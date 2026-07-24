@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import {
   Warehouse,
   Truck,
@@ -13,9 +14,13 @@ import {
   TrendingUp,
   Package,
   PackageSearch,
+  Activity,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart"
 import {
   AreaChart,
@@ -35,6 +40,7 @@ import {
 import { kpiMetrics, inboundTrend, outboundTrend, warehousePerformance, dispatchPerformance, costTrend, dailyThroughput, slaData, inventoryAccuracyTrend, manpowerProductivity } from "@/data/mock-data"
 import { KPICard } from "@/components/shared/kpi-card"
 import { PageHeader } from "@/components/shared/page-header"
+import { cn } from "@/lib/utils"
 
 const kpiIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   totalWarehouses: Warehouse,
@@ -113,12 +119,43 @@ const manpowerChartConfig = {
 const SLA_COLORS = ["#2563EB", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4"]
 
 export function DashboardView() {
+  const [lastUpdated] = React.useState(() =>
+    new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
+  )
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Executive Dashboard"
-        description="Real-time overview of all warehouse operations across India"
-      />
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+        <PageHeader
+          title="Executive Dashboard"
+          description="Real-time overview of all warehouse operations across India"
+        />
+        <div className="flex items-center gap-2 text-xs text-muted-foreground shrink-0">
+          <Activity className="h-3 w-3 text-emerald-500" />
+          <span>Live</span>
+          <span>•</span>
+          <span>Updated {lastUpdated}</span>
+        </div>
+      </div>
+
+      {/* Quick Action Bar */}
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+        {[
+          { label: "New Inbound", icon: PackageSearch, color: "text-blue-600 bg-blue-50 dark:bg-blue-950/50 dark:text-blue-400", count: "12" },
+          { label: "Pending Dispatch", icon: Truck, color: "text-amber-600 bg-amber-50 dark:bg-amber-950/50 dark:text-amber-400", count: "8" },
+          { label: "Critical Alerts", icon: Activity, color: "text-red-600 bg-red-50 dark:bg-red-950/50 dark:text-red-400", count: "3" },
+          { label: "Reports Due", icon: BarChart3, color: "text-purple-600 bg-purple-50 dark:bg-purple-950/50 dark:text-purple-400", count: "2" },
+        ].map((action) => (
+          <Button
+            key={action.label}
+            variant="outline"
+            className={cn("h-auto flex-col gap-1.5 rounded-xl border border-border/60 py-3 transition-all hover:shadow-sm hover:border-border", action.color)}
+          >
+            <span className="text-lg font-bold">{action.count}</span>
+            <span className="text-[10px] font-medium opacity-70">{action.label}</span>
+          </Button>
+        ))}
+      </div>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:gap-4">

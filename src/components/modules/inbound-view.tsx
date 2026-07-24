@@ -7,6 +7,7 @@ import { StatusBadge } from "@/components/shared/status-badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -27,6 +28,7 @@ import {
   ChevronDown,
   Globe,
   Home,
+  Search,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -52,15 +54,17 @@ const statusVariant: Record<string, "green" | "amber" | "red" | "blue" | "gray">
 export function InboundView() {
   const [typeFilter, setTypeFilter] = useState("all")
   const [warehouseFilter, setWarehouseFilter] = useState("all")
+  const [searchQuery, setSearchQuery] = useState("")
   const [expandedRow, setExpandedRow] = useState<string | null>(null)
 
   const filtered = useMemo(() => {
     return inboundShipments.filter((s) => {
       if (typeFilter !== "all" && s.type.toLowerCase() !== typeFilter) return false
       if (warehouseFilter !== "all" && !s.warehouse.includes(warehouseFilter)) return false
+      if (searchQuery && !s.invoice.toLowerCase().includes(searchQuery.toLowerCase()) && !s.supplier.toLowerCase().includes(searchQuery.toLowerCase())) return false
       return true
     })
-  }, [typeFilter, warehouseFilter])
+  }, [typeFilter, warehouseFilter, searchQuery])
 
   const summary = useMemo(() => ({
     total: inboundShipments.length,
@@ -110,8 +114,17 @@ export function InboundView() {
 
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-3">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search invoice or supplier..."
+            className="h-8 w-[220px] pl-8 text-xs"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
         <Select value={typeFilter} onValueChange={setTypeFilter}>
-          <SelectTrigger className="w-[160px] h-8 text-xs">
+          <SelectTrigger className="w-[140px] h-8 text-xs">
             <SelectValue placeholder="Type" />
           </SelectTrigger>
           <SelectContent>
@@ -121,7 +134,7 @@ export function InboundView() {
           </SelectContent>
         </Select>
         <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
-          <SelectTrigger className="w-[200px] h-8 text-xs">
+          <SelectTrigger className="w-[180px] h-8 text-xs">
             <SelectValue placeholder="Warehouse" />
           </SelectTrigger>
           <SelectContent>
@@ -131,6 +144,9 @@ export function InboundView() {
             ))}
           </SelectContent>
         </Select>
+        <div className="ml-auto text-xs text-muted-foreground">
+          {filtered.length} shipment{filtered.length !== 1 ? "s" : ""}
+        </div>
       </div>
 
       {/* Inbound Pipeline */}
