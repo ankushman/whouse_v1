@@ -19,6 +19,7 @@ import {
   Eye,
   FileSpreadsheet,
 } from "lucide-react"
+import { toast } from "sonner"
 import { kpiMetrics, warehousePerformance } from "@/data/mock-data"
 
 interface Report {
@@ -89,6 +90,18 @@ const reports: Report[] = [
 ]
 
 export function ReportsView() {
+  const handleGenerateReport = (reportId: string, reportTitle: string) => {
+    toast.loading(`Generating ${reportTitle}...`, {
+      id: reportId,
+    })
+    setTimeout(() => {
+      toast.success(`${reportTitle} generated successfully`, {
+        id: reportId,
+        description: "Report ready for download",
+        duration: 4000,
+      })
+    }, 1500)
+  }
   // CSV export handlers
   const handleExportExecSummaryCSV = () => {
     const data = kpiMetrics.map(m => ({
@@ -129,7 +142,7 @@ export function ReportsView() {
         title="Reports"
         description="Generate and download operational reports"
         actions={
-          <Button size="sm" className="gap-1.5">
+          <Button size="sm" className="gap-1.5" onClick={() => toast.info("Refreshing all reports...", { description: "This may take a moment", duration: 2000 })}>
             <RefreshCw className="h-3.5 w-3.5" /> Refresh All
           </Button>
         }
@@ -178,7 +191,7 @@ export function ReportsView() {
                 </div>
                 <Separator />
                 <div className="flex items-center gap-2">
-                  <Button size="sm" className="flex-1 text-xs gap-1.5 h-8">
+                  <Button size="sm" className="flex-1 text-xs gap-1.5 h-8" onClick={() => handleGenerateReport(report.id, report.title)}>
                     <RefreshCw className="h-3 w-3" /> Generate
                   </Button>
                   {hasCSVExport ? (

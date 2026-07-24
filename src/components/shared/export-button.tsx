@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Download, FileSpreadsheet, FileText } from "lucide-react"
+import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 
 interface ExportButtonProps {
@@ -61,4 +62,8 @@ export function exportToCSV(data: Record<string, any>[], filename: string, colum
   link.download = `${filename}.csv`
   link.click()
   URL.revokeObjectURL(url)
+  toast.success(`CSV exported`, {
+    description: `${filename}.csv (${data.length} rows)`,
+    duration: 3000,
+  })
 }
