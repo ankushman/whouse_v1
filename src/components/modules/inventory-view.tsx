@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { inventoryItems, warehouses } from "@/data/mock-data";
 import { PageHeader } from "@/components/shared/page-header";
 import { StatusBadge } from "@/components/shared/status-badge";
+import { ExportButton, exportToCSV } from "@/components/shared/export-button";
 import {
   ChartContainer,
   ChartTooltip,
@@ -36,7 +37,6 @@ import {
   TrendingUp,
   BarChart3,
   Filter,
-  Download,
   RefreshCw,
   Search,
 } from "lucide-react";
@@ -144,6 +144,20 @@ export function InventoryView() {
   const hasActiveFilters =
     warehouseFilter !== "All" || categoryFilter !== "All" || abcFilter !== "All";
 
+  const handleExportCSV = useCallback(() => {
+    const data = filteredItems.map((item) => ({
+      SKU: item.sku,
+      "Part Name": item.partName,
+      Category: item.category,
+      Warehouse: item.warehouse,
+      Quantity: item.quantity,
+      "Min Stock": item.minStock,
+      Variance: item.variance,
+      "ABC Class": item.abcClass,
+    }))
+    exportToCSV(data, "inventory-data")
+  }, [filteredItems])
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -151,10 +165,7 @@ export function InventoryView() {
         description="Track stock levels, accuracy and variance across warehouses"
         actions={
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="gap-1.5">
-              <Download className="h-3.5 w-3.5" />
-              Export
-            </Button>
+            <ExportButton onExportCSV={handleExportCSV} />
             <Button variant="outline" size="sm" className="gap-1.5">
               <RefreshCw className="h-3.5 w-3.5" />
               Refresh

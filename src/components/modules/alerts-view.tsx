@@ -1,8 +1,10 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useCallback } from "react"
 import { alerts } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
+import { StatusBadge } from "@/components/shared/status-badge"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -73,6 +75,19 @@ export function AlertsView() {
     }
   }
 
+  const handleExportCSV = useCallback(() => {
+    const data = alerts.map((a) => ({
+      ID: a.id,
+      Type: a.type,
+      Severity: a.severity,
+      Title: a.title,
+      Warehouse: a.warehouse,
+      Timestamp: a.timestamp,
+      Acknowledged: acknowledgedAlerts.has(a.id) ? "Yes" : "No",
+    }))
+    exportToCSV(data, "alerts-data", ["ID", "Type", "Severity", "Title", "Warehouse", "Timestamp", "Acknowledged"])
+  }, [acknowledgedAlerts])
+
   const formatTimestamp = (ts: string) => {
     const date = new Date(ts)
     const now = new Date()
@@ -89,6 +104,9 @@ export function AlertsView() {
       <PageHeader
         title="Alert Center"
         description="Monitor and manage operational alerts"
+        actions={
+          <ExportButton onExportCSV={handleExportCSV} />
+        }
       />
 
       {/* Summary */}

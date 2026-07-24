@@ -1,9 +1,10 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useCallback } from "react"
 import { transportVehicles } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
@@ -55,6 +56,20 @@ export function TransportationView() {
   const completedDeliveries = transportVehicles.reduce((a, v) => a + v.deliveriesCompleted, 0)
   const otif = totalDeliveries > 0 ? ((completedDeliveries / totalDeliveries) * 100).toFixed(1) : "0"
 
+  const handleExportCSV = useCallback(() => {
+    const data = transportVehicles.map((v) => ({
+      ID: v.id,
+      Name: v.name,
+      Type: v.type,
+      "Reg No.": v.regNo,
+      Status: v.status,
+      Driver: v.driver,
+      Route: v.route,
+      "OTIF (%)": v.deliveriesTotal > 0 ? ((v.deliveriesCompleted / v.deliveriesTotal) * 100).toFixed(1) : "0",
+    }))
+    exportToCSV(data, "transport-fleet")
+  }, [])
+
   const delayedVehicles = transportVehicles.filter((v) => v.status === "delayed")
 
   return (
@@ -63,9 +78,12 @@ export function TransportationView() {
         title="Transportation"
         description="Monitor fleet, routes and delivery performance"
         actions={
-          <Button variant="outline" size="sm" className="gap-1.5">
-            <Navigation className="h-3.5 w-3.5" /> Track All
-          </Button>
+          <>
+            <Button variant="outline" size="sm" className="gap-1.5">
+              <Navigation className="h-3.5 w-3.5" /> Track All
+            </Button>
+            <ExportButton onExportCSV={handleExportCSV} />
+          </>
         }
       />
 

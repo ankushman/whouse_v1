@@ -26,6 +26,7 @@ import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { HealthScoreRing } from "@/components/shared/health-score-ring"
 import { WarehouseDetailModal } from "@/components/modules/warehouse-detail-modal"
+import { WarehouseMapView } from "@/components/modules/warehouse-map-view"
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -270,6 +271,7 @@ export function WarehousesView() {
   const setActiveView = useAppStore((s) => s.setActiveView)
   const [selectedWarehouse, setSelectedWarehouse] = React.useState<(typeof warehouses)[number] | null>(null)
   const [modalOpen, setModalOpen] = React.useState(false)
+  const [showMap, setShowMap] = React.useState(false)
 
   const summary = useMemo(() => {
     const totalCapacity = warehouses.reduce((acc, w) => acc + w.capacity, 0)
@@ -290,68 +292,93 @@ export function WarehousesView() {
       {/* ── Page Header ── */}
       <PageHeader
         title="Warehouses"
-        description="Monitor performance across all 6 warehouses in India"
+        description={showMap ? "Geographic view of all warehouses across India" : "Monitor performance across all 6 warehouses in India"}
         actions={
-          <Button disabled size="sm">
-            <Plus className="size-4" />
-            Add Warehouse
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant={showMap ? "default" : "outline"}
+              size="sm"
+              onClick={() => setShowMap(!showMap)}
+            >
+              <MapPin className="size-4" />
+              <span className="hidden sm:inline">{showMap ? "Card View" : "Map View"}</span>
+            </Button>
+            <Button disabled size="sm">
+              <Plus className="size-4" />
+              Add Warehouse
+            </Button>
+          </div>
         }
       />
 
-      {/* ── Summary Row ── */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 stagger-children">
-        <SummaryStat
-          icon={<Building2 className="size-5 text-foreground" />}
-          label="Warehouses"
-          value={summary.totalWarehouses}
-          sublabel="Across India"
-        />
-        <SummaryStat
-          icon={<Package className="size-5 text-foreground" />}
-          label="Total Capacity"
-          value={summary.totalCapacity.toLocaleString("en-IN")}
-          sublabel="Pallet positions"
-        />
-        <SummaryStat
-          icon={<Gauge className="size-5 text-foreground" />}
-          label="Avg. Occupancy"
-          value={`${summary.avgOccupancy}%`}
-          sublabel={
-            summary.avgOccupancy > 85
-              ? "Running high"
-              : summary.avgOccupancy > 70
-                ? "Optimal range"
-                : "Below target"
-          }
-        />
-        <SummaryStat
-          icon={<Gauge className="size-5 text-foreground" />}
-          label="Avg. Health Score"
-          value={summary.avgHealth}
-          sublabel={
-            summary.avgHealth >= 85
-              ? "Good standing"
-              : summary.avgHealth >= 70
-                ? "Needs attention"
-                : "Below threshold"
-          }
-        />
-      </div>
-
-      {/* ── Warehouse Grid ── */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children">
-        {warehouses.map((warehouse) => (
-          <WarehouseCard
-            key={warehouse.id}
-            warehouse={warehouse}
-            onClick={() => {
-              setSelectedWarehouse(warehouse)
+      {showMap ? (
+        <WarehouseMapView
+          onWarehouseClick={(warehouseId) => {
+            const wh = warehouses.find((w) => w.id === warehouseId)
+            if (wh) {
+              setSelectedWarehouse(wh)
               setModalOpen(true)
-            }}
-          />
-        ))}
-      </div>
+              setShowMap(false)
+            }
+          }}
+        />
+      ) : (
+        <>
+          {/* ── Summary Row ── */}
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 stagger-children">
+            <SummaryStat
+              icon={<Building2 className="size-5 text-foreground" />}
+              label="Warehouses"
+              value={summary.totalWarehouses}
+              sublabel="Across India"
+            />
+            <SummaryStat
+              icon={<Package className="size-5 text-foreground" />}
+              label="Total Capacity"
+              value={summary.totalCapacity.toLocaleString("en-IN")}
+              sublabel="Pallet positions"
+            />
+            <SummaryStat
+              icon={<Gauge className="size-5 text-foreground" />}
+              label="Avg. Occupancy"
+              value={`${summary.avgOccupancy}%`}
+              sublabel={
+                summary.avgOccupancy > 85
+                  ? "Running high"
+                  : summary.avgOccupancy > 70
+                    ? "Optimal range"
+                    : "Below target"
+              }
+            />
+            <SummaryStat
+              icon={<Gauge className="size-5 text-foreground" />}
+              label="Avg. Health Score"
+              value={summary.avgHealth}
+              sublabel={
+                summary.avgHealth >= 85
+                  ? "Good standing"
+                  : summary.avgHealth >= 70
+                    ? "Needs attention"
+                    : "Below threshold"
+              }
+            />
+          </div>
+
+          {/* ── Warehouse Grid ── */}
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children">
+            {warehouses.map((warehouse) => (
+              <WarehouseCard
+                key={warehouse.id}
+                warehouse={warehouse}
+                onClick={() => {
+                  setSelectedWarehouse(warehouse)
+                  setModalOpen(true)
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
 
       {/* ── Warehouse Detail Modal ── */}
       <WarehouseDetailModal

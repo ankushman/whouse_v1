@@ -123,13 +123,16 @@ const severityColor = {
 // ──────────────────────────────────────────────────────
 function AppLogo() {
   return (
-    <div className="flex items-center gap-2.5 px-2 py-1.5">
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-sm shadow-blue-500/25">
+    <div className="flex items-center gap-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-2 py-2.5">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/15 text-white shadow-sm">
         <Building2 className="h-4 w-4" />
       </div>
       <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-        <span className="text-sm font-bold tracking-tight text-foreground leading-tight">AutoFlow</span>
-        <span className="text-[10px] font-medium text-muted-foreground leading-tight">Warehouse Management</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-sm font-bold tracking-tight text-white leading-tight">AutoFlow</span>
+          <span className="rounded bg-white/20 px-1 py-px text-[9px] font-semibold leading-none text-white">v1.0</span>
+        </div>
+        <span className="text-[10px] font-medium text-blue-100 leading-tight">Warehouse Management</span>
       </div>
     </div>
   )
@@ -149,7 +152,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarSeparator />
       <SidebarContent>
-        <SidebarGroup>
+        <SidebarGroup className="border-b pb-3">
           <SidebarGroupLabel>Operations</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -181,7 +184,7 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
+        <SidebarGroup className="border-b pb-3">
           <SidebarGroupLabel>Analytics</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

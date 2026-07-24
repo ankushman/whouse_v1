@@ -1,8 +1,9 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useCallback } from "react"
 import { employees } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
@@ -115,11 +116,26 @@ export function EmployeesView() {
     [filtered]
   )
 
+  const handleExportCSV = useCallback(() => {
+    const data = filtered.map((e) => ({
+      Name: e.name,
+      Role: e.role,
+      Warehouse: e.warehouse,
+      Shift: e.shift,
+      "Productivity (%)": e.productivity,
+      "Attendance (%)": e.attendance,
+      "Tasks Completed": e.tasksCompleted,
+      "Error Rate (%)": e.errorRate,
+    }))
+    exportToCSV(data, "employees-data")
+  }, [filtered])
+
   return (
     <div className="space-y-6">
       <PageHeader
         title="Employees"
         description="Workforce management and performance tracking"
+        actions={<ExportButton onExportCSV={handleExportCSV} />}
       />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 stagger-children">
