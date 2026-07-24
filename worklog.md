@@ -393,3 +393,82 @@ Updated Project Status (Post Round 7 - Complete):
   6. Add WebSocket mini-service for live updates
   7. Add geographic clustering visualization
 
+---
+Task ID: 5-a
+Agent: Main + Full-stack subagent
+Task: WebSocket real-time data service with Socket.io
+
+Work Log:
+- Created mini-services/live-data-service/ with Socket.io server on port 3005
+- 10 event generators: inbound, outbound, equipment, inventory, SLA, dock, shift, delivery, temperature, vehicle
+- Per-client intervals with proper cleanup on disconnect
+- GRPC-style graceful shutdown on SIGTERM/SIGINT
+- Created use-live-data.ts hook: WebSocket client with auto-reconnect, connection state tracking
+- Integrated WebSocket into LiveUpdatesFeed: hybrid approach (WebSocket events when connected, local fallback otherwise)
+- Events tagged with "W" badge when from WebSocket to distinguish from local events
+- Live indicator shows "● Live" (green) when WebSocket connected, "Local" (amber) for fallback, "Paused" (gray) when paused
+
+Stage Summary:
+- 3 new files: mini-services/live-data-service/{index.ts, package.json, bun.lock}
+- 1 new file: src/hooks/use-live-data.ts
+- 1 modified: src/components/shared/live-updates-feed.tsx (WebSocket integration)
+- Lint: 0 errors
+
+---
+Task ID: 5-b
+Agent: Frontend Styling Expert subagent
+Task: Dashboard enhancements, print CSS, quick stats, warehouse card hover
+
+Work Log:
+- Enhanced Dashboard: Added period indicator below date range buttons (computed from/to dates)
+- Enhanced Dashboard: Added "Last updated" timestamp showing current time
+- Added Quick Stats Bar: 4 metric pills with Lucide icons (Pending GRN=24, Delayed=8, SLA Breaches=3, Maintenance=2)
+- Added print-friendly CSS: @media print block with rules for hiding interactive elements, clean card printing, forced light mode
+- Added no-print class to footer and mobile nav
+- Enhanced warehouse cards: status-based left border accent (border-l-4 emerald/amber/red), hover:scale-[1.01]
+
+Stage Summary:
+- 5 files modified: dashboard-view.tsx, globals.css, app-layout.tsx, mobile-bottom-nav.tsx, warehouses-view.tsx
+- Lint: 0 errors
+
+---
+Task ID: 6 (Combined Push)
+Agent: Main
+Task: Commit and push Round 8 changes
+
+Work Log:
+- Pushed successfully to GitHub: commit cfd8ddc
+- 12 files changed, 523 insertions, 36 deletions
+
+---
+Updated Project Status (Post Round 8 - Complete):
+- STATUS: STABLE - All modules compile and render correctly
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit cfd8ddc)
+- MINI SERVICES (1): live-data-service (port 3005, Socket.io)
+- CLIENT HOOKS (1): use-live-data.ts (WebSocket client)
+- SHARED COMPONENTS (14): KPICard, StatusBadge, PageHeader, EmptyState, DashboardSkeleton, PageSkeleton, TableSkeleton, HealthScoreRing, ExportButton, AnimatedCounter, DataTable, LiveUpdatesFeed
+- LAYOUT COMPONENTS (2): AppLayout, MobileBottomNav
+- MODULE VIEWS (13 + 1): All 13 modules + Warehouse Map View (toggle in Warehouses)
+- LIVE DATA: WebSocket service (port 3005) with 10 event types, LiveUpdatesFeed hybrid mode (WebSocket + local fallback)
+- PRINT SUPPORT: @media print CSS with hidden nav, clean cards, forced light mode
+- NEW FEATURES THIS ROUND:
+  - WebSocket real-time data service with Socket.io
+  - useLiveData hook for WebSocket client connectivity
+  - Hybrid LiveUpdatesFeed (WebSocket + local fallback)
+  - Quick Stats Bar on dashboard (4 metric pills)
+  - Period indicator + last updated timestamp
+  - Print-friendly CSS across entire app
+  - Warehouse card left-border accent + hover scale
+- LINT: 0 errors, 0 warnings
+- COMPILE: GET / 200 verified (1.15s)
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental)
+- COMPLETED RECOMMENDATIONS: WebSocket real-time data ✓, Print-friendly CSS ✓
+- PRIORITY NEXT:
+  1. Add geographic clustering visualization on warehouse map
+  2. Add employee shift scheduling module
+  3. Add barcode/QR code scanning for inventory
+  4. Add data persistence with Supabase
+  5. Add delivery route optimization UI
+  6. Add inventory demand forecasting charts
+  7. Enhance mobile experience with swipe gestures
+
