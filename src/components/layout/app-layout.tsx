@@ -78,6 +78,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { cn } from "@/lib/utils"
 import { type ReactNode } from "react"
+import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
 
 // ──────────────────────────────────────────────────────
 // Icon Map
@@ -623,10 +624,11 @@ export function AppLayout({ children }: { children: ReactNode }) {
       <AppSidebar />
       <SidebarInset className="flex min-h-svh flex-col">
         <TopNav />
-        <main className="flex-1">
+        <main className="flex-1 pb-16 md:pb-0">
           {children}
         </main>
       </SidebarInset>
+      <MobileBottomNav />
       <CommandPalette />
     </>
   )

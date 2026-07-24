@@ -89,7 +89,7 @@ export function EquipmentView() {
       />
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 stagger-children">
         <Card className="py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">

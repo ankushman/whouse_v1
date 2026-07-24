@@ -77,7 +77,7 @@ export function TransportationView() {
       />
 
       {/* Summary */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6 stagger-children">
         {[
           { label: "Total Vehicles", value: summary.total, icon: Truck, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
           { label: "In Transit", value: summary.inTransit, icon: MapPin, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },

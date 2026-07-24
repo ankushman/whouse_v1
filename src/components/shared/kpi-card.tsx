@@ -1,8 +1,10 @@
 "use client"
 
+import { useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
 import { TrendingUp, TrendingDown, Minus, type LucideIcon } from "lucide-react"
+import { AnimatedCounter } from "@/components/shared/animated-counter"
 
 interface KPICardProps {
   title: string
@@ -15,7 +17,38 @@ interface KPICardProps {
   colorClass?: string
 }
 
+const VALUE_PATTERN = /^([^\d.,\s]*)([\d,.]+)([^\d.]*)$/
+
+function parseValue(value: string | number): {
+  numericValue: number
+  prefix: string
+  suffix: string
+  decimals: number
+} | null {
+  if (typeof value === "number") {
+    const decimals = value % 1 !== 0 ? String(value).split(".")[1].length : 0
+    return { numericValue: value, prefix: "", suffix: "", decimals }
+  }
+
+  const match = value.match(VALUE_PATTERN)
+  if (!match) return null
+
+  const prefix = match[1]
+  const numericStr = match[2]
+  const suffix = match[3]
+  const cleaned = numericStr.replace(/,/g, "")
+  const numericValue = parseFloat(cleaned)
+
+  if (isNaN(numericValue)) return null
+
+  const decimals = cleaned.includes(".") ? cleaned.split(".")[1].length : 0
+
+  return { numericValue, prefix, suffix, decimals }
+}
+
 export function KPICard({ title, value, change = 0, trend = "neutral", icon: Icon, subtitle, index = 0, colorClass = "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" }: KPICardProps) {
+  const parsed = useMemo(() => parseValue(value), [value])
+
   return (
     <Card className="group relative overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-border">
       <CardContent className="p-4">
@@ -23,7 +56,18 @@ export function KPICard({ title, value, change = 0, trend = "neutral", icon: Ico
           <div className="flex-1 space-y-1">
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{title}</p>
             <div className="flex items-baseline gap-2">
-              <p className="text-2xl font-bold tracking-tight text-foreground">{value}</p>
+              {parsed ? (
+                <p className="text-2xl font-bold tracking-tight text-foreground">
+                  <AnimatedCounter
+                    value={parsed.numericValue}
+                    prefix={parsed.prefix}
+                    suffix={parsed.suffix}
+                    decimals={parsed.decimals}
+                  />
+                </p>
+              ) : (
+                <p className="text-2xl font-bold tracking-tight text-foreground">{value}</p>
+              )}
               {change !== 0 && (
                 <div className={cn(
                   "flex items-center gap-0.5 text-xs font-medium",

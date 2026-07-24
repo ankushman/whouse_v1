@@ -82,7 +82,7 @@ export function CostAnalyticsView() {
       />
 
       {/* Summary */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 stagger-children">
         {[
           { label: "Total Cost", value: `₹${(totalCostThisMonth / 100000).toFixed(2)}L`, change: +parseFloat(totalChange), icon: DollarSign, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
           { label: "Labor Cost", value: `₹${(latest.labor / 100000).toFixed(2)}L`, icon: Users, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },

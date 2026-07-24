@@ -93,7 +93,7 @@ export function ProductivityView() {
       />
 
       {/* Summary */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 stagger-children">
         {[
           { label: "Overall Productivity", value: `${summary.overall}%`, icon: TrendingUp, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
           { label: "Morning Shift", value: `${summary.morning}%`, icon: Sunrise, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },

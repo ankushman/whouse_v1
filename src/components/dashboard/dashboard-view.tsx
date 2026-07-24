@@ -17,6 +17,7 @@ import {
   Activity,
   ArrowRight,
   Sparkles,
+  Calendar,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -70,6 +71,16 @@ const kpiColors: Record<string, string> = {
   productivity: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400",
 }
 
+const DATE_RANGES = [
+  { label: "Today", value: "today" },
+  { label: "7D", value: "7d" },
+  { label: "30D", value: "30d" },
+  { label: "90D", value: "90d" },
+  { label: "12M", value: "12m" },
+] as const
+
+type DateRangeValue = (typeof DATE_RANGES)[number]["value"]
+
 const inboundChartConfig = {
   domestic: { label: "Domestic", color: "#2563EB" },
   imported: { label: "Imported", color: "#10B981" },
@@ -122,6 +133,7 @@ export function DashboardView() {
   const [lastUpdated] = React.useState(() =>
     new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
   )
+  const [selectedRange, setSelectedRange] = React.useState<DateRangeValue>("7d")
 
   return (
     <div className="space-y-6">
@@ -130,35 +142,63 @@ export function DashboardView() {
           title="Executive Dashboard"
           description="Real-time overview of all warehouse operations across India"
         />
-        <div className="flex items-center gap-2 text-xs text-muted-foreground shrink-0">
-          <Activity className="h-3 w-3 text-emerald-500" />
-          <span>Live</span>
-          <span>•</span>
-          <span>Updated {lastUpdated}</span>
+        <div className="flex items-center gap-3 shrink-0">
+          {/* Date Range Picker */}
+          <div className="flex items-center rounded-lg border border-border/60 bg-muted/40 p-0.5">
+            <Calendar className="ml-1.5 h-3 w-3 text-muted-foreground" />
+            {DATE_RANGES.map((range) => (
+              <Button
+                key={range.value}
+                variant="ghost"
+                size="sm"
+                className={cn(
+                  "h-6 rounded-md px-2 text-[11px] font-medium transition-colors",
+                  selectedRange === range.value
+                    ? "bg-background shadow-sm text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+                onClick={() => setSelectedRange(range.value)}
+              >
+                {range.label}
+              </Button>
+            ))}
+          </div>
+
+          {/* Live Indicator */}
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <Activity className="h-3 w-3 text-emerald-500" />
+            <span>Live</span>
+            <span>•</span>
+            <span>Updated {lastUpdated}</span>
+          </div>
         </div>
       </div>
 
       {/* Quick Action Bar */}
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 stagger-children">
         {[
           { label: "New Inbound", icon: PackageSearch, color: "text-blue-600 bg-blue-50 dark:bg-blue-950/50 dark:text-blue-400", count: "12" },
           { label: "Pending Dispatch", icon: Truck, color: "text-amber-600 bg-amber-50 dark:bg-amber-950/50 dark:text-amber-400", count: "8" },
           { label: "Critical Alerts", icon: Activity, color: "text-red-600 bg-red-50 dark:bg-red-950/50 dark:text-red-400", count: "3" },
           { label: "Reports Due", icon: BarChart3, color: "text-purple-600 bg-purple-50 dark:bg-purple-950/50 dark:text-purple-400", count: "2" },
-        ].map((action) => (
-          <Button
-            key={action.label}
-            variant="outline"
-            className={cn("h-auto flex-col gap-1.5 rounded-xl border border-border/60 py-3 transition-all hover:shadow-sm hover:border-border", action.color)}
-          >
-            <span className="text-lg font-bold">{action.count}</span>
-            <span className="text-[10px] font-medium opacity-70">{action.label}</span>
-          </Button>
-        ))}
+        ].map((action) => {
+          const ActionIcon = action.icon
+          return (
+            <Button
+              key={action.label}
+              variant="outline"
+              className={cn("h-auto flex-col gap-1.5 rounded-xl border border-border/60 py-3 transition-all hover:shadow-sm hover:border-border", action.color)}
+            >
+              <ActionIcon className="h-4 w-4" />
+              <span className="text-lg font-bold">{action.count}</span>
+              <span className="text-[10px] font-medium opacity-70">{action.label}</span>
+            </Button>
+          )
+        })}
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:gap-4 stagger-children">
         {kpiMetrics.map((kpi, index) => {
           const Icon = kpiIcons[kpi.key]
           if (!Icon) return null
@@ -183,7 +223,7 @@ export function DashboardView() {
       </div>
 
       {/* Charts Row 1 */}
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2 stagger-children">
         <Card className="rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Inbound vs Outbound Trend</CardTitle>
@@ -226,7 +266,7 @@ export function DashboardView() {
       </div>
 
       {/* Charts Row 2 */}
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2 stagger-children">
         <Card className="rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Warehouse Performance</CardTitle>
@@ -272,7 +312,7 @@ export function DashboardView() {
       </div>
 
       {/* Charts Row 3 */}
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2 stagger-children">
         <Card className="rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Daily Throughput</CardTitle>
@@ -326,7 +366,7 @@ export function DashboardView() {
       </div>
 
       {/* Bottom Row */}
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2 stagger-children">
         <Card className="rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">SLA Achievement by Warehouse</CardTitle>

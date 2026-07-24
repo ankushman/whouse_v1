@@ -296,7 +296,7 @@ export function WarehousesView() {
       />
 
       {/* ── Summary Row ── */}
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 stagger-children">
         <SummaryStat
           icon={<Building2 className="size-5 text-foreground" />}
           label="Warehouses"
@@ -336,7 +336,7 @@ export function WarehousesView() {
       </div>
 
       {/* ── Warehouse Grid ── */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children">
         {warehouses.map((warehouse) => (
           <WarehouseCard
             key={warehouse.id}

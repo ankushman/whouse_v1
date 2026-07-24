@@ -1,0 +1,1093 @@
+     1→"use client"
+     2→
+     3→import { useState } from "react"
+     4→import { PageHeader } from "@/components/shared/page-header"
+     5→import { StatusBadge } from "@/components/shared/status-badge"
+     6→import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+     7→import { Badge } from "@/components/ui/badge"
+     8→import { Button } from "@/components/ui/button"
+     9→import { Input } from "@/components/ui/input"
+    10→import { Label } from "@/components/ui/label"
+    11→import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+    12→import { Switch } from "@/components/ui/switch"
+    13→import { Separator } from "@/components/ui/separator"
+    14→import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+    15→import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+    16→import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+    17→import { Textarea } from "@/components/ui/textarea"
+    18→import {
+    19→  Dialog,
+    20→  DialogContent,
+    21→  DialogDescription,
+    22→  DialogFooter,
+    23→  DialogHeader,
+    24→  DialogTitle,
+    25→} from "@/components/ui/dialog"
+    26→import {
+    27→  Settings,
+    28→  Building2,
+    29→  Users,
+    30→  Truck,
+    31→  Target,
+    32→  Bell,
+    33→  Shield,
+    34→  Globe,
+    35→  Save,
+    36→  Plus,
+    37→  Edit,
+    38→  Trash2,
+    39→  Mail,
+    40→  Phone,
+    41→  MapPin,
+    42→  Star,
+    43→  AlertTriangle,
+    44→  Search,
+    45→} from "lucide-react"
+    46→import { cn } from "@/lib/utils"
+    47→import { warehouses as warehouseData, kpiMetrics } from "@/data/mock-data"
+    48→
+    49→// ---- Mock Customer Data ----
+    50→const customersData = [
+    51→  { id: "1", name: "Maruti Suzuki India", code: "MSI-001", city: "Gurugram", state: "Haryana", contact: "Harsh Mehta", email: "harsh.mehta@maruti.co.in", type: "OEM", status: "Active" },
+    52→  { id: "2", name: "Tata Motors Ltd", code: "TML-002", city: "Pune", state: "Maharashtra", contact: "Rahul Kulkarni", email: "rahul.k@tatamotors.com", type: "OEM", status: "Active" },
+    53→  { id: "3", name: "Bosch Ltd", code: "BSH-003", city: "Bangalore", state: "Karnataka", contact: "Deepak Rao", email: "deepak.rao@bosch.in", type: "Tier1", status: "Active" },
+    54→  { id: "4", name: "Motherson Sumi Systems", code: "MSS-004", city: "Noida", state: "Uttar Pradesh", contact: "Vineet Agarwal", email: "vineet.a@motherson.com", type: "Tier1", status: "Active" },
+    55→  { id: "5", name: "Bharat Forge Ltd", code: "BFL-005", city: "Pune", state: "Maharashtra", contact: "Suresh Jadhav", email: "suresh.j@bharatforge.com", type: "Tier1", status: "Active" },
+    56→  { id: "6", name: "Uno Minda Ltd", code: "UML-006", city: "Manesar", state: "Haryana", contact: "Anil Bhatia", email: "anil.b@unominda.com", type: "Tier2", status: "Active" },
+    57→  { id: "7", name: "Varroc Polymers", code: "VPC-007", city: "Aurangabad", state: "Maharashtra", contact: "Prasad Joshi", email: "prasad.j@varroc.com", type: "Tier2", status: "Inactive" },
+    58→  { id: "8", name: "Jamna Auto Industries", code: "JAI-008", city: "Delhi", state: "Delhi", contact: "Manish Gupta", email: "manish.g@jamnaauto.com", type: "Tier2", status: "Active" },
+    59→]
+    60→
+    61→// ---- Mock Transporter Data ----
+    62→const transportersData = [
+    63→  { id: "1", name: "TCI Express Ltd", fleet: 120, routes: 45, contact: "Pradeep Kumar", phone: "+91 98765 43210", rating: 5, status: "Active" },
+    64→  { id: "2", name: "Delhivery Logistics", fleet: 85, routes: 32, contact: "Arun Sharma", phone: "+91 87654 32109", rating: 4, status: "Active" },
+    65→  { id: "3", name: "Blue Dart Express", fleet: 65, routes: 28, contact: "Sunil Verma", phone: "+91 76543 21098", rating: 5, status: "Active" },
+    66→  { id: "4", name: "VRL Logistics", fleet: 95, routes: 38, contact: "Mahesh Patil", phone: "+91 65432 10987", rating: 3, status: "Active" },
+    67→  { id: "5", name: "SafeExpress", fleet: 55, routes: 20, contact: "Kiran Reddy", phone: "+91 54321 09876", rating: 4, status: "Inactive" },
+    68→  { id: "6", name: "Allcargo Logistics", fleet: 70, routes: 25, contact: "Dinesh Yadav", phone: "+91 43210 98765", rating: 3, status: "Active" },
+    69→]
+    70→
+    71→// ---- KPI Config Data ----
+    72→interface KPIConfigItem {
+    73→  key: string
+    74→  label: string
+    75→  value: number
+    76→  unit: string
+    77→  target: number
+    78→  warningThreshold: number
+    79→  criticalThreshold: number
+    80→}
+    81→
+    82→const initialKPIConfig: KPIConfigItem[] = [
+    83→  { key: "inventoryAccuracy", label: "Inventory Accuracy", value: 97.8, unit: "%", target: 99, warningThreshold: 96, criticalThreshold: 93 },
+    84→  { key: "slaAchievement", label: "SLA Achievement", value: 94.6, unit: "%", target: 97, warningThreshold: 93, criticalThreshold: 88 },
+    85→  { key: "dockToStockTime", label: "Dock to Stock Time", value: 3.2, unit: "hrs", target: 2.5, warningThreshold: 4, criticalThreshold: 6 },
+    86→  { key: "equipmentUtilization", label: "Equipment Utilization", value: 82.4, unit: "%", target: 85, warningThreshold: 70, criticalThreshold: 55 },
+    87→  { key: "warehouseOccupancy", label: "Warehouse Occupancy", value: 79.7, unit: "%", target: 80, warningThreshold: 90, criticalThreshold: 95 },
+    88→  { key: "productivity", label: "Productivity Index", value: 86.3, unit: "%", target: 90, warningThreshold: 75, criticalThreshold: 60 },
+    89→  { key: "costPerShipment", label: "Cost per Shipment", value: 3245, unit: "₹", target: 2800, warningThreshold: 4000, criticalThreshold: 5500 },
+    90→  { key: "pendingGRN", label: "Pending GRN", value: 63, unit: "", target: 30, warningThreshold: 80, criticalThreshold: 120 },
+    91→]
+    92→
+    93→const usersData = [
+    94→  { id: "1", name: "Rajesh Kumar", email: "rajesh.kumar@autoflow.in", role: "Executive", status: "Active", lastLogin: "2 min ago" },
+    95→  { id: "2", name: "Priya Sharma", email: "priya.sharma@autoflow.in", role: "Regional Manager", status: "Active", lastLogin: "15 min ago" },
+    96→  { id: "3", name: "Amit Patel", email: "amit.patel@autoflow.in", role: "Warehouse Manager", status: "Active", lastLogin: "1 hr ago" },
+    97→  { id: "4", name: "Deepa Nair", email: "deepa.nair@autoflow.in", role: "Supervisor", status: "Active", lastLogin: "30 min ago" },
+    98→  { id: "5", name: "Suresh Reddy", email: "suresh.reddy@autoflow.in", role: "Operator", status: "Inactive", lastLogin: "2 days ago" },
+    99→  { id: "6", name: "Kavitha Menon", email: "kavitha.menon@autoflow.in", role: "Warehouse Manager", status: "Active", lastLogin: "5 min ago" },
+   100→  { id: "7", name: "Ravi Verma", email: "ravi.verma@autoflow.in", role: "Supervisor", status: "Active", lastLogin: "45 min ago" },
+   101→  { id: "8", name: "Anjali Desai", email: "anjali.desai@autoflow.in", role: "Operator", status: "Active", lastLogin: "2 hrs ago" },
+   102→]
+   103→
+   104→const rolesData = [
+   105→  { name: "Super Admin", permissions: "Full access", users: 1 },
+   106→  { name: "Executive", permissions: "All views, reports, settings", users: 3 },
+   107→  { name: "Regional Manager", permissions: "Regional views, reports", users: 4 },
+   108→  { name: "Warehouse Manager", permissions: "Warehouse operations, inventory", users: 6 },
+   109→  { name: "Supervisor", permissions: "Operations, alerts", users: 12 },
+   110→  { name: "Operator", permissions: "Basic operations only", users: 45 },
+   111→]
+   112→
+   113→function SettingsSection({ children }: { children: React.ReactNode }) {
+   114→  return <div className="space-y-4">{children}</div>
+   115→}
+   116→
+   117→function SettingRow({ label, description, children }: { label: string; description?: string; children: React.ReactNode }) {
+   118→  return (
+   119→    <div className="flex items-center justify-between gap-4 py-2">
+   120→      <div className="space-y-0.5">
+   121→        <Label className="text-sm">{label}</Label>
+   122→        {description && <p className="text-xs text-muted-foreground">{description}</p>}
+   123→      </div>
+   124→      <div className="shrink-0">{children}</div>
+   125→    </div>
+   126→  )
+   127→}
+   128→
+   129→function RatingStars({ rating }: { rating: number }) {
+   130→  return (
+   131→    <div className="flex items-center gap-0.5">
+   132→      {Array.from({ length: 5 }).map((_, i) => (
+   133→        <Star
+   134→          key={i}
+   135→          className={cn(
+   136→            "h-3.5 w-3.5",
+   137→            i < rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground/30"
+   138→          )}
+   139→        />
+   140→      ))}
+   141→    </div>
+   142→  )
+   143→}
+   144→
+   145→export function SettingsView() {
+   146→  const [enabledNotifications, setEnabledNotifications] = useState({
+   147→    email: true,
+   148→    push: true,
+   149→    sms: false,
+   150→    slaBreach: true,
+   151→    lowStock: true,
+   152→    equipmentAlert: true,
+   153→    dailyReport: false,
+   154→  })
+   155→
+   156→  // Warehouse dialog
+   157→  const [warehouseDialogOpen, setWarehouseDialogOpen] = useState(false)
+   158→  const [editingWarehouse, setEditingWarehouse] = useState<typeof warehouseData[0] | null>(null)
+   159→  const [warehouseSearch, setWarehouseSearch] = useState("")
+   160→  const [warehouseForm, setWarehouseForm] = useState({
+   161→    name: "", city: "", state: "", managerName: "", capacity: "",
+   162→  })
+   163→
+   164→  // Customer dialog
+   165→  const [customerDialogOpen, setCustomerDialogOpen] = useState(false)
+   166→  const [editingCustomer, setEditingCustomer] = useState<typeof customersData[0] | null>(null)
+   167→  const [customerSearch, setCustomerSearch] = useState("")
+   168→  const [customerForm, setCustomerForm] = useState({
+   169→    name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM" as const,
+   170→  })
+   171→
+   172→  // Transporter dialog
+   173→  const [transporterDialogOpen, setTransporterDialogOpen] = useState(false)
+   174→  const [editingTransporter, setEditingTransporter] = useState<typeof transportersData[0] | null>(null)
+   175→  const [transporterSearch, setTransporterSearch] = useState("")
+   176→  const [transporterForm, setTransporterForm] = useState({
+   177→    name: "", fleet: "", routes: "", contact: "", phone: "", rating: "4",
+   178→  })
+   179→
+   180→  // KPI config
+   181→  const [kpiConfig, setKpiConfig] = useState<KPIConfigItem[]>(initialKPIConfig)
+   182→  const [kpiSearch, setKpiSearch] = useState("")
+   183→
+   184→  // Handlers — Warehouses
+   185→  const openAddWarehouse = () => {
+   186→    setEditingWarehouse(null)
+   187→    setWarehouseForm({ name: "", city: "", state: "", managerName: "", capacity: "" })
+   188→    setWarehouseDialogOpen(true)
+   189→  }
+   190→  const openEditWarehouse = (wh: typeof warehouseData[0]) => {
+   191→    setEditingWarehouse(wh)
+   192→    setWarehouseForm({ name: wh.name, city: wh.city, state: wh.state, managerName: wh.managerName, capacity: String(wh.capacity) })
+   193→    setWarehouseDialogOpen(true)
+   194→  }
+   195→  const filteredWarehouses = warehouseData.filter(wh =>
+   196→    wh.name.toLowerCase().includes(warehouseSearch.toLowerCase()) ||
+   197→    wh.city.toLowerCase().includes(warehouseSearch.toLowerCase()) ||
+   198→    wh.state.toLowerCase().includes(warehouseSearch.toLowerCase())
+   199→  )
+   200→
+   201→  // Handlers — Customers
+   202→  const openAddCustomer = () => {
+   203→    setEditingCustomer(null)
+   204→    setCustomerForm({ name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM" })
+   205→    setCustomerDialogOpen(true)
+   206→  }
+   207→  const openEditCustomer = (c: typeof customersData[0]) => {
+   208→    setEditingCustomer(c)
+   209→    setCustomerForm({ name: c.name, code: c.code, city: c.city, state: c.state, contact: c.contact, email: c.email, type: c.type as "OEM" })
+   210→    setCustomerDialogOpen(true)
+   211→  }
+   212→  const filteredCustomers = customersData.filter(c =>
+   213→    c.name.toLowerCase().includes(customerSearch.toLowerCase()) ||
+   214→    c.code.toLowerCase().includes(customerSearch.toLowerCase()) ||
+   215→    c.city.toLowerCase().includes(customerSearch.toLowerCase())
+   216→  )
+   217→
+   218→  // Handlers — Transporters
+   219→  const openAddTransporter = () => {
+   220→    setEditingTransporter(null)
+   221→    setTransporterForm({ name: "", fleet: "", routes: "", contact: "", phone: "", rating: "4" })
+   222→    setTransporterDialogOpen(true)
+   223→  }
+   224→  const openEditTransporter = (t: typeof transportersData[0]) => {
+   225→    setEditingTransporter(t)
+   226→    setTransporterForm({ name: t.name, fleet: String(t.fleet), routes: String(t.routes), contact: t.contact, phone: t.phone, rating: String(t.rating) })
+   227→    setTransporterDialogOpen(true)
+   228→  }
+   229→  const filteredTransporters = transportersData.filter(t =>
+   230→    t.name.toLowerCase().includes(transporterSearch.toLowerCase()) ||
+   231→    t.contact.toLowerCase().includes(transporterSearch.toLowerCase())
+   232→  )
+   233→
+   234→  // Handlers — KPI Config
+   235→  const updateKPI = (key: string, field: keyof KPIConfigItem, value: number) => {
+   236→    setKpiConfig(prev => prev.map(k => k.key === key ? { ...k, [field]: value } : k))
+   237→  }
+   238→  const filteredKPIConfig = kpiConfig.filter(k =>
+   239→    k.label.toLowerCase().includes(kpiSearch.toLowerCase())
+   240→  )
+   241→
+   242→  return (
+   243→    <div className="space-y-6">
+   244→      <PageHeader
+   245→        title="Settings"
+   246→        description="Configure system preferences and manage users"
+   247→        actions={
+   248→          <Button size="sm" className="gap-1.5">
+   249→            <Save className="h-3.5 w-3.5" /> Save All Changes
+   250→          </Button>
+   251→        }
+   252→      />
+   253→
+   254→      <Tabs defaultValue="general" className="space-y-4">
+   255→        <TabsList className="flex-wrap h-auto gap-1">
+   256→          {["general", "warehouses", "customers", "transporters", "users", "roles", "kpi", "notifications"].map((tab) => (
+   257→            <TabsTrigger key={tab} value={tab} className="text-xs h-7 px-3 capitalize">
+   258→              {tab}
+   259→            </TabsTrigger>
+   260→          ))}
+   261→        </TabsList>
+   262→
+   263→        {/* General */}
+   264→        <TabsContent value="general">
+   265→          <Card className="rounded-xl border-border/60 shadow-sm">
+   266→            <CardHeader>
+   267→              <CardTitle className="text-sm font-semibold">General Settings</CardTitle>
+   268→              <CardDescription className="text-xs">Configure basic application settings</CardDescription>
+   269→            </CardHeader>
+   270→            <CardContent className="space-y-6">
+   271→              <div className="grid gap-4 md:grid-cols-2">
+   272→                <div className="space-y-2">
+   273→                  <Label className="text-xs">Company Name</Label>
+   274→                  <Input defaultValue="AutoFlow Logistics" className="h-9 text-sm" />
+   275→                </div>
+   276→                <div className="space-y-2">
+   277→                  <Label className="text-xs">Industry</Label>
+   278→                  <Input defaultValue="Automobile Logistics" className="h-9 text-sm" />
+   279→                </div>
+   280→                <div className="space-y-2">
+   281→                  <Label className="text-xs">Timezone</Label>
+   282→                  <Select defaultValue="asia-kolkata">
+   283→                    <SelectTrigger className="h-9 text-sm">
+   284→                      <SelectValue />
+   285→                    </SelectTrigger>
+   286→                    <SelectContent>
+   287→                      <SelectItem value="asia-kolkata">Asia/Kolkata (IST +5:30)</SelectItem>
+   288→                      <SelectItem value="utc">UTC</SelectItem>
+   289→                    </SelectContent>
+   290→                  </Select>
+   291→                </div>
+   292→                <div className="space-y-2">
+   293→                  <Label className="text-xs">Date Format</Label>
+   294→                  <Select defaultValue="dd-mm-yyyy">
+   295→                    <SelectTrigger className="h-9 text-sm">
+   296→                      <SelectValue />
+   297→                    </SelectTrigger>
+   298→                    <SelectContent>
+   299→                      <SelectItem value="dd-mm-yyyy">DD/MM/YYYY</SelectItem>
+   300→                      <SelectItem value="mm-dd-yyyy">MM/DD/YYYY</SelectItem>
+   301→                      <SelectItem value="yyyy-mm-dd">YYYY-MM-DD</SelectItem>
+   302→                    </SelectContent>
+   303→                  </Select>
+   304→                </div>
+   305→                <div className="space-y-2">
+   306→                  <Label className="text-xs">Currency</Label>
+   307→                  <Select defaultValue="inr">
+   308→                    <SelectTrigger className="h-9 text-sm">
+   309→                      <SelectValue />
+   310→                    </SelectTrigger>
+   311→                    <SelectContent>
+   312→                      <SelectItem value="inr">INR (₹)</SelectItem>
+   313→                      <SelectItem value="usd">USD ($)</SelectItem>
+   314→                    </SelectContent>
+   315→                  </Select>
+   316→                </div>
+   317→                <div className="space-y-2">
+   318→                  <Label className="text-xs">Language</Label>
+   319→                  <Select defaultValue="en">
+   320→                    <SelectTrigger className="h-9 text-sm">
+   321→                      <SelectValue />
+   322→                    </SelectTrigger>
+   323→                    <SelectContent>
+   324→                      <SelectItem value="en">English</SelectItem>
+   325→                      <SelectItem value="hi">Hindi</SelectItem>
+   326→                    </SelectContent>
+   327→                  </Select>
+   328→                </div>
+   329→              </div>
+   330→              <Separator />
+   331→              <div className="flex justify-end">
+   332→                <Button size="sm" className="gap-1.5">
+   333→                  <Save className="h-3.5 w-3.5" /> Save Settings
+   334→                </Button>
+   335→              </div>
+   336→            </CardContent>
+   337→          </Card>
+   338→        </TabsContent>
+   339→
+   340→        {/* Warehouses Tab — Real CRUD */}
+   341→        <TabsContent value="warehouses">
+   342→          <Card className="rounded-xl border-border/60 shadow-sm">
+   343→            <CardHeader>
+   344→              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+   345→                <div>
+   346→                  <CardTitle className="text-sm font-semibold">Warehouse Management</CardTitle>
+   347→                  <CardDescription className="text-xs">Manage warehouse configurations and details</CardDescription>
+   348→                </div>
+   349→                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddWarehouse}>
+   350→                  <Plus className="h-3.5 w-3.5" /> Add Warehouse
+   351→                </Button>
+   352→              </div>
+   353→            </CardHeader>
+   354→            <CardContent className="space-y-4">
+   355→              <div className="relative max-w-xs">
+   356→                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+   357→                <Input
+   358→                  placeholder="Search warehouses..."
+   359→                  value={warehouseSearch}
+   360→                  onChange={(e) => setWarehouseSearch(e.target.value)}
+   361→                  className="h-8 pl-8 text-xs"
+   362→                />
+   363→              </div>
+   364→              <div className="max-h-[420px] overflow-y-auto rounded-md border">
+   365→                <Table>
+   366→                  <TableHeader className="sticky top-0 bg-background z-10">
+   367→                    <TableRow className="hover:bg-transparent">
+   368→                      <TableHead className="text-xs">Name</TableHead>
+   369→                      <TableHead className="text-xs hidden md:table-cell">City</TableHead>
+   370→                      <TableHead className="text-xs hidden lg:table-cell">State</TableHead>
+   371→                      <TableHead className="text-xs hidden md:table-cell">Manager</TableHead>
+   372→                      <TableHead className="text-xs">Capacity</TableHead>
+   373→                      <TableHead className="text-xs">Status</TableHead>
+   374→                      <TableHead className="text-xs text-right">Actions</TableHead>
+   375→                    </TableRow>
+   376→                  </TableHeader>
+   377→                  <TableBody>
+   378→                    {filteredWarehouses.map((wh) => (
+   379→                      <TableRow key={wh.id}>
+   380→                        <TableCell>
+   381→                          <div className="flex items-center gap-2">
+   382→                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+   383→                              <Building2 className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+   384→                            </div>
+   385→                            <div>
+   386→                              <p className="text-xs font-medium">{wh.name}</p>
+   387→                              <p className="text-[10px] text-muted-foreground">{wh.id}</p>
+   388→                            </div>
+   389→                          </div>
+   390→                        </TableCell>
+   391→                        <TableCell className="text-xs hidden md:table-cell">
+   392→                          <div className="flex items-center gap-1 text-muted-foreground">
+   393→                            <MapPin className="h-3 w-3" />
+   394→                            {wh.city}
+   395→                          </div>
+   396→                        </TableCell>
+   397→                        <TableCell className="text-xs hidden lg:table-cell">{wh.state}</TableCell>
+   398→                        <TableCell className="text-xs hidden md:table-cell">{wh.managerName}</TableCell>
+   399→                        <TableCell className="text-xs">
+   400→                          <div className="flex items-center gap-2">
+   401→                            <div className="h-1.5 w-12 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+   402→                              <div
+   403→                                className={cn(
+   404→                                  "h-full rounded-full",
+   405→                                  wh.capacityUsed > 90 ? "bg-red-500" : wh.capacityUsed > 80 ? "bg-amber-500" : "bg-emerald-500"
+   406→                                )}
+   407→                                style={{ width: `${wh.capacityUsed}%` }}
+   408→                              />
+   409→                            </div>
+   410→                            <span className="text-[10px] text-muted-foreground whitespace-nowrap">{wh.capacityUsed}%</span>
+   411→                          </div>
+   412→                        </TableCell>
+   413→                        <TableCell>
+   414→                          <StatusBadge
+   415→                            status={wh.status === "green" ? "Healthy" : wh.status === "amber" ? "Warning" : "Critical"}
+   416→                            variant={wh.status}
+   417→                          />
+   418→                        </TableCell>
+   419→                        <TableCell className="text-right">
+   420→                          <div className="flex items-center justify-end gap-1">
+   421→                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditWarehouse(wh)}>
+   422→                              <Edit className="h-3 w-3" />
+   423→                            </Button>
+   424→                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+   425→                              <Trash2 className="h-3 w-3" />
+   426→                            </Button>
+   427→                          </div>
+   428→                        </TableCell>
+   429→                      </TableRow>
+   430→                    ))}
+   431→                    {filteredWarehouses.length === 0 && (
+   432→                      <TableRow>
+   433→                        <TableCell colSpan={7} className="h-24 text-center text-xs text-muted-foreground">
+   434→                          No warehouses found.
+   435→                        </TableCell>
+   436→                      </TableRow>
+   437→                    )}
+   438→                  </TableBody>
+   439→                </Table>
+   440→              </div>
+   441→              <div className="flex items-center justify-between text-xs text-muted-foreground">
+   442→                <span>{filteredWarehouses.length} of {warehouseData.length} warehouses</span>
+   443→              </div>
+   444→            </CardContent>
+   445→          </Card>
+   446→
+   447→          {/* Warehouse Dialog */}
+   448→          <Dialog open={warehouseDialogOpen} onOpenChange={setWarehouseDialogOpen}>
+   449→            <DialogContent className="sm:max-w-lg">
+   450→              <DialogHeader>
+   451→                <DialogTitle className="text-sm">{editingWarehouse ? "Edit Warehouse" : "Add New Warehouse"}</DialogTitle>
+   452→                <DialogDescription className="text-xs">
+   453→                  {editingWarehouse ? "Update warehouse configuration details." : "Enter details for the new warehouse."}
+   454→                </DialogDescription>
+   455→              </DialogHeader>
+   456→              <div className="grid gap-4 py-2">
+   457→                <div className="grid gap-4 sm:grid-cols-2">
+   458→                  <div className="space-y-1.5">
+   459→                    <Label className="text-xs">Warehouse Name</Label>
+   460→                    <Input value={warehouseForm.name} onChange={(e) => setWarehouseForm({ ...warehouseForm, name: e.target.value })} placeholder="e.g. Chennai Distribution Hub" className="h-9 text-sm" />
+   461→                  </div>
+   462→                  <div className="space-y-1.5">
+   463→                    <Label className="text-xs">City</Label>
+   464→                    <Input value={warehouseForm.city} onChange={(e) => setWarehouseForm({ ...warehouseForm, city: e.target.value })} placeholder="e.g. Chennai" className="h-9 text-sm" />
+   465→                  </div>
+   466→                </div>
+   467→                <div className="grid gap-4 sm:grid-cols-2">
+   468→                  <div className="space-y-1.5">
+   469→                    <Label className="text-xs">State</Label>
+   470→                    <Input value={warehouseForm.state} onChange={(e) => setWarehouseForm({ ...warehouseForm, state: e.target.value })} placeholder="e.g. Tamil Nadu" className="h-9 text-sm" />
+   471→                  </div>
+   472→                  <div className="space-y-1.5">
+   473→                    <Label className="text-xs">Capacity (pallets)</Label>
+   474→                    <Input type="number" value={warehouseForm.capacity} onChange={(e) => setWarehouseForm({ ...warehouseForm, capacity: e.target.value })} placeholder="e.g. 3000" className="h-9 text-sm" />
+   475→                  </div>
+   476→                </div>
+   477→                <div className="space-y-1.5">
+   478→                  <Label className="text-xs">Manager Name</Label>
+   479→                  <Input value={warehouseForm.managerName} onChange={(e) => setWarehouseForm({ ...warehouseForm, managerName: e.target.value })} placeholder="e.g. Rajesh Krishnamurthy" className="h-9 text-sm" />
+   480→                </div>
+   481→              </div>
+   482→              <DialogFooter>
+   483→                <Button variant="outline" size="sm" onClick={() => setWarehouseDialogOpen(false)}>Cancel</Button>
+   484→                <Button size="sm" onClick={() => setWarehouseDialogOpen(false)}>
+   485→                  {editingWarehouse ? "Update Warehouse" : "Add Warehouse"}
+   486→                </Button>
+   487→              </DialogFooter>
+   488→            </DialogContent>
+   489→          </Dialog>
+   490→        </TabsContent>
+   491→
+   492→        {/* Customers Tab */}
+   493→        <TabsContent value="customers">
+   494→          <Card className="rounded-xl border-border/60 shadow-sm">
+   495→            <CardHeader>
+   496→              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+   497→                <div>
+   498→                  <CardTitle className="text-sm font-semibold">Customer Management</CardTitle>
+   499→                  <CardDescription className="text-xs">Manage OEM and supplier customer profiles</CardDescription>
+   500→                </div>
+   501→                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddCustomer}>
+   502→                  <Plus className="h-3.5 w-3.5" /> Add Customer
+   503→                </Button>
+   504→              </div>
+   505→            </CardHeader>
+   506→            <CardContent className="space-y-4">
+   507→              <div className="relative max-w-xs">
+   508→                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+   509→                <Input
+   510→                  placeholder="Search customers..."
+   511→                  value={customerSearch}
+   512→                  onChange={(e) => setCustomerSearch(e.target.value)}
+   513→                  className="h-8 pl-8 text-xs"
+   514→                />
+   515→              </div>
+   516→              <div className="max-h-[420px] overflow-y-auto rounded-md border">
+   517→                <Table>
+   518→                  <TableHeader className="sticky top-0 bg-background z-10">
+   519→                    <TableRow className="hover:bg-transparent">
+   520→                      <TableHead className="text-xs">Name</TableHead>
+   521→                      <TableHead className="text-xs">Code</TableHead>
+   522→                      <TableHead className="text-xs hidden md:table-cell">City</TableHead>
+   523→                      <TableHead className="text-xs hidden lg:table-cell">Contact</TableHead>
+   524→                      <TableHead className="text-xs">Type</TableHead>
+   525→                      <TableHead className="text-xs">Status</TableHead>
+   526→                      <TableHead className="text-xs text-right">Actions</TableHead>
+   527→                    </TableRow>
+   528→                  </TableHeader>
+   529→                  <TableBody>
+   530→                    {filteredCustomers.map((c) => (
+   531→                      <TableRow key={c.id}>
+   532→                        <TableCell>
+   533→                          <div className="flex items-center gap-2">
+   534→                            <Avatar className="h-7 w-7">
+   535→                              <AvatarFallback className={cn(
+   536→                                "text-[10px]",
+   537→                                c.type === "OEM" ? "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+   538→                                  : c.type === "Tier1" ? "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"
+   539→                                  : "bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300"
+   540→                              )}>
+   541→                                {c.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+   542→                              </AvatarFallback>
+   543→                            </Avatar>
+   544→                            <span className="text-xs font-medium">{c.name}</span>
+   545→                          </div>
+   546→                        </TableCell>
+   547→                        <TableCell>
+   548→                          <Badge variant="outline" className="text-[10px] font-mono">{c.code}</Badge>
+   549→                        </TableCell>
+   550→                        <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{c.city}, {c.state}</TableCell>
+   551→                        <TableCell className="text-xs hidden lg:table-cell">
+   552→                          <div className="flex items-center gap-1 text-muted-foreground">
+   553→                            <Mail className="h-3 w-3" />
+   554→                            {c.contact}
+   555→                          </div>
+   556→                        </TableCell>
+   557→                        <TableCell>
+   558→                          <Badge className={cn(
+   559→                            "text-[10px] rounded-full",
+   560→                            c.type === "OEM" && "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200",
+   561→                            c.type === "Tier1" && "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
+   562→                            c.type === "Tier2" && "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
+   563→                          )}>
+   564→                            {c.type}
+   565→                          </Badge>
+   566→                        </TableCell>
+   567→                        <TableCell>
+   568→                          <Badge className={cn(
+   569→                            "text-[10px] rounded-full",
+   570→                            c.status === "Active" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+   571→                          )}>
+   572→                            {c.status}
+   573→                          </Badge>
+   574→                        </TableCell>
+   575→                        <TableCell className="text-right">
+   576→                          <div className="flex items-center justify-end gap-1">
+   577→                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditCustomer(c)}>
+   578→                              <Edit className="h-3 w-3" />
+   579→                            </Button>
+   580→                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+   581→                              <Trash2 className="h-3 w-3" />
+   582→                            </Button>
+   583→                          </div>
+   584→                        </TableCell>
+   585→                      </TableRow>
+   586→                    ))}
+   587→                    {filteredCustomers.length === 0 && (
+   588→                      <TableRow>
+   589→                        <TableCell colSpan={7} className="h-24 text-center text-xs text-muted-foreground">
+   590→                          No customers found.
+   591→                        </TableCell>
+   592→                      </TableRow>
+   593→                    )}
+   594→                  </TableBody>
+   595→                </Table>
+   596→              </div>
+   597→              <div className="flex items-center justify-between text-xs text-muted-foreground">
+   598→                <span>{filteredCustomers.length} of {customersData.length} customers</span>
+   599→              </div>
+   600→            </CardContent>
+   601→          </Card>
+   602→
+   603→          {/* Customer Dialog */}
+   604→          <Dialog open={customerDialogOpen} onOpenChange={setCustomerDialogOpen}>
+   605→            <DialogContent className="sm:max-w-lg">
+   606→              <DialogHeader>
+   607→                <DialogTitle className="text-sm">{editingCustomer ? "Edit Customer" : "Add New Customer"}</DialogTitle>
+   608→                <DialogDescription className="text-xs">
+   609→                  {editingCustomer ? "Update customer details." : "Enter details for the new customer."}
+   610→                </DialogDescription>
+   611→              </DialogHeader>
+   612→              <div className="grid gap-4 py-2">
+   613→                <div className="grid gap-4 sm:grid-cols-2">
+   614→                  <div className="space-y-1.5">
+   615→                    <Label className="text-xs">Customer Name</Label>
+   616→                    <Input value={customerForm.name} onChange={(e) => setCustomerForm({ ...customerForm, name: e.target.value })} placeholder="e.g. Maruti Suzuki India" className="h-9 text-sm" />
+   617→                  </div>
+   618→                  <div className="space-y-1.5">
+   619→                    <Label className="text-xs">Customer Code</Label>
+   620→                    <Input value={customerForm.code} onChange={(e) => setCustomerForm({ ...customerForm, code: e.target.value })} placeholder="e.g. MSI-001" className="h-9 text-sm" />
+   621→                  </div>
+   622→                </div>
+   623→                <div className="grid gap-4 sm:grid-cols-2">
+   624→                  <div className="space-y-1.5">
+   625→                    <Label className="text-xs">City</Label>
+   626→                    <Input value={customerForm.city} onChange={(e) => setCustomerForm({ ...customerForm, city: e.target.value })} placeholder="e.g. Gurugram" className="h-9 text-sm" />
+   627→                  </div>
+   628→                  <div className="space-y-1.5">
+   629→                    <Label className="text-xs">State</Label>
+   630→                    <Input value={customerForm.state} onChange={(e) => setCustomerForm({ ...customerForm, state: e.target.value })} placeholder="e.g. Haryana" className="h-9 text-sm" />
+   631→                  </div>
+   632→                </div>
+   633→                <div className="grid gap-4 sm:grid-cols-2">
+   634→                  <div className="space-y-1.5">
+   635→                    <Label className="text-xs">Contact Person</Label>
+   636→                    <Input value={customerForm.contact} onChange={(e) => setCustomerForm({ ...customerForm, contact: e.target.value })} placeholder="e.g. Harsh Mehta" className="h-9 text-sm" />
+   637→                  </div>
+   638→                  <div className="space-y-1.5">
+   639→                    <Label className="text-xs">Email</Label>
+   640→                    <Input type="email" value={customerForm.email} onChange={(e) => setCustomerForm({ ...customerForm, email: e.target.value })} placeholder="e.g. harsh.mehta@maruti.co.in" className="h-9 text-sm" />
+   641→                  </div>
+   642→                </div>
+   643→                <div className="space-y-1.5">
+   644→                  <Label className="text-xs">Customer Type</Label>
+   645→                  <Select value={customerForm.type} onValueChange={(v) => setCustomerForm({ ...customerForm, type: v as "OEM" | "Tier1" | "Tier2" })}>
+   646→                    <SelectTrigger className="h-9 text-sm">
+   647→                      <SelectValue />
+   648→                    </SelectTrigger>
+   649→                    <SelectContent>
+   650→                      <SelectItem value="OEM">OEM (Original Equipment Manufacturer)</SelectItem>
+   651→                      <SelectItem value="Tier1">Tier 1 Supplier</SelectItem>
+   652→                      <SelectItem value="Tier2">Tier 2 Supplier</SelectItem>
+   653→                    </SelectContent>
+   654→                  </Select>
+   655→                </div>
+   656→              </div>
+   657→              <DialogFooter>
+   658→                <Button variant="outline" size="sm" onClick={() => setCustomerDialogOpen(false)}>Cancel</Button>
+   659→                <Button size="sm" onClick={() => setCustomerDialogOpen(false)}>
+   660→                  {editingCustomer ? "Update Customer" : "Add Customer"}
+   661→                </Button>
+   662→              </DialogFooter>
+   663→            </DialogContent>
+   664→          </Dialog>
+   665→        </TabsContent>
+   666→
+   667→        {/* Transporters Tab */}
+   668→        <TabsContent value="transporters">
+   669→          <Card className="rounded-xl border-border/60 shadow-sm">
+   670→            <CardHeader>
+   671→              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+   672→                <div>
+   673→                  <CardTitle className="text-sm font-semibold">Transporter Management</CardTitle>
+   674→                  <CardDescription className="text-xs">Manage logistics partners and fleet providers</CardDescription>
+   675→                </div>
+   676→                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddTransporter}>
+   677→                  <Plus className="h-3.5 w-3.5" /> Add Transporter
+   678→                </Button>
+   679→              </div>
+   680→            </CardHeader>
+   681→            <CardContent className="space-y-4">
+   682→              <div className="relative max-w-xs">
+   683→                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+   684→                <Input
+   685→                  placeholder="Search transporters..."
+   686→                  value={transporterSearch}
+   687→                  onChange={(e) => setTransporterSearch(e.target.value)}
+   688→                  className="h-8 pl-8 text-xs"
+   689→                />
+   690→              </div>
+   691→              <div className="max-h-[420px] overflow-y-auto rounded-md border">
+   692→                <Table>
+   693→                  <TableHeader className="sticky top-0 bg-background z-10">
+   694→                    <TableRow className="hover:bg-transparent">
+   695→                      <TableHead className="text-xs">Name</TableHead>
+   696→                      <TableHead className="text-xs hidden sm:table-cell">Fleet Size</TableHead>
+   697→                      <TableHead className="text-xs hidden md:table-cell">Routes</TableHead>
+   698→                      <TableHead className="text-xs hidden lg:table-cell">Contact</TableHead>
+   699→                      <TableHead className="text-xs">Rating</TableHead>
+   700→                      <TableHead className="text-xs text-right">Actions</TableHead>
+   701→                    </TableRow>
+   702→                  </TableHeader>
+   703→                  <TableBody>
+   704→                    {filteredTransporters.map((t) => (
+   705→                      <TableRow key={t.id}>
+   706→                        <TableCell>
+   707→                          <div className="flex items-center gap-2">
+   708→                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950">
+   709→                              <Truck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+   710→                            </div>
+   711→                            <div>
+   712→                              <p className="text-xs font-medium">{t.name}</p>
+   713→                              <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+   714→                                <Phone className="h-2.5 w-2.5" />
+   715→                                {t.phone}
+   716→                              </div>
+   717→                            </div>
+   718→                          </div>
+   719→                        </TableCell>
+   720→                        <TableCell className="text-xs hidden sm:table-cell">
+   721→                          <Badge variant="secondary" className="text-[10px]">{t.fleet} vehicles</Badge>
+   722→                        </TableCell>
+   723→                        <TableCell className="text-xs hidden md:table-cell">{t.routes} active routes</TableCell>
+   724→                        <TableCell className="text-xs hidden lg:table-cell">{t.contact}</TableCell>
+   725→                        <TableCell>
+   726→                          <RatingStars rating={t.rating} />
+   727→                        </TableCell>
+   728→                        <TableCell className="text-right">
+   729→                          <div className="flex items-center justify-end gap-1">
+   730→                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditTransporter(t)}>
+   731→                              <Edit className="h-3 w-3" />
+   732→                            </Button>
+   733→                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+   734→                              <Trash2 className="h-3 w-3" />
+   735→                            </Button>
+   736→                          </div>
+   737→                        </TableCell>
+   738→                      </TableRow>
+   739→                    ))}
+   740→                    {filteredTransporters.length === 0 && (
+   741→                      <TableRow>
+   742→                        <TableCell colSpan={6} className="h-24 text-center text-xs text-muted-foreground">
+   743→                          No transporters found.
+   744→                        </TableCell>
+   745→                      </TableRow>
+   746→                    )}
+   747→                  </TableBody>
+   748→                </Table>
+   749→              </div>
+   750→              <div className="flex items-center justify-between text-xs text-muted-foreground">
+   751→                <span>{filteredTransporters.length} of {transportersData.length} transporters</span>
+   752→              </div>
+   753→            </CardContent>
+   754→          </Card>
+   755→
+   756→          {/* Transporter Dialog */}
+   757→          <Dialog open={transporterDialogOpen} onOpenChange={setTransporterDialogOpen}>
+   758→            <DialogContent className="sm:max-w-lg">
+   759→              <DialogHeader>
+   760→                <DialogTitle className="text-sm">{editingTransporter ? "Edit Transporter" : "Add New Transporter"}</DialogTitle>
+   761→                <DialogDescription className="text-xs">
+   762→                  {editingTransporter ? "Update transporter details." : "Enter details for the new transporter."}
+   763→                </DialogDescription>
+   764→              </DialogHeader>
+   765→              <div className="grid gap-4 py-2">
+   766→                <div className="space-y-1.5">
+   767→                  <Label className="text-xs">Company Name</Label>
+   768→                  <Input value={transporterForm.name} onChange={(e) => setTransporterForm({ ...transporterForm, name: e.target.value })} placeholder="e.g. TCI Express Ltd" className="h-9 text-sm" />
+   769→                </div>
+   770→                <div className="grid gap-4 sm:grid-cols-2">
+   771→                  <div className="space-y-1.5">
+   772→                    <Label className="text-xs">Fleet Size</Label>
+   773→                    <Input type="number" value={transporterForm.fleet} onChange={(e) => setTransporterForm({ ...transporterForm, fleet: e.target.value })} placeholder="e.g. 120" className="h-9 text-sm" />
+   774→                  </div>
+   775→                  <div className="space-y-1.5">
+   776→                    <Label className="text-xs">Active Routes</Label>
+   777→                    <Input type="number" value={transporterForm.routes} onChange={(e) => setTransporterForm({ ...transporterForm, routes: e.target.value })} placeholder="e.g. 45" className="h-9 text-sm" />
+   778→                  </div>
+   779→                </div>
+   780→                <div className="grid gap-4 sm:grid-cols-2">
+   781→                  <div className="space-y-1.5">
+   782→                    <Label className="text-xs">Contact Person</Label>
+   783→                    <Input value={transporterForm.contact} onChange={(e) => setTransporterForm({ ...transporterForm, contact: e.target.value })} placeholder="e.g. Pradeep Kumar" className="h-9 text-sm" />
+   784→                  </div>
+   785→                  <div className="space-y-1.5">
+   786→                    <Label className="text-xs">Phone</Label>
+   787→                    <Input value={transporterForm.phone} onChange={(e) => setTransporterForm({ ...transporterForm, phone: e.target.value })} placeholder="+91 98765 43210" className="h-9 text-sm" />
+   788→                  </div>
+   789→                </div>
+   790→                <div className="space-y-1.5">
+   791→                  <Label className="text-xs">Rating (1-5)</Label>
+   792→                  <Select value={transporterForm.rating} onValueChange={(v) => setTransporterForm({ ...transporterForm, rating: v })}>
+   793→                    <SelectTrigger className="h-9 text-sm">
+   794→                      <SelectValue />
+   795→                    </SelectTrigger>
+   796→                    <SelectContent>
+   797→                      {[1, 2, 3, 4, 5].map((r) => (
+   798→                        <SelectItem key={r} value={String(r)}>
+   799→                          <div className="flex items-center gap-1">
+   800→                            {Array.from({ length: 5 }).map((_, i) => (
+   801→                              <Star key={i} className={cn("h-3 w-3", i < r ? "fill-amber-400 text-amber-400" : "text-muted-foreground/30")} />
+   802→                            ))}
+   803→                          </div>
+   804→                        </SelectItem>
+   805→                      ))}
+   806→                    </SelectContent>
+   807→                  </Select>
+   808→                </div>
+   809→              </div>
+   810→              <DialogFooter>
+   811→                <Button variant="outline" size="sm" onClick={() => setTransporterDialogOpen(false)}>Cancel</Button>
+   812→                <Button size="sm" onClick={() => setTransporterDialogOpen(false)}>
+   813→                  {editingTransporter ? "Update Transporter" : "Add Transporter"}
+   814→                </Button>
+   815→              </DialogFooter>
+   816→            </DialogContent>
+   817→          </Dialog>
+   818→        </TabsContent>
+   819→
+   820→        {/* Users */}
+   821→        <TabsContent value="users">
+   822→          <Card className="rounded-xl border-border/60 shadow-sm">
+   823→            <CardHeader>
+   824→              <div className="flex items-center justify-between">
+   825→                <div>
+   826→                  <CardTitle className="text-sm font-semibold">User Management</CardTitle>
+   827→                  <CardDescription className="text-xs">Manage users and their access levels</CardDescription>
+   828→                </div>
+   829→                <Button size="sm" className="gap-1.5 h-8 text-xs">
+   830→                  <Plus className="h-3.5 w-3.5" /> Add User
+   831→                </Button>
+   832→              </div>
+   833→            </CardHeader>
+   834→            <CardContent>
+   835→              <Table>
+   836→                <TableHeader>
+   837→                  <TableRow className="hover:bg-transparent">
+   838→                    <TableHead className="text-xs">User</TableHead>
+   839→                    <TableHead className="text-xs hidden md:table-cell">Email</TableHead>
+   840→                    <TableHead className="text-xs">Role</TableHead>
+   841→                    <TableHead className="text-xs">Status</TableHead>
+   842→                    <TableHead className="text-xs hidden md:table-cell">Last Login</TableHead>
+   843→                    <TableHead className="text-xs text-right">Actions</TableHead>
+   844→                  </TableRow>
+   845→                </TableHeader>
+   846→                <TableBody>
+   847→                  {usersData.map((user) => (
+   848→                    <TableRow key={user.id}>
+   849→                      <TableCell>
+   850→                        <div className="flex items-center gap-2">
+   851→                          <Avatar className="h-7 w-7">
+   852→                            <AvatarFallback className="bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 text-[10px]">
+   853→                              {user.name.split(" ").map((n) => n[0]).join("")}
+   854→                            </AvatarFallback>
+   855→                          </Avatar>
+   856→                          <span className="text-xs font-medium">{user.name}</span>
+   857→                        </div>
+   858→                      </TableCell>
+   859→                      <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{user.email}</TableCell>
+   860→                      <TableCell>
+   861→                        <Badge variant="outline" className="text-[10px] rounded-full">{user.role}</Badge>
+   862→                      </TableCell>
+   863→                      <TableCell>
+   864→                        <Badge className={cn("text-[10px] rounded-full", user.status === "Active" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300")}>{user.status}</Badge>
+   865→                      </TableCell>
+   866→                      <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{user.lastLogin}</TableCell>
+   867→                      <TableCell className="text-right">
+   868→                        <div className="flex items-center justify-end gap-1">
+   869→                          <Button variant="ghost" size="icon" className="h-7 w-7"><Edit className="h-3 w-3" /></Button>
+   870→                          <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500"><Trash2 className="h-3 w-3" /></Button>
+   871→                        </div>
+   872→                      </TableCell>
+   873→                    </TableRow>
+   874→                  ))}
+   875→                </TableBody>
+   876→              </Table>
+   877→            </CardContent>
+   878→          </Card>
+   879→        </TabsContent>
+   880→
+   881→        {/* Roles */}
+   882→        <TabsContent value="roles">
+   883→          <Card className="rounded-xl border-border/60 shadow-sm">
+   884→            <CardHeader>
+   885→              <div className="flex items-center justify-between">
+   886→                <div>
+   887→                  <CardTitle className="text-sm font-semibold">Roles & Permissions</CardTitle>
+   888→                  <CardDescription className="text-xs">Define roles and access permissions</CardDescription>
+   889→                </div>
+   890→                <Button size="sm" className="gap-1.5 h-8 text-xs">
+   891→                  <Shield className="h-3.5 w-3.5" /> Add Role
+   892→                </Button>
+   893→              </div>
+   894→            </CardHeader>
+   895→            <CardContent>
+   896→              <Table>
+   897→                <TableHeader>
+   898→                  <TableRow className="hover:bg-transparent">
+   899→                    <TableHead className="text-xs">Role Name</TableHead>
+   900→                    <TableHead className="text-xs">Permissions</TableHead>
+   901→                    <TableHead className="text-xs text-right">Users</TableHead>
+   902→                    <TableHead className="text-xs text-right">Actions</TableHead>
+   903→                  </TableRow>
+   904→                </TableHeader>
+   905→                <TableBody>
+   906→                  {rolesData.map((role) => (
+   907→                    <TableRow key={role.name}>
+   908→                      <TableCell className="text-xs font-medium">{role.name}</TableCell>
+   909→                      <TableCell className="text-xs text-muted-foreground">{role.permissions}</TableCell>
+   910→                      <TableCell className="text-xs text-right">
+   911→                        <Badge variant="secondary" className="text-[10px]">{role.users}</Badge>
+   912→                      </TableCell>
+   913→                      <TableCell className="text-right">
+   914→                        <Button variant="ghost" size="icon" className="h-7 w-7"><Edit className="h-3 w-3" /></Button>
+   915→                      </TableCell>
+   916→                    </TableRow>
+   917→                  ))}
+   918→                </TableBody>
+   919→              </Table>
+   920→            </CardContent>
+   921→          </Card>
+   922→        </TabsContent>
+   923→
+   924→        {/* KPI Config Tab — Real Configuration */}
+   925→        <TabsContent value="kpi">
+   926→          <Card className="rounded-xl border-border/60 shadow-sm">
+   927→            <CardHeader>
+   928→              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+   929→                <div>
+   930→                  <CardTitle className="text-sm font-semibold">KPI Target Configuration</CardTitle>
+   931→                  <CardDescription className="text-xs">Set target values and alert thresholds for each KPI</CardDescription>
+   932→                </div>
+   933→                <Button size="sm" className="gap-1.5 h-8 text-xs">
+   934→                  <Save className="h-3.5 w-3.5" /> Save Targets
+   935→                </Button>
+   936→              </div>
+   937→            </CardHeader>
+   938→            <CardContent className="space-y-4">
+   939→              <div className="relative max-w-xs">
+   940→                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+   941→                <Input
+   942→                  placeholder="Search KPIs..."
+   943→                  value={kpiSearch}
+   944→                  onChange={(e) => setKpiSearch(e.target.value)}
+   945→                  className="h-8 pl-8 text-xs"
+   946→                />
+   947→              </div>
+   948→              <div className="max-h-[480px] overflow-y-auto rounded-md border">
+   949→                <Table>
+   950→                  <TableHeader className="sticky top-0 bg-background z-10">
+   951→                    <TableRow className="hover:bg-transparent">
+   952→                      <TableHead className="text-xs">KPI Name</TableHead>
+   953→                      <TableHead className="text-xs">Current</TableHead>
+   954→                      <TableHead className="text-xs">Target</TableHead>
+   955→                      <TableHead className="text-xs hidden sm:table-cell">Unit</TableHead>
+   956→                      <TableHead className="text-xs hidden md:table-cell">
+   957→                        <div className="flex items-center gap-1">
+   958→                          <AlertTriangle className="h-3 w-3 text-amber-500" />
+   959→                          Warning
+   960→                        </div>
+   961→                      </TableHead>
+   962→                      <TableHead className="text-xs hidden md:table-cell">
+   963→                        <div className="flex items-center gap-1">
+   964→                          <AlertTriangle className="h-3 w-3 text-red-500" />
+   965→                          Critical
+   966→                        </div>
+   967→                      </TableHead>
+   968→                      <TableHead className="text-xs hidden lg:table-cell">Status</TableHead>
+   969→                    </TableRow>
+   970→                  </TableHeader>
+   971→                  <TableBody>
+   972→                    {filteredKPIConfig.map((kpi) => {
+   973→                      const isAtTarget = kpi.value >= kpi.target
+   974→                      const isWarning = !isAtTarget && kpi.value >= kpi.warningThreshold
+   975→                      const isCritical = !isAtTarget && !isWarning
+   976→
+   977→                      return (
+   978→                        <TableRow key={kpi.key}>
+   979→                          <TableCell>
+   980→                            <div className="flex items-center gap-2">
+   981→                              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+   982→                                <Target className="h-3.5 w-3.5 text-slate-600 dark:text-slate-300" />
+   983→                              </div>
+   984→                              <span className="text-xs font-medium">{kpi.label}</span>
+   985→                            </div>
+   986→                          </TableCell>
+   987→                          <TableCell className="text-xs font-mono font-medium">{kpi.value}{kpi.unit}</TableCell>
+   988→                          <TableCell>
+   989→                            <Input
+   990→                              type="number"
+   991→                              value={kpi.target}
+   992→                              onChange={(e) => updateKPI(kpi.key, "target", Number(e.target.value))}
+   993→                              className="h-7 w-20 text-xs"
+   994→                            />
+   995→                          </TableCell>
+   996→                          <TableCell className="text-xs text-muted-foreground hidden sm:table-cell">{kpi.unit || "—"}</TableCell>
+   997→                          <TableCell className="hidden md:table-cell">
+   998→                            <Input
+   999→                              type="number"
+  1000→                              value={kpi.warningThreshold}
+  1001→                              onChange={(e) => updateKPI(kpi.key, "warningThreshold", Number(e.target.value))}
+  1002→                              className="h-7 w-20 text-xs"
+  1003→                            />
+  1004→                          </TableCell>
+  1005→                          <TableCell className="hidden md:table-cell">
+  1006→                            <Input
+  1007→                              type="number"
+  1008→                              value={kpi.criticalThreshold}
+  1009→                              onChange={(e) => updateKPI(kpi.key, "criticalThreshold", Number(e.target.value))}
+  1010→                              className="h-7 w-20 text-xs"
+  1011→                            />
+  1012→                          </TableCell>
+  1013→                          <TableCell className="hidden lg:table-cell">
+  1014→                            <StatusBadge
+  1015→                              status={isAtTarget ? "On Target" : isWarning ? "Warning" : "Critical"}
+  1016→                              variant={isAtTarget ? "green" : isWarning ? "amber" : "red"}
+  1017→                            />
+  1018→                          </TableCell>
+  1019→                        </TableRow>
+  1020→                      )
+  1021→                    })}
+  1022→                  </TableBody>
+  1023→                </Table>
+  1024→              </div>
+  1025→              <div className="flex items-center justify-between text-xs text-muted-foreground">
+  1026→                <span>{filteredKPIConfig.length} KPIs configured</span>
+  1027→                <div className="flex items-center gap-4">
+  1028→                  <div className="flex items-center gap-1.5">
+  1029→                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+  1030→                    <span>On Target</span>
+  1031→                  </div>
+  1032→                  <div className="flex items-center gap-1.5">
+  1033→                    <span className="h-2 w-2 rounded-full bg-amber-500" />
+  1034→                    <span>Warning</span>
+  1035→                  </div>
+  1036→                  <div className="flex items-center gap-1.5">
+  1037→                    <span className="h-2 w-2 rounded-full bg-red-500" />
+  1038→                    <span>Critical</span>
+  1039→                  </div>
+  1040→                </div>
+  1041→              </div>
+  1042→            </CardContent>
+  1043→          </Card>
+  1044→        </TabsContent>
+  1045→
+  1046→        {/* Notifications */}
+  1047→        <TabsContent value="notifications">
+  1048→          <Card className="rounded-xl border-border/60 shadow-sm">
+  1049→            <CardHeader>
+  1050→              <CardTitle className="text-sm font-semibold">Notification Settings</CardTitle>
+  1051→              <CardDescription className="text-xs">Configure how and when you receive notifications</CardDescription>
+  1052→            </CardHeader>
+  1053→            <CardContent className="space-y-6">
+  1054→              <div>
+  1055→                <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Channels</h4>
+  1056→                <SettingsSection>
+  1057→                  <SettingRow label="Email Notifications" description="Receive alerts via email">
+  1058→                    <Switch checked={enabledNotifications.email} onCheckedChange={(v) => setEnabledNotifications({ ...enabledNotifications, email: v })} />
+  1059→                  </SettingRow>
+  1060→                  <SettingRow label="Push Notifications" description="Browser push notifications">
+  1061→                    <Switch checked={enabledNotifications.push} onCheckedChange={(v) => setEnabledNotifications({ ...enabledNotifications, push: v })} />
+  1062→                  </SettingRow>
+  1063→                  <SettingRow label="SMS Alerts" description="Critical alerts via SMS">
+  1064→                    <Switch checked={enabledNotifications.sms} onCheckedChange={(v) => setEnabledNotifications({ ...enabledNotifications, sms: v })} />
+  1065→                  </SettingRow>
+  1066→                </SettingsSection>
+  1067→              </div>
+  1068→              <Separator />
+  1069→              <div>
+  1070→                <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Alert Types</h4>
+  1071→                <SettingsSection>
+  1072→                  <SettingRow label="SLA Breach Alerts">
+  1073→                    <Switch checked={enabledNotifications.slaBreach} onCheckedChange={(v) => setEnabledNotifications({ ...enabledNotifications, slaBreach: v })} />
+  1074→                  </SettingRow>
+  1075→                  <SettingRow label="Low Stock Warnings">
+  1076→                    <Switch checked={enabledNotifications.lowStock} onCheckedChange={(v) => setEnabledNotifications({ ...enabledNotifications, lowStock: v })} />
+  1077→                  </SettingRow>
+  1078→                  <SettingRow label="Equipment Failure">
+  1079→                    <Switch checked={enabledNotifications.equipmentAlert} onCheckedChange={(v) => setEnabledNotifications({ ...enabledNotifications, equipmentAlert: v })} />
+  1080→                  </SettingRow>
+  1081→                  <SettingRow label="Daily Report Email">
+  1082→                    <Switch checked={enabledNotifications.dailyReport} onCheckedChange={(v) => setEnabledNotifications({ ...enabledNotifications, dailyReport: v })} />
+  1083→                  </SettingRow>
+  1084→                </SettingsSection>
+  1085→              </div>
+  1086→            </CardContent>
+  1087→          </Card>
+  1088→        </TabsContent>
+  1089→      </Tabs>
+  1090→    </div>
+  1091→  )
+  1092→}
+  1093→

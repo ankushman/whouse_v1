@@ -84,7 +84,7 @@ export function AlertsView() {
       />
 
       {/* Summary */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4 stagger-children">
         {[
           { label: "Critical", value: summary.critical, icon: AlertTriangle, color: "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" },
           { label: "Warnings", value: summary.warning, icon: AlertCircle, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },

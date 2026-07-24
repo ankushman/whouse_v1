@@ -81,7 +81,7 @@ export function OutboundView() {
       />
 
       {/* Summary */}
-      <div className="grid grid-cols-3 gap-3 md:grid-cols-7">
+      <div className="grid grid-cols-3 gap-3 md:grid-cols-7 stagger-children">
         {[
           { label: "Total", value: summary.total, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
           { label: "Pending", value: summary.pending, color: "bg-slate-50 text-slate-600 dark:bg-slate-950 dark:text-slate-400" },

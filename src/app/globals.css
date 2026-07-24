@@ -122,8 +122,13 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -149,4 +154,198 @@
   .dark ::-webkit-scrollbar-thumb:hover {
     background: oklch(0.45 0.01 250);
   }
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes counter-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Utility animation classes */
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.25s ease-out both;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.35s ease-out both;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Staggered grid children animation */
+.stagger-children > * {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 40ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 280ms; }
+.stagger-children > *:nth-child(9) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(11) { animation-delay: 400ms; }
+.stagger-children > *:nth-child(12) { animation-delay: 440ms; }
+
+/* Skeleton shimmer effect */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.935 0.005 250) 25%,
+    oklch(0.96 0.005 250) 50%,
+    oklch(0.935 0.005 250) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    oklch(0.22 0.015 250) 25%,
+    oklch(0.26 0.015 250) 50%,
+    oklch(0.22 0.015 250) 75%
+  );
+  background-size: 200% 100%;
+}
+
+/* ── Focus Styles ───────────────────────────────────────── */
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid oklch(0.488 0.243 264);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .dark :focus-visible {
+    outline-color: oklch(0.588 0.243 264);
+  }
+}
+
+/* ── Table Enhancements ──────────────────────────────────── */
+
+@layer base {
+  /* Sticky table headers */
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: oklch(1 0 0);
+  }
+  .dark thead th {
+    background: oklch(0.18 0.015 250);
+  }
+}
+
+/* ── Card Surface Styles ───────────────────────────────── */
+
+/* Glass effect for overlay cards */
+.card-glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Bottom Navigation (Mobile) ─────────────────────────── */
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 6px 0;
+  font-size: 10px;
+  font-weight: 500;
+  color: oklch(0.5 0.02 250);
+  transition: color 0.15s ease;
+  min-width: 48px;
+}
+
+.bottom-nav-item.active {
+  color: oklch(0.488 0.243 264);
+}
+
+.dark .bottom-nav-item.active {
+  color: oklch(0.588 0.243 264);
+}
+
+.bottom-nav-item:hover {
+  color: oklch(0.3 0.015 250);
+}
+
+.dark .bottom-nav-item:hover {
+  color: oklch(0.8 0.005 250);
+}
+
+/* ── Selection Styles ────────────────────────────────────── */
+
+::selection {
+  background-color: oklch(0.488 0.243 264 / 0.2);
+}
+
+.dark ::selection {
+  background-color: oklch(0.588 0.243 264 / 0.3);
 }
