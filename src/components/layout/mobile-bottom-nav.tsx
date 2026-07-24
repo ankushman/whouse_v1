@@ -78,8 +78,9 @@ export function MobileBottomNav() {
       className={cn(
         "fixed bottom-0 left-0 right-0 z-40 md:hidden",
         "border-t border-border",
-        "bg-background/95 backdrop-blur-md",
-        "supports-[backdrop-filter]:bg-background/80"
+        "shadow-[0_-1px_3px_rgba(0,0,0,0.05)]",
+        "dark:shadow-[0_-1px_3px_rgba(0,0,0,0.2)]",
+        "bg-background/80 backdrop-blur-lg"
       )}
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
       role="navigation"

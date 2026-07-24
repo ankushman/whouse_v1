@@ -15,9 +15,14 @@ import {
   Package,
   PackageSearch,
   Activity,
-  ArrowRight,
-  Sparkles,
   Calendar,
+  ArrowDownToLine,
+  ArrowUpFromLine,
+  Wrench,
+  AlertTriangle,
+  CheckCircle2,
+  Timer,
+  ShieldAlert,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -28,20 +33,112 @@ import {
   BarChart,
   Bar,
   Area,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
-  LineChart,
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
 } from "recharts"
 import { kpiMetrics, inboundTrend, outboundTrend, warehousePerformance, dispatchPerformance, costTrend, dailyThroughput, slaData, inventoryAccuracyTrend, manpowerProductivity } from "@/data/mock-data"
 import { KPICard } from "@/components/shared/kpi-card"
 import { PageHeader } from "@/components/shared/page-header"
 import { cn } from "@/lib/utils"
+
+// ──────────────────────────────────────────────────────
+// Recent Activity Feed Data
+// ──────────────────────────────────────────────────────
+const recentActivities = [
+  {
+    id: "1",
+    icon: ArrowDownToLine,
+    description: "Inbound shipment INV-2024-4521 received at Mumbai Hub",
+    time: "5m ago",
+    severity: "success" as const,
+  },
+  {
+    id: "2",
+    icon: ArrowUpFromLine,
+    description: "Outbound dispatch SH-0891 departed for Delhi NCR",
+    time: "12m ago",
+    severity: "info" as const,
+  },
+  {
+    id: "3",
+    icon: Wrench,
+    description: "Forklift FL-003 maintenance completed at Chennai",
+    time: "18m ago",
+    severity: "success" as const,
+  },
+  {
+    id: "4",
+    icon: ShieldAlert,
+    description: "SLA breach alert: Dock-to-stock exceeded 4hrs at Gurugram",
+    time: "25m ago",
+    severity: "critical" as const,
+  },
+  {
+    id: "5",
+    icon: ArrowDownToLine,
+    description: "Import shipment IMO-2024-078 cleared customs at Mumbai",
+    time: "32m ago",
+    severity: "success" as const,
+  },
+  {
+    id: "6",
+    icon: AlertTriangle,
+    description: "Equipment FL-007 battery critically low at Pune warehouse",
+    time: "41m ago",
+    severity: "warning" as const,
+  },
+  {
+    id: "7",
+    icon: CheckCircle2,
+    description: "SLA target achieved: 98.5% on-time delivery this week",
+    time: "55m ago",
+    severity: "success" as const,
+  },
+  {
+    id: "8",
+    icon: Timer,
+    description: "Pune warehouse approaching capacity threshold (85%)",
+    time: "1h ago",
+    severity: "warning" as const,
+  },
+]
+
+const activitySeverityStyle = {
+  critical: {
+    icon: "text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/50",
+    dot: "bg-red-500",
+    line: "border-l-red-200 dark:border-l-red-800",
+  },
+  warning: {
+    icon: "text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/50",
+    dot: "bg-amber-500",
+    line: "border-l-amber-200 dark:border-l-amber-800",
+  },
+  success: {
+    icon: "text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50",
+    dot: "bg-emerald-500",
+    line: "border-l-emerald-200 dark:border-l-emerald-800",
+  },
+  info: {
+    icon: "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50",
+    dot: "bg-blue-500",
+    line: "border-l-blue-200 dark:border-l-blue-800",
+  },
+}
+
+// ──────────────────────────────────────────────────────
+// Chart card accent colors
+// ──────────────────────────────────────────────────────
+type ChartAccent = "blue" | "green" | "amber" | "purple" | "red"
+
+const chartAccentBorder: Record<ChartAccent, string> = {
+  blue: "border-t-blue-500",
+  green: "border-t-emerald-500",
+  amber: "border-t-amber-500",
+  purple: "border-t-purple-500",
+  red: "border-t-red-500",
+}
 
 const kpiIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   totalWarehouses: Warehouse,
@@ -127,8 +224,6 @@ const manpowerChartConfig = {
   night: { label: "Night", color: "#F59E0B" },
 }
 
-const SLA_COLORS = ["#2563EB", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6", "#06B6D4"]
-
 export function DashboardView() {
   const [lastUpdated] = React.useState(() =>
     new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
@@ -197,6 +292,56 @@ export function DashboardView() {
         })}
       </div>
 
+      {/* Recent Activity Feed */}
+      <Card className="rounded-xl border-border/60 shadow-sm">
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-sm font-semibold">Recent Activity</CardTitle>
+              <CardDescription className="text-xs">Latest operational events across all warehouses</CardDescription>
+            </div>
+            <Badge variant="secondary" className="text-[10px]">Live</Badge>
+          </div>
+        </CardHeader>
+        <CardContent className="pb-2">
+          <div className="relative space-y-0 stagger-children">
+            {/* Timeline line */}
+            <div className="absolute left-[15px] top-2 bottom-2 w-px bg-border" />
+            {recentActivities.map((activity) => {
+              const ActivityIcon = activity.icon
+              const sev = activitySeverityStyle[activity.severity]
+              return (
+                <div key={activity.id} className="relative flex items-start gap-3 py-2.5 pl-1">
+                  {/* Timeline dot */}
+                  <div className="relative z-10 mt-0.5 flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full border-2 border-background">
+                    <div className={cn("absolute inset-0 rounded-full", sev.dot, "opacity-30")} />
+                    <ActivityIcon className={cn("h-3.5 w-3.5 relative z-10", sev.icon.split(" ")[0])} />
+                  </div>
+                  {/* Content */}
+                  <div className="flex-1 min-w-0 pb-0.5">
+                    <p className="text-xs leading-relaxed text-foreground">{activity.description}</p>
+                    <span className="text-[10px] text-muted-foreground">{activity.time}</span>
+                  </div>
+                  {/* Severity badge */}
+                  <Badge
+                    variant="outline"
+                    className={cn(
+                      "shrink-0 text-[9px] px-1.5 py-0 h-5 border-current/20",
+                      activity.severity === "critical" && "text-red-600 dark:text-red-400 border-red-200 dark:border-red-800",
+                      activity.severity === "warning" && "text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-800",
+                      activity.severity === "success" && "text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800",
+                      activity.severity === "info" && "text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800"
+                    )}
+                  >
+                    {activity.severity === "critical" ? "Critical" : activity.severity === "warning" ? "Warning" : activity.severity === "success" ? "Resolved" : "Info"}
+                  </Badge>
+                </div>
+              )
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:gap-4 stagger-children">
         {kpiMetrics.map((kpi, index) => {
@@ -224,7 +369,7 @@ export function DashboardView() {
 
       {/* Charts Row 1 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Inbound vs Outbound Trend</CardTitle>
             <CardDescription className="text-xs">Monthly shipment volume comparison</CardDescription>
@@ -244,7 +389,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.green)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Dispatch Performance</CardTitle>
             <CardDescription className="text-xs">Last 7 days on-time vs delayed deliveries</CardDescription>
@@ -267,7 +412,7 @@ export function DashboardView() {
 
       {/* Charts Row 2 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Warehouse Performance</CardTitle>
             <CardDescription className="text-xs">Cross-warehouse metrics comparison</CardDescription>
@@ -286,7 +431,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Inventory Accuracy Trend</CardTitle>
             <CardDescription className="text-xs">6-month accuracy tracking</CardDescription>
@@ -313,7 +458,7 @@ export function DashboardView() {
 
       {/* Charts Row 3 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Daily Throughput</CardTitle>
             <CardDescription className="text-xs">Last 30 days inbound and outbound volumes</CardDescription>
@@ -342,7 +487,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.amber)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Trend Analysis</CardTitle>
             <CardDescription className="text-xs">Monthly cost breakdown (₹ Lakhs)</CardDescription>
@@ -367,7 +512,7 @@ export function DashboardView() {
 
       {/* Bottom Row */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.red)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">SLA Achievement by Warehouse</CardTitle>
             <CardDescription className="text-xs">Target vs achieved vs breach percentage</CardDescription>
@@ -386,7 +531,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.purple)}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Manpower Productivity by Shift</CardTitle>
             <CardDescription className="text-xs">Weekly shift-wise productivity comparison</CardDescription>

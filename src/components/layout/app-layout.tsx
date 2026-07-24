@@ -627,6 +627,14 @@ export function AppLayout({ children }: { children: ReactNode }) {
         <main className="flex-1 pb-16 md:pb-0">
           {children}
         </main>
+        <footer className="mt-auto hidden border-t px-4 py-2 md:flex md:items-center md:justify-between">
+          <span className="text-[10px] text-muted-foreground">
+            © 2024 AutoFlow Logistics | Enterprise Warehouse Management
+          </span>
+          <span className="text-[10px] text-muted-foreground">
+            v1.0.0 · Built with Next.js
+          </span>
+        </footer>
       </SidebarInset>
       <MobileBottomNav />
       <CommandPalette />

@@ -21,9 +21,11 @@ import {
   Target,
   Plus,
 } from "lucide-react"
+import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { HealthScoreRing } from "@/components/shared/health-score-ring"
+import { WarehouseDetailModal } from "@/components/modules/warehouse-detail-modal"
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -266,6 +268,8 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
 
 export function WarehousesView() {
   const setActiveView = useAppStore((s) => s.setActiveView)
+  const [selectedWarehouse, setSelectedWarehouse] = React.useState<(typeof warehouses)[number] | null>(null)
+  const [modalOpen, setModalOpen] = React.useState(false)
 
   const summary = useMemo(() => {
     const totalCapacity = warehouses.reduce((acc, w) => acc + w.capacity, 0)
@@ -341,10 +345,20 @@ export function WarehousesView() {
           <WarehouseCard
             key={warehouse.id}
             warehouse={warehouse}
-            onClick={() => setActiveView("dashboard")}
+            onClick={() => {
+              setSelectedWarehouse(warehouse)
+              setModalOpen(true)
+            }}
           />
         ))}
       </div>
+
+      {/* ── Warehouse Detail Modal ── */}
+      <WarehouseDetailModal
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        warehouse={selectedWarehouse}
+      />
     </div>
   )
 }

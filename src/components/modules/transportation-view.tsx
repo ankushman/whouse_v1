@@ -5,27 +5,20 @@ import { transportVehicles } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Progress } from "@/components/ui/progress"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
+import { DataTable, type Column } from "@/components/shared/data-table"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Truck,
   MapPin,
-  Clock,
   Navigation,
-  Fuel,
   AlertTriangle,
   CheckCircle2,
   Wrench,
   PackageCheck,
   Timer,
-  BarChart3,
-  TrendingDown,
-  Route,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -143,59 +136,26 @@ export function TransportationView() {
         </TabsList>
       </Tabs>
 
-      <Card className="rounded-xl border-border/60 shadow-sm overflow-hidden">
-        <CardContent className="p-0">
-          <ScrollArea>
-            <Table>
-              <TableHeader>
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="text-xs">Registration</TableHead>
-                  <TableHead className="text-xs">Type</TableHead>
-                  <TableHead className="text-xs hidden md:table-cell">Driver</TableHead>
-                  <TableHead className="text-xs hidden lg:table-cell">Route</TableHead>
-                  <TableHead className="text-xs">Status</TableHead>
-                  <TableHead className="text-xs hidden md:table-cell">Location</TableHead>
-                  <TableHead className="text-xs">Deliveries</TableHead>
-                  <TableHead className="text-xs hidden lg:table-cell">ETA</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((vehicle) => {
-                  const deliveryPct = vehicle.deliveriesTotal > 0
-                    ? Math.round((vehicle.deliveriesCompleted / vehicle.deliveriesTotal) * 100)
-                    : 0
-                  const TypeIcon = typeIcons[vehicle.type] || Truck
-
-                  return (
-                    <TableRow key={vehicle.id}>
-                      <TableCell className="text-xs font-medium">{vehicle.registration}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="gap-1 text-[10px] rounded-full">
-                          <TypeIcon className="h-2.5 w-2.5" />
-                          {vehicle.type}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-xs hidden md:table-cell">{vehicle.driver}</TableCell>
-                      <TableCell className="text-xs hidden lg:table-cell">{vehicle.route}</TableCell>
-                      <TableCell>
-                        <StatusBadge status={vehicle.status} variant={statusVariant[vehicle.status] || "gray"} />
-                      </TableCell>
-                      <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{vehicle.currentLocation}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Progress value={deliveryPct} className="h-1.5 w-16" />
-                          <span className="text-[10px] text-muted-foreground">{vehicle.deliveriesCompleted}/{vehicle.deliveriesTotal}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-xs text-muted-foreground hidden lg:table-cell">{vehicle.eta}</TableCell>
-                    </TableRow>
-                  )
-                })}
-              </TableBody>
-            </Table>
-          </ScrollArea>
-        </CardContent>
-      </Card>
+      <DataTable
+        data={filtered as any[]}
+        columns={[
+          { key: "registration", header: "Registration", sortable: true, className: "text-xs font-medium" },
+          { key: "type", header: "Type", sortable: true, render: (val: string) => {
+            const TypeIcon = typeIcons[val] || Truck
+            return <Badge variant="outline" className="gap-1 text-[10px] rounded-full"><TypeIcon className="h-2.5 w-2.5" />{val}</Badge>
+          }},
+          { key: "driver", header: "Driver", sortable: true },
+          { key: "route", header: "Route", sortable: true },
+          { key: "status", header: "Status", sortable: true, render: (val: string) => <StatusBadge status={val} variant={(statusVariant[val] || "gray") as any} /> },
+          { key: "currentLocation", header: "Location" },
+          { key: "deliveries", header: "Deliveries", render: (_: any, row: any) => {
+            const pct = row.deliveriesTotal > 0 ? Math.round((row.deliveriesCompleted / row.deliveriesTotal) * 100) : 0
+            return <div className="flex items-center gap-2"><Progress value={pct} className="h-1.5 w-16" /><span className="text-[10px] text-muted-foreground">{row.deliveriesCompleted}/{row.deliveriesTotal}</span></div>
+          }},
+          { key: "eta", header: "ETA" },
+        ] as Column<any>[]}
+        pageSize={8}
+      />
     </div>
   )
 }

@@ -306,6 +306,10 @@
 .card-glass {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  background: oklch(1 0 0 / 0.7);
+}
+.dark .card-glass {
+  background: oklch(0.18 0.015 250 / 0.7);
 }
 
 /* ── Bottom Navigation (Mobile) ─────────────────────────── */
@@ -348,4 +352,156 @@
 
 .dark ::selection {
   background-color: oklch(0.588 0.243 264 / 0.3);
+}
+
+/* ── Card Gradient Accent System ─────────────────────── */
+
+.card-accent-blue {
+  border-top: 2px solid oklch(0.488 0.243 264);
+}
+.card-accent-green {
+  border-top: 2px solid oklch(0.627 0.194 149);
+}
+.card-accent-amber {
+  border-top: 2px solid oklch(0.795 0.184 86);
+}
+.card-accent-red {
+  border-top: 2px solid oklch(0.577 0.245 27.325);
+}
+.card-accent-purple {
+  border-top: 2px solid oklch(0.541 0.281 293);
+}
+.card-accent-cyan {
+  border-top: 2px solid oklch(0.705 0.209 219);
+}
+
+/* ── Chart Card Hover Effect ──────────────────────────── */
+
+.chart-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.chart-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -2px oklch(0 0 0 / 0.1);
+}
+.dark .chart-card:hover {
+  box-shadow: 0 4px 12px -2px oklch(0 0 0 / 0.3);
+}
+
+/* ── Activity Timeline ────────────────────────────────── */
+
+.activity-timeline {
+  position: relative;
+}
+.activity-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: oklch(0.912 0.005 250);
+}
+.dark .activity-timeline::before {
+  background: oklch(0.28 0.015 250);
+}
+.activity-item {
+  position: relative;
+  padding-left: 36px;
+}
+.activity-dot {
+  position: absolute;
+  left: 10px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid oklch(0.912 0.005 250);
+  background: oklch(1 0 0);
+}
+.dark .activity-dot {
+  border-color: oklch(0.28 0.015 250);
+  background: oklch(0.18 0.015 250);
+}
+
+/* ── Enhanced Dark Mode for Charts ────────────────────── */
+
+.dark .recharts-text {
+  fill: oklch(0.65 0.02 250);
+}
+.dark .recharts-cartesian-grid-horizontal line,
+.dark .recharts-cartesian-grid-vertical line {
+  stroke: oklch(0.28 0.015 250);
+}
+
+/* ── Pulse Dot Animation (Live indicator) ─────────────── */
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+.pulse-dot {
+  position: relative;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: inherit;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ── Smooth Scrollbar (Firefox) ───────────────────────── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.7 0.01 250) transparent;
+}
+.dark * {
+  scrollbar-color: oklch(0.35 0.01 250) transparent;
+}
+
+/* ── App Footer ───────────────────────────────────────── */
+
+.app-footer {
+  border-top: 1px solid oklch(0.912 0.005 250);
+  background: oklch(0.985 0.001 250);
+}
+.dark .app-footer {
+  border-top-color: oklch(0.28 0.015 250);
+  background: oklch(0.13 0.015 250);
+}
+
+/* ── KPI Card Shimmer on Hover ────────────────────────── */
+
+.kpi-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.kpi-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.488 0.243 264 / 0.04) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.kpi-shimmer:hover::before {
+  transform: translateX(100%);
+}
+.dark .kpi-shimmer::before {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.588 0.243 264 / 0.06) 50%,
+    transparent 100%
+  );
 }

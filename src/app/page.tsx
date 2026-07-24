@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <SidebarProvider defaultOpen>
       <AppLayout>
-        <div className="p-4 md:p-6">
+        <div className="flex min-h-0 flex-1 flex-col p-4 md:p-6">
           <ViewRenderer />
         </div>
       </AppLayout>
