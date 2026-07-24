@@ -18,6 +18,8 @@ import {
   Cell,
   BarChart,
   Bar,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -39,6 +41,7 @@ import {
   Filter,
   RefreshCw,
   Search,
+  BrainCircuit,
 } from "lucide-react";
 
 const ABC_COLORS = {
@@ -75,6 +78,24 @@ const categoryChartConfig = {
 type WarehouseFilter = "All" | string;
 type CategoryFilter = "All" | "Engine" | "Transmission" | "Body" | "Electrical" | "Suspension" | "Brakes";
 type AbcFilter = "All" | "A" | "B" | "C";
+
+// Demand forecasting chart config and mock data
+const forecastChartConfig = {
+  actual: { label: "Actual Demand", color: "var(--chart-1)" },
+  forecast: { label: "Forecasted Demand", color: "var(--chart-2)" },
+};
+
+const forecastData = (() => {
+  const base = [285, 312, 298, 340, 365, 378, 355, 320, 390, 410, 385, 362];
+  return base.map((v, i) => {
+    const variance = 1 + (Math.sin(i * 1.3) * 0.12 + Math.cos(i * 0.7) * 0.05);
+    return {
+      week: `W${i + 1}`,
+      actual: i < 4 ? v : undefined,
+      forecast: Math.round(v * variance),
+    };
+  });
+})();
 
 export function InventoryView() {
   const [warehouseFilter, setWarehouseFilter] = useState<WarehouseFilter>("All");
@@ -313,6 +334,62 @@ export function InventoryView() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Demand Forecasting Chart */}
+      <Card className="card-depth chart-card card-accent-blue">
+        <CardHeader className="pb-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <BrainCircuit className="size-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-semibold">Demand Forecasting</CardTitle>
+            </div>
+            <Badge variant="outline" className="text-[10px] font-normal text-emerald-600 border-emerald-200 dark:text-emerald-400 dark:border-emerald-800">
+              Forecast Accuracy: 94.2%
+            </Badge>
+          </div>
+          <CardDescription className="text-xs">
+            Actual vs forecasted demand for the next 12 weeks
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={forecastChartConfig} className="h-[240px] w-full">
+            <AreaChart data={forecastData} margin={{ left: 0, right: 8, top: 4, bottom: 0 }}>
+              <defs>
+                <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="forecastGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="var(--chart-2)" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+              <XAxis dataKey="week" tick={{ fontSize: 11 }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 11 }} tickLine={false} axisLine={false} />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              <ChartLegend content={<ChartLegendContent />} />
+              <Area
+                type="monotone"
+                dataKey="actual"
+                stroke="var(--chart-1)"
+                strokeWidth={2}
+                fill="url(#actualGradient)"
+                connectNulls={false}
+              />
+              <Area
+                type="monotone"
+                dataKey="forecast"
+                stroke="var(--chart-2)"
+                strokeWidth={2}
+                strokeDasharray="6 3"
+                fill="url(#forecastGradient)"
+                connectNulls={false}
+              />
+            </AreaChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
 
       <Separator />
 

@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/table"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Users,
   UserCheck,
@@ -34,8 +35,10 @@ import {
   Medal,
   Award,
   Search,
+  Clock,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ShiftScheduler } from "@/components/shared/shift-scheduler"
 
 function getRankBadge(rank: number) {
   if (rank === 1)
@@ -139,7 +142,7 @@ export function EmployeesView() {
       />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 stagger-children">
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Users className="size-5 text-muted-foreground" />
@@ -155,7 +158,7 @@ export function EmployeesView() {
           </CardContent>
         </Card>
 
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/60">
               <UserCheck className="size-5 text-emerald-600" />
@@ -171,7 +174,7 @@ export function EmployeesView() {
           </CardContent>
         </Card>
 
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <TrendingUp className="size-5 text-muted-foreground" />
@@ -187,7 +190,7 @@ export function EmployeesView() {
           </CardContent>
         </Card>
 
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <CalendarCheck className="size-5 text-muted-foreground" />
@@ -204,125 +207,144 @@ export function EmployeesView() {
         </Card>
       </div>
 
-      <Card className="rounded-xl">
-        <CardHeader className="flex flex-row items-center justify-between pb-4 gap-4">
-          <div className="flex items-center gap-2">
-            <Trophy className="size-5 text-amber-500" />
-            <CardTitle className="text-base font-semibold">
-              Performance Leaderboard
-            </CardTitle>
-          </div>
-        </CardHeader>
-        <CardContent>
-          {/* Filter bar with search, warehouse select, and result count */}
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <div className="relative">
-              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Search name or role..."
-                className="h-8 w-[200px] pl-8 text-xs"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
-              <SelectTrigger className="w-[180px] h-8 text-xs">
-                <SelectValue placeholder="Filter warehouse" />
-              </SelectTrigger>
-              <SelectContent>
-                {warehouseList.map((wh) => (
-                  <SelectItem key={wh} value={wh}>
-                    {wh === "all" ? "All Warehouses" : wh}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <div className="ml-auto text-xs text-muted-foreground">
-              {filtered.length} employee{filtered.length !== 1 ? "s" : ""} shown
-            </div>
-          </div>
+      <Tabs defaultValue="leaderboard" className="w-full">
+        <TabsList className="h-9">
+          <TabsTrigger value="leaderboard" className="text-xs gap-1.5">
+            <Trophy className="size-3" />
+            Leaderboard
+          </TabsTrigger>
+          <TabsTrigger value="shifts" className="text-xs gap-1.5">
+            <Clock className="size-3" />
+            Shift Schedule
+          </TabsTrigger>
+        </TabsList>
 
-          <ScrollArea className="max-h-[520px]">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-16 text-center">Rank</TableHead>
-                  <TableHead>Name</TableHead>
-                  <TableHead className="hidden md:table-cell">Role</TableHead>
-                  <TableHead className="hidden lg:table-cell">Warehouse</TableHead>
-                  <TableHead className="hidden sm:table-cell">Shift</TableHead>
-                  <TableHead className="text-right">Attend.</TableHead>
-                  <TableHead className="text-right hidden sm:table-cell">Tasks</TableHead>
-                  <TableHead className="text-right">Productivity</TableHead>
-                  <TableHead className="text-right hidden md:table-cell">Error</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {sorted.map((emp) => (
-                  <TableRow key={emp.id}>
-                    <TableCell className="text-center">
-                      {getRankBadge(emp.rank)}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2.5">
-                        <Avatar className="size-7">
-                          <AvatarFallback className="text-[10px] font-semibold bg-muted">
-                            {emp.avatar}
-                          </AvatarFallback>
-                        </Avatar>
-                        <span className="font-medium text-sm whitespace-nowrap">
-                          {emp.name}
-                        </span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
-                      {emp.role}
-                    </TableCell>
-                    <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
-                      {emp.warehouse}
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                      <Badge
-                        variant="outline"
-                        className={cn(
-                          "text-[10px] font-normal rounded-full",
-                          shiftColor(emp.shift)
-                        )}
-                      >
-                        {emp.shift}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums text-sm">
-                      {emp.attendance}%
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums text-sm hidden sm:table-cell">
-                      {emp.tasksCompleted}
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums text-sm">
-                      <span className={productivityColor(emp.productivity)}>
-                        {emp.productivity}%
-                      </span>
-                    </TableCell>
-                    <TableCell className="text-right tabular-nums text-sm hidden md:table-cell">
-                      <span
-                        className={cn(
-                          emp.errorRate > 3
-                            ? "text-red-600"
-                            : emp.errorRate > 1.5
-                              ? "text-amber-600"
-                              : "text-muted-foreground"
-                        )}
-                      >
-                        {emp.errorRate}%
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </ScrollArea>
-        </CardContent>
-      </Card>
+        <TabsContent value="leaderboard" className="mt-4">
+          <Card className="rounded-xl">
+            <CardHeader className="flex flex-row items-center justify-between pb-4 gap-4">
+              <div className="flex items-center gap-2">
+                <Trophy className="size-5 text-amber-500" />
+                <CardTitle className="text-base font-semibold">
+                  Performance Leaderboard
+                </CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent>
+              {/* Filter bar with search, warehouse select, and result count */}
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <div className="relative">
+                  <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    placeholder="Search name or role..."
+                    className="h-8 w-[200px] pl-8 text-xs"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+                <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
+                  <SelectTrigger className="w-[180px] h-8 text-xs">
+                    <SelectValue placeholder="Filter warehouse" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {warehouseList.map((wh) => (
+                      <SelectItem key={wh} value={wh}>
+                        {wh === "all" ? "All Warehouses" : wh}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <div className="ml-auto text-xs text-muted-foreground">
+                  {filtered.length} employee{filtered.length !== 1 ? "s" : ""} shown
+                </div>
+              </div>
+
+              <ScrollArea className="max-h-[520px]">
+                <Table className="table-row-hover">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-16 text-center">Rank</TableHead>
+                      <TableHead>Name</TableHead>
+                      <TableHead className="hidden md:table-cell">Role</TableHead>
+                      <TableHead className="hidden lg:table-cell">Warehouse</TableHead>
+                      <TableHead className="hidden sm:table-cell">Shift</TableHead>
+                      <TableHead className="text-right">Attend.</TableHead>
+                      <TableHead className="text-right hidden sm:table-cell">Tasks</TableHead>
+                      <TableHead className="text-right">Productivity</TableHead>
+                      <TableHead className="text-right hidden md:table-cell">Error</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {sorted.map((emp) => (
+                      <TableRow key={emp.id}>
+                        <TableCell className="text-center">
+                          {getRankBadge(emp.rank)}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-2.5">
+                            <Avatar className="size-7">
+                              <AvatarFallback className="text-[10px] font-semibold bg-muted">
+                                {emp.avatar}
+                              </AvatarFallback>
+                            </Avatar>
+                            <span className="font-medium text-sm whitespace-nowrap">
+                              {emp.name}
+                            </span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
+                          {emp.role}
+                        </TableCell>
+                        <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
+                          {emp.warehouse}
+                        </TableCell>
+                        <TableCell className="hidden sm:table-cell">
+                          <Badge
+                            variant="outline"
+                            className={cn(
+                              "text-[10px] font-normal rounded-full",
+                              shiftColor(emp.shift)
+                            )}
+                          >
+                            {emp.shift}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-right tabular-nums text-sm">
+                          {emp.attendance}%
+                        </TableCell>
+                        <TableCell className="text-right tabular-nums text-sm hidden sm:table-cell">
+                          {emp.tasksCompleted}
+                        </TableCell>
+                        <TableCell className="text-right tabular-nums text-sm">
+                          <span className={productivityColor(emp.productivity)}>
+                            {emp.productivity}%
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-right tabular-nums text-sm hidden md:table-cell">
+                          <span
+                            className={cn(
+                              emp.errorRate > 3
+                                ? "text-red-600"
+                                : emp.errorRate > 1.5
+                                  ? "text-amber-600"
+                                  : "text-muted-foreground"
+                            )}
+                          >
+                            {emp.errorRate}%
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </ScrollArea>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="shifts" className="mt-4">
+          <ShiftScheduler />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

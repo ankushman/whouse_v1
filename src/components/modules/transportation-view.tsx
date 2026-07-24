@@ -97,7 +97,7 @@ export function TransportationView() {
           { label: "In Maintenance", value: summary.maintenance, icon: Wrench, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
           { label: "OTIF Rate", value: `${otif}%`, icon: Timer, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
-          <Card key={item.label} className="rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardContent className="flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />

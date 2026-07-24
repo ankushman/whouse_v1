@@ -782,6 +782,179 @@
   color: oklch(0.65 0.02 250);
 }
 
+/* ── Progress Bar Animated Fill ──────────────────── */
+
+.progress-animated {
+  overflow: hidden;
+}
+.progress-animated > div,
+.progress-animated [role="progressbar"] {
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Card Hover Glow ──────────────────────────────── */
+
+.card-hover-glow {
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-hover-glow:hover {
+  box-shadow: 0 0 16px -4px oklch(0.488 0.243 264 / 0.15),
+              0 4px 12px -2px oklch(0 0 0 / 0.06);
+  border-color: oklch(0.488 0.243 264 / 0.25);
+}
+.dark .card-hover-glow:hover {
+  box-shadow: 0 0 20px -4px oklch(0.588 0.243 264 / 0.2),
+              0 4px 12px -2px oklch(0 0 0 / 0.3);
+  border-color: oklch(0.588 0.243 264 / 0.3);
+}
+
+/* ── Badge Bounce Animation ───────────────────────── */
+
+@keyframes badge-bounce-anim {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(0.95); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(0.98); }
+  75% { transform: scale(1.05); }
+}
+.badge-bounce {
+  animation: badge-bounce-anim 0.8s ease-out;
+}
+
+/* ── Container Glass (Frosted) ────────────────────── */
+
+.container-glass {
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  background: oklch(0.985 0.001 250 / 0.75);
+  border-bottom: 1px solid oklch(0.912 0.005 250 / 0.6);
+}
+.dark .container-glass {
+  background: oklch(0.13 0.015 250 / 0.75);
+  border-bottom-color: oklch(0.28 0.015 250 / 0.6);
+}
+
+/* ── Tooltip / Popover Scale-In Animation ────────── */
+
+.tooltip-animate {
+  animation: tooltip-scale-in 0.18s ease-out both;
+}
+@keyframes tooltip-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Table Stripe (Alternating Rows) ──────────────── */
+
+.table-stripe tbody tr:nth-child(even) {
+  background: oklch(0.96 0.005 250 / 0.5);
+}
+.dark .table-stripe tbody tr:nth-child(even) {
+  background: oklch(0.22 0.015 250 / 0.4);
+}
+
+/* ── Input Focus Ring ──────────────────────────────── */
+
+.input-focus-ring {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-focus-ring:focus {
+  border-color: oklch(0.488 0.243 264);
+  box-shadow: 0 0 0 3px oklch(0.488 0.243 264 / 0.12);
+  outline: none;
+}
+.dark .input-focus-ring:focus {
+  border-color: oklch(0.588 0.243 264);
+  box-shadow: 0 0 0 3px oklch(0.588 0.243 264 / 0.18);
+}
+
+/* ── Icon Spin (Loading) ──────────────────────────── */
+
+@keyframes icon-spin-anim {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.icon-spin {
+  animation: icon-spin-anim 1s linear infinite;
+}
+
+/* ── Wave Divider ──────────────────────────────────── */
+
+.wave-divider {
+  position: relative;
+  height: 32px;
+  overflow: hidden;
+  line-height: 0;
+}
+.wave-divider svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  fill: oklch(0.96 0.005 250);
+}
+.dark .wave-divider svg {
+  fill: oklch(0.22 0.015 250);
+}
+
+/* ── Chip / Pill ───────────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 9999px;
+  background: oklch(0.96 0.005 250);
+  color: oklch(0.35 0.015 250);
+  border: 1px solid oklch(0.912 0.005 250);
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.chip:hover {
+  background: oklch(0.93 0.005 250);
+  border-color: oklch(0.85 0.01 250);
+}
+.dark .chip {
+  background: oklch(0.23 0.015 250);
+  color: oklch(0.8 0.005 250);
+  border-color: oklch(0.28 0.015 250);
+}
+.dark .chip:hover {
+  background: oklch(0.28 0.015 250);
+  border-color: oklch(0.35 0.015 250);
+}
+
+/* ── Stat Card Highlight ──────────────────────────── */
+
+.stat-card-highlight {
+  position: relative;
+  border-left: 3px solid oklch(0.488 0.243 264);
+  background: linear-gradient(
+    135deg,
+    oklch(0.488 0.243 264 / 0.03) 0%,
+    oklch(1 0 0) 60%
+  );
+}
+.dark .stat-card-highlight {
+  border-left-color: oklch(0.588 0.243 264);
+  background: linear-gradient(
+    135deg,
+    oklch(0.588 0.243 264 / 0.06) 0%,
+    oklch(0.18 0.015 250) 60%
+  );
+}
+
 /* ── Print Styles ──────────────────────────────────────────── */
 @media print {
   /* Hide interactive elements */

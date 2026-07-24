@@ -137,7 +137,7 @@ export function DataTable<T extends Record<string, any>>({
         </div>
       )}
 
-      <div className="rounded-xl border bg-card table-row-hover">
+      <div className="rounded-xl border bg-card table-row-hover table-stripe">
         <Table>
           <TableHeader>
             <TableRow

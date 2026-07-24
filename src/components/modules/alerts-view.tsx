@@ -117,7 +117,7 @@ export function AlertsView() {
           { label: "Info", value: summary.info, icon: Info, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
           { label: "Acknowledged", value: summary.acknowledged, icon: CheckCircle2, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
-          <Card key={item.label} className="rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardContent className="flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />

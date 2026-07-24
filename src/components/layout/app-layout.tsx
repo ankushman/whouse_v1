@@ -79,6 +79,8 @@ import {
 import { cn } from "@/lib/utils"
 import { type ReactNode } from "react"
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
+import { NotificationsSheet } from "@/components/shared/notifications-sheet"
+import { KeyboardShortcutsDialog } from "@/components/shared/keyboard-shortcuts-dialog"
 
 // ──────────────────────────────────────────────────────
 // Icon Map
@@ -316,49 +318,60 @@ function LiveClock() {
 // ──────────────────────────────────────────────────────
 function NotificationPanel() {
   const [open, setOpen] = React.useState(false)
+  const [sheetOpen, setSheetOpen] = React.useState(false)
   const alertCount = recentNotifications.length
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative h-8 w-8">
-          <Bell className="h-4 w-4" />
-          {alertCount > 0 && (
-            <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white ring-2 ring-background">
-              {alertCount}
-            </span>
-          )}
-          <span className="sr-only">Notifications</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-80 p-0" sideOffset={8}>
-        <div className="flex items-center justify-between border-b px-4 py-3">
-          <DropdownMenuLabel className="p-0 text-sm font-semibold">Notifications</DropdownMenuLabel>
-          <Badge variant="secondary" className="text-[10px]">{alertCount} new</Badge>
-        </div>
-        <div className="max-h-72 overflow-y-auto">
-          {recentNotifications.map((n) => {
-            const SevIcon = severityIcon[n.severity as keyof typeof severityIcon] || Info
-            const colorClass = severityColor[n.severity as keyof typeof severityColor] || "text-muted-foreground"
-            return (
-              <DropdownMenuItem key={n.id} className="flex items-start gap-3 px-4 py-3 cursor-pointer">
-                <SevIcon className={cn("mt-0.5 h-4 w-4 shrink-0", colorClass)} />
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium">{n.title}</p>
-                  <p className="mt-0.5 text-[11px] text-muted-foreground line-clamp-1">{n.desc}</p>
-                  <p className="mt-0.5 text-[10px] text-muted-foreground/60">{n.time}</p>
-                </div>
-              </DropdownMenuItem>
-            )
-          })}
-        </div>
-        <div className="border-t px-4 py-2">
-          <DropdownMenuItem className="justify-center text-xs text-blue-600 dark:text-blue-400 cursor-pointer">
-            View All Notifications
-          </DropdownMenuItem>
-        </div>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon" className="relative h-8 w-8">
+            <Bell className="h-4 w-4" />
+            {alertCount > 0 && (
+              <span className="badge-bounce absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white ring-2 ring-background">
+                {alertCount}
+              </span>
+            )}
+            <span className="sr-only">Notifications</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-80 p-0" sideOffset={8}>
+          <div className="flex items-center justify-between border-b px-4 py-3">
+            <DropdownMenuLabel className="p-0 text-sm font-semibold">Notifications</DropdownMenuLabel>
+            <Badge variant="secondary" className="text-[10px]">{alertCount} new</Badge>
+          </div>
+          <div className="max-h-72 overflow-y-auto">
+            {recentNotifications.map((n) => {
+              const SevIcon = severityIcon[n.severity as keyof typeof severityIcon] || Info
+              const colorClass = severityColor[n.severity as keyof typeof severityColor] || "text-muted-foreground"
+              return (
+                <DropdownMenuItem key={n.id} className="flex items-start gap-3 px-4 py-3 cursor-pointer">
+                  <SevIcon className={cn("mt-0.5 h-4 w-4 shrink-0", colorClass)} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium">{n.title}</p>
+                    <p className="mt-0.5 text-[11px] text-muted-foreground line-clamp-1">{n.desc}</p>
+                    <p className="mt-0.5 text-[10px] text-muted-foreground/60">{n.time}</p>
+                  </div>
+                </DropdownMenuItem>
+              )
+            })}
+          </div>
+          <div className="border-t px-4 py-2">
+            <DropdownMenuItem
+              className="justify-center text-xs text-blue-600 dark:text-blue-400 cursor-pointer"
+              onSelect={(e) => {
+                e.preventDefault()
+                setOpen(false)
+                setSheetOpen(true)
+              }}
+            >
+              View All Notifications
+            </DropdownMenuItem>
+          </div>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <NotificationsSheet open={sheetOpen} onOpenChange={setSheetOpen} />
+    </>
   )
 }
 
@@ -384,7 +397,7 @@ export function TopNav() {
   ]
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center gap-2 border-b bg-background/80 px-4 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <header className="container-glass sticky top-0 z-30 flex h-14 items-center gap-2 px-4">
       {/* Left: Sidebar trigger + Breadcrumb */}
       <div className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1" />
@@ -611,6 +624,7 @@ export function CommandPalette() {
           <span className="flex items-center gap-1">
             <kbd className="rounded border bg-muted px-1 py-0.5 font-mono text-[9px]">↑↓</kbd> navigate
             <kbd className="rounded border bg-muted px-1 py-0.5 font-mono text-[9px] ml-2">↵</kbd> select
+            <kbd className="rounded border bg-muted px-1 py-0.5 font-mono text-[9px] ml-2">?</kbd> shortcuts
           </span>
         </div>
       </div>
@@ -641,6 +655,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
       </SidebarInset>
       <MobileBottomNav />
       <CommandPalette />
+      <KeyboardShortcutsDialog />
     </>
   )
 }

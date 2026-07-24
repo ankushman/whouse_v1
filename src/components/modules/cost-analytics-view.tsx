@@ -171,7 +171,7 @@ export function CostAnalyticsView() {
         </CardHeader>
         <CardContent>
           <div className="table-container">
-          <Table className="table-row-hover">
+          <Table className="table-row-hover table-stripe">
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead className="text-xs">Month</TableHead>

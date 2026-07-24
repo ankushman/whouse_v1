@@ -50,7 +50,7 @@ export function KPICard({ title, value, change = 0, trend = "neutral", icon: Ico
   const parsed = useMemo(() => parseValue(value), [value])
 
   return (
-    <Card className="group kpi-shimmer card-depth relative overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-border">
+    <Card className="group kpi-shimmer card-hover-glow stat-card-highlight card-depth relative overflow-hidden rounded-xl border border-border/60 bg-card shadow-sm transition-all duration-200 hover:shadow-md hover:border-border">
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div className="flex-1 space-y-1">
