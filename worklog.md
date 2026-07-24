@@ -472,3 +472,126 @@ Updated Project Status (Post Round 8 - Complete):
   6. Add inventory demand forecasting charts
   7. Enhance mobile experience with swipe gestures
 
+---
+Task ID: 9-a
+Agent: Frontend Styling Expert (Subagent)
+Task: CSS styling improvements — animations, micro-interactions, gradients, responsive
+
+Work Log:
+- Added 11 new CSS utility classes to globals.css with full light/dark mode support:
+  - `.progress-animated` — Animated width transition (0.8s cubic-bezier) for progress bars
+  - `.card-hover-glow` — Subtle blue glow shadow on hover for cards
+  - `.badge-bounce` — 3-bounce scale animation for notification badges
+  - `.container-glass` — Frosted glass with backdrop-blur(16px) saturate(1.4)
+  - `.tooltip-animate` — Scale-in + translateY animation for tooltips
+  - `.table-stripe` — Alternating row backgrounds for tables (even rows)
+  - `.input-focus-ring` — Enhanced focus ring with colored border + box-shadow
+  - `.icon-spin` — Continuous 360° rotation for loading icons
+  - `.wave-divider` — Decorative SVG wave section divider
+  - `.chip` — Pill/chip style for tags/filters (rounded-full, subtle bg)
+  - `.stat-card-highlight` — Left blue border + gradient background for important cards
+- Applied `badge-bounce` to notification bell count in app-layout.tsx
+- Applied `container-glass` to top nav header (replaced inline backdrop-blur)
+- Applied `card-hover-glow` + `stat-card-highlight` to KPICard component
+- Applied `table-stripe` to DataTable, inventory variance table, cost-analytics MoM table
+- Applied `card-depth` to stat cards in employees-view (4), alerts-view (4), transportation-view (6)
+
+Stage Summary:
+- globals.css: +175 lines (11 new utilities, 3 new keyframe animations)
+- 8 component files modified with CSS class additions
+- Zero lint errors, zero warnings
+
+---
+Task ID: 9-b
+Agent: Full-Stack Developer (Subagent)
+Task: Employee shift scheduler, inventory demand forecasting, notifications history sheet
+
+Work Log:
+- Created shift-scheduler.tsx: Weekly timeline view (Mon-Sun), 3 shift rows (Morning/Afternoon/Night)
+  - Employee count per shift with color coding (amber/sky/violet)
+  - Current active shift highlighted with status-dot-pulse
+  - Shift Coverage summary with progress bar
+- Integrated shift scheduler into employees-view.tsx via Tabs (Leaderboard / Shift Schedule)
+- Added Inventory Demand Forecasting chart to inventory-view.tsx:
+  - Recharts AreaChart with 12 data points (next 12 weeks)
+  - Solid "Actual Demand" + dashed "Forecasted Demand" areas
+  - "Forecast Accuracy: 94.2%" badge
+  - Wrapped in Card with card-depth chart-card card-accent-blue
+- Created notifications-sheet.tsx: Full slide-in Sheet panel
+  - 15 mock notifications with 4 severity levels
+  - Filter tabs: All, Critical, Warning, Info
+  - "Mark All as Read" button with toast notification
+  - Unread items with blue left border + bolder text
+  - Stagger-children animation for notification list
+- Wired "View All Notifications" in app-layout.tsx to open NotificationsSheet
+
+Stage Summary:
+- 2 new files: shift-scheduler.tsx, notifications-sheet.tsx
+- 3 files modified: employees-view.tsx, inventory-view.tsx, app-layout.tsx
+- Zero lint errors
+
+---
+Task ID: 9-c
+Agent: Main
+Task: Keyboard shortcuts dialog, command palette polish
+
+Work Log:
+- Created keyboard-shortcuts-dialog.tsx: Press ? to open dialog
+  - 13 shortcuts documented (navigation + quick commands)
+  - Styled kbd elements with proper border/shadow
+  - Category sections with uppercase headers
+  - Doesn't trigger when typing in inputs/textareas
+- Integrated into AppLayout (rendered alongside CommandPalette)
+- Added "?" keyboard shortcut hint to command palette footer
+- Fixed import of KeyboardShortcutsDialog in app-layout.tsx
+
+Stage Summary:
+- 1 new file: keyboard-shortcuts-dialog.tsx
+- 2 files modified: app-layout.tsx
+- Zero lint errors
+
+---
+Task ID: 9-combined
+Agent: Main
+Task: Commit and push Round 9 changes
+
+Work Log:
+- Committed 12 files changed, 1099 insertions, 168 deletions
+- Pushed to GitHub: commit 1743285
+- GitHub: https://github.com/ankushman/whouse_v1.git (main branch, commit 1743285)
+
+---
+Updated Project Status (Post Round 9 - Complete):
+- STATUS: STABLE - All modules compile and render correctly
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit 1743285)
+- MINI SERVICES (1): live-data-service (port 3005, Socket.io)
+- CLIENT HOOKS (1): use-live-data.ts (WebSocket client)
+- SHARED COMPONENTS (17): KPICard, StatusBadge, PageHeader, EmptyState, DashboardSkeleton, PageSkeleton, TableSkeleton, HealthScoreRing, ExportButton, AnimatedCounter, DataTable, LiveUpdatesFeed, ShiftScheduler, NotificationsSheet, KeyboardShortcutsDialog
+- LAYOUT COMPONENTS (2): AppLayout, MobileBottomNav
+- MODULE VIEWS (13 + 1): All 13 modules + Warehouse Map View (toggle in Warehouses)
+- CSS UTILITIES (41+): All previous + progress-animated, card-hover-glow, badge-bounce, container-glass, tooltip-animate, table-stripe, input-focus-ring, icon-spin, wave-divider, chip, stat-card-highlight
+- NEW FEATURES THIS ROUND:
+  - Employee Shift Scheduler (weekly timeline, 3 shifts, coverage progress)
+  - Inventory Demand Forecasting Chart (12-week area chart, actual vs forecast)
+  - Notifications History Sheet (slide-in panel, 15 notifications, severity filters)
+  - Keyboard Shortcuts Dialog (press ? to show all shortcuts)
+  - 11 new CSS utilities with full light/dark mode support
+  - Card-depth on 14+ additional stat cards across 3 modules
+  - Table-stripe on DataTable + 2 module tables
+  - Badge bounce animation on notification bell
+  - Container glass effect on top navigation header
+  - Card hover glow on KPI cards
+  - Command palette ? shortcuts hint
+- LINT: 0 errors, 0 warnings
+- COMPILE: GET / 200 verified (6.2s first compile)
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental, not code bug)
+- COMPLETED RECOMMENDATIONS: Shift scheduler ✓, Inventory forecasting ✓, Keyboard shortcuts ✓, Notifications drawer ✓, CSS polish ✓
+- PRIORITY NEXT:
+  1. Add data persistence with Supabase (remote has seed commit)
+  2. Add delivery route optimization UI
+  3. Add geographic clustering visualization on warehouse map
+  4. Enhance mobile experience with swipe gestures
+  5. Add barcode/QR code scanning for inventory
+  6. Add employee performance trend charts
+  7. Add real-time SLA monitoring dashboard panel
+
