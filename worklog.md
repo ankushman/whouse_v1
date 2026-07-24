@@ -65,9 +65,43 @@ Current Project Status:
   2. Add sortable columns to data tables (TanStack Table sort functions)
   3. Add pagination to inbound/outbound/transportation tables
   4. Add CSV/PDF export functionality to reports
-  5. Add animated SVG health score rings to warehouse cards
+  5. ~~Add animated SVG health score rings to warehouse cards~~ ✅ DONE
   6. Add real-time WebSocket connection for live data updates
-  7. Add loading skeletons for initial page load
+  7. ~~Add loading skeletons for initial page load~~ ✅ DONE
   8. Add responsive mobile bottom navigation for operators
   9. Add dark mode-specific chart color adjustments
   10. Integrate Supabase for persistent data storage
+
+---
+Task ID: 4
+Agent: Main
+Task: Add shared loading skeleton components and animated health score rings
+
+Work Log:
+- Created src/components/shared/dashboard-skeleton.tsx with three reusable skeleton components: DashboardSkeleton (11 KPI + 4 charts), PageSkeleton (generic page), TableSkeleton (configurable rows/cols)
+- Created src/components/shared/health-score-ring.tsx - Animated SVG ring with configurable score, size, stroke, status colors (green/amber/red), optional label, 1s CSS transition, drop shadow glow
+- Updated src/app/page.tsx - Added mounted state with 300ms delay, shows DashboardSkeleton while loading, fades in active view with transition-all duration-500
+- Updated src/components/modules/warehouses-view.tsx - Replaced static HealthBadge with animated HealthScoreRing SVG component in warehouse cards
+
+Stage Summary:
+- 2 new shared components, 2 files updated, zero lint errors
+- Addresses roadmap items #5 (health score rings) and #7 (loading skeletons)
+
+---
+Task ID: 5
+Agent: Main
+Task: Enhanced settings modules with real CRUD forms and CSV export functionality
+
+Work Log:
+- Created src/components/shared/export-button.tsx - Reusable ExportButton dropdown component with CSV/PDF export options, plus standalone `exportToCSV()` utility function for generating and downloading CSV files from any data array
+- Rewrote src/components/modules/settings-view.tsx - Replaced placeholder tabs with real CRUD content:
+  - Warehouses Tab: Full table of 6 warehouses from mock-data with Name, City, State, Manager, Capacity (progress bar), Status (StatusBadge), Edit/Delete actions, search filter, Add Warehouse dialog with form fields
+  - Customers Tab: 8 mock customers with Name, Code, City, Contact, Type badge (OEM/Tier1/Tier2), Status, Edit/Delete actions, search filter, Add/Edit Customer dialog with all fields including type selector
+  - Transporters Tab: 6 mock transporters with Name, Fleet Size, Routes, Contact, Star Rating (visual stars), Edit/Delete actions, search filter, Add/Edit Transporter dialog with rating selector
+  - KPI Config Tab: 8 KPIs with editable Target, Warning, Critical threshold Input fields, live status badges (On Target/Warning/Critical), search filter, Save Targets button
+- Updated src/components/modules/reports-view.tsx - Wired up real CSV export for Executive Summary (exports kpiMetrics) and Warehouse Performance (exports warehousePerformance data), replaced static download buttons with ExportButton dropdown component
+
+Stage Summary:
+- 1 new shared component, 2 files updated, zero lint errors, page compiles successfully
+- Addresses roadmap item #4 (Add CSV/PDF export functionality to reports)
+- All settings tabs now have real data tables instead of placeholders

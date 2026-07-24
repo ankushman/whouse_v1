@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { PageHeader } from "@/components/shared/page-header"
+import { StatusBadge } from "@/components/shared/status-badge"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -14,6 +15,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Textarea } from "@/components/ui/textarea"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import {
   Settings,
   Building2,
@@ -30,8 +39,56 @@ import {
   Mail,
   Phone,
   MapPin,
+  Star,
+  AlertTriangle,
+  Search,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { warehouses as warehouseData, kpiMetrics } from "@/data/mock-data"
+
+// ---- Mock Customer Data ----
+const customersData = [
+  { id: "1", name: "Maruti Suzuki India", code: "MSI-001", city: "Gurugram", state: "Haryana", contact: "Harsh Mehta", email: "harsh.mehta@maruti.co.in", type: "OEM", status: "Active" },
+  { id: "2", name: "Tata Motors Ltd", code: "TML-002", city: "Pune", state: "Maharashtra", contact: "Rahul Kulkarni", email: "rahul.k@tatamotors.com", type: "OEM", status: "Active" },
+  { id: "3", name: "Bosch Ltd", code: "BSH-003", city: "Bangalore", state: "Karnataka", contact: "Deepak Rao", email: "deepak.rao@bosch.in", type: "Tier1", status: "Active" },
+  { id: "4", name: "Motherson Sumi Systems", code: "MSS-004", city: "Noida", state: "Uttar Pradesh", contact: "Vineet Agarwal", email: "vineet.a@motherson.com", type: "Tier1", status: "Active" },
+  { id: "5", name: "Bharat Forge Ltd", code: "BFL-005", city: "Pune", state: "Maharashtra", contact: "Suresh Jadhav", email: "suresh.j@bharatforge.com", type: "Tier1", status: "Active" },
+  { id: "6", name: "Uno Minda Ltd", code: "UML-006", city: "Manesar", state: "Haryana", contact: "Anil Bhatia", email: "anil.b@unominda.com", type: "Tier2", status: "Active" },
+  { id: "7", name: "Varroc Polymers", code: "VPC-007", city: "Aurangabad", state: "Maharashtra", contact: "Prasad Joshi", email: "prasad.j@varroc.com", type: "Tier2", status: "Inactive" },
+  { id: "8", name: "Jamna Auto Industries", code: "JAI-008", city: "Delhi", state: "Delhi", contact: "Manish Gupta", email: "manish.g@jamnaauto.com", type: "Tier2", status: "Active" },
+]
+
+// ---- Mock Transporter Data ----
+const transportersData = [
+  { id: "1", name: "TCI Express Ltd", fleet: 120, routes: 45, contact: "Pradeep Kumar", phone: "+91 98765 43210", rating: 5, status: "Active" },
+  { id: "2", name: "Delhivery Logistics", fleet: 85, routes: 32, contact: "Arun Sharma", phone: "+91 87654 32109", rating: 4, status: "Active" },
+  { id: "3", name: "Blue Dart Express", fleet: 65, routes: 28, contact: "Sunil Verma", phone: "+91 76543 21098", rating: 5, status: "Active" },
+  { id: "4", name: "VRL Logistics", fleet: 95, routes: 38, contact: "Mahesh Patil", phone: "+91 65432 10987", rating: 3, status: "Active" },
+  { id: "5", name: "SafeExpress", fleet: 55, routes: 20, contact: "Kiran Reddy", phone: "+91 54321 09876", rating: 4, status: "Inactive" },
+  { id: "6", name: "Allcargo Logistics", fleet: 70, routes: 25, contact: "Dinesh Yadav", phone: "+91 43210 98765", rating: 3, status: "Active" },
+]
+
+// ---- KPI Config Data ----
+interface KPIConfigItem {
+  key: string
+  label: string
+  value: number
+  unit: string
+  target: number
+  warningThreshold: number
+  criticalThreshold: number
+}
+
+const initialKPIConfig: KPIConfigItem[] = [
+  { key: "inventoryAccuracy", label: "Inventory Accuracy", value: 97.8, unit: "%", target: 99, warningThreshold: 96, criticalThreshold: 93 },
+  { key: "slaAchievement", label: "SLA Achievement", value: 94.6, unit: "%", target: 97, warningThreshold: 93, criticalThreshold: 88 },
+  { key: "dockToStockTime", label: "Dock to Stock Time", value: 3.2, unit: "hrs", target: 2.5, warningThreshold: 4, criticalThreshold: 6 },
+  { key: "equipmentUtilization", label: "Equipment Utilization", value: 82.4, unit: "%", target: 85, warningThreshold: 70, criticalThreshold: 55 },
+  { key: "warehouseOccupancy", label: "Warehouse Occupancy", value: 79.7, unit: "%", target: 80, warningThreshold: 90, criticalThreshold: 95 },
+  { key: "productivity", label: "Productivity Index", value: 86.3, unit: "%", target: 90, warningThreshold: 75, criticalThreshold: 60 },
+  { key: "costPerShipment", label: "Cost per Shipment", value: 3245, unit: "₹", target: 2800, warningThreshold: 4000, criticalThreshold: 5500 },
+  { key: "pendingGRN", label: "Pending GRN", value: 63, unit: "", target: 30, warningThreshold: 80, criticalThreshold: 120 },
+]
 
 const usersData = [
   { id: "1", name: "Rajesh Kumar", email: "rajesh.kumar@autoflow.in", role: "Executive", status: "Active", lastLogin: "2 min ago" },
@@ -69,6 +126,22 @@ function SettingRow({ label, description, children }: { label: string; descripti
   )
 }
 
+function RatingStars({ rating }: { rating: number }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          className={cn(
+            "h-3.5 w-3.5",
+            i < rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground/30"
+          )}
+        />
+      ))}
+    </div>
+  )
+}
+
 export function SettingsView() {
   const [enabledNotifications, setEnabledNotifications] = useState({
     email: true,
@@ -79,6 +152,92 @@ export function SettingsView() {
     equipmentAlert: true,
     dailyReport: false,
   })
+
+  // Warehouse dialog
+  const [warehouseDialogOpen, setWarehouseDialogOpen] = useState(false)
+  const [editingWarehouse, setEditingWarehouse] = useState<typeof warehouseData[0] | null>(null)
+  const [warehouseSearch, setWarehouseSearch] = useState("")
+  const [warehouseForm, setWarehouseForm] = useState({
+    name: "", city: "", state: "", managerName: "", capacity: "",
+  })
+
+  // Customer dialog
+  const [customerDialogOpen, setCustomerDialogOpen] = useState(false)
+  const [editingCustomer, setEditingCustomer] = useState<typeof customersData[0] | null>(null)
+  const [customerSearch, setCustomerSearch] = useState("")
+  const [customerForm, setCustomerForm] = useState({
+    name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM" as const,
+  })
+
+  // Transporter dialog
+  const [transporterDialogOpen, setTransporterDialogOpen] = useState(false)
+  const [editingTransporter, setEditingTransporter] = useState<typeof transportersData[0] | null>(null)
+  const [transporterSearch, setTransporterSearch] = useState("")
+  const [transporterForm, setTransporterForm] = useState({
+    name: "", fleet: "", routes: "", contact: "", phone: "", rating: "4",
+  })
+
+  // KPI config
+  const [kpiConfig, setKpiConfig] = useState<KPIConfigItem[]>(initialKPIConfig)
+  const [kpiSearch, setKpiSearch] = useState("")
+
+  // Handlers — Warehouses
+  const openAddWarehouse = () => {
+    setEditingWarehouse(null)
+    setWarehouseForm({ name: "", city: "", state: "", managerName: "", capacity: "" })
+    setWarehouseDialogOpen(true)
+  }
+  const openEditWarehouse = (wh: typeof warehouseData[0]) => {
+    setEditingWarehouse(wh)
+    setWarehouseForm({ name: wh.name, city: wh.city, state: wh.state, managerName: wh.managerName, capacity: String(wh.capacity) })
+    setWarehouseDialogOpen(true)
+  }
+  const filteredWarehouses = warehouseData.filter(wh =>
+    wh.name.toLowerCase().includes(warehouseSearch.toLowerCase()) ||
+    wh.city.toLowerCase().includes(warehouseSearch.toLowerCase()) ||
+    wh.state.toLowerCase().includes(warehouseSearch.toLowerCase())
+  )
+
+  // Handlers — Customers
+  const openAddCustomer = () => {
+    setEditingCustomer(null)
+    setCustomerForm({ name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM" })
+    setCustomerDialogOpen(true)
+  }
+  const openEditCustomer = (c: typeof customersData[0]) => {
+    setEditingCustomer(c)
+    setCustomerForm({ name: c.name, code: c.code, city: c.city, state: c.state, contact: c.contact, email: c.email, type: c.type as "OEM" })
+    setCustomerDialogOpen(true)
+  }
+  const filteredCustomers = customersData.filter(c =>
+    c.name.toLowerCase().includes(customerSearch.toLowerCase()) ||
+    c.code.toLowerCase().includes(customerSearch.toLowerCase()) ||
+    c.city.toLowerCase().includes(customerSearch.toLowerCase())
+  )
+
+  // Handlers — Transporters
+  const openAddTransporter = () => {
+    setEditingTransporter(null)
+    setTransporterForm({ name: "", fleet: "", routes: "", contact: "", phone: "", rating: "4" })
+    setTransporterDialogOpen(true)
+  }
+  const openEditTransporter = (t: typeof transportersData[0]) => {
+    setEditingTransporter(t)
+    setTransporterForm({ name: t.name, fleet: String(t.fleet), routes: String(t.routes), contact: t.contact, phone: t.phone, rating: String(t.rating) })
+    setTransporterDialogOpen(true)
+  }
+  const filteredTransporters = transportersData.filter(t =>
+    t.name.toLowerCase().includes(transporterSearch.toLowerCase()) ||
+    t.contact.toLowerCase().includes(transporterSearch.toLowerCase())
+  )
+
+  // Handlers — KPI Config
+  const updateKPI = (key: string, field: keyof KPIConfigItem, value: number) => {
+    setKpiConfig(prev => prev.map(k => k.key === key ? { ...k, [field]: value } : k))
+  }
+  const filteredKPIConfig = kpiConfig.filter(k =>
+    k.label.toLowerCase().includes(kpiSearch.toLowerCase())
+  )
 
   return (
     <div className="space-y-6">
@@ -176,6 +335,486 @@ export function SettingsView() {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        {/* Warehouses Tab — Real CRUD */}
+        <TabsContent value="warehouses">
+          <Card className="rounded-xl border-border/60 shadow-sm">
+            <CardHeader>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <CardTitle className="text-sm font-semibold">Warehouse Management</CardTitle>
+                  <CardDescription className="text-xs">Manage warehouse configurations and details</CardDescription>
+                </div>
+                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddWarehouse}>
+                  <Plus className="h-3.5 w-3.5" /> Add Warehouse
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="relative max-w-xs">
+                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search warehouses..."
+                  value={warehouseSearch}
+                  onChange={(e) => setWarehouseSearch(e.target.value)}
+                  className="h-8 pl-8 text-xs"
+                />
+              </div>
+              <div className="max-h-[420px] overflow-y-auto rounded-md border">
+                <Table>
+                  <TableHeader className="sticky top-0 bg-background z-10">
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead className="text-xs">Name</TableHead>
+                      <TableHead className="text-xs hidden md:table-cell">City</TableHead>
+                      <TableHead className="text-xs hidden lg:table-cell">State</TableHead>
+                      <TableHead className="text-xs hidden md:table-cell">Manager</TableHead>
+                      <TableHead className="text-xs">Capacity</TableHead>
+                      <TableHead className="text-xs">Status</TableHead>
+                      <TableHead className="text-xs text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredWarehouses.map((wh) => (
+                      <TableRow key={wh.id}>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+                              <Building2 className="h-4 w-4 text-slate-600 dark:text-slate-300" />
+                            </div>
+                            <div>
+                              <p className="text-xs font-medium">{wh.name}</p>
+                              <p className="text-[10px] text-muted-foreground">{wh.id}</p>
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-xs hidden md:table-cell">
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <MapPin className="h-3 w-3" />
+                            {wh.city}
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-xs hidden lg:table-cell">{wh.state}</TableCell>
+                        <TableCell className="text-xs hidden md:table-cell">{wh.managerName}</TableCell>
+                        <TableCell className="text-xs">
+                          <div className="flex items-center gap-2">
+                            <div className="h-1.5 w-12 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                              <div
+                                className={cn(
+                                  "h-full rounded-full",
+                                  wh.capacityUsed > 90 ? "bg-red-500" : wh.capacityUsed > 80 ? "bg-amber-500" : "bg-emerald-500"
+                                )}
+                                style={{ width: `${wh.capacityUsed}%` }}
+                              />
+                            </div>
+                            <span className="text-[10px] text-muted-foreground whitespace-nowrap">{wh.capacityUsed}%</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <StatusBadge
+                            status={wh.status === "green" ? "Healthy" : wh.status === "amber" ? "Warning" : "Critical"}
+                            variant={wh.status}
+                          />
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditWarehouse(wh)}>
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {filteredWarehouses.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={7} className="h-24 text-center text-xs text-muted-foreground">
+                          No warehouses found.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>{filteredWarehouses.length} of {warehouseData.length} warehouses</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Warehouse Dialog */}
+          <Dialog open={warehouseDialogOpen} onOpenChange={setWarehouseDialogOpen}>
+            <DialogContent className="sm:max-w-lg">
+              <DialogHeader>
+                <DialogTitle className="text-sm">{editingWarehouse ? "Edit Warehouse" : "Add New Warehouse"}</DialogTitle>
+                <DialogDescription className="text-xs">
+                  {editingWarehouse ? "Update warehouse configuration details." : "Enter details for the new warehouse."}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-2">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Warehouse Name</Label>
+                    <Input value={warehouseForm.name} onChange={(e) => setWarehouseForm({ ...warehouseForm, name: e.target.value })} placeholder="e.g. Chennai Distribution Hub" className="h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">City</Label>
+                    <Input value={warehouseForm.city} onChange={(e) => setWarehouseForm({ ...warehouseForm, city: e.target.value })} placeholder="e.g. Chennai" className="h-9 text-sm" />
+                  </div>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">State</Label>
+                    <Input value={warehouseForm.state} onChange={(e) => setWarehouseForm({ ...warehouseForm, state: e.target.value })} placeholder="e.g. Tamil Nadu" className="h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Capacity (pallets)</Label>
+                    <Input type="number" value={warehouseForm.capacity} onChange={(e) => setWarehouseForm({ ...warehouseForm, capacity: e.target.value })} placeholder="e.g. 3000" className="h-9 text-sm" />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Manager Name</Label>
+                  <Input value={warehouseForm.managerName} onChange={(e) => setWarehouseForm({ ...warehouseForm, managerName: e.target.value })} placeholder="e.g. Rajesh Krishnamurthy" className="h-9 text-sm" />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button variant="outline" size="sm" onClick={() => setWarehouseDialogOpen(false)}>Cancel</Button>
+                <Button size="sm" onClick={() => setWarehouseDialogOpen(false)}>
+                  {editingWarehouse ? "Update Warehouse" : "Add Warehouse"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </TabsContent>
+
+        {/* Customers Tab */}
+        <TabsContent value="customers">
+          <Card className="rounded-xl border-border/60 shadow-sm">
+            <CardHeader>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <CardTitle className="text-sm font-semibold">Customer Management</CardTitle>
+                  <CardDescription className="text-xs">Manage OEM and supplier customer profiles</CardDescription>
+                </div>
+                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddCustomer}>
+                  <Plus className="h-3.5 w-3.5" /> Add Customer
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="relative max-w-xs">
+                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search customers..."
+                  value={customerSearch}
+                  onChange={(e) => setCustomerSearch(e.target.value)}
+                  className="h-8 pl-8 text-xs"
+                />
+              </div>
+              <div className="max-h-[420px] overflow-y-auto rounded-md border">
+                <Table>
+                  <TableHeader className="sticky top-0 bg-background z-10">
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead className="text-xs">Name</TableHead>
+                      <TableHead className="text-xs">Code</TableHead>
+                      <TableHead className="text-xs hidden md:table-cell">City</TableHead>
+                      <TableHead className="text-xs hidden lg:table-cell">Contact</TableHead>
+                      <TableHead className="text-xs">Type</TableHead>
+                      <TableHead className="text-xs">Status</TableHead>
+                      <TableHead className="text-xs text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredCustomers.map((c) => (
+                      <TableRow key={c.id}>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <Avatar className="h-7 w-7">
+                              <AvatarFallback className={cn(
+                                "text-[10px]",
+                                c.type === "OEM" ? "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                                  : c.type === "Tier1" ? "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"
+                                  : "bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300"
+                              )}>
+                                {c.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                              </AvatarFallback>
+                            </Avatar>
+                            <span className="text-xs font-medium">{c.name}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className="text-[10px] font-mono">{c.code}</Badge>
+                        </TableCell>
+                        <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{c.city}, {c.state}</TableCell>
+                        <TableCell className="text-xs hidden lg:table-cell">
+                          <div className="flex items-center gap-1 text-muted-foreground">
+                            <Mail className="h-3 w-3" />
+                            {c.contact}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <Badge className={cn(
+                            "text-[10px] rounded-full",
+                            c.type === "OEM" && "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200",
+                            c.type === "Tier1" && "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300",
+                            c.type === "Tier2" && "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300",
+                          )}>
+                            {c.type}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <Badge className={cn(
+                            "text-[10px] rounded-full",
+                            c.status === "Active" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+                          )}>
+                            {c.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditCustomer(c)}>
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {filteredCustomers.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={7} className="h-24 text-center text-xs text-muted-foreground">
+                          No customers found.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>{filteredCustomers.length} of {customersData.length} customers</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Customer Dialog */}
+          <Dialog open={customerDialogOpen} onOpenChange={setCustomerDialogOpen}>
+            <DialogContent className="sm:max-w-lg">
+              <DialogHeader>
+                <DialogTitle className="text-sm">{editingCustomer ? "Edit Customer" : "Add New Customer"}</DialogTitle>
+                <DialogDescription className="text-xs">
+                  {editingCustomer ? "Update customer details." : "Enter details for the new customer."}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-2">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Customer Name</Label>
+                    <Input value={customerForm.name} onChange={(e) => setCustomerForm({ ...customerForm, name: e.target.value })} placeholder="e.g. Maruti Suzuki India" className="h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Customer Code</Label>
+                    <Input value={customerForm.code} onChange={(e) => setCustomerForm({ ...customerForm, code: e.target.value })} placeholder="e.g. MSI-001" className="h-9 text-sm" />
+                  </div>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">City</Label>
+                    <Input value={customerForm.city} onChange={(e) => setCustomerForm({ ...customerForm, city: e.target.value })} placeholder="e.g. Gurugram" className="h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">State</Label>
+                    <Input value={customerForm.state} onChange={(e) => setCustomerForm({ ...customerForm, state: e.target.value })} placeholder="e.g. Haryana" className="h-9 text-sm" />
+                  </div>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Contact Person</Label>
+                    <Input value={customerForm.contact} onChange={(e) => setCustomerForm({ ...customerForm, contact: e.target.value })} placeholder="e.g. Harsh Mehta" className="h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Email</Label>
+                    <Input type="email" value={customerForm.email} onChange={(e) => setCustomerForm({ ...customerForm, email: e.target.value })} placeholder="e.g. harsh.mehta@maruti.co.in" className="h-9 text-sm" />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Customer Type</Label>
+                  <Select value={customerForm.type} onValueChange={(v) => setCustomerForm({ ...customerForm, type: v as "OEM" | "Tier1" | "Tier2" })}>
+                    <SelectTrigger className="h-9 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="OEM">OEM (Original Equipment Manufacturer)</SelectItem>
+                      <SelectItem value="Tier1">Tier 1 Supplier</SelectItem>
+                      <SelectItem value="Tier2">Tier 2 Supplier</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <DialogFooter>
+                <Button variant="outline" size="sm" onClick={() => setCustomerDialogOpen(false)}>Cancel</Button>
+                <Button size="sm" onClick={() => setCustomerDialogOpen(false)}>
+                  {editingCustomer ? "Update Customer" : "Add Customer"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </TabsContent>
+
+        {/* Transporters Tab */}
+        <TabsContent value="transporters">
+          <Card className="rounded-xl border-border/60 shadow-sm">
+            <CardHeader>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <CardTitle className="text-sm font-semibold">Transporter Management</CardTitle>
+                  <CardDescription className="text-xs">Manage logistics partners and fleet providers</CardDescription>
+                </div>
+                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddTransporter}>
+                  <Plus className="h-3.5 w-3.5" /> Add Transporter
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="relative max-w-xs">
+                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search transporters..."
+                  value={transporterSearch}
+                  onChange={(e) => setTransporterSearch(e.target.value)}
+                  className="h-8 pl-8 text-xs"
+                />
+              </div>
+              <div className="max-h-[420px] overflow-y-auto rounded-md border">
+                <Table>
+                  <TableHeader className="sticky top-0 bg-background z-10">
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead className="text-xs">Name</TableHead>
+                      <TableHead className="text-xs hidden sm:table-cell">Fleet Size</TableHead>
+                      <TableHead className="text-xs hidden md:table-cell">Routes</TableHead>
+                      <TableHead className="text-xs hidden lg:table-cell">Contact</TableHead>
+                      <TableHead className="text-xs">Rating</TableHead>
+                      <TableHead className="text-xs text-right">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredTransporters.map((t) => (
+                      <TableRow key={t.id}>
+                        <TableCell>
+                          <div className="flex items-center gap-2">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950">
+                              <Truck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                            </div>
+                            <div>
+                              <p className="text-xs font-medium">{t.name}</p>
+                              <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                                <Phone className="h-2.5 w-2.5" />
+                                {t.phone}
+                              </div>
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-xs hidden sm:table-cell">
+                          <Badge variant="secondary" className="text-[10px]">{t.fleet} vehicles</Badge>
+                        </TableCell>
+                        <TableCell className="text-xs hidden md:table-cell">{t.routes} active routes</TableCell>
+                        <TableCell className="text-xs hidden lg:table-cell">{t.contact}</TableCell>
+                        <TableCell>
+                          <RatingStars rating={t.rating} />
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <div className="flex items-center justify-end gap-1">
+                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditTransporter(t)}>
+                              <Edit className="h-3 w-3" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                    {filteredTransporters.length === 0 && (
+                      <TableRow>
+                        <TableCell colSpan={6} className="h-24 text-center text-xs text-muted-foreground">
+                          No transporters found.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>{filteredTransporters.length} of {transportersData.length} transporters</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Transporter Dialog */}
+          <Dialog open={transporterDialogOpen} onOpenChange={setTransporterDialogOpen}>
+            <DialogContent className="sm:max-w-lg">
+              <DialogHeader>
+                <DialogTitle className="text-sm">{editingTransporter ? "Edit Transporter" : "Add New Transporter"}</DialogTitle>
+                <DialogDescription className="text-xs">
+                  {editingTransporter ? "Update transporter details." : "Enter details for the new transporter."}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-2">
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Company Name</Label>
+                  <Input value={transporterForm.name} onChange={(e) => setTransporterForm({ ...transporterForm, name: e.target.value })} placeholder="e.g. TCI Express Ltd" className="h-9 text-sm" />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Fleet Size</Label>
+                    <Input type="number" value={transporterForm.fleet} onChange={(e) => setTransporterForm({ ...transporterForm, fleet: e.target.value })} placeholder="e.g. 120" className="h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Active Routes</Label>
+                    <Input type="number" value={transporterForm.routes} onChange={(e) => setTransporterForm({ ...transporterForm, routes: e.target.value })} placeholder="e.g. 45" className="h-9 text-sm" />
+                  </div>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Contact Person</Label>
+                    <Input value={transporterForm.contact} onChange={(e) => setTransporterForm({ ...transporterForm, contact: e.target.value })} placeholder="e.g. Pradeep Kumar" className="h-9 text-sm" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Phone</Label>
+                    <Input value={transporterForm.phone} onChange={(e) => setTransporterForm({ ...transporterForm, phone: e.target.value })} placeholder="+91 98765 43210" className="h-9 text-sm" />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Rating (1-5)</Label>
+                  <Select value={transporterForm.rating} onValueChange={(v) => setTransporterForm({ ...transporterForm, rating: v })}>
+                    <SelectTrigger className="h-9 text-sm">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[1, 2, 3, 4, 5].map((r) => (
+                        <SelectItem key={r} value={String(r)}>
+                          <div className="flex items-center gap-1">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <Star key={i} className={cn("h-3 w-3", i < r ? "fill-amber-400 text-amber-400" : "text-muted-foreground/30")} />
+                            ))}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <DialogFooter>
+                <Button variant="outline" size="sm" onClick={() => setTransporterDialogOpen(false)}>Cancel</Button>
+                <Button size="sm" onClick={() => setTransporterDialogOpen(false)}>
+                  {editingTransporter ? "Update Transporter" : "Add Transporter"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </TabsContent>
 
         {/* Users */}
@@ -282,6 +921,128 @@ export function SettingsView() {
           </Card>
         </TabsContent>
 
+        {/* KPI Config Tab — Real Configuration */}
+        <TabsContent value="kpi">
+          <Card className="rounded-xl border-border/60 shadow-sm">
+            <CardHeader>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <CardTitle className="text-sm font-semibold">KPI Target Configuration</CardTitle>
+                  <CardDescription className="text-xs">Set target values and alert thresholds for each KPI</CardDescription>
+                </div>
+                <Button size="sm" className="gap-1.5 h-8 text-xs">
+                  <Save className="h-3.5 w-3.5" /> Save Targets
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="relative max-w-xs">
+                <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search KPIs..."
+                  value={kpiSearch}
+                  onChange={(e) => setKpiSearch(e.target.value)}
+                  className="h-8 pl-8 text-xs"
+                />
+              </div>
+              <div className="max-h-[480px] overflow-y-auto rounded-md border">
+                <Table>
+                  <TableHeader className="sticky top-0 bg-background z-10">
+                    <TableRow className="hover:bg-transparent">
+                      <TableHead className="text-xs">KPI Name</TableHead>
+                      <TableHead className="text-xs">Current</TableHead>
+                      <TableHead className="text-xs">Target</TableHead>
+                      <TableHead className="text-xs hidden sm:table-cell">Unit</TableHead>
+                      <TableHead className="text-xs hidden md:table-cell">
+                        <div className="flex items-center gap-1">
+                          <AlertTriangle className="h-3 w-3 text-amber-500" />
+                          Warning
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs hidden md:table-cell">
+                        <div className="flex items-center gap-1">
+                          <AlertTriangle className="h-3 w-3 text-red-500" />
+                          Critical
+                        </div>
+                      </TableHead>
+                      <TableHead className="text-xs hidden lg:table-cell">Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredKPIConfig.map((kpi) => {
+                      const isAtTarget = kpi.value >= kpi.target
+                      const isWarning = !isAtTarget && kpi.value >= kpi.warningThreshold
+                      const isCritical = !isAtTarget && !isWarning
+
+                      return (
+                        <TableRow key={kpi.key}>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+                                <Target className="h-3.5 w-3.5 text-slate-600 dark:text-slate-300" />
+                              </div>
+                              <span className="text-xs font-medium">{kpi.label}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="text-xs font-mono font-medium">{kpi.value}{kpi.unit}</TableCell>
+                          <TableCell>
+                            <Input
+                              type="number"
+                              value={kpi.target}
+                              onChange={(e) => updateKPI(kpi.key, "target", Number(e.target.value))}
+                              className="h-7 w-20 text-xs"
+                            />
+                          </TableCell>
+                          <TableCell className="text-xs text-muted-foreground hidden sm:table-cell">{kpi.unit || "—"}</TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            <Input
+                              type="number"
+                              value={kpi.warningThreshold}
+                              onChange={(e) => updateKPI(kpi.key, "warningThreshold", Number(e.target.value))}
+                              className="h-7 w-20 text-xs"
+                            />
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            <Input
+                              type="number"
+                              value={kpi.criticalThreshold}
+                              onChange={(e) => updateKPI(kpi.key, "criticalThreshold", Number(e.target.value))}
+                              className="h-7 w-20 text-xs"
+                            />
+                          </TableCell>
+                          <TableCell className="hidden lg:table-cell">
+                            <StatusBadge
+                              status={isAtTarget ? "On Target" : isWarning ? "Warning" : "Critical"}
+                              variant={isAtTarget ? "green" : isWarning ? "amber" : "red"}
+                            />
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
+                  </TableBody>
+                </Table>
+              </div>
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>{filteredKPIConfig.length} KPIs configured</span>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                    <span>On Target</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-amber-500" />
+                    <span>Warning</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="h-2 w-2 rounded-full bg-red-500" />
+                    <span>Critical</span>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         {/* Notifications */}
         <TabsContent value="notifications">
           <Card className="rounded-xl border-border/60 shadow-sm">
@@ -325,28 +1086,6 @@ export function SettingsView() {
             </CardContent>
           </Card>
         </TabsContent>
-
-        {/* Other tabs - placeholder */}
-        {["warehouses", "customers", "transporters", "kpi"].map((tab) => (
-          <TabsContent key={tab} value={tab}>
-            <Card className="rounded-xl border-border/60 shadow-sm">
-              <CardHeader>
-                <CardTitle className="text-sm font-semibold capitalize">{tab === "kpi" ? "KPI Configuration" : `${tab.charAt(0).toUpperCase() + tab.slice(1)} Master`}</CardTitle>
-                <CardDescription className="text-xs">Manage {tab} configuration and data</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-col items-center justify-center py-12 text-center">
-                  <Settings className="h-8 w-8 text-muted-foreground/50" />
-                  <p className="mt-3 text-sm font-medium text-muted-foreground">Configuration UI</p>
-                  <p className="text-xs text-muted-foreground">Ready for Supabase integration. Connect your database to manage {tab} data.</p>
-                  <Button variant="outline" size="sm" className="mt-4 gap-1.5 text-xs">
-                    <Plus className="h-3.5 w-3.5" /> Add {tab === "kpi" ? "KPI" : tab.charAt(0).toUpperCase() + tab.slice(1).slice(0, -1)}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        ))}
       </Tabs>
     </div>
   )

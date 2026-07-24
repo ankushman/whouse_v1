@@ -23,6 +23,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
+import { HealthScoreRing } from "@/components/shared/health-score-ring"
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -123,19 +124,7 @@ interface HealthBadgeProps {
 }
 
 function HealthBadge({ score, status }: HealthBadgeProps) {
-  const colors = statusColorMap[status]
-  return (
-    <div
-      className={cn(
-        "flex items-center justify-center size-12 rounded-full ring-2 font-bold tabular-nums text-sm",
-        colors.ring,
-        colors.bg,
-        colors.text
-      )}
-    >
-      {score}
-    </div>
-  )
+  return <HealthScoreRing score={score} status={status} size={52} showLabel />
 }
 
 // ── Warehouse Card ───────────────────────────────────────────────────────────
@@ -176,7 +165,7 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
               </span>
             </div>
           </div>
-          <HealthBadge score={warehouse.healthScore} status={status} />
+          <HealthScoreRing score={warehouse.healthScore} status={status} size={52} showLabel />
         </div>
 
         <Separator className="opacity-60" />

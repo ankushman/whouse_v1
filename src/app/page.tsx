@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppLayout } from "@/components/layout/app-layout"
 import { useAppStore } from "@/store/app-store"
@@ -16,7 +17,7 @@ import { CostAnalyticsView } from "@/components/modules/cost-analytics-view"
 import { AlertsView } from "@/components/modules/alerts-view"
 import { ReportsView } from "@/components/modules/reports-view"
 import { SettingsView } from "@/components/modules/settings-view"
-import { Skeleton } from "@/components/ui/skeleton"
+import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 
 const viewMap: Record<string, React.ComponentType> = {
   dashboard: DashboardView,
@@ -34,11 +35,27 @@ const viewMap: Record<string, React.ComponentType> = {
   settings: SettingsView,
 }
 
+
 function ViewRenderer() {
+  const [mounted, setMounted] = useState(false)
   const { activeView } = useAppStore()
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 300)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (!mounted) {
+    return <DashboardSkeleton />
+  }
+
   const View = viewMap[activeView]
   if (!View) return null
-  return <View />
+  return (
+    <div className="transition-all duration-500">
+      <View />
+    </div>
+  )
 }
 
 export default function Home() {

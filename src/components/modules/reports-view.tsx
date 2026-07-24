@@ -1,6 +1,7 @@
 "use client"
 
 import { PageHeader } from "@/components/shared/page-header"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -18,7 +19,7 @@ import {
   Eye,
   FileSpreadsheet,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { kpiMetrics, warehousePerformance } from "@/data/mock-data"
 
 interface Report {
   id: string
@@ -88,6 +89,40 @@ const reports: Report[] = [
 ]
 
 export function ReportsView() {
+  // CSV export handlers
+  const handleExportExecSummaryCSV = () => {
+    const data = kpiMetrics.map(m => ({
+      KPI: m.label,
+      Value: m.value,
+      Unit: m.unit,
+      Trend: m.trend === "up" ? "↑" : "↓",
+      "Change (%)": m.trendValue,
+    }))
+    exportToCSV(data, "executive-summary-kpis")
+  }
+
+  const handleExportWarehousePerfCSV = () => {
+    const data = warehousePerformance.map(w => ({
+      Warehouse: w.name,
+      "Inbound (units)": w.inbound,
+      "Outbound (units)": w.outbound,
+      "Accuracy (%)": w.accuracy,
+      "SLA Achievement (%)": w.sla,
+    }))
+    exportToCSV(data, "warehouse-performance")
+  }
+
+  const getExportHandlers = (reportId: string) => {
+    switch (reportId) {
+      case "exec":
+        return { onExportCSV: handleExportExecSummaryCSV }
+      case "warehouse":
+        return { onExportCSV: handleExportWarehousePerfCSV }
+      default:
+        return {}
+    }
+  }
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -116,6 +151,9 @@ export function ReportsView() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {reports.map((report) => {
           const Icon = report.icon
+          const exportHandlers = getExportHandlers(report.id)
+          const hasCSVExport = !!exportHandlers.onExportCSV
+
           return (
             <Card key={report.id} className="group rounded-xl border-border/60 shadow-sm transition-all hover:shadow-md hover:border-border">
               <CardHeader className="pb-3">
@@ -143,11 +181,15 @@ export function ReportsView() {
                   <Button size="sm" className="flex-1 text-xs gap-1.5 h-8">
                     <RefreshCw className="h-3 w-3" /> Generate
                   </Button>
-                  <Button variant="outline" size="sm" className="text-xs gap-1.5 h-8" title="Download PDF">
-                    <Download className="h-3 w-3" />
-                    <span className="hidden sm:inline">PDF</span>
-                  </Button>
-                  {report.formats.includes("excel") && (
+                  {hasCSVExport ? (
+                    <ExportButton onExportCSV={exportHandlers.onExportCSV} />
+                  ) : (
+                    <Button variant="outline" size="sm" className="text-xs gap-1.5 h-8" title="Download PDF">
+                      <Download className="h-3 w-3" />
+                      <span className="hidden sm:inline">PDF</span>
+                    </Button>
+                  )}
+                  {report.formats.includes("excel") && !hasCSVExport && (
                     <Button variant="outline" size="sm" className="text-xs gap-1.5 h-8" title="Download Excel">
                       <FileSpreadsheet className="h-3 w-3" />
                       <span className="hidden sm:inline">Excel</span>
