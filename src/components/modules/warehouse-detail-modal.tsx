@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/chart"
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts"
 import {
+  Activity,
   Building2,
   MapPin,
   Users,
@@ -278,6 +279,38 @@ export function WarehouseDetailModal({ open, onOpenChange, warehouse }: Warehous
                   </Badge>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* ── Today's Activity ── */}
+        <div className="px-6 pb-4">
+          <Card className="rounded-xl border-border/60 shadow-sm card-accent-green">
+            <CardHeader className="pb-2">
+              <div className="flex items-center gap-2">
+                <Activity className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <CardTitle className="text-sm font-semibold">Today's Activity</CardTitle>
+              </div>
+              <CardDescription className="text-xs">Recent warehouse operations</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {[
+                { text: `Inbound shipment INV-${847 + Math.round(warehouse.capacityUsed / 10)} received`, time: "32 min ago", dot: "bg-emerald-500" },
+                { text: "Dock D3 allocated for unloading", time: "1h ago", dot: "bg-blue-500" },
+                { text: "Inventory cycle count completed", time: "2h ago", dot: "bg-emerald-400" },
+                { text: "Equipment FL-005 maintenance scheduled", time: "3h ago", dot: "bg-amber-500" },
+                { text: `Outbound shipment SH-${912 + Math.round(warehouse.todayOrders / 50)} dispatched`, time: "4h ago", dot: "bg-emerald-500" },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <div className="mt-1 flex h-2.5 w-2.5 shrink-0 items-center justify-center rounded-full">
+                    <div className={cn("h-2 w-2 rounded-full status-dot-pulse", item.dot)} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-foreground">{item.text}</p>
+                    <p className="text-[10px] text-muted-foreground">{item.time}</p>
+                  </div>
+                </div>
+              ))}
             </CardContent>
           </Card>
         </div>

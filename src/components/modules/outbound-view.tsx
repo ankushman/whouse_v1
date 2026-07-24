@@ -1,28 +1,24 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useCallback } from "react"
 import { outboundShipments, warehouses } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Truck,
-  Package,
   Clock,
   CheckCircle2,
-  Circle,
-  AlertCircle,
   Filter,
-  Download,
-  Box,
-  ShippingContainer,
+  Search,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -48,20 +44,24 @@ const textColorMap: Record<string, string> = {
 }
 
 const stepIndexMap: Record<string, number> = {
-  Pending: 0, Picking: 1, Packing: 2, Ready: 3, Dispatched:4, Delivered: 5,
+  Pending: 0, Picking: 1, Packing: 2, Ready: 3, Dispatched: 4, Delivered: 5,
 }
+
+const EXPORT_COLUMNS = ["Invoice", "Customer", "Pick Type", "Picker", "Packer", "Vehicle", "Status", "Dispatch Time"]
 
 export function OutboundView() {
   const [statusFilter, setStatusFilter] = useState("all")
   const [warehouseFilter, setWarehouseFilter] = useState("all")
+  const [searchQuery, setSearchQuery] = useState("")
 
   const filtered = useMemo(() => {
     return outboundShipments.filter((s) => {
       if (statusFilter !== "all" && s.status !== statusFilter) return false
       if (warehouseFilter !== "all" && !s.warehouse.includes(warehouseFilter)) return false
+      if (searchQuery && !s.invoice.toLowerCase().includes(searchQuery.toLowerCase()) && !s.customer.toLowerCase().includes(searchQuery.toLowerCase())) return false
       return true
     })
-  }, [statusFilter, warehouseFilter])
+  }, [statusFilter, warehouseFilter, searchQuery])
 
   const summary = useMemo(() => ({
     total: outboundShipments.length,
@@ -73,6 +73,22 @@ export function OutboundView() {
     delivered: outboundShipments.filter((s) => s.status === "Delivered").length,
   }), [])
 
+  const handleExportCSV = useCallback(() => {
+    const data = filtered.map((s) => ({
+      Invoice: s.invoice,
+      Customer: s.customer,
+      "Pick Type": s.pickingType,
+      Picker: s.picker,
+      Packer: s.packer,
+      Vehicle: s.vehicle,
+      Status: s.status,
+      "Dispatch Time": s.dispatchTime
+        ? new Date(s.dispatchTime).toLocaleDateString("en-IN", { day: "2-digit", month: "short" })
+        : "—",
+    }))
+    exportToCSV(data, "outbound-shipments", EXPORT_COLUMNS)
+  }, [filtered])
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -83,9 +99,7 @@ export function OutboundView() {
             <Button variant="outline" size="sm" className="gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
-            <Button variant="outline" size="sm" className="gap-1.5">
-              <Download className="h-3.5 w-3.5" /> Export
-            </Button>
+            <ExportButton onExportCSV={handleExportCSV} />
           </>
         }
       />
@@ -126,7 +140,16 @@ export function OutboundView() {
       </Tabs>
 
       {/* Filters */}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search invoice or customer..."
+            className="h-8 w-[220px] pl-8 text-xs"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
         <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
           <SelectTrigger className="w-[200px] h-8 text-xs">
             <SelectValue placeholder="Warehouse" />
@@ -138,6 +161,9 @@ export function OutboundView() {
             ))}
           </SelectContent>
         </Select>
+        <div className="ml-auto text-xs text-muted-foreground">
+          {filtered.length} shipment{filtered.length !== 1 ? "s" : ""}
+        </div>
       </div>
 
       {/* Shipments Table */}

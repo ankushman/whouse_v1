@@ -36,19 +36,6 @@ import { PageHeader } from "@/components/shared/page-header"
 import { LiveUpdatesFeed } from "@/components/shared/live-updates-feed"
 import { cn } from "@/lib/utils"
 
-// ──────────────────────────────────────────────────────
-// Chart card accent colors
-// ──────────────────────────────────────────────────────
-type ChartAccent = "blue" | "green" | "amber" | "purple" | "red"
-
-const chartAccentBorder: Record<ChartAccent, string> = {
-  blue: "border-t-blue-500",
-  green: "border-t-emerald-500",
-  amber: "border-t-amber-500",
-  purple: "border-t-purple-500",
-  red: "border-t-red-500",
-}
-
 const kpiIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   totalWarehouses: Warehouse,
   activeShipments: Truck,
@@ -231,7 +218,7 @@ export function DashboardView() {
 
       {/* Charts Row 1 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
+        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Inbound vs Outbound Trend</CardTitle>
             <CardDescription className="text-xs">Monthly shipment volume comparison</CardDescription>
@@ -251,7 +238,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.green)}>
+        <Card className={cn("chart-card card-accent-green rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Dispatch Performance</CardTitle>
             <CardDescription className="text-xs">Last 7 days on-time vs delayed deliveries</CardDescription>
@@ -274,7 +261,7 @@ export function DashboardView() {
 
       {/* Charts Row 2 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
+        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Warehouse Performance</CardTitle>
             <CardDescription className="text-xs">Cross-warehouse metrics comparison</CardDescription>
@@ -293,7 +280,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
+        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Inventory Accuracy Trend</CardTitle>
             <CardDescription className="text-xs">6-month accuracy tracking</CardDescription>
@@ -320,7 +307,7 @@ export function DashboardView() {
 
       {/* Charts Row 3 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.blue)}>
+        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Daily Throughput</CardTitle>
             <CardDescription className="text-xs">Last 30 days inbound and outbound volumes</CardDescription>
@@ -349,7 +336,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.amber)}>
+        <Card className={cn("chart-card card-accent-amber rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Trend Analysis</CardTitle>
             <CardDescription className="text-xs">Monthly cost breakdown (₹ Lakhs)</CardDescription>
@@ -374,7 +361,7 @@ export function DashboardView() {
 
       {/* Bottom Row */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.red)}>
+        <Card className={cn("chart-card card-accent-red rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">SLA Achievement by Warehouse</CardTitle>
             <CardDescription className="text-xs">Target vs achieved vs breach percentage</CardDescription>
@@ -393,7 +380,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("rounded-xl border border-t-2 border-border/60 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md", chartAccentBorder.purple)}>
+        <Card className={cn("chart-card card-accent-purple rounded-xl border border-t-2 border-border/60 shadow-sm")}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Manpower Productivity by Shift</CardTitle>
             <CardDescription className="text-xs">Weekly shift-wise productivity comparison</CardDescription>

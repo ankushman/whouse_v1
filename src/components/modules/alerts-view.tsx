@@ -154,7 +154,7 @@ export function AlertsView() {
             <Card
               key={alert.id}
               className={cn(
-                "rounded-xl border shadow-sm transition-all",
+                "rounded-xl border shadow-sm transition-all hover:bg-muted/40",
                 config.border,
                 isAcknowledged && "opacity-60"
               )}

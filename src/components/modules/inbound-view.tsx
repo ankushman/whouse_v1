@@ -1,31 +1,27 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useCallback } from "react"
 import { inboundShipments, warehouses } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   PackageSearch,
-  Truck,
   Clock,
-  User,
   CheckCircle2,
   Circle,
   AlertCircle,
   Filter,
-  Download,
   ChevronRight,
-  ChevronDown,
   Globe,
   Home,
   Search,
@@ -51,6 +47,8 @@ const statusVariant: Record<string, "green" | "amber" | "red" | "blue" | "gray">
   "On Hold": "amber",
 }
 
+const EXPORT_COLUMNS = ["Invoice", "Supplier", "Type", "Warehouse", "Status", "SLA Progress"]
+
 export function InboundView() {
   const [typeFilter, setTypeFilter] = useState("all")
   const [warehouseFilter, setWarehouseFilter] = useState("all")
@@ -73,6 +71,18 @@ export function InboundView() {
     delayed: inboundShipments.filter((s) => s.status === "Delayed").length,
   }), [])
 
+  const handleExportCSV = useCallback(() => {
+    const data = filtered.map((s) => ({
+      Invoice: s.invoice,
+      Supplier: s.supplier,
+      Type: s.type,
+      Warehouse: s.warehouse,
+      Status: s.status,
+      "SLA Progress": `${s.slaProgress}%`,
+    }))
+    exportToCSV(data, "inbound-shipments", EXPORT_COLUMNS)
+  }, [filtered])
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -83,9 +93,7 @@ export function InboundView() {
             <Button variant="outline" size="sm" className="gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
-            <Button variant="outline" size="sm" className="gap-1.5">
-              <Download className="h-3.5 w-3.5" /> Export
-            </Button>
+            <ExportButton onExportCSV={handleExportCSV} />
           </>
         }
       />

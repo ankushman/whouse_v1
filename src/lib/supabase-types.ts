@@ -204,9 +204,13 @@ export interface TimelineStep {
   timestamp: string
 }
 
-// Helper type - remove for now, will define properly
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Json = any
+type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | Json[]
+  | { [key: string]: Json }
 
 // Database response types
 export interface Tables {

@@ -90,7 +90,7 @@ export function CostAnalyticsView() {
           { label: "Equipment Cost", value: `₹${(latest.equipment / 100000).toFixed(2)}L`, icon: Wrench, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
           { label: "Storage Cost", value: `₹${(latest.storage / 100000).toFixed(2)}L`, icon: Warehouse, color: "bg-purple-50 text-purple-600 dark:bg-purple-950 dark:text-purple-400" },
         ].map((item) => (
-          <Card key={item.label} className="rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardContent className="p-4">
               <div className="flex items-start justify-between">
                 <div>
@@ -114,7 +114,7 @@ export function CostAnalyticsView() {
 
       {/* Charts Row */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className="card-accent-blue rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Trend</CardTitle>
             <CardDescription className="text-xs">Monthly cost breakdown (₹)</CardDescription>
@@ -142,7 +142,7 @@ export function CostAnalyticsView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className="card-accent-amber rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Breakdown</CardTitle>
             <CardDescription className="text-xs">Current month distribution by category</CardDescription>
@@ -170,7 +170,8 @@ export function CostAnalyticsView() {
           <CardDescription className="text-xs">Last 6 months with change percentages</CardDescription>
         </CardHeader>
         <CardContent>
-          <Table>
+          <div className="table-container">
+          <Table className="table-row-hover">
             <TableHeader>
               <TableRow className="hover:bg-transparent">
                 <TableHead className="text-xs">Month</TableHead>
@@ -200,6 +201,7 @@ export function CostAnalyticsView() {
               ))}
             </TableBody>
           </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

@@ -224,14 +224,34 @@ Stage Summary:
 - Lint: 0 errors
 
 ---
-Updated Project Status (Post Round 6):
-- STATUS: STABLE - Documentation complete, GitHub repo active
-- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
-- DOCUMENTATION: README.md with full project documentation
-- PRIORITY NEXT:
-  1. Integrate DataTable into Inbound and Outbound modules
-  2. Add WebSocket real-time data simulation
-  3. Add geographic map for warehouse network
-  4. Wire ExportButton to all remaining table views
-  5. Add barcode/QR code scanning for inventory
-  6. Add print-friendly CSS for reports
+Task ID: 4-a
+Agent: Frontend Styling Expert (Subagent)
+Task: CSS styling overhaul across all module views
+
+Work Log:
+- Added 7 new CSS utility classes to globals.css:
+  - `.card-highlight` — Animated gradient border using conic-gradient + @property --angle
+  - `.data-card` — Hover lift card with translateY(-1px), shadow increase, border color transition
+  - `.table-container` — Rounded overflow wrapper with subtle border
+  - `.filter-bar` — Styled filter bar with bg-muted/30, rounded-xl, consistent padding/gap
+  - `.status-dot-pulse` — Animated opacity + scale pulse for status dots
+  - `.metric-change` — Metric change indicator with positive/negative color states
+  - `.section-divider` — Flex divider with centered label, using oklch colors
+- Applied `card-depth` to summary cards in 6 modules: inbound (4 cards), outbound (7 cards), inventory (4 cards + card-accent-blue on Total SKUs), employees (4 cards), productivity (4 cards), cost-analytics (5 cards)
+- Applied table styling: wrapped variance table in inventory-view with `table-container` div + `table-row-hover` on Table; wrapped MoM table in cost-analytics-view with `table-container` div + `table-row-hover`; added `table-row-hover` to employees-view table
+- Applied `filter-bar` class to outbound-view and inventory-view filter sections
+- Applied card-accent borders to chart cards: productivity-view shift chart (`card-accent-blue`), inventory-view ABC Classification (`card-accent-green`) + Category Distribution (`card-accent-purple`), cost-analytics-view Cost Trend (`card-accent-blue`) + Cost Breakdown (`card-accent-amber`)
+- Card hover enhancements: equipment-view cards got `card-depth data-card` classes replacing inline hover; alerts-view alert cards got `hover:bg-muted/40`
+- Dashboard chart card polish: converted all 8 chart cards from inline Tailwind border-t + hover utilities to CSS `chart-card card-accent-*` classes; removed unused `ChartAccent` type and `chartAccentBorder` constant
+
+Stage Summary:
+- 1 file modified (globals.css): +164 lines (7 new utility classes with dark mode support)
+- 8 module/component files modified with CSS class additions
+- Zero lint errors, zero build errors
+- All changes respect existing oklch color system and light/dark mode
+
+Updated Project Status (Post Task 4-a):
+- CSS UTILITIES (24+): All previous + card-highlight, data-card, table-container, filter-bar, status-dot-pulse, metric-change, section-divider
+- VISUAL CONSISTENCY: All summary cards use card-depth, all chart cards use card-accent-* + chart-card, all data tables use table-row-hover
+- PRIORITY NEXT: Same as before
+

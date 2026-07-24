@@ -28,6 +28,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import {
   Package,
@@ -164,7 +165,7 @@ export function InventoryView() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
-        <Card className="relative overflow-hidden">
+        <Card className="card-depth card-accent-blue relative overflow-hidden">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -180,7 +181,7 @@ export function InventoryView() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden">
+        <Card className="card-depth relative overflow-hidden">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -196,7 +197,7 @@ export function InventoryView() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden border-red-200 dark:border-red-900">
+        <Card className="card-depth relative overflow-hidden border-red-200 dark:border-red-900">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -214,7 +215,7 @@ export function InventoryView() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden">
+        <Card className="card-depth relative overflow-hidden">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -236,7 +237,7 @@ export function InventoryView() {
       {/* Charts Row */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {/* ABC Classification */}
-        <Card>
+        <Card className="card-accent-green">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">
               ABC Classification
@@ -270,7 +271,7 @@ export function InventoryView() {
         </Card>
 
         {/* Category Distribution */}
-        <Card>
+        <Card className="card-accent-purple">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">
               Category Distribution
@@ -305,7 +306,7 @@ export function InventoryView() {
       <Separator />
 
       {/* Filter Bar */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="filter-bar flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
             <Filter className="h-3.5 w-3.5" />
@@ -366,12 +367,11 @@ export function InventoryView() {
         </div>
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-          <input
-            type="text"
+          <Input
             placeholder="Search SKU, part, location..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="h-8 w-[220px] rounded-md border border-input bg-background pl-8 pr-3 text-xs outline-none ring-ring/10 focus:border-ring focus:ring-2 focus:ring-ring/20"
+            className="h-8 w-[220px] pl-8 text-xs"
           />
         </div>
       </div>
@@ -401,8 +401,8 @@ export function InventoryView() {
         <TabsContent value="variance" className="mt-4">
           <Card>
             <CardContent className="p-0">
-              <div className="max-h-[480px] overflow-y-auto">
-                <Table>
+              <div className="table-container max-h-[480px] overflow-y-auto">
+                <Table className="table-row-hover">
                   <TableHeader>
                     <TableRow className="hover:bg-transparent">
                       <TableHead className="w-[110px] text-xs">SKU</TableHead>

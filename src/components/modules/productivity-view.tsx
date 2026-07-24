@@ -100,7 +100,7 @@ export function ProductivityView() {
           { label: "Afternoon Shift", value: `${summary.afternoon}%`, icon: Sun, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
           { label: "Night Shift", value: `${summary.night}%`, icon: Moon, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
         ].map((item) => (
-          <Card key={item.label} className="rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardContent className="flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
@@ -115,7 +115,7 @@ export function ProductivityView() {
       </div>
 
       {/* Shift Productivity Chart */}
-      <Card className="rounded-xl border-border/60 shadow-sm">
+      <Card className="card-accent-blue rounded-xl border-border/60 shadow-sm">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-semibold">Shift-wise Productivity</CardTitle>
           <CardDescription className="text-xs">Daily productivity by shift</CardDescription>

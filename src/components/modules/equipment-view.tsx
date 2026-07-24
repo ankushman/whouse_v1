@@ -184,7 +184,7 @@ export function EquipmentView() {
               {equipmentData.map((eq) => (
                 <div
                   key={eq.id}
-                  className="rounded-lg border p-4 space-y-3 transition-colors hover:bg-muted/40"
+                  className="card-depth data-card rounded-lg border p-4 space-y-3"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">

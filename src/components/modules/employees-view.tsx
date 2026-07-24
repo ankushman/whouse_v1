@@ -5,6 +5,7 @@ import { employees } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectTrigger,
@@ -31,6 +32,7 @@ import {
   Crown,
   Medal,
   Award,
+  Search,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -77,6 +79,7 @@ function productivityColor(p: number) {
 
 export function EmployeesView() {
   const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
+  const [searchQuery, setSearchQuery] = useState("")
 
   const warehouseList = useMemo(
     () => ["all", ...Array.from(new Set(employees.map((e) => e.warehouse)))],
@@ -85,10 +88,12 @@ export function EmployeesView() {
 
   const filtered = useMemo(
     () =>
-      warehouseFilter === "all"
-        ? employees
-        : employees.filter((e) => e.warehouse === warehouseFilter),
-    [warehouseFilter]
+      employees.filter((e) => {
+        if (warehouseFilter !== "all" && e.warehouse !== warehouseFilter) return false
+        if (searchQuery && !e.name.toLowerCase().includes(searchQuery.toLowerCase()) && !e.role.toLowerCase().includes(searchQuery.toLowerCase())) return false
+        return true
+      }),
+    [warehouseFilter, searchQuery]
   )
 
   const sorted = useMemo(
@@ -191,20 +196,36 @@ export function EmployeesView() {
               Performance Leaderboard
             </CardTitle>
           </div>
-          <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
-            <SelectTrigger className="w-[180px] h-9 text-sm">
-              <SelectValue placeholder="Filter warehouse" />
-            </SelectTrigger>
-            <SelectContent>
-              {warehouseList.map((wh) => (
-                <SelectItem key={wh} value={wh}>
-                  {wh === "all" ? "All Warehouses" : wh}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </CardHeader>
         <CardContent>
+          {/* Filter bar with search, warehouse select, and result count */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                placeholder="Search name or role..."
+                className="h-8 w-[200px] pl-8 text-xs"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
+              <SelectTrigger className="w-[180px] h-8 text-xs">
+                <SelectValue placeholder="Filter warehouse" />
+              </SelectTrigger>
+              <SelectContent>
+                {warehouseList.map((wh) => (
+                  <SelectItem key={wh} value={wh}>
+                    {wh === "all" ? "All Warehouses" : wh}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <div className="ml-auto text-xs text-muted-foreground">
+              {filtered.length} employee{filtered.length !== 1 ? "s" : ""} shown
+            </div>
+          </div>
+
           <ScrollArea className="max-h-[520px]">
             <Table>
               <TableHeader>
