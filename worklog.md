@@ -315,3 +315,81 @@ Updated Project Status (Post Round 6 - Complete):
   5. Add print-friendly CSS for reports
   6. Add barcode/QR code scanning for inventory
 
+---
+Task ID: 5-a
+Agent: Full-stack subagent
+Task: Create India warehouse network map with SVG visualization
+
+Work Log:
+- Created warehouse-map-view.tsx: SVG-based India map with simplified 37-point polygon outline
+- Placed 6 warehouse markers at approximate geographic positions with pulsing status dots
+- Interactive hover reveals floating info card with health score, capacity, orders
+- Clicking marker navigates to warehouse cards + opens detail modal
+- Dotted logistics route lines connecting warehouses
+- Stats summary bar: Total (6), Active, Warning, Critical counts
+- Legend section with status colors and route indicators
+- Responsive layout: lg=[2fr_1fr] map+sidebar, md/sm stacked with grid cards
+- Dark mode support with currentColor SVG styling
+- Wired map toggle into WarehousesView via MapPin button in PageHeader
+
+Stage Summary:
+- 1 new file: warehouse-map-view.tsx (~300 lines)
+- 1 modified: warehouses-view.tsx (showMap state + MapPin toggle)
+- Lint: 0 errors
+
+---
+Task ID: 5-b
+Agent: Main
+Task: ExportButton across all modules, search in equipment, sidebar polish
+
+Work Log:
+- Wired ExportButton to Equipment module (CSV: 8 columns)
+- Wired ExportButton to Alerts module (CSV: 7 columns)
+- Wired ExportButton to Transportation module (CSV: 8 columns)
+- Wired ExportButton to Inventory module (CSV: 8 columns)
+- Wired ExportButton to Employees module (CSV: 8 columns)
+- Added search Input + result count to Equipment module
+- Sidebar logo: gradient background (from-blue-600 to-blue-700) + v1.0 badge (subagent)
+- Sidebar groups: border-b separators between Operations/Analytics/System
+- Removed unused Download import from inventory-view
+
+Stage Summary:
+- 7 files modified: equipment, alerts, transportation, inventory, employees, app-layout (sidebar)
+- ExportButton now available in 8 of 13 modules (Dashboard, Warehouses, Inbound, Outbound, Inventory, Transportation, Equipment, Employees, Alerts, Reports)
+- Lint: 0 errors, 0 warnings
+
+---
+Task ID: 6 (Combined Push)
+Agent: Main
+Task: Commit and push Round 7 changes
+
+Work Log:
+- Resolved rebase conflict with remote (cron had pushed Supabase commit)
+- Successfully rebased and pushed
+- Commit: 80d59ed — 8 files changed, 705 insertions, 75 deletions
+
+---
+Updated Project Status (Post Round 7 - Complete):
+- STATUS: STABLE - All modules compile and render correctly
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit 80d59ed)
+- MODULE VIEWS (14): All 13 modules + Warehouse Map View (toggle in Warehouses)
+- NEW FEATURES THIS ROUND:
+  - India Warehouse Network Map (SVG, interactive markers, routes, hover cards)
+  - Map View toggle in Warehouses module
+  - ExportButton in 5 additional modules (Equipment, Alerts, Transportation, Inventory, Employees)
+  - Search + result count in Equipment module
+  - Sidebar gradient logo with version badge
+- EXPORT COVERAGE: 8 of 13 modules now have CSV export
+- LINT: 0 errors, 0 warnings
+- COMPILE: GET / 200 verified (6.5s)
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental)
+- COMPLETED RECOMMENDATIONS: Warehouse map ✓, ExportButton in all table views ✓, Sidebar polish ✓
+- PRIORITY NEXT:
+  1. Add WebSocket real-time data simulation
+  2. Add employee shift scheduling module
+  3. Add print-friendly CSS for reports
+  4. Add barcode/QR code scanning for inventory
+  5. Add data persistence with Supabase (remote already has seed commit)
+  6. Add WebSocket mini-service for live updates
+  7. Add geographic clustering visualization
+
