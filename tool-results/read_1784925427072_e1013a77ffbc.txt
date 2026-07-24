@@ -1,0 +1,674 @@
+     1→"use client";
+     2→
+     3→import { useMemo, useState, useCallback } from "react";
+     4→import { inventoryItems, warehouses } from "@/data/mock-data";
+     5→import { PageHeader } from "@/components/shared/page-header";
+     6→import { StatusBadge } from "@/components/shared/status-badge";
+     7→import { ExportButton, exportToCSV } from "@/components/shared/export-button";
+     8→import {
+     9→  ChartContainer,
+    10→  ChartTooltip,
+    11→  ChartTooltipContent,
+    12→  ChartLegend,
+    13→  ChartLegendContent,
+    14→} from "@/components/ui/chart";
+    15→import {
+    16→  PieChart,
+    17→  Pie,
+    18→  Cell,
+    19→  BarChart,
+    20→  Bar,
+    21→  AreaChart,
+    22→  Area,
+    23→  XAxis,
+    24→  YAxis,
+    25→  CartesianGrid,
+    26→} from "recharts";
+    27→import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+    28→import { Badge } from "@/components/ui/badge";
+    29→import { Button } from "@/components/ui/button";
+    30→import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+    31→import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+    32→import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+    33→import { Progress } from "@/components/ui/progress";
+    34→import { Input } from "@/components/ui/input";
+    35→import { Separator } from "@/components/ui/separator";
+    36→import {
+    37→  Package,
+    38→  AlertTriangle,
+    39→  TrendingUp,
+    40→  BarChart3,
+    41→  Filter,
+    42→  RefreshCw,
+    43→  Search,
+    44→  BrainCircuit,
+    45→} from "lucide-react";
+    46→
+    47→const ABC_COLORS = {
+    48→  A: "#3b82f6",
+    49→  B: "#f59e0b",
+    50→  C: "#94a3b8",
+    51→};
+    52→
+    53→const CATEGORY_COLORS: Record<string, string> = {
+    54→  Engine: "#3b82f6",
+    55→  Transmission: "#8b5cf6",
+    56→  Body: "#f59e0b",
+    57→  Electrical: "#10b981",
+    58→  Suspension: "#ef4444",
+    59→  Brakes: "#06b6d4",
+    60→};
+    61→
+    62→const abcChartConfig = {
+    63→  A: { label: "Class A (High Value)", color: "#3b82f6" },
+    64→  B: { label: "Class B (Medium Value)", color: "#f59e0b" },
+    65→  C: { label: "Class C (Low Value)", color: "#94a3b8" },
+    66→};
+    67→
+    68→const categoryChartConfig = {
+    69→  count: { label: "Items" },
+    70→  Engine: { label: "Engine", color: "#3b82f6" },
+    71→  Transmission: { label: "Transmission", color: "#8b5cf6" },
+    72→  Body: { label: "Body", color: "#f59e0b" },
+    73→  Electrical: { label: "Electrical", color: "#10b981" },
+    74→  Suspension: { label: "Suspension", color: "#ef4444" },
+    75→  Brakes: { label: "Brakes", color: "#06b6d4" },
+    76→};
+    77→
+    78→type WarehouseFilter = "All" | string;
+    79→type CategoryFilter = "All" | "Engine" | "Transmission" | "Body" | "Electrical" | "Suspension" | "Brakes";
+    80→type AbcFilter = "All" | "A" | "B" | "C";
+    81→
+    82→// Demand forecasting chart config and mock data
+    83→const forecastChartConfig = {
+    84→  actual: { label: "Actual Demand", color: "var(--chart-1)" },
+    85→  forecast: { label: "Forecasted Demand", color: "var(--chart-2)" },
+    86→};
+    87→
+    88→const forecastData = (() => {
+    89→  const base = [285, 312, 298, 340, 365, 378, 355, 320, 390, 410, 385, 362];
+    90→  return base.map((v, i) => {
+    91→    const variance = 1 + (Math.sin(i * 1.3) * 0.12 + Math.cos(i * 0.7) * 0.05);
+    92→    return {
+    93→      week: `W${i + 1}`,
+    94→      actual: i < 4 ? v : undefined,
+    95→      forecast: Math.round(v * variance),
+    96→    };
+    97→  });
+    98→})();
+    99→
+   100→export function InventoryView() {
+   101→  const [warehouseFilter, setWarehouseFilter] = useState<WarehouseFilter>("All");
+   102→  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("All");
+   103→  const [abcFilter, setAbcFilter] = useState<AbcFilter>("All");
+   104→  const [searchQuery, setSearchQuery] = useState("");
+   105→
+   106→  const filteredItems = useMemo(() => {
+   107→    return inventoryItems.filter((item) => {
+   108→      if (warehouseFilter !== "All" && item.warehouse !== warehouseFilter) return false;
+   109→      if (categoryFilter !== "All" && item.category !== categoryFilter) return false;
+   110→      if (abcFilter !== "All" && item.abcClass !== abcFilter) return false;
+   111→      if (searchQuery) {
+   112→        const q = searchQuery.toLowerCase();
+   113→        return (
+   114→          item.sku.toLowerCase().includes(q) ||
+   115→          item.partName.toLowerCase().includes(q) ||
+   116→          item.location.toLowerCase().includes(q)
+   117→        );
+   118→      }
+   119→      return true;
+   120→    });
+   121→  }, [warehouseFilter, categoryFilter, abcFilter, searchQuery]);
+   122→
+   123→  const summary = useMemo(() => {
+   124→    const totalSkus = inventoryItems.length;
+   125→    const totalItems = inventoryItems.reduce((s, i) => s + i.quantity, 0);
+   126→    const belowMin = inventoryItems.filter((i) => i.quantity < i.minStock);
+   127→    const accuracyItems = inventoryItems.filter((i) => i.variance === 0);
+   128→    const avgAccuracy =
+   129→      inventoryItems.length > 0
+   130→        ? ((accuracyItems.length / inventoryItems.length) * 100).toFixed(1)
+   131→        : "0";
+   132→    return { totalSkus, totalItems, belowMin, avgAccuracy };
+   133→  }, []);
+   134→
+   135→  const abcData = useMemo(() => {
+   136→    const counts: Record<string, number> = { A: 0, B: 0, C: 0 };
+   137→    filteredItems.forEach((item) => {
+   138→      counts[item.abcClass]++;
+   139→    });
+   140→    return [
+   141→      { name: "A", value: counts.A, fill: ABC_COLORS.A },
+   142→      { name: "B", value: counts.B, fill: ABC_COLORS.B },
+   143→      { name: "C", value: counts.C, fill: ABC_COLORS.C },
+   144→    ].filter((d) => d.value > 0);
+   145→  }, [filteredItems]);
+   146→
+   147→  const categoryData = useMemo(() => {
+   148→    const counts: Record<string, number> = {};
+   149→    filteredItems.forEach((item) => {
+   150→      counts[item.category] = (counts[item.category] || 0) + 1;
+   151→    });
+   152→    return Object.entries(counts)
+   153→      .map(([key, value]) => ({
+   154→        category: key,
+   155→        count: value,
+   156→        fill: CATEGORY_COLORS[key] || "#94a3b8",
+   157→      }))
+   158→      .sort((a, b) => b.count - a.count);
+   159→  }, [filteredItems]);
+   160→
+   161→  const stockAlerts = useMemo(() => {
+   162→    return inventoryItems.filter((item) => item.quantity < item.minStock);
+   163→  }, []);
+   164→
+   165→  const hasActiveFilters =
+   166→    warehouseFilter !== "All" || categoryFilter !== "All" || abcFilter !== "All";
+   167→
+   168→  const handleExportCSV = useCallback(() => {
+   169→    const data = filteredItems.map((item) => ({
+   170→      SKU: item.sku,
+   171→      "Part Name": item.partName,
+   172→      Category: item.category,
+   173→      Warehouse: item.warehouse,
+   174→      Quantity: item.quantity,
+   175→      "Min Stock": item.minStock,
+   176→      Variance: item.variance,
+   177→      "ABC Class": item.abcClass,
+   178→    }))
+   179→    exportToCSV(data, "inventory-data")
+   180→  }, [filteredItems])
+   181→
+   182→  return (
+   183→    <div className="space-y-6">
+   184→      <PageHeader
+   185→        title="Inventory Management"
+   186→        description="Track stock levels, accuracy and variance across warehouses"
+   187→        actions={
+   188→          <div className="flex items-center gap-2">
+   189→            <ExportButton onExportCSV={handleExportCSV} />
+   190→            <Button variant="outline" size="sm" className="gap-1.5">
+   191→              <RefreshCw className="h-3.5 w-3.5" />
+   192→              Refresh
+   193→            </Button>
+   194→          </div>
+   195→        }
+   196→      />
+   197→
+   198→      {/* Summary Cards */}
+   199→      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
+   200→        <Card className="card-depth card-accent-blue relative overflow-hidden">
+   201→          <CardContent className="p-4">
+   202→            <div className="flex items-center justify-between">
+   203→              <div>
+   204→                <p className="text-xs font-medium text-muted-foreground">Total SKUs</p>
+   205→                <p className="mt-1 text-2xl font-bold tracking-tight">
+   206→                  {summary.totalSkus}
+   207→                </p>
+   208→              </div>
+   209→              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+   210→                <Package className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+   211→              </div>
+   212→            </div>
+   213→          </CardContent>
+   214→        </Card>
+   215→
+   216→        <Card className="card-depth relative overflow-hidden">
+   217→          <CardContent className="p-4">
+   218→            <div className="flex items-center justify-between">
+   219→              <div>
+   220→                <p className="text-xs font-medium text-muted-foreground">Total Items</p>
+   221→                <p className="mt-1 text-2xl font-bold tracking-tight">
+   222→                  {summary.totalItems.toLocaleString()}
+   223→                </p>
+   224→              </div>
+   225→              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
+   226→                <BarChart3 className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+   227→              </div>
+   228→            </div>
+   229→          </CardContent>
+   230→        </Card>
+   231→
+   232→        <Card className="card-depth relative overflow-hidden border-red-200 dark:border-red-900">
+   233→          <CardContent className="p-4">
+   234→            <div className="flex items-center justify-between">
+   235→              <div>
+   236→                <p className="text-xs font-medium text-muted-foreground">
+   237→                  Below Min Stock
+   238→                </p>
+   239→                <p className="mt-1 text-2xl font-bold tracking-tight text-red-600 dark:text-red-400">
+   240→                  {summary.belowMin.length}
+   241→                </p>
+   242→              </div>
+   243→              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950">
+   244→                <AlertTriangle className="h-5 w-5 text-red-500" />
+   245→              </div>
+   246→            </div>
+   247→          </CardContent>
+   248→        </Card>
+   249→
+   250→        <Card className="card-depth relative overflow-hidden">
+   251→          <CardContent className="p-4">
+   252→            <div className="flex items-center justify-between">
+   253→              <div>
+   254→                <p className="text-xs font-medium text-muted-foreground">
+   255→                  Avg Accuracy
+   256→                </p>
+   257→                <p className="mt-1 text-2xl font-bold tracking-tight">
+   258→                  {summary.avgAccuracy}%
+   259→                </p>
+   260→              </div>
+   261→              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950">
+   262→                <TrendingUp className="h-5 w-5 text-emerald-500" />
+   263→              </div>
+   264→            </div>
+   265→          </CardContent>
+   266→        </Card>
+   267→      </div>
+   268→
+   269→      {/* Charts Row */}
+   270→      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+   271→        {/* ABC Classification */}
+   272→        <Card className="card-accent-green">
+   273→          <CardHeader className="pb-2">
+   274→            <CardTitle className="text-sm font-semibold">
+   275→              ABC Classification
+   276→            </CardTitle>
+   277→            <CardDescription className="text-xs">
+   278→              Distribution by value class (A = High, B = Medium, C = Low)
+   279→            </CardDescription>
+   280→          </CardHeader>
+   281→          <CardContent>
+   282→            <ChartContainer config={abcChartConfig} className="mx-auto h-[220px] w-full">
+   283→              <PieChart>
+   284→                <ChartTooltip content={<ChartTooltipContent />} />
+   285→                <Pie
+   286→                  data={abcData}
+   287→                  cx="50%"
+   288→                  cy="50%"
+   289→                  innerRadius={55}
+   290→                  outerRadius={85}
+   291→                  paddingAngle={4}
+   292→                  dataKey="value"
+   293→                  strokeWidth={0}
+   294→                >
+   295→                  {abcData.map((entry, index) => (
+   296→                    <Cell key={`cell-${index}`} fill={entry.fill} />
+   297→                  ))}
+   298→                </Pie>
+   299→                <ChartLegend content={<ChartLegendContent nameKey="name" />} />
+   300→              </PieChart>
+   301→            </ChartContainer>
+   302→          </CardContent>
+   303→        </Card>
+   304→
+   305→        {/* Category Distribution */}
+   306→        <Card className="card-accent-purple">
+   307→          <CardHeader className="pb-2">
+   308→            <CardTitle className="text-sm font-semibold">
+   309→              Category Distribution
+   310→            </CardTitle>
+   311→            <CardDescription className="text-xs">
+   312→              Inventory items per part category
+   313→            </CardDescription>
+   314→          </CardHeader>
+   315→          <CardContent>
+   316→            <ChartContainer config={categoryChartConfig} className="h-[220px] w-full">
+   317→              <BarChart data={categoryData} layout="vertical" margin={{ left: 0, right: 16, top: 4, bottom: 4 }}>
+   318→                <CartesianGrid horizontal={false} strokeDasharray="3 3" />
+   319→                <XAxis type="number" tick={{ fontSize: 11 }} />
+   320→                <YAxis
+   321→                  dataKey="category"
+   322→                  type="category"
+   323→                  width={90}
+   324→                  tick={{ fontSize: 11 }}
+   325→                />
+   326→                <ChartTooltip content={<ChartTooltipContent />} />
+   327→                <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={24}>
+   328→                  {categoryData.map((entry, index) => (
+   329→                    <Cell key={`bar-${index}`} fill={entry.fill} />
+   330→                  ))}
+   331→                </Bar>
+   332→              </BarChart>
+   333→            </ChartContainer>
+   334→          </CardContent>
+   335→        </Card>
+   336→      </div>
+   337→
+   338→      {/* Demand Forecasting Chart */}
+   339→      <Card className="card-depth chart-card card-accent-blue">
+   340→        <CardHeader className="pb-2">
+   341→          <div className="flex items-center justify-between">
+   342→            <div className="flex items-center gap-2">
+   343→              <BrainCircuit className="size-4 text-muted-foreground" />
+   344→              <CardTitle className="text-sm font-semibold">Demand Forecasting</CardTitle>
+   345→            </div>
+   346→            <Badge variant="outline" className="text-[10px] font-normal text-emerald-600 border-emerald-200 dark:text-emerald-400 dark:border-emerald-800">
+   347→              Forecast Accuracy: 94.2%
+   348→            </Badge>
+   349→          </div>
+   350→          <CardDescription className="text-xs">
+   351→            Actual vs forecasted demand for the next 12 weeks
+   352→          </CardDescription>
+   353→        </CardHeader>
+   354→        <CardContent>
+   355→          <ChartContainer config={forecastChartConfig} className="h-[240px] w-full">
+   356→            <AreaChart data={forecastData} margin={{ left: 0, right: 8, top: 4, bottom: 0 }}>
+   357→              <defs>
+   358→                <linearGradient id="actualGradient" x1="0" y1="0" x2="0" y2="1">
+   359→                  <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.3} />
+   360→                  <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+   361→                </linearGradient>
+   362→                <linearGradient id="forecastGradient" x1="0" y1="0" x2="0" y2="1">
+   363→                  <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.2} />
+   364→                  <stop offset="95%" stopColor="var(--chart-2)" stopOpacity={0} />
+   365→                </linearGradient>
+   366→              </defs>
+   367→              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+   368→              <XAxis dataKey="week" tick={{ fontSize: 11 }} tickLine={false} axisLine={false} />
+   369→              <YAxis tick={{ fontSize: 11 }} tickLine={false} axisLine={false} />
+   370→              <ChartTooltip content={<ChartTooltipContent />} />
+   371→              <ChartLegend content={<ChartLegendContent />} />
+   372→              <Area
+   373→                type="monotone"
+   374→                dataKey="actual"
+   375→                stroke="var(--chart-1)"
+   376→                strokeWidth={2}
+   377→                fill="url(#actualGradient)"
+   378→                connectNulls={false}
+   379→              />
+   380→              <Area
+   381→                type="monotone"
+   382→                dataKey="forecast"
+   383→                stroke="var(--chart-2)"
+   384→                strokeWidth={2}
+   385→                strokeDasharray="6 3"
+   386→                fill="url(#forecastGradient)"
+   387→                connectNulls={false}
+   388→              />
+   389→            </AreaChart>
+   390→          </ChartContainer>
+   391→        </CardContent>
+   392→      </Card>
+   393→
+   394→      <Separator />
+   395→
+   396→      {/* Filter Bar */}
+   397→      <div className="filter-bar flex flex-col sm:flex-row sm:items-center sm:justify-between">
+   398→        <div className="flex flex-wrap items-center gap-2">
+   399→          <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+   400→            <Filter className="h-3.5 w-3.5" />
+   401→            Filters
+   402→          </div>
+   403→          <Select value={warehouseFilter} onValueChange={(v) => setWarehouseFilter(v as WarehouseFilter)}>
+   404→            <SelectTrigger className="h-8 w-[150px] text-xs">
+   405→              <SelectValue placeholder="Warehouse" />
+   406→            </SelectTrigger>
+   407→            <SelectContent>
+   408→              <SelectItem value="All">All Warehouses</SelectItem>
+   409→              {warehouses.map((w) => (
+   410→                <SelectItem key={w.id} value={w.city}>
+   411→                  {w.city}
+   412→                </SelectItem>
+   413→              ))}
+   414→            </SelectContent>
+   415→          </Select>
+   416→          <Select value={categoryFilter} onValueChange={(v) => setCategoryFilter(v as CategoryFilter)}>
+   417→            <SelectTrigger className="h-8 w-[140px] text-xs">
+   418→              <SelectValue placeholder="Category" />
+   419→            </SelectTrigger>
+   420→            <SelectContent>
+   421→              <SelectItem value="All">All Categories</SelectItem>
+   422→              <SelectItem value="Engine">Engine</SelectItem>
+   423→              <SelectItem value="Transmission">Transmission</SelectItem>
+   424→              <SelectItem value="Body">Body</SelectItem>
+   425→              <SelectItem value="Electrical">Electrical</SelectItem>
+   426→              <SelectItem value="Suspension">Suspension</SelectItem>
+   427→              <SelectItem value="Brakes">Brakes</SelectItem>
+   428→            </SelectContent>
+   429→          </Select>
+   430→          <Select value={abcFilter} onValueChange={(v) => setAbcFilter(v as AbcFilter)}>
+   431→            <SelectTrigger className="h-8 w-[120px] text-xs">
+   432→              <SelectValue placeholder="ABC Class" />
+   433→            </SelectTrigger>
+   434→            <SelectContent>
+   435→              <SelectItem value="All">All Classes</SelectItem>
+   436→              <SelectItem value="A">Class A</SelectItem>
+   437→              <SelectItem value="B">Class B</SelectItem>
+   438→              <SelectItem value="C">Class C</SelectItem>
+   439→            </SelectContent>
+   440→          </Select>
+   441→          {hasActiveFilters && (
+   442→            <Button
+   443→              variant="ghost"
+   444→              size="sm"
+   445→              className="h-8 text-xs text-muted-foreground"
+   446→              onClick={() => {
+   447→                setWarehouseFilter("All");
+   448→                setCategoryFilter("All");
+   449→                setAbcFilter("All");
+   450→              }}
+   451→            >
+   452→              Clear all
+   453→            </Button>
+   454→          )}
+   455→        </div>
+   456→        <div className="relative">
+   457→          <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+   458→          <Input
+   459→            placeholder="Search SKU, part, location..."
+   460→            value={searchQuery}
+   461→            onChange={(e) => setSearchQuery(e.target.value)}
+   462→            className="h-8 w-[220px] pl-8 text-xs"
+   463→          />
+   464→        </div>
+   465→      </div>
+   466→
+   467→      {/* Tabs: Variance Table + Stock Alerts */}
+   468→      <Tabs defaultValue="variance" className="w-full">
+   469→        <TabsList className="h-9">
+   470→          <TabsTrigger value="variance" className="text-xs">
+   471→            Variance Table
+   472→            {filteredItems.length > 0 && (
+   473→              <Badge variant="secondary" className="ml-1.5 h-4 px-1.5 text-[10px]">
+   474→                {filteredItems.length}
+   475→              </Badge>
+   476→            )}
+   477→          </TabsTrigger>
+   478→          <TabsTrigger value="alerts" className="text-xs">
+   479→            Stock Alerts
+   480→            {stockAlerts.length > 0 && (
+   481→              <Badge variant="destructive" className="ml-1.5 h-4 px-1.5 text-[10px]">
+   482→                {stockAlerts.length}
+   483→              </Badge>
+   484→            )}
+   485→          </TabsTrigger>
+   486→        </TabsList>
+   487→
+   488→        {/* Variance Table */}
+   489→        <TabsContent value="variance" className="mt-4">
+   490→          <Card>
+   491→            <CardContent className="p-0">
+   492→              <div className="table-container max-h-[480px] overflow-y-auto">
+   493→                <Table className="table-row-hover">
+   494→                  <TableHeader>
+   495→                    <TableRow className="hover:bg-transparent">
+   496→                      <TableHead className="w-[110px] text-xs">SKU</TableHead>
+   497→                      <TableHead className="min-w-[200px] text-xs">Part Name</TableHead>
+   498→                      <TableHead className="w-[100px] text-xs">Category</TableHead>
+   499→                      <TableHead className="w-[90px] text-xs">Warehouse</TableHead>
+   500→                      <TableHead className="w-[75px] text-right text-xs">Quantity</TableHead>
+   501→                      <TableHead className="w-[75px] text-right text-xs">Last Count</TableHead>
+   502→                      <TableHead className="w-[75px] text-right text-xs">Variance</TableHead>
+   503→                      <TableHead className="w-[60px] text-right text-xs">Days</TableHead>
+   504→                    </TableRow>
+   505→                  </TableHeader>
+   506→                  <TableBody>
+   507→                    {filteredItems.map((item) => {
+   508→                      const isAlert =
+   509→                        item.variance > 0 || item.quantity < item.minStock;
+   510→                      const stockPercent = Math.min(
+   511→                        100,
+   512→                        Math.round((item.quantity / item.maxStock) * 100)
+   513→                      );
+   514→                      return (
+   515→                        <TableRow
+   516→                          key={item.id}
+   517→                          className={isAlert ? "bg-red-50/60 dark:bg-red-950/30" : ""}
+   518→                        >
+   519→                          <TableCell className="font-mono text-xs font-medium">
+   520→                            {item.sku}
+   521→                          </TableCell>
+   522→                          <TableCell>
+   523→                            <div className="max-w-[220px]">
+   524→                              <p className="truncate text-xs font-medium">
+   525→                                {item.partName}
+   526→                              </p>
+   527→                              <p className="text-[10px] text-muted-foreground">
+   528→                                {item.location}
+   529→                              </p>
+   530→                            </div>
+   531→                          </TableCell>
+   532→                          <TableCell>
+   533→                            <Badge
+   534→                              variant="outline"
+   535→                              className="text-[10px] font-normal"
+   536→                            >
+   537→                              {item.category}
+   538→                            </Badge>
+   539→                          </TableCell>
+   540→                          <TableCell className="text-xs">
+   541→                            {item.warehouse}
+   542→                          </TableCell>
+   543→                          <TableCell className="text-right">
+   544→                            <div className="flex flex-col items-end gap-1">
+   545→                              <span className="text-xs font-semibold">
+   546→                                {item.quantity}
+   547→                              </span>
+   548→                              <Progress
+   549→                                value={stockPercent}
+   550→                                className="h-1 w-14"
+   551→                              />
+   552→                            </div>
+   553→                          </TableCell>
+   554→                          <TableCell className="text-right text-xs">
+   555→                            {item.lastCount}
+   556→                          </TableCell>
+   557→                          <TableCell className="text-right">
+   558→                            <span
+   559→                              className={`text-xs font-semibold ${
+   560→                                item.variance > 0
+   561→                                  ? "text-red-600 dark:text-red-400"
+   562→                                  : item.variance < 0
+   563→                                    ? "text-amber-600 dark:text-amber-400"
+   564→                                    : "text-muted-foreground"
+   565→                              }`}
+   566→                            >
+   567→                              {item.variance > 0
+   568→                                ? `+${item.variance}`
+   569→                                : item.variance}
+   570→                            </span>
+   571→                          </TableCell>
+   572→                          <TableCell className="text-right">
+   573→                            <span
+   574→                              className={`text-xs ${
+   575→                                item.daysSinceLastCount > 7
+   576→                                  ? "text-amber-600 dark:text-amber-400 font-medium"
+   577→                                  : "text-muted-foreground"
+   578→                              }`}
+   579→                            >
+   580→                              {item.daysSinceLastCount}d
+   581→                            </span>
+   582→                          </TableCell>
+   583→                        </TableRow>
+   584→                      );
+   585→                    })}
+   586→                    {filteredItems.length === 0 && (
+   587→                      <TableRow>
+   588→                        <TableCell colSpan={8} className="h-24 text-center text-xs text-muted-foreground">
+   589→                          No items match the current filters.
+   590→                        </TableCell>
+   591→                      </TableRow>
+   592→                    )}
+   593→                  </TableBody>
+   594→                </Table>
+   595→              </div>
+   596→            </CardContent>
+   597→          </Card>
+   598→        </TabsContent>
+   599→
+   600→        {/* Stock Alerts */}
+   601→        <TabsContent value="alerts" className="mt-4">
+   602→          {stockAlerts.length === 0 ? (
+   603→            <Card>
+   604→              <CardContent className="flex flex-col items-center justify-center py-12">
+   605→                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950">
+   606→                  <Package className="h-6 w-6 text-emerald-500" />
+   607→                </div>
+   608→                <p className="mt-3 text-sm font-medium">All stock levels are healthy</p>
+   609→                <p className="mt-1 text-xs text-muted-foreground">
+   610→                  No items are currently below minimum stock levels.
+   611→                </p>
+   612→              </CardContent>
+   613→            </Card>
+   614→          ) : (
+   615→            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+   616→              {stockAlerts.map((item) => {
+   617→                const deficit = item.minStock - item.quantity;
+   618→                const stockPercent = Math.round(
+   619→                  (item.quantity / item.minStock) * 100
+   620→                );
+   621→                return (
+   622→                  <Card
+   623→                    key={item.id}
+   624→                    className="border-red-200 dark:border-red-900"
+   625→                  >
+   626→                    <CardContent className="p-4">
+   627→                      <div className="flex items-start justify-between gap-2">
+   628→                        <div className="min-w-0 flex-1">
+   629→                          <div className="flex items-center gap-2">
+   630→                            <AlertTriangle className="h-4 w-4 shrink-0 text-red-500" />
+   631→                            <p className="truncate text-xs font-semibold">
+   632→                              {item.partName}
+   633→                            </p>
+   634→                          </div>
+   635→                          <p className="mt-1 font-mono text-[10px] text-muted-foreground">
+   636→                            {item.sku}
+   637→                          </p>
+   638→                        </div>
+   639→                        <Badge
+   640→                          variant="outline"
+   641→                          className="shrink-0 text-[10px]"
+   642→                        >
+   643→                          {item.abcClass}
+   644→                        </Badge>
+   645→                      </div>
+   646→                      <div className="mt-3 space-y-2">
+   647→                        <div className="flex items-center justify-between text-[11px]">
+   648→                          <span className="text-muted-foreground">
+   649→                            Current / Min
+   650→                          </span>
+   651→                          <span className="font-semibold">
+   652→                            {item.quantity} / {item.minStock}
+   653→                          </span>
+   654→                        </div>
+   655→                        <Progress value={stockPercent} className="h-1.5" />
+   656→                        <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+   657→                          <span>{item.warehouse} · {item.category}</span>
+   658→                          <span className="font-medium text-red-600 dark:text-red-400">
+   659→                            -{deficit} units short
+   660→                          </span>
+   661→                        </div>
+   662→                      </div>
+   663→                    </CardContent>
+   664→                  </Card>
+   665→                );
+   666→              })}
+   667→            </div>
+   668→          )}
+   669→        </TabsContent>
+   670→      </Tabs>
+   671→    </div>
+   672→  );
+   673→}
+   674→

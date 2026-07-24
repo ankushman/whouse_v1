@@ -115,7 +115,7 @@ export function OutboundView() {
           { label: "Dispatched", value: summary.dispatched, color: "bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400" },
           { label: "Delivered", value: summary.delivered, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
-          <Card key={item.label} className="rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardContent className="p-3 text-center">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
               <p className={cn("mt-1 text-xl font-bold", textColorMap[item.label])}>{item.value}</p>
@@ -140,7 +140,7 @@ export function OutboundView() {
       </Tabs>
 
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="filter-bar flex flex-wrap items-center gap-3">
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -170,7 +170,8 @@ export function OutboundView() {
       <Card className="rounded-xl border-border/60 shadow-sm overflow-hidden">
         <CardContent className="p-0">
           <ScrollArea>
-            <Table>
+            <div className="table-container">
+            <Table className="table-row-hover">
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="text-xs">Invoice</TableHead>
@@ -232,6 +233,7 @@ export function OutboundView() {
                 })}
               </TableBody>
             </Table>
+            </div>
           </ScrollArea>
         </CardContent>
       </Card>

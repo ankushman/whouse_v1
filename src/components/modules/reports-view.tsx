@@ -168,7 +168,7 @@ export function ReportsView() {
           const hasCSVExport = !!exportHandlers.onExportCSV
 
           return (
-            <Card key={report.id} className="group rounded-xl border-border/60 shadow-sm transition-all hover:shadow-md hover:border-border">
+            <Card key={report.id} className="card-depth data-card group rounded-xl border-border/60 shadow-sm transition-all hover:shadow-md hover:border-border">
               <CardHeader className="pb-3">
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400">

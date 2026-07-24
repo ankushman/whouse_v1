@@ -132,7 +132,7 @@ export function AlertsView() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="filter-bar flex flex-wrap items-center gap-3">
         <Select value={severityFilter} onValueChange={setSeverityFilter}>
           <SelectTrigger className="w-[160px] h-8 text-xs">
             <SelectValue placeholder="Severity" />

@@ -955,6 +955,99 @@
   );
 }
 
+/* ── Dashboard Header Gradient ───────────────────── */
+
+.dashboard-header-gradient {
+  background: linear-gradient(
+    135deg,
+    oklch(0.985 0.002 250) 0%,
+    oklch(0.97 0.008 200) 50%,
+    oklch(0.985 0.003 280) 100%
+  );
+}
+.dark .dashboard-header-gradient {
+  background: linear-gradient(
+    135deg,
+    oklch(0.15 0.01 250) 0%,
+    oklch(0.13 0.015 200) 50%,
+    oklch(0.15 0.01 280) 100%
+  );
+}
+
+/* ── Stat Card Hover Lift ────────────────────────── */
+
+.stat-card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px oklch(0 0 0 / 0.1);
+}
+.dark .stat-card-lift:hover {
+  box-shadow: 0 8px 16px -4px oklch(0 0 0 / 0.3);
+}
+
+/* ── Animated Gradient Text ──────────────────────── */
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.488 0.243 264), oklch(0.6 0.2 160), oklch(0.488 0.243 264));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+
+/* ── Skeleton Shimmer (Dark Mode) ────────────────── */
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(1 0 0 / 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+.dark .skeleton-shimmer::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(1 0 0 / 0.06) 50%,
+    transparent 100%
+  );
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ── Dock Board Grid ─────────────────────────────── */
+
+.dock-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+@media (min-width: 1024px) {
+  .dock-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
 /* ── Print Styles ──────────────────────────────────────────── */
 @media print {
   /* Hide interactive elements */
@@ -974,30 +1067,38 @@
     margin: 0 !important;
   }
 
-  /* Clean cards for print */
-  .card {
-    break-inside: avoid;
-    border: 1px solid #ddd !important;
+  /* Card borders for print */
+  .card, .rounded-xl {
+    border: 1px solid #e0e0e0 !important;
     box-shadow: none !important;
+    break-inside: avoid;
   }
 
-  /* Tables print well */
-  table {
-    font-size: 10pt !important;
+  /* Remove dark mode */
+  .dark {
+    color-scheme: light !important;
   }
 
-  thead {
-    background: #f5f5f5 !important;
-  }
-
-  /* Force dark mode to light for print */
   :root {
     color-scheme: light !important;
   }
 
   /* Page headers */
-  h1, h2, h3 {
+  h1, h2, h3, h4 {
     page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Avoid breaking inside cards and tables */
+  .card, .rounded-xl, table, tr, td, th {
+    break-inside: avoid;
+  }
+
+  /* Hide interactive elements */
+  button, nav, [role="navigation"], [role="tablist"], [role="menubar"],
+  [data-radix-popper-content-wrapper], .sidebar, .mobile-bottom-nav,
+  .filter-bar, input, select, .export-button, .scroll-area-viewport {
+    display: none !important;
   }
 
   /* Show link URLs */
@@ -1010,5 +1111,54 @@
   body {
     background: white !important;
     color: black !important;
+    font-size: 11pt;
+  }
+
+  /* Card borders for print */
+  .card, .rounded-xl {
+    border: 1px solid #e0e0e0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Table borders for print */
+  table {
+    border-collapse: collapse !important;
+  }
+  th, td {
+    border: 1px solid #d0d0d0 !important;
+  }
+  th {
+    background: #f5f5f5 !important;
+  }
+
+  /* Show print header on reports */
+  .print-header {
+    display: flex !important;
+  }
+
+  /* Remove hover effects */
+  .hover\:bg-muted\/40, .group:hover {
+    background: inherit !important;
+  }
+
+  /* Ensure adequate margins */
+  @page {
+    margin: 1.5cm;
+    @top-right {
+      content: "AutoFlow Logistics — Confidential";
+      font-size: 8pt;
+      color: #999;
+    }
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 8pt;
+      color: #999;
+    }
+  }
+
+  /* Charts should be visible */
+  svg, canvas {
+    max-width: 100% !important;
+    break-inside: avoid;
   }
 }

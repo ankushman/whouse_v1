@@ -102,7 +102,7 @@ interface StatPillProps {
 
 function StatPill({ icon, label, value, color, sublabel }: StatPillProps) {
   return (
-    <Card className="py-0 gap-0">
+    <Card className="card-depth py-0 gap-0">
       <CardContent className="flex items-center gap-3 py-3 px-4">
         <div className={cn("flex size-9 shrink-0 items-center justify-center rounded-lg", color)}>
           {icon}

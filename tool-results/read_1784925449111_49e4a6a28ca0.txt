@@ -1,0 +1,1015 @@
+     1→@import "tailwindcss";
+     2→@import "tw-animate-css";
+     3→
+     4→@custom-variant dark (&:is(.dark *));
+     5→
+     6→@theme inline {
+     7→  --color-background: var(--background);
+     8→  --color-foreground: var(--foreground);
+     9→  --font-sans: var(--font-geist-sans);
+    10→  --font-mono: var(--font-geist-mono);
+    11→  --color-sidebar-ring: var(--sidebar-ring);
+    12→  --color-sidebar-border: var(--sidebar-border);
+    13→  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    14→  --color-sidebar-accent: var(--sidebar-accent);
+    15→  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    16→  --color-sidebar-primary: var(--sidebar-primary);
+    17→  --color-sidebar-foreground: var(--sidebar-foreground);
+    18→  --color-sidebar: var(--sidebar);
+    19→  --color-chart-5: var(--chart-5);
+    20→  --color-chart-4: var(--chart-4);
+    21→  --color-chart-3: var(--chart-3);
+    22→  --color-chart-2: var(--chart-2);
+    23→  --color-chart-1: var(--chart-1);
+    24→  --color-ring: var(--ring);
+    25→  --color-input: var(--input);
+    26→  --color-border: var(--border);
+    27→  --color-destructive: var(--destructive);
+    28→  --color-accent-foreground: var(--accent-foreground);
+    29→  --color-accent: var(--accent);
+    30→  --color-muted-foreground: var(--muted-foreground);
+    31→  --color-muted: var(--muted);
+    32→  --color-secondary-foreground: var(--secondary-foreground);
+    33→  --color-secondary: var(--secondary);
+    34→  --color-primary-foreground: var(--primary-foreground);
+    35→  --color-primary: var(--primary);
+    36→  --color-popover-foreground: var(--popover-foreground);
+    37→  --color-popover: var(--popover);
+    38→  --color-card-foreground: var(--card-foreground);
+    39→  --color-card: var(--card);
+    40→  --color-success: var(--success);
+    41→  --color-warning: var(--warning);
+    42→  --radius-sm: calc(var(--radius) - 4px);
+    43→  --radius-md: calc(var(--radius) - 2px);
+    44→  --radius-lg: var(--radius);
+    45→  --radius-xl: calc(var(--radius) + 4px);
+    46→}
+    47→
+    48→:root {
+    49→  --radius: 0.625rem;
+    50→  --background: oklch(0.985 0.001 250);
+    51→  --foreground: oklch(0.145 0.015 250);
+    52→  --card: oklch(1 0 0);
+    53→  --card-foreground: oklch(0.145 0.015 250);
+    54→  --popover: oklch(1 0 0);
+    55→  --popover-foreground: oklch(0.145 0.015 250);
+    56→  --primary: oklch(0.488 0.243 264);
+    57→  --primary-foreground: oklch(0.985 0 0);
+    58→  --secondary: oklch(0.96 0.01 250);
+    59→  --secondary-foreground: oklch(0.205 0.015 250);
+    60→  --muted: oklch(0.96 0.005 250);
+    61→  --muted-foreground: oklch(0.5 0.02 250);
+    62→  --accent: oklch(0.96 0.01 250);
+    63→  --accent-foreground: oklch(0.205 0.015 250);
+    64→  --destructive: oklch(0.577 0.245 27.325);
+    65→  --success: oklch(0.627 0.194 149);
+    66→  --warning: oklch(0.795 0.184 86);
+    67→  --border: oklch(0.912 0.005 250);
+    68→  --input: oklch(0.912 0.005 250);
+    69→  --ring: oklch(0.488 0.243 264);
+    70→  --chart-1: oklch(0.488 0.243 264);
+    71→  --chart-2: oklch(0.627 0.194 149);
+    72→  --chart-3: oklch(0.795 0.184 86);
+    73→  --chart-4: oklch(0.646 0.222 41.116);
+    74→  --chart-5: oklch(0.577 0.245 27.325);
+    75→  --sidebar: oklch(0.975 0.002 250);
+    76→  --sidebar-foreground: oklch(0.205 0.015 250);
+    77→  --sidebar-primary: oklch(0.488 0.243 264);
+    78→  --sidebar-primary-foreground: oklch(0.985 0 0);
+    79→  --sidebar-accent: oklch(0.96 0.01 250);
+    80→  --sidebar-accent-foreground: oklch(0.205 0.015 250);
+    81→  --sidebar-border: oklch(0.912 0.005 250);
+    82→  --sidebar-ring: oklch(0.488 0.243 264);
+    83→}
+    84→
+    85→.dark {
+    86→  --background: oklch(0.13 0.015 250);
+    87→  --foreground: oklch(0.96 0.005 250);
+    88→  --card: oklch(0.18 0.015 250);
+    89→  --card-foreground: oklch(0.96 0.005 250);
+    90→  --popover: oklch(0.18 0.015 250);
+    91→  --popover-foreground: oklch(0.96 0.005 250);
+    92→  --primary: oklch(0.588 0.243 264);
+    93→  --primary-foreground: oklch(0.985 0 0);
+    94→  --secondary: oklch(0.23 0.015 250);
+    95→  --secondary-foreground: oklch(0.96 0.005 250);
+    96→  --muted: oklch(0.23 0.015 250);
+    97→  --muted-foreground: oklch(0.65 0.02 250);
+    98→  --accent: oklch(0.23 0.015 250);
+    99→  --accent-foreground: oklch(0.96 0.005 250);
+   100→  --destructive: oklch(0.637 0.237 22.5);
+   101→  --success: oklch(0.667 0.194 149);
+   102→  --warning: oklch(0.815 0.184 86);
+   103→  --border: oklch(0.28 0.015 250);
+   104→  --input: oklch(0.28 0.015 250);
+   105→  --ring: oklch(0.588 0.243 264);
+   106→  --chart-1: oklch(0.588 0.243 264);
+   107→  --chart-2: oklch(0.667 0.194 149);
+   108→  --chart-3: oklch(0.815 0.184 86);
+   109→  --chart-4: oklch(0.696 0.222 41.116);
+   110→  --chart-5: oklch(0.637 0.237 22.5);
+   111→  --sidebar: oklch(0.16 0.015 250);
+   112→  --sidebar-foreground: oklch(0.96 0.005 250);
+   113→  --sidebar-primary: oklch(0.588 0.243 264);
+   114→  --sidebar-primary-foreground: oklch(0.985 0 0);
+   115→  --sidebar-accent: oklch(0.23 0.015 250);
+   116→  --sidebar-accent-foreground: oklch(0.96 0.005 250);
+   117→  --sidebar-border: oklch(0.28 0.015 250);
+   118→  --sidebar-ring: oklch(0.588 0.243 264);
+   119→}
+   120→
+   121→@layer base {
+   122→  * {
+   123→    @apply border-border outline-ring/50;
+   124→  }
+   125→  html {
+   126→    scroll-behavior: smooth;
+   127→  }
+   128→  body {
+   129→    @apply bg-background text-foreground;
+   130→    -webkit-font-smoothing: antialiased;
+   131→    -moz-osx-font-smoothing: grayscale;
+   132→  }
+   133→}
+   134→
+   135→/* Custom scrollbar */
+   136→@layer base {
+   137→  ::-webkit-scrollbar {
+   138→    width: 6px;
+   139→    height: 6px;
+   140→  }
+   141→  ::-webkit-scrollbar-track {
+   142→    background: transparent;
+   143→  }
+   144→  ::-webkit-scrollbar-thumb {
+   145→    background: oklch(0.7 0.01 250);
+   146→    border-radius: 3px;
+   147→  }
+   148→  ::-webkit-scrollbar-thumb:hover {
+   149→    background: oklch(0.6 0.01 250);
+   150→  }
+   151→  .dark ::-webkit-scrollbar-thumb {
+   152→    background: oklch(0.35 0.01 250);
+   153→  }
+   154→  .dark ::-webkit-scrollbar-thumb:hover {
+   155→    background: oklch(0.45 0.01 250);
+   156→  }
+   157→}
+   158→
+   159→/* ── Animations ──────────────────────────────────────────── */
+   160→
+   161→@keyframes fade-in-up {
+   162→  from {
+   163→    opacity: 0;
+   164→    transform: translateY(8px);
+   165→  }
+   166→  to {
+   167→    opacity: 1;
+   168→    transform: translateY(0);
+   169→  }
+   170→}
+   171→
+   172→@keyframes fade-in {
+   173→  from { opacity: 0; }
+   174→  to { opacity: 1; }
+   175→}
+   176→
+   177→@keyframes scale-in {
+   178→  from {
+   179→    opacity: 0;
+   180→    transform: scale(0.95);
+   181→  }
+   182→  to {
+   183→    opacity: 1;
+   184→    transform: scale(1);
+   185→  }
+   186→}
+   187→
+   188→@keyframes slide-in-right {
+   189→  from {
+   190→    opacity: 0;
+   191→    transform: translateX(12px);
+   192→  }
+   193→  to {
+   194→    opacity: 1;
+   195→    transform: translateX(0);
+   196→  }
+   197→}
+   198→
+   199→@keyframes shimmer {
+   200→  0% { background-position: -200% 0; }
+   201→  100% { background-position: 200% 0; }
+   202→}
+   203→
+   204→@keyframes pulse-subtle {
+   205→  0%, 100% { opacity: 1; }
+   206→  50% { opacity: 0.7; }
+   207→}
+   208→
+   209→@keyframes counter-up {
+   210→  from { opacity: 0; transform: translateY(4px); }
+   211→  to { opacity: 1; transform: translateY(0); }
+   212→}
+   213→
+   214→/* Utility animation classes */
+   215→.animate-fade-in-up {
+   216→  animation: fade-in-up 0.4s ease-out both;
+   217→}
+   218→
+   219→.animate-fade-in {
+   220→  animation: fade-in 0.3s ease-out both;
+   221→}
+   222→
+   223→.animate-scale-in {
+   224→  animation: scale-in 0.25s ease-out both;
+   225→}
+   226→
+   227→.animate-slide-in-right {
+   228→  animation: slide-in-right 0.35s ease-out both;
+   229→}
+   230→
+   231→.animate-pulse-subtle {
+   232→  animation: pulse-subtle 2s ease-in-out infinite;
+   233→}
+   234→
+   235→/* Staggered grid children animation */
+   236→.stagger-children > * {
+   237→  animation: fade-in-up 0.4s ease-out both;
+   238→}
+   239→
+   240→.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+   241→.stagger-children > *:nth-child(2) { animation-delay: 40ms; }
+   242→.stagger-children > *:nth-child(3) { animation-delay: 80ms; }
+   243→.stagger-children > *:nth-child(4) { animation-delay: 120ms; }
+   244→.stagger-children > *:nth-child(5) { animation-delay: 160ms; }
+   245→.stagger-children > *:nth-child(6) { animation-delay: 200ms; }
+   246→.stagger-children > *:nth-child(7) { animation-delay: 240ms; }
+   247→.stagger-children > *:nth-child(8) { animation-delay: 280ms; }
+   248→.stagger-children > *:nth-child(9) { animation-delay: 320ms; }
+   249→.stagger-children > *:nth-child(10) { animation-delay: 360ms; }
+   250→.stagger-children > *:nth-child(11) { animation-delay: 400ms; }
+   251→.stagger-children > *:nth-child(12) { animation-delay: 440ms; }
+   252→
+   253→/* Skeleton shimmer effect */
+   254→.skeleton-shimmer {
+   255→  background: linear-gradient(
+   256→    90deg,
+   257→    oklch(0.935 0.005 250) 25%,
+   258→    oklch(0.96 0.005 250) 50%,
+   259→    oklch(0.935 0.005 250) 75%
+   260→  );
+   261→  background-size: 200% 100%;
+   262→  animation: shimmer 1.5s infinite;
+   263→}
+   264→
+   265→.dark .skeleton-shimmer {
+   266→  background: linear-gradient(
+   267→    90deg,
+   268→    oklch(0.22 0.015 250) 25%,
+   269→    oklch(0.26 0.015 250) 50%,
+   270→    oklch(0.22 0.015 250) 75%
+   271→  );
+   272→  background-size: 200% 100%;
+   273→}
+   274→
+   275→/* ── Focus Styles ───────────────────────────────────────── */
+   276→
+   277→@layer base {
+   278→  :focus-visible {
+   279→    outline: 2px solid oklch(0.488 0.243 264);
+   280→    outline-offset: 2px;
+   281→    border-radius: 4px;
+   282→  }
+   283→  .dark :focus-visible {
+   284→    outline-color: oklch(0.588 0.243 264);
+   285→  }
+   286→}
+   287→
+   288→/* ── Table Enhancements ──────────────────────────────────── */
+   289→
+   290→@layer base {
+   291→  /* Sticky table headers */
+   292→  thead th {
+   293→    position: sticky;
+   294→    top: 0;
+   295→    z-index: 10;
+   296→    background: oklch(1 0 0);
+   297→  }
+   298→  .dark thead th {
+   299→    background: oklch(0.18 0.015 250);
+   300→  }
+   301→}
+   302→
+   303→/* ── Card Surface Styles ───────────────────────────────── */
+   304→
+   305→/* Glass effect for overlay cards */
+   306→.card-glass {
+   307→  backdrop-filter: blur(12px);
+   308→  -webkit-backdrop-filter: blur(12px);
+   309→  background: oklch(1 0 0 / 0.7);
+   310→}
+   311→.dark .card-glass {
+   312→  background: oklch(0.18 0.015 250 / 0.7);
+   313→}
+   314→
+   315→/* ── Bottom Navigation (Mobile) ─────────────────────────── */
+   316→
+   317→.bottom-nav-item {
+   318→  display: flex;
+   319→  flex-direction: column;
+   320→  align-items: center;
+   321→  justify-content: center;
+   322→  gap: 2px;
+   323→  padding: 6px 0;
+   324→  font-size: 10px;
+   325→  font-weight: 500;
+   326→  color: oklch(0.5 0.02 250);
+   327→  transition: color 0.15s ease;
+   328→  min-width: 48px;
+   329→}
+   330→
+   331→.bottom-nav-item.active {
+   332→  color: oklch(0.488 0.243 264);
+   333→}
+   334→
+   335→.dark .bottom-nav-item.active {
+   336→  color: oklch(0.588 0.243 264);
+   337→}
+   338→
+   339→.bottom-nav-item:hover {
+   340→  color: oklch(0.3 0.015 250);
+   341→}
+   342→
+   343→.dark .bottom-nav-item:hover {
+   344→  color: oklch(0.8 0.005 250);
+   345→}
+   346→
+   347→/* ── Selection Styles ────────────────────────────────────── */
+   348→
+   349→::selection {
+   350→  background-color: oklch(0.488 0.243 264 / 0.2);
+   351→}
+   352→
+   353→.dark ::selection {
+   354→  background-color: oklch(0.588 0.243 264 / 0.3);
+   355→}
+   356→
+   357→/* ── Card Gradient Accent System ─────────────────────── */
+   358→
+   359→.card-accent-blue {
+   360→  border-top: 2px solid oklch(0.488 0.243 264);
+   361→}
+   362→.card-accent-green {
+   363→  border-top: 2px solid oklch(0.627 0.194 149);
+   364→}
+   365→.card-accent-amber {
+   366→  border-top: 2px solid oklch(0.795 0.184 86);
+   367→}
+   368→.card-accent-red {
+   369→  border-top: 2px solid oklch(0.577 0.245 27.325);
+   370→}
+   371→.card-accent-purple {
+   372→  border-top: 2px solid oklch(0.541 0.281 293);
+   373→}
+   374→.card-accent-cyan {
+   375→  border-top: 2px solid oklch(0.705 0.209 219);
+   376→}
+   377→
+   378→/* ── Chart Card Hover Effect ──────────────────────────── */
+   379→
+   380→.chart-card {
+   381→  transition: transform 0.2s ease, box-shadow 0.2s ease;
+   382→}
+   383→.chart-card:hover {
+   384→  transform: translateY(-1px);
+   385→  box-shadow: 0 4px 12px -2px oklch(0 0 0 / 0.1);
+   386→}
+   387→.dark .chart-card:hover {
+   388→  box-shadow: 0 4px 12px -2px oklch(0 0 0 / 0.3);
+   389→}
+   390→
+   391→/* ── Activity Timeline ────────────────────────────────── */
+   392→
+   393→.activity-timeline {
+   394→  position: relative;
+   395→}
+   396→.activity-timeline::before {
+   397→  content: '';
+   398→  position: absolute;
+   399→  left: 15px;
+   400→  top: 8px;
+   401→  bottom: 8px;
+   402→  width: 2px;
+   403→  background: oklch(0.912 0.005 250);
+   404→}
+   405→.dark .activity-timeline::before {
+   406→  background: oklch(0.28 0.015 250);
+   407→}
+   408→.activity-item {
+   409→  position: relative;
+   410→  padding-left: 36px;
+   411→}
+   412→.activity-dot {
+   413→  position: absolute;
+   414→  left: 10px;
+   415→  top: 6px;
+   416→  width: 12px;
+   417→  height: 12px;
+   418→  border-radius: 50%;
+   419→  border: 2px solid oklch(0.912 0.005 250);
+   420→  background: oklch(1 0 0);
+   421→}
+   422→.dark .activity-dot {
+   423→  border-color: oklch(0.28 0.015 250);
+   424→  background: oklch(0.18 0.015 250);
+   425→}
+   426→
+   427→/* ── Enhanced Dark Mode for Charts ────────────────────── */
+   428→
+   429→.dark .recharts-text {
+   430→  fill: oklch(0.65 0.02 250);
+   431→}
+   432→.dark .recharts-cartesian-grid-horizontal line,
+   433→.dark .recharts-cartesian-grid-vertical line {
+   434→  stroke: oklch(0.28 0.015 250);
+   435→}
+   436→
+   437→/* ── Pulse Dot Animation (Live indicator) ─────────────── */
+   438→
+   439→@keyframes pulse-dot {
+   440→  0%, 100% { opacity: 1; transform: scale(1); }
+   441→  50% { opacity: 0.5; transform: scale(1.5); }
+   442→}
+   443→.pulse-dot {
+   444→  position: relative;
+   445→}
+   446→.pulse-dot::after {
+   447→  content: '';
+   448→  position: absolute;
+   449→  inset: -2px;
+   450→  border-radius: 50%;
+   451→  background: inherit;
+   452→  animation: pulse-dot 2s ease-in-out infinite;
+   453→}
+   454→
+   455→/* ── Smooth Scrollbar (Firefox) ───────────────────────── */
+   456→
+   457→* {
+   458→  scrollbar-width: thin;
+   459→  scrollbar-color: oklch(0.7 0.01 250) transparent;
+   460→}
+   461→.dark * {
+   462→  scrollbar-color: oklch(0.35 0.01 250) transparent;
+   463→}
+   464→
+   465→/* ── App Footer ───────────────────────────────────────── */
+   466→
+   467→.app-footer {
+   468→  border-top: 1px solid oklch(0.912 0.005 250);
+   469→  background: oklch(0.985 0.001 250);
+   470→}
+   471→.dark .app-footer {
+   472→  border-top-color: oklch(0.28 0.015 250);
+   473→  background: oklch(0.13 0.015 250);
+   474→}
+   475→
+   476→/* ── KPI Card Shimmer on Hover ────────────────────────── */
+   477→
+   478→.kpi-shimmer {
+   479→  position: relative;
+   480→  overflow: hidden;
+   481→}
+   482→.kpi-shimmer::before {
+   483→  content: '';
+   484→  position: absolute;
+   485→  inset: 0;
+   486→  background: linear-gradient(
+   487→    90deg,
+   488→    transparent 0%,
+   489→    oklch(0.488 0.243 264 / 0.04) 50%,
+   490→    transparent 100%
+   491→  );
+   492→  transform: translateX(-100%);
+   493→  transition: transform 0.6s ease;
+   494→  pointer-events: none;
+   495→  z-index: 1;
+   496→}
+   497→.kpi-shimmer:hover::before {
+   498→  transform: translateX(100%);
+   499→}
+   500→.dark .kpi-shimmer::before {
+   501→  background: linear-gradient(
+   502→    90deg,
+   503→    transparent 0%,
+   504→    oklch(0.588 0.243 264 / 0.06) 50%,
+   505→    transparent 100%
+   506→  );
+   507→}
+   508→
+   509→/* ── Table Row Hover Accent ────────────────────────── */
+   510→
+   511→.table-row-hover tbody tr {
+   512→  transition: all 0.15s ease;
+   513→  border-left: 3px solid transparent;
+   514→}
+   515→.table-row-hover tbody tr:hover {
+   516→  border-left-color: oklch(0.488 0.243 264);
+   517→  background: oklch(0.96 0.005 250);
+   518→}
+   519→.dark .table-row-hover tbody tr:hover {
+   520→  background: oklch(0.22 0.015 250);
+   521→}
+   522→
+   523→/* ── Card Depth Effect ──────────────────────────────── */
+   524→
+   525→.card-depth {
+   526→  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 0.6), 0 1px 3px 0 oklch(0 0 0 / 0.04);
+   527→}
+   528→.dark .card-depth {
+   529→  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 0.05), 0 1px 3px 0 oklch(0 0 0 / 0.2);
+   530→}
+   531→
+   532→/* ── Gradient Text Utility ──────────────────────────── */
+   533→
+   534→.text-gradient {
+   535→  background: linear-gradient(135deg, oklch(0.488 0.243 264), oklch(0.646 0.222 41.116));
+   536→  -webkit-background-clip: text;
+   537→  -webkit-text-fill-color: transparent;
+   538→  background-clip: text;
+   539→}
+   540→
+   541→/* ── Badge Glow Effects ──────────────────────────────── */
+   542→
+   543→.badge-glow-critical {
+   544→  box-shadow: 0 0 8px 0 oklch(0.577 0.245 27.325 / 0.3);
+   545→}
+   546→.badge-glow-warning {
+   547→  box-shadow: 0 0 8px 0 oklch(0.795 0.184 86 / 0.3);
+   548→}
+   549→
+   550→/* ── Button Press Effect ────────────────────────────── */
+   551→
+   552→.btn-press:active {
+   553→  transform: scale(0.97);
+   554→  transition: transform 0.1s ease;
+   555→}
+   556→
+   557→/* ── Data Row Enter Animation ────────────────────────── */
+   558→
+   559→@keyframes data-row-slide {
+   560→  from { opacity: 0; transform: translateX(-4px); }
+   561→  to { opacity: 1; transform: translateX(0); }
+   562→}
+   563→.data-row-enter {
+   564→  animation: data-row-slide 0.2s ease-out;
+   565→}
+   566→
+   567→/* ── Live Pulse Indicator ──────────────────────────── */
+   568→
+   569→@keyframes live-pulse {
+   570→  0%, 100% { box-shadow: 0 0 0 0 oklch(0.627 0.194 149 / 0.5); }
+   571→  50% { box-shadow: 0 0 0 6px oklch(0.627 0.194 149 / 0); }
+   572→}
+   573→.live-indicator {
+   574→  animation: live-pulse 2s ease-in-out infinite;
+   575→}
+   576→
+   577→/* ── Noise Texture Background ────────────────────────── */
+   578→
+   579→.texture-bg {
+   580→  position: relative;
+   581→}
+   582→.texture-bg::after {
+   583→  content: '';
+   584→  position: absolute;
+   585→  inset: 0;
+   586→  opacity: 0.02;
+   587→  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+   588→  pointer-events: none;
+   589→  border-radius: inherit;
+   590→}
+   591→
+   592→/* ── Sidebar Active Bar Indicator ────────────────────── */
+   593→
+   594→.sidebar-active-bar {
+   595→  position: relative;
+   596→}
+   597→.sidebar-active-bar::before {
+   598→  content: '';
+   599→  position: absolute;
+   600→  left: 0;
+   601→  top: 50%;
+   602→  transform: translateY(-50%);
+   603→  width: 3px;
+   604→  height: 60%;
+   605→  background: oklch(0.488 0.243 264);
+   606→  border-radius: 0 3px 3px 0;
+   607→}
+   608→
+   609→/* ── Scroll Reveal Animation ─────────────────────────── */
+   610→
+   611→.scroll-reveal {
+   612→  opacity: 0;
+   613→  transform: translateY(12px);
+   614→  transition: opacity 0.5s ease, transform 0.5s ease;
+   615→}
+   616→.scroll-reveal.revealed {
+   617→  opacity: 1;
+   618→  transform: translateY(0);
+   619→}
+   620→
+   621→/* ── Card Highlight (Animated Gradient Border) ─────── */
+   622→
+   623→@keyframes border-rotate {
+   624→  0% { --angle: 0deg; }
+   625→  100% { --angle: 360deg; }
+   626→}
+   627→
+   628→@property --angle {
+   629→  syntax: "<angle>";
+   630→  inherits: false;
+   631→  initial-value: 0deg;
+   632→}
+   633→
+   634→.card-highlight {
+   635→  position: relative;
+   636→  border-radius: var(--radius-lg, 0.625rem);
+   637→  overflow: hidden;
+   638→}
+   639→.card-highlight::before {
+   640→  content: '';
+   641→  position: absolute;
+   642→  inset: 0;
+   643→  border-radius: inherit;
+   644→  padding: 2px;
+   645→  background: conic-gradient(
+   646→    from var(--angle, 0deg),
+   647→    oklch(0.488 0.243 264),
+   648→    oklch(0.627 0.194 149),
+   649→    oklch(0.795 0.184 86),
+   650→    oklch(0.577 0.245 27.325),
+   651→    oklch(0.541 0.281 293),
+   652→    oklch(0.488 0.243 264)
+   653→  );
+   654→  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+   655→  mask-composite: exclude;
+   656→  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+   657→  -webkit-mask-composite: xor;
+   658→  animation: border-rotate 4s linear infinite;
+   659→  pointer-events: none;
+   660→  z-index: 1;
+   661→}
+   662→
+   663→/* ── Data Card (Hover Lift) ────────────────────────── */
+   664→
+   665→.data-card {
+   666→  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+   667→  border: 1px solid oklch(0.912 0.005 250);
+   668→}
+   669→.data-card:hover {
+   670→  transform: translateY(-1px);
+   671→  box-shadow: 0 4px 12px -2px oklch(0 0 0 / 0.08);
+   672→  border-color: oklch(0.488 0.243 264 / 0.2);
+   673→}
+   674→.dark .data-card {
+   675→  border-color: oklch(0.28 0.015 250);
+   676→}
+   677→.dark .data-card:hover {
+   678→  box-shadow: 0 4px 12px -2px oklch(0 0 0 / 0.3);
+   679→  border-color: oklch(0.588 0.243 264 / 0.3);
+   680→}
+   681→
+   682→/* ── Table Container ───────────────────────────────── */
+   683→
+   684→.table-container {
+   685→  border-radius: var(--radius-lg, 0.625rem);
+   686→  overflow: hidden;
+   687→  border: 1px solid oklch(0.912 0.005 250);
+   688→}
+   689→.dark .table-container {
+   690→  border-color: oklch(0.28 0.015 250);
+   691→}
+   692→
+   693→/* ── Filter Bar ────────────────────────────────────── */
+   694→
+   695→.filter-bar {
+   696→  padding: 0.75rem;
+   697→  border-radius: 0.75rem;
+   698→  background: oklch(0.96 0.005 250 / 0.3);
+   699→  gap: 0.5rem;
+   700→}
+   701→.dark .filter-bar {
+   702→  background: oklch(0.23 0.015 250 / 0.3);
+   703→}
+   704→
+   705→/* ── Status Dot Pulse ──────────────────────────────── */
+   706→
+   707→@keyframes status-dot-pulse {
+   708→  0% { opacity: 0; transform: scale(0.8); }
+   709→  50% { opacity: 1; transform: scale(1.2); }
+   710→  100% { opacity: 0; transform: scale(0.8); }
+   711→}
+   712→.status-dot-pulse {
+   713→  position: relative;
+   714→}
+   715→.status-dot-pulse::after {
+   716→  content: '';
+   717→  position: absolute;
+   718→  inset: -3px;
+   719→  border-radius: 50%;
+   720→  background: inherit;
+   721→  opacity: 0;
+   722→  animation: status-dot-pulse 2s ease-in-out infinite;
+   723→}
+   724→
+   725→/* ── Metric Change Indicator ──────────────────────── */
+   726→
+   727→.metric-change {
+   728→  display: inline-flex;
+   729→  align-items: center;
+   730→  gap: 0.25rem;
+   731→  font-size: 0.625rem;
+   732→  font-weight: 600;
+   733→  line-height: 1;
+   734→  padding: 0.125rem 0.375rem;
+   735→  border-radius: 0.25rem;
+   736→}
+   737→.metric-change.positive {
+   738→  color: oklch(0.577 0.245 27.325);
+   739→  background: oklch(0.577 0.245 27.325 / 0.08);
+   740→}
+   741→.metric-change.negative {
+   742→  color: oklch(0.627 0.194 149);
+   743→  background: oklch(0.627 0.194 149 / 0.08);
+   744→}
+   745→.dark .metric-change.positive {
+   746→  color: oklch(0.637 0.237 22.5);
+   747→  background: oklch(0.637 0.237 22.5 / 0.12);
+   748→}
+   749→.dark .metric-change.negative {
+   750→  color: oklch(0.667 0.194 149);
+   751→  background: oklch(0.667 0.194 149 / 0.12);
+   752→}
+   753→
+   754→/* ── Section Divider ────────────────────────────────── */
+   755→
+   756→.section-divider {
+   757→  display: flex;
+   758→  align-items: center;
+   759→  gap: 0.75rem;
+   760→  padding: 0.5rem 0;
+   761→}
+   762→.section-divider::before,
+   763→.section-divider::after {
+   764→  content: '';
+   765→  flex: 1;
+   766→  height: 1px;
+   767→  background: oklch(0.912 0.005 250);
+   768→}
+   769→.dark .section-divider::before,
+   770→.dark .section-divider::after {
+   771→  background: oklch(0.28 0.015 250);
+   772→}
+   773→.section-divider-label {
+   774→  font-size: 0.6875rem;
+   775→  font-weight: 600;
+   776→  text-transform: uppercase;
+   777→  letter-spacing: 0.05em;
+   778→  color: oklch(0.5 0.02 250);
+   779→  white-space: nowrap;
+   780→}
+   781→.dark .section-divider-label {
+   782→  color: oklch(0.65 0.02 250);
+   783→}
+   784→
+   785→/* ── Progress Bar Animated Fill ──────────────────── */
+   786→
+   787→.progress-animated {
+   788→  overflow: hidden;
+   789→}
+   790→.progress-animated > div,
+   791→.progress-animated [role="progressbar"] {
+   792→  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+   793→}
+   794→
+   795→/* ── Card Hover Glow ──────────────────────────────── */
+   796→
+   797→.card-hover-glow {
+   798→  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+   799→}
+   800→.card-hover-glow:hover {
+   801→  box-shadow: 0 0 16px -4px oklch(0.488 0.243 264 / 0.15),
+   802→              0 4px 12px -2px oklch(0 0 0 / 0.06);
+   803→  border-color: oklch(0.488 0.243 264 / 0.25);
+   804→}
+   805→.dark .card-hover-glow:hover {
+   806→  box-shadow: 0 0 20px -4px oklch(0.588 0.243 264 / 0.2),
+   807→              0 4px 12px -2px oklch(0 0 0 / 0.3);
+   808→  border-color: oklch(0.588 0.243 264 / 0.3);
+   809→}
+   810→
+   811→/* ── Badge Bounce Animation ───────────────────────── */
+   812→
+   813→@keyframes badge-bounce-anim {
+   814→  0%, 100% { transform: scale(1); }
+   815→  15% { transform: scale(1.25); }
+   816→  30% { transform: scale(0.95); }
+   817→  45% { transform: scale(1.15); }
+   818→  60% { transform: scale(0.98); }
+   819→  75% { transform: scale(1.05); }
+   820→}
+   821→.badge-bounce {
+   822→  animation: badge-bounce-anim 0.8s ease-out;
+   823→}
+   824→
+   825→/* ── Container Glass (Frosted) ────────────────────── */
+   826→
+   827→.container-glass {
+   828→  backdrop-filter: blur(16px) saturate(1.4);
+   829→  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+   830→  background: oklch(0.985 0.001 250 / 0.75);
+   831→  border-bottom: 1px solid oklch(0.912 0.005 250 / 0.6);
+   832→}
+   833→.dark .container-glass {
+   834→  background: oklch(0.13 0.015 250 / 0.75);
+   835→  border-bottom-color: oklch(0.28 0.015 250 / 0.6);
+   836→}
+   837→
+   838→/* ── Tooltip / Popover Scale-In Animation ────────── */
+   839→
+   840→.tooltip-animate {
+   841→  animation: tooltip-scale-in 0.18s ease-out both;
+   842→}
+   843→@keyframes tooltip-scale-in {
+   844→  from {
+   845→    opacity: 0;
+   846→    transform: scale(0.92) translateY(-2px);
+   847→  }
+   848→  to {
+   849→    opacity: 1;
+   850→    transform: scale(1) translateY(0);
+   851→  }
+   852→}
+   853→
+   854→/* ── Table Stripe (Alternating Rows) ──────────────── */
+   855→
+   856→.table-stripe tbody tr:nth-child(even) {
+   857→  background: oklch(0.96 0.005 250 / 0.5);
+   858→}
+   859→.dark .table-stripe tbody tr:nth-child(even) {
+   860→  background: oklch(0.22 0.015 250 / 0.4);
+   861→}
+   862→
+   863→/* ── Input Focus Ring ──────────────────────────────── */
+   864→
+   865→.input-focus-ring {
+   866→  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+   867→}
+   868→.input-focus-ring:focus {
+   869→  border-color: oklch(0.488 0.243 264);
+   870→  box-shadow: 0 0 0 3px oklch(0.488 0.243 264 / 0.12);
+   871→  outline: none;
+   872→}
+   873→.dark .input-focus-ring:focus {
+   874→  border-color: oklch(0.588 0.243 264);
+   875→  box-shadow: 0 0 0 3px oklch(0.588 0.243 264 / 0.18);
+   876→}
+   877→
+   878→/* ── Icon Spin (Loading) ──────────────────────────── */
+   879→
+   880→@keyframes icon-spin-anim {
+   881→  from { transform: rotate(0deg); }
+   882→  to { transform: rotate(360deg); }
+   883→}
+   884→.icon-spin {
+   885→  animation: icon-spin-anim 1s linear infinite;
+   886→}
+   887→
+   888→/* ── Wave Divider ──────────────────────────────────── */
+   889→
+   890→.wave-divider {
+   891→  position: relative;
+   892→  height: 32px;
+   893→  overflow: hidden;
+   894→  line-height: 0;
+   895→}
+   896→.wave-divider svg {
+   897→  position: absolute;
+   898→  bottom: 0;
+   899→  width: 100%;
+   900→  height: 100%;
+   901→  fill: oklch(0.96 0.005 250);
+   902→}
+   903→.dark .wave-divider svg {
+   904→  fill: oklch(0.22 0.015 250);
+   905→}
+   906→
+   907→/* ── Chip / Pill ───────────────────────────────────── */
+   908→
+   909→.chip {
+   910→  display: inline-flex;
+   911→  align-items: center;
+   912→  gap: 0.25rem;
+   913→  padding: 0.125rem 0.625rem;
+   914→  font-size: 0.6875rem;
+   915→  font-weight: 500;
+   916→  line-height: 1.5;
+   917→  border-radius: 9999px;
+   918→  background: oklch(0.96 0.005 250);
+   919→  color: oklch(0.35 0.015 250);
+   920→  border: 1px solid oklch(0.912 0.005 250);
+   921→  transition: background 0.15s ease, border-color 0.15s ease;
+   922→  white-space: nowrap;
+   923→}
+   924→.chip:hover {
+   925→  background: oklch(0.93 0.005 250);
+   926→  border-color: oklch(0.85 0.01 250);
+   927→}
+   928→.dark .chip {
+   929→  background: oklch(0.23 0.015 250);
+   930→  color: oklch(0.8 0.005 250);
+   931→  border-color: oklch(0.28 0.015 250);
+   932→}
+   933→.dark .chip:hover {
+   934→  background: oklch(0.28 0.015 250);
+   935→  border-color: oklch(0.35 0.015 250);
+   936→}
+   937→
+   938→/* ── Stat Card Highlight ──────────────────────────── */
+   939→
+   940→.stat-card-highlight {
+   941→  position: relative;
+   942→  border-left: 3px solid oklch(0.488 0.243 264);
+   943→  background: linear-gradient(
+   944→    135deg,
+   945→    oklch(0.488 0.243 264 / 0.03) 0%,
+   946→    oklch(1 0 0) 60%
+   947→  );
+   948→}
+   949→.dark .stat-card-highlight {
+   950→  border-left-color: oklch(0.588 0.243 264);
+   951→  background: linear-gradient(
+   952→    135deg,
+   953→    oklch(0.588 0.243 264 / 0.06) 0%,
+   954→    oklch(0.18 0.015 250) 60%
+   955→  );
+   956→}
+   957→
+   958→/* ── Print Styles ──────────────────────────────────────────── */
+   959→@media print {
+   960→  /* Hide interactive elements */
+   961→  .no-print,
+   962→  [data-slot="sidebar"],
+   963→  [role="navigation"],
+   964→  button:not(.print-include),
+   965→  .mobile-bottom-nav,
+   966→  .command-palette-overlay,
+   967→  .toast-container {
+   968→    display: none !important;
+   969→  }
+   970→
+   971→  /* Full-width content */
+   972→  main {
+   973→    padding: 0 !important;
+   974→    margin: 0 !important;
+   975→  }
+   976→
+   977→  /* Clean cards for print */
+   978→  .card {
+   979→    break-inside: avoid;
+   980→    border: 1px solid #ddd !important;
+   981→    box-shadow: none !important;
+   982→  }
+   983→
+   984→  /* Tables print well */
+   985→  table {
+   986→    font-size: 10pt !important;
+   987→  }
+   988→
+   989→  thead {
+   990→    background: #f5f5f5 !important;
+   991→  }
+   992→
+   993→  /* Force dark mode to light for print */
+   994→  :root {
+   995→    color-scheme: light !important;
+   996→  }
+   997→
+   998→  /* Page headers */
+   999→  h1, h2, h3 {
+  1000→    page-break-after: avoid;
+  1001→  }
+  1002→
+  1003→  /* Show link URLs */
+  1004→  a[href]::after {
+  1005→    content: " (" attr(href) ")";
+  1006→    font-size: 9pt;
+  1007→    color: #666;
+  1008→  }
+  1009→
+  1010→  body {
+  1011→    background: white !important;
+  1012→    color: black !important;
+  1013→  }
+  1014→}
+  1015→

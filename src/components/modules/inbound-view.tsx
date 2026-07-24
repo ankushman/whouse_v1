@@ -106,7 +106,7 @@ export function InboundView() {
           { label: "Completed", value: summary.completed, icon: CheckCircle2, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
           { label: "Delayed", value: summary.delayed, icon: AlertCircle, color: "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" },
         ].map((item) => (
-          <Card key={item.label} className="rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardContent className="flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
@@ -121,7 +121,7 @@ export function InboundView() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="filter-bar flex flex-wrap items-center gap-3">
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -164,7 +164,8 @@ export function InboundView() {
         </CardHeader>
         <CardContent className="p-0">
           <ScrollArea className="h-auto">
-            <Table>
+            <div className="table-container">
+            <Table className="table-row-hover">
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="w-8"></TableHead>
@@ -294,6 +295,7 @@ export function InboundView() {
                 })}
               </TableBody>
             </Table>
+            </div>
           </ScrollArea>
         </CardContent>
       </Card>

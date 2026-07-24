@@ -1,7 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin, isSupabaseConfigured } from '@/lib/supabase'
+import { warehouses } from '@/data/mock-data'
+
+function mockResponse(searchParams: URLSearchParams) {
+  let data = warehouses
+  const city = searchParams.get('city')
+  const status = searchParams.get('status')
+  const search = searchParams.get('search')
+  if (city) data = data.filter(w => w.city.toLowerCase().includes(city.toLowerCase()))
+  if (status) data = data.filter(w => w.status === status)
+  if (search) data = data.filter(w => w.name.toLowerCase().includes(search.toLowerCase()) || w.city.toLowerCase().includes(search.toLowerCase()))
+  return NextResponse.json({ data, count: data.length })
+}
 
 export async function GET(request: NextRequest) {
+  if (!isSupabaseConfigured()) return mockResponse(new URL(request.url).searchParams)
   try {
     const { searchParams } = new URL(request.url)
     const city = searchParams.get('city')

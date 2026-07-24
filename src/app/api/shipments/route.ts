@@ -1,7 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin, isSupabaseConfigured } from '@/lib/supabase'
+import { inboundShipments, outboundShipments } from '@/data/mock-data'
+
+function mockResponse(searchParams: URLSearchParams) {
+  const type = searchParams.get('type')
+  const status = searchParams.get('status')
+  const search = searchParams.get('search')
+  const page = Number(searchParams.get('page')) || 1
+  const pageSize = Number(searchParams.get('pageSize')) || 20
+
+  let data: any[] = []
+  if (type === 'inbound' || !type) data = [...data, ...inboundShipments]
+  if (type === 'outbound' || !type) data = [...data, ...outboundShipments]
+  if (status) data = data.filter(s => s.status === status)
+  if (search) data = data.filter(s => s.invoice.toLowerCase().includes(search.toLowerCase()))
+
+  const start = (page - 1) * pageSize
+  return NextResponse.json({
+    data: data.slice(start, start + pageSize),
+    count: data.length,
+    page,
+    pageSize,
+    totalPages: Math.ceil(data.length / pageSize),
+  })
+}
 
 export async function GET(request: NextRequest) {
+  if (!isSupabaseConfigured()) return mockResponse(new URL(request.url).searchParams)
   try {
     const { searchParams } = new URL(request.url)
     const type = searchParams.get('type')

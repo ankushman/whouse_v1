@@ -124,7 +124,7 @@ export function EquipmentView() {
       />
 
       {/* Search + Count */}
-      <div className="flex items-center gap-3">
+      <div className="filter-bar flex items-center gap-3">
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -141,7 +141,7 @@ export function EquipmentView() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 stagger-children">
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Cog className="size-5 text-muted-foreground" />
@@ -157,7 +157,7 @@ export function EquipmentView() {
           </CardContent>
         </Card>
 
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/60">
               <Activity className="size-5 text-emerald-600" />
@@ -173,7 +173,7 @@ export function EquipmentView() {
           </CardContent>
         </Card>
 
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950/60">
               <Wrench className="size-5 text-red-600" />
@@ -189,7 +189,7 @@ export function EquipmentView() {
           </CardContent>
         </Card>
 
-        <Card className="py-0 gap-0">
+        <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60">
               <Zap className="size-5 text-blue-600" />
@@ -205,7 +205,7 @@ export function EquipmentView() {
           </CardContent>
         </Card>
 
-        <Card className="py-0 gap-0 col-span-2 lg:col-span-1">
+        <Card className="card-depth py-0 gap-0 col-span-2 lg:col-span-1">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Battery className="size-5 text-muted-foreground" />

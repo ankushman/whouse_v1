@@ -138,7 +138,7 @@ export function ProductivityView() {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Warehouse Heatmap */}
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className="card-depth rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Warehouse × Shift Heatmap</CardTitle>
             <CardDescription className="text-xs">Productivity % by warehouse and shift</CardDescription>
@@ -172,7 +172,7 @@ export function ProductivityView() {
         </Card>
 
         {/* Top & Low Performers */}
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className="card-depth rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Top Performers</CardTitle>
             <CardDescription className="text-xs">Ranked by productivity score</CardDescription>

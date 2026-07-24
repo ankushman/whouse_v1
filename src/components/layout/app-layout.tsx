@@ -17,6 +17,7 @@ import {
   FileBarChart,
   Settings,
   Grid3X3,
+  LayoutGrid,
   Search,
   Moon,
   Sun,
@@ -99,6 +100,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Bell,
   FileBarChart,
   Settings,
+  LayoutGrid,
 }
 
 // ──────────────────────────────────────────────────────

@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin, isSupabaseConfigured } from '@/lib/supabase'
+import { warehouses } from '@/data/mock-data'
 
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!isSupabaseConfigured()) {
+    const { id } = await params
+    const warehouse = warehouses.find(w => w.id === id)
+    if (!warehouse) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    return NextResponse.json({ data: warehouse })
+  }
   try {
     const { id } = await params
     const { data, error } = await supabaseAdmin

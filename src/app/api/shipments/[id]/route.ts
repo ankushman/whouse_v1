@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin, isSupabaseConfigured } from '@/lib/supabase'
+import { inboundShipments, outboundShipments } from '@/data/mock-data'
 
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!isSupabaseConfigured()) {
+    const { id } = await params
+    const shipment = inboundShipments.find(s => s.id === id) || outboundShipments.find(s => s.id === id)
+    if (!shipment) return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    return NextResponse.json({ data: shipment })
+  }
   try {
     const { id } = await params
 

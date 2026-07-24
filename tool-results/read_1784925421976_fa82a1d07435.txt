@@ -1,0 +1,662 @@
+     1→"use client"
+     2→
+     3→import * as React from "react"
+     4→import { useTheme } from "next-themes"
+     5→import {
+     6→  LayoutDashboard,
+     7→  Warehouse,
+     8→  PackageSearch,
+     9→  Truck,
+    10→  Package,
+    11→  Route,
+    12→  Cog,
+    13→  Users,
+    14→  TrendingUp,
+    15→  DollarSign,
+    16→  Bell,
+    17→  FileBarChart,
+    18→  Settings,
+    19→  Grid3X3,
+    20→  Search,
+    21→  Moon,
+    22→  Sun,
+    23→  ChevronDown,
+    24→  LogOut,
+    25→  User,
+    26→  Shield,
+    27→  Building2,
+    28→  Clock,
+    29→  CheckCircle2,
+    30→  AlertTriangle,
+    31→  Info,
+    32→  X,
+    33→} from "lucide-react"
+    34→import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
+    35→import { warehouses } from "@/data/mock-data"
+    36→import {
+    37→  Sidebar,
+    38→  SidebarContent,
+    39→  SidebarFooter,
+    40→  SidebarGroup,
+    41→  SidebarGroupContent,
+    42→  SidebarGroupLabel,
+    43→  SidebarHeader,
+    44→  SidebarMenu,
+    45→  SidebarMenuBadge,
+    46→  SidebarMenuButton,
+    47→  SidebarMenuItem,
+    48→  SidebarRail,
+    49→  SidebarInset,
+    50→  SidebarTrigger,
+    51→  SidebarSeparator,
+    52→} from "@/components/ui/sidebar"
+    53→import { Button } from "@/components/ui/button"
+    54→import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+    55→import {
+    56→  DropdownMenu,
+    57→  DropdownMenuContent,
+    58→  DropdownMenuGroup,
+    59→  DropdownMenuItem,
+    60→  DropdownMenuLabel,
+    61→  DropdownMenuSeparator,
+    62→  DropdownMenuTrigger,
+    63→} from "@/components/ui/dropdown-menu"
+    64→import {
+    65→  Select,
+    66→  SelectContent,
+    67→  SelectItem,
+    68→  SelectTrigger,
+    69→  SelectValue,
+    70→} from "@/components/ui/select"
+    71→import { Badge } from "@/components/ui/badge"
+    72→import { Separator } from "@/components/ui/separator"
+    73→import {
+    74→  Breadcrumb,
+    75→  BreadcrumbItem,
+    76→  BreadcrumbList,
+    77→  BreadcrumbPage,
+    78→} from "@/components/ui/breadcrumb"
+    79→import { cn } from "@/lib/utils"
+    80→import { type ReactNode } from "react"
+    81→import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
+    82→import { NotificationsSheet } from "@/components/shared/notifications-sheet"
+    83→import { KeyboardShortcutsDialog } from "@/components/shared/keyboard-shortcuts-dialog"
+    84→
+    85→// ──────────────────────────────────────────────────────
+    86→// Icon Map
+    87→// ──────────────────────────────────────────────────────
+    88→const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+    89→  LayoutDashboard,
+    90→  Warehouse,
+    91→  PackageSearch,
+    92→  Truck,
+    93→  Package,
+    94→  Route,
+    95→  Cog,
+    96→  Users,
+    97→  TrendingUp,
+    98→  DollarSign,
+    99→  Bell,
+   100→  FileBarChart,
+   101→  Settings,
+   102→}
+   103→
+   104→// ──────────────────────────────────────────────────────
+   105→// Recent notifications for the bell dropdown
+   106→// ──────────────────────────────────────────────────────
+   107→const recentNotifications = [
+   108→  { id: "1", title: "SLA Breach", desc: "Gurugram Hub dock-to-stock exceeded 4hrs", severity: "critical", time: "5m ago" },
+   109→  { id: "2", title: "Equipment Alert", desc: "Forklift FL-003 battery below 15%", severity: "warning", time: "12m ago" },
+   110→  { id: "3", title: "Inventory Variance", desc: "SKU ENG-4521 count mismatch at Chennai", severity: "warning", time: "28m ago" },
+   111→  { id: "4", title: "Dispatch Complete", desc: "Shipment SH-2024-0891 delivered on time", severity: "success", time: "45m ago" },
+   112→  { id: "5", title: "Capacity Warning", desc: "Pune warehouse at 85% capacity", severity: "info", time: "1h ago" },
+   113→]
+   114→
+   115→const severityIcon = { critical: AlertTriangle, warning: AlertTriangle, success: CheckCircle2, info: Info }
+   116→const severityColor = {
+   117→  critical: "text-red-600 dark:text-red-400",
+   118→  warning: "text-amber-600 dark:text-amber-400",
+   119→  success: "text-emerald-600 dark:text-emerald-400",
+   120→  info: "text-blue-600 dark:text-blue-400",
+   121→}
+   122→
+   123→// ──────────────────────────────────────────────────────
+   124→// App Logo
+   125→// ──────────────────────────────────────────────────────
+   126→function AppLogo() {
+   127→  return (
+   128→    <div className="flex items-center gap-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-2 py-2.5">
+   129→      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/15 text-white shadow-sm">
+   130→        <Building2 className="h-4 w-4" />
+   131→      </div>
+   132→      <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+   133→        <div className="flex items-center gap-1.5">
+   134→          <span className="text-sm font-bold tracking-tight text-white leading-tight">AutoFlow</span>
+   135→          <span className="rounded bg-white/20 px-1 py-px text-[9px] font-semibold leading-none text-white">v1.0</span>
+   136→        </div>
+   137→        <span className="text-[10px] font-medium text-blue-100 leading-tight">Warehouse Management</span>
+   138→      </div>
+   139→    </div>
+   140→  )
+   141→}
+   142→
+   143→// ──────────────────────────────────────────────────────
+   144→// Sidebar
+   145→// ──────────────────────────────────────────────────────
+   146→export function AppSidebar() {
+   147→  const { activeView, setActiveView, currentRole, selectedWarehouse, setSelectedWarehouse } = useAppStore()
+   148→  const filteredItems = navItems.filter((item) => item.roles.includes(currentRole))
+   149→
+   150→  return (
+   151→    <Sidebar collapsible="icon" variant="sidebar">
+   152→      <SidebarHeader className="p-2">
+   153→        <AppLogo />
+   154→      </SidebarHeader>
+   155→      <SidebarSeparator />
+   156→      <SidebarContent>
+   157→        <SidebarGroup className="border-b pb-3">
+   158→          <SidebarGroupLabel>Operations</SidebarGroupLabel>
+   159→          <SidebarGroupContent>
+   160→            <SidebarMenu>
+   161→              {filteredItems.slice(0, 7).map((item) => {
+   162→                const Icon = iconMap[item.icon]
+   163→                const isActive = activeView === item.id
+   164→                return (
+   165→                  <SidebarMenuItem key={item.id}>
+   166→                    <SidebarMenuButton
+   167→                      isActive={isActive}
+   168→                      tooltip={item.label}
+   169→                      onClick={() => setActiveView(item.id)}
+   170→                      className={cn(
+   171→                        "transition-all duration-150",
+   172→                        isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
+   173→                      )}
+   174→                    >
+   175→                      {Icon && <Icon className="h-4 w-4" />}
+   176→                      <span>{item.label}</span>
+   177→                    </SidebarMenuButton>
+   178→                    {item.badge && item.badge > 0 && (
+   179→                      <SidebarMenuBadge className={isActive ? "bg-white/20 text-white" : "bg-blue-600 text-white"}>
+   180→                        {item.badge}
+   181→                      </SidebarMenuBadge>
+   182→                    )}
+   183→                  </SidebarMenuItem>
+   184→                )
+   185→              })}
+   186→            </SidebarMenu>
+   187→          </SidebarGroupContent>
+   188→        </SidebarGroup>
+   189→        <SidebarGroup className="border-b pb-3">
+   190→          <SidebarGroupLabel>Analytics</SidebarGroupLabel>
+   191→          <SidebarGroupContent>
+   192→            <SidebarMenu>
+   193→              {filteredItems.slice(7, 10).map((item) => {
+   194→                const Icon = iconMap[item.icon]
+   195→                const isActive = activeView === item.id
+   196→                return (
+   197→                  <SidebarMenuItem key={item.id}>
+   198→                    <SidebarMenuButton
+   199→                      isActive={isActive}
+   200→                      tooltip={item.label}
+   201→                      onClick={() => setActiveView(item.id)}
+   202→                      className={cn(
+   203→                        "transition-all duration-150",
+   204→                        isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
+   205→                      )}
+   206→                    >
+   207→                      {Icon && <Icon className="h-4 w-4" />}
+   208→                      <span>{item.label}</span>
+   209→                    </SidebarMenuButton>
+   210→                  </SidebarMenuItem>
+   211→                )
+   212→              })}
+   213→            </SidebarMenu>
+   214→          </SidebarGroupContent>
+   215→        </SidebarGroup>
+   216→        <SidebarGroup>
+   217→          <SidebarGroupLabel>System</SidebarGroupLabel>
+   218→          <SidebarGroupContent>
+   219→            <SidebarMenu>
+   220→              {filteredItems.slice(10).map((item) => {
+   221→                const Icon = iconMap[item.icon]
+   222→                const isActive = activeView === item.id
+   223→                return (
+   224→                  <SidebarMenuItem key={item.id}>
+   225→                    <SidebarMenuButton
+   226→                      isActive={isActive}
+   227→                      tooltip={item.label}
+   228→                      onClick={() => setActiveView(item.id)}
+   229→                      className={cn(
+   230→                        "transition-all duration-150",
+   231→                        isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
+   232→                      )}
+   233→                    >
+   234→                      {Icon && <Icon className="h-4 w-4" />}
+   235→                      <span>{item.label}</span>
+   236→                    </SidebarMenuButton>
+   237→                    {item.badge && item.badge > 0 && (
+   238→                      <SidebarMenuBadge className={isActive ? "bg-white/20 text-white" : "bg-blue-600 text-white"}>
+   239→                        {item.badge}
+   240→                      </SidebarMenuBadge>
+   241→                    )}
+   242→                  </SidebarMenuItem>
+   243→                )
+   244→              })}
+   245→            </SidebarMenu>
+   246→          </SidebarGroupContent>
+   247→        </SidebarGroup>
+   248→      </SidebarContent>
+   249→      <SidebarFooter className="p-2">
+   250→        <div className="space-y-2">
+   251→          <Select value={selectedWarehouse} onValueChange={setSelectedWarehouse}>
+   252→            <SelectTrigger className="h-8 border-none bg-muted/50 text-xs shadow-none group-data-[collapsible=icon]:hidden">
+   253→              <Warehouse className="h-3 w-3 shrink-0 text-muted-foreground" />
+   254→              <SelectValue placeholder="Select Warehouse" />
+   255→            </SelectTrigger>
+   256→            <SelectContent>
+   257→              <SelectItem value="all">All Warehouses</SelectItem>
+   258→              {warehouses.map((wh) => (
+   259→                <SelectItem key={wh.id} value={wh.id}>
+   260→                  <span className="flex items-center gap-2">
+   261→                    <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: wh.status === "green" ? "#10B981" : wh.status === "amber" ? "#F59E0B" : "#EF4444" }} />
+   262→                    {wh.name}
+   263→                  </span>
+   264→                </SelectItem>
+   265→              ))}
+   266→            </SelectContent>
+   267→          </Select>
+   268→          <Separator />
+   269→          <div className="flex items-center gap-2.5 px-2 py-1">
+   270→            <Avatar className="h-8 w-8 shrink-0">
+   271→              <AvatarFallback className="bg-gradient-to-br from-blue-600 to-blue-700 text-[10px] font-semibold text-white shadow-sm">RK</AvatarFallback>
+   272→            </Avatar>
+   273→            <div className="flex flex-1 flex-col min-w-0 group-data-[collapsible=icon]:hidden">
+   274→              <span className="truncate text-xs font-medium text-foreground">Rajesh Kumar</span>
+   275→              <span className="truncate text-[10px] text-muted-foreground capitalize">{currentRole.replace(/_/g, " ")}</span>
+   276→            </div>
+   277→          </div>
+   278→        </div>
+   279→      </SidebarFooter>
+   280→      <SidebarRail />
+   281→    </Sidebar>
+   282→  )
+   283→}
+   284→
+   285→// ──────────────────────────────────────────────────────
+   286→// Live Clock
+   287→// ──────────────────────────────────────────────────────
+   288→function LiveClock() {
+   289→  const [time, setTime] = React.useState("")
+   290→
+   291→  React.useEffect(() => {
+   292→    const tick = () => {
+   293→      setTime(
+   294→        new Date().toLocaleTimeString("en-IN", {
+   295→          hour: "2-digit",
+   296→          minute: "2-digit",
+   297→          second: "2-digit",
+   298→          hour12: true,
+   299→        })
+   300→      )
+   301→    }
+   302→    tick()
+   303→    const id = setInterval(tick, 1000)
+   304→    return () => clearInterval(id)
+   305→  }, [])
+   306→
+   307→  if (!time) return null
+   308→  return (
+   309→    <span className="hidden items-center gap-1.5 text-xs text-muted-foreground lg:flex">
+   310→      <Clock className="h-3 w-3" />
+   311→      {time}
+   312→    </span>
+   313→  )
+   314→}
+   315→
+   316→// ──────────────────────────────────────────────────────
+   317→// Notification Panel
+   318→// ──────────────────────────────────────────────────────
+   319→function NotificationPanel() {
+   320→  const [open, setOpen] = React.useState(false)
+   321→  const [sheetOpen, setSheetOpen] = React.useState(false)
+   322→  const alertCount = recentNotifications.length
+   323→
+   324→  return (
+   325→    <>
+   326→      <DropdownMenu open={open} onOpenChange={setOpen}>
+   327→        <DropdownMenuTrigger asChild>
+   328→          <Button variant="ghost" size="icon" className="relative h-8 w-8">
+   329→            <Bell className="h-4 w-4" />
+   330→            {alertCount > 0 && (
+   331→              <span className="badge-bounce absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white ring-2 ring-background">
+   332→                {alertCount}
+   333→              </span>
+   334→            )}
+   335→            <span className="sr-only">Notifications</span>
+   336→          </Button>
+   337→        </DropdownMenuTrigger>
+   338→        <DropdownMenuContent align="end" className="w-80 p-0" sideOffset={8}>
+   339→          <div className="flex items-center justify-between border-b px-4 py-3">
+   340→            <DropdownMenuLabel className="p-0 text-sm font-semibold">Notifications</DropdownMenuLabel>
+   341→            <Badge variant="secondary" className="text-[10px]">{alertCount} new</Badge>
+   342→          </div>
+   343→          <div className="max-h-72 overflow-y-auto">
+   344→            {recentNotifications.map((n) => {
+   345→              const SevIcon = severityIcon[n.severity as keyof typeof severityIcon] || Info
+   346→              const colorClass = severityColor[n.severity as keyof typeof severityColor] || "text-muted-foreground"
+   347→              return (
+   348→                <DropdownMenuItem key={n.id} className="flex items-start gap-3 px-4 py-3 cursor-pointer">
+   349→                  <SevIcon className={cn("mt-0.5 h-4 w-4 shrink-0", colorClass)} />
+   350→                  <div className="flex-1 min-w-0">
+   351→                    <p className="text-xs font-medium">{n.title}</p>
+   352→                    <p className="mt-0.5 text-[11px] text-muted-foreground line-clamp-1">{n.desc}</p>
+   353→                    <p className="mt-0.5 text-[10px] text-muted-foreground/60">{n.time}</p>
+   354→                  </div>
+   355→                </DropdownMenuItem>
+   356→              )
+   357→            })}
+   358→          </div>
+   359→          <div className="border-t px-4 py-2">
+   360→            <DropdownMenuItem
+   361→              className="justify-center text-xs text-blue-600 dark:text-blue-400 cursor-pointer"
+   362→              onSelect={(e) => {
+   363→                e.preventDefault()
+   364→                setOpen(false)
+   365→                setSheetOpen(true)
+   366→              }}
+   367→            >
+   368→              View All Notifications
+   369→            </DropdownMenuItem>
+   370→          </div>
+   371→        </DropdownMenuContent>
+   372→      </DropdownMenu>
+   373→      <NotificationsSheet open={sheetOpen} onOpenChange={setSheetOpen} />
+   374→    </>
+   375→  )
+   376→}
+   377→
+   378→// ──────────────────────────────────────────────────────
+   379→// Top Navigation
+   380→// ──────────────────────────────────────────────────────
+   381→export function TopNav() {
+   382→  const { activeView, currentRole, setCurrentRole, commandPaletteOpen, setCommandPaletteOpen } = useAppStore()
+   383→  const { theme, setTheme } = useTheme()
+   384→  const [mounted, setMounted] = React.useState(false)
+   385→
+   386→  React.useEffect(() => { setMounted(true) }, [])
+   387→
+   388→  const currentNavItem = navItems.find((item) => item.id === activeView)
+   389→
+   390→  const roles: { value: Role; label: string }[] = [
+   391→    { value: "super_admin", label: "Super Admin" },
+   392→    { value: "executive", label: "Executive" },
+   393→    { value: "regional_manager", label: "Regional Manager" },
+   394→    { value: "warehouse_manager", label: "Warehouse Manager" },
+   395→    { value: "supervisor", label: "Supervisor" },
+   396→    { value: "operator", label: "Operator" },
+   397→  ]
+   398→
+   399→  return (
+   400→    <header className="container-glass sticky top-0 z-30 flex h-14 items-center gap-2 px-4">
+   401→      {/* Left: Sidebar trigger + Breadcrumb */}
+   402→      <div className="flex items-center gap-2">
+   403→        <SidebarTrigger className="-ml-1" />
+   404→        <Separator orientation="vertical" className="mx-1 h-5" />
+   405→        <Breadcrumb className="hidden sm:flex">
+   406→          <BreadcrumbList>
+   407→            <BreadcrumbItem>
+   408→              <BreadcrumbPage className="text-sm font-semibold text-foreground">
+   409→                {currentNavItem?.label || "Dashboard"}
+   410→              </BreadcrumbPage>
+   411→            </BreadcrumbItem>
+   412→          </BreadcrumbList>
+   413→        </Breadcrumb>
+   414→      </div>
+   415→
+   416→      {/* Center: Search */}
+   417→      <div className="flex flex-1 items-center justify-center">
+   418→        <Button
+   419→          variant="outline"
+   420→          size="sm"
+   421→          className="hidden h-8 w-64 justify-start gap-2 rounded-lg border-dashed text-muted-foreground transition-colors hover:border-solid hover:bg-muted/50 md:flex"
+   422→          onClick={() => setCommandPaletteOpen(true)}
+   423→        >
+   424→          <Search className="h-3.5 w-3.5" />
+   425→          <span className="text-xs">Search pages...</span>
+   426→          <kbd className="pointer-events-none ml-auto inline-flex h-5 select-none items-center gap-0.5 rounded border bg-muted/80 px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+   427→            <span className="text-[9px]">⌘</span>K
+   428→          </kbd>
+   429→        </Button>
+   430→      </div>
+   431→
+   432→      {/* Mobile search button */}
+   433→      <Button variant="ghost" size="icon" className="h-8 w-8 md:hidden" onClick={() => setCommandPaletteOpen(true)}>
+   434→        <Search className="h-4 w-4" />
+   435→      </Button>
+   436→
+   437→      {/* Right: Controls */}
+   438→      <div className="flex items-center gap-1.5">
+   439→        <LiveClock />
+   440→
+   441→        {/* Role Switcher */}
+   442→        <DropdownMenu>
+   443→          <DropdownMenuTrigger asChild>
+   444→            <Button variant="outline" size="sm" className="hidden gap-1.5 h-8 text-xs rounded-lg lg:flex">
+   445→              <Shield className="h-3 w-3" />
+   446→              <span className="max-w-[100px] truncate capitalize">{currentRole.replace(/_/g, " ")}</span>
+   447→              <ChevronDown className="h-2.5 w-2.5" />
+   448→            </Button>
+   449→          </DropdownMenuTrigger>
+   450→          <DropdownMenuContent align="end" className="w-48">
+   451→            <DropdownMenuLabel className="text-xs">Switch Role</DropdownMenuLabel>
+   452→            <DropdownMenuSeparator />
+   453→            {roles.map((role) => (
+   454→              <DropdownMenuItem
+   455→                key={role.value}
+   456→                className={cn(
+   457→                  "text-xs cursor-pointer",
+   458→                  currentRole === role.value && "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300"
+   459→                )}
+   460→                onClick={() => setCurrentRole(role.value)}
+   461→              >
+   462→                {role.label}
+   463→              </DropdownMenuItem>
+   464→            ))}
+   465→          </DropdownMenuContent>
+   466→        </DropdownMenu>
+   467→
+   468→        {/* Notifications */}
+   469→        <NotificationPanel />
+   470→
+   471→        {/* Theme Toggle */}
+   472→        {mounted && (
+   473→          <Button
+   474→            variant="ghost"
+   475→            size="icon"
+   476→            className="h-8 w-8"
+   477→            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+   478→          >
+   479→            <Sun className="h-4 w-4 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
+   480→            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
+   481→            <span className="sr-only">Toggle theme</span>
+   482→          </Button>
+   483→        )}
+   484→
+   485→        {/* Profile */}
+   486→        <DropdownMenu>
+   487→          <DropdownMenuTrigger asChild>
+   488→            <Button variant="ghost" className="relative h-8 gap-2 rounded-full pl-1.5 pr-2.5 hover:bg-muted">
+   489→              <Avatar className="h-7 w-7">
+   490→                <AvatarFallback className="bg-gradient-to-br from-blue-600 to-blue-700 text-[10px] font-semibold text-white shadow-sm">RK</AvatarFallback>
+   491→              </Avatar>
+   492→              <span className="hidden text-xs font-medium lg:inline-block">Rajesh Kumar</span>
+   493→            </Button>
+   494→          </DropdownMenuTrigger>
+   495→          <DropdownMenuContent align="end" className="w-52" forceMount>
+   496→            <DropdownMenuLabel className="font-normal">
+   497→              <div className="flex flex-col gap-1">
+   498→                <div className="flex items-center gap-2">
+   499→                  <Avatar className="h-8 w-8">
+   500→                    <AvatarFallback className="bg-gradient-to-br from-blue-600 to-blue-700 text-[10px] font-semibold text-white">RK</AvatarFallback>
+   501→                  </Avatar>
+   502→                  <div>
+   503→                    <p className="text-sm font-medium leading-none">Rajesh Kumar</p>
+   504→                    <p className="mt-1 text-[11px] text-muted-foreground capitalize">{currentRole.replace(/_/g, " ")}</p>
+   505→                  </div>
+   506→                </div>
+   507→              </div>
+   508→            </DropdownMenuLabel>
+   509→            <DropdownMenuSeparator />
+   510→            <DropdownMenuGroup>
+   511→              <DropdownMenuItem className="text-xs cursor-pointer">
+   512→                <User className="mr-2 h-3.5 w-3.5" /> Profile
+   513→              </DropdownMenuItem>
+   514→              <DropdownMenuItem className="text-xs cursor-pointer" onClick={() => useAppStore.getState().setActiveView("settings")}>
+   515→                <Settings className="mr-2 h-3.5 w-3.5" /> Settings
+   516→              </DropdownMenuItem>
+   517→            </DropdownMenuGroup>
+   518→            <DropdownMenuSeparator />
+   519→            <DropdownMenuItem variant="destructive" className="text-xs cursor-pointer">
+   520→              <LogOut className="mr-2 h-3.5 w-3.5" /> Log out
+   521→            </DropdownMenuItem>
+   522→          </DropdownMenuContent>
+   523→        </DropdownMenu>
+   524→      </div>
+   525→    </header>
+   526→  )
+   527→}
+   528→
+   529→// ──────────────────────────────────────────────────────
+   530→// Command Palette
+   531→// ──────────────────────────────────────────────────────
+   532→export function CommandPalette() {
+   533→  const { commandPaletteOpen, setCommandPaletteOpen, setActiveView } = useAppStore()
+   534→  const [search, setSearch] = React.useState("")
+   535→  const inputRef = React.useRef<HTMLInputElement>(null)
+   536→
+   537→  React.useEffect(() => {
+   538→    const down = (e: KeyboardEvent) => {
+   539→      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+   540→        e.preventDefault()
+   541→        setCommandPaletteOpen(!commandPaletteOpen)
+   542→      }
+   543→      if (e.key === "Escape" && commandPaletteOpen) {
+   544→        setCommandPaletteOpen(false)
+   545→        setSearch("")
+   546→      }
+   547→    }
+   548→    document.addEventListener("keydown", down)
+   549→    return () => document.removeEventListener("keydown", down)
+   550→  }, [commandPaletteOpen, setCommandPaletteOpen])
+   551→
+   552→  React.useEffect(() => {
+   553→    if (commandPaletteOpen && inputRef.current) {
+   554→      inputRef.current.focus()
+   555→    }
+   556→  }, [commandPaletteOpen])
+   557→
+   558→  const filtered = navItems.filter((item) =>
+   559→    item.label.toLowerCase().includes(search.toLowerCase())
+   560→  )
+   561→
+   562→  return (
+   563→    <>
+   564→      <div
+   565→        className={cn(
+   566→          "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-200",
+   567→          commandPaletteOpen ? "opacity-100" : "pointer-events-none opacity-0"
+   568→        )}
+   569→        onClick={() => { setCommandPaletteOpen(false); setSearch("") }}
+   570→      />
+   571→      <div
+   572→        className={cn(
+   573→          "fixed left-1/2 top-[15%] z-50 w-full max-w-lg -translate-x-1/2 rounded-2xl border border-border/60 bg-background shadow-2xl shadow-black/20 transition-all duration-200",
+   574→          commandPaletteOpen ? "scale-100 opacity-100" : "scale-95 opacity-0 pointer-events-none"
+   575→        )}
+   576→      >
+   577→        <div className="flex items-center gap-2 border-b px-4">
+   578→          <Search className="h-4 w-4 shrink-0 text-muted-foreground" />
+   579→          <input
+   580→            ref={inputRef}
+   581→            placeholder="Search pages, warehouses, actions..."
+   582→            className="flex-1 bg-transparent py-3.5 text-sm outline-none placeholder:text-muted-foreground"
+   583→            value={search}
+   584→            onChange={(e) => setSearch(e.target.value)}
+   585→          />
+   586→          <kbd className="pointer-events-none inline-flex h-5 select-none items-center rounded border bg-muted/80 px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+   587→            ESC
+   588→          </kbd>
+   589→        </div>
+   590→        <div className="max-h-72 overflow-y-auto p-2">
+   591→          <div className="px-2 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+   592→            {search ? "Results" : "Quick Navigation"}
+   593→          </div>
+   594→          {filtered.map((item) => {
+   595→            const Icon = iconMap[item.icon]
+   596→            const isActive = useAppStore.getState().activeView === item.id
+   597→            return (
+   598→              <button
+   599→                key={item.id}
+   600→                className={cn(
+   601→                  "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-left transition-colors",
+   602→                  isActive ? "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300" : "hover:bg-muted"
+   603→                )}
+   604→                onClick={() => {
+   605→                  setActiveView(item.id)
+   606→                  setCommandPaletteOpen(false)
+   607→                  setSearch("")
+   608→                }}
+   609→              >
+   610→                {Icon ? <Icon className="h-4 w-4 shrink-0" /> : <div className="h-4 w-4" />}
+   611→                <span className="flex-1">{item.label}</span>
+   612→                {isActive && <span className="text-[10px] text-muted-foreground">Current</span>}
+   613→              </button>
+   614→            )
+   615→          })}
+   616→          {filtered.length === 0 && (
+   617→            <div className="px-3 py-8 text-center text-sm text-muted-foreground">
+   618→              No results for &ldquo;{search}&rdquo;
+   619→            </div>
+   620→          )}
+   621→        </div>
+   622→        <div className="border-t px-4 py-2 flex items-center justify-between text-[10px] text-muted-foreground">
+   623→          <span>Type to search</span>
+   624→          <span className="flex items-center gap-1">
+   625→            <kbd className="rounded border bg-muted px-1 py-0.5 font-mono text-[9px]">↑↓</kbd> navigate
+   626→            <kbd className="rounded border bg-muted px-1 py-0.5 font-mono text-[9px] ml-2">↵</kbd> select
+   627→            <kbd className="rounded border bg-muted px-1 py-0.5 font-mono text-[9px] ml-2">?</kbd> shortcuts
+   628→          </span>
+   629→        </div>
+   630→      </div>
+   631→    </>
+   632→  )
+   633→}
+   634→
+   635→// ──────────────────────────────────────────────────────
+   636→// App Layout (Root)
+   637→// ──────────────────────────────────────────────────────
+   638→export function AppLayout({ children }: { children: ReactNode }) {
+   639→  return (
+   640→    <>
+   641→      <AppSidebar />
+   642→      <SidebarInset className="flex min-h-svh flex-col">
+   643→        <TopNav />
+   644→        <main className="flex-1 pb-16 md:pb-0">
+   645→          {children}
+   646→        </main>
+   647→        <footer className="no-print mt-auto hidden border-t px-4 py-2 md:flex md:items-center md:justify-between">
+   648→          <span className="text-[10px] text-muted-foreground">
+   649→            © 2024 AutoFlow Logistics | Enterprise Warehouse Management
+   650→          </span>
+   651→          <span className="text-[10px] text-muted-foreground">
+   652→            v1.0.0 · Built with Next.js
+   653→          </span>
+   654→        </footer>
+   655→      </SidebarInset>
+   656→      <MobileBottomNav />
+   657→      <CommandPalette />
+   658→      <KeyboardShortcutsDialog />
+   659→    </>
+   660→  )
+   661→}
+   662→

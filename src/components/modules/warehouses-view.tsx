@@ -67,7 +67,7 @@ interface SummaryStatProps {
 
 function SummaryStat({ icon, label, value, sublabel }: SummaryStatProps) {
   return (
-    <Card className="py-0 gap-0">
+    <Card className="card-depth py-0 gap-0">
       <CardContent className="flex items-center gap-4 py-4">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
           {icon}

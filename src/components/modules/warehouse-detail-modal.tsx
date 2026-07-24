@@ -94,7 +94,7 @@ const throughputChartConfig = {
 
 function StatCard({ icon, label, value, color }: { icon: React.ReactNode; label: string; value: string | number; color: string }) {
   return (
-    <Card className="rounded-xl border-border/60 shadow-sm">
+    <Card className="card-depth rounded-xl border-border/60 shadow-sm">
       <CardContent className="flex items-center gap-3 p-4">
         <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg", color)}>
           {icon}
@@ -194,7 +194,7 @@ export function WarehouseDetailModal({ open, onOpenChange, warehouse }: Warehous
 
         {/* ── Capacity Bar ── */}
         <div className="px-6 pb-4">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardContent className="p-4">
               <div className="flex items-center justify-between text-xs mb-2">
                 <span className="font-medium text-muted-foreground">Capacity Usage</span>
@@ -257,7 +257,7 @@ export function WarehouseDetailModal({ open, onOpenChange, warehouse }: Warehous
 
         {/* ── Equipment Section ── */}
         <div className="px-6 pb-4">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-semibold">Equipment Status</CardTitle>
               <CardDescription className="text-xs">Forklift fleet overview</CardDescription>
@@ -317,7 +317,7 @@ export function WarehouseDetailModal({ open, onOpenChange, warehouse }: Warehous
 
         {/* ── Recent Shipments ── */}
         <div className="px-6 pb-6">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="card-depth rounded-xl border-border/60 shadow-sm">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-semibold">Recent Shipments</CardTitle>
               <CardDescription className="text-xs">Latest inbound and outbound activity</CardDescription>

@@ -164,7 +164,7 @@ export function CostAnalyticsView() {
       </div>
 
       {/* MoM Comparison */}
-      <Card className="rounded-xl border-border/60 shadow-sm">
+      <Card className="card-depth rounded-xl border-border/60 shadow-sm">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-semibold">Month-over-Month Comparison</CardTitle>
           <CardDescription className="text-xs">Last 6 months with change percentages</CardDescription>

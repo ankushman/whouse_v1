@@ -1,7 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin, isSupabaseConfigured } from '@/lib/supabase'
+import { inventoryItems } from '@/data/mock-data'
+
+function mockResponse(searchParams: URLSearchParams) {
+  let data = inventoryItems
+  const warehouse = searchParams.get('warehouse')
+  const category = searchParams.get('category')
+  const abc = searchParams.get('abc')
+  const search = searchParams.get('search')
+  const belowMin = searchParams.get('belowMin') === 'true'
+  if (warehouse) data = data.filter(i => i.warehouse.toLowerCase().includes(warehouse.toLowerCase()))
+  if (category) data = data.filter(i => i.category === category)
+  if (abc) data = data.filter(i => i.abcClass === abc)
+  if (search) data = data.filter(i => i.partName.toLowerCase().includes(search.toLowerCase()) || i.sku.toLowerCase().includes(search.toLowerCase()))
+  if (belowMin) data = data.filter(i => i.quantity < i.minStock)
+  return NextResponse.json({ data, count: data.length })
+}
 
 export async function GET(request: NextRequest) {
+  if (!isSupabaseConfigured()) return mockResponse(new URL(request.url).searchParams)
   try {
     const { searchParams } = new URL(request.url)
     const warehouse = searchParams.get('warehouse')

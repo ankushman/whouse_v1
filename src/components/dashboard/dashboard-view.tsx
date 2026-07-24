@@ -34,7 +34,6 @@ import {
 } from "recharts"
 import { kpiMetrics, inboundTrend, outboundTrend, warehousePerformance, dispatchPerformance, costTrend, dailyThroughput, slaData, inventoryAccuracyTrend, manpowerProductivity } from "@/data/mock-data"
 import { KPICard } from "@/components/shared/kpi-card"
-import { PageHeader } from "@/components/shared/page-header"
 import { LiveUpdatesFeed } from "@/components/shared/live-updates-feed"
 import { cn } from "@/lib/utils"
 
@@ -176,11 +175,15 @@ export function DashboardView() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-        <PageHeader
-          title="Executive Dashboard"
-          description="Real-time overview of all warehouse operations across India"
-        />
+      {/* Dashboard Header */}
+      <div className="dashboard-header-gradient -m-4 mb-0 p-4 md:-m-6 md:p-6 rounded-none">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-xl font-bold tracking-tight">
+              <span className="gradient-text">Executive Dashboard</span>
+            </h1>
+            <p className="text-xs text-muted-foreground">Real-time overview of all warehouse operations across India</p>
+          </div>
         <div className="flex flex-col gap-1.5 shrink-0 sm:items-end">
           <div className="flex items-center gap-3">
             {/* Date Range Picker */}
@@ -477,6 +480,7 @@ export function DashboardView() {
           </CardContent>
         </Card>
       </div>
+    </div>
     </div>
   )
 }
