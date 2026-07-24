@@ -1,0 +1,291 @@
+"use client"
+
+import { useMemo, useState } from "react"
+import { employees } from "@/data/mock-data"
+import { PageHeader } from "@/components/shared/page-header"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import {
+  Users,
+  UserCheck,
+  TrendingUp,
+  CalendarCheck,
+  Trophy,
+  Crown,
+  Medal,
+  Award,
+} from "lucide-react"
+import { cn } from "@/lib/utils"
+
+function getRankBadge(rank: number) {
+  if (rank === 1)
+    return (
+      <Badge className="bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-100 gap-1">
+        <Crown className="size-3" /> 1st
+      </Badge>
+    )
+  if (rank === 2)
+    return (
+      <Badge className="bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-100 gap-1">
+        <Medal className="size-3" /> 2nd
+      </Badge>
+    )
+  if (rank === 3)
+    return (
+      <Badge className="bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-100 gap-1">
+        <Award className="size-3" /> 3rd
+      </Badge>
+    )
+  return <span className="text-muted-foreground tabular-nums text-sm">{rank}</span>
+}
+
+function shiftColor(shift: string) {
+  switch (shift) {
+    case "Morning":
+      return "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-800"
+    case "Afternoon":
+      return "bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-950 dark:text-sky-300 dark:border-sky-800"
+    case "Night":
+      return "bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-950 dark:text-violet-300 dark:border-violet-800"
+    default:
+      return ""
+  }
+}
+
+function productivityColor(p: number) {
+  if (p >= 90) return "text-emerald-600 font-semibold"
+  if (p >= 80) return "text-amber-600 font-medium"
+  return "text-red-600"
+}
+
+export function EmployeesView() {
+  const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
+
+  const warehouseList = useMemo(
+    () => ["all", ...Array.from(new Set(employees.map((e) => e.warehouse)))],
+    []
+  )
+
+  const filtered = useMemo(
+    () =>
+      warehouseFilter === "all"
+        ? employees
+        : employees.filter((e) => e.warehouse === warehouseFilter),
+    [warehouseFilter]
+  )
+
+  const sorted = useMemo(
+    () => [...filtered].sort((a, b) => a.rank - b.rank),
+    [filtered]
+  )
+
+  const stats = useMemo(
+    () => ({
+      total: filtered.length,
+      onShift: Math.round(filtered.length * 0.78),
+      avgProductivity: Math.round(
+        filtered.reduce((s, e) => s + e.productivity, 0) / (filtered.length || 1)
+      ),
+      avgAttendance: Math.round(
+        filtered.reduce((s, e) => s + e.attendance, 0) / (filtered.length || 1)
+      ),
+    }),
+    [filtered]
+  )
+
+  return (
+    <div className="space-y-6">
+      <PageHeader
+        title="Employees"
+        description="Workforce management and performance tracking"
+      />
+
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <Card className="py-0 gap-0">
+          <CardContent className="flex items-center gap-4 py-4">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
+              <Users className="size-5 text-muted-foreground" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Total Employees
+              </p>
+              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight">
+                {stats.total}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="py-0 gap-0">
+          <CardContent className="flex items-center gap-4 py-4">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/60">
+              <UserCheck className="size-5 text-emerald-600" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                On Shift Today
+              </p>
+              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight text-emerald-600">
+                {stats.onShift}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="py-0 gap-0">
+          <CardContent className="flex items-center gap-4 py-4">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
+              <TrendingUp className="size-5 text-muted-foreground" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Avg Productivity
+              </p>
+              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight">
+                {stats.avgProductivity}%
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="py-0 gap-0">
+          <CardContent className="flex items-center gap-4 py-4">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
+              <CalendarCheck className="size-5 text-muted-foreground" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Avg Attendance
+              </p>
+              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight">
+                {stats.avgAttendance}%
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="rounded-xl">
+        <CardHeader className="flex flex-row items-center justify-between pb-4 gap-4">
+          <div className="flex items-center gap-2">
+            <Trophy className="size-5 text-amber-500" />
+            <CardTitle className="text-base font-semibold">
+              Performance Leaderboard
+            </CardTitle>
+          </div>
+          <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
+            <SelectTrigger className="w-[180px] h-9 text-sm">
+              <SelectValue placeholder="Filter warehouse" />
+            </SelectTrigger>
+            <SelectContent>
+              {warehouseList.map((wh) => (
+                <SelectItem key={wh} value={wh}>
+                  {wh === "all" ? "All Warehouses" : wh}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea className="max-h-[520px]">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-16 text-center">Rank</TableHead>
+                  <TableHead>Name</TableHead>
+                  <TableHead className="hidden md:table-cell">Role</TableHead>
+                  <TableHead className="hidden lg:table-cell">Warehouse</TableHead>
+                  <TableHead className="hidden sm:table-cell">Shift</TableHead>
+                  <TableHead className="text-right">Attend.</TableHead>
+                  <TableHead className="text-right hidden sm:table-cell">Tasks</TableHead>
+                  <TableHead className="text-right">Productivity</TableHead>
+                  <TableHead className="text-right hidden md:table-cell">Error</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sorted.map((emp) => (
+                  <TableRow key={emp.id}>
+                    <TableCell className="text-center">
+                      {getRankBadge(emp.rank)}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2.5">
+                        <Avatar className="size-7">
+                          <AvatarFallback className="text-[10px] font-semibold bg-muted">
+                            {emp.avatar}
+                          </AvatarFallback>
+                        </Avatar>
+                        <span className="font-medium text-sm whitespace-nowrap">
+                          {emp.name}
+                        </span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
+                      {emp.role}
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
+                      {emp.warehouse}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <Badge
+                        variant="outline"
+                        className={cn(
+                          "text-[10px] font-normal rounded-full",
+                          shiftColor(emp.shift)
+                        )}
+                      >
+                        {emp.shift}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right tabular-nums text-sm">
+                      {emp.attendance}%
+                    </TableCell>
+                    <TableCell className="text-right tabular-nums text-sm hidden sm:table-cell">
+                      {emp.tasksCompleted}
+                    </TableCell>
+                    <TableCell className="text-right tabular-nums text-sm">
+                      <span className={productivityColor(emp.productivity)}>
+                        {emp.productivity}%
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right tabular-nums text-sm hidden md:table-cell">
+                      <span
+                        className={cn(
+                          emp.errorRate > 3
+                            ? "text-red-600"
+                            : emp.errorRate > 1.5
+                              ? "text-amber-600"
+                              : "text-muted-foreground"
+                        )}
+                      >
+                        {emp.errorRate}%
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </ScrollArea>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
