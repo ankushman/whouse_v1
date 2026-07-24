@@ -37,6 +37,16 @@ const statusVariant: Record<string, "green" | "amber" | "red" | "blue" | "gray">
   Delivered: "green",
 }
 
+const textColorMap: Record<string, string> = {
+  Total: "text-blue-600 dark:text-blue-400",
+  Pending: "text-slate-600 dark:text-slate-400",
+  Picking: "text-blue-600 dark:text-blue-400",
+  Packing: "text-amber-600 dark:text-amber-400",
+  Ready: "text-blue-600 dark:text-blue-400",
+  Dispatched: "text-indigo-600 dark:text-indigo-400",
+  Delivered: "text-emerald-600 dark:text-emerald-400",
+}
+
 const stepIndexMap: Record<string, number> = {
   Pending: 0, Picking: 1, Packing: 2, Ready: 3, Dispatched:4, Delivered: 5,
 }
@@ -94,7 +104,7 @@ export function OutboundView() {
           <Card key={item.label} className="rounded-xl border-border/60 shadow-sm">
             <CardContent className="p-3 text-center">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
-              <p className={cn("mt-1 text-xl font-bold", item.color.split(" ")[1])}>{item.value}</p>
+              <p className={cn("mt-1 text-xl font-bold", textColorMap[item.label])}>{item.value}</p>
             </CardContent>
           </Card>
         ))}

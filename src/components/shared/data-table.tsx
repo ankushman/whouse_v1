@@ -137,7 +137,7 @@ export function DataTable<T extends Record<string, any>>({
         </div>
       )}
 
-      <div className="rounded-xl border bg-card">
+      <div className="rounded-xl border bg-card table-row-hover">
         <Table>
           <TableHeader>
             <TableRow
@@ -222,14 +222,14 @@ export function DataTable<T extends Record<string, any>>({
           </span>
           <div className="flex items-center gap-1">
             <button
-              className="inline-flex items-center justify-center rounded-md p-1.5 hover:bg-muted disabled:opacity-40 disabled:pointer-events-none transition-colors"
+              className="inline-flex items-center justify-center rounded-md p-1.5 hover:bg-muted disabled:opacity-40 disabled:pointer-events-none transition-colors btn-press"
               disabled={safeCurrentPage <= 1}
               onClick={() => handlePageChange(safeCurrentPage - 1)}
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
             <button
-              className="inline-flex items-center justify-center rounded-md p-1.5 hover:bg-muted disabled:opacity-40 disabled:pointer-events-none transition-colors"
+              className="inline-flex items-center justify-center rounded-md p-1.5 hover:bg-muted disabled:opacity-40 disabled:pointer-events-none transition-colors btn-press"
               disabled={safeCurrentPage >= totalPages}
               onClick={() => handlePageChange(safeCurrentPage + 1)}
             >

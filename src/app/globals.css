@@ -505,3 +505,115 @@
     transparent 100%
   );
 }
+
+/* ── Table Row Hover Accent ────────────────────────── */
+
+.table-row-hover tbody tr {
+  transition: all 0.15s ease;
+  border-left: 3px solid transparent;
+}
+.table-row-hover tbody tr:hover {
+  border-left-color: oklch(0.488 0.243 264);
+  background: oklch(0.96 0.005 250);
+}
+.dark .table-row-hover tbody tr:hover {
+  background: oklch(0.22 0.015 250);
+}
+
+/* ── Card Depth Effect ──────────────────────────────── */
+
+.card-depth {
+  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 0.6), 0 1px 3px 0 oklch(0 0 0 / 0.04);
+}
+.dark .card-depth {
+  box-shadow: inset 0 1px 0 0 oklch(1 0 0 / 0.05), 0 1px 3px 0 oklch(0 0 0 / 0.2);
+}
+
+/* ── Gradient Text Utility ──────────────────────────── */
+
+.text-gradient {
+  background: linear-gradient(135deg, oklch(0.488 0.243 264), oklch(0.646 0.222 41.116));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Badge Glow Effects ──────────────────────────────── */
+
+.badge-glow-critical {
+  box-shadow: 0 0 8px 0 oklch(0.577 0.245 27.325 / 0.3);
+}
+.badge-glow-warning {
+  box-shadow: 0 0 8px 0 oklch(0.795 0.184 86 / 0.3);
+}
+
+/* ── Button Press Effect ────────────────────────────── */
+
+.btn-press:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease;
+}
+
+/* ── Data Row Enter Animation ────────────────────────── */
+
+@keyframes data-row-slide {
+  from { opacity: 0; transform: translateX(-4px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.data-row-enter {
+  animation: data-row-slide 0.2s ease-out;
+}
+
+/* ── Live Pulse Indicator ──────────────────────────── */
+
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.627 0.194 149 / 0.5); }
+  50% { box-shadow: 0 0 0 6px oklch(0.627 0.194 149 / 0); }
+}
+.live-indicator {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+/* ── Noise Texture Background ────────────────────────── */
+
+.texture-bg {
+  position: relative;
+}
+.texture-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Sidebar Active Bar Indicator ────────────────────── */
+
+.sidebar-active-bar {
+  position: relative;
+}
+.sidebar-active-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: oklch(0.488 0.243 264);
+  border-radius: 0 3px 3px 0;
+}
+
+/* ── Scroll Reveal Animation ─────────────────────────── */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
