@@ -781,3 +781,61 @@
 .dark .section-divider-label {
   color: oklch(0.65 0.02 250);
 }
+
+/* ── Print Styles ──────────────────────────────────────────── */
+@media print {
+  /* Hide interactive elements */
+  .no-print,
+  [data-slot="sidebar"],
+  [role="navigation"],
+  button:not(.print-include),
+  .mobile-bottom-nav,
+  .command-palette-overlay,
+  .toast-container {
+    display: none !important;
+  }
+
+  /* Full-width content */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Clean cards for print */
+  .card {
+    break-inside: avoid;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+  }
+
+  /* Tables print well */
+  table {
+    font-size: 10pt !important;
+  }
+
+  thead {
+    background: #f5f5f5 !important;
+  }
+
+  /* Force dark mode to light for print */
+  :root {
+    color-scheme: light !important;
+  }
+
+  /* Page headers */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  /* Show link URLs */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

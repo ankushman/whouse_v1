@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect, useCallback, useMemo } from "react"
+import { useState, useEffect, useCallback, useMemo, useRef } from "react"
+import { useLiveData } from "@/hooks/use-live-data"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
@@ -85,6 +86,8 @@ function formatTimeAgo(timestamp: number): string {
 
 export function LiveUpdatesFeed({ maxItems = 6 }: { maxItems?: number }) {
   const [isPaused, setIsPaused] = useState(false)
+  const [wsConnected, setWsConnected] = useState(false)
+  const hasConnectedRef = useRef(false)
 
   const initialEvents = useMemo((): LiveEvent[] => {
     return Array.from({ length: maxItems }, (_, i) => ({
@@ -105,9 +108,25 @@ export function LiveUpdatesFeed({ maxItems = 6 }: { maxItems?: number }) {
     }
   }, [])
 
-  // Add new events periodically
+  // WebSocket event handler
+  const handleWsEvent = useCallback((wsEvent: { type: string; title: string; message: string; warehouse: string; severity: string; timestamp: string }) => {
+    const newEvent: LiveEvent = {
+      id: `ws-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      type: (wsEvent.type === "sla" ? "sla" : wsEvent.type === "dock" ? "capacity" : wsEvent.type === "vehicle" ? "dispatch" : wsEvent.type === "temperature" ? "equipment" : wsEvent.type === "shift" ? "capacity" : "inbound") as LiveEvent["type"],
+      description: wsEvent.message,
+      warehouse: wsEvent.warehouse,
+      severity: wsEvent.severity as LiveEvent["severity"],
+      timestamp: Date.now(),
+    }
+    setEvents(prev => [newEvent, ...prev].slice(0, maxItems))
+  }, [maxItems])
+
+  // Connect to WebSocket live data service
+  const { isConnected: wsIsConnected } = useLiveData(handleWsEvent)
+
+  // Local fallback: generate events only if WebSocket is not connected
   useEffect(() => {
-    if (isPaused) return
+    if (isPaused || wsConnected) return
 
     const interval = setInterval(() => {
       setEvents(prev => {
@@ -117,7 +136,7 @@ export function LiveUpdatesFeed({ maxItems = 6 }: { maxItems?: number }) {
     }, 8000 + Math.random() * 7000) // Random interval between 8-15 seconds
 
     return () => clearInterval(interval)
-  }, [isPaused, generateEvent, maxItems])
+  }, [isPaused, generateEvent, maxItems, wsConnected])
 
   // Update timestamps every 10s
   useEffect(() => {
@@ -138,7 +157,10 @@ export function LiveUpdatesFeed({ maxItems = 6 }: { maxItems?: number }) {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5">
               <div className={cn("h-2 w-2 rounded-full", isPaused ? "bg-muted-foreground" : "bg-emerald-500 live-indicator")} />
-              <span className="text-[10px] text-muted-foreground">{isPaused ? "Paused" : "Live"}</span>
+              <span className={cn(
+                "text-[10px] font-medium",
+                wsConnected ? "text-emerald-600 dark:text-emerald-400" : isPaused ? "text-muted-foreground" : "text-amber-600 dark:text-amber-400"
+              )}>{wsConnected ? "● Live" : isPaused ? "Paused" : "Local"}</span>
             </div>
             <Badge variant="secondary" className="text-[10px] gap-1 cursor-pointer select-none" onClick={() => setIsPaused(!isPaused)}>
               <Zap className="h-2.5 w-2.5" />
@@ -189,6 +211,9 @@ export function LiveUpdatesFeed({ maxItems = 6 }: { maxItems?: number }) {
                     styles.badge
                   )}
                 >
+                  {event.id.startsWith("ws-") && (
+                    <span className="mr-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-emerald-500 text-[7px] font-bold text-white">W</span>
+                  )}
                   {event.severity === "critical" ? "Critical" : event.severity === "warning" ? "Warning" : event.severity === "success" ? "Resolved" : "Info"}
                 </Badge>
               </div>

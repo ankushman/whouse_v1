@@ -16,6 +16,8 @@ import {
   PackageSearch,
   Activity,
   Calendar,
+  AlertTriangle,
+  Wrench,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -120,11 +122,57 @@ const manpowerChartConfig = {
   night: { label: "Night", color: "#F59E0B" },
 }
 
+function getDateRange(range: DateRangeValue) {
+  const now = new Date()
+  const to = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  let from: Date
+  let label: string
+  switch (range) {
+    case "today":
+      label = "Today"
+      from = new Date(to)
+      break
+    case "7d":
+      label = "Last 7 Days"
+      from = new Date(to)
+      from.setDate(from.getDate() - 6)
+      break
+    case "30d":
+      label = "Last 30 Days"
+      from = new Date(to)
+      from.setDate(from.getDate() - 29)
+      break
+    case "90d":
+      label = "Last 90 Days"
+      from = new Date(to)
+      from.setDate(from.getDate() - 89)
+      break
+    case "12m":
+      label = "Last 12 Months"
+      from = new Date(to)
+      from.setFullYear(from.getFullYear() - 1)
+      break
+  }
+  return { label, from: from!, to }
+}
+
+function formatDateShort(d: Date): string {
+  return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short" })
+}
+
+const quickStats = [
+  { label: "Pending GRN", value: 24, icon: Package, colorClass: "border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-800/60 dark:bg-blue-950/70 dark:text-blue-300" },
+  { label: "Delayed", value: 8, icon: Truck, colorClass: "border-red-200 bg-red-50 text-red-700 dark:border-red-800/60 dark:bg-red-950/70 dark:text-red-300" },
+  { label: "SLA Breaches", value: 3, icon: AlertTriangle, colorClass: "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/70 dark:text-amber-300" },
+  { label: "Maintenance", value: 2, icon: Wrench, colorClass: "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-800/60 dark:bg-zinc-950/70 dark:text-zinc-300" },
+] as const
+
 export function DashboardView() {
   const [lastUpdated] = React.useState(() =>
     new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
   )
   const [selectedRange, setSelectedRange] = React.useState<DateRangeValue>("7d")
+  const dateInfo = getDateRange(selectedRange)
 
   return (
     <div className="space-y-6">
@@ -133,36 +181,64 @@ export function DashboardView() {
           title="Executive Dashboard"
           description="Real-time overview of all warehouse operations across India"
         />
-        <div className="flex items-center gap-3 shrink-0">
-          {/* Date Range Picker */}
-          <div className="flex items-center rounded-lg border border-border/60 bg-muted/40 p-0.5">
-            <Calendar className="ml-1.5 h-3 w-3 text-muted-foreground" />
-            {DATE_RANGES.map((range) => (
-              <Button
-                key={range.value}
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  "h-6 rounded-md px-2 text-[11px] font-medium transition-colors",
-                  selectedRange === range.value
-                    ? "bg-background shadow-sm text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                onClick={() => setSelectedRange(range.value)}
-              >
-                {range.label}
-              </Button>
-            ))}
-          </div>
+        <div className="flex flex-col gap-1.5 shrink-0 sm:items-end">
+          <div className="flex items-center gap-3">
+            {/* Date Range Picker */}
+            <div className="flex items-center rounded-lg border border-border/60 bg-muted/40 p-0.5">
+              <Calendar className="ml-1.5 h-3 w-3 text-muted-foreground" />
+              {DATE_RANGES.map((range) => (
+                <Button
+                  key={range.value}
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "h-6 rounded-md px-2 text-[11px] font-medium transition-colors",
+                    selectedRange === range.value
+                      ? "bg-background shadow-sm text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                  onClick={() => setSelectedRange(range.value)}
+                >
+                  {range.label}
+                </Button>
+              ))}
+            </div>
 
-          {/* Live Indicator */}
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Activity className="h-3 w-3 text-emerald-500" />
-            <span>Live</span>
-            <span>•</span>
-            <span>Updated {lastUpdated}</span>
+            {/* Live Indicator */}
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Activity className="h-3 w-3 text-emerald-500" />
+              <span>Live</span>
+            </div>
+          </div>
+          <div className="flex flex-col items-end gap-0.5">
+            <p className="text-[11px] text-muted-foreground">
+              {dateInfo.label} · {formatDateShort(dateInfo.from)} – {formatDateShort(dateInfo.to)}
+            </p>
+            <p className="text-[10px] text-muted-foreground/60">
+              Last updated: {lastUpdated}
+            </p>
           </div>
         </div>
+      </div>
+
+      {/* Quick Stats Bar */}
+      <div className="flex flex-wrap gap-2">
+        {quickStats.map((stat) => {
+          const StatIcon = stat.icon
+          return (
+            <Badge
+              key={stat.label}
+              variant="outline"
+              className={cn(
+                "gap-1.5 border px-2.5 py-1 text-[11px] font-medium",
+                stat.colorClass
+              )}
+            >
+              <StatIcon className="h-3 w-3" />
+              {stat.value} {stat.label}
+            </Badge>
+          )
+        })}
       </div>
 
       {/* Quick Action Bar */}
