@@ -2414,3 +2414,63 @@ Updated Project Status (Post Round 25 - Complete):
   9. Enhance Dock Scheduler with drag-and-drop assignment
   10. Add more modules with CSV export (Warehouses, Employees, SLA Countdown, Dock Scheduler)
   11. Consolidate inline mock data from route-optimization/sla-countdown/warehouse-health into mock-data.ts
+
+---
+Task ID: 28
+Agent: Main (Cron Review - Round 26)
+Task: QA assessment, bug fixes (DataTable, hooks), new features (DataTable in Warehouses, CSV export, CSS animations)
+
+Work Log:
+- QA Assessment: lint 0 errors, build successful (compiled in 15.7s, GET / 200)
+- agent-browser QA skipped due to sandbox OOM limitation (known environmental issue — browser + dev server exceed memory)
+- Deep code review via subagents: Reviewed data-table.tsx (610 lines), hooks (use-toast, use-live-toast, use-live-data, use-simulated-events, use-realtime-events), stores (app-store), app layer (layout, page)
+- NOTE: Subagent reported 3 CRITICAL syntax errors in toast-provider.tsx and realtime-toast-listener.tsx — verified as FALSE POSITIVES (actual code is correct, build confirms)
+- Found and fixed 5 real bugs:
+  - [B1] data-table.tsx: pageSize=0 caused Infinity pages — added safePageSize = Math.max(1, pageSize) guard (CRITICAL edge case)
+  - [B2] data-table.tsx: handleSort called setState inside another setState updater (anti-pattern under React Concurrent Mode) — refactored to single updater + setCurrentPage(1) for sort change (MODERATE)
+  - [B3] data-table.tsx: Inline <style> tag recreated template literal on every render — extracted to static TABLE_ROW_KEYFRAMES constant (LOW perf)
+  - [B4] data-table.tsx: selectedRowIds.size used for display count showed stale numbers after external data mutation — changed to selectedRows.length (MODERATE)
+  - [B5] data-table.tsx: onSelectionChange fired every render when parent didn't memoize — stabilized with useRef pattern (MODERATE perf)
+  - [B6] data-table.tsx: searchableColumns! non-null assertion — replaced with type cast (searchableColumns as string[]) (LOW type safety)
+  - [B7] use-realtime-events.ts: Dangling socket after unmount during async import — added mounted guard after await import("socket.io-client") (MODERATE race condition)
+  - [B8] use-simulated-events.ts: activeView in scheduleNext deps caused event chain to restart on every navigation — changed to ref pattern (activeViewRef) (MODERATE)
+  - [B9] use-simulated-events.ts: browserPush toggle blocked notification store entries — removed pushOk gate from notification condition (MODERATE logic bug)
+- New Features (via subagent):
+  - Warehouses view: Added DataTable with 6 columns (Name+status dot, City, Status badge, Capacity % with bar, Health Score, Manager), search by name/city, selectable rows with "View Details" batch action, cards/table ToggleGroup view mode switch, CSV export
+  - Dock Scheduler view: Added ExportButton with CSV export (9 columns)
+  - SLA Countdown view: Added ExportButton with CSV export (9 columns)
+  - CSS: Added 8 new animation/utility classes (breathe-glow, tabular-nums, btn-ripple, skeleton-shimmer-new, container-reveal, fab-enter, status-ping, glass-card, hover-gradient-border with @property --border-angle)
+  - Applied: breathe-glow to warehouse card status dots, container-reveal to Operations Overview, glass-card to warehouse map stats bar
+
+Stage Summary:
+- 9 files changed: 408 insertions, 50 deletions
+- Bug fixes: 5 in DataTable, 1 in use-realtime-events, 2 in use-simulated-events
+- New features: DataTable in Warehouses (view toggle), CSV export in Dock+SLA, 8 CSS animation classes
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+- GitHub push: commit a1c5a87 to main
+
+---
+Updated Project Status (Post Round 26 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit a1c5a87)
+- MODULES (18): Dashboard, Operations Overview, Warehouses (+DataTable toggle +CSV), Inbound, Outbound, Inventory, Transportation, Route Optimization, Equipment, Employees, Productivity, Cost Analytics, Alerts, Dock Scheduling (+CSV), SLA Countdown (+CSV), Reports, Settings, Warehouse Map
+- SHARED COMPONENTS (37): All previous + ViewErrorBoundary + OperationsOverviewView
+- HOOKS (9): use-toast, use-mobile, use-live-data, use-realtime-events (FIXED), use-live-toast, use-toast-helper, use-swipe, use-accent-color, use-simulated-events (FIXED)
+- CSS UTILITIES (320+): 312+ previous + 8 new
+- EXPORT COVERAGE: 12 of 18 modules now have CSV export (Dashboard, Warehouses NEW, Inbound, Outbound, Transportation, Equipment, Inventory, Alerts, Productivity, Route Optimization, Cost Analytics, Operations Overview, Dock Scheduler NEW, SLA Countdown NEW)
+- DATATABLE MODULES: Transportation, Inbound, Outbound, Inventory, Equipment, Warehouses (NEW), ShipmentTrackingTable, WarehouseKPIComparison
+- BUGS FIXED THIS ROUND: 9 (DataTable pageSize/sort/perf/selection/refs, socket race condition, event chain restart, browserPush gating)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental); agent-browser can't run simultaneously with dev server
+- PRIORITY NEXT:
+  1. Add mobile pull-to-refresh gesture
+  2. Add employee performance alerts/notification thresholds
+  3. Make DataTable Column.render type-safe (replace value: any with T[keyof T])
+  4. CSS consolidation: deduplicate redundant keyframes across 5400+ line globals.css
+  5. Enhance Dock Scheduler with drag-and-drop assignment
+  6. Add Supabase persistence for real data
+  7. Add warehouse geographic clustering with actual lat/lng positioning
+  8. Consolidate inline mock data from route-optimization/sla-countdown/warehouse-health into mock-data.ts
+  9. Migrate remaining use-toast.ts consumers to sonner-based use-toast-helper.ts (two toast systems coexist)
