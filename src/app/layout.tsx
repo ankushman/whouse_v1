@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/shared/toast-provider";
 import { RealtimeToastListener } from "@/components/shared/realtime-toast-listener";
+import { SimulatedEventProvider } from "@/components/shared/simulated-event-provider";
 import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
@@ -41,6 +42,7 @@ export default function RootLayout({
           {children}
           <ToastProvider />
           <RealtimeToastListener />
+          <SimulatedEventProvider />
         </ThemeProvider>
       </body>
     </html>

@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { TrendingUp, TrendingDown, Minus, ChevronRight, type LucideIcon } from "lucide-react"
 import { AnimatedCounter } from "@/components/shared/animated-counter"
 import { KPIDetailPopover } from "@/components/shared/kpi-detail-popover"
+import { MiniSparkline } from "@/components/shared/mini-sparkline"
 
 interface KPICardProps {
   title: string
@@ -18,6 +19,8 @@ interface KPICardProps {
   colorClass?: string
   /** Optional custom breakdown data for the detail popover */
   breakdown?: { label: string; value: string; change: number }[]
+  /** Optional sparkline data to show a mini trend chart */
+  sparklineData?: number[]
 }
 
 const VALUE_PATTERN = /^([^\d.,\s]*)([\d,.]+)([^\d.]*)$/
@@ -49,7 +52,7 @@ function parseValue(value: string | number): {
   return { numericValue, prefix, suffix, decimals }
 }
 
-export function KPICard({ title, value, change = 0, trend = "neutral", icon: Icon, subtitle, index = 0, colorClass = "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400", breakdown }: KPICardProps) {
+export function KPICard({ title, value, change = 0, trend = "neutral", icon: Icon, subtitle, index = 0, colorClass = "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400", breakdown, sparklineData }: KPICardProps) {
   const parsed = useMemo(() => parseValue(value), [value])
 
   const cardContent = (
@@ -92,7 +95,19 @@ export function KPICard({ title, value, change = 0, trend = "neutral", icon: Ico
                 </div>
               )}
             </div>
-            {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
+            {/* Sparkline row */}
+            <div className="flex items-center gap-2 pt-0.5">
+              {sparklineData && sparklineData.length > 1 && (
+                <MiniSparkline
+                  data={sparklineData}
+                  width={56}
+                  height={20}
+                  trend={trend}
+                  className="opacity-70 group-hover:opacity-100 transition-opacity"
+                />
+              )}
+              {subtitle && <p className="text-[10px] text-muted-foreground/60">{subtitle}</p>}
+            </div>
           </div>
           <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform group-hover:scale-105", colorClass)}>
             <Icon className="h-5 w-5" />

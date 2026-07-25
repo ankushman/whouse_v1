@@ -22,6 +22,16 @@ export const navItems: NavItem[] = [
   { id: 'settings', label: 'Settings', icon: 'Settings', roles: ['super_admin', 'executive'] },
 ]
 
+export interface AppNotification {
+  id: string
+  title: string
+  message: string
+  severity: 'critical' | 'warning' | 'success' | 'info'
+  warehouse?: string
+  timestamp: number
+  read: boolean
+}
+
 interface AppState {
   activeView: string
   setActiveView: (view: string) => void
@@ -33,6 +43,12 @@ interface AppState {
   setSidebarOpen: (open: boolean) => void
   commandPaletteOpen: boolean
   setCommandPaletteOpen: (open: boolean) => void
+  notifications: AppNotification[]
+  unreadCount: number
+  addNotification: (notification: Omit<AppNotification, 'id' | 'timestamp' | 'read'>) => void
+  markAllRead: () => void
+  markRead: (id: string) => void
+  clearNotifications: () => void
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -46,4 +62,28 @@ export const useAppStore = create<AppState>((set) => ({
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
   commandPaletteOpen: false,
   setCommandPaletteOpen: (open) => set({ commandPaletteOpen: open }),
+  notifications: [],
+  unreadCount: 0,
+  addNotification: (notification) => set((state) => {
+    const newNotification: AppNotification = {
+      ...notification,
+      id: `notif-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      timestamp: Date.now(),
+      read: false,
+    }
+    const notifications = [newNotification, ...state.notifications].slice(0, 50)
+    return {
+      notifications,
+      unreadCount: notifications.filter((n) => !n.read).length,
+    }
+  }),
+  markAllRead: () => set((state) => ({
+    notifications: state.notifications.map((n) => ({ ...n, read: true })),
+    unreadCount: 0,
+  })),
+  markRead: (id) => set((state) => ({
+    notifications: state.notifications.map((n) => n.id === id ? { ...n, read: true } : n),
+    unreadCount: state.notifications.filter((n) => !n.read && n.id !== id).length,
+  })),
+  clearNotifications: () => set({ notifications: [], unreadCount: 0 }),
 }))

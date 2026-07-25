@@ -325,7 +325,15 @@ function LiveClock() {
 function NotificationPanel() {
   const [open, setOpen] = React.useState(false)
   const [sheetOpen, setSheetOpen] = React.useState(false)
-  const alertCount = recentNotifications.length
+  const storeNotifications = useAppStore((s) => s.notifications)
+  const unreadCount = useAppStore((s) => s.unreadCount)
+  const markRead = useAppStore((s) => s.markRead)
+
+  // Use store notifications, fall back to static data before store is seeded
+  const displayNotifications = storeNotifications.length > 0
+    ? storeNotifications.slice(0, 5)
+    : recentNotifications.slice(0, 5)
+  const alertCount = storeNotifications.length > 0 ? unreadCount : recentNotifications.length
 
   return (
     <>
@@ -334,8 +342,11 @@ function NotificationPanel() {
           <Button variant="ghost" size="icon" className="relative h-8 w-8 icon-badge">
             <Bell className="h-4 w-4" />
             {alertCount > 0 && (
-              <span className="badge-bounce absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white ring-2 ring-background">
-                {alertCount}
+              <span className={cn(
+                "badge-bounce absolute -right-0.5 -top-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full px-1 text-[9px] font-bold text-white ring-2 ring-background",
+                unreadCount > 0 ? "bg-red-500" : "bg-blue-500"
+              )}>
+                {alertCount > 99 ? "99+" : alertCount}
               </span>
             )}
             <span className="sr-only">Notifications</span>
@@ -344,19 +355,47 @@ function NotificationPanel() {
         <DropdownMenuContent align="end" className="w-80 p-0" sideOffset={8}>
           <div className="flex items-center justify-between border-b px-4 py-3">
             <DropdownMenuLabel className="p-0 text-sm font-semibold">Notifications</DropdownMenuLabel>
-            <Badge variant="secondary" className="text-[10px]">{alertCount} new</Badge>
+            {unreadCount > 0 && (
+              <Badge variant="secondary" className="text-[10px] tabular-nums">{unreadCount} new</Badge>
+            )}
           </div>
           <div className="max-h-72 overflow-y-auto">
-            {recentNotifications.map((n) => {
-              const SevIcon = severityIcon[n.severity as keyof typeof severityIcon] || Info
-              const colorClass = severityColor[n.severity as keyof typeof severityColor] || "text-muted-foreground"
+            {displayNotifications.map((n) => {
+              const sev = n.severity ?? "info"
+              const SevIcon = severityIcon[sev as keyof typeof severityIcon] || Info
+              const colorClass = severityColor[sev as keyof typeof severityColor] || "text-muted-foreground"
+              const isUnread = "read" in n ? !n.read : true
               return (
-                <DropdownMenuItem key={n.id} className="flex items-start gap-3 px-4 py-3 cursor-pointer">
+                <DropdownMenuItem
+                  key={n.id}
+                  className={cn(
+                    "flex items-start gap-3 px-4 py-3 cursor-pointer",
+                    isUnread && "bg-blue-50/50 dark:bg-blue-950/20"
+                  )}
+                  onClick={() => "read" in n && markRead(n.id)}
+                >
                   <SevIcon className={cn("mt-0.5 h-4 w-4 shrink-0", colorClass)} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium">{n.title}</p>
-                    <p className="mt-0.5 text-[11px] text-muted-foreground line-clamp-1">{n.desc}</p>
-                    <p className="mt-0.5 text-[10px] text-muted-foreground/60">{n.time}</p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-xs font-medium">{n.title}</p>
+                      {isUnread && <span className="size-1.5 rounded-full bg-blue-500 shrink-0" />}
+                    </div>
+                    <p className="mt-0.5 text-[11px] text-muted-foreground line-clamp-1">
+                      {"message" in n ? n.message : "desc" in n ? n.desc : ""}
+                    </p>
+                    <div className="mt-0.5 flex items-center gap-1.5">
+                      <p className="text-[10px] text-muted-foreground/60">
+                        {"timestamp" in n
+                          ? formatRelativeTime(n.timestamp as number)
+                          : "time" in n ? n.time : ""}
+                      </p>
+                      {"warehouse" in n && n.warehouse && (
+                        <>
+                          <span className="text-muted-foreground/30">·</span>
+                          <p className="text-[10px] text-muted-foreground/60">{n.warehouse as string}</p>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </DropdownMenuItem>
               )
@@ -379,6 +418,16 @@ function NotificationPanel() {
       <NotificationsSheet open={sheetOpen} onOpenChange={setSheetOpen} />
     </>
   )
+}
+
+function formatRelativeTime(ts: number): string {
+  const diff = Date.now() - ts
+  const minutes = Math.floor(diff / 60000)
+  if (minutes < 1) return "Just now"
+  if (minutes < 60) return `${minutes}m ago`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}h ago`
+  return `${Math.floor(hours / 24)}d ago`
 }
 
 // ──────────────────────────────────────────────────────

@@ -41,6 +41,7 @@ import { MetricsTicker } from "@/components/shared/metrics-ticker"
 import { ActivityTimeline } from "@/components/shared/activity-timeline"
 import { AIInsightsPanel } from "@/components/shared/ai-insights-panel"
 import { ShiftHandoverPanel } from "@/components/shared/shift-handover-panel"
+import { generateSparklineData } from "@/components/shared/mini-sparkline"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 
@@ -173,6 +174,21 @@ const quickStats = [
   { label: "Maintenance", value: 2, icon: Wrench, colorClass: "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-800/60 dark:bg-zinc-950/70 dark:text-zinc-300" },
 ] as const
 
+// Pre-generated sparkline data for KPI cards (stable across renders)
+const kpiSparklineData: Record<string, number[]> = {
+  totalWarehouses: [6, 6, 6, 6, 6, 6, 6],
+  activeShipments: generateSparklineData(847, 12, 0.08),
+  pendingGRN: generateSparklineData(63, 12, 0.12),
+  inventoryAccuracy: generateSparklineData(97.8, 12, 0.02),
+  todaysDispatches: generateSparklineData(193, 12, 0.1),
+  dockToStockTime: generateSparklineData(3.2, 12, 0.1),
+  slaAchievement: generateSparklineData(94.6, 12, 0.03),
+  equipmentUtilization: generateSparklineData(82.4, 12, 0.05),
+  costPerShipment: generateSparklineData(3245, 12, 0.06),
+  warehouseOccupancy: generateSparklineData(79.7, 12, 0.04),
+  productivity: generateSparklineData(86.3, 12, 0.04),
+}
+
 export function DashboardView() {
   const [lastUpdated] = React.useState(() =>
     new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
@@ -290,6 +306,7 @@ export function DashboardView() {
               icon={Icon}
               index={index}
               colorClass={kpiColors[kpi.key]}
+              sparklineData={kpiSparklineData[kpi.key]}
             />
           )
         })}
