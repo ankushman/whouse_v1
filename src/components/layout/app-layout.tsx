@@ -16,7 +16,6 @@ import {
   Bell,
   FileBarChart,
   Settings,
-  Grid3X3,
   LayoutGrid,
   Search,
   Moon,
@@ -35,6 +34,7 @@ import {
   Navigation,
   Timer,
   Zap,
+  Activity,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -94,6 +94,7 @@ import { KeyboardShortcutsDialog } from "@/components/shared/keyboard-shortcuts-
 // ──────────────────────────────────────────────────────
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard,
+  Activity,
   Warehouse,
   PackageSearch,
   Truck,

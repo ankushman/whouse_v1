@@ -1,8 +1,9 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useCallback } from "react"
 import { costTrend } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -40,19 +41,18 @@ const pieConfig = {
 const PIE_COLORS = ["#2563EB", "#10B981", "#F59E0B", "#8B5CF6"]
 
 export function CostAnalyticsView() {
-  const latest = costTrend[costTrend.length - 1]
-  const previous = costTrend[costTrend.length - 2]
+  const latest = costTrend.length > 1 ? costTrend[costTrend.length - 1] : null
+  const previous = costTrend.length > 1 ? costTrend[costTrend.length - 2] : null
 
-  const totalCostThisMonth = latest.total
-  const totalCostLastMonth = previous.total
-  const totalChange = ((totalCostThisMonth - totalCostLastMonth) / totalCostLastMonth * 100).toFixed(1)
-
-  const categoryBreakdown = useMemo(() => [
-    { name: "Labor", value: latest.labor, color: PIE_COLORS[0] },
-    { name: "Transport", value: latest.transport, color: PIE_COLORS[1] },
-    { name: "Equipment", value: latest.equipment, color: PIE_COLORS[2] },
-    { name: "Storage", value: latest.storage, color: PIE_COLORS[3] },
-  ], [latest])
+  const categoryBreakdown = useMemo(() => {
+    if (!latest) return []
+    return [
+      { name: "Labor", value: latest.labor, color: PIE_COLORS[0] },
+      { name: "Transport", value: latest.transport, color: PIE_COLORS[1] },
+      { name: "Equipment", value: latest.equipment, color: PIE_COLORS[2] },
+      { name: "Storage", value: latest.storage, color: PIE_COLORS[3] },
+    ]
+  }, [latest])
 
   const momComparison = useMemo(() =>
     costTrend.slice(-6).map((entry, idx, arr) => {
@@ -72,11 +72,32 @@ export function CostAnalyticsView() {
       }
     }), [])
 
+  const handleExportCSV = useCallback(() => {
+    const data = costTrend.map((entry) => ({
+      Month: entry.month,
+      Labor: `₹${(entry.labor / 1000).toFixed(0)}K`,
+      Transport: `₹${(entry.transport / 1000).toFixed(0)}K`,
+      Equipment: `₹${(entry.equipment / 1000).toFixed(0)}K`,
+      Storage: `₹${(entry.storage / 1000).toFixed(0)}K`,
+      Total: `₹${(entry.total / 1000).toFixed(0)}K`,
+    }))
+    exportToCSV(data, "cost-analytics", ["Month", "Labor", "Transport", "Equipment", "Storage", "Total"])
+  }, [])
+
+  if (!latest || !previous) return null
+
+  const totalCostThisMonth = latest.total
+  const totalCostLastMonth = previous.total
+  const totalChange = ((totalCostThisMonth - totalCostLastMonth) / totalCostLastMonth * 100).toFixed(1)
+
   return (
     <div className="space-y-6">
       <PageHeader
         title="Cost Analytics"
         description="Financial insights and cost optimization"
+        actions={
+          <ExportButton onExportCSV={handleExportCSV} />
+        }
       />
 
       {/* Summary */}

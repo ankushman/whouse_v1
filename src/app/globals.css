@@ -5114,3 +5114,249 @@ html.theme-transition body {
   opacity: 1;
   transition: opacity 0s;
 }
+
+/* ============================================================================
+ * Round 24 - New CSS Micro-interactions & Utility Classes
+ * ============================================================================ */
+
+/* ── Animated gradient border on hover ── */
+.animated-border-glow {
+  position: relative;
+  overflow: hidden;
+}
+.animated-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from 0deg,
+    theme('colors.primary') 0%,
+    theme('colors.emerald.400') 25%,
+    theme('colors.amber.400') 50%,
+    theme('colors.primary') 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.animated-border-glow:hover::before {
+  opacity: 1;
+  animation: spin-slow 3s linear infinite;
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Pulse ring for live indicators ── */
+.live-pulse-ring {
+  position: relative;
+}
+.live-pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid theme('colors.emerald.400');
+  opacity: 0;
+  animation: live-pulse-ring-anim 2s ease-out infinite;
+}
+@keyframes live-pulse-ring-anim {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ── Subtle breathing glow for important cards ── */
+.card-breathe {
+  animation: card-breathe-anim 4s ease-in-out infinite;
+}
+@keyframes card-breathe-anim {
+  0%, 100% { box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05); }
+  50% { box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.08), 0 0 0 1px rgb(37 99 235 / 0.06); }
+}
+.dark .card-breathe {
+  animation-name: card-breathe-dark-anim;
+}
+@keyframes card-breathe-dark-anim {
+  0%, 100% { box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2); }
+  50% { box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.3), 0 0 0 1px rgb(37 99 235 / 0.1); }
+}
+
+/* ── Smooth number counter animation ── */
+.count-up {
+  animation: count-up-flash 0.3s ease-out;
+}
+@keyframes count-up-flash {
+  0% { transform: translateY(4px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Skeleton loading variants ── */
+.skeleton-wave {
+  background: linear-gradient(
+    90deg,
+    theme('colors.muted') 0%,
+    theme('colors.muted' / 0.5) 40%,
+    theme('colors.muted') 80%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-wave-anim 1.5s ease-in-out infinite;
+}
+@keyframes skeleton-wave-anim {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Table row slide in animation ── */
+.table-row-slide-in {
+  animation: row-slide-in 0.35s ease-out both;
+}
+@keyframes row-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Button press micro-interaction ── */
+.btn-press {
+  transition: transform 0.1s ease, box-shadow 0.15s ease;
+}
+.btn-press:active {
+  transform: scale(0.96) translateY(1px);
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.06);
+}
+.dark .btn-press:active {
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.2);
+}
+
+/* ── Floating action button entrance ── */
+.fab-enter {
+  animation: fab-enter-anim 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes fab-enter-anim {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ── Notification badge bounce ── */
+.badge-bounce {
+  animation: badge-bounce-anim 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes badge-bounce-anim {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ── Shimmer text effect for loading states ── */
+.text-shimmer {
+  background: linear-gradient(
+    110deg,
+    theme('colors.foreground') 30%,
+    theme('colors.muted.foreground') 50%,
+    theme('colors.foreground') 70%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer-anim 2s ease-in-out infinite;
+}
+@keyframes text-shimmer-anim {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Smooth scrollbar styling ── */
+.custom-scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar-thin::-webkit-scrollbar-thumb {
+  background: theme('colors.muted.foreground' / 0.2);
+  border-radius: 3px;
+}
+.custom-scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.muted.foreground' / 0.4);
+}
+
+/* ── Card hover depth effect ── */
+.card-depth {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.card-depth:hover {
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.07),
+    0 2px 4px -2px rgb(0 0 0 / 0.05);
+}
+.dark .card-depth:hover {
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.25),
+    0 2px 4px -2px rgb(0 0 0 / 0.15);
+}
+
+/* ── Focus visible with offset ── */
+.focus-ring-offset {
+  outline: none;
+}
+.focus-ring-offset:focus-visible {
+  outline: 2px solid theme('colors.primary');
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Gradient text for headings ── */
+.heading-gradient {
+  background: linear-gradient(135deg, theme('colors.primary') 0%, theme('colors.emerald.500') 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Dot pattern background ── */
+.bg-dots {
+  background-image: radial-gradient(circle, theme('colors.muted.foreground' / 0.15) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* ── Tooltip slide-in ── */
+.tooltip-slide-in {
+  animation: tooltip-slide 0.2s ease-out both;
+}
+@keyframes tooltip-slide {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Status indicator dot blink ── */
+.status-blink {
+  animation: status-blink-anim 1.5s ease-in-out infinite;
+}
+@keyframes status-blink-anim {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

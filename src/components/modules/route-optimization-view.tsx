@@ -1,7 +1,8 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useState, useCallback } from "react"
 import { PageHeader } from "@/components/shared/page-header"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -28,8 +29,10 @@ import {
   ArrowRight,
   Zap,
   TrendingUp,
+  Filter,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 // ── Mock Data ──────────────────────────────────────────────────────────────
 
@@ -88,6 +91,28 @@ function getProgressColor(progress: number): string {
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function RouteOptimizationView() {
+  const [statusFilter, setStatusFilter] = useState("all")
+
+  const filteredRoutes = useMemo(() => {
+    if (statusFilter === "all") return routes
+    return routes.filter((r) => r.status === statusFilter)
+  }, [statusFilter])
+
+  const handleExportCSV = useCallback(() => {
+    const data = routes.map((r) => ({
+      ID: r.id,
+      Origin: r.origin,
+      Destination: r.destination,
+      Stops: r.stops,
+      "Est. Time": r.estTime,
+      Distance: r.distance,
+      Status: r.status,
+      Progress: `${r.progress}%`,
+      Vehicle: r.vehicle,
+    }))
+    exportToCSV(data, "route-optimization", ["ID", "Origin", "Destination", "Stops", "Est. Time", "Distance", "Status", "Progress", "Vehicle"])
+  }, [])
+
   const summaryCards = useMemo(() => [
     { label: "Active Routes", value: "24", change: "+3 today", icon: Route, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
     { label: "Avg. Delivery Time", value: "4.2 hrs", change: "↓ 12%", icon: Clock, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
@@ -101,10 +126,26 @@ export function RouteOptimizationView() {
         title="Route Optimization"
         description="Plan and optimize delivery routes across the warehouse network"
         actions={
-          <Button variant="outline" size="sm" className="gap-1.5">
-            <Zap className="h-3.5 w-3.5" />
-            Optimize All
-          </Button>
+          <div className="flex items-center gap-2">
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-[140px] h-8 text-xs">
+                <Filter className="h-3 w-3 mr-1.5 text-muted-foreground" />
+                <SelectValue placeholder="All Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="optimized">Optimized</SelectItem>
+                <SelectItem value="in-transit">In Transit</SelectItem>
+                <SelectItem value="delayed">Delayed</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+            <ExportButton onExportCSV={handleExportCSV} />
+            <Button variant="outline" size="sm" className="gap-1.5">
+              <Zap className="h-3.5 w-3.5" />
+              Optimize All
+            </Button>
+          </div>
         }
       />
 
@@ -137,7 +178,7 @@ export function RouteOptimizationView() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {routes.map((route) => {
+            {filteredRoutes.map((route) => {
               const status = statusStyles[route.status]
               return (
                 <div

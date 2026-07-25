@@ -23,11 +23,14 @@ import { SettingsView } from "@/components/modules/settings-view"
 import { DockSchedulerView } from "@/components/modules/dock-scheduler-view"
 import { WarehouseMapView } from "@/components/modules/warehouse-map-view"
 import { SLACountdownView } from "@/components/modules/sla-countdown-view"
+import { OperationsOverviewView } from "@/components/modules/operations-overview-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
+import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
 
 const viewMap: Record<string, React.ComponentType> = {
   dashboard: DashboardView,
+  "operations-overview": OperationsOverviewView,
   warehouses: WarehousesView,
   inbound: InboundView,
   outbound: OutboundView,
@@ -136,7 +139,9 @@ function ViewRenderer() {
           transitioning && (transitionDir === "left" ? "exiting" : "entering")
         )}
       >
-        <View />
+        <ViewErrorBoundary>
+          <View />
+        </ViewErrorBoundary>
       </div>
     </div>
   )

@@ -1,9 +1,10 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useCallback } from "react"
 import { employees, manpowerProductivity } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -43,10 +44,29 @@ const shiftIcons: Record<string, typeof Sun> = {
 export function ProductivityView() {
   const [warehouseFilter, setWarehouseFilter] = useState("all")
 
+  // Derive unique warehouse names for filter dropdown
+  const warehouseNames = useMemo(() => {
+    const names = new Set(employees.map((e) => e.warehouse))
+    return Array.from(names).sort()
+  }, [])
+
   const filtered = useMemo(() => {
     if (warehouseFilter === "all") return employees
     return employees.filter((e) => e.warehouse.includes(warehouseFilter))
   }, [warehouseFilter])
+
+  const handleExportCSV = useCallback(() => {
+    const data = employees.map((e) => ({
+      Name: e.name,
+      Role: e.role,
+      Warehouse: e.warehouse,
+      Shift: e.shift,
+      Productivity: `${e.productivity}%`,
+      Tasks: e.tasksCompleted,
+      Rank: e.rank,
+    }))
+    exportToCSV(data, "productivity-data", ["Name", "Role", "Warehouse", "Shift", "Productivity", "Tasks", "Rank"])
+  }, [])
 
   const summary = useMemo(() => {
     const avg = (arr: number[]) => arr.length > 0 ? (arr.reduce((a, b) => a + b, 0) / arr.length) : 0
@@ -59,12 +79,12 @@ export function ProductivityView() {
   }, [])
 
   const topPerformers = useMemo(() =>
-    [...employees].sort((a, b) => a.rank - b.rank).slice(0, 5),
-  [])
+    [...filtered].sort((a, b) => a.rank - b.rank).slice(0, 5),
+  [filtered])
 
   const lowPerformers = useMemo(() =>
-    [...employees].sort((a, b) => b.rank - a.rank).slice(0, 5),
-  [])
+    [...filtered].sort((a, b) => b.rank - a.rank).slice(0, 5),
+  [filtered])
 
   const warehouseData = useMemo(() => {
     const whMap: Record<string, { name: string; morning: number[]; afternoon: number[]; night: number[] }> = {}
@@ -88,6 +108,22 @@ export function ProductivityView() {
       <PageHeader
         title="Productivity"
         description="Workforce productivity analysis and benchmarks"
+        actions={
+          <div className="flex items-center gap-2">
+            <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
+              <SelectTrigger className="w-[160px] h-8 text-xs">
+                <SelectValue placeholder="All Warehouses" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Warehouses</SelectItem>
+                {warehouseNames.map((name) => (
+                  <SelectItem key={name} value={name}>{name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <ExportButton onExportCSV={handleExportCSV} />
+          </div>
+        }
       />
 
       {/* Summary */}

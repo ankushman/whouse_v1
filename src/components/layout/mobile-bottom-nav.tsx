@@ -11,6 +11,7 @@ import {
   Warehouse,
   Route,
   Navigation,
+  Timer,
   Cog,
   Users,
   TrendingUp,
@@ -22,6 +23,7 @@ import {
   ScanBarcode,
   PlusCircle,
   ClipboardList,
+  Activity,
 } from "lucide-react"
 import { useAppStore, navItems } from "@/store/app-store"
 import { cn } from "@/lib/utils"
@@ -41,12 +43,14 @@ import { Separator } from "@/components/ui/separator"
 
 const moreIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard,
+  Activity,
   Warehouse,
   PackageSearch,
   Truck,
   Package,
   Route,
   Navigation,
+  Timer,
   Cog,
   Users,
   TrendingUp,

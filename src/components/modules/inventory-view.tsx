@@ -3,7 +3,7 @@
 import { useMemo, useState, useCallback } from "react";
 import { inventoryItems, warehouses } from "@/data/mock-data";
 import { PageHeader } from "@/components/shared/page-header";
-import { BarcodeScanner } from "@/components/shared/barcode-scanner";
+import { BarcodeScannerModal } from "@/components/shared/barcode-scanner-modal";
 import { ExportButton, exportToCSV } from "@/components/shared/export-button";
 import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table";
 import {
@@ -105,7 +105,6 @@ export function InventoryView() {
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("All");
   const [abcFilter, setAbcFilter] = useState<AbcFilter>("All");
   const [scannerOpen, setScannerOpen] = useState(false);
-  const [lastScan, setLastScan] = useState<{barcode: string; type: string} | null>(null);
 
   const filteredItems = useMemo(() => {
     return inventoryItems.filter((item) => {
@@ -313,25 +312,6 @@ export function InventoryView() {
           </div>
         }
       />
-
-      {/* Barcode Scanner */}
-      <BarcodeScanner
-        isOpen={scannerOpen}
-        onClose={() => setScannerOpen(false)}
-        onScan={(barcode, type) => {
-          setLastScan({ barcode, type });
-        }}
-      />
-      {lastScan && (
-        <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-lg border bg-background px-3 py-2 shadow-lg micro-pop">
-          <ScanBarcode className="h-4 w-4 text-primary" />
-          <span className="text-xs font-mono font-medium">{lastScan.barcode}</span>
-          <Badge variant="outline" className="text-[10px]">{lastScan.type === 'qr' ? 'QR' : 'BC'}</Badge>
-          <Button variant="ghost" size="icon" className="h-5 w-5" onClick={() => setLastScan(null)}>
-            <span className="text-xs text-muted-foreground">&times;</span>
-          </Button>
-        </div>
-      )}
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
@@ -593,6 +573,12 @@ export function InventoryView() {
           )}
         </TabsContent>
       </Tabs>
+      {/* Barcode Scanner Modal */}
+      <BarcodeScannerModal
+        open={scannerOpen}
+        onOpenChange={setScannerOpen}
+        inventoryItems={inventoryItems}
+      />
     </div>
   );
 }

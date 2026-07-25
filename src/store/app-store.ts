@@ -5,6 +5,7 @@ export type { Role, NavItem }
 
 export const navItems: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: 'LayoutDashboard', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
+  { id: 'operations-overview', label: 'Operations Overview', icon: 'Activity', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'warehouses', label: 'Warehouses', icon: 'Warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'inbound', label: 'Inbound', icon: 'PackageSearch', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'outbound', label: 'Outbound', icon: 'Truck', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
