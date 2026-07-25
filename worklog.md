@@ -2474,3 +2474,62 @@ Updated Project Status (Post Round 26 - Complete):
   7. Add warehouse geographic clustering with actual lat/lng positioning
   8. Consolidate inline mock data from route-optimization/sla-countdown/warehouse-health into mock-data.ts
   9. Migrate remaining use-toast.ts consumers to sonner-based use-toast-helper.ts (two toast systems coexist)
+
+---
+Task ID: 29
+Agent: Main (Cron Review - Round 27)
+Task: QA assessment, bug fixes (toast API, CSV, countdown, counter, sidebar, exports), new features (DataTable in Employees, CSS animations)
+
+Work Log:
+- QA Assessment: lint 0 errors, build successful (compiled in 15s, GET / 200)
+- agent-browser QA skipped due to sandbox OOM limitation (known environmental issue)
+- Deep code review via 2 parallel subagents: Reviewed all 18 module views, shared components, hooks, stores, layout, dashboard
+- Found and fixed 6 real bugs:
+  - [B1] dock-scheduler-view.tsx: useToast() imported but never called — `toast` variable undefined at runtime, all toast.success/info/error calls silently fail (CRITICAL). Fix: Added `const toastResult = useToast()` + `const toastRef = useRef(toastResult)` + `useEffect(() => { toastRef.current = toastResult })`, changed all `toast.` → `toastRef.current.` for React Compiler compatibility
+  - [B2] dock-scheduler-view.tsx: handleExportCSV accessed `d.loadingType` and `d.currentAssignment.*` which don't exist on Dock interface — CSV export showed all "—" for 6 of 9 columns (CRITICAL). Fix: Changed to use `docksWithAssignments.map(({ dock, assignment: a }) => ...)` with correct property names
+  - [B3] sla-countdown-view.tsx: Compounding countdown timer — subtracted `Date.now() - mountTimeRef.current` from already-reduced `item.remainingMs`, causing quadratic decay (2-hour SLA breached after ~36 seconds) (MODERATE). Fix: Changed to fixed decrement `item.remainingMs - 1000` per tick
+  - [B4] animated-counter.tsx: Flashed to 0 on every value update — animation restarted from `value * 0 = 0` on first frame (MODERATE). Fix: Added `prevValueRef` to capture previous display value, animate from `from + (value - from) * easedProgress`
+  - [B5] export-button.tsx: Headers unquoted (CSV breaks with comma in column names), undefined values rendered as literal "undefined" (LOW). Fix: Wrapped headers in quotes, added null guard returning empty string
+  - [B6] app-layout.tsx: Sidebar hardcoded slice indices (0-7, 7-10, 10+) only correct for super_admin role — other roles got wrong groupings (MODERATE). Fix: Added `group` field to NavItem type, tagged all 18 items, replaced slice with `.filter(item => item.group === "...")`
+- Also removed unused imports: `X` from lucide-react (app-layout.tsx), `outboundTrend` from mock-data (dashboard-view.tsx)
+
+New Features (via subagent):
+- Employees view: Replaced manual table with DataTable (8 columns: Name+avatar, Role, Warehouse, Shift badge, Productivity color-coded, Attendance %, Tasks Completed, Status badge), searchable by name/role, sortable, pageSize 8, removed unused table imports
+- CSS: Added 8 new animation/utility classes (stagger-grid entrance animation, tooltip-smooth, nav-item-active indicator, gradient-heading, card-hover-glow-subtle, badge-pop, scrollbar-horizontal, focus-ring-primary)
+- Applied: stagger-grid to warehouse card grid, focus-ring-primary to DataTable search input
+
+Stage Summary:
+- 12 files changed: 303 insertions, 246 deletions
+- Bug fixes: 6 (toast hook, CSV properties, countdown timer, counter flash, export null, sidebar groups)
+- New features: DataTable in Employees, 8 CSS animations, sidebar group fix
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+- GitHub push: commit 57b1788 to main
+
+---
+Updated Project Status (Post Round 27 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit 57b1788)
+- MODULES (18): Dashboard, Operations Overview, Warehouses (+DataTable toggle +CSV), Inbound, Outbound, Inventory, Transportation, Route Optimization, Equipment, Employees (+DataTable NEW), Productivity, Cost Analytics, Alerts, Dock Scheduling (+CSV), SLA Countdown (+CSV, timer FIXED), Reports, Settings, Warehouse Map
+- SHARED COMPONENTS (37): All previous
+- HOOKS (9): All previous
+- CSS UTILITIES (330+): 320+ previous + 10 new
+- DATATABLE MODULES (9): Transportation, Inbound, Outbound, Inventory, Equipment, Warehouses, Employees (NEW), ShipmentTrackingTable, WarehouseKPIComparison
+- EXPORT COVERAGE: 12 of 18 modules with CSV export
+- SIDEBAR: Group-based filtering (replaces hardcoded slice indices) — correct for all 6 roles
+- ANIMATED COUNTER: Smooth from-to transition (no more flash-to-zero)
+- SLA COUNTDOWN: Correct linear decrement (no more quadratic compounding)
+- BUGS FIXED THIS ROUND: 6 (toast hook, CSV props, countdown timer, counter flash, export null, sidebar groups)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental); agent-browser can't run simultaneously with dev server
+- PRIORITY NEXT:
+  1. Add mobile pull-to-refresh gesture
+  2. Add employee performance alerts/notification thresholds
+  3. Make DataTable Column.render type-safe (replace value: any with T[keyof T])
+  4. CSS consolidation: deduplicate redundant keyframes across 5600+ line globals.css
+  5. Enhance Dock Scheduler with drag-and-drop assignment
+  6. Add Supabase persistence for real data
+  7. Add warehouse geographic clustering with actual lat/lng positioning
+  8. Consolidate inline mock data from route-optimization/sla-countdown/warehouse-health into mock-data.ts
+  9. Migrate remaining use-toast.ts consumers to sonner-based use-toast-helper.ts (two toast systems coexist)
