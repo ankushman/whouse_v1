@@ -36,6 +36,7 @@ import {
   Pause,
   Building2,
   FastForward,
+  GripVertical,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
@@ -236,7 +237,13 @@ function DockCard({
                 </div>
                 <span className="font-medium text-number">{formatTime(assignment.startTime, assignment.estimatedDuration, progress)}</span>
               </div>
-              <Progress value={progress} className="h-1.5 progress-bar-animated" />
+              <Progress value={progress} className={cn(
+                "h-1.5 progress-bar-animated",
+                progress < 30 && "progress-gradient",
+                progress >= 30 && progress < 70 && "[&>div]:bg-gradient-to-r [&>div]:from-blue-500 [&>div]:to-emerald-500",
+                progress >= 70 && progress < 90 && "progress-gradient-amber",
+                progress >= 90 && "progress-gradient-red"
+              )} />
               <p className="text-right text-[9px] text-number text-muted-foreground"><span className="text-number">{progress}</span>%</p>
             </div>
 
@@ -663,8 +670,9 @@ export function DockSchedulerView() {
           <CardContent>
             <div className="space-y-2">
               {queuedVehicles.map((vehicle) => (
-                <div key={vehicle.id} className="flex items-center justify-between rounded-lg border border-amber-200 dark:border-amber-800 bg-background/80 p-3">
+                <div key={vehicle.id} className="ripple-effect flex items-center justify-between rounded-lg border border-amber-200 dark:border-amber-800 bg-background/80 p-3">
                   <div className="flex items-center gap-3">
+                    <GripVertical className="h-4 w-4 text-muted-foreground/40 shrink-0 cursor-grab active:cursor-grabbing" />
                     <div className={cn(
                       "flex h-8 w-8 items-center justify-center rounded-lg",
                       vehicle.type === "inbound"

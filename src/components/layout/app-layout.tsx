@@ -34,6 +34,7 @@ import {
   MapPin,
   Navigation,
   Timer,
+  Zap,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -178,8 +179,8 @@ export function AppSidebar() {
                       tooltip={item.label}
                       onClick={() => setActiveView(item.id)}
                       className={cn(
-                        "transition-all duration-200 nav-icon-animated",
-                        isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
+                        "transition-all duration-150 nav-icon-animated hover:bg-primary/5 hover:translate-x-0.5 active:scale-[0.98]",
+                        isActive && "relative sidebar-active-bar bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
                       )}
                     >
                       {Icon && <Icon className="h-4 w-4" />}
@@ -210,8 +211,8 @@ export function AppSidebar() {
                       tooltip={item.label}
                       onClick={() => setActiveView(item.id)}
                       className={cn(
-                        "transition-all duration-200 nav-icon-animated",
-                        isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
+                        "transition-all duration-150 nav-icon-animated hover:bg-primary/5 hover:translate-x-0.5 active:scale-[0.98]",
+                        isActive && "relative sidebar-active-bar bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
                       )}
                     >
                       {Icon && <Icon className="h-4 w-4" />}
@@ -237,8 +238,8 @@ export function AppSidebar() {
                       tooltip={item.label}
                       onClick={() => setActiveView(item.id)}
                       className={cn(
-                        "transition-all duration-200 nav-icon-animated",
-                        isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
+                        "transition-all duration-150 nav-icon-animated hover:bg-primary/5 hover:translate-x-0.5 active:scale-[0.98]",
+                        isActive && "relative sidebar-active-bar bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
                       )}
                     >
                       {Icon && <Icon className="h-4 w-4" />}
@@ -596,9 +597,22 @@ export function TopNav() {
 // Command Palette
 // ──────────────────────────────────────────────────────
 export function CommandPalette() {
-  const { commandPaletteOpen, setCommandPaletteOpen, setActiveView } = useAppStore()
+  const { commandPaletteOpen, setCommandPaletteOpen, setActiveView, activeView } = useAppStore()
   const [search, setSearch] = React.useState("")
   const inputRef = React.useRef<HTMLInputElement>(null)
+  const [recentViews, setRecentViews] = React.useState<string[]>([])
+
+  // Track recent views (max 3)
+  const trackRecentView = React.useCallback((viewId: string) => {
+    setRecentViews((prev) => {
+      const filtered = prev.filter((v) => v !== viewId)
+      return [viewId, ...filtered].slice(0, 3)
+    })
+  }, [])
+
+  React.useEffect(() => {
+    if (activeView) trackRecentView(activeView)
+  }, [activeView, trackRecentView])
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -624,6 +638,18 @@ export function CommandPalette() {
   const filtered = navItems.filter((item) =>
     item.label.toLowerCase().includes(search.toLowerCase())
   )
+
+  const recentItems = recentViews
+    .map((id) => navItems.find((n) => n.id === id))
+    .filter(Boolean) as typeof navItems
+
+  // Quick action shortcuts
+  const quickActions = [
+    { id: "quick-scan", label: "Scan Barcode", icon: "scan", view: "inventory" },
+    { id: "quick-alerts", label: "View Alerts", icon: "alert", view: "alerts" },
+    { id: "quick-sla", label: "SLA Countdown", icon: "timer", view: "sla-countdown" },
+    { id: "quick-dock", label: "Dock Schedule", icon: "dock", view: "dock-scheduler" },
+  ]
 
   return (
     <>
@@ -653,9 +679,58 @@ export function CommandPalette() {
             ESC
           </kbd>
         </div>
-        <div className="max-h-72 overflow-y-auto p-2">
+        <div className="max-h-80 overflow-y-auto p-2">
+          {/* Recent Views (only when not searching) */}
+          {!search && recentItems.length > 0 && (
+            <>
+              <div className="px-2 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Recent
+              </div>
+              {recentItems.map((item) => {
+                const Icon = iconMap[item.icon]
+                return (
+                  <button
+                    key={`recent-${item.id}`}
+                    className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-left transition-colors hover:bg-muted"
+                    onClick={() => {
+                      setActiveView(item.id)
+                      setCommandPaletteOpen(false)
+                      setSearch("")
+                    }}
+                  >
+                    {Icon ? <Icon className="h-4 w-4 shrink-0 text-muted-foreground" /> : <div className="h-4 w-4" />}
+                    <span className="flex-1">{item.label}</span>
+                    <span className="text-[10px] text-muted-foreground">recent</span>
+                  </button>
+                )
+              })}
+            </>
+          )}
+          {/* Quick Actions (only when not searching) */}
+          {!search && (
+            <>
+              <div className="px-2 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                Quick Actions
+              </div>
+              {quickActions.map((action) => (
+                <button
+                  key={action.id}
+                  className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-left transition-colors hover:bg-muted"
+                  onClick={() => {
+                    setActiveView(action.view)
+                    setCommandPaletteOpen(false)
+                    setSearch("")
+                  }}
+                >
+                  <Zap className="h-4 w-4 shrink-0 text-primary" />
+                  <span className="flex-1">{action.label}</span>
+                  <kbd className="rounded border bg-muted/80 px-1 py-0.5 font-mono text-[9px] text-muted-foreground">action</kbd>
+                </button>
+              ))}
+            </>
+          )}
           <div className="px-2 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-            {search ? "Results" : "Quick Navigation"}
+            {search ? "Results" : "All Pages"}
           </div>
           {filtered.map((item) => {
             const Icon = iconMap[item.icon]

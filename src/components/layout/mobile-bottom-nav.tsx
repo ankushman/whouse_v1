@@ -289,7 +289,7 @@ export function MobileBottomNav() {
                   />
                   {/* Unread badge driven by store unreadCount */}
                   {item.id === "alerts" && unreadCount > 0 && !isActive && (
-                    <span className="absolute -right-1.5 -top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white ring-2 ring-background">
+                    <span className="badge-bounce absolute -right-1.5 -top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white ring-2 ring-background">
                       {unreadCount > 9 ? "9+" : unreadCount}
                     </span>
                   )}
