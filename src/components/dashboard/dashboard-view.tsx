@@ -36,7 +36,10 @@ import { kpiMetrics, inboundTrend, outboundTrend, warehousePerformance, dispatch
 import { KPICard } from "@/components/shared/kpi-card"
 import { LiveUpdatesFeed } from "@/components/shared/live-updates-feed"
 import { SLAMonitoringPanel } from "@/components/shared/sla-monitoring-panel"
+import { WarehouseCapacityHeatmap } from "@/components/shared/warehouse-capacity-heatmap"
+import { MetricsTicker } from "@/components/shared/metrics-ticker"
 import { cn } from "@/lib/utils"
+import { useAppStore } from "@/store/app-store"
 
 const kpiIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   totalWarehouses: Warehouse,
@@ -226,39 +229,23 @@ export function DashboardView() {
       </div>
 
       {/* Quick Stats Bar */}
-      <div className="flex flex-wrap gap-2">
-        {quickStats.map((stat) => {
-          const StatIcon = stat.icon
-          return (
-            <Badge
-              key={stat.label}
-              variant="outline"
-              className={cn(
-                "gap-1.5 border px-2.5 py-1 text-[11px] font-medium",
-                stat.colorClass
-              )}
-            >
-              <StatIcon className="h-3 w-3" />
-              {stat.value} {stat.label}
-            </Badge>
-          )
-        })}
-      </div>
+      <MetricsTicker />
 
       {/* Quick Action Bar */}
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 stagger-children">
         {[
-          { label: "New Inbound", icon: PackageSearch, color: "text-blue-600 bg-blue-50 dark:bg-blue-950/50 dark:text-blue-400", count: "12" },
-          { label: "Pending Dispatch", icon: Truck, color: "text-amber-600 bg-amber-50 dark:bg-amber-950/50 dark:text-amber-400", count: "8" },
-          { label: "Critical Alerts", icon: Activity, color: "text-red-600 bg-red-50 dark:bg-red-950/50 dark:text-red-400", count: "3" },
-          { label: "Reports Due", icon: BarChart3, color: "text-purple-600 bg-purple-50 dark:bg-purple-950/50 dark:text-purple-400", count: "2" },
+          { label: "New Inbound", icon: PackageSearch, color: "text-blue-600 bg-blue-50 dark:bg-blue-950/50 dark:text-blue-400", count: "12", view: "inbound" },
+          { label: "Pending Dispatch", icon: Truck, color: "text-amber-600 bg-amber-50 dark:bg-amber-950/50 dark:text-amber-400", count: "8", view: "outbound" },
+          { label: "Critical Alerts", icon: Activity, color: "text-red-600 bg-red-50 dark:bg-red-950/50 dark:text-red-400", count: "3", view: "alerts" },
+          { label: "Reports Due", icon: BarChart3, color: "text-purple-600 bg-purple-50 dark:bg-purple-950/50 dark:text-purple-400", count: "2", view: "reports" },
         ].map((action) => {
           const ActionIcon = action.icon
           return (
             <Button
               key={action.label}
               variant="outline"
-              className={cn("h-auto flex-col gap-1.5 rounded-xl border border-border/60 py-3 transition-all hover:shadow-sm hover:border-border", action.color)}
+              onClick={() => useAppStore.getState().setActiveView(action.view)}
+              className={cn("h-auto flex-col gap-1.5 rounded-xl border border-border/60 py-3 transition-all hover:shadow-sm hover:border-border btn-press", action.color)}
             >
               <ActionIcon className="h-4 w-4" />
               <span className="text-lg font-bold">{action.count}</span>
@@ -299,6 +286,11 @@ export function DashboardView() {
       {/* SLA Monitoring Panel */}
       <div className="stagger-children">
         <SLAMonitoringPanel />
+      </div>
+
+      {/* Warehouse Capacity Heatmap */}
+      <div className="stagger-children">
+        <WarehouseCapacityHeatmap />
       </div>
 
       {/* Charts Row 1 */}

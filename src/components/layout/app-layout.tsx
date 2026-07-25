@@ -171,7 +171,7 @@ export function AppSidebar() {
                       tooltip={item.label}
                       onClick={() => setActiveView(item.id)}
                       className={cn(
-                        "transition-all duration-150",
+                        "transition-all duration-200 nav-icon-animated",
                         isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
                       )}
                     >
@@ -203,7 +203,7 @@ export function AppSidebar() {
                       tooltip={item.label}
                       onClick={() => setActiveView(item.id)}
                       className={cn(
-                        "transition-all duration-150",
+                        "transition-all duration-200 nav-icon-animated",
                         isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
                       )}
                     >
@@ -230,7 +230,7 @@ export function AppSidebar() {
                       tooltip={item.label}
                       onClick={() => setActiveView(item.id)}
                       className={cn(
-                        "transition-all duration-150",
+                        "transition-all duration-200 nav-icon-animated",
                         isActive && "bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
                       )}
                     >

@@ -56,7 +56,7 @@ function ViewRenderer() {
   const View = viewMap[activeView]
   if (!View) return null
   return (
-    <div className="transition-all duration-500">
+    <div className="transition-all duration-500 page-transition">
       <View />
     </div>
   )

@@ -172,7 +172,7 @@ export function NotificationsSheet({ open, onOpenChange }: NotificationsSheetPro
                   <div
                     key={notif.id}
                     className={cn(
-                      "relative flex gap-3 rounded-lg p-3 mb-1 transition-colors hover:bg-muted/50",
+                      "relative flex gap-3 rounded-lg p-3 mb-1 transition-colors hover:bg-muted/50 data-row-enter",
                       notif.unread && "border-l-2 border-l-blue-500 dark:border-l-blue-400"
                     )}
                   >

@@ -1244,6 +1244,237 @@
   background-image: radial-gradient(oklch(0.3 0.015 250) 1px, transparent 1px);
 }
 
+/* ── Sidebar Item Transition ──────────────────────────────────── */
+
+.sidebar-item-transition {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  margin: 2px 8px;
+}
+.sidebar-item-transition:hover {
+  transform: translateX(4px);
+  background-color: oklch(from var(--accent) l c h / 0.3);
+}
+.sidebar-item-transition.active {
+  background: oklch(from var(--primary) l c h / 0.15);
+  box-shadow: inset 3px 0 0 var(--primary);
+}
+
+/* ── Chart Gradient Fill ──────────────────────────────────────── */
+
+.chart-gradient-fill {
+  background: linear-gradient(
+    180deg,
+    oklch(from var(--chart-1) l c h / 0.4) 0%,
+    oklch(from var(--chart-1) l c h / 0.02) 100%
+  );
+}
+
+/* ── Hover Glow Effects ──────────────────────────────────────── */
+
+.hover-glow-blue {
+  transition: box-shadow 0.3s ease;
+}
+.hover-glow-blue:hover {
+  box-shadow:
+    0 0 20px oklch(0.65 0.2 250 / 0.15),
+    0 4px 12px oklch(0 0 0 / 0.08);
+}
+
+.hover-glow-emerald {
+  transition: box-shadow 0.3s ease;
+}
+.hover-glow-emerald:hover {
+  box-shadow:
+    0 0 20px oklch(0.7 0.2 160 / 0.15),
+    0 4px 12px oklch(0 0 0 / 0.08);
+}
+
+.hover-glow-amber {
+  transition: box-shadow 0.3s ease;
+}
+.hover-glow-amber:hover {
+  box-shadow:
+    0 0 20px oklch(0.75 0.18 85 / 0.15),
+    0 4px 12px oklch(0 0 0 / 0.08);
+}
+
+.dark .hover-glow-blue:hover {
+  box-shadow:
+    0 0 24px oklch(0.55 0.18 250 / 0.25),
+    0 4px 16px oklch(0 0 0 / 0.3);
+}
+.dark .hover-glow-emerald:hover {
+  box-shadow:
+    0 0 24px oklch(0.6 0.18 160 / 0.25),
+    0 4px 16px oklch(0 0 0 / 0.3);
+}
+.dark .hover-glow-amber:hover {
+  box-shadow:
+    0 0 24px oklch(0.65 0.16 85 / 0.25),
+    0 4px 16px oklch(0 0 0 / 0.3);
+}
+
+/* ── Animate Count Up ────────────────────────────────────────── */
+
+.animate-count-up {
+  animation: countUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Badge Status Dot ────────────────────────────────────────── */
+
+.badge-status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 9999px;
+}
+.badge-status-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.badge-status-dot.success::before {
+  background-color: oklch(0.65 0.2 145);
+}
+.badge-status-dot.warning::before {
+  background-color: oklch(0.75 0.18 85);
+}
+.badge-status-dot.critical::before {
+  background-color: oklch(0.6 0.22 25);
+}
+.badge-status-dot.info::before {
+  background-color: oklch(0.65 0.2 250);
+}
+
+.dark .badge-status-dot.success::before {
+  background-color: oklch(0.7 0.18 145);
+}
+.dark .badge-status-dot.warning::before {
+  background-color: oklch(0.8 0.16 85);
+}
+.dark .badge-status-dot.critical::before {
+  background-color: oklch(0.65 0.2 25);
+}
+.dark .badge-status-dot.info::before {
+  background-color: oklch(0.7 0.18 250);
+}
+
+/* ── Page Transition ─────────────────────────────────────────── */
+
+.page-transition {
+  animation: pageIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Card Grid Pattern ───────────────────────────────────────── */
+
+.card-grid-pattern {
+  background-image:
+    linear-gradient(oklch(from var(--border) l c h / 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(from var(--border) l c h / 0.3) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ── Nav Icon Animated ───────────────────────────────────────── */
+
+.nav-icon-animated {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+}
+.sidebar-item-transition:hover .nav-icon-animated {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+/* ── Table Header Sticky Glass ───────────────────────────────── */
+
+.table-header-sticky-glass thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: oklch(from var(--background) l c h / 0.85);
+  border-bottom: 1px solid var(--border);
+}
+.dark .table-header-sticky-glass thead th {
+  background: oklch(from var(--background) l c h / 0.75);
+}
+
+/* ── Content Fade In ─────────────────────────────────────────── */
+
+.content-fade-in {
+  animation: contentFade 0.4s ease-out forwards;
+}
+@keyframes contentFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Pulse Ring ──────────────────────────────────────────────── */
+
+.pulse-ring {
+  position: relative;
+}
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  opacity: 0;
+}
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* ── Scrolling Ticker ──────────────────────────────────────── */
+.animate-scroll-ticker {
+  animation: scrollTicker 60s linear infinite;
+}
+@keyframes scrollTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+.animate-scroll-ticker:hover {
+  animation-play-state: paused;
+}
+
 /* ── Print Styles ──────────────────────────────────────────── */
 @media print {
   /* Hide interactive elements */
