@@ -22,6 +22,7 @@ import { ReportsView } from "@/components/modules/reports-view"
 import { SettingsView } from "@/components/modules/settings-view"
 import { DockSchedulerView } from "@/components/modules/dock-scheduler-view"
 import { WarehouseMapView } from "@/components/modules/warehouse-map-view"
+import { SLACountdownView } from "@/components/modules/sla-countdown-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { cn } from "@/lib/utils"
 
@@ -42,6 +43,7 @@ const viewMap: Record<string, React.ComponentType> = {
   settings: SettingsView,
   "dock-scheduler": DockSchedulerView,
   "warehouse-map": WarehouseMapView,
+  "sla-countdown": SLACountdownView,
 }
 
 

@@ -18,6 +18,7 @@ export const navItems: NavItem[] = [
   { id: 'cost-analytics', label: 'Cost Analytics', icon: 'DollarSign', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'alerts', label: 'Alerts', icon: 'Bell', badge: 5, roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'dock-scheduler', label: 'Dock Scheduling', icon: 'LayoutGrid', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
+  { id: 'sla-countdown', label: 'SLA Countdown', icon: 'Timer', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', roles: ['super_admin', 'executive'] },
 ]

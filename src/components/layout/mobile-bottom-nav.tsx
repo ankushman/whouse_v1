@@ -19,9 +19,13 @@ import {
   Settings,
   LayoutGrid,
   MapPin,
+  ScanBarcode,
+  PlusCircle,
+  ClipboardList,
 } from "lucide-react"
 import { useAppStore, navItems } from "@/store/app-store"
 import { cn } from "@/lib/utils"
+import { useSwipe } from "@/hooks/use-swipe"
 import {
   Sheet,
   SheetContent,
@@ -55,7 +59,7 @@ const moreIconMap: Record<string, React.ComponentType<{ className?: string }>> =
 }
 
 // ──────────────────────────────────────────────────────
-// Core mobile nav items (first 4 + Alerts + More)
+// Core mobile nav items (first 4 + Alerts)
 // ──────────────────────────────────────────────────────
 
 interface MobileNavItem {
@@ -64,7 +68,6 @@ interface MobileNavItem {
   icon: React.ComponentType<{ className?: string }>
   /** navItem ids used to pull role permissions */
   sourceIds: string[]
-  badge?: number
 }
 
 const coreMobileItems: MobileNavItem[] = [
@@ -97,8 +100,19 @@ const coreMobileItems: MobileNavItem[] = [
     label: "Alerts",
     icon: Bell,
     sourceIds: ["alerts"],
-    badge: 5,
   },
+]
+
+// ──────────────────────────────────────────────────────
+// Quick actions for swipe-up gesture sheet
+// ──────────────────────────────────────────────────────
+
+const quickActions = [
+  { id: "scan", label: "Scan", icon: ScanBarcode, view: "inventory" },
+  { id: "receive", label: "Receive", icon: PackageSearch, view: "inbound" },
+  { id: "dispatch", label: "Dispatch", icon: Truck, view: "outbound" },
+  { id: "check", label: "Stock Check", icon: ClipboardList, view: "inventory" },
+  { id: "new-order", label: "New Order", icon: PlusCircle, view: "outbound" },
 ]
 
 // ──────────────────────────────────────────────────────
@@ -106,8 +120,9 @@ const coreMobileItems: MobileNavItem[] = [
 // ──────────────────────────────────────────────────────
 
 export function MobileBottomNav() {
-  const { activeView, setActiveView, currentRole } = useAppStore()
+  const { activeView, setActiveView, currentRole, unreadCount } = useAppStore()
   const [moreOpen, setMoreOpen] = React.useState(false)
+  const [quickActionsOpen, setQuickActionsOpen] = React.useState(false)
 
   // Keep only items the current role has permission for
   const permittedCoreItems = React.useMemo(
@@ -132,6 +147,79 @@ export function MobileBottomNav() {
   const coreIds = new Set(permittedCoreItems.map((i) => i.id))
   const moreItems = permittedAllItems.filter((n) => !coreIds.has(n.id))
 
+  // ── Sliding pill indicator ──────────────────────────
+  const navRef = React.useRef<HTMLElement>(null)
+  const itemRefs = React.useRef<Record<string, HTMLButtonElement | null>>({})
+  const moreBtnRef = React.useRef<HTMLButtonElement>(null)
+
+  const [pillStyle, setPillStyle] = React.useState<React.CSSProperties>({
+    opacity: 0,
+  })
+
+  const activeIndex = React.useMemo(
+    () => permittedCoreItems.findIndex((i) => i.id === activeView),
+    [permittedCoreItems, activeView]
+  )
+
+  const updatePillPosition = React.useCallback(() => {
+    const navEl = navRef.current
+    if (!navEl) return
+
+    let targetBtn: HTMLButtonElement | null = null
+
+    if (activeIndex >= 0) {
+      targetBtn =
+        itemRefs.current[permittedCoreItems[activeIndex]?.id] ?? null
+    } else if (moreOpen) {
+      targetBtn = moreBtnRef.current
+    }
+
+    if (!targetBtn) {
+      setPillStyle((prev) => ({ ...prev, opacity: 0 }))
+      return
+    }
+
+    const navRect = navEl.getBoundingClientRect()
+    const btnRect = targetBtn.getBoundingClientRect()
+    const inset = 10
+
+    setPillStyle({
+      transform: `translateX(${btnRect.left - navRect.left + inset}px)`,
+      width: Math.max(0, btnRect.width - inset * 2),
+      opacity: 1,
+    })
+  }, [activeIndex, moreOpen, permittedCoreItems])
+
+  React.useLayoutEffect(() => {
+    updatePillPosition()
+  }, [updatePillPosition])
+
+  // Recalculate pill on window resize
+  React.useEffect(() => {
+    window.addEventListener("resize", updatePillPosition)
+    return () => window.removeEventListener("resize", updatePillPosition)
+  }, [updatePillPosition])
+
+  // ── Swipe gesture navigation ────────────────────────
+  const swipeHandlers = useSwipe({
+    onSwipeLeft: () => {
+      if (activeIndex >= 0 && activeIndex < permittedCoreItems.length - 1) {
+        setActiveView(permittedCoreItems[activeIndex + 1].id)
+      }
+    },
+    onSwipeRight: () => {
+      if (activeIndex > 0) {
+        setActiveView(permittedCoreItems[activeIndex - 1].id)
+      }
+    },
+    onSwipeUp: () => {
+      setMoreOpen(false)
+      setQuickActionsOpen(true)
+    },
+    threshold: 40,
+  })
+
+  // ── Handlers ────────────────────────────────────────
   const handleMoreSelect = React.useCallback(
     (id: string) => {
       setActiveView(id)
@@ -140,9 +228,24 @@ export function MobileBottomNav() {
     [setActiveView]
   )
 
+  const handleQuickAction = React.useCallback(
+    (view: string) => {
+      setActiveView(view)
+      setQuickActionsOpen(false)
+    },
+    [setActiveView]
+  )
+
+  const openMore = React.useCallback(() => {
+    setQuickActionsOpen(false)
+    setMoreOpen(true)
+  }, [])
+
   return (
     <>
       <nav
+        ref={navRef}
+        {...swipeHandlers}
         className={cn(
           "no-print fixed bottom-0 left-0 right-0 z-40 md:hidden",
           "border-t border-border",
@@ -154,7 +257,7 @@ export function MobileBottomNav() {
         role="navigation"
         aria-label="Mobile navigation"
       >
-        <div className="flex items-center justify-around px-1 pt-1">
+        <div className="relative flex items-center justify-around px-1 pt-1">
           {permittedCoreItems.map((item) => {
             const Icon = item.icon
             const isActive = activeView === item.id
@@ -162,13 +265,18 @@ export function MobileBottomNav() {
             return (
               <button
                 key={item.id}
+                ref={(el) => {
+                  itemRefs.current[item.id] = el
+                }}
                 type="button"
                 onClick={() => setActiveView(item.id)}
                 className={cn(
-                  "ripple-effect nav-tap-feedback relative flex min-w-0 flex-1 flex-col items-center gap-0.5",
+                  "nav-tap-feedback relative flex min-w-0 flex-1 flex-col items-center gap-0.5",
                   "rounded-lg py-2 transition-colors duration-150",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                  isActive ? "text-primary" : "text-muted-foreground"
+                  isActive
+                    ? "text-primary active:bg-primary/10"
+                    : "text-muted-foreground"
                 )}
                 aria-current={isActive ? "page" : undefined}
               >
@@ -179,10 +287,10 @@ export function MobileBottomNav() {
                       isActive && "scale-110"
                     )}
                   />
-                  {/* Badge count */}
-                  {item.badge != null && item.badge > 0 && !isActive && (
+                  {/* Unread badge driven by store unreadCount */}
+                  {item.id === "alerts" && unreadCount > 0 && !isActive && (
                     <span className="absolute -right-1.5 -top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white ring-2 ring-background">
-                      {item.badge > 9 ? "9+" : item.badge}
+                      {unreadCount > 9 ? "9+" : unreadCount}
                     </span>
                   )}
                 </span>
@@ -194,20 +302,17 @@ export function MobileBottomNav() {
                 >
                   {item.label}
                 </span>
-                {/* Active bottom bar indicator */}
-                {isActive && (
-                  <span className="nav-active-bar" />
-                )}
               </button>
             )
           })}
 
           {/* "More" button */}
           <button
+            ref={moreBtnRef}
             type="button"
-            onClick={() => setMoreOpen(true)}
+            onClick={openMore}
             className={cn(
-              "ripple-effect nav-tap-feedback relative flex min-w-0 flex-1 flex-col items-center gap-0.5",
+              "nav-tap-feedback relative flex min-w-0 flex-1 flex-col items-center gap-0.5",
               "rounded-lg py-2 transition-colors duration-150",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
               moreOpen ? "text-primary" : "text-muted-foreground"
@@ -220,8 +325,13 @@ export function MobileBottomNav() {
             <span className="text-[10px] leading-tight font-medium text-muted-foreground">
               More
             </span>
-            {moreOpen && <span className="nav-active-bar" />}
           </button>
+
+          {/* Sliding pill indicator */}
+          <span
+            className="pointer-events-none absolute bottom-0 left-0 h-1 rounded-full bg-primary transition-[transform,width,opacity] duration-300 ease-out"
+            style={pillStyle}
+          />
         </div>
       </nav>
 
@@ -236,7 +346,9 @@ export function MobileBottomNav() {
           }}
         >
           <SheetHeader className="px-4 pb-3">
-            <SheetTitle className="text-sm font-semibold">All Modules</SheetTitle>
+            <SheetTitle className="text-sm font-semibold">
+              All Modules
+            </SheetTitle>
           </SheetHeader>
           <Separator />
           <ScrollArea className="h-full max-h-[calc(60vh-4rem)] px-4 pt-2">
@@ -274,6 +386,47 @@ export function MobileBottomNav() {
               })}
             </div>
           </ScrollArea>
+        </SheetContent>
+      </Sheet>
+
+      {/* Quick Actions Sheet (swipe-up) */}
+      <Sheet open={quickActionsOpen} onOpenChange={setQuickActionsOpen}>
+        <SheetContent
+          side="bottom"
+          className="rounded-t-2xl px-0 pb-0 pt-4 md:hidden"
+          style={{
+            paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          }}
+        >
+          <SheetHeader className="px-4 pb-3">
+            <SheetTitle className="text-sm font-semibold">
+              Quick Actions
+            </SheetTitle>
+          </SheetHeader>
+          <Separator />
+          <div className="grid grid-cols-3 gap-2 px-4 pt-4 pb-4">
+            {quickActions.map((action) => {
+              const ActionIcon = action.icon
+              return (
+                <button
+                  key={action.id}
+                  type="button"
+                  onClick={() => handleQuickAction(action.view)}
+                  className={cn(
+                    "nav-tap-feedback flex flex-col items-center gap-2 rounded-xl p-4",
+                    "bg-muted/50 text-foreground transition-all duration-150",
+                    "active:bg-primary/10 active:scale-95 active:text-primary",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  )}
+                >
+                  <ActionIcon className="h-5 w-5" />
+                  <span className="text-[11px] font-medium leading-tight text-center">
+                    {action.label}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </SheetContent>
       </Sheet>
     </>

@@ -4443,3 +4443,126 @@ html.theme-transition body {
     opacity: 0;
   }
 }
+
+/* ---- Card Accent Variants ── */
+.card-accent-green {
+  border-top: 3px solid oklch(0.65 0.2 145 / 0.7);
+}
+.card-accent-amber {
+  border-top: 3px solid oklch(0.75 0.18 85 / 0.7);
+}
+.card-accent-red {
+  border-top: 3px solid oklch(0.6 0.22 25 / 0.7);
+}
+.card-accent-blue {
+  border-top: 3px solid oklch(0.6 0.15 250 / 0.7);
+}
+
+/* ---- Breached Flash Animation ── */
+@keyframes breached-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.animate-breached-flash {
+  animation: breached-flash 1s ease-in-out infinite;
+}
+
+/* ---- Countdown Pulse ── */
+@keyframes countdown-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+.animate-countdown-pulse {
+  animation: countdown-pulse 2s ease-in-out infinite;
+}
+
+/* ---- Slide In Bottom Micro ── */
+.animate-slide-in-bottom-micro {
+  animation: slideInBottomMicro 0.2s ease-out;
+}
+@keyframes slideInBottomMicro {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Skeleton Shimmer ── */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-skeleton-shimmer {
+  background: linear-gradient(90deg, transparent 25%, oklch(0.5 0.01 260 / 0.1) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s linear infinite;
+}
+
+/* ---- Focus Ring Glow ── */
+.focus-ring-glow:focus-visible {
+  outline: 2px solid oklch(0.6 0.2 250);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px oklch(0.6 0.2 250 / 0.2);
+}
+
+/* ---- Number Tabular ── */
+.text-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Stagger Children with Variable Delay ── */
+.stagger-children > * {
+  animation: staggerFadeIn 0.35s ease-out both;
+}
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 40ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 200ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 280ms; }
+.stagger-children > *:nth-child(9) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 360ms; }
+
+/* ---- Nav Tap Feedback ── */
+.nav-tap-feedback {
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+.nav-tap-feedback:active {
+  transform: scale(0.92);
+}
+
+/* ---- Glass Panel Effect ── */
+.glass-panel {
+  background: oklch(1 0 0 / 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.5 0.02 260 / 0.15);
+}
+.dark .glass-panel {
+  background: oklch(0.15 0.01 260 / 0.7);
+  border-color: oklch(0.5 0.02 260 / 0.2);
+}
+
+/* ---- Gradient Text Warm ── */
+.gradient-text-warm {
+  background: linear-gradient(135deg, oklch(0.65 0.2 25), oklch(0.75 0.18 85));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
