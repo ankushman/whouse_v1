@@ -649,3 +649,50 @@ Updated Project Status (Post Round 7):
   7. Connect WebSocket events to toast notifications
   8. Add data export to PDF for reports module
 
+---
+Task ID: 10
+Agent: Main
+Task: Restructure frontend & backend folder architecture
+
+Work Log:
+- Assessed entire project folder structure (169+ files across src/, mini-services/, examples/)
+- Updated .gitignore to exclude temp/generated files: tool-results/, download/, upload/, tests/, *.db, agent-ctx/
+- Removed tracked temp files from git (rm --cached): 30+ tool-result files, db/custom.db, upload/download content, agent-ctx
+- Created src/types/ directory with organized type definitions:
+  - database.ts: 15 database model interfaces (Warehouse, Employee, InboundShipment, OutboundShipment, InventoryItem, TransportVehicle, Equipment, Alert, KpiSnapshot, Customer, Transporter, TimelineStep, Json, Tables)
+  - api.ts: Standardized response types (ApiResponse, PaginatedResponse, ServiceResult)
+  - store.ts: Store types (Role, NavItem)
+  - index.ts: Barrel export re-exporting all types
+- Created src/services/ directory with extracted backend service layer:
+  - warehouse-service.ts: getWarehouses, getWarehouseById, createWarehouse, updateWarehouse, deleteWarehouse
+  - inventory-service.ts: getInventoryItems, createInventoryItem
+  - shipment-service.ts: getShipments, getShipmentById, createShipment, updateShipment, deleteShipment
+  - index.ts: Barrel export
+- Refactored all 5 API routes to be thin controllers delegating to services:
+  - api/warehouses/route.ts (from 77 lines → 25 lines)
+  - api/warehouses/[id]/route.ts (from 89 lines → 45 lines)
+  - api/inventory/route.ts (from 89 lines → 27 lines)
+  - api/shipments/route.ts (from 153 lines → 33 lines)
+  - api/shipments/[id]/route.ts (from 128 lines → 45 lines)
+- Removed stale src/app/api/route.ts ("Hello World" placeholder)
+- Created barrel exports (index.ts) for 7 directories:
+  - src/components/layout/index.ts
+  - src/components/dashboard/index.ts
+  - src/components/modules/index.ts
+  - src/components/shared/index.ts
+  - src/hooks/index.ts
+  - src/lib/index.ts
+  - src/store/index.ts
+- Updated supabase-types.ts to re-export from @/types for backward compatibility
+- Updated app-store.ts to import Role/NavItem from @/types instead of local definitions
+- Ran lint: 0 errors, 0 warnings
+- Committed and pushed to GitHub (commit da28004)
+
+Stage Summary:
+- Project folder structure fully reorganized with clear frontend/backend separation
+- Frontend: types/, components/(ui|layout|dashboard|modules|shared)/, hooks/, lib/, store/ — all with barrel exports
+- Backend: services/ layer with pure business logic, thin API route controllers
+- 30+ temp files removed from git tracking
+- Clean commit pushed to origin/main
+- Lint passes with zero errors
+
