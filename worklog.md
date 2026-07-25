@@ -882,3 +882,85 @@ Updated Project Status (Post Round 11 - Complete):
   6. Enhance mobile experience with swipe gestures
   7. Add data persistence with Supabase (remote has seed commit)
   8. Integrate enhanced DataTable into outbound + inventory modules
+
+---
+Task ID: 13
+Agent: Main (Cron Review - Round 12)
+Task: QA with agent-browser, bug fixes, toast system, reports enhancement, activity timeline, CSS expansion
+
+Work Log:
+- QA Testing via agent-browser:
+  - Opened dashboard at localhost:3000, verified sidebar navigation, KPI rendering
+  - Tested: Inbound, Outbound, Route Optimization, Dock Scheduling — all rendered correctly
+  - FOUND CRITICAL BUG: Employees module crashed with "client-side exception" error
+  - Root cause: weeklyTrendData and weeklySummary used in JSX but never defined
+  - Fix: Added mock data arrays (7 weeks of productivity/attendance/errorRate/tasks + weeklySummary)
+  - Verified fix: Employees module + Performance Trends tab render correctly post-fix
+- Enhanced Toast System:
+  - Created ToastProvider (toast-provider.tsx): wraps Sonner Toaster with theme-aware styling, Alt+T shortcut
+  - Created useToastHelper hook (use-toast-helper.ts): success/error/warning/info/loading convenience methods
+  - Added toast CSS: custom enter/exit animations, rounded-xl corners, border styling
+  - Wired ToastProvider into layout.tsx
+  - Updated barrel exports for shared components and hooks
+- Enhanced Reports Module (reports-view.tsx):
+  - Generate Report workflow: shimmer-loading state → 1.5s delay → success toast → "Ready" badge
+  - Schedule dropdown per report (Daily/Weekly/Monthly/Custom)
+  - Report History table with 10 mock entries, table-header-sticky-glass + table-row-hover
+  - Download All button with loading→success toast flow
+  - Applied card-depth, hover-lift-sm, stagger-children, text-number styling
+- Created Activity Timeline component (activity-timeline.tsx):
+  - Chronological warehouse operations (10 events across 6 types)
+  - Type filter dropdown, status badges (completed/in-progress/scheduled/delayed)
+  - Gradient timeline line, animated pulse for in-progress items
+  - Show All/Show Less toggle
+  - Added to dashboard in 2-column layout with LiveUpdatesFeed
+- Added 10+ new CSS utility classes:
+  - hover-scale-sm/md, shimmer-loading, border-glow-blue/emerald, card-shine
+  - text-number, animate-breathe, ripple-effect, scroll-fade-edges
+  - status-online/offline/busy indicators
+
+Stage Summary:
+- 13 files changed: 828 insertions, 26 deletions
+- 3 new files: activity-timeline.tsx, toast-provider.tsx, use-toast-helper.ts
+- 1 CRITICAL BUG FIXED: employees-view.tsx undefined data crash
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+- GitHub push: commit f8c61e9 to main
+
+---
+Updated Project Status (Post Round 12 - Complete):
+- STATUS: STABLE - All modules compile and render correctly
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit f8c61e9)
+- MODULES (15): Dashboard, Warehouses, Inbound, Outbound, Inventory, Transportation, Route Optimization, Equipment, Employees, Productivity, Cost Analytics, Alerts, Dock Scheduling, Reports, Settings
+- SHARED COMPONENTS (19): KPICard, StatusBadge, PageHeader, EmptyState, DashboardSkeleton, PageSkeleton, TableSkeleton, HealthScoreRing, ExportButton, AnimatedCounter, DataTable, LiveUpdatesFeed, KeyboardShortcutsDialog, NotificationsSheet, ShiftScheduler, SLAMonitoringPanel, WarehouseCapacityHeatmap, MetricsTicker, ToastProvider, ActivityTimeline
+- LAYOUT COMPONENTS (2): AppLayout, MobileBottomNav
+- CONFIG LAYER: src/config/ — supabase.ts, db.ts
+- MINI SERVICES (1): Realtime WebSocket service (port 3004)
+- HOOKS (6): use-toast, use-mobile, use-live-data, use-realtime-events, use-live-toast, use-toast-helper
+- CSS UTILITIES (85+): All previous + 22+ new classes across Rounds 11-12
+- NEW FEATURES THIS ROUND:
+  - Toast system enhancement (provider + helper + CSS animations)
+  - Reports module: generate workflow, schedule dropdown, history table, download all
+  - Activity Timeline: operations chronology with filter and status tracking
+  - 10+ CSS micro-interaction utilities
+- BUGS FIXED: employees-view.tsx undefined weeklyTrendData/weeklySummary → client crash
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental); agent-browser can't run simultaneously
+- COMPLETED RECOMMENDATIONS:
+  - Route optimization UI ✓
+  - SLA monitoring panel ✓
+  - Config layer restructuring ✓
+  - CSS utility expansion ✓
+  - Employee performance trend charts ✓
+  - DataTable enhancement ✓
+  - Toast notification system ✓
+  - Reports module enhancement ✓
+- PRIORITY NEXT:
+  1. Add data export to PDF for reports module
+  2. Add geographic clustering visualization on warehouse map
+  3. Enhance dock scheduler with drag-and-drop dock assignments
+  4. Add barcode/QR code scanning for inventory
+  5. Enhance mobile experience with swipe gestures
+  6. Add data persistence with Supabase (remote has seed commit)
+  7. Integrate enhanced DataTable into outbound + inventory modules
