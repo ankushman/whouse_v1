@@ -536,7 +536,7 @@ export function WarehousesView() {
 
           {/* ── Cards View ── */}
           {viewMode === "cards" && (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children stagger-grid">
               {warehouses.map((warehouse) => (
                 <WarehouseCard
                   key={warehouse.id}

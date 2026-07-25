@@ -35,7 +35,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts"
-import { kpiMetrics, inboundTrend, outboundTrend, warehousePerformance, dispatchPerformance, costTrend, dailyThroughput, slaData, inventoryAccuracyTrend, manpowerProductivity } from "@/data/mock-data"
+import { kpiMetrics, inboundTrend, warehousePerformance, dispatchPerformance, costTrend, dailyThroughput, slaData, inventoryAccuracyTrend, manpowerProductivity } from "@/data/mock-data"
 import { KPICard } from "@/components/shared/kpi-card"
 import { LiveUpdatesFeed } from "@/components/shared/live-updates-feed"
 import { SLAMonitoringPanel } from "@/components/shared/sla-monitoring-panel"

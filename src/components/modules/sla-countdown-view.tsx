@@ -230,14 +230,13 @@ export function SLACountdownView() {
   const [slaItems, setSlaItems] = useState<SLAItem[]>(() => createSLAItems(mountTimeRef.current))
   const [slaTrendData] = useState(() => createSlaTrendData(mountTimeRef.current))
 
-  // Update countdowns every second
+  // Update countdowns every second — decrement by fixed 1000ms each tick
   useEffect(() => {
     const interval = setInterval(() => {
       setSlaItems((prev) =>
         prev.map((item) => {
           if (item.status === "completed") return item
-          const elapsed = Date.now() - mountTimeRef.current
-          const newRemaining = item.remainingMs - elapsed
+          const newRemaining = item.remainingMs - 1000
           const newStatus = getStatusFromMs(newRemaining, item.progress)
           return { ...item, remainingMs: newRemaining, status: newStatus }
         })

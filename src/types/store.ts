@@ -11,10 +11,13 @@ export type Role =
   | 'supervisor'
   | 'operator'
 
+export type NavGroup = "operations" | "analytics" | "system"
+
 export interface NavItem {
   id: string
   label: string
   icon: string
+  group: NavGroup
   badge?: number
   roles: Role[]
 }

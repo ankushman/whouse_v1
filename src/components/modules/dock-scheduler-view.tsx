@@ -40,7 +40,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -167,7 +167,7 @@ function DockCard({
 
   const handleComplete = () => {
     if (!assignment) return
-    toast.success(`Dock ${dock.name} cleared`, `${assignment.vehicleReg} — ${assignment.supplier}`)
+    toastRef.current.success(`Dock ${dock.name} cleared`, `${assignment.vehicleReg} — ${assignment.supplier}`)
     onComplete(assignment.id)
   }
 
@@ -319,6 +319,9 @@ function DockCard({
 // ── Main Component ─────────────────────────────────────────────────────────
 
 export function DockSchedulerView() {
+  const toastResult = useToast()
+  const toastRef = useRef(toastResult)
+  useEffect(() => { toastRef.current = toastResult })
   const [docks, setDocks] = useState<Dock[]>(INITIAL_DOCKS)
   const [assignments, setAssignments] = useState<DockAssignment[]>(INITIAL_ASSIGNMENTS)
   const [queuedVehicles, setQueuedVehicles] = useState<QueuedVehicle[]>(INITIAL_QUEUED_VEHICLES)
@@ -364,7 +367,7 @@ export function DockSchedulerView() {
 
   const handleComplete = useCallback((assignmentId: string) => {
     setCompletedIds((prev) => new Set(prev).add(assignmentId))
-    toast.success("Dock assignment completed")
+    toastRef.current.success("Dock assignment completed")
   }, [])
 
   const handleAdvanceProgress = useCallback((assignmentId: string, amount: number) => {
@@ -407,7 +410,7 @@ export function DockSchedulerView() {
     // Remove from queue
     setQueuedVehicles((prev) => prev.filter((v) => v.id !== selectedVehicleId))
 
-    toast.success("Vehicle Assigned", `${vehicle.reg} → ${assigningDock.name} (${vehicle.supplier})`)
+    toastRef.current.success("Vehicle Assigned", `${vehicle.reg} → ${assigningDock.name} (${vehicle.supplier})`)
 
     setAssignDialogOpen(false)
     setAssigningDock(null)
@@ -450,7 +453,7 @@ export function DockSchedulerView() {
         return next
       })
 
-      toast.success("Vehicle Assigned", `${vehicle.reg} → ${dock.name} (${vehicle.supplier})`)
+      toastRef.current.success("Vehicle Assigned", `${vehicle.reg} → ${dock.name} (${vehicle.supplier})`)
     },
     [queuedVehicles, docks]
   )
@@ -476,7 +479,7 @@ export function DockSchedulerView() {
             if (newProgress >= 100) {
               // Auto-complete
               setTimeout(() => {
-                toast.success("Assignment Auto-Completed", `${a.vehicleReg} at ${docks.find((d) => d.id === a.dockId)?.name ?? a.dockId}`)
+                toastRef.current.success("Assignment Auto-Completed", `${a.vehicleReg} at ${docks.find((d) => d.id === a.dockId)?.name ?? a.dockId}`)
                 setCompletedIds((c) => new Set(c).add(a.id))
                 setDocks((dd) =>
                   dd.map((d) => (d.id === a.dockId ? { ...d, status: "available" as DockStatus } : d))
@@ -502,9 +505,9 @@ export function DockSchedulerView() {
   const toggleSimulation = useCallback(() => {
     setSimulating((prev) => !prev)
     if (!simulating) {
-      toast.info("Simulation Started", "Progress will advance 5% every 3 seconds", { duration: 3000 })
+      toastRef.current.info("Simulation Started", "Progress will advance 5% every 3 seconds", { duration: 3000 })
     } else {
-      toast.info("Simulation Stopped", "Simulation has been stopped", { duration: 2000 })
+      toastRef.current.info("Simulation Stopped", "Simulation has been stopped", { duration: 2000 })
     }
   }, [simulating])
 
@@ -515,19 +518,19 @@ export function DockSchedulerView() {
   }))
 
   const handleExportCSV = useCallback(() => {
-    const data = docks.map((d) => ({
+    const data = docksWithAssignments.map(({ dock: d, assignment: a }) => ({
       Dock: d.name,
       Zone: d.zone,
       Status: d.status.charAt(0).toUpperCase() + d.status.slice(1),
-      "Loading Type": d.loadingType || "—",
-      "Current Vehicle": d.currentAssignment?.vehicleReg || "—",
-      "Driver": d.currentAssignment?.driverName || "—",
-      "Shipment Type": d.currentAssignment?.type || "—",
-      Supplier: d.currentAssignment?.supplier || "—",
-      Progress: d.currentAssignment ? `${d.currentAssignment.progress}%` : "—",
+      "Loading Type": d.type.charAt(0).toUpperCase() + d.type.slice(1),
+      "Current Vehicle": a?.vehicleReg || "—",
+      Driver: a?.driverName || "—",
+      "Shipment Type": a?.type || "—",
+      Supplier: a?.supplier || "—",
+      Progress: a ? `${a.progress}%` : "—",
     }))
     exportToCSV(data, "dock-scheduler", ["Dock", "Zone", "Status", "Loading Type", "Current Vehicle", "Driver", "Shipment Type", "Supplier", "Progress"])
-  }, [docks])
+  }, [docksWithAssignments])
 
   return (
     <div className="space-y-6">
@@ -553,7 +556,7 @@ export function DockSchedulerView() {
                 </>
               )}
             </Button>
-            <Button size="sm" className="gap-1.5" onClick={() => toast.info("Refreshing dock status...", "Fetching latest dock information", { duration: 2000 })}>
+            <Button size="sm" className="gap-1.5" onClick={() => toastRef.current.info("Refreshing dock status...", "Fetching latest dock information", { duration: 2000 })}>
               <Zap className="h-3.5 w-3.5" /> Refresh Status
             </Button>
           </div>

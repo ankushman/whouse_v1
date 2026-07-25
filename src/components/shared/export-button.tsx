@@ -48,11 +48,11 @@ export function ExportButton({ onExportCSV, onExportPDF, className }: ExportButt
 export function exportToCSV(data: Record<string, any>[], filename: string, columns?: string[]) {
   if (!data.length) return
   const cols = columns || Object.keys(data[0])
-  const header = cols.join(",")
+  const header = cols.map(c => `"${c.replace(/"/g, '""')}"`).join(",")
   const rows = data.map(row => cols.map(col => {
     const val = row[col]
-    const str = typeof val === "string" ? `"${val.replace(/"/g, '""')}"` : String(val)
-    return str
+    if (val == null) return ""
+    return typeof val === "string" ? `"${val.replace(/"/g, '""')}"` : String(val)
   }).join(","))
   const csv = [header, ...rows].join("\n")
   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" })

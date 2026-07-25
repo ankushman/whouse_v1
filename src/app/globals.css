@@ -5487,3 +5487,112 @@ html.theme-transition body {
   from { --border-angle: 0deg; }
   to { --border-angle: 360deg; }
 }
+
+
+/* ── Round 27: Enhanced interaction & visual polish ── */
+
+/* Smooth card entrance stagger for grid children */
+@keyframes stagger-grid-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.stagger-grid > * {
+  animation: stagger-grid-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.stagger-grid > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-grid > *:nth-child(2) { animation-delay: 40ms; }
+.stagger-grid > *:nth-child(3) { animation-delay: 80ms; }
+.stagger-grid > *:nth-child(4) { animation-delay: 120ms; }
+.stagger-grid > *:nth-child(5) { animation-delay: 160ms; }
+.stagger-grid > *:nth-child(6) { animation-delay: 200ms; }
+.stagger-grid > *:nth-child(7) { animation-delay: 240ms; }
+.stagger-grid > *:nth-child(8) { animation-delay: 280ms; }
+.stagger-grid > *:nth-child(n+9) { animation-delay: 320ms; }
+
+/* Tooltip with smooth fade + slide */
+@keyframes tooltip-enter {
+  from { opacity: 0; transform: translateY(4px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.tooltip-smooth {
+  animation: tooltip-enter 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Active nav item with animated left indicator */
+@keyframes nav-indicator {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+.nav-item-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: oklch(0.6 0.2 250);
+  animation: nav-indicator 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+:is(.dark) .nav-item-active::before {
+  background: oklch(0.65 0.18 250);
+}
+
+/* Gradient text for headings */
+.gradient-heading {
+  background: linear-gradient(135deg, oklch(0.55 0.2 250), oklch(0.6 0.15 180));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle hover glow for interactive cards */
+@keyframes card-hover-glow-subtle {
+  from { box-shadow: 0 0 0 0 oklch(0.6 0.15 250 / 0); }
+  to { box-shadow: 0 4px 20px -4px oklch(0.6 0.15 250 / 0.08); }
+}
+.card-hover-glow-subtle {
+  transition: box-shadow 0.3s ease;
+}
+.card-hover-glow-subtle:hover {
+  animation: card-hover-glow-subtle 0.3s ease both;
+}
+
+/* Badge with count animation */
+@keyframes badge-pop {
+  0% { transform: scale(0.5); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.badge-pop {
+  animation: badge-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Smooth scrollbar for horizontal overflow */
+.scrollbar-horizontal {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: oklch(0.75 0 0 / 0.3) transparent;
+}
+.scrollbar-horizontal::-webkit-scrollbar {
+  height: 6px;
+}
+.scrollbar-horizontal::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background: oklch(0.75 0 0 / 0.3);
+  border-radius: 3px;
+}
+:is(.dark) .scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background: oklch(0.4 0 0 / 0.3);
+}
+
+/* Focus ring for inputs with primary color */
+.focus-ring-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px oklch(1 0 0 / 0.8), 0 0 0 4px oklch(0.55 0.2 250 / 0.3);
+}
+:is(.dark) .focus-ring-primary:focus {
+  box-shadow: 0 0 0 2px oklch(0.15 0 0 / 0.8), 0 0 0 4px oklch(0.55 0.2 250 / 0.4);
+}

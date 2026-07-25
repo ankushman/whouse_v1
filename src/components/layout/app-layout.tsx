@@ -29,7 +29,6 @@ import {
   CheckCircle2,
   AlertTriangle,
   Info,
-  X,
   MapPin,
   Navigation,
   Timer,
@@ -153,6 +152,35 @@ function AppLogo() {
 }
 
 // ──────────────────────────────────────────────────────
+// Sidebar helper: render a single nav menu item
+// ──────────────────────────────────────────────────────
+function SidebarNavItem({ item, activeView, setActiveView }: { item: NavItem; activeView: string; setActiveView: (v: string) => void }) {
+  const Icon = iconMap[item.icon]
+  const isActive = activeView === item.id
+  return (
+    <SidebarMenuItem key={item.id}>
+      <SidebarMenuButton
+        isActive={isActive}
+        tooltip={item.label}
+        onClick={() => setActiveView(item.id)}
+        className={cn(
+          "transition-all duration-150 nav-icon-animated hover:bg-primary/5 hover:translate-x-0.5 active:scale-[0.98]",
+          isActive && "relative sidebar-active-bar bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
+        )}
+      >
+        {Icon && <Icon className="h-4 w-4" />}
+        <span>{item.label}</span>
+      </SidebarMenuButton>
+      {item.badge && item.badge > 0 && (
+        <SidebarMenuBadge className={isActive ? "bg-white/20 text-white" : "bg-blue-600 text-white"}>
+          {item.badge}
+        </SidebarMenuBadge>
+      )}
+    </SidebarMenuItem>
+  )
+}
+
+// ──────────────────────────────────────────────────────
 // Sidebar
 // ──────────────────────────────────────────────────────
 export function AppSidebar() {
@@ -170,31 +198,9 @@ export function AppSidebar() {
           <SidebarGroupLabel>Operations</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {filteredItems.slice(0, 7).map((item) => {
-                const Icon = iconMap[item.icon]
-                const isActive = activeView === item.id
-                return (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton
-                      isActive={isActive}
-                      tooltip={item.label}
-                      onClick={() => setActiveView(item.id)}
-                      className={cn(
-                        "transition-all duration-150 nav-icon-animated hover:bg-primary/5 hover:translate-x-0.5 active:scale-[0.98]",
-                        isActive && "relative sidebar-active-bar bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
-                      )}
-                    >
-                      {Icon && <Icon className="h-4 w-4" />}
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
-                    {item.badge && item.badge > 0 && (
-                      <SidebarMenuBadge className={isActive ? "bg-white/20 text-white" : "bg-blue-600 text-white"}>
-                        {item.badge}
-                      </SidebarMenuBadge>
-                    )}
-                  </SidebarMenuItem>
-                )
-              })}
+              {filteredItems.filter((item) => item.group === "operations").map((item) => (
+                <SidebarNavItem key={item.id} item={item} activeView={activeView} setActiveView={setActiveView} />
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -202,26 +208,9 @@ export function AppSidebar() {
           <SidebarGroupLabel>Analytics</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {filteredItems.slice(7, 10).map((item) => {
-                const Icon = iconMap[item.icon]
-                const isActive = activeView === item.id
-                return (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton
-                      isActive={isActive}
-                      tooltip={item.label}
-                      onClick={() => setActiveView(item.id)}
-                      className={cn(
-                        "transition-all duration-150 nav-icon-animated hover:bg-primary/5 hover:translate-x-0.5 active:scale-[0.98]",
-                        isActive && "relative sidebar-active-bar bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
-                      )}
-                    >
-                      {Icon && <Icon className="h-4 w-4" />}
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                )
-              })}
+              {filteredItems.filter((item) => item.group === "analytics").map((item) => (
+                <SidebarNavItem key={item.id} item={item} activeView={activeView} setActiveView={setActiveView} />
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -229,31 +218,9 @@ export function AppSidebar() {
           <SidebarGroupLabel>System</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {filteredItems.slice(10).map((item) => {
-                const Icon = iconMap[item.icon]
-                const isActive = activeView === item.id
-                return (
-                  <SidebarMenuItem key={item.id}>
-                    <SidebarMenuButton
-                      isActive={isActive}
-                      tooltip={item.label}
-                      onClick={() => setActiveView(item.id)}
-                      className={cn(
-                        "transition-all duration-150 nav-icon-animated hover:bg-primary/5 hover:translate-x-0.5 active:scale-[0.98]",
-                        isActive && "relative sidebar-active-bar bg-blue-600 text-white shadow-sm shadow-blue-500/25 hover:bg-blue-700 hover:text-white"
-                      )}
-                    >
-                      {Icon && <Icon className="h-4 w-4" />}
-                      <span>{item.label}</span>
-                    </SidebarMenuButton>
-                    {item.badge && item.badge > 0 && (
-                      <SidebarMenuBadge className={isActive ? "bg-white/20 text-white" : "bg-blue-600 text-white"}>
-                        {item.badge}
-                      </SidebarMenuBadge>
-                    )}
-                  </SidebarMenuItem>
-                )
-              })}
+              {filteredItems.filter((item) => item.group === "system").map((item) => (
+                <SidebarNavItem key={item.id} item={item} activeView={activeView} setActiveView={setActiveView} />
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -4,9 +4,9 @@ import { useMemo, useState, useCallback } from "react"
 import { employees } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { DataTable, type Column } from "@/components/shared/data-table"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectTrigger,
@@ -14,16 +14,8 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Users,
@@ -34,7 +26,6 @@ import {
   Crown,
   Medal,
   Award,
-  Search,
   Clock,
   BarChart3,
   GitCompareArrows,
@@ -176,9 +167,87 @@ function buildWarehouseBreakdown(employeesList: typeof employees) {
   }))
 }
 
+
+const employeeColumns: Column<(typeof employees)[number]>[] = [
+  {
+    key: "name",
+    header: "Name",
+    sortable: true,
+    render: (_val, emp) => (
+      <div className="flex items-center gap-2.5">
+        <Avatar className="size-7">
+          <AvatarFallback className="text-[10px] font-semibold bg-muted">
+            {emp.avatar}
+          </AvatarFallback>
+        </Avatar>
+        <span className="font-medium text-sm whitespace-nowrap">{emp.name}</span>
+      </div>
+    ),
+  },
+  {
+    key: "role",
+    header: "Role",
+    sortable: true,
+    className: "hidden md:table-cell text-muted-foreground",
+  },
+  {
+    key: "warehouse",
+    header: "Warehouse",
+    sortable: true,
+    className: "hidden lg:table-cell text-muted-foreground",
+  },
+  {
+    key: "shift",
+    header: "Shift",
+    sortable: true,
+    className: "hidden sm:table-cell",
+    render: (val: string) => (
+      <Badge variant="outline" className={cn("text-[10px] font-normal rounded-full", shiftColor(val))}>
+        {val}
+      </Badge>
+    ),
+  },
+  {
+    key: "productivity",
+    header: "Productivity",
+    sortable: true,
+    className: "text-right tabular-nums",
+    render: (val: number) => <span className={productivityColor(val)}>{val}%</span>,
+  },
+  {
+    key: "attendance",
+    header: "Attendance (%)",
+    sortable: true,
+    className: "text-right tabular-nums",
+    render: (val: number) => <span>{val}%</span>,
+  },
+  {
+    key: "tasksCompleted",
+    header: "Tasks",
+    sortable: true,
+    className: "text-right tabular-nums hidden sm:table-cell",
+  },
+  {
+    key: "status",
+    header: "Status",
+    sortable: true,
+    className: "hidden md:table-cell",
+    render: (_val, emp) => {
+      const isOnShift = emp.shift !== "Off Duty"
+      return (
+        <Badge variant={isOnShift ? "default" : "secondary"} className={cn(
+          "text-[10px] rounded-full",
+          isOnShift ? "bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800 hover:bg-emerald-100" : ""
+        )}>
+          {isOnShift ? "Active" : "Off Duty"}
+        </Badge>
+      )
+    },
+  },
+]
+
 export function EmployeesView() {
   const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
-  const [searchQuery, setSearchQuery] = useState("")
   const [selectedEmployee, setSelectedEmployee] = useState<(typeof employees)[number] | null>(null)
 
   const warehouseList = useMemo(
@@ -190,15 +259,9 @@ export function EmployeesView() {
     () =>
       employees.filter((e) => {
         if (warehouseFilter !== "all" && e.warehouse !== warehouseFilter) return false
-        if (searchQuery && !e.name.toLowerCase().includes(searchQuery.toLowerCase()) && !e.role.toLowerCase().includes(searchQuery.toLowerCase())) return false
         return true
       }),
-    [warehouseFilter, searchQuery]
-  )
-
-  const sorted = useMemo(
-    () => [...filtered].sort((a, b) => a.rank - b.rank),
-    [filtered]
+    [warehouseFilter]
   )
 
   const stats = useMemo(
@@ -341,119 +404,29 @@ export function EmployeesView() {
                   Performance Leaderboard
                 </CardTitle>
               </div>
+              <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
+                <SelectTrigger className="w-[180px] h-8 text-xs">
+                  <SelectValue placeholder="Filter warehouse" />
+                </SelectTrigger>
+                <SelectContent>
+                  {warehouseList.map((wh) => (
+                    <SelectItem key={wh} value={wh}>
+                      {wh === "all" ? "All Warehouses" : wh}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </CardHeader>
             <CardContent>
-              {/* Filter bar with search, warehouse select, and result count */}
-              <div className="filter-bar flex flex-wrap items-center gap-3 mb-4">
-                <div className="relative">
-                  <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                  <Input
-                    placeholder="Search name or role..."
-                    className="h-8 w-[200px] pl-8 text-xs"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </div>
-                <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
-                  <SelectTrigger className="w-[180px] h-8 text-xs">
-                    <SelectValue placeholder="Filter warehouse" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {warehouseList.map((wh) => (
-                      <SelectItem key={wh} value={wh}>
-                        {wh === "all" ? "All Warehouses" : wh}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <div className="ml-auto text-xs text-muted-foreground">
-                  {filtered.length} employee{filtered.length !== 1 ? "s" : ""} shown
-                </div>
-              </div>
-
-              <ScrollArea className="max-h-[520px]">
-                <Table className="table-row-hover">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-16 text-center">Rank</TableHead>
-                      <TableHead>Name</TableHead>
-                      <TableHead className="hidden md:table-cell">Role</TableHead>
-                      <TableHead className="hidden lg:table-cell">Warehouse</TableHead>
-                      <TableHead className="hidden sm:table-cell">Shift</TableHead>
-                      <TableHead className="text-right">Attend.</TableHead>
-                      <TableHead className="text-right hidden sm:table-cell">Tasks</TableHead>
-                      <TableHead className="text-right">Productivity</TableHead>
-                      <TableHead className="text-right hidden md:table-cell">Error</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {sorted.map((emp) => (
-                      <TableRow
-                        key={emp.id}
-                        className="cursor-pointer hover:bg-muted/60"
-                        onClick={() => setSelectedEmployee(emp)}
-                      >
-                        <TableCell className="text-center">
-                          {getRankBadge(emp.rank)}
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-2.5">
-                            <Avatar className="size-7">
-                              <AvatarFallback className="text-[10px] font-semibold bg-muted">
-                                {emp.avatar}
-                              </AvatarFallback>
-                            </Avatar>
-                            <span className="font-medium text-sm whitespace-nowrap">
-                              {emp.name}
-                            </span>
-                          </div>
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell text-muted-foreground text-sm">
-                          {emp.role}
-                        </TableCell>
-                        <TableCell className="hidden lg:table-cell text-muted-foreground text-sm">
-                          {emp.warehouse}
-                        </TableCell>
-                        <TableCell className="hidden sm:table-cell">
-                          <Badge
-                            variant="outline"
-                            className={cn(
-                              "text-[10px] font-normal rounded-full",
-                              shiftColor(emp.shift)
-                            )}
-                          >
-                            {emp.shift}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums text-sm">
-                          {emp.attendance}%
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums text-sm hidden sm:table-cell">
-                          {emp.tasksCompleted}
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums text-sm">
-                          <span className={productivityColor(emp.productivity)}>
-                            {emp.productivity}%
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums text-sm hidden md:table-cell">
-                          <span
-                            className={cn(
-                              emp.errorRate > 3
-                                ? "text-red-600"
-                                : emp.errorRate > 1.5
-                                  ? "text-amber-600"
-                                  : "text-muted-foreground"
-                            )}
-                          >
-                            {emp.errorRate}%
-                          </span>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </ScrollArea>
+              <DataTable
+                data={filtered}
+                columns={employeeColumns}
+                pageSize={8}
+                searchableColumns={["name", "role"]}
+                searchPlaceholder="Search name or role..."
+                onRowClick={(row) => setSelectedEmployee(row as typeof employees[number])}
+                className="max-h-[520px]"
+              />
             </CardContent>
           </Card>
         </TabsContent>
