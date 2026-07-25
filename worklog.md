@@ -2305,3 +2305,112 @@ Updated Project Status (Post Round 24 - Complete):
   7. Add warehouse geographic clustering with actual lat/lng positioning
   8. CSS consolidation: deduplicate 8+ redundant keyframes
   9. Enhance Dock Scheduler with drag-and-drop assignment
+
+---
+Task ID: 29
+Agent: Main (Cron Review - Round 25)
+Task: Deep code review, 7 bug fixes, module enhancements, Operations Overview module, CSS animation expansion
+
+Work Log:
+- QA Assessment: lint 0 errors, build successful (compiled in ~16s)
+- agent-browser QA skipped — dev server OOM in sandbox (known environmental limitation)
+- Deep code review via Explore subagent: all 16 module views, 40+ shared components, 10 hooks, 2 stores
+
+Bug Fixes (7 total):
+1. [B1] use-toast.ts: Fixed dangerous default values — TOAST_LIMIT: 1→5, TOAST_REMOVE_DELAY: 1000000→5000
+2. [B2] mobile-bottom-nav.tsx: Added missing Timer and Activity icons to moreIconMap (blank icons shown for SLA Countdown and Operations Overview in "More" sheet)
+3. [B3] cost-analytics-view.tsx: Added length guard (costTrend.length < 2 → return null) to prevent unsafe array indexing TypeError
+4. [B4] productivity-view.tsx: Rendered the warehouse filter Select UI that was declared but never used (dead state + dead imports)
+5. [B5] alerts-view.tsx: Fixed variable shadowing — renamed `const alert` to `const foundAlert` inside acknowledge() to avoid shadowing .map() iteration variable
+6. [B6] app-layout.tsx: Removed unused Grid3X3 import
+7. [I7] modules/index.ts: Added missing SLACountdownView and OperationsOverviewView exports to barrel file
+
+Module Enhancements (3 modules):
+1. Route Optimization: Added status filter dropdown (All/Optimized/In-Transit/Delayed/Completed), CSV export, Filter icon in trigger
+2. Cost Analytics: Added CSV export button to PageHeader (exports monthly cost trend data)
+3. Productivity: Rendered warehouse filter Select (was dead state), added CSV export, made top/low performers respect filter
+
+New Features:
+1. Operations Overview Module (operations-overview-view.tsx, ~540 lines):
+   - 8 executive KPI cards: Warehouses, Active Shipments, Pending GRN, Critical Alerts, Avg Occupancy, Avg Health Score, Equipment Utilization, SLA Achievement
+   - Weekly Throughput BarChart (inbound vs outbound)
+   - Warehouse Health PieChart distribution (green/amber/red)
+   - Top Issues panel (critical + warning alerts with severity badges)
+   - Cost Trend AreaChart (6-month gradient)
+   - Active Shipments Table (ID, destination, customer, status, ETA, progress bar)
+   - Warehouse Network Status Table (occupancy bar, health score, alert count)
+   - Time Range selector tabs (Today/7D/30D)
+   - CSV export for warehouse status data
+   - Registered as nav item in app-store.ts (icon: Activity, roles: super_admin/executive/regional_manager)
+
+2. ViewErrorBoundary (view-error-boundary.tsx, ~90 lines):
+   - React class component error boundary
+   - Renders friendly error UI with AlertTriangle icon
+   - "Dashboard" button (resets to dashboard view via store)
+   - "Retry" button (re-renders the failed component)
+   - Integrated in page.tsx wrapping the View component
+
+CSS Additions (18 new classes + 15 keyframes):
+- animated-border-glow: rotating conic-gradient border on hover
+- live-pulse-ring: pulsing ring for live status indicators
+- card-breathe: subtle breathing box-shadow animation (light + dark variants)
+- count-up: flash animation for number changes
+- skeleton-wave: alternative skeleton shimmer pattern
+- table-row-slide-in: slide-in animation for table rows
+- btn-press: scale+shadow press feedback for buttons
+- fab-enter: floating action button spring entrance
+- badge-bounce: badge count spring bounce
+- text-shimmer: shimmer text gradient for loading states
+- custom-scrollbar-thin: thin styled scrollbar (6px, transparent track)
+- card-depth: hover depth shadow effect (light + dark variants)
+- focus-ring-offset: focus-visible ring with 2px offset
+- heading-gradient: blue-to-emerald gradient text
+- bg-dots: dot pattern background
+- tooltip-slide-in: slide-up entrance for tooltips
+- status-blink: blinking opacity for status dots
+
+Stage Summary:
+- 15 files changed: ~1800 insertions, ~80 deletions
+- 1 new file: operations-overview-view.tsx (~540 lines)
+- 1 new file: view-error-boundary.tsx (~90 lines)
+- 10 files modified for bug fixes (use-toast.ts, mobile-bottom-nav.tsx, cost-analytics-view.tsx, productivity-view.tsx, alerts-view.tsx, app-layout.tsx, modules/index.ts, shared/index.ts)
+- 4 files modified for enhancements (route-optimization-view.tsx, cost-analytics-view.tsx, productivity-view.tsx)
+- 2 files modified for new module registration (page.tsx, app-store.ts)
+- 1 file modified for CSS: globals.css (+250 lines)
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+
+---
+Updated Project Status (Post Round 25 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (18): Dashboard (+AI Chat, +Weather Panel, +Real-time KPI), Operations Overview (NEW), Warehouses, Inbound, Outbound, Inventory (+Barcode Scanner Modal), Transportation, Route Optimization (+Filter/+Export), Equipment, Employees, Productivity (+Filter/+Export), Cost Analytics (+Export, FIXED), Alerts, Dock Scheduling, SLA Countdown, Reports, Settings, Warehouse Map
+- SHARED COMPONENTS (37): All previous + ViewErrorBoundary + OperationsOverviewView
+- HOOKS (9): use-toast, use-mobile, use-live-data, use-realtime-events, use-live-toast, use-toast-helper, use-swipe, use-accent-color, use-simulated-events, use-realtime-kpi
+- API ROUTES (4): /api/warehouses, /api/inventory, /api/shipments, /api/chat
+- CSS UTILITIES (310+): 295+ previous + 18 new
+- EXPORT COVERAGE: Inbound, Outbound, Transportation, Equipment, Inventory, Alerts, Productivity (NEW), Route Optimization (NEW), Cost Analytics (NEW), Operations Overview (NEW)
+- FILTER COVERAGE: Inbound, Outbound, Transportation, Equipment, Inventory, Alerts, Route Optimization (NEW), Productivity (NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental); agent-browser can't run simultaneously with dev server
+- BUGS FIXED THIS ROUND: 7 (use-toast defaults, missing icons, unsafe indexing, dead state, variable shadow, unused import, missing barrel export)
+- NEW FEATURES THIS ROUND:
+  - Operations Overview module (8 KPIs + 3 charts + 2 tables + filters) ✓
+  - ViewErrorBoundary error isolation ✓
+  - Route Optimization filter + export ✓
+  - Cost Analytics export ✓
+  - Productivity filter UI + export ✓
+  - 18 CSS animation/utility classes ✓
+- PRIORITY NEXT:
+  1. Push to GitHub (accumulated commits from Rounds 24-25)
+  2. Add data persistence with Supabase (remote has seed commit)
+  3. Integrate WebSocket real-time events into SLA + Health panels
+  4. Add employee performance alerts/notification thresholds
+  5. Add mobile pull-to-refresh gesture
+  6. Make DataTable render function type-safe (remove `value: any`)
+  7. Add warehouse geographic clustering with actual lat/lng positioning
+  8. CSS consolidation: deduplicate redundant keyframes across 5300+ line globals.css
+  9. Enhance Dock Scheduler with drag-and-drop assignment
+  10. Add more modules with CSV export (Warehouses, Employees, SLA Countdown, Dock Scheduler)
+  11. Consolidate inline mock data from route-optimization/sla-countdown/warehouse-health into mock-data.ts
