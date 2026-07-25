@@ -28,7 +28,9 @@ export function useLiveDataWithToast(onEvent?: (event: LiveEvent) => void) {
   const socketRef = useRef<Socket | null>(null)
   const [isConnected, setIsConnected] = useState(false)
   const onEventRef = useRef(onEvent)
-  onEventRef.current = onEvent
+  useEffect(() => {
+    onEventRef.current = onEvent
+  })
 
   const showToastForEvent = useCallback((event: LiveEvent) => {
     // Deduplicate: don't toast for events with the same message within 30 seconds
