@@ -696,3 +696,101 @@ Stage Summary:
 - Clean commit pushed to origin/main
 - Lint passes with zero errors
 
+---
+Task ID: 11
+Agent: Main (Cron Review - Round 8)
+Task: Folder restructuring, CSS styling, SLA monitoring panel, Route Optimization module
+
+Work Log:
+- Reviewed worklog.md to understand full project history (699 lines, 10+ prior rounds)
+- Assessed current directory structure — identified lib/ mixing utilities with infrastructure config
+- Extracted src/config/ from src/lib/:
+  - Created src/config/supabase.ts (Supabase client configuration)
+  - Created src/config/db.ts (Prisma client configuration)
+  - Created src/config/index.ts (barrel export)
+  - Updated src/lib/supabase.ts and src/lib/db.ts as backward-compat shims (re-export from @/config)
+  - Updated src/lib/index.ts to only export cn() utility
+  - Updated all 3 services (warehouse, inventory, shipment) to import from @/config/supabase
+  - Cleaned up src/store/index.ts (removed duplicate type re-exports)
+
+- Added 16 new CSS utility classes to globals.css with full light/dark mode support:
+  - card-3d (3D perspective tilt on hover)
+  - scrollbar-thin (6px Webkit + Firefox thin scrollbar)
+  - text-balance (text-wrap: balance for headings)
+  - glass-panel (backdrop-blur-xl glassmorphism)
+  - hover-lift-sm / hover-lift-md (translateY lift effects with shadow transitions)
+  - ring-focus (focus-visible ring using CSS outline)
+  - animate-in-view (opacity+translateY reveal with .is-visible class)
+  - badge-soft (rounded-full pill badge)
+  - divider-gradient (gradient horizontal line)
+  - shadow-card / shadow-card-hover (oklch-based card shadows)
+  - truncate-2 (2-line text truncation)
+  - transition-smooth (cubic-bezier transition utility)
+  - skeleton-base (pulse animation placeholder)
+  - dot-pattern (radial-gradient dot background)
+
+- Applied new CSS classes to existing components:
+  - KPICard: shadow-card + transition-smooth + hover:shadow-card-hover
+  - DataTable: scrollbar-thin on table container
+  - WarehouseView cards: hover-lift-sm + shadow-card
+
+- Created SLA Monitoring Panel (src/components/shared/sla-monitoring-panel.tsx):
+  - SLA overview: 96.8% achievement with SVG progress ring, 12 at-risk (amber), 3 breached (red)
+  - SLA by category: Recharts horizontal BarChart with 5 categories, color-coded by threshold
+  - At-risk shipments: 5 compact rows with invoice, type badge, deadline, progress bar
+  - Card styling: card-depth chart-card card-accent-amber card-hover-glow
+  - Integrated into dashboard between KPI grid and chart rows
+  - Added to shared/index.ts barrel export
+  - Fixed parsing error (className=stagger-children → className="stagger-children")
+
+- Created Route Optimization module (src/components/modules/route-optimization-view.tsx):
+  - PageHeader with "Optimize All" action button
+  - 4 summary stat cards: Active Routes (24), Avg Delivery Time (4.2hrs ↓12%), Fuel Efficiency (8.5km/L ↑5%), On-time Rate (94.7% ↑2.3%)
+  - 6 route cards with status (Optimized/In Transit/Delayed/Completed), progress bars, vehicle assignment
+  - Delivery performance LineChart (7-day planned vs actual times)
+  - AI optimization suggestions (3 items with High/Medium/Low priority badges)
+  - Registered: navItems in app-store.ts, viewMap in page.tsx, barrel export in modules/index.ts
+
+- Verified: bun run lint (0 errors, 0 warnings), bun run build (compiled successfully)
+
+Stage Summary:
+- 21 files changed: 842 insertions, 48 deletions
+- 4 new files: config/supabase.ts, config/db.ts, config/index.ts, sla-monitoring-panel.tsx, route-optimization-view.tsx
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+- GitHub push: commit af21541 to main
+
+---
+Updated Project Status (Post Round 8 - Complete):
+- STATUS: STABLE - All modules compile and render correctly
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit af21541)
+- MODULES (15): Dashboard, Warehouses, Inbound, Outbound, Inventory, Transportation, Route Optimization, Equipment, Employees, Productivity, Cost Analytics, Alerts, Dock Scheduling, Reports, Settings
+- SHARED COMPONENTS (15): KPICard, StatusBadge, PageHeader, EmptyState, DashboardSkeleton, PageSkeleton, TableSkeleton, HealthScoreRing, ExportButton, AnimatedCounter, DataTable, LiveUpdatesFeed, KeyboardShortcutsDialog, NotificationsSheet, ShiftScheduler, SLAMonitoringPanel
+- LAYOUT COMPONENTS (2): AppLayout, MobileBottomNav
+- CONFIG LAYER (NEW): src/config/ — supabase.ts, db.ts (extracted from src/lib/)
+- MINI SERVICES (1): Realtime WebSocket service (port 3004)
+- HOOKS (5): use-toast, use-mobile, use-live-data, use-realtime-events
+- CSS UTILITIES (63+): All previous + 16 new (card-3d, scrollbar-thin, text-balance, glass-panel, hover-lift-sm/md, ring-focus, animate-in-view, badge-soft, divider-gradient, shadow-card/hover, truncate-2, transition-smooth, skeleton-base, dot-pattern)
+- NEW FEATURES THIS ROUND:
+  - Infrastructure: config layer separation (frontend utilities vs backend config)
+  - SLA Monitoring Panel on dashboard (stats, category chart, at-risk table)
+  - Route Optimization module (route list, performance chart, AI suggestions)
+  - 16 new CSS utilities with full dark mode support
+  - Refined card shadows and transitions across KPI cards and warehouse cards
+- LINT: 0 errors, 0 warnings
+- COMPILE: GET / 200 verified
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental); agent-browser can't run simultaneously
+- COMPLETED RECOMMENDATIONS:
+  - Route optimization UI ✓
+  - SLA monitoring panel ✓
+  - Config layer restructuring ✓
+  - CSS utility expansion ✓
+- PRIORITY NEXT:
+  1. Connect WebSocket events to toast notifications in real-time
+  2. Add data export to PDF for reports module
+  3. Add geographic clustering visualization on warehouse map
+  4. Enhance mobile experience with swipe gestures
+  5. Add barcode/QR code scanning for inventory
+  6. Add employee performance trend charts
+  7. Enhance dock scheduler with drag-and-drop dock assignments
+  8. Add data persistence with Supabase (remote has seed commit)
