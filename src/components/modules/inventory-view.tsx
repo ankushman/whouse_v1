@@ -285,7 +285,7 @@ export function InventoryView() {
       icon: ShoppingCart,
       onClick: (rows) => {
         const lowStock = rows.filter((r) => r.quantity < r.minStock);
-        console.log("Reorder for:", lowStock.map((r) => r.sku));
+        // Reorder workflow — ready for API integration
       },
     },
   ], []);

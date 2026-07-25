@@ -18,7 +18,7 @@ import { warehouses } from "@/data/mock-data"
 
 // Simulated zone-level capacity data
 const ZONE_DATA: Record<string, { zone: string; usage: number; capacity: number }[]> = {
-  "WH-001": [
+  "WH-CHN-001": [
     { zone: "A1", usage: 92, capacity: 500 },
     { zone: "A2", usage: 78, capacity: 450 },
     { zone: "B1", usage: 45, capacity: 300 },
@@ -28,7 +28,7 @@ const ZONE_DATA: Record<string, { zone: string; usage: number; capacity: number 
     { zone: "D1", usage: 71, capacity: 320 },
     { zone: "D2", usage: 55, capacity: 250 },
   ],
-  "WH-002": [
+  "WH-PUN-002": [
     { zone: "A1", usage: 82, capacity: 600 },
     { zone: "A2", usage: 91, capacity: 550 },
     { zone: "B1", usage: 60, capacity: 400 },
@@ -38,7 +38,7 @@ const ZONE_DATA: Record<string, { zone: string; usage: number; capacity: number 
     { zone: "D1", usage: 52, capacity: 300 },
     { zone: "D2", usage: 67, capacity: 280 },
   ],
-  "WH-003": [
+  "WH-GUR-003": [
     { zone: "A1", usage: 95, capacity: 480 },
     { zone: "A2", usage: 70, capacity: 420 },
     { zone: "B1", usage: 42, capacity: 380 },
@@ -46,7 +46,7 @@ const ZONE_DATA: Record<string, { zone: string; usage: number; capacity: number 
     { zone: "C1", usage: 56, capacity: 300 },
     { zone: "C2", usage: 79, capacity: 340 },
   ],
-  "WH-004": [
+  "WH-KOL-004": [
     { zone: "A1", usage: 33, capacity: 550 },
     { zone: "A2", usage: 48, capacity: 500 },
     { zone: "B1", usage: 62, capacity: 420 },
@@ -56,7 +56,7 @@ const ZONE_DATA: Record<string, { zone: string; usage: number; capacity: number 
     { zone: "D1", usage: 55, capacity: 380 },
     { zone: "D2", usage: 29, capacity: 300 },
   ],
-  "WH-005": [
+  "WH-SAN-005": [
     { zone: "A1", usage: 87, capacity: 520 },
     { zone: "A2", usage: 94, capacity: 480 },
     { zone: "B1", usage: 51, capacity: 400 },
@@ -64,7 +64,7 @@ const ZONE_DATA: Record<string, { zone: string; usage: number; capacity: number 
     { zone: "C1", usage: 76, capacity: 350 },
     { zone: "C2", usage: 43, capacity: 300 },
   ],
-  "WH-006": [
+  "WH-HOS-006": [
     { zone: "A1", usage: 59, capacity: 450 },
     { zone: "A2", usage: 72, capacity: 420 },
     { zone: "B1", usage: 83, capacity: 380 },

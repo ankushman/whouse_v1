@@ -26,7 +26,7 @@ import {
   BarChart3,
   ChevronRight,
 } from "lucide-react"
-import { useToast } from "@/hooks/use-toast-helper"
+import { useToastHelper } from "@/hooks"
 import { cn } from "@/lib/utils"
 
 const severityConfig = {
@@ -48,6 +48,7 @@ export function AlertsView() {
   const [severityFilter, setSeverityFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
   const [acknowledgedAlerts, setAcknowledgedAlerts] = useState<Set<string>>(new Set())
+  const { toast } = useToastHelper()
 
   const filtered = useMemo(() => {
     return alerts.filter((a) => {
@@ -68,7 +69,7 @@ export function AlertsView() {
     setAcknowledgedAlerts((prev) => new Set(prev).add(id))
     const alert = alerts.find((a) => a.id === id)
     if (alert) {
-      toast.success(`Alert acknowledged`, {
+      toast.success("Alert acknowledged", {
         description: `${alert.title} at ${alert.warehouse}`,
         duration: 3000,
       })

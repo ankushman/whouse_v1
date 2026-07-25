@@ -82,6 +82,7 @@ import { cn } from "@/lib/utils"
 import { type ReactNode } from "react"
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
 import { NotificationsSheet } from "@/components/shared/notifications-sheet"
+import { QuickSettingsPopover } from "@/components/shared/quick-settings-popover"
 import { KeyboardShortcutsDialog } from "@/components/shared/keyboard-shortcuts-dialog"
 import { useLiveDataWithToast } from "@/hooks/use-live-toast"
 
@@ -486,6 +487,9 @@ export function TopNav() {
             <span className="sr-only">Toggle theme</span>
           </Button>
         )}
+
+        {/* Quick Settings */}
+        <QuickSettingsPopover />
 
         {/* Profile */}
         <DropdownMenu>

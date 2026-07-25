@@ -18,7 +18,6 @@ import {
   Users,
   Award,
   TrendingUp,
-  TrendingDown,
   Clock,
   Star,
   Medal,
@@ -26,7 +25,6 @@ import {
   Sun,
   Moon,
   Sunrise,
-  Zap,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 

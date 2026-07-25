@@ -195,7 +195,7 @@ export function OutboundView() {
       label: "Update Status",
       icon: RefreshCw,
       onClick: (rows) => {
-        console.log("Update status for:", rows.map((r) => r.invoice))
+        // Batch update status — ready for API integration
       },
     },
   ], [])

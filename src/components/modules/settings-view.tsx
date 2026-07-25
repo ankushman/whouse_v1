@@ -42,6 +42,11 @@ import {
   Star,
   AlertTriangle,
   Search,
+  Palette,
+  Monitor,
+  Volume2,
+  Clock,
+  Check,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useToast } from "@/hooks/use-toast-helper"
@@ -154,6 +159,34 @@ export function SettingsView() {
     dailyReport: false,
   })
 
+  // Appearance state
+  const [appearanceSettings, setAppearanceSettings] = useState({
+    theme: "system",
+    accentColor: "blue",
+    density: "comfortable",
+    animations: true,
+    sidebarDefault: "expanded",
+    showDecimals: true,
+    compactNumbers: false,
+    tabularNumbers: true,
+  })
+
+  // Notification Preferences state
+  const [notifPrefs, setNotifPrefs] = useState({
+    frequency: "instant",
+    quietHoursEnabled: false,
+    quietHoursStart: "22:00",
+    quietHoursEnd: "07:00",
+    minSeverity: "all",
+    soundEnabled: true,
+    soundVolume: "medium",
+    emailAddress: "ops@autoflow.in",
+    dailyDigest: true,
+    weeklySummary: false,
+    browserPush: true,
+    desktopBadge: true,
+  })
+
   // Warehouse dialog
   const [warehouseDialogOpen, setWarehouseDialogOpen] = useState(false)
   const [editingWarehouse, setEditingWarehouse] = useState<typeof warehouseData[0] | null>(null)
@@ -181,6 +214,30 @@ export function SettingsView() {
   // KPI config
   const [kpiConfig, setKpiConfig] = useState<KPIConfigItem[]>(initialKPIConfig)
   const [kpiSearch, setKpiSearch] = useState("")
+
+  // Appearance settings
+  const [appearanceTheme, setAppearanceTheme] = useState("system")
+  const [accentColor, setAccentColor] = useState("blue")
+  const [layoutDensity, setLayoutDensity] = useState("comfortable")
+  const [animationsEnabled, setAnimationsEnabled] = useState(true)
+  const [sidebarDefault, setSidebarDefault] = useState("expanded")
+  const [showDecimals, setShowDecimals] = useState(true)
+  const [compactNumbers, setCompactNumbers] = useState(false)
+  const [tabularNumbers, setTabularNumbers] = useState(true)
+
+  // Notification preferences
+  const [notifFrequency, setNotifFrequency] = useState("instant")
+  const [quietHoursEnabled, setQuietHoursEnabled] = useState(false)
+  const [quietHoursStart, setQuietHoursStart] = useState("22:00")
+  const [quietHoursEnd, setQuietHoursEnd] = useState("06:00")
+  const [notifMinSeverity, setNotifMinSeverity] = useState("all")
+  const [notifSoundEnabled, setNotifSoundEnabled] = useState(true)
+  const [notifVolume, setNotifVolume] = useState("medium")
+  const [notifEmail, setNotifEmail] = useState("ops@autoflow.in")
+  const [notifDailyDigest, setNotifDailyDigest] = useState(true)
+  const [notifWeeklySummary, setNotifWeeklySummary] = useState(false)
+  const [notifBrowserPush, setNotifBrowserPush] = useState(true)
+  const [notifDesktopBadge, setNotifDesktopBadge] = useState(true)
 
   // Handlers — Warehouses
   const openAddWarehouse = () => {
@@ -254,7 +311,7 @@ export function SettingsView() {
 
       <Tabs defaultValue="general" className="space-y-4">
         <TabsList className="flex-wrap h-auto gap-1">
-          {["general", "warehouses", "customers", "transporters", "users", "roles", "kpi", "notifications"].map((tab) => (
+          {["general", "warehouses", "customers", "transporters", "users", "roles", "kpi", "notifications", "appearance", "notif-prefs"].map((tab) => (
             <TabsTrigger key={tab} value={tab} className="text-xs h-7 px-3 capitalize">
               {tab}
             </TabsTrigger>
@@ -1086,6 +1143,240 @@ export function SettingsView() {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        {/* Appearance */}
+        <TabsContent value="appearance">
+          <div className="grid gap-4 lg:grid-cols-2 stagger-children">
+            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+              <CardHeader>
+                <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
+                  <Palette className="size-4 text-purple-500" /> Theme
+                </CardTitle>
+                <CardDescription className="text-xs">Customize the visual appearance</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <SettingRow label="Color Mode" description="Light, dark, or follow system">
+                  <Select value={appearanceSettings.theme} onValueChange={(v) => setAppearanceSettings({ ...appearanceSettings, theme: v })}>
+                    <SelectTrigger className="w-[140px] h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="light">☀️ Light</SelectItem>
+                      <SelectItem value="dark">🌙 Dark</SelectItem>
+                      <SelectItem value="system">💻 System</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <Separator />
+                <div>
+                  <Label className="text-xs font-medium">Accent Color</Label>
+                  <p className="text-[11px] text-muted-foreground mb-2">Choose the primary accent for highlights and interactive elements</p>
+                  <div className="flex items-center gap-2">
+                    {[
+                      { name: "blue", color: "bg-blue-500", ring: "ring-blue-300 dark:ring-blue-700" },
+                      { name: "emerald", color: "bg-emerald-500", ring: "ring-emerald-300 dark:ring-emerald-700" },
+                      { name: "amber", color: "bg-amber-500", ring: "ring-amber-300 dark:ring-amber-700" },
+                      { name: "violet", color: "bg-violet-500", ring: "ring-violet-300 dark:ring-violet-700" },
+                      { name: "rose", color: "bg-rose-500", ring: "ring-rose-300 dark:ring-rose-700" },
+                    ].map((c) => (
+                      <button
+                        key={c.name}
+                        onClick={() => setAppearanceSettings({ ...appearanceSettings, accentColor: c.name })}
+                        className={cn(
+                          "relative h-8 w-8 rounded-full transition-all duration-200 hover:scale-110",
+                          c.color,
+                          appearanceSettings.accentColor === c.name && `ring-2 ring-offset-2 ring-offset-background ${c.ring}`
+                        )}
+                      >
+                        {appearanceSettings.accentColor === c.name && (
+                          <Check className="absolute inset-0 m-auto h-4 w-4 text-white drop-shadow-sm" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+              <CardHeader>
+                <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
+                  <Monitor className="size-4 text-blue-500" /> Layout & Display
+                </CardTitle>
+                <CardDescription className="text-xs">Control density and data presentation</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <SettingRow label="Layout Density" description="Adjust spacing and sizing">
+                  <Select value={appearanceSettings.density} onValueChange={(v) => setAppearanceSettings({ ...appearanceSettings, density: v })}>
+                    <SelectTrigger className="w-[140px] h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="compact">Compact</SelectItem>
+                      <SelectItem value="comfortable">Comfortable</SelectItem>
+                      <SelectItem value="spacious">Spacious</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Default Sidebar" description="Initial sidebar state on load">
+                  <Select value={appearanceSettings.sidebarDefault} onValueChange={(v) => setAppearanceSettings({ ...appearanceSettings, sidebarDefault: v })}>
+                    <SelectTrigger className="w-[140px] h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="expanded">Expanded</SelectItem>
+                      <SelectItem value="collapsed">Collapsed</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <Separator />
+                <SettingsSection>
+                  <SettingRow label="Animations" description="Enable page and element transitions">
+                    <Switch checked={appearanceSettings.animations} onCheckedChange={(v) => setAppearanceSettings({ ...appearanceSettings, animations: v })} />
+                  </SettingRow>
+                  <SettingRow label="Show Decimals" description="Display decimal places in numbers">
+                    <Switch checked={appearanceSettings.showDecimals} onCheckedChange={(v) => setAppearanceSettings({ ...appearanceSettings, showDecimals: v })} />
+                  </SettingRow>
+                  <SettingRow label="Tabular Numbers" description="Fixed-width digits for alignment">
+                    <Switch checked={appearanceSettings.tabularNumbers} onCheckedChange={(v) => setAppearanceSettings({ ...appearanceSettings, tabularNumbers: v })} />
+                  </SettingRow>
+                </SettingsSection>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        {/* Notification Preferences */}
+        <TabsContent value="notif-prefs">
+          <div className="grid gap-4 lg:grid-cols-2 stagger-children">
+            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+              <CardHeader>
+                <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
+                  <Clock className="size-4 text-amber-500" /> Delivery Schedule
+                </CardTitle>
+                <CardDescription className="text-xs">Control how and when notifications are delivered</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <SettingRow label="Delivery Frequency" description="How often alerts are sent">
+                  <Select value={notifPrefs.frequency} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, frequency: v })}>
+                    <SelectTrigger className="w-[140px] h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="instant">Instant</SelectItem>
+                      <SelectItem value="1hr">Digest (1hr)</SelectItem>
+                      <SelectItem value="4hr">Digest (4hr)</SelectItem>
+                      <SelectItem value="daily">Daily Digest</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <SettingRow label="Minimum Severity" description="Only receive alerts at or above this level">
+                  <Select value={notifPrefs.minSeverity} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, minSeverity: v })}>
+                    <SelectTrigger className="w-[140px] h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Alerts</SelectItem>
+                      <SelectItem value="warning">Warning &amp; Critical</SelectItem>
+                      <SelectItem value="critical">Critical Only</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <Separator />
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-xs font-medium">Quiet Hours</Label>
+                    <Switch checked={notifPrefs.quietHoursEnabled} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, quietHoursEnabled: v })} />
+                  </div>
+                  <p className="text-[11px] text-muted-foreground mb-2">Silence non-critical notifications during these hours</p>
+                  <div className="flex items-center gap-2">
+                    <Select value={notifPrefs.quietHoursStart} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, quietHoursStart: v })}>
+                      <SelectTrigger className="w-[100px] h-7 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="20:00">20:00</SelectItem>
+                        <SelectItem value="21:00">21:00</SelectItem>
+                        <SelectItem value="22:00">22:00</SelectItem>
+                        <SelectItem value="23:00">23:00</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <span className="text-xs text-muted-foreground">to</span>
+                    <Select value={notifPrefs.quietHoursEnd} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, quietHoursEnd: v })}>
+                      <SelectTrigger className="w-[100px] h-7 text-xs">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="06:00">06:00</SelectItem>
+                        <SelectItem value="07:00">07:00</SelectItem>
+                        <SelectItem value="08:00">08:00</SelectItem>
+                        <SelectItem value="09:00">09:00</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+              <CardHeader>
+                <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
+                  <Volume2 className="size-4 text-blue-500" /> Sound & Channels
+                </CardTitle>
+                <CardDescription className="text-xs">Configure notification sounds and delivery channels</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-5">
+                <SettingRow label="Notification Sound" description="Play sound for incoming alerts">
+                  <Switch checked={notifPrefs.soundEnabled} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, soundEnabled: v })} />
+                </SettingRow>
+                <SettingRow label="Sound Volume">
+                  <Select value={notifPrefs.soundVolume} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, soundVolume: v })}>
+                    <SelectTrigger className="w-[140px] h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="low">Low</SelectItem>
+                      <SelectItem value="medium">Medium</SelectItem>
+                      <SelectItem value="high">High</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </SettingRow>
+                <Separator />
+                <div>
+                  <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Email Channel</h4>
+                  <SettingsSection>
+                    <div className="space-y-1">
+                      <Label className="text-xs">Delivery Email</Label>
+                      <Input
+                        value={notifPrefs.emailAddress}
+                        onChange={(e) => setNotifPrefs({ ...notifPrefs, emailAddress: e.target.value })}
+                        className="h-8 text-xs"
+                      />
+                    </div>
+                    <SettingRow label="Daily Digest">
+                      <Switch checked={notifPrefs.dailyDigest} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, dailyDigest: v })} />
+                    </SettingRow>
+                    <SettingRow label="Weekly Summary">
+                      <Switch checked={notifPrefs.weeklySummary} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, weeklySummary: v })} />
+                    </SettingRow>
+                  </SettingsSection>
+                </div>
+                <Separator />
+                <div>
+                  <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Push Channel</h4>
+                  <SettingsSection>
+                    <SettingRow label="Browser Push" description="Chrome/Firefox notifications">
+                      <Switch checked={notifPrefs.browserPush} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, browserPush: v })} />
+                    </SettingRow>
+                    <SettingRow label="Desktop Badge" description="Show unread count on taskbar">
+                      <Switch checked={notifPrefs.desktopBadge} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, desktopBadge: v })} />
+                    </SettingRow>
+                  </SettingsSection>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
       </Tabs>
     </div>

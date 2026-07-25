@@ -64,7 +64,6 @@ export function useLiveDataWithToast(onEvent?: (event: LiveEvent) => void) {
     socketRef.current = socket
 
     socket.on("connect", () => {
-      console.log("[LiveDataWithToast] Connected")
       setIsConnected(true)
     })
 
@@ -74,7 +73,6 @@ export function useLiveDataWithToast(onEvent?: (event: LiveEvent) => void) {
     })
 
     socket.on("disconnect", () => {
-      console.log("[LiveDataWithToast] Disconnected")
       setIsConnected(false)
     })
 

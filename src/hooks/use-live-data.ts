@@ -30,7 +30,6 @@ export function useLiveData(onEvent: (event: LiveEvent) => void) {
     socketRef.current = socket
 
     socket.on("connect", () => {
-      console.log("[LiveData] Connected")
       setIsConnected(true)
     })
 
@@ -39,7 +38,6 @@ export function useLiveData(onEvent: (event: LiveEvent) => void) {
     })
 
     socket.on("disconnect", () => {
-      console.log("[LiveData] Disconnected")
       setIsConnected(false)
     })
 
