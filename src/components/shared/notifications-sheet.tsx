@@ -154,7 +154,7 @@ export function NotificationsSheet({ open, onOpenChange }: NotificationsSheetPro
         </div>
 
         {/* Notification List */}
-        <ScrollArea className="flex-1 h-[calc(100vh-220px)]">
+        <ScrollArea className="scrollbar-glass flex-1 h-[calc(100vh-220px)]">
           <div className="px-4 pb-6 stagger-children">
             {filtered.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16">

@@ -230,7 +230,7 @@ export function SLAMonitoringPanel() {
   }, [now])
 
   return (
-    <Card className="card-depth chart-card card-accent-amber card-hover-glow rounded-xl border border-t-2 border-border/60 shadow-sm">
+    <Card className="card-depth chart-card card-accent-amber card-hover-glow glow-border-blue rounded-xl border border-t-2 border-border/60 shadow-sm">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">

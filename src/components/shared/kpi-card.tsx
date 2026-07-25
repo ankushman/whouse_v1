@@ -54,7 +54,7 @@ export function KPICard({ title, value, change = 0, trend = "neutral", icon: Ico
 
   const cardContent = (
     <Card className={cn(
-      "group kpi-shimmer card-hover-glow stat-card-highlight card-depth shadow-card relative overflow-hidden rounded-xl border border-border/60 bg-card transition-smooth hover:shadow-card-hover hover:border-border cursor-pointer"
+      "group kpi-shimmer card-hover-glow stat-card-highlight card-depth card-morph shadow-card relative overflow-hidden rounded-xl border border-border/60 bg-card transition-smooth hover:shadow-card-hover hover:border-border cursor-pointer"
     )}>
       <CardContent className="p-4">
         <div className="flex items-start justify-between">

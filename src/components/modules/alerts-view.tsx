@@ -188,7 +188,7 @@ export function AlertsView() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h4 className="text-sm font-medium">{alert.title}</h4>
-                        <Badge className={cn("text-[9px] rounded-full px-1.5", config.badge, alert.severity === "critical" && "badge-glow-critical", alert.severity === "warning" && "badge-glow-warning")}>{alert.severity}</Badge>
+                        <Badge className={cn("badge-dot text-[9px] rounded-full px-2 py-0.5", config.badge, alert.severity === "critical" && "badge-glow-critical", alert.severity === "warning" && "badge-glow-warning")}>{alert.severity}</Badge>
                       </div>
                       <p className="mt-0.5 text-xs text-muted-foreground">{alert.message}</p>
                       <div className="mt-1.5 flex items-center gap-3 text-[10px] text-muted-foreground">

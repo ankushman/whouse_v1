@@ -39,6 +39,8 @@ import { SLAMonitoringPanel } from "@/components/shared/sla-monitoring-panel"
 import { WarehouseCapacityHeatmap } from "@/components/shared/warehouse-capacity-heatmap"
 import { MetricsTicker } from "@/components/shared/metrics-ticker"
 import { ActivityTimeline } from "@/components/shared/activity-timeline"
+import { AIInsightsPanel } from "@/components/shared/ai-insights-panel"
+import { ShiftHandoverPanel } from "@/components/shared/shift-handover-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 
@@ -213,7 +215,7 @@ export function DashboardView() {
             </div>
 
             {/* Live Indicator */}
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <div className="float-animation flex items-center gap-2 text-xs text-muted-foreground">
               <Activity className="h-3 w-3 text-emerald-500" />
               <span className="text-glow-blue font-medium">Live</span>
             </div>
@@ -254,6 +256,12 @@ export function DashboardView() {
             </Button>
           )
         })}
+      </div>
+
+      {/* AI Insights + Shift Handover */}
+      <div className="grid gap-4 lg:grid-cols-2 stagger-children">
+        <AIInsightsPanel />
+        <ShiftHandoverPanel />
       </div>
 
       {/* Activity Feed + Timeline Row */}

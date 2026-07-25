@@ -584,7 +584,7 @@ export function CommandPalette() {
           <input
             ref={inputRef}
             placeholder="Search pages, warehouses, actions..."
-            className="flex-1 bg-transparent py-3.5 text-sm outline-none placeholder:text-muted-foreground"
+            className="flex-1 bg-transparent py-3.5 text-sm outline-none placeholder:text-muted-foreground input-underline"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
