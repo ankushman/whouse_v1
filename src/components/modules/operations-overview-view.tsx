@@ -242,7 +242,7 @@ export function OperationsOverviewView() {
   }, [warehouseStatus])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 container-reveal">
       <PageHeader
         title="Operations Overview"
         description="Executive summary of all warehouse operations in real-time"

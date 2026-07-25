@@ -110,6 +110,8 @@ export function useSimulatedEvents(options?: {
   const notifPrefs = useAppStore((s) => s.notifPrefs)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const mutedRef = useRef(false)
+  const activeViewRef = useRef(activeView)
+  useEffect(() => { activeViewRef.current = activeView })
   const scheduleNextRef = useRef<() => void>(() => {})
 
   // Check mute state
@@ -157,8 +159,8 @@ export function useSimulatedEvents(options?: {
         ? warehouses[Math.floor(Math.random() * warehouses.length)].city
         : event.warehouse
 
-      // Should we fire?
-      const shouldFire = !dashboardOnly || activeView === "dashboard"
+      // Should we fire? Use ref to avoid recreating scheduleNext on every navigation
+      const shouldFire = !dashboardOnly || activeViewRef.current === "dashboard"
 
       // Severity filter: skip if event doesn't meet minimum severity
       const severityOk = passesSeverityFilter(event.severity)
@@ -166,10 +168,8 @@ export function useSimulatedEvents(options?: {
       // Quiet hours: only show critical events during quiet hours
       const quietOk = !isQuietHours() || event.severity === "critical"
 
-      // Browser push preference
-      const pushOk = notifPrefs.browserPush
-
-      if (shouldFire && severityOk && quietOk && pushOk && addNotification) {
+      // Notification store: always add (browserPush only controls actual browser Notification API)
+      if (shouldFire && severityOk && quietOk && addNotification) {
         addNotificationFn({
           title: event.title,
           message: event.message,
@@ -191,7 +191,7 @@ export function useSimulatedEvents(options?: {
       // Use ref to call the latest scheduleNext without circular dependency
       scheduleNextRef.current()
     }, delay)
-  }, [minInterval, maxInterval, showToast, addNotification, dashboardOnly, activeView, addNotificationFn, checkMuted, passesSeverityFilter, isQuietHours, notifPrefs.browserPush])
+  }, [minInterval, maxInterval, showToast, addNotification, dashboardOnly, addNotificationFn, checkMuted, passesSeverityFilter, isQuietHours])
 
   // Keep ref updated
   useEffect(() => {

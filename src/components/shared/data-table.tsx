@@ -115,6 +115,9 @@ function getRowId<T extends Record<string, any>>(row: T, fallbackIndex: number):
   return `__idx:${fallbackIndex}`
 }
 
+// Static keyframes string — avoids re-creating template literal on every render
+const TABLE_ROW_KEYFRAMES = `@keyframes tableRowIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }`
+
 export function DataTable<T extends Record<string, any>>({
   data,
   columns,
@@ -133,6 +136,13 @@ export function DataTable<T extends Record<string, any>>({
   expandableRowRender,
   getRowKey,
 }: DataTableProps<T>) {
+  // Clamp pageSize to ≥1 to prevent Infinity pages
+  const safePageSize = Math.max(1, pageSize)
+  // Stabilize onSelectionChange callback to prevent unnecessary effect fires
+  const onSelectionChangeRef = useRef(onSelectionChange)
+  useEffect(() => {
+    onSelectionChangeRef.current = onSelectionChange
+  })
   const [expandedRowKeys, setExpandedRowKeys] = useState<Set<string>>(new Set())
   const [sortColumn, setSortColumn] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<SortDirection>(null)
@@ -149,7 +159,7 @@ export function DataTable<T extends Record<string, any>>({
     if (!hasSearch || !searchQuery.trim()) return data
     const lower = searchQuery.toLowerCase().trim()
     return data.filter((row) =>
-      searchableColumns!.some((key) => {
+      (searchableColumns as string[]).some((key) => {
         const val = row[key]
         if (val == null) return false
         return String(val).toLowerCase().includes(lower)
@@ -168,7 +178,7 @@ export function DataTable<T extends Record<string, any>>({
     })
   }, [filteredData, sortColumn, sortDirection])
 
-  const totalPages = Math.max(1, Math.ceil(sortedData.length / pageSize))
+  const totalPages = Math.max(1, Math.ceil(sortedData.length / safePageSize))
 
   // Clamp current page within valid range (derived state, no setState needed)
   const safeCurrentPage = Math.min(currentPage, totalPages)
@@ -176,10 +186,10 @@ export function DataTable<T extends Record<string, any>>({
   const paginatedData = useMemo(
     () =>
       sortedData.slice(
-        (safeCurrentPage - 1) * pageSize,
-        safeCurrentPage * pageSize
+        (safeCurrentPage - 1) * safePageSize,
+        safeCurrentPage * safePageSize
       ),
-    [sortedData, safeCurrentPage, pageSize]
+    [sortedData, safeCurrentPage, safePageSize]
   )
 
   // --- Column visibility (user toggle) ---
@@ -194,13 +204,13 @@ export function DataTable<T extends Record<string, any>>({
   const isAllSelected =
     paginatedData.length > 0 &&
     paginatedData.every((row, i) =>
-      selectedRowIds.has(getRowId(row, (safeCurrentPage - 1) * pageSize + i))
+      selectedRowIds.has(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
     )
 
   const isSomeSelected =
     !isAllSelected &&
     paginatedData.some((row, i) =>
-      selectedRowIds.has(getRowId(row, (safeCurrentPage - 1) * pageSize + i))
+      selectedRowIds.has(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
     )
 
   const selectedRows = useMemo(() => {
@@ -208,10 +218,10 @@ export function DataTable<T extends Record<string, any>>({
     return sortedData.filter((row, i) => selectedRowIds.has(getRowId(row, i)))
   }, [selectedRowIds, sortedData])
 
-  // Fire onSelectionChange when selection changes
+  // Fire onSelectionChange when selection changes (stabilized via ref)
   useEffect(() => {
-    onSelectionChange?.(selectedRows)
-  }, [selectedRows, onSelectionChange])
+    onSelectionChangeRef.current?.(selectedRows)
+  }, [selectedRows])
 
   const toggleRow = useCallback((rowId: string) => {
     setSelectedRowIds((prev) => {
@@ -230,16 +240,16 @@ export function DataTable<T extends Record<string, any>>({
       const next = new Set(prev)
       if (isAllSelected) {
         paginatedData.forEach((row, i) => {
-          next.delete(getRowId(row, (safeCurrentPage - 1) * pageSize + i))
+          next.delete(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
         })
       } else {
         paginatedData.forEach((row, i) => {
-          next.add(getRowId(row, (safeCurrentPage - 1) * pageSize + i))
+          next.add(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
         })
       }
       return next
     })
-  }, [isAllSelected, paginatedData, safeCurrentPage, pageSize])
+  }, [isAllSelected, paginatedData, safeCurrentPage, safePageSize])
 
   const clearSelection = useCallback(() => {
     setSelectedRowIds(new Set())
@@ -290,18 +300,16 @@ export function DataTable<T extends Record<string, any>>({
 
   // --- Sort handler ---
   const handleSort = useCallback((key: string) => {
-    setSortColumn((prev) => {
-      if (prev !== key) {
-        setSortDirection("asc")
-        return key
-      }
-      setSortDirection((dir) => {
-        if (dir === "asc") return "desc"
-        if (dir === "desc") return null
+    setSortColumn((prevCol) => {
+      setSortDirection((prevDir) => {
+        if (prevCol !== key) return "asc"
+        if (prevDir === "asc") return "desc"
+        if (prevDir === "desc") return null
         return "asc"
       })
       return key
     })
+    setCurrentPage(1)
   }, [])
 
   const handlePageChange = useCallback((page: number) => {
@@ -321,11 +329,11 @@ export function DataTable<T extends Record<string, any>>({
   return (
     <div className={cn("flex flex-col gap-3", className)}>
       {/* Batch action toolbar – shown when rows are selected */}
-      {selectable && selectedRowIds.size > 0 && (
+      {selectable && selectedRows.length > 0 && (
         <div className="flex items-center gap-2 rounded-lg border bg-primary/5 px-4 py-2.5 text-sm animate-in fade-in slide-in-from-top-2 duration-200">
           <CheckSquare className="h-4 w-4 text-primary" />
           <span className="font-medium text-primary">
-            {selectedRowIds.size} selected
+            {selectedRows.length} selected
           </span>
           {batchActions && batchActions.length > 0 && (
             <>
@@ -601,10 +609,10 @@ export function DataTable<T extends Record<string, any>>({
         </div>
       )}
 
-      {/* Inline keyframes for row enter animation */}
+      {/* Row enter animation keyframes — static constant */}
       <style dangerouslySetInnerHTML={{
-        __html: `@keyframes tableRowIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }`
-      }} />
+        __html: TABLE_ROW_KEYFRAMES
+      }} suppressHydrationWarning />
     </div>
   )
 }

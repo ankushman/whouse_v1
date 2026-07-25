@@ -435,7 +435,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
       />
 
       {/* ── Stats Bar ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 stagger-children">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 stagger-children glass-card rounded-xl p-3">
         <Card className="card-depth py-0 gap-0 shadow-card">
           <CardContent className="flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted/80">

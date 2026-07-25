@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo, useRef } from "react"
+import { useState, useEffect, useMemo, useRef, useCallback } from "react"
 import { PageHeader } from "@/components/shared/page-header"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -21,6 +21,7 @@ import {
   Warehouse,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import {
   LineChart,
   Line,
@@ -275,11 +276,30 @@ export function SLACountdownView() {
     return [...slaItems].sort((a, b) => order[a.status] - order[b.status] || a.remainingMs - b.remainingMs)
   }, [slaItems])
 
+  // CSV export handler
+  const handleExportCSV = useCallback(() => {
+    const data = slaItems.map((item) => ({
+      "Shipment ID": item.shipmentId,
+      Type: item.type,
+      Customer: item.customer,
+      Warehouse: item.warehouse,
+      Status: item.status === "at-risk" ? "At Risk" : item.status === "on-track" ? "On Track" : item.status.charAt(0).toUpperCase() + item.status.slice(1),
+      Priority: item.priority,
+      Progress: `${Math.min(100, item.progress)}%`,
+      Handler: item.handler,
+      Deadline: item.deadline.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true }),
+    }))
+    exportToCSV(data, "sla-countdown", ["Shipment ID", "Type", "Customer", "Warehouse", "Status", "Priority", "Progress", "Handler", "Deadline"])
+  }, [slaItems])
+
   return (
     <div className="space-y-6">
       <PageHeader
         title="SLA Countdown"
         description="Real-time shipment SLA monitoring with live countdown timers"
+        actions={
+          <ExportButton onExportCSV={handleExportCSV} />
+        }
       />
 
       {/* ── Stats Bar ── */}

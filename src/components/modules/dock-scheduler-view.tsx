@@ -39,6 +39,7 @@ import {
   GripVertical,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { toast } from "sonner"
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -513,6 +514,21 @@ export function DockSchedulerView() {
     assignment: activeAssignments.find((a) => a.dockId === dock.id),
   }))
 
+  const handleExportCSV = useCallback(() => {
+    const data = docks.map((d) => ({
+      Dock: d.name,
+      Zone: d.zone,
+      Status: d.status.charAt(0).toUpperCase() + d.status.slice(1),
+      "Loading Type": d.loadingType || "—",
+      "Current Vehicle": d.currentAssignment?.vehicleReg || "—",
+      "Driver": d.currentAssignment?.driverName || "—",
+      "Shipment Type": d.currentAssignment?.type || "—",
+      Supplier: d.currentAssignment?.supplier || "—",
+      Progress: d.currentAssignment ? `${d.currentAssignment.progress}%` : "—",
+    }))
+    exportToCSV(data, "dock-scheduler", ["Dock", "Zone", "Status", "Loading Type", "Current Vehicle", "Driver", "Shipment Type", "Supplier", "Progress"])
+  }, [docks])
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -520,6 +536,7 @@ export function DockSchedulerView() {
         description="Manage dock bay assignments and vehicle scheduling"
         actions={
           <div className="flex items-center gap-2">
+            <ExportButton onExportCSV={handleExportCSV} />
             <Button
               size="sm"
               variant={simulating ? "default" : "outline"}

@@ -37,6 +37,8 @@ export function useRealtimeEvents(options: UseRealtimeEventsOptions = {}) {
     const connect = async () => {
       try {
         const { io } = await import("socket.io-client")
+        // Guard: component may have unmounted while awaiting dynamic import
+        if (!mounted) return
         const socket = io("/?XTransformPort=3004", {
           transports: ["websocket", "polling"],
           reconnection: true,

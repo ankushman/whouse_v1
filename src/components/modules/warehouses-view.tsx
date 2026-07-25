@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, useCallback } from "react"
 import { warehouses } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { Card, CardContent } from "@/components/ui/card"
@@ -8,6 +8,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import { StatusBadge } from "@/components/shared/status-badge"
+import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table"
 import {
   Building2,
   MapPin,
@@ -20,6 +24,9 @@ import {
   ClipboardList,
   Target,
   Plus,
+  LayoutGrid,
+  Table2,
+  Eye,
 } from "lucide-react"
 import * as React from "react"
 import { cn } from "@/lib/utils"
@@ -37,6 +44,7 @@ const statusColorMap = {
     text: "text-emerald-700 dark:text-emerald-300",
     progress: "bg-emerald-500",
     progressTrack: "bg-emerald-100 dark:bg-emerald-900/40",
+    dot: "bg-emerald-500",
   },
   amber: {
     ring: "ring-orange-200 dark:ring-orange-800/60",
@@ -44,6 +52,7 @@ const statusColorMap = {
     text: "text-orange-700 dark:text-orange-300",
     progress: "bg-orange-500",
     progressTrack: "bg-orange-100 dark:bg-orange-900/40",
+    dot: "bg-amber-500",
   },
   red: {
     ring: "ring-red-200 dark:ring-red-800/60",
@@ -51,10 +60,17 @@ const statusColorMap = {
     text: "text-red-700 dark:text-red-300",
     progress: "bg-red-500",
     progressTrack: "bg-red-100 dark:bg-red-900/40",
+    dot: "bg-red-500",
   },
 } as const
 
 type WarehouseStatus = keyof typeof statusColorMap
+
+const statusLabelMap: Record<WarehouseStatus, string> = {
+  green: "Healthy",
+  amber: "Warning",
+  red: "Critical",
+}
 
 // ── Summary Stat Card ────────────────────────────────────────────────────────
 
@@ -159,6 +175,7 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
+              <span className={cn("size-2 shrink-0 rounded-full breathe-glow", colors.dot)} />
               <Building2 className="size-4 shrink-0 text-muted-foreground" />
               <h3 className="truncate text-sm font-semibold text-foreground leading-tight">
                 {warehouse.name}
@@ -268,6 +285,96 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
   )
 }
 
+// ── Table Columns ────────────────────────────────────────────────────────────
+
+type WarehouseRow = (typeof warehouses)[number]
+
+function getWarehouseColumns(
+  onRowClick: (row: WarehouseRow) => void
+): Column<WarehouseRow>[] {
+  return [
+    {
+      key: "name",
+      header: "Name",
+      sortable: true,
+      render: (value, row) => (
+        <div className="flex items-center gap-2">
+          <span className={cn(
+            "size-2 shrink-0 rounded-full",
+            row.status === "green" ? "bg-emerald-500" : row.status === "amber" ? "bg-amber-500" : "bg-red-500"
+          )} />
+          <span className="font-medium">{value as string}</span>
+        </div>
+      ),
+    },
+    {
+      key: "city",
+      header: "City",
+      sortable: true,
+      render: (value, row) => (
+        <span className="text-muted-foreground">{value as string}, {row.state}</span>
+      ),
+    },
+    {
+      key: "status",
+      header: "Status",
+      sortable: true,
+      render: (value) => {
+        const s = value as WarehouseStatus
+        return (
+          <StatusBadge
+            variant={s}
+            label={statusLabelMap[s]}
+          />
+        )
+      },
+    },
+    {
+      key: "capacityUsed",
+      header: "Capacity %",
+      sortable: true,
+      render: (value) => {
+        const pct = value as number
+        return (
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
+              <div
+                className={cn(
+                  "h-full rounded-full",
+                  pct > 90 ? "bg-red-500" : pct > 75 ? "bg-amber-500" : "bg-emerald-500"
+                )}
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+            <span className={cn(
+              "tabular-nums text-xs font-medium",
+              pct > 90 ? "text-red-600 dark:text-red-400" : pct > 75 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
+            )}>{pct}%</span>
+          </div>
+        )
+      },
+    },
+    {
+      key: "healthScore",
+      header: "Health Score",
+      sortable: true,
+      render: (value, row) => (
+        <span className={cn(
+          "tabular-nums font-medium",
+          (value as number) >= 85 ? "text-emerald-600 dark:text-emerald-400" :
+          (value as number) >= 70 ? "text-amber-600 dark:text-amber-400" :
+          "text-red-600 dark:text-red-400"
+        )}>{value as number}</span>
+      ),
+    },
+    {
+      key: "managerName",
+      header: "Manager",
+      sortable: true,
+    },
+  ]
+}
+
 // ── Main Component ───────────────────────────────────────────────────────────
 
 export function WarehousesView() {
@@ -275,6 +382,7 @@ export function WarehousesView() {
   const [selectedWarehouse, setSelectedWarehouse] = React.useState<(typeof warehouses)[number] | null>(null)
   const [modalOpen, setModalOpen] = React.useState(false)
   const [showMap, setShowMap] = React.useState(false)
+  const [viewMode, setViewMode] = React.useState<"cards" | "table">("cards")
 
   const summary = useMemo(() => {
     const totalCapacity = warehouses.reduce((acc, w) => acc + w.capacity, 0)
@@ -290,6 +398,45 @@ export function WarehousesView() {
     }
   }, [])
 
+  const handleViewDetails = useCallback((row: WarehouseRow) => {
+    setSelectedWarehouse(row)
+    setModalOpen(true)
+  }, [])
+
+  const columns = useMemo(
+    () => getWarehouseColumns(handleViewDetails),
+    [handleViewDetails]
+  )
+
+  const batchActions: BatchAction<WarehouseRow>[] = useMemo(() => [
+    {
+      label: "View Details",
+      icon: Eye,
+      onClick: (rows) => {
+        if (rows.length === 1) {
+          setSelectedWarehouse(rows[0])
+          setModalOpen(true)
+        }
+      },
+    },
+  ], [])
+
+  const handleExportCSV = useCallback(() => {
+    const data = warehouses.map((w) => ({
+      Name: w.name,
+      City: w.city,
+      State: w.state,
+      Status: statusLabelMap[w.status as WarehouseStatus],
+      "Capacity %": w.capacityUsed,
+      "Health Score": w.healthScore,
+      Manager: w.managerName,
+      Orders: w.todayOrders,
+      "Pending Tasks": w.pendingTasks,
+      Alerts: w.alerts,
+    }))
+    exportToCSV(data, "warehouses", ["Name", "City", "State", "Status", "Capacity %", "Health Score", "Manager", "Orders", "Pending Tasks", "Alerts"])
+  }, [])
+
   return (
     <div className="space-y-6">
       {/* ── Page Header ── */}
@@ -298,6 +445,26 @@ export function WarehousesView() {
         description={showMap ? "Geographic view of all warehouses across India" : "Monitor performance across all 6 warehouses in India"}
         actions={
           <div className="flex items-center gap-2">
+            {!showMap && (
+              <>
+                <ToggleGroup
+                  type="single"
+                  value={viewMode}
+                  onValueChange={(v) => { if (v) setViewMode(v as "cards" | "table") }}
+                  className="bg-muted"
+                >
+                  <ToggleGroupItem value="cards" className="h-8 gap-1.5 px-3 text-xs" aria-label="Card view">
+                    <LayoutGrid className="size-3.5" />
+                    <span className="hidden sm:inline">Cards</span>
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="table" className="h-8 gap-1.5 px-3 text-xs" aria-label="Table view">
+                    <Table2 className="size-3.5" />
+                    <span className="hidden sm:inline">Table</span>
+                  </ToggleGroupItem>
+                </ToggleGroup>
+                <ExportButton onExportCSV={handleExportCSV} />
+              </>
+            )}
             <Button
               variant={showMap ? "default" : "outline"}
               size="sm"
@@ -367,19 +534,36 @@ export function WarehousesView() {
             />
           </div>
 
-          {/* ── Warehouse Grid ── */}
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children">
-            {warehouses.map((warehouse) => (
-              <WarehouseCard
-                key={warehouse.id}
-                warehouse={warehouse}
-                onClick={() => {
-                  setSelectedWarehouse(warehouse)
-                  setModalOpen(true)
-                }}
-              />
-            ))}
-          </div>
+          {/* ── Cards View ── */}
+          {viewMode === "cards" && (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 stagger-children">
+              {warehouses.map((warehouse) => (
+                <WarehouseCard
+                  key={warehouse.id}
+                  warehouse={warehouse}
+                  onClick={() => {
+                    setSelectedWarehouse(warehouse)
+                    setModalOpen(true)
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* ── Table View ── */}
+          {viewMode === "table" && (
+            <DataTable<WarehouseRow>
+              data={warehouses}
+              columns={columns}
+              searchableColumns={["name", "city"]}
+              searchPlaceholder="Search by name or city..."
+              selectable
+              batchActions={batchActions}
+              onRowClick={handleViewDetails}
+              pageSize={10}
+              showCount
+            />
+          )}
         </>
       )}
 
