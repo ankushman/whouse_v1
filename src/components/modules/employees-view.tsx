@@ -455,7 +455,7 @@ export function EmployeesView() {
                     <XAxis dataKey="week" tick={{ fontSize: 11 }} />
                     <YAxis tick={{ fontSize: 11 }} />
                     <ChartTooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="tasks" fill="var(--color-tasks)" radius={[4, 4]} />
+                    <Bar dataKey="tasks" fill="var(--color-tasks)" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ChartContainer>
               </CardContent>

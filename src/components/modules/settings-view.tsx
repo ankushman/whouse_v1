@@ -49,6 +49,8 @@ import {
   Check,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useThemeStore, type AccentColor, type LayoutDensity } from "@/store/theme-store"
+import { useTheme } from "next-themes"
 import { useToast } from "@/hooks/use-toast-helper"
 import { warehouses as warehouseData, kpiMetrics } from "@/data/mock-data"
 
@@ -149,6 +151,7 @@ function RatingStars({ rating }: { rating: number }) {
 }
 
 export function SettingsView() {
+  const toast = useToast()
   const [enabledNotifications, setEnabledNotifications] = useState({
     email: true,
     push: true,
@@ -170,6 +173,12 @@ export function SettingsView() {
     compactNumbers: false,
     tabularNumbers: true,
   })
+
+  // Theme store connections
+  const { setTheme: setNextTheme } = useTheme()
+  const storeSetAccentColor = useThemeStore((s) => s.setAccentColor)
+  const storeSetDensity = useThemeStore((s) => s.setDensity)
+  const storeSetAnimations = useThemeStore((s) => s.setAnimationsEnabled)
 
   // Notification Preferences state
   const [notifPrefs, setNotifPrefs] = useState({
@@ -215,29 +224,6 @@ export function SettingsView() {
   const [kpiConfig, setKpiConfig] = useState<KPIConfigItem[]>(initialKPIConfig)
   const [kpiSearch, setKpiSearch] = useState("")
 
-  // Appearance settings
-  const [appearanceTheme, setAppearanceTheme] = useState("system")
-  const [accentColor, setAccentColor] = useState("blue")
-  const [layoutDensity, setLayoutDensity] = useState("comfortable")
-  const [animationsEnabled, setAnimationsEnabled] = useState(true)
-  const [sidebarDefault, setSidebarDefault] = useState("expanded")
-  const [showDecimals, setShowDecimals] = useState(true)
-  const [compactNumbers, setCompactNumbers] = useState(false)
-  const [tabularNumbers, setTabularNumbers] = useState(true)
-
-  // Notification preferences
-  const [notifFrequency, setNotifFrequency] = useState("instant")
-  const [quietHoursEnabled, setQuietHoursEnabled] = useState(false)
-  const [quietHoursStart, setQuietHoursStart] = useState("22:00")
-  const [quietHoursEnd, setQuietHoursEnd] = useState("06:00")
-  const [notifMinSeverity, setNotifMinSeverity] = useState("all")
-  const [notifSoundEnabled, setNotifSoundEnabled] = useState(true)
-  const [notifVolume, setNotifVolume] = useState("medium")
-  const [notifEmail, setNotifEmail] = useState("ops@autoflow.in")
-  const [notifDailyDigest, setNotifDailyDigest] = useState(true)
-  const [notifWeeklySummary, setNotifWeeklySummary] = useState(false)
-  const [notifBrowserPush, setNotifBrowserPush] = useState(true)
-  const [notifDesktopBadge, setNotifDesktopBadge] = useState(true)
 
   // Handlers — Warehouses
   const openAddWarehouse = () => {
@@ -1157,7 +1143,7 @@ export function SettingsView() {
               </CardHeader>
               <CardContent className="space-y-5">
                 <SettingRow label="Color Mode" description="Light, dark, or follow system">
-                  <Select value={appearanceSettings.theme} onValueChange={(v) => setAppearanceSettings({ ...appearanceSettings, theme: v })}>
+                  <Select value={appearanceSettings.theme} onValueChange={(v) => { setAppearanceSettings({ ...appearanceSettings, theme: v }); setNextTheme(v); toast.success("Theme updated", `Switched to ${v} mode`) }}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
@@ -1182,7 +1168,7 @@ export function SettingsView() {
                     ].map((c) => (
                       <button
                         key={c.name}
-                        onClick={() => setAppearanceSettings({ ...appearanceSettings, accentColor: c.name })}
+                        onClick={() => { setAppearanceSettings({ ...appearanceSettings, accentColor: c.name }); storeSetAccentColor(c.name as AccentColor); toast.success("Accent color updated", `Applied ${c.name} accent`) }}
                         className={cn(
                           "relative h-8 w-8 rounded-full transition-all duration-200 hover:scale-110",
                           c.color,
@@ -1208,7 +1194,7 @@ export function SettingsView() {
               </CardHeader>
               <CardContent className="space-y-5">
                 <SettingRow label="Layout Density" description="Adjust spacing and sizing">
-                  <Select value={appearanceSettings.density} onValueChange={(v) => setAppearanceSettings({ ...appearanceSettings, density: v })}>
+                  <Select value={appearanceSettings.density} onValueChange={(v) => { setAppearanceSettings({ ...appearanceSettings, density: v }); storeSetDensity(v as LayoutDensity); toast.success("Density updated", `Layout set to ${v}`) }}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
@@ -1233,7 +1219,7 @@ export function SettingsView() {
                 <Separator />
                 <SettingsSection>
                   <SettingRow label="Animations" description="Enable page and element transitions">
-                    <Switch checked={appearanceSettings.animations} onCheckedChange={(v) => setAppearanceSettings({ ...appearanceSettings, animations: v })} />
+                    <Switch checked={appearanceSettings.animations} onCheckedChange={(v) => { setAppearanceSettings({ ...appearanceSettings, animations: v }); storeSetAnimations(v); toast.success(v ? "Animations enabled" : "Animations disabled") }} />
                   </SettingRow>
                   <SettingRow label="Show Decimals" description="Display decimal places in numbers">
                     <Switch checked={appearanceSettings.showDecimals} onCheckedChange={(v) => setAppearanceSettings({ ...appearanceSettings, showDecimals: v })} />

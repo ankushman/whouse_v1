@@ -84,7 +84,7 @@ import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
 import { NotificationsSheet } from "@/components/shared/notifications-sheet"
 import { QuickSettingsPopover } from "@/components/shared/quick-settings-popover"
 import { KeyboardShortcutsDialog } from "@/components/shared/keyboard-shortcuts-dialog"
-import { useLiveDataWithToast } from "@/hooks/use-live-toast"
+
 
 // ──────────────────────────────────────────────────────
 // Icon Map
@@ -694,8 +694,6 @@ export function CommandPalette() {
 // App Layout (Root)
 // ──────────────────────────────────────────────────────
 export function AppLayout({ children }: { children: ReactNode }) {
-  // Connect WebSocket live events to toast notifications
-  useLiveDataWithToast()
 
   return (
     <>
@@ -707,7 +705,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </main>
         <footer className="no-print mt-auto hidden border-t px-4 py-2 md:flex md:items-center md:justify-between">
           <span className="text-[10px] text-muted-foreground">
-            © 2024 AutoFlow Logistics | Enterprise Warehouse Management
+            © {new Date().getFullYear()} AutoFlow Logistics | Enterprise Warehouse Management
           </span>
           <span className="text-[10px] text-muted-foreground">
             v1.0.0 · Built with Next.js

@@ -86,8 +86,6 @@ function formatTimeAgo(timestamp: number): string {
 
 export function LiveUpdatesFeed({ maxItems = 6 }: { maxItems?: number }) {
   const [isPaused, setIsPaused] = useState(false)
-  const [wsConnected, setWsConnected] = useState(false)
-  const hasConnectedRef = useRef(false)
 
   const initialEvents = useMemo((): LiveEvent[] => {
     return Array.from({ length: maxItems }, (_, i) => ({
@@ -122,7 +120,7 @@ export function LiveUpdatesFeed({ maxItems = 6 }: { maxItems?: number }) {
   }, [maxItems])
 
   // Connect to WebSocket live data service
-  const { isConnected: wsIsConnected } = useLiveData(handleWsEvent)
+  const { isConnected: wsConnected } = useLiveData(handleWsEvent)
 
   // Local fallback: generate events only if WebSocket is not connected
   useEffect(() => {

@@ -96,7 +96,7 @@ export function ShiftHandoverPanel() {
   const progressPercent = Math.round((completedCount / totalCount) * 100)
 
   const handleCompleteHandover = () => {
-    toast.success("Handover Complete", "Morning shift handover has been finalized and sent to afternoon shift supervisor")
+    toast.success("Handover Complete", { description: "Morning shift handover has been finalized and sent to afternoon shift supervisor" })
   }
 
   return (

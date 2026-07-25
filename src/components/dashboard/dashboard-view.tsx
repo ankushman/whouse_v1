@@ -45,7 +45,9 @@ import { generateSparklineData } from "@/components/shared/mini-sparkline"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 
-const kpiIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+import { type LucideIcon } from "lucide-react"
+
+const kpiIcons: Record<string, LucideIcon> = {
   totalWarehouses: Warehouse,
   activeShipments: Truck,
   pendingGRN: ClipboardCheck,
@@ -199,7 +201,7 @@ export function DashboardView() {
   return (
     <div className="space-y-6">
       {/* Dashboard Header */}
-      <div className="dashboard-header-gradient -m-4 mb-0 p-4 md:-m-6 md:p-6 rounded-none">
+      <div className="dashboard-header-gradient bg-mesh-gradient -m-4 mb-0 p-4 md:-m-6 md:p-6 rounded-none">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-xl font-bold tracking-tight">
@@ -324,8 +326,8 @@ export function DashboardView() {
 
       {/* Charts Row 1 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-blue card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">Inbound vs Outbound Trend</CardTitle>
             <CardDescription className="text-xs">Monthly shipment volume comparison</CardDescription>
           </CardHeader>
@@ -344,8 +346,8 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("chart-card card-accent-green rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-green card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">Dispatch Performance</CardTitle>
             <CardDescription className="text-xs">Last 7 days on-time vs delayed deliveries</CardDescription>
           </CardHeader>
@@ -367,8 +369,8 @@ export function DashboardView() {
 
       {/* Charts Row 2 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-blue card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">Warehouse Performance</CardTitle>
             <CardDescription className="text-xs">Cross-warehouse metrics comparison</CardDescription>
           </CardHeader>
@@ -386,8 +388,8 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-blue card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">Inventory Accuracy Trend</CardTitle>
             <CardDescription className="text-xs">6-month accuracy tracking</CardDescription>
           </CardHeader>
@@ -413,8 +415,8 @@ export function DashboardView() {
 
       {/* Charts Row 3 */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("chart-card card-accent-blue rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-blue card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">Daily Throughput</CardTitle>
             <CardDescription className="text-xs">Last 30 days inbound and outbound volumes</CardDescription>
           </CardHeader>
@@ -442,8 +444,8 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("chart-card card-accent-amber rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-amber card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">Cost Trend Analysis</CardTitle>
             <CardDescription className="text-xs">Monthly cost breakdown (₹ Lakhs)</CardDescription>
           </CardHeader>
@@ -467,8 +469,8 @@ export function DashboardView() {
 
       {/* Bottom Row */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-        <Card className={cn("chart-card card-accent-red rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-red card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">SLA Achievement by Warehouse</CardTitle>
             <CardDescription className="text-xs">Target vs achieved vs breach percentage</CardDescription>
           </CardHeader>
@@ -486,8 +488,8 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
-        <Card className={cn("chart-card card-accent-purple rounded-xl border border-t-2 border-border/60 shadow-sm")}>
-          <CardHeader className="pb-2">
+        <Card className={cn("chart-card card-accent-purple card-elevated rounded-xl border border-t-2 border-border/60 shadow-sm")}>
+          <CardHeader className="pb-2 flex-center">
             <CardTitle className="text-sm font-semibold">Manpower Productivity by Shift</CardTitle>
             <CardDescription className="text-xs">Weekly shift-wise productivity comparison</CardDescription>
           </CardHeader>

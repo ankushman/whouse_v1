@@ -163,11 +163,8 @@ export function DataTable<T extends Record<string, any>>({
 
   const totalPages = Math.max(1, Math.ceil(sortedData.length / pageSize))
 
-  // Reset page when data length changes
+  // Clamp current page within valid range (derived state, no setState needed)
   const safeCurrentPage = Math.min(currentPage, totalPages)
-  if (safeCurrentPage !== currentPage) {
-    setCurrentPage(safeCurrentPage)
-  }
 
   const paginatedData = useMemo(
     () =>
@@ -366,7 +363,7 @@ export function DataTable<T extends Record<string, any>>({
                   placeholder={searchPlaceholder ?? "Search..."}
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="h-8 w-56 pl-8 text-xs"
+                  className="h-8 w-56 pl-8 text-xs shadow-inner-soft"
                 />
               </div>
             )}

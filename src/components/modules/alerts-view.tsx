@@ -48,7 +48,7 @@ export function AlertsView() {
   const [severityFilter, setSeverityFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
   const [acknowledgedAlerts, setAcknowledgedAlerts] = useState<Set<string>>(new Set())
-  const { toast } = useToastHelper()
+  const toast = useToastHelper()
 
   const filtered = useMemo(() => {
     return alerts.filter((a) => {

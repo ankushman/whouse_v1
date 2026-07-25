@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState } from "react"
 import { PageHeader } from "@/components/shared/page-header"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -39,11 +39,12 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
+  FileDown,
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast-helper"
-import { kpiMetrics, warehousePerformance } from "@/data/mock-data"
-import { toast } from "sonner"
+import { kpiMetrics, warehousePerformance, dispatchPerformance, costTrend, slaData, inventoryAccuracyTrend } from "@/data/mock-data"
 import { cn } from "@/lib/utils"
+import { exportToPDF, exportCombinedPDF } from "@/lib/pdf-export"
 
 interface Report {
   id: string
@@ -142,7 +143,7 @@ const scheduleOptions = [
 ]
 
 export function ReportsView() {
-  const { toast: appToast } = useToast()
+  const toast = useToast()
   const [generatingIds, setGeneratingIds] = useState<Set<string>>(new Set())
   const [readyIds, setReadyIds] = useState<Set<string>>(new Set())
   const [schedules, setSchedules] = useState<Record<string, string>>(() => {
@@ -153,7 +154,7 @@ export function ReportsView() {
     return initial
   })
 
-  const handleGenerateReport = useCallback((reportId: string, reportTitle: string) => {
+  const handleGenerateReport = (reportId: string, reportTitle: string) => {
     if (generatingIds.has(reportId)) return
     setGeneratingIds(prev => new Set(prev).add(reportId))
     setReadyIds(prev => {
@@ -171,21 +172,86 @@ export function ReportsView() {
       setReadyIds(prev => new Set(prev).add(reportId))
       toast.success("Report Generated", "Your report is ready to download")
     }, 1500)
-  }, [generatingIds])
+  }
 
-  const handleDownloadAll = useCallback(() => {
-    const loadingId = "download-all"
-    toast.loading("Preparing Downloads", "Compressing 3 reports...", { id: loadingId })
-    setTimeout(() => {
-      toast.success("Downloads Ready", "3 reports prepared for download", { id: loadingId })
-    }, 2000)
-  }, [])
+  const handleDownloadAllPDF = () => {
+    const loadingId = "download-all-pdf"
+    toast.loading("Preparing PDF", "Combining all report sections...", { id: loadingId })
+    try {
+      exportCombinedPDF({
+        title: "AutoFlow Logistics — Combined Report",
+        subtitle: "All operational reports in a single document",
+        sections: [
+          {
+            title: "Executive Summary — KPI Metrics",
+            data: kpiMetrics.map(m => ({
+              KPI: m.label,
+              Value: m.value,
+              Unit: m.unit,
+              Trend: m.trend === "up" ? "↑" : "↓",
+              "Change (%)": m.trendValue,
+            })),
+          },
+          {
+            title: "Warehouse Performance",
+            data: warehousePerformance.map(w => ({
+              Warehouse: w.name,
+              "Inbound (units)": w.inbound,
+              "Outbound (units)": w.outbound,
+              "Accuracy (%)": w.accuracy,
+              "SLA Achievement (%)": w.sla,
+            })),
+          },
+          {
+            title: "Transportation — Dispatch Performance (7 days)",
+            data: dispatchPerformance.map(d => ({
+              Day: d.day,
+              Dispatched: d.dispatched,
+              "On Time": d.onTime,
+              Delayed: d.delayed,
+            })),
+          },
+          {
+            title: "Inventory Accuracy Trend",
+            data: inventoryAccuracyTrend.map(a => ({
+              Month: a.month,
+              "Accuracy (%)": a.accuracy,
+            })),
+          },
+          {
+            title: "SLA Achievement by Warehouse",
+            data: slaData.map(s => ({
+              Warehouse: s.name,
+              "Target (%)": s.target,
+              "Achieved (%)": s.achieved,
+              "Breach (%)": s.breach,
+            })),
+          },
+          {
+            title: "Cost Trend Analysis (₹)",
+            data: costTrend.map(c => ({
+              Month: c.month,
+              Labor: c.labor.toLocaleString("en-IN"),
+              Transport: c.transport.toLocaleString("en-IN"),
+              Equipment: c.equipment.toLocaleString("en-IN"),
+              Storage: c.storage.toLocaleString("en-IN"),
+              Total: c.total.toLocaleString("en-IN"),
+            })),
+          },
+        ],
+        filename: "autoflow-combined-report",
+      })
+      toast.success("PDF Generated", "Combined report opened for printing", { id: loadingId })
+    } catch {
+      toast.error("PDF Export Failed", "Could not open print window. Please allow pop-ups.", { id: loadingId })
+    }
+  }
 
-  const handleScheduleChange = useCallback((reportId: string, value: string) => {
+  const handleScheduleChange = (reportId: string, value: string) => {
     setSchedules(prev => ({ ...prev, [reportId]: value }))
     const label = scheduleOptions.find(o => o.value === value)?.label ?? value
-    appToast.success("Schedule Updated", `Report set to ${label} frequency`)
-  }, [appToast])
+    toast.success("Schedule Updated", `Report set to ${label} frequency`)
+  }
 
   // CSV export handlers
   const handleExportExecSummaryCSV = () => {
@@ -210,12 +276,114 @@ export function ReportsView() {
     exportToCSV(data, "warehouse-performance")
   }
 
+  // PDF export handlers
+  const handleExportPDF = (reportId: string, reportTitle: string) => {
+    toast.loading("Generating PDF", `Preparing ${reportTitle}...`, { id: `pdf-${reportId}` })
+    try {
+      switch (reportId) {
+        case "exec":
+          exportToPDF({
+            title: "Executive Summary — KPI Metrics",
+            subtitle: "Comprehensive overview of all operations across all warehouses",
+            data: kpiMetrics.map(m => ({
+              KPI: m.label,
+              Value: m.unit === "₹" ? `₹${m.value.toLocaleString("en-IN")}` : m.unit ? `${m.value}${m.unit}` : m.value.toLocaleString(),
+              Unit: m.unit,
+              Trend: m.trend === "up" ? "↑" : "↓",
+              "Change (%)": m.trendValue,
+            })),
+            filename: "executive-summary",
+          })
+          break
+        case "warehouse":
+          exportToPDF({
+            title: "Warehouse Performance Report",
+            subtitle: "Detailed warehouse metrics including throughput, accuracy, SLA compliance",
+            data: warehousePerformance.map(w => ({
+              Warehouse: w.name,
+              "Inbound (units)": w.inbound,
+              "Outbound (units)": w.outbound,
+              "Accuracy (%)": w.accuracy,
+              "SLA Achievement (%)": w.sla,
+            })),
+            filename: "warehouse-performance",
+          })
+          break
+        case "mis":
+          exportToPDF({
+            title: "Monthly MIS Report",
+            subtitle: "Monthly management information system report with operational and financial summaries",
+            data: [
+              { Metric: "Total Warehouses", Value: 6 },
+              { Metric: "Active Shipments", Value: 847 },
+              { Metric: "Pending GRN", Value: 63 },
+              { Metric: "Inventory Accuracy", Value: "97.8%" },
+              { Metric: "Today's Dispatches", Value: 193 },
+              { Metric: "Dock to Stock Time", Value: "3.2 hrs" },
+              { Metric: "SLA Achievement", Value: "94.6%" },
+              { Metric: "Equipment Utilization", Value: "82.4%" },
+              { Metric: "Warehouse Occupancy", Value: "79.7%" },
+              { Metric: "Productivity", Value: "86.3%" },
+            ],
+            filename: "monthly-mis",
+          })
+          break
+        case "inventory":
+          exportToPDF({
+            title: "Inventory Report",
+            subtitle: "Stock levels, variance analysis, ABC classification and cycle count summaries",
+            data: inventoryAccuracyTrend.map(a => ({
+              Month: a.month,
+              "Accuracy (%)": a.accuracy,
+            })),
+            filename: "inventory-report",
+          })
+          break
+        case "transport":
+          exportToPDF({
+            title: "Transportation Report",
+            subtitle: "Fleet utilization, delivery performance, OTIF metrics and route analytics",
+            data: dispatchPerformance.map(d => ({
+              Day: d.day,
+              Dispatched: d.dispatched,
+              "On Time": d.onTime,
+              Delayed: d.delayed,
+              "OTIF (%)": ((d.onTime / d.dispatched) * 100).toFixed(1),
+            })),
+            filename: "transportation-report",
+          })
+          break
+        case "cost":
+          exportToPDF({
+            title: "Cost Analysis Report",
+            subtitle: "Financial performance breakdown, cost trends and optimization opportunities",
+            data: costTrend.map(c => ({
+              Month: c.month,
+              "Labor (₹)": `₹${(c.labor / 100000).toFixed(1)}L`,
+              "Transport (₹)": `₹${(c.transport / 100000).toFixed(1)}L`,
+              "Equipment (₹)": `₹${(c.equipment / 100000).toFixed(1)}L`,
+              "Storage (₹)": `₹${(c.storage / 100000).toFixed(1)}L`,
+              "Total (₹)": `₹${(c.total / 100000).toFixed(1)}L`,
+            })),
+            filename: "cost-analysis",
+          })
+          break
+        default:
+          toast.error("Not Available", "This report does not support PDF export", { id: `pdf-${reportId}` })
+          return
+      }
+      toast.success("PDF Generated", `${reportTitle} opened for printing`, { id: `pdf-${reportId}` })
+    } catch {
+      toast.error("PDF Export Failed", "Could not open print window. Please allow pop-ups.", { id: `pdf-${reportId}` })
+    }
+  }
+
   const getExportHandlers = (reportId: string) => {
     switch (reportId) {
       case "exec":
-        return { onExportCSV: handleExportExecSummaryCSV }
+        return { onExportCSV: handleExportExecSummaryCSV, onExportPDF: () => handleExportPDF("exec", "Executive Summary") }
       case "warehouse":
-        return { onExportCSV: handleExportWarehousePerfCSV }
+        return { onExportCSV: handleExportWarehousePerfCSV, onExportPDF: () => handleExportPDF("warehouse", "Warehouse Performance") }
       default:
         return {}
     }
@@ -259,10 +427,10 @@ export function ReportsView() {
         description="Generate and download operational reports"
         actions={
           <div className="flex items-center gap-2">
-            <Button size="sm" className="gap-1.5" onClick={handleDownloadAll}>
-              <DownloadCloud className="h-3.5 w-3.5" /> Download All
+            <Button size="sm" className="gap-1.5" onClick={handleDownloadAllPDF}>
+              <FileDown className="h-3.5 w-3.5" /> Download All as PDF
             </Button>
-            <Button size="sm" variant="outline" className="gap-1.5" onClick={() => appToast.info("Refreshing all reports...", "This may take a moment", { duration: 2000 })}>
+            <Button size="sm" variant="outline" className="gap-1.5" onClick={() => toast.info("Refreshing all reports...", "This may take a moment", { duration: 2000 })}>
               <RefreshCw className="h-3.5 w-3.5" /> Refresh All
             </Button>
           </div>
@@ -271,7 +439,7 @@ export function ReportsView() {
 
       {/* Schedule Banner */}
       <Card className="rounded-xl border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/30">
-        <CardContent className="flex items-center gap-3 p-4">
+        <CardContent className="flex items-center gap-loose p-4">
           <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           <div className="flex-1">
             <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Automated Report Schedule</p>
@@ -337,9 +505,9 @@ export function ReportsView() {
                     {isGenerating ? <Loader2 className="h-3 w-3 animate-spin" /> : <RefreshCw className="h-3 w-3" />} Generate
                   </Button>
                   {hasCSVExport ? (
-                    <ExportButton onExportCSV={exportHandlers.onExportCSV} />
+                    <ExportButton onExportCSV={exportHandlers.onExportCSV} onExportPDF={exportHandlers.onExportPDF} />
                   ) : (
-                    <Button variant="outline" size="sm" className="text-xs gap-1.5 h-8" title="Download PDF">
+                    <Button variant="outline" size="sm" className="text-xs gap-1.5 h-8" title="Download PDF" onClick={() => handleExportPDF(report.id, report.title)}>
                       <Download className="h-3 w-3" />
                       <span className="hidden sm:inline">PDF</span>
                     </Button>

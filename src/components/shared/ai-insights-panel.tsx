@@ -128,15 +128,15 @@ export function AIInsightsPanel() {
   }
 
   const handleApply = () => {
-    toast.success("Recommendation Applied", "AI insight has been queued for implementation")
+    toast.success("Recommendation Applied", { description: "AI insight has been queued for implementation" })
   }
 
   const handleDismissAll = () => {
-    toast.info("Insights Dismissed", "All AI insights have been archived")
+    toast.info("Insights Dismissed", { description: "All AI insights have been archived" })
   }
 
   const handleShare = () => {
-    toast.success("Report Shared", "AI insights report sent to operations team")
+    toast.success("Report Shared", { description: "AI insights report sent to operations team" })
   }
 
   return (

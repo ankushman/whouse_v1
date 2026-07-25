@@ -4,3 +4,5 @@
 // ============================================================================
 
 export { cn } from './utils'
+export { exportToPDF, exportCombinedPDF } from './pdf-export'
+export type { PDFExportOptions } from './pdf-export'

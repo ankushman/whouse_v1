@@ -90,7 +90,7 @@ interface NotificationsSheetProps {
 }
 
 export function NotificationsSheet({ open, onOpenChange }: NotificationsSheetProps) {
-  const { toast } = useToast()
+  const toast = useToast()
   const [filter, setFilter] = useState<FilterTab>("all")
   const notifications = useAppStore((s) => s.notifications)
   const unreadCount = useAppStore((s) => s.unreadCount)

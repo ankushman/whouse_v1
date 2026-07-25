@@ -24,6 +24,8 @@ export function useRealtimeEvents(options: UseRealtimeEventsOptions = {}) {
   const [events, setEvents] = useState<WarehouseEvent[]>([])
   const [connected, setConnected] = useState(false)
   const socketRef = useRef<any>(null)
+  const onEventRef = useRef(onEvent)
+  onEventRef.current = onEvent
 
   useEffect(() => {
     if (!enabled) return
@@ -51,7 +53,7 @@ export function useRealtimeEvents(options: UseRealtimeEventsOptions = {}) {
         socket.on("warehouse-event", (event: WarehouseEvent) => {
           if (!mounted) return
           setEvents((prev) => [event, ...prev].slice(0, maxEvents))
-          onEvent?.(event)
+          onEventRef.current?.(event)
         })
 
         socketRef.current = socket
@@ -66,7 +68,7 @@ export function useRealtimeEvents(options: UseRealtimeEventsOptions = {}) {
       mounted = false
       socketRef.current?.disconnect()
     }
-  }, [enabled, maxEvents, onEvent])
+  }, [enabled, maxEvents])
 
   const clearEvents = useCallback(() => setEvents([]), [])
 
