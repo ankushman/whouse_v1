@@ -4389,3 +4389,57 @@ html.theme-transition body {
 .nav-icon-animated:hover {
   transform: scale(1.1);
 }
+
+/* ---- Route Line Animated (Warehouse Map) ---- */
+.route-line-animated {
+  animation: route-dash-flow 20s linear infinite;
+}
+@keyframes route-dash-flow {
+  to {
+    stroke-dashoffset: -260;
+  }
+}
+
+/* ---- Route Particle (animated dots on map) ---- */
+.route-particle-animated-1 {
+  fill: oklch(0.7 0.15 250);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 3px oklch(0.7 0.15 250 / 0.6));
+}
+.route-particle-animated-2 {
+  fill: oklch(0.65 0.15 250);
+  opacity: 0.7;
+  filter: drop-shadow(0 0 2px oklch(0.65 0.15 250 / 0.4));
+}
+.route-particle-animated-delayed {
+  fill: oklch(0.65 0.2 25);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 3px oklch(0.65 0.2 25 / 0.6));
+}
+
+/* ---- Slide In Right Micro ---- */
+.animate-slide-in-right-micro {
+  animation: slideInRightMicro 0.25s ease-out;
+}
+@keyframes slideInRightMicro {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---- Ping Slow (slower pulse ring) ---- */
+.animate-ping-slow {
+  animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping-slow {
+  75%,
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}

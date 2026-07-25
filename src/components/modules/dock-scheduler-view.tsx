@@ -165,9 +165,7 @@ function DockCard({
 
   const handleComplete = () => {
     if (!assignment) return
-    toast.success(`Dock ${dock.name} cleared`, {
-      description: `${assignment.vehicleReg} — ${assignment.supplier}`,
-    })
+    toast.success(`Dock ${dock.name} cleared`, `${assignment.vehicleReg} — ${assignment.supplier}`)
     onComplete(assignment.id)
   }
 
@@ -401,9 +399,7 @@ export function DockSchedulerView() {
     // Remove from queue
     setQueuedVehicles((prev) => prev.filter((v) => v.id !== selectedVehicleId))
 
-    toast.success("Vehicle Assigned", {
-      description: `${vehicle.reg} → ${assigningDock.name} (${vehicle.supplier})`,
-    })
+    toast.success("Vehicle Assigned", `${vehicle.reg} → ${assigningDock.name} (${vehicle.supplier})`)
 
     setAssignDialogOpen(false)
     setAssigningDock(null)
@@ -446,9 +442,7 @@ export function DockSchedulerView() {
         return next
       })
 
-      toast.success("Vehicle Assigned", {
-        description: `${vehicle.reg} → ${dock.name} (${vehicle.supplier})`,
-      })
+      toast.success("Vehicle Assigned", `${vehicle.reg} → ${dock.name} (${vehicle.supplier})`)
     },
     [queuedVehicles, docks]
   )
@@ -474,9 +468,7 @@ export function DockSchedulerView() {
             if (newProgress >= 100) {
               // Auto-complete
               setTimeout(() => {
-                toast.success("Assignment Auto-Completed", {
-                  description: `${a.vehicleReg} at ${docks.find((d) => d.id === a.dockId)?.name ?? a.dockId}`,
-                })
+                toast.success("Assignment Auto-Completed", `${a.vehicleReg} at ${docks.find((d) => d.id === a.dockId)?.name ?? a.dockId}`)
                 setCompletedIds((c) => new Set(c).add(a.id))
                 setDocks((dd) =>
                   dd.map((d) => (d.id === a.dockId ? { ...d, status: "available" as DockStatus } : d))
@@ -502,9 +494,9 @@ export function DockSchedulerView() {
   const toggleSimulation = useCallback(() => {
     setSimulating((prev) => !prev)
     if (!simulating) {
-      toast.info("Simulation Started", { description: "Progress will advance 5% every 3 seconds", duration: 3000 })
+      toast.info("Simulation Started", "Progress will advance 5% every 3 seconds", { duration: 3000 })
     } else {
-      toast.info("Simulation Stopped", { duration: 2000 })
+      toast.info("Simulation Stopped", "Simulation has been stopped", { duration: 2000 })
     }
   }, [simulating])
 
@@ -537,7 +529,7 @@ export function DockSchedulerView() {
                 </>
               )}
             </Button>
-            <Button size="sm" className="gap-1.5" onClick={() => toast.info("Refreshing dock status...", { duration: 2000 })}>
+            <Button size="sm" className="gap-1.5" onClick={() => toast.info("Refreshing dock status...", "Fetching latest dock information", { duration: 2000 })}>
               <Zap className="h-3.5 w-3.5" /> Refresh Status
             </Button>
           </div>

@@ -4,7 +4,7 @@ import { useMemo, useState, useCallback } from "react"
 import { employees } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import {
@@ -36,6 +36,9 @@ import {
   Award,
   Search,
   Clock,
+  BarChart3,
+  GitCompareArrows,
+  Building2,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ShiftScheduler } from "@/components/shared/shift-scheduler"
@@ -57,6 +60,12 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+  ResponsiveContainer,
 } from "recharts"
 
 function getRankBadge(rank: number) {
@@ -119,6 +128,55 @@ const weeklySummary = [
   { label: "Error Rate", value: "2.2%", change: -0.3 },
 ]
 
+// ── Compare Tab Data ──────────────────────────────────────────────────────────
+
+const TOP5_COLORS = ["#2563EB", "#10B981", "#F59E0B", "#8B5CF6", "#EF4444"]
+
+// Radar chart data for top 5 employees (computed dynamically)
+function buildTop5CompareData(employeesList: typeof employees) {
+  const top5 = [...employeesList].sort((a, b) => a.rank - b.rank).slice(0, 5)
+  const metrics = ["Productivity", "Attendance", "Tasks", "Error Quality"]
+  return metrics.map((metric) => {
+    const row: Record<string, string | number> = { metric }
+    for (const emp of top5) {
+      if (metric === "Productivity") row[emp.name] = emp.productivity
+      else if (metric === "Attendance") row[emp.name] = emp.attendance
+      else if (metric === "Tasks") row[emp.name] = Math.min(100, (emp.tasksCompleted / 200) * 100)
+      else row[emp.name] = Math.max(0, 100 - emp.errorRate * 20)
+    }
+    return row
+  })
+}
+
+function buildTop5BarData(employeesList: typeof employees) {
+  const top5 = [...employeesList].sort((a, b) => a.rank - b.rank).slice(0, 5)
+  return top5.map((emp) => ({
+    name: emp.name.split(" ")[0],
+    productivity: emp.productivity,
+    attendance: emp.attendance,
+    taskScore: Math.min(100, (emp.tasksCompleted / 200) * 100),
+  }))
+}
+
+function buildWarehouseBreakdown(employeesList: typeof employees) {
+  const warehouseMap = new Map<string, typeof employeesList>()
+  for (const emp of employeesList) {
+    const list = warehouseMap.get(emp.warehouse) || []
+    list.push(emp)
+    warehouseMap.set(emp.warehouse, list)
+  }
+  return Array.from(warehouseMap.entries()).map(([warehouse, emps]) => ({
+    warehouse,
+    count: emps.length,
+    metrics: [
+      { label: "Productivity", value: Math.round(emps.reduce((s, e) => s + e.productivity, 0) / emps.length) },
+      { label: "Attendance %", value: Math.round(emps.reduce((s, e) => s + e.attendance, 0) / emps.length) },
+      { label: "Tasks", value: Math.round(emps.reduce((s, e) => s + e.tasksCompleted, 0) / emps.length) },
+      { label: "Error Rate", value: Number((emps.reduce((s, e) => s + e.errorRate, 0) / emps.length).toFixed(1)) },
+    ],
+  }))
+}
+
 export function EmployeesView() {
   const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
@@ -157,6 +215,15 @@ export function EmployeesView() {
     }),
     [filtered]
   )
+
+  // Compare tab derived data
+  const top5Employees = useMemo(
+    () => [...employees].sort((a, b) => a.rank - b.rank).slice(0, 5),
+    []
+  )
+  const top5RadarData = useMemo(() => buildTop5CompareData(filtered), [filtered])
+  const top5BarData = useMemo(() => buildTop5BarData(filtered), [filtered])
+  const warehouseBreakdown = useMemo(() => buildWarehouseBreakdown(filtered), [filtered])
 
   const handleExportCSV = useCallback(() => {
     const data = filtered.map((e) => ({
@@ -259,6 +326,10 @@ export function EmployeesView() {
           <TabsTrigger value="trends" className="text-xs gap-1.5">
             <TrendingUp className="size-3" />
             Performance Trends
+          </TabsTrigger>
+          <TabsTrigger value="compare" className="text-xs gap-1.5">
+            <GitCompareArrows className="size-3" />
+            Compare
           </TabsTrigger>
         </TabsList>
 
@@ -477,6 +548,151 @@ export function EmployeesView() {
                       <p className={cn("text-xs", item.change > 0 ? "text-emerald-500" : "text-red-500")}>
                         {item.change > 0 ? "↑" : "↓"}{Math.abs(item.change)}%
                       </p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        {/* ── Compare Tab ── */}
+        <TabsContent value="compare" className="mt-4">
+          <div className="space-y-4">
+            {/* Head-to-Head: Top 5 Radar Comparison */}
+            <Card className="card-depth chart-card card-accent-blue shadow-card">
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                    <GitCompareArrows className="size-4 text-blue-500" />
+                    Top 5 Employees — Skill Comparison
+                  </CardTitle>
+                  <Badge variant="outline" className="text-[10px]">Radar View</Badge>
+                </div>
+                <CardDescription className="text-xs">
+                  Multi-dimensional performance comparison across key metrics
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer
+                  config={{
+                    productivity: { label: "Productivity", color: "#2563EB" },
+                    attendance: { label: "Attendance", color: "#10B981" },
+                    tasks: { label: "Tasks", color: "#8B5CF6" },
+                    accuracy: { label: "Accuracy", color: "#F59E0B" },
+                  }}
+                  className="h-[320px] w-full"
+                >
+                  <RadarChart cx="50%" cy="50%" outerRadius="70%" data={top5RadarData}>
+                    <PolarGrid strokeDasharray="3 3" />
+                    <PolarAngleAxis dataKey="metric" tick={{ fontSize: 11 }} />
+                    <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fontSize: 9 }} />
+                    {top5Employees.map((emp, idx) => (
+                      <Radar
+                        key={emp.name}
+                        name={emp.name}
+                        dataKey={emp.name}
+                        stroke={TOP5_COLORS[idx]}
+                        fill={TOP5_COLORS[idx]}
+                        fillOpacity={0.08}
+                        strokeWidth={2}
+                      />
+                    ))}
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <ChartLegend content={<ChartLegendContent />} />
+                  </RadarChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
+            {/* Bar Chart: Top 5 Multi-Metric Comparison */}
+            <Card className="card-depth chart-card card-accent-green shadow-card">
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                    <BarChart3 className="size-4 text-emerald-500" />
+                    Metric Breakdown — Top Performers
+                  </CardTitle>
+                  <Badge variant="outline" className="text-[10px]">Grouped Bars</Badge>
+                </div>
+                <CardDescription className="text-xs">
+                  Side-by-side comparison of productivity, attendance, and task completion rates
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer
+                  config={{
+                    productivity: { label: "Productivity %", color: "#2563EB" },
+                    attendance: { label: "Attendance %", color: "#10B981" },
+                    tasks: { label: "Task Score", color: "#8B5CF6" },
+                  }}
+                  className="h-[260px] w-full"
+                >
+                  <BarChart data={top5BarData}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+                    <YAxis tick={{ fontSize: 10 }} domain={[0, 100]} />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <ChartLegend content={<ChartLegendContent />} />
+                    <Bar dataKey="productivity" fill="var(--color-productivity)" radius={[3, 3, 0, 0]} />
+                    <Bar dataKey="attendance" fill="var(--color-attendance)" radius={[3, 3, 0, 0]} />
+                    <Bar dataKey="taskScore" fill="var(--color-tasks)" radius={[3, 3, 0, 0]} />
+                  </BarChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
+            {/* Warehouse-level Performance Comparison */}
+            <Card className="card-depth shadow-card lg:col-span-2">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                  <Building2 className="size-4 text-violet-500" />
+                  Warehouse Performance Breakdown
+                </CardTitle>
+                <CardDescription className="text-xs">
+                  Average performance metrics grouped by warehouse location
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {warehouseBreakdown.map((wh) => (
+                    <div key={wh.warehouse} className="rounded-lg border border-border/50 bg-muted/15 p-3 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold">{wh.warehouse}</span>
+                        <Badge variant="outline" className="text-[9px]">
+                          {wh.count} staff
+                        </Badge>
+                      </div>
+                      {wh.metrics.map((m) => (
+                        <div key={m.label} className="space-y-0.5">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] text-muted-foreground">{m.label}</span>
+                            <span className={cn(
+                              "text-[10px] font-bold tabular-nums",
+                              m.label === "Productivity" ? productivityColor(m.value) :
+                              m.label === "Error Rate" && m.value > 3 ? "text-red-600" :
+                              m.label === "Error Rate" && m.value > 1.5 ? "text-amber-600" :
+                              "text-foreground"
+                            )}>
+                              {m.value}{m.label.includes("%") || m.label === "Error Rate" ? "%" : ""}
+                            </span>
+                          </div>
+                          <div className="h-1 rounded-full bg-muted overflow-hidden">
+                            <div
+                              className={cn(
+                                "h-full rounded-full transition-all duration-500",
+                                m.label === "Productivity" && m.value >= 90 ? "bg-emerald-500" :
+                                m.label === "Productivity" && m.value >= 80 ? "bg-amber-500" : "bg-blue-500",
+                                m.label === "Attendance" && m.value >= 90 ? "bg-emerald-500" : "bg-blue-500",
+                                m.label === "Tasks" && "bg-violet-500",
+                                m.label === "Error Rate" && m.value <= 2 ? "bg-emerald-500" :
+                                m.label === "Error Rate" && m.value <= 3 ? "bg-amber-500" : "bg-red-500"
+                              )}
+                              style={{ width: `${Math.min(100, m.value)}%` }}
+                            />
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   ))}
                 </div>

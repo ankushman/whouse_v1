@@ -107,6 +107,7 @@ export function useSimulatedEvents(options?: {
 
   const addNotificationFn = useAppStore((s) => s.addNotification)
   const activeView = useAppStore((s) => s.activeView)
+  const notifPrefs = useAppStore((s) => s.notifPrefs)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const mutedRef = useRef(false)
   const scheduleNextRef = useRef<() => void>(() => {})
@@ -117,6 +118,33 @@ export function useSimulatedEvents(options?: {
       mutedRef.current = localStorage.getItem("realtime-toasts-muted") === "true"
     }
   }, [])
+
+  // Check if event should be filtered by severity preference
+  const passesSeverityFilter = useCallback((severity: string) => {
+    const min = notifPrefs.minSeverity
+    if (min === "all") return true
+    if (min === "warning") return severity === "warning" || severity === "critical"
+    if (min === "critical") return severity === "critical"
+    return true
+  }, [notifPrefs.minSeverity])
+
+  // Check if currently in quiet hours
+  const isQuietHours = useCallback(() => {
+    if (!notifPrefs.quietHoursEnabled) return false
+    const now = new Date()
+    const hours = now.getHours()
+    const mins = now.getMinutes()
+    const currentMinutes = hours * 60 + mins
+    const [sh, sm] = notifPrefs.quietHoursStart.split(":").map(Number)
+    const [eh, em] = notifPrefs.quietHoursEnd.split(":").map(Number)
+    const startMinutes = sh * 60 + (sm ?? 0)
+    const endMinutes = eh * 60 + (em ?? 0)
+    // Handle overnight quiet hours (e.g. 22:00 to 07:00)
+    if (startMinutes > endMinutes) {
+      return currentMinutes >= startMinutes || currentMinutes < endMinutes
+    }
+    return currentMinutes >= startMinutes && currentMinutes < endMinutes
+  }, [notifPrefs.quietHoursEnabled, notifPrefs.quietHoursStart, notifPrefs.quietHoursEnd])
 
   const scheduleNext = useCallback(() => {
     const delay = minInterval + Math.random() * (maxInterval - minInterval)
@@ -132,7 +160,16 @@ export function useSimulatedEvents(options?: {
       // Should we fire?
       const shouldFire = !dashboardOnly || activeView === "dashboard"
 
-      if (shouldFire && addNotification) {
+      // Severity filter: skip if event doesn't meet minimum severity
+      const severityOk = passesSeverityFilter(event.severity)
+
+      // Quiet hours: only show critical events during quiet hours
+      const quietOk = !isQuietHours() || event.severity === "critical"
+
+      // Browser push preference
+      const pushOk = notifPrefs.browserPush
+
+      if (shouldFire && severityOk && quietOk && pushOk && addNotification) {
         addNotificationFn({
           title: event.title,
           message: event.message,
@@ -141,7 +178,7 @@ export function useSimulatedEvents(options?: {
         })
       }
 
-      if (shouldFire && showToast && !mutedRef.current) {
+      if (shouldFire && severityOk && quietOk && showToast && !mutedRef.current) {
         const toastFn = SEVERITY_TOAST[event.severity] ?? toast.info
         const duration = SEVERITY_DURATION[event.severity] ?? 4000
         toastFn(event.title, {
@@ -154,7 +191,7 @@ export function useSimulatedEvents(options?: {
       // Use ref to call the latest scheduleNext without circular dependency
       scheduleNextRef.current()
     }, delay)
-  }, [minInterval, maxInterval, showToast, addNotification, dashboardOnly, activeView, addNotificationFn, checkMuted])
+  }, [minInterval, maxInterval, showToast, addNotification, dashboardOnly, activeView, addNotificationFn, checkMuted, passesSeverityFilter, isQuietHours, notifPrefs.browserPush])
 
   // Keep ref updated
   useEffect(() => {

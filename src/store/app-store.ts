@@ -32,6 +32,36 @@ export interface AppNotification {
   read: boolean
 }
 
+export interface NotifPrefs {
+  frequency: string
+  quietHoursEnabled: boolean
+  quietHoursStart: string
+  quietHoursEnd: string
+  minSeverity: string
+  soundEnabled: boolean
+  soundVolume: string
+  emailAddress: string
+  dailyDigest: boolean
+  weeklySummary: boolean
+  browserPush: boolean
+  desktopBadge: boolean
+}
+
+const DEFAULT_NOTIF_PREFS: NotifPrefs = {
+  frequency: 'instant',
+  quietHoursEnabled: false,
+  quietHoursStart: '22:00',
+  quietHoursEnd: '07:00',
+  minSeverity: 'all',
+  soundEnabled: true,
+  soundVolume: 'medium',
+  emailAddress: 'ops@autoflow.in',
+  dailyDigest: true,
+  weeklySummary: false,
+  browserPush: true,
+  desktopBadge: true,
+}
+
 interface AppState {
   activeView: string
   setActiveView: (view: string) => void
@@ -49,6 +79,9 @@ interface AppState {
   markAllRead: () => void
   markRead: (id: string) => void
   clearNotifications: () => void
+  notifPrefs: NotifPrefs
+  setNotifPrefs: (prefs: Partial<NotifPrefs>) => void
+  resetNotifPrefs: () => void
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -86,4 +119,9 @@ export const useAppStore = create<AppState>((set) => ({
     unreadCount: state.notifications.filter((n) => !n.read && n.id !== id).length,
   })),
   clearNotifications: () => set({ notifications: [], unreadCount: 0 }),
+  notifPrefs: DEFAULT_NOTIF_PREFS,
+  setNotifPrefs: (prefs) => set((state) => ({
+    notifPrefs: { ...state.notifPrefs, ...prefs },
+  })),
+  resetNotifPrefs: () => set({ notifPrefs: DEFAULT_NOTIF_PREFS }),
 }))

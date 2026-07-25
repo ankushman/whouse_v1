@@ -50,6 +50,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useThemeStore, type AccentColor, type LayoutDensity } from "@/store/theme-store"
+import { useAppStore } from "@/store/app-store"
 import { useTheme } from "next-themes"
 import { useToast } from "@/hooks/use-toast-helper"
 import { warehouses as warehouseData, kpiMetrics } from "@/data/mock-data"
@@ -181,20 +182,8 @@ export function SettingsView() {
   const storeSetAnimations = useThemeStore((s) => s.setAnimationsEnabled)
 
   // Notification Preferences state
-  const [notifPrefs, setNotifPrefs] = useState({
-    frequency: "instant",
-    quietHoursEnabled: false,
-    quietHoursStart: "22:00",
-    quietHoursEnd: "07:00",
-    minSeverity: "all",
-    soundEnabled: true,
-    soundVolume: "medium",
-    emailAddress: "ops@autoflow.in",
-    dailyDigest: true,
-    weeklySummary: false,
-    browserPush: true,
-    desktopBadge: true,
-  })
+  const notifPrefs = useAppStore((s) => s.notifPrefs)
+  const setNotifPrefs = useAppStore((s) => s.setNotifPrefs)
 
   // Warehouse dialog
   const [warehouseDialogOpen, setWarehouseDialogOpen] = useState(false)
@@ -1245,7 +1234,7 @@ export function SettingsView() {
               </CardHeader>
               <CardContent className="space-y-5">
                 <SettingRow label="Delivery Frequency" description="How often alerts are sent">
-                  <Select value={notifPrefs.frequency} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, frequency: v })}>
+                  <Select value={notifPrefs.frequency} onValueChange={(v) => setNotifPrefs({ frequency: v })}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
@@ -1258,7 +1247,7 @@ export function SettingsView() {
                   </Select>
                 </SettingRow>
                 <SettingRow label="Minimum Severity" description="Only receive alerts at or above this level">
-                  <Select value={notifPrefs.minSeverity} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, minSeverity: v })}>
+                  <Select value={notifPrefs.minSeverity} onValueChange={(v) => setNotifPrefs({ minSeverity: v })}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
@@ -1273,11 +1262,11 @@ export function SettingsView() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <Label className="text-xs font-medium">Quiet Hours</Label>
-                    <Switch checked={notifPrefs.quietHoursEnabled} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, quietHoursEnabled: v })} />
+                    <Switch checked={notifPrefs.quietHoursEnabled} onCheckedChange={(v) => setNotifPrefs({ quietHoursEnabled: v }) } />
                   </div>
                   <p className="text-[11px] text-muted-foreground mb-2">Silence non-critical notifications during these hours</p>
                   <div className="flex items-center gap-2">
-                    <Select value={notifPrefs.quietHoursStart} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, quietHoursStart: v })}>
+                    <Select value={notifPrefs.quietHoursStart} onValueChange={(v) => setNotifPrefs({ quietHoursStart: v })}>
                       <SelectTrigger className="w-[100px] h-7 text-xs">
                         <SelectValue />
                       </SelectTrigger>
@@ -1289,7 +1278,7 @@ export function SettingsView() {
                       </SelectContent>
                     </Select>
                     <span className="text-xs text-muted-foreground">to</span>
-                    <Select value={notifPrefs.quietHoursEnd} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, quietHoursEnd: v })}>
+                    <Select value={notifPrefs.quietHoursEnd} onValueChange={(v) => setNotifPrefs({ quietHoursEnd: v })}>
                       <SelectTrigger className="w-[100px] h-7 text-xs">
                         <SelectValue />
                       </SelectTrigger>
