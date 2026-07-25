@@ -291,7 +291,7 @@ export function ReportsView() {
 
           return (
             <Card key={report.id} className={cn(
-              "card-depth hover-lift-sm data-card group rounded-xl border-border/60 shadow-sm transition-all hover:border-border",
+              "card-depth hover-lift-sm hover-border-accent data-card group rounded-xl border-border/60 shadow-sm transition-all hover:border-border",
               isGenerating && "shimmer-loading pointer-events-none"
             )}>
               <CardHeader className="pb-3">

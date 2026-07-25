@@ -170,7 +170,8 @@ export function CostAnalyticsView() {
           <CardDescription className="text-xs">Last 6 months with change percentages</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="table-container">
+          <div className="mobile-scroll-hint -mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-x-visible md:px-0">
+          <div className="table-container min-w-[540px]">
           <Table className="table-row-hover table-stripe">
             <TableHeader className="table-header-sticky-glass">
               <TableRow className="hover:bg-transparent">
@@ -201,6 +202,7 @@ export function CostAnalyticsView() {
               ))}
             </TableBody>
           </Table>
+          </div>
           </div>
         </CardContent>
       </Card>

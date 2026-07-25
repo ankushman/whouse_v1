@@ -263,9 +263,9 @@ export function SettingsView() {
 
         {/* General */}
         <TabsContent value="general">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
-              <CardTitle className="text-sm font-semibold">General Settings</CardTitle>
+              <CardTitle className="text-sm font-semibold animated-underline">General Settings</CardTitle>
               <CardDescription className="text-xs">Configure basic application settings</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -340,11 +340,11 @@ export function SettingsView() {
 
         {/* Warehouses Tab — Real CRUD */}
         <TabsContent value="warehouses">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <CardTitle className="text-sm font-semibold">Warehouse Management</CardTitle>
+                  <CardTitle className="text-sm font-semibold animated-underline">Warehouse Management</CardTitle>
                   <CardDescription className="text-xs">Manage warehouse configurations and details</CardDescription>
                 </div>
                 <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddWarehouse}>
@@ -492,11 +492,11 @@ export function SettingsView() {
 
         {/* Customers Tab */}
         <TabsContent value="customers">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <CardTitle className="text-sm font-semibold">Customer Management</CardTitle>
+                  <CardTitle className="text-sm font-semibold animated-underline">Customer Management</CardTitle>
                   <CardDescription className="text-xs">Manage OEM and supplier customer profiles</CardDescription>
                 </div>
                 <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddCustomer}>
@@ -667,11 +667,11 @@ export function SettingsView() {
 
         {/* Transporters Tab */}
         <TabsContent value="transporters">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <CardTitle className="text-sm font-semibold">Transporter Management</CardTitle>
+                  <CardTitle className="text-sm font-semibold animated-underline">Transporter Management</CardTitle>
                   <CardDescription className="text-xs">Manage logistics partners and fleet providers</CardDescription>
                 </div>
                 <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddTransporter}>
@@ -820,11 +820,11 @@ export function SettingsView() {
 
         {/* Users */}
         <TabsContent value="users">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-sm font-semibold">User Management</CardTitle>
+                  <CardTitle className="text-sm font-semibold animated-underline">User Management</CardTitle>
                   <CardDescription className="text-xs">Manage users and their access levels</CardDescription>
                 </div>
                 <Button size="sm" className="gap-1.5 h-8 text-xs">
@@ -881,11 +881,11 @@ export function SettingsView() {
 
         {/* Roles */}
         <TabsContent value="roles">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-sm font-semibold">Roles & Permissions</CardTitle>
+                  <CardTitle className="text-sm font-semibold animated-underline">Roles & Permissions</CardTitle>
                   <CardDescription className="text-xs">Define roles and access permissions</CardDescription>
                 </div>
                 <Button size="sm" className="gap-1.5 h-8 text-xs">
@@ -924,11 +924,11 @@ export function SettingsView() {
 
         {/* KPI Config Tab — Real Configuration */}
         <TabsContent value="kpi">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <CardTitle className="text-sm font-semibold">KPI Target Configuration</CardTitle>
+                  <CardTitle className="text-sm font-semibold animated-underline">KPI Target Configuration</CardTitle>
                   <CardDescription className="text-xs">Set target values and alert thresholds for each KPI</CardDescription>
                 </div>
                 <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={() => toast.success("KPI targets saved", { description: "Thresholds updated for all warehouses", duration: 3000 })}>
@@ -1046,9 +1046,9 @@ export function SettingsView() {
 
         {/* Notifications */}
         <TabsContent value="notifications">
-          <Card className="rounded-xl border-border/60 shadow-sm">
+          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
-              <CardTitle className="text-sm font-semibold">Notification Settings</CardTitle>
+              <CardTitle className="text-sm font-semibold animated-underline">Notification Settings</CardTitle>
               <CardDescription className="text-xs">Configure how and when you receive notifications</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">

@@ -1649,6 +1649,307 @@
   animation: breathe 1.5s ease-in-out infinite;
 }
 
+/* ── Round 14 Mobile + Interaction CSS ─────────────────────── */
+
+/* Mobile swipe hint indicator */
+.swipe-hint-left {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 64px;
+  background: linear-gradient(to right, oklch(from var(--primary) l c h / 0.15), transparent);
+  border-radius: 0 8px 8px 0;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.swipe-hint-left.visible {
+  opacity: 1;
+}
+
+.swipe-hint-right {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 64px;
+  background: linear-gradient(to left, oklch(from var(--primary) l c h / 0.15), transparent);
+  border-radius: 8px 0 0 8px;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.swipe-hint-right.visible {
+  opacity: 1;
+}
+
+/* Mobile overflow scroll indicator */
+.mobile-scroll-hint {
+  position: relative;
+}
+.mobile-scroll-hint::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  background: linear-gradient(to left, oklch(from var(--card) l c h / 1), transparent);
+  pointer-events: none;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Nav item tap feedback */
+.nav-tap-feedback {
+  transition: transform 0.1s ease;
+}
+.nav-tap-feedback:active {
+  transform: scale(0.92);
+}
+
+/* Ripple effect for nav buttons */
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), oklch(from var(--primary) l c h / 0.12) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.ripple-effect:active::after {
+  opacity: 1;
+}
+
+/* Mobile safe area padding bottom for scrollable content */
+.mobile-safe-bottom {
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Glass morphism card for mobile */
+.mobile-glass-card {
+  background: oklch(from var(--card) l c h / 0.7);
+  backdrop-filter: blur(12px) saturate(1.3);
+  border: 1px solid oklch(from var(--border) l c h / 0.3);
+}
+
+/* Responsive text truncation */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Active nav bottom bar */
+.nav-active-bar {
+  position: absolute;
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pulse animation for live indicators */
+.live-pulse {
+  animation: livePulse 2s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Smooth page content transition on mobile */
+.page-content-transition {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.page-content-transition.entering {
+  opacity: 0;
+  transform: translateX(8px);
+}
+.page-content-transition.exiting {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+/* ── Round 14 CSS Utilities ──────────────────────────────── */
+
+/* Toast notification entrance animation */
+.toast-enter {
+  animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(100%) scale(0.95); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* Glass card with gradient border */
+.card-glass-gradient {
+  position: relative;
+  background: oklch(from var(--card) l c h / 0.6);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid oklch(from var(--border) l c h / 0.4);
+}
+.card-glass-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, oklch(0.65 0.2 250 / 0.3), oklch(0.7 0.15 160 / 0.2), oklch(0.75 0.15 85 / 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Skeleton with gradient animation */
+.skeleton-gradient {
+  background: linear-gradient(
+    90deg,
+    oklch(from var(--muted) l c h / 0.5) 0%,
+    oklch(from var(--muted) l c h / 0.8) 50%,
+    oklch(from var(--muted) l c h / 0.5) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonGradient 1.5s ease-in-out infinite;
+}
+@keyframes skeletonGradient {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Hover zoom effect */
+.hover-zoom {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-zoom:hover {
+  transform: scale(1.02);
+}
+
+/* Animated underline */
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: oklch(from var(--primary) l c h / 0.6);
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+/* Dot grid pattern background */
+.dot-grid-pattern {
+  background-image: radial-gradient(circle, oklch(from var(--border) l c h / 0.4) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Fade from bottom */
+.fade-from-bottom {
+  animation: fadeFromBottom 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes fadeFromBottom {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Status indicator bar (vertical) */
+.status-bar {
+  position: relative;
+}
+.status-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  border-radius: 2px;
+  background: oklch(from var(--primary) l c h / 0.6);
+}
+.status-bar-success::before { background: oklch(0.65 0.2 145); }
+.status-bar-warning::before { background: oklch(0.75 0.18 85); }
+.status-bar-critical::before { background: oklch(0.6 0.24 25); }
+.status-bar-info::before { background: oklch(0.6 0.15 250); }
+
+/* Numeric tabular with monospace for data grids */
+.data-grid-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum", "ss01";
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Card hover border transition */
+.hover-border-accent {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-border-accent:hover {
+  border-color: oklch(from var(--primary) l c h / 0.5);
+  box-shadow: 0 0 0 1px oklch(from var(--primary) l c h / 0.1);
+}
+
+/* Pill badge with left indicator */
+.pill-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: oklch(from var(--muted) l c h / 0.5);
+  color: oklch(from var(--foreground) l c h / 0.8);
+}
+.pill-indicator::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Smooth scroll container */
+.scroll-smooth-container {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Text gradient for headings */
+.heading-gradient {
+  background: linear-gradient(135deg, oklch(from var(--foreground) l c h / 1) 0%, oklch(from var(--primary) l c h / 0.8) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* ── Print Styles ──────────────────────────────────────────── */
 @media print {
   /* Hide interactive elements */

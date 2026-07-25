@@ -144,7 +144,7 @@ export function TransportationView() {
       )}
 
       {/* Fleet Table */}
-      <Tabs value={view} onValueChange={setView}>
+      <Tabs value={view} onValueChange={setView} className="-mx-4 overflow-x-auto px-4 md:mx-0 md:overflow-x-visible md:px-0">
         <TabsList>
           <TabsTrigger value="all" className="text-xs">All ({summary.total})</TabsTrigger>
           <TabsTrigger value="in-transit" className="text-xs">In Transit ({summary.inTransit})</TabsTrigger>
@@ -154,6 +154,7 @@ export function TransportationView() {
         </TabsList>
       </Tabs>
 
+      <div className="mobile-scroll-hint -mx-4 overflow-x-auto px-4 md:mx-0 md:overflow-x-visible md:px-0">
       <DataTable
         data={filtered as any[]}
         columns={[
@@ -174,6 +175,7 @@ export function TransportationView() {
         ] as Column<any>[]}
         pageSize={8}
       />
+      </div>
     </div>
   )
 }

@@ -3,8 +3,9 @@
 import { useMemo } from "react"
 import { cn } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
-import { TrendingUp, TrendingDown, Minus, type LucideIcon } from "lucide-react"
+import { TrendingUp, TrendingDown, Minus, ChevronRight, type LucideIcon } from "lucide-react"
 import { AnimatedCounter } from "@/components/shared/animated-counter"
+import { KPIDetailPopover } from "@/components/shared/kpi-detail-popover"
 
 interface KPICardProps {
   title: string
@@ -15,6 +16,8 @@ interface KPICardProps {
   subtitle?: string
   index?: number
   colorClass?: string
+  /** Optional custom breakdown data for the detail popover */
+  breakdown?: { label: string; value: string; change: number }[]
 }
 
 const VALUE_PATTERN = /^([^\d.,\s]*)([\d,.]+)([^\d.]*)$/
@@ -46,15 +49,20 @@ function parseValue(value: string | number): {
   return { numericValue, prefix, suffix, decimals }
 }
 
-export function KPICard({ title, value, change = 0, trend = "neutral", icon: Icon, subtitle, index = 0, colorClass = "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" }: KPICardProps) {
+export function KPICard({ title, value, change = 0, trend = "neutral", icon: Icon, subtitle, index = 0, colorClass = "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400", breakdown }: KPICardProps) {
   const parsed = useMemo(() => parseValue(value), [value])
 
-  return (
-    <Card className="group kpi-shimmer card-hover-glow stat-card-highlight card-depth shadow-card relative overflow-hidden rounded-xl border border-border/60 bg-card transition-smooth hover:shadow-card-hover hover:border-border">
+  const cardContent = (
+    <Card className={cn(
+      "group kpi-shimmer card-hover-glow stat-card-highlight card-depth shadow-card relative overflow-hidden rounded-xl border border-border/60 bg-card transition-smooth hover:shadow-card-hover hover:border-border cursor-pointer"
+    )}>
       <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div className="flex-1 space-y-1">
-            <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{title}</p>
+            <div className="flex items-center gap-1">
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{title}</p>
+              <ChevronRight className="h-3 w-3 text-muted-foreground/40 group-hover:text-muted-foreground/70 transition-colors" />
+            </div>
             <div className="flex items-baseline gap-2">
               {parsed ? (
                 <p className="text-2xl font-bold tracking-tight text-foreground">
@@ -92,5 +100,11 @@ export function KPICard({ title, value, change = 0, trend = "neutral", icon: Ico
         </div>
       </CardContent>
     </Card>
+  )
+
+  return (
+    <KPIDetailPopover title={title} value={value} breakdown={breakdown}>
+      {cardContent}
+    </KPIDetailPopover>
   )
 }
