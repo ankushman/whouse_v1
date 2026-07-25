@@ -1033,7 +1033,7 @@
     oklch(1 0 0 / 0.3) 50%,
     transparent 100%
   );
-  animation: shimmer 1.8s ease-in-out infinite;
+  animation: shimmer-slide-translate 1.8s ease-in-out infinite;
 }
 .dark .skeleton-shimmer::after {
   background: linear-gradient(
@@ -1044,7 +1044,7 @@
   );
 }
 
-@keyframes shimmer {
+@keyframes shimmer-slide-translate {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
@@ -4527,16 +4527,7 @@ html.theme-transition body {
 .stagger-children > * {
   animation: staggerFadeIn 0.35s ease-out both;
 }
-@keyframes staggerFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* Note: staggerFadeIn keyframe defined earlier (line 4354) — reused here */
 .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
 .stagger-children > *:nth-child(2) { animation-delay: 40ms; }
 .stagger-children > *:nth-child(3) { animation-delay: 80ms; }
@@ -4655,7 +4646,7 @@ html.theme-transition body {
     oklch(1 0 0 / 0.4) 50%,
     transparent 100%
   );
-  animation: shimmer-slide 1.5s infinite;
+  animation: shimmer-slide-xform 1.5s infinite;
 }
 .dark .shimmer::after {
   background: linear-gradient(
@@ -4665,7 +4656,7 @@ html.theme-transition body {
     transparent 100%
   );
 }
-@keyframes shimmer-slide {
+@keyframes shimmer-slide-xform {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
@@ -4727,9 +4718,9 @@ html.theme-transition body {
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: gradient-rotate 4s linear infinite;
+  animation: gradient-rotate-bg 4s linear infinite;
 }
-@keyframes gradient-rotate {
+@keyframes gradient-rotate-bg {
   from { background: linear-gradient(0deg, oklch(0.7 0.15 250), oklch(0.7 0.15 150), oklch(0.7 0.15 200)); }
   to { background: linear-gradient(360deg, oklch(0.7 0.15 250), oklch(0.7 0.15 150), oklch(0.7 0.15 200)); }
 }
@@ -5255,9 +5246,9 @@ html.theme-transition body {
 
 /* ── Notification badge bounce ── */
 .badge-bounce {
-  animation: badge-bounce-anim 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: badge-pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-@keyframes badge-bounce-anim {
+@keyframes badge-pop-in {
   0% { transform: scale(0); }
   60% { transform: scale(1.2); }
   100% { transform: scale(1); }
@@ -5595,4 +5586,156 @@ html.theme-transition body {
 }
 :is(.dark) .focus-ring-primary:focus {
   box-shadow: 0 0 0 2px oklch(0.15 0 0 / 0.8), 0 0 0 4px oklch(0.55 0.2 250 / 0.4);
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Round 28 — Inventory Detail Drawer + Micro-interactions                */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+/* Drawer slide-in with subtle bounce */
+@keyframes drawer-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.98);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-8px) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+.drawer-slide-in {
+  animation: drawer-slide-in 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Stat card hover lift with subtle glow */
+.stat-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.stat-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px -2px oklch(0.4 0 0 / 0.1), 0 2px 4px -1px oklch(0.4 0 0 / 0.06);
+}
+:is(.dark) .stat-card-hover:hover {
+  box-shadow: 0 4px 12px -2px oklch(0 0 0 / 0.3), 0 2px 4px -1px oklch(0 0 0 / 0.2);
+}
+
+/* Movement row entrance — left slide-in for history items */
+@keyframes movement-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.movement-row-in {
+  animation: movement-row-in 0.25s ease-out both;
+}
+
+/* Health score badge — pulsing border for critical status */
+@keyframes critical-pulse-border {
+  0%, 100% {
+    box-shadow: 0 0 0 0 oklch(0.58 0.24 27 / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px oklch(0.58 0.24 27 / 0);
+  }
+}
+.critical-pulse-border {
+  animation: critical-pulse-border 1.6s ease-out infinite;
+}
+
+/* Reorder button urgent glow */
+@keyframes reorder-urgent-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 oklch(0.58 0.24 27 / 0.5), 0 1px 2px oklch(0 0 0 / 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 6px oklch(0.58 0.24 27 / 0), 0 1px 2px oklch(0 0 0 / 0.1);
+  }
+}
+.reorder-urgent {
+  animation: reorder-urgent-glow 1.8s ease-out infinite;
+}
+
+/* Drawer header gradient shimmer — subtle moving highlight */
+@keyframes drawer-header-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.drawer-header-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.6 0.2 250 / 0.04) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: drawer-header-shimmer 4s linear infinite;
+}
+
+/* Stock level progress fill animation */
+@keyframes stock-fill-grow {
+  from { width: 0%; }
+}
+.stock-fill-animate > div {
+  animation: stock-fill-grow 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Number ticker for stock values */
+@keyframes number-ticker-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.number-ticker {
+  animation: number-ticker-up 0.3s ease-out;
+}
+
+/* Subtle border glow on focus for inventory cards */
+.inventory-card-focus:focus-within {
+  border-color: oklch(0.55 0.2 250 / 0.4);
+  box-shadow: 0 0 0 2px oklch(0.55 0.2 250 / 0.15);
+}
+
+/* Tabular number alignment for all .text-number instances (reaffirmed) */
+.text-number {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Hover ripple effect on table rows */
+@keyframes row-hover-ripple {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.row-hover-ripple:hover {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.55 0.2 250 / 0.04) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: row-hover-ripple 1.2s linear infinite;
+}
+
+/* Smooth color transition for status badges */
+.status-badge-smooth {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }

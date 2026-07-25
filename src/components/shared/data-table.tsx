@@ -144,21 +144,20 @@ export function DataTable<T extends Record<string, any>>({
     onSelectionChangeRef.current = onSelectionChange
   })
   const [expandedRowKeys, setExpandedRowKeys] = useState<Set<string>>(new Set())
-  const [sortColumn, setSortColumn] = useState<string | null>(null)
-  const [sortDirection, setSortDirection] = useState<SortDirection>(null)
-  // Sort state as a single reducer to avoid nested setState anti-pattern
+  // Sort state as a single reducer to avoid nested setState anti-pattern in handleSort.
+  // Previously sortColumn and sortDirection were two separate useState hooks, and handleSort
+  // called setSortDirection inside setSortColumn's updater — an explicit React anti-pattern.
   const [sortState, sortDispatch] = useReducer(
     (prev: { column: string | null; direction: SortDirection }, action: { key: string }) => {
-      if (prev.column !== action.key) return { column: action.key, direction: "asc" }
-      if (prev.direction === "asc") return { column: action.key, direction: "desc" }
+      if (prev.column !== action.key) return { column: action.key, direction: "asc" as SortDirection }
+      if (prev.direction === "asc") return { column: action.key, direction: "desc" as SortDirection }
       if (prev.direction === "desc") return { column: null, direction: null }
-      return { column: action.key, direction: "asc" }
+      return { column: action.key, direction: "asc" as SortDirection }
     },
     { column: null, direction: null as SortDirection }
   )
-  // Derived sort values from reducer for backward compatibility
-  sortColumn = sortState.column
-  sortDirection = sortState.direction
+  const sortColumn = sortState.column
+  const sortDirection = sortState.direction
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedRowIds, setSelectedRowIds] = useState<Set<string>>(new Set())
@@ -312,16 +311,9 @@ export function DataTable<T extends Record<string, any>>({
   )
 
   // --- Sort handler ---
+  // Single dispatch updates both column and direction atomically (no nested setState).
   const handleSort = useCallback((key: string) => {
-    setSortColumn((prevCol) => {
-      setSortDirection((prevDir) => {
-        if (prevCol !== key) return "asc"
-        if (prevDir === "asc") return "desc"
-        if (prevDir === "desc") return null
-        return "asc"
-      })
-      return key
-    })
+    sortDispatch({ key })
     setCurrentPage(1)
   }, [])
 

@@ -45,6 +45,8 @@ import {
   ScanBarcode,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { InventoryDetailDrawer, type InventoryDetailRow } from "@/components/shared/inventory-detail-drawer";
+import { useToast } from "@/hooks/use-toast-helper";
 
 const ABC_COLORS = {
   A: "#3b82f6",
@@ -105,6 +107,27 @@ export function InventoryView() {
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("All");
   const [abcFilter, setAbcFilter] = useState<AbcFilter>("All");
   const [scannerOpen, setScannerOpen] = useState(false);
+  const [detailItem, setDetailItem] = useState<InventoryDetailRow | null>(null);
+  const [detailOpen, setDetailOpen] = useState(false);
+  const toast = useToast();
+
+  const openDetail = useCallback((item: InventoryDetailRow) => {
+    setDetailItem(item);
+    setDetailOpen(true);
+  }, []);
+
+  const handleReorder = useCallback((item: InventoryDetailRow) => {
+    const deficit = (item.minStock ?? 0) - item.quantity;
+    toast.success(
+      "Reorder placed",
+      `${item.sku} — ${Math.max(0, deficit + (item.minStock ?? 0))} units ordered from supplier`
+    );
+    setDetailOpen(false);
+  }, [toast]);
+
+  const handleRefresh = useCallback((item: InventoryDetailRow) => {
+    toast.info("Refreshing inventory", `Recounting ${item.sku} stock levels...`);
+  }, [toast]);
 
   const filteredItems = useMemo(() => {
     return inventoryItems.filter((item) => {
@@ -522,6 +545,7 @@ export function InventoryView() {
             batchActions={batchActions}
             pageSize={10}
             showCount
+            onRowClick={(row) => openDetail(row as unknown as InventoryDetailRow)}
           />
         </TabsContent>
 
@@ -542,7 +566,11 @@ export function InventoryView() {
                 const deficit = item.minStock - item.quantity;
                 const stockPercent = Math.round((item.quantity / item.minStock) * 100);
                 return (
-                  <Card key={item.id} className="border-red-200 dark:border-red-900">
+                  <Card
+                    key={item.id}
+                    className="border-red-200 dark:border-red-900 cursor-pointer hover:shadow-md hover:border-red-300 dark:hover:border-red-800 transition-all"
+                    onClick={() => openDetail(item as unknown as InventoryDetailRow)}
+                  >
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0 flex-1">
@@ -578,6 +606,15 @@ export function InventoryView() {
         open={scannerOpen}
         onOpenChange={setScannerOpen}
         inventoryItems={inventoryItems}
+      />
+
+      {/* Inventory Detail Drawer */}
+      <InventoryDetailDrawer
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        item={detailItem}
+        onReorder={handleReorder}
+        onRefresh={handleRefresh}
       />
     </div>
   );

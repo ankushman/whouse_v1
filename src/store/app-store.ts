@@ -34,14 +34,22 @@ export interface AppNotification {
   read: boolean
 }
 
+/**
+ * Notification preferences with strict union types for enum-like fields.
+ * This prevents typos like setNotifPrefs({ minSeverity: "warningg" }) at compile time.
+ */
+export type NotifFrequency = 'instant' | 'hourly' | 'daily' | '1hr' | '4hr'
+export type NotifSeverity = 'all' | 'warning' | 'critical'
+export type NotifVolume = 'low' | 'medium' | 'high'
+
 export interface NotifPrefs {
-  frequency: string
+  frequency: NotifFrequency
   quietHoursEnabled: boolean
   quietHoursStart: string
   quietHoursEnd: string
-  minSeverity: string
+  minSeverity: NotifSeverity
   soundEnabled: boolean
-  soundVolume: string
+  soundVolume: NotifVolume
   emailAddress: string
   dailyDigest: boolean
   weeklySummary: boolean

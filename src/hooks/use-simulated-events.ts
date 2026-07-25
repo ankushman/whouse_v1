@@ -57,13 +57,6 @@ function pickRandomEvent(): EventTemplate {
   return EVENT_TEMPLATES[EVENT_TEMPLATES.length - 1]
 }
 
-// Generate a realistic delay between events (15-45 seconds, occasionally shorter)
-function getRandomInterval(): number {
-  const base = 20000 // 20 seconds base
-  const variance = Math.random() * 25000 // 0-25s variance
-  return base + variance
-}
-
 // Severity → toast function mapping
 const SEVERITY_TOAST: Record<string, typeof toast.info> = {
   critical: toast.error,

@@ -2533,3 +2533,126 @@ Updated Project Status (Post Round 27 - Complete):
   7. Add warehouse geographic clustering with actual lat/lng positioning
   8. Consolidate inline mock data from route-optimization/sla-countdown/warehouse-health into mock-data.ts
   9. Migrate remaining use-toast.ts consumers to sonner-based use-toast-helper.ts (two toast systems coexist)
+
+---
+Task ID: 29
+Agent: Main (Cron Review - Round 28)
+Task: Deep code audit, 5 bug fixes, Inventory Detail Drawer feature, CSS micro-interactions, AppStore type safety
+
+Work Log:
+- QA Assessment: lint 0 errors, build successful (compiled in 16.1s, GET / 200)
+- agent-browser QA: attempted but failed — sandbox network isolation prevents browser from reaching localhost:3000 (ERR_CONNECTION_REFUSED). This is a known environmental limitation documented since Round 4. Fell back to deep code audit via static analysis.
+- Deep code audit (subagent-assisted) identified 15 issues across 5 files:
+  - 1 CRITICAL runtime bug in DataTable (pageSize vs safePageSize mismatch on line 506)
+  - 1 React anti-pattern (nested setState in handleSort)
+  - 1 wasteful WebSocket reconnect (maxEvents in effect deps)
+  - 5 duplicate CSS @keyframes names in globals.css
+  - 1 dead code function (getRandomInterval)
+  - Type safety improvements (any → unknown, loose string → union types)
+  - Cross-cutting toast API inconsistency (sonner direct vs use-toast-helper)
+
+Bug Fixes (5):
+1. **DataTable row ID corruption (CRITICAL)** — `data-table.tsx:506`
+   - Render path used raw `pageSize` while selection logic used `safePageSize` (clamped to ≥1)
+   - When `pageSize=0` or negative, row IDs would diverge between selection and render
+   - Result: checkboxes would appear checked but not actually be selected, or vice versa
+   - Fix: replaced `pageSize` with `safePageSize` on line 506
+2. **DataTable handleSort nested setState anti-pattern** — `data-table.tsx:302-313`
+   - `setSortDirection` was called inside `setSortColumn`'s updater function
+   - Explicitly warned against in React docs; unreliable in concurrent mode
+   - Fix: replaced two `useState` hooks (sortColumn, sortDirection) with a single `useReducer(sortState, sortDispatch)`. handleSort now calls `sortDispatch({ key })` once. Atomic update, no nesting.
+3. **use-realtime-events wasteful WebSocket reconnect** — `use-realtime-events.ts:75`
+   - `maxEvents` was in the socket setup effect's dependency array
+   - Changing maxEvents (only controls local state slicing) caused full socket teardown + reconnect + visible "disconnected → connected" flicker
+   - Fix: captured maxEvents in `maxEventsRef` (useRef + sync effect). Removed maxEvents from socket effect deps. Event handler now reads `maxEventsRef.current` to avoid stale closure.
+4. **CSS duplicate @keyframes (5 names)** — `globals.css`
+   - Found 5 duplicate keyframe names: `shimmer`, `shimmer-slide`, `gradient-rotate`, `badge-bounce-anim`, `staggerFadeIn`
+   - Browser silently uses last-defined; earlier definitions were dead code
+   - Fix: renamed duplicates to `shimmer-slide-translate`, `shimmer-slide-xform`, `gradient-rotate-bg`, `badge-pop-in`. Removed the near-identical duplicate `staggerFadeIn` (kept earlier 8px version). Updated all 4 class references to use new names.
+   - Verified: `rg -o '@keyframes\s+([\w-]+)' globals.css -r '$1' | sort | uniq -d` returns empty (no duplicates)
+5. **Dead code removal** — `use-simulated-events.ts:61-65`
+   - `getRandomInterval()` function was defined but never called anywhere in the codebase
+   - The hook's `scheduleNext` computes delay inline
+   - Fix: removed the dead function
+
+New Features:
+1. **Inventory Detail Drawer** — `src/components/shared/inventory-detail-drawer.tsx` (new file, ~435 lines)
+   - Right-side Sheet drawer that opens when user clicks any inventory row or stock-alert card
+   - Header: gradient accent, item icon (red AlertTriangle if low stock), part name, SKU, category/class/warehouse badges
+   - Stock Health banner: color-coded (red/amber/emerald) with score 0-100 and label (Critical/At Risk/Monitor/Healthy)
+   - Stock Level card: 3-column grid (Current/Min/Max) with progress bar showing capacity %
+   - Reorder warning banner when below min stock (red border, deficit shown)
+   - Quick Stats grid (6 cells): Last Count, Variance, Unit Price, Inventory Value, Daily Velocity, Days of Stock
+   - Velocity calculated from mock movement history (units/day outflow)
+   - Days of Stock = quantity / velocity (red if <7d, amber if <14d)
+   - Supplier & Replenishment section (conditional on supplier/leadTime/reorderPoint fields)
+   - Recent Movements list: 8 deterministic mock entries (IN/OUT/ADJ/COUNT) with staggered slide-in animation (movement-row-in class, 30ms delay per row)
+   - Footer: Refresh + Reorder Now buttons. Reorder button has `reorder-urgent` pulsing glow animation when stock is low.
+   - Reorder action fires `toast.success("Reorder placed", ...)` via use-toast-helper
+   - Hooks correctly placed before early return (rules-of-hooks compliant)
+   - Exported from `src/components/shared/index.ts`
+   - Integrated into `inventory-view.tsx`:
+     - Added `onRowClick` to DataTable → opens drawer
+     - Stock alert cards now clickable (cursor-pointer + hover shadow) → opens drawer
+     - Added `useToast()` for reorder/refresh confirmations
+2. **AppStore type safety** — `src/store/app-store.ts`
+   - Added 3 union types: `NotifFrequency`, `NotifSeverity`, `NotifVolume`
+   - Updated `NotifPrefs` interface to use these unions instead of loose `string`
+   - Benefit: typos like `setNotifPrefs({ minSeverity: "warningg" })` now fail at compile time
+   - Updated `settings-view.tsx` to cast Select onValueChange values to the union types
+3. **13 new CSS micro-interaction classes** — `globals.css` (lines 5591-5741)
+   - `drawer-slide-in`: slide-in from right with subtle bounce (cubic-bezier easing)
+   - `stat-card-hover`: translateY(-2px) + soft shadow on hover
+   - `movement-row-in`: left slide-in for history list items (staggered)
+   - `critical-pulse-border`: pulsing red box-shadow ring for critical status
+   - `reorder-urgent-glow`: urgent pulsing glow on reorder button (1.8s loop)
+   - `drawer-header-shimmer`: moving highlight across drawer header (4s loop)
+   - `stock-fill-grow`: progress bar fill animation (0.8s)
+   - `number-ticker-up`: number entrance animation (translateY 4px → 0)
+   - `inventory-card-focus`: primary-tinted focus-within ring
+   - `text-number` (reaffirmed): tabular-nums + tnum font feature
+   - `row-hover-ripple`: animated diagonal shimmer on row hover
+   - `status-badge-smooth`: smooth color transitions for badges
+
+Verification:
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully in 16.0s, all 7 routes generated
+- Dev server: started cleanly, GET / 200, /api/inventory 200, /api/warehouses 200
+- Duplicate keyframes: 0 remaining (verified via `rg | uniq -d`)
+
+Stage Summary:
+- 7 files changed: data-table.tsx, use-realtime-events.ts, use-simulated-events.ts, globals.css, app-store.ts, settings-view.tsx, inventory-view.tsx, shared/index.ts
+- 1 new file: inventory-detail-drawer.tsx (~435 lines)
+- 5 bugs fixed (1 CRITICAL, 1 anti-pattern, 1 perf, 5 CSS dupes, 1 dead code)
+- 3 new features: Inventory Detail Drawer, AppStore union types, 13 CSS micro-interactions
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+
+---
+Updated Project Status (Post Round 28 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (18): Dashboard, Operations Overview, Warehouses, Inbound, Outbound, Inventory (+Detail Drawer NEW), Transportation, Route Optimization, Equipment, Employees, Productivity, Cost Analytics, Alerts, Dock Scheduling, SLA Countdown, Reports, Settings, Warehouse Map
+- SHARED COMPONENTS (38): All previous + InventoryDetailDrawer (NEW)
+- HOOKS (9): All previous
+- CSS UTILITIES (345+): 332+ previous + 13 new (Round 28)
+- DATATABLE MODULES (9): Transportation, Inbound, Outbound, Inventory (+row click → drawer), Equipment, Warehouses, Employees, ShipmentTrackingTable, WarehouseKPIComparison
+- DATATABLE BUGS FIXED: row ID mismatch (pageSize→safePageSize), nested setState in handleSort (→useReducer)
+- REALTIME: use-realtime-events no longer reconnects on maxEvents change (ref-based)
+- TYPE SAFETY: NotifPrefs fields now use union types (NotifFrequency, NotifSeverity, NotifVolume)
+- CSS HYGIENE: 5 duplicate @keyframes names resolved (0 duplicates remaining)
+- INVENTORY DETAIL DRAWER: Stock health score, velocity/days-of-stock calc, movement history, reorder CTA with urgent glow
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- KNOWN ISSUES: Dev server OOM in sandbox (environmental); agent-browser can't reach localhost (network isolation)
+- PRIORITY NEXT:
+  1. Add mobile pull-to-refresh gesture
+  2. Add employee performance alerts/notification thresholds
+  3. Make DataTable Column.render type-safe (replace value: any with T[keyof T])
+  4. Further CSS consolidation: audit 345+ classes for unused/redundant definitions
+  5. Enhance Dock Scheduler with drag-and-drop assignment (dnd-kit already installed)
+  6. Add Supabase persistence for real data
+  7. Add warehouse geographic clustering with actual lat/lng positioning
+  8. Consolidate inline mock data from route-optimization/sla-countdown/warehouse-health into mock-data.ts
+  9. Migrate remaining direct sonner imports (export-button, ai-insights-panel, sla-monitoring-panel, shift-handover-panel, shipment-tracking-table, use-live-toast, use-simulated-events) to use-toast-helper for consistency
+  10. Add similar detail drawers to other modules (Equipment, Shipments, Employees already has modal)

@@ -50,7 +50,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useThemeStore, type AccentColor, type LayoutDensity } from "@/store/theme-store"
-import { useAppStore } from "@/store/app-store"
+import { useAppStore, type NotifFrequency, type NotifSeverity, type NotifVolume } from "@/store/app-store"
 import { useTheme } from "next-themes"
 import { useToast } from "@/hooks/use-toast-helper"
 import { warehouses as warehouseData, kpiMetrics } from "@/data/mock-data"
@@ -1234,7 +1234,7 @@ export function SettingsView() {
               </CardHeader>
               <CardContent className="space-y-5">
                 <SettingRow label="Delivery Frequency" description="How often alerts are sent">
-                  <Select value={notifPrefs.frequency} onValueChange={(v) => setNotifPrefs({ frequency: v })}>
+                  <Select value={notifPrefs.frequency} onValueChange={(v) => setNotifPrefs({ frequency: v as NotifFrequency })}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
@@ -1247,7 +1247,7 @@ export function SettingsView() {
                   </Select>
                 </SettingRow>
                 <SettingRow label="Minimum Severity" description="Only receive alerts at or above this level">
-                  <Select value={notifPrefs.minSeverity} onValueChange={(v) => setNotifPrefs({ minSeverity: v })}>
+                  <Select value={notifPrefs.minSeverity} onValueChange={(v) => setNotifPrefs({ minSeverity: v as NotifSeverity })}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
@@ -1306,7 +1306,7 @@ export function SettingsView() {
                   <Switch checked={notifPrefs.soundEnabled} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, soundEnabled: v })} />
                 </SettingRow>
                 <SettingRow label="Sound Volume">
-                  <Select value={notifPrefs.soundVolume} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, soundVolume: v })}>
+                  <Select value={notifPrefs.soundVolume} onValueChange={(v) => setNotifPrefs({ ...notifPrefs, soundVolume: v as NotifVolume })}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
