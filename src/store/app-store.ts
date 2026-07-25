@@ -1,14 +1,7 @@
 import { create } from 'zustand'
+import type { Role, NavItem } from '@/types'
 
-export type Role = 'super_admin' | 'executive' | 'regional_manager' | 'warehouse_manager' | 'supervisor' | 'operator'
-
-export interface NavItem {
-  id: string
-  label: string
-  icon: string
-  badge?: number
-  roles: Role[]
-}
+export type { Role, NavItem }
 
 export const navItems: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: 'LayoutDashboard', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },

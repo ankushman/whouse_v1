@@ -50,5 +50,22 @@ test
 prompt
 
 server.log
+
 # Skills directory
 /skills/
+
+# Temp and generated files
+/tool-results/
+/download/
+/upload/
+/tests/
+
+# Database files
+*.db
+db/*.db
+
+# Agent context
+/agent-ctx/
+
+# Build artifacts
+*.tsbuildinfo

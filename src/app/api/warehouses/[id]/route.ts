@@ -1,61 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin, isSupabaseConfigured } from '@/lib/supabase'
-import { warehouses } from '@/data/mock-data'
+import {
+  getWarehouseById,
+  updateWarehouse,
+  deleteWarehouse,
+} from '@/services'
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  if (!isSupabaseConfigured()) {
-    const { id } = await params
-    const warehouse = warehouses.find(w => w.id === id)
-    if (!warehouse) return NextResponse.json({ error: 'Not found' }, { status: 404 })
-    return NextResponse.json({ data: warehouse })
-  }
-  try {
-    const { id } = await params
-    const { data, error } = await supabaseAdmin
-      .from('warehouses')
-      .select('*')
-      .eq('id', id)
-      .eq('is_active', true)
-      .single()
-
-    if (error || !data) {
-      return NextResponse.json({ error: 'Not found' }, { status: 404 })
-    }
-
-    return NextResponse.json({ data })
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error'
-    return NextResponse.json({ error: message }, { status: 500 })
-  }
+  const { id } = await params
+  const result = await getWarehouseById(id)
+  if (result.error)
+    return NextResponse.json({ error: result.error }, { status: 404 })
+  return NextResponse.json(result)
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params
     const body = await request.json()
-
-    const { data, error } = await supabaseAdmin
-      .from('warehouses')
-      .update({
-        ...body,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('id', id)
-      .eq('is_active', true)
-      .select()
-      .single()
-
-    if (error || !data) {
-      return NextResponse.json({ error: 'Not found' }, { status: 404 })
-    }
-
-    return NextResponse.json({ data })
+    const result = await updateWarehouse(id, body)
+    if (result.error)
+      return NextResponse.json({ error: result.error }, { status: 404 })
+    return NextResponse.json(result)
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error'
     return NextResponse.json({ error: message }, { status: 500 })
@@ -64,26 +35,11 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  try {
-    const { id } = await params
-
-    const { data, error } = await supabaseAdmin
-      .from('warehouses')
-      .update({ is_active: false, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .eq('is_active', true)
-      .select()
-      .single()
-
-    if (error || !data) {
-      return NextResponse.json({ error: 'Not found' }, { status: 404 })
-    }
-
-    return NextResponse.json({ data })
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error'
-    return NextResponse.json({ error: message }, { status: 500 })
-  }
+  const { id } = await params
+  const result = await deleteWarehouse(id)
+  if (result.error)
+    return NextResponse.json({ error: result.error }, { status: 404 })
+  return NextResponse.json(result)
 }
