@@ -418,7 +418,7 @@ export function DataTable<T extends Record<string, any>>({
       {/* Table */}
       <div className="rounded-xl border bg-card table-row-hover table-stripe scrollbar-thin">
         <Table>
-          <TableHeader>
+          <TableHeader className="table-header-sticky-glass">
             <TableRow
               className={cn(
                 "bg-muted/40",

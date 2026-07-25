@@ -115,7 +115,7 @@ export function ProductivityView() {
       </div>
 
       {/* Shift Productivity Chart */}
-      <Card className="card-accent-blue rounded-xl border-border/60 shadow-sm">
+      <Card className="card-accent-blue card-shine rounded-xl border-border/60 shadow-sm">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-semibold">Shift-wise Productivity</CardTitle>
           <CardDescription className="text-xs">Daily productivity by shift</CardDescription>
@@ -138,7 +138,7 @@ export function ProductivityView() {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Warehouse Heatmap */}
-        <Card className="card-depth rounded-xl border-border/60 shadow-sm">
+        <Card className="card-depth card-shine rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Warehouse × Shift Heatmap</CardTitle>
             <CardDescription className="text-xs">Productivity % by warehouse and shift</CardDescription>

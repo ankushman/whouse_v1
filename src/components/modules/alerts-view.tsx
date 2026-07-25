@@ -112,19 +112,19 @@ export function AlertsView() {
       {/* Summary */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 stagger-children">
         {[
-          { label: "Critical", value: summary.critical, icon: AlertTriangle, color: "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" },
-          { label: "Warnings", value: summary.warning, icon: AlertCircle, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
-          { label: "Info", value: summary.info, icon: Info, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
-          { label: "Acknowledged", value: summary.acknowledged, icon: CheckCircle2, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
+          { label: "Critical", value: summary.critical, icon: AlertTriangle, color: "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400", glow: "" },
+          { label: "Warnings", value: summary.warning, icon: AlertCircle, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400", glow: "hover-glow-amber" },
+          { label: "Info", value: summary.info, icon: Info, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400", glow: "hover-glow-blue" },
+          { label: "Acknowledged", value: summary.acknowledged, icon: CheckCircle2, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400", glow: "" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className={cn("card-depth rounded-xl border-border/60 shadow-sm hover-scale-sm", item.glow)}>
             <CardContent className="flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>
               <div>
                 <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
-                <p className="text-lg font-bold">{item.value}</p>
+                <p className="text-lg font-bold text-number">{item.value}</p>
               </div>
             </CardContent>
           </Card>

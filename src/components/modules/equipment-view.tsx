@@ -141,7 +141,7 @@ export function EquipmentView() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 stagger-children">
-        <Card className="card-depth py-0 gap-0">
+        <Card className="card-depth py-0 gap-0 hover-scale-sm">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Cog className="size-5 text-muted-foreground" />
@@ -150,14 +150,14 @@ export function EquipmentView() {
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Total Equipment
               </p>
-              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight">
+              <p className="mt-0.5 text-xl font-bold tabular-nums text-number leading-tight">
                 {stats.total}
               </p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="card-depth py-0 gap-0">
+        <Card className="card-depth py-0 gap-0 hover-scale-sm">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/60">
               <Activity className="size-5 text-emerald-600" />
@@ -166,14 +166,14 @@ export function EquipmentView() {
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Active
               </p>
-              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight text-emerald-600">
+              <p className="mt-0.5 text-xl font-bold tabular-nums text-number leading-tight text-emerald-600">
                 {stats.active}
               </p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="card-depth py-0 gap-0">
+        <Card className="card-depth py-0 gap-0 hover-scale-sm">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950/60">
               <Wrench className="size-5 text-red-600" />
@@ -182,14 +182,14 @@ export function EquipmentView() {
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 In Maintenance
               </p>
-              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight text-red-600">
+              <p className="mt-0.5 text-xl font-bold tabular-nums text-number leading-tight text-red-600">
                 {stats.maintenance}
               </p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="card-depth py-0 gap-0">
+        <Card className="card-depth py-0 gap-0 hover-scale-sm">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/60">
               <Zap className="size-5 text-blue-600" />
@@ -198,7 +198,7 @@ export function EquipmentView() {
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Charging
               </p>
-              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight text-blue-600">
+              <p className="mt-0.5 text-xl font-bold tabular-nums text-number leading-tight text-blue-600">
                 {stats.charging}
               </p>
             </div>
@@ -214,7 +214,7 @@ export function EquipmentView() {
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 Avg Battery
               </p>
-              <p className="mt-0.5 text-xl font-bold tabular-nums leading-tight">
+              <p className="mt-0.5 text-xl font-bold tabular-nums text-number leading-tight">
                 {stats.avgBattery}%
               </p>
             </div>
@@ -267,7 +267,7 @@ export function EquipmentView() {
                         <Battery className={cn("size-3.5", batteryLabel(eq.batteryLevel))} />
                         Battery
                       </span>
-                      <span className={cn("font-semibold tabular-nums", batteryLabel(eq.batteryLevel))}>
+                      <span className={cn("font-semibold tabular-nums text-number", batteryLabel(eq.batteryLevel))}>
                         {eq.batteryLevel}%
                       </span>
                     </div>
@@ -296,7 +296,7 @@ export function EquipmentView() {
       </Card>
 
       {/* Utilization Chart */}
-      <Card className="rounded-xl">
+      <Card className="rounded-xl card-shine">
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold">
             Equipment Utilization

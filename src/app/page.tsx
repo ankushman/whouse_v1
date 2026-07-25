@@ -19,6 +19,7 @@ import { AlertsView } from "@/components/modules/alerts-view"
 import { ReportsView } from "@/components/modules/reports-view"
 import { SettingsView } from "@/components/modules/settings-view"
 import { DockSchedulerView } from "@/components/modules/dock-scheduler-view"
+import { WarehouseMapView } from "@/components/modules/warehouse-map-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 
 const viewMap: Record<string, React.ComponentType> = {
@@ -37,6 +38,7 @@ const viewMap: Record<string, React.ComponentType> = {
   reports: ReportsView,
   settings: SettingsView,
   "dock-scheduler": DockSchedulerView,
+  "warehouse-map": WarehouseMapView,
 }
 
 

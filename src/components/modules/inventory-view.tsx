@@ -202,7 +202,7 @@ export function InventoryView() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total SKUs</p>
-                <p className="mt-1 text-2xl font-bold tracking-tight">
+                <p className="mt-1 text-2xl font-bold tracking-tight text-number">
                   {summary.totalSkus}
                 </p>
               </div>
@@ -218,7 +218,7 @@ export function InventoryView() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total Items</p>
-                <p className="mt-1 text-2xl font-bold tracking-tight">
+                <p className="mt-1 text-2xl font-bold tracking-tight text-number">
                   {summary.totalItems.toLocaleString()}
                 </p>
               </div>
@@ -236,7 +236,7 @@ export function InventoryView() {
                 <p className="text-xs font-medium text-muted-foreground">
                   Below Min Stock
                 </p>
-                <p className="mt-1 text-2xl font-bold tracking-tight text-red-600 dark:text-red-400">
+                <p className="mt-1 text-2xl font-bold tracking-tight text-red-600 dark:text-red-400 text-number">
                   {summary.belowMin.length}
                 </p>
               </div>
@@ -254,7 +254,7 @@ export function InventoryView() {
                 <p className="text-xs font-medium text-muted-foreground">
                   Avg Accuracy
                 </p>
-                <p className="mt-1 text-2xl font-bold tracking-tight">
+                <p className="mt-1 text-2xl font-bold tracking-tight text-number">
                   {summary.avgAccuracy}%
                 </p>
               </div>
@@ -269,7 +269,7 @@ export function InventoryView() {
       {/* Charts Row */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {/* ABC Classification */}
-        <Card className="card-accent-green">
+        <Card className="card-accent-green card-shine">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">
               ABC Classification
@@ -303,7 +303,7 @@ export function InventoryView() {
         </Card>
 
         {/* Category Distribution */}
-        <Card className="card-accent-purple">
+        <Card className="card-accent-purple card-shine">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">
               Category Distribution
@@ -336,7 +336,7 @@ export function InventoryView() {
       </div>
 
       {/* Demand Forecasting Chart */}
-      <Card className="card-depth chart-card card-accent-blue">
+      <Card className="card-depth chart-card card-accent-blue card-shine">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -542,7 +542,7 @@ export function InventoryView() {
                           </TableCell>
                           <TableCell className="text-right">
                             <div className="flex flex-col items-end gap-1">
-                              <span className="text-xs font-semibold">
+                              <span className="text-xs font-semibold text-number">
                                 {item.quantity}
                               </span>
                               <Progress
@@ -551,12 +551,12 @@ export function InventoryView() {
                               />
                             </div>
                           </TableCell>
-                          <TableCell className="text-right text-xs">
+                          <TableCell className="text-right text-xs text-number">
                             {item.lastCount}
                           </TableCell>
                           <TableCell className="text-right">
                             <span
-                              className={`text-xs font-semibold ${
+                              className={`text-xs font-semibold text-number ${
                                 item.variance > 0
                                   ? "text-red-600 dark:text-red-400"
                                   : item.variance < 0
@@ -648,14 +648,14 @@ export function InventoryView() {
                           <span className="text-muted-foreground">
                             Current / Min
                           </span>
-                          <span className="font-semibold">
+                          <span className="font-semibold text-number">
                             {item.quantity} / {item.minStock}
                           </span>
                         </div>
                         <Progress value={stockPercent} className="h-1.5" />
                         <div className="flex items-center justify-between text-[10px] text-muted-foreground">
                           <span>{item.warehouse} · {item.category}</span>
-                          <span className="font-medium text-red-600 dark:text-red-400">
+                          <span className="font-medium text-red-600 dark:text-red-400 text-number">
                             -{deficit} units short
                           </span>
                         </div>

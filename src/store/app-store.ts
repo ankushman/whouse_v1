@@ -11,6 +11,7 @@ export const navItems: NavItem[] = [
   { id: 'inventory', label: 'Inventory', icon: 'Package', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'transportation', label: 'Transportation', icon: 'Route', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'route-optimization', label: 'Route Optimization', icon: 'Navigation', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
+  { id: 'warehouse-map', label: 'Warehouse Map', icon: 'MapPin', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'equipment', label: 'Equipment', icon: 'Cog', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'employees', label: 'Employees', icon: 'Users', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'productivity', label: 'Productivity', icon: 'TrendingUp', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },

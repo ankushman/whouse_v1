@@ -90,12 +90,12 @@ export function CostAnalyticsView() {
           { label: "Equipment Cost", value: `₹${(latest.equipment / 100000).toFixed(2)}L`, icon: Wrench, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
           { label: "Storage Cost", value: `₹${(latest.storage / 100000).toFixed(2)}L`, icon: Warehouse, color: "bg-purple-50 text-purple-600 dark:bg-purple-950 dark:text-purple-400" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
             <CardContent className="p-4">
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
-                  <p className="mt-1 text-lg font-bold">{item.value}</p>
+                  <p className="mt-1 text-lg font-bold text-number">{item.value}</p>
                 </div>
                 <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                   <item.icon className="h-4 w-4" />
@@ -114,7 +114,7 @@ export function CostAnalyticsView() {
 
       {/* Charts Row */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card className="card-accent-blue rounded-xl border-border/60 shadow-sm">
+        <Card className="card-accent-blue card-shine rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Trend</CardTitle>
             <CardDescription className="text-xs">Monthly cost breakdown (₹)</CardDescription>
@@ -142,7 +142,7 @@ export function CostAnalyticsView() {
           </CardContent>
         </Card>
 
-        <Card className="card-accent-amber rounded-xl border-border/60 shadow-sm">
+        <Card className="card-accent-amber card-shine rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Breakdown</CardTitle>
             <CardDescription className="text-xs">Current month distribution by category</CardDescription>
@@ -172,7 +172,7 @@ export function CostAnalyticsView() {
         <CardContent>
           <div className="table-container">
           <Table className="table-row-hover table-stripe">
-            <TableHeader>
+            <TableHeader className="table-header-sticky-glass">
               <TableRow className="hover:bg-transparent">
                 <TableHead className="text-xs">Month</TableHead>
                 <TableHead className="text-xs text-right">Labor</TableHead>
@@ -187,11 +187,11 @@ export function CostAnalyticsView() {
               {momComparison.map((row) => (
                 <TableRow key={row.month}>
                   <TableCell className="text-xs font-medium">{row.month}</TableCell>
-                  <TableCell className="text-xs text-right">₹{(row.labor / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right">₹{(row.transport / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right">₹{(row.equipment / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right">₹{(row.storage / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right font-medium">₹{(row.total / 1000).toFixed(0)}K</TableCell>
+                  <TableCell className="text-xs text-right text-number">₹{(row.labor / 1000).toFixed(0)}K</TableCell>
+                  <TableCell className="text-xs text-right text-number">₹{(row.transport / 1000).toFixed(0)}K</TableCell>
+                  <TableCell className="text-xs text-right text-number">₹{(row.equipment / 1000).toFixed(0)}K</TableCell>
+                  <TableCell className="text-xs text-right text-number">₹{(row.storage / 1000).toFixed(0)}K</TableCell>
+                  <TableCell className="text-xs text-right font-medium text-number">₹{(row.total / 1000).toFixed(0)}K</TableCell>
                   <TableCell className="text-xs text-right">
                     <span className={cn("font-medium", row.totalChange > 0 ? "text-red-600" : row.totalChange < 0 ? "text-emerald-600" : "text-muted-foreground")}>
                       {row.totalChange > 0 ? "+" : ""}{row.totalChange}%
