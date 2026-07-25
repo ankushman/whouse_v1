@@ -26,7 +26,7 @@ import {
   BarChart3,
   ChevronRight,
 } from "lucide-react"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import { cn } from "@/lib/utils"
 
 const severityConfig = {

@@ -1475,6 +1475,180 @@
   animation-play-state: paused;
 }
 
+/* ── Micro-interaction utility classes ──────────────────── */
+
+.hover-scale-sm {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-scale-sm:hover {
+  transform: scale(1.02);
+}
+
+.hover-scale-md {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-scale-md:hover {
+  transform: scale(1.04);
+}
+
+.shimmer-loading {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(from var(--background) l c h / 0.4) 50%,
+    transparent 100%
+  );
+  animation: shimmerLoading 2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shimmerLoading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.border-glow-blue {
+  border: 1px solid oklch(0.65 0.15 250 / 0.3);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.border-glow-blue:hover {
+  border-color: oklch(0.65 0.2 250 / 0.6);
+  box-shadow: 0 0 12px oklch(0.65 0.2 250 / 0.1);
+}
+.border-glow-emerald {
+  border: 1px solid oklch(0.65 0.15 160 / 0.3);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.border-glow-emerald:hover {
+  border-color: oklch(0.65 0.2 160 / 0.6);
+  box-shadow: 0 0 12px oklch(0.65 0.2 160 / 0.1);
+}
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    oklch(1 0 0 / 0.08) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card-shine:hover::before {
+  opacity: 1;
+}
+
+.text-number {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  letter-spacing: -0.02em;
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-effect::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: oklch(from var(--primary) l c h / 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+  opacity: 0;
+}
+.ripple-effect:active::after {
+  width: 200%;
+  height: 200%;
+  opacity: 1;
+  transition: width 0s, height 0s, opacity 0s;
+}
+
+.scroll-fade-edges {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 3%,
+    black 97%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 3%,
+    black 97%,
+    transparent
+  );
+}
+
+.status-online {
+  color: oklch(0.65 0.2 145);
+}
+.status-online::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+}
+.status-offline {
+  color: oklch(0.5 0 0);
+}
+.status-offline::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-busy {
+  color: oklch(0.75 0.18 85);
+}
+.status-busy::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: breathe 1.5s ease-in-out infinite;
+}
+
 /* ── Print Styles ──────────────────────────────────────────── */
 @media print {
   /* Hide interactive elements */
@@ -1588,4 +1762,97 @@
     max-width: 100% !important;
     break-inside: avoid;
   }
+}
+
+/* ============================================================
+   Custom Toast Styles — overrides Sonner defaults to match theme
+   ============================================================ */
+
+/* Container */
+.toast-custom {
+  --border-radius: 12px;
+  --box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --border-color: var(--border);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Individual toast item */
+[data-sonner-toast] {
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--box-shadow) !important;
+  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent) !important;
+  padding: 12px 14px;
+  animation: toast-enter 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+}
+
+[data-sonner-toast][data-removed="true"] {
+  animation: toast-exit 0.25s cubic-bezier(0.06, 0.71, 0.55, 1) forwards;
+}
+
+/* Smooth enter animation */
+@keyframes toast-enter {
+  0% {
+    opacity: 0;
+    transform: translateX(40px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Smooth exit animation */
+@keyframes toast-exit {
+  0% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40px) scale(0.96);
+  }
+}
+
+/* Title */
+.toast-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Description */
+.toast-description {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+/* Close button */
+.toast-close {
+  top: 8px;
+  right: 8px;
+  height: 20px;
+  width: 20px;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+}
+.toast-close:hover {
+  opacity: 1;
+}
+
+/* Action button */
+.toast-action {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+/* Cancel button */
+.toast-cancel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 8px;
 }

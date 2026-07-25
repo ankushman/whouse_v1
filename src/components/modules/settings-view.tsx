@@ -44,7 +44,7 @@ import {
   Search,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import { warehouses as warehouseData, kpiMetrics } from "@/data/mock-data"
 
 // ---- Mock Customer Data ----

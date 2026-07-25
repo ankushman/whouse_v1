@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import {
   Sheet,
   SheetContent,
@@ -87,6 +87,7 @@ interface NotificationsSheetProps {
 }
 
 export function NotificationsSheet({ open, onOpenChange }: NotificationsSheetProps) {
+  const { toast } = useToast()
   const [filter, setFilter] = useState<FilterTab>("all")
   const [notifications, setNotifications] = useState<NotificationItem[]>(MOCK_NOTIFICATIONS)
 

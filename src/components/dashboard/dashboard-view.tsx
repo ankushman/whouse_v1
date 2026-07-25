@@ -38,6 +38,7 @@ import { LiveUpdatesFeed } from "@/components/shared/live-updates-feed"
 import { SLAMonitoringPanel } from "@/components/shared/sla-monitoring-panel"
 import { WarehouseCapacityHeatmap } from "@/components/shared/warehouse-capacity-heatmap"
 import { MetricsTicker } from "@/components/shared/metrics-ticker"
+import { ActivityTimeline } from "@/components/shared/activity-timeline"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 
@@ -255,8 +256,11 @@ export function DashboardView() {
         })}
       </div>
 
-      {/* Recent Activity Feed */}
-      <LiveUpdatesFeed maxItems={6} />
+      {/* Activity Feed + Timeline Row */}
+      <div className="grid gap-4 lg:grid-cols-2 stagger-children">
+        <LiveUpdatesFeed maxItems={6} />
+        <ActivityTimeline maxItems={5} />
+      </div>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:gap-4 stagger-children">
