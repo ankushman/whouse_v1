@@ -82,6 +82,7 @@ import { type ReactNode } from "react"
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav"
 import { NotificationsSheet } from "@/components/shared/notifications-sheet"
 import { KeyboardShortcutsDialog } from "@/components/shared/keyboard-shortcuts-dialog"
+import { useLiveDataWithToast } from "@/hooks/use-live-toast"
 
 // ──────────────────────────────────────────────────────
 // Icon Map
@@ -638,6 +639,9 @@ export function CommandPalette() {
 // App Layout (Root)
 // ──────────────────────────────────────────────────────
 export function AppLayout({ children }: { children: ReactNode }) {
+  // Connect WebSocket live events to toast notifications
+  useLiveDataWithToast()
+
   return (
     <>
       <AppSidebar />

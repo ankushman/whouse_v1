@@ -4,5 +4,6 @@
 
 export { useToast } from './use-toast'
 export { useLiveData } from './use-live-data'
+export { useLiveDataWithToast } from './use-live-toast'
 export { useRealtimeEvents } from './use-realtime-events'
 export { useIsMobile } from './use-mobile'

@@ -39,6 +39,22 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ShiftScheduler } from "@/components/shared/shift-scheduler"
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+} from "@/components/ui/chart"
+import {
+  LineChart,
+  Line,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+} from "recharts"
 
 function getRankBadge(rank: number) {
   if (rank === 1)
@@ -217,6 +233,10 @@ export function EmployeesView() {
             <Clock className="size-3" />
             Shift Schedule
           </TabsTrigger>
+          <TabsTrigger value="trends" className="text-xs gap-1.5">
+            <TrendingUp className="size-3" />
+            Performance Trends
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="leaderboard" className="mt-4">
@@ -343,6 +363,99 @@ export function EmployeesView() {
 
         <TabsContent value="shifts" className="mt-4">
           <ShiftScheduler />
+        </TabsContent>
+
+        <TabsContent value="trends" className="mt-4">
+          <div className="grid gap-4 lg:grid-cols-2">
+            {/* Productivity Trend */}
+            <Card className="card-depth chart-card card-accent-blue shadow-card">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold">Productivity Trend (Weekly)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer
+                  config={{ productivity: { label: "Productivity %", color: "#2563EB" }, attendance: { label: "Attendance %", color: "#10B981" } }}
+                  className="h-[220px] w-full"
+                >
+                  <AreaChart data={weeklyTrendData}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="week" tick={{ fontSize: 11 }} />
+                    <YAxis tick={{ fontSize: 11 }} domain={[60, 100]} />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <ChartLegend content={<ChartLegendContent />} />
+                    <Area type="monotone" dataKey="productivity" stroke="var(--color-productivity)" fill="var(--color-productivity)" fillOpacity={0.15} strokeWidth={2} />
+                    <Area type="monotone" dataKey="attendance" stroke="var(--color-attendance)" fill="var(--color-attendance)" fillOpacity={0.1} strokeWidth={2} strokeDasharray="4 2" />
+                  </AreaChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
+            {/* Error Rate Trend */}
+            <Card className="card-depth chart-card card-accent-red shadow-card">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold">Error Rate Trend (Weekly)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer
+                  config={{ errorRate: { label: "Error Rate %", color: "#EF4444" }, target: { label: "Target", color: "#94A3B8" } }}
+                  className="h-[220px] w-full"
+                >
+                  <LineChart data={weeklyTrendData}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="week" tick={{ fontSize: 11 }} />
+                    <YAxis tick={{ fontSize: 11 }} domain={[0, 5]} />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <ChartLegend content={<ChartLegendContent />} />
+                    <Line type="monotone" dataKey="errorRate" stroke="var(--color-errorRate)" strokeWidth={2} dot={{ r: 3 }} />
+                    <Line type="monotone" dataKey="target" stroke="var(--color-target)" strokeWidth={1.5} strokeDasharray="6 3" dot={false} />
+                  </LineChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
+            {/* Tasks Completed Trend */}
+            <Card className="card-depth chart-card card-accent-green shadow-card">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-semibold">Tasks Completed Trend (Weekly)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer
+                  config={{ tasks: { label: "Tasks Completed", color: "#8B5CF6" } }}
+                  className="h-[220px] w-full"
+                >
+                  <BarChart data={weeklyTrendData}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="week" tick={{ fontSize: 11 }} />
+                    <YAxis tick={{ fontSize: 11 }} />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar dataKey="tasks" fill="var(--color-tasks)" radius={[4, 4]} />
+                  </BarChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
+            {/* Summary comparison */}
+            <Card className="card-depth shadow-card lg:col-span-2">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-semibold">Weekly Performance Summary</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                  {weeklySummary.map((item) => (
+                    <div key={item.label} className="rounded-lg border border-border/50 bg-muted/20 p-3 text-center transition-smooth">
+                      <p className="text-xs text-muted-foreground uppercase tracking-wider">{item.label}</p>
+                      <p className={cn("text-lg font-bold tabular-nums", item.change > 0 ? "text-emerald-600" : item.change < 0 ? "text-red-600" : "text-foreground")}>
+                        {item.change > 0 ? "+" : ""}{item.value}
+                      </p>
+                      <p className={cn("text-xs", item.change > 0 ? "text-emerald-500" : "text-red-500")}>
+                        {item.change > 0 ? "↑" : "↓"}{Math.abs(item.change)}%
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
       </Tabs>
     </div>
