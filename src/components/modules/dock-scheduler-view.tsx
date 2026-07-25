@@ -238,7 +238,7 @@ function DockCard({
                 </div>
                 <span className="font-medium text-number">{formatTime(assignment.startTime, assignment.estimatedDuration, progress)}</span>
               </div>
-              <Progress value={progress} className="h-1.5" />
+              <Progress value={progress} className="h-1.5 progress-bar-animated" />
               <p className="text-right text-[9px] text-number text-muted-foreground"><span className="text-number">{progress}</span>%</p>
             </div>
 

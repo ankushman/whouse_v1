@@ -5,20 +5,17 @@ import { outboundShipments, warehouses } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import {
-  Truck,
-  Clock,
-  CheckCircle2,
   Filter,
-  Search,
+  CheckCircle2,
+  Download,
+  RefreshCw,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -49,19 +46,19 @@ const stepIndexMap: Record<string, number> = {
 
 const EXPORT_COLUMNS = ["Invoice", "Customer", "Pick Type", "Picker", "Packer", "Vehicle", "Status", "Dispatch Time"]
 
+type OutboundRow = (typeof outboundShipments)[number]
+
 export function OutboundView() {
   const [statusFilter, setStatusFilter] = useState("all")
   const [warehouseFilter, setWarehouseFilter] = useState("all")
-  const [searchQuery, setSearchQuery] = useState("")
 
   const filtered = useMemo(() => {
     return outboundShipments.filter((s) => {
       if (statusFilter !== "all" && s.status !== statusFilter) return false
       if (warehouseFilter !== "all" && !s.warehouse.includes(warehouseFilter)) return false
-      if (searchQuery && !s.invoice.toLowerCase().includes(searchQuery.toLowerCase()) && !s.customer.toLowerCase().includes(searchQuery.toLowerCase())) return false
       return true
     })
-  }, [statusFilter, warehouseFilter, searchQuery])
+  }, [statusFilter, warehouseFilter])
 
   const summary = useMemo(() => ({
     total: outboundShipments.length,
@@ -84,10 +81,124 @@ export function OutboundView() {
       Status: s.status,
       "Dispatch Time": s.dispatchTime
         ? new Date(s.dispatchTime).toLocaleDateString("en-IN", { day: "2-digit", month: "short" })
-        : "—",
+        : "\u2014",
     }))
     exportToCSV(data, "outbound-shipments", EXPORT_COLUMNS)
   }, [filtered])
+
+  const columns: Column<OutboundRow>[] = useMemo(() => [
+    {
+      key: "invoice",
+      header: "Invoice",
+      sortable: true,
+      render: (value) => (
+        <span className="font-mono font-medium">{value as string}</span>
+      ),
+    },
+    {
+      key: "customer",
+      header: "Customer",
+      sortable: true,
+    },
+    {
+      key: "pickingType",
+      header: "Pick Type",
+      render: (value) => (
+        <Badge variant="outline" className="rounded-full text-[10px]">{value as string}</Badge>
+      ),
+    },
+    {
+      key: "picker",
+      header: "Picker",
+    },
+    {
+      key: "packer",
+      header: "Packer",
+    },
+    {
+      key: "vehicle",
+      header: "Vehicle",
+    },
+    {
+      key: "status",
+      header: "Status",
+      sortable: true,
+      render: (value) => (
+        <StatusBadge status={value as string} variant={statusVariant[value as string] || "gray"} />
+      ),
+    },
+    {
+      key: "progress",
+      header: "Progress",
+      render: (_value, row) => {
+        const currentIdx = stepIndexMap[row.status] ?? 0
+        return (
+          <div className="flex items-center gap-1">
+            {OUTBOUND_STEPS.map((step, idx) => {
+              const isDone = idx < currentIdx
+              const isCurrent = idx === currentIdx
+              const isDelivered = step === "Delivered" && row.status === "Delivered"
+              return (
+                <div key={step} className="flex items-center" title={step}>
+                  <div className={cn(
+                    "flex h-5 w-5 items-center justify-center rounded-full text-[8px] font-medium",
+                    (isDone || isDelivered) && "bg-emerald-500 text-white",
+                    isCurrent && !isDelivered && "bg-blue-600 text-white ring-2 ring-blue-200 dark:ring-blue-800",
+                    !isDone && !isCurrent && "bg-muted text-muted-foreground"
+                  )}>
+                    {(isDone || isDelivered) ? <CheckCircle2 className="h-2.5 w-2.5" /> : idx + 1}
+                  </div>
+                  {idx < OUTBOUND_STEPS.length - 1 && (
+                    <div className={cn("h-0.5 w-2 md:w-4", idx < currentIdx ? "bg-emerald-500" : "bg-muted")} />
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )
+      },
+    },
+    {
+      key: "dispatchTime",
+      header: "Dispatch",
+      render: (value) => (
+        <span className="text-muted-foreground">
+          {value
+            ? new Date(value as string).toLocaleDateString("en-IN", { day: "2-digit", month: "short" })
+            : "\u2014"}
+        </span>
+      ),
+    },
+  ], [])
+
+  const batchActions: BatchAction<OutboundRow>[] = useMemo(() => [
+    {
+      label: "Export Selected",
+      icon: Download,
+      onClick: (rows) => {
+        const data = rows.map((s) => ({
+          Invoice: s.invoice,
+          Customer: s.customer,
+          "Pick Type": s.pickingType,
+          Picker: s.picker,
+          Packer: s.packer,
+          Vehicle: s.vehicle,
+          Status: s.status,
+          "Dispatch Time": s.dispatchTime
+            ? new Date(s.dispatchTime).toLocaleDateString("en-IN", { day: "2-digit", month: "short" })
+            : "\u2014",
+        }))
+        exportToCSV(data, "outbound-selected", EXPORT_COLUMNS)
+      },
+    },
+    {
+      label: "Update Status",
+      icon: RefreshCw,
+      onClick: (rows) => {
+        console.log("Update status for:", rows.map((r) => r.invoice))
+      },
+    },
+  ], [])
 
   return (
     <div className="space-y-6">
@@ -139,17 +250,8 @@ export function OutboundView() {
         </TabsList>
       </Tabs>
 
-      {/* Filters */}
+      {/* Filters - only warehouse select, search handled by DataTable */}
       <div className="filter-bar flex flex-wrap items-center gap-3">
-        <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search invoice or customer..."
-            className="h-8 w-[220px] pl-8 text-xs"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
         <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
           <SelectTrigger className="w-[200px] h-8 text-xs">
             <SelectValue placeholder="Warehouse" />
@@ -161,82 +263,19 @@ export function OutboundView() {
             ))}
           </SelectContent>
         </Select>
-        <div className="ml-auto text-xs text-muted-foreground">
-          {filtered.length} shipment{filtered.length !== 1 ? "s" : ""}
-        </div>
       </div>
 
-      {/* Shipments Table */}
-      <Card className="rounded-xl border-border/60 shadow-sm overflow-hidden">
-        <CardContent className="p-0">
-          <ScrollArea>
-            <div className="table-container">
-            <Table className="table-row-hover">
-              <TableHeader>
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="text-xs">Invoice</TableHead>
-                  <TableHead className="text-xs">Customer</TableHead>
-                  <TableHead className="text-xs hidden lg:table-cell">Pick Type</TableHead>
-                  <TableHead className="text-xs hidden md:table-cell">Picker</TableHead>
-                  <TableHead className="text-xs hidden md:table-cell">Packer</TableHead>
-                  <TableHead className="text-xs hidden lg:table-cell">Vehicle</TableHead>
-                  <TableHead className="text-xs min-w-[250px]">Progress</TableHead>
-                  <TableHead className="text-xs hidden md:table-cell">Dispatch</TableHead>
-                  <TableHead className="text-xs">Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((shipment) => {
-                  const currentIdx = stepIndexMap[shipment.status] ?? 0
-                  return (
-                    <TableRow key={shipment.id}>
-                      <TableCell className="text-xs font-medium">{shipment.invoice}</TableCell>
-                      <TableCell className="text-xs">{shipment.customer}</TableCell>
-                      <TableCell className="hidden lg:table-cell">
-                        <Badge variant="outline" className="text-[10px] rounded-full">{shipment.pickingType}</Badge>
-                      </TableCell>
-                      <TableCell className="text-xs hidden md:table-cell">{shipment.picker}</TableCell>
-                      <TableCell className="text-xs hidden md:table-cell">{shipment.packer}</TableCell>
-                      <TableCell className="text-xs hidden lg:table-cell">{shipment.vehicle}</TableCell>
-                      <TableCell className="py-2">
-                        <div className="flex items-center gap-1">
-                          {OUTBOUND_STEPS.map((step, idx) => {
-                            const isDone = idx < currentIdx
-                            const isCurrent = idx === currentIdx
-                            const isDelivered = step === "Delivered" && shipment.status === "Delivered"
-                            return (
-                              <div key={step} className="flex items-center" title={step}>
-                                <div className={cn(
-                                  "flex h-5 w-5 items-center justify-center rounded-full text-[8px] font-medium",
-                                  (isDone || isDelivered) && "bg-emerald-500 text-white",
-                                  isCurrent && !isDelivered && "bg-blue-600 text-white ring-2 ring-blue-200 dark:ring-blue-800",
-                                  !isDone && !isCurrent && "bg-muted text-muted-foreground"
-                                )}>
-                                  {(isDone || isDelivered) ? <CheckCircle2 className="h-2.5 w-2.5" /> : idx + 1}
-                                </div>
-                                {idx < OUTBOUND_STEPS.length - 1 && (
-                                  <div className={cn("h-0.5 w-2 md:w-4", idx < currentIdx ? "bg-emerald-500" : "bg-muted")} />
-                                )}
-                              </div>
-                            )
-                          })}
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-xs text-muted-foreground hidden md:table-cell">
-                        {shipment.dispatchTime ? new Date(shipment.dispatchTime).toLocaleDateString("en-IN", { day: "2-digit", month: "short" }) : "—"}
-                      </TableCell>
-                      <TableCell>
-                        <StatusBadge status={shipment.status} variant={statusVariant[shipment.status] || "gray"} />
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
-              </TableBody>
-            </Table>
-            </div>
-          </ScrollArea>
-        </CardContent>
-      </Card>
+      {/* Shipments DataTable */}
+      <DataTable<OutboundRow>
+        data={filtered}
+        columns={columns}
+        searchableColumns={["invoice", "customer"]}
+        searchPlaceholder="Search shipments..."
+        selectable
+        batchActions={batchActions}
+        pageSize={8}
+        showCount
+      />
     </div>
   )
 }

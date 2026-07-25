@@ -388,7 +388,7 @@ export function ReportsView() {
                     <TableCell className="text-xs font-medium">{item.name}</TableCell>
                     <TableCell className="text-xs text-muted-foreground">{item.generatedDate}</TableCell>
                     <TableCell>
-                      <Badge variant="outline" className="text-[10px] gap-1">
+                      <Badge variant="outline" className="tag-chip text-[10px] gap-1">
                         {item.type === "PDF" ? <FileText className="h-2.5 w-2.5 text-red-500" /> : <FileSpreadsheet className="h-2.5 w-2.5 text-emerald-600" />}
                         {item.type}
                       </Badge>

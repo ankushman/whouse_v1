@@ -215,7 +215,7 @@ export function DashboardView() {
             {/* Live Indicator */}
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Activity className="h-3 w-3 text-emerald-500" />
-              <span>Live</span>
+              <span className="text-glow-blue font-medium">Live</span>
             </div>
           </div>
           <div className="flex flex-col items-end gap-0.5">

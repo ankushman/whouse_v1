@@ -39,6 +39,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ShiftScheduler } from "@/components/shared/shift-scheduler"
+import { EmployeeDetailModal } from "@/components/shared/employee-detail-modal"
 import {
   ChartContainer,
   ChartTooltip,
@@ -121,6 +122,7 @@ const weeklySummary = [
 export function EmployeesView() {
   const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState("")
+  const [selectedEmployee, setSelectedEmployee] = useState<(typeof employees)[number] | null>(null)
 
   const warehouseList = useMemo(
     () => ["all", ...Array.from(new Set(employees.map((e) => e.warehouse)))],
@@ -316,7 +318,11 @@ export function EmployeesView() {
                   </TableHeader>
                   <TableBody>
                     {sorted.map((emp) => (
-                      <TableRow key={emp.id}>
+                      <TableRow
+                        key={emp.id}
+                        className="cursor-pointer hover:bg-muted/60"
+                        onClick={() => setSelectedEmployee(emp)}
+                      >
                         <TableCell className="text-center">
                           {getRankBadge(emp.rank)}
                         </TableCell>
@@ -479,6 +485,14 @@ export function EmployeesView() {
           </div>
         </TabsContent>
       </Tabs>
+
+      <EmployeeDetailModal
+        employee={selectedEmployee}
+        open={!!selectedEmployee}
+        onOpenChange={(open) => {
+          if (!open) setSelectedEmployee(null)
+        }}
+      />
     </div>
   )
 }

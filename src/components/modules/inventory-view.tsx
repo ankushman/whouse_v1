@@ -3,8 +3,8 @@
 import { useMemo, useState, useCallback } from "react";
 import { inventoryItems, warehouses } from "@/data/mock-data";
 import { PageHeader } from "@/components/shared/page-header";
-import { StatusBadge } from "@/components/shared/status-badge";
 import { ExportButton, exportToCSV } from "@/components/shared/export-button";
+import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table";
 import {
   ChartContainer,
   ChartTooltip,
@@ -29,9 +29,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import {
   Package,
@@ -40,9 +38,11 @@ import {
   BarChart3,
   Filter,
   RefreshCw,
-  Search,
   BrainCircuit,
+  Download,
+  ShoppingCart,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const ABC_COLORS = {
   A: "#3b82f6",
@@ -79,7 +79,6 @@ type WarehouseFilter = "All" | string;
 type CategoryFilter = "All" | "Engine" | "Transmission" | "Body" | "Electrical" | "Suspension" | "Brakes";
 type AbcFilter = "All" | "A" | "B" | "C";
 
-// Demand forecasting chart config and mock data
 const forecastChartConfig = {
   actual: { label: "Actual Demand", color: "var(--chart-1)" },
   forecast: { label: "Forecasted Demand", color: "var(--chart-2)" },
@@ -97,28 +96,21 @@ const forecastData = (() => {
   });
 })();
 
+type InventoryRow = (typeof inventoryItems)[number];
+
 export function InventoryView() {
   const [warehouseFilter, setWarehouseFilter] = useState<WarehouseFilter>("All");
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>("All");
   const [abcFilter, setAbcFilter] = useState<AbcFilter>("All");
-  const [searchQuery, setSearchQuery] = useState("");
 
   const filteredItems = useMemo(() => {
     return inventoryItems.filter((item) => {
       if (warehouseFilter !== "All" && item.warehouse !== warehouseFilter) return false;
       if (categoryFilter !== "All" && item.category !== categoryFilter) return false;
       if (abcFilter !== "All" && item.abcClass !== abcFilter) return false;
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        return (
-          item.sku.toLowerCase().includes(q) ||
-          item.partName.toLowerCase().includes(q) ||
-          item.location.toLowerCase().includes(q)
-        );
-      }
       return true;
     });
-  }, [warehouseFilter, categoryFilter, abcFilter, searchQuery]);
+  }, [warehouseFilter, categoryFilter, abcFilter]);
 
   const summary = useMemo(() => {
     const totalSkus = inventoryItems.length;
@@ -134,9 +126,7 @@ export function InventoryView() {
 
   const abcData = useMemo(() => {
     const counts: Record<string, number> = { A: 0, B: 0, C: 0 };
-    filteredItems.forEach((item) => {
-      counts[item.abcClass]++;
-    });
+    filteredItems.forEach((item) => { counts[item.abcClass]++; });
     return [
       { name: "A", value: counts.A, fill: ABC_COLORS.A },
       { name: "B", value: counts.B, fill: ABC_COLORS.B },
@@ -179,6 +169,127 @@ export function InventoryView() {
     exportToCSV(data, "inventory-data")
   }, [filteredItems])
 
+  const columns: Column<InventoryRow>[] = useMemo(() => [
+    {
+      key: "sku",
+      header: "SKU",
+      sortable: true,
+      className: "w-[110px]",
+      render: (value) => (
+        <span className="font-mono text-xs font-medium">{value as string}</span>
+      ),
+    },
+    {
+      key: "partName",
+      header: "Part Name",
+      sortable: true,
+      render: (value, row) => (
+        <div className="max-w-[220px]">
+          <p className="truncate text-xs font-medium">{value as string}</p>
+          <p className="text-[10px] text-muted-foreground">{row.location}</p>
+        </div>
+      ),
+    },
+    {
+      key: "category",
+      header: "Category",
+      sortable: true,
+      className: "w-[100px]",
+      render: (value) => (
+        <Badge variant="outline" className="text-[10px] font-normal">{value as string}</Badge>
+      ),
+    },
+    {
+      key: "warehouse",
+      header: "Warehouse",
+      sortable: true,
+      className: "w-[90px]",
+    },
+    {
+      key: "quantity",
+      header: "Quantity",
+      sortable: true,
+      className: "w-[100px]",
+      render: (value, row) => {
+        const stockPercent = Math.min(100, Math.round(((value as number) / row.maxStock) * 100));
+        return (
+          <div className="flex flex-col items-end gap-1">
+            <span className="text-xs font-semibold text-number">{value as number}</span>
+            <Progress value={stockPercent} className="h-1 w-14" />
+          </div>
+        );
+      },
+    },
+    {
+      key: "lastCount",
+      header: "Last Count",
+      className: "w-[80px]",
+      sortable: true,
+      render: (value) => <span className="text-xs text-number text-right block">{value as string}</span>,
+    },
+    {
+      key: "variance",
+      header: "Variance",
+      sortable: true,
+      className: "w-[80px]",
+      render: (value) => {
+        const v = value as number;
+        return (
+          <span className={cn(
+            "text-xs font-semibold text-number",
+            v > 0 && "text-red-600 dark:text-red-400",
+            v < 0 && "text-amber-600 dark:text-amber-400",
+            v === 0 && "text-muted-foreground"
+          )}>
+            {v > 0 ? `+${v}` : v}
+          </span>
+        );
+      },
+    },
+    {
+      key: "daysSinceLastCount",
+      header: "Days",
+      sortable: true,
+      className: "w-[60px]",
+      render: (value) => (
+        <span className={cn(
+          "text-xs",
+          (value as number) > 7 ? "text-amber-600 dark:text-amber-400 font-medium" : "text-muted-foreground"
+        )}>
+          {value as number}d
+        </span>
+      ),
+    },
+  ], []);
+
+  const batchActions: BatchAction<InventoryRow>[] = useMemo(() => [
+    {
+      label: "Export Selected",
+      icon: Download,
+      onClick: (rows) => {
+        const data = rows.map((item) => ({
+          SKU: item.sku,
+          "Part Name": item.partName,
+          Category: item.category,
+          Warehouse: item.warehouse,
+          Quantity: item.quantity,
+          "Min Stock": item.minStock,
+          Variance: item.variance,
+          "ABC Class": item.abcClass,
+        }));
+        exportToCSV(data, "inventory-selected");
+      },
+    },
+    {
+      label: "Reorder Low Stock",
+      icon: ShoppingCart,
+      onClick: (rows) => {
+        const lowStock = rows.filter((r) => r.quantity < r.minStock);
+        console.log("Reorder for:", lowStock.map((r) => r.sku));
+      },
+    },
+  ], []);
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -202,9 +313,7 @@ export function InventoryView() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total SKUs</p>
-                <p className="mt-1 text-2xl font-bold tracking-tight text-number">
-                  {summary.totalSkus}
-                </p>
+                <p className="mt-1 text-2xl font-bold tracking-tight text-number">{summary.totalSkus}</p>
               </div>
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
                 <Package className="h-5 w-5 text-slate-600 dark:text-slate-400" />
@@ -212,15 +321,12 @@ export function InventoryView() {
             </div>
           </CardContent>
         </Card>
-
         <Card className="card-depth relative overflow-hidden">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total Items</p>
-                <p className="mt-1 text-2xl font-bold tracking-tight text-number">
-                  {summary.totalItems.toLocaleString()}
-                </p>
+                <p className="mt-1 text-2xl font-bold tracking-tight text-number">{summary.totalItems.toLocaleString()}</p>
               </div>
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800">
                 <BarChart3 className="h-5 w-5 text-slate-600 dark:text-slate-400" />
@@ -228,17 +334,12 @@ export function InventoryView() {
             </div>
           </CardContent>
         </Card>
-
         <Card className="card-depth relative overflow-hidden border-red-200 dark:border-red-900">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-medium text-muted-foreground">
-                  Below Min Stock
-                </p>
-                <p className="mt-1 text-2xl font-bold tracking-tight text-red-600 dark:text-red-400 text-number">
-                  {summary.belowMin.length}
-                </p>
+                <p className="text-xs font-medium text-muted-foreground">Below Min Stock</p>
+                <p className="mt-1 text-2xl font-bold tracking-tight text-red-600 dark:text-red-400 text-number">{summary.belowMin.length}</p>
               </div>
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950">
                 <AlertTriangle className="h-5 w-5 text-red-500" />
@@ -246,17 +347,12 @@ export function InventoryView() {
             </div>
           </CardContent>
         </Card>
-
         <Card className="card-depth relative overflow-hidden">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-medium text-muted-foreground">
-                  Avg Accuracy
-                </p>
-                <p className="mt-1 text-2xl font-bold tracking-tight text-number">
-                  {summary.avgAccuracy}%
-                </p>
+                <p className="text-xs font-medium text-muted-foreground">Avg Accuracy</p>
+                <p className="mt-1 text-2xl font-bold tracking-tight text-number">{summary.avgAccuracy}%</p>
               </div>
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950">
                 <TrendingUp className="h-5 w-5 text-emerald-500" />
@@ -268,66 +364,37 @@ export function InventoryView() {
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {/* ABC Classification */}
         <Card className="card-accent-green card-shine">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold">
-              ABC Classification
-            </CardTitle>
-            <CardDescription className="text-xs">
-              Distribution by value class (A = High, B = Medium, C = Low)
-            </CardDescription>
+            <CardTitle className="text-sm font-semibold">ABC Classification</CardTitle>
+            <CardDescription className="text-xs">Distribution by value class (A = High, B = Medium, C = Low)</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={abcChartConfig} className="mx-auto h-[220px] w-full">
               <PieChart>
                 <ChartTooltip content={<ChartTooltipContent />} />
-                <Pie
-                  data={abcData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={55}
-                  outerRadius={85}
-                  paddingAngle={4}
-                  dataKey="value"
-                  strokeWidth={0}
-                >
-                  {abcData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.fill} />
-                  ))}
+                <Pie data={abcData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={4} dataKey="value" strokeWidth={0}>
+                  {abcData.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.fill} />))}
                 </Pie>
                 <ChartLegend content={<ChartLegendContent nameKey="name" />} />
               </PieChart>
             </ChartContainer>
           </CardContent>
         </Card>
-
-        {/* Category Distribution */}
         <Card className="card-accent-purple card-shine">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold">
-              Category Distribution
-            </CardTitle>
-            <CardDescription className="text-xs">
-              Inventory items per part category
-            </CardDescription>
+            <CardTitle className="text-sm font-semibold">Category Distribution</CardTitle>
+            <CardDescription className="text-xs">Inventory items per part category</CardDescription>
           </CardHeader>
           <CardContent>
             <ChartContainer config={categoryChartConfig} className="h-[220px] w-full">
               <BarChart data={categoryData} layout="vertical" margin={{ left: 0, right: 16, top: 4, bottom: 4 }}>
                 <CartesianGrid horizontal={false} strokeDasharray="3 3" />
                 <XAxis type="number" tick={{ fontSize: 11 }} />
-                <YAxis
-                  dataKey="category"
-                  type="category"
-                  width={90}
-                  tick={{ fontSize: 11 }}
-                />
+                <YAxis dataKey="category" type="category" width={90} tick={{ fontSize: 11 }} />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Bar dataKey="count" radius={[0, 4, 4, 0]} maxBarSize={24}>
-                  {categoryData.map((entry, index) => (
-                    <Cell key={`bar-${index}`} fill={entry.fill} />
-                  ))}
+                  {categoryData.map((entry, index) => (<Cell key={`bar-${index}`} fill={entry.fill} />))}
                 </Bar>
               </BarChart>
             </ChartContainer>
@@ -347,9 +414,7 @@ export function InventoryView() {
               Forecast Accuracy: 94.2%
             </Badge>
           </div>
-          <CardDescription className="text-xs">
-            Actual vs forecasted demand for the next 12 weeks
-          </CardDescription>
+          <CardDescription className="text-xs">Actual vs forecasted demand for the next 12 weeks</CardDescription>
         </CardHeader>
         <CardContent>
           <ChartContainer config={forecastChartConfig} className="h-[240px] w-full">
@@ -369,23 +434,8 @@ export function InventoryView() {
               <YAxis tick={{ fontSize: 11 }} tickLine={false} axisLine={false} />
               <ChartTooltip content={<ChartTooltipContent />} />
               <ChartLegend content={<ChartLegendContent />} />
-              <Area
-                type="monotone"
-                dataKey="actual"
-                stroke="var(--chart-1)"
-                strokeWidth={2}
-                fill="url(#actualGradient)"
-                connectNulls={false}
-              />
-              <Area
-                type="monotone"
-                dataKey="forecast"
-                stroke="var(--chart-2)"
-                strokeWidth={2}
-                strokeDasharray="6 3"
-                fill="url(#forecastGradient)"
-                connectNulls={false}
-              />
+              <Area type="monotone" dataKey="actual" stroke="var(--chart-1)" strokeWidth={2} fill="url(#actualGradient)" connectNulls={false} />
+              <Area type="monotone" dataKey="forecast" stroke="var(--chart-2)" strokeWidth={2} strokeDasharray="6 3" fill="url(#forecastGradient)" connectNulls={false} />
             </AreaChart>
           </ChartContainer>
         </CardContent>
@@ -406,11 +456,7 @@ export function InventoryView() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="All">All Warehouses</SelectItem>
-              {warehouses.map((w) => (
-                <SelectItem key={w.id} value={w.city}>
-                  {w.city}
-                </SelectItem>
-              ))}
+              {warehouses.map((w) => (<SelectItem key={w.id} value={w.city}>{w.city}</SelectItem>))}
             </SelectContent>
           </Select>
           <Select value={categoryFilter} onValueChange={(v) => setCategoryFilter(v as CategoryFilter)}>
@@ -439,165 +485,39 @@ export function InventoryView() {
             </SelectContent>
           </Select>
           {hasActiveFilters && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-8 text-xs text-muted-foreground"
-              onClick={() => {
-                setWarehouseFilter("All");
-                setCategoryFilter("All");
-                setAbcFilter("All");
-              }}
-            >
+            <Button variant="ghost" size="sm" className="h-8 text-xs text-muted-foreground" onClick={() => { setWarehouseFilter("All"); setCategoryFilter("All"); setAbcFilter("All"); }}>
               Clear all
             </Button>
           )}
         </div>
-        <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search SKU, part, location..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="h-8 w-[220px] pl-8 text-xs"
-          />
-        </div>
       </div>
 
-      {/* Tabs: Variance Table + Stock Alerts */}
+      {/* Tabs: DataTable + Stock Alerts */}
       <Tabs defaultValue="variance" className="w-full">
         <TabsList className="h-9">
           <TabsTrigger value="variance" className="text-xs">
-            Variance Table
-            {filteredItems.length > 0 && (
-              <Badge variant="secondary" className="ml-1.5 h-4 px-1.5 text-[10px]">
-                {filteredItems.length}
-              </Badge>
-            )}
+            Inventory Items
+            {filteredItems.length > 0 && (<Badge variant="secondary" className="ml-1.5 h-4 px-1.5 text-[10px]">{filteredItems.length}</Badge>)}
           </TabsTrigger>
           <TabsTrigger value="alerts" className="text-xs">
             Stock Alerts
-            {stockAlerts.length > 0 && (
-              <Badge variant="destructive" className="ml-1.5 h-4 px-1.5 text-[10px]">
-                {stockAlerts.length}
-              </Badge>
-            )}
+            {stockAlerts.length > 0 && (<Badge variant="destructive" className="ml-1.5 h-4 px-1.5 text-[10px]">{stockAlerts.length}</Badge>)}
           </TabsTrigger>
         </TabsList>
 
-        {/* Variance Table */}
         <TabsContent value="variance" className="mt-4">
-          <Card>
-            <CardContent className="p-0">
-              <div className="table-container max-h-[480px] overflow-y-auto">
-                <Table className="table-row-hover">
-                  <TableHeader>
-                    <TableRow className="hover:bg-transparent">
-                      <TableHead className="w-[110px] text-xs">SKU</TableHead>
-                      <TableHead className="min-w-[200px] text-xs">Part Name</TableHead>
-                      <TableHead className="w-[100px] text-xs">Category</TableHead>
-                      <TableHead className="w-[90px] text-xs">Warehouse</TableHead>
-                      <TableHead className="w-[75px] text-right text-xs">Quantity</TableHead>
-                      <TableHead className="w-[75px] text-right text-xs">Last Count</TableHead>
-                      <TableHead className="w-[75px] text-right text-xs">Variance</TableHead>
-                      <TableHead className="w-[60px] text-right text-xs">Days</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredItems.map((item) => {
-                      const isAlert =
-                        item.variance > 0 || item.quantity < item.minStock;
-                      const stockPercent = Math.min(
-                        100,
-                        Math.round((item.quantity / item.maxStock) * 100)
-                      );
-                      return (
-                        <TableRow
-                          key={item.id}
-                          className={isAlert ? "bg-red-50/60 dark:bg-red-950/30" : ""}
-                        >
-                          <TableCell className="font-mono text-xs font-medium">
-                            {item.sku}
-                          </TableCell>
-                          <TableCell>
-                            <div className="max-w-[220px]">
-                              <p className="truncate text-xs font-medium">
-                                {item.partName}
-                              </p>
-                              <p className="text-[10px] text-muted-foreground">
-                                {item.location}
-                              </p>
-                            </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge
-                              variant="outline"
-                              className="text-[10px] font-normal"
-                            >
-                              {item.category}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-xs">
-                            {item.warehouse}
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <div className="flex flex-col items-end gap-1">
-                              <span className="text-xs font-semibold text-number">
-                                {item.quantity}
-                              </span>
-                              <Progress
-                                value={stockPercent}
-                                className="h-1 w-14"
-                              />
-                            </div>
-                          </TableCell>
-                          <TableCell className="text-right text-xs text-number">
-                            {item.lastCount}
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <span
-                              className={`text-xs font-semibold text-number ${
-                                item.variance > 0
-                                  ? "text-red-600 dark:text-red-400"
-                                  : item.variance < 0
-                                    ? "text-amber-600 dark:text-amber-400"
-                                    : "text-muted-foreground"
-                              }`}
-                            >
-                              {item.variance > 0
-                                ? `+${item.variance}`
-                                : item.variance}
-                            </span>
-                          </TableCell>
-                          <TableCell className="text-right">
-                            <span
-                              className={`text-xs ${
-                                item.daysSinceLastCount > 7
-                                  ? "text-amber-600 dark:text-amber-400 font-medium"
-                                  : "text-muted-foreground"
-                              }`}
-                            >
-                              {item.daysSinceLastCount}d
-                            </span>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                    {filteredItems.length === 0 && (
-                      <TableRow>
-                        <TableCell colSpan={8} className="h-24 text-center text-xs text-muted-foreground">
-                          No items match the current filters.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
+          <DataTable<InventoryRow>
+            data={filteredItems}
+            columns={columns}
+            searchableColumns={["sku", "partName"]}
+            searchPlaceholder="Search SKU, part name..."
+            selectable
+            batchActions={batchActions}
+            pageSize={10}
+            showCount
+          />
         </TabsContent>
 
-        {/* Stock Alerts */}
         <TabsContent value="alerts" className="mt-4">
           {stockAlerts.length === 0 ? (
             <Card>
@@ -606,58 +526,36 @@ export function InventoryView() {
                   <Package className="h-6 w-6 text-emerald-500" />
                 </div>
                 <p className="mt-3 text-sm font-medium">All stock levels are healthy</p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  No items are currently below minimum stock levels.
-                </p>
+                <p className="mt-1 text-xs text-muted-foreground">No items are currently below minimum stock levels.</p>
               </CardContent>
             </Card>
           ) : (
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
               {stockAlerts.map((item) => {
                 const deficit = item.minStock - item.quantity;
-                const stockPercent = Math.round(
-                  (item.quantity / item.minStock) * 100
-                );
+                const stockPercent = Math.round((item.quantity / item.minStock) * 100);
                 return (
-                  <Card
-                    key={item.id}
-                    className="border-red-200 dark:border-red-900"
-                  >
+                  <Card key={item.id} className="border-red-200 dark:border-red-900">
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
                             <AlertTriangle className="h-4 w-4 shrink-0 text-red-500" />
-                            <p className="truncate text-xs font-semibold">
-                              {item.partName}
-                            </p>
+                            <p className="truncate text-xs font-semibold">{item.partName}</p>
                           </div>
-                          <p className="mt-1 font-mono text-[10px] text-muted-foreground">
-                            {item.sku}
-                          </p>
+                          <p className="mt-1 font-mono text-[10px] text-muted-foreground">{item.sku}</p>
                         </div>
-                        <Badge
-                          variant="outline"
-                          className="shrink-0 text-[10px]"
-                        >
-                          {item.abcClass}
-                        </Badge>
+                        <Badge variant="outline" className="shrink-0 text-[10px]">{item.abcClass}</Badge>
                       </div>
                       <div className="mt-3 space-y-2">
                         <div className="flex items-center justify-between text-[11px]">
-                          <span className="text-muted-foreground">
-                            Current / Min
-                          </span>
-                          <span className="font-semibold text-number">
-                            {item.quantity} / {item.minStock}
-                          </span>
+                          <span className="text-muted-foreground">Current / Min</span>
+                          <span className="font-semibold text-number">{item.quantity} / {item.minStock}</span>
                         </div>
                         <Progress value={stockPercent} className="h-1.5" />
                         <div className="flex items-center justify-between text-[10px] text-muted-foreground">
                           <span>{item.warehouse} · {item.category}</span>
-                          <span className="font-medium text-red-600 dark:text-red-400 text-number">
-                            -{deficit} units short
-                          </span>
+                          <span className="font-medium text-red-600 dark:text-red-400 text-number">-{deficit} units short</span>
                         </div>
                       </div>
                     </CardContent>

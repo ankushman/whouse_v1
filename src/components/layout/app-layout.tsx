@@ -330,7 +330,7 @@ function NotificationPanel() {
     <>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="relative h-8 w-8">
+          <Button variant="ghost" size="icon" className="relative h-8 w-8 icon-badge">
             <Bell className="h-4 w-4" />
             {alertCount > 0 && (
               <span className="badge-bounce absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white ring-2 ring-background">
@@ -402,7 +402,7 @@ export function TopNav() {
   ]
 
   return (
-    <header className="container-glass sticky top-0 z-30 flex h-14 items-center gap-2 px-4">
+    <header className="glass-morphism sticky top-0 z-30 flex h-14 items-center gap-2 px-4">
       {/* Left: Sidebar trigger + Breadcrumb */}
       <div className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1" />
@@ -478,7 +478,7 @@ export function TopNav() {
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-8 w-8 theme-toggle-btn"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
             <Sun className="h-4 w-4 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
