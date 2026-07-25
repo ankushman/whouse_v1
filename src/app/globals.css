@@ -5200,7 +5200,7 @@ html.theme-transition body {
   background: linear-gradient(
     90deg,
     theme('colors.muted') 0%,
-    theme('colors.muted' / 0.5) 40%,
+    rgb(100 116 139 / 0.5) 40%,
     theme('colors.muted') 80%
   );
   background-size: 200% 100%;
@@ -5291,11 +5291,11 @@ html.theme-transition body {
   background: transparent;
 }
 .custom-scrollbar-thin::-webkit-scrollbar-thumb {
-  background: theme('colors.muted.foreground' / 0.2);
+  background: rgb(100 116 139 / 0.2);
   border-radius: 3px;
 }
 .custom-scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.muted.foreground' / 0.4);
+  background: rgb(100 116 139 / 0.4);
 }
 
 /* ── Card hover depth effect ── */
@@ -5333,7 +5333,7 @@ html.theme-transition body {
 
 /* ── Dot pattern background ── */
 .bg-dots {
-  background-image: radial-gradient(circle, theme('colors.muted.foreground' / 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgb(100 116 139 / 0.15) 1px, transparent 1px);
   background-size: 16px 16px;
 }
 
