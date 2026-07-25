@@ -100,7 +100,7 @@ export function ShiftHandoverPanel() {
   }
 
   return (
-    <Card className="card-depth rounded-xl border border-t-2 border-border/60 shadow-sm">
+    <Card className="card-depth rounded-xl border border-t-2 border-border/60 depth-shadow-md">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">

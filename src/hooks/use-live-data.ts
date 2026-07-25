@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useEffect, useRef, useState } from "react"
 import { io, Socket } from "socket.io-client"
 
 interface LiveEvent {
@@ -15,8 +15,12 @@ interface LiveEvent {
 export function useLiveData(onEvent: (event: LiveEvent) => void) {
   const socketRef = useRef<Socket | null>(null)
   const [isConnected, setIsConnected] = useState(false)
+  const onEventRef = useRef(onEvent)
 
-  const stableOnEvent = useCallback((e) => onEvent(e), [onEvent])
+  // Keep ref in sync without triggering effect re-runs
+  useEffect(() => {
+    onEventRef.current = onEvent
+  })
 
   useEffect(() => {
     const socket = io("/?XTransformPort=3005", {
@@ -34,7 +38,7 @@ export function useLiveData(onEvent: (event: LiveEvent) => void) {
     })
 
     socket.on("live-event", (event: LiveEvent) => {
-      stableOnEvent(event)
+      onEventRef.current(event)
     })
 
     socket.on("disconnect", () => {
@@ -44,7 +48,8 @@ export function useLiveData(onEvent: (event: LiveEvent) => void) {
     return () => {
       socket.disconnect()
     }
-  }, [stableOnEvent])
+    // No onEvent dependency — uses ref pattern to avoid infinite reconnects
+  }, [])
 
   return { isConnected }
 }

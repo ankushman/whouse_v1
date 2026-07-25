@@ -149,8 +149,8 @@ export function InventoryView() {
   }, [filteredItems]);
 
   const stockAlerts = useMemo(() => {
-    return inventoryItems.filter((item) => item.quantity < item.minStock);
-  }, []);
+    return filteredItems.filter((item) => item.quantity < item.minStock);
+  }, [filteredItems]);
 
   const hasActiveFilters =
     warehouseFilter !== "All" || categoryFilter !== "All" || abcFilter !== "All";

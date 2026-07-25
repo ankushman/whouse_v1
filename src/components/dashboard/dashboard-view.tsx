@@ -41,7 +41,9 @@ import { MetricsTicker } from "@/components/shared/metrics-ticker"
 import { ActivityTimeline } from "@/components/shared/activity-timeline"
 import { AIInsightsPanel } from "@/components/shared/ai-insights-panel"
 import { ShiftHandoverPanel } from "@/components/shared/shift-handover-panel"
+import { WarehouseKPIComparison } from "@/components/shared/warehouse-kpi-comparison"
 import { generateSparklineData } from "@/components/shared/mini-sparkline"
+import { ShipmentTrackingTable } from "@/components/shared/shipment-tracking-table"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 
@@ -319,8 +321,9 @@ export function DashboardView() {
         <SLAMonitoringPanel />
       </div>
 
-      {/* Warehouse Capacity Heatmap */}
-      <div className="stagger-children">
+      {/* Warehouse KPI Comparison + Capacity Heatmap */}
+      <div className="grid gap-4 lg:grid-cols-2 stagger-children">
+        <WarehouseKPIComparison />
         <WarehouseCapacityHeatmap />
       </div>
 
@@ -465,6 +468,11 @@ export function DashboardView() {
             </ChartContainer>
           </CardContent>
         </Card>
+      </div>
+
+      {/* Recent Shipments Table */}
+      <div className="stagger-children">
+        <ShipmentTrackingTable />
       </div>
 
       {/* Bottom Row */}

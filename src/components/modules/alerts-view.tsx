@@ -69,8 +69,7 @@ export function AlertsView() {
     setAcknowledgedAlerts((prev) => new Set(prev).add(id))
     const alert = alerts.find((a) => a.id === id)
     if (alert) {
-      toast.success("Alert acknowledged", {
-        description: `${alert.title} at ${alert.warehouse}`,
+      toast.success("Alert acknowledged", `${alert.title} at ${alert.warehouse}`, {
         duration: 3000,
       })
     }

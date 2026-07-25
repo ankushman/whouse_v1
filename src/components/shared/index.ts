@@ -29,3 +29,5 @@ export { ShiftHandoverPanel } from './shift-handover-panel'
 export { QuickSettingsPopover } from './quick-settings-popover'
 export { SimulatedEventProvider } from './simulated-event-provider'
 export { ThemeEffect } from './theme-effect'
+export { ShipmentTrackingTable } from "./shipment-tracking-table"
+export { WarehouseKPIComparison } from "./warehouse-kpi-comparison"

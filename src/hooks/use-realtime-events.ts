@@ -25,7 +25,9 @@ export function useRealtimeEvents(options: UseRealtimeEventsOptions = {}) {
   const [connected, setConnected] = useState(false)
   const socketRef = useRef<any>(null)
   const onEventRef = useRef(onEvent)
-  onEventRef.current = onEvent
+  useEffect(() => {
+    onEventRef.current = onEvent
+  })
 
   useEffect(() => {
     if (!enabled) return

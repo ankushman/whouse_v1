@@ -102,13 +102,13 @@ function productivityColor(p: number) {
 
 // Weekly trend data for performance charts
 const weeklyTrendData = [
-  { week: "Wk 1", productivity: 82, attendance: 91, errorRate: 2.8, tasks: 145 },
-  { week: "Wk 2", productivity: 85, attendance: 88, errorRate: 2.1, tasks: 158 },
-  { week: "Wk 3", productivity: 79, attendance: 93, errorRate: 3.4, tasks: 139 },
-  { week: "Wk 4", productivity: 88, attendance: 90, errorRate: 1.9, tasks: 167 },
-  { week: "Wk 5", productivity: 84, attendance: 92, errorRate: 2.5, tasks: 152 },
-  { week: "Wk 6", productivity: 91, attendance: 94, errorRate: 1.4, tasks: 173 },
-  { week: "Wk 7", productivity: 87, attendance: 89, errorRate: 2.2, tasks: 161 },
+  { week: "Wk 1", productivity: 82, attendance: 91, errorRate: 2.8, tasks: 145, target: 2.5 },
+  { week: "Wk 2", productivity: 85, attendance: 88, errorRate: 2.1, tasks: 158, target: 2.5 },
+  { week: "Wk 3", productivity: 79, attendance: 93, errorRate: 3.4, tasks: 139, target: 2.5 },
+  { week: "Wk 4", productivity: 88, attendance: 90, errorRate: 1.9, tasks: 167, target: 2.5 },
+  { week: "Wk 5", productivity: 84, attendance: 92, errorRate: 2.5, tasks: 152, target: 2.5 },
+  { week: "Wk 6", productivity: 91, attendance: 94, errorRate: 1.4, tasks: 173, target: 2.5 },
+  { week: "Wk 7", productivity: 87, attendance: 89, errorRate: 2.2, tasks: 161, target: 2.5 },
 ]
 
 // Weekly summary comparison data

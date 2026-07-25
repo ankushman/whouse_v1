@@ -3770,6 +3770,272 @@ html.theme-transition body {
 }
 
 /* ============================================================================ */
+/* MICRO-INTERACTION UTILITIES */
+/* ============================================================================ */
+
+/* ── Animation & Motion ───────────────────────────── */
+
+@keyframes micro-slide-in-left {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-in-left-micro {
+  animation: micro-slide-in-left 0.4s ease-out both;
+}
+
+@keyframes animate-scale-bounce {
+  0%   { opacity: 0; transform: scale(0.8); }
+  60%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in-bounce {
+  animation: animate-scale-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes micro-fade-in-up-delayed {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up-delayed {
+  opacity: 0;
+  animation: micro-fade-in-up-delayed 0.5s ease-out 0.3s both;
+}
+
+@keyframes animate-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+.animate-float {
+  animation: animate-float 3s ease-in-out infinite;
+}
+
+/* ── Glass & Depth ────────────────────────────────── */
+
+.glass-card-elevated {
+  backdrop-filter: blur(20px) saturate(1.3);
+  -webkit-backdrop-filter: blur(20px) saturate(1.3);
+  background: oklch(1 0 0 / 0.1);
+  box-shadow: oklch(0 0 0 / 0.06) 0px 4px 12px -2px,
+              oklch(0 0 0 / 0.04) 0px 2px 4px -1px;
+  border-radius: 0.75rem;
+}
+.dark .glass-card-elevated {
+  background: oklch(0 0 0 / 0.2);
+  box-shadow: oklch(0 0 0 / 0.2) 0px 4px 12px -2px,
+              oklch(0 0 0 / 0.15) 0px 2px 4px -1px;
+}
+
+.glass-border {
+  border: 1px solid oklch(1 0 0 / 0.2);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.05);
+}
+.dark .glass-border {
+  border-color: oklch(1 0 0 / 0.1);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.03);
+}
+
+.depth-shadow-sm {
+  box-shadow: oklch(0 0 0 / 0.08) 0px 1px 3px;
+}
+.dark .depth-shadow-sm {
+  box-shadow: oklch(0 0 0 / 0.3) 0px 1px 3px;
+}
+
+.depth-shadow-md {
+  box-shadow: oklch(0 0 0 / 0.1) 0px 4px 12px;
+}
+.dark .depth-shadow-md {
+  box-shadow: oklch(0 0 0 / 0.4) 0px 4px 12px;
+}
+
+.depth-shadow-lg {
+  box-shadow: oklch(0 0 0 / 0.12) 0px 8px 24px;
+}
+.dark .depth-shadow-lg {
+  box-shadow: oklch(0 0 0 / 0.5) 0px 8px 24px;
+}
+
+/* ── Interactive States ───────────────────────────── */
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: oklch(0 0 0 / 0.1) 0px 4px 12px -2px;
+}
+.dark .hover-lift:hover {
+  box-shadow: oklch(0 0 0 / 0.25) 0px 4px 12px -2px;
+}
+
+.hover-scale-smooth {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-scale-smooth:hover {
+  transform: scale(1.02);
+}
+
+.active-press {
+  transition: transform 0.1s ease;
+}
+.active-press:active {
+  transform: scale(0.98);
+}
+
+.focus-visible-ring-lg {
+  outline: none;
+}
+.focus-visible-ring-lg:focus-visible {
+  box-shadow: 0 0 0 2px oklch(1 0 0),
+              0 0 0 4px oklch(0.623 0.214 259.815 / 0.5);
+  border-radius: var(--radius);
+}
+.dark .focus-visible-ring-lg:focus-visible {
+  box-shadow: 0 0 0 2px oklch(0.22 0.015 250),
+              0 0 0 4px oklch(0.707 0.165 254.624 / 0.5);
+}
+
+/* ── Data Visualization ───────────────────────────── */
+
+.data-bar {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: oklch(0.96 0.005 250);
+  overflow: hidden;
+}
+.dark .data-bar {
+  background: oklch(0.25 0.015 250);
+}
+
+.data-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(to right, oklch(0.623 0.214 259.815), oklch(0.707 0.165 254.624));
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dark .data-bar-fill {
+  background: linear-gradient(to right, oklch(0.707 0.165 254.624), oklch(0.768 0.149 262.881));
+}
+
+.data-bar-fill-success {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(to right, oklch(0.696 0.17 163.225), oklch(0.765 0.177 163.223));
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.data-bar-fill-warning {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(to right, oklch(0.769 0.188 70.08), oklch(0.828 0.189 84.429));
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.data-bar-fill-danger {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(to right, oklch(0.637 0.237 25.331), oklch(0.704 0.191 22.216));
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Layout & Container ───────────────────────────── */
+
+.scroll-y-smooth {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.stack-y {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.inline-flex-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Typography & Visual ──────────────────────────── */
+
+.text-muted-dot {
+  color: oklch(0.7 0.01 260);
+}
+.dark .text-muted-dot {
+  color: oklch(0.6 0.01 260);
+}
+
+.text-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: oklch(0.55 0.015 260);
+}
+.dark .text-label {
+  color: oklch(0.65 0.015 260);
+}
+
+.divider-gradient-subtle {
+  height: 1px;
+  border: none;
+  background: linear-gradient(to right, transparent, oklch(0.8 0.02 260), transparent);
+}
+.dark .divider-gradient-subtle {
+  background: linear-gradient(to right, transparent, oklch(0.3 0.02 260), transparent);
+}
+
+@keyframes shimmer-move {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer-surface {
+  background: linear-gradient(
+    90deg,
+    oklch(0.96 0.005 250) 25%,
+    oklch(0.93 0.005 250) 50%,
+    oklch(0.96 0.005 250) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-move 2s ease-in-out infinite;
+}
+.dark .shimmer-surface {
+  background: linear-gradient(
+    90deg,
+    oklch(0.22 0.015 250) 25%,
+    oklch(0.28 0.015 250) 50%,
+    oklch(0.22 0.015 250) 75%
+  );
+  background-size: 200% 100%;
+}
+
+.corner-accent {
+  position: relative;
+  overflow: hidden;
+}
+.corner-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 8px 8px 0;
+  border-color: transparent oklch(0.488 0.243 264) transparent transparent;
+}
+.dark .corner-accent::before {
+  border-color: transparent oklch(0.588 0.243 264) transparent transparent;
+}
+
+/* ============================================================================ */
 /* DENSITY SYSTEM */
 /* ============================================================================ */
 

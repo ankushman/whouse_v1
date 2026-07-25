@@ -289,7 +289,7 @@ export function SettingsView() {
         title="Settings"
         description="Configure system preferences and manage users"
         actions={
-          <Button size="sm" className="gap-1.5" onClick={() => toast.success("Settings saved successfully", { description: "All changes have been applied", duration: 3000 })}>
+          <Button size="sm" className="gap-1.5" onClick={() => toast.success("Settings saved successfully", "All changes have been applied", { duration: 3000 })}>
             <Save className="h-3.5 w-3.5" /> Save All Changes
           </Button>
         }
@@ -373,7 +373,7 @@ export function SettingsView() {
               </div>
               <Separator />
               <div className="flex justify-end">
-                <Button size="sm" className="gap-1.5" onClick={() => toast.success("Notification settings saved", { duration: 3000 })}>
+                <Button size="sm" className="gap-1.5" onClick={() => toast.success("Notification settings saved", "Preferences updated", { duration: 3000 })}>
                   <Save className="h-3.5 w-3.5" /> Save Settings
                 </Button>
               </div>
@@ -974,7 +974,7 @@ export function SettingsView() {
                   <CardTitle className="text-sm font-semibold animated-underline">KPI Target Configuration</CardTitle>
                   <CardDescription className="text-xs">Set target values and alert thresholds for each KPI</CardDescription>
                 </div>
-                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={() => toast.success("KPI targets saved", { description: "Thresholds updated for all warehouses", duration: 3000 })}>
+                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={() => toast.success("KPI targets saved", "Thresholds updated for all warehouses", { duration: 3000 })}>
                   <Save className="h-3.5 w-3.5" /> Save Targets
                 </Button>
               </div>
