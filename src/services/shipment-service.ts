@@ -1,4 +1,4 @@
-import { supabaseAdmin, isSupabaseConfigured } from '@/lib/supabase'
+import { supabaseAdmin, isSupabaseConfigured } from '@/config/supabase'
 import { inboundShipments, outboundShipments } from '@/data/mock-data'
 
 // ---------------------------------------------------------------------------

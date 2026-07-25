@@ -146,8 +146,8 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
     <Card
       onClick={onClick}
       className={cn(
-        "group relative cursor-pointer rounded-xl border-border/60 py-0 gap-0 transition-all duration-200 hover:scale-[1.01]",
-        "hover:border-primary/30 hover:shadow-md hover:shadow-primary/[0.04]",
+        "group relative cursor-pointer rounded-xl border-border/60 py-0 gap-0 transition-smooth hover-lift-sm shadow-card",
+        "hover:border-primary/30",
         "active:scale-[0.99]",
         status === "green" && "border-l-4 border-l-emerald-500",
         status === "amber" && "border-l-4 border-l-amber-500",

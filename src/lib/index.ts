@@ -1,7 +1,6 @@
 // ============================================================================
-// AutoFlow Logistics - Core Library Exports
+// AutoFlow Logistics - Core Utility Exports
+// Frontend utilities — pure helper functions with no infrastructure dependencies
 // ============================================================================
 
 export { cn } from './utils'
-export { db } from './db'
-export { supabase, supabaseAdmin, isSupabaseConfigured } from './supabase'

@@ -10,6 +10,7 @@ import { InboundView } from "@/components/modules/inbound-view"
 import { OutboundView } from "@/components/modules/outbound-view"
 import { InventoryView } from "@/components/modules/inventory-view"
 import { TransportationView } from "@/components/modules/transportation-view"
+import { RouteOptimizationView } from "@/components/modules/route-optimization-view"
 import { EquipmentView } from "@/components/modules/equipment-view"
 import { EmployeesView } from "@/components/modules/employees-view"
 import { ProductivityView } from "@/components/modules/productivity-view"
@@ -27,6 +28,7 @@ const viewMap: Record<string, React.ComponentType> = {
   outbound: OutboundView,
   inventory: InventoryView,
   transportation: TransportationView,
+  "route-optimization": RouteOptimizationView,
   equipment: EquipmentView,
   employees: EmployeesView,
   productivity: ProductivityView,

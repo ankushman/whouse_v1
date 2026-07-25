@@ -35,6 +35,7 @@ import {
 import { kpiMetrics, inboundTrend, outboundTrend, warehousePerformance, dispatchPerformance, costTrend, dailyThroughput, slaData, inventoryAccuracyTrend, manpowerProductivity } from "@/data/mock-data"
 import { KPICard } from "@/components/shared/kpi-card"
 import { LiveUpdatesFeed } from "@/components/shared/live-updates-feed"
+import { SLAMonitoringPanel } from "@/components/shared/sla-monitoring-panel"
 import { cn } from "@/lib/utils"
 
 const kpiIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -293,6 +294,11 @@ export function DashboardView() {
             />
           )
         })}
+      </div>
+
+      {/* SLA Monitoring Panel */}
+      <div className="stagger-children">
+        <SLAMonitoringPanel />
       </div>
 
       {/* Charts Row 1 */}
