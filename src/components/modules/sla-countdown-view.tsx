@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo, useCallback } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 import { PageHeader } from "@/components/shared/page-header"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -11,8 +11,6 @@ import {
   CheckCircle2,
   Timer,
   TrendingDown,
-  ArrowDown,
-  ArrowUp,
   Zap,
   BarChart3,
   Shield,
@@ -58,13 +56,12 @@ interface SLAItem {
   handler: string
 }
 
-// ── Mock SLA Data ───────────────────────────────────────────────────────────
+// ── Constants ────────────────────────────────────────────────────────────────
 
-const now = Date.now()
 const MIN = 60_000
 const HOUR = 3_600_000
 
-function createSLAItems(): SLAItem[] {
+function createSLAItems(now: number): SLAItem[] {
   return [
     { id: "sla-001", shipmentId: "SHP-4821", type: "Outbound", customer: "Maruti Suzuki India", warehouse: "Mumbai Hub", deadline: new Date(now + 12 * MIN), status: "at-risk", progress: 65, remainingMs: 12 * MIN, priority: "high", handler: "Rajesh Kumar" },
     { id: "sla-002", shipmentId: "SHP-4822", type: "Inbound", customer: "Tata Motors Ltd", warehouse: "Delhi NCR", deadline: new Date(now + 95 * MIN), status: "on-track", progress: 42, remainingMs: 95 * MIN, priority: "medium", handler: "Priya Sharma" },
@@ -79,16 +76,17 @@ function createSLAItems(): SLAItem[] {
   ]
 }
 
-// SLA compliance trend data (last 12 hours)
-const slaTrendData = Array.from({ length: 12 }, (_, i) => {
-  const hour = new Date(now - (11 - i) * HOUR)
-  const label = hour.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })
-  return {
-    hour: label,
-    compliance: Math.round(92 + Math.random() * 7 - i * 0.3),
-    target: 95,
-  }
-})
+function createSlaTrendData(now: number) {
+  return Array.from({ length: 12 }, (_, i) => {
+    const hour = new Date(now - (11 - i) * HOUR)
+    const label = hour.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: true })
+    return {
+      hour: label,
+      compliance: Math.round(92 + Math.random() * 7 - i * 0.3),
+      target: 95,
+    }
+  })
+}
 
 // ── Helper Functions ──────────────────────────────────────────────────────
 
@@ -137,18 +135,18 @@ const typeIcons: Record<string, React.ReactNode> = {
 
 // ── SLA Card Component ───────────────────────────────────────────────────
 
-function SLACard({ item }: { item: SLAItem }) {
+function SLACard({ item, mountTime }: { item: SLAItem; mountTime: number }) {
   const [countdown, setCountdown] = useState(item.remainingMs)
   const colors = statusColors[item.status]
 
   useEffect(() => {
-    const elapsed = Date.now() - now
+    const elapsed = Date.now() - mountTime
     setCountdown(item.remainingMs - elapsed)
     const interval = setInterval(() => {
       setCountdown((prev) => prev - 1000)
     }, 1000)
     return () => clearInterval(interval)
-  }, [item.remainingMs])
+  }, [item.remainingMs, mountTime])
 
   const isBreached = countdown < 0
   const isFlashing = countdown < 0 && Math.floor(Date.now() / 1000) % 2 === 0
@@ -227,7 +225,9 @@ function SLACard({ item }: { item: SLAItem }) {
 // ── Main Component ─────────────────────────────────────────────────────────
 
 export function SLACountdownView() {
-  const [slaItems, setSlaItems] = useState<SLAItem[]>(createSLAItems)
+  const mountTimeRef = useRef(Date.now())
+  const [slaItems, setSlaItems] = useState<SLAItem[]>(() => createSLAItems(mountTimeRef.current))
+  const [slaTrendData] = useState(() => createSlaTrendData(mountTimeRef.current))
 
   // Update countdowns every second
   useEffect(() => {
@@ -235,7 +235,7 @@ export function SLACountdownView() {
       setSlaItems((prev) =>
         prev.map((item) => {
           if (item.status === "completed") return item
-          const elapsed = Date.now() - now
+          const elapsed = Date.now() - mountTimeRef.current
           const newRemaining = item.remainingMs - elapsed
           const newStatus = getStatusFromMs(newRemaining, item.progress)
           return { ...item, remainingMs: newRemaining, status: newStatus }
@@ -344,7 +344,7 @@ export function SLACountdownView() {
       {/* ── SLA Timeline Cards ── */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
         {sorted.map((item) => (
-          <SLACard key={item.id} item={item} />
+          <SLACard key={item.id} item={item} mountTime={mountTimeRef.current} />
         ))}
       </div>
 

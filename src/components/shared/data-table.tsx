@@ -431,7 +431,7 @@ export function DataTable<T extends Record<string, any>>({
       )}
 
       {/* Table */}
-      <div className="rounded-xl border bg-card table-row-hover table-stripe scrollbar-thin">
+      <div className="rounded-xl border bg-card table-row-hover table-stripe scrollbar-thin card-lift">
         <Table>
           <TableHeader className="table-header-sticky-glass">
             <TableRow

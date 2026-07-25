@@ -65,7 +65,6 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   Radar,
-  ResponsiveContainer,
 } from "recharts"
 
 function getRankBadge(rank: number) {

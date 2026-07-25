@@ -5,7 +5,8 @@ import { ToastProvider } from "@/components/shared/toast-provider";
 import { RealtimeToastListener } from "@/components/shared/realtime-toast-listener";
 import { SimulatedEventProvider } from "@/components/shared/simulated-event-provider";
 import { ThemeProvider } from "next-themes";
-import { ThemeEffect } from "@/components/shared/theme-effect"
+import { ThemeEffect } from "@/components/shared/theme-effect";
+import { AIChatPanel } from "@/components/shared/ai-chat-panel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +46,7 @@ export default function RootLayout({
           <ToastProvider />
           <RealtimeToastListener />
           <SimulatedEventProvider />
+          <AIChatPanel />
         </ThemeProvider>
       </body>
     </html>

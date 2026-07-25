@@ -32,3 +32,6 @@ export { ThemeEffect } from './theme-effect'
 export { ShipmentTrackingTable } from "./shipment-tracking-table"
 export { WarehouseKPIComparison } from "./warehouse-kpi-comparison"
 export { WarehouseHealthMonitor } from "./warehouse-health-monitor"
+export { AIChatPanel } from "./ai-chat-panel"
+export { WeatherPanel } from "./weather-panel"
+export { BarcodeScanner } from "./barcode-scanner"

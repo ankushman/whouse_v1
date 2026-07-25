@@ -18,6 +18,9 @@ import {
   Calendar,
   AlertTriangle,
   Wrench,
+  Gauge,
+  BoxesIcon,
+  Anchor,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -45,8 +48,10 @@ import { WarehouseKPIComparison } from "@/components/shared/warehouse-kpi-compar
 import { generateSparklineData } from "@/components/shared/mini-sparkline"
 import { ShipmentTrackingTable } from "@/components/shared/shipment-tracking-table"
 import { WarehouseHealthMonitor } from "@/components/shared/warehouse-health-monitor"
+import { WeatherPanel } from "@/components/shared/weather-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
+import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
 
 import { type LucideIcon } from "lucide-react"
 
@@ -195,6 +200,7 @@ const kpiSparklineData: Record<string, number[]> = {
 }
 
 export function DashboardView() {
+  const { kpi: realtimeKpi } = useRealtimeKpi()
   const [lastUpdated] = React.useState(() =>
     new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })
   )
@@ -254,6 +260,89 @@ export function DashboardView() {
 
       {/* Quick Stats Bar */}
       <MetricsTicker />
+
+      {/* Real-time Operations Panel */}
+      <Card className="card-depth overflow-hidden border-primary/10">
+        <CardHeader className="pb-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="live-dot pl-2">
+                <Activity className="h-4 w-4 text-emerald-500" />
+              </div>
+              <CardTitle className="text-sm font-semibold">Real-time Operations</CardTitle>
+            </div>
+            <Badge variant="outline" className="text-[10px] tabular-nums">
+              Updated {new Date(realtimeKpi.lastUpdated).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+            </Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4" key={realtimeKpi.flashKey}>
+            <div className={cn(
+              "flex items-center gap-3 rounded-lg border p-3 transition-all",
+              realtimeKpi.isUpdating && "kpi-update-pulse"
+            )}>
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/70">
+                <Gauge className="size-4 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Throughput</p>
+                <p className="text-lg font-bold text-number tabular-nums leading-tight">
+                  {realtimeKpi.throughput}
+                  <span className="ml-0.5 text-[10px] font-medium text-muted-foreground">/hr</span>
+                </p>
+              </div>
+            </div>
+            <div className={cn(
+              "flex items-center gap-3 rounded-lg border p-3 transition-all",
+              realtimeKpi.isUpdating && "kpi-update-pulse"
+            )}>
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-950/70">
+                <BoxesIcon className="size-4 text-amber-600 dark:text-amber-400" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Pending</p>
+                <p className="text-lg font-bold text-number tabular-nums leading-tight">{realtimeKpi.pendingOrders}</p>
+              </div>
+            </div>
+            <div className={cn(
+              "flex items-center gap-3 rounded-lg border p-3 transition-all",
+              realtimeKpi.isUpdating && "kpi-update-pulse"
+            )}>
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/70">
+                <Anchor className="size-4 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Active Docks</p>
+                <p className="text-lg font-bold text-number tabular-nums leading-tight">
+                  {realtimeKpi.activeDocks}
+                  <span className="ml-0.5 text-[10px] font-medium text-muted-foreground">/24</span>
+                </p>
+              </div>
+            </div>
+            <div className={cn(
+              "flex items-center gap-3 rounded-lg border p-3 transition-all",
+              realtimeKpi.isUpdating && "kpi-update-pulse"
+            )}>
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-50 dark:bg-violet-950/70">
+                <BarChart3 className="size-4 text-violet-600 dark:text-violet-400" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Occupancy</p>
+                <p className="text-lg font-bold text-number tabular-nums leading-tight">
+                  {realtimeKpi.occupancyRate}
+                  <span className="ml-0.5 text-[10px] font-medium text-muted-foreground">%</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Weather Conditions Panel */}
+      <div className="stagger-children">
+        <WeatherPanel />
+      </div>
 
       {/* Quick Action Bar */}
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 stagger-children">

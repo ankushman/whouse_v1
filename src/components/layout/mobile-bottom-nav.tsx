@@ -201,7 +201,7 @@ export function MobileBottomNav() {
   }, [updatePillPosition])
 
   // ── Swipe gesture navigation ────────────────────────
-  const swipeHandlers = useSwipe({
+  const { swipeHandlers } = useSwipe({
     onSwipeLeft: () => {
       if (activeIndex >= 0 && activeIndex < permittedCoreItems.length - 1) {
         setActiveView(permittedCoreItems[activeIndex + 1].id)

@@ -532,8 +532,12 @@ export function TopNav() {
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 theme-toggle-btn"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="h-8 w-8 theme-toggle-btn relative overflow-hidden"
+            onClick={() => {
+              document.documentElement.classList.add('theme-transitioning')
+              setTheme(theme === "dark" ? "light" : "dark")
+              setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 350)
+            }}
           >
             <Sun className="h-4 w-4 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
