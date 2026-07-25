@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useMemo, useCallback, useEffect, useRef } from "react"
+import React, { useState, useReducer, useMemo, useCallback, useEffect, useRef } from "react"
 import {
   ArrowUp,
   ArrowDown,
@@ -146,6 +146,19 @@ export function DataTable<T extends Record<string, any>>({
   const [expandedRowKeys, setExpandedRowKeys] = useState<Set<string>>(new Set())
   const [sortColumn, setSortColumn] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<SortDirection>(null)
+  // Sort state as a single reducer to avoid nested setState anti-pattern
+  const [sortState, sortDispatch] = useReducer(
+    (prev: { column: string | null; direction: SortDirection }, action: { key: string }) => {
+      if (prev.column !== action.key) return { column: action.key, direction: "asc" }
+      if (prev.direction === "asc") return { column: action.key, direction: "desc" }
+      if (prev.direction === "desc") return { column: null, direction: null }
+      return { column: action.key, direction: "asc" }
+    },
+    { column: null, direction: null as SortDirection }
+  )
+  // Derived sort values from reducer for backward compatibility
+  sortColumn = sortState.column
+  sortDirection = sortState.direction
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedRowIds, setSelectedRowIds] = useState<Set<string>>(new Set())
@@ -503,7 +516,7 @@ export function DataTable<T extends Record<string, any>>({
             ) : (
               paginatedData.map((row, rowIndex) => {
                 const originalIndex =
-                  (safeCurrentPage - 1) * pageSize + rowIndex
+                  (safeCurrentPage - 1) * safePageSize + rowIndex
                 const rowId = getRowId(row, originalIndex)
                 const isSelected = selectedRowIds.has(rowId)
 
