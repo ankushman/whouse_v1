@@ -4065,3 +4065,327 @@ html.theme-transition body {
   transition-duration: 0.01ms !important;
   scroll-behavior: auto !important;
 }
+
+/* ============================================================================ */
+/* ROUND 12 - NEW CSS MICRO-INTERACTIONS & ENHANCEMENTS
+/* ============================================================================ */
+
+/* ---- Tag Chip Pill ---- */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+.tag-chip:hover {
+  filter: brightness(0.95);
+}
+
+/* ---- Data Card Hover Glow ---- */
+.data-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.data-card:hover {
+  border-color: oklch(var(--primary) / 0.2);
+  box-shadow: 0 4px 16px -4px oklch(var(--primary) / 0.08),
+              0 2px 4px -2px oklch(var(--border) / 0.5);
+  transform: translateY(-1px);
+}
+
+/* ---- Table Row Hover Glow ---- */
+.table-row-hover tbody tr {
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.table-row-hover tbody tr:hover {
+  background-color: oklch(var(--muted) / 0.3);
+  box-shadow: inset 3px 0 0 oklch(var(--primary) / 0.5);
+}
+
+/* ---- Card Accent Colors ---- */
+.card-accent-blue {
+  border-top-color: oklch(0.623 0.214 259);
+}
+.card-accent-green {
+  border-top-color: oklch(0.696 0.17 163);
+}
+.card-accent-red {
+  border-top-color: oklch(0.637 0.237 25);
+}
+.card-accent-amber {
+  border-top-color: oklch(0.769 0.188 79);
+}
+.card-accent-purple {
+  border-top-color: oklch(0.585 0.233 293);
+}
+
+/* ---- Card Shine Effect ---- */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(1 / 0.03),
+    transparent
+  );
+  transition: left 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card-shine:hover::before {
+  left: 150%;
+}
+
+/* ---- Button Press Effect ---- */
+.btn-press {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-press:active {
+  transform: scale(0.96);
+  box-shadow: inset 0 1px 2px oklch(0 0 0 / 0.1);
+}
+
+/* ---- Float Animation (Infinite) ---- */
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.float-animation {
+  animation: floatSubtle 3s ease-in-out infinite;
+}
+
+/* ---- Status Dot Pulse ---- */
+.status-dot-pulse {
+  position: relative;
+}
+.status-dot-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background: inherit;
+  opacity: 0.4;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+@keyframes statusPulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ---- Scrollbar Glass ---- */
+.scrollbar-glass::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-glass::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-glass::-webkit-scrollbar-thumb {
+  background: oklch(0 0 0 / 0.1);
+  border-radius: 3px;
+}
+.scrollbar-glass::-webkit-scrollbar-thumb:hover {
+  background: oklch(0 0 0 / 0.2);
+}
+
+/* ---- Card Depth System ---- */
+.card-depth {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-depth:hover {
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.04),
+              0 4px 12px -4px oklch(0 0 0 / 0.08);
+}
+
+/* ---- Filter Bar Styling ---- */
+.filter-bar {
+  padding: 0.25rem 0;
+}
+.filter-bar [class*="SelectTrigger"],
+.filter-bar [class*="Input"] {
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+.filter-bar [class*="SelectTrigger"]:hover,
+.filter-bar [class*="Input"]:hover {
+  border-color: oklch(var(--primary) / 0.4);
+  box-shadow: 0 0 0 2px oklch(var(--primary) / 0.05);
+}
+
+/* ---- Badge Glow Effects ---- */
+.badge-glow-critical {
+  box-shadow: 0 0 8px oklch(0.637 0.237 25 / 0.3);
+}
+.badge-glow-warning {
+  box-shadow: 0 0 8px oklch(0.769 0.188 79 / 0.3);
+}
+
+/* ---- Table Stripe (Alternating Rows) ---- */
+.table-stripe tbody tr:nth-child(even) {
+  background-color: oklch(var(--muted) / 0.08);
+}
+.table-stripe tbody tr:nth-child(even):hover {
+  background-color: oklch(var(--muted) / 0.15);
+}
+
+/* ---- Table Header Sticky Glass ---- */
+.table-header-sticky-glass {
+  backdrop-filter: blur(8px);
+  background: oklch(var(--card) / 0.85) !important;
+}
+
+/* ---- Mobile Scroll Hint ---- */
+.mobile-scroll-hint {
+  -webkit-overflow-scrolling: touch;
+}
+.mobile-scroll-hint:after {
+  content: '';
+  position: sticky;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, oklch(var(--background)));
+  pointer-events: none;
+}
+
+/* ---- Gradient Text ---- */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.623 0.214 259), oklch(0.585 0.233 293));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Text Glow Blue ---- */
+.text-glow-blue {
+  text-shadow: 0 0 8px oklch(0.623 0.214 259 / 0.5);
+}
+
+/* ---- Dashboard Header Gradient ---- */
+.dashboard-header-gradient {
+  background: linear-gradient(135deg, oklch(var(--card)) 0%, oklch(var(--muted) / 0.3) 100%);
+}
+.bg-mesh-gradient {
+  background-image:
+    radial-gradient(at 20% 80%, oklch(var(--primary) / 0.06) 0%, transparent 50%),
+    radial-gradient(at 80% 20%, oklch(0.585 0.233 293 / 0.04) 0%, transparent 50%);
+}
+
+/* ---- Data Row Enter Animation ---- */
+.data-row-enter {
+  animation: dataRowEnter 0.4s ease-out both;
+}
+@keyframes dataRowEnter {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---- Number Tabular Fonts ---- */
+.text-number,
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Hover Glow Variants ---- */
+.hover-glow-blue:hover {
+  box-shadow: 0 0 12px oklch(0.623 0.214 259 / 0.2);
+}
+.hover-glow-amber:hover {
+  box-shadow: 0 0 12px oklch(0.769 0.188 79 / 0.2);
+}
+.hover-glow-red:hover {
+  box-shadow: 0 0 12px oklch(0.637 0.237 25 / 0.2);
+}
+
+/* ---- Scale Transition Variants ---- */
+.hover-scale-sm {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hover-scale-sm:hover {
+  transform: scale(1.01);
+}
+
+/* ---- Shadow Inner Soft ---- */
+.shadow-inner-soft {
+  box-shadow: inset 0 1px 3px oklch(0 0 0 / 0.06);
+}
+
+/* ---- Stagger Children System ---- */
+.stagger-children > * {
+  animation: staggerFadeIn 0.4s ease-out both;
+}
+.stagger-children > *:nth-child(1)  { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2)  { animation-delay: 50ms; }
+.stagger-children > *:nth-child(3)  { animation-delay: 100ms; }
+.stagger-children > *:nth-child(4)  { animation-delay: 150ms; }
+.stagger-children > *:nth-child(5)  { animation-delay: 200ms; }
+.stagger-children > *:nth-child(6)  { animation-delay: 250ms; }
+.stagger-children > *:nth-child(7)  { animation-delay: 300ms; }
+.stagger-children > *:nth-child(8)  { animation-delay: 350ms; }
+.stagger-children > *:nth-child(9)  { animation-delay: 400ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 450ms; }
+.stagger-children > *:nth-child(11) { animation-delay: 500ms; }
+.stagger-children > *:nth-child(12) { animation-delay: 550ms; }
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Page Content Transition ---- */
+.page-content-transition {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.page-content-transition.exiting {
+  opacity: 0;
+  transform: translateX(-16px);
+}
+.page-content-transition.entering {
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+/* ---- Chart Card Hover ---- */
+.chart-card {
+  transition: all 0.3s ease;
+}
+.chart-card:hover {
+  border-color: oklch(var(--border));
+  box-shadow: 0 4px 20px -4px oklch(0 0 0 / 0.06);
+}
+
+/* ---- Flex Center Utility ---- */
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---- Nav Icon Animated ---- */
+.nav-icon-animated {
+  transition: transform 0.2s ease;
+}
+.nav-icon-animated:hover {
+  transform: scale(1.1);
+}

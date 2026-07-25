@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo, useCallback, useEffect, useRef } from "react"
+import React, { useState, useMemo, useCallback, useEffect, useRef } from "react"
 import {
   ArrowUp,
   ArrowDown,
@@ -70,6 +70,10 @@ export interface DataTableProps<T> {
   batchActions?: BatchAction<T>[]
   /** Show column visibility toggle dropdown. Defaults to true when >4 columns. */
   showColumnToggle?: boolean
+  /** Render expandable content below a row. When provided, a chevron toggle column is added. */
+  expandableRowRender?: (row: T) => React.ReactNode
+  /** Unique key extractor for expanded rows. Defaults to row.id or index. */
+  getRowKey?: (row: T) => string
 }
 
 type SortDirection = "asc" | "desc" | null
@@ -126,7 +130,10 @@ export function DataTable<T extends Record<string, any>>({
   onSelectionChange,
   batchActions,
   showColumnToggle,
+  expandableRowRender,
+  getRowKey,
 }: DataTableProps<T>) {
+  const [expandedRowKeys, setExpandedRowKeys] = useState<Set<string>>(new Set())
   const [sortColumn, setSortColumn] = useState<string | null>(null)
   const [sortDirection, setSortDirection] = useState<SortDirection>(null)
   const [currentPage, setCurrentPage] = useState(1)
@@ -238,6 +245,17 @@ export function DataTable<T extends Record<string, any>>({
     setSelectedRowIds(new Set())
   }, [])
 
+  // --- Expandable rows ---
+  const hasExpandableRows = !!expandableRowRender
+  const toggleExpand = useCallback((key: string) => {
+    setExpandedRowKeys((prev) => {
+      const next = new Set(prev)
+      if (next.has(key)) next.delete(key)
+      else next.add(key)
+      return next
+    })
+  }, [])
+
   // --- Row enter animation via IntersectionObserver ---
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -298,7 +316,7 @@ export function DataTable<T extends Record<string, any>>({
 
   // --- Determine if we need a toolbar row ---
   const hasToolbar = hasSearch || shouldShowColumnToggle || selectable
-  const colSpan = visibleColumns.length + (selectable ? 1 : 0)
+  const colSpan = visibleColumns.length + (selectable ? 1 : 0) + (hasExpandableRows ? 1 : 0)
 
   return (
     <div className={cn("flex flex-col gap-3", className)}>
@@ -422,6 +440,11 @@ export function DataTable<T extends Record<string, any>>({
                 stickyHeader && "sticky top-0 z-10"
               )}
             >
+              {hasExpandableRows && (
+                <TableHead className="w-9 p-1">
+                  <span className="sr-only">Expand</span>
+                </TableHead>
+              )}
               {selectable && (
                 <TableHead className="w-10 p-2">
                   <Checkbox
@@ -476,13 +499,17 @@ export function DataTable<T extends Record<string, any>>({
                 const rowId = getRowId(row, originalIndex)
                 const isSelected = selectedRowIds.has(rowId)
 
+                const expandKey = getRowKey ? getRowKey(row) : rowId
+                const isExpanded = hasExpandableRows && expandedRowKeys.has(expandKey)
+
                 return (
+                  <React.Fragment key={rowId}>
                   <TableRow
-                    key={rowId}
                     ref={setRowRef(rowId)}
                     data-row-id={rowId}
                     className={cn(
                       onRowClick && "cursor-pointer",
+                      isExpanded && "bg-muted/20",
                       isSelected && "bg-primary/5"
                     )}
                     style={{
@@ -490,9 +517,27 @@ export function DataTable<T extends Record<string, any>>({
                       animationDelay: `${rowIndex * 30}ms`,
                     }}
                     onClick={
-                      onRowClick ? () => onRowClick(row) : undefined
+                      hasExpandableRows
+                        ? () => toggleExpand(expandKey)
+                        : onRowClick
+                          ? () => onRowClick(row)
+                          : undefined
                     }
                   >
+                    {hasExpandableRows && (
+                      <TableCell className="w-9 p-1">
+                        <button
+                          className="flex h-6 w-6 items-center justify-center rounded-md hover:bg-muted transition-colors"
+                          onClick={(e) => { e.stopPropagation(); toggleExpand(expandKey) }}
+                          aria-label={isExpanded ? "Collapse" : "Expand"}
+                        >
+                          <ChevronRight className={cn(
+                            "h-3.5 w-3.5 text-muted-foreground transition-transform duration-200",
+                            isExpanded && "rotate-90"
+                          )} />
+                        </button>
+                      </TableCell>
+                    )}
                     {selectable && (
                       <TableCell className="w-10 p-2">
                         <Checkbox
@@ -514,6 +559,16 @@ export function DataTable<T extends Record<string, any>>({
                       </TableCell>
                     ))}
                   </TableRow>
+                  {isExpanded && expandableRowRender && (
+                    <TableRow className="bg-muted/20 hover:bg-muted/20">
+                      <TableCell colSpan={colSpan} className="p-4">
+                        <div className="animate-in fade-in slide-in-from-top-1 duration-200">
+                          {expandableRowRender(row)}
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                  </React.Fragment>
                 )
               })
             )}

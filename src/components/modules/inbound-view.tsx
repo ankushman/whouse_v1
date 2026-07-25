@@ -5,15 +5,13 @@ import { inboundShipments, warehouses } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Progress } from "@/components/ui/progress"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Separator } from "@/components/ui/separator"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   PackageSearch,
   Clock,
@@ -21,10 +19,10 @@ import {
   Circle,
   AlertCircle,
   Filter,
-  ChevronRight,
   Globe,
   Home,
-  Search,
+  Download,
+  Eye,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -47,22 +45,21 @@ const statusVariant: Record<string, "green" | "amber" | "red" | "blue" | "gray">
   "On Hold": "amber",
 }
 
-const EXPORT_COLUMNS = ["Invoice", "Supplier", "Type", "Warehouse", "Status", "SLA Progress"]
+const EXPORT_COLUMNS = ["Invoice", "Supplier", "Type", "Warehouse", "Status", "SLA %"]
+
+type InboundRow = (typeof inboundShipments)[number]
 
 export function InboundView() {
   const [typeFilter, setTypeFilter] = useState("all")
   const [warehouseFilter, setWarehouseFilter] = useState("all")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [expandedRow, setExpandedRow] = useState<string | null>(null)
 
   const filtered = useMemo(() => {
     return inboundShipments.filter((s) => {
       if (typeFilter !== "all" && s.type.toLowerCase() !== typeFilter) return false
       if (warehouseFilter !== "all" && !s.warehouse.includes(warehouseFilter)) return false
-      if (searchQuery && !s.invoice.toLowerCase().includes(searchQuery.toLowerCase()) && !s.supplier.toLowerCase().includes(searchQuery.toLowerCase())) return false
       return true
     })
-  }, [typeFilter, warehouseFilter, searchQuery])
+  }, [typeFilter, warehouseFilter])
 
   const summary = useMemo(() => ({
     total: inboundShipments.length,
@@ -78,10 +75,155 @@ export function InboundView() {
       Type: s.type,
       Warehouse: s.warehouse,
       Status: s.status,
-      "SLA Progress": `${s.slaProgress}%`,
+      "SLA %": `${s.slaProgress}%`,
     }))
     exportToCSV(data, "inbound-shipments", EXPORT_COLUMNS)
   }, [filtered])
+
+  const columns: Column<InboundRow>[] = [
+    {
+      key: "invoice",
+      header: "Invoice",
+      sortable: true,
+      className: "w-[120px]",
+      render: (value) => (
+        <span className="font-mono text-xs font-medium">{value as string}</span>
+      ),
+    },
+    {
+      key: "supplier",
+      header: "Supplier",
+      sortable: true,
+      render: (value) => <span className="text-xs">{value as string}</span>,
+    },
+    {
+      key: "type",
+      header: "Type",
+      sortable: true,
+      className: "w-[100px]",
+      render: (value) => (
+        <Badge variant="outline" className="gap-1 text-[10px] rounded-full">
+          {(value as string) === "Domestic" ? <Home className="h-2.5 w-2.5" /> : <Globe className="h-2.5 w-2.5" />}
+          {value as string}
+        </Badge>
+      ),
+    },
+    {
+      key: "warehouse",
+      header: "Warehouse",
+      sortable: true,
+      className: "w-[90px] hidden lg:table-cell",
+    },
+    {
+      key: "slaProgress",
+      header: "SLA",
+      sortable: true,
+      className: "w-[100px]",
+      render: (value) => {
+        const pct = value as number
+        const color = pct > 80 ? "text-emerald-600 dark:text-emerald-400" : pct > 50 ? "text-amber-600 dark:text-amber-400" : "text-red-600 dark:text-red-400"
+        return (
+          <div className="flex items-center gap-1.5">
+            <Progress value={pct} className="h-1.5 w-12" />
+            <span className={cn("text-[10px] font-medium tabular-nums", color)}>{pct}%</span>
+          </div>
+        )
+      },
+    },
+    {
+      key: "status",
+      header: "Status",
+      sortable: true,
+      className: "w-[110px]",
+      render: (value) => (
+        <StatusBadge status={value as string} variant={statusVariant[(value as string)] || "gray"} />
+      ),
+    },
+  ]
+
+  const batchActions: BatchAction<InboundRow>[] = [
+    {
+      label: "Export Selected",
+      icon: Download,
+      onClick: (rows) => {
+        const data = rows.map((s) => ({
+          Invoice: s.invoice,
+          Supplier: s.supplier,
+          Type: s.type,
+          Warehouse: s.warehouse,
+          Status: s.status,
+          "SLA %": `${s.slaProgress}%`,
+        }))
+        exportToCSV(data, "inbound-selected", EXPORT_COLUMNS)
+      },
+    },
+    {
+      label: "View Details",
+      icon: Eye,
+      onClick: (rows) => {
+        // Detail view — ready for API integration
+      },
+    },
+  ]
+
+  const expandableRowRender = useCallback((row: InboundRow) => {
+    const currentStep = row.timeline.find((s) => s.status === "in-progress")
+    const slaColor = row.slaProgress > 80 ? "text-emerald-600 dark:text-emerald-400" : row.slaProgress > 50 ? "text-amber-600 dark:text-amber-400" : "text-red-600 dark:text-red-400"
+
+    return (
+      <div className="grid gap-4 md:grid-cols-2">
+        <div>
+          <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Shipment Timeline</h4>
+          <div className="space-y-2">
+            {row.timeline.map((step) => (
+              <div key={step.step} className="flex items-start gap-3">
+                <div className={cn(
+                  "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+                  step.status === "completed" && "bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400",
+                  step.status === "in-progress" && "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400",
+                  step.status === "pending" && "bg-muted text-muted-foreground"
+                )}>
+                  {step.status === "completed" ? <CheckCircle2 className="h-3 w-3" /> : step.status === "in-progress" ? <Clock className="h-3 w-3" /> : <Circle className="h-3 w-3" />}
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs font-medium">{step.label}</p>
+                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
+                    {step.duration && <span>{step.duration}</span>}
+                    {step.user && <span className="flex items-center gap-1">{step.user}</span>}
+                    <span>{step.timestamp}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-3">
+          <div>
+            <h4 className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Shipment Details</h4>
+            <div className="rounded-lg border bg-card p-3 space-y-2 text-xs">
+              <div className="flex justify-between"><span className="text-muted-foreground">Invoice</span><span className="font-medium">{row.invoice}</span></div>
+              <Separator />
+              <div className="flex justify-between"><span className="text-muted-foreground">Supplier</span><span className="font-medium">{row.supplier}</span></div>
+              <Separator />
+              <div className="flex justify-between"><span className="text-muted-foreground">Type</span><span className="font-medium">{row.type}</span></div>
+              <Separator />
+              <div className="flex justify-between"><span className="text-muted-foreground">Warehouse</span><span className="font-medium">{row.warehouse}</span></div>
+              <Separator />
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Current Step</span>
+                <span className="font-medium">{currentStep?.label || "—"}</span>
+              </div>
+              <Separator />
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">SLA Progress</span>
+                <span className={cn("font-medium tabular-nums", slaColor)}>{row.slaProgress}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }, [])
 
   return (
     <div className="space-y-6">
@@ -106,14 +248,14 @@ export function InboundView() {
           { label: "Completed", value: summary.completed, icon: CheckCircle2, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
           { label: "Delayed", value: summary.delayed, icon: AlertCircle, color: "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
+          <Card key={item.label} className="card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
             <CardContent className="flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">{item.label}</p>
-                <p className="text-lg font-bold">{item.value}</p>
+                <p className="text-lg font-bold text-number">{item.value}</p>
               </div>
             </CardContent>
           </Card>
@@ -122,15 +264,6 @@ export function InboundView() {
 
       {/* Filters */}
       <div className="filter-bar flex flex-wrap items-center gap-3">
-        <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search invoice or supplier..."
-            className="h-8 w-[220px] pl-8 text-xs"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
         <Select value={typeFilter} onValueChange={setTypeFilter}>
           <SelectTrigger className="w-[140px] h-8 text-xs">
             <SelectValue placeholder="Type" />
@@ -152,153 +285,22 @@ export function InboundView() {
             ))}
           </SelectContent>
         </Select>
-        <div className="ml-auto text-xs text-muted-foreground">
-          {filtered.length} shipment{filtered.length !== 1 ? "s" : ""}
-        </div>
       </div>
 
-      {/* Inbound Pipeline */}
-      <Card className="rounded-xl border-border/60 shadow-sm overflow-hidden">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-sm font-semibold">Inbound Pipeline</CardTitle>
-        </CardHeader>
-        <CardContent className="p-0">
-          <ScrollArea className="h-auto">
-            <div className="table-container">
-            <Table className="table-row-hover">
-              <TableHeader>
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="w-8"></TableHead>
-                  <TableHead className="text-xs">Invoice</TableHead>
-                  <TableHead className="text-xs">Supplier</TableHead>
-                  <TableHead className="text-xs">Type</TableHead>
-                  <TableHead className="text-xs hidden lg:table-cell">Warehouse</TableHead>
-                  <TableHead className="text-xs min-w-[300px]">Process Progress</TableHead>
-                  <TableHead className="text-xs hidden md:table-cell">Duration</TableHead>
-                  <TableHead className="text-xs hidden md:table-cell">User</TableHead>
-                  <TableHead className="text-xs">SLA</TableHead>
-                  <TableHead className="text-xs">Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((shipment) => {
-                  const isExpanded = expandedRow === shipment.id
-                  const currentStep = shipment.timeline.find((s) => s.status === "in-progress")
-                  const slaColor = shipment.slaProgress > 80 ? "text-emerald-600 dark:text-emerald-400" : shipment.slaProgress > 50 ? "text-amber-600 dark:text-amber-400" : "text-red-600 dark:text-red-400"
-
-                  return (
-                    <>
-                      <TableRow
-                        key={shipment.id}
-                        className="cursor-pointer"
-                        onClick={() => setExpandedRow(isExpanded ? null : shipment.id)}
-                      >
-                        <TableCell className="p-2">
-                          <ChevronRight className={cn("h-3.5 w-3.5 text-muted-foreground transition-transform", isExpanded && "rotate-90")} />
-                        </TableCell>
-                        <TableCell className="text-xs font-medium">{shipment.invoice}</TableCell>
-                        <TableCell className="text-xs">{shipment.supplier}</TableCell>
-                        <TableCell>
-                          <Badge variant="outline" className="gap-1 text-[10px] rounded-full">
-                            {shipment.type === "Domestic" ? <Home className="h-2.5 w-2.5" /> : <Globe className="h-2.5 w-2.5" />}
-                            {shipment.type}
-                          </Badge>
-                        </TableCell>
-                        <TableCell className="text-xs hidden lg:table-cell">{shipment.warehouse}</TableCell>
-                        <TableCell className="py-2">
-                          <div className="flex items-center gap-1">
-                            {STEPS.map((step, idx) => {
-                              const stepData = shipment.timeline.find((s) => s.label === step)
-                              const isDone = stepData?.status === "completed"
-                              const isCurrent = stepData?.status === "in-progress"
-                              return (
-                                <div key={step} className="flex items-center" title={step}>
-                                  <div className={cn(
-                                    "flex h-6 w-6 items-center justify-center rounded-full text-[9px] font-medium transition-colors",
-                                    isDone && "bg-emerald-500 text-white",
-                                    isCurrent && "bg-blue-600 text-white ring-2 ring-blue-200 dark:ring-blue-800",
-                                    !isDone && !isCurrent && "bg-muted text-muted-foreground"
-                                  )}>
-                                    {isDone ? <CheckCircle2 className="h-3 w-3" /> : idx + 1}
-                                  </div>
-                                  {idx < STEPS.length - 1 && (
-                                    <div className={cn("h-0.5 w-3 md:w-6", isDone ? "bg-emerald-500" : "bg-muted")} />
-                                  )}
-                                </div>
-                              )
-                            })}
-                          </div>
-                        </TableCell>
-                        <TableCell className="text-xs hidden md:table-cell">{currentStep?.duration || "—"}</TableCell>
-                        <TableCell className="text-xs hidden md:table-cell">{currentStep?.user || "—"}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center gap-1.5">
-                            <Progress value={shipment.slaProgress} className="h-1.5 w-12" />
-                            <span className={cn("text-[10px] font-medium", slaColor)}>{shipment.slaProgress}%</span>
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <StatusBadge status={shipment.status} variant={statusVariant[shipment.status] || "gray"} />
-                        </TableCell>
-                      </TableRow>
-                      {isExpanded && (
-                        <TableRow key={`${shipment.id}-detail`} className="bg-muted/30">
-                          <TableCell colSpan={10} className="p-4">
-                            <div className="grid gap-4 md:grid-cols-2">
-                              <div>
-                                <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Shipment Timeline</h4>
-                                <div className="space-y-2">
-                                  {shipment.timeline.map((step) => (
-                                    <div key={step.step} className="flex items-start gap-3">
-                                      <div className={cn(
-                                        "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
-                                        step.status === "completed" && "bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400",
-                                        step.status === "in-progress" && "bg-blue-100 text-blue-600 dark:bg-blue-950 dark:text-blue-400",
-                                        step.status === "pending" && "bg-muted text-muted-foreground"
-                                      )}>
-                                        {step.status === "completed" ? <CheckCircle2 className="h-3 w-3" /> : step.status === "in-progress" ? <Clock className="h-3 w-3" /> : <Circle className="h-3 w-3" />}
-                                      </div>
-                                      <div className="flex-1">
-                                        <p className="text-xs font-medium">{step.label}</p>
-                                        <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
-                                          {step.duration && <span>{step.duration}</span>}
-                                          {step.user && <span>• {step.user}</span>}
-                                          <span>• {step.timestamp}</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                              <div className="space-y-3">
-                                <div>
-                                  <h4 className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Shipment Details</h4>
-                                  <div className="rounded-lg border bg-card p-3 space-y-2 text-xs">
-                                    <div className="flex justify-between"><span className="text-muted-foreground">Invoice</span><span className="font-medium">{shipment.invoice}</span></div>
-                                    <Separator />
-                                    <div className="flex justify-between"><span className="text-muted-foreground">Supplier</span><span className="font-medium">{shipment.supplier}</span></div>
-                                    <Separator />
-                                    <div className="flex justify-between"><span className="text-muted-foreground">Type</span><span className="font-medium">{shipment.type}</span></div>
-                                    <Separator />
-                                    <div className="flex justify-between"><span className="text-muted-foreground">Warehouse</span><span className="font-medium">{shipment.warehouse}</span></div>
-                                    <Separator />
-                                    <div className="flex justify-between"><span className="text-muted-foreground">SLA Progress</span><span className={cn("font-medium", slaColor)}>{shipment.slaProgress}%</span></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </>
-                  )
-                })}
-              </TableBody>
-            </Table>
-            </div>
-          </ScrollArea>
-        </CardContent>
-      </Card>
+      {/* Inbound Pipeline DataTable with Expandable Timeline */}
+      <DataTable<InboundRow>
+        data={filtered}
+        columns={columns}
+        searchableColumns={["invoice", "supplier", "warehouse"]}
+        searchPlaceholder="Search invoice, supplier, warehouse..."
+        selectable
+        batchActions={batchActions}
+        expandableRowRender={expandableRowRender}
+        getRowKey={(row) => row.id}
+        showColumnToggle
+        pageSize={8}
+        showCount
+      />
     </div>
   )
 }

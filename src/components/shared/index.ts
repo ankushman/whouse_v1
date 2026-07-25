@@ -31,3 +31,4 @@ export { SimulatedEventProvider } from './simulated-event-provider'
 export { ThemeEffect } from './theme-effect'
 export { ShipmentTrackingTable } from "./shipment-tracking-table"
 export { WarehouseKPIComparison } from "./warehouse-kpi-comparison"
+export { WarehouseHealthMonitor } from "./warehouse-health-monitor"

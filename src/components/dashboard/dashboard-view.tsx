@@ -44,6 +44,7 @@ import { ShiftHandoverPanel } from "@/components/shared/shift-handover-panel"
 import { WarehouseKPIComparison } from "@/components/shared/warehouse-kpi-comparison"
 import { generateSparklineData } from "@/components/shared/mini-sparkline"
 import { ShipmentTrackingTable } from "@/components/shared/shipment-tracking-table"
+import { WarehouseHealthMonitor } from "@/components/shared/warehouse-health-monitor"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 
@@ -319,6 +320,11 @@ export function DashboardView() {
       {/* SLA Monitoring Panel */}
       <div className="stagger-children">
         <SLAMonitoringPanel />
+      </div>
+
+      {/* Warehouse Health Monitor */}
+      <div className="stagger-children">
+        <WarehouseHealthMonitor />
       </div>
 
       {/* Warehouse KPI Comparison + Capacity Heatmap */}
