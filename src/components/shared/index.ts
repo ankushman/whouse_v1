@@ -23,7 +23,7 @@ export { ToastProvider } from './toast-provider'
 export { ActivityTimeline } from './activity-timeline'
 export { RealtimeToastListener } from './realtime-toast-listener'
 export { KPIDetailPopover } from './kpi-detail-popover'
-export { EmployeeDetailModal } from './employee-detail-modal'
+export { EmployeeDetailDrawer, type EmployeeDetailDrawerProps } from "./employee-detail-drawer"
 export { AIInsightsPanel } from './ai-insights-panel'
 export { ShiftHandoverPanel } from './shift-handover-panel'
 export { QuickSettingsPopover } from './quick-settings-popover'

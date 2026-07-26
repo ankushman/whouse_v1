@@ -6087,3 +6087,127 @@ html.theme-transition body {
   box-shadow: 0 12px 24px -8px oklch(0.4 0.15 250 / 0.25);
 }
 
+/* ============================================================================
+   Round 33 — Employee Detail Drawer micro-interactions
+   ============================================================================ */
+
+/* Subtle sheen on employee drawer header (8s loop, matches wh-drawer-sheen) */
+.emp-drawer-header {
+  position: relative;
+  overflow: hidden;
+}
+.emp-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  animation: emp-header-sheen 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes emp-header-sheen {
+  0%   { left: -100%; }
+  60%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* Online status dot — pulsing emerald ring */
+@keyframes emp-online-pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70%  { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.emp-online-pulse {
+  animation: emp-online-pulse-ring 2s ease-out infinite;
+}
+
+/* Body content slide-in from right (mirrors wh-drawer-content-enter) */
+@keyframes emp-body-enter {
+  0%   { opacity: 0; transform: translateX(20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.emp-drawer-body-enter {
+  animation: emp-body-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Stat card hover — gentle lift + tinted border */
+.emp-stat-card-hover {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.emp-stat-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: oklch(0.6 0.15 250 / 0.4);
+  box-shadow: 0 4px 12px -3px oklch(0.4 0.15 250 / 0.18);
+}
+
+/* Card staggered entrance (Performance Breakdown, Trend, Skills, Tasks, etc.) */
+@keyframes emp-card-enter-anim {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.emp-card-enter {
+  animation: emp-card-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 80ms;
+}
+
+/* Skill badge entrance — slight pop-in */
+@keyframes emp-skill-pop {
+  0%   { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.emp-skill-enter {
+  animation: emp-skill-pop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Task row hover — bg tint + slight left shift of the dot */
+.emp-task-row-hover {
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+.emp-task-row-hover:hover {
+  background-color: oklch(0.96 0.01 250 / 0.6);
+  transform: translateX(2px);
+}
+:is(.dark .emp-task-row-hover:hover) {
+  background-color: oklch(0.25 0.02 250 / 0.5);
+}
+
+/* Achievement card entrance — staggered slide + fade */
+@keyframes emp-ach-enter-anim {
+  0%   { opacity: 0; transform: translateY(6px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.emp-ach-enter {
+  animation: emp-ach-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Cert row entrance */
+.emp-cert-row {
+  animation: emp-card-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Activity timeline entrance — staggered slide from left */
+@keyframes emp-activity-slide {
+  0%   { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.emp-activity-enter {
+  animation: emp-activity-slide 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Performance alert entrance — staggered slide from right with subtle scale */
+@keyframes emp-alert-enter-anim {
+  0%   { opacity: 0; transform: translateX(12px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.emp-alert-enter {
+  animation: emp-alert-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+

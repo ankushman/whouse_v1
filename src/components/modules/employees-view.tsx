@@ -30,10 +30,11 @@ import {
   BarChart3,
   GitCompareArrows,
   Building2,
+  AlertTriangle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ShiftScheduler } from "@/components/shared/shift-scheduler"
-import { EmployeeDetailModal } from "@/components/shared/employee-detail-modal"
+import { EmployeeDetailDrawer } from "@/components/shared/employee-detail-drawer"
 import {
   ChartContainer,
   ChartTooltip,
@@ -288,8 +289,15 @@ const employeeColumns: Column<(typeof employees)[number]>[] = [
   },
 ]
 
+// An employee "needs attention" if any of their core metrics breach thresholds.
+// Used by the new "Needs Attention" filter + stat card + tab badge.
+function needsAttention(e: { productivity: number; attendance: number; errorRate: number; overtime: number }): boolean {
+  return e.productivity < 80 || e.attendance < 90 || e.errorRate > 3 || e.overtime > 20
+}
+
 export function EmployeesView() {
   const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
+  const [attentionFilter, setAttentionFilter] = useState<string>("all")
   const [selectedEmployee, setSelectedEmployee] = useState<(typeof employees)[number] | null>(null)
 
   const warehouseList = useMemo(
@@ -301,9 +309,11 @@ export function EmployeesView() {
     () =>
       employees.filter((e) => {
         if (warehouseFilter !== "all" && e.warehouse !== warehouseFilter) return false
+        if (attentionFilter === "needs-attention" && !needsAttention(e)) return false
+        if (attentionFilter === "top-performers" && e.productivity < 90) return false
         return true
       }),
-    [warehouseFilter]
+    [warehouseFilter, attentionFilter]
   )
 
   const stats = useMemo(
@@ -318,6 +328,16 @@ export function EmployeesView() {
       ),
     }),
     [filtered]
+  )
+
+  // Count employees needing attention across the warehouse filter (not attention filter)
+  // so the stat card always reflects the warehouse selection regardless of attention filter.
+  const needsAttentionCount = useMemo(
+    () => employees.filter((e) => {
+      if (warehouseFilter !== "all" && e.warehouse !== warehouseFilter) return false
+      return needsAttention(e)
+    }).length,
+    [warehouseFilter]
   )
 
   // Compare tab derived data
@@ -370,7 +390,7 @@ export function EmployeesView() {
         actions={<ExportButton onExportCSV={handleExportCSV} />}
       />
 
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 stagger-children">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 stagger-children">
         <Card className="card-depth py-0 gap-0">
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
@@ -434,6 +454,39 @@ export function EmployeesView() {
             </div>
           </CardContent>
         </Card>
+
+        <Card
+          className={cn(
+            "card-depth py-0 gap-0 cursor-pointer transition-all hover:shadow-md",
+            attentionFilter === "needs-attention" && "ring-2 ring-amber-400/60"
+          )}
+          onClick={() => setAttentionFilter(attentionFilter === "needs-attention" ? "all" : "needs-attention")}
+        >
+          <CardContent className="flex items-center gap-4 py-4">
+            <div className={cn(
+              "flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors",
+              needsAttentionCount > 0
+                ? "bg-amber-50 dark:bg-amber-950/60"
+                : "bg-emerald-50 dark:bg-emerald-950/60"
+            )}>
+              <AlertTriangle className={cn(
+                "size-5",
+                needsAttentionCount > 0 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
+              )} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Needs Attention
+              </p>
+              <p className={cn(
+                "mt-0.5 text-xl font-bold tabular-nums leading-tight",
+                needsAttentionCount > 0 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
+              )}>
+                {needsAttentionCount}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <Tabs defaultValue="leaderboard" className="w-full">
@@ -465,18 +518,30 @@ export function EmployeesView() {
                   Performance Leaderboard
                 </CardTitle>
               </div>
-              <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
-                <SelectTrigger className="w-[180px] h-8 text-xs">
-                  <SelectValue placeholder="Filter warehouse" />
-                </SelectTrigger>
-                <SelectContent>
-                  {warehouseList.map((wh) => (
-                    <SelectItem key={wh} value={wh}>
-                      {wh === "all" ? "All Warehouses" : wh}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="flex items-center gap-2">
+                <Select value={attentionFilter} onValueChange={setAttentionFilter}>
+                  <SelectTrigger className="w-[160px] h-8 text-xs">
+                    <SelectValue placeholder="Performance" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Employees</SelectItem>
+                    <SelectItem value="needs-attention">Needs Attention</SelectItem>
+                    <SelectItem value="top-performers">Top Performers</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select value={warehouseFilter} onValueChange={setWarehouseFilter}>
+                  <SelectTrigger className="w-[180px] h-8 text-xs">
+                    <SelectValue placeholder="Filter warehouse" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {warehouseList.map((wh) => (
+                      <SelectItem key={wh} value={wh}>
+                        {wh === "all" ? "All Warehouses" : wh}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </CardHeader>
             <CardContent>
               <DataTable
@@ -727,7 +792,7 @@ export function EmployeesView() {
         </TabsContent>
       </Tabs>
 
-      <EmployeeDetailModal
+      <EmployeeDetailDrawer
         employee={selectedEmployee}
         open={!!selectedEmployee}
         onOpenChange={(open) => {
