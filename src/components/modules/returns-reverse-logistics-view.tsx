@@ -59,6 +59,7 @@ import {
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast-helper"
 import { cn } from "@/lib/utils"
+import { ReturnsDetailDrawer, type ReturnDetailItem } from "@/components/shared/returns-detail-drawer"
 import {
   AreaChart,
   Area,
@@ -246,6 +247,30 @@ export function ReturnsReverseLogisticsView() {
   const [reasonFilter, setReasonFilter] = useState<string>("all")
   const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
   const [selectedTab, setSelectedTab] = useState("all")
+  const [detailOpen, setDetailOpen] = useState(false)
+  const [detailItem, setDetailItem] = useState<ReturnDetailItem | null>(null)
+
+  const openDetail = (r: typeof returnsData[0]) => {
+    setDetailItem({
+      id: r.id,
+      rma: r.rma,
+      customer: r.customer,
+      warehouse: r.warehouse,
+      sku: r.sku,
+      partName: r.partName,
+      category: r.category,
+      quantity: r.quantity,
+      reason: r.reason,
+      status: r.status,
+      disposition: r.disposition,
+      initiatedDate: r.initiatedDate,
+      ageDays: r.ageDays,
+      value: r.value,
+      inspector: r.inspector,
+      priority: r.priority,
+    })
+    setDetailOpen(true)
+  }
 
   const filteredReturns = useMemo(() => {
     return returnsData.filter((r) => {
@@ -696,7 +721,7 @@ export function ReturnsReverseLogisticsView() {
                   const StatusIcon = statusConfig[r.status].icon
                   const ReasonIcon = reasonConfig[r.reason].icon
                   return (
-                    <TableRow key={r.id} className="cursor-pointer hover:bg-accent/40 transition-colors returns-row-in">
+                    <TableRow key={r.id} className="cursor-pointer hover:bg-accent/40 transition-colors returns-row-in" onClick={() => openDetail(r)}>
                       <TableCell>
                         <div className="flex flex-col">
                           <div className="flex items-center gap-1.5">
@@ -810,7 +835,7 @@ export function ReturnsReverseLogisticsView() {
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7"
-                            onClick={() => toast.info("Opening detail", `${r.rma} — full RMA detail drawer coming next round.`)}
+                            onClick={() => openDetail(r)}
                           >
                             <Eye className="h-3 w-3" />
                           </Button>
@@ -831,6 +856,13 @@ export function ReturnsReverseLogisticsView() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Universal detail drawer — drill-down from RMA rows */}
+      <ReturnsDetailDrawer
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        item={detailItem}
+      />
     </div>
   )
 }

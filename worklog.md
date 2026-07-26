@@ -4022,3 +4022,132 @@ Updated Project Status (Post Round 41):
   12. Predictive model retraining trigger UI (currently display-only)
   13. Add Customer SLA Performance module (cross-customer SLA dashboard)
   14. Add Supplier Quality Scorecard module (vendor performance analytics)
+
+---
+Task ID: 42
+Agent: Main (Cron Review - Round 42)
+Task: ReturnsDetailDrawer (closes RMA drawer gap) + new Yard Management module + 30+ CSS micro-interactions + agent-browser QA verification
+
+Work Log:
+- Read worklog.md — project at Round 41 (commit 3366a1e), 23 modules, 21 detail drawers (universal coverage incl. Settings), 590+ CSS classes, 0 TS errors, lint/build clean.
+- Verified baseline: `bun run lint` (0 errors), `bun run build` (success, 18.5s), `npx tsc --noEmit` (0 src/ errors).
+- **agent-browser QA: WORKED THIS ROUND!** Successfully navigated to http://localhost:3000/, clicked "Yard Management" nav item, verified view rendered (heading "Yard Management", "Live Yard Map · Chennai Hub", "Trailer Park", vehicle TN-01-AB-1234 visible in table). Then clicked "Returns & Reverse" nav, verified RMA records loaded (RMA-2024-1101 through RMA-2024-1114). Then clicked first table row → ReturnsDetailDrawer opened correctly with 5 tabs (Overview / Inspection / Recovery / Communications / Timeline). Clicked "Inspection" tab — verified Inspector info, Defect Codes (DMG-OUT-01, DMG-IN-02), Photo Evidence (4), QA Checklist (Non-conforming), and Inspector Notes all rendered. Prior rounds' note about sandbox network isolation no longer applies.
+- Strategic choice: Closed the only remaining drawer gap (Returns RMA drill-down — was showing a "coming next round" toast), added a brand new operational module (Yard Management — bridge between Dock Scheduler and Warehouse Map), and added 30+ new CSS micro-interactions. Both new features verified live via agent-browser.
+
+NEW FEATURE 1: ReturnsDetailDrawer (~1430 lines, 5 sub-tabs, file: src/components/shared/returns-detail-drawer.tsx)
+  - 5 sub-tabs: Overview / Inspection / Recovery / Communications / Timeline
+  - Overview tab: Return Reason card (icon + label + description, full theming per 8 reason types), Part Information grid (SKU/Part Name/Category/Qty/Unit Value/Gross Value), Customer & Warehouse cards (avatar with initials), 14-Day SKU Return Trend AreaChart (returns vs shipped with weekend factor), Disposition snapshot card (icon + label + description + recovery progress bar)
+  - Inspection tab: Inspector card (avatar + name + warehouse + start time), Identified Defect Codes list (2-3 codes per RMA, severity badges critical/major/minor, 7 reason-specific code pools), Photo Evidence grid (4 placeholder tiles with hover-zoom + label), QA Checklist (7 items with pass/fail/n/a status + summary counter), Inspector Notes (italicized quote with signature)
+  - Recovery tab: Financial Breakdown card (Gross Value, Recovery %, Transport/Inspection/Disposal costs, Net Financial Impact with color-coded total + progress bar), Recovery Breakdown donut PieChart (5 segments: Recovered/Transport/Inspection/Disposal/Net Loss), Disposition Comparison BarChart (6 dispositions with selected one highlighted at full opacity), Similar Returns History (5 historical RMAs for same SKU with disposition badges + recovery %)
+  - Communications tab: 4-message chat-style thread (customer/warehouse/system with avatar colors + timestamps + bubble alignment), Quick Reply composer (input + send button + 4 quick-reply chips)
+  - Timeline tab: 7-event lifecycle timeline (initiated → pickup → transit → received → inspection → decision → resolved) with color-coded dots, event icons, timestamps, actor attribution
+  - Status-aware theming: 9 status variants (initiated/pickup-scheduled/in-transit/received/inspection/restocked/refurbished/disposed/rejected) with matching gradients, borders, icon colors, glow shadows
+  - Header: 4 hero stat grid (Quantity / Gross Value / Recovery % / Aging) with severity colors
+  - Footer actions: Export CSV / Print Label / Call + contextual Approve/Reject (only when status=inspection) OR Acknowledge
+  - Deterministic mock data: timeline events (status-conditional), defect codes (reason-specific pool, hash-picked), QA checklist (hash-bit pass/fail), communications (4 messages with relative timestamps), similar returns (5 RMAs with varied dispositions), SKU 14-day trend (with weekend factor) — all seeded by RMA ID hash
+  - Hooks correctly placed BEFORE early return
+  - Wired into returns-reverse-logistics-view.tsx: RMA table rows now clickable (cursor-pointer + onClick), Eye button now opens drawer (was toast.info placeholder), drawer state in parent (detailOpen + detailItem)
+
+NEW FEATURE 2: Yard Management Module (~750 lines, file: src/components/modules/yard-management-view.tsx)
+  - New navigation item: "Yard Management" (icon: ParkingCircle, group: operations, between Dock Scheduler and SLA Countdown)
+  - 6 hero KPI cards: Trucks in Yard / Avg Wait Time / Detention Risk / Gate-In (24h) / Gate-Out (24h) / Yard Utilization — each with trend indicator, severity color, secondary metric, Progress bar for utilization
+  - 24-Hour Gate Activity AreaChart (gate-in vs gate-out per hour with peak-hour modeling)
+  - Yard Zone Distribution donut PieChart (6 zones: Trailer Park / Cold Storage / Bonded / Hazmat / Empty Returns / Inspection Bay) with color-coded legend
+  - **Live Yard Map visualization** (NEW!): 30-slot Trailer Park grid (color-coded: green=empty, blue=occupied, amber=awaiting dock, red=detention with pulse animation), plus 3 sub-zone grids (Cold Storage 10 slots, Bonded 8 slots, Hazmat 5 slots) — each slot shows hover tooltip with vehicle reg + driver
+  - Average Wait Time by Zone BarChart (6 zones with zone-color bars)
+  - Active Yard Vehicles table with 18 mock records: RegNumber / Type+Carrier / Driver+Shipment / Zone+Slot / Status / Wait / Detention / Dock / Warehouse / Actions
+  - 5 tabs: All (18) / Arriving (2) / Parked (4) / Awaiting Dock (4) / Detention (5)
+  - 3 filters: Zone (6 options), Status (8 options), Warehouse (6 options) + free-text search
+  - 8 vehicle statuses: arriving → gate-in → parked/yard-move → awaiting-dock/dock-assigned → gate-out, plus detention alert
+  - 6 vehicle types: tractor / trailer / container-20ft / container-40ft / reefer (each with icon + color)
+  - 6 yard zones with full theming (icon, color, bg, pieColor, description)
+  - Contextual quick-action buttons in table: "Assign Dock" (awaiting-dock with loading state), "Move" (parked), "To Dock" (dock-assigned), Eye (always)
+  - Status pill with icon + color-coded background + severity border
+  - Priority badge (HIGH) with pulse animation
+  - Wait time cell color-coded (green <60min, amber 60-90min, red >90min)
+  - Detention cell flashes when >0 (red >60min, amber <60min)
+  - CSV export with all 18 vehicles (full field set)
+  - Refresh + Gate-In action buttons with toast feedback
+  - All animations: yard-kpi-enter (6 staggered), yard-chart-enter (hover lift), yard-map-enter (scale-in), yard-slot-pop (per slot), yard-row-in (per row with hover accent), yard-detention-pulse (red slots), yard-detention-flash (detention cell), yard-priority-pulse (HIGH badge)
+
+NEW FEATURE 3: Navigation + Icon Map updates
+  - Added 'yard-management' to navItems in app-store.ts (group: operations, roles: super_admin/executive/regional_manager/warehouse_manager/supervisor)
+  - Imported ParkingCircle icon in app-layout.tsx and added to iconMap
+  - Imported YardManagementView in app/page.tsx and added to viewMap
+
+CSS: Added 30+ new micro-interaction classes in globals.css (lines 8680-9002, +322 lines):
+  - 14 for Returns Detail Drawer: returns-drawer-sheen (header sweep), returns-icon-pulse, returns-stat-enter (staggered 4), returns-body-enter (slide-in), returns-card-enter (hover lift + shadow), returns-tab-switch, returns-row-in, returns-msg-in (chat bubbles), returns-timeline-in, returns-photo-pop (scale + hover), returns-search-focus (ring expand), returns-bar-shimmer, returns-number-glow, returns-check-ripple (pass icons), returns-timeline-glow, returns-drawer-header (gradient underline), returns-drawer-header::after (bottom edge gradient)
+  - 16+ for Yard Management: yard-kpi-enter (6 staggered), yard-chart-enter (hover lift), yard-map-enter (scale-in), yard-slot-pop (per slot with hover scale 1.18), yard-row-in (per row with hover accent bar), yard-row-accent (left edge gradient), yard-detention-pulse (red slot pulse), yard-detention-flash (detention cell flash), yard-priority-pulse (HIGH badge), yard-truck-drive (drive animation), yard-empty-enter, yard-assign-glow (button hover)
+
+QA Verification (agent-browser LIVE TEST):
+  - agent-browser navigate http://localhost:3000/ → ✓ page loaded
+  - agent-browser snapshot → ✓ Yard Management nav item visible
+  - agent-browser click nav button → ✓ Yard Management view rendered
+  - agent-browser snapshot → ✓ "Live Yard Map · Chennai Hub", "Trailer Park", vehicle TN-01-AB-1234 visible
+  - agent-browser click Returns & Reverse nav → ✓ Returns view rendered with 14 RMA records
+  - agent-browser eval --stdin → clicked first table row
+  - agent-browser snapshot → ✓ ReturnsDetailDrawer opened (dialog "RMA-2024-1101 Under Inspection HIGH")
+  - Verified 5 tabs visible: Overview, Inspection (2), Recovery, Communications, Timeline (5)
+  - agent-browser click "Inspection" tab → ✓ Defect Codes (DMG-OUT-01, DMG-IN-02), Photo Evidence (4), QA Checklist (Non-conforming), Inspector Notes all rendered
+
+Static Verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully in 18.6s, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (maintained from Round 41)
+
+Stage Summary:
+- 8 files changed (2 new + 6 modified), +2520 lines
+- 1 NEW DETAIL DRAWER: ReturnsDetailDrawer (~1430 lines, 5 sub-tabs) — closes the Returns module drill-down gap
+- 1 NEW MODULE: Yard Management (~750 lines, 6 KPIs + 4 charts + Live Yard Map + filterable vehicle table with 18 records + 5 tabs)
+- 1 NEW NAV ITEM + ICON: "Yard Management" with ParkingCircle icon
+- 30+ new CSS micro-interaction classes (14 returns + 16+ yard)
+- 3 views updated: returns-reverse-logistics-view (rows clickable, drawer wired), app-layout (ParkingCircle icon), page.tsx (viewMap)
+- DETAIL DRAWERS NOW: 22 total
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓ NEW
+- MODULES NOW: 24 (was 23 — added Yard Management)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser LIVE TEST PASSED (this round worked — sandbox network isolation no longer blocking)
+
+---
+Updated Project Status (Post Round 42):
+- STATUS: STABLE + RETURNS DRAWER COMPLETE + NEW YARD MANAGEMENT MODULE + agent-browser QA PASSED
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (24): All previous 23 + Yard Management (NEW)
+- SHARED COMPONENTS (53+): All previous 52 + ReturnsDetailDrawer (NEW)
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (620+): 590+ previous + 30+ new (14 returns + 16+ yard)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (22 — UNIVERSAL COVERAGE COMPLETE INCLUDING RETURNS):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser LIVE verification passed (Yard nav click → view render; Returns row click → drawer open + tab switch)
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use `bun run build` for verification)
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - agent-browser requires `eval --stdin` (heredoc) for any JS with quotes/special chars — inline `eval "..."` only works for simple expressions
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Yard Management module does not yet have a dedicated YardDetailDrawer (vehicle drill-down) — Eye button currently shows toast.info placeholder
+- PRIORITY NEXT:
+  1. Add YardDetailDrawer (vehicle drill-down) — closes the per-record drill-down gap for the new module
+  2. Add Vendor Management module (new operational module — supplier performance analytics)
+  3. Add Customer SLA Performance module (cross-customer SLA dashboard)
+  4. Add Supplier Quality Scorecard module (vendor performance analytics)
+  5. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  6. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  7. Consolidate inline mock data from all 22 detail drawers into mock-data.ts (refactor)
+  8. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  9. CSS audit: 620+ classes — consolidate 181 pre-existing duplicates
+  10. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  11. Multi-warehouse switching for dock scheduler & yard management (currently fixed to Chennai Hub)
+  12. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  13. Predictive model retraining trigger UI (currently display-only)
+  14. Yard tractor pairing logic (currently shows tractor+trailer as independent vehicles)

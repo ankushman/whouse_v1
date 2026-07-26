@@ -8675,3 +8675,328 @@ html.theme-transition body {
   transform-origin: left;
   animation: settings-coverage-fill 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* ============================================================================
+   ROUND 42 — Returns Detail Drawer + Yard Management micro-interactions
+   ============================================================================ */
+
+/* ── Returns Detail Drawer ───────────────────────────────────────────────── */
+
+@keyframes returns-drawer-sheen {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(100%); opacity: 0.5; }
+}
+.returns-drawer-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  animation: returns-drawer-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes returns-icon-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 currentColor; }
+  50% { transform: scale(1.04); box-shadow: 0 0 0 6px transparent; }
+}
+.returns-icon-pulse {
+  animation: returns-icon-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes returns-stat-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.returns-stat-enter > * {
+  animation: returns-stat-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.returns-stat-enter > *:nth-child(1) { animation-delay: 60ms; }
+.returns-stat-enter > *:nth-child(2) { animation-delay: 120ms; }
+.returns-stat-enter > *:nth-child(3) { animation-delay: 180ms; }
+.returns-stat-enter > *:nth-child(4) { animation-delay: 240ms; }
+
+@keyframes returns-body-enter {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.returns-body-enter {
+  animation: returns-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes returns-card-enter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.returns-card-enter {
+  animation: returns-card-enter 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.returns-card-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes returns-tab-switch {
+  from { opacity: 0.6; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.returns-tab-switch {
+  animation: returns-tab-switch 200ms ease-out;
+}
+
+@keyframes returns-row-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.returns-row-in {
+  animation: returns-row-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes returns-msg-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.returns-msg-in {
+  animation: returns-msg-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes returns-timeline-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.returns-timeline-in {
+  animation: returns-timeline-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes returns-photo-pop {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+.returns-photo-pop {
+  animation: returns-photo-pop 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: transform 220ms ease;
+}
+.returns-photo-pop:hover {
+  transform: scale(1.06);
+}
+
+/* ── Yard Management ─────────────────────────────────────────────────────── */
+
+@keyframes yard-kpi-enter {
+  from { opacity: 0; transform: translateY(10px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.yard-kpi-enter > * {
+  animation: yard-kpi-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.yard-kpi-enter > *:nth-child(1) { animation-delay: 60ms; }
+.yard-kpi-enter > *:nth-child(2) { animation-delay: 120ms; }
+.yard-kpi-enter > *:nth-child(3) { animation-delay: 180ms; }
+.yard-kpi-enter > *:nth-child(4) { animation-delay: 240ms; }
+.yard-kpi-enter > *:nth-child(5) { animation-delay: 300ms; }
+.yard-kpi-enter > *:nth-child(6) { animation-delay: 360ms; }
+
+@keyframes yard-chart-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.yard-chart-enter {
+  animation: yard-chart-enter 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.yard-chart-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -14px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes yard-map-enter {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.yard-map-enter {
+  animation: yard-map-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes yard-slot-pop {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+.yard-slot-pop {
+  animation: yard-slot-pop 280ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.yard-slot-pop:hover {
+  transform: scale(1.18) translateY(-1px);
+  box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.24);
+  z-index: 2;
+  position: relative;
+}
+
+@keyframes yard-row-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.yard-row-in {
+  animation: yard-row-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.yard-row-in:hover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg, #3b82f6 0%, #10b981 100%);
+  animation: yard-row-accent 240ms ease-out;
+}
+.yard-row-in {
+  position: relative;
+}
+@keyframes yard-row-accent {
+  from { transform: scaleY(0); transform-origin: top; }
+  to { transform: scaleY(1); transform-origin: top; }
+}
+
+@keyframes yard-detention-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6), inset 0 0 0 1px rgba(239, 68, 68, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0), inset 0 0 0 1px rgba(239, 68, 68, 0.7);
+  }
+}
+.yard-detention-pulse {
+  animation: yard-detention-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes yard-detention-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.yard-detention-flash {
+  animation: yard-detention-flash 1.4s ease-in-out infinite;
+}
+
+@keyframes yard-priority-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.18); opacity: 0.75; }
+}
+.yard-priority-pulse {
+  animation: yard-priority-pulse 1.5s ease-in-out infinite;
+}
+
+/* Hover effects for yard KPIs */
+.yard-kpi-enter > *:hover {
+  transform: translateY(-2px);
+  transition: transform 200ms ease;
+}
+
+/* ── Returns drawer search focus ring ─────────────────────────────────────── */
+
+@keyframes returns-search-focus {
+  from { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+  to { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0); }
+}
+.returns-search-focus:focus {
+  animation: returns-search-focus 600ms ease-out;
+}
+
+/* ── Returns disposition bar shimmer ──────────────────────────────────────── */
+
+@keyframes returns-bar-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.returns-bar-shimmer {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: returns-bar-shimmer 2.4s linear infinite;
+}
+
+/* ── Returns number glow on hover ─────────────────────────────────────────── */
+
+.returns-number-glow {
+  transition: text-shadow 220ms ease, color 220ms ease;
+}
+.returns-number-glow:hover {
+  text-shadow: 0 0 12px currentColor;
+}
+
+/* ── Yard truck icon drive ────────────────────────────────────────────────── */
+
+@keyframes yard-truck-drive {
+  0% { transform: translateX(-12px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(12px); opacity: 0; }
+}
+.yard-truck-drive {
+  animation: yard-truck-drive 2.2s ease-in-out infinite;
+}
+
+/* ── Yard empty-state enter ───────────────────────────────────────────────── */
+
+@keyframes yard-empty-enter {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.yard-empty-enter {
+  animation: yard-empty-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Returns drawer header glow ───────────────────────────────────────────── */
+
+.returns-drawer-header {
+  position: relative;
+  overflow: hidden;
+}
+.returns-drawer-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.5) 30%,
+    rgba(16, 185, 129, 0.5) 70%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Returns timeline dot glow ────────────────────────────────────────────── */
+
+@keyframes returns-timeline-glow {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 4px transparent; }
+}
+.returns-timeline-in .absolute {
+  animation: returns-timeline-glow 2.4s ease-in-out infinite;
+}
+
+/* ── Returns checklist pass ripple ────────────────────────────────────────── */
+
+@keyframes returns-check-ripple {
+  from { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  to { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+}
+.returns-card-enter svg.text-emerald-500 {
+  animation: returns-check-ripple 1.6s ease-out infinite;
+}
+
+/* ── Yard dock assignment button glow ─────────────────────────────────────── */
+
+@keyframes yard-assign-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.6); }
+  50% { box-shadow: 0 0 0 5px rgba(250, 204, 21, 0); }
+}
+.yard-row-in button:hover {
+  animation: yard-assign-glow 800ms ease-out;
+}

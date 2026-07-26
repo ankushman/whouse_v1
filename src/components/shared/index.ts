@@ -57,3 +57,4 @@ export { EnergyDetailDrawer, type EnergySiteDetail } from "./energy-detail-drawe
 export { OperationsOverviewDetailDrawer, type OperationsWarehouseSummary } from "./operations-overview-detail-drawer"
 export { SLACountdownDetailDrawer, type SLADetailItem } from "./sla-countdown-detail-drawer"
 export { WarehouseMapDetailDrawer, type WarehouseMapDetail } from "./warehouse-map-detail-drawer"
+export { ReturnsDetailDrawer, type ReturnDetailItem, type ReturnStatus, type ReturnReason, type Disposition } from "./returns-detail-drawer"
