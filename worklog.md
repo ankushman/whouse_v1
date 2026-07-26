@@ -3909,3 +3909,116 @@ Updated Project Status (Post Round 40):
   12. Add Returns & Reverse Logistics module (new operational module — no current coverage)
   13. Add Vendor Management module (new operational module)
   14. Add Yard Management module (new operational module — bridge between dock scheduler and warehouse map)
+
+---
+Task ID: 41
+Agent: Main (Cron Review - Round 41)
+Task: SettingsDetailDrawer (final drawer gap) + Returns & Reverse Logistics new module + BarcodeScanner wiring + 30+ CSS micro-interactions
+
+Work Log:
+- Read worklog.md — project at Round 40 (commit 3bec3e1), 20 detail drawers, 560+ CSS classes, 0 TS errors, lint/build clean.
+- Verified baseline: `bun run lint` (0 errors), `bun run build` (success), `npx tsc --noEmit` (0 src/ errors).
+- agent-browser QA: SKIPPED (sandbox network isolation — confirmed unfixable in earlier rounds). Continued with strict static verification.
+- Strategic choice: Closed the last remaining drawer gap (Settings → customer/transporter drill-down), added a new operational module (Returns & Reverse Logistics), wired existing BarcodeScannerModal to InventoryDetailDrawer (was orphaned), and added 30+ new CSS micro-interactions.
+
+NEW FEATURE 1: SettingsDetailDrawer (~770 lines, 4 sub-tabs, file: src/components/shared/settings-detail-drawer.tsx)
+  - 4 sub-tabs: Overview / Shipments / Contracts / Timeline
+  - Overview tab: Primary Contact card (avatar + email/phone + call button), 4-KPI grid (Total Orders / On-time Rate / Pending / Outstanding ₹ for customers; Active Fleet / On-time Delivery / Avg Transit / Damage Rate for transporters), 30-day Activity AreaChart, Coverage list (warehouse or lane with progress bars), Volume Distribution BarChart
+  - Shipments tab: 5-7 shipment rows with ref / origin → destination / status badge (Delivered/In Transit/Pending/Delayed) / value / date
+  - Contracts tab: 4 contract rows (MSA / Pricing / Quality / Returns for customers; Fleet / Pricing / Insurance / Driver SLA for transporters) with effective/expires dates, SLA terms, status (Active/Expiring/Expired)
+  - Timeline tab: 5 events (QBR / Contract Amended / SLA Breach Resolved / Compliance Audit / Onboarded) with color-coded dots and actor attribution
+  - Status-aware theming: 2 variants (Active=emerald, Inactive=slate) with matching gradients, borders, icon colors, glow shadows
+  - Deterministic mock data: 30-day activity trend (with weekend factor), KPIs (4 per kind, status-based values), shipments (5-7 with status variety), contracts (4 with progressive expiry), timeline (5 events with relative timestamps), coverage (5 warehouses or lanes with share %) — all seeded by entity ID hash
+  - Hooks correctly placed BEFORE early return
+  - Wired into settings-view.tsx: customer table rows now clickable (cursor-pointer + hover:bg-accent/40), transporter table rows now clickable. Drawer state in parent.
+  - Triggered from: customer row click OR transporter row click in settings-view
+
+NEW FEATURE 2: Returns & Reverse Logistics Module (~830 lines, file: src/components/modules/returns-reverse-logistics-view.tsx)
+  - New navigation item: "Returns & Reverse" (icon: RotateCcw, group: operations, between Outbound and Inventory)
+  - 6 hero KPI cards: Total Returns / Open RMAs / Aging >7d / Total Value / Recovery Rate / Avg Process Time — each with trend indicator, severity color, secondary metric
+  - 30-day Returns Inbound vs Processed AreaChart (with throughput % badge)
+  - Return Reasons PieChart (8 reasons: damaged / wrong-item / quality-defect / expired / customer-cancel / warranty-claim / overstock / recall) with color-coded legend
+  - Disposition & Recovery Value BarChart (6 dispositions: restock 100% / refurbish 70% / resell-discount 50% / donate 35% / recycle 15% / dispose 0%) with custom tooltip showing count + recovered value
+  - RMA Table with 14 mock records: RMA ID / Customer / Warehouse / SKU / Part / Qty / Reason / Status / Disposition (with progress bar) / Value / Age / Actions
+  - 4 tabs: All / Open / Aging >7d / Closed
+  - 3 filters: Status (9 options), Reason (8 options), Warehouse (6 options) + free-text search
+  - 9 return statuses with full workflow: initiated → pickup-scheduled → in-transit → received → inspection → restocked/refurbished/disposed/rejected
+  - Contextual quick-action buttons in table: "Approve" (inspection), "Inspect" (received), "Pickup" (pickup-scheduled), "View" (all)
+  - Status pill with icon + color-coded background
+  - Priority badge (HIGH) with pulse animation
+  - Aging cell color-coded (green <3d, amber 3-6d, red ≥7d)
+  - CSV export with all 14 returns (full field set)
+  - Refresh action with toast feedback
+  - All animations: returns-kpi-enter (6 staggered), returns-chart-enter (hover lift), returns-row-in (8 staggered), returns-table-enter (slide-up)
+
+NEW FEATURE 3: BarcodeScannerModal → InventoryDetailDrawer wiring
+  - Added `onViewItem?: (item: BarcodeInventoryItem) => void` callback prop to BarcodeScannerModal
+  - "View Details" button (was previously inert) now triggers onViewItem callback and closes the scanner modal
+  - In inventory-view.tsx: wired onViewItem to map BarcodeInventoryItem → InventoryDetailRow and call openDetail() — so scanning a barcode now seamlessly opens the full InventoryDetailDrawer for that item
+  - This completes the integration loop: scanner modal → detail drawer (was orphaned UI before)
+
+CSS: Added 30+ new micro-interaction classes in globals.css (lines 8396-8677, +281 lines):
+  - 8 for Settings Detail Drawer: settings-drawer-sheen (header sweep), settings-icon-pulse, settings-stat-enter (staggered 4), settings-body-enter (slide-in), settings-card-enter (hover lift), settings-tab-switch, settings-avatar-rotate (hover), settings-coverage-fill (progress bar scaleX)
+  - 22 for Returns module: returns-kpi-enter (6 staggered), returns-chart-enter (hover lift), returns-row-in (8 staggered), returns-table-enter (slide-up), returns-status-pulse, returns-recovery-fill, returns-kpi-hover-glow, returns-reason-shake, returns-priority-pulse (HIGH badge), returns-aging-flash, returns-empty-enter, returns-search-focus (ring expand), returns-disposition-bar (transition), returns-row-in::before (hover accent slide-in from left), returns-tooltip-pop, returns-number-glow, returns-bar-shimmer (animated shimmer on disposition bars)
+
+Verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (maintained from Round 40)
+
+Stage Summary:
+- 9 files changed (2 new + 7 modified), +2114 lines
+- 1 NEW DETAIL DRAWER: SettingsDetailDrawer (~770 lines, 4 sub-tabs) — closes the universal drill-down coverage gap
+- 1 NEW MODULE: Returns & Reverse Logistics (~830 lines, 6 KPIs + 3 charts + filterable RMA table with 14 records)
+- 1 NEW INTEGRATION: BarcodeScannerModal "View Details" button now opens InventoryDetailDrawer (was orphaned)
+- 30+ new CSS micro-interaction classes (8 settings + 22 returns)
+- 3 views updated: settings-view (customer/transporter rows clickable), inventory-view (scanner→drawer wiring)
+- 1 nav item added: "Returns & Reverse" between Outbound and Inventory
+- 1 icon added to iconMap: RotateCcw
+- DETAIL DRAWERS NOW: 21 total — Universal coverage including Settings
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓ NEW
+- MODULES NOW: 23 (was 22 — added Returns & Reverse Logistics)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+
+---
+Updated Project Status (Post Round 41):
+- STATUS: STABLE + UNIVERSAL DRILL-DOWN COMPLETE (incl. Settings) + NEW Returns module
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit 18df558)
+- MODULES (23): All previous 22 + Returns & Reverse Logistics (NEW)
+- SHARED COMPONENTS (52+): All previous 51 + SettingsDetailDrawer (NEW)
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (590+): 560+ previous + 30+ new (8 settings + 22 returns)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (21 — UNIVERSAL COVERAGE COMPLETE INCLUDING SETTINGS):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓ (NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use `bun run build` for verification)
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - agent-browser sandbox network isolation (cannot QA test against localhost — unfixable)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Returns module does not yet have a dedicated ReturnsDetailDrawer (RMA drill-down) — Eye button currently shows toast
+- PRIORITY NEXT:
+  1. Add ReturnsDetailDrawer (RMA drill-down) — completes per-record drill-down for the new module
+  2. Add Vendor Management module (new operational module)
+  3. Add Yard Management module (bridge between dock scheduler and warehouse map)
+  4. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  5. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  6. Consolidate inline mock data from all 21 detail drawers into mock-data.ts (refactor)
+  7. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  8. CSS audit: 590+ classes — consolidate 181 pre-existing duplicates
+  9. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  10. Multi-warehouse switching for dock scheduler (currently fixed to Chennai Hub)
+  11. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  12. Predictive model retraining trigger UI (currently display-only)
+  13. Add Customer SLA Performance module (cross-customer SLA dashboard)
+  14. Add Supplier Quality Scorecard module (vendor performance analytics)
