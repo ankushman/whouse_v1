@@ -38,6 +38,8 @@ import {
   List,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { EquipmentDetailDrawer, type EquipmentDetailRow } from "@/components/shared/equipment-detail-drawer"
+import { useToast } from "@/hooks/use-toast-helper"
 
 const statusVariantMap: Record<string, "green" | "amber" | "red" | "blue" | "gray"> = {
   active: "green",
@@ -65,6 +67,26 @@ const EXPORT_COLUMNS = ["ID", "Name", "Type", "Status", "Warehouse", "Utilizatio
 export function EquipmentView() {
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid")
   const [statusFilter, setStatusFilter] = useState("all")
+  const [detailItem, setDetailItem] = useState<EquipmentDetailRow | null>(null)
+  const [detailOpen, setDetailOpen] = useState(false)
+  const toast = useToast()
+
+  const openDetail = useCallback((item: EquipmentDetailRow) => {
+    setDetailItem(item)
+    setDetailOpen(true)
+  }, [])
+
+  const handleScheduleMaintenance = useCallback((item: EquipmentDetailRow) => {
+    toast.success(
+      "Maintenance scheduled",
+      `${item.name} — service scheduled for ${new Date(Date.now() + 7 * 86400000).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}`
+    )
+    setDetailOpen(false)
+  }, [toast])
+
+  const handleRefresh = useCallback((item: EquipmentDetailRow) => {
+    toast.info("Refreshing equipment data", `Fetching latest telemetry for ${item.name}...`)
+  }, [toast])
 
   const filteredEquipment = useMemo(() => {
     if (statusFilter === "all") return equipmentData
@@ -72,17 +94,23 @@ export function EquipmentView() {
   }, [statusFilter])
 
   const handleExportCSV = useCallback(() => {
-    const data = equipmentData.map((e) => ({
-      ID: e.id,
-      Name: e.name,
-      Type: e.type,
-      Status: e.status,
-      Warehouse: e.warehouse,
-      "Utilization (%)": e.utilization,
-      "Battery (%)": e.batteryLevel,
-      "Hours Used": e.hoursUsed,
-      "Next Maintenance": new Date(e.nextMaintenance).toLocaleDateString("en-IN", { day: "numeric", month: "short" }),
-    }))
+    const data = equipmentData.map((e) => {
+      // Utilization = hours_used / (hours_used + downtime) — derived metric
+      const utilization = e.hoursUsed + e.downtime > 0
+        ? Math.round((e.hoursUsed / (e.hoursUsed + e.downtime)) * 100)
+        : 0
+      return {
+        ID: e.id,
+        Name: e.name,
+        Type: e.type,
+        Status: e.status,
+        Warehouse: e.warehouse,
+        "Utilization (%)": utilization,
+        "Battery (%)": e.batteryLevel,
+        "Hours Used": e.hoursUsed,
+        "Next Maintenance": new Date(e.nextMaintenance).toLocaleDateString("en-IN", { day: "numeric", month: "short" }),
+      }
+    })
     exportToCSV(data, "equipment-data", EXPORT_COLUMNS)
   }, [])
 
@@ -142,12 +170,15 @@ export function EquipmentView() {
       ),
     },
     {
-      key: "utilization",
+      key: "hoursUsed",
       header: "Utilization",
       sortable: true,
       className: "w-[120px]",
-      render: (value) => {
-        const pct = value as number
+      render: (_value, row) => {
+        // Derived utilization: hoursUsed / (hoursUsed + downtime)
+        const pct = row.hoursUsed + row.downtime > 0
+          ? Math.round((row.hoursUsed / (row.hoursUsed + row.downtime)) * 100)
+          : 0
         const color = pct >= 80 ? "text-emerald-600" : pct >= 50 ? "text-amber-600" : "text-red-600"
         return (
           <div className="flex items-center gap-2">
@@ -204,17 +235,22 @@ export function EquipmentView() {
       label: "Export Selected",
       icon: Download,
       onClick: (rows) => {
-        const data = rows.map((e) => ({
-          ID: e.id,
-          Name: e.name,
-          Type: e.type,
-          Status: e.status,
-          Warehouse: e.warehouse,
-          "Utilization (%)": e.utilization,
-          "Battery (%)": e.batteryLevel,
-          "Hours Used": e.hoursUsed,
-          "Next Maintenance": new Date(e.nextMaintenance).toLocaleDateString("en-IN", { day: "numeric", month: "short" }),
-        }))
+        const data = rows.map((e) => {
+          const utilization = e.hoursUsed + e.downtime > 0
+            ? Math.round((e.hoursUsed / (e.hoursUsed + e.downtime)) * 100)
+            : 0
+          return {
+            ID: e.id,
+            Name: e.name,
+            Type: e.type,
+            Status: e.status,
+            Warehouse: e.warehouse,
+            "Utilization (%)": utilization,
+            "Battery (%)": e.batteryLevel,
+            "Hours Used": e.hoursUsed,
+            "Next Maintenance": new Date(e.nextMaintenance).toLocaleDateString("en-IN", { day: "numeric", month: "short" }),
+          }
+        })
         exportToCSV(data, "equipment-selected", EXPORT_COLUMNS)
       },
     },
@@ -230,16 +266,20 @@ export function EquipmentView() {
             <Button
               variant="outline"
               size="sm"
-              className={cn("gap-1.5", viewMode === "table" && "bg-accent")}
+              className={cn("gap-1.5", viewMode === "grid" && "bg-accent")}
               onClick={() => setViewMode("grid")}
+              aria-label="Grid view"
+              aria-pressed={viewMode === "grid"}
             >
               <LayoutGrid className="h-3.5 w-3.5" />
             </Button>
             <Button
               variant="outline"
               size="sm"
-              className={cn("gap-1.5", viewMode === "grid" && "bg-accent")}
+              className={cn("gap-1.5", viewMode === "table" && "bg-accent")}
               onClick={() => setViewMode("table")}
+              aria-label="Table view"
+              aria-pressed={viewMode === "table"}
             >
               <List className="h-3.5 w-3.5" />
             </Button>
@@ -304,7 +344,11 @@ export function EquipmentView() {
           {filteredEquipment.map((eq) => (
             <div
               key={eq.id}
-              className="card-depth data-card rounded-lg border p-4 space-y-3 hover-scale-sm"
+              className="card-depth data-card rounded-lg border p-4 space-y-3 hover-scale-sm cursor-pointer transition-all hover:shadow-md hover:border-primary/30"
+              onClick={() => openDetail(eq as unknown as EquipmentDetailRow)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDetail(eq as unknown as EquipmentDetailRow) } }}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
@@ -371,6 +415,7 @@ export function EquipmentView() {
           showColumnToggle
           pageSize={10}
           showCount
+          onRowClick={(row) => openDetail(row as unknown as EquipmentDetailRow)}
         />
       )}
 
@@ -409,6 +454,15 @@ export function EquipmentView() {
           </ChartContainer>
         </CardContent>
       </Card>
+
+      {/* Equipment Detail Drawer */}
+      <EquipmentDetailDrawer
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        item={detailItem}
+        onScheduleMaintenance={handleScheduleMaintenance}
+        onRefresh={handleRefresh}
+      />
     </div>
   )
 }

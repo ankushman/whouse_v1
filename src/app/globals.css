@@ -5739,3 +5739,131 @@ html.theme-transition body {
 .status-badge-smooth {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Round 29 — Equipment Detail Drawer + Polish                           */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+/* Battery level bar — smooth width transition when value changes */
+.battery-bar-fill {
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+}
+
+/* Battery charging pulse — for charging status icon */
+@keyframes battery-charging-pulse {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 oklch(0.62 0.18 250 / 0));
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 4px oklch(0.62 0.18 250 / 0.6));
+  }
+}
+.battery-charging-pulse {
+  animation: battery-charging-pulse 1.6s ease-in-out infinite;
+}
+
+/* Maintenance overdue badge — urgent pulse */
+@keyframes maintenance-overdue-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 oklch(0.58 0.24 27 / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px oklch(0.58 0.24 27 / 0);
+  }
+}
+.maintenance-overdue-pulse {
+  animation: maintenance-overdue-pulse 1.4s ease-out infinite;
+}
+
+/* Equipment card hover lift with primary tint */
+.equipment-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.equipment-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: oklch(0.55 0.2 250 / 0.3);
+  box-shadow: 0 4px 16px -4px oklch(0.4 0 0 / 0.1), 0 2px 4px -1px oklch(0.4 0 0 / 0.06);
+}
+
+/* Dock card drag handle visual cue */
+.dock-drag-handle {
+  cursor: grab;
+  transition: background-color 0.15s ease;
+}
+.dock-drag-handle:hover {
+  background-color: oklch(0.55 0.2 250 / 0.06);
+}
+.dock-drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Dock status colors — border-left accent */
+.dock-status-available {
+  border-left: 3px solid oklch(0.62 0.18 145 / 0.5);
+}
+.dock-status-occupied {
+  border-left: 3px solid oklch(0.62 0.18 250 / 0.5);
+}
+.dock-status-maintenance {
+  border-left: 3px solid oklch(0.58 0.24 27 / 0.5);
+}
+
+/* Progress bar with animated stripe for active progress */
+@keyframes progress-active-stripe {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+.progress-active-stripe > div {
+  background-image: linear-gradient(
+    45deg,
+    oklch(1 0 0 / 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    oklch(1 0 0 / 0.15) 50%,
+    oklch(1 0 0 / 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 40px 40px;
+  animation: progress-active-stripe 1s linear infinite;
+}
+
+/* Stat number counter entrance */
+@keyframes stat-counter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.stat-counter-rise {
+  animation: stat-counter-rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hover ring for clickable table rows */
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.clickable-row:hover {
+  background-color: oklch(0.55 0.2 250 / 0.04);
+}
+
+/* Focus visible outline for keyboard nav on cards */
+.card-focus-visible:focus-visible {
+  outline: 2px solid oklch(0.55 0.2 250 / 0.6);
+  outline-offset: 2px;
+}
+
+/* Equipment type icon tint variants */
+.icon-tint-blue { color: oklch(0.55 0.2 250); }
+.icon-tint-emerald { color: oklch(0.62 0.18 145); }
+.icon-tint-amber { color: oklch(0.7 0.18 75); }
+.icon-tint-red { color: oklch(0.58 0.24 27); }
+.icon-tint-purple { color: oklch(0.55 0.2 300); }
+.icon-tint-cyan { color: oklch(0.6 0.18 200); }

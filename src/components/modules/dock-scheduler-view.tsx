@@ -167,7 +167,8 @@ function DockCard({
 
   const handleComplete = () => {
     if (!assignment) return
-    toastRef.current.success(`Dock ${dock.name} cleared`, `${assignment.vehicleReg} — ${assignment.supplier}`)
+    // Toast is shown by parent's handleComplete — no toast here to avoid double-toast
+    // (and `toastRef` is not in scope for this sibling component).
     onComplete(assignment.id)
   }
 
@@ -324,8 +325,16 @@ export function DockSchedulerView() {
   useEffect(() => { toastRef.current = toastResult })
   const [docks, setDocks] = useState<Dock[]>(INITIAL_DOCKS)
   const [assignments, setAssignments] = useState<DockAssignment[]>(INITIAL_ASSIGNMENTS)
+  // Ref mirror of assignments so callbacks (handleComplete etc.) can read latest
+  // without being in their dependency arrays (avoids recreating callbacks on every change).
+  const assignmentsRef = useRef(assignments)
+  useEffect(() => { assignmentsRef.current = assignments })
   const [queuedVehicles, setQueuedVehicles] = useState<QueuedVehicle[]>(INITIAL_QUEUED_VEHICLES)
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set())
+  const completedIdsRef = useRef(completedIds)
+  useEffect(() => { completedIdsRef.current = completedIds })
+  const docksRef = useRef(docks)
+  useEffect(() => { docksRef.current = docks })
   const [zoneFilter, setZoneFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
 
@@ -367,7 +376,21 @@ export function DockSchedulerView() {
 
   const handleComplete = useCallback((assignmentId: string) => {
     setCompletedIds((prev) => new Set(prev).add(assignmentId))
-    toastRef.current.success("Dock assignment completed")
+    // Also free up the dock (mirror auto-complete path)
+    const assignment = assignmentsRef.current.find((a) => a.id === assignmentId)
+    if (assignment) {
+      setDocks((prev) =>
+        prev.map((d) =>
+          d.id === assignment.dockId ? { ...d, status: "available" as const } : d
+        )
+      )
+      toastRef.current.success(
+        "Dock assignment completed",
+        `${assignment.vehicleReg} — dock freed for next assignment`
+      )
+    } else {
+      toastRef.current.success("Dock assignment completed")
+    }
   }, [])
 
   const handleAdvanceProgress = useCallback((assignmentId: string, amount: number) => {
@@ -465,42 +488,50 @@ export function DockSchedulerView() {
     setAssignDialogOpen(true)
   }, [])
 
-  // Simulate progress — auto-advance active assignments by 5% every 3 seconds
+  // Simulate progress — auto-advance active assignments by 5% every 3 seconds.
+  // Uses refs for completedIds/docks so the interval doesn't tear down on every state change.
+  // Side-effects (toast, setCompletedIds, setDocks) are fired via setTimeout(0) OUTSIDE
+  // the setAssignments updater — updaters must be pure (StrictMode double-invokes them).
   useEffect(() => {
-    if (simulating) {
-      simIntervalRef.current = setInterval(() => {
-        setAssignments((prev) => {
-          const now = new Date()
-          const timeStr = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })
-          const updated = prev.map((a) => {
-            if (completedIds.has(a.id)) return a
-            if (a.progress >= 100) return a
-            const newProgress = Math.min(100, a.progress + 5)
-            if (newProgress >= 100) {
-              // Auto-complete
-              setTimeout(() => {
-                toastRef.current.success("Assignment Auto-Completed", `${a.vehicleReg} at ${docks.find((d) => d.id === a.dockId)?.name ?? a.dockId}`)
-                setCompletedIds((c) => new Set(c).add(a.id))
-                setDocks((dd) =>
-                  dd.map((d) => (d.id === a.dockId ? { ...d, status: "available" as DockStatus } : d))
-                )
-              }, 0)
-            }
-            return { ...a, progress: newProgress }
-          })
-          return updated
-        })
-      }, 3000)
-    } else {
+    if (!simulating) {
       if (simIntervalRef.current) {
         clearInterval(simIntervalRef.current)
         simIntervalRef.current = null
       }
+      return
     }
+    simIntervalRef.current = setInterval(() => {
+      const justCompleted: DockAssignment[] = []
+      setAssignments((prev) => {
+        const updated = prev.map((a) => {
+          if (completedIdsRef.current.has(a.id)) return a
+          if (a.progress >= 100) return a
+          const newProgress = Math.min(100, a.progress + 5)
+          if (newProgress >= 100) {
+            justCompleted.push(a)
+          }
+          return { ...a, progress: newProgress }
+        })
+        return updated
+      })
+      // Fire side-effects outside the updater
+      if (justCompleted.length > 0) {
+        setTimeout(() => {
+          justCompleted.forEach((a) => {
+            const dockName = docksRef.current.find((d) => d.id === a.dockId)?.name ?? a.dockId
+            toastRef.current.success("Assignment Auto-Completed", `${a.vehicleReg} at ${dockName}`)
+            setCompletedIds((c) => new Set(c).add(a.id))
+            setDocks((dd) =>
+              dd.map((d) => (d.id === a.dockId ? { ...d, status: "available" as DockStatus } : d))
+            )
+          })
+        }, 0)
+      }
+    }, 3000)
     return () => {
       if (simIntervalRef.current) clearInterval(simIntervalRef.current)
     }
-  }, [simulating, completedIds, docks])
+  }, [simulating])
 
   const toggleSimulation = useCallback(() => {
     setSimulating((prev) => !prev)

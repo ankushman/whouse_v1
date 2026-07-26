@@ -34,12 +34,21 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export interface Column<T> {
+  /** Property key on the row, or a synthetic key for computed columns. */
   key: string
   header: string
   sortable?: boolean
   className?: string
   headerClassName?: string
-  render?: (value: any, row: T, index: number) => React.ReactNode
+  /**
+   * Custom cell renderer.
+   * - `value` is typed as `unknown` (not `any`) to force callers to narrow it.
+   *   For typed access, cast inside the render body: `(value as string)`, or
+   *   prefer reading from `row` directly when the column key is synthetic.
+   * - `row` is the full typed row T.
+   * - `index` is the row's position in the visible (filtered + sorted) data.
+   */
+  render?: (value: unknown, row: T, index: number) => React.ReactNode
   visible?: boolean
 }
 
@@ -78,7 +87,7 @@ export interface DataTableProps<T> {
 
 type SortDirection = "asc" | "desc" | null
 
-function compareValues(a: any, b: any, direction: "asc" | "desc"): number {
+function compareValues(a: unknown, b: unknown, direction: "asc" | "desc"): number {
   const multiplier = direction === "asc" ? 1 : -1
 
   if (a == null && b == null) return 0
@@ -89,8 +98,20 @@ function compareValues(a: any, b: any, direction: "asc" | "desc"): number {
     return a.localeCompare(b, undefined, { sensitivity: "base" }) * multiplier
   }
 
-  if (a < b) return -1 * multiplier
-  if (a > b) return 1 * multiplier
+  // Numeric or mixed comparison — coerce to number when possible
+  const aNum = typeof a === "number" ? a : Number(a)
+  const bNum = typeof b === "number" ? b : Number(b)
+  if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
+    if (aNum < bNum) return -1 * multiplier
+    if (aNum > bNum) return 1 * multiplier
+    return 0
+  }
+
+  // Fallback: string comparison
+  const aStr = String(a)
+  const bStr = String(b)
+  if (aStr < bStr) return -1 * multiplier
+  if (aStr > bStr) return 1 * multiplier
   return 0
 }
 
@@ -184,8 +205,9 @@ export function DataTable<T extends Record<string, any>>({
     if (!sortColumn || !sortDirection) return filteredData
 
     return [...filteredData].sort((a, b) => {
-      let aVal: any = a[sortColumn]
-      let bVal: any = b[sortColumn]
+      // Cast to Record<string, unknown> for indexed access (T is constrained to Record<string, any>)
+      const aVal: unknown = (a as Record<string, unknown>)[sortColumn]
+      const bVal: unknown = (b as Record<string, unknown>)[sortColumn]
       return compareValues(aVal, bVal, sortDirection)
     })
   }, [filteredData, sortColumn, sortDirection])
