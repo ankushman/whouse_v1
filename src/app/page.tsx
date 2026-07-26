@@ -18,6 +18,7 @@ import { RouteOptimizationView } from "@/components/modules/route-optimization-v
 import { EquipmentView } from "@/components/modules/equipment-view"
 import { EmployeesView } from "@/components/modules/employees-view"
 import { VendorManagementView } from "@/components/modules/vendor-management-view"
+import { CustomerSLAPerformanceView } from "@/components/modules/customer-sla-performance-view"
 import { ProductivityView } from "@/components/modules/productivity-view"
 import { CostAnalyticsView } from "@/components/modules/cost-analytics-view"
 import { AlertsView } from "@/components/modules/alerts-view"
@@ -49,6 +50,7 @@ const viewMap: Record<string, React.ComponentType> = {
   equipment: EquipmentView,
   employees: EmployeesView,
   "vendor-management": VendorManagementView,
+  "customer-sla-performance": CustomerSLAPerformanceView,
   productivity: ProductivityView,
   'cost-analytics': CostAnalyticsView,
   alerts: AlertsView,
