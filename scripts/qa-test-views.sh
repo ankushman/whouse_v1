@@ -11,6 +11,7 @@ tests=(
   "Inbound|Inbound"
   "Procurement / PO|Procurement"
   "BOM Management|BOM"
+  "Quality Inspection|Quality Inspection"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"
