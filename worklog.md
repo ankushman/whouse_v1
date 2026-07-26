@@ -4701,3 +4701,141 @@ Updated Project Status (Post Round 46):
   13. Vendor contract document management (upload/store contract PDFs)
   14. Customer contract document management (mirror vendor contract module)
   15. Add 3-way match (PO ↔ GRN ↔ Invoice) auto-verification dashboard for Procurement module
+
+---
+Task ID: 47
+Agent: Main (Cron Review - Round 47)
+Task: Bill of Materials (BOM) Management new module with multi-tab detail drawer + 30+ CSS micro-interactions + agent-browser QA verified across all 29 modules
+
+Work Log:
+- Read worklog.md — project at Round 46, 28 modules, 26 detail drawers, 740+ CSS classes, 0 TS errors, lint/build clean.
+- Verified baseline: `bun run lint` (0 errors), `npx tsc --noEmit` (0 src/ errors), `bun run build` (success).
+- **agent-browser SMOKE TEST PASSED**: All 28 modules rendered without runtime errors.
+- Strategic choice: Built new operational module "Bill of Materials (BOM) Management" (was priority #2 in worklog priority list). Multi-level BOM with revision control, cost rollup, and where-used traceability. Directly extends the Procurement/PO module (line items reference parts).
+
+NEW FEATURE 1: Bill of Materials (BOM) Module (~1900 lines, file: src/components/modules/bill-of-materials-view.tsx)
+  - New navigation item: "BOM Management" (icon: Layers, group: operations, placed right after Procurement / PO — closes the manufacturing engineering gap)
+  - 6 hero KPI cards: Total BOMs / Active BOMs (approved+released+frozen) / Revisions Pending / Avg Parts per BOM / Total BOM Value (sum of standard costs) / Multi-Level BOMs (2+ levels deep) — each with trend indicator, severity color, secondary metric, top gradient bar, blurred bg bubble
+  - 6-Month Revision Activity AreaChart (revisions approved per month, gradient fill, dot markers)
+  - BOMs by Category donut PieChart (6 categories: Finished Good, Sub-Assembly, Engineered, Phantom, Packaging Kit, Service Kit) with color-coded legend
+  - Cost Variance by Category BarChart (avg standard vs actual cost in ₹ Lakh per category — 6 grouped bars)
+  - Top 8 Parts Usage Pareto horizontal BarChart (most frequently used parts across all BOMs, color-coded by part type)
+  - BOM Master table with 16 mock records: BOM ID (+ L2/L3 multi-level badge) / Product Name (avatar + category icon + product line) / Status (7 statuses with icons) / Rev / Category / Parts / Levels / Std Cost ₹ / Variance (color-coded) / Last Modified / Eng. Owner / Eye
+  - 7 status tabs: All (16) / Draft (1) / In Review (2) / Approved (3) / Released (4) / Frozen (4) / Deprecated (1) / Obsolete (1) — each with live count badge
+  - 2 filters: Category (6 options) + Type (4 options: Manufacturing/Engineering/Service/Packaging) + free-text search
+  - 6 BOM categories (finished-good, sub-assembly, engineered, phantom, packaging-kit, service-kit) with full theming (label, color, bg, pieColor, icon)
+  - 4 BOM types (manufacturing, engineering, service, packaging) with theming
+  - 7 BOM statuses (draft, in-review, approved, released, frozen, deprecated, obsolete) — each with icon, color, bg, border
+  - 7 part types (raw-material, component, sub-assembly, fastener, consumable, packaging, service) with theming
+  - 3 part sources (buy, make, phantom) with theming
+  - Status-aware row theming: critical=red gradient+pulse (obsolete or variance>5%), warning=amber gradient (deprecated or variance 0-5%), normal=hover bg with accent bar
+  - Cost variance color-coded per row (>5% red, 0-5% amber, ≤0% emerald)
+  - CSV export with full 25-field set per BOM
+  - Refresh + New BOM action buttons with toast feedback
+
+NEW FEATURE 2: BOM Detail Drawer (~830 lines, 5 sub-tabs, embedded in module)
+  - 5 sub-tabs: Overview / Parts Tree / Revisions / Cost Rollup / Where Used
+  - Header: 4 hero stat grid (Standard Cost / Cost Variance with actual cost sub / Total Parts with unique count / Avg Lead Time), status badge, product code, revision badge, category badge, type badge, 5-dot levels indicator
+  - Overview tab: Ownership card (Engineering Owner + Manufacturing Owner + Approver with avatars), Lifecycle card (Created By/Date, Last Modified, Effective Date, Expiry Date, ECN count), Cost Analysis 3-card grid (Standard / Actual / Variance with color-coded alerting), Part Source Breakdown 3-card grid (Buy/Make/Phantom counts with category colors), Description card with notes (amber-tinted with AlertTriangle for special BOM types)
+  - Parts Tree tab: Full line items table (#, Part No with sub-BOM indicator, Description, Type, Source, UOM, Qty, Unit ₹, Scrap%, Lead time, Total ₹) + Total Parts/Total Cost summary
+  - Revisions tab: Revision history timeline (newest first) with revision letter badges, status icons (approved/rejected/pending/superseded), author→approver flow, change description, ECN number, impacted parts count, cost impact % color-coded
+  - Cost Rollup tab: Multi-level cost breakdown table (Level, Part No, Description, Source, Qty, Unit ₹, Extended, Scrap, Labor, Overhead, Total) + 5-column summary footer (Extended/Scrap/Labor/Overhead/Total)
+  - Where Used tab: Parent BOMs that consume this item (Parent BOM ID, Parent Name, Category badge, Qty/Parent, Effective Date) — shows empty state for top-level BOMs ("Not used in any parent BOM")
+  - Footer: Export button always + status-aware actions:
+    - in-review: Reject + Approve buttons
+    - approved: Release button
+    - other statuses: New Revision button
+  - All animations: bom-drawer-sheen (sheen sweep on open), bom-drawer-header (gradient underline + backdrop blur), bom-stat-enter (4 staggered), bom-body-enter (fade-up), bom-card-enter (hover lift), bom-tab-switch, bom-revision-step (staggered entrance)
+
+NEW FEATURE 3: Navigation + Icon Map updates
+  - Added 'bill-of-materials' to navItems in app-store.ts (group: operations, icon: Layers, roles: super_admin/executive/regional_manager/warehouse_manager)
+  - Imported Layers icon in app-layout.tsx and added to iconMap
+  - Imported BillOfMaterialsView in app/page.tsx and added to viewMap
+  - Exported from src/components/modules/index.ts
+
+NEW FEATURE 4: 30+ new CSS micro-interaction classes (file: src/app/globals.css, lines 10276-10722, +447 lines)
+  - bom-kpi-enter (staggered + hover lift), bom-chart-enter (hover lift + violet tint overlay), bom-table-card (hover shadow), bom-row-in (entrance + ::before gradient accent bar), bom-row-critical (red gradient + pulse), bom-row-warning (amber gradient + accent), bom-tab-btn (transition + active scale), bom-search-focus (ring expand), bom-drawer-sheen (sheen sweep), bom-drawer-header (gradient underline + backdrop blur), bom-stat-enter (4 staggered), bom-body-enter (fade-up), bom-card-enter (hover lift), bom-tab-switch, bom-revision-step (staggered entrance), bom-level-pulse (multi-level badge pulse), bom-badge-pop (count badge animation), bom-chart-enter::after (violet tint overlay), bom-drawer-sheen scrollbar styling, bom-total-shimmer (cost rollup total row shimmer), tree node hover scale, cost variance animated underline on hover, prefers-reduced-motion support
+
+NEW FEATURE 5: Reusable QA test script updated (file: /home/z/my-project/scripts/qa-test-views.sh)
+  - Added "BOM Management|BOM" test case
+  - Now tests 29 modules (was 28)
+  - Result this round: 29/29 OK
+
+QA Verification (agent-browser LIVE TEST):
+  - **Smoke test PASSED**: All 29 modules render without runtime errors (verified via qa-test-views.sh)
+  - BOM Management nav click → ✓ "Bill of Materials (BOM)" heading rendered
+  - KPI cards visible: Total BOMs (16), Active BOMs, Revisions Pending, Avg Parts/BOM, Total BOM Value, Multi-Level BOMs
+  - 4 chart cards visible: 6-Month Revision Activity, BOMs by Category donut, Cost Variance by Category, Top 8 Parts Usage Pareto
+  - All 7 status tabs visible with counts: Draft(1), In Review(2), Approved(3), Released(4), Frozen(4), Deprecated(1), Obsolete(1)
+  - Master table shows 16 BOMs with product avatars, status icons, color-coded rows (obsolete BOMs highlighted with red gradient, deprecated with amber)
+  - Clicked first row (BOM-1001, Front Wheel Assembly — Passenger Car, Draft status)
+  - agent-browser snapshot → ✓ Drawer opened (heading "Front Wheel Assembly — Passenger Car")
+  - Verified 5 tabs visible: Overview, Parts Tree (4), Revisions (1), Cost Rollup, Where Used
+  - Overview tab content visible: Cost Analysis (3-card grid), Part Source Breakdown (3-card grid), Ownership, Lifecycle
+  - Clicked Parts Tree tab → ✓ Parts Tree table rendered with 4 parts, all columns visible, Total Cost ₹9.2 K summary
+  - Clicked Revisions tab → ✓ Revision History rendered with Rev A entry, ECN-2026-9313, parts impacted count, cost impact % displayed
+  - Clicked Cost Rollup tab → ✓ Cost Rollup table rendered with all parts at Level 1, all cost columns visible
+  - Closed drawer → clicked Sub-Assembly BOM (BOM-2002 L3 Brake Pad Sub-Assembly) → clicked Where Used tab → ✓ "Where Used (3)" with 3 parent BOM entries shown
+
+Static Verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (maintained from Round 46)
+
+Stage Summary:
+- 6 files changed (1 new + 5 modified), +2350 lines
+- 1 NEW MODULE: Bill of Materials (~1900 lines, 6 KPIs + 4 charts + 7 status tabs + 2 filters + 16-BOM master table with full BOM lifecycle)
+- 1 NEW INLINE DRAWER: BOMDetailDrawer (~830 lines, 5 sub-tabs) — Overview/Parts Tree/Revisions/Cost Rollup/Where Used
+- 1 NEW NAV ITEM + ICON: "BOM Management" with Layers icon
+- 30+ new CSS micro-interaction classes (all bom-* classes)
+- 4 views updated: app-layout (Layers icon), page.tsx (viewMap), app-store.ts (navItems), modules/index.ts (export)
+- 1 QA SCRIPT UPDATED: scripts/qa-test-views.sh — added BOM Management (now 29 modules tested)
+- MODULES NOW: 29 (was 28 — added Bill of Materials)
+- DETAIL DRAWERS NOW: 27 total (26 universal + 1 new inline BOM drawer)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser LIVE verification PASSED (smoke test 29/29 modules + drawer 4 tabs verified: Overview/Parts Tree/Revisions/Cost Rollup + Where Used on sub-assembly BOM)
+
+---
+Updated Project Status (Post Round 47):
+- STATUS: STABLE + NEW BILL OF MATERIALS MODULE + agent-browser SMOKE TEST PASSED (29/29 modules)
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (29): All previous 28 + Bill of Materials (NEW)
+- SHARED COMPONENTS (54+): All previous 54
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (770+): 740+ previous + 30+ new (all bom-* classes)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (27 — UNIVERSAL COVERAGE + 1 NEW INLINE):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓, Yard ✓,
+    + Customer SLA (inline), + Supplier Quality (inline), + Procurement (inline), + BOM (inline multi-tab drawer NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser SMOKE TEST 29/29 PASSED + BOM drawer 4 tabs verified (Overview/Parts Tree/Revisions/Cost Rollup) + Where Used tab verified on sub-assembly BOM
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use standalone production build with NODE_OPTIONS=--max-old-space-size=128 and clean chrome processes before testing)
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - agent-browser requires `eval --stdin` (heredoc) for any JS with quotes/special chars — inline `eval "..."` only works for simple expressions
+  - Chrome processes accumulate across QA runs — must `pkill -9 chrome` between sessions to free memory
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Customer SLA, Vendor, Supplier Quality, Procurement, and BOM drawers are inline in module files (not extracted to shared) — minor refactor candidate for future round
+- PRIORITY NEXT:
+  1. Extract 5 inline drawers to shared/*-detail-drawer.tsx (VendorDetailSheet + CustomerSLADetailDrawer + SupplierQualityDetailDrawer + ProcurementDetailDrawer + BOMDetailDrawer — consistency refactor)
+  2. Add Quality Inspection Plan (QIP) module (link to supplier quality — inspection workflows per part number, links to BOM parts)
+  3. Add 3-way match (PO ↔ GRN ↔ Invoice) auto-verification dashboard for Procurement module
+  4. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  5. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  6. Consolidate inline mock data from all 27 detail drawers into mock-data.ts (refactor)
+  7. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  8. CSS audit: 770+ classes — consolidate 181 pre-existing duplicates
+  9. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  10. Multi-warehouse switching for dock scheduler & yard management (currently fixed to Chennai Hub)
+  11. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  12. Predictive model retraining trigger UI (currently display-only)
+  13. Vendor contract document management (upload/store contract PDFs)
+  14. Customer contract document management (mirror vendor contract module)
+  15. Add Work Order Management module (links BOM ↔ Production Schedule — manufacturing execution)

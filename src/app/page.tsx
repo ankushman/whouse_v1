@@ -10,6 +10,7 @@ import { DashboardView } from "@/components/dashboard/dashboard-view"
 import { WarehousesView } from "@/components/modules/warehouses-view"
 import { InboundView } from "@/components/modules/inbound-view"
 import { ProcurementPurchaseOrdersView } from "@/components/modules/procurement-purchase-orders-view"
+import { BillOfMaterialsView } from "@/components/modules/bill-of-materials-view"
 import { OutboundView } from "@/components/modules/outbound-view"
 import { ReturnsReverseLogisticsView } from "@/components/modules/returns-reverse-logistics-view"
 import { YardManagementView } from "@/components/modules/yard-management-view"
@@ -44,6 +45,7 @@ const viewMap: Record<string, React.ComponentType> = {
   warehouses: WarehousesView,
   inbound: InboundView,
   "procurement-purchase-orders": ProcurementPurchaseOrdersView,
+  "bill-of-materials": BillOfMaterialsView,
   outbound: OutboundView,
   "returns-reverse-logistics": ReturnsReverseLogisticsView,
   "yard-management": YardManagementView,

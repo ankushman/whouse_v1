@@ -10,6 +10,7 @@ tests=(
   "Warehouses|Warehouses"
   "Inbound|Inbound"
   "Procurement / PO|Procurement"
+  "BOM Management|BOM"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"
