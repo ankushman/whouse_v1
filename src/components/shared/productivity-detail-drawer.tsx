@@ -107,7 +107,7 @@ interface Achievement {
 
 interface ShiftHistoryRow {
   date: string
-  shift: "Morning" | "Afternoon" | "Night"
+  shift: "Morning" | "Afternoon" | "Night" | "Off Duty"
   start: string
   end: string
   productivity: number

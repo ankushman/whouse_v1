@@ -18,12 +18,21 @@ const dotClasses = {
 }
 
 interface StatusBadgeProps {
-  status: string
+  /** Text shown inside the badge */
+  status?: string
+  /** Alias for `status` (kept for backward compatibility) */
+  label?: string
   variant?: keyof typeof variantClasses
   className?: string
 }
 
-export function StatusBadge({ status, variant = "gray", className }: StatusBadgeProps) {
+export function StatusBadge({
+  status,
+  label,
+  variant = "gray",
+  className,
+}: StatusBadgeProps) {
+  const text = status ?? label ?? ""
   return (
     <Badge
       variant="outline"
@@ -34,7 +43,7 @@ export function StatusBadge({ status, variant = "gray", className }: StatusBadge
       )}
     >
       <span className={cn("h-1.5 w-1.5 rounded-full", dotClasses[variant])} />
-      {status}
+      {text}
     </Badge>
   )
 }

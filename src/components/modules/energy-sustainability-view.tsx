@@ -32,6 +32,10 @@ import { cn } from "@/lib/utils"
 import { useToast } from "@/hooks/use-toast-helper"
 import { ExportButton } from "@/components/shared/export-button"
 import {
+  EnergyDetailDrawer,
+  type EnergySiteDetail,
+} from "@/components/shared/energy-detail-drawer"
+import {
   AreaChart,
   Area,
   BarChart,
@@ -130,6 +134,7 @@ const esgKpis = [
 export function EnergySustainabilityView() {
   const { toast } = useToast()
   const [selectedSite, setSelectedSite] = useState<EnergySite | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [now, setNow] = useState(() => Date.now())
 
   useEffect(() => {
@@ -472,7 +477,10 @@ export function EnergySustainabilityView() {
                   "site-energy-card cursor-pointer energy-card-tilt",
                   selectedSite?.id === site.id && "ring-2 ring-primary"
                 )}
-                onClick={() => setSelectedSite(site)}
+                onClick={() => {
+                  setSelectedSite(site)
+                  setDrawerOpen(true)
+                }}
               >
                 <CardContent className="p-3.5">
                   <div className="flex items-start justify-between">
@@ -646,6 +654,12 @@ export function EnergySustainabilityView() {
           </div>
         </CardContent>
       </Card>
+
+      <EnergyDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        site={selectedSite}
+      />
     </div>
   )
 }

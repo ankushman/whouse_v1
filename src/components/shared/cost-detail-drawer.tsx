@@ -381,7 +381,14 @@ export function CostDetailDrawer({
   // 6-month projection (linear regression-ish mock) — also must be unconditional
   const projection = React.useMemo(() => {
     if (!category) return []
-    const trend = costTrend.map(e => ({
+    type TrendPoint = {
+      month: string
+      amount: number
+      total: number
+      share: number
+      type?: "actual" | "projected"
+    }
+    const trend: TrendPoint[] = costTrend.map(e => ({
       month: e.month,
       amount: e[category],
       total: e.total,
@@ -395,15 +402,15 @@ export function CostDetailDrawer({
     }, 0) / (last6.length - 1)
     const last = last6[last6.length - 1].amount
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-    return last6.map((d) => ({ ...d, type: "actual" as const })).concat(
-      Array.from({ length: 3 }).map((_, i) => ({
-        month: months[i % 6] || `M+${i + 1}`,
-        amount: Math.max(0, Math.round(last + avgChange * (i + 1))),
-        total: 0,
-        share: 0,
-        type: "projected" as const,
-      }))
-    )
+    const actuals: TrendPoint[] = last6.map((d) => ({ ...d, type: "actual" as const }))
+    const projected: TrendPoint[] = Array.from({ length: 3 }).map((_, i) => ({
+      month: months[i % 6] || `M+${i + 1}`,
+      amount: Math.max(0, Math.round(last + avgChange * (i + 1))),
+      total: 0,
+      share: 0,
+      type: "projected" as const,
+    }))
+    return actuals.concat(projected)
   }, [category])
 
   // Quarterly comparison — also unconditional
@@ -601,7 +608,7 @@ export function CostDetailDrawer({
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
-                      formatter={(val: number) => [`₹${(val / 100000).toFixed(2)}L`, meta.label]}
+                      formatter={(val) => [`₹${(Number(val) / 100000).toFixed(2)}L`, meta.label]}
                     />
                   }
                 />
@@ -651,7 +658,7 @@ export function CostDetailDrawer({
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
-                      formatter={(val: number) => [`₹${(val / 100000).toFixed(2)}L`, "Amount"]}
+                      formatter={(val) => [`₹${(Number(val) / 100000).toFixed(2)}L`, "Amount"]}
                     />
                   }
                 />
@@ -763,7 +770,7 @@ export function CostDetailDrawer({
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
-                      formatter={(val: number) => [`₹${(val / 100000).toFixed(2)}L`, meta.label]}
+                      formatter={(val) => [`₹${(Number(val) / 100000).toFixed(2)}L`, meta.label]}
                     />
                   }
                 />

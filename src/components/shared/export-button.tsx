@@ -12,23 +12,39 @@ import { toast as sonnerToast } from "sonner"
 import { cn } from "@/lib/utils"
 
 interface ExportButtonProps {
+  /** CSV export callback (callback mode) */
   onExportCSV?: () => void
+  /** PDF export callback (callback mode) */
   onExportPDF?: () => void
+  /** Optional label shown on the trigger button (default: "Export") */
+  label?: string
+  /** Optional data array — when provided, CSV export is auto-wired via exportToCSV */
+  data?: ReadonlyArray<Record<string, unknown>> | unknown[]
+  /** Filename (without extension) used when `data` is provided */
+  filename?: string
   className?: string
 }
 
-export function ExportButton({ onExportCSV, onExportPDF, className }: ExportButtonProps) {
+export function ExportButton({
+  onExportCSV,
+  onExportPDF,
+  label = "Export",
+  data,
+  filename = "export",
+  className,
+}: ExportButtonProps) {
+  const handleCSV = onExportCSV ?? (() => exportToCSV((data as Record<string, unknown>[]) ?? [], filename))
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className={cn("gap-1.5 text-xs", className)}>
           <Download className="h-3.5 w-3.5" />
-          Export
+          {label}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {onExportCSV && (
-          <DropdownMenuItem className="text-xs gap-2 cursor-pointer" onClick={onExportCSV}>
+        {(onExportCSV || data) && (
+          <DropdownMenuItem className="text-xs gap-2 cursor-pointer" onClick={handleCSV}>
             <FileSpreadsheet className="h-4 w-4 text-emerald-600" />
             Export CSV
           </DropdownMenuItem>

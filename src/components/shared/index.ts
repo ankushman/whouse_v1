@@ -51,3 +51,6 @@ export { ReportsDetailDrawer, type ReportDetail, type ReportsDetailDrawerProps }
 export { AlertsDetailDrawer, type AlertDetail, type AlertsDetailDrawerProps, type AlertSeverity, type AlertType } from "./alerts-detail-drawer"
 export { DockDetailDrawer, type DockDetail, type DockAssignmentDetail, type DockDetailDrawerProps } from "./dock-detail-drawer"
 export { RouteOptimizationDetailDrawer, type RouteDetail, type RouteDetailDrawerProps, type RouteStatus } from "./route-detail-drawer"
+export { PredictiveDetailDrawer, type PredictiveAnomaly } from "./predictive-detail-drawer"
+export { ComplianceDetailDrawer, type ComplianceDomainDetail } from "./compliance-detail-drawer"
+export { EnergyDetailDrawer, type EnergySiteDetail } from "./energy-detail-drawer"

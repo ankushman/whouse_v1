@@ -2,6 +2,22 @@
 
 import { toast as sonnerToast, type ExternalToast } from "sonner"
 
+type ToastFn = (
+  title: string,
+  description?: string,
+  opts?: ExternalToast,
+) => string | number
+
+interface ToastApi {
+  success: ToastFn
+  error: ToastFn
+  warning: ToastFn
+  info: ToastFn
+  loading: ToastFn
+  dismiss: (id?: string | number) => void
+  raw: typeof sonnerToast
+}
+
 /**
  * Convenience wrapper around sonner's `toast` with named methods
  * that enforce a consistent (title, description) shape across the app.
@@ -10,48 +26,30 @@ import { toast as sonnerToast, type ExternalToast } from "sonner"
  *   import { useToast } from "@/hooks/use-toast-helper"
  *   const { toast } = useToast()
  *   toast.success("Saved!", "Your changes have been applied")
+ *
+ * Backward-compatible: also exposes `success`/`error`/`warning`/`info`/`loading`
+ * at the top level so callers using `const { success } = useToast()` still work.
  */
 export function useToast() {
-  return {
-    /** Display a success toast */
-    success: (title: string, description?: string, opts?: ExternalToast) =>
-      sonnerToast.success(title, {
-        description,
-        ...opts,
-      }),
-
-    /** Display an error toast */
-    error: (title: string, description?: string, opts?: ExternalToast) =>
-      sonnerToast.error(title, {
-        description,
-        ...opts,
-      }),
-
-    /** Display a warning toast */
-    warning: (title: string, description?: string, opts?: ExternalToast) =>
-      sonnerToast.warning(title, {
-        description,
-        ...opts,
-      }),
-
-    /** Display an info toast */
-    info: (title: string, description?: string, opts?: ExternalToast) =>
-      sonnerToast.info(title, {
-        description,
-        ...opts,
-      }),
-
-    /** Display a loading toast — returns the id so you can update/dismiss it */
-    loading: (title: string, description?: string, opts?: ExternalToast) =>
-      sonnerToast.loading(title, {
-        description,
-        ...opts,
-      }),
-
-    /** Dismiss a toast by id */
+  const api: ToastApi = {
+    success: (title, description, opts) =>
+      sonnerToast.success(title, { description, ...opts }),
+    error: (title, description, opts) =>
+      sonnerToast.error(title, { description, ...opts }),
+    warning: (title, description, opts) =>
+      sonnerToast.warning(title, { description, ...opts }),
+    info: (title, description, opts) =>
+      sonnerToast.info(title, { description, ...opts }),
+    loading: (title, description, opts) =>
+      sonnerToast.loading(title, { description, ...opts }),
     dismiss: (id?: string | number) => sonnerToast.dismiss(id),
-
-    /** Direct access to the underlying sonner toast for advanced usage */
     raw: sonnerToast,
+  }
+
+  return {
+    // Preferred API — `const { toast } = useToast(); toast.success(...)`
+    toast: api,
+    // Backward-compatible API — `const { success } = useToast()`
+    ...api,
   }
 }

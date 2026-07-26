@@ -197,8 +197,11 @@ export function SettingsView() {
   const [customerDialogOpen, setCustomerDialogOpen] = useState(false)
   const [editingCustomer, setEditingCustomer] = useState<typeof customersData[0] | null>(null)
   const [customerSearch, setCustomerSearch] = useState("")
-  const [customerForm, setCustomerForm] = useState({
-    name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM" as const,
+  const [customerForm, setCustomerForm] = useState<{
+    name: string; code: string; city: string; state: string; contact: string; email: string;
+    type: "OEM" | "Tier1" | "Tier2"; status: "Active" | "Inactive" | "On Hold";
+  }>({
+    name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM", status: "Active",
   })
 
   // Transporter dialog
@@ -234,12 +237,12 @@ export function SettingsView() {
   // Handlers — Customers
   const openAddCustomer = () => {
     setEditingCustomer(null)
-    setCustomerForm({ name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM" })
+    setCustomerForm({ name: "", code: "", city: "", state: "", contact: "", email: "", type: "OEM", status: "Active" })
     setCustomerDialogOpen(true)
   }
   const openEditCustomer = (c: typeof customersData[0]) => {
     setEditingCustomer(c)
-    setCustomerForm({ name: c.name, code: c.code, city: c.city, state: c.state, contact: c.contact, email: c.email, type: c.type as "OEM" })
+    setCustomerForm({ name: c.name, code: c.code, city: c.city, state: c.state, contact: c.contact, email: c.email, type: c.type as "OEM" | "Tier1" | "Tier2", status: (c.status as "Active" | "Inactive" | "On Hold") ?? "Active" })
     setCustomerDialogOpen(true)
   }
   const filteredCustomers = customersData.filter(c =>

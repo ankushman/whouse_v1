@@ -33,6 +33,10 @@ import { cn } from "@/lib/utils"
 import { useToast } from "@/hooks/use-toast-helper"
 import { ExportButton } from "@/components/shared/export-button"
 import {
+  PredictiveDetailDrawer,
+  type PredictiveAnomaly,
+} from "@/components/shared/predictive-detail-drawer"
+import {
   AreaChart,
   Area,
   LineChart,
@@ -249,6 +253,7 @@ export function PredictiveAnalyticsView() {
   const [selectedTab, setSelectedTab] = useState("forecast")
   const [refreshing, setRefreshing] = useState(false)
   const [selectedAnomaly, setSelectedAnomaly] = useState<Anomaly | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [now, setNow] = useState(() => Date.now())
 
   useEffect(() => {
@@ -467,7 +472,10 @@ export function PredictiveAnalyticsView() {
                 a.severity === "warning" && "border-amber-500/40",
                 selectedAnomaly?.id === a.id && "ring-2 ring-primary"
               )}
-              onClick={() => setSelectedAnomaly(a)}
+              onClick={() => {
+                setSelectedAnomaly(a)
+                setDrawerOpen(true)
+              }}
             >
               <CardContent className="p-4">
                 <div className="flex items-start justify-between gap-3">
@@ -687,6 +695,19 @@ export function PredictiveAnalyticsView() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      <PredictiveDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        anomaly={selectedAnomaly}
+        onAcknowledge={(a) => {
+          toast.info("Anomaly acknowledged", `${a.metric} at ${a.warehouse}`)
+        }}
+        onResolve={(a) => {
+          toast.success("Anomaly resolved", `${a.metric} marked as resolved`)
+          setSelectedAnomaly(null)
+        }}
+      />
     </div>
   )
 }

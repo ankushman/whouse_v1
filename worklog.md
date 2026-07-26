@@ -3683,3 +3683,128 @@ Stage Summary:
   6. Add Supabase persistence for audit log entries (currently in-memory mock)
   7. Add real blockchain-style hash chaining for shift handover signatures (currently random hex)
   8. CSS audit: 460+ classes — consolidate 181 pre-existing duplicates
+
+---
+Task ID: 39
+Agent: Main (Cron Review - Round 39)
+Task: Static-QA + 52 TS-error fix sweep + 3 new detail drawers (Predictive/Compliance/Energy) + 30+ CSS micro-interactions
+
+Work Log:
+- Read worklog.md — project at Round 38 (commit 7287564), 22 view modules, 14 detail drawers, 460+ CSS classes, lint clean, build success, but 52 pre-existing TypeScript errors in src/ that Next.js build was silently skipping.
+- Verified baseline: `bun run lint` (0 errors), `bun run build` (success 17.2s), `npx tsc --noEmit` (52 src/ errors).
+- agent-browser QA: SKIPPED (sandbox network isolation — confirmed unfixable in prior rounds). Replaced with strict `tsc --noEmit` + `bun run lint` + `bun run build` triple verification.
+
+TSC ERROR SWEEP — fixed all 52 src/ TypeScript errors:
+  - use-toast-helper.ts: ROOT CAUSE FIX. Hook was returning `{ success, error, ... }` but every drawer was calling `const { toast } = useToast(); toast.success(...)`. `toast` was undefined → runtime crash waiting to happen. Rewrote hook to return `{ toast: api, ...api }` so BOTH calling patterns work (`toast.success(...)` AND `success(...)`).
+  - export-button.tsx: Extended props to accept optional `data` + `filename` + `label` for data-driven CSV export mode (callers in predictive/energy were passing `data` which didn't exist on the props).
+  - status-badge.tsx: Added `label` as alias for `status` (callers in operations-overview and warehouses-view were using `label` prop).
+  - database.ts (Warehouse): Aligned type with actual mock-data usage — added camelCase aliases (`capacityUsed`, `inventoryAccuracy`, `healthScore`, `todayOrders`, etc.) and optional `accuracy` field. Old snake_case fields kept as optional for back-compat.
+  - database.ts (OutboundShipment): Made `dispatch_time`/`delivery_time` optional + added camelCase `dispatchTime`/`deliveryTime` aliases.
+  - database.ts (Employee): Added `"Off Duty"` to `shift` union (employees-view was comparing to "Off Duty").
+  - mock-data.ts (Employee): Same `"Off Duty"` shift union fix.
+  - operations-overview-view.tsx: Fixed comparison of `s.status` against `"in-transit"`/`"delayed"` (not in OutboundShipment union). Changed to `"Dispatched"`/`"Delivered"`. Derived `destination`/`eta`/`progress` from existing fields where missing.
+  - employees-view.tsx: 3 render functions had `(val: string)` / `(val: number)` signatures incompatible with DataTable's `(value: unknown, row, index)`. Changed to `(value: unknown)` with internal narrowing.
+  - settings-view.tsx: customerForm state type was too narrow (`type: "OEM" as const`). Explicitly typed to allow `"OEM" | "Tier1" | "Tier2"` and added missing `status` field.
+  - warehouse-map-view.tsx: Used `warehouse.inventoryAccuracy ?? warehouse.accuracy ?? 0` for missing `accuracy` field.
+  - employee-detail-drawer.tsx: Fixed arithmetic on `String(baseHour).padStart(...) - 1` (string can't be subtracted). Changed to `baseHour - 1`. Added `as TaskEntry[]` cast on filtered array (literal widening issue). Migrated 6 `toast({title, description})` calls to new `toast.success(title, description)` API.
+  - alerts-detail-drawer.tsx: Added `"low"` to ImpactMetric.severity union (code was using `as never` workaround).
+  - cost-detail-drawer.tsx: Fixed Recharts `Formatter` type — `(val: number) => [string, string]` was too narrow, changed to `(val) => [...]` with `Number(val)` inside. Fixed `.concat()` overload failure by explicitly typing `TrendPoint[]` for both arrays.
+  - productivity-detail-drawer.tsx: Added `"Off Duty"` to ShiftHistoryRow.shift union.
+  - reports-detail-drawer.tsx: Added `"pie"` to ReportSection.type union. Renamed lowercase `typeIcon` local to PascalCase `TypeIcon` (JSX requires PascalCase for component variables).
+  - transportation-detail-drawer.tsx: Same `typeIcon` → `TypeIcon` rename. Fixed Recharts Formatter signature.
+  - inbound-detail-drawer.tsx: Fixed Recharts Formatter signature.
+  - warehouse-kpi-comparison.tsx: 3 render functions returned `{val}%` where val was `unknown` — wrapped in `Number(val)`.
+  - shipment-tracking-table.tsx: 7 render functions had `(value: string)` / `(value: number)` / `(value: Shipment["status"])` signatures — all changed to `(value: unknown)` with internal casts. Widened `Shipment.id` to `string | number` for structural compatibility with `ShipmentDetailRow`.
+  - barcode-scanner-modal.tsx: Extracted `BarcodeInventoryItem` interface (was using `typeof inventoryItems[number]` which only works on values, not props).
+  - chat/route.ts: Cast `m.role as 'user' | 'assistant' | 'system'` to satisfy ChatMessage[] typing.
+
+NEW FEATURE 1: PredictiveDetailDrawer (~890 lines, 7 sections, file: src/components/shared/predictive-detail-drawer.tsx)
+  - 7 sections: Header strip (severity gradient + sheen animation + icon pulse + 4 hero metrics: Expected/Observed/Deviation/Model Confidence), Anomaly Description card, 24-Hour Trend AreaChart (baseline vs actual with threshold reference line + gradient fill), Root Cause Analysis (3-5 ML-inferred causes with probability bars + evidence + category badges), Detection Model details (model name, algorithm, accuracy, features, last trained, detection latency), Affected Entities list (3-5 contextual entities: warehouse/employee/shipment/sku/customer/vehicle with type-specific icons), Recommended Actions checklist (3-4 actions with owner/ETA/impact/status cycle: pending→in-progress→done + progress bar), Footer with Export Report + Acknowledge + Mark Resolved.
+  - Severity-aware theming: 3 variants (critical=red, warning=amber, info=blue) with matching gradients, borders, icon colors, glow shadows, bar colors.
+  - Metric-aware content: 5 metric categories (throughput/cycle-time/utilization/energy/accuracy) each with UNIQUE root causes, UNIQUE action items, UNIQUE affected entities, UNIQUE ML model details.
+  - Deterministic mock data: root causes, action items, trend data (24 hourly points), model details, affected entities — all seeded by anomaly ID hash.
+  - Hooks correctly placed BEFORE early return (Rules of Hooks).
+  - Actions: Acknowledge (toast), Resolve (toast + closes drawer), Export Report CSV, per-action toggle (cycles pending → in-progress → done).
+  - Wired into predictive-analytics-view.tsx: anomaly Card onClick now opens drawer (was just setting ring state). Drawer state in parent (drawerOpen + selectedAnomaly).
+
+NEW FEATURE 2: ComplianceDetailDrawer (~640 lines, 6 sections, file: src/components/shared/compliance-detail-drawer.tsx)
+  - 6 sections: Header strip (status gradient + sheen + icon pulse + 4 hero metrics: Score/Target/Gap/Critical findings), Framework Description card, 6-Month Score Trend BarChart (score vs target with color-coded bars: emerald if ≥target, amber if within 5pts, red if below), Control Coverage donut PieChart (Passed/Warning/Failed/Not Tested with breakdown legend), Open Findings list (3-5 findings with severity badges: critical/major/minor/observation + status: open/in-remediation/resolved/overdue + owner + due date + description + remediation plan + evidence), Audit History timeline (4-5 historical audit events with date/type/auditor/outcome/notes), Footer with Export Report + Acknowledge + Schedule Review.
+  - Status-aware theming: 3 variants (compliant=emerald, at-risk=amber, non-compliant=red) with matching gradients, borders, icon colors, glow shadows.
+  - Domain-aware findings: 6 compliance domains (iso-9001, iso-27001, dpdp-2023, sox-equiv, osh-2020, gst-compliance) each with UNIQUE findings, UNIQUE remediation plans, UNIQUE audit history.
+  - Deterministic mock data: findings, score history (6 months), control coverage, audit history — all seeded by domain ID hash.
+  - Hooks correctly placed BEFORE early return.
+  - Actions: Acknowledge (toast), Export Report CSV, Schedule Review (toast + closes drawer).
+  - Wired into compliance-audit-view.tsx: ComplianceDomainCard now accepts onOpen callback. Card onClick opens drawer. Drawer state in parent.
+
+NEW FEATURE 3: EnergyDetailDrawer (~700 lines, 7 sections, file: src/components/shared/energy-detail-drawer.tsx)
+  - 7 sections: Header strip (emerald gradient + sheen + Sun icon decoration + icon pulse + 4 hero metrics: Daily kWh/Solar Share/Carbon/Efficiency), 24-Hour Consumption stacked AreaChart (grid + solar with gradient fills + noon reference line), Appliance-Level Breakdown (7 appliances with icons + kWh + percentage progress bars + color-coded), Solar Generation Stats (capacity/today/month + trees-equivalent + CO₂ avoided + inverter status badge), 30-Day Carbon Emissions stacked BarChart (Scope 1 + Scope 2), Water + Waste dual cards, AI Recommendations list (3-5 recommendations with category icons + impact badges + estimated savings + payback months + Queue button), Footer with Export Report + Schedule Audit + Offset Carbon.
+  - Site-type-aware content: 4 site types (warehouse/cold-storage/cross-dock/hub) each with UNIQUE appliance breakdown (cold-storage emphasizes refrigeration; warehouse emphasizes HVAC).
+  - Efficiency-score theming: 4 tiers (≥85=emerald, ≥70=blue, ≥55=amber, <55=red).
+  - Deterministic mock data: hourly consumption (24 points with solar peak curve + business hours factor + appliance split), appliance breakdown, 30-day emissions history, solar stats, recommendations — all seeded by site ID hash.
+  - Hooks correctly placed BEFORE early return.
+  - Actions: Export Report CSV, Schedule Audit (toast), Offset Carbon (toast + closes drawer), per-recommendation Queue button (toast).
+  - Wired into energy-sustainability-view.tsx: site Card onClick now opens drawer. Drawer state in parent (drawerOpen + selectedSite).
+
+CSS: Added 30+ new micro-interaction classes in globals.css (lines 7816-8191, +376 lines):
+  - 11 for Predictive drawer: predictive-drawer-header (sheen animation), predictive-icon-pulse, predictive-stat-enter (staggered entrance), predictive-drawer-body-enter (slide-in), predictive-card-enter (slide-in + hover lift)
+  - 11 for Compliance drawer: compliance-drawer-header (sheen), compliance-icon-pulse, compliance-stat-enter, compliance-drawer-body-enter, compliance-card-enter (slide-up + hover lift)
+  - 11 for Energy drawer: energy-drawer-header (sheen), energy-icon-pulse, energy-stat-enter, energy-drawer-body-enter, energy-card-enter (slide-in + hover lift)
+  - 8 generic utilities: hover-lift-sm, glass-card-frost, gradient-border-animated-v2, number-flash, glow-ring-active, scroll-reveal, tab-indicator-slide, stagger-children (8-level), btn-press-sm, focus-ring-primary, animate-breathe-subtle, skeleton-shimmer-v2, underline-grow, fade-in-down-sm, hover-brighten-sm, hover-grow-sm, animate-spin-slower, animate-pulse-subtle-v2
+
+Verification:
+  - `npx tsc --noEmit` — 0 errors in src/ (was 52, now 0)
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully in 17.2s, all 7 routes generated
+
+Stage Summary:
+- 28 files changed (3 new + 25 modified)
+- 3 NEW DETAIL DRAWERS: PredictiveDetailDrawer (~890 lines, 7 sections) + ComplianceDetailDrawer (~640 lines, 6 sections) + EnergyDetailDrawer (~700 lines, 7 sections)
+- 30+ new CSS micro-interaction classes (11 predictive + 11 compliance + 11 energy + 8 generic utilities)
+- 3 views updated to wire drawers in (predictive-analytics, compliance-audit, energy-sustainability)
+- CRITICAL FIX: useToast helper now supports BOTH `toast.success()` AND `success()` calling conventions (was a runtime crash waiting to happen)
+- 52 TypeScript errors ELIMINATED — `npx tsc --noEmit` now passes 100% clean on src/
+- Type system cleanup: Warehouse/OutboundShipment/Employee types aligned with actual mock-data shape (camelCase + optional snake_case aliases for back-compat)
+- Recharts Formatter typing standardized across all drawers (cost/inbound/transportation)
+- JSX component variable casing fixed (typeIcon → TypeIcon in reports/transportation drawers)
+- StatusBadge API expanded (supports both `status` and `label` props)
+- ExportButton API expanded (supports both callback mode and data-driven mode)
+- DETAIL DRAWERS NOW: 17 total (Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓, Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓ NEW, Compliance ✓ NEW, Energy ✓ NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors (was 52)
+- agent-browser QA: SKIPPED (sandbox network isolation — unfixable)
+
+---
+Updated Project Status (Post Round 39):
+- STATUS: STABLE + HEALTHIEST EVER — All TypeScript errors eliminated, lint clean, build clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (22): Dashboard, Operations Overview, Warehouses (+Detail Drawer), Inbound (+Detail Drawer), Outbound (+Detail Drawer), Inventory (+Detail Drawer), Transportation (+Detail Drawer), Route Optimization (+Detail Drawer), Equipment (+Detail Drawer), Employees (+Detail Drawer), Productivity (+Detail Drawer), Cost Analytics (+Detail Drawer), Alerts (+Detail Drawer), Dock Scheduling (+Detail Drawer), SLA Countdown, Reports (+Detail Drawer), Settings, Warehouse Map, Predictive Analytics (+Detail Drawer NEW), Compliance & Audit (+Detail Drawer NEW), Energy & Sustainability (+Detail Drawer NEW), Shift Handover
+- SHARED COMPONENTS (48+): All previous 45 + PredictiveDetailDrawer (NEW) + ComplianceDetailDrawer (NEW) + EnergyDetailDrawer (NEW)
+- HOOKS (10): useToast helper upgraded to support both calling patterns (backward-compatible)
+- CSS UTILITIES (530+): 495+ previous + 30+ new (11 predictive + 11 compliance + 11 energy + 8 generic)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (17): Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓, Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓ (NEW), Compliance ✓ (NEW), Energy ✓ (NEW) — EVERY operational + analytics module now has a drill-down drawer
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully (17.2s, 7 routes)
+- TSC: 0 src/ errors (was 52 — all eliminated this round)
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use `bun run build` for verification)
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - agent-browser sandbox network isolation (cannot QA test against localhost — unfixable)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+- PRIORITY NEXT:
+  1. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  2. Add warehouse geographic clustering with actual lat/lng positioning
+  3. Consolidate inline mock data (predictive-detail-drawer / compliance-detail-drawer / energy-detail-drawer) into mock-data.ts
+  4. Add barcode/QR code scanning integration in inventory drawer (already have BarcodeScannerModal — wire it)
+  5. Add DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  6. CSS audit: 530+ classes — consolidate 181 pre-existing duplicates
+  7. Add OperationsOverviewDetailDrawer (drill-down from operations overview)
+  8. Add SLACountdownDetailDrawer (drill-down from SLA countdown)
+  9. Add WarehouseMapDetailDrawer (drill-down from warehouse map)
+  10. Add SettingsDetailDrawer (drill-down from customer/transporter cards in settings)
+  11. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  12. Multi-warehouse switching for dock scheduler (currently fixed to Chennai Hub)
+  13. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  14. Predictive model retraining trigger UI (currently display-only)

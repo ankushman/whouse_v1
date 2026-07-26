@@ -462,7 +462,7 @@ export function InboundDetailDrawer({
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
-                        formatter={(val: number) => [`${val} min`, "Duration"]}
+                        formatter={(val) => [`${val} min`, "Duration"]}
                       />
                     }
                   />

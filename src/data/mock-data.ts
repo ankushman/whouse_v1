@@ -15,6 +15,8 @@ export interface Warehouse {
   capacity: number;
   capacityUsed: number;
   inventoryAccuracy: number;
+  /** Alias used by some views (e.g. warehouse-map) */
+  accuracy?: number;
   forkliftCount: number;
   forkliftActive: number;
   todayOrders: number;
@@ -117,7 +119,7 @@ export interface Employee {
   role: string;
   warehouse: string;
   avatar: string;
-  shift: "Morning" | "Afternoon" | "Night";
+  shift: "Morning" | "Afternoon" | "Night" | "Off Duty";
   attendance: number;
   tasksCompleted: number;
   productivity: number;

@@ -100,8 +100,8 @@ export function OperationsOverviewView() {
   // ── Derived KPIs ──
   const executiveKPIs = useMemo(() => {
     const criticalAlerts = alerts.filter((a) => a.severity === "critical" && !a.acknowledged)
-    const activeShipments = outboundShipments.filter((s) => s.status === "in-transit")
-    const pendingGRN = inboundShipments.filter((s) => s.status === "pending")
+    const activeShipments = outboundShipments.filter((s) => s.status === "Dispatched")
+    const pendingGRN = inboundShipments.filter((s) => s.status === "Pending")
     const totalCapacity = warehouses.reduce((s, w) => s + w.capacity, 0)
     const totalUsed = warehouses.reduce((s, w) => s + w.capacityUsed, 0)
     const occupancy = Math.round((totalUsed / totalCapacity) * 100)
@@ -122,7 +122,7 @@ export function OperationsOverviewView() {
       {
         title: "Active Shipments",
         value: String(activeShipments.length),
-        change: `${outboundShipments.filter((s) => s.status === "delayed").length} delayed`,
+        change: `${outboundShipments.filter((s) => s.status === "Dispatched").length} in transit`,
         trend: activeShipments.length > 5 ? "up" : "down" as const,
         icon: Truck,
         color: "emerald",
@@ -216,8 +216,21 @@ export function OperationsOverviewView() {
   // ── Active Shipments Table ──
   const activeShipmentsData = useMemo(() =>
     outboundShipments
-      .filter((s) => s.status === "in-transit" || s.status === "delayed")
-      .slice(0, 8), [])
+      .filter((s) => s.status === "Dispatched" || s.status === "Delivered")
+      .slice(0, 8)
+      .map((s) => ({
+        id: s.id,
+        destination: s.customer,
+        customer: s.customer,
+        status: s.status,
+        eta: s.deliveryTime ?? s.dispatchTime ?? "—",
+        progress:
+          s.status === "Delivered"
+            ? 100
+            : s.status === "Dispatched"
+              ? 70
+              : 30,
+      })), [])
 
   // ── Warehouse Quick Status ──
   const warehouseStatus = useMemo(() =>
@@ -449,7 +462,7 @@ export function OperationsOverviewView() {
                       <TableCell className="text-xs hidden sm:table-cell text-muted-foreground">{shipment.customer}</TableCell>
                       <TableCell>
                         <StatusBadge
-                          variant={shipment.status === "delayed" ? "red" : shipment.status === "in-transit" ? "blue" : "green"}
+                          variant={shipment.status === "Delivered" ? "green" : shipment.status === "Dispatched" ? "blue" : "amber"}
                           label={shipment.status}
                         />
                       </TableCell>

@@ -6,26 +6,36 @@
 export interface Warehouse {
   id: string
   name: string
-  code: string
+  code?: string
   city: string
   state: string
-  address: string
-  manager_id: string | null
-  manager_name: string
-  manager_avatar: string
+  address?: string
+  managerId?: string | null
+  managerName?: string
+  managerAvatar?: string
+  manager_name?: string
+  manager_avatar?: string
   capacity: number
-  capacity_used: number
-  inventory_accuracy: number
-  forklift_count: number
-  forklift_active: number
-  today_orders: number
-  pending_tasks: number
-  health_score: number
+  capacityUsed?: number
+  capacity_used?: number
+  inventoryAccuracy?: number
+  inventory_accuracy?: number
+  forkliftCount?: number
+  forklift_active?: number
+  forklift_count?: number
+  todayOrders?: number
+  today_orders?: number
+  pendingTasks?: number
+  pending_tasks?: number
+  healthScore?: number
+  health_score?: number
+  accuracy?: number
   status: 'green' | 'amber' | 'red'
-  alerts_count: number
-  is_active: boolean
-  created_at: string
-  updated_at: string
+  alerts?: number
+  alerts_count?: number
+  is_active?: boolean
+  created_at?: string
+  updated_at?: string
 }
 
 export interface Employee {
@@ -36,7 +46,7 @@ export interface Employee {
   warehouse_id: string
   warehouse_name: string
   avatar: string
-  shift: 'Morning' | 'Afternoon' | 'Night'
+  shift: 'Morning' | 'Afternoon' | 'Night' | 'Off Duty'
   attendance: number
   tasks_completed: number
   productivity: number
@@ -75,9 +85,11 @@ export interface OutboundShipment {
   vehicle_id: string | null
   vehicle: string
   status: 'Pending' | 'Picking' | 'Packing' | 'Ready' | 'Dispatched' | 'Delivered'
-  dispatch_time: string | null
-  delivery_time: string | null
-  is_active: boolean
+  dispatch_time?: string | null
+  delivery_time?: string | null
+  dispatchTime?: string | null
+  deliveryTime?: string | null
+  is_active?: boolean
   created_at: string
   updated_at: string
 }

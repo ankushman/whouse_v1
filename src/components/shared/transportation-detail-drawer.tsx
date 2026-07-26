@@ -559,7 +559,7 @@ export function TransportationDetailDrawer({
               <div className="space-y-3">
                 {stops.map((stop, i) => {
                   const Icon = stop.status === "completed" ? CheckCircle2 : stop.status === "current" ? CircleDot : Circle
-                  const typeIcon = stop.type === "warehouse" ? Building2 :
+                  const TypeIcon = stop.type === "warehouse" ? Building2 :
                                    stop.type === "hub" ? Crosshair :
                                    stop.type === "pickup" ? Box : PackageCheck
                   const accentClass = stop.status === "completed"
@@ -583,7 +583,7 @@ export function TransportationDetailDrawer({
                       <div className="flex-1 min-w-0 pt-0.5">
                         <div className="flex items-center justify-between gap-2">
                           <p className="text-xs font-medium leading-snug flex items-center gap-1.5">
-                            {typeIcon && <typeIcon className="size-3 text-muted-foreground" />}
+                            <TypeIcon className="size-3 text-muted-foreground" />
                             {stop.name}
                           </p>
                           {stop.status === "current" && (
@@ -626,7 +626,7 @@ export function TransportationDetailDrawer({
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
-                      formatter={(val: number) => [`${val} km`, "Distance"]}
+                      formatter={(val) => [`${val} km`, "Distance"]}
                     />
                   }
                 />

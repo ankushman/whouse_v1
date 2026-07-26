@@ -42,9 +42,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Build messages array for the SDK
-    const sdkMessages: Array<{ role: string; content: string }> = [
-      { role: 'assistant', content: SYSTEM_PROMPT },
-      ...history.map((m) => ({ role: m.role, content: m.content })),
+    const sdkMessages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
+      { role: 'system', content: SYSTEM_PROMPT },
+      ...history.map((m) => ({ role: m.role as 'user' | 'assistant' | 'system', content: m.content })),
     ]
 
     const zai = await ZAI.create()

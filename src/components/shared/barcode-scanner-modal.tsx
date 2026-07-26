@@ -28,26 +28,28 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+export interface BarcodeInventoryItem {
+  id: string
+  sku: string
+  partName: string
+  category: string
+  warehouse: string
+  quantity: number
+  minStock: number
+  maxStock: number
+  location: string
+  abcClass: string
+  variance: number
+}
+
 interface BarcodeScannerModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  inventoryItems: Array<{
-    id: string
-    sku: string
-    partName: string
-    category: string
-    warehouse: string
-    quantity: number
-    minStock: number
-    maxStock: number
-    location: string
-    abcClass: string
-    variance: number
-  }>
+  inventoryItems: BarcodeInventoryItem[]
 }
 
 interface ScanResult {
-  item: typeof inventoryItems[number]
+  item: BarcodeInventoryItem
   scannedAt: Date
 }
 

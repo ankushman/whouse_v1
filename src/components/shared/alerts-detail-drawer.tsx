@@ -192,7 +192,7 @@ interface ImpactMetric {
   value: string
   delta: string
   trend: "up" | "down" | "flat"
-  severity: "good" | "warning" | "critical"
+  severity: "good" | "warning" | "critical" | "low"
 }
 
 interface RunbookStep {
@@ -419,7 +419,7 @@ function generateImpactMetrics(alert: AlertDetail): ImpactMetric[] {
       { label: "Variance Units", value: `+${20 + (seed % 80)}`, delta: "+8", trend: "up", severity: "warning" },
       { label: "Variance Value", value: `₹${(5 + (seed % 25)).toLocaleString("en-IN")}k`, delta: "+₹3k", trend: "up", severity: "warning" },
       { label: "Last Audit", value: `${8 + (seed % 12)} days`, delta: "+2d", trend: "up", severity: "warning" },
-      { label: "SKU Affected", value: `${1 + (seed % 4)}`, delta: "0", trend: "flat", severity: "low" as never },
+      { label: "SKU Affected", value: `${1 + (seed % 4)}`, delta: "0", trend: "flat", severity: "low" },
     ],
     dispatch: [
       { label: "Delay (hours)", value: `${2 + (seed % 6)}h`, delta: "+4h", trend: "up", severity: "critical" },

@@ -244,25 +244,34 @@ const employeeColumns: Column<(typeof employees)[number]>[] = [
     header: "Shift",
     sortable: true,
     className: "hidden sm:table-cell",
-    render: (val: string) => (
-      <Badge variant="outline" className={cn("text-[10px] font-normal rounded-full", shiftColor(val))}>
-        {val}
-      </Badge>
-    ),
+    render: (val: unknown) => {
+      const v = String(val ?? "")
+      return (
+        <Badge variant="outline" className={cn("text-[10px] font-normal rounded-full", shiftColor(v))}>
+          {v}
+        </Badge>
+      )
+    },
   },
   {
     key: "productivity",
     header: "Productivity",
     sortable: true,
     className: "text-right tabular-nums",
-    render: (val: number) => <span className={productivityColor(val)}>{val}%</span>,
+    render: (val: unknown) => {
+      const v = Number(val ?? 0)
+      return <span className={productivityColor(v)}>{v}%</span>
+    },
   },
   {
     key: "attendance",
     header: "Attendance (%)",
     sortable: true,
     className: "text-right tabular-nums",
-    render: (val: number) => <span>{val}%</span>,
+    render: (val: unknown) => {
+      const v = Number(val ?? 0)
+      return <span>{v}%</span>
+    },
   },
   {
     key: "tasksCompleted",

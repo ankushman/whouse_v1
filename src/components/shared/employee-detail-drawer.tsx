@@ -187,7 +187,7 @@ function getActivities(employee: Employee): ActivityEntry[] {
     },
     {
       text: "Pre-shift equipment inspection completed",
-      time: `${String(baseHour).padStart(2, "0") - 1 < 0 ? "23" : String(baseHour - 1).padStart(2, "0")}:45`,
+      time: `${baseHour - 1 < 0 ? "23" : String(baseHour - 1).padStart(2, "0")}:45`,
       icon: <CheckCircle2 className="size-3.5 text-emerald-500" />,
       accent: "bg-emerald-500",
     },
@@ -347,7 +347,7 @@ function getTodayTasks(employee: Employee): TaskEntry[] {
       dueIn: "End of shift",
       progress: 0,
     },
-  ].filter((_, i) => (h >> i) & 0x1 || i < 4)
+  ].filter((_, i) => (h >> i) & 0x1 || i < 4) as TaskEntry[]
 }
 
 function getPerformanceAlerts(employee: Employee): PerformanceAlert[] {
@@ -659,10 +659,7 @@ export function EmployeeDetailDrawer({
                   if (onAssignTask) {
                     onAssignTask(emp)
                   } else {
-                    toast({
-                      title: "Task assigned",
-                      description: `New task assigned to ${emp.name}`,
-                    })
+                    toast.success("Task assigned", `New task assigned to ${emp.name}`)
                   }
                 }}
               >
@@ -673,7 +670,7 @@ export function EmployeeDetailDrawer({
                 size="sm"
                 variant="outline"
                 className="gap-1.5 h-7 text-xs flex-1"
-                onClick={() => toast({ title: "Message sent", description: `Message delivered to ${emp.name}` })}
+                onClick={() => toast.success("Message sent", `Message delivered to ${emp.name}`)}
               >
                 <MessageSquare className="size-3.5" />
                 Message
@@ -686,7 +683,7 @@ export function EmployeeDetailDrawer({
                   if (onScheduleReview) {
                     onScheduleReview(emp)
                   } else {
-                    toast({ title: "Review scheduled", description: `Performance review for ${emp.name} scheduled` })
+                    toast.success("Review scheduled", `Performance review for ${emp.name} scheduled`)
                   }
                 }}
               >
@@ -697,7 +694,7 @@ export function EmployeeDetailDrawer({
                 size="sm"
                 variant="ghost"
                 className="gap-1.5 h-7 text-xs px-2"
-                onClick={() => toast({ title: "Calling", description: `Dialing ${emp.name}…` })}
+                onClick={() => toast.success("Calling", `Dialing ${emp.name}…`) }
               >
                 <Phone className="size-3.5" />
               </Button>
@@ -705,7 +702,7 @@ export function EmployeeDetailDrawer({
                 size="sm"
                 variant="ghost"
                 className="gap-1.5 h-7 text-xs px-2"
-                onClick={() => toast({ title: "Email", description: `Composing email to ${emp.name}…` })}
+                onClick={() => toast.success("Email", `Composing email to ${emp.name}…`) }
               >
                 <Mail className="size-3.5" />
               </Button>
@@ -1158,7 +1155,7 @@ export function EmployeeDetailDrawer({
               variant="ghost"
               size="sm"
               className="h-6 text-[10px] gap-1"
-              onClick={() => toast({ title: "Refreshing", description: `Re-fetching ${emp.name}'s data…` })}
+              onClick={() => toast.success("Refreshing", `Re-fetching ${emp.name}'s data…`) }
             >
               <RefreshCw className="size-3" />
               Refresh

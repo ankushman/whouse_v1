@@ -243,7 +243,7 @@ export function WarehouseKPIComparison() {
         className: "text-right",
         headerClassName: "text-right",
         render: (val) => (
-          <span className="text-number text-xs font-medium">{val}%</span>
+          <span className="text-number text-xs font-medium">{Number(val)}%</span>
         ),
       },
       {
@@ -253,7 +253,7 @@ export function WarehouseKPIComparison() {
         className: "text-right",
         headerClassName: "text-right",
         render: (val) => (
-          <span className="text-number text-xs font-medium">{val}%</span>
+          <span className="text-number text-xs font-medium">{Number(val)}%</span>
         ),
       },
       {
@@ -263,7 +263,7 @@ export function WarehouseKPIComparison() {
         className: "text-right",
         headerClassName: "text-right",
         render: (val) => (
-          <span className="text-number text-xs font-medium">{val}%</span>
+          <span className="text-number text-xs font-medium">{Number(val)}%</span>
         ),
       },
       {

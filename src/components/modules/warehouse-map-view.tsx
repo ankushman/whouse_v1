@@ -397,7 +397,7 @@ function WarehouseNode({ warehouse, position, isSelected, onClick }: WarehouseNo
             <div className="rounded bg-muted/50 px-1.5 py-1">
               <p className="text-[7px] uppercase tracking-wider text-muted-foreground">Accuracy</p>
               <p className="text-[10px] font-bold text-number text-emerald-600 dark:text-emerald-400">
-                {warehouse.accuracy}%
+                {warehouse.inventoryAccuracy ?? warehouse.accuracy ?? 0}%
               </p>
             </div>
           </div>

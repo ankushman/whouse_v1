@@ -8,7 +8,7 @@ import { DataTable, type Column, type BatchAction } from "@/components/shared/da
 import { ShipmentDetailDrawer, type ShipmentDetailRow } from "@/components/shared/shipment-detail-drawer"
 
 interface Shipment {
-  id: string
+  id: string | number
   trackingId: string
   origin: string
   destination: string
@@ -143,17 +143,20 @@ export function ShipmentTrackingTable() {
         header: "Tracking ID",
         sortable: true,
         className: "w-[140px]",
-        render: (value: string) => (
-          <span className="font-mono text-xs text-number">{value}</span>
-        ),
+        render: (value: unknown) => {
+          const v = String(value ?? "")
+          return (
+            <span className="font-mono text-xs text-number">{v}</span>
+          )
+        },
       },
       {
         key: "origin",
         header: "Origin",
         sortable: true,
         className: "w-[120px]",
-        render: (value: string) => (
-          <span className="text-xs font-medium text-number">{value}</span>
+        render: (value: unknown) => (
+          <span className="text-xs font-medium text-number">{String(value ?? "")}</span>
         ),
       },
       {
@@ -161,8 +164,8 @@ export function ShipmentTrackingTable() {
         header: "Destination",
         sortable: true,
         className: "w-[120px]",
-        render: (value: string) => (
-          <span className="text-xs text-number">{value}</span>
+        render: (value: unknown) => (
+          <span className="text-xs text-number">{String(value ?? "")}</span>
         ),
       },
       {
@@ -170,8 +173,8 @@ export function ShipmentTrackingTable() {
         header: "Carrier",
         sortable: true,
         className: "w-[110px]",
-        render: (value: string) => (
-          <span className="text-xs text-muted-foreground">{value}</span>
+        render: (value: unknown) => (
+          <span className="text-xs text-muted-foreground">{String(value ?? "")}</span>
         ),
       },
       {
@@ -179,25 +182,28 @@ export function ShipmentTrackingTable() {
         header: "Status",
         sortable: true,
         className: "w-[130px]",
-        render: (value: Shipment["status"]) => (
-          <Badge
-            variant="outline"
-            className={`rounded-full border px-2 py-0.5 text-[10px] font-medium ${
-              statusStyles[value] || ""
-            }`}
-          >
-            <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-current" />
-            {value}
-          </Badge>
-        ),
+        render: (value: unknown) => {
+          const v = value as Shipment["status"]
+          return (
+            <Badge
+              variant="outline"
+              className={`rounded-full border px-2 py-0.5 text-[10px] font-medium ${
+                statusStyles[v] || ""
+              }`}
+            >
+              <span className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-current" />
+              {v}
+            </Badge>
+          )
+        },
       },
       {
         key: "eta",
         header: "ETA",
         sortable: true,
         className: "w-[140px]",
-        render: (value: string) => (
-          <span className="text-xs text-muted-foreground">{value}</span>
+        render: (value: unknown) => (
+          <span className="text-xs text-muted-foreground">{String(value ?? "")}</span>
         ),
       },
       {
@@ -206,9 +212,9 @@ export function ShipmentTrackingTable() {
         sortable: true,
         className: "w-[70px]",
         headerClassName: "text-right",
-        render: (value: number) => (
+        render: (value: unknown) => (
           <span className="text-xs font-medium text-right block text-number">
-            {value}
+            {Number(value ?? 0)}
           </span>
         ),
       },
@@ -218,9 +224,9 @@ export function ShipmentTrackingTable() {
         sortable: true,
         className: "w-[100px]",
         headerClassName: "text-right",
-        render: (value: string) => (
+        render: (value: unknown) => (
           <span className="text-xs font-medium text-right block text-number">
-            {value}
+            {String(value ?? "")}
           </span>
         ),
       },

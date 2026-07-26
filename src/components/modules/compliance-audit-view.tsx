@@ -40,6 +40,10 @@ import { cn } from "@/lib/utils"
 import { useToast } from "@/hooks/use-toast-helper"
 import { ExportButton } from "@/components/shared/export-button"
 import {
+  ComplianceDetailDrawer,
+  type ComplianceDomainDetail,
+} from "@/components/shared/compliance-detail-drawer"
+import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -205,6 +209,8 @@ export function ComplianceAuditView() {
   const [actionFilter, setActionFilter] = useState<string>("all")
   const [outcomeFilter, setOutcomeFilter] = useState<string>("all")
   const [selectedEntry, setSelectedEntry] = useState<AuditEntry | null>(null)
+  const [drawerDomain, setDrawerDomain] = useState<ComplianceDomain | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [now, setNow] = useState(() => Date.now())
 
   useEffect(() => {
@@ -459,7 +465,14 @@ export function ComplianceAuditView() {
         <CardContent>
           <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {complianceDomains.map((d) => (
-              <ComplianceDomainCard key={d.id} domain={d} />
+              <ComplianceDomainCard
+                key={d.id}
+                domain={d}
+                onOpen={(dom) => {
+                  setDrawerDomain(dom)
+                  setDrawerOpen(true)
+                }}
+              />
             ))}
           </div>
         </CardContent>
@@ -635,13 +648,28 @@ export function ComplianceAuditView() {
           )}
         </CardContent>
       </Card>
+
+      <ComplianceDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        domain={drawerDomain}
+        onAcknowledge={(d) => {
+          toast.info("Compliance acknowledged", `${d.name} status reviewed`)
+        }}
+      />
     </div>
   )
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
-function ComplianceDomainCard({ domain }: { domain: ComplianceDomain }) {
+function ComplianceDomainCard({
+  domain,
+  onOpen,
+}: {
+  domain: ComplianceDomain
+  onOpen: (d: ComplianceDomain) => void
+}) {
   const Icon = domain.icon
   const passes = domain.score >= domain.target
   const statusColor =
@@ -653,8 +681,9 @@ function ComplianceDomainCard({ domain }: { domain: ComplianceDomain }) {
 
   return (
     <Card
+      onClick={() => onOpen(domain)}
       className={cn(
-        "compliance-domain-card overflow-hidden",
+        "compliance-domain-card overflow-hidden cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all",
         domain.status === "at-risk" && "border-amber-500/40",
         domain.status === "non-compliant" && "border-destructive/40"
       )}

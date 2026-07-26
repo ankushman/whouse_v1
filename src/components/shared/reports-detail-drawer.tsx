@@ -93,7 +93,7 @@ interface ReportSection {
   id: string
   title: string
   rows: number
-  type: "table" | "chart" | "kpis" | "text"
+  type: "table" | "chart" | "kpis" | "text" | "pie"
   description: string
 }
 
@@ -611,7 +611,7 @@ export function ReportsDetailDrawer({
             </div>
             <div className="space-y-1.5">
               {sections.map((section, i) => {
-                const typeIcon = section.type === "table" ? Database :
+                const TypeIcon = section.type === "table" ? Database :
                                  section.type === "chart" ? TrendingUp :
                                  section.type === "kpis" ? Sparkles :
                                  section.type === "pie" ? Layers :
@@ -623,7 +623,7 @@ export function ReportsDetailDrawer({
                     style={{ animationDelay: `${i * 50}ms` }}
                   >
                     <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400">
-                      {typeIcon && <typeIcon className="size-3.5" />}
+                      <TypeIcon className="size-3.5" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-medium leading-tight">{section.title}</p>

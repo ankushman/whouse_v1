@@ -7813,3 +7813,379 @@ html.theme-transition body {
 .animate-spin-slow {
   animation: spin-360 2s linear infinite;
 }
+
+
+/* ============================================================================ */
+/* ROUND 39 — Predictive / Compliance / Energy Detail Drawer micro-interactions */
+/* ============================================================================ */
+
+/* --- Predictive Detail Drawer ---------------------------------------------- */
+@keyframes predictive-header-sheen {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.predictive-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: predictive-header-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes predictive-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50% { box-shadow: 0 0 0 8px transparent; opacity: 0.92; }
+}
+.predictive-icon-pulse {
+  animation: predictive-icon-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes predictive-stat-enter {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.predictive-stat-enter > * {
+  animation: predictive-stat-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.predictive-stat-enter > *:nth-child(1) { animation-delay: 50ms; }
+.predictive-stat-enter > *:nth-child(2) { animation-delay: 100ms; }
+.predictive-stat-enter > *:nth-child(3) { animation-delay: 150ms; }
+.predictive-stat-enter > *:nth-child(4) { animation-delay: 200ms; }
+
+@keyframes predictive-body-enter {
+  0% { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.predictive-drawer-body-enter {
+  animation: predictive-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+@keyframes predictive-card-enter {
+  0% { opacity: 0; transform: translateX(-12px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.predictive-card-enter {
+  animation: predictive-card-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.predictive-card-enter:hover {
+  transform: translateX(2px);
+  background-color: hsl(var(--accent) / 0.4);
+}
+
+/* --- Compliance Detail Drawer ---------------------------------------------- */
+@keyframes compliance-header-sheen {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.compliance-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: compliance-header-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes compliance-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; transform: scale(1); }
+  50% { box-shadow: 0 0 0 6px transparent; transform: scale(1.04); }
+}
+.compliance-icon-pulse {
+  animation: compliance-icon-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes compliance-stat-enter {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.compliance-stat-enter > * {
+  animation: compliance-stat-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.compliance-stat-enter > *:nth-child(1) { animation-delay: 50ms; }
+.compliance-stat-enter > *:nth-child(2) { animation-delay: 100ms; }
+.compliance-stat-enter > *:nth-child(3) { animation-delay: 150ms; }
+.compliance-stat-enter > *:nth-child(4) { animation-delay: 200ms; }
+
+@keyframes compliance-body-enter {
+  0% { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.compliance-drawer-body-enter {
+  animation: compliance-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+@keyframes compliance-card-enter {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.compliance-card-enter {
+  animation: compliance-card-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.compliance-card-enter:hover {
+  transform: translateY(-1px);
+  border-color: hsl(var(--border) / 0.8);
+  background-color: hsl(var(--accent) / 0.4);
+}
+
+/* --- Energy Detail Drawer -------------------------------------------------- */
+@keyframes energy-header-sheen {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.energy-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: energy-header-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes energy-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(16,185,129,0); }
+}
+.energy-icon-pulse {
+  animation: energy-icon-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes energy-stat-enter {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.energy-stat-enter > * {
+  animation: energy-stat-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.energy-stat-enter > *:nth-child(1) { animation-delay: 50ms; }
+.energy-stat-enter > *:nth-child(2) { animation-delay: 100ms; }
+.energy-stat-enter > *:nth-child(3) { animation-delay: 150ms; }
+.energy-stat-enter > *:nth-child(4) { animation-delay: 200ms; }
+
+@keyframes energy-body-enter {
+  0% { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.energy-drawer-body-enter {
+  animation: energy-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+@keyframes energy-card-enter {
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.energy-card-enter {
+  animation: energy-card-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.energy-card-enter:hover {
+  transform: translateX(2px);
+  background-color: hsl(var(--accent) / 0.4);
+}
+
+/* --- Generic utilities reused across new drawers --------------------------- */
+
+/* Hover lift with subtle scale (used on compliance domain cards) */
+.hover-lift-sm {
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms ease;
+}
+.hover-lift-sm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -10px hsl(var(--foreground) / 0.15);
+}
+
+/* Frosted glass card with backdrop blur */
+.glass-card-frost {
+  background: hsl(var(--background) / 0.6);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+/* Animated gradient border (for premium drawer headers) */
+@keyframes gradient-border-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.gradient-border-animated-v2 {
+  position: relative;
+  background-clip: padding-box;
+}
+.gradient-border-animated-v2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.4), transparent 40%, hsl(var(--primary) / 0.2));
+  background-size: 200% 200%;
+  animation: gradient-border-shift 6s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Number flash animation (when KPI updates) */
+@keyframes number-flash {
+  0% { color: hsl(var(--primary)); transform: scale(1.05); }
+  100% { color: inherit; transform: scale(1); }
+}
+.number-flash {
+  animation: number-flash 600ms ease-out;
+}
+
+/* Soft glow ring for active/selected rows */
+@keyframes glow-ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
+  50% { box-shadow: 0 0 0 4px hsl(var(--primary) / 0); }
+}
+.glow-ring-active {
+  animation: glow-ring-pulse 2s ease-in-out infinite;
+}
+
+/* Scroll reveal (apply to elements as they enter viewport) */
+@keyframes scroll-reveal {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.scroll-reveal {
+  animation: scroll-reveal 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Tab indicator slide animation */
+@keyframes tab-indicator-slide {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+.tab-indicator-slide {
+  animation: tab-indicator-slide 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Stagger helper (apply to a parent; children animate with delay) */
+.stagger-children > * {
+  animation: scroll-reveal 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
+
+/* Button press micro-feedback */
+.btn-press-sm {
+  transition: transform 100ms ease;
+}
+.btn-press-sm:active {
+  transform: scale(0.96);
+}
+
+/* Focus ring (keyboard accessibility) */
+.focus-ring-primary:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* Subtle breathe animation for live indicators */
+@keyframes breathe-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(0.98); }
+}
+.animate-breathe-subtle {
+  animation: breathe-subtle 3.2s ease-in-out infinite;
+}
+
+/* Shimmer skeleton (for loading placeholders) */
+@keyframes shimmer-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer-v2 {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted) / 0.6) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-sweep 1.6s ease-in-out infinite;
+}
+
+/* Underline grow on hover (for links) */
+.underline-grow {
+  position: relative;
+}
+.underline-grow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.underline-grow:hover::after {
+  width: 100%;
+}
+
+/* Fade-in-down (dropdown menus) */
+@keyframes fade-in-down-sm {
+  0% { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.fade-in-down-sm {
+  animation: fade-in-down-sm 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hover brighten (subtle, for cards in grids) */
+.hover-brighten-sm {
+  transition: filter 200ms ease, transform 200ms ease;
+}
+.hover-brighten-sm:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+/* Hover grow (for icon-only buttons) */
+.hover-grow-sm {
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-grow-sm:hover {
+  transform: scale(1.08);
+}
+
+/* Slow spin (for refresh/loading icons) */
+@keyframes spin-slow-360 {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slower {
+  animation: spin-slow-360 3s linear infinite;
+}
+
+/* Pulse subtle (for status dots) */
+@keyframes pulse-subtle-v2 {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse-subtle-v2 {
+  animation: pulse-subtle-v2 2s ease-in-out infinite;
+}
