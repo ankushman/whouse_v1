@@ -1,10 +1,11 @@
 "use client"
 
-import { useMemo, useCallback } from "react"
-import { toast } from "sonner"
+import { useMemo, useCallback, useState } from "react"
+import { useToast } from "@/hooks/use-toast-helper"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table"
+import { ShipmentDetailDrawer, type ShipmentDetailRow } from "@/components/shared/shipment-detail-drawer"
 
 interface Shipment {
   id: string
@@ -17,6 +18,9 @@ interface Shipment {
   items: number
   value: string
 }
+
+// Re-export for external consumers (e.g. detail drawer)
+export type { Shipment as ShipmentDetailRow }
 
 const mockShipments: Shipment[] = [
   {
@@ -123,6 +127,15 @@ const statusStyles: Record<Shipment["status"], string> = {
 }
 
 export function ShipmentTrackingTable() {
+  const toast = useToast()
+  const [detailItem, setDetailItem] = useState<Shipment | null>(null)
+  const [detailOpen, setDetailOpen] = useState(false)
+
+  const openDetail = useCallback((item: Shipment) => {
+    setDetailItem(item)
+    setDetailOpen(true)
+  }, [])
+
   const columns: Column<Shipment>[] = useMemo(
     () => [
       {
@@ -238,14 +251,26 @@ export function ShipmentTrackingTable() {
           ),
       },
     ],
-    []
+    [toast]
   )
 
   const handleRowClick = useCallback((row: Shipment) => {
-    toast.info("Shipment Details", `${row.trackingId} — ${row.origin} → ${row.destination}`, {
-      duration: 3000,
-    })
-  }, [])
+    openDetail(row)
+  }, [openDetail])
+
+  const handleTrack = useCallback((item: Shipment) => {
+    toast.info(
+      "Live tracking enabled",
+      `${item.trackingId} — refreshes every 30 seconds`
+    )
+  }, [toast])
+
+  const handleExport = useCallback((item: Shipment) => {
+    toast.success(
+      "Shipment summary exported",
+      `${item.trackingId}.pdf (${item.items} items, ${item.value})`
+    )
+  }, [toast])
 
   return (
     <Card className="card-depth depth-shadow-md table-container hover-lift transition-smooth">
@@ -279,6 +304,15 @@ export function ShipmentTrackingTable() {
           className="text-xs"
         />
       </CardContent>
+
+      {/* Shipment Detail Drawer */}
+      <ShipmentDetailDrawer
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        item={detailItem}
+        onTrack={handleTrack}
+        onExport={handleExport}
+      />
     </Card>
   )
 }

@@ -5867,3 +5867,109 @@ html.theme-transition body {
 .icon-tint-red { color: oklch(0.58 0.24 27); }
 .icon-tint-purple { color: oklch(0.55 0.2 300); }
 .icon-tint-cyan { color: oklch(0.6 0.18 200); }
+
+/* ──────────────────────────────────────────────────────────────────────── */
+/*  Round 30 — Shipment Detail Drawer + Timeline polish                  */
+/* ──────────────────────────────────────────────────────────────────────── */
+
+/* Timeline dot pulse — for in-progress / current event */
+@keyframes timeline-dot-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 oklch(0.62 0.18 250 / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 4px oklch(0.62 0.18 250 / 0);
+  }
+}
+.timeline-dot-active {
+  animation: timeline-dot-pulse 1.6s ease-out infinite;
+}
+
+/* Timeline vertical line — subtle gradient */
+.timeline-line {
+  background: linear-gradient(
+    to bottom,
+    oklch(0.62 0.18 145 / 0.4) 0%,
+    oklch(0.62 0.18 250 / 0.3) 50%,
+    oklch(0.4 0 0 / 0.1) 100%
+  );
+}
+
+/* Status banner pulse for delayed shipments */
+@keyframes delayed-banner-pulse {
+  0%, 100% {
+    background-color: oklch(0.58 0.24 27 / 0.08);
+  }
+  50% {
+    background-color: oklch(0.58 0.24 27 / 0.15);
+  }
+}
+.delayed-banner-pulse {
+  animation: delayed-banner-pulse 2s ease-in-out infinite;
+}
+
+/* Progress bar with shimmer overlay for in-transit shipments */
+@keyframes transit-progress-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.transit-progress-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.transit-progress-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(1 0 0 / 0.3) 50%,
+    transparent 100%
+  );
+  animation: transit-progress-shimmer 2s linear infinite;
+}
+
+/* Carrier logo / badge tint variants */
+.carrier-tint-bluedart { color: oklch(0.55 0.22 250); }
+.carrier-tint-delhivery { color: oklch(0.55 0.22 145); }
+.carrier-tint-dtdc { color: oklch(0.55 0.22 25); }
+.carrier-tint-ecom { color: oklch(0.55 0.22 300); }
+.carrier-tint-xpressbees { color: oklch(0.55 0.22 200); }
+.carrier-tint-shadowfax { color: oklch(0.55 0.22 350); }
+
+/* Map pin bounce for origin/destination markers */
+@keyframes map-pin-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.map-pin-bounce {
+  animation: map-pin-bounce 1.4s ease-in-out infinite;
+}
+
+/* Distance bar — animated fill from left */
+@keyframes distance-fill {
+  from { width: 0%; }
+}
+.distance-fill-animate {
+  animation: distance-fill 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Hover ripple for clickable shipment rows */
+.shipment-row-hover {
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.shipment-row-hover:hover {
+  background-color: oklch(0.55 0.2 250 / 0.04);
+}
+
+/* Driver / vehicle card subtle accent */
+.driver-card-accent {
+  border-left: 3px solid oklch(0.55 0.2 250 / 0.4);
+}
+
+/* COD amount highlight */
+.cod-amount-highlight {
+  background: linear-gradient(135deg, oklch(0.7 0.18 75 / 0.1), oklch(0.7 0.18 45 / 0.1));
+  border-color: oklch(0.7 0.18 75 / 0.3);
+}

@@ -39,3 +39,4 @@ export { GlassCard, GlassCardHeader, GlassCardContent, GlassCardTitle, GlassCard
 export { ViewErrorBoundary } from "./view-error-boundary"
 export { InventoryDetailDrawer, type InventoryDetailRow } from "./inventory-detail-drawer"
 export { EquipmentDetailDrawer, type EquipmentDetailRow, type EquipmentStatus } from "./equipment-detail-drawer"
+export { ShipmentDetailDrawer, type ShipmentDetailRow, type ShipmentStatus } from "./shipment-detail-drawer"
