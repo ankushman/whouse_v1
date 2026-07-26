@@ -24,6 +24,7 @@ tests=(
   "Prod. Schedule|Production Schedule"
   "Cost Variance|Production Cost Variance"
   "Inventory Valuation|Inventory Valuation"
+  "Demand Forecasting|Demand Forecasting"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"

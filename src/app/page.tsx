@@ -17,6 +17,7 @@ import { WorkOrderManagementView } from "@/components/modules/work-order-managem
 import { ProductionScheduleView } from "@/components/modules/production-schedule-view"
 import { ProductionCostVarianceView } from "@/components/modules/production-cost-variance-view"
 import { InventoryValuationView } from "@/components/modules/inventory-valuation-view"
+import { DemandForecastingView } from "@/components/modules/demand-forecasting-view"
 import { SupplierCorrectiveActionRequestView } from "@/components/modules/supplier-corrective-action-request-view"
 import { OutboundView } from "@/components/modules/outbound-view"
 import { ReturnsReverseLogisticsView } from "@/components/modules/returns-reverse-logistics-view"
@@ -60,6 +61,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "production-schedule": ProductionScheduleView,
   "production-cost-variance": ProductionCostVarianceView,
   "inventory-valuation": InventoryValuationView,
+  "demand-forecasting": DemandForecastingView,
   "supplier-corrective-action-request": SupplierCorrectiveActionRequestView,
   outbound: OutboundView,
   "returns-reverse-logistics": ReturnsReverseLogisticsView,

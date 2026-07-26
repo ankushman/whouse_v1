@@ -6057,3 +6057,157 @@ Updated Project Status (Post Round 55):
   13. Customer contract document management (mirror vendor contract module)
   14. Add Demand Forecasting module (statistical + ML forecasting on top of MRP demand history — extends MRP module)
   15. Add Fixed Asset Register module (links to PCV for capitalization + IV for asset valuation — closes finance ops layer with capital assets tracking, depreciation schedules per Companies Act Schedule II, asset capitalization workflow linked to procurement, impairment indicators linked to PCV/NCR, asset transfer/disposal workflow with journal entries)
+
+---
+Task ID: 56
+Agent: Main (Cron Review - Round 56)
+Task: Demand Forecasting module (statistical + ML forecasting on top of MRP demand history) with 6 forecasting methods (MA/ETS/OLS/STL/ARIMA/ML Ensemble), 36-month historical + forecast chart, method comparison, ML feature importance, accuracy benchmarks, scenario analysis, model run history — 6-tab inline drawer + 30+ CSS micro-interactions + agent-browser QA verified + Dashboard/IV regression check
+
+Work Log:
+- Read worklog.md — project at Round 55, 37 modules, 35 detail drawers, 1010+ CSS classes, 0 src/ TS errors, lint/build clean.
+- Verified baseline: `bun run lint` (0 errors), `npx tsc --noEmit` (0 src/ errors; only pre-existing errors in mini-services/skills dirs and examples/websocket), `bun run build` (success, 7 routes).
+- Started standalone server with `NODE_OPTIONS=--max-old-space-size=256` on `http://127.0.0.1:3001/`.
+- agent-browser smoke test PASSED: Dashboard rendered ("Executive Dashboard"), Inventory Valuation rendered ("Inventory Valuation" heading from R55).
+- Strategic choice: Built new operational module "Demand Forecasting" (was priority #14 in worklog priority list). Extends MRP (R53) with statistical + ML forecasting — closes the demand planning loop: Sales Order → Demand Forecast → MRP → Production Schedule → Work Order → Cost Variance → Inventory Valuation.
+
+NEW FEATURE 1: Demand Forecasting Module (~2345 lines, file: src/components/modules/demand-forecasting-view.tsx)
+  - New navigation item: "Demand Forecasting" (icon: Brain, group: operations, placed right after Inventory Valuation)
+  - 6 hero KPI cards: 12-Mo Forecast / Avg MAPE / Avg Confidence / Approved / Pending Review (with pulse ping when > 0) / Rejected — each with gradient top bar, trend indicator, secondary metric
+  - Aggregate Demand History + Forecast (36 months) ComposedChart — AreaChart for forecast (dashed, indigo gradient) + Line for actual (emerald) — combined view across all 16 SKUs
+  - Forecast Status Distribution donut PieChart (6 statuses color-coded)
+  - Primary Method Distribution donut PieChart (6 methods color-coded)
+  - Average MAPE by Forecast Method horizontal BarChart (color-coded by accuracy threshold)
+  - Top 10 SKUs by 12-Month Forecast Volume grouped BarChart (last 12M actual vs next 12M forecast)
+  - 16 mock DF records with realistic Indian automotive parts (same parts as WO/PS/MRP/PCV/IV modules for traceability continuity): brake pad, wheel rim, engine block, caliper seal, shock absorber, Li-Ion battery, tire bead, wiring harness, engine bolt, engine oil, windshield, radiator cap, air filter, spark plug, clutch FAI, helmet shell
+  - 7 status tabs: All (16) / Approved (9) / Auto-Generated (2) / Under Review (2) / Rejected (1) / Draft (1) / Archived (1) — each with live count badge
+  - 3 filters: Forecast Method (7 options) + ABC Class (4 options) + free-text search (matches ID, part no, description, category, warehouse, planner, MRP ref)
+  - 6 forecasting methods with theming + description: moving-average=MA-3/blue, exponential-smoothing=ETS/emerald, linear-regression=OLS/amber, seasonal-decomposition=STL/purple, arima=ARIMA/rose, ml-ensemble=ML-Ens/indigo
+  - 6 forecast statuses with full theming (label, color, bg, border, pieColor, icon): approved=CheckCircle2/emerald, auto-generated=Sparkles/blue, under-review=Eye/amber, rejected=XCircle/rose, draft=FileBarChart/cyan, archived=Archive/zinc
+  - 4 confidence levels with theming: high (92%) / medium (68%) / low (38%)
+  - 4 trend types with theming: up/down/flat/volatile
+  - 4 seasonality levels with theming: none/weak/moderate/strong
+  - Hash-seeded deterministic mock data generators: generateHistory (24 months actual + 12 months forecast with trend/seasonality/noise simulation), generateMethodResults (6 methods ranked by MAPE with forecast/mape/rmse/bias/weight), generateFeatures (8 top ML features with importance from 10 candidates: Lag-1, Lag-12, Production Schedule Forward, Promo Calendar, Festival Indicator, Supplier Lead Time, Customer Order Pipeline, IIP-Auto Index, Weather, Competitor Stockout), generateAccuracy (7 metrics: MAPE/RMSE/MASE/Bias/WAPE/R²/Tracking Signal with benchmark + status), generateDrivers (5-7 qualitative drivers with impact/direction/description), generateScenarios (3 scenarios: pessimistic 18%/base 64%/optimistic 18% with assumptions list), generateModelRuns (6 historical training runs with trigger/duration/dataPoints/status/notes)
+  - Status-aware row theming: rejected=red gradient+pulse animation, under-review/draft=amber tint, approved=indigo accent on hover, all with left gradient accent bar
+  - Forecast change color-coded in table (emerald for positive, rose for negative)
+  - MAPE color-coded by threshold (<10% emerald, <15% amber, >=15% rose)
+  - Confidence shown as single letter badge (H/M/L)
+  - Trend shown as icon (TrendingUp/Down/Minus/Activity)
+  - Seasonality shown as first letter (N/W/M/S)
+  - Safety stock recommendation shown in emerald
+  - Planner + linked MRP ref stacked in table cells
+  - CSV export with full 28-field set per DF record
+  - Refresh + Bulk Retrain action buttons with toast feedback
+
+NEW FEATURE 2: Demand Forecast Detail Drawer (~720 lines, 6 sub-tabs, embedded in module)
+  - 6 sub-tabs: Overview / Method Compare / ML Features / Accuracy / Scenarios / Model Runs
+  - Header: 4 hero stat grid (Last Actual, Next Period Forecast with change %, 12-Month Forecast, MAPE with RMSE+Bias), status badge, method badge, confidence badge, trend badge, seasonality badge, ABC badge, DF ID, Part No, Planner, Linked MRP ref
+  - Sheen sweep on open (gradient indigo→purple→pink), gradient underline + backdrop blur on header
+  - Overview tab: 36-month Historical Demand + Forecast ComposedChart (Area for forecast + Line for actual) + 3-card summary (3-Month Forecast / Safety Stock Rec / Reorder Point) + Forecast Metadata 4×2 grid (data source, history points, horizon, planner, last run, next run, warehouse, category) + Demand Drivers list (5-7 factors with direction icon + impact % badge)
+  - Method Compare tab: Full table with 6 methods (Method, Forecast, MAPE, RMSE, Bias, Weight, Primary badge) + MAPE by Method horizontal BarChart (color-coded by accuracy) + Ensemble Weight Distribution donut PieChart
+  - ML Features tab: Top 8 features horizontal BarChart with SHAP-style importance bars + Feature Details table (Feature, Description, Importance %, Contribution Progress bar)
+  - Accuracy tab: 7 metrics table (Metric, Description, Value, Benchmark, Status badge with icon) + Actual vs Forecast ScatterChart (holdout period — diagonal = perfect forecast)
+  - Scenarios tab: 3 scenario cards (Pessimistic/Base/Optimistic with forecast value + probability + Progress bar) + Scenario Assumptions list (4 assumptions per scenario with bullet points)
+  - Model Runs tab: Full table with 6 historical training runs (Run ID, Run Date, Trigger, Duration, Data Points, Status badge, Notes)
+  - Footer: Export button always + status-aware actions:
+    - draft: Submit for Review (blue)
+    - auto-generated: Review & Approve (amber)
+    - under-review: Approve Forecast (emerald) + Reject (destructive rose)
+    - approved: Trigger Manual Retrain (indigo)
+    - rejected: Reopen for Re-analysis (outline)
+    - archived: Unarchive (outline)
+  - All animations: df-drawer-sheen (sheen sweep on open), df-drawer-header (gradient underline + backdrop blur), df-stat-enter (4 staggered), df-body-enter (fade-up), df-card-enter (hover lift), df-tab-btn (active scale), df-search-focus (ring expand), df-row-in (entrance + ::before gradient accent bar), df-row-critical (red gradient + pulse), df-row-warn (amber tint), df-row-favorable (indigo tint on hover), df-kpi-enter (staggered + hover lift), df-chart-enter (hover lift + border tint), df-table-card (hover shadow), custom indigo→purple scrollbar, prefers-reduced-motion support, prefers-contrast: more support
+
+NEW FEATURE 3: Navigation + Icon Map updates
+  - Added 'demand-forecasting' to navItems in app-store.ts (group: operations, icon: Brain, roles: super_admin/executive/regional_manager/warehouse_manager, placed after Inventory Valuation)
+  - Brain icon already imported in app-layout.tsx and in iconMap (was previously added for Predictive Analytics)
+  - Imported DemandForecastingView in app/page.tsx and added to viewMap
+  - Exported from src/components/modules/index.ts
+
+NEW FEATURE 4: 30+ new CSS micro-interaction classes (file: src/app/globals.css, appended at end, +300 lines including keyframes)
+  - df-kpi-enter (staggered + hover lift), df-chart-enter (hover lift + border tint), df-table-card (hover shadow), df-row-in (entrance + ::before gradient accent bar), df-row-critical (red gradient + pulse animation), df-row-warn (amber tint), df-row-favorable (indigo tint on hover), df-tab-btn (transition + active scale), df-search-focus (ring expand), df-drawer-sheen (sheen sweep on open), df-drawer-header (gradient underline + backdrop blur + shadow), df-stat-enter (4 staggered), df-body-enter (fade-up), df-card-enter (hover lift), df-badge-pop (badge pop animation), custom indigo→purple scrollbar styling for drawer, row hover text-shadow, prefers-reduced-motion support, prefers-contrast: more support
+
+NEW FEATURE 5: Reusable QA test script updated (file: /home/z/my-project/scripts/qa-test-views.sh)
+  - Added "Demand Forecasting|Demand Forecasting" test case
+  - Now tests 38 modules (was 37)
+
+QA Verification (agent-browser LIVE TEST):
+  - **Smoke test PASSED**: Demand Forecasting nav click → ✓ "Demand Forecasting" heading rendered
+  - KPI cards visible: 6 KPIs (12-Mo Forecast, Avg MAPE, Avg Confidence, Approved, Pending Review, Rejected)
+  - 5 chart cards visible: Aggregate Demand History + Forecast ComposedChart, Forecast Status Distribution donut, Primary Method Distribution donut, Average MAPE by Forecast Method BarChart, Top 10 SKUs by 12-Month Forecast Volume grouped BarChart
+  - All 7 status tabs visible with counts (All: 16, Approved: 9, Auto-Generated: 2, Under Review: 2, Rejected: 1, Draft: 1, Archived: 1)
+  - Master table shows 16 DF records with part avatars, status icons, method badges, confidence badges, trend icons, seasonality letters, color-coded rows (rejected highlighted with red gradient/pulse, under-review/draft with amber tint, approved with indigo accent on hover)
+  - Clicked first row (DF-2026-8001, Brake Pad Assembly — Passenger Car, Approved status, ML Ensemble method, High confidence, Upward trend, Moderate seasonality)
+  - agent-browser snapshot → ✓ Drawer opened (heading "Brake Pad Assembly — Passenger Car")
+  - Verified 6 tabs visible in drawer (Overview, Method Compare, ML Features, Accuracy, Scenarios, Model Runs)
+  - Clicked Method Compare tab → ✓ "Forecast Method Comparison" rendered — 6 methods with MAPE/RMSE/Bias/Weight + Primary badge + MAPE by Method BarChart + Ensemble Weight Distribution donut
+  - Clicked ML Features tab → ✓ "ML Feature Importance (XGBoost + LSTM Ensemble)" rendered — 8 features (Production Schedule Forward, Historical Lag-1, Lag-12, Festival/Holiday, etc.) with SHAP-style importance bars + Feature Details table with Contribution Progress bars
+  - Clicked Accuracy tab → ✓ "Forecast Accuracy Metrics" rendered — 7 metrics (MAPE/RMSE/MASE/Bias/WAPE/R²/Tracking Signal) with benchmark + status badges (good/warning/bad)
+  - Clicked Scenarios tab → ✓ "Scenario Assumptions" rendered — Pessimistic (18%)/Base (64%)/Optimistic (18%) scenarios with forecast values + probability Progress bars + assumption bullet lists
+  - Clicked Model Runs tab → ✓ "Model Run History (last 6 training runs)" rendered — RUN-BRK-PA-001 through 006 with trigger/duration/dataPoints/status (completed/failed) badges
+  - Tested status-aware footer on Approved (DF-2026-8001) → Footer shows Export + Trigger Manual Retrain buttons (status-aware correct)
+  - **Regression check PASSED**: Dashboard still renders ("Executive Dashboard" heading), Inventory Valuation (R55) still renders ("Inventory Valuation" heading)
+
+Static verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (only pre-existing error in examples/websocket/server.ts socket.io missing module — unrelated)
+
+Stage Summary:
+- 7 files changed (1 new + 6 modified), +2680 lines
+- 1 NEW MODULE: Demand Forecasting (~2345 lines, 6 KPIs + 5 charts + 7 status tabs + 3 filters + 16-item master table + 6-tab inline drawer with method comparison, ML feature importance, accuracy benchmarks, scenario analysis, model run history)
+- 1 NEW NAV ITEM + ICON: "Demand Forecasting" with Brain icon (already imported)
+- 30+ new CSS micro-interaction classes (all df-* classes)
+- 4 views updated: app-store.ts (navItems), page.tsx (viewMap), modules/index.ts (export), qa-test-views.sh (test case), globals.css (df-* classes)
+- MODULES NOW: 38 (was 37 — added Demand Forecasting)
+- DETAIL DRAWERS NOW: 36 total (35 universal + 1 new inline DF drawer)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors (only 1 pre-existing error in examples/websocket/server.ts)
+- QA: agent-browser LIVE verification PASSED (DF drawer 6 tabs verified: Overview/Method Compare/ML Features/Accuracy/Scenarios/Model Runs + status-aware footer actions verified on Approved (Trigger Manual Retrain) + Dashboard + Inventory Valuation regression check)
+- DEMAND PLANNING LOOP CLOSED: Sales Order → Demand Forecast (R56 NEW — 6 statistical + ML methods, accuracy benchmarks, scenario analysis) → MRP (R53 — auto-recommends POs based on net demand) → Procurement (PO) → Supplier Quality (R45) → QIP (R48) → NCR (R49) → SCAR (R51) → Supplier Scorecard → Production Schedule (R52) → Work Order (R50) → Cost Variance (R54) → Inventory Valuation (R55) → Standard Cost Update → back to Demand Forecast
+
+---
+Updated Project Status (Post Round 56):
+- STATUS: STABLE + NEW DEMAND FORECASTING MODULE + agent-browser SMOKE TEST PASSED (38/38 modules total)
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (38): All previous 37 + Demand Forecasting (NEW)
+- SHARED COMPONENTS (54+): All previous 54
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (1040+): 1010+ previous + 30+ new (all df-* classes)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (36 — UNIVERSAL COVERAGE + 1 NEW INLINE):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓, Yard ✓,
+    + Customer SLA (inline), + Supplier Quality (inline), + Procurement (inline), + BOM (inline), + QIP (inline), + NCR (inline),
+    + Work Order (inline), + SCAR (inline), + Production Schedule (inline), + Inventory Replenishment (inline), + Production Cost Variance (inline), + Inventory Valuation (inline), + Demand Forecasting (inline multi-tab drawer NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors (only 1 pre-existing error in examples/websocket/server.ts socket.io missing module — unrelated)
+- QA: agent-browser SMOKE TEST PASSED + DF drawer 6 tabs verified (Overview/Method Compare/ML Features/Accuracy/Scenarios/Model Runs) + status-aware footer actions verified on Approved (Trigger Manual Retrain) + Dashboard + Inventory Valuation regression check
+- DEMAND PLANNING + MANUFACTURING + SUPPLY CHAIN + FINANCE LOOP CLOSED: Sales Order → Demand Forecast (R56) → MRP (R53) → Procurement → Supplier Quality → QIP → NCR → SCAR → Supplier Scorecard → Production Schedule → Work Order → Cost Variance → Inventory Valuation → Standard Cost Update → back to Demand Forecast
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use standalone production build with NODE_OPTIONS=--max-old-space-size=256 and clean chrome + next-server processes between batches)
+  - agent-browser `eval --stdin` consistently crashes server via OOM (cgroup memory limit hit when full SPA bundle loads) — use `agent-browser click "@ref"` and `agent-browser snapshot` instead, restart server between batches
+  - Stale next-server processes can occupy port 3001 across QA sessions — must `pkill -9 -f "next-server"` + `pkill -9 chrome` between batches
+  - `localhost` resolves to IPv6 (::1) which standalone server doesn't bind to — must use `127.0.0.1` explicitly
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Customer SLA, Vendor, Supplier Quality, Procurement, BOM, QIP, NCR, WO, SCAR, PS, MRP, PCV, IV, and DF drawers are inline in module files (not extracted to shared) — 14 inline drawers total, refactor candidate for future round
+- PRIORITY NEXT:
+  1. Extract 14 inline drawers to shared/*-detail-drawer.tsx (consistency refactor)
+  2. Add 3-way match (PO ↔ GRN ↔ Invoice) auto-verification dashboard for Procurement module
+  3. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  4. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  5. Consolidate inline mock data from all 36 detail drawers into mock-data.ts (refactor)
+  6. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  7. CSS audit: 1040+ classes — consolidate 181 pre-existing duplicates
+  8. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  9. Multi-warehouse switching for dock scheduler & yard management (currently fixed to Chennai Hub)
+  10. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  11. Predictive model retraining trigger UI (currently display-only) — could link to DF model runs
+  12. Vendor contract document management (upload/store contract PDFs)
+  13. Customer contract document management (mirror vendor contract module)
+  14. Add Fixed Asset Register module (links to PCV for capitalization + IV for asset valuation — closes finance ops layer with capital assets tracking, depreciation schedules per Companies Act Schedule II, asset capitalization workflow linked to procurement, impairment indicators linked to PCV/NCR, asset transfer/disposal workflow with journal entries)
+  15. Add Production Capacity Planning module (extends Demand Forecasting with rough-cut capacity planning — links DF output to work-center capacity, identifies bottleneck work centers, recommends overtime/subcontracting/CAPEX decisions, what-if scenarios for capacity expansion)
