@@ -3140,3 +3140,69 @@ Stage Summary:
 - Dead code: warehouse-detail-modal.tsx (362 lines) still exported from modules/index.ts but unused
 - No code changes (audit-only)
 - Detailed report with file:line + snippets + fixes delivered to caller
+
+---
+Task ID: 33
+Agent: Main (Cron Review - Round 33)
+Task: QA verification + new feature development (EmployeeDetailDrawer + Performance Alerts filter)
+
+Work Log:
+- Read worklog.md tail to assess R32 state; ran lint (0 errors) + build (16.3s success).
+- Confirmed all 6 audit bugs from R32 (CRITICAL pull-to-refresh stale closure, HIGH dashboard layout regression, MEDIUM employees-view getMetricBarColor label mismatch, MEDIUM warehouse-detail-drawer trendVal "+-15%" bug, MEDIUM warehouse-detail-drawer capacity bar CSS, dead warehouse-detail-modal.tsx file) — ALL VERIFIED FIXED in prior round.
+- Project state: STABLE. Proceeded to new feature work per user instruction "样式要越做细节越多!! 功能要越做越多!!".
+- Built EmployeeDetailDrawer (~1100 lines, new file: src/components/shared/employee-detail-drawer.tsx) — full migration from Modal to Drawer pattern, mirroring Warehouse/Inventory/Equipment/Shipment drawers.
+- Wired EmployeeDetailDrawer into employees-view.tsx (replaces EmployeeDetailModal usage).
+- Added Performance filter (NEW feature): "Performance" dropdown with 3 options — All Employees / Needs Attention / Top Performers. Threshold logic: productivity < 80 || attendance < 90 || errorRate > 3 || overtime > 20.
+- Added "Needs Attention" stat card (5th card in expanded 5-column grid) — clickable to toggle filter, ring highlight when active, color-coded by count.
+- Added 11 new CSS micro-interaction classes for employee drawer (emp-drawer-header sheen, emp-online-pulse ring, emp-drawer-body-enter, emp-stat-card-hover, emp-card-enter, emp-skill-enter, emp-task-row-hover, emp-ach-enter, emp-cert-row, emp-activity-enter, emp-alert-enter). Avoided duplicate .critical-pulse-border definition.
+- Deleted dead code: src/components/shared/employee-detail-modal.tsx (438 lines) + removed its export from index.ts.
+- agent-browser QA: started dev server, navigated to /, clicked Employees nav, verified:
+  - 24 total employees, 19 on shift, 89% avg productivity, 96% avg attendance, 13 needs attention
+  - All 3 Performance filter options work (All=24, Needs Attention=13, Top Performers=11)
+  - Clicked row → EmployeeDetailDrawer opens with all 9 sections rendering: Header + PerformanceScoreRing, Performance Alerts, Quick Stats, Performance Breakdown (RadialBarChart), 7-Day Trend (AreaChart), Skills, Today's Tasks, Achievements, Training Progress, Activity Timeline, Footer
+  - Performance Alerts correctly shows "High Overtime" warning for Rajesh Kumar (24h OT)
+- Lint: 0 errors. Build: compiled successfully in 16.4s. Committed as e5eba31, pushed to main.
+
+Stage Summary:
+- 5 files changed (1 new + 1 deleted + 3 modified) — net +1377 / -454 lines
+- 1 new feature: EmployeeDetailDrawer with 9 sections (Header/Ring, Alerts, Stats, Breakdown, Trend, Skills, Tasks, Achievements, Training, Activity)
+- 1 new feature: Performance filter (Needs Attention / Top Performers) with stat card
+- 11 new CSS micro-interaction classes (no duplicates introduced)
+- 1 dead file removed (employee-detail-modal.tsx)
+- DETAIL DRAWERS NOW: Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓ (NEW) — all major modules covered
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+- agent-browser QA: PASSED (drawer opens, all sections render, filter works)
+
+---
+Updated Project Status (Post Round 33 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, latest commit e5eba31)
+- MODULES (18): Dashboard (+PullToRefresh), Operations Overview, Warehouses (+Detail Drawer), Inbound, Outbound, Inventory (+Detail Drawer), Transportation, Route Optimization, Equipment (+Detail Drawer), Employees (+Detail Drawer NEW + Performance Filter NEW), Productivity, Cost Analytics, Alerts, Dock Scheduling, SLA Countdown, Reports, Settings, Warehouse Map
+- SHARED COMPONENTS (43): All previous + EmployeeDetailDrawer (NEW) - EmployeeDetailModal (DELETED)
+- HOOKS (10): All previous (usePullToRefresh etc.)
+- CSS UTILITIES (393+): 382+ previous + 11 new (Round 33) for employee drawer micro-interactions
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (5): Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓ (NEW) — all major detail drawer patterns now covered
+- EMPLOYEES MODULE: NEW Performance filter (All/Needs Attention/Top Performers) + 5-column stat grid with Needs Attention card + EmployeeDetailDrawer
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- agent-browser QA: PASSED for Employees view + drawer + filter
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: start/stop on demand for QA)
+  - Remaining direct sonner imports: export-button, sla-monitoring-panel, shift-handover-panel, use-live-toast, use-simulated-events (all use correct 2-arg API)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - mobile-bottom-nav itemRefs Record not cleaned up on role change (LOW)
+  - use-mobile MQL vs innerWidth scrollbar-boundary mismatch (LOW, edge case)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round)
+- PRIORITY NEXT:
+  1. Dock Scheduler drag-and-drop with dnd-kit (CSS prep done in R29, dnd-kit installed)
+  2. Add Supabase persistence for real data
+  3. Add warehouse geographic clustering with actual lat/lng positioning
+  4. Consolidate inline mock data (route-optimization/sla-countdown/warehouse-health/warehouse-detail-drawer/employee-detail-drawer) into mock-data.ts
+  5. Migrate remaining direct sonner imports to use-toast-helper for consistency
+  6. Add barcode/QR code scanning integration in inventory drawer
+  7. Add DataTable getRowKey prop for tables without stable IDs
+  8. CSS audit: 393+ classes — consolidate unused/redundant definitions (181 pre-existing duplicates)
+  9. Add Shift Handover digital signature flow
+  10. Add Cost Analytics drill-down drawer (mirror employee/warehouse pattern)
