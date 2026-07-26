@@ -54,6 +54,7 @@ import { useAppStore, type NotifFrequency, type NotifSeverity, type NotifVolume 
 import { useTheme } from "next-themes"
 import { useToast } from "@/hooks/use-toast-helper"
 import { warehouses as warehouseData, kpiMetrics } from "@/data/mock-data"
+import { SettingsDetailDrawer } from "@/components/shared/settings-detail-drawer"
 
 // ---- Mock Customer Data ----
 const customersData = [
@@ -215,6 +216,54 @@ export function SettingsView() {
   // KPI config
   const [kpiConfig, setKpiConfig] = useState<KPIConfigItem[]>(initialKPIConfig)
   const [kpiSearch, setKpiSearch] = useState("")
+
+  // Detail drawer (universal drill-down for customer/transporter rows)
+  const [detailOpen, setDetailOpen] = useState(false)
+  const [detailItem, setDetailItem] = useState<{
+    id: string
+    kind: "customer" | "transporter"
+    name: string
+    code?: string
+    status: "Active" | "Inactive"
+    city?: string
+    state?: string
+    contact?: string
+    email?: string
+    type?: "OEM" | "Tier1" | "Tier2"
+    fleet?: number
+    routes?: number
+    phone?: string
+    rating?: number
+  } | null>(null)
+  const openCustomerDetail = (c: typeof customersData[0]) => {
+    setDetailItem({
+      id: c.id,
+      kind: "customer",
+      name: c.name,
+      code: c.code,
+      status: c.status === "Active" ? "Active" : "Inactive",
+      city: c.city,
+      state: c.state,
+      contact: c.contact,
+      email: c.email,
+      type: c.type as "OEM" | "Tier1" | "Tier2",
+    })
+    setDetailOpen(true)
+  }
+  const openTransporterDetail = (t: typeof transportersData[0]) => {
+    setDetailItem({
+      id: t.id,
+      kind: "transporter",
+      name: t.name,
+      status: t.status === "Active" ? "Active" : "Inactive",
+      fleet: t.fleet,
+      routes: t.routes,
+      contact: t.contact,
+      phone: t.phone,
+      rating: t.rating,
+    })
+    setDetailOpen(true)
+  }
 
 
   // Handlers — Warehouses
@@ -564,7 +613,11 @@ export function SettingsView() {
                   </TableHeader>
                   <TableBody>
                     {filteredCustomers.map((c) => (
-                      <TableRow key={c.id}>
+                      <TableRow
+                        key={c.id}
+                        className="cursor-pointer transition-colors hover:bg-accent/40"
+                        onClick={() => openCustomerDetail(c)}
+                      >
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <Avatar className="h-7 w-7">
@@ -738,7 +791,11 @@ export function SettingsView() {
                   </TableHeader>
                   <TableBody>
                     {filteredTransporters.map((t) => (
-                      <TableRow key={t.id}>
+                      <TableRow
+                        key={t.id}
+                        className="cursor-pointer transition-colors hover:bg-accent/40"
+                        onClick={() => openTransporterDetail(t)}
+                      >
                         <TableCell>
                           <div className="flex items-center gap-2">
                             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950">
@@ -1357,6 +1414,13 @@ export function SettingsView() {
           </div>
         </TabsContent>
       </Tabs>
+
+      {/* Universal detail drawer — drill-down from customer/transporter rows */}
+      <SettingsDetailDrawer
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        item={detailItem}
+      />
     </div>
   )
 }

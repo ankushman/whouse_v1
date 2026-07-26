@@ -8393,3 +8393,285 @@ html.theme-transition body {
 .animate-slide-in-right-micro {
   animation: slide-in-right-micro 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* ============================================================================
+   Round 41 — Settings Detail Drawer + Returns & Reverse Logistics animations
+   ============================================================================ */
+
+/* --- Settings drawer: header sheen + icon pulse --- */
+@keyframes settings-drawer-sheen {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.settings-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(110deg, transparent 30%, hsl(var(--foreground) / 0.04) 50%, transparent 70%);
+  animation: settings-drawer-sheen 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes settings-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50% { box-shadow: 0 0 0 6px transparent; opacity: 0.92; }
+}
+.settings-icon-pulse {
+  animation: settings-icon-pulse 2.4s ease-in-out infinite;
+}
+
+/* --- Settings drawer: staggered stat cards --- */
+@keyframes settings-stat-enter {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.settings-stat-enter > * {
+  animation: settings-stat-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.settings-stat-enter > *:nth-child(1) { animation-delay: 50ms; }
+.settings-stat-enter > *:nth-child(2) { animation-delay: 100ms; }
+.settings-stat-enter > *:nth-child(3) { animation-delay: 150ms; }
+.settings-stat-enter > *:nth-child(4) { animation-delay: 200ms; }
+
+/* --- Settings drawer: body slide-in --- */
+@keyframes settings-body-enter {
+  0% { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.settings-drawer-body-enter {
+  animation: settings-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+/* --- Settings drawer: card hover-lift --- */
+@keyframes settings-card-enter {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.settings-card-enter {
+  animation: settings-card-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.settings-card-enter:hover {
+  transform: translateY(-1px);
+  background-color: hsl(var(--accent) / 0.4);
+}
+
+/* ============================================================================
+   Returns & Reverse Logistics
+   ============================================================================ */
+
+/* --- KPI grid: staggered entrance --- */
+@keyframes returns-kpi-enter {
+  0% { opacity: 0; transform: translateY(10px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.returns-kpi-enter > * {
+  animation: returns-kpi-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.returns-kpi-enter > *:nth-child(1) { animation-delay: 60ms; }
+.returns-kpi-enter > *:nth-child(2) { animation-delay: 110ms; }
+.returns-kpi-enter > *:nth-child(3) { animation-delay: 160ms; }
+.returns-kpi-enter > *:nth-child(4) { animation-delay: 210ms; }
+.returns-kpi-enter > *:nth-child(5) { animation-delay: 260ms; }
+.returns-kpi-enter > *:nth-child(6) { animation-delay: 310ms; }
+
+/* --- Chart cards: fade-in with slight slide-up --- */
+@keyframes returns-chart-enter {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.returns-chart-enter {
+  animation: returns-chart-enter 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 200ms;
+  transition: box-shadow 220ms ease, transform 220ms ease, border-color 220ms ease;
+}
+.returns-chart-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -16px hsl(var(--foreground) / 0.15);
+}
+
+/* --- Table: row staggered slide-in --- */
+@keyframes returns-row-in {
+  0% { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.returns-row-in {
+  animation: returns-row-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.returns-row-in:nth-child(1) { animation-delay: 40ms; }
+.returns-row-in:nth-child(2) { animation-delay: 80ms; }
+.returns-row-in:nth-child(3) { animation-delay: 120ms; }
+.returns-row-in:nth-child(4) { animation-delay: 160ms; }
+.returns-row-in:nth-child(5) { animation-delay: 200ms; }
+.returns-row-in:nth-child(6) { animation-delay: 240ms; }
+.returns-row-in:nth-child(7) { animation-delay: 280ms; }
+.returns-row-in:nth-child(8) { animation-delay: 320ms; }
+.returns-row-in:nth-child(n+9) { animation-delay: 360ms; }
+
+/* --- Table card: slide-up entrance --- */
+@keyframes returns-table-enter {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.returns-table-enter {
+  animation: returns-table-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 280ms;
+}
+
+/* --- Status pill: subtle glow when status changes --- */
+@keyframes returns-status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 3px transparent; }
+}
+.returns-status-pill {
+  animation: returns-status-pulse 2.8s ease-in-out infinite;
+}
+
+/* --- Recovery bar: animated fill on mount --- */
+@keyframes returns-recovery-fill {
+  0% { width: 0%; }
+  100% { width: var(--recovery-pct, 100%); }
+}
+
+/* --- Hover-lift for KPI cards (in addition to .hover-zoom) --- */
+@keyframes returns-kpi-hover-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
+  50% { box-shadow: 0 0 20px -8px hsl(var(--primary) / 0.3); }
+}
+.returns-kpi-enter > *:hover {
+  animation: returns-kpi-hover-glow 1.6s ease-in-out infinite;
+}
+
+/* --- Reason badge: subtle shake on hover (for "damaged"/"recall") --- */
+@keyframes returns-reason-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+.returns-reason-shake:hover {
+  animation: returns-reason-shake 280ms ease-in-out;
+}
+
+/* --- "HIGH" priority badge: continuous pulse --- */
+@keyframes returns-priority-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+}
+.returns-priority-pulse {
+  animation: returns-priority-pulse 1.8s ease-in-out infinite;
+}
+
+/* --- Aging cell flash when > 7d --- */
+@keyframes returns-aging-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+.returns-aging-flash {
+  animation: returns-aging-flash 1.4s ease-in-out infinite;
+}
+
+/* --- Empty state: gentle fade-in --- */
+@keyframes returns-empty-enter {
+  0% { opacity: 0; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.returns-empty-enter {
+  animation: returns-empty-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Search input focus ring expansion --- */
+@keyframes returns-search-focus {
+  0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
+  100% { box-shadow: 0 0 0 4px hsl(var(--primary) / 0); }
+}
+.returns-search-input:focus {
+  animation: returns-search-focus 600ms ease-out;
+}
+
+/* --- Disposition progress bar: animated width transition --- */
+.returns-disposition-bar {
+  transition: width 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Hover effect for table rows: subtle accent slide-in from left --- */
+.returns-row-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: hsl(var(--primary));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.returns-row-in:hover::before {
+  transform: scaleY(1);
+}
+
+/* --- Chart tooltip: slight scale on appearance --- */
+@keyframes returns-tooltip-pop {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.returns-chart-enter [data-tooltip] {
+  animation: returns-tooltip-pop 180ms ease-out;
+}
+
+/* --- Settings drawer: tab switching slide --- */
+@keyframes settings-tab-switch {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.settings-drawer-body-enter > * {
+  animation: settings-tab-switch 280ms ease-out both;
+}
+
+/* --- Returns KPI: number count-up effect (CSS-only approximation) --- */
+@keyframes returns-number-glow {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50% { text-shadow: 0 0 8px hsl(var(--primary) / 0.4); }
+}
+.returns-kpi-enter > *:hover .text-number {
+  animation: returns-number-glow 1.2s ease-in-out infinite;
+}
+
+/* --- Settings contact card: avatar subtle rotate on hover --- */
+@keyframes settings-avatar-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(8deg); }
+}
+.settings-card-enter:hover [data-avatar] {
+  animation: settings-avatar-rotate 320ms ease-out;
+}
+
+/* --- Returns disposition bar: shimmer effect --- */
+@keyframes returns-bar-shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+.returns-disposition-bar {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--foreground) / 0.08) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: returns-bar-shimmer 2.4s linear infinite;
+}
+
+/* --- Settings coverage progress: animated fill on mount --- */
+@keyframes settings-coverage-fill {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+.settings-card-enter [role="progressbar"] > div {
+  transform-origin: left;
+  animation: settings-coverage-fill 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}

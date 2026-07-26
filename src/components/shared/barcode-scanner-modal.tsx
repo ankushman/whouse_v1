@@ -46,6 +46,7 @@ interface BarcodeScannerModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   inventoryItems: BarcodeInventoryItem[]
+  onViewItem?: (item: BarcodeInventoryItem) => void
 }
 
 interface ScanResult {
@@ -111,6 +112,7 @@ export function BarcodeScannerModal({
   open,
   onOpenChange,
   inventoryItems,
+  onViewItem,
 }: BarcodeScannerModalProps) {
   const [mode, setMode] = useState<"camera" | "manual">("camera")
   const [isScanning, setIsScanning] = useState(false)
@@ -412,7 +414,18 @@ export function BarcodeScannerModal({
 
                     {/* Action buttons */}
                     <div className="flex gap-1.5 pt-1">
-                      <Button variant="outline" size="sm" className="flex-1 h-7 text-[10px] gap-1">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 h-7 text-[10px] gap-1"
+                        onClick={() => {
+                          if (scanResult && onViewItem) {
+                            onViewItem(scanResult.item)
+                            handleOpenChange(false)
+                          }
+                        }}
+                        disabled={!scanResult || !onViewItem}
+                      >
                         View Details
                         <ArrowRight className="h-3 w-3" />
                       </Button>

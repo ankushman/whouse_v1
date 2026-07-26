@@ -606,6 +606,23 @@ export function InventoryView() {
         open={scannerOpen}
         onOpenChange={setScannerOpen}
         inventoryItems={inventoryItems}
+        onViewItem={(scanned) => {
+          // Map BarcodeInventoryItem → InventoryDetailRow and open detail drawer
+          const detail: InventoryDetailRow = {
+            id: scanned.id,
+            sku: scanned.sku,
+            partName: scanned.partName,
+            category: scanned.category,
+            warehouse: scanned.warehouse,
+            location: scanned.location,
+            quantity: scanned.quantity,
+            minStock: scanned.minStock,
+            maxStock: scanned.maxStock,
+            variance: scanned.variance,
+            abcClass: scanned.abcClass,
+          }
+          openDetail(detail)
+        }}
       />
 
       {/* Inventory Detail Drawer */}
