@@ -1,9 +1,10 @@
 "use client"
 
-import { useMemo, useCallback } from "react"
+import { useMemo, useCallback, useState } from "react"
 import { costTrend } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { CostDetailDrawer, type CostCategory } from "@/components/shared/cost-detail-drawer"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -43,6 +44,15 @@ const PIE_COLORS = ["#2563EB", "#10B981", "#F59E0B", "#8B5CF6"]
 export function CostAnalyticsView() {
   const latest = costTrend.length > 1 ? costTrend[costTrend.length - 1] : null
   const previous = costTrend.length > 1 ? costTrend[costTrend.length - 2] : null
+  const [drawerCategory, setDrawerCategory] = useState<CostCategory | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerMonth, setDrawerMonth] = useState<string | undefined>(undefined)
+
+  const openCostDrawer = useCallback((cat: CostCategory, month?: string) => {
+    setDrawerCategory(cat)
+    setDrawerMonth(month)
+    setDrawerOpen(true)
+  }, [])
 
   const categoryBreakdown = useMemo(() => {
     if (!latest) return []
@@ -108,17 +118,27 @@ export function CostAnalyticsView() {
       {/* Summary */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 stagger-children">
         {[
-          { label: "Total Cost", value: `₹${(totalCostThisMonth / 100000).toFixed(2)}L`, change: parseFloat(totalChange), icon: DollarSign, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
-          { label: "Labor Cost", value: `₹${(latest.labor / 100000).toFixed(2)}L`, icon: Users, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
-          { label: "Transport Cost", value: `₹${(latest.transport / 100000).toFixed(2)}L`, icon: Fuel, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
-          { label: "Equipment Cost", value: `₹${(latest.equipment / 100000).toFixed(2)}L`, icon: Wrench, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
-          { label: "Storage Cost", value: `₹${(latest.storage / 100000).toFixed(2)}L`, icon: Warehouse, color: "bg-purple-50 text-purple-600 dark:bg-purple-950 dark:text-purple-400" },
+          { label: "Total Cost", value: `₹${(totalCostThisMonth / 100000).toFixed(2)}L`, change: parseFloat(totalChange), icon: DollarSign, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400", category: null as CostCategory | null },
+          { label: "Labor Cost", value: `₹${(latest.labor / 100000).toFixed(2)}L`, icon: Users, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400", category: "labor" as CostCategory },
+          { label: "Transport Cost", value: `₹${(latest.transport / 100000).toFixed(2)}L`, icon: Fuel, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400", category: "transport" as CostCategory },
+          { label: "Equipment Cost", value: `₹${(latest.equipment / 100000).toFixed(2)}L`, icon: Wrench, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400", category: "equipment" as CostCategory },
+          { label: "Storage Cost", value: `₹${(latest.storage / 100000).toFixed(2)}L`, icon: Warehouse, color: "bg-purple-50 text-purple-600 dark:bg-purple-950 dark:text-purple-400", category: "storage" as CostCategory },
         ].map((item) => (
-          <Card key={item.label} className="card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
+          <Card
+            key={item.label}
+            className={cn(
+              "card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm transition-all",
+              item.category && "cursor-pointer hover:border-primary/40 hover:shadow-md cost-summary-card-clickable"
+            )}
+            onClick={item.category ? () => openCostDrawer(item.category!) : undefined}
+          >
             <CardContent className="p-4">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground flex items-center gap-1">
+                    {item.label}
+                    {item.category && <BarChart3 className="size-2.5 text-muted-foreground/60" />}
+                  </p>
                   <p className="mt-1 text-lg font-bold text-number">{item.value}</p>
                 </div>
                 <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
@@ -176,9 +196,17 @@ export function CostAnalyticsView() {
               <PieChart>
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <Pie data={categoryBreakdown} cx="50%" cy="50%" innerRadius={60} outerRadius={100} dataKey="value" nameKey="name" paddingAngle={2}>
-                  {categoryBreakdown.map((entry, idx) => (
-                    <Cell key={entry.name} fill={entry.color} />
-                  ))}
+                  {categoryBreakdown.map((entry, idx) => {
+                    const catMap: Record<string, CostCategory> = { Labor: "labor", Transport: "transport", Equipment: "equipment", Storage: "storage" }
+                    return (
+                      <Cell
+                        key={entry.name}
+                        fill={entry.color}
+                        className="cost-pie-slice"
+                        onClick={() => openCostDrawer(catMap[entry.name])}
+                      />
+                    )
+                  })}
                 </Pie>
                 <ChartLegend content={<ChartLegendContent nameKey="name" />} />
               </PieChart>
@@ -210,12 +238,28 @@ export function CostAnalyticsView() {
             </TableHeader>
             <TableBody>
               {momComparison.map((row) => (
-                <TableRow key={row.month}>
+                <TableRow key={row.month} className="group">
                   <TableCell className="text-xs font-medium">{row.month}</TableCell>
-                  <TableCell className="text-xs text-right text-number">₹{(row.labor / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right text-number">₹{(row.transport / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right text-number">₹{(row.equipment / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right text-number">₹{(row.storage / 1000).toFixed(0)}K</TableCell>
+                  <TableCell
+                    className="text-xs text-right text-number cost-mom-cell hover:bg-blue-50 dark:hover:bg-blue-950/40 transition-colors group-hover:text-blue-600"
+                    onClick={() => openCostDrawer("labor", row.month)}
+                    title="Click to drill into Labor cost"
+                  >₹{(row.labor / 1000).toFixed(0)}K</TableCell>
+                  <TableCell
+                    className="text-xs text-right text-number cost-mom-cell hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors group-hover:text-emerald-600"
+                    onClick={() => openCostDrawer("transport", row.month)}
+                    title="Click to drill into Transport cost"
+                  >₹{(row.transport / 1000).toFixed(0)}K</TableCell>
+                  <TableCell
+                    className="text-xs text-right text-number cost-mom-cell hover:bg-amber-50 dark:hover:bg-amber-950/40 transition-colors group-hover:text-amber-600"
+                    onClick={() => openCostDrawer("equipment", row.month)}
+                    title="Click to drill into Equipment cost"
+                  >₹{(row.equipment / 1000).toFixed(0)}K</TableCell>
+                  <TableCell
+                    className="text-xs text-right text-number cost-mom-cell hover:bg-purple-50 dark:hover:bg-purple-950/40 transition-colors group-hover:text-purple-600"
+                    onClick={() => openCostDrawer("storage", row.month)}
+                    title="Click to drill into Storage cost"
+                  >₹{(row.storage / 1000).toFixed(0)}K</TableCell>
                   <TableCell className="text-xs text-right font-medium text-number">₹{(row.total / 1000).toFixed(0)}K</TableCell>
                   <TableCell className="text-xs text-right">
                     <span className={cn("font-medium", row.totalChange > 0 ? "text-red-600" : row.totalChange < 0 ? "text-emerald-600" : "text-muted-foreground")}>
@@ -230,6 +274,14 @@ export function CostAnalyticsView() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Cost Category Drill-Down Drawer */}
+      <CostDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        category={drawerCategory}
+        monthLabel={drawerMonth}
+      />
     </div>
   )
 }

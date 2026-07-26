@@ -15,7 +15,7 @@ import {
   TrendingUp,
   ClipboardCheck,
 } from "lucide-react"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import { cn } from "@/lib/utils"
 
 // ---- Types ----
@@ -79,6 +79,7 @@ function getStatusConfig(status: TaskStatus) {
 // ---- Component ----
 
 export function ShiftHandoverPanel() {
+  const { success: toastSuccess } = useToast()
   const [taskStates, setTaskStates] = React.useState<Record<string, TaskStatus>>(
     Object.fromEntries(handoverTasks.map((t) => [t.id, t.status]))
   )
@@ -96,7 +97,7 @@ export function ShiftHandoverPanel() {
   const progressPercent = Math.round((completedCount / totalCount) * 100)
 
   const handleCompleteHandover = () => {
-    toast.success("Handover Complete", { description: "Morning shift handover has been finalized and sent to afternoon shift supervisor" })
+    toastSuccess("Handover Complete", "Morning shift handover has been finalized and sent to afternoon shift supervisor")
   }
 
   return (

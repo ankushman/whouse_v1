@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Download, FileSpreadsheet, FileText } from "lucide-react"
-import { toast } from "sonner"
+import { toast as sonnerToast } from "sonner"
 import { cn } from "@/lib/utils"
 
 interface ExportButtonProps {
@@ -45,6 +45,8 @@ export function ExportButton({ onExportCSV, onExportPDF, className }: ExportButt
 }
 
 // CSV export utility function
+// Note: This is a module-level helper (not a hook), so we use sonner directly.
+// The useToast hook is for components; exportToCSV is called from non-component contexts too.
 export function exportToCSV(data: Record<string, any>[], filename: string, columns?: string[]) {
   if (!data.length) return
   const cols = columns || Object.keys(data[0])
@@ -62,7 +64,7 @@ export function exportToCSV(data: Record<string, any>[], filename: string, colum
   link.download = `${filename}.csv`
   link.click()
   URL.revokeObjectURL(url)
-  toast.success(`CSV exported`, {
+  sonnerToast.success(`CSV exported`, {
     description: `${filename}.csv (${data.length} rows)`,
     duration: 3000,
   })

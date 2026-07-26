@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react"
 import { useAppStore } from "@/store/app-store"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import { warehouses } from "@/data/mock-data"
 
 // ── Event Templates ────────────────────────────────────────────────
@@ -57,14 +57,7 @@ function pickRandomEvent(): EventTemplate {
   return EVENT_TEMPLATES[EVENT_TEMPLATES.length - 1]
 }
 
-// Severity → toast function mapping
-const SEVERITY_TOAST: Record<string, typeof toast.info> = {
-  critical: toast.error,
-  warning: toast.warning,
-  success: toast.success,
-  info: toast.info,
-}
-
+// Severity → duration mapping (toast function is now resolved via useToast inside the hook)
 const SEVERITY_DURATION: Record<string, number> = {
   critical: 7000,
   warning: 5000,
@@ -101,6 +94,7 @@ export function useSimulatedEvents(options?: {
   const addNotificationFn = useAppStore((s) => s.addNotification)
   const activeView = useAppStore((s) => s.activeView)
   const notifPrefs = useAppStore((s) => s.notifPrefs)
+  const toast = useToast()
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const mutedRef = useRef(false)
   const activeViewRef = useRef(activeView)
@@ -172,19 +166,21 @@ export function useSimulatedEvents(options?: {
       }
 
       if (shouldFire && severityOk && quietOk && showToast && !mutedRef.current) {
-        const toastFn = SEVERITY_TOAST[event.severity] ?? toast.info
         const duration = SEVERITY_DURATION[event.severity] ?? 4000
-        toastFn(event.title, {
-          description: `${event.message} — ${warehouse}`,
-          duration,
-          id: `sim-${Date.now()}`,
-        })
+        const description = `${event.message} — ${warehouse}`
+        const opts = { duration, id: `sim-${Date.now()}` }
+        switch (event.severity) {
+          case "critical": toast.error(event.title, description, opts); break
+          case "warning":  toast.warning(event.title, description, opts); break
+          case "success":  toast.success(event.title, description, opts); break
+          default:          toast.info(event.title, description, opts)
+        }
       }
 
       // Use ref to call the latest scheduleNext without circular dependency
       scheduleNextRef.current()
     }, delay)
-  }, [minInterval, maxInterval, showToast, addNotification, dashboardOnly, addNotificationFn, checkMuted, passesSeverityFilter, isQuietHours])
+  }, [minInterval, maxInterval, showToast, addNotification, dashboardOnly, addNotificationFn, checkMuted, passesSeverityFilter, isQuietHours, toast])
 
   // Keep ref updated
   useEffect(() => {

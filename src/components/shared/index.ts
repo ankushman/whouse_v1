@@ -42,3 +42,4 @@ export { EquipmentDetailDrawer, type EquipmentDetailRow, type EquipmentStatus } 
 export { ShipmentDetailDrawer, type ShipmentDetailRow, type ShipmentStatus } from "./shipment-detail-drawer"
 export { WarehouseDetailDrawer } from "./warehouse-detail-drawer"
 export { PullToRefreshContainer } from "./pull-to-refresh-container"
+export { CostDetailDrawer, type CostCategory, type CostDetailDrawerProps } from "./cost-detail-drawer"

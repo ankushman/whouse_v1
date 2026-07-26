@@ -17,7 +17,7 @@ import {
   XCircle,
   Share2,
 } from "lucide-react"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import { cn } from "@/lib/utils"
 
 // ---- Types ----
@@ -116,6 +116,7 @@ const impactColors: Record<string, string> = {
 // ---- Component ----
 
 export function AIInsightsPanel() {
+  const { success: toastSuccess, info: toastInfo } = useToast()
   const [expandedIds, setExpandedIds] = React.useState<Set<string>>(new Set())
   // Bug A1 fix: insights are now component state so Apply/Dismiss actually change the UI.
   // Previously `insights` was a module-level const and Apply/Dismiss handlers only showed a toast,
@@ -135,9 +136,7 @@ export function AIInsightsPanel() {
 
   const handleApply = (insight: Insight) => {
     setAppliedIds((prev) => new Set(prev).add(insight.id))
-    toast.success("Recommendation Applied", {
-      description: `"${insight.title}" has been queued for implementation`,
-    })
+    toastSuccess("Recommendation Applied", `"${insight.title}" has been queued for implementation`)
   }
 
   const handleDismiss = (id: string) => {
@@ -154,12 +153,12 @@ export function AIInsightsPanel() {
       next.delete(id)
       return next
     })
-    toast.info("Insight Dismissed", { description: "The insight has been archived" })
+    toastInfo("Insight Dismissed", "The insight has been archived")
   }
 
   const handleDismissAll = () => {
     if (insightList.length === 0) {
-      toast.info("No insights to dismiss", { description: "The insights list is already empty" })
+      toastInfo("No insights to dismiss", "The insights list is already empty")
       return
     }
     const dismissedCount = insightList.length
@@ -167,13 +166,11 @@ export function AIInsightsPanel() {
     setExpandedIds(new Set())
     // Bug 33-AUDIT#18 (LOW) fix: clear appliedIds too.
     setAppliedIds(new Set())
-    toast.info("Insights Dismissed", {
-      description: `${dismissedCount} insight${dismissedCount === 1 ? "" : "s"} archived`,
-    })
+    toastInfo("Insights Dismissed", `${dismissedCount} insight${dismissedCount === 1 ? "" : "s"} archived`)
   }
 
   const handleShare = () => {
-    toast.success("Report Shared", { description: "AI insights report sent to operations team" })
+    toastSuccess("Report Shared", "AI insights report sent to operations team")
   }
 
   return (
@@ -319,7 +316,7 @@ export function AIInsightsPanel() {
             onClick={() => {
               const first = insightList[0]
               if (first) handleApply(first)
-              else toast.info("No insights to apply", { description: "All recommendations have been resolved" })
+              else toastInfo("No insights to apply", "All recommendations have been resolved")
             }}
             disabled={insightList.length === 0}
           >

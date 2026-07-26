@@ -2,7 +2,8 @@
 
 import { useEffect, useCallback } from "react"
 import { useTheme } from "next-themes"
-import { Toaster as SonnerToaster, toast as sonnerToast } from "sonner"
+import { Toaster as SonnerToaster } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 
 /**
  * ToastProvider — wraps Sonner's <Toaster> with custom theme,
@@ -12,21 +13,22 @@ import { Toaster as SonnerToaster, toast as sonnerToast } from "sonner"
  */
 export function ToastProvider() {
   const { theme = "system" } = useTheme()
+  const toast = useToast()
 
   // ---- Alt+T → toggle toast history ----
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.altKey && e.key.toLowerCase() === "t") {
       e.preventDefault()
       const count = document.querySelectorAll("[data-sonner-toast]").length
-      sonnerToast.info("Toast history", {
-        description: count > 0
+      toast.info(
+        "Toast history",
+        count > 0
           ? `${count} active toast${count > 1 ? "s" : ""} on screen`
           : "No active toasts",
-        duration: 2000,
-        id: "alt-t-history",
-      })
+        { duration: 2000, id: "alt-t-history" }
+      )
     }
-  }, [])
+  }, [toast])
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown)

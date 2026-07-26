@@ -16,7 +16,7 @@ import {
   Cell,
 } from "recharts"
 import { Clock, AlertTriangle, CheckCircle, TrendingDown } from "lucide-react"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import { cn } from "@/lib/utils"
 
 // ---- Types ----
@@ -160,6 +160,7 @@ function CircularProgressRing({
 
 export function SLAMonitoringPanel() {
   // Use ref for deadline timestamps so they don't reset on re-render
+  const { error: toastError } = useToast()
   const shipmentsRef = useRef<ShipmentCountdown[]>([])
   const breachedRef = useRef<Set<string>>(new Set())
   const mountTimeRef = useRef<number>(0)
@@ -221,13 +222,10 @@ export function SLAMonitoringPanel() {
       if (s.status === "active" && now >= s.deadlineMs && !breachedRef.current.has(s.invoice)) {
         breachedRef.current.add(s.invoice)
         s.status = "breached"
-        toast.error(`SLA Breached: ${s.invoice}`, {
-          description: `${s.type} shipment has exceeded its SLA deadline.`,
-          duration: 6000,
-        })
+        toastError(`SLA Breached: ${s.invoice}`, `${s.type} shipment has exceeded its SLA deadline.`)
       }
     })
-  }, [now])
+  }, [now, toastError])
 
   return (
     <Card className="card-depth chart-card card-accent-amber card-hover-glow glow-border-blue rounded-xl border border-t-2 border-border/60 shadow-sm">

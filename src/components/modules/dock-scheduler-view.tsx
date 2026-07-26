@@ -41,6 +41,27 @@ import {
 import { cn } from "@/lib/utils"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { useToast } from "@/hooks/use-toast-helper"
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  PointerSensor,
+  TouchSensor,
+  KeyboardSensor,
+  useSensor,
+  useSensors,
+  closestCenter,
+  useDroppable,
+} from "@dnd-kit/core"
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -317,6 +338,156 @@ function DockCard({
   )
 }
 
+// ── Sortable Queued Vehicle (dnd-kit) ─────────────────────────────────────
+
+interface SortableQueuedVehicleProps {
+  vehicle: QueuedVehicle
+  availableDocks: Dock[]
+  vehicleDockDropdown: Record<string, string>
+  onDockSelect: (vehicleId: string, dockId: string) => void
+  isOverlay?: boolean
+}
+
+function SortableQueuedVehicle({
+  vehicle,
+  availableDocks,
+  vehicleDockDropdown,
+  onDockSelect,
+  isOverlay,
+}: SortableQueuedVehicleProps) {
+  const sortable = useSortable({
+    id: vehicle.id,
+    disabled: isOverlay,
+  })
+
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(sortable.transform),
+    transition: sortable.transition,
+  }
+
+  return (
+    <div
+      // eslint-disable-next-line react-hooks/refs -- dnd-kit's setNodeRef is a stable callback ref, not a value ref; safe to spread during render.
+      ref={sortable.setNodeRef}
+      style={style}
+      className={cn(
+        "ripple-effect flex items-center justify-between rounded-lg border border-amber-200 dark:border-amber-800 bg-background/80 p-3",
+        isOverlay ? "shadow-xl rotate-1 ring-2 ring-amber-400/40 dock-queue-drag-overlay" : "",
+        // eslint-disable-next-line react-hooks/refs -- dnd-kit's isDragging is a render-time derived boolean, not a ref value.
+        !isOverlay && sortable.isDragging && "opacity-50 dock-queue-row-dragging",
+        !isOverlay && "dock-queue-row-enter"
+      )}
+      // eslint-disable-next-line react-hooks/refs -- dnd-kit's attributes/listeners are stable objects, not ref values.
+      {...sortable.attributes}
+      // eslint-disable-next-line react-hooks/refs -- dnd-kit's listeners object is stable across renders.
+      {...sortable.listeners}
+    >
+      <div className="flex items-center gap-3">
+        <GripVertical className={cn(
+          "h-4 w-4 shrink-0",
+          isOverlay ? "text-amber-500" : "text-muted-foreground/40 cursor-grab active:cursor-grabbing"
+        )} />
+        <div className={cn(
+          "flex h-8 w-8 items-center justify-center rounded-lg",
+          vehicle.type === "inbound"
+            ? "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300"
+            : "bg-emerald-100 text-emerald-600 dark:bg-emerald-900 dark:text-emerald-300"
+        )}>
+          {vehicle.type === "inbound" ? (
+            <ArrowDownToLine className="h-4 w-4" />
+          ) : (
+            <ArrowUpFromLine className="h-4 w-4" />
+          )}
+        </div>
+        <div>
+          <p className="text-xs font-medium">{vehicle.reg}</p>
+          <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
+            <span className="flex items-center gap-0.5"><User className="h-2.5 w-2.5" />{vehicle.driver}</span>
+            <span>·</span>
+            <span>{vehicle.supplier}</span>
+          </div>
+        </div>
+      </div>
+      {!isOverlay && (
+        <div className="flex items-center gap-2">
+          <Badge variant="outline" className="text-[9px] gap-1">
+            <Clock className="h-2.5 w-2.5" />
+            <span className="text-number">{vehicle.waitTime}</span>m
+          </Badge>
+          {availableDocks.length > 0 ? (
+            <Select
+              value={vehicleDockDropdown[vehicle.id] ?? ""}
+              onValueChange={(dockId) => {
+                if (dockId === "__assign__") return
+                onDockSelect(vehicle.id, dockId)
+              }}
+            >
+              <SelectTrigger
+                className="w-auto h-6 text-[9px] gap-1 px-2"
+                onClick={(e) => e.stopPropagation()}
+                onPointerDown={(e) => e.stopPropagation()}
+              >
+                <Zap className="h-2.5 w-2.5" />
+                <SelectValue placeholder="Assign" />
+              </SelectTrigger>
+              <SelectContent>
+                {availableDocks.map((dock) => (
+                  <SelectItem key={dock.id} value={dock.id} className="text-xs">
+                    {dock.name} (Zone {dock.zone})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          ) : (
+            <Button size="sm" variant="outline" className="h-6 text-[9px] gap-1" disabled>
+              No docks
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── Droppable Dock Card wrapper ────────────────────────────────────────────
+// Wraps an available DockCard with a drop zone that highlights when a queued
+// vehicle is dragged over it.
+
+interface DroppableDockWrapperProps {
+  dock: Dock
+  isDropTarget: boolean
+  children: React.ReactNode
+}
+
+function DroppableDockWrapper({ dock, isDropTarget, children }: DroppableDockWrapperProps) {
+  const { setNodeRef, isOver } = useDroppable({
+    id: `dock-drop-${dock.id}`,
+    data: { type: "dock", dockId: dock.id },
+    disabled: dock.status !== "available",
+  })
+
+  return (
+    <div
+      ref={setNodeRef}
+      className={cn(
+        "relative transition-all duration-150",
+        isOver && dock.status === "available" && "dock-drop-active scale-[1.02] -translate-y-0.5",
+        isDropTarget && "dock-drop-pulse"
+      )}
+    >
+      {children}
+      {isOver && dock.status === "available" && (
+        <div className="absolute inset-0 pointer-events-none rounded-xl border-2 border-dashed border-emerald-500 bg-emerald-500/10 flex items-center justify-center dock-drop-overlay">
+          <div className="rounded-full bg-emerald-600 text-white text-xs px-3 py-1.5 font-semibold shadow-lg flex items-center gap-1.5">
+            <ArrowDownToLine className="size-3.5" />
+            Drop to assign
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Main Component ─────────────────────────────────────────────────────────
 
 export function DockSchedulerView() {
@@ -349,6 +520,24 @@ export function DockSchedulerView() {
   // Simulate progress state
   const [simulating, setSimulating] = useState(false)
   const simIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  // DnD state for drag-and-drop queue → dock assignment
+  const [activeDragVehicle, setActiveDragVehicle] = useState<QueuedVehicle | null>(null)
+
+  const dndSensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 6 },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 150, tolerance: 8 },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  )
+
+  // handleDragStart + handleDragEnd are declared AFTER handleAssignVehicleFromQueue
+  // because they reference it (cannot reference before declaration — see react-hooks/immutability).
 
   const filteredDocks = useMemo(() => {
     return docks.filter((d) => {
@@ -480,6 +669,43 @@ export function DockSchedulerView() {
     },
     [queuedVehicles, docks]
   )
+
+  // DnD handlers — declared after handleAssignVehicleFromQueue to satisfy TDZ.
+  const handleDragStart = useCallback((event: DragStartEvent) => {
+    const vehicle = queuedVehicles.find((v) => v.id === event.active.id)
+    setActiveDragVehicle(vehicle ?? null)
+  }, [queuedVehicles])
+
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event
+    setActiveDragVehicle(null)
+
+    if (!over) return
+
+    const activeId = String(active.id)
+    const overId = String(over.id)
+
+    // Drop onto a dock?
+    if (overId.startsWith("dock-drop-")) {
+      const dockId = overId.replace("dock-drop-", "")
+      const dock = docks.find((d) => d.id === dockId)
+      if (dock && dock.status === "available") {
+        handleAssignVehicleFromQueue(activeId, dockId)
+        return
+      }
+    }
+
+    // Otherwise: re-order within queue
+    if (active.id !== over.id) {
+      setQueuedVehicles((prev) => {
+        const oldIdx = prev.findIndex((v) => v.id === activeId)
+        const newIdx = prev.findIndex((v) => v.id === overId)
+        if (oldIdx === -1 || newIdx === -1) return prev
+        return arrayMove(prev, oldIdx, newIdx)
+      })
+      toastRef.current.info("Queue Reordered", "Vehicle priority updated in waiting queue")
+    }
+  }, [docks, handleAssignVehicleFromQueue])
 
   // Open dialog for dock assignment
   const openAssignDialog = useCallback((dock: Dock) => {
@@ -681,7 +907,13 @@ export function DockSchedulerView() {
         </div>
       </div>
 
-      {/* Dock Board */}
+      {/* Dock Board + Vehicle Queue — wrapped in DndContext for drag-and-drop */}
+      <DndContext
+        sensors={dndSensors}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
       <div>
         <div className="flex items-center gap-2 mb-3">
           <MapPin className="h-4 w-4 text-muted-foreground" />
@@ -692,22 +924,29 @@ export function DockSchedulerView() {
               Simulating
             </Badge>
           )}
+          {availableDocks.length > 0 && queuedVehicles.length > 0 && (
+            <Badge variant="outline" className="ml-auto text-[10px] gap-1 border-emerald-300 text-emerald-600 bg-emerald-50 dark:border-emerald-700 dark:text-emerald-400 dark:bg-emerald-950/40 dock-dnd-hint">
+              <GripVertical className="h-2.5 w-2.5" />
+              Drag a queue vehicle onto any <span className="font-semibold">available</span> dock
+            </Badge>
+          )}
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 stagger-children">
           {docksWithAssignments.map(({ dock, assignment }) => (
-            <DockCard
-              key={dock.id}
-              dock={dock}
-              assignment={assignment}
-              onComplete={handleComplete}
-              onAdvanceProgress={handleAdvanceProgress}
-              onAssignVehicleClick={openAssignDialog}
-            />
+            <DroppableDockWrapper key={dock.id} dock={dock} isDropTarget={!!activeDragVehicle}>
+              <DockCard
+                dock={dock}
+                assignment={assignment}
+                onComplete={handleComplete}
+                onAdvanceProgress={handleAdvanceProgress}
+                onAssignVehicleClick={openAssignDialog}
+              />
+            </DroppableDockWrapper>
           ))}
         </div>
       </div>
 
-      {/* Vehicle Queue */}
+      {/* Vehicle Queue — sortable */}
       {queuedVehicles.length > 0 && (
         <Card className="card-depth rounded-xl border-amber-200 bg-amber-50/30 dark:border-amber-800 dark:bg-amber-950/20">
           <CardHeader className="pb-2">
@@ -715,74 +954,47 @@ export function DockSchedulerView() {
               <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
               <CardTitle className="text-sm font-semibold">Waiting Queue</CardTitle>
               <Badge variant="secondary" className="text-[10px]"><span className="text-number">{queuedVehicles.length}</span> vehicles</Badge>
+              <span className="ml-auto text-[10px] text-muted-foreground hidden sm:flex items-center gap-1">
+                <GripVertical className="size-3" />
+                Drag to reorder or assign
+              </span>
             </div>
-            <CardDescription className="text-xs">Vehicles waiting for dock assignment</CardDescription>
+            <CardDescription className="text-xs">Vehicles waiting for dock assignment · drag onto an available dock to assign instantly</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              {queuedVehicles.map((vehicle) => (
-                <div key={vehicle.id} className="ripple-effect flex items-center justify-between rounded-lg border border-amber-200 dark:border-amber-800 bg-background/80 p-3">
-                  <div className="flex items-center gap-3">
-                    <GripVertical className="h-4 w-4 text-muted-foreground/40 shrink-0 cursor-grab active:cursor-grabbing" />
-                    <div className={cn(
-                      "flex h-8 w-8 items-center justify-center rounded-lg",
-                      vehicle.type === "inbound"
-                        ? "bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300"
-                        : "bg-emerald-100 text-emerald-600 dark:bg-emerald-900 dark:text-emerald-300"
-                    )}>
-                      {vehicle.type === "inbound" ? (
-                        <ArrowDownToLine className="h-4 w-4" />
-                      ) : (
-                        <ArrowUpFromLine className="h-4 w-4" />
-                      )}
-                    </div>
-                    <div>
-                      <p className="text-xs font-medium">{vehicle.reg}</p>
-                      <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                        <span className="flex items-center gap-0.5"><User className="h-2.5 w-2.5" />{vehicle.driver}</span>
-                        <span>·</span>
-                        <span>{vehicle.supplier}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="text-[9px] gap-1">
-                      <Clock className="h-2.5 w-2.5" />
-                      <span className="text-number">{vehicle.waitTime}</span>m
-                    </Badge>
-                    {availableDocks.length > 0 ? (
-                      <Select
-                        value={vehicleDockDropdown[vehicle.id] ?? ""}
-                        onValueChange={(dockId) => {
-                          if (dockId === "__assign__") return
-                          setVehicleDockDropdown((prev) => ({ ...prev, [vehicle.id]: dockId }))
-                          handleAssignVehicleFromQueue(vehicle.id, dockId)
-                        }}
-                      >
-                        <SelectTrigger className="w-auto h-6 text-[9px] gap-1 px-2">
-                          <Zap className="h-2.5 w-2.5" />
-                          <SelectValue placeholder="Assign" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {availableDocks.map((dock) => (
-                            <SelectItem key={dock.id} value={dock.id} className="text-xs">
-                              {dock.name} (Zone {dock.zone})
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : (
-                      <Button size="sm" variant="outline" className="h-6 text-[9px] gap-1" disabled>
-                        No docks
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <SortableContext items={queuedVehicles.map(v => v.id)} strategy={verticalListSortingStrategy}>
+              <div className="space-y-2">
+                {queuedVehicles.map((vehicle) => (
+                  <SortableQueuedVehicle
+                    key={vehicle.id}
+                    vehicle={vehicle}
+                    availableDocks={availableDocks}
+                    vehicleDockDropdown={vehicleDockDropdown}
+                    onDockSelect={(vehicleId, dockId) => {
+                      setVehicleDockDropdown((prev) => ({ ...prev, [vehicleId]: dockId }))
+                      handleAssignVehicleFromQueue(vehicleId, dockId)
+                    }}
+                  />
+                ))}
+              </div>
+            </SortableContext>
           </CardContent>
         </Card>
       )}
+
+      {/* Drag overlay — shows the vehicle card being dragged */}
+      <DragOverlay>
+        {activeDragVehicle ? (
+          <SortableQueuedVehicle
+            vehicle={activeDragVehicle}
+            availableDocks={availableDocks}
+            vehicleDockDropdown={vehicleDockDropdown}
+            onDockSelect={() => {}}
+            isOverlay
+          />
+        ) : null}
+      </DragOverlay>
+      </DndContext>
 
       {/* Assign Vehicle Dialog */}
       <Dialog open={assignDialogOpen} onOpenChange={setAssignDialogOpen}>

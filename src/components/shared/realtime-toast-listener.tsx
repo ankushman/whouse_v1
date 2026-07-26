@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useCallback, useRef } from "react"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 import { useLiveDataWithToast, type LiveEvent } from "@/hooks/use-live-toast"
 import { useRealtimeEvents, type WarehouseEvent } from "@/hooks/use-realtime-events"
 import { useAppStore } from "@/store/app-store"
@@ -34,16 +34,14 @@ function isDuplicate(message: string): boolean {
   return false
 }
 
-function getSeverityConfig(severity: string) {
+type SeverityKey = "critical" | "warning" | "success" | "info"
+
+function getSeverityKey(severity: string): SeverityKey {
   switch (severity) {
-    case "critical":
-      return { toastFn: toast.error }
-    case "warning":
-      return { toastFn: toast.warning }
-    case "success":
-      return { toastFn: toast.success }
-    default:
-      return { toastFn: toast.info }
+    case "critical": return "critical"
+    case "warning":  return "warning"
+    case "success":  return "success"
+    default:         return "info"
   }
 }
 
@@ -58,6 +56,7 @@ function getSeverityConfig(severity: string) {
  * Includes a mute toggle persisted in localStorage.
  */
 export function RealtimeToastListener() {
+  const toast = useToast()
   const activeView = useAppStore((s) => s.activeView)
   const isOnDashboard = activeView === "dashboard"
 
@@ -91,14 +90,29 @@ export function RealtimeToastListener() {
       if (!isOnDashboard) return
       if (isDuplicate(`${event.type}-${event.message}`)) return
 
-      const config = getSeverityConfig(event.severity)
-      config.toastFn(event.title || event.type, {
-        description: `${event.message} — ${event.warehouse}`,
+      const severityKey = getSeverityKey(event.severity)
+      const title = event.title || event.type
+      const description = `${event.message} — ${event.warehouse}`
+      const opts = {
         duration: event.severity === "critical" ? 6000 : 4000,
         id: event.id || `wh-${Date.now()}`,
-      })
+      }
+      // Route to the appropriate toast method based on severity
+      switch (severityKey) {
+        case "critical":
+          toast.error(title, description, opts)
+          break
+        case "warning":
+          toast.warning(title, description, opts)
+          break
+        case "success":
+          toast.success(title, description, opts)
+          break
+        default:
+          toast.info(title, description, opts)
+      }
     },
-    [isOnDashboard]
+    [isOnDashboard, toast]
   )
 
   // Connect to port 3005 — useLiveDataWithToast handles its own toasts + dedup

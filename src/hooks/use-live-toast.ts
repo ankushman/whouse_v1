@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react"
 import { io, Socket } from "socket.io-client"
-import { toast } from "sonner"
+import { useToast } from "@/hooks/use-toast-helper"
 
 interface LiveEvent {
   type: string
@@ -25,6 +25,7 @@ function cleanupProcessed() {
 }
 
 export function useLiveDataWithToast(onEvent?: (event: LiveEvent) => void) {
+  const toast = useToast()
   const socketRef = useRef<Socket | null>(null)
   const [isConnected, setIsConnected] = useState(false)
   const onEventRef = useRef(onEvent)
@@ -45,12 +46,13 @@ export function useLiveDataWithToast(onEvent?: (event: LiveEvent) => void) {
 
     const title = event.title || event.type
 
-    toast(`${icon} ${title}`, {
+    // Use the raw sonner toast via the helper for the custom-icon variant
+    toast.raw(`${icon} ${title}`, {
       description: `${event.message} — ${event.warehouse}`,
       duration: event.severity === "critical" ? 6000 : 4000,
       id: event.timestamp || `live-${Date.now()}`,
     })
-  }, [])
+  }, [toast])
 
   useEffect(() => {
     const socket = io("/?XTransformPort=3005", {

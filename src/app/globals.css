@@ -6211,3 +6211,237 @@ html.theme-transition body {
   animation: emp-alert-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+
+/* ==========================================================================
+   Round 34 — Cost Detail Drawer micro-interactions
+   ========================================================================== */
+
+/* Drawer header sheen — animated gradient sweep across the header strip */
+@keyframes cost-drawer-sheen {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.cost-drawer-header {
+  background-image: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: cost-drawer-sheen 12s ease-in-out infinite;
+}
+
+/* Category icon pulse — gentle ring expansion around the icon */
+@keyframes cost-icon-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50%      { box-shadow: 0 0 0 6px transparent; opacity: 0.92; }
+}
+.cost-icon-pulse {
+  animation: cost-icon-pulse-anim 2.6s ease-out infinite;
+}
+
+/* Hero stat cards — staggered entrance */
+@keyframes cost-stat-enter-anim {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.cost-stat-enter {
+  animation: cost-stat-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Body content entrance — slide from right */
+@keyframes cost-drawer-body-enter-anim {
+  0%   { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.cost-drawer-body-enter {
+  animation: cost-drawer-body-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Card sections — staggered card entrance */
+@keyframes cost-card-enter-anim {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.cost-card-enter {
+  animation: cost-card-enter-anim 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Cost driver row — slide from left + bar fill */
+@keyframes cost-driver-row-anim {
+  0%   { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.cost-driver-row {
+  animation: cost-driver-row-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Cost bar fill — width grow animation when row enters */
+@keyframes cost-fill-animate-anim {
+  0%   { width: 0; }
+  100% { width: var(--final-width, 100%); }
+}
+.cost-fill-animate {
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Recommendation cards — slide from right + subtle scale */
+@keyframes cost-rec-enter-anim {
+  0%   { opacity: 0; transform: translateX(10px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.cost-rec-enter {
+  animation: cost-rec-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.cost-rec-enter:hover {
+  transform: translateY(-1px) scale(1.005);
+  box-shadow: 0 4px 12px -2px rgba(16, 185, 129, 0.18);
+}
+
+/* Cost alert entrance — slide down with attention */
+@keyframes cost-alert-enter-anim {
+  0%   { opacity: 0; transform: translateY(-8px); }
+  60%  { opacity: 1; transform: translateY(2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.cost-alert-enter {
+  animation: cost-alert-enter-anim 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Cost category summary card hover — for clickable cards in cost-analytics-view */
+.cost-summary-card-clickable {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.cost-summary-card-clickable::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, transparent 50%, rgba(59, 130, 246, 0.06) 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.cost-summary-card-clickable:hover::after {
+  opacity: 1;
+}
+.cost-summary-card-clickable:active {
+  transform: scale(0.985);
+}
+
+/* Pie slice hover — for clickable pie cells in cost breakdown */
+.cost-pie-slice {
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform-origin: center;
+}
+.cost-pie-slice:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+/* MoM table cell hover — drill-down affordance */
+.cost-mom-cell {
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.cost-mom-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+.cost-mom-cell:hover::before {
+  opacity: 0.06;
+}
+
+/* Trend line draw-in — for the area chart stroke */
+@keyframes cost-trend-draw-anim {
+  0%   { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Quarterly bar grow */
+@keyframes cost-bar-grow-anim {
+  0%   { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
+}
+
+/* ==========================================================================
+   Round 34 — Dock Scheduler DnD micro-interactions
+   ========================================================================== */
+
+/* Queue row entrance — staggered slide-in */
+@keyframes dock-queue-row-enter-anim {
+  0%   { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.dock-queue-row-enter {
+  animation: dock-queue-row-enter-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Dragging state — dim the original row */
+.dock-queue-row-dragging {
+  opacity: 0.4;
+  transform: scale(0.98);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* Drag overlay — the floating card following the cursor */
+@keyframes dock-queue-drag-overlay-anim {
+  0%   { transform: scale(0.95) rotate(0deg); }
+  100% { transform: scale(1.02) rotate(1deg); }
+}
+.dock-queue-drag-overlay {
+  animation: dock-queue-drag-overlay-anim 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  cursor: grabbing !important;
+}
+
+/* Drop zone active — when a vehicle is being dragged over an available dock */
+@keyframes dock-drop-active-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  50%      { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25); }
+}
+.dock-drop-active {
+  animation: dock-drop-active-anim 1.2s ease-in-out infinite;
+  border-color: rgba(16, 185, 129, 0.5) !important;
+}
+
+/* Drop zone pulse — when ANY vehicle is being dragged (subtle hint) */
+@keyframes dock-drop-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  50%      { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.12); }
+}
+.dock-drop-pulse {
+  animation: dock-drop-pulse-anim 1.4s ease-in-out infinite;
+}
+
+/* Drop overlay — the "Drop to assign" badge that appears over an available dock */
+@keyframes dock-drop-overlay-anim {
+  0%   { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.dock-drop-overlay {
+  animation: dock-drop-overlay-anim 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  backdrop-filter: blur(2px);
+}
+
+/* DnD hint badge — subtle pulse to draw attention */
+@keyframes dock-dnd-hint-anim {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 1; }
+}
+.dock-dnd-hint {
+  animation: dock-dnd-hint-anim 2s ease-in-out infinite;
+}
