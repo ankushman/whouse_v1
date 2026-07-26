@@ -6694,3 +6694,309 @@ html.theme-transition body {
 .outb-tracking-active {
   animation: outb-tracking-active-anim 1.5s ease-out infinite;
 }
+
+/* ==========================================================================
+   Round 36 — Productivity + Transportation + Reports Detail Drawers
+   ========================================================================== */
+
+/* ─── Productivity drawer ─── */
+
+@keyframes prod-drawer-sheen {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.prod-drawer-header {
+  background-image: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: prod-drawer-sheen 14s ease-in-out infinite;
+}
+
+@keyframes prod-icon-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50%      { box-shadow: 0 0 0 6px transparent; opacity: 0.92; }
+}
+.prod-icon-pulse {
+  animation: prod-icon-pulse-anim 2.8s ease-out infinite;
+}
+
+@keyframes prod-stat-enter-anim {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.prod-stat-enter {
+  animation: prod-stat-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes prod-drawer-body-enter-anim {
+  0%   { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.prod-drawer-body-enter {
+  animation: prod-drawer-body-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes prod-card-enter-anim {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.prod-card-enter {
+  animation: prod-card-enter-anim 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes prod-task-enter-anim {
+  0%   { opacity: 0; transform: translateY(6px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.prod-task-enter {
+  animation: prod-task-enter-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes prod-skill-enter-anim {
+  0%   { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.prod-skill-enter {
+  animation: prod-skill-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.prod-fill-animate {
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes prod-achievement-enter-anim {
+  0%   { opacity: 0; transform: translateX(8px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.prod-achievement-enter {
+  animation: prod-achievement-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes prod-shift-row-anim {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.prod-shift-row {
+  animation: prod-shift-row-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.prod-shift-row:hover {
+  background-color: rgba(245, 158, 11, 0.04);
+  transform: translateX(2px);
+}
+
+/* ─── Transportation drawer ─── */
+
+@keyframes trans-drawer-sheen {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.trans-drawer-header {
+  background-image: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: trans-drawer-sheen 14s ease-in-out infinite;
+}
+
+@keyframes trans-icon-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50%      { box-shadow: 0 0 0 6px transparent; opacity: 0.92; }
+}
+.trans-icon-pulse {
+  animation: trans-icon-pulse-anim 2.8s ease-out infinite;
+}
+
+@keyframes trans-pulse-ring-anim {
+  0%   { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+.trans-pulse-ring {
+  animation: trans-pulse-ring-anim 1.6s ease-out infinite;
+}
+
+@keyframes trans-stat-enter-anim {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.trans-stat-enter {
+  animation: trans-stat-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes trans-drawer-body-enter-anim {
+  0%   { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.trans-drawer-body-enter {
+  animation: trans-drawer-body-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes trans-card-enter-anim {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.trans-card-enter {
+  animation: trans-card-enter-anim 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes trans-stop-enter-anim {
+  0%   { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.trans-stop-enter {
+  animation: trans-stop-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes trans-stop-active-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  50%      { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0); }
+}
+.trans-stop-active {
+  animation: trans-stop-active-anim 1.8s ease-out infinite;
+}
+
+@keyframes trans-metric-enter-anim {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.trans-metric-enter {
+  animation: trans-metric-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.trans-fill-animate {
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes trans-event-enter-anim {
+  0%   { opacity: 0; transform: translateX(8px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.trans-event-enter {
+  animation: trans-event-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes trans-cargo-row-anim {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.trans-cargo-row {
+  animation: trans-cargo-row-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.trans-cargo-row:hover {
+  background-color: rgba(59, 130, 246, 0.04);
+  transform: translateX(2px);
+}
+
+/* ─── Reports drawer ─── */
+
+@keyframes rpt-drawer-sheen {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.rpt-drawer-header {
+  background-image: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: rpt-drawer-sheen 14s ease-in-out infinite;
+}
+
+@keyframes rpt-icon-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50%      { box-shadow: 0 0 0 6px transparent; opacity: 0.92; }
+}
+.rpt-icon-pulse {
+  animation: rpt-icon-pulse-anim 2.8s ease-out infinite;
+}
+
+@keyframes rpt-stat-enter-anim {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.rpt-stat-enter {
+  animation: rpt-stat-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rpt-drawer-body-enter-anim {
+  0%   { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.rpt-drawer-body-enter {
+  animation: rpt-drawer-body-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rpt-card-enter-anim {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.rpt-card-enter {
+  animation: rpt-card-enter-anim 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rpt-kpi-enter-anim {
+  0%   { opacity: 0; transform: translateY(6px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.rpt-kpi-enter {
+  animation: rpt-kpi-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rpt-section-row-anim {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.rpt-section-row {
+  animation: rpt-section-row-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.rpt-section-row:hover {
+  background-color: rgba(168, 85, 247, 0.04);
+  transform: translateX(2px);
+}
+
+@keyframes rpt-recipient-row-anim {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.rpt-recipient-row {
+  animation: rpt-recipient-row-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.rpt-recipient-row:hover {
+  background-color: rgba(59, 130, 246, 0.04);
+  transform: translateX(2px);
+}
+
+@keyframes rpt-history-row-anim {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.rpt-history-row {
+  animation: rpt-history-row-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.rpt-history-row:hover {
+  background-color: rgba(99, 102, 241, 0.04);
+  transform: translateX(2px);
+}

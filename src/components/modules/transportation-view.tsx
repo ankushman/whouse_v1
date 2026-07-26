@@ -2,10 +2,12 @@
 
 import { useMemo, useState, useCallback } from "react"
 import { transportVehicles } from "@/data/mock-data"
+import type { TransportVehicle } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table"
+import { TransportationDetailDrawer } from "@/components/shared/transportation-detail-drawer"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
@@ -53,6 +55,13 @@ const EXPORT_COLUMNS = ["Registration", "Type", "Driver", "Route", "Status", "Lo
 
 export function TransportationView() {
   const [view, setView] = useState("all")
+  const [drawerVehicle, setDrawerVehicle] = useState<TransportVehicle | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const openDrawer = useCallback((vehicle: TransportVehicle) => {
+    setDrawerVehicle(vehicle)
+    setDrawerOpen(true)
+  }, [])
 
   const filtered = useMemo(() => {
     if (view === "all") return transportVehicles
@@ -208,7 +217,7 @@ export function TransportationView() {
       label: "Track Selected",
       icon: Eye,
       onClick: (rows) => {
-        // Real-time tracking — ready for API integration
+        if (rows.length > 0) openDrawer(rows[0])
       },
     },
   ]
@@ -302,9 +311,18 @@ export function TransportationView() {
         searchPlaceholder="Search registration, driver, route..."
         selectable
         batchActions={batchActions}
+        getRowKey={(row) => row.id}
+        onRowClick={(row) => openDrawer(row)}
         showColumnToggle
         pageSize={8}
         showCount
+      />
+
+      {/* Transportation Detail Drawer */}
+      <TransportationDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        vehicle={drawerVehicle}
       />
     </div>
   )

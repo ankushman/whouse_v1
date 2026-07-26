@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { PageHeader } from "@/components/shared/page-header"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { ReportsDetailDrawer, type ReportDetail } from "@/components/shared/reports-detail-drawer"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -54,6 +55,7 @@ interface Report {
   lastGenerated: string
   frequency: string
   formats: ("pdf" | "excel")[]
+  color?: string
 }
 
 interface ReportHistoryItem {
@@ -74,6 +76,7 @@ const reports: Report[] = [
     lastGenerated: "Today, 09:00 AM",
     frequency: "Daily",
     formats: ["pdf", "excel"],
+    color: "blue",
   },
   {
     id: "warehouse",
@@ -83,6 +86,7 @@ const reports: Report[] = [
     lastGenerated: "Today, 08:30 AM",
     frequency: "Daily",
     formats: ["pdf", "excel"],
+    color: "emerald",
   },
   {
     id: "mis",
@@ -92,6 +96,7 @@ const reports: Report[] = [
     lastGenerated: "1 Jan 2025",
     frequency: "Monthly",
     formats: ["pdf", "excel"],
+    color: "amber",
   },
   {
     id: "inventory",
@@ -101,6 +106,7 @@ const reports: Report[] = [
     lastGenerated: "Today, 07:00 AM",
     frequency: "Weekly",
     formats: ["pdf", "excel"],
+    color: "purple",
   },
   {
     id: "transport",
@@ -110,6 +116,7 @@ const reports: Report[] = [
     lastGenerated: "Today, 06:00 AM",
     frequency: "Daily",
     formats: ["pdf", "excel"],
+    color: "indigo",
   },
   {
     id: "cost",
@@ -119,6 +126,7 @@ const reports: Report[] = [
     lastGenerated: "15 Jan 2025",
     frequency: "Monthly",
     formats: ["pdf"],
+    color: "rose",
   },
 ]
 
@@ -146,6 +154,8 @@ export function ReportsView() {
   const toast = useToast()
   const [generatingIds, setGeneratingIds] = useState<Set<string>>(new Set())
   const [readyIds, setReadyIds] = useState<Set<string>>(new Set())
+  const [drawerReport, setDrawerReport] = useState<ReportDetail | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const [schedules, setSchedules] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {}
     reports.forEach(r => {
@@ -153,6 +163,11 @@ export function ReportsView() {
     })
     return initial
   })
+
+  const openDrawer = (report: Report) => {
+    setDrawerReport(report as unknown as ReportDetail)
+    setDrawerOpen(true)
+  }
 
   const handleGenerateReport = (reportId: string, reportTitle: string) => {
     if (generatingIds.has(reportId)) return
@@ -518,7 +533,7 @@ export function ReportsView() {
                       <span className="hidden sm:inline">Excel</span>
                     </Button>
                   )}
-                  <Button variant="ghost" size="sm" className="text-xs gap-1.5 h-8" title="Preview">
+                  <Button variant="ghost" size="sm" className="text-xs gap-1.5 h-8" title="Preview report details" onClick={() => openDrawer(report)}>
                     <Eye className="h-3 w-3" />
                   </Button>
                 </div>
@@ -580,6 +595,13 @@ export function ReportsView() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Reports Detail Drawer */}
+      <ReportsDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        report={drawerReport}
+      />
     </div>
   )
 }

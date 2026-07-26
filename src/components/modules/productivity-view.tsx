@@ -2,13 +2,16 @@
 
 import { useMemo, useState, useCallback } from "react"
 import { employees, manpowerProductivity } from "@/data/mock-data"
+import type { Employee } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { ProductivityDetailDrawer } from "@/components/shared/productivity-detail-drawer"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
@@ -26,6 +29,7 @@ import {
   Sun,
   Moon,
   Sunrise,
+  Eye,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -39,6 +43,13 @@ const manpowerChartConfig = {
 
 export function ProductivityView() {
   const [warehouseFilter, setWarehouseFilter] = useState("all")
+  const [drawerEmp, setDrawerEmp] = useState<Employee | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const openDrawer = useCallback((emp: Employee) => {
+    setDrawerEmp(emp)
+    setDrawerOpen(true)
+  }, [])
 
   // Derive unique warehouse names for filter dropdown
   const warehouseNames = useMemo(() => {
@@ -203,33 +214,52 @@ export function ProductivityView() {
 
         {/* Top & Low Performers */}
         <Card className="card-depth rounded-xl border-border/60 shadow-sm">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold">Top Performers</CardTitle>
-            <CardDescription className="text-xs">Ranked by productivity score</CardDescription>
+          <CardHeader className="pb-2 flex flex-row items-center justify-between">
+            <div>
+              <CardTitle className="text-sm font-semibold">Top Performers</CardTitle>
+              <CardDescription className="text-xs">Ranked by productivity score · click to view detail</CardDescription>
+            </div>
+            <Button variant="ghost" size="sm" className="h-7 text-[10px] gap-1" title="View all">
+              <Eye className="size-3" />
+              View All
+            </Button>
           </CardHeader>
           <CardContent className="space-y-3">
             {topPerformers.map((emp, idx) => {
               const rankIcon = idx === 0 ? <Medal className="h-4 w-4 text-amber-500" /> : idx === 1 ? <Medal className="h-4 w-4 text-slate-400" /> : idx === 2 ? <Medal className="h-4 w-4 text-amber-700" /> : <span className="text-xs text-muted-foreground">#{emp.rank}</span>
               return (
-                <div key={emp.id} className="flex items-center gap-3 rounded-lg border p-2.5 transition-colors hover:bg-muted/50">
+                <button
+                  key={emp.id}
+                  type="button"
+                  onClick={() => openDrawer(emp)}
+                  className="prod-perf-card group flex w-full items-center gap-3 rounded-lg border p-2.5 text-left transition-all hover:bg-muted/50 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                >
                   <div className="flex items-center justify-center w-6">{rankIcon}</div>
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 text-[10px]">{emp.avatar}</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium truncate">{emp.name}</p>
+                    <p className="text-xs font-medium truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{emp.name}</p>
                     <p className="text-[10px] text-muted-foreground">{emp.role} • {emp.warehouse}</p>
                   </div>
                   <div className="text-right">
                     <p className={cn("text-sm font-bold", emp.productivity >= 90 ? "text-emerald-600" : "text-foreground")}>{emp.productivity}%</p>
                     <p className="text-[10px] text-muted-foreground">{emp.tasksCompleted} tasks</p>
                   </div>
-                </div>
+                  <Eye className="size-3 text-muted-foreground/50 group-hover:text-blue-500 transition-colors" />
+                </button>
               )
             })}
           </CardContent>
         </Card>
       </div>
+
+      {/* Productivity Detail Drawer */}
+      <ProductivityDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        employee={drawerEmp}
+      />
     </div>
   )
 }
