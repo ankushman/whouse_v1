@@ -11514,3 +11514,171 @@ html.theme-transition body {
     transform: none !important;
   }
 }
+
+/* ============================================================
+   ROUND 51: Supplier Corrective Action Request (SCAR) — micro-interactions
+   ============================================================ */
+
+/* KPI cards — staggered entrance + hover lift */
+.scar-kpi-enter {
+  animation: scar-kpi-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.scar-kpi-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(139, 92, 246, 0.18);
+}
+
+/* Chart cards — entrance + hover border tint */
+.scar-chart-enter {
+  animation: scar-chart-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.scar-chart-enter:hover {
+  border-color: hsl(var(--primary) / 0.35);
+  box-shadow: 0 4px 18px -6px hsl(var(--primary) / 0.18);
+}
+
+/* Table card — subtle hover shadow */
+.scar-table-card {
+  transition: box-shadow 200ms ease;
+}
+.scar-table-card:hover {
+  box-shadow: 0 4px 16px -8px rgba(15, 23, 42, 0.1);
+}
+
+/* Row entrance — staggered fade-in with accent bar */
+.scar-row-in {
+  animation: scar-row-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+}
+.scar-row-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, transparent, hsl(var(--primary) / 0.45), transparent);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.scar-row-in:hover::before {
+  opacity: 1;
+}
+
+/* Critical-severity non-closed SCAR — red gradient + pulse */
+.scar-row-critical {
+  background: linear-gradient(90deg, rgb(254 226 226 / 0.5), transparent 30%);
+  animation: scar-row-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both, scar-row-pulse 2.4s ease-in-out infinite;
+}
+.scar-row-critical::before {
+  background: linear-gradient(180deg, transparent, rgb(225 29 72 / 0.7), transparent);
+  opacity: 1;
+}
+
+/* Tab button — transition + active scale */
+.scar-tab-btn {
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease, border-color 150ms ease;
+}
+.scar-tab-btn:active {
+  transform: scale(0.96);
+}
+
+/* Search input — focus ring expand */
+.scar-search-focus {
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+.scar-search-focus:focus {
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.12);
+  border-color: hsl(var(--primary) / 0.55);
+}
+
+/* Drawer — sheen sweep on open */
+.scar-drawer-sheen {
+  pointer-events: none;
+  overflow: hidden;
+}
+.scar-sheen {
+  animation: scar-sheen 1400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Drawer header — gradient underline + backdrop blur */
+.scar-drawer-header {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 0 hsl(var(--primary) / 0.15);
+}
+
+/* Stat cards in drawer — staggered entrance */
+.scar-stat-enter {
+  animation: scar-stat-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.scar-stat-enter:hover {
+  border-color: hsl(var(--primary) / 0.3);
+  transform: translateY(-1px);
+}
+
+/* Body content of drawer — fade-up */
+.scar-body-enter {
+  animation: scar-body-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes scar-body-enter {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Inner cards in drawer — hover lift */
+.scar-card-enter {
+  animation: scar-stat-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.scar-card-enter:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.1);
+}
+
+/* Badge count — pop animation */
+.scar-badge-pop {
+  animation: scar-badge-pop 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Custom scrollbar inside SCAR drawer */
+.scar-drawer-content::-webkit-scrollbar {
+  width: 6px;
+}
+.scar-drawer-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scar-drawer-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8b5cf6, #ec4899);
+  border-radius: 3px;
+}
+.scar-drawer-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #7c3aed, #db2777);
+}
+
+/* Row hover — subtle tint on tabular-nums cells */
+.scar-row-in:hover td {
+  text-shadow: 0 0 0 currentColor;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scar-kpi-enter,
+  .scar-chart-enter,
+  .scar-row-in,
+  .scar-row-critical,
+  .scar-stat-enter,
+  .scar-body-enter,
+  .scar-card-enter,
+  .scar-badge-pop,
+  .scar-sheen {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

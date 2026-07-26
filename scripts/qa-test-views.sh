@@ -33,6 +33,7 @@ tests=(
   "Vendor Management|Vendor Management"
   "Customer SLA|Customer SLA"
   "Supplier Quality|Supplier Quality"
+  "SCAR / 8D|Supplier Corrective"
   "Productivity|Productivity"
   "Cost Analytics|Cost Analytics"
   "Predictive Analytics|Predictive"
