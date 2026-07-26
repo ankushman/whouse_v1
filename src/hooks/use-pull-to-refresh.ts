@@ -76,6 +76,16 @@ export function usePullToRefresh({
   React.useEffect(() => {
     isRefreshingRef.current = isRefreshing
   }, [isRefreshing])
+  // Bug 33-AUDIT#1 (CRITICAL) fix: mirror pullDistance into a ref too.
+  // Previously onTouchEnd read `pullDistance` from the closure captured at mount time
+  // (when pullDistance === 0). The effect deps don't include `pullDistance`, so the
+  // listener was never re-bound. The condition `0 >= threshold` was always false →
+  // onRefresh was NEVER called. Pull-to-refresh visually tracked the pull but never
+  // actually fired.
+  const pullDistanceRef = React.useRef(0)
+  React.useEffect(() => {
+    pullDistanceRef.current = pullDistance
+  }, [pullDistance])
 
   // Use a ref to keep the latest onRefresh without re-attaching listeners.
   const onRefreshRef = React.useRef(onRefresh)
@@ -94,6 +104,18 @@ export function usePullToRefresh({
 
     const onTouchStart = (e: TouchEvent) => {
       if (disabledRef.current || isRefreshingRef.current) return
+      // Bug 33-AUDIT#11 (LOW) fix: reject multi-touch — a second finger landing
+      // mid-pull would overwrite startYRef/startXRef and cause the pull to "jump".
+      if (e.touches.length > 1) {
+        startYRef.current = null
+        startXRef.current = null
+        pullingRef.current = false
+        pullDistanceRef.current = 0
+        setPullDistance(0)
+        return
+      }
+      // If a gesture is already in progress, don't reset origin.
+      if (pullingRef.current) return
       // Only initiate if we're at the top of the scroll area
       if (el.scrollTop > 0) return
       const t = e.touches[0]
@@ -114,6 +136,7 @@ export function usePullToRefresh({
       if (Math.abs(deltaX) > Math.abs(deltaY) * 1.4) {
         startYRef.current = null
         startXRef.current = null
+        pullDistanceRef.current = 0
         setPullDistance(0)
         return
       }
@@ -121,6 +144,7 @@ export function usePullToRefresh({
       // Only pulling DOWN past the top counts.
       if (deltaY <= 0) {
         pullingRef.current = false
+        pullDistanceRef.current = 0
         setPullDistance(0)
         return
       }
@@ -128,6 +152,7 @@ export function usePullToRefresh({
       // If user scrolled away from top mid-gesture, cancel.
       if (el.scrollTop > 0) {
         pullingRef.current = false
+        pullDistanceRef.current = 0
         setPullDistance(0)
         return
       }
@@ -137,6 +162,8 @@ export function usePullToRefresh({
       // Apply resistance + clamp at maxPull
       const adjusted = deltaY * resistance
       const clamped = Math.min(maxPull, adjusted)
+      // Update both state (for re-render) AND ref (for onTouchEnd to read latest).
+      pullDistanceRef.current = clamped
       setPullDistance(clamped)
 
       // Prevent native pull-to-refresh (Chrome on Android).
@@ -147,6 +174,7 @@ export function usePullToRefresh({
       if (!pullingRef.current) {
         startYRef.current = null
         startXRef.current = null
+        pullDistanceRef.current = 0
         setPullDistance(0)
         return
       }
@@ -154,8 +182,12 @@ export function usePullToRefresh({
       startYRef.current = null
       startXRef.current = null
 
-      if (pullDistance >= threshold && !isRefreshingRef.current) {
+      // Bug 33-AUDIT#1 (CRITICAL) fix: read pullDistance from ref, not closure.
+      // The closure captures the mount-time value (0) because `pullDistance` is not
+      // in the effect deps. Without the ref, onRefresh NEVER fires.
+      if (pullDistanceRef.current >= threshold && !isRefreshingRef.current) {
         // Snap to threshold + trigger refresh
+        pullDistanceRef.current = threshold
         setPullDistance(threshold)
         isRefreshingRef.current = true
         setIsRefreshing(true)
@@ -166,10 +198,12 @@ export function usePullToRefresh({
         } finally {
           isRefreshingRef.current = false
           setIsRefreshing(false)
+          pullDistanceRef.current = 0
           setPullDistance(0)
         }
       } else {
         // Animate back to 0
+        pullDistanceRef.current = 0
         setPullDistance(0)
       }
     }
@@ -178,6 +212,7 @@ export function usePullToRefresh({
       pullingRef.current = false
       startYRef.current = null
       startXRef.current = null
+      pullDistanceRef.current = 0
       setPullDistance(0)
     }
 

@@ -103,18 +103,42 @@ function productivityColor(p: number) {
 // each producing a `bg-*` class. tailwind-merge keeps the LAST conflicting class — so
 // Productivity/Attendance/Tasks bars always ended up red (the Error Rate fallthrough).
 // Now we return a SINGLE bg-* class based on metric label + value.
+//
+// Bug 33-AUDIT#6 (MEDIUM) fix: the helper checked `label === "Attendance"` but the actual
+// label emitted by buildWarehouseBreakdown is `"Attendance %"`. The branch was dead.
+// Now we normalize by checking both variants.
 function getMetricBarColor(label: string, value: number): string {
-  if (label === "Productivity") {
+  // Normalize: strip trailing " %" so "Attendance %" matches "Attendance".
+  const norm = label.replace(/\s*%$/, "").trim()
+  if (norm === "Productivity") {
     return value >= 90 ? "bg-emerald-500" : value >= 80 ? "bg-amber-500" : "bg-blue-500"
   }
-  if (label === "Attendance") {
+  if (norm === "Attendance") {
     return value >= 90 ? "bg-emerald-500" : "bg-blue-500"
   }
-  if (label === "Tasks") return "bg-violet-500"
-  if (label === "Error Rate") {
+  if (norm === "Tasks") return "bg-violet-500"
+  if (norm === "Error Rate") {
     return value <= 2 ? "bg-emerald-500" : value <= 3 ? "bg-amber-500" : "bg-red-500"
   }
   return "bg-blue-500"
+}
+
+// Returns the width % for a metric bar. Tasks are raw counts (not percentages),
+// so they need normalization to a 0-100 scale relative to a 200-task baseline.
+// Bug 33-AUDIT#7 (MEDIUM) fix: previously Tasks bars were always 100% because
+// Math.min(100, rawCount) clamped any count > 100 to 100.
+function getMetricBarWidth(label: string, value: number): number {
+  const norm = label.replace(/\s*%$/, "").trim()
+  if (norm === "Tasks") {
+    // Normalize: 200+ tasks = full bar
+    return Math.min(100, Math.round((value / 200) * 100))
+  }
+  if (norm === "Error Rate") {
+    // Invert: lower error rate = fuller bar (5% error → 0% bar, 0% error → 100% bar)
+    return Math.max(0, Math.min(100, Math.round((1 - value / 5) * 100)))
+  }
+  // Productivity / Attendance are already 0-100
+  return Math.min(100, Math.max(0, value))
 }
 
 // Weekly trend data for performance charts
@@ -309,6 +333,20 @@ export function EmployeesView() {
   const top5RadarData = useMemo(() => buildTop5CompareData(filtered), [filtered])
   const top5BarData = useMemo(() => buildTop5BarData(filtered), [filtered])
   const warehouseBreakdown = useMemo(() => buildWarehouseBreakdown(filtered), [filtered])
+
+  // Bug 33-AUDIT#21 (LOW) fix: memoize the radar chart config so it's not rebuilt
+  // on every render. Previously the config object was constructed inline via .reduce
+  // inside the JSX, defeating any memoization inside ChartContainer.
+  const top5RadarConfig = useMemo<Record<string, { label: string; color: string }>>(
+    () => top5Employees.reduce<Record<string, { label: string; color: string }>>(
+      (acc, emp, idx) => {
+        acc[emp.name] = { label: emp.name, color: TOP5_COLORS[idx] ?? "#94A3B8" }
+        return acc
+      },
+      {}
+    ),
+    [top5Employees]
+  )
 
   const handleExportCSV = useCallback(() => {
     const data = filtered.map((e) => ({
@@ -570,13 +608,7 @@ export function EmployeesView() {
               </CardHeader>
               <CardContent>
                 <ChartContainer
-                  config={top5Employees.reduce<Record<string, { label: string; color: string }>>(
-                    (acc, emp, idx) => {
-                      acc[emp.name] = { label: emp.name, color: TOP5_COLORS[idx] ?? "#94A3B8" }
-                      return acc
-                    },
-                    {}
-                  )}
+                  config={top5RadarConfig}
                   className="h-[320px] w-full"
                 >
                   <RadarChart cx="50%" cy="50%" outerRadius="70%" data={top5RadarData}>
@@ -670,7 +702,9 @@ export function EmployeesView() {
                               m.label === "Error Rate" && m.value > 1.5 ? "text-amber-600" :
                               "text-foreground"
                             )}>
-                              {m.value}{m.label.includes("%") || m.label === "Error Rate" ? "%" : ""}
+                              {/* Bug 33-AUDIT#8 (MEDIUM) fix: "Productivity" was rendered without % suffix.
+                                  Now % is added for Productivity, Attendance %, and Error Rate. */}
+                              {m.value}{m.label.includes("%") || m.label === "Error Rate" || m.label === "Productivity" ? "%" : ""}
                             </span>
                           </div>
                           <div className="h-1 rounded-full bg-muted overflow-hidden">
@@ -679,7 +713,7 @@ export function EmployeesView() {
                                 "h-full rounded-full transition-all duration-500",
                                 getMetricBarColor(m.label, m.value)
                               )}
-                              style={{ width: `${Math.min(100, m.value)}%` }}
+                              style={{ width: `${getMetricBarWidth(m.label, m.value)}%` }}
                             />
                           </div>
                         </div>

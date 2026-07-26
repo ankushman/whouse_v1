@@ -221,9 +221,9 @@ export function DashboardView() {
   void refreshNonce
 
   return (
-    <PullToRefreshContainer onRefresh={handlePullRefresh} className="-m-4 md:-m-6">
-    <div className="space-y-6" key={refreshNonce}>
-      {/* Dashboard Header */}
+    <PullToRefreshContainer onRefresh={handlePullRefresh}>
+    <div className="space-y-6 p-4 md:p-6" key={refreshNonce}>
+      {/* Dashboard Header — negative margins cancel the parent's p-4/p-6 so the gradient extends edge-to-edge */}
       <div className="dashboard-header-gradient bg-mesh-gradient -m-4 mb-0 p-4 md:-m-6 md:p-6 rounded-none">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
           <div>

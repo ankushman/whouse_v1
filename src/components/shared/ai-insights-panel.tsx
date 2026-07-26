@@ -147,6 +147,13 @@ export function AIInsightsPanel() {
       next.delete(id)
       return next
     })
+    // Bug 33-AUDIT#18 (LOW) fix: also clear the appliedIds entry so the Set doesn't
+    // accumulate stale IDs forever (would matter if insights were re-added later).
+    setAppliedIds((prev) => {
+      const next = new Set(prev)
+      next.delete(id)
+      return next
+    })
     toast.info("Insight Dismissed", { description: "The insight has been archived" })
   }
 
@@ -158,6 +165,8 @@ export function AIInsightsPanel() {
     const dismissedCount = insightList.length
     setInsightList([])
     setExpandedIds(new Set())
+    // Bug 33-AUDIT#18 (LOW) fix: clear appliedIds too.
+    setAppliedIds(new Set())
     toast.info("Insights Dismissed", {
       description: `${dismissedCount} insight${dismissedCount === 1 ? "" : "s"} archived`,
     })

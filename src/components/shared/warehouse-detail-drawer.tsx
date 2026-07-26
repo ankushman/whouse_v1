@@ -361,8 +361,8 @@ export function WarehouseDetailDrawer({
         side="right"
         className="w-full sm:max-w-[640px] overflow-y-auto p-0 gap-0 bg-background"
       >
-        {/* ── Header (gradient + status strip) ────────────────────────────── */}
-        <SheetHeader className="relative px-6 pt-6 pb-4 space-y-0 drawer-header-shimmer wh-drawer-header-sheen bg-gradient-to-br from-primary/10 via-background to-background border-b">
+        {/* ── Header (gradient + status strip) ────────────────────────────────── */}
+        <SheetHeader className="relative px-6 pt-6 pb-4 space-y-0 wh-drawer-header-sheen bg-gradient-to-br from-primary/10 via-background to-background border-b">
           <div
             className={cn(
               "absolute inset-x-0 top-0 h-1",
@@ -527,7 +527,7 @@ export function WarehouseDetailDrawer({
               </div>
               <div className="h-2.5 w-full overflow-hidden rounded-full bg-muted relative">
                 <div
-                  className={cn("h-full rounded-full transition-all duration-700 stock-fill-grow", capColor.bar)}
+                  className={cn("h-full rounded-full transition-all duration-700", capColor.bar)}
                   style={{ width: `${warehouse.capacityUsed}%` }}
                 />
                 {/* Threshold markers */}
@@ -581,8 +581,11 @@ export function WarehouseDetailDrawer({
                 value: `${forkliftUtilizationPct}%`,
                 icon: <Forklift className="size-3.5" />,
                 tint: "bg-violet-50 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400",
-                trend: "up" as const,
-                trendVal: `+${forkliftUtilizationPct - 65}%`,
+                // Bug 33-AUDIT#3 (MEDIUM) fix: previously trendVal was `+${pct-65}%` which
+                // produced "+-15%" when utilization < 65, paired with a hardcoded "up" trend.
+                // Now derive both from the sign of (pct - 65).
+                trend: forkliftUtilizationPct >= 65 ? "up" as const : "down" as const,
+                trendVal: `${forkliftUtilizationPct >= 65 ? "+" : ""}${forkliftUtilizationPct - 65}%`,
               },
               {
                 label: "Fleet Status",
@@ -601,13 +604,15 @@ export function WarehouseDetailDrawer({
                   : warehouse.alerts > 0
                     ? "bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400"
                     : "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400",
-                trend: warehouse.alerts > 0 ? "up" as const : "up" as const,
+                // Bug 33-AUDIT#4 (MEDIUM) fix: previously both ternary branches returned "up".
+                // "All clear" with a green up-arrow was misleading. Now down = good (alerts low).
+                trend: warehouse.alerts > 0 ? "up" as const : "down" as const,
                 trendVal: warehouse.alerts > 0 ? "needs attention" : "all clear",
               },
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-lg border border-border/40 bg-muted/15 p-2.5 stat-card-hover wh-stat-card-hover"
+                className="rounded-lg border border-border/40 bg-muted/15 p-2.5 wh-stat-card-hover"
               >
                 <div className="flex items-center justify-between mb-1.5">
                   <div className={cn("flex size-6 items-center justify-center rounded", stat.tint)}>
@@ -688,7 +693,7 @@ export function WarehouseDetailDrawer({
                 return (
                   <div
                     key={zone.name}
-                    className="rounded-lg border border-border/40 bg-muted/15 p-2.5 stat-card-hover wh-stat-card-hover zone-card-enter"
+                    className="rounded-lg border border-border/40 bg-muted/15 p-2.5 wh-stat-card-hover zone-card-enter"
                     style={{ animationDelay: `${idx * 60}ms` }}
                   >
                     <div className="flex items-center justify-between mb-1.5">

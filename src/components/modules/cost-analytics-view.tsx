@@ -108,7 +108,7 @@ export function CostAnalyticsView() {
       {/* Summary */}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5 stagger-children">
         {[
-          { label: "Total Cost", value: `₹${(totalCostThisMonth / 100000).toFixed(2)}L`, change: +parseFloat(totalChange), icon: DollarSign, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
+          { label: "Total Cost", value: `₹${(totalCostThisMonth / 100000).toFixed(2)}L`, change: parseFloat(totalChange), icon: DollarSign, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
           { label: "Labor Cost", value: `₹${(latest.labor / 100000).toFixed(2)}L`, icon: Users, color: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
           { label: "Transport Cost", value: `₹${(latest.transport / 100000).toFixed(2)}L`, icon: Fuel, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
           { label: "Equipment Cost", value: `₹${(latest.equipment / 100000).toFixed(2)}L`, icon: Wrench, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },

@@ -52,7 +52,7 @@ export function PullToRefreshContainer({
   return (
     <div
       ref={scrollRef}
-      className={cn("relative h-full overflow-y-auto overs-contain", className)}
+      className={cn("relative h-full overflow-y-auto overscroll-y-contain", className)}
       style={{
         // Don't let pull translate the scroll container; we render the indicator
         // above the content using absolute positioning.
@@ -62,6 +62,9 @@ export function PullToRefreshContainer({
       {/* Pull-to-refresh indicator (fixed at top of scroll area) */}
       {showIndicator && (
         <div
+          role="status"
+          aria-live="polite"
+          aria-busy={isRefreshing}
           className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-center justify-center ptr-indicator-enter"
           style={{ height: `${isRefreshing ? 70 : pullDistance}px` }}
         >
@@ -85,7 +88,7 @@ export function PullToRefreshContainer({
                 <ArrowDown
                   className={cn(
                     "size-3.5 transition-transform duration-150",
-                    refreshProgress >= 100 && "rotate-180 text-emerald-500"
+                    refreshProgress >= 100 && "text-emerald-500"
                   )}
                   style={{ transform: `rotate(${arrowRotation}deg)` }}
                 />

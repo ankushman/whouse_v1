@@ -3099,3 +3099,44 @@ Updated Project Status (Post Round 32 - Complete):
   8. Enhance barcode/QR code scanning integration
   9. Add DataTable getRowKey prop for tables without stable IDs (fixes DT2 LOW bug)
   10. CSS audit: 382+ classes — consolidate unused/redundant definitions
+
+---
+Task ID: 33-AUDIT
+Agent: Sub (Explore — Post-R32 Code Audit)
+Task: Focused code audit on Round 32 changes (warehouse-detail-drawer, use-pull-to-refresh, pull-to-refresh-container, dashboard-view wrapping, warehouses-view legacy modal removal, employees-view R32 fixes, ai-insights-panel R32 fixes, sla-countdown-view CRITICAL fix, cost-analytics-view division-by-zero, CSS duplicate-class check). Find NEW bugs introduced in R32 or pre-existing bugs the R32 audit missed. Classify CRITICAL/HIGH/MEDIUM/LOW. No code changes.
+
+Work Log:
+- Read worklog tail (lines 2800-3101) to understand R32 scope: 12 bug fixes + WarehouseDetailDrawer (new, ~832 lines) + usePullToRefresh hook + PullToRefreshContainer + 12 CSS micro-interactions.
+- Read all 10 audit target files in full (warehouse-detail-drawer.tsx, use-pull-to-refresh.ts, pull-to-refresh-container.tsx, dashboard-view.tsx, warehouses-view.tsx, employees-view.tsx, ai-insights-panel.tsx, sla-countdown-view.tsx, cost-analytics-view.tsx, warehouse-detail-modal.tsx).
+- Verified R32 fixes:
+  - sla-countdown-view CRITICAL fix (removed local countdown state): VERIFIED ✓ — SLACard reads item.remainingMs directly, no local setInterval, parent's 1s setInterval decrements item.remainingMs. Single source of truth.
+  - sla-countdown-view breach reclassification fix (getStatusFromMs checks ms<0 before progress>=100): VERIFIED ✓
+  - sla-countdown-view priority bar colors fix (Cell children inside Bar): VERIFIED ✓
+  - employees-view radar top5Employees from filtered: VERIFIED ✓
+  - employees-view getMetricBarColor helper: VERIFIED PRESENT but has a label-mismatch bug (see finding #3)
+  - employees-view radar config dynamic from top5Employees: VERIFIED ✓
+  - dashboard-view 3 chart legend fixes (removed phantom keys): VERIFIED ✓
+  - ai-insights-panel insightList state + handleApply/handleDismiss: VERIFIED ✓
+  - cost-analytics-view division-by-zero guards: VERIFIED ✓ (both momComparison and totalChange)
+- Ran CSS duplicate-class check: 181 duplicate class definitions (mostly pre-existing, e.g., .card-depth × 3, .status-dot-pulse × 2). R32 classes checked individually — false-positive duplicates are all base+:hover pairs (e.g., .wh-stat-card-hover + .wh-stat-card-hover:hover).
+- Found 1 dead CSS keyframe (health-ring-draw), 1 missing CSS class (stock-fill-grow class applied but only .stock-fill-animate>div rule exists).
+- Found 20 bugs total: 1 CRITICAL, 1 HIGH, 8 MEDIUM, 10 LOW.
+- No code changes made (audit-only task).
+
+Key Findings (top 5):
+1. CRITICAL: use-pull-to-refresh.ts onTouchEnd reads `pullDistance` from a stale closure — the effect deps are [threshold, maxPull, resistance] (not pullDistance), so the touchend handler forever sees the mount-time value (0). The condition `pullDistance >= threshold` is always `0 >= 70` = false. **The pull-to-refresh gesture NEVER fires onRefresh.** The entire R32 pull-to-refresh feature is non-functional. Fix: mirror pullDistance into a ref (pullDistanceRef.current = clamped in touchmove; read pullDistanceRef.current in touchend).
+2. HIGH: dashboard-view.tsx PullToRefreshContainer wrapping broke the negative-margin pattern. `-m-4 md:-m-6` was moved to PullToRefreshContainer (cancels page p-4 md:p-6), but the inner dashboard div has NO `p-4 md:p-6`, so the header gradient's own `-m-4 md:-m-6` overflows the scroll container (horizontal scrollbar + clipped top), and all other dashboard content (MetricsTicker, cards) now touches screen edges with no internal padding.
+3. MEDIUM: employees-view.tsx getMetricBarColor checks `label === "Attendance"` but buildWarehouseBreakdown emits label `"Attendance %"` (with %). The branch is dead; "Attendance %" bars always fall through to default `bg-blue-500`. R32 fix was incomplete.
+4. MEDIUM: warehouse-detail-drawer.tsx trendVal for Forklift Utilization is `+${forkliftUtilizationPct - 65}%` → renders "+-15%" when utilization < 65. Same file line 604 has `trend: warehouse.alerts > 0 ? "up" : "up"` — both branches identical, logic bug.
+5. MEDIUM: warehouse-detail-drawer.tsx capacity bar uses class `stock-fill-grow` but globals.css only defines `.stock-fill-animate > div` (different selector). The fill animation never runs.
+
+Stage Summary:
+- Files audited: 10 source files + globals.css + tailwind v4 utilities
+- Bugs found: 20 (1 CRITICAL pull-to-refresh stale closure, 1 HIGH dashboard layout regression, 8 MEDIUM, 10 LOW)
+- R32 CRITICAL fix (SLA countdown 2x speed): VERIFIED correct
+- R32 division-by-zero fix (cost-analytics): VERIFIED complete
+- R32 employees-view getMetricBarColor fix: INCOMPLETE (label mismatch)
+- CSS: 181 pre-existing duplicate class definitions (not R32); 1 dead keyframe (health-ring-draw); 1 missing class (stock-fill-grow)
+- Dead code: warehouse-detail-modal.tsx (362 lines) still exported from modules/index.ts but unused
+- No code changes (audit-only)
+- Detailed report with file:line + snippets + fixes delivered to caller

@@ -140,7 +140,7 @@ const typeIcons: Record<string, React.ReactNode> = {
 
 // ── SLA Card Component ───────────────────────────────────────────────────
 
-function SLACard({ item }: { item: SLAItem; mountTime: number }) {
+function SLACard({ item }: { item: SLAItem }) {
   // Single source of truth: parent (SLACountdownView) already decrements item.remainingMs
   // by 1000ms every second via setSlaItems. We just read item.remainingMs directly.
   //
@@ -363,7 +363,7 @@ export function SLACountdownView() {
       {/* ── SLA Timeline Cards ── */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
         {sorted.map((item) => (
-          <SLACard key={item.id} item={item} mountTime={mountTimeRef.current} />
+          <SLACard key={item.id} item={item} />
         ))}
       </div>
 
