@@ -5751,3 +5751,155 @@ Updated Project Status (Post Round 53):
   13. Customer contract document management (mirror vendor contract module)
   14. Add Production Cost Variance Analysis module (planned vs actual cost across WO + PS + BOM + MRP — finance operations layer)
   15. Add Demand Forecasting module (statistical + ML forecasting on top of MRP demand history — extends MRP module)
+
+---
+Task ID: 54
+Agent: Main (Cron Review - Round 54)
+Task: Production Cost Variance Analysis module (finance ops layer) with 6-tab inline drawer + 30+ CSS micro-interactions + agent-browser QA verified + Dashboard/MRP/PS regression check
+
+Work Log:
+- Read worklog.md — project at Round 53, 35 modules, 33 detail drawers, 950+ CSS classes, 0 TS errors, lint/build clean.
+- Verified baseline: `bun run lint` (0 errors), `npx tsc --noEmit` (0 src/ errors; only pre-existing errors in mini-services/skills dirs), `bun run build` (success, 7 routes).
+- Started standalone server with `NODE_OPTIONS=--max-old-space-size=768` on `http://127.0.0.1:3001/`.
+- agent-browser smoke test PASSED: Dashboard rendered ("Executive Dashboard"), MRP rendered ("Inventory Replenishment (MRP)"), Production Schedule rendered ("Production Schedule" + Gantt view).
+- Strategic choice: Built new operational module "Production Cost Variance" (was priority #14 in worklog priority list). Finance operations layer that closes the manufacturing finance loop: BOM → Production Schedule → Work Order → Cost Variance → Journal Entries → Standard Cost Update. Multi-tier approval workflow (supervisor → manager → controller → CFO) with Ind AS 2 style journal entries.
+
+NEW FEATURE 1: Production Cost Variance Module (~2325 lines, file: src/components/modules/production-cost-variance-view.tsx)
+  - New navigation item: "Cost Variance" (icon: Calculator, group: operations, placed right after Prod. Schedule)
+  - 6 hero KPI cards: Total Variance Records / Critical Variances (with pulse ping when > 0) / Total Variance (color-coded by direction) / Favorable Variance / Avg Variance % / Total Planned Cost — each with trend indicator, severity color, secondary metric, top gradient bar
+  - 6-Month Cost Trend (Planned vs Actual) AreaChart (aggregated across all work orders)
+  - Status Distribution donut PieChart (8 statuses color-coded)
+  - Cost Variance by Category BarChart (Planned vs Actual grouped bars, sorted by variance)
+  - Risk Distribution horizontal BarChart (4 risk levels: low/medium/high/critical)
+  - Cost Variance by Warehouse BarChart (color-coded: red for unfavorable, green for favorable)
+  - 16 mock PCV records with realistic Indian automotive parts (same parts as WO/PS/MRP modules for traceability continuity): brake pad, wheel rim, engine block, caliper seal, shock absorber, Li-Ion battery, tire bead, wiring harness, engine bolt, engine oil, windshield, radiator cap, air filter, spark plug, clutch FAI, helmet shell
+  - 9 status tabs: All (16) / Favorable (4) / On Target (3) / Unfavorable (3) / Critical (1) / Investigating (2) / Pending Review (1) / Approved (1) / Rejected (1) — each with live count badge
+  - 3 filters: Category (15 options) + Risk (4 options) + free-text search (matches PCV ID, WO, part no, description, category, warehouse, supplier, line, cost controller, product manager, BOM ref, PS ref)
+  - 8 PCV statuses with full theming (label, color, bg, border, pieColor, icon): favorable=TrendingDown/emerald, on-target=Target/blue, unfavorable=TrendingUp/amber, critical=XCircle/rose, investigating=Search/purple, approved=CheckCircle2/emerald, rejected=XCircle/rose, pending-review=Clock/cyan
+  - 6 cost categories with theming: material=Boxes/blue, labor=Wrench/emerald, overhead=Factory/amber, scrap=XCircle/rose, setup=Timer/purple, subcontract=Factory/cyan
+  - 4 risk levels with theming: low=CheckCircle2/emerald, medium=AlertTriangle/amber, high=AlertTriangle/orange, critical=XCircle/rose
+  - 3 variance directions with theming: favorable=TrendingDown/emerald, unfavorable=TrendingUp/rose, neutral=Minus/blue
+  - Hash-seeded deterministic mock data generators: genMonthlyTrend (6 months planned/actual/variance), genCostElements (6 categories: material/labor/overhead/scrap/setup/subcontract — with notes), genDrivers (top 6 drivers: price/usage/rate/efficiency/variable OH/fixed OH/scrap/setup/subcontract premium), genRootCauses (2-3 causes ranked by risk score = probability × impact), genMitigationActions (2-3 actions with type/owner/due/savings/progress), genApprovals (multi-tier chain based on variance amount threshold), genJournalEntries (Ind AS 2 style 4-line balanced entries with WIP variance accounts)
+  - Status-aware row theming: critical=red gradient+pulse animation, unfavorable/investigating/pending-review/rejected=amber tint, favorable=emerald tint, normal=hover bg with accent bar
+  - Variance color-coded in table (rose for unfavorable, emerald for favorable, blue for neutral)
+  - Supplier rating badge with star icon shown inline
+  - Qty produced/planned stacked in table cells
+  - Planned/Actual unit cost shown in drawer hero stats
+  - CSV export with full 25-field set per PCV record
+  - Refresh + New Variance Run action buttons with toast feedback
+
+NEW FEATURE 2: Cost Variance Detail Drawer (~640 lines, 6 sub-tabs, embedded in module)
+  - 6 sub-tabs: Overview / Cost Elements / Variance Drivers / Root Causes / Mitigation / Approvals
+  - Header: 4 hero stat grid (Planned Cost, Actual Cost, Variance, Unit Cost Δ), status badge, risk badge, direction badge, ABC badge, PCV ID, WO, Part No, Production Line
+  - Sheen sweep on open (gradient blue→violet→cyan), gradient underline + backdrop blur on header
+  - Overview tab: Cost Summary 3-card grid (Planned/Actual/Variance) + 6-Month Trend AreaChart + Traceability 4×2 grid (PS ref, BOM ref, Cost Controller, Product Manager, Production Start/End, Linked NCR, Linked SCAR) + Supplier Context 3-card row (name/rating/last variance date)
+  - Cost Elements tab: Full table with 6 cost categories (Planned/Actual/Variance/%/Direction/Notes) + total row + Planned vs Actual by Category grouped BarChart
+  - Variance Drivers tab: Top 6 driver cards with category icon, name, description, impact (color-coded), bar chart visualization of relative impact
+  - Root Causes tab: Ranked cause cards with RC-XXX ID, status badge, owner, identified date, description, 3-bar probability/impact/risk score visualization
+  - Mitigation tab: Summary 3-card (Total Estimated Savings, Avg Progress, Active Actions) + Mitigation action cards with MA-XXX ID, type icon, status badge, owner, due date, description, Est. Savings, progress bar
+  - Approvals tab: Multi-tier vertical timeline approval workflow (supervisor → manager → controller → CFO) with status icons + comments + amount + timestamp + Ind AS 2 style Journal Entries table (4 entries: 1 clearing + 3 WIP variance splits, balanced debit/credit) + total row with balanced check
+  - Footer: Export button always + status-aware actions:
+    - pending-review: Submit for Approval + Reject
+    - investigating: Initiate Root Cause Analysis
+    - unfavorable: Draft Mitigation Plan
+    - critical: Escalate to CFO (destructive rose)
+    - rejected: Reopen for Re-analysis
+    - favorable/on-target/approved: Update Standard Cost
+  - All animations: pcv-drawer-sheen (sheen sweep on open), pcv-drawer-header (gradient underline + backdrop blur), pcv-stat-enter (4 staggered), pcv-body-enter (fade-up), pcv-card-enter (hover lift), pcv-tab-btn (active scale), pcv-search-focus (ring expand), pcv-row-in (entrance + ::before gradient accent bar), pcv-row-critical (red gradient + pulse), pcv-row-warn (amber tint), pcv-row-favorable (emerald tint), pcv-kpi-enter (staggered + hover lift), pcv-chart-enter (hover lift + border tint), pcv-table-card (hover shadow), custom blue→cyan scrollbar, prefers-reduced-motion support, prefers-contrast: more support
+
+NEW FEATURE 3: Navigation + Icon Map updates
+  - Added 'production-cost-variance' to navItems in app-store.ts (group: operations, icon: Calculator, roles: super_admin/executive/regional_manager/warehouse_manager, placed after Prod. Schedule)
+  - Imported Calculator icon in app-layout.tsx and added to iconMap (both import and iconMap object)
+  - Imported ProductionCostVarianceView in app/page.tsx and added to viewMap
+  - Exported from src/components/modules/index.ts
+
+NEW FEATURE 4: 30+ new CSS micro-interaction classes (file: src/app/globals.css, appended at end, +200 lines including keyframes)
+  - pcv-kpi-enter (staggered + hover lift), pcv-chart-enter (hover lift + border tint), pcv-table-card (hover shadow), pcv-row-in (entrance + ::before gradient accent bar), pcv-row-critical (red gradient + pulse animation), pcv-row-warn (amber tint), pcv-row-favorable (emerald tint), pcv-tab-btn (transition + active scale), pcv-search-focus (ring expand), pcv-drawer-sheen (sheen sweep on open), pcv-drawer-header (gradient underline + backdrop blur + shadow), pcv-stat-enter (4 staggered), pcv-body-enter (fade-up), pcv-card-enter (hover lift), pcv-badge-pop (badge pop animation), custom blue→cyan scrollbar styling for drawer, row hover text-shadow, prefers-reduced-motion support, prefers-contrast: more support
+
+NEW FEATURE 5: Reusable QA test script updated (file: /home/z/my-project/scripts/qa-test-views.sh)
+  - Added "Cost Variance|Production Cost Variance" test case
+  - Now tests 36 modules (was 35)
+
+QA Verification (agent-browser LIVE TEST):
+  - **Smoke test PASSED**: Cost Variance nav click → ✓ "Production Cost Variance" heading rendered
+  - KPI cards visible: 6 KPIs (Total Variance Records, Critical Variances, Total Variance, Favorable Variance, Avg Variance %, Total Planned Cost)
+  - 4 chart cards visible: 6-Month Cost Trend AreaChart, Status Distribution donut, Cost Variance by Category BarChart, Risk Distribution, Cost Variance by Warehouse
+  - All 9 status tabs visible with counts (All: 16, Favorable: 4, On Target: 3, Unfavorable: 3, Critical: 1, Investigating: 2, Pending Review: 1, Approved: 1, Rejected: 1)
+  - Master table shows 16 PCV records with part avatars, status icons, color-coded rows (critical highlighted with red gradient/pulse, unfavorable/investigating/pending-review/rejected with amber tint, favorable with emerald tint)
+  - Clicked first row (PCV-2026-9001, Brake Pad Assembly — Passenger Car, Unfavorable status, High risk)
+  - agent-browser snapshot → ✓ Drawer opened (heading "Brake Pad Assembly — Passenger Car")
+  - Verified 6 tabs visible in drawer (Overview, Cost Elements, Variance Drivers, Root Causes, Mitigation, Approvals)
+  - Clicked Cost Elements tab → ✓ "Cost Element Breakdown" rendered — 6 categories (Material/Labor/Overhead/Scrap/Setup/Subcontract) with Planned/Actual/Variance columns + total row
+  - Clicked Variance Drivers tab → ✓ "Variance Drivers — Top N" rendered — drivers list with Material price variance, Labor rate variance, etc.
+  - Clicked Root Causes tab → ✓ "Root Cause Analysis" rendered — RC-2026-01/02 with probability/impact/risk score bars
+  - Clicked Mitigation tab → ✓ "Mitigation Actions" rendered — MA-2026-01/02 with Total Estimated Savings, Est. Savings per action, progress bars
+  - Clicked Approvals tab → ✓ "Approval Workflow" + "Journal Entries — Ind AS 2 Style" rendered — 4 entries balanced (Debit: ₹2.88L · Credit: ₹2.88L · ✓ Balanced)
+  - Tested status-aware footer on Unfavorable (PCV-2026-9001) → Footer shows Export + Draft Mitigation Plan buttons (status-aware correct)
+  - Tested Critical status (PCV-2026-9003 Engine Block) → Footer shows Export + Escalate to CFO button (destructive rose, status-aware correct)
+  - Tested Favorable status (PCV-2026-9002 Wheel Rim) → Footer shows Export + Update Standard Cost button (status-aware correct)
+  - **Regression check PASSED**: Dashboard still renders ("Executive Dashboard" heading), MRP still renders ("Inventory Replenishment (MRP)" heading), Production Schedule still renders ("Production Schedule" heading + Gantt view)
+
+Static Verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (maintained from Round 53)
+
+Stage Summary:
+- 7 files changed (1 new + 6 modified), +2525 lines
+- 1 NEW MODULE: Production Cost Variance (~2325 lines, 6 KPIs + 5 charts + 9 status tabs + 3 filters + 16-item master table + 6-tab inline drawer with multi-tier approval workflow + Ind AS 2 journal entries)
+- 1 NEW NAV ITEM + ICON: "Cost Variance" with Calculator icon
+- 30+ new CSS micro-interaction classes (all pcv-* classes)
+- 4 views updated: app-layout (Calculator icon), page.tsx (viewMap), app-store.ts (navItems), modules/index.ts (export), qa-test-views.sh (test case)
+- MODULES NOW: 36 (was 35 — added Production Cost Variance)
+- DETAIL DRAWERS NOW: 34 total (33 universal + 1 new inline PCV drawer)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser LIVE verification PASSED (PCV drawer 6 tabs verified: Overview/Cost Elements/Variance Drivers/Root Causes/Mitigation/Approvals + status-aware footer actions verified on Unfavorable (Draft Mitigation Plan) + Critical (Escalate to CFO) + Favorable (Update Standard Cost) + Dashboard + MRP + Production Schedule regression check)
+- MANUFACTURING FINANCE LOOP CLOSED: BOM (R47) → Production Schedule (R52) → Work Order (R50) → Routing → Material → Labor → QIP (R48) → NCR (R49) → SCAR (R51) → Inventory Replenishment/MRP (R53) → Procurement (PO) → Supplier Quality → Production Cost Variance (R54 NEW — finance ops layer with planned vs actual variance, root cause, mitigation, multi-tier approval, Ind AS 2 journal entries) → Standard Cost Update → back to BOM
+
+---
+Updated Project Status (Post Round 54):
+- STATUS: STABLE + NEW PRODUCTION COST VARIANCE MODULE + agent-browser SMOKE TEST PASSED (36/36 modules total)
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (36): All previous 35 + Production Cost Variance (NEW)
+- SHARED COMPONENTS (54+): All previous 54
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (980+): 950+ previous + 30+ new (all pcv-* classes)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (34 — UNIVERSAL COVERAGE + 1 NEW INLINE):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓, Yard ✓,
+    + Customer SLA (inline), + Supplier Quality (inline), + Procurement (inline), + BOM (inline), + QIP (inline), + NCR (inline),
+    + Work Order (inline), + SCAR (inline), + Production Schedule (inline), + Inventory Replenishment (inline), + Production Cost Variance (inline multi-tab drawer NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser SMOKE TEST PASSED + PCV drawer 6 tabs verified (Overview/Cost Elements/Variance Drivers/Root Causes/Mitigation/Approvals) + status-aware footer actions verified on Unfavorable (Draft Mitigation Plan) + Critical (Escalate to CFO) + Favorable (Update Standard Cost) + Dashboard + MRP + Production Schedule regression check
+- MANUFACTURING + SUPPLY CHAIN + FINANCE LOOP CLOSED: Sales Order → BOM → Production Schedule → Work Order → Inventory Replenishment (MRP) → Procurement → Supplier Quality → QIP → NCR → SCAR → Supplier Scorecard → Production Cost Variance (Ind AS 2 journal entries) → Standard Cost Update → back to BOM
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use standalone production build with NODE_OPTIONS=--max-old-space-size=768 and clean chrome + next-server processes between batches)
+  - agent-browser `eval --stdin` consistently crashes server via OOM (cgroup memory limit hit when full SPA bundle loads) — use `agent-browser click "@ref"` and `agent-browser snapshot` instead, restart server between batches
+  - Stale next-server processes can occupy port 3001 across QA sessions — must `pkill -9 -f "next-server"` + `pkill -9 chrome` between batches
+  - `localhost` resolves to IPv6 (::1) which standalone server doesn't bind to — must use `127.0.0.1` explicitly
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Customer SLA, Vendor, Supplier Quality, Procurement, BOM, QIP, NCR, WO, SCAR, PS, MRP, and PCV drawers are inline in module files (not extracted to shared) — 12 inline drawers total, refactor candidate for future round
+- PRIORITY NEXT:
+  1. Extract 12 inline drawers to shared/*-detail-drawer.tsx (consistency refactor)
+  2. Add 3-way match (PO ↔ GRN ↔ Invoice) auto-verification dashboard for Procurement module
+  3. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  4. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  5. Consolidate inline mock data from all 34 detail drawers into mock-data.ts (refactor)
+  6. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  7. CSS audit: 980+ classes — consolidate 181 pre-existing duplicates
+  8. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  9. Multi-warehouse switching for dock scheduler & yard management (currently fixed to Chennai Hub)
+  10. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  11. Predictive model retraining trigger UI (currently display-only)
+  12. Vendor contract document management (upload/store contract PDFs)
+  13. Customer contract document management (mirror vendor contract module)
+  14. Add Demand Forecasting module (statistical + ML forecasting on top of MRP demand history — extends MRP module)
+  15. Add Inventory Valuation module (FIFO/LIFO/Weighted Average/Special Cost layer — links to PCV for standard cost roll input)

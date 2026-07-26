@@ -22,6 +22,7 @@ tests=(
   "NCR / CAPA|Non-Conformance"
   "Work Orders|Work Order"
   "Prod. Schedule|Production Schedule"
+  "Cost Variance|Production Cost Variance"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"
