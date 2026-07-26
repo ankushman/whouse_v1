@@ -4151,3 +4151,141 @@ Updated Project Status (Post Round 42):
   12. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
   13. Predictive model retraining trigger UI (currently display-only)
   14. Yard tractor pairing logic (currently shows tractor+trailer as independent vehicles)
+
+---
+Task ID: 43
+Agent: Main (Cron Review - Round 43)
+Task: YardDetailDrawer (closes yard drawer gap) + new Vendor Management module with inline scorecard drawer + 30+ CSS micro-interactions + agent-browser QA verified
+
+Work Log:
+- Read worklog.md — project at Round 42 (commit d488bc6), 24 modules, 22 detail drawers, 620+ CSS classes, 0 TS errors, lint/build clean, agent-browser QA passed prior round.
+- Verified baseline: `bun run lint` (0 errors), `bun run build` (success, 18.6s), `npx tsc --noEmit` (0 src/ errors).
+- agent-browser LIVE QA at start: confirmed Yard nav → view rendered; clicked first Yard row → got "Opening detail" toast (placeholder); confirmed the drawer gap.
+- Strategic choice: Closed the only remaining drawer gap (Yard vehicle drill-down — was showing a "coming soon" toast), added a brand new operational module (Vendor Management with inline scorecard sheet), and added 30+ new CSS micro-interactions. Both new features verified live via agent-browser.
+
+NEW FEATURE 1: YardDetailDrawer (~970 lines, 6 sub-tabs, file: src/components/shared/yard-detail-drawer.tsx)
+  - 6 sub-tabs: Overview / Cargo / Inspection / Telemetry / Communications / Timeline
+  - Overview tab: Vehicle & Driver info cards (avatar, reg, type, carrier, arrival + Call Driver button), Zone & dock assignment card (icon + label + description + slot → dock chain), Cargo Summary (3 metrics: units / weight / value + manifest ref), 3-card KPI mini grid (Yard Dwell / Inspection progress / Demurrage risk)
+  - Cargo tab: Cargo Manifest list (3-5 SKUs per vehicle, each with sku/description/qty/weight/value, icon + hover-bg), Cargo Value by SKU BarChart (purple bars with custom tooltip)
+  - Inspection tab: 8-item Gate-In Inspection Checklist (pass/fail/pending with icons + detail per item, summary counter, overall status verdict: PASSED/IN PROGRESS/FAILED), Gate-In Photos grid (6 placeholder tiles with hover-zoom + labels: Vehicle Front/Rear, Cargo Door, Seal Close-up, Driver ID, Reg Plate), Inspector card (avatar + name + warehouse)
+  - Telemetry tab: 60-min Real-Time Telemetry AreaChart (speed + fuel with gradients), 4-card gauge grid (Fuel %, Speed km/h, RTLS Tag ID with active status, Battery %), Reefer Temperature Log LineChart (only for reefer type — set point -25°C with tolerance ±2°C)
+  - Communications tab: 4-message chat-style thread (driver/yard/system with avatar colors + bubble alignment + timestamps), Quick Reply composer with input + 4 quick-reply chips
+  - Timeline tab: 6-event lifecycle (gate-in → parked → yard-move → detention-start → dock-assign → gate-out) with color-coded dots + event icons + timestamps + actor attribution + pending indicator
+  - Status-aware theming: 8 status variants (arriving/gate-in/parked/yard-move/awaiting-dock/dock-assigned/gate-out/detention) with matching gradients, borders, icon colors
+  - Header: 4 hero stat grid (Wait Time / Detention / Zone+Slot / Dock)
+  - Footer actions: Export CSV / Print Pass / Call Driver + contextual Assign Dock (awaiting-dock) OR Yard Move (parked) OR Release (dock-assigned) OR Gate-Out (parked+assigned)
+  - Deterministic mock data: timeline (status-conditional), inspection (8 items, hash-bit pass/fail), cargo (3-5 SKUs from 8-item pool), telemetry (12 points with status-aware), comms (4 messages) — all seeded by vehicle ID hash
+  - Hooks correctly placed BEFORE early return
+  - Wired into yard-management-view.tsx: vehicle table rows now clickable (cursor-pointer + onClick), Eye button now opens drawer (was toast.info placeholder), drawer state in parent (detailOpen + detailVehicle)
+
+NEW FEATURE 2: Vendor Management Module (~1135 lines, file: src/components/modules/vendor-management-view.tsx)
+  - New navigation item: "Vendor Management" (icon: Factory, group: analytics, between Employees and Productivity)
+  - 6 hero KPI cards: Total Vendors / YTD Spend / Avg On-Time / Avg Quality / Avg Rating / Active POs — each with trend indicator, severity color, secondary metric
+  - 30-Day Procurement Spend Trend AreaChart (daily spend in ₹L with weekend factor + custom Y-axis formatter)
+  - Vendor Categories donut PieChart (5 categories: Raw Materials / Components / Packaging / Logistics / Services) with color-coded legend showing count + spend per category
+  - Top 5 Vendors by YTD Spend leaderboard (rank badges 1-3 with medal colors, avatar with initials, rating+status badges, click-to-open-detail)
+  - Vendor Performance Comparison BarChart (top 8 vendors — On-Time/Quality/Rating bars side-by-side)
+  - Vendor Master table with 16 mock records: Code / Name+City / Tier+Status badges / Category / Rating / On-Time / Quality / Defect / YTD Spend / Active POs / Eye
+  - 5 tabs: All (16) / Preferred (5) / Active (8) / Review (2) / Suspended (1)
+  - 3 filters: Tier (3 options), Status (4 options), Category (5 options) + free-text search
+  - 4 vendor tiers (Tier-1/Tier-2/Tier-3) with strategic/approved/transactional labels
+  - 4 vendor statuses (preferred/active/review/suspended) with full theming (icon, color, bg, border)
+  - 5 vendor categories with full theming (icon, color, bg, pieColor)
+  - CSV export with all 16 vendors (full 23-field set)
+  - Refresh + Onboard action buttons with toast feedback
+  - All animations: vendor-kpi-enter (6 staggered), vendor-chart-enter (hover lift), vendor-row-in (with hover accent bar gradient), vendor-rank-glow (top-3 medal pulse)
+
+NEW FEATURE 3: Inline Vendor Scorecard Drawer (~250 lines, embedded in vendor-management-view.tsx)
+  - Uses shadcn Sheet pattern with full theming (status-aware gradient + sheen animation)
+  - Header: Avatar with initials, vendor name, status badge, tier badge, category badge, city/state
+  - Hero stat grid: Rating / On-Time / Quality / YTD Spend
+  - Body sections: Primary Contact card (avatar + email + phone + Call/Email buttons), 12-Month Performance Trend LineChart (on-time vs quality), Contract info card (Payment Terms, Lead Time SLA vs Actual, Onboarded, Last Audit, Certifications), Procurement info card (Total POs, Active POs, YTD Spend, Lifetime Spend), Vendor Scorecard with 4 weighted metrics (On-Time 30%, Quality 30%, Defect inverted 20%, Lead Time Compliance 20%) + Overall Composite Score
+  - Footer actions: Export Scorecard / Schedule Audit / Renew Contract
+
+NEW FEATURE 4: Navigation + Icon Map updates
+  - Added 'vendor-management' to navItems in app-store.ts (group: analytics, roles: super_admin/executive/regional_manager/warehouse_manager)
+  - Imported Factory icon in app-layout.tsx and added to iconMap
+  - Imported VendorManagementView in app/page.tsx and added to viewMap
+
+CSS: Added 30+ new micro-interaction classes in globals.css (lines 9005-9315, +310 lines):
+  - 11 for Yard Detail Drawer: yard-drawer-sheen, yard-icon-pulse, yard-stat-enter (staggered 4), yard-body-enter, yard-card-enter (hover lift), yard-tab-switch, yard-msg-in, yard-timeline-in, yard-photo-pop (hover scale), yard-drawer-header (gradient underline + ::after)
+  - 13+ for Vendor Management: vendor-kpi-enter (6 staggered), vendor-chart-enter (hover lift), vendor-row-in (with ::before accent bar gradient scaleY on hover), vendor-drawer-sheen, vendor-icon-pulse, vendor-stat-enter, vendor-body-enter, vendor-card-enter, vendor-drawer-header, vendor-star-shimmer (animated gradient on rating), vendor-status-pulse (review/suspended), vendor-search-focus (ring expand), vendor-score-fill (progress bar fill), vendor-rank-glow (top-3 medal)
+
+QA Verification (agent-browser LIVE TEST):
+  - agent-browser navigate http://localhost:3000/ → ✓ page loaded
+  - agent-browser snapshot → ✓ "Vendor Management" + "Yard Management" nav items visible
+  - agent-browser click Vendor Management → ✓ view rendered (heading "Vendor Management", "30-Day Procurement Spend Trend", "Top 5 Vendors by YTD Spend", vendor names: Tata Steel, Bosch Auto)
+  - agent-browser eval --stdin → clicked first vendor row
+  - agent-browser snapshot → ✓ VendorDetailSheet opened (dialog "Bosch Auto Components India Preferred", "Tier-1 (Strategic)", "18 active POs")
+  - Verified sections: PRIMARY CONTACT, 12-MONTH PERFORMANCE TREND, Payment Terms, Active POs, VENDOR SCORECARD, Overall Composite Score
+  - Closed dialog, navigated to Yard Management
+  - agent-browser eval --stdin → clicked first yard vehicle row
+  - agent-browser snapshot → ✓ YardDetailDrawer opened (dialog "TN-01-AB-1234 Parked NORMAL")
+  - Verified 6 tabs visible: Overview, Cargo (5), Inspection, Telemetry, Communications, Timeline (4)
+  - agent-browser click "Cargo" tab → ✓ ENG-CYL-2231, SNS-PROX-1180 SKUs visible, "CARGO VALUE BY SKU (₹)" chart visible
+  - agent-browser click "Telemetry" tab → ✓ "REAL-TIME TELEMETRY (LAST 60 MIN)", FUEL, SPEED (0 km/h), RTLS TAG, BATTERY sections rendered
+  - All 3 new features (Yard drawer + Vendor module + Vendor scorecard drawer) verified working
+
+Static Verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (maintained from Round 42)
+
+Stage Summary:
+- 8 files changed (2 new + 6 modified), +3715 lines
+- 1 NEW DETAIL DRAWER: YardDetailDrawer (~970 lines, 6 sub-tabs) — closes the Yard module drill-down gap
+- 1 NEW MODULE: Vendor Management (~1135 lines, 6 KPIs + 4 charts + Top-5 leaderboard + 16-vendor master table with 5 tabs and 3 filters)
+- 1 NEW INLINE DRAWER: VendorDetailSheet (~250 lines, embedded in module) — scorecard with weighted metrics + composite score
+- 1 NEW NAV ITEM + ICON: "Vendor Management" with Factory icon
+- 30+ new CSS micro-interaction classes (11 yard + 13+ vendor)
+- 3 views updated: yard-management-view (rows clickable, drawer wired), app-layout (Factory icon), page.tsx (viewMap)
+- DETAIL DRAWERS NOW: 23 total
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓, Yard ✓ NEW
+- MODULES NOW: 25 (was 24 — added Vendor Management)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser LIVE verification PASSED (Vendor nav → view + row click → drawer; Yard nav → view + row click → drawer + tab switches)
+
+---
+Updated Project Status (Post Round 43):
+- STATUS: STABLE + YARD DRAWER COMPLETE + NEW VENDOR MANAGEMENT MODULE + agent-browser QA PASSED
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (25): All previous 24 + Vendor Management (NEW)
+- SHARED COMPONENTS (54+): All previous 53 + YardDetailDrawer (NEW)
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (650+): 620+ previous + 30+ new (11 yard + 13+ vendor)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (23 — UNIVERSAL COVERAGE COMPLETE INCLUDING YARD):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓, Yard ✓
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser LIVE verification passed (Vendor + Yard drawers both verified)
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use `bun run build` for verification)
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - agent-browser requires `eval --stdin` (heredoc) for any JS with quotes/special chars — inline `eval "..."` only works for simple expressions
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Vendor drawer is inline in module file (not extracted to shared) — minor refactor candidate for next round
+  - Vendor drawer doesn't yet have multi-tab structure like other drawers — single-page layout with all sections
+- PRIORITY NEXT:
+  1. Extract VendorDetailSheet to shared/vendor-detail-drawer.tsx with multi-tab structure (matches other drawer patterns)
+  2. Add Customer SLA Performance module (cross-customer SLA dashboard)
+  3. Add Supplier Quality Scorecard module (vendor quality deep-dive — could merge with Vendor drawer)
+  4. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  5. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  6. Consolidate inline mock data from all 23 detail drawers into mock-data.ts (refactor)
+  7. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  8. CSS audit: 650+ classes — consolidate 181 pre-existing duplicates
+  9. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  10. Multi-warehouse switching for dock scheduler & yard management (currently fixed to Chennai Hub)
+  11. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  12. Predictive model retraining trigger UI (currently display-only)
+  13. Yard tractor-trailer pairing logic (currently shows tractor+trailer as independent vehicles)
+  14. Vendor contract document management (upload/store contract PDFs)

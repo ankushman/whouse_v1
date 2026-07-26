@@ -58,3 +58,4 @@ export { OperationsOverviewDetailDrawer, type OperationsWarehouseSummary } from 
 export { SLACountdownDetailDrawer, type SLADetailItem } from "./sla-countdown-detail-drawer"
 export { WarehouseMapDetailDrawer, type WarehouseMapDetail } from "./warehouse-map-detail-drawer"
 export { ReturnsDetailDrawer, type ReturnDetailItem, type ReturnStatus, type ReturnReason, type Disposition } from "./returns-detail-drawer"
+export { YardDetailDrawer, type YardVehicleDetail, type YardZone, type VehicleStatus, type VehicleType } from "./yard-detail-drawer"

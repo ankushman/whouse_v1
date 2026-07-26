@@ -9000,3 +9000,316 @@ html.theme-transition body {
 .yard-row-in button:hover {
   animation: yard-assign-glow 800ms ease-out;
 }
+
+/* ============================================================================
+   ROUND 43 — Yard Detail Drawer + Vendor Management micro-interactions
+   ============================================================================ */
+
+/* ── Yard Detail Drawer ───────────────────────────────────────────────────── */
+
+@keyframes yard-drawer-sheen {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(100%); opacity: 0.5; }
+}
+.yard-drawer-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  animation: yard-drawer-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes yard-icon-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 currentColor; }
+  50% { transform: scale(1.04); box-shadow: 0 0 0 6px transparent; }
+}
+.yard-icon-pulse {
+  animation: yard-icon-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes yard-stat-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.yard-stat-enter > * {
+  animation: yard-stat-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.yard-stat-enter > *:nth-child(1) { animation-delay: 60ms; }
+.yard-stat-enter > *:nth-child(2) { animation-delay: 120ms; }
+.yard-stat-enter > *:nth-child(3) { animation-delay: 180ms; }
+.yard-stat-enter > *:nth-child(4) { animation-delay: 240ms; }
+
+@keyframes yard-body-enter {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.yard-body-enter {
+  animation: yard-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes yard-card-enter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.yard-card-enter {
+  animation: yard-card-enter 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.yard-card-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes yard-tab-switch {
+  from { opacity: 0.6; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.yard-tab-switch {
+  animation: yard-tab-switch 200ms ease-out;
+}
+
+@keyframes yard-msg-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.yard-msg-in {
+  animation: yard-msg-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes yard-timeline-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.yard-timeline-in {
+  animation: yard-timeline-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes yard-photo-pop {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+.yard-photo-pop {
+  animation: yard-photo-pop 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  transition: transform 220ms ease;
+}
+.yard-photo-pop:hover {
+  transform: scale(1.06);
+}
+
+.yard-drawer-header {
+  position: relative;
+  overflow: hidden;
+}
+.yard-drawer-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.5) 30%,
+    rgba(16, 185, 129, 0.5) 70%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Vendor Management ────────────────────────────────────────────────────── */
+
+@keyframes vendor-kpi-enter {
+  from { opacity: 0; transform: translateY(10px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.vendor-kpi-enter > * {
+  animation: vendor-kpi-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.vendor-kpi-enter > *:nth-child(1) { animation-delay: 60ms; }
+.vendor-kpi-enter > *:nth-child(2) { animation-delay: 120ms; }
+.vendor-kpi-enter > *:nth-child(3) { animation-delay: 180ms; }
+.vendor-kpi-enter > *:nth-child(4) { animation-delay: 240ms; }
+.vendor-kpi-enter > *:nth-child(5) { animation-delay: 300ms; }
+.vendor-kpi-enter > *:nth-child(6) { animation-delay: 360ms; }
+.vendor-kpi-enter > *:hover {
+  transform: translateY(-2px);
+  transition: transform 200ms ease;
+}
+
+@keyframes vendor-chart-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vendor-chart-enter {
+  animation: vendor-chart-enter 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.vendor-chart-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -14px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes vendor-row-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vendor-row-in {
+  animation: vendor-row-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.vendor-row-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg, #8b5cf6 0%, #3b82f6 100%);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 240ms ease-out;
+}
+.vendor-row-in {
+  position: relative;
+}
+.vendor-row-in:hover::before {
+  transform: scaleY(1);
+}
+
+/* Vendor drawer animations */
+@keyframes vendor-drawer-sheen {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(100%); opacity: 0.5; }
+}
+.vendor-drawer-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  animation: vendor-drawer-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes vendor-icon-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 currentColor; }
+  50% { transform: scale(1.04); box-shadow: 0 0 0 6px transparent; }
+}
+.vendor-icon-pulse {
+  animation: vendor-icon-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes vendor-stat-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vendor-stat-enter > * {
+  animation: vendor-stat-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.vendor-stat-enter > *:nth-child(1) { animation-delay: 60ms; }
+.vendor-stat-enter > *:nth-child(2) { animation-delay: 120ms; }
+.vendor-stat-enter > *:nth-child(3) { animation-delay: 180ms; }
+.vendor-stat-enter > *:nth-child(4) { animation-delay: 240ms; }
+
+@keyframes vendor-body-enter {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.vendor-body-enter {
+  animation: vendor-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes vendor-card-enter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.vendor-card-enter {
+  animation: vendor-card-enter 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.vendor-card-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.18);
+}
+
+.vendor-drawer-header {
+  position: relative;
+  overflow: hidden;
+}
+.vendor-drawer-header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.5) 30%,
+    rgba(59, 130, 246, 0.5) 70%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* Vendor rating star shimmer */
+@keyframes vendor-star-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.vendor-star-shimmer {
+  background: linear-gradient(90deg,
+    #f59e0b 0%,
+    #fbbf24 50%,
+    #f59e0b 100%);
+  background-size: 200% 100%;
+  animation: vendor-star-shimmer 2.4s linear infinite;
+}
+
+/* Vendor status pill pulse for review/suspended */
+@keyframes vendor-status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 4px transparent; }
+}
+.vendor-status-pulse {
+  animation: vendor-status-pulse 1.8s ease-in-out infinite;
+}
+
+/* Vendor search focus */
+@keyframes vendor-search-focus {
+  from { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5); }
+  to { box-shadow: 0 0 0 4px rgba(139, 92, 246, 0); }
+}
+.vendor-search-focus:focus {
+  animation: vendor-search-focus 600ms ease-out;
+}
+
+/* Vendor scorecard progress bar fill animation */
+@keyframes vendor-score-fill {
+  from { width: 0; }
+}
+.vendor-card-enter [role="progressbar"] > div {
+  animation: vendor-score-fill 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Vendor rank badge glow for top-3 */
+@keyframes vendor-rank-glow {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 3px transparent; }
+}
+.vendor-row-in:nth-child(-n+3) span:first-child {
+  animation: vendor-rank-glow 2s ease-in-out infinite;
+}
+
+/* Yard tab transition on tab content change */
+.yard-tab-switch + * {
+  animation: yard-body-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Vendor tab content fade */
+.vendor-row-in ~ * {
+  transition: opacity 200ms ease;
+}

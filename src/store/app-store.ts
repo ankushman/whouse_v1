@@ -16,6 +16,7 @@ export const navItems: NavItem[] = [
   { id: 'warehouse-map', label: 'Warehouse Map', icon: 'MapPin', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'equipment', label: 'Equipment', icon: 'Cog', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'employees', label: 'Employees', icon: 'Users', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
+  { id: 'vendor-management', label: 'Vendor Management', icon: 'Factory', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'productivity', label: 'Productivity', icon: 'TrendingUp', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'cost-analytics', label: 'Cost Analytics', icon: 'DollarSign', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'predictive-analytics', label: 'Predictive Analytics', icon: 'Brain', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },

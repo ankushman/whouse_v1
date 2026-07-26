@@ -65,6 +65,7 @@ import {
 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast-helper"
 import { cn } from "@/lib/utils"
+import { YardDetailDrawer, type YardVehicleDetail } from "@/components/shared/yard-detail-drawer"
 import {
   AreaChart,
   Area,
@@ -229,6 +230,29 @@ export function YardManagementView() {
   const [warehouseFilter, setWarehouseFilter] = useState<string>("all")
   const [selectedTab, setSelectedTab] = useState("all")
   const [assignDockFor, setAssignDockFor] = useState<string | null>(null)
+  const [detailOpen, setDetailOpen] = useState(false)
+  const [detailVehicle, setDetailVehicle] = useState<YardVehicleDetail | null>(null)
+
+  const openDetail = (v: typeof yardVehicles[0]) => {
+    setDetailVehicle({
+      id: v.id,
+      regNumber: v.regNumber,
+      type: v.type,
+      driver: v.driver,
+      carrier: v.carrier,
+      zone: v.zone,
+      slot: v.slot,
+      status: v.status,
+      waitMinutes: v.waitMinutes,
+      detentionMinutes: v.detentionMinutes,
+      dockAssignment: v.dockAssignment,
+      warehouse: v.warehouse,
+      shipmentRef: v.shipmentRef,
+      arrivalTime: v.arrivalTime,
+      priority: v.priority,
+    })
+    setDetailOpen(true)
+  }
 
   const filteredVehicles = useMemo(() => {
     return yardVehicles.filter((v) => {
@@ -739,7 +763,7 @@ export function YardManagementView() {
                       key={v.id}
                       className="cursor-pointer hover:bg-accent/40 transition-colors yard-row-in"
                       style={{ animationDelay: `${idx * 40}ms` }}
-                      onClick={() => toast.info("Opening detail", `${v.regNumber} — full vehicle detail drawer coming soon.`)}
+                      onClick={() => openDetail(v)}
                     >
                       <TableCell>
                         <div className="flex flex-col gap-0.5">
@@ -848,7 +872,7 @@ export function YardManagementView() {
                             variant="ghost"
                             size="icon"
                             className="h-7 w-7"
-                            onClick={(e) => { e.stopPropagation(); toast.info("Opening detail", `${v.regNumber} — full vehicle detail drawer coming soon.`) }}
+                            onClick={(e) => { e.stopPropagation(); openDetail(v) }}
                           >
                             <Eye className="h-3 w-3" />
                           </Button>
@@ -869,6 +893,13 @@ export function YardManagementView() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Universal detail drawer — drill-down from vehicle rows */}
+      <YardDetailDrawer
+        open={detailOpen}
+        onOpenChange={setDetailOpen}
+        vehicle={detailVehicle}
+      />
     </div>
   )
 }
