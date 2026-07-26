@@ -24,6 +24,10 @@ import { DockSchedulerView } from "@/components/modules/dock-scheduler-view"
 import { WarehouseMapView } from "@/components/modules/warehouse-map-view"
 import { SLACountdownView } from "@/components/modules/sla-countdown-view"
 import { OperationsOverviewView } from "@/components/modules/operations-overview-view"
+import { PredictiveAnalyticsView } from "@/components/modules/predictive-analytics-view"
+import { ComplianceAuditView } from "@/components/modules/compliance-audit-view"
+import { EnergySustainabilityView } from "@/components/modules/energy-sustainability-view"
+import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -47,6 +51,10 @@ const viewMap: Record<string, React.ComponentType> = {
   "dock-scheduler": DockSchedulerView,
   "warehouse-map": WarehouseMapView,
   "sla-countdown": SLACountdownView,
+  "predictive-analytics": PredictiveAnalyticsView,
+  "compliance-audit": ComplianceAuditView,
+  "energy-sustainability": EnergySustainabilityView,
+  "shift-handover": ShiftHandoverView,
 }
 
 

@@ -3588,3 +3588,98 @@ Updated Project Status (Post Round 37 - Complete):
   10. Add WarehouseMapDetailDrawer (drill-down from warehouse map)
   11. Real-time WebSocket integration for live telemetry (currently deterministic mock)
   12. Multi-warehouse switching for dock scheduler (currently fixed to Chennai Hub)
+
+---
+Task ID: 38
+Agent: Main (Cron Review - Round 38)
+Task: Autonomous dev cycle — add 4 new enterprise modules + reusable SignaturePad + 40+ CSS micro-interactions
+
+Work Log:
+- Read worklog.md — confirmed project state at Round 37 (commit ef79a78), lint clean
+- Verified build & lint baseline before starting new work (both pass)
+- Upgraded DataTable `getRowKey` to be used consistently across selection / expand / React.Fragment keys (was previously only used for expandKey). Falls back to internal `getRowId` heuristic when consumer doesn't supply getRowKey. Critical for tables with composite keys.
+- NEW MODULE: Predictive Analytics (`src/components/modules/predictive-analytics-view.tsx`, ~620 lines)
+  - 4 hero KPI cards with confidence bars + AI insight tooltips
+  - Critical/Warning/Model Confidence summary strip with severity-specific glows
+  - 4-tab interface: Forecast / Anomalies / Scenarios / Model
+  - Forecast tab: 28-day chart with historical actuals (solid area) + ML forecast (dashed line) + 80% confidence band shading + reference line at today
+  - Anomalies tab: 5 expandable anomaly cards with expected/observed/deviation metrics + AI recommendations
+  - Scenarios tab: 4-scenario what-if bar chart + per-scenario metric breakdown cards
+  - Model tab: 4 model quality metrics (MAPE, R², training data, latency) + 3-layer ensemble architecture explainer
+- NEW MODULE: Compliance & Audit Trail (`src/components/modules/compliance-audit-view.tsx`, ~570 lines)
+  - 4 summary cards (overall compliance score, open findings, critical findings, audit events)
+  - 6 compliance framework cards: ISO 9001, ISO 27001, DPDP Act 2023, SOX-equivalent, OSH Code 2020, GST Compliance — each with score, target, status, findings breakdown
+  - Risk distribution histogram (4 bands: low/medium/high/critical, color-coded)
+  - Composite score radial gauge
+  - Immutable audit trail table (12 entries) with 9 action types, 3 outcomes, risk scoring, IP tracking, actor avatars
+  - Filter by action type + outcome + full-text search
+  - Click any row → detail panel with timestamp/actor/IP/risk/notes
+- NEW MODULE: Energy & Sustainability (`src/components/modules/energy-sustainability-view.tsx`, ~600 lines)
+  - 6 hero ESG KPI cards: Energy Intensity, Carbon Footprint, Water Reuse, Waste Diversion, Renewable Share, LEED Sites — each with target + change %
+  - 4 hero summary cards: total kWh (with grid vs solar breakdown), carbon footprint (with trees-equivalent), water consumption, efficiency score (with radial gauge)
+  - 24-hour energy consumption chart (total area + solar area + grid line overlay)
+  - Energy source mix donut chart (4 sources: grid/solar/renewable grid/diesel)
+  - 30-day carbon emissions stacked bar chart (Scope 1 + Scope 2 + offset line)
+  - 6 site-level energy performance cards with efficiency scores, hover-revealed AI recommendations (peak load shifting, solar expansion, water reuse, HVAC optimization)
+  - Net-Zero Roadmap timeline (2024-2032) with progress bars and current-milestone pulse animation
+- NEW MODULE: Shift Handover with Digital Signature (`src/components/modules/shift-handover-view.tsx`, ~480 lines)
+  - 6 KPI cards (tasks completed, escalations, on-time rate, shipments, pick accuracy, safety incidents)
+  - 12-task handover checklist with category badges (operations/safety/compliance/equipment), animated slide-in rows, status cycle: pending → in-progress → done
+  - Handover metadata card (outgoing/incoming shift + supervisor + warehouse + handover ID)
+  - Free-text handover notes textarea
+  - Two SVG-based digital signature pads (outgoing + incoming supervisor) with:
+    - Pointer event capture (mouse/touch/pen)
+    - SVG path string serialization (M/L commands)
+    - Signature stroke draw animation
+    - "Sign above the line" placeholder pulse
+    - Confirm button → locks pad + records fake blockchain hash
+    - Clear/Confirm actions
+  - Finalize Handover CTA card with prerequisite checklist status (only enabled when all tasks done AND both signatures captured) + ready-state pulse animation
+  - Past handover history (4 entries) with hash-chained signature hashes
+- NEW REUSABLE COMPONENT: SignaturePad (`src/components/shared/signature-pad.tsx`, ~190 lines)
+  - Controlled/uncontrolled modes
+  - SVG viewBox-based coordinate mapping (responsive)
+  - Pointer capture for cross-device support
+  - Exposes path via onChange/onConfirm for persistence
+  - Optional label, strokeColor, strokeWidth, disabled, showActions props
+- CSS: appended 40+ new micro-interaction classes to `src/app/globals.css` (~512 new lines, total now 7815)
+  - Predictive: kpi-card-tilt, predictive-kpi-card (shimmer sweep), predictive-card-glow + 3 severity variants (critical/warning/info), anomaly-card-hover, scenario-card-hover, model-metric-card
+  - Compliance: compliance-domain-card, 4 summary card hover effects with top-border gradient line
+  - Energy: 4 hero card variants, esg-kpi-card, energy-card-tilt, energy-btn-gradient (shimmer sweep on hover)
+  - Handover: handover-kpi-card, handover-task-slide-in animation, handover-status-badge gradient, handover-finalize-ready pulse animation, past-handover-row hover translate
+  - Signature: signature-pad-container (lined paper background), signature-pad-active glow, signature-stroke-draw animation, signature-placeholder-pulse
+  - Generic utilities: focus-ring-primary, btn-press (active scale-down), scroll-reveal-up/fade/scale, stagger-item, glow-ring-active, number-flash, tab-indicator-slide, card-lift, depth-shadow-sm/md/lg, hover-brighten, gradient-border-animated, transition-smooth, skeleton-shimmer, animate-breathe, underline-grow, fade-in-down, glass-frosted, hover-grow, animate-spin-slow, animate-pulse-subtle
+- Navigation wiring:
+  - Added 4 new nav items to `src/store/app-store.ts`: predictive-analytics (analytics group), energy-sustainability (analytics group), compliance-audit (system group), shift-handover (system group) — all roles: super_admin/executive/regional_manager (shift-handover also warehouse_manager/supervisor)
+  - Wired 4 new view imports + viewMap entries in `src/app/page.tsx`
+  - Added 4 new icons (Brain, Leaf, ShieldCheck, ArrowRightLeft) to iconMap in both `src/components/layout/app-layout.tsx` and `src/components/layout/mobile-bottom-nav.tsx`
+- Verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully in 17.8s, 7 static pages generated
+  - `npx tsc --noEmit` — pre-existing errors in 4 files (reports-detail-drawer, shipment-tracking-table, transportation-detail-drawer, warehouse-kpi-comparison) — NONE introduced this round
+
+Stage Summary:
+- 4 NEW VIEW MODULES: Predictive Analytics, Compliance & Audit, Energy & Sustainability, Shift Handover
+- 1 NEW REUSABLE COMPONENT: SignaturePad (SVG path capture, cross-device, controlled/uncontrolled)
+- 1 COMPONENT UPGRADE: DataTable getRowKey now consistently applied across selection + expand + React keys
+- CSS UTILITIES (460+): 412+ previous + 40+ new (predictive glows, energy hero cards, signature pad animations, scroll reveals, focus rings, button press, stagger helpers, glass frosted, etc.)
+- VIEW MODULES (22): All previous 18 + 4 new (predictive-analytics, compliance-audit, energy-sustainability, shift-handover)
+- SHARED COMPONENTS (45): All previous 44 + SignaturePad (NEW)
+- NAV ITEMS (22): All previous 18 + 4 new
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully, 7 routes generated
+- KNOWN ISSUES (carried forward, no new issues introduced):
+  - Dev server OOM risk in sandbox (workaround: use `bun run build` for verification)
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Pre-existing TypeScript errors in 4 files (reports-detail-drawer, shipment-tracking-table, transportation-detail-drawer, warehouse-kpi-comparison) — Next.js skips type validation in build, lint passes
+- PRIORITY NEXT:
+  1. Fix the 4 pre-existing TypeScript errors (shipment-tracking-table Column render signature mismatch + reports/transportation drawer `typeIcon` JSX element vs component confusion + warehouse-kpi-comparison `unknown` cast)
+  2. Consolidate inline mock data (predictive-analytics / compliance-audit / energy-sustainability / shift-handover) into `src/data/mock-data.ts`
+  3. Build Predictive Detail Drawer (drill-down from anomaly card → full root-cause analysis view)
+  4. Build Compliance Detail Drawer (drill-down from framework card → full findings list + remediation plan)
+  5. Energy Detail Drawer (drill-down from site card → 24h appliance-level breakdown)
+  6. Add Supabase persistence for audit log entries (currently in-memory mock)
+  7. Add real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  8. CSS audit: 460+ classes — consolidate 181 pre-existing duplicates

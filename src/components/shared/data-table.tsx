@@ -235,22 +235,31 @@ export function DataTable<T extends Record<string, any>>({
   )
 
   // --- Selection ---
+  // Stable row identity — prefers consumer-provided getRowKey over internal fallback.
+  // This is critical for tables whose rows lack a stable `id` field (e.g. aggregated
+  // data, composite-key rows). Falls back to getRowId heuristic.
+  const resolveRowKey = useCallback(
+    (row: T, fallbackIndex: number): string =>
+      getRowKey ? getRowKey(row) : getRowId(row, fallbackIndex),
+    [getRowKey]
+  )
+
   const isAllSelected =
     paginatedData.length > 0 &&
     paginatedData.every((row, i) =>
-      selectedRowIds.has(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
+      selectedRowIds.has(resolveRowKey(row, (safeCurrentPage - 1) * safePageSize + i))
     )
 
   const isSomeSelected =
     !isAllSelected &&
     paginatedData.some((row, i) =>
-      selectedRowIds.has(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
+      selectedRowIds.has(resolveRowKey(row, (safeCurrentPage - 1) * safePageSize + i))
     )
 
   const selectedRows = useMemo(() => {
     if (selectedRowIds.size === 0) return []
-    return sortedData.filter((row, i) => selectedRowIds.has(getRowId(row, i)))
-  }, [selectedRowIds, sortedData])
+    return sortedData.filter((row, i) => selectedRowIds.has(resolveRowKey(row, i)))
+  }, [selectedRowIds, sortedData, resolveRowKey])
 
   // Fire onSelectionChange when selection changes (stabilized via ref)
   useEffect(() => {
@@ -274,16 +283,16 @@ export function DataTable<T extends Record<string, any>>({
       const next = new Set(prev)
       if (isAllSelected) {
         paginatedData.forEach((row, i) => {
-          next.delete(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
+          next.delete(resolveRowKey(row, (safeCurrentPage - 1) * safePageSize + i))
         })
       } else {
         paginatedData.forEach((row, i) => {
-          next.add(getRowId(row, (safeCurrentPage - 1) * safePageSize + i))
+          next.add(resolveRowKey(row, (safeCurrentPage - 1) * safePageSize + i))
         })
       }
       return next
     })
-  }, [isAllSelected, paginatedData, safeCurrentPage, safePageSize])
+  }, [isAllSelected, paginatedData, safeCurrentPage, safePageSize, resolveRowKey])
 
   const clearSelection = useCallback(() => {
     setSelectedRowIds(new Set())
@@ -531,10 +540,10 @@ export function DataTable<T extends Record<string, any>>({
               paginatedData.map((row, rowIndex) => {
                 const originalIndex =
                   (safeCurrentPage - 1) * safePageSize + rowIndex
-                const rowId = getRowId(row, originalIndex)
+                const rowId = resolveRowKey(row, originalIndex)
                 const isSelected = selectedRowIds.has(rowId)
 
-                const expandKey = getRowKey ? getRowKey(row) : rowId
+                const expandKey = rowId
                 const isExpanded = hasExpandableRows && expandedRowKeys.has(expandKey)
 
                 return (

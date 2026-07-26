@@ -7301,3 +7301,515 @@ html.theme-transition body {
 .route-cargo-row:hover {
   transform: translateX(2px);
 }
+
+/* ============================================================================
+   ROUND 38 — Predictive Analytics / Compliance / Energy / Shift Handover
+   40+ new micro-interaction classes
+   ============================================================================ */
+
+/* --- KPI card hover lift with 3D tilt ------------------------------------- */
+.kpi-card-tilt {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.kpi-card-tilt:hover {
+  transform: translateY(-3px) rotateX(1.5deg);
+  box-shadow: 0 12px 32px -8px hsl(var(--primary) / 0.18), 0 4px 10px -3px hsl(var(--foreground) / 0.08);
+}
+
+/* --- Predictive KPI card shimmer effect on hover -------------------------- */
+.predictive-kpi-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.predictive-kpi-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, hsl(var(--primary) / 0.06) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+}
+.predictive-kpi-card:hover::before {
+  transform: translateX(100%);
+}
+.predictive-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -6px hsl(var(--primary) / 0.15);
+}
+
+/* --- Predictive glow variants --------------------------------------------- */
+.predictive-card-glow {
+  position: relative;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+.predictive-card-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.predictive-card-glow:hover::after {
+  opacity: 1;
+}
+.predictive-critical-glow::after {
+  box-shadow: inset 0 0 0 1px hsl(var(--destructive) / 0.4), 0 0 28px -4px hsl(var(--destructive) / 0.3);
+}
+.predictive-warning-glow::after {
+  box-shadow: inset 0 0 0 1px rgb(245 158 11 / 0.4), 0 0 28px -4px rgb(245 158 11 / 0.3);
+}
+.predictive-info-glow::after {
+  box-shadow: inset 0 0 0 1px rgb(16 185 129 / 0.4), 0 0 28px -4px rgb(16 185 129 / 0.3);
+}
+
+/* --- Anomaly card hover effect -------------------------------------------- */
+.anomaly-card-hover {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.2s ease;
+}
+.anomaly-card-hover:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 20px -6px hsl(var(--foreground) / 0.12);
+}
+
+/* --- Scenario card hover (predictive scenarios) --------------------------- */
+.scenario-card-hover {
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+.scenario-card-hover:hover {
+  transform: translateY(-1px);
+  background-color: hsl(var(--muted) / 0.6);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+/* --- Model metric card ---------------------------------------------------- */
+.model-metric-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.model-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -4px hsl(var(--primary) / 0.15);
+}
+
+/* --- Subtle pulse for "live" indicators ----------------------------------- */
+@keyframes pulse-subtle-anim {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.7; }
+}
+.animate-pulse-subtle {
+  animation: pulse-subtle-anim 2.4s ease-in-out infinite;
+}
+
+/* --- Compliance domain card hover ----------------------------------------- */
+.compliance-domain-card {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+}
+.compliance-domain-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px -8px hsl(var(--primary) / 0.18);
+}
+
+/* --- Compliance summary cards (top row) ----------------------------------- */
+.compliance-score-card,
+.compliance-findings-card,
+.compliance-critical-card,
+.compliance-events-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.compliance-score-card::before,
+.compliance-findings-card::before,
+.compliance-critical-card::before,
+.compliance-events-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.compliance-score-card:hover,
+.compliance-findings-card:hover,
+.compliance-critical-card:hover,
+.compliance-events-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px hsl(var(--foreground) / 0.1);
+}
+.compliance-score-card:hover::before,
+.compliance-findings-card:hover::before,
+.compliance-critical-card:hover::before,
+.compliance-events-card:hover::before {
+  opacity: 1;
+}
+
+/* --- Energy hero cards ---------------------------------------------------- */
+.energy-card-hero,
+.carbon-card-hero,
+.water-card-hero,
+.efficiency-card-hero {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+.energy-card-hero:hover,
+.carbon-card-hero:hover,
+.water-card-hero:hover,
+.efficiency-card-hero:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -10px hsl(var(--primary) / 0.22);
+}
+
+/* --- ESG KPI card --------------------------------------------------------- */
+.esg-kpi-card {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.esg-kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--primary) / 0.3);
+  box-shadow: 0 6px 16px -4px hsl(var(--primary) / 0.12);
+}
+
+/* --- Site energy card with tilt ------------------------------------------- */
+.energy-card-tilt {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.2s ease;
+}
+.energy-card-tilt:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 28px -6px hsl(var(--primary) / 0.18);
+}
+
+/* --- Energy AI Optimize button gradient ----------------------------------- */
+.energy-btn-gradient {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, rgb(16 185 129) 100%);
+  border: none;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.energy-btn-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.2) 50%, transparent 65%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+.energy-btn-gradient:hover::before {
+  transform: translateX(100%);
+}
+.energy-btn-gradient:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px -4px hsl(var(--primary) / 0.4);
+}
+
+/* --- Handover KPI card ---------------------------------------------------- */
+.handover-kpi-card {
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.handover-kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+/* --- Handover task row slide-in ------------------------------------------- */
+@keyframes handover-task-slide-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.handover-task-row {
+  animation: handover-task-slide-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Handover status badge pulse ------------------------------------------ */
+.handover-status-badge {
+  background: linear-gradient(135deg, rgb(245 158 11 / 0.08), rgb(168 85 247 / 0.08));
+  border-color: rgb(245 158 11 / 0.3);
+}
+.handover-status-badge:hover {
+  background: linear-gradient(135deg, rgb(245 158 11 / 0.15), rgb(168 85 247 / 0.15));
+}
+
+/* --- Signature pad interactions ------------------------------------------- */
+.signature-pad-container {
+  background:
+    linear-gradient(hsl(var(--background)), hsl(var(--background))),
+    repeating-linear-gradient(0deg, transparent, transparent 19px, hsl(var(--muted) / 0.4) 19px, hsl(var(--muted) / 0.4) 20px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.signature-pad-active {
+  border-style: solid !important;
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.12), inset 0 0 12px hsl(var(--primary) / 0.04);
+}
+
+/* --- Signature stroke animation when path appears ------------------------- */
+@keyframes signature-stroke-draw {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+.signature-stroke-anim {
+  stroke-dasharray: 1000;
+  animation: signature-stroke-draw 0.6s ease-out;
+}
+
+/* --- Signature placeholder fade ------------------------------------------- */
+@keyframes signature-placeholder-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.8; }
+}
+.signature-placeholder-text {
+  animation: signature-placeholder-pulse 2.5s ease-in-out infinite;
+}
+
+/* --- Signature card confirmation state ------------------------------------ */
+.signature-card-outgoing,
+.signature-card-incoming {
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* --- Handover finalize card ready state ----------------------------------- */
+.handover-finalize-card {
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.handover-finalize-ready {
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.3), 0 8px 24px -6px hsl(var(--primary) / 0.2);
+  animation: handover-ready-pulse 2.5s ease-in-out infinite;
+}
+@keyframes handover-ready-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px hsl(var(--primary) / 0.3), 0 8px 24px -6px hsl(var(--primary) / 0.2); }
+  50%      { box-shadow: 0 0 0 2px hsl(var(--primary) / 0.4), 0 12px 32px -6px hsl(var(--primary) / 0.3); }
+}
+
+/* --- Past handover row hover ---------------------------------------------- */
+.past-handover-row {
+  transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.past-handover-row:hover {
+  transform: translateX(3px);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
+/* --- Generic focus ring (primary) ----------------------------------------- */
+.focus-ring-primary {
+  outline: none;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.focus-ring-primary:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary) / 0.5);
+  border-color: hsl(var(--primary) / 0.6);
+}
+
+/* --- Button press effect (subtle scale-down on click) --------------------- */
+.btn-press {
+  transition: transform 0.1s ease;
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* --- Scroll-reveal utility classes ---------------------------------------- */
+@keyframes scroll-reveal-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.scroll-reveal-up {
+  animation: scroll-reveal-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes scroll-reveal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.scroll-reveal-fade {
+  animation: scroll-reveal-fade 0.6s ease-out both;
+}
+
+@keyframes scroll-reveal-scale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.scroll-reveal-scale {
+  animation: scroll-reveal-scale 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Glow ring for "live" / "active" cards -------------------------------- */
+@keyframes glow-ring-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
+  50%      { box-shadow: 0 0 0 6px hsl(var(--primary) / 0); }
+}
+.glow-ring-active {
+  animation: glow-ring-pulse 2s ease-in-out infinite;
+}
+
+/* --- Stagger helper: apply with animationDelay inline --------------------- */
+.stagger-item {
+  opacity: 0;
+  animation: scroll-reveal-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --- Number counter flash (when value updates) ---------------------------- */
+@keyframes number-flash-anim {
+  0%   { color: hsl(var(--primary)); }
+  100% { color: inherit; }
+}
+.number-flash {
+  animation: number-flash-anim 0.6s ease-out;
+}
+
+/* --- Tab indicator slide -------------------------------------------------- */
+.tab-indicator-slide {
+  position: relative;
+  transition: color 0.2s ease;
+}
+.tab-indicator-slide[data-state="active"]::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  transform: translateX(-50%);
+  animation: tab-indicator-fade-in 0.3s ease-out;
+}
+@keyframes tab-indicator-fade-in {
+  from { opacity: 0; transform: translateX(-50%) scaleX(0.6); }
+  to   { opacity: 1; transform: translateX(-50%) scaleX(1); }
+}
+
+/* --- Card lift on hover (generic, for cards in dense grids) --------------- */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -2px hsl(var(--foreground) / 0.08);
+}
+
+/* --- Shadow utilities for depth ------------------------------------------- */
+.depth-shadow-sm { box-shadow: 0 1px 2px hsl(var(--foreground) / 0.05); }
+.depth-shadow-md { box-shadow: 0 4px 10px -2px hsl(var(--foreground) / 0.08); }
+.depth-shadow-lg { box-shadow: 0 10px 24px -6px hsl(var(--foreground) / 0.12); }
+
+/* --- Hover-brighten utility (for icons / status badges) ------------------- */
+.hover-brighten {
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.hover-brighten:hover {
+  filter: brightness(1.15);
+  transform: scale(1.05);
+}
+
+/* --- Animated gradient border (for premium cards) ------------------------- */
+.gradient-border-animated {
+  position: relative;
+  background: hsl(var(--card));
+  border-radius: inherit;
+}
+.gradient-border-animated::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.4), transparent 50%, hsl(var(--primary) / 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+.gradient-border-animated:hover::before {
+  opacity: 1;
+}
+
+/* --- Smooth color transition for theme-aware elements --------------------- */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Skeleton shimmer (re-usable for loading states) ---------------------- */
+@keyframes skeleton-shimmer-anim {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted) / 0.4) 0%,
+    hsl(var(--muted) / 0.7) 50%,
+    hsl(var(--muted) / 0.4) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer-anim 1.4s ease-in-out infinite;
+}
+
+/* --- Subtle "breathe" animation for status dots --------------------------- */
+@keyframes breathe-anim {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50%      { transform: scale(1.15); opacity: 1; }
+}
+.animate-breathe {
+  animation: breathe-anim 2.8s ease-in-out infinite;
+}
+
+/* --- Underline-grow (for nav links / tabs) -------------------------------- */
+.underline-grow {
+  position: relative;
+}
+.underline-grow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.underline-grow:hover::after,
+.underline-grow[data-state="active"]::after {
+  transform: scaleX(1);
+}
+
+/* --- Fade-in-down utility (alternative to slide-in-from-top) -------------- */
+@keyframes fade-in-down-anim {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in-down {
+  animation: fade-in-down-anim 0.4s ease-out both;
+}
+
+/* --- Glass-effect card (frosted) ------------------------------------------ */
+.glass-frosted {
+  backdrop-filter: blur(8px);
+  background: hsl(var(--card) / 0.65);
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+/* --- Hover-grow icon effect ----------------------------------------------- */
+.hover-grow {
+  transition: transform 0.2s ease;
+}
+.hover-grow:hover {
+  transform: scale(1.1);
+}
+
+/* --- Spinner ring (loading state) ----------------------------------------- */
+@keyframes spin-360 {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-360 2s linear infinite;
+}

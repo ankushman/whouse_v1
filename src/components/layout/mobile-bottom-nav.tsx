@@ -24,6 +24,10 @@ import {
   PlusCircle,
   ClipboardList,
   Activity,
+  Brain,
+  Leaf,
+  ShieldCheck,
+  ArrowRightLeft,
 } from "lucide-react"
 import { useAppStore, navItems } from "@/store/app-store"
 import { cn } from "@/lib/utils"
@@ -60,6 +64,10 @@ const moreIconMap: Record<string, React.ComponentType<{ className?: string }>> =
   Settings,
   LayoutGrid,
   MapPin,
+  Brain,
+  Leaf,
+  ShieldCheck,
+  ArrowRightLeft,
 }
 
 // ──────────────────────────────────────────────────────
