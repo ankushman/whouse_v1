@@ -2,10 +2,12 @@
 
 import { useState, useMemo, useCallback } from "react"
 import { outboundShipments, warehouses } from "@/data/mock-data"
+import type { OutboundShipment } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table"
+import { OutboundDetailDrawer } from "@/components/shared/outbound-detail-drawer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -16,6 +18,7 @@ import {
   CheckCircle2,
   Download,
   RefreshCw,
+  Eye,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -51,6 +54,13 @@ type OutboundRow = (typeof outboundShipments)[number]
 export function OutboundView() {
   const [statusFilter, setStatusFilter] = useState("all")
   const [warehouseFilter, setWarehouseFilter] = useState("all")
+  const [drawerShipment, setDrawerShipment] = useState<OutboundShipment | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const openDrawer = useCallback((shipment: OutboundShipment) => {
+    setDrawerShipment(shipment)
+    setDrawerOpen(true)
+  }, [])
 
   const filtered = useMemo(() => {
     return outboundShipments.filter((s) => {
@@ -195,7 +205,14 @@ export function OutboundView() {
       label: "Update Status",
       icon: RefreshCw,
       onClick: (rows) => {
-        // Batch update status — ready for API integration
+        if (rows.length > 0) openDrawer(rows[0])
+      },
+    },
+    {
+      label: "View Details",
+      icon: Eye,
+      onClick: (rows) => {
+        if (rows.length > 0) openDrawer(rows[0])
       },
     },
   ], [])
@@ -273,8 +290,16 @@ export function OutboundView() {
         searchPlaceholder="Search shipments..."
         selectable
         batchActions={batchActions}
+        onRowClick={(row) => openDrawer(row)}
         pageSize={8}
         showCount
+      />
+
+      {/* Outbound Shipment Detail Drawer */}
+      <OutboundDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        shipment={drawerShipment}
       />
     </div>
   )

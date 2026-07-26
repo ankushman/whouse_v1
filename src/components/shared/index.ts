@@ -43,3 +43,5 @@ export { ShipmentDetailDrawer, type ShipmentDetailRow, type ShipmentStatus } fro
 export { WarehouseDetailDrawer } from "./warehouse-detail-drawer"
 export { PullToRefreshContainer } from "./pull-to-refresh-container"
 export { CostDetailDrawer, type CostCategory, type CostDetailDrawerProps } from "./cost-detail-drawer"
+export { InboundDetailDrawer, type InboundDetailDrawerProps } from "./inbound-detail-drawer"
+export { OutboundDetailDrawer, type OutboundDetailDrawerProps } from "./outbound-detail-drawer"

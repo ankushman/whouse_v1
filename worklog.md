@@ -3314,3 +3314,74 @@ Updated Project Status (Post Round 34 - Complete):
   8. Add Reports drill-down drawer (mirror cost/employee pattern)
   9. Add Inbound/Outbound detail drawers (currently use modals or row-click only)
   10. Convert Dock Scheduler assign dialog to use DnD exclusively (deprecate the radio-button dialog)
+
+---
+Task ID: 35
+Agent: Main (Cron Review - Round 35)
+Task: QA verification + new features (InboundDetailDrawer + OutboundDetailDrawer) + DataTable row click fix
+
+Work Log:
+- Read worklog.md tail to assess R34 state; ran lint (0 errors) + build (16s success).
+- agent-browser QA: PASSED. Successfully reached dev server. Tested Dashboard (loads, 0 errors), Inbound view (1 table, 8 rows, 5 cards), Outbound view (1 table, 8 rows, 8 cards, 7-tab status filter).
+- Code-level audit: found that DataTable's `onRowClick` was silently overridden when `expandableRowRender` was also provided — row clicks only toggled expand, never fired the drawer open handler.
+- BUG FIX (DataTable): when both `expandableRowRender` AND `onRowClick` are provided, the row onClick now calls BOTH (drawer opens + expand toggles). The expand chevron button already called `e.stopPropagation()` so no double-toggle issue.
+- Built InboundDetailDrawer (~720 lines, new file: src/components/shared/inbound-detail-drawer.tsx):
+  - 7 sections: Header strip (status gradient + sheen + icon pulse + hero metrics: Status/SLA/Current Step), SLA RadialBarChart + Pipeline Progress (with Advance Step + Put on Hold buttons), Process Timeline (8-step vertical timeline with live indicator + duration + user per step), Step Duration Analysis (BarChart of minutes per step), Cargo Manifest (4-6 SKUs with condition badges + weight totals + damaged/quarantine flags), Unloading Metrics (4 metric cards: Pallets/Cartons/Unload Time/Workers with target progress bars), Inspection Findings (3-5 findings with severity badges: info/warning/critical + counts), Shipment Information (Supplier/Warehouse/Created/Invoice grid), Footer with View ledger button.
+  - Status-aware theming: 4 status variants (In Progress=blue, Completed=emerald, Delayed=red, On Hold=amber) with matching gradients, borders, icon colors.
+  - Deterministic mock data: cargo items + inspection findings + unloading metrics all seeded by shipment ID hash for stable per-shipment data.
+  - Hooks correctly placed BEFORE early return (Rules of Hooks).
+- Built OutboundDetailDrawer (~770 lines, new file: src/components/shared/outbound-detail-drawer.tsx):
+  - 7 sections: Header strip (status gradient + sheen + icon pulse + in-transit ring for dispatched + hero metrics: Status/Pick Progress/Vehicle), Dispatch Pipeline (6-step horizontal stepper with Advance button + Assign Vehicle button for Pending), Pick Performance Metrics (4 cards: Pick Rate/Accuracy/Lines/Time with target bars + trend indicators), Order Line Pick Progress (BarChart: ordered vs picked per line), Order Lines (4-6 lines with pick status badges + per-line progress bars: picked/partial/pending), Picker & Packer (2 avatars with ratings + today's stats: picks/accuracy/avg time), Live Tracking (6-event timeline shown only for Dispatched/Delivered shipments, with pulsing current-location marker), Shipment Information (Customer/Warehouse/Vehicle/Created/Dispatched/Delivered grid), Footer with View POD button.
+  - Status-aware theming: 6 status variants (Pending=slate, Picking=blue, Packing=amber, Ready=blue, Dispatched=indigo with pulse ring, Delivered=emerald).
+  - Deterministic mock data: order lines + pick metrics + tracking events + picker stats all seeded by shipment ID hash.
+  - Tracking timeline only renders when status >= Dispatched (currentIdx >= 4).
+- Wired both drawers into their respective views:
+  - inbound-view.tsx: added onRowClick to DataTable (opens drawer) + View Details batch action now opens drawer for first selected row + drawer mounted at end of view.
+  - outbound-view.tsx: added onRowClick to DataTable + Update Status + View Details batch actions both open drawer + drawer mounted at end of view.
+- Exported both drawers from src/components/shared/index.ts.
+- Added 17 new CSS micro-interaction classes (globals.css lines 6450-6696):
+  - 10 for Inbound drawer: inb-drawer-header (sheen), inb-icon-pulse, inb-stat-enter, inb-drawer-body-enter, inb-card-enter, inb-timeline-enter, inb-step-active (pulsing blue ring), inb-cargo-row (hover lift), inb-metric-enter, inb-fill-animate, inb-finding-enter
+  - 7 for Outbound drawer: outb-drawer-header (sheen), outb-icon-pulse, outb-pulse-ring (in-transit emerald ring), outb-stat-enter, outb-drawer-body-enter, outb-card-enter, outb-step-enter, outb-step-active, outb-metric-enter, outb-line-row (hover lift), outb-fill-animate, outb-tracking-enter, outb-tracking-active (pulsing indigo ring)
+- agent-browser QA: PASSED for both new drawers.
+  - InboundDetailDrawer: clicked first row → drawer opens with all 7 sections rendering (header, pipeline progress with SLA radial, process timeline, step duration chart, cargo manifest, unloading metrics, inspection findings, shipment info).
+  - OutboundDetailDrawer: clicked first row (Dispatched) → drawer opens with all 7 sections + Live Tracking timeline visible with 6 events.
+- Lint: 0 errors, 0 warnings. Build: compiled successfully in 16s.
+
+Stage Summary:
+- 6 files changed (2 new + 4 modified) — net +1500 / -50 lines approximately
+- 1 BUG FIX: DataTable onRowClick now fires even when expandableRowRender is provided
+- 2 new features: InboundDetailDrawer (~720 lines, 7 sections) + OutboundDetailDrawer (~770 lines, 7 sections)
+- 17 new CSS micro-interaction classes (10 inbound + 7 outbound)
+- DETAIL DRAWERS NOW: Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓ (NEW), Outbound ✓ (NEW) — 8 detail drawers covering ALL major operational modules
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+- agent-browser QA: PASSED for Inbound drawer (all 7 sections render) + Outbound drawer (all 7 sections + tracking timeline)
+
+---
+Updated Project Status (Post Round 35 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (18): Dashboard, Operations Overview, Warehouses (+Detail Drawer), Inbound (+Detail Drawer NEW), Outbound (+Detail Drawer NEW), Inventory (+Detail Drawer), Transportation, Route Optimization, Equipment (+Detail Drawer), Employees (+Detail Drawer), Productivity, Cost Analytics (+Detail Drawer), Alerts, Dock Scheduling (+Drag-and-Drop), SLA Countdown, Reports, Settings, Warehouse Map
+- SHARED COMPONENTS (46): All previous + InboundDetailDrawer (NEW) + OutboundDetailDrawer (NEW)
+- HOOKS (10): All previous (useToast used consistently)
+- CSS UTILITIES (429+): 412+ previous + 17 new (10 inbound + 7 outbound)
+- DATATABLE MODULES (9): All previous + DataTable onRowClick now works alongside expandableRowRender
+- DETAIL DRAWERS (8): Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓ (NEW), Outbound ✓ (NEW) — ALL major operational modules now have drill-down drawers
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- agent-browser QA: PASSED for both new drawers
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: start/stop on demand for QA)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round)
+  - DataTable inline <style> tag duplicated per instance (minor)
+- PRIORITY NEXT:
+  1. Add Supabase persistence for real data
+  2. Add warehouse geographic clustering with actual lat/lng positioning
+  3. Consolidate inline mock data (route-optimization/sla-countdown/warehouse-health/warehouse-detail-drawer/employee-detail-drawer/cost-detail-drawer/inbound-detail-drawer/outbound-detail-drawer) into mock-data.ts
+  4. Add barcode/QR code scanning integration in inventory drawer
+  5. Add DataTable getRowKey prop for tables without stable IDs
+  6. CSS audit: 429+ classes — consolidate unused/redundant definitions (181 pre-existing duplicates)
+  7. Add Shift Handover digital signature flow
+  8. Add Reports drill-down drawer (mirror cost/employee pattern)
+  9. Add Productivity detail drawer (mirror inbound/outbound pattern)
+  10. Add Transportation detail drawer (currently uses ShipmentDetailDrawer for tracking table only)

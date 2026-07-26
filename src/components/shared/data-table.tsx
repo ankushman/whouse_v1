@@ -553,7 +553,12 @@ export function DataTable<T extends Record<string, any>>({
                     }}
                     onClick={
                       hasExpandableRows
-                        ? () => toggleExpand(expandKey)
+                        ? (e: React.MouseEvent<HTMLTableRowElement>) => {
+                            // If a custom onRowClick is provided, call it too (in addition to toggling expand).
+                            // Clicking the expand button itself already calls stopPropagation, so we won't double-toggle.
+                            if (onRowClick) onRowClick(row)
+                            toggleExpand(expandKey)
+                          }
                         : onRowClick
                           ? () => onRowClick(row)
                           : undefined

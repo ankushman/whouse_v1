@@ -6445,3 +6445,252 @@ html.theme-transition body {
 .dock-dnd-hint {
   animation: dock-dnd-hint-anim 2s ease-in-out infinite;
 }
+
+/* ==========================================================================
+   Round 35 — Inbound + Outbound Detail Drawer micro-interactions
+   ========================================================================== */
+
+/* Inbound drawer header sheen */
+@keyframes inb-drawer-sheen {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.inb-drawer-header {
+  background-image: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: inb-drawer-sheen 14s ease-in-out infinite;
+}
+
+/* Inbound icon pulse */
+@keyframes inb-icon-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50%      { box-shadow: 0 0 0 6px transparent; opacity: 0.92; }
+}
+.inb-icon-pulse {
+  animation: inb-icon-pulse-anim 2.8s ease-out infinite;
+}
+
+/* Inbound stat enter */
+@keyframes inb-stat-enter-anim {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.inb-stat-enter {
+  animation: inb-stat-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Inbound body enter */
+@keyframes inb-drawer-body-enter-anim {
+  0%   { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.inb-drawer-body-enter {
+  animation: inb-drawer-body-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Inbound card enter */
+@keyframes inb-card-enter-anim {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.inb-card-enter {
+  animation: inb-card-enter-anim 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Inbound timeline enter */
+@keyframes inb-timeline-enter-anim {
+  0%   { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.inb-timeline-enter {
+  animation: inb-timeline-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Inbound step active pulse */
+@keyframes inb-step-active-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  50%      { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0); }
+}
+.inb-step-active {
+  animation: inb-step-active-anim 1.8s ease-out infinite;
+}
+
+/* Inbound cargo row */
+@keyframes inb-cargo-row-anim {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.inb-cargo-row {
+  animation: inb-cargo-row-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.inb-cargo-row:hover {
+  background-color: var(--accent, rgba(59, 130, 246, 0.04));
+  transform: translateX(2px);
+}
+
+/* Inbound metric enter */
+@keyframes inb-metric-enter-anim {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.inb-metric-enter {
+  animation: inb-metric-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Inbound fill animate */
+@keyframes inb-fill-animate-anim {
+  0%   { width: 0; }
+  100% { width: var(--final-width, 100%); }
+}
+.inb-fill-animate {
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Inbound finding enter */
+@keyframes inb-finding-enter-anim {
+  0%   { opacity: 0; transform: translateX(8px) scale(0.98); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.inb-finding-enter {
+  animation: inb-finding-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─── Outbound drawer ─── */
+
+/* Outbound drawer header sheen */
+@keyframes outb-drawer-sheen {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.outb-drawer-header {
+  background-image: linear-gradient(
+    110deg,
+    transparent 0%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: outb-drawer-sheen 14s ease-in-out infinite;
+}
+
+/* Outbound icon pulse */
+@keyframes outb-icon-pulse-anim {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50%      { box-shadow: 0 0 0 6px transparent; opacity: 0.92; }
+}
+.outb-icon-pulse {
+  animation: outb-icon-pulse-anim 2.8s ease-out infinite;
+}
+
+/* Outbound pulse ring (for in-transit indicator) */
+@keyframes outb-pulse-ring-anim {
+  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.outb-pulse-ring {
+  animation: outb-pulse-ring-anim 1.6s ease-out infinite;
+}
+
+/* Outbound stat enter */
+@keyframes outb-stat-enter-anim {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.outb-stat-enter {
+  animation: outb-stat-enter-anim 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Outbound body enter */
+@keyframes outb-drawer-body-enter-anim {
+  0%   { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.outb-drawer-body-enter {
+  animation: outb-drawer-body-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Outbound card enter */
+@keyframes outb-card-enter-anim {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.outb-card-enter {
+  animation: outb-card-enter-anim 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Outbound step enter */
+@keyframes outb-step-enter-anim {
+  0%   { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.outb-step-enter {
+  animation: outb-step-enter-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Outbound step active */
+@keyframes outb-step-active-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  50%      { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0); }
+}
+.outb-step-active {
+  animation: outb-step-active-anim 1.8s ease-out infinite;
+}
+
+/* Outbound metric enter */
+@keyframes outb-metric-enter-anim {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.outb-metric-enter {
+  animation: outb-metric-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Outbound line row */
+@keyframes outb-line-row-anim {
+  0%   { opacity: 0; transform: translateX(-6px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.outb-line-row {
+  animation: outb-line-row-anim 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.outb-line-row:hover {
+  background-color: rgba(99, 102, 241, 0.04);
+  transform: translateX(2px);
+}
+
+/* Outbound fill animate */
+.outb-fill-animate {
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Outbound tracking enter */
+@keyframes outb-tracking-enter-anim {
+  0%   { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.outb-tracking-enter {
+  animation: outb-tracking-enter-anim 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Outbound tracking active (current location) */
+@keyframes outb-tracking-active-anim {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.5); }
+  50%      { box-shadow: 0 0 0 5px rgba(99, 102, 241, 0); }
+}
+.outb-tracking-active {
+  animation: outb-tracking-active-anim 1.5s ease-out infinite;
+}

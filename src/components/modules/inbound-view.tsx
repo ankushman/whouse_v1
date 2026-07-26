@@ -2,10 +2,12 @@
 
 import { useState, useMemo, useCallback } from "react"
 import { inboundShipments, warehouses } from "@/data/mock-data"
+import type { InboundShipment } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { DataTable, type Column, type BatchAction } from "@/components/shared/data-table"
+import { InboundDetailDrawer } from "@/components/shared/inbound-detail-drawer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -52,6 +54,13 @@ type InboundRow = (typeof inboundShipments)[number]
 export function InboundView() {
   const [typeFilter, setTypeFilter] = useState("all")
   const [warehouseFilter, setWarehouseFilter] = useState("all")
+  const [drawerShipment, setDrawerShipment] = useState<InboundShipment | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const openDrawer = useCallback((shipment: InboundShipment) => {
+    setDrawerShipment(shipment)
+    setDrawerOpen(true)
+  }, [])
 
   const filtered = useMemo(() => {
     return inboundShipments.filter((s) => {
@@ -161,7 +170,7 @@ export function InboundView() {
       label: "View Details",
       icon: Eye,
       onClick: (rows) => {
-        // Detail view — ready for API integration
+        if (rows.length > 0) openDrawer(rows[0])
       },
     },
   ]
@@ -297,9 +306,17 @@ export function InboundView() {
         batchActions={batchActions}
         expandableRowRender={expandableRowRender}
         getRowKey={(row) => row.id}
+        onRowClick={(row) => openDrawer(row)}
         showColumnToggle
         pageSize={8}
         showCount
+      />
+
+      {/* Inbound Shipment Detail Drawer */}
+      <InboundDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        shipment={drawerShipment}
       />
     </div>
   )
