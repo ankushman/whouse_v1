@@ -3385,3 +3385,102 @@ Updated Project Status (Post Round 35 - Complete):
   8. Add Reports drill-down drawer (mirror cost/employee pattern)
   9. Add Productivity detail drawer (mirror inbound/outbound pattern)
   10. Add Transportation detail drawer (currently uses ShipmentDetailDrawer for tracking table only)
+
+---
+Task ID: 36
+Agent: Main (Cron Review - Round 36)
+Task: QA verification + 3 new detail drawers (Productivity + Transportation + Reports) + 31 CSS micro-interactions
+
+Work Log:
+- Read worklog.md tail to assess R35 state; project at commit 8ca3b51, 11 detail drawers (Inventory/Equipment/Shipment/Warehouse/Employee/Cost/Inbound/Outbound), 18 modules, 429+ CSS classes.
+- Started dev server (Ready in 683ms, GET / 200 in 6.6s). Lint: 0 errors. Build: compiled successfully.
+- agent-browser QA: PASSED. Smoke-tested Dashboard (loads, 0 errors), Productivity (Top Performers section visible), Reports (6 report cards + recent reports table), Transportation (vehicle DataTable with status tabs).
+- Code-level audit: confirmed DataTable's onRowClick + expandableRowRender fix from R35 still works; verified no stale closures, all views have proper null guards for drawer state (drawerEmp/drawerVehicle/drawerReport all initialized to null and only set on user action).
+
+NEW FEATURE: ProductivityDetailDrawer (~830 lines, 7 sections, file: src/components/shared/productivity-detail-drawer.tsx)
+  - 7 sections: Header strip (avatar pulse + hero metrics: Productivity/Attendance/Tasks), KPI grid with radial chart (overtime/error rate/attendance/rank + Recognize & Promote buttons), Weekly productivity trend LineChart with target line, Task category breakdown BarChart + 5 KPI mini-cards (Picking/Packing/Loading/Inspection/Cycle Count), Skills matrix (7 skills with progress bars + certification badges), Achievements & Badges (3-6 deterministic achievements with icons: Trophy/Target/ShieldCheck/Medal/Calendar/Flame), Recent shift history (5-day table with on-time/overtime/late badges), Employee info grid + footer.
+  - Status-aware theming: 3 status variants (Top=emerald, Low=amber, Normal=blue) with matching gradients, borders, icon colors.
+  - Deterministic mock data: weekly trend, task categories, skills, achievements, shift history all seeded by employee ID hash for stable per-employee data.
+  - Hooks correctly placed BEFORE early return (Rules of Hooks).
+  - Actions: Recognize (toast), Promote (top performers only), Export CSV (KPI summary), Export shift history CSV, View full profile.
+  - Wired into productivity-view.tsx: Top Performers list converted from <div> to clickable <button> with hover lift + ring focus + chevron icon. Card header gets "View All" button. Drawer mounted at end of view.
+
+NEW FEATURE: TransportationDetailDrawer (~750 lines, 8 sections, file: src/components/shared/transportation-detail-drawer.tsx)
+  - 8 sections: Header strip (truck icon + in-transit pulse ring + maintenance wrench badge + hero metrics: Status/Deliveries/ETA), Delivery performance ring (route progress % + OTIF + current location + next stop with live badge), Route & Stops timeline (5 stops: pickup/hub/delivery/warehouse with completed/current/pending status + arrival/departure/distance), Distance between stops BarChart, Vehicle telemetry (4 metrics: Fuel/Engine Temp/Tire Pressure/Mileage with target bars + warning/critical states), Driver info card (avatar, license, rating, today/week hours, call button), Trip event timeline (6 events: pre-trip inspection/cargo loaded/departed/border crossed/refuel/arrival), Cargo manifest (4-6 SKUs with fragile/hazardous/cold-chain type badges + weight totals), Vehicle info grid + footer.
+  - Status-aware theming: 4 status variants (in-transit=blue with pulse ring, available=emerald, maintenance=amber with wrench badge, delayed=red).
+  - Deterministic mock data: route stops (5), vehicle health (4 metrics), driver info, trip events (6), cargo manifest (4-6) all seeded by vehicle ID hash.
+  - Hooks correctly placed BEFORE early return.
+  - Actions: Assign Route (only when not in-transit), Contact Driver (toast with phone number), Export cargo manifest CSV, Live map preview.
+  - Wired into transportation-view.tsx: added drawer state + openDrawer callback, DataTable onRowClick opens drawer, 'Track Selected' batch action now opens drawer for first selected row (was previously a no-op comment), drawer mounted at end of view.
+
+NEW FEATURE: ReportsDetailDrawer (~620 lines, 7 sections, file: src/components/shared/reports-detail-drawer.tsx)
+  - 7 sections: Header strip (report icon + Ready/Failed status badge + hero metrics: Sections/Data Rows/Recipients), Key metrics snapshot (4 KPIs with delta arrows + Regenerate/Share buttons), Visual preview chart (varies by report type — PieChart for cost, AreaChart for exec/mis, BarChart for warehouse, LineChart for inventory/transport), Report sections list (4-6 sections with type icons: table/chart/kpis/text), Distribution list (3-5 recipients with viewed/pending/bounced status badges + initials avatars), Schedule history (5 recent runs with completed/processing/failed status + triggered-by icons), Report info grid + footer.
+  - Status-aware theming: 3 status variants (Ready=emerald, Failed=red, Stale=amber).
+  - Deterministic mock data: sections (varies per report ID — exec/warehouse/mis/inventory/transport/cost each have unique section templates), distribution list, schedule history, KPIs, preview chart data — all seeded by report ID hash.
+  - Hooks correctly placed BEFORE early return.
+  - Actions: Regenerate (toast), Share (toast), Export KPIs CSV, Configure schedule, Full preview.
+  - Wired into reports-view.tsx: added drawer state + openDrawer callback, Eye/Preview button on each report card now opens drawer (was previously a no-op). Drawer mounted at end of view. Added optional `color` property to Report interface for future theming.
+
+CSS: Added 31 new micro-interaction classes in globals.css (lines 6697-7002):
+  - 11 for Productivity drawer: prod-drawer-header (sheen), prod-icon-pulse, prod-stat-enter, prod-drawer-body-enter, prod-card-enter, prod-task-enter, prod-skill-enter, prod-fill-animate, prod-achievement-enter, prod-shift-row (hover lift), prod-perf-card (used in view)
+  - 11 for Transportation drawer: trans-drawer-header (sheen), trans-icon-pulse, trans-pulse-ring (in-transit ring), trans-stat-enter, trans-drawer-body-enter, trans-card-enter, trans-stop-enter, trans-stop-active (pulsing blue ring), trans-metric-enter, trans-fill-animate, trans-event-enter, trans-cargo-row (hover lift)
+  - 9 for Reports drawer: rpt-drawer-header (sheen), rpt-icon-pulse, rpt-stat-enter, rpt-drawer-body-enter, rpt-card-enter, rpt-kpi-enter, rpt-section-row (hover lift), rpt-recipient-row (hover lift), rpt-history-row (hover lift)
+
+Exported all 3 new drawers from src/components/shared/index.ts.
+
+Lint: 0 errors, 0 warnings.
+Build: compiled successfully in 25.8s (Turbopack).
+agent-browser QA: PASSED for all 3 drawers.
+  - ProductivityDetailDrawer: clicked Rajesh Kumar performer button → drawer opens with all 7 sections rendering (header with avatar pulse, KPI grid with radial chart, weekly trend LineChart, task category BarChart, skills matrix with 7 progress bars, achievements with Trophy icon, shift history table, employee info grid).
+  - TransportationDetailDrawer: clicked TN-04-AB-1234 vehicle row → drawer opens with all 8 sections rendering (header with in-transit pulse ring, delivery performance ring, route & stops timeline with 5 stops, distance BarChart, vehicle telemetry 4 metrics, driver info card, trip events timeline, cargo manifest with type badges).
+  - ReportsDetailDrawer: clicked Executive Summary Eye/Preview button → drawer opens with all 7 sections rendering (header with Ready badge, KPI snapshot with delta arrows, visual preview AreaChart, sections list, distribution list with recipient avatars, schedule history with status badges, report info grid).
+
+Screenshots saved to /home/z/my-project/download/:
+  - r36-productivity-drawer.png
+  - r36-transport-drawer.png
+  - r36-reports-drawer.png
+
+Stage Summary:
+- 8 files changed (3 new + 5 modified) — net +2,916 / -8 lines
+- 3 new features: ProductivityDetailDrawer (~830 lines, 7 sections) + TransportationDetailDrawer (~750 lines, 8 sections) + ReportsDetailDrawer (~620 lines, 7 sections)
+- 31 new CSS micro-interaction classes (11 productivity + 11 transportation + 9 reports)
+- 3 views updated to wire drawers in (productivity-view, transportation-view, reports-view)
+- 1 batch action upgraded from no-op to functional: 'Track Selected' in transportation now opens drawer
+- 1 button upgraded from no-op to functional: 'Eye/Preview' in reports now opens drawer
+- Top Performers list in productivity converted from passive div to clickable button with hover lift + ring focus
+- DETAIL DRAWERS NOW: 11 total (Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓, Productivity ✓ NEW, Transportation ✓ NEW, Reports ✓ NEW) — ALL major operational modules now have drill-down drawers
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+- agent-browser QA: PASSED for all 3 new drawers
+
+---
+Updated Project Status (Post Round 36 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit d57f6b3)
+- MODULES (18): Dashboard, Operations Overview, Warehouses (+Detail Drawer), Inbound (+Detail Drawer), Outbound (+Detail Drawer), Inventory (+Detail Drawer), Transportation (+Detail Drawer NEW), Route Optimization, Equipment (+Detail Drawer), Employees (+Detail Drawer), Productivity (+Detail Drawer NEW), Cost Analytics (+Detail Drawer), Alerts, Dock Scheduling (+Drag-and-Drop), SLA Countdown, Reports (+Detail Drawer NEW), Settings, Warehouse Map
+- SHARED COMPONENTS (49): All previous + ProductivityDetailDrawer (NEW) + TransportationDetailDrawer (NEW) + ReportsDetailDrawer (NEW)
+- HOOKS (10): All previous (useToast used consistently)
+- CSS UTILITIES (460+): 429+ previous + 31 new (11 productivity + 11 transportation + 9 reports)
+- DATATABLE MODULES (9): All previous + Transportation now uses onRowClick to open drawer
+- DETAIL DRAWERS (11): Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓, Productivity ✓ (NEW), Transportation ✓ (NEW), Reports ✓ (NEW) — ALL major operational modules now have drill-down drawers
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- agent-browser QA: PASSED for all 3 new drawers
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: start/stop on demand for QA)
+  - 181+ pre-existing duplicate CSS class definitions (not introduced this round)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Some views (alerts, dock-scheduler, sla-countdown, route-optimization, operations-overview, settings, warehouse-map) still do not have detail drawers
+- PRIORITY NEXT:
+  1. Add Supabase persistence for real data
+  2. Add warehouse geographic clustering with actual lat/lng positioning
+  3. Consolidate inline mock data (route-optimization/sla-countdown/warehouse-health/warehouse-detail-drawer/employee-detail-drawer/cost-detail-drawer/inbound-detail-drawer/outbound-detail-drawer/productivity-detail-drawer/transportation-detail-drawer/reports-detail-drawer) into mock-data.ts
+  4. Add barcode/QR code scanning integration in inventory drawer
+  5. Add DataTable getRowKey prop for tables without stable IDs
+  6. CSS audit: 460+ classes — consolidate unused/redundant definitions
+  7. Add Shift Handover digital signature flow
+  8. Add AlertsDetailDrawer (drill-down from alerts list)
+  9. Add DockSchedulerDetailDrawer (drill-down from dock scheduler)
+  10. Add RouteOptimizationDetailDrawer (drill-down from route optimization)
+  11. Add OperationsOverviewDetailDrawer (drill-down from operations overview)
+  12. Add SLACountdownDetailDrawer (drill-down from SLA countdown)
