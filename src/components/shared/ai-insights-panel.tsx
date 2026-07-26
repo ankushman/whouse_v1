@@ -117,6 +117,12 @@ const impactColors: Record<string, string> = {
 
 export function AIInsightsPanel() {
   const [expandedIds, setExpandedIds] = React.useState<Set<string>>(new Set())
+  // Bug A1 fix: insights are now component state so Apply/Dismiss actually change the UI.
+  // Previously `insights` was a module-level const and Apply/Dismiss handlers only showed a toast,
+  // giving false confirmation while leaving the list unchanged.
+  const [insightList, setInsightList] = React.useState<Insight[]>(insights)
+  // Track which insights have been "applied" so we can show a different visual state.
+  const [appliedIds, setAppliedIds] = React.useState<Set<string>>(new Set())
 
   const toggleExpand = (id: string) => {
     setExpandedIds((prev) => {
@@ -127,12 +133,34 @@ export function AIInsightsPanel() {
     })
   }
 
-  const handleApply = () => {
-    toast.success("Recommendation Applied", { description: "AI insight has been queued for implementation" })
+  const handleApply = (insight: Insight) => {
+    setAppliedIds((prev) => new Set(prev).add(insight.id))
+    toast.success("Recommendation Applied", {
+      description: `"${insight.title}" has been queued for implementation`,
+    })
+  }
+
+  const handleDismiss = (id: string) => {
+    setInsightList((prev) => prev.filter((i) => i.id !== id))
+    setExpandedIds((prev) => {
+      const next = new Set(prev)
+      next.delete(id)
+      return next
+    })
+    toast.info("Insight Dismissed", { description: "The insight has been archived" })
   }
 
   const handleDismissAll = () => {
-    toast.info("Insights Dismissed", { description: "All AI insights have been archived" })
+    if (insightList.length === 0) {
+      toast.info("No insights to dismiss", { description: "The insights list is already empty" })
+      return
+    }
+    const dismissedCount = insightList.length
+    setInsightList([])
+    setExpandedIds(new Set())
+    toast.info("Insights Dismissed", {
+      description: `${dismissedCount} insight${dismissedCount === 1 ? "" : "s"} archived`,
+    })
   }
 
   const handleShare = () => {
@@ -162,10 +190,20 @@ export function AIInsightsPanel() {
       <CardContent className="space-y-3">
         {/* Insights List */}
         <div className="space-y-2">
-          {insights.map((insight, index) => {
+          {insightList.length === 0 && (
+            <div className="rounded-lg border border-dashed border-border/50 p-6 text-center">
+              <Sparkles className="mx-auto h-5 w-5 text-muted-foreground/50" />
+              <p className="mt-2 text-xs font-medium text-muted-foreground">All insights resolved</p>
+              <p className="mt-0.5 text-[10px] text-muted-foreground/70">
+                New AI recommendations will appear here when available
+              </p>
+            </div>
+          )}
+          {insightList.map((insight, index) => {
             const config = severityConfig[insight.severity]
             const Icon = config.icon
             const isExpanded = expandedIds.has(insight.id)
+            const isApplied = appliedIds.has(insight.id)
 
             return (
               <div
@@ -173,7 +211,8 @@ export function AIInsightsPanel() {
                 className={cn(
                   "rounded-lg border border-border/40 p-3 transition-all duration-300 data-row-enter",
                   config.cardBg,
-                  isExpanded && "ring-1 ring-primary/20"
+                  isExpanded && "ring-1 ring-primary/20",
+                  isApplied && "ring-1 ring-emerald-400/40 bg-emerald-50/40 dark:bg-emerald-950/30"
                 )}
                 style={{ animationDelay: `${index * 80}ms` }}
               >
@@ -191,6 +230,11 @@ export function AIInsightsPanel() {
                       >
                         {insight.severity}
                       </Badge>
+                      {isApplied && (
+                        <Badge variant="outline" className="text-[9px] gap-0.5 px-1.5 py-0 border-emerald-300 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800">
+                          Applied
+                        </Badge>
+                      )}
                     </div>
                     <p className="mt-1 text-[11px] text-muted-foreground leading-relaxed">
                       {insight.description}
@@ -214,6 +258,7 @@ export function AIInsightsPanel() {
                   <button
                     onClick={() => toggleExpand(insight.id)}
                     className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    aria-label={isExpanded ? "Collapse insight" : "Expand insight"}
                   >
                     {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                   </button>
@@ -226,10 +271,26 @@ export function AIInsightsPanel() {
                       {insight.details}
                     </p>
                     <div className="mt-2 flex gap-2">
-                      <Button size="sm" variant="outline" className="h-7 gap-1 text-[10px]" onClick={handleApply}>
-                        <ExternalLink className="h-2.5 w-2.5" /> Apply Recommendation
+                      <Button
+                        size="sm"
+                        variant={isApplied ? "secondary" : "outline"}
+                        className="h-7 gap-1 text-[10px]"
+                        onClick={() => handleApply(insight)}
+                        disabled={isApplied}
+                      >
+                        {isApplied ? (
+                          <><Sparkles className="h-2.5 w-2.5" /> Applied</>
+                        ) : (
+                          <><ExternalLink className="h-2.5 w-2.5" /> Apply Recommendation</>
+                        )}
                       </Button>
-                      <Button size="sm" variant="ghost" className="h-7 gap-1 text-[10px]" onClick={() => toggleExpand(insight.id)}>
+                      {/* Bug A2 fix: "Dismiss" button now actually dismisses (was calling toggleExpand). */}
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-7 gap-1 text-[10px] hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40"
+                        onClick={() => handleDismiss(insight.id)}
+                      >
                         <XCircle className="h-2.5 w-2.5" /> Dismiss
                       </Button>
                     </div>
@@ -242,10 +303,26 @@ export function AIInsightsPanel() {
 
         {/* Quick Actions */}
         <div className="flex items-center gap-2 pt-1">
-          <Button size="sm" variant="outline" className="h-7 gap-1.5 text-[10px] flex-1" onClick={handleApply}>
+          <Button
+            size="sm"
+            variant="outline"
+            className="h-7 gap-1.5 text-[10px] flex-1"
+            onClick={() => {
+              const first = insightList[0]
+              if (first) handleApply(first)
+              else toast.info("No insights to apply", { description: "All recommendations have been resolved" })
+            }}
+            disabled={insightList.length === 0}
+          >
             <Sparkles className="h-3 w-3 text-blue-500" /> Apply Recommendation
           </Button>
-          <Button size="sm" variant="outline" className="h-7 gap-1.5 text-[10px] flex-1" onClick={handleDismissAll}>
+          <Button
+            size="sm"
+            variant="outline"
+            className="h-7 gap-1.5 text-[10px] flex-1"
+            onClick={handleDismissAll}
+            disabled={insightList.length === 0}
+          >
             <XCircle className="h-3 w-3" /> Dismiss All
           </Button>
           <Button size="sm" variant="outline" className="h-7 gap-1.5 text-[10px]" onClick={handleShare}>

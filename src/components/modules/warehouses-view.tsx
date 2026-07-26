@@ -32,7 +32,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { HealthScoreRing } from "@/components/shared/health-score-ring"
-import { WarehouseDetailModal } from "@/components/modules/warehouse-detail-modal"
+import { WarehouseDetailDrawer } from "@/components/shared/warehouse-detail-drawer"
 import { WarehouseMapView } from "@/components/modules/warehouse-map-view"
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -162,12 +162,12 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
     <Card
       onClick={onClick}
       className={cn(
-        "group relative cursor-pointer rounded-xl border-border/60 py-0 gap-0 transition-smooth hover-expand shadow-card",
+        "group relative cursor-pointer rounded-xl border-border/60 py-0 gap-0 transition-smooth hover-expand shadow-card wh-card-grid-hover",
         "hover:border-primary/30",
         "active:scale-[0.99]",
         status === "green" && "border-l-4 border-l-emerald-500",
         status === "amber" && "border-l-4 border-l-amber-500",
-        status === "red" && "border-l-4 border-l-red-500"
+        status === "red" && "border-l-4 border-l-red-500 critical-wh-strip"
       )}
     >
       <CardContent className="p-5 flex flex-col gap-4">
@@ -289,9 +289,10 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
 
 type WarehouseRow = (typeof warehouses)[number]
 
-function getWarehouseColumns(
-  onRowClick: (row: WarehouseRow) => void
-): Column<WarehouseRow>[] {
+function getWarehouseColumns(): Column<WarehouseRow>[] {
+  // Bug W1 fix: removed unused `onRowClick` parameter. Row clicks are handled via
+  // <DataTable onRowClick={handleViewDetails} /> at the call site — passing it here
+  // was misleading and forced useMemo to depend on it unnecessarily.
   return [
     {
       key: "name",
@@ -379,10 +380,17 @@ function getWarehouseColumns(
 
 export function WarehousesView() {
   const setActiveView = useAppStore((s) => s.setActiveView)
-  const [selectedWarehouse, setSelectedWarehouse] = React.useState<(typeof warehouses)[number] | null>(null)
-  const [modalOpen, setModalOpen] = React.useState(false)
   const [showMap, setShowMap] = React.useState(false)
   const [viewMode, setViewMode] = React.useState<"cards" | "table">("cards")
+
+  // Drawer state — opens on row click / card click / map pin click.
+  const [drawerWarehouse, setDrawerWarehouse] = React.useState<(typeof warehouses)[number] | null>(null)
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
+
+  const openDrawer = useCallback((row: WarehouseRow) => {
+    setDrawerWarehouse(row)
+    setDrawerOpen(true)
+  }, [])
 
   const summary = useMemo(() => {
     const totalCapacity = warehouses.reduce((acc, w) => acc + w.capacity, 0)
@@ -398,14 +406,14 @@ export function WarehousesView() {
     }
   }, [])
 
+  // Row click / card click → open the new drawer.
   const handleViewDetails = useCallback((row: WarehouseRow) => {
-    setSelectedWarehouse(row)
-    setModalOpen(true)
-  }, [])
+    openDrawer(row)
+  }, [openDrawer])
 
   const columns = useMemo(
-    () => getWarehouseColumns(handleViewDetails),
-    [handleViewDetails]
+    () => getWarehouseColumns(),
+    []
   )
 
   const batchActions: BatchAction<WarehouseRow>[] = useMemo(() => [
@@ -414,12 +422,11 @@ export function WarehousesView() {
       icon: Eye,
       onClick: (rows) => {
         if (rows.length === 1) {
-          setSelectedWarehouse(rows[0])
-          setModalOpen(true)
+          openDrawer(rows[0])
         }
       },
     },
-  ], [])
+  ], [openDrawer])
 
   const handleExportCSV = useCallback(() => {
     const data = warehouses.map((w) => ({
@@ -486,8 +493,7 @@ export function WarehousesView() {
           onWarehouseClick={(warehouseId) => {
             const wh = warehouses.find((w) => w.id === warehouseId)
             if (wh) {
-              setSelectedWarehouse(wh)
-              setModalOpen(true)
+              openDrawer(wh)
               setShowMap(false)
             }
           }}
@@ -542,8 +548,7 @@ export function WarehousesView() {
                   key={warehouse.id}
                   warehouse={warehouse}
                   onClick={() => {
-                    setSelectedWarehouse(warehouse)
-                    setModalOpen(true)
+                    openDrawer(warehouse)
                   }}
                 />
               ))}
@@ -567,11 +572,25 @@ export function WarehousesView() {
         </>
       )}
 
-      {/* ── Warehouse Detail Modal ── */}
-      <WarehouseDetailModal
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-        warehouse={selectedWarehouse}
+      {/* ── Warehouse Detail Drawer (slide-in panel, replaces legacy modal) ── */}
+      <WarehouseDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        warehouse={drawerWarehouse}
+        onRefresh={(w) => {
+          // Parent doesn't actually refetch (mock data); the toast is shown inside the drawer.
+          // Hook is here for future Supabase integration.
+          console.debug("Refresh requested for", w.id)
+        }}
+        onViewOnMap={(w) => {
+          setDrawerOpen(false)
+          setShowMap(true)
+          // Give the drawer close animation a moment, then focus the map
+          setTimeout(() => {
+            const evt = new CustomEvent("warehouse:focus", { detail: w.id })
+            window.dispatchEvent(evt)
+          }, 200)
+        }}
       />
     </div>
   )

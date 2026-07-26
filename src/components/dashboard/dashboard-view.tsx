@@ -49,6 +49,7 @@ import { generateSparklineData } from "@/components/shared/mini-sparkline"
 import { ShipmentTrackingTable } from "@/components/shared/shipment-tracking-table"
 import { WarehouseHealthMonitor } from "@/components/shared/warehouse-health-monitor"
 import { WeatherPanel } from "@/components/shared/weather-panel"
+import { PullToRefreshContainer } from "@/components/shared/pull-to-refresh-container"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -98,17 +99,18 @@ const inboundChartConfig = {
   imported: { label: "Imported", color: "#10B981" },
 }
 
+// Bug D1 fix: removed "dispatched" key — there is no <Bar dataKey="dispatched"> rendered in the chart,
+// so the legend was showing a phantom "Dispatched" entry with no corresponding bar.
 const dispatchChartConfig = {
-  dispatched: { label: "Dispatched", color: "#2563EB" },
   onTime: { label: "On Time", color: "#10B981" },
   delayed: { label: "Delayed", color: "#F59E0B" },
 }
 
+// Bug D2 fix: removed "accuracy" and "sla" keys — only Inbound/Outbound Bars are rendered.
+// The legend was showing 4 items but only 2 bars existed.
 const warehouseChartConfig = {
   inbound: { label: "Inbound", color: "#2563EB" },
   outbound: { label: "Outbound", color: "#10B981" },
-  accuracy: { label: "Accuracy %", color: "#F59E0B" },
-  sla: { label: "SLA %", color: "#8B5CF6" },
 }
 
 const accuracyChartConfig = {
@@ -127,8 +129,9 @@ const costChartConfig = {
   storage: { label: "Storage", color: "#8B5CF6" },
 }
 
+// Bug D3 fix: removed "target" key — no <Bar dataKey="target"> is rendered in the SLA chart.
+// The legend was showing a phantom "Target %" entry with no corresponding bar.
 const slaChartConfig = {
-  target: { label: "Target %", color: "#E2E8F0" },
   achieved: { label: "Achieved %", color: "#2563EB" },
   breach: { label: "Breach %", color: "#EF4444" },
 }
@@ -207,8 +210,19 @@ export function DashboardView() {
   const [selectedRange, setSelectedRange] = React.useState<DateRangeValue>("7d")
   const dateInfo = getDateRange(selectedRange)
 
+  // Pull-to-refresh handler — simulates a "refresh" by toggling a local state.
+  // We don't actually refetch (mock data); the brief animation is the visual feedback.
+  const [refreshNonce, setRefreshNonce] = React.useState(0)
+  const handlePullRefresh = React.useCallback(async () => {
+    await new Promise((r) => setTimeout(r, 800))
+    setRefreshNonce((n) => n + 1)
+  }, [])
+  // Reference refreshNonce to silence unused warning; the spinner state is enough.
+  void refreshNonce
+
   return (
-    <div className="space-y-6">
+    <PullToRefreshContainer onRefresh={handlePullRefresh} className="-m-4 md:-m-6">
+    <div className="space-y-6" key={refreshNonce}>
       {/* Dashboard Header */}
       <div className="dashboard-header-gradient bg-mesh-gradient -m-4 mb-0 p-4 md:-m-6 md:p-6 rounded-none">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
@@ -614,5 +628,6 @@ export function DashboardView() {
       </div>
     </div>
     </div>
+    </PullToRefreshContainer>
   )
 }

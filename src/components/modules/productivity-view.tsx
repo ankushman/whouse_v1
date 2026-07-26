@@ -35,11 +35,7 @@ const manpowerChartConfig = {
   night: { label: "Night", color: "#F59E0B" },
 }
 
-const shiftIcons: Record<string, typeof Sun> = {
-  Morning: Sunrise,
-  Afternoon: Sun,
-  Night: Moon,
-}
+// Bug P1 fix: removed dead `shiftIcons` map — it was defined but never referenced in JSX.
 
 export function ProductivityView() {
   const [warehouseFilter, setWarehouseFilter] = useState("all")
@@ -82,13 +78,13 @@ export function ProductivityView() {
     [...filtered].sort((a, b) => a.rank - b.rank).slice(0, 5),
   [filtered])
 
-  const lowPerformers = useMemo(() =>
-    [...filtered].sort((a, b) => b.rank - a.rank).slice(0, 5),
-  [filtered])
+  // Bug P1 fix: removed dead `lowPerformers` useMemo — it was computed but never rendered.
 
   const warehouseData = useMemo(() => {
     const whMap: Record<string, { name: string; morning: number[]; afternoon: number[]; night: number[] }> = {}
-    employees.forEach((e) => {
+    // Bug P2 fix: heatmap now respects the warehouse filter (was using global `employees` array,
+    // so the chart showed ALL warehouses even when the user filtered to one).
+    filtered.forEach((e) => {
       const shift = e.shift
       if (!whMap[e.warehouse]) whMap[e.warehouse] = { name: e.warehouse, morning: [], afternoon: [], night: [] }
       if (shift === "Morning") whMap[e.warehouse].morning.push(e.productivity)
@@ -101,7 +97,7 @@ export function ProductivityView() {
       afternoon: w.afternoon.length > 0 ? +(w.afternoon.reduce((a, b) => a + b, 0) / w.afternoon.length).toFixed(1) : 0,
       night: w.night.length > 0 ? +(w.night.reduce((a, b) => a + b, 0) / w.night.length).toFixed(1) : 0,
     }))
-  }, [])
+  }, [filtered])
 
   return (
     <div className="space-y-6">

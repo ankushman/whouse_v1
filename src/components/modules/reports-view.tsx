@@ -348,7 +348,7 @@ export function ReportsView() {
               Dispatched: d.dispatched,
               "On Time": d.onTime,
               Delayed: d.delayed,
-              "OTIF (%)": ((d.onTime / d.dispatched) * 100).toFixed(1),
+              "OTIF (%)": d.dispatched ? ((d.onTime / d.dispatched) * 100).toFixed(1) : "0.0",
             })),
             filename: "transportation-report",
           })

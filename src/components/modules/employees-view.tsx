@@ -99,6 +99,24 @@ function productivityColor(p: number) {
   return "text-red-600"
 }
 
+// Bug E2 fix: Previously the warehouse breakdown bar used 4 chained ternaries inside cn(),
+// each producing a `bg-*` class. tailwind-merge keeps the LAST conflicting class — so
+// Productivity/Attendance/Tasks bars always ended up red (the Error Rate fallthrough).
+// Now we return a SINGLE bg-* class based on metric label + value.
+function getMetricBarColor(label: string, value: number): string {
+  if (label === "Productivity") {
+    return value >= 90 ? "bg-emerald-500" : value >= 80 ? "bg-amber-500" : "bg-blue-500"
+  }
+  if (label === "Attendance") {
+    return value >= 90 ? "bg-emerald-500" : "bg-blue-500"
+  }
+  if (label === "Tasks") return "bg-violet-500"
+  if (label === "Error Rate") {
+    return value <= 2 ? "bg-emerald-500" : value <= 3 ? "bg-amber-500" : "bg-red-500"
+  }
+  return "bg-blue-500"
+}
+
 // Weekly trend data for performance charts
 const weeklyTrendData = [
   { week: "Wk 1", productivity: 82, attendance: 91, errorRate: 2.8, tasks: 145, target: 2.5 },
@@ -279,9 +297,14 @@ export function EmployeesView() {
   )
 
   // Compare tab derived data
+  // Bug E1 fix: top5Employees must be derived from `filtered` (not the global `employees` array)
+  // so the radar lines stay in sync with the radar data when a warehouse filter is applied.
+  // Previously: top5RadarData used `filtered`, but top5Employees used `employees` (global),
+  // so radars were rendered for the global top-5 names even when those employees weren't in
+  // the filtered set — producing empty radar lines and a legend disconnected from the data.
   const top5Employees = useMemo(
-    () => [...employees].sort((a, b) => a.rank - b.rank).slice(0, 5),
-    []
+    () => [...filtered].sort((a, b) => a.rank - b.rank).slice(0, 5),
+    [filtered]
   )
   const top5RadarData = useMemo(() => buildTop5CompareData(filtered), [filtered])
   const top5BarData = useMemo(() => buildTop5BarData(filtered), [filtered])
@@ -547,12 +570,13 @@ export function EmployeesView() {
               </CardHeader>
               <CardContent>
                 <ChartContainer
-                  config={{
-                    productivity: { label: "Productivity", color: "#2563EB" },
-                    attendance: { label: "Attendance", color: "#10B981" },
-                    tasks: { label: "Tasks", color: "#8B5CF6" },
-                    accuracy: { label: "Accuracy", color: "#F59E0B" },
-                  }}
+                  config={top5Employees.reduce<Record<string, { label: string; color: string }>>(
+                    (acc, emp, idx) => {
+                      acc[emp.name] = { label: emp.name, color: TOP5_COLORS[idx] ?? "#94A3B8" }
+                      return acc
+                    },
+                    {}
+                  )}
                   className="h-[320px] w-full"
                 >
                   <RadarChart cx="50%" cy="50%" outerRadius="70%" data={top5RadarData}>
@@ -653,12 +677,7 @@ export function EmployeesView() {
                             <div
                               className={cn(
                                 "h-full rounded-full transition-all duration-500",
-                                m.label === "Productivity" && m.value >= 90 ? "bg-emerald-500" :
-                                m.label === "Productivity" && m.value >= 80 ? "bg-amber-500" : "bg-blue-500",
-                                m.label === "Attendance" && m.value >= 90 ? "bg-emerald-500" : "bg-blue-500",
-                                m.label === "Tasks" && "bg-violet-500",
-                                m.label === "Error Rate" && m.value <= 2 ? "bg-emerald-500" :
-                                m.label === "Error Rate" && m.value <= 3 ? "bg-amber-500" : "bg-red-500"
+                                getMetricBarColor(m.label, m.value)
                               )}
                               style={{ width: `${Math.min(100, m.value)}%` }}
                             />

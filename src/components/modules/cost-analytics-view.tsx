@@ -64,11 +64,12 @@ export function CostAnalyticsView() {
         equipment: entry.equipment,
         storage: entry.storage,
         total: entry.total,
-        laborChange: idx > 0 ? +((entry.labor - prev.labor) / prev.labor * 100).toFixed(1) : 0,
-        transportChange: idx > 0 ? +((entry.transport - prev.transport) / prev.transport * 100).toFixed(1) : 0,
-        equipmentChange: idx > 0 ? +((entry.equipment - prev.equipment) / prev.equipment * 100).toFixed(1) : 0,
-        storageChange: idx > 0 ? +((entry.storage - prev.storage) / prev.storage * 100).toFixed(1) : 0,
-        totalChange: idx > 0 ? +((entry.total - prev.total) / prev.total * 100).toFixed(1) : 0,
+        // Bug C1 fix: guard against division by zero (prev.labor/transport/etc could be 0).
+        laborChange: idx > 0 && prev.labor !== 0 ? +((entry.labor - prev.labor) / prev.labor * 100).toFixed(1) : 0,
+        transportChange: idx > 0 && prev.transport !== 0 ? +((entry.transport - prev.transport) / prev.transport * 100).toFixed(1) : 0,
+        equipmentChange: idx > 0 && prev.equipment !== 0 ? +((entry.equipment - prev.equipment) / prev.equipment * 100).toFixed(1) : 0,
+        storageChange: idx > 0 && prev.storage !== 0 ? +((entry.storage - prev.storage) / prev.storage * 100).toFixed(1) : 0,
+        totalChange: idx > 0 && prev.total !== 0 ? +((entry.total - prev.total) / prev.total * 100).toFixed(1) : 0,
       }
     }), [])
 
@@ -88,7 +89,11 @@ export function CostAnalyticsView() {
 
   const totalCostThisMonth = latest.total
   const totalCostLastMonth = previous.total
-  const totalChange = ((totalCostThisMonth - totalCostLastMonth) / totalCostLastMonth * 100).toFixed(1)
+  // Bug C1 fix: guard against division by zero when previous month's total was 0.
+  // Previously: 0 base → Infinity → "Infinity%" rendered in the summary card.
+  const totalChange = totalCostLastMonth === 0
+    ? "0.0"
+    : ((totalCostThisMonth - totalCostLastMonth) / totalCostLastMonth * 100).toFixed(1)
 
   return (
     <div className="space-y-6">

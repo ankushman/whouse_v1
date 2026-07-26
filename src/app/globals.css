@@ -5973,3 +5973,117 @@ html.theme-transition body {
   background: linear-gradient(135deg, oklch(0.7 0.18 75 / 0.1), oklch(0.7 0.18 45 / 0.1));
   border-color: oklch(0.7 0.18 75 / 0.3);
 }
+
+/* ===========================================================================
+   ROUND 32 — Warehouse Detail Drawer + Pull-to-Refresh Micro-interactions
+   =========================================================================== */
+
+/* Warehouse drawer header gradient sheen (animated) */
+@keyframes wh-drawer-sheen {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.wh-drawer-header-sheen {
+  background-size: 200% 200%;
+  animation: wh-drawer-sheen 8s ease-in-out infinite;
+}
+
+/* Health ring stroke draw-in animation */
+@keyframes health-ring-draw {
+  from { stroke-dasharray: 0 176; }
+  to   { stroke-dasharray: var(--target-dash, 100) 176; }
+}
+
+/* Capacity bar threshold marker pulse */
+@keyframes threshold-marker-pulse {
+  0%, 100% { opacity: 0.5; transform: scaleY(1); }
+  50%      { opacity: 1;   transform: scaleY(1.3); }
+}
+.threshold-marker {
+  animation: threshold-marker-pulse 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Zone utilization card staggered entrance */
+@keyframes zone-card-enter {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+}
+.zone-card-enter {
+  animation: zone-card-enter 0.4s ease-out both;
+}
+
+/* Critical warehouse strip pulse */
+@keyframes critical-wh-strip {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 0 0 oklch(0.6 0.25 25 / 0.6); }
+  50%      { opacity: 0.7; box-shadow: 0 0 0 4px oklch(0.6 0.25 25 / 0);  }
+}
+.critical-wh-strip {
+  animation: critical-wh-strip 1.8s ease-in-out infinite;
+}
+
+/* Stat card subtle hover lift (for warehouse drawer quick-stats) */
+.wh-stat-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.wh-stat-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px -2px oklch(0.5 0.1 240 / 0.18);
+  border-color: oklch(0.55 0.2 250 / 0.35);
+}
+
+/* Pull-to-refresh indicator slide-in */
+@keyframes ptr-indicator-enter {
+  from { opacity: 0; transform: translateY(-12px) scale(0.85); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+.ptr-indicator-enter {
+  animation: ptr-indicator-enter 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Pull-to-refresh spinner glow */
+@keyframes ptr-spinner-glow {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.6 0.2 250 / 0.3); }
+  50%      { box-shadow: 0 0 0 8px oklch(0.6 0.2 250 / 0);  }
+}
+.ptr-spinner-glow {
+  animation: ptr-spinner-glow 1.6s ease-in-out infinite;
+}
+
+/* Drawer content slide-in (mirrors drawer-slide-in but with subtle bounce for warehouse drawer) */
+@keyframes wh-drawer-content-enter {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+.wh-drawer-content-enter {
+  animation: wh-drawer-content-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Manager contact card hover */
+.manager-card-hover {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.manager-card-hover:hover {
+  background-color: oklch(0.55 0.1 250 / 0.06);
+  transform: translateX(2px);
+}
+
+/* Activity feed dot pulse (more pronounced than status-dot-pulse) */
+@keyframes wh-activity-dot-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1;   }
+  50%      { transform: scale(1.4); opacity: 0.7; }
+}
+.wh-activity-dot {
+  animation: wh-activity-dot-pulse 2s ease-in-out infinite;
+}
+
+/* Warehouse card grid hover lift (used in cards view) */
+.wh-card-grid-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.wh-card-grid-hover:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 12px 24px -8px oklch(0.4 0.15 250 / 0.25);
+}
+

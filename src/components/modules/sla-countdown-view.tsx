@@ -29,6 +29,7 @@ import {
   Area,
   BarChart,
   Bar,
+  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -109,8 +110,11 @@ function formatRemaining(ms: number): string {
 }
 
 function getStatusFromMs(ms: number, progress: number): SLAItem["status"] {
-  if (progress >= 100) return "completed"
+  // Check breach FIRST — a shipment past deadline is breached even if progress hit 100% late.
+  // Otherwise completed items with progress=100 and ms<0 (breached mock items) would be
+  // instantly reclassified as "completed" on the first tick, hiding breaches.
   if (ms < 0) return "breached"
+  if (progress >= 100) return "completed"
   if (ms < 30 * MIN) return "at-risk"
   return "on-track"
 }
@@ -136,18 +140,14 @@ const typeIcons: Record<string, React.ReactNode> = {
 
 // ── SLA Card Component ───────────────────────────────────────────────────
 
-function SLACard({ item, mountTime }: { item: SLAItem; mountTime: number }) {
-  const [countdown, setCountdown] = useState(item.remainingMs)
+function SLACard({ item }: { item: SLAItem; mountTime: number }) {
+  // Single source of truth: parent (SLACountdownView) already decrements item.remainingMs
+  // by 1000ms every second via setSlaItems. We just read item.remainingMs directly.
+  //
+  // Previously this component also ran its own setInterval + re-synced from item.remainingMs - elapsed,
+  // which compounded with the parent's decrement → countdown dropped at 2x real speed.
+  const countdown = item.remainingMs
   const colors = statusColors[item.status]
-
-  useEffect(() => {
-    const elapsed = Date.now() - mountTime
-    setCountdown(item.remainingMs - elapsed)
-    const interval = setInterval(() => {
-      setCountdown((prev) => prev - 1000)
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [item.remainingMs, mountTime])
 
   const isBreached = countdown < 0
   const isFlashing = countdown < 0 && Math.floor(Date.now() / 1000) % 2 === 0
@@ -428,7 +428,11 @@ export function SLACountdownView() {
                 <XAxis type="number" tick={{ fontSize: 10 }} />
                 <YAxis type="category" dataKey="priority" tick={{ fontSize: 11 }} width={60} />
                 <ChartTooltip content={<ChartTooltipContent />} />
-                <Bar dataKey="count" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="count" radius={[0, 4, 4, 0]}>
+                  {priorityBreakdown.map((entry) => (
+                    <Cell key={entry.priority} fill={entry.fill} />
+                  ))}
+                </Bar>
               </BarChart>
             </ChartContainer>
 

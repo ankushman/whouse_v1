@@ -187,11 +187,20 @@ export function EquipmentDetailDrawer({
   const uptimePct = 100 - Math.min(100, utilization === 0 ? 0 : (item.downtime / (item.hoursUsed + item.downtime)) * 100)
   const nextMaintDate = new Date(item.nextMaintenance)
   const today = new Date()
-  const daysUntilMaintenance = Math.ceil((nextMaintDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-  const maintenanceDue = daysUntilMaintenance <= 7
-  const maintenanceOverdue = daysUntilMaintenance < 0
+  // Bug ED1 fix: guard against invalid date strings. Previously, if item.nextMaintenance
+  // was an unparseable string, nextMaintDate would be Invalid Date → getTime() returns NaN
+  // → daysUntilMaintenance = NaN → all maintenance flags silently false.
+  const nextMaintValid = !isNaN(nextMaintDate.getTime())
+  const daysUntilMaintenance = nextMaintValid
+    ? Math.ceil((nextMaintDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+    : Number.POSITIVE_INFINITY  // unknown date → never due / never overdue
+  const maintenanceDue = nextMaintValid && daysUntilMaintenance <= 7
+  const maintenanceOverdue = nextMaintValid && daysUntilMaintenance < 0
   const lastMaintDate = new Date(item.lastMaintenance)
-  const daysSinceLastMaintenance = Math.floor((today.getTime() - lastMaintDate.getTime()) / (1000 * 60 * 60 * 24))
+  const lastMaintValid = !isNaN(lastMaintDate.getTime())
+  const daysSinceLastMaintenance = lastMaintValid
+    ? Math.floor((today.getTime() - lastMaintDate.getTime()) / (1000 * 60 * 60 * 24))
+    : 0
 
   // Health score (0-100)
   let healthScore = 100
@@ -395,7 +404,9 @@ export function EquipmentDetailDrawer({
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Last Service</span>
                 <span className="font-medium text-number">
-                  {lastMaintDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                  {lastMaintValid
+                    ? lastMaintDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+                    : "N/A"}
                 </span>
               </div>
               <div className="flex items-center justify-between text-xs">
@@ -405,12 +416,14 @@ export function EquipmentDetailDrawer({
                   maintenanceOverdue && "text-red-600 dark:text-red-400",
                   maintenanceDue && !maintenanceOverdue && "text-amber-600 dark:text-amber-400"
                 )}>
-                  {nextMaintDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}
+                  {nextMaintValid
+                    ? nextMaintDate.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })
+                    : "N/A"}
                 </span>
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Days Since</span>
-                <span className="font-medium text-number">{daysSinceLastMaintenance}d</span>
+                <span className="font-medium text-number">{lastMaintValid ? `${daysSinceLastMaintenance}d` : "N/A"}</span>
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Days Until</span>
@@ -419,11 +432,15 @@ export function EquipmentDetailDrawer({
                   maintenanceOverdue && "text-red-600 dark:text-red-400",
                   maintenanceDue && !maintenanceOverdue && "text-amber-600 dark:text-amber-400"
                 )}>
-                  {maintenanceOverdue ? `${Math.abs(daysUntilMaintenance)}d overdue` : `${daysUntilMaintenance}d`}
+                  {!nextMaintValid
+                    ? "N/A"
+                    : maintenanceOverdue
+                      ? `${Math.abs(daysUntilMaintenance)}d overdue`
+                      : `${daysUntilMaintenance}d`}
                 </span>
               </div>
             </div>
-            {maintenanceOverdue && (
+            {maintenanceOverdue && nextMaintValid && (
               <div className="rounded-md border border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/30 px-3 py-2 flex items-center gap-2">
                 <AlertTriangle className="h-3.5 w-3.5 text-red-500 shrink-0" />
                 <p className="text-[11px] text-red-700 dark:text-red-300">

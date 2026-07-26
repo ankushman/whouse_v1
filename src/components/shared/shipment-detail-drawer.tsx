@@ -78,7 +78,7 @@ interface TrackingDetails {
   events: TrackingEvent[]
   progressPct: number
   distanceKm: number
-  distanceCoveredKm: number
+  // distanceCoveredKm removed from interface — computed at the call site from progressPct * distanceKm
   transitHoursElapsed: number
   transitHoursTotal: number
   weight: string
@@ -140,7 +140,8 @@ function generateTrackingDetails(trackingId: string): TrackingDetails {
     events,
     progressPct: Math.min(100, Math.max(15, Math.round((events.filter((e) => e.completed).length / events.length) * 100))),
     distanceKm: 850 + (seed % 1200),
-    distanceCoveredKm: 0, // computed below
+    // Bug ID1 fix: removed dead `distanceCoveredKm: 0` field — actual value is computed
+    // separately at the call site from progressPct * distanceKm, never read from `details`.
     transitHoursElapsed: 8 + (seed % 36),
     transitHoursTotal: 24 + (seed % 48),
     weight: `${(2 + (seed % 18)).toFixed(1)} kg`,
