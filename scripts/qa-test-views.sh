@@ -21,6 +21,7 @@ tests=(
   "Quality Inspection|Quality Inspection"
   "NCR / CAPA|Non-Conformance"
   "Work Orders|Work Order"
+  "Prod. Schedule|Production Schedule"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"

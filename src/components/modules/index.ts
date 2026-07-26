@@ -25,6 +25,7 @@ export { BillOfMaterialsView } from './bill-of-materials-view'
 export { QualityInspectionPlanView } from './quality-inspection-plan-view'
 export { NonConformanceReportView } from './non-conformance-report-view'
 export { WorkOrderManagementView } from './work-order-management-view'
+export { ProductionScheduleView } from './production-schedule-view'
 export { SupplierCorrectiveActionRequestView } from './supplier-corrective-action-request-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file

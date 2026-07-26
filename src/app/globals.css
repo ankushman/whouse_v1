@@ -11682,3 +11682,201 @@ html.theme-transition body {
     transform: none !important;
   }
 }
+
+/* ============================================================
+   ROUND 52: Production Schedule (Gantt) — micro-interactions
+   ============================================================ */
+
+/* KPI cards — staggered entrance + hover lift */
+.ps-kpi-enter {
+  animation: ps-kpi-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.ps-kpi-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(59, 130, 246, 0.18);
+}
+
+/* Chart cards — entrance + hover border tint */
+.ps-chart-enter {
+  animation: ps-chart-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.ps-chart-enter:hover {
+  border-color: hsl(var(--primary) / 0.35);
+  box-shadow: 0 4px 18px -6px hsl(var(--primary) / 0.18);
+}
+
+/* Table card — subtle hover shadow */
+.ps-table-card {
+  transition: box-shadow 200ms ease;
+}
+.ps-table-card:hover {
+  box-shadow: 0 4px 16px -8px rgba(15, 23, 42, 0.1);
+}
+
+/* Row entrance — staggered fade-in with accent bar */
+.ps-row-in {
+  animation: ps-row-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+}
+.ps-row-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, transparent, hsl(var(--primary) / 0.45), transparent);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.ps-row-in:hover::before {
+  opacity: 1;
+}
+
+/* Delayed schedule — red gradient + pulse */
+.ps-row-critical {
+  background: linear-gradient(90deg, rgb(254 226 226 / 0.5), transparent 30%);
+  animation: ps-row-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both, ps-row-pulse 2.4s ease-in-out infinite;
+}
+.ps-row-critical::before {
+  background: linear-gradient(180deg, transparent, rgb(225 29 72 / 0.7), transparent);
+  opacity: 1;
+}
+
+/* Gantt chart container */
+.ps-gantt-container {
+  position: relative;
+}
+.ps-gantt-row {
+  animation: ps-gantt-row-enter 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ps-gantt-row:hover .ps-gantt-bar {
+  filter: brightness(1.1);
+  transform: scaleY(1.1);
+}
+
+/* Tab button — transition + active scale */
+.ps-tab-btn {
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease, border-color 150ms ease;
+}
+.ps-tab-btn:active {
+  transform: scale(0.96);
+}
+
+/* Search input — focus ring expand */
+.ps-search-focus {
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+.ps-search-focus:focus {
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.12);
+  border-color: hsl(var(--primary) / 0.55);
+}
+
+/* Drawer — sheen sweep on open */
+.ps-drawer-sheen {
+  pointer-events: none;
+  overflow: hidden;
+}
+.ps-sheen {
+  animation: ps-sheen 1400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Drawer header — gradient underline + backdrop blur */
+.ps-drawer-header {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 0 hsl(var(--primary) / 0.15);
+}
+
+/* Stat cards in drawer — staggered entrance */
+.ps-stat-enter {
+  animation: ps-stat-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.ps-stat-enter:hover {
+  border-color: hsl(var(--primary) / 0.3);
+  transform: translateY(-1px);
+}
+
+/* Body content of drawer — fade-up */
+.ps-body-enter {
+  animation: ps-body-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ps-body-enter {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Inner cards in drawer — hover lift */
+.ps-card-enter {
+  animation: ps-stat-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.ps-card-enter:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -4px rgba(15, 23, 42, 0.1);
+}
+
+/* Badge count — pop animation */
+.ps-badge-pop {
+  animation: ps-badge-pop 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Custom scrollbar inside PS drawer */
+.ps-drawer-content::-webkit-scrollbar {
+  width: 6px;
+}
+.ps-drawer-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ps-drawer-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #06b6d4);
+  border-radius: 3px;
+}
+.ps-drawer-content::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #0891b2);
+}
+
+/* Row hover — subtle tint on tabular-nums cells */
+.ps-row-in:hover td {
+  text-shadow: 0 0 0 currentColor;
+}
+
+/* Gantt container scrollbar */
+.ps-gantt-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.ps-gantt-container::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.4);
+  border-radius: 4px;
+}
+.ps-gantt-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+}
+.ps-gantt-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #7c3aed);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ps-kpi-enter,
+  .ps-chart-enter,
+  .ps-row-in,
+  .ps-row-critical,
+  .ps-stat-enter,
+  .ps-body-enter,
+  .ps-card-enter,
+  .ps-badge-pop,
+  .ps-sheen,
+  .ps-gantt-row {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
