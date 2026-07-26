@@ -52,6 +52,7 @@ import {
   Mail,
   CalendarRange,
   Calculator,
+  Landmark,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -146,6 +147,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Mail,
   CalendarRange,
   Calculator,
+  Landmark,
 }
 
 // ──────────────────────────────────────────────────────

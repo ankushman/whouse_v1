@@ -23,6 +23,7 @@ tests=(
   "Work Orders|Work Order"
   "Prod. Schedule|Production Schedule"
   "Cost Variance|Production Cost Variance"
+  "Inventory Valuation|Inventory Valuation"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"

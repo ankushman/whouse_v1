@@ -15,6 +15,7 @@ export const navItems: NavItem[] = [
   { id: 'work-order-management', label: 'Work Orders', icon: 'ClipboardList', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'production-schedule', label: 'Prod. Schedule', icon: 'CalendarRange', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'production-cost-variance', label: 'Cost Variance', icon: 'Calculator', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
+  { id: 'inventory-valuation', label: 'Inventory Valuation', icon: 'Landmark', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'outbound', label: 'Outbound', icon: 'Truck', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'returns-reverse-logistics', label: 'Returns & Reverse', icon: 'RotateCcw', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'inventory', label: 'Inventory', icon: 'Package', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },

@@ -12491,3 +12491,303 @@ html.theme-transition body {
     width: 4px !important;
   }
 }
+
+/* ─────────────────────────────────────────────────────────── */
+/* R55 — Inventory Valuation micro-interactions (iv-* classes) */
+/* ─────────────────────────────────────────────────────────── */
+
+@keyframes iv-kpi-enter {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes iv-chart-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes iv-row-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes iv-row-critical-pulse {
+  0%, 100% { background-color: rgba(244, 63, 94, 0.06); }
+  50% { background-color: rgba(244, 63, 94, 0.12); }
+}
+
+@keyframes iv-stat-enter {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes iv-body-enter {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes iv-card-enter {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes iv-drawer-sheen {
+  0% { background-position: -200% 0; }
+  60% { background-position: 200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes iv-badge-pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes iv-search-ring-expand {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  50% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes iv-tab-pop {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.iv-kpi-enter {
+  opacity: 0;
+  animation: iv-kpi-enter 0.45s ease-out forwards;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.iv-kpi-enter:nth-child(1) { animation-delay: 0.02s; }
+.iv-kpi-enter:nth-child(2) { animation-delay: 0.06s; }
+.iv-kpi-enter:nth-child(3) { animation-delay: 0.10s; }
+.iv-kpi-enter:nth-child(4) { animation-delay: 0.14s; }
+.iv-kpi-enter:nth-child(5) { animation-delay: 0.18s; }
+.iv-kpi-enter:nth-child(6) { animation-delay: 0.22s; }
+.iv-kpi-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(16, 185, 129, 0.25);
+}
+
+.iv-chart-enter {
+  opacity: 0;
+  animation: iv-chart-enter 0.5s ease-out forwards;
+  animation-delay: 0.1s;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.iv-chart-enter:hover {
+  transform: translateY(-1px);
+  border-color: rgba(16, 185, 129, 0.4) !important;
+}
+
+.iv-table-card {
+  transition: box-shadow 0.3s ease;
+}
+.iv-table-card:hover {
+  box-shadow: 0 4px 16px -6px rgba(16, 185, 129, 0.15);
+}
+
+.iv-row-in {
+  opacity: 0;
+  animation: iv-row-in 0.35s ease-out forwards;
+  position: relative;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.iv-row-in:nth-child(odd) { animation-delay: calc(var(--row-idx, 0) * 0.02s); }
+.iv-row-in:hover {
+  transform: translateX(2px);
+}
+.iv-row-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #10b981 0%, #06b6d4 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.iv-row-in:hover::before {
+  opacity: 1;
+}
+
+.iv-row-critical {
+  background-color: rgba(244, 63, 94, 0.06);
+  animation: iv-row-in 0.35s ease-out forwards, iv-row-critical-pulse 2.5s ease-in-out infinite 0.4s;
+}
+.iv-row-critical::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #f43f5e 0%, #ef4444 100%);
+  opacity: 1 !important;
+}
+
+.iv-row-warn {
+  background-color: rgba(245, 158, 11, 0.05);
+  animation: iv-row-in 0.35s ease-out forwards;
+}
+.iv-row-warn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #f59e0b 0%, #f97316 100%);
+  opacity: 1 !important;
+}
+
+.iv-row-favorable {
+  animation: iv-row-in 0.35s ease-out forwards;
+}
+.iv-row-favorable::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #10b981 0%, #06b6d4 100%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.iv-row-favorable:hover::before {
+  opacity: 1;
+}
+
+.iv-tab-btn {
+  transition: all 0.2s ease;
+}
+.iv-tab-btn:active {
+  transform: scale(0.96);
+  animation: iv-tab-pop 0.3s ease;
+}
+
+.iv-search-focus {
+  transition: all 0.2s ease;
+}
+.iv-search-focus:focus-within {
+  animation: iv-search-ring-expand 0.6s ease-out;
+}
+.iv-search-focus input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.iv-drawer-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.iv-drawer-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #10b981 20%, #06b6d4 40%, #a855f7 60%, #10b981 80%, transparent 100%);
+  background-size: 200% 100%;
+  animation: iv-drawer-sheen 2.5s ease-in-out;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.iv-drawer-header {
+  position: relative;
+}
+.iv-drawer-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(16, 185, 129, 0.4) 30%, rgba(6, 182, 212, 0.4) 70%, transparent 100%);
+  pointer-events: none;
+}
+
+.iv-stat-enter {
+  opacity: 0;
+  animation: iv-stat-enter 0.5s ease-out forwards;
+}
+.iv-stat-enter:nth-child(1) { animation-delay: 0.05s; }
+.iv-stat-enter:nth-child(2) { animation-delay: 0.10s; }
+.iv-stat-enter:nth-child(3) { animation-delay: 0.15s; }
+.iv-stat-enter:nth-child(4) { animation-delay: 0.20s; }
+
+.iv-body-enter {
+  opacity: 0;
+  animation: iv-body-enter 0.4s ease-out forwards;
+  animation-delay: 0.1s;
+}
+
+.iv-card-enter {
+  opacity: 0;
+  animation: iv-card-enter 0.4s ease-out forwards;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.iv-card-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -6px rgba(16, 185, 129, 0.18);
+}
+
+.iv-badge-pop {
+  animation: iv-badge-pop 0.4s ease-out;
+}
+
+/* Custom scrollbar — emerald→cyan themed */
+.iv-drawer-sheen::-webkit-scrollbar {
+  width: 8px;
+}
+.iv-drawer-sheen::-webkit-scrollbar-track {
+  background: rgba(16, 185, 129, 0.05);
+}
+.iv-drawer-sheen::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981 0%, #06b6d4 100%);
+  border-radius: 4px;
+}
+.iv-drawer-sheen::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #059669 0%, #0891b2 100%);
+}
+
+/* Row hover text glow on emerald accent */
+.iv-row-in:hover td {
+  text-shadow: 0 0 0.5px rgba(16, 185, 129, 0.4);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .iv-kpi-enter,
+  .iv-chart-enter,
+  .iv-row-in,
+  .iv-row-critical,
+  .iv-row-warn,
+  .iv-row-favorable,
+  .iv-stat-enter,
+  .iv-body-enter,
+  .iv-card-enter,
+  .iv-drawer-sheen::before,
+  .iv-drawer-header::after {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* High-contrast mode */
+@media (prefers-contrast: more) {
+  .iv-row-critical::before,
+  .iv-row-warn::before,
+  .iv-row-favorable::before,
+  .iv-row-in::before {
+    opacity: 1 !important;
+    width: 4px !important;
+  }
+}

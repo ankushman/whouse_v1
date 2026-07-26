@@ -5903,3 +5903,157 @@ Updated Project Status (Post Round 54):
   13. Customer contract document management (mirror vendor contract module)
   14. Add Demand Forecasting module (statistical + ML forecasting on top of MRP demand history — extends MRP module)
   15. Add Inventory Valuation module (FIFO/LIFO/Weighted Average/Special Cost layer — links to PCV for standard cost roll input)
+
+---
+Task ID: 55
+Agent: Main (Cron Review - Round 55)
+Task: Inventory Valuation module (finance ops layer) with 4 costing methods (FIFO/LIFO/WAC/Std), Ind AS 2 reserves + journal entries, book-vs-physical reconciliation, standard cost roll history linked to PCV — 6-tab inline drawer + 30+ CSS micro-interactions + agent-browser QA verified + Dashboard/MRP/PCV regression check
+
+Work Log:
+- Read worklog.md — project at Round 54, 36 modules, 34 detail drawers, 980+ CSS classes, 0 TS errors, lint/build clean.
+- Verified baseline: `bun run lint` (0 errors), `npx tsc --noEmit` (only 1 pre-existing error in examples/websocket/server.ts — socket.io module missing, unrelated), `bun run build` (success, 7 routes).
+- Started standalone server with `NODE_OPTIONS=--max-old-space-size=256` on `http://127.0.0.1:3001/`.
+- agent-browser smoke test PASSED: Dashboard rendered ("Executive Dashboard"), PCV rendered ("Production Cost Variance"), MRP rendered ("Inventory Replenishment (MRP)"), Production Schedule rendered ("Production Schedule").
+- Strategic choice: Built new operational module "Inventory Valuation" (was priority #15 in worklog priority list). Closes the inventory finance loop: BOM → Production Schedule → Work Order → Inventory Replenishment/MRP → Production Cost Variance → Inventory Valuation (4 costing methods + reserves + Ind AS 2 journals + reconciliation + standard cost roll) → Standard Cost Update → back to BOM.
+
+NEW FEATURE 1: Inventory Valuation Module (~2565 lines, file: src/components/modules/inventory-valuation-view.tsx)
+  - New navigation item: "Inventory Valuation" (icon: Landmark, group: operations, placed right after Cost Variance)
+  - 6 hero KPI cards: Total Inventory Value / FIFO Value / WAC Value / Standard Value / Total Reserve (with pulse ping when > 0) / Quarantine Value — each with gradient top bar, trend indicator, secondary metric
+  - 6-Month Valuation Trend AreaChart (4-method overlay: FIFO/LIFO/WAC/Standard aggregated across all SKUs)
+  - Stock Status Distribution donut PieChart (7 statuses color-coded)
+  - Value by Costing Method donut PieChart (4 methods color-coded)
+  - Top 10 SKUs by Inventory Value horizontal BarChart (color-coded by status)
+  - Reserve by Category BarChart (sorted by amount)
+  - Inventory Value by Warehouse BarChart
+  - 16 mock IV records with realistic Indian automotive parts (same parts as WO/PS/MRP/PCV modules for traceability continuity): brake pad, wheel rim, engine block, caliper seal, shock absorber, Li-Ion battery, tire bead, wiring harness, engine bolt, engine oil, windshield, radiator cap, air filter, spark plug, clutch FAI, helmet shell
+  - 8 status tabs: All (16) / Active (10) / Slow-Moving (3) / Obsolete (1) / Reserved (1) / Quarantine (1) / In-Transit (0) / Consignment (0) — each with live count badge
+  - 3 filters: Costing Method (5 options) + ABC Class (4 options) + free-text search (matches ID, part no, description, category, warehouse, supplier, bin, lot)
+  - 7 stock statuses with full theming (label, color, bg, border, pieColor, icon): active=PackageCheck/emerald, slow-moving=Hourglass/amber, obsolete=Archive/rose, reserved=BookMarked/blue, quarantine=PackageX/purple, in-transit=Truck/cyan, consignment=Handshake/indigo
+  - 4 costing methods with theming + description: fifo=Layers/blue, lifo=Layers3/rose, weighted-average=Scale/emerald, standard=Target/amber — each with methodological description
+  - 4 risk levels with theming: low/medium/high/critical (emerald→rose gradient)
+  - 3 ABC classes with theming: A (emerald, high-value), B (blue, mid), C (amber, low)
+  - Hash-seeded deterministic mock data generators: genCostLayers (2-4 FIFO/LIFO layers with receipt date/GRN/PO/supplier/qty/age), genMovements (8-12 movement records with receipt/issue/transfer/adjustment/return/scrap types and running balance), genReserves (obsolete/slow-moving/price-decline/damage/expiry — each with type/description/percent/amount/justification/status/approver/date), genJournalEntries (Ind AS 2 style 4-line balanced entries: Inventory Reserve + COGS Write-down + DTA + Deferred Tax), genReconciliation (4 quarterly cycle count records with book/physical/variance + investigator + status), genStdCostRolls (3 historical standard cost revisions with prev/new/variance/reason/PCV-ref/approver/status), genMonthlyTrend (6 months FIFO/LIFO/WAC/Std/reserve)
+  - Status-aware row theming: obsolete=red gradient+pulse animation, slow-moving/quarantine=amber tint, active=emerald accent on hover, all with left gradient accent bar
+  - Reserve amount color-coded in table (rose if > 0)
+  - Net value (Total - Reserve) shown explicitly
+  - Days in stock badge with amber tint for >90 days
+  - Supplier rating badge with star icon shown inline
+  - Bin location + lot number stacked in table cells
+  - CSV export with full 25-field set per IV record
+  - Refresh + Run Period Close action buttons with toast feedback
+
+NEW FEATURE 2: Inventory Valuation Detail Drawer (~840 lines, 6 sub-tabs, embedded in module)
+  - 6 sub-tabs: Overview / Cost Layers / Movements / Reserves / Reconciliation / Std Cost Roll
+  - Header: 4 hero stat grid (On-Hand Qty, Unit Cost by Method, Total Value, Reserve), status badge, risk badge, method badge, ABC badge, supplier rating badge, IV ID, Part No, Bin, Lot
+  - Sheen sweep on open (gradient emerald→cyan→purple), gradient underline + backdrop blur on header
+  - Overview tab: 3-card value grid (Book/Standard/Net Realizable) + 6-Month Valuation Trend AreaChart (4-method overlay) + Traceability 4×2 grid (warehouse/bin/lot/expiry/receipt/issue/accountant/valuation date) + Supplier Context 3-card row (name/rating/PCV ref)
+  - Cost Layers tab: Full table with 2-4 cost layers (Layer ID, Receipt Date, GRN/PO, Qty Received, Qty Remaining, Unit Cost, Extended, Age in days) + total row + Cost Layer Aging Distribution BarChart (color-coded by age: <30d emerald, 30-90d blue, >90d amber)
+  - Movements tab: Full table with 8-12 movement records (Movement ID, Date, Type with icon, Reference, Qty +/-, Unit Cost, Value, Balance, User, Notes) — type icons color-coded (receipt emerald, issue rose, transfer blue/amber, adjustment purple, return cyan, scrap rose)
+  - Reserves tab: 3-card summary (Total Reserve, Active Reserves count, Net Book Value) + Reserve Entries table (Reserve Type, Description, Reserve %, Reserve Amount, Status, Approved By, Date) + Ind AS 2 Journal Entries table (4 entries: 1 inventory reserve credit + 1 COGS write-down debit + 1 DTA debit + 1 deferred tax credit, balanced debit/credit) + total row with balanced check
+  - Reconciliation tab: Full table with 4 quarterly records (Recon ID, Date, Book Qty, Physical Qty, Variance Qty, Book Value, Physical Value, Variance Value, Status, Investigator, Notes) — status-aware row theming (matched=normal, variance=amber tint, under-investigation=rose tint)
+  - Std Cost Roll tab: Current Standard Cost hero card + Std Cost Roll History table (Roll ID, Effective Date, Prev Std, New Std, Variance, Variance %, Reason, PCV Ref, Approved By, Status) + Standard Cost Evolution LineChart (new vs prev cost)
+  - Footer: Export button always + status-aware actions:
+    - slow-moving: Initiate Clearance Plan (amber)
+    - obsolete: Initiate Scrap Write-off (destructive rose)
+    - quarantine: Initiate Disposition Review (purple)
+    - active with std cost variance > 0: Update Standard Cost (emerald)
+    - reserved: Release Reservation (blue)
+  - All animations: iv-drawer-sheen (sheen sweep on open), iv-drawer-header (gradient underline + backdrop blur), iv-stat-enter (4 staggered), iv-body-enter (fade-up), iv-card-enter (hover lift), iv-tab-btn (active scale), iv-search-focus (ring expand), iv-row-in (entrance + ::before gradient accent bar), iv-row-critical (red gradient + pulse), iv-row-warn (amber tint), iv-row-favorable (emerald tint on hover), iv-kpi-enter (staggered + hover lift), iv-chart-enter (hover lift + border tint), iv-table-card (hover shadow), custom emerald→cyan scrollbar, prefers-reduced-motion support, prefers-contrast: more support
+
+NEW FEATURE 3: Navigation + Icon Map updates
+  - Added 'inventory-valuation' to navItems in app-store.ts (group: operations, icon: Landmark, roles: super_admin/executive/regional_manager/warehouse_manager, placed after Cost Variance)
+  - Imported Landmark icon in app-layout.tsx and added to iconMap (both import and iconMap object)
+  - Imported InventoryValuationView in app/page.tsx and added to viewMap
+  - Exported from src/components/modules/index.ts
+
+NEW FEATURE 4: 30+ new CSS micro-interaction classes (file: src/app/globals.css, appended at end, +300 lines including keyframes)
+  - iv-kpi-enter (staggered + hover lift), iv-chart-enter (hover lift + border tint), iv-table-card (hover shadow), iv-row-in (entrance + ::before gradient accent bar), iv-row-critical (red gradient + pulse animation), iv-row-warn (amber tint), iv-row-favorable (emerald tint on hover), iv-tab-btn (transition + active scale), iv-search-focus (ring expand), iv-drawer-sheen (sheen sweep on open), iv-drawer-header (gradient underline + backdrop blur + shadow), iv-stat-enter (4 staggered), iv-body-enter (fade-up), iv-card-enter (hover lift), iv-badge-pop (badge pop animation), custom emerald→cyan scrollbar styling for drawer, row hover text-shadow, prefers-reduced-motion support, prefers-contrast: more support
+
+NEW FEATURE 5: Reusable QA test script updated (file: /home/z/my-project/scripts/qa-test-views.sh)
+  - Added "Inventory Valuation|Inventory Valuation" test case
+  - Now tests 37 modules (was 36)
+
+QA Verification (agent-browser LIVE TEST):
+  - **Smoke test PASSED**: Inventory Valuation nav click → ✓ "Inventory Valuation" heading rendered
+  - KPI cards visible: 6 KPIs (Total Inventory Value, FIFO Value, WAC Value, Standard Value, Total Reserve, Quarantine Value)
+  - 6 chart cards visible: 6-Month Valuation Trend AreaChart (4-method overlay), Stock Status Distribution donut, Value by Costing Method donut, Top 10 SKUs by Inventory Value horizontal BarChart, Reserve by Category BarChart, Inventory Value by Warehouse BarChart
+  - All 8 status tabs visible with counts (All: 16, Active: 10, Slow-Moving: 3, Obsolete: 1, Reserved: 1, Quarantine: 1, In-Transit: 0, Consignment: 0)
+  - Master table shows 16 IV records with part avatars, status icons, method badges, ABC badges, risk badges, color-coded rows (obsolete highlighted with red gradient/pulse, slow-moving/quarantine with amber tint, active with emerald accent on hover)
+  - Clicked first row (IV-2026-7001, Brake Pad Assembly — Passenger Car, Active status, FIFO method, Low risk)
+  - agent-browser snapshot → ✓ Drawer opened (heading "Brake Pad Assembly — Passenger Car")
+  - Verified 6 tabs visible in drawer (Overview, Cost Layers, Movements, Reserves, Reconciliation, Std Cost Roll)
+  - Clicked Cost Layers tab → ✓ "Cost Layer Breakdown" rendered — layers with Layer ID/GRN-PO/Qty Received/Qty Remaining/Unit Cost/Extended/Age + total row + Cost Layer Aging Distribution chart
+  - Clicked Movements tab → ✓ "Inventory Movement History" rendered — MVT-BRK-PA-001/002/003... with type icons, references (GRN/WO/TRF), running balance
+  - Clicked Reserves tab → ✓ "Inventory Reserve Entries (Ind AS 2)" rendered — "No active reserves — inventory at full book value" (correct for active A-class item)
+  - Clicked Reconciliation tab → ✓ "Book vs Physical Reconciliation History" rendered — REC-BRK-PA-001/002/003/004 with book/physical/variance
+  - Clicked Std Cost Roll tab → ✓ "Standard Cost Roll History" rendered — SCR-BRK-PA-01/02/03 with linked PCV refs (PCV-2026-9011/13/15), approval status badges, Standard Cost Evolution chart
+  - Closed drawer, clicked Obsolete row (IV-2026-7012, Radiator Cap 1.1 Bar, Obsolete status, Critical risk)
+  - Clicked Reserves tab → ✓ "Journal Entries — Ind AS 2 Style" rendered with "Balanced" badge (4 entries: Inventory Reserve credit + COGS Write-down debit + DTA debit + Deferred Tax credit — balanced)
+  - Tested status-aware footer on Obsolete (Radiator Cap) → Footer shows Export + Initiate Scrap Write-off (destructive rose, status-aware correct)
+  - Tested status-aware footer on Active (Brake Pad) → Footer shows Export + Update Standard Cost (emerald, status-aware correct)
+  - **Regression check PASSED**: Dashboard still renders ("Executive Dashboard" heading), MRP still renders ("Inventory Replenishment (MRP)" heading), PCV still renders ("Production Cost Variance" heading)
+
+Static verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (only 1 pre-existing error in examples/websocket/server.ts socket.io missing module — unrelated)
+
+Stage Summary:
+- 7 files changed (1 new + 6 modified), +2900 lines
+- 1 NEW MODULE: Inventory Valuation (~2565 lines, 6 KPIs + 6 charts + 8 status tabs + 3 filters + 16-item master table + 6-tab inline drawer with cost layers, movements, reserves, journal entries, reconciliation, standard cost roll)
+- 1 NEW NAV ITEM + ICON: "Inventory Valuation" with Landmark icon
+- 30+ new CSS micro-interaction classes (all iv-* classes)
+- 4 views updated: app-layout (Landmark icon), page.tsx (viewMap), app-store.ts (navItems), modules/index.ts (export), qa-test-views.sh (test case), globals.css (iv-* classes)
+- MODULES NOW: 37 (was 36 — added Inventory Valuation)
+- DETAIL DRAWERS NOW: 35 total (34 universal + 1 new inline IV drawer)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors (only 1 pre-existing error in examples/websocket/server.ts)
+- QA: agent-browser LIVE verification PASSED (IV drawer 6 tabs verified: Overview/Cost Layers/Movements/Reserves/Reconciliation/Std Cost Roll + status-aware footer actions verified on Obsolete (Initiate Scrap Write-off) + Active (Update Standard Cost) + Ind AS 2 journal entries balanced badge verified + Dashboard + MRP + PCV regression check)
+- INVENTORY FINANCE LOOP CLOSED: BOM (R47) → Production Schedule (R52) → Work Order (R50) → Inventory Replenishment/MRP (R53) → Procurement (PO) → Supplier Quality → QIP (R48) → NCR (R49) → SCAR (R51) → Supplier Scorecard → Production Cost Variance (R54) → Inventory Valuation (R55 NEW — 4 costing methods, Ind AS 2 reserves + journal entries, book-vs-physical reconciliation, standard cost roll history linked to PCV) → Standard Cost Update → back to BOM
+
+---
+Updated Project Status (Post Round 55):
+- STATUS: STABLE + NEW INVENTORY VALUATION MODULE + agent-browser SMOKE TEST PASSED (37/37 modules total)
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (37): All previous 36 + Inventory Valuation (NEW)
+- SHARED COMPONENTS (54+): All previous 54
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (1010+): 980+ previous + 30+ new (all iv-* classes)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (35 — UNIVERSAL COVERAGE + 1 NEW INLINE):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓, Yard ✓,
+    + Customer SLA (inline), + Supplier Quality (inline), + Procurement (inline), + BOM (inline), + QIP (inline), + NCR (inline),
+    + Work Order (inline), + SCAR (inline), + Production Schedule (inline), + Inventory Replenishment (inline), + Production Cost Variance (inline), + Inventory Valuation (inline multi-tab drawer NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors (only 1 pre-existing error in examples/websocket/server.ts socket.io missing module — unrelated)
+- QA: agent-browser SMOKE TEST PASSED + IV drawer 6 tabs verified (Overview/Cost Layers/Movements/Reserves/Reconciliation/Std Cost Roll) + status-aware footer actions verified on Obsolete (Initiate Scrap Write-off) + Active (Update Standard Cost) + Ind AS 2 journal entries balanced badge verified + Dashboard + MRP + PCV regression check
+- MANUFACTURING + SUPPLY CHAIN + FINANCE LOOP CLOSED: Sales Order → BOM → Production Schedule → Work Order → Inventory Replenishment (MRP) → Procurement → Supplier Quality → QIP → NCR → SCAR → Supplier Scorecard → Production Cost Variance (Ind AS 2 journal entries) → Inventory Valuation (4 costing methods + reserves + journal + reconciliation + std cost roll) → Standard Cost Update → back to BOM
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use standalone production build with NODE_OPTIONS=--max-old-space-size=256 and clean chrome + next-server processes between batches)
+  - agent-browser `eval --stdin` consistently crashes server via OOM (cgroup memory limit hit when full SPA bundle loads) — use `agent-browser click "@ref"` and `agent-browser snapshot` instead, restart server between batches
+  - Stale next-server processes can occupy port 3001 across QA sessions — must `pkill -9 -f "next-server"` + `pkill -9 chrome` between batches
+  - `localhost` resolves to IPv6 (::1) which standalone server doesn't bind to — must use `127.0.0.1` explicitly
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Customer SLA, Vendor, Supplier Quality, Procurement, BOM, QIP, NCR, WO, SCAR, PS, MRP, PCV, and IV drawers are inline in module files (not extracted to shared) — 13 inline drawers total, refactor candidate for future round
+- PRIORITY NEXT:
+  1. Extract 13 inline drawers to shared/*-detail-drawer.tsx (consistency refactor)
+  2. Add 3-way match (PO ↔ GRN ↔ Invoice) auto-verification dashboard for Procurement module
+  3. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  4. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  5. Consolidate inline mock data from all 35 detail drawers into mock-data.ts (refactor)
+  6. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  7. CSS audit: 1010+ classes — consolidate 181 pre-existing duplicates
+  8. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  9. Multi-warehouse switching for dock scheduler & yard management (currently fixed to Chennai Hub)
+  10. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  11. Predictive model retraining trigger UI (currently display-only)
+  12. Vendor contract document management (upload/store contract PDFs)
+  13. Customer contract document management (mirror vendor contract module)
+  14. Add Demand Forecasting module (statistical + ML forecasting on top of MRP demand history — extends MRP module)
+  15. Add Fixed Asset Register module (links to PCV for capitalization + IV for asset valuation — closes finance ops layer with capital assets tracking, depreciation schedules per Companies Act Schedule II, asset capitalization workflow linked to procurement, impairment indicators linked to PCV/NCR, asset transfer/disposal workflow with journal entries)
