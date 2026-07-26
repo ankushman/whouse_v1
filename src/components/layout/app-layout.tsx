@@ -43,6 +43,7 @@ import {
   Factory,
   Trophy,
   ClipboardCheck,
+  ShoppingCart,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -128,6 +129,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Factory,
   Trophy,
   ClipboardCheck,
+  ShoppingCart,
 }
 
 // ──────────────────────────────────────────────────────

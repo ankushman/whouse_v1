@@ -9,6 +9,7 @@ tests=(
   "Operations Overview|Operations Overview"
   "Warehouses|Warehouses"
   "Inbound|Inbound"
+  "Procurement / PO|Procurement"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"
