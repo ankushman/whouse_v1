@@ -15,6 +15,10 @@ import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { KPICard } from "@/components/shared/kpi-card"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import {
+  OperationsOverviewDetailDrawer,
+  type OperationsWarehouseSummary,
+} from "@/components/shared/operations-overview-detail-drawer"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
@@ -96,6 +100,8 @@ const costLineConfig = {
 
 export function OperationsOverviewView() {
   const [timeRange, setTimeRange] = useState("today")
+  const [drawerWh, setDrawerWh] = useState<OperationsWarehouseSummary | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   // ── Derived KPIs ──
   const executiveKPIs = useMemo(() => {
@@ -505,7 +511,14 @@ export function OperationsOverviewView() {
               </TableHeader>
               <TableBody>
                 {warehouseStatus.map((wh) => (
-                  <TableRow key={wh.name} className="table-row-hover">
+                  <TableRow
+                    key={wh.name}
+                    className="table-row-hover cursor-pointer hover:bg-accent/40"
+                    onClick={() => {
+                      setDrawerWh(wh as OperationsWarehouseSummary)
+                      setDrawerOpen(true)
+                    }}
+                  >
                     <TableCell className="text-xs font-medium">{wh.name}</TableCell>
                     <TableCell>
                       <StatusBadge
@@ -545,6 +558,12 @@ export function OperationsOverviewView() {
           </div>
         </CardContent>
       </Card>
+
+      <OperationsOverviewDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        warehouse={drawerWh}
+      />
     </div>
   )
 }

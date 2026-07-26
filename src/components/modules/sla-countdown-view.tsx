@@ -23,6 +23,10 @@ import {
 import { cn } from "@/lib/utils"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import {
+  SLACountdownDetailDrawer,
+  type SLADetailItem,
+} from "@/components/shared/sla-countdown-detail-drawer"
+import {
   LineChart,
   Line,
   AreaChart,
@@ -140,7 +144,7 @@ const typeIcons: Record<string, React.ReactNode> = {
 
 // ── SLA Card Component ───────────────────────────────────────────────────
 
-function SLACard({ item }: { item: SLAItem }) {
+function SLACard({ item, onOpen }: { item: SLAItem; onOpen: (i: SLAItem) => void }) {
   // Single source of truth: parent (SLACountdownView) already decrements item.remainingMs
   // by 1000ms every second via setSlaItems. We just read item.remainingMs directly.
   //
@@ -153,7 +157,10 @@ function SLACard({ item }: { item: SLAItem }) {
   const isFlashing = countdown < 0 && Math.floor(Date.now() / 1000) % 2 === 0
 
   return (
-    <Card className={cn("card-depth overflow-hidden transition-all duration-300 hover-lift", colors.bg)}>
+    <Card
+      onClick={() => onOpen(item)}
+      className={cn("card-depth overflow-hidden transition-all duration-300 hover-lift cursor-pointer", colors.bg)}
+    >
       <CardContent className="p-4 space-y-3">
         {/* Header row */}
         <div className="flex items-start justify-between gap-2">
@@ -229,6 +236,8 @@ export function SLACountdownView() {
   const mountTimeRef = useRef(Date.now())
   const [slaItems, setSlaItems] = useState<SLAItem[]>(() => createSLAItems(mountTimeRef.current))
   const [slaTrendData] = useState(() => createSlaTrendData(mountTimeRef.current))
+  const [drawerItem, setDrawerItem] = useState<SLAItem | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   // Update countdowns every second — decrement by fixed 1000ms each tick
   useEffect(() => {
@@ -363,9 +372,22 @@ export function SLACountdownView() {
       {/* ── SLA Timeline Cards ── */}
       <div className="grid gap-4 lg:grid-cols-2 stagger-children">
         {sorted.map((item) => (
-          <SLACard key={item.id} item={item} />
+          <SLACard
+            key={item.id}
+            item={item}
+            onOpen={(i) => {
+              setDrawerItem(i)
+              setDrawerOpen(true)
+            }}
+          />
         ))}
       </div>
+
+      <SLACountdownDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        item={drawerItem}
+      />
 
       {/* ── Charts Row ── */}
       <div className="grid gap-4 lg:grid-cols-2">

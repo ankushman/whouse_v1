@@ -54,3 +54,6 @@ export { RouteOptimizationDetailDrawer, type RouteDetail, type RouteDetailDrawer
 export { PredictiveDetailDrawer, type PredictiveAnomaly } from "./predictive-detail-drawer"
 export { ComplianceDetailDrawer, type ComplianceDomainDetail } from "./compliance-detail-drawer"
 export { EnergyDetailDrawer, type EnergySiteDetail } from "./energy-detail-drawer"
+export { OperationsOverviewDetailDrawer, type OperationsWarehouseSummary } from "./operations-overview-detail-drawer"
+export { SLACountdownDetailDrawer, type SLADetailItem } from "./sla-countdown-detail-drawer"
+export { WarehouseMapDetailDrawer, type WarehouseMapDetail } from "./warehouse-map-detail-drawer"

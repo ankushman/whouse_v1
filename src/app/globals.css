@@ -8189,3 +8189,207 @@ html.theme-transition body {
 .animate-pulse-subtle-v2 {
   animation: pulse-subtle-v2 2s ease-in-out infinite;
 }
+
+/* ============================================================================ */
+/* ROUND 40 — Operations Overview / SLA Countdown / Warehouse Map detail drawer */
+/* ============================================================================ */
+
+/* --- Operations Overview Detail Drawer ------------------------------------- */
+@keyframes ops-header-sheen {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.ops-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: ops-header-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ops-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50% { box-shadow: 0 0 0 8px transparent; opacity: 0.92; }
+}
+.ops-icon-pulse {
+  animation: ops-icon-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes ops-stat-enter {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.ops-stat-enter > * {
+  animation: ops-stat-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.ops-stat-enter > *:nth-child(1) { animation-delay: 50ms; }
+.ops-stat-enter > *:nth-child(2) { animation-delay: 100ms; }
+.ops-stat-enter > *:nth-child(3) { animation-delay: 150ms; }
+.ops-stat-enter > *:nth-child(4) { animation-delay: 200ms; }
+
+@keyframes ops-body-enter {
+  0% { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.ops-drawer-body-enter {
+  animation: ops-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+@keyframes ops-card-enter {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.ops-card-enter {
+  animation: ops-card-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.ops-card-enter:hover {
+  transform: translateY(-1px);
+  background-color: hsl(var(--accent) / 0.4);
+}
+
+/* --- SLA Countdown Detail Drawer ------------------------------------------- */
+@keyframes sla-header-sheen {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.sla-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: sla-header-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sla-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; transform: scale(1); }
+  50% { box-shadow: 0 0 0 6px transparent; transform: scale(1.04); }
+}
+.sla-icon-pulse {
+  animation: sla-icon-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes sla-stat-enter {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.sla-stat-enter > * {
+  animation: sla-stat-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes sla-body-enter {
+  0% { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.sla-drawer-body-enter {
+  animation: sla-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+@keyframes sla-card-enter {
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.sla-card-enter {
+  animation: sla-card-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.sla-card-enter:hover {
+  transform: translateX(2px);
+  background-color: hsl(var(--accent) / 0.4);
+}
+
+/* SLA breach flash (for critical countdowns) */
+@keyframes sla-breach-flash {
+  0%, 100% { background-color: hsl(var(--destructive) / 0.05); }
+  50% { background-color: hsl(var(--destructive) / 0.15); }
+}
+.sla-breach-flash {
+  animation: sla-breach-flash 1.6s ease-in-out infinite;
+}
+
+/* --- Warehouse Map Detail Drawer ------------------------------------------- */
+@keyframes whmap-header-sheen {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.whmap-drawer-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: whmap-header-sheen 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes whmap-icon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50% { box-shadow: 0 0 0 8px transparent; opacity: 0.92; }
+}
+.whmap-icon-pulse {
+  animation: whmap-icon-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes whmap-stat-enter {
+  0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.whmap-stat-enter > * {
+  animation: whmap-stat-enter 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.whmap-stat-enter > *:nth-child(1) { animation-delay: 50ms; }
+.whmap-stat-enter > *:nth-child(2) { animation-delay: 100ms; }
+.whmap-stat-enter > *:nth-child(3) { animation-delay: 150ms; }
+.whmap-stat-enter > *:nth-child(4) { animation-delay: 200ms; }
+
+@keyframes whmap-body-enter {
+  0% { opacity: 0; transform: translateX(16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.whmap-drawer-body-enter {
+  animation: whmap-body-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 120ms;
+}
+
+@keyframes whmap-card-enter {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.whmap-card-enter {
+  animation: whmap-card-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.whmap-card-enter:hover {
+  transform: translateY(-1px);
+  background-color: hsl(var(--accent) / 0.4);
+}
+
+/* Pulse ring for "view full details" button on warehouse detail panel */
+@keyframes view-details-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.3); }
+  50% { box-shadow: 0 0 0 4px hsl(var(--primary) / 0); }
+}
+.view-details-pulse {
+  animation: view-details-pulse 2.4s ease-in-out infinite;
+}
+
+/* Slide-in-right micro animation for warehouse detail panel */
+@keyframes slide-in-right-micro {
+  0% { opacity: 0; transform: translateX(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+.animate-slide-in-right-micro {
+  animation: slide-in-right-micro 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}

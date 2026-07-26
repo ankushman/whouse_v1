@@ -3,6 +3,7 @@
 import { useState, useMemo, useCallback } from "react"
 import { warehouses } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
+import { WarehouseMapDetailDrawer } from "@/components/shared/warehouse-map-detail-drawer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -32,6 +33,8 @@ import {
   CheckCircle2,
   Box,
   Timer,
+  Eye,
+  ChevronRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -218,9 +221,11 @@ function AnimatedRouteLine({ route, idx }: { route: typeof ROUTE_CONNECTIONS[num
 function WarehouseDetailPanel({
   warehouse,
   onClose,
+  onExpand,
 }: {
   warehouse: (typeof warehouses)[number]
   onClose: () => void
+  onExpand?: (w: (typeof warehouses)[number]) => void
 }) {
   const details = WAREHOUSE_DETAILS[warehouse.id]
   const status = warehouse.status as WarehouseStatus
@@ -300,6 +305,18 @@ function WarehouseDetailPanel({
             {status === "green" ? "All Systems Operational" : status === "amber" ? "Performance Warning" : "Critical Attention Required"}
           </div>
         </div>
+
+        {/* Expand to detail drawer */}
+        {onExpand && (
+          <button
+            onClick={() => onExpand(warehouse)}
+            className="w-full text-[10px] font-medium text-primary hover:text-primary/80 flex items-center justify-center gap-1 py-1.5 rounded-md border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors"
+          >
+            <Eye className="size-3" />
+            View Full Details
+            <ChevronRight className="size-3" />
+          </button>
+        )}
       </CardContent>
     </Card>
   )
@@ -411,6 +428,8 @@ function WarehouseNode({ warehouse, position, isSelected, onClick }: WarehouseNo
 
 export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [drawerWh, setDrawerWh] = useState<(typeof warehouses)[number] | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const handleNodeClick = useCallback((warehouseId: string) => {
     setSelectedId((prev) => prev === warehouseId ? null : warehouseId)
@@ -419,6 +438,11 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
 
   const handleClosePanel = useCallback(() => {
     setSelectedId(null)
+  }, [])
+
+  const handleExpand = useCallback((w: (typeof warehouses)[number]) => {
+    setDrawerWh(w)
+    setDrawerOpen(true)
   }, [])
 
   const selectedWarehouse = useMemo(
@@ -605,6 +629,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
               <WarehouseDetailPanel
                 warehouse={selectedWarehouse}
                 onClose={handleClosePanel}
+                onExpand={handleExpand}
               />
             )}
 
@@ -765,6 +790,12 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
           </CardContent>
         </Card>
       </div>
+
+      <WarehouseMapDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        warehouse={drawerWh}
+      />
     </div>
   )
 }
