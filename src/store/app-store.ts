@@ -17,6 +17,7 @@ export const navItems: NavItem[] = [
   { id: 'outbound', label: 'Outbound', icon: 'Truck', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'returns-reverse-logistics', label: 'Returns & Reverse', icon: 'RotateCcw', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'inventory', label: 'Inventory', icon: 'Package', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
+  { id: 'inventory-replenishment', label: 'MRP Replenishment', icon: 'Boxes', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'transportation', label: 'Transportation', icon: 'Route', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'route-optimization', label: 'Route Optimization', icon: 'Navigation', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'warehouse-map', label: 'Warehouse Map', icon: 'MapPin', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },

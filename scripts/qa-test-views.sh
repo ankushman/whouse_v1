@@ -25,6 +25,7 @@ tests=(
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"
+  "MRP Replenishment|Inventory Replenishment"
   "Transportation|Transportation"
   "Yard Management|Yard Management"
   "Route Optimization|Route"

@@ -11880,3 +11880,312 @@ html.theme-transition body {
     transform: none !important;
   }
 }
+
+/* ════════════════════════════════════════════════════════════
+   ROUND 53 — Inventory Replenishment (MRP) Module Styles
+   Pattern: mrp-* prefix (mirrors ps-* from R52 and wo-* from R50)
+   ════════════════════════════════════════════════════════════ */
+
+/* KPI Card entrance — staggered fade-up with subtle scale */
+@keyframes mrp-kpi-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.mrp-kpi-enter {
+  animation: mrp-kpi-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.mrp-kpi-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(59, 130, 246, 0.25);
+}
+
+/* Chart card entrance + hover lift */
+@keyframes mrp-chart-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mrp-chart-enter {
+  animation: mrp-chart-enter 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: box-shadow 220ms ease, border-color 220ms ease;
+}
+.mrp-chart-enter:hover {
+  box-shadow: 0 4px 16px -6px rgba(59, 130, 246, 0.18);
+  border-color: hsl(var(--border) / 0.9);
+}
+
+/* Master table card */
+.mrp-table-card {
+  transition: box-shadow 220ms ease;
+}
+.mrp-table-card:hover {
+  box-shadow: 0 4px 16px -6px rgba(15, 23, 42, 0.10);
+}
+
+/* Row entrance + accent bar */
+@keyframes mrp-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.mrp-row-in {
+  animation: mrp-row-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+}
+.mrp-row-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  opacity: 0;
+  transition: opacity 200ms ease;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.mrp-row-in:hover::before {
+  opacity: 1;
+}
+
+/* Critical shortage row — red pulse */
+@keyframes mrp-row-critical-pulse {
+  0%, 100% {
+    background-color: hsl(0 84% 95% / 0.5);
+  }
+  50% {
+    background-color: hsl(0 84% 95% / 0.8);
+  }
+}
+.mrp-row-critical {
+  animation: mrp-row-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both, mrp-row-critical-pulse 2.4s ease-in-out infinite;
+  background-color: hsl(0 84% 95% / 0.5);
+}
+.mrp-row-critical::before {
+  background: linear-gradient(180deg, #ef4444, #f87171);
+  opacity: 1 !important;
+}
+
+/* Below safety — amber tint */
+.mrp-row-warn {
+  background-color: hsl(38 92% 50% / 0.06);
+}
+.mrp-row-warn::before {
+  background: linear-gradient(180deg, #f59e0b, #fbbf24);
+  opacity: 1 !important;
+}
+
+/* Overstock — violet tint */
+.mrp-row-overstock {
+  background-color: hsl(258 90% 66% / 0.06);
+}
+.mrp-row-overstock::before {
+  background: linear-gradient(180deg, #8b5cf6, #a78bfa);
+  opacity: 1 !important;
+}
+
+/* Obsolete risk — pink tint */
+.mrp-row-obsolete {
+  background-color: hsl(330 81% 60% / 0.06);
+}
+.mrp-row-obsolete::before {
+  background: linear-gradient(180deg, #ec4899, #f472b6);
+  opacity: 1 !important;
+}
+
+/* Tab buttons — scale on active */
+.mrp-tab-btn {
+  transition: all 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mrp-tab-btn:active {
+  transform: scale(0.96);
+}
+
+/* Badge pop animation */
+@keyframes mrp-badge-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.mrp-badge-pop {
+  animation: mrp-badge-pop 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Search focus — ring expand */
+.mrp-search-focus {
+  transition: box-shadow 220ms ease, border-color 220ms ease;
+}
+.mrp-search-focus:focus {
+  border-color: hsl(217 91% 60%);
+  box-shadow:
+    0 0 0 3px hsl(217 91% 60% / 0.15),
+    0 0 0 6px hsl(217 91% 60% / 0.06);
+}
+
+/* Drawer sheen sweep on open */
+@keyframes mrp-drawer-sheen {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.mrp-drawer-sheen {
+  animation: mrp-drawer-sheen 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+  overflow: hidden;
+}
+.mrp-drawer-sheen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsl(217 91% 60% / 0.08), hsl(258 90% 66% / 0.06), transparent);
+  animation: mrp-sheen-sweep 1.6s ease-out forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes mrp-sheen-sweep {
+  0% {
+    left: -60%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Drawer header — gradient underline + backdrop blur */
+.mrp-drawer-header {
+  position: relative;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 0 hsl(var(--border) / 0.6);
+}
+.mrp-drawer-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, transparent);
+  opacity: 0.6;
+}
+
+/* Stat card staggered entrance */
+@keyframes mrp-stat-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.mrp-stat-enter {
+  animation: mrp-stat-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Body entrance */
+@keyframes mrp-body-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mrp-body-enter {
+  animation: mrp-body-enter 380ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Recommendation card entrance */
+@keyframes mrp-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mrp-card-enter {
+  animation: mrp-card-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.mrp-card-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px -6px rgba(59, 130, 246, 0.18);
+}
+
+/* Custom scrollbar for MRP drawer (blue → cyan) */
+.mrp-drawer-sheen::-webkit-scrollbar {
+  width: 8px;
+}
+.mrp-drawer-sheen::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mrp-drawer-sheen::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #06b6d4);
+  border-radius: 4px;
+}
+.mrp-drawer-sheen::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #0891b2);
+}
+
+/* Tabular nums text-shadow on row hover */
+.mrp-row-in:hover td {
+  text-shadow: 0 0 0 currentColor;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mrp-kpi-enter,
+  .mrp-chart-enter,
+  .mrp-row-in,
+  .mrp-row-critical,
+  .mrp-stat-enter,
+  .mrp-body-enter,
+  .mrp-card-enter,
+  .mrp-badge-pop,
+  .mrp-drawer-sheen,
+  .mrp-drawer-sheen::before {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

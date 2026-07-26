@@ -20,6 +20,7 @@ import { OutboundView } from "@/components/modules/outbound-view"
 import { ReturnsReverseLogisticsView } from "@/components/modules/returns-reverse-logistics-view"
 import { YardManagementView } from "@/components/modules/yard-management-view"
 import { InventoryView } from "@/components/modules/inventory-view"
+import { InventoryReplenishmentView } from "@/components/modules/inventory-replenishment-view"
 import { TransportationView } from "@/components/modules/transportation-view"
 import { RouteOptimizationView } from "@/components/modules/route-optimization-view"
 import { EquipmentView } from "@/components/modules/equipment-view"
@@ -60,6 +61,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "returns-reverse-logistics": ReturnsReverseLogisticsView,
   "yard-management": YardManagementView,
   inventory: InventoryView,
+  "inventory-replenishment": InventoryReplenishmentView,
   transportation: TransportationView,
   "route-optimization": RouteOptimizationView,
   equipment: EquipmentView,
