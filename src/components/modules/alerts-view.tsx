@@ -5,6 +5,7 @@ import { alerts } from "@/data/mock-data"
 import { PageHeader } from "@/components/shared/page-header"
 import { StatusBadge } from "@/components/shared/status-badge"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { AlertsDetailDrawer, type AlertDetail } from "@/components/shared/alerts-detail-drawer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -48,7 +49,14 @@ export function AlertsView() {
   const [severityFilter, setSeverityFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
   const [acknowledgedAlerts, setAcknowledgedAlerts] = useState<Set<string>>(new Set())
+  const [drawerAlert, setDrawerAlert] = useState<AlertDetail | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
   const toast = useToastHelper()
+
+  const openDrawer = useCallback((alert: typeof alerts[number]) => {
+    setDrawerAlert(alert as AlertDetail)
+    setDrawerOpen(true)
+  }, [])
 
   const filtered = useMemo(() => {
     return alerts.filter((a) => {
@@ -173,8 +181,12 @@ export function AlertsView() {
           return (
             <Card
               key={alert.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => openDrawer(alert)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDrawer(alert) } }}
               className={cn(
-                "rounded-xl border shadow-sm transition-all hover:bg-muted/40",
+                "rounded-xl border shadow-sm transition-all hover:bg-muted/40 hover:shadow-md hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 config.border,
                 isAcknowledged && "opacity-60"
               )}
@@ -197,9 +209,10 @@ export function AlertsView() {
                         <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{formatTimestamp(alert.timestamp)}</span>
                       </div>
                     </div>
+                    <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0 mt-0.5" />
                   </div>
                 </div>
-                <div className="flex shrink-0 items-center gap-2">
+                <div className="flex shrink-0 items-center gap-2" onClick={(e) => e.stopPropagation()}>
                   {!isAcknowledged && (
                     <Button
                       variant="outline"
@@ -224,6 +237,23 @@ export function AlertsView() {
           </div>
         )}
       </div>
+
+      {/* Detail Drawer */}
+      <AlertsDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        alert={drawerAlert}
+        onAcknowledge={(a) => {
+          setAcknowledgedAlerts((prev) => new Set(prev).add(a.id))
+        }}
+        onEscalate={(a) => {
+          toast.warning("Escalated", `${a.title} escalated to regional ops`, { duration: 3000 })
+        }}
+        onResolve={(a) => {
+          setAcknowledgedAlerts((prev) => new Set(prev).add(a.id))
+          toast.success("Resolved", `${a.title} marked as resolved`, { duration: 3000 })
+        }}
+      />
     </div>
   )
 }

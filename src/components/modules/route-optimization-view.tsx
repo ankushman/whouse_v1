@@ -3,6 +3,7 @@
 import { useMemo, useState, useCallback } from "react"
 import { PageHeader } from "@/components/shared/page-header"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
+import { RouteOptimizationDetailDrawer, type RouteDetail } from "@/components/shared/route-detail-drawer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -30,19 +31,20 @@ import {
   Zap,
   TrendingUp,
   Filter,
+  ChevronRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 // ── Mock Data ──────────────────────────────────────────────────────────────
 
-const routes = [
-  { id: "RT-2024-001", origin: "Mumbai DC", destination: "Pune Hub", stops: 3, estTime: "2h 45m", distance: "152 km", status: "optimized" as const, progress: 0, vehicle: "TRK-101" },
-  { id: "RT-2024-002", origin: "Delhi Hub", destination: "Jaipur DC", stops: 2, estTime: "4h 10m", distance: "268 km", status: "in-transit" as const, progress: 65, vehicle: "TRK-203" },
-  { id: "RT-2024-003", origin: "Chennai Port", destination: "Bangalore DC", stops: 4, estTime: "6h 30m", distance: "347 km", status: "in-transit" as const, progress: 42, vehicle: "TRK-307" },
-  { id: "RT-2024-004", origin: "Kolkata DC", destination: "Patna Hub", stops: 2, estTime: "5h 15m", distance: "573 km", status: "delayed" as const, progress: 80, vehicle: "TRK-412" },
-  { id: "RT-2024-005", origin: "Hyderabad DC", destination: "Mumbai Port", stops: 3, estTime: "8h 20m", distance: "712 km", status: "optimized" as const, progress: 0, vehicle: "TRK-518" },
-  { id: "RT-2024-006", origin: "Mumbai DC", destination: "Goa Warehouse", stops: 1, estTime: "5h 45m", distance: "559 km", status: "completed" as const, progress: 100, vehicle: "TRK-209" },
+const routes: RouteDetail[] = [
+  { id: "RT-2024-001", origin: "Mumbai DC", destination: "Pune Hub", stops: 3, estTime: "2h 45m", distance: "152 km", status: "optimized", progress: 0, vehicle: "TRK-101" },
+  { id: "RT-2024-002", origin: "Delhi Hub", destination: "Jaipur DC", stops: 2, estTime: "4h 10m", distance: "268 km", status: "in-transit", progress: 65, vehicle: "TRK-203" },
+  { id: "RT-2024-003", origin: "Chennai Port", destination: "Bangalore DC", stops: 4, estTime: "6h 30m", distance: "347 km", status: "in-transit", progress: 42, vehicle: "TRK-307" },
+  { id: "RT-2024-004", origin: "Kolkata DC", destination: "Patna Hub", stops: 2, estTime: "5h 15m", distance: "573 km", status: "delayed", progress: 80, vehicle: "TRK-412" },
+  { id: "RT-2024-005", origin: "Hyderabad DC", destination: "Mumbai Port", stops: 3, estTime: "8h 20m", distance: "712 km", status: "optimized", progress: 0, vehicle: "TRK-518" },
+  { id: "RT-2024-006", origin: "Mumbai DC", destination: "Goa Warehouse", stops: 1, estTime: "5h 45m", distance: "559 km", status: "completed", progress: 100, vehicle: "TRK-209" },
 ]
 
 const performanceData = [
@@ -92,6 +94,13 @@ function getProgressColor(progress: number): string {
 
 export function RouteOptimizationView() {
   const [statusFilter, setStatusFilter] = useState("all")
+  const [drawerRoute, setDrawerRoute] = useState<RouteDetail | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const openDrawer = useCallback((route: RouteDetail) => {
+    setDrawerRoute(route)
+    setDrawerOpen(true)
+  }, [])
 
   const filteredRoutes = useMemo(() => {
     if (statusFilter === "all") return routes
@@ -183,7 +192,11 @@ export function RouteOptimizationView() {
               return (
                 <div
                   key={route.id}
-                  className="group flex items-center gap-4 rounded-xl border border-border/50 bg-muted/20 p-4 transition-smooth hover:bg-muted/40 hover-lift-sm"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => openDrawer(route)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDrawer(route) } }}
+                  className="group flex items-center gap-4 rounded-xl border border-border/50 bg-muted/20 p-4 transition-smooth hover:bg-muted/40 hover-lift-sm hover:border-border cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {/* Route Info */}
                   <div className="min-w-0 flex-1">
@@ -217,6 +230,7 @@ export function RouteOptimizationView() {
                       <span className="text-xs tabular-nums text-muted-foreground">{route.progress}%</span>
                     </div>
                   )}
+                  <ChevronRight className="size-4 shrink-0 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
               )
             })}
@@ -288,6 +302,17 @@ export function RouteOptimizationView() {
           </Card>
         </div>
       </div>
+
+      {/* Detail Drawer */}
+      <RouteOptimizationDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        route={drawerRoute}
+        onOptimize={(r) => {
+          // Could trigger an actual re-optimization here
+          console.log("Re-optimize route:", r.id)
+        }}
+      />
     </div>
   )
 }

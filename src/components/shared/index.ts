@@ -48,3 +48,6 @@ export { OutboundDetailDrawer, type OutboundDetailDrawerProps } from "./outbound
 export { ProductivityDetailDrawer, type ProductivityDetailDrawerProps } from "./productivity-detail-drawer"
 export { TransportationDetailDrawer, type TransportationDetailDrawerProps } from "./transportation-detail-drawer"
 export { ReportsDetailDrawer, type ReportDetail, type ReportsDetailDrawerProps } from "./reports-detail-drawer"
+export { AlertsDetailDrawer, type AlertDetail, type AlertsDetailDrawerProps, type AlertSeverity, type AlertType } from "./alerts-detail-drawer"
+export { DockDetailDrawer, type DockDetail, type DockAssignmentDetail, type DockDetailDrawerProps } from "./dock-detail-drawer"
+export { RouteOptimizationDetailDrawer, type RouteDetail, type RouteDetailDrawerProps, type RouteStatus } from "./route-detail-drawer"

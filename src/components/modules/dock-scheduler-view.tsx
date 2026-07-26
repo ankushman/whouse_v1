@@ -37,10 +37,12 @@ import {
   Building2,
   FastForward,
   GripVertical,
+  ChevronRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ExportButton, exportToCSV } from "@/components/shared/export-button"
 import { useToast } from "@/hooks/use-toast-helper"
+import { DockDetailDrawer, type DockDetail, type DockAssignmentDetail } from "@/components/shared/dock-detail-drawer"
 import {
   DndContext,
   DragEndEvent,
@@ -177,12 +179,14 @@ function DockCard({
   onComplete,
   onAdvanceProgress,
   onAssignVehicleClick,
+  onOpenDrawer,
 }: {
   dock: Dock
   assignment?: DockAssignment
   onComplete: (id: string) => void
   onAdvanceProgress: (id: string, amount: number) => void
   onAssignVehicleClick: (dock: Dock) => void
+  onOpenDrawer: (dock: Dock, assignment?: DockAssignment) => void
 }) {
   const progress = assignment?.progress ?? 0
 
@@ -200,7 +204,12 @@ function DockCard({
       dock.status === "available" && "hover:shadow-md hover:border-emerald-400 dark:hover:border-emerald-600"
     )}>
       <CardHeader className="pb-2 pt-3 px-3">
-        <div className="flex items-center justify-between">
+        <button
+          type="button"
+          onClick={() => onOpenDrawer(dock, assignment)}
+          className="flex items-center justify-between w-full text-left hover:opacity-80 transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+          aria-label={`Open details for ${dock.name}`}
+        >
           <div className="flex items-center gap-2">
             <div className={cn(
               "flex h-8 w-8 items-center justify-center rounded-lg font-bold text-sm",
@@ -215,8 +224,11 @@ function DockCard({
               <p className="text-[10px] text-muted-foreground">Zone {dock.zone} · <span className="text-number">{dock.capacity}</span> tons</p>
             </div>
           </div>
-          <StatusBadge status={dockStatusBadge[dock.status].label} variant={dockStatusBadge[dock.status].variant} />
-        </div>
+          <div className="flex items-center gap-1">
+            <StatusBadge status={dockStatusBadge[dock.status].label} variant={dockStatusBadge[dock.status].variant} />
+            <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/60 hover:text-foreground transition-colors" />
+          </div>
+        </button>
       </CardHeader>
 
       <CardContent className="px-3 pb-3">
@@ -523,6 +535,41 @@ export function DockSchedulerView() {
 
   // DnD state for drag-and-drop queue → dock assignment
   const [activeDragVehicle, setActiveDragVehicle] = useState<QueuedVehicle | null>(null)
+
+  // Detail drawer state
+  const [drawerDock, setDrawerDock] = useState<DockDetail | null>(null)
+  const [drawerAssignment, setDrawerAssignment] = useState<DockAssignmentDetail | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const openDockDrawer = useCallback((dock: Dock, assignment?: DockAssignment) => {
+    setDrawerDock({
+      id: dock.id,
+      name: dock.name,
+      type: dock.type,
+      status: dock.status,
+      zone: dock.zone,
+      capacity: dock.capacity,
+    })
+    if (assignment) {
+      setDrawerAssignment({
+        id: assignment.id,
+        dockId: assignment.dockId,
+        vehicleReg: assignment.vehicleReg,
+        driverName: assignment.driverName,
+        type: assignment.type,
+        supplier: assignment.supplier,
+        status: assignment.status,
+        startTime: assignment.startTime,
+        estimatedDuration: assignment.estimatedDuration,
+        progress: assignment.progress,
+        warehouse: assignment.warehouse,
+        priority: assignment.priority,
+      })
+    } else {
+      setDrawerAssignment(null)
+    }
+    setDrawerOpen(true)
+  }, [])
 
   const dndSensors = useSensors(
     useSensor(PointerSensor, {
@@ -940,6 +987,7 @@ export function DockSchedulerView() {
                 onComplete={handleComplete}
                 onAdvanceProgress={handleAdvanceProgress}
                 onAssignVehicleClick={openAssignDialog}
+                onOpenDrawer={openDockDrawer}
               />
             </DroppableDockWrapper>
           ))}
@@ -1070,6 +1118,27 @@ export function DockSchedulerView() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Detail Drawer */}
+      <DockDetailDrawer
+        open={drawerOpen}
+        onOpenChange={setDrawerOpen}
+        dock={drawerDock}
+        assignment={drawerAssignment}
+        onComplete={(assignmentId) => {
+          handleComplete(assignmentId)
+          setDrawerOpen(false)
+        }}
+        onAdvanceProgress={(assignmentId, amount) => {
+          handleAdvanceProgress(assignmentId, amount)
+        }}
+        onMarkAvailable={(dockId) => {
+          setDocks((prev) =>
+            prev.map((d) => (d.id === dockId ? { ...d, status: "available" as DockStatus } : d))
+          )
+          setDrawerOpen(false)
+        }}
+      />
     </div>
   )
 }
