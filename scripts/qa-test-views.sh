@@ -19,6 +19,8 @@ tests=(
   "Equipment|Equipment"
   "Employees|Employees"
   "Vendor Management|Vendor Management"
+  "Customer SLA|Customer SLA"
+  "Supplier Quality|Supplier Quality"
   "Productivity|Productivity"
   "Cost Analytics|Cost Analytics"
   "Predictive Analytics|Predictive"

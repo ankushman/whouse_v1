@@ -4420,3 +4420,137 @@ Updated Project Status (Post Round 44):
   12. Vendor contract document management (upload/store contract PDFs)
   13. Customer contract document management (mirror vendor contract module)
   14. Add Procurement/Purchase Order management module (new operational module — PO lifecycle)
+
+---
+Task ID: 45
+Agent: Main (Cron Review - Round 45)
+Task: Supplier Quality Scorecard new module with multi-tab detail drawer + 30+ CSS micro-interactions + agent-browser QA verified across all 27 modules
+
+Work Log:
+- Read worklog.md — project at Round 44, 26 modules, 24 detail drawers, 680+ CSS classes, 0 TS errors, lint/build clean.
+- Verified baseline: `bun run lint` (0 errors), `npx tsc --noEmit` (0 src/ errors), `bun run build` (success).
+- Strategic choice: Built new operational module "Supplier Quality Scorecard" (was priority #2 in worklog). Comprehensive supplier quality tracking with defect rates, FPY, audit scores, CAPA tracking, COPQ analytics. Includes 5-tab inline detail drawer.
+- Updated reusable QA smoke test script to include "Supplier Quality" (now 27 modules).
+
+NEW FEATURE 1: Supplier Quality Scorecard Module (~1730 lines, file: src/components/modules/supplier-quality-scorecard-view.tsx)
+  - New navigation item: "Supplier Quality" (icon: ClipboardCheck, group: analytics, between Customer SLA and Productivity)
+  - 6 hero KPI cards: Total Suppliers / Avg Quality Score / Avg Defect Rate (PPM) / Open CAPAs / Cost of Poor Quality / Audits Due (120d) — each with trend indicator, severity color, secondary metric, bottom shimmer
+  - 30-Day Defect Rate Trend AreaChart (PPM over time with target threshold line, includes day-15 incident spike callout)
+  - Quality Grade Distribution donut PieChart (4 grades: Excellent / Good / Watch / Critical) with color-coded legend
+  - Top 5 Quality Performers leaderboard (rank badges 1-3 with medal colors + rank glow on #1, avatar with initials, category, click-to-open-detail)
+  - At-Risk Suppliers list (top 5 with warning row variant — red gradient accent bar + pulse animation, PPM and CAPAs display)
+  - Quality vs Audit Score BarChart (top 10 suppliers by spend — quality bar blue + audit bar violet, 60-100 y-axis domain)
+  - Cost of Poor Quality by Category (5-card grid with progress bars sized to max COPQ)
+  - Supplier Quality Master table with 16 mock records: Supplier / Grade+Tier / Quality Score / Defect PPM / FPY% / OTD% / Audit Score / CAPAs / Batches (Rejected) / COPQ / 90d Trend / Eye
+  - 5 tabs: All (16) / Excellent (8) / Good (5) / Watch (2) / Critical (1)
+  - 4 filters: Tier (3 options) + Grade (4 options) + Category (5 options) + Region (4 options) + free-text search
+  - 4 supplier grades (excellent/good/watch/critical) with full theming (icon, color, bg, border, pieColor)
+  - 3 supplier tiers (tier-1/tier-2/tier-3) with full theming (icon, color, bg)
+  - 5 supplier categories (raw-material/components/packaging/logistics/services) with full theming + pie colors
+  - 4 Indian regions (North/South/East/West)
+  - Color-coded values throughout (emerald for ≥target, amber for within tolerance, red for below threshold)
+  - 90-day trend indicator (arrow up/down + delta) per row
+  - Status-aware row theming: critical=red gradient+pulse, watch=amber gradient+accent bar
+  - CSV export with full 28-field set per supplier
+  - Refresh + Schedule Audit action buttons with toast feedback
+
+NEW FEATURE 2: Supplier Quality Detail Drawer (~620 lines, 5 sub-tabs, embedded in module)
+  - 5 sub-tabs: Overview / Batches / Defects / Audit / Scorecard
+  - Overview tab: Primary Contact card (avatar + email + phone + Call/Email buttons), 6-Month Quality & Audit Trend AreaChart (with target line), 4-metric grid (FPY/OTD/Audit Score/Batch Acceptance with progress bars), Parts Portfolio card (Active Parts / Critical Parts / PPAP Approved counts), Certifications badges (ISO 9001:2015 / IATF 16949 / ISO 14001 — conditional on isoCertified and tier)
+  - Batches tab: 6 recent inspection batches table (Batch ID / Date / Part No / Qty / Accepted / Status / Inspector) — status badges color-coded (Accepted=green / Conditional=amber / Rejected=red); rejection rate mocked higher for critical/watch suppliers
+  - Defects tab: Defect Pareto Analysis (6 defect types: Dimensional / Surface Finish / Functional / Documentation / Packaging / Compliance — each with count + percentage + progress bar); Active CAPA Items list (up to 4 visible with "+ N more CAPAs" indicator) showing CAPA ID, description, open date, due date, severity badge (Critical/Major/Minor)
+  - Audit tab: Audit History (4 audit entries — type / date / auditor / score / findings count / major NCs count); Next audit due date prominently displayed; "Schedule Next Audit" action button
+  - Scorecard tab: 6-metric weighted scorecard (Defect Rate 25% / FPY 20% / OTD 20% / Audit Performance 15% / CAPA Closure 10% / Batch Acceptance 10%) with progress bars colored by score band + Overall Composite Score; YTD Spend and COPQ/Spend Ratio summary cards
+  - Status-aware theming: 4 grade variants with matching gradients, borders, icon colors
+  - Header: 4 hero stat grid (Quality Score / Defect Rate / Open CAPAs / COPQ)
+  - Footer actions: Export Scorecard (always) + Acknowledge (always) + Escalate (conditional — only for critical/watch grades)
+  - All animations: sqs-drawer-sheen (sheen sweep), sqs-icon-pulse (icon scale glow), sqs-stat-enter (4 staggered), sqs-body-enter (fade-up), sqs-card-enter (hover lift), sqs-tab-switch, sqs-drawer-header (gradient underline)
+
+NEW FEATURE 3: Navigation + Icon Map updates
+  - Added 'supplier-quality-scorecard' to navItems in app-store.ts (group: analytics, icon: ClipboardCheck, roles: super_admin/executive/regional_manager/warehouse_manager)
+  - Imported ClipboardCheck icon in app-layout.tsx and added to iconMap
+  - Imported SupplierQualityScorecardView in app/page.tsx and added to viewMap
+  - Exported from src/components/modules/index.ts
+
+NEW FEATURE 4: 30+ new CSS micro-interaction classes (file: src/app/globals.css, lines 9540-9851, +312 lines)
+  - sqs-kpi-enter (6 staggered + hover lift), sqs-shimmer (bottom bar sweep), sqs-chart-enter (hover lift), sqs-row-in (with ::before accent bar gradient), sqs-row-critical (red gradient + pulse animation), sqs-row-watch (amber gradient + ::before accent), sqs-rank-glow (top-1 medal pulse), sqs-drawer-header (::after gradient underline), sqs-drawer-sheen (sheen sweep), sqs-icon-pulse (scale + glow), sqs-stat-enter (4 staggered), sqs-body-enter (fade-up), sqs-card-enter (hover lift), sqs-cat-card (hover lift + border accent), sqs-tab-switch (transition), sqs-bar-fill (width animation), sqs-score-fill (scaleX progress), sqs-search-focus (ring expand)
+
+QA Verification (agent-browser LIVE TEST):
+  - **Smoke test PASSED**: All 27 modules render without runtime errors (verified via qa-test-views.sh)
+  - Supplier Quality nav click → ✓ "Supplier Quality Scorecard" heading rendered
+  - KPI cards visible: TOTAL SUPPLIERS, AVG DEFECT RATE, OPEN CAPAS, "3 suppliers need attention"
+  - 30-Day Defect Rate Trend chart visible
+  - Quality Grade Distribution donut visible with "16 suppliers by current grade"
+  - At-Risk Suppliers list visible with 3 entries: Steel Strips Wheels (Critical, 4180 PPM, 12 CAPAs), Gabriel India (Watch, 2410 PPM, 8 CAPAs), Suprajit Engineering (Watch, 2080 PPM, 6 CAPAs)
+  - Clicked critical row (Steel Strips Wheels)
+  - agent-browser snapshot → ✓ Drawer opened (dialog "Steel Strips Wheels Critical")
+  - Verified 5 tabs visible: Overview, Batches (6), Defects, Audit, Scorecard
+  - Conditional Escalate button ✓ shown for critical supplier
+  - agent-browser click "Scorecard" tab → ✓ Weighted Quality Scorecard with 6 metrics (Defect Rate, FPY, OTD, Audit Performance, CAPA Closure, Batch Acceptance) + Composite Score + YTD Spend + COPQ/Spend Ratio
+  - agent-browser click "Defects" tab → ✓ Defect Pareto Analysis with all 6 defect types (Dimensional, Surface, Functional, Documentation, Packaging, Compliance) + Total Defects + Avg Defects/Batch + Active CAPA Items list with 4 visible CAPAs + "+ 8 more CAPAs" indicator
+  - Closed drawer, clicked excellent supplier (Bosch Auto Components)
+  - agent-browser snapshot → ✓ Drawer opened (dialog "Bosch Auto Components India Excellent")
+  - Conditional Escalate button ✓ HIDDEN for excellent supplier (only Export Scorecard + Acknowledge visible) — conditional rendering verified
+
+Static Verification:
+  - `bun run lint` — 0 errors, 0 warnings
+  - `bun run build` — compiled successfully, all 7 routes generated
+  - `npx tsc --noEmit` — 0 src/ errors (maintained from Round 44)
+
+Stage Summary:
+- 6 files changed (1 new + 5 modified), +2050 lines
+- 1 NEW MODULE: Supplier Quality Scorecard (~1730 lines, 6 KPIs + 4 charts + Top-5 leaderboard + at-risk list + 16-supplier master table with 5 tabs and 4 filters + COPQ-by-category grid)
+- 1 NEW INLINE DRAWER: SupplierQualityDetailDrawer (~620 lines, 5 sub-tabs) — Overview/Batches/Defects/Audit/Scorecard with weighted scorecard metrics, Pareto analysis, CAPA list, audit history
+- 1 NEW NAV ITEM + ICON: "Supplier Quality" with ClipboardCheck icon
+- 30+ new CSS micro-interaction classes (all sqs-* classes)
+- 4 views updated: app-layout (ClipboardCheck icon), page.tsx (viewMap), app-store.ts (navItems), modules/index.ts (export)
+- 1 QA SCRIPT UPDATED: scripts/qa-test-views.sh — added Supplier Quality (now 27 modules tested)
+- MODULES NOW: 27 (was 26 — added Supplier Quality Scorecard)
+- DETAIL DRAWERS NOW: 25 total (24 universal + 1 new inline Supplier Quality drawer)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser LIVE verification PASSED (smoke test 27/27 modules + drawer 3 tabs verified + conditional Escalate button verified for both critical and excellent suppliers)
+
+---
+Updated Project Status (Post Round 45):
+- STATUS: STABLE + NEW SUPPLIER QUALITY SCORECARD MODULE + agent-browser SMOKE TEST PASSED (27/27 modules)
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch)
+- MODULES (27): All previous 26 + Supplier Quality Scorecard (NEW)
+- SHARED COMPONENTS (54+): All previous 54
+- HOOKS (10): useToast helper (backward-compatible)
+- CSS UTILITIES (710+): 680+ previous + 30+ new (all sqs-* classes)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (25 — UNIVERSAL COVERAGE + 1 NEW INLINE):
+    Inventory ✓, Equipment ✓, Shipment ✓, Warehouse ✓, Employee ✓, Cost ✓, Inbound ✓, Outbound ✓,
+    Productivity ✓, Transportation ✓, Reports ✓, Alerts ✓, Dock ✓, Route Optimization ✓, Predictive ✓,
+    Compliance ✓, Energy ✓, Operations Overview ✓, SLA Countdown ✓, Warehouse Map ✓, Settings ✓, Returns ✓, Yard ✓,
+    + Customer SLA (inline multi-tab drawer), + Supplier Quality (inline multi-tab drawer NEW)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- TSC: 0 src/ errors
+- QA: agent-browser SMOKE TEST 27/27 PASSED + Supplier Quality drawer 3 tabs verified (Overview/Scorecard/Defects) + conditional Escalate button verified
+- KNOWN ISSUES:
+  - Dev server OOM risk in sandbox (workaround: use standalone production build with `NODE_OPTIONS=--max-old-space-size=512` and clean chrome processes before testing)
+  - Recharts <Line> strokeDasharray doesn't support per-segment function (workaround: solid line + dot color/size)
+  - agent-browser requires `eval --stdin` (heredoc) for any JS with quotes/special chars — inline `eval "..."` only works for simple expressions
+  - Chrome processes accumulate across QA runs — must `pkill -f chrome` between sessions to free memory
+  - 181 pre-existing duplicate CSS class definitions (not introduced this round; consolidated audit is non-blocking)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Customer SLA, Vendor, and Supplier Quality drawers are inline in module files (not extracted to shared) — minor refactor candidate for future round
+- PRIORITY NEXT:
+  1. Extract VendorDetailSheet + CustomerSLADetailDrawer + SupplierQualityDetailDrawer to shared/*-detail-drawer.tsx (consistency refactor)
+  2. Add Procurement/Purchase Order management module (new operational module — PO lifecycle, GRN, invoice matching)
+  3. Add Supabase persistence for real data (replace mock-data.ts with live DB)
+  4. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
+  5. Consolidate inline mock data from all 25 detail drawers into mock-data.ts (refactor)
+  6. Wire DataTable getRowKey prop for tables without stable IDs (already supported but not used everywhere)
+  7. CSS audit: 710+ classes — consolidate 181 pre-existing duplicates
+  8. Real-time WebSocket integration for live telemetry (currently deterministic mock)
+  9. Multi-warehouse switching for dock scheduler & yard management (currently fixed to Chennai Hub)
+  10. Real blockchain-style hash chaining for shift handover signatures (currently random hex)
+  11. Predictive model retraining trigger UI (currently display-only)
+  12. Vendor contract document management (upload/store contract PDFs)
+  13. Customer contract document management (mirror vendor contract module)
+  14. Add Bill of Materials (BOM) management module (multi-level BOM with cost rollup)
+  15. Add Quality Inspection Plan (QIP) module (link to supplier quality — inspection workflows per part number)

@@ -9537,3 +9537,315 @@ html.theme-transition body {
 .csla-tab-switch + * {
   animation: csla-body-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Round 45 — Supplier Quality Scorecard micro-interactions
+   Pattern: .sqs-*  (sqs = Supplier Quality Scorecard)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── KPI cards: staggered entrance + bottom shimmer ───────────────────────── */
+
+@keyframes sqs-kpi-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.sqs-kpi-enter {
+  animation: sqs-kpi-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.sqs-kpi-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px hsl(var(--primary) / 0.25);
+}
+
+@keyframes sqs-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.sqs-shimmer {
+  animation: sqs-shimmer 3s ease-in-out infinite;
+}
+
+/* ── Chart cards: hover lift ───────────────────────────────────────────────── */
+
+@keyframes sqs-chart-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sqs-chart-enter {
+  animation: sqs-chart-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.sqs-chart-enter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -10px hsl(var(--primary) / 0.22);
+}
+
+/* ── Top performer / at-risk rows: entrance with accent bar ───────────────── */
+
+@keyframes sqs-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.sqs-row-in {
+  position: relative;
+  animation: sqs-row-in 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: background-color 180ms ease;
+}
+.sqs-row-in::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.6), hsl(var(--primary) / 0.1));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 220ms ease;
+  border-radius: 0 2px 2px 0;
+}
+.sqs-row-in:hover::before {
+  transform: scaleY(1);
+}
+
+/* ── Critical row: red accent gradient + pulse ────────────────────────────── */
+
+@keyframes sqs-row-critical-pulse {
+  0%, 100% {
+    box-shadow: inset 3px 0 0 0 rgba(239, 68, 68, 0.8);
+  }
+  50% {
+    box-shadow: inset 3px 0 0 0 rgba(239, 68, 68, 1);
+  }
+}
+.sqs-row-critical {
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.07) 0%, transparent 50%);
+  animation: sqs-row-critical-pulse 2.5s ease-in-out infinite;
+}
+.sqs-row-critical:hover {
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, transparent 50%);
+}
+
+/* ── Watch row: amber accent ──────────────────────────────────────────────── */
+
+.sqs-row-watch {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.06) 0%, transparent 50%);
+  position: relative;
+}
+.sqs-row-watch::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #f59e0b, rgba(245, 158, 11, 0.3));
+  border-radius: 0 2px 2px 0;
+}
+.sqs-row-watch:hover {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.12) 0%, transparent 50%);
+}
+
+/* ── Rank glow for #1 performer ───────────────────────────────────────────── */
+
+@keyframes sqs-rank-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 12px 2px rgba(245, 158, 11, 0.2);
+  }
+}
+.sqs-rank-glow {
+  animation: sqs-rank-glow 2.8s ease-in-out infinite;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+/* ── Drawer header: gradient underline + sheen sweep ──────────────────────── */
+
+.sqs-drawer-header {
+  position: relative;
+}
+.sqs-drawer-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.5), transparent);
+}
+
+@keyframes sqs-drawer-sheen {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  60%, 100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+.sqs-drawer-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: sqs-drawer-sheen 2.5s ease-in-out;
+  pointer-events: none;
+}
+
+/* ── Icon pulse on drawer open ────────────────────────────────────────────── */
+
+@keyframes sqs-icon-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px hsl(var(--primary) / 0);
+  }
+}
+.sqs-icon-pulse {
+  animation: sqs-icon-pulse 2s ease-in-out infinite;
+}
+
+/* ── Drawer stat grid: staggered entrance ─────────────────────────────────── */
+
+@keyframes sqs-stat-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.sqs-stat-enter > * {
+  animation: sqs-stat-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.sqs-stat-enter > *:nth-child(1) { animation-delay: 60ms; }
+.sqs-stat-enter > *:nth-child(2) { animation-delay: 120ms; }
+.sqs-stat-enter > *:nth-child(3) { animation-delay: 180ms; }
+.sqs-stat-enter > *:nth-child(4) { animation-delay: 240ms; }
+
+/* ── Drawer body entrance ─────────────────────────────────────────────────── */
+
+@keyframes sqs-body-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sqs-body-enter {
+  animation: sqs-body-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Card entrance + hover lift ───────────────────────────────────────────── */
+
+@keyframes sqs-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sqs-card-enter {
+  animation: sqs-card-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: box-shadow 220ms ease, transform 220ms ease;
+}
+.sqs-card-enter:hover {
+  box-shadow: 0 6px 16px -6px hsl(var(--primary) / 0.2);
+  transform: translateY(-1px);
+}
+
+/* ── Category cards: subtle hover lift + border accent ────────────────────── */
+
+.sqs-cat-card {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.sqs-cat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px -4px hsl(var(--primary) / 0.18);
+  border-color: hsl(var(--primary) / 0.4);
+}
+
+/* ── Tab switch transition ────────────────────────────────────────────────── */
+
+@keyframes sqs-tab-switch {
+  from {
+    opacity: 0.6;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.sqs-tab-switch {
+  animation: sqs-tab-switch 220ms ease-out both;
+}
+.sqs-tab-switch + * {
+  animation: sqs-body-enter 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Bar fill animation (defect pareto + scorecard progress) ──────────────── */
+
+@keyframes sqs-bar-fill {
+  from { width: 0 !important; }
+}
+.sqs-bar-fill {
+  animation: sqs-bar-fill 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Score fill (progress bars in scorecard metrics) ──────────────────────── */
+
+@keyframes sqs-score-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.sqs-score-fill > div,
+.sqs-score-fill[role="progressbar"] > div {
+  transform-origin: left;
+  animation: sqs-score-fill 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Search focus ring expand ─────────────────────────────────────────────── */
+
+@keyframes sqs-search-focus {
+  from { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.5); }
+  to { box-shadow: 0 0 0 4px rgba(168, 85, 247, 0); }
+}
+.sqs-search-focus:focus {
+  animation: sqs-search-focus 600ms ease-out;
+}
