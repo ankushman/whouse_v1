@@ -43,6 +43,7 @@ import {
   Factory,
   Trophy,
   ClipboardCheck,
+  ClipboardList,
   ShoppingCart,
   Layers,
   Microscope,
@@ -136,6 +137,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Layers,
   Microscope,
   FileWarning,
+  ClipboardList,
 }
 
 // ──────────────────────────────────────────────────────

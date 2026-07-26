@@ -1,7 +1,14 @@
 #!/bin/bash
 # Quick QA: click each nav button, snapshot, look for errors
+# Usage: bash scripts/qa-test-views.sh [URL]
+#   URL defaults to http://127.0.0.1:3001
 set -e
 cd /home/z/my-project
+
+BASE_URL="${1:-http://127.0.0.1:3001}"
+# Ensure page is loaded once before starting tests
+agent-browser open "$BASE_URL/" >/dev/null 2>&1 || true
+sleep 3
 
 # Define test cases: "nav_text|expected_heading_substring"
 tests=(
@@ -13,6 +20,7 @@ tests=(
   "BOM Management|BOM"
   "Quality Inspection|Quality Inspection"
   "NCR / CAPA|Non-Conformance"
+  "Work Orders|Work Order"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"
