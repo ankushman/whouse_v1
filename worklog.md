@@ -2773,3 +2773,95 @@ Updated Project Status (Post Round 29 - Complete):
   8. Migrate remaining direct sonner imports to use-toast-helper
   9. Add similar detail drawers to Employees (replace modal) and Warehouses
   10. Add employee performance alerts/notification thresholds
+
+---
+Task ID: 31
+Agent: Main (Cron Review - Round 30)
+Task: Shipment Detail Drawer, toast API fix, 10 CSS micro-interactions
+
+Work Log:
+- QA Assessment: lint 0 errors, build successful, dev server GET / 200
+- agent-browser QA: skipped (sandbox network isolation prevents reaching localhost, known since Round 4)
+- Reviewed Round 29 worklog — confirmed 2 outstanding issues to address:
+  1. shipment-tracking-table.tsx used wrong sonner toast API (3-arg instead of 2-arg+opts) → descriptions lost
+  2. Shipment Detail Drawer was on the priority-next list
+
+Bug Fixes (1):
+1. **shipment-tracking-table.tsx — wrong sonner toast API**
+   - File imported `toast` directly from "sonner" and called `toast.info(title, descriptionString, { duration })` (3-arg)
+   - Sonner's signature is `toast.info(message, data?: ExternalToast)` — only 2 args, second must be an options object
+   - The description string was treated as ExternalToast (type error, ignored), and { duration } was passed as a third arg sonner ignores
+   - Result: toasts fired but description text was lost and duration was ignored
+   - Fix: migrated to `useToast()` from `@/hooks/use-toast-helper` which uses the correct `(title, description, opts)` positional API. Updated all 3 toast call sites (batchActions Track/Export + handleRowClick originally). Added `toast` to useMemo deps for batchActions.
+   - Bonus: handleRowClick now opens the new ShipmentDetailDrawer instead of just showing a toast.
+
+New Features:
+1. **ShipmentDetailDrawer** — `src/components/shared/shipment-detail-drawer.tsx` (new file, ~430 lines)
+   - Right-side Sheet drawer triggered by clicking any shipment row.
+   - Header: status-colored bg (red/sky/amber/blue/emerald), status icon (AlertTriangle for delayed, CheckCircle2 for delivered, Truck otherwise), tracking ID, origin→destination route with arrows, status/carrier/service-type badges.
+   - Shipment Progress banner: large progress bar (%), km covered vs km remaining.
+   - ETA/Hours Left/Weight 3-column stat grid.
+   - Delayed shipment warning banner (red border, mentions 4-8h delay).
+   - Shipment Details card: items, declared value, dimensions, insurance value, COD amount (conditional), service type. Special instructions box (conditional, amber-tinted).
+   - Sender/Receiver 2-column cards: name, phone, email, address.
+   - Driver & Vehicle card (only if not delivered): driver name/phone, vehicle reg (mono font), license.
+   - Tracking Timeline: 5-7 deterministic events with vertical line, completed dots (emerald), current dot, staggered slide-in animation (movement-row-in, 40ms delay per item). Each event shows status, description, location, timestamp.
+   - Footer: Export (toast) + Track Live (toast) buttons. Track Live button turns red+urgent-glow when shipment is delayed.
+   - Mock data deterministic per trackingId (seed-based): events, distances, transit hours, driver/vehicle, sender/receiver, COD, insurance, special instructions.
+   - Exported Shipment type as ShipmentDetailRow for external use.
+   - Integrated into shipment-tracking-table.tsx: replaced toast-only row click with drawer open. Added onTrack + onExport handlers firing toasts.
+2. **10 new CSS micro-interaction classes** — `globals.css` (lines 5875-5975)
+   - `timeline-dot-pulse`: pulsing box-shadow for current timeline event
+   - `timeline-line`: vertical gradient line for timeline (emerald→blue→fade)
+   - `delayed-banner-pulse`: pulsing red bg for delayed shipment banner
+   - `transit-progress-shimmer`: shimmer overlay on progress bar for in-transit shipments
+   - `carrier-tint-bluedart/delhivery/dtdc/ecom/xpressbees/shadowfax`: 6 carrier-specific color variants
+   - `map-pin-bounce`: gentle bounce animation for map markers
+   - `distance-fill-animate`: width-grow animation for distance bars
+   - `shipment-row-hover`: subtle bg tint on row hover
+   - `driver-card-accent`: left-border accent for driver/vehicle card
+   - `cod-amount-highlight`: amber gradient bg for COD amount field
+
+Verification:
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully, all 7 routes generated
+- Dev server: GET / 200
+- Duplicate keyframes: 0 (verified)
+
+Stage Summary:
+- 4 files changed: shipment-tracking-table.tsx, globals.css, shared/index.ts
+- 1 new file: shipment-detail-drawer.tsx (~430 lines)
+- 1 bug fixed (toast API)
+- 2 new features: Shipment Detail Drawer, 10 CSS micro-interactions
+- Lint: 0 errors, 0 warnings
+- Build: compiled successfully
+
+---
+Updated Project Status (Post Round 30 - Complete):
+- STATUS: STABLE - All modules compile and lint passes clean
+- GITHUB: https://github.com/ankushman/whouse_v1.git (main branch, commit f6df869)
+- MODULES (18): Dashboard, Operations Overview, Warehouses, Inbound, Outbound, Inventory (+Detail Drawer), Transportation, Route Optimization, Equipment (+Detail Drawer), Employees, Productivity, Cost Analytics, Alerts, Dock Scheduling, SLA Countdown, Reports, Settings, Warehouse Map
+- SHARED COMPONENTS (40): All previous + ShipmentDetailDrawer (NEW)
+- HOOKS (9): All previous
+- CSS UTILITIES (370+): 358+ previous + 10 new + 4 new @keyframes (timeline-dot-pulse, delayed-banner-pulse, transit-progress-shimmer, map-pin-bounce, distance-fill)
+- DATATABLE MODULES (9): All previous
+- DETAIL DRAWERS (3): Inventory ✓, Equipment ✓, Shipment ✓ (NEW) — all share consistent drawer-slide-in animation + footer CTA pattern
+- TOAST API CONSISTENCY: shipment-tracking-table migrated to use-toast-helper (was last direct-sonner consumer with wrong API)
+- LINT: 0 errors, 0 warnings
+- BUILD: compiled successfully
+- KNOWN ISSUES:
+  - Dev server OOM in sandbox (environmental); agent-browser can't reach localhost
+  - Remaining direct sonner imports: export-button, ai-insights-panel, sla-monitoring-panel, shift-handover-panel, use-live-toast, use-simulated-events (all use correct 2-arg API, just bypass the helper)
+  - DataTable inline <style> tag duplicated per instance (minor)
+  - Shipment interface in shipment-tracking-table still uses local type (not in mock-data.ts) — acceptable since drawer is self-contained
+- PRIORITY NEXT:
+  1. Add mobile pull-to-refresh gesture
+  2. Enhance Dock Scheduler with dnd-kit drag-and-drop (already installed, CSS prep done)
+  3. Add Supabase persistence for real data
+  4. Add warehouse geographic clustering with actual lat/lng positioning
+  5. Consolidate inline mock data (route-optimization/sla-countdown/warehouse-health) into mock-data.ts
+  6. Migrate remaining direct sonner imports to use-toast-helper for consistency
+  7. Add similar detail drawers to Employees (replace existing modal) and Warehouses
+  8. Add employee performance alerts/notification thresholds
+  9. Add barcode/QR code scanning for inventory (modal exists, enhance integration)
+  10. Add data persistence with Supabase
