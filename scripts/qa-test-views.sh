@@ -12,6 +12,7 @@ tests=(
   "Procurement / PO|Procurement"
   "BOM Management|BOM"
   "Quality Inspection|Quality Inspection"
+  "NCR / CAPA|Non-Conformance"
   "Outbound|Outbound"
   "Returns & Reverse|Returns"
   "Inventory|Inventory"

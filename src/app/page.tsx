@@ -12,6 +12,7 @@ import { InboundView } from "@/components/modules/inbound-view"
 import { ProcurementPurchaseOrdersView } from "@/components/modules/procurement-purchase-orders-view"
 import { BillOfMaterialsView } from "@/components/modules/bill-of-materials-view"
 import { QualityInspectionPlanView } from "@/components/modules/quality-inspection-plan-view"
+import { NonConformanceReportView } from "@/components/modules/non-conformance-report-view"
 import { OutboundView } from "@/components/modules/outbound-view"
 import { ReturnsReverseLogisticsView } from "@/components/modules/returns-reverse-logistics-view"
 import { YardManagementView } from "@/components/modules/yard-management-view"
@@ -48,6 +49,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "procurement-purchase-orders": ProcurementPurchaseOrdersView,
   "bill-of-materials": BillOfMaterialsView,
   "quality-inspection-plan": QualityInspectionPlanView,
+  "non-conformance-report": NonConformanceReportView,
   outbound: OutboundView,
   "returns-reverse-logistics": ReturnsReverseLogisticsView,
   "yard-management": YardManagementView,
