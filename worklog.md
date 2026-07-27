@@ -1,4 +1,144 @@
 ---
+Task ID: 128
+Agent: Main (Cron Review - Round 128)
+Task: Wave Planning & Picking Management module
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R127 was latest completed round)
+- Verified: 57 modules, 7 API routes, build passes, lint clean, 0 src/ TS errors
+- TSC: 0 src/ errors (7 pre-existing in non-src: skills/, examples/, mini-services/)
+- Build: compiled successfully (10 routes)
+- agent-browser QA: sidebar loaded with all 58 modules (wave-planning visible), homepage renders correctly. Known limitation: agent-browser cannot sustain stable connections in this environment.
+
+- Created R128: Wave Planning & Picking Management module
+  * NEW FILE: src/components/modules/wave-planning-view.tsx (~1,351 lines)
+  * 5 tabs: Wave Dashboard | Wave Queue | Pick Lists | Packing Stations | Picker Performance
+  * Theme: Amber + Indigo + Emerald (#f59e0b, #6366f1, #10b981)
+  * Header: gradient banner with animated top border (amber → indigo → emerald, 6s cycle)
+  * Header badges: Total Waves, Active, Completed, Pending, Avg Pick Rate, Avg Accuracy
+
+  * Tab 1 Wave Dashboard:
+    - 6 KPI cards (Total Waves, Active Waves, Avg Pick Rate/hr, Accuracy %, Pending Waves, Active Pickers)
+    - Wave Strategy Distribution PieChart (5 strategies: Batch, Zone, Discrete, Cluster, Multi-Order)
+    - Warehouse Wave Performance BarChart (6 warehouses: total waves + completed)
+    - Picking Efficiency RadarChart (6 axes: Pick Rate, Accuracy, Utilization, On-Time, SLA Score, Labor Eff.)
+    - Monthly Wave & Fulfillment Trend ComposedChart (waves created/completed bars + pick rate line)
+    - Accuracy & Cycle Time Trend ComposedChart (accuracy area + cycle time line)
+    - Zone Pick Utilization horizontal BarChart (6 zones: utilization + fill rate)
+    - Top Picker Leaderboard (ranked top 5 with gold/silver/bronze badges, star ratings)
+
+  * Tab 2 Wave Queue:
+    - Filter bar: search (wave ID/warehouse), status (6: Pending/In Progress/Picking/Packing/Completed/Cancelled), strategy (5)
+    - Full wave table (80 records, shows 50): ID, warehouse, strategy badge, priority badge, status badge (Picking has pulse), orders, lines, picks, pick rate, accuracy, completion bar, picker, carrier, created date/time, actions
+    - Wave Detail Drawer (slide-in from right with backdrop blur):
+      - Status banner (active/completed/cancelled) with progress bar
+      - Info grid: priority, zone, orders, lines, total picks, pickers, pick rate, accuracy, est/actual time, carrier, picker
+      - Performance bars: completion %, accuracy % (color-coded)
+      - Related pick list items (up to 10 from pickLists data)
+
+  * Tab 3 Pick Lists:
+    - 5 pick stat cards (Total Picks, Completed, In Progress, Short-pulse, Assigned)
+    - Filter bar: search (pick ID/SKU/product), status (6: Pending/Assigned/In Progress/Completed/Short/Skipped)
+    - Full pick table (150 records, shows 60): ID, wave, SKU, product, category badge, zone, bin, priority badge, status badge, qty progress bar, picker, travel distance, batch no, lot no, expiry date, actions
+    - Pick Detail Drawer: status banner, info grid (SKU, product, category, bin, zone, priority, qty, batch, lot, expiry, picker, travel dist, est/actual time), pick progress bar
+
+  * Tab 4 Packing Stations:
+    - 6 packing KPI cards (Total Orders, Queued, Packing, Verified, Sealed, Shipped)
+    - Packing Status Distribution PieChart (5 statuses)
+    - Box Type Usage BarChart (7 types: Small/Medium/Large Box, Pallet, Mailer, Poly Bag, Custom Crate)
+    - Station Utilization horizontal BarChart (6 stations with packer names)
+    - Filter bar: search (packing ID/order ID)
+    - Packing table (40 records): ID, station, packer, order, product, items, box type, weight, dimension, status badge, carrier, seal number, AWB number, label status badge (Printed/Pending)
+
+  * Tab 5 Picker Performance:
+    - 5 performance KPI cards (Total Pickers, Avg Accuracy, Avg Pick Rate, Total Picks, Shortcuts)
+    - Picks per Picker BarChart (all 12 pickers sorted)
+    - Accuracy vs Speed ScatterChart (x=avg time, y=accuracy, bubble=total picks, color-coded by accuracy level)
+    - Sort controls (Total Picks / Accuracy / Avg Time)
+    - Picker Performance table: rank badge (#1-#12), ID, name, zone, total picks, accuracy bar, avg time, productivity/hr, shortcuts (color-coded), 5-star rating
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 128128)
+  * 80 wave records across 6 warehouses, 5 strategies, 4 priority levels, 6 statuses
+  * 150 pick list records with 30 Indian products across 6 categories (Food, Pharma, Electronics, Auto Parts, Industrial, Textile)
+  * 40 packing records with 7 box types, 6 packers, 8 Indian carriers (Delhivery, BlueDart, DTDC, Ecom Express, India Post, Shadowfax, XpressBees, Gati)
+  * 12 picker profiles with zone assignment, pick rates, accuracy, star ratings
+  * 6 packer profiles with station assignments
+  * 12-month trend data for waves, accuracy, cycle time
+  * Zone distribution data for 6 zones
+
+- Created CSS: scripts/r128-css.css (~680 lines), appended to src/app/globals.css
+  * Amber + indigo + emerald theme
+  * Animated gradient top border (amber → indigo → emerald, 6s cycle)
+  * 6 KPI card gradient backgrounds with dark mode variants
+  * Strategy badges (5: batch=amber, zone=indigo, discrete=emerald, cluster=purple, multi=cyan)
+  * Priority badges (4: critical=red-bold, high=amber, medium=indigo, low=emerald)
+  * Wave status badges (6: pending=gray, in-progress=indigo, picking=amber-pulse, packing=purple, completed=green, cancelled=red)
+  * Pick status badges (6: pending=gray, assigned=cyan, in-progress=amber-pulse, completed=green, short=red-pulse, skipped=gray)
+  * Pack status badges (5: queued=gray, packing=amber-pulse, verified=indigo, sealed=purple, shipped=green)
+  * Category badges (6: food=amber, pharma=emerald, electronics=indigo, auto=red, industrial=gray, textile=purple)
+  * Label badges (printed=green, pending=amber)
+  * Mini progress bars with gradient fills (amber/indigo/emerald/red)
+  * Pick stat cards (5 with gradient backgrounds)
+  * Leaderboard rank badges (gold/silver/bronze/default with gradient + shadow)
+  * Star rating system (filled=amber, empty=gray)
+  * Wave Detail Drawer (slide-in from right with backdrop blur, gradient left border)
+  * Pick Detail Drawer (same styling)
+  * Drawer components: status banners, info grid, progress bars, pick rows
+  * Filter bar with styled input and select
+  * Table styling with hover and alternating rows
+  * 12-level staggered slide-up animations
+  * Full dark mode coverage
+  * Responsive breakpoints (1024px: grid adjustments, 768px: full-width drawer)
+
+- Fixed TS errors during development:
+  * Changed useMemo(() => {...}, []) to typed IIFEs (() => {...})() for data generation
+  * Added explicit Array type annotations for waves, pickLists, packingData
+  * Fixed pickIdx to accept readonly unknown[] instead of readonly T[]
+  * Fixed number-to-string coercion in KPI card values
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'wave-planning' (icon: Waves, group: operations)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: re-export as default
+  * src/components/layout/app-layout.tsx: Waves added to imports + iconMap
+
+LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 2daefa4
+
+Stage Summary:
+- NEW MODULE: Wave Planning & Picking Management (58 modules total, was 57)
+- ~1,351-line component + ~680 lines CSS (wave-* classes)
+- 5 tabs + 10 chart types + 80 waves + 150 picks + 40 packing records + 12 pickers
+- Interactive wave detail drawer with related pick list items
+- Interactive pick detail drawer with batch/lot/expiry tracking
+- Picker leaderboard with gold/silver/bronze ranking and star ratings
+- Accuracy vs Speed scatter chart with bubble sizing
+- Total globals.css: 27,752 lines (+680)
+
+## Updated Project Status (Post Round 128)
+- STATUS: STABLE + NEW WAVE PLANNING MODULE (58 modules)
+- MODULES (58): All previous 57 + Wave Planning & Picking Management
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 27,752 lines
+
+KNOWN ISSUES:
+- agent-browser cannot sustain stable connections (separate network namespace)
+- Git local/remote divergence: 66 remote commits not in local, 17 local not on remote
+- Pre-existing TS errors in non-src files (skills/, examples/, mini-services/) — not main source
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (growing redundancy across 58 modules)
+  2. Multi-warehouse switching for all modules
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for R113-R128 modules
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 27000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+
+---
 Task ID: 127
 Agent: Main (Cron Review - Round 127)
 Task: Slotting Optimization & Bin Assignment Management module
