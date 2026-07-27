@@ -1,4 +1,125 @@
 ---
+Task ID: 132
+Agent: Main (Cron Review - Round 132)
+Task: Returns Processing & Refund Management module
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R131 was latest completed round)
+- Verified: 61 modules, 7 API routes, build passes, lint clean, 0 src/ TS errors
+- agent-browser QA: dev server connection instability (known limitation)
+- BUILD: compiled successfully (10 routes)
+
+- Created R132: Returns Processing & Refund Management module
+  * NEW FILE: src/components/modules/returns-processing-view.tsx (~1,060 lines)
+  * 5 tabs: Dashboard | Returns Queue | QC Inspection | Refunds | Analytics
+  * Theme: Pink + Cyan + Amber (#ec4899, #06b6d4, #f59e0b)
+  * Header: gradient banner with animated top border (pink → cyan → amber, 6s cycle)
+  * Header badges: Returns, Pending QC, Refunded, Disputed, Refund Value
+
+  * Tab 1 Dashboard:
+    - 6 KPI cards (Total Returns, Pending QC, Refunded, Disputed, Refund Value ₹, Restock Value ₹)
+    - Monthly Returns & Refund Volume ComposedChart (requests + processed bars + avg TAT line)
+    - Return Reason Distribution PieChart (10 reasons: Defective, Wrong Item, Damaged, Size, Color, Quality, Missing Parts, Expired, Mind Changed, Duplicate)
+    - Channel-wise Returns & Avg Refund BarChart (6 channels: E-Commerce, D2C, Marketplace, Wholesale, Retail, Phone)
+    - Disposition Analysis PieChart (7: Restock, Liquidation, Scrap, Return to Supplier, Refurbish, Donate, Hold)
+    - Returns Team Performance table: processor, role, warehouse, processed, refunds, accuracy bar, avg TAT, star rating
+
+  * Tab 2 Returns Queue:
+    - Filter bar: search (RMA/Order/SKU/product/customer/reason), status (9), channel (6)
+    - Full returns table (100 records, shows 60): RMA ID, Order ID, customer + city + segment, product/SKU, qty, reason badge, channel badge, priority badge, status badge (Inspecting/Refund Processing/Disputed=pulse), refund ₹, warehouse, created date, actions
+
+  * Tab 3 QC Inspection:
+    - 4 KPI cards (Pending Inspection, QC Approved, QC Rejected, Avg QC TAT)
+    - QC Decision Distribution PieChart (Pass-Restock, Pass-Refurbish, Fail-Liquidate, Fail-Scrap, Fail-Supplier, Pending)
+    - Reason vs QC Outcome grouped BarChart (pass vs fail per reason)
+    - QC table (40 items): RMA, status, product/SKU, qty, reason, QC decision badge, disposition badge, processor, warehouse, images count, notes
+
+  * Tab 4 Refunds:
+    - 4 KPI cards (Refund Issued, Processing, Total Refunded ₹, Avg Refund ₹)
+    - Refund Method Distribution PieChart (6: NEFT/RTGS, UPI, Wallet, Store Credit, Original, Cheque)
+    - Monthly Refund & Restock Value Trend AreaChart
+    - Filter: search + status (4)
+    - Refund table (50 items): RMA, order, customer, product, refund status badge, method, amount ₹ (pink bold), restock ₹ (green), disposition badge, feedback, refunded on
+
+  * Tab 5 Analytics:
+    - 4 KPI cards (Return Rate %, Net Loss ₹, Recovery Rate %, Avg Satisfaction %)
+    - Cost of Returns Analysis ComposedChart (refund cost bars + recovery line + satisfaction line)
+    - Customer Segment Return Analysis RadarChart (Premium/Regular/Enterprise × returns/avg refund/satisfaction)
+    - Top Return Products table: rank badges, product, SKU, category, returns count, top reason, refund ₹, restock ₹, recovery % bar
+
+  * Return Detail Drawer:
+    - Status banner (done/active/default/rejected/disputed with icons + pulse)
+    - Customer Info box (name, city, ID, segment)
+    - Product Flow: product dot → warehouse dot → disposition dot
+    - Info grid: SKU, category, unit price, quantity, channel badge, priority badge
+    - Financial Summary: 3 boxes (Refund ₹ / Restock ₹ / Net Loss)
+    - Return Timeline: 5-step (Requested → Received → QC Check → Refund → Closed) with dates
+    - Customer Feedback box (with thumbs-up icon)
+    - Footer: processor, QC decision, refund method, transit days
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 132132)
+  * 100 return records with 10 reasons, 6 channels, 9 statuses, 7 dispositions
+  * 18 products across 6 categories with prices and margin data
+  * 8 customers across 4 segments (Premium/Regular/Enterprise) in Indian cities
+  * 6 processors with roles (Returns Lead, QC Inspector, Refund Analyst)
+  * 12-month trend data for requests, processing, refund amounts, TAT, satisfaction
+
+- Created CSS: scripts/r132-css.css (~580 lines), appended to src/app/globals.css
+  * Pink + cyan + amber theme
+  * Animated gradient top border (pink → cyan → amber, 6s cycle)
+  * 6 KPI card gradient backgrounds with dark mode
+  * Status badges (9: received=gray, inspecting=cyan-pulse, qc-pass=green, qc-fail=red, refund-proc=amber-pulse, refund-done=green, replaced=cyan, closed=gray, disputed=red-bold-pulse)
+  * Reason badges (10 unique colors), Channel badges (6), Priority badges (4), Disposition badges (7)
+  * Customer info box (pink background)
+  * Product Flow visualization (pink/cyan/green dots)
+  * Financial summary qty boxes (refund=pink, restock=green, negative=red)
+  * Timeline track (5-step with dates)
+  * Feedback box (green background)
+  * Drawer with pink left border, backdrop blur
+  * Table row highlighting (critical=red, disputed=red, inspecting=cyan left borders)
+  * Staggered animations, full dark mode, responsive
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'returns-processing' (icon: Undo2, group: operations)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: re-export as default
+  * src/components/layout/app-layout.tsx: Undo2 added to imports + iconMap
+
+LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 1c6cc16
+
+Stage Summary:
+- NEW MODULE: Returns Processing & Refund Management (62 modules total, was 61)
+- ~1,060-line component + ~580 lines CSS (rp-* classes)
+- 5 tabs + 8 chart types + 100 returns + 6 processors + 8 customers
+- End-to-end RMA workflow: request → receive → QC → disposition → refund/close
+- Customer segment analysis and satisfaction tracking
+- Financial impact analysis: refund value vs restock recovery vs net loss
+- Total globals.css: 29,224 lines (+272)
+
+## Updated Project Status (Post Round 132)
+- STATUS: STABLE + NEW RETURNS PROCESSING MODULE (62 modules)
+- MODULES (62): All previous 61 + Returns Processing & Refund Management
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 29,224 lines
+
+KNOWN ISSUES:
+- Dev server timeout in agent-browser QA (connection instability)
+- Git local/remote divergence: ~68 remote commits not in local, ~22 local not on remote
+- Pre-existing TS errors in non-src files (skills/, examples/, mini-services/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (62+ modules growing redundancy)
+  2. Multi-warehouse switching for all modules
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for R113-R132 modules
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 29000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+---
 Task ID: 131
 Agent: Main (Cron Review - Round 131)
 Task: Cycle Count Management module
