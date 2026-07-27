@@ -1,4 +1,122 @@
 ---
+Task ID: 117
+Agent: Main (Cron Review - Round 117)
+Task: Fleet Maintenance Management module (R117)
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R116 was latest completed round)
+- Verified project state: 46 modules, 7 API routes, build passes, lint clean
+- Dev server: localhost:3099 returns 200 OK
+- agent-browser QA: Known limitation (separate network namespace), skipped
+  * Build: compiled successfully (10 routes)
+  * ESLint: 0 errors on src/
+  * TSC: 0 errors in src/components/
+
+- Created R117: Fleet Maintenance Management module
+  * NEW FILE: src/components/modules/fleet-maintenance-management-view.tsx (~1077 lines)
+  * 5 tabs: Fleet Overview | Vehicle Registry | Work Orders | Cost Analytics | Maintenance Schedule
+  * Theme: Industrial Steel Blue + Slate Grey + Amber accent
+  * Header: gradient banner with animated top border (amber → blue → purple, 6s cycle)
+  * Header badges: Active count, Open WOs, Fleet Utilization %
+
+  * Tab 1 Fleet Overview:
+    - 4 KPI cards (Total Vehicles, Operational, Open WOs, Total Maint. Cost)
+    - Fleet Composition donut chart (10 vehicle types)
+    - Monthly Maintenance Cost (ComposedChart: total area + preventive/corrective lines)
+    - Warehouse Fleet Comparison horizontal bar (total/operational)
+    - Downtime by Vehicle Type bar chart (color-coded by severity)
+    - Maintenance Type Breakdown donut (preventive/corrective/emergency/predictive)
+    - Upcoming Scheduled Services list (10 items with urgency badges)
+
+  * Tab 2 Vehicle Registry:
+    - Filter bar: search, vehicle type (10 types), status, warehouse
+    - Vehicle card grid (3 columns): each card shows vehicle info + 3 SVG health rings
+    - Health rings: Utilization %, Battery/Fuel %, Tire condition %
+    - Vehicle cards with hover lift + blue border highlight
+
+  * Tab 3 Work Orders:
+    - 4 WO KPI cards (Total, Open, Completed, Emergency)
+    - WOs by Status bar chart (color-coded per status)
+    - Full work orders table: WO#, vehicle, type, priority, status, assignee, scheduled date, cost
+
+  * Tab 4 Cost Analytics:
+    - 4 cost KPI cards (Total Cost, Avg per Vehicle, Preventive Ratio, Avg Downtime)
+    - Cost by Maintenance Type bar chart (color-coded per type)
+    - Maintenance Cost by Warehouse bar chart
+    - Stacked area chart: Preventive vs Corrective vs Emergency cost trend
+
+  * Tab 5 Maintenance Schedule:
+    - Fleet Health Summary: 6 progress bars (Availability, PM Compliance, First-Time Fix Rate, Parts Availability, Avg Repair Time, Preventive Ratio)
+    - Vehicles Requiring Attention: smart scoring (battery + tires + utilization) sorted list
+    - Service Schedule Table: full vehicle list with next service countdown badges
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 117117)
+  * 32 vehicles across 6 warehouses
+  * 10 vehicle types: forklift, reach truck, pallet jack, terminal tractor, delivery truck, reefer truck, floor sweeper, boom lift, tugger, order picker
+  * 6 fuel types: diesel, electric, LPG, CNG, gasoline, manual
+  * 5 manufacturers per type (Toyota, Crown, Hyster, Yale, Komatsu, Kalmar, Tata Motors, Ashok Leyland, etc.)
+  * Realistic model numbers per manufacturer
+  * 1-5 maintenance records per vehicle
+  * 4 maintenance types, 4 priority levels, 6 WO statuses
+  * Vehicle health: battery %, tire condition, utilization rate
+  * Cost tracking: purchase cost, maintenance cost, estimated vs actual
+  * Downtime hours per vehicle
+  * 20 different parts used across work orders
+
+- Created CSS: scripts/r117-css.css (~360 lines), appended to src/app/globals.css
+  * Industrial steel blue + slate grey + amber accent theme
+  * Animated gradient top border (amber → blue → purple, 6s cycle)
+  * 4 KPI card gradient backgrounds (blue/green/amber/purple)
+  * Vehicle cards with hover lift + blue border reveal
+  * Vehicle icon with gradient background
+  * SVG health rings with color thresholds (green/amber/red)
+  * Upcoming service items with urgent variant (red border + background)
+  * WO KPI cards with staggered slide-up animation
+  * Cost KPI cards with hover lift
+  * Attention items with red hover highlight
+  * Filter bar with steel blue focus ring
+  * Tab bar with steel blue active indicator
+  * Dark mode full coverage
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'fleet-maintenance' (icon: Wrench, group: operations)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: export
+  * src/components/layout/app-layout.tsx: added Wrench to lucide imports + iconMap
+
+LINT: 0 errors | BUILD: compiled successfully | SRC TS ERRORS: 0
+
+Stage Summary:
+- NEW MODULE: Fleet Maintenance Management (47 modules total, was 46)
+- ~1077-line component + ~360 lines CSS (fm-* classes)
+- 5 tabs + 8 chart types + vehicle health rings + work order tracking
+- Mock data: 32 vehicles, 10 types, 6 warehouses, 90+ work orders
+- Total globals.css: 21,185 lines (+360)
+
+## Updated Project Status (Post Round 117)
+- STATUS: STABLE + NEW FLEET MAINTENANCE MODULE (47 modules)
+- MODULES (47): All previous 46 + Fleet Maintenance Management (NEW — Vehicle registry, PM scheduling, work orders, cost analytics)
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 21,185 lines
+
+KNOWN ISSUES:
+- agent-browser cannot connect to localhost (separate network namespace)
+- Git local/remote divergence: 66 remote commits not in local, 8 local not on remote
+- 1 pre-existing TS error in skills/stock-analysis-skill/src/ — none in src/
+
+PRIORITY NEXT:
+  1. Extract 14 inline drawers to shared/*-detail-drawer.tsx (consistency refactor)
+  2. Multi-warehouse switching for dock scheduler & yard management
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for new modules (R113-R117)
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 21000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+
+---
 Task ID: 116
 Agent: Main (Cron Review - Round 116)
 Task: Badge variant fix + Safety & EHS Incident Management module (R116)
