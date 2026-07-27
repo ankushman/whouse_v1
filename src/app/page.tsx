@@ -44,6 +44,8 @@ import { PredictiveAnalyticsView } from "@/components/modules/predictive-analyti
 import { ComplianceAuditView } from "@/components/modules/compliance-audit-view"
 import { EnergySustainabilityView } from "@/components/modules/energy-sustainability-view"
 import { ContinualImprovementView } from "@/components/modules/continual-improvement-view"
+import { SupplierAuditView } from "@/components/modules/supplier-audit-view"
+import { ESGSustainabilityAuditView } from "@/components/modules/esg-sustainability-audit-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -88,6 +90,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "compliance-audit": ComplianceAuditView,
   "energy-sustainability": EnergySustainabilityView,
   "continual-improvement": ContinualImprovementView,
+  "supplier-audit": SupplierAuditView,
+  "esg-sustainability-audit": ESGSustainabilityAuditView,
   "shift-handover": ShiftHandoverView,
 }
 

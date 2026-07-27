@@ -32,6 +32,8 @@ export { InventoryValuationView } from './inventory-valuation-view'
 export { DemandForecastingView } from './demand-forecasting-view'
 export { SupplierCorrectiveActionRequestView } from './supplier-corrective-action-request-view'
 export { ContinualImprovementView } from './continual-improvement-view'
+export { SupplierAuditView } from './supplier-audit-view'
+export { ESGSustainabilityAuditView } from './esg-sustainability-audit-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.
