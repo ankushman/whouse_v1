@@ -208,7 +208,7 @@ function TrendIndicator({ current, previous }: { current: number; previous: numb
 
 function ConditionalBadge({ value, target, suffix = "%" }: { value: number; target: number; suffix?: string }) {
   const pct = ((value - target) / target) * 100;
-  let variant: "success" | "warning" | "destructive" = "success";
+  let variant: "success" | "warning" | "destructive" | "outline" | "secondary" | "default" = "success";
   if (pct < -5) variant = "destructive";
   else if (pct < 0) variant = "warning";
   return (
@@ -263,7 +263,7 @@ export function WarehousePerformanceScorecardView() {
     return kpis.map((kpi) => {
       const entry: Record<string, string | number> = { name: kpi.name };
       data.forEach((wh) => {
-        entry[wh.name] = (wh.operational as Record<string, number>)[kpi.key] ?? (wh.financial as Record<string, number>)[kpi.key] ?? 0;
+        entry[wh.name] = (wh.operational as unknown as Record<string, number>)[kpi.key] ?? (wh.financial as unknown as Record<string, number>)[kpi.key] ?? 0;
       });
       return entry;
     });
@@ -285,7 +285,7 @@ export function WarehousePerformanceScorecardView() {
       week: t.week,
       ...data.reduce((acc, wh) => {
         if (trendWarehouses.includes(wh.id)) {
-          acc[wh.name] = wh.trend[wi]?.[trendKpi as keyof TrendData] ?? 0;
+          acc[wh.name] = Number(wh.trend[wi]?.[trendKpi as keyof TrendData] ?? 0);
         }
         return acc;
       }, {} as Record<string, number>),
@@ -559,7 +559,7 @@ export function WarehousePerformanceScorecardView() {
               {data.filter((w) => trendWarehouses.includes(w.id)).map((wh) => {
                 const last = wh.trend[wh.trend.length - 1]?.[trendKpi as keyof TrendData] ?? 0;
                 const prev = wh.trend[wh.trend.length - 2]?.[trendKpi as keyof TrendData] ?? 0;
-                const change = last - prev;
+                const change = Number(last) - Number(prev);
                 return (
                   <div key={wh.id} className="wps-change-card">
                     <div className="text-xs text-muted-foreground">{wh.name}</div>

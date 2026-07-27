@@ -334,7 +334,7 @@ const COLORS = ["#0ea5e9", "#6366f1", "#8b5cf6", "#a855f7", "#d946ef", "#ec4899"
 // Helper Components
 // ============================================================================
 function MatchStatusBadge({ status }: { status: string }) {
-  const colorMap: Record<string, "success" | "warning" | "destructive" | "default" | "secondary"> = {
+  const colorMap: Record<string, "success" | "warning" | "destructive" | "default" | "secondary" | "outline"> = {
     full_match: "success", partial_match: "warning", qty_variance: "warning",
     price_variance: "warning", no_grn: "destructive", no_invoice: "destructive",
     no_match: "secondary", over_invoice: "destructive",

@@ -1,4 +1,74 @@
 ---
+Task ID: 116
+Agent: Main (Cron Review - Round 116)
+Task: Badge variant fix + Safety & EHS Incident Management module (R116)
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R115 was latest completed round)
+- Verified project state: 45 modules, 7 API routes, build passes, lint clean
+- Git status: 6 local commits ahead of divergence point, 66 remote commits ahead
+- agent-browser QA: Known limitation (separate network namespace), skipped
+  * Build: compiled successfully (10 routes)
+  * ESLint: 0 errors on src/
+  * Dev server: localhost:3099 returns 200 OK
+
+- Fixed 23 TS errors in src/components/:
+  * ROOT CAUSE: Badge component only accepted "default"|"destructive"|"outline"|"secondary" variants
+  * FIX: Added "success" (emerald-600) and "warning" (amber-500) variants to Badge component
+    - src/components/ui/badge.tsx: +4 lines (two new CVA variants)
+  * FIXED FILES:
+    - src/components/modules/three-way-match-dashboard-view.tsx: MatchStatusBadge type widened
+    - src/components/modules/vendor-contract-management-view.tsx: 15 Badge variant calls now valid
+    - src/components/modules/warehouse-performance-scorecard-view.tsx: 3 type fixes
+  * RESULT: 0 TS errors in src/components/ (1 remains in skills/ — not in main source)
+
+- Created R116: Safety & EHS Incident Management module
+  * NEW FILE: src/components/modules/safety-incident-management-view.tsx (~1235 lines)
+  * 5 tabs: Safety Overview | Incident Register | Root Cause Analysis | Corrective Actions | Compliance & OSHA
+  * Theme: Red + Orange + Blue gradient (safety/hazard aesthetic)
+  * 48 incidents, 12 categories, 6 warehouses, corrective actions, injury records
+  * 7 recharts chart types, OSHA/TRIR/DART metrics, RCA tracking
+
+- Created CSS: scripts/r116-css.css (~534 lines), appended to src/app/globals.css
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'safety-incident-mgmt' (icon: ShieldAlert, group: system)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: export
+  * src/components/layout/app-layout.tsx: ShieldAlert added to imports + iconMap
+
+LINT: 0 errors | BUILD: compiled successfully | SRC TS ERRORS: 0
+
+Stage Summary:
+- BUG FIX: Badge component enhanced with "success" and "warning" variants (fixes 23 TS errors)
+- NEW MODULE: Safety & EHS Incident Management (46 modules total, was 45)
+- ~1235-line component + ~534 lines CSS (sim-* classes)
+- 5 tabs + 7 chart types + OSHA compliance + root cause analysis
+- Total globals.css: 20,825 lines
+
+## Updated Project Status (Post Round 116)
+- STATUS: STABLE + NEW SAFETY & EHS MODULE + BUG FIXES (46 modules)
+- MODULES (46): All previous 45 + Safety & EHS Incident Management
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 20,825 lines
+
+KNOWN ISSUES:
+- agent-browser cannot connect to localhost (separate network namespace)
+- Git local/remote divergence: 66 remote commits not in local, 7 local not on remote
+- 1 pre-existing TS error in skills/stock-analysis-skill/src/ — none in src/
+
+PRIORITY NEXT:
+  1. Extract 14 inline drawers to shared/*-detail-drawer.tsx (consistency refactor)
+  2. Multi-warehouse switching for dock scheduler & yard management
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for new modules (R113-R116)
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 20000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+
+---
 Task ID: 115
 Agent: Main (Cron Review - Round 115)
 Task: Vendor Contract Management module (R115) + CSS styling
