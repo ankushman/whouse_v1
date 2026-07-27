@@ -1,4 +1,67 @@
 ---
+Task ID: 138
+Agent: Main (Cron Review - Round 138)
+Task: R138 — Batch & Lot Management module
+
+Work Log:
+- Read worklog.md (R137 latest, 67 modules)
+- Build ✅ | Lint ✅ | TSC src/ ✅ (error only in skills/, pre-existing)
+- agent-browser QA: dev server connection instability (known limitation)
+- BUILD: compiled successfully (10 routes)
+
+- Created R138: Batch & Lot Management module
+  * NEW FILE: src/components/modules/batch-lot-view.tsx (913 lines)
+  * 5 tabs: Dashboard | Batch Register | Expiry Alerts | Compliance | Analytics
+  * Theme: Violet + Amber + Sky (#7c3aed, #f59e0b, #0ea5e9)
+  * Tab 1: 6 KPIs, ComposedChart (monthly lifecycle), PieChart (category), BarChart (expiry timeline), stacked BarChart (warehouse status), critical alerts table (12 rows)
+  * Tab 2: Batch Register 150 records, 4 filters (search/status/category/expiry), 14-column table with batch/lot/product/dates/status/qty/storage/policy/compliance/QC
+  * Tab 3: Expiry Alerts — 4 urgency cards (Critical/Warning/Info/Total), timeline BarChart, retention policy PieChart, full alerts table
+  * Tab 4: Compliance — 4 standard rate cards (FSSAI/CDSCO/ISO/WHO), monthly AreaChart, storage condition PieChart, violations table (40 records, filterable)
+  * Tab 5: Analytics — 4 stat cards, creation/consumption ComposedChart, status PieChart, warehouse distribution, violation type PieChart
+  * Batch Detail Drawer: status banner (5 variants), 4-dot flow (Received→Inspected→Stored→Dispatched), 12-field info grid, qty progress bar (available/reserved/damaged), compliance badges, QC status, HS code
+  * Mock Data: seed 138138, 15 products with HS codes, 150 batch records, 7 statuses, 8 categories, 6 storage conditions, 8 compliance standards (FSSAI, CDSCO, ISO 9001, WHO-GMP, EU-GMP, US-FDA, BIS, AGMARK)
+  * Indian regulatory focus: FSSAI food safety, CDSCO pharma, GST-ready HS codes
+
+- Fixes applied:
+  * Missing </CardContent> closing tag on dashboard alerts Card (line 431)
+  * Duplicate Layers import in app-layout.tsx (already defined at line 50)
+
+- CSS: scripts/r138-css.css (~149 lines, bl-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: Layers), app-layout.tsx
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: ffc3f9c
+
+Stage Summary:
+- NEW MODULE: Batch & Lot Management (68 modules total, was 67)
+- 913-line component + 149 lines CSS
+- Full batch/lot lifecycle: receipt → inspection → storage → dispatch
+- Expiry management with urgency classification (Critical ≤7d, Warning 8-30d, Info 31-60d)
+- Indian regulatory compliance: FSSAI, CDSCO, WHO-GMP, ISO 9001, BIS, AGMARK
+- FIFO/FEFO retention policy tracking
+- Compliance violation monitoring with severity classification
+- Total globals.css: 31,253 lines (+149)
+
+## Updated Project Status (Post Round 138)
+- STATUS: STABLE + BATCH & LOT MODULE (68 modules)
+- MODULES (68): All previous 67 + Batch & Lot Management
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 31,253 lines
+
+KNOWN ISSUES:
+- Dev server timeout in agent-browser QA (connection instability)
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (68+ modules)
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 31000+ classes — consolidate
+  5. Resolve git local/remote divergence
+  6. Consignment Stock Management module
+  7. Cross-module navigation
+---
 Task ID: 137
 Agent: Main (Cron Review - Round 137)
 Task: R136 TS fix + Kitting & Assembly Management module
