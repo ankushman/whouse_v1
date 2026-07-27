@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState } from "react"
 import {
   Card, CardContent, CardHeader, CardTitle,
 } from "@/components/ui/card"
@@ -21,7 +21,7 @@ import {
   TrendingUp, ArrowUpRight, ArrowDownRight, Eye, X, Package, Clock,
   Warehouse, Star, Timer, MapPin, User, ChevronRight, ArrowRight,
   PackageSearch, LayoutGrid, Zap, ShieldCheck, ThermometerSnowflake,
-  IndianRupee, Target, Gauge, BoxesIcon, Archive,
+  IndianRupee, Target, Gauge, Boxes, Archive,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -391,9 +391,9 @@ export default function PutawayManagementView() {
   const [queueStrategyFilter, setQueueStrategyFilter] = useState("All")
   const [selectedTask, setSelectedTask] = useState<typeof putawayTasks[0] | null>(null)
 
-  const filteredQueue = useMemo(() => {
+  const filteredQueue = (() => {
+    const q = queueSearch.toLowerCase()
     return putawayTasks.filter((t) => {
-      const q = queueSearch.toLowerCase()
       const matchSearch = !q || t.id.toLowerCase().includes(q) || t.palletId.toLowerCase().includes(q)
         || t.product.sku.toLowerCase().includes(q) || t.product.name.toLowerCase().includes(q)
         || t.warehouse.toLowerCase().includes(q) || t.zone.toLowerCase().includes(q)
@@ -402,7 +402,7 @@ export default function PutawayManagementView() {
       const matchStrategy = queueStrategyFilter === "All" || t.strategy === queueStrategyFilter
       return matchSearch && matchStatus && matchPriority && matchStrategy
     })
-  }, [queueSearch, queueStatusFilter, queuePriorityFilter, queueStrategyFilter])
+  })()
 
   const visibleQueue = filteredQueue.slice(0, 60)
 
@@ -777,7 +777,7 @@ export default function PutawayManagementView() {
               {/* KPI Cards */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
-                  { title: "Total Bins", val: "2,400", icon: BoxesIcon, cls: "pa-kpi-indigo" },
+                  { title: "Total Bins", val: "2,400", icon: Boxes, cls: "pa-kpi-indigo" },
                   { title: "Optimized", val: "1,856", icon: CheckCircle2, cls: "pa-kpi-emerald" },
                   { title: "Defrag Score", val: "87.3%", icon: Target, cls: "pa-kpi-amber" },
                   { title: "Travel Saved", val: "1,240m", icon: TrendingUp, cls: "pa-kpi-cyan" },
