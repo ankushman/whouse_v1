@@ -40,6 +40,7 @@ export { WarehousePerformanceScorecardView } from './warehouse-performance-score
 export { ThreeWayMatchDashboardView } from './three-way-match-dashboard-view'
 export { VendorContractManagementView } from './vendor-contract-management-view'
 export { SafetyIncidentManagementView } from './safety-incident-management-view'
+export { FleetMaintenanceManagementView } from './fleet-maintenance-management-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.
