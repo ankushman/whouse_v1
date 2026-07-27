@@ -23852,3 +23852,164 @@ html.theme-transition body {
   .cfs-drawer { width: 100%; max-width: 100vw; }
   .cfs-filter-search .cfs-filter-input { width: 120px; }
 }
+/* ========================================================================
+   R122: Hazmat & Dangerous Goods Management
+   Theme: Orange + Red + Indigo (#f97316, #ef4444, #6366f1)
+   Prefix: haz-
+   ======================================================================== */
+
+.haz-container { max-width: 100%; }
+
+.haz-header {
+  position: relative;
+  background: linear-gradient(135deg, #c2410c, #dc2626, #4338ca);
+  border-radius: 12px;
+  padding: 24px;
+  overflow: hidden;
+  animation: haz-header-glow 6s ease-in-out infinite alternate;
+}
+
+.haz-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f97316, #ef4444, #6366f1, #f97316);
+  background-size: 300% 100%;
+  animation: haz-gradient-shift 6s linear infinite;
+}
+
+@keyframes haz-gradient-shift { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+@keyframes haz-header-glow {
+  0% { box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3); }
+  100% { box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3); }
+}
+
+.haz-header-content { display: flex; align-items: center; gap: 16px; }
+.haz-header-icon-wrap { width: 48px; height: 48px; background: rgba(255, 255, 255, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+.haz-header-title { font-size: 1.25rem; font-weight: 700; color: white; line-height: 1.3; }
+.haz-header-subtitle { font-size: 0.8rem; color: rgba(255, 255, 255, 0.7); margin-top: 2px; }
+.haz-header-badges { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+
+.haz-header-badge { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; backdrop-filter: blur(10px); }
+.haz-badge-orange { background: rgba(249, 115, 22, 0.3); color: #fed7aa; border: 1px solid rgba(249, 115, 22, 0.3); }
+.haz-badge-red { background: rgba(239, 68, 68, 0.3); color: #fecaca; border: 1px solid rgba(239, 68, 68, 0.3); }
+.haz-badge-green { background: rgba(16, 185, 129, 0.3); color: #a7f3d0; border: 1px solid rgba(16, 185, 129, 0.3); }
+
+/* Tabs */
+.haz-tabs { display: flex; gap: 4px; padding: 4px; background: hsl(var(--muted)); border-radius: 10px; overflow-x: auto; }
+.haz-tab { padding: 8px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 500; color: hsl(var(--muted-foreground)); background: transparent; border: none; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; }
+.haz-tab:hover { color: hsl(var(--foreground)); background: hsl(var(--card)); }
+.haz-tab-active { color: white; background: linear-gradient(135deg, #f97316, #ef4444); box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3); }
+.haz-tab-content { animation: haz-fade-in 0.3s ease; }
+@keyframes haz-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* KPI Cards */
+.haz-kpi-card { border: none; overflow: hidden; position: relative; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.haz-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
+.haz-kpi-orange { background: linear-gradient(135deg, #fff7ed, #ffedd5); }
+.haz-kpi-green { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+.haz-kpi-red { background: linear-gradient(135deg, #fef2f2, #fee2e2); }
+.haz-kpi-amber { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+.haz-kpi-purple { background: linear-gradient(135deg, #faf5ff, #f3e8ff); }
+.haz-kpi-blue { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+.dark .haz-kpi-orange { background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.08)); }
+.dark .haz-kpi-green { background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08)); }
+.dark .haz-kpi-red { background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08)); }
+.dark .haz-kpi-amber { background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08)); }
+.dark .haz-kpi-purple { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.08)); }
+.dark .haz-kpi-blue { background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08)); }
+
+.haz-kpi-icon { color: hsl(var(--muted-foreground)); }
+.haz-kpi-value { font-size: 1.5rem; font-weight: 700; color: hsl(var(--foreground)); line-height: 1.2; }
+.haz-kpi-label { font-size: 0.7rem; color: hsl(var(--muted-foreground)); margin-top: 2px; }
+
+/* Cards */
+.haz-card { border: 1px solid hsl(var(--border)); transition: box-shadow 0.2s ease; }
+.haz-card:hover { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05); }
+.haz-card-title { font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+/* Filter Bar */
+.haz-filter-card { border: 1px solid hsl(var(--border)); }
+.haz-filter-search { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: hsl(var(--muted)); border-radius: 8px; border: 1px solid hsl(var(--border)); }
+.haz-filter-input { background: transparent; border: none; outline: none; font-size: 0.8rem; color: hsl(var(--foreground)); width: 180px; }
+.haz-filter-select { padding: 6px 10px; border-radius: 8px; border: 1px solid hsl(var(--border)); background: hsl(var(--muted)); font-size: 0.75rem; color: hsl(var(--foreground)); outline: none; }
+.haz-filter-count { font-size: 0.7rem; color: hsl(var(--muted-foreground)); margin-left: auto; font-weight: 500; }
+
+/* Table */
+.haz-table { border-collapse: collapse; font-size: 0.75rem; }
+.haz-table th { text-align: left; padding: 8px 10px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: hsl(var(--muted-foreground)); border-bottom: 2px solid hsl(var(--border)); white-space: nowrap; }
+.haz-table td { padding: 8px 10px; border-bottom: 1px solid hsl(var(--border)); white-space: nowrap; }
+.haz-table-row { transition: background 0.15s ease; }
+.haz-table-row:hover { background: hsl(var(--muted) / 0.5); }
+
+/* Class Badge */
+.haz-class-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: 600; }
+
+/* Severity Badge */
+.haz-sev-badge { border: none; font-weight: 600; text-transform: capitalize; }
+
+/* Life Bar */
+.haz-life-bar-bg { height: 5px; background: rgba(0, 0, 0, 0.06); border-radius: 3px; overflow: hidden; }
+.haz-life-bar { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.haz-life-ok { background: #10b981; }
+.haz-life-warn { background: #f59e0b; }
+.haz-life-crit { background: #ef4444; }
+
+/* PPE Cards */
+.haz-ppe-card { border: 1px solid hsl(var(--border)); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.haz-ppe-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
+.haz-ppe-equip-item { display: flex; align-items: center; gap: 6px; }
+.haz-ppe-bar-bg { height: 5px; background: rgba(0, 0, 0, 0.06); border-radius: 3px; overflow: hidden; }
+.haz-ppe-bar { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+/* Storage Zone Cards */
+.haz-zone-card { border: 1px solid hsl(var(--border)); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.haz-zone-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); }
+.haz-zone-id { font-size: 0.7rem; font-weight: 700; font-family: monospace; color: hsl(var(--foreground)); }
+.haz-zone-name { font-size: 0.8rem; font-weight: 600; color: hsl(var(--foreground)); margin-bottom: 2px; }
+.haz-zone-type { font-size: 0.65rem; color: hsl(var(--muted-foreground)); text-transform: capitalize; margin-bottom: 8px; }
+.haz-zone-metrics { display: flex; gap: 8px; margin-bottom: 4px; }
+.haz-zone-metric { display: flex; align-items: center; gap: 4px; font-size: 0.7rem; color: hsl(var(--muted-foreground)); }
+.haz-zone-features { display: flex; flex-wrap: wrap; gap: 6px; }
+.haz-zone-feature { display: flex; align-items: center; gap: 3px; font-size: 0.6rem; color: hsl(var(--muted-foreground)); }
+
+/* Drawer */
+.haz-drawer-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); z-index: 50; animation: haz-fade-in 0.2s ease; }
+.haz-drawer { position: fixed; top: 0; right: 0; width: 440px; max-width: 90vw; height: 100%; background: hsl(var(--card)); border-left: 1px solid hsl(var(--border)); box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15); overflow-y: auto; animation: haz-slide-in 0.3s ease; z-index: 51; }
+@keyframes haz-slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.haz-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid hsl(var(--border)); }
+.haz-drawer-title { font-size: 0.9rem; font-weight: 600; }
+.haz-drawer-body { padding: 20px; }
+.haz-drawer-section { margin-bottom: 20px; }
+.haz-drawer-section-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: hsl(var(--muted-foreground)); margin-bottom: 10px; padding-bottom: 4px; border-bottom: 1px solid hsl(var(--border)); }
+.haz-drawer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.haz-drawer-label { display: block; font-size: 0.65rem; color: hsl(var(--muted-foreground)); margin-bottom: 2px; }
+.haz-drawer-value { font-size: 0.8rem; font-weight: 500; color: hsl(var(--foreground)); }
+
+/* Stagger */
+@keyframes haz-slide-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.haz-stagger-0 { animation: haz-slide-up 0.4s ease both; animation-delay: 0ms; }
+.haz-stagger-1 { animation: haz-slide-up 0.4s ease both; animation-delay: 50ms; }
+.haz-stagger-2 { animation: haz-slide-up 0.4s ease both; animation-delay: 100ms; }
+.haz-stagger-3 { animation: haz-slide-up 0.4s ease both; animation-delay: 150ms; }
+.haz-stagger-4 { animation: haz-slide-up 0.4s ease both; animation-delay: 200ms; }
+.haz-stagger-5 { animation: haz-slide-up 0.4s ease both; animation-delay: 250ms; }
+.haz-stagger-6 { animation: haz-slide-up 0.4s ease both; animation-delay: 300ms; }
+.haz-stagger-7 { animation: haz-slide-up 0.4s ease both; animation-delay: 350ms; }
+.haz-stagger-8 { animation: haz-slide-up 0.4s ease both; animation-delay: 400ms; }
+.haz-stagger-9 { animation: haz-slide-up 0.4s ease both; animation-delay: 450ms; }
+.haz-stagger-10 { animation: haz-slide-up 0.4s ease both; animation-delay: 500ms; }
+.haz-stagger-11 { animation: haz-slide-up 0.4s ease both; animation-delay: 550ms; }
+
+/* Responsive */
+@media (max-width: 1024px) { .haz-header-title { font-size: 1rem; } .haz-kpi-value { font-size: 1.2rem; } }
+@media (max-width: 768px) {
+  .haz-header { padding: 16px; }
+  .haz-header-content { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .haz-header-badges { flex-direction: column; width: 100%; }
+  .haz-tab { padding: 6px 12px; font-size: 0.7rem; }
+  .haz-drawer { width: 100%; max-width: 100vw; }
+  .haz-filter-search .haz-filter-input { width: 120px; }
+}

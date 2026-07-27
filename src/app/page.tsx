@@ -57,6 +57,7 @@ import { CargoDamageClaimsView } from "@/components/modules/cargo-damage-claims-
 import CrossDockTransshipmentView from "@/components/modules/cross-dock-transshipment-view"
 import ColdChainTemperatureView from "@/components/modules/cold-chain-temperature-view"
 import ContainerFreightStationView from "@/components/modules/container-freight-station-view"
+import HazmatDangerousGoodsView from "@/components/modules/hazmat-dangerous-goods-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -114,6 +115,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "cross-dock-transshipment": CrossDockTransshipmentView,
   "cold-chain-temp": ColdChainTemperatureView,
   "container-freight-station": ContainerFreightStationView,
+  "hazmat-dangerous-goods": HazmatDangerousGoodsView,
   "shift-handover": ShiftHandoverView,
 }
 
