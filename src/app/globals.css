@@ -30679,3 +30679,231 @@ html.theme-transition body {
 .dark .grn-drawer-footer {
   background: rgba(148, 163, 184, 0.05);
 }
+/* test *//* ═══════════════════════════════════════════════════════════════
+   R136: Tally Integration & Accounting Interface — CSS (tally-*)
+   Theme: Violet (#8b5cf6) + Cyan (#06b6d4) + Emerald (#10b981)
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes tally-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes tally-pulse-glow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.15); }
+}
+
+@keyframes tally-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Container ─── */
+.tally-container { animation: tally-fade-in 0.35s ease-out; }
+
+/* ─── Header ─── */
+.tally-header {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06), rgba(6, 182, 212, 0.06), rgba(16, 185, 129, 0.06));
+  padding: 16px 20px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.tally-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981, #8b5cf6);
+  background-size: 300% 100%;
+  animation: tally-gradient-shift 6s ease infinite;
+}
+
+/* ─── Status Dots ─── */
+.tally-status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.tally-status-connected { background: #10b981; box-shadow: 0 0 6px rgba(16, 185, 129, 0.5); }
+.tally-status-syncing { background: #06b6d4; box-shadow: 0 0 6px rgba(6, 182, 212, 0.5); animation: tally-pulse-glow 2s infinite; }
+.tally-status-disconnected { background: #f43f5e; box-shadow: 0 0 6px rgba(244, 63, 94, 0.5); }
+.tally-pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #06b6d4; animation: tally-pulse-glow 2s infinite; display: inline-block; }
+
+/* ─── KPI Cards ─── */
+.tally-kpi-card {
+  position: relative;
+  overflow: hidden;
+  animation: tally-fade-in 0.4s ease-out;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tally-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); }
+
+.tally-kpi-violet { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+.tally-kpi-emerald { background: linear-gradient(135deg, #10b981, #34d399); }
+.tally-kpi-rose { background: linear-gradient(135deg, #f43f5e, #fb7185); }
+.tally-kpi-amber { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+.tally-kpi-cyan { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+.tally-kpi-teal { background: linear-gradient(135deg, #14b8a6, #2dd4bf); }
+
+.dark .tally-kpi-violet { background: linear-gradient(135deg, #6d28d9, #8b5cf6); }
+.dark .tally-kpi-emerald { background: linear-gradient(135deg, #047857, #10b981); }
+.dark .tally-kpi-rose { background: linear-gradient(135deg, #be123c, #f43f5e); }
+.dark .tally-kpi-amber { background: linear-gradient(135deg, #b45309, #f59e0b); }
+.dark .tally-kpi-cyan { background: linear-gradient(135deg, #0e7490, #06b6d4); }
+.dark .tally-kpi-teal { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+
+/* ─── Tabs ─── */
+.tally-tabs-wrapper { background: rgba(139, 92, 246, 0.03); padding: 8px 12px; border-radius: 12px; }
+
+/* ─── Charts ─── */
+.tally-chart-card {
+  border-radius: 12px;
+  transition: box-shadow 0.2s;
+  animation: tally-fade-in 0.5s ease-out;
+}
+.tally-chart-card:hover { box-shadow: 0 4px 12px rgba(139, 92, 246, 0.08); }
+
+/* ─── Company Card ─── */
+.tally-company-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: tally-fade-in 0.4s ease-out;
+}
+.tally-company-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+
+/* ─── Status Badges ─── */
+.tally-badge-pending { background: #f3f4f6; color: #6b7280; }
+.tally-badge-syncing { background: #cffafe; color: #0891b2; animation: tally-pulse-glow 2s infinite; }
+.tally-badge-synced { background: #d1fae5; color: #059669; }
+.tally-badge-failed { background: #fee2e2; color: #dc2626; font-weight: 600; }
+.tally-badge-queued { background: #fef3c7; color: #d97706; }
+.tally-badge-reversed { background: #ede9fe; color: #7c3aed; }
+
+.dark .tally-badge-pending { background: #374151; color: #9ca3af; }
+.dark .tally-badge-syncing { background: #164e63; color: #22d3ee; }
+.dark .tally-badge-synced { background: #064e3b; color: #34d399; }
+.dark .tally-badge-failed { background: #7f1d1d; color: #fca5a5; }
+.dark .tally-badge-queued { background: #78350f; color: #fcd34d; }
+.dark .tally-badge-reversed { background: #4c1d95; color: #c4b5fd; }
+
+/* ─── Doc Type Badges ─── */
+.tally-badge-purchase { background: #ede9fe; color: #7c3aed; }
+.tally-badge-sales { background: #dbeafe; color: #2563eb; }
+.tally-badge-credit { background: #d1fae5; color: #059669; }
+.tally-badge-debit { background: #fee2e2; color: #dc2626; }
+.tally-badge-journal { background: #fef3c7; color: #d97706; }
+.tally-badge-receipt { background: #cffafe; color: #0891b2; }
+.tally-badge-payment { background: #fce7f3; color: #db2777; }
+.tally-badge-contra { background: #f3f4f6; color: #4b5563; }
+
+.dark .tally-badge-purchase { background: #4c1d95; color: #c4b5fd; }
+.dark .tally-badge-sales { background: #1e3a5f; color: #93c5fd; }
+.dark .tally-badge-credit { background: #064e3b; color: #6ee7b7; }
+.dark .tally-badge-debit { background: #7f1d1d; color: #fca5a5; }
+.dark .tally-badge-journal { background: #78350f; color: #fcd34d; }
+.dark .tally-badge-receipt { background: #164e63; color: #67e8f9; }
+.dark .tally-badge-payment { background: #831843; color: #f9a8d4; }
+.dark .tally-badge-contra { background: #374151; color: #d1d5db; }
+
+/* ─── Error Type Badge ─── */
+.tally-badge-error-type { background: #fef3c7; color: #92400e; }
+.dark .tally-badge-error-type { background: #78350f; color: #fcd34d; }
+
+/* ─── Severity Badges ─── */
+.tally-badge-critical { background: #fee2e2; color: #991b1b; font-weight: 600; }
+.tally-badge-high { background: #ffedd5; color: #9a3412; }
+.tally-badge-medium { background: #fef9c3; color: #854d0e; }
+.tally-badge-low { background: #f3f4f6; color: #4b5563; }
+
+.dark .tally-badge-critical { background: #7f1d1d; color: #fca5a5; }
+.dark .tally-badge-high { background: #7c2d12; color: #fed7aa; }
+.dark .tally-badge-medium { background: #713f12; color: #fde68a; }
+.dark .tally-badge-low { background: #374151; color: #d1d5db; }
+
+/* ─── Escalated Badge ─── */
+.tally-badge-escalated { background: #fee2e2; color: #dc2626; font-weight: 700; }
+.dark .tally-badge-escalated { background: #991b1b; color: #fca5a5; }
+
+/* ─── GST Status Badges ─── */
+.tally-badge-filed { background: #d1fae5; color: #059669; }
+.tally-badge-gst-pending { background: #fef3c7; color: #d97706; }
+.tally-badge-overdue { background: #fee2e2; color: #dc2626; font-weight: 600; }
+
+.dark .tally-badge-filed { background: #064e3b; color: #6ee7b7; }
+.dark .tally-badge-gst-pending { background: #78350f; color: #fcd34d; }
+.dark .tally-badge-overdue { background: #991b1b; color: #fca5a5; }
+
+/* ─── Filters ─── */
+.tally-filter-bar { animation: tally-fade-in 0.3s ease-out; }
+.tally-input:focus { outline: none; border-color: #8b5cf6; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15); }
+.tally-select:focus { outline: none; border-color: #8b5cf6; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15); }
+
+/* ─── Table ─── */
+.tally-table-wrapper { animation: tally-fade-in 0.4s ease-out; }
+.tally-row-failed { border-left: 3px solid #f43f5e; }
+.tally-row-syncing { border-left: 3px solid #06b6d4; }
+
+/* ─── Drawer ─── */
+.tally-drawer-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px);
+  z-index: 50; display: flex; justify-content: flex-end; animation: tally-fade-in 0.2s ease-out;
+}
+.tally-drawer {
+  width: 420px; max-width: 90vw; height: 100vh; overflow-y: auto; padding: 20px;
+  background: white; dark:bg-gray-900;
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(to bottom, #8b5cf6, #06b6d4, #10b981) 1;
+  animation: tally-drawer-slide 0.3s ease-out;
+  background-color: white;
+}
+.dark .tally-drawer { background-color: #111827; }
+
+@keyframes tally-drawer-slide {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ─── Drawer Banner ─── */
+.tally-banner-synced { background: linear-gradient(135deg, #059669, #10b981); }
+.tally-banner-syncing { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+.tally-banner-failed { background: linear-gradient(135deg, #dc2626, #f43f5e); }
+.tally-banner-reversed { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+.tally-banner-pending { background: linear-gradient(135deg, #6b7280, #9ca3af); }
+
+/* ─── Sync Flow Dots ─── */
+.tally-flow-dot {
+  width: 12px; height: 12px; border-radius: 50%; border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); transition: all 0.2s;
+}
+.tally-dot-violet { background: #8b5cf6; }
+.tally-dot-cyan { background: #06b6d4; }
+.tally-dot-emerald { background: #10b981; }
+.tally-dot-amber { background: #f59e0b; }
+
+/* ─── Info Boxes ─── */
+.tally-info-box { animation: tally-fade-in 0.35s ease-out; }
+
+/* ─── Tax Computation Box ─── */
+.tally-tax-box {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.08));
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.dark .tally-tax-box {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* ─── Error Box ─── */
+.tally-error-box {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.08), rgba(239, 68, 68, 0.08));
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+.dark .tally-error-box {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.15), rgba(239, 68, 68, 0.15));
+  border-color: rgba(244, 63, 94, 0.3);
+}
+
+/* ─── Timeline ─── */
+.tally-timeline .w-6 { transition: all 0.2s; }
+
+/* ─── Drawer Footer ─── */
+.tally-drawer-footer { border-color: rgba(139, 92, 246, 0.2); }

@@ -62,3 +62,4 @@ export { default as LoadingDispatchView } from './loading-dispatch-view'
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.
 export { default as GoodsReceiptView } from './goods-receipt-view'
+export { default as TallyIntegrationView } from './tally-integration-view'
