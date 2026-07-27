@@ -32,6 +32,7 @@ export { InventoryValuationView } from './inventory-valuation-view'
 export { DemandForecastingView } from './demand-forecasting-view'
 export { SupplierCorrectiveActionRequestView } from './supplier-corrective-action-request-view'
 export { ContinualImprovementView } from './continual-improvement-view'
+export { FixedAssetRegisterView } from './fixed-asset-register-view'
 export { SupplierAuditView } from './supplier-audit-view'
 export { ESGSustainabilityAuditView } from './esg-sustainability-audit-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
