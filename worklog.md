@@ -1,4 +1,103 @@
 ---
+Task ID: 125
+Agent: Main (Cron Review - Round 125)
+Task: Labor Management & Workforce Scheduling module
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R124 was latest completed round)
+- Verified: 54 modules, 7 API routes, build passes, lint clean, 0 src/ TS errors
+- TSC: 0 src/ errors, Build: compiled successfully (10 routes)
+- agent-browser QA: skipped (known network namespace limitation)
+
+- Created R125: Labor Management & Workforce Scheduling module
+  * NEW FILE: src/components/modules/labor-management-view.tsx (~1190 lines)
+  * 5 tabs: Workforce Overview | Employee Directory | Shift Scheduler | Attendance & Time Tracking | Performance & Overtime
+  * Theme: Violet + Emerald + Amber (#8b5cf6, #10b981, #f59e0b)
+  * Header: gradient banner with animated top border (violet → emerald → amber, 6s cycle)
+  * Header badges: Total Employees, On Shift, Overtime Hours, Avg Productivity, Monthly Labor Cost
+
+  * Tab 1 Workforce Overview:
+    - 6 KPI cards (Total Employees, On Shift, Absent, Overtime Hours, Avg Productivity, Monthly Labor Cost)
+    - Department Distribution PieChart (8 departments: Receiving, Picking, Packing, Shipping, QC, Maintenance, Admin, Security)
+    - Shift Coverage BarChart (Morning, Afternoon, Night)
+    - Weekly Attendance ComposedChart (line + bars)
+    - Labor Cost Trend AreaChart (12 months)
+
+  * Tab 2 Employee Directory:
+    - Filter bar: search, department (8), warehouse (6), shift (3), status (4)
+    - Full employee table (100 records): ID, name, dept badge, role, warehouse, shift badge, status badge, attendance %, productivity score, hourly rate, actions
+    - Employee Detail Drawer: personal info, work details, attendance/progress bars
+
+  * Tab 3 Shift Scheduler:
+    - Visual grid: 3 shifts × 6 warehouses with employee count cards
+    - Shift colors: Morning=amber, Afternoon=emerald, Night=violet
+    - Shift Swap Requests table
+
+  * Tab 4 Attendance & Time Tracking:
+    - Daily attendance register: check-in/out times, break duration, overtime
+    - Monthly attendance bar chart
+
+  * Tab 5 Performance & Overtime:
+    - Department-wise productivity comparison bar chart
+    - Overtime distribution donut
+    - Top performers table with rank badges
+    - Overtime approval queue
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 125125)
+  * 100 employees across 8 departments, 6 Indian warehouses, 3 shifts
+  * Indian names, real cities, hourly rates in INR
+  * Attendance tracking with check-in/out, overtime calculation
+  * Productivity scores (0-100), attendance percentages
+  * 12-month labor cost trend
+  * Shift swap requests
+
+- Created CSS: scripts/r125-css.css (~512 lines), appended to src/app/globals.css
+  * Violet + emerald + amber theme
+  * Animated gradient top border (6s cycle)
+  * Shift grid cards with color coding
+  * Attendance and productivity progress bars
+  - Overtime pulse animation for critical hours
+  * Staggered slide-up animations (12 levels)
+  - Full dark mode coverage + responsive breakpoints
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'labor-management' (icon: HardHat, group: analytics)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: re-export as default
+  * src/components/layout/app-layout.tsx: HardHat added to imports + iconMap
+
+LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+
+Stage Summary:
+- NEW MODULE: Labor Management & Workforce Scheduling (55 modules total, was 54)
+- ~1190-line component + ~512 lines CSS (lm-* classes)
+- 5 tabs + 6 chart types + 100 employees + 3 shifts + 8 departments
+- Total globals.css: 26,299 lines (+512)
+
+## Updated Project Status (Post Round 125)
+- STATUS: STABLE + NEW LABOR MANAGEMENT MODULE (55 modules)
+- MODULES (55): All previous 54 + Labor Management & Workforce Scheduling
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 26,299 lines
+
+KNOWN ISSUES:
+- agent-browser cannot connect to localhost (separate network namespace)
+- Git local/remote divergence: 66 remote commits not in local, 14 local not on remote
+- Pre-existing TS errors in non-src files (skills/, examples/, mini-services/) — not main source
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (growing redundancy across 55 modules)
+  2. Multi-warehouse switching for all modules
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for R113-R125 modules
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 26000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+
+---
 Task ID: 124
 Agent: Main (Cron Review - Round 124)
 Task: E-Commerce Fulfillment & Last-Mile Delivery module
