@@ -34,6 +34,7 @@ export const navItems: NavItem[] = [
   { id: 'cost-analytics', label: 'Cost Analytics', icon: 'DollarSign', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'predictive-analytics', label: 'Predictive Analytics', icon: 'Brain', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'energy-sustainability', label: 'Energy & ESG', icon: 'Leaf', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
+  { id: 'continual-improvement', label: 'Continual Improvement', icon: 'Rocket', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'compliance-audit', label: 'Compliance & Audit', icon: 'ShieldCheck', group: 'system', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'alerts', label: 'Alerts', icon: 'Bell', badge: 5, group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'dock-scheduler', label: 'Dock Scheduling', icon: 'LayoutGrid', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
