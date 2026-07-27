@@ -44,6 +44,7 @@ export const navItems: NavItem[] = [
   { id: 'vendor-contract-mgmt', label: 'Vendor Contracts', icon: 'FileText', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'safety-incident-mgmt', label: 'Safety & EHS', icon: 'ShieldAlert', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'fleet-maintenance', label: 'Fleet Maint.', icon: 'Wrench', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
+  { id: 'cargo-damage-claims', label: 'Damage Claims', icon: 'PackageX', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'compliance-audit', label: 'Compliance & Audit', icon: 'ShieldCheck', group: 'system', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'alerts', label: 'Alerts', icon: 'Bell', badge: 5, group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'dock-scheduler', label: 'Dock Scheduling', icon: 'LayoutGrid', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },

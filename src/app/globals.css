@@ -21183,3 +21183,103 @@ html.theme-transition body {
 .dark .fm-vehicle-card:hover {
   border-color: #60a5fa;
 }
+/* ============================================================================
+   R118: Cargo Damage Claims Management Module — CSS
+   Theme: Crimson Red + Amber + Deep Purple (insurance/claims aesthetic)
+   ============================================================================ */
+
+.cdc-container { padding: 1rem; animation: cdc-fadeIn 0.4s ease-out; }
+@keyframes cdc-fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.cdc-header {
+  background: linear-gradient(135deg, #991b1b 0%, #b91c1c 35%, #581c87 100%);
+  border-radius: 12px; padding: 1.25rem 1.5rem; position: relative; overflow: hidden;
+  box-shadow: 0 4px 24px rgba(153, 27, 27, 0.25), 0 0 0 1px rgba(255,255,255,0.08);
+}
+.cdc-header::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #fbbf24, #ef4444, #7c3aed, #fbbf24);
+  background-size: 200% 100%; animation: cdc-gradientBorder 6s linear infinite;
+}
+@keyframes cdc-gradientBorder { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
+.cdc-header-content { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
+.cdc-header-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); }
+.cdc-header-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.cdc-header-badge { display: flex; align-items: center; gap: 0.375rem; padding: 0.375rem 0.75rem; border-radius: 8px; border: 1px solid; backdrop-filter: blur(8px); }
+
+.cdc-tabs { display: flex; gap: 0.25rem; margin-top: 1rem; padding: 0.25rem; background: hsl(var(--muted)); border-radius: 10px; overflow-x: auto; scrollbar-width: thin; }
+.cdc-tab { padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.75rem; font-weight: 500; color: hsl(var(--muted-foreground)); cursor: pointer; transition: all 0.25s ease; white-space: nowrap; border: none; background: transparent; }
+.cdc-tab:hover { color: hsl(var(--foreground)); background: hsl(var(--accent)); }
+.cdc-tab.active { background: #991b1b; color: white; font-weight: 600; box-shadow: 0 2px 8px rgba(153, 27, 27, 0.4); }
+.cdc-content { margin-top: 1rem; }
+
+/* KPI Cards */
+.cdc-kpi-card { border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.375rem; position: relative; overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease; animation: cdc-slideUp 0.4s ease-out both; }
+@keyframes cdc-slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.cdc-kpi-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.cdc-kpi-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+.cdc-kpi-red { background: linear-gradient(135deg, #991b1b, #ef4444); }
+.cdc-kpi-red::before { background: linear-gradient(90deg, #f87171, #fca5a5); }
+.cdc-kpi-amber { background: linear-gradient(135deg, #92400e, #f59e0b); }
+.cdc-kpi-amber::before { background: linear-gradient(90deg, #fbbf24, #fde68a); }
+.cdc-kpi-rose { background: linear-gradient(135deg, #9f1239, #e11d48); }
+.cdc-kpi-rose::before { background: linear-gradient(90deg, #fb7185, #fda4af); }
+.cdc-kpi-purple { background: linear-gradient(135deg, #581c87, #7c3aed); }
+.cdc-kpi-purple::before { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
+
+.cdc-card { transition: transform 0.25s ease, box-shadow 0.25s ease; animation: cdc-cardFadeIn 0.5s ease-out both; }
+.cdc-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+@keyframes cdc-cardFadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+/* Recovery Bar */
+.cdc-recovery-bar { padding: 1rem 1.25rem; background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: 10px; animation: cdc-cardFadeIn 0.4s ease-out; }
+
+/* Filter Bar */
+.cdc-filter-bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: 10px; flex-wrap: wrap; animation: cdc-cardFadeIn 0.3s ease-out; }
+.cdc-search-box { display: flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem; background: hsl(var(--muted)); border: 1px solid transparent; border-radius: 8px; flex: 1; min-width: 180px; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.cdc-search-box:focus-within { border-color: #991b1b; box-shadow: 0 0 0 2px rgba(153, 27, 27, 0.15); }
+.cdc-search-input { border: none; background: transparent; outline: none; font-size: 0.75rem; width: 100%; color: hsl(var(--foreground)); }
+.cdc-filter-select { padding: 0.375rem 0.625rem; border: 1px solid hsl(var(--border)); border-radius: 8px; font-size: 0.75rem; background: hsl(var(--muted)); color: hsl(var(--foreground)); cursor: pointer; transition: border-color 0.2s ease; }
+.cdc-filter-select:focus { border-color: #991b1b; outline: none; box-shadow: 0 0 0 2px rgba(153, 27, 27, 0.15); }
+
+/* Table */
+.cdc-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.75rem; }
+.cdc-table thead th { padding: 0.625rem 0.75rem; text-align: left; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: hsl(var(--muted-foreground)); border-bottom: 2px solid hsl(var(--border)); background: hsl(var(--muted) / 0.5); position: sticky; top: 0; }
+.cdc-table-row { transition: background-color 0.15s ease; cursor: pointer; }
+.cdc-table-row:hover { background: rgba(153, 27, 27, 0.06); }
+.cdc-table-row td { padding: 0.5rem 0.75rem; border-bottom: 1px solid hsl(var(--border) / 0.5); vertical-align: middle; }
+
+.cdc-view-btn { width: 28px; height: 28px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--muted-foreground)); cursor: pointer; transition: all 0.2s ease; }
+.cdc-view-btn:hover { background: #991b1b; border-color: #991b1b; color: white; box-shadow: 0 2px 8px rgba(153, 27, 27, 0.3); }
+
+/* Empty State */
+.cdc-empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 2rem; text-align: center; animation: cdc-fadeIn 0.4s ease-out; }
+.cdc-nav-btn { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.75rem; font-weight: 500; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); border: none; cursor: pointer; transition: all 0.2s ease; margin-top: 1rem; }
+.cdc-nav-btn:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-1px); }
+
+/* Detail Header */
+.cdc-detail-header { background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #581c87 100%); border-radius: 12px; padding: 1.25rem 1.5rem; position: relative; overflow: hidden; animation: cdc-cardFadeIn 0.4s ease-out; }
+.cdc-detail-header::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #fbbf24, #ef4444, #7c3aed, #fbbf24); background-size: 200% 100%; animation: cdc-gradientBorder 6s linear infinite; }
+.cdc-detail-meta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid rgba(255,255,255,0.15); }
+.cdc-detail-meta div { display: flex; align-items: center; gap: 0.375rem; font-size: 0.6875rem; color: rgba(255,255,255,0.7); }
+
+/* RCA Box */
+.cdc-rca-box { padding: 0.75rem; background: rgba(239, 68, 68, 0.08); border-left: 3px solid #ef4444; border-radius: 0 6px 6px 0; }
+.cdc-action-item { padding: 0.5rem 0.75rem; background: rgba(34, 197, 94, 0.08); border-left: 3px solid #22c55e; border-radius: 0 6px 6px 0; font-size: 0.6875rem; margin-bottom: 0.25rem; }
+.cdc-field { padding: 0.5rem; background: hsl(var(--muted)); border-radius: 6px; border: 1px solid hsl(var(--border)); display: flex; flex-direction: column; gap: 0.125rem; }
+.cdc-amount-box { padding: 0.75rem; background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 8px; text-align: center; display: flex; flex-direction: column; gap: 0.25rem; }
+.cdc-rejection-box { padding: 0.75rem; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; }
+
+/* Insurance KPI */
+.cdc-ins-kpi { padding: 1rem; background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: 10px; text-align: center; transition: transform 0.25s ease, box-shadow 0.25s ease; animation: cdc-slideUp 0.4s ease-out both; }
+.cdc-ins-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+/* Dark Mode */
+.dark .cdc-kpi-card { box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+.dark .cdc-kpi-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.dark .cdc-header { box-shadow: 0 4px 24px rgba(153, 27, 27, 0.2), 0 0 0 1px rgba(255,255,255,0.05); }
+.dark .cdc-table thead th { background: hsl(var(--muted) / 0.3); }
+.dark .cdc-table-row:hover { background: rgba(153, 27, 27, 0.1); }
+.dark .cdc-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.dark .cdc-rca-box { background: rgba(239, 68, 68, 0.15); }
+.dark .cdc-action-item { background: rgba(34, 197, 94, 0.15); }
