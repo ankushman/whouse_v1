@@ -1,4 +1,165 @@
 ---
+Task ID: 113
+Agent: Main (Cron Review - Round 113)
+Task: TypeScript bug fixes + Warehouse Performance Scorecard module (R113) + CSS micro-interaction enhancements
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R112 was latest completed round)
+- Verified project state: 42 modules, 7 API routes, build passes, lint clean
+- Git status: 3 local commits ahead of divergence point, 66 remote commits ahead (same as R112)
+- Attempted agent-browser QA: OOM kills prevented browser-based testing (same issue as R112)
+  * Workaround: ESLint (0 errors) + TypeScript type-check + production build verification
+  * Production build: compiled successfully, all 10 routes verified
+
+- Fixed 9 TypeScript errors in src/ files (7 remaining errors in examples/mini-services/skills/ ignored):
+  * src/app/api/esg-sustainability-audit/route.ts:690 — Removed dead 'pending_verification' comparison branch (TS2367)
+  * src/app/api/supplier-audit/route.ts:507 — Fixed 2 impossible approvalStatus comparisons (TS2367); changed 'in_progress' visual status to 'pending' (TS2322)
+  * src/components/modules/continual-improvement-view.tsx:245 — Fixed unresolved 'BookOpen' import → changed to 'Activity' (TS2304)
+  * src/components/modules/continual-improvement-view.tsx:418 — Fixed toast variant mismatch ('success' not in shadcn type) (TS2322)
+  * src/components/modules/esg-sustainability-audit-view.tsx:679,802 — Replaced recharts PieChart with lucide PieChartIcon (size prop doesn't exist on recharts) (TS2322 ×2)
+  * src/components/modules/supplier-audit-view.tsx:514 — Fixed toast variant type mismatch wrapper (TS2322)
+
+- Created R113: Warehouse Performance Scorecard module
+  * NEW FILE: src/components/modules/warehouse-performance-scorecard-view.tsx (~1081 lines)
+  * 7 tabs: Performance Overview | KPI Benchmarking | Trend Analysis | Warehouse Deep Dive | Operational Metrics | Financial Metrics | Rankings & Leaderboard
+  * Theme: Deep Violet + Indigo + Fuchsia gradient (premium analytics aesthetic)
+  * Header: gradient banner with animated top border (violet → indigo → fuchsia, 6s cycle)
+  * Period selector dropdown (This Month / Last Month / This Quarter / This Year / Last Year)
+  * Tab 1 Performance Overview:
+    - 4 summary cards (Average Score, Best Performer, Most Improved, Needs Attention) with gradient backgrounds
+    - 2×3 grid of warehouse cards, each with: circular score ring (0-100), rank badge, trend arrow, 4 mini KPIs
+    - Click card to navigate to Deep Dive tab
+  * Tab 2 KPI Benchmarking:
+    - KPI category selector (All / Operations / Financial / Quality / Safety / People)
+    - Grouped bar chart comparing all 6 warehouses on 5 operational KPIs
+    - Radar/spider chart overlay showing normalized scores across 5 categories
+    - Best-in-Class highlight cards showing which warehouse leads each category
+  * Tab 3 Trend Analysis:
+    - Multi-warehouse selector (toggle buttons with color coding)
+    - 5 KPI trend selectors (Score / Throughput / SLA / Cost Eff. / Safety)
+    - Period-over-period change cards with color-coded arrows
+    - Multi-line chart showing 12-week trends for selected warehouses
+  * Tab 4 Warehouse Deep Dive:
+    - 6 warehouse selector tabs
+    - Score breakdown donut chart (Operations 30%, Quality 20%, Cost 20%, Safety 15%, People 15%)
+    - Actual vs Target metric table with progress bars and conditional coloring
+    - Top 3 Strengths card (green) and Bottom 3 Improvement Areas card (amber)
+    - 12-week score trend area chart for selected warehouse
+  * Tab 5 Operational Metrics:
+    - Full comparison table: 6 warehouses × 8 operational KPIs
+    - Conditional formatting badges (green > target, amber within tolerance, red below)
+    - Metrics: Throughput, Units/Day, Order Accuracy, On-Time Shipment, Dock Utilization, Inventory Turnover, Warehouse Utilization, OEE
+  * Tab 6 Financial Metrics:
+    - Financial KPI table: Cost/Order, Cost/Unit, Revenue, Labor %, Energy/sqft, ROI
+    - Color-coded financial values (green ≤ target, amber moderate, red high)
+    - Cost structure comparison stacked bar chart (Labor / Energy / Other)
+  * Tab 7 Rankings & Leaderboard:
+    - Overall ranking table with gold/silver/bronze rank icons
+    - Rank, Score, vs Last Period change, Streak months, Status badges
+    - 5 Category Champion cards (Operations/Quality/Cost/Safety/People) with icons
+    - Bottom 3 performance alerts with areas needing attention
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 113113)
+  * 6 warehouses with realistic Indian logistics data
+  * Mumbai (92), Delhi NCR (87), Bangalore (85), Hyderabad (83), Chennai (78), Kolkata (72) base scores
+  * Throughput: 3200-7200 orders/day; Order Accuracy: 96-99.8%; On-Time: 82-97%; OEE: 60-85%
+  * Cost/Order: ₹45-120; Cost/Unit: ₹3-6; Revenue: ₹800-1200 Lakhs; ROI: 8-20%
+  * 12-week trend data per warehouse with realistic variance
+  * Score composition: Operations (30%), Quality (20%), Cost (20%), Safety (15%), People (15%)
+
+- Created CSS: scripts/r113-css.css (~300 lines), appended to src/app/globals.css
+  * Deep violet + indigo + fuchsia gradient theme
+  * Animated gradient top border (3-color, 6s cycle)
+  * Score ring SVG animation (stroke-dashoffset transition)
+  * Warehouse card hover lift + gradient top border reveal
+  * Summary card shimmer overlay + hover translateY
+  * Tab bar with active gradient indicator + bottom accent line
+  * KPI category pill buttons with gradient active state
+  * Best-in-class card hover scale effect
+  * Warehouse toggle buttons with colored active borders
+  * Metric progress bar gradients (green/amber/red)
+  * Strength card green left border, Improvement card amber left border
+  * Full metrics table with row hover highlight
+  - Ranking table with gold/silver/bronze gradient rank cells
+  * Champion card hover lift with icon badge
+  * Alert items with colored left borders and slide-on-hover
+  * Dark mode full coverage
+  * Responsive breakpoints (1024px, 768px)
+
+- CSS Enhancements (R113b):
+  * scripts/r113b-enhance-css.css (~268 lines) appended to globals.css
+  * Sidebar nav radial gradient hover effect
+  * Card depth hover system (translateY + shadow)
+  * Shimmer overlay effect (radial gradient sweep on hover)
+  * Glass card enhancement (backdrop-filter + border transition)
+  * Button press feedback (scale on active)
+  * Badge glow animations (success/warning/destructive pulse)
+  * Staggered children animation system (10-item stagger, 60ms delay)
+  * Table row slide highlight on hover
+  * Focus ring enhancement (violet/indigo)
+  * Tooltip fade-in animation
+  * Thin scrollbar styling (violet accent)
+  * Tab content enter animation (slide from right)
+  * Notification dot pulse animation
+  * Sidebar active indicator glow
+  * Skeleton loading shimmer enhancement
+  * Dark mode adjustments for all effects
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'warehouse-performance-scorecard' (icon: Medal, group: analytics)
+  * src/app/page.tsx: import WarehousePerformanceScorecardView + viewMap entry
+  * src/components/modules/index.ts: export WarehousePerformanceScorecardView
+  * src/components/layout/app-layout.tsx: added Medal to lucide imports + iconMap
+
+LINT: 0 errors, 0 warnings (full ESLint on src/)
+BUILD: compiled successfully, all routes working
+TSC: 0 errors in src/ files (7 remaining in examples/mini-services/skills/ — pre-existing, non-blocking)
+
+Stage Summary:
+- BUG FIXES: 9 TypeScript errors fixed across 6 source files
+- NEW MODULE: Warehouse Performance Scorecard (43 modules total, was 42)
+- ~1081-line single-file React component + ~300 lines of wps-* CSS + ~268 lines of enhancement CSS
+- 7 tabs + 8 chart types + score ring component + conditional formatting tables + ranking system
+- Realistic mock data: 6 warehouses, score breakdowns, 12-week trends, financial/operational metrics
+- Zero lint errors, zero build errors, zero TSC errors in src/
+
+## Updated Project Status (Post Round 113)
+- STATUS: STABLE + 9 TS BUG FIXES + NEW WAREHOUSE PERFORMANCE SCORECARD MODULE + BUILD PASSES (43 modules total)
+- MODULES (43): All previous 42 + Warehouse Performance Scorecard (NEW — Cross-WH KPI Benchmarking, Rankings, Trend Analysis)
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- CSS UTILITIES: +568 lines (wps-* classes + global micro-interaction enhancements)
+- Total globals.css: 19,304 lines
+- LINT: 0 errors
+- BUILD: compiled successfully, all routes working
+- TSC: 0 errors in src/ (7 in examples/mini-services/skills/ — non-blocking)
+
+KNOWN ISSUES:
+- Dev server OOM risk in sandbox: next-server uses 22GB virtual memory (2.2GB RSS)
+  — WORKAROUND: use production build with standalone server, --max-old-space-size=256
+  — agent-browser cannot run alongside next-server due to combined memory exceeding ~4GB limit
+- Git local/remote divergence: 66 remote commits (R57-R109) not in local branch, 5 local commits not on remote
+  — Option: force push (loses remote history), pull+rebase (merge conflicts), or create new branch
+- 7 pre-existing TS errors in: examples/websocket/server.ts, mini-services/realtime-service/index.ts,
+  skills/image-edit/scripts/image-edit.ts, skills/stock-analysis-skill/src/analyzer.ts — none in src/
+- 181+ pre-existing duplicate CSS class definitions (not introduced this round; non-blocking)
+- 14 inline drawers (CI, SCAR, NCR, etc.) not extracted to shared/*-detail-drawer.tsx
+- No real database integration (Prisma schema only has User/Post)
+- No Supabase env vars configured (NEXT_PUBLIC_SUPABASE_URL not set)
+
+PRIORITY NEXT:
+  1. Build 3-Way Match Dashboard (PO ↔ GRN ↔ Invoice auto-verification)
+  2. Extract 14 inline drawers to shared/*-detail-drawer.tsx (consistency refactor)
+  3. Vendor contract document management module
+  4. Multi-warehouse switching for dock scheduler & yard management
+  5. Predictive model retraining trigger UI (link to Demand Forecasting)
+  6. Resolve git local/remote divergence (force push or create new branch)
+  7. Add Warehouse Performance Scorecard API route with POST/PUT/DELETE
+  8. CSS audit: 19000+ classes — consolidate pre-existing duplicates
+  9. Real-time WebSocket integration for live KPI telemetry
+  10. Cross-module navigation improvements (related views linking)
+
+---
 Task ID: 112
 Agent: Main (Cron Review - Round 112)
 Task: QA testing + Production Capacity Planning module (R112) + CSS enhancements

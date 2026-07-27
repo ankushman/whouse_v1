@@ -687,7 +687,7 @@ function generateFindings(audits: ESGAudit[], count: number): ESGFinding[] {
       correctiveAction: status !== 'open' ? pick(correctiveActions, i + 350) : null,
       preventiveAction: status === 'closed' ? 'Systemic controls updated across all warehouses. Monitoring frequency increased.' : null,
       capaId: status !== 'open' ? `CAPA-ESG-${String(i + 1).padStart(4, '0')}` : null,
-      verificationMethod: status === 'closed' ? 'document_review' : status === 'pending_verification' ? 'on_site_verification' : null,
+      verificationMethod: status === 'closed' ? 'document_review' : null,
       verifiedBy: status === 'closed' ? pick(AUDITOR_POOL, i + 400) : null,
       owner: pick(AUDITOR_POOL, i + 450),
       warehouseName: audit.warehouseName,

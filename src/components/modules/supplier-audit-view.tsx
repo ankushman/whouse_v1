@@ -511,7 +511,7 @@ export function SupplierAuditView() {
           id={detailModal.id}
           data={data}
           onClose={() => setDetailModal(null)}
-          onToast={toast}
+          onToast={(opts) => toast({ ...opts, variant: opts.variant === 'success' ? 'default' : opts.variant } as any)}
         />
       )}
     </div>

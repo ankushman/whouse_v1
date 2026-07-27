@@ -242,7 +242,7 @@ function fmtRelative(days: number): string {
   return `in ${Math.round(days / 365)} years`;
 }
 function renderTypeIcon(name: string, size = 14, style?: CSSProperties) {
-  const map: Record<string, typeof BookOpen> = {
+  const map: Record<string, typeof Activity> = {
     Rocket: Rocket, Lightbulb: Lightbulb, GitBranch: GitBranch, Coins: Coins,
     Trophy: Trophy, Network: Network, Sparkles: Sparkles,
     Workflow: Workflow, Cpu: Cpu, HeartHandshake: HeartHandshake, Leaf: Leaf,
@@ -415,7 +415,7 @@ export function ContinualImprovementView() {
           id={detailModal.id}
           data={data}
           onClose={() => setDetailModal(null)}
-          onToast={toast}
+          onToast={(opts) => toast({ ...opts, variant: opts.variant === 'success' ? 'default' : opts.variant } as any)}
         />
       )}
     </div>

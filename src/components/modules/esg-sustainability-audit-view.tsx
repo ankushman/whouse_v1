@@ -14,6 +14,7 @@ import {
   CircleDot, Layers, Shield, ExternalLink, Award, Flame,
   Factory, CloudRain, Recycle, Heart, Brain, Scale,
   TargetIcon, BadgeCheck, TriangleAlert, AlertOctagon, Truck,
+  PieChart as PieChartIcon,
 } from 'lucide-react';
 import {
   BarChart, Bar, PieChart, Pie, Cell,
@@ -676,7 +677,7 @@ function GRIIndicatorsTab({ data }: { data: ApiResponse }) {
       {/* GRI Disclosure Pie */}
       <div className="esg-charts-row">
         <Card className="esg-chart-card">
-          <div className="esg-chart-header"><PieChart size={16} /><h3>Disclosure Status Distribution</h3></div>
+          <div className="esg-chart-header"><PieChartIcon size={16} /><h3>Disclosure Status Distribution</h3></div>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>
               <Pie data={[
@@ -799,7 +800,7 @@ function RiskAssessmentTab({ data, setDetailModal }: { data: ApiResponse; setDet
 
       <div className="esg-charts-row">
         <Card className="esg-chart-card">
-          <div className="esg-chart-header"><PieChart size={16} /><h3>Mitigation Status</h3></div>
+          <div className="esg-chart-header"><PieChartIcon size={16} /><h3>Mitigation Status</h3></div>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart><Pie data={mitigationDist} dataKey="count" nameKey="label" cx="50%" cy="50%" outerRadius={80} label>
               {mitigationDist.map((e, i) => <Cell key={i} fill={e.color} />)}</Pie>

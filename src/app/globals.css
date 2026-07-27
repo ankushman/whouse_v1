@@ -18010,3 +18010,1295 @@ html.theme-transition body {
 .dark .hover-glow-blue:hover {
   box-shadow: 0 0 16px rgba(37, 99, 235, 0.08);
 }
+/* ============================================================================
+ * R113: Warehouse Performance Scorecard — CSS
+ * Theme: Deep violet + Indigo + Fuchsia gradient
+ * ============================================================================ */
+
+/* Root */
+.wps-root {
+  animation: wpsFadeIn 0.3s ease-out;
+}
+@keyframes wpsFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.wps-header {
+  position: relative;
+  overflow: hidden;
+}
+.wps-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #6366f1, #d946ef, #7c3aed);
+  background-size: 200% 100%;
+  animation: wpsGradientSlide 6s ease infinite;
+}
+@keyframes wpsGradientSlide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.wps-header-title {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* KPI Banner */
+.wps-kpi-banner {
+  animation: wpsSlideUp 0.4s ease-out;
+}
+@keyframes wpsSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.wps-kpi-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  transition: all 0.25s ease;
+}
+.wps-kpi-card:hover {
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.1);
+  transform: translateY(-1px);
+}
+.wps-kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7c3aed, #6366f1, #d946ef);
+}
+.wps-kpi-value {
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(135deg, #c4b5fd, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.dark .wps-kpi-value {
+  background: linear-gradient(135deg, #c4b5fd, #a78bfa, #e879f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tab Bar */
+.wps-tab-bar {
+  position: relative;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+}
+.wps-tab-btn {
+  position: relative;
+  padding: 10px 18px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba(124, 58, 237, 0.55);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+.wps-tab-btn:hover {
+  color: rgba(124, 58, 237, 0.85);
+}
+.wps-tab-btn.active {
+  color: #7c3aed;
+}
+.wps-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7c3aed, #6366f1);
+  border-radius: 2px 2px 0 0;
+}
+.dark .wps-tab-btn {
+  color: rgba(167, 139, 250, 0.5);
+}
+.dark .wps-tab-btn:hover {
+  color: rgba(167, 139, 250, 0.8);
+}
+.dark .wps-tab-btn.active {
+  color: #a78bfa;
+}
+.dark .wps-tab-btn.active::after {
+  background: linear-gradient(90deg, #a78bfa, #818cf8);
+}
+
+/* Warehouse Card (Performance Overview) */
+.wps-wh-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.12);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.03), rgba(99, 102, 241, 0.02));
+}
+.wps-wh-card:hover {
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.12);
+  transform: translateY(-2px);
+}
+.dark .wps-wh-card {
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.06), rgba(99, 102, 241, 0.04));
+  border-color: rgba(124, 58, 237, 0.15);
+}
+.wps-wh-card-top {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(99, 102, 241, 0.06));
+  padding: 16px;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.08);
+}
+.dark .wps-wh-card-top {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(99, 102, 241, 0.08));
+}
+
+/* Rank Badge */
+.wps-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.wps-rank-1 {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1c1917;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+.wps-rank-2 {
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(148, 163, 184, 0.3);
+}
+.wps-rank-3 {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+}
+.wps-rank-default {
+  background: rgba(124, 58, 237, 0.1);
+  color: #7c3aed;
+}
+.dark .wps-rank-default {
+  background: rgba(167, 139, 250, 0.12);
+  color: #c4b5fd;
+}
+
+/* Score Ring */
+.wps-score-ring {
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.wps-score-ring svg {
+  transform: rotate(-90deg);
+}
+.wps-score-ring-value {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+}
+.wps-score-excellent { color: #10b981; }
+.wps-score-good { color: #6366f1; }
+.wps-score-average { color: #f59e0b; }
+.wps-score-poor { color: #ef4444; }
+
+/* Mini KPI */
+.wps-mini-kpi {
+  text-align: center;
+  padding: 8px 4px;
+  border-radius: 8px;
+  background: rgba(124, 58, 237, 0.04);
+  transition: background 0.2s;
+}
+.wps-mini-kpi:hover {
+  background: rgba(124, 58, 237, 0.08);
+}
+.dark .wps-mini-kpi {
+  background: rgba(167, 139, 250, 0.05);
+}
+.wps-mini-kpi-label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+  margin-bottom: 2px;
+}
+.wps-mini-kpi-value {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Trend Arrow */
+.wps-trend-up { color: #10b981; }
+.wps-trend-down { color: #ef4444; }
+.wps-trend-flat { color: #64748b; }
+
+/* Table conditional formatting */
+.wps-cell-green {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  font-weight: 600;
+}
+.wps-cell-amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  font-weight: 600;
+}
+.wps-cell-red {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  font-weight: 600;
+}
+.dark .wps-cell-green {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+}
+.dark .wps-cell-amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+}
+.dark .wps-cell-red {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+/* Leaderboard */
+.wps-podium {
+  position: relative;
+  padding: 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.06), rgba(217, 70, 239, 0.04));
+  border: 1px solid rgba(124, 58, 237, 0.12);
+}
+.dark .wps-podium {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(217, 70, 239, 0.06));
+}
+.wps-podium-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.wps-podium-item:hover {
+  background: rgba(124, 58, 237, 0.06);
+}
+.wps-champion-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(217, 70, 239, 0.1));
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+.dark .wps-champion-badge {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(232, 121, 249, 0.1));
+  color: #c4b5fd;
+  border-color: rgba(167, 139, 250, 0.2);
+}
+
+/* Alert Strip (Bottom 3) */
+.wps-alert-strip {
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.05);
+  padding: 12px 16px;
+  transition: all 0.2s;
+}
+.wps-alert-strip:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.dark .wps-alert-strip {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+/* Strength / Weakness pills */
+.wps-strength-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.wps-weakness-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.dark .wps-strength-pill {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+.dark .wps-weakness-pill {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Deep Dive Score Breakdown Bar */
+.wps-breakdown-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(124, 58, 237, 0.1);
+  overflow: hidden;
+}
+.wps-breakdown-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+.wps-breakdown-ops { background: linear-gradient(90deg, #7c3aed, #6366f1); }
+.wps-breakdown-quality { background: linear-gradient(90deg, #6366f1, #818cf8); }
+.wps-breakdown-cost { background: linear-gradient(90deg, #d946ef, #e879f9); }
+.wps-breakdown-safety { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.wps-breakdown-people { background: linear-gradient(90deg, #10b981, #34d399); }
+
+/* Chart containers */
+.wps-chart-container {
+  position: relative;
+  border: 1px solid rgba(124, 58, 237, 0.08);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.02), rgba(99, 102, 241, 0.01));
+  padding: 20px;
+}
+.dark .wps-chart-container {
+  border-color: rgba(124, 58, 237, 0.12);
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.04), rgba(99, 102, 241, 0.02));
+}
+
+/* Scrollable tab content */
+.wps-tab-content {
+  animation: wpsTabFade 0.25s ease-out;
+}
+@keyframes wpsTabFade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Improvement badge */
+.wps-improved-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+.wps-declined-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* Donut chart center label */
+.wps-donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Most improved highlight */
+.wps-most-improved {
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+}
+.wps-most-improved:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+}
+
+/* Responsive tab scroll */
+.wps-tab-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.wps-tab-scroll::-webkit-scrollbar {
+  height: 2px;
+}
+.wps-tab-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.wps-tab-scroll::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.2);
+  border-radius: 2px;
+}
+
+/* Period change card */
+.wps-period-card {
+  border: 1px solid rgba(124, 58, 237, 0.1);
+  border-radius: 10px;
+  padding: 14px;
+  transition: all 0.2s;
+}
+.wps-period-card:hover {
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+/* Glow hover effects */
+.wps-hover-glow:hover {
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.08);
+}
+.dark .wps-hover-glow:hover {
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.08);
+}
+/* ============================================================================
+   R113: Warehouse Performance Scorecard — wps-* classes
+   Theme: Deep Violet + Indigo + Fuchsia gradient
+   ============================================================================ */
+
+/* Container */
+.wps-container {
+  animation: wps-fadeIn 0.4s ease-out;
+}
+@keyframes wps-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animated Gradient Header */
+.wps-header {
+  background: linear-gradient(135deg, #7c3aed 0%, #6366f1 40%, #d946ef 100%);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.wps-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #a855f7, #818cf8, #e879f9, #a855f7);
+  background-size: 200% 100%;
+  animation: wps-gradientSlide 6s linear infinite;
+}
+@keyframes wps-gradientSlide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.wps-header-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wps-period-select {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+.wps-period-select:hover {
+  background: rgba(255,255,255,0.25);
+}
+.wps-period-select option {
+  color: #1e1b4b;
+  background: white;
+}
+
+.wps-header-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: white;
+}
+
+/* Tab Bar */
+.wps-tab-bar {
+  margin-top: 12px;
+}
+.wps-tab {
+  padding: 8px 16px;
+  border-radius: 8px 8px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  position: relative;
+}
+.wps-tab:hover {
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.05);
+}
+.wps-tab.active {
+  color: #7c3aed;
+  background: white;
+  box-shadow: 0 -2px 8px rgba(124, 58, 237, 0.1);
+  font-weight: 600;
+}
+.wps-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #8b5cf6, #d946ef);
+  border-radius: 2px 2px 0 0;
+}
+
+/* Summary Cards Grid */
+.wps-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1024px) {
+  .wps-summary-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .wps-summary-grid { grid-template-columns: 1fr; }
+}
+
+.wps-summary-card {
+  border-radius: 12px;
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.wps-summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+}
+.wps-summary-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.wps-summary-card-violet { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+.wps-summary-card-indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.wps-summary-card-fuchsia { background: linear-gradient(135deg, #d946ef, #a21caf); }
+.wps-summary-card-purple { background: linear-gradient(135deg, #9333ea, #7e22ce); }
+
+/* Warehouse Cards */
+.wps-wh-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.wps-wh-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #8b5cf6, #d946ef);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.wps-wh-card:hover {
+  border-color: #c4b5fd;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.12);
+  transform: translateY(-2px);
+}
+.wps-wh-card:hover::before { opacity: 1; }
+
+/* Score Ring Animation */
+.wps-score-ring-anim {
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+/* Rank Badge */
+.wps-wh-rank {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.wps-wh-rank-top {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #92400e;
+}
+.wps-wh-rank-normal {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.wps-wh-mini-kpi {
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.dark .wps-wh-mini-kpi {
+  background: rgba(255,255,255,0.05);
+}
+
+/* Chart Cards */
+.wps-chart-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: box-shadow 0.2s;
+}
+.wps-chart-card:hover {
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.06);
+}
+
+/* KPI Category Buttons */
+.wps-kpi-cat-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wps-kpi-cat-btn:hover {
+  border-color: #c4b5fd;
+  color: #7c3aed;
+}
+.wps-kpi-cat-btn.active {
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+}
+
+/* Best-in-Class Card */
+.wps-bic-card {
+  background: linear-gradient(135deg, #faf5ff, #f0e7ff);
+  border: 1px solid #e9d5ff;
+  border-radius: 12px;
+  padding: 12px;
+  transition: transform 0.2s;
+}
+.wps-bic-card:hover {
+  transform: scale(1.03);
+}
+
+/* Warehouse Toggle */
+.wps-wh-toggle {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1.5px solid #e5e7eb;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wps-wh-toggle.active {
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.15);
+}
+
+/* Period Change Cards */
+.wps-change-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.wps-change-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Warehouse Tabs (Deep Dive) */
+.wps-wh-tab {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #e5e7eb;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wps-wh-tab:hover {
+  border-color: #c4b5fd;
+  color: #7c3aed;
+}
+.wps-wh-tab.active {
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+}
+
+/* Rank Badge */
+.wps-rank-badge {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Metric Bars */
+.wps-metric-bar {
+  transition: width 0.8s ease-out;
+}
+.wps-metric-green { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.wps-metric-amber { background: linear-gradient(90deg, #eab308, #facc15); }
+.wps-metric-red { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+/* Strength & Improvement Cards */
+.wps-strength-card {
+  border-left: 3px solid #22c55e;
+}
+.wps-improve-card {
+  border-left: 3px solid #eab308;
+}
+
+/* Metrics Table */
+.wps-metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.wps-metrics-table th {
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  border-bottom: 2px solid #e5e7eb;
+  background: #fafafa;
+}
+.wps-metrics-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.wps-metrics-row {
+  transition: background 0.15s;
+}
+.wps-metrics-row:hover {
+  background: #faf5ff;
+}
+
+/* Ranking Table */
+.wps-ranking-row {
+  transition: background 0.15s;
+}
+.wps-ranking-row:hover {
+  background: #faf5ff;
+}
+.wps-ranking-top {
+  background: linear-gradient(90deg, #fffbeb, transparent);
+}
+.wps-ranking-top:hover {
+  background: linear-gradient(90deg, #fef3c7, #faf5ff);
+}
+
+.wps-rank-cell {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wps-rank-gold { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
+.wps-rank-silver { background: linear-gradient(135deg, #d1d5db, #9ca3af); color: white; }
+.wps-rank-bronze { background: linear-gradient(135deg, #d97706, #b45309); color: white; }
+
+/* Champion Cards */
+.wps-champion-card {
+  border: 1px solid #e9d5ff;
+  border-radius: 12px;
+  background: white;
+  transition: all 0.25s;
+  cursor: default;
+}
+.wps-champion-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+  border-color: #c4b5fd;
+}
+.wps-champion-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+  color: #7c3aed;
+}
+
+/* Alert Cards */
+.wps-alerts-card {
+  border: 1px solid #fef3c7;
+  border-left: 4px solid #f59e0b;
+}
+.wps-alert-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 3px solid;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.wps-alert-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.wps-alert-warning {
+  border-left-color: #f59e0b;
+  background: #fffbeb;
+}
+.wps-alert-critical {
+  border-left-color: #ef4444;
+  background: #fef2f2;
+}
+
+/* Dark Mode */
+.dark .wps-wh-card {
+  background: #1e1b2e;
+  border-color: #374151;
+}
+.dark .wps-wh-card:hover {
+  border-color: #7c3aed;
+}
+.dark .wps-chart-card {
+  background: #1e1b2e;
+  border-color: #374151;
+}
+.dark .wps-tab.active {
+  color: #c4b5fd;
+  background: #1e1b2e;
+  box-shadow: 0 -2px 8px rgba(124, 58, 237, 0.15);
+}
+.dark .wps-tab.active::after {
+  background: linear-gradient(90deg, #7c3aed, #d946ef);
+}
+.dark .wps-change-card {
+  background: #1e1b2e;
+  border-color: #374151;
+}
+.dark .wps-kpi-cat-btn {
+  background: #1e1b2e;
+  border-color: #374151;
+  color: #9ca3af;
+}
+.dark .wps-kpi-cat-btn.active {
+  color: white;
+}
+.dark .wps-bic-card {
+  background: linear-gradient(135deg, #1e1b2e, #2d1b69);
+  border-color: #4c1d95;
+}
+.dark .wps-metrics-table th {
+  background: #1e1b2e;
+  color: #9ca3af;
+  border-bottom-color: #374151;
+}
+.dark .wps-metrics-table td {
+  border-bottom-color: #374151;
+}
+.dark .wps-metrics-row:hover {
+  background: rgba(124, 58, 237, 0.08);
+}
+.dark .wps-wh-mini-kpi {
+  background: rgba(255,255,255,0.05);
+}
+.dark .wps-ranking-top {
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.1), transparent);
+}
+.dark .wps-champion-card {
+  background: #1e1b2e;
+  border-color: #4c1d95;
+}
+.dark .wps-champion-icon {
+  background: linear-gradient(135deg, #4c1d95, #6d28d9);
+  color: #c4b5fd;
+}
+.dark .wps-alerts-card {
+  background: #1e1b2e;
+  border-color: #422006;
+}
+.dark .wps-alert-warning {
+  background: rgba(245, 158, 11, 0.08);
+}
+.dark .wps-strength-card {
+  border-left-color: #22c55e;
+  background: rgba(34, 197, 94, 0.03);
+}
+.dark .wps-improve-card {
+  border-left-color: #eab308;
+  background: rgba(234, 179, 8, 0.03);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wps-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .wps-wh-card .flex.items-start.justify-between {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .wps-champion-card {
+    padding: 0;
+  }
+}
+/* ============================================================================
+   R113b: Global CSS Micro-Interaction Enhancements
+   Cross-module hover effects, transitions, and animation polish
+   ============================================================================ */
+
+/* ── Sidebar Nav Enhancement ── */
+.nav-icon-animated {
+  position: relative;
+  overflow: hidden;
+}
+.nav-icon-animated::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(124, 58, 237, 0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.nav-icon-animated:hover::after {
+  opacity: 1;
+}
+
+/* ── Card Depth Hover System ── */
+.card-depth-hover {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-depth-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08),
+              0 4px 8px rgba(0, 0, 0, 0.04);
+}
+.dark .card-depth-hover:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3),
+              0 4px 8px rgba(124, 58, 237, 0.1);
+}
+
+/* ── Shimmer Overlay Effect ── */
+.shimmer-overlay {
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.shimmer-overlay:hover::before {
+  left: 100%;
+}
+
+/* ── Glass Card Enhancement ── */
+.glass-card-enhanced {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.glass-card-enhanced:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+.dark .glass-card-enhanced {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+.dark .glass-card-enhanced:hover {
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+/* ── Button Press Feedback ── */
+.btn-press-effect {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.btn-press-effect:active {
+  transform: scale(0.97);
+  box-shadow: none !important;
+}
+
+/* ── Badge Glow Effects ── */
+.badge-glow-success {
+  animation: badgeGlowGreen 2s ease-in-out infinite;
+}
+.badge-glow-warning {
+  animation: badgeGlowAmber 2s ease-in-out infinite;
+}
+.badge-glow-destructive {
+  animation: badgeGlowRed 1.5s ease-in-out infinite;
+}
+@keyframes badgeGlowGreen {
+  0%, 100% { box-shadow: 0 0 4px rgba(34, 197, 94, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.5); }
+}
+@keyframes badgeGlowAmber {
+  0%, 100% { box-shadow: 0 0 4px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(245, 158, 11, 0.5); }
+}
+@keyframes badgeGlowRed {
+  0%, 100% { box-shadow: 0 0 4px rgba(239, 68, 68, 0.3); }
+  50% { box-shadow: 0 0 12px rgba(239, 68, 68, 0.5); }
+}
+
+/* ── Staggered Animation System ── */
+.stagger-children > * {
+  opacity: 0;
+  animation: staggerFadeIn 0.4s ease forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
+.stagger-children > *:nth-child(9) { animation-delay: 480ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 540ms; }
+
+@keyframes staggerFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Table Row Slide Highlight ── */
+.table-row-slide-highlight {
+  transition: background 0.2s, transform 0.2s;
+}
+.table-row-slide-highlight:hover {
+  transform: translateX(2px);
+}
+
+/* ── Focus Ring Enhancement ── */
+.focus-ring-violet:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.focus-ring-indigo:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Tooltip Arrow Enhancement ── */
+.tooltip-enhanced {
+  animation: tooltipFadeIn 0.15s ease-out;
+}
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scrollbar Micro-Interactions ── */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.2);
+  border-radius: 3px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.4);
+}
+
+/* ── KPI Card Counter Animation ── */
+.kpi-counter-animate {
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s;
+}
+
+/* ── Tab Transition System ── */
+.tab-content-enter {
+  animation: tabContentEnter 0.3s ease-out;
+}
+@keyframes tabContentEnter {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Notification Dot Pulse ── */
+.notification-dot-pulse {
+  position: relative;
+}
+.notification-dot-pulse::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 2px solid white;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+.dark .notification-dot-pulse::after {
+  border-color: #1e1b2e;
+}
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+/* ── Sidebar Active Indicator ── */
+.sidebar-active-indicator {
+  position: relative;
+}
+.sidebar-active-indicator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: linear-gradient(180deg, #8b5cf6, #d946ef);
+  border-radius: 0 2px 2px 0;
+  animation: indicatorGlow 2s ease-in-out infinite;
+}
+@keyframes indicatorGlow {
+  0%, 100% { box-shadow: 0 0 4px rgba(139, 92, 246, 0.3); }
+  50% { box-shadow: 0 0 8px rgba(139, 92, 246, 0.6); }
+}
+
+/* ── Skeleton Loading Enhancement ── */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: skeletonLoad 1.5s ease-in-out infinite;
+}
+.dark .skeleton-shimmer {
+  background: linear-gradient(90deg, #1e1b2e 25%, #2d1b69 50%, #1e1b2e 75%);
+  background-size: 200% 100%;
+}
+@keyframes skeletonLoad {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Responsive Polish ── */
+@media (max-width: 1024px) {
+  .card-depth-hover:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 640px) {
+  .card-depth-hover:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+}

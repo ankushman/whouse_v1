@@ -504,7 +504,7 @@ function generateSuppliers(count: number): Supplier[] {
                               : tier === 'strategic' ? (riskRoll > 0.7 ? 'medium' : 'low')
                               : (riskRoll > 0.7 ? 'medium' : 'low');
     const onboardedDaysAgo = randInt(60, 2200, i + 400);
-    const isFullyOnboarded = approvalStatus !== 'pending' && approvalStatus !== 'in_review';
+    const isFullyOnboarded = true;
     const onboardingStage: OnboardingStage = isFullyOnboarded ? 'completed'
                                           : approvalStatus === 'suspended' ? 'first_po'
                                           : approvalStatus === 'probation' ? 'first_po'
@@ -812,7 +812,7 @@ function generateFAIs(suppliers: Supplier[], count: number): FirstArticleInspect
       inspectionDate = daysAgo(randInt(0, 1, i + 300)).toISOString();
       completedDate = null;
       dimensional = 'in_progress'; material = 'received'; functional = 'pending';
-      visual = 'in_progress'; packaging = 'pending'; documentation = 'passed';
+      visual = 'pending'; packaging = 'pending'; documentation = 'passed';
       overall = 'pending';
       deviationCount = 0;
       criticalDeviations = 0;
