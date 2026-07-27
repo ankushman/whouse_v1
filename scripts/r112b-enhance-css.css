@@ -1,0 +1,162 @@
+/* ============================================================================
+ * R112b: Styling enhancements for Alerts & Productivity modules
+ * ============================================================================ */
+
+/* Alerts Module - Enhanced animations */
+.prod-perf-card {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.prod-perf-card:hover {
+  transform: translateX(4px);
+}
+
+/* Alert card glow effects for critical alerts */
+.badge-glow-critical {
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+  animation: alertGlowCritical 2s ease-in-out infinite;
+}
+@keyframes alertGlowCritical {
+  0%, 100% { box-shadow: 0 0 6px rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 12px rgba(239, 68, 68, 0.7); }
+}
+
+.badge-glow-warning {
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.4);
+  animation: alertGlowWarning 2.5s ease-in-out infinite;
+}
+@keyframes alertGlowWarning {
+  0%, 100% { box-shadow: 0 0 6px rgba(245, 158, 11, 0.4); }
+  50% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.6); }
+}
+
+/* Enhanced filter bar animation */
+.filter-bar {
+  animation: filterSlideIn 0.3s ease-out;
+}
+@keyframes filterSlideIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card depth enhancement */
+.card-depth {
+  transition: all 0.2s ease;
+}
+.card-depth:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.hover-scale-sm {
+  transition: transform 0.15s ease;
+}
+.hover-scale-sm:hover {
+  transform: scale(1.02);
+}
+
+/* Card shine effect */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.card-shine:hover::after {
+  opacity: 1;
+}
+
+/* Card accent for blue */
+.card-accent-blue {
+  border-left: 3px solid rgba(37, 99, 235, 0.5);
+}
+
+/* Hover glow effects */
+.hover-glow-amber {
+  transition: box-shadow 0.3s ease;
+}
+.hover-glow-amber:hover {
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.15);
+}
+.hover-glow-blue {
+  transition: box-shadow 0.3s ease;
+}
+.hover-glow-blue:hover {
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.15);
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  animation: staggerFadeIn 0.4s ease-out backwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7) { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8) { animation-delay: 420ms; }
+@keyframes staggerFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Badge dot pulse */
+.badge-dot {
+  position: relative;
+}
+.badge-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: badgeDotPulse 1.5s ease-in-out infinite;
+}
+.badge-dot:has(.text-red-600)::before,
+.badge-dot:has(.text-red-700)::before { background: #ef4444; }
+.badge-dot:has(.text-amber-600)::before,
+.badge-dot:has(.text-amber-700)::before { background: #f59e0b; }
+.badge-dot:has(.text-blue-600)::before,
+.badge-dot:has(.text-blue-700)::before { background: #3b82f6; }
+@keyframes badgeDotPulse {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.4; transform: translateY(-50%) scale(0.7); }
+}
+
+/* Mobile scroll hint */
+.mobile-scroll-hint {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Text number styling */
+.text-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Dark mode adjustments */
+.dark .card-depth:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.dark .card-shine::after {
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 70%);
+}
+.dark .hover-glow-amber:hover {
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.08);
+}
+.dark .hover-glow-blue:hover {
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.08);
+}
