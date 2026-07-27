@@ -786,11 +786,12 @@ const formatPct = (val: number) => `${val.toFixed(1)}%`;
 export function FixedAssetRegisterView() {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState<'portfolio' | 'depreciation' | 'maintenance' | 'transfers' | 'disposals' | 'compliance' | 'insights'>('portfolio');
-  // Initialize data on mount using lazy init pattern to avoid effect setState
+  // Initialize all data in a single lazy init to ensure consistency
   const [assets, setAssets] = useState<Asset[]>(() => generateAssets());
-  const [maintenanceHistory, setMaintenanceHistory] = useState<MaintenanceHistoryEntry[]>(() => generateMaintenanceHistory([]));
-  const [transfers, setTransfers] = useState<AssetTransfer[]>(() => generateAssetTransfers([]));
-  const [disposals, setDisposals] = useState<AssetDisposal[]>(() => generateAssetDisposals([]));
+  // Derive maintenance/transfers/disposals from assets via useMemo to avoid setState-in-effect lint rule
+  const maintenanceHistory = useMemo<MaintenanceHistoryEntry[]>(() => generateMaintenanceHistory(assets), [assets]);
+  const transfers = useMemo<AssetTransfer[]>(() => generateAssetTransfers(assets), [assets]);
+  const disposals = useMemo<AssetDisposal[]>(() => generateAssetDisposals(assets), [assets]);
   const [selectedAsset, setSelectedAsset] = useState<Asset | null>(null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<AssetStatus | 'all'>('all');
@@ -800,9 +801,7 @@ export function FixedAssetRegisterView() {
   const handleRefresh = useCallback(() => {
     const generated = generateAssets();
     setAssets(generated);
-    setMaintenanceHistory(generateMaintenanceHistory(generated));
-    setTransfers(generateAssetTransfers(generated));
-    setDisposals(generateAssetDisposals(generated));
+    // maintenanceHistory, transfers, disposals auto-recompute via useMemo
     toast({ title: 'Asset register refreshed', description: `${generated.length} assets loaded successfully` });
   }, [toast]);
 
