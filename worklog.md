@@ -1,4 +1,145 @@
 ---
+Task ID: 131
+Agent: Main (Cron Review - Round 131)
+Task: Cycle Count Management module
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R130 was latest completed round)
+- Verified: 60 modules, 7 API routes, build passes, lint clean, 0 src/ TS errors
+- agent-browser QA: dev server connection timeout (known limitation); build/lint/TS verified clean.
+- TSC: 0 src/ errors (pre-existing non-src errors in skills/, examples/, mini-services/)
+- BUILD: compiled successfully (10 routes)
+
+- Created R131: Cycle Count Management module
+  * NEW FILE: src/components/modules/cycle-count-view.tsx (~1,347 lines)
+  * 5 tabs: Dashboard | Count Schedules | Execution | Variance Analysis | Adjustments
+  * Theme: Teal + Orange + Violet (#14b8a6, #f97316, #8b5cf6)
+  * Header: gradient banner with animated top border (teal → orange → violet, 6s cycle)
+  * Header badges: Total Counts, Active, Done, Variances, Pending
+
+  * Tab 1 Dashboard:
+    - 6 KPI cards (Total Counts, In Progress, Accuracy Rate, Variances Found, Pending Approval, Financial Impact ₹)
+    - Monthly Count Volume & Accuracy Trend ComposedChart (counts + variances bars + accuracy line)
+    - Count Type Distribution PieChart (6 types: Full, Spot, ABC Triggered, Recount, Blind, Negative Stock Audit)
+    - Warehouse Accuracy Performance RadarChart (6 axes: accuracy, on-time, speed per warehouse)
+    - ABC Classification Count Trend stacked AreaChart (Class A/B/C monthly)
+    - Variance Reasons Breakdown horizontal BarChart (top 8 reasons)
+    - Counter Accuracy vs Speed ScatterChart (bubble size = total counts)
+    - Warehouse Accuracy Summary table (accuracy bars, on-time bars, variance rate color-coded, avg count time, star rating)
+
+  * Tab 2 Count Schedules:
+    - Filter bar: search (ID/SKU/product/warehouse/counter), status (6: Scheduled/In Progress/Completed/Paused/Cancelled/Pending Approval), type (6)
+    - Full schedule table (120 records, shows 60): ID, type badge, ABC class badge, priority badge, status badge (In Progress/Pending=pulse), product/SKU, location, sys qty, counted qty, variance (color-coded +/-), warehouse, zone, counter, scheduled date, actions
+
+  * Tab 3 Execution:
+    - 4 KPI cards (In Progress, Paused, Avg Duration, Active Counters)
+    - Counter Leaderboard table: rank badges (gold/silver/bronze), name, warehouse, cert badge (L1/L2/L3), total counts, accuracy bar, avg time, star rating
+    - Counter Speed vs Thoroughness ScatterChart (bubble size = total counts)
+    - Active & Paused Counts table: status badge, product/SKU, location, counter, warehouse, zone, sys qty, counted qty, recounts, notes
+
+  * Tab 4 Variance Analysis:
+    - 4 KPI cards (Total Variances, Over-counted, Under-counted, Avg Variance %)
+    - Monthly Variance Trend ComposedChart (variances bars + adjustments line)
+    - Variance by ABC Class PieChart (A=red, B=orange, C=violet)
+    - Variance by Warehouse Zone stacked BarChart (over=teal, under=red)
+    - Variance table (50 items): ID, product, ABC, location, system qty, actual qty, variance (color bold), variance % (color-coded thresholds), reason, warehouse, counter, actions. High variance rows highlighted with red left border.
+
+  * Tab 5 Adjustments:
+    - 5 KPI cards (Total Adjustments, Approved, Pending, Rejected, Total Impact ₹L)
+    - Adjustment Type Distribution PieChart (6 types: Qty Inc/Dec, Location/Batch/Status Correction, Write-off)
+    - Monthly Adjustment Trend & Value ComposedChart (adjustment bars + accuracy line)
+    - Filter bar: search, status (4: Approved/Pending/Rejected/Escalated)
+    - Adjustment table (50 items): Adj ID, count ID, type badge, status badge (Pending/Escalated=pulse), product/SKU, warehouse, location, system qty, adjusted qty, diff (color bold), impact ₹ (color-coded thresholds), reason, approver, date, actions. Escalated rows highlighted.
+
+  * Count Detail Drawer (slide-in from right with backdrop blur):
+    - Status banner (done/active/approval/default/rejected/escalated with icons + pulse)
+    - Location Flow: warehouse dot → zone dot → bin location dot
+    - Info grid: product, SKU, category, unit value, priority badge, count type, counter + cert, supervisor
+    - Quantity Comparison: 3 boxes (System / Counted / Variance) with color-coded backgrounds
+    - Count Timeline: 5-step visual (Scheduled → Assigned → Counting → Verified → Completed) with dot/line status
+    - Variance Reason box (orange background)
+    - Footer: scheduled date, completed date, duration, recount count
+
+  * Adjustment Detail Drawer:
+    - Status banner (approved/pending/rejected/escalated)
+    - Route Flow: warehouse → zone → bin location
+    - Info grid: product, SKU, category, batch no., expiry date, unit value
+    - Financial Impact: 3 qty boxes + impact banner (low=teal, high=red) with ₹ amount
+    - Approval Chain: 2-step visual (requester → approver) with dot/line status
+    - Footer: request date, approval date, linked count ID
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 131131)
+  * 120 count schedule records with 6 types, 6 statuses, 3 ABC classes, 8 zones, 10 counters
+  * 20 Indian products across 6 categories (Food, Pharma, Electronics, Auto Parts, Industrial, Textile) with unit values ₹85-₹8,900
+  * 80 adjustment records with 6 types, 4 statuses, 10 variance reasons
+  * 10 certified counters (L1/L2/L3) across 6 warehouses
+  * 12-month trend data for counts, variances, adjustments, accuracy
+  * Warehouse accuracy data per warehouse (accuracy, on-time, variance rate, avg count time)
+  * Counter performance data (accuracy, avg time, speed, thoroughness scores)
+
+- Created CSS: scripts/r131-css.css (~650 lines), appended to src/app/globals.css
+  * Teal + orange + violet theme
+  * Animated gradient top border (teal → orange → violet, 6s cycle)
+  * 6 KPI card gradient backgrounds with dark mode
+  * Status badges (6: scheduled=gray, progress=orange-pulse, completed=green, paused=amber, cancelled=gray-dim, approval=violet-pulse, rejected=red, escalated=red-bold-pulse)
+  * ABC class badges (A=red-bold, B=orange, C=violet)
+  * Count type badges (6 unique colors)
+  * Adjustment type badges (6 unique colors)
+  * Priority badges (4: critical=red-bold, high=orange, medium=violet, low=teal)
+  * Rank badges (gold/silver/bronze gradients)
+  * Star rating system (filled=amber, empty=gray)
+  * Location Flow visualization (teal/orange/violet dots with chevron connectors)
+  * Quantity Comparison boxes (system/default, counted=teal, positive=green, negative=red)
+  * Financial Impact banner (low=teal, high=red)
+  * Timeline track (5-step with done/current dots and connectors)
+  * Approval Chain (2-step with status dots)
+  * Drawer with gradient left border, backdrop blur
+  * Mini progress bars for accuracy/on-time
+  * Filter bar, table styling with highlighted rows (active=orange-left-border, high-variance=red-left-border, escalated=red-left-border)
+  * Staggered fade-in animations, full dark mode, responsive
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'cycle-count' (icon: ClipboardCheck, group: operations)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: re-export as default
+  * src/components/layout/app-layout.tsx: ClipboardCheck already in iconMap (no duplicate needed)
+
+LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 864c3e9
+
+Stage Summary:
+- NEW MODULE: Cycle Count Management (61 modules total, was 60)
+- ~1,347-line component + ~650 lines CSS (cc-* classes)
+- 5 tabs + 9 chart types + 120 counts + 80 adjustments + 10 counters
+- Interactive count detail drawer with timeline visualization
+- Interactive adjustment detail drawer with approval chain
+- Counter leaderboard with gold/silver/bronze rankings
+- ABC classification analysis and variance root cause tracking
+- Total globals.css: 28,952 lines (+651)
+
+## Updated Project Status (Post Round 131)
+- STATUS: STABLE + NEW CYCLE COUNT MODULE (61 modules)
+- MODULES (61): All previous 60 + Cycle Count Management
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 28,952 lines
+
+KNOWN ISSUES:
+- Dev server timeout in agent-browser QA this session (connection instability)
+- Git local/remote divergence: ~67 remote commits not in local, ~20 local not on remote
+- Pre-existing TS errors in non-src files (skills/, examples/, mini-services/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (61+ modules growing redundancy)
+  2. Multi-warehouse switching for all modules
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for R113-R131 modules
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 29000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+---
 Task ID: 130
 Agent: Main (Cron Review - Round 130)
 Task: Barcode & Label Management module
