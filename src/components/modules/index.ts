@@ -54,6 +54,7 @@ export { default as SlottingOptimizationView } from './slotting-optimization-vie
 export { default as WavePlanningView } from './wave-planning-view'
 export { default as StockTransferView } from './stock-transfer-view'
 export { default as BarcodeLabelView } from './barcode-label-view'
+export { default as CycleCountView } from './cycle-count-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.

@@ -66,6 +66,7 @@ import SlottingOptimizationView from "@/components/modules/slotting-optimization
 import WavePlanningView from "@/components/modules/wave-planning-view"
 import StockTransferView from "@/components/modules/stock-transfer-view"
 import BarcodeLabelView from "@/components/modules/barcode-label-view"
+import CycleCountView from "@/components/modules/cycle-count-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -132,6 +133,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "wave-planning": WavePlanningView,
   "stock-transfer": StockTransferView,
   "barcode-label": BarcodeLabelView,
+  "cycle-count": CycleCountView,
   "shift-handover": ShiftHandoverView,
 }
 
