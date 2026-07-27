@@ -59,6 +59,7 @@ import ColdChainTemperatureView from "@/components/modules/cold-chain-temperatur
 import ContainerFreightStationView from "@/components/modules/container-freight-station-view"
 import HazmatDangerousGoodsView from "@/components/modules/hazmat-dangerous-goods-view"
 import SerialNumberTrackingView from "@/components/modules/serial-number-tracking-view"
+import EcommerceFulfillmentView from "@/components/modules/ecommerce-fulfillment-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -118,6 +119,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "container-freight-station": ContainerFreightStationView,
   "hazmat-dangerous-goods": HazmatDangerousGoodsView,
   "serial-number-tracking": SerialNumberTrackingView,
+  "ecommerce-fulfillment": EcommerceFulfillmentView,
   "shift-handover": ShiftHandoverView,
 }
 
