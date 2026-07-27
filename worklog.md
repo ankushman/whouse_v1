@@ -1,4 +1,136 @@
 ---
+Task ID: 129
+Agent: Main (Cron Review - Round 129)
+Task: Stock Transfer & Inter-Warehouse Movement module
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R128 was latest completed round)
+- Verified: 58 modules, 7 API routes, build passes, lint clean, 0 src/ TS errors
+- TSC: 0 src/ errors (7 pre-existing in non-src: skills/, examples/, mini-services/)
+- Build: compiled successfully (10 routes)
+- agent-browser QA: sidebar loaded with all 59 modules (stock-transfer visible), homepage renders. Known limitation: refs unstable across re-renders, dev server disconnects.
+
+- Created R129: Stock Transfer & Inter-Warehouse Movement module
+  * NEW FILE: src/components/modules/stock-transfer-view.tsx (~962 lines)
+  * 5 tabs: Transfer Dashboard | Transfer Queue | Route Analysis | Cost & Savings | SLA & Compliance
+  * Theme: Cyan + Amber + Emerald (#06b6d4, #f59e0b, #10b981)
+  * Header: gradient banner with animated top border (cyan → amber → emerald, 6s cycle)
+  * Header badges: Total Transfers, Active, Completed, Pending Approval, Total Qty, Cost (₹)
+
+  * Tab 1 Transfer Dashboard:
+    - 6 KPI cards (Total Transfers, Active, Completed, Avg Transit Days, Pending Approval, Rejected)
+    - Transfer Type Distribution PieChart (5 types: Inter-Warehouse, Zone Transfer, Bin Relocation, Return to Supplier, Cross-Dock Transfer)
+    - Monthly Transfer Volume ComposedChart (stacked area for Inter-WH/Zone/Bin + line for total qty)
+    - Transfer Efficiency RadarChart (6 axes: On-Time, SLA Score, Cost Eff., Utilization, Approval Speed, Damage-Free)
+    - Transfer Reasons Analysis horizontal BarChart (top 10 reasons: Stock Rebalancing, Demand Surge, etc.)
+    - Top Transfer Routes leaderboard (8 routes with cyan rank badges)
+
+  * Tab 2 Transfer Queue:
+    - Filter bar: search (transfer ID/product/SKU/warehouse), status (8: Requested/Pending Approval/Approved/In Transit/Received/Completed/Cancelled/Rejected), type (5)
+    - Full transfer table (100 records, shows 60): ID, type badge, priority badge, status badge (Pending Approval=purple-pulse, In Transit=amber-pulse), origin (WH+zone), destination (WH+zone), SKU/product, qty+unit, reason, transport mode, cost ₹, est days+actual, approver, created date, actions
+    - Transfer Detail Drawer (slide-in from right with backdrop blur):
+      - Status banner (active/completed/cancelled) with icon
+      - Route Flow visualization: origin dot → dashed line with transport mode → destination dot
+      - Info grid: product, SKU, category badge, priority, qty, weight, volume, transport, approver+role, cost ₹, est/actual days, vehicle number, tracking ID, created, completed
+      - Transit Timeline: 5-step visual (Requested → Approved → Dispatched → In Transit → Delivered) with status highlighting
+
+  * Tab 3 Route Analysis:
+    - 4 KPI cards (Active Routes, Total Movements, Avg Cost/Transfer, Avg Transit Days)
+    - Warehouse Flow BarChart (outgoing cyan bars + incoming amber bars per warehouse)
+    - Cost per Warehouse Route horizontal BarChart
+    - Warehouse Transfer Summary table: warehouse, outgoing, incoming, total, avg cost, avg transit days, balance (color-coded positive/negative)
+
+  * Tab 4 Cost & Savings:
+    - View toggle: Monthly Trend / By Warehouse
+    - 4 KPI cards (Total Transport Cost, Handling Cost, Total Savings, Savings Rate)
+    - Cost Breakdown Trend ComposedChart (transport area + handling bars) [monthly view]
+    - Savings Breakdown stacked AreaChart (Route Optimized + Consolidation + Route Savings) [monthly view]
+    - Cost by Warehouse BarChart [warehouse view]
+    - Transport Mode Distribution PieChart (7 modes: Own Fleet, 3PL-Delhivery, 3PL-BlueDart, 3PL-DTDC, Rail Freight, Air Cargo, Road Transport)
+
+  * Tab 5 SLA & Compliance:
+    - 4 KPI cards (On-Time Rate, Within SLA, Avg Delay, Delayed Rate)
+    - Warehouse SLA Performance BarChart (on-time % + within SLA % bars + delayed line)
+    - Approval Workflow Analytics PieChart (8 statuses distribution)
+    - SLA Detail table: warehouse, on-time % with bar, within SLA %, delayed %, avg delay (color-coded), 5-star SLA rating
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 129129)
+  * 100 transfer records across 6 warehouses, 5 types, 8 statuses, 4 priority levels
+  * 20 Indian products across 6 categories (Food, Pharma, Electronics, Auto Parts, Industrial, Textile)
+  * 7 transport modes (Own Fleet + 6 3PL/carriers)
+  * 10 transfer reasons (Stock Rebalancing, Demand Surge, Safety Stock, Expiry Management, etc.)
+  * 4 approvers with roles (Regional Manager, Warehouse Manager, Ops Director, Supply Chain Head)
+  * Vehicle numbers, tracking IDs for inter-warehouse transfers
+  * 12-month trend data for volumes and costs
+  * 30 warehouse pair routes with volume analysis
+  * SLA data per warehouse (on-time, within SLA, delayed, avg delay)
+
+- Created CSS: scripts/r129-css.css (~328 lines), appended to src/app/globals.css
+  * Cyan + amber + emerald theme
+  * Animated gradient top border (cyan → amber → emerald, 6s cycle)
+  * KPI card gradient backgrounds (3 variants with dark mode)
+  * Type badges (5: IW=cyan, ZT=amber, BR=emerald, RTS=red, CD=purple)
+  * Priority badges (4: critical=red-bold, high=amber, medium=purple, low=emerald)
+  * Status badges (8: requested=gray, pending=purple-pulse, approved=cyan, transit=amber-pulse, received=indigo, completed=green, cancelled=gray, rejected=red)
+  * Category badges (6: food=amber, pharma=emerald, electronics=indigo, auto=red, industrial=gray, textile=purple)
+  * Route Flow visualization (origin/dest dots with gradient, dashed line, transport label)
+  * Route rank badges (cyan gradient for top 3)
+  * Transfer Detail Drawer (slide-in, gradient left border, backdrop blur)
+  * Transit Timeline (5-step with dot indicators)
+  * Filter bar, table styling, mini progress bars
+  * Star rating system (filled=cyan, empty=gray)
+  * 12-level staggered animations
+  * Full dark mode coverage
+  * Responsive breakpoints
+
+- Fixed TS errors during development:
+  * Removed duplicate ArrowLeftRight import (already existed in app-layout.tsx)
+  * Removed typed Tooltip formatter (not needed)
+  * Fixed number-to-string coercion in KPI card values
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'stock-transfer' (icon: ArrowLeftRight, group: operations)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: re-export as default
+  * src/components/layout/app-layout.tsx: ArrowLeftRight already in iconMap
+
+LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 03c3980
+
+Stage Summary:
+- NEW MODULE: Stock Transfer & Inter-Warehouse Movement (59 modules total, was 58)
+- ~962-line component + ~328 lines CSS (stf-* classes)
+- 5 tabs + 9 chart types + 100 transfers + 30 route pairs + 12 pickers
+- Interactive transfer detail drawer with route flow visualization and transit timeline
+- Route analysis with warehouse flow balance tracking
+- Cost & savings analysis with monthly/warehouse view toggle
+- SLA compliance tracking with star ratings
+- Total globals.css: 28,080 lines (+328)
+
+## Updated Project Status (Post Round 129)
+- STATUS: STABLE + NEW STOCK TRANSFER MODULE (59 modules)
+- MODULES (59): All previous 58 + Stock Transfer & Inter-Warehouse Movement
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 28,080 lines
+
+KNOWN ISSUES:
+- agent-browser refs unstable across page re-renders, dev server connection drops
+- Git local/remote divergence: 66 remote commits not in local, 18 local not on remote
+- Pre-existing TS errors in non-src files (skills/, examples/, mini-services/) — not main source
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (growing redundancy across 59 modules)
+  2. Multi-warehouse switching for all modules
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for R113-R129 modules
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 28000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+
+---
 Task ID: 128
 Agent: Main (Cron Review - Round 128)
 Task: Wave Planning & Picking Management module
