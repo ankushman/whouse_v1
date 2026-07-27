@@ -51,6 +51,7 @@ export { default as EcommerceFulfillmentView } from './ecommerce-fulfillment-vie
 export { default as LaborManagementView } from './labor-management-view'
 export { default as PackagingStandardsView } from './packaging-standards-view'
 export { default as SlottingOptimizationView } from './slotting-optimization-view'
+export { default as WavePlanningView } from './wave-planning-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.

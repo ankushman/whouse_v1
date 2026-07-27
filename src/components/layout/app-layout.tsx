@@ -72,6 +72,7 @@ import {
   HardHat,
   Box,
   LayoutList,
+  Waves,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -186,6 +187,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   HardHat,
   Box,
   LayoutList,
+  Waves,
 }
 // ──────────────────────────────────────────────────────
 const recentNotifications = [
