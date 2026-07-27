@@ -1,0 +1,276 @@
+/* ============================================================================
+   R114b: Additional CSS Micro-Interactions — Cross-Module Polish
+   ============================================================================ */
+
+/* ── Glassmorphism Navigation Enhancement ── */
+.glass-nav-pill {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.glass-nav-pill:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+.dark .glass-nav-pill {
+  background: rgba(30, 27, 75, 0.7);
+  border-color: rgba(99, 102, 241, 0.15);
+}
+
+/* ── Data Grid Cell Hover Glow ── */
+.data-cell-glow {
+  position: relative;
+  transition: background 0.2s;
+}
+.data-cell-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.data-cell-glow:hover::after {
+  opacity: 1;
+}
+
+/* ── Animated Border Gradient Card ── */
+.animated-border-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.animated-border-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1.5px;
+  background: linear-gradient(135deg, #0ea5e9, #6366f1, #8b5cf6, #d946ef, #0ea5e9);
+  background-size: 300% 300%;
+  animation: borderRotate 8s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Metric Card Subtle Pulse ── */
+.metric-pulse-subtle {
+  animation: metricPulse 3s ease-in-out infinite;
+}
+@keyframes metricPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08); }
+}
+
+/* ── Loading Skeleton Multi-Shimmer ── */
+.skeleton-multi-shimmer {
+  background: linear-gradient(
+    110deg,
+    #f3f4f6 8%,
+    #e5e7eb 18%,
+    #f3f4f6 33%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 6px;
+}
+.dark .skeleton-multi-shimmer {
+  background: linear-gradient(
+    110deg,
+    #1e1b4b 8%,
+    #312e81 18%,
+    #1e1b4b 33%
+  );
+  background-size: 200% 100%;
+}
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Icon Button Ripple Effect ── */
+.icon-btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.icon-btn-ripple::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+.icon-btn-ripple:active::after {
+  transform: scale(2);
+  opacity: 1;
+  transition: transform 0s, opacity 0s;
+}
+
+/* ── Status Dot Live Indicator ── */
+.status-dot-live {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  position: relative;
+}
+.status-dot-live::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid #22c55e;
+  animation: statusDotPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes statusDotPing {
+  0% { transform: scale(1); opacity: 0.8; }
+  75%, 100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ── Tab Content Smooth Transition ── */
+.tab-smooth-enter {
+  animation: tabSmoothIn 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes tabSmoothIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Card Hover Reveal Border ── */
+.card-reveal-border {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+.card-reveal-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  padding: 1px;
+  background: linear-gradient(135deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.card-reveal-border:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+.card-reveal-border:hover::before {
+  opacity: 1;
+}
+
+/* ── Number Counter Tabular ── */
+.number-tabular {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ── Tooltip Arrow Polish ── */
+.tooltip-polished {
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  animation: tooltipPop 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes tooltipPop {
+  from { opacity: 0; transform: scale(0.95) translateY(4px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Focus Trap Ring ── */
+.focus-ring-glow:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 0 0 0 6px rgba(99, 102, 241, 0.1);
+  border-radius: 8px;
+}
+
+/* ── Scroll Indicator Fade ── */
+.scroll-fade-bottom {
+  position: relative;
+}
+.scroll-fade-bottom::after {
+  content: '';
+  position: sticky;
+  bottom: 0;
+  display: block;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, white);
+  pointer-events: none;
+  z-index: 1;
+}
+.dark .scroll-fade-bottom::after {
+  background: linear-gradient(to bottom, transparent, #0f0a2e);
+}
+
+/* ── Hover Scale Micro ── */
+.hover-scale-micro {
+  transition: transform 0.15s ease;
+}
+.hover-scale-micro:hover {
+  transform: scale(1.02);
+}
+
+/* ── Text Gradient Utility ── */
+.text-gradient-blue-violet {
+  background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-violet-fuchsia {
+  background: linear-gradient(135deg, #8b5cf6, #d946ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-emerald-cyan {
+  background: linear-gradient(135deg, #22c55e, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Responsive Adjustments ── */
+@media (max-width: 1024px) {
+  .animated-border-card::before {
+    animation-duration: 12s;
+  }
+}
+
+@media (max-width: 640px) {
+  .card-reveal-border:hover {
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+  .hover-scale-micro:hover {
+    transform: none;
+  }
+}
