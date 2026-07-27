@@ -1,4 +1,124 @@
 ---
+Task ID: 121
+Agent: Main (Cron Review - Round 121)
+Task: Container Freight Station & Customs module
+
+Work Log:
+- Read /home/z/my-project/worklog.md (R120 was latest completed round)
+- Verified: 50 modules, 7 API routes, build passes, lint clean, 0 src/ TS errors
+- TSC: 0 src/ errors (only pre-existing skills/stock-analysis-skill/src/ error)
+- Build: compiled successfully (10 routes)
+
+- Created R121: Container Freight Station & Customs module
+  * NEW FILE: src/components/modules/container-freight-station-view.tsx (~1188 lines)
+  * 5 tabs: CFS Overview | Container Register | Customs Documentation | Seal & Integrity | Storage & Demurrage
+  * Theme: Teal + Orange + Indigo (#0d9488, #f97316, #6366f1)
+  * Header: gradient banner with animated top border (teal → indigo → orange, 6s cycle)
+  * Header badges: Active Containers, Customs Hold, Cleared
+
+  * Tab 1 CFS Overview:
+    - 6 KPI cards (Active Containers, Customs Hold, Total Duty, Avg Detention, Total TEU, Total Packages)
+    - Status Pipeline (8-stage horizontal bar visualization with counts)
+    - Monthly Throughput ComposedChart (imports/exports/transit stacked bars + TEU line)
+    - Movement Type donut chart (import, export, transit)
+    - Container Size donut chart (20ft FCL, 40ft FCL, 40ft HC, LCL, Air Cargo, Break Bulk)
+    - Duty Collection by Warehouse horizontal bar chart
+    - Avg Detention Trend ComposedChart (line + bar overlay)
+
+  * Tab 2 Container Register:
+    - Filter bar: search, status (8 options), warehouse, movement type, container size
+    - Full container table: ID, container#, size, movement badge, warehouse, shipping line, status badge, arrival, detention, duty, flags
+    - Container Detail Drawer (slide-in from right with backdrop blur):
+      - Container Overview (size, weight, packages, status)
+      - Shipping & Route (vessel, voyage, POL, POD, shipper, consignee)
+      - Customs & Duty (BE/IE numbers, regime, duty status with color, BL#, seal#)
+      - Timing & Detention (free days remaining with timeline visualization bar)
+      - Notes section
+
+  * Tab 3 Customs Documentation:
+    - 4 Doc Status KPI cards (Total, Approved, Pending, Rejected)
+    - Full document register table (90 docs: 15 types including BE, Shipping Bill, Invoice, Packing List, Certificate of Origin, Phyto, Fumigation, Insurance, IGM, EGM, LC, HS Code, GST E-Way Bill, ITC Classification, Customs Bond)
+    - Document Status donut chart (pending, submitted, approved, rejected, expired)
+    - Document Type horizontal bar chart (top 10 by count)
+    - Duty Collection Trend AreaChart (customs duty, GST, cess stacked, 12 months)
+
+  * Tab 4 Seal & Integrity:
+    - 4 Seal Status KPI cards (Total Seals, Intact, Broken, Replaced)
+    - Seal Integrity PieChart with inline labels
+    - Full seal register table (40 seals: number, type, container, status badge with pulse animation for broken, location, verifier, applied date)
+
+  * Tab 5 Storage & Demurrage:
+    - 4 Storage KPI cards (Total Storage Revenue, Active Storage, Avg Storage Days, Avg Daily Rate)
+    - Storage Revenue Trend ComposedChart (revenue area + utilization line overlay, 12 months)
+    - Full storage register table (35 entries with zone/block/position, free storage usage bars with color coding, daily rate, total charge)
+    - Warehouse Storage Comparison bar chart
+    - Container Operations RadarChart (imports, exports, transit, cleared, held per warehouse)
+
+- Mock Data Generation:
+  * Seeded deterministic generation (seed: 121121)
+  * 60 containers across 6 warehouses, 6 container types, 3 movements, 8 statuses
+  * 10 Indian ports (Nhava Sheva, Mundra, Chennai, Kolkata, Cochin, Vizag, Tuticorin, Kandla, Hazira, Mormugao)
+  * 10 shipping lines, 10 vessels, 10 shippers, 10 consignees
+  * BE/IE numbering for import/export customs documentation
+  * 90 customs documents (15 types, 5 statuses)
+  * 40 seal records (6 seal types, 3 statuses)
+  * 35 storage entries with daily rates and free storage tracking
+  * 12-month throughput, duty collection, detention, and storage revenue trends
+
+- Created CSS: scripts/r121-css.css (~482 lines), appended to src/app/globals.css
+  * Teal + orange + indigo theme
+  * Animated gradient top border (teal → indigo → orange, 6s cycle)
+  * Header glow animation cycling through theme colors
+  * 6 KPI card gradient backgrounds with dark mode variants
+  * Status Pipeline with horizontal bars
+  * Status badges with distinct colors per status
+  * Movement type badges (teal=import, orange=export, indigo=transit)
+  * Container flags (damage=red, hazmat=amber, temperature=blue)
+  * Seal integrity badges with pulse animation for broken seals
+  * Free storage usage bars (green/amber/red thresholds)
+  * Container Detail Drawer (slide-in from right with backdrop blur)
+  * Staggered slide-up animations (10 levels)
+  * Full dark mode coverage
+  * Responsive breakpoints (1024px, 768px)
+
+- Registered module in 4 files:
+  * src/store/app-store.ts: navItem 'container-freight-station' (icon: Container, group: operations)
+  * src/app/page.tsx: import + viewMap entry
+  * src/components/modules/index.ts: re-export as default
+  * src/components/layout/app-layout.tsx: Container added to imports + iconMap
+
+LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+
+Stage Summary:
+- NEW MODULE: Container Freight Station & Customs (51 modules total, was 50)
+- ~1188-line component + ~482 lines CSS (cfs-* classes)
+- 5 tabs + 12 chart types + 60 containers + 90 docs + 40 seals + 35 storage entries
+- Total globals.css: 23,854 lines (+482)
+
+## Updated Project Status (Post Round 121)
+- STATUS: STABLE + NEW CFS & CUSTOMS MODULE (51 modules)
+- MODULES (51): All previous 50 + Container Freight Station & Customs
+- API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 23,854 lines
+
+KNOWN ISSUES:
+- agent-browser cannot connect to localhost (separate network namespace)
+- Git local/remote divergence: 66 remote commits not in local, 11 local not on remote
+- 1 pre-existing TS error in skills/stock-analysis-skill/src/ — none in src/
+- 7 TS errors in non-src files (skills/, examples/, mini-services/) — not main source
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components
+  2. Multi-warehouse switching for dock scheduler & yard management
+  3. Predictive model retraining trigger UI
+  4. Dashboard home page widgets for R113-R121 modules
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation improvements
+  7. CSS audit: 23000+ classes — consolidate duplicates
+  8. Real-time WebSocket integration
+
+---
 Task ID: 120
 Agent: Main (Cron Review - Round 120)
 Task: Cold Chain & Temperature Logistics module + R119 TS bug fixes
