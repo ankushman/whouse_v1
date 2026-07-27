@@ -1,183 +1,139 @@
 ---
-Task ID: 111
-Agent: Main (Cron Review - Round 111)
-Task: QA testing + new module development (R111: Fixed Asset Register — Companies Act Schedule II + Ind AS 16/36/105)
+Task ID: 112
+Agent: Main (Cron Review - Round 112)
+Task: QA testing + Production Capacity Planning module (R112) + CSS enhancements
 
 Work Log:
-- Read /home/z/my-project/worklog.md (R110 was the latest completed module per worklog)
-- Verified actual file system state: 40 module files (41 including index.ts), 7 API routes on disk
-- Confirmed GitHub remote at https://github.com/ankushman/whouse_v1.git (main branch)
-- Git status: 3 local commits ahead, 66 remote commits ahead (divergence from R57-R109 sessions)
-- Git push rejected (non-fast-forward) — documented but did not force push to preserve remote history
+- Read /home/z/my-project/worklog.md (R111 was the latest completed module per worklog)
+- Verified project state: 41 modules, 7 API routes, build passes, lint clean
+- Git status: 3 local commits ahead of divergence point (c167f20), 66 remote commits ahead
+- Attempted agent-browser QA: OOM kills prevented browser-based testing
+  * Root cause: next-server uses 22GB vmem (2.2GB RSS), Chrome adds ~1GB+ renderer processes
+  * Total container memory limit ~4GB — any simultaneous server+browser = OOM kill
+  * Workaround: Used curl-based QA + production standalone build verification
+  * Production build: `npx next build` compiled successfully, all 10 routes verified
+- Code-level QA: ESLint on all modules (0 errors), build verification (pass)
 
-- agent-browser QA Infrastructure:
-  * agent-browser doctor: 8 pass, 0 warn, 0 fail — Chrome for Testing 151.0.7922.34 installed
-  * Chrome headless launches fine to about:blank, connects to external URLs (example.com)
-  * Chrome could NOT reach 127.0.0.1:3000 initially due to OOM kills of next-server
-  * Root cause: next-server uses 22GB virtual memory (2.2GB RSS), gets killed by cgroup OOM when
-    Chrome launches additional renderers consuming ~1GB+. Total memory cap ~4GB.
-  * Workaround: Kill chrome before starting server, keep memory low, use --max-old-space-size=192
-  * First agent-browser successful connection after killing chrome + restarting fresh
+- Created R112: Production Capacity Planning module
+  * NEW FILE: src/components/modules/capacity-planning-view.tsx (~1150 lines)
+  * 7 tabs: Capacity Overview | Work Centers | Shift Management | Capacity Planning | Production Scheduling | Efficiency Analytics | Alerts & Actions
+  * Theme: Teal + Cyan + Emerald gradient (manufacturing/operations aesthetic)
+  * Header: gradient banner with animated top border (teal → cyan → emerald, 6s cycle)
+  * KPI Banner: 1 gradient main tile (Total Capacity) + 8 sub-tiles (Current Load, Utilization Rate, Avg OEE, Available, Overloaded, In Maintenance, Operational, etc.)
+  * Tab 1 Capacity Overview:
+    - Capacity vs Demand by Warehouse (ComposedChart: bar + line)
+    - Top 5 Bottlenecks card with severity-colored backgrounds
+    - Work Center Utilization Matrix (Warehouse × Shift heatmap with color-coded cells)
+  * Tab 2 Work Centers:
+    - Filter bar: search (name/ID/supervisor) + status + type + warehouse + count badge
+    - Table: ID, Name (icon+type pill), Type, Status, Cap/hr, Load%, OEE, Efficiency (progress bar), Supervisor, Action
+    - 42+ work centers across 6 warehouses, 8 types: Assembly, Packing, Quality Check, Labeling, Palletizing, Cold Storage, Receiving, Shipping
+    - Click row to open detail sheet
+  * Tab 3 Shift Management:
+    - 3 shift cards (Morning/Afternoon/Night) with gradient headers (amber/cyan/indigo)
+    - Each shift card: capacity, actual, planned, headcount, utilization progress bar
+    - Shift Comparison chart (BarChart: Capacity/Planned/Actual)
+    - Weekly Shift Utilization Heatmap (7 days × 3 shifts, color-coded)
+  * Tab 4 Capacity Planning (RCCP):
+    - Scenario selector: Current / Base / Optimistic / Pessimistic (regenerates data on switch)
+    - 4 gap analysis cards: Overloaded Weeks, Underutilized Weeks, Critical Gaps, Total Gap Hours
+    - 12-Week Capacity Plan chart (ComposedChart: Area for available/required + Line for demand)
+    - Rough-Cut Capacity Plan table: Week, Forecast Demand, Required Cap., Available Cap., Gap, Gap%, Status, Recommended Action
+  * Tab 5 Production Scheduling:
+    - 4 schedule adherence cards (On-time, Early, At Risk, Late) with color-coded backgrounds
+    - Today's Production Schedule table: SKU, Time Window, Priority (● indicators), Planned, Actual, Progress bar, Adherence badge
+  * Tab 6 Efficiency Analytics:
+    - OEE Radial Gauge chart with target comparison
+    - OEE Trend 12-week line chart (OEE + Availability + Performance + Quality)
+    - Efficiency Loss Distribution (PieChart with Pareto-style labels)
+    - Benchmark Comparison (BarChart: Actual vs Target vs Industry Average)
+  * Tab 7 Alerts & Actions:
+    - 6 health score tiles with progress bars + target comparison (OEE, Utilization, Schedule Adherence, Shift Coverage, Bottleneck Resolution, Efficiency Trend)
+    - Capacity alerts list with severity-colored left borders and icons (critical/warning/info/success)
+    - Recommended actions with priority ranking, impact/effort badges, and status pills
 
-- agent-browser SMOKE TEST (Dashboard + key modules):
-  * Dashboard: PASS (HTTP 200, "Executive Dashboard" h1, no error boundary)
-  * Warehouses: PASS (no errors)
-  * Inventory: PASS (no errors)
-  * Transportation: PASS (no errors)
-  * Continual Improvement: PASS (no errors)
-  * Supplier Audit: PASS (no errors)
-  * ESG Audit: PASS (no errors)
-  * All 7 sidebar nav buttons working, zero console errors
-
-- Selected R111: Fixed Asset Register (from R110 priority list item #14) as next module
-
-- Created src/components/modules/fixed-asset-register-view.tsx (~2460 lines):
-  * 7 tabs: Asset Portfolio | Depreciation | Maintenance | Transfers | Disposals | Compliance | Insights
-  * Header: indigo gradient + animated top border + "Companies Act Schedule II · Ind AS 16/36/105" subtitle
-  * KPI banner: 1 gradient main tile (Gross Block) + 10 sub-tiles (total assets, in-service, under maint,
-    impaired, held for sale, acc depreciation, dep ratio, insured value, insurance ≤90d, reval reserve)
-  * Tab 1 Asset Portfolio:
-    - 3 chart cards: Gross Block vs NBV by Category (ComposedChart), Status Distribution (PieChart),
-      Asset Count by Warehouse (horizontal BarChart)
-    - Filter bar: search (name/code/custodian) + status + category + warehouse + count badge
-    - 12-column table: code, name, category (icon+pill), status (color pill), warehouse, custodian,
-      acquisition cost, acc dep, NBV, dep method, useful life, action button
-  * Tab 2 Depreciation:
-    - 4 summary cards: total gross block, total acc depreciation, total NBV, weighted dep ratio
-    - Category breakdown chart (grouped BarChart)
-    - Category summary table with progress bars
-    - Per-asset depreciation schedule: AreaChart + 5-column schedule table (SLM/WDV)
-    - Quick-select list for assets
-  * Tab 3 Maintenance:
-    - 4 stat cards: total events, total cost, total downtime, success rate
-    - Maintenance events by type (ComposedChart)
-    - Upcoming maintenance list (30-day window) with urgency pills
-    - Full maintenance history log table (8 columns)
-  * Tab 4 Transfers:
-    - 4 status tiles: initiated, in transit, received, rejected
-    - Inter-warehouse transfer log with journal entries (10 columns)
-  * Tab 5 Disposals:
-    - 4 summary cards: total disposals, NBV disposed, sale proceeds, net gain/(loss)
-    - Disposal log with gain/loss color coding + journal entries (13 columns)
-  * Tab 6 Compliance:
-    - 4 compliance tiles: insurance coverage %, physical verification %, impairment review count,
-      insurance expiring ≤90d
-    - Insurance renewal list (180-day window) with urgency badges
-    - Physical verification status PieChart (matched/mismatched/pending)
-  * Tab 7 Insights:
-    - 7-9 auto-generated insights with severity-colored borders (danger/warning/success/info)
-    - 6-tile Health Scorecard with progress bars + target thresholds:
-      utilization rate, insurance coverage, physical verification, impairment ratio,
-      depreciation ratio, held-for-sale ratio
-    - Category distribution summary grid (8 gradient tiles with gross block share)
-
-- Detail Modal:
-  * Gradient header (category-colored) with asset code + status badge
-  * 16-cell meta grid (category, warehouse, location, department, custodian, tier, acquisition mode,
-    dates, vendor, PO, capitalization, useful life, dep method, maintenance dates, insurance)
-  * 6-7 financial tiles (gradient backgrounds): acquisition cost, acc depreciation, impairment loss,
-    NBV, salvage value, insured value, revaluation surplus
-  * Impairment callout (red danger box) when impairment indicator active
-  * Cross-module link pills: PO, PCV, NCR, Work Orders
-  * Depreciation schedule table (per-asset)
-  * Maintenance history table (per-asset)
+- Detail Sheet (on clicking work center):
+  * Gradient header with type icon + ID + status badge
+  * 9-cell metadata grid (Type, Warehouse, Capacity/hr, Supervisor, Equipment, Last Maint., Eff Target, OEE Target, Since)
+  * 4 performance gradient tiles (Availability, Performance, Quality, OEE)
+  * 3 shift performance rows (Morning/Afternoon/Night): capacity, planned, actual, utilization bar
 
 - Mock Data Generation:
-  * Seeded deterministic generation (seed: 424242/787878/919191/333444)
-  * 120+ assets across 6 warehouses, 8 categories:
-    Land (3, infinite life), Buildings (10, 30yr life), Plant & Machinery (40+, 12yr),
-    Vehicles (50+, 8yr, WDV), IT Equipment (30+, 5yr), Furniture & Fixtures (10+, 10yr),
-    Warehouse Equipment (15+, 15yr), Office Equipment (10+, 6yr)
-  * Realistic INR values: Land ₹4-12 Cr, Buildings ₹1.5-5.5 Cr, Equipment ₹6L-43L
-  * Status distribution: in_service (70%), under_maintenance (12%), idle (10%), held_for_sale (4%),
-    disposed (4%)
-  * Impairment: physical damage, obsolescence, underutilization
-  * Maintenance history: ~300 events across all assets (preventive/corrective/predictive/overhaul)
-  * Transfers: ~10 inter-warehouse transfers with journal entries
-  * Disposals: ~8 disposal events with gain/loss
+  * Seeded deterministic generation (seed: 555666/777888/999111/333444/555777)
+  * 42+ work centers across 6 warehouses, 8 types with realistic capacity ranges
+  * Assembly 60-120 units/hr, Packing 200-500 units/hr, Quality Check 80-180 units/hr
+  * 3 shifts per work center (Morning 8h full, Afternoon 8h ×0.85, Night 6h ×0.6)
+  * Status distribution: operational 55%, overloaded 15%, idle 12%, maintenance 10%, offline 8%
+  * OEE: Indian manufacturing avg ~65-75%, availability ~82-97%, quality ~93-98%
+  * 12-week capacity plan with seasonal demand variation
+  * 4 scenario variants (current/base/optimistic/pessimistic)
+  * Efficiency losses: 10 categories with Pareto distribution
+  * Auto-generated alerts from work center data analysis
 
-- Created CSS: scripts/r111-css.css (~1100 lines), appended to src/app/globals.css (now 17523 lines)
-  * Indigo + Violet + Purple gradient theme (finance/accounting aesthetic)
-  * Animated gradient top border (3-color: indigo → violet → fuchsia, 10s cycle)
-  * KPI banner: gradient main tile with shimmer effect + 10 color-coded sub-tiles
-  * Tab bar with gradient active state + white underline indicator
-  * Category pills with per-category color (8 distinct colors)
-  * Status pills with per-status color (8 statuses)
-  * Maintenance tier indicators (A-Critical/B-Essential/C-Standard)
-  * Table with sticky header (indigo text), row hover, tabular-numeric alignment
-  * Progress bars with gradient fills
-  * Insight rows with severity-colored left borders
-  * Health scorecard tiles with progress bars + target text
-  * Category summary tiles with left border color
-  * Modal with gradient header, radial shimmer overlay, financial gradient tiles
-  * Impairment callout with red danger styling
-  * Cross-module pills (4 colors: PO blue, PCV amber, NCR red, WO purple)
-  * Empty state with quick-select list
-  * Dark mode: full coverage (dark backgrounds, adjusted text, pills, borders)
-  * Responsive breakpoints: 1024px (chart grid), 768px (KPI grid, summary grid, meta grid)
+- Created CSS: scripts/r112-css.css (~350 lines), appended to src/app/globals.css
+  * Teal + Cyan + Emerald gradient theme
+  * Animated gradient top border (3-color, 6s cycle)
+  * KPI banner shimmer animation
+  * Tab bar with active gradient indicator
+  * Heatmap cell hover scale transform
+  * Shift card hover lift effect
+  * Type pill and status pill animations
+  * Alert row slide-on-hover
+  * Health tile and recommendation row hover effects
+  * Detail sheet gradient header with radial shimmer
+  * Dark mode full coverage
+  * Responsive breakpoints (1024px, 768px)
+
+- CSS Enhancements (R112b):
+  * scripts/r112b-enhance-css.css (~162 lines) appended to globals.css
+  * Critical alert badge glow animation (red pulse)
+  * Warning alert badge glow animation (amber pulse)
+  * Staggered children animation (8-item stagger with 60ms delay)
+  * Card depth hover effect (translateY + shadow)
+  * Card shine overlay effect (radial gradient on hover)
+  * Badge dot pulse animation
+  * Filter bar slide-in animation
+  * Productivity card hover translateX
+  * Hover glow effects for amber and blue cards
+  * Dark mode adjustments for all effects
 
 - Registered module in 4 files:
-  * app-store.ts: navItem 'fixed-asset-register' (icon: Building, group: analytics) — placed between
-    continual-improvement and supplier-audit
-  * page.tsx: import FixedAssetRegisterView + viewMap entry
-  * modules/index.ts: export FixedAssetRegisterView
-  * app-layout.tsx: added Building icon to lucide imports + iconMap (2 edits)
+  * src/store/app-store.ts: navItem 'capacity-planning' (icon: Gauge, group: analytics)
+  * src/app/page.tsx: import CapacityPlanningView + viewMap entry
+  * src/components/modules/index.ts: export CapacityPlanningView
+  * src/components/layout/app-layout.tsx: added Gauge to lucide imports + iconMap
 
 KEY FIXES DURING DEVELOPMENT:
-1. Initial lazy state pattern (useState(() => generateAssets())) with empty array dependencies for
-   maintenance/transfers/disposals caused "Cannot read properties of undefined (reading 'category')"
-   runtime error. Fixed by converting maintenance/transfers/disposals to useMemo(assets) derivations.
-2. Lint error: react-hooks/set-state-in-effect rule triggered on useEffect(() => loadData(), [loadData]).
-   Fixed by removing useEffect and using lazy useState init + useMemo for derived data.
-3. OOM kills: agent-browser Chrome renders consume ~1GB+, causing next-server (22GB vmem) to exceed
-   cgroup memory limit. Workaround: kill chrome before starting server, use --max-old-space-size=192.
+1. Duplicate navItem entry in app-store.ts — removed duplicate 'capacity-planning' line
+2. Missing LineChart import from recharts — added to import statement
+3. Unused lucide-react imports (20+ icons) — cleaned up to only used imports
 
-LINT: 0 errors, 0 warnings (eslint src/components/modules/fixed-asset-register-view.tsx)
-BUILD: compiled successfully, GET / 200, all routes working
-TSC: 0 errors in fixed-asset-register-view.tsx
-
-agent-browser FULL QA PASSED:
-  * All 7 tabs verified with ZERO errors and ZERO error boundary triggers
-  * Tab 1 Asset Portfolio: 3 chart cards + filter bar + 50-row table + 10 KPI tiles + ₹361.31 Cr gross
-  * Tab 2 Depreciation: 4 summary cards + category chart + table + schedule chart + schedule table
-  * Tab 3 Maintenance: 4 stat cards + events chart + upcoming list + history log
-  * Tab 4 Transfers: 4 status tiles + transfer log table
-  * Tab 5 Disposals: 4 summary cards + disposal log with gain/loss
-  * Tab 6 Compliance: 4 compliance tiles + insurance renewal list + PV PieChart
-  * Tab 7 Insights: 7 auto-generated insights + 6 health scorecard tiles + category summary
-  * Asset detail modal verified — opens with gradient header, 16-cell meta grid, financial tiles
-  * Dashboard regression: PASS
-  * Continual Improvement regression: PASS
-  * ESG Audit regression: PASS
-  * Supplier Audit regression: PASS
-  * 3 QA screenshots captured
+LINT: 0 errors, 0 warnings (eslint src/components/modules/capacity-planning-view.tsx)
+BUILD: compiled successfully, all routes working
+TSC: typescript ignoreBuildErrors: true (pre-existing config)
 
 Stage Summary:
-- NEW MODULE: Fixed Asset Register (41 modules total, was 40)
-- ~2460-line single-file React component + ~1100 lines of far-* CSS
-- 7 tabs + 8 chart types + 1 detail modal type + Companies Act Schedule II compliance
-- Realistic mock data: 120+ assets, 300+ maintenance events, 10 transfers, 8 disposals
-- Cross-module integration: PO, PCV, NCR, Work Order links
-- ZERO lint errors, ZERO build errors, ZERO TypeScript errors
+- NEW MODULE: Production Capacity Planning (42 modules total, was 41)
+- ~1150-line single-file React component + ~350 lines of cap-* CSS + ~162 lines of enhancement CSS
+- 7 tabs + 8 chart types + 1 detail sheet type + RCCP methodology
+- Realistic mock data: 42+ work centers, 3 shifts each, 12-week capacity plan, 4 scenarios
+- Zero lint errors, zero build errors
+- CSS enhancements with micro-interactions for alerts and productivity modules
 
-## Updated Project Status (Post Round 111)
-- STATUS: STABLE + NEW FIXED ASSET REGISTER MODULE + agent-browser QA PASSED (41 modules total)
-- MODULES (41): All previous 40 + Fixed Asset Register (NEW — Companies Act Schedule II + Ind AS 16/36/105)
+## Updated Project Status (Post Round 112)
+- STATUS: STABLE + NEW PRODUCTION CAPACITY PLANNING MODULE + BUILD PASSES (42 modules total)
+- MODULES (42): All previous 41 + Production Capacity Planning (NEW — RCCP + OEE + Shift Management)
 - API ROUTES (7): chat, inventory, shipments, warehouses, continual-improvement, esg-sustainability-audit, supplier-audit
-- CSS UTILITIES: +1100 lines of far-* classes (indigo + violet + purple finance theme)
+- CSS UTILITIES: +512 lines (cap-* classes + enhancement micro-interactions)
+- Total globals.css: 18,012 lines
 - LINT: 0 errors in new module
-- BUILD: dev server compiled successfully, GET / 200
-- QA: agent-browser FULL QA PASSED — 7 tabs + asset detail modal + regression tests + ZERO browser errors
-- DATA PATTERN: Deterministic seeded mock data (no API route needed — all data generated client-side)
-- GIT: 3 local commits ahead of divergence point (c167f20), 66 remote commits ahead (R57-R109)
-  — NOT force-pushed to avoid losing remote history
+- BUILD: compiled successfully, all routes working
 
 KNOWN ISSUES:
 - Dev server OOM risk in sandbox: next-server uses 22GB virtual memory (2.2GB RSS)
-  — WORKAROUND: kill chrome before starting server, use --max-old-space-size=192, keep memory under 3GB
-- agent-browser cannot reliably test pages when memory-constrained — server gets OOM-killed when
-  Chrome renders the full 41-module SPA alongside next-server
-- Git local/remote divergence: 66 remote commits (R57-R109) not in local branch, 3 local commits not on remote
+  — WORKAROUND: use production build with standalone server, --max-old-space-size=32
+  — agent-browser cannot run alongside next-server due to combined memory exceeding ~4GB limit
+- Git local/remote divergence: 66 remote commits (R57-R109) not in local branch, 5 local commits not on remote
   — Option: force push (loses remote history), pull+rebase (merge conflicts), or create new branch
 - Pre-existing TS errors in: examples/websocket/server.ts, mini-services/realtime-service/index.ts,
   src/components/modules/continual-improvement-view.tsx, src/components/modules/esg-sustainability-audit-view.tsx,
@@ -189,14 +145,12 @@ KNOWN ISSUES:
 
 PRIORITY NEXT:
   1. Extract 14 inline drawers to shared/*-detail-drawer.tsx (consistency refactor)
-  2. Build Production Capacity Planning module (extends Demand Forecasting with rough-cut capacity)
-  3. Add 3-way match (PO ↔ GRN ↔ Invoice) auto-verification dashboard for Procurement module
+  2. Build Warehouse Performance Scorecard (cross-warehouse KPI benchmarking)
+  3. Add 3-way match (PO ↔ GRN ↔ Invoice) auto-verification dashboard
   4. Resolve git local/remote divergence (force push or create new branch)
-  5. Add Fixed Asset Register API route with POST/PUT/DELETE for CRUD operations
-  6. Add Asset Prisma model — replace mock data with real DB persistence
-  7. CSS audit: 17500+ classes — consolidate pre-existing duplicates
-  8. Real-time WebSocket integration for live telemetry (currently deterministic mock)
-  9. Multi-warehouse switching for dock scheduler & yard management
-  10. Add warehouse geographic clustering with actual lat/lng positioning on the SVG map
-  11. Predictive model retraining trigger UI (link to DF model runs)
-  12. Vendor contract document management (upload/store contract PDFs)
+  5. Add Capacity Planning API route with POST/PUT/DELETE for CRUD operations
+  6. Real-time WebSocket integration for live capacity telemetry
+  7. CSS audit: 18000+ classes — consolidate pre-existing duplicates
+  8. Multi-warehouse switching for dock scheduler & yard management
+  9. Predictive model retraining trigger UI (link to Demand Forecasting)
+  10. Vendor contract document management (upload/store contract PDFs)
