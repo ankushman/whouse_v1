@@ -37,6 +37,7 @@ export const navItems: NavItem[] = [
   { id: 'esg-sustainability-audit', label: 'ESG Audit', icon: 'Globe', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'continual-improvement', label: 'Continual Improvement', icon: 'Rocket', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'fixed-asset-register', label: 'Fixed Assets', icon: 'Building', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
+  { id: 'capacity-planning', label: 'Capacity Planning', icon: 'Gauge', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'supplier-audit', label: 'Supplier Audit', icon: 'FileSearch', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'compliance-audit', label: 'Compliance & Audit', icon: 'ShieldCheck', group: 'system', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'alerts', label: 'Alerts', icon: 'Bell', badge: 5, group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },

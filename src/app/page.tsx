@@ -47,6 +47,7 @@ import { ContinualImprovementView } from "@/components/modules/continual-improve
 import { FixedAssetRegisterView } from "@/components/modules/fixed-asset-register-view"
 import { SupplierAuditView } from "@/components/modules/supplier-audit-view"
 import { ESGSustainabilityAuditView } from "@/components/modules/esg-sustainability-audit-view"
+import { CapacityPlanningView } from "@/components/modules/capacity-planning-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -94,6 +95,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "fixed-asset-register": FixedAssetRegisterView,
   "supplier-audit": SupplierAuditView,
   "esg-sustainability-audit": ESGSustainabilityAuditView,
+  "capacity-planning": CapacityPlanningView,
   "shift-handover": ShiftHandoverView,
 }
 

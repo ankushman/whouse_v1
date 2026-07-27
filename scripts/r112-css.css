@@ -1,0 +1,327 @@
+/* ============================================================================
+ * R112: Production Capacity Planning — CSS
+ * Theme: Teal + Cyan + Emerald gradient (manufacturing/operations aesthetic)
+ * ============================================================================ */
+
+/* Header */
+.cap-root {
+  animation: capFadeIn 0.3s ease-out;
+}
+@keyframes capFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cap-header {
+  position: relative;
+  overflow: hidden;
+}
+.cap-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #14b8a6, #06b6d4, #10b981, #14b8a6);
+  background-size: 200% 100%;
+  animation: capGradientSlide 6s ease infinite;
+}
+@keyframes capGradientSlide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.cap-header-title {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.cap-header-subtitle {
+  letter-spacing: 0.02em;
+}
+
+/* KPI Banner */
+.cap-kpi-banner {
+  animation: capSlideUp 0.4s ease-out;
+}
+@keyframes capSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cap-kpi-main {
+  position: relative;
+  overflow: hidden;
+}
+.cap-kpi-shimmer {
+  animation: capShimmer 3s ease-in-out infinite;
+}
+@keyframes capShimmer {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(100%); opacity: 1; }
+}
+
+.cap-kpi-tile {
+  transition: all 0.2s ease;
+}
+.cap-kpi-tile:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
+  border-color: rgba(13, 148, 136, 0.3);
+}
+.cap-kpi-label {
+  letter-spacing: 0.05em;
+}
+.cap-kpi-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tab Bar */
+.cap-tab-bar {
+  scrollbar-width: thin;
+}
+.cap-tab-item {
+  position: relative;
+  transition: all 0.2s ease;
+}
+.cap-tab-item:hover {
+  background-color: hsl(var(--muted) / 0.5);
+}
+.cap-tab-active {
+  font-weight: 600;
+}
+
+/* Tab Content */
+.cap-tab-content {
+  animation: capTabFade 0.25s ease-out;
+}
+@keyframes capTabFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Overview Tab */
+.cap-chart-card,
+.cap-bottleneck-card,
+.cap-heatmap-card {
+  transition: box-shadow 0.2s ease;
+}
+.cap-chart-card:hover,
+.cap-bottleneck-card:hover,
+.cap-heatmap-card:hover {
+  box-shadow: 0 4px 16px rgba(13, 148, 136, 0.08);
+}
+
+.cap-bottleneck-item {
+  transition: background-color 0.15s ease;
+}
+.cap-bottleneck-item:hover {
+  filter: brightness(0.97);
+}
+.cap-bottleneck-rank {
+  font-variant-numeric: tabular-nums;
+}
+
+.cap-heatmap-th {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.cap-heatmap-cell {
+  font-variant-numeric: tabular-nums;
+  min-width: 52px;
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+.cap-heatmap-cell:hover {
+  transform: scale(1.05);
+}
+
+/* Work Centers Tab */
+.cap-filter-bar {
+  animation: capSlideUp 0.3s ease-out;
+}
+
+.cap-table-th {
+  color: #0d9488;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+  padding: 10px 12px;
+}
+[data-theme="dark"] .cap-table-th {
+  color: #5eead4;
+}
+
+.cap-table-row {
+  transition: background-color 0.15s ease;
+}
+
+.cap-type-pill {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  transition: transform 0.15s ease;
+}
+.cap-type-pill:hover {
+  transform: scale(1.05);
+}
+
+.cap-status-pill {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  animation: capPulse 2s ease-in-out infinite;
+}
+@keyframes capPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Shifts Tab */
+.cap-shift-card {
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+.cap-shift-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.12);
+}
+.cap-shift-card-header {
+  position: relative;
+  overflow: hidden;
+}
+.cap-shift-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Planning Tab */
+.cap-gap-card {
+  transition: all 0.2s ease;
+}
+.cap-gap-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
+}
+
+/* Scheduling Tab */
+.cap-scheduling .cap-schedule-row {
+  transition: background-color 0.15s ease;
+}
+
+/* Efficiency Tab */
+.cap-efficiency .cap-perf-tile {
+  transition: transform 0.2s ease;
+}
+.cap-efficiency .cap-perf-tile:hover {
+  transform: scale(1.03);
+}
+
+/* Alerts Tab */
+.cap-alert-row {
+  transition: all 0.2s ease;
+}
+.cap-alert-row:hover {
+  filter: brightness(0.97);
+  transform: translateX(2px);
+}
+
+.cap-health-tile {
+  transition: all 0.2s ease;
+}
+.cap-health-tile:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
+}
+
+.cap-rec-row {
+  transition: all 0.2s ease;
+}
+.cap-rec-row:hover {
+  border-color: rgba(13, 148, 136, 0.3);
+  background-color: hsl(var(--muted) / 0.3);
+}
+
+.cap-rec-priority {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Detail Sheet */
+.cap-detail-sheet {
+  scrollbar-width: thin;
+}
+
+.cap-detail-header {
+  position: relative;
+  overflow: hidden;
+}
+.cap-detail-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at top right, rgba(255,255,255,0.15), transparent 60%);
+}
+
+.cap-meta-cell {
+  transition: background-color 0.15s ease;
+}
+.cap-meta-cell:hover {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
+.cap-shift-detail {
+  transition: all 0.15s ease;
+}
+.cap-shift-detail:hover {
+  background-color: hsl(var(--muted) / 0.4);
+  border-color: rgba(13, 148, 136, 0.3);
+}
+
+/* Empty State */
+.cap-empty-state {
+  animation: capFadeIn 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .cap-kpi-banner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cap-kpi-banner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cap-kpi-main {
+    grid-column: span 2;
+  }
+  .cap-detail-meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Dark Mode */
+.dark .cap-header {
+  border-color: rgba(13, 148, 136, 0.3);
+}
+.dark .cap-kpi-tile {
+  border-color: rgba(13, 148, 136, 0.2);
+}
+.dark .cap-shift-card {
+  border-color: rgba(6, 182, 212, 0.2);
+}
+.dark .cap-table-row:hover {
+  background-color: rgba(13, 148, 136, 0.05);
+}
+.dark .cap-heatmap-cell {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
