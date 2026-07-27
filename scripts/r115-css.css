@@ -1,0 +1,324 @@
+/* ============================================================================
+   R115: Vendor Contract Management — vcm-* classes
+   Theme: Amber + Red + Pink gradient (document/legal aesthetic)
+   ============================================================================ */
+
+.vcm-container { animation: vcm-fadeIn 0.4s ease-out; }
+@keyframes vcm-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header */
+.vcm-header {
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #ec4899 100%);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.vcm-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #fbbf24, #f87171, #f472b6, #fbbf24);
+  background-size: 200% 100%;
+  animation: vcm-gradientSlide 6s linear infinite;
+}
+@keyframes vcm-gradientSlide {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.vcm-header-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vcm-header-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+}
+
+/* Tabs */
+.vcm-tab-bar { margin-top: 12px; }
+.vcm-tab {
+  padding: 8px 16px;
+  border-radius: 8px 8px 0 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  position: relative;
+}
+.vcm-tab:hover { color: #f59e0b; background: rgba(245, 158, 11, 0.05); }
+.vcm-tab.active {
+  color: #f59e0b;
+  background: white;
+  box-shadow: 0 -2px 8px rgba(245, 158, 11, 0.1);
+  font-weight: 600;
+}
+.vcm-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #f59e0b, #ec4899);
+  border-radius: 2px 2px 0 0;
+}
+
+/* KPI Cards */
+.vcm-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+@media (max-width: 1280px) { .vcm-kpi-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .vcm-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.vcm-kpi-card {
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: white;
+}
+.vcm-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.vcm-kpi-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.vcm-kpi-amber { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.vcm-kpi-green { background: linear-gradient(135deg, #22c55e, #16a34a); }
+.vcm-kpi-orange { background: linear-gradient(135deg, #f97316, #ea580c); }
+.vcm-kpi-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.vcm-kpi-pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+.vcm-kpi-rose { background: linear-gradient(135deg, #f43f5e, #e11d48); }
+
+/* Chart Cards */
+.vcm-chart-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: white;
+  transition: box-shadow 0.2s;
+}
+.vcm-chart-card:hover { box-shadow: 0 4px 12px rgba(245, 158, 11, 0.06); }
+
+/* Search & Filter */
+.vcm-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.vcm-search-box:focus-within { border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); }
+.vcm-search-input { border: none; background: transparent; outline: none; font-size: 13px; width: 160px; color: #1f2937; }
+.vcm-search-input::placeholder { color: #9ca3af; }
+.vcm-filter-select {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #374151;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.vcm-filter-select:hover { border-color: #f59e0b; }
+.vcm-filter-select option { color: #1f2937; background: white; }
+
+/* Table */
+.vcm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.vcm-table th {
+  padding: 10px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  border-bottom: 2px solid #e5e7eb;
+  background: #fafafa;
+  white-space: nowrap;
+}
+.vcm-table td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; }
+.vcm-table-row { cursor: pointer; transition: background 0.15s; }
+.vcm-table-row:hover { background: #fffbeb; }
+
+/* Score Badge */
+.vcm-score-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 24px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: monospace;
+}
+.vcm-score-green { background: #dcfce7; color: #166534; }
+.vcm-score-amber { background: #fef3c7; color: #92400e; }
+.vcm-score-red { background: #fee2e2; color: #991b1b; }
+
+/* Vendor Cards */
+.vcm-vendor-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.vcm-vendor-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f59e0b, #ec4899);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.vcm-vendor-card:hover { border-color: #fbbf24; box-shadow: 0 8px 24px rgba(245, 158, 11, 0.12); transform: translateY(-2px); }
+.vcm-vendor-card:hover::before { opacity: 1; }
+
+.vcm-vendor-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fef3c7, #fce7f3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #b45309;
+}
+.vcm-vendor-stat {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* Compliance Card */
+.vcm-compliance-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.2s;
+}
+.vcm-compliance-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
+
+/* Detail Header */
+.vcm-detail-header {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  border-radius: 12px;
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.vcm-detail-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #fbbf24, #f87171, #f472b6, #fbbf24);
+  background-size: 200% 100%;
+  animation: vcm-gradientSlide 6s linear infinite;
+}
+.vcm-detail-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Document Items */
+.vcm-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  transition: all 0.2s;
+  cursor: default;
+}
+.vcm-doc-item:hover { border-color: #f59e0b; background: #fffbeb; transform: translateX(2px); }
+
+/* Amendments */
+.vcm-amendments-card { border-left: 4px solid #f97316; }
+.vcm-amendment-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.vcm-amendment-item:hover { border-color: #f97316; background: #fff7ed; transform: translateX(2px); }
+
+/* Dark Mode */
+.dark .vcm-tab.active { color: #fbbf24; background: #1e1b2e; box-shadow: 0 -2px 8px rgba(245, 158, 11, 0.15); }
+.dark .vcm-tab.active::after { background: linear-gradient(90deg, #f59e0b, #ec4899); }
+.dark .vcm-chart-card { background: #1e1b2e; border-color: #374151; }
+.dark .vcm-vendor-card { background: #1e1b2e; border-color: #374151; }
+.dark .vcm-vendor-card:hover { border-color: #f59e0b; }
+.dark .vcm-vendor-stat { background: rgba(255,255,255,0.05); }
+.dark .vcm-vendor-avatar { background: linear-gradient(135deg, #422006, #831843); color: #fbbf24; }
+.dark .vcm-search-box { background: #1e1b2e; border-color: #374151; }
+.dark .vcm-search-input { color: #e5e7eb; }
+.dark .vcm-filter-select { background: #1e1b2e; border-color: #374151; color: #e5e7eb; }
+.dark .vcm-table th { background: #1e1b2e; color: #9ca3af; border-bottom-color: #374151; }
+.dark .vcm-table td { border-bottom-color: #374151; }
+.dark .vcm-table-row:hover { background: rgba(245, 158, 11, 0.08); }
+.dark .vcm-score-green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+.dark .vcm-score-amber { background: rgba(234, 179, 8, 0.15); color: #facc15; }
+.dark .vcm-score-red { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+.dark .vcm-compliance-card { background: #1e1b2e; border-color: #374151; }
+.dark .vcm-doc-item { background: transparent; border-color: #374151; }
+.dark .vcm-doc-item:hover { background: rgba(245, 158, 11, 0.05); border-color: #f59e0b; }
+.dark .vcm-amendments-card { background: #1e1b2e; border-color: #422006; }
+.dark .vcm-amendment-item { background: transparent; border-color: #374151; }
+.dark .vcm-amendment-item:hover { background: rgba(249, 115, 22, 0.05); border-color: #f97316; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .vcm-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+}

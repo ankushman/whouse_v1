@@ -41,6 +41,7 @@ export const navItems: NavItem[] = [
   { id: 'supplier-audit', label: 'Supplier Audit', icon: 'FileSearch', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'warehouse-performance-scorecard', label: 'WH Performance', icon: 'Medal', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'three-way-match', label: '3-Way Match', icon: 'GitCompareArrows', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
+  { id: 'vendor-contract-mgmt', label: 'Vendor Contracts', icon: 'FileText', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'compliance-audit', label: 'Compliance & Audit', icon: 'ShieldCheck', group: 'system', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'alerts', label: 'Alerts', icon: 'Bell', badge: 5, group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'dock-scheduler', label: 'Dock Scheduling', icon: 'LayoutGrid', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },

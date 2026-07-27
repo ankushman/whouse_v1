@@ -50,6 +50,7 @@ import { ESGSustainabilityAuditView } from "@/components/modules/esg-sustainabil
 import { CapacityPlanningView } from "@/components/modules/capacity-planning-view"
 import { WarehousePerformanceScorecardView } from "@/components/modules/warehouse-performance-scorecard-view"
 import { ThreeWayMatchDashboardView } from "@/components/modules/three-way-match-dashboard-view"
+import { VendorContractManagementView } from "@/components/modules/vendor-contract-management-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -100,6 +101,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "capacity-planning": CapacityPlanningView,
   "warehouse-performance-scorecard": WarehousePerformanceScorecardView,
   "three-way-match": ThreeWayMatchDashboardView,
+  "vendor-contract-mgmt": VendorContractManagementView,
   "shift-handover": ShiftHandoverView,
 }
 
