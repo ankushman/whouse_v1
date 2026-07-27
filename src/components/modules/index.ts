@@ -46,6 +46,7 @@ export { default as CrossDockTransshipmentView } from './cross-dock-transshipmen
 export { default as ColdChainTemperatureView } from './cold-chain-temperature-view'
 export { default as ContainerFreightStationView } from './container-freight-station-view'
 export { default as HazmatDangerousGoodsView } from './hazmat-dangerous-goods-view'
+export { default as SerialNumberTrackingView } from './serial-number-tracking-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.
