@@ -54,6 +54,7 @@ import { VendorContractManagementView } from "@/components/modules/vendor-contra
 import { SafetyIncidentManagementView } from "@/components/modules/safety-incident-management-view"
 import { FleetMaintenanceManagementView } from "@/components/modules/fleet-maintenance-management-view"
 import { CargoDamageClaimsView } from "@/components/modules/cargo-damage-claims-view"
+import CrossDockTransshipmentView from "@/components/modules/cross-dock-transshipment-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -108,6 +109,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "safety-incident-mgmt": SafetyIncidentManagementView,
   "fleet-maintenance": FleetMaintenanceManagementView,
   "cargo-damage-claims": CargoDamageClaimsView,
+  "cross-dock-transshipment": CrossDockTransshipmentView,
   "shift-handover": ShiftHandoverView,
 }
 
