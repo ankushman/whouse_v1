@@ -62,6 +62,7 @@ import SerialNumberTrackingView from "@/components/modules/serial-number-trackin
 import EcommerceFulfillmentView from "@/components/modules/ecommerce-fulfillment-view"
 import LaborManagementView from "@/components/modules/labor-management-view"
 import PackagingStandardsView from "@/components/modules/packaging-standards-view"
+import SlottingOptimizationView from "@/components/modules/slotting-optimization-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -124,6 +125,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "ecommerce-fulfillment": EcommerceFulfillmentView,
   "labor-management": LaborManagementView,
   "packaging-standards": PackagingStandardsView,
+  "slotting-optimization": SlottingOptimizationView,
   "shift-handover": ShiftHandoverView,
 }
 

@@ -26698,3 +26698,375 @@ html.theme-transition body {
   .pkg-info-grid { grid-template-columns: 1fr; }
   .pkg-filter-bar { flex-direction: column; }
 }
+/* ============================================================
+   R127: Slotting Optimization & Bin Assignment Management
+   Theme: Purple + Orange + Teal (#8b5cf6, #f97316, #14b8a6)
+   Prefix: slot-*
+   ============================================================ */
+
+/* --- Animated Gradient Top Border (Purple → Orange → Teal, 6s) --- */
+.slot-header-banner {
+  position: relative;
+  background: linear-gradient(135deg, #f5f3ff 0%, #fff7ed 50%, #f0fdfa 100%);
+  border-radius: 16px;
+  padding: 24px 28px 20px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+.slot-header-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8b5cf6, #f97316, #14b8a6, #8b5cf6);
+  background-size: 300% 100%;
+  animation: slotGradientShift 6s ease infinite;
+}
+@keyframes slotGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- Dark Mode Header --- */
+:is(.dark .slot-header-banner) {
+  background: linear-gradient(135deg, rgba(139,92,246,0.08) 0%, rgba(249,115,22,0.08) 50%, rgba(20,184,166,0.08) 100%);
+  border-color: rgba(139, 92, 246, 0.15);
+}
+
+/* --- KPI Cards --- */
+.slot-kpi-card {
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.slot-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.slot-kpi-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+.slot-kpi-purple { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); }
+.slot-kpi-purple::after { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.slot-kpi-orange { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); }
+.slot-kpi-orange::after { background: linear-gradient(90deg, #f97316, #fb923c); }
+.slot-kpi-teal { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
+.slot-kpi-teal::after { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+.slot-kpi-rose { background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%); }
+.slot-kpi-rose::after { background: linear-gradient(90deg, #f43f5e, #fb7185); }
+.slot-kpi-sky { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); }
+.slot-kpi-sky::after { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+.slot-kpi-lime { background: linear-gradient(135deg, #f7fee7 0%, #ecfccb 100%); }
+.slot-kpi-lime::after { background: linear-gradient(90deg, #84cc16, #a3e635); }
+
+/* Dark KPI */
+:is(.dark .slot-kpi-purple) { background: linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(139,92,246,0.05) 100%); }
+:is(.dark .slot-kpi-orange) { background: linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(249,115,22,0.05) 100%); }
+:is(.dark .slot-kpi-teal) { background: linear-gradient(135deg, rgba(20,184,166,0.1) 0%, rgba(20,184,166,0.05) 100%); }
+:is(.dark .slot-kpi-rose) { background: linear-gradient(135deg, rgba(244,63,94,0.1) 0%, rgba(244,63,94,0.05) 100%); }
+:is(.dark .slot-kpi-sky) { background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(14,165,233,0.05) 100%); }
+:is(.dark .slot-kpi-lime) { background: linear-gradient(135deg, rgba(132,204,22,0.1) 0%, rgba(132,204,22,0.05) 100%); }
+
+/* --- Zone Badges --- */
+.slot-badge-zone-a { background: #fef3c7; color: #92400e; border: 1px solid #fbbf24; }
+.slot-badge-zone-b { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+.slot-badge-zone-c { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+.slot-badge-zone-d { background: #fce7f3; color: #9d174d; border: 1px solid #f9a8d4; }
+.slot-badge-zone-e { background: #f5f3ff; color: #6d28d9; border: 1px solid #c4b5fd; }
+.slot-badge-zone-f { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+:is(.dark .slot-badge-zone-a) { background: rgba(245,158,11,0.15); color: #fbbf24; border-color: rgba(245,158,11,0.3); }
+:is(.dark .slot-badge-zone-b) { background: rgba(59,130,246,0.15); color: #93c5fd; border-color: rgba(59,130,246,0.3); }
+:is(.dark .slot-badge-zone-c) { background: rgba(100,116,139,0.15); color: #cbd5e1; border-color: rgba(100,116,139,0.3); }
+:is(.dark .slot-badge-zone-d) { background: rgba(236,72,153,0.15); color: #f9a8d4; border-color: rgba(236,72,153,0.3); }
+:is(.dark .slot-badge-zone-e) { background: rgba(139,92,246,0.15); color: #c4b5fd; border-color: rgba(139,92,246,0.3); }
+:is(.dark .slot-badge-zone-f) { background: rgba(34,197,94,0.15); color: #86efac; border-color: rgba(34,197,94,0.3); }
+
+/* --- ABC Classification Badges --- */
+.slot-badge-abc-a { background: #fef3c7; color: #92400e; font-weight: 700; }
+.slot-badge-abc-b { background: #dbeafe; color: #1e40af; font-weight: 700; }
+.slot-badge-abc-c { background: #f1f5f9; color: #334155; font-weight: 700; }
+:is(.dark .slot-badge-abc-a) { background: rgba(245,158,11,0.15); color: #fbbf24; }
+:is(.dark .slot-badge-abc-b) { background: rgba(59,130,246,0.15); color: #93c5fd; }
+:is(.dark .slot-badge-abc-c) { background: rgba(100,116,139,0.15); color: #cbd5e1; }
+
+/* --- Bin Status Badges --- */
+.slot-badge-occupied { background: #dbeafe; color: #1e40af; }
+.slot-badge-partial { background: #fef3c7; color: #92400e; }
+.slot-badge-empty { background: #dcfce7; color: #166534; }
+.slot-badge-reserved { background: #f5f3ff; color: #6d28d9; }
+.slot-badge-maintenance { background: #fee2e2; color: #991b1b; }
+.slot-badge-quarantine { background: #fce7f3; color: #9d174d; }
+:is(.dark .slot-badge-occupied) { background: rgba(59,130,246,0.15); color: #93c5fd; }
+:is(.dark .slot-badge-partial) { background: rgba(245,158,11,0.15); color: #fbbf24; }
+:is(.dark .slot-badge-empty) { background: rgba(34,197,94,0.15); color: #86efac; }
+:is(.dark .slot-badge-reserved) { background: rgba(139,92,246,0.15); color: #c4b5fd; }
+:is(.dark .slot-badge-maintenance) { background: rgba(239,68,68,0.15); color: #fca5a5; }
+:is(.dark .slot-badge-quarantine) { background: rgba(236,72,153,0.15); color: #f9a8d4; }
+
+/* --- Reassignment Status Badges --- */
+.slot-badge-reassign-pending { background: #fef3c7; color: #92400e; }
+.slot-badge-reassign-scheduled { background: #dbeafe; color: #1e40af; }
+.slot-badge-reassign-completed { background: #dcfce7; color: #166534; }
+.slot-badge-reassign-overdue { background: #fee2e2; color: #991b1b; animation: slotOverduePulse 1.5s ease-in-out infinite; }
+@keyframes slotOverduePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+:is(.dark .slot-badge-reassign-pending) { background: rgba(245,158,11,0.15); color: #fbbf24; }
+:is(.dark .slot-badge-reassign-scheduled) { background: rgba(59,130,246,0.15); color: #93c5fd; }
+:is(.dark .slot-badge-reassign-completed) { background: rgba(34,197,94,0.15); color: #86efac; }
+:is(.dark .slot-badge-reassign-overdue) { background: rgba(239,68,68,0.15); color: #fca5a5; }
+
+/* --- Ergonomic Level Badges --- */
+.slot-badge-optimal { background: #dcfce7; color: #166534; }
+.slot-badge-acceptable { background: #fef3c7; color: #92400e; }
+.slot-badge-strained { background: #fee2e2; color: #991b1b; animation: slotStrainedPulse 2s ease-in-out infinite; }
+@keyframes slotStrainedPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+:is(.dark .slot-badge-optimal) { background: rgba(34,197,94,0.15); color: #86efac; }
+:is(.dark .slot-badge-acceptable) { background: rgba(245,158,11,0.15); color: #fbbf24; }
+:is(.dark .slot-badge-strained) { background: rgba(239,68,68,0.15); color: #fca5a5; }
+
+/* --- Priority Badges --- */
+.slot-badge-high-pri { background: #fee2e2; color: #991b1b; font-weight: 600; }
+.slot-badge-medium-pri { background: #fef3c7; color: #92400e; }
+.slot-badge-low-pri { background: #dcfce7; color: #166534; }
+:is(.dark .slot-badge-high-pri) { background: rgba(239,68,68,0.15); color: #fca5a5; }
+:is(.dark .slot-badge-medium-pri) { background: rgba(245,158,11,0.15); color: #fbbf24; }
+:is(.dark .slot-badge-low-pri) { background: rgba(34,197,94,0.15); color: #86efac; }
+
+/* --- Bin Visual Grid --- */
+.slot-bin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 6px;
+}
+.slot-bin-cell {
+  border-radius: 8px;
+  padding: 8px 6px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 1px solid rgba(0,0,0,0.08);
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.slot-bin-cell:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  z-index: 2;
+}
+.slot-bin-occupied { background: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+.slot-bin-partial { background: #fef3c7; color: #92400e; border-color: #fbbf24; }
+.slot-bin-empty { background: #dcfce7; color: #166534; border-color: #86efac; }
+.slot-bin-reserved { background: #f5f3ff; color: #6d28d9; border-color: #c4b5fd; }
+.slot-bin-maintenance { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+:is(.dark .slot-bin-occupied) { background: rgba(59,130,246,0.12); color: #93c5fd; border-color: rgba(59,130,246,0.25); }
+:is(.dark .slot-bin-partial) { background: rgba(245,158,11,0.12); color: #fbbf24; border-color: rgba(245,158,11,0.25); }
+:is(.dark .slot-bin-empty) { background: rgba(34,197,94,0.12); color: #86efac; border-color: rgba(34,197,94,0.25); }
+:is(.dark .slot-bin-reserved) { background: rgba(139,92,246,0.12); color: #c4b5fd; border-color: rgba(139,92,246,0.25); }
+:is(.dark .slot-bin-maintenance) { background: rgba(239,68,68,0.12); color: #fca5a5; border-color: rgba(239,68,68,0.25); }
+
+/* --- Progress Bars --- */
+.slot-progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+.slot-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease;
+}
+.slot-progress-purple { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.slot-progress-orange { background: linear-gradient(90deg, #f97316, #fb923c); }
+.slot-progress-teal { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+.slot-progress-green { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.slot-progress-amber { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.slot-progress-red { background: linear-gradient(90deg, #ef4444, #f87171); }
+.slot-progress-rose { background: linear-gradient(90deg, #f43f5e, #fb7185); }
+:is(.dark .slot-progress-bar) { background: #374151; }
+
+/* --- Heatmap cell (for pick frequency) --- */
+.slot-heat-0 { background: #f0fdf4; border-color: #86efac; }
+.slot-heat-1 { background: #dcfce7; border-color: #4ade80; }
+.slot-heat-2 { background: #fef08a; border-color: #facc15; }
+.slot-heat-3 { background: #fed7aa; border-color: #fb923c; }
+.slot-heat-4 { background: #fecaca; border-color: #f87171; }
+:is(.dark .slot-heat-0) { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2); }
+:is(.dark .slot-heat-1) { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3); }
+:is(.dark .slot-heat-2) { background: rgba(234,179,8,0.15); border-color: rgba(234,179,8,0.3); }
+:is(.dark .slot-heat-3) { background: rgba(249,115,22,0.15); border-color: rgba(249,115,22,0.3); }
+:is(.dark .slot-heat-4) { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); }
+
+/* --- Filter Bar --- */
+.slot-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 16px;
+}
+:is(.dark .slot-filter-bar) {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Data Table --- */
+.slot-data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.slot-data-table thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+.slot-data-table tbody td {
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #1f2937;
+}
+.slot-data-table tbody tr:hover { background: #f9fafb; }
+.slot-data-table tbody tr:last-child td { border-bottom: none; }
+:is(.dark .slot-data-table thead th) { background: #0f172a; color: #9ca3af; border-bottom-color: #374151; }
+:is(.dark .slot-data-table tbody td) { color: #e5e7eb; border-bottom-color: #1f2937; }
+:is(.dark .slot-data-table tbody tr:hover) { background: #1e293b; }
+
+/* --- Section Cards --- */
+.slot-section-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+:is(.dark .slot-section-card) {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Drawer --- */
+.slot-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  animation: slotFadeIn 0.2s ease;
+}
+.slot-drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 520px;
+  background: white;
+  z-index: 51;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+  animation: slotSlideIn 0.3s ease;
+}
+:is(.dark .slot-drawer-panel) {
+  background: #1e293b;
+  box-shadow: -8px 0 30px rgba(0, 0, 0, 0.4);
+}
+@keyframes slotFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slotSlideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+/* --- Drawer Info Grid --- */
+.slot-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.slot-info-item {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+}
+:is(.dark .slot-info-item) {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* --- Ergonomic Zone Strips --- */
+.slot-ergo-strip {
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.slot-ergo-floor { background: #fee2e2; color: #991b1b; }
+.slot-ergo-low { background: #fed7aa; color: #9a3412; }
+.slot-ergo-golden { background: #dcfce7; color: #166534; }
+.slot-ergo-high { background: #fef08a; color: #854d0e; }
+.slot-ergo-top { background: #fee2e2; color: #991b1b; }
+:is(.dark .slot-ergo-floor) { background: rgba(239,68,68,0.15); color: #fca5a5; }
+:is(.dark .slot-ergo-low) { background: rgba(249,115,22,0.15); color: #fdba74; }
+:is(.dark .slot-ergo-golden) { background: rgba(34,197,94,0.15); color: #86efac; }
+:is(.dark .slot-ergo-high) { background: rgba(234,179,8,0.15); color: #fde047; }
+:is(.dark .slot-ergo-top) { background: rgba(239,68,68,0.15); color: #fca5a5; }
+
+/* --- Staggered Slide-Up Animations (12 levels) --- */
+.slot-anim-1 { animation: slotSlideUp 0.4s ease 0.05s both; }
+.slot-anim-2 { animation: slotSlideUp 0.4s ease 0.1s both; }
+.slot-anim-3 { animation: slotSlideUp 0.4s ease 0.15s both; }
+.slot-anim-4 { animation: slotSlideUp 0.4s ease 0.2s both; }
+.slot-anim-5 { animation: slotSlideUp 0.4s ease 0.25s both; }
+.slot-anim-6 { animation: slotSlideUp 0.4s ease 0.3s both; }
+.slot-anim-7 { animation: slotSlideUp 0.4s ease 0.35s both; }
+.slot-anim-8 { animation: slotSlideUp 0.4s ease 0.4s both; }
+.slot-anim-9 { animation: slotSlideUp 0.4s ease 0.45s both; }
+.slot-anim-10 { animation: slotSlideUp 0.4s ease 0.5s both; }
+.slot-anim-11 { animation: slotSlideUp 0.4s ease 0.55s both; }
+.slot-anim-12 { animation: slotSlideUp 0.4s ease 0.6s both; }
+@keyframes slotSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive Breakpoints --- */
+@media (max-width: 1024px) {
+  .slot-kpi-grid-6 { grid-template-columns: repeat(3, 1fr) !important; }
+  .slot-chart-grid-2 { grid-template-columns: 1fr !important; }
+  .slot-drawer-panel { width: 420px; }
+  .slot-bin-grid { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); }
+}
+@media (max-width: 768px) {
+  .slot-kpi-grid-6 { grid-template-columns: repeat(2, 1fr) !important; }
+  .slot-drawer-panel { width: 100%; }
+  .slot-info-grid { grid-template-columns: 1fr; }
+  .slot-filter-bar { flex-direction: column; }
+}
