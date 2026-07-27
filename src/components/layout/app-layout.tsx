@@ -70,6 +70,7 @@ import {
   Flame,
   ScanBarcode,
   HardHat,
+  Box,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -182,6 +183,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Flame,
   ScanBarcode,
   HardHat,
+  Box,
 }
 // ──────────────────────────────────────────────────────
 const recentNotifications = [

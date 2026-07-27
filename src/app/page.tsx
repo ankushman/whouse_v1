@@ -61,6 +61,7 @@ import HazmatDangerousGoodsView from "@/components/modules/hazmat-dangerous-good
 import SerialNumberTrackingView from "@/components/modules/serial-number-tracking-view"
 import EcommerceFulfillmentView from "@/components/modules/ecommerce-fulfillment-view"
 import LaborManagementView from "@/components/modules/labor-management-view"
+import PackagingStandardsView from "@/components/modules/packaging-standards-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -122,6 +123,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "serial-number-tracking": SerialNumberTrackingView,
   "ecommerce-fulfillment": EcommerceFulfillmentView,
   "labor-management": LaborManagementView,
+  "packaging-standards": PackagingStandardsView,
   "shift-handover": ShiftHandoverView,
 }
 
