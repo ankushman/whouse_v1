@@ -57,6 +57,7 @@ export { default as BarcodeLabelView } from './barcode-label-view'
 export { default as CycleCountView } from './cycle-count-view'
 export { default as ReturnsProcessingView } from './returns-processing-view'
 export { default as PutawayManagementView } from './putaway-management-view'
+export { default as LoadingDispatchView } from './loading-dispatch-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.
