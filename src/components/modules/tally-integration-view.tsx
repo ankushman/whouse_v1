@@ -458,7 +458,7 @@ export default function TallyIntegrationView() {
                       <TableCell className="font-mono">{fmtRupee(r.tallyBal)}</TableCell>
                       <TableCell className="font-mono">{fmtRupee(r.whBal)}</TableCell>
                       <TableCell className={cn("font-mono font-semibold", r.difference > 10000 ? "text-red-500" : r.difference > 1000 ? "text-amber-500" : "text-emerald-500")}>{fmtRupee(r.difference)}</TableCell>
-                      <TableCell className={cn("tabular-nums", parseFloat(r.variancePct) > 2 ? "text-red-500" : parseFloat(r.variancePct) > 0.5 ? "text-amber-500" : "text-emerald-500")}>{r.variancePct}%</TableCell>
+                      <TableCell className={cn("tabular-nums", r.variancePct)}>{r.variancePct}%</TableCell>
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", r.status === "Matched" ? "tally-badge-synced" : r.status === "Pending" ? "tally-badge-queued" : "tally-badge-failed")}>{r.status}</Badge></TableCell>
                       <TableCell className="text-gray-500">{r.lastReconciled}</TableCell>
                       <TableCell><Button size="sm" variant="ghost" className="h-7 text-[10px]"><RefreshCw className="h-3 w-3" /></Button></TableCell>

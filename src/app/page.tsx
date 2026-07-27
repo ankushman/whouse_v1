@@ -72,6 +72,7 @@ import PutawayManagementView from "@/components/modules/putaway-management-view"
 import LoadingDispatchView from "@/components/modules/loading-dispatch-view"
 import GoodsReceiptView from "@/components/modules/goods-receipt-view"
 import TallyIntegrationView from "@/components/modules/tally-integration-view"
+import KittingAssemblyView from "@/components/modules/kitting-assembly-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -144,6 +145,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "loading-dispatch": LoadingDispatchView,
   "goods-receipt": GoodsReceiptView,
   "tally-integration": TallyIntegrationView,
+  "kitting-assembly": KittingAssemblyView,
   "shift-handover": ShiftHandoverView,
 }
 

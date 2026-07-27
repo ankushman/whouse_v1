@@ -63,3 +63,4 @@ export { default as LoadingDispatchView } from './loading-dispatch-view'
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.
 export { default as GoodsReceiptView } from './goods-receipt-view'
 export { default as TallyIntegrationView } from './tally-integration-view'
+export { default as KittingAssemblyView } from './kitting-assembly-view'
