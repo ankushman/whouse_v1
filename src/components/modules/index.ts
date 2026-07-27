@@ -43,6 +43,7 @@ export { SafetyIncidentManagementView } from './safety-incident-management-view'
 export { FleetMaintenanceManagementView } from './fleet-maintenance-management-view'
 export { CargoDamageClaimsView } from './cargo-damage-claims-view'
 export { default as CrossDockTransshipmentView } from './cross-dock-transshipment-view'
+export { default as ColdChainTemperatureView } from './cold-chain-temperature-view'
 // Bug 33-AUDIT#10 (MEDIUM) cleanup: removed WarehouseDetailModal export.
 // The legacy modal was replaced by WarehouseDetailDrawer in R32; this file
 // (warehouse-detail-modal.tsx) is now dead code and will be deleted.

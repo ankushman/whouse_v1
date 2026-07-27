@@ -192,8 +192,8 @@ interface HourlyFlow {
 
 function generateData() {
   const rand = seededRandom(119119);
-  const pick = <T,>(arr: T[]): T => arr[Math.floor(rand() * arr.length)];
-  const pickIdx = <T,>(arr: T[]): number => Math.floor(rand() * arr.length);
+  const pick = <T,>(arr: readonly T[]): T => arr[Math.floor(rand() * arr.length)];
+  const pickIdx = <T,>(arr: readonly T[]): number => Math.floor(rand() * arr.length);
 
   const statuses: XDockStatus[] = ["arrived", "unloading", "sorting", "staging", "loading", "departed", "delayed", "cancelled"];
   const priorities: TransferPriority[] = ["critical", "high", "medium", "low"];
@@ -972,9 +972,9 @@ export default function CrossDockTransshipmentView() {
                           </td>
                           <td>
                             <span className="cd-flags-cell">
-                              {s.damageFlag && <AlertTriangle className="h-3.5 w-3.5 cd-flag-damage" title="Damage reported" />}
-                              {s.qualityHold && <ShieldCheck className="h-3.5 w-3.5 cd-flag-hold" title="Quality hold" />}
-                              {!s.damageFlag && !s.qualityHold && <PackageCheck className="h-3.5 w-3.5 cd-flag-clean" title="Clean" />}
+                              {s.damageFlag && <span title="Damage reported"><AlertTriangle className="h-3.5 w-3.5 cd-flag-damage" /></span>}
+                              {s.qualityHold && <span title="Quality hold"><ShieldCheck className="h-3.5 w-3.5 cd-flag-hold" /></span>}
+                              {!s.damageFlag && !s.qualityHold && <span title="Clean"><PackageCheck className="h-3.5 w-3.5 cd-flag-clean" /></span>}
                             </span>
                           </td>
                         </tr>

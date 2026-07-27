@@ -55,6 +55,7 @@ import { SafetyIncidentManagementView } from "@/components/modules/safety-incide
 import { FleetMaintenanceManagementView } from "@/components/modules/fleet-maintenance-management-view"
 import { CargoDamageClaimsView } from "@/components/modules/cargo-damage-claims-view"
 import CrossDockTransshipmentView from "@/components/modules/cross-dock-transshipment-view"
+import ColdChainTemperatureView from "@/components/modules/cold-chain-temperature-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -110,6 +111,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "fleet-maintenance": FleetMaintenanceManagementView,
   "cargo-damage-claims": CargoDamageClaimsView,
   "cross-dock-transshipment": CrossDockTransshipmentView,
+  "cold-chain-temp": ColdChainTemperatureView,
   "shift-handover": ShiftHandoverView,
 }
 
