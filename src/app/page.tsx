@@ -137,6 +137,7 @@ import FreightAuditPaymentView from "@/components/modules/freight-audit-payment-
 import EWayBillGSTComplianceView from "@/components/modules/eway-bill-gst-compliance-view"
 import TallyIntegrationERPView from "@/components/modules/tally-integration-erp-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
+import WarehouseOpsCommandView from "@/components/modules/warehouse-ops-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -273,6 +274,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "eway-bill-gst-compliance": EWayBillGSTComplianceView,
   "tally-integration-erp": TallyIntegrationERPView,
   "shift-handover": ShiftHandoverView,
+  "warehouse-ops-command": WarehouseOpsCommandView,
 }
 
 

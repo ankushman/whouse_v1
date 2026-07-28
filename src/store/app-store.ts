@@ -133,6 +133,7 @@ export const navItems: NavItem[] = [
   { id: 'eway-bill-gst-compliance', label: 'E-Way Bill & GST', icon: 'ScrollText', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'logistics'] },
   { id: 'shift-handover', label: 'Shift Handover', icon: 'ArrowRightLeft', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'tally-integration-erp', label: 'Tally Integration & ERP', icon: 'RefreshCw', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement'] },
+  { id: 'warehouse-ops-command', label: 'Warehouse Operations Command', icon: 'LayoutDashboard', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
