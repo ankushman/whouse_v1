@@ -107,4 +107,5 @@ export { default as QualityInspectionAutomationView } from './quality-inspection
 export { default as SupplierRiskManagementView } from './supplier-risk-management-view'
 export { default as PredictiveDemandForecastingView } from './predictive-demand-forecasting-view'
 export { default as LogisticsNetworkOptimizationView } from './logistics-network-optimization-view'
+export { default as ContractComplianceAutomationView } from './contract-compliance-automation-view'
 

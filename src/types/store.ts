@@ -10,6 +10,9 @@ export type Role =
   | 'warehouse_manager'
   | 'supervisor'
   | 'operator'
+  | 'procurement'
+  | 'demand_planner'
+  | 'logistics'
 
 export type NavGroup = "operations" | "analytics" | "system"
 

@@ -74,7 +74,6 @@ import {
   BarChart,
   Bar,
   ComposedChart,
-  Composed,
   Line,
   PieChart,
   Pie,
@@ -572,7 +571,7 @@ export default function PredictiveDemandForecastingView() {
   })
 
   // Alert severity distribution
-  const alertSeverityDist = severities.map((sev) => ({
+  const alertSeverityDist = data.severities.map((sev: string) => ({
     name: sev,
     value: data.alertRecords.filter((a) => a.severity === sev).length,
   }))
@@ -1471,7 +1470,6 @@ export default function PredictiveDemandForecastingView() {
       <PageHeader
         title="Predictive Demand Forecasting"
         description="AI-powered demand prediction with seasonal analysis and scenario modeling"
-        icon={ChartSpline}
       />
       {/* Tab Navigation */}
       <div className="pdf-tab-nav">

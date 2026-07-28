@@ -1,0 +1,233 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   R181 — Contract Compliance Automation (cca-*)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Root */
+.cca-root { padding: 0; }
+
+/* Tabs */
+.cca-tabs {
+  display: flex; gap: 4px; padding: 16px 24px 0; overflow-x: auto;
+  border-bottom: 2px solid #e2e8f0;
+}
+.cca-tab-btn {
+  padding: 10px 20px; border: none; background: transparent; color: #64748b;
+  font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -2px; white-space: nowrap; transition: all 0.2s;
+  border-radius: 8px 8px 0 0;
+}
+.cca-tab-btn:hover { color: #0f172a; background: #f8fafc; }
+.cca-tab-btn-active { color: #0d9488; border-bottom-color: #0d9488; background: #f0fdfa; }
+
+/* Tab Content */
+.cca-tab-content { padding: 20px 24px; }
+.cca-tab-section { display: flex; flex-direction: column; gap: 16px; }
+.cca-tab-dashboard { display: flex; flex-direction: column; gap: 20px; }
+
+/* KPI Grid */
+.cca-kpi-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px;
+}
+.cca-kpi-card {
+  background: #fff; border-radius: 12px; padding: 16px 14px;
+  border-top: 3px solid #0d9488; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+}
+.cca-kpi-icon { font-size: 20px; }
+.cca-kpi-label { font-size: 11px; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.cca-kpi-value { font-size: 22px; font-weight: 700; color: #0f172a; }
+
+/* Chart Grid */
+.cca-chart-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+}
+.cca-chart-card {
+  background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.cca-chart-wide { grid-column: span 2; }
+.cca-chart-title { font-size: 14px; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+
+/* Filters */
+.cca-filters {
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+}
+.cca-search {
+  padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px;
+  min-width: 260px; outline: none; transition: border-color 0.2s;
+}
+.cca-search:focus { border-color: #0d9488; box-shadow: 0 0 0 3px rgba(13,148,136,0.1); }
+.cca-filter {
+  padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px;
+  background: #fff; outline: none; cursor: pointer; color: #475569;
+}
+.cca-filter:focus { border-color: #0d9488; }
+
+/* Table */
+.cca-table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.cca-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+.cca-table thead th {
+  position: sticky; top: 0; background: #f8fafc; padding: 10px 14px; text-align: left;
+  font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; white-space: nowrap; z-index: 2;
+}
+.cca-table tbody td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+.cca-row { cursor: pointer; transition: background 0.15s; }
+.cca-row:hover { background: #f0fdfa; }
+.cca-cell-id { font-family: "SF Mono", "Fira Code", monospace; font-size: 12px; color: #0d9488; font-weight: 600; }
+.cca-cell-mono { font-family: "SF Mono", "Fira Code", monospace; font-size: 12px; }
+.cca-cell-truncate { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cca-clickable { cursor: pointer; user-select: none; }
+.cca-clickable:hover { color: #0d9488; }
+
+/* Score Ring Mini */
+.cca-score-ring-mini { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Compliance Bar */
+.cca-compliance-bar-wrap {
+  display: flex; align-items: center; gap: 8px;
+}
+.cca-compliance-bar-track {
+  width: 80px; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;
+}
+.cca-compliance-bar {
+  height: 100%; border-radius: 4px; transition: width 0.3s;
+}
+.cca-compliance-bar-label { font-size: 11px; font-weight: 600; color: #475569; min-width: 32px; }
+
+/* Badges */
+.cca-badge-risk {
+  display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.cca-risk-critical { background: #fef2f2; color: #e11d48; }
+.cca-risk-high { background: #fffbeb; color: #d97706; }
+.cca-risk-medium { background: #f0f9ff; color: #0284c7; }
+.cca-risk-low { background: #f0fdf4; color: #059669; }
+
+.cca-badge-status {
+  display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;
+}
+.cca-status-compliant { background: #f0fdf4; color: #059669; }
+.cca-status-partial { background: #fffbeb; color: #d97706; }
+.cca-status-non-compliant { background: #fef2f2; color: #e11d48; }
+.cca-status-under-review { background: #f0f9ff; color: #0284c7; }
+.cca-status-expired { background: #f5f3ff; color: #7c3aed; }
+.cca-status-fulfilled { background: #f0fdf4; color: #059669; }
+.cca-status-pending { background: #fffbeb; color: #d97706; }
+.cca-status-overdue { background: #fef2f2; color: #e11d48; }
+.cca-status-in-progress { background: #f0f9ff; color: #0284c7; }
+.cca-status-breached { background: #fef2f2; color: #e11d48; }
+.cca-status-needs-review { background: #fffbeb; color: #d97706; }
+.cca-status-amended { background: #f0f9ff; color: #0284c7; }
+.cca-status-waived { background: #f5f3ff; color: #7c3aed; }
+.cca-status-completed { background: #f0fdf4; color: #059669; }
+.cca-status-scheduled { background: #f0f9ff; color: #0284c7; }
+.cca-status-paid { background: #f0fdf4; color: #059669; }
+.cca-status-disputed { background: #fef2f2; color: #e11d48; }
+.cca-status-in-appeal { background: #fffbeb; color: #d97706; }
+
+.cca-badge-category {
+  display: inline-flex; padding: 3px 8px; border-radius: 6px; font-size: 11px;
+  font-weight: 500; background: #f0f9ff; color: #0284c7;
+}
+.cca-badge-obl-type {
+  display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px;
+  font-weight: 600; background: #f0f9ff; color: #0284c7;
+}
+.cca-badge-audit-type {
+  display: inline-flex; padding: 3px 8px; border-radius: 6px; font-size: 11px;
+  font-weight: 500; background: #f5f3ff; color: #7c3aed;
+}
+.cca-badge-clause-type {
+  display: inline-flex; padding: 3px 8px; border-radius: 6px; font-size: 11px;
+  font-weight: 500; background: #f0f9ff; color: #0284c7;
+}
+.cca-badge-dispute {
+  display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px;
+  font-weight: 600; background: #fef2f2; color: #e11d48;
+}
+.cca-badge-no-dispute {
+  display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px;
+  font-weight: 500; background: #f0fdf4; color: #059669;
+}
+
+/* Text Colors */
+.cca-text-rose { color: #e11d48; font-weight: 600; }
+.cca-text-emerald { color: #059669; font-weight: 600; }
+
+/* Drawer / Sheet */
+.cca-sheet { width: 520px !important; padding: 0 !important; overflow-y: auto; }
+.cca-sheet-body { padding: 24px; }
+.cca-drawer-header {
+  background: linear-gradient(135deg, #0d9488, #6366f1);
+  margin: -24px -24px 20px; padding: 24px; color: #fff;
+}
+.cca-drawer-header-left { display: flex; align-items: center; gap: 16px; }
+.cca-drawer-title { font-size: 18px; font-weight: 700; color: #fff; }
+.cca-drawer-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+.cca-drawer-badges { display: flex; gap: 6px; margin-top: 8px; }
+.cca-drawer-desc {
+  background: #f8fafc; border-left: 3px solid #0d9488; padding: 12px 16px;
+  border-radius: 0 8px 8px 0; font-size: 13px; color: #475569; line-height: 1.5; margin-bottom: 16px;
+}
+
+/* Drawer Clause/Penalty Icon */
+.cca-drawer-clause-icon { font-size: 40px; }
+.cca-drawer-penalty-icon { font-size: 40px; }
+
+/* Metrics */
+.cca-drawer-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.cca-drawer-metric-card {
+  background: #f8fafc; border-radius: 10px; padding: 12px; text-align: center;
+  border-top: 3px solid #e2e8f0;
+}
+.cca-drawer-metric-label { font-size: 11px; color: #64748b; font-weight: 500; display: block; }
+.cca-drawer-metric-value { font-size: 16px; font-weight: 700; color: #0f172a; margin-top: 4px; display: block; }
+
+/* Score Grid */
+.cca-drawer-score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+.cca-drawer-score-item {
+  background: #f8fafc; border-radius: 10px; padding: 10px; text-align: center;
+  border-top: 3px solid #e2e8f0;
+}
+.cca-drawer-score-label { font-size: 11px; color: #64748b; font-weight: 500; display: block; }
+.cca-drawer-score-value { font-size: 18px; font-weight: 700; color: #0f172a; margin-top: 4px; display: block; }
+
+/* Field Grid */
+.cca-drawer-field-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+.cca-drawer-field {
+  background: #f8fafc; border-radius: 8px; padding: 10px 12px;
+}
+.cca-drawer-field-label { font-size: 11px; color: #64748b; font-weight: 500; display: block; }
+.cca-drawer-field-value { font-size: 13px; color: #0f172a; font-weight: 600; margin-top: 2px; display: block; }
+
+/* Actions */
+.cca-drawer-actions { display: flex; gap: 10px; margin-top: 20px; }
+.cca-btn-primary {
+  padding: 8px 20px; background: #0d9488; color: #fff; border: none; border-radius: 8px;
+  font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s;
+}
+.cca-btn-primary:hover { background: #0f766e; }
+.cca-btn-secondary {
+  padding: 8px 20px; background: #fff; color: #0d9488; border: 1px solid #0d9488; border-radius: 8px;
+  font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.cca-btn-secondary:hover { background: #f0fdfa; }
+.cca-btn-ghost {
+  padding: 8px 20px; background: transparent; color: #64748b; border: 1px solid #e2e8f0;
+  border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s;
+}
+.cca-btn-ghost:hover { background: #f8fafc; color: #0f172a; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .cca-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  .cca-chart-grid { grid-template-columns: 1fr; }
+  .cca-chart-wide { grid-column: span 1; }
+}
+@media (max-width: 768px) {
+  .cca-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .cca-drawer-field-grid { grid-template-columns: 1fr; }
+  .cca-drawer-score-grid { grid-template-columns: repeat(2, 1fr); }
+  .cca-drawer-metrics { grid-template-columns: 1fr; }
+  .cca-sheet { width: 100% !important; }
+}

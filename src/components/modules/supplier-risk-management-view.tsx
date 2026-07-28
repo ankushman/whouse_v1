@@ -79,7 +79,6 @@ import {
   BarChart,
   Bar,
   ComposedChart,
-  Composed,
   Line,
   PieChart,
   Pie,
@@ -1623,7 +1622,6 @@ export default function SupplierRiskManagementView() {
       <PageHeader
         title="Supplier Risk Management"
         description="Identify, assess, and mitigate supplier risks across your supply chain"
-        icon={ShieldAlert}
       />
       {/* Tab Navigation */}
       <div className="srm-tab-nav">

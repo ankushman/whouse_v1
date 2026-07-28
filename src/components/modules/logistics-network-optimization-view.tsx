@@ -74,7 +74,6 @@ import {
   BarChart,
   Bar,
   ComposedChart,
-  Composed,
   Line,
   PieChart,
   Pie,
@@ -942,7 +941,7 @@ export default function LogisticsNetworkOptimizationView() {
 
   return (
     <div className="lno-container">
-      <PageHeader title="Logistics Network Optimization" description="Optimize your India logistics network with route analysis, mode shifting, and scenario simulation" icon={ChartNetwork} />
+      <PageHeader title="Logistics Network Optimization" description="Optimize your India logistics network with route analysis, mode shifting, and scenario simulation" />
       <div className="lno-tab-nav">
         {tabs.map((tab, i) => (
           <button key={i} className={`lno-tab-btn ${activeTab === i ? "active" : ""}`} onClick={() => { setActiveTab(i); setSearchTerm(""); setFilterNodeType("all"); setFilterMode("all"); setFilterImpact("all"); setFilterRouteType("all") }}>{tab.title}</button>
