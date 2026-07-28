@@ -124,4 +124,5 @@ export { default as MaritimeCargoSecurityView } from './maritime-cargo-security-
 export { default as ColdChainComplianceView } from './cold-chain-compliance-view'
 export { default as CustomsDutyRefundView } from './customs-duty-refund-view'
 export { default as ExportDocumentationLCView } from './export-documentation-lc-view'
+export { default as FreightAuditPaymentView } from './freight-audit-payment-view'
 

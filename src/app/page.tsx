@@ -133,6 +133,7 @@ import MaritimeCargoSecurityView from "@/components/modules/maritime-cargo-secur
 import ColdChainComplianceView from "@/components/modules/cold-chain-compliance-view"
 import CustomsDutyRefundView from "@/components/modules/customs-duty-refund-view"
 import ExportDocumentationLCView from "@/components/modules/export-documentation-lc-view"
+import FreightAuditPaymentView from "@/components/modules/freight-audit-payment-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -266,6 +267,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "cold-chain-compliance": ColdChainComplianceView,
   "customs-duty-refund": CustomsDutyRefundView,
   "export-documentation-lc": ExportDocumentationLCView,
+  "freight-audit-payment": FreightAuditPaymentView,
   "shift-handover": ShiftHandoverView,
 }
 
