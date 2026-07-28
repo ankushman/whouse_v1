@@ -129,4 +129,5 @@ export { default as EWayBillGSTComplianceView } from './eway-bill-gst-compliance
 export { default as TallyIntegrationERPView } from './tally-integration-erp-view'
 export { default as WarehouseOpsCommandView } from './warehouse-ops-command-view'
 export { default as InventoryAgingObsolescenceView } from './inventory-aging-obsolescence-view'
+export { default as DemurrageDetentionMgmtView } from './demurrage-detention-mgmt-view'
 

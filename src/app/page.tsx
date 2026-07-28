@@ -139,6 +139,7 @@ import TallyIntegrationERPView from "@/components/modules/tally-integration-erp-
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import WarehouseOpsCommandView from "@/components/modules/warehouse-ops-command-view"
 import InventoryAgingObsolescenceView from "@/components/modules/inventory-aging-obsolescence-view"
+import DemurrageDetentionMgmtView from "@/components/modules/demurrage-detention-mgmt-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -277,6 +278,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "shift-handover": ShiftHandoverView,
   "warehouse-ops-command": WarehouseOpsCommandView,
   "inventory-aging-obsolescence": InventoryAgingObsolescenceView,
+  "demurrage-detention-mgmt": DemurrageDetentionMgmtView,
 }
 
 

@@ -44878,3 +44878,313 @@ html.theme-transition body {
 .dark .iao-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .iao-root ::-webkit-scrollbar-thumb { background: rgba(180,83,9,0.15); }
 .dark .iao-root ::-webkit-scrollbar-thumb:hover { background: rgba(180,83,9,0.3); }
+
+/* ============================================================================
+ * R204: Demurrage & Detention Management (ddm-*) — Enhanced CSS
+ * Theme: Deep Red #991b1b + Teal #0d9488 + Gold #ca8a04 + Slate #475569 + Amber #d97706
+ * ============================================================================ */
+
+/* --- Tab Active State: Red→Rose gradient with glow --- */
+.ddm-root [data-state="active"][role="tab"] {
+  background: linear-gradient(135deg, #991b1b, #be123c) !important;
+  color: #fff7ed !important;
+  box-shadow: 0 0 16px rgba(153, 27, 27, 0.35), 0 2px 8px rgba(190, 18, 60, 0.2);
+  position: relative;
+}
+.ddm-root [data-state="active"][role="tab"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(251,191,36,0.12), transparent);
+  pointer-events: none;
+}
+
+/* --- KPI Card: 8 distinct border-left colors --- */
+.ddm-kpi-card:nth-child(1) { border-left: 3px solid #991b1b; }
+.ddm-kpi-card:nth-child(2) { border-left: 3px solid #ca8a04; }
+.ddm-kpi-card:nth-child(3) { border-left: 3px solid #ef4444; }
+.ddm-kpi-card:nth-child(4) { border-left: 3px solid #0d9488; }
+.ddm-kpi-card:nth-child(5) { border-left: 3px solid #d97706; }
+.ddm-kpi-card:nth-child(6) { border-left: 3px solid #7c3aed; }
+.ddm-kpi-card:nth-child(7) { border-left: 3px solid #475569; }
+.ddm-kpi-card:nth-child(8) { border-left: 3px solid #059669; }
+.ddm-kpi-card {
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: ddm-kpi-fade-up 0.5s ease-out both;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ddm-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.ddm-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.ddm-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.ddm-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.ddm-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.ddm-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.ddm-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.ddm-kpi-card:nth-child(8) { animation-delay: 350ms; }
+.ddm-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(153,27,27,0.08), transparent 70%);
+  pointer-events: none;
+}
+.ddm-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(153,27,27,0.12);
+}
+@keyframes ddm-kpi-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- KPI Value counter animation --- */
+.ddm-kpi-card .tabular-nums {
+  animation: ddm-counter-scale 0.4s ease-out;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes ddm-counter-scale {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* --- Heat Bar / Free Time Bar: gradient fill + glass overlay --- */
+.ddm-heat-bar, .ddm-util-fill {
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: width 0.8s ease-out;
+}
+.ddm-util-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
+  pointer-events: none;
+}
+
+/* --- Container Number monospace display --- */
+.ddm-container-no {
+  letter-spacing: 0.08em;
+  border-left: 2px solid #991b1b;
+  padding-left: 6px;
+}
+
+/* --- Pill Badge shimmer --- */
+.ddm-pill {
+  animation: ddm-badge-shimmer 3s ease-in-out infinite;
+  animation-delay: 1.4s;
+  position: relative;
+  overflow: hidden;
+}
+.ddm-pill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  animation: ddm-shimmer-sweep 3s ease-in-out infinite;
+  animation-delay: 1.4s;
+}
+@keyframes ddm-shimmer-sweep {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* --- Bucket badge inherits shimmer via ddm-pill class --- */
+.ddm-bucket-badge, .ddm-wo-status-badge, .ddm-wh-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- SVG Rings: draw transition --- */
+.ddm-score-ring {
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+/* --- Risk Critical pulse --- */
+.ddm-risk-critical {
+  animation: ddm-risk-pulse 1.5s ease-in-out infinite;
+}
+@keyframes ddm-risk-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(220,38,38,0.3); }
+  50% { opacity: 0.65; box-shadow: 0 0 12px rgba(220,38,38,0.6); }
+}
+
+/* --- SLA Urgent pulse --- */
+.ddm-sla-urgent {
+  animation: ddm-sla-urgent-pulse 1.5s ease-in-out infinite;
+}
+@keyframes ddm-sla-urgent-pulse {
+  0%, 100% { color: #dc2626; }
+  50% { color: #fca5a5; }
+}
+
+/* --- Expired flash --- */
+.ddm-expired-flash {
+  animation: ddm-expired-flash 2s ease-in-out infinite;
+}
+@keyframes ddm-expired-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* --- Value Tiles: top gradient stripe --- */
+.ddm-value-tile {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.ddm-value-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #991b1b, #ca8a04); }
+
+.ddm-wo-value-tile {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.ddm-wo-value-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+
+.ddm-gst-tile {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.ddm-gst-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #0d9488, #14b8a6); }
+
+/* --- SLA Tracker --- */
+.ddm-sla-tracker { border-radius: 6px; }
+
+/* --- Recovery Bar --- */
+.ddm-recovery-bar {
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: width 0.6s ease-out;
+}
+.ddm-recovery-bar > div::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
+  pointer-events: none;
+}
+
+/* --- Approval Progress: stage dots hover --- */
+.ddm-approval-progress .ddm-stage {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ddm-approval-progress .ddm-stage:hover {
+  transform: scale(1.25);
+}
+
+/* --- Row Striping --- */
+.ddm-data-row:nth-child(even) {
+  background: rgba(71,85,105,0.03);
+}
+
+/* --- Sort Header --- */
+.ddm-sort-header {
+  transition: background 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+.ddm-sort-header:hover { background: rgba(153,27,27,0.08); }
+.ddm-sort-header[aria-sort="ascending"],
+.ddm-sort-header[aria-sort="descending"] { background: rgba(153,27,27,0.12); transform: scale(0.98); }
+
+/* --- Action Buttons --- */
+.ddm-action-btn { transition: all 0.15s; }
+.ddm-action-btn:hover { transform: scale(1.03); background: rgba(153,27,27,0.1); border-color: rgba(153,27,27,0.4); color: #991b1b; }
+
+/* --- Table Row Hover per-tab tint --- */
+.ddm-tab-0-row:hover { background: rgba(153,27,27,0.04); }
+.ddm-tab-1-row:hover { background: rgba(13,148,136,0.04); }
+.ddm-tab-2-row:hover { background: rgba(202,138,4,0.04); }
+.ddm-tab-3-row:hover { background: rgba(217,119,6,0.04); }
+.ddm-tab-4-row:hover { background: rgba(71,85,105,0.04); }
+.ddm-tab-5-row:hover { background: rgba(5,150,105,0.04); }
+
+/* --- Chart Card glow on hover --- */
+.ddm-chart-card {
+  border-radius: 10px;
+  transition: box-shadow 0.2s;
+}
+.ddm-chart-card:hover { box-shadow: 0 0 20px rgba(153,27,27,0.08); }
+
+/* --- Responsive Grid --- */
+.ddm-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) { .ddm-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .ddm-kpi-grid { grid-template-columns: 1fr; } }
+
+/* --- Custom Scrollbar --- */
+.ddm-root ::-webkit-scrollbar { width: 6px; height: 6px; }
+.ddm-root ::-webkit-scrollbar-track { background: rgba(71,85,105,0.05); border-radius: 3px; }
+.ddm-root ::-webkit-scrollbar-thumb { background: rgba(153,27,27,0.2); border-radius: 3px; }
+.ddm-root ::-webkit-scrollbar-thumb:hover { background: rgba(153,27,27,0.4); }
+
+/* --- Sheet Content Transition --- */
+.ddm-drawer-header + div { animation: ddm-sheet-fade 0.25s ease-out; }
+@keyframes ddm-sheet-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================================ */
+/* DARK MODE: Full dark overrides for ddm-* */
+/* ============================================================================ */
+.dark .ddm-root [data-state="active"][role="tab"] {
+  background: linear-gradient(135deg, #7f1d1d, #881337) !important;
+  color: #fef3c7 !important;
+  box-shadow: 0 0 16px rgba(153,27,27,0.2), 0 2px 8px rgba(190,18,60,0.1);
+}
+.dark .ddm-root [data-state="active"][role="tab"]::after {
+  background: linear-gradient(135deg, rgba(251,191,36,0.08), transparent);
+}
+.dark .ddm-kpi-card { background: rgba(15,23,42,0.4); }
+.dark .ddm-kpi-card:hover { box-shadow: 0 6px 20px rgba(153,27,27,0.08); }
+.dark .ddm-pill::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
+.dark .ddm-container-no { border-left-color: rgba(153,27,27,0.6); }
+.dark .ddm-value-tile, .ddm-wo-value-tile, .ddm-gst-tile { background: rgba(15,23,42,0.5); }
+.dark .ddm-value-tile::before { background: linear-gradient(90deg, rgba(153,27,27,0.6), rgba(202,138,4,0.6)); }
+.dark .ddm-wo-value-tile::before { background: linear-gradient(90deg, rgba(124,58,237,0.6), rgba(167,139,250,0.6)); }
+.dark .ddm-gst-tile::before { background: linear-gradient(90deg, rgba(13,148,136,0.6), rgba(20,184,166,0.6)); }
+.dark .ddm-data-row:nth-child(even) { background: rgba(71,85,105,0.04); }
+.dark .ddm-sort-header:hover { background: rgba(153,27,27,0.06); }
+.dark .ddm-action-btn:hover { background: rgba(153,27,27,0.08); border-color: rgba(153,27,27,0.3); }
+.dark .ddm-tab-0-row:hover { background: rgba(153,27,27,0.03); }
+.dark .ddm-tab-1-row:hover { background: rgba(13,148,136,0.03); }
+.dark .ddm-tab-2-row:hover { background: rgba(202,138,4,0.03); }
+.dark .ddm-tab-3-row:hover { background: rgba(217,119,6,0.03); }
+.dark .ddm-tab-4-row:hover { background: rgba(71,85,105,0.03); }
+.dark .ddm-tab-5-row:hover { background: rgba(5,150,105,0.03); }
+.dark .ddm-chart-card:hover { box-shadow: 0 0 20px rgba(153,27,27,0.05); }
+.dark .ddm-risk-critical { animation-name: ddm-risk-pulse-dark; }
+@keyframes ddm-risk-pulse-dark {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(220,38,38,0.2); }
+  50% { opacity: 0.5; box-shadow: 0 0 12px rgba(220,38,38,0.4); }
+}
+.dark .ddm-sla-urgent { animation-name: ddm-sla-urgent-dark; }
+@keyframes ddm-sla-urgent-dark {
+  0%, 100% { color: #fca5a5; }
+  50% { color: #fecaca; }
+}
+.dark .ddm-expired-flash { animation-name: ddm-expired-flash-dark; }
+@keyframes ddm-expired-flash-dark {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.dark .ddm-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .ddm-root ::-webkit-scrollbar-thumb { background: rgba(153,27,27,0.15); }
+.dark .ddm-root ::-webkit-scrollbar-thumb:hover { background: rgba(153,27,27,0.3); }

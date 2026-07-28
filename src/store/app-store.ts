@@ -135,6 +135,7 @@ export const navItems: NavItem[] = [
   { id: 'tally-integration-erp', label: 'Tally Integration & ERP', icon: 'RefreshCw', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement'] },
   { id: 'warehouse-ops-command', label: 'Warehouse Operations Command', icon: 'LayoutDashboard', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'shift_lead'] },
   { id: 'inventory-aging-obsolescence', label: 'Inventory Aging & Obsolescence', icon: 'Hourglass', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'finance'] },
+  { id: 'demurrage-detention-mgmt', label: 'Demurrage & Detention', icon: 'Anchor', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'logistics', 'finance'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
