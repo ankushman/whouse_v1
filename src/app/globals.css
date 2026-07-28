@@ -43010,3 +43010,152 @@ html.theme-transition body {
 @media (max-width: 768px) {
   .dfc-kpi-grid { grid-template-columns: 1fr !important; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   R195 — Maritime Cargo Security & Surveillance (mcs-*)
+   Theme: Deep Navy + Cyan + Indigo + Teal (#1e3a5f, #06b6d4, #7c3aed, #0d9488)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Tab active state — cyan accent */
+.mcs-tab-trigger[data-state="active"] {
+  background: linear-gradient(135deg, #0e7490, #1e3a5f);
+  color: white;
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+}
+.mcs-tab-trigger[data-state="active"]::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, #06b6d4, #7c3aed);
+  border-radius: 1px;
+}
+
+/* KPI card staggered animation */
+.mcs-kpi-card:nth-child(1) { animation: mcs-fade-up 0.4s ease-out 0ms both; }
+.mcs-kpi-card:nth-child(2) { animation: mcs-fade-up 0.4s ease-out 50ms both; }
+.mcs-kpi-card:nth-child(3) { animation: mcs-fade-up 0.4s ease-out 100ms both; }
+.mcs-kpi-card:nth-child(4) { animation: mcs-fade-up 0.4s ease-out 150ms both; }
+.mcs-kpi-card:nth-child(5) { animation: mcs-fade-up 0.4s ease-out 200ms both; }
+.mcs-kpi-card:nth-child(6) { animation: mcs-fade-up 0.4s ease-out 250ms both; }
+.mcs-kpi-card:nth-child(7) { animation: mcs-fade-up 0.4s ease-out 300ms both; }
+.mcs-kpi-card:nth-child(8) { animation: mcs-fade-up 0.4s ease-out 350ms both; }
+
+@keyframes mcs-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Counter value scale animation */
+.mcs-counter-value {
+  animation: mcs-count-scale 0.6s ease-out 0.3s both;
+}
+@keyframes mcs-count-scale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* KPI grid responsive */
+.mcs-kpi-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1024px) {
+  .mcs-kpi-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 768px) {
+  .mcs-kpi-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Threat ring progress animation */
+.mcs-ring-progress {
+  stroke-dashoffset: 100;
+  animation: mcs-ring-draw 1.2s ease-out 0.2s forwards;
+}
+@keyframes mcs-ring-draw {
+  to { stroke-dashoffset: var(--ring-offset, 0); }
+}
+
+/* Anomaly bar fill animation */
+.mcs-anomaly-fill {
+  animation: mcs-bar-grow 0.8s ease-out 0.3s forwards;
+  transform-origin: left;
+}
+@keyframes mcs-bar-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Compliance arc animation */
+.mcs-compliance-arc {
+  stroke-dashoffset: var(--circumference, 113);
+  animation: mcs-arc-draw 1s ease-out 0.4s forwards;
+}
+@keyframes mcs-arc-draw {
+  to { stroke-dashoffset: var(--offset, 0); }
+}
+
+/* Sort header */
+.mcs-sort-header {
+  transition: color 0.15s ease, background 0.15s ease;
+  user-select: none;
+}
+.mcs-sort-header:hover {
+  color: #06b6d4;
+  background: rgba(6, 182, 212, 0.05);
+}
+
+/* Action button hover */
+.mcs-action-btn {
+  transition: all 0.15s ease;
+}
+.mcs-action-btn:hover {
+  background: rgba(6, 182, 212, 0.08);
+  color: #06b6d4;
+  transform: scale(1.02);
+}
+
+/* Table row hover tint */
+.mcs-table-row {
+  transition: background-color 0.15s ease;
+}
+
+/* Feed card hover */
+.mcs-feed-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Zone card hover */
+.mcs-zone-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+}
+
+/* Chart card subtle glow on hover */
+.mcs-chart-card:hover {
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.06);
+}
+
+/* Dark mode overrides */
+.dark .mcs-sort-header:hover {
+  color: #22d3ee;
+  background: rgba(6, 182, 212, 0.08);
+}
+.dark .mcs-action-btn:hover {
+  background: rgba(6, 182, 212, 0.1);
+  color: #22d3ee;
+}
+.dark .mcs-table-row:hover {
+  background: rgba(6, 182, 212, 0.04);
+}
+.dark .mcs-feed-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+.dark .mcs-zone-card:hover {
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15);
+}
+.dark .mcs-chart-card:hover {
+  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.1);
+}

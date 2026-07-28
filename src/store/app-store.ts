@@ -123,6 +123,7 @@ export const navItems: NavItem[] = [
   { id: 'cargo-insurance-claims', label: 'Insurance & Claims', icon: 'Scale', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'logistics'] },
   { id: 'port-community-system', label: 'Port Community System', icon: 'Ship', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'logistics'] },
   { id: 'dedicated-freight-corridor', label: 'Freight Corridor', icon: 'TrainFront', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'logistics', 'operator'] },
+  { id: 'maritime-cargo-security', label: 'Maritime Security', icon: 'Radar', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'logistics'] },
   { id: 'labor-management', label: 'Labor Management', icon: 'HardHat', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'sla-countdown', label: 'SLA Countdown', icon: 'Timer', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'shift-handover', label: 'Shift Handover', icon: 'ArrowRightLeft', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },

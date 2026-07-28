@@ -129,6 +129,7 @@ import WarehouseEnergyManagementView from "@/components/modules/warehouse-energy
 import CargoInsuranceClaimsView from "@/components/modules/cargo-insurance-claims-view"
 import PortCommunitySystemView from "@/components/modules/port-community-system-view"
 import DedicatedFreightCorridorView from "@/components/modules/dedicated-freight-corridor-view"
+import MaritimeCargoSecurityView from "@/components/modules/maritime-cargo-security-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -258,6 +259,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "cargo-insurance-claims": CargoInsuranceClaimsView,
   "port-community-system": PortCommunitySystemView,
   "dedicated-freight-corridor": DedicatedFreightCorridorView,
+  "maritime-cargo-security": MaritimeCargoSecurityView,
   "shift-handover": ShiftHandoverView,
 }
 
