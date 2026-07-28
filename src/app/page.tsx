@@ -111,6 +111,7 @@ import YardTruckingView from "@/components/modules/yard-trucking-dock-view"
 import PackagingDesignStudioView from "@/components/modules/packaging-design-studio-view"
 import WarehouseLaborForecastingView from "@/components/modules/warehouse-labor-forecasting-view"
 import ReturnsConsolidationHubView from "@/components/modules/returns-consolidation-hub-view"
+import ThreePLPerformanceScorecardView from "@/components/modules/3pl-performance-scorecard-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -222,6 +223,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "packaging-design-studio": PackagingDesignStudioView,
   "warehouse-labor-forecasting": WarehouseLaborForecastingView,
   "returns-consolidation-hub": ReturnsConsolidationHubView,
+  "3pl-performance-scorecard": ThreePLPerformanceScorecardView,
   "shift-handover": ShiftHandoverView,
 }
 
