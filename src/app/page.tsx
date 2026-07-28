@@ -85,6 +85,7 @@ import CustomerServiceResolutionView from "@/components/modules/customer-service
 import WarehouseAnalyticsBIView from "@/components/modules/warehouse-analytics-bi-view"
 import ReturnsRefundAnalyticsView from "@/components/modules/returns-refund-analytics-view"
 import PickPackOptimizationView from "@/components/modules/pick-pack-optimization-view"
+import FreightShippingRateView from "@/components/modules/freight-shipping-rate-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -170,6 +171,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-analytics-bi": WarehouseAnalyticsBIView,
   "returns-refund-analytics": ReturnsRefundAnalyticsView,
   "pick-pack-optimization": PickPackOptimizationView,
+  "freight-shipping-rate": FreightShippingRateView,
   "shift-handover": ShiftHandoverView,
 }
 

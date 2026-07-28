@@ -76,3 +76,4 @@ export { default as CustomerServiceResolutionView } from './customer-service-res
 export { default as WarehouseAnalyticsBIView } from './warehouse-analytics-bi-view'
 export { default as ReturnsRefundAnalyticsView } from './returns-refund-analytics-view'
 export { default as PickPackOptimizationView } from './pick-pack-optimization-view'
+export { default as FreightShippingRateView } from './freight-shipping-rate-view'

@@ -67,7 +67,7 @@ for (let i = 0; i < 150; i++) {
   const status = pick([...STATUSES])
   const priority = pick([...PRIORITIES])
   const method = pick([...METHODS])
-  const zone = pick(ZONES)
+  const zone = pick([...ZONES])
   const warehouse = pick(WAREHOUSES)
   const picker = pick(PICKERS)
   const items = randInt(1, 25)
@@ -77,7 +77,7 @@ for (let i = 0; i < 150; i++) {
     id: `ORD-${String(2608001 + i).padStart(7, "0")}`,
     date: `2026-07-${String(randInt(1, 28)).padStart(2, "0")}`,
     customer: pick(["Tata Motors", "Reliance Retail", "BigBasket", "DMart", "Spencer's", "Metro Cash", "Croma", "Decathlon", "Pepperfry", "Nykaa", "Amazon IN", "Flipkart"]),
-    warehouse, zone, items, method, priority, status,
+    warehouse, zone: zone as string, items, method, priority, status,
     picker: status !== "Pending" ? picker.name : "Unassigned",
     lines: randInt(1, 12),
     estMinutes, actualMinutes,
@@ -453,7 +453,7 @@ export default function PickPackOptimizationView() {
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><TrendingUp className="h-4 w-4 text-emerald-500" />Pick Accuracy Trend</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={MONTHS.slice(0, 7).map((m, i) => ({ month: m, accuracy: randFloat(96, 99.5), speed: randFloat(15, 25) }))}>
+                <LineChart data={["Jan","Feb","Mar","Apr","May","Jun","Jul"].map((m, i) => ({ month: m, accuracy: randFloat(96, 99.5), speed: randFloat(15, 25) }))}>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="month" tick={{ fontSize: 10 }} />
                   <YAxis tick={{ fontSize: 10 }} domain={[90, 100]} />
