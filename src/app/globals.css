@@ -43898,3 +43898,184 @@ html.theme-transition body {
 .dark .ewb-plate-badge { color: #fbbf24; }
 .dark .ewb-due-overdue { animation: ewb-due-flash-dark 1s ease-in-out infinite; }
 @keyframes ewb-due-flash-dark { 0%, 100% { background: rgba(225, 29, 72, 0.12); } 50% { background: rgba(225, 29, 72, 0.25); } }
+
+/* ============================================================================
+   Tally Integration & ERP Sync Module (tie-*)
+   Theme: Deep Orange + Slate + Teal + Amber
+   ============================================================================ */
+
+/* Tab active state */
+.tie-tab-trigger[data-state="active"] {
+  background: linear-gradient(135deg, #c2410c, #334155);
+  color: white;
+  box-shadow: 0 0 12px rgba(194, 65, 12, 0.35), 0 2px 6px rgba(51, 65, 85, 0.2);
+}
+
+/* KPI card staggered fade-up */
+.tie-kpi-card {
+  opacity: 0;
+  animation: tie-fade-up 0.5s ease forwards;
+  border-left: 4px solid;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tie-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+@keyframes tie-fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Counter value scale-up */
+.tie-counter-value { animation: tie-scale-up 0.6s ease forwards; }
+@keyframes tie-scale-up { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+
+/* Sync progress bar 5-stage */
+.tie-progress-fill { animation: tie-progress-stages 2s ease-out forwards; }
+@keyframes tie-progress-stages { from { width: 0%; } }
+
+/* Running status pulse */
+.tie-running-pulse { animation: tie-pulse-cyan 2s ease-in-out infinite; }
+@keyframes tie-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); } 50% { box-shadow: 0 0 0 6px rgba(6, 182, 212, 0); } }
+
+/* Confidence bar fill animation */
+.tie-confidence-fill { animation: tie-confidence-grow 1s ease-out forwards; }
+@keyframes tie-confidence-grow { from { width: 0%; } }
+
+/* Ledger pair card hover */
+.tie-ledger-pair-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.tie-ledger-pair-card:hover { transform: scale(1.02); box-shadow: 0 4px 16px rgba(194, 65, 12, 0.12); }
+.tie-ledger-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+
+/* Voucher type icon background */
+.tie-voucher-icon { transition: transform 0.15s ease; }
+.tie-voucher-icon:hover { transform: scale(1.1); }
+
+/* Stock variance tile red/green pulse */
+.tie-variance-pulse { animation: tie-variance-blink 1.5s ease-in-out infinite; }
+@keyframes tie-variance-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+/* Value comparison bar animation */
+.tie-value-bar { animation: tie-value-grow 1.2s ease-out forwards; }
+@keyframes tie-value-grow { from { width: 0%; } }
+
+/* Badge shimmer effect */
+.tie-badge-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: tie-shimmer 3s ease-in-out infinite;
+}
+@keyframes tie-shimmer { 0% { left: -100%; } 50%, 100% { left: 100%; } }
+
+/* Sort header hover */
+.tie-sort-header:hover { color: #c2410c; background: rgba(194, 65, 12, 0.05); }
+
+/* Action button hover */
+.tie-action-btn { transition: all 0.15s ease; }
+.tie-action-btn:hover { transform: scale(1.03); background: rgba(13, 148, 136, 0.08); color: #0d9488; border-color: rgba(13, 148, 136, 0.3); }
+
+/* Table row hover tint per-tab */
+.tie-jobs-row:hover { background: rgba(194, 65, 12, 0.04); }
+.tie-voucher-row:hover { background: rgba(13, 148, 136, 0.04); }
+.tie-stock-row:hover { background: rgba(217, 119, 6, 0.04); }
+
+/* Analytics card border-left + hover lift */
+.tie-analytics-card {
+  opacity: 0;
+  animation: tie-fade-up 0.5s ease forwards;
+  border-left: 4px solid;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.tie-analytics-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); }
+
+/* Chart card hover */
+.tie-chart-card { transition: box-shadow 0.2s ease; }
+.tie-chart-card:hover { box-shadow: 0 4px 16px rgba(194, 65, 12, 0.08); }
+
+/* Table scroll custom scrollbar */
+.tie-table-scroll::-webkit-scrollbar { width: 6px; }
+.tie-table-scroll::-webkit-scrollbar-track { background: transparent; }
+.tie-table-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+.tie-table-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Category filter pill active */
+.tie-category-pill-active { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); }
+
+/* Ledger grid responsive */
+.tie-ledger-grid { display: grid; grid-template-columns: repeat(1, 1fr); }
+@media (min-width: 768px) { .tie-ledger-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1280px) { .tie-ledger-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Progress bar container */
+.tie-progress-bar { padding: 4px 0; }
+
+/* Dark mode overrides */
+.dark .tie-tab-trigger:hover:not([data-state="active"]) { background: rgba(194, 65, 12, 0.1); color: #fb923c; }
+.dark .tie-kpi-card:hover { box-shadow: 0 6px 24px rgba(194, 65, 12, 0.2); }
+.dark .tie-analytics-card:hover { box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3); }
+.dark .tie-jobs-row:hover { background: rgba(194, 65, 12, 0.06); }
+.dark .tie-voucher-row:hover { background: rgba(13, 148, 136, 0.06); }
+.dark .tie-stock-row:hover { background: rgba(217, 119, 6, 0.06); }
+.dark .tie-chart-card:hover { box-shadow: 0 4px 20px rgba(194, 65, 12, 0.15); }
+.dark .tie-action-btn:hover { background: rgba(13, 148, 136, 0.15); color: #5eead4; border-color: rgba(13, 148, 136, 0.4); }
+.dark .tie-sort-header:hover { color: #fb923c; background: rgba(194, 65, 12, 0.08); }
+.dark .tie-table-scroll::-webkit-scrollbar-thumb { background: #475569; }
+.dark .tie-table-scroll::-webkit-scrollbar-thumb:hover { background: #64748b; }
+.dark .tie-ledger-pair-card:hover { box-shadow: 0 4px 20px rgba(194, 65, 12, 0.2); }
+.dark .tie-category-pill-active { box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3); }
+/* TIE enhanced animations & details */
+.tie-tab-trigger[data-state="active"] { box-shadow: 0 2px 10px rgba(194, 65, 12, 0.3), inset 0 1px 0 rgba(255,255,255,0.08); }
+.tie-tab-trigger { transition: all 0.2s ease; position: relative; }
+.tie-tab-trigger:hover:not([data-state="active"]) { background: rgba(194, 65, 12, 0.06); color: #c2410c; }
+.tie-kpi-card { border-left: 3px solid transparent; position: relative; overflow: hidden; }
+.tie-kpi-card::before { content: ''; position: absolute; top: 0; right: 0; width: 50px; height: 50px; border-radius: 50%; background: radial-gradient(circle, rgba(194,65,12,0.04) 0%, transparent 70%); pointer-events: none; }
+.tie-kpi-card:nth-child(1) { border-left-color: #c2410c; }
+.tie-kpi-card:nth-child(2) { border-left-color: #334155; }
+.tie-kpi-card:nth-child(3) { border-left-color: #0d9488; }
+.tie-kpi-card:nth-child(4) { border-left-color: #d97706; }
+.tie-kpi-card:nth-child(5) { border-left-color: #059669; }
+.tie-kpi-card:nth-child(6) { border-left-color: #7c3aed; }
+.tie-kpi-card:nth-child(7) { border-left-color: #e11d48; }
+.tie-kpi-card:nth-child(8) { border-left-color: #0891b2; }
+.tie-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(194, 65, 12, 0.12); }
+.tie-running-pulse { animation: tie-run-pulse 1.5s ease-in-out infinite; }
+@keyframes tie-run-pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); } 50% { opacity: 0.8; box-shadow: 0 0 8px 4px rgba(6, 182, 212, 0.15); } }
+.tie-confidence-fill { transition: width 0.8s ease; }
+.tie-ledger-pair-card { transition: all 0.25s ease; border: 1px solid transparent; }
+.tie-ledger-pair-card:hover { border-color: rgba(194, 65, 12, 0.12); transform: translateY(-2px); }
+.tie-gst-mode-bg { transition: background-color 0.2s ease; }
+.tie-stock-variance { font-variant-numeric: tabular-nums; }
+.tie-stock-mismatch { animation: tie-mismatch-flash 2s ease-in-out infinite; }
+@keyframes tie-mismatch-flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+.tie-value-bar { transition: width 0.6s ease; position: relative; overflow: hidden; }
+.tie-value-bar::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 50%); pointer-events: none; }
+.tie-analytics-card { transition: all 0.2s ease; border-left: 3px solid transparent; }
+.tie-analytics-card:nth-child(1) { border-left-color: #c2410c; }
+.tie-analytics-card:nth-child(2) { border-left-color: #334155; }
+.tie-analytics-card:nth-child(3) { border-left-color: #0d9488; }
+.tie-analytics-card:nth-child(4) { border-left-color: #d97706; }
+.tie-analytics-card:nth-child(5) { border-left-color: #059669; }
+.tie-analytics-card:nth-child(6) { border-left-color: #7c3aed; }
+.tie-analytics-card:nth-child(7) { border-left-color: #e11d48; }
+.tie-analytics-card:nth-child(8) { border-left-color: #0891b2; }
+.tie-analytics-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.tie-row-stripe:nth-child(even) { background: rgba(194, 65, 12, 0.015); }
+.dark .tie-row-stripe:nth-child(even) { background: rgba(194, 65, 12, 0.03); }
+.tie-ledger-row:hover { background: rgba(51, 65, 85, 0.04); }
+.tie-sort-header { cursor: pointer; transition: color 0.15s ease, background 0.15s ease; user-select: none; }
+.tie-sort-header:active { transform: scale(0.98); }
+.tie-action-btn { transition: all 0.15s ease; }
+.tie-action-btn:hover { transform: scale(1.03); background: rgba(13, 148, 136, 0.08); color: #0d9488; border-color: rgba(13, 148, 136, 0.3); }
+.tie-badge-shimmer { position: relative; overflow: hidden; }
+.tie-badge-shimmer::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); animation: tie-shimmer 3s infinite 1.5s; }
+@keyframes tie-shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+.dark .tie-tab-trigger:hover:not([data-state="active"]) { background: rgba(251, 146, 60, 0.08); color: #fb923c; }
+.dark .tie-kpi-card::before { background: radial-gradient(circle, rgba(251,146,60,0.06) 0%, transparent 70%); }
+.dark .tie-kpi-card:hover { box-shadow: 0 6px 24px rgba(194, 65, 12, 0.2); }
+.dark .tie-running-pulse { animation: tie-run-pulse-dark 1.5s ease-in-out infinite; }
+@keyframes tie-run-pulse-dark { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.5); } 50% { opacity: 0.8; box-shadow: 0 0 10px 6px rgba(34, 211, 238, 0.2); } }
+.dark .tie-ledger-pair-card:hover { border-color: rgba(251, 146, 60, 0.15); box-shadow: 0 4px 24px rgba(194, 65, 12, 0.25); }
+.dark .tie-value-bar::after { background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 50%); }
+.dark .tie-analytics-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+.dark .tie-ledger-row:hover { background: rgba(51, 65, 85, 0.06); }
+.dark .tie-action-btn:hover { background: rgba(94, 234, 212, 0.12); color: #5eead4; border-color: rgba(94, 234, 212, 0.4); }
+.dark .tie-badge-shimmer::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); }
+.dark .tie-stock-mismatch { animation: tie-mismatch-flash-dark 2s ease-in-out infinite; }
+@keyframes tie-mismatch-flash-dark { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }

@@ -135,6 +135,7 @@ import CustomsDutyRefundView from "@/components/modules/customs-duty-refund-view
 import ExportDocumentationLCView from "@/components/modules/export-documentation-lc-view"
 import FreightAuditPaymentView from "@/components/modules/freight-audit-payment-view"
 import EWayBillGSTComplianceView from "@/components/modules/eway-bill-gst-compliance-view"
+import TallyIntegrationERPView from "@/components/modules/tally-integration-erp-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -270,6 +271,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "export-documentation-lc": ExportDocumentationLCView,
   "freight-audit-payment": FreightAuditPaymentView,
   "eway-bill-gst-compliance": EWayBillGSTComplianceView,
+  "tally-integration-erp": TallyIntegrationERPView,
   "shift-handover": ShiftHandoverView,
 }
 
