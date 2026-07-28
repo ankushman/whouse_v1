@@ -119,6 +119,7 @@ import LogisticsNetworkOptimizationView from "@/components/modules/logistics-net
 import ContractComplianceAutomationView from "@/components/modules/contract-compliance-automation-view"
 import LastMileDeliveryAnalyticsView from "@/components/modules/last-mile-delivery-analytics-view"
 import ReturnsProcessingEnhancementView from "@/components/modules/returns-processing-enhancement-view"
+import ColdChainMonitoringView from "@/components/modules/cold-chain-monitoring-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -238,6 +239,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "contract-compliance-automation": ContractComplianceAutomationView,
   "last-mile-delivery-analytics": LastMileDeliveryAnalyticsView,
   "returns-processing-enhancement": ReturnsProcessingEnhancementView,
+  "cold-chain-monitoring": ColdChainMonitoringView,
   "shift-handover": ShiftHandoverView,
 }
 

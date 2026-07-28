@@ -1,0 +1,125 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   R184 — Cold Chain Monitoring (ccm-*)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ccm-root { padding: 0; }
+.ccm-tabs { display: flex; gap: 4px; padding: 16px 24px 0; overflow-x: auto; border-bottom: 2px solid #e2e8f0; }
+.ccm-tab-btn { padding: 10px 20px; border: none; background: transparent; color: #64748b; font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: all 0.2s; border-radius: 8px 8px 0 0; }
+.ccm-tab-btn:hover { color: #0f172a; background: #f8fafc; }
+.ccm-tab-btn-active { color: #0d9488; border-bottom-color: #0d9488; background: #f0fdfa; }
+.ccm-tab-content { padding: 20px 24px; }
+.ccm-tab-section { display: flex; flex-direction: column; gap: 16px; }
+.ccm-tab-dashboard { display: flex; flex-direction: column; gap: 20px; }
+.ccm-kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+.ccm-kpi-card { background: #fff; border-radius: 12px; padding: 16px 14px; border-top: 3px solid #0d9488; box-shadow: 0 1px 3px rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.ccm-kpi-icon { font-size: 20px; }
+.ccm-kpi-label { font-size: 11px; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+.ccm-kpi-value { font-size: 22px; font-weight: 700; color: #0f172a; }
+.ccm-chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.ccm-chart-card { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.ccm-chart-wide { grid-column: span 2; }
+.ccm-chart-title { font-size: 14px; font-weight: 600; color: #0f172a; margin-bottom: 12px; }
+.ccm-filters { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.ccm-search { padding: 8px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px; min-width: 260px; outline: none; }
+.ccm-search:focus { border-color: #0d9488; box-shadow: 0 0 0 3px rgba(13,148,136,0.1); }
+.ccm-filter { padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: #fff; outline: none; cursor: pointer; color: #475569; }
+.ccm-table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.ccm-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+.ccm-table thead th { position: sticky; top: 0; background: #f8fafc; padding: 10px 14px; text-align: left; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; white-space: nowrap; z-index: 2; }
+.ccm-table tbody td { padding: 10px 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+.ccm-row { cursor: pointer; transition: background 0.15s; }
+.ccm-row:hover { background: #f0fdfa; }
+.ccm-cell-id { font-family: "SF Mono", "Fira Code", monospace; font-size: 12px; color: #0d9488; font-weight: 600; }
+.ccm-cell-mono { font-family: "SF Mono", "Fira Code", monospace; font-size: 12px; }
+.ccm-cell-truncate { max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ccm-clickable { cursor: pointer; user-select: none; }
+.ccm-clickable:hover { color: #0d9488; }
+.ccm-text-rose { color: #e11d48; font-weight: 600; }
+
+/* Temp Badge */
+.ccm-temp-ok { display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; background: #f0fdf4; color: #059669; }
+.ccm-temp-cold { display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; background: #f0f9ff; color: #0284c7; }
+.ccm-temp-hot { display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; background: #fef2f2; color: #e11d48; }
+
+/* Badges */
+.ccm-badge-product { background: #f0f9ff; color: #0284c7; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 500; }
+.ccm-badge-type { background: #fffbeb; color: #d97706; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 500; }
+.ccm-badge-standard { background: #f5f3ff; color: #7c3aed; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 500; }
+.ccm-badge-status { display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.ccm-status-in-transit { background: #f0f9ff; color: #0284c7; }
+.ccm-status-at-hub { background: #f0fdf4; color: #059669; }
+.ccm-status-loading { background: #fffbeb; color: #d97706; }
+.ccm-status-unloading { background: #f0f9ff; color: #0284c7; }
+.ccm-status-completed { background: #f0fdf4; color: #059669; }
+.ccm-status-delayed { background: #fef2f2; color: #e11d48; }
+.ccm-badge-severity { display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+.ccm-sev-critical { background: #7f1d1d; color: #fff; }
+.ccm-sev-high { background: #fef2f2; color: #e11d48; }
+.ccm-sev-medium { background: #fffbeb; color: #d97706; }
+.ccm-sev-low { background: #f0fdf4; color: #059669; }
+.ccm-badge-compliance { display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.ccm-comp-compliant { background: #f0fdf4; color: #059669; }
+.ccm-comp-at-risk { background: #fffbeb; color: #d97706; }
+.ccm-comp-non-compliant { background: #fef2f2; color: #e11d48; }
+.ccm-badge-result { display: inline-flex; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.ccm-result-pass { background: #f0fdf4; color: #059669; }
+.ccm-result-conditional { background: #fffbeb; color: #d97706; }
+.ccm-result-fail { background: #fef2f2; color: #e11d48; }
+.ccm-result-scheduled { background: #f0f9ff; color: #0284c7; }
+.ccm-badge-resolved { background: #f0fdf4; color: #059669; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.ccm-badge-ack { background: #fffbeb; color: #d97706; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+.ccm-badge-unack { background: #fef2f2; color: #e11d48; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+
+/* Energy Cards */
+.ccm-energy-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.ccm-energy-card { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 4px solid #7c3aed; }
+.ccm-energy-label { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 12px; }
+.ccm-energy-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ccm-energy-metrics > div { text-align: center; }
+.ccm-energy-val { display: block; font-size: 16px; font-weight: 700; color: #7c3aed; }
+.ccm-energy-sub { display: block; font-size: 10px; color: #64748b; font-weight: 500; }
+
+/* Drawer */
+.ccm-sheet { width: 520px !important; padding: 0 !important; overflow-y: auto; }
+.ccm-sheet-body { padding: 24px; }
+.ccm-drawer-header { background: linear-gradient(135deg, #0284c7, #6366f1); margin: -24px -24px 20px; padding: 24px; color: #fff; }
+.ccm-drawer-header-left { display: flex; align-items: center; gap: 16px; }
+.ccm-drawer-title { font-size: 18px; font-weight: 700; color: #fff; }
+.ccm-drawer-subtitle { font-size: 13px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+.ccm-drawer-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.ccm-drawer-desc { background: #f8fafc; border-left: 3px solid #0d9488; padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 13px; color: #475569; line-height: 1.5; margin-bottom: 16px; }
+.ccm-drawer-alert-icon { font-size: 40px; }
+.ccm-drawer-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.ccm-drawer-metric-card { background: #f8fafc; border-radius: 10px; padding: 12px; text-align: center; border-top: 3px solid #e2e8f0; }
+.ccm-drawer-metric-label { font-size: 11px; color: #64748b; font-weight: 500; display: block; }
+.ccm-drawer-metric-value { font-size: 16px; font-weight: 700; color: #0f172a; margin-top: 4px; display: block; }
+.ccm-drawer-score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+.ccm-drawer-score-item { background: #f8fafc; border-radius: 10px; padding: 10px; text-align: center; border-top: 3px solid #e2e8f0; }
+.ccm-drawer-score-label { font-size: 11px; color: #64748b; font-weight: 500; display: block; }
+.ccm-drawer-score-value { font-size: 16px; font-weight: 700; color: #0f172a; margin-top: 4px; display: block; }
+.ccm-drawer-field-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+.ccm-drawer-field { background: #f8fafc; border-radius: 8px; padding: 10px 12px; }
+.ccm-drawer-field-label { font-size: 11px; color: #64748b; font-weight: 500; display: block; }
+.ccm-drawer-field-value { font-size: 13px; color: #0f172a; font-weight: 600; margin-top: 2px; display: block; }
+.ccm-drawer-actions { display: flex; gap: 10px; margin-top: 20px; }
+.ccm-btn-primary { padding: 8px 20px; background: #0d9488; color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.ccm-btn-primary:hover { background: #0f766e; }
+.ccm-btn-secondary { padding: 8px 20px; background: #fff; color: #0d9488; border: 1px solid #0d9488; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.ccm-btn-secondary:hover { background: #f0fdfa; }
+.ccm-btn-ghost { padding: 8px 20px; background: transparent; color: #64748b; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; }
+.ccm-btn-ghost:hover { background: #f8fafc; color: #0f172a; }
+
+@media (max-width: 1024px) {
+  .ccm-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  .ccm-chart-grid { grid-template-columns: 1fr; }
+  .ccm-chart-wide { grid-column: span 1; }
+  .ccm-energy-summary-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .ccm-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .ccm-drawer-field-grid { grid-template-columns: 1fr; }
+  .ccm-drawer-score-grid { grid-template-columns: repeat(2, 1fr); }
+  .ccm-drawer-metrics { grid-template-columns: 1fr; }
+  .ccm-sheet { width: 100% !important; }
+  .ccm-energy-summary-grid { grid-template-columns: 1fr; }
+}
