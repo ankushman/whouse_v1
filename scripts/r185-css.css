@@ -1,0 +1,168 @@
+/* R185 - Packaging Optimization View */
+
+.pkg-root {
+  --pkg-teal: #0d9488;
+  --pkg-indigo: #6366f1;
+  --pkg-rose: #e11d48;
+  --pkg-amber: #d97706;
+  --pkg-emerald: #059669;
+  --pkg-sky: #0284c7;
+}
+
+.pkg-tabs {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pkg-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.pkg-tab {
+  min-width: fit-content;
+  transition: all 0.2s ease;
+}
+.pkg-tab-active {
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.3);
+}
+.pkg-tab-inactive:hover {
+  background: rgba(13, 148, 136, 0.06);
+}
+
+.pkg-kpi-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pkg-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.pkg-kpi-value {
+  letter-spacing: -0.02em;
+}
+
+.pkg-chart-card {
+  transition: box-shadow 0.2s ease;
+}
+.pkg-chart-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+.pkg-chart-title {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.pkg-table-wrap {
+  border-color: var(--border);
+}
+.pkg-table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(13, 148, 136, 0.3) transparent;
+}
+.pkg-table-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.pkg-table-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.pkg-table-scroll::-webkit-scrollbar-thumb {
+  background: rgba(13, 148, 136, 0.3);
+  border-radius: 3px;
+}
+.pkg-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 148, 136, 0.5);
+}
+
+.pkg-thead {
+  backdrop-filter: blur(8px);
+  background: rgba(241, 245, 249, 0.9);
+}
+
+.pkg-th {
+  user-select: none;
+  white-space: nowrap;
+}
+.pkg-th:hover {
+  color: var(--pkg-teal);
+}
+
+.pkg-row {
+  transition: background-color 0.15s ease;
+}
+
+.pkg-td {
+  white-space: nowrap;
+}
+
+.pkg-search {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.pkg-search:focus {
+  border-color: var(--pkg-teal);
+}
+
+.pkg-select {
+  transition: border-color 0.2s ease;
+  cursor: pointer;
+}
+.pkg-select:focus {
+  border-color: var(--pkg-teal);
+  outline: none;
+}
+
+.pkg-sus-bar {
+  background: rgba(0, 0, 0, 0.06);
+  transition: width 0.4s ease;
+}
+
+.pkg-drawer-header {
+  background-size: 200% 200%;
+  animation: pkg-gradient-shift 6s ease infinite;
+}
+@keyframes pkg-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.pkg-metric-card {
+  transition: transform 0.15s ease;
+}
+.pkg-metric-card:hover {
+  transform: translateY(-1px);
+}
+
+.pkg-field-row {
+  transition: background-color 0.15s ease;
+}
+.pkg-field-row:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.pkg-action-btn {
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.pkg-action-btn:active {
+  transform: scale(0.97);
+}
+
+.pkg-cost-kpi,
+.pkg-sus-kpi {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pkg-cost-kpi:hover,
+.pkg-sus-kpi:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.pkg-filters {
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .pkg-kpi-value {
+    font-size: 1rem;
+  }
+  .pkg-drawer-fields {
+    grid-template-columns: 1fr;
+  }
+}

@@ -37,10 +37,10 @@ function formatINR(v: number) {
 }
 
 interface Shipment { id: string; carrier: string; route: string; productType: string; sensorCount: number; currentTemp: number; targetTempMin: number; targetTempMax: number; humidity: number; status: string; departure: string; eta: string; excursions: number; complianceScore: number; warehouse: string; value: number }
-interface ColdRoom { id: string; warehouse: string; roomName: string; currentTemp: number; targetTemp: number; humidity: number; capacity: number; occupancy: number; doorOpenMins: number; lastDefrost: string; compressors: number; activeAlerts: number; energyKwh: number; compliance: string; warehouse: string }
-interface SensorAlert { id: string; warehouse: string; roomOrShipment: string; alertType: string; severity: string; currentValue: number; threshold: number; deviation: string; timestamp: string; acknowledged: boolean; resolved: boolean; costImpact: number; warehouse: string }
-interface ComplianceRecord { id: string; warehouse: string; standard: string; auditDate: string; score: number; findings: number; critical: number; status: string; nextAudit: string; auditor: string; warehouse: string }
-interface EnergyRecord { id: string; warehouse: string; period: string; consumptionKwh: number; cost: number; efficiency: number; benchmark: number; deviation: number; compressorHours: number; defrostCycles: number; warehouse: string }
+interface ColdRoom { id: string; warehouse: string; roomName: string; currentTemp: number; targetTemp: number; humidity: number; capacity: number; occupancy: number; doorOpenMins: number; lastDefrost: string; compressors: number; activeAlerts: number; energyKwh: number; compliance: string }
+interface SensorAlert { id: string; warehouse: string; roomOrShipment: string; alertType: string; severity: string; currentValue: number; threshold: number; deviation: string; timestamp: string; acknowledged: boolean; resolved: boolean; costImpact: number }
+interface ComplianceRecord { id: string; warehouse: string; standard: string; auditDate: string; score: number; findings: number; critical: number; status: string; nextAudit: string; auditor: string }
+interface EnergyRecord { id: string; warehouse: string; period: string; consumptionKwh: number; cost: number; efficiency: number; benchmark: number; deviation: number; compressorHours: number; defrostCycles: number }
 
 function generateData() {
   const s = seededRandom(184)
@@ -49,7 +49,7 @@ function generateData() {
 
   const shipments: Shipment[] = Array.from({ length: 80 }, (_, i) => {
     const prodType = pick(PRODUCT_TYPES)
-    const tMin = prodType === "Frozen Foods" ? -25 : prodType === "Pharmaceuticals" ? 2 : prodType === "Fresh Produce" ? 1 : prodType === "Meat & Poultry" ? -18 : prodType === "Seafood" ? -20 : prodType === "Ice Cream" ? -22 : prodType === "Dairy" ? 0 : prodType === "Beverages" ? 4 : 3
+    const tMin = prodType === "Frozen Foods" ? -25 : prodType === "Pharmaceuticals" ? 2 : prodType === "Fresh Produce" ? 1 : prodType === "Meat & Poultry" ? -18 : prodType === "Seafood" ? -20 : prodType === "Ice Cream" ? -22 : prodType === "Dairy Products" ? 0 : prodType === "Beverages" ? 4 : 3
     const tMax = tMin + (prodType === "Frozen Foods" ? 4 : prodType === "Pharmaceuticals" ? 6 : prodType === "Fresh Produce" ? 6 : 5)
     const curTemp = tMin + Math.floor(s() * (tMax - tMin + 3)) - 1
     return {
