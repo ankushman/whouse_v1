@@ -101,6 +101,7 @@ import HyperlocalDeliveryView from "@/components/modules/hyperlocal-delivery-vie
 import CarbonFootprintTrackerView from "@/components/modules/carbon-footprint-tracker-view"
 import SmartLockerKioskView from "@/components/modules/smart-locker-kiosk-view"
 import WarehouseDigitalTwinView from "@/components/modules/warehouse-digital-twin-view"
+import AGVFleetManagementView from "@/components/modules/agv-fleet-management-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -202,6 +203,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "carbon-footprint": CarbonFootprintTrackerView,
   "smart-locker-kiosk": SmartLockerKioskView,
   "warehouse-digital-twin": WarehouseDigitalTwinView,
+  "agv-fleet-management": AGVFleetManagementView,
   "shift-handover": ShiftHandoverView,
 }
 

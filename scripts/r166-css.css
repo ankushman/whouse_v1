@@ -1,0 +1,215 @@
+/* ================================================================
+   R166: AGV Fleet Management (agv-*) 
+   Theme: Orange #f97316 + Cyan #06b6d4 + Violet #8b5cf6
+   ================================================================ */
+
+/* Container */
+.agv-container { padding: 24px; max-width: 1440px; margin: 0 auto; font-family: 'Inter', system-ui, sans-serif; }
+.agv-page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.agv-page-title-row { display: flex; align-items: center; gap: 12px; }
+.agv-page-title { font-size: 24px; font-weight: 700; color: #f1f5f9; margin: 0; letter-spacing: -0.5px; }
+.agv-page-subtitle { font-size: 13px; color: #64748b; margin: 2px 0 0; }
+.agv-header-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+.agv-header-stat { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #94a3b8; background: #0f172a; padding: 6px 12px; border-radius: 8px; border: 1px solid #1e293b; }
+.agv-header-stat svg { color: #f97316; }
+
+/* Live clock */
+.agv-clock-row { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 8px 14px; background: #0f172a; border-radius: 8px; border: 1px solid #1e293b; }
+.agv-live-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: agv-pulse 1.5s infinite; }
+@keyframes agv-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.agv-clock-text { font-size: 13px; color: #94a3b8; font-variant-numeric: tabular-nums; }
+
+/* Tabs */
+.agv-tabs { display: flex; gap: 4px; margin-bottom: 20px; background: #0f172a; border-radius: 10px; padding: 4px; border: 1px solid #1e293b; overflow-x: auto; }
+.agv-tab { padding: 10px 18px; border: none; background: transparent; color: #64748b; font-size: 13px; font-weight: 500; cursor: pointer; border-radius: 8px; transition: all 0.2s; white-space: nowrap; }
+.agv-tab:hover { color: #e2e8f0; background: #1e293b; }
+.agv-tab-active { background: linear-gradient(135deg, #f97316, #ea580c) !important; color: #fff !important; box-shadow: 0 2px 8px rgba(249,115,22,0.3); }
+
+/* Tab content */
+.agv-tab-content { animation: agv-fadeIn 0.3s ease; }
+@keyframes agv-fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* KPI grid */
+.agv-kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.agv-kpi-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 16px; display: flex; align-items: center; gap: 14px; border-top: 3px solid; transition: transform 0.2s, box-shadow 0.2s; }
+.agv-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.agv-kpi-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.agv-kpi-body { display: flex; flex-direction: column; gap: 2px; }
+.agv-kpi-value { font-size: 22px; font-weight: 700; color: #f1f5f9; font-variant-numeric: tabular-nums; }
+.agv-kpi-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Charts */
+.agv-charts-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; margin-bottom: 16px; }
+.agv-chart-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 16px; }
+.agv-chart-wide { grid-column: span 1; }
+.agv-chart-full { margin-bottom: 16px; }
+.agv-chart-header { margin-bottom: 12px; }
+.agv-chart-title { font-size: 14px; font-weight: 600; color: #e2e8f0; margin: 0; }
+
+/* Heat map */
+.agv-heatmap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.agv-heatmap-cell { border-radius: 10px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; border: 1px solid; transition: transform 0.2s; cursor: default; min-height: 80px; }
+.agv-heatmap-cell:hover { transform: scale(1.05); }
+.agv-heatmap-aisle { font-size: 15px; font-weight: 700; color: #f1f5f9; }
+.agv-heatmap-zone { font-size: 10px; color: #94a3b8; }
+.agv-heatmap-count { font-size: 11px; font-weight: 600; color: #e2e8f0; }
+.agv-heatmap-density { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Filter row */
+.agv-filter-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; }
+.agv-search-box { flex: 1; min-width: 240px; }
+.agv-search-input { width: 100%; padding: 9px 14px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; font-size: 13px; outline: none; transition: border-color 0.2s; box-sizing: border-box; }
+.agv-search-input:focus { border-color: #f97316; }
+.agv-search-input::placeholder { color: #475569; }
+.agv-filter-pills { display: flex; gap: 4px; flex-wrap: wrap; }
+.agv-pill { padding: 6px 12px; border: 1px solid #334155; background: transparent; color: #94a3b8; font-size: 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.agv-pill:hover { border-color: #64748b; color: #e2e8f0; }
+.agv-pill-active { background: #f97316 !important; border-color: #f97316 !important; color: #fff !important; }
+
+/* Fleet stats bar */
+.agv-fleet-stats { display: flex; gap: 20px; padding: 10px 16px; background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; margin-bottom: 12px; font-size: 12px; color: #64748b; }
+.agv-fleet-stats b { color: #e2e8f0; }
+
+/* Table */
+.agv-table-wrapper { overflow-x: auto; background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; margin-bottom: 12px; }
+.agv-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.agv-table thead { background: #1e293b; }
+.agv-table th { padding: 10px 12px; text-align: left; color: #94a3b8; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #334155; white-space: nowrap; }
+.agv-th-sortable { cursor: pointer; user-select: none; display: flex; align-items: center; gap: 4px; }
+.agv-th-sortable:hover { color: #f97316; }
+.agv-table-row { border-left: 3px solid; transition: background 0.15s; }
+.agv-table-row:hover { background: #1e293b80; }
+.agv-table td { padding: 9px 12px; color: #cbd5e1; border-bottom: 1px solid #1e293b; white-space: nowrap; }
+.agv-td-id { font-weight: 600; color: #e2e8f0; font-variant-numeric: tabular-nums; }
+.agv-td-model { color: #94a3b8; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+.agv-td-task { max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+
+/* Badges */
+.agv-status-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: capitalize; }
+.agv-type-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; background: #8b5cf620; color: #a78bfa; border: 1px solid #8b5cf630; }
+
+/* Battery cell */
+.agv-battery-cell { display: flex; align-items: center; gap: 8px; }
+.agv-battery-bar-track { width: 50px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; }
+.agv-battery-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+.agv-battery-text { font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Efficiency cell */
+.agv-eff-cell { display: flex; align-items: center; gap: 6px; }
+.agv-eff-bar-track { width: 40px; height: 5px; background: #1e293b; border-radius: 3px; overflow: hidden; }
+.agv-eff-bar-fill { height: 100%; border-radius: 3px; }
+
+/* View button */
+.agv-view-btn { padding: 5px 10px; background: #f9731620; border: 1px solid #f9731640; color: #f97316; border-radius: 6px; cursor: pointer; display: flex; align-items: center; transition: all 0.2s; }
+.agv-view-btn:hover { background: #f97316; color: #fff; }
+
+/* Pagination */
+.agv-pagination { display: flex; gap: 4px; align-items: center; justify-content: center; padding: 8px; }
+.agv-page-btn { width: 32px; height: 32px; border: 1px solid #334155; background: #0f172a; color: #94a3b8; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all 0.2s; }
+.agv-page-btn:hover:not(:disabled) { border-color: #f97316; color: #f97316; }
+.agv-page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.agv-page-active { background: #f97316 !important; border-color: #f97316 !important; color: #fff !important; }
+
+/* Charging grid */
+.agv-charging-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.agv-station-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 16px; transition: transform 0.2s, box-shadow 0.2s; border-left: 3px solid; }
+.agv-station-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.agv-station-header { margin-bottom: 12px; }
+.agv-station-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.agv-station-name { font-size: 14px; font-weight: 600; color: #e2e8f0; }
+.agv-station-status-dot { width: 8px; height: 8px; border-radius: 50%; margin-left: auto; }
+.agv-station-warehouse { font-size: 11px; color: #64748b; }
+.agv-station-slots { margin-bottom: 10px; }
+.agv-slot-bar-track { display: flex; gap: 3px; }
+.agv-slot-indicator { width: 20px; height: 14px; border-radius: 3px; transition: background 0.3s; }
+.agv-slot-bar-track-lg .agv-slot-indicator-lg { width: 28px; height: 20px; border-radius: 4px; }
+.agv-slot-label { font-size: 11px; color: #64748b; margin-top: 6px; display: block; }
+.agv-station-stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.agv-station-stat { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #94a3b8; }
+.agv-card-action-btn { width: 100%; padding: 8px; background: #06b6d415; border: 1px solid #06b6d430; color: #06b6d4; border-radius: 8px; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
+.agv-card-action-btn:hover { background: #06b6d4; color: #fff; }
+
+/* Section header */
+.agv-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.agv-section-title { font-size: 16px; font-weight: 600; color: #e2e8f0; margin: 0; }
+
+/* Path grid */
+.agv-path-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.agv-path-card { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 14px; border-left: 3px solid; transition: transform 0.2s; }
+.agv-path-card:hover { transform: translateY(-1px); }
+.agv-path-name { font-size: 13px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px; }
+.agv-path-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.agv-path-status { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; text-transform: capitalize; }
+.agv-path-detail { font-size: 11px; color: #64748b; }
+.agv-path-incidents { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #ef4444; margin-top: 8px; }
+
+/* Alert list */
+.agv-alert-list { display: flex; flex-direction: column; gap: 8px; }
+.agv-alert-row { display: flex; gap: 12px; align-items: flex-start; background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 14px; border-left: 3px solid; transition: background 0.15s; }
+.agv-alert-row:hover { background: #1e293b60; }
+.agv-alert-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.agv-alert-body { flex: 1; min-width: 0; }
+.agv-alert-title { font-size: 13px; font-weight: 600; color: #e2e8f0; margin-bottom: 4px; }
+.agv-alert-msg { font-size: 12px; color: #94a3b8; margin-bottom: 6px; }
+.agv-alert-meta { display: flex; gap: 12px; font-size: 11px; color: #64748b; flex-wrap: wrap; }
+.agv-alert-value { color: #94a3b8; }
+.agv-alert-ack { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+.agv-ack-yes { background: #22c55e20; color: #22c55e; }
+.agv-ack-no { background: #f59e0b20; color: #f59e0b; }
+
+/* Drawer overlay */
+.agv-drawer-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 100; animation: agv-overlayIn 0.25s; }
+@keyframes agv-overlayIn { from { opacity: 0; } to { opacity: 1; } }
+.agv-drawer-panel { position: fixed; top: 0; right: 0; width: 480px; max-width: 90vw; height: 100vh; background: #0f172a; border-left: 1px solid #1e293b; z-index: 101; display: flex; flex-direction: column; animation: agv-slideIn 0.3s ease; overflow: hidden; }
+@keyframes agv-slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+/* Drawer header */
+.agv-drawer-header { padding: 20px 24px 16px; flex-shrink: 0; }
+.agv-drawer-header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.agv-drawer-header-info { display: flex; align-items: center; gap: 12px; }
+.agv-drawer-header-icon { color: #fff; }
+.agv-drawer-title { font-size: 20px; font-weight: 700; color: #fff; }
+.agv-drawer-subtitle { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 2px; }
+.agv-drawer-close { background: rgba(255,255,255,0.15); border: none; color: #fff; border-radius: 6px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.agv-drawer-close:hover { background: rgba(255,255,255,0.25); }
+.agv-drawer-badges { display: flex; gap: 6px; }
+.agv-drawer-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; text-transform: capitalize; }
+
+/* Drawer body */
+.agv-drawer-body { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.agv-drawer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.agv-drawer-field { background: #1e293b40; border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 3px; }
+.agv-drawer-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+.agv-drawer-value { font-size: 13px; color: #e2e8f0; font-weight: 500; }
+.agv-drawer-section-title { font-size: 13px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; margin: 16px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #1e293b; }
+
+/* Drawer metric cards */
+.agv-drawer-card-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.agv-drawer-metric-card { background: #1e293b60; border: 1px solid #334155; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.agv-drawer-metric-label { font-size: 10px; color: #64748b; text-transform: uppercase; }
+.agv-drawer-metric-value { font-size: 20px; font-weight: 700; }
+.agv-drawer-metric-bar { width: 100%; height: 4px; background: #1e293b; border-radius: 2px; overflow: hidden; margin-top: 4px; }
+.agv-drawer-metric-bar div { height: 100%; border-radius: 2px; transition: width 0.5s; }
+
+/* Drawer actions */
+.agv-drawer-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; padding-top: 16px; border-top: 1px solid #1e293b; }
+.agv-action-btn { padding: 9px 16px; border-radius: 8px; font-size: 12px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; border: none; }
+.agv-action-primary { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; box-shadow: 0 2px 8px rgba(249,115,22,0.3); }
+.agv-action-primary:hover { box-shadow: 0 4px 14px rgba(249,115,22,0.4); transform: translateY(-1px); }
+.agv-action-secondary { background: #1e293b; border: 1px solid #334155; color: #cbd5e1; }
+.agv-action-secondary:hover { border-color: #f97316; color: #f97316; }
+.agv-action-ghost { background: transparent; border: 1px solid #334155; color: #64748b; }
+.agv-action-ghost:hover { border-color: #64748b; color: #cbd5e1; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .agv-container { padding: 12px; }
+  .agv-page-header { flex-direction: column; gap: 12px; }
+  .agv-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .agv-charts-row { grid-template-columns: 1fr; }
+  .agv-charging-grid { grid-template-columns: 1fr; }
+  .agv-path-grid { grid-template-columns: 1fr; }
+  .agv-drawer-panel { width: 100vw; }
+  .agv-drawer-grid { grid-template-columns: 1fr; }
+  .agv-drawer-card-row { grid-template-columns: 1fr; }
+}

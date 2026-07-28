@@ -27,6 +27,7 @@ import {
   User,
   Shield,
   Building2,
+  Bot,
   Clock,
   CheckCircle2,
   AlertTriangle,
@@ -233,6 +234,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   MapPinCheck,
   LockKeyhole,
   Building2,
+  Bot,
   Zap,
 } as const
 const recentNotifications = [
