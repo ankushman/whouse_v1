@@ -90,6 +90,7 @@ import DockSchedulingYardView from "@/components/modules/dock-scheduling-yard-vi
 import DangerousGoodsHazMatView from "@/components/modules/dangerous-goods-hazmat-view"
 import CustomsDutyGstView from "@/components/modules/customs-duty-gst-view"
 import PalletContainerView from "@/components/modules/pallet-container-view"
+import ReturnsQualityInspectionView from "@/components/modules/returns-quality-inspection-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -180,6 +181,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "dangerous-goods-hazmat": DangerousGoodsHazMatView,
   "customs-duty-gst": CustomsDutyGstView,
   "pallet-container": PalletContainerView,
+  "returns-quality-inspection": ReturnsQualityInspectionView,
   "shift-handover": ShiftHandoverView,
 }
 
