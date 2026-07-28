@@ -1,4 +1,114 @@
 ---
+Task ID: 207
+Agent: Main (Cron Review - Round 207)
+Task: R207 — Barcode & Labels Management module + Drayage & First-Mile Operations module
+
+Work Log:
+- Read worklog.md (R206 latest, 136 navItems, 0 TSC errors in src/)
+- TSC src/: 2 errors — BarcodeLabelView missing file (exported in index.ts, referenced in page.tsx viewMap, but file never created)
+- Fixed page.tsx: added `import BarcodeLabelView from "@/components/modules/barcode-label-view"` (line 144)
+- agent-browser QA: dev server OOM — known infra issue, skipped
+
+- Created R207a: Barcode & Labels Management module
+  * FILE: src/components/modules/barcode-label-view.tsx (1,422 lines)
+  * 6 tabs: Label Dashboard | Label Templates | Print Queue | Scan History | Compliance & Standards | Label Analytics
+  * Theme: Emerald #059669 + Amber #d97706 + Violet #7c3aed + Slate #475569 + Cyan #0891b2 + Rose #e11d48, CSS prefix: bl-*
+  * Tab 0 (Dashboard): 8 KPIs (Active Templates/Labels Printed Today/Print Queue/Scan Rate/Avg Print Time/Label Errors/Compliance Score/Ink Level), monthly volume AreaChart, print status PieChart, type distribution BarChart
+  * Tab 1 (Label Templates): 60 templates, 12 types (EAN-13/QR Code/Shipping/Pallet/Return/Hazmat/Pharma/Serial/Batch/Location/GS1-128/Product), 8 statuses, 10 categories (FMCG/Electronics/Pharma/Apparel/Auto/Food/Chemical/Textile/Agriculture/Industrial). TemplateTypeBadge, TemplateStatusBadge, CategoryBadge, FormatBadge, PrintCountIndicator, TemplatePreviewCard. Search/filter, sortable table (10 cols). Drawer: emerald→teal gradient, 3 actions (Edit/Duplicate/Archive)
+  * Tab 2 (Print Queue): 75 print jobs, 8 statuses, 10 Indian warehouse printers (HP/Toshiba/Zebra/Sato/Intermec/Citizen/Dymo/Brother/Epson/Aristo), 5 priorities, 8 paper sizes. PrintJobStatusBadge (Printing=cyan pulse), PriorityBadge (5-tier), ProgressIndicator. Drawer: amber→yellow gradient, 3 actions (Reprint/Cancel/Pause)
+  * Tab 3 (Scan History): 85 scan records, 10 scan types (Receiving/Picking/Packing/Shipping/Inventory/Returns/Quality/Audit/Putaway/Loading), 8 statuses, 12 warehouse zones, 10 scanner devices. ScanTypeBadge, ScanStatusBadge (Invalid+Duplicate+Blacklisted=red pulse), LocationBadge, DeviceBadge, BarcodePreview. Drawer: violet→purple gradient, 3 actions (Re-scan/Investigate/Export)
+  * Tab 4 (Compliance & Standards): 50 records, 10 barcode standards (GS1/EAN-13/UPC-A/QR Code/Data Matrix/ITF-14/Code 128/GS1-128/Code 39/Aztec), 8 statuses, 6 audit frequencies. StandardBadge, ComplianceStatusBadge, ComplianceScoreBar, AuditFrequencyBadge. Drawer: cyan→blue gradient, 3 actions (Audit/Remediate/Exempt)
+  * Tab 5 (Label Analytics): 8 analytics KPIs, daily 30-day LineChart, error breakdown BarChart, compliance trend, cost PieChart, monthly efficiency AreaChart
+
+- BUG FIX: Fixed 12 toast() calls in barcode-label-view.tsx — changed `toast({ title: "...", description: "..." })` to `toast.success("title", "description")` / `toast.warning()` / `toast.info()` per useToast hook API
+
+- Created R207b: Drayage & First-Mile Operations module (NEW navItem)
+  * FILE: src/components/modules/drayage-first-mile-view.tsx (2,560 lines)
+  * 6 tabs: Drayage Dashboard | Active Drayage Orders | Truck & Driver Management | Port/ICD Scheduling | Container Tracking | Drayage Analytics
+  * Theme: Teal #0d9488 + Orange #ea580c + Indigo #4f46e5 + Slate #475569 + Amber #d97706 + Emerald #059669, CSS prefix: dfm-*
+  * Tab 0 (Dashboard): 8 KPIs, weekly trip volume AreaChart, port-wise BarChart (6 Indian ports), order status PieChart
+  * Tab 1 (Active Drayage Orders): 70 orders, 8 statuses, 10 order types (FCL Import/Export, LCL, Empty Return, Devanning, Stuffing, Cross-Dock, Bonded, Transshipment), 8 container types, 12 Indian ports (JNPT/Mundra/Chennai/Hazira/Visakhapatnam/Tuticorin/Cochin/Kolkata/Kandla/Ennore/Dahej/Krishnapatnam), 15 destination cities. DrayageStatusBadge, OrderTypeBadge, ContainerTypeBadge, PortBadge, TripProgressIndicator (6-stage), CostTile, DetentionWarningBadge. Drawer: teal→emerald gradient, 3 actions (Reassign/Track/Escalate)
+  * Tab 2 (Truck & Driver Management): 50 trucks, 10 truck types, 8 statuses, 12 Indian trucking companies (BlueDart/TCI/VRL/Gati/Transport Corp/BlackBuck/Roadzen/Vahak/Porter/Ninjacart/TVS Supply/DHL), 20 base cities. TruckStatusBadge, TruckTypeBadge, CompanyBadge, DriverInfoTile, LocationTile, MaintenanceDueBadge. Drawer: orange→amber gradient, 3 actions (Dispatch/Track/Schedule Maintenance)
+  * Tab 3 (Port/ICD Scheduling): 45 appointments, 8 statuses, 6 time slots, 5 appointment types. AppointmentStatusBadge, TimeSlotBadge, GatePassBadge, WaitTimeIndicator. Drawer: indigo→violet gradient, 3 actions (Reschedule/Check-In/Cancel)
+  * Tab 4 (Container Tracking): 65 containers, 8 statuses, GPSLocationTile, ETAIndicator, DaysInTransitCounter, TemperatureIndicator (reefer °C). Drawer: slate→gray-800 gradient, 3 actions (Track/Reroute/Report Damage)
+  * Tab 5 (Drayage Analytics): 8 KPIs, monthly trip trend LineChart, port performance BarChart, container utilization PieChart, cost breakdown horizontal BarChart, on-time AreaChart
+
+- Unique Visual Components (43 total across both modules):
+  * Barcode module (21): TemplateTypeBadge, TemplateStatusBadge, CategoryBadge, FormatBadge, PrintCountIndicator, TemplatePreviewCard, PrintJobStatusBadge, PrinterBadge, PriorityBadge, PaperSizeBadge, ProgressIndicator, ScanTypeBadge, ScanStatusBadge, LocationBadge, DeviceBadge, ScanTimeIndicator, BarcodePreview, StandardBadge, ComplianceStatusBadge, AuditFrequencyBadge, ComplianceScoreBar
+  * Drayage module (22): DrayageStatusBadge, OrderTypeBadge, ContainerTypeBadge, PortBadge, ETAIndicator, TripProgressIndicator, CostTile, DetentionWarningBadge, TruckStatusBadge, TruckTypeBadge, CompanyBadge, DriverInfoTile, LocationTile, MaintenanceDueBadge, AppointmentStatusBadge, TimeSlotBadge, GatePassBadge, WaitTimeIndicator, ContainerCountTile, GPSLocationTile, DaysInTransitCounter, TemperatureIndicator
+
+- CSS: appended to globals.css (+204 lines, bl-* + dfm-* prefixes)
+  * KPI cards with 8-color left border + gradient top stripe + staggered fade-up animation (8 items, 50ms delay)
+  * Shimmer loading effect on KPI grids
+  * Chart cards with themed border glow on hover
+  * Template preview card with diagonal stripe pattern
+  * Progress bar with glass overlay pattern (trip progress)
+  * Printing status cyan pulse animation
+  * Error/Invalid/Duplicate red pulse animation
+  * In Transit teal pulse animation
+  * Delayed/No-Show orange pulse animation
+  * Customs Hold red fast pulse animation
+  * GPS active blink animation (green dot)
+  * Detention warning flash animation (amber background)
+  * Badge shimmer animation
+  * Barcode preview bars (monospace)
+  * Compliance score bar (3-tier: high/mid/low gradients)
+  * Temperature indicator (3-tier: ok/warn/critical)
+  * Table: even-row striping, hover left border accent, tab-specific hover tints (4-5 tabs each)
+  * Sort header hover + active scale-down
+  * Action button hover scale + themed border
+  * Drawer themed border-left
+  * Analytics cards with hover lift
+  * Full dark mode overrides (25+ rules per module, custom scrollbar)
+  * Print optimization (break-inside avoid)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export BarcodeLabelView + DrayageFirstMileView
+  * src/app/page.tsx: import + viewMap entries 'barcode-label' + 'drayage-first-mile'
+  * src/store/app-store.ts: new navItem 'drayage-first-mile' (icon: Container, group: operations, roles: super_admin/executive/regional_manager/warehouse_manager/logistics/procurement/shift_lead)
+  * src/components/layout/app-layout.tsx: Container already in imports + iconMap — no change needed
+
+- BUG FIX: Fixed seededRandom in drayage-first-mile-view.tsx — changed from closure pattern `() => {}` to direct return pattern (matching all other modules)
+- BUG FIX: Removed 6 extra `()` calls on seededRandom() in data generation (lat/lng/weight/avgHours)
+
+TSC src/: 0 errors! (2 pre-existing BarcodeLabelView import errors eliminated)
+
+Stage Summary:
+- BUG FIX: Eliminated 2 TSC errors from missing BarcodeLabelView file + import
+- NEW MODULE: Barcode & Labels Management (1,422 lines, 21 unique visual components)
+- NEW MODULE: Drayage & First-Mile Operations (2,560 lines, 22 unique visual components, NEW navItem)
+- Total navItems: 137 (was 136, +1 drayage-first-mile)
+- Total view files: 137 (barcode-label now has view, +1 drayage-first-mile)
+- Combined data: 60 templates + 75 print jobs + 85 scan records + 50 compliance records + 70 drayage orders + 50 trucks + 45 appointments + 65 containers = 500 data records
+- CSS: +204 lines (bl-* ~95 lines + dfm-* ~110 lines)
+- Total globals.css: 46,043 lines (+204)
+
+## Updated Project Status (Post Round 207)
+- STATUS: STABLE + BARCODE LABELS + DRAYAGE MODULES (137 navItems)
+- MODULES: 137 view files + 137 navItems
+- TSC src/: **0 errors** ✅ (10 remain in non-src files only)
+- Total globals.css: 46,043 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 10 TS errors in non-src files (examples/, mini-services/, scripts/, skills/) — not app code
+- CSS at 46,043 lines
+- 8 navItems have name mismatch with view files (non-breaking: carbon-footprint, cold-chain-temp, etc.)
+
+PRIORITY NEXT:
+  1. New logistics modules (Chassis Pool Management, Dock Door Optimization, First-Mile Collection)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Fix navItem name mismatches (align navItem IDs with view file names)
+  7. Git resolution
+
+---
+
+
+---
 Task ID: 201
 Agent: Main (Cron Review - Round 201)
 Task: R201 — Tally Integration & ERP Sync module

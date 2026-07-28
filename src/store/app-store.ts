@@ -138,6 +138,7 @@ export const navItems: NavItem[] = [
   { id: 'demurrage-detention-mgmt', label: 'Demurrage & Detention', icon: 'Anchor', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'logistics', 'finance'] },
   { id: 'multi-warehouse-rebalance', label: 'Multi-WH Rebalancing', icon: 'GitCompareArrows', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics'] },
   { id: 'multi-modal-transport-corridor', label: 'Multi-Modal Transport', icon: 'Route', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
+  { id: 'drayage-first-mile', label: 'Drayage & First-Mile', icon: 'Container', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

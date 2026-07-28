@@ -141,6 +141,8 @@ import InventoryAgingObsolescenceView from "@/components/modules/inventory-aging
 import DemurrageDetentionMgmtView from "@/components/modules/demurrage-detention-mgmt-view"
 import MultiWarehouseRebalanceView from "@/components/modules/multi-warehouse-rebalance-view"
 import MultiModalTransportCorridorView from "@/components/modules/multi-modal-transport-corridor-view"
+import BarcodeLabelView from "@/components/modules/barcode-label-view"
+import DrayageFirstMileView from "@/components/modules/drayage-first-mile-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -282,6 +284,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "demurrage-detention-mgmt": DemurrageDetentionMgmtView,
   "multi-warehouse-rebalance": MultiWarehouseRebalanceView,
   "multi-modal-transport-corridor": MultiModalTransportCorridorView,
+  "drayage-first-mile": DrayageFirstMileView,
 }
 
 

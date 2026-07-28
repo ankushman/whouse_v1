@@ -132,4 +132,5 @@ export { default as InventoryAgingObsolescenceView } from './inventory-aging-obs
 export { default as DemurrageDetentionMgmtView } from './demurrage-detention-mgmt-view'
 export { default as MultiWarehouseRebalanceView } from './multi-warehouse-rebalance-view'
 export { default as MultiModalTransportCorridorView } from './multi-modal-transport-corridor-view'
+export { default as DrayageFirstMileView } from './drayage-first-mile-view'
 
