@@ -28,6 +28,7 @@ import {
   Shield,
   Building2,
   Bot,
+  GitFork,
   Clock,
   CheckCircle2,
   AlertTriangle,
@@ -235,6 +236,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LockKeyhole,
   Building2,
   Bot,
+  GitFork,
   Zap,
 } as const
 const recentNotifications = [

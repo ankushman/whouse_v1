@@ -93,3 +93,4 @@ export { default as CarbonFootprintTrackerView } from './carbon-footprint-tracke
 export { default as SmartLockerKioskView } from './smart-locker-kiosk-view'
 export { default as WarehouseDigitalTwinView } from './warehouse-digital-twin-view'
 export { default as AGVFleetManagementView } from './agv-fleet-management-view'
+export { default as ParcelSortingCrossDockView } from './parcel-sorting-crossdock-view'
