@@ -83,6 +83,7 @@ import QualityControlView from "@/components/modules/quality-control-view"
 import VehicleFleetTransportView from "@/components/modules/vehicle-fleet-transport-view"
 import CustomerServiceResolutionView from "@/components/modules/customer-service-resolution-view"
 import WarehouseAnalyticsBIView from "@/components/modules/warehouse-analytics-bi-view"
+import ReturnsRefundAnalyticsView from "@/components/modules/returns-refund-analytics-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -166,6 +167,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "vehicle-fleet-transport": VehicleFleetTransportView,
   "customer-service-resolution": CustomerServiceResolutionView,
   "warehouse-analytics-bi": WarehouseAnalyticsBIView,
+  "returns-refund-analytics": ReturnsRefundAnalyticsView,
   "shift-handover": ShiftHandoverView,
 }
 
