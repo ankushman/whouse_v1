@@ -43651,3 +43651,250 @@ html.theme-transition body {
 .dark .fap-sort-head:hover { color: #818cf8; }
 .dark .fap-tab-trigger:hover:not([data-state="active"]) { background: rgba(99, 102, 241, 0.08); color: #818cf8; }
 .dark .fap-badge-shimmer::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent); }
+
+/* ── E-Way Bill & GST Compliance Module (ewb-*) ───────────────── */
+
+/* Tab active state with blue-amber glow */
+.ewb-tab-trigger[data-state="active"] {
+  background: linear-gradient(135deg, #1e40af, #d97706) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 12px rgba(30, 64, 175, 0.35), 0 1px 4px rgba(217, 119, 6, 0.25);
+}
+.ewb-tab-trigger:not([data-state="active"]):hover {
+  background: rgba(30, 64, 175, 0.08);
+  color: #1e40af;
+}
+.dark .ewb-tab-trigger:not([data-state="active"]):hover {
+  background: rgba(30, 64, 175, 0.12);
+  color: #60a5fa;
+}
+
+/* KPI card staggered fade-up animation */
+.ewb-kpi-card {
+  animation: ewb-fade-up 0.45s ease-out both;
+}
+.ewb-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.ewb-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.ewb-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.ewb-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.ewb-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.ewb-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.ewb-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.ewb-kpi-card:nth-child(8) { animation-delay: 350ms; }
+
+@keyframes ewb-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Counter value scale-up */
+.ewb-counter {
+  animation: ewb-scale-up 0.5s ease-out;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes ewb-scale-up {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Validity timer pulse for <24h */
+@keyframes ewb-red-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.ewb-pulse-red { animation: ewb-red-pulse 1.2s ease-in-out infinite; }
+
+/* Route tracker dot movement */
+.ewb-checkpoint-appear {
+  animation: ewb-dot-pop 0.3s ease-out both;
+}
+@keyframes ewb-dot-pop {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Fill bar animation */
+.ewb-fill-bar {
+  animation: ewb-fill 0.7s ease-out both;
+  transform-origin: left;
+}
+@keyframes ewb-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Vehicle plate badge glow */
+.ewb-plate-glow {
+  box-shadow: 0 0 8px rgba(217, 119, 6, 0.2);
+}
+.ewb-plate-glow:hover {
+  box-shadow: 0 0 14px rgba(217, 119, 6, 0.4);
+}
+
+/* License plate monospace styling */
+.ewb-plate-glow {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.04em;
+}
+
+/* Filing calendar cell hover */
+.ewb-calendar-cell {
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.ewb-calendar-cell:hover {
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  z-index: 1;
+}
+
+/* Badge shimmer effect */
+.ewb-badge-shimmer { position: relative; overflow: hidden; }
+.ewb-badge-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: ewb-shimmer 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes ewb-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Sort header hover */
+.ewb-sort-head:hover { color: #1e40af; }
+.dark .ewb-sort-head:hover { color: #60a5fa; }
+
+/* Action button hover */
+.ewb-action-btn {
+  transition: transform 0.15s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.ewb-action-btn:hover {
+  transform: scale(1.06);
+  background: rgba(217, 119, 6, 0.08);
+  border-color: rgba(217, 119, 6, 0.35);
+  box-shadow: 0 1px 6px rgba(217, 119, 6, 0.2);
+}
+.dark .ewb-action-btn:hover {
+  background: rgba(217, 119, 6, 0.12);
+  color: #fbbf24;
+  border-color: rgba(217, 119, 6, 0.4);
+}
+
+/* Table row hover tint per-tab */
+.ewb-ewb-row:hover { background: rgba(30, 64, 175, 0.04) !important; }
+.ewb-vm-card:hover { border-color: rgba(217, 119, 6, 0.3); box-shadow: 0 4px 16px rgba(217, 119, 6, 0.12); }
+.ewb-gst-row:hover { background: rgba(5, 150, 105, 0.04) !important; }
+.ewb-itc-row:hover { background: rgba(225, 29, 72, 0.04) !important; }
+.dark .ewb-ewb-row:hover { background: rgba(30, 64, 175, 0.07) !important; }
+.dark .ewb-gst-row:hover { background: rgba(5, 150, 105, 0.07) !important; }
+.dark .ewb-itc-row:hover { background: rgba(225, 29, 72, 0.07) !important; }
+
+/* Analytics card hover lift */
+.ewb-analytics-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ewb-analytics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.dark .ewb-analytics-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+}
+
+/* Row striping */
+.ewb-row-stripe:nth-child(even) { background: rgba(0,0,0,0.015); }
+.dark .ewb-row-stripe:nth-child(even) { background: rgba(255,255,255,0.015); }
+
+/* KPI/Analytics/Filing responsive grids */
+.ewb-kpi-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) { .ewb-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .ewb-kpi-grid { grid-template-columns: 1fr; } }
+
+/* Section 16 countdown */
+.ewb-countdown { font-variant-numeric: tabular-nums; }
+
+/* Drawer header gradient override */
+.ewb-drawer [data-slot="sheet-header"] {
+  border-radius: 12px 0 0 0;
+}
+
+/* Custom scrollbar */
+.ewb-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.ewb-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.ewb-scrollbar::-webkit-scrollbar-thumb { background: rgba(30, 64, 175, 0.2); border-radius: 3px; }
+.ewb-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(30, 64, 175, 0.4); }
+
+/* Dark mode overrides */
+.dark .ewb-plate-glow { box-shadow: 0 0 8px rgba(217, 119, 6, 0.15); }
+.dark .ewb-plate-glow:hover { box-shadow: 0 0 14px rgba(217, 119, 6, 0.3); }
+.dark .ewb-badge-shimmer::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); }
+.dark .ewb-sort-head:hover { color: #60a5fa; }
+.dark .ewb-vm-card:hover { border-color: rgba(217, 119, 6, 0.2); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+/* EWB enhanced animations & details */
+.ewb-tab-trigger[data-state="active"] { box-shadow: 0 2px 10px rgba(30, 64, 175, 0.3), inset 0 1px 0 rgba(255,255,255,0.08); }
+.ewb-tab-trigger { transition: all 0.2s ease; position: relative; }
+.ewb-tab-trigger:hover:not([data-state="active"]) { background: rgba(30, 64, 175, 0.06); color: #1e40af; }
+.ewb-kpi-card { border-left: 3px solid transparent; position: relative; overflow: hidden; }
+.ewb-kpi-card::before { content: ''; position: absolute; top: 0; right: 0; width: 50px; height: 50px; border-radius: 50%; background: radial-gradient(circle, rgba(30,64,175,0.05) 0%, transparent 70%); pointer-events: none; }
+.ewb-kpi-card:nth-child(1) { border-left-color: #1e40af; }
+.ewb-kpi-card:nth-child(2) { border-left-color: #d97706; }
+.ewb-kpi-card:nth-child(3) { border-left-color: #e11d48; }
+.ewb-kpi-card:nth-child(4) { border-left-color: #059669; }
+.ewb-kpi-card:nth-child(5) { border-left-color: #0891b2; }
+.ewb-kpi-card:nth-child(6) { border-left-color: #7c3aed; }
+.ewb-kpi-card:nth-child(7) { border-left-color: #ea580c; }
+.ewb-kpi-card:nth-child(8) { border-left-color: #475569; }
+.ewb-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 64, 175, 0.12); }
+.ewb-ewb-row:hover { background: rgba(30, 64, 175, 0.04); }
+.ewb-vm-row:hover { background: rgba(217, 119, 6, 0.04); }
+.ewb-gst-row:hover { background: rgba(5, 150, 105, 0.04); }
+.ewb-itc-row:hover { background: rgba(225, 29, 72, 0.04); }
+.ewb-analytics-card { transition: all 0.2s ease; border-left: 3px solid transparent; }
+.ewb-analytics-card:nth-child(1) { border-left-color: #1e40af; }
+.ewb-analytics-card:nth-child(2) { border-left-color: #d97706; }
+.ewb-analytics-card:nth-child(3) { border-left-color: #059669; }
+.ewb-analytics-card:nth-child(4) { border-left-color: #e11d48; }
+.ewb-analytics-card:nth-child(5) { border-left-color: #7c3aed; }
+.ewb-analytics-card:nth-child(6) { border-left-color: #ea580c; }
+.ewb-analytics-card:nth-child(7) { border-left-color: #0891b2; }
+.ewb-analytics-card:nth-child(8) { border-left-color: #475569; }
+.ewb-analytics-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.ewb-row-stripe:nth-child(even) { background: rgba(30, 64, 175, 0.015); }
+.dark .ewb-row-stripe:nth-child(even) { background: rgba(30, 64, 175, 0.03); }
+.ewb-validity-urgent { animation: ewb-urgent-pulse 1.2s ease-in-out infinite; }
+@keyframes ewb-urgent-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.ewb-checkpoint-dot { transition: all 0.2s ease; }
+.ewb-checkpoint-dot:hover { transform: scale(1.4); filter: brightness(1.2); }
+.ewb-checkpoint-dot.completed { box-shadow: 0 0 6px rgba(5, 150, 105, 0.5); }
+.ewb-filing-month { transition: all 0.15s ease; }
+.ewb-filing-month:hover { transform: scale(1.08); filter: brightness(1.1); }
+.ewb-due-overdue { animation: ewb-due-flash 1s ease-in-out infinite; }
+@keyframes ewb-due-flash { 0%, 100% { background: rgba(225, 29, 72, 0.08); } 50% { background: rgba(225, 29, 72, 0.18); } }
+.ewb-match-bar { border-radius: 999px; overflow: hidden; position: relative; }
+.ewb-match-bar::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 50%); pointer-events: none; }
+.ewb-sort-head { cursor: pointer; transition: color 0.15s ease, background 0.15s ease; user-select: none; }
+.ewb-sort-head:active { transform: scale(0.98); }
+.ewb-action-btn { transition: all 0.15s ease; }
+.ewb-action-btn:hover { transform: scale(1.03); background: rgba(217, 119, 6, 0.08); color: #d97706; border-color: rgba(217, 119, 6, 0.3); }
+.ewb-plate-badge { font-family: 'Courier New', monospace; letter-spacing: 0.05em; font-weight: 700; }
+.ewb-ewb-number { font-family: 'Courier New', monospace; letter-spacing: 0.08em; }
+.ewb-gstin-display { font-family: 'Courier New', monospace; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+.ewb-chart-card { transition: box-shadow 0.2s ease; }
+.ewb-chart-card:hover { box-shadow: 0 4px 16px rgba(30, 64, 175, 0.08); }
+.dark .ewb-tab-trigger:hover:not([data-state="active"]) { background: rgba(96, 165, 250, 0.08); color: #60a5fa; }
+.dark .ewb-kpi-card::before { background: radial-gradient(circle, rgba(96,165,250,0.06) 0%, transparent 70%); }
+.dark .ewb-kpi-card:hover { box-shadow: 0 6px 24px rgba(30, 64, 175, 0.2); }
+.dark .ewb-ewb-row:hover { background: rgba(30, 64, 175, 0.06); }
+.dark .ewb-vm-row:hover { background: rgba(217, 119, 6, 0.06); }
+.dark .ewb-gst-row:hover { background: rgba(5, 150, 105, 0.06); }
+.dark .ewb-itc-row:hover { background: rgba(225, 29, 72, 0.06); }
+.dark .ewb-analytics-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+.dark .ewb-checkpoint-dot.completed { box-shadow: 0 0 10px rgba(52, 211, 153, 0.6); }
+.dark .ewb-match-bar::after { background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 50%); }
+.dark .ewb-action-btn:hover { background: rgba(217, 119, 6, 0.12); color: #fbbf24; border-color: rgba(217, 119, 6, 0.4); }
+.dark .ewb-chart-card:hover { box-shadow: 0 4px 20px rgba(30, 64, 175, 0.15); }
+.dark .ewb-plate-badge { color: #fbbf24; }
+.dark .ewb-due-overdue { animation: ewb-due-flash-dark 1s ease-in-out infinite; }
+@keyframes ewb-due-flash-dark { 0%, 100% { background: rgba(225, 29, 72, 0.12); } 50% { background: rgba(225, 29, 72, 0.25); } }

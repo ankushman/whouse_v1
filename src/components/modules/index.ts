@@ -125,4 +125,5 @@ export { default as ColdChainComplianceView } from './cold-chain-compliance-view
 export { default as CustomsDutyRefundView } from './customs-duty-refund-view'
 export { default as ExportDocumentationLCView } from './export-documentation-lc-view'
 export { default as FreightAuditPaymentView } from './freight-audit-payment-view'
+export { default as EWayBillGSTComplianceView } from './eway-bill-gst-compliance-view'
 
