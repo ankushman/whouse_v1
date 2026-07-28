@@ -115,4 +115,5 @@ export { default as PackagingOptimizationView } from './packaging-optimization-v
 export { default as LoadPlanningOptimizationView } from './load-planning-optimization-view'
 export { default as FreightLaneManagementView } from './freight-lane-management-view'
 export { default as CustomsDutyOptimizationView } from './customs-duty-optimization-view'
+export { default as IntermodalTransportHubView } from './intermodal-transport-hub-view'
 
