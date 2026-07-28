@@ -104,4 +104,5 @@ export { default as WarehouseLaborForecastingView } from './warehouse-labor-fore
 export { default as ReturnsConsolidationHubView } from './returns-consolidation-hub-view'
 export { default as ThreePLPerformanceScorecardView } from './3pl-performance-scorecard-view'
 export { default as QualityInspectionAutomationView } from './quality-inspection-automation-view'
+export { default as SupplierRiskManagementView } from './supplier-risk-management-view'
 

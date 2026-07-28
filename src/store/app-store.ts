@@ -107,6 +107,7 @@ export const navItems: NavItem[] = [
   { id: 'returns-consolidation-hub', label: 'Returns Consolidation', icon: 'RotateCcw', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: '3pl-performance-scorecard', label: '3PL Scorecard', icon: 'Award', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'quality-inspection-automation', label: 'Inspection Automation', icon: 'Thermometer', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
+  { id: 'supplier-risk-management', label: 'Supplier Risk', icon: 'ShieldAlert', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement'] },
   { id: 'labor-management', label: 'Labor Management', icon: 'HardHat', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'sla-countdown', label: 'SLA Countdown', icon: 'Timer', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'shift-handover', label: 'Shift Handover', icon: 'ArrowRightLeft', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },

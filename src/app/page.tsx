@@ -113,6 +113,7 @@ import WarehouseLaborForecastingView from "@/components/modules/warehouse-labor-
 import ReturnsConsolidationHubView from "@/components/modules/returns-consolidation-hub-view"
 import ThreePLPerformanceScorecardView from "@/components/modules/3pl-performance-scorecard-view"
 import QualityInspectionAutomationView from "@/components/modules/quality-inspection-automation-view"
+import SupplierRiskManagementView from "@/components/modules/supplier-risk-management-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -226,6 +227,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "returns-consolidation-hub": ReturnsConsolidationHubView,
   "3pl-performance-scorecard": ThreePLPerformanceScorecardView,
   "quality-inspection-automation": QualityInspectionAutomationView,
+  "supplier-risk-management": SupplierRiskManagementView,
   "shift-handover": ShiftHandoverView,
 }
 
