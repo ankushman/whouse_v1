@@ -86,3 +86,4 @@ export { default as CODPaymentReconciliationView } from './cod-payment-reconcili
 export { default as WarrantyGuaranteeView } from './warranty-guarantee-view'
 export { default as InsuranceClaimsView } from './insurance-claims-view'
 export { default as LastMileDeliveryView } from './last-mile-delivery-view'
+export { default as MultiChannelIntegrationHubView } from './multi-channel-integration-hub-view'

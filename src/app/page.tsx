@@ -95,6 +95,7 @@ import CODPaymentReconciliationView from "@/components/modules/cod-payment-recon
 import WarrantyGuaranteeView from "@/components/modules/warranty-guarantee-view"
 import InsuranceClaimsView from "@/components/modules/insurance-claims-view"
 import LastMileDeliveryView from "@/components/modules/last-mile-delivery-view"
+import MultiChannelIntegrationHubView from "@/components/modules/multi-channel-integration-hub-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -190,6 +191,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "warranty-guarantee": WarrantyGuaranteeView,
   "insurance-claims": InsuranceClaimsView,
   "last-mile-delivery": LastMileDeliveryView,
+  "multi-channel-integration": MultiChannelIntegrationHubView,
   "shift-handover": ShiftHandoverView,
 }
 
