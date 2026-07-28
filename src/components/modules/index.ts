@@ -103,4 +103,5 @@ export { default as PackagingDesignStudioView } from './packaging-design-studio-
 export { default as WarehouseLaborForecastingView } from './warehouse-labor-forecasting-view'
 export { default as ReturnsConsolidationHubView } from './returns-consolidation-hub-view'
 export { default as ThreePLPerformanceScorecardView } from './3pl-performance-scorecard-view'
+export { default as QualityInspectionAutomationView } from './quality-inspection-automation-view'
 

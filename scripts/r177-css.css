@@ -1,0 +1,198 @@
+/* ─── R177: Quality Inspection Automation (qia-*) ─── Teal + Indigo + Rose + Amber + Emerald + Violet */
+
+.qia-container { padding: 20px; background: linear-gradient(180deg,#f8fafc 0%,#f1f5f9 100%); min-height: 100vh; }
+
+/* Header */
+.qia-header { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:18px; flex-wrap:wrap; }
+.qia-header-left { display:flex; flex-direction:column; gap:4px; }
+.qia-title { display:flex; align-items:center; gap:10px; font-size:24px; font-weight:800; color:#0f172a; margin:0; letter-spacing:-0.3px; }
+.qia-title-icon { color:#0d9488; }
+.qia-subtitle { font-size:13px; color:#64748b; font-weight:500; }
+.qia-header-controls { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.qia-search-box { display:flex; align-items:center; gap:8px; padding:8px 12px; background:#fff; border:1px solid #e2e8f0; border-radius:10px; min-width:280px; color:#64748b; transition:all .2s; }
+.qia-search-box:focus-within { border-color:#0d9488; box-shadow:0 0 0 3px rgba(13,148,136,0.12); }
+.qia-search-box input { flex:1; border:none; outline:none; font-size:13px; background:transparent; color:#0f172a; }
+.qia-search-box button { background:transparent; border:none; cursor:pointer; color:#94a3b8; padding:2px; display:flex; }
+.qia-refresh-btn { display:flex; align-items:center; gap:6px; padding:8px 14px; background:#fff; border:1px solid #e2e8f0; border-radius:10px; font-size:13px; font-weight:500; color:#475569; cursor:pointer; transition:all .15s; }
+.qia-refresh-btn:hover { background:#0d9488; color:#fff; border-color:#0d9488; }
+
+/* Tabs */
+.qia-tabs-list { background:#fff; border:1px solid #e2e8f0; padding:6px; border-radius:12px; margin-bottom:16px; }
+.qia-tab-trigger { display:flex; align-items:center; gap:6px; font-size:13px; font-weight:600; color:#64748b; }
+.qia-tab-trigger[data-state=active] { background:linear-gradient(135deg,#0d9488,#14b8a6); color:#fff; box-shadow:0 2px 8px rgba(13,148,136,0.3); }
+.qia-tab-content { animation:qia-fade .25s ease-out; }
+@keyframes qia-fade { from { opacity:0; transform:translateY(4px);} to { opacity:1; transform:translateY(0);} }
+
+/* KPI Cards */
+.qia-kpi-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin-bottom:18px; }
+.qia-cost-summary-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px; }
+.qia-kpi-card { border:none; border-radius:14px; overflow:hidden; box-shadow:0 2px 8px rgba(15,23,42,0.06); position:relative; transition:all .2s; }
+.qia-kpi-card:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(15,23,42,0.1); }
+.qia-kpi-card::before { content:""; position:absolute; top:0; left:0; right:0; height:4px; }
+.qia-kpi-teal::before { background:linear-gradient(90deg,#0d9488,#14b8a6); }
+.qia-kpi-indigo::before { background:linear-gradient(90deg,#6366f1,#818cf8); }
+.qia-kpi-rose::before { background:linear-gradient(90deg,#e11d48,#fb7185); }
+.qia-kpi-amber::before { background:linear-gradient(90deg,#f59e0b,#fbbf24); }
+.qia-kpi-emerald::before { background:linear-gradient(90deg,#10b981,#34d399); }
+.qia-kpi-violet::before { background:linear-gradient(90deg,#8b5cf6,#a78bfa); }
+.qia-kpi-body { padding:18px; display:flex; gap:14px; align-items:center; }
+.qia-kpi-icon-wrap { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.qia-kpi-teal .qia-kpi-icon-wrap { background:#ccfbf1; color:#0d9488; }
+.qia-kpi-indigo .qia-kpi-icon-wrap { background:#e0e7ff; color:#6366f1; }
+.qia-kpi-rose .qia-kpi-icon-wrap { background:#ffe4e6; color:#e11d48; }
+.qia-kpi-amber .qia-kpi-icon-wrap { background:#fef3c7; color:#f59e0b; }
+.qia-kpi-emerald .qia-kpi-icon-wrap { background:#d1fae5; color:#10b981; }
+.qia-kpi-violet .qia-kpi-icon-wrap { background:#ede9fe; color:#8b5cf6; }
+.qia-kpi-text { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.qia-kpi-label { font-size:11px; color:#64748b; font-weight:600; text-transform:uppercase; letter-spacing:0.4px; }
+.qia-kpi-value { font-size:20px; font-weight:800; color:#0f172a; line-height:1.2; }
+.qia-kpi-sub { font-size:11px; color:#94a3b8; display:flex; align-items:center; gap:3px; }
+
+/* Charts */
+.qia-chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+.qia-chart-card { border:none; border-radius:14px; box-shadow:0 2px 8px rgba(15,23,42,0.06); overflow:hidden; }
+.qia-chart-wide { grid-column:span 1; }
+.qia-chart-header { padding:14px 18px 6px; border-bottom:1px solid #f1f5f9; }
+.qia-chart-title { font-size:14px; font-weight:700; color:#1e293b; }
+.qia-chart-card .qia-chart-card > div { padding:12px 18px; }
+
+/* Table */
+.qia-table-toolbar { margin-bottom:12px; padding:12px; background:#fff; border-radius:12px; border:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.qia-filter-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.qia-filter-row select { padding:6px 12px; border:1px solid #e2e8f0; border-radius:8px; font-size:12px; background:#fff; cursor:pointer; color:#475569; outline:none; transition:all .15s; }
+.qia-filter-row select:hover, .qia-filter-row select:focus { border-color:#0d9488; }
+.qia-count-badge { padding:4px 10px; background:#e0e7ff; color:#6366f1; border-radius:6px; font-size:11px; font-weight:700; }
+.qia-table-container { background:#fff; border-radius:12px; border:1px solid #e2e8f0; overflow:auto; max-height:70vh; box-shadow:0 2px 8px rgba(15,23,42,0.06); }
+.qia-table { width:100%; border-collapse:collapse; font-size:12px; }
+.qia-table thead { position:sticky; top:0; background:#f8fafc; z-index:5; }
+.qia-table th { padding:11px 12px; text-align:left; font-weight:600; color:#475569; font-size:11px; text-transform:uppercase; letter-spacing:0.4px; border-bottom:2px solid #e2e8f0; cursor:pointer; user-select:none; white-space:nowrap; }
+.qia-table th:hover { background:#f1f5f9; color:#0d9488; }
+.qia-table td { padding:10px 12px; border-bottom:1px solid #f1f5f9; color:#334155; vertical-align:middle; }
+.qia-table tr { cursor:pointer; transition:background .12s; }
+.qia-table tbody tr:hover { background:#f0fdfa; }
+.qia-row-failed { background:#fff7f7 !important; }
+.qia-row-quarantined { background:#f5f3ff !important; }
+.qia-row-critical { background:#fef2f2 !important; }
+.qia-row-major { background:#fffbeb !important; }
+.qia-row-inactive { background:#f8fafc !important; opacity:0.65; }
+
+/* Table cells */
+.qia-vendor-cell { display:flex; align-items:center; gap:5px; }
+.qia-vendor-name { font-weight:600; color:#1e293b; font-size:12.5px; }
+.qia-mono-cell { font-family:monospace; font-size:11px; color:#475569; font-weight:600; }
+.qia-number-cell { font-variant-numeric:tabular-nums; font-weight:600; text-align:right; color:#0f172a; }
+.qia-warehouse-cell { display:flex; align-items:center; gap:4px; font-size:11.5px; color:#475569; }
+.qia-score-highlight { color:#0d9488; font-weight:700; }
+.qia-category-badge { background:#f1f5f9; color:#475569; border:none; font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:6px; }
+.qia-type-badge { background:#e0e7ff; color:#6366f1; border:none; font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:6px; }
+.qia-action-badge { background:#fef3c7; color:#92400e; border:none; font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:6px; }
+.qia-auto-badge { background:#ccfbf1; color:#059669; border:none; font-size:10px; font-weight:700; padding:2px 6px; border-radius:5px; display:inline-flex; align-items:center; gap:3px; }
+.qia-ai-badge { background:#e0e7ff; color:#6366f1; border:none; font-size:10px; font-weight:700; padding:2px 6px; border-radius:5px; display:inline-flex; align-items:center; gap:3px; }
+.qia-ai-badge-sm { background:#e0e7ff; color:#6366f1; border:none; font-size:9.5px; font-weight:700; padding:1px 5px; border-radius:4px; display:inline-flex; align-items:center; gap:2px; }
+.qia-manual-label { font-size:11px; color:#94a3b8; }
+
+/* Severity & Status badges */
+.qia-severity-badge { display:inline-block; padding:3px 10px; border-radius:6px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+.qia-severity-critical { background:linear-gradient(135deg,#dc2626,#ef4444); color:#fff; }
+.qia-severity-major { background:linear-gradient(135deg,#f59e0b,#fbbf24); color:#fff; }
+.qia-severity-minor { background:linear-gradient(135deg,#6366f1,#818cf8); color:#fff; }
+.qia-severity-info { background:#f1f5f9; color:#64748b; }
+
+.qia-status-badge { display:inline-flex; padding:2px 8px; border-radius:6px; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.4px; }
+.qia-status-passed { background:#d1fae5; color:#059669; }
+.qia-status-failed { background:#fee2e2; color:#dc2626; }
+.qia-status-conditional { background:#fef3c7; color:#92400e; }
+.qia-status-progress { background:#e0e7ff; color:#6366f1; }
+.qia-status-quarantined { background:#ede9fe; color:#7c3aed; }
+
+.qia-ai-active-badge { display:inline-flex; padding:2px 8px; border-radius:6px; font-size:10.5px; font-weight:700; }
+.qia-active-on { background:#d1fae5; color:#059669; }
+.qia-active-off { background:#f1f5f9; color:#94a3b8; }
+
+/* Trend badges */
+.qia-trend-badge { display:inline-flex; align-items:center; gap:2px; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700; }
+.qia-trend-up { background:#d1fae5; color:#059669; }
+.qia-trend-down { background:#fee2e2; color:#dc2626; }
+.qia-trend-flat { background:#f1f5f9; color:#64748b; }
+
+/* Confidence bar */
+.qia-confidence-bar { display:flex; align-items:center; gap:6px; min-width:100px; }
+.qia-cb-track { flex:1; height:6px; background:#f1f5f9; border-radius:3px; overflow:hidden; }
+.qia-cb-fill { height:100%; border-radius:3px; transition:width .3s; }
+.qia-cb-value { font-size:11px; font-weight:700; font-variant-numeric:tabular-nums; min-width:38px; }
+
+/* Score gauge */
+.qia-gauge-wrap { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.qia-gauge { display:block; }
+.qia-gauge-label { font-size:9px; color:#64748b; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; }
+
+/* Station grid */
+.qia-station-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px; margin-bottom:14px; }
+.qia-station-card { border:none; border-radius:14px; box-shadow:0 2px 8px rgba(15,23,42,0.06); overflow:hidden; cursor:pointer; transition:all .2s; border:2px solid transparent; }
+.qia-station-card:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(15,23,42,0.1); border-color:#0d9488; }
+.qia-station-offline { opacity:0.65; border-color:#fee2e2; }
+.qia-station-maintenance { border-color:#fef3c7; }
+.qia-station-body { padding:16px; display:flex; flex-direction:column; gap:12px; }
+.qia-station-header { display:flex; align-items:center; gap:6px; }
+.qia-station-status-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.qia-dot-online { background:#10b981; box-shadow:0 0 6px rgba(16,185,129,0.5); }
+.qia-dot-maintenance { background:#f59e0b; box-shadow:0 0 6px rgba(245,158,11,0.5); }
+.qia-dot-offline { background:#ef4444; box-shadow:0 0 6px rgba(239,68,68,0.5); }
+.qia-station-name { font-size:13px; font-weight:700; color:#0f172a; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.qia-station-id { font-size:10px; color:#94a3b8; font-family:monospace; }
+.qia-station-metrics { display:flex; justify-content:center; gap:16px; }
+.qia-station-info { display:flex; flex-direction:column; gap:4px; }
+.qia-station-info-row { display:flex; align-items:center; gap:6px; font-size:11.5px; color:#475569; }
+.qia-station-info-row svg { color:#94a3b8; }
+
+/* Drawers */
+.qia-drawer-overlay { position:fixed; inset:0; background:rgba(15,23,42,0.55); backdrop-filter:blur(2px); z-index:50; animation:qia-fade .15s; }
+.qia-drawer-panel { position:fixed; top:0; right:0; bottom:0; width:480px; background:#fff; box-shadow:-8px 0 32px rgba(0,0,0,0.12); z-index:51; overflow-y:auto; display:flex; flex-direction:column; animation:qia-slide-in .25s ease-out; }
+@keyframes qia-slide-in { from { transform:translateX(100%);} to { transform:translateX(0);} }
+.qia-drawer-header { padding:18px 20px; background:linear-gradient(135deg,#0d9488 0%,#14b8a6 100%); color:#fff; display:flex; align-items:flex-start; gap:12px; }
+.qia-header-defect { background:linear-gradient(135deg,#e11d48 0%,#fb7185 100%); }
+.qia-header-station { background:linear-gradient(135deg,#6366f1 0%,#818cf8 100%); }
+.qia-header-ai { background:linear-gradient(135deg,#8b5cf6 0%,#a78bfa 100%); }
+.qia-drawer-header-info { display:flex; flex-direction:column; gap:6px; flex:1; min-width:0; }
+.qia-drawer-title { font-size:18px; font-weight:700; margin:0; }
+.qia-drawer-subtitle { font-size:12px; opacity:0.95; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.qia-drawer-close { background:rgba(255,255,255,0.18); border:none; color:#fff; width:30px; height:30px; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+.qia-drawer-close:hover { background:rgba(255,255,255,0.32); }
+.qia-drawer-body { padding:18px 20px; display:flex; flex-direction:column; gap:14px; }
+
+.qia-drawer-field-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; padding:14px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; }
+.qia-drawer-field { display:flex; flex-direction:column; gap:2px; }
+.qia-drawer-field-label { font-size:10.5px; color:#64748b; font-weight:600; text-transform:uppercase; letter-spacing:0.3px; display:flex; align-items:center; gap:4px; }
+.qia-drawer-field-value { font-size:12.5px; color:#0f172a; font-weight:600; word-break:break-word; }
+
+.qia-drawer-metrics-row { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.qia-drawer-metric-card { padding:10px; border-radius:10px; display:flex; flex-direction:column; gap:2px; align-items:center; text-align:center; }
+.qia-metric-teal { background:#ccfbf1; color:#0d9488; }
+.qia-metric-indigo { background:#e0e7ff; color:#6366f1; }
+.qia-metric-rose { background:#ffe4e6; color:#e11d48; }
+.qia-metric-amber { background:#fef3c7; color:#92400e; }
+.qia-drawer-metric-label { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px; opacity:0.85; }
+.qia-drawer-metric-value { font-size:16px; font-weight:800; }
+
+.qia-drawer-actions { display:flex; gap:6px; flex-wrap:wrap; padding-top:4px; }
+.qia-btn-primary { background:linear-gradient(135deg,#0d9488,#14b8a6); color:#fff; border:none; font-weight:600; }
+.qia-btn-primary:hover { background:linear-gradient(135deg,#0f766e,#0d9488); }
+
+/* Drawer visual sections */
+.qia-drawer-visual { display:flex; align-items:center; gap:16px; padding:14px; background:linear-gradient(135deg,#f0fdfa 0%,#fff 100%); border:1px solid #ccfbf1; border-radius:12px; }
+.qia-drawer-inspection-stats { display:flex; flex-direction:column; gap:6px; }
+.qia-stat-chip { display:flex; align-items:center; gap:5px; padding:4px 10px; background:#fff; border:1px solid #e2e8f0; border-radius:6px; font-size:11px; font-weight:600; color:#475569; }
+.qia-chip-auto { background:#ccfbf1; color:#059669; border-color:#a7f3d0; }
+
+.qia-drawer-defect-visual { display:flex; flex-direction:column; gap:10px; padding:14px; background:linear-gradient(135deg,#fff7f7 0%,#fff 100%); border:1px solid #fecdd3; border-radius:12px; }
+.qia-defect-desc-box { display:flex; align-items:flex-start; gap:8px; padding:8px 12px; background:#fff; border:1px solid #fecdd3; border-radius:8px; font-size:12px; color:#334155; line-height:1.5; }
+.qia-defect-desc-box svg { color:#e11d48; flex-shrink:0; margin-top:2px; }
+
+.qia-drawer-station-visual { display:flex; justify-content:center; gap:24px; padding:14px; background:linear-gradient(135deg,#f5f3ff 0%,#fff 100%); border:1px solid #e0e7ff; border-radius:12px; }
+
+.qia-drawer-ai-visual { display:flex; justify-content:center; gap:20px; padding:14px; background:linear-gradient(135deg,#faf5ff 0%,#fff 100%); border:1px solid #ede9fe; border-radius:12px; }
+
+/* Responsive */
+@media (max-width:1280px) { .qia-kpi-grid { grid-template-columns:repeat(3,1fr); } }
+@media (max-width:900px) { .qia-kpi-grid { grid-template-columns:repeat(2,1fr); } .qia-cost-summary-grid { grid-template-columns:repeat(2,1fr); } .qia-chart-grid { grid-template-columns:1fr; } }
+@media (max-width:640px) { .qia-kpi-grid { grid-template-columns:1fr; } .qia-cost-summary-grid { grid-template-columns:1fr; } .qia-drawer-panel { width:100vw; } .qia-drawer-field-grid { grid-template-columns:1fr; } .qia-drawer-metrics-row { grid-template-columns:1fr; } .qia-station-grid { grid-template-columns:1fr; } }
