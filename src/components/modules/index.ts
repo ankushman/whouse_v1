@@ -73,3 +73,4 @@ export { default as MultiChannelFulfillmentView } from './multi-channel-fulfillm
 export { default as QualityControlView } from './quality-control-view'
 export { default as VehicleFleetTransportView } from './vehicle-fleet-transport-view'
 export { default as CustomerServiceResolutionView } from './customer-service-resolution-view'
+export { default as WarehouseAnalyticsBIView } from './warehouse-analytics-bi-view'

@@ -33526,3 +33526,206 @@ html.theme-transition body {
 .csrc-progress-fill-amber { @apply bg-amber-500; }
 .csrc-progress-fill-red { @apply bg-rose-500; }
 .csrc-progress-fill-blue { @apply bg-blue-500; }
+/* ═══════════════════════════════════════════════════════════════
+   R147 — Warehouse Analytics & Business Intelligence (wabi-*)
+   Theme: Indigo 600 + Teal 500 + Amber 500
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── KPI Cards ─────────────────────────────────────────── */
+.wabi-kpi-card {
+  @apply rounded-xl border border-indigo-100 bg-white p-4 shadow-sm
+    transition-all duration-200 hover:shadow-md dark:border-indigo-900/40 dark:bg-gray-900;
+}
+.wabi-kpi-value {
+  @apply text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50;
+}
+.wabi-kpi-label {
+  @apply text-xs font-medium text-gray-500 dark:text-gray-400;
+}
+.wabi-kpi-icon {
+  @apply flex h-9 w-9 items-center justify-center rounded-lg;
+}
+.wabi-kpi-trend {
+  @apply flex items-center gap-1 text-xs font-medium;
+}
+.wabi-kpi-trend-up {
+  @apply text-teal-600 dark:text-teal-400;
+}
+.wabi-kpi-trend-down {
+  @apply text-red-600 dark:text-red-400;
+}
+
+/* ── Score Cards ──────────────────────────────────────── */
+.wabi-score-card {
+  @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm
+    transition-all duration-200 hover:shadow-md dark:border-gray-800 dark:bg-gray-900;
+}
+.wabi-score-circle {
+  @apply flex h-24 w-24 items-center justify-center rounded-full border-4;
+}
+.wabi-score-circle-excellent { @apply border-teal-500; }
+.wabi-score-circle-good { @apply border-blue-500; }
+.wabi-score-circle-average { @apply border-amber-500; }
+.wabi-score-circle-poor { @apply border-red-500; }
+.wabi-score-value {
+  @apply text-xl font-bold text-gray-900 dark:text-gray-50;
+}
+.wabi-score-label {
+  @apply text-[10px] font-medium text-gray-500 dark:text-gray-400;
+}
+
+/* ── Metric Badges ──────────────────────────────────── */
+.wabi-metric-badge {
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold leading-none;
+}
+.wabi-badge-positive { @apply bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300; }
+.wabi-badge-negative { @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300; }
+.wabi-badge-neutral { @apply bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400; }
+.wabi-badge-warning { @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300; }
+.wabi-badge-info { @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300; }
+
+/* ── Data Table ─────────────────────────────────────── */
+.wabi-table-wrap {
+  @apply overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm
+    dark:border-gray-800 dark:bg-gray-900;
+}
+.wabi-table {
+  @apply w-full text-sm;
+}
+.wabi-table-head {
+  @apply border-b border-gray-200 bg-gray-50/80 dark:border-gray-800 dark:bg-gray-800/50;
+}
+.wabi-table-head th {
+  @apply px-3 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400;
+}
+.wabi-table-row {
+  @apply border-b border-gray-100 transition-colors hover:bg-indigo-50/50 dark:border-gray-800 dark:hover:bg-indigo-950/10;
+}
+.wabi-table-row td {
+  @apply px-3 py-2.5 text-gray-700 dark:text-gray-300;
+}
+
+/* ── Progress Bar ───────────────────────────────────── */
+.wabi-progress-track {
+  @apply h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700;
+}
+.wabi-progress-fill {
+  @apply h-2.5 rounded-full transition-all duration-500;
+}
+.wabi-progress-indigo { @apply bg-indigo-500; }
+.wabi-progress-teal { @apply bg-teal-500; }
+.wabi-progress-amber { @apply bg-amber-500; }
+.wabi-progress-red { @apply bg-red-500; }
+.wabi-progress-blue { @apply bg-blue-500; }
+.wabi-progress-purple { @apply bg-purple-500; }
+
+/* ── Drawer ─────────────────────────────────────────── */
+.wabi-drawer-overlay {
+  @apply fixed inset-0 z-50 bg-black/40 backdrop-blur-sm;
+}
+.wabi-drawer-panel {
+  @apply fixed right-0 top-0 z-50 h-full w-full max-w-xl overflow-y-auto
+    bg-white shadow-2xl dark:bg-gray-900;
+}
+.wabi-drawer-header {
+  @apply px-6 py-5;
+}
+.wabi-drawer-header-gradient {
+  @apply -mx-6 -mt-6 mb-5 px-6 py-6;
+}
+.wabi-drawer-body {
+  @apply px-6 pb-6;
+}
+.wabi-drawer-section {
+  @apply mb-5;
+}
+.wabi-drawer-section-title {
+  @apply mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400;
+}
+.wabi-drawer-field-grid {
+  @apply grid grid-cols-2 gap-2;
+}
+.wabi-drawer-field {
+  @apply rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-800;
+}
+.wabi-drawer-field-label {
+  @apply text-[10px] font-medium text-gray-500 dark:text-gray-400;
+}
+.wabi-drawer-field-value {
+  @apply text-sm font-medium text-gray-900 dark:text-gray-100;
+}
+
+/* ── Alert Cards ─────────────────────────────────────── */
+.wabi-alert {
+  @apply flex items-start gap-3 rounded-lg border p-3 text-sm;
+}
+.wabi-alert-critical {
+  @apply border-red-200 bg-red-50 dark:border-red-900/30 dark:bg-red-950/20;
+}
+.wabi-alert-warning {
+  @apply border-amber-200 bg-amber-50 dark:border-amber-900/30 dark:bg-amber-950/20;
+}
+.wabi-alert-info {
+  @apply border-blue-200 bg-blue-50 dark:border-blue-900/30 dark:bg-blue-950/20;
+}
+
+/* ── Dimension Filter Pills ─────────────────────────── */
+.wabi-dim-pill {
+  @apply flex cursor-pointer items-center gap-1.5 rounded-lg border px-3 py-2
+    text-xs font-medium transition-all duration-150 hover:shadow-sm;
+}
+.wabi-dim-pill-active {
+  @apply border-indigo-500 bg-indigo-50 text-indigo-700 ring-2 ring-indigo-500
+    dark:bg-indigo-950/30 dark:text-indigo-300;
+}
+
+/* ── Insight Card ───────────────────────────────────── */
+.wabi-insight-card {
+  @apply rounded-xl border bg-gradient-to-br p-4;
+}
+.wabi-insight-card-positive {
+  @apply from-teal-50 to-emerald-50 border-teal-200 dark:from-teal-950/20 dark:to-emerald-950/20 dark:border-teal-900/30;
+}
+.wabi-insight-card-negative {
+  @apply from-red-50 to-rose-50 border-red-200 dark:from-red-950/20 dark:to-rose-950/20 dark:border-red-900/30;
+}
+.wabi-insight-card-neutral {
+  @apply from-blue-50 to-indigo-50 border-blue-200 dark:from-blue-950/20 dark:to-indigo-950/20 dark:border-blue-900/30;
+}
+
+/* ── Heatmap Cell ─────────────────────────────────── */
+.wabi-heatmap-cell {
+  @apply flex h-10 w-10 items-center justify-center rounded text-[10px] font-medium;
+}
+.wabi-heatmap-low { @apply bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300; }
+.wabi-heatmap-mid { @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300; }
+.wabi-heatmap-high { @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300; }
+
+/* ── Tab Content ──────────────────────────────────── */
+.wabi-tab-content {
+  @apply space-y-4;
+}
+.wabi-tab-section {
+  @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm
+    dark:border-gray-800 dark:bg-gray-900;
+}
+.wabi-tab-section-title {
+  @apply mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100;
+}
+
+/* ── Comparison Bar ─────────────────────────────── */
+.wabi-comparison-bar {
+  @apply flex items-center gap-3 text-xs;
+}
+.wabi-comparison-label {
+  @apply w-20 shrink-0 text-gray-600 dark:text-gray-400;
+}
+.wabi-comparison-track {
+  @apply h-3 flex-1 rounded-full bg-gray-200 dark:bg-gray-700;
+}
+.wabi-comparison-fill {
+  @apply h-3 rounded-full;
+}
+.wabi-comparison-value {
+  @apply w-14 text-right font-medium text-gray-900 dark:text-gray-100;
+}
