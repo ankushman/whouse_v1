@@ -1,4 +1,69 @@
 ---
+Task ID: 153
+Agent: Main (Cron Review - Round 153)
+Task: R153 — Customs, Duty & GST Compliance Management module
+
+Work Log:
+- Read worklog.md (R152 latest, 82 modules)
+- Build ✅ | TSC src/ ✅
+
+- Created R153: Customs, Duty & GST Compliance Management module
+  * NEW FILE: src/components/modules/customs-duty-gst-view.tsx (~580 lines)
+  * 5 tabs: Dashboard | GST Register | E-Way Bills | HS Code Classification | Customs & Import/Export
+  * Theme: Indigo + Gold + Teal (#6366f1, #f59e0b, #10b981) — inspired by Indian governance colors
+  * Tab 1 (Dashboard): 6 KPIs (total GST collected/ITC claimed/pending filing/active e-way bills/customs pending/total duty collected), monthly GST collection stacked AreaChart (CGST+SGST+IGST), E-Way Bill status PieChart (6 statuses), ITC utilization ComposedChart (available+claimed+lapsed), port performance RadarChart (6 Indian ports), 6 compliance alerts (GSTR-3B due/expired e-way/BOE pending/GSTR-2A mismatch/anti-dumping duty/ITC reversal)
+  * Tab 2 (GST Register): 250 invoices, 6 status filter badges, search, 30-row table (11 columns: invoice/supplier+GSTIN/date/HS code/taxable/CGST%/SGST%/IGST%/total GST/status/action), INR formatting (L/Cr), monospace ID, GST rate % display, color-coded amounts per tax type
+  * Tab 3 (E-Way Bills): 200 e-way bills, 6 status filter badges, search, 30-row table (8 columns: e-way no./goods+HS/from-to/transport+vehicle/distance/valid until/status+extensions/action), Indian vehicle registration format (MH/DL/KA/TN/TS/GJ), extension counter badges
+  * Tab 4 (HS Code Classification): Invoice distribution horizontal BarChart by HS chapter, GST Rate vs Customs Duty comparison BarChart, HS Code directory table (15 chapters with duty %, GST %, invoice count, total taxable value)
+  * Tab 5 (Customs & Import/Export): Import vs Export ComposedChart (6-month trend + avg clearance days line), Duty collected AreaChart, 150 customs entries with 6 status filters, 25-row table (12 columns: BE No./type/importer+GSTIN/port/country/HS code/assessable/customs duty/IGST/total duty/status/action), Indian CHA agents
+  * Invoice Detail Drawer: gradient header (Indigo→Emerald), GST breakdown section (CGST/SGST/IGST with color-coded amounts), ITC claimed/pending badge, 12-field detail grid (supplier/GSTIN/HS code/chapter/warehouse/taxable), invoice total with gradient highlight, 3 action buttons (File GSTR/Copy GSTIN/Download)
+  * E-Way Bill Detail Drawer: gradient header (Blue→Cyan), extension counter badge, 12-field detail grid (invoice/supplier/goods/HS code/transport/distance/from/to/created/valid until/warehouse/taxable), 3 action buttons (Extend Validity/View on NIC/Copy No.)
+  * Customs BOE Detail Drawer: gradient header (Teal→Emerald), import/export badge, 10-field detail grid (importer/GSTIN/port/country/HS code/chapter/document/CHA agent/warehouse/assessable), duty breakdown section (basic customs/IGST/education cess 2%/social welfare cess 1%/total), 3 action buttons (Assess & Release/BOE Copy/ICEGATE)
+  * Mock Data: seed 153153, 250 GST invoices, 200 E-Way Bills, 150 customs entries, 15 HS chapters, 10 Indian suppliers (Tata Steel/Reliance/Infosys/Mahindra/Wipro/Bajaj/Godrej/Dr Reddy's/Asian Paints/L&T) with real GSTIN format, 10 Indian ports (JNPT/Mumbai/Chennai/Kolkata/Tuticorin/Cochin/Visakhapatnam/Kandla/Mundra/Krishnapatnam), 6 warehouses (SEZ/FTWZ/ICD/CFS/Port), 10 countries, 5 Indian CHA agents
+  * Indian-specific features: INR formatting with L/Cr notation, inter-state vs intra-state GST logic (IGST for interstate, CGST+SGST for intrastate), Indian vehicle registration format (state code + district + series), GST return filing alerts (GSTR-3B, GSTR-2A), Anti-Dumping Duty notifications, ICEGATE integration buttons, NIC portal references
+
+- CSS: scripts/r153-css.css (~155 lines, cdg-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: Landmark, group: system), app-layout.tsx (Landmark already in iconMap at L187, no duplicate added)
+
+- No TS errors encountered during development (clean build first try)
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 4f61ba9
+
+Stage Summary:
+- NEW MODULE: Customs, Duty & GST Compliance Management (83 modules total, was 82)
+- ~580-line component + ~155 lines CSS
+- Comprehensive Indian GST compliance system with CGST/SGST/IGST/UTGST tracking
+- 250 GST invoices with inter-state vs intra-state tax logic
+- 200 E-Way Bills with extension tracking and Indian vehicle format
+- 150 customs entries with duty breakdown (basic + IGST + education cess + social welfare cess)
+- 15 HS code chapters with customs duty rates (5-25%) and GST rates (0-28%)
+- 10 real Indian ports with performance radar chart
+- INR formatting with Lakh/Crore notation
+- 3 contextual detail drawers with duty breakdowns
+- 6 compliance alerts (GSTR-3B due, expired e-way, BOE pending, GSTR-2A mismatch, anti-dumping, ITC reversal)
+- Total globals.css: 34,623 lines (+155)
+
+## Updated Project Status (Post Round 153)
+- STATUS: STABLE + GST COMPLIANCE MODULE (83 modules)
+- MODULES (83): All previous 82 + Customs, Duty & GST Compliance
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 34,623 lines
+
+KNOWN ISSUES:
+- Dev server cannot maintain connection for agent-browser QA
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (83+ modules)
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 34000+ classes — consolidate
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation
+  7. Pallet & Container Management module
+---
 Task ID: 152
 Agent: Main (Cron Review - Round 152)
 Task: R152 — Dangerous Goods & HazMat Management module
