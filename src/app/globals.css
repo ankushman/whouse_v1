@@ -44445,3 +44445,436 @@ html.theme-transition body {
 .dark .woc-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .woc-root ::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.25); }
 .dark .woc-root ::-webkit-scrollbar-thumb:hover { background: rgba(100,116,139,0.4); }
+
+/* ============================================================================
+ * R203: Inventory Aging & Obsolescence Management (iao-*) — Enhanced CSS
+ * Theme: Deep Amber #b45309 + Rose #e11d48 + Slate #475569 + Emerald #059669 + Violet #7c3aed
+ * ============================================================================ */
+
+/* --- Tab Active State: Amber→Rose gradient with glow --- */
+.iao-root [data-state="active"][role="tab"] {
+  background: linear-gradient(135deg, #b45309, #9f1239) !important;
+  color: #fff7ed !important;
+  box-shadow: 0 0 16px rgba(180, 83, 9, 0.35), 0 2px 8px rgba(225, 29, 72, 0.2);
+  position: relative;
+}
+.iao-root [data-state="active"][role="tab"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(251,191,36,0.15), transparent);
+  pointer-events: none;
+}
+
+/* --- KPI Card: 8 distinct border-left colors + radial corner glow --- */
+.iao-kpi-card:nth-child(1) { border-left: 3px solid #b45309; }
+.iao-kpi-card:nth-child(2) { border-left: 3px solid #7c3aed; }
+.iao-kpi-card:nth-child(3) { border-left: 3px solid #e11d48; }
+.iao-kpi-card:nth-child(4) { border-left: 3px solid #f97316; }
+.iao-kpi-card:nth-child(5) { border-left: 3px solid #64748b; }
+.iao-kpi-card:nth-child(6) { border-left: 3px solid #059669; }
+.iao-kpi-card:nth-child(7) { border-left: 3px solid #dc2626; }
+.iao-kpi-card:nth-child(8) { border-left: 3px solid #0891b2; }
+.iao-kpi-card {
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: iao-kpi-fade-up 0.5s ease-out both;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.iao-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.iao-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.iao-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.iao-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.iao-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.iao-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.iao-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.iao-kpi-card:nth-child(8) { animation-delay: 350ms; }
+.iao-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180,83,9,0.08), transparent 70%);
+  pointer-events: none;
+}
+.iao-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(180,83,9,0.12);
+}
+@keyframes iao-kpi-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- KPI Value counter animation --- */
+.iao-kpi-card .tabular-nums {
+  animation: iao-counter-scale 0.4s ease-out;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes iao-counter-scale {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* --- Aging Heat Bar: gradient fill transition --- */
+.iao-heat-bar {
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: width 0.8s ease-out;
+}
+.iao-heat-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), transparent);
+  pointer-events: none;
+}
+
+/* --- Bucket Badge: color pill with shimmer --- */
+.iao-bucket-badge {
+  animation: iao-badge-shimmer 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+  position: relative;
+  overflow: hidden;
+}
+.iao-bucket-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  animation: iao-shimmer-sweep 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+@keyframes iao-shimmer-sweep {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* --- Disposition/RootCause/ActionPlan/Velocity badges inherit shimmer --- */
+.iao-disposition-badge,
+.iao-root-cause-badge,
+.iao-action-plan-badge,
+.iao-velocity-badge,
+.iao-disposal-badge,
+.iao-approval-badge,
+.iao-reserve-type-badge,
+.iao-reserve-status-badge,
+.iao-wo-status-badge,
+.iao-risk-badge {
+  position: relative;
+  overflow: hidden;
+  animation: iao-badge-shimmer 3s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+.iao-disposition-badge::after,
+.iao-root-cause-badge::after,
+.iao-action-plan-badge::after,
+.iao-velocity-badge::after,
+.iao-disposal-badge::after,
+.iao-approval-badge::after,
+.iao-reserve-type-badge::after,
+.iao-reserve-status-badge::after,
+.iao-wo-status-badge::after,
+.iao-risk-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: iao-shimmer-sweep 3s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+
+/* --- SVG Rings: draw transition --- */
+.iao-score-ring,
+.iao-coverage-ring {
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+/* --- Sparkline: subtle glow on hover --- */
+.iao-sparkline {
+  transition: filter 0.2s;
+}
+.iao-sparkline:hover {
+  filter: drop-shadow(0 0 4px rgba(180,83,9,0.4));
+}
+
+/* --- Value Tiles: top gradient stripe --- */
+.iao-value-tile,
+.iao-wo-value-tile,
+.iao-provision-tile,
+.iao-carrying-tile,
+.iao-doh-tile {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.iao-value-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #b45309, #f59e0b); }
+.iao-wo-value-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+.iao-provision-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #475569, #94a3b8); }
+.iao-carrying-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #e11d48, #fb7185); }
+.iao-doh-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #f97316, #fbbf24); }
+
+/* --- Recovery Bar: glass overlay --- */
+.iao-recovery-bar {
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: width 0.8s ease-out;
+}
+.iao-recovery-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
+  pointer-events: none;
+}
+
+/* --- PV Bar (Provision vs Actual): side-by-side --- */
+.iao-pv-bar {
+  border-radius: 3px;
+  transition: width 0.6s ease-out;
+}
+
+/* --- Approval Progress: stage dots --- */
+.iao-approval-progress .iao-stage {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.iao-approval-progress .iao-stage:hover {
+  transform: scale(1.25);
+}
+.iao-approval-progress .iao-event-circle {
+  transition: box-shadow 0.2s;
+}
+.iao-approval-progress .iao-event-circle:hover {
+  box-shadow: 0 0 8px rgba(180,83,9,0.4);
+}
+
+/* --- Disposal Timeline: event slide on hover --- */
+.iao-disposal-timeline .iao-stage:hover {
+  transform: translateX(2px);
+}
+
+/* --- Monthly Trend mini bars --- */
+.iao-monthly-trend {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 32px;
+}
+.iao-monthly-trend > div {
+  transition: height 0.5s ease-out;
+  border-radius: 2px 2px 0 0;
+}
+
+/* --- Row Striping --- */
+.iao-data-row:nth-child(even) {
+  background: rgba(71,85,105,0.03);
+}
+
+/* --- Sort Header: hover + active --- */
+.iao-sort-header {
+  transition: background 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+.iao-sort-header:hover {
+  background: rgba(180,83,9,0.08);
+}
+.iao-sort-header[aria-sort="ascending"],
+.iao-sort-header[aria-sort="descending"] {
+  background: rgba(180,83,9,0.12);
+  transform: scale(0.98);
+}
+
+/* --- Action Buttons --- */
+.iao-action-btn {
+  transition: all 0.15s;
+}
+.iao-action-btn:hover {
+  transform: scale(1.03);
+  background: rgba(180,83,9,0.1);
+  border-color: rgba(180,83,9,0.4);
+  color: #b45309;
+}
+
+/* --- Table Row Hover per-tab tint --- */
+.iao-tab-0-row:hover { background: rgba(180,83,9,0.04); }
+.iao-tab-1-row:hover { background: rgba(245,158,11,0.04); }
+.iao-tab-2-row:hover { background: rgba(225,29,72,0.04); }
+.iao-tab-3-row:hover { background: rgba(124,58,237,0.04); }
+.iao-tab-4-row:hover { background: rgba(71,85,105,0.04); }
+.iao-tab-5-row:hover { background: rgba(5,150,105,0.04); }
+
+/* --- Chart Card: glow on hover --- */
+.iao-chart-card {
+  border-radius: 10px;
+  transition: box-shadow 0.2s;
+}
+.iao-chart-card:hover {
+  box-shadow: 0 0 20px rgba(180,83,9,0.08);
+}
+
+/* --- Warehouse Badge --- */
+.iao-wh-badge {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.iao-wh-badge:hover {
+  border-color: rgba(180,83,9,0.3);
+  box-shadow: 0 0 6px rgba(180,83,9,0.15);
+}
+
+/* --- Risk Badge: critical pulse --- */
+.iao-risk-critical {
+  animation: iao-risk-pulse 1.5s ease-in-out infinite;
+}
+@keyframes iao-risk-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(220,38,38,0.3); }
+  50% { opacity: 0.7; box-shadow: 0 0 10px rgba(220,38,38,0.6); }
+}
+
+/* --- Last Movement: expired flash --- */
+.iao-last-movement-expired {
+  animation: iao-expired-flash 2s ease-in-out infinite;
+}
+@keyframes iao-expired-flash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* --- Responsive Grid --- */
+.iao-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1024px) {
+  .iao-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .iao-kpi-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Custom Scrollbar --- */
+.iao-root ::-webkit-scrollbar { width: 6px; height: 6px; }
+.iao-root ::-webkit-scrollbar-track { background: rgba(71,85,105,0.05); border-radius: 3px; }
+.iao-root ::-webkit-scrollbar-thumb { background: rgba(180,83,9,0.2); border-radius: 3px; }
+.iao-root ::-webkit-scrollbar-thumb:hover { background: rgba(180,83,9,0.4); }
+
+/* --- Sheet Content Transition --- */
+.iao-drawer-header + div {
+  animation: iao-sheet-fade 0.25s ease-out;
+}
+@keyframes iao-sheet-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================================ */
+/* DARK MODE: Full dark overrides for iao-* */
+/* ============================================================================ */
+.dark .iao-root [data-state="active"][role="tab"] {
+  background: linear-gradient(135deg, #78350f, #881337) !important;
+  color: #fef3c7 !important;
+  box-shadow: 0 0 16px rgba(180,83,9,0.2), 0 2px 8px rgba(225,29,72,0.1);
+}
+.dark .iao-root [data-state="active"][role="tab"]::after {
+  background: linear-gradient(135deg, rgba(251,191,36,0.1), transparent);
+}
+.dark .iao-kpi-card {
+  background: rgba(15,23,42,0.4);
+}
+.dark .iao-kpi-card:hover {
+  box-shadow: 0 6px 20px rgba(180,83,9,0.08);
+}
+.dark .iao-heat-bar::after {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent);
+}
+.dark .iao-bucket-badge::after,
+.dark .iao-disposition-badge::after,
+.dark .iao-root-cause-badge::after,
+.dark .iao-action-plan-badge::after,
+.dark .iao-velocity-badge::after,
+.dark .iao-disposal-badge::after,
+.dark .iao-approval-badge::after,
+.dark .iao-reserve-type-badge::after,
+.dark .iao-reserve-status-badge::after,
+.dark .iao-wo-status-badge::after,
+.dark .iao-risk-badge::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.dark .iao-sparkline:hover {
+  filter: drop-shadow(0 0 4px rgba(180,83,9,0.25));
+}
+.dark .iao-value-tile,
+.dark .iao-wo-value-tile,
+.dark .iao-provision-tile,
+.dark .iao-carrying-tile,
+.dark .iao-doh-tile {
+  background: rgba(15,23,42,0.5);
+}
+.dark .iao-value-tile::before { background: linear-gradient(90deg, rgba(180,83,9,0.6), rgba(245,158,11,0.6)); }
+.dark .iao-wo-value-tile::before { background: linear-gradient(90deg, rgba(124,58,237,0.6), rgba(167,139,250,0.6)); }
+.dark .iao-provision-tile::before { background: linear-gradient(90deg, rgba(71,85,105,0.6), rgba(148,163,184,0.6)); }
+.dark .iao-carrying-tile::before { background: linear-gradient(90deg, rgba(225,29,72,0.6), rgba(251,113,133,0.6)); }
+.dark .iao-doh-tile::before { background: linear-gradient(90deg, rgba(249,115,22,0.6), rgba(251,191,36,0.6)); }
+.dark .iao-recovery-bar::after {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), transparent);
+}
+.dark .iao-data-row:nth-child(even) {
+  background: rgba(71,85,105,0.04);
+}
+.dark .iao-sort-header:hover {
+  background: rgba(180,83,9,0.06);
+}
+.dark .iao-action-btn:hover {
+  background: rgba(180,83,9,0.08);
+  border-color: rgba(180,83,9,0.3);
+}
+.dark .iao-tab-0-row:hover { background: rgba(180,83,9,0.03); }
+.dark .iao-tab-1-row:hover { background: rgba(245,158,11,0.03); }
+.dark .iao-tab-2-row:hover { background: rgba(225,29,72,0.03); }
+.dark .iao-tab-3-row:hover { background: rgba(124,58,237,0.03); }
+.dark .iao-tab-4-row:hover { background: rgba(71,85,105,0.03); }
+.dark .iao-tab-5-row:hover { background: rgba(5,150,105,0.03); }
+.dark .iao-chart-card:hover {
+  box-shadow: 0 0 20px rgba(180,83,9,0.05);
+}
+.dark .iao-wh-badge:hover {
+  border-color: rgba(180,83,9,0.2);
+  box-shadow: 0 0 6px rgba(180,83,9,0.1);
+}
+.dark .iao-risk-critical {
+  animation-name: iao-risk-pulse-dark;
+}
+@keyframes iao-risk-pulse-dark {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(220,38,38,0.2); }
+  50% { opacity: 0.5; box-shadow: 0 0 10px rgba(220,38,38,0.4); }
+}
+.dark .iao-last-movement-expired {
+  animation-name: iao-expired-flash-dark;
+}
+@keyframes iao-expired-flash-dark {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.dark .iao-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .iao-root ::-webkit-scrollbar-thumb { background: rgba(180,83,9,0.15); }
+.dark .iao-root ::-webkit-scrollbar-thumb:hover { background: rgba(180,83,9,0.3); }

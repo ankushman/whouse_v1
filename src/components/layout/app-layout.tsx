@@ -116,6 +116,7 @@ import {
   Gavel,
   FileCheck2,
   Receipt,
+  Hourglass,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -175,6 +176,7 @@ import { KeyboardShortcutsDialog } from "@/components/shared/keyboard-shortcuts-
 // ──────────────────────────────────────────────────────
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard,
+  Hourglass,
   Activity,
   Warehouse,
   PackageSearch,
