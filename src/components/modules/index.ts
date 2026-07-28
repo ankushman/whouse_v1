@@ -112,4 +112,5 @@ export { default as LastMileDeliveryAnalyticsView } from './last-mile-delivery-a
 export { default as ReturnsProcessingEnhancementView } from './returns-processing-enhancement-view'
 export { default as ColdChainMonitoringView } from './cold-chain-monitoring-view'
 export { default as PackagingOptimizationView } from './packaging-optimization-view'
+export { default as LoadPlanningOptimizationView } from './load-planning-optimization-view'
 
