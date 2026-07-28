@@ -1,0 +1,140 @@
+/* ─── R188 Customs & Duty Optimization (cdo-*) ──────────────────────────── */
+.cdo-root { padding: 24px; max-width: 1440px; margin: 0 auto; }
+.cdo-tabs { display: flex; gap: 4px; border-bottom: 1px solid hsl(var(--border)); margin-bottom: 20px; overflow-x: auto; }
+.cdo-tab { padding: 10px 18px; background: transparent; border: none; color: hsl(var(--muted-foreground)); cursor: pointer; font-size: 13px; font-weight: 500; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.cdo-tab:hover { color: hsl(var(--foreground)); }
+.cdo-tab-active { color: #0d9488; border-bottom-color: #0d9488; }
+.cdo-tab-content { display: flex; flex-direction: column; gap: 20px; }
+
+.cdo-kpi-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.cdo-kpi-card { background: hsl(var(--card)); padding: 14px 16px; border-radius: 8px; border-left: 3px solid #0d9488; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: transform 0.15s; }
+.cdo-kpi-card:hover { transform: translateY(-2px); }
+.cdo-kpi-label { font-size: 11px; color: hsl(var(--muted-foreground)); text-transform: uppercase; letter-spacing: 0.5px; }
+.cdo-kpi-value { font-size: 20px; font-weight: 700; color: hsl(var(--foreground)); margin: 4px 0; }
+.cdo-kpi-sub { font-size: 11px; color: hsl(var(--muted-foreground)); }
+
+.cdo-chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.cdo-chart-card { background: hsl(var(--card)); padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.cdo-chart-wide { grid-column: span 2; }
+.cdo-chart-title { font-size: 14px; font-weight: 600; color: hsl(var(--foreground)); margin-bottom: 12px; }
+
+.cdo-filter-bar { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.cdo-search { flex: 1; min-width: 200px; padding: 8px 12px; background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: 6px; color: hsl(var(--foreground)); font-size: 13px; }
+.cdo-search:focus { outline: none; border-color: #0d9488; box-shadow: 0 0 0 2px rgba(13,148,136,0.15); }
+.cdo-select { padding: 8px 12px; background: hsl(var(--card)); border: 1px solid hsl(var(--border)); border-radius: 6px; color: hsl(var(--foreground)); font-size: 13px; cursor: pointer; }
+
+.cdo-table-wrap { background: hsl(var(--card)); border-radius: 8px; overflow: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.cdo-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.cdo-th { padding: 10px 12px; text-align: left; background: hsl(var(--muted) / 0.4); color: hsl(var(--muted-foreground)); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; border-bottom: 1px solid hsl(var(--border)); white-space: nowrap; }
+.cdo-th:hover { background: hsl(var(--muted) / 0.6); }
+.cdo-td { padding: 10px 12px; color: hsl(var(--foreground)); border-bottom: 1px solid hsl(var(--border) / 0.5); white-space: nowrap; }
+.cdo-tr { cursor: pointer; transition: background 0.15s; }
+.cdo-tr:hover { background: hsl(var(--muted) / 0.3); }
+.cdo-showing { text-align: center; font-size: 11px; color: hsl(var(--muted-foreground)); padding: 10px; }
+
+/* Priority badges (5) */
+.cdo-priority-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.cdo-priority-badge-critical { background: #1e293b; color: #fff; }
+.cdo-priority-badge-high { background: rgba(225,29,72,0.15); color: #e11d48; }
+.cdo-priority-badge-medium { background: rgba(217,119,6,0.15); color: #d97706; }
+.cdo-priority-badge-low { background: rgba(5,150,105,0.15); color: #059669; }
+.cdo-priority-badge-routine { background: rgba(71,85,105,0.2); color: #475569; }
+
+/* Import status badges (9) */
+.cdo-import-status-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.cdo-import-status-badge-pending-review { background: rgba(217,119,6,0.15); color: #d97706; }
+.cdo-import-status-badge-documentation { background: rgba(2,132,199,0.15); color: #0284c7; }
+.cdo-import-status-badge-assessment { background: rgba(99,102,241,0.15); color: #6366f1; }
+.cdo-import-status-badge-examination { background: rgba(124,58,237,0.15); color: #7c3aed; }
+.cdo-import-status-badge-duty-calculated { background: rgba(14,165,233,0.15); color: #0ea5e9; }
+.cdo-import-status-badge-payment-pending { background: rgba(234,88,12,0.15); color: #ea580c; }
+.cdo-import-status-badge-cleared { background: rgba(5,150,105,0.15); color: #059669; }
+.cdo-import-status-badge-hold { background: #1e293b; color: #fff; }
+.cdo-import-status-badge-under-audit { background: rgba(225,29,72,0.15); color: #e11d48; }
+
+/* Compliance level badges (5) */
+.cdo-compliance-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.cdo-compliance-badge-fully-compliant { background: rgba(5,150,105,0.15); color: #059669; }
+.cdo-compliance-badge-minor-issues { background: rgba(217,119,6,0.15); color: #d97706; }
+.cdo-compliance-badge-major-issues { background: rgba(225,29,72,0.15); color: #e11d48; }
+.cdo-compliance-badge-non-compliant { background: #1e293b; color: #fff; }
+.cdo-compliance-badge-under-review { background: rgba(99,102,241,0.15); color: #6366f1; }
+
+/* Document status badges */
+.cdo-doc-status-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.cdo-doc-status-badge-complete { background: rgba(5,150,105,0.15); color: #059669; }
+.cdo-doc-status-badge-incomplete { background: rgba(225,29,72,0.15); color: #e11d48; }
+.cdo-doc-status-badge-expired { background: rgba(71,85,105,0.2); color: #475569; }
+.cdo-doc-status-badge-pending { background: rgba(217,119,6,0.15); color: #d97706; }
+.cdo-doc-status-badge-rejected { background: #1e293b; color: #fff; }
+
+.cdo-doc-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.cdo-doc-complete { background: rgba(5,150,105,0.15); color: #059669; }
+.cdo-doc-incomplete { background: rgba(225,29,72,0.15); color: #e11d48; }
+
+/* Savings status badges */
+.cdo-savings-status-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.cdo-savings-status-badge-active { background: rgba(5,150,105,0.15); color: #059669; }
+.cdo-savings-status-badge-completed { background: rgba(2,132,199,0.15); color: #0284c7; }
+.cdo-savings-status-badge-pending-approval { background: rgba(217,119,6,0.15); color: #d97706; }
+.cdo-savings-status-badge-in-review { background: rgba(99,102,241,0.15); color: #6366f1; }
+.cdo-savings-status-badge-rejected { background: rgba(225,29,72,0.15); color: #e11d48; }
+
+/* Compliance score */
+.cdo-score-ring { font-size: 13px; font-weight: 700; }
+
+/* Duty breakdown visual */
+.cdo-duty-breakdown-visual { display: flex; flex-direction: column; gap: 8px; padding: 12px; background: hsl(var(--muted) / 0.15); border-radius: 6px; }
+.cdo-duty-row { display: grid; grid-template-columns: 90px 100px 1fr; gap: 8px; align-items: center; font-size: 12px; }
+.cdo-duty-row span:first-child { color: hsl(var(--muted-foreground)); }
+.cdo-duty-row span:nth-child(2) { font-weight: 600; color: hsl(var(--foreground)); text-align: right; }
+.cdo-duty-bar-bg { height: 6px; background: hsl(var(--muted) / 0.4); border-radius: 3px; overflow: hidden; }
+.cdo-duty-bar-fill { height: 100%; border-radius: 3px; }
+.cdo-duty-fill-teal { background: #0d9488; }
+.cdo-duty-fill-indigo { background: #6366f1; }
+.cdo-duty-fill-amber { background: #d97706; }
+.cdo-duty-fill-rose { background: #e11d48; }
+.cdo-duty-fill-orange { background: #ea580c; }
+.cdo-duty-total { font-size: 18px; font-weight: 700; color: #fff; }
+
+/* Summary cards */
+.cdo-summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.cdo-summary-card { background: hsl(var(--card)); padding: 14px; border-radius: 8px; border-left: 3px solid #6366f1; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+.cdo-summary-label { font-size: 11px; color: hsl(var(--muted-foreground)); text-transform: uppercase; letter-spacing: 0.5px; }
+.cdo-summary-value { font-size: 18px; font-weight: 700; color: hsl(var(--foreground)); margin: 4px 0; }
+.cdo-summary-sub { font-size: 11px; color: hsl(var(--muted-foreground)); }
+
+/* Drawer */
+.cdo-drawer-header { background: linear-gradient(135deg, #6366f1 0%, #0d9488 100%); padding: 20px; color: #fff; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.cdo-drawer-title { font-size: 18px; font-weight: 700; margin: 0; }
+.cdo-drawer-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.cdo-compliance-section { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 8px 12px; background: hsl(var(--muted) / 0.2); border-radius: 6px; }
+.cdo-metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.cdo-metric-card { padding: 12px; background: hsl(var(--muted) / 0.3); border-radius: 6px; text-align: center; }
+.cdo-metric-value { font-size: 16px; font-weight: 700; color: hsl(var(--foreground)); }
+.cdo-metric-label { font-size: 11px; color: hsl(var(--muted-foreground)); margin-top: 2px; }
+.cdo-fields-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.cdo-field { padding: 8px 12px; background: hsl(var(--muted) / 0.2); border-radius: 4px; display: flex; flex-direction: column; gap: 2px; }
+.cdo-field-label { font-size: 10px; color: hsl(var(--muted-foreground)); text-transform: uppercase; letter-spacing: 0.5px; }
+.cdo-field-value { font-size: 13px; font-weight: 600; color: hsl(var(--foreground)); }
+.cdo-drawer-actions { display: flex; gap: 8px; }
+.cdo-action-btn { flex: 1; padding: 10px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+.cdo-action-primary { background: #6366f1; color: #fff; }
+.cdo-action-primary:hover { background: #4f46e5; }
+.cdo-action-secondary { background: #0d9488; color: #fff; }
+.cdo-action-secondary:hover { background: #0f766e; }
+.cdo-action-outline { background: transparent; border: 1px solid hsl(var(--border)); color: hsl(var(--foreground)); }
+.cdo-action-outline:hover { background: hsl(var(--muted) / 0.4); }
+
+@media (max-width: 1024px) {
+  .cdo-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+  .cdo-chart-grid { grid-template-columns: 1fr; }
+  .cdo-chart-wide { grid-column: span 1; }
+  .cdo-summary-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .cdo-kpi-grid { grid-template-columns: 1fr; }
+  .cdo-summary-grid { grid-template-columns: 1fr; }
+  .cdo-metrics-grid { grid-template-columns: 1fr; }
+  .cdo-fields-grid { grid-template-columns: 1fr; }
+}
