@@ -91,6 +91,7 @@ export const navItems: NavItem[] = [
   { id: 'last-mile-delivery', label: 'Last Mile Delivery', icon: 'MapPinCheck', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'multi-channel-integration', label: 'Multi-Channel Hub', icon: 'Globe', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'supplier-portal', label: 'Supplier Portal', icon: 'Handshake', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
+  { id: 'hyperlocal-delivery', label: 'Hyperlocal Delivery', icon: 'Zap', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'labor-management', label: 'Labor Management', icon: 'HardHat', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'sla-countdown', label: 'SLA Countdown', icon: 'Timer', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'shift-handover', label: 'Shift Handover', icon: 'ArrowRightLeft', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },

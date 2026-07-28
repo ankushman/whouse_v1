@@ -228,6 +228,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   ShieldQuestion,
   ShieldPlus,
   MapPinCheck,
+  Zap,
 } as const
 const recentNotifications = [
   { id: "1", title: "SLA Breach", desc: "Gurugram Hub dock-to-stock exceeded 4hrs", severity: "critical", time: "5m ago" },
