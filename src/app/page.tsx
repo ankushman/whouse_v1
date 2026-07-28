@@ -93,6 +93,7 @@ import PalletContainerView from "@/components/modules/pallet-container-view"
 import ReturnsQualityInspectionView from "@/components/modules/returns-quality-inspection-view"
 import CODPaymentReconciliationView from "@/components/modules/cod-payment-reconciliation-view"
 import WarrantyGuaranteeView from "@/components/modules/warranty-guarantee-view"
+import InsuranceClaimsView from "@/components/modules/insurance-claims-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -186,6 +187,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "returns-quality-inspection": ReturnsQualityInspectionView,
   "cod-payment-reconciliation": CODPaymentReconciliationView,
   "warranty-guarantee": WarrantyGuaranteeView,
+  "insurance-claims": InsuranceClaimsView,
   "shift-handover": ShiftHandoverView,
 }
 
