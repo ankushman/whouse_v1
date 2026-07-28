@@ -66,7 +66,7 @@ function formatINR(amount: number): string {
 // ═══════════════════════════════════════════════════════════════════════════════
 function generateData() {
   const r = seededRandom(2022901);
-  const pick = <T,>(a: T[]): T => a[Math.floor(r() * a.length)];
+  const pick = <T,>(a: readonly T[]): T => a[Math.floor(r() * a.length)];
   const ri = (min: number, max: number) => Math.floor(r() * (max - min + 1)) + min;
   const rf = (min: number, max: number) => +(r() * (max - min) + min).toFixed(1);
 
@@ -727,7 +727,7 @@ const OPS_PIE_COLORS = [TC.emerald, TC.amber, TC.sky, TC.slate, TC.red, TC.gray]
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function WarehouseOpsCommandView() {
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState("0");
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [sortField, setSortField] = useState("");
@@ -806,20 +806,20 @@ export default function WarehouseOpsCommandView() {
       </div>
 
       {/* Tabs */}
-      <Tabs value={activeTab} onValueChange={v => setActiveTab(Number(v))}>
+      <Tabs value={activeTab} onValueChange={v => setActiveTab(v)}>
         <TabsList className="w-full flex overflow-x-auto">
-          <TabsTrigger value={0} className="text-xs px-3">Live Ops Dashboard</TabsTrigger>
-          <TabsTrigger value={1} className="text-xs px-3">Dock & Yard</TabsTrigger>
-          <TabsTrigger value={2} className="text-xs px-3">Workforce</TabsTrigger>
-          <TabsTrigger value={3} className="text-xs px-3">Inbound Pipeline</TabsTrigger>
-          <TabsTrigger value={4} className="text-xs px-3">Outbound Pipeline</TabsTrigger>
-          <TabsTrigger value={5} className="text-xs px-3">Exception Queue</TabsTrigger>
+          <TabsTrigger value="0" className="text-xs px-3">Live Ops Dashboard</TabsTrigger>
+          <TabsTrigger value="1" className="text-xs px-3">Dock & Yard</TabsTrigger>
+          <TabsTrigger value="2" className="text-xs px-3">Workforce</TabsTrigger>
+          <TabsTrigger value="3" className="text-xs px-3">Inbound Pipeline</TabsTrigger>
+          <TabsTrigger value="4" className="text-xs px-3">Outbound Pipeline</TabsTrigger>
+          <TabsTrigger value="5" className="text-xs px-3">Exception Queue</TabsTrigger>
         </TabsList>
 
         {/* ═══════════════════════════════════════════════════════════════════ */}
         {/* TAB 0: LIVE OPERATIONS DASHBOARD                                   */}
         {/* ═══════════════════════════════════════════════════════════════════ */}
-        <TabsContent value={0} className="space-y-4 mt-4">
+        <TabsContent value="0" className="space-y-4 mt-4">
           {/* KPI Tiles */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {DATA.kpis.map(kpi => (
@@ -919,7 +919,7 @@ export default function WarehouseOpsCommandView() {
         {/* ═══════════════════════════════════════════════════════════════════ */}
         {/* TAB 1: DOCK & YARD CONTROL                                        */}
         {/* ═══════════════════════════════════════════════════════════════════ */}
-        <TabsContent value={1} className="space-y-4 mt-4">
+        <TabsContent value="1" className="space-y-4 mt-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="relative flex-1 w-full sm:max-w-xs">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -982,7 +982,7 @@ export default function WarehouseOpsCommandView() {
         {/* ═══════════════════════════════════════════════════════════════════ */}
         {/* TAB 2: WORKFORCE DEPLOYMENT                                        */}
         {/* ═══════════════════════════════════════════════════════════════════ */}
-        <TabsContent value={2} className="space-y-4 mt-4">
+        <TabsContent value="2" className="space-y-4 mt-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="relative flex-1 w-full sm:max-w-xs">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -1043,7 +1043,7 @@ export default function WarehouseOpsCommandView() {
         {/* ═══════════════════════════════════════════════════════════════════ */}
         {/* TAB 3: INBOUND PIPELINE                                             */}
         {/* ═══════════════════════════════════════════════════════════════════ */}
-        <TabsContent value={3} className="space-y-4 mt-4">
+        <TabsContent value="3" className="space-y-4 mt-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="relative flex-1 w-full sm:max-w-xs">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -1099,7 +1099,7 @@ export default function WarehouseOpsCommandView() {
         {/* ═══════════════════════════════════════════════════════════════════ */}
         {/* TAB 4: OUTBOUND PIPELINE                                            */}
         {/* ═══════════════════════════════════════════════════════════════════ */}
-        <TabsContent value={4} className="space-y-4 mt-4">
+        <TabsContent value="4" className="space-y-4 mt-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="relative flex-1 w-full sm:max-w-xs">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -1155,7 +1155,7 @@ export default function WarehouseOpsCommandView() {
         {/* ═══════════════════════════════════════════════════════════════════ */}
         {/* TAB 5: EXCEPTION & INCIDENT QUEUE                                   */}
         {/* ═══════════════════════════════════════════════════════════════════ */}
-        <TabsContent value={5} className="space-y-4 mt-4">
+        <TabsContent value="5" className="space-y-4 mt-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
             <div className="relative flex-1 w-full sm:max-w-xs">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
@@ -1217,7 +1217,7 @@ export default function WarehouseOpsCommandView() {
           {drawerRecord && (
             <>
               {/* Dock Drawer */}
-              {activeTab === 1 && (
+              {activeTab === "1" && (
                 <>
                   <div className="woc-drawer-header" style={{ background: "linear-gradient(135deg, #0f172a, #334155)" }}>
                     <SheetTitle className="text-white text-sm">{drawerRecord.name}</SheetTitle>
@@ -1254,7 +1254,7 @@ export default function WarehouseOpsCommandView() {
               )}
 
               {/* Workforce Drawer */}
-              {activeTab === 2 && (
+              {activeTab === "2" && (
                 <>
                   <div className="woc-drawer-header" style={{ background: "linear-gradient(135deg, #06b6d4, #0d9488)" }}>
                     <SheetTitle className="text-white text-sm">{drawerRecord.name}</SheetTitle>
@@ -1292,7 +1292,7 @@ export default function WarehouseOpsCommandView() {
               )}
 
               {/* Inbound Drawer */}
-              {activeTab === 3 && (
+              {activeTab === "3" && (
                 <>
                   <div className="woc-drawer-header" style={{ background: "linear-gradient(135deg, #f97316, #f59e0b)" }}>
                     <SheetTitle className="text-white text-sm">{drawerRecord.poNumber}</SheetTitle>
@@ -1329,7 +1329,7 @@ export default function WarehouseOpsCommandView() {
               )}
 
               {/* Outbound Drawer */}
-              {activeTab === 4 && (
+              {activeTab === "4" && (
                 <>
                   <div className="woc-drawer-header" style={{ background: "linear-gradient(135deg, #10b981, #059669)" }}>
                     <SheetTitle className="text-white text-sm">{drawerRecord.orderNo}</SheetTitle>
@@ -1367,7 +1367,7 @@ export default function WarehouseOpsCommandView() {
               )}
 
               {/* Exception Drawer */}
-              {activeTab === 5 && (
+              {activeTab === "5" && (
                 <>
                   <div className="woc-drawer-header" style={{ background: "linear-gradient(135deg, #e11d48, #ef4444)" }}>
                     <SheetTitle className="text-white text-sm">{drawerRecord.id} — {drawerRecord.type}</SheetTitle>

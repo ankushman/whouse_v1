@@ -1,23 +1,25 @@
 "use client"
+
 import { useState, useMemo } from "react"
-import {
-  BarChart, Bar, AreaChart, Area, ComposedChart, Line, PieChart, Pie, Cell,
-  RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-} from "recharts"
+import { PageHeader } from "@/components/shared/page-header"
+import { useToast } from "@/hooks/use-toast-helper"
+import { cn } from "@/lib/utils"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import {
-  Search, TrendingUp, TrendingDown, Minus, ArrowUpDown, Filter,
-  X, ChevronRight, Clock, MapPin, Star, AlertTriangle, CheckCircle2,
-  FileText, IndianRupee, Award, Users, BarChart3, Target, Zap,
-  ShieldCheck, ShieldAlert, ThumbsUp, ThumbsDown, Eye, Download,
-  RefreshCw, ArrowUpRight, ArrowDownRight, Globe, Building, Truck,
-  PackageCheck, Timer, DollarSign, Percent, CircleDot, SquareStack,
-  CalendarRange,
+  BarChart, Bar, AreaChart, Area, LineChart, Line, PieChart, Pie, Cell,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
+} from "recharts"
+import {
+  Search, Filter, ArrowUpDown, Download, RefreshCw, TrendingUp,
+  TrendingDown, Star, AlertTriangle, CheckCircle2, Clock, Truck,
+  IndianRupee, Target, Users, ShieldCheck, ShieldAlert, Eye,
+  ArrowUpRight, ArrowDownRight, Package, Timer, BarChart3, Zap,
 } from "lucide-react"
 
 // ─── Seed & Helpers ──────────────────────────────────────
@@ -27,1026 +29,492 @@ function seededRandom(seed: number) {
   s = (s * 16807) % 2147483647
   return (s - 1) / 2147483646
 }
-const pick = <T,>(arr: T[], seed: number) => arr[Math.floor(seededRandom(seed) * arr.length)]
+const pick = <T,>(arr: readonly T[], seed: number) => arr[Math.floor(seededRandom(seed) * arr.length)]
 const ri = (min: number, max: number, seed: number) => Math.floor(seededRandom(seed) * (max - min + 1)) + min
-const rf = (min: number, max: number, seed: number) => +(seededRandom(seed) * (max - min) + min).toFixed(2)
 const formatINR = (n: number) => n >= 10000000 ? `₹${(n / 10000000).toFixed(2)} Cr` : n >= 100000 ? `₹${(n / 100000).toFixed(2)} L` : `₹${n.toLocaleString("en-IN")}`
-const formatPct = (n: number) => `${n.toFixed(1)}%`
 
-// ─── Enums (returned from generateData) ───────────────────
-const VENDOR_NAMES = [
-  "Delhivery Logistics", "BlueDart Express", "DTDC Express", "Ecom Express",
-  "XpressBees", "Shadowfax", "Spoton Logistics", "Ekart Logistics",
-  "Delivree Partner", "Shiprocket Fulfillment", "NimbusPost", "Pickrr",
-  "Rivigo", "BlackBuck", "Lalamove India", "Porter Logistics",
-  "Moovo Fleet", "ElasticRun", "Loadshare Networks", "LetsTransport",
+// ─── Enums ──────────────────────────────────────────────
+const REGIONS = ["North", "South", "East", "West", "Central"] as const
+const SLA_TYPES = ["Delivery Time", "Order Accuracy", "Damage Rate", "Return Processing", "POD Compliance", "Pickup Time", "COD Remittance", "Customer Response"] as const
+const SLA_STATUSES = ["Compliant", "At Risk", "Non-Compliant", "Under Review", "Exempted"] as const
+const CLAIM_TYPES = ["Damage", "Loss", "Delay", "Shortage", "Wrong Delivery", "Overcharge"] as const
+const CLAIM_STATUSES = ["Open", "Under Investigation", "Acknowledged", "Settled", "Rejected"] as const
+const SEVERITY_LEVELS = ["Critical", "High", "Medium", "Low"] as const
+const PARTNER_NAMES = [
+  "Delhivery", "BlueDart", "DTDC", "Gati", "XpressBees", "Ecom Express", "Rivigo", "BlackBuck",
+  "VRL Logistics", "TCIL", "Mahindra Logistics", "Allcargo", "TCI Express", "SafeExpress", "Shadowfax",
+  "Dotzot", "Spoton", "Locus", "ElasticRun", "Moovo", "FarEye", "LogiNext", "FreightFox",
+  "Roadzen", "Trukkr", "Vahak", "Porter", "Ninjacart", "Licious Logistics", "Supplynote",
+  "Freightwalla", "Shiprocket", "Pickrr", "Shipway", "AfterShip", "ClickPost", "Rivoship",
+  "Loadshare", "Eshipz", "Shipsy", "Tiger Logistics", "Navatta", "Javas", "Sical Logistics",
+  "TVS Supply Chain", "DHL Supply Chain", "Kuehne+Nagel", "DB Schenker", "Expeditors", "CEVA Logistics",
+  "GEODIS", "Dimerco", "Agility", "Logwin", "Hellmann", "Cargo-Partner", "Rhenus", "Omni Logistics",
+  "Kintetsu World", "Sankyu India", "Nippon Express",
 ] as const
-const WAREHOUSES = [
-  "Mumbai Hub", "Delhi NCR Hub", "Bengaluru DC", "Chennai DC",
-  "Hyderabad DC", "Pune Warehouse", "Kolkata Hub", "Ahmedabad DC",
-] as const
-const ZONES = ["West", "North", "South", "South", "West", "West", "East", "West"] as const
-const SERVICE_TYPES = [
-  "Fulfillment", "Last Mile Delivery", "First Mile Pickup", "Cross-Dock",
-  "Express Delivery", "Economy Delivery", "Cold Chain", "Bulk Transport",
-  "Warehousing", "Value-Added Services",
-] as const
-const CATEGORIES = [
-  "On-Time Delivery", "Order Accuracy", "Damage Rate", "Cost Efficiency",
-  "Customer Satisfaction", " responsiveness", "Documentation Quality", "Compliance",
-] as const
-const SLA_CATEGORIES = [
-  "Delivery SLA", "Pickup SLA", "Processing SLA", "Quality SLA",
-  "Response SLA", "Reporting SLA",
-] as const
-const CONTRACT_STATUSES = [
-  "Active", "Under Review", "Expiring Soon", "Renewed", "Terminated", "Pending Signature",
-] as const
-const RATING_TIERS = ["Platinum", "Gold", "Silver", "Bronze", "At Risk"] as const
-const RATING_COLORS: Record<string, string> = {
-  Platinum: "#7c3aed", Gold: "#d97706", Silver: "#6b7280", Bronze: "#b45309", "At Risk": "#dc2626",
-}
+const COST_CATEGORIES = ["Freight", "Handling", "Storage", "Last Mile", "Returns"] as const
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
+const PIE_COLORS = ["#4338ca", "#d97706", "#059669", "#e11d48", "#0891b2"]
 
-// ─── Types ────────────────────────────────────────────────
-interface VendorScorecard {
-  id: string; vendor: string; zone: string; service: string; warehouse: string;
-  overallScore: number; deliveryRating: number; accuracyRating: number;
-  costRating: number; satisfactionRating: number; complianceRating: number;
-  tier: string; onTimePct: number; damagePct: number; returnPct: number;
-  avgCostPerOrder: number; totalShipments: number; totalRevenue: number;
-  contractStart: string; contractEnd: string; trend: number; isPreferred: boolean;
-}
-interface SLARecord {
-  id: string; vendor: string; category: string; targetPct: number; actualPct: number;
-  breachCount: number; penaltyAmount: number; period: string; zone: string;
-  status: string; slaId: string;
-}
-interface CostRecord {
-  id: string; vendor: string; service: string; warehouse: string; zone: string;
-  baseCost: number; fuelSurcharge: number; handlingCost: number; insuranceCost: number;
-  techFee: number; totalCost: number; costPerUnit: number; volume: number;
-  period: string; savingsVsLastYear: number; budgetVariance: number;
-}
-interface Contract {
-  id: string; vendor: string; service: string; warehouse: string;
-  startDate: string; endDate: string; value: number; status: string;
-  autoRenew: boolean; noticePeriod: string; paymentTerms: string;
-  penaltyClause: string; performanceBonus: number; slaGuarantee: number;
-}
-interface Benchmark {
-  id: string; vendor: string; metric: string; ourScore: number;
-  industryAvg: number; bestInClass: number; peerAvg: number;
-  percentile: number; trend: string; period: string;
-}
+// ─── Types ──────────────────────────────────────────────
+interface Partner { id: string; name: string; region: string; score: number; onTimePct: number; slaPct: number; monthlyVolume: number; contractValue: number; rating: number; tier: string; trend: number[] }
+interface SLARecord { id: string; partner: string; slaType: string; target: number; actual: number; status: string; period: string }
+interface CostRecord { id: string; month: string; category: string; actual: number; budget: number; forecast: number }
+interface Claim { id: string; claimId: string; partner: string; type: string; status: string; severity: string; amount: number; filedDate: string; resolutionDays: number; stage: number }
+type DrawerRecord = Partner | SLARecord | CostRecord | Claim | null
 
-// ─── Data Generation ─────────────────────────────────────
-function generateData() {
-  const vendors: VendorScorecard[] = []
-  for (let i = 0; i < 80; i++) {
-    const seed = i * 137 + 42
-    const delivery = rf(70, 99.5, seed); const accuracy = rf(85, 99.9, seed + 1)
-    const cost = rf(60, 98, seed + 2); const satisfaction = rf(65, 99, seed + 3)
-    const compliance = rf(75, 100, seed + 4)
-    const overall = +((delivery * 0.3 + accuracy * 0.25 + cost * 0.15 + satisfaction * 0.15 + compliance * 0.15)).toFixed(1)
-    const tier = overall >= 95 ? "Platinum" : overall >= 88 ? "Gold" : overall >= 78 ? "Silver" : overall >= 65 ? "Bronze" : "At Risk"
-    vendors.push({
-      id: `TPL-V-${String(i + 1).padStart(4, "0")}`,
-      vendor: VENDOR_NAMES[i % VENDOR_NAMES.length],
-      zone: ZONES[i % ZONES.length],
-      service: pick([...SERVICE_TYPES], seed + 5) as string,
-      warehouse: WAREHOUSES[i % WAREHOUSES.length],
-      overallScore: overall, deliveryRating: delivery, accuracyRating: accuracy,
-      costRating: cost, satisfactionRating: satisfaction, complianceRating: compliance,
-      tier, onTimePct: delivery, damagePct: rf(0.1, 5, seed + 6),
-      returnPct: rf(0.5, 8, seed + 7),
-      avgCostPerOrder: ri(45, 320, seed + 8),
-      totalShipments: ri(500, 50000, seed + 9),
-      totalRevenue: ri(500000, 80000000, seed + 10),
-      contractStart: `2024-${String(ri(1, 12, seed + 11)).padStart(2, "0")}-01`,
-      contractEnd: `2026-${String(ri(1, 12, seed + 12)).padStart(2, "0")}-30`,
-      trend: [-3, -2, -1, 0, 1, 2, 3, 4, 5][Math.floor(seededRandom(seed + 13) * 9)] as number,
-      isPreferred: seededRandom(seed + 14) > 0.7,
-    })
-  }
-  const slaRecords: SLARecord[] = []
-  for (let i = 0; i < 70; i++) {
-    const seed = i * 199 + 77
-    const target = rf(95, 99.5, seed)
-    const actual = rf(80, 100, seed + 1)
-    slaRecords.push({
-      id: `TPL-SLA-${String(i + 1).padStart(4, "0")}`,
-      vendor: VENDOR_NAMES[i % VENDOR_NAMES.length],
-      category: SLA_CATEGORIES[i % SLA_CATEGORIES.length] as string,
-      targetPct: target, actualPct: actual,
-      breachCount: actual < target ? ri(1, 25, seed + 2) : 0,
-      penaltyAmount: actual < target ? ri(5000, 500000, seed + 3) : 0,
-      period: `Q${ri(1, 4, seed + 4)} 2025`,
-      zone: ZONES[i % ZONES.length],
-      status: actual >= target ? "Met" : actual >= target - 2 ? "At Risk" : "Breached",
-      slaId: `SLA-${ri(1000, 9999, seed + 5)}`,
-    })
-  }
-  const costs: CostRecord[] = []
-  for (let i = 0; i < 55; i++) {
-    const seed = i * 223 + 99
-    const base = ri(200000, 5000000, seed)
-    const fuel = Math.round(base * rf(0.05, 0.2, seed + 1))
-    const handling = Math.round(base * rf(0.03, 0.12, seed + 2))
-    const insurance = Math.round(base * rf(0.01, 0.05, seed + 3))
-    const tech = Math.round(base * rf(0.02, 0.08, seed + 4))
-    const total = base + fuel + handling + insurance + tech
-    costs.push({
-      id: `TPL-COST-${String(i + 1).padStart(4, "0")}`,
-      vendor: VENDOR_NAMES[i % VENDOR_NAMES.length],
-      service: pick([...SERVICE_TYPES], seed + 5) as string,
-      warehouse: WAREHOUSES[i % WAREHOUSES.length],
-      zone: ZONES[i % ZONES.length],
-      baseCost: base, fuelSurcharge: fuel, handlingCost: handling,
-      insuranceCost: insurance, techFee: tech, totalCost: total,
-      costPerUnit: ri(20, 350, seed + 6),
-      volume: ri(1000, 100000, seed + 7),
-      period: `2025-${String(ri(1, 12, seed + 8)).padStart(2, "0")}`,
-      savingsVsLastYear: rf(-10, 25, seed + 9),
-      budgetVariance: rf(-15, 10, seed + 10),
-    })
-  }
-  const contracts: Contract[] = []
-  for (let i = 0; i < 40; i++) {
-    const seed = i * 311 + 55
-    const status = [...CONTRACT_STATUSES][Math.floor(seededRandom(seed) * CONTRACT_STATUSES.length)] as string
-    contracts.push({
-      id: `TPL-CON-${String(i + 1).padStart(4, "0")}`,
-      vendor: VENDOR_NAMES[i % VENDOR_NAMES.length],
-      service: pick([...SERVICE_TYPES], seed + 1) as string,
-      warehouse: WAREHOUSES[i % WAREHOUSES.length],
-      startDate: `2024-${String(ri(1, 12, seed + 2)).padStart(2, "0")}-01`,
-      endDate: `2026-${String(ri(1, 12, seed + 3)).padStart(2, "0")}-30`,
-      value: ri(1000000, 500000000, seed + 4),
-      status,
-      autoRenew: seededRandom(seed + 5) > 0.5,
-      noticePeriod: ["30 Days", "60 Days", "90 Days"][Math.floor(seededRandom(seed + 6) * 3)] as string,
-      paymentTerms: ["Net 30", "Net 45", "Net 60", "Net 90"][Math.floor(seededRandom(seed + 7) * 4)] as string,
-      penaltyClause: ["5% of invoice", "2% per day delay", "₹50K per breach", "Tiered penalty"][Math.floor(seededRandom(seed + 8) * 4)] as string,
-      performanceBonus: ri(50000, 2000000, seed + 9),
-      slaGuarantee: rf(90, 99, seed + 10),
-    })
-  }
-  const benchmarks: Benchmark[] = []
-  for (let i = 0; i < 60; i++) {
-    const seed = i * 373 + 88
-    const ourScore = rf(65, 98, seed)
-    const industryAvg = ourScore - rf(2, 12, seed + 1)
-    const bestInClass = ourScore + rf(1, 8, seed + 2)
-    const peerAvg = ourScore - rf(1, 8, seed + 3)
-    const percentile = ri(15, 98, seed + 4)
-    benchmarks.push({
-      id: `TPL-BM-${String(i + 1).padStart(4, "0")}`,
-      vendor: VENDOR_NAMES[i % VENDOR_NAMES.length],
-      metric: [...CATEGORIES][Math.floor(seededRandom(seed + 5) * CATEGORIES.length)] as string,
-      ourScore, industryAvg: +industryAvg.toFixed(1),
-      bestInClass: +bestInClass.toFixed(1), peerAvg: +peerAvg.toFixed(1),
-      percentile, trend: ["improving", "stable", "declining"][Math.floor(seededRandom(seed + 6) * 3)] as string,
-      period: `Q${ri(1, 4, seed + 7)} 2025`,
-    })
-  }
-  const monthlyTrend = Array.from({ length: 12 }, (_, i) => {
-    const seed = i * 47 + 100
-    return {
-      month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][i],
-      avgScore: rf(82, 96, seed),
-      totalShipments: ri(80000, 200000, seed + 1),
-      totalCost: ri(50000000, 150000000, seed + 2),
-      slaBreachCount: ri(3, 30, seed + 3),
-      onTimePct: rf(88, 98, seed + 4),
-      costPerShipment: ri(120, 350, seed + 5),
-    }
-  })
-  const vendorDistribution = RATING_TIERS.map(tier => ({
-    tier,
-    count: vendors.filter(v => v.tier === tier).length,
-    color: RATING_COLORS[tier],
-  }))
-  const servicePerformance = SERVICE_TYPES.slice(0, 8).map(svc => {
-    const seed = svc.length * 31
-    const matching = vendors.filter(v => v.service === svc)
-    return {
-      service: svc,
-      avgScore: matching.length ? +(matching.reduce((a, b) => a + b.overallScore, 0) / matching.length).toFixed(1) : rf(75, 95, seed),
-      avgCost: ri(80, 300, seed + 1),
-      volume: ri(5000, 80000, seed + 2),
-    }
-  })
-  const zoneComparison = WAREHOUSES.map((wh, idx) => {
-    const seed = idx * 61 + 200
-    const matching = vendors.filter(v => v.warehouse === wh)
-    return {
-      warehouse: wh,
-      delivery: matching.length ? +(matching.reduce((a, b) => a + b.deliveryRating, 0) / matching.length).toFixed(1) : rf(85, 97, seed),
-      accuracy: matching.length ? +(matching.reduce((a, b) => a + b.accuracyRating, 0) / matching.length).toFixed(1) : rf(88, 99, seed + 1),
-      cost: matching.length ? +(matching.reduce((a, b) => a + b.costRating, 0) / matching.length).toFixed(1) : rf(70, 95, seed + 2),
-      satisfaction: matching.length ? +(matching.reduce((a, b) => a + b.satisfactionRating, 0) / matching.length).toFixed(1) : rf(78, 96, seed + 3),
-      compliance: matching.length ? +(matching.reduce((a, b) => a + b.complianceRating, 0) / matching.length).toFixed(1) : rf(80, 99, seed + 4),
-    }
-  })
-  const costBreakdownData = [
-    { component: "Base Freight", value: 55, color: "#0d9488" },
-    { component: "Fuel Surcharge", value: 15, color: "#e11d48" },
-    { component: "Handling", value: 12, color: "#6366f1" },
-    { component: "Insurance", value: 8, color: "#f59e0b" },
-    { component: "Tech Fee", value: 6, color: "#10b981" },
-    { component: "Miscellaneous", value: 4, color: "#8b5cf6" },
-  ]
+// ─── Data Generation ────────────────────────────────────
+let seedCounter = 2067701
+const nextSeed = () => ++seedCounter
+
+const partners: Partner[] = PARTNER_NAMES.map((name, i) => {
+  const s = nextSeed()
+  const score = ri(28, 98, s)
   return {
-    vendors, slaRecords, costs, contracts, benchmarks, monthlyTrend,
-    vendorDistribution, servicePerformance, zoneComparison, costBreakdownData,
-    VENDOR_NAMES, WAREHOUSES, ZONES, SERVICE_TYPES, CATEGORIES, SLA_CATEGORIES,
-    CONTRACT_STATUSES, RATING_TIERS, RATING_COLORS,
+    id: `P${String(i + 1).padStart(3, "0")}`, name, region: pick(REGIONS, s), score,
+    onTimePct: ri(62, 99, s), slaPct: ri(55, 100, s),
+    monthlyVolume: ri(1200, 48000, s), contractValue: ri(800000, 85000000, s),
+    rating: ri(1, 5, s), tier: score >= 85 ? "Gold" : score >= 70 ? "Silver" : score >= 50 ? "Bronze" : "Standard",
+    trend: Array.from({ length: 6 }, () => ri(40, 100, nextSeed())),
   }
+})
+
+const slaRecords: SLARecord[] = Array.from({ length: 55 }, (_, i) => {
+  const s = nextSeed()
+  return { id: `SLA${i + 1}`, partner: pick(PARTNER_NAMES, s), slaType: pick(SLA_TYPES, s), target: ri(90, 100, s), actual: ri(60, 100, s), status: pick(SLA_STATUSES, s), period: `2024-${String(ri(1, 12, s)).padStart(2, "0")}` }
+})
+
+const costRecords: CostRecord[] = Array.from({ length: 50 }, (_, i) => {
+  const s = nextSeed()
+  return { id: `C${i + 1}`, month: pick(MONTHS, s), category: pick(COST_CATEGORIES, s), actual: ri(800000, 12000000, s), budget: ri(800000, 12000000, s), forecast: ri(800000, 12000000, s) }
+})
+
+const claims: Claim[] = Array.from({ length: 40 }, (_, i) => {
+  const s = nextSeed()
+  return { id: `CL${i + 1}`, claimId: `CLM-2024-${String(i + 1).padStart(4, "0")}`, partner: pick(PARTNER_NAMES, s), type: pick(CLAIM_TYPES, s), status: pick(CLAIM_STATUSES, s), severity: pick(SEVERITY_LEVELS, s), amount: ri(5000, 850000, s), filedDate: `2024-${String(ri(1, 12, s)).padStart(2, "0")}-${String(ri(1, 28, s)).padStart(2, "0")}`, resolutionDays: ri(1, 45, s), stage: pick([0, 1, 2, 3] as const, s) }
+})
+
+// ─── Chart Data ─────────────────────────────────────────
+const monthlyTrend = MONTHS.map((m, i) => ({ month: m, onTime: ri(78, 96, 2067701 + i * 3), cost: ri(70, 95, 2067702 + i * 3), quality: ri(75, 98, 2067703 + i * 3) }))
+const partnerDistribution = [{ name: "Gold", value: partners.filter(p => p.tier === "Gold").length }, { name: "Silver", value: partners.filter(p => p.tier === "Silver").length }, { name: "Bronze", value: partners.filter(p => p.tier === "Bronze").length }, { name: "Standard", value: partners.filter(p => p.tier === "Standard").length }]
+const slaByCategory = SLA_TYPES.slice(0, 6).map((t, i) => ({ category: t.split(" ")[0], compliant: ri(15, 30, 3000 + i * 7), atRisk: ri(2, 8, 3001 + i * 7), nonCompliant: ri(0, 5, 3002 + i * 7) }))
+const costTrend = MONTHS.map((m, i) => ({ month: m, actual: ri(8000000, 15000000, 4000 + i * 3), budget: ri(8000000, 15000000, 4001 + i * 3), forecast: ri(8000000, 15000000, 4002 + i * 3) }))
+const costBreakdown = MONTHS.map((m, i) => ({ month: m, Freight: ri(3000000, 7000000, 5000 + i * 5), Handling: ri(1000000, 3000000, 5001 + i * 5), Storage: ri(800000, 2500000, 5002 + i * 5), "Last Mile": ri(1500000, 4000000, 5003 + i * 5), Returns: ri(500000, 2000000, 5004 + i * 5) }))
+const quarterlyTrend = ["Q1", "Q2", "Q3", "Q4"].map((q, i) => ({ quarter: q, score: ri(70, 95, 6000 + i * 3), onTime: ri(80, 96, 6001 + i * 3), compliance: ri(75, 98, 6002 + i * 3) }))
+const partnerComparison = partners.slice(0, 8).map((p, i) => ({ name: p.name.split(" ")[0].slice(0, 8), onTime: p.onTimePct, cost: ri(65, 95, 7000 + i), quality: ri(70, 98, 7001 + i) }))
+
+const avgScore = +(partners.reduce((a, p) => a + p.score, 0) / partners.length).toFixed(1)
+const avgSla = +(slaRecords.filter(s => s.status === "Compliant").length / slaRecords.length * 100).toFixed(1)
+const totalContracts = partners.reduce((a, p) => a + p.contractValue, 0)
+const openClaimsCount = claims.filter(c => c.status === "Open").length
+const avgOnTime = +(partners.reduce((a, p) => a + p.onTimePct, 0) / partners.length).toFixed(1)
+const avgResolution = +(claims.reduce((a, c) => a + c.resolutionDays, 0) / claims.length).toFixed(1)
+const costVariance = +((costRecords.reduce((a, c) => a + c.actual, 0) - costRecords.reduce((a, c) => a + c.budget, 0)) / costRecords.reduce((a, c) => a + c.budget, 0) * 100).toFixed(1)
+
+// ─── 14 Visual Components ───────────────────────────────
+
+// 1. ScoreBadge
+function ScoreBadge({ score }: { score: number }) {
+  return <span className={cn("tps-score-badge inline-flex items-center justify-center rounded-md px-2 py-0.5 text-xs font-bold", score >= 80 ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" : score >= 60 ? "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300" : score >= 40 ? "bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300" : "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300")}>{score}</span>
 }
 
-const data = generateData()
+// 2. RegionBadge
+function RegionBadge({ region }: { region: string }) {
+  const colors: Record<string, string> = { North: "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300", South: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300", East: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300", West: "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300", Central: "bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300" }
+  return <span className={cn("tps-region-badge inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium", colors[region] ?? "bg-slate-100 text-slate-700")}>{region}</span>
+}
 
-// ─── Helper Components ───────────────────────────────────
-function FieldGrid({ fields }: { fields: { label: string; value: string; icon?: React.ReactNode }[] }) {
-  return (
-    <div className="tpl-drawer-field-grid">
-      {fields.map((f, i) => (
-        <div key={i} className="tpl-drawer-field">
-          <span className="tpl-drawer-field-label">{f.icon}{f.label}</span>
-          <span className="tpl-drawer-field-value">{f.value}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
-function MetricsRow({ metrics }: { metrics: { label: string; value: string; trend?: string; color: string }[] }) {
-  return (
-    <div className="tpl-drawer-metrics-row">
-      {metrics.map((m, i) => (
-        <div key={i} className={`tpl-drawer-metric-card tpl-metric-${m.color}`}>
-          <span className="tpl-drawer-metric-label">{m.label}</span>
-          <span className="tpl-drawer-metric-value">{m.value}</span>
-          {m.trend && (
-            <span className={`tpl-drawer-metric-trend ${m.trend.startsWith("+") ? "tpl-trend-up" : m.trend.startsWith("-") ? "tpl-trend-down" : ""}`}>
-              {m.trend}
-            </span>
-          )}
-        </div>
-      ))}
-    </div>
-  )
-}
-function TierBadge({ tier }: { tier: string }) {
-  const colors: Record<string, string> = {
-    Platinum: "tpl-tier-platinum", Gold: "tpl-tier-gold", Silver: "tpl-tier-silver",
-    Bronze: "tpl-tier-bronze", "At Risk": "tpl-tier-atrisk",
-  }
-  return <span className={`tpl-tier-badge ${colors[tier] || ""}`}>{tier}</span>
-}
-function ScoreRing({ score, size = 60 }: { score: number; size?: number }) {
-  const r = (size - 8) / 2; const circ = 2 * Math.PI * r
-  const offset = circ - (score / 100) * circ
-  const color = score >= 90 ? "#0d9488" : score >= 75 ? "#6366f1" : score >= 60 ? "#f59e0b" : "#e11d48"
-  return (
-    <svg width={size} height={size} className="tpl-score-ring">
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#e5e7eb" strokeWidth="4" />
-      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth="4"
-        strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" transform={`rotate(-90 ${size / 2} ${size / 2})`} />
-      <text x={size / 2} y={size / 2} textAnchor="middle" dominantBaseline="central"
-        fontSize="14" fontWeight="700" fill={color}>{score}</text>
-    </svg>
-  )
-}
+// 3. StarRating
 function StarRating({ rating }: { rating: number }) {
-  const stars = Math.round(rating / 20)
-  return (
-    <span className="tpl-star-rating">
-      {Array.from({ length: 5 }, (_, i) => (
-        <Star key={i} size={14} className={i < stars ? "tpl-star-filled" : "tpl-star-empty"} />
-      ))}
-      <span className="tpl-star-value">{rating.toFixed(0)}%</span>
-    </span>
-  )
+  return <span className="tps-star-rating inline-flex items-center gap-0.5">{[1, 2, 3, 4, 5].map(s => (<svg key={s} className={cn("h-3.5 w-3.5", s <= rating ? "text-amber-400 fill-amber-400" : "text-slate-300 dark:text-slate-600")} viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>))}</span>
 }
-function ProgressBar({ value, max, color = "#0d9488", label }: { value: number; max: number; color?: string; label: string }) {
-  const pct = Math.min((value / max) * 100, 100)
+
+// 4. SLAComplianceGauge
+function SLAComplianceGauge({ value }: { value: number }) {
+  const pct = Math.min(100, Math.max(0, value))
+  const angle = (pct / 100) * 180
+  const r = 60, cx = 70, cy = 70
+  const x2 = cx + r * Math.cos(((180 - angle) * Math.PI) / 180)
+  const y2 = cy - r * Math.sin(((180 - angle) * Math.PI) / 180)
   return (
-    <div className="tpl-progress-bar-container">
-      <span className="tpl-progress-label">{label}</span>
-      <div className="tpl-progress-bar-track">
-        <div className="tpl-progress-bar-fill" style={{ width: `${pct}%`, backgroundColor: color }} />
-      </div>
-      <span className="tpl-progress-value">{formatPct(pct)}</span>
+    <div className="tps-sla-gauge relative flex items-end justify-center">
+      <svg viewBox="0 0 140 85" className="w-36 h-24">
+        <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`} fill="none" stroke="#e2e8f0" strokeWidth="10" strokeLinecap="round" />
+        <path d={`M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${x2} ${y2}`} fill="none" stroke={pct >= 90 ? "#059669" : pct >= 70 ? "#d97706" : "#e11d48"} strokeWidth="10" strokeLinecap="round" />
+        <text x={cx} y={cy - 12} textAnchor="middle" className="text-lg font-bold" fill={pct >= 90 ? "#059669" : pct >= 70 ? "#d97706" : "#e11d48"}>{pct.toFixed(0)}%</text>
+        <text x={cx} y={cy + 6} textAnchor="middle" className="text-[10px]" fill="#64748b">Compliance</text>
+      </svg>
     </div>
   )
 }
 
-// ─── Sort Helper ──────────────────────────────────────────
-function sortBy(arr: any[], key: string, dir: "asc" | "desc"): any[] {
-  return [...arr].sort((a, b) => {
-    const va = a[key]; const vb = b[key]
-    if (typeof va === "number" && typeof vb === "number") return dir === "asc" ? va - vb : vb - va
-    return dir === "asc" ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va))
-  })
+// 5. SLAStatusBadge
+function SLAStatusBadge({ status }: { status: string }) {
+  const cfg: Record<string, string> = { "Compliant": "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300", "At Risk": "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300", "Non-Compliant": "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300", "Under Review": "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300", "Exempted": "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400" }
+  return <span className={cn("tps-sla-status-badge inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium", cfg[status] ?? "bg-slate-100 text-slate-600")}>{status}</span>
 }
 
-// ─── Drawers ───────────────────────────────────────────────
-function VendorDrawer({ v, onClose }: { v: any; onClose: () => void }) {
-  return (
-    <>
-      <div className="tpl-drawer-overlay" onClick={onClose} />
-      <div className="tpl-drawer-panel">
-        <div className="tpl-drawer-header">
-          <div className="tpl-drawer-header-info">
-            <h3 className="tpl-drawer-title">{v.vendor}</h3>
-            <div className="tpl-drawer-subtitle">
-              <MapPin size={13} /> {v.warehouse} · {v.zone} Zone
-              {v.isPreferred && <Badge className="tpl-preferred-badge"><Award size={12} /> Preferred</Badge>}
-            </div>
-          </div>
-          <button onClick={onClose} className="tpl-drawer-close"><X size={18} /></button>
-        </div>
-        <div className="tpl-drawer-body">
-          <div className="tpl-drawer-score-section">
-            <ScoreRing score={v.overallScore} size={80} />
-            <div className="tpl-drawer-tier-info">
-              <TierBadge tier={v.tier} />
-              <div className="tpl-drawer-trend" style={{ color: v.trend > 0 ? "#10b981" : v.trend < 0 ? "#ef4444" : "#6b7280" }}>
-                {v.trend > 0 ? <ArrowUpRight size={14} /> : v.trend < 0 ? <ArrowDownRight size={14} /> : <Minus size={14} />}
-                {v.trend > 0 ? `+${v.trend}%` : v.trend < 0 ? `${v.trend}%` : "0%"} vs last quarter
-              </div>
-            </div>
-          </div>
-          <FieldGrid fields={[
-            { label: "Service Type", value: v.service, icon: <Truck size={13} /> },
-            { label: "Vendor ID", value: v.id, icon: <FileText size={13} /> },
-            { label: "Contract Start", value: v.contractStart, icon: <Clock size={13} /> },
-            { label: "Contract End", value: v.contractEnd, icon: <Clock size={13} /> },
-            { label: "On-Time %", value: formatPct(v.onTimePct), icon: <Timer size={13} /> },
-            { label: "Damage Rate", value: formatPct(v.damagePct), icon: <AlertTriangle size={13} /> },
-            { label: "Return Rate", value: formatPct(v.returnPct), icon: <RefreshCw size={13} /> },
-            { label: "Avg Cost/Order", value: `₹${v.avgCostPerOrder}`, icon: <IndianRupee size={13} /> },
-            { label: "Total Shipments", value: v.totalShipments.toLocaleString(), icon: <PackageCheck size={13} /> },
-            { label: "Total Revenue", value: formatINR(v.totalRevenue), icon: <DollarSign size={13} /> },
-          ]} />
-          <MetricsRow metrics={[
-            { label: "Delivery", value: formatPct(v.deliveryRating), color: "teal" },
-            { label: "Accuracy", value: formatPct(v.accuracyRating), color: "indigo" },
-            { label: "Satisfaction", value: formatPct(v.satisfactionRating), color: "rose" },
-          ]} />
-          <div className="tpl-drawer-progress-section">
-            <h4 className="tpl-drawer-section-title">Performance Breakdown</h4>
-            <ProgressBar value={v.deliveryRating} max={100} color="#0d9488" label="Delivery" />
-            <ProgressBar value={v.accuracyRating} max={100} color="#6366f1" label="Accuracy" />
-            <ProgressBar value={v.costRating} max={100} color="#e11d48" label="Cost Efficiency" />
-            <ProgressBar value={v.satisfactionRating} max={100} color="#f59e0b" label="Satisfaction" />
-            <ProgressBar value={v.complianceRating} max={100} color="#10b981" label="Compliance" />
-          </div>
-          <div className="tpl-drawer-actions">
-            <Button size="sm" className="tpl-btn-primary"><Eye size={14} /> View Report</Button>
-            <Button size="sm" variant="outline"><FileText size={14} /> SLA Details</Button>
-            <Button size="sm" variant="outline"><Download size={14} /> Export</Button>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+// 6. ClaimTypeBadge
+function ClaimTypeBadge({ type }: { type: string }) {
+  const cfg: Record<string, string> = { Damage: "bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300", Loss: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300", Delay: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300", Shortage: "bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300", "Wrong Delivery": "bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300", Overcharge: "bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300" }
+  return <span className={cn("tps-claim-type-badge inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium", cfg[type] ?? "bg-slate-100 text-slate-600")}>{type}</span>
 }
 
-function SLADrawer({ s, onClose }: { s: any; onClose: () => void }) {
-  const isMet = s.actualPct >= s.targetPct
-  return (
-    <>
-      <div className="tpl-drawer-overlay" onClick={onClose} />
-      <div className="tpl-drawer-panel">
-        <div className="tpl-drawer-header tpl-sla-header">
-          <div className="tpl-drawer-header-info">
-            <h3 className="tpl-drawer-title">SLA: {s.slaId}</h3>
-            <div className="tpl-drawer-subtitle">
-              <span className={`tpl-sla-status-badge tpl-sla-${s.status.toLowerCase().replace(" ", "-")}`}>{s.status}</span>
-              <MapPin size={13} /> {s.zone} Zone
-            </div>
-          </div>
-          <button onClick={onClose} className="tpl-drawer-close"><X size={18} /></button>
-        </div>
-        <div className="tpl-drawer-body">
-          <div className="tpl-drawer-sla-visual">
-            <div className={`tpl-sla-circle ${isMet ? "tpl-sla-met" : "tpl-sla-breached"}`}>
-              <span className="tpl-sla-circle-value">{formatPct(s.actualPct)}</span>
-              <span className="tpl-sla-circle-label">Actual</span>
-            </div>
-            <div className="tpl-sla-target-indicator">
-              <Target size={20} />
-              <span>Target: {formatPct(s.targetPct)}</span>
-            </div>
-            {s.breachCount > 0 && (
-              <div className="tpl-sla-breach-alert">
-                <ShieldAlert size={16} />
-                <span>{s.breachCount} breaches · Penalty: {formatINR(s.penaltyAmount)}</span>
-              </div>
-            )}
-          </div>
-          <FieldGrid fields={[
-            { label: "Vendor", value: s.vendor, icon: <Users size={13} /> },
-            { label: "SLA ID", value: s.slaId, icon: <FileText size={13} /> },
-            { label: "Category", value: s.category, icon: <ShieldCheck size={13} /> },
-            { label: "Period", value: s.period, icon: <CalendarRange size={13} /> },
-            { label: "Target %", value: formatPct(s.targetPct), icon: <Target size={13} /> },
-            { label: "Actual %", value: formatPct(s.actualPct), icon: <BarChart3 size={13} /> },
-            { label: "Gap", value: formatPct(s.actualPct - s.targetPct), icon: s.actualPct >= s.targetPct ? <ThumbsUp size={13} /> : <ThumbsDown size={13} /> },
-            { label: "Penalty", value: s.penaltyAmount ? formatINR(s.penaltyAmount) : "None", icon: <IndianRupee size={13} /> },
-          ]} />
-          <MetricsRow metrics={[
-            { label: "Breach Count", value: String(s.breachCount), color: s.breachCount > 0 ? "rose" : "teal" },
-            { label: "Performance", value: formatPct(s.actualPct), color: isMet ? "teal" : "rose" },
-            { label: "Penalty", value: s.penaltyAmount ? formatINR(s.penaltyAmount) : "₹0", color: s.penaltyAmount > 0 ? "amber" : "teal" },
-          ]} />
-          <div className="tpl-drawer-actions">
-            <Button size="sm" className="tpl-btn-primary"><RefreshCw size={14} /> Dispute</Button>
-            <Button size="sm" variant="outline"><FileText size={14} /> Full Report</Button>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+// 7. SeverityBadge (with Critical pulse)
+function SeverityBadge({ severity }: { severity: string }) {
+  const cfg: Record<string, string> = { Critical: "bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300", High: "bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300", Medium: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300", Low: "bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300" }
+  return <span className={cn("tps-severity-badge inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium", cfg[severity] ?? "bg-slate-100 text-slate-600", severity === "Critical" && "animate-pulse")}>{severity === "Critical" && <span className="h-1.5 w-1.5 rounded-full bg-red-500" />}{severity}</span>
 }
 
-function CostDrawer({ c, onClose }: { c: any; onClose: () => void }) {
-  const breakdown = [
-    { label: "Base Freight", value: c.baseCost, pct: c.baseCost / c.totalCost * 100, color: "#0d9488" },
-    { label: "Fuel Surcharge", value: c.fuelSurcharge, pct: c.fuelSurcharge / c.totalCost * 100, color: "#e11d48" },
-    { label: "Handling", value: c.handlingCost, pct: c.handlingCost / c.totalCost * 100, color: "#6366f1" },
-    { label: "Insurance", value: c.insuranceCost, pct: c.insuranceCost / c.totalCost * 100, color: "#f59e0b" },
-    { label: "Tech Fee", value: c.techFee, pct: c.techFee / c.totalCost * 100, color: "#10b981" },
-  ]
-  return (
-    <>
-      <div className="tpl-drawer-overlay" onClick={onClose} />
-      <div className="tpl-drawer-panel">
-        <div className="tpl-drawer-header tpl-cost-header">
-          <div className="tpl-drawer-header-info">
-            <h3 className="tpl-drawer-title">Cost: {c.id}</h3>
-            <div className="tpl-drawer-subtitle">
-              <IndianRupee size={13} /> {formatINR(c.totalCost)} total · {c.period}
-            </div>
-          </div>
-          <button onClick={onClose} className="tpl-drawer-close"><X size={18} /></button>
-        </div>
-        <div className="tpl-drawer-body">
-          <FieldGrid fields={[
-            { label: "Vendor", value: c.vendor, icon: <Users size={13} /> },
-            { label: "Service", value: c.service, icon: <Truck size={13} /> },
-            { label: "Warehouse", value: c.warehouse, icon: <Building size={13} /> },
-            { label: "Zone", value: c.zone, icon: <MapPin size={13} /> },
-            { label: "Volume", value: c.volume.toLocaleString(), icon: <PackageCheck size={13} /> },
-            { label: "Cost/Unit", value: `₹${c.costPerUnit}`, icon: <IndianRupee size={13} /> },
-            { label: "Savings YoY", value: formatPct(c.savingsVsLastYear), icon: c.savingsVsLastYear > 0 ? <TrendingUp size={13} /> : <TrendingDown size={13} /> },
-            { label: "Budget Variance", value: formatPct(c.budgetVariance), icon: c.budgetVariance >= 0 ? <ThumbsUp size={13} /> : <ThumbsDown size={13} /> },
-          ]} />
-          <MetricsRow metrics={[
-            { label: "Total Cost", value: formatINR(c.totalCost), color: "teal" },
-            { label: "Cost/Unit", value: `₹${c.costPerUnit}`, color: "indigo" },
-            { label: "Volume", value: c.volume.toLocaleString(), color: "amber" },
-          ]} />
-          <div className="tpl-drawer-breakdown-section">
-            <h4 className="tpl-drawer-section-title">Cost Breakdown</h4>
-            {breakdown.map((b, i) => (
-              <div key={i} className="tpl-cost-breakdown-bar">
-                <span className="tpl-cb-label">{b.label}</span>
-                <div className="tpl-cb-track">
-                  <div className="tpl-cb-fill" style={{ width: `${b.pct}%`, backgroundColor: b.color }} />
-                </div>
-                <span className="tpl-cb-value">{formatINR(b.value)}</span>
-                <span className="tpl-cb-pct">{formatPct(b.pct)}</span>
-              </div>
-            ))}
-          </div>
-          <div className="tpl-drawer-actions">
-            <Button size="sm" className="tpl-btn-primary"><Download size={14} /> Export Report</Button>
-            <Button size="sm" variant="outline"><BarChart3 size={14} /> Compare</Button>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+// 8. CostVarianceIndicator
+function CostVarianceIndicator({ value }: { value: number }) {
+  return <span className={cn("tps-cost-variance inline-flex items-center gap-1 text-xs font-semibold", value >= 0 ? "text-red-600 dark:text-red-400" : "text-emerald-600 dark:text-emerald-400")}>{value >= 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}{value >= 0 ? "+" : ""}{value}%</span>
 }
 
-function ContractDrawer({ ct, onClose }: { ct: any; onClose: () => void }) {
-  const statusColors: Record<string, string> = {
-    Active: "tpl-con-active", "Under Review": "tpl-con-review", "Expiring Soon": "tpl-con-expiring",
-    Renewed: "tpl-con-renewed", Terminated: "tpl-con-terminated", "Pending Signature": "tpl-con-pending",
-  }
-  return (
-    <>
-      <div className="tpl-drawer-overlay" onClick={onClose} />
-      <div className="tpl-drawer-panel">
-        <div className="tpl-drawer-header tpl-contract-header">
-          <div className="tpl-drawer-header-info">
-            <h3 className="tpl-drawer-title">Contract: {ct.id}</h3>
-            <div className="tpl-drawer-subtitle">
-              <span className={`tpl-contract-status-badge ${statusColors[ct.status] || ""}`}>{ct.status}</span>
-              <span className="tpl-contract-auto-renew">{ct.autoRenew ? "Auto-Renew ON" : "Manual Renewal"}</span>
-            </div>
-          </div>
-          <button onClick={onClose} className="tpl-drawer-close"><X size={18} /></button>
-        </div>
-        <div className="tpl-drawer-body">
-          <FieldGrid fields={[
-            { label: "Vendor", value: ct.vendor, icon: <Users size={13} /> },
-            { label: "Service", value: ct.service, icon: <Truck size={13} /> },
-            { label: "Warehouse", value: ct.warehouse, icon: <Building size={13} /> },
-            { label: "Contract Value", value: formatINR(ct.value), icon: <IndianRupee size={13} /> },
-            { label: "Start Date", value: ct.startDate, icon: <Clock size={13} /> },
-            { label: "End Date", value: ct.endDate, icon: <Clock size={13} /> },
-            { label: "Notice Period", value: ct.noticePeriod, icon: <Timer size={13} /> },
-            { label: "Payment Terms", value: ct.paymentTerms, icon: <DollarSign size={13} /> },
-            { label: "Penalty Clause", value: ct.penaltyClause, icon: <ShieldAlert size={13} /> },
-            { label: "SLA Guarantee", value: formatPct(ct.slaGuarantee), icon: <ShieldCheck size={13} /> },
-          ]} />
-          <MetricsRow metrics={[
-            { label: "Contract Value", value: formatINR(ct.value), color: "teal" },
-            { label: "Perf. Bonus", value: formatINR(ct.performanceBonus), color: "amber" },
-            { label: "SLA Target", value: formatPct(ct.slaGuarantee), color: "indigo" },
-          ]} />
-          <div className="tpl-drawer-actions">
-            <Button size="sm" className="tpl-btn-primary"><FileText size={14} /> Full Contract</Button>
-            <Button size="sm" variant="outline"><RefreshCw size={14} /> Renew</Button>
-            <Button size="sm" variant="outline"><Download size={14} /> Download</Button>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+// 9. TrendSparkline
+function TrendSparkline({ data }: { data: number[] }) {
+  if (data.length < 2) return null
+  const min = Math.min(...data), max = Math.max(...data), range = max - min || 1
+  const w = 60, h = 20
+  const pts = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / range) * h}`).join(" ")
+  const color = data[data.length - 1] >= data[data.length - 2] ? "#059669" : "#e11d48"
+  return <svg viewBox={`0 0 ${w} ${h}`} className="tps-sparkline w-16 h-5"><polyline fill="none" stroke={color} strokeWidth="1.5" points={pts} /></svg>
 }
 
-function BenchmarkDrawer({ b, onClose }: { b: any; onClose: () => void }) {
-  const trendIcons = { improving: <TrendingUp size={14} />, stable: <Minus size={14} />, declining: <TrendingDown size={14} /> }
-  const trendColors = { improving: "#10b981", stable: "#6b7280", declining: "#ef4444" }
-  return (
-    <>
-      <div className="tpl-drawer-overlay" onClick={onClose} />
-      <div className="tpl-drawer-panel">
-        <div className="tpl-drawer-header tpl-benchmark-header">
-          <div className="tpl-drawer-header-info">
-            <h3 className="tpl-drawer-title">Benchmark: {b.metric}</h3>
-            <div className="tpl-drawer-subtitle">
-              {b.vendor} · {b.period}
-              <span className="tpl-benchmark-trend" style={{ color: trendColors[b.trend as keyof typeof trendColors] }}>
-                {trendIcons[b.trend as keyof typeof trendIcons]} {b.trend}
-              </span>
-            </div>
-          </div>
-          <button onClick={onClose} className="tpl-drawer-close"><X size={18} /></button>
-        </div>
-        <div className="tpl-drawer-body">
-          <div className="tpl-benchmark-visual">
-            <div className="tpl-bm-rank">
-              <span className="tpl-bm-percentile">{b.percentile}<small>th %ile</small></span>
-              <span className="tpl-bm-label">Percentile</span>
-            </div>
-            <div className="tpl-bm-comparisons">
-              <div className="tpl-bm-bar-item">
-                <span className="tpl-bm-bar-label">Our Score</span>
-                <div className="tpl-bm-bar-track"><div className="tpl-bm-bar-fill tpl-bm-ours" style={{ width: `${b.ourScore}%` }} /></div>
-                <span className="tpl-bm-bar-val">{formatPct(b.ourScore)}</span>
-              </div>
-              <div className="tpl-bm-bar-item">
-                <span className="tpl-bm-bar-label">Peer Avg</span>
-                <div className="tpl-bm-bar-track"><div className="tpl-bm-bar-fill tpl-bm-peer" style={{ width: `${Math.max(b.peerAvg, 0)}%` }} /></div>
-                <span className="tpl-bm-bar-val">{formatPct(b.peerAvg)}</span>
-              </div>
-              <div className="tpl-bm-bar-item">
-                <span className="tpl-bm-bar-label">Industry Avg</span>
-                <div className="tpl-bm-bar-track"><div className="tpl-bm-bar-fill tpl-bm-industry" style={{ width: `${Math.max(b.industryAvg, 0)}%` }} /></div>
-                <span className="tpl-bm-bar-val">{formatPct(b.industryAvg)}</span>
-              </div>
-              <div className="tpl-bm-bar-item">
-                <span className="tpl-bm-bar-label">Best in Class</span>
-                <div className="tpl-bm-bar-track"><div className="tpl-bm-bar-fill tpl-bm-best" style={{ width: `${Math.min(b.bestInClass, 100)}%` }} /></div>
-                <span className="tpl-bm-bar-val">{formatPct(b.bestInClass)}</span>
-              </div>
-            </div>
-          </div>
-          <FieldGrid fields={[
-            { label: "Vendor", value: b.vendor, icon: <Users size={13} /> },
-            { label: "Metric", value: b.metric, icon: <BarChart3 size={13} /> },
-            { label: "Our Score", value: formatPct(b.ourScore), icon: <Star size={13} /> },
-            { label: "Industry Avg", value: formatPct(b.industryAvg), icon: <Globe size={13} /> },
-            { label: "Best in Class", value: formatPct(b.bestInClass), icon: <Award size={13} /> },
-            { label: "Peer Avg", value: formatPct(b.peerAvg), icon: <Users size={13} /> },
-            { label: "Period", value: b.period, icon: <Clock size={13} /> },
-          ]} />
-          <MetricsRow metrics={[
-            { label: "Our Score", value: formatPct(b.ourScore), color: b.ourScore >= 90 ? "teal" : b.ourScore >= 75 ? "amber" : "rose" },
-            { label: "Percentile", value: `${b.percentile}th`, color: b.percentile >= 75 ? "teal" : "amber" },
-            { label: "Trend", value: b.trend, color: b.trend === "improving" ? "teal" : b.trend === "stable" ? "amber" : "rose" },
-          ]} />
-          <div className="tpl-drawer-actions">
-            <Button size="sm" className="tpl-btn-primary"><Download size={14} /> Export</Button>
-            <Button size="sm" variant="outline"><BarChart3 size={14} /> Deep Dive</Button>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+// 10. PartnerTierBadge
+function PartnerTierBadge({ tier }: { tier: string }) {
+  const cfg: Record<string, string> = { Gold: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 border border-amber-300", Silver: "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-400", Bronze: "bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300 border border-orange-300", Standard: "bg-slate-50 text-slate-500 dark:bg-slate-900 dark:text-slate-500 border border-slate-300" }
+  return <span className={cn("tps-tier-badge inline-flex items-center rounded-md px-2 py-0.5 text-[10px] font-bold uppercase", cfg[tier] ?? cfg.Standard)}>{tier}</span>
 }
 
-// ─── Main Component ───────────────────────────────────────
-export default function ThreePLPerformanceScorecardView() {
+// 11. DeliveryPerformanceBar
+function DeliveryPerformanceBar({ onTime, damaged, delayed }: { onTime: number; damaged: number; delayed: number }) {
+  const total = onTime + damaged + delayed || 1
+  return <div className="tps-delivery-bar flex h-2 w-full rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800"><div className="bg-emerald-500" style={{ width: `${(onTime / total) * 100}%` }} /><div className="bg-amber-500" style={{ width: `${(damaged / total) * 100}%` }} /><div className="bg-red-500" style={{ width: `${(delayed / total) * 100}%` }} /></div>
+}
+
+// 12. ClaimResolutionTracker
+function ClaimResolutionTracker({ stage }: { stage: number }) {
+  const stages = ["Filed", "Investigating", "Acknowledged", "Resolved"]
+  return <div className="tps-resolution-tracker flex items-center gap-1.5">{stages.map((label, i) => (<div key={label} className="flex items-center gap-1.5"><div className={cn("h-2.5 w-2.5 rounded-full", i <= stage ? "bg-indigo-500" : "bg-slate-200 dark:bg-slate-700")} title={label} />{i < stages.length - 1 && <div className="h-px w-3 bg-slate-200 dark:bg-slate-700" />}</div>))}</div>
+}
+
+// 13. QuarterBadge
+function QuarterBadge({ quarter }: { quarter: string }) {
+  const colors: Record<string, string> = { Q1: "bg-indigo-100 text-indigo-700", Q2: "bg-emerald-100 text-emerald-700", Q3: "bg-amber-100 text-amber-700", Q4: "bg-rose-100 text-rose-700" }
+  return <span className={cn("tps-quarter-badge inline-flex items-center rounded-md px-2 py-0.5 text-xs font-bold", colors[quarter] ?? "bg-slate-100 text-slate-600")}>{quarter}</span>
+}
+
+// 14. VolumeHeatCell
+function VolumeHeatCell({ volume }: { volume: number }) {
+  const intensity = Math.min(1, volume / 48000)
+  const bg = intensity > 0.75 ? "bg-indigo-600 text-white" : intensity > 0.5 ? "bg-indigo-400 text-white" : intensity > 0.25 ? "bg-indigo-200 text-indigo-900 dark:bg-indigo-900 dark:text-indigo-200" : "bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
+  return <span className={cn("tps-heat-cell inline-flex items-center justify-center rounded px-2 py-0.5 text-xs font-mono font-semibold", bg)}>{volume.toLocaleString("en-IN")}</span>
+}
+
+// ─── Main Component ─────────────────────────────────────
+export default function ThreePlPerformanceScorecardView() {
+  const { toast } = useToast()
   const [activeTab, setActiveTab] = useState("0")
   const [search, setSearch] = useState("")
-  const [filterVendor, setFilterVendor] = useState("all")
-  const [filterStatus, setFilterStatus] = useState("all")
-  const [sortKey, setSortKey] = useState("")
+  const [regionFilter, setRegionFilter] = useState("all")
+  const [sortCol, setSortCol] = useState("score")
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc")
-  const [drawerData, setDrawerData] = useState<any>(null)
-  const [drawerType, setDrawerType] = useState<"vendor" | "sla" | "cost" | "contract" | "benchmark">("vendor")
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [drawerRecord, setDrawerRecord] = useState<DrawerRecord>(null)
 
-  const filteredVendors = useMemo(() => {
-    let result = data.vendors.filter(v =>
-      v.vendor.toLowerCase().includes(search.toLowerCase()) ||
-      v.id.toLowerCase().includes(search.toLowerCase()) ||
-      v.warehouse.toLowerCase().includes(search.toLowerCase())
-    )
-    if (filterVendor !== "all") result = result.filter(v => v.vendor === filterVendor)
-    if (filterStatus !== "all") result = result.filter(v => v.tier === filterStatus)
-    return sortKey ? sortBy(result, sortKey, sortDir) : result
-  }, [search, filterVendor, filterStatus, sortKey, sortDir])
-
-  const filteredSLA = useMemo(() => {
-    let result = data.slaRecords.filter(s =>
-      s.vendor.toLowerCase().includes(search.toLowerCase()) ||
-      s.slaId.toLowerCase().includes(search.toLowerCase())
-    )
-    if (filterStatus !== "all") result = result.filter(s => s.status === filterStatus)
-    if (filterVendor !== "all") result = result.filter(s => s.vendor === filterVendor)
-    return sortKey ? sortBy(result, sortKey, sortDir) : result
-  }, [search, filterVendor, filterStatus, sortKey, sortDir])
-
-  const filteredCosts = useMemo(() => {
-    let result = data.costs.filter(c =>
-      c.vendor.toLowerCase().includes(search.toLowerCase()) ||
-      c.id.toLowerCase().includes(search.toLowerCase())
-    )
-    if (filterVendor !== "all") result = result.filter(c => c.vendor === filterVendor)
-    return sortKey ? sortBy(result, sortKey, sortDir) : result
-  }, [search, filterVendor, sortKey, sortDir])
-
-  const filteredContracts = useMemo(() => {
-    let result = data.contracts.filter(c =>
-      c.vendor.toLowerCase().includes(search.toLowerCase()) ||
-      c.id.toLowerCase().includes(search.toLowerCase())
-    )
-    if (filterVendor !== "all") result = result.filter(c => c.vendor === filterVendor)
-    if (filterStatus !== "all") result = result.filter(c => c.status === filterStatus)
-    return sortKey ? sortBy(result, sortKey, sortDir) : result
-  }, [search, filterVendor, filterStatus, sortKey, sortDir])
-
-  const filteredBenchmarks = useMemo(() => {
-    let result = data.benchmarks.filter(b =>
-      b.vendor.toLowerCase().includes(search.toLowerCase()) ||
-      b.metric.toLowerCase().includes(search.toLowerCase())
-    )
-    if (filterVendor !== "all") result = result.filter(b => b.vendor === filterVendor)
-    return sortKey ? sortBy(result, sortKey, sortDir) : result
-  }, [search, filterVendor, sortKey, sortDir])
-
-  const totalRevenue = data.vendors.reduce((a, b) => a + b.totalRevenue, 0)
-  const avgScore = +(data.vendors.reduce((a, b) => a + b.overallScore, 0) / data.vendors.length).toFixed(1)
-  const totalPenalties = data.slaRecords.reduce((a, b) => a + b.penaltyAmount, 0)
-  const preferredCount = data.vendors.filter(v => v.isPreferred).length
-
-  const openDrawer = (item: any, type: typeof drawerType) => {
-    setDrawerData(item); setDrawerType(type)
+  const handleSort = (col: string) => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc")
+    else { setSortCol(col); setSortDir("desc") }
   }
-  const toggleSort = (key: string) => {
-    if (sortKey === key) setSortDir(d => d === "asc" ? "desc" : "asc")
-    else { setSortKey(key); setSortDir("desc") }
-  }
+
+  const filteredPartners = useMemo(() => {
+    let list = [...partners]
+    if (search) list = list.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+    if (regionFilter !== "all") list = list.filter(p => p.region === regionFilter)
+    list.sort((a, b) => { const av = (a as unknown as Record<string, number | string>)[sortCol] as number; const bv = (b as unknown as Record<string, number | string>)[sortCol] as number; return sortDir === "asc" ? av - bv : bv - av })
+    return list
+  }, [search, regionFilter, sortCol, sortDir])
+
+  const isPartner = (r: DrawerRecord): r is Partner => r !== null && "contractValue" in r
+  const isClaim = (r: DrawerRecord): r is Claim => r !== null && "claimId" in r
+  const isSLA = (r: DrawerRecord): r is SLARecord => r !== null && "slaType" in r
+
+  const kpis = [
+    { label: "Total 3PL Partners", value: partners.length.toString(), icon: Users, color: "text-indigo-600 dark:text-indigo-400", bg: "bg-indigo-50 dark:bg-indigo-950" },
+    { label: "Avg Score", value: avgScore.toString(), icon: Target, color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-50 dark:bg-amber-950" },
+    { label: "SLA Compliance %", value: `${avgSla}%`, icon: ShieldCheck, color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-950" },
+    { label: "Active Contracts", value: formatINR(totalContracts), icon: IndianRupee, color: "text-rose-600 dark:text-rose-400", bg: "bg-rose-50 dark:bg-rose-950" },
+    { label: "Open Claims", value: openClaimsCount.toString(), icon: AlertTriangle, color: "text-red-600 dark:text-red-400", bg: "bg-red-50 dark:bg-red-950" },
+    { label: "On-Time Delivery %", value: `${avgOnTime}%`, icon: Truck, color: "text-cyan-600 dark:text-cyan-400", bg: "bg-cyan-50 dark:bg-cyan-950" },
+    { label: "Cost Variance", value: `${costVariance}%`, icon: TrendingDown, color: costVariance > 0 ? "text-red-600" : "text-emerald-600", bg: costVariance > 0 ? "bg-red-50 dark:bg-red-950" : "bg-emerald-50 dark:bg-emerald-950" },
+    { label: "Avg Resolution Days", value: avgResolution.toString(), icon: Timer, color: "text-slate-600 dark:text-slate-400", bg: "bg-slate-100 dark:bg-slate-900" },
+  ]
+
+  const analyticsKpis = [
+    { label: "Top Partner Score", value: `${Math.max(...partners.map(p => p.score))}`, icon: Star, color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-50 dark:bg-amber-950" },
+    { label: "Bottom Partner Score", value: `${Math.min(...partners.map(p => p.score))}`, icon: ShieldAlert, color: "text-red-600 dark:text-red-400", bg: "bg-red-50 dark:bg-red-950" },
+    { label: "Gold Partners", value: partners.filter(p => p.tier === "Gold").length.toString(), icon: Zap, color: "text-amber-500 dark:text-amber-400", bg: "bg-amber-50 dark:bg-amber-950" },
+    { label: "Total Monthly Volume", value: partners.reduce((a, p) => a + p.monthlyVolume, 0).toLocaleString("en-IN"), icon: Package, color: "text-indigo-600 dark:text-indigo-400", bg: "bg-indigo-50 dark:bg-indigo-950" },
+    { label: "Avg On-Time", value: `${avgOnTime}%`, icon: Truck, color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-950" },
+    { label: "Claims Settled", value: claims.filter(c => c.status === "Settled").length.toString(), icon: CheckCircle2, color: "text-cyan-600 dark:text-cyan-400", bg: "bg-cyan-50 dark:bg-cyan-950" },
+    { label: "Total Claim Amount", value: formatINR(claims.reduce((a, c) => a + c.amount, 0)), icon: IndianRupee, color: "text-rose-600 dark:text-rose-400", bg: "bg-rose-50 dark:bg-rose-950" },
+    { label: "SLA Exempted", value: slaRecords.filter(s => s.status === "Exempted").length.toString(), icon: ShieldCheck, color: "text-slate-600 dark:text-slate-400", bg: "bg-slate-100 dark:bg-slate-900" },
+  ]
+
+  const openDrawer = (record: DrawerRecord) => { setDrawerRecord(record); setDrawerOpen(true) }
 
   return (
-    <div className="tpl-container">
+    <div className="tps-root space-y-4 p-4 md:p-6" id="3pl-performance-scorecard">
+      <PageHeader title="3PL Performance Scorecard" description="Vendor evaluation, SLA tracking & cost analysis for logistics partners" />
+
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <div className="tpl-header">
-          <div className="tpl-header-left">
-            <h1 className="tpl-title"><Award size={26} className="tpl-title-icon" />3PL Performance Scorecard</h1>
-            <p className="tpl-subtitle">Vendor performance management &amp; SLA compliance tracking</p>
-          </div>
-          <div className="tpl-header-controls">
-            <div className="tpl-search-box">
-              <Search size={15} />
-              <input type="text" placeholder="Search vendors, IDs, warehouses..." value={search} onChange={e => setSearch(e.target.value)} />
-              {search && <button onClick={() => setSearch("")}><X size={14} /></button>}
-            </div>
-            <button className="tpl-refresh-btn"><RefreshCw size={15} /> Refresh</button>
-          </div>
-        </div>
-        <TabsList className="tpl-tabs-list">
-          <TabsTrigger value="0" className="tpl-tab-trigger"><BarChart3 size={14} /> Dashboard</TabsTrigger>
-          <TabsTrigger value="1" className="tpl-tab-trigger"><Award size={14} /> Vendor Scorecards</TabsTrigger>
-          <TabsTrigger value="2" className="tpl-tab-trigger"><ShieldCheck size={14} /> SLA Compliance</TabsTrigger>
-          <TabsTrigger value="3" className="tpl-tab-trigger"><DollarSign size={14} /> Cost Analysis</TabsTrigger>
-          <TabsTrigger value="4" className="tpl-tab-trigger"><FileText size={14} /> Contracts</TabsTrigger>
-          <TabsTrigger value="5" className="tpl-tab-trigger"><Globe size={14} /> Benchmarking</TabsTrigger>
+        <TabsList className="tps-tabs-list grid w-full grid-cols-6 lg:w-auto lg:inline-grid">
+          {["Scorecard Dashboard", "3PL Partners", "SLA Compliance", "Cost Analysis", "Claims & Disputes", "Performance Analytics"].map((t, i) => (
+            <TabsTrigger key={i} value={String(i)} className="tps-tab-trigger text-xs">{t}</TabsTrigger>
+          ))}
         </TabsList>
 
-        {/* ═══ Tab 0: Dashboard ═══ */}
-        <TabsContent value="0" className="tpl-tab-content">
-          <div className="tpl-kpi-grid">
-            <Card className="tpl-kpi-card tpl-kpi-teal"><CardContent className="tpl-kpi-body"><div className="tpl-kpi-icon-wrap"><Truck size={22} /></div><div className="tpl-kpi-text"><span className="tpl-kpi-label">Active Vendors</span><span className="tpl-kpi-value">{data.VENDOR_NAMES.length}</span><span className="tpl-kpi-sub">Across {data.WAREHOUSES.length} warehouses</span></div></CardContent></Card>
-            <Card className="tpl-kpi-card tpl-kpi-indigo"><CardContent className="tpl-kpi-body"><div className="tpl-kpi-icon-wrap"><Star size={22} /></div><div className="tpl-kpi-text"><span className="tpl-kpi-label">Avg. Score</span><span className="tpl-kpi-value">{avgScore}</span><span className="tpl-kpi-sub"><TrendingUp size={12} /> +2.3 vs last quarter</span></div></CardContent></Card>
-            <Card className="tpl-kpi-card tpl-kpi-rose"><CardContent className="tpl-kpi-body"><div className="tpl-kpi-icon-wrap"><IndianRupee size={22} /></div><div className="tpl-kpi-text"><span className="tpl-kpi-label">Total Spend</span><span className="tpl-kpi-value">{formatINR(totalRevenue)}</span><span className="tpl-kpi-sub">FY 2025-26</span></div></CardContent></Card>
-            <Card className="tpl-kpi-card tpl-kpi-amber"><CardContent className="tpl-kpi-body"><div className="tpl-kpi-icon-wrap"><ShieldAlert size={22} /></div><div className="tpl-kpi-text"><span className="tpl-kpi-label">SLA Penalties</span><span className="tpl-kpi-value">{formatINR(totalPenalties)}</span><span className="tpl-kpi-sub">{data.slaRecords.filter(s => s.breachCount > 0).length} breach events</span></div></CardContent></Card>
-            <Card className="tpl-kpi-card tpl-kpi-emerald"><CardContent className="tpl-kpi-body"><div className="tpl-kpi-icon-wrap"><Award size={22} /></div><div className="tpl-kpi-text"><span className="tpl-kpi-label">Preferred Partners</span><span className="tpl-kpi-value">{preferredCount}</span><span className="tpl-kpi-sub">{preferredCount > 0 ? "Top-rated vendors" : "None selected"}</span></div></CardContent></Card>
-            <Card className="tpl-kpi-card tpl-kpi-violet"><CardContent className="tpl-kpi-body"><div className="tpl-kpi-icon-wrap"><Target size={22} /></div><div className="tpl-kpi-text"><span className="tpl-kpi-label">On-Time Rate</span><span className="tpl-kpi-value">{formatPct(data.vendors.reduce((a, b) => a + b.onTimePct, 0) / data.vendors.length)}</span><span className="tpl-kpi-sub">Network average</span></div></CardContent></Card>
+        {/* TAB 0: Scorecard Dashboard */}
+        <TabsContent value="0" className="tps-tab-dashboard space-y-4 mt-4">
+          <div className="tps-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
+            {kpis.map(k => { const Icon = k.icon; return (
+              <Card key={k.label} className="tps-kpi-card"><CardContent className="flex items-center gap-3 p-4">
+                <div className={cn("tps-kpi-icon rounded-lg p-2", k.bg)}><Icon className={cn("h-4 w-4", k.color)} /></div>
+                <div><p className="text-[11px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
+              </CardContent></Card>
+            )})}
           </div>
-          <div className="tpl-chart-grid">
-            <Card className="tpl-chart-card tpl-chart-wide"><CardHeader className="tpl-chart-header"><CardTitle className="tpl-chart-title">Monthly Performance Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={280}><ComposedChart data={data.monthlyTrend}><CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 12 }} /><YAxis yAxisId="score" domain={[75, 100]} tick={{ fontSize: 12 }} /><YAxis yAxisId="shipments" orientation="right" tick={{ fontSize: 12 }} /><Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #e5e7eb" }} /><Legend wrapperStyle={{ fontSize: 12 }} /><Bar yAxisId="shipments" dataKey="totalShipments" fill="#c7d2fe" name="Shipments" radius={[4, 4, 0, 0]} /><Line yAxisId="score" type="monotone" dataKey="avgScore" stroke="#0d9488" strokeWidth={2.5} dot={{ r: 4, fill: "#0d9488" }} name="Avg Score" /><Line yAxisId="score" type="monotone" dataKey="onTimePct" stroke="#e11d48" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3, fill: "#e11d48" }} name="On-Time %" /></ComposedChart></ResponsiveContainer></CardContent></Card>
-            <Card className="tpl-chart-card"><CardHeader className="tpl-chart-header"><CardTitle className="tpl-chart-title">Vendor Tier Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={280}><PieChart><Pie data={data.vendorDistribution} dataKey="count" nameKey="tier" cx="50%" cy="50%" outerRadius={90} innerRadius={50} paddingAngle={3} label={({ tier, count }) => `${tier}: ${count}`}><Cell fill="#7c3aed" /><Cell fill="#d97706" /><Cell fill="#6b7280" /><Cell fill="#b45309" /><Cell fill="#dc2626" /></Pie><Tooltip /><Legend wrapperStyle={{ fontSize: 12 }} /></PieChart></ResponsiveContainer></CardContent></Card>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <Card className="lg:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Score Trend</CardTitle></CardHeader><CardContent>
+              <ResponsiveContainer width="100%" height={220}><AreaChart data={monthlyTrend}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} />
+                <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
+                <Area type="monotone" dataKey="onTime" name="On-Time" stroke="#059669" fill="#059669" fillOpacity={0.15} />
+                <Area type="monotone" dataKey="cost" name="Cost Efficiency" stroke="#d97706" fill="#d97706" fillOpacity={0.15} />
+                <Area type="monotone" dataKey="quality" name="Quality" stroke="#4338ca" fill="#4338ca" fillOpacity={0.15} />
+              </AreaChart></ResponsiveContainer>
+            </CardContent></Card>
+            <Card><CardHeader className="pb-2"><CardTitle className="text-sm">Partner Distribution</CardTitle></CardHeader><CardContent>
+              <ResponsiveContainer width="100%" height={220}><PieChart>
+                <Pie data={partnerDistribution} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value" paddingAngle={3} label={({ name, value }) => `${name}: ${value}`}>
+                  {partnerDistribution.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}
+                </Pie><Tooltip /><Legend wrapperStyle={{ fontSize: 10 }} />
+              </PieChart></ResponsiveContainer>
+            </CardContent></Card>
           </div>
-          <div className="tpl-chart-grid">
-            <Card className="tpl-chart-card"><CardHeader className="tpl-chart-header"><CardTitle className="tpl-chart-title">Warehouse Performance Radar</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={300}><RadarChart data={data.zoneComparison}><PolarGrid stroke="#e5e7eb" /><PolarAngleAxis dataKey="warehouse" tick={{ fontSize: 10 }} /><PolarRadiusAxis domain={[70, 100]} tick={{ fontSize: 10 }} /><Radar name="Delivery" dataKey="delivery" stroke="#0d9488" fill="#0d9488" fillOpacity={0.15} /><Radar name="Accuracy" dataKey="accuracy" stroke="#6366f1" fill="#6366f1" fillOpacity={0.1} /><Legend wrapperStyle={{ fontSize: 12 }} /></RadarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="tpl-chart-card"><CardHeader className="tpl-chart-header"><CardTitle className="tpl-chart-title">Cost Component Breakdown</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={300}><PieChart><Pie data={data.costBreakdownData} dataKey="value" nameKey="component" cx="50%" cy="50%" outerRadius={95} innerRadius={55} paddingAngle={2} label={({ component, value }) => `${component}: ${value}%`}><Cell fill="#0d9488" /><Cell fill="#e11d48" /><Cell fill="#6366f1" /><Cell fill="#f59e0b" /><Cell fill="#10b981" /><Cell fill="#8b5cf6" /></Pie><Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} /></PieChart></ResponsiveContainer></CardContent></Card>
-          </div>
-          <div className="tpl-chart-grid">
-            <Card className="tpl-chart-card tpl-chart-wide"><CardHeader className="tpl-chart-header"><CardTitle className="tpl-chart-title">SLA Breach Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><AreaChart data={data.monthlyTrend}><CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 12 }} /><YAxis tick={{ fontSize: 12 }} /><Tooltip contentStyle={{ borderRadius: 8 }} /><Legend wrapperStyle={{ fontSize: 12 }} /><Area type="monotone" dataKey="slaBreachCount" stroke="#e11d48" fill="#fecdd3" strokeWidth={2} name="Breaches" /><Area type="monotone" dataKey="costPerShipment" stroke="#6366f1" fill="#e0e7ff" strokeWidth={2} name="Cost/Shipment (₹)" /></AreaChart></ResponsiveContainer></CardContent></Card>
-            <Card className="tpl-chart-card"><CardHeader className="tpl-chart-header"><CardTitle className="tpl-chart-title">Service Performance</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.servicePerformance}><CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="service" tick={{ fontSize: 10 }} angle={-25} textAnchor="end" height={50} /><YAxis domain={[70, 100]} tick={{ fontSize: 12 }} /><Tooltip contentStyle={{ borderRadius: 8 }} /><Bar dataKey="avgScore" radius={[4, 4, 0, 0]}><Cell fill="#0d9488" /><Cell fill="#6366f1" /><Cell fill="#e11d48" /><Cell fill="#f59e0b" /><Cell fill="#10b981" /><Cell fill="#8b5cf6" /><Cell fill="#0ea5e9" /><Cell fill="#ec4899" /></Bar></BarChart></ResponsiveContainer></CardContent></Card>
-          </div>
+          <Card><CardHeader className="pb-2"><CardTitle className="text-sm">SLA Compliance by Category</CardTitle></CardHeader><CardContent>
+            <ResponsiveContainer width="100%" height={200}><BarChart data={slaByCategory}>
+              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="category" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} />
+              <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
+              <Bar dataKey="compliant" name="Compliant" stackId="a" fill="#059669" /><Bar dataKey="atRisk" name="At Risk" stackId="a" fill="#d97706" /><Bar dataKey="nonCompliant" name="Non-Compliant" stackId="a" fill="#e11d48" />
+            </BarChart></ResponsiveContainer>
+          </CardContent></Card>
         </TabsContent>
 
-        {/* ═══ Tab 1: Vendor Scorecards ═══ */}
-        <TabsContent value="1" className="tpl-tab-content">
-          <div className="tpl-table-toolbar">
-            <div className="tpl-filter-row">
-              <select value={filterVendor} onChange={e => setFilterVendor(e.target.value)}>
-                <option value="all">All Vendors</option>
-                {data.VENDOR_NAMES.map(v => <option key={v} value={v}>{v}</option>)}
-              </select>
-              <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
-                <option value="all">All Tiers</option>
-                {data.RATING_TIERS.map(t => <option key={t} value={t}>{t}</option>)}
-              </select>
-              <Badge className="tpl-count-badge">{filteredVendors.length} vendors</Badge>
+        {/* TAB 1: 3PL Partners */}
+        <TabsContent value="1" className="tps-tab-partners space-y-4 mt-4">
+          <div className="flex flex-wrap gap-2 items-center">
+            <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search partners..." value={search} onChange={e => setSearch(e.target.value)} className="tps-search pl-9 h-9" /></div>
+            <div className="flex gap-1">
+              <Button variant={regionFilter === "all" ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setRegionFilter("all")}>All</Button>
+              {REGIONS.map(r => (<Button key={r} variant={regionFilter === r ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setRegionFilter(r)}>{r}</Button>))}
             </div>
           </div>
-          <div className="tpl-table-container">
-            <table className="tpl-table">
-              <thead><tr>
-                <th onClick={() => toggleSort("vendor")}>Vendor <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("overallScore")}>Score <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("tier")}>Tier <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("deliveryRating")}>Delivery <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("accuracyRating")}>Accuracy <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("costRating")}>Cost Eff. <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("satisfactionRating")}>Satisfaction <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("warehouse")}>Warehouse <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("totalShipments")}>Shipments <ArrowUpDown size={12} /></th>
-                <th>Trend</th>
-              </tr></thead>
-              <tbody>
-                {filteredVendors.map(v => (
-                  <tr key={v.id} className={`tpl-row ${v.trend < 0 ? "tpl-row-declining" : ""}`} onClick={() => openDrawer(v, "vendor")}>
-                    <td>
-                      <div className="tpl-vendor-cell">
-                        <span className="tpl-vendor-name">{v.vendor}</span>
-                        {v.isPreferred && <Award size={12} className="tpl-preferred-icon" />}
-                      </div>
-                      <span className="tpl-vendor-id">{v.id}</span>
-                    </td>
-                    <td><ScoreRing score={v.overallScore} size={44} /></td>
-                    <td><TierBadge tier={v.tier} /></td>
-                    <td><StarRating rating={v.deliveryRating} /></td>
-                    <td><StarRating rating={v.accuracyRating} /></td>
-                    <td><StarRating rating={v.costRating} /></td>
-                    <td><StarRating rating={v.satisfactionRating} /></td>
-                    <td><div className="tpl-warehouse-cell"><MapPin size={12} />{v.warehouse}</div></td>
-                    <td className="tpl-number-cell">{v.totalShipments.toLocaleString()}</td>
-                    <td>
-                      <span className={`tpl-trend-badge ${v.trend > 0 ? "tpl-trend-up" : v.trend < 0 ? "tpl-trend-down" : "tpl-trend-flat"}`}>
-                        {v.trend > 0 ? <ArrowUpRight size={14} /> : v.trend < 0 ? <ArrowDownRight size={14} /> : <Minus size={14} />}
-                        {v.trend > 0 ? `+${v.trend}%` : `${v.trend}%`}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+            <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("name")}>Partner <ArrowUpDown className="inline h-3 w-3" /></TableHead>
+            <TableHead className="text-xs">Region</TableHead>
+            <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("score")}>Score <ArrowUpDown className="inline h-3 w-3" /></TableHead>
+            <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("onTimePct")}>On-Time %</TableHead>
+            <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("slaPct")}>SLA %</TableHead>
+            <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("monthlyVolume")}>Volume</TableHead>
+            <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("contractValue")}>Contract</TableHead>
+            <TableHead className="text-xs">Rating</TableHead>
+          </TableRow></TableHeader><TableBody>
+            {filteredPartners.map(p => (
+              <TableRow key={p.id} className="tps-partner-row cursor-pointer hover:bg-muted/50" onClick={() => openDrawer(p)}>
+                <TableCell className="text-xs font-medium">{p.name}</TableCell>
+                <TableCell><RegionBadge region={p.region} /></TableCell>
+                <TableCell><ScoreBadge score={p.score} /></TableCell>
+                <TableCell className="text-xs font-mono">{p.onTimePct}%</TableCell>
+                <TableCell className="text-xs font-mono">{p.slaPct}%</TableCell>
+                <TableCell><VolumeHeatCell volume={p.monthlyVolume} /></TableCell>
+                <TableCell className="text-xs font-mono">{formatINR(p.contractValue)}</TableCell>
+                <TableCell><StarRating rating={p.rating} /></TableCell>
+              </TableRow>
+            ))}
+          </TableBody></Table></CardContent></Card>
         </TabsContent>
 
-        {/* ═══ Tab 2: SLA Compliance ═══ */}
-        <TabsContent value="2" className="tpl-tab-content">
-          <div className="tpl-table-toolbar">
-            <div className="tpl-filter-row">
-              <select value={filterVendor} onChange={e => setFilterVendor(e.target.value)}>
-                <option value="all">All Vendors</option>
-                {data.VENDOR_NAMES.map(v => <option key={v} value={v}>{v}</option>)}
-              </select>
-              <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
-                <option value="all">All Status</option>
-                <option value="Met">Met</option>
-                <option value="At Risk">At Risk</option>
-                <option value="Breached">Breached</option>
-              </select>
-              <Badge className="tpl-count-badge">{filteredSLA.length} records</Badge>
-            </div>
+        {/* TAB 2: SLA Compliance */}
+        <TabsContent value="2" className="tps-tab-sla space-y-4 mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <Card className="flex flex-col items-center justify-center"><CardHeader className="pb-0"><CardTitle className="text-sm text-center">Overall SLA Compliance</CardTitle></CardHeader><CardContent><SLAComplianceGauge value={avgSla} /></CardContent></Card>
+            <Card className="lg:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Compliance by Status</CardTitle></CardHeader><CardContent>
+              <ResponsiveContainer width="100%" height={160}><BarChart data={SLA_STATUSES.map(s => ({ status: s, count: slaRecords.filter(r => r.status === s).length }))}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="status" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} />
+                <Tooltip /><Bar dataKey="count" name="Records" radius={[4, 4, 0, 0]}>
+                  {SLA_STATUSES.map((_, i) => <Cell key={i} fill={["#059669", "#d97706", "#e11d48", "#4338ca", "#475569"][i]} />)}
+                </Bar>
+              </BarChart></ResponsiveContainer>
+            </CardContent></Card>
           </div>
-          <div className="tpl-table-container">
-            <table className="tpl-table">
-              <thead><tr>
-                <th onClick={() => toggleSort("slaId")}>SLA ID <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("vendor")}>Vendor <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("category")}>Category <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("targetPct")}>Target <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("actualPct")}>Actual <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("status")}>Status <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("breachCount")}>Breaches <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("penaltyAmount")}>Penalty <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("period")}>Period <ArrowUpDown size={12} /></th>
-              </tr></thead>
-              <tbody>
-                {filteredSLA.map(s => (
-                  <tr key={s.id} className={`tpl-row ${s.status === "Breached" ? "tpl-row-breached" : s.status === "At Risk" ? "tpl-row-atrisk" : ""}`} onClick={() => openDrawer(s, "sla")}>
-                    <td className="tpl-mono-cell">{s.slaId}</td>
-                    <td>{s.vendor}</td>
-                    <td><Badge className="tpl-category-badge">{s.category}</Badge></td>
-                    <td className="tpl-number-cell">{formatPct(s.targetPct)}</td>
-                    <td className="tpl-number-cell">{formatPct(s.actualPct)}</td>
-                    <td>
-                      <span className={`tpl-sla-status-badge tpl-sla-${s.status.toLowerCase().replace(" ", "-")}`}>{s.status}</span>
-                    </td>
-                    <td className="tpl-number-cell">{s.breachCount}</td>
-                    <td className="tpl-number-cell">{s.penaltyAmount ? formatINR(s.penaltyAmount) : "—"}</td>
-                    <td>{s.period}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+            <TableHead className="text-xs">Partner</TableHead><TableHead className="text-xs">SLA Type</TableHead><TableHead className="text-xs">Target</TableHead>
+            <TableHead className="text-xs">Actual</TableHead><TableHead className="text-xs">Status</TableHead><TableHead className="text-xs">Period</TableHead>
+          </TableRow></TableHeader><TableBody>
+            {slaRecords.map(r => (
+              <TableRow key={r.id} className="tps-sla-row cursor-pointer hover:bg-muted/50" onClick={() => openDrawer(r)}>
+                <TableCell className="text-xs font-medium">{r.partner}</TableCell>
+                <TableCell className="text-xs">{r.slaType}</TableCell>
+                <TableCell className="text-xs font-mono">{r.target}%</TableCell>
+                <TableCell className={cn("text-xs font-mono font-bold", r.actual >= r.target ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400")}>{r.actual}%</TableCell>
+                <TableCell><SLAStatusBadge status={r.status} /></TableCell>
+                <TableCell><QuarterBadge quarter={`Q${Math.ceil(parseInt(r.period.split("-")[1]) / 3)}`} /></TableCell>
+              </TableRow>
+            ))}
+          </TableBody></Table></CardContent></Card>
         </TabsContent>
 
-        {/* ═══ Tab 3: Cost Analysis ═══ */}
-        <TabsContent value="3" className="tpl-tab-content">
-          <div className="tpl-table-toolbar">
-            <div className="tpl-filter-row">
-              <select value={filterVendor} onChange={e => setFilterVendor(e.target.value)}>
-                <option value="all">All Vendors</option>
-                {data.VENDOR_NAMES.map(v => <option key={v} value={v}>{v}</option>)}
-              </select>
-              <Badge className="tpl-count-badge">{filteredCosts.length} records</Badge>
-            </div>
-          </div>
-          <div className="tpl-table-container">
-            <table className="tpl-table">
-              <thead><tr>
-                <th onClick={() => toggleSort("vendor")}>Vendor <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("service")}>Service <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("warehouse")}>Warehouse <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("totalCost")}>Total Cost <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("costPerUnit")}>Cost/Unit <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("volume")}>Volume <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("savingsVsLastYear")}>YoY Savings <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("budgetVariance")}>Budget Var. <ArrowUpDown size={12} /></th>
-                <th>Period</th>
-              </tr></thead>
-              <tbody>
-                {filteredCosts.map(c => (
-                  <tr key={c.id} className="tpl-row" onClick={() => openDrawer(c, "cost")}>
-                    <td><div className="tpl-vendor-cell"><span className="tpl-vendor-name">{c.vendor}</span></div></td>
-                    <td><Badge className="tpl-category-badge">{c.service}</Badge></td>
-                    <td><div className="tpl-warehouse-cell"><MapPin size={12} />{c.warehouse}</div></td>
-                    <td className="tpl-number-cell">{formatINR(c.totalCost)}</td>
-                    <td className="tpl-number-cell">₹{c.costPerUnit}</td>
-                    <td className="tpl-number-cell">{c.volume.toLocaleString()}</td>
-                    <td>
-                      <span className={`tpl-trend-badge ${c.savingsVsLastYear > 0 ? "tpl-trend-up" : "tpl-trend-down"}`}>
-                        {c.savingsVsLastYear > 0 ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-                        {formatPct(c.savingsVsLastYear)}
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`tpl-trend-badge ${c.budgetVariance >= 0 ? "tpl-trend-up" : "tpl-trend-down"}`}>
-                        {formatPct(Math.abs(c.budgetVariance))}
-                        {c.budgetVariance >= 0 ? " under" : " over"}
-                      </span>
-                    </td>
-                    <td>{c.period}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        {/* TAB 3: Cost Analysis */}
+        <TabsContent value="3" className="tps-tab-cost space-y-4 mt-4">
+          <Card><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Cost Trend</CardTitle></CardHeader><CardContent>
+            <ResponsiveContainer width="100%" height={240}><LineChart data={costTrend}>
+              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={v => `${(v / 10000000).toFixed(0)}Cr`} />
+              <Tooltip formatter={(v: number) => formatINR(v)} /><Legend wrapperStyle={{ fontSize: 11 }} />
+              <Line type="monotone" dataKey="actual" name="Actual" stroke="#4338ca" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="budget" name="Budget" stroke="#059669" strokeWidth={2} strokeDasharray="5 5" dot={false} />
+              <Line type="monotone" dataKey="forecast" name="Forecast" stroke="#d97706" strokeWidth={2} strokeDasharray="2 2" dot={false} />
+            </LineChart></ResponsiveContainer>
+          </CardContent></Card>
+          <Card><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Breakdown by Category</CardTitle></CardHeader><CardContent>
+            <ResponsiveContainer width="100%" height={240}><BarChart data={costBreakdown}>
+              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={v => `${(v / 100000).toFixed(0)}L`} />
+              <Tooltip formatter={(v: number) => formatINR(v)} /><Legend wrapperStyle={{ fontSize: 11 }} />
+              <Bar dataKey="Freight" stackId="a" fill="#4338ca" /><Bar dataKey="Handling" stackId="a" fill="#d97706" /><Bar dataKey="Storage" stackId="a" fill="#059669" /><Bar dataKey="Last Mile" stackId="a" fill="#e11d48" /><Bar dataKey="Returns" stackId="a" fill="#0891b2" />
+            </BarChart></ResponsiveContainer>
+          </CardContent></Card>
+          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+            <TableHead className="text-xs">ID</TableHead><TableHead className="text-xs">Month</TableHead><TableHead className="text-xs">Category</TableHead>
+            <TableHead className="text-xs">Actual</TableHead><TableHead className="text-xs">Budget</TableHead><TableHead className="text-xs">Variance</TableHead>
+          </TableRow></TableHeader><TableBody>
+            {costRecords.slice(0, 20).map(r => { const variance = +((r.actual - r.budget) / r.budget * 100).toFixed(1); return (
+              <TableRow key={r.id} className="tps-cost-row cursor-pointer hover:bg-muted/50" onClick={() => openDrawer(r)}>
+                <TableCell className="text-xs font-mono">{r.id}</TableCell><TableCell className="text-xs">{r.month}</TableCell><TableCell className="text-xs">{r.category}</TableCell>
+                <TableCell className="text-xs font-mono">{formatINR(r.actual)}</TableCell><TableCell className="text-xs font-mono">{formatINR(r.budget)}</TableCell>
+                <TableCell><CostVarianceIndicator value={variance} /></TableCell>
+              </TableRow>
+            )})}
+          </TableBody></Table></CardContent></Card>
         </TabsContent>
 
-        {/* ═══ Tab 4: Contracts ═══ */}
-        <TabsContent value="4" className="tpl-tab-content">
-          <div className="tpl-table-toolbar">
-            <div className="tpl-filter-row">
-              <select value={filterVendor} onChange={e => setFilterVendor(e.target.value)}>
-                <option value="all">All Vendors</option>
-                {data.VENDOR_NAMES.map(v => <option key={v} value={v}>{v}</option>)}
-              </select>
-              <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
-                <option value="all">All Status</option>
-                {data.CONTRACT_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
-              <Badge className="tpl-count-badge">{filteredContracts.length} contracts</Badge>
-            </div>
+        {/* TAB 4: Claims & Disputes */}
+        <TabsContent value="4" className="tps-tab-claims space-y-4 mt-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {CLAIM_STATUSES.map(s => (<Card key={s}><CardContent className="p-3 text-center"><p className="text-[11px] text-muted-foreground">{s}</p><p className="text-lg font-bold">{claims.filter(c => c.status === s).length}</p></CardContent></Card>))}
           </div>
-          <div className="tpl-table-container">
-            <table className="tpl-table">
-              <thead><tr>
-                <th onClick={() => toggleSort("id")}>Contract ID <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("vendor")}>Vendor <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("service")}>Service <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("value")}>Value <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("status")}>Status <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("startDate")}>Start <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("endDate")}>End <ArrowUpDown size={12} /></th>
-                <th>Auto-Renew</th>
-                <th onClick={() => toggleSort("slaGuarantee")}>SLA Target <ArrowUpDown size={12} /></th>
-              </tr></thead>
-              <tbody>
-                {filteredContracts.map(c => (
-                  <tr key={c.id} className={`tpl-row ${c.status === "Expiring Soon" ? "tpl-row-expiring" : c.status === "Terminated" ? "tpl-row-terminated" : ""}`} onClick={() => openDrawer(c, "contract")}>
-                    <td className="tpl-mono-cell">{c.id}</td>
-                    <td><div className="tpl-vendor-cell"><span className="tpl-vendor-name">{c.vendor}</span></div></td>
-                    <td><Badge className="tpl-category-badge">{c.service}</Badge></td>
-                    <td className="tpl-number-cell">{formatINR(c.value)}</td>
-                    <td><span className={`tpl-contract-status-badge tpl-con-${c.status.toLowerCase().replace(" ", "-")}`}>{c.status}</span></td>
-                    <td>{c.startDate}</td>
-                    <td>{c.endDate}</td>
-                    <td><span className={`tpl-auto-renew-badge ${c.autoRenew ? "tpl-auto-on" : "tpl-auto-off"}`}>{c.autoRenew ? "ON" : "OFF"}</span></td>
-                    <td className="tpl-number-cell">{formatPct(c.slaGuarantee)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+            <TableHead className="text-xs">Claim ID</TableHead><TableHead className="text-xs">Partner</TableHead><TableHead className="text-xs">Type</TableHead>
+            <TableHead className="text-xs">Severity</TableHead><TableHead className="text-xs">Amount</TableHead><TableHead className="text-xs">Status</TableHead><TableHead className="text-xs">Resolution</TableHead>
+          </TableRow></TableHeader><TableBody>
+            {claims.map(c => (
+              <TableRow key={c.id} className="tps-claim-row cursor-pointer hover:bg-muted/50" onClick={() => openDrawer(c)}>
+                <TableCell className="text-xs font-mono">{c.claimId}</TableCell><TableCell className="text-xs font-medium">{c.partner}</TableCell>
+                <TableCell><ClaimTypeBadge type={c.type} /></TableCell><TableCell><SeverityBadge severity={c.severity} /></TableCell>
+                <TableCell className="text-xs font-mono font-semibold">{formatINR(c.amount)}</TableCell><TableCell><SLAStatusBadge status={c.status} /></TableCell>
+                <TableCell><ClaimResolutionTracker stage={c.stage} /></TableCell>
+              </TableRow>
+            ))}
+          </TableBody></Table></CardContent></Card>
         </TabsContent>
 
-        {/* ═══ Tab 5: Benchmarking ═══ */}
-        <TabsContent value="5" className="tpl-tab-content">
-          <div className="tpl-table-toolbar">
-            <div className="tpl-filter-row">
-              <select value={filterVendor} onChange={e => setFilterVendor(e.target.value)}>
-                <option value="all">All Vendors</option>
-                {data.VENDOR_NAMES.map(v => <option key={v} value={v}>{v}</option>)}
-              </select>
-              <Badge className="tpl-count-badge">{filteredBenchmarks.length} benchmarks</Badge>
+        {/* TAB 5: Performance Analytics */}
+        <TabsContent value="5" className="tps-tab-analytics space-y-4 mt-4">
+          <div className="tps-analytics-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
+            {analyticsKpis.map(k => { const Icon = k.icon; return (
+              <Card key={k.label}><CardContent className="flex items-center gap-3 p-4">
+                <div className={cn("tps-analytics-icon rounded-lg p-2", k.bg)}><Icon className={cn("h-4 w-4", k.color)} /></div>
+                <div><p className="text-[11px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
+              </CardContent></Card>
+            )})}
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <Card><CardHeader className="pb-2"><CardTitle className="text-sm">Partner Comparison</CardTitle></CardHeader><CardContent>
+              <ResponsiveContainer width="100%" height={260}><BarChart data={partnerComparison}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} />
+                <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
+                <Bar dataKey="onTime" name="On-Time" fill="#059669" /><Bar dataKey="cost" name="Cost" fill="#d97706" /><Bar dataKey="quality" name="Quality" fill="#4338ca" />
+              </BarChart></ResponsiveContainer>
+            </CardContent></Card>
+            <Card><CardHeader className="pb-2"><CardTitle className="text-sm">Quarterly Trend</CardTitle></CardHeader><CardContent>
+              <ResponsiveContainer width="100%" height={260}><AreaChart data={quarterlyTrend}>
+                <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="quarter" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} />
+                <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
+                <Area type="monotone" dataKey="score" name="Score" stroke="#4338ca" fill="#4338ca" fillOpacity={0.2} />
+                <Area type="monotone" dataKey="onTime" name="On-Time" stroke="#059669" fill="#059669" fillOpacity={0.2} />
+                <Area type="monotone" dataKey="compliance" name="Compliance" stroke="#d97706" fill="#d97706" fillOpacity={0.2} />
+              </AreaChart></ResponsiveContainer>
+            </CardContent></Card>
+          </div>
+          <Card><CardHeader className="pb-2"><CardTitle className="text-sm">Partner Performance Heatmap</CardTitle></CardHeader><CardContent>
+            <div className="tps-heatmap-grid grid grid-cols-4 md:grid-cols-8 gap-2">
+              {partners.slice(0, 32).map(p => (
+                <div key={p.id} className="tps-heatmap-cell rounded-lg border p-2 text-center cursor-pointer hover:bg-muted/50 transition-colors" onClick={() => openDrawer(p)}>
+                  <p className="text-[10px] font-medium truncate">{p.name.split(" ")[0]}</p>
+                  <ScoreBadge score={p.score} />
+                  <div className="mt-1"><TrendSparkline data={p.trend} /></div>
+                </div>
+              ))}
             </div>
-          </div>
-          <div className="tpl-table-container">
-            <table className="tpl-table">
-              <thead><tr>
-                <th onClick={() => toggleSort("metric")}>Metric <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("vendor")}>Vendor <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("ourScore")}>Our Score <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("peerAvg")}>Peer Avg <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("industryAvg")}>Industry Avg <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("bestInClass")}>Best in Class <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("percentile")}>Percentile <ArrowUpDown size={12} /></th>
-                <th onClick={() => toggleSort("trend")}>Trend <ArrowUpDown size={12} /></th>
-                <th>Period</th>
-              </tr></thead>
-              <tbody>
-                {filteredBenchmarks.map(b => (
-                  <tr key={b.id} className={`tpl-row ${b.trend === "declining" ? "tpl-row-declining" : ""}`} onClick={() => openDrawer(b, "benchmark")}>
-                    <td><Badge className="tpl-category-badge">{b.metric}</Badge></td>
-                    <td>{b.vendor}</td>
-                    <td className="tpl-number-cell tpl-score-highlight">{formatPct(b.ourScore)}</td>
-                    <td className="tpl-number-cell">{formatPct(b.peerAvg)}</td>
-                    <td className="tpl-number-cell">{formatPct(b.industryAvg)}</td>
-                    <td className="tpl-number-cell">{formatPct(b.bestInClass)}</td>
-                    <td>
-                      <div className="tpl-percentile-cell">
-                        <div className="tpl-percentile-bar">
-                          <div className="tpl-percentile-fill" style={{ width: `${b.percentile}%`, backgroundColor: b.percentile >= 75 ? "#0d9488" : b.percentile >= 50 ? "#f59e0b" : "#e11d48" }} />
-                        </div>
-                        <span className="tpl-percentile-value">{b.percentile}th</span>
-                      </div>
-                    </td>
-                    <td>
-                      <span className={`tpl-benchmark-trend-badge ${b.trend === "improving" ? "tpl-trend-up" : b.trend === "declining" ? "tpl-trend-down" : "tpl-trend-flat"}`}>
-                        {b.trend === "improving" ? <TrendingUp size={14} /> : b.trend === "declining" ? <TrendingDown size={14} /> : <Minus size={14} />}
-                        {b.trend}
-                      </span>
-                    </td>
-                    <td>{b.period}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          </CardContent></Card>
         </TabsContent>
       </Tabs>
 
       {/* Drawer */}
-      {drawerData && drawerType === "vendor" && <VendorDrawer v={drawerData} onClose={() => setDrawerData(null)} />}
-      {drawerData && drawerType === "sla" && <SLADrawer s={drawerData} onClose={() => setDrawerData(null)} />}
-      {drawerData && drawerType === "cost" && <CostDrawer c={drawerData} onClose={() => setDrawerData(null)} />}
-      {drawerData && drawerType === "contract" && <ContractDrawer ct={drawerData} onClose={() => setDrawerData(null)} />}
-      {drawerData && drawerType === "benchmark" && <BenchmarkDrawer b={drawerData} onClose={() => setDrawerData(null)} />}
+      <Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
+        <SheetContent className="tps-drawer w-[420px] sm:w-[480px] overflow-y-auto p-0">
+          {drawerRecord && (
+            <>
+              <div className="tps-drawer-header bg-gradient-to-r from-indigo-600 to-violet-600 p-6 text-white">
+                <SheetHeader><SheetTitle className="text-white text-base">
+                  {isPartner(drawerRecord) ? drawerRecord.name : isClaim(drawerRecord) ? drawerRecord.claimId : isSLA(drawerRecord) ? drawerRecord.id : (drawerRecord as CostRecord).id}
+                </SheetTitle></SheetHeader>
+                {isPartner(drawerRecord) && <div className="flex items-center gap-2 mt-2"><PartnerTierBadge tier={drawerRecord.tier} /><RegionBadge region={drawerRecord.region} /><StarRating rating={drawerRecord.rating} /></div>}
+              </div>
+              <div className="tps-drawer-body p-4 space-y-3">
+                {isPartner(drawerRecord) && (<>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[["Score", drawerRecord.score], ["On-Time %", `${drawerRecord.onTimePct}%`], ["SLA %", `${drawerRecord.slaPct}%`], ["Monthly Volume", drawerRecord.monthlyVolume.toLocaleString("en-IN")], ["Contract Value", formatINR(drawerRecord.contractValue)], ["Tier", drawerRecord.tier]].map(([k, v]) => (
+                      <div key={k} className="rounded-lg border p-2.5"><p className="text-[10px] text-muted-foreground uppercase">{k}</p><p className="text-sm font-bold">{v}</p></div>
+                    ))}
+                  </div>
+                  <div className="rounded-lg border p-3"><p className="text-[10px] text-muted-foreground uppercase mb-1">6-Month Trend</p><TrendSparkline data={drawerRecord.trend} /></div>
+                  <div className="rounded-lg border p-3"><p className="text-[10px] text-muted-foreground uppercase mb-2">Delivery Performance</p><DeliveryPerformanceBar onTime={drawerRecord.onTimePct} damaged={ri(1, 8, 9999)} delayed={Math.max(0, 100 - drawerRecord.onTimePct - 5)} /><div className="flex justify-between mt-1 text-[10px] text-muted-foreground"><span>On-Time</span><span>Damaged</span><span>Delayed</span></div></div>
+                </>)}
+                {isClaim(drawerRecord) && (<div className="grid grid-cols-2 gap-2">
+                  {[["Partner", drawerRecord.partner], ["Type", drawerRecord.type], ["Severity", drawerRecord.severity], ["Amount", formatINR(drawerRecord.amount)], ["Status", drawerRecord.status], ["Filed", drawerRecord.filedDate], ["Resolution", `${drawerRecord.resolutionDays} days`]].map(([k, v]) => (
+                    <div key={k} className="rounded-lg border p-2.5"><p className="text-[10px] text-muted-foreground uppercase">{k}</p><p className="text-sm font-bold">{v}</p></div>
+                  ))}
+                </div>)}
+                {isSLA(drawerRecord) && (<div className="grid grid-cols-2 gap-2">
+                  {[["Partner", drawerRecord.partner], ["SLA Type", drawerRecord.slaType], ["Target", `${drawerRecord.target}%`], ["Actual", `${drawerRecord.actual}%`], ["Status", drawerRecord.status], ["Period", drawerRecord.period]].map(([k, v]) => (
+                    <div key={k} className="rounded-lg border p-2.5"><p className="text-[10px] text-muted-foreground uppercase">{k}</p><p className="text-sm font-bold">{v}</p></div>
+                  ))}
+                </div>)}
+                {!isPartner(drawerRecord) && !isClaim(drawerRecord) && !isSLA(drawerRecord) && (<div className="grid grid-cols-2 gap-2">
+                  {[["Month", (drawerRecord as CostRecord).month], ["Category", (drawerRecord as CostRecord).category], ["Actual", formatINR((drawerRecord as CostRecord).actual)], ["Budget", formatINR((drawerRecord as CostRecord).budget)], ["Forecast", formatINR((drawerRecord as CostRecord).forecast)]].map(([k, v]) => (
+                    <div key={k} className="rounded-lg border p-2.5"><p className="text-[10px] text-muted-foreground uppercase">{k}</p><p className="text-sm font-bold">{v}</p></div>
+                  ))}
+                </div>)}
+              </div>
+              <SheetFooter className="tps-drawer-footer border-t px-4 py-3 flex-row gap-2">
+                <Button variant="outline" size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported to CSV successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
+                <Button variant="outline" size="sm" className="h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed with latest metrics")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
+                <Button size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Saved", "Changes saved successfully")}><CheckCircle2 className="h-3 w-3 mr-1" /> Save</Button>
+              </SheetFooter>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }

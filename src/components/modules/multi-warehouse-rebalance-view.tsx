@@ -319,7 +319,8 @@ export default function MultiWarehouseRebalanceView() {
     return sortDir === "asc" ? <ArrowUp className="w-3 h-3 ml-1 text-teal-600" /> : <ArrowDown className="w-3 h-3 ml-1 text-teal-600" />;
   };
 
-  const genericSort = useCallback((arr: Record<string, unknown>[], f: string, d: "asc" | "desc") => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const genericSort = useCallback((arr: any[], f: string, d: "asc" | "desc") => {
     return [...arr].sort((a, b) => {
       const cmp = String(a[f]).localeCompare(String(b[f]), undefined, { numeric: true });
       return d === "asc" ? cmp : -cmp;
