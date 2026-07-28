@@ -77,6 +77,7 @@ import BatchLotView from "@/components/modules/batch-lot-view"
 import ConsignmentStockView from "@/components/modules/consignment-stock-view"
 import PoolDistributionView from "@/components/modules/pool-distribution-view"
 import ThirdPartyLogisticsView from "@/components/modules/third-party-logistics-view"
+import DocumentManagementView from "@/components/modules/document-management-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -154,6 +155,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "consignment-stock": ConsignmentStockView,
   "pool-distribution": PoolDistributionView,
   "third-party-logistics": ThirdPartyLogisticsView,
+  "document-management": DocumentManagementView,
   "shift-handover": ShiftHandoverView,
 }
 

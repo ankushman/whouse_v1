@@ -31800,3 +31800,207 @@ html.theme-transition body {
 /* Animations */
 @keyframes tpl-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes tpl-slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+/* ============================================================================
+   R142: Document Management & Workflow Center (dmw-*) Theme
+   Emerald (#10b981) + Rose (#f43f5e) + Amber (#f59e0b)
+   ============================================================================ */
+
+/* Root & Header */
+.dmw-root { min-height: 0; }
+.dmw-header { background: linear-gradient(135deg, #ecfdf5 0%, #fff1f2 50%, #fffbeb 100%); border-bottom: 1px solid #a7f3d0; }
+.dark .dmw-header { background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(244,63,94,0.08) 50%, rgba(245,158,11,0.08) 100%); border-color: rgba(16,185,129,0.2); }
+.dmw-icon-wrap { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 2px 8px rgba(16,185,129,0.3); }
+.dmw-title { color: #064e3b; }
+.dark .dmw-title { color: #a7f3d0; }
+.dmw-subtitle { color: #047857; opacity: 0.7; }
+.dark .dmw-subtitle { color: #6ee7b7; opacity: 0.6; }
+
+/* Badge Trends */
+.dmw-badge-trend { background: rgba(16,185,129,0.1); color: #10b981; border: 1px solid rgba(16,185,129,0.2); }
+.dark .dmw-badge-trend { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+.dmw-badge-trend-up { background: rgba(16,185,129,0.1); color: #10b981; border-color: rgba(16,185,129,0.2); }
+.dark .dmw-badge-trend-up { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+.dmw-badge-locked { background: rgba(239,68,68,0.1); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+
+/* Tabs */
+.dmw-tabs-wrap { border-bottom: 1px solid #a7f3d0; }
+.dark .dmw-tabs-wrap { border-color: rgba(16,185,129,0.2); }
+.dmw-tabs-list { background: rgba(16,185,129,0.05); border: 1px solid #a7f3d0; border-radius: 10px; padding: 3px; }
+.dark .dmw-tabs-list { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.2); }
+.dmw-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #10b981, #059669); color: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(16,185,129,0.3); }
+.dmw-tab-trigger[data-state="inactive"] { color: #047857; border-radius: 8px; }
+.dark .dmw-tab-trigger[data-state="inactive"] { color: #6ee7b7; }
+
+/* KPI Cards */
+.dmw-kpi-card { border: 1px solid #a7f3d0; border-radius: 12px; background: #fff; transition: all 0.2s; }
+.dark .dmw-kpi-card { border-color: rgba(16,185,129,0.15); background: rgba(16,185,129,0.05); }
+.dmw-kpi-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16,185,129,0.12); }
+.dmw-kpi-icon { color: #10b981; }
+.dmw-kpi-value { color: #1e1b4b; }
+.dark .dmw-kpi-value { color: #f5f3ff; }
+.dmw-kpi-label { color: #6b7280; }
+.dmw-kpi-sub { color: #10b981; font-weight: 500; }
+.dmw-trend-badge { display: inline-flex; align-items: center; padding: 2px; border-radius: 50%; }
+.dmw-trend-up { background: rgba(16,185,129,0.15); color: #10b981; }
+.dmw-trend-down { background: rgba(239,68,68,0.15); color: #ef4444; }
+
+/* Chart Cards */
+.dmw-chart-card { border: 1px solid #a7f3d0; border-radius: 12px; background: #fff; }
+.dark .dmw-chart-card { border-color: rgba(16,185,129,0.15); background: rgba(15,23,42,0.8); }
+.dmw-chart-title { color: #064e3b; }
+.dark .dmw-chart-title { color: #a7f3d0; }
+
+/* Stat Mini Cards */
+.dmw-stat-mini { border: 1px solid #a7f3d0; border-radius: 8px; background: rgba(16,185,129,0.03); }
+.dark .dmw-stat-mini { border-color: rgba(16,185,129,0.15); background: rgba(16,185,129,0.05); }
+
+/* Summary Cards */
+.dmw-sum-card-emerald { border: 1px solid #a7f3d0; border-radius: 10px; background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(5,150,105,0.05)); }
+.dark .dmw-sum-card-emerald { border-color: rgba(16,185,129,0.2); }
+.dmw-sum-card-amber { border: 1px solid #fde68a; border-radius: 10px; background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(234,88,12,0.05)); }
+.dark .dmw-sum-card-amber { border-color: rgba(245,158,11,0.2); }
+.dmw-sum-card-rose { border: 1px solid #fecdd3; border-radius: 10px; background: linear-gradient(135deg, rgba(244,63,94,0.05), rgba(225,29,72,0.05)); }
+.dark .dmw-sum-card-rose { border-color: rgba(244,63,94,0.2); }
+.dmw-sum-card-violet { border: 1px solid #ede9fe; border-radius: 10px; background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(168,85,247,0.05)); }
+.dark .dmw-sum-card-violet { border-color: rgba(139,92,246,0.2); }
+.dmw-sum-card-red { border: 1px solid #fecaca; border-radius: 10px; background: linear-gradient(135deg, rgba(239,68,68,0.05), rgba(220,38,38,0.05)); }
+.dark .dmw-sum-card-red { border-color: rgba(239,68,68,0.2); }
+.dmw-sum-card-cyan { border: 1px solid #cffafe; border-radius: 10px; background: linear-gradient(135deg, rgba(6,182,212,0.05), rgba(20,184,166,0.05)); }
+.dark .dmw-sum-card-cyan { border-color: rgba(6,182,212,0.2); }
+
+/* Alert Card */
+.dmw-alert-card { border: 1px solid #a7f3d0; border-radius: 12px; }
+.dark .dmw-alert-card { border-color: rgba(16,185,129,0.15); }
+.dmw-alert-row { border: 1px solid transparent; }
+.dmw-alert-critical { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.15); }
+.dmw-alert-warning { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.15); }
+.dmw-alert-info { background: rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.15); }
+.dark .dmw-alert-critical { background: rgba(239,68,68,0.1); }
+.dark .dmw-alert-warning { background: rgba(245,158,11,0.1); }
+.dark .dmw-alert-info { background: rgba(59,130,246,0.1); }
+
+/* Filters */
+.dmw-filter-input { border: 1px solid #a7f3d0; background: #fff; outline: none; transition: border-color 0.2s; }
+.dmw-filter-input:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+.dark .dmw-filter-input { border-color: rgba(16,185,129,0.2); background: rgba(15,23,42,0.8); color: #f5f3ff; }
+.dmw-filter-select { border: 1px solid #a7f3d0; background: #fff; color: #064e3b; outline: none; }
+.dmw-filter-select:focus { border-color: #10b981; }
+.dark .dmw-filter-select { border-color: rgba(16,185,129,0.2); background: rgba(15,23,42,0.8); color: #a7f3d0; }
+
+/* Tables */
+.dmw-table-card { border: 1px solid #a7f3d0; border-radius: 12px; overflow: hidden; }
+.dark .dmw-table-card { border-color: rgba(16,185,129,0.15); }
+.dmw-table-header { background: linear-gradient(135deg, #ecfdf5, #fff1f2); }
+.dark .dmw-table-header { background: rgba(16,185,129,0.05); }
+.dmw-th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #047857; }
+.dark .dmw-th { color: #6ee7b7; }
+.dmw-table-row { border-bottom: 1px solid #a7f3d0; transition: background 0.15s; }
+.dark .dmw-table-row { border-color: rgba(16,185,129,0.1); }
+.dmw-table-row:hover { background: rgba(16,185,129,0.03); }
+.dark .dmw-table-row:hover { background: rgba(16,185,129,0.05); }
+.dmw-td { padding: 10px 12px; font-size: 12px; color: #374151; }
+.dark .dmw-td { color: #d1d5db; }
+
+/* File Type Badge */
+.dmw-filetype-badge { background: rgba(139,92,246,0.08); color: #7c3aed; border: 1px solid rgba(139,92,246,0.15); font-family: monospace; font-weight: 600; }
+.dark .dmw-filetype-badge { background: rgba(139,92,246,0.12); color: #a78bfa; }
+
+/* Classification Badges */
+.dmw-class-public { background: rgba(34,197,94,0.1); color: #16a34a; border: 1px solid rgba(34,197,94,0.2); }
+.dark .dmw-class-public { background: rgba(34,197,94,0.15); color: #4ade80; }
+.dmw-class-internal { background: rgba(59,130,246,0.1); color: #2563eb; border: 1px solid rgba(59,130,246,0.2); }
+.dark .dmw-class-internal { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.dmw-class-confidential { background: rgba(245,158,11,0.1); color: #d97706; border: 1px solid rgba(245,158,11,0.2); }
+.dark .dmw-class-confidential { background: rgba(245,158,11,0.15); color: #fbbf24; }
+.dmw-class-restricted { background: rgba(239,68,68,0.1); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+.dark .dmw-class-restricted { background: rgba(239,68,68,0.15); color: #f87171; }
+
+/* Status Badges */
+.dmw-badge-draft { background: rgba(107,114,128,0.1); color: #6b7280; border: 1px solid rgba(107,114,128,0.2); }
+.dark .dmw-badge-draft { background: rgba(107,114,128,0.15); color: #9ca3af; }
+.dmw-badge-review { background: rgba(139,92,246,0.1); color: #7c3aed; border: 1px solid rgba(139,92,246,0.2); }
+.dark .dmw-badge-review { background: rgba(139,92,246,0.15); color: #a78bfa; }
+.dmw-badge-approved { background: rgba(16,185,129,0.1); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
+.dmw-badge-published { background: rgba(6,182,212,0.1); color: #0891b2; border: 1px solid rgba(6,182,212,0.2); }
+.dark .dmw-badge-published { background: rgba(6,182,212,0.15); color: #22d3ee; }
+.dmw-badge-archived { background: rgba(107,114,128,0.08); color: #6b7280; border: 1px solid rgba(107,114,128,0.15); }
+.dmw-badge-rejected { background: rgba(239,68,68,0.1); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+.dmw-badge-pending-rev { background: rgba(245,158,11,0.1); color: #d97706; border: 1px solid rgba(245,158,11,0.2); }
+.dmw-badge-pending { background: rgba(245,158,11,0.1); color: #d97706; border: 1px solid rgba(245,158,11,0.2); }
+.dmw-badge-progress { background: rgba(59,130,246,0.1); color: #2563eb; border: 1px solid rgba(59,130,246,0.2); }
+.dark .dmw-badge-progress { background: rgba(59,130,246,0.15); color: #60a5fa; }
+.dmw-badge-completed { background: rgba(16,185,129,0.1); color: #059669; border: 1px solid rgba(16,185,129,0.2); }
+.dmw-badge-hold { background: rgba(245,158,11,0.08); color: #b45309; border: 1px solid rgba(245,158,11,0.15); }
+
+/* Priority Badges */
+.dmw-priority-low { background: rgba(107,114,128,0.1); color: #6b7280; border: 1px solid rgba(107,114,128,0.2); }
+.dmw-priority-medium { background: rgba(59,130,246,0.1); color: #2563eb; border: 1px solid rgba(59,130,246,0.2); }
+.dmw-priority-high { background: rgba(245,158,11,0.1); color: #d97706; border: 1px solid rgba(245,158,11,0.2); }
+.dmw-priority-critical { background: rgba(239,68,68,0.1); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+
+/* WF Card */
+.dmw-wf-card { border-color: #a7f3d0; background: #fff; }
+.dark .dmw-wf-card { border-color: rgba(16,185,129,0.15); background: rgba(16,185,129,0.03); }
+.dmw-wf-id { background: rgba(16,185,129,0.08); color: #059669; border: 1px solid rgba(16,185,129,0.15); font-family: monospace; }
+.dark .dmw-wf-id { background: rgba(16,185,129,0.12); color: #6ee7b7; }
+.dmw-approver-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(16,185,129,0.08); border: 2px solid #d1d5db; }
+.dark .dmw-approver-dot { background: rgba(16,185,129,0.1); border-color: #4b5563; }
+.dmw-approver-approved { background: rgba(16,185,129,0.15); border-color: #10b981; color: #10b981; }
+.dmw-approver-rejected { background: rgba(239,68,68,0.15); border-color: #ef4444; color: #ef4444; }
+.dmw-approver-current { background: rgba(245,158,11,0.15); border-color: #f59e0b; color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.15); }
+
+/* Template Cards */
+.dmw-tpl-card { border: 1px solid #a7f3d0; border-radius: 12px; background: #fff; cursor: pointer; transition: all 0.2s; }
+.dark .dmw-tpl-card { border-color: rgba(16,185,129,0.15); background: rgba(15,23,42,0.6); }
+.dmw-tpl-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16,185,129,0.1); }
+.dmw-tpl-avatar { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
+.dmw-use-btn { border-color: #10b981; color: #10b981; }
+.dmw-use-btn:hover { background: rgba(16,185,129,0.1); }
+.dmw-owner-avatar { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-size: 10px; }
+
+/* Content Area */
+.dmw-content { scrollbar-width: thin; scrollbar-color: #10b981 transparent; }
+.dmw-content::-webkit-scrollbar { width: 6px; }
+.dmw-content::-webkit-scrollbar-thumb { background: #10b981; border-radius: 3px; }
+.dmw-content::-webkit-scrollbar-track { background: transparent; }
+
+/* Drawer */
+.dmw-drawer-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.5); display: flex; justify-content: flex-end; animation: dmw-fade-in 0.2s ease; }
+.dmw-drawer { width: 480px; max-width: 95vw; background: #fff; display: flex; flex-direction: column; animation: dmw-slide-in 0.25s ease; overflow: hidden; }
+.dark .dmw-drawer { background: #0f172a; }
+.dmw-drawer-header { background: linear-gradient(135deg, #10b981, #059669, #047857); color: #fff; }
+.dmw-drawer-header-review { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.dmw-drawer-header-approved { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+.dmw-drawer-header-draft { background: linear-gradient(135deg, #6b7280, #4b5563); }
+.dmw-drawer-avatar { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.2); }
+
+/* Drawer Flow */
+.dmw-flow-dot { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.dmw-flow-dot-active { background: rgba(255,255,255,0.25); border: 2px solid #fff; color: #fff; }
+.dmw-flow-dot-inactive { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); }
+
+/* Drawer Content */
+.dmw-section-title { color: #064e3b; border-bottom: 1px solid #a7f3d0; padding-bottom: 4px; }
+.dark .dmw-section-title { color: #a7f3d0; border-color: rgba(16,185,129,0.2); }
+.dmw-info-cell { background: rgba(16,185,129,0.03); border: 1px solid #a7f3d0; border-radius: 8px; }
+.dark .dmw-info-cell { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.12); }
+.dmw-info-label { color: #9ca3af; letter-spacing: 0.05em; }
+.dmw-info-value { color: #1e1b4b; }
+.dark .dmw-info-value { color: #f5f3ff; }
+.dmw-person-avatar { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #f43f5e); color: #fff; }
+.dmw-tag-badge { background: rgba(16,185,129,0.08); color: #059669; border: 1px solid rgba(16,185,129,0.15); }
+.dark .dmw-tag-badge { background: rgba(16,185,129,0.12); color: #6ee7b7; border-color: rgba(16,185,129,0.2); }
+
+/* WF Steps */
+.dmw-wf-step { background: rgba(16,185,129,0.03); border: 1px solid #a7f3d0; }
+.dark .dmw-wf-step { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.12); }
+.dmw-wf-step-approved { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.2); }
+.dmw-wf-step-rejected { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.2); }
+
+/* Action Buttons */
+.dmw-action-btn { border-color: #a7f3d0; color: #059669; }
+.dmw-action-btn:hover { background: rgba(16,185,129,0.06); border-color: #10b981; }
+
+/* Animations */
+@keyframes dmw-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes dmw-slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
