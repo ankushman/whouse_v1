@@ -115,6 +115,7 @@ import ThreePLPerformanceScorecardView from "@/components/modules/3pl-performanc
 import QualityInspectionAutomationView from "@/components/modules/quality-inspection-automation-view"
 import SupplierRiskManagementView from "@/components/modules/supplier-risk-management-view"
 import PredictiveDemandForecastingView from "@/components/modules/predictive-demand-forecasting-view"
+import LogisticsNetworkOptimizationView from "@/components/modules/logistics-network-optimization-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -230,6 +231,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "quality-inspection-automation": QualityInspectionAutomationView,
   "supplier-risk-management": SupplierRiskManagementView,
   "predictive-demand-forecasting": PredictiveDemandForecastingView,
+  "logistics-network-optimization": LogisticsNetworkOptimizationView,
   "shift-handover": ShiftHandoverView,
 }
 

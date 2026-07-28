@@ -106,4 +106,5 @@ export { default as ThreePLPerformanceScorecardView } from './3pl-performance-sc
 export { default as QualityInspectionAutomationView } from './quality-inspection-automation-view'
 export { default as SupplierRiskManagementView } from './supplier-risk-management-view'
 export { default as PredictiveDemandForecastingView } from './predictive-demand-forecasting-view'
+export { default as LogisticsNetworkOptimizationView } from './logistics-network-optimization-view'
 
