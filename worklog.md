@@ -1,4 +1,65 @@
 ---
+Task ID: 158
+Agent: Main (Cron Review - Round 158)
+Task: R158 — Insurance Claims Management module
+
+Work Log:
+- Read worklog.md (R157 latest, 87 modules)
+- Build ✅ | TSC src/ ✅
+
+- Created R158: Insurance Claims Management module
+  * NEW FILE: src/components/modules/insurance-claims-view.tsx (~580 lines)
+  * 4 tabs: Dashboard | Claims Queue | Insurer Analysis | Category Insights
+  * Theme: Sky Blue + Amber + Emerald (#0ea5e9, #f59e0b, #10b981)
+  * Tab 1 (Dashboard): 6 KPIs (total claims/open claims/settled/total claimed/total settled/critical), monthly claims value & settlement ComposedChart (claim value+settlement value bars + rejection rate line), claims status PieChart, insurance type PieChart (6 types: cargo transit/warehouse liability/employee comp/property/vehicle fleet/general liability), monthly claims & avg settlement days ComposedChart, 6 alerts (critical claim pending/insurer delay/policy expiry/high rejection/investigation stalled/settlement milestone)
+  * Tab 2 (Claims Queue): 300 insurance claims, 9 status filter badges + 6 type filters, search, 30-row table (11 columns: claim+policy/customer/category/insurer/type/claim amount/approved amount/priority/status/adjuster/action), double-row filter bar, category badges, insurer badges, type badges
+  * Tab 3 (Insurer Analysis): 10 Indian insurers (ICICI Lombard/Bajaj Allianz/HDFC ERGO/New India Assurance/National Insurance/IFFCO Tokio/SBI General/Reliance General/Royal Sundaram/Cholamandalam MS), approval & rejection rate horizontal BarChart, insurer claims volume PieChart, performance scorecard table (total claims/approval rate/rejection rate/avg settlement/avg days/total settled)
+  * Tab 4 (Category Insights): category claimed vs settled ComposedChart + approval rate line, category claims volume PieChart, 10 category detail table with recovery rate progress bars (fire damage/water damage/theft/transit damage/natural calamity/equipment breakdown/vehicle accident/employee injury/third party liability/stock damage)
+  * Claim Detail Drawer: gradient header (3 variants: settled=emerald, rejected=red, open=sky blue), status+priority+type badges, claim & policy 4-field grid, claimant 4-field grid, key dates 4-field grid, incident description card (amber), financial summary (claim amount/approved/deductible/net settlement), recovery rate progress bar, assessment notes card (green), 3-step claim timeline (incident→filed→settled/rejected), 4 action buttons (Submit to Insurer/Approve/Download Report/View Documents)
+  * Mock Data: seed 158158, 300 claims, 9 statuses, 6 insurance types, 10 insurers, 10 categories, 10 descriptions, 8 adjusters, 12-month trends
+  * INR formatting (₹Lakh/Crore)
+
+- CSS: scripts/r158-css.css (~178 lines, icm-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: ShieldPlus, group: analytics), app-layout.tsx (ShieldPlus added to imports + iconMap)
+
+- No TS errors (clean build first try)
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 9985cbf
+
+Stage Summary:
+- NEW MODULE: Insurance Claims Management (88 modules total, was 87)
+- ~580-line component + ~178 lines CSS
+- 300 insurance claims across 6 insurance types
+- 10 Indian insurance company partners with performance tracking
+- 10 damage categories with recovery rate analysis
+- Double-row filter bar (status + insurance type)
+- Financial summary with recovery rate visualization
+- Net settlement calculation (approved - deductible)
+- 3-step claim timeline with settled/rejected variants
+- Total globals.css: 35,521 lines (+178)
+
+## Updated Project Status (Post Round 158)
+- STATUS: STABLE + INSURANCE MODULE (88 modules)
+- MODULES (88): All previous 87 + Insurance Claims Management
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 35,521 lines
+
+KNOWN ISSUES:
+- Dev server cannot maintain connection for agent-browser QA
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (88+ modules)
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 35000+ classes — consolidate
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation
+  7. Last Mile Delivery Tracking
+  8. Multi-Channel Integration Hub
+---
 Task ID: 157
 Agent: Main (Cron Review - Round 157)
 Task: R157 — Warranty & Guarantee Management module
