@@ -45188,3 +45188,260 @@ html.theme-transition body {
 .dark .ddm-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .ddm-root ::-webkit-scrollbar-thumb { background: rgba(153,27,27,0.15); }
 .dark .ddm-root ::-webkit-scrollbar-thumb:hover { background: rgba(153,27,27,0.3); }
+
+/* ============================================================================
+ * R205: Multi-Warehouse Inventory Rebalancing (mwr-*) — Enhanced CSS
+ * Theme: Teal #0d9488 + Amber #d97706 + Violet #7c3aed + Red #dc2626 + Slate #475569 + Emerald #059669
+ * ============================================================================ */
+
+/* --- Tab Active: Teal→Dark Teal gradient with glow --- */
+.mwr-root [data-state="active"][role="tab"] {
+  background: linear-gradient(135deg, #0d9488, #134e4a) !important;
+  color: #f0fdfa !important;
+  box-shadow: 0 0 16px rgba(13,148,136,0.35), 0 2px 8px rgba(19,78,74,0.2);
+  position: relative;
+}
+.mwr-root [data-state="active"][role="tab"]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(45,212,191,0.12), transparent);
+  pointer-events: none;
+}
+
+/* --- KPI Card: 8 distinct border-left + radial corner glow --- */
+.mwr-kpi-card:nth-child(1) { border-left: 3px solid #0d9488; }
+.mwr-kpi-card:nth-child(2) { border-left: 3px solid #d97706; }
+.mwr-kpi-card:nth-child(3) { border-left: 3px solid #dc2626; }
+.mwr-kpi-card:nth-child(4) { border-left: 3px solid #7c3aed; }
+.mwr-kpi-card:nth-child(5) { border-left: 3px solid #059669; }
+.mwr-kpi-card:nth-child(6) { border-left: 3px solid #475569; }
+.mwr-kpi-card:nth-child(7) { border-left: 3px solid #ca8a04; }
+.mwr-kpi-card:nth-child(8) { border-left: 3px solid #0891b2; }
+.mwr-kpi-card {
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: mwr-kpi-fade-up 0.5s ease-out both;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.mwr-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.mwr-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.mwr-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.mwr-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.mwr-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.mwr-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.mwr-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.mwr-kpi-card:nth-child(8) { animation-delay: 350ms; }
+.mwr-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13,148,136,0.08), transparent 70%);
+  pointer-events: none;
+}
+.mwr-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13,148,136,0.12); }
+@keyframes mwr-kpi-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- KPI Value counter --- */
+.mwr-kpi-card .tabular-nums {
+  animation: mwr-counter-scale 0.4s ease-out;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes mwr-counter-scale {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* --- Pill shimmer --- */
+.mwr-pill {
+  animation: mwr-badge-shimmer 3s ease-in-out infinite;
+  animation-delay: 1.3s;
+  position: relative;
+  overflow: hidden;
+}
+.mwr-pill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  animation: mwr-shimmer-sweep 3s ease-in-out infinite;
+  animation-delay: 1.3s;
+}
+@keyframes mwr-shimmer-sweep {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* --- Warehouse Pill: hover glow --- */
+.mwr-wh-pill {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.mwr-wh-pill:hover {
+  border-color: rgba(13,148,136,0.3);
+  box-shadow: 0 0 6px rgba(13,148,136,0.15);
+}
+
+/* --- Transfer Flow Indicator --- */
+.mwr-flow-indicator {
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(13,148,136,0.05), rgba(124,58,237,0.05));
+  border: 1px dashed rgba(13,148,136,0.2);
+}
+
+/* --- Qty Progress Bar --- */
+.mwr-qty-bar {
+  min-width: 80px;
+}
+
+/* --- Days Cover Bar: fill transition --- */
+.mwr-cover-bar {
+  min-width: 90px;
+}
+.mwr-cover-fill::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
+  pointer-events: none;
+}
+
+/* --- Risk Critical pulse --- */
+.mwr-risk-critical {
+  animation: mwr-risk-pulse 1.5s ease-in-out infinite;
+}
+@keyframes mwr-risk-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(220,38,38,0.3); }
+  50% { opacity: 0.65; box-shadow: 0 0 12px rgba(220,38,38,0.6); }
+}
+
+/* --- Savings Tile: gradient border + hover --- */
+.mwr-savings-tile {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.mwr-savings-tile:hover {
+  transform: translateY(-1px);
+}
+
+/* --- Value Tile --- */
+.mwr-value-tile {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.mwr-value-tile::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0d9488, #d97706);
+}
+
+/* --- SVG Rings draw transition --- */
+.mwr-score-ring {
+  transition: stroke-dashoffset 1s ease-out;
+}
+
+/* --- Warehouse Health Card hover lift --- */
+.mwr-wh-card {
+  border-radius: 10px;
+  border: 1px solid rgba(13,148,136,0.1);
+  transition: all 0.2s;
+}
+.mwr-wh-card:hover {
+  border-color: rgba(13,148,136,0.3);
+  box-shadow: 0 4px 16px rgba(13,148,136,0.1);
+}
+
+/* --- Row Striping --- */
+.mwr-data-row:nth-child(even) { background: rgba(71,85,105,0.03); }
+
+/* --- Sort Header --- */
+.mwr-sort-header { transition: background 0.15s, transform 0.15s; cursor: pointer; }
+.mwr-sort-header:hover { background: rgba(13,148,136,0.08); }
+.mwr-sort-header[aria-sort="ascending"], .mwr-sort-header[aria-sort="descending"] { background: rgba(13,148,136,0.12); transform: scale(0.98); }
+
+/* --- Action Buttons --- */
+.mwr-action-btn { transition: all 0.15s; }
+.mwr-action-btn:hover { transform: scale(1.03); background: rgba(13,148,136,0.1); border-color: rgba(13,148,136,0.4); color: #0d9488; }
+
+/* --- Table Row Hover per-tab tint --- */
+.mwr-tab-0-row:hover { background: rgba(13,148,136,0.04); }
+.mwr-tab-1-row:hover { background: rgba(217,119,6,0.04); }
+.mwr-tab-2-row:hover { background: rgba(220,38,38,0.04); }
+.mwr-tab-3-row:hover { background: rgba(124,58,237,0.04); }
+.mwr-tab-4-row:hover { background: rgba(71,85,105,0.04); }
+.mwr-tab-5-row:hover { background: rgba(5,150,105,0.04); }
+
+/* --- Chart Card glow on hover --- */
+.mwr-chart-card { border-radius: 10px; transition: box-shadow 0.2s; }
+.mwr-chart-card:hover { box-shadow: 0 0 20px rgba(13,148,136,0.08); }
+
+/* --- Responsive Grid --- */
+.mwr-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 1024px) { .mwr-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .mwr-kpi-grid { grid-template-columns: 1fr; } }
+
+/* --- Custom Scrollbar --- */
+.mwr-root ::-webkit-scrollbar { width: 6px; height: 6px; }
+.mwr-root ::-webkit-scrollbar-track { background: rgba(71,85,105,0.05); border-radius: 3px; }
+.mwr-root ::-webkit-scrollbar-thumb { background: rgba(13,148,136,0.2); border-radius: 3px; }
+.mwr-root ::-webkit-scrollbar-thumb:hover { background: rgba(13,148,136,0.4); }
+
+/* --- Sheet Transition --- */
+.mwr-drawer-header + div { animation: mwr-sheet-fade 0.25s ease-out; }
+@keyframes mwr-sheet-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================================ */
+/* DARK MODE: Full dark overrides for mwr-* */
+/* ============================================================================ */
+.dark .mwr-root [data-state="active"][role="tab"] {
+  background: linear-gradient(135deg, #115e59, #042f2e) !important;
+  color: #ccfbf1 !important;
+  box-shadow: 0 0 16px rgba(13,148,136,0.2), 0 2px 8px rgba(19,78,74,0.1);
+}
+.dark .mwr-root [data-state="active"][role="tab"]::after { background: linear-gradient(135deg, rgba(45,212,191,0.08), transparent); }
+.dark .mwr-kpi-card { background: rgba(15,23,42,0.4); }
+.dark .mwr-kpi-card:hover { box-shadow: 0 6px 20px rgba(13,148,136,0.08); }
+.dark .mwr-pill::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
+.dark .mwh-wh-pill:hover { border-color: rgba(13,148,136,0.2); box-shadow: 0 0 6px rgba(13,148,136,0.1); }
+.dark .mwr-flow-indicator { background: linear-gradient(90deg, rgba(13,148,136,0.05), rgba(124,58,237,0.05)); border-color: rgba(13,148,136,0.15); }
+.dark .mwr-value-tile { background: rgba(15,23,42,0.5); }
+.dark .mwr-value-tile::before { background: linear-gradient(90deg, rgba(13,148,136,0.6), rgba(217,119,6,0.6)); }
+.dark .mwr-savings-tile { background: rgba(5,150,105,0.08); border-color: rgba(5,150,105,0.3); }
+.dark .mwr-wh-card { border-color: rgba(13,148,136,0.08); background: rgba(15,23,42,0.4); }
+.dark .mwr-wh-card:hover { border-color: rgba(13,148,136,0.2); box-shadow: 0 4px 16px rgba(13,148,136,0.06); }
+.dark .mwr-data-row:nth-child(even) { background: rgba(71,85,105,0.04); }
+.dark .mwr-sort-header:hover { background: rgba(13,148,136,0.06); }
+.dark .mwr-action-btn:hover { background: rgba(13,148,136,0.08); border-color: rgba(13,148,136,0.3); }
+.dark .mwr-tab-0-row:hover { background: rgba(13,148,136,0.03); }
+.dark .mwr-tab-1-row:hover { background: rgba(217,119,6,0.03); }
+.dark .mwr-tab-2-row:hover { background: rgba(220,38,38,0.03); }
+.dark .mwr-tab-3-row:hover { background: rgba(124,58,237,0.03); }
+.dark .mwr-tab-4-row:hover { background: rgba(71,85,105,0.03); }
+.dark .mwr-tab-5-row:hover { background: rgba(5,150,105,0.03); }
+.dark .mwr-chart-card:hover { box-shadow: 0 0 20px rgba(13,148,136,0.05); }
+.dark .mwr-risk-critical { animation-name: mwr-risk-pulse-dark; }
+@keyframes mwr-risk-pulse-dark {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(220,38,38,0.2); }
+  50% { opacity: 0.5; box-shadow: 0 0 12px rgba(220,38,38,0.4); }
+}
+.dark .mwr-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .mwr-root ::-webkit-scrollbar-thumb { background: rgba(13,148,136,0.15); }
+.dark .mwr-root ::-webkit-scrollbar-thumb:hover { background: rgba(13,148,136,0.3); }

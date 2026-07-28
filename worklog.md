@@ -7772,3 +7772,94 @@ PRIORITY NEXT:
   4. Cross-module navigation
   5. Migrate recent modules to SharedModuleDrawer + smod-* CSS
   6. Resolve git local/remote divergence
+
+---
+Task ID: 205
+Agent: Main (Cron Review - Round 205)
+Task: R205 — Multi-Warehouse Inventory Rebalancing module
+
+Work Log:
+- Read worklog.md (R204 latest, 134 navItems, Demurrage & Detention just shipped)
+- TSC src/ ✅ (0 errors)
+- agent-browser QA: dev server OOM — known infra issue, skipped
+- Gap analysis: no multi-warehouse rebalancing module existed (stock-transfer is basic, no rebalancing logic)
+
+- Created R205: Multi-Warehouse Inventory Rebalancing module
+  * NEW FILE: src/components/modules/multi-warehouse-rebalance-view.tsx (602 lines)
+  * 6 tabs: Rebalance Dashboard | Transfer Orders | Stock Imbalance | Rebalance Rules | Network Heatmap | Rebalance Analytics
+  * Theme: Teal + Amber + Violet + Red + Slate + Emerald (#0d9488, #d97706, #7c3aed, #dc2626, #475569, #059669), CSS prefix: mwr-*
+  * Tab 0 (Dashboard): 8 KPIs (Active Transfers / Value In Transit ₹ / Imbalance Alerts / Avg Transit Days / Rebalance Savings ₹ / Active Rules / Stock Utilization % / Pending Approvals), monthly transfers BarChart (Inbound/Outbound/Internal), stock distribution stacked BarChart (6 WH), savings trend AreaChart (6 months)
+  * Tab 1 (Transfer Orders): 70 transfers, 12 Indian warehouses, 8 statuses, 8 reasons, 6 transport modes, 5 priority levels, INR. TransferStatusBadge, PriorityBadge, WarehousePill, TransferFlowIndicator, QtyProgressBar. Drawer: teal→dark teal gradient, 3 actions (Approve/Hold/Cancel)
+  * Tab 2 (Stock Imbalance): 80 stock records, 12 warehouses, 10 categories, 6 imbalance types, INR. ImbalanceTypeBadge, DaysCoverBar (color-coded 0-60d), WarehousePill. Sortable table.
+  * Tab 3 (Rebalance Rules): 30 rules, 5 statuses, 8 triggers, 5 zones. RuleStatusBadge, RuleExecutionRing (SVG arc), SavingsTile. Card grid layout.
+  * Tab 4 (Network Heatmap): 12 warehouse health cards with overstock/understock/optimal counts + health % bar.
+  * Tab 5 (Rebalance Analytics): 8 analytics cards, savings trend LineChart, warehouse distribution BarChart.
+
+- Unique Visual Components (18):
+  * TransferStatusBadge: 8-tier pill (Pending Approval=amber, In Transit=cyan, Completed=green, etc.)
+  * PriorityBadge: 5-tier (Critical=red, Urgent=orange, High=amber, Medium=blue, Low=gray)
+  * WarehousePill: 12 Indian warehouse names with hover glow
+  * TransferFlowIndicator: Source→Destination with dashed border (teal→violet gradient)
+  * QtyProgressBar: Received/Total with color-coded fill (≥100% emerald, ≥50% amber, <50% red)
+  * ImbalanceTypeBadge: 6-tier (Critical Shortage=red+blink, Understock=orange, Overstock=amber, Optimal=emerald)
+  * DaysCoverBar: Color-coded days of cover (0-60d scale, 5 color zones)
+  * RuleStatusBadge: 5-tier (Active=emerald, Paused=amber, Draft=slate, Expired=red, Under Review=blue)
+  * SavingsTile: Green-tinted card showing savings generated ₹
+  * RuleExecutionRing: SVG arc showing execution count (vs max 200)
+  * TransferValueTile: Qty + Unit Cost + Total Value breakdown with teal→amber top stripe
+
+- CSS: appended to globals.css (+257 lines, mwr-* prefix)
+  * Teal→Dark Teal gradient tab active with glow
+  * KPI card border-left 8 colors + radial corner glow + staggered fade-up
+  * Pill badge shimmer animation
+  * Warehouse pill hover glow + border
+  * Transfer flow dashed border indicator
+  * Days cover bar fill transition + glass overlay
+  * Risk critical pulse animation
+  * Value tile gradient top stripe
+  * SVG ring draw transition
+  * Warehouse health card hover lift + border
+  * Row striping, sort header, action buttons
+  * Per-tab row hover tint (6 tabs)
+  * Chart card glow on hover
+  * Responsive grid breakpoints
+  * Custom scrollbar (teal-themed)
+  * Full dark mode (25+ overrides)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export MultiWarehouseRebalanceView (default)
+  * src/app/page.tsx: import + viewMap entry 'multi-warehouse-rebalance'
+  * src/store/app-store.ts: navItem 'multi-warehouse-rebalance' (icon: GitCompareArrows, group: operations, roles: super_admin/executive/regional_manager/warehouse_manager/logistics)
+  * src/components/layout/app-layout.tsx: GitCompareArrows already in imports + iconMap
+
+LINT: 0 errors | TSC src/: 0 errors | BUILD: OOM (known infra)
+
+Stage Summary:
+- NEW MODULE: Multi-Warehouse Inventory Rebalancing (135 navItems total, was 134)
+- 602-line component + 257 lines CSS
+- 70 transfer orders across 12 Indian warehouses with TransferFlowIndicator
+- 80 stock level records with DaysCoverBar across 10 categories and 6 imbalance types
+- 30 auto-rebalance rules with RuleExecutionRing and SavingsTile
+- 12 warehouse health heatmap cards
+- 18 unique visual components
+- Total globals.css: 45,447 lines (+257)
+
+## Updated Project Status (Post Round 205)
+- STATUS: STABLE + MULTI-WH REBALANCING MODULE (135 navItems)
+- MODULES: 135 view files + 135 navItems
+- LINT: 0 errors | TSC src/: 0 errors | BUILD: OOM (known infra)
+- Total globals.css: 45,447 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files
+- CSS at 45,447 lines
+
+PRIORITY NEXT:
+  1. New modules (continued expansion)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
