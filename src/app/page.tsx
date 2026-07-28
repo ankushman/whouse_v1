@@ -98,6 +98,7 @@ import LastMileDeliveryView from "@/components/modules/last-mile-delivery-view"
 import MultiChannelIntegrationHubView from "@/components/modules/multi-channel-integration-hub-view"
 import SupplierPortalView from "@/components/modules/supplier-portal-view"
 import HyperlocalDeliveryView from "@/components/modules/hyperlocal-delivery-view"
+import CarbonFootprintTrackerView from "@/components/modules/carbon-footprint-tracker-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -196,6 +197,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "multi-channel-integration": MultiChannelIntegrationHubView,
   "supplier-portal": SupplierPortalView,
   "hyperlocal-delivery": HyperlocalDeliveryView,
+  "carbon-footprint": CarbonFootprintTrackerView,
   "shift-handover": ShiftHandoverView,
 }
 
