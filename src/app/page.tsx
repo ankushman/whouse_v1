@@ -104,6 +104,7 @@ import WarehouseDigitalTwinView from "@/components/modules/warehouse-digital-twi
 import AGVFleetManagementView from "@/components/modules/agv-fleet-management-view"
 import ParcelSortingCrossDockView from "@/components/modules/parcel-sorting-crossdock-view"
 import WarehouseSafetyComplianceView from "@/components/modules/warehouse-safety-compliance-view"
+import GoodsToPersonPickingView from "@/components/modules/goods-to-person-picking-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -208,6 +209,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "agv-fleet-management": AGVFleetManagementView,
   "parcel-sorting-crossdock": ParcelSortingCrossDockView,
   "warehouse-safety-compliance": WarehouseSafetyComplianceView,
+  "goods-to-person-picking": GoodsToPersonPickingView,
   "shift-handover": ShiftHandoverView,
 }
 

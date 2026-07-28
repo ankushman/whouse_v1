@@ -95,3 +95,4 @@ export { default as WarehouseDigitalTwinView } from './warehouse-digital-twin-vi
 export { default as AGVFleetManagementView } from './agv-fleet-management-view'
 export { default as ParcelSortingCrossDockView } from './parcel-sorting-crossdock-view'
 export { default as WarehouseSafetyComplianceView } from './warehouse-safety-compliance-view'
+export { default as GoodsToPersonPickingView } from './goods-to-person-picking-view'
