@@ -87,6 +87,7 @@ import ReturnsRefundAnalyticsView from "@/components/modules/returns-refund-anal
 import PickPackOptimizationView from "@/components/modules/pick-pack-optimization-view"
 import FreightShippingRateView from "@/components/modules/freight-shipping-rate-view"
 import DockSchedulingYardView from "@/components/modules/dock-scheduling-yard-view"
+import DangerousGoodsHazMatView from "@/components/modules/dangerous-goods-hazmat-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -174,6 +175,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "pick-pack-optimization": PickPackOptimizationView,
   "freight-shipping-rate": FreightShippingRateView,
   "dock-scheduling-yard": DockSchedulingYardView,
+  "dangerous-goods-hazmat": DangerousGoodsHazMatView,
   "shift-handover": ShiftHandoverView,
 }
 
