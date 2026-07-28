@@ -126,6 +126,7 @@ import FreightLaneManagementView from "@/components/modules/freight-lane-managem
 import CustomsDutyOptimizationView from "@/components/modules/customs-duty-optimization-view"
 import IntermodalTransportHubView from "@/components/modules/intermodal-transport-hub-view"
 import WarehouseEnergyManagementView from "@/components/modules/warehouse-energy-management-view"
+import CargoInsuranceClaimsView from "@/components/modules/cargo-insurance-claims-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -252,6 +253,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "customs-duty-optimization": CustomsDutyOptimizationView,
   "intermodal-transport-hub": IntermodalTransportHubView,
   "warehouse-energy-management": WarehouseEnergyManagementView,
+  "cargo-insurance-claims": CargoInsuranceClaimsView,
   "shift-handover": ShiftHandoverView,
 }
 

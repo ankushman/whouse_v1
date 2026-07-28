@@ -42381,3 +42381,86 @@ html.theme-transition body {
   .wem-tab-trigger { font-size: 10px; padding: 4px 8px; }
   .wem-health-tile { padding: 8px; }
 }
+/* ============================================================================
+   R191: Cargo Insurance & Claims (cig-*) CSS
+   Theme: Indigo (#6366f1) + Emerald (#059669) + Amber (#d97706)
+   ============================================================================ */
+
+.cig-root { position: relative; }
+
+.cig-kpi-card { transition: all 0.2s ease; border-radius: 10px; }
+.cig-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.12); }
+.cig-kpi-icon { transition: transform 0.2s ease; }
+.cig-kpi-card:hover .cig-kpi-icon { transform: scale(1.1) rotate(5deg); }
+
+.cig-chart-card { border-radius: 10px; transition: box-shadow 0.2s ease; }
+.cig-chart-card:hover { box-shadow: 0 4px 16px rgba(5, 150, 105, 0.08); }
+
+.cig-tab-trigger { border-radius: 6px; transition: all 0.2s ease; position: relative; }
+.cig-tab-trigger:hover { background: rgba(99, 102, 241, 0.08); }
+.cig-tab-trigger[data-state="active"] { background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(5, 150, 105, 0.12)); color: #6366f1; font-weight: 600; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15); }
+.cig-tab-trigger[data-state="active"]::after { content: ''; position: absolute; bottom: 0; left: 20%; right: 20%; height: 2px; background: linear-gradient(90deg, #6366f1, #059669); border-radius: 2px; }
+
+.cig-risk-badge { border-radius: 6px; font-weight: 600; transition: transform 0.15s ease; }
+.cig-risk-badge:hover { transform: scale(1.08); }
+.cig-sbadge { border-radius: 6px; transition: all 0.15s ease; font-weight: 500; }
+.cig-sbadge:hover { filter: brightness(0.95); }
+.cig-severity { border-radius: 6px; transition: all 0.15s ease; }
+
+.cig-risk-bar { padding: 6px; background: linear-gradient(135deg, rgba(217, 119, 6, 0.04), rgba(225, 29, 72, 0.04)); border-radius: 10px; }
+.cig-progress-tracker { padding: 4px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(5, 150, 105, 0.04)); border-radius: 10px; }
+.cig-payout-bar { padding: 6px; background: linear-gradient(135deg, rgba(5, 150, 105, 0.04), rgba(99, 102, 241, 0.04)); border-radius: 10px; }
+.cig-coverage-bar { padding: 6px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(217, 119, 6, 0.04)); border-radius: 10px; }
+
+.cig-sort-head { transition: color 0.15s ease; }
+.cig-sort-head:hover { color: #6366f1; }
+
+.cig-view-btn { border-radius: 6px; transition: all 0.2s ease; }
+.cig-view-btn:hover { background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(5, 150, 105, 0.1)); transform: translateX(2px); }
+
+.cig-action-btn { border-radius: 8px; transition: all 0.2s ease; font-weight: 500; }
+.cig-action-btn:hover { box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15); transform: translateY(-1px); }
+
+.cig-policy-row, .cig-claim-row, .cig-risk-row, .cig-payment-row { transition: background 0.15s ease; }
+.cig-policy-row:hover, .cig-claim-row:hover, .cig-risk-row:hover, .cig-payment-row:hover { background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(5, 150, 105, 0.03)); }
+
+.cig-search { border-radius: 8px; transition: all 0.2s ease; border-color: rgba(99, 102, 241, 0.2); }
+.cig-search:focus { border-color: #059669; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); }
+.cig-filter { border-radius: 8px; transition: all 0.2s ease; border-color: rgba(99, 102, 241, 0.15); }
+.cig-filter:hover { border-color: #059669; }
+
+.cig-stat-card { border-radius: 10px; transition: all 0.2s ease; }
+.cig-stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); }
+.cig-analytics-stat { border-radius: 10px; transition: all 0.2s ease; }
+.cig-analytics-stat:hover { transform: translateY(-1px); }
+
+.cig-insurer-card { transition: all 0.2s ease; }
+.cig-insurer-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08); }
+
+.cig-drawer-header { background: linear-gradient(135deg, #6366f1, #059669); }
+.cig-policy-drawer, .cig-claim-drawer, .cig-risk-drawer, .cig-payment-drawer { scrollbar-width: thin; }
+
+.cig-dashboard .cig-kpi-card { animation: cig-fadeSlideUp 0.3s ease both; }
+.cig-dashboard .cig-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.cig-dashboard .cig-kpi-card:nth-child(2) { animation-delay: 40ms; }
+.cig-dashboard .cig-kpi-card:nth-child(3) { animation-delay: 80ms; }
+.cig-dashboard .cig-kpi-card:nth-child(4) { animation-delay: 120ms; }
+.cig-dashboard .cig-kpi-card:nth-child(5) { animation-delay: 160ms; }
+.cig-dashboard .cig-kpi-card:nth-child(6) { animation-delay: 200ms; }
+
+@keyframes cig-fadeSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dark .cig-kpi-card:hover { box-shadow: 0 6px 20px rgba(5, 150, 105, 0.2); }
+.dark .cig-chart-card:hover { box-shadow: 0 4px 16px rgba(5, 150, 105, 0.15); }
+.dark .cig-tab-trigger[data-state="active"] { background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(5, 150, 105, 0.15)); color: #6366f1; }
+.dark .cig-tab-trigger[data-state="active"]::after { background: linear-gradient(90deg, #6366f1, #059669); }
+.dark .cig-policy-row:hover, .dark .cig-claim-row:hover, .dark .cig-risk-row:hover, .dark .cig-payment-row:hover { background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(5, 150, 105, 0.05)); }
+.dark .cig-search { border-color: rgba(99, 102, 241, 0.3); background: rgba(99, 102, 241, 0.05); }
+.dark .cig-search:focus { border-color: #059669; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.2); }
+.dark .cig-filter { border-color: rgba(99, 102, 241, 0.25); }
+
+@media (max-width: 1024px) { .cig-root .grid { gap: 12px; } }
+@media (max-width: 768px) { .cig-tab-trigger { font-size: 10px; padding: 4px 8px; } }
