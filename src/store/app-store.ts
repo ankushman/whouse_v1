@@ -119,6 +119,7 @@ export const navItems: NavItem[] = [
   { id: 'freight-lane-management', label: 'Freight Lane Mgmt', icon: 'Route', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics'] },
   { id: 'customs-duty-optimization', label: 'Customs & Duty', icon: 'Landmark', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement'] },
   { id: 'intermodal-transport-hub', label: 'Intermodal Hub', icon: 'Network', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'operator'] },
+  { id: 'warehouse-energy-management', label: 'Energy Management', icon: 'Zap', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operator'] },
   { id: 'labor-management', label: 'Labor Management', icon: 'HardHat', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'sla-countdown', label: 'SLA Countdown', icon: 'Timer', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'shift-handover', label: 'Shift Handover', icon: 'ArrowRightLeft', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },

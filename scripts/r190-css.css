@@ -1,0 +1,144 @@
+/* ============================================================================
+   R190: Warehouse Energy Management (wem-*) CSS
+   Theme: Emerald (#059669) + Amber (#d97706) + Sky (#0284c7)
+   ============================================================================ */
+
+.wem-root { position: relative; }
+
+/* KPI Cards */
+.wem-kpi-card { transition: all 0.2s ease; border-radius: 10px; }
+.wem-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(5, 150, 105, 0.12); }
+.wem-kpi-icon { transition: transform 0.2s ease; }
+.wem-kpi-card:hover .wem-kpi-icon { transform: scale(1.1) rotate(5deg); }
+
+/* Chart Cards */
+.wem-chart-card { border-radius: 10px; transition: box-shadow 0.2s ease; }
+.wem-chart-card:hover { box-shadow: 0 4px 16px rgba(217, 119, 6, 0.08); }
+
+/* Tab Triggers */
+.wem-tab-trigger { border-radius: 6px; transition: all 0.2s ease; position: relative; }
+.wem-tab-trigger:hover { background: rgba(5, 150, 105, 0.08); }
+.wem-tab-trigger[data-state="active"] { background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(217, 119, 6, 0.12)); color: #059669; font-weight: 600; box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15); }
+.wem-tab-trigger[data-state="active"]::after { content: ''; position: absolute; bottom: 0; left: 20%; right: 20%; height: 2px; background: linear-gradient(90deg, #059669, #d97706); border-radius: 2px; }
+
+/* Efficiency Badge */
+.wem-eff-badge { border-radius: 6px; font-weight: 700; letter-spacing: 0.5px; transition: transform 0.2s ease; }
+.wem-eff-badge:hover { transform: scale(1.1); }
+
+/* Power Badge */
+.wem-power-badge { border-radius: 6px; font-weight: 500; transition: all 0.15s ease; }
+.wem-power-badge:hover { filter: brightness(0.92); transform: scale(1.05); }
+
+/* Status Badge */
+.wem-sbadge { border-radius: 6px; transition: all 0.15s ease; font-weight: 500; }
+.wem-sbadge:hover { filter: brightness(0.95); }
+
+/* Alert Badge */
+.wem-alert-badge { border-radius: 6px; font-weight: 500; transition: all 0.15s ease; }
+.wem-alert-badge:hover { transform: scale(1.05); }
+
+/* Temperature Gauge */
+.wem-temp-gauge { padding: 4px; background: linear-gradient(135deg, rgba(2, 132, 199, 0.04), rgba(217, 119, 6, 0.04)); border-radius: 10px; }
+.wem-temp-gauge .h-4 { transition: width 0.3s ease; }
+
+/* Solar Progress Bar */
+.wem-solar-bar { padding: 4px; background: linear-gradient(135deg, rgba(5, 150, 105, 0.04), rgba(217, 119, 6, 0.04)); border-radius: 10px; }
+.wem-solar-bar .h-3 { transition: width 0.5s ease; }
+
+/* Cost Breakdown Visual */
+.wem-cost-vis { padding: 8px; }
+.wem-cost-vis .h-3 { border-radius: 3px; transition: width 0.5s ease; }
+
+/* Health Tile */
+.wem-health-tile { border-radius: 10px; transition: all 0.2s ease; }
+.wem-health-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); }
+.wem-health-tile .h-2 { transition: width 0.4s ease; }
+
+/* Sort Headers */
+.wem-sort-head { transition: color 0.15s ease; }
+.wem-sort-head:hover { color: #d97706; }
+
+/* View Buttons */
+.wem-view-btn { border-radius: 6px; transition: all 0.2s ease; }
+.wem-view-btn:hover { background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(217, 119, 6, 0.1)); transform: translateX(2px); }
+
+/* Action Buttons */
+.wem-action-btn { border-radius: 8px; transition: all 0.2s ease; font-weight: 500; }
+.wem-action-btn:hover { box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15); transform: translateY(-1px); }
+
+/* Table Rows */
+.wem-eq-row, .wem-solar-row, .wem-cost-row, .wem-hvac-row { transition: background 0.15s ease; }
+.wem-eq-row:hover, .wem-solar-row:hover, .wem-cost-row:hover, .wem-hvac-row:hover { background: linear-gradient(135deg, rgba(5, 150, 105, 0.03), rgba(217, 119, 6, 0.03)); }
+
+/* Search & Filter */
+.wem-search { border-radius: 8px; transition: all 0.2s ease; border-color: rgba(5, 150, 105, 0.2); }
+.wem-search:focus { border-color: #d97706; box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15); }
+.wem-filter { border-radius: 8px; transition: all 0.2s ease; border-color: rgba(5, 150, 105, 0.15); }
+.wem-filter:hover { border-color: #d97706; }
+
+/* Warehouse Solar Card */
+.wem-wh-solar-card { border-radius: 10px; transition: all 0.2s ease; border-left: 3px solid #059669; }
+.wem-wh-solar-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1); }
+
+/* Savings Card */
+.wem-savings-card { border-radius: 10px; border-left: 3px solid #059669; transition: all 0.2s ease; }
+.wem-savings-card:hover { border-left-color: #16a34a; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1); }
+
+/* Alerts List */
+.wem-alert-item { transition: all 0.2s ease; }
+.wem-alert-item:hover { transform: translateX(3px); }
+
+/* Optimization List */
+.wem-opt-item { transition: all 0.2s ease; }
+.wem-opt-item:hover { transform: translateX(3px); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
+
+/* Drawer Header */
+.wem-drawer-header { background: linear-gradient(135deg, #059669, #d97706); }
+
+/* Drawer Sheets */
+.wem-eq-drawer, .wem-solar-drawer, .wem-cost-drawer, .wem-hvac-drawer { scrollbar-width: thin; }
+
+/* Dashboard Grid Animations */
+.wem-dashboard .wem-kpi-card { animation: wem-fadeSlideUp 0.3s ease both; }
+.wem-dashboard .wem-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.wem-dashboard .wem-kpi-card:nth-child(2) { animation-delay: 40ms; }
+.wem-dashboard .wem-kpi-card:nth-child(3) { animation-delay: 80ms; }
+.wem-dashboard .wem-kpi-card:nth-child(4) { animation-delay: 120ms; }
+.wem-dashboard .wem-kpi-card:nth-child(5) { animation-delay: 160ms; }
+.wem-dashboard .wem-kpi-card:nth-child(6) { animation-delay: 200ms; }
+
+@keyframes wem-fadeSlideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Health Tiles Staggered Animation */
+.wem-alerts-tab .wem-health-tile { animation: wem-fadeSlideUp 0.3s ease both; }
+.wem-alerts-tab .wem-health-tile:nth-child(1) { animation-delay: 0ms; }
+.wem-alerts-tab .wem-health-tile:nth-child(2) { animation-delay: 60ms; }
+.wem-alerts-tab .wem-health-tile:nth-child(3) { animation-delay: 120ms; }
+.wem-alerts-tab .wem-health-tile:nth-child(4) { animation-delay: 180ms; }
+.wem-alerts-tab .wem-health-tile:nth-child(5) { animation-delay: 240ms; }
+.wem-alerts-tab .wem-health-tile:nth-child(6) { animation-delay: 300ms; }
+
+/* Dark Mode */
+.dark .wem-kpi-card:hover { box-shadow: 0 6px 20px rgba(217, 119, 6, 0.2); }
+.dark .wem-chart-card:hover { box-shadow: 0 4px 16px rgba(217, 119, 6, 0.15); }
+.dark .wem-tab-trigger[data-state="active"] { background: linear-gradient(135deg, rgba(5, 150, 105, 0.2), rgba(217, 119, 6, 0.15)); color: #d97706; }
+.dark .wem-tab-trigger[data-state="active"]::after { background: linear-gradient(90deg, #059669, #d97706); }
+.dark .wem-eq-row:hover, .dark .wem-solar-row:hover, .dark .wem-cost-row:hover, .dark .wem-hvac-row:hover { background: linear-gradient(135deg, rgba(5, 150, 105, 0.08), rgba(217, 119, 6, 0.05)); }
+.dark .wem-search { border-color: rgba(5, 150, 105, 0.3); background: rgba(5, 150, 105, 0.05); }
+.dark .wem-search:focus { border-color: #d97706; box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.2); }
+.dark .wem-filter { border-color: rgba(5, 150, 105, 0.25); }
+.dark .wem-wh-solar-card { border-left-color: #22c55e; }
+.dark .wem-savings-card { border-left-color: #22c55e; }
+.dark .wem-alert-item { background: rgba(0, 0, 0, 0.2) !important; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .wem-root .grid { gap: 12px; }
+}
+@media (max-width: 768px) {
+  .wem-tab-trigger { font-size: 10px; padding: 4px 8px; }
+  .wem-health-tile { padding: 8px; }
+}
