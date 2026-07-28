@@ -108,4 +108,5 @@ export { default as SupplierRiskManagementView } from './supplier-risk-managemen
 export { default as PredictiveDemandForecastingView } from './predictive-demand-forecasting-view'
 export { default as LogisticsNetworkOptimizationView } from './logistics-network-optimization-view'
 export { default as ContractComplianceAutomationView } from './contract-compliance-automation-view'
+export { default as LastMileDeliveryAnalyticsView } from './last-mile-delivery-analytics-view'
 
