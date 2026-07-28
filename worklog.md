@@ -1,4 +1,69 @@
 ---
+Task ID: 152
+Agent: Main (Cron Review - Round 152)
+Task: R152 — Dangerous Goods & HazMat Management module
+
+Work Log:
+- Read worklog.md (R151 latest, 81 modules)
+- Build ✅ | TSC src/ ✅
+
+- Agent-browser QA: dev server cannot maintain connection — fell back to build/tsc
+
+- Created R152: Dangerous Goods & HazMat Management module
+  * NEW FILE: src/components/modules/dangerous-goods-hazmat-view.tsx (~580 lines)
+  * 5 tabs: Dashboard | Hazmat Inventory | Storage Zones | Compliance & Inspections | Incident Tracker
+  * Theme: Red + Amber + Emerald (#ef4444, #f59e0b, #10b981)
+  * Tab 1 (Dashboard): 6 KPIs (total items/critical hazard/pending inspection/SDS compliance/high risk/total incidents), UN Class distribution BarChart (Class 1-9 with per-class colors), hazard category PieChart (10 categories), monthly incident ComposedChart (spills+exposures+near-miss stacked + total line), compliance trend LineChart (SDS/inspection/training rates), 6 safety alerts (expiry/temperature/MSDS/inspection/reclassification/fire drill)
+  * Tab 2 (Hazmat Inventory): 200 items, 8 status filter badges, category dropdown, search, 30-row table (10 columns: ID/chemical+UN/class/category/qty/hazard/risk bar/SDS status/status/action), UN class color-coded badges, inline risk progress bars, SDS compliant/missing badges
+  * Tab 3 (Storage Zones): 6 zone cards with occupancy bars, critical item counts, temp/humidity readings, zone occupancy BarChart, temperature by zone BarChart
+  * Tab 4 (Compliance & Inspections): 6 CDG-certified inspector cards with avatar/assigned/approved/pending, SDS compliance stacked BarChart by category, risk score distribution PieChart
+  * Tab 5 (Incident Tracker): 4 incident KPIs (spills/exposures/near misses/days since last), 12-month incident stacked AreaChart, incidents by warehouse horizontal BarChart, recent incident log
+  * Hazmat Detail Drawer: gradient header (4 hazard variants — Critical=red/High=orange/Medium=amber/Low=green), hazard badge with color, risk score display, SDS compliance status, 12-field detail grid (qty/zone/warehouse/supplier/storage/dates/temp/humidity/MSDS/incidents/emergency), PPE requirements badges, inspection schedule (inspector/last/next), 3 action buttons (Inspect/View SDS/Restrict)
+  * Mock Data: seed 152152, 200 items, 9 UN classes, 10 hazard categories, 6 storage zones, 6 warehouses, 6 inspectors, 8 statuses, 30 Indian chemicals, 10 Indian suppliers
+
+- CSS: scripts/r152-css.css (~132 lines, hazmat-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: ShieldAlert, group: system), app-layout.tsx (ShieldAlert already in iconMap, no duplicate added)
+
+- Fixed 2 issues during development:
+  * Removed duplicate ShieldAlert import in app-layout.tsx (already existed at L64)
+  * Chemical icon → Droplets (no Chemical export in lucide-react)
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 309841c
+
+Stage Summary:
+- NEW MODULE: Dangerous Goods & HazMat Management (82 modules total, was 81)
+- ~580-line component + ~132 lines CSS
+- Full UN Class 1-9 classification system with color coding
+- 200 hazmat items with risk scoring (1-100) and hazard levels
+- SDS compliance tracking with per-category breakdown
+- 6 storage zones with temperature/humidity monitoring
+- CDG inspector management with assignment tracking
+- Incident tracker with 12-month trend analysis
+- 30 real Indian chemicals (Acetone/Sulphuric Acid/LPG/Ammonium Nitrate etc.)
+- 10 Indian chemical suppliers (Tata Chemicals/Reliance Industries/UPL etc.)
+- Total globals.css: 34,454 lines (+132)
+
+## Updated Project Status (Post Round 152)
+- STATUS: STABLE + HAZMAT SAFETY MODULE (82 modules)
+- MODULES (82): All previous 81 + Dangerous Goods & HazMat Management
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 34,454 lines
+
+KNOWN ISSUES:
+- Dev server cannot maintain connection for agent-browser QA
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (82+ modules)
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 34000+ classes — consolidate
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation
+  7. Asset & Equipment Maintenance module
+---
 Task ID: 151
 Agent: Main (Cron Review - Round 151)
 Task: R151 — Dock Scheduling & Yard Management module
