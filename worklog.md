@@ -1,4 +1,68 @@
 ---
+Task ID: 163
+Agent: Main (Cron Review - Round 163)
+Task: R163 — Carbon Footprint Tracker module
+
+Work Log:
+- Read worklog.md (R162 latest, 92 modules)
+- Build ✅ | TSC src/ ✅ (0 errors)
+- Code-level QA: R162 registrations verified
+- agent-browser QA: dev server OOM — known issue, skipped
+
+- Created R163: Carbon Footprint Tracker module
+  * NEW FILE: src/components/modules/carbon-footprint-tracker-view.tsx (~1006 lines)
+  * 5 tabs: Carbon Dashboard | Emission Records | Carbon Credits | Green Initiatives | Compliance
+  * Theme: Emerald + Sky + Amber (#10b981, #0ea5e9, #f59e0b)
+  * Tab 1 (Carbon Dashboard): 6 KPIs (total emissions/carbon offsets/net emissions/intensity index/credits available/green investment) with trend change indicators, monthly emissions by scope stacked ComposedChart (S1+S2+S3 bars + target line), emissions by source donut PieChart, net emissions vs offsets AreaChart (3 layers), carbon intensity trend ComposedChart, 6 environmental alerts (emission exceedance/credit verification/compliance warning/ESG deadline/scope 3 surge/solar approval)
+  * Tab 2 (Emission Records): 400 emission records, search (ID/Warehouse/City/Source/Category), double-row filter (3 scope + 8 source + 5 category pills), 35-row paginated table (10 columns), source color dots, scope/category badges, CO2e highlighted, cost INR, intensity, variance vs baseline color-coded, detail drawer
+  * Tab 3 (Carbon Credits): 6 credit KPIs, credits by project type PieChart (6 types: Renewable Energy/Afforestation/Wind/Biogas/Hydro/Waste Recovery), credit value by project BarChart, 8 carbon credit cards with ID/status/verification badge/location/standard/credits/price/value/period
+  * Tab 4 (Green Initiatives): 6 initiative KPIs, status filter (active/planned/completed/on_hold), investment vs CO2 saved ComposedChart (investment bars + CO2 saved line), ROI & payback ComposedChart (ROI bars + payback months dashed line), 10 initiative cards (name/type/status/4-stat row: investment/CO2 saved/ROI/payback, warehouse/start date, impact tag)
+  * Tab 5 (Compliance): 10 warehouse compliance cards with scope breakdown (S1/S2/S3/Total), target progress bar, intensity index, green energy %, solar capacity (kW), EV fleet %, compliance status badges (compliant/near_compliance/at_risk/non_compliant), regional intensity benchmarks ComposedChart (avg+target bars + best-in-class line), warehouse total emissions stacked horizontal BarChart
+  * Emission Detail Drawer: gradient header (green=below baseline, red=above), record info grid, warehouse details, emission metrics (4 metric boxes: CO2e/Cost/Intensity/Variance), baseline comparison card, 4 action buttons (Export/Recalculate/Audit Log/View Warehouse)
+  * Mock Data: seed 163163, 400 emission records, 10 warehouses, 8 emission sources, 3 scopes, 5 compliance levels, 8 carbon credits (Indian projects: Rajasthan Solar/TN Wind/MP Forest/Gujarat Biogas/Karnataka Hydro/MH Waste-to-Energy/HP Reforestation/Telangana Solar), 10 green initiatives, 5 regional benchmarks, 12-month trends
+  * INR formatting
+
+- CSS: scripts/r163-css.css (~193 lines, scf-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: Sprout, group: analytics), app-layout.tsx (Sprout added to imports + iconMap)
+
+- Initial TS errors (3): Activity JSX syntax error (fixed: extra `}` in closing tag), PieChart icon conflict with Recharts (fixed: replaced with Cloud icon), ShieldCheck not imported (fixed: replaced with CheckCircle2), duplicate `name` property in spread (fixed: renamed to shortName)
+- Clean build after fixes, 0 TS errors in src/
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 1d009bd
+
+Stage Summary:
+- NEW MODULE: Carbon Footprint Tracker (93 modules total, was 92)
+- ~1006-line component + ~193 lines CSS
+- 400 emission records across 8 sources (Scope 1/2/3)
+- 10 warehouse compliance cards with green metrics
+- 8 Indian carbon credit projects (VCS/Gold Standard/CDM)
+- 10 green initiatives with ROI and payback analysis
+- Regional intensity benchmarks (5 Indian regions)
+- Emission variance tracking vs baseline
+- Total globals.css: 37,001 lines (+193)
+
+## Updated Project Status (Post Round 163)
+- STATUS: STABLE + CARBON FOOTPRINT TRACKER MODULE (93 modules)
+- MODULES (93): All previous 92 + Carbon Footprint Tracker
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 37,001 lines
+
+KNOWN ISSUES:
+- Dev server cannot maintain connection for agent-browser QA (OOM in container)
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (93+ modules with repetitive drawer patterns)
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 37000+ classes — consolidate
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation
+  7. Smart Locker & Self-Service Kiosk Management
+  8. Warehouse Digital Twin / IoT Dashboard
+---
 Task ID: 162
 Agent: Main (Cron Review - Round 162)
 Task: R162 — Hyperlocal Delivery Management module
