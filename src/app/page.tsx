@@ -109,6 +109,7 @@ import ValueAddedServicesView from "@/components/modules/value-added-services-vi
 import GateSecurityView from "@/components/modules/gate-security-view"
 import YardTruckingView from "@/components/modules/yard-trucking-dock-view"
 import PackagingDesignStudioView from "@/components/modules/packaging-design-studio-view"
+import WarehouseLaborForecastingView from "@/components/modules/warehouse-labor-forecasting-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -218,6 +219,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "gate-security": GateSecurityView,
   "yard-trucking-dock": YardTruckingView,
   "packaging-design-studio": PackagingDesignStudioView,
+  "warehouse-labor-forecasting": WarehouseLaborForecastingView,
   "shift-handover": ShiftHandoverView,
 }
 
