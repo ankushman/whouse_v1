@@ -122,6 +122,7 @@ import ReturnsProcessingEnhancementView from "@/components/modules/returns-proce
 import ColdChainMonitoringView from "@/components/modules/cold-chain-monitoring-view"
 import PackagingOptimizationView from "@/components/modules/packaging-optimization-view"
 import LoadPlanningOptimizationView from "@/components/modules/load-planning-optimization-view"
+import FreightLaneManagementView from "@/components/modules/freight-lane-management-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -244,6 +245,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "cold-chain-monitoring": ColdChainMonitoringView,
   "packaging-optimization": PackagingOptimizationView,
   "load-planning-optimization": LoadPlanningOptimizationView,
+  "freight-lane-management": FreightLaneManagementView,
   "shift-handover": ShiftHandoverView,
 }
 

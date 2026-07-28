@@ -113,4 +113,5 @@ export { default as ReturnsProcessingEnhancementView } from './returns-processin
 export { default as ColdChainMonitoringView } from './cold-chain-monitoring-view'
 export { default as PackagingOptimizationView } from './packaging-optimization-view'
 export { default as LoadPlanningOptimizationView } from './load-planning-optimization-view'
+export { default as FreightLaneManagementView } from './freight-lane-management-view'
 
