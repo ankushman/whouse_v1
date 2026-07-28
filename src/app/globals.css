@@ -43366,3 +43366,110 @@ html.theme-transition body {
 .dark .cdr-table-row:hover { background: rgba(217, 119, 6, 0.04); }
 .dark .cdr-scheme-card:hover { box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15); }
 .dark .cdr-chart-card:hover { box-shadow: 0 4px 16px rgba(217, 119, 6, 0.1); }
+
+
+/* R198 - Export Documentation & LC Management (edl-*) */
+.edl-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #0d9488, #d4a017) !important; color: white !important; border-color: transparent !important; }
+.edl-kpi-card { animation: edl-fade-up 0.4s ease-out both; }
+.edl-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.edl-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.edl-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.edl-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.edl-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.edl-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.edl-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.edl-kpi-card:nth-child(8) { animation-delay: 350ms; }
+@keyframes edl-fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.edl-counter { animation: edl-scale-up 0.5s ease-out; }
+@keyframes edl-scale-up { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.edl-bar-fill { animation: edl-bar-grow 0.8s ease-out both; }
+@keyframes edl-bar-grow { from { width: 0 !important; } }
+.edl-progress-dot { animation: edl-dot-pulse 0.4s ease-out; }
+@keyframes edl-dot-pulse { from { transform: scale(0); } to { transform: scale(1); } }
+.edl-lc-ring-arc { animation: edl-ring-draw 1s ease-out; }
+@keyframes edl-ring-draw { from { stroke-dashoffset: 175.9; } }
+.edl-sort-head:hover { color: #0d9488; background: rgba(13, 148, 136, 0.06); }
+.edl-action-btn { transition: all 0.15s ease; }
+.edl-action-btn:hover { transform: scale(1.03); background: rgba(212, 160, 23, 0.08); color: #d4a017; border-color: rgba(212, 160, 23, 0.3); }
+.edl-sb-row:hover { background: rgba(13, 148, 136, 0.04); }
+.edl-lc-row:hover { background: rgba(212, 160, 23, 0.04); }
+.edl-inv-row:hover { background: rgba(139, 26, 26, 0.04); }
+.edl-cert-card { transition: all 0.2s ease; }
+.edl-cert-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(13, 148, 136, 0.12); }
+.edl-chart-card { transition: box-shadow 0.2s ease; }
+.edl-chart-card:hover { box-shadow: 0 0 20px rgba(13, 148, 136, 0.08); }
+.edl-view-btn:hover { color: #0d9488; }
+@media (max-width: 640px) { .edl-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 641px) and (max-width: 1024px) { .edl-kpi-grid { grid-template-columns: repeat(4, 1fr); } }
+.edl-drawer-header { box-shadow: 0 4px 16px rgba(13, 148, 136, 0.3); }
+.dark .edl-sort-head:hover { color: #5eead4; background: rgba(13, 148, 136, 0.1); }
+.dark .edl-action-btn:hover { background: rgba(212, 160, 23, 0.12); color: #fbbf24; border-color: rgba(212, 160, 23, 0.4); }
+.dark .edl-sb-row:hover { background: rgba(13, 148, 136, 0.06); }
+.dark .edl-lc-row:hover { background: rgba(212, 160, 23, 0.06); }
+.dark .edl-inv-row:hover { background: rgba(139, 26, 26, 0.06); }
+.dark .edl-cert-card:hover { box-shadow: 0 8px 24px rgba(13, 148, 136, 0.18); }
+.dark .edl-chart-card:hover { box-shadow: 0 0 24px rgba(13, 148, 136, 0.12); }
+.dark .edl-view-btn:hover { color: #5eead4; }
+.dark .edl-kpi-card { background: hsl(var(--card)); border-color: hsl(var(--border)); }
+/* EDL enhanced animations & details */
+.edl-tab-trigger[data-state="active"] { box-shadow: 0 2px 8px rgba(13, 148, 136, 0.25); }
+.edl-tab-trigger { transition: all 0.2s ease; }
+.edl-tab-trigger:hover:not([data-state="active"]) { background: rgba(13, 148, 136, 0.06); color: #0d9488; }
+.edl-kpi-card { border-left: 3px solid transparent; }
+.edl-kpi-card:nth-child(1) { border-left-color: #0d9488; }
+.edl-kpi-card:nth-child(2) { border-left-color: #d4a017; }
+.edl-kpi-card:nth-child(3) { border-left-color: #8b1a1a; }
+.edl-kpi-card:nth-child(4) { border-left-color: #1e3a5f; }
+.edl-kpi-card:nth-child(5) { border-left-color: #059669; }
+.edl-kpi-card:nth-child(6) { border-left-color: #7c3aed; }
+.edl-kpi-card:nth-child(7) { border-left-color: #ea580c; }
+.edl-kpi-card:nth-child(8) { border-left-color: #0891b2; }
+.edl-kpi-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1); }
+.edl-counter-value { font-variant-numeric: tabular-nums; }
+.edl-progress-track { background: linear-gradient(90deg, #f1f5f9, #e2e8f0); border-radius: 999px; overflow: hidden; }
+.dark .edl-progress-track { background: linear-gradient(90deg, #1e293b, #334155); }
+.edl-progress-stage-dot { transition: all 0.2s ease; }
+.edl-progress-stage-dot:hover { transform: scale(1.3); filter: brightness(1.1); }
+.edl-progress-stage-dot.completed { box-shadow: 0 0 6px rgba(13, 148, 136, 0.4); }
+.edl-lc-ring-arc { transition: stroke-dashoffset 0.6s ease; }
+.edl-currency-pill { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.edl-currency-pill:hover { transform: scale(1.05); }
+.edl-expiry-badge { transition: all 0.2s ease; }
+.edl-expiry-badge:hover { transform: scale(1.08); }
+.edl-amount-bar { border-radius: 4px; overflow: hidden; position: relative; }
+.edl-amount-bar::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.2)); pointer-events: none; }
+.edl-cert-card { border-radius: 12px; }
+.edl-cert-card .edl-cert-initial { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: white; }
+.edl-sort-head { cursor: pointer; transition: color 0.15s ease, background 0.15s ease; user-select: none; }
+.edl-sort-head:active { transform: scale(0.98); }
+.edl-analytics-card { transition: all 0.2s ease; border-left: 3px solid transparent; }
+.edl-analytics-card:nth-child(1) { border-left-color: #0d9488; }
+.edl-analytics-card:nth-child(2) { border-left-color: #d4a017; }
+.edl-analytics-card:nth-child(3) { border-left-color: #ef4444; }
+.edl-analytics-card:nth-child(4) { border-left-color: #3b82f6; }
+.edl-analytics-card:nth-child(5) { border-left-color: #8b5cf6; }
+.edl-analytics-card:nth-child(6) { border-left-color: #f97316; }
+.edl-analytics-card:nth-child(7) { border-left-color: #10b981; }
+.edl-analytics-card:nth-child(8) { border-left-color: #06b6d4; }
+.edl-analytics-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.dark .edl-analytics-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+.edl-drawer-header { background-attachment: fixed; }
+.edl-sheet-content { transition: transform 0.3s ease; }
+.edl-badge-shimmer { position: relative; overflow: hidden; }
+.edl-badge-shimmer::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: edl-shimmer 3s infinite; }
+@keyframes edl-shimmer { 0% { left: -100%; } 100% { left: 200%; } }
+.edl-row-stripe:nth-child(even) { background: rgba(13, 148, 136, 0.02); }
+.dark .edl-row-stripe:nth-child(even) { background: rgba(13, 148, 136, 0.04); }
+.edl-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 1024px) { .edl-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .edl-kpi-grid { grid-template-columns: 1fr; } }
+.edl-cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 1024px) { .edl-cert-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .edl-cert-grid { grid-template-columns: 1fr; } }
+.edl-analytics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 1024px) { .edl-analytics-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .edl-analytics-grid { grid-template-columns: 1fr; } }
+.dark .edl-tab-trigger:hover:not([data-state="active"]) { background: rgba(94, 234, 212, 0.08); color: #5eead4; }
+.dark .edl-progress-stage-dot.completed { box-shadow: 0 0 8px rgba(94, 234, 212, 0.5); }
+.dark .edl-amount-bar::after { background: linear-gradient(90deg, transparent 60%, rgba(255,255,255,0.1)); }
+.dark .edl-kpi-card:hover { box-shadow: 0 4px 16px rgba(13, 148, 136, 0.15); }

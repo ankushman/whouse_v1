@@ -123,4 +123,5 @@ export { default as DedicatedFreightCorridorView } from './dedicated-freight-cor
 export { default as MaritimeCargoSecurityView } from './maritime-cargo-security-view'
 export { default as ColdChainComplianceView } from './cold-chain-compliance-view'
 export { default as CustomsDutyRefundView } from './customs-duty-refund-view'
+export { default as ExportDocumentationLCView } from './export-documentation-lc-view'
 
