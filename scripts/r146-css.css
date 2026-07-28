@@ -1,0 +1,266 @@
+/* ═══════════════════════════════════════════════════════════════
+   R146 — Customer Service & Complaint Resolution Center (csrc-*)
+   Theme: Rose 600 + Emerald 500 + Amber 500
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── KPI Cards ─────────────────────────────────────────── */
+.csrc-kpi-card {
+  @apply rounded-xl border border-rose-100 bg-white p-4 shadow-sm
+    transition-all duration-200 hover:shadow-md dark:border-rose-900/40 dark:bg-gray-900;
+}
+.csrc-kpi-value {
+  @apply text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-50;
+}
+.csrc-kpi-label {
+  @apply text-xs font-medium text-gray-500 dark:text-gray-400;
+}
+.csrc-kpi-icon {
+  @apply flex h-9 w-9 items-center justify-center rounded-lg;
+}
+.csrc-kpi-trend {
+  @apply flex items-center gap-1 text-xs font-medium;
+}
+.csrc-kpi-trend-up {
+  @apply text-emerald-600 dark:text-emerald-400;
+}
+.csrc-kpi-trend-down {
+  @apply text-rose-600 dark:text-rose-400;
+}
+
+/* ── Status Filter Cards ──────────────────────────────── */
+.csrc-status-card {
+  @apply flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2
+    text-xs font-medium transition-all duration-150 hover:shadow-sm;
+}
+.csrc-status-card-active {
+  @apply ring-2 ring-rose-500 shadow-sm;
+}
+.csrc-status-badge {
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold leading-none;
+}
+.csrc-status-open { @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300; }
+.csrc-status-in-progress { @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300; }
+.csrc-status-escalated { @apply bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300; }
+.csrc-status-pending-customer { @apply bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300; }
+.csrc-status-resolved { @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300; }
+.csrc-status-closed { @apply bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400; }
+
+/* ── Priority Badges ────────────────────────────────── */
+.csrc-priority-critical { @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300; }
+.csrc-priority-high { @apply bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300; }
+.csrc-priority-medium { @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300; }
+.csrc-priority-low { @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300; }
+
+/* ── Category Badges ────────────────────────────────── */
+.csrc-cat-badge {
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold leading-none
+    bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300;
+}
+.csrc-channel-badge {
+  @apply inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold leading-none
+    bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300;
+}
+
+/* ── Data Table ─────────────────────────────────────── */
+.csrc-table-wrap {
+  @apply overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm
+    dark:border-gray-800 dark:bg-gray-900;
+}
+.csrc-table {
+  @apply w-full text-sm;
+}
+.csrc-table-head {
+  @apply border-b border-gray-200 bg-gray-50/80 dark:border-gray-800 dark:bg-gray-800/50;
+}
+.csrc-table-head th {
+  @apply px-3 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400;
+}
+.csrc-table-row {
+  @apply border-b border-gray-100 transition-colors hover:bg-rose-50/50 dark:border-gray-800 dark:hover:bg-rose-950/10;
+}
+.csrc-table-row td {
+  @apply px-3 py-2.5 text-gray-700 dark:text-gray-300;
+}
+
+/* ── Customer Cards ──────────────────────────────────── */
+.csrc-customer-card {
+  @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm
+    transition-all duration-200 hover:shadow-md dark:border-gray-800 dark:bg-gray-900;
+}
+.csrc-customer-card-header {
+  @apply -mt-4 -mx-4 mb-3 rounded-t-xl px-4 py-3;
+}
+.csrc-customer-gradient-platinum {
+  @apply bg-gradient-to-r from-rose-500 to-pink-600;
+}
+.csrc-customer-gradient-gold {
+  @apply bg-gradient-to-r from-amber-400 to-yellow-500;
+}
+.csrc-customer-gradient-silver {
+  @apply bg-gradient-to-r from-gray-400 to-gray-500;
+}
+
+/* ── Satisfaction Gauge ──────────────────────────────── */
+.csrc-gauge {
+  @apply flex h-28 w-28 items-center justify-center rounded-full border-4;
+}
+.csrc-gauge-excellent {
+  @apply border-emerald-500;
+}
+.csrc-gauge-good {
+  @apply border-blue-500;
+}
+.csrc-gauge-average {
+  @apply border-amber-500;
+}
+.csrc-gauge-poor {
+  @apply border-rose-500;
+}
+.csrc-gauge-value {
+  @apply text-2xl font-bold;
+}
+.csrc-gauge-label {
+  @apply text-[10px] font-medium text-gray-500 dark:text-gray-400;
+}
+
+/* ── Credit Note Card ─────────────────────────────────── */
+.csrc-credit-card {
+  @apply rounded-lg border border-emerald-200 bg-emerald-50/50 p-3
+    dark:border-emerald-900/30 dark:bg-emerald-950/20;
+}
+.csrc-credit-value {
+  @apply text-lg font-bold text-emerald-700 dark:text-emerald-400;
+}
+
+/* ── Drawer ─────────────────────────────────────────── */
+.csrc-drawer-overlay {
+  @apply fixed inset-0 z-50 bg-black/40 backdrop-blur-sm;
+}
+.csrc-drawer-panel {
+  @apply fixed right-0 top-0 z-50 h-full w-full max-w-xl overflow-y-auto
+    bg-white shadow-2xl dark:bg-gray-900;
+}
+.csrc-drawer-header {
+  @apply px-6 py-5;
+}
+.csrc-drawer-header-gradient {
+  @apply -mx-6 -mt-6 mb-5 px-6 py-6;
+}
+.csrc-drawer-body {
+  @apply px-6 pb-6;
+}
+.csrc-drawer-section {
+  @apply mb-5;
+}
+.csrc-drawer-section-title {
+  @apply mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400;
+}
+.csrc-drawer-field-grid {
+  @apply grid grid-cols-2 gap-2;
+}
+.csrc-drawer-field {
+  @apply rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-800;
+}
+.csrc-drawer-field-label {
+  @apply text-[10px] font-medium text-gray-500 dark:text-gray-400;
+}
+.csrc-drawer-field-value {
+  @apply text-sm font-medium text-gray-900 dark:text-gray-100;
+}
+
+/* ── Resolution Flow ─────────────────────────────────── */
+.csrc-flow-step {
+  @apply flex flex-col items-center gap-1;
+}
+.csrc-flow-circle {
+  @apply flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold;
+}
+.csrc-flow-circle-done {
+  @apply border-emerald-500 bg-emerald-500 text-white;
+}
+.csrc-flow-circle-current {
+  @apply border-rose-500 bg-white text-rose-500 dark:bg-gray-900;
+}
+.csrc-flow-circle-pending {
+  @apply border-gray-300 bg-white text-gray-400 dark:border-gray-700 dark:bg-gray-900;
+}
+.csrc-flow-line {
+  @apply h-0.5 w-8;
+}
+.csrc-flow-line-done { @apply bg-emerald-500; }
+.csrc-flow-line-pending { @apply bg-gray-300 dark:bg-gray-700; }
+
+/* ── Communication Log ─────────────────────────────── */
+.csrc-comm-entry {
+  @apply rounded-lg border border-gray-200 bg-gray-50 p-3
+    dark:border-gray-800 dark:bg-gray-800/50;
+}
+.csrc-comm-inbound {
+  @apply border-l-4 border-l-blue-500;
+}
+.csrc-comm-outbound {
+  @apply border-l-4 border-l-emerald-500;
+}
+
+/* ── Alert Cards ─────────────────────────────────────── */
+.csrc-alert {
+  @apply flex items-start gap-3 rounded-lg border p-3 text-sm;
+}
+.csrc-alert-critical {
+  @apply border-red-200 bg-red-50 dark:border-red-900/30 dark:bg-red-950/20;
+}
+.csrc-alert-warning {
+  @apply border-amber-200 bg-amber-50 dark:border-amber-900/30 dark:bg-amber-950/20;
+}
+.csrc-alert-info {
+  @apply border-blue-200 bg-blue-50 dark:border-blue-900/30 dark:bg-blue-950/20;
+}
+
+/* ── NPS Bar ────────────────────────────────────────── */
+.csrc-nps-bar {
+  @apply h-3 rounded-full;
+}
+.csrc-nps-promoter { @apply bg-emerald-500; }
+.csrc-nps-passive { @apply bg-amber-500; }
+.csrc-nps-detractor { @apply bg-rose-500; }
+
+/* ── Agent Performance Card ──────────────────────────── */
+.csrc-agent-card {
+  @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm
+    dark:border-gray-800 dark:bg-gray-900;
+}
+.csrc-agent-avatar {
+  @apply flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white;
+}
+
+/* ── Search Input ───────────────────────────────────── */
+.csrc-search {
+  @apply rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm
+    placeholder:text-gray-400 focus:border-rose-400 focus:outline-none focus:ring-2
+    focus:ring-rose-200 dark:border-gray-700 dark:bg-gray-800 dark:placeholder:text-gray-500
+    dark:focus:border-rose-500 dark:focus:ring-rose-900/30;
+}
+
+/* ── Tab Content Area ───────────────────────────────── */
+.csrc-tab-content {
+  @apply space-y-4;
+}
+.csrc-tab-section {
+  @apply rounded-xl border border-gray-200 bg-white p-4 shadow-sm
+    dark:border-gray-800 dark:bg-gray-900;
+}
+.csrc-tab-section-title {
+  @apply mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100;
+}
+
+/* ── Progress Bar ───────────────────────────────────── */
+.csrc-progress-track {
+  @apply h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700;
+}
+.csrc-progress-fill {
+  @apply h-2 rounded-full transition-all duration-500;
+}
+.csrc-progress-fill-green { @apply bg-emerald-500; }
+.csrc-progress-fill-amber { @apply bg-amber-500; }
+.csrc-progress-fill-red { @apply bg-rose-500; }
+.csrc-progress-fill-blue { @apply bg-blue-500; }

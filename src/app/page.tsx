@@ -81,6 +81,7 @@ import DocumentManagementView from "@/components/modules/document-management-vie
 import MultiChannelFulfillmentView from "@/components/modules/multi-channel-fulfillment-view"
 import QualityControlView from "@/components/modules/quality-control-view"
 import VehicleFleetTransportView from "@/components/modules/vehicle-fleet-transport-view"
+import CustomerServiceResolutionView from "@/components/modules/customer-service-resolution-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -162,6 +163,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "multi-channel-fulfillment": MultiChannelFulfillmentView,
   "quality-control": QualityControlView,
   "vehicle-fleet-transport": VehicleFleetTransportView,
+  "customer-service-resolution": CustomerServiceResolutionView,
   "shift-handover": ShiftHandoverView,
 }
 
