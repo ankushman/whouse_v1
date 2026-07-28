@@ -1,5 +1,63 @@
 ---
-Task ID: 167
+Task ID: 168
+Agent: Main (Cron Review - Round 168)
+Task: R168 — Warehouse Safety & Compliance Management module
+
+Work Log:
+- Read worklog.md (R167 latest, 97 modules)
+- Build ✅ | TSC src/ ✅ (0 errors)
+- Code-level QA: R167 registrations verified
+- agent-browser QA: dev server OOM — known issue, skipped
+
+- Created R168: Warehouse Safety & Compliance Management module
+  * NEW FILE: src/components/modules/warehouse-safety-compliance-view.tsx (~667 lines)
+  * 5 tabs: Dashboard | Incident Tracker | Compliance Audits | Safety Equipment | Training & Inspections
+  * Theme: Red + Green + Orange (#ef4444, #22c55e, #f97316), CSS prefix: saf-*
+  * Tab 0 (Dashboard): Live clock, 6 KPIs (open incidents/critical/days safe/avg audit score/non-compliant equip/training rate), monthly safety trend ComposedChart (incidents+resolved bars + audit score line), incident type PieChart (10 types), warehouse safety RadarChart (6 warehouses, safety+compliance), equipment compliance BarChart (4 statuses)
+  * Tab 1 (Incident Tracker): 60 incidents across 8 warehouses (10 types: Slip/Fall, Forklift, Fire, Chemical, etc.), severity filter (critical/major/minor/near-miss), status filter (open/investigating/resolved/closed/escalated), sortable table with risk score bars and near-miss indicators, incident detail drawer with root cause, corrective action, compliance reference, investigation actions
+  * Tab 2 (Compliance Audits): 4 KPIs (total/completed/overdue/avg score), 30 audits (6 types: Safety/Fire/Environmental/OSHA/ISO 45001/Internal), visual score circles, check progress bars, critical findings badges, audit detail drawer with 10-field grid
+  * Tab 3 (Safety Equipment): 80 equipment items (10 types: extinguishers, first aid kits, harnesses, etc.), compliance filter (compliant/non-compliant/expiring/pending), condition bars, paginated table, equipment detail drawer
+  * Tab 4 (Training & Inspections): 25 training programs (8 courses, 4 types: mandatory/refresher/certification/induction) with attendance tracking and pass rates, 20 safety inspections (5 types) with scores and findings
+
+- CSS: scripts/r168-css.css (~170 lines, saf-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: ShieldAlert, group: operations), app-layout.tsx (ShieldAlert already in iconMap)
+- Initial TS error (1): Arrow function syntax in map() — fixed with explicit type annotation
+- Clean build after fix, 0 TS errors in src/
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 88dc6d6
+
+Stage Summary:
+- NEW MODULE: Warehouse Safety & Compliance Management (98 modules total, was 97)
+- ~667-line component + ~170 lines CSS
+- 60 safety incidents with risk scoring and investigation tracking
+- 30 compliance audits (OSHA/ISO 45001/Fire Safety/Environmental)
+- 80 safety equipment items with compliance status monitoring
+- 25 training programs and 20 safety inspections
+- 3 detail drawers (Incident/Audit/Equipment)
+- Total globals.css: 38,120 lines (+169)
+
+## Updated Project Status (Post Round 168)
+- STATUS: STABLE + SAFETY & COMPLIANCE MODULE (98 modules)
+- MODULES (98): All previous 97 + Warehouse Safety & Compliance Management
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 38,120 lines
+
+KNOWN ISSUES:
+- Dev server cannot maintain connection for agent-browser QA (OOM in container)
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 38000+ classes
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation
+  7. Reverse Logistics & Returns Hub
+  8. Cold Chain & Temperature-Controlled Storage
+---
 Agent: Main (Cron Review - Round 167)
 Task: R167 — Parcel Sorting & Cross-Dock Automation module
 
