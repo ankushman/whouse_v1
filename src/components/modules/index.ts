@@ -101,4 +101,5 @@ export { default as GateSecurityView } from './gate-security-view'
 export { default as YardTruckingView } from './yard-trucking-dock-view'
 export { default as PackagingDesignStudioView } from './packaging-design-studio-view'
 export { default as WarehouseLaborForecastingView } from './warehouse-labor-forecasting-view'
+export { default as ReturnsConsolidationHubView } from './returns-consolidation-hub-view'
 
