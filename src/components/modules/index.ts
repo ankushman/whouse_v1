@@ -119,4 +119,5 @@ export { default as IntermodalTransportHubView } from './intermodal-transport-hu
 export { default as WarehouseEnergyManagementView } from './warehouse-energy-management-view'
 export { default as CargoInsuranceClaimsView } from './cargo-insurance-claims-view'
 export { default as PortCommunitySystemView } from './port-community-system-view'
+export { default as DedicatedFreightCorridorView } from './dedicated-freight-corridor-view'
 

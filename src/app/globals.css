@@ -42706,3 +42706,147 @@ html.theme-transition body {
 @media (max-width: 768px) {
   .pcs-kpi-grid { grid-template-columns: 1fr !important; }
 }
+/* ═══════════════════════════════════════════════════════════
+   R193 — Dedicated Freight Corridor Analytics (dfc-*)
+   Theme: Violet + Emerald + Sky (#7c3aed, #059669, #0ea5e9)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Tab active indicator */
+.dfc-tab-active {
+  position: relative;
+  color: #7c3aed !important;
+  font-weight: 600;
+}
+.dfc-tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 10%;
+  width: 80%;
+  height: 2.5px;
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  border-radius: 2px;
+}
+
+/* KPI cards staggered animation */
+@keyframes dfc-fade-slide-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.dfc-kpi-card {
+  animation: dfc-fade-slide-up 0.45s ease-out forwards;
+  opacity: 0;
+}
+.dfc-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.dfc-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.dfc-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.dfc-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.dfc-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.dfc-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.dfc-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.dfc-kpi-card:nth-child(8) { animation-delay: 350ms; }
+
+/* Counter animation */
+@keyframes dfc-count-up {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+.dfc-counter-value {
+  animation: dfc-count-up 0.6s ease-out forwards;
+}
+
+/* Speed gauge glow */
+.dfc-speed-glow {
+  box-shadow: 0 0 8px rgba(124, 58, 237, 0.15);
+  border-radius: 9999px;
+}
+
+/* Priority pill */
+.dfc-priority-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Connectivity pill */
+.dfc-conn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Status pill */
+.dfc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Stat card hover */
+.dfc-stat-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.dfc-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Table sort header */
+.dfc-sort-header {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s;
+}
+.dfc-sort-header:hover {
+  color: #7c3aed;
+}
+
+/* Action button */
+.dfc-action-btn {
+  transition: all 0.15s ease;
+}
+.dfc-action-btn:hover {
+  background: rgba(124, 58, 237, 0.1);
+  color: #7c3aed;
+  transform: scale(1.05);
+}
+
+/* Table row hover */
+.dfc-table-row {
+  transition: background 0.15s ease;
+}
+.dfc-table-row:hover {
+  background: rgba(124, 58, 237, 0.04);
+}
+.dark .dfc-table-row:hover {
+  background: rgba(124, 58, 237, 0.08);
+}
+
+/* Corridor progress ring pulse */
+@keyframes dfc-ring-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dfc-kpi-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 768px) {
+  .dfc-kpi-grid { grid-template-columns: 1fr !important; }
+}
