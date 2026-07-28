@@ -232,6 +232,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   ShieldPlus,
   MapPinCheck,
   LockKeyhole,
+  Building2,
   Zap,
 } as const
 const recentNotifications = [
