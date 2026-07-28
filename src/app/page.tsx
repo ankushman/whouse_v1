@@ -143,6 +143,7 @@ import MultiWarehouseRebalanceView from "@/components/modules/multi-warehouse-re
 import MultiModalTransportCorridorView from "@/components/modules/multi-modal-transport-corridor-view"
 import BarcodeLabelView from "@/components/modules/barcode-label-view"
 import DrayageFirstMileView from "@/components/modules/drayage-first-mile-view"
+import ChassisPoolMgmtView from "@/components/modules/chassis-pool-mgmt-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -285,6 +286,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "multi-warehouse-rebalance": MultiWarehouseRebalanceView,
   "multi-modal-transport-corridor": MultiModalTransportCorridorView,
   "drayage-first-mile": DrayageFirstMileView,
+  "chassis-pool-mgmt": ChassisPoolMgmtView,
 }
 
 

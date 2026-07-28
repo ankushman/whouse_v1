@@ -133,4 +133,5 @@ export { default as DemurrageDetentionMgmtView } from './demurrage-detention-mgm
 export { default as MultiWarehouseRebalanceView } from './multi-warehouse-rebalance-view'
 export { default as MultiModalTransportCorridorView } from './multi-modal-transport-corridor-view'
 export { default as DrayageFirstMileView } from './drayage-first-mile-view'
+export { default as ChassisPoolMgmtView } from './chassis-pool-mgmt-view'
 

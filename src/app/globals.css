@@ -46041,3 +46041,85 @@ html.theme-transition body {
 .dark .dfm-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .dfm-root ::-webkit-scrollbar-thumb { background: rgba(13,148,136,0.2); }
 .dark .dfm-root ::-webkit-scrollbar-thumb:hover { background: rgba(13,148,136,0.35); }
+
+/* ============================================================================
+ * R208 — Chassis Pool Management (cpm-*) — ~180 lines
+ * Theme: Slate #334155 + Amber #d97706 + Teal #0d9488 + Rose #e11d48 + Emerald #059669 + Indigo #4f46e5
+ * ============================================================================ */
+.cpm-root {}
+/* Tab Active — slate gradient */
+.cpm-tab-active { background: linear-gradient(135deg, #334155, #475569) !important; color: #fff !important; box-shadow: 0 0 12px rgba(51,65,85,0.35), inset 0 1px 0 rgba(255,255,255,0.15); }
+/* KPI Cards — 8-color left border */
+.cpm-kpi { border-left: 4px solid; position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.cpm-kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; opacity: 0; transition: opacity 0.3s; }
+.cpm-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.cpm-kpi:hover::before { opacity: 1; }
+.cpm-kpi-slate { border-left-color: #334155; } .cpm-kpi-slate::before { background: linear-gradient(90deg, #334155, #475569); }
+.cpm-kpi-emerald { border-left-color: #059669; } .cpm-kpi-emerald::before { background: linear-gradient(90deg, #059669, #10b981); }
+.cpm-kpi-teal { border-left-color: #0d9488; } .cpm-kpi-teal::before { background: linear-gradient(90deg, #0d9488, #14b8a6); }
+.cpm-kpi-amber { border-left-color: #d97706; } .cpm-kpi-amber::before { background: linear-gradient(90deg, #d97706, #f59e0b); }
+.cpm-kpi-indigo { border-left-color: #4f46e5; } .cpm-kpi-indigo::before { background: linear-gradient(90deg, #4f46e5, #818cf8); }
+.cpm-kpi-cyan { border-left-color: #0891b2; } .cpm-kpi-cyan::before { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+.cpm-kpi-rose { border-left-color: #e11d48; } .cpm-kpi-rose::before { background: linear-gradient(90deg, #e11d48, #fb7185); }
+.cpm-kpi-orange { border-left-color: #ea580c; } .cpm-kpi-orange::before { background: linear-gradient(90deg, #ea580c, #f97316); }
+/* KPI staggered fade-up */
+@keyframes cpm-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.cpm-kpi-anim:nth-child(1) { animation: cpm-fade-up 0.35s ease-out 0s both; }
+.cpm-kpi-anim:nth-child(2) { animation: cpm-fade-up 0.35s ease-out 0.05s both; }
+.cpm-kpi-anim:nth-child(3) { animation: cpm-fade-up 0.35s ease-out 0.1s both; }
+.cpm-kpi-anim:nth-child(4) { animation: cpm-fade-up 0.35s ease-out 0.15s both; }
+.cpm-kpi-anim:nth-child(5) { animation: cpm-fade-up 0.35s ease-out 0.2s both; }
+.cpm-kpi-anim:nth-child(6) { animation: cpm-fade-up 0.35s ease-out 0.25s both; }
+.cpm-kpi-anim:nth-child(7) { animation: cpm-fade-up 0.35s ease-out 0.3s both; }
+.cpm-kpi-anim:nth-child(8) { animation: cpm-fade-up 0.35s ease-out 0.35s both; }
+/* Shimmer */
+@keyframes cpm-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.cpm-shimmer { background: linear-gradient(90deg, transparent 30%, rgba(51,65,85,0.08) 50%, transparent 70%); background-size: 200% 100%; animation: cpm-shimmer 2s infinite; }
+/* Chart cards */
+.cpm-chart-card { transition: border-color 0.3s, box-shadow 0.3s; }
+.cpm-chart-card:hover { border-color: rgba(51,65,85,0.3); box-shadow: 0 0 16px rgba(51,65,85,0.08); }
+/* Tire bar */
+.cpm-tire-bar { min-width: 120px; }
+/* Pulse animations */
+@keyframes cpm-pulse-error { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); } }
+.cpm-pulse-error { animation: cpm-pulse-error 1.2s infinite; }
+@keyframes cpm-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(8,145,178,0.4); } 50% { box-shadow: 0 0 0 6px rgba(8,145,178,0); } }
+.cpm-pulse-cyan { animation: cpm-pulse-cyan 1.5s infinite; }
+/* Badge shimmer */
+@keyframes cpm-badge-shimmer { 0% { background-position: -100% 0; } 100% { background-position: 200% 0; } }
+.cpm-badge-shimmer { background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%); background-size: 300% 100%; animation: cpm-badge-shimmer 1.5s infinite 0.5s; }
+/* Table */
+.cpm-table tr:nth-child(even) { background: rgba(51,65,85,0.02); }
+.cpm-table tr:hover { background: rgba(51,65,85,0.06); }
+.cpm-table-tab1 tr:hover { background: rgba(51,65,85,0.06); }
+.cpm-table-tab2 tr:hover { background: rgba(13,148,136,0.06); }
+.cpm-table-tab3 tr:hover { background: rgba(217,119,6,0.06); }
+.cpm-table-tab4 tr:hover { background: rgba(79,70,229,0.06); }
+/* Sort header */
+.cpm-sort-header { transition: background 0.15s, transform 0.15s; cursor: pointer; user-select: none; }
+.cpm-sort-header:hover { background: rgba(51,65,85,0.08); }
+.cpm-sort-header.active { background: rgba(51,65,85,0.12); transform: scale(0.98); }
+/* Action buttons */
+.cpm-action-btn { transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; }
+.cpm-action-btn:hover { transform: scale(1.03); box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-color: rgba(51,65,85,0.3); }
+/* Drawer */
+.cpm-drawer { border-left: 3px solid #334155; }
+/* Pickup/Drop tile */
+.cpm-pickup-drop { padding: 6px 10px; background: rgba(51,65,85,0.04); border: 1px solid rgba(51,65,85,0.12); border-radius: 6px; }
+/* Analytics cards */
+.cpm-analytics-card { border-left: 4px solid; transition: transform 0.2s, box-shadow 0.2s; }
+.cpm-analytics-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+/* Dark mode */
+.dark .cpm-tab-active { box-shadow: 0 0 12px rgba(51,65,85,0.25), inset 0 1px 0 rgba(255,255,255,0.08); }
+.dark .cpm-kpi { background: rgba(15,23,42,0.5); }
+.dark .cpm-kpi:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.dark .cpm-table tr:nth-child(even) { background: rgba(51,65,85,0.04); }
+.dark .cpm-table tr:hover { background: rgba(51,65,85,0.1); }
+.dark .cpm-chart-card:hover { border-color: rgba(51,65,85,0.4); box-shadow: 0 0 16px rgba(51,65,85,0.12); }
+.dark .cpm-drawer { border-left-color: #475569; }
+.dark .cpm-pickup-drop { background: rgba(51,65,85,0.08); border-color: rgba(51,65,85,0.2); }
+.dark .cpm-sort-header:hover { background: rgba(51,65,85,0.12); }
+.dark .cpm-sort-header.active { background: rgba(51,65,85,0.18); }
+.dark .cpm-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .cpm-root ::-webkit-scrollbar-thumb { background: rgba(51,65,85,0.2); }
+.dark .cpm-root ::-webkit-scrollbar-thumb:hover { background: rgba(51,65,85,0.35); }
