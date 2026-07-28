@@ -134,4 +134,5 @@ export { default as MultiWarehouseRebalanceView } from './multi-warehouse-rebala
 export { default as MultiModalTransportCorridorView } from './multi-modal-transport-corridor-view'
 export { default as DrayageFirstMileView } from './drayage-first-mile-view'
 export { default as ChassisPoolMgmtView } from './chassis-pool-mgmt-view'
+export { default as DockDoorOptimizationView } from './dock-door-optimization-view'
 

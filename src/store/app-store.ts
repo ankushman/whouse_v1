@@ -140,6 +140,7 @@ export const navItems: NavItem[] = [
   { id: 'multi-modal-transport-corridor', label: 'Multi-Modal Transport', icon: 'Route', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
   { id: 'drayage-first-mile', label: 'Drayage & First-Mile', icon: 'Container', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'shift_lead'] },
   { id: 'chassis-pool-mgmt', label: 'Chassis Pool Mgmt', icon: 'Layers', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'shift_lead'] },
+  { id: 'dock-door-optimization', label: 'Dock Door Optimization', icon: 'DoorOpen', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
