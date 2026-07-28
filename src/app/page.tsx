@@ -92,6 +92,7 @@ import CustomsDutyGstView from "@/components/modules/customs-duty-gst-view"
 import PalletContainerView from "@/components/modules/pallet-container-view"
 import ReturnsQualityInspectionView from "@/components/modules/returns-quality-inspection-view"
 import CODPaymentReconciliationView from "@/components/modules/cod-payment-reconciliation-view"
+import WarrantyGuaranteeView from "@/components/modules/warranty-guarantee-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -184,6 +185,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "pallet-container": PalletContainerView,
   "returns-quality-inspection": ReturnsQualityInspectionView,
   "cod-payment-reconciliation": CODPaymentReconciliationView,
+  "warranty-guarantee": WarrantyGuaranteeView,
   "shift-handover": ShiftHandoverView,
 }
 
