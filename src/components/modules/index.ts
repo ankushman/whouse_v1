@@ -77,3 +77,4 @@ export { default as WarehouseAnalyticsBIView } from './warehouse-analytics-bi-vi
 export { default as ReturnsRefundAnalyticsView } from './returns-refund-analytics-view'
 export { default as PickPackOptimizationView } from './pick-pack-optimization-view'
 export { default as FreightShippingRateView } from './freight-shipping-rate-view'
+export { default as DockSchedulingYardView } from './dock-scheduling-yard-view'

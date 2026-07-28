@@ -34169,3 +34169,154 @@ html.theme-transition body {
 
 /* Utility */
 .center { text-align: center; }
+/* R151 — Dock Scheduling & Yard Management (dsy-* prefix) */
+/* Theme: Emerald + Blue + Amber (#10b981, #3b82f6, #f59e0b) */
+
+.dsy-root { padding: 1.25rem; max-width: 100%; }
+
+.dsy-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; }
+.dsy-heading { font-size: 1.35rem; font-weight: 700; color: #1e293b; display: flex; align-items: center; gap: 0.5rem; }
+.dark .dsy-heading { color: #f1f5f9; }
+.dsy-subheading { font-size: 0.8rem; color: #64748b; margin-top: 0.2rem; }
+.dsy-header-btn { font-size: 0.75rem; gap: 0.3rem; }
+.dsy-header-btn-primary { font-size: 0.75rem; gap: 0.3rem; background: #10b981; }
+.dsy-header-btn-primary:hover { background: #059669; }
+
+/* Tabs */
+.dsy-tabs-bar { display: flex; gap: 0.25rem; background: #f1f5f9; border-radius: 0.75rem; padding: 0.25rem; margin-bottom: 1.25rem; overflow-x: auto; }
+.dark .dsy-tabs-bar { background: #1e293b; }
+.dsy-tab { padding: 0.5rem 1rem; border-radius: 0.6rem; font-size: 0.8rem; font-weight: 500; color: #64748b; transition: all 0.2s; white-space: nowrap; border: none; cursor: pointer; background: transparent; }
+.dsy-tab:hover { color: #334155; }
+.dsy-tab-active { background: #10b981; color: white; box-shadow: 0 2px 8px rgba(16,185,129,0.3); }
+
+/* Content */
+.dsy-content { animation: dsy-fadeIn 0.3s ease; }
+@keyframes dsy-fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* KPI Grid */
+.dsy-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem; }
+.dsy-kpi-card { transition: transform 0.2s, box-shadow 0.2s; }
+.dsy-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.dsy-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem; }
+.dsy-value { font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+.dsy-sub { font-size: 0.7rem; color: #94a3b8; margin-top: 0.2rem; }
+.dsy-icon-wrap { padding: 0.5rem; border-radius: 0.75rem; }
+
+/* Chart Card */
+.dsy-chart-card { transition: transform 0.2s; }
+.dsy-chart-card:hover { transform: translateY(-1px); }
+.dsy-title { font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem; }
+
+/* Filter Bar */
+.dsy-filter-bar { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-bottom: 1rem; padding: 0.75rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0; }
+.dark .dsy-filter-bar { background: #0f172a; border-color: #1e293b; }
+.dsy-filter-badge { font-size: 0.7rem; cursor: pointer; transition: all 0.15s; }
+.dsy-search-input { width: 100%; padding: 0.45rem 0.7rem 0.45rem 2rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; font-size: 0.8rem; background: white; outline: none; transition: border-color 0.2s; }
+.dsy-search-input:focus { border-color: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+.dark .dsy-search-input { background: #1e293b; border-color: #334155; color: #e2e8f0; }
+.dsy-select-input { padding: 0.45rem 0.7rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; font-size: 0.8rem; background: white; outline: none; }
+.dark .dsy-select-input { background: #1e293b; border-color: #334155; color: #e2e8f0; }
+
+/* Table */
+.dsy-table-card { overflow: hidden; }
+.dsy-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.dsy-table-head { background: #f8fafc; }
+.dark .dsy-table-head { background: #1e293b; }
+.dsy-table-head th { padding: 0.6rem 0.75rem; text-align: left; font-size: 0.7rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #e2e8f0; }
+.dsy-table-row { transition: background 0.15s; }
+.dsy-table-row:hover { background: #f8fafc; }
+.dark .dsy-table-row:hover { background: #1e293b; }
+.dsy-table-row td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+.dark .dsy-table-row td { border-bottom-color: #1e293b; }
+.dsy-dock-badge { font-size: 0.65rem; }
+.dsy-action-btn { padding: 0.25rem; height: auto; }
+
+/* Progress */
+.dsy-progress-wrap { display: flex; align-items: center; gap: 0.5rem; }
+.dsy-progress-bar { width: 60px; height: 5px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+.dark .dsy-progress-bar { background: #1e293b; }
+.dsy-progress-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+/* Dock Cards */
+.dsy-dock-card { transition: transform 0.2s, box-shadow 0.2s; }
+.dsy-dock-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
+.dsy-dock-icon { width: 2.25rem; height: 2.25rem; border-radius: 0.6rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.dsy-dock-bar-wrap { margin-top: 0.5rem; }
+.dsy-dock-bar { height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+.dark .dsy-dock-bar { background: #1e293b; }
+.dsy-dock-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.dsy-metric-mini { background: #f8fafc; padding: 0.4rem; border-radius: 0.5rem; }
+.dark .dsy-metric-mini { background: #0f172a; }
+.dsy-temp-badge { display: flex; align-items: center; gap: 0.3rem; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: #ecfeff; border-radius: 0.4rem; font-size: 0.7rem; color: #0891b2; }
+.dark .dsy-temp-badge { background: rgba(6,182,212,0.1); }
+
+/* Yard */
+.dsy-yard-visual { margin-bottom: 1rem; }
+.dsy-yard-card { transition: transform 0.15s; }
+.dsy-yard-card:hover { transform: translateY(-1px); }
+.dsy-yard-bar { height: 5px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+.dark .dsy-yard-bar { background: #1e293b; }
+.dsy-yard-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.dsy-vehicle-chip { display: flex; align-items: center; gap: 0.2rem; padding: 0.15rem 0.35rem; background: #f1f5f9; border-radius: 0.35rem; font-size: 0.65rem; }
+.dark .dsy-vehicle-chip { background: #1e293b; }
+
+/* Alerts */
+.dsy-alerts-section { margin-top: 1.25rem; }
+.dsy-section-heading { font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.75rem; }
+.dsy-alert-card { padding: 0.75rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; }
+.dsy-alert-critical { background: #fef2f2; border-color: #fecaca; }
+.dark .dsy-alert-critical { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); }
+.dsy-alert-warning { background: #fffbeb; border-color: #fde68a; }
+.dark .dsy-alert-warning { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); }
+.dsy-alert-info { background: #eff6ff; border-color: #bfdbfe; }
+.dark .dsy-alert-info { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); }
+
+/* Drawer */
+.dsy-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; display: flex; justify-content: flex-end; animation: dsy-drawerOverlayIn 0.2s ease; }
+@keyframes dsy-drawerOverlayIn { from { opacity: 0; } to { opacity: 1; } }
+.dsy-drawer { width: 420px; max-width: 90vw; background: white; height: 100vh; overflow-y: auto; animation: dsy-drawerSlideIn 0.3s ease; box-shadow: -8px 0 24px rgba(0,0,0,0.15); }
+.dark .dsy-drawer { background: #0f172a; }
+@keyframes dsy-drawerSlideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+.dsy-drawer-header { padding: 1.25rem; color: white; }
+.dsy-drawer-body { padding: 1.25rem; }
+
+/* Flow Steps */
+.dsy-dock-flow { display: flex; align-items: center; justify-content: center; gap: 0; padding: 1.5rem 0 1rem; }
+.dsy-flow-step { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; flex: 0 0 auto; }
+.dsy-flow-dot { width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #e2e8f0; border: 2px solid #cbd5e1; }
+.dark .dsy-flow-dot { background: #1e293b; border-color: #334155; }
+.dsy-flow-dot-done { background: #10b981; border-color: #059669; }
+.dsy-flow-dot-active { background: #3b82f6; border-color: #2563eb; box-shadow: 0 0 0 4px rgba(59,130,246,0.2); }
+.dsy-flow-line { width: 60px; height: 2px; background: #e2e8f0; margin-bottom: 1.2rem; }
+.dark .dsy-flow-line { background: #1e293b; }
+.dsy-flow-line-done { background: #10b981; }
+.dsy-flow-pending span { color: #94a3b8; }
+.dsy-flow-active span { color: #1e293b; font-weight: 600; }
+.dark .dsy-flow-active span { color: #f1f5f9; }
+.dsy-flow-done span { color: #10b981; font-weight: 500; }
+
+/* Detail Grid */
+.dsy-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; margin-top: 1rem; }
+.dsy-detail-item { padding: 0.6rem; background: #f8fafc; border-radius: 0.6rem; }
+.dark .dsy-detail-item { background: #1e293b; }
+
+/* Progress Section */
+.dsy-progress-section { margin-top: 1.25rem; padding: 1rem; background: #f0fdf4; border-radius: 0.75rem; }
+.dark .dsy-progress-section { background: rgba(16,185,129,0.08); }
+.dsy-progress-bar-lg { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+.dark .dsy-progress-bar-lg { background: #1e293b; }
+.dsy-progress-fill-lg { height: 100%; background: linear-gradient(90deg, #10b981, #3b82f6); border-radius: 4px; transition: width 0.5s ease; }
+
+/* Notes */
+.dsy-notes-section { margin-top: 1rem; padding: 0.75rem; background: #fef2f2; border-radius: 0.6rem; border: 1px solid #fecaca; }
+.dark .dsy-notes-section { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.2); }
+.dsy-drawer-section-title { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; color: #334155; display: flex; align-items: center; gap: 0.3rem; }
+.dark .dsy-drawer-section-title { color: #cbd5e1; }
+
+/* Drawer Actions */
+.dsy-drawer-actions { display: flex; gap: 0.5rem; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
+.dark .dsy-drawer-actions { border-top-color: #1e293b; }
+.dsy-action-primary { background: #10b981; font-size: 0.8rem; gap: 0.3rem; }
+.dsy-action-primary:hover { background: #059669; }
+.dsy-action-secondary { font-size: 0.8rem; gap: 0.3rem; }
