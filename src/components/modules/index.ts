@@ -90,3 +90,4 @@ export { default as MultiChannelIntegrationHubView } from './multi-channel-integ
 export { default as SupplierPortalView } from './supplier-portal-view'
 export { default as HyperlocalDeliveryView } from './hyperlocal-delivery-view'
 export { default as CarbonFootprintTrackerView } from './carbon-footprint-tracker-view'
+export { default as SmartLockerKioskView } from './smart-locker-kiosk-view'
