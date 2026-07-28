@@ -118,6 +118,7 @@ import PredictiveDemandForecastingView from "@/components/modules/predictive-dem
 import LogisticsNetworkOptimizationView from "@/components/modules/logistics-network-optimization-view"
 import ContractComplianceAutomationView from "@/components/modules/contract-compliance-automation-view"
 import LastMileDeliveryAnalyticsView from "@/components/modules/last-mile-delivery-analytics-view"
+import ReturnsProcessingEnhancementView from "@/components/modules/returns-processing-enhancement-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -236,6 +237,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "logistics-network-optimization": LogisticsNetworkOptimizationView,
   "contract-compliance-automation": ContractComplianceAutomationView,
   "last-mile-delivery-analytics": LastMileDeliveryAnalyticsView,
+  "returns-processing-enhancement": ReturnsProcessingEnhancementView,
   "shift-handover": ShiftHandoverView,
 }
 

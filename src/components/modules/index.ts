@@ -109,4 +109,5 @@ export { default as PredictiveDemandForecastingView } from './predictive-demand-
 export { default as LogisticsNetworkOptimizationView } from './logistics-network-optimization-view'
 export { default as ContractComplianceAutomationView } from './contract-compliance-automation-view'
 export { default as LastMileDeliveryAnalyticsView } from './last-mile-delivery-analytics-view'
+export { default as ReturnsProcessingEnhancementView } from './returns-processing-enhancement-view'
 
