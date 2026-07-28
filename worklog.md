@@ -1,4 +1,69 @@
 ---
+Task ID: 151
+Agent: Main (Cron Review - Round 151)
+Task: R151 — Dock Scheduling & Yard Management module
+
+Work Log:
+- Read worklog.md (R150 latest, 80 modules)
+- Build ✅ | TSC src/ ✅
+
+- Agent-browser QA: dev server compilation timeout — fell back to build/tsc verification
+
+- Created R151: Dock Scheduling & Yard Management module
+  * NEW FILE: src/components/modules/dock-scheduling-yard-view.tsx (~560 lines)
+  * 5 tabs: Dashboard | Appointment Schedule | Dock Management | Yard Overview | Analytics
+  * Theme: Emerald + Blue + Amber (#10b981, #3b82f6, #f59e0b)
+  * Tab 1 (Dashboard): 6 KPIs (active docks/avg utilization/completed/delayed/avg turnaround/yard occupancy), hourly dock utilization stacked AreaChart (Inbound/Outbound/Cross-Dock + capacity line), appointment status PieChart (8 statuses), daily appointment trend ComposedChart, yard zone occupancy BarChart+Line, 6 dock & yard alerts (overload/reefer temp/documentation/emergency spill/cold chain)
+  * Tab 2 (Appointment Schedule): 180 appointments, 8 status filter badges, dock dropdown filter, search, 30-row table (10 columns: ID/carrier+vehicle/dock+type/time/load+weight/priority/progress/status/action), carrier/vehicle sub-rows, progress bars, priority badges
+  * Tab 3 (Dock Management): 8 dock cards across 4 warehouses (Mumbai Central/Delhi NCR/Chennai Port) with type-specific colors (Inbound=Green/Outbound=Blue/Cross-Dock=Amber/Cold Storage=Cyan), capacity utilization bars, active/queued counts, cold storage temperature badges, dock throughput BarChart, avg turnaround horizontal BarChart
+  * Tab 4 (Yard Overview): 6 yard zone occupancy map (Staging/Queue/Holding/Emergency/Repair/Reserved) with live vehicle chips, vehicle type PieChart (6 types), load type BarChart (7 types with per-type Cell colors)
+  * Tab 5 (Analytics): 28-day throughput trend AreaChart, carrier performance RadarChart (BlueDart/Delhivery/FedEx/DHL/Gati on 5 metrics), inbound vs outbound balance BarChart, delay analysis horizontal BarChart by reason
+  * Appointment Detail Drawer: gradient header (8 status variants — Completed/Loading+Unloading/Delayed/Scheduled/Checking In/No Show/Cancelled), 4-step flow visualization (Scheduled→Checked In→Processing→Completed) with done/active/pending states, 12-field detail grid (driver/license/vehicle type/warehouse/times/duration/pallets/weight/yard/temp), progress bar with gradient fill, delay notes section with red styling, 3 action buttons (Complete/Reschedule/Cancel)
+  * Mock Data: seed 151151, 180 appointments, 8 docks, 12 carriers, 10 vehicle types, 8 statuses, 12 Indian drivers, 6 yard zones, 7 load types
+
+- CSS: scripts/r151-css.css (~151 lines, dsy-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: DoorOpen, group: operations), app-layout.tsx (DoorOpen imported + iconMap)
+
+- Fixed 3 TS errors during development:
+  * L16: Lanes → TrendingUp (no such export from lucide-react)
+  * L243: Added dataKey="value" to PieChart Pie element (required prop)
+  * L593: TrendingUp was missing from import
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 9c29515
+
+Stage Summary:
+- NEW MODULE: Dock Scheduling & Yard Management (81 modules total, was 80)
+- ~560-line component + ~151 lines CSS
+- 8 loading docks across 4 warehouses with type-specific functionality
+- 180 appointment records with full lifecycle tracking
+- Yard zone occupancy visualization with live vehicle chips
+- Cold chain monitoring with temperature badges
+- Carrier performance radar across 5 Indian logistics providers
+- 4-step appointment flow: Scheduled → Checked In → Processing → Completed
+- Indian business context: MH/DL license plates, Indian carriers (BlueDart/Delhivery/Gati/VRL/Allcargo), Indian drivers
+- Total globals.css: 34,322 lines (+151)
+
+## Updated Project Status (Post Round 151)
+- STATUS: STABLE + DOCK SCHEDULING & YARD MODULE (81 modules)
+- MODULES (81): All previous 80 + Dock Scheduling & Yard Management
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 34,322 lines
+
+KNOWN ISSUES:
+- Dev server compilation timeout in agent-browser QA (80+ modules too heavy for hot compile)
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components (81+ modules)
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 34000+ classes — consolidate
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation
+  7. Dangerous Goods & Hazardous Materials module
+---
 Task ID: 150
 Agent: Main (Cron Review - Round 150)
 Task: R150 — Freight & Shipping Rate Management module
