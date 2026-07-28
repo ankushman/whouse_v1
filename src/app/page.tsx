@@ -75,6 +75,7 @@ import TallyIntegrationView from "@/components/modules/tally-integration-view"
 import KittingAssemblyView from "@/components/modules/kitting-assembly-view"
 import BatchLotView from "@/components/modules/batch-lot-view"
 import ConsignmentStockView from "@/components/modules/consignment-stock-view"
+import PoolDistributionView from "@/components/modules/pool-distribution-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -150,6 +151,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "kitting-assembly": KittingAssemblyView,
   "batch-lot": BatchLotView,
   "consignment-stock": ConsignmentStockView,
+  "pool-distribution": PoolDistributionView,
   "shift-handover": ShiftHandoverView,
 }
 

@@ -1,0 +1,147 @@
+/* ========================================================================
+   R140: Pool Distribution & Vehicle Scheduling — pd-* prefix
+   Theme: Teal (#0d9488) + Amber (#f59e0b) + Indigo (#6366f1)
+   ======================================================================== */
+
+.pd-container { padding: 0; }
+.pd-header { position: relative; }
+
+.pd-stat-chip {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 4px 12px; border-radius: 8px;
+  background: linear-gradient(135deg, #f0fdfa, #fefce8);
+  border: 1px solid #ccfbf1;
+}
+
+.pd-tabs-wrapper {
+  background: white; dark:bg-gray-900;
+  border-radius: 12px; padding: 4px;
+  box-shadow: 0 1px 3px rgba(13, 148, 136, 0.08);
+}
+
+.pd-kpi-teal { background: linear-gradient(135deg, #0d9488, #0f766e); box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3); }
+.pd-kpi-indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
+.pd-kpi-emerald { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+.pd-kpi-red { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+.pd-kpi-amber { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+.pd-kpi-cyan { background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3); }
+
+.pd-chart-card {
+  border: 1px solid #ccfbf1; border-radius: 12px;
+  background: white; dark:bg-gray-900;
+  box-shadow: 0 1px 4px rgba(13, 148, 136, 0.06);
+  transition: box-shadow 0.2s;
+}
+.pd-chart-card:hover { box-shadow: 0 4px 16px rgba(13, 148, 136, 0.12); }
+
+.pd-filter-input:focus {
+  outline: none; border-color: #0d9488;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.15);
+}
+.pd-filter-select:focus {
+  outline: none; border-color: #0d9488;
+  box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.15);
+}
+
+.pd-table-header { background: linear-gradient(135deg, #f0fdfa, #fefce8); }
+.pd-table-header th { font-weight: 600; color: #0f766e; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.pd-badge-planned { background: #e0f2fe; color: #0369a1; }
+.pd-badge-dispatched { background: #dbeafe; color: #1d4ed8; }
+.pd-badge-transit { background: #e0e7ff; color: #4338ca; }
+.pd-badge-delivered { background: #d1fae5; color: #065f46; }
+.pd-badge-delayed { background: #fee2e2; color: #991b1b; font-weight: 600; }
+.pd-badge-cancelled { background: #f3f4f6; color: #4b5563; }
+.pd-badge-partial { background: #fef3c7; color: #92400e; }
+
+.pd-badge-critical { background: #fee2e2; color: #dc2626; font-weight: 600; }
+.pd-badge-high { background: #fef3c7; color: #d97706; }
+.pd-badge-medium { background: #e0f2fe; color: #0369a1; }
+.pd-badge-low { background: #f3f4f6; color: #4b5563; }
+
+.pd-badge-sev-high { background: #fee2e2; color: #dc2626; font-weight: 600; }
+.pd-badge-sev-medium { background: #fef3c7; color: #d97706; }
+.pd-badge-sev-low { background: #f3f4f6; color: #4b5563; }
+
+.pd-chip-truck-s { background: #0d9488; color: white; }
+.pd-chip-truck-l { background: #0f766e; color: white; }
+.pd-chip-cont-s { background: #6366f1; color: white; }
+.pd-chip-cont-l { background: #4f46e5; color: white; }
+.pd-chip-mini { background: #f59e0b; color: white; }
+.pd-chip-flatbed { background: #78716c; color: white; }
+.pd-chip-refrigerated { background: #06b6d4; color: white; }
+.pd-chip-tanker { background: #ef4444; color: white; }
+
+.pd-vehicle-card { transition: transform 0.2s, box-shadow 0.2s; }
+.pd-vehicle-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13, 148, 136, 0.12); }
+.pd-driver-card { transition: transform 0.2s, box-shadow 0.2s; }
+.pd-driver-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13, 148, 136, 0.12); }
+
+.pd-sched-conflict { background: linear-gradient(135deg, #fef2f2, #fee2e2); border-left: 4px solid #ef4444; }
+.pd-sched-resolved { background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-left: 4px solid #10b981; }
+.pd-sched-fuel { background: linear-gradient(135deg, #fffbeb, #fef3c7); border-left: 4px solid #f59e0b; }
+.pd-schedule-ontime { background: linear-gradient(135deg, #f0fdfa, #ccfbf1); border-left: 4px solid #0d9488; }
+
+.pd-analytics-card { transition: transform 0.2s, box-shadow 0.2s; }
+.pd-analytics-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(13, 148, 136, 0.12); }
+
+/* Drawer */
+.pd-drawer-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px); z-index: 100;
+  display: flex; justify-content: flex-end;
+}
+.pd-drawer {
+  width: 100%; max-width: 480px; height: 100%;
+  background: white; dark:bg-gray-900;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  animation: pd-slide-in 0.3s ease-out;
+}
+@keyframes pd-slide-in {
+  from { transform: translateX(100%); } to { transform: translateX(0); }
+}
+
+.pd-drawer-header { position: sticky; top: 0; z-index: 10; background: white; dark:bg-gray-900; }
+.pd-status-banner { padding: 16px 20px; border-radius: 0 0 16px 16px; }
+.pd-banner-delivered { background: linear-gradient(135deg, #10b981, #34d399); }
+.pd-banner-delayed { background: linear-gradient(135deg, #ef4444, #f87171); }
+.pd-banner-transit { background: linear-gradient(135deg, #6366f1, #818cf8); }
+.pd-banner-cancelled { background: linear-gradient(135deg, #6b7280, #9ca3af); }
+.pd-banner-default { background: linear-gradient(135deg, #0d9488, #14b8a6); }
+
+.pd-drawer-content { padding: 16px 20px; }
+
+.pd-flow-dots {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 0; justify-content: center;
+  border-bottom: 1px solid #ccfbf1; margin-bottom: 12px;
+}
+.pd-flow-dot { width: 12px; height: 12px; border-radius: 50%; transition: all 0.3s; }
+.pd-dot-active { background: #0d9488; box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.25); }
+.pd-dot-inactive { background: #e5e7eb; }
+
+.pd-info-item { transition: background 0.15s; }
+.pd-info-item:hover { background: #f0fdfa; }
+
+/* Gradient border */
+.pd-container { position: relative; }
+.pd-container::before {
+  content: ''; position: absolute; inset: -1px;
+  border-radius: 13px; padding: 1px;
+  background: linear-gradient(135deg, #0d9488, #f59e0b, #6366f1, #0d9488);
+  background-size: 300% 300%;
+  animation: pd-gradient-shift 8s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none; opacity: 0.4;
+}
+@keyframes pd-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.pd-drawer::-webkit-scrollbar { width: 4px; }
+.pd-drawer::-webkit-scrollbar-track { background: transparent; }
+.pd-drawer::-webkit-scrollbar-thumb { background: #ccfbf1; border-radius: 2px; }
