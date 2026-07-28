@@ -98,3 +98,4 @@ export { default as WarehouseSafetyComplianceView } from './warehouse-safety-com
 export { default as GoodsToPersonPickingView } from './goods-to-person-picking-view'
 export { default as ValueAddedServicesView } from './value-added-services-view'
 export { default as GateSecurityView } from './gate-security-view'
+export { default as YardTruckingView } from './yard-trucking-dock-view'

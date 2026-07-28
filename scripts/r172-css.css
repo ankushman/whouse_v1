@@ -1,0 +1,108 @@
+/* ===== YARD TRUCKING & DOCK (ytd-*) CSS prefix — R172 ===== */
+.ytd-container { padding: 1.5rem; color: #e2e8f0; min-height: 100vh; background: #0f172a; }
+.ytd-live-clock { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, #059669, #7c3aed); border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.9rem; font-weight: 600; color: white; }
+.ytd-clock-date { margin-left: 0.75rem; font-weight: 400; opacity: 0.85; }
+.ytd-kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.ytd-kpi-card { background: #1e293b; border-radius: 10px; padding: 1rem; display: flex; align-items: center; gap: 0.75rem; border: 1px solid #334155; transition: transform 0.2s, box-shadow 0.2s; }
+.ytd-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.ytd-kpi-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ytd-kpi-info { display: flex; flex-direction: column; flex: 1; }
+.ytd-kpi-value { font-size: 1.4rem; font-weight: 700; color: #f1f5f9; line-height: 1.2; }
+.ytd-kpi-label { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+.ytd-kpi-trend { font-size: 0.75rem; font-weight: 600; display: flex; align-items: center; gap: 2px; }
+.ytd-trend-up { color: #22c55e; }
+.ytd-trend-down { color: #ef4444; }
+.ytd-charts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.ytd-chart-card { background: #1e293b; border-radius: 10px; padding: 1rem; border: 1px solid #334155; }
+.ytd-chart-card.ytd-chart-lg { grid-column: span 2; }
+.ytd-chart-title { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.75rem; font-weight: 600; }
+.ytd-tab-content { padding-top: 0.5rem; }
+.ytd-section-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
+.ytd-section-title { font-size: 1.1rem; font-weight: 700; color: #f1f5f9; }
+.ytd-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.ytd-search-box { display: flex; align-items: center; gap: 0.5rem; background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 0.4rem 0.75rem; }
+.ytd-search-box input { background: none; border: none; outline: none; color: #e2e8f0; font-size: 0.8rem; width: 200px; }
+.ytd-search-box svg { color: #64748b; }
+.ytd-filter-select { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 0.4rem 0.6rem; color: #e2e8f0; font-size: 0.8rem; outline: none; cursor: pointer; }
+.ytd-filter-select:focus { border-color: #059669; }
+.ytd-table-wrapper { overflow-x: auto; border-radius: 10px; border: 1px solid #334155; }
+.ytd-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.ytd-table thead { background: #1e293b; }
+.ytd-table th { padding: 0.6rem 0.75rem; text-align: left; color: #94a3b8; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; border-bottom: 1px solid #334155; }
+.ytd-sortable-th { cursor: pointer; user-select: none; }
+.ytd-sortable-th:hover { color: #e2e8f0; }
+.ytd-sort-icon { margin-left: 4px; font-size: 0.65rem; }
+.ytd-table td { padding: 0.55rem 0.75rem; border-bottom: 1px solid #1e293b; white-space: nowrap; color: #cbd5e1; }
+.ytd-table-row { cursor: pointer; transition: background 0.15s; }
+.ytd-table-row:hover { background: #1e293b; }
+.ytd-mono { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 0.78rem; }
+.ytd-bold { font-weight: 600; color: #f1f5f9; }
+.ytd-text-red { color: #ef4444; font-weight: 600; }
+.ytd-pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+.ytd-page-info { font-size: 0.8rem; color: #94a3b8; }
+.ytd-page-buttons { display: flex; gap: 0.35rem; }
+.ytd-page-btn { background: #1e293b; border: 1px solid #334155; border-radius: 6px; padding: 0.35rem 0.7rem; color: #94a3b8; font-size: 0.78rem; cursor: pointer; transition: all 0.15s; }
+.ytd-page-btn:hover:not(:disabled) { background: #334155; color: #f1f5f9; }
+.ytd-page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.ytd-page-btn.ytd-page-active { background: #059669; border-color: #059669; color: white; font-weight: 600; }
+/* Badges */
+.ytd-badge-green { background: rgba(34,197,94,0.15); color: #22c55e; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.ytd-badge-blue { background: rgba(59,130,246,0.15); color: #3b82f6; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.ytd-badge-amber { background: rgba(245,158,11,0.15); color: #f59e0b; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.ytd-badge-red { background: rgba(239,68,68,0.15); color: #ef4444; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.ytd-badge-gray { background: rgba(148,163,184,0.15); color: #94a3b8; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.ytd-badge-purple { background: rgba(168,85,247,0.15); color: #a855f7; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.ytd-badge-teal { background: rgba(13,148,136,0.15); color: #14b8a6; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.ytd-type-badge { background: rgba(5,150,105,0.12); color: #34d399; padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: capitalize; }
+/* Bar helpers */
+.ytd-bar-bg { height: 8px; background: #334155; border-radius: 4px; overflow: hidden; position: relative; }
+.ytd-bar-sm { height: 6px; }
+.ytd-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+.ytd-bar-value { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 0.65rem; color: #e2e8f0; font-weight: 600; }
+.ytd-bar-row { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #94a3b8; }
+.ytd-bar-row span:first-child { width: 80px; flex-shrink: 0; }
+/* Cards */
+.ytd-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+.ytd-trailer-card { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+.ytd-trailer-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.ytd-trailer-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.ytd-trailer-icon-wrapper { width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #059669, #34d399); display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0; }
+.ytd-trailer-card-info { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.ytd-trailer-name { font-weight: 600; font-size: 0.85rem; color: #f1f5f9; }
+.ytd-trailer-location { font-size: 0.72rem; color: #94a3b8; }
+.ytd-trailer-card-details { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.35rem; margin-bottom: 0.6rem; }
+.ytd-trailer-detail-item { display: flex; justify-content: space-between; font-size: 0.75rem; }
+.ytd-trailer-detail-item span:first-child { color: #64748b; }
+.ytd-trailer-detail-item span:last-child { color: #cbd5e1; }
+.ytd-trailer-card-bars { margin-bottom: 0.5rem; }
+.ytd-trailer-card-footer { display: flex; justify-content: space-between; font-size: 0.68rem; color: #64748b; }
+/* Drawer */
+.ytd-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; }
+.ytd-drawer-panel { position: fixed; top: 0; right: 0; width: 480px; height: 100vh; background: #0f172a; z-index: 1000; overflow-y: auto; box-shadow: -4px 0 24px rgba(0,0,0,0.4); animation: ytd-slideIn 0.25s ease-out; }
+@keyframes ytd-slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.ytd-drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; background: linear-gradient(135deg, #059669, #7c3aed); }
+.ytd-drawer-header-left { display: flex; align-items: center; gap: 0.75rem; color: white; }
+.ytd-drawer-header-left h3 { font-size: 1.05rem; font-weight: 700; }
+.ytd-drawer-subtitle { font-size: 0.75rem; opacity: 0.85; }
+.ytd-drawer-close { background: none; border: none; color: white; cursor: pointer; padding: 0.25rem; opacity: 0.8; transition: opacity 0.15s; }
+.ytd-drawer-close:hover { opacity: 1; }
+.ytd-drawer-body { padding: 1.25rem; }
+.ytd-drawer-field-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; margin-bottom: 1rem; }
+.ytd-drawer-field { display: flex; flex-direction: column; gap: 0.15rem; }
+.ytd-field-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 600; }
+.ytd-field-value { font-size: 0.82rem; color: #e2e8f0; font-weight: 500; }
+.ytd-drawer-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1rem; }
+.ytd-metric-card { background: #1e293b; border-radius: 8px; padding: 0.6rem 0.75rem; }
+.ytd-metric-label { font-size: 0.7rem; color: #94a3b8; display: block; margin-bottom: 0.25rem; }
+.ytd-metric-value { font-size: 0.85rem; font-weight: 700; color: #f1f5f9; }
+.ytd-drawer-notes { margin-bottom: 1rem; }
+.ytd-notes-label { font-size: 0.72rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.35rem; display: block; }
+.ytd-notes-text { font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; background: #1e293b; padding: 0.6rem 0.75rem; border-radius: 6px; border-left: 3px solid #334155; }
+.ytd-drawer-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.ytd-action-btn { display: flex; align-items: center; gap: 0.4rem; padding: 0.5rem 0.85rem; border-radius: 8px; font-size: 0.78rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; transition: all 0.15s; }
+.ytd-action-primary { background: #059669; color: white; border-color: #059669; }
+.ytd-action-primary:hover { background: #047857; }
+.ytd-action-secondary { background: #1e293b; color: #94a3b8; border-color: #334155; }
+.ytd-action-secondary:hover { background: #334155; color: #f1f5f9; }
+.ytd-action-danger { background: rgba(239,68,68,0.12); color: #ef4444; border-color: rgba(239,68,68,0.3); }
+.ytd-action-danger:hover { background: rgba(239,68,68,0.25); }
