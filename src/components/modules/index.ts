@@ -122,4 +122,5 @@ export { default as PortCommunitySystemView } from './port-community-system-view
 export { default as DedicatedFreightCorridorView } from './dedicated-freight-corridor-view'
 export { default as MaritimeCargoSecurityView } from './maritime-cargo-security-view'
 export { default as ColdChainComplianceView } from './cold-chain-compliance-view'
+export { default as CustomsDutyRefundView } from './customs-duty-refund-view'
 

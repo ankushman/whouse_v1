@@ -43308,3 +43308,61 @@ html.theme-transition body {
 .dark .ccc-chart-card:hover {
   box-shadow: 0 4px 16px rgba(245, 158, 11, 0.1);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   R197 — Customs Duty Refund & Drawback (cdr-*)
+   Theme: Amber + Violet + Blue + Emerald (#d97706, #7c3aed, #3b82f6, #10b981)
+   ═══════════════════════════════════════════════════════════════ */
+
+.cdr-tab-trigger[data-state="active"] {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  color: white;
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+}
+.cdr-tab-trigger[data-state="active"]::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, #f59e0b, #7c3aed);
+  border-radius: 1px;
+}
+.cdr-kpi-card:nth-child(1) { animation: cdr-fade-up 0.4s ease-out 0ms both; }
+.cdr-kpi-card:nth-child(2) { animation: cdr-fade-up 0.4s ease-out 50ms both; }
+.cdr-kpi-card:nth-child(3) { animation: cdr-fade-up 0.4s ease-out 100ms both; }
+.cdr-kpi-card:nth-child(4) { animation: cdr-fade-up 0.4s ease-out 150ms both; }
+.cdr-kpi-card:nth-child(5) { animation: cdr-fade-up 0.4s ease-out 200ms both; }
+.cdr-kpi-card:nth-child(6) { animation: cdr-fade-up 0.4s ease-out 250ms both; }
+.cdr-kpi-card:nth-child(7) { animation: cdr-fade-up 0.4s ease-out 300ms both; }
+.cdr-kpi-card:nth-child(8) { animation: cdr-fade-up 0.4s ease-out 350ms both; }
+@keyframes cdr-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.cdr-counter-value { animation: cdr-count-scale 0.6s ease-out 0.3s both; }
+@keyframes cdr-count-scale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+.cdr-bar-fill { animation: cdr-bar-grow 0.8s ease-out 0.3s forwards; transform-origin: left; }
+@keyframes cdr-bar-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.cdr-sort-header { transition: color 0.15s ease, background 0.15s ease; user-select: none; }
+.cdr-sort-header:hover { color: #d97706; background: rgba(217, 119, 6, 0.05); }
+.cdr-action-btn { transition: all 0.15s ease; }
+.cdr-action-btn:hover { background: rgba(217, 119, 6, 0.08); color: #d97706; transform: scale(1.02); }
+.cdr-table-row { transition: background-color 0.15s ease; }
+.cdr-scheme-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1); }
+.cdr-chart-card:hover { box-shadow: 0 4px 16px rgba(217, 119, 6, 0.06); }
+.cdr-kpi-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) { .cdr-kpi-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 768px) { .cdr-kpi-grid { grid-template-columns: 1fr !important; } }
+.dark .cdr-sort-header:hover { color: #fbbf24; background: rgba(217, 119, 6, 0.08); }
+.dark .cdr-action-btn:hover { background: rgba(217, 119, 6, 0.1); color: #fbbf24; }
+.dark .cdr-table-row:hover { background: rgba(217, 119, 6, 0.04); }
+.dark .cdr-scheme-card:hover { box-shadow: 0 8px 24px rgba(124, 58, 237, 0.15); }
+.dark .cdr-chart-card:hover { box-shadow: 0 4px 16px rgba(217, 119, 6, 0.1); }
