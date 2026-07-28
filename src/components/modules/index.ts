@@ -82,3 +82,4 @@ export { default as DangerousGoodsHazMatView } from './dangerous-goods-hazmat-vi
 export { default as CustomsDutyGstView } from './customs-duty-gst-view'
 export { default as PalletContainerView } from './pallet-container-view'
 export { default as ReturnsQualityInspectionView } from './returns-quality-inspection-view'
+export { default as CODPaymentReconciliationView } from './cod-payment-reconciliation-view'
