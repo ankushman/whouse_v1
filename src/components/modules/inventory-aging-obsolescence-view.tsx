@@ -1015,7 +1015,7 @@ export default function InventoryAgingObsolescenceView() {
       recs = recs.filter((r) => r.sku.toLowerCase().includes(s) || r.name.toLowerCase().includes(s) || r.category.toLowerCase().includes(s));
     }
     if (statusFilter !== "all") recs = recs.filter((r) => r.agingBucket === statusFilter);
-    return sortData(recs as unknown as Record<string, unknown>[]) as SKURecord[];
+    return sortData(recs as unknown as Record<string, unknown>[]) as unknown as SKURecord[];
   }, [searchTerm, statusFilter, sortData]);
 
   // Tab 2: filtered slow-moving records
@@ -1026,7 +1026,7 @@ export default function InventoryAgingObsolescenceView() {
       recs = recs.filter((r) => r.sku.toLowerCase().includes(s) || r.name.toLowerCase().includes(s) || r.velocity.toLowerCase().includes(s));
     }
     if (statusFilter !== "all") recs = recs.filter((r) => r.rootCause === statusFilter);
-    return sortData(recs as unknown as Record<string, unknown>[]) as SlowMovingRecord[];
+    return sortData(recs as unknown as Record<string, unknown>[]) as unknown as SlowMovingRecord[];
   }, [searchTerm, statusFilter, sortData]);
 
   // Tab 3: filtered write-off records
@@ -1037,7 +1037,7 @@ export default function InventoryAgingObsolescenceView() {
       recs = recs.filter((r) => r.woNumber.toLowerCase().includes(s) || r.sku.toLowerCase().includes(s) || r.name.toLowerCase().includes(s));
     }
     if (statusFilter !== "all") recs = recs.filter((r) => r.status === statusFilter);
-    return sortData(recs as unknown as Record<string, unknown>[]) as WriteOffRecord[];
+    return sortData(recs as unknown as Record<string, unknown>[]) as unknown as WriteOffRecord[];
   }, [searchTerm, statusFilter, sortData]);
 
   // Tab 4: filtered provisioning records
@@ -1048,7 +1048,7 @@ export default function InventoryAgingObsolescenceView() {
       recs = recs.filter((r) => r.recordNo.toLowerCase().includes(s) || r.category.toLowerCase().includes(s) || r.reserveType.toLowerCase().includes(s));
     }
     if (statusFilter !== "all") recs = recs.filter((r) => r.status === statusFilter);
-    return sortData(recs as unknown as Record<string, unknown>[]) as ProvisioningRecord[];
+    return sortData(recs as unknown as Record<string, unknown>[]) as unknown as ProvisioningRecord[];
   }, [searchTerm, statusFilter, sortData]);
 
   const openDrawer = useCallback((record: unknown) => {
@@ -1584,7 +1584,7 @@ export default function InventoryAgingObsolescenceView() {
       {/* ═══════════════════════════════════════════════════ */}
 
       {/* SKU Drawer */}
-      <Sheet open={drawerOpen && drawerRecord && "sku" in (drawerRecord as SKURecord)} onOpenChange={setDrawerOpen}>
+      <Sheet open={!!(drawerOpen && drawerRecord && "sku" in (drawerRecord as SKURecord))} onOpenChange={setDrawerOpen}>
         <SheetContent className="w-[420px] sm:w-[500px] overflow-y-auto">
           {(drawerRecord as SKURecord) && (
             <>
@@ -1628,7 +1628,7 @@ export default function InventoryAgingObsolescenceView() {
       </Sheet>
 
       {/* Slow-Moving Drawer */}
-      <Sheet open={drawerOpen && drawerRecord && "score" in (drawerRecord as SlowMovingRecord)} onOpenChange={setDrawerOpen}>
+      <Sheet open={!!(drawerOpen && drawerRecord && "score" in (drawerRecord as SlowMovingRecord))} onOpenChange={setDrawerOpen}>
         <SheetContent className="w-[420px] sm:w-[500px] overflow-y-auto">
           {(drawerRecord as SlowMovingRecord) && (
             <>
@@ -1673,7 +1673,7 @@ export default function InventoryAgingObsolescenceView() {
       </Sheet>
 
       {/* Write-Off Drawer */}
-      <Sheet open={drawerOpen && drawerRecord && "woNumber" in (drawerRecord as WriteOffRecord)} onOpenChange={setDrawerOpen}>
+      <Sheet open={!!(drawerOpen && drawerRecord && "woNumber" in (drawerRecord as WriteOffRecord))} onOpenChange={setDrawerOpen}>
         <SheetContent className="w-[420px] sm:w-[500px] overflow-y-auto">
           {(drawerRecord as WriteOffRecord) && (
             <>
@@ -1718,7 +1718,7 @@ export default function InventoryAgingObsolescenceView() {
       </Sheet>
 
       {/* Provisioning Drawer */}
-      <Sheet open={drawerOpen && drawerRecord && "recordNo" in (drawerRecord as ProvisioningRecord)} onOpenChange={setDrawerOpen}>
+      <Sheet open={!!(drawerOpen && drawerRecord && "recordNo" in (drawerRecord as ProvisioningRecord))} onOpenChange={setDrawerOpen}>
         <SheetContent className="w-[420px] sm:w-[500px] overflow-y-auto">
           {(drawerRecord as ProvisioningRecord) && (
             <>

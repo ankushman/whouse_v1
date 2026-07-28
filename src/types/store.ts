@@ -13,6 +13,8 @@ export type Role =
   | 'procurement'
   | 'demand_planner'
   | 'logistics'
+  | 'shift_lead'
+  | 'finance'
 
 export type NavGroup = "operations" | "analytics" | "system"
 

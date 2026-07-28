@@ -172,7 +172,7 @@ function generateData() {
       invoiceRef: invoices[i % invoices.length].invoiceNo,
       evidence: { invoice: Math.floor(rand() * 2) === 0, bl: Math.floor(rand() * 2) === 0, portReceipt: Math.floor(rand() * 2) === 0, photos: Math.floor(rand() * 2) === 0 },
       raisedDate: `2026-0${(Math.floor(rand() * 6) + 1).toString().padStart(2, "0")}-${String(Math.floor(rand() * 28) + 1).padStart(2, "0")}`,
-      resolutionDate: ["Accepted", "Rejected"].includes(disputeStatuses[Math.floor(rand() * disputeStatuses.length)]) ? `2026-0${(Math.floor(rand() * 3) + 4)).toString().padStart(2, "0")}-${String(Math.floor(rand() * 28) + 1).padStart(2, "0")}` : "—",
+      resolutionDate: ["Accepted", "Rejected"].includes(disputeStatuses[Math.floor(rand() * disputeStatuses.length)]) ? `2026-0${(Math.floor(rand() * 3) + 4).toString().padStart(2, "0")}-${String(Math.floor(rand() * 28) + 1).padStart(2, "0")}` : "—",
       assignee: ["Raj K.", "Priya M.", "Amit S.", "Neha P.", "Vikram T."][Math.floor(rand() * 5)],
     };
   });

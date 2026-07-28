@@ -7863,3 +7863,112 @@ PRIORITY NEXT:
   4. Cross-module navigation
   5. SharedModuleDrawer migration
   6. Git resolution
+
+---
+Task ID: 205
+Agent: Main (Cron Review - Round 205)
+Task: R205 — Multi-Modal Transport Corridor Management + Bug Fixes
+
+Work Log:
+- Read worklog.md (R204 latest, 134 navItems stated but actual count is 135 after R205 pre-registered mwr)
+- TSC src/: Found 106 errors (R204 demurrage extra paren caused cascade, inventory-aging unknown casts, Role type missing shift_lead/finance, pre-existing warehouse-ops-command + multi-warehouse-rebalance unknown issues)
+- agent-browser QA: dev server OOM — known infra issue, skipped
+
+- BUG FIXES:
+  * Fixed R204 demurrage-detention-mgmt-view.tsx line 175: extra `)` in template literal `(Math.floor(rand() * 3) + 4))` → `(Math.floor(rand() * 3) + 4)`
+  * Fixed inventory-aging-obsolescence-view.tsx: 4 type casts `as SKURecord[]` → `as unknown as SKURecord[]` (TS2352)
+  * Fixed inventory-aging-obsolescence-view.tsx: 4 Sheet `open` props `boolean | null` → `!!(...)` wrapper (TS2322)
+  * Fixed src/types/store.ts: Added `shift_lead` | `finance` to Role union type (3 TS2322 errors resolved)
+  * Result: 106 → 95 src/ errors (all remaining are pre-existing warehouse-ops-command + multi-warehouse-rebalance unknown type issues from older rounds)
+
+- Created R205: Multi-Modal Transport Corridor Management module
+  * NEW FILE: src/components/modules/multi-modal-transport-corridor-view.tsx (~960 lines)
+  * 6 tabs: Corridor Dashboard | Shipment Tracker | Terminal Throughput | Carbon & Sustainability | Incidents & Risks | Corridor Analytics
+  * Theme: Deep Sky #0369a1 + Teal #0d9488 + Amber #d97706 + Violet #7c3aed + Slate #475569 + Emerald #059669, CSS prefix: mtc-*
+  * Tab 0 (Dashboard): 8 KPIs (Active Corridors/Active Shipments/Avg Reliability/Open Incidents/Weekly TEU/Avg Transit Time/Avg Cost per Ton/CO2 Saved), monthly mode throughput stacked AreaChart (Rail/Road/Coastal/Waterway/Air), mode distribution PieChart, corridor performance BarChart, transit time trend LineChart
+  * Tab 1 (Shipment Tracker): 80 shipments, 12 Indian corridors, 6 transport modes (Rail/Road/Coastal Shipping/Inland Waterway/Air Cargo/Multimodal), 10 cargo types, 15 operators (CONCOR/Maersk/Blue Dart/Delhivery etc.), 9 statuses, 5 priority levels, INR. ShipmentStatusBadge, ModeBadge (with icon), CargoTypeBadge, TransitProgressBar (delayed=orange, customs=red), PriorityBadge. Search/filter. Drawer: sky→teal gradient header, mode+transit+cost+details, 3 actions (Reroute/Track/Escalate)
+  * Tab 2 (Terminal Throughput): 60 records, 20 Indian terminals (JNPT/Mundra/Chennai/Kolkata/Cochin etc.), utilization bar, TEU/vessels/dwell time/truck turnaround/rail loads columns, horizontal BarChart
+  * Tab 3 (Carbon & Sustainability): CO2 by mode BarChart (actual vs target), corridor carbon score gauges (semi-circle SVG), 8 analytics KPIs (Modal Shift/Empty Miles/Dwell Time/Corridor Util/Green Score/NPS/Cost Savings/ROI)
+  * Tab 4 (Incidents & Risks): 45 incidents, 11 types (Port Congestion/Weather/Equipment/Customs/Route Blockage/Labor Strike/Document/Cargo Damage/Security/Fuel/Schedule), 5 severity levels (Low→Extreme with Critical+Extreme pulsing), 5 statuses. IncidentSeverityIndicator (glowing dot), financial impact INR, drawer with root cause + corrective action + 3 actions (Escalate/Resolve/Claim)
+  * Tab 5 (Analytics): 8 KPIs (same as carbon + analytics), mode comparison BarChart, savings vs investment BarChart
+
+- Unique Visual Components (16):
+  * TransportModeIcon: Lucide icon switch for 6 modes (Train/Truck/Ship/Waves/Plane/ArrowRightLeft)
+  * CorridorStatusBadge: 6-tier (Active=emerald, Under Optimization=blue, Capacity Expansion=amber, Maintenance=orange, Seasonal Restricted=slate, Suspended=red)
+  * ShipmentStatusBadge: 9-tier with transit-specific colors (In Transit=blue, Customs Hold=red, Transloading=cyan)
+  * RiskLevelBadge: 5-tier (Low→Extreme, Critical+Extreme with pulse animation)
+  * PriorityBadge: 5-tier (Standard=slate, Economy=blue, Priority=amber, Express=orange, Emergency=red+pulse)
+  * ModeBadge: Transport mode with embedded icon + colored border
+  * UtilizationBar: Color-coded utilization bar (<50% green, <75% amber, <90% orange, ≥90% red)
+  * ReliabilityRing: SVG arc showing on-time reliability percentage (≥90% green, ≥75% amber, <75% red)
+  * CarbonScoreGauge: Semi-circle SVG gauge for CO2 emissions (g/t-km) with target comparison
+  * TransitProgressBar: Progress percentage with dashed overlay pattern
+  * ModeSplitChart: Multi-color stacked bar showing Rail/Road/Coastal split ratio
+  * DwellTimeSpark: Compact dwell time + change% indicator
+  * IncidentSeverityIndicator: Glowing colored dot + severity text
+  * DocumentStatusTracker: FileCheck/FileWarning icons for document readiness
+  * CorridorRouteIndicator: Origin→Mode icons→Destination path display
+  * ContainerIcon: Alias for Package icon
+
+- CSS: appended to globals.css (+187 lines, mtc-* prefix)
+  * KPI cards with 8-color left border + gradient top stripe on hover + staggered fade-up animation
+  * Shimmer loading effect on KPI grid
+  * Chart cards with sky-blue border glow on hover
+  * Pills with scale hover + shadow
+  * Mode badges with colored border accent
+  * Table: even-row striping, hover left border accent, sort header bottom border
+  * Transit progress bar with dashed pattern overlay
+  * Value tiles with subtle border + hover glow
+  * SVG score ring hover scale
+  * Carbon gauge hover scale
+  * Drawer header gradient shadow
+  * Risk critical pulse animation (glow + scale)
+  * Row pulse for critical incident rows
+  * Tab-specific row striping (5 tabs)
+  * Corridor status border color coding
+  * Mode-specific background gradients (6 modes)
+  * Priority-based row highlighting
+  * Focus-visible states for accessibility
+  * Print optimization (break-inside avoid, hide action buttons)
+  * Full dark mode overrides (25+ rules, custom scrollbar)
+  * 255 total data records (70 corridors + 80 shipments + 60 terminal + 45 incidents)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export MultiModalTransportCorridorView (default)
+  * src/app/page.tsx: import + viewMap entry 'multi-modal-transport-corridor'
+  * src/store/app-store.ts: navItem 'multi-modal-transport-corridor' (icon: Route, group: operations, roles: super_admin/executive/regional_manager/warehouse_manager/logistics/procurement)
+  * src/components/layout/app-layout.tsx: Route already in imports + iconMap — no change needed
+
+TSC src/: 0 new errors (95 pre-existing from warehouse-ops-command + multi-warehouse-rebalance)
+
+Stage Summary:
+- BUG FIXES: R204 extra paren, R203 unknown casts + boolean|null, Role type missing 2 values
+- NEW MODULE: Multi-Modal Transport Corridor Management (136 navItems total)
+- ~960-line component + 187 lines CSS
+- 80 shipments across 12 Indian transport corridors with 6 modes (Rail/Road/Coastal/Waterway/Air/Multimodal)
+- 70 corridor performance records with reliability rings and utilization bars
+- 60 terminal throughput records for 20 Indian ports/ICD/airports
+- 45 incidents with severity tracking and financial impact
+- 16 unique visual components
+- Total globals.css: 45,634 lines (+187)
+
+## Updated Project Status (Post Round 205)
+- STATUS: STABLE + MULTI-MODAL TRANSPORT CORRIDOR MODULE (136 navItems)
+- MODULES: 136 view files + 136 navItems
+- TSC src/: 95 errors (all pre-existing in warehouse-ops-command + multi-warehouse-rebalance from older rounds — 0 new)
+- Total globals.css: 45,634 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 95 pre-existing TSC errors in warehouse-ops-command (~65) + multi-warehouse-rebalance (~30) from older rounds (unknown type pattern)
+- CSS at 45,634 lines
+
+PRIORITY NEXT:
+  1. New modules (Vendor Scorecard & Performance Management, Yard Operations Enhancement, Cold Chain Monitoring)
+  2. Fix pre-existing TSC errors in warehouse-ops-command + multi-warehouse-rebalance
+  3. Multi-warehouse switching feature
+  4. Dashboard home page widgets
+  5. Cross-module navigation
+  6. SharedModuleDrawer migration
+  7. Git resolution
