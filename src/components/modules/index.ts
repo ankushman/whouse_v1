@@ -75,3 +75,4 @@ export { default as VehicleFleetTransportView } from './vehicle-fleet-transport-
 export { default as CustomerServiceResolutionView } from './customer-service-resolution-view'
 export { default as WarehouseAnalyticsBIView } from './warehouse-analytics-bi-view'
 export { default as ReturnsRefundAnalyticsView } from './returns-refund-analytics-view'
+export { default as PickPackOptimizationView } from './pick-pack-optimization-view'
