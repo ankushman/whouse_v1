@@ -105,4 +105,5 @@ export { default as ReturnsConsolidationHubView } from './returns-consolidation-
 export { default as ThreePLPerformanceScorecardView } from './3pl-performance-scorecard-view'
 export { default as QualityInspectionAutomationView } from './quality-inspection-automation-view'
 export { default as SupplierRiskManagementView } from './supplier-risk-management-view'
+export { default as PredictiveDemandForecastingView } from './predictive-demand-forecasting-view'
 
