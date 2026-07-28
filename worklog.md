@@ -1,5 +1,64 @@
 ---
-Task ID: 166
+Task ID: 167
+Agent: Main (Cron Review - Round 167)
+Task: R167 — Parcel Sorting & Cross-Dock Automation module
+
+Work Log:
+- Read worklog.md (R166 latest, 96 modules)
+- Build ✅ | TSC src/ ✅ (0 errors)
+- Code-level QA: R166 registrations verified (AGVFleetManagementView, Bot icon, all 4 files)
+- agent-browser QA: dev server OOM — known issue, skipped
+
+- Created R167: Parcel Sorting & Cross-Dock Automation module
+  * NEW FILE: src/components/modules/parcel-sorting-crossdock-view.tsx (~1023 lines)
+  * 5 tabs: Dashboard | Sorting Lanes | Parcel Tracker | Cross-Dock Ops | Routes & Alerts
+  * Theme: Pink + Cyan + Violet (#ec4899, #06b6d4, #8b5cf6), CSS prefix: psd-*
+  * Tab 0 (Dashboard): Live clock, 6 KPIs (active lanes/total parcels/sorted today/avg sort speed/cross-dock efficiency/exceptions), 24h parcel flow ComposedChart (inbound+sorted+dispatched bars + exceptions line), lane type PieChart, hub performance RadarChart (6 hubs, throughput+efficiency), courier volume BarChart (8 Indian couriers), dock status visual grid (20 docks, 3 types: inbound/outbound/cross-dock with utilization bars)
+  * Tab 1 (Sorting Lanes): 30 sorting lanes across 8 hubs (6 types: Linear Sorter/Tilt Tray/Cross Belt/Bombay Sorter/Shoe Sorter/Pusher Sorter), search by ID/name/hub, status filter pills (active/idle/maintenance/error/changeover), sortable table (11 columns: ID/type/status/speed/parcels per hour/volume-capacity/error rate/uptime/route/hub), volume utilization bars, paginated 15 rows/page. Lane detail drawer: gradient header (pink=active, red=error, amber=maintenance), 6-field info grid, 3 metric cards (speed/throughput/uptime), performance stats, 4 action buttons
+  * Tab 2 (Parcel Tracker): 500 parcels, search by ID/AWB/courier, priority filter (express/priority/standard/economy), courier filter (8 Indian couriers), sortable table (12 columns: ID/AWB/priority/status/courier/service/weight/route/lane/value/time in hub), INR value formatting, parcel detail drawer with dimensions/route/scanning/tracking info, FRAGILE badge, Rescan/Re-sort/Track actions
+  * Tab 3 (Cross-Dock Ops): 4 KPIs (total batches/in progress/completed/failed), 40 cross-dock batches with visual cards showing: inbound→outbound truck flow, dock routing, sort progress bar, SLA progress bar (color-coded when approaching limit), efficiency percentage, batch detail drawer with 13-field info grid
+  * Tab 4 (Routes & Alerts): 12 sorting routes with destination/parcel queue/departure/status, 3 alert summary KPIs (critical unack/warnings/acknowledged), 15 alert list with severity, metric tracking (value vs threshold), ACK/PENDING status
+
+- CSS: scripts/r167-css.css (~195 lines, psd-* prefix)
+- Registered in 4 files: index.ts, page.tsx, app-store.ts (icon: GitFork, group: operations), app-layout.tsx (GitFork added to imports + iconMap)
+- Initial TS error (1): Outbox icon not exported from lucide-react — replaced with Send
+- Clean build after fix, 0 TS errors in src/
+
+LINT: 0 | BUILD: passes | SRC TS ERRORS: 0
+COMMIT: 05051b9
+
+Stage Summary:
+- NEW MODULE: Parcel Sorting & Cross-Dock Automation (97 modules total, was 96)
+- ~1023-line component + ~195 lines CSS
+- 30 sorting lanes with 6 conveyor types across 8 Indian hubs
+- 500 parcels with 8 Indian courier partners (Delhivery/DTDC/BlueDart/XpressBees/Ecom Express/Shadowfax/Spoton/Amazon Transport)
+- 40 cross-dock batches with SLA tracking
+- 20 docks (inbound/outbound/cross-dock) with utilization visualization
+- 12 sorting routes, 15 alerts
+- 3 detail drawers (Lane/Parcel/Batch)
+- Total globals.css: 37,951 lines (+192)
+
+## Updated Project Status (Post Round 167)
+- STATUS: STABLE + PARCEL SORTING & CROSS-DOCK MODULE (97 modules)
+- MODULES (97): All previous 96 + Parcel Sorting & Cross-Dock Automation
+- LINT: 0 errors | BUILD: passes | SRC TS ERRORS: 0
+- Total globals.css: 37,951 lines
+
+KNOWN ISSUES:
+- Dev server cannot maintain connection for agent-browser QA (OOM in container)
+- Git local/remote divergence
+- Pre-existing TS errors in non-src files (skills/)
+
+PRIORITY NEXT:
+  1. Extract inline drawers to shared components
+  2. Multi-warehouse switching
+  3. Dashboard home page widgets
+  4. CSS audit: 38000+ classes
+  5. Resolve git local/remote divergence
+  6. Cross-module navigation
+  7. Warehouse Safety & Compliance Management
+  8. Reverse Logistics & Returns Hub
+---
 Agent: Main (Cron Review - Round 166)
 Task: R166 — AGV Fleet Management module
 
