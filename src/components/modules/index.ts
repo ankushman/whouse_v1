@@ -85,3 +85,4 @@ export { default as ReturnsQualityInspectionView } from './returns-quality-inspe
 export { default as CODPaymentReconciliationView } from './cod-payment-reconciliation-view'
 export { default as WarrantyGuaranteeView } from './warranty-guarantee-view'
 export { default as InsuranceClaimsView } from './insurance-claims-view'
+export { default as LastMileDeliveryView } from './last-mile-delivery-view'
