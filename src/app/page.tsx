@@ -80,6 +80,7 @@ import ThirdPartyLogisticsView from "@/components/modules/third-party-logistics-
 import DocumentManagementView from "@/components/modules/document-management-view"
 import MultiChannelFulfillmentView from "@/components/modules/multi-channel-fulfillment-view"
 import QualityControlView from "@/components/modules/quality-control-view"
+import VehicleFleetTransportView from "@/components/modules/vehicle-fleet-transport-view"
 import { ShiftHandoverView } from "@/components/modules/shift-handover-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -160,6 +161,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "document-management": DocumentManagementView,
   "multi-channel-fulfillment": MultiChannelFulfillmentView,
   "quality-control": QualityControlView,
+  "vehicle-fleet-transport": VehicleFleetTransportView,
   "shift-handover": ShiftHandoverView,
 }
 

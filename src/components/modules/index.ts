@@ -71,3 +71,4 @@ export { default as ThirdPartyLogisticsView } from './third-party-logistics-view
 export { default as DocumentManagementView } from './document-management-view'
 export { default as MultiChannelFulfillmentView } from './multi-channel-fulfillment-view'
 export { default as QualityControlView } from './quality-control-view'
+export { default as VehicleFleetTransportView } from './vehicle-fleet-transport-view'
