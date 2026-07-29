@@ -137,4 +137,6 @@ export { default as ChassisPoolMgmtView } from './chassis-pool-mgmt-view'
 export { default as DockDoorOptimizationView } from './dock-door-optimization-view'
 export { default as YardOperationsView } from './yard-trucking-view'
 export { default as FirstMileCollectionView } from './first-mile-collection-view'
+export { default as LastMileEnhancementView } from './last-mile-enhancement-view'
+export { default as SupplyChainVisibilityView } from './supply-chain-visibility-view'
 

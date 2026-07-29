@@ -147,6 +147,8 @@ import ChassisPoolMgmtView from "@/components/modules/chassis-pool-mgmt-view"
 import DockDoorOptimizationView from "@/components/modules/dock-door-optimization-view"
 import YardOperationsView from "@/components/modules/yard-trucking-view"
 import FirstMileCollectionView from "@/components/modules/first-mile-collection-view"
+import LastMileEnhancementView from "@/components/modules/last-mile-enhancement-view"
+import SupplyChainVisibilityView from "@/components/modules/supply-chain-visibility-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -293,6 +295,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "dock-door-optimization": DockDoorOptimizationView,
   "yard-operations": YardOperationsView,
   "first-mile-collection": FirstMileCollectionView,
+  "last-mile-enhancement": LastMileEnhancementView,
+  "supply-chain-visibility": SupplyChainVisibilityView,
 }
 
 
