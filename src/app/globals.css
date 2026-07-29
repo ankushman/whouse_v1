@@ -46776,3 +46776,95 @@ html.theme-transition body {
 .dark .lac-container ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .lac-container ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.2); }
 .dark .lac-container ::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.35); }
+
+/* ============================================================================
+ * R214a: Drone Delivery Hub (ddh-*)
+ * Theme: Sky Blue #0284c7 + Emerald #059669
+ * ============================================================================ */
+
+.ddh-kpi-card { animation: ddh-fade-up 0.4s ease-out both; }
+.ddh-kpi-card:nth-child(1) { animation-delay: 0.03s; }
+.ddh-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.ddh-kpi-card:nth-child(3) { animation-delay: 0.09s; }
+.ddh-kpi-card:nth-child(4) { animation-delay: 0.12s; }
+.ddh-kpi-card:nth-child(5) { animation-delay: 0.15s; }
+.ddh-kpi-card:nth-child(6) { animation-delay: 0.18s; }
+.ddh-kpi-card:nth-child(7) { animation-delay: 0.21s; }
+.ddh-kpi-card:nth-child(8) { animation-delay: 0.24s; }
+@keyframes ddh-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.ddh-chart-card { transition: box-shadow 0.25s ease, border-color 0.25s ease; }
+.ddh-chart-card:hover { box-shadow: 0 0 16px rgba(2,132,199,0.12); border-color: rgba(2,132,199,0.2); }
+
+.ddh-pulse-active { animation: ddh-pa 1.5s ease-in-out infinite; }
+@keyframes ddh-pa { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.ddh-pulse-error { animation: ddh-pe 1.2s ease-in-out infinite; }
+@keyframes ddh-pe { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.ddh-pulse-critical { animation: ddh-pc 1.0s ease-in-out infinite; }
+@keyframes ddh-pc { 0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.4); } 50% { box-shadow: 0 0 8px 3px rgba(2,132,199,0.15); } }
+.ddh-pulse-charge { animation: ddh-pch 1.8s ease-in-out infinite; }
+@keyframes ddh-pch { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.ddh-pulse-warning { animation: ddh-pw 1.3s ease-in-out infinite; }
+@keyframes ddh-pw { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.ddh-action-btn { transition: all 0.2s ease; }
+.ddh-action-btn:hover { transform: scale(1.05); border-color: rgba(2,132,199,0.4); }
+
+.ddh-container table tbody tr:nth-child(even) { background-color: rgba(2,132,199,0.02); }
+.ddh-container table tbody tr:hover { background-color: rgba(2,132,199,0.05); }
+
+.dark .ddh-kpi-card { background: linear-gradient(145deg, rgba(15,23,42,0.9), rgba(15,23,42,0.95)); }
+.dark .ddh-chart-card { background: rgba(15,23,42,0.6); }
+.dark .ddh-chart-card:hover { box-shadow: 0 0 20px rgba(2,132,199,0.08); border-color: rgba(2,132,199,0.15); }
+.dark .ddh-container table tbody tr:nth-child(even) { background-color: rgba(2,132,199,0.03); }
+.dark .ddh-container table tbody tr:hover { background-color: rgba(2,132,199,0.06); }
+.dark .ddh-container ::-webkit-scrollbar { width: 6px; height: 6px; }
+.dark .ddh-container ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .ddh-container ::-webkit-scrollbar-thumb { background: rgba(2,132,199,0.2); }
+.dark .ddh-container ::-webkit-scrollbar-thumb:hover { background: rgba(2,132,199,0.35); }
+
+/* ============================================================================
+ * R214b: Digital Freight Marketplace (dfm-*)
+ * Theme: Blue #3b82f6 + Emerald #059669
+ * ============================================================================ */
+
+.dfm-kpi-card { animation: dfm-fade-up 0.4s ease-out both; }
+.dfm-kpi-card:nth-child(1) { animation-delay: 0.03s; }
+.dfm-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.dfm-kpi-card:nth-child(3) { animation-delay: 0.09s; }
+.dfm-kpi-card:nth-child(4) { animation-delay: 0.12s; }
+.dfm-kpi-card:nth-child(5) { animation-delay: 0.15s; }
+.dfm-kpi-card:nth-child(6) { animation-delay: 0.18s; }
+.dfm-kpi-card:nth-child(7) { animation-delay: 0.21s; }
+.dfm-kpi-card:nth-child(8) { animation-delay: 0.24s; }
+@keyframes dfm-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.dfm-chart-card { transition: box-shadow 0.25s ease, border-color 0.25s ease; }
+.dfm-chart-card:hover { box-shadow: 0 0 16px rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.2); }
+
+.dfm-contract-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.dfm-contract-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59,130,246,0.1); }
+
+.dfm-pulse-active { animation: dfm-pa 1.5s ease-in-out infinite; }
+@keyframes dfm-pa { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.dfm-pulse-warning { animation: dfm-pw 1.3s ease-in-out infinite; }
+@keyframes dfm-pw { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.dfm-pulse-error { animation: dfm-pe 1.2s ease-in-out infinite; }
+@keyframes dfm-pe { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.dfm-action-btn { transition: all 0.2s ease; }
+.dfm-action-btn:hover { transform: scale(1.05); border-color: rgba(59,130,246,0.4); }
+
+.dfm-container table tbody tr:nth-child(even) { background-color: rgba(59,130,246,0.02); }
+.dfm-container table tbody tr:hover { background-color: rgba(59,130,246,0.05); }
+
+.dark .dfm-kpi-card { background: linear-gradient(145deg, rgba(15,23,42,0.9), rgba(15,23,42,0.95)); }
+.dark .dfm-chart-card { background: rgba(15,23,42,0.6); }
+.dark .dfm-chart-card:hover { box-shadow: 0 0 20px rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.15); }
+.dark .dfm-contract-card { background: rgba(15,23,42,0.7); }
+.dark .dfm-container table tbody tr:nth-child(even) { background-color: rgba(59,130,246,0.03); }
+.dark .dfm-container table tbody tr:hover { background-color: rgba(59,130,246,0.06); }
+.dark .dfm-container ::-webkit-scrollbar { width: 6px; height: 6px; }
+.dark .dfm-container ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .dfm-container ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.2); }
+.dark .dfm-container ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.35); }

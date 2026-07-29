@@ -155,6 +155,8 @@ import ReverseLogisticsEnhancementView from "@/components/modules/reverse-logist
 import WarehouseAutomationView from "@/components/modules/warehouse-automation-view"
 import SmartPackagingHubView from "@/components/modules/smart-packaging-hub-view"
 import LogisticsAICommandView from "@/components/modules/logistics-ai-command-view"
+import DroneDeliveryHubView from "@/components/modules/drone-delivery-hub-view"
+import DigitalFreightMarketplaceView from "@/components/modules/digital-freight-marketplace-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -309,6 +311,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-automation": WarehouseAutomationView,
   "smart-packaging-hub": SmartPackagingHubView,
   "logistics-ai-command": LogisticsAICommandView,
+  "drone-delivery-hub": DroneDeliveryHubView,
+  "digital-freight-marketplace": DigitalFreightMarketplaceView,
 }
 
 

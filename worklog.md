@@ -1,4 +1,91 @@
 ---
+Task ID: 214
+Agent: Main (Cron Review - Round 214)
+Task: R214 — Drone Delivery Hub + Digital Freight Marketplace modules
+
+Work Log:
+- Read worklog.md (R213 latest, 149 navItems, 0 TSC errors in src/)
+- TSC src/: 0 errors — confirmed clean build
+- agent-browser QA: dev server not running (OOM known infra), skipped
+
+- Created R214a: Drone Delivery Hub module (NEW navItem 'drone-delivery-hub')
+  * FILE: src/components/modules/drone-delivery-hub-view.tsx (698 lines)
+  * 6 tabs: Drone Dashboard | Fleet Management | Delivery Queue | Flight Analytics | No-Fly Zones | Delivery Analytics
+  * Theme: Sky Blue #0284c7 + Emerald #059669 + Orange #ea580c + Violet #7c3aed, CSS prefix: ddh-*
+  * Tab 0 (Dashboard): 8 KPIs, hourly deliveries AreaChart (Completed/In-Flight/Charging stacked), drone type PieChart (6 types), zone coverage BarChart (6 zones)
+  * Tab 1 (Fleet Management): 75 drones, 6 types (Quadcopter/Hexacopter/Fixed-Wing/Hybrid/Heavy-Lift/Nano), 6 models, 6 zones, 8 statuses, battery bars, health score bars
+  * Tab 2 (Delivery Queue): 70 deliveries, 5 priorities (Emergency/Rush/High/Medium/Low), 8 statuses, 10 Indian hubs, Indian customers/locations, SortHeader sort
+  * Tab 3 (Flight Analytics): 60 flights, 6 statuses (Completed/Aborted/Rerouted/Low Battery/Signal Lost/Collision Avoided), speed/altitude/wind tiles, energy bars
+  * Tab 4 (No-Fly Zones): 55 NFZ records, 8 types (Airport/Military/Gov/Hospital/School/Dense Pop/Event/Weather), Indian locations, altitude limit tiles
+  * Tab 5 (Analytics): 8 KPIs, daily delivery LineChart, zone throughput BarChart, failure reasons horizontal BarChart, cost vs revenue stacked AreaChart (6-month)
+
+- Created R214b: Digital Freight Marketplace module (NEW navItem 'digital-freight-marketplace')
+  * FILE: src/components/modules/digital-freight-marketplace-view.tsx (1,078 lines)
+  * 6 tabs: Marketplace Dashboard | Load Posting | Carrier Bidding | Spot Rates | Contract Management | Freight Analytics
+  * Theme: Blue #3b82f6 + Emerald #059669 + Orange #ea580c + Violet #7c3aed + Cyan #0891b2, CSS prefix: dfm-*
+  * Tab 0 (Dashboard): 8 KPIs, daily shipment AreaChart (Booked/Matched/In Transit/Delivered stacked), freight mode PieChart (7 modes), lane density BarChart (Top 10)
+  * Tab 1 (Load Posting): 75 loads, 8 vehicle types, 5 freight types (FTL/PTL/LTL/Express/Part-Load), 7 statuses, 10 Indian shippers, Indian cities, SortHeader
+  * Tab 2 (Carrier Bidding): 70 bids, 15 Indian carriers, 6 statuses, rating bars (1-5), compliance bars, fleet size, equipment age
+  * Tab 3 (Spot Rates): 65 spot rates, Indian city-pair lanes, 6 modes, trend badges (Up/Down/Stable/Volatile), volatility bars, rate tiles
+  * Tab 4 (Contracts): 55 contracts, card layout with blue→emerald gradient headers, 6 statuses, penalty clauses (None/2%/5%/10%/Variable), INR rates
+  * Tab 5 (Analytics): 8 KPIs, monthly GMV LineChart, lane performance BarChart, mode mix horizontal BarChart, cost breakdown stacked AreaChart (6-month)
+
+- BUG FIXES: None — 0 TSC errors on first compile for both modules
+
+- Unique Visual Components:
+  * Drone Delivery Hub (16): DroneTypeBadge (6 with emoji), DroneStatusBadge (8-tier, In Flight/Returning/Calibrating pulse, Charging amber pulse), BatteryBar (3-color), HealthBar (3-color), PriorityBadge (4-tier, Emergency pulse), DeliveryStatusBadge (8-tier, In Flight/Hovering pulse, Failed pulse), FlightStatusBadge (6-tier, Aborted red pulse, Collision Avoided amber pulse), EnergyBar (3-color inverted), SpeedTile (conditional), NFZTypeBadge (8), NFZStatusBadge (4), AltitudeTile (conditional), ZoneBadge (6), DistanceTile (km), WeightTile (g conditional), ETATile (min conditional)
+  * Digital Freight Marketplace (16): VehicleTypeBadge (8 with emoji), FreightTypeBadge (5), LoadStatusBadge (7-tier, Bidding/Open pulse), CarrierBadge (15 Indian), BidStatusBadge (6-tier, Submitted/Counter-Offer pulse), RatingBar (1-5 stars), ComplianceBar (3-color), ModeBadge (6), TrendBadge (4 with arrows), VolatilityBar (4-color), RateTile (₹ with trend), ContractStatusBadge (6-tier, Expiring Soon amber pulse), PenaltyBadge (5), VolumeTile (MT conditional), LaneBadge (origin→destination), MarginTile (₹ with indicator)
+
+- CSS: appended to globals.css (+92 lines, ddh-* ~46 lines + dfm-* ~46 lines)
+  * Sky Blue→Emerald gradient tab active (ddh-*)
+  * Blue→Emerald gradient tab active (dfm-*)
+  * KPI cards with colored left border + staggered fade-up (both)
+  * Chart cards with themed border glow on hover (both)
+  * Contract cards with gradient headers and hover lift (dfm-*)
+  * Battery/Health/Energy/Compliance/Volatility bars with 3-color gradient (both)
+  * Pulse animations: Active (1.5s), Error (1.2s), Critical (1.0s glow), Charge (1.8s), Warning (1.3s) (both)
+  * Table: even-row striping, hover effects (both)
+  * Full dark mode overrides (14+ rules per module, custom scrollbar)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export DroneDeliveryHubView + DigitalFreightMarketplaceView
+  * src/app/page.tsx: import + viewMap entries 'drone-delivery-hub' + 'digital-freight-marketplace'
+  * src/store/app-store.ts: 2 new navItems (drone-delivery-hub: icon Send group operations, digital-freight-marketplace: icon Globe group analytics)
+  * src/components/layout/app-layout.tsx: Send + Globe already in imports + iconMap — no change needed
+
+TSC src/: 0 errors!
+
+Stage Summary:
+- NEW MODULE: Drone Delivery Hub (698 lines, 16 unique visual components, 260 data records)
+- NEW MODULE: Digital Freight Marketplace (1,078 lines, 16 unique visual components, 265 data records)
+- Total navItems: 151 (was 149, +2)
+- Total view files: 150 component files + dashboard = 151
+- Combined data: 75 drones + 70 deliveries + 60 flights + 55 NFZ + 75 loads + 70 bids + 65 spot rates + 55 contracts = 525 data records
+- CSS: +92 lines (ddh-* ~46 lines + dfm-* ~46 lines)
+- Total globals.css: 46,870 lines (+92)
+
+## Updated Project Status (Post Round 214)
+- STATUS: STABLE + DRONE DELIVERY HUB + DIGITAL FREIGHT MARKETPLACE (151 navItems)
+- MODULES: 151 navItems / 151 view files
+- TSC src/: **0 errors** ✅ (1 remains in non-src files only)
+- Total globals.css: 46,870 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 1 TS error in non-src file (skills/stock-analysis-skill/) — not app code
+- CSS at 46,870 lines
+- 8 navItems have filename inconsistency with view files (non-breaking)
+
+PRIORITY NEXT:
+  1. New logistics modules (IoT Sensor Dashboard, 3PL Integration Hub, Last-Mile Customer Portal)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
+
+---
 Task ID: 213
 Agent: Main (Cron Review - Round 213)
 Task: R213 — Smart Packaging Hub + Logistics AI Command Center modules

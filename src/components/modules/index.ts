@@ -145,4 +145,6 @@ export { default as ReverseLogisticsEnhancementView } from './reverse-logistics-
 export { default as WarehouseAutomationView } from './warehouse-automation-view'
 export { default as SmartPackagingHubView } from './smart-packaging-hub-view'
 export { default as LogisticsAICommandView } from './logistics-ai-command-view'
+export { default as DroneDeliveryHubView } from './drone-delivery-hub-view'
+export { default as DigitalFreightMarketplaceView } from './digital-freight-marketplace-view'
 
