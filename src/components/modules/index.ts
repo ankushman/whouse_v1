@@ -153,4 +153,6 @@ export { default as LastMileCustomerPortalView } from './last-mile-customer-port
 export { default as ColdChainMonitorView } from './cold-chain-monitor-view'
 export { FleetManagementProView } from './fleet-management-pro-view'
 export { default as CrossDockOperationsHubView } from './cross-dock-operations-hub-view'
+export { default as CustomsTradeComplianceView } from './customs-trade-compliance-view'
+export { default as ReturnsProcessingCenterView } from './returns-processing-center-view'
 

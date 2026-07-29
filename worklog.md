@@ -1,4 +1,96 @@
 ---
+Task ID: 218
+Agent: Main (Cron Review - Round 218)
+Task: R218 — Customs & Trade Compliance + Returns Processing Center modules
+
+Work Log:
+- Read worklog.md (R217 latest, 157 navItems, 0 TSC errors in src/)
+- TSC src/: 0 errors — confirmed clean build
+- agent-browser QA: dev server not running (OOM known infra), skipped
+
+- Created R218a: Customs & Trade Compliance module (NEW navItem 'customs-trade-compliance')
+  * FILE: src/components/modules/customs-trade-compliance-view.tsx (589 lines)
+  * 6 tabs: Compliance Dashboard | Import Shipments | Export Shipments | Duty & Taxation | Licenses & Certifications | Risk & Analytics
+  * Theme: Rose #e11d48 + Amber #d97706 + Blue #3b82f6 + Emerald #059669 + Violet #7c3aed + Cyan #0891b2, CSS prefix: ctc-*
+  * Tab 0 (Dashboard): 8 KPIs, monthly clearance trend AreaChart (Cleared/Held/Rejected stacked), shipment type PieChart (8 types), port-wise clearance BarChart (10 Indian ports)
+  * Tab 1 (Import Shipments): 75 imports, 8 statuses (Pending/Customs Hold/Under Examination/Duty Assessed/Cleared/Released/Rejected/Quarantine), 10 Indian ports (Nhava Sheva/JNPT/Mundra/Chennai/Kolkata/Hazira/Tuticorin/Cochin/Vizag/Kandla), 8 shipment types with emoji, 10 origin countries with flags, HS Code, BOE No, IGM No, Container No, Duty (₹), CHA, Risk level
+  * Tab 2 (Export Shipments): 70 exports, 8 statuses (Documentation/Customs Filing/Inspection/Cleared/Loaded/Departed/Returned/Cancelled), destination countries, FOB Value (₹), Shipping Bill No, LET No, Vessel Name, EDPMS status
+  * Tab 3 (Duty & Taxation): 55 duty records, gradient cards (rose for duty, amber for tax), 6 duty types (Basic Customs/Countervailing/Anti-Dumping/IGST/Cess/Surcharge), Duty Rate Bar, Section reference, Settlement status
+  * Tab 4 (Licenses): 65 licenses, 8 types (IEC/RCMC/AD Code/FSSAI/BIS/NSIC/ISO 9001/AGMARK), Expiry Soon pulse, Compliance Score Bar (3-color), Renewal status
+  * Tab 5 (Analytics): 8 KPIs, monthly duty collection LineChart (12 months), risk category PieChart (5 levels), top HS codes horizontal BarChart, port performance stacked AreaChart (4 ports, 6 months)
+
+- Created R218b: Returns Processing Center module (NEW navItem 'returns-processing-center')
+  * FILE: src/components/modules/returns-processing-center-view.tsx (641 lines)
+  * 6 tabs: Returns Dashboard | Return Requests | Quality Inspection | Refund Processing | Resale & Disposition | Returns Analytics
+  * Theme: Amber #d97706 + Emerald #059669 + Rose #e11d48 + Blue #3b82f6 + Violet #7c3aed + Cyan #0891b2, CSS prefix: rpc-*
+  * Tab 0 (Dashboard): 8 KPIs, daily return volume AreaChart (Refund/Replace/Reject stacked), return reason PieChart (8 reasons), platform-wise BarChart (8 Indian platforms)
+  * Tab 1 (Return Requests): 75 returns, 8 statuses (Requested/Picked Up/In Transit/Received/Inspecting/Approved/Refunded/Rejected), 8 reasons, 8 Indian e-commerce platforms (Amazon/Flipkart/Myntra/Meesho/Snapdeal/Nykaa/Ajio/JioMart), 12 cities, categories, 15 customer names, Order ID, Pickup slot
+  * Tab 2 (Quality Inspection): 70 inspections, 6 statuses (Pending/In Progress/Passed/Failed/Partially Passed/On Hold), 8 defect types, 6 resolutions, severity (Critical/High/Medium/Low), inspector names, time
+  * Tab 3 (Refund Processing): 55 refund records, gradient cards (emerald for refund, amber for replacement), 5 methods (UPI/NEFT/Wallet/Credit Note/Bank Transfer), satisfaction stars (1-5), processing time
+  * Tab 4 (Resale & Disposition): 65 items, 6 disposition types, grade badges (A+/A/B/C/D), Condition Bar, markdown %, 8 platforms, days to resell
+  * Tab 5 (Analytics): 8 KPIs, monthly return trend LineChart (returns count + refund amount), category return rate BarChart, top reasons horizontal BarChart, financial impact stacked AreaChart (6 months, Refund/Logistics/Replacement/Recovery)
+
+- BUG FIXES: Fixed 2 TSC errors (app-store.ts used invalid roles 'compliance' and 'customer_service')
+  * Changed to valid roles: compliance→finance, customer_service→operator
+  * Result: 0 src/ TSC errors
+
+- Unique Visual Components:
+  * Customs & Trade Compliance (16): ShipmentStatusBadge (8-tier with pulses), PortBadge (10 Indian ports), ShipmentTypeBadge (8 with emoji), OriginCountryBadge (10 with flags), DutyTypeBadge (6 with color coding), DutyRateBar (3-color), LicenseTypeBadge (8), LicenseStatusBadge (4-tier with expiry pulse), ComplianceScoreBar (3-color), RiskBadge (5-tier, Critical/Prohibited pulse+glow), CHABadge (10 CHA names), HSCodeTile, DutyTile (₹), FOBValueTile (₹), ClearanceTimeTile (hrs), ContainerTile
+  * Returns Processing Center (16): ReturnStatusBadge (8-tier with pulses), ReturnReasonBadge (8 reasons), PlatformBadge (8 Indian e-commerce with color coding), InspectionStatusBadge (6-tier with pulse), DefectTypeBadge (8 types), ResolutionBadge (6 with ArrowLeftRight icon), SeverityBadge (4-tier, Critical pulse+glow), RefundMethodBadge (5 with emoji icons), RefundStatusBadge (5-tier with pulse), GradeBadge (A+/A/B/C/D with gradient), DispositionBadge (6 with Recycle icon), ConditionBar (5-color), SatisfactionBar (1-5 stars), ReturnTile (₹), MarkdownTile (%), ResolutionTimeTile (days)
+
+- CSS: appended to globals.css (+118 lines, ctc-* ~59 lines + rpc-* ~59 lines)
+  * Rose→Amber gradient tab active (ctc-*)
+  * Amber→Emerald gradient tab active (rpc-*)
+  * KPI cards with colored left border + staggered fade-up (both)
+  * Chart cards with themed border glow on hover (both)
+  * Duty cards (rose gradient) vs Tax cards (amber gradient) with hover lift (ctc-*)
+  * Refund cards (emerald gradient) vs Replacement cards (amber gradient) with hover lift (rpc-*)
+  * Grade badges with gradient backgrounds for A+/A (rpc-*)
+  * Risk badge with critical glow shadow (ctc-*)
+  * Severity badge with critical glow shadow (rpc-*)
+  * Expiry pulse (amber, 1.3s) and Critical pulse (red, 1.0s with scale transform) (both)
+  * Table: even-row striping, hover effects (both)
+  * Full dark mode overrides (both)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export CustomsTradeComplianceView + ReturnsProcessingCenterView (both default)
+  * src/app/page.tsx: import CustomsTradeComplianceView + ReturnsProcessingCenterView, viewMap entries
+  * src/store/app-store.ts: 2 new navItems (customs-trade-compliance: icon Gavel group operations, returns-processing-center: icon Recycle group operations)
+  * src/components/layout/app-layout.tsx: Gavel + Recycle already in imports + iconMap — no change needed
+
+TSC src/: 0 errors!
+
+Stage Summary:
+- NEW MODULE: Customs & Trade Compliance (589 lines, 16 unique visual components, 265 data records)
+- NEW MODULE: Returns Processing Center (641 lines, 16 unique visual components, 265 data records)
+- Total navItems: 159 (was 157, +2)
+- Total view files: 158 component files + dashboard = 159
+- Combined data: 75 imports + 70 exports + 55 duties + 65 licenses + 75 returns + 70 inspections + 55 refunds + 65 dispositions = 530 data records
+- CSS: +118 lines (ctc-* ~59 lines + rpc-* ~59 lines)
+- Total globals.css: 47,289 lines (+118)
+
+## Updated Project Status (Post Round 218)
+- STATUS: STABLE + CUSTOMS & TRADE COMPLIANCE + RETURNS PROCESSING CENTER (159 navItems)
+- MODULES: 159 navItems / 159 view files
+- TSC src/: **0 errors** ✅ (non-src errors remain in examples/mini-services/scripts — not app code)
+- Total globals.css: 47,289 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- Non-src TSC errors in examples/, mini-services/, scripts/ — not application code
+- CSS at 47,289 lines
+- 8 navItems have filename inconsistency with view files (non-breaking)
+
+PRIORITY NEXT:
+  1. New logistics modules (E-commerce Fulfillment Hub, Warehouse Safety Management, Logistics Analytics Pro)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
+
+---
 Task ID: 217
 Agent: Main (Cron Review - Round 217)
 Task: R217 — Fleet Management Pro + Cross-Dock Operations Hub modules

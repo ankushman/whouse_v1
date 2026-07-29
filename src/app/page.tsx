@@ -163,6 +163,8 @@ import LastMileCustomerPortalView from "@/components/modules/last-mile-customer-
 import ColdChainMonitorView from "@/components/modules/cold-chain-monitor-view"
 import { FleetManagementProView } from "@/components/modules/fleet-management-pro-view"
 import CrossDockOperationsHubView from "@/components/modules/cross-dock-operations-hub-view"
+import CustomsTradeComplianceView from "@/components/modules/customs-trade-compliance-view"
+import ReturnsProcessingCenterView from "@/components/modules/returns-processing-center-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -325,6 +327,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "cold-chain-monitor": ColdChainMonitorView,
   "fleet-management-pro": FleetManagementProView,
   "cross-dock-operations-hub": CrossDockOperationsHubView,
+  "customs-trade-compliance": CustomsTradeComplianceView,
+  "returns-processing-center": ReturnsProcessingCenterView,
 }
 
 
