@@ -46967,3 +46967,103 @@ html.theme-transition body {
 .dark .tpl-container ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .tpl-container ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); }
 .dark .tpl-container ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.35); }
+
+/* ============================================================================
+ * R216a — Last-Mile Customer Portal (lmc-*) — Blue #3b82f6 + Emerald #059669
+ * ============================================================================ */
+.lmc-tab-trigger { font-size: 11px; padding: 6px 12px; transition: all 0.2s; }
+.lmc-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #3b82f6, #059669); color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(59,130,246,0.25); }
+.lmc-tab-trigger:hover:not([data-state="active"]) { background: rgba(59,130,246,0.08); color: #3b82f6; }
+
+.lmc-kpi-card { border-left: 3px solid #3b82f6; animation: lmc-fade-up 0.5s ease both; }
+.lmc-kpi-card:nth-child(1) { animation-delay: 0.02s; }
+.lmc-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.lmc-kpi-card:nth-child(3) { animation-delay: 0.10s; }
+.lmc-kpi-card:nth-child(4) { animation-delay: 0.14s; }
+.lmc-kpi-card:nth-child(5) { animation-delay: 0.18s; }
+.lmc-kpi-card:nth-child(6) { animation-delay: 0.22s; }
+.lmc-kpi-card:nth-child(7) { animation-delay: 0.26s; }
+.lmc-kpi-card:nth-child(8) { animation-delay: 0.30s; }
+@keyframes lmc-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.lmc-chart-card { transition: border-color 0.3s, box-shadow 0.3s; border: 1px solid rgba(59,130,246,0.15); }
+.lmc-chart-card:hover { border-color: rgba(59,130,246,0.35); box-shadow: 0 0 12px rgba(59,130,246,0.08); }
+
+.lmc-table-header { background: linear-gradient(135deg, rgba(59,130,246,0.06), rgba(5,150,105,0.04)); }
+.lmc-table-row:nth-child(even) { background-color: rgba(59,130,246,0.02); }
+.lmc-table-row:hover { background-color: rgba(59,130,246,0.06); transition: background-color 0.15s; }
+
+.lmc-pulse-active { animation: lmc-pulse 1.5s ease-in-out infinite; }
+.lmc-pulse-error { animation: lmc-pulse-error 1.2s ease-in-out infinite; }
+.lmc-pulse-warning { animation: lmc-pulse-warning 1.3s ease-in-out infinite; }
+@keyframes lmc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes lmc-pulse-error { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes lmc-pulse-warning { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.lmc-platinum-glow { box-shadow: 0 0 8px rgba(212,175,55,0.4); animation: lmc-shimmer 2s ease-in-out infinite; }
+@keyframes lmc-shimmer { 0%, 100% { box-shadow: 0 0 8px rgba(212,175,55,0.4); } 50% { box-shadow: 0 0 16px rgba(212,175,55,0.7); } }
+
+.lmc-sheet-header { position: relative; overflow: hidden; }
+.lmc-sheet-header::after { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); pointer-events: none; }
+
+.dark .lmc-kpi-card { border-left-color: rgba(59,130,246,0.5); }
+.dark .lmc-chart-card { border-color: rgba(59,130,246,0.1); }
+.dark .lmc-chart-card:hover { border-color: rgba(59,130,246,0.25); box-shadow: 0 0 12px rgba(59,130,246,0.05); }
+.dark .lmc-table-header { background: linear-gradient(135deg, rgba(59,130,246,0.04), rgba(5,150,105,0.02)); }
+.dark .lmc-table-row:nth-child(even) { background-color: rgba(59,130,246,0.03); }
+.dark .lmc-table-row:hover { background-color: rgba(59,130,246,0.08); }
+
+/* ============================================================================
+ * R216b — Cold Chain Monitor (ccm-*) — Cyan #0891b2 + Blue #3b82f6
+ * ============================================================================ */
+.ccm-tab-trigger { font-size: 11px; padding: 6px 12px; transition: all 0.2s; }
+.ccm-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #0891b2, #3b82f6); color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(8,145,178,0.25); }
+.ccm-tab-trigger:hover:not([data-state="active"]) { background: rgba(8,145,178,0.08); color: #0891b2; }
+
+.ccm-kpi-card { border-left: 3px solid #0891b2; animation: ccm-fade-up 0.5s ease both; }
+.ccm-kpi-card:nth-child(1) { animation-delay: 0.02s; }
+.ccm-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.ccm-kpi-card:nth-child(3) { animation-delay: 0.10s; }
+.ccm-kpi-card:nth-child(4) { animation-delay: 0.14s; }
+.ccm-kpi-card:nth-child(5) { animation-delay: 0.18s; }
+.ccm-kpi-card:nth-child(6) { animation-delay: 0.22s; }
+.ccm-kpi-card:nth-child(7) { animation-delay: 0.26s; }
+.ccm-kpi-card:nth-child(8) { animation-delay: 0.30s; }
+@keyframes ccm-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.ccm-chart-card { transition: border-color 0.3s, box-shadow 0.3s; border: 1px solid rgba(8,145,178,0.15); }
+.ccm-chart-card:hover { border-color: rgba(8,145,178,0.35); box-shadow: 0 0 12px rgba(8,145,178,0.08); }
+
+.ccm-table-header { background: linear-gradient(135deg, rgba(8,145,178,0.06), rgba(59,130,246,0.04)); }
+.ccm-table-row:nth-child(even) { background-color: rgba(8,145,178,0.02); }
+.ccm-table-row:hover { background-color: rgba(8,145,178,0.06); transition: background-color 0.15s; }
+
+.ccm-pulse-active { animation: ccm-pulse 1.5s ease-in-out infinite; }
+.ccm-pulse-error { animation: ccm-pulse-error 1.2s ease-in-out infinite; }
+.ccm-pulse-warning { animation: ccm-pulse-warning 1.3s ease-in-out infinite; }
+.ccm-pulse-critical { animation: ccm-pulse-critical 1.0s ease-in-out infinite; box-shadow: 0 0 8px rgba(225,29,72,0.6); }
+@keyframes ccm-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes ccm-pulse-error { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes ccm-pulse-warning { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes ccm-pulse-critical { 0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(225,29,72,0.6); } 50% { opacity: 0.7; box-shadow: 0 0 16px rgba(225,29,72,0.9); } }
+
+.ccm-temp-blue { color: #0891b2; }
+.ccm-temp-green { color: #059669; }
+.ccm-temp-amber { color: #d97706; }
+.ccm-temp-red { color: #e11d48; }
+.ccm-temp-tile { padding: 4px 8px; border-radius: 6px; font-family: monospace; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; }
+
+.ccm-sheet-header { position: relative; overflow: hidden; }
+.ccm-sheet-header::after { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); pointer-events: none; }
+
+.ccm-frost-border { background: linear-gradient(90deg, rgba(8,145,178,0.05), rgba(59,130,246,0.08), rgba(8,145,178,0.05)); border-left: 3px solid; }
+.ccm-frost-critical { border-color: #e11d48; }
+.ccm-frost-warning { border-color: #d97706; }
+.ccm-frost-normal { border-color: #0891b2; }
+
+.dark .ccm-kpi-card { border-left-color: rgba(8,145,178,0.5); }
+.dark .ccm-chart-card { border-color: rgba(8,145,178,0.1); }
+.dark .ccm-chart-card:hover { border-color: rgba(8,145,178,0.25); box-shadow: 0 0 12px rgba(8,145,178,0.05); }
+.dark .ccm-table-header { background: linear-gradient(135deg, rgba(8,145,178,0.04), rgba(59,130,246,0.02)); }
+.dark .ccm-table-row:nth-child(even) { background-color: rgba(8,145,178,0.03); }
+.dark .ccm-table-row:hover { background-color: rgba(8,145,178,0.08); }

@@ -159,6 +159,8 @@ import DroneDeliveryHubView from "@/components/modules/drone-delivery-hub-view"
 import DigitalFreightMarketplaceView from "@/components/modules/digital-freight-marketplace-view"
 import IoTSensorDashboardView from "@/components/modules/iot-sensor-dashboard-view"
 import ThreePLIntegrationHubView from "@/components/modules/3pl-integration-hub-view"
+import LastMileCustomerPortalView from "@/components/modules/last-mile-customer-portal-view"
+import ColdChainMonitorView from "@/components/modules/cold-chain-monitor-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -317,6 +319,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "digital-freight-marketplace": DigitalFreightMarketplaceView,
   "iot-sensor-dashboard": IoTSensorDashboardView,
   "3pl-integration-hub": ThreePLIntegrationHubView,
+  "last-mile-customer-portal": LastMileCustomerPortalView,
+  "cold-chain-monitor": ColdChainMonitorView,
 }
 
 

@@ -149,4 +149,6 @@ export { default as DroneDeliveryHubView } from './drone-delivery-hub-view'
 export { default as DigitalFreightMarketplaceView } from './digital-freight-marketplace-view'
 export { default as IoTSensorDashboardView } from './iot-sensor-dashboard-view'
 export { default as ThreePLIntegrationHubView } from './3pl-integration-hub-view'
+export { default as LastMileCustomerPortalView } from './last-mile-customer-portal-view'
+export { default as ColdChainMonitorView } from './cold-chain-monitor-view'
 

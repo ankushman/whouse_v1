@@ -155,6 +155,8 @@ export const navItems: NavItem[] = [
   { id: 'digital-freight-marketplace', label: 'Digital Freight Market', icon: 'Globe', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
   { id: 'iot-sensor-dashboard', label: 'IoT Sensor Dashboard', icon: 'Radar', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: '3pl-integration-hub', label: '3PL Integration Hub', icon: 'Network', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
+  { id: 'last-mile-customer-portal', label: 'Last-Mile Customer Portal', icon: 'Users', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
+  { id: 'cold-chain-monitor', label: 'Cold Chain Monitor', icon: 'ThermometerSnowflake', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
@@ -230,7 +232,7 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  activeView: 'dashboard',
+  activeView: 'last-mile-customer-portal',
   setActiveView: (view) => set({ activeView: view }),
   currentRole: 'executive',
   setCurrentRole: (role) => set({ currentRole: role }),

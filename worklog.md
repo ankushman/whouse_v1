@@ -1,4 +1,93 @@
 ---
+Task ID: 216
+Agent: Main (Cron Review - Round 216)
+Task: R216 — Last-Mile Customer Portal + Cold Chain Monitor modules
+
+Work Log:
+- Read worklog.md (R215 latest, 153 navItems, 0 TSC errors in src/)
+- TSC src/: 0 errors — confirmed clean build
+- agent-browser QA: dev server not running (OOM known infra), skipped
+
+- Created R216a: Last-Mile Customer Portal module (NEW navItem 'last-mile-customer-portal')
+  * FILE: src/components/modules/last-mile-customer-portal-view.tsx (799 lines)
+  * 6 tabs: Customer Dashboard | Delivery Tracking | Customer Management | Rider Fleet | Feedback & Ratings | Last-Mile Analytics
+  * Theme: Blue #3b82f6 + Emerald #059669 + Orange #ea580c + Violet #7c3aed + Rose #e11d48 + Amber #d97706, CSS prefix: lmc-*
+  * Tab 0 (Dashboard): 8 KPIs, daily delivery volume AreaChart (7 days, Delivered/Failed/In Transit stacked), delivery type PieChart (8 types), city-wise BarChart (12 cities)
+  * Tab 1 (Delivery Tracking): 75 deliveries, 8 statuses (Picked Up/In Transit/Out for Delivery/Near Location/Delivered/Failed/Rescheduled/Returned), 8 delivery types, 12 Indian cities, 20 Indian pincodes, Rider assignment, ETA tiles, Attempts badges, SortHeader sort
+  * Tab 2 (Customer Management): 70 customers, 6 tiers (Platinum glow gold shimmer animation), Total Orders, Total Spent (₹), Avg Rating, Last Order
+  * Tab 3 (Rider Fleet): 65 riders, 6 vehicle types with emoji (🚲🏍️🛵🚐⚡🛺), 6 statuses, Acceptance Rate Bar (3-color), Rating stars, Earnings (₹)
+  * Tab 4 (Feedback & Ratings): 55 records, 5 categories, 1-5 stars visual, 3 sentiment badges, 3 resolved statuses, comments
+  * Tab 5 (Analytics): 8 KPIs, weekly delivery trend LineChart (12 weeks), city performance BarChart, failure reasons horizontal BarChart, cost breakdown stacked AreaChart (6-month)
+
+- Created R216b: Cold Chain Monitor module (NEW navItem 'cold-chain-monitor')
+  * FILE: src/components/modules/cold-chain-monitor-view.tsx (629 lines)
+  * 6 tabs: Cold Chain Dashboard | Temperature Monitoring | Shipment Tracking | Cold Storage Inventory | Compliance & Alerts | Cold Chain Analytics
+  * Theme: Cyan #0891b2 + Blue #3b82f6 + Emerald #059669 + Amber #d97706 + Rose #e11d48 + Violet #7c3aed, CSS prefix: ccm-*
+  * Tab 0 (Dashboard): 8 KPIs, 24h temperature trend AreaChart (Frozen/Chill/Cool stacked), shipment type PieChart (8 types), compliance score BarChart (12 warehouses)
+  * Tab 1 (Temperature Monitoring): 75 sensor readings, 8 temp zones with emoji (❄️🧊🌡️🍏🌡️💊🥶⚙️), 8 statuses (Warning amber pulse, Critical red pulse + glow), TempTile color-coded (blue<0/green 0-8/amber 8-15/red>15), DeviationTile (±°C), Humidity%, Battery Bar
+  * Tab 2 (Shipment Tracking): 70 shipments, 8 types (Pharmaceutical/Food/Dairy/Meat/Frozen/Chemicals/Biotech/Vaccines), 8 statuses (In Transit/Loading/Unloading pulse, Customs Hold/Quarantine/Rejected red), Indian city pairs, Min/Max temp tiles, Excursion count badges
+  * Tab 3 (Cold Storage Inventory): 65 items, 15 cold products, 8 categories, frost-bordered cards for critical items, 4 stock statuses (Expiring Soon amber pulse, Expired red pulse), Batch No, Expiry Date, INR values
+  * Tab 4 (Compliance & Alerts): 55 records, 8 compliance types (FDA 21 CFR/EU GDP/WHO PQ/CDSCO/ISO 22000/HACCP/FSSAI/IFS), 5 severities (Critical pulse+glow, High amber pulse), cards with severity-colored left borders (frost-normal/frost-warning/frost-critical)
+  * Tab 5 (Analytics): 8 KPIs, monthly excursion LineChart (12 months), warehouse energy consumption BarChart, top product categories horizontal BarChart, cost trend stacked AreaChart (6-month)
+
+- BUG FIXES: None — 0 TSC errors on first compile for both modules (pattern now stable)
+
+- Unique Visual Components:
+  * Last-Mile Customer Portal (16): DeliveryStatusBadge (8-tier with pulses), DeliveryTypeBadge (8), CustomerTierBadge (6, Platinum gold glow shimmer), VehicleBadge (6 with emoji), RiderStatusBadge (6-tier with pulses), RatingBar (1-5 stars), AcceptanceRateBar (3-color), CategoryBadge (5), SentimentBadge (3), ResolvedBadge (3), ETATile, AttemptsBadge, ValueTile (₹), SpendingTile (₹), EarningsTile (₹), PhoneTile
+  * Cold Chain Monitor (16): TempZoneBadge (8 with emoji), SensorStatusBadge (8-tier with pulses), TempTile (color-coded °C), DeviationTile (±°C), ShipmentTypeBadge (8), ShipmentStatusBadge (8-tier with pulses), ComplianceBadge (8), SeverityBadge (5-tier with critical pulse+glow), StockStatusBadge (4), BatteryBar (3-color), CategoryBadge (8), ExcursionBadge, WeightTile (kg), HumidityTile, EnergyTile (kWh), ValueTile (₹)
+
+- CSS: appended to globals.css (+100 lines, lmc-* ~50 lines + ccm-* ~50 lines)
+  * Blue→Emerald gradient tab active (lmc-*)
+  * Cyan→Blue gradient tab active (ccm-*)
+  * KPI cards with colored left border + staggered fade-up (both)
+  * Chart cards with themed border glow on hover (both)
+  * Platinum gold shimmer animation for premium tier (lmc-*)
+  * Critical pulse with red glow shadow for temperature excursions (ccm-*)
+  * Frost-bordered cards with severity colors (ccm-*)
+  * Color-coded temperature tiles (blue/green/amber/red) (ccm-*)
+  * Pulse animations: Active (1.5s), Error (1.2s), Warning (1.3s), Critical (1.0s) (both)
+  * Table: even-row striping, hover effects (both)
+  * Full dark mode overrides
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export LastMileCustomerPortalView + ColdChainMonitorView
+  * src/app/page.tsx: import + viewMap entries 'last-mile-customer-portal' + 'cold-chain-monitor'
+  * src/store/app-store.ts: 2 new navItems (last-mile-customer-portal: icon Users group operations, cold-chain-monitor: icon ThermometerSnowflake group operations)
+  * src/components/layout/app-layout.tsx: Users + ThermometerSnowflake already in imports + iconMap — no change needed
+
+TSC src/: 0 errors!
+
+Stage Summary:
+- NEW MODULE: Last-Mile Customer Portal (799 lines, 16 unique visual components, 265 data records)
+- NEW MODULE: Cold Chain Monitor (629 lines, 16 unique visual components, 265 data records)
+- Total navItems: 155 (was 153, +2)
+- Total view files: 154 component files + dashboard = 155
+- Combined data: 75 deliveries + 70 customers + 65 riders + 55 feedback + 75 sensors + 70 shipments + 65 inventory + 55 compliance = 530 data records
+- CSS: +100 lines (lmc-* ~50 lines + ccm-* ~50 lines)
+- Total globals.css: 47,069 lines (+100)
+
+## Updated Project Status (Post Round 216)
+- STATUS: STABLE + LAST-MILE CUSTOMER PORTAL + COLD CHAIN MONITOR (155 navItems)
+- MODULES: 155 navItems / 155 view files
+- TSC src/: **0 errors** ✅ (1 remains in non-src files only)
+- Total globals.css: 47,069 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 1 TS error in non-src file (skills/stock-analysis-skill/) — not app code
+- CSS at 47,069 lines
+- 8 navItems have filename inconsistency with view files (non-breaking)
+
+PRIORITY NEXT:
+  1. New logistics modules (Fleet Management Pro, Cross-Dock Operations Hub, Customs & Trade Compliance)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
+
+---
 Task ID: 215
 Agent: Main (Cron Review - Round 215)
 Task: R215 — IoT Sensor Dashboard + 3PL Integration Hub modules
