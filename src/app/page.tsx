@@ -169,6 +169,8 @@ import EcommerceFulfillmentHubView from "@/components/modules/ecommerce-fulfillm
 import WarehouseSafetyManagementView from "@/components/modules/warehouse-safety-management-view"
 import LogisticsAnalyticsProView from "@/components/modules/logistics-analytics-pro-view"
 import MultiWarehouseOperationsView from "@/components/modules/multi-warehouse-operations-view"
+import TransportNetworkHubView from "@/components/modules/transport-network-hub-view"
+import WMSDashboardProView from "@/components/modules/wms-dashboard-pro-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -337,6 +339,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-safety-management": WarehouseSafetyManagementView,
   "logistics-analytics-pro": LogisticsAnalyticsProView,
   "multi-warehouse-operations": MultiWarehouseOperationsView,
+  "transport-network-hub": TransportNetworkHubView,
+  "wms-dashboard-pro": WMSDashboardProView,
 }
 
 

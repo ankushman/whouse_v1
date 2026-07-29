@@ -159,4 +159,5 @@ export { default as EcommerceFulfillmentHubView } from './ecommerce-fulfillment-
 export { default as WarehouseSafetyManagementView } from './warehouse-safety-management-view'
 export { default as LogisticsAnalyticsProView } from './logistics-analytics-pro-view'
 export { default as MultiWarehouseOperationsView } from './multi-warehouse-operations-view'
-
+export { default as TransportNetworkHubView } from './transport-network-hub-view'
+export { default as WMSDashboardProView } from './wms-dashboard-pro-view'
