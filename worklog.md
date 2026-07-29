@@ -1,7 +1,111 @@
 ---
-Task ID: 208
-Agent: Main (Cron Review - Round 208)
-Task: R208 — Chassis Pool Management module
+Task ID: 209
+Agent: Main (Cron Review - Round 209)
+Task: R209 — Yard Trucking Enhancement + First-Mile Collection Hub modules
+
+Work Log:
+- Read worklog.md (R208 latest, 139 navItems, 0 TSC errors in src/)
+- TSC src/: 5 errors in dock-door-optimization-view.tsx
+  * Lines 131-132: `pick([...])` missing seed argument → added seed + wrapped ri() with String()
+  * Lines 415, 417, 494: `Pause` and `Play` icons not imported → added to lucide-react import
+  * Line 494: `w-3.` typo → `w-3.5`
+  → Fixed all 5 errors, TSC src/ back to 0
+
+- agent-browser QA: dev server OOM — known infra issue, skipped
+
+- Created R209a: Yard Trucking Enhancement module (NEW navItem 'yard-operations')
+  * FILE: src/components/modules/yard-trucking-view.tsx (660 lines)
+  * 6 tabs: Yard Dashboard | Spotting Operations | Shunting & Trailers | Yard Equipment | Task Management | Yard Analytics
+  * Theme: Slate #475569 + Teal #0d9488 + Orange #ea580c + Indigo #4f46e5 + Amber #d97706, CSS prefix: yt-*
+  * Tab 0 (Dashboard): 8 KPIs, weekly ops AreaChart (spots+moves), zone utilization BarChart, spot type PieChart
+  * Tab 1 (Spotting Operations): 60 spot records, 8 types, 8 statuses, 8 yard zones, priority tracking
+  * Tab 2 (Shunting & Trailers): 55 trailers, 10 types, 8 statuses, GPS coordinates, maintenance due
+  * Tab 3 (Yard Equipment): 50 equipment (yard trucks, reach stackers, RTG cranes, etc.), utilization rings, fuel bars
+  * Tab 4 (Task Management): 45 tasks, 8 types, 8 statuses, priority, assigned to, turnaround timer
+  * Tab 5 (Yard Analytics): 8 analytics KPIs, daily ops LineChart, equip utilization BarChart, spot time BarChart, cost analysis AreaChart (6-month labor+fuel+maintenance)
+
+- BUG FIXES in yard-trucking-view.tsx (caught during TSC):
+  * Removed non-existent `MeterSquare` and `WrenchIcon` from lucide-react imports
+  * Added `ArrowRight` to lucide-react imports
+  * Removed duplicate "In Transit" key in STATUS_COLORS
+  * Fixed `ZONE_ZONES` → `YARD_ZONES` reference
+  * Added missing `</AreaChart>`, `</PieChart>`, `</LineChart>` closing tags
+
+- Created R209b: First-Mile Collection Hub module (NEW navItem 'first-mile-collection')
+  * FILE: src/components/modules/first-mile-collection-view.tsx (859 lines)
+  * 6 tabs: Collection Dashboard | Pickup Orders | Route Optimization | Driver & Vehicle Fleet | Supplier Management | Collection Analytics
+  * Theme: Blue #3b82f6 + Emerald #059669 + Orange #ea580c + Violet #7c3aed + Teal #0d9488, CSS prefix: fmc-*
+  * Tab 0 (Dashboard): 8 KPIs, weekly pickup AreaChart, hub-wise BarChart, commodity PieChart
+  * Tab 1 (Pickup Orders): 65 orders, Indian suppliers/commodities, pickup types, statuses
+  * Tab 2 (Route Optimization): 55 routes, efficiency scores, fuel cost, stop count
+  * Tab 3 (Driver & Vehicle Fleet): 50 drivers, Indian vehicle types (Tata Ace, Mahindra Bolero, etc.), ratings, earnings
+  * Tab 4 (Supplier Management): 55 suppliers, 8 categories (Farmer, Dairy Farm, Manufacturer, etc.), compliance scores
+  * Tab 5 (Collection Analytics): 8 analytics KPIs, daily collection LineChart, route efficiency BarChart, supplier PieChart, cost vs revenue
+
+- BUG FIX: Resolved duplicate `YardTruckingView` export name conflict — existing `yard-trucking-dock-view` already used that name. Renamed new module export to `YardOperationsView`, navItem ID to `yard-operations`
+
+- Unique Visual Components:
+  * Yard Trucking (20): SpotStatusBadge (8-tier, multi-pulse), TrailerTypeBadge (10 colors), EquipmentTypeBadge (10 colors), FuelLevelBar (3-color gradient), UtilizationRing (conic-gradient), PriorityBadge (5-tier), LocationTile, ContainerNumberBadge, DriverInfoTile, MoveDistanceTile, GpsCoordsTile, TaskTypeBadge, MaintenanceDueIndicator, SpotRouteTile (from→to), TurnaroundTimer, YardZoneBadge, OperatorBadge, CostTile, LoadIndicator, EquipStatusBadge
+  * First-Mile Collection (22): PickupStatusBadge (8-tier, multi-pulse), CommodityBadge (12 commodities), PickupTypeBadge, RouteEfficiencyBar (3-tier), FuelCostTile, DistanceTile, StopCountBadge, DriverRatingBadge (1-5 stars), VehicleTypeBadge (Indian types), ShiftBadge, EarningsTile, SupplierCategoryBadge, ComplianceScoreBar (3-tier), PickupFrequencyBadge, LocationTile, WeightTile, QuantityTile, HubBadge, TripCounterBadge, OnTimeIndicator, CostRevenueTile, TimeVsEstimateTile
+
+- CSS: appended to globals.css (+177 lines, yt-* ~90 lines + fmc-* ~87 lines)
+  * Slate gradient tab active with glow (yt-*)
+  * Blue→Indigo gradient tab active with glow (fmc-*)
+  * KPI cards with colored left border + gradient top stripe + staggered fade-up (both)
+  * Shimmer loading effect (both)
+  * Chart cards with themed border glow on hover (both)
+  * Fuel level bar with 3-color gradient (yt-*)
+  * Utilization ring with conic-gradient (yt-*)
+  * Route efficiency bar (fmc-*)
+  * Compliance score bar (fmc-*)
+  * Cyan/orange/red pulse animations (both)
+  * Table: even-row striping, hover effects (both)
+  * Sort header hover + active scale-down (both)
+  * Action button hover scale + themed border (both)
+  * Drawer themed border-left (both)
+  * Analytics cards with hover lift (both)
+  * Full dark mode overrides (18+ rules per module, custom scrollbar)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export YardOperationsView + FirstMileCollectionView
+  * src/app/page.tsx: import + viewMap entries 'yard-operations' + 'first-mile-collection'
+  * src/store/app-store.ts: 2 new navItems (yard-operations: icon Truck, first-mile-collection: icon MapPin, both group operations)
+  * src/components/layout/app-layout.tsx: Truck + MapPin already in imports + iconMap — no change needed
+
+TSC src/: 0 errors!
+
+Stage Summary:
+- BUG FIX: Eliminated 5 TSC errors from dock-door-optimization-view.tsx (missing Pause/Play imports, missing pick() seed args, typo)
+- NEW MODULE: Yard Trucking Enhancement (660 lines, 20 unique visual components, 210 data records)
+- NEW MODULE: First-Mile Collection Hub (859 lines, 22 unique visual components, 225 data records)
+- Total navItems: 141 (was 139, +2 yard-operations + first-mile-collection)
+- Total view files: 141 (140 component files + dashboard)
+- Combined data: 60 spots + 55 trailers + 50 equipment + 45 tasks + 65 pickups + 55 routes + 50 drivers + 55 suppliers = 435 data records
+- CSS: +177 lines (yt-* ~90 lines + fmc-* ~87 lines)
+- Total globals.css: 46,302 lines (+177)
+
+## Updated Project Status (Post Round 209)
+- STATUS: STABLE + YARD TRUCKING + FIRST-MILE COLLECTION (141 navItems)
+- MODULES: 141 navItems / 141 view files
+- TSC src/: **0 errors** ✅ (10 remain in non-src files only)
+- Total globals.css: 46,302 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 10 TS errors in non-src files (examples/, mini-services/, scripts/, skills/) — not app code
+- CSS at 46,302 lines
+- 8 navItems have filename inconsistency with view files (non-breaking)
+
+PRIORITY NEXT:
+  1. New logistics modules (Last-Mile Delivery, Cross-Dock Optimization, Cold Chain Enhancement)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
+
+---
 
 Work Log:
 - Read worklog.md (R207 latest, 137 navItems, 0 TSC errors in src/)

@@ -26,6 +26,7 @@ import {
   CreditCard, Clock, Warehouse, User, FileText, DollarSign, Receipt, BarChart3, Target,
   Building2, Navigation, Fuel, Layers, CircleDot, Settings, Zap, Ban, ArrowUpDown,
   Send, DoorOpen, Car, ThermometerSun, ClipboardList, Route, GaugeCircle,
+  Pause, Play,
 } from "lucide-react"
 
 // ============================================================================
@@ -128,8 +129,8 @@ function generateData() {
       endTime: `${String(ri(6, 22, seed + 6)).padStart(2, "0")}:${String(ri(0, 59, seed + 7)).padStart(2, "0")}`,
       dwellMin: ri(10, 180, seed + 8),
       priority: pick(["Critical", "High", "Normal", "Low"], seed + 9) as string,
-      truckNo: pick(["MH", "KA", "TN", "DL", "GJ", "RJ", "UP", "WB", "TS", "AP"]) + ri(10, 99, seed + 10) + String.fromCharCode(65 + ri(0, 25, seed + 11)) + ri(1000, 9999, seed + 12),
-      containerNo: pick(["MSKU", "TCNU", "CMAU", "FCIU", "TEMU", "HLBU", "OOLU", "ONEU"]) + ri(1000000, 9999999, seed + 13),
+      truckNo: pick(["MH", "KA", "TN", "DL", "GJ", "RJ", "UP", "WB", "TS", "AP"], seed + 10) as string + String(ri(10, 99, seed + 10)) + String.fromCharCode(65 + ri(0, 25, seed + 11)) + String(ri(1000, 9999, seed + 12)),
+      containerNo: pick(["MSKU", "TCNU", "CMAU", "FCIU", "TEMU", "HLBU", "OOLU", "ONEU"], seed + 13) as string + String(ri(1000000, 9999999, seed + 14)),
       weight: ri(500, 25000, seed + 14),
       volume: ri(5, 120, seed + 15),
       date: `2025-07-29`,
@@ -491,7 +492,7 @@ export default function DockDoorOptimizationView() {
                     <div><span className="text-muted-foreground">Volume</span><div className="font-medium tabular-nums">{rec.volume} CBM</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="ddo-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => { toast.success("Started", `Appt ${rec.id} started`); setDrawerOpen(false) }}><Play className="w-3. h-3.5 mr-1" />Start</Button>
+                    <Button size="sm" className="ddo-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => { toast.success("Started", `Appt ${rec.id} started`); setDrawerOpen(false) }}><Play className="w-3.5 h-3.5 mr-1" />Start</Button>
                     <Button size="sm" variant="outline" className="ddo-action-btn flex-1" onClick={() => { toast.info("Redirected", `Appt ${rec.id} redirected`); setDrawerOpen(false) }}><Navigation className="w-3.5 h-3.5 mr-1" />Redirect</Button>
                     <Button size="sm" variant="outline" className="ddo-action-btn" onClick={() => { toast.warning("Cancelled", `Appt ${rec.id} cancelled`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" />Cancel</Button>
                   </div>

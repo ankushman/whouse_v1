@@ -145,6 +145,8 @@ import BarcodeLabelView from "@/components/modules/barcode-label-view"
 import DrayageFirstMileView from "@/components/modules/drayage-first-mile-view"
 import ChassisPoolMgmtView from "@/components/modules/chassis-pool-mgmt-view"
 import DockDoorOptimizationView from "@/components/modules/dock-door-optimization-view"
+import YardOperationsView from "@/components/modules/yard-trucking-view"
+import FirstMileCollectionView from "@/components/modules/first-mile-collection-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -289,6 +291,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "drayage-first-mile": DrayageFirstMileView,
   "chassis-pool-mgmt": ChassisPoolMgmtView,
   "dock-door-optimization": DockDoorOptimizationView,
+  "yard-operations": YardOperationsView,
+  "first-mile-collection": FirstMileCollectionView,
 }
 
 

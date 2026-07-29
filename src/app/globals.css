@@ -46123,3 +46123,180 @@ html.theme-transition body {
 .dark .cpm-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .cpm-root ::-webkit-scrollbar-thumb { background: rgba(51,65,85,0.2); }
 .dark .cpm-root ::-webkit-scrollbar-thumb:hover { background: rgba(51,65,85,0.35); }
+
+/* ========================================================================
+ * Yard Trucking Enhancement (yt-*) prefix
+ * ======================================================================== */
+.yt-tab-list { background: linear-gradient(135deg, #334155, #475569); }
+.yt-tab-trigger { color: #cbd5e1; }
+.yt-tab-trigger[data-state="active"] { background: rgba(16,185,129,0.15); color: #fff; box-shadow: 0 0 12px rgba(16,185,129,0.3); }
+.yt-shimmer { position: relative; overflow: hidden; }
+.yt-shimmer::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(148,163,184,0.08), transparent); animation: yt-shimmer-anim 2s infinite; pointer-events: none; }
+@keyframes yt-shimmer-anim { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.yt-kpi-card { border-left: 3px solid; background: linear-gradient(180deg, rgba(51,65,85,0.03) 0%, transparent 40%); border-radius: 0.5rem; animation: yt-fade-up 0.5s ease-out both; }
+.yt-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.yt-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.yt-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.yt-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.yt-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.yt-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.yt-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.yt-kpi-card:nth-child(8) { animation-delay: 350ms; }
+@keyframes yt-fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.yt-chart-card { border-radius: 0.5rem; transition: all 0.2s; border: 1px solid rgba(148,163,184,0.15); }
+.yt-chart-card:hover { border-color: rgba(51,65,85,0.35); box-shadow: 0 0 16px rgba(51,65,85,0.08); }
+.yt-status-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.yt-trailer-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.yt-equip-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.yt-equip-status { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.yt-priority-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.yt-spot-type-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; background: rgba(51,65,85,0.08); color: #475569; }
+.yt-task-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.yt-container-badge { border-radius: 6px; font-size: 10px; }
+.yt-pulse-cyan { animation: yt-pulse-c 1.5s ease-in-out infinite; }
+@keyframes yt-pulse-c { 0%, 100% { box-shadow: 0 0 0 0 rgba(8,145,178,0.4); } 50% { box-shadow: 0 0 8px 2px rgba(8,145,178,0.2); } }
+.yt-pulse-orange { animation: yt-pulse-o 1.5s ease-in-out infinite; }
+@keyframes yt-pulse-o { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.4); } 50% { box-shadow: 0 0 8px 2px rgba(234,88,12,0.2); } }
+.yt-pulse-red { animation: yt-pulse-r 1.2s ease-in-out infinite; }
+@keyframes yt-pulse-r { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 8px 2px rgba(220,38,38,0.2); } }
+.yt-fuel-bar { height: 16px; border-radius: 8px; background: rgba(148,163,184,0.1); overflow: hidden; }
+.yt-fuel-bar-fill { height: 100%; border-radius: 8px; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; min-width: 32px; }
+.yt-fuel-bar-text { font-size: 9px; font-weight: 700; color: #fff; }
+.yt-util-ring { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.yt-util-ring-inner { width: 28px; height: 28px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; }
+.yt-location-tile { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; border-left: 3px solid; background: rgba(148,163,184,0.04); }
+.yt-driver-tile { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; background: rgba(148,163,184,0.04); }
+.yt-distance-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(148,163,184,0.04); }
+.yt-gps-tile { display: flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 6px; background: rgba(148,163,184,0.04); }
+.yt-maint-indicator { border-radius: 6px; padding: 2px 8px; font-weight: 600; }
+.yt-route-tile { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; background: rgba(148,163,184,0.04); font-size: 11px; }
+.yt-route-from { font-weight: 500; color: #475569; }
+.yt-route-to { font-weight: 500; color: #059669; }
+.yt-route-dist { margin-left: auto; color: #94a3b8; font-size: 10px; }
+.yt-turnaround { font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; }
+.yt-zone-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.yt-operator-badge { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; background: rgba(148,163,184,0.04); font-size: 12px; }
+.yt-cost-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(148,163,184,0.04); }
+.yt-load-indicator { display: flex; flex-direction: column; gap: 4px; }
+.yt-analytics-card { border-radius: 0.5rem; transition: all 0.2s; border-left: 3px solid; }
+.yt-analytics-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(51,65,85,0.1); }
+.yt-equip-card { border-radius: 0.5rem; transition: all 0.2s; border: 1px solid rgba(148,163,184,0.15); }
+.yt-equip-card:hover { border-color: rgba(51,65,85,0.3); box-shadow: 0 4px 12px rgba(51,65,85,0.08); }
+.yt-table-row { font-size: 12px; }
+.yt-table-row-hover:hover { background: rgba(51,65,85,0.04); }
+.yt-table-row-hover:nth-child(even) { background: rgba(148,163,184,0.02); }
+.yt-table-row-hover:nth-child(even):hover { background: rgba(51,65,85,0.04); }
+.yt-sort-header { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; cursor: pointer; padding: 2px 4px; border-radius: 4px; transition: all 0.15s; opacity: 0.7; }
+.yt-sort-header:hover { background: rgba(51,65,85,0.06); opacity: 1; }
+.yt-sort-header.active { background: rgba(51,65,85,0.1); opacity: 1; transform: scale(0.98); }
+.yt-action-btn { transition: all 0.15s; border-radius: 6px; }
+.yt-action-btn:hover { transform: scale(1.03); border-color: rgba(51,65,85,0.3); }
+.yt-drawer { border-left: 3px solid #475569; }
+/* Dark mode overrides for Yard Trucking */
+.dark .yt-kpi-card { background: linear-gradient(180deg, rgba(30,41,59,0.3) 0%, transparent 40%); }
+.dark .yt-chart-card { border-color: rgba(148,163,184,0.08); }
+.dark .yt-chart-card:hover { border-color: rgba(51,65,85,0.3); box-shadow: 0 0 12px rgba(51,65,85,0.15); }
+.dark .yt-location-tile { background: rgba(30,41,59,0.3); }
+.dark .yt-driver-tile { background: rgba(30,41,59,0.3); }
+.dark .yt-route-tile { background: rgba(30,41,59,0.3); }
+.dark .yt-operator-badge { background: rgba(30,41,59,0.3); }
+.dark .yt-distance-tile { background: rgba(30,41,59,0.3); }
+.dark .yt-gps-tile { background: rgba(30,41,59,0.3); }
+.dark .yt-spot-type-badge { background: rgba(30,41,59,0.2); color: #cbd5e1; }
+.dark .yt-table-row-hover:nth-child(even) { background: rgba(30,41,59,0.15); }
+.dark .yt-table-row-hover:hover { background: rgba(30,41,59,0.25); }
+.dark .yt-sort-header:hover { background: rgba(148,163,184,0.08); }
+.dark .yt-equip-card { border-color: rgba(148,163,184,0.06); }
+.dark .yt-equip-card:hover { border-color: rgba(148,163,184,0.15); }
+.dark .yt-fuel-bar { background: rgba(30,41,59,0.4); }
+.dark .yt-util-ring-inner { background: #1e293b; }
+.dark .yt-analytics-card:hover { box-shadow: 0 4px 12px rgba(51,65,85,0.2); }
+
+/* ========================================================================
+ * First-Mile Collection Hub (fmc-*) prefix
+ * ======================================================================== */
+.fmc-tab-list { background: linear-gradient(135deg, #3b82f6, #4f46e5); }
+.fmc-tab-trigger { color: #e0e7ff; }
+.fmc-tab-trigger[data-state="active"] { background: rgba(16,185,129,0.15); color: #fff; box-shadow: 0 0 12px rgba(16,185,129,0.3); }
+.fmc-shimmer { position: relative; overflow: hidden; }
+.fmc-shimmer::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(59,130,246,0.08), transparent); animation: fmc-shimmer-anim 2s infinite; pointer-events: none; }
+@keyframes fmc-shimmer-anim { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.fmc-kpi-card { border-left: 3px solid; background: linear-gradient(180deg, rgba(59,130,246,0.03) 0%, transparent 40%); border-radius: 0.5rem; animation: fmc-fade-up 0.5s ease-out both; }
+.fmc-kpi-card:nth-child(1) { animation-delay: 0ms; }
+.fmc-kpi-card:nth-child(2) { animation-delay: 50ms; }
+.fmc-kpi-card:nth-child(3) { animation-delay: 100ms; }
+.fmc-kpi-card:nth-child(4) { animation-delay: 150ms; }
+.fmc-kpi-card:nth-child(5) { animation-delay: 200ms; }
+.fmc-kpi-card:nth-child(6) { animation-delay: 250ms; }
+.fmc-kpi-card:nth-child(7) { animation-delay: 300ms; }
+.fmc-kpi-card:nth-child(8) { animation-delay: 350ms; }
+@keyframes fmc-fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.fmc-kpi-grid { display: grid; gap: 1rem; }
+.fmc-chart-card { border-radius: 0.5rem; transition: all 0.2s; border: 1px solid rgba(59,130,246,0.15); }
+.fmc-chart-card:hover { border-color: rgba(59,130,246,0.35); box-shadow: 0 0 16px rgba(59,130,246,0.08); }
+.fmc-status-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-commodity-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-pickup-type-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-route-eff-bar { height: 14px; border-radius: 7px; background: rgba(148,163,184,0.1); overflow: hidden; }
+.fmc-route-eff-bar-fill { height: 100%; border-radius: 7px; transition: width 0.5s ease; }
+.fmc-fuel-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(59,130,246,0.04); }
+.fmc-distance-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(59,130,246,0.04); }
+.fmc-stop-badge { border-radius: 6px; padding: 2px 8px; font-weight: 600; font-size: 10px; background: rgba(59,130,246,0.08); color: #3b82f6; }
+.fmc-driver-rating { display: inline-flex; align-items: center; gap: 2px; font-size: 11px; font-weight: 600; }
+.fmc-vehicle-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-shift-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-earnings-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(5,150,105,0.04); }
+.fmc-supplier-cat-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-compliance-bar { height: 14px; border-radius: 7px; background: rgba(148,163,184,0.1); overflow: hidden; }
+.fmc-compliance-bar-fill { height: 100%; border-radius: 7px; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; }
+.fmc-freq-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-location-tile { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; background: rgba(59,130,246,0.04); }
+.fmc-weight-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(59,130,246,0.04); font-size: 11px; }
+.fmc-qty-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(59,130,246,0.04); font-size: 11px; }
+.fmc-hub-badge { border-radius: 6px; padding: 2px 8px; font-weight: 500; }
+.fmc-trip-badge { border-radius: 6px; padding: 2px 8px; font-weight: 600; background: rgba(5,150,105,0.08); color: #059669; }
+.fmc-ontime-indicator { font-weight: 700; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; }
+.fmc-cost-rev-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(59,130,246,0.04); }
+.fmc-time-est-tile { display: flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(59,130,246,0.04); font-size: 11px; }
+.fmc-drawer-header { padding: 1rem; border-radius: 0.75rem 0 0 0; }
+.fmc-table-row { font-size: 12px; }
+.fmc-table-row:hover { background: rgba(59,130,246,0.04); }
+.fmc-table-row:nth-child(even) { background: rgba(59,130,246,0.02); }
+.fmc-table-row:nth-child(even):hover { background: rgba(59,130,246,0.04); }
+.fmc-sort-header { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; cursor: pointer; padding: 2px 4px; border-radius: 4px; transition: all 0.15s; opacity: 0.7; }
+.fmc-sort-header:hover { background: rgba(59,130,246,0.06); opacity: 1; }
+.fmc-sort-header.active { background: rgba(59,130,246,0.1); opacity: 1; transform: scale(0.98); }
+.fmc-action-btn { transition: all 0.15s; border-radius: 6px; }
+.fmc-action-btn:hover { transform: scale(1.03); border-color: rgba(59,130,246,0.3); }
+.fmc-pulse-cyan { animation: fmc-pulse-c 1.5s ease-in-out infinite; }
+@keyframes fmc-pulse-c { 0%, 100% { box-shadow: 0 0 0 0 rgba(8,145,178,0.4); } 50% { box-shadow: 0 0 8px 2px rgba(8,145,178,0.2); } }
+.fmc-pulse-orange { animation: fmc-pulse-o 1.5s ease-in-out infinite; }
+@keyframes fmc-pulse-o { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.4); } 50% { box-shadow: 0 0 8px 2px rgba(234,88,12,0.2); } }
+.fmc-pulse-red { animation: fmc-pulse-r 1.2s ease-in-out infinite; }
+@keyframes fmc-pulse-r { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 8px 2px rgba(220,38,38,0.2); } }
+/* Dark mode overrides for First-Mile Collection */
+.dark .fmc-kpi-card { background: linear-gradient(180deg, rgba(30,41,59,0.3) 0%, transparent 40%); }
+.dark .fmc-chart-card { border-color: rgba(59,130,246,0.08); }
+.dark .fmc-chart-card:hover { border-color: rgba(59,130,246,0.3); box-shadow: 0 0 12px rgba(59,130,246,0.15); }
+.dark .fmc-location-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-fuel-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-distance-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-earnings-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-weight-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-qty-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-cost-rev-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-time-est-tile { background: rgba(30,41,59,0.3); }
+.dark .fmc-commodity-badge { color: #e0e7ff; }
+.dark .fmc-pickup-type-badge { color: #e0e7ff; }
+.dark .fmc-vehicle-badge { color: #e0e7ff; }
+.dark .fmc-supplier-cat-badge { color: #e0e7ff; }
+.dark .fmc-table-row:nth-child(even) { background: rgba(30,41,59,0.15); }
+.dark .fmc-table-row:hover { background: rgba(30,41,59,0.25); }
+.dark .fmc-sort-header:hover { background: rgba(148,163,184,0.08); }
+.dark .fmc-freq-badge { color: #e0e7ff; }
+.dark .fmc-hub-badge { color: #e0e7ff; }
+.dark .fmc-route-eff-bar { background: rgba(30,41,59,0.4); }
+.dark .fmc-compliance-bar { background: rgba(30,41,59,0.4); }
+.dark .fmc-root ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .fmc-root ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.2); }
+.dark .fmc-root ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.35); }

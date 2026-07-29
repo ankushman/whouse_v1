@@ -135,4 +135,6 @@ export { default as MultiModalTransportCorridorView } from './multi-modal-transp
 export { default as DrayageFirstMileView } from './drayage-first-mile-view'
 export { default as ChassisPoolMgmtView } from './chassis-pool-mgmt-view'
 export { default as DockDoorOptimizationView } from './dock-door-optimization-view'
+export { default as YardOperationsView } from './yard-trucking-view'
+export { default as FirstMileCollectionView } from './first-mile-collection-view'
 
