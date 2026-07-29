@@ -47067,3 +47067,105 @@ html.theme-transition body {
 .dark .ccm-table-header { background: linear-gradient(135deg, rgba(8,145,178,0.04), rgba(59,130,246,0.02)); }
 .dark .ccm-table-row:nth-child(even) { background-color: rgba(8,145,178,0.03); }
 .dark .ccm-table-row:hover { background-color: rgba(8,145,178,0.08); }
+
+/* ============================================================================
+ * R217a — Fleet Management Pro (fmp-*) — Emerald #059669 + Blue #3b82f6
+ * ============================================================================ */
+.fmp-tab-trigger { font-size: 11px; padding: 6px 12px; transition: all 0.2s; }
+.fmp-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #059669, #3b82f6); color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(5,150,105,0.25); }
+.fmp-tab-trigger:hover:not([data-state="active"]) { background: rgba(5,150,105,0.08); color: #059669; }
+
+.fmp-kpi-card { border-left: 3px solid #059669; animation: fmp-fade-up 0.5s ease both; }
+.fmp-kpi-card:nth-child(1) { animation-delay: 0.02s; }
+.fmp-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.fmp-kpi-card:nth-child(3) { animation-delay: 0.10s; }
+.fmp-kpi-card:nth-child(4) { animation-delay: 0.14s; }
+.fmp-kpi-card:nth-child(5) { animation-delay: 0.18s; }
+.fmp-kpi-card:nth-child(6) { animation-delay: 0.22s; }
+.fmp-kpi-card:nth-child(7) { animation-delay: 0.26s; }
+.fmp-kpi-card:nth-child(8) { animation-delay: 0.30s; }
+@keyframes fmp-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.fmp-chart-card { transition: border-color 0.3s, box-shadow 0.3s; border: 1px solid rgba(5,150,105,0.15); }
+.fmp-chart-card:hover { border-color: rgba(5,150,105,0.35); box-shadow: 0 0 12px rgba(5,150,105,0.08); }
+
+.fmp-table-header { background: linear-gradient(135deg, rgba(5,150,105,0.06), rgba(59,130,246,0.04)); }
+.fmp-table-row:nth-child(even) { background-color: rgba(5,150,105,0.02); }
+.fmp-table-row:hover { background-color: rgba(5,150,105,0.06); transition: background-color 0.15s; }
+
+.fmp-pulse-active { animation: fmp-pulse 1.5s ease-in-out infinite; }
+.fmp-pulse-error { animation: fmp-pulse-error 1.2s ease-in-out infinite; }
+.fmp-pulse-warning { animation: fmp-pulse-warning 1.3s ease-in-out infinite; }
+@keyframes fmp-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes fmp-pulse-error { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes fmp-pulse-warning { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.fmp-maint-card { background: linear-gradient(135deg, rgba(234,88,12,0.05), rgba(217,119,6,0.04)); border-left: 3px solid #ea580c; transition: transform 0.2s; }
+.fmp-maint-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(234,88,12,0.1); }
+.fmp-fuel-card { background: linear-gradient(135deg, rgba(5,150,105,0.05), rgba(59,130,246,0.04)); border-left: 3px solid #059669; transition: transform 0.2s; }
+.fmp-fuel-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.1); }
+
+.fmp-sheet-header { position: relative; overflow: hidden; }
+.fmp-sheet-header::after { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); pointer-events: none; }
+
+.dark .fmp-kpi-card { border-left-color: rgba(5,150,105,0.5); }
+.dark .fmp-chart-card { border-color: rgba(5,150,105,0.1); }
+.dark .fmp-chart-card:hover { border-color: rgba(5,150,105,0.25); box-shadow: 0 0 12px rgba(5,150,105,0.05); }
+.dark .fmp-table-header { background: linear-gradient(135deg, rgba(5,150,105,0.04), rgba(59,130,246,0.02)); }
+.dark .fmp-table-row:nth-child(even) { background-color: rgba(5,150,105,0.03); }
+.dark .fmp-table-row:hover { background-color: rgba(5,150,105,0.08); }
+
+/* ============================================================================
+ * R217b — Cross-Dock Operations Hub (cdh-*) — Orange #ea580c + Cyan #0891b2
+ * ============================================================================ */
+.cdh-tab-trigger { font-size: 11px; padding: 6px 12px; transition: all 0.2s; }
+.cdh-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #ea580c, #0891b2); color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(234,88,12,0.25); }
+.cdh-tab-trigger:hover:not([data-state="active"]) { background: rgba(234,88,12,0.08); color: #ea580c; }
+
+.cdh-kpi-card { border-left: 3px solid #ea580c; animation: cdh-fade-up 0.5s ease both; }
+.cdh-kpi-card:nth-child(1) { animation-delay: 0.02s; }
+.cdh-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.cdh-kpi-card:nth-child(3) { animation-delay: 0.10s; }
+.cdh-kpi-card:nth-child(4) { animation-delay: 0.14s; }
+.cdh-kpi-card:nth-child(5) { animation-delay: 0.18s; }
+.cdh-kpi-card:nth-child(6) { animation-delay: 0.22s; }
+.cdh-kpi-card:nth-child(7) { animation-delay: 0.26s; }
+.cdh-kpi-card:nth-child(8) { animation-delay: 0.30s; }
+@keyframes cdh-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.cdh-chart-card { transition: border-color 0.3s, box-shadow 0.3s; border: 1px solid rgba(234,88,12,0.15); }
+.cdh-chart-card:hover { border-color: rgba(234,88,12,0.35); box-shadow: 0 0 12px rgba(234,88,12,0.08); }
+
+.cdh-table-header { background: linear-gradient(135deg, rgba(234,88,12,0.06), rgba(8,145,178,0.04)); }
+.cdh-table-row:nth-child(even) { background-color: rgba(234,88,12,0.02); }
+.cdh-table-row:hover { background-color: rgba(234,88,12,0.06); transition: background-color 0.15s; }
+
+.cdh-pulse-active { animation: cdh-pulse 1.5s ease-in-out infinite; }
+.cdh-pulse-error { animation: cdh-pulse-error 1.2s ease-in-out infinite; }
+.cdh-pulse-warning { animation: cdh-pulse-warning 1.3s ease-in-out infinite; }
+.cdh-pulse-emergency { animation: cdh-pulse-emergency 1.0s ease-in-out infinite; }
+@keyframes cdh-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes cdh-pulse-error { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes cdh-pulse-warning { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes cdh-pulse-emergency { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.02); } }
+
+.cdh-priority-card { border-left: 3px solid; transition: transform 0.2s, box-shadow 0.2s; }
+.cdh-priority-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
+.cdh-priority-emergency { border-color: #e11d48; background: linear-gradient(135deg, rgba(225,29,72,0.06), rgba(225,29,72,0.02)); }
+.cdh-priority-high { border-color: #ea580c; background: linear-gradient(135deg, rgba(234,88,12,0.05), rgba(234,88,12,0.02)); }
+.cdh-priority-medium { border-color: #d97706; background: linear-gradient(135deg, rgba(217,119,6,0.05), rgba(217,119,6,0.02)); }
+
+.cdh-status-strip { display: flex; gap: 4px; align-items: center; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; }
+.cdh-strip-available { background: rgba(5,150,105,0.1); color: #059669; }
+.cdh-strip-occupied { background: rgba(217,119,6,0.1); color: #d97706; }
+.cdh-strip-maintenance { background: rgba(225,29,72,0.1); color: #e11d48; }
+
+.cdh-sheet-header { position: relative; overflow: hidden; }
+.cdh-sheet-header::after { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); pointer-events: none; }
+
+.dark .cdh-kpi-card { border-left-color: rgba(234,88,12,0.5); }
+.dark .cdh-chart-card { border-color: rgba(234,88,12,0.1); }
+.dark .cdh-chart-card:hover { border-color: rgba(234,88,12,0.25); box-shadow: 0 0 12px rgba(234,88,12,0.05); }
+.dark .cdh-table-header { background: linear-gradient(135deg, rgba(234,88,12,0.04), rgba(8,145,178,0.02)); }
+.dark .cdh-table-row:nth-child(even) { background-color: rgba(234,88,12,0.03); }
+.dark .cdh-table-row:hover { background-color: rgba(234,88,12,0.08); }

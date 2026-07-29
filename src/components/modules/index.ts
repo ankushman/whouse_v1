@@ -151,4 +151,6 @@ export { default as IoTSensorDashboardView } from './iot-sensor-dashboard-view'
 export { default as ThreePLIntegrationHubView } from './3pl-integration-hub-view'
 export { default as LastMileCustomerPortalView } from './last-mile-customer-portal-view'
 export { default as ColdChainMonitorView } from './cold-chain-monitor-view'
+export { FleetManagementProView } from './fleet-management-pro-view'
+export { default as CrossDockOperationsHubView } from './cross-dock-operations-hub-view'
 

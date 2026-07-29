@@ -161,6 +161,8 @@ import IoTSensorDashboardView from "@/components/modules/iot-sensor-dashboard-vi
 import ThreePLIntegrationHubView from "@/components/modules/3pl-integration-hub-view"
 import LastMileCustomerPortalView from "@/components/modules/last-mile-customer-portal-view"
 import ColdChainMonitorView from "@/components/modules/cold-chain-monitor-view"
+import { FleetManagementProView } from "@/components/modules/fleet-management-pro-view"
+import CrossDockOperationsHubView from "@/components/modules/cross-dock-operations-hub-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -321,6 +323,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "3pl-integration-hub": ThreePLIntegrationHubView,
   "last-mile-customer-portal": LastMileCustomerPortalView,
   "cold-chain-monitor": ColdChainMonitorView,
+  "fleet-management-pro": FleetManagementProView,
+  "cross-dock-operations-hub": CrossDockOperationsHubView,
 }
 
 
