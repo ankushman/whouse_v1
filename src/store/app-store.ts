@@ -171,6 +171,8 @@ export const navItems: NavItem[] = [
   { id: 'last-mile-optimization', label: 'Last-mile Optimize', icon: 'Navigation', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'smart-locker-network', label: 'Smart Locker Net', icon: 'LockKeyhole', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'returns-quality-center', label: 'Returns Quality', icon: 'Microscope', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance', 'supervisor'] },
+  { id: 'hyperlocal-fulfillment', label: 'Hyperlocal Fulfill', icon: 'MapPin', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
+  { id: 'freight-lane-intelligence', label: 'Freight Lane Intel', icon: 'Route', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance', 'demand_planner'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

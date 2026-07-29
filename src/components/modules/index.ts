@@ -165,3 +165,5 @@ export { default as SupplierIntelligencePortalView } from './supplier-intelligen
 export { default as LastMileOptimizationView } from './last-mile-optimization-view'
 export { default as SmartLockerNetworkView } from './smart-locker-network-view'
 export { default as ReturnsQualityCenterView } from './returns-quality-center-view'
+export { default as HyperlocalFulfillmentView } from './hyperlocal-fulfillment-view'
+export { default as FreightLaneIntelligenceView } from './freight-lane-intelligence-view'
