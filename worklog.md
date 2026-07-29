@@ -1,4 +1,94 @@
 ---
+Task ID: 215
+Agent: Main (Cron Review - Round 215)
+Task: R215 — IoT Sensor Dashboard + 3PL Integration Hub modules
+
+Work Log:
+- Read worklog.md (R214 latest, 151 navItems, 0 TSC errors in src/)
+- TSC src/: 0 errors — confirmed clean build
+- agent-browser QA: dev server not running (OOM known infra), skipped
+
+- Created R215a: IoT Sensor Dashboard module (NEW navItem 'iot-sensor-dashboard')
+  * FILE: src/components/modules/iot-sensor-dashboard-view.tsx (703 lines)
+  * 6 tabs: Sensor Dashboard | Sensor Fleet | Real-Time Readings | Alert Management | Maintenance Tracker | Sensor Analytics
+  * Theme: Teal #0d9488 + Amber #d97706 + Blue #3b82f6 + Rose #e11d48 + Violet #7c3aed + Emerald #059669, CSS prefix: isd-*
+  * Tab 0 (Dashboard): 8 KPIs, 24h sensor readings AreaChart (Temperature/Humidity/CO2 stacked), sensor type PieChart (8 types), alerts by warehouse BarChart (12 warehouses)
+  * Tab 1 (Sensor Fleet): 75 sensors, 8 types (Temperature/Humidity/Motion/Proximity/Pressure/Light/Gas/CO2/Vibration), 8 models, 12 warehouses, 8 zones, 8 statuses, Battery Level Bar (3-color), Signal Strength Badge
+  * Tab 2 (Real-Time Readings): 70 readings, 8 metrics, color-coded ValueTile (green/amber/red), Min/Max tiles, Status Badge
+  * Tab 3 (Alert Management): 65 alerts, 8 alert types, 4 severities (Critical pulse), 6 statuses (New/Investigating pulse), Sheet with rose→violet gradient + timeline
+  * Tab 4 (Maintenance Tracker): 55 records, 8 maint types, 6 statuses (Overdue red pulse, In Progress amber pulse), cards with gradient headers, CostTile (₹)
+  * Tab 5 (Analytics): 8 KPIs, monthly uptime LineChart (12 months), alert resolution BarChart (8 types), top 10 problem warehouses horizontal BarChart, cost trend stacked AreaChart (6-month)
+
+- Created R215b: 3PL Integration Hub module (NEW navItem '3pl-integration-hub')
+  * FILE: src/components/modules/3pl-integration-hub-view.tsx (651 lines)
+  * 6 tabs: Integration Dashboard | Partner Management | Order Integration | API Gateway | Contract & Billing | Performance Analytics
+  * Theme: Indigo #6366f1 + Emerald #059669 + Orange #ea580c + Cyan #0891b2 + Rose #e11d48 + Amber #d97706, CSS prefix: tpl-*
+  * Tab 0 (Dashboard): 8 KPIs, daily sync volume AreaChart (Synced/Failed/Pending stacked, 14 days), partner type PieChart (8 types), health by type BarChart
+  * Tab 1 (Partner Management): 75 partners, 8 types (Full-Service 3PL/Warehousing/Transport/E-com/Cold Chain/Last-Mile/Cross-Dock/VAS), 16 Indian 3PL companies, SLA Compliance Bar (3-color), RatingBar (1-5 stars), Region Badge (8), SortHeader sort
+  * Tab 2 (Order Integration): 70 orders, 8 sync statuses (Synced/Failed/Pending/etc.), RetryBadge (color), Method badges, Indian cities/warehouses, SortHeader sort
+  * Tab 3 (API Gateway): 65 endpoints, 6 HTTP methods (GET/POST/PUT/PATCH/DELETE/WEBHOOK) with color badges, 6 API statuses (Healthy green, Degraded amber pulse, Down red pulse), ErrorRateBar (3-color), ResponseTimeTile (ms conditional), Uptime
+  * Tab 4 (Contract & Billing): 55 contracts, card layout with indigo→emerald gradient headers, 8 statuses (Expiring Soon amber pulse), BillingCycleBadge (6), PenaltyBadge (5), PaymentStatusBadge (3), INR values
+  * Tab 5 (Analytics): 8 KPIs, monthly order volume LineChart (12 months, 3 lines), partner performance BarChart (Top 10), API usage horizontal BarChart, cost breakdown stacked AreaChart (6-month)
+
+- BUG FIXES: Fixed 20 TSC errors in 3PL module
+  * filterData/sortedData generic constraint changed from `T extends Record<string, string | number>` to `T,` (no constraint) with `as unknown as Record<string, string | number>` double-jump cast inside
+  * sortedData call sites updated to pass sortField and sortDir as explicit parameters
+  * Result: 0 src/ TSC errors
+
+- Unique Visual Components:
+  * IoT Sensor Dashboard (16): SensorTypeBadge (8 with emoji), SensorStatusBadge (8-tier, Online/Calibrating pulse, Error red pulse, Low Battery amber pulse), BatteryLevelBar (3-color), SignalBadge (4), MetricBadge (8), ValueTile (color-coded with unit), AlertTypeBadge (8), AlertSeverityBadge (4-tier, Critical pulse), AlertStatusBadge (6-tier, New/Investigating pulse), MaintTypeBadge (8), MaintStatusBadge (6-tier, Overdue/In Progress pulse), PriorityBadge (4), ZoneBadge (8), WarehouseBadge (12), DurationTile, CostTile (₹)
+  * 3PL Integration Hub (16): PartnerTypeBadge (8 with emoji), PartnerStatusBadge (8-tier with pulses), SLAComplianceBar (3-color), RatingBar (1-5 stars), RegionBadge (8), IntegrationStatusBadge (8-tier with pulses), MethodBadge (6 with colors), APIStatusBadge (6-tier with pulses), ErrorRateBar (3-color), ResponseTimeTile (ms conditional), ContractStatusBadge (8-tier with pulses), BillingCycleBadge (6), PenaltyBadge (5), PaymentStatusBadge (3), RetryBadge (conditional color), RevenueTile (₹)
+
+- CSS: appended to globals.css (+99 lines, isd-* ~50 lines + tpl-* ~49 lines)
+  * Teal→Amber gradient tab active (isd-*)
+  * Indigo→Emerald gradient tab active (tpl-*)
+  * KPI cards with colored left border + staggered fade-up (both)
+  * Chart cards with themed border glow on hover (both)
+  * Contract cards with gradient headers and hover lift (tpl-*)
+  * Battery/SLA/Error/Compliance bars with 3-color gradient (both)
+  * Pulse animations: Active (1.5s), Error (1.2s), Warning (1.3s) (both)
+  * Table: even-row striping, hover effects (both)
+  * Full dark mode overrides (14+ rules per module, custom scrollbar)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export IoTSensorDashboardView + ThreePLIntegrationHubView
+  * src/app/page.tsx: import + viewMap entries 'iot-sensor-dashboard' + '3pl-integration-hub'
+  * src/store/app-store.ts: 2 new navItems (iot-sensor-dashboard: icon Radar group operations, 3pl-integration-hub: icon Network group analytics)
+  * src/components/layout/app-layout.tsx: Radar + Network already in imports + iconMap — no change needed
+
+TSC src/: 0 errors!
+
+Stage Summary:
+- NEW MODULE: IoT Sensor Dashboard (703 lines, 16 unique visual components, 265 data records)
+- NEW MODULE: 3PL Integration Hub (651 lines, 16 unique visual components, 265 data records)
+- Total navItems: 153 (was 151, +2)
+- Total view files: 152 component files + dashboard = 153
+- Combined data: 75 sensors + 70 readings + 65 alerts + 55 maintenance + 75 partners + 70 orders + 65 API endpoints + 55 contracts = 530 data records
+- CSS: +99 lines (isd-* ~50 lines + tpl-* ~49 lines)
+- Total globals.css: 46,969 lines (+99)
+
+## Updated Project Status (Post Round 215)
+- STATUS: STABLE + IOT SENSOR DASHBOARD + 3PL INTEGRATION HUB (153 navItems)
+- MODULES: 153 navItems / 153 view files
+- TSC src/: **0 errors** ✅ (1 remains in non-src files only)
+- Total globals.css: 46,969 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 1 TS error in non-src file (skills/stock-analysis-skill/) — not app code
+- CSS at 46,969 lines
+- 8 navItems have filename inconsistency with view files (non-breaking)
+
+PRIORITY NEXT:
+  1. New logistics modules (Last-Mile Customer Portal, Cold Chain Monitor, Fleet Management Pro)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
+
+---
 Task ID: 214
 Agent: Main (Cron Review - Round 214)
 Task: R214 — Drone Delivery Hub + Digital Freight Marketplace modules

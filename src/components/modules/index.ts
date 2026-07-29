@@ -147,4 +147,6 @@ export { default as SmartPackagingHubView } from './smart-packaging-hub-view'
 export { default as LogisticsAICommandView } from './logistics-ai-command-view'
 export { default as DroneDeliveryHubView } from './drone-delivery-hub-view'
 export { default as DigitalFreightMarketplaceView } from './digital-freight-marketplace-view'
+export { default as IoTSensorDashboardView } from './iot-sensor-dashboard-view'
+export { default as ThreePLIntegrationHubView } from './3pl-integration-hub-view'
 

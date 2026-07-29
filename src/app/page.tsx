@@ -157,6 +157,8 @@ import SmartPackagingHubView from "@/components/modules/smart-packaging-hub-view
 import LogisticsAICommandView from "@/components/modules/logistics-ai-command-view"
 import DroneDeliveryHubView from "@/components/modules/drone-delivery-hub-view"
 import DigitalFreightMarketplaceView from "@/components/modules/digital-freight-marketplace-view"
+import IoTSensorDashboardView from "@/components/modules/iot-sensor-dashboard-view"
+import ThreePLIntegrationHubView from "@/components/modules/3pl-integration-hub-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -313,6 +315,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "logistics-ai-command": LogisticsAICommandView,
   "drone-delivery-hub": DroneDeliveryHubView,
   "digital-freight-marketplace": DigitalFreightMarketplaceView,
+  "iot-sensor-dashboard": IoTSensorDashboardView,
+  "3pl-integration-hub": ThreePLIntegrationHubView,
 }
 
 
