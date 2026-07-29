@@ -167,6 +167,8 @@ import CustomsTradeComplianceView from "@/components/modules/customs-trade-compl
 import ReturnsProcessingCenterView from "@/components/modules/returns-processing-center-view"
 import EcommerceFulfillmentHubView from "@/components/modules/ecommerce-fulfillment-hub-view"
 import WarehouseSafetyManagementView from "@/components/modules/warehouse-safety-management-view"
+import LogisticsAnalyticsProView from "@/components/modules/logistics-analytics-pro-view"
+import MultiWarehouseOperationsView from "@/components/modules/multi-warehouse-operations-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -333,6 +335,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "returns-processing-center": ReturnsProcessingCenterView,
   "ecommerce-fulfillment-hub": EcommerceFulfillmentHubView,
   "warehouse-safety-management": WarehouseSafetyManagementView,
+  "logistics-analytics-pro": LogisticsAnalyticsProView,
+  "multi-warehouse-operations": MultiWarehouseOperationsView,
 }
 
 

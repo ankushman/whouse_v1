@@ -163,6 +163,8 @@ export const navItems: NavItem[] = [
   { id: 'returns-processing-center', label: 'Returns Center', icon: 'Recycle', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
   { id: 'ecommerce-fulfillment-hub', label: 'E-comm Fulfillment', icon: 'PackageCheck', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator', 'shift_lead'] },
   { id: 'warehouse-safety-management', label: 'Safety Management', icon: 'HardHat', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'shift_lead'] },
+  { id: 'logistics-analytics-pro', label: 'Analytics Pro', icon: 'ChartSpline', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'finance', 'logistics'] },
+  { id: 'multi-warehouse-operations', label: 'Multi-WH Ops', icon: 'Building2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

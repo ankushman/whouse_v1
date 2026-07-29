@@ -157,4 +157,6 @@ export { default as CustomsTradeComplianceView } from './customs-trade-complianc
 export { default as ReturnsProcessingCenterView } from './returns-processing-center-view'
 export { default as EcommerceFulfillmentHubView } from './ecommerce-fulfillment-hub-view'
 export { default as WarehouseSafetyManagementView } from './warehouse-safety-management-view'
+export { default as LogisticsAnalyticsProView } from './logistics-analytics-pro-view'
+export { default as MultiWarehouseOperationsView } from './multi-warehouse-operations-view'
 
