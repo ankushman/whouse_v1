@@ -143,4 +143,6 @@ export { default as ColdChainEnhancementView } from './cold-chain-enhancement-vi
 export { default as CrossDockOptimizationView } from './cross-dock-optimization-view'
 export { default as ReverseLogisticsEnhancementView } from './reverse-logistics-enhancement-view'
 export { default as WarehouseAutomationView } from './warehouse-automation-view'
+export { default as SmartPackagingHubView } from './smart-packaging-hub-view'
+export { default as LogisticsAICommandView } from './logistics-ai-command-view'
 

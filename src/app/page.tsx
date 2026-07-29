@@ -153,6 +153,8 @@ import ColdChainEnhancementView from "@/components/modules/cold-chain-enhancemen
 import CrossDockOptimizationView from "@/components/modules/cross-dock-optimization-view"
 import ReverseLogisticsEnhancementView from "@/components/modules/reverse-logistics-enhancement-view"
 import WarehouseAutomationView from "@/components/modules/warehouse-automation-view"
+import SmartPackagingHubView from "@/components/modules/smart-packaging-hub-view"
+import LogisticsAICommandView from "@/components/modules/logistics-ai-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -305,6 +307,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "cross-dock-optimization": CrossDockOptimizationView,
   "reverse-logistics-enhancement": ReverseLogisticsEnhancementView,
   "warehouse-automation": WarehouseAutomationView,
+  "smart-packaging-hub": SmartPackagingHubView,
+  "logistics-ai-command": LogisticsAICommandView,
 }
 
 

@@ -46682,3 +46682,97 @@ html.theme-transition body {
 .dark .wam-container ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
 .dark .wam-container ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.2); }
 .dark .wam-container ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.35); }
+
+/* ============================================================================
+ * R213a: Smart Packaging Hub (sph-*)
+ * Theme: Emerald #059669 + Orange #ea580c
+ * ============================================================================ */
+
+.sph-kpi-card { animation: sph-fade-up 0.4s ease-out both; }
+.sph-kpi-card:nth-child(1) { animation-delay: 0.03s; }
+.sph-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.sph-kpi-card:nth-child(3) { animation-delay: 0.09s; }
+.sph-kpi-card:nth-child(4) { animation-delay: 0.12s; }
+.sph-kpi-card:nth-child(5) { animation-delay: 0.15s; }
+.sph-kpi-card:nth-child(6) { animation-delay: 0.18s; }
+.sph-kpi-card:nth-child(7) { animation-delay: 0.21s; }
+.sph-kpi-card:nth-child(8) { animation-delay: 0.24s; }
+@keyframes sph-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.sph-chart-card { transition: box-shadow 0.25s ease, border-color 0.25s ease; }
+.sph-chart-card:hover { box-shadow: 0 0 16px rgba(5,150,105,0.12); border-color: rgba(5,150,105,0.2); }
+
+.sph-material-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.sph-material-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(5,150,105,0.1); }
+
+.sph-status-pulse-active { animation: sph-pulse-active 1.5s ease-in-out infinite; }
+@keyframes sph-pulse-active { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.sph-status-pulse-warning { animation: sph-pulse-warn 1.3s ease-in-out infinite; }
+@keyframes sph-pulse-warn { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.sph-severity-pulse { animation: sph-sev-pulse 1.0s ease-in-out infinite; }
+@keyframes sph-sev-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.4); } 50% { box-shadow: 0 0 6px 2px rgba(5,150,105,0.15); } }
+
+.sph-action-btn { transition: all 0.2s ease; }
+.sph-action-btn:hover { transform: scale(1.05); border-color: rgba(5,150,105,0.4); }
+
+.sph-container table tbody tr:nth-child(even) { background-color: rgba(5,150,105,0.02); }
+.sph-container table tbody tr:hover { background-color: rgba(5,150,105,0.05); }
+
+.dark .sph-kpi-card { background: linear-gradient(145deg, rgba(15,23,42,0.9), rgba(15,23,42,0.95)); }
+.dark .sph-chart-card { background: rgba(15,23,42,0.6); }
+.dark .sph-chart-card:hover { box-shadow: 0 0 20px rgba(5,150,105,0.08); border-color: rgba(5,150,105,0.15); }
+.dark .sph-material-card { background: rgba(15,23,42,0.7); }
+.dark .sph-container table tbody tr:nth-child(even) { background-color: rgba(5,150,105,0.03); }
+.dark .sph-container table tbody tr:hover { background-color: rgba(5,150,105,0.06); }
+.dark .sph-container ::-webkit-scrollbar { width: 6px; height: 6px; }
+.dark .sph-container ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .sph-container ::-webkit-scrollbar-thumb { background: rgba(5,150,105,0.2); }
+.dark .sph-container ::-webkit-scrollbar-thumb:hover { background: rgba(5,150,105,0.35); }
+
+/* ============================================================================
+ * R213b: Logistics AI Command Center (lac-*)
+ * Theme: Violet #7c3aed + Cyan #0891b2
+ * ============================================================================ */
+
+.lac-kpi-card { animation: lac-fade-up 0.4s ease-out both; }
+.lac-kpi-card:nth-child(1) { animation-delay: 0.03s; }
+.lac-kpi-card:nth-child(2) { animation-delay: 0.06s; }
+.lac-kpi-card:nth-child(3) { animation-delay: 0.09s; }
+.lac-kpi-card:nth-child(4) { animation-delay: 0.12s; }
+.lac-kpi-card:nth-child(5) { animation-delay: 0.15s; }
+.lac-kpi-card:nth-child(6) { animation-delay: 0.18s; }
+.lac-kpi-card:nth-child(7) { animation-delay: 0.21s; }
+.lac-kpi-card:nth-child(8) { animation-delay: 0.24s; }
+@keyframes lac-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.lac-chart-card { transition: box-shadow 0.25s ease, border-color 0.25s ease; }
+.lac-chart-card:hover { box-shadow: 0 0 16px rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.2); }
+
+.lac-pulse-active { animation: lac-pulse-a 1.5s ease-in-out infinite; }
+@keyframes lac-pulse-a { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.lac-pulse-error { animation: lac-pulse-e 1.2s ease-in-out infinite; }
+@keyframes lac-pulse-e { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.lac-pulse-critical { animation: lac-pulse-c 1.0s ease-in-out infinite; }
+@keyframes lac-pulse-c { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.4); } 50% { box-shadow: 0 0 8px 3px rgba(124,58,237,0.15); } }
+.lac-pulse-charge { animation: lac-pulse-ch 1.8s ease-in-out infinite; }
+@keyframes lac-pulse-ch { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.lac-pulse-warning { animation: lac-pulse-w 1.3s ease-in-out infinite; }
+@keyframes lac-pulse-w { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.lac-tte-pulse { animation: lac-tte 1.3s ease-in-out infinite; }
+@keyframes lac-tte { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.lac-action-btn { transition: all 0.2s ease; }
+.lac-action-btn:hover { transform: scale(1.05); border-color: rgba(124,58,237,0.4); }
+
+.lac-container table tbody tr:nth-child(even) { background-color: rgba(124,58,237,0.02); }
+.lac-container table tbody tr:hover { background-color: rgba(124,58,237,0.05); }
+
+.dark .lac-kpi-card { background: linear-gradient(145deg, rgba(15,23,42,0.9), rgba(15,23,42,0.95)); }
+.dark .lac-chart-card { background: rgba(15,23,42,0.6); }
+.dark .lac-chart-card:hover { box-shadow: 0 0 20px rgba(124,58,237,0.08); border-color: rgba(124,58,237,0.15); }
+.dark .lac-container table tbody tr:nth-child(even) { background-color: rgba(124,58,237,0.03); }
+.dark .lac-container table tbody tr:hover { background-color: rgba(124,58,237,0.06); }
+.dark .lac-container ::-webkit-scrollbar { width: 6px; height: 6px; }
+.dark .lac-container ::-webkit-scrollbar-track { background: rgba(15,23,42,0.1); }
+.dark .lac-container ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.2); }
+.dark .lac-container ::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.35); }

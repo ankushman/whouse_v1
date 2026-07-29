@@ -1,4 +1,92 @@
 ---
+Task ID: 213
+Agent: Main (Cron Review - Round 213)
+Task: R213 — Smart Packaging Hub + Logistics AI Command Center modules
+
+Work Log:
+- Read worklog.md (R212 latest, 147 navItems, 0 TSC errors in src/)
+- TSC src/: 0 errors — confirmed clean build
+- agent-browser QA: dev server not running (OOM known infra), skipped
+
+- Created R213a: Smart Packaging Hub module (NEW navItem 'smart-packaging-hub')
+  * FILE: src/components/modules/smart-packaging-hub-view.tsx (951 lines)
+  * 6 tabs: Packaging Dashboard | Packaging Orders | Material Inventory | Sustainability Tracker | Quality Control | Packaging Analytics
+  * Theme: Emerald #059669 + Orange #ea580c + Blue #3b82f6 + Amber #d97706, CSS prefix: sph-*
+  * Tab 0 (Dashboard): 8 KPIs, hourly throughput AreaChart (Standard/Eco/Fragile stacked), material type PieChart (8 types), package category BarChart (7 categories)
+  * Tab 1 (Packaging Orders): 75 orders, 8 package types, 5 sizes, 8 materials, 4 priorities, 6 statuses, 50+ Indian customers, INR costs, SortHeader sort
+  * Tab 2 (Material Inventory): 60 materials, 8 types, 5 grades, 5 stock statuses, 15 Indian suppliers, stock level bars with 3-color gradient
+  * Tab 3 (Sustainability Tracker): 55 records, 6 metric types (Carbon/Recycled/Plastic/Waste/Water/Energy), 4 categories, achievement bars with 3-color gradient
+  * Tab 4 (Quality Control): 65 checks, 8 check types, 4 results, 8 defect types, 4 severity levels, 7 actions, 20 Indian inspectors
+  * Tab 5 (Analytics): 8 KPIs, daily volume LineChart, material cost BarChart, defect type horizontal BarChart, cost trend stacked AreaChart (6-month)
+
+- Created R213b: Logistics AI Command Center module (NEW navItem 'logistics-ai-command')
+  * FILE: src/components/modules/logistics-ai-command-view.tsx (674 lines)
+  * 6 tabs: AI Overview | Demand Forecasting | Anomaly Detection | Route Intelligence | Predictive Maintenance | AI Analytics
+  * Theme: Violet #7c3aed + Cyan #0891b2 + Emerald #059669 + Orange #ea580c, CSS prefix: lac-*
+  * Tab 0 (AI Overview): 8 KPIs, AI model performance AreaChart (4 AI models stacked, 14 days), prediction type PieChart (8 types), model accuracy BarChart (6 models)
+  * Tab 1 (Demand Forecasting): 75 forecasts, 10 SKU categories, 8 regions, 5 time horizons, 6 AI models (LSTM/ARIMA/Prophet/XGBoost/Transformer/Ensemble), 5 statuses, confidence bars, variance tiles
+  * Tab 2 (Anomaly Detection): 65 anomalies, 8 source systems (WMS/TMS/OMS/IMS/IoT/ERP/EDI/GPS), 8 anomaly types, 4 severity levels, 6 statuses, AI score bars (3-color)
+  * Tab 3 (Route Intelligence): 60 route records, Indian cities, 8 AI recommendations, 5 modes, savings tiles (₹), CO2 tiles (kg), confidence bars
+  * Tab 4 (Predictive Maintenance): 55 predictions, 8 asset types, 8 predicted issues, 12 Indian warehouse locations, probability bars, TTE badges (<7d pulse), priority badges
+  * Tab 5 (AI Analytics): 8 KPIs, monthly accuracy LineChart, model performance BarChart, anomaly distribution horizontal BarChart, ROI stacked AreaChart (6-month)
+
+- BUG FIXES: None — 0 TSC errors on first compile for both modules
+
+- Unique Visual Components:
+  * Smart Packaging Hub (16): PackageTypeBadge (8), PackageSizeBadge (5), MaterialBadge (8), PriorityBadge (4-tier, Rush pulse), PackagingStatusBadge (6-tier), MaterialGradeBadge (5), StockStatusBadge (5-tier, Out of Stock + Low Stock pulse), StockLevelBar (3-color + threshold), MetricTypeBadge (6 sustainability), AchievementBar (3-color), QCResultBadge (4), DefectBadge (8), SeverityBadge (4, Critical pulse), ActionTakenBadge (7), ValueTile (₹), WeightTile (kg conditional)
+  * Logistics AI Command Center (17): ForecastStatusBadge (5, Active/Failed pulse), AnomalyTypeBadge (8), AnomalySeverityBadge (4, Critical pulse), AnomalyStatusBadge (6, New/Investigating pulse), AIScoreBar (3-color 0-100%), RegionBadge (8), ConfidenceBar (3-color), VarianceTile (conditional ±%), RecommendationBadge (8), RouteStatusBadge (5), SavingsTile (₹), CO2Tile (kg conditional), ProbabilityBar (3-color), TTEBadge (days, <7d pulse), PredPriorityBadge (4, Critical pulse), PredStatusBadge (6, Overdue pulse), MaintTypeBadge (4)
+
+- CSS: appended to globals.css (+94 lines, sph-* ~47 lines + lac-* ~47 lines)
+  * Emerald→Orange gradient tab active (sph-*)
+  * Violet→Cyan gradient tab active (lac-*)
+  * KPI cards with colored left border + staggered fade-up (both)
+  * Chart cards with themed border glow on hover (both)
+  * Material cards with hover lift (sph-*)
+  * Stock level bars with 3-color threshold markers (sph-*)
+  * Achievement/Confidence/Probability/AI Score bars with 3-color gradient (both)
+  * AI-themed pulse animations: Critical (violet glow), Active (1.5s), Error (1.2s), Warning (1.3s), TTE (1.3s), Charge (1.8s) (lac-*)
+  * Table: even-row striping, hover effects (both)
+  * Full dark mode overrides (14+ rules per module, custom scrollbar)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export SmartPackagingHubView + LogisticsAICommandView
+  * src/app/page.tsx: import + viewMap entries 'smart-packaging-hub' + 'logistics-ai-command'
+  * src/store/app-store.ts: 2 new navItems (smart-packaging-hub: icon PackagePlus group operations, logistics-ai-command: icon BrainCircuit group analytics)
+  * src/components/layout/app-layout.tsx: PackagePlus + BrainCircuit already in imports + iconMap — no change needed
+
+TSC src/: 0 errors!
+
+Stage Summary:
+- NEW MODULE: Smart Packaging Hub (951 lines, 16 unique visual components, 255 data records)
+- NEW MODULE: Logistics AI Command Center (674 lines, 17 unique visual components, 255 data records)
+- Total navItems: 149 (was 147, +2)
+- Total view files: 148 component files + dashboard = 149
+- Combined data: 75 orders + 60 materials + 55 sustainability + 65 QC + 75 forecasts + 65 anomalies + 60 routes + 55 predictions = 510 data records
+- CSS: +94 lines (sph-* ~47 lines + lac-* ~47 lines)
+- Total globals.css: 46,778 lines (+94)
+
+## Updated Project Status (Post Round 213)
+- STATUS: STABLE + SMART PACKAGING HUB + LOGISTICS AI COMMAND CENTER (149 navItems)
+- MODULES: 149 navItems / 149 view files
+- TSC src/: **0 errors** ✅ (1 remains in non-src files only)
+- Total globals.css: 46,778 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 1 TS error in non-src file (skills/stock-analysis-skill/) — not app code
+- CSS at 46,778 lines
+- 8 navItems have filename inconsistency with view files (non-breaking)
+
+PRIORITY NEXT:
+  1. New logistics modules (Drone Delivery Hub, Digital Freight Marketplace, IoT Sensor Dashboard)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
+
+---
 Task ID: 212
 Agent: Main (Cron Review - Round 212)
 Task: R212 — Reverse Logistics Enhancement + Warehouse Automation modules
