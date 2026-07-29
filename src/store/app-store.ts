@@ -165,8 +165,10 @@ export const navItems: NavItem[] = [
   { id: 'warehouse-safety-management', label: 'Safety Management', icon: 'HardHat', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'shift_lead'] },
   { id: 'logistics-analytics-pro', label: 'Analytics Pro', icon: 'ChartSpline', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'finance', 'logistics'] },
   { id: 'multi-warehouse-operations', label: 'Multi-WH Ops', icon: 'Building2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor'] },
-  { id: 'transport-network-hub', label: 'Transport Network', icon: 'Network', group: 'logistics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'transport-network-hub', label: 'Transport Network', icon: 'Network', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'wms-dashboard-pro', label: 'WMS Dashboard Pro', icon: 'LayoutGrid', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'supervisor', 'operator'] },
+  { id: 'supplier-intelligence-portal', label: 'Supplier Intelligence', icon: 'BrainCircuit', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'finance'] },
+  { id: 'last-mile-optimization', label: 'Last-mile Optimize', icon: 'Navigation', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

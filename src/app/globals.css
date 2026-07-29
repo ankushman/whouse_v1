@@ -47632,3 +47632,133 @@ html.theme-transition body {
 .dark .wdp-utilization-bar { background: rgba(59,130,246,0.15); }
 .dark .wdp-occupancy-bar { background: rgba(225,29,72,0.15); }
 .dark .wdp-velocity-bar { background: rgba(5,150,105,0.15); }
+
+/* ═══════════════════════════════════════════════════════
+   R222a: Supplier Intelligence Portal (sip-*) — Blue/Emerald/Amber/Violet/Rose/Indigo
+   ═══════════════════════════════════════════════════════ */
+.sip-tabs-list { background: linear-gradient(135deg, rgba(219,234,254,0.6), rgba(209,250,229,0.4)); }
+.sip-tab-trigger { position: relative; transition: all 0.2s; }
+.sip-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #3b82f6, #059669); color: white; box-shadow: 0 2px 8px rgba(59,130,246,0.3); }
+.sip-tab-trigger:hover:not([data-state="active"]) { color: #3b82f6; background: rgba(59,130,246,0.06); }
+
+.sip-kpi-grid { animation: sip-fadeUp 0.5s ease-out; }
+.sip-kpi-card { border-left: 3px solid transparent; transition: all 0.3s ease; }
+.sip-kpi-card:nth-child(1) { border-left-color: #3b82f6; }
+.sip-kpi-card:nth-child(2) { border-left-color: #059669; }
+.sip-kpi-card:nth-child(3) { border-left-color: #d97706; }
+.sip-kpi-card:nth-child(4) { border-left-color: #e11d48; }
+.sip-kpi-card:nth-child(5) { border-left-color: #7c3aed; }
+.sip-kpi-card:nth-child(6) { border-left-color: #6366f1; }
+.sip-kpi-card:nth-child(7) { border-left-color: #0891b2; }
+.sip-kpi-card:nth-child(8) { border-left-color: #f97316; }
+
+.sip-chart-card { border: 1px solid rgba(59,130,246,0.1); transition: all 0.3s ease; }
+.sip-chart-card:hover { border-color: rgba(59,130,246,0.3); box-shadow: 0 0 16px rgba(59,130,246,0.08); }
+
+.sip-supplier-card { border-radius: 12px; }
+.sip-supplier-header { border-radius: 8px 8px 0 0; }
+.sip-supplier-card:hover { box-shadow: 0 8px 24px rgba(59,130,246,0.12); }
+
+.sip-category-badge, .sip-supplier-status, .sip-rating-bar, .sip-city-badge,
+.sip-metric-type, .sip-grade-badge, .sip-trend-indicator, .sip-risk-type,
+.sip-risk-severity, .sip-risk-score-bar, .sip-ct-type, .sip-contract-status,
+.sip-value-tile, .sip-compliance-bar, .sip-spend-tile, .sip-impact-tile { border-radius: 6px; transition: all 0.2s; }
+.sip-category-badge:hover, .sip-metric-type:hover, .sip-risk-type:hover, .sip-ct-type:hover { transform: scale(1.04); }
+
+.sip-pulse-active { animation: sip-pulseActive 1.5s ease-in-out infinite; }
+.sip-pulse-warning { animation: sip-pulseWarning 1.3s ease-in-out infinite; }
+.sip-pulse-critical-glow { animation: sip-pulseCritical 1.0s ease-in-out infinite; }
+
+.sip-sort-header { border-radius: 6px; font-weight: 600; letter-spacing: 0.02em; }
+.sip-sheet-header { border-radius: 12px; box-shadow: 0 4px 12px rgba(59,130,246,0.2); }
+.sip-detail-item { transition: all 0.2s; }
+.sip-detail-item:hover { background-color: rgba(59,130,246,0.04); }
+.sip-table-row:nth-child(even) { background-color: rgba(59,130,246,0.02); }
+.sip-table-row:hover { background-color: rgba(59,130,246,0.06); }
+
+.sip-rating-bar { height: 6px; border-radius: 3px; background: rgba(5,150,105,0.1); overflow: hidden; }
+.sip-rating-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.sip-compliance-bar { height: 6px; border-radius: 3px; background: rgba(99,102,241,0.1); overflow: hidden; }
+.sip-compliance-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.sip-risk-score-bar { height: 6px; border-radius: 3px; background: rgba(225,29,72,0.1); overflow: hidden; }
+.sip-risk-score-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+@keyframes sip-fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sip-pulseActive { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes sip-pulseWarning { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+@keyframes sip-pulseCritical { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
+
+.dark .sip-tab-trigger[data-state="active"] { box-shadow: 0 2px 12px rgba(59,130,246,0.4); }
+.dark .sip-chart-card { border-color: rgba(59,130,246,0.08); }
+.dark .sip-chart-card:hover { border-color: rgba(59,130,246,0.2); box-shadow: 0 0 12px rgba(59,130,246,0.05); }
+.dark .sip-supplier-header { opacity: 0.95; }
+.dark .sip-table-row:nth-child(even) { background-color: rgba(59,130,246,0.03); }
+.dark .sip-table-row:hover { background-color: rgba(59,130,246,0.08); }
+.dark .sip-rating-bar { background: rgba(5,150,105,0.15); }
+.dark .sip-compliance-bar { background: rgba(99,102,241,0.15); }
+.dark .sip-risk-score-bar { background: rgba(225,29,72,0.15); }
+
+/* ═══════════════════════════════════════════════════════
+   R222b: Last-mile Optimization Hub (lmo-*) — Emerald/Blue/Orange/Violet/Rose/Cyan
+   ═══════════════════════════════════════════════════════ */
+.lmo-tabs-list { background: linear-gradient(135deg, rgba(209,250,229,0.6), rgba(219,234,254,0.4)); }
+.lmo-tab-trigger { position: relative; transition: all 0.2s; }
+.lmo-tab-trigger[data-state="active"] { background: linear-gradient(135deg, #059669, #3b82f6); color: white; box-shadow: 0 2px 8px rgba(5,150,105,0.3); }
+.lmo-tab-trigger:hover:not([data-state="active"]) { color: #059669; background: rgba(5,150,105,0.06); }
+
+.lmo-kpi-grid { animation: lmo-fadeUp 0.5s ease-out; }
+.lmo-kpi-card { border-left: 3px solid transparent; transition: all 0.3s ease; }
+.lmo-kpi-card:nth-child(1) { border-left-color: #059669; }
+.lmo-kpi-card:nth-child(2) { border-left-color: #3b82f6; }
+.lmo-kpi-card:nth-child(3) { border-left-color: #f97316; }
+.lmo-kpi-card:nth-child(4) { border-left-color: #e11d48; }
+.lmo-kpi-card:nth-child(5) { border-left-color: #7c3aed; }
+.lmo-kpi-card:nth-child(6) { border-left-color: #0891b2; }
+.lmo-kpi-card:nth-child(7) { border-left-color: #d97706; }
+.lmo-kpi-card:nth-child(8) { border-left-color: #6366f1; }
+
+.lmo-chart-card { border: 1px solid rgba(5,150,105,0.1); transition: all 0.3s ease; }
+.lmo-chart-card:hover { border-color: rgba(5,150,105,0.3); box-shadow: 0 0 16px rgba(5,150,105,0.08); }
+
+.lmo-route-card { border-radius: 12px; }
+.lmo-route-header { border-radius: 8px 8px 0 0; }
+.lmo-route-card:hover { box-shadow: 0 8px 24px rgba(5,150,105,0.12); }
+
+.lmo-zone-badge, .lmo-route-status, .lmo-vehicle-badge, .lmo-fleet-status,
+.lmo-delivery-type, .lmo-delivery-status, .lmo-star-rating, .lmo-battery-bar,
+.lmo-distance-tile, .lmo-eta-tile, .lmo-hub-type, .lmo-hub-status,
+.lmo-capacity-bar, .lmo-utilization-bar, .lmo-pincode-tile, .lmo-cod-amount { border-radius: 6px; transition: all 0.2s; }
+.lmo-zone-badge:hover, .lmo-vehicle-badge:hover, .lmo-hub-type:hover, .lmo-delivery-type:hover { transform: scale(1.04); }
+
+.lmo-pulse-active { animation: lmo-pulseActive 1.5s ease-in-out infinite; }
+.lmo-pulse-warning { animation: lmo-pulseWarning 1.3s ease-in-out infinite; }
+.lmo-pulse-critical-glow { animation: lmo-pulseCritical 1.0s ease-in-out infinite; }
+
+.lmo-sort-header { border-radius: 6px; font-weight: 600; letter-spacing: 0.02em; }
+.lmo-sheet-header { border-radius: 12px; box-shadow: 0 4px 12px rgba(5,150,105,0.2); }
+.lmo-detail-item { transition: all 0.2s; }
+.lmo-detail-item:hover { background-color: rgba(5,150,105,0.04); }
+.lmo-table-row:nth-child(even) { background-color: rgba(5,150,105,0.02); }
+.lmo-table-row:hover { background-color: rgba(5,150,105,0.06); }
+
+.lmo-battery-bar { height: 6px; border-radius: 3px; background: rgba(5,150,105,0.1); overflow: hidden; }
+.lmo-battery-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.lmo-capacity-bar { height: 6px; border-radius: 3px; background: rgba(59,130,246,0.1); overflow: hidden; }
+.lmo-capacity-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+.lmo-utilization-bar { height: 6px; border-radius: 3px; background: rgba(249,115,22,0.1); overflow: hidden; }
+.lmo-utilization-bar-fill { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
+
+@keyframes lmo-fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes lmo-pulseActive { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes lmo-pulseWarning { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+@keyframes lmo-pulseCritical { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.05); } }
+
+.dark .lmo-tab-trigger[data-state="active"] { box-shadow: 0 2px 12px rgba(5,150,105,0.4); }
+.dark .lmo-chart-card { border-color: rgba(5,150,105,0.08); }
+.dark .lmo-chart-card:hover { border-color: rgba(5,150,105,0.2); box-shadow: 0 0 12px rgba(5,150,105,0.05); }
+.dark .lmo-route-header { opacity: 0.95; }
+.dark .lmo-table-row:nth-child(even) { background-color: rgba(5,150,105,0.03); }
+.dark .lmo-table-row:hover { background-color: rgba(5,150,105,0.08); }
+.dark .lmo-battery-bar { background: rgba(5,150,105,0.15); }
+.dark .lmo-capacity-bar { background: rgba(59,130,246,0.15); }
+.dark .lmo-utilization-bar { background: rgba(249,115,22,0.15); }

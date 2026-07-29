@@ -171,6 +171,8 @@ import LogisticsAnalyticsProView from "@/components/modules/logistics-analytics-
 import MultiWarehouseOperationsView from "@/components/modules/multi-warehouse-operations-view"
 import TransportNetworkHubView from "@/components/modules/transport-network-hub-view"
 import WMSDashboardProView from "@/components/modules/wms-dashboard-pro-view"
+import SupplierIntelligencePortalView from "@/components/modules/supplier-intelligence-portal-view"
+import LastMileOptimizationView from "@/components/modules/last-mile-optimization-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -341,6 +343,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "multi-warehouse-operations": MultiWarehouseOperationsView,
   "transport-network-hub": TransportNetworkHubView,
   "wms-dashboard-pro": WMSDashboardProView,
+  "supplier-intelligence-portal": SupplierIntelligencePortalView,
+  "last-mile-optimization": LastMileOptimizationView,
 }
 
 

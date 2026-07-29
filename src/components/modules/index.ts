@@ -161,3 +161,5 @@ export { default as LogisticsAnalyticsProView } from './logistics-analytics-pro-
 export { default as MultiWarehouseOperationsView } from './multi-warehouse-operations-view'
 export { default as TransportNetworkHubView } from './transport-network-hub-view'
 export { default as WMSDashboardProView } from './wms-dashboard-pro-view'
+export { default as SupplierIntelligencePortalView } from './supplier-intelligence-portal-view'
+export { default as LastMileOptimizationView } from './last-mile-optimization-view'
