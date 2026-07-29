@@ -163,3 +163,5 @@ export { default as TransportNetworkHubView } from './transport-network-hub-view
 export { default as WMSDashboardProView } from './wms-dashboard-pro-view'
 export { default as SupplierIntelligencePortalView } from './supplier-intelligence-portal-view'
 export { default as LastMileOptimizationView } from './last-mile-optimization-view'
+export { default as SmartLockerNetworkView } from './smart-locker-network-view'
+export { default as ReturnsQualityCenterView } from './returns-quality-center-view'
