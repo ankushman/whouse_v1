@@ -139,4 +139,6 @@ export { default as YardOperationsView } from './yard-trucking-view'
 export { default as FirstMileCollectionView } from './first-mile-collection-view'
 export { default as LastMileEnhancementView } from './last-mile-enhancement-view'
 export { default as SupplyChainVisibilityView } from './supply-chain-visibility-view'
+export { default as ColdChainEnhancementView } from './cold-chain-enhancement-view'
+export { default as CrossDockOptimizationView } from './cross-dock-optimization-view'
 

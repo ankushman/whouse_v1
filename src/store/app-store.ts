@@ -145,6 +145,8 @@ export const navItems: NavItem[] = [
   { id: 'first-mile-collection', label: 'First-Mile Collection Hub', icon: 'MapPin', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'shift_lead'] },
   { id: 'last-mile-enhancement', label: 'Last-Mile Enhancement', icon: 'Bike', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'supply-chain-visibility', label: 'Supply Chain Visibility', icon: 'Satellite', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
+  { id: 'cold-chain-enhancement', label: 'Cold Chain Enhancement', icon: 'ThermometerSnowflake', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
+  { id: 'cross-dock-optimization', label: 'Cross-Dock Optimization', icon: 'GitFork', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

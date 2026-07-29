@@ -149,6 +149,8 @@ import YardOperationsView from "@/components/modules/yard-trucking-view"
 import FirstMileCollectionView from "@/components/modules/first-mile-collection-view"
 import LastMileEnhancementView from "@/components/modules/last-mile-enhancement-view"
 import SupplyChainVisibilityView from "@/components/modules/supply-chain-visibility-view"
+import ColdChainEnhancementView from "@/components/modules/cold-chain-enhancement-view"
+import CrossDockOptimizationView from "@/components/modules/cross-dock-optimization-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -297,6 +299,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "first-mile-collection": FirstMileCollectionView,
   "last-mile-enhancement": LastMileEnhancementView,
   "supply-chain-visibility": SupplyChainVisibilityView,
+  "cold-chain-enhancement": ColdChainEnhancementView,
+  "cross-dock-optimization": CrossDockOptimizationView,
 }
 
 
