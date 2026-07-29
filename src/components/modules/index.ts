@@ -141,4 +141,6 @@ export { default as LastMileEnhancementView } from './last-mile-enhancement-view
 export { default as SupplyChainVisibilityView } from './supply-chain-visibility-view'
 export { default as ColdChainEnhancementView } from './cold-chain-enhancement-view'
 export { default as CrossDockOptimizationView } from './cross-dock-optimization-view'
+export { default as ReverseLogisticsEnhancementView } from './reverse-logistics-enhancement-view'
+export { default as WarehouseAutomationView } from './warehouse-automation-view'
 

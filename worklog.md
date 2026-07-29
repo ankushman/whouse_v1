@@ -1,4 +1,98 @@
 ---
+Task ID: 212
+Agent: Main (Cron Review - Round 212)
+Task: R212 — Reverse Logistics Enhancement + Warehouse Automation modules
+
+Work Log:
+- Read worklog.md (R211 latest, 145 navItems, 0 TSC errors in src/)
+- TSC src/: 0 errors — confirmed clean build
+- agent-browser QA: dev server not running (OOM known infra), skipped
+
+- Created R212a: Reverse Logistics Enhancement module (NEW navItem 'reverse-logistics-enhancement')
+  * FILE: src/components/modules/reverse-logistics-enhancement-view.tsx (816 lines)
+  * 6 tabs: Returns Dashboard | Return Requests | Quality Inspection | Refund Tracker | Recovery & Resale | Returns Analytics
+  * Theme: Rose #e11d48 + Emerald #059669 + Amber #d97706 + Blue #3b82f6 + Violet #7c3aed + Cyan #0891b2, CSS prefix: rle-*
+  * Tab 0 (Dashboard): 8 KPIs, daily returns volume AreaChart (New Request/Picked Up/Processed/Refunded stacked), return reason PieChart (8 reasons), channel distribution BarChart (8 channels)
+  * Tab 1 (Return Requests): 75 return requests, 50 Indian customers, Indian cities/pincodes/phones, 10 statuses, 8 reasons, 8 channels (Amazon/Flipkart/Myntra/Ajio/Meesho/Direct/Retail/Wholesale), 50 product SKUs, INR values, SortHeader sort, search + status filter
+  * Tab 2 (Quality Inspection): 60 inspections, 20 Indian inspectors, 4 results (Pass/Fail/Conditional/Rejected), 8 defect types, 4 severity levels, 7 QA actions
+  * Tab 3 (Refund Tracker): 65 refund records, card layout with rose→emerald gradient headers, 7 refund methods (with emoji), 6 statuses, INR values with deductions, TAT tracking
+  * Tab 4 (Recovery & Resale): 55 recovery records, 6 condition grades (A+ to Scrap), 6 recovery channels, recovery % bar (3-color gradient), days-to-sell
+  * Tab 5 (Analytics): 8 analytics KPIs, monthly return trend LineChart, category return rate BarChart, channel comparison horizontal BarChart, cost savings stacked AreaChart (6-month)
+
+- Created R212b: Warehouse Automation module (NEW navItem 'warehouse-automation')
+  * FILE: src/components/modules/warehouse-automation-view.tsx (908 lines)
+  * 6 tabs: Automation Dashboard | Robot Fleet Management | Task Queue & Dispatch | Error & Diagnostics | Maintenance Schedule | Automation Analytics
+  * Theme: Indigo #6366f1 + Cyan #0891b2 + Emerald #059669 + Orange #ea580c + Rose #e11d48 + Amber #d97706, CSS prefix: wam-*
+  * Tab 0 (Dashboard): 8 KPIs, hourly throughput AreaChart (Manual/Semi-Auto/Fully Auto stacked), automation type PieChart (8 types), zone coverage BarChart (8 zones)
+  * Tab 1 (Robot Fleet Management): 75 robots, 8 types (AGV/AMR/ASRS/Robotic Arm/Pick Station/Sortation Robot/Palletizer/Conveyor), 8 statuses, 8 zones, battery bars, robot cards with status indicators
+  * Tab 2 (Task Queue & Dispatch): 70 tasks, 8 types, 4 priority levels, 7 statuses, Indian warehouse location codes, SortHeader sort, search + filter
+  * Tab 3 (Error & Diagnostics): 60 error records, 8 error types, 4 severity levels, 8 resolution types, Critical errors with red pulse
+  * Tab 4 (Maintenance Schedule): 55 maintenance records, 8 types, 6 statuses, 15 Indian technician names, INR costs, overdue items with amber pulse
+  * Tab 5 (Analytics): 8 analytics KPIs, daily performance LineChart, zone throughput BarChart, error trend BarChart, ROI stacked AreaChart (6-month)
+
+- BUG FIXES caught during TSC:
+  * reverse-logistics-enhancement-view.tsx: PageHeader `subtitle` → `description` (TS2322 prop mismatch)
+  * reverse-logistics-enhancement-view.tsx: Sort comparator type `Record<string, unknown>` → `Record<string, string | number>` with fallback `?? ""` to fix TS18046 unknown comparison (16 errors across 4 sort blocks)
+  * reverse-logistics-enhancement-view.tsx: Inspection requestId generation simplified — removed broken inline ternary comparison
+
+- Unique Visual Components:
+  * Reverse Logistics Enhancement (15): ReturnStatusBadge (10-tier, multi-pulse), ReturnReasonBadge (8 types), ChannelBadge (8 e-commerce channels), QualityResultBadge (4-tier), DefectTypeBadge (8 types), SeverityBadge (4-tier, Critical pulse), RefundMethodBadge (7 methods with emoji), RefundStatusBadge (6-tier, Failed pulse), ConditionGradeBadge (6-tier, A+ green→Scrap red), RecoveryChannelBadge (6), RecoveryStatusBadge (7), RecoveryPctBar (3-color), ValueTile (₹), TATBadge (conditional color + pulse), DeductionTile
+  * Warehouse Automation (17): RobotTypeBadge (8 types with emoji), RobotStatusBadge (8-tier, Active green pulse, Error red pulse, Charging amber pulse), BatteryLevelBar (3-color), UptimeBar (3-color), TaskTypeBadge (8), TaskStatusBadge (7-tier, In Progress cyan pulse, Failed red pulse), TaskPriorityBadge (4-tier, Critical red pulse), ErrorTypeBadge (8), ErrorSeverityBadge (4-tier, Critical red pulse), ResolutionBadge (8), MaintenanceTypeBadge (8), MaintenanceStatusBadge (6-tier, Overdue amber pulse), CostTile (₹), DowntimeTile (conditional color), LocationBadge (warehouse zone codes), ErrorCountBadge (color-coded)
+
+- CSS: appended to globals.css (+118 lines, rle-* ~59 lines + wam-* ~59 lines)
+  * Rose→Emerald gradient tab active with glow (rle-*)
+  * Indigo gradient tab active with glow (wam-*)
+  * KPI cards with colored left border + staggered fade-up (both)
+  * Chart cards with themed border glow on hover (both)
+  * Refund cards with gradient headers and hover lift (rle-*)
+  * Robot cards with hover lift (wam-*)
+  * Battery level bars with 3-color transition (wam-*)
+  * Recovery % bars with 3-color gradient (rle-*)
+  * Error pulse (red, 1.2s), Active pulse (rose/indigo, 1.5s), Warning pulse (amber, 1.3s) (both)
+  * Severity/TAT/Overdue/Charge pulse animations (both)
+  * Table: even-row striping, hover effects (both)
+  * Action button hover scale + themed border (both)
+  * Full dark mode overrides (14+ rules per module, custom scrollbar)
+
+- Registered in 4 files:
+  * src/components/modules/index.ts: export ReverseLogisticsEnhancementView + WarehouseAutomationView
+  * src/app/page.tsx: import + viewMap entries 'reverse-logistics-enhancement' + 'warehouse-automation'
+  * src/store/app-store.ts: 2 new navItems (reverse-logistics-enhancement: icon Recycle, warehouse-automation: icon Bot, both group operations)
+  * src/components/layout/app-layout.tsx: Recycle + Bot already in imports + iconMap — no change needed
+
+TSC src/: 0 errors!
+
+Stage Summary:
+- NEW MODULE: Reverse Logistics Enhancement (816 lines, 15 unique visual components, 255 data records)
+- NEW MODULE: Warehouse Automation (908 lines, 17 unique visual components, 260 data records)
+- Total navItems: 147 (was 145, +2)
+- Total view files: 146 component files + dashboard = 147
+- Combined data: 75 return requests + 60 inspections + 65 refunds + 55 recoveries + 75 robots + 70 tasks + 60 errors + 55 maintenance = 515 data records
+- CSS: +118 lines (rle-* ~59 lines + wam-* ~59 lines)
+- Total globals.css: 46,684 lines (+118)
+
+## Updated Project Status (Post Round 212)
+- STATUS: STABLE + REVERSE LOGISTICS ENHANCEMENT + WAREHOUSE AUTOMATION (147 navItems)
+- MODULES: 147 navItems / 147 view files
+- TSC src/: **0 errors** ✅ (1 remains in non-src files only)
+- Total globals.css: 46,684 lines
+
+KNOWN ISSUES:
+- Dev server OOM — known infra, TSC verified
+- Git local/remote divergence
+- 1 TS error in non-src file (skills/stock-analysis-skill/) — not app code
+- CSS at 46,684 lines
+- 8 navItems have filename inconsistency with view files (non-breaking)
+
+PRIORITY NEXT:
+  1. New logistics modules (Smart Packaging Hub, Logistics AI Command Center, Drone Delivery Hub)
+  2. Multi-warehouse switching feature
+  3. Dashboard home page widgets
+  4. Cross-module navigation
+  5. SharedModuleDrawer migration
+  6. Git resolution
+
+---
 Task ID: 211
 Agent: Main (Cron Review - Round 211)
 Task: R211 — Cold Chain Enhancement + Cross-Dock Optimization modules

@@ -151,6 +151,8 @@ import LastMileEnhancementView from "@/components/modules/last-mile-enhancement-
 import SupplyChainVisibilityView from "@/components/modules/supply-chain-visibility-view"
 import ColdChainEnhancementView from "@/components/modules/cold-chain-enhancement-view"
 import CrossDockOptimizationView from "@/components/modules/cross-dock-optimization-view"
+import ReverseLogisticsEnhancementView from "@/components/modules/reverse-logistics-enhancement-view"
+import WarehouseAutomationView from "@/components/modules/warehouse-automation-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -301,6 +303,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "supply-chain-visibility": SupplyChainVisibilityView,
   "cold-chain-enhancement": ColdChainEnhancementView,
   "cross-dock-optimization": CrossDockOptimizationView,
+  "reverse-logistics-enhancement": ReverseLogisticsEnhancementView,
+  "warehouse-automation": WarehouseAutomationView,
 }
 
 
