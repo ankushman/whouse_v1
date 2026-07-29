@@ -165,6 +165,8 @@ import { FleetManagementProView } from "@/components/modules/fleet-management-pr
 import CrossDockOperationsHubView from "@/components/modules/cross-dock-operations-hub-view"
 import CustomsTradeComplianceView from "@/components/modules/customs-trade-compliance-view"
 import ReturnsProcessingCenterView from "@/components/modules/returns-processing-center-view"
+import EcommerceFulfillmentHubView from "@/components/modules/ecommerce-fulfillment-hub-view"
+import WarehouseSafetyManagementView from "@/components/modules/warehouse-safety-management-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -329,6 +331,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "cross-dock-operations-hub": CrossDockOperationsHubView,
   "customs-trade-compliance": CustomsTradeComplianceView,
   "returns-processing-center": ReturnsProcessingCenterView,
+  "ecommerce-fulfillment-hub": EcommerceFulfillmentHubView,
+  "warehouse-safety-management": WarehouseSafetyManagementView,
 }
 
 

@@ -155,4 +155,6 @@ export { FleetManagementProView } from './fleet-management-pro-view'
 export { default as CrossDockOperationsHubView } from './cross-dock-operations-hub-view'
 export { default as CustomsTradeComplianceView } from './customs-trade-compliance-view'
 export { default as ReturnsProcessingCenterView } from './returns-processing-center-view'
+export { default as EcommerceFulfillmentHubView } from './ecommerce-fulfillment-hub-view'
+export { default as WarehouseSafetyManagementView } from './warehouse-safety-management-view'
 
