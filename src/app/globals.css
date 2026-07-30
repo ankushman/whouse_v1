@@ -52644,3 +52644,51 @@ html.theme-transition body {
 @keyframes dce-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes dce-pulse-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(67,56,202,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(67,56,202,0.15); } }
 @keyframes dce-glow-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(67,56,202,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(67,56,202,0.25); } }
+
+/* Cement Building Materials (cbm) */
+.cbm-container { animation: cbm-fade-in 0.4s ease; }
+.cbm-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.cbm-tab-trigger[data-state="active"] { background-color: #b45309; color: white; }
+.cbm-tab-trigger[data-state="active"]:hover { background-color: #92400e; }
+.cbm-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.cbm-kpi-card:hover { border-color: #b45309; box-shadow: 0 4px 12px rgba(180,83,9,0.15); }
+.cbm-kpi-value { font-variant-numeric: tabular-nums; }
+.cbm-health-ring svg { transition: transform 0.3s ease; }
+.cbm-health-ring:hover svg { transform: scale(1.05); }
+.cbm-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.cbm-ring-value { font-variant-numeric: tabular-nums; }
+.cbm-material-badge, .cbm-status-badge { transition: transform 0.15s ease; }
+.cbm-material-badge:hover { transform: scale(1.05); }
+.cbm-cost-bar-fill { transition: width 0.6s ease; }
+.cbm-table-row { transition: background-color 0.15s ease; }
+.cbm-table-row:hover { background-color: rgba(180,83,9,0.04); }
+.cbm-chart-card { border: 1px solid #e5e7eb; }
+.cbm-insight-card { border: 1px solid #e5e7eb; }
+@keyframes cbm-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cbm-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes cbm-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(180,83,9,0.15); } }
+@keyframes cbm-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(180,83,9,0.25); } }
+
+/* Telecom Tower Infrastructure (tti) */
+.tti-container { animation: tti-fade-in 0.4s ease; }
+.tti-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.tti-tab-trigger[data-state="active"] { background-color: #7c3aed; color: white; }
+.tti-tab-trigger[data-state="active"]:hover { background-color: #6d28d9; }
+.tti-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.tti-kpi-card:hover { border-color: #7c3aed; box-shadow: 0 4px 12px rgba(124,58,237,0.15); }
+.tti-kpi-value { font-variant-numeric: tabular-nums; }
+.tti-health-ring svg { transition: transform 0.3s ease; }
+.tti-health-ring:hover svg { transform: scale(1.05); }
+.tti-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.tti-ring-value { font-variant-numeric: tabular-nums; }
+.tti-equip-badge, .tti-status-badge { transition: transform 0.15s ease; }
+.tti-equip-badge:hover { transform: scale(1.05); }
+.tti-cost-bar-fill { transition: width 0.6s ease; }
+.tti-table-row { transition: background-color 0.15s ease; }
+.tti-table-row:hover { background-color: rgba(124,58,237,0.04); }
+.tti-chart-card { border: 1px solid #e5e7eb; }
+.tti-insight-card { border: 1px solid #e5e7eb; }
+@keyframes tti-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tti-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes tti-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,58,237,0.15); } }
+@keyframes tti-glow-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,58,237,0.25); } }

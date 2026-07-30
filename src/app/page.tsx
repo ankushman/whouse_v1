@@ -252,6 +252,8 @@ import ChemicalIndustrialGasesView from "@/components/modules/chemical-industria
 import SemiconductorElectronicsView from "@/components/modules/semiconductor-electronics-view"
 import SteelMetalsSupplyChainView from "@/components/modules/steel-metals-supply-chain-view"
 import DataCenterEquipmentView from "@/components/modules/data-center-equipment-view"
+import CementBuildingMaterialsView from "@/components/modules/cement-building-materials-view"
+import TelecomTowerInfrastructureView from "@/components/modules/telecom-tower-infrastructure-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -503,6 +505,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "semiconductor-electronics": SemiconductorElectronicsView,
   "steel-metals-supply-chain": SteelMetalsSupplyChainView,
   "data-center-equipment": DataCenterEquipmentView,
+  "cement-building-materials": CementBuildingMaterialsView,
+  "telecom-tower-infrastructure": TelecomTowerInfrastructureView,
 }
 
 

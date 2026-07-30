@@ -242,3 +242,5 @@ export { default as ChemicalIndustrialGasesView } from './chemical-industrial-ga
 export { default as SemiconductorElectronicsView } from './semiconductor-electronics-view'
 export { default as SteelMetalsSupplyChainView } from './steel-metals-supply-chain-view'
 export { default as DataCenterEquipmentView } from './data-center-equipment-view'
+export { default as CementBuildingMaterialsView } from './cement-building-materials-view'
+export { default as TelecomTowerInfrastructureView } from './telecom-tower-infrastructure-view'
