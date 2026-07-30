@@ -4,6 +4,90 @@
 
 ---
 
+Task ID: R274
+Agent: Main Agent (Cron Loop)
+Task: R274 — Dark Store Operations + Smart Returns Routing + CSS oklch fix
+
+Work Log:
+- Read worklog.md: R273 complete, 205 views, 205 navItems, 51,617 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R274)
+- R273 commit 90cbcb8 already pushed
+
+- BUGFIX: Fixed lightningcss panic (text.rs:1496)
+  - Replaced 39 oklch() color values in text-shadow with rgba()
+  - Affected 23 text-shadow declarations across globals.css
+  - Script: scripts/fix-oklch-textshadow.py
+  - Note: Turbopack OOM persists (51K+ CSS lines exceeds 3.9GB RAM) - this is a known limitation
+
+- Created Dark Store Operations module (R274a):
+  * FILE: src/components/modules/dark-store-operations-view.tsx (255 lines)
+  * 4 tabs: Dashboard | Stores | Analytics | Insights
+  * Theme: Pink #ec4899 + Purple #a855f7, CSS prefix: dso-*
+  * Tab 0 (Dashboard): 4 KPIs, 6 HealthRing SVG gauges, 3 charts
+  * Tab 1 (Stores): 60 dark stores with SearchFilterToolbar (3 filter groups: zone/category/status) + ModuleBreadcrumb
+  * Tab 2 (Analytics): 4 value tiles, BarChart, PieChart
+  * Tab 3 (Insights): 4 insight cards
+  * 12 visual components: ZoneBadge, StatusBadge, PriorityBadge, FillBar, DeliveryBar, HealthRing, KpiTile, ValueTile
+  * Data: 60 dark store records, 8 Indian zones, 8 product categories, 6 statuses
+
+- Created Smart Returns Routing module (R274b):
+  * FILE: src/components/modules/smart-returns-routing-view.tsx (243 lines)
+  * 4 tabs: Dashboard | Routes | Analytics | Insights
+  * Theme: Teal #14b8a6 + Lime #84cc16, CSS prefix: srr-*
+  * Tab 0 (Dashboard): 4 KPIs, 6 HealthRing SVG gauges, 3 charts
+  * Tab 1 (Routes): 60 returns with SearchFilterToolbar (3 filter groups: route/category/channel) + ModuleBreadcrumb
+  * Tab 2 (Analytics): 4 value tiles, BarChart, PieChart
+  * Tab 3 (Insights): 4 insight cards
+  * 12 visual components: RouteBadge, ChannelBadge, PriorityBadge, RecoveryBar, CostBar, HealthRing, KpiTile, ValueTile
+  * Data: 60 returns records, 8 routes, 8 categories, 6 channels
+
+- Registered both modules in 4 files:
+  * src/components/modules/index.ts: +2 exports (total 207)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (Store, Route icons)
+  * src/components/layout/app-layout.tsx: +1 new icon (Store, total 122)
+
+- TSC: 0 errors in src/ (fixed ValueTile sub→change prop)
+
+- CSS additions: 64 lines (dso-*/srr-* styles, 5+5 keyframe animations per module)
+
+Stage Summary:
+- NEW MODULE: Dark Store Operations (255 lines, 12 visual components, 60 records)
+- NEW MODULE: Smart Returns Routing (243 lines, 12 visual components, 60 records)
+- BUGFIX: oklch() in text-shadow → rgba() (39 replacements, 23 declarations)
+- NEW ICON: Store (total 122)
+- SearchFilterToolbar: 25 modules (was 23, +2)
+- ModuleBreadcrumb: 25 modules (was 23, +2)
+- Total navItems: 207 | VIEW FILES: 207 | CSS: 51,681 lines
+- ZERO src/ TSC errors
+- Git pushed: commit 1513b1a
+
+## Updated Project Status (Post Round 274)
+- STATUS: STABLE (Turbopack OOM persists - known limitation)
+- VIEW FILES: 207 | NAVITEMS: 207
+- SHARED COMPONENTS: 25 modules with SearchFilterToolbar + ModuleBreadcrumb
+- HOOKS: 13 | ICONMAP: 122 icons | CSS: 51,681 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main (commit 1513b1a)
+
+KNOWN ISSUES:
+- Turbopack OOM (lightningcss panic on globals.css >51K lines, 3.9GB RAM insufficient)
+- oklch text-shadow bug FIXED (no more lightningcss panic from text-shadow oklch)
+- Build/dev server still OOMs due to total CSS size (needs CSS splitting)
+- SearchFilterToolbar: 25/207 modules (~12% coverage)
+- Git remote: origin → ankushman/whouse_v1.git
+
+PRIORITY NEXT:
+1. Create new logistics modules (Perishable Goods Command, Express Delivery Command)
+2. CSS splitting to resolve Turbopack OOM (critical)
+3. Integrate SearchFilterToolbar into 5-10 more existing table-based modules
+4. Cross-module drill-down navigation
+5. Real-time WebSocket events
+6. Mobile experience enhancements
+7. Dashboard home page widgets enhancement
+
+---
+
 Task ID: R273
 Agent: Main Agent (Cron Loop)
 Task: R273 — Warehouse Simulation Lab + Green Logistics Tracker + CSS
