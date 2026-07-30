@@ -224,6 +224,8 @@ import PharmaLogisticsView from "@/components/modules/pharma-logistics-view"
 import EWasteReverseLogisticsView from "@/components/modules/e-waste-reverse-logistics-view"
 import TextileReverseLogisticsView from "@/components/modules/textile-reverse-logistics-view"
 import AgriSupplyChainView from "@/components/modules/agri-supply-chain-view"
+import LuxuryGoodsLogisticsView from "@/components/modules/luxury-goods-logistics-view"
+import ConstructionMaterialTrackerView from "@/components/modules/construction-material-tracker-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -447,6 +449,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "e-waste-reverse-logistics": EWasteReverseLogisticsView,
   "textile-reverse-logistics": TextileReverseLogisticsView,
   "agri-supply-chain": AgriSupplyChainView,
+  "luxury-goods-logistics": LuxuryGoodsLogisticsView,
+  "construction-material-tracker": ConstructionMaterialTrackerView,
 }
 
 

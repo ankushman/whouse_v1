@@ -51975,3 +51975,51 @@ html.theme-transition body {
 @keyframes asc-pulse-lime { 0%, 100% { box-shadow: 0 0 0 0 rgba(101,163,13,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(101,163,13,0.15); } }
 @keyframes asc-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(22,163,74,0.15); } }
 @keyframes asc-glow-lime { 0%, 100% { box-shadow: 0 0 0 0 rgba(101,163,13,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(101,163,13,0.25); } }
+
+/* ========== Luxury Goods Logistics (lux-*) ========== */
+.lux-container { animation: lux-fade-in 0.4s ease-out; }
+.lux-tab-trigger[data-state="active"] { background-color: #7c3aed; color: white; }
+.lux-tab-trigger[data-state="active"]:hover { background-color: #6d28d9; }
+.lux-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.lux-kpi-card:hover { border-color: #7c3aed; box-shadow: 0 4px 12px rgba(124,58,237,0.15); }
+.lux-kpi-value { font-variant-numeric: tabular-nums; }
+.lux-health-ring svg { transition: transform 0.3s ease; }
+.lux-health-ring:hover svg { transform: scale(1.05); }
+.lux-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.lux-ring-value { font-variant-numeric: tabular-nums; }
+.lux-category-badge, .lux-security-badge, .lux-status-badge { transition: transform 0.15s ease; }
+.lux-category-badge:hover { transform: scale(1.05); }
+.lux-value-bar-fill { transition: width 0.6s ease; }
+.lux-table-row { transition: background-color 0.15s ease; }
+.lux-table-row:hover { background-color: rgba(124,58,237,0.04); }
+.lux-chart-card { border: 1px solid #e5e7eb; }
+.lux-insight-card { border: 1px solid #e5e7eb; }
+@keyframes lux-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes lux-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes lux-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,58,237,0.15); } }
+@keyframes lux-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(109,40,217,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(109,40,217,0.15); } }
+@keyframes lux-glow-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,58,237,0.25); } }
+
+/* ========== Construction Material Tracker (cmt-*) ========== */
+.cmt-container { animation: cmt-fade-in 0.4s ease-out; }
+.cmt-tab-trigger[data-state="active"] { background-color: #ea580c; color: white; }
+.cmt-tab-trigger[data-state="active"]:hover { background-color: #c2410c; }
+.cmt-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.cmt-kpi-card:hover { border-color: #ea580c; box-shadow: 0 4px 12px rgba(234,88,12,0.15); }
+.cmt-kpi-value { font-variant-numeric: tabular-nums; }
+.cmt-health-ring svg { transition: transform 0.3s ease; }
+.cmt-health-ring:hover svg { transform: scale(1.05); }
+.cmt-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.cmt-ring-value { font-variant-numeric: tabular-nums; }
+.cmt-material-badge, .cmt-status-badge { transition: transform 0.15s ease; }
+.cmt-material-badge:hover { transform: scale(1.05); }
+.cmt-cost-bar-fill { transition: width 0.6s ease; }
+.cmt-table-row { transition: background-color 0.15s ease; }
+.cmt-table-row:hover { background-color: rgba(234,88,12,0.04); }
+.cmt-chart-card { border: 1px solid #e5e7eb; }
+.cmt-insight-card { border: 1px solid #e5e7eb; }
+@keyframes cmt-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cmt-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes cmt-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(234,88,12,0.15); } }
+@keyframes cmt-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(194,65,12,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(194,65,12,0.15); } }
+@keyframes cmt-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(234,88,12,0.25); } }
