@@ -208,6 +208,7 @@ import ReturnsQualityLabView from "@/components/modules/returns-quality-lab-view
 import PortOperationsHubView from "@/components/modules/port-operations-hub-view"
 import AiDemandSensingProView from "@/components/modules/ai-demand-sensing-pro-view"
 import MicroFulfillmentCenterView from "@/components/modules/micro-fulfillment-center-view"
+import RailFreightCommandView from "@/components/modules/rail-freight-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -415,6 +416,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "port-operations-hub": PortOperationsHubView,
   "ai-demand-sensing-pro": AiDemandSensingProView,
   "micro-fulfillment-center": MicroFulfillmentCenterView,
+  "rail-freight-command": RailFreightCommandView,
 }
 
 

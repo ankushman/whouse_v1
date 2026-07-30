@@ -151,7 +151,6 @@ export const navItems: NavItem[] = [
   { id: 'warehouse-automation', label: 'Warehouse Automation', icon: 'Bot', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'smart-packaging-hub', label: 'Smart Packaging Hub', icon: 'PackagePlus', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'logistics-ai-command', label: 'Logistics AI Command', icon: 'BrainCircuit', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics'] },
-  { id: 'drone-delivery-hub', label: 'Drone Delivery Hub', icon: 'Send', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'digital-freight-marketplace', label: 'Digital Freight Market', icon: 'Globe', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
   { id: 'iot-sensor-dashboard', label: 'IoT Sensor Dashboard', icon: 'Radar', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: '3pl-integration-hub', label: '3PL Integration Hub', icon: 'Network', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
@@ -204,6 +203,8 @@ export const navItems: NavItem[] = [
   { id: 'port-operations-hub', label: 'Port Operations Hub', icon: 'Anchor', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'ai-demand-sensing-pro', label: 'AI Demand Sensing', icon: 'BrainCircuit', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'demand_planner', 'procurement', 'supervisor'] },
   { id: 'micro-fulfillment-center', label: 'Micro-Fulfillment', icon: 'Boxes', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'rail-freight-command', label: 'Rail Freight Command', icon: 'TrainFront', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'drone-delivery-hub', label: 'Drone Delivery Hub', icon: 'Satellite', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

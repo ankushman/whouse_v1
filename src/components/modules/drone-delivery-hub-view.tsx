@@ -1,501 +1,246 @@
-"use client"
+import React, { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-import React, { useState, useMemo } from "react"
-import { PageHeader } from "@/components/shared/page-header"
-import { useToast } from "@/hooks/use-toast-helper"
-import { cn } from "@/lib/utils"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
-import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from "@/components/ui/select"
-import {
-  Tabs, TabsContent, TabsList, TabsTrigger,
-} from "@/components/ui/tabs"
-import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-} from "@/components/ui/table"
-import {
-  Sheet, SheetContent, SheetHeader, SheetTitle,
-} from "@/components/ui/sheet"
-import {
-  AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
-} from "recharts"
-import {
-  Send, MapPin, Clock, IndianRupee, TrendingUp, Target,
-  ArrowUpRight, ArrowDownRight, Search, Eye, Filter,
-  Battery, Zap, Wind, ShieldAlert, CheckCircle2, XCircle,
-  AlertTriangle, BarChart3, Package, Star, Activity, Gauge,
-  Navigation, type LucideIcon,
-} from "lucide-react"
+const COLORS = ['#10b981', '#06b6d4', '#3b82f6', '#f59e0b', '#ef4444', '#ec4899', '#8b5cf6', '#f97316']
 
-// ============================================================================
-// Helpers
-// ============================================================================
-function seededRandom(seed: number) {
-  let s = seed % 2147483647
-  if (s <= 0) s += 2147483646
-  s = (s * 16807) % 2147483647
-  return (s - 1) / 2147483646
-}
-const pick = <T,>(arr: readonly T[], seed: number) =>
-  arr[Math.floor(seededRandom(seed) * arr.length)]
-const ri = (min: number, max: number, seed: number) =>
-  Math.floor(seededRandom(seed) * (max - min + 1)) + min
-const formatINR = (n: number) =>
-  n >= 10000000 ? `₹${(n / 10000000).toFixed(2)} Cr`
-  : n >= 100000 ? `₹${(n / 100000).toFixed(2)} L`
-  : `₹${n.toLocaleString("en-IN")}`
+const DRONE_TYPES = ['Fixed Wing', 'Multirotor', 'VTOL Hybrid', 'Heavy Lift', 'Delivery Bot', 'Agricultural']
+const ZONES = ['Metro Zone', 'Suburban Ring', 'Industrial Belt', 'Rural Outreach', 'Hilly Terrain', 'Coastal Arc', 'Island Connect', 'Emergency Zone']
+const MISSION_TYPES = ['Medical Supply', 'E-commerce Express', 'Food Delivery', 'Agricultural Spray', 'Survey & Map', 'Infra Inspect', 'Emergency Relief', 'WH Transfer']
+const STATUSES = ['Airborne', 'Charging', 'Maintenance', 'Standby', 'Returning', 'Loading']
+const OPERATORS = ['SkyPort India', 'DroneSeva', 'AeroLogistics', 'FlytBase Ops', 'Garuda Drones', 'TechEagle', 'DroniX', 'AutoSky']
 
-// ============================================================================
-// Enums
-// ============================================================================
-const DRONE_TYPES = ["Quadcopter", "Hexacopter", "Fixed-Wing", "Hybrid", "Heavy-Lift", "Nano"] as const
-const DRONE_MODELS = ["DJI Mavic 3", "Parrot ANAFI", "Skydio X10", "Amazon MK30", "Zipline Serpent", "Wingcopter 198"] as const
-const DRONE_ZONES = ["Zone A (0-2km)", "Zone B (2-5km)", "Zone C (5-10km)", "Zone D (10-15km)", "Zone E (15-25km)", "Zone F (>25km)"] as const
-const DRONE_STATUSES = ["Active", "Idle", "In Flight", "Charging", "Maintenance", "Offline", "Calibrating", "Returning"] as const
-const DELIVERY_PRIORITIES = ["Emergency", "Rush", "High", "Medium", "Low"] as const
-const DELIVERY_STATUSES = ["Queued", "Dispatched", "In Flight", "Hovering", "Delivered", "Failed", "Rerouted", "Returning"] as const
-const FLIGHT_STATUSES = ["Completed", "Aborted", "Rerouted", "Low Battery Return", "Signal Lost", "Collision Avoided"] as const
-const NFZ_TYPES = ["Airport Proximity", "Military Area", "Government Building", "Hospital", "School", "Dense Population", "Temporary Event", "Weather Hazard"] as const
-const NFZ_STATUSES = ["Active", "Expired", "Suspended", "Updated"] as const
-const INDIAN_HUBS = ["Mumbai Hub", "Delhi NCR Hub", "Bangalore Tech Park", "Chennai Port", "Hyderabad HITEC", "Pune Industrial", "Kolkata Salt Lake", "Ahmedabad SG Highway", "Jaipur Mansarovar", "Lucknow Gomti Nagar"] as const
-const INDIAN_CUSTOMERS = [
-  "Rajesh Kumar", "Priya Sharma", "Arun Patel", "Sneha Reddy", "Vikram Singh",
-  "Ananya Iyer", "Karthik Menon", "Deepa Nair", "Sanjay Gupta", "Meera Joshi",
-  "Rohit Verma", "Pooja Agarwal", "Amit Bose", "Kavitha Krishnan", "Manish Tiwari",
-  "Divya Saxena", "Suresh Pillai", "Lakshmi Rao", "Nikhil Deshmukh", "Ritu Malhotra",
-  "Pradeep Yadav", "Shalini Kulkarni", "Harish Chauhan", "Sunita Devi", "Vishal Kapoor",
-  "Anjali Mehta", "Ramesh Bhatt", "Pallavi Hegde", "Dinesh Shukla", "Swati Pandey",
-  "Ganesh Iyer", "Komal Thakur", "Tarun Grover", "Bhavna Sinha", "Akhil Nambiar",
-  "Madhuri Dixit", "Siddharth Jha", "Prachi Goyal", "Rajan Pillai", "Neha Chopra",
-  "Kiran Rao", "Yogesh Patil", "Asha Menon", "Varun Khanna", "Shikha Verma",
-  "Gaurav Tandon", "Suman Latha", "Pankaj Dubey", "Rekha Nair", "Mohan Das",
-] as const
-const INDIAN_LOCATIONS = [
-  "Bandra West Mumbai", "Connaught Place Delhi", "Koramangala Bangalore", "T Nagar Chennai",
-  "Madhapur Hyderabad", "Viman Nagar Pune", "Salt Lake Kolkata", "Navrangpura Ahmedabad",
-  "C-Scheme Jaipur", "Gomti Nagar Lucknow", "MG Road Kochi", "RS Puram Coimbatore",
-  "Dharampeth Nagpur", "Ring Road Surat", "Vijay Nagar Indore", "MP Nagar Bhopal",
-] as const
+const drones = [
+  { id: 'DRN-0001', model: 'Fixed-806', type: 'Fixed Wing', zone: 'Metro Zone', mission: 'Medical Supply', status: 'Airborne', operator: 'SkyPort India', battery: 76, range_km: 30.0, payload: 21, altitude: 285, speed: 107, missions_today: 12, lastUpdate: '2026-07-20 08:34' },
+  { id: 'DRN-0002', model: 'Multirotor-900', type: 'Multirotor', zone: 'Suburban Ring', mission: 'E-commerce Express', status: 'Charging', operator: 'DroneSeva', battery: 93, range_km: 16.0, payload: 17, altitude: 204, speed: 63, missions_today: 13, lastUpdate: '2026-07-01 07:12' },
+  { id: 'DRN-0003', model: 'VTOL-675', type: 'VTOL Hybrid', zone: 'Industrial Belt', mission: 'Food Delivery', status: 'Maintenance', operator: 'AeroLogistics', battery: 60, range_km: 12.5, payload: 8, altitude: 293, speed: 78, missions_today: 17, lastUpdate: '2026-07-23 23:41' },
+  { id: 'DRN-0004', model: 'Heavy-306', type: 'Heavy Lift', zone: 'Rural Outreach', mission: 'Agricultural Spray', status: 'Standby', operator: 'FlytBase Ops', battery: 97, range_km: 12.8, payload: 3, altitude: 269, speed: 134, missions_today: 14, lastUpdate: '2026-07-23 19:09' },
+  { id: 'DRN-0005', model: 'Delivery-440', type: 'Delivery Bot', zone: 'Hilly Terrain', mission: 'Survey & Map', status: 'Returning', operator: 'Garuda Drones', battery: 87, range_km: 63.9, payload: 3, altitude: 379, speed: 118, missions_today: 6, lastUpdate: '2026-07-24 10:29' },
+  { id: 'DRN-0006', model: 'Agricultural-993', type: 'Agricultural', zone: 'Coastal Arc', mission: 'Infra Inspect', status: 'Loading', operator: 'TechEagle', battery: 25, range_km: 62.6, payload: 15, altitude: 252, speed: 108, missions_today: 1, lastUpdate: '2026-07-10 07:01' },
+  { id: 'DRN-0007', model: 'Fixed-392', type: 'Fixed Wing', zone: 'Island Connect', mission: 'Emergency Relief', status: 'Airborne', operator: 'DroniX', battery: 85, range_km: 11.3, payload: 20, altitude: 42, speed: 134, missions_today: 17, lastUpdate: '2026-07-19 17:09' },
+  { id: 'DRN-0008', model: 'Multirotor-133', type: 'Multirotor', zone: 'Emergency Zone', mission: 'WH Transfer', status: 'Charging', operator: 'AutoSky', battery: 39, range_km: 26.7, payload: 4, altitude: 109, speed: 28, missions_today: 11, lastUpdate: '2026-07-14 10:16' },
+  { id: 'DRN-0009', model: 'VTOL-887', type: 'VTOL Hybrid', zone: 'Metro Zone', mission: 'Medical Supply', status: 'Maintenance', operator: 'SkyPort India', battery: 19, range_km: 55.5, payload: 10, altitude: 126, speed: 92, missions_today: 18, lastUpdate: '2026-07-20 07:08' },
+  { id: 'DRN-0010', model: 'Heavy-757', type: 'Heavy Lift', zone: 'Suburban Ring', mission: 'E-commerce Express', status: 'Standby', operator: 'DroneSeva', battery: 96, range_km: 76.1, payload: 25, altitude: 241, speed: 24, missions_today: 13, lastUpdate: '2026-07-19 07:16' },
+  { id: 'DRN-0011', model: 'Delivery-315', type: 'Delivery Bot', zone: 'Industrial Belt', mission: 'Food Delivery', status: 'Returning', operator: 'AeroLogistics', battery: 69, range_km: 42.4, payload: 5, altitude: 283, speed: 91, missions_today: 12, lastUpdate: '2026-07-05 07:46' },
+  { id: 'DRN-0012', model: 'Agricultural-367', type: 'Agricultural', zone: 'Rural Outreach', mission: 'Agricultural Spray', status: 'Loading', operator: 'FlytBase Ops', battery: 17, range_km: 79.7, payload: 9, altitude: 393, speed: 57, missions_today: 11, lastUpdate: '2026-07-16 06:25' },
+  { id: 'DRN-0013', model: 'Fixed-296', type: 'Fixed Wing', zone: 'Hilly Terrain', mission: 'Survey & Map', status: 'Airborne', operator: 'Garuda Drones', battery: 21, range_km: 59.8, payload: 21, altitude: 196, speed: 148, missions_today: 2, lastUpdate: '2026-07-21 13:52' },
+  { id: 'DRN-0014', model: 'Multirotor-870', type: 'Multirotor', zone: 'Coastal Arc', mission: 'Infra Inspect', status: 'Charging', operator: 'TechEagle', battery: 67, range_km: 3.9, payload: 10, altitude: 301, speed: 125, missions_today: 13, lastUpdate: '2026-07-20 19:30' },
+  { id: 'DRN-0015', model: 'VTOL-609', type: 'VTOL Hybrid', zone: 'Island Connect', mission: 'Emergency Relief', status: 'Maintenance', operator: 'DroniX', battery: 84, range_km: 58.9, payload: 25, altitude: 278, speed: 64, missions_today: 12, lastUpdate: '2026-07-14 09:12' },
+  { id: 'DRN-0016', model: 'Heavy-114', type: 'Heavy Lift', zone: 'Emergency Zone', mission: 'WH Transfer', status: 'Standby', operator: 'AutoSky', battery: 36, range_km: 12.7, payload: 1, altitude: 90, speed: 106, missions_today: 16, lastUpdate: '2026-07-12 20:13' },
+  { id: 'DRN-0017', model: 'Delivery-993', type: 'Delivery Bot', zone: 'Metro Zone', mission: 'Medical Supply', status: 'Returning', operator: 'SkyPort India', battery: 35, range_km: 34.8, payload: 8, altitude: 314, speed: 89, missions_today: 9, lastUpdate: '2026-07-10 09:08' },
+  { id: 'DRN-0018', model: 'Agricultural-233', type: 'Agricultural', zone: 'Suburban Ring', mission: 'E-commerce Express', status: 'Loading', operator: 'DroneSeva', battery: 79, range_km: 52.2, payload: 22, altitude: 98, speed: 37, missions_today: 11, lastUpdate: '2026-07-25 04:39' },
+  { id: 'DRN-0019', model: 'Fixed-665', type: 'Fixed Wing', zone: 'Industrial Belt', mission: 'Food Delivery', status: 'Airborne', operator: 'AeroLogistics', battery: 54, range_km: 19.3, payload: 1, altitude: 209, speed: 132, missions_today: 7, lastUpdate: '2026-07-21 11:35' },
+  { id: 'DRN-0020', model: 'Multirotor-542', type: 'Multirotor', zone: 'Rural Outreach', mission: 'Agricultural Spray', status: 'Charging', operator: 'FlytBase Ops', battery: 27, range_km: 42.7, payload: 24, altitude: 274, speed: 150, missions_today: 7, lastUpdate: '2026-07-19 20:15' },
+  { id: 'DRN-0021', model: 'VTOL-494', type: 'VTOL Hybrid', zone: 'Hilly Terrain', mission: 'Survey & Map', status: 'Maintenance', operator: 'Garuda Drones', battery: 73, range_km: 69.8, payload: 10, altitude: 221, speed: 99, missions_today: 4, lastUpdate: '2026-07-06 08:26' },
+  { id: 'DRN-0022', model: 'Heavy-893', type: 'Heavy Lift', zone: 'Coastal Arc', mission: 'Infra Inspect', status: 'Standby', operator: 'TechEagle', battery: 58, range_km: 76.7, payload: 23, altitude: 138, speed: 125, missions_today: 13, lastUpdate: '2026-07-02 05:43' },
+  { id: 'DRN-0023', model: 'Delivery-538', type: 'Delivery Bot', zone: 'Island Connect', mission: 'Emergency Relief', status: 'Returning', operator: 'DroniX', battery: 40, range_km: 11.5, payload: 16, altitude: 233, speed: 94, missions_today: 8, lastUpdate: '2026-07-01 02:04' },
+  { id: 'DRN-0024', model: 'Agricultural-104', type: 'Agricultural', zone: 'Emergency Zone', mission: 'WH Transfer', status: 'Loading', operator: 'AutoSky', battery: 20, range_km: 68.0, payload: 15, altitude: 331, speed: 41, missions_today: 12, lastUpdate: '2026-07-13 03:20' },
+  { id: 'DRN-0025', model: 'Fixed-467', type: 'Fixed Wing', zone: 'Metro Zone', mission: 'Medical Supply', status: 'Airborne', operator: 'SkyPort India', battery: 54, range_km: 80.0, payload: 8, altitude: 321, speed: 149, missions_today: 3, lastUpdate: '2026-07-13 19:19' },
+  { id: 'DRN-0026', model: 'Multirotor-989', type: 'Multirotor', zone: 'Suburban Ring', mission: 'E-commerce Express', status: 'Charging', operator: 'DroneSeva', battery: 29, range_km: 12.1, payload: 10, altitude: 288, speed: 141, missions_today: 13, lastUpdate: '2026-07-25 09:26' },
+  { id: 'DRN-0027', model: 'VTOL-519', type: 'VTOL Hybrid', zone: 'Industrial Belt', mission: 'Food Delivery', status: 'Maintenance', operator: 'AeroLogistics', battery: 28, range_km: 32.5, payload: 5, altitude: 269, speed: 135, missions_today: 9, lastUpdate: '2026-07-03 10:57' },
+  { id: 'DRN-0028', model: 'Heavy-118', type: 'Heavy Lift', zone: 'Rural Outreach', mission: 'Agricultural Spray', status: 'Standby', operator: 'FlytBase Ops', battery: 48, range_km: 51.3, payload: 18, altitude: 244, speed: 97, missions_today: 13, lastUpdate: '2026-07-07 14:19' },
+  { id: 'DRN-0029', model: 'Delivery-894', type: 'Delivery Bot', zone: 'Hilly Terrain', mission: 'Survey & Map', status: 'Returning', operator: 'Garuda Drones', battery: 69, range_km: 68.2, payload: 4, altitude: 124, speed: 90, missions_today: 16, lastUpdate: '2026-07-29 14:04' },
+  { id: 'DRN-0030', model: 'Agricultural-282', type: 'Agricultural', zone: 'Coastal Arc', mission: 'Infra Inspect', status: 'Loading', operator: 'TechEagle', battery: 27, range_km: 16.0, payload: 14, altitude: 280, speed: 96, missions_today: 7, lastUpdate: '2026-07-04 12:28' },
+  { id: 'DRN-0031', model: 'Fixed-999', type: 'Fixed Wing', zone: 'Island Connect', mission: 'Emergency Relief', status: 'Airborne', operator: 'DroniX', battery: 44, range_km: 59.0, payload: 24, altitude: 338, speed: 103, missions_today: 10, lastUpdate: '2026-07-07 15:15' },
+  { id: 'DRN-0032', model: 'Multirotor-679', type: 'Multirotor', zone: 'Emergency Zone', mission: 'WH Transfer', status: 'Charging', operator: 'AutoSky', battery: 46, range_km: 22.8, payload: 19, altitude: 202, speed: 105, missions_today: 9, lastUpdate: '2026-07-01 20:25' },
+  { id: 'DRN-0033', model: 'VTOL-816', type: 'VTOL Hybrid', zone: 'Metro Zone', mission: 'Medical Supply', status: 'Maintenance', operator: 'SkyPort India', battery: 69, range_km: 76.2, payload: 6, altitude: 70, speed: 52, missions_today: 13, lastUpdate: '2026-07-27 21:25' },
+  { id: 'DRN-0034', model: 'Heavy-539', type: 'Heavy Lift', zone: 'Suburban Ring', mission: 'E-commerce Express', status: 'Standby', operator: 'DroneSeva', battery: 20, range_km: 27.8, payload: 24, altitude: 329, speed: 131, missions_today: 8, lastUpdate: '2026-07-27 00:10' },
+  { id: 'DRN-0035', model: 'Delivery-197', type: 'Delivery Bot', zone: 'Industrial Belt', mission: 'Food Delivery', status: 'Returning', operator: 'AeroLogistics', battery: 57, range_km: 69.3, payload: 21, altitude: 357, speed: 142, missions_today: 16, lastUpdate: '2026-07-03 21:30' },
+  { id: 'DRN-0036', model: 'Agricultural-961', type: 'Agricultural', zone: 'Rural Outreach', mission: 'Agricultural Spray', status: 'Loading', operator: 'FlytBase Ops', battery: 78, range_km: 75.2, payload: 13, altitude: 247, speed: 44, missions_today: 5, lastUpdate: '2026-07-03 09:59' },
+  { id: 'DRN-0037', model: 'Fixed-547', type: 'Fixed Wing', zone: 'Hilly Terrain', mission: 'Survey & Map', status: 'Airborne', operator: 'Garuda Drones', battery: 97, range_km: 64.4, payload: 23, altitude: 53, speed: 92, missions_today: 16, lastUpdate: '2026-07-22 06:45' },
+  { id: 'DRN-0038', model: 'Multirotor-739', type: 'Multirotor', zone: 'Coastal Arc', mission: 'Infra Inspect', status: 'Charging', operator: 'TechEagle', battery: 61, range_km: 22.6, payload: 1, altitude: 265, speed: 148, missions_today: 6, lastUpdate: '2026-07-12 16:12' },
+  { id: 'DRN-0039', model: 'VTOL-931', type: 'VTOL Hybrid', zone: 'Island Connect', mission: 'Emergency Relief', status: 'Maintenance', operator: 'DroniX', battery: 63, range_km: 16.6, payload: 2, altitude: 193, speed: 147, missions_today: 14, lastUpdate: '2026-07-26 17:57' },
+  { id: 'DRN-0040', model: 'Heavy-581', type: 'Heavy Lift', zone: 'Emergency Zone', mission: 'WH Transfer', status: 'Standby', operator: 'AutoSky', battery: 78, range_km: 8.1, payload: 19, altitude: 173, speed: 57, missions_today: 11, lastUpdate: '2026-07-08 10:11' },
+  { id: 'DRN-0041', model: 'Delivery-532', type: 'Delivery Bot', zone: 'Metro Zone', mission: 'Medical Supply', status: 'Returning', operator: 'SkyPort India', battery: 77, range_km: 42.0, payload: 24, altitude: 138, speed: 62, missions_today: 3, lastUpdate: '2026-07-06 10:10' },
+  { id: 'DRN-0042', model: 'Agricultural-281', type: 'Agricultural', zone: 'Suburban Ring', mission: 'E-commerce Express', status: 'Loading', operator: 'DroneSeva', battery: 60, range_km: 19.2, payload: 23, altitude: 37, speed: 108, missions_today: 3, lastUpdate: '2026-07-12 21:30' },
+  { id: 'DRN-0043', model: 'Fixed-684', type: 'Fixed Wing', zone: 'Industrial Belt', mission: 'Food Delivery', status: 'Airborne', operator: 'AeroLogistics', battery: 67, range_km: 21.7, payload: 15, altitude: 69, speed: 68, missions_today: 8, lastUpdate: '2026-07-19 15:03' },
+  { id: 'DRN-0044', model: 'Multirotor-685', type: 'Multirotor', zone: 'Rural Outreach', mission: 'Agricultural Spray', status: 'Charging', operator: 'FlytBase Ops', battery: 27, range_km: 54.5, payload: 21, altitude: 399, speed: 39, missions_today: 2, lastUpdate: '2026-07-01 14:16' },
+  { id: 'DRN-0045', model: 'VTOL-658', type: 'VTOL Hybrid', zone: 'Hilly Terrain', mission: 'Survey & Map', status: 'Maintenance', operator: 'Garuda Drones', battery: 70, range_km: 27.8, payload: 9, altitude: 59, speed: 115, missions_today: 17, lastUpdate: '2026-07-20 00:22' },
+  { id: 'DRN-0046', model: 'Heavy-647', type: 'Heavy Lift', zone: 'Coastal Arc', mission: 'Infra Inspect', status: 'Standby', operator: 'TechEagle', battery: 38, range_km: 27.9, payload: 17, altitude: 219, speed: 106, missions_today: 5, lastUpdate: '2026-07-22 17:58' },
+  { id: 'DRN-0047', model: 'Delivery-223', type: 'Delivery Bot', zone: 'Island Connect', mission: 'Emergency Relief', status: 'Returning', operator: 'DroniX', battery: 80, range_km: 26.3, payload: 19, altitude: 109, speed: 127, missions_today: 15, lastUpdate: '2026-07-18 00:54' },
+  { id: 'DRN-0048', model: 'Agricultural-150', type: 'Agricultural', zone: 'Emergency Zone', mission: 'WH Transfer', status: 'Loading', operator: 'AutoSky', battery: 36, range_km: 21.5, payload: 5, altitude: 64, speed: 135, missions_today: 9, lastUpdate: '2026-07-07 20:39' },
+  { id: 'DRN-0049', model: 'Fixed-628', type: 'Fixed Wing', zone: 'Metro Zone', mission: 'Medical Supply', status: 'Airborne', operator: 'SkyPort India', battery: 37, range_km: 70.1, payload: 18, altitude: 386, speed: 108, missions_today: 7, lastUpdate: '2026-07-09 06:12' },
+  { id: 'DRN-0050', model: 'Multirotor-537', type: 'Multirotor', zone: 'Suburban Ring', mission: 'E-commerce Express', status: 'Charging', operator: 'DroneSeva', battery: 87, range_km: 38.4, payload: 16, altitude: 83, speed: 27, missions_today: 10, lastUpdate: '2026-07-04 05:44' },
+  { id: 'DRN-0051', model: 'VTOL-185', type: 'VTOL Hybrid', zone: 'Industrial Belt', mission: 'Food Delivery', status: 'Maintenance', operator: 'AeroLogistics', battery: 76, range_km: 6.0, payload: 20, altitude: 168, speed: 61, missions_today: 8, lastUpdate: '2026-07-12 17:10' },
+  { id: 'DRN-0052', model: 'Heavy-161', type: 'Heavy Lift', zone: 'Rural Outreach', mission: 'Agricultural Spray', status: 'Standby', operator: 'FlytBase Ops', battery: 42, range_km: 15.0, payload: 9, altitude: 382, speed: 131, missions_today: 1, lastUpdate: '2026-07-17 06:15' },
+  { id: 'DRN-0053', model: 'Delivery-363', type: 'Delivery Bot', zone: 'Hilly Terrain', mission: 'Survey & Map', status: 'Returning', operator: 'Garuda Drones', battery: 64, range_km: 67.2, payload: 4, altitude: 217, speed: 32, missions_today: 6, lastUpdate: '2026-07-15 16:13' },
+  { id: 'DRN-0054', model: 'Agricultural-443', type: 'Agricultural', zone: 'Coastal Arc', mission: 'Infra Inspect', status: 'Loading', operator: 'TechEagle', battery: 76, range_km: 55.0, payload: 6, altitude: 235, speed: 148, missions_today: 4, lastUpdate: '2026-07-07 08:00' },
+  { id: 'DRN-0055', model: 'Fixed-445', type: 'Fixed Wing', zone: 'Island Connect', mission: 'Emergency Relief', status: 'Airborne', operator: 'DroniX', battery: 41, range_km: 53.5, payload: 18, altitude: 377, speed: 20, missions_today: 3, lastUpdate: '2026-07-11 10:25' },
+]
 
-const PIE_COLORS = ["#0284c7", "#059669", "#ea580c", "#7c3aed", "#e11d48", "#d97706", "#0891b2", "#6366f1"]
+const monthlyData = [
+  { month: 'Jan', flights: 351, deliveries: 291, successRate: 94.5 },
+  { month: 'Feb', flights: 742, deliveries: 505, successRate: 90.0 },
+  { month: 'Mar', flights: 560, deliveries: 566, successRate: 93.5 },
+  { month: 'Apr', flights: 755, deliveries: 521, successRate: 91.5 },
+  { month: 'May', flights: 205, deliveries: 407, successRate: 95.6 },
+  { month: 'Jun', flights: 633, deliveries: 451, successRate: 95.3 },
+  { month: 'Jul', flights: 392, deliveries: 410, successRate: 96.4 },
+  { month: 'Aug', flights: 563, deliveries: 240, successRate: 92.6 },
+  { month: 'Sep', flights: 699, deliveries: 575, successRate: 97.7 },
+  { month: 'Oct', flights: 233, deliveries: 337, successRate: 91.2 },
+  { month: 'Nov', flights: 360, deliveries: 510, successRate: 99.0 },
+  { month: 'Dec', flights: 533, deliveries: 391, successRate: 94.8 },
+]
 
-// ============================================================================
-// Color Maps
-// ============================================================================
-const DRONE_STATUS_COLORS: Record<string, string> = {
-  "Active": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
-  "Idle": "bg-slate-100 text-slate-700 dark:bg-slate-900/40 dark:text-slate-300",
-  "In Flight": "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300 ddh-pulse-active",
-  "Charging": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 ddh-pulse-charge",
-  "Maintenance": "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
-  "Offline": "bg-gray-100 text-gray-600 dark:bg-gray-800/40 dark:text-gray-400",
-  "Calibrating": "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 ddh-pulse-active",
-  "Returning": "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300 ddh-pulse-active",
-}
-const PRIORITY_COLORS: Record<string, string> = {
-  "Emergency": "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 ddh-pulse-critical",
-  "Rush": "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
-  "High": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  "Medium": "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
-  "Low": "bg-slate-100 text-slate-600 dark:bg-slate-900/40 dark:text-slate-400",
-}
-const DELIVERY_STATUS_COLORS: Record<string, string> = {
-  "Queued": "bg-slate-100 text-slate-700 dark:bg-slate-900/40 dark:text-slate-300",
-  "Dispatched": "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 ddh-pulse-active",
-  "In Flight": "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300 ddh-pulse-active",
-  "Hovering": "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300 ddh-pulse-active",
-  "Delivered": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
-  "Failed": "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 ddh-pulse-error",
-  "Rerouted": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  "Returning": "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
-}
-const FLIGHT_STATUS_COLORS: Record<string, string> = {
-  "Completed": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
-  "Aborted": "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 ddh-pulse-error",
-  "Rerouted": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  "Low Battery Return": "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
-  "Signal Lost": "bg-gray-100 text-gray-600 dark:bg-gray-800/40 dark:text-gray-400",
-  "Collision Avoided": "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300 ddh-pulse-warning",
-}
-const NFZ_TYPE_COLORS: Record<string, string> = {
-  "Airport Proximity": "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300",
-  "Military Area": "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-300",
-  "Government Building": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  "Hospital": "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300",
-  "School": "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
-  "Dense Population": "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300",
-  "Temporary Event": "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300",
-  "Weather Hazard": "bg-slate-100 text-slate-700 dark:bg-slate-900/40 dark:text-slate-300",
-}
-const NFZ_STATUS_COLORS: Record<string, string> = {
-  "Active": "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300",
-  "Expired": "bg-gray-100 text-gray-600 dark:bg-gray-800/40 dark:text-gray-400",
-  "Suspended": "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300",
-  "Updated": "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300",
+const zoneDist = [
+  { name: 'Metro Zone', value: 45 },
+  { name: 'Suburban Ring', value: 54 },
+  { name: 'Industrial Belt', value: 61 },
+  { name: 'Rural Outreach', value: 58 },
+  { name: 'Hilly Terrain', value: 39 },
+  { name: 'Coastal Arc', value: 31 },
+  { name: 'Island Connect', value: 42 },
+  { name: 'Emergency Zone', value: 44 },
+]
+
+const filterGroups = [
+  { key: 'type', label: 'Drone Type', options: DRONE_TYPES.map(t => ({ value: t, label: t, count: 0 })) },
+  { key: 'status', label: 'Status', options: STATUSES.map(s => ({ value: s, label: s, count: 0 })) },
+  { key: 'mission', label: 'Mission', options: MISSION_TYPES.map(m => ({ value: m, label: m, count: 0 })) },
+]
+
+function TypeBadge({ type }: { type: string }) {
+  const color = type === 'Fixed Wing' ? 'bg-emerald-500/15 text-emerald-400' : type === 'Multirotor' ? 'bg-cyan-500/15 text-cyan-400' : type === 'VTOL Hybrid' ? 'bg-blue-500/15 text-blue-400' : type === 'Heavy Lift' ? 'bg-amber-500/15 text-amber-400' : type === 'Delivery Bot' ? 'bg-violet-500/15 text-violet-400' : 'bg-rose-500/15 text-rose-400'
+  return <span className={'drh-type-badge px-2 py-0.5 rounded-full text-xs font-medium ' + color}>{type}</span>
 }
 
-// ============================================================================
-// Data Generation
-// ============================================================================
-interface DroneRecord { id: string; type: string; model: string; zone: string; status: string; battery: number; lastFlight: number; totalFlights: number; flightHours: number; healthScore: number; }
-interface DeliveryRecord { id: string; customer: string; pickupHub: string; dropLocation: string; weight: number; distance: number; priority: string; status: string; droneAssigned: string; eta: number; }
-interface FlightRecord { id: string; droneId: string; route: string; distance: number; duration: number; speed: number; altitude: number; wind: number; status: string; energyUsed: number; }
-interface NFZRecord { id: string; type: string; location: string; radius: number; altitudeLimit: number; reason: string; status: string; validUntil: string; }
-
-function generateData() {
-  const drones: DroneRecord[] = []
-  for (let i = 0; i < 75; i++) {
-    const s = i * 17 + 3
-    drones.push({
-      id: `DRN-${String(i + 100).padStart(3, "0")}`, type: pick(DRONE_TYPES, s) as string,
-      model: pick(DRONE_MODELS, s + 1) as string, zone: pick(DRONE_ZONES, s + 2) as string,
-      status: pick(DRONE_STATUSES, s + 3) as string, battery: ri(5, 100, s + 4),
-      lastFlight: ri(5, 120, s + 5), totalFlights: ri(10, 5000, s + 6),
-      flightHours: ri(5, 2000, s + 7), healthScore: ri(55, 99, s + 8),
-    })
-  }
-
-  const deliveries: DeliveryRecord[] = []
-  for (let i = 0; i < 70; i++) {
-    const s = i * 19 + 7
-    deliveries.push({
-      id: `DLV-${String(i + 5001).padStart(4, "0")}`, customer: pick(INDIAN_CUSTOMERS, s) as string,
-      pickupHub: pick(INDIAN_HUBS, s + 1) as string, dropLocation: pick(INDIAN_LOCATIONS, s + 2) as string,
-      weight: ri(50, 5000, s + 3), distance: ri(1, 30, s + 4), priority: pick(DELIVERY_PRIORITIES, s + 5) as string,
-      status: pick(DELIVERY_STATUSES, s + 6) as string, droneAssigned: `DRN-${String(ri(100, 174, s + 7)).padStart(3, "0")}`,
-      eta: ri(5, 90, s + 8),
-    })
-  }
-
-  const flights: FlightRecord[] = []
-  for (let i = 0; i < 60; i++) {
-    const s = i * 23 + 11
-    flights.push({
-      id: `FLT-${String(i + 3001).padStart(4, "0")}`, droneId: `DRN-${String(ri(100, 174, s)).padStart(3, "0")}`,
-      route: `${pick(INDIAN_HUBS, s + 1).toString().split(" ")[0]} → ${pick(INDIAN_LOCATIONS, s + 2).toString().split(" ")[0]}`,
-      distance: ri(1, 30, s + 3), duration: ri(5, 120, s + 4), speed: ri(15, 80, s + 5),
-      altitude: ri(30, 150, s + 6), wind: ri(0, 45, s + 7),
-      status: pick(FLIGHT_STATUSES, s + 8) as string, energyUsed: ri(10, 85, s + 9),
-    })
-  }
-
-  const nfzs: NFZRecord[] = []
-  const nfzLocations = ["IGI Airport Delhi (5km)", "Mumbai Chhatrapati Airport (5km)", "Bangalore HAL Airport (4km)", "Chennai Airport (5km)", "Hyderabad Airport (4km)", "Rashtrapati Bhavan Delhi (2km)", "Indian Parliament (2km)", "Military Station Bangalore (3km)", "INS Vikramaditya Kochi (5km)", "ISRO HQ Ahmedabad (3km)", "DRDO Hyderabad (4km)", "Taj Mahal Agra (3km)", "PMO New Delhi (2km)", "South Block Delhi (2km)", "Defence Colony Mumbai (2km)"]
-  const nfzReasons = ["Restricted airspace per DGCA", "Security zone per GOI", "VIP movement area", "Controlled airspace", "Temporary restriction for event", "Weather advisory", "Low altitude restriction", "Population density safety"]
-  for (let i = 0; i < 55; i++) {
-    const s = i * 29 + 13
-    nfzs.push({
-      id: `NFZ-${String(i + 4001).padStart(4, "0")}`, type: pick(NFZ_TYPES, s) as string,
-      location: nfzLocations[i % nfzLocations.length],
-      radius: ri(1, 10, s + 1), altitudeLimit: ri(30, 200, s + 2),
-      reason: nfzReasons[i % nfzReasons.length], status: pick(NFZ_STATUSES, s + 3) as string,
-      validUntil: `${ri(1, 28, s + 4)}/${ri(1, 12, s + 5)}/2027`,
-    })
-  }
-
-  // Chart data
-  const hourlyDeliveries = Array.from({ length: 24 }, (_, i) => ({
-    hour: `${String(i).padStart(2, "0")}:00`,
-    "Completed": ri(5, 25, i * 3), "In-Flight": ri(2, 12, i * 3 + 1), "Charging": ri(1, 8, i * 3 + 2),
-  }))
-  const typeDist = DRONE_TYPES.map((t, i) => ({ name: t, value: ri(5, 25, i * 7) }))
-  const zoneCoverage = DRONE_ZONES.map((z, i) => ({ name: z.split(" ")[0] + " " + z.split(" ")[1], value: ri(30, 100, i * 11) }))
-  const dailyTrend = Array.from({ length: 14 }, (_, i) => ({ day: `Day ${i + 1}`, deliveries: ri(50, 200, i * 5) }))
-  const zoneThroughput = DRONE_ZONES.map((z, i) => ({ name: z.split(" ")[0] + " " + z.split(" ")[1], count: ri(20, 120, i * 9) }))
-  const failureReasons = ["Low Battery", "Signal Lost", "Wind Exceeded", "NFZ Violation", "Payload Too Heavy", "Obstacle Detected", "Motor Failure", "Weather"].map((r, i) => ({ name: r, count: ri(2, 20, i * 13) }))
-  const costTrend = Array.from({ length: 6 }, (_, i) => ({
-    month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"][i],
-    "Fuel Savings": ri(200000, 800000, i * 3), "Labor Savings": ri(300000, 1000000, i * 3 + 1),
-    "Maintenance": ri(100000, 400000, i * 3 + 2), "Revenue": ri(500000, 2000000, i * 3 + 3),
-  }))
-
-  return { drones, deliveries, flights, nfzs, hourlyDeliveries, typeDist, zoneCoverage, dailyTrend, zoneThroughput, failureReasons, costTrend }
+function StatusBadge({ status }: { status: string }) {
+  const color = status === 'Airborne' ? 'bg-emerald-500/15 text-emerald-400' : status === 'Charging' ? 'bg-amber-500/15 text-amber-400' : status === 'Maintenance' ? 'bg-red-500/15 text-red-400' : status === 'Standby' ? 'bg-zinc-500/15 text-zinc-400' : status === 'Returning' ? 'bg-blue-500/15 text-blue-400' : 'bg-cyan-500/15 text-cyan-400'
+  return <span className={'drh-status-badge px-2 py-0.5 rounded-full text-xs font-medium ' + color}>{status}</span>
 }
 
-// ============================================================================
-// Visual Components
-// ============================================================================
-function DroneTypeBadge({ type }: { type: string }) {
-  const icons: Record<string, string> = { "Quadcopter": "🚁", "Hexacopter": "🎯", "Fixed-Wing": "✈️", "Hybrid": "🔄", "Heavy-Lift": "🏗️", "Nano": "🤏" }
-  return <Badge className="text-[10px] px-1.5 py-0 font-medium bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300">{icons[type] ?? ""} {type}</Badge>
-}
-function DroneStatusBadge({ status }: { status: string }) { return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", DRONE_STATUS_COLORS[status] ?? "bg-gray-100 text-gray-700")}>{status}</Badge> }
-function BatteryBar({ pct }: { pct: number }) {
-  const color = pct > 60 ? "bg-emerald-500" : pct > 20 ? "bg-amber-500" : "bg-red-500"
-  return <div className="flex items-center gap-2 w-20"><div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div className={cn("h-full rounded-full transition-all", color)} style={{ width: `${Math.min(pct, 100)}%` }} /></div><span className="text-[10px] font-mono">{pct}%</span></div>
-}
-function HealthBar({ pct }: { pct: number }) {
-  const color = pct > 80 ? "bg-emerald-500" : pct > 60 ? "bg-amber-500" : "bg-red-500"
-  return <div className="flex items-center gap-2 w-20"><div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div className={cn("h-full rounded-full", color)} style={{ width: `${Math.min(pct, 100)}%` }} /></div><span className="text-[10px] font-mono">{pct}</span></div>
-}
-function PriorityBadge({ priority }: { priority: string }) { return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", PRIORITY_COLORS[priority] ?? "bg-gray-100 text-gray-700")}>{priority}</Badge> }
-function DeliveryStatusBadge({ status }: { status: string }) { return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", DELIVERY_STATUS_COLORS[status] ?? "bg-gray-100 text-gray-700")}>{status}</Badge> }
-function FlightStatusBadge({ status }: { status: string }) { return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", FLIGHT_STATUS_COLORS[status] ?? "bg-gray-100 text-gray-700")}>{status}</Badge> }
-function EnergyBar({ pct }: { pct: number }) {
-  const color = pct < 30 ? "bg-emerald-500" : pct < 60 ? "bg-amber-500" : "bg-red-500"
-  return <div className="flex items-center gap-2 w-20"><div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden"><div className={cn("h-full rounded-full", color)} style={{ width: `${Math.min(pct, 100)}%` }} /></div><span className="text-[10px] font-mono">{pct}%</span></div>
-}
-function SpeedTile({ speed }: { speed: number }) {
-  const color = speed > 60 ? "text-emerald-600 dark:text-emerald-400" : speed > 30 ? "text-amber-600 dark:text-amber-400" : "text-red-600 dark:text-red-400"
-  return <span className={cn("text-xs font-mono font-medium", color)}>{speed} km/h</span>
-}
-function NFZTypeBadge({ type }: { type: string }) { return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", NFZ_TYPE_COLORS[type] ?? "bg-gray-100 text-gray-700")}>{type}</Badge> }
-function NFZStatusBadge({ status }: { status: string }) { return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", NFZ_STATUS_COLORS[status] ?? "bg-gray-100 text-gray-700")}>{status}</Badge> }
-function AltitudeTile({ alt }: { alt: number }) {
-  const color = alt > 120 ? "text-red-600 dark:text-red-400" : alt > 80 ? "text-amber-600 dark:text-amber-400" : "text-sky-600 dark:text-sky-400"
-  return <span className={cn("text-xs font-mono font-medium", color)}>{alt}m</span>
-}
-function ZoneBadge({ zone }: { zone: string }) { const short = zone.split(" ")[0] + " " + zone.split(" ")[1]; return <Badge className="text-[10px] px-1.5 py-0 font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">{short}</Badge> }
-function DistanceTile({ km }: { km: number }) { return <span className="text-xs font-mono font-medium text-sky-600 dark:text-sky-400">{km} km</span> }
-function WeightTile({ g }: { g: number }) {
-  const color = g > 3000 ? "text-red-600 dark:text-red-400" : g > 1000 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
-  return <span className={cn("text-xs font-mono font-medium", color)}>{g}g</span>
-}
-function ETATile({ min }: { min: number }) {
-  const color = min > 60 ? "text-red-600 dark:text-red-400" : min > 30 ? "text-amber-600 dark:text-amber-400" : "text-emerald-600 dark:text-emerald-400"
-  return <span className={cn("text-xs font-mono font-medium", color)}>{min}m</span>
+function BatteryIndicator({ value }: { value: number }) {
+  const w = value
+  const color = value > 60 ? 'bg-emerald-500' : value > 30 ? 'bg-amber-500' : 'bg-red-500'
+  return <div className='drh-batt-bar w-full h-2 bg-zinc-800 rounded-full overflow-hidden'><div className={'h-full rounded-full drh-batt-fill ' + color} style={{ width: w + '%', animation: 'drh-grow 1s ease-out' }}/></div>
 }
 
-function SortHeader({ label, field, sortField, sortDir, onSort }: { label: string; field: string; sortField: string; sortDir: "asc" | "desc"; onSort: (f: string) => void }) {
-  return (
-    <TableHead className="cursor-pointer select-none hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" onClick={() => onSort(field)}>
-      <div className={cn("flex items-center gap-1 text-xs font-semibold uppercase tracking-wider", sortField === field ? "text-foreground" : "text-gray-500 dark:text-gray-400")}>
-        {label}
-        {sortField === field && <span className="text-[10px]">{sortDir === "asc" ? "↑" : "↓"}</span>}
-      </div>
-    </TableHead>
-  )
+function PayloadBar({ value, max }: { value: number; max: number }) {
+  const w = Math.round(value / max * 100)
+  return <div className='drh-pl-bar w-full h-2 bg-zinc-800 rounded-full overflow-hidden'><div className='h-full rounded-full bg-cyan-500 drh-pl-fill' style={{ width: w + '%', animation: 'drh-grow 1s ease-out' }}/></div>
 }
 
-// ============================================================================
-// Main
-// ============================================================================
+function HealthRing({ value, label, color }: { value: number; label: string; color: string }) {
+  const r = 28, c = 2 * Math.PI * r, offset = c - (value / 100) * c
+  return <div className='drh-ring flex flex-col items-center'><svg width='70' height='70' className='-rotate-90'><circle cx='35' cy='35' r={r} fill='none' stroke='#27272a' strokeWidth='5'/><circle cx='35' cy='35' r={r} fill='none' stroke={color} strokeWidth='5' strokeDasharray={c} strokeDashoffset={offset} strokeLinecap='round' className='drh-ring-path' style={{ transition: 'stroke-dashoffset 1s ease' }}/></svg><span className='drh-ring-val text-sm font-bold mt-1' style={{ color }}>{value}%</span><span className='drh-ring-label text-[10px] text-zinc-500'>{label}</span></div>
+}
+
+function KpiTile({ label, value, sub, color }: { label: string; value: string; sub: string; color: string }) {
+  return <div className='drh-kpi bg-zinc-900/80 border border-zinc-800 rounded-xl p-4 drh-kpi-card'><p className='text-xs text-zinc-500 mb-1'>{label}</p><p className={'text-xl font-bold ' + color}>{value}</p><p className='text-[10px] text-zinc-400 mt-1'>{sub}</p></div>
+}
+
+function ValueTile({ label, value, change }: { label: string; value: string; change: string }) {
+  const up = change.startsWith('+')
+  return <div className='drh-value-tile bg-zinc-900/60 border border-zinc-800 rounded-lg p-3'><p className='text-xs text-zinc-500'>{label}</p><p className='text-lg font-bold text-white mt-1'>{value}</p><p className={'text-xs mt-1 ' + (up ? 'text-emerald-400' : 'text-red-400')}>{change}</p></div>
+}
+
+const insights = [
+  { title: 'BVLOS Permission Granted', desc: 'DGCA approved Beyond Visual Line of Sight operations for 5 zones covering Mumbai-Pune corridor. 12 new delivery routes activated. Expected daily capacity: +340 flights.', severity: 'high' },
+  { title: 'Battery Technology Upgrade', desc: 'Lithium-sulfur cells deployed across 20 Multirotor fleet. Flight endurance increased from 35min to 62min. Payload capacity up 15%. Maintenance cost down 22%.', severity: 'medium' },
+  { title: 'Weather API Integration', desc: 'Real-time IMD weather feed now auto-halts flights during wind >40km/h or visibility <500m. Prevented 23 unsafe flights in July. Safety compliance at 99.7%.', severity: 'medium' },
+  { title: 'Rural Medical Route Success', desc: 'Emergency medical supply drone route to 8 PHCs in Karnataka rural belt achieving 94% on-time delivery. Avg delivery time: 18 min vs 2.5 hrs by road.', severity: 'low' },
+]
+
 export default function DroneDeliveryHubView() {
-  const { toast } = useToast()
-  const data = useMemo(() => generateData(), [])
-  const [activeTab, setActiveTab] = useState("0")
-  const [searchQ, setSearchQ] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [sortField, setSortField] = useState("")
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc")
-  const [sheetOpen, setSheetOpen] = useState(false)
-  const [selectedDelivery, setSelectedDelivery] = useState<DeliveryRecord | null>(null)
+  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
+  const [searchQuery, setSearchQuery] = useState('')
+  const [tab, setTab] = useState('dashboard')
 
-  const kpis = useMemo(() => [
-    { label: "Active Drones", value: data.drones.filter(d => d.status === "Active" || d.status === "In Flight").length.toString(), change: "+3", up: true, icon: Send, color: "text-sky-600 dark:text-sky-400" },
-    { label: "Deliveries Today", value: "347", change: "+22%", up: true, icon: Package, color: "text-emerald-600 dark:text-emerald-400" },
-    { label: "Avg Flight Time", value: "18min", change: "-2min", up: false, icon: Clock, color: "text-blue-600 dark:text-blue-400" },
-    { label: "Coverage Radius", value: "25km", change: "+5km", up: true, icon: MapPin, color: "text-violet-600 dark:text-violet-400" },
-    { label: "Success Rate", value: "96.8%", change: "+0.5%", up: true, icon: Target, color: "text-emerald-600 dark:text-emerald-400" },
-    { label: "Battery Health", value: "82%", change: "-1%", up: false, icon: Battery, color: "text-amber-600 dark:text-amber-400" },
-    { label: "Fleet Utilization", value: "74%", change: "+8%", up: true, icon: Gauge, color: "text-cyan-600 dark:text-cyan-400" },
-    { label: "Cost Savings", value: formatINR(12400000), change: "+15%", up: true, icon: IndianRupee, color: "text-emerald-600 dark:text-emerald-400" },
-  ], [data])
-
-  const handleSort = (field: string) => { if (sortField === field) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortField(field); setSortDir("desc") } }
-
-  const sortFn = <T,>(items: T[], field: string): T[] => {
-    if (!field) return items
-    return [...items].sort((a, b) => { const aV = (a as unknown as Record<string, string | number>)[field] ?? ""; const bV = (b as unknown as Record<string, string | number>)[field] ?? ""; return sortDir === "asc" ? (aV < bV ? -1 : aV > bV ? 1 : 0) : (aV < bV ? 1 : aV > bV ? -1 : 0) })
+  const toggleFilter = (key: string, val: string) => {
+    setActiveFilters(prev => {
+      const cur = prev[key] || []
+      const next = cur.includes(val) ? cur.filter(v => v !== val) : [...cur, val]
+      return { ...prev, [key]: next }
+    })
   }
 
-  const filteredDrones = useMemo(() => { let f = data.drones; if (searchQ) f = f.filter(d => d.id.toLowerCase().includes(searchQ.toLowerCase()) || d.model.toLowerCase().includes(searchQ.toLowerCase())); if (statusFilter !== "all") f = f.filter(d => d.status === statusFilter); return sortFn(f, sortField) }, [data.drones, searchQ, statusFilter, sortField, sortDir])
-  const filteredDeliveries = useMemo(() => { let f = data.deliveries; if (searchQ) f = f.filter(d => d.customer.toLowerCase().includes(searchQ.toLowerCase()) || d.id.toLowerCase().includes(searchQ.toLowerCase())); if (statusFilter !== "all") f = f.filter(d => d.status === statusFilter); return sortFn(f, sortField) }, [data.deliveries, searchQ, statusFilter, sortField, sortDir])
-  const filteredFlights = useMemo(() => { let f = data.flights; if (searchQ) f = f.filter(f2 => f2.id.toLowerCase().includes(searchQ.toLowerCase()) || f2.route.toLowerCase().includes(searchQ.toLowerCase())); if (statusFilter !== "all") f = f.filter(f2 => f2.status === statusFilter); return sortFn(f, sortField) }, [data.flights, searchQ, statusFilter, sortField, sortDir])
-  const filteredNFZs = useMemo(() => { let f = data.nfzs; if (searchQ) f = f.filter(n => n.location.toLowerCase().includes(searchQ.toLowerCase()) || n.type.toLowerCase().includes(searchQ.toLowerCase())); if (statusFilter !== "all") f = f.filter(n => n.status === statusFilter); return sortFn(f, sortField) }, [data.nfzs, searchQ, statusFilter, sortField, sortDir])
-
-  const openDetail = (d: DeliveryRecord) => { setSelectedDelivery(d); setSheetOpen(true); toast.info("Delivery Detail", `Viewing ${d.id}`) }
+  const filtered = drones.filter(d => {
+    for (const [key, vals] of Object.entries(activeFilters)) {
+      if (vals.length > 0 && !vals.includes(d[key as keyof typeof d] as string)) return false
+    }
+    if (searchQuery && !Object.values(d).some(v => String(v).toLowerCase().includes(searchQuery.toLowerCase()))) return false
+    return true
+  })
 
   return (
-    <div className="space-y-4 p-4 md:p-6">
-      <PageHeader title="Drone Delivery Hub" description="Fleet management, delivery operations, flight analytics and no-fly zone compliance for drone-based logistics" />
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="bg-gray-100 dark:bg-gray-800 p-1 h-auto flex-wrap gap-1">
-          {["Drone Dashboard", "Fleet Management", "Delivery Queue", "Flight Analytics", "No-Fly Zones", "Delivery Analytics"].map((t, i) => (
-            <TabsTrigger key={i} value={String(i)} className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-sky-600 data-[state=active]:to-emerald-600 data-[state=active]:text-white text-xs px-3 py-1.5">{t}</TabsTrigger>
-          ))}
+    <div className='drh-root space-y-4 p-4'>
+      <PageHeader title='Drone Delivery Hub' description='UAV fleet management & autonomous delivery operations' />
+
+      <Tabs value={tab} onValueChange={setTab}>
+        <TabsList className='drh-tabs-list bg-zinc-900 border border-zinc-800'>
+          <TabsTrigger value='dashboard' className='drh-tab'>Dashboard</TabsTrigger>
+          <TabsTrigger value='fleet' className='drh-tab'>Fleet</TabsTrigger>
+          <TabsTrigger value='analytics' className='drh-tab'>Analytics</TabsTrigger>
+          <TabsTrigger value='insights' className='drh-tab'>Insights</TabsTrigger>
         </TabsList>
 
-        {/* Tab 0: Dashboard */}
-        <TabsContent value="0" className="space-y-4 mt-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {kpis.map((k, i) => { const Icon = k.icon; return (
-              <Card key={i} className="hover-lift-sm ddh-kpi-card border-l-4 border-l-sky-500 hover:shadow-lg transition-shadow">
-                <CardContent className="inner-glow p-3">
-                  <div className="flex items-center justify-between">
-                    <div><p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p><p className="text-lg font-bold mt-0.5">{k.value}</p>
-                      <div className={cn("flex items-center text-[10px] mt-1 gap-0.5", k.up ? "text-emerald-600" : "text-red-600")}>{k.up ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}{k.change}</div>
-                    </div>
-                    <Icon className={cn("w-5 h-5 opacity-50", k.color)} />
-                  </div>
-                </CardContent>
-              </Card>
-            )})}
+        <TabsContent value='dashboard' className='drh-tab-content space-y-4 mt-4'>
+          <div className='drh-kpi-row grid grid-cols-2 lg:grid-cols-4 gap-3'>
+            <KpiTile label='Active Drones' value='55' sub='+12 this quarter' color='text-emerald-400' />
+            <KpiTile label='Flights Today' value='142' sub='+28% vs avg' color='text-cyan-400' />
+            <KpiTile label='Success Rate' value='96.8%' sub='+1.2pp' color='text-blue-400' />
+            <KpiTile label='Avg Delivery' value='18 min' sub='-4 min improvement' color='text-amber-400' />
           </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            <Card className="hover-lift-sm ddh-chart-card col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Hourly Deliveries</CardTitle></CardHeader><CardContent><AreaChart data={data.hourlyDeliveries} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="hour" tick={{ fontSize: 8 }} interval={2} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Completed" stackId="a" fill="#059669" /><Area type="monotone" dataKey="In-Flight" stackId="a" fill="#0284c7" /><Area type="monotone" dataKey="Charging" stackId="a" fill="#d97706" /></AreaChart></CardContent></Card>
-            <Card className="hover-lift-sm ddh-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Drone Types</CardTitle></CardHeader><CardContent><PieChart width={240} height={240}><Pie data={data.typeDist} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label={({ name, percent }) => `${name.split("-")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={9}>{data.typeDist.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          <div className='drh-ring-row flex flex-wrap justify-around gap-2'>
+            <HealthRing value={97} label='Safety' color='#10b981' />
+            <HealthRing value={84} label='Battery Avg' color='#06b6d4' />
+            <HealthRing value={91} label='On-Time' color='#3b82f6' />
+            <HealthRing value={73} label='Coverage' color='#f59e0b' />
+            <HealthRing value={88} label='Uptime' color='#8b5cf6' />
+            <HealthRing value={95} label='Signal' color='#ec4899' />
           </div>
-          <Card className="hover-lift-sm ddh-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Zone Coverage</CardTitle></CardHeader><CardContent><BarChart data={data.zoneCoverage} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="value" fill="#0284c7" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
-        </TabsContent>
-
-        {/* Tab 1: Fleet Management */}
-        <TabsContent value="1" className="space-y-4 mt-4">
-          <div className="flex flex-wrap gap-2 items-center">
-            <div className="relative flex-1 min-w-[200px] max-w-sm"><Search className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-gray-400" /><Input placeholder="Search by ID, model..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-8 h-9 text-xs" /></div>
-            <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 text-xs w-[140px]"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All</SelectItem>{DRONE_STATUSES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
-          </div>
-          <div className="border rounded-lg overflow-auto max-h-[520px]">
-            <Table><TableHeader><TableRow>
-              <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Type</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Model</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Zone</TableHead>
-              <SortHeader label="Status" field="status" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Battery</TableHead>
-              <SortHeader label="Flights" field="totalFlights" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Health</TableHead>
-            </TableRow></TableHeader><TableBody>
-              {filteredDrones.map(d => (<TableRow key={d.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
-                <TableCell className="text-xs font-mono">{d.id}</TableCell><TableCell><DroneTypeBadge type={d.type} /></TableCell><TableCell className="text-xs">{d.model}</TableCell><TableCell><ZoneBadge zone={d.zone} /></TableCell><TableCell><DroneStatusBadge status={d.status} /></TableCell><TableCell><BatteryBar pct={d.battery} /></TableCell><TableCell className="text-xs font-mono">{d.totalFlights.toLocaleString()}</TableCell><TableCell><HealthBar pct={d.healthScore} /></TableCell>
-              </TableRow>))}
-            </TableBody></Table>
+          <div className='drh-chart-row grid grid-cols-1 lg:grid-cols-3 gap-4'>
+            <Card className='drh-chart-card bg-zinc-900/60 border-zinc-800'><CardHeader className='pb-2'><CardTitle className='text-sm text-zinc-300'>Flight Volume</CardTitle></CardHeader><CardContent><LineChart data={monthlyData} width={350} height={200}><CartesianGrid strokeDasharray='3 3' stroke='#27272a'/><XAxis dataKey='month' tick={{ fontSize: 10 }} stroke='#71717a'/><YAxis tick={{ fontSize: 10 }} stroke='#71717a'/><Tooltip contentStyle={{ background: '#18181b', border: '1px solid #27272a', borderRadius: 8, fontSize: 11 }}/><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }}/><Line type='monotone' dataKey='flights' stroke='#10b981' strokeWidth={2} dot={false}/><Line type='monotone' dataKey='deliveries' stroke='#06b6d4' strokeWidth={2} dot={false}/></LineChart></CardContent></Card>
+            <Card className='drh-chart-card bg-zinc-900/60 border-zinc-800'><CardHeader className='pb-2'><CardTitle className='text-sm text-zinc-300'>Success Rate Trend</CardTitle></CardHeader><CardContent><BarChart data={monthlyData} width={350} height={200}><CartesianGrid strokeDasharray='3 3' stroke='#27272a'/><XAxis dataKey='month' tick={{ fontSize: 10 }} stroke='#71717a'/><YAxis tick={{ fontSize: 10 }} stroke='#71717a'/><Tooltip contentStyle={{ background: '#18181b', border: '1px solid #27272a', borderRadius: 8, fontSize: 11 }}/><Bar dataKey='successRate' fill='#3b82f6' radius={[4,4,0,0]}/></BarChart></CardContent></Card>
+            <Card className='drh-chart-card bg-zinc-900/60 border-zinc-800'><CardHeader className='pb-2'><CardTitle className='text-sm text-zinc-300'>Zone Distribution</CardTitle></CardHeader><CardContent><PieChart width={350} height={200}><Pie data={zoneDist} cx='50%' cy='50%' outerRadius={70} innerRadius={35} dataKey='value' paddingAngle={2}>{zoneDist.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip contentStyle={{ background: '#18181b', border: '1px solid #27272a', borderRadius: 8, fontSize: 11 }}/><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }}/></PieChart></CardContent></Card>
           </div>
         </TabsContent>
 
-        {/* Tab 2: Delivery Queue */}
-        <TabsContent value="2" className="space-y-4 mt-4">
-          <div className="flex flex-wrap gap-2 items-center">
-            <div className="relative flex-1 min-w-[200px] max-w-sm"><Search className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-gray-400" /><Input placeholder="Search by customer, ID..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-8 h-9 text-xs" /></div>
-            <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 text-xs w-[140px]"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All</SelectItem>{DELIVERY_STATUSES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
+        <TabsContent value='fleet' className='drh-tab-content space-y-4 mt-4'>
+          <ModuleBreadcrumb items={[{ label: 'Drone Hub' }, { label: 'Fleet' }]} />
+          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => { setActiveFilters({}); setSearchQuery('') }} totalItems={drones.length} filteredCount={filtered.length} onRefresh={() => {}} placeholder='Search drones by ID, model, zone...' />
+          <Card className='drh-table-card bg-zinc-900/60 border-zinc-800'><CardContent className='p-0'><div className='drh-table-wrap overflow-x-auto'><table className='drh-table w-full text-sm'><thead><tr className='border-b border-zinc-800'><th className='text-left px-3 py-2 text-zinc-500 text-xs font-medium'>ID</th><th className='text-left px-3 py-2 text-zinc-500 text-xs font-medium'>Model</th><th className='text-left px-3 py-2 text-zinc-500 text-xs font-medium'>Type</th><th className='text-left px-3 py-2 text-zinc-500 text-xs font-medium'>Zone</th><th className='text-left px-3 py-2 text-zinc-500 text-xs font-medium'>Mission</th><th className='text-left px-3 py-2 text-zinc-500 text-xs font-medium'>Operator</th><th className='text-right px-3 py-2 text-zinc-500 text-xs font-medium'>Battery</th><th className='text-right px-3 py-2 text-zinc-500 text-xs font-medium'>Payload</th><th className='text-right px-3 py-2 text-zinc-500 text-xs font-medium'>Speed</th><th className='text-left px-3 py-2 text-zinc-500 text-xs font-medium'>Status</th></tr></thead><tbody>
+          {filtered.map(d => (
+            <tr key={d.id} className='drh-table-row border-b border-zinc-800/50 hover:bg-zinc-800/30 transition-colors'>
+              <td className='px-3 py-2 font-mono text-xs text-emerald-400'>{d.id}</td>
+              <td className='px-3 py-2 text-xs font-medium text-zinc-200'>{d.model}</td>
+              <td className='px-3 py-2'><TypeBadge type={d.type} /></td>
+              <td className='px-3 py-2 text-xs text-zinc-300'>{d.zone}</td>
+              <td className='px-3 py-2 text-xs text-zinc-400'>{d.mission}</td>
+              <td className='px-3 py-2 text-xs text-blue-300'>{d.operator}</td>
+              <td className='px-3 py-2 w-24'><BatteryIndicator value={d.battery} /><span className='text-[10px] text-zinc-500 ml-1'>{d.battery}%</span></td>
+              <td className='px-3 py-2 text-right text-xs'>{d.payload}kg</td>
+              <td className='px-3 py-2 text-right text-xs'>{d.speed}km/h</td>
+              <td className='px-3 py-2'><StatusBadge status={d.status} /></td>
+            </tr>
+          ))})
+          </tbody></table></div></CardContent></Card>
+        </TabsContent>
+
+        <TabsContent value='analytics' className='drh-tab-content space-y-4 mt-4'>
+          <div className='drh-value-row grid grid-cols-2 lg:grid-cols-4 gap-3'>
+            <ValueTile label='Total Flights (MTD)' value='4,280' change='+35% YoY' />
+            <ValueTile label='Avg Flight Time' value='14.2 min' change='-2.1 min' />
+            <ValueTile label='Distance Covered' value='12.5K km' change='+22% QoQ' />
+            <ValueTile label='Battery Lifespan' value='340 cycles' change='+45 cycles' />
           </div>
-          <div className="border rounded-lg overflow-auto max-h-[520px]">
-            <Table><TableHeader><TableRow>
-              <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Customer</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Route</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Weight</TableHead>
-              <SortHeader label="Distance" field="distance" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Priority</TableHead>
-              <SortHeader label="Status" field="status" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Drone</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">ETA</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Action</TableHead>
-            </TableRow></TableHeader><TableBody>
-              {filteredDeliveries.map(d => (<TableRow key={d.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
-                <TableCell className="press-scale text-xs font-mono">{d.id}</TableCell><TableCell className="text-xs font-medium">{d.customer}</TableCell><TableCell className="text-[10px]"><span>{d.pickupHub.split(" ")[0]}</span><span className="text-gray-400 mx-0.5">→</span><span>{d.dropLocation.split(" ").slice(0, 2).join(" ")}</span></TableCell><TableCell><WeightTile g={d.weight} /></TableCell><TableCell><DistanceTile km={d.distance} /></TableCell><TableCell><PriorityBadge priority={d.priority} /></TableCell><TableCell><DeliveryStatusBadge status={d.status} /></TableCell><TableCell className="text-xs font-mono">{d.droneAssigned}</TableCell><TableCell><ETATile min={d.eta} /></TableCell><TableCell><Button variant="ghost" size="sm" className="h-7 text-[10px] ddh-action-btn" onClick={() => openDetail(d)}><Eye className="w-3 h-3 mr-1" />View</Button></TableCell>
-              </TableRow>))}
-            </TableBody></Table>
+          <div className='drh-analytics-charts grid grid-cols-1 lg:grid-cols-2 gap-4'>
+            <Card className='drh-chart-card bg-zinc-900/60 border-zinc-800'><CardHeader className='pb-2'><CardTitle className='text-sm text-zinc-300'>Mission Type Mix</CardTitle></CardHeader><CardContent><PieChart width={450} height={220}><Pie data={[{ name: 'Medical', value: 28 }, { name: 'E-commerce', value: 22 }, { name: 'Food', value: 18 }, { name: 'Survey', value: 14 }, { name: 'Emergency', value: 10 }, { name: 'Others', value: 8 }]} cx='50%' cy='50%' outerRadius={80} innerRadius={40} dataKey='value' paddingAngle={3}>{[<Cell key={0} fill='#10b981' />, <Cell key={1} fill='#06b6d4' />, <Cell key={2} fill='#3b82f6' />, <Cell key={3} fill='#f59e0b' />, <Cell key={4} fill='#ef4444' />, <Cell key={5} fill='#6b7280' />]}</Pie><Tooltip contentStyle={{ background: '#18181b', border: '1px solid #27272a', borderRadius: 8, fontSize: 11 }}/><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }}/></PieChart></CardContent></Card>
+            <Card className='drh-chart-card bg-zinc-900/60 border-zinc-800'><CardHeader className='pb-2'><CardTitle className='text-sm text-zinc-300'>Operator Performance</CardTitle></CardHeader><CardContent><BarChart data={OPERATORS.map((o,i) => ({ name: o.split(' ')[0], flights: [420,380,310,280,250,220,190,160][i], incidents: [2,3,1,4,2,1,3,2][i] }))} width={450} height={220}><CartesianGrid strokeDasharray='3 3' stroke='#27272a'/><XAxis dataKey='name' tick={{ fontSize: 10 }} stroke='#71717a'/><YAxis tick={{ fontSize: 10 }} stroke='#71717a'/><Tooltip contentStyle={{ background: '#18181b', border: '1px solid #27272a', borderRadius: 8, fontSize: 11 }}/><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }}/><Bar dataKey='flights' fill='#10b981' radius={[4,4,0,0]}/><Bar dataKey='incidents' fill='#ef4444' radius={[4,4,0,0]}/></BarChart></CardContent></Card>
           </div>
         </TabsContent>
 
-        {/* Tab 3: Flight Analytics */}
-        <TabsContent value="3" className="space-y-4 mt-4">
-          <div className="flex flex-wrap gap-2 items-center">
-            <div className="relative flex-1 min-w-[200px] max-w-sm"><Search className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-gray-400" /><Input placeholder="Search by ID, route..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-8 h-9 text-xs" /></div>
-            <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 text-xs w-[140px]"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All</SelectItem>{FLIGHT_STATUSES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
-          </div>
-          <div className="border rounded-lg overflow-auto max-h-[520px]">
-            <Table><TableHeader><TableRow>
-              <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Drone</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Route</TableHead>
-              <SortHeader label="Dist" field="distance" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <SortHeader label="Speed" field="speed" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <SortHeader label="Alt" field="altitude" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Wind</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Energy</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Status</TableHead>
-            </TableRow></TableHeader><TableBody>
-              {filteredFlights.map(f => (<TableRow key={f.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
-                <TableCell className="text-xs font-mono">{f.id}</TableCell><TableCell className="text-xs font-mono">{f.droneId}</TableCell><TableCell className="text-[10px]">{f.route}</TableCell><TableCell><DistanceTile km={f.distance} /></TableCell><TableCell><SpeedTile speed={f.speed} /></TableCell><TableCell><AltitudeTile alt={f.altitude} /></TableCell><TableCell className="text-xs font-mono">{f.wind} km/h</TableCell><TableCell><EnergyBar pct={f.energyUsed} /></TableCell><TableCell><FlightStatusBadge status={f.status} /></TableCell>
-              </TableRow>))}
-            </TableBody></Table>
-          </div>
-        </TabsContent>
-
-        {/* Tab 4: No-Fly Zones */}
-        <TabsContent value="4" className="space-y-4 mt-4">
-          <div className="flex flex-wrap gap-2 items-center">
-            <div className="relative flex-1 min-w-[200px] max-w-sm"><Search className="absolute left-2.5 top-2.5 w-3.5 h-3.5 text-gray-400" /><Input placeholder="Search by location, type..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-8 h-9 text-xs" /></div>
-            <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 text-xs w-[140px]"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All</SelectItem>{NFZ_STATUSES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
-          </div>
-          <div className="border rounded-lg overflow-auto max-h-[520px]">
-            <Table><TableHeader><TableRow>
-              <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Type</TableHead>
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Location</TableHead>
-              <SortHeader label="Radius" field="radius" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <SortHeader label="Alt Limit" field="altitudeLimit" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Reason</TableHead>
-              <SortHeader label="Status" field="status" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
-              <TableHead className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">Valid Until</TableHead>
-            </TableRow></TableHeader><TableBody>
-              {filteredNFZs.map(n => (<TableRow key={n.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
-                <TableCell className="text-xs font-mono">{n.id}</TableCell><TableCell><NFZTypeBadge type={n.type} /></TableCell><TableCell className="text-xs">{n.location}</TableCell><TableCell className="text-xs font-mono">{n.radius} km</TableCell><TableCell><AltitudeTile alt={n.altitudeLimit} /></TableCell><TableCell className="text-[10px] text-gray-600 dark:text-gray-400 max-w-[150px] truncate">{n.reason}</TableCell><TableCell><NFZStatusBadge status={n.status} /></TableCell><TableCell className="text-xs">{n.validUntil}</TableCell>
-              </TableRow>))}
-            </TableBody></Table>
-          </div>
-        </TabsContent>
-
-        {/* Tab 5: Analytics */}
-        <TabsContent value="5" className="space-y-4 mt-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { label: "Total Deliveries (YTD)", value: "18,432", icon: Package, color: "text-sky-600 dark:text-sky-400" },
-              { label: "Avg Success Rate", value: "96.8%", icon: Target, color: "text-emerald-600 dark:text-emerald-400" },
-              { label: "Fleet Downtime", value: "2.1%", icon: AlertTriangle, color: "text-amber-600 dark:text-amber-400" },
-              { label: "Revenue", value: formatINR(56000000), icon: IndianRupee, color: "text-emerald-600 dark:text-emerald-400" },
-              { label: "Avg Delivery Time", value: "22min", icon: Clock, color: "text-blue-600 dark:text-blue-400" },
-              { label: "Fleet Size", value: "75", icon: Activity, color: "text-violet-600 dark:text-violet-400" },
-              { label: "NFZ Compliance", value: "99.4%", icon: ShieldAlert, color: "text-emerald-600 dark:text-emerald-400" },
-              { label: "Customer Rating", value: "4.7★", icon: Star, color: "text-amber-600 dark:text-amber-400" },
-            ].map((k, i) => { const Icon = k.icon; return (
-              <Card key={i} className="inner-glow hover-lift-sm ddh-kpi-card border-l-4 border-l-emerald-500"><CardContent className="p-3"><div className="flex items-center justify-between"><div><p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p><p className="text-base font-bold mt-0.5">{k.value}</p></div><Icon className={cn("w-5 h-5 opacity-50", k.color)} /></div></CardContent></Card>
-            )})}
-          </div>
-          <div className="grid md:grid-cols-2 gap-4">
-            <Card className="hover-lift-sm ddh-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Daily Delivery Trend</CardTitle></CardHeader><CardContent><LineChart data={data.dailyTrend} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="deliveries" stroke="#0284c7" strokeWidth={2} /></LineChart></CardContent></Card>
-            <Card className="hover-lift-sm ddh-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Zone Throughput</CardTitle></CardHeader><CardContent><BarChart data={data.zoneThroughput} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="count" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
-          </div>
-          <div className="grid md:grid-cols-2 gap-4">
-            <Card className="hover-lift-sm ddh-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Failure Reasons</CardTitle></CardHeader><CardContent><BarChart data={data.failureReasons} layout="vertical" height={260}><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="name" tick={{ fontSize: 9 }} width={110} /><Tooltip /><Bar dataKey="count" fill="#e11d48" radius={[0, 4, 4, 0]} /></BarChart></CardContent></Card>
-            <Card className="hover-lift-sm ddh-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost vs Revenue (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.costTrend} height={260}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={(v: number) => `${(v / 100000).toFixed(0)}L`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Fuel Savings" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Labor Savings" stackId="a" fill="#0284c7" /><Area type="monotone" dataKey="Maintenance" stackId="a" fill="#ea580c" /><Area type="monotone" dataKey="Revenue" stackId="a" fill="#7c3aed" /></AreaChart></CardContent></Card>
-          </div>
+        <TabsContent value='insights' className='drh-tab-content space-y-4 mt-4'>
+          {insights.map((ins, i) => (
+            <Card key={i} className={'drh-insight-card bg-zinc-900/60 border ' + (ins.severity === 'high' ? 'border-emerald-500/30' : ins.severity === 'medium' ? 'border-amber-500/30' : 'border-zinc-800')}><CardContent className='p-4'><div className='flex items-start gap-3'><div className={'drh-insight-dot w-2 h-2 rounded-full mt-1.5 shrink-0 ' + (ins.severity === 'high' ? 'bg-emerald-500' : ins.severity === 'medium' ? 'bg-amber-500' : 'bg-zinc-500')} /><div><p className='text-sm font-medium text-zinc-200'>{ins.title}</p><p className='text-xs text-zinc-400 mt-1 leading-relaxed'>{ins.desc}</p></div></div></CardContent></Card>
+          ))}
         </TabsContent>
       </Tabs>
-
-      {/* Detail Sheet */}
-      <Sheet open={!!(sheetOpen && selectedDelivery)} onOpenChange={setSheetOpen}>
-        <SheetContent className="w-[420px] sm:w-[540px] overflow-y-auto">
-          {selectedDelivery && (<>
-            <SheetHeader><div className="h-2 bg-gradient-to-r from-sky-500 to-emerald-500 rounded-full -mx-6 -mt-6 mb-4" /><SheetTitle className="flex items-center gap-2"><Send className="w-4 h-4 text-sky-600" />{selectedDelivery.id}</SheetTitle></SheetHeader>
-            <div className="space-y-4 mt-2">
-              <div className="flex items-center gap-2"><DeliveryStatusBadge status={selectedDelivery.status} /><PriorityBadge priority={selectedDelivery.priority} /></div>
-              <Separator />
-              <div className="space-y-2">
-                <div className="text-xs"><span className="text-gray-500">Customer: </span><span className="font-semibold">{selectedDelivery.customer}</span></div>
-                <div className="text-xs"><span className="text-gray-500">Route: </span><span>{selectedDelivery.pickupHub} → {selectedDelivery.dropLocation}</span></div>
-                <div className="text-xs"><span className="text-gray-500">Weight: </span><WeightTile g={selectedDelivery.weight} /></div>
-                <div className="text-xs"><span className="text-gray-500">Distance: </span><DistanceTile km={selectedDelivery.distance} /></div>
-                <div className="text-xs"><span className="text-gray-500">Drone: </span><span className="font-mono">{selectedDelivery.droneAssigned}</span></div>
-                <div className="text-xs"><span className="text-gray-500">ETA: </span><ETATile min={selectedDelivery.eta} /></div>
-              </div>
-              <Separator />
-              <div className="flex gap-2">
-                <Button size="sm" className="press-scale text-xs flex-1 bg-sky-600 hover:bg-sky-700" onClick={() => toast.success("Dispatched", `Delivery ${selectedDelivery.id} dispatched`)}>Dispatch</Button>
-                <Button size="sm" className="press-scale text-xs flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => toast.info("Rerouted", `Delivery ${selectedDelivery.id} rerouted`)}>Reroute</Button>
-              </div>
-            </div>
-          </>)}
-        </SheetContent>
-      </Sheet>
     </div>
   )
 }
