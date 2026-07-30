@@ -226,3 +226,5 @@ export { default as MiningMineralsLogisticsView } from './mining-minerals-logist
 export { default as DefenceSupplyChainView } from './defence-supply-chain-view'
 export { default as SeedAgriInputLogisticsView } from './seed-agri-input-logistics-view'
 export { default as DairyMilkSupplyChainView } from './dairy-milk-supply-chain-view'
+export { default as GemJewelleryLogisticsView } from './gem-jewellery-logistics-view'
+export { default as PortContainerTerminalView } from './port-container-terminal-view'
