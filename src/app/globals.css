@@ -51028,3 +51028,64 @@ html.theme-transition body {
 .dpe-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 .dpe-tabs button[data-state="active"] { background: linear-gradient(135deg, #8b5cf6, #f59e0b); color: white; }
 @keyframes dpe-pulse-green { 0%, 100% { box-shadow: 0 0 4px rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 12px rgba(5,150,105,0.6); } }
+
+/* ── R266: Freight Lane Command Center (flc-*) ── */
+.flc-mode-badge, .flc-status-badge, .flc-priority-badge,
+.flc-city-badge { transition: all 0.2s ease; }
+.flc-mode-badge:hover, .flc-priority-badge:hover { transform: scale(1.05); }
+.flc-status-badge:hover { transform: scale(1.08); }
+.flc-active { animation: flc-pulse-green 2s ease-in-out infinite; }
+.flc-congested { animation: flc-pulse-red 2s ease-in-out infinite; }
+.flc-disrupted { animation: flc-pulse-red 2s ease-in-out infinite; }
+@keyframes flc-pulse-green { 0%, 100% { box-shadow: 0 0 4px rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 12px rgba(5,150,105,0.6); } }
+@keyframes flc-pulse-red { 0%, 100% { box-shadow: 0 0 6px rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 16px rgba(220,38,38,0.7); } }
+.flc-util-bar { transition: all 0.3s ease; }
+.flc-util-bar:hover { transform: scaleX(1.08); }
+.flc-kpi-tile { transition: all 0.3s ease; }
+.flc-kpi-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.flc-table-card { transition: all 0.2s ease; border-radius: 8px; overflow: hidden; }
+.flc-table-card:hover { box-shadow: 0 4px 12px rgba(6,182,212,0.08); }
+.flc-table-header { background: linear-gradient(135deg, rgba(6,182,212,0.04), rgba(245,158,11,0.04)); }
+.flc-table-row { transition: all 0.15s ease; }
+.flc-table-row:hover { background-color: rgba(6,182,212,0.04); }
+.flc-chart-card { transition: all 0.2s ease; border-radius: 8px; }
+.flc-chart-card:hover { box-shadow: 0 4px 15px rgba(6,182,212,0.1); }
+.flc-insight-card { transition: all 0.3s ease; border-radius: 8px; }
+.flc-insight-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.flc-health-ring svg { transition: all 0.3s ease; }
+.flc-health-ring:hover svg { transform: scale(1.1); }
+.flc-value-tile { transition: all 0.2s ease; }
+.flc-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.flc-tabs button[data-state="active"] { background: linear-gradient(135deg, #06b6d4, #8b5cf6); color: white; }
+
+/* ── R266: 3PL Partner Hub (tph-*) ── */
+.tph-type-badge, .tph-status-badge, .tph-sla-badge,
+.tph-city-badge { transition: all 0.2s ease; }
+.tph-type-badge:hover, .tph-sla-badge:hover { transform: scale(1.05); }
+.tph-status-badge:hover { transform: scale(1.08); }
+.tph-active { animation: tph-pulse-green 2s ease-in-out infinite; }
+.tph-suspended { animation: tph-pulse-red 2s ease-in-out infinite; }
+.tph-gold { animation: tph-glow-gold 2s ease-in-out infinite; }
+@keyframes tph-pulse-green { 0%, 100% { box-shadow: 0 0 4px rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 12px rgba(5,150,105,0.6); } }
+@keyframes tph-pulse-red { 0%, 100% { box-shadow: 0 0 6px rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 16px rgba(220,38,38,0.7); } }
+@keyframes tph-glow-gold { 0%, 100% { box-shadow: 0 0 6px rgba(202,138,4,0.3); } 50% { box-shadow: 0 0 18px rgba(202,138,4,0.5); } }
+.tph-score-bar { transition: all 0.3s ease; }
+.tph-score-bar:hover { transform: scaleX(1.08); }
+.tph-stars { transition: all 0.2s ease; }
+.tph-stars:hover { transform: scale(1.05); }
+.tph-kpi-tile { transition: all 0.3s ease; }
+.tph-kpi-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.tph-table-card { transition: all 0.2s ease; border-radius: 8px; overflow: hidden; }
+.tph-table-card:hover { box-shadow: 0 4px 12px rgba(236,72,153,0.08); }
+.tph-table-header { background: linear-gradient(135deg, rgba(236,72,153,0.04), rgba(245,158,11,0.04)); }
+.tph-table-row { transition: all 0.15s ease; }
+.tph-table-row:hover { background-color: rgba(236,72,153,0.04); }
+.tph-chart-card { transition: all 0.2s ease; border-radius: 8px; }
+.tph-chart-card:hover { box-shadow: 0 4px 15px rgba(236,72,153,0.1); }
+.tph-insight-card { transition: all 0.3s ease; border-radius: 8px; }
+.tph-insight-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.tph-health-ring svg { transition: all 0.3s ease; }
+.tph-health-ring:hover svg { transform: scale(1.1); }
+.tph-value-tile { transition: all 0.2s ease; }
+.tph-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.tph-tabs button[data-state="active"] { background: linear-gradient(135deg, #ec4899, #f59e0b); color: white; }

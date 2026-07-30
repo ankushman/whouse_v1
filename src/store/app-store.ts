@@ -192,6 +192,8 @@ export const navItems: NavItem[] = [
   { id: 'logistics-ai-copilot', label: 'AI Copilot', icon: 'BrainCircuit', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'demand_planner', 'procurement', 'supervisor'] },
   { id: 'fleet-telematics-pro', label: 'Fleet Telematics', icon: 'Satellite', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'dynamic-pricing-engine', label: 'Dynamic Pricing', icon: 'Calculator', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance', 'procurement'] },
+  { id: 'freight-lane-command', label: 'Freight Lane Cmd', icon: 'Workflow', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
+  { id: '3pl-partner-hub', label: '3PL Partner Hub', icon: 'Link', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

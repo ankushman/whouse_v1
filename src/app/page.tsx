@@ -196,6 +196,8 @@ import SmartDockSchedulerView from "@/components/modules/smart-dock-scheduler-vi
 import LogisticsAiCopilotView from "@/components/modules/logistics-ai-copilot-view"
 import FleetTelematicsProView from "@/components/modules/fleet-telematics-pro-view"
 import DynamicPricingEngineView from "@/components/modules/dynamic-pricing-engine-view"
+import FreightLaneCommandView from "@/components/modules/freight-lane-command-view"
+import ThreePlPartnerHubView from "@/components/modules/3pl-partner-hub-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -391,6 +393,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "logistics-ai-copilot": LogisticsAiCopilotView,
   "fleet-telematics-pro": FleetTelematicsProView,
   "dynamic-pricing-engine": DynamicPricingEngineView,
+  "freight-lane-command": FreightLaneCommandView,
+  "3pl-partner-hub": ThreePlPartnerHubView,
 }
 
 
