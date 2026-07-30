@@ -246,3 +246,5 @@ export { default as CementBuildingMaterialsView } from './cement-building-materi
 export { default as TelecomTowerInfrastructureView } from './telecom-tower-infrastructure-view'
 export { default as SugarEthanolLogisticsView } from './sugar-ethanol-logistics-view'
 export { default as FertilizerAgriChemicalsView } from './fertilizer-agri-chemicals-view'
+export { default as RubberTyreLogisticsView } from './rubber-tyre-logistics-view'
+export { default as PaintsCoatingsSupplyChainView } from './paints-coatings-supply-chain-view'
