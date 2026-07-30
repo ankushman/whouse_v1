@@ -174,6 +174,7 @@ export const navItems: NavItem[] = [
   { id: 'hyperlocal-fulfillment', label: 'Hyperlocal Fulfill', icon: 'MapPin', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
   { id: 'freight-lane-intelligence', label: 'Freight Lane Intel', icon: 'Route', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance', 'demand_planner'] },
   { id: 'omnichannel-returns-hub', label: 'Omnichannel Returns', icon: 'RotateCcw', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
+  { id: 'autonomous-mobile-robots-fleet', label: 'AMR Fleet', icon: 'Bot', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

@@ -178,6 +178,7 @@ import ReturnsQualityCenterView from "@/components/modules/returns-quality-cente
 import HyperlocalFulfillmentView from "@/components/modules/hyperlocal-fulfillment-view"
 import FreightLaneIntelligenceView from "@/components/modules/freight-lane-intelligence-view"
 import OmnichannelReturnsHubView from "@/components/modules/omnichannel-returns-hub-view"
+import AutonomousMobileRobotsFleetView from "@/components/modules/autonomous-mobile-robots-fleet-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -355,6 +356,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "hyperlocal-fulfillment": HyperlocalFulfillmentView,
   "freight-lane-intelligence": FreightLaneIntelligenceView,
   "omnichannel-returns-hub": OmnichannelReturnsHubView,
+  "autonomous-mobile-robots-fleet": AutonomousMobileRobotsFleetView,
 }
 
 

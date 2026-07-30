@@ -168,3 +168,4 @@ export { default as ReturnsQualityCenterView } from './returns-quality-center-vi
 export { default as HyperlocalFulfillmentView } from './hyperlocal-fulfillment-view'
 export { default as FreightLaneIntelligenceView } from './freight-lane-intelligence-view'
 export { default as OmnichannelReturnsHubView } from './omnichannel-returns-hub-view'
+export { default as AutonomousMobileRobotsFleetView } from './autonomous-mobile-robots-fleet-view'
