@@ -196,3 +196,5 @@ export { default as CrossBorderLogisticsView } from './cross-border-logistics-vi
 export { default as WarehouseDigitalFloorPlanView } from './warehouse-digital-floor-plan-view'
 export { default as ReturnsQualityLabView } from './returns-quality-lab-view'
 export { default as PortOperationsHubView } from './port-operations-hub-view'
+export { default as AiDemandSensingProView } from './ai-demand-sensing-pro-view'
+export { default as MicroFulfillmentCenterView } from './micro-fulfillment-center-view'

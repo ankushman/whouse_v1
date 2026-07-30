@@ -206,6 +206,8 @@ import CrossBorderLogisticsView from "@/components/modules/cross-border-logistic
 import WarehouseDigitalFloorPlanView from "@/components/modules/warehouse-digital-floor-plan-view"
 import ReturnsQualityLabView from "@/components/modules/returns-quality-lab-view"
 import PortOperationsHubView from "@/components/modules/port-operations-hub-view"
+import AiDemandSensingProView from "@/components/modules/ai-demand-sensing-pro-view"
+import MicroFulfillmentCenterView from "@/components/modules/micro-fulfillment-center-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -411,6 +413,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-digital-floor-plan": WarehouseDigitalFloorPlanView,
   "returns-quality-lab": ReturnsQualityLabView,
   "port-operations-hub": PortOperationsHubView,
+  "ai-demand-sensing-pro": AiDemandSensingProView,
+  "micro-fulfillment-center": MicroFulfillmentCenterView,
 }
 
 
