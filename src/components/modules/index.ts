@@ -207,3 +207,5 @@ export { default as PerishableGoodsCommandView } from './perishable-goods-comman
 export { default as ExpressDeliveryCommandView } from './express-delivery-command-view'
 export { default as CustomsDutyCommandView } from './customs-duty-command-view'
 export { default as FleetFuelTrackerView } from './fleet-fuel-tracker-view'
+export { default as MultiModalTransportView } from './multi-modal-transport-view'
+export { default as SupplyChainRiskView } from './supply-chain-risk-view'

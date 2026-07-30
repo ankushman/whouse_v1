@@ -51787,3 +51787,47 @@ html.theme-transition body {
 @keyframes fft-pulse-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(16,185,129,0.15); } }
 @keyframes fft-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(6,182,212,0.15); } }
 @keyframes fft-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(239,68,68,0.25); } }
+
+/* ── Multi-Modal Transport Hub (mmt-*) ── */
+.mmt-root { animation: fadeIn 0.4s ease-out; }
+.mmt-tabs-list { border-radius: 12px; }
+.mmt-tab { border-radius: 8px; transition: all 0.2s; }
+.mmt-tab[data-state="active"] { background: rgba(20,184,166,0.15); color: #14b8a6; box-shadow: 0 0 8px rgba(20,184,166,0.2); }
+.mmt-kpi-card { transition: transform 0.2s, box-shadow 0.2s; }
+.mmt-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(20,184,166,0.1); }
+.mmt-ring-path { transition: stroke-dashoffset 1.2s ease; }
+.mmt-chart-card { border-radius: 12px; transition: box-shadow 0.2s; }
+.mmt-chart-card:hover { box-shadow: 0 4px 20px rgba(20,184,166,0.08); }
+.mmt-table-card { border-radius: 12px; }
+.mmt-table-row { transition: background-color 0.15s; }
+.mmt-table-wrap { scrollbar-width: thin; scrollbar-color: #3f3f46 transparent; }
+.mmt-insight-card { border-radius: 12px; transition: transform 0.2s, border-color 0.2s; }
+.mmt-insight-card:hover { transform: translateX(4px); }
+@keyframes mmt-grow { from { width: 0; } }
+@keyframes mmt-pulse-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(20,184,166,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(20,184,166,0.15); } }
+@keyframes mmt-pulse-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(99,102,241,0.15); } }
+@keyframes mmt-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(245,158,11,0.15); } }
+@keyframes mmt-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(6,182,212,0.15); } }
+@keyframes mmt-glow-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(20,184,166,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(20,184,166,0.25); } }
+
+/* ── Supply Chain Risk Command (scr-*) ── */
+.scr-root { animation: fadeIn 0.4s ease-out; }
+.scr-tabs-list { border-radius: 12px; }
+.scr-tab { border-radius: 8px; transition: all 0.2s; }
+.scr-tab[data-state="active"] { background: rgba(244,63,94,0.15); color: #f43f5e; box-shadow: 0 0 8px rgba(244,63,94,0.2); }
+.scr-kpi-card { transition: transform 0.2s, box-shadow 0.2s; }
+.scr-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(244,63,94,0.1); }
+.scr-ring-path { transition: stroke-dashoffset 1.2s ease; }
+.scr-chart-card { border-radius: 12px; transition: box-shadow 0.2s; }
+.scr-chart-card:hover { box-shadow: 0 4px 20px rgba(244,63,94,0.08); }
+.scr-table-card { border-radius: 12px; }
+.scr-table-row { transition: background-color 0.15s; }
+.scr-table-wrap { scrollbar-width: thin; scrollbar-color: #3f3f46 transparent; }
+.scr-insight-card { border-radius: 12px; transition: transform 0.2s, border-color 0.2s; }
+.scr-insight-card:hover { transform: translateX(4px); }
+@keyframes scr-grow { from { width: 0; } }
+@keyframes scr-pulse-rose { 0%, 100% { box-shadow: 0 0 0 0 rgba(244,63,94,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(244,63,94,0.15); } }
+@keyframes scr-pulse-slate { 0%, 100% { box-shadow: 0 0 0 0 rgba(100,116,139,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(100,116,139,0.15); } }
+@keyframes scr-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.15); } }
+@keyframes scr-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(245,158,11,0.15); } }
+@keyframes scr-glow-rose { 0%, 100% { box-shadow: 0 0 0 0 rgba(244,63,94,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(244,63,94,0.25); } }

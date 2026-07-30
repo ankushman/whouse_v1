@@ -217,6 +217,8 @@ import PerishableGoodsCommandView from "@/components/modules/perishable-goods-co
 import ExpressDeliveryCommandView from "@/components/modules/express-delivery-command-view"
 import CustomsDutyCommandView from "@/components/modules/customs-duty-command-view"
 import FleetFuelTrackerView from "@/components/modules/fleet-fuel-tracker-view"
+import MultiModalTransportView from "@/components/modules/multi-modal-transport-view"
+import SupplyChainRiskView from "@/components/modules/supply-chain-risk-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -433,6 +435,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "express-delivery-command": ExpressDeliveryCommandView,
   "customs-duty-command": CustomsDutyCommandView,
   "fleet-fuel-tracker": FleetFuelTrackerView,
+  "multi-modal-transport": MultiModalTransportView,
+  "supply-chain-risk": SupplyChainRiskView,
 }
 
 
