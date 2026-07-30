@@ -1,1362 +1,257 @@
-"use client";
+import React, { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-import React, { useState, useMemo, useCallback } from "react";
-import {
-  BarChart, Bar, Line, RadarChart, Radar, PolarGrid,
-  PolarAngleAxis, PolarRadiusAxis, PieChart, Pie, Cell,
-  ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  ResponsiveContainer, AreaChart, Area,
-} from "recharts";
-import {
-  MapPinCheck, MapPin, Truck, Package, Clock, CheckCircle2,
-  XCircle, AlertTriangle, Phone, Star, Camera,
-  ArrowUpRight, ArrowDownRight, Navigation, Route,
-  BarChart3, Eye, Search, IndianRupee, Calendar,
-  TrendingDown, FileText, Users, RefreshCw,
-  ChevronRight, User, MessageSquare, CreditCard,
-  MapPinned, Timer, CircleDot, Footprints,
-  PhoneCall, Bike, Zap, Coffee, FileCheck,
-} from "lucide-react";
+const COLORS = ['#10b981', '#059669', '#34d399', '#6ee7b7', '#a7f3d0', '#047857', '#065f46', '#0d9488']
 
-// ============================================================================
-// Types
-// ============================================================================
-interface DeliveryAgent {
-  id: string;
-  name: string;
-  phone: string;
-  avatar: string;
-  vehicleType: "motorcycle" | "van" | "bicycle" | "economy_van";
-  zone: string;
-  city: string;
-  rating: number;
-  totalDeliveries: number;
-  todayDeliveries: number;
-  successRate: number;
-  avgDeliveryTime: number;
-  status: "active" | "on_break" | "offline" | "dispatching";
-  currentLat: number;
-  currentLng: number;
+const ZONES = ['Metro Core', 'Suburban Ring', 'Tier-2 City', 'Semi-Urban', 'Rural Belt', 'Industrial Cluster', 'SEZ Zone', 'Coastal Town']
+const VEHICLE_TYPES = ['Electric Scooter', 'Delivery Van', 'Cargo Bike', 'Auto Rickshaw', 'E-Rickshaw', 'Motorbike', 'Pickup Truck', 'Walk Courier']
+const PRIORITIES = ['Express', 'Same-Day', 'Next-Day', 'Standard']
+
+const deliveries = [
+  { id: 'LMD-0001', zone: 'Metro Core', vehicle: 'Electric Scooter', priority: 'Express', distance_km: 4.2, eta_min: 18, status: 'In Transit', cod_amount: 0, weight_kg: 2.1, attempts: 1, customer_rating: 4.8, assigned_to: 'Ravi K.' },
+  { id: 'LMD-0002', zone: 'Suburban Ring', vehicle: 'Delivery Van', priority: 'Same-Day', distance_km: 12.8, eta_min: 42, status: 'Delivered', cod_amount: 2450, weight_kg: 8.5, attempts: 1, customer_rating: 4.2, assigned_to: 'Priya S.' },
+  { id: 'LMD-0003', zone: 'Tier-2 City', vehicle: 'Cargo Bike', priority: 'Next-Day', distance_km: 18.5, eta_min: 65, status: 'At Hub', cod_amount: 0, weight_kg: 5.3, attempts: 0, customer_rating: 0, assigned_to: 'Arun M.' },
+  { id: 'LMD-0004', zone: 'Rural Belt', vehicle: 'Auto Rickshaw', priority: 'Standard', distance_km: 32.1, eta_min: 95, status: 'Out for Delivery', cod_amount: 3200, weight_kg: 12.4, attempts: 2, customer_rating: 3.8, assigned_to: 'Deepak R.' },
+  { id: 'LMD-0005', zone: 'Metro Core', vehicle: 'Walk Courier', priority: 'Express', distance_km: 1.8, eta_min: 12, status: 'Delivered', cod_amount: 0, weight_kg: 0.5, attempts: 1, customer_rating: 5.0, assigned_to: 'Sneha P.' },
+  { id: 'LMD-0006', zone: 'Industrial Cluster', vehicle: 'Pickup Truck', priority: 'Standard', distance_km: 22.4, eta_min: 55, status: 'In Transit', cod_amount: 15800, weight_kg: 45.2, attempts: 1, customer_rating: 0, assigned_to: 'Vikram T.' },
+  { id: 'LMD-0007', zone: 'SEZ Zone', vehicle: 'E-Rickshaw', priority: 'Same-Day', distance_km: 8.6, eta_min: 30, status: 'Delivered', cod_amount: 780, weight_kg: 3.2, attempts: 1, customer_rating: 4.6, assigned_to: 'Meena D.' },
+  { id: 'LMD-0008', zone: 'Coastal Town', vehicle: 'Motorbike', priority: 'Next-Day', distance_km: 28.3, eta_min: 78, status: 'Delayed', cod_amount: 5400, weight_kg: 6.8, attempts: 3, customer_rating: 2.1, assigned_to: 'Kiran J.' },
+  { id: 'LMD-0009', zone: 'Suburban Ring', vehicle: 'Delivery Van', priority: 'Same-Day', distance_km: 15.2, eta_min: 48, status: 'At Hub', cod_amount: 0, weight_kg: 9.1, attempts: 0, customer_rating: 0, assigned_to: 'Anita G.' },
+  { id: 'LMD-0010', zone: 'Metro Core', vehicle: 'Electric Scooter', priority: 'Express', distance_km: 5.1, eta_min: 22, status: 'Delivered', cod_amount: 1200, weight_kg: 1.8, attempts: 1, customer_rating: 4.9, assigned_to: 'Rahul V.' },
+  { id: 'LMD-0011', zone: 'Semi-Urban', vehicle: 'Auto Rickshaw', priority: 'Standard', distance_km: 19.7, eta_min: 62, status: 'Out for Delivery', cod_amount: 4100, weight_kg: 7.6, attempts: 1, customer_rating: 0, assigned_to: 'Suresh N.' },
+  { id: 'LMD-0012', zone: 'Tier-2 City', vehicle: 'Cargo Bike', priority: 'Next-Day', distance_km: 24.3, eta_min: 72, status: 'Delivered', cod_amount: 0, weight_kg: 4.9, attempts: 1, customer_rating: 4.4, assigned_to: 'Pooja K.' },
+  { id: 'LMD-0013', zone: 'Metro Core', vehicle: 'E-Rickshaw', priority: 'Same-Day', distance_km: 6.3, eta_min: 25, status: 'In Transit', cod_amount: 890, weight_kg: 3.8, attempts: 1, customer_rating: 0, assigned_to: 'Manoj B.' },
+  { id: 'LMD-0014', zone: 'Rural Belt', vehicle: 'Motorbike', priority: 'Standard', distance_km: 35.8, eta_min: 105, status: 'Delivered', cod_amount: 2800, weight_kg: 2.5, attempts: 2, customer_rating: 3.5, assigned_to: 'Lakshmi R.' },
+  { id: 'LMD-0015', zone: 'Suburban Ring', vehicle: 'Delivery Van', priority: 'Express', distance_km: 10.9, eta_min: 35, status: 'At Hub', cod_amount: 0, weight_kg: 15.3, attempts: 0, customer_rating: 0, assigned_to: 'Rajesh M.' },
+  { id: 'LMD-0016', zone: 'Industrial Cluster', vehicle: 'Pickup Truck', priority: 'Standard', distance_km: 26.5, eta_min: 68, status: 'Delivered', cod_amount: 18500, weight_kg: 52.1, attempts: 1, customer_rating: 4.1, assigned_to: 'Sunil D.' },
+  { id: 'LMD-0017', zone: 'SEZ Zone', vehicle: 'Delivery Van', priority: 'Same-Day', distance_km: 11.2, eta_min: 38, status: 'Out for Delivery', cod_amount: 0, weight_kg: 11.2, attempts: 1, customer_rating: 0, assigned_to: 'Geeta P.' },
+  { id: 'LMD-0018', zone: 'Metro Core', vehicle: 'Walk Courier', priority: 'Express', distance_km: 2.1, eta_min: 15, status: 'Delivered', cod_amount: 0, weight_kg: 0.3, attempts: 1, customer_rating: 4.7, assigned_to: 'Aditya S.' },
+  { id: 'LMD-0019', zone: 'Coastal Town', vehicle: 'Auto Rickshaw', priority: 'Next-Day', distance_km: 20.8, eta_min: 58, status: 'Delayed', cod_amount: 6200, weight_kg: 8.9, attempts: 2, customer_rating: 2.8, assigned_to: 'Nandini V.' },
+  { id: 'LMD-0020', zone: 'Semi-Urban', vehicle: 'E-Rickshaw', priority: 'Standard', distance_km: 14.5, eta_min: 45, status: 'Delivered', cod_amount: 1750, weight_kg: 4.1, attempts: 1, customer_rating: 4.3, assigned_to: 'Harish T.' },
+  { id: 'LMD-0021', zone: 'Metro Core', vehicle: 'Electric Scooter', priority: 'Express', distance_km: 3.8, eta_min: 16, status: 'In Transit', cod_amount: 0, weight_kg: 1.5, attempts: 1, customer_rating: 0, assigned_to: 'Kavita L.' },
+  { id: 'LMD-0022', zone: 'Tier-2 City', vehicle: 'Delivery Van', priority: 'Same-Day', distance_km: 16.4, eta_min: 50, status: 'At Hub', cod_amount: 0, weight_kg: 10.2, attempts: 0, customer_rating: 0, assigned_to: 'Prakash J.' },
+  { id: 'LMD-0023', zone: 'Rural Belt', vehicle: 'Motorbike', priority: 'Standard', distance_km: 38.2, eta_min: 110, status: 'Delivered', cod_amount: 3100, weight_kg: 3.4, attempts: 3, customer_rating: 3.2, assigned_to: 'Bhawana A.' },
+  { id: 'LMD-0024', zone: 'Suburban Ring', vehicle: 'Cargo Bike', priority: 'Next-Day', distance_km: 13.1, eta_min: 40, status: 'Delivered', cod_amount: 0, weight_kg: 6.7, attempts: 1, customer_rating: 4.5, assigned_to: 'Dinesh R.' },
+  { id: 'LMD-0025', zone: 'Industrial Cluster', vehicle: 'Pickup Truck', priority: 'Standard', distance_km: 29.6, eta_min: 75, status: 'Out for Delivery', cod_amount: 9800, weight_kg: 38.6, attempts: 1, customer_rating: 0, assigned_to: 'Swati N.' },
+  { id: 'LMD-0026', zone: 'Metro Core', vehicle: 'Walk Courier', priority: 'Express', distance_km: 1.2, eta_min: 10, status: 'Delivered', cod_amount: 0, weight_kg: 0.2, attempts: 1, customer_rating: 5.0, assigned_to: 'Amit P.' },
+  { id: 'LMD-0027', zone: 'SEZ Zone', vehicle: 'E-Rickshaw', priority: 'Same-Day', distance_km: 7.4, eta_min: 28, status: 'Delivered', cod_amount: 560, weight_kg: 2.8, attempts: 1, customer_rating: 4.8, assigned_to: 'Rekha M.' },
+  { id: 'LMD-0028', zone: 'Coastal Town', vehicle: 'Auto Rickshaw', priority: 'Standard', distance_km: 23.6, eta_min: 70, status: 'In Transit', cod_amount: 4500, weight_kg: 9.3, attempts: 1, customer_rating: 0, assigned_to: 'Tarun G.' },
+  { id: 'LMD-0029', zone: 'Suburban Ring', vehicle: 'Electric Scooter', priority: 'Express', distance_km: 9.5, eta_min: 32, status: 'Delivered', cod_amount: 0, weight_kg: 1.9, attempts: 1, customer_rating: 4.6, assigned_to: 'Isha W.' },
+  { id: 'LMD-0030', zone: 'Semi-Urban', vehicle: 'Delivery Van', priority: 'Next-Day', distance_km: 17.8, eta_min: 52, status: 'At Hub', cod_amount: 2200, weight_kg: 12.5, attempts: 0, customer_rating: 0, assigned_to: 'Nikhil B.' },
+]
+
+const genRecords = (start: number) => {
+  const statuses = ['Delivered', 'In Transit', 'At Hub', 'Out for Delivery', 'Delayed']
+  const assignees = ['Ravi K.', 'Priya S.', 'Arun M.', 'Deepak R.', 'Sneha P.', 'Vikram T.', 'Meena D.', 'Kiran J.', 'Anita G.', 'Rahul V.', 'Suresh N.', 'Pooja K.', 'Manoj B.', 'Lakshmi R.', 'Rajesh M.', 'Sunil D.', 'Geeta P.', 'Aditya S.', 'Nandini V.', 'Harish T.', 'Kavita L.', 'Prakash J.', 'Bhawana A.', 'Dinesh R.', 'Swati N.', 'Amit P.', 'Rekha M.', 'Tarun G.', 'Isha W.', 'Nikhil B.']
+  return Array.from({ length: 30 }, (_, i) => ({
+    id: `LMD-${String(start + i).padStart(4, '0')}`,
+    zone: ZONES[(start + i) % 8],
+    vehicle: VEHICLE_TYPES[(start + i) % 8],
+    priority: PRIORITIES[(start + i) % 4],
+    distance_km: Math.round((3 + Math.random() * 38) * 10) / 10,
+    eta_min: Math.round(10 + Math.random() * 100),
+    status: statuses[(start + i) % 5],
+    cod_amount: Math.round(Math.random()) * Math.round(500 + Math.random() * 20000),
+    weight_kg: Math.round((0.2 + Math.random() * 50) * 10) / 10,
+    attempts: Math.floor(Math.random() * 4),
+    customer_rating: Math.round(Math.random() * 50) / 10,
+    assigned_to: assignees[(start + i) % 30],
+  }))
 }
 
-interface LastMileDelivery {
-  id: string;
-  orderId: string;
-  awbNumber: string;
-  customer: string;
-  phone: string;
-  address: string;
-  city: string;
-  zone: string;
-  pincode: string;
-  agent: string;
-  agentPhone: string;
-  status: "picked_up" | "in_transit" | "out_for_delivery" | "near_location" | "delivery_attempted" | "delivered" | "failed" | "returned" | "rescheduled";
-  priority: "standard" | "express" | "same_day" | "scheduled";
-  deliverySlot: string;
-  orderedAt: string;
-  dispatchedAt: string;
-  estimatedDelivery: string;
-  deliveredAt?: string;
-  CODAmount: number;
-  paymentMethod: "prepaid" | "cod" | "upi";
-  proofOfDelivery: boolean;
-  customerRating?: number;
-  customerFeedback?: string;
-  deliveryPhoto: boolean;
-  ePodSigned: boolean;
-  remarks?: string;
-  items: number;
-  weight: number;
-  attempts: number;
-  distance: number;
+const allDeliveries = [...deliveries, ...genRecords(31), ...genRecords(61)]
+
+function ri(min: number, max: number, value: number) {
+  return Math.max(min, Math.min(max, value))
 }
 
-// ============================================================================
-// Seeded Data
-// ============================================================================
-function seededRandom(seed: number): () => number {
-  let s = seed;
-  return () => {
-    s = (s * 16807 + 0) % 2147483647;
-    return (s - 1) / 2147483646;
-  };
+const filterGroups = [
+  {
+    key: 'zone',
+    label: 'Zone',
+    options: ZONES.map(z => ({ label: z, value: z, count: allDeliveries.filter(d => d.zone === z).length })),
+  },
+  {
+    key: 'vehicle',
+    label: 'Vehicle',
+    options: VEHICLE_TYPES.map(v => ({ label: v, value: v, count: allDeliveries.filter(d => d.vehicle === v).length })),
+  },
+  {
+    key: 'priority',
+    label: 'Priority',
+    options: PRIORITIES.map(p => ({ label: p, value: p, count: allDeliveries.filter(d => d.priority === p).length })),
+  },
+]
+
+function ZoneBadge({ zone }: { zone: string }) {
+  const colors: Record<string, string> = { 'Metro Core': 'bg-emerald-100 text-emerald-800', 'Suburban Ring': 'bg-teal-100 text-teal-800', 'Tier-2 City': 'bg-cyan-100 text-cyan-800', 'Semi-Urban': 'bg-sky-100 text-sky-800', 'Rural Belt': 'bg-amber-100 text-amber-800', 'Industrial Cluster': 'bg-violet-100 text-violet-800', 'SEZ Zone': 'bg-indigo-100 text-indigo-800', 'Coastal Town': 'bg-blue-100 text-blue-800' }
+  return <span className={`lmd-zone-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[zone] || 'bg-gray-100 text-gray-800'}`}>{zone}</span>
 }
 
-function generateData() {
-  const rand = seededRandom(159159);
-
-  const cities = ["Mumbai", "Delhi", "Bengaluru", "Chennai", "Hyderabad", "Pune", "Kolkata", "Jaipur", "Lucknow", "Ahmedabad"];
-  const zones = ["North", "South", "East", "West", "Central", "NE", "NW", "SE", "SW", "Harbour"];
-  const pincodes = ["400001", "400051", "400078", "400086", "411001", "411014", "411027", "110001", "110045", "110085", "560001", "560034", "560076", "560100", "600001", "600034", "600096", "700001", "700045", "700078", "500001", "500034", "500072", "302001", "302015", "302034", "226001", "226010", "226020", "380001", "380006", "380054"];
-  const streets = ["MG Road", "Linking Road", "Park Street", "Anna Nagar", "Jubilee Hills", "FC Road", "Salt Lake", "MI Road", "Hazratganj", "CG Road", " Brigade Road", "T. Nagar", "Banjara Hills", "JM Road", "Camac Street", "SV Road", "GS Road", "Ashram Road", "Sarojini Nagar", "Koregaon Park"];
-  const customers = ["Rahul Sharma", "Priya Patel", "Amit Kumar", "Sunita Devi", "Rajesh Gupta", "Neha Singh", "Vikram Joshi", "Kavita Reddy", "Manish Agarwal", "Deepa Nair", "Suresh Menon", "Anita Desai", "Prakash Iyer", "Ritu Malhotra", "Arjun Verma", "Pooja Mehta", "Sanjay Rao", "Lakshmi Iyer", "Ravi Kapoor", "Sneha Pillai", "Harish Chandra", "Meera Krishnan", "Dinesh Yadav", "Anjali Bhattacharya", "Karthik Subramaniam"];
-  const agentNames = ["Ravi Kumar", "Suresh Patil", "Mohan Singh", "Anil Das", "Raju Naik", "Deepak Verma", "Santosh Yadav", "Ganesh Reddy", "Kishore Joshi", "Vijay Mistry", "Pradeep Gupta", "Manoj Tiwari", "Ramesh Kulkarni", "Arun Nair", "Sunil Shukla"];
-  const deliverySlots = ["09:00-12:00", "12:00-15:00", "15:00-18:00", "18:00-21:00", "10:00-14:00", "14:00-18:00", "08:00-10:00", "19:00-21:00"];
-  const remarks = ["Customer not available", "Address not found", "Gate locked", "Customer requested reschedule", "Wrong address provided", "Customer refused delivery", "Package damaged", "Successfully delivered to reception", "Handed to family member", "Left at doorstep with permission", "OTP verified and delivered", "Customer collected from hub"];
-
-  const allStatuses: LastMileDelivery["status"][] = ["picked_up", "in_transit", "out_for_delivery", "near_location", "delivery_attempted", "delivered", "failed", "returned", "rescheduled"];
-  const allPriorities: LastMileDelivery["priority"][] = ["standard", "express", "same_day", "scheduled"];
-  const allPayments: LastMileDelivery["paymentMethod"][] = ["prepaid", "cod", "upi"];
-  const vehicleTypes: DeliveryAgent["vehicleType"][] = ["motorcycle", "van", "bicycle", "economy_van"];
-  const agentStatuses: DeliveryAgent["status"][] = ["active", "on_break", "offline", "dispatching"];
-
-  const pick = <T,>(arr: T[]): T => arr[Math.floor(rand() * arr.length)];
-
-  // Generate 25 delivery agents
-  const agents: DeliveryAgent[] = Array.from({ length: 25 }, (_, i) => ({
-    id: `DA-${String(i + 1).padStart(3, "0")}`,
-    name: agentNames[i % agentNames.length],
-    phone: `+91 ${98000 + Math.floor(rand() * 9000)}${Math.floor(rand() * 9000)}`,
-    avatar: agentNames[i % agentNames.length].split(" ").map(n => n[0]).join(""),
-    vehicleType: pick(vehicleTypes),
-    zone: zones[i % zones.length],
-    city: cities[i % cities.length],
-    rating: Math.round((3.2 + rand() * 1.8) * 10) / 10,
-    totalDeliveries: Math.floor(800 + rand() * 3500),
-    todayDeliveries: Math.floor(3 + rand() * 22),
-    successRate: Math.round((82 + rand() * 18) * 10) / 10,
-    avgDeliveryTime: Math.round((15 + rand() * 55) * 10) / 10,
-    status: pick(agentStatuses),
-    currentLat: 18.5 + rand() * 6,
-    currentLng: 72 + rand() * 12,
-  }));
-
-  // Generate 350 deliveries
-  const deliveries: LastMileDelivery[] = Array.from({ length: 350 }, (_, i) => {
-    const city = pick(cities);
-    const zone = pick(zones);
-    const status = i < 180 ? pick(allStatuses.slice(3)) : pick(allStatuses);
-    const priority = pick(allPriorities);
-    const isDelivered = status === "delivered";
-    const isFailed = status === "failed" || status === "returned";
-    const agent = pick(agents);
-    const d = new Date(2026, 6, 28 - Math.floor(rand() * 30));
-    d.setHours(Math.floor(rand() * 14) + 7, Math.floor(rand() * 60));
-
-    const dispatchedD = new Date(d);
-    dispatchedD.setHours(d.getHours() - Math.floor(rand() * 4) - 1);
-    const deliveredD = isDelivered ? new Date(d.getTime() + (rand() * 72 + 1) * 3600000) : undefined;
-
-    return {
-      id: `LMD-${String(i + 1).padStart(4, "0")}`,
-      orderId: `ORD-${String(10000 + i).padStart(6, "0")}`,
-      awbNumber: `AWB${String(500000 + Math.floor(rand() * 900000))}`,
-      customer: pick(customers),
-      phone: `+91 ${97000 + Math.floor(rand() * 9000)}${Math.floor(rand() * 9000)}`,
-      address: `${Math.floor(rand() * 500) + 1}, ${pick(streets)}, ${zone} Zone`,
-      city,
-      zone,
-      pincode: pick(pincodes),
-      agent: agent.name,
-      agentPhone: agent.phone,
-      status,
-      priority,
-      deliverySlot: pick(deliverySlots),
-      orderedAt: dispatchedD.toISOString().slice(0, 10),
-      dispatchedAt: d.toISOString().slice(0, 16).replace("T", " "),
-      estimatedDelivery: new Date(d.getTime() + (rand() * 48 + 4) * 3600000).toISOString().slice(0, 16).replace("T", " "),
-      deliveredAt: deliveredD ? deliveredD.toISOString().slice(0, 16).replace("T", " ") : undefined,
-      CODAmount: pick(allPayments) === "cod" ? Math.round((100 + rand() * 4900)) : 0,
-      paymentMethod: pick(allPayments),
-      proofOfDelivery: isDelivered ? rand() > 0.1 : false,
-      customerRating: isDelivered ? Math.round((rand() * 3 + 2) * 10) / 10 : undefined,
-      customerFeedback: isDelivered && rand() > 0.4 ? pick(remarks.slice(6)) : undefined,
-      deliveryPhoto: isDelivered ? rand() > 0.25 : false,
-      ePodSigned: isDelivered ? rand() > 0.15 : false,
-      remarks: isFailed ? pick(remarks.slice(0, 6)) : isDelivered ? pick(remarks.slice(6)) : undefined,
-      items: Math.floor(1 + rand() * 8),
-      weight: Math.round((200 + rand() * 9800)) / 1000,
-      attempts: isFailed ? Math.floor(rand() * 3) + 1 : 1,
-      distance: Math.round((2 + rand() * 28) * 10) / 10,
-    };
-  });
-
-  // Monthly trends
-  const months = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"];
-  const monthlyTrends = months.map((m, idx) => {
-    const base = 1800 + idx * 120;
-    return {
-      month: m,
-      totalDeliveries: base + Math.floor(rand() * 400),
-      successful: Math.floor((base + rand() * 400) * (0.88 + rand() * 0.08)),
-      failed: Math.floor((base + rand() * 400) * (0.03 + rand() * 0.05)),
-      rescheduled: Math.floor((base + rand() * 400) * (0.02 + rand() * 0.03)),
-      avgDeliveryTime: Math.round((35 + rand() * 20 - idx * 0.8) * 10) / 10,
-      successRate: Math.round((86 + idx * 0.5 + rand() * 5) * 10) / 10,
-      codCollection: Math.round((12 + rand() * 8 + idx * 0.3) * 100) / 100,
-      customerRating: Math.round((3.6 + rand() * 0.8) * 10) / 10,
-    };
-  });
-
-  // City-wise analysis
-  const cityAnalysis = cities.map(city => {
-    const cityDels = deliveries.filter(d => d.city === city);
-    const delivered = cityDels.filter(d => d.status === "delivered");
-    return {
-      city,
-      total: cityDels.length || Math.floor(200 + rand() * 300),
-      delivered: delivered.length || Math.floor(170 + rand() * 250),
-      successRate: Math.round((84 + rand() * 14) * 10) / 10,
-      avgTime: Math.round((20 + rand() * 40) * 10) / 10,
-      failed: Math.floor(5 + rand() * 25),
-      codRate: Math.round((20 + rand() * 35) * 10) / 10,
-      avgRating: Math.round((3.4 + rand() * 1.2) * 10) / 10,
-    };
-  });
-
-  // Zone performance
-  const zonePerformance = zones.slice(0, 8).map(zone => ({
-    zone,
-    total: Math.floor(150 + rand() * 400),
-    successRate: Math.round((83 + rand() * 15) * 10) / 10,
-    avgTime: Math.round((18 + rand() * 45) * 10) / 10,
-    firstAttemptRate: Math.round((72 + rand() * 22) * 10) / 10,
-    codCollected: Math.round((78 + rand() * 20) * 10) / 10,
-    avgRating: Math.round((3.3 + rand() * 1.4) * 10) / 10,
-  }));
-
-  // Vehicle type distribution
-  const vehicleDistribution = vehicleTypes.map(vt => ({
-    type: vt.replace("_", " ").replace(/\b\w/g, c => c.toUpperCase()),
-    count: Math.floor(40 + rand() * 160),
-    avgTime: Math.round((20 + rand() * 35) * 10) / 10,
-    successRate: Math.round((84 + rand() * 14) * 10) / 10,
-    costPerKm: Math.round((3 + rand() * 12) * 100) / 100,
-  }));
-
-  // Payment method breakdown
-  const paymentBreakdown = allPayments.map(pm => {
-    const pmDels = deliveries.filter(d => d.paymentMethod === pm);
-    return {
-      method: pm === "cod" ? "Cash on Delivery" : pm === "upi" ? "UPI" : "Prepaid",
-      count: pmDels.length || Math.floor(80 + rand() * 250),
-      percentage: Math.round((20 + rand() * 50) * 10) / 10,
-      amount: Math.round((50000 + rand() * 500000)),
-    };
-  });
-
-  // Agent performance for radar chart
-  const agentPerformance = agents.slice(0, 6).map(a => ({
-    name: a.name.split(" ")[0],
-    speed: Math.round((60 + rand() * 40) * 10) / 10,
-    accuracy: a.successRate,
-    reliability: Math.round((70 + rand() * 28) * 10) / 10,
-    rating: Math.round(a.rating * 20),
-    volume: Math.round(a.todayDeliveries / 25 * 100),
-    customerSat: Math.round((65 + rand() * 33) * 10) / 10,
-  }));
-
-  return {
-    deliveries,
-    agents,
-    monthlyTrends,
-    cityAnalysis,
-    zonePerformance,
-    vehicleDistribution,
-    paymentBreakdown,
-    agentPerformance,
-    months,
-    cities,
-    zones,
-    statuses: allStatuses,
-    priorities: allPriorities,
-    payments: allPayments,
-  };
+function VehicleBadge({ vehicle }: { vehicle: string }) {
+  const colors: Record<string, string> = { 'Electric Scooter': 'bg-green-100 text-green-800', 'Delivery Van': 'bg-emerald-100 text-emerald-800', 'Cargo Bike': 'bg-lime-100 text-lime-800', 'Auto Rickshaw': 'bg-teal-100 text-teal-800', 'E-Rickshaw': 'bg-cyan-100 text-cyan-800', 'Motorbike': 'bg-sky-100 text-sky-800', 'Pickup Truck': 'bg-blue-100 text-blue-800', 'Walk Courier': 'bg-violet-100 text-violet-800' }
+  return <span className={`lmd-vehicle-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[vehicle] || 'bg-gray-100 text-gray-800'}`}>{vehicle}</span>
 }
 
-// ============================================================================
-// Helpers
-// ============================================================================
-function formatNumber(n: number): string {
-  if (n >= 10000000) return `₹${(n / 10000000).toFixed(2)} Cr`;
-  if (n >= 100000) return `₹${(n / 100000).toFixed(2)} L`;
-  if (n >= 1000) return n.toLocaleString("en-IN");
-  return String(n);
+function PriorityBadge({ priority }: { priority: string }) {
+  const colors: Record<string, string> = { Express: 'bg-red-100 text-red-800', 'Same-Day': 'bg-orange-100 text-orange-800', 'Next-Day': 'bg-yellow-100 text-yellow-800', Standard: 'bg-gray-100 text-gray-700' }
+  return <span className={`lmd-priority-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[priority] || 'bg-gray-100 text-gray-700'}`}>{priority}</span>
 }
 
-function formatINR(n: number): string {
-  if (n >= 10000000) return `₹${(n / 10000000).toFixed(2)} Cr`;
-  if (n >= 100000) return `₹${(n / 100000).toFixed(2)} L`;
-  return `₹${n.toLocaleString("en-IN")}`;
+function StatusBadge({ status }: { status: string }) {
+  const colors: Record<string, string> = { Delivered: 'bg-green-100 text-green-800', 'In Transit': 'bg-blue-100 text-blue-800', 'At Hub': 'bg-yellow-100 text-yellow-800', 'Out for Delivery': 'bg-indigo-100 text-indigo-800', Delayed: 'bg-red-100 text-red-800' }
+  return <span className={`lmd-status-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-700'}`}>{status}</span>
 }
 
-const THEME = {
-  primary: "#059669",
-  primaryLight: "#d1fae5",
-  secondary: "#f59e0b",
-  secondaryLight: "#fef3c7",
-  danger: "#ef4444",
-  dangerLight: "#fee2e2",
-  info: "#6366f1",
-  infoLight: "#e0e7ff",
-  bg: "#f0fdf4",
-  surface: "#ffffff",
-  text: "#1e293b",
-  textMuted: "#64748b",
-  border: "#e2e8f0",
-};
+function DistanceBar({ distance }: { distance: number }) {
+  const pct = ri(0, 100, (distance / 40) * 100)
+  return <div className="lmd-dist-bar flex items-center gap-2"><div className="h-2 w-20 rounded-full bg-gray-200"><div className="lmd-dist-bar-fill h-2 rounded-full bg-emerald-500 transition-all" style={{ width: `${pct}%` }} /></div><span className="text-xs text-gray-500">{distance}km</span></div>
+}
 
-const STATUS_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
-  picked_up: { label: "Picked Up", color: "#6366f1", bg: "#e0e7ff" },
-  in_transit: { label: "In Transit", color: "#3b82f6", bg: "#dbeafe" },
-  out_for_delivery: { label: "Out for Delivery", color: "#f59e0b", bg: "#fef3c7" },
-  near_location: { label: "Near Location", color: "#8b5cf6", bg: "#ede9fe" },
-  delivery_attempted: { label: "Attempted", color: "#f97316", bg: "#ffedd5" },
-  delivered: { label: "Delivered", color: "#10b981", bg: "#d1fae5" },
-  failed: { label: "Failed", color: "#ef4444", bg: "#fee2e2" },
-  returned: { label: "Returned", color: "#64748b", bg: "#f1f5f9" },
-  rescheduled: { label: "Rescheduled", color: "#06b6d4", bg: "#cffafe" },
-};
+function EtaBar({ eta }: { eta: number }) {
+  const pct = ri(0, 100, (eta / 120) * 100)
+  const color = eta < 30 ? 'bg-emerald-500' : eta < 60 ? 'bg-yellow-500' : 'bg-red-500'
+  return <div className="lmd-eta-bar flex items-center gap-2"><div className="h-2 w-20 rounded-full bg-gray-200"><div className={`lmd-eta-bar-fill h-2 rounded-full ${color} transition-all`} style={{ width: `${pct}%` }} /></div><span className="text-xs text-gray-500">{eta}min</span></div>
+}
 
-const PRIORITY_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
-  standard: { label: "Standard", color: "#64748b", bg: "#f1f5f9" },
-  express: { label: "Express", color: "#f59e0b", bg: "#fef3c7" },
-  same_day: { label: "Same Day", color: "#ef4444", bg: "#fee2e2" },
-  scheduled: { label: "Scheduled", color: "#6366f1", bg: "#e0e7ff" },
-};
+function HealthRing({ value, label, color }: { value: number; label: string; color: string }) {
+  const r = 28, cx = 35, cy = 35, sw = 5
+  const circ = 2 * Math.PI * r
+  const offset = circ - (ri(0, 100, value) / 100) * circ
+  return <div className="lmd-health-ring flex flex-col items-center"><svg width={70} height={70} className="-rotate-90"><circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={circ} strokeDashoffset={offset} className="lmd-ring-path" strokeLinecap="round" /></svg><span className="lmd-ring-value mt-1 text-sm font-bold" style={{ color }}>{value}%</span><span className="text-xs text-gray-500">{label}</span></div>
+}
 
-const PAYMENT_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
-  prepaid: { label: "Prepaid", color: "#10b981", bg: "#d1fae5" },
-  cod: { label: "COD", color: "#f59e0b", bg: "#fef3c7" },
-  upi: { label: "UPI", color: "#6366f1", bg: "#e0e7ff" },
-};
+function KpiTile({ title, value, sub }: { title: string; value: string; sub: string }) {
+  return <Card className="lmd-kpi-card"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="lmd-kpi-value mt-1 text-2xl font-bold">{value}</p><p className="text-xs text-gray-400 mt-0.5">{sub}</p></CardContent></Card>
+}
 
-const VEHICLE_CONFIG: Record<string, { label: string; icon: string }> = {
-  motorcycle: { label: "Motorcycle", icon: "🏍️" },
-  van: { label: "Van", icon: "🚐" },
-  bicycle: { label: "Bicycle", icon: "🚲" },
-  economy_van: { label: "E-Van", icon: "⚡" },
-};
+function ValueTile({ title, value, trend }: { title: string; value: string; trend: string }) {
+  const up = trend.startsWith('+')
+  return <Card className="lmd-value-tile"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="mt-1 text-xl font-bold">{value}</p><p className={`text-xs mt-0.5 ${up ? 'text-green-600' : 'text-red-500'}`}>{trend}</p></CardContent></Card>
+}
 
-const AGENT_STATUS_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
-  active: { label: "Active", color: "#10b981", bg: "#d1fae5" },
-  on_break: { label: "On Break", color: "#f59e0b", bg: "#fef3c7" },
-  offline: { label: "Offline", color: "#64748b", bg: "#f1f5f9" },
-  dispatching: { label: "Dispatching", color: "#3b82f6", bg: "#dbeafe" },
-};
-
-// ============================================================================
-// Component
-// ============================================================================
 export default function LastMileDeliveryView() {
-  const data = useMemo(() => generateData(), []);
-  const [activeTab, setActiveTab] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [priorityFilter, setPriorityFilter] = useState<string>("all");
-  const [paymentFilter, setPaymentFilter] = useState<string>("all");
-  const [cityFilter, setCityFilter] = useState<string>("all");
-  const [selectedDelivery, setSelectedDelivery] = useState<LastMileDelivery | null>(null);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [agentCityFilter, setAgentCityFilter] = useState<string>("all");
+  const [activeTab, setActiveTab] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
 
-  const tabs = ["Dashboard", "Live Tracking", "Delivery Agents", "Performance Analytics", "Payment & COD"];
+  const toggleFilter = (key: string, value: string) => {
+    setActiveFilters(prev => {
+      const curr = prev[key] || []
+      const next = curr.includes(value) ? curr.filter(v => v !== value) : [...curr, value]
+      return next.length > 0 ? { ...prev, [key]: next } : Object.fromEntries(Object.entries(prev).filter(([k]) => k !== key))
+    })
+  }
 
-  // Computed metrics
-  const metrics = useMemo(() => {
-    const total = data.deliveries.length;
-    const delivered = data.deliveries.filter(d => d.status === "delivered").length;
-    const inTransit = data.deliveries.filter(d => ["in_transit", "out_for_delivery", "near_location"].includes(d.status)).length;
-    const failed = data.deliveries.filter(d => d.status === "failed").length;
-    const returned = data.deliveries.filter(d => d.status === "returned").length;
-    const avgRating = data.deliveries.filter(d => d.customerRating).reduce((s, d) => s + (d.customerRating || 0), 0) / Math.max(data.deliveries.filter(d => d.customerRating).length, 1);
-    const codCollected = data.deliveries.filter(d => d.paymentMethod === "cod" && d.status === "delivered").reduce((s, d) => s + d.CODAmount, 0);
-    const codPending = data.deliveries.filter(d => d.paymentMethod === "cod" && d.status !== "delivered" && d.status !== "returned" && d.status !== "failed").reduce((s, d) => s + d.CODAmount, 0);
-    const activeAgents = data.agents.filter(a => a.status === "active").length;
-    const avgDeliveryTime = 32.5;
+  const filtered = allDeliveries.filter(d => {
+    const q = searchQuery.toLowerCase()
+    if (q && !d.id.toLowerCase().includes(q) && !d.zone.toLowerCase().includes(q) && !d.assigned_to.toLowerCase().includes(q)) return false
+    return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(d[key as keyof typeof d] as string))
+  })
 
-    return { total, delivered, inTransit, failed, returned, avgRating, codCollected, codPending, activeAgents, avgDeliveryTime };
-  }, [data]);
+  const delivered = allDeliveries.filter(d => d.status === 'Delivered')
+  const avgRating = delivered.length > 0 ? (delivered.reduce((s, d) => s + d.customer_rating, 0) / delivered.length).toFixed(1) : '0'
+  const onTime = allDeliveries.filter(d => d.status === 'Delivered' && d.eta_min < d.distance_km * 4).length
 
-  // Filtered deliveries
-  const filteredDeliveries = useMemo(() => {
-    return data.deliveries.filter(d => {
-      if (statusFilter !== "all" && d.status !== statusFilter) return false;
-      if (priorityFilter !== "all" && d.priority !== priorityFilter) return false;
-      if (paymentFilter !== "all" && d.paymentMethod !== paymentFilter) return false;
-      if (cityFilter !== "all" && d.city !== cityFilter) return false;
-      if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        return d.id.toLowerCase().includes(q) || d.orderId.toLowerCase().includes(q) || d.awbNumber.toLowerCase().includes(q) || d.customer.toLowerCase().includes(q) || d.agent.toLowerCase().includes(q) || d.pincode.includes(q);
-      }
-      return true;
-    });
-  }, [data, statusFilter, priorityFilter, paymentFilter, cityFilter, searchQuery]);
+  const monthlyData = [
+    { month: 'Jan', delivered: 4520, returned: 180, express: 890 },
+    { month: 'Feb', delivered: 4890, returned: 210, express: 960 },
+    { month: 'Mar', delivered: 5230, returned: 195, express: 1120 },
+    { month: 'Apr', delivered: 4980, returned: 240, express: 1050 },
+    { month: 'May', delivered: 5510, returned: 170, express: 1280 },
+    { month: 'Jun', delivered: 5840, returned: 220, express: 1340 },
+    { month: 'Jul', delivered: 5670, returned: 205, express: 1190 },
+  ]
+  const zoneData = ZONES.map(z => ({ zone: z, count: allDeliveries.filter(d => d.zone === z).length }))
+  const vehicleData = VEHICLE_TYPES.map(v => ({ vehicle: v, count: allDeliveries.filter(d => d.vehicle === v).length }))
 
-  // Filtered agents
-  const filteredAgents = useMemo(() => {
-    return data.agents.filter(a => {
-      if (agentCityFilter !== "all" && a.city !== agentCityFilter) return false;
-      return true;
-    });
-  }, [data, agentCityFilter]);
-
-  // Status distribution for pie
-  const statusPieData = useMemo(() => {
-    const counts: Record<string, number> = {};
-    data.deliveries.forEach(d => { counts[d.status] = (counts[d.status] || 0) + 1; });
-    return Object.entries(counts).map(([key, value]) => ({
-      name: STATUS_CONFIG[key]?.label || key,
-      value,
-      color: STATUS_CONFIG[key]?.color || "#94a3b8",
-    }));
-  }, [data]);
-
-  const PIE_COLORS = ["#10b981", "#3b82f6", "#f59e0b", "#ef4444", "#6366f1", "#8b5cf6", "#f97316", "#06b6d4", "#64748b"];
-
-  const openDrawer = useCallback((d: LastMileDelivery) => {
-    setSelectedDelivery(d);
-    setDrawerOpen(true);
-  }, []);
-
-  const closeDrawer = useCallback(() => {
-    setDrawerOpen(false);
-    setTimeout(() => setSelectedDelivery(null), 300);
-  }, []);
-
-  // ===== TAB 1: Dashboard =====
-  const renderDashboard = () => (
-    <div className="lmd-tab-content">
-      {/* KPI Cards */}
-      <div className="lmd-kpi-grid">
-        {[
-          { label: "Total Deliveries", value: metrics.total.toLocaleString("en-IN"), change: "+8.3%", up: true, icon: Package, color: THEME.primary },
-          { label: "In Transit", value: metrics.inTransit.toLocaleString("en-IN"), change: "+12.1%", up: true, icon: Truck, color: "#3b82f6" },
-          { label: "Delivered", value: metrics.delivered.toLocaleString("en-IN"), change: "+6.5%", up: true, icon: CheckCircle2, color: "#10b981" },
-          { label: "Failed / Returned", value: (metrics.failed + metrics.returned).toLocaleString("en-IN"), change: "-3.2%", up: false, icon: XCircle, color: THEME.danger },
-          { label: "COD Collected", value: formatINR(metrics.codCollected), change: "+15.7%", up: true, icon: IndianRupee, color: THEME.secondary },
-          { label: "Avg Rating", value: metrics.avgRating.toFixed(1) + " / 5", change: "+0.2", up: true, icon: Star, color: "#8b5cf6" },
-        ].map((kpi, i) => (
-          <div key={i} className="lmd-kpi-card" style={{ borderTopColor: kpi.color }}>
-            <div className="lmd-kpi-icon" style={{ backgroundColor: `${kpi.color}15`, color: kpi.color }}>
-              <kpi.icon size={20} />
-            </div>
-            <div className="lmd-kpi-info">
-              <span className="lmd-kpi-label">{kpi.label}</span>
-              <span className="lmd-kpi-value">{kpi.value}</span>
-              <span className={`lmd-kpi-change ${kpi.up ? "lmd-kpi-up" : "lmd-kpi-down"}`}>
-                {kpi.up ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
-                {kpi.change}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Charts Row 1 */}
-      <div className="lmd-charts-row">
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">Monthly Delivery Volume & Success Rate</h3>
-            <span className="lmd-chart-subtitle">Last 12 months</span>
-          </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <ComposedChart data={data.monthlyTrends}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis yAxisId="left" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11, fill: "#64748b" }} domain={[0, 100]} unit="%" />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar yAxisId="left" dataKey="totalDeliveries" fill="#059669" radius={[4, 4, 0, 0]} name="Total" />
-              <Bar yAxisId="left" dataKey="successful" fill="#6ee7b7" radius={[4, 4, 0, 0]} name="Successful" />
-              <Bar yAxisId="left" dataKey="failed" fill="#fca5a5" radius={[4, 4, 0, 0]} name="Failed" />
-              <Line yAxisId="right" type="monotone" dataKey="successRate" stroke="#f59e0b" strokeWidth={2} dot={false} name="Success %" />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">Delivery Status Distribution</h3>
-            <span className="lmd-chart-subtitle">Current month</span>
-          </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <PieChart>
-              <Pie data={statusPieData} cx="50%" cy="50%" innerRadius={55} outerRadius={95} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={{ strokeWidth: 1 }}>
-                {statusPieData.map((entry, i) => (
-                  <Cell key={i} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* Charts Row 2 */}
-      <div className="lmd-charts-row">
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">Avg Delivery Time & Customer Rating</h3>
-            <span className="lmd-chart-subtitle">Monthly trend</span>
-          </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <ComposedChart data={data.monthlyTrends}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis yAxisId="left" tick={{ fontSize: 11, fill: "#64748b" }} unit=" min" />
-              <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11, fill: "#64748b" }} domain={[0, 5]} />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Area yAxisId="left" type="monotone" dataKey="avgDeliveryTime" fill="#d1fae5" stroke="#059669" strokeWidth={2} name="Avg Time (min)" />
-              <Line yAxisId="right" type="monotone" dataKey="customerRating" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 3 }} name="Rating (out of 5)" />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">COD Collection Trend</h3>
-            <span className="lmd-chart-subtitle">Monthly COD collection (₹ Lakhs)</span>
-          </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <AreaChart data={data.monthlyTrends}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis tick={{ fontSize: 11, fill: "#64748b" }} unit=" L" />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Area type="monotone" dataKey="codCollection" fill="#fef3c7" stroke="#f59e0b" strokeWidth={2} name="COD Collected (L)" />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* Alerts */}
-      <div className="lmd-alerts-section">
-        <h3 className="lmd-section-title">Active Alerts</h3>
-        <div className="lmd-alerts-grid">
-          {[
-            { title: "Delivery SLA Breach", msg: "18 deliveries exceeded 2hr SLA in Mumbai South", severity: "critical" },
-            { title: "Agent Delay Alert", msg: "Agent DA-007 has been idle for 45+ minutes", severity: "warning" },
-            { title: "High Failure Zone", msg: "Kolkata East failure rate spiked to 12.5%", severity: "critical" },
-            { title: "COD Pending", msg: `₹${formatINR(metrics.codPending)} COD awaiting collection`, severity: "warning" },
-            { title: "Agent Offline", msg: "3 agents went offline during active dispatch", severity: "warning" },
-            { title: "Rating Drop", msg: "Bengaluru avg rating dropped below 3.8 this week", severity: "info" },
-          ].map((alert, i) => (
-            <div key={i} className={`lmd-alert-card lmd-alert-${alert.severity}`}>
-              <AlertTriangle size={16} className="lmd-alert-icon" />
-              <div>
-                <span className="lmd-alert-title">{alert.title}</span>
-                <span className="lmd-alert-msg">{alert.msg}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  // ===== TAB 2: Live Tracking =====
-  const renderLiveTracking = () => {
-    const activeDeliveries = data.deliveries.filter(d => ["in_transit", "out_for_delivery", "near_location"].includes(d.status));
-
-    return (
-      <div className="lmd-tab-content">
-        {/* Live Stats */}
-        <div className="lmd-live-stats">
-          <div className="lmd-live-stat">
-            <div className="lmd-live-dot lmd-live-dot-green" />
-            <span className="lmd-live-label">Active Deliveries</span>
-            <span className="lmd-live-value">{activeDeliveries.length}</span>
-          </div>
-          <div className="lmd-live-stat">
-            <div className="lmd-live-dot lmd-live-dot-blue" />
-            <span className="lmd-live-label">Out for Delivery</span>
-            <span className="lmd-live-value">{data.deliveries.filter(d => d.status === "out_for_delivery").length}</span>
-          </div>
-          <div className="lmd-live-stat">
-            <div className="lmd-live-dot lmd-live-dot-amber" />
-            <span className="lmd-live-label">Near Location</span>
-            <span className="lmd-live-value">{data.deliveries.filter(d => d.status === "near_location").length}</span>
-          </div>
-          <div className="lmd-live-stat">
-            <div className="lmd-live-dot lmd-live-dot-red" />
-            <span className="lmd-live-label">Failed Today</span>
-            <span className="lmd-live-value">{data.deliveries.filter(d => d.status === "failed").length}</span>
-          </div>
-          <div className="lmd-live-stat">
-            <User size={16} className="lmd-live-icon" />
-            <span className="lmd-live-label">Active Agents</span>
-            <span className="lmd-live-value">{metrics.activeAgents}</span>
-          </div>
-        </div>
-
-        {/* Delivery Queue */}
-        <div className="lmd-section-header">
-          <h3 className="lmd-section-title">Delivery Queue ({filteredDeliveries.length})</h3>
-          <div className="lmd-search-box">
-            <Search size={16} className="lmd-search-icon" />
-            <input
-              type="text"
-              placeholder="Search by ID, Order, AWB, Customer, Agent, PIN..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="lmd-search-input"
-            />
-          </div>
-        </div>
-
-        {/* Double-row filter */}
-        <div className="lmd-filter-row">
-          <div className="lmd-filter-pills">
-            {["all", ...data.statuses].map(s => (
-              <button
-                key={s}
-                className={`lmd-filter-pill ${statusFilter === s ? "lmd-filter-pill-active" : ""}`}
-                onClick={() => setStatusFilter(s)}
-                style={statusFilter === s ? { backgroundColor: STATUS_CONFIG[s]?.color || "#059669", color: "#fff", borderColor: STATUS_CONFIG[s]?.color || "#059669" } : {}}
-              >
-                {s === "all" ? "All Status" : STATUS_CONFIG[s]?.label || s}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="lmd-filter-row">
-          <div className="lmd-filter-pills">
-            <button className={`lmd-filter-pill ${priorityFilter === "all" ? "lmd-filter-pill-active" : ""}`} onClick={() => setPriorityFilter("all")}>All Priority</button>
-            {data.priorities.map(p => (
-              <button
-                key={p}
-                className={`lmd-filter-pill ${priorityFilter === p ? "lmd-filter-pill-active" : ""}`}
-                onClick={() => setPriorityFilter(p)}
-                style={priorityFilter === p ? { backgroundColor: PRIORITY_CONFIG[p].color, color: "#fff", borderColor: PRIORITY_CONFIG[p].color } : {}}
-              >
-                {PRIORITY_CONFIG[p].label}
-              </button>
-            ))}
-            <span className="lmd-filter-separator">|</span>
-            <button className={`lmd-filter-pill ${paymentFilter === "all" ? "lmd-filter-pill-active" : ""}`} onClick={() => setPaymentFilter("all")}>All Payment</button>
-            {data.payments.map(p => (
-              <button
-                key={p}
-                className={`lmd-filter-pill ${paymentFilter === p ? "lmd-filter-pill-active" : ""}`}
-                onClick={() => setPaymentFilter(p)}
-                style={paymentFilter === p ? { backgroundColor: PAYMENT_CONFIG[p].color, color: "#fff", borderColor: PAYMENT_CONFIG[p].color } : {}}
-              >
-                {PAYMENT_CONFIG[p].label}
-              </button>
-            ))}
-          </div>
-          <div className="lmd-city-select">
-            <select value={cityFilter} onChange={(e) => setCityFilter(e.target.value)} className="lmd-select">
-              <option value="all">All Cities</option>
-              {data.cities.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-          </div>
-        </div>
-
-        {/* Table */}
-        <div className="lmd-table-container">
-          <table className="lmd-table">
-            <thead>
-              <tr>
-                <th>ID / Order</th>
-                <th>Customer</th>
-                <th>City / PIN</th>
-                <th>Agent</th>
-                <th>Priority</th>
-                <th>Payment</th>
-                <th>COD Amt</th>
-                <th>Slot</th>
-                <th>Status</th>
-                <th>Attempts</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredDeliveries.slice(0, 35).map((d, i) => (
-                <tr key={d.id} className="lmd-table-row">
-                  <td>
-                    <div className="lmd-cell-primary">
-                      <span className="lmd-cell-id">{d.id}</span>
-                      <span className="lmd-cell-sub">{d.awbNumber}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="lmd-cell-primary">
-                      <span className="lmd-cell-name">{d.customer}</span>
-                      <span className="lmd-cell-sub">{d.phone}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="lmd-cell-primary">
-                      <span className="lmd-cell-name">{d.city}</span>
-                      <span className="lmd-cell-sub">{d.pincode}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="lmd-cell-primary">
-                      <span className="lmd-cell-name">{d.agent}</span>
-                    </div>
-                  </td>
-                  <td>
-                    <span className="lmd-badge" style={{ color: PRIORITY_CONFIG[d.priority].color, backgroundColor: PRIORITY_CONFIG[d.priority].bg }}>
-                      {PRIORITY_CONFIG[d.priority].label}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="lmd-badge" style={{ color: PAYMENT_CONFIG[d.paymentMethod].color, backgroundColor: PAYMENT_CONFIG[d.paymentMethod].bg }}>
-                      {PAYMENT_CONFIG[d.paymentMethod].label}
-                    </span>
-                  </td>
-                  <td className="lmd-cell-amount">{d.paymentMethod === "cod" ? formatINR(d.CODAmount) : "—"}</td>
-                  <td><span className="lmd-cell-slot">{d.deliverySlot}</span></td>
-                  <td>
-                    <span className="lmd-badge" style={{ color: STATUS_CONFIG[d.status].color, backgroundColor: STATUS_CONFIG[d.status].bg }}>
-                      {STATUS_CONFIG[d.status].label}
-                    </span>
-                  </td>
-                  <td className="lmd-cell-center">{d.attempts}</td>
-                  <td>
-                    <button className="lmd-action-btn" onClick={() => openDrawer(d)}>
-                      <Eye size={14} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="lmd-table-footer">
-            Showing {Math.min(35, filteredDeliveries.length)} of {filteredDeliveries.length} deliveries
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // ===== TAB 3: Delivery Agents =====
-  const renderAgents = () => (
-    <div className="lmd-tab-content">
-      {/* Agent Stats */}
-      <div className="lmd-kpi-grid">
-        {[
-          { label: "Total Agents", value: data.agents.length, icon: Users, color: THEME.primary },
-          { label: "Active Now", value: data.agents.filter(a => a.status === "active").length, icon: Footprints, color: "#10b981" },
-          { label: "On Break", value: data.agents.filter(a => a.status === "on_break").length, icon: Coffee, color: "#f59e0b" },
-          { label: "Avg Rating", value: (data.agents.reduce((s, a) => s + a.rating, 0) / data.agents.length).toFixed(1), icon: Star, color: "#8b5cf6" },
-          { label: "Total Today Deliveries", value: data.agents.reduce((s, a) => s + a.todayDeliveries, 0), icon: Package, color: "#3b82f6" },
-          { label: "Avg Success Rate", value: (data.agents.reduce((s, a) => s + a.successRate, 0) / data.agents.length).toFixed(1) + "%", icon: CheckCircle2, color: "#059669" },
-        ].map((kpi, i) => (
-          <div key={i} className="lmd-kpi-card" style={{ borderTopColor: kpi.color }}>
-            <div className="lmd-kpi-icon" style={{ backgroundColor: `${kpi.color}15`, color: kpi.color }}>
-              <kpi.icon size={20} />
-            </div>
-            <div className="lmd-kpi-info">
-              <span className="lmd-kpi-label">{kpi.label}</span>
-              <span className="lmd-kpi-value">{kpi.value}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Agent Filter */}
-      <div className="lmd-filter-row" style={{ marginTop: 16 }}>
-        <div className="lmd-city-select">
-          <select value={agentCityFilter} onChange={(e) => setAgentCityFilter(e.target.value)} className="lmd-select">
-            <option value="all">All Cities</option>
-            {data.cities.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
-        </div>
-      </div>
-
-      {/* Agent Grid */}
-      <div className="lmd-agent-grid">
-        {filteredAgents.map(agent => (
-          <div key={agent.id} className="lmd-agent-card">
-            <div className="lmd-agent-header">
-              <div className="lmd-agent-avatar" style={{ backgroundColor: `${THEME.primary}20`, color: THEME.primary }}>
-                {agent.avatar}
-              </div>
-              <div className="lmd-agent-meta">
-                <span className="lmd-agent-name">{agent.name}</span>
-                <span className="lmd-agent-id">{agent.id} · {VEHICLE_CONFIG[agent.vehicleType]?.icon} {VEHICLE_CONFIG[agent.vehicleType]?.label}</span>
-              </div>
-              <span className="lmd-badge" style={{ color: AGENT_STATUS_CONFIG[agent.status].color, backgroundColor: AGENT_STATUS_CONFIG[agent.status].bg }}>
-                {AGENT_STATUS_CONFIG[agent.status].label}
-              </span>
-            </div>
-            <div className="lmd-agent-details">
-              <div className="lmd-agent-detail-row">
-                <Phone size={13} />
-                <span>{agent.phone}</span>
-              </div>
-              <div className="lmd-agent-detail-row">
-                <MapPin size={13} />
-                <span>{agent.zone} Zone, {agent.city}</span>
-              </div>
-            </div>
-            <div className="lmd-agent-stats">
-              <div className="lmd-agent-stat">
-                <span className="lmd-agent-stat-value">{agent.todayDeliveries}</span>
-                <span className="lmd-agent-stat-label">Today</span>
-              </div>
-              <div className="lmd-agent-stat">
-                <span className="lmd-agent-stat-value">{agent.totalDeliveries.toLocaleString()}</span>
-                <span className="lmd-agent-stat-label">Total</span>
-              </div>
-              <div className="lmd-agent-stat">
-                <span className="lmd-agent-stat-value">{agent.successRate}%</span>
-                <span className="lmd-agent-stat-label">Success</span>
-              </div>
-              <div className="lmd-agent-stat">
-                <span className="lmd-agent-stat-value">{agent.avgDeliveryTime}m</span>
-                <span className="lmd-agent-stat-label">Avg Time</span>
-              </div>
-              <div className="lmd-agent-stat">
-                <div className="lmd-agent-rating">
-                  <Star size={12} fill="#f59e0b" stroke="#f59e0b" />
-                  <span>{agent.rating}</span>
-                </div>
-                <span className="lmd-agent-stat-label">Rating</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  // ===== TAB 4: Performance Analytics =====
-  const renderPerformance = () => (
-    <div className="lmd-tab-content">
-      {/* Charts Row 1 */}
-      <div className="lmd-charts-row">
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">City-wise Delivery Performance</h3>
-            <span className="lmd-chart-subtitle">Success rate & avg delivery time</span>
-          </div>
-          <ResponsiveContainer width="100%" height={320}>
-            <ComposedChart data={data.cityAnalysis} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis type="number" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis dataKey="city" type="category" tick={{ fontSize: 11, fill: "#64748b" }} width={80} />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="delivered" fill="#059669" radius={[0, 4, 4, 0]} name="Delivered" />
-              <Bar dataKey="failed" fill="#fca5a5" radius={[0, 4, 4, 0]} name="Failed" />
-              <Line type="monotone" dataKey="successRate" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} name="Success %" />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">Zone Performance Radar</h3>
-            <span className="lmd-chart-subtitle">Multi-dimensional comparison</span>
-          </div>
-          <ResponsiveContainer width="100%" height={320}>
-            <RadarChart data={data.agentPerformance.slice(0, 5)}>
-              <PolarGrid stroke="#e2e8f0" />
-              <PolarAngleAxis dataKey="name" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <PolarRadiusAxis tick={{ fontSize: 10, fill: "#94a3b8" }} />
-              <Radar name="Speed" dataKey="speed" stroke="#059669" fill="#d1fae5" fillOpacity={0.5} />
-              <Radar name="Accuracy" dataKey="accuracy" stroke="#3b82f6" fill="#dbeafe" fillOpacity={0.5} />
-              <Radar name="Rating" dataKey="rating" stroke="#8b5cf6" fill="#ede9fe" fillOpacity={0.5} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-            </RadarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* Charts Row 2 */}
-      <div className="lmd-charts-row">
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">Vehicle Type Analysis</h3>
-            <span className="lmd-chart-subtitle">Fleet composition & performance</span>
-          </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <ComposedChart data={data.vehicleDistribution}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="type" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis yAxisId="left" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar yAxisId="left" dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} name="Vehicles" />
-              <Line yAxisId="right" type="monotone" dataKey="successRate" stroke="#10b981" strokeWidth={2} name="Success %" />
-              <Line yAxisId="right" type="monotone" dataKey="avgTime" stroke="#f59e0b" strokeWidth={2} dot={{ r: 3 }} name="Avg Time (min)" />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="lmd-chart-card">
-          <div className="lmd-chart-header">
-            <h3 className="lmd-chart-title">Zone-wise Performance</h3>
-            <span className="lmd-chart-subtitle">First attempt rate & COD collection</span>
-          </div>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={data.zonePerformance}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-              <XAxis dataKey="zone" tick={{ fontSize: 11, fill: "#64748b" }} />
-              <YAxis tick={{ fontSize: 11, fill: "#64748b" }} />
-              <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-              <Legend wrapperStyle={{ fontSize: 11 }} />
-              <Bar dataKey="firstAttemptRate" fill="#10b981" radius={[4, 4, 0, 0]} name="1st Attempt %" />
-              <Bar dataKey="codCollected" fill="#f59e0b" radius={[4, 4, 0, 0]} name="COD Collected %" />
-              <Bar dataKey="successRate" fill="#6366f1" radius={[4, 4, 0, 0]} name="Success %" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* City Table */}
-      <div className="lmd-table-container">
-        <div className="lmd-section-header" style={{ marginBottom: 12 }}>
-          <h3 className="lmd-section-title">City-wise Detail Table</h3>
-        </div>
-        <table className="lmd-table">
-          <thead>
-            <tr>
-              <th>City</th>
-              <th>Total</th>
-              <th>Delivered</th>
-              <th>Success Rate</th>
-              <th>Avg Time</th>
-              <th>Failed</th>
-              <th>COD Rate</th>
-              <th>Avg Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.cityAnalysis.map((c, i) => (
-              <tr key={i} className="lmd-table-row">
-                <td className="lmd-cell-name">{c.city}</td>
-                <td className="lmd-cell-center">{c.total}</td>
-                <td className="lmd-cell-center">{c.delivered}</td>
-                <td className="lmd-cell-center">
-                  <div className="lmd-progress-bar">
-                    <div className="lmd-progress-fill" style={{ width: `${c.successRate}%`, backgroundColor: c.successRate >= 92 ? "#10b981" : c.successRate >= 88 ? "#f59e0b" : "#ef4444" }} />
-                    <span>{c.successRate}%</span>
-                  </div>
-                </td>
-                <td className="lmd-cell-center">{c.avgTime} min</td>
-                <td className="lmd-cell-center" style={{ color: c.failed > 15 ? "#ef4444" : "#64748b" }}>{c.failed}</td>
-                <td className="lmd-cell-center">{c.codRate}%</td>
-                <td className="lmd-cell-center">
-                  <div className="lmd-rating-inline">
-                    <Star size={12} fill="#f59e0b" stroke="#f59e0b" />
-                    {c.avgRating}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-
-  // ===== TAB 5: Payment & COD =====
-  const renderPaymentCOD = () => {
-    const codDeliveries = data.deliveries.filter(d => d.paymentMethod === "cod");
-    const codDelivered = codDeliveries.filter(d => d.status === "delivered");
-    const codPending = codDeliveries.filter(d => !["delivered", "returned", "failed"].includes(d.status));
-    const totalCODAmount = codDeliveries.reduce((s, d) => s + d.CODAmount, 0);
-    const collectedCOD = codDelivered.reduce((s, d) => s + d.CODAmount, 0);
-    const pendingCOD = codPending.reduce((s, d) => s + d.CODAmount, 0);
-    const upiDeliveries = data.deliveries.filter(d => d.paymentMethod === "upi");
-
-    return (
-      <div className="lmd-tab-content">
-        {/* Payment KPIs */}
-        <div className="lmd-kpi-grid">
-          {[
-            { label: "Total COD Orders", value: codDeliveries.length.toLocaleString("en-IN"), icon: CreditCard, color: THEME.secondary },
-            { label: "COD Collected", value: formatINR(collectedCOD), icon: IndianRupee, color: "#10b981" },
-            { label: "COD Pending", value: formatINR(pendingCOD), icon: Clock, color: "#f59e0b" },
-            { label: "Collection Rate", value: (collectedCOD / Math.max(totalCODAmount, 1) * 100).toFixed(1) + "%", icon: CheckCircle2, color: "#059669" },
-            { label: "UPI Orders", value: upiDeliveries.length.toLocaleString("en-IN"), icon: Zap, color: "#6366f1" },
-            { label: "Avg COD Amount", value: formatINR(totalCODAmount / Math.max(codDeliveries.length, 1)), icon: BarChart3, color: "#8b5cf6" },
-          ].map((kpi, i) => (
-            <div key={i} className="lmd-kpi-card" style={{ borderTopColor: kpi.color }}>
-              <div className="lmd-kpi-icon" style={{ backgroundColor: `${kpi.color}15`, color: kpi.color }}>
-                <kpi.icon size={20} />
-              </div>
-              <div className="lmd-kpi-info">
-                <span className="lmd-kpi-label">{kpi.label}</span>
-                <span className="lmd-kpi-value">{kpi.value}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Charts Row */}
-        <div className="lmd-charts-row">
-          <div className="lmd-chart-card">
-            <div className="lmd-chart-header">
-              <h3 className="lmd-chart-title">Payment Method Distribution</h3>
-              <span className="lmd-chart-subtitle">Prepaid vs COD vs UPI</span>
-            </div>
-            <ResponsiveContainer width="100%" height={280}>
-              <PieChart>
-                <Pie data={data.paymentBreakdown} cx="50%" cy="50%" innerRadius={55} outerRadius={95} paddingAngle={3} dataKey="count" nameKey="method" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
-                  {data.paymentBreakdown.map((_, i) => (
-                    <Cell key={i} fill={["#10b981", "#f59e0b", "#6366f1"][i]} />
-                  ))}
-                </Pie>
-                <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-
-          <div className="lmd-chart-card">
-            <div className="lmd-chart-header">
-              <h3 className="lmd-chart-title">Monthly COD Collection</h3>
-              <span className="lmd-chart-subtitle">₹ Lakhs trend</span>
-            </div>
-            <ResponsiveContainer width="100%" height={280}>
-              <AreaChart data={data.monthlyTrends}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#64748b" }} />
-                <YAxis tick={{ fontSize: 11, fill: "#64748b" }} unit=" L" />
-                <Tooltip contentStyle={{ borderRadius: 8, fontSize: 12 }} />
-                <Area type="monotone" dataKey="codCollection" fill="#fef3c7" stroke="#f59e0b" strokeWidth={2} name="COD Collected (₹ L)" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* COD Pending Table */}
-        <div className="lmd-table-container">
-          <div className="lmd-section-header" style={{ marginBottom: 12 }}>
-            <h3 className="lmd-section-title">COD Orders Awaiting Collection ({codPending.length})</h3>
-          </div>
-          <table className="lmd-table">
-            <thead>
-              <tr>
-                <th>ID / Order</th>
-                <th>Customer</th>
-                <th>City</th>
-                <th>Agent</th>
-                <th>COD Amount</th>
-                <th>Status</th>
-                <th>Slot</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {codPending.slice(0, 20).map(d => (
-                <tr key={d.id} className="lmd-table-row">
-                  <td>
-                    <div className="lmd-cell-primary">
-                      <span className="lmd-cell-id">{d.id}</span>
-                      <span className="lmd-cell-sub">{d.orderId}</span>
-                    </div>
-                  </td>
-                  <td className="lmd-cell-name">{d.customer}</td>
-                  <td>{d.city}</td>
-                  <td>{d.agent}</td>
-                  <td className="lmd-cell-amount" style={{ fontWeight: 600 }}>{formatINR(d.CODAmount)}</td>
-                  <td>
-                    <span className="lmd-badge" style={{ color: STATUS_CONFIG[d.status].color, backgroundColor: STATUS_CONFIG[d.status].bg }}>
-                      {STATUS_CONFIG[d.status].label}
-                    </span>
-                  </td>
-                  <td>{d.deliverySlot}</td>
-                  <td>
-                    <button className="lmd-action-btn" onClick={() => openDrawer(d)}>
-                      <Eye size={14} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="lmd-table-footer">
-            Showing {Math.min(20, codPending.length)} of {codPending.length} COD orders
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // ===== Drawer =====
-  const renderDrawer = () => {
-    if (!selectedDelivery) return null;
-    const d = selectedDelivery;
-    const statusCfg = STATUS_CONFIG[d.status];
-    const isDelivered = d.status === "delivered";
-    const isFailed = d.status === "failed" || d.status === "returned";
-    const headerGradient = isDelivered
-      ? "linear-gradient(135deg, #059669, #10b981)"
-      : isFailed
-      ? "linear-gradient(135deg, #dc2626, #ef4444)"
-      : "linear-gradient(135deg, #3b82f6, #6366f1)";
-
-    return (
-      <div className={`lmd-drawer-overlay ${drawerOpen ? "lmd-drawer-open" : ""}`} onClick={closeDrawer}>
-        <div className="lmd-drawer" onClick={(e) => e.stopPropagation()}>
-          {/* Header */}
-          <div className="lmd-drawer-header" style={{ background: headerGradient }}>
-            <div className="lmd-drawer-header-top">
-              <div>
-                <h2 className="lmd-drawer-title">{d.id}</h2>
-                <span className="lmd-drawer-subtitle">{d.awbNumber} · {d.orderId}</span>
-              </div>
-              <button className="lmd-drawer-close" onClick={closeDrawer}>✕</button>
-            </div>
-            <div className="lmd-drawer-badges">
-              <span className="lmd-badge" style={{ color: "#fff", backgroundColor: "rgba(255,255,255,0.2)" }}>
-                {statusCfg.label}
-              </span>
-              <span className="lmd-badge" style={{ color: "#fff", backgroundColor: "rgba(255,255,255,0.2)" }}>
-                {PRIORITY_CONFIG[d.priority].label}
-              </span>
-              <span className="lmd-badge" style={{ color: "#fff", backgroundColor: "rgba(255,255,255,0.2)" }}>
-                {PAYMENT_CONFIG[d.paymentMethod].label}
-              </span>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="lmd-drawer-content">
-            {/* Customer */}
-            <div className="lmd-drawer-section">
-              <h4 className="lmd-drawer-section-title">Customer Details</h4>
-              <div className="lmd-drawer-grid">
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Customer</span>
-                  <span className="lmd-drawer-field-value">{d.customer}</span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Phone</span>
-                  <span className="lmd-drawer-field-value">{d.phone}</span>
-                </div>
-                <div className="lmd-drawer-field" style={{ gridColumn: "span 2" }}>
-                  <span className="lmd-drawer-field-label">Address</span>
-                  <span className="lmd-drawer-field-value">{d.address}, {d.city} - {d.pincode}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Delivery Info */}
-            <div className="lmd-drawer-section">
-              <h4 className="lmd-drawer-section-title">Delivery Information</h4>
-              <div className="lmd-drawer-grid">
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Delivery Agent</span>
-                  <span className="lmd-drawer-field-value">{d.agent}</span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Agent Phone</span>
-                  <span className="lmd-drawer-field-value">{d.agentPhone}</span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Delivery Slot</span>
-                  <span className="lmd-drawer-field-value">{d.deliverySlot}</span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Distance</span>
-                  <span className="lmd-drawer-field-value">{d.distance} km</span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Items</span>
-                  <span className="lmd-drawer-field-value">{d.items} items · {d.weight} kg</span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Attempts</span>
-                  <span className="lmd-drawer-field-value">{d.attempts}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Dates */}
-            <div className="lmd-drawer-section">
-              <h4 className="lmd-drawer-section-title">Key Dates</h4>
-              <div className="lmd-drawer-grid">
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Dispatched</span>
-                  <span className="lmd-drawer-field-value">{d.dispatchedAt}</span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Estimated Delivery</span>
-                  <span className="lmd-drawer-field-value">{d.estimatedDelivery}</span>
-                </div>
-                {d.deliveredAt && (
-                  <div className="lmd-drawer-field" style={{ gridColumn: "span 2" }}>
-                    <span className="lmd-drawer-field-label">Delivered At</span>
-                    <span className="lmd-drawer-field-value" style={{ color: "#10b981" }}>{d.deliveredAt}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Financial */}
-            <div className="lmd-drawer-section">
-              <h4 className="lmd-drawer-section-title">Payment Details</h4>
-              <div className="lmd-drawer-grid">
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">Payment Method</span>
-                  <span className="lmd-badge" style={{ color: PAYMENT_CONFIG[d.paymentMethod].color, backgroundColor: PAYMENT_CONFIG[d.paymentMethod].bg }}>
-                    {PAYMENT_CONFIG[d.paymentMethod].label}
-                  </span>
-                </div>
-                <div className="lmd-drawer-field">
-                  <span className="lmd-drawer-field-label">COD Amount</span>
-                  <span className="lmd-drawer-field-value" style={{ fontWeight: 600, color: d.CODAmount > 0 ? "#f59e0b" : "#64748b" }}>
-                    {d.CODAmount > 0 ? formatINR(d.CODAmount) : "N/A (Prepaid)"}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Remarks */}
-            {d.remarks && (
-              <div className="lmd-drawer-card" style={{ backgroundColor: isFailed ? "#fee2e2" : "#d1fae5", borderColor: isFailed ? "#fca5a5" : "#6ee7b7" }}>
-                <span className="lmd-drawer-card-label" style={{ color: isFailed ? "#dc2626" : "#059669" }}>
-                  {isFailed ? "Failure Reason" : "Delivery Note"}
-                </span>
-                <span className="lmd-drawer-card-text">{d.remarks}</span>
-              </div>
-            )}
-
-            {/* POD Status */}
-            {isDelivered && (
-              <div className="lmd-drawer-section">
-                <h4 className="lmd-drawer-section-title">Proof of Delivery</h4>
-                <div className="lmd-pod-grid">
-                  <div className={`lmd-pod-item ${d.proofOfDelivery ? "lmd-pod-done" : "lmd-pod-pending"}`}>
-                    <FileText size={16} />
-                    <span>POD Form</span>
-                    <span className="lmd-pod-status">{d.proofOfDelivery ? "✓ Submitted" : "Pending"}</span>
-                  </div>
-                  <div className={`lmd-pod-item ${d.deliveryPhoto ? "lmd-pod-done" : "lmd-pod-pending"}`}>
-                    <Camera size={16} />
-                    <span>Delivery Photo</span>
-                    <span className="lmd-pod-status">{d.deliveryPhoto ? "✓ Captured" : "Missing"}</span>
-                  </div>
-                  <div className={`lmd-pod-item ${d.ePodSigned ? "lmd-pod-done" : "lmd-pod-pending"}`}>
-                    <FileCheck size={16} />
-                    <span>E-POD Signed</span>
-                    <span className="lmd-pod-status">{d.ePodSigned ? "✓ Signed" : "Pending"}</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Customer Feedback */}
-            {d.customerRating && (
-              <div className="lmd-drawer-card" style={{ backgroundColor: "#fef3c7", borderColor: "#fcd34d" }}>
-                <span className="lmd-drawer-card-label" style={{ color: "#92400e" }}>Customer Feedback</span>
-                <div className="lmd-rating-row">
-                  {[1, 2, 3, 4, 5].map(star => (
-                    <Star key={star} size={18} fill={star <= Math.round(d.customerRating || 0) ? "#f59e0b" : "#e2e8f0"} stroke="#f59e0b" />
-                  ))}
-                  <span className="lmd-rating-text">{d.customerRating} / 5</span>
-                </div>
-                {d.customerFeedback && (
-                  <span className="lmd-drawer-card-text">"{d.customerFeedback}"</span>
-                )}
-              </div>
-            )}
-
-            {/* Timeline */}
-            <div className="lmd-drawer-section">
-              <h4 className="lmd-drawer-section-title">Delivery Timeline</h4>
-              <div className="lmd-timeline">
-                <div className="lmd-timeline-item">
-                  <div className="lmd-timeline-dot" style={{ backgroundColor: "#3b82f6" }} />
-                  <div>
-                    <span className="lmd-timeline-step">Order Dispatched</span>
-                    <span className="lmd-timeline-time">{d.dispatchedAt}</span>
-                  </div>
-                </div>
-                <div className="lmd-timeline-item">
-                  <div className="lmd-timeline-dot" style={{ backgroundColor: "#f59e0b" }} />
-                  <div>
-                    <span className="lmd-timeline-step">Picked Up by Agent</span>
-                    <span className="lmd-timeline-time">{d.agent}</span>
-                  </div>
-                </div>
-                <div className="lmd-timeline-item">
-                  <div className="lmd-timeline-dot" style={{ backgroundColor: "#8b5cf6" }} />
-                  <div>
-                    <span className="lmd-timeline-step">Out for Delivery</span>
-                    <span className="lmd-timeline-time">Slot: {d.deliverySlot}</span>
-                  </div>
-                </div>
-                <div className="lmd-timeline-item">
-                  <div className="lmd-timeline-dot" style={{ backgroundColor: isDelivered ? "#10b981" : isFailed ? "#ef4444" : "#64748b" }} />
-                  <div>
-                    <span className="lmd-timeline-step">{isDelivered ? "Delivered Successfully" : isFailed ? "Delivery Failed" : "In Progress"}</span>
-                    <span className="lmd-timeline-time">{d.deliveredAt || d.estimatedDelivery}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="lmd-drawer-actions">
-              <button className="lmd-drawer-btn lmd-drawer-btn-primary">
-                <PhoneCall size={14} /> Call Customer
-              </button>
-              <button className="lmd-drawer-btn lmd-drawer-btn-secondary">
-                <Navigation size={14} /> Track Live
-              </button>
-              <button className="lmd-drawer-btn lmd-drawer-btn-secondary">
-                <MessageSquare size={14} /> Send Update
-              </button>
-              <button className="lmd-drawer-btn lmd-drawer-btn-outline">
-                <RefreshCw size={14} /> Reschedule
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  const tabs = [
+    { value: 'dashboard', label: 'Dashboard' },
+    { value: 'deliveries', label: 'Deliveries' },
+    { value: 'analytics', label: 'Analytics' },
+    { value: 'insights', label: 'Insights' },
+  ]
 
   return (
-    <div className="lmd-root">
-      {/* Header */}
-      <div className="lmd-header">
-        <div className="lmd-header-left">
-          <div className="lmd-header-icon" style={{ backgroundColor: `${THEME.primary}15`, color: THEME.primary }}>
-            <MapPinCheck size={22} />
-          </div>
-          <div>
-            <h1 className="lmd-header-title">Last Mile Delivery Tracking</h1>
-            <p className="lmd-header-subtitle">Real-time delivery visibility, agent management & COD reconciliation</p>
-          </div>
-        </div>
-        <div className="lmd-header-right">
-          <div className="lmd-header-badge">
-            <div className="lmd-header-badge-dot" />
-            <span>Live</span>
-          </div>
-          <span className="lmd-header-stat">{data.deliveries.length} Deliveries</span>
-          <span className="lmd-header-stat">{data.agents.length} Agents</span>
-        </div>
-      </div>
+    <div className="lmd-container space-y-4">
+      <PageHeader title="Last-Mile Delivery Ops" description="Hyperlocal delivery fleet management across Indian cities" />
+      <ModuleBreadcrumb items={[{ label: 'Operations' }, { label: 'Last-Mile Delivery' }]} />
+      <Tabs value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="lmd-tabs-list">
+          {tabs.map(t => <TabsTrigger key={t.value} value={t.value} className="lmd-tab-trigger">{t.label}</TabsTrigger>)}
+        </TabsList>
 
-      {/* Tabs */}
-      <div className="lmd-tabs">
-        {tabs.map((tab, i) => (
-          <button
-            key={i}
-            className={`lmd-tab ${activeTab === i ? "lmd-tab-active" : ""}`}
-            onClick={() => setActiveTab(i)}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+        <TabsContent value="dashboard" className="lmd-tab-content space-y-4 mt-4">
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+            <KpiTile title="Total Deliveries" value={allDeliveries.length.toString()} sub="This month" />
+            <KpiTile title="Delivered" value={delivered.length.toString()} sub={`${((delivered.length / allDeliveries.length) * 100).toFixed(1)}% rate`} />
+            <KpiTile title="Avg Rating" value={avgRating} sub="Customer score" />
+            <KpiTile title="On-Time" value={onTime.toString()} sub="SLA compliance" />
+          </div>
+          <div className="grid gap-4 grid-cols-3 md:grid-cols-6">
+            <HealthRing value={92} label="On-Time" color="#10b981" />
+            <HealthRing value={87} label="First-Attempt" color="#059669" />
+            <HealthRing value={78} label="Express SLA" color="#34d399" />
+            <HealthRing value={95} label="COD Accuracy" color="#047857" />
+            <HealthRing value={71} label="EV Fleet" color="#0d9488" />
+            <HealthRing value={88} label="Coverage" color="#6ee7b7" />
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <Card className="lmd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Delivery Volume</CardTitle></CardHeader><CardContent><LineChart data={monthlyData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Line type="monotone" dataKey="delivered" stroke="#10b981" strokeWidth={2} /><Line type="monotone" dataKey="express" stroke="#059669" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
+            <Card className="lmd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Deliveries by Zone</CardTitle></CardHeader><CardContent><BarChart data={zoneData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="zone" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="count" fill="#10b981" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
+            <Card className="lmd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Vehicle Mix</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={vehicleData} dataKey="count" nameKey="vehicle" cx="50%" cy="50%" outerRadius={70} label={({ vehicle, count }) => `${vehicle}: ${count}`}>{vehicleData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          </div>
+        </TabsContent>
 
-      {/* Tab Content */}
-      {activeTab === 0 && renderDashboard()}
-      {activeTab === 1 && renderLiveTracking()}
-      {activeTab === 2 && renderAgents()}
-      {activeTab === 3 && renderPerformance()}
-      {activeTab === 4 && renderPaymentCOD()}
+        <TabsContent value="deliveries" className="lmd-tab-content space-y-4 mt-4">
+          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={allDeliveries.length} filteredCount={filtered.length} onRefresh={() => {}} placeholder="Search by ID, zone, or agent..." />
+          <div className="overflow-x-auto rounded-lg border">
+            <table className="lmd-table w-full text-sm">
+              <thead><tr className="lmd-table-header bg-gray-50"><th className="px-3 py-2 text-left font-medium">ID</th><th className="px-3 py-2 text-left font-medium">Zone</th><th className="px-3 py-2 text-left font-medium">Vehicle</th><th className="px-3 py-2 text-left font-medium">Priority</th><th className="px-3 py-2 text-left font-medium">Distance</th><th className="px-3 py-2 text-left font-medium">ETA</th><th className="px-3 py-2 text-left font-medium">Status</th><th className="px-3 py-2 text-left font-medium">Agent</th><th className="px-3 py-2 text-left font-medium">COD</th></tr></thead>
+              <tbody>{filtered.slice(0, 20).map(d => (
+                <tr key={d.id} className="lmd-table-row border-t hover:bg-gray-50 transition-colors">
+                  <td className="px-3 py-2 font-mono text-xs">{d.id}</td>
+                  <td className="px-3 py-2"><ZoneBadge zone={d.zone} /></td>
+                  <td className="px-3 py-2"><VehicleBadge vehicle={d.vehicle} /></td>
+                  <td className="px-3 py-2"><PriorityBadge priority={d.priority} /></td>
+                  <td className="px-3 py-2"><DistanceBar distance={d.distance_km} /></td>
+                  <td className="px-3 py-2"><EtaBar eta={d.eta_min} /></td>
+                  <td className="px-3 py-2"><StatusBadge status={d.status} /></td>
+                  <td className="px-3 py-2 text-xs">{d.assigned_to}</td>
+                  <td className="px-3 py-2 text-xs">{d.cod_amount > 0 ? `₹${d.cod_amount.toLocaleString('en-IN')}` : '-'}</td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+        </TabsContent>
 
-      {/* Drawer */}
-      {renderDrawer()}
+        <TabsContent value="analytics" className="lmd-tab-content space-y-4 mt-4">
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+            <ValueTile title="Avg Distance" value="15.3 km" trend="+2.1% vs last month" />
+            <ValueTile title="Avg ETA" value="42 min" trend="-5.4% improving" />
+            <ValueTile title="COD Volume" value="₹4.2L" trend="+12.3% growth" />
+            <ValueTile title="Return Rate" value="3.8%" trend="-0.6% improved" />
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card className="lmd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Zone Throughput</CardTitle></CardHeader><CardContent><BarChart data={zoneData} width={400} height={250}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="zone" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="count" fill="#059669" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
+            <Card className="lmd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Priority Distribution</CardTitle></CardHeader><CardContent><PieChart width={400} height={250}><Pie data={PRIORITIES.map(p => ({ priority: p, count: allDeliveries.filter(d => d.priority === p).length }))} dataKey="count" nameKey="priority" cx="50%" cy="50%" outerRadius={80} label>{PRIORITIES.map((_, i) => <Cell key={i} fill={['#ef4444','#f97316','#eab308','#6b7280'][i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="insights" className="lmd-tab-content space-y-4 mt-4">
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card className="lmd-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Quick Commerce Expansion</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Quick commerce adoption in Tier-1 cities has driven a 34% increase in express deliveries. Partnering with Zepto and Blinkit for 10-minute delivery corridors across Mumbai, Delhi, and Bangalore.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-emerald-800">High Impact</span><span className="text-gray-400">Q3 2026</span></div></CardContent></Card>
+            <Card className="lmd-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">EV Fleet Transition</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>71% of last-mile fleet now electric. Government FAME-II subsidies covering 40% of conversion costs. Projected 100% EV by Q1 2027. Charging infra expanded to 45 hubs.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-teal-100 px-2 py-0.5 text-teal-800">In Progress</span><span className="text-gray-400">Ongoing</span></div></CardContent></Card>
+            <Card className="lmd-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Droid Delivery Robots</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Autonomous delivery droids deployed in 3 gated communities in Noida and Gurgaon. 200 daily autonomous deliveries with 98.5% success rate. Scaling to 12 communities by Diwali.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-violet-100 px-2 py-0.5 text-violet-800">Pilot Phase</span><span className="text-gray-400">Q4 2026</span></div></CardContent></Card>
+            <Card className="lmd-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Rural Delivery Network</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Partnering with India Post for last-mile rural coverage. Reaching 2,800+ pin codes through hub-and-spoke model with local franchise agents. COD collection efficiency improved 28%.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-amber-800">Strategic</span><span className="text-gray-400">FY2027</span></div></CardContent></Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
-  );
+  )
 }
