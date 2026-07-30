@@ -50654,3 +50654,48 @@ html.theme-transition body {
 .wcs-glow { position: relative; overflow: hidden; }
 .wcs-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed, #0891b2); opacity: 0; transition: opacity 0.3s ease; }
 .wcs-glow:hover::before { opacity: 1; }
+
+/* ═══════ R261: Demand Sensing AI (dsa-*) ═══════ */
+.dsa-signal-badge, .dsa-cat-badge, .dsa-city-badge, .dsa-region-badge { transition: all 0.15s ease; }
+.dsa-signal-badge:hover, .dsa-cat-badge:hover { transform: scale(1.06); box-shadow: 0 2px 8px rgba(59,130,246,0.15); }
+.dsa-active-badge { position: relative; }
+.dsa-active-badge::after { content: ''; position: absolute; top: -1px; right: -1px; width: 6px; height: 6px; border-radius: 50%; background: #059669; }
+.dsa-training-badge { animation: dsa-pulse-glow 2s ease-in-out infinite; }
+@keyframes dsa-pulse-glow { 0%, 100% { box-shadow: 0 0 4px rgba(59,130,246,0.3); } 50% { box-shadow: 0 0 12px rgba(59,130,246,0.6); } }
+.dsa-stale-badge { border: 1px dashed #d97706; }
+.dsa-impact-high { animation: dsa-impact-breathe 2.5s ease-in-out infinite; }
+@keyframes dsa-impact-breathe { 0%, 100% { box-shadow: 0 0 4px rgba(220,38,38,0.25); } 50% { box-shadow: 0 0 14px rgba(220,38,38,0.5); } }
+.dsa-value-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(59,130,246,0.1); }
+.dsa-chart-card:hover { box-shadow: 0 4px 16px rgba(124,58,237,0.08); }
+.dsa-table-row { transition: background 0.15s ease; }
+.dsa-table-row:hover td:first-child { text-decoration: underline; text-underline-offset: 2px; }
+.dsa-model-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.12); }
+.dsa-detail-header { box-shadow: 0 4px 20px rgba(59,130,246,0.3); }
+.dsa-drift-critical { animation: dsa-drift-pulse 1.5s ease-in-out infinite; }
+@keyframes dsa-drift-pulse { 0%, 100% { box-shadow: 0 0 4px rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 12px rgba(220,38,38,0.6); } }
+.dsa-confidence-gauge, .dsa-mape-bar, .dsa-trend-indicator { transition: all 0.2s ease; }
+.dsa-confidence-gauge:hover, .dsa-mape-bar:hover { transform: scale(1.05); }
+.dsa-horizon-badge { transition: all 0.15s ease; }
+.dsa-horizon-badge:hover { background-color: #3b82f6; color: white; }
+
+/* ═══════ R261: Returns Prediction Engine (rpe-*) ═══════ */
+.rpe-reason-badge, .rpe-cat-badge, .rpe-city-badge, .rpe-strategy-badge { transition: all 0.15s ease; }
+.rpe-reason-badge:hover, .rpe-cat-badge:hover { transform: scale(1.06); box-shadow: 0 2px 8px rgba(217,119,6,0.15); }
+.rpe-risk-high { animation: rpe-risk-breathe 2s ease-in-out infinite; }
+.rpe-risk-critical { animation: rpe-risk-critical-pulse 1.5s ease-in-out infinite; position: relative; }
+.rpe-risk-critical::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; background: transparent; box-shadow: 0 0 8px rgba(220,38,38,0.5); pointer-events: none; }
+@keyframes rpe-risk-breathe { 0%, 100% { box-shadow: 0 0 4px rgba(220,38,38,0.25); } 50% { box-shadow: 0 0 14px rgba(220,38,38,0.5); } }
+@keyframes rpe-risk-critical-pulse { 0%, 100% { box-shadow: 0 0 6px rgba(220,38,38,0.4); transform: scale(1); } 50% { box-shadow: 0 0 16px rgba(220,38,38,0.7); transform: scale(1.03); } }
+.rpe-value-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217,119,6,0.1); }
+.rpe-chart-card:hover { box-shadow: 0 4px 16px rgba(220,38,38,0.08); }
+.rpe-table-row { transition: background 0.15s ease; }
+.rpe-table-row:hover td:first-child { text-decoration: underline; text-underline-offset: 2px; }
+.rpe-strategy-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,119,6,0.12); }
+.rpe-detail-header { box-shadow: 0 4px 20px rgba(217,119,6,0.3); }
+.rpe-prob-gauge, .rpe-trend-indicator, .rpe-progress-ring { transition: all 0.2s ease; }
+.rpe-prob-gauge:hover, .rpe-progress-ring:hover { transform: scale(1.05); }
+.rpe-savings-tile { transition: all 0.2s ease; }
+.rpe-savings-tile:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(5,150,105,0.12); }
+.rpe-roi-badge, .rpe-cost-badge { transition: all 0.15s ease; }
+.rpe-roi-badge:hover, .rpe-cost-badge:hover { transform: scale(1.06); }
+.rpe-risk-factor { font-weight: 500; }

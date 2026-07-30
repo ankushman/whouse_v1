@@ -186,6 +186,8 @@ import SupplyChainResilienceHubView from "@/components/modules/supply-chain-resi
 import LogisticsProcurementCommandView from "@/components/modules/logistics-procurement-command-view"
 import WarehouseQualityCommandView from "@/components/modules/warehouse-quality-command-view"
 import WmsConfigurationStudioView from "@/components/modules/wms-configuration-studio-view"
+import DemandSensingAiView from "@/components/modules/demand-sensing-ai-view"
+import ReturnsPredictionEngineView from "@/components/modules/returns-prediction-engine-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -371,6 +373,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "logistics-procurement-command": LogisticsProcurementCommandView,
   "warehouse-quality-command": WarehouseQualityCommandView,
   "wms-configuration-studio": WmsConfigurationStudioView,
+  "demand-sensing-ai": DemandSensingAiView,
+  "returns-prediction-engine": ReturnsPredictionEngineView,
 }
 
 

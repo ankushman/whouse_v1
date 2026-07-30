@@ -176,3 +176,5 @@ export { default as SupplyChainResilienceHubView } from './supply-chain-resilien
 export { default as LogisticsProcurementCommandView } from './logistics-procurement-command-view'
 export { default as WarehouseQualityCommandView } from './warehouse-quality-command-view'
 export { default as WmsConfigurationStudioView } from './wms-configuration-studio-view'
+export { default as DemandSensingAiView } from './demand-sensing-ai-view'
+export { default as ReturnsPredictionEngineView } from './returns-prediction-engine-view'

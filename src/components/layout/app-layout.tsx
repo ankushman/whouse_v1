@@ -46,6 +46,7 @@ import {
   Palette,
   BrainCircuit,
   Leaf,
+  Target,
   Sprout,
   Rocket,
   ShieldCheck,
@@ -294,6 +295,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Crosshair,
   HeartPulse,
   Grid3x3,
+  Target,
 } as const
 const recentNotifications = [
   { id: "1", title: "SLA Breach", desc: "Gurugram Hub dock-to-stock exceeded 4hrs", severity: "critical", time: "5m ago" },
