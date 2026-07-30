@@ -150,7 +150,7 @@ export function RouteOptimizationView() {
               </SelectContent>
             </Select>
             <ExportButton onExportCSV={handleExportCSV} />
-            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate gap-1.5">
               <Zap className="h-3.5 w-3.5" />
               Optimize All
             </Button>
@@ -162,7 +162,7 @@ export function RouteOptimizationView() {
       <div className="stagger-children grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {summaryCards.map((card) => (
           <Card key={card.label} className="card-depth shadow-card hover-lift-sm">
-            <CardContent className="glass-subtle flex items-center gap-4 p-4">
+            <CardContent className="inner-glow glass-subtle flex items-center gap-4 p-4">
               <div className={cn("flex size-10 shrink-0 items-center justify-center rounded-xl", card.color)}>
                 <card.icon className="size-5" />
               </div>
@@ -179,14 +179,14 @@ export function RouteOptimizationView() {
       {/* ── Main Content Grid ── */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Route List */}
-        <Card className="card-depth shadow-card lg:col-span-2">
+        <Card className="hover-lift-sm card-depth shadow-card lg:col-span-2">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center gap-2 text-base">
               <Truck className="size-4 text-muted-foreground" />
               Optimized Routes
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-3">
+          <CardContent className="inner-glow glass-subtle space-y-3">
             {filteredRoutes.map((route) => {
               const status = statusStyles[route.status]
               return (
@@ -240,7 +240,7 @@ export function RouteOptimizationView() {
         {/* Right Column */}
         <div className="space-y-6">
           {/* Performance Chart */}
-          <Card className="card-depth chart-card card-accent-blue shadow-card">
+          <Card className="hover-lift-sm card-depth chart-card card-accent-blue shadow-card">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-base">
                 <TrendingUp className="size-4 text-muted-foreground" />
@@ -276,14 +276,14 @@ export function RouteOptimizationView() {
           </Card>
 
           {/* AI Suggestions */}
-          <Card className="card-depth shadow-card">
+          <Card className="hover-lift-sm card-depth shadow-card">
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-base">
                 <Lightbulb className="size-4 text-amber-500" />
                 Optimization Suggestions
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-3">
+            <CardContent className="inner-glow glass-subtle space-y-3">
               {suggestions.map((s, i) => {
                 const prio = priorityStyles[s.priority]
                 return (

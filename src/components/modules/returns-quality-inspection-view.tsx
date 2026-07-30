@@ -201,8 +201,8 @@ export default function ReturnsQualityView() {
             { label: "Pending Queue", value: String(items.filter(it => it.inspectionStatus === "Pending Inspection").length), icon: ClipboardCheck, color: "text-violet-600", bg: "bg-violet-50 dark:bg-violet-950/40", sub: "awaiting inspector" },
             { label: "Auto-Approved", value: String(items.filter(it => it.inspectionStatus === "Auto-Approved").length), icon: CheckCircle2, color: "text-green-600", bg: "bg-green-50 dark:bg-green-950/40", sub: "no defect found" },
           ].map(kpi => (
-            <Card key={kpi.label} className="rq-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm rq-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="rq-label">{kpi.label}</p>
@@ -219,7 +219,7 @@ export default function ReturnsQualityView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><RotateCcw className="h-4 w-4 text-blue-500" />Monthly Return Volume</CardTitle>
             </CardHeader>
@@ -239,7 +239,7 @@ export default function ReturnsQualityView() {
             </CardContent>
           </Card>
 
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><Star className="h-4 w-4 text-amber-500" />Grade Distribution</CardTitle>
             </CardHeader>
@@ -255,7 +255,7 @@ export default function ReturnsQualityView() {
             </CardContent>
           </Card>
 
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><BarChart3 className="h-4 w-4 text-indigo-500" />Return Reasons</CardTitle>
             </CardHeader>
@@ -272,7 +272,7 @@ export default function ReturnsQualityView() {
             </CardContent>
           </Card>
 
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><Target className="h-4 w-4 text-emerald-500" />Category Risk Radar</CardTitle>
             </CardHeader>
@@ -336,8 +336,8 @@ export default function ReturnsQualityView() {
             <input className="rq-search-input" placeholder="Search RMA, order, SKU, customer..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
         </div>
-        <Card className="rq-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm rq-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="rq-table">
                 <thead>
@@ -366,7 +366,7 @@ export default function ReturnsQualityView() {
                       <td className="text-xs text-slate-600 dark:text-slate-400">{it.inspector}</td>
                       <td><span className={`rq-status-badge ${STATUS_COLORS[it.inspectionStatus] || ""}`}>{it.inspectionStatus}</span></td>
                       <td><Badge className={`rq-grade-badge ${GRADE_COLORS[it.grade] || ""}`}>{it.grade === "-" ? "—" : `Grade ${it.grade}`}</Badge></td>
-                      <td><Button size="sm" variant="ghost" className="rq-action-btn" onClick={() => { setSelectedItem(it); setDrawerOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale rq-action-btn" onClick={() => { setSelectedItem(it); setDrawerOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -383,7 +383,7 @@ export default function ReturnsQualityView() {
     return (
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mb-4">
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><Recycle className="h-4 w-4 text-emerald-500" />Disposition Distribution</CardTitle>
             </CardHeader>
@@ -400,7 +400,7 @@ export default function ReturnsQualityView() {
             </CardContent>
           </Card>
 
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><DollarSign className="h-4 w-4 text-indigo-500" />Loss by Grade (₹)</CardTitle>
             </CardHeader>
@@ -426,11 +426,11 @@ export default function ReturnsQualityView() {
           </Card>
         </div>
 
-        <Card className="rq-table-card border-slate-100 dark:border-slate-800">
+        <Card className="hover-lift-sm rq-table-card border-slate-100 dark:border-slate-800">
           <CardHeader className="pb-2">
             <CardTitle className="rq-title"><ClipboardCheck className="h-4 w-4 text-amber-500" />Grade Summary Table</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-0">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="rq-table">
                 <thead>
@@ -474,7 +474,7 @@ export default function ReturnsQualityView() {
     return (
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mb-4">
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><TrendingDown className="h-4 w-4 text-red-500" />Returns by Platform</CardTitle>
             </CardHeader>
@@ -493,7 +493,7 @@ export default function ReturnsQualityView() {
             </CardContent>
           </Card>
 
-          <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="rq-title"><TrendingUp className="h-4 w-4 text-emerald-500" />Recovery Trend by Month</CardTitle>
             </CardHeader>
@@ -517,11 +517,11 @@ export default function ReturnsQualityView() {
           </Card>
         </div>
 
-        <Card className="rq-table-card border-slate-100 dark:border-slate-800">
+        <Card className="hover-lift-sm rq-table-card border-slate-100 dark:border-slate-800">
           <CardHeader className="pb-2">
             <CardTitle className="rq-title"><ArrowLeftRight className="h-4 w-4 text-indigo-500" />Inspector Performance</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-0">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="rq-table">
                 <thead>
@@ -572,8 +572,8 @@ export default function ReturnsQualityView() {
             { label: "Total Resale Recovery", value: `₹${(totalResale / 100000).toFixed(2)}L`, icon: TrendingUp, color: "text-emerald-600", bg: "bg-emerald-50 dark:bg-emerald-950/40" },
             { label: "Net Recovery", value: `₹${((totalResale - totalLoss) / 100000).toFixed(2)}L`, icon: DollarSign, color: totalResale >= totalLoss ? "text-green-600" : "text-orange-600", bg: totalResale >= totalLoss ? "bg-green-50 dark:bg-green-950/40" : "bg-orange-50 dark:bg-orange-950/40" },
           ].map(kpi => (
-            <Card key={kpi.label} className="rq-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm rq-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="rq-label">{kpi.label}</p>
@@ -586,7 +586,7 @@ export default function ReturnsQualityView() {
           ))}
         </div>
 
-        <Card className="rq-chart-card border-slate-100 dark:border-slate-800">
+        <Card className="hover-lift-sm rq-chart-card border-slate-100 dark:border-slate-800">
           <CardHeader className="pb-2">
             <CardTitle className="rq-title"><ClipboardCheck className="h-4 w-4 text-blue-500" />Category-wise Loss & Recovery</CardTitle>
           </CardHeader>
@@ -625,7 +625,7 @@ export default function ReturnsQualityView() {
                 <p className="rq-drawer-subtitle">{it.orderId} | {it.date}</p>
               </div>
             </div>
-            <Button variant="ghost" size="sm" className="rq-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
+            <Button variant="ghost" size="sm" className="press-scale rq-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
           </div>
           <div className="rq-drawer-body">
             <div className="rq-drawer-status-row">
@@ -670,9 +670,9 @@ export default function ReturnsQualityView() {
               <p className="rq-notes-text">{it.notes}</p>
             </div>
             <div className="rq-drawer-actions">
-              <Button size="sm" className="rq-btn-primary"><ClipboardCheck className="h-3.5 w-3.5 mr-1" /> Complete Inspection</Button>
-              <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><Camera className="h-3.5 w-3.5 mr-1" /> Add Photos</Button>
-              <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><QrCode className="h-3.5 w-3.5 mr-1" /> Scan SKU</Button>
+              <Button size="sm" className="press-scale rq-btn-primary"><ClipboardCheck className="h-3.5 w-3.5 mr-1" /> Complete Inspection</Button>
+              <Button size="sm" variant="outline" className="press-scale btn-outline-animate rq-btn-outline"><Camera className="h-3.5 w-3.5 mr-1" /> Add Photos</Button>
+              <Button size="sm" variant="outline" className="press-scale btn-outline-animate rq-btn-outline"><QrCode className="h-3.5 w-3.5 mr-1" /> Scan SKU</Button>
             </div>
           </div>
         </div>
@@ -688,9 +688,9 @@ export default function ReturnsQualityView() {
           <p className="rq-page-subtitle">Inspect, grade, and manage disposition of returned goods across all channels</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" className="rq-btn-primary"><Plus className="h-3.5 w-3.5 mr-1" /> New Inspection</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Bulk Grade</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export Report</Button>
+          <Button size="sm" className="press-scale rq-btn-primary"><Plus className="h-3.5 w-3.5 mr-1" /> New Inspection</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate rq-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Bulk Grade</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate rq-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export Report</Button>
         </div>
       </div>
 

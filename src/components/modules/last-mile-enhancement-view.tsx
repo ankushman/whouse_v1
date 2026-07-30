@@ -711,9 +711,9 @@ export default function LastMileEnhancementView() {
         <TabsContent value="0" className="space-y-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 xl:grid-cols-4">
             {kpis.map((k, i) => (
-              <Card key={i} className="lme-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: k.color.includes("violet") ? "#7c3aed" : k.color.includes("emerald") ? "#059669" : k.color.includes("rose") ? "#e11d48" : k.color.includes("cyan") ? "#0891b2" : k.color.includes("amber") ? "#d97706" : k.color.includes("orange") ? "#ea580c" : k.color.includes("indigo") ? "#6366f1" : "#14b8a6" }}>
+              <Card key={i} className="hover-lift-sm lme-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: k.color.includes("violet") ? "#7c3aed" : k.color.includes("emerald") ? "#059669" : k.color.includes("rose") ? "#e11d48" : k.color.includes("cyan") ? "#0891b2" : k.color.includes("amber") ? "#d97706" : k.color.includes("orange") ? "#ea580c" : k.color.includes("indigo") ? "#6366f1" : "#14b8a6" }}>
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-80" style={{ background: `linear-gradient(90deg, ${k.color.includes("violet") ? "#7c3aed" : "#059669"}, ${k.color.includes("violet") ? "#6366f1" : "#0891b2"})` }} />
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{k.label}</p>
@@ -729,9 +729,9 @@ export default function LastMileEnhancementView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Deliveries</CardTitle></CardHeader><CardContent><AreaChart data={data.dailyDeliveries}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Successful" stackId="1" stroke="#059669" fill="#05966980" /><Area type="monotone" dataKey="Failed" stackId="1" stroke="#e11d48" fill="#e11d4880" /><Area type="monotone" dataKey="InTransit" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /></AreaChart></CardContent></Card>
-            <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">City-wise Deliveries</CardTitle></CardHeader><CardContent><BarChart data={data.cityDeliveries}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="city" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Deliveries" fill="#7c3aed" /><Bar dataKey="Returns" fill="#ea580c" /></BarChart></CardContent></Card>
-            <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Delivery Types</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.deliveryTypeData} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.deliveryTypeData.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Deliveries</CardTitle></CardHeader><CardContent><AreaChart data={data.dailyDeliveries}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Successful" stackId="1" stroke="#059669" fill="#05966980" /><Area type="monotone" dataKey="Failed" stackId="1" stroke="#e11d48" fill="#e11d4880" /><Area type="monotone" dataKey="InTransit" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">City-wise Deliveries</CardTitle></CardHeader><CardContent><BarChart data={data.cityDeliveries}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="city" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Deliveries" fill="#7c3aed" /><Bar dataKey="Returns" fill="#ea580c" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Delivery Types</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.deliveryTypeData} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.deliveryTypeData.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -741,8 +741,8 @@ export default function LastMileEnhancementView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search orders by customer, ID or city..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.info("Filters cleared", "All filters have been reset") }}>Clear</Button>
           </div>
-          <Card className="card-crud-lift lme-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift lme-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">Order ID</SortHeader>
@@ -768,7 +768,7 @@ export default function LastMileEnhancementView() {
                       <TableCell className="numeric-cell font-semibold text-gray-900 dark:text-gray-100">{o.amount}</TableCell>
                       <TableCell className="text-xs">{o.agent}</TableCell>
                       <TableCell className="text-xs text-gray-500">{o.eta}</TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="lme-action-btn" onClick={() => { setSelectedOrder(o); toast.info("Order Details", `Viewing ${o.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="lme-action-btn" onClick={() => { setSelectedOrder(o); toast.info("Order Details", `Viewing ${o.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -784,9 +784,9 @@ export default function LastMileEnhancementView() {
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {filteredAgents.slice(0, 30).map(a => (
-              <Card key={a.id} className="lme-agent-card overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
+              <Card key={a.id} className="hover-lift-sm lme-agent-card overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
                 <div className="h-1 bg-gradient-to-r from-violet-500 to-emerald-500" />
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-sm font-bold text-gray-900 dark:text-gray-100">{a.name}</p>
@@ -820,8 +820,8 @@ export default function LastMileEnhancementView() {
                     <OnTimePercentageBar pct={a.onTimePct} />
                   </div>
                   <div className="mt-3 flex gap-2">
-                    <Button size="sm" variant="outline" className="btn-outline-animate lme-action-btn flex-1 text-xs" onClick={() => { setSelectedAgent(a); toast.info("Agent Profile", `Viewing ${a.name}`) }}>View Details</Button>
-                    <Button size="sm" className="lme-action-btn flex-1 bg-violet-600 text-xs hover:bg-violet-700" onClick={() => toast.success("Assignment", `${a.name} assigned new orders`)}>Assign</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate lme-action-btn flex-1 text-xs" onClick={() => { setSelectedAgent(a); toast.info("Agent Profile", `Viewing ${a.name}`) }}>View Details</Button>
+                    <Button size="sm" className="press-scale lme-action-btn flex-1 bg-violet-600 text-xs hover:bg-violet-700" onClick={() => toast.success("Assignment", `${a.name} assigned new orders`)}>Assign</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -831,8 +831,8 @@ export default function LastMileEnhancementView() {
 
         {/* ===== Tab 3: Routes ===== */}
         <TabsContent value="3" className="space-y-4">
-          <Card className="card-crud-lift lme-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift lme-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">Route ID</SortHeader>
@@ -860,7 +860,7 @@ export default function LastMileEnhancementView() {
                       <TableCell><TrafficConditionBadge condition={r.traffic} /></TableCell>
                       <TableCell className="numeric-cell text-xs font-semibold">{r.fuelCost}</TableCell>
                       <TableCell className="text-xs">{r.agent}</TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="lme-action-btn" onClick={() => { setSelectedRoute(r); toast.info("Route Details", `Viewing ${r.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="lme-action-btn" onClick={() => { setSelectedRoute(r); toast.info("Route Details", `Viewing ${r.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -871,8 +871,8 @@ export default function LastMileEnhancementView() {
 
         {/* ===== Tab 4: Customer Experience ===== */}
         <TabsContent value="4" className="space-y-4">
-          <Card className="card-crud-lift lme-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift lme-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="nps">NPS</SortHeader>
@@ -898,7 +898,7 @@ export default function LastMileEnhancementView() {
                       <TableCell><StarRating rating={f.communication} /></TableCell>
                       <TableCell><ComplaintCategoryBadge category={f.complaint} /></TableCell>
                       <TableCell className="text-xs">{f.city}</TableCell>
-                      <TableCell className="numeric-cell text-right"><Button size="sm" variant="ghost" className="lme-action-btn" onClick={() => { setSelectedFeedback(f); toast.info("Feedback", `Viewing feedback for ${f.customer}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale numeric-cell text-right"><Button size="sm" variant="ghost" className="lme-action-btn" onClick={() => { setSelectedFeedback(f); toast.info("Feedback", `Viewing feedback for ${f.customer}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -911,8 +911,8 @@ export default function LastMileEnhancementView() {
         <TabsContent value="5" className="space-y-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {analyticsKpiList.map((k, i) => (
-              <Card key={i} className="lme-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm lme-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center gap-3">
                     <div className={cn("lme-analytics-icon flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-white", k.color)}><k.icon className="h-4.5 w-4.5" /></div>
                     <div>
@@ -925,12 +925,12 @@ export default function LastMileEnhancementView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Performance</CardTitle></CardHeader><CardContent><LineChart data={data.dailyPerformance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Deliveries" stroke="#7c3aed" strokeWidth={2} /><Line type="monotone" dataKey="OnTime" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Returns" stroke="#e11d48" strokeWidth={2} /></LineChart></CardContent></Card>
-            <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Zone Efficiency</CardTitle></CardHeader><CardContent><BarChart data={data.zoneEfficiency} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="zone" type="category" tick={{ fontSize: 10 }} width={90} /><Tooltip /><Bar dataKey="Efficiency" fill="#7c3aed" /></BarChart></CardContent></Card>
-            <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Payment Mode Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.paymentDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="count" label={({ mode, percent }: { mode: string; percent: number }) => `${mode} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.paymentDistribution.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-            <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Complaint Categories</CardTitle></CardHeader><CardContent><BarChart data={data.complaintDistribution}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="category" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="count" fill="#e11d48" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Performance</CardTitle></CardHeader><CardContent><LineChart data={data.dailyPerformance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Deliveries" stroke="#7c3aed" strokeWidth={2} /><Line type="monotone" dataKey="OnTime" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Returns" stroke="#e11d48" strokeWidth={2} /></LineChart></CardContent></Card>
+            <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Zone Efficiency</CardTitle></CardHeader><CardContent><BarChart data={data.zoneEfficiency} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="zone" type="category" tick={{ fontSize: 10 }} width={90} /><Tooltip /><Bar dataKey="Efficiency" fill="#7c3aed" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Payment Mode Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.paymentDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="count" label={({ mode, percent }: { mode: string; percent: number }) => `${mode} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.paymentDistribution.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Complaint Categories</CardTitle></CardHeader><CardContent><BarChart data={data.complaintDistribution}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="category" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="count" fill="#e11d48" /></BarChart></CardContent></Card>
           </div>
-          <Card className="lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cost vs Revenue (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.costRevenueData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Revenue" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /><Area type="monotone" dataKey="Cost" stackId="1" stroke="#e11d48" fill="#e11d4880" /><Area type="monotone" dataKey="Profit" stackId="1" stroke="#059669" fill="#05966980" /></AreaChart></CardContent></Card>
+          <Card className="hover-lift-sm lme-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cost vs Revenue (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.costRevenueData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Revenue" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /><Area type="monotone" dataKey="Cost" stackId="1" stroke="#e11d48" fill="#e11d4880" /><Area type="monotone" dataKey="Profit" stackId="1" stroke="#059669" fill="#05966980" /></AreaChart></CardContent></Card>
         </TabsContent>
       </Tabs>
 
@@ -955,8 +955,8 @@ export default function LastMileEnhancementView() {
                 <div><p className="text-xs text-gray-500 mb-1">Package</p><WeightDimensionTile weight={selectedOrder.weight} dimensions={selectedOrder.dimensions} /></div>
                 <div className="grid grid-cols-2 gap-3"><div><p className="text-xs text-gray-500">Agent</p><p className="text-sm font-medium">{selectedOrder.agent}</p></div><div><p className="text-xs text-gray-500">ETA</p><p className="text-sm font-medium">{selectedOrder.eta}</p></div></div>
                 <div className="flex gap-2 pt-2">
-                  <Button className="lme-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Updated", `Order ${selectedOrder.id} status updated`)}>Update Status</Button>
-                  <Button variant="outline" className="btn-outline-animate lme-action-btn" onClick={() => toast.info("Assigned", `Reassigning ${selectedOrder.id}`)}>Reassign</Button>
+                  <Button className="press-scale lme-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Updated", `Order ${selectedOrder.id} status updated`)}>Update Status</Button>
+                  <Button variant="outline" className="press-scale btn-outline-animate lme-action-btn" onClick={() => toast.info("Assigned", `Reassigning ${selectedOrder.id}`)}>Reassign</Button>
                 </div>
               </div>
             </>
@@ -990,8 +990,8 @@ export default function LastMileEnhancementView() {
                 {selectedAgent.batteryLevel !== null && <div className="flex items-center justify-between"><span className="text-xs text-gray-500">Battery</span><BatteryLevelBar level={selectedAgent.batteryLevel} /></div>}
                 <div className="flex items-center justify-between"><span className="text-xs text-gray-500">On-time</span><OnTimePercentageBar pct={selectedAgent.onTimePct} /></div>
                 <div className="flex gap-2 pt-2">
-                  <Button className="lme-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => toast.success("Assigned", `${selectedAgent.name} assigned new orders`)}>Assign Orders</Button>
-                  <Button variant="outline" className="btn-outline-animate lme-action-btn" onClick={() => toast.info("Shift", `Changing shift for ${selectedAgent.name}`)}>Change Shift</Button>
+                  <Button className="press-scale lme-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => toast.success("Assigned", `${selectedAgent.name} assigned new orders`)}>Assign Orders</Button>
+                  <Button variant="outline" className="press-scale btn-outline-animate lme-action-btn" onClick={() => toast.info("Shift", `Changing shift for ${selectedAgent.name}`)}>Change Shift</Button>
                 </div>
               </div>
             </>
@@ -1021,8 +1021,8 @@ export default function LastMileEnhancementView() {
                 <div className="grid grid-cols-2 gap-3"><div><p className="text-xs text-gray-500">Agent</p><p className="text-sm font-medium">{selectedRoute.agent}</p></div><div><p className="text-xs text-gray-500">Created</p><p className="text-sm">{selectedRoute.created}</p></div></div>
                 <DeliveryTimeTile estimated={selectedRoute.estimatedTime} actual={selectedRoute.actualTime} />
                 <div className="flex gap-2 pt-2">
-                  <Button className="lme-action-btn flex-1 bg-orange-600 hover:bg-orange-700" onClick={() => toast.success("Optimized", `Route ${selectedRoute.id} re-optimized`)}>Re-Optimize</Button>
-                  <Button variant="outline" className="btn-outline-animate lme-action-btn" onClick={() => toast.info("Reassigned", `Route ${selectedRoute.id} reassigned`)}>Reassign</Button>
+                  <Button className="press-scale lme-action-btn flex-1 bg-orange-600 hover:bg-orange-700" onClick={() => toast.success("Optimized", `Route ${selectedRoute.id} re-optimized`)}>Re-Optimize</Button>
+                  <Button variant="outline" className="press-scale btn-outline-animate lme-action-btn" onClick={() => toast.info("Reassigned", `Route ${selectedRoute.id} reassigned`)}>Reassign</Button>
                 </div>
               </div>
             </>
@@ -1055,8 +1055,8 @@ export default function LastMileEnhancementView() {
                 <div><p className="text-xs text-gray-500 mb-1">Complaint</p><ComplaintCategoryBadge category={selectedFeedback.complaint} /></div>
                 <div><p className="text-xs text-gray-500">Agent</p><p className="text-sm">{selectedFeedback.agent}</p></div>
                 <div className="flex gap-2 pt-2">
-                  <Button className="lme-action-btn flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => toast.success("Resolved", `Complaint for ${selectedFeedback.id} resolved`)}>Mark Resolved</Button>
-                  <Button variant="outline" className="btn-outline-animate lme-action-btn" onClick={() => toast.info("Escalated", `Feedback ${selectedFeedback.id} escalated`)}>Escalate</Button>
+                  <Button className="press-scale lme-action-btn flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => toast.success("Resolved", `Complaint for ${selectedFeedback.id} resolved`)}>Mark Resolved</Button>
+                  <Button variant="outline" className="press-scale btn-outline-animate lme-action-btn" onClick={() => toast.info("Escalated", `Feedback ${selectedFeedback.id} escalated`)}>Escalate</Button>
                 </div>
               </div>
             </>

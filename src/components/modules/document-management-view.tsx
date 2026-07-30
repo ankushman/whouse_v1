@@ -365,8 +365,8 @@ export default function DocumentManagementView() {
             {/* KPIs */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {SUMMARY_KPIS.map((kpi) => (
-                <Card key={kpi.label} className="dmw-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={kpi.label} className="hover-lift-sm dmw-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 dmw-kpi-icon" />
                       <span className={cn("dmw-trend-badge", kpi.trend === "up" ? "dmw-trend-up" : "dmw-trend-down")}>
@@ -383,7 +383,7 @@ export default function DocumentManagementView() {
 
             {/* Charts Row 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Document Activity Trend</CardTitle>
                 </CardHeader>
@@ -403,7 +403,7 @@ export default function DocumentManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Document Categories</CardTitle>
                 </CardHeader>
@@ -419,7 +419,7 @@ export default function DocumentManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">File Type Distribution</CardTitle>
                 </CardHeader>
@@ -438,7 +438,7 @@ export default function DocumentManagementView() {
 
             {/* Charts Row 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Workflow Volume Trend</CardTitle>
                 </CardHeader>
@@ -458,7 +458,7 @@ export default function DocumentManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Classification Distribution</CardTitle>
                 </CardHeader>
@@ -476,7 +476,7 @@ export default function DocumentManagementView() {
             </div>
 
             {/* Recent Alerts */}
-            <Card className="dmw-alert-card">
+            <Card className="hover-lift-sm dmw-alert-card">
               <CardHeader className="pb-2">
                 <CardTitle className="dmw-chart-title text-sm">Recent Notifications</CardTitle>
               </CardHeader>
@@ -528,8 +528,8 @@ export default function DocumentManagementView() {
                 { label: "Archived", value: documents.filter((d) => d.status === "Archived").length },
                 { label: "Locked", value: documents.filter((d) => d.isLocked).length },
               ].map((s) => (
-                <Card key={s.label} className="dmw-stat-mini">
-                  <CardContent className="glass-subtle p-2 text-center">
+                <Card key={s.label} className="hover-lift-sm dmw-stat-mini">
+                  <CardContent className="inner-glow glass-subtle p-2 text-center">
                     <div className="text-sm font-bold">{s.value}</div>
                     <div className="text-[10px] opacity-60">{s.label}</div>
                   </CardContent>
@@ -538,8 +538,8 @@ export default function DocumentManagementView() {
             </div>
 
             {/* Documents Table */}
-            <Card className="card-crud-lift dmw-table-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift dmw-table-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -613,7 +613,7 @@ export default function DocumentManagementView() {
                 { label: "Completed", value: String(workflows.filter((w) => w.status === "Completed").length), color: "dmw-sum-card-cyan" },
               ].map((c) => (
                 <Card key={c.label} className={c.color}>
-                  <CardContent className="glass-subtle p-3 text-center">
+                  <CardContent className="inner-glow glass-subtle p-3 text-center">
                     <div className="text-lg font-bold">{c.value}</div>
                     <div className="text-xs opacity-70">{c.label}</div>
                   </CardContent>
@@ -623,7 +623,7 @@ export default function DocumentManagementView() {
 
             {/* Dept Dist + Approval Pipeline */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Workflows by Department</CardTitle>
                 </CardHeader>
@@ -639,7 +639,7 @@ export default function DocumentManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Approval Level Distribution</CardTitle>
                 </CardHeader>
@@ -658,7 +658,7 @@ export default function DocumentManagementView() {
             </div>
 
             {/* Workflow Cards */}
-            <Card className="dmw-table-card">
+            <Card className="hover-lift-sm dmw-table-card">
               <CardHeader className="pb-2">
                 <CardTitle className="dmw-chart-title text-sm">Active Workflows</CardTitle>
               </CardHeader>
@@ -725,8 +725,8 @@ export default function DocumentManagementView() {
             {/* Template Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredTemplates.map((tpl) => (
-                <Card key={tpl.id} className="dmw-tpl-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={tpl.id} className="hover-lift-sm dmw-tpl-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="dmw-tpl-avatar">
@@ -750,7 +750,7 @@ export default function DocumentManagementView() {
                       <div className="dmw-owner-avatar">
                         <span className="text-[10px] font-bold">{tpl.owner.avatar}</span>
                       </div>
-                      <Button variant="outline" size="sm" className="btn-outline-animate dmw-use-btn text-xs">
+                      <Button variant="outline" size="sm" className="press-scale btn-outline-animate dmw-use-btn text-xs">
                         <Download className="h-3 w-3 mr-1" /> Use Template
                       </Button>
                     </div>
@@ -770,8 +770,8 @@ export default function DocumentManagementView() {
                 { label: "Doc Storage Used", value: `${rInt(2, 8)}.${rInt(0, 9)} GB`, sub: `of ${rInt(10, 50)} GB` },
                 { label: "Workflow SLA", value: `${rInt(85, 98)}%`, sub: "Met on time" },
               ].map((k) => (
-                <Card key={k.label} className="dmw-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={k.label} className="hover-lift-sm dmw-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="dmw-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="dmw-kpi-label text-xs">{k.label}</div>
                     <div className="dmw-kpi-sub text-xs">{k.sub}</div>
@@ -781,7 +781,7 @@ export default function DocumentManagementView() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Version History Activity</CardTitle>
                 </CardHeader>
@@ -801,7 +801,7 @@ export default function DocumentManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Workflow Completion Time</CardTitle>
                 </CardHeader>
@@ -821,7 +821,7 @@ export default function DocumentManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Warehouse Document Volume</CardTitle>
                 </CardHeader>
@@ -840,7 +840,7 @@ export default function DocumentManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="dmw-chart-card">
+              <Card className="hover-lift-sm dmw-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="dmw-chart-title text-sm">Change Type Distribution</CardTitle>
                 </CardHeader>
@@ -870,11 +870,11 @@ export default function DocumentManagementView() {
             </div>
 
             {/* Version History Table */}
-            <Card className="dmw-table-card">
+            <Card className="hover-lift-sm dmw-table-card">
               <CardHeader className="pb-2">
                 <CardTitle className="dmw-chart-title text-sm">Recent Version History</CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -926,7 +926,7 @@ export default function DocumentManagementView() {
                     <p className="text-sm opacity-80">{selectedDoc.id} · {selectedDoc.version}</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="text-white/70 hover:text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="press-scale text-white/70 hover:text-white hover:bg-white/10">
                   <X className="h-5 w-5" />
                 </Button>
               </div>
@@ -1050,12 +1050,12 @@ export default function DocumentManagementView() {
               <div>
                 <h3 className="dmw-section-title text-sm font-semibold mb-2">Actions</h3>
                 <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Download className="h-3 w-3 mr-1" /> Download</Button>
-                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Eye className="h-3 w-3 mr-1" /> Preview</Button>
-                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Edit className="h-3 w-3 mr-1" /> Edit</Button>
-                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Paperclip className="h-3 w-3 mr-1" /> Attach</Button>
-                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><RotateCcw className="h-3 w-3 mr-1" /> Version</Button>
-                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Archive className="h-3 w-3 mr-1" /> Archive</Button>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate dmw-action-btn text-xs"><Download className="h-3 w-3 mr-1" /> Download</Button>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate dmw-action-btn text-xs"><Eye className="h-3 w-3 mr-1" /> Preview</Button>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate dmw-action-btn text-xs"><Edit className="h-3 w-3 mr-1" /> Edit</Button>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate dmw-action-btn text-xs"><Paperclip className="h-3 w-3 mr-1" /> Attach</Button>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate dmw-action-btn text-xs"><RotateCcw className="h-3 w-3 mr-1" /> Version</Button>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate dmw-action-btn text-xs"><Archive className="h-3 w-3 mr-1" /> Archive</Button>
                 </div>
               </div>
             </div>

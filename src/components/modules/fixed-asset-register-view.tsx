@@ -1090,7 +1090,7 @@ export function FixedAssetRegisterView() {
               <Calendar className="w-3 h-3" />
               <span>FY 2025-26</span>
             </div>
-            <Button onClick={handleRefresh} variant="outline" size="sm" className="btn-outline-animate far-header-refresh">
+            <Button onClick={handleRefresh} variant="outline" size="sm" className="press-scale btn-outline-animate far-header-refresh">
               <RefreshCw className="w-3 h-3 mr-1" />
               Refresh
             </Button>
@@ -1282,7 +1282,7 @@ function AssetPortfolioTab({
     <div className="far-tab-pane">
       {/* Chart row */}
       <div className="far-chart-row">
-        <Card className="far-chart-card">
+        <Card className="hover-lift-sm far-chart-card">
           <div className="far-chart-header">
             <h3 className="far-chart-title">Gross Block vs Net Book Value by Category</h3>
             <p className="far-chart-subtitle">Capital allocation across asset categories</p>
@@ -1301,7 +1301,7 @@ function AssetPortfolioTab({
             </ComposedChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="far-chart-card">
+        <Card className="hover-lift-sm far-chart-card">
           <div className="far-chart-header">
             <h3 className="far-chart-title">Asset Distribution by Status</h3>
             <p className="far-chart-subtitle">Operational state of all assets</p>
@@ -1326,7 +1326,7 @@ function AssetPortfolioTab({
             </PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="far-chart-card">
+        <Card className="hover-lift-sm far-chart-card">
           <div className="far-chart-header">
             <h3 className="far-chart-title">Asset Count by Warehouse</h3>
             <p className="far-chart-subtitle">Geographic distribution</p>
@@ -1390,7 +1390,7 @@ function AssetPortfolioTab({
       </div>
 
       {/* Assets table */}
-      <Card className="far-table-card">
+      <Card className="hover-lift-sm far-table-card">
         <div className="far-table-wrapper">
           <table className="far-table">
             <thead>
@@ -1508,7 +1508,7 @@ function DepreciationTab({ byCategory, selectedAsset, depreciationSchedule, asse
       </div>
 
       {/* Category breakdown */}
-      <Card className="far-chart-card">
+      <Card className="hover-lift-sm far-chart-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Depreciation by Category</h3>
           <p className="far-chart-subtitle">Gross block, accumulated depreciation, and net book value per asset class</p>
@@ -1528,7 +1528,7 @@ function DepreciationTab({ byCategory, selectedAsset, depreciationSchedule, asse
       </Card>
 
       {/* Category table */}
-      <Card className="far-table-card">
+      <Card className="hover-lift-sm far-table-card">
         <div className="far-table-wrapper">
           <table className="far-table">
             <thead>
@@ -1571,7 +1571,7 @@ function DepreciationTab({ byCategory, selectedAsset, depreciationSchedule, asse
       </Card>
 
       {/* Per-asset depreciation schedule */}
-      <Card className="far-chart-card">
+      <Card className="hover-lift-sm far-chart-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Asset Depreciation Schedule</h3>
           <p className="far-chart-subtitle">
@@ -1714,7 +1714,7 @@ function MaintenanceTab({ assets, history, onSelectAsset }: MaintenanceTabProps)
       </div>
 
       <div className="far-chart-row">
-        <Card className="far-chart-card">
+        <Card className="hover-lift-sm far-chart-card">
           <div className="far-chart-header">
             <h3 className="far-chart-title">Maintenance Events by Type</h3>
             <p className="far-chart-subtitle">Cost and count distribution</p>
@@ -1732,7 +1732,7 @@ function MaintenanceTab({ assets, history, onSelectAsset }: MaintenanceTabProps)
             </ComposedChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="far-chart-card">
+        <Card className="hover-lift-sm far-chart-card">
           <div className="far-chart-header">
             <h3 className="far-chart-title">Upcoming Maintenance (30 days)</h3>
             <p className="far-chart-subtitle">{upcomingMaintenance.length} assets due</p>
@@ -1762,7 +1762,7 @@ function MaintenanceTab({ assets, history, onSelectAsset }: MaintenanceTabProps)
         </Card>
       </div>
 
-      <Card className="far-table-card">
+      <Card className="hover-lift-sm far-table-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Maintenance History Log</h3>
           <p className="far-chart-subtitle">{history.length} most recent events</p>
@@ -1839,7 +1839,7 @@ function TransfersTab({ transfers }: { transfers: AssetTransfer[] }) {
         })}
       </div>
 
-      <Card className="far-table-card">
+      <Card className="hover-lift-sm far-table-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Asset Transfer Log</h3>
           <p className="far-chart-subtitle">Inter-warehouse asset movements with journal entries</p>
@@ -1932,7 +1932,7 @@ function DisposalsTab({ disposals }: { disposals: AssetDisposal[] }) {
         </div>
       </div>
 
-      <Card className="far-table-card">
+      <Card className="hover-lift-sm far-table-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Asset Disposal Log</h3>
           <p className="far-chart-subtitle">Disposal events with journal entries per Ind AS 105</p>
@@ -2041,7 +2041,7 @@ function ComplianceTab({ assets, stats, onSelectAsset }: { assets: Asset[]; stat
       </div>
 
       {/* Insurance expiring list */}
-      <Card className="far-table-card">
+      <Card className="hover-lift-sm far-table-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Insurance Renewals — Within 180 Days</h3>
           <p className="far-chart-subtitle">Schedule renewals with insurance providers</p>
@@ -2088,7 +2088,7 @@ function ComplianceTab({ assets, stats, onSelectAsset }: { assets: Asset[]; stat
       </Card>
 
       {/* Physical verification status */}
-      <Card className="far-chart-card">
+      <Card className="hover-lift-sm far-chart-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Physical Verification Status</h3>
           <p className="far-chart-subtitle">Asset physical verification per audit requirements</p>
@@ -2148,7 +2148,7 @@ function InsightsTab({ insights, stats, byCategory }: { insights: any[]; stats: 
       </div>
 
       {/* Asset Health Scorecard */}
-      <Card className="far-chart-card">
+      <Card className="hover-lift-sm far-chart-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Asset Health Scorecard</h3>
           <p className="far-chart-subtitle">Composite indicators across the asset portfolio</p>
@@ -2218,7 +2218,7 @@ function InsightsTab({ insights, stats, byCategory }: { insights: any[]; stats: 
       </Card>
 
       {/* Category summary */}
-      <Card className="far-chart-card">
+      <Card className="hover-lift-sm far-chart-card">
         <div className="far-chart-header">
           <h3 className="far-chart-title">Category Distribution Summary</h3>
           <p className="far-chart-subtitle">Concentration analysis across asset classes</p>

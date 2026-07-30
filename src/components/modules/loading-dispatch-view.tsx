@@ -546,7 +546,7 @@ export default function LoadingDispatchView() {
 
             {/* Charts row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="ld-fade-in ld-fade-in-1">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-1">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Daily Dispatch Volume & On-Time Trend</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -564,7 +564,7 @@ export default function LoadingDispatchView() {
                 </CardContent>
               </Card>
 
-              <Card className="ld-fade-in ld-fade-in-2">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-2">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Vehicle Type Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -581,7 +581,7 @@ export default function LoadingDispatchView() {
 
             {/* Charts row 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="ld-fade-in ld-fade-in-3">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-3">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Warehouse Dispatch Performance</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -598,7 +598,7 @@ export default function LoadingDispatchView() {
                 </CardContent>
               </Card>
 
-              <Card className="ld-fade-in ld-fade-in-4">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-4">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Load Type Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -614,7 +614,7 @@ export default function LoadingDispatchView() {
             </div>
 
             {/* Driver Performance Table */}
-            <Card className="ld-fade-in ld-fade-in-5">
+            <Card className="hover-lift-sm ld-fade-in ld-fade-in-5">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Driver Performance</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -676,7 +676,7 @@ export default function LoadingDispatchView() {
             </div>
 
             <Card>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -743,7 +743,7 @@ export default function LoadingDispatchView() {
             </div>
 
             {/* Dock Status Grid */}
-            <Card className="ld-fade-in ld-fade-in-2">
+            <Card className="hover-lift-sm ld-fade-in ld-fade-in-2">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Dock Status Grid</CardTitle></CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -770,7 +770,7 @@ export default function LoadingDispatchView() {
             </Card>
 
             {/* Dock Utilization Chart */}
-            <Card className="ld-fade-in ld-fade-in-3">
+            <Card className="hover-lift-sm ld-fade-in ld-fade-in-3">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Dock Utilization (%)</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={240}>
@@ -786,7 +786,7 @@ export default function LoadingDispatchView() {
             </Card>
 
             {/* Dock Assignment Table */}
-            <Card className="ld-fade-in ld-fade-in-4">
+            <Card className="hover-lift-sm ld-fade-in ld-fade-in-4">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Dock Assignment Table</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -845,7 +845,7 @@ export default function LoadingDispatchView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="ld-fade-in ld-fade-in-1">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-1">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Vehicle Utilization (bubble = trips)</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -863,7 +863,7 @@ export default function LoadingDispatchView() {
                 </CardContent>
               </Card>
 
-              <Card className="ld-fade-in ld-fade-in-2">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-2">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Driver Star Rating Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -879,7 +879,7 @@ export default function LoadingDispatchView() {
               </Card>
             </div>
 
-            <Card className="ld-fade-in ld-fade-in-3">
+            <Card className="hover-lift-sm ld-fade-in ld-fade-in-3">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Active Dispatches</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
@@ -940,7 +940,7 @@ export default function LoadingDispatchView() {
             </div>
 
             {/* Cost Trend */}
-            <Card className="ld-fade-in ld-fade-in-1">
+            <Card className="hover-lift-sm ld-fade-in ld-fade-in-1">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Dispatch Cost Trend (Stacked)</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -961,7 +961,7 @@ export default function LoadingDispatchView() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Destination Performance Radar */}
-              <Card className="ld-fade-in ld-fade-in-2">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-2">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Destination Performance</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -980,7 +980,7 @@ export default function LoadingDispatchView() {
               </Card>
 
               {/* Exception Table placeholder - actually the full table */}
-              <Card className="ld-fade-in ld-fade-in-3">
+              <Card className="hover-lift-sm ld-fade-in ld-fade-in-3">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Delivery Exception Analysis</CardTitle></CardHeader>
                 <CardContent>
                   <div className="overflow-x-auto max-h-[400px]">

@@ -369,7 +369,7 @@ export default function EcommerceFulfillmentHubView() {
   const filteredPicks = sortedData(filterData(data.picks, searchQ), sortField, sortDir)
 
   const SortHeader = ({ field, children }: { field: string; children: React.ReactNode }) => (
-    <Button variant="ghost" size="sm" className="ecf-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
+    <Button variant="ghost" size="sm" className="press-scale ecf-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
       <span className="flex items-center gap-1">{children}<ArrowUpDown className="h-3 w-3" /></span>
     </Button>
   )
@@ -390,7 +390,7 @@ export default function EcommerceFulfillmentHubView() {
           <div className="ecf-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`ecf-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -398,15 +398,15 @@ export default function EcommerceFulfillmentHubView() {
             ))}
           </div>
           <div className="ecf-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="ecf-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ecf-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Daily Order Volume</CardTitle></CardHeader>
               <CardContent><AreaChart data={dailyOrders}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Standard" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Express" stackId="a" fill="#059669" /><Area type="monotone" dataKey="SameDay" stackId="a" fill="#e11d48" /></AreaChart></CardContent>
             </Card>
-            <Card className="ecf-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ecf-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Marketplace Distribution</CardTitle></CardHeader>
               <CardContent><PieChart><Pie data={mpPie} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{mpPie.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
-            <Card className="ecf-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ecf-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">City-wise Orders</CardTitle></CardHeader>
               <CardContent><BarChart data={cityBar}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="city" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={60} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="Orders" fill="#3b82f6" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
             </Card>
@@ -434,7 +434,7 @@ export default function EcommerceFulfillmentHubView() {
                     <td className="p-2"><WeightTile kg={ord.weight} /></td>
                     <td className="p-2 text-[10px] font-medium text-gray-600 dark:text-gray-400">{ord.city}</td>
                     <td className="p-2"><SLABadge sla={ord.slaHrs} /></td>
-                    <td className="p-2 text-center"><Button variant="ghost" size="sm" className="ecf-view-btn h-7 w-7 p-0 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/30" onClick={() => { setSelectedOrder(ord); setSheetOpen(true); toast.success("Viewing Order", `${ord.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
+                    <td className="press-scale p-2 text-center"><Button variant="ghost" size="sm" className="ecf-view-btn h-7 w-7 p-0 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-900/30" onClick={() => { setSelectedOrder(ord); setSheetOpen(true); toast.success("Viewing Order", `${ord.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -474,12 +474,12 @@ export default function EcommerceFulfillmentHubView() {
         <TabsContent value="3" className="ecf-tab-content space-y-4">
           <div className="ecf-pack-grid grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             {data.packs.map((pk) => (
-              <Card key={pk.id} className="ecf-pack-card group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden border-l-4 border-l-blue-500">
+              <Card key={pk.id} className="hover-lift-sm ecf-pack-card group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden border-l-4 border-l-blue-500">
                 <div className="ecf-pack-card-header p-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
                   <div className="badge-interactive flex items-center justify-between"><PackTypeBadge type={pk.type} /><Badge variant="outline" className="text-[10px] px-2 py-0.5 border-white/30 text-white bg-white/10">{pk.printed ? "Label Printed" : "Pending"}</Badge></div>
                   <p className="text-lg font-bold mt-1">{pk.id}</p>
                 </div>
-                <CardContent className="glass-subtle p-3 space-y-2">
+                <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">AWB</span><ManifestBadge id={pk.awbNo} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Courier</span><CourierBadge name={pk.courier} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Weight</span><WeightTile kg={pk.weight} /></div>
@@ -524,7 +524,7 @@ export default function EcommerceFulfillmentHubView() {
               { label: "Revenue", value: fmtINR(data.orders.reduce((s, o) => s + o.value, 0)), icon: IndianRupee, color: "text-violet-600", bg: "bg-violet-50 dark:bg-violet-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`ecf-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -532,19 +532,19 @@ export default function EcommerceFulfillmentHubView() {
             ))}
           </div>
           <div className="ecf-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card className="ecf-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ecf-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Monthly Orders Trend</CardTitle></CardHeader>
               <CardContent><LineChart data={Array.from({ length: 12 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][i], Orders: ri(200, 800, i + 200), Dispatched: ri(150, 700, i + 300) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="Orders" stroke="#3b82f6" strokeWidth={2} /><Line type="monotone" dataKey="Dispatched" stroke="#059669" strokeWidth={2} /></LineChart></CardContent>
             </Card>
-            <Card className="ecf-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ecf-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Order Type Mix</CardTitle></CardHeader>
               <CardContent><PieChart><Pie data={ORDER_TYPES.map((t, i) => ({ name: t, value: ri(5, 40, i + 400) }))} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{ORDER_TYPES.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
-            <Card className="ecf-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ecf-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Top SKUs by Volume</CardTitle></CardHeader>
               <CardContent><BarChart data={Array.from({ length: 8 }, (_, i) => ({ sku: `SKU-${ri(10000, 99999, i + 500)}`, Volume: ri(20, 150, i + 600) }))} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis dataKey="sku" type="category" tick={{ fontSize: 9 }} width={70} /><Tooltip /><Bar dataKey="Volume" fill="#7c3aed" radius={[0, 4, 4, 0]} /></BarChart></CardContent>
             </Card>
-            <Card className="ecf-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ecf-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Revenue by Channel (6 months)</CardTitle></CardHeader>
               <CardContent><AreaChart data={Array.from({ length: 6 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"][i], Amazon: ri(10, 50, i + 700), Flipkart: ri(8, 40, i + 750), Myntra: ri(5, 25, i + 800), Others: ri(10, 35, i + 850) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} unit="L" /><Tooltip /><Area type="monotone" dataKey="Amazon" stackId="a" fill="#f97316" /><Area type="monotone" dataKey="Flipkart" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Myntra" stackId="a" fill="#ec4899" /><Area type="monotone" dataKey="Others" stackId="a" fill="#6b7280" /></AreaChart></CardContent>
             </Card>

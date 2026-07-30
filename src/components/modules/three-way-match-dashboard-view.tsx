@@ -516,7 +516,7 @@ export function ThreeWayMatchDashboardView() {
 
             {/* Match Rate Trend + Distribution */}
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              <Card className="twm-chart-card">
+              <Card className="hover-lift-sm twm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-blue-500" />
@@ -539,7 +539,7 @@ export function ThreeWayMatchDashboardView() {
                 </CardContent>
               </Card>
 
-              <Card className="twm-chart-card">
+              <Card className="hover-lift-sm twm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <PieChart className="h-4 w-4 text-violet-500" />
@@ -569,7 +569,7 @@ export function ThreeWayMatchDashboardView() {
             </div>
 
             {/* Match Table */}
-            <Card className="twm-chart-card overflow-hidden">
+            <Card className="hover-lift-sm twm-chart-card overflow-hidden">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm flex items-center gap-2">
@@ -599,7 +599,7 @@ export function ThreeWayMatchDashboardView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="twm-match-table">
                     <thead>
@@ -648,7 +648,7 @@ export function ThreeWayMatchDashboardView() {
           <div className="space-y-6">
             {/* Discrepancy Distribution Chart */}
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              <Card className="twm-chart-card">
+              <Card className="hover-lift-sm twm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-orange-500" />
@@ -672,7 +672,7 @@ export function ThreeWayMatchDashboardView() {
                 </CardContent>
               </Card>
 
-              <Card className="twm-chart-card">
+              <Card className="hover-lift-sm twm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <Activity className="h-4 w-4 text-blue-500" />
@@ -728,14 +728,14 @@ export function ThreeWayMatchDashboardView() {
             </div>
 
             {/* All Discrepancies Table */}
-            <Card className="twm-chart-card overflow-hidden">
+            <Card className="hover-lift-sm twm-chart-card overflow-hidden">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <ShieldAlert className="h-4 w-4 text-red-500" />
                   All Discrepancies ({matches.reduce((s, m) => s + m.discrepancies.length, 0)} total)
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto max-h-80">
                   <table className="twm-match-table">
                     <thead className="sticky top-0">
@@ -787,7 +787,7 @@ export function ThreeWayMatchDashboardView() {
         {activeTab === 2 && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              <Card className="twm-chart-card">
+              <Card className="hover-lift-sm twm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-indigo-500" />
@@ -811,7 +811,7 @@ export function ThreeWayMatchDashboardView() {
                 </CardContent>
               </Card>
 
-              <Card className="twm-chart-card">
+              <Card className="hover-lift-sm twm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <DollarSign className="h-4 w-4 text-orange-500" />
@@ -833,14 +833,14 @@ export function ThreeWayMatchDashboardView() {
             </div>
 
             {/* Supplier Table */}
-            <Card className="twm-chart-card overflow-hidden">
+            <Card className="hover-lift-sm twm-chart-card overflow-hidden">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Zap className="h-4 w-4 text-amber-500" />
                   Supplier Performance Summary
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="twm-match-table">
                     <thead>
@@ -931,14 +931,14 @@ export function ThreeWayMatchDashboardView() {
                 </div>
 
                 {/* Line-by-line comparison */}
-                <Card className="twm-chart-card overflow-hidden">
+                <Card className="hover-lift-sm twm-chart-card overflow-hidden">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-sm flex items-center gap-2">
                       <GitCompareArrows className="h-4 w-4 text-blue-500" />
                       Line-by-Line Comparison
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="glass-subtle p-0">
+                  <CardContent className="inner-glow glass-subtle p-0">
                     <div className="overflow-x-auto">
                       <table className="twm-match-table">
                         <thead>
@@ -992,14 +992,14 @@ export function ThreeWayMatchDashboardView() {
 
                 {/* Discrepancies for this PO */}
                 {selectedMatch.discrepancies.length > 0 && (
-                  <Card className="twm-chart-card twm-alerts-card">
+                  <Card className="hover-lift-sm twm-chart-card twm-alerts-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm flex items-center gap-2 text-amber-600">
                         <AlertTriangle className="h-4 w-4" />
                         Discrepancies ({selectedMatch.discrepancies.length})
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="glass-subtle space-y-2">
+                    <CardContent className="inner-glow glass-subtle space-y-2">
                       {selectedMatch.discrepancies.map((d, i) => (
                         <div key={i} className={`twm-disc-detail ${d.severity === "critical" ? "twm-disc-critical" : d.severity === "warning" ? "twm-disc-warning" : "twm-disc-info"}`}>
                           <Badge variant={d.severity === "critical" ? "destructive" : d.severity === "warning" ? "warning" : "default"} className="badge-interactive text-[10px]">
@@ -1020,7 +1020,7 @@ export function ThreeWayMatchDashboardView() {
 
                 {/* Navigation */}
                 <div className="flex justify-between">
-                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate text-xs"
                     onClick={() => {
                       const idx = matches.findIndex((m) => m.poId === selectedMatch.poId);
                       if (idx > 0) setSelectedMatch(matches[idx - 1]);
@@ -1029,7 +1029,7 @@ export function ThreeWayMatchDashboardView() {
                   >
                     ← Previous PO
                   </Button>
-                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate text-xs"
                     onClick={() => {
                       const idx = matches.findIndex((m) => m.poId === selectedMatch.poId);
                       if (idx < matches.length - 1) setSelectedMatch(matches[idx + 1]);
@@ -1041,8 +1041,8 @@ export function ThreeWayMatchDashboardView() {
                 </div>
               </div>
             ) : (
-              <Card className="twm-chart-card">
-                <CardContent className="glass-subtle py-12 text-center">
+              <Card className="hover-lift-sm twm-chart-card">
+                <CardContent className="inner-glow glass-subtle py-12 text-center">
                   <FileCheck className="h-12 w-12 text-muted-foreground/30 mx-auto mb-3" />
                   <p className="text-sm text-muted-foreground">Select a PO from the Match Overview tab to inspect its 3-way match details</p>
                 </CardContent>

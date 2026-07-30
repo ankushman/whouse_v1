@@ -648,7 +648,7 @@ export default function CrossDockOperationsHubView() {
             <StatusStrip data={ibData as unknown as Record<string, unknown>[]} statusKey="status" />
           </div>
           <div className="cdh-charts mt-2 grid gap-4 lg:grid-cols-3">
-            <Card className="lg:col-span-1">
+            <Card className="hover-lift-sm lg:col-span-1">
               <CardHeader><CardTitle className="text-sm">Hourly Throughput (Stacked)</CardTitle></CardHeader>
               <CardContent>
                 <AreaChart data={hrThroughput} height={260}>
@@ -663,7 +663,7 @@ export default function CrossDockOperationsHubView() {
             </Card>
             <Card>
               <CardHeader><CardTitle className="text-sm">Carrier Distribution</CardTitle></CardHeader>
-              <CardContent className="glass-subtle flex justify-center">
+              <CardContent className="inner-glow glass-subtle flex justify-center">
                 <PieChart width={260} height={260}>
                   <Pie data={carrierDist} cx="50%" cy="50%" innerRadius={55} outerRadius={95} dataKey="value" paddingAngle={2}
                     label={({ name, percent }: { name: string; percent: number }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`}>
@@ -700,7 +700,7 @@ export default function CrossDockOperationsHubView() {
             <FilterButtons items={INBOUND_STATUSES} value={ibFilter} onChange={setIbFilter} />
           </div>
           <Card>
-            <CardContent className="glass-subtle p-0 max-h-[540px] overflow-y-auto">
+            <CardContent className="inner-glow glass-subtle p-0 max-h-[540px] overflow-y-auto">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   <TableHead className="cursor-pointer select-none text-xs" onClick={() => handleSort("id")}><div className="flex items-center gap-1">Shipment<ArrowUpDown className="h-3 w-3" /></div></TableHead>
@@ -757,7 +757,7 @@ export default function CrossDockOperationsHubView() {
           </div>
           <StatusStrip data={dkData as unknown as Record<string, unknown>[]} statusKey="status" />
           <Card>
-            <CardContent className="glass-subtle p-0 max-h-[540px] overflow-y-auto">
+            <CardContent className="inner-glow glass-subtle p-0 max-h-[540px] overflow-y-auto">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   {["Door ID", "Type", "Status", "Current Shipment", "Carrier", "Warehouse", "Occupancy", "Throughput", "Assigned Worker"].map((h) => (
@@ -805,20 +805,20 @@ export default function CrossDockOperationsHubView() {
             </h4>
             <div className="grid gap-2">
               {stData.filter((t) => t.priority === "Emergency" || t.priority === "High").slice(0, 4).map((t) => (
-                <Card key={t.id} className="cdh-priority-card border-l-4" style={{ borderLeftColor: t.priority === "Emergency" ? THEME.rose : THEME.orange }}>
-                  <CardContent className="glass-subtle flex flex-wrap items-center gap-3 p-3">
+                <Card key={t.id} className="hover-lift-sm cdh-priority-card border-l-4" style={{ borderLeftColor: t.priority === "Emergency" ? THEME.rose : THEME.orange }}>
+                  <CardContent className="inner-glow glass-subtle flex flex-wrap items-center gap-3 p-3">
                     <span className="font-mono text-xs font-bold">{t.id}</span>
                     <PriorityBadge level={t.priority} /><CategoryBadge cat={t.category} /><SortStatusBadge status={t.status} />
                     <LaneBadge lane={t.lane} /><WorkerBadge name={t.worker} />
                     <span className="ml-auto text-xs text-muted-foreground">{t.items} items</span>
-                    <Button size="sm" variant="ghost" onClick={() => { setSelSort(t); setSheetOpen(true) }}><Eye className="h-4 w-4" /></Button>
+                    <Button size="sm" variant="ghost" onClick={() => { setSelSort(t); setSheetOpen(true) }}><Eye className="press-scale h-4 w-4" /></Button>
                   </CardContent>
                 </Card>
               ))}
             </div>
           </div>
           <Card>
-            <CardContent className="glass-subtle p-0 max-h-[420px] overflow-y-auto">
+            <CardContent className="inner-glow glass-subtle p-0 max-h-[420px] overflow-y-auto">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   {[
@@ -879,7 +879,7 @@ export default function CrossDockOperationsHubView() {
           </div>
           <StatusStrip data={obData as unknown as Record<string, unknown>[]} statusKey="status" />
           <Card>
-            <CardContent className="glass-subtle p-0 max-h-[540px] overflow-y-auto">
+            <CardContent className="inner-glow glass-subtle p-0 max-h-[540px] overflow-y-auto">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   {["id", "carrier", "destination", "origin", "status", "vehicle", "driver", "departure", "eta", "pallets", "weight", "value", "tracking"].map((h) => (

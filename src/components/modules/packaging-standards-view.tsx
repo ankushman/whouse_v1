@@ -586,7 +586,7 @@ export default function PackagingStandardsView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="pkg-anim-5"><CardHeader><CardTitle className="text-base">Packaging Type Distribution</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-5"><CardHeader><CardTitle className="text-base">Packaging Type Distribution</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart><Pie data={typeDistribution} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                   {typeDistribution.map((e, i) => <Cell key={i} fill={e.color} />)}
@@ -594,7 +594,7 @@ export default function PackagingStandardsView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="pkg-anim-6"><CardHeader><CardTitle className="text-base">Material Cost Trend (12 Months)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-6"><CardHeader><CardTitle className="text-base">Material Cost Trend (12 Months)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <ComposedChart data={monthlyTrends}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="month" className="text-xs" /><YAxis className="text-xs" />
@@ -606,7 +606,7 @@ export default function PackagingStandardsView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="pkg-anim-7"><CardHeader><CardTitle className="text-base">Sustainability Score (Radar)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-7"><CardHeader><CardTitle className="text-base">Sustainability Score (Radar)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <RadarChart data={sustainabilityRadar}><PolarGrid className="stroke-gray-200 dark:stroke-gray-700" /><PolarAngleAxis dataKey="axis" className="text-xs" /><PolarRadiusAxis className="text-xs" domain={[0, 100]} />
                   <Radar name="Score" dataKey="value" stroke="#06b6d4" fill="#06b6d4" fillOpacity={0.3} strokeWidth={2} />
@@ -614,7 +614,7 @@ export default function PackagingStandardsView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="pkg-anim-8"><CardHeader><CardTitle className="text-base">Warehouse Packaging Volume</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-8"><CardHeader><CardTitle className="text-base">Warehouse Packaging Volume</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={whVolumeData}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="name" className="text-xs" /><YAxis className="text-xs" />
@@ -673,7 +673,7 @@ export default function PackagingStandardsView() {
                       <td className="text-xs">{s.warehouse.replace("WH-", "")}</td>
                       <td>{statusBadge(s.status)}</td>
                       <td className="text-xs text-gray-500">{s.lastUpdated}</td>
-                      <td><Button size="sm" variant="ghost" className="h-8 w-8 p-0" onClick={() => setSelectedSpec(s)}><span title="Eye"><Eye className="h-4 w-4 text-gray-500" /></span></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale h-8 w-8 p-0" onClick={() => setSelectedSpec(s)}><span title="Eye"><Eye className="h-4 w-4 text-gray-500" /></span></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -691,7 +691,7 @@ export default function PackagingStandardsView() {
               <div className="pkg-drawer-panel p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-bold">{selectedSpec.id} — Spec Details</h3>
-                  <Button size="sm" variant="ghost" onClick={() => setSelectedSpec(null)} className="h-8 w-8 p-0"><X className="h-4 w-4" /></Button>
+                  <Button size="sm" variant="ghost" onClick={() => setSelectedSpec(null)} className="press-scale h-8 w-8 p-0"><X className="h-4 w-4" /></Button>
                 </div>
 
                 {/* Status Banner */}
@@ -802,7 +802,7 @@ export default function PackagingStandardsView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="pkg-anim-5"><CardHeader><CardTitle className="text-base">Material Stock Levels (Top 15)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-5"><CardHeader><CardTitle className="text-base">Material Stock Levels (Top 15)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={materialStockData} layout="vertical"><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis type="number" className="text-xs" /><YAxis type="category" dataKey="name" width={120} className="text-xs" tick={{ fontSize: 11 }} />
@@ -813,7 +813,7 @@ export default function PackagingStandardsView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="pkg-anim-6"><CardHeader><CardTitle className="text-base">Material Category Distribution</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-6"><CardHeader><CardTitle className="text-base">Material Category Distribution</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart><Pie data={materialCatData} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                   {materialCatData.map((e, i) => <Cell key={i} fill={e.color} />)}
@@ -875,7 +875,7 @@ export default function PackagingStandardsView() {
         {/* ===== TAB 4: Cost Optimization ===== */}
         <TabsContent value="optimization" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="pkg-anim-1"><CardHeader><CardTitle className="text-base">Cost Savings Opportunity (12 Months)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-1"><CardHeader><CardTitle className="text-base">Cost Savings Opportunity (12 Months)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={monthlyTrends}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="month" className="text-xs" /><YAxis className="text-xs" />
@@ -886,7 +886,7 @@ export default function PackagingStandardsView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="pkg-anim-2"><CardHeader><CardTitle className="text-base">Packaging Cost per Unit by Warehouse</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-2"><CardHeader><CardTitle className="text-base">Packaging Cost per Unit by Warehouse</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={whCostData}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="name" className="text-xs" /><YAxis className="text-xs" />
@@ -897,7 +897,7 @@ export default function PackagingStandardsView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="pkg-anim-3"><CardHeader><CardTitle className="text-base">Fill Rate vs Material Cost</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-3"><CardHeader><CardTitle className="text-base">Fill Rate vs Material Cost</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <ScatterChart><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="fillRate" name="Fill Rate %" className="text-xs" /><YAxis dataKey="cost" name="Cost ₹" className="text-xs" />
@@ -959,7 +959,7 @@ export default function PackagingStandardsView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="pkg-anim-5"><CardHeader><CardTitle className="text-base">Compliance Rate Trend (12 Months)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm pkg-anim-5"><CardHeader><CardTitle className="text-base">Compliance Rate Trend (12 Months)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <LineChart data={monthlyTrends}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="month" className="text-xs" /><YAxis domain={[60, 100]} className="text-xs" />
@@ -970,7 +970,7 @@ export default function PackagingStandardsView() {
             </CardContent></Card>
 
             {failureReasons.length > 0 && (
-              <Card className="pkg-anim-6"><CardHeader><CardTitle className="text-base">Test Failure Reasons</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm pkg-anim-6"><CardHeader><CardTitle className="text-base">Test Failure Reasons</CardTitle></CardHeader><CardContent>
                 <ResponsiveContainer width="100%" height={280}>
                   <PieChart><Pie data={failureReasons} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                     {failureReasons.map((_, i) => <Cell key={i} fill={["#f43f5e", "#06b6d4", "#84cc16", "#f59e0b", "#6366f1", "#ec4899", "#64748b", "#eab308"][i % 8]} />)}

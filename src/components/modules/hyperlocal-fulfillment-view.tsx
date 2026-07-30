@@ -229,7 +229,7 @@ export default function HyperlocalFulfillmentView() {
             ).map((k, i) => {
               const KpiIcon = KPI_ICON_MAP[k.icon]
               return (
-              <Card key={i}><CardContent className="glass-subtle flex items-center gap-3 p-4">
+              <Card key={i}><CardContent className="inner-glow hover-lift-sm glass-subtle flex items-center gap-3 p-4">
                 <div className={cn("rounded-lg p-2 hyl-kpi-icon", k.color)}>{KpiIcon && <KpiIcon className="h-4 w-4 text-white" />}</div>
                 <div><p className="text-[10px] text-muted-foreground">{k.t}</p><p className="text-sm font-bold">{k.v}</p><p className="text-[10px] text-muted-foreground">{k.s}</p></div>
               </CardContent></Card>
@@ -385,8 +385,8 @@ export default function HyperlocalFulfillmentView() {
                 <div className="badge-interactive flex flex-wrap items-center gap-3"><DeliveryTimeTile min={s.avgDeliveryMin} /><Badge variant="outline" className="text-[10px]">{s.dailyOrders} orders/day</Badge><Badge variant="outline" className="text-[10px]">{s.skuCount.toLocaleString()} SKUs</Badge><Badge variant="outline" className="text-[10px]">{s.riderCount} riders</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Store Updated", `${s.storeId} details updated`)}><TrendingUp className="h-3 w-3" />Update</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Maintenance", `Scheduling maintenance for ${s.storeId}`)}>Maintenance</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1" onClick={() => toast.success("Store Updated", `${s.storeId} details updated`)}><TrendingUp className="h-3 w-3" />Update</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Maintenance", `Scheduling maintenance for ${s.storeId}`)}>Maintenance</Button>
                 </div>
               </div>
             </>
@@ -405,8 +405,8 @@ export default function HyperlocalFulfillmentView() {
                 <div className="badge-interactive flex flex-wrap items-center gap-3"><ValueTile amount={o.value} /><Badge variant="outline" className="text-[10px]">{o.items} items</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Updated", `Order ${o.orderId} updated`)}>Update Status</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Tracking", `Tracking ${o.orderId}`)}>Track</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1" onClick={() => toast.success("Updated", `Order ${o.orderId} updated`)}>Update Status</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Tracking", `Tracking ${o.orderId}`)}>Track</Button>
                 </div>
               </div>
             </>
@@ -425,8 +425,8 @@ export default function HyperlocalFulfillmentView() {
                 <div className="badge-interactive flex flex-wrap items-center gap-3"><StarRating rating={p.rating} /><EarningsTile amount={p.earnings} /><Badge variant="outline" className="text-[10px]">{p.deliveries} deliveries</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Partner Updated", `${p.partnerId} updated`)}>Update</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Assigned", `New zone assigned to ${p.name}`)}>Assign Zone</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1" onClick={() => toast.success("Partner Updated", `${p.partnerId} updated`)}>Update</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Assigned", `New zone assigned to ${p.name}`)}>Assign Zone</Button>
                 </div>
               </div>
             </>
@@ -442,8 +442,8 @@ export default function HyperlocalFulfillmentView() {
                 <div className="badge-interactive flex flex-wrap items-center gap-3"><RadiusTile km={z.radius} /><Badge variant="outline" className="text-[10px]">{z.avgFreq} orders/day</Badge><Badge variant="outline" className="text-[10px]">{z.competitors} competitors</Badge><Badge variant="outline" className="text-[10px]">{z.darkStores} dark stores</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Zone Updated", `${z.zoneId} updated`)}>Update</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Expanding", `Expanding coverage for ${z.name}`)}>Expand Coverage</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1" onClick={() => toast.success("Zone Updated", `${z.zoneId} updated`)}>Update</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Expanding", `Expanding coverage for ${z.name}`)}>Expand Coverage</Button>
                 </div>
               </div>
             </>

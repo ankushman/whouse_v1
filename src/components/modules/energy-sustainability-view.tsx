@@ -197,8 +197,8 @@ export function EnergySustainabilityView() {
           const Icon = kpi.icon
           const isImproving = kpi.change < 0 || (kpi.label === "Water Reuse" || kpi.label === "Waste Diversion" || kpi.label === "Renewable Share") && kpi.change > 0
           return (
-            <Card key={kpi.id} className="esg-kpi-card kpi-card-tilt overflow-hidden">
-              <CardContent className="glass-subtle p-3">
+            <Card key={kpi.id} className="hover-lift-sm esg-kpi-card kpi-card-tilt overflow-hidden">
+              <CardContent className="inner-glow glass-subtle p-3">
                 <div className="flex items-start justify-between">
                   <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
                     <Icon className="h-3.5 w-3.5 text-primary" />
@@ -233,8 +233,8 @@ export function EnergySustainabilityView() {
 
       {/* Top summary cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="energy-card-hero overflow-hidden">
-          <CardContent className="glass-subtle p-4 relative">
+        <Card className="hover-lift-sm energy-card-hero overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
@@ -260,8 +260,8 @@ export function EnergySustainabilityView() {
           </CardContent>
         </Card>
 
-        <Card className="carbon-card-hero overflow-hidden">
-          <CardContent className="glass-subtle p-4 relative">
+        <Card className="hover-lift-sm carbon-card-hero overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
@@ -286,8 +286,8 @@ export function EnergySustainabilityView() {
           </CardContent>
         </Card>
 
-        <Card className="water-card-hero overflow-hidden">
-          <CardContent className="glass-subtle p-4 relative">
+        <Card className="hover-lift-sm water-card-hero overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
@@ -311,8 +311,8 @@ export function EnergySustainabilityView() {
           </CardContent>
         </Card>
 
-        <Card className="efficiency-card-hero overflow-hidden">
-          <CardContent className="glass-subtle p-4 relative">
+        <Card className="hover-lift-sm efficiency-card-hero overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
@@ -340,7 +340,7 @@ export function EnergySustainabilityView() {
 
       {/* Energy consumption chart + source mix */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="md:col-span-2">
+        <Card className="hover-lift-sm md:col-span-2">
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <Activity className="h-4 w-4 text-primary" />
@@ -482,7 +482,7 @@ export function EnergySustainabilityView() {
                   setDrawerOpen(true)
                 }}
               >
-                <CardContent className="glass-subtle p-3.5">
+                <CardContent className="inner-glow glass-subtle p-3.5">
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="text-sm font-semibold">{site.name}</div>

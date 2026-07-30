@@ -379,7 +379,7 @@ function AuditScheduleTab({ data, search, setSearch, filterScope, setFilterScope
   return (
     <div className="esg-tab-pane">
       <div className="esg-charts-row">
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>Audits by Scope</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart><Pie data={data.auditsByScope} dataKey="count" nameKey="label" cx="50%" cy="50%" outerRadius={80} label>
@@ -387,7 +387,7 @@ function AuditScheduleTab({ data, search, setSearch, filterScope, setFilterScope
               <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} /></PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>Audits by Status</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.auditsByStatus} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -399,7 +399,7 @@ function AuditScheduleTab({ data, search, setSearch, filterScope, setFilterScope
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>Audits by Outcome</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.auditsByOutcome} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -413,7 +413,7 @@ function AuditScheduleTab({ data, search, setSearch, filterScope, setFilterScope
         </Card>
       </div>
 
-      <Card className="esg-chart-card esg-trend-card">
+      <Card className="hover-lift-sm esg-chart-card esg-trend-card">
         <div className="esg-chart-header"><Activity size={16} /><h3>12-Month Audit Activity Trend</h3></div>
         <ResponsiveContainer width="100%" height={250}>
           <ComposedChart data={data.auditTrend} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
@@ -483,25 +483,25 @@ function CarbonFootprintTab({ data, setDetailModal }: { data: ApiResponse; setDe
   return (
     <div className="esg-tab-pane">
       <div className="esg-charts-row">
-        <Card className="esg-chart-card esg-summary-card">
+        <Card className="hover-lift-sm esg-chart-card esg-summary-card">
           <div className="esg-summary-icon" style={{ background: CARBON_COLORS.scope1 + '20', color: CARBON_COLORS.scope1 }}><Flame size={20} /></div>
           <div className="esg-summary-label">Scope 1 (Direct)</div>
           <div className="esg-summary-value">{fmtNum(s1?.total ?? 0)}</div>
           <div className="esg-summary-unit">tCO2e</div>
         </Card>
-        <Card className="esg-chart-card esg-summary-card">
+        <Card className="hover-lift-sm esg-chart-card esg-summary-card">
           <div className="esg-summary-icon" style={{ background: CARBON_COLORS.scope2 + '20', color: CARBON_COLORS.scope2 }}><Zap size={20} /></div>
           <div className="esg-summary-label">Scope 2 (Indirect Energy)</div>
           <div className="esg-summary-value">{fmtNum(s2?.total ?? 0)}</div>
           <div className="esg-summary-unit">tCO2e</div>
         </Card>
-        <Card className="esg-chart-card esg-summary-card">
+        <Card className="hover-lift-sm esg-chart-card esg-summary-card">
           <div className="esg-summary-icon" style={{ background: CARBON_COLORS.scope3 + '20', color: CARBON_COLORS.scope3 }}><Truck size={20} /></div>
           <div className="esg-summary-label">Scope 3 (Value Chain)</div>
           <div className="esg-summary-value">{fmtNum(s3?.total ?? 0)}</div>
           <div className="esg-summary-unit">tCO2e</div>
         </Card>
-        <Card className="esg-chart-card esg-summary-card">
+        <Card className="hover-lift-sm esg-chart-card esg-summary-card">
           <div className="esg-summary-icon" style={{ background: '#04785720', color: '#047857' }}><Globe size={20} /></div>
           <div className="esg-summary-label">Total Carbon Footprint</div>
           <div className="esg-summary-value">{fmtNum(total)}</div>
@@ -510,7 +510,7 @@ function CarbonFootprintTab({ data, setDetailModal }: { data: ApiResponse; setDe
       </div>
 
       <div className="esg-charts-row">
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>Emissions by Warehouse</h3></div>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={data.emissionsByWarehouse} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
@@ -523,7 +523,7 @@ function CarbonFootprintTab({ data, setDetailModal }: { data: ApiResponse; setDe
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><TrendingDown size={16} /><h3>Carbon Reduction Trajectory</h3></div>
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={data.reductionTrajectory} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
@@ -585,7 +585,7 @@ function SustainabilityKPIsTab({ data }: { data: ApiResponse }) {
       {/* KPI Grid */}
       <div className="esg-kpi-detail-grid">
         {data.sustainabilityKPIs.map(k => (
-          <Card key={k.id} className="esg-kpi-detail-card">
+          <Card key={k.id} className="hover-lift-sm esg-kpi-detail-card">
             <div className="esg-kpi-detail-header">
               <div className="esg-kpi-detail-dim" style={{ background: DIMENSION_COLORS[k.dimension] + '20', color: DIMENSION_COLORS[k.dimension] }}>{k.dimension}</div>
               {trendIcon(k.trend)}
@@ -610,7 +610,7 @@ function SustainabilityKPIsTab({ data }: { data: ApiResponse }) {
       </div>
 
       {/* Radar Chart */}
-      <Card className="esg-chart-card esg-trend-card">
+      <Card className="hover-lift-sm esg-chart-card esg-trend-card">
         <div className="esg-chart-header"><Target size={16} /><h3>KPI Performance by Dimension</h3></div>
         <ResponsiveContainer width="100%" height={320}>
           <RadarChart data={radarData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
@@ -676,7 +676,7 @@ function GRIIndicatorsTab({ data }: { data: ApiResponse }) {
 
       {/* GRI Disclosure Pie */}
       <div className="esg-charts-row">
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><PieChartIcon size={16} /><h3>Disclosure Status Distribution</h3></div>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart>
@@ -692,7 +692,7 @@ function GRIIndicatorsTab({ data }: { data: ApiResponse }) {
             </PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>GRI Standards Coverage</h3></div>
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={['Emissions', 'Materials', 'Energy', 'Water', 'Waste', 'Employment', 'OHS', 'Diversity', 'Security', 'Communities', 'Anti-Corruption', 'General'].map(std => ({
@@ -713,7 +713,7 @@ function GRIIndicatorsTab({ data }: { data: ApiResponse }) {
       {/* GRI Indicator Cards */}
       <div className="esg-gri-grid">
         {data.griIndicators.map(g => (
-          <Card key={g.id} className="esg-gri-card">
+          <Card key={g.id} className="hover-lift-sm esg-gri-card">
             <div className="esg-gri-card-header">
               <span className="esg-gri-code">{g.griCode}</span>
               <span className="esg-pill" style={{ background: DISC_COLORS[g.disclosureStatus] + '20', color: DISC_COLORS[g.disclosureStatus] }}>{DISC_LABELS[g.disclosureStatus]}</span>
@@ -768,7 +768,7 @@ function RiskAssessmentTab({ data, setDetailModal }: { data: ApiResponse; setDet
       </div>
 
       {/* Risk Heatmap Matrix */}
-      <Card className="esg-chart-card esg-trend-card">
+      <Card className="hover-lift-sm esg-chart-card esg-trend-card">
         <div className="esg-chart-header"><Hexagon size={16} /><h3>ESG Risk Matrix (Probability × Impact)</h3></div>
         <div className="esg-heatmap-container">
           <div className="esg-heatmap-label-y">Probability</div>
@@ -799,7 +799,7 @@ function RiskAssessmentTab({ data, setDetailModal }: { data: ApiResponse; setDet
       </Card>
 
       <div className="esg-charts-row">
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><PieChartIcon size={16} /><h3>Mitigation Status</h3></div>
           <ResponsiveContainer width="100%" height={240}>
             <PieChart><Pie data={mitigationDist} dataKey="count" nameKey="label" cx="50%" cy="50%" outerRadius={80} label>
@@ -807,7 +807,7 @@ function RiskAssessmentTab({ data, setDetailModal }: { data: ApiResponse; setDet
               <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} /></PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><Hexagon size={16} /><h3>Probability-Impact Scatter</h3></div>
           <ResponsiveContainer width="100%" height={240}>
             <ScatterChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
@@ -883,7 +883,7 @@ function FindingsTab({ data, search, setSearch, filterSeverity, setFilterSeverit
       </div>
 
       <div className="esg-charts-row">
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>Findings by Severity</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.findingsBySeverity} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -897,7 +897,7 @@ function FindingsTab({ data, search, setSearch, filterSeverity, setFilterSeverit
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>Findings by Status</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart><Pie data={data.findingsByStatus} dataKey="count" nameKey="label" cx="50%" cy="50%" outerRadius={80} label>
@@ -971,7 +971,7 @@ function ComplianceTab({ data }: { data: ApiResponse }) {
       </div>
 
       <div className="esg-charts-row">
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><BarChart3 size={16} /><h3>Compliance Status Distribution</h3></div>
           <ResponsiveContainer width="100%" height={240}>
             <BarChart data={compDist} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -983,7 +983,7 @@ function ComplianceTab({ data }: { data: ApiResponse }) {
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="esg-chart-card">
+        <Card className="hover-lift-sm esg-chart-card">
           <div className="esg-chart-header"><Clock size={16} /><h3>Upcoming Deadlines</h3></div>
           <div className="esg-deadline-list">
             {upcoming.map(o => (
@@ -1069,7 +1069,7 @@ function InsightsTab({ data }: { data: ApiResponse }) {
         <h3 className="esg-section-title"><Gauge size={18} /> ESG Health Scorecard</h3>
         <div className="esg-health-tiles">
           {healthTiles.map(tile => (
-            <Card key={tile.label} className="esg-health-tile">
+            <Card key={tile.label} className="hover-lift-sm esg-health-tile">
               <div className="esg-health-tile-icon" style={{ background: tile.color + '20', color: tile.color }}>
                 <tile.icon size={20} />
               </div>

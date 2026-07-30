@@ -270,7 +270,7 @@ export default function PoolDistributionView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Pool Lifecycle</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Pool Lifecycle</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyPools}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -280,7 +280,7 @@ export default function PoolDistributionView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Route Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Route Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={routeDist} cx="50%" cy="50%" innerRadius={50} outerRadius={85} dataKey="count" nameKey="name" label={({ name, percent }) => `${name.split("→")[1]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {routeDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -290,7 +290,7 @@ export default function PoolDistributionView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Load Summary</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Load Summary</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><BarChart data={warehouseLoads} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" /><XAxis type="number" fontSize={11} /><YAxis type="category" dataKey="warehouse" fontSize={10} width={95} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -301,7 +301,7 @@ export default function PoolDistributionView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Breakdown</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Breakdown</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><AreaChart data={monthlyCosts}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip formatter={(v: number) => fmtRupee(v)} /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -314,7 +314,7 @@ export default function PoolDistributionView() {
               </div>
 
               {/* Active Transit Table */}
-              <Card className="card-crud-lift pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Navigation className="h-4 w-4 text-indigo-500" />Active In-Transit Pools ({inTransitCount})</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm card-crud-lift pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Navigation className="h-4 w-4 text-indigo-500" />Active In-Transit Pools ({inTransitCount})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
@@ -351,7 +351,7 @@ export default function PoolDistributionView() {
                           <TableCell className="text-[10px] font-mono">{p.eta}</TableCell>
                           <TableCell className="numeric-cell text-[10px] font-mono">{p.totalDistance} km</TableCell>
                           <TableCell>
-                            <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedPool(p) }}>
+                            <Button variant="ghost" size="sm" className="press-scale h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedPool(p) }}>
                               <Eye className="h-3 w-3" />
                             </Button>
                           </TableCell>
@@ -367,7 +367,7 @@ export default function PoolDistributionView() {
           {/* TAB 2: POOL REGISTER */}
           {activeTab === "pools" && (
             <div className="mt-4 space-y-4">
-              <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-teal-500" />Filter Pools</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-teal-500" />Filter Pools</CardTitle></CardHeader><CardContent>
                 <div className="flex flex-wrap gap-2 items-center">
                   <div className="relative flex-1 min-w-[180px]">
                     <Search className="h-3.5 w-3.5 absolute left-2.5 top-2.5 text-gray-400" />
@@ -385,7 +385,7 @@ export default function PoolDistributionView() {
                 </div>
               </CardContent></Card>
 
-              <Card className="card-crud-lift glass-subtle pd-chart-card"><CardContent className="p-0">
+              <Card className="inner-glow hover-lift-sm card-crud-lift glass-subtle pd-chart-card"><CardContent className="p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow className="pd-table-header">
@@ -426,7 +426,7 @@ export default function PoolDistributionView() {
                           <TableCell className="text-[10px]">{p.estimatedDuration}h</TableCell>
                           <TableCell className="numeric-cell text-[10px] font-mono">{fmtRupee(p.cost)}</TableCell>
                           <TableCell>
-                            <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedPool(p) }}>
+                            <Button variant="ghost" size="sm" className="press-scale h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedPool(p) }}>
                               <Eye className="h-3 w-3" />
                             </Button>
                           </TableCell>
@@ -443,7 +443,7 @@ export default function PoolDistributionView() {
           {activeTab === "vehicles" && (
             <div className="mt-4 space-y-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Vehicle Type Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Vehicle Type Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={vehicleTypeDist} cx="50%" cy="50%" innerRadius={50} outerRadius={85} dataKey="count" nameKey="name" label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {vehicleTypeDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -451,7 +451,7 @@ export default function PoolDistributionView() {
                   </PieChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Fuel Type Share</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Fuel Type Share</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={fuelDist} cx="50%" cy="50%" innerRadius={45} outerRadius={80} dataKey="costShare" nameKey="type" label={({ type, percent }) => `${type} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {fuelDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -460,7 +460,7 @@ export default function PoolDistributionView() {
                 </CardContent></Card>
               </div>
 
-              <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Fleet Overview ({VEHICLES.length} Vehicles)</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Fleet Overview ({VEHICLES.length} Vehicles)</CardTitle></CardHeader><CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                   {VEHICLES.map((v) => (
                     <div key={v.id} className="pd-vehicle-card rounded-lg p-3 border border-gray-200 dark:border-gray-700">
@@ -481,7 +481,7 @@ export default function PoolDistributionView() {
               </CardContent></Card>
 
               {/* Drivers */}
-              <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Driver Pool ({DRIVERS.length} Drivers)</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Driver Pool ({DRIVERS.length} Drivers)</CardTitle></CardHeader><CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
                   {DRIVERS.map((d) => (
                     <div key={d.id} className="pd-driver-card rounded-lg p-3 border border-gray-200 dark:border-gray-700">
@@ -524,7 +524,7 @@ export default function PoolDistributionView() {
                 ))}
               </div>
 
-              <Card className="card-crud-lift pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Schedule Conflicts ({scheduleConflicts.length})</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm card-crud-lift pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Schedule Conflicts ({scheduleConflicts.length})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
@@ -575,7 +575,7 @@ export default function PoolDistributionView() {
                   { title: "Cost/km", val: fmtRupee(Math.round(totalCost / pools.reduce((a, b) => a + b.totalDistance, 0))), sub: "Weighted average" },
                   { title: "Fuel Cost Share", val: `${Math.round(pools.reduce((a, b) => a + b.fuelCost, 0) / totalCost * 100)}%`, sub: "Of total logistics" },
                 ].map((s) => (
-                  <Card key={s.title} className="pd-analytics-card rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                  <Card key={s.title} className="hover-lift-sm pd-analytics-card rounded-xl p-4 border border-gray-200 dark:border-gray-700">
                     <div className="text-[10px] font-medium text-gray-500 uppercase">{s.title}</div>
                     <div className="text-xl font-bold text-teal-700 dark:text-teal-400 mt-1">{s.val}</div>
                     <div className="text-[9px] text-gray-400">{s.sub}</div>
@@ -584,7 +584,7 @@ export default function PoolDistributionView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Pool Volume & Cost Trend</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Pool Volume & Cost Trend</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyPools}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -595,7 +595,7 @@ export default function PoolDistributionView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Components Trend</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Components Trend</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><AreaChart data={monthlyCosts}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -608,7 +608,7 @@ export default function PoolDistributionView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Throughput</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Throughput</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><BarChart data={warehouseLoads}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" fontSize={10} angle={-20} textAnchor="end" height={50} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -618,7 +618,7 @@ export default function PoolDistributionView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Status Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Status Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={(() => {
                       const counts: Record<string, number> = {}
@@ -646,7 +646,7 @@ export default function PoolDistributionView() {
                     <h3 className="text-base font-bold text-white">{selectedPool.id}</h3>
                     <p className="text-xs text-white/70">{selectedPool.route} · {selectedPool.priority}</p>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-white/70 hover:text-white hover:bg-white/10" onClick={() => setSelectedPool(null)}>
+                  <Button variant="ghost" size="sm" className="press-scale text-white/70 hover:text-white hover:bg-white/10" onClick={() => setSelectedPool(null)}>
                     <X className="h-4 w-4" />
                   </Button>
                 </div>

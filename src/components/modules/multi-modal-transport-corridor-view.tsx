@@ -591,22 +591,22 @@ export default function MultiModalTransportCorridorView() {
               { label: "Avg Cost/Ton", value: formatINR(k.avgCostPerTon), icon: <IndianRupee className="w-4 h-4" /> },
               { label: "CO2 Saved (t)", value: k.co2Saved, icon: <Globe2 className="w-4 h-4" /> },
             ].map((item, idx) => (
-              <Card key={idx} className="mtc-kpi-card">
+              <Card key={idx} className="hover-lift-sm mtc-kpi-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-4">
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="inner-glow glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Mode Throughput (TEU)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><AreaChart data={data.monthlyThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Area type="monotone" dataKey="Rail" stackId="1" stroke="#0369a1" fill="#bae6fd" /><Area type="monotone" dataKey="Road" stackId="1" stroke="#d97706" fill="#fde68a" /><Area type="monotone" dataKey="Coastal" stackId="1" stroke="#0d9488" fill="#99f6e4" /><Area type="monotone" dataKey="Waterway" stackId="1" stroke="#06b6d4" fill="#cffafe" /><Area type="monotone" dataKey="Air" stackId="1" stroke="#7c3aed" fill="#ede9fe" /></AreaChart></ResponsiveContainer></CardContent></Card>
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><PieChart><Pie data={data.modeDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.modeDistribution.map((_: unknown, idx: number) => <Cell key={idx} fill={CHART_COLORS[idx % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Mode Throughput (TEU)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><AreaChart data={data.monthlyThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Area type="monotone" dataKey="Rail" stackId="1" stroke="#0369a1" fill="#bae6fd" /><Area type="monotone" dataKey="Road" stackId="1" stroke="#d97706" fill="#fde68a" /><Area type="monotone" dataKey="Coastal" stackId="1" stroke="#0d9488" fill="#99f6e4" /><Area type="monotone" dataKey="Waterway" stackId="1" stroke="#06b6d4" fill="#cffafe" /><Area type="monotone" dataKey="Air" stackId="1" stroke="#7c3aed" fill="#ede9fe" /></AreaChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><PieChart><Pie data={data.modeDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.modeDistribution.map((_: unknown, idx: number) => <Cell key={idx} fill={CHART_COLORS[idx % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Corridor Performance</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.corridorPerformance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="corridor" tick={{ fontSize: 9 }} angle={-25} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 11 }} domain={[0, 100]} /><Tooltip /><Legend /><Bar dataKey="Reliability" fill="#0369a1" radius={[2, 2, 0, 0]} /><Bar dataKey="Capacity" fill="#0d9488" radius={[2, 2, 0, 0]} /><Bar dataKey="CostEfficiency" fill="#d97706" radius={[2, 2, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Transit Time Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><LineChart data={data.transitTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} unit="h" /><Tooltip /><Legend /><Line type="monotone" dataKey="Actual" stroke="#0369a1" strokeWidth={2} /><Line type="monotone" dataKey="Target" stroke="#d97706" strokeDasharray="5 5" /><Line type="monotone" dataKey="Optimal" stroke="#059669" strokeDasharray="2 2" /></LineChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Corridor Performance</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.corridorPerformance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="corridor" tick={{ fontSize: 9 }} angle={-25} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 11 }} domain={[0, 100]} /><Tooltip /><Legend /><Bar dataKey="Reliability" fill="#0369a1" radius={[2, 2, 0, 0]} /><Bar dataKey="Capacity" fill="#0d9488" radius={[2, 2, 0, 0]} /><Bar dataKey="CostEfficiency" fill="#d97706" radius={[2, 2, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Transit Time Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><LineChart data={data.transitTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} unit="h" /><Tooltip /><Legend /><Line type="monotone" dataKey="Actual" stroke="#0369a1" strokeWidth={2} /><Line type="monotone" dataKey="Target" stroke="#d97706" strokeDasharray="5 5" /><Line type="monotone" dataKey="Optimal" stroke="#059669" strokeDasharray="2 2" /></LineChart></ResponsiveContainer></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -646,7 +646,7 @@ export default function MultiModalTransportCorridorView() {
                     <td className="px-3 py-2 min-w-[80px]"><TransitProgressBar pct={Number(s.transitProgress)} status={String(s.status)} /></td>
                     <td className="px-3 py-2 font-semibold tabular-nums">{formatINR(Number(s.totalCost))}</td>
                     <td className="px-3 py-2 tabular-nums text-muted-foreground">{String(s.eta)}</td>
-                    <td className="px-3 py-2"><Button size="sm" variant="ghost" className="mtc-action-btn" onClick={(e) => { e.stopPropagation(); setDrawerRecord(s as unknown as Record<string, unknown>); setDrawerOpen(true); }}><Eye className="w-3.5 h-3.5" /></Button></td>
+                    <td className="press-scale px-3 py-2"><Button size="sm" variant="ghost" className="mtc-action-btn" onClick={(e) => { e.stopPropagation(); setDrawerRecord(s as unknown as Record<string, unknown>); setDrawerOpen(true); }}><Eye className="w-3.5 h-3.5" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -657,14 +657,14 @@ export default function MultiModalTransportCorridorView() {
         {/* ====== TAB 2: Terminal Throughput ====== */}
         <TabsContent value="2" className="space-y-4 mt-4">
           <div className="grid grid-cols-2 gap-4">
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Terminal Utilization</CardTitle></CardHeader><CardContent><div className="space-y-3 max-h-[350px] overflow-y-auto">{data.terminalThroughput.filter((_, idx) => idx < 20).map((t, idx) => (
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Terminal Utilization</CardTitle></CardHeader><CardContent><div className="space-y-3 max-h-[350px] overflow-y-auto">{data.terminalThroughput.filter((_, idx) => idx < 20).map((t, idx) => (
               <div key={idx} className="flex items-center justify-between gap-3">
                 <span className="text-xs text-muted-foreground min-w-[120px] truncate">{String(t.terminal)}</span>
                 <div className="flex-1"><UtilizationBar pct={Number(t.utilizationPct)} /></div>
                 <span className="text-xs font-bold tabular-nums w-8 text-right">{String(t.utilizationPct)}%</span>
               </div>
             ))}</div></CardContent></Card>
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">TEU by Terminal</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={350}><BarChart data={data.terminalThroughput.filter((_, i) => i < 10).map(t => ({ terminal: String(t.terminal).length > 12 ? String(t.terminal).slice(0, 12) : String(t.terminal), teu: Number(t.teuHandled) }))} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis dataKey="terminal" type="category" tick={{ fontSize: 9 }} width={80} /><Tooltip /><Bar dataKey="teu" fill="#0369a1" radius={[0, 4, 4, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">TEU by Terminal</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={350}><BarChart data={data.terminalThroughput.filter((_, i) => i < 10).map(t => ({ terminal: String(t.terminal).length > 12 ? String(t.terminal).slice(0, 12) : String(t.terminal), teu: Number(t.teuHandled) }))} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis dataKey="terminal" type="category" tick={{ fontSize: 9 }} width={80} /><Tooltip /><Bar dataKey="teu" fill="#0369a1" radius={[0, 4, 4, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
           </div>
           <div className="rounded-lg border overflow-auto max-h-[400px]">
             <table className="w-full text-xs">
@@ -699,8 +699,8 @@ export default function MultiModalTransportCorridorView() {
         {/* ====== TAB 3: Carbon & Sustainability ====== */}
         <TabsContent value="3" className="space-y-4 mt-4">
           <div className="grid grid-cols-2 gap-4">
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">CO2 Emissions by Mode (g/t-km)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={280}><BarChart data={data.carbonByMode}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 9 }} angle={-20} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 11 }} unit="g" /><Tooltip /><Legend /><Bar dataKey="co2" fill="#0369a1" radius={[4, 4, 0, 0]} name="Actual" /><Bar dataKey="target" fill="#059669" radius={[4, 4, 0, 0]} name="Target" /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Corridor Carbon Scores</CardTitle></CardHeader><CardContent><div className="grid grid-cols-3 gap-3">{data.corridorRecords.filter((_, i) => i < 6).map((c, idx) => (
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">CO2 Emissions by Mode (g/t-km)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={280}><BarChart data={data.carbonByMode}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 9 }} angle={-20} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 11 }} unit="g" /><Tooltip /><Legend /><Bar dataKey="co2" fill="#0369a1" radius={[4, 4, 0, 0]} name="Actual" /><Bar dataKey="target" fill="#059669" radius={[4, 4, 0, 0]} name="Target" /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Corridor Carbon Scores</CardTitle></CardHeader><CardContent><div className="grid grid-cols-3 gap-3">{data.corridorRecords.filter((_, i) => i < 6).map((c, idx) => (
               <div key={idx} className="flex flex-col items-center p-2 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
                 <span className="text-[10px] text-muted-foreground truncate max-w-full">{String(c.corridorName).slice(0, 20)}</span>
                 <CarbonScoreGauge co2={Number(c.co2PerTonKm)} target={50} />
@@ -718,12 +718,12 @@ export default function MultiModalTransportCorridorView() {
               { label: "Cost Savings", value: formatINR(ak.avgCostSavings), icon: <TrendingUp className="w-4 h-4" /> },
               { label: "ROI", value: `${ak.roiPercent}%`, icon: <BarChart3 className="w-4 h-4" /> },
             ].map((item, idx) => (
-              <Card key={idx} className="mtc-kpi-card">
+              <Card key={idx} className="hover-lift-sm mtc-kpi-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-4">
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="inner-glow glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -765,7 +765,7 @@ export default function MultiModalTransportCorridorView() {
                     <td className="px-3 py-2 font-bold tabular-nums">{String(inc.affectedShipments)}</td>
                     <td className="px-3 py-2 font-semibold tabular-nums">{formatINR(Number(inc.financialImpact))}</td>
                     <td className="px-3 py-2 tabular-nums text-muted-foreground">{String(inc.reportedDate)}</td>
-                    <td className="px-3 py-2"><Button size="sm" variant="ghost" className="mtc-action-btn" onClick={(e) => { e.stopPropagation(); setDrawerRecord(inc as unknown as Record<string, unknown>); setDrawerOpen(true); }}><Eye className="w-3.5 h-3.5" /></Button></td>
+                    <td className="press-scale px-3 py-2"><Button size="sm" variant="ghost" className="mtc-action-btn" onClick={(e) => { e.stopPropagation(); setDrawerRecord(inc as unknown as Record<string, unknown>); setDrawerOpen(true); }}><Eye className="w-3.5 h-3.5" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -786,18 +786,18 @@ export default function MultiModalTransportCorridorView() {
               { label: "Customer NPS", value: ak.customerNPS, icon: <ShieldCheck className="w-4 h-4" /> },
               { label: "ROI", value: `${ak.roiPercent}%`, icon: <BarChart3 className="w-4 h-4" /> },
             ].map((item, idx) => (
-              <Card key={idx} className="mtc-kpi-card">
+              <Card key={idx} className="hover-lift-sm mtc-kpi-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-4">
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="inner-glow glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Comparison</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.analyticsCharts.modeComparison}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Cost" fill="#0369a1" radius={[4, 4, 0, 0]} /><Bar dataKey="Speed" fill="#d97706" radius={[4, 4, 0, 0]} /><Bar dataKey="Reliability" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Savings vs Investment</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.analyticsCharts.savingsTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Bar dataKey="Savings" fill="#059669" radius={[4, 4, 0, 0]} /><Bar dataKey="Investment" fill="#7c3aed" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Comparison</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.analyticsCharts.modeComparison}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Cost" fill="#0369a1" radius={[4, 4, 0, 0]} /><Bar dataKey="Speed" fill="#d97706" radius={[4, 4, 0, 0]} /><Bar dataKey="Reliability" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mtc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Savings vs Investment</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.analyticsCharts.savingsTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Bar dataKey="Savings" fill="#059669" radius={[4, 4, 0, 0]} /><Bar dataKey="Investment" fill="#7c3aed" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -842,9 +842,9 @@ export default function MultiModalTransportCorridorView() {
                     <div><span className="text-muted-foreground">Tracking Updates</span><div className="font-bold tabular-nums">{String(drawerRecord.trackingUpdates)}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="mtc-action-btn flex-1" onClick={() => { toast.success("Rerouted", `${drawerRecord.shipmentId} rerouted successfully`); setDrawerOpen(false); }}><Navigation2 className="w-3.5 h-3.5 mr-1" />Reroute</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Tracking Updated", `Fresh tracking for ${drawerRecord.shipmentId}`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5 mr-1" />Track</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.shipmentId} escalated`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale mtc-action-btn flex-1" onClick={() => { toast.success("Rerouted", `${drawerRecord.shipmentId} rerouted successfully`); setDrawerOpen(false); }}><Navigation2 className="w-3.5 h-3.5 mr-1" />Reroute</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Tracking Updated", `Fresh tracking for ${drawerRecord.shipmentId}`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5 mr-1" />Track</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mtc-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.shipmentId} escalated`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -869,9 +869,9 @@ export default function MultiModalTransportCorridorView() {
                     <div><span className="text-muted-foreground">Reported</span><div className="font-medium tabular-nums">{String(drawerRecord.reportedDate)}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="mtc-action-btn flex-1" onClick={() => { toast.success("Escalated", `${drawerRecord.incidentId} escalated to management`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5 mr-1" />Escalate</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Resolved", `${drawerRecord.incidentId} marked resolved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Resolve</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn" onClick={() => { toast.error("Claim Filed", `${drawerRecord.incidentId} insurance claim`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale mtc-action-btn flex-1" onClick={() => { toast.success("Escalated", `${drawerRecord.incidentId} escalated to management`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5 mr-1" />Escalate</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Resolved", `${drawerRecord.incidentId} marked resolved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Resolve</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mtc-action-btn" onClick={() => { toast.error("Claim Filed", `${drawerRecord.incidentId} insurance claim`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -895,9 +895,9 @@ export default function MultiModalTransportCorridorView() {
                     <div className="flex justify-between text-xs"><span className="text-muted-foreground">CO2/t-km</span><span className="font-semibold tabular-nums">{String(drawerRecord.co2PerTonKm)}g</span></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="mtc-action-btn flex-1" onClick={() => { toast.success("Optimized", `${drawerRecord.corridorName} optimization started`); setDrawerOpen(false); }}><TrendingUp className="w-3.5 h-3.5 mr-1" />Optimize</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Capacity Review", `Reviewing ${drawerRecord.corridorName}`); setDrawerOpen(false); }}><Gauge className="w-3.5 h-3.5 mr-1" />Review</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn" onClick={() => { toast.warning("Alert Set", `Alerts configured`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale mtc-action-btn flex-1" onClick={() => { toast.success("Optimized", `${drawerRecord.corridorName} optimization started`); setDrawerOpen(false); }}><TrendingUp className="w-3.5 h-3.5 mr-1" />Optimize</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Capacity Review", `Reviewing ${drawerRecord.corridorName}`); setDrawerOpen(false); }}><Gauge className="w-3.5 h-3.5 mr-1" />Review</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mtc-action-btn" onClick={() => { toast.warning("Alert Set", `Alerts configured`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}

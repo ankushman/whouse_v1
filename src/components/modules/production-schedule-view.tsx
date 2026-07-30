@@ -900,15 +900,15 @@ export function ProductionScheduleView() {
 
       {/* Action bar */}
       <div className="flex flex-wrap items-center gap-2">
-        <Button onClick={handleNewSchedule} className="ps-kpi-enter gap-2">
+        <Button onClick={handleNewSchedule} className="press-scale ps-kpi-enter gap-2">
           <Plus className="h-4 w-4" />
           New Schedule
         </Button>
-        <Button variant="outline" onClick={handleRefresh} className="btn-outline-animate gap-2">
+        <Button variant="outline" onClick={handleRefresh} className="press-scale btn-outline-animate gap-2">
           <RefreshCw className="h-4 w-4" />
           Refresh
         </Button>
-        <Button variant="outline" onClick={handleExport} className="btn-outline-animate gap-2">
+        <Button variant="outline" onClick={handleExport} className="press-scale btn-outline-animate gap-2">
           <Download className="h-4 w-4" />
           Export CSV
         </Button>
@@ -944,9 +944,9 @@ export function ProductionScheduleView() {
 
       {/* KPI cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-        <Card className="ps-kpi-enter relative overflow-hidden border-blue-200/50" style={{ animationDelay: "0ms" }}>
+        <Card className="hover-lift-sm ps-kpi-enter relative overflow-hidden border-blue-200/50" style={{ animationDelay: "0ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-blue-100/60 blur-lg" />
-          <CardContent className="glass-subtle p-4 relative">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Total Schedules</p>
               <Hash className="h-4 w-4 text-blue-600" />
@@ -955,9 +955,9 @@ export function ProductionScheduleView() {
             <p className="text-xs text-blue-700 mt-1">{kpis.active} active · {kpis.completed} done</p>
           </CardContent>
         </Card>
-        <Card className="ps-kpi-enter relative overflow-hidden border-emerald-200/50" style={{ animationDelay: "60ms" }}>
+        <Card className="hover-lift-sm ps-kpi-enter relative overflow-hidden border-emerald-200/50" style={{ animationDelay: "60ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-emerald-100/60 blur-lg" />
-          <CardContent className="glass-subtle p-4 relative">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">On-Time Rate</p>
               <CheckCircle2 className="h-4 w-4 text-emerald-600" />
@@ -968,9 +968,9 @@ export function ProductionScheduleView() {
             </p>
           </CardContent>
         </Card>
-        <Card className="ps-kpi-enter relative overflow-hidden border-rose-200/50" style={{ animationDelay: "120ms" }}>
+        <Card className="hover-lift-sm ps-kpi-enter relative overflow-hidden border-rose-200/50" style={{ animationDelay: "120ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-rose-100/60 blur-lg" />
-          <CardContent className="glass-subtle p-4 relative">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Delayed</p>
               <AlertTriangle className="h-4 w-4 text-rose-600" />
@@ -979,9 +979,9 @@ export function ProductionScheduleView() {
             <p className="text-xs text-rose-700 mt-1">{kpis.totalDelayDays}d total delay</p>
           </CardContent>
         </Card>
-        <Card className="ps-kpi-enter relative overflow-hidden border-amber-200/50" style={{ animationDelay: "180ms" }}>
+        <Card className="hover-lift-sm ps-kpi-enter relative overflow-hidden border-amber-200/50" style={{ animationDelay: "180ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-amber-100/60 blur-lg" />
-          <CardContent className="glass-subtle p-4 relative">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">On Hold</p>
               <CirclePause className="h-4 w-4 text-amber-600" />
@@ -990,9 +990,9 @@ export function ProductionScheduleView() {
             <p className="text-xs text-amber-700 mt-1">Awaiting review</p>
           </CardContent>
         </Card>
-        <Card className="ps-kpi-enter relative overflow-hidden border-violet-200/50" style={{ animationDelay: "240ms" }}>
+        <Card className="hover-lift-sm ps-kpi-enter relative overflow-hidden border-violet-200/50" style={{ animationDelay: "240ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-violet-100/60 blur-lg" />
-          <CardContent className="glass-subtle p-4 relative">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Avg Utilization</p>
               <Gauge className="h-4 w-4 text-violet-600" />
@@ -1001,9 +1001,9 @@ export function ProductionScheduleView() {
             <p className="text-xs text-violet-700 mt-1">Across all work centers</p>
           </CardContent>
         </Card>
-        <Card className="ps-kpi-enter relative overflow-hidden border-orange-200/50" style={{ animationDelay: "300ms" }}>
+        <Card className="hover-lift-sm ps-kpi-enter relative overflow-hidden border-orange-200/50" style={{ animationDelay: "300ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-orange-100/60 blur-lg" />
-          <CardContent className="glass-subtle p-4 relative">
+          <CardContent className="inner-glow glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Critical</p>
               <FlagTriangleRight className="h-4 w-4 text-orange-600" />
@@ -1016,7 +1016,7 @@ export function ProductionScheduleView() {
 
       {/* Charts row */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card className="ps-chart-enter">
+        <Card className="hover-lift-sm ps-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">6-Month Schedule Trend</CardTitle>
             <CardDescription className="text-xs">Scheduled vs completed production runs per month</CardDescription>
@@ -1045,7 +1045,7 @@ export function ProductionScheduleView() {
           </CardContent>
         </Card>
 
-        <Card className="ps-chart-enter">
+        <Card className="hover-lift-sm ps-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Schedules by Status</CardTitle>
             <CardDescription className="text-xs">Distribution across 8 lifecycle stages</CardDescription>
@@ -1064,7 +1064,7 @@ export function ProductionScheduleView() {
           </CardContent>
         </Card>
 
-        <Card className="ps-chart-enter">
+        <Card className="hover-lift-sm ps-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Schedules by Type</CardTitle>
             <CardDescription className="text-xs">Production vs rework vs prototype vs maintenance vs sample</CardDescription>
@@ -1085,7 +1085,7 @@ export function ProductionScheduleView() {
           </CardContent>
         </Card>
 
-        <Card className="ps-chart-enter">
+        <Card className="hover-lift-sm ps-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Work Center Utilization</CardTitle>
             <CardDescription className="text-xs">Capacity utilization % across active work centers</CardDescription>
@@ -1194,7 +1194,7 @@ export function ProductionScheduleView() {
 
       {/* Gantt or List view */}
       {view === "gantt" ? (
-        <Card className="ps-table-card overflow-hidden">
+        <Card className="hover-lift-sm ps-table-card overflow-hidden">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <GanttChartSquare className="h-4 w-4 text-violet-600" />
@@ -1204,13 +1204,13 @@ export function ProductionScheduleView() {
               Planning horizon: 2026-07-12 to 2026-08-08 · Click any bar to open schedule detail · Today marked with red line
             </CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle p-0">
+          <CardContent className="inner-glow glass-subtle p-0">
             <GanttChart schedules={filteredSchedules} onBarClick={handleBarClick} selectedId={selectedSchedule?.id || null} />
           </CardContent>
         </Card>
       ) : (
-        <Card className="card-crud-lift ps-table-card">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm card-crud-lift ps-table-card">
+          <CardContent className="inner-glow glass-subtle p-0">
             <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="bg-muted/40 hover:bg-muted/40">
@@ -1560,7 +1560,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Production Summary</CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <CardContent className="inner-glow glass-subtle grid grid-cols-2 gap-4 sm:grid-cols-4">
                   <div className="ps-stat-enter space-y-1">
                     <p className="text-xs text-muted-foreground">Order Qty</p>
                     <p className="text-xl font-bold tabular-nums">{fmtNum(schedule.orderQty)}</p>
@@ -1595,7 +1595,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Schedule Window</CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <CardContent className="inner-glow glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-md border p-3">
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Calendar className="h-3 w-3" /> Planned Start
@@ -1643,7 +1643,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Traceability Links</CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <CardContent className="inner-glow glass-subtle grid grid-cols-1 gap-3 sm:grid-cols-3">
                   <button
                     onClick={() => toast.info("Navigate", `Opening Work Order: ${schedule.woRef}`)}
                     className="ps-card-enter rounded-md border border-blue-200/50 bg-blue-50/30 p-3 text-left hover:border-blue-400 hover:shadow-sm"
@@ -1684,8 +1684,8 @@ function ScheduleDetailDrawer({
               </Card>
 
               {/* Notes */}
-              <Card className="border-amber-200/50 bg-amber-50/20">
-                <CardContent className="glass-subtle p-4">
+              <Card className="hover-lift-sm border-amber-200/50 bg-amber-50/20">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="mt-0.5 h-4 w-4 text-amber-600" />
                     <div>
@@ -1912,7 +1912,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Capacity Summary</CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <CardContent className="inner-glow glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-md border p-3 bg-violet-50/30">
                     <p className="text-xs text-muted-foreground">Total Planned Hours</p>
                     <p className="mt-1 text-lg font-bold tabular-nums">{schedule.plannedHours}h</p>
@@ -1942,42 +1942,42 @@ function ScheduleDetailDrawer({
               Created: <span className="font-mono">{schedule.createdAt}</span>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={handleExport} className="btn-outline-animate gap-1">
+              <Button variant="outline" size="sm" onClick={handleExport} className="press-scale btn-outline-animate gap-1">
                 <Download className="h-3 w-3" />
                 Export
               </Button>
               {schedule.status === "planned" && (
-                <Button size="sm" onClick={() => handleAction("release")} className="gap-1">
+                <Button size="sm" onClick={() => handleAction("release")} className="press-scale gap-1">
                   <ArrowRightCircle className="h-3 w-3" />
                   Release
                 </Button>
               )}
               {schedule.status === "released" && (
-                <Button size="sm" onClick={() => handleAction("start")} className="gap-1">
+                <Button size="sm" onClick={() => handleAction("start")} className="press-scale gap-1">
                   <Play className="h-3 w-3" />
                   Start
                 </Button>
               )}
               {(schedule.status === "started" || schedule.status === "in-progress") && (
-                <Button variant="outline" size="sm" onClick={() => handleAction("hold")} className="btn-outline-animate gap-1 border-amber-300 text-amber-700">
+                <Button variant="outline" size="sm" onClick={() => handleAction("hold")} className="press-scale btn-outline-animate gap-1 border-amber-300 text-amber-700">
                   <CirclePause className="h-3 w-3" />
                   Hold
                 </Button>
               )}
               {schedule.status === "on-hold" && (
-                <Button size="sm" onClick={() => handleAction("resume")} className="gap-1">
+                <Button size="sm" onClick={() => handleAction("resume")} className="press-scale gap-1">
                   <Play className="h-3 w-3" />
                   Resume
                 </Button>
               )}
               {schedule.status === "delayed" && (
-                <Button variant="outline" size="sm" onClick={() => handleAction("expedite")} className="btn-outline-animate gap-1 border-rose-300 text-rose-700">
+                <Button variant="outline" size="sm" onClick={() => handleAction("expedite")} className="press-scale btn-outline-animate gap-1 border-rose-300 text-rose-700">
                   <AlertTriangle className="h-3 w-3" />
                   Expedite
                 </Button>
               )}
               {schedule.status === "in-progress" && schedule.progressPct >= 95 && (
-                <Button size="sm" onClick={() => handleAction("complete")} className="gap-1">
+                <Button size="sm" onClick={() => handleAction("complete")} className="press-scale gap-1">
                   <CheckCircle2 className="h-3 w-3" />
                   Complete
                 </Button>

@@ -240,19 +240,19 @@ export default function IntermodalTransportHubView() {
   }
 
   const SH = ({ label, field }: { label: string; field: any }) => (
-    <TableHead className="cursor-pointer select-none text-[11px]" onClick={() => { if (sortBy === field) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortBy(field); setSortDir("asc") } }}>
+    <TableHead className="underline-animated cursor-pointer select-none text-[11px]" onClick={() => { if (sortBy === field) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortBy(field); setSortDir("asc") } }}>
       <span className="ith-sort-head flex items-center gap-1">{label} {sortBy === field && (sortDir === "asc" ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />)}</span>
     </TableHead>
   )
 
   const ActBtn = ({ d, t }: { d: any; t: string }) => (
-    <Button variant="ghost" size="sm" className="ith-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(d); setDrawerType(t) }}><Activity className="h-3 w-3 mr-1" />View</Button>
+    <Button variant="ghost" size="sm" className="press-scale ith-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(d); setDrawerType(t) }}><Activity className="h-3 w-3 mr-1" />View</Button>
   )
 
   const DrawerActions = ({ id, name }: { id: string; name: string }) => (
     <div className="flex gap-2 pt-2">
       {[{ label: "Edit", icon: Zap }, { label: "Details", icon: Target }, { label: "Report", icon: BarChart3 }].map(a => (
-        <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate ith-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+        <Button key={a.label} variant="outline" size="sm" className="press-scale btn-outline-animate ith-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
       ))}
     </div>
   )
@@ -271,14 +271,14 @@ export default function IntermodalTransportHubView() {
       <div className="ith-dashboard space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {kpis.map(k => (
-            <Card key={k.label} className="glass-subtle ith-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+            <Card key={k.label} className="inner-glow hover-lift-sm glass-subtle ith-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
               <div className={cn("ith-kpi-icon p-2 rounded-lg", k.bg)}><k.icon className={cn("h-4 w-4", k.color)} /></div>
               <div><p className="text-[10px] text-muted-foreground uppercase tracking-wide">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
             </CardContent></Card>
           ))}
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Throughput (tons)</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Throughput (tons)</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><AreaChart data={data.monthlyThroughput}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
               <Area type="monotone" dataKey="roadTons" stackId="1" stroke={CC.orange} fill={CC.orange} fillOpacity={0.6} name="Road" />
@@ -286,21 +286,21 @@ export default function IntermodalTransportHubView() {
               <Area type="monotone" dataKey="portTons" stackId="1" stroke={CC.cyan} fill={CC.cyan} fillOpacity={0.6} name="Port" />
             </AreaChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Hub Type Distribution</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Hub Type Distribution</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><PieChart>
               <Pie data={data.hubTypeData} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value" paddingAngle={3}>
                 {[CC.blue, CC.cyan, CC.orange, CC.purple, CC.emerald].map((c, i) => <Cell key={i} fill={c} />)}
               </Pie><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
             </PieChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Share (%)</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Share (%)</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><BarChart data={data.modeShareData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="mode" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} />
               <Bar dataKey="share" radius={[4, 4, 0, 0]}>{[CC.orange, CC.blue, CC.cyan, CC.purple, CC.teal].map((c, i) => <Cell key={i} fill={c} />)}</Bar>
             </BarChart></ResponsiveContainer>
           </CardContent></Card>
         </div>
-        <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Hub Performance Radar</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Hub Performance Radar</CardTitle></CardHeader><CardContent>
           <ResponsiveContainer width="100%" height={260}><RadarChart data={data.hubRadarData}>
             <PolarGrid stroke="#e5e7eb" /><PolarAngleAxis dataKey="hub" tick={{ fontSize: 10 }} /><PolarRadiusAxis tick={{ fontSize: 9 }} />
             <Radar name="Throughput" dataKey="throughput" stroke={CC.blue} fill={CC.blue} fillOpacity={0.2} />
@@ -393,7 +393,7 @@ export default function IntermodalTransportHubView() {
     }), sortBy)
     return (
       <div className="ith-scheduling-tab space-y-4">
-        <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Weekly Schedule Overview</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Weekly Schedule Overview</CardTitle></CardHeader><CardContent>
           <ResponsiveContainer width="100%" height={200}><BarChart data={data.weeklyScheduleData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
             <Bar dataKey="scheduled" fill={CC.blue} radius={[2, 2, 0, 0]} name="Scheduled" /><Bar dataKey="completed" fill={CC.green} radius={[2, 2, 0, 0]} name="Completed" /><Bar dataKey="delayed" fill={CC.rose} radius={[2, 2, 0, 0]} name="Delayed" />
@@ -434,19 +434,19 @@ export default function IntermodalTransportHubView() {
     return (
       <div className="ith-cost-tab space-y-4">
         <div className="grid md:grid-cols-3 gap-4">
-          <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost by Mode (\u20b9/ton-km)</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost by Mode (\u20b9/ton-km)</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={200}><BarChart data={data.costByModeData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="mode" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} />
               <Bar dataKey="cost" radius={[4, 4, 0, 0]}>{[CC.orange, CC.blue, CC.cyan, CC.teal, CC.purple].map((c, i) => <Cell key={i} fill={c} />)}</Bar>
             </BarChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Trend (\u20b9/ton-km)</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Trend (\u20b9/ton-km)</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={200}><LineChart data={data.costTrendData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
               <Line type="monotone" dataKey="road" stroke={CC.orange} strokeWidth={2} name="Road" /><Line type="monotone" dataKey="rail" stroke={CC.blue} strokeWidth={2} name="Rail" /><Line type="monotone" dataKey="coastal" stroke={CC.cyan} strokeWidth={2} name="Coastal" />
             </LineChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="glass-subtle ith-comparison-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Comparison</CardTitle></CardHeader><CardContent className="space-y-2">
+          <Card className="inner-glow hover-lift-sm glass-subtle ith-comparison-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Comparison</CardTitle></CardHeader><CardContent className="space-y-2">
             {[{ m: "Road", cost: "\u20b93.2/t-km", time: "2-5 days", rel: "88%" }, { m: "Rail", cost: "\u20b92.1/t-km", time: "3-7 days", rel: "92%" }, { m: "Coastal", cost: "\u20b91.5/t-km", time: "5-10 days", rel: "85%" }].map(c => (
               <div key={c.m} className="ith-comparison-item flex justify-between items-center p-2 rounded-lg bg-muted/50 text-xs">
                 <span className="font-medium">{c.m}</span><div className="flex gap-4 text-[10px] text-muted-foreground"><span>{c.cost}</span><span>{c.time}</span><span>{c.rel}</span></div>
@@ -468,7 +468,7 @@ export default function IntermodalTransportHubView() {
             <TableCell className="numeric-cell text-xs">{c.reliability}%</TableCell><TableCell className="text-xs font-medium">{fmtINR(c.totalCost)}</TableCell><ActBtn d={c} t="cost" />
           </TableRow>
         ))}</TableBody></Table></div>
-        <Card className="glass-subtle ith-savings-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+        <Card className="inner-glow hover-lift-sm glass-subtle ith-savings-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
           <TrendingUp className="h-5 w-5 text-emerald-600" /><div><p className="text-sm font-medium">Potential Savings Opportunity</p><p className="text-xs text-muted-foreground">{rows.filter(r => r.reliability > 90).length} routes with &gt;90% reliability eligible for volume discounts</p></div>
         </CardContent></Card>
       </div>
@@ -486,13 +486,13 @@ export default function IntermodalTransportHubView() {
     return (
       <div className="ith-perf-tab space-y-4">
         <div className="grid md:grid-cols-2 gap-4">
-          <Card className="ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly SLA Compliance</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm ith-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly SLA Compliance</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><LineChart data={data.slaTrendData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis domain={[80, 100]} tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
               <Line type="monotone" dataKey="target" stroke={CC.rose} strokeDasharray="5 5" strokeWidth={2} name="Target" /><Line type="monotone" dataKey="actual" stroke={CC.cyan} strokeWidth={2} dot={{ r: 3 }} name="Actual" />
             </LineChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="glass-subtle ith-summary-card border-border/60"><CardContent className="p-4 space-y-3">
+          <Card className="inner-glow hover-lift-sm glass-subtle ith-summary-card border-border/60"><CardContent className="p-4 space-y-3">
             <h3 className="text-sm font-medium">SLA Summary</h3>
             {[
               { label: "Hubs >95% On-Time", value: data.performance.filter(p => p.onTime >= 95).length, color: "text-emerald-600" },
@@ -572,7 +572,7 @@ export default function IntermodalTransportHubView() {
             { label: "Throughput", value: `${drawerData.throughput.toLocaleString()} tons` },
             { label: "Dwell Time", value: `${drawerData.dwellTime}h` },
             { label: "Area", value: `${(drawerData.area / 1000).toFixed(0)}K sqft` },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
           <div><p className="text-[10px] text-muted-foreground mb-1">Capacity Utilization</p><CapacityBar value={drawerData.capacity} /><p className="text-[10px] text-muted-foreground mt-0.5">{drawerData.capacity}%</p></div>
           <div className="flex items-center gap-2"><span className="text-xs text-muted-foreground">Connectivity:</span><ConnectivityScore score={drawerData.connectivity} /></div>
           <InfoGrid items={[["Region", drawerData.region], ["Manager", drawerData.manager], ["Established", drawerData.established], ["Rail", drawerData.railConnected ? "Yes" : "No"], ["Port", drawerData.portConnected ? "Yes" : "No"], ["Type", drawerData.type], ["Status", drawerData.status], ["ID", drawerData.id]]} />
@@ -586,12 +586,12 @@ export default function IntermodalTransportHubView() {
           <ModeBadge mode={drawerData.mode} /><SBadge status={drawerData.status} /><SizeBadge size={drawerData.size} /><PriorityBadge priority={drawerData.priority} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><RouteTimeline origin={drawerData.origin} transfer={drawerData.transferHub} destination={drawerData.destination} mode={drawerData.mode} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><RouteTimeline origin={drawerData.origin} transfer={drawerData.transferHub} destination={drawerData.destination} mode={drawerData.mode} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Weight", value: `${drawerData.weight}t` },
             { label: "In Transit", value: `${drawerData.daysInTransit}d` },
             { label: "Shipper", value: drawerData.shipper },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-cyan-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-cyan-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["ETD", fmtDate(drawerData.etd)], ["ETA", fmtDate(drawerData.eta)], ["Mode", drawerData.mode], ["Size", drawerData.size], ["Priority", drawerData.priority], ["Status", drawerData.status]]} />
           <DrawerActions id={drawerData.id} name={drawerData.id} />
         </div></>}
@@ -603,12 +603,12 @@ export default function IntermodalTransportHubView() {
           <TypeBadge type={drawerData.type} /><SBadge status={drawerData.status} /><PriorityBadge priority={drawerData.priority} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><p className="text-sm font-medium">{drawerData.route}</p><div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground"><MapPin className="h-3 w-3" />{fmtDate(drawerData.departure)} <ArrowRight className="h-3 w-3" /><MapPin className="h-3 w-3" />{fmtDate(drawerData.arrival)}</div></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><p className="text-sm font-medium">{drawerData.route}</p><div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground"><MapPin className="h-3 w-3" />{fmtDate(drawerData.departure)} <ArrowRight className="h-3 w-3" /><MapPin className="h-3 w-3" />{fmtDate(drawerData.arrival)}</div></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Containers", value: drawerData.containers },
             { label: "Capacity", value: `${drawerData.capacityUtil}%` },
             { label: "Mode", value: drawerData.mode },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Type", drawerData.type], ["Status", drawerData.status], ["Departure", fmtDate(drawerData.departure)], ["Arrival", fmtDate(drawerData.arrival)], ["Priority", drawerData.priority], ["Mode", drawerData.mode]]} />
           <DrawerActions id={drawerData.id} name={drawerData.id} />
         </div></>}
@@ -620,12 +620,12 @@ export default function IntermodalTransportHubView() {
           <ModeBadge mode={drawerData.mode} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="border-border/60"><CardHeader className="pb-1"><CardTitle className="text-xs">Cost Breakdown</CardTitle></CardHeader><CardContent><CostBreakdown data={drawerData} /></CardContent></Card>
+          <Card className="hover-lift-sm border-border/60"><CardHeader className="pb-1"><CardTitle className="text-xs">Cost Breakdown</CardTitle></CardHeader><CardContent><CostBreakdown data={drawerData} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Total Cost", value: fmtINR(drawerData.totalCost) },
             { label: "Reliability", value: `${drawerData.reliability}%` },
             { label: "Transit", value: `${drawerData.transitDays}d` },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-orange-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-orange-700">{m.value}</p></CardContent></Card>))}</div>
           <DrawerActions id={drawerData.id} name={drawerData.id} />
         </div></>}
       </SheetContent></Sheet>
@@ -645,7 +645,7 @@ export default function IntermodalTransportHubView() {
             { label: "Throughput", value: drawerData.throughput.toLocaleString() },
             { label: "Region", value: drawerData.region },
             { label: "Status", value: drawerData.status },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Hub", drawerData.hub], ["On-Time", `${drawerData.onTime}%`], ["Dwell Time", `${drawerData.dwellTime}h`], ["Damage Rate", `${drawerData.damageRate}%`]]} />
           <DrawerActions id={drawerData.id} name={drawerData.hub} />
         </div></>}

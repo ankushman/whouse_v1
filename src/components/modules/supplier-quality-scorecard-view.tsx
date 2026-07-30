@@ -474,7 +474,7 @@ export function SupplierQualityScorecardView() {
               )}
               style={{ animationDelay: `${i * 70}ms` }}
             >
-              <CardContent className="glass-subtle p-3">
+              <CardContent className="inner-glow glass-subtle p-3">
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{kpi.label}</p>
                   <div className={cn("rounded-md p-1", kpi.bg)}>
@@ -495,7 +495,7 @@ export function SupplierQualityScorecardView() {
 
       {/* Charts row 1: defect trend + grade distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <Card className="lg:col-span-2 sqs-chart-enter">
+        <Card className="hover-lift-sm lg:col-span-2 sqs-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -512,7 +512,7 @@ export function SupplierQualityScorecardView() {
               </Badge>
             </div>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={defectChartConfig} className="h-[200px] w-full">
               <AreaChart data={defectTrend30d} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
                 <defs>
@@ -532,7 +532,7 @@ export function SupplierQualityScorecardView() {
           </CardContent>
         </Card>
 
-        <Card className="sqs-chart-enter">
+        <Card className="hover-lift-sm sqs-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <Award className="h-4 w-4 text-violet-500" />
@@ -540,7 +540,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">{totalSuppliers} suppliers by current grade</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={pieConfig} className="h-[200px] w-full">
               <PieChart>
                 <Pie
@@ -576,7 +576,7 @@ export function SupplierQualityScorecardView() {
       {/* Charts row 2: Top performers + At-risk + score comparison */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Top 5 performers */}
-        <Card className="sqs-chart-enter">
+        <Card className="hover-lift-sm sqs-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <Medal className="h-4 w-4 text-amber-500" />
@@ -584,7 +584,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">Highest quality scores this quarter</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0 space-y-2">
+          <CardContent className="inner-glow glass-subtle pt-0 space-y-2">
             {topPerformers.map((s, i) => {
               const initials = s.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
               return (
@@ -624,7 +624,7 @@ export function SupplierQualityScorecardView() {
         </Card>
 
         {/* At-risk suppliers */}
-        <Card className="sqs-chart-enter">
+        <Card className="hover-lift-sm sqs-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-red-500" />
@@ -632,7 +632,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">{atRiskSuppliers.length} suppliers need intervention</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0 space-y-2">
+          <CardContent className="inner-glow glass-subtle pt-0 space-y-2">
             {atRiskSuppliers.length === 0 ? (
               <div className="text-xs text-muted-foreground text-center py-4">No at-risk suppliers</div>
             ) : atRiskSuppliers.map((s, i) => {
@@ -668,7 +668,7 @@ export function SupplierQualityScorecardView() {
         </Card>
 
         {/* Score comparison chart */}
-        <Card className="sqs-chart-enter">
+        <Card className="hover-lift-sm sqs-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <Crosshair className="h-4 w-4 text-blue-500" />
@@ -676,7 +676,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">Top 10 suppliers by spend</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={scoreComparisonConfig} className="h-[200px] w-full">
               <BarChart data={scoreComparison} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
@@ -692,7 +692,7 @@ export function SupplierQualityScorecardView() {
       </div>
 
       {/* Category COPQ breakdown */}
-      <Card className="sqs-chart-enter">
+      <Card className="hover-lift-sm sqs-chart-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm flex items-center gap-2">
             <Flame className="h-4 w-4 text-orange-500" />
@@ -702,7 +702,7 @@ export function SupplierQualityScorecardView() {
             Where quality issues are costing the most — focus areas for FY25 QA programs
           </CardDescription>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
             {categoryDistribution.map((cat) => {
               const maxCopq = Math.max(...categoryDistribution.map(c => c.copq))
@@ -751,13 +751,13 @@ export function SupplierQualityScorecardView() {
                   className="pl-7 h-8 text-xs w-48 sqs-search-focus"
                 />
               </div>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-xs" onClick={handleRefresh}>
                 <RefreshCw className="h-3 w-3 mr-1" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-xs" onClick={handleExport}>
                 <Download className="h-3 w-3 mr-1" /> Export
               </Button>
-              <Button size="sm" className="h-8 text-xs" onClick={handleNewAudit}>
+              <Button size="sm" className="press-scale h-8 text-xs" onClick={handleNewAudit}>
                 <ClipboardCheck className="h-3 w-3 mr-1" /> Schedule Audit
               </Button>
             </div>
@@ -839,7 +839,7 @@ export function SupplierQualityScorecardView() {
             </Select>
           </div>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="rounded-md border overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1300,10 +1300,10 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-[10px]" onClick={handleCall}>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-7 text-[10px]" onClick={handleCall}>
                       <Phone className="h-3 w-3 mr-1" /> Call
                     </Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-[10px]" onClick={handleEmail}>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-7 text-[10px]" onClick={handleEmail}>
                       <Mail className="h-3 w-3 mr-1" /> Email
                     </Button>
                   </div>
@@ -1628,7 +1628,7 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
                 ))}
               </div>
               <Separator className="my-3" />
-              <Button variant="outline" size="sm" className="btn-outline-animate w-full h-7 text-[10px]" onClick={handleScheduleAudit}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate w-full h-7 text-[10px]" onClick={handleScheduleAudit}>
                 <Calendar className="h-3 w-3 mr-1" /> Schedule Next Audit
               </Button>
             </div>
@@ -1716,15 +1716,15 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
         </div>
 
         <SheetFooter className="border-t px-4 py-3 flex-row gap-2">
-          <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={handleExportScorecard}>
+          <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-xs flex-1" onClick={handleExportScorecard}>
             <Download className="h-3 w-3 mr-1" /> Export Scorecard
           </Button>
           {(supplier.grade === "critical" || supplier.grade === "watch") && (
-            <Button variant="destructive" size="sm" className="h-8 text-xs flex-1" onClick={handleEscalate}>
+            <Button variant="destructive" size="sm" className="press-scale h-8 text-xs flex-1" onClick={handleEscalate}>
               <AlertTriangle className="h-3 w-3 mr-1" /> Escalate
             </Button>
           )}
-          <Button size="sm" className="h-8 text-xs flex-1" onClick={handleAcknowledge}>
+          <Button size="sm" className="press-scale h-8 text-xs flex-1" onClick={handleAcknowledge}>
             <CheckCircle2 className="h-3 w-3 mr-1" /> Acknowledge
           </Button>
         </SheetFooter>

@@ -577,7 +577,7 @@ function KPIBox({ title, value, subValue, trend, trendLabel, icon: Icon, color, 
     >
       <div className={cn("absolute inset-x-0 top-0 h-1 bg-gradient-to-r", c.gradient, "to-transparent")} />
       <div className={cn("absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-30 blur-2xl", c.bg)} />
-      <CardContent className="glass-subtle p-4">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1">
             <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{title}</p>
@@ -831,7 +831,7 @@ export function BillOfMaterialsView() {
       {/* Charts row */}
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         {/* 6-month revision activity */}
-        <Card className="bom-chart-enter">
+        <Card className="hover-lift-sm bom-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -845,7 +845,7 @@ export function BillOfMaterialsView() {
               </Badge>
             </div>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={revisionActivityConfig} className="h-[220px] w-full">
               <AreaChart data={REVISION_ACTIVITY} margin={{ top: 8, right: 12, left: -4, bottom: 0 }}>
                 <defs>
@@ -873,12 +873,12 @@ export function BillOfMaterialsView() {
         </Card>
 
         {/* BOM by category donut */}
-        <Card className="bom-chart-enter">
+        <Card className="hover-lift-sm bom-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">BOMs by Category</CardTitle>
             <CardDescription className="text-xs">{BOMS.length} BOMs across 6 categories</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <div className="flex flex-col items-center gap-2 sm:flex-row">
               <ChartContainer config={categoryConfig} className="h-[200px] w-full sm:w-1/2">
                 <PieChart>
@@ -916,12 +916,12 @@ export function BillOfMaterialsView() {
         </Card>
 
         {/* Cost variance by category */}
-        <Card className="bom-chart-enter">
+        <Card className="hover-lift-sm bom-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Cost Variance by Category</CardTitle>
             <CardDescription className="text-xs">Avg standard vs actual cost (₹ Lakh)</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={costVarianceConfig} className="h-[200px] w-full">
               <BarChart data={COST_VARIANCE_BY_CAT} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" vertical={false} />
@@ -937,12 +937,12 @@ export function BillOfMaterialsView() {
         </Card>
 
         {/* Parts usage Pareto */}
-        <Card className="bom-chart-enter">
+        <Card className="hover-lift-sm bom-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Top 8 Parts Usage</CardTitle>
             <CardDescription className="text-xs">Most frequently used parts across all BOMs</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer
               config={{
                 count: { label: "Usage Count", color: "#10b981" },
@@ -970,7 +970,7 @@ export function BillOfMaterialsView() {
       </div>
 
       {/* Master Table Card */}
-      <Card className="bom-table-card">
+      <Card className="hover-lift-sm bom-table-card">
         <CardHeader className="pb-3">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
@@ -1011,13 +1011,13 @@ export function BillOfMaterialsView() {
                   ))}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-9" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-9" onClick={handleRefresh}>
                 <RefreshCw className="mr-1.5 h-3.5 w-3.5" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-9" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-9" onClick={handleExport}>
                 <Download className="mr-1.5 h-3.5 w-3.5" /> Export
               </Button>
-              <Button size="sm" className="h-9" onClick={handleNewBOM}>
+              <Button size="sm" className="press-scale h-9" onClick={handleNewBOM}>
                 <FilePlus className="mr-1.5 h-3.5 w-3.5" /> New BOM
               </Button>
             </div>
@@ -1054,7 +1054,7 @@ export function BillOfMaterialsView() {
           </div>
         </CardHeader>
 
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1381,26 +1381,26 @@ function BOMDetailDrawer({ bom, open, onOpenChange }: DetailDrawerProps) {
               Last Modified: <span className="font-medium text-foreground">{bom.lastModified}</span>
             </div>
             <div className="flex gap-1.5">
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="mr-1 h-3.5 w-3.5" /> Export
               </Button>
               {bom.status === "in-review" && (
                 <>
-                  <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-red-600 hover:text-red-700" onClick={handleReject}>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-red-600 hover:text-red-700" onClick={handleReject}>
                     <XCircle className="mr-1 h-3.5 w-3.5" /> Reject
                   </Button>
-                  <Button size="sm" className="h-8" onClick={handleApprove}>
+                  <Button size="sm" className="press-scale h-8" onClick={handleApprove}>
                     <CheckCircle2 className="mr-1 h-3.5 w-3.5" /> Approve
                   </Button>
                 </>
               )}
               {bom.status === "approved" && (
-                <Button size="sm" className="h-8" onClick={handleRelease}>
+                <Button size="sm" className="press-scale h-8" onClick={handleRelease}>
                   <FileCheck className="mr-1 h-3.5 w-3.5" /> Release
                 </Button>
               )}
               {!["draft", "in-review", "approved"].includes(bom.status) && (
-                <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={() => toast.info("New revision", `Started new revision for ${bom.id}`)}>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={() => toast.info("New revision", `Started new revision for ${bom.id}`)}>
                   <GitBranch className="mr-1 h-3.5 w-3.5" /> New Revision
                 </Button>
               )}
@@ -1428,11 +1428,11 @@ function OverviewTab({ bom, totalCost, buyParts, makeParts, phantomParts, avgLea
     <div className="space-y-3">
       {/* Ownership + Lifecycle */}
       <div className="bom-card-enter grid gap-3 md:grid-cols-2">
-        <Card className="overflow-hidden">
+        <Card className="hover-lift-sm overflow-hidden">
           <CardHeader className="bg-muted/40 pb-2">
             <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground">Ownership</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-3">
+          <CardContent className="inner-glow glass-subtle p-3">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <Avatar className="h-7 w-7">
@@ -1471,11 +1471,11 @@ function OverviewTab({ bom, totalCost, buyParts, makeParts, phantomParts, avgLea
           </CardContent>
         </Card>
 
-        <Card className="overflow-hidden">
+        <Card className="hover-lift-sm overflow-hidden">
           <CardHeader className="bg-muted/40 pb-2">
             <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground">Lifecycle</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-3">
+          <CardContent className="inner-glow glass-subtle p-3">
             <div className="grid grid-cols-2 gap-2 text-[11px]">
               <div>
                 <div className="text-muted-foreground">Created By</div>
@@ -1509,12 +1509,12 @@ function OverviewTab({ bom, totalCost, buyParts, makeParts, phantomParts, avgLea
       </div>
 
       {/* Cost analysis */}
-      <Card className="bom-card-enter">
+      <Card className="hover-lift-sm bom-card-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">Cost Analysis</CardTitle>
           <CardDescription className="text-[11px]">Standard vs actual cost with variance breakdown</CardDescription>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="grid grid-cols-3 gap-2 text-center">
             <div className="rounded-lg border p-2">
               <CircleDollarSign className="mx-auto mb-1 h-4 w-4 text-blue-600 dark:text-blue-400" />
@@ -1538,11 +1538,11 @@ function OverviewTab({ bom, totalCost, buyParts, makeParts, phantomParts, avgLea
       </Card>
 
       {/* Source breakdown */}
-      <Card className="bom-card-enter">
+      <Card className="hover-lift-sm bom-card-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">Part Source Breakdown</CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="grid grid-cols-3 gap-2">
             <div className="rounded-lg border border-blue-200 bg-blue-50 p-2 text-center dark:border-blue-800 dark:bg-blue-950/30">
               <div className="text-[10px] uppercase text-muted-foreground">Buy</div>
@@ -1564,11 +1564,11 @@ function OverviewTab({ bom, totalCost, buyParts, makeParts, phantomParts, avgLea
       </Card>
 
       {/* Description */}
-      <Card className="bom-card-enter">
+      <Card className="hover-lift-sm bom-card-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">Description</CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <p className="text-xs text-muted-foreground">{bom.description}</p>
           {bom.notes && (
             <div className="mt-2 flex items-start gap-2 rounded border bg-amber-50/50 p-2 dark:bg-amber-950/20">
@@ -1584,12 +1584,12 @@ function OverviewTab({ bom, totalCost, buyParts, makeParts, phantomParts, avgLea
 
 function PartsTreeTab({ bom }: { bom: BillOfMaterials }) {
   return (
-    <Card className="bom-card-enter">
+    <Card className="hover-lift-sm bom-card-enter">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm">Parts Tree ({bom.parts.length})</CardTitle>
         <CardDescription className="text-[11px]">Line items with quantities, costs, and sources</CardDescription>
       </CardHeader>
-      <CardContent className="glass-subtle pt-0">
+      <CardContent className="inner-glow glass-subtle pt-0">
         <div className="overflow-x-auto">
           <Table className="table-hover-highlight">
             <TableHeader>
@@ -1672,8 +1672,8 @@ function PartsTreeTab({ bom }: { bom: BillOfMaterials }) {
 function RevisionsTab({ bom }: { bom: BillOfMaterials }) {
   if (bom.revisions.length === 0) {
     return (
-      <Card className="bom-card-enter">
-        <CardContent className="glass-subtle flex flex-col items-center justify-center py-12">
+      <Card className="hover-lift-sm bom-card-enter">
+        <CardContent className="inner-glow glass-subtle flex flex-col items-center justify-center py-12">
           <History className="mb-2 h-10 w-10 text-muted-foreground/40" />
           <p className="text-sm font-medium">No revisions yet</p>
           <p className="text-[11px] text-muted-foreground">Revision history will appear here as the BOM evolves</p>
@@ -1682,12 +1682,12 @@ function RevisionsTab({ bom }: { bom: BillOfMaterials }) {
     )
   }
   return (
-    <Card className="bom-card-enter">
+    <Card className="hover-lift-sm bom-card-enter">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm">Revision History</CardTitle>
         <CardDescription className="text-[11px]">{bom.revisions.length} revisions · current: Rev {bom.revision}</CardDescription>
       </CardHeader>
-      <CardContent className="glass-subtle pt-0">
+      <CardContent className="inner-glow glass-subtle pt-0">
         <div className="space-y-2">
           {bom.revisions.slice().reverse().map((rev, idx) => {
             const statusVisual = rev.status === "approved"
@@ -1753,12 +1753,12 @@ function CostRollupTab({ bom }: { bom: BillOfMaterials }) {
     { extended: 0, scrap: 0, labor: 0, overhead: 0, total: 0 }
   )
   return (
-    <Card className="bom-card-enter">
+    <Card className="hover-lift-sm bom-card-enter">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm">Cost Rollup</CardTitle>
         <CardDescription className="text-[11px]">Multi-level cost breakdown including labor, overhead, and scrap</CardDescription>
       </CardHeader>
-      <CardContent className="glass-subtle pt-0">
+      <CardContent className="inner-glow glass-subtle pt-0">
         <div className="overflow-x-auto">
           <Table className="table-hover-highlight">
             <TableHeader>
@@ -1845,8 +1845,8 @@ function CostRollupTab({ bom }: { bom: BillOfMaterials }) {
 function WhereUsedTab({ bom }: { bom: BillOfMaterials }) {
   if (bom.whereUsed.length === 0) {
     return (
-      <Card className="bom-card-enter">
-        <CardContent className="glass-subtle flex flex-col items-center justify-center py-12">
+      <Card className="hover-lift-sm bom-card-enter">
+        <CardContent className="inner-glow glass-subtle flex flex-col items-center justify-center py-12">
           <Workflow className="mb-2 h-10 w-10 text-muted-foreground/40" />
           <p className="text-sm font-medium">Not used in any parent BOM</p>
           <p className="text-[11px] text-muted-foreground">This is a top-level BOM (finished good or independent item)</p>
@@ -1855,12 +1855,12 @@ function WhereUsedTab({ bom }: { bom: BillOfMaterials }) {
     )
   }
   return (
-    <Card className="bom-card-enter">
+    <Card className="hover-lift-sm bom-card-enter">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm">Where Used ({bom.whereUsed.length})</CardTitle>
         <CardDescription className="text-[11px]">Parent BOMs that consume this item</CardDescription>
       </CardHeader>
-      <CardContent className="glass-subtle pt-0">
+      <CardContent className="inner-glow glass-subtle pt-0">
         <div className="overflow-x-auto">
           <Table className="table-hover-highlight">
             <TableHeader>

@@ -436,7 +436,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, trend, color }: {
   trend?: "up" | "down" | "neutral"; color: string
 }) {
   return (
-    <Card className="glass-subtle dfm-kpi"><CardContent className="p-4">
+    <Card className="inner-glow hover-lift-sm glass-subtle dfm-kpi"><CardContent className="p-4">
       <div className="flex items-start justify-between">
         <div className="flex flex-col gap-1">
           <span className="text-[10px] text-muted-foreground font-medium">{title}</span>
@@ -577,7 +577,7 @@ export default function DigitalFreightMarketplaceView() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <Card className="dfm-chart col-span-1 md:col-span-2">
+            <Card className="hover-lift-sm dfm-chart col-span-1 md:col-span-2">
               <CardHeader><CardTitle className="text-sm">Daily Shipment Volume (Stacked)</CardTitle></CardHeader>
               <CardContent>
                 <div className="h-[240px]">
@@ -595,7 +595,7 @@ export default function DigitalFreightMarketplaceView() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="dfm-chart">
+            <Card className="hover-lift-sm dfm-chart">
               <CardHeader><CardTitle className="text-sm">Freight Mode Distribution</CardTitle></CardHeader>
               <CardContent>
                 <div className="h-[240px]">
@@ -613,7 +613,7 @@ export default function DigitalFreightMarketplaceView() {
             </Card>
           </div>
 
-          <Card className="dfm-chart">
+          <Card className="hover-lift-sm dfm-chart">
             <CardHeader><CardTitle className="text-sm">Lane Density — Top 10 Routes by Volume</CardTitle></CardHeader>
             <CardContent>
               <div className="h-[240px]">
@@ -826,7 +826,7 @@ export default function DigitalFreightMarketplaceView() {
                 ? "from-slate-500 to-slate-600"
                 : "from-violet-600 to-cyan-600"
               return (
-                <Card key={String(c.id)} className="dfm-contract-card cursor-pointer hover:shadow-md transition-shadow" onClick={() => openSheet("contract", c)}>
+                <Card key={String(c.id)} className="hover-lift-sm dfm-contract-card cursor-pointer hover:shadow-md transition-shadow" onClick={() => openSheet("contract", c)}>
                   <div className={cn("rounded-t-lg bg-gradient-to-r p-3 text-white", gradCls)}>
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-bold font-mono">{String(c.id)}</span>
@@ -834,7 +834,7 @@ export default function DigitalFreightMarketplaceView() {
                     </div>
                     <div className="text-[10px] mt-1 opacity-80">{String(c.shipper)} &harr; {String(c.carrier)}</div>
                   </div>
-                  <CardContent className="glass-subtle p-3 space-y-2">
+                  <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <LaneBadge lane={String(c.lane)} />
                       <span className="text-xs font-semibold">\u20b9{String(c.rate)}/km</span>
@@ -869,7 +869,7 @@ export default function DigitalFreightMarketplaceView() {
             <KpiCard title="Dispute Rate" value="1.2%" subtitle="Below 2% SLA" icon={AlertTriangle} trend="down" color="bg-red-600" />
           </div>
 
-          <Card className="dfm-chart">
+          <Card className="hover-lift-sm dfm-chart">
             <CardHeader><CardTitle className="text-sm">Monthly GMV Trend</CardTitle></CardHeader>
             <CardContent>
               <div className="h-[240px]">
@@ -885,7 +885,7 @@ export default function DigitalFreightMarketplaceView() {
           </Card>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card className="dfm-chart">
+            <Card className="hover-lift-sm dfm-chart">
               <CardHeader><CardTitle className="text-sm">Lane Performance — Top 10 by Margin</CardTitle></CardHeader>
               <CardContent>
                 <div className="h-[240px]">
@@ -899,7 +899,7 @@ export default function DigitalFreightMarketplaceView() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="dfm-chart">
+            <Card className="hover-lift-sm dfm-chart">
               <CardHeader><CardTitle className="text-sm">Freight Mode Mix</CardTitle></CardHeader>
               <CardContent>
                 <div className="h-[240px]">
@@ -915,7 +915,7 @@ export default function DigitalFreightMarketplaceView() {
             </Card>
           </div>
 
-          <Card className="dfm-chart">
+          <Card className="hover-lift-sm dfm-chart">
             <CardHeader><CardTitle className="text-sm">Cost Breakdown (6-Month Stacked)</CardTitle></CardHeader>
             <CardContent>
               <div className="h-[240px]">
@@ -969,9 +969,9 @@ export default function DigitalFreightMarketplaceView() {
                 </div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Posted", `Load ${String(selectedItem.id)} posted to marketplace`) }}><CheckCircle2 className="h-3 w-3" />Accept Bid</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Refreshed", "Bid list refreshed") }}><RefreshCw className="h-3 w-3" />Refresh</Button>
-                  <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Cancelled", `Load ${String(selectedItem.id)} cancelled`); setSheetOpen(false) }}><XCircle className="h-3 w-3" />Cancel</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Posted", `Load ${String(selectedItem.id)} posted to marketplace`) }}><CheckCircle2 className="h-3 w-3" />Accept Bid</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Refreshed", "Bid list refreshed") }}><RefreshCw className="h-3 w-3" />Refresh</Button>
+                  <Button size="sm" variant="destructive" className="press-scale h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Cancelled", `Load ${String(selectedItem.id)} cancelled`); setSheetOpen(false) }}><XCircle className="h-3 w-3" />Cancel</Button>
                 </div>
               </div>
             </>
@@ -1002,9 +1002,9 @@ export default function DigitalFreightMarketplaceView() {
                 <RateTile amount={Number(selectedItem.bidAmount)} trend="Stable" />
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Awarded", `Bid ${String(selectedItem.id)} awarded`) }}><CheckCircle2 className="h-3 w-3" />Award</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Counter", "Counter-offer sent") }}><RefreshCw className="h-3 w-3" />Counter-Offer</Button>
-                  <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Rejected", `Bid ${String(selectedItem.id)} rejected`) }}><AlertTriangle className="h-3 w-3" />Reject</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Awarded", `Bid ${String(selectedItem.id)} awarded`) }}><CheckCircle2 className="h-3 w-3" />Award</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Counter", "Counter-offer sent") }}><RefreshCw className="h-3 w-3" />Counter-Offer</Button>
+                  <Button size="sm" variant="destructive" className="press-scale h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Rejected", `Bid ${String(selectedItem.id)} rejected`) }}><AlertTriangle className="h-3 w-3" />Reject</Button>
                 </div>
               </div>
             </>
@@ -1035,8 +1035,8 @@ export default function DigitalFreightMarketplaceView() {
                 </div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Booked", `Rate ${String(selectedItem.id)} booked`) }}><Gavel className="h-3 w-3" />Book Rate</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Rate card exported") }}><FileDown className="h-3 w-3" />Export</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Booked", `Rate ${String(selectedItem.id)} booked`) }}><Gavel className="h-3 w-3" />Book Rate</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Rate card exported") }}><FileDown className="h-3 w-3" />Export</Button>
                 </div>
               </div>
             </>
@@ -1066,9 +1066,9 @@ export default function DigitalFreightMarketplaceView() {
                 </div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
-                  <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Renewed", `Contract ${String(selectedItem.id)} renewed`) }}><CheckCircle2 className="h-3 w-3" />Renew</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Contract exported") }}><FileDown className="h-3 w-3" />Export</Button>
-                  <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Terminated", `Contract ${String(selectedItem.id)} terminated`); setSheetOpen(false) }}><AlertTriangle className="h-3 w-3" />Terminate</Button>
+                  <Button size="sm" className="press-scale h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Renewed", `Contract ${String(selectedItem.id)} renewed`) }}><CheckCircle2 className="h-3 w-3" />Renew</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Contract exported") }}><FileDown className="h-3 w-3" />Export</Button>
+                  <Button size="sm" variant="destructive" className="press-scale h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Terminated", `Contract ${String(selectedItem.id)} terminated`); setSheetOpen(false) }}><AlertTriangle className="h-3 w-3" />Terminate</Button>
                 </div>
               </div>
             </>

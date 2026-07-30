@@ -498,9 +498,9 @@ export default function ColdChainEnhancementView() {
         <TabsContent value="0" className="space-y-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {kpis.map((k, i) => (
-              <Card key={i} className="cce-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: ["#0891b2","#3b82f6","#e11d48","#0d9488","#6366f1","#059669","#d97706","#7c3aed"][i] }}>
+              <Card key={i} className="hover-lift-sm cce-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: ["#0891b2","#3b82f6","#e11d48","#0d9488","#6366f1","#059669","#d97706","#7c3aed"][i] }}>
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-80" style={{ background: `linear-gradient(90deg, ${["#0891b2","#3b82f6","#e11d48","#0d9488","#6366f1","#059669","#d97706","#7c3aed"][i]}, ${["#06b6d4","#60a5fa","#f43f5e","#14b8a6","#818cf8","#34d399","#f59e0b","#a78bfa"][i]})` }} />
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{k.label}</p>
@@ -514,9 +514,9 @@ export default function ColdChainEnhancementView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <Card className="cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Cold Chain Volume</CardTitle></CardHeader><CardContent><AreaChart data={data.dailyVolume}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Shipped" stackId="1" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Delivered" stackId="1" stroke="#059669" fill="#05966980" /><Area type="monotone" dataKey="Alerts" stackId="1" stroke="#e11d48" fill="#e11d4880" /></AreaChart></CardContent></Card>
-            <Card className="cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Product Category Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.categoryPie} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.categoryPie.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-            <Card className="cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Zone Utilization (%)</CardTitle></CardHeader><CardContent><BarChart data={data.zoneUtilization}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="zone" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Utilization" fill="#0891b2" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Cold Chain Volume</CardTitle></CardHeader><CardContent><AreaChart data={data.dailyVolume}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Shipped" stackId="1" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Delivered" stackId="1" stroke="#059669" fill="#05966980" /><Area type="monotone" dataKey="Alerts" stackId="1" stroke="#e11d48" fill="#e11d4880" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Product Category Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.categoryPie} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.categoryPie.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Zone Utilization (%)</CardTitle></CardHeader><CardContent><BarChart data={data.zoneUtilization}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="zone" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Utilization" fill="#0891b2" /></BarChart></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -526,8 +526,8 @@ export default function ColdChainEnhancementView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search by customer, ID or category..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.info("Cleared", "Filters reset") }}>Clear</Button>
           </div>
-          <Card className="card-crud-lift cce-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift cce-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
@@ -555,7 +555,7 @@ export default function ColdChainEnhancementView() {
                       <TableCell><ShelfLifeTile days={c.shelfLifeRemaining} /></TableCell>
                       <TableCell><RouteTile origin={c.origin} destination={c.destination} /></TableCell>
                       <TableCell><SensorCountBadge count={c.sensors} /></TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="cce-action-btn" onClick={() => { setSelectedConsignment(c); toast.info("Consignment", `Viewing ${c.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="cce-action-btn" onClick={() => { setSelectedConsignment(c); toast.info("Consignment", `Viewing ${c.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -568,9 +568,9 @@ export default function ColdChainEnhancementView() {
         <TabsContent value="2" className="space-y-4">
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {data.coldRooms.slice(0, 30).map(r => (
-              <Card key={r.id} className="cce-room-card overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
+              <Card key={r.id} className="hover-lift-sm cce-room-card overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
                 <div className="h-1 bg-gradient-to-r" style={{ background: r.type === "Blast Freezer" ? "linear-gradient(90deg,#3b82f6,#06b6d4)" : r.type === "Cold Storage" ? "linear-gradient(90deg,#0891b2,#14b8a6)" : r.type === "Chill Room" ? "linear-gradient(90deg,#0d9488,#059669)" : "linear-gradient(90deg,#d97706,#f59e0b)" }} />
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-start justify-between">
                     <div>
                       <p className="text-sm font-bold text-gray-900 dark:text-gray-100">{r.name}</p>
@@ -596,8 +596,8 @@ export default function ColdChainEnhancementView() {
                     <span className="text-gray-500">Alarms: {r.alarmCount}</span>
                   </div>
                   <div className="mt-3 flex gap-2">
-                    <Button size="sm" variant="outline" className="btn-outline-animate cce-action-btn flex-1 text-xs" onClick={() => { setSelectedRoom(r); toast.info("Cold Room", `Viewing ${r.name}`) }}>Details</Button>
-                    <Button size="sm" className="cce-action-btn flex-1 bg-cyan-600 text-xs hover:bg-cyan-700" onClick={() => toast.success("Defrost", `Defrost cycle initiated for ${r.name}`)}>Defrost</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate cce-action-btn flex-1 text-xs" onClick={() => { setSelectedRoom(r); toast.info("Cold Room", `Viewing ${r.name}`) }}>Details</Button>
+                    <Button size="sm" className="press-scale cce-action-btn flex-1 bg-cyan-600 text-xs hover:bg-cyan-700" onClick={() => toast.success("Defrost", `Defrost cycle initiated for ${r.name}`)}>Defrost</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -607,8 +607,8 @@ export default function ColdChainEnhancementView() {
 
         {/* Tab 3: Alerts */}
         <TabsContent value="3" className="space-y-4">
-          <Card className="card-crud-lift cce-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift cce-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <TableHead>Severity</TableHead>
@@ -636,8 +636,8 @@ export default function ColdChainEnhancementView() {
                       </TableCell>
                       <TableCell className="text-right">
                         <div className="flex gap-1 justify-end">
-                          <Button size="sm" variant="ghost" className="cce-action-btn" onClick={() => { setSelectedAlert(a); toast.info("Alert", `Viewing ${a.id}`) }}><Eye className="h-4 w-4" /></Button>
-                          {!a.resolved && <Button size="sm" variant="ghost" className="cce-action-btn text-emerald-600" onClick={() => toast.success("Resolved", `Alert ${a.id} resolved`)}><CheckCircle2 className="h-4 w-4" /></Button>}
+                          <Button size="sm" variant="ghost" className="press-scale cce-action-btn" onClick={() => { setSelectedAlert(a); toast.info("Alert", `Viewing ${a.id}`) }}><Eye className="h-4 w-4" /></Button>
+                          {!a.resolved && <Button size="sm" variant="ghost" className="press-scale cce-action-btn text-emerald-600" onClick={() => toast.success("Resolved", `Alert ${a.id} resolved`)}><CheckCircle2 className="h-4 w-4" /></Button>}
                         </div>
                       </TableCell>
                     </TableRow>
@@ -650,8 +650,8 @@ export default function ColdChainEnhancementView() {
 
         {/* Tab 4: Compliance */}
         <TabsContent value="4" className="space-y-4">
-          <Card className="card-crud-lift cce-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift cce-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <TableHead>ID</TableHead>
@@ -677,7 +677,7 @@ export default function ColdChainEnhancementView() {
                       <TableCell className="text-xs">{c.auditor}</TableCell>
                       <TableCell className="text-xs">{c.lastAudit}</TableCell>
                       <TableCell className="text-xs">{c.findings > 0 ? <span className="text-rose-600 font-semibold">{c.findings}</span> : <span className="text-emerald-600">0</span>}</TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="cce-action-btn" onClick={() => { setSelectedCompliance(c); toast.info("Compliance", `Viewing ${c.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="cce-action-btn" onClick={() => { setSelectedCompliance(c); toast.info("Compliance", `Viewing ${c.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -699,8 +699,8 @@ export default function ColdChainEnhancementView() {
               { label: "Fleet Util.", value: data.analyticsKpis.fleetUtilization, icon: Gauge, color: "from-indigo-500 to-indigo-600" },
               { label: "Compliance Score", value: data.analyticsKpis.complianceScore, icon: ShieldCheck, color: "from-teal-500 to-teal-600" },
             ].map((k, i) => (
-              <Card key={i} className="cce-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm cce-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center gap-3">
                     <div className={cn("cce-analytics-icon flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-white", k.color)}><k.icon className="h-4.5 w-4.5" /></div>
                     <div>
@@ -713,10 +713,10 @@ export default function ColdChainEnhancementView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Card className="cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Temperature Trend (14-Day)</CardTitle></CardHeader><CardContent><LineChart data={data.tempTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Deep Freeze" stroke="#3b82f6" strokeWidth={2} /><Line type="monotone" dataKey="Chill" stroke="#0d9488" strokeWidth={2} /><Line type="monotone" dataKey="Cool" stroke="#d97706" strokeWidth={2} /></LineChart></CardContent></Card>
-            <Card className="cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Room Type Utilization</CardTitle></CardHeader><CardContent><BarChart data={data.roomUtilization} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="room" type="category" tick={{ fontSize: 10 }} width={90} /><Tooltip /><Bar dataKey="Utilization" fill="#0891b2" /></BarChart></CardContent></Card>
-            <Card className="cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Alert Trend</CardTitle></CardHeader><CardContent><BarChart data={data.alertTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Breaches" fill="#e11d48" /><Bar dataKey="Resolved" fill="#059669" /></BarChart></CardContent></Card>
-            <Card className="cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Energy Cost (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.energyCost}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Deep Freeze" stackId="1" stroke="#3b82f6" fill="#3b82f680" /><Area type="monotone" dataKey="Chill" stackId="1" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Cool" stackId="1" stroke="#d97706" fill="#d9770680" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Temperature Trend (14-Day)</CardTitle></CardHeader><CardContent><LineChart data={data.tempTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Deep Freeze" stroke="#3b82f6" strokeWidth={2} /><Line type="monotone" dataKey="Chill" stroke="#0d9488" strokeWidth={2} /><Line type="monotone" dataKey="Cool" stroke="#d97706" strokeWidth={2} /></LineChart></CardContent></Card>
+            <Card className="hover-lift-sm cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Room Type Utilization</CardTitle></CardHeader><CardContent><BarChart data={data.roomUtilization} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="room" type="category" tick={{ fontSize: 10 }} width={90} /><Tooltip /><Bar dataKey="Utilization" fill="#0891b2" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Alert Trend</CardTitle></CardHeader><CardContent><BarChart data={data.alertTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Breaches" fill="#e11d48" /><Bar dataKey="Resolved" fill="#059669" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm cce-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Energy Cost (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.energyCost}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Deep Freeze" stackId="1" stroke="#3b82f6" fill="#3b82f680" /><Area type="monotone" dataKey="Chill" stackId="1" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Cool" stackId="1" stroke="#d97706" fill="#d9770680" /></AreaChart></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -748,8 +748,8 @@ export default function ColdChainEnhancementView() {
                 <div><p className="text-xs text-gray-500">Value</p><span className="text-sm font-bold text-emerald-600">{selectedConsignment.value}</span></div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button className="cce-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => toast.success("Updated", `${selectedConsignment.id} updated`)}>Update Status</Button>
-                <Button variant="outline" className="btn-outline-animate cce-action-btn" onClick={() => toast.info("Tracking", `Temperature log for ${selectedConsignment.id}`)}>Temp Log</Button>
+                <Button className="press-scale cce-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => toast.success("Updated", `${selectedConsignment.id} updated`)}>Update Status</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate cce-action-btn" onClick={() => toast.info("Tracking", `Temperature log for ${selectedConsignment.id}`)}>Temp Log</Button>
               </div>
             </div>
           </>)}
@@ -779,8 +779,8 @@ export default function ColdChainEnhancementView() {
                 <div><p className="text-xs text-gray-500">Alarms</p><span className="text-lg font-bold">{selectedRoom.alarmCount}</span></div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button className="cce-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => toast.success("Defrost", `Defrost started for ${selectedRoom.name}`)}>Start Defrost</Button>
-                <Button variant="outline" className="btn-outline-animate cce-action-btn" onClick={() => toast.info("History", `Alarm history for ${selectedRoom.name}`)}>Alarm History</Button>
+                <Button className="press-scale cce-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => toast.success("Defrost", `Defrost started for ${selectedRoom.name}`)}>Start Defrost</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate cce-action-btn" onClick={() => toast.info("History", `Alarm history for ${selectedRoom.name}`)}>Alarm History</Button>
               </div>
             </div>
           </>)}
@@ -808,9 +808,9 @@ export default function ColdChainEnhancementView() {
               <div><p className="text-xs text-gray-500">Temperature</p><TempTile current={parseFloat(selectedAlert.temperature)} target={4} /></div>
               <div className="flex gap-2 pt-2">
                 {!selectedAlert.resolved ? (
-                  <><Button className="cce-action-btn flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => toast.success("Resolved", `Alert ${selectedAlert.id} resolved`)}>Resolve</Button>
-                  <Button variant="outline" className="btn-outline-animate cce-action-btn" onClick={() => toast.info("Escalated", `Alert ${selectedAlert.id} escalated`)}>Escalate</Button></>
-                ) : <Button variant="outline" className="btn-outline-animate cce-action-btn flex-1" onClick={() => toast.info("Reopened", `Alert ${selectedAlert.id} reopened`)}>Reopen</Button>}
+                  <><Button className="press-scale cce-action-btn flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => toast.success("Resolved", `Alert ${selectedAlert.id} resolved`)}>Resolve</Button>
+                  <Button variant="outline" className="press-scale btn-outline-animate cce-action-btn" onClick={() => toast.info("Escalated", `Alert ${selectedAlert.id} escalated`)}>Escalate</Button></>
+                ) : <Button variant="outline" className="press-scale btn-outline-animate cce-action-btn flex-1" onClick={() => toast.info("Reopened", `Alert ${selectedAlert.id} reopened`)}>Reopen</Button>}
               </div>
             </div>
           </>)}
@@ -842,8 +842,8 @@ export default function ColdChainEnhancementView() {
                 <div><p className="text-xs text-gray-500">Next Audit</p><span className="text-sm">{selectedCompliance.nextAudit}</span></div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button className="cce-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => toast.success("Audit", `New audit scheduled for ${selectedCompliance.id}`)}>Schedule Audit</Button>
-                <Button variant="outline" className="btn-outline-animate cce-action-btn" onClick={() => toast.info("Report", `Generating compliance report`)}>Generate Report</Button>
+                <Button className="press-scale cce-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => toast.success("Audit", `New audit scheduled for ${selectedCompliance.id}`)}>Schedule Audit</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate cce-action-btn" onClick={() => toast.info("Report", `Generating compliance report`)}>Generate Report</Button>
               </div>
             </div>
           </>)}

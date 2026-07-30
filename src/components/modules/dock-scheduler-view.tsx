@@ -231,7 +231,7 @@ function DockCard({
         </button>
       </CardHeader>
 
-      <CardContent className="glass-subtle px-3 pb-3">
+      <CardContent className="inner-glow glass-subtle px-3 pb-3">
         {assignment && dock.status === "occupied" ? (
           <div className="space-y-2.5">
             <div className="flex items-center gap-1.5">
@@ -318,7 +318,7 @@ function DockCard({
               <Clock className="h-2.5 w-2.5" />
               Arriving at {assignment.startTime}
             </div>
-            <Button size="sm" variant="outline" className="btn-outline-animate w-full h-6 text-[9px] gap-1">
+            <Button size="sm" variant="outline" className="press-scale btn-outline-animate w-full h-6 text-[9px] gap-1">
               <X className="h-2.5 w-2.5" /> Cancel Reservation
             </Button>
           </div>
@@ -327,7 +327,7 @@ function DockCard({
             <Wrench className="h-5 w-5 text-red-400" />
             <p className="text-[10px] font-medium text-red-600 dark:text-red-400">Under Maintenance</p>
             <p className="text-[9px] text-muted-foreground">Estimated repair: 2h</p>
-            <Button size="sm" variant="outline" className="btn-outline-animate h-6 text-[9px] gap-1 mt-1">
+            <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-6 text-[9px] gap-1 mt-1">
               <RotateCcw className="h-2.5 w-2.5" /> Mark Available
             </Button>
           </div>
@@ -451,7 +451,7 @@ function SortableQueuedVehicle({
               </SelectContent>
             </Select>
           ) : (
-            <Button size="sm" variant="outline" className="btn-outline-animate h-6 text-[9px] gap-1" disabled>
+            <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-6 text-[9px] gap-1" disabled>
               No docks
             </Button>
           )}
@@ -860,7 +860,7 @@ export function DockSchedulerView() {
                 </>
               )}
             </Button>
-            <Button size="sm" className="gap-1.5" onClick={() => toastRef.current.info("Refreshing dock status...", "Fetching latest dock information", { duration: 2000 })}>
+            <Button size="sm" className="press-scale gap-1.5" onClick={() => toastRef.current.info("Refreshing dock status...", "Fetching latest dock information", { duration: 2000 })}>
               <Zap className="h-3.5 w-3.5" /> Refresh Status
             </Button>
           </div>
@@ -877,8 +877,8 @@ export function DockSchedulerView() {
           { label: "Reserved", value: summary.reserved, icon: Timer, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
           { label: "Utilization", value: `${summary.utilization}%`, icon: Zap, color: summary.utilization > 80 ? "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" : summary.utilization > 60 ? "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" : "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
-            <CardContent className="glass-subtle p-3 text-center">
+          <Card key={item.label} className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
+            <CardContent className="inner-glow glass-subtle p-3 text-center">
               <div className={cn("mx-auto mb-1.5 flex h-7 w-7 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-3.5 w-3.5" />
               </div>
@@ -890,8 +890,8 @@ export function DockSchedulerView() {
       </div>
 
       {/* Utilization Bar */}
-      <Card className="card-depth rounded-xl border-border/60 shadow-sm">
-        <CardContent className="glass-subtle p-4">
+      <Card className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
+        <CardContent className="inner-glow glass-subtle p-4">
           <div className="flex items-center justify-between mb-2">
             <p className="text-xs font-semibold">Dock Utilization Overview</p>
             <p className={cn("text-xs font-bold text-number",
@@ -996,7 +996,7 @@ export function DockSchedulerView() {
 
       {/* Vehicle Queue — sortable */}
       {queuedVehicles.length > 0 && (
-        <Card className="card-depth rounded-xl border-amber-200 bg-amber-50/30 dark:border-amber-800 dark:bg-amber-950/20">
+        <Card className="hover-lift-sm card-depth rounded-xl border-amber-200 bg-amber-50/30 dark:border-amber-800 dark:bg-amber-950/20">
           <CardHeader className="pb-2">
             <div className="flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />

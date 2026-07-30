@@ -185,7 +185,7 @@ function KpiCard({ title, value, icon: Icon, colorClass, subtitle }: {
 }) {
   return (
     <Card className={cn("rp-kpi-card", colorClass)}>
-      <CardContent className="glass-subtle p-4">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs opacity-70 mb-1">{title}</p>
@@ -394,7 +394,7 @@ export default function ReturnsProcessingView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Monthly Returns & Refund Volume</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -412,7 +412,7 @@ export default function ReturnsProcessingView() {
                 </CardContent>
               </Card>
 
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Return Reason Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -428,7 +428,7 @@ export default function ReturnsProcessingView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Channel-wise Returns & Avg Refund</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -445,7 +445,7 @@ export default function ReturnsProcessingView() {
                 </CardContent>
               </Card>
 
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Disposition Analysis</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -461,9 +461,9 @@ export default function ReturnsProcessingView() {
             </div>
 
             {/* Processor Performance Table */}
-            <Card className="rp-card">
+            <Card className="hover-lift-sm rp-card">
               <CardHeader className="pb-2"><CardTitle className="rp-card-title">Returns Team Performance</CardTitle></CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -526,8 +526,8 @@ export default function ReturnsProcessingView() {
               </div>
             </div>
 
-            <Card className="card-crud-lift rp-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift rp-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -573,7 +573,7 @@ export default function ReturnsProcessingView() {
                           <TableCell className="rp-td"><span className="text-xs">{r.warehouse.length > 10 ? r.warehouse.substring(0, 10) + ".." : r.warehouse}</span></TableCell>
                           <TableCell className="rp-td"><span className="text-xs">{r.createdAt}</span></TableCell>
                           <TableCell className="rp-td">
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedReturn(r)}><Eye className="h-3.5 w-3.5" /></Button>
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedReturn(r)}><Eye className="press-scale h-3.5 w-3.5" /></Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -603,7 +603,7 @@ export default function ReturnsProcessingView() {
 
             {/* QC Decision Distribution */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">QC Decision Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -617,7 +617,7 @@ export default function ReturnsProcessingView() {
                 </CardContent>
               </Card>
 
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Reason vs QC Outcome</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -645,8 +645,8 @@ export default function ReturnsProcessingView() {
               </div>
             </div>
 
-            <Card className="card-crud-lift rp-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift rp-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -694,7 +694,7 @@ export default function ReturnsProcessingView() {
                           </TableCell>
                           <TableCell className="rp-td"><span className="text-xs max-w-32 truncate block">{r.notes}</span></TableCell>
                           <TableCell className="rp-td">
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedReturn(r)}><Eye className="h-3.5 w-3.5" /></Button>
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedReturn(r)}><Eye className="press-scale h-3.5 w-3.5" /></Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -723,7 +723,7 @@ export default function ReturnsProcessingView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Refund Method Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -737,7 +737,7 @@ export default function ReturnsProcessingView() {
                 </CardContent>
               </Card>
 
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Monthly Refund & Restock Value Trend</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -765,8 +765,8 @@ export default function ReturnsProcessingView() {
               </select>
             </div>
 
-            <Card className="card-crud-lift rp-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift rp-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -809,7 +809,7 @@ export default function ReturnsProcessingView() {
                           </TableCell>
                           <TableCell className="rp-td"><span className="text-xs">{r.refundedAt || "—"}</span></TableCell>
                           <TableCell className="rp-td">
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedReturn(r)}><Eye className="h-3.5 w-3.5" /></Button>
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedReturn(r)}><Eye className="press-scale h-3.5 w-3.5" /></Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -838,7 +838,7 @@ export default function ReturnsProcessingView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Cost of Returns Analysis</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -855,7 +855,7 @@ export default function ReturnsProcessingView() {
                 </CardContent>
               </Card>
 
-              <Card className="rp-card">
+              <Card className="hover-lift-sm rp-card">
                 <CardHeader className="pb-2"><CardTitle className="rp-card-title">Customer Segment Return Analysis</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -878,9 +878,9 @@ export default function ReturnsProcessingView() {
               </Card>
             </div>
 
-            <Card className="rp-card">
+            <Card className="hover-lift-sm rp-card">
               <CardHeader className="pb-2"><CardTitle className="rp-card-title">Top Return Products</CardTitle></CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>

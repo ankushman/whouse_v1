@@ -408,8 +408,8 @@ export default function YardTruckingView() {
         <TabsContent value="0">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 yt-shimmer">
             {data.kpis.map((k, i) => (
-              <Card key={i} className="yt-kpi-card" style={{ borderLeftColor: PIE_COLORS[i % PIE_COLORS.length] }}>
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm yt-kpi-card" style={{ borderLeftColor: PIE_COLORS[i % PIE_COLORS.length] }}>
+                <CardContent className="inner-glow glass-subtle p-4">
                   <p className="text-xs text-muted-foreground">{k.label}</p>
                   <p className="text-lg font-bold tabular-nums mt-1">{k.value}</p>
                   <div className="flex items-center justify-between mt-1"><TrendIndicator trend={k.change} /></div>
@@ -418,9 +418,9 @@ export default function YardTruckingView() {
             ))}
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Card className="yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Weekly Operations Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><AreaChart data={data.weeklyTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="spots" fill="#3b82f6" fillOpacity={0.3} stroke="#3b82f6" /><Area type="monotone" dataKey="moves" fill="#0d9488" fillOpacity={0.3} stroke="#0d9488" /><Legend /></AreaChart></ResponsiveContainer></CardContent></Card>
-            <Card className="yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Zone Utilization</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={data.zoneUtil}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="zone" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="utilization" fill="#4f46e5" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Spot Type Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><PieChart><Pie data={data.typeDist} dataKey="count" nameKey="type" cx="50%" cy="50%" outerRadius={80} label={({ type, percent }) => `${type.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.typeDist.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Weekly Operations Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><AreaChart data={data.weeklyTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="spots" fill="#3b82f6" fillOpacity={0.3} stroke="#3b82f6" /><Area type="monotone" dataKey="moves" fill="#0d9488" fillOpacity={0.3} stroke="#0d9488" /><Legend /></AreaChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Zone Utilization</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={data.zoneUtil}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="zone" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="utilization" fill="#4f46e5" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Spot Type Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><PieChart><Pie data={data.typeDist} dataKey="count" nameKey="type" cx="50%" cy="50%" outerRadius={80} label={({ type, percent }) => `${type.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.typeDist.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -441,7 +441,7 @@ export default function YardTruckingView() {
               <TableCell><SpotStatusBadge status={r.status} /></TableCell>
               <TableCell><PriorityBadge priority={r.priority} /></TableCell>
               <TableCell><MoveDistanceTile meters={r.distance} /></TableCell>
-              <TableCell><Button size="sm" variant="ghost" className="yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("spot"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell>
+              <TableCell><Button size="sm" variant="ghost" className="press-scale yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("spot"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell>
             </TableRow>
           ))}</TableBody></Table></div>
         </TabsContent>
@@ -464,7 +464,7 @@ export default function YardTruckingView() {
               <TableCell><div className="text-xs">{r.driver}</div></TableCell>
               <TableCell><MaintenanceDueIndicator date={r.maintDue} /></TableCell>
               <TableCell><GpsCoordsTile lat={r.gpsLat} lng={r.gpsLng} /></TableCell>
-              <TableCell><Button size="sm" variant="ghost" className="yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("trailer"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell>
+              <TableCell><Button size="sm" variant="ghost" className="press-scale yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("trailer"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell>
             </TableRow>
           ))}</TableBody></Table></div>
         </TabsContent>
@@ -477,8 +477,8 @@ export default function YardTruckingView() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredEquipment.slice(0, 24).map((r, i) => (
-              <Card key={r.id} className="yt-equip-card">
-                <CardContent className="glass-subtle p-4 space-y-3">
+              <Card key={r.id} className="hover-lift-sm yt-equip-card">
+                <CardContent className="inner-glow glass-subtle p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="badge-interactive flex items-center gap-2"><Badge className="text-xs font-mono bg-slate-100 dark:bg-slate-800 px-2">{r.id}</Badge><EquipmentTypeBadge type={r.equipType} /></div>
                     <EquipStatusBadge status={r.status} />
@@ -496,9 +496,9 @@ export default function YardTruckingView() {
                     <span>Port: {r.port}</span><span>·</span><span>{r.company}</span>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="yt-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => toast.info("Deploying", `Equipment ${r.id} deploying`)}><PlayCircle className="w-3.5 h-3.5 mr-1" />Deploy</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => toast.info("Servicing", `Equipment ${r.id} service scheduled`)}><Wrench className="w-3.5 h-3.5" /></Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("equip"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale yt-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => toast.info("Deploying", `Equipment ${r.id} deploying`)}><PlayCircle className="w-3.5 h-3.5 mr-1" />Deploy</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn" onClick={() => toast.info("Servicing", `Equipment ${r.id} service scheduled`)}><Wrench className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("equip"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button>
                   </div>
                 </CardContent>
               </Card>
@@ -523,7 +523,7 @@ export default function YardTruckingView() {
               <TableCell className="text-xs tabular-nums">{r.scheduledTime}</TableCell>
               <TableCell><TurnaroundTimer mins={r.duration} /></TableCell>
               <TableCell><LocationTile location={r.location} /></TableCell>
-              <TableCell><Button size="sm" variant="ghost" className="yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("task"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell>
+              <TableCell><Button size="sm" variant="ghost" className="press-scale yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("task"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell>
             </TableRow>
           ))}</TableBody></Table></div>
         </TabsContent>
@@ -532,8 +532,8 @@ export default function YardTruckingView() {
         <TabsContent value="5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 yt-shimmer">
             {data.analyticsKpis.map((k, i) => (
-              <Card key={i} className="yt-analytics-card" style={{ borderLeftColor: PIE_COLORS[i % PIE_COLORS.length] }}>
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm yt-analytics-card" style={{ borderLeftColor: PIE_COLORS[i % PIE_COLORS.length] }}>
+                <CardContent className="inner-glow glass-subtle p-4">
                   <p className="text-xs text-muted-foreground">{k.label}</p>
                   <p className="text-lg font-bold tabular-nums mt-1">{k.value}</p>
                   <TrendIndicator trend={k.trend} />
@@ -542,10 +542,10 @@ export default function YardTruckingView() {
             ))}
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Card className="yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Daily Operations (14-Day)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><LineChart data={data.dailyOps}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="date" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="operations" stroke="#3b82f6" strokeWidth={2} /><Line type="monotone" dataKey="spots" stroke="#0d9488" strokeWidth={2} /><Legend /></LineChart></ResponsiveContainer></CardContent></Card>
-            <Card className="yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Equipment Utilization by Type</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={data.equipUtil}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="type" tick={{ fontSize: 8 }} angle={-20} textAnchor="end" height={60} /><YAxis tick={{ fontSize: 10 }} domain={[0, 100]} /><Tooltip /><Bar dataKey="avgUtil" fill="#4f46e5" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Spot Time Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={data.spotTime}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="range" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="count" fill="#d97706" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="yt-chart-card md:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Analysis (6-Month)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><AreaChart data={data.costAnalysis}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={v => `₹${(v / 100000).toFixed(0)}L`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="labor" fill="#3b82f6" fillOpacity={0.3} stroke="#3b82f6" /><Area type="monotone" dataKey="fuel" fill="#d97706" fillOpacity={0.3} stroke="#d97706" /><Area type="monotone" dataKey="maintenance" fill="#059669" fillOpacity={0.3} stroke="#059669" /><Legend /></AreaChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Daily Operations (14-Day)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><LineChart data={data.dailyOps}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="date" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="operations" stroke="#3b82f6" strokeWidth={2} /><Line type="monotone" dataKey="spots" stroke="#0d9488" strokeWidth={2} /><Legend /></LineChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Equipment Utilization by Type</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={data.equipUtil}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="type" tick={{ fontSize: 8 }} angle={-20} textAnchor="end" height={60} /><YAxis tick={{ fontSize: 10 }} domain={[0, 100]} /><Tooltip /><Bar dataKey="avgUtil" fill="#4f46e5" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm yt-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Spot Time Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={data.spotTime}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="range" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="count" fill="#d97706" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm yt-chart-card md:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Analysis (6-Month)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><AreaChart data={data.costAnalysis}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={v => `₹${(v / 100000).toFixed(0)}L`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="labor" fill="#3b82f6" fillOpacity={0.3} stroke="#3b82f6" /><Area type="monotone" dataKey="fuel" fill="#d97706" fillOpacity={0.3} stroke="#d97706" /><Area type="monotone" dataKey="maintenance" fill="#059669" fillOpacity={0.3} stroke="#059669" /><Legend /></AreaChart></ResponsiveContainer></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -571,9 +571,9 @@ export default function YardTruckingView() {
                     <div><span className="text-muted-foreground">Distance</span><div className="tabular-nums">{rec.distance}m</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Reassigned", `Spot ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5 mr-1" />Reassign</Button>
-                    <Button size="sm" className="yt-action-btn flex-1 bg-slate-700 hover:bg-slate-800 text-white" onClick={() => { toast.success("Tracking", `Spot ${rec.id} tracking`); setDrawerOpen(false) }}><Navigation className="w-3.5 h-3.5 mr-1" />Track</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Cancelled", `Spot ${rec.id} cancelled`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Reassigned", `Spot ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5 mr-1" />Reassign</Button>
+                    <Button size="sm" className="press-scale yt-action-btn flex-1 bg-slate-700 hover:bg-slate-800 text-white" onClick={() => { toast.success("Tracking", `Spot ${rec.id} tracking`); setDrawerOpen(false) }}><Navigation className="w-3.5 h-3.5 mr-1" />Track</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Cancelled", `Spot ${rec.id} cancelled`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)
@@ -595,9 +595,9 @@ export default function YardTruckingView() {
                     <div><span className="text-muted-foreground">Company</span><div className="font-medium">{rec.company}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="yt-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => { toast.success("Dispatched", `Trailer ${rec.id} dispatched`); setDrawerOpen(false) }}><Send className="w-3.5 h-3.5 mr-1" />Dispatch</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Inspecting", `Trailer ${rec.id} inspection`); setDrawerOpen(false) }}><Eye className="w-3.5 h-3.5 mr-1" />Inspect</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Maintenance", `Trailer ${rec.id} maintenance`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale yt-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => { toast.success("Dispatched", `Trailer ${rec.id} dispatched`); setDrawerOpen(false) }}><Send className="w-3.5 h-3.5 mr-1" />Dispatch</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Inspecting", `Trailer ${rec.id} inspection`); setDrawerOpen(false) }}><Eye className="w-3.5 h-3.5 mr-1" />Inspect</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Maintenance", `Trailer ${rec.id} maintenance`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)
@@ -623,9 +623,9 @@ export default function YardTruckingView() {
                     <div><span className="text-muted-foreground">Company</span><div className="font-medium">{rec.company}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="yt-action-btn flex-1 bg-amber-600 hover:bg-amber-700 text-white" onClick={() => { toast.success("Deployed", `Equipment ${rec.id} deployed`); setDrawerOpen(false) }}><PlayCircle className="w-3.5 h-3.5 mr-1" />Deploy</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Servicing", `Equipment ${rec.id} service`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5 mr-1" />Service</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Retired", `Equipment ${rec.id} retired`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale yt-action-btn flex-1 bg-amber-600 hover:bg-amber-700 text-white" onClick={() => { toast.success("Deployed", `Equipment ${rec.id} deployed`); setDrawerOpen(false) }}><PlayCircle className="w-3.5 h-3.5 mr-1" />Deploy</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Servicing", `Equipment ${rec.id} service`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5 mr-1" />Service</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Retired", `Equipment ${rec.id} retired`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)
@@ -645,9 +645,9 @@ export default function YardTruckingView() {
                     <div><span className="text-muted-foreground">Completed</span><div className="tabular-nums">{rec.completedTime || "—"}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="yt-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => { toast.success("Completed", `Task ${rec.id} completed`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Complete</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.warning("Escalated", `Task ${rec.id} escalated`); setDrawerOpen(false) }}><ArrowUpRight className="w-3.5 h-3.5 mr-1" />Escalate</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.info("Reassigned", `Task ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale yt-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => { toast.success("Completed", `Task ${rec.id} completed`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Complete</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.warning("Escalated", `Task ${rec.id} escalated`); setDrawerOpen(false) }}><ArrowUpRight className="w-3.5 h-3.5 mr-1" />Escalate</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate yt-action-btn" onClick={() => { toast.info("Reassigned", `Task ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)

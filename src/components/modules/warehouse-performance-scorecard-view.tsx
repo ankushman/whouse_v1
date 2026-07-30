@@ -444,7 +444,7 @@ export function WarehousePerformanceScorecardView() {
             </div>
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              <Card className="wps-chart-card">
+              <Card className="hover-lift-sm wps-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-violet-500" />
@@ -467,7 +467,7 @@ export function WarehousePerformanceScorecardView() {
                 </CardContent>
               </Card>
 
-              <Card className="wps-chart-card">
+              <Card className="hover-lift-sm wps-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2">
                     <Target className="h-4 w-4 text-fuchsia-500" />
@@ -492,7 +492,7 @@ export function WarehousePerformanceScorecardView() {
             </div>
 
             {/* Best in Class */}
-            <Card className="wps-chart-card">
+            <Card className="hover-lift-sm wps-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Star className="h-4 w-4 text-amber-500" />
@@ -573,7 +573,7 @@ export function WarehousePerformanceScorecardView() {
               })}
             </div>
 
-            <Card className="wps-chart-card">
+            <Card className="hover-lift-sm wps-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-violet-500" />
@@ -664,7 +664,7 @@ export function WarehousePerformanceScorecardView() {
 
                   <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                     {/* Score Breakdown Donut */}
-                    <Card className="wps-chart-card">
+                    <Card className="hover-lift-sm wps-chart-card">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm">Score Breakdown</CardTitle>
                       </CardHeader>
@@ -694,7 +694,7 @@ export function WarehousePerformanceScorecardView() {
                     </Card>
 
                     {/* Metric Table */}
-                    <Card className="wps-chart-card">
+                    <Card className="hover-lift-sm wps-chart-card">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm">Actual vs Target</CardTitle>
                       </CardHeader>
@@ -725,13 +725,13 @@ export function WarehousePerformanceScorecardView() {
 
                   {/* Strengths & Improvements */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Card className="wps-strength-card">
+                    <Card className="hover-lift-sm wps-strength-card">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm flex items-center gap-2 text-emerald-600">
                           <CheckCircle2 className="h-4 w-4" /> Top Strengths
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="glass-subtle space-y-2">
+                      <CardContent className="inner-glow glass-subtle space-y-2">
                         {strengths.map((m, i) => (
                           <div key={m.name} className="flex items-center gap-2 text-sm">
                             <Badge variant="success" className="badge-interactive text-xs">#{i + 1}</Badge>
@@ -741,13 +741,13 @@ export function WarehousePerformanceScorecardView() {
                         ))}
                       </CardContent>
                     </Card>
-                    <Card className="wps-improve-card">
+                    <Card className="hover-lift-sm wps-improve-card">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm flex items-center gap-2 text-amber-600">
                           <AlertTriangle className="h-4 w-4" /> Improvement Areas
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="glass-subtle space-y-2">
+                      <CardContent className="inner-glow glass-subtle space-y-2">
                         {improvements.map((m, i) => (
                           <div key={m.name} className="flex items-center gap-2 text-sm">
                             <Badge variant="warning" className="badge-interactive text-xs">#{metrics.length - 2 + i}</Badge>
@@ -760,7 +760,7 @@ export function WarehousePerformanceScorecardView() {
                   </div>
 
                   {/* 6-Month Trend Mini Chart */}
-                  <Card className="wps-chart-card">
+                  <Card className="hover-lift-sm wps-chart-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm flex items-center gap-2">
                         <Activity className="h-4 w-4 text-violet-500" />
@@ -794,14 +794,14 @@ export function WarehousePerformanceScorecardView() {
         {/* Tab 4: Operational Metrics */}
         {activeTab === 4 && (
           <div className="space-y-6">
-            <Card className="wps-chart-card overflow-hidden">
+            <Card className="hover-lift-sm wps-chart-card overflow-hidden">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Package className="h-4 w-4 text-violet-500" />
                   Operational Metrics — All Warehouses
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="wps-metrics-table">
                     <thead>
@@ -857,14 +857,14 @@ export function WarehousePerformanceScorecardView() {
         {/* Tab 5: Financial Metrics */}
         {activeTab === 5 && (
           <div className="space-y-6">
-            <Card className="wps-chart-card overflow-hidden">
+            <Card className="hover-lift-sm wps-chart-card overflow-hidden">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <DollarSign className="h-4 w-4 text-violet-500" />
                   Financial Metrics — All Warehouses
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="wps-metrics-table">
                     <thead>
@@ -912,7 +912,7 @@ export function WarehousePerformanceScorecardView() {
             </Card>
 
             {/* Cost Breakdown Stacked Bar */}
-            <Card className="wps-chart-card">
+            <Card className="hover-lift-sm wps-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <BarChart3 className="h-4 w-4 text-fuchsia-500" />
@@ -946,14 +946,14 @@ export function WarehousePerformanceScorecardView() {
         {activeTab === 6 && (
           <div className="space-y-6">
             {/* Overall Ranking */}
-            <Card className="wps-chart-card">
+            <Card className="hover-lift-sm wps-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2">
                   <Trophy className="h-4 w-4 text-amber-500" />
                   Overall Performance Ranking — {selectedPeriod}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="wps-metrics-table">
                     <thead>
@@ -1024,8 +1024,8 @@ export function WarehousePerformanceScorecardView() {
                   people: <Users className="h-5 w-5" />,
                 };
                 return (
-                  <Card key={cat} className="wps-champion-card">
-                    <CardContent className="glass-subtle pt-4 text-center">
+                  <Card key={cat} className="hover-lift-sm wps-champion-card">
+                    <CardContent className="inner-glow glass-subtle pt-4 text-center">
                       <div className="wps-champion-icon">{icons[cat]}</div>
                       <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-2">Champion</div>
                       <div className="text-xs capitalize font-medium">{cat}</div>
@@ -1038,14 +1038,14 @@ export function WarehousePerformanceScorecardView() {
             </div>
 
             {/* Bottom 3 Performance Alerts */}
-            <Card className="wps-alerts-card">
+            <Card className="hover-lift-sm wps-alerts-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2 text-amber-600">
                   <AlertTriangle className="h-4 w-4" />
                   Performance Alerts — Bottom 3 Warehouses
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-3">
+              <CardContent className="inner-glow glass-subtle space-y-3">
                 {ranked.slice(-3).map((wh, idx) => {
                   const metricsNeedingAttention: string[] = [];
                   if (wh.scores.operations < 80) metricsNeedingAttention.push("Operations");
@@ -1065,7 +1065,7 @@ export function WarehousePerformanceScorecardView() {
                           Areas needing attention: {metricsNeedingAttention.length > 0 ? metricsNeedingAttention.join(", ") : "Multiple areas below target"}
                         </div>
                       </div>
-                      <Button size="sm" variant="outline" className="btn-outline-animate text-xs h-7" onClick={() => { setSelectedWarehouse(wh.id); setActiveTab(3); }}>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate text-xs h-7" onClick={() => { setSelectedWarehouse(wh.id); setActiveTab(3); }}>
                         View Details
                       </Button>
                     </div>

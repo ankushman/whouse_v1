@@ -507,7 +507,7 @@ export default function ContainerFreightStationView() {
               { label: "Total Packages", value: fmt(totalPackages), icon: Boxes, color: "cfs-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color} cfs-stagger-${Math.min(i, 5)}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between mb-2">
                     <kpi.icon className="h-4 w-4 cfs-kpi-icon" />
                     {kpi.total && <span className="cfs-kpi-total">/ {kpi.total}</span>}
@@ -520,7 +520,7 @@ export default function ContainerFreightStationView() {
           </div>
 
           {/* Status Pipeline */}
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><Activity className="h-4 w-4" /> Container Status Pipeline</CardTitle>
             </CardHeader>
@@ -540,7 +540,7 @@ export default function ContainerFreightStationView() {
 
           {/* Throughput Trend + Movement/Size Distribution */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="cfs-card lg:col-span-2 cfs-stagger-6">
+            <Card className="hover-lift-sm cfs-card lg:col-span-2 cfs-stagger-6">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><TrendingUp className="h-4 w-4" /> Monthly Throughput (12 Months)</CardTitle>
               </CardHeader>
@@ -563,11 +563,11 @@ export default function ContainerFreightStationView() {
               </CardContent>
             </Card>
 
-            <Card className="cfs-card cfs-stagger-7">
+            <Card className="hover-lift-sm cfs-card cfs-stagger-7">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><Globe2 className="h-4 w-4" /> Movement &amp; Size</CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-4">
+              <CardContent className="inner-glow glass-subtle space-y-4">
                 <div>
                   <div className="text-xs font-semibold text-muted-foreground mb-2">Movement Type</div>
                   <div className="h-36">
@@ -602,7 +602,7 @@ export default function ContainerFreightStationView() {
 
           {/* Duty by Warehouse + Detention Trend */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="cfs-card cfs-stagger-8">
+            <Card className="hover-lift-sm cfs-card cfs-stagger-8">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><IndianRupee className="h-4 w-4" /> Duty Collection by Warehouse</CardTitle>
               </CardHeader>
@@ -621,7 +621,7 @@ export default function ContainerFreightStationView() {
               </CardContent>
             </Card>
 
-            <Card className="cfs-card cfs-stagger-9">
+            <Card className="hover-lift-sm cfs-card cfs-stagger-9">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><Timer className="h-4 w-4" /> Avg Detention Trend</CardTitle>
               </CardHeader>
@@ -648,8 +648,8 @@ export default function ContainerFreightStationView() {
       {/* Tab 1: Container Register */}
       {activeTab === 1 && (
         <div className="cfs-tab-content space-y-4">
-          <Card className="cfs-filter-card">
-            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
+          <Card className="hover-lift-sm cfs-filter-card">
+            <CardContent className="inner-glow glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cfs-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search ID or container..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cfs-filter-input" />
@@ -676,7 +676,7 @@ export default function ContainerFreightStationView() {
             </CardContent>
           </Card>
 
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><ClipboardList className="h-4 w-4" /> Container Register</CardTitle>
             </CardHeader>
@@ -728,7 +728,7 @@ export default function ContainerFreightStationView() {
                           </span>
                         </td>
                         <td>
-                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setSelectedContainer(c)}>
+                          <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => setSelectedContainer(c)}>
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
                         </td>
@@ -746,7 +746,7 @@ export default function ContainerFreightStationView() {
               <div className="cfs-drawer" onClick={(e) => e.stopPropagation()}>
                 <div className="cfs-drawer-header">
                   <h3 className="cfs-drawer-title">{selectedContainer.id} — {selectedContainer.containerNumber}</h3>
-                  <Button variant="ghost" size="sm" onClick={() => setSelectedContainer(null)} className="h-8 w-8 p-0">
+                  <Button variant="ghost" size="sm" onClick={() => setSelectedContainer(null)} className="press-scale h-8 w-8 p-0">
                     <XCircle className="h-4 w-4" />
                   </Button>
                 </div>
@@ -815,8 +815,8 @@ export default function ContainerFreightStationView() {
       {/* Tab 2: Customs Documentation */}
       {activeTab === 2 && (
         <div className="cfs-tab-content space-y-4">
-          <Card className="cfs-filter-card">
-            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
+          <Card className="hover-lift-sm cfs-filter-card">
+            <CardContent className="inner-glow glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cfs-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search doc name or ID..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cfs-filter-input" />
@@ -837,7 +837,7 @@ export default function ContainerFreightStationView() {
               { label: "Rejected", value: data.docs.filter((d) => d.status === "rejected").length, color: "cfs-kpi-red" },
             ]).map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="cfs-kpi-value">{kpi.value}</div>
                   <div className="cfs-kpi-label">{kpi.label}</div>
                 </CardContent>
@@ -845,7 +845,7 @@ export default function ContainerFreightStationView() {
             ))}
           </div>
 
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><FileCheck className="h-4 w-4" /> Document Register</CardTitle>
             </CardHeader>
@@ -891,7 +891,7 @@ export default function ContainerFreightStationView() {
 
           {/* Doc Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="cfs-card">
+            <Card className="hover-lift-sm cfs-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><BarChart3 className="h-4 w-4" /> Document Status Distribution</CardTitle>
               </CardHeader>
@@ -910,7 +910,7 @@ export default function ContainerFreightStationView() {
               </CardContent>
             </Card>
 
-            <Card className="cfs-card">
+            <Card className="hover-lift-sm cfs-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><Archive className="h-4 w-4" /> Document Type Breakdown</CardTitle>
               </CardHeader>
@@ -931,7 +931,7 @@ export default function ContainerFreightStationView() {
           </div>
 
           {/* Duty Trend */}
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><IndianRupee className="h-4 w-4" /> Duty Collection Trend (12 Months)</CardTitle>
             </CardHeader>
@@ -966,7 +966,7 @@ export default function ContainerFreightStationView() {
               { label: "Replaced", value: data.seals.filter((s) => s.status === "replaced").length, color: "cfs-kpi-amber" },
             ].map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="cfs-kpi-value">{kpi.value}</div>
                   <div className="cfs-kpi-label">{kpi.label}</div>
                 </CardContent>
@@ -975,7 +975,7 @@ export default function ContainerFreightStationView() {
           </div>
 
           {/* Seal Distribution */}
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><ShieldCheck className="h-4 w-4" /> Seal Integrity Status</CardTitle>
             </CardHeader>
@@ -1001,7 +1001,7 @@ export default function ContainerFreightStationView() {
           </Card>
 
           {/* Seal Register */}
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><Stamp className="h-4 w-4" /> Seal Register</CardTitle>
             </CardHeader>
@@ -1057,7 +1057,7 @@ export default function ContainerFreightStationView() {
               { label: "Avg Daily Rate", value: `₹${Math.round(data.storage.reduce((s, e) => s + e.dailyRate, 0) / data.storage.length)}`, icon: Receipt, color: "cfs-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <kpi.icon className="h-4 w-4 cfs-kpi-icon mb-2" />
                   <div className="cfs-kpi-value">{kpi.value}</div>
                   <div className="cfs-kpi-label">{kpi.label}</div>
@@ -1067,7 +1067,7 @@ export default function ContainerFreightStationView() {
           </div>
 
           {/* Storage Revenue Trend */}
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><TrendingUp className="h-4 w-4" /> Storage Revenue Trend (12 Months)</CardTitle>
             </CardHeader>
@@ -1090,7 +1090,7 @@ export default function ContainerFreightStationView() {
           </Card>
 
           {/* Storage Table */}
-          <Card className="cfs-card">
+          <Card className="hover-lift-sm cfs-card">
             <CardHeader className="pb-2">
               <CardTitle className="cfs-card-title"><Archive className="h-4 w-4" /> Storage Register</CardTitle>
             </CardHeader>
@@ -1139,7 +1139,7 @@ export default function ContainerFreightStationView() {
 
           {/* Warehouse Storage Comparison + Radar */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="cfs-card">
+            <Card className="hover-lift-sm cfs-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><MapPin className="h-4 w-4" /> Warehouse Storage Comparison</CardTitle>
               </CardHeader>
@@ -1158,7 +1158,7 @@ export default function ContainerFreightStationView() {
               </CardContent>
             </Card>
 
-            <Card className="cfs-card">
+            <Card className="hover-lift-sm cfs-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><Globe className="h-4 w-4" /> Container Operations Radar</CardTitle>
               </CardHeader>

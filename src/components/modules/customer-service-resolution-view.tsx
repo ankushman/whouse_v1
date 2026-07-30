@@ -375,7 +375,7 @@ export default function CustomerServiceView() {
         {/* Charts Row 1 */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {/* Monthly Volume */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <BarChart3 className="h-4 w-4 text-rose-500" />
@@ -398,7 +398,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* Category Distribution */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <PieChart className="h-4 w-4 text-emerald-500" />
@@ -421,7 +421,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* Channel Distribution */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Phone className="h-4 w-4 text-amber-500" />
@@ -447,7 +447,7 @@ export default function CustomerServiceView() {
         {/* Charts Row 2 */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {/* Warehouse Breakdown */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Target className="h-4 w-4 text-blue-500" />
@@ -470,7 +470,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* Status Distribution */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Filter className="h-4 w-4 text-purple-500" />
@@ -493,7 +493,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* NPS Score */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Sparkles className="h-4 w-4 text-amber-500" />
@@ -539,7 +539,7 @@ export default function CustomerServiceView() {
         {/* Recent Complaints + Alerts */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Recent Complaints */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Clock className="h-4 w-4 text-rose-500" />
@@ -578,7 +578,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* Alerts */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <AlertTriangle className="h-4 w-4 text-amber-500" />
@@ -758,7 +758,7 @@ export default function CustomerServiceView() {
         </div>
 
         {/* Active Complaints with Flow */}
-        <Card className="border-rose-100 dark:border-rose-900/40">
+        <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <RotateCcw className="h-4 w-4 text-blue-500" />
@@ -814,7 +814,7 @@ export default function CustomerServiceView() {
         </Card>
 
         {/* Agent Workload */}
-        <Card className="border-rose-100 dark:border-rose-900/40">
+        <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <Users className="h-4 w-4 text-purple-500" />
@@ -896,7 +896,7 @@ export default function CustomerServiceView() {
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* CSAT Distribution */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Star className="h-4 w-4 text-amber-500" />
@@ -933,7 +933,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* Top Customer Satisfaction */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Award className="h-4 w-4 text-purple-500" />
@@ -966,7 +966,7 @@ export default function CustomerServiceView() {
 
         {/* Credit Notes Summary */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <CreditCard className="h-4 w-4 text-emerald-500" />
@@ -987,7 +987,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* Communication Channel Performance */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <PhoneCall className="h-4 w-4 text-cyan-500" />
@@ -1049,7 +1049,7 @@ export default function CustomerServiceView() {
         {/* Charts */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Daily Volume Trend */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <TrendingUp className="h-4 w-4 text-blue-500" />
@@ -1071,7 +1071,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* SLA Compliance by Warehouse */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Target className="h-4 w-4 text-emerald-500" />
@@ -1095,7 +1095,7 @@ export default function CustomerServiceView() {
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Agent Performance */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Users className="h-4 w-4 text-indigo-500" />
@@ -1119,7 +1119,7 @@ export default function CustomerServiceView() {
           </Card>
 
           {/* TAT by Category */}
-          <Card className="border-rose-100 dark:border-rose-900/40">
+          <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Clock className="h-4 w-4 text-orange-500" />
@@ -1143,7 +1143,7 @@ export default function CustomerServiceView() {
         </div>
 
         {/* Monthly CSAT Trend */}
-        <Card className="border-rose-100 dark:border-rose-900/40">
+        <Card className="hover-lift-sm border-rose-100 dark:border-rose-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <TrendingUp className="h-4 w-4 text-emerald-500" />
@@ -1331,19 +1331,19 @@ export default function CustomerServiceView() {
             <div className="csrc-drawer-section">
               <div className="csrc-drawer-section-title">Actions</div>
               <div className="flex flex-wrap gap-2">
-                <Button size="sm" className="bg-rose-600 text-white hover:bg-rose-700 gap-1">
+                <Button size="sm" className="press-scale bg-rose-600 text-white hover:bg-rose-700 gap-1">
                   <Phone className="h-3.5 w-3.5" /> Call Customer
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <Mail className="h-3.5 w-3.5" /> Send Email
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <MessageSquare className="h-3.5 w-3.5" /> WhatsApp
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <FileText className="h-3.5 w-3.5" /> Credit Note
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <ArrowRight className="h-3.5 w-3.5" /> Escalate
                 </Button>
               </div>

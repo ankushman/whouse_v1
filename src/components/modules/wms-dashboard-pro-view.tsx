@@ -146,7 +146,7 @@ export default function WMSDashboardProView() {
   const SearchBar = () => (
     <div className="flex items-center gap-2 mb-3">
       <div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground"/><Input placeholder="Search records..." value={search} onChange={e=>setSearch(e.target.value)} className="wdp-search pl-8 h-9 text-sm"/></div>
-      <Button variant="outline" size="sm" className="btn-outline-animate wdp-sort-btn" onClick={()=>setSortDir(d=>d==="asc"?"desc":"asc")}><ArrowUpDown className="h-4 w-4"/></Button>
+      <Button variant="outline" size="sm" className="press-scale btn-outline-animate wdp-sort-btn" onClick={()=>setSortDir(d=>d==="asc"?"desc":"asc")}><ArrowUpDown className="h-4 w-4"/></Button>
     </div>
   )
 
@@ -164,24 +164,24 @@ export default function WMSDashboardProView() {
           <div className="wdp-dash space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {kpis.map((k,i)=>(
-                <Card key={i} className="wdp-kpi border-border/60">
-                  <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <Card key={i} className="hover-lift-sm wdp-kpi border-border/60">
+                  <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                     <div className={`wdp-kpi-icon ${k.bg} p-2.5 rounded-lg`}><k.icon className={`h-5 w-5 ${k.color}`}/></div>
                     <div><p className="text-xs text-muted-foreground">{k.label}</p><p className={`wdp-kpi-val text-lg font-bold ${k.color}`}>{k.value}</p></div>
                   </CardContent>
                 </Card>
               ))}
             </div>
-            <Card className="wdp-chart border-border/60">
+            <Card className="hover-lift-sm wdp-chart border-border/60">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Daily Throughput (30 Days)</CardTitle></CardHeader>
               <CardContent><LineChart data={thrData} height={250}><CartesianGrid strokeDasharray="3 3" className="stroke-muted"/><XAxis dataKey="day" tick={{fontSize:9}}/><YAxis tick={{fontSize:10}}/><Tooltip/><Line type="monotone" dataKey="Receiving" stroke={TH.blue} strokeWidth={2} dot={false}/><Line type="monotone" dataKey="Picking" stroke={TH.emerald} strokeWidth={2} dot={false}/><Line type="monotone" dataKey="Shipping" stroke={TH.violet} strokeWidth={2} dot={false}/></LineChart></CardContent>
             </Card>
             <div className="grid md:grid-cols-2 gap-4">
-              <Card className="wdp-chart border-border/60">
+              <Card className="hover-lift-sm wdp-chart border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Zone Type Distribution</CardTitle></CardHeader>
                 <CardContent><PieChart height={260}><Pie data={ztPie} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90} label={({name})=>name} labelLine={false}>{ztPie.map((_,i)=><Cell key={i} fill={PC[i%PC.length]}/>)}</Pie><Tooltip/></PieChart></CardContent>
               </Card>
-              <Card className="wdp-chart border-border/60">
+              <Card className="hover-lift-sm wdp-chart border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Warehouse Comparison</CardTitle></CardHeader>
                 <CardContent><BarChart data={whComp} height={260}><CartesianGrid strokeDasharray="3 3" className="stroke-muted"/><XAxis dataKey="name" tick={{fontSize:9}}/><YAxis tick={{fontSize:10}}/><Tooltip/><Bar dataKey="throughput" fill={TH.blue} radius={[4,4,0,0]}/><Bar dataKey="efficiency" fill={TH.emerald} radius={[4,4,0,0]}/></BarChart></CardContent>
               </Card>
@@ -211,7 +211,7 @@ export default function WMSDashboardProView() {
                     <td className="p-2 text-right font-mono">{z.items.toLocaleString()}</td>
                     <td className="p-2"><WHBadge wh={z.wh}/></td>
                     <td className="p-2"><SupervisorBadge name={z.sup}/></td>
-                    <td className="p-2 text-center"><Button variant="ghost" size="sm" className="wdp-eye-btn h-7 w-7 p-0" onClick={()=>{setSelZone(z);setSheetOpen(true);toast.success("Zone Details",`Viewing ${z.code}`)}}><Eye className="h-3.5 w-3.5"/></Button></td>
+                    <td className="press-scale p-2 text-center"><Button variant="ghost" size="sm" className="wdp-eye-btn h-7 w-7 p-0" onClick={()=>{setSelZone(z);setSheetOpen(true);toast.success("Zone Details",`Viewing ${z.code}`)}}><Eye className="h-3.5 w-3.5"/></Button></td>
                   </tr>
                 ))}
               </tbody></table>
@@ -307,21 +307,21 @@ export default function WMSDashboardProView() {
         {activeTab === "5" && (
           <div className="wdp-analytics space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
-              <Card className="wdp-chart border-border/60">
+              <Card className="hover-lift-sm wdp-chart border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Utilization Trend vs Target (85%)</CardTitle></CardHeader>
                 <CardContent><LineChart data={utilTrend} height={240}><CartesianGrid strokeDasharray="3 3" className="stroke-muted"/><XAxis dataKey="month" tick={{fontSize:10}}/><YAxis tick={{fontSize:10}} domain={[60,100]}/><Tooltip/><Line type="monotone" dataKey="utilization" stroke={TH.blue} strokeWidth={2}/><Line type="monotone" dataKey="target" stroke={TH.rose} strokeDasharray="6 3" strokeWidth={1.5}/></LineChart></CardContent>
               </Card>
-              <Card className="wdp-chart border-border/60">
+              <Card className="hover-lift-sm wdp-chart border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Storage Type Distribution</CardTitle></CardHeader>
                 <CardContent><PieChart height={240}><Pie data={stPie} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={85} label={({name})=>name} labelLine={false}>{stPie.map((_,i)=><Cell key={i} fill={PC[i%PC.length]}/>)}</Pie><Tooltip/></PieChart></CardContent>
               </Card>
             </div>
             <div className="grid md:grid-cols-2 gap-4">
-              <Card className="wdp-chart border-border/60">
+              <Card className="hover-lift-sm wdp-chart border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Putaway Efficiency (6 Months)</CardTitle></CardHeader>
                 <CardContent><AreaChart data={putEff} height={240}><CartesianGrid strokeDasharray="3 3" className="stroke-muted"/><XAxis dataKey="month" tick={{fontSize:10}}/><YAxis tick={{fontSize:10}} domain={[60,100]}/><Tooltip/><Area type="monotone" dataKey="efficiency" fill={TH.violet} stroke={TH.violet} fillOpacity={0.3}/><Area type="monotone" dataKey="target" fill={TH.rose} stroke={TH.rose} fillOpacity={0.1}/></AreaChart></CardContent>
               </Card>
-              <Card className="wdp-chart border-border/60">
+              <Card className="hover-lift-sm wdp-chart border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Zone Performance</CardTitle></CardHeader>
                 <CardContent><BarChart data={zPerf} height={240} layout="vertical"><CartesianGrid strokeDasharray="3 3" className="stroke-muted"/><XAxis type="number" tick={{fontSize:10}} domain={[0,100]}/><YAxis dataKey="zone" type="category" tick={{fontSize:9}} width={100}/><Tooltip/><Bar dataKey="perf" fill={TH.emerald} radius={[0,4,4,0]}/></BarChart></CardContent>
               </Card>
@@ -335,7 +335,7 @@ export default function WMSDashboardProView() {
           <SheetHeader><SheetTitle className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">Zone Details \u2014 {selZone?.code}</SheetTitle></SheetHeader>
           {selZone && (
             <div className="mt-4 space-y-4">
-              <Card className="wdp-sheet-card p-4 border-border/60">
+              <Card className="hover-lift-sm wdp-sheet-card p-4 border-border/60">
                 <div className="flex flex-wrap items-center gap-2 mb-4">
                   <ZoneTypeBadge type={selZone.type}/>
                   <ZoneStatusBadge status={selZone.status}/>

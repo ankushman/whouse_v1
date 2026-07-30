@@ -653,10 +653,10 @@ export function CapacityPlanningView() {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20" onClick={() => {}}>
+              <Button variant="ghost" size="sm" className="press-scale text-white hover:bg-white/20" onClick={() => {}}>
                 <RefreshCw className="h-4 w-4 mr-1" /> Refresh
               </Button>
-              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20" onClick={handleExportCSV}>
+              <Button variant="ghost" size="sm" className="press-scale text-white hover:bg-white/20" onClick={handleExportCSV}>
                 <Download className="h-4 w-4 mr-1" /> Export
               </Button>
             </div>
@@ -735,7 +735,7 @@ export function CapacityPlanningView() {
           <div className="cap-overview space-y-4">
             {/* Capacity vs Demand Chart */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="cap-chart-card lg:col-span-2">
+              <Card className="hover-lift-sm cap-chart-card lg:col-span-2">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-teal-600" />
@@ -760,14 +760,14 @@ export function CapacityPlanningView() {
               </Card>
 
               {/* Bottleneck Card */}
-              <Card className="cap-bottleneck-card">
+              <Card className="hover-lift-sm cap-bottleneck-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <AlertTriangle className="h-4 w-4 text-amber-500" />
                     Top Bottlenecks
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle space-y-2">
+                <CardContent className="inner-glow glass-subtle space-y-2">
                   {bottlenecks.map((bn, i) => (
                     <div key={bn.id} className={`cap-bottleneck-item flex items-center justify-between p-2 rounded-lg ${SEVERITY_CONFIG[bn.severity].bg}`}>
                       <div className="flex items-center gap-2">
@@ -796,7 +796,7 @@ export function CapacityPlanningView() {
             </div>
 
             {/* Work Center Utilization Grid */}
-            <Card className="cap-heatmap-card">
+            <Card className="hover-lift-sm cap-heatmap-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <LayoutGrid className="h-4 w-4 text-cyan-600" />
@@ -849,8 +849,8 @@ export function CapacityPlanningView() {
         {activeTab === 'workcenters' && (
           <div className="cap-workcenters space-y-4">
             {/* Filter Bar */}
-            <Card className="cap-filter-bar">
-              <CardContent className="glass-subtle py-3 flex flex-wrap items-center gap-3">
+            <Card className="hover-lift-sm cap-filter-bar">
+              <CardContent className="inner-glow glass-subtle py-3 flex flex-wrap items-center gap-3">
                 <div className="relative flex-1 min-w-[200px]">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -900,7 +900,7 @@ export function CapacityPlanningView() {
 
             {/* Work Center Table */}
             <Card>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-teal-50/50 dark:bg-teal-950/20">
@@ -964,7 +964,7 @@ export function CapacityPlanningView() {
                           </TableCell>
                           <TableCell className="cap-table-cell text-xs text-muted-foreground">{wc.supervisor}</TableCell>
                           <TableCell className="cap-table-cell text-center">
-                            <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={() => handleOpenDetail(wc)}>
+                            <Button size="sm" variant="ghost" className="press-scale h-7 w-7 p-0" onClick={() => handleOpenDetail(wc)}>
                               <Eye className="h-3.5 w-3.5" />
                             </Button>
                           </TableCell>
@@ -991,7 +991,7 @@ export function CapacityPlanningView() {
                 const util = totalCap > 0 ? totalActual / totalCap : 0
                 const gradient = sn === 'Morning' ? 'from-amber-500 to-orange-600' : sn === 'Afternoon' ? 'from-cyan-500 to-blue-600' : 'from-indigo-500 to-purple-600'
                 return (
-                  <Card key={sn} className="cap-shift-card overflow-hidden">
+                  <Card key={sn} className="hover-lift-sm cap-shift-card overflow-hidden">
                     <div className={`cap-shift-card-header bg-gradient-to-r ${gradient} p-4 text-white`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -1003,7 +1003,7 @@ export function CapacityPlanningView() {
                         </Badge>
                       </div>
                     </div>
-                    <CardContent className="glass-subtle p-4 space-y-3">
+                    <CardContent className="inner-glow glass-subtle p-4 space-y-3">
                       <div className="grid grid-cols-2 gap-3">
                         <div>
                           <div className="text-xs text-muted-foreground">Capacity</div>
@@ -1130,26 +1130,26 @@ export function CapacityPlanningView() {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <Card className="cap-gap-card">
-                <CardContent className="glass-subtle p-4 text-center">
+              <Card className="hover-lift-sm cap-gap-card">
+                <CardContent className="inner-glow glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Overloaded Weeks</div>
                   <div className="text-2xl font-bold text-red-600">{gapStats.overloadedWeeks}</div>
                 </CardContent>
               </Card>
-              <Card className="cap-gap-card">
-                <CardContent className="glass-subtle p-4 text-center">
+              <Card className="hover-lift-sm cap-gap-card">
+                <CardContent className="inner-glow glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Underutilized Weeks</div>
                   <div className="text-2xl font-bold text-sky-600">{gapStats.underutilizedWeeks}</div>
                 </CardContent>
               </Card>
-              <Card className="cap-gap-card">
-                <CardContent className="glass-subtle p-4 text-center">
+              <Card className="hover-lift-sm cap-gap-card">
+                <CardContent className="inner-glow glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Critical Gaps</div>
                   <div className="text-2xl font-bold text-amber-600">{gapStats.criticalGaps}</div>
                 </CardContent>
               </Card>
-              <Card className="cap-gap-card">
-                <CardContent className="glass-subtle p-4 text-center">
+              <Card className="hover-lift-sm cap-gap-card">
+                <CardContent className="inner-glow glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Total Gap Hours</div>
                   <div className="text-2xl font-bold text-teal-600">{gapStats.totalGapHours.toLocaleString('en-IN')}</div>
                 </CardContent>
@@ -1185,7 +1185,7 @@ export function CapacityPlanningView() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Rough-Cut Capacity Plan</CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-teal-50/50 dark:bg-teal-950/20">
@@ -1241,7 +1241,7 @@ export function CapacityPlanningView() {
                 const bg = status === 'On-time' ? 'bg-emerald-50 dark:bg-emerald-950/30' : status === 'Early' ? 'bg-teal-50 dark:bg-teal-950/30' : status === 'At Risk' ? 'bg-amber-50 dark:bg-amber-950/30' : 'bg-red-50 dark:bg-red-950/30'
                 return (
                   <Card key={status} className={`${bg} border-${color.replace('text-', '')}`}>
-                    <CardContent className="glass-subtle p-4 text-center">
+                    <CardContent className="inner-glow glass-subtle p-4 text-center">
                       <div className="text-xs text-muted-foreground uppercase">{status}</div>
                       <div className={`text-2xl font-bold ${color}`}>{count}</div>
                       <div className="text-xs text-muted-foreground">orders</div>
@@ -1259,7 +1259,7 @@ export function CapacityPlanningView() {
                   Today's Production Schedule
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-teal-50/50 dark:bg-teal-950/20">
@@ -1324,7 +1324,7 @@ export function CapacityPlanningView() {
                     Overall OEE
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle flex flex-col items-center">
+                <CardContent className="inner-glow glass-subtle flex flex-col items-center">
                   <ResponsiveContainer width="100%" height={200}>
                     <RadialBarChart cx="50%" cy="50%" innerRadius="60%" outerRadius="90%" data={oeeGaugeData} startAngle={180} endAngle={0}>
                       <RadialBar dataKey="value" cornerRadius={10} />
@@ -1354,7 +1354,7 @@ export function CapacityPlanningView() {
               </Card>
 
               {/* OEE Trend */}
-              <Card className="lg:col-span-2">
+              <Card className="hover-lift-sm lg:col-span-2">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-teal-600" />
@@ -1442,8 +1442,8 @@ export function CapacityPlanningView() {
                 const pct = hs.value * 100
                 const isAboveTarget = pct >= hs.target * 100
                 return (
-                  <Card key={hs.label} className="cap-health-tile">
-                    <CardContent className="glass-subtle p-3">
+                  <Card key={hs.label} className="hover-lift-sm cap-health-tile">
+                    <CardContent className="inner-glow glass-subtle p-3">
                       <div className="text-xs text-muted-foreground font-medium mb-2">{hs.label}</div>
                       <div className={`text-lg font-bold tabular-nums ${isAboveTarget ? 'text-emerald-600' : 'text-amber-600'}`}>
                         {pct.toFixed(1)}%
@@ -1474,7 +1474,7 @@ export function CapacityPlanningView() {
                   Capacity Alerts
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-2">
+              <CardContent className="inner-glow glass-subtle space-y-2">
                 {capacityAlerts.map(alert => {
                   const sev = SEVERITY_CONFIG[alert.severity]
                   return (

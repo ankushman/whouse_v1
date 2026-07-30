@@ -513,7 +513,7 @@ export function SafetyIncidentManagementView() {
             {/* Charts Row */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Monthly Trend */}
-              <Card className="col-span-2 sim-card">
+              <Card className="hover-lift-sm col-span-2 sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <LineChartIcon className="h-4 w-4 text-blue-500" /> Monthly Incident Trend
@@ -536,7 +536,7 @@ export function SafetyIncidentManagementView() {
               </Card>
 
               {/* Category Distribution */}
-              <Card className="sim-card">
+              <Card className="hover-lift-sm sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <PieChartIcon className="h-4 w-4 text-purple-500" /> By Category
@@ -567,7 +567,7 @@ export function SafetyIncidentManagementView() {
             {/* Second Row: Warehouse Comparison + Safety Culture */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Warehouse Comparison */}
-              <Card className="sim-card">
+              <Card className="hover-lift-sm sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Building2 className="h-4 w-4 text-cyan-500" /> Warehouse Safety Comparison
@@ -590,13 +590,13 @@ export function SafetyIncidentManagementView() {
               </Card>
 
               {/* Safety Culture / Leading Indicators */}
-              <Card className="sim-card">
+              <Card className="hover-lift-sm sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <ShieldCheck className="h-4 w-4 text-emerald-500" /> Safety Culture — Leading Indicators
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle space-y-3">
+                <CardContent className="inner-glow glass-subtle space-y-3">
                   {safetyCulture.map((item) => {
                     const pct = Math.min((item.value / item.target) * 100, 100);
                     return (
@@ -623,7 +623,7 @@ export function SafetyIncidentManagementView() {
 
             {/* Severity Distribution + Days Since Incident */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="sim-card">
+              <Card className="hover-lift-sm sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <CircleAlert className="h-4 w-4 text-red-500" /> Severity Breakdown
@@ -651,7 +651,7 @@ export function SafetyIncidentManagementView() {
               </Card>
 
               {/* Key Metrics */}
-              <Card className="col-span-2 sim-card">
+              <Card className="hover-lift-sm col-span-2 sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Target className="h-4 w-4 text-indigo-500" /> Key Safety Metrics
@@ -816,7 +816,7 @@ export function SafetyIncidentManagementView() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {/* Root Cause Analysis */}
-                  <Card className="sim-card">
+                  <Card className="hover-lift-sm sim-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm font-semibold flex items-center gap-2">
                         <BrainCircuit className="h-4 w-4 text-purple-500" /> Root Cause Analysis
@@ -869,7 +869,7 @@ export function SafetyIncidentManagementView() {
                   {/* Injury Record + Witnesses */}
                   <div className="space-y-4">
                     {/* Injury Record */}
-                    <Card className="sim-card">
+                    <Card className="hover-lift-sm sim-card">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-semibold flex items-center gap-2">
                           <Heart className="h-4 w-4 text-red-500" /> Injury Record
@@ -910,7 +910,7 @@ export function SafetyIncidentManagementView() {
                     </Card>
 
                     {/* Witnesses */}
-                    <Card className="sim-card">
+                    <Card className="hover-lift-sm sim-card">
                       <CardHeader className="pb-2">
                         <CardTitle className="text-sm font-semibold flex items-center gap-2">
                           <Users className="h-4 w-4 text-blue-500" /> Witnesses ({selectedIncident.witnesses.length})
@@ -967,7 +967,7 @@ export function SafetyIncidentManagementView() {
 
             {/* CA Status Distribution Chart */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="sim-card">
+              <Card className="hover-lift-sm sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-blue-500" /> Actions by Status
@@ -997,7 +997,7 @@ export function SafetyIncidentManagementView() {
               </Card>
 
               {/* Overdue CA by Warehouse */}
-              <Card className="col-span-2 sim-card">
+              <Card className="hover-lift-sm col-span-2 sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Clock className="h-4 w-4 text-amber-500" /> Corrective Actions Timeline
@@ -1028,7 +1028,7 @@ export function SafetyIncidentManagementView() {
             </div>
 
             {/* All Corrective Actions Table */}
-            <Card className="sim-card">
+            <Card className="hover-lift-sm sim-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <ClipboardCheck className="h-4 w-4 text-emerald-500" /> All Corrective Actions
@@ -1103,13 +1103,13 @@ export function SafetyIncidentManagementView() {
 
             {/* Compliance Checklist */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="sim-card">
+              <Card className="hover-lift-sm sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <FileText className="h-4 w-4 text-indigo-500" /> Regulatory Compliance Checklist
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle space-y-2">
+                <CardContent className="inner-glow glass-subtle space-y-2">
                   {[
                     { item: "OSHA 300 Log Maintained", status: "compliant", note: "Updated weekly" },
                     { item: "OSHA 300A Annual Summary", status: "compliant", note: "Posted Feb 1" },
@@ -1141,7 +1141,7 @@ export function SafetyIncidentManagementView() {
               </Card>
 
               {/* Safety Training Matrix */}
-              <Card className="sim-card">
+              <Card className="hover-lift-sm sim-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Megaphone className="h-4 w-4 text-orange-500" /> Training Compliance by Module
@@ -1174,7 +1174,7 @@ export function SafetyIncidentManagementView() {
             </div>
 
             {/* Injury Cost Trend */}
-            <Card className="sim-card">
+            <Card className="hover-lift-sm sim-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <IndianRupee className="h-4 w-4 text-green-500" /> Injury Cost Trend by Month

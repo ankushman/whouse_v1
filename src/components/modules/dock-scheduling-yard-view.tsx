@@ -194,8 +194,8 @@ export default function DockSchedulingYardView() {
             { label: "Avg Turnaround", value: fmtMin(avgTurnaround), icon: Timer, color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-950/40", sub: "Loading + Unloading" },
             { label: "Yard Occupancy", value: `${yardUtil}%`, icon: ParkingCircle, color: "text-cyan-600", bg: "bg-cyan-50 dark:bg-cyan-950/40", sub: `${yardOccupancy.reduce((s, d) => s + d.occupied, 0)} vehicles in yard` },
           ].map(kpi => (
-            <Card key={kpi.label} className="dsy-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm dsy-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="dsy-label">{kpi.label}</p>
@@ -212,7 +212,7 @@ export default function DockSchedulingYardView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Clock className="h-4 w-4 text-blue-500" />Hourly Dock Utilization</CardTitle>
             </CardHeader>
@@ -233,7 +233,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Target className="h-4 w-4 text-emerald-500" />Appointment Status Distribution</CardTitle>
             </CardHeader>
@@ -249,7 +249,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Navigation className="h-4 w-4 text-violet-500" />Daily Appointment Trend</CardTitle>
             </CardHeader>
@@ -270,7 +270,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><ParkingCircle className="h-4 w-4 text-amber-500" />Yard Zone Occupancy</CardTitle>
             </CardHeader>
@@ -339,8 +339,8 @@ export default function DockSchedulingYardView() {
           </select>
         </div>
 
-        <Card className="dsy-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm dsy-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="dsy-table">
                 <thead>
@@ -393,7 +393,7 @@ export default function DockSchedulingYardView() {
                       </td>
                       <td><Badge className={STATUS_COLORS[appt.status]}>{appt.status}</Badge></td>
                       <td>
-                        <Button size="sm" variant="ghost" className="dsy-action-btn" onClick={() => openDrawer(appt)}>
+                        <Button size="sm" variant="ghost" className="press-scale dsy-action-btn" onClick={() => openDrawer(appt)}>
                           <Eye className="h-3.5 w-3.5" />
                         </Button>
                       </td>
@@ -418,8 +418,8 @@ export default function DockSchedulingYardView() {
             const queued = dockAppts.filter(a => a.status === "Scheduled").length
             const pct = Math.round(dock.level / dock.capacity * 100)
             return (
-              <Card key={dock.id} className="dsy-dock-card border-slate-100 dark:border-slate-800" style={{ borderTopWidth: 3, borderTopColor: dock.color }}>
-                <CardContent className="glass-subtle p-4">
+              <Card key={dock.id} className="hover-lift-sm dsy-dock-card border-slate-100 dark:border-slate-800" style={{ borderTopWidth: 3, borderTopColor: dock.color }}>
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <div className="dsy-dock-icon" style={{ backgroundColor: dock.color + "18", border: `2px solid ${dock.color}` }}>
@@ -465,7 +465,7 @@ export default function DockSchedulingYardView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mt-4">
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><ArrowUpDown className="h-4 w-4 text-blue-500" />Dock Throughput Comparison</CardTitle>
             </CardHeader>
@@ -484,7 +484,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Clock className="h-4 w-4 text-amber-500" />Avg Turnaround by Dock</CardTitle>
             </CardHeader>
@@ -515,8 +515,8 @@ export default function DockSchedulingYardView() {
               const vehicles = appointments.filter(a => a.yardZone.includes(zone.zone) && ["Checking In", "Loading", "Unloading", "Scheduled"].includes(a.status)).slice(0, 6)
               const color = zone.pct >= 90 ? "#ef4444" : zone.pct >= 70 ? "#f59e0b" : "#10b981"
               return (
-                <Card key={i} className="dsy-yard-card border-slate-100 dark:border-slate-800" style={{ borderLeftWidth: 4, borderLeftColor: color }}>
-                  <CardContent className="glass-subtle p-3">
+                <Card key={i} className="hover-lift-sm dsy-yard-card border-slate-100 dark:border-slate-800" style={{ borderLeftWidth: 4, borderLeftColor: color }}>
+                  <CardContent className="inner-glow glass-subtle p-3">
                     <div className="flex items-center justify-between mb-2">
                       <p className="font-semibold text-xs">{zone.zone}</p>
                       <Badge variant={zone.pct >= 90 ? "destructive" : "outline"} className="badge-interactive text-xs">{zone.pct}%</Badge>
@@ -545,7 +545,7 @@ export default function DockSchedulingYardView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mt-4">
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Truck className="h-4 w-4 text-emerald-500" />Vehicle Type Distribution</CardTitle>
             </CardHeader>
@@ -561,7 +561,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Flag className="h-4 w-4 text-violet-500" />Load Type Breakdown</CardTitle>
             </CardHeader>
@@ -588,7 +588,7 @@ export default function DockSchedulingYardView() {
     return (
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><TrendingUp className="h-4 w-4 text-emerald-500" />Throughput Trend (28 Days)</CardTitle>
             </CardHeader>
@@ -607,7 +607,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Target className="h-4 w-4 text-violet-500" />Carrier Performance Radar (Top 5)</CardTitle>
             </CardHeader>
@@ -629,7 +629,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><ArrowRightLeft className="h-4 w-4 text-amber-500" />Inbound vs Outbound Balance</CardTitle>
             </CardHeader>
@@ -648,7 +648,7 @@ export default function DockSchedulingYardView() {
             </CardContent>
           </Card>
 
-          <Card className="dsy-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm dsy-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="dsy-title"><Timer className="h-4 w-4 text-cyan-500" />Delay Analysis by Reason</CardTitle>
             </CardHeader>
@@ -677,8 +677,8 @@ export default function DockSchedulingYardView() {
           <p className="dsy-subheading">Loading dock allocation, truck scheduling, and yard operations across warehouses</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="btn-outline-animate dsy-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
-          <Button size="sm" className="dsy-header-btn-primary"><Plus className="h-3.5 w-3.5" />New Appointment</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate dsy-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
+          <Button size="sm" className="press-scale dsy-header-btn-primary"><Plus className="h-3.5 w-3.5" />New Appointment</Button>
         </div>
       </div>
 
@@ -786,9 +786,9 @@ export default function DockSchedulingYardView() {
               )}
 
               <div className="dsy-drawer-actions">
-                <Button className="dsy-action-primary flex-1"><CheckCircle2 className="h-4 w-4" />Complete</Button>
-                <Button variant="outline" className="btn-outline-animate dsy-action-secondary"><Clock className="h-4 w-4" />Reschedule</Button>
-                <Button variant="outline" className="btn-outline-animate dsy-action-secondary text-red-500"><X className="h-4 w-4" />Cancel</Button>
+                <Button className="press-scale dsy-action-primary flex-1"><CheckCircle2 className="h-4 w-4" />Complete</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate dsy-action-secondary"><Clock className="h-4 w-4" />Reschedule</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate dsy-action-secondary text-red-500"><X className="h-4 w-4" />Cancel</Button>
               </div>
             </div>
           </div>

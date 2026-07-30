@@ -175,7 +175,7 @@ export default function PickPackOptimizationView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><BarChart3 className="h-4 w-4 text-sky-500" />Monthly Order Volume</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
@@ -193,7 +193,7 @@ export default function PickPackOptimizationView() {
             </CardContent>
           </Card>
 
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><LayoutGrid className="h-4 w-4 text-rose-500" />Pick Method Distribution</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
@@ -207,7 +207,7 @@ export default function PickPackOptimizationView() {
             </CardContent>
           </Card>
 
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><MapPin className="h-4 w-4 text-amber-500" />Zone Distribution</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
@@ -223,7 +223,7 @@ export default function PickPackOptimizationView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><ArrowLeftRight className="h-4 w-4 text-emerald-500" />Planned vs Actual Picks (Daily)</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
@@ -240,7 +240,7 @@ export default function PickPackOptimizationView() {
             </CardContent>
           </Card>
 
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><AlertTriangle className="h-4 w-4 text-amber-500" />Pick & Pack Alerts</CardTitle></CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -336,7 +336,7 @@ export default function PickPackOptimizationView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><BarChart3 className="h-4 w-4 text-sky-500" />Zone Multi-Metric Comparison</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={250}>
@@ -354,7 +354,7 @@ export default function PickPackOptimizationView() {
             </CardContent>
           </Card>
 
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><Clock className="h-4 w-4 text-amber-500" />Zone Backlog Status</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={250}>
@@ -370,7 +370,7 @@ export default function PickPackOptimizationView() {
           </Card>
         </div>
 
-        <Card className="border-sky-100 dark:border-sky-900/40">
+        <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
           <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><MapPin className="h-4 w-4 text-indigo-500" />Zone Detail Cards</CardTitle></CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
@@ -419,7 +419,7 @@ export default function PickPackOptimizationView() {
           ))}
         </div>
 
-        <Card className="border-sky-100 dark:border-sky-900/40">
+        <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
           <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><Users className="h-4 w-4 text-sky-500" />Picker Performance Rankings</CardTitle></CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -449,7 +449,7 @@ export default function PickPackOptimizationView() {
     return (
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><TrendingUp className="h-4 w-4 text-emerald-500" />Pick Accuracy Trend</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
@@ -465,7 +465,7 @@ export default function PickPackOptimizationView() {
             </CardContent>
           </Card>
 
-          <Card className="border-sky-100 dark:border-sky-900/40">
+          <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
             <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><Timer className="h-4 w-4 text-amber-500" />Pick Time by Method</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
@@ -483,7 +483,7 @@ export default function PickPackOptimizationView() {
           </Card>
         </div>
 
-        <Card className="border-sky-100 dark:border-sky-900/40">
+        <Card className="hover-lift-sm border-sky-100 dark:border-sky-900/40">
           <CardHeader className="pb-2"><CardTitle className="flex items-center gap-2 text-sm font-semibold"><ArrowLeftRight className="h-4 w-4 text-indigo-500" />Priority Distribution</CardTitle></CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={180}>
@@ -569,10 +569,10 @@ export default function PickPackOptimizationView() {
             <div className="ppo-drawer-section">
               <div className="ppo-drawer-section-title">Actions</div>
               <div className="flex flex-wrap gap-2">
-                <Button size="sm" className="bg-sky-600 text-white hover:bg-sky-700 gap-1"><ScanBarcode className="h-3.5 w-3.5" /> Assign Picker</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1"><PackageCheck className="h-3.5 w-3.5" /> Confirm Pick</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1"><Box className="h-3.5 w-3.5" /> Generate Pack</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1"><Truck className="h-3.5 w-3.5" /> Create Shipment</Button>
+                <Button size="sm" className="press-scale bg-sky-600 text-white hover:bg-sky-700 gap-1"><ScanBarcode className="h-3.5 w-3.5" /> Assign Picker</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1"><PackageCheck className="h-3.5 w-3.5" /> Confirm Pick</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1"><Box className="h-3.5 w-3.5" /> Generate Pack</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1"><Truck className="h-3.5 w-3.5" /> Create Shipment</Button>
               </div>
             </div>
           </div>

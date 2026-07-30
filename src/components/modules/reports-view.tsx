@@ -442,10 +442,10 @@ export function ReportsView() {
         description="Generate and download operational reports"
         actions={
           <div className="flex items-center gap-2">
-            <Button size="sm" className="gap-1.5" onClick={handleDownloadAllPDF}>
+            <Button size="sm" className="press-scale gap-1.5" onClick={handleDownloadAllPDF}>
               <FileDown className="h-3.5 w-3.5" /> Download All as PDF
             </Button>
-            <Button size="sm" variant="outline" className="btn-outline-animate gap-1.5" onClick={() => toast.info("Refreshing all reports...", "This may take a moment", { duration: 2000 })}>
+            <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1.5" onClick={() => toast.info("Refreshing all reports...", "This may take a moment", { duration: 2000 })}>
               <RefreshCw className="h-3.5 w-3.5" /> Refresh All
             </Button>
           </div>
@@ -453,14 +453,14 @@ export function ReportsView() {
       />
 
       {/* Schedule Banner */}
-      <Card className="rounded-xl border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/30">
-        <CardContent className="glass-subtle flex items-center gap-loose p-4">
+      <Card className="hover-lift-sm rounded-xl border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/30">
+        <CardContent className="inner-glow glass-subtle flex items-center gap-loose p-4">
           <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           <div className="flex-1">
             <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Automated Report Schedule</p>
             <p className="text-xs text-blue-600 dark:text-blue-400">Executive Summary: Daily 9AM • MIS: 1st of every month • Cost Analysis: 15th of every month</p>
           </div>
-          <Button variant="outline" size="sm" className="btn-outline-animate text-xs">Manage Schedule</Button>
+          <Button variant="outline" size="sm" className="press-scale btn-outline-animate text-xs">Manage Schedule</Button>
         </CardContent>
       </Card>
 
@@ -491,7 +491,7 @@ export function ReportsView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-3">
+              <CardContent className="inner-glow glass-subtle space-y-3">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Last Generated</span>
                   <span className="font-medium">{report.lastGenerated}</span>
@@ -516,24 +516,24 @@ export function ReportsView() {
                 </div>
                 <Separator />
                 <div className="flex items-center gap-2">
-                  <Button size="sm" className="flex-1 text-xs gap-1.5 h-8" disabled={isGenerating} onClick={() => handleGenerateReport(report.id, report.title)}>
+                  <Button size="sm" className="press-scale flex-1 text-xs gap-1.5 h-8" disabled={isGenerating} onClick={() => handleGenerateReport(report.id, report.title)}>
                     {isGenerating ? <Loader2 className="h-3 w-3 animate-spin" /> : <RefreshCw className="h-3 w-3" />} Generate
                   </Button>
                   {hasCSVExport ? (
                     <ExportButton onExportCSV={exportHandlers.onExportCSV} onExportPDF={exportHandlers.onExportPDF} />
                   ) : (
-                    <Button variant="outline" size="sm" className="btn-outline-animate text-xs gap-1.5 h-8" title="Download PDF" onClick={() => handleExportPDF(report.id, report.title)}>
+                    <Button variant="outline" size="sm" className="press-scale btn-outline-animate text-xs gap-1.5 h-8" title="Download PDF" onClick={() => handleExportPDF(report.id, report.title)}>
                       <Download className="h-3 w-3" />
                       <span className="hidden sm:inline">PDF</span>
                     </Button>
                   )}
                   {report.formats.includes("excel") && !hasCSVExport && (
-                    <Button variant="outline" size="sm" className="btn-outline-animate text-xs gap-1.5 h-8" title="Download Excel">
+                    <Button variant="outline" size="sm" className="press-scale btn-outline-animate text-xs gap-1.5 h-8" title="Download Excel">
                       <FileSpreadsheet className="h-3 w-3" />
                       <span className="hidden sm:inline">Excel</span>
                     </Button>
                   )}
-                  <Button variant="ghost" size="sm" className="text-xs gap-1.5 h-8" title="Preview report details" onClick={() => openDrawer(report)}>
+                  <Button variant="ghost" size="sm" className="press-scale text-xs gap-1.5 h-8" title="Preview report details" onClick={() => openDrawer(report)}>
                     <Eye className="h-3 w-3" />
                   </Button>
                 </div>
@@ -544,7 +544,7 @@ export function ReportsView() {
       </div>
 
       {/* Recent Reports History Table */}
-      <Card className="rounded-xl">
+      <Card className="hover-lift-sm rounded-xl">
         <CardHeader className="pb-3">
           <div className="flex items-center gap-2">
             <Clock className="h-5 w-5 text-muted-foreground" />
@@ -552,7 +552,7 @@ export function ReportsView() {
           </div>
           <CardDescription className="text-xs">History of recently generated reports</CardDescription>
         </CardHeader>
-        <CardContent className="glass-subtle p-0">
+        <CardContent className="inner-glow glass-subtle p-0">
           <div className="max-h-96 overflow-y-auto">
             <Table className="table-hover-highlight">
               <TableHeader className="table-header-sticky-glass">
@@ -580,10 +580,10 @@ export function ReportsView() {
                     <TableCell>{getHistoryStatusBadge(item.status)}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex items-center justify-end gap-1">
-                        <Button variant="ghost" size="sm" className="h-7 w-7 p-0" title="Download" disabled={item.status !== "Completed"}>
+                        <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" title="Download" disabled={item.status !== "Completed"}>
                           <Download className="h-3.5 w-3.5" />
                         </Button>
-                        <Button variant="ghost" size="sm" className="h-7 w-7 p-0" title="Preview">
+                        <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" title="Preview">
                           <Eye className="h-3.5 w-3.5" />
                         </Button>
                       </div>

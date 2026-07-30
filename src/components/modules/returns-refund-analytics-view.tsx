@@ -293,7 +293,7 @@ export default function ReturnsRefundAnalyticsView() {
         {/* Charts Row 1 */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {/* Monthly Returns Volume */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <BarChart3 className="h-4 w-4 text-orange-500" />
@@ -318,7 +318,7 @@ export default function ReturnsRefundAnalyticsView() {
           </Card>
 
           {/* Return Reasons PieChart */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <RotateCcw className="h-4 w-4 text-cyan-500" />
@@ -341,7 +341,7 @@ export default function ReturnsRefundAnalyticsView() {
           </Card>
 
           {/* Disposition Distribution */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Recycle className="h-4 w-4 text-emerald-500" />
@@ -367,7 +367,7 @@ export default function ReturnsRefundAnalyticsView() {
         {/* Charts Row 2 */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Warehouse Returns */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Warehouse className="h-4 w-4 text-blue-500" />
@@ -395,7 +395,7 @@ export default function ReturnsRefundAnalyticsView() {
           </Card>
 
           {/* Channel Analysis */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Zap className="h-4 w-4 text-amber-500" />
@@ -417,7 +417,7 @@ export default function ReturnsRefundAnalyticsView() {
         </div>
 
         {/* Alerts */}
-        <Card className="border-orange-100 dark:border-orange-900/40">
+        <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <AlertTriangle className="h-4 w-4 text-amber-500" />
@@ -533,7 +533,7 @@ export default function ReturnsRefundAnalyticsView() {
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Reason Value BarChart */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <RotateCcw className="h-4 w-4 text-orange-500" />
@@ -554,7 +554,7 @@ export default function ReturnsRefundAnalyticsView() {
           </Card>
 
           {/* Supplier Return Table */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <User className="h-4 w-4 text-cyan-500" />
@@ -602,7 +602,7 @@ export default function ReturnsRefundAnalyticsView() {
         </div>
 
         {/* Supplier Quality Scatter (simulated as Bar) */}
-        <Card className="border-orange-100 dark:border-orange-900/40">
+        <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <Star className="h-4 w-4 text-amber-500" />
@@ -657,7 +657,7 @@ export default function ReturnsRefundAnalyticsView() {
         </div>
 
         {/* Refund Trend */}
-        <Card className="border-orange-100 dark:border-orange-900/40">
+        <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <TrendingUp className="h-4 w-4 text-emerald-500" />
@@ -685,7 +685,7 @@ export default function ReturnsRefundAnalyticsView() {
 
         {/* Refund by channel + warehouse */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <ArrowLeftRight className="h-4 w-4 text-indigo-500" />
@@ -710,7 +710,7 @@ export default function ReturnsRefundAnalyticsView() {
             </CardContent>
           </Card>
 
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Warehouse className="h-4 w-4 text-purple-500" />
@@ -769,7 +769,7 @@ export default function ReturnsRefundAnalyticsView() {
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Disposition Mix */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Recycle className="h-4 w-4 text-emerald-500" />
@@ -792,7 +792,7 @@ export default function ReturnsRefundAnalyticsView() {
           </Card>
 
           {/* Quality Grade Distribution */}
-          <Card className="border-orange-100 dark:border-orange-900/40">
+          <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Star className="h-4 w-4 text-amber-500" />
@@ -823,7 +823,7 @@ export default function ReturnsRefundAnalyticsView() {
         </div>
 
         {/* Recovery by warehouse */}
-        <Card className="border-orange-100 dark:border-orange-900/40">
+        <Card className="hover-lift-sm border-orange-100 dark:border-orange-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <Warehouse className="h-4 w-4 text-indigo-500" />
@@ -988,16 +988,16 @@ export default function ReturnsRefundAnalyticsView() {
             <div className="rra-drawer-section">
               <div className="rra-drawer-section-title">Actions</div>
               <div className="flex flex-wrap gap-2">
-                <Button size="sm" className="bg-orange-600 text-white hover:bg-orange-700 gap-1">
+                <Button size="sm" className="press-scale bg-orange-600 text-white hover:bg-orange-700 gap-1">
                   <Package className="h-3.5 w-3.5" /> Process Return
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <CreditCard className="h-3.5 w-3.5" /> Issue Refund
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <Recycle className="h-3.5 w-3.5" /> Initiate Restock
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <Send className="h-3.5 w-3.5" /> Return to Vendor
                 </Button>
               </div>

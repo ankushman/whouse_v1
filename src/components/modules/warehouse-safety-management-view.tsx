@@ -372,7 +372,7 @@ export default function WarehouseSafetyManagementView() {
   const filteredPPE = sortedData(filterData(data.ppe, searchQ), sortField, sortDir)
 
   const SortHeader = ({ field, children }: { field: string; children: React.ReactNode }) => (
-    <Button variant="ghost" size="sm" className="wsm-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
+    <Button variant="ghost" size="sm" className="press-scale wsm-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
       <span className="flex items-center gap-1">{children}<ArrowUpDown className="h-3 w-3" /></span>
     </Button>
   )
@@ -393,7 +393,7 @@ export default function WarehouseSafetyManagementView() {
           <div className="wsm-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`wsm-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -401,15 +401,15 @@ export default function WarehouseSafetyManagementView() {
             ))}
           </div>
           <div className="wsm-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="wsm-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm wsm-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Monthly Incidents</CardTitle></CardHeader>
               <CardContent><AreaChart data={monthlyIncidents}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Incidents" stackId="a" fill="#e11d48" /><Area type="monotone" dataKey="Injuries" stackId="a" fill="#d97706" /></AreaChart></CardContent>
             </Card>
-            <Card className="wsm-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm wsm-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Incident Types</CardTitle></CardHeader>
               <CardContent><PieChart><Pie data={typePie} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{typePie.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
-            <Card className="wsm-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm wsm-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Zone Safety Scores</CardTitle></CardHeader>
               <CardContent><BarChart data={zoneBar}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="zone" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={60} /><YAxis tick={{ fontSize: 10 }} domain={[0, 100]} /><Tooltip /><Bar dataKey="Score" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
             </Card>
@@ -463,7 +463,7 @@ export default function WarehouseSafetyManagementView() {
                     <td className="p-2"><InjuryTile count={inc.injuries} /></td>
                     <td className="p-2"><CostTile amount={inc.cost} /></td>
                     <td className="p-2 text-[10px] font-medium text-gray-600 dark:text-gray-400">{inc.rootCause}</td>
-                    <td className="p-2 text-center"><Button variant="ghost" size="sm" className="wsm-view-btn h-7 w-7 p-0 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30" onClick={() => { setSelectedIncident(inc); setSheetOpen(true); toast.success("Viewing Incident", `${inc.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
+                    <td className="press-scale p-2 text-center"><Button variant="ghost" size="sm" className="wsm-view-btn h-7 w-7 p-0 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30" onClick={() => { setSelectedIncident(inc); setSheetOpen(true); toast.success("Viewing Incident", `${inc.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -484,7 +484,7 @@ export default function WarehouseSafetyManagementView() {
                   <div className="flex items-center justify-between"><PPETypeBadge type={p.type} /><PPEStatusBadge status={p.status} /></div>
                   <p className="text-lg font-bold mt-1">{p.id}</p>
                 </div>
-                <CardContent className="glass-subtle p-3 space-y-2">
+                <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Zone</span><ZoneBadge zone={p.zone} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Issued To</span><InspectorBadge name={p.issuedTo} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Compliance</span><SafetyScoreBar score={p.complianceRate} /></div>
@@ -529,7 +529,7 @@ export default function WarehouseSafetyManagementView() {
               { label: "Total Cost", value: fmtINR(data.incidents.reduce((s, x) => s + x.cost, 0)), icon: TrendingUp, color: "text-violet-600", bg: "bg-violet-50 dark:bg-violet-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`wsm-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -537,19 +537,19 @@ export default function WarehouseSafetyManagementView() {
             ))}
           </div>
           <div className="wsm-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card className="wsm-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm wsm-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Safety Trend (12 months)</CardTitle></CardHeader>
               <CardContent><LineChart data={Array.from({ length: 12 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][i], Score: ri(70, 100, i + 200), Target: 90 }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} domain={[50, 100]} /><Tooltip /><Line type="monotone" dataKey="Score" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Target" stroke="#e11d48" strokeWidth={1.5} strokeDasharray="5 5" /></LineChart></CardContent>
             </Card>
-            <Card className="wsm-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm wsm-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Incident Severity Distribution</CardTitle></CardHeader>
               <CardContent><PieChart><Pie data={INCIDENT_SEVERITIES.map((s, i) => ({ name: s, value: ri(3, 25, i + 300) }))} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{INCIDENT_SEVERITIES.map((_, i) => <Cell key={i} fill={["#e11d48", "#f97316", "#d97706", "#059669", "#3b82f6"][i]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
-            <Card className="wsm-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm wsm-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Top Root Causes</CardTitle></CardHeader>
               <CardContent><BarChart data={["Human Error", "Equipment Fault", "Procedural Gap", "Environmental", "Training Deficit", "Maintenance Overdue"].map((c, i) => ({ cause: c, count: ri(3, 20, i + 400) }))} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis dataKey="cause" type="category" tick={{ fontSize: 9 }} width={100} /><Tooltip /><Bar dataKey="count" fill="#e11d48" radius={[0, 4, 4, 0]} /></BarChart></CardContent>
             </Card>
-            <Card className="wsm-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm wsm-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Cost by Type (6 months)</CardTitle></CardHeader>
               <CardContent><AreaChart data={Array.from({ length: 6 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"][i], Medical: ri(50, 200, i + 500), Legal: ri(10, 80, i + 550), Equipment: ri(20, 100, i + 600), Productivity: ri(30, 150, i + 650) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Medical" stackId="a" fill="#e11d48" /><Area type="monotone" dataKey="Legal" stackId="a" fill="#7c3aed" /><Area type="monotone" dataKey="Equipment" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Productivity" stackId="a" fill="#d97706" /></AreaChart></CardContent>
             </Card>

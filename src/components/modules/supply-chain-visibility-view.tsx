@@ -601,9 +601,9 @@ export default function SupplyChainVisibilityView() {
         <TabsContent value="0" className="space-y-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {kpis.map((k, i) => (
-              <Card key={i} className="scv-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: i === 0 ? "#0d9488" : i === 1 ? "#3b82f6" : i === 2 ? "#e11d48" : i === 3 ? "#d97706" : i === 4 ? "#059669" : i === 5 ? "#7c3aed" : i === 6 ? "#ea580c" : "#6366f1" }}>
+              <Card key={i} className="hover-lift-sm scv-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: i === 0 ? "#0d9488" : i === 1 ? "#3b82f6" : i === 2 ? "#e11d48" : i === 3 ? "#d97706" : i === 4 ? "#059669" : i === 5 ? "#7c3aed" : i === 6 ? "#ea580c" : "#6366f1" }}>
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-80" style={{ background: `linear-gradient(90deg, ${i === 0 ? "#0d9488" : "#3b82f6"}, ${i === 0 ? "#14b8a6" : "#60a5fa"})` }} />
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{k.label}</p>
@@ -619,9 +619,9 @@ export default function SupplyChainVisibilityView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <Card className="scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Shipment Volume</CardTitle></CardHeader><CardContent><AreaChart data={data.dailyShipments}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Booked" stackId="1" stroke="#3b82f6" fill="#3b82f680" /><Area type="monotone" dataKey="InTransit" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /><Area type="monotone" dataKey="Delivered" stackId="1" stroke="#059669" fill="#05966980" /><Area type="monotone" dataKey="Exception" stackId="1" stroke="#e11d48" fill="#e11d4880" /></AreaChart></CardContent></Card>
-            <Card className="scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Transport Mode Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.modeDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.modeDistribution.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-            <Card className="scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Port Throughput (TEUs)</CardTitle></CardHeader><CardContent><BarChart data={data.portThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="port" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="TEUs" fill="#0d9488" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Shipment Volume</CardTitle></CardHeader><CardContent><AreaChart data={data.dailyShipments}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Booked" stackId="1" stroke="#3b82f6" fill="#3b82f680" /><Area type="monotone" dataKey="InTransit" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /><Area type="monotone" dataKey="Delivered" stackId="1" stroke="#059669" fill="#05966980" /><Area type="monotone" dataKey="Exception" stackId="1" stroke="#e11d48" fill="#e11d4880" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Transport Mode Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.modeDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.modeDistribution.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Port Throughput (TEUs)</CardTitle></CardHeader><CardContent><BarChart data={data.portThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="port" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="TEUs" fill="#0d9488" /></BarChart></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -631,8 +631,8 @@ export default function SupplyChainVisibilityView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search by ID, BL/AWB, origin or destination..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.info("Cleared", "All filters reset") }}>Clear</Button>
           </div>
-          <Card className="card-crud-lift scv-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift scv-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
@@ -662,7 +662,7 @@ export default function SupplyChainVisibilityView() {
                       <TableCell><ValueTile value={s.value} /></TableCell>
                       <TableCell className="text-xs">{s.eta}</TableCell>
                       <TableCell><WeatherBadge condition={s.weather} /></TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="scv-action-btn" onClick={() => { setSelectedShipment(s); toast.info("Shipment", `Tracking ${s.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="scv-action-btn" onClick={() => { setSelectedShipment(s); toast.info("Shipment", `Tracking ${s.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -673,8 +673,8 @@ export default function SupplyChainVisibilityView() {
 
         {/* ===== Tab 2: Alerts ===== */}
         <TabsContent value="2" className="space-y-4">
-          <Card className="card-crud-lift scv-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift scv-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="severity">Severity</SortHeader>
@@ -698,8 +698,8 @@ export default function SupplyChainVisibilityView() {
                       <TableCell className="text-xs">{a.createdAt}</TableCell>
                       <TableCell className="text-right">
                         <div className="flex gap-1 justify-end">
-                          <Button size="sm" variant="ghost" className="scv-action-btn" onClick={() => { setSelectedAlert(a); toast.info("Alert", `Viewing ${a.id}`) }}><Eye className="h-4 w-4" /></Button>
-                          {!a.resolved && <Button size="sm" variant="ghost" className="scv-action-btn text-emerald-600" onClick={() => toast.success("Resolved", `Alert ${a.id} marked resolved`)}><CheckCircle2 className="h-4 w-4" /></Button>}
+                          <Button size="sm" variant="ghost" className="press-scale scv-action-btn" onClick={() => { setSelectedAlert(a); toast.info("Alert", `Viewing ${a.id}`) }}><Eye className="h-4 w-4" /></Button>
+                          {!a.resolved && <Button size="sm" variant="ghost" className="press-scale scv-action-btn text-emerald-600" onClick={() => toast.success("Resolved", `Alert ${a.id} marked resolved`)}><CheckCircle2 className="h-4 w-4" /></Button>}
                         </div>
                       </TableCell>
                     </TableRow>
@@ -712,8 +712,8 @@ export default function SupplyChainVisibilityView() {
 
         {/* ===== Tab 3: Carrier Performance ===== */}
         <TabsContent value="3" className="space-y-4">
-          <Card className="card-crud-lift scv-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift scv-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="carrier">Carrier</SortHeader>
@@ -737,7 +737,7 @@ export default function SupplyChainVisibilityView() {
                       <TableCell className="text-xs">{c.avgTransitDays}d</TableCell>
                       <TableCell><DamageRateTile rate={c.damageRate} /></TableCell>
                       <TableCell><ComplianceBar pct={c.compliance} /></TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="scv-action-btn" onClick={() => { setSelectedCarrier(c); toast.info("Carrier", `Viewing ${c.carrier}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="scv-action-btn" onClick={() => { setSelectedCarrier(c); toast.info("Carrier", `Viewing ${c.carrier}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -748,8 +748,8 @@ export default function SupplyChainVisibilityView() {
 
         {/* ===== Tab 4: Documents ===== */}
         <TabsContent value="4" className="space-y-4">
-          <Card className="card-crud-lift scv-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift scv-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">Doc ID</SortHeader>
@@ -775,7 +775,7 @@ export default function SupplyChainVisibilityView() {
                       <TableCell className="text-xs">{d.submittedDate}</TableCell>
                       <TableCell className="text-xs">{d.expiryDate}</TableCell>
                       <TableCell className="text-xs">{d.verifiedBy}</TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="scv-action-btn" onClick={() => { setSelectedDoc(d); toast.info("Document", `Viewing ${d.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="scv-action-btn" onClick={() => { setSelectedDoc(d); toast.info("Document", `Viewing ${d.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -788,8 +788,8 @@ export default function SupplyChainVisibilityView() {
         <TabsContent value="5" className="space-y-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {analyticsKpiList.map((k, i) => (
-              <Card key={i} className="scv-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm scv-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center gap-3">
                     <div className={cn("scv-analytics-icon flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-white", k.color)}><k.icon className="h-4.5 w-4.5" /></div>
                     <div>
@@ -802,10 +802,10 @@ export default function SupplyChainVisibilityView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Card className="scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Monthly Shipment Trend</CardTitle></CardHeader><CardContent><LineChart data={data.monthlyTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Shipments" stroke="#0d9488" strokeWidth={2} /><Line type="monotone" dataKey="OnTime" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Exceptions" stroke="#e11d48" strokeWidth={2} /></LineChart></CardContent></Card>
-            <Card className="scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Mode Performance</CardTitle></CardHeader><CardContent><BarChart data={data.modePerformance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="OnTime" fill="#0d9488" /><Bar dataKey="Cost" fill="#7c3aed" /></BarChart></CardContent></Card>
-            <Card className="scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Alerts by Type</CardTitle></CardHeader><CardContent><BarChart data={data.alertByType} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="type" type="category" tick={{ fontSize: 10 }} width={100} /><Tooltip /><Bar dataKey="count" fill="#e11d48" /></BarChart></CardContent></Card>
-            <Card className="scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cost by Mode (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.costTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Ocean" stackId="1" stroke="#3b82f6" fill="#3b82f680" /><Area type="monotone" dataKey="Air" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /><Area type="monotone" dataKey="Road" stackId="1" stroke="#d97706" fill="#d9770680" /><Area type="monotone" dataKey="Rail" stackId="1" stroke="#059669" fill="#05966980" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Monthly Shipment Trend</CardTitle></CardHeader><CardContent><LineChart data={data.monthlyTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Shipments" stroke="#0d9488" strokeWidth={2} /><Line type="monotone" dataKey="OnTime" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Exceptions" stroke="#e11d48" strokeWidth={2} /></LineChart></CardContent></Card>
+            <Card className="hover-lift-sm scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Mode Performance</CardTitle></CardHeader><CardContent><BarChart data={data.modePerformance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="OnTime" fill="#0d9488" /><Bar dataKey="Cost" fill="#7c3aed" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Alerts by Type</CardTitle></CardHeader><CardContent><BarChart data={data.alertByType} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="type" type="category" tick={{ fontSize: 10 }} width={100} /><Tooltip /><Bar dataKey="count" fill="#e11d48" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm scv-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cost by Mode (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.costTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Ocean" stackId="1" stroke="#3b82f6" fill="#3b82f680" /><Area type="monotone" dataKey="Air" stackId="1" stroke="#7c3aed" fill="#7c3aed80" /><Area type="monotone" dataKey="Road" stackId="1" stroke="#d97706" fill="#d9770680" /><Area type="monotone" dataKey="Rail" stackId="1" stroke="#059669" fill="#05966980" /></AreaChart></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -844,8 +844,8 @@ export default function SupplyChainVisibilityView() {
                 </div>
                 <div><p className="text-xs text-gray-500">Value</p><ValueTile value={selectedShipment.value} /></div>
                 <div className="flex gap-2 pt-2">
-                  <Button className="scv-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => toast.success("Updated", `Shipment ${selectedShipment.id} updated`)}>Update Status</Button>
-                  <Button variant="outline" className="btn-outline-animate scv-action-btn" onClick={() => toast.info("Tracking", `Live tracking for ${selectedShipment.id}`)}>Track Live</Button>
+                  <Button className="press-scale scv-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => toast.success("Updated", `Shipment ${selectedShipment.id} updated`)}>Update Status</Button>
+                  <Button variant="outline" className="press-scale btn-outline-animate scv-action-btn" onClick={() => toast.info("Tracking", `Live tracking for ${selectedShipment.id}`)}>Track Live</Button>
                 </div>
               </div>
             </>
@@ -878,11 +878,11 @@ export default function SupplyChainVisibilityView() {
                 <div className="flex gap-2 pt-2">
                   {!selectedAlert.resolved ? (
                     <>
-                      <Button className="scv-action-btn flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => toast.success("Resolved", `Alert ${selectedAlert.id} resolved`)}>Resolve</Button>
-                      <Button variant="outline" className="btn-outline-animate scv-action-btn" onClick={() => toast.info("Escalated", `Alert ${selectedAlert.id} escalated`)}>Escalate</Button>
+                      <Button className="press-scale scv-action-btn flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => toast.success("Resolved", `Alert ${selectedAlert.id} resolved`)}>Resolve</Button>
+                      <Button variant="outline" className="press-scale btn-outline-animate scv-action-btn" onClick={() => toast.info("Escalated", `Alert ${selectedAlert.id} escalated`)}>Escalate</Button>
                     </>
                   ) : (
-                    <Button variant="outline" className="btn-outline-animate scv-action-btn flex-1" onClick={() => toast.info("Reopened", `Alert ${selectedAlert.id} reopened`)}>Reopen</Button>
+                    <Button variant="outline" className="press-scale btn-outline-animate scv-action-btn flex-1" onClick={() => toast.info("Reopened", `Alert ${selectedAlert.id} reopened`)}>Reopen</Button>
                   )}
                 </div>
               </div>
@@ -912,8 +912,8 @@ export default function SupplyChainVisibilityView() {
                 <div className="flex items-center justify-between"><span className="text-xs text-gray-500">Damage Rate</span><DamageRateTile rate={selectedCarrier.damageRate} /></div>
                 <div><p className="text-xs text-gray-500">Last Shipment</p><p className="text-sm">{selectedCarrier.lastShipment}</p></div>
                 <div className="flex gap-2 pt-2">
-                  <Button className="scv-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => toast.success("Review", `Carrier review for ${selectedCarrier.carrier}`)}>Review</Button>
-                  <Button variant="outline" className="btn-outline-animate scv-action-btn" onClick={() => toast.info("Contract", `Viewing contract for ${selectedCarrier.carrier}`)}>View Contract</Button>
+                  <Button className="press-scale scv-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => toast.success("Review", `Carrier review for ${selectedCarrier.carrier}`)}>Review</Button>
+                  <Button variant="outline" className="press-scale btn-outline-animate scv-action-btn" onClick={() => toast.info("Contract", `Viewing contract for ${selectedCarrier.carrier}`)}>View Contract</Button>
                 </div>
               </div>
             </>
@@ -948,14 +948,14 @@ export default function SupplyChainVisibilityView() {
                 {selectedDoc.remarks && <div><p className="text-xs text-gray-500">Remarks</p><p className="text-sm text-amber-600 dark:text-amber-400">{selectedDoc.remarks}</p></div>}
                 <div className="flex gap-2 pt-2">
                   {selectedDoc.status === "Pending" ? (
-                    <Button className="scv-action-btn flex-1 bg-blue-600 hover:bg-blue-700" onClick={() => toast.success("Submitted", `Document ${selectedDoc.id} submitted`)}>Submit</Button>
+                    <Button className="press-scale scv-action-btn flex-1 bg-blue-600 hover:bg-blue-700" onClick={() => toast.success("Submitted", `Document ${selectedDoc.id} submitted`)}>Submit</Button>
                   ) : selectedDoc.status === "Rejected" ? (
                     <>
-                      <Button className="scv-action-btn flex-1 bg-blue-600 hover:bg-blue-700" onClick={() => toast.info("Resubmitted", `Document ${selectedDoc.id} resubmitted`)}>Resubmit</Button>
-                      <Button variant="outline" className="btn-outline-animate scv-action-btn" onClick={() => toast.info("Appeal", `Appeal for ${selectedDoc.id}`)}>Appeal</Button>
+                      <Button className="press-scale scv-action-btn flex-1 bg-blue-600 hover:bg-blue-700" onClick={() => toast.info("Resubmitted", `Document ${selectedDoc.id} resubmitted`)}>Resubmit</Button>
+                      <Button variant="outline" className="press-scale btn-outline-animate scv-action-btn" onClick={() => toast.info("Appeal", `Appeal for ${selectedDoc.id}`)}>Appeal</Button>
                     </>
                   ) : (
-                    <Button variant="outline" className="btn-outline-animate scv-action-btn flex-1" onClick={() => toast.info("Download", `Downloading ${selectedDoc.id}`)}>Download</Button>
+                    <Button variant="outline" className="press-scale btn-outline-animate scv-action-btn flex-1" onClick={() => toast.info("Download", `Downloading ${selectedDoc.id}`)}>Download</Button>
                   )}
                 </div>
               </div>

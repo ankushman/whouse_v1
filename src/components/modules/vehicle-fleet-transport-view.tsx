@@ -489,20 +489,20 @@ function DashboardTab({ onSelectVehicle, onSelectTrip }: { onSelectVehicle: (v: 
 
       {/* Charts Row 1 */}
       <div className="vft-chart-grid-2">
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Route className="h-4 w-4" /> Monthly Trip Volume</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><ComposedChart data={monthlyTripChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="month" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Legend /><Bar dataKey="onTime" name="On-Time" fill={THEME.primary} radius={[4, 4, 0, 0]} /><Bar dataKey="delayed" name="Delayed" fill={THEME.danger} radius={[4, 4, 0, 0]} /><Line dataKey="trips" name="Total" stroke={THEME.secondary} strokeWidth={2} dot={{ fill: THEME.secondary }} /></ComposedChart></div></CardContent></Card>
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Bus className="h-4 w-4" /> Fleet by Status</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><PieChart><Pie data={vehicleStatusChartData} cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{vehicleStatusChartData.map((_, idx) => { const tc = CHART_COLORS; return <Cell key={idx} fill={tc[idx % tc.length]} /> })}</Pie><Tooltip content={<CustomTooltip />} /></PieChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Route className="h-4 w-4" /> Monthly Trip Volume</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><ComposedChart data={monthlyTripChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="month" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Legend /><Bar dataKey="onTime" name="On-Time" fill={THEME.primary} radius={[4, 4, 0, 0]} /><Bar dataKey="delayed" name="Delayed" fill={THEME.danger} radius={[4, 4, 0, 0]} /><Line dataKey="trips" name="Total" stroke={THEME.secondary} strokeWidth={2} dot={{ fill: THEME.secondary }} /></ComposedChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Bus className="h-4 w-4" /> Fleet by Status</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><PieChart><Pie data={vehicleStatusChartData} cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{vehicleStatusChartData.map((_, idx) => { const tc = CHART_COLORS; return <Cell key={idx} fill={tc[idx % tc.length]} /> })}</Pie><Tooltip content={<CustomTooltip />} /></PieChart></div></CardContent></Card>
       </div>
 
       {/* Charts Row 2 */}
       <div className="vft-chart-grid-3">
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Truck className="h-4 w-4" /> Vehicle Types</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><PieChart><Pie data={vehicleTypeChartData} cx="50%" cy="50%" innerRadius={45} outerRadius={75} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`}>{vehicleTypeChartData.map((_, idx) => { const tc = CHART_COLORS; return <Cell key={idx} fill={tc[idx % tc.length]} /> })}</Pie><Tooltip content={<CustomTooltip />} /></PieChart></div></CardContent></Card>
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Fuel className="h-4 w-4" /> Fuel Type Distribution</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><PieChart><Pie data={fuelTypeChartData} cx="50%" cy="50%" innerRadius={45} outerRadius={75} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{fuelTypeChartData.map((_, idx) => { const tc = [FUEL_COLORS["Diesel"], FUEL_COLORS["CNG"], FUEL_COLORS["Electric"], FUEL_COLORS["Petrol"], FUEL_COLORS["Hybrid"]]; return <Cell key={idx} fill={tc[idx % tc.length]} /> })}</Pie><Tooltip content={<CustomTooltip />} /></PieChart></div></CardContent></Card>
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Gauge className="h-4 w-4" /> Fleet by Warehouse</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={warehouseFleetChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="warehouse" tick={{ fill: "#94a3b8", fontSize: 10 }} tickFormatter={(v: string) => v.slice(0, 6)} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Legend /><Bar dataKey="total" name="Total" fill={THEME.primary} radius={[4, 4, 0, 0]} /><Bar dataKey="active" name="Active" fill={THEME.success} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Truck className="h-4 w-4" /> Vehicle Types</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><PieChart><Pie data={vehicleTypeChartData} cx="50%" cy="50%" innerRadius={45} outerRadius={75} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`}>{vehicleTypeChartData.map((_, idx) => { const tc = CHART_COLORS; return <Cell key={idx} fill={tc[idx % tc.length]} /> })}</Pie><Tooltip content={<CustomTooltip />} /></PieChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Fuel className="h-4 w-4" /> Fuel Type Distribution</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><PieChart><Pie data={fuelTypeChartData} cx="50%" cy="50%" innerRadius={45} outerRadius={75} paddingAngle={2} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{fuelTypeChartData.map((_, idx) => { const tc = [FUEL_COLORS["Diesel"], FUEL_COLORS["CNG"], FUEL_COLORS["Electric"], FUEL_COLORS["Petrol"], FUEL_COLORS["Hybrid"]]; return <Cell key={idx} fill={tc[idx % tc.length]} /> })}</Pie><Tooltip content={<CustomTooltip />} /></PieChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Gauge className="h-4 w-4" /> Fleet by Warehouse</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={warehouseFleetChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="warehouse" tick={{ fill: "#94a3b8", fontSize: 10 }} tickFormatter={(v: string) => v.slice(0, 6)} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Legend /><Bar dataKey="total" name="Total" fill={THEME.primary} radius={[4, 4, 0, 0]} /><Bar dataKey="active" name="Active" fill={THEME.success} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
       </div>
 
       {/* Active Trips Table + Alerts */}
       <div className="vft-chart-grid-2">
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Navigation className="h-4 w-4" /> Recent Trips</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Navigation className="h-4 w-4" /> Recent Trips</CardTitle></CardHeader><CardContent>
           <div className="vft-table-wrap">
             <table className="vft-table">
               <thead><tr><th>ID</th><th>Route</th><th>Driver</th><th>Status</th><th>Progress</th></tr></thead>
@@ -521,7 +521,7 @@ function DashboardTab({ onSelectVehicle, onSelectTrip }: { onSelectVehicle: (v: 
           </div>
         </CardContent></Card>
 
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><AlertTriangle className="h-4 w-4" /> Fleet Alerts</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><AlertTriangle className="h-4 w-4" /> Fleet Alerts</CardTitle></CardHeader><CardContent>
           <div className="vft-alerts-list">
             {alertsData.map(alert => (
               <div key={alert.id} className={`vft-alert-item vft-alert-${alert.type}`}>
@@ -619,8 +619,8 @@ function TripsTab({ trips: tList, onSelect, statusFilter, onStatusFilterChange }
       </div>
 
       {/* Trip Table */}
-      <Card className="vft-card">
-        <CardContent className="glass-subtle vft-card-content">
+      <Card className="hover-lift-sm vft-card">
+        <CardContent className="inner-glow glass-subtle vft-card-content">
           <div className="vft-table-wrap">
             <table className="vft-table">
               <thead>
@@ -707,14 +707,14 @@ function MaintenanceTab({ records, onSelectVehicle }: {
 
       {/* Charts */}
       <div className="vft-chart-grid-2">
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Maintenance by Type</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={maintByTypeChartData} layout="vertical"><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis type="number" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis dataKey="name" type="category" width={120} tick={{ fill: "#94a3b8", fontSize: 11 }} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="count" fill={THEME.primary} radius={[0, 4, 4, 0]} /></BarChart></div></CardContent></Card>
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Cost by Warehouse (₹)</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={maintCostByWarehouseChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="warehouse" tick={{ fill: "#94a3b8", fontSize: 10 }} tickFormatter={(v: string) => v.slice(0, 6)} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="cost" fill={THEME.accent} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Maintenance by Type</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={maintByTypeChartData} layout="vertical"><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis type="number" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis dataKey="name" type="category" width={120} tick={{ fill: "#94a3b8", fontSize: 11 }} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="count" fill={THEME.primary} radius={[0, 4, 4, 0]} /></BarChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Cost by Warehouse (₹)</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={maintCostByWarehouseChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="warehouse" tick={{ fill: "#94a3b8", fontSize: 10 }} tickFormatter={(v: string) => v.slice(0, 6)} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="cost" fill={THEME.accent} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
       </div>
 
       {/* Records Table */}
-      <Card className="vft-card">
+      <Card className="hover-lift-sm vft-card">
         <CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Wrench className="h-4 w-4" /> Maintenance Records</CardTitle></CardHeader>
-        <CardContent className="glass-subtle vft-card-content">
+        <CardContent className="inner-glow glass-subtle vft-card-content">
           <div className="vft-table-wrap">
             <table className="vft-table">
               <thead><tr><th>ID</th><th>Vehicle</th><th>Type</th><th>Vendor</th><th>Scheduled</th><th>Completed</th><th>Cost</th><th>Priority</th><th>Status</th></tr></thead>
@@ -781,17 +781,17 @@ function FuelAnalyticsTab({ onSelectVehicle, onSelectTrip }: {
 
       {/* Charts */}
       <div className="vft-chart-grid-2">
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Daily Cost Breakdown</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><AreaChart data={dailyCostChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="day" tick={{ fill: "#94a3b8", fontSize: 11 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} tickFormatter={(v: number) => `₹${(v / 1000).toFixed(0)}k`} /><Tooltip content={<CustomTooltip />} /><Legend /><Area dataKey="fuel" name="Fuel" fill={THEME.primary} fillOpacity={0.6} stroke={THEME.primary} /><Area dataKey="maintenance" name="Maintenance" fill={THEME.accent} fillOpacity={0.6} stroke={THEME.accent} /><Area dataKey="tolls" name="Tolls" fill={THEME.secondary} fillOpacity={0.6} stroke={THEME.secondary} /></AreaChart></div></CardContent></Card>
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Fuel Cost by Warehouse</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={fuelConsumptionByWarehouseChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="warehouse" tick={{ fill: "#94a3b8", fontSize: 10 }} tickFormatter={(v: string) => v.slice(0, 6)} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} tickFormatter={(v: number) => `₹${(v / 1000).toFixed(0)}k`} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="cost" fill={THEME.primary} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Daily Cost Breakdown</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><AreaChart data={dailyCostChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="day" tick={{ fill: "#94a3b8", fontSize: 11 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} tickFormatter={(v: number) => `₹${(v / 1000).toFixed(0)}k`} /><Tooltip content={<CustomTooltip />} /><Legend /><Area dataKey="fuel" name="Fuel" fill={THEME.primary} fillOpacity={0.6} stroke={THEME.primary} /><Area dataKey="maintenance" name="Maintenance" fill={THEME.accent} fillOpacity={0.6} stroke={THEME.accent} /><Area dataKey="tolls" name="Tolls" fill={THEME.secondary} fillOpacity={0.6} stroke={THEME.secondary} /></AreaChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Fuel Cost by Warehouse</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={fuelConsumptionByWarehouseChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="warehouse" tick={{ fill: "#94a3b8", fontSize: 10 }} tickFormatter={(v: string) => v.slice(0, 6)} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} tickFormatter={(v: number) => `₹${(v / 1000).toFixed(0)}k`} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="cost" fill={THEME.primary} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
       </div>
 
       <div className="vft-chart-grid-2">
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Fuel Efficiency by Type</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={fuelEfficiencyChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="fuelType" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="kmPerUnit" name="km per litre" fill={THEME.secondary} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
-        <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Users className="h-4 w-4" /> Driver Performance</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={driverPerformanceChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="name" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Legend /><Bar dataKey="completed" name="Completed" fill={THEME.success} radius={[4, 4, 0, 0]} /><Bar dataKey="delayed" name="Delayed" fill={THEME.danger} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title">Fuel Efficiency by Type</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={fuelEfficiencyChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="fuelType" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Bar dataKey="kmPerUnit" name="km per litre" fill={THEME.secondary} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
+        <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Users className="h-4 w-4" /> Driver Performance</CardTitle></CardHeader><CardContent><div className="vft-chart-container"><BarChart data={driverPerformanceChartData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" /><XAxis dataKey="name" tick={{ fill: "#94a3b8", fontSize: 12 }} /><YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} /><Tooltip content={<CustomTooltip />} /><Legend /><Bar dataKey="completed" name="Completed" fill={THEME.success} radius={[4, 4, 0, 0]} /><Bar dataKey="delayed" name="Delayed" fill={THEME.danger} radius={[4, 4, 0, 0]} /></BarChart></div></CardContent></Card>
       </div>
 
       {/* Top Fuel Stations */}
-      <Card className="vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Fuel className="h-4 w-4" /> Top Fuel Stations by Spend</CardTitle></CardHeader><CardContent>
+      <Card className="hover-lift-sm vft-card"><CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Fuel className="h-4 w-4" /> Top Fuel Stations by Spend</CardTitle></CardHeader><CardContent>
         <div className="vft-stations-grid">
           {topFuelStations.map(([station, cost], i) => (
             <div key={i} className="vft-station-item">
@@ -912,10 +912,10 @@ function VehicleDetailDrawer({ vehicle }: { vehicle: typeof vehicles[number] }) 
 
         {/* Actions */}
         <div className="vft-drawer-actions">
-          <Button className="vft-action-btn" style={{ background: THEME.primary, color: "#fff" }}><Navigation className="h-4 w-4" /> Track Live</Button>
-          <Button className="vft-action-btn" style={{ background: THEME.secondary, color: "#fff" }}><Wrench className="h-4 w-4" /> Schedule Service</Button>
-          <Button className="btn-outline-animate vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> Documents</Button>
-          <Button className="btn-outline-animate vft-action-btn" variant="outline"><Fuel className="h-4 w-4" /> Fuel Log</Button>
+          <Button className="press-scale vft-action-btn" style={{ background: THEME.primary, color: "#fff" }}><Navigation className="h-4 w-4" /> Track Live</Button>
+          <Button className="press-scale vft-action-btn" style={{ background: THEME.secondary, color: "#fff" }}><Wrench className="h-4 w-4" /> Schedule Service</Button>
+          <Button className="press-scale btn-outline-animate vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> Documents</Button>
+          <Button className="press-scale btn-outline-animate vft-action-btn" variant="outline"><Fuel className="h-4 w-4" /> Fuel Log</Button>
         </div>
       </div>
     </ScrollArea>
@@ -1016,10 +1016,10 @@ function TripDetailDrawer({ trip }: { trip: typeof trips[number] }) {
 
         {/* Actions */}
         <div className="vft-drawer-actions">
-          <Button className="vft-action-btn" style={{ background: THEME.primary, color: "#fff" }}><Navigation className="h-4 w-4" /> Track Live</Button>
-          <Button className="vft-action-btn" style={{ background: THEME.accent, color: "#fff" }}><Phone className="h-4 w-4" /> Call Driver</Button>
-          <Button className="btn-outline-animate vft-action-btn" variant="outline"><AlertTriangle className="h-4 w-4" /> Report Issue</Button>
-          <Button className="btn-outline-animate vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> E-Way Bill</Button>
+          <Button className="press-scale vft-action-btn" style={{ background: THEME.primary, color: "#fff" }}><Navigation className="h-4 w-4" /> Track Live</Button>
+          <Button className="press-scale vft-action-btn" style={{ background: THEME.accent, color: "#fff" }}><Phone className="h-4 w-4" /> Call Driver</Button>
+          <Button className="press-scale btn-outline-animate vft-action-btn" variant="outline"><AlertTriangle className="h-4 w-4" /> Report Issue</Button>
+          <Button className="press-scale btn-outline-animate vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> E-Way Bill</Button>
         </div>
       </div>
     </ScrollArea>

@@ -281,8 +281,8 @@ function KPICard({ title, value, icon: Icon, color, sub }: {
   title: string; value: string; icon: React.ComponentType<{ className?: string }>; color: string; sub?: string
 }) {
   return (
-    <Card className="grn-kpi-card">
-      <CardContent className="glass-subtle p-4 flex items-center gap-3">
+    <Card className="hover-lift-sm grn-kpi-card">
+      <CardContent className="inner-glow glass-subtle p-4 flex items-center gap-3">
         <div className={"grn-kpi-icon " + color}>
           <Icon className="h-5 w-5" />
         </div>
@@ -609,7 +609,7 @@ export default function GoodsReceiptView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Monthly GRN Volume & Acceptance Trend</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <ComposedChart data={monthlyVolume}>
@@ -625,7 +625,7 @@ export default function GoodsReceiptView() {
                 </ResponsiveContainer></CardContent>
               </Card>
 
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Receipt Type Distribution</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <PieChart><Pie data={receiptTypeData} cx="50%" cy="50%" outerRadius={90} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={{ fontSize: 10 }}>
@@ -634,7 +634,7 @@ export default function GoodsReceiptView() {
                 </ResponsiveContainer></CardContent>
               </Card>
 
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Performance</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <BarChart data={warehousePerf}>
@@ -649,7 +649,7 @@ export default function GoodsReceiptView() {
                 </ResponsiveContainer></CardContent>
               </Card>
 
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Supplier Quality Overview</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <BarChart data={supplierQuality} layout="vertical">
@@ -665,7 +665,7 @@ export default function GoodsReceiptView() {
               </Card>
             </div>
 
-            <Card className="grn-chart-card">
+            <Card className="hover-lift-sm grn-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">QC Method Distribution</CardTitle></CardHeader>
               <CardContent><ResponsiveContainer width="100%" height={240}>
                 <PieChart><Pie data={qcMethodData} cx="50%" cy="50%" outerRadius={85} innerRadius={45} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={{ fontSize: 10 }}>
@@ -697,7 +697,7 @@ export default function GoodsReceiptView() {
                 <SelectTrigger className="h-9 w-36 text-xs"><SelectValue placeholder="Priority" /></SelectTrigger>
                 <SelectContent>{["all", ...PRIORITIES].map((p) => <SelectItem key={p} value={p} className="text-xs">{p === "all" ? "All Priorities" : p}</SelectItem>)}</SelectContent>
               </Select>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-9 text-xs" onClick={() => { setSearch(""); setStatusFilter("all"); setTypeFilter("all"); setPriorityFilter("all") }}><Filter className="h-3 w-3 mr-1" />Reset</Button>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-9 text-xs" onClick={() => { setSearch(""); setStatusFilter("all"); setTypeFilter("all"); setPriorityFilter("all") }}><Filter className="h-3 w-3 mr-1" />Reset</Button>
             </div>
 
             <div className="rounded-lg border overflow-auto">
@@ -744,7 +744,7 @@ export default function GoodsReceiptView() {
                       <TableCell className="text-[10px]">{r.warehouse.city}</TableCell>
                       <TableCell className="text-xs">{r.receiver.name}</TableCell>
                       <TableCell className="text-[10px]">{r.date}</TableCell>
-                      <TableCell><Button variant="ghost" size="sm" className="h-7" onClick={() => openDrawer(r)}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
+                      <TableCell><Button variant="ghost" size="sm" className="press-scale h-7" onClick={() => openDrawer(r)}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -765,7 +765,7 @@ export default function GoodsReceiptView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">QC Result Distribution</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <PieChart><Pie data={[
@@ -776,7 +776,7 @@ export default function GoodsReceiptView() {
                 </ResponsiveContainer></CardContent>
               </Card>
 
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Category-wise QC Results</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <BarChart data={catQCData}>
@@ -793,7 +793,7 @@ export default function GoodsReceiptView() {
               </Card>
             </div>
 
-            <Card className="card-crud-lift grn-chart-card">
+            <Card className="hover-lift-sm card-crud-lift grn-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">QC Queue ({qcQueue.length} items)</CardTitle></CardHeader>
               <CardContent><div className="rounded-lg border overflow-auto">
                 <Table className="table-hover-highlight grn-table">
@@ -844,7 +844,7 @@ export default function GoodsReceiptView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">3-Way Match Status</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <PieChart><Pie data={[
@@ -855,7 +855,7 @@ export default function GoodsReceiptView() {
                 </ResponsiveContainer></CardContent>
               </Card>
 
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Mismatch Trend</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={260}>
                   <ComposedChart data={mismatchTrend}>
@@ -873,7 +873,7 @@ export default function GoodsReceiptView() {
               </Card>
             </div>
 
-            <Card className="card-crud-lift grn-chart-card">
+            <Card className="hover-lift-sm card-crud-lift grn-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Invoice Matching Details ({invoiceData.length})</CardTitle></CardHeader>
               <CardContent><div className="rounded-lg border overflow-auto">
                 <Table className="table-hover-highlight grn-table">
@@ -903,7 +903,7 @@ export default function GoodsReceiptView() {
                         <TableCell className={"text-xs text-right font-medium " + (inv.variance > 0 ? "text-red-500" : inv.variance < 0 ? "text-emerald-500" : "")}>{inv.variance > 0 ? "+" : ""}₹{fmt(inv.variance)}</TableCell>
                         <TableCell className={"text-xs text-right " + (Math.abs(inv.varPct) > 5 ? "text-red-500 font-medium" : "")}>{inv.varPct}%</TableCell>
                         <TableCell><MatchBadge status={inv.matchStatus} /></TableCell>
-                        <TableCell><Button variant="ghost" size="sm" className="h-7 text-[10px]">Review</Button></TableCell>
+                        <TableCell><Button variant="ghost" size="sm" className="press-scale h-7 text-[10px]">Review</Button></TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -924,7 +924,7 @@ export default function GoodsReceiptView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Lead Time by Supplier</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={280}>
                   <BarChart data={leadTimeData}>
@@ -939,7 +939,7 @@ export default function GoodsReceiptView() {
                 </ResponsiveContainer></CardContent>
               </Card>
 
-              <Card className="grn-chart-card">
+              <Card className="hover-lift-sm grn-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Receipt Value & Cost</CardTitle></CardHeader>
                 <CardContent><ResponsiveContainer width="100%" height={280}>
                   <AreaChart data={receiptValueData}>
@@ -955,7 +955,7 @@ export default function GoodsReceiptView() {
               </Card>
             </div>
 
-            <Card className="card-crud-lift grn-chart-card">
+            <Card className="hover-lift-sm card-crud-lift grn-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Supplier Scorecard</CardTitle></CardHeader>
               <CardContent><div className="rounded-lg border overflow-auto">
                 <Table className="table-hover-highlight grn-table">

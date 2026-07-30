@@ -215,19 +215,19 @@ export default function CargoInsuranceClaimsView() {
   }
 
   const SH = ({ label, field }: { label: string; field: any }) => (
-    <TableHead className="cursor-pointer select-none text-[11px]" onClick={() => { if (sortBy === field) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortBy(field); setSortDir("asc") } }}>
+    <TableHead className="underline-animated cursor-pointer select-none text-[11px]" onClick={() => { if (sortBy === field) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortBy(field); setSortDir("asc") } }}>
       <span className="cig-sort-head flex items-center gap-1">{label} {sortBy === field && (sortDir === "asc" ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />)}</span>
     </TableHead>
   )
 
   const ActBtn = ({ d, t }: { d: any; t: string }) => (
-    <Button variant="ghost" size="sm" className="cig-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(d); setDrawerType(t) }}><Activity className="h-3 w-3 mr-1" />View</Button>
+    <Button variant="ghost" size="sm" className="press-scale cig-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(d); setDrawerType(t) }}><Activity className="h-3 w-3 mr-1" />View</Button>
   )
 
   const DrawerActions = ({ id, name }: { id: string; name: string }) => (
     <div className="flex gap-2 pt-2">
       {[{ label: "Edit", icon: Scale }, { label: "Details", icon: Target }, { label: "Report", icon: BarChart3 }].map(a => (
-        <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate cig-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+        <Button key={a.label} variant="outline" size="sm" className="press-scale btn-outline-animate cig-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
       ))}
     </div>
   )
@@ -266,27 +266,27 @@ export default function CargoInsuranceClaimsView() {
       <div className="cig-dashboard space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {kpis.map(k => (
-            <Card key={k.label} className="glass-subtle cig-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+            <Card key={k.label} className="inner-glow hover-lift-sm glass-subtle cig-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
               <div className={cn("cig-kpi-icon p-2 rounded-lg", k.bg)}><k.icon className={cn("h-4 w-4", k.color)} /></div>
               <div><p className="text-[10px] text-muted-foreground uppercase tracking-wide">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
             </CardContent></Card>
           ))}
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className="cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Claims Trend</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Claims Trend</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><BarChart data={data.monthlyClaims}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
               <Bar dataKey="filed" fill={CC.indigo} radius={[2, 2, 0, 0]} name="Filed" /><Bar dataKey="settled" fill={CC.emerald} radius={[2, 2, 0, 0]} name="Settled" /><Bar dataKey="rejected" fill={CC.rose} radius={[2, 2, 0, 0]} name="Rejected" />
             </BarChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Claim Type Distribution</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Claim Type Distribution</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><PieChart>
               <Pie data={data.claimTypeData} cx="50%" cy="50%" innerRadius={45} outerRadius={80} dataKey="value" paddingAngle={2}>
                 {[CC.indigo, CC.sky, CC.amber, CC.rose, CC.orange, CC.teal, CC.purple, CC.emerald].map((c, i) => <Cell key={i} fill={c} />)}
               </Pie><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 9 }} />
             </PieChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Risk Radar</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Risk Radar</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><RadarChart data={data.riskRadarData}>
               <PolarGrid stroke="#e5e7eb" /><PolarAngleAxis dataKey="warehouse" tick={{ fontSize: 9 }} /><PolarRadiusAxis tick={{ fontSize: 8 }} />
               <Radar name="Theft" dataKey="theft" stroke={CC.indigo} fill={CC.indigo} fillOpacity={0.1} />
@@ -296,7 +296,7 @@ export default function CargoInsuranceClaimsView() {
             </RadarChart></ResponsiveContainer>
           </CardContent></Card>
         </div>
-        <Card className="cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Loss Ratio Trend (Claims/Premium)</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Loss Ratio Trend (Claims/Premium)</CardTitle></CardHeader><CardContent>
           <ResponsiveContainer width="100%" height={200}><LineChart data={data.lossRatioTrend}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis domain={[20, 100]} tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
             <Line type="monotone" dataKey="ratio" stroke={CC.indigo} strokeWidth={2} dot={{ r: 3 }} name="Loss Ratio %" />
@@ -379,7 +379,7 @@ export default function CargoInsuranceClaimsView() {
     }), sortBy)
     return (
       <div className="cig-risk-tab space-y-4">
-        <Card className="cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Premium vs Claims Trend</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Premium vs Claims Trend</CardTitle></CardHeader><CardContent>
           <ResponsiveContainer width="100%" height={200}><AreaChart data={data.premiumTrend}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
             <Area type="monotone" dataKey="paid" stroke={CC.indigo} fill={CC.indigo} fillOpacity={0.3} name="Premium Paid" />
@@ -421,7 +421,7 @@ export default function CargoInsuranceClaimsView() {
             { label: "Pending", value: fmtINR(data.payments.filter(p => p.status === "Pending" || p.status === "Processing").reduce((a, p) => a + p.amount, 0)), color: "text-amber-600" },
             { label: "Avg Payout", value: fmtINR(Math.round(data.payments.reduce((a, p) => a + p.amount, 0) / data.payments.length)), color: "text-indigo-600" },
             { label: "Total Payments", value: data.payments.length.toString(), color: "text-sky-600" },
-          ].map(s => (<Card key={s.label} className="glass-subtle cig-stat-card border-border/60"><CardContent className="p-4 text-center"><p className="text-[10px] text-muted-foreground">{s.label}</p><p className={cn("text-xl font-bold", s.color)}>{s.value}</p></CardContent></Card>))}
+          ].map(s => (<Card key={s.label} className="inner-glow hover-lift-sm glass-subtle cig-stat-card border-border/60"><CardContent className="p-4 text-center"><p className="text-[10px] text-muted-foreground">{s.label}</p><p className={cn("text-xl font-bold", s.color)}>{s.value}</p></CardContent></Card>))}
         </div>
         <div className="flex flex-wrap gap-2">
           <Input placeholder="Search payments..." value={search} onChange={e => setSearch(e.target.value)} className="cig-search h-8 text-xs w-60" />
@@ -450,24 +450,24 @@ export default function CargoInsuranceClaimsView() {
           { label: "Claims Settled", value: data.monthlyClaims.reduce((a, m) => a + m.settled, 0), icon: CheckCircle, color: "text-emerald-600" },
           { label: "Rejection Rate", value: `${Math.round(data.monthlyClaims.reduce((a, m) => a + m.rejected, 0) / data.monthlyClaims.reduce((a, m) => a + m.filed, 0) * 100)}%`, icon: AlertTriangle, color: "text-rose-600" },
           { label: "Avg Claim Amount", value: fmtINR(Math.round(data.claims.reduce((a, c) => a + c.claimAmount, 0) / data.claims.length)), icon: DollarSign, color: "text-amber-600" },
-        ].map(s => (<Card key={s.label} className="glass-subtle cig-analytics-stat border-border/60"><CardContent className="p-4 flex items-center gap-3"><s.icon className={cn("h-5 w-5", s.color)} /><div><p className="text-[10px] text-muted-foreground">{s.label}</p><p className={cn("text-lg font-bold", s.color)}>{s.value}</p></div></CardContent></Card>))}
+        ].map(s => (<Card key={s.label} className="inner-glow hover-lift-sm glass-subtle cig-analytics-stat border-border/60"><CardContent className="p-4 flex items-center gap-3"><s.icon className={cn("h-5 w-5", s.color)} /><div><p className="text-[10px] text-muted-foreground">{s.label}</p><p className={cn("text-lg font-bold", s.color)}>{s.value}</p></div></CardContent></Card>))}
       </div>
       <div className="grid md:grid-cols-2 gap-4">
-        <Card className="cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Claim Status Breakdown</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Claim Status Breakdown</CardTitle></CardHeader><CardContent>
           <ResponsiveContainer width="100%" height={220}><PieChart>
             <Pie data={data.claimStatusData} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value" paddingAngle={3}>
               {[CC.sky, CC.amber, CC.emerald, CC.rose, CC.indigo, CC.slate].map((c, i) => <Cell key={i} fill={c} />)}
             </Pie><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
           </PieChart></ResponsiveContainer>
         </CardContent></Card>
-        <Card className="cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Avg Claim Amount by Month</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm cig-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Avg Claim Amount by Month</CardTitle></CardHeader><CardContent>
           <ResponsiveContainer width="100%" height={220}><LineChart data={data.monthlyClaims}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} />
             <Line type="monotone" dataKey="avgAmount" stroke={CC.indigo} strokeWidth={2} dot={{ r: 3 }} name="Avg Amount" />
           </LineChart></ResponsiveContainer>
         </CardContent></Card>
       </div>
-      <Card className="glass-subtle cig-chart-card border-border/60"><CardContent className="p-4">
+      <Card className="inner-glow hover-lift-sm glass-subtle cig-chart-card border-border/60"><CardContent className="p-4">
         <h3 className="text-sm font-medium mb-3">Insurer Performance Summary</h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
           {data.INSURERS.slice(0, 8).map(ins => {
@@ -511,12 +511,12 @@ export default function CargoInsuranceClaimsView() {
           <Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.type}</Badge><SBadge status={drawerData.status} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Coverage</p><PolicyCoverageBar sumInsured={drawerData.sumInsured} premium={drawerData.premium} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Coverage</p><PolicyCoverageBar sumInsured={drawerData.sumInsured} premium={drawerData.premium} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Claims", value: drawerData.claimsCount.toString() },
             { label: "Total Claimed", value: fmtINR(drawerData.totalClaimed) },
             { label: "Deductible", value: fmtINR(drawerData.deductible) },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-indigo-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-indigo-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Insurer", drawerData.insurer], ["Warehouse", drawerData.warehouse], ["Start Date", drawerData.startDate], ["End Date", drawerData.endDate], ["Status", drawerData.status], ["ID", drawerData.id]]} />
           <DrawerActions id={drawerData.id} name={drawerData.policyNumber} />
         </div></>}
@@ -528,14 +528,14 @@ export default function CargoInsuranceClaimsView() {
           <Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.claimType}</Badge><SBadge status={drawerData.status} /><SBadge status={drawerData.priority} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-2">Claim Progress</p><ClaimProgressTracker status={drawerData.status} /></CardContent></Card>
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Payout Analysis</p><PayoutBar claimed={drawerData.claimAmount} approved={drawerData.approvedAmount} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-2">Claim Progress</p><ClaimProgressTracker status={drawerData.status} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Payout Analysis</p><PayoutBar claimed={drawerData.claimAmount} approved={drawerData.approvedAmount} /></CardContent></Card>
           <div className="p-3 rounded-lg bg-muted/50 text-xs"><p className="text-[10px] text-muted-foreground">Description</p><p className="mt-1">{drawerData.description}</p></div>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Claimed", value: fmtINR(drawerData.claimAmount) },
             { label: "Approved", value: fmtINR(drawerData.approvedAmount) },
             { label: "Documents", value: `${drawerData.documentsCount} files` },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-sky-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-sky-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Policy", drawerData.policyId], ["Warehouse", drawerData.warehouse], ["Insurer", drawerData.insurer], ["Filed", fmtDate(drawerData.filedDate)], ["Resolved", fmtDate(drawerData.resolvedDate)], ["Severity", drawerData.severity], ["Assessment", drawerData.assessmentNotes]]} />
           <DrawerActions id={drawerData.id} name={drawerData.id} />
         </div></>}
@@ -547,12 +547,12 @@ export default function CargoInsuranceClaimsView() {
           <RiskBadge level={drawerData.riskLevel} /><Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.category}</Badge>
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Risk Score</p><RiskScoreBar probability={drawerData.probability} impact={drawerData.impact} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Risk Score</p><RiskScoreBar probability={drawerData.probability} impact={drawerData.impact} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Probability", value: `${drawerData.probability}%` },
             { label: "Impact", value: `${drawerData.impact}%` },
             { label: "Residual", value: `${drawerData.residualRisk}%` },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Warehouse", drawerData.warehouse], ["Category", drawerData.category], ["Mitigation", drawerData.mitigationMeasure], ["Owner", drawerData.owner], ["Last Assessed", drawerData.lastAssessed], ["Risk Level", drawerData.riskLevel]]} />
           <DrawerActions id={drawerData.id} name={drawerData.category} />
         </div></>}
@@ -568,7 +568,7 @@ export default function CargoInsuranceClaimsView() {
             { label: "Amount", value: fmtINR(drawerData.amount) },
             { label: "Method", value: drawerData.method },
             { label: "Status", value: drawerData.status },
-          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-emerald-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-emerald-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Claim ID", drawerData.claimId], ["Insurer", drawerData.insurer], ["Initiated", fmtDate(drawerData.initiatedDate)], ["Completed", fmtDate(drawerData.completedDate)], ["Amount", fmtINR(drawerData.amount)], ["Status", drawerData.status]]} />
           <DrawerActions id={drawerData.id} name={drawerData.claimId} />
         </div></>}

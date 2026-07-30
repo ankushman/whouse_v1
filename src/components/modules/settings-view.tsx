@@ -330,7 +330,7 @@ export function SettingsView() {
         title="Settings"
         description="Configure system preferences and manage users"
         actions={
-          <Button size="sm" className="gap-1.5" onClick={() => toast.success("Settings saved successfully", "All changes have been applied", { duration: 3000 })}>
+          <Button size="sm" className="press-scale gap-1.5" onClick={() => toast.success("Settings saved successfully", "All changes have been applied", { duration: 3000 })}>
             <Save className="h-3.5 w-3.5" /> Save All Changes
           </Button>
         }
@@ -347,12 +347,12 @@ export function SettingsView() {
 
         {/* General */}
         <TabsContent value="general">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <CardTitle className="text-sm font-semibold animated-underline">General Settings</CardTitle>
               <CardDescription className="text-xs">Configure basic application settings</CardDescription>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-6">
+            <CardContent className="inner-glow glass-subtle space-y-6">
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label className="text-xs">Company Name</Label>
@@ -414,7 +414,7 @@ export function SettingsView() {
               </div>
               <Separator />
               <div className="flex justify-end">
-                <Button size="sm" className="gap-1.5" onClick={() => toast.success("Notification settings saved", "Preferences updated", { duration: 3000 })}>
+                <Button size="sm" className="press-scale gap-1.5" onClick={() => toast.success("Notification settings saved", "Preferences updated", { duration: 3000 })}>
                   <Save className="h-3.5 w-3.5" /> Save Settings
                 </Button>
               </div>
@@ -424,19 +424,19 @@ export function SettingsView() {
 
         {/* Warehouses Tab — Real CRUD */}
         <TabsContent value="warehouses">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <CardTitle className="text-sm font-semibold animated-underline">Warehouse Management</CardTitle>
                   <CardDescription className="text-xs">Manage warehouse configurations and details</CardDescription>
                 </div>
-                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddWarehouse}>
+                <Button size="sm" className="press-scale gap-1.5 h-8 text-xs" onClick={openAddWarehouse}>
                   <Plus className="h-3.5 w-3.5" /> Add Warehouse
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-4">
+            <CardContent className="inner-glow glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -503,10 +503,10 @@ export function SettingsView() {
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex items-center justify-end gap-1">
-                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditWarehouse(wh)}>
+                            <Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={() => openEditWarehouse(wh)}>
                               <Edit className="h-3 w-3" />
                             </Button>
-                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+                            <Button variant="ghost" size="icon" className="press-scale h-7 w-7 text-red-500">
                               <Trash2 className="h-3 w-3" />
                             </Button>
                           </div>
@@ -576,19 +576,19 @@ export function SettingsView() {
 
         {/* Customers Tab */}
         <TabsContent value="customers">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <CardTitle className="text-sm font-semibold animated-underline">Customer Management</CardTitle>
                   <CardDescription className="text-xs">Manage OEM and supplier customer profiles</CardDescription>
                 </div>
-                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddCustomer}>
+                <Button size="sm" className="press-scale gap-1.5 h-8 text-xs" onClick={openAddCustomer}>
                   <Plus className="h-3.5 w-3.5" /> Add Customer
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-4">
+            <CardContent className="inner-glow glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -663,10 +663,10 @@ export function SettingsView() {
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex items-center justify-end gap-1">
-                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditCustomer(c)}>
+                            <Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={() => openEditCustomer(c)}>
                               <Edit className="h-3 w-3" />
                             </Button>
-                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+                            <Button variant="ghost" size="icon" className="press-scale h-7 w-7 text-red-500">
                               <Trash2 className="h-3 w-3" />
                             </Button>
                           </div>
@@ -755,19 +755,19 @@ export function SettingsView() {
 
         {/* Transporters Tab */}
         <TabsContent value="transporters">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <CardTitle className="text-sm font-semibold animated-underline">Transporter Management</CardTitle>
                   <CardDescription className="text-xs">Manage logistics partners and fleet providers</CardDescription>
                 </div>
-                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={openAddTransporter}>
+                <Button size="sm" className="press-scale gap-1.5 h-8 text-xs" onClick={openAddTransporter}>
                   <Plus className="h-3.5 w-3.5" /> Add Transporter
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-4">
+            <CardContent className="inner-glow glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -820,10 +820,10 @@ export function SettingsView() {
                         </TableCell>
                         <TableCell className="text-right">
                           <div className="flex items-center justify-end gap-1">
-                            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openEditTransporter(t)}>
+                            <Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={() => openEditTransporter(t)}>
                               <Edit className="h-3 w-3" />
                             </Button>
-                            <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500">
+                            <Button variant="ghost" size="icon" className="press-scale h-7 w-7 text-red-500">
                               <Trash2 className="h-3 w-3" />
                             </Button>
                           </div>
@@ -912,14 +912,14 @@ export function SettingsView() {
 
         {/* Users */}
         <TabsContent value="users">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-sm font-semibold animated-underline">User Management</CardTitle>
                   <CardDescription className="text-xs">Manage users and their access levels</CardDescription>
                 </div>
-                <Button size="sm" className="gap-1.5 h-8 text-xs">
+                <Button size="sm" className="press-scale gap-1.5 h-8 text-xs">
                   <Plus className="h-3.5 w-3.5" /> Add User
                 </Button>
               </div>
@@ -959,8 +959,8 @@ export function SettingsView() {
                       <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{user.lastLogin}</TableCell>
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
-                          <Button variant="ghost" size="icon" className="h-7 w-7"><Edit className="h-3 w-3" /></Button>
-                          <Button variant="ghost" size="icon" className="h-7 w-7 text-red-500"><Trash2 className="h-3 w-3" /></Button>
+                          <Button variant="ghost" size="icon" className="press-scale h-7 w-7"><Edit className="h-3 w-3" /></Button>
+                          <Button variant="ghost" size="icon" className="press-scale h-7 w-7 text-red-500"><Trash2 className="h-3 w-3" /></Button>
                         </div>
                       </TableCell>
                     </TableRow>
@@ -973,14 +973,14 @@ export function SettingsView() {
 
         {/* Roles */}
         <TabsContent value="roles">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-sm font-semibold animated-underline">Roles & Permissions</CardTitle>
                   <CardDescription className="text-xs">Define roles and access permissions</CardDescription>
                 </div>
-                <Button size="sm" className="gap-1.5 h-8 text-xs">
+                <Button size="sm" className="press-scale gap-1.5 h-8 text-xs">
                   <Shield className="h-3.5 w-3.5" /> Add Role
                 </Button>
               </div>
@@ -1004,7 +1004,7 @@ export function SettingsView() {
                         <Badge variant="secondary" className="badge-interactive text-[10px]">{role.users}</Badge>
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="icon" className="h-7 w-7"><Edit className="h-3 w-3" /></Button>
+                        <Button variant="ghost" size="icon" className="press-scale h-7 w-7"><Edit className="h-3 w-3" /></Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -1016,19 +1016,19 @@ export function SettingsView() {
 
         {/* KPI Config Tab — Real Configuration */}
         <TabsContent value="kpi">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <CardTitle className="text-sm font-semibold animated-underline">KPI Target Configuration</CardTitle>
                   <CardDescription className="text-xs">Set target values and alert thresholds for each KPI</CardDescription>
                 </div>
-                <Button size="sm" className="gap-1.5 h-8 text-xs" onClick={() => toast.success("KPI targets saved", "Thresholds updated for all warehouses", { duration: 3000 })}>
+                <Button size="sm" className="press-scale gap-1.5 h-8 text-xs" onClick={() => toast.success("KPI targets saved", "Thresholds updated for all warehouses", { duration: 3000 })}>
                   <Save className="h-3.5 w-3.5" /> Save Targets
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-4">
+            <CardContent className="inner-glow glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -1138,12 +1138,12 @@ export function SettingsView() {
 
         {/* Notifications */}
         <TabsContent value="notifications">
-          <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
+          <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
             <CardHeader>
               <CardTitle className="text-sm font-semibold animated-underline">Notification Settings</CardTitle>
               <CardDescription className="text-xs">Configure how and when you receive notifications</CardDescription>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-6">
+            <CardContent className="inner-glow glass-subtle space-y-6">
               <div>
                 <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Channels</h4>
                 <SettingsSection>
@@ -1183,14 +1183,14 @@ export function SettingsView() {
         {/* Appearance */}
         <TabsContent value="appearance">
           <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+            <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
               <CardHeader>
                 <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
                   <Palette className="size-4 text-purple-500" /> Theme
                 </CardTitle>
                 <CardDescription className="text-xs">Customize the visual appearance</CardDescription>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-5">
+              <CardContent className="inner-glow glass-subtle space-y-5">
                 <SettingRow label="Color Mode" description="Light, dark, or follow system">
                   <Select value={appearanceSettings.theme} onValueChange={(v) => { setAppearanceSettings({ ...appearanceSettings, theme: v }); setNextTheme(v); toast.success("Theme updated", `Switched to ${v} mode`) }}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
@@ -1234,14 +1234,14 @@ export function SettingsView() {
               </CardContent>
             </Card>
 
-            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+            <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
               <CardHeader>
                 <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
                   <Monitor className="size-4 text-blue-500" /> Layout & Display
                 </CardTitle>
                 <CardDescription className="text-xs">Control density and data presentation</CardDescription>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-5">
+              <CardContent className="inner-glow glass-subtle space-y-5">
                 <SettingRow label="Layout Density" description="Adjust spacing and sizing">
                   <Select value={appearanceSettings.density} onValueChange={(v) => { setAppearanceSettings({ ...appearanceSettings, density: v }); storeSetDensity(v as LayoutDensity); toast.success("Density updated", `Layout set to ${v}`) }}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
@@ -1285,14 +1285,14 @@ export function SettingsView() {
         {/* Notification Preferences */}
         <TabsContent value="notif-prefs">
           <div className="grid gap-4 lg:grid-cols-2 stagger-children">
-            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+            <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
               <CardHeader>
                 <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
                   <Clock className="size-4 text-amber-500" /> Delivery Schedule
                 </CardTitle>
                 <CardDescription className="text-xs">Control how and when notifications are delivered</CardDescription>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-5">
+              <CardContent className="inner-glow glass-subtle space-y-5">
                 <SettingRow label="Delivery Frequency" description="How often alerts are sent">
                   <Select value={notifPrefs.frequency} onValueChange={(v) => setNotifPrefs({ frequency: v as NotifFrequency })}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
@@ -1354,14 +1354,14 @@ export function SettingsView() {
               </CardContent>
             </Card>
 
-            <Card className="rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
+            <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm card-depth hover-zoom">
               <CardHeader>
                 <CardTitle className="text-sm font-semibold animated-underline flex items-center gap-2">
                   <Volume2 className="size-4 text-blue-500" /> Sound & Channels
                 </CardTitle>
                 <CardDescription className="text-xs">Configure notification sounds and delivery channels</CardDescription>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-5">
+              <CardContent className="inner-glow glass-subtle space-y-5">
                 <SettingRow label="Notification Sound" description="Play sound for incoming alerts">
                   <Switch checked={notifPrefs.soundEnabled} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, soundEnabled: v })} />
                 </SettingRow>

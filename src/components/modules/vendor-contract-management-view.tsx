@@ -393,7 +393,7 @@ export function VendorContractManagementView() {
 
             {/* Charts Row */}
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-              <Card className="vcm-chart-card">
+              <Card className="hover-lift-sm vcm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2"><BarChart3 className="h-4 w-4 text-amber-500" /> Contract Value by Type</CardTitle>
                 </CardHeader>
@@ -412,7 +412,7 @@ export function VendorContractManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="vcm-chart-card">
+              <Card className="hover-lift-sm vcm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2"><TrendingUp className="h-4 w-4 text-pink-500" /> Contract Lifecycle Trend</CardTitle>
                 </CardHeader>
@@ -432,7 +432,7 @@ export function VendorContractManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="vcm-chart-card">
+              <Card className="hover-lift-sm vcm-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm flex items-center gap-2"><Activity className="h-4 w-4 text-red-500" /> Risk Distribution</CardTitle>
                 </CardHeader>
@@ -455,7 +455,7 @@ export function VendorContractManagementView() {
             </div>
 
             {/* Contract Table */}
-            <Card className="vcm-chart-card overflow-hidden">
+            <Card className="hover-lift-sm vcm-chart-card overflow-hidden">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between flex-wrap gap-2">
                   <CardTitle className="text-sm flex items-center gap-2"><Stamp className="h-4 w-4 text-amber-500" /> Contracts ({filtered.length})</CardTitle>
@@ -481,7 +481,7 @@ export function VendorContractManagementView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="vcm-table">
                     <thead>
@@ -562,7 +562,7 @@ export function VendorContractManagementView() {
             </div>
 
             {/* Vendor Contract Distribution */}
-            <Card className="vcm-chart-card">
+            <Card className="hover-lift-sm vcm-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2"><Building2 className="h-4 w-4 text-pink-500" /> Vendor Contract Value Distribution</CardTitle>
               </CardHeader>
@@ -602,11 +602,11 @@ export function VendorContractManagementView() {
               ))}
             </div>
 
-            <Card className="vcm-chart-card overflow-hidden">
+            <Card className="hover-lift-sm vcm-chart-card overflow-hidden">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2"><FileCheck className="h-4 w-4 text-emerald-500" /> Contract Compliance Details</CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="vcm-table">
                     <thead>
@@ -684,7 +684,7 @@ export function VendorContractManagementView() {
 
                 {/* Terms + Docs Grid */}
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                  <Card className="vcm-chart-card">
+                  <Card className="hover-lift-sm vcm-chart-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm flex items-center gap-2"><Scale className="h-4 w-4 text-amber-500" /> Contract Terms</CardTitle>
                     </CardHeader>
@@ -711,7 +711,7 @@ export function VendorContractManagementView() {
                     </CardContent>
                   </Card>
 
-                  <Card className="vcm-chart-card">
+                  <Card className="hover-lift-sm vcm-chart-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm flex items-center gap-2"><FolderOpen className="h-4 w-4 text-pink-500" /> Documents ({selectedContract.documents.length})</CardTitle>
                     </CardHeader>
@@ -734,11 +734,11 @@ export function VendorContractManagementView() {
 
                 {/* Amendments */}
                 {selectedContract.amendments.length > 0 && (
-                  <Card className="vcm-chart-card vcm-amendments-card">
+                  <Card className="hover-lift-sm vcm-chart-card vcm-amendments-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm flex items-center gap-2"><PenLine className="h-4 w-4 text-orange-500" /> Amendments ({selectedContract.amendments.length})</CardTitle>
                     </CardHeader>
-                    <CardContent className="glass-subtle space-y-2">
+                    <CardContent className="inner-glow glass-subtle space-y-2">
                       {selectedContract.amendments.map((amd) => (
                         <div key={amd.id} className="vcm-amendment-item">
                           <Badge className="badge-interactive text-[10px] bg-orange-100 text-orange-700 border-none">{amd.type.replace(/_/g, " ")}</Badge>
@@ -753,7 +753,7 @@ export function VendorContractManagementView() {
 
                 {/* Compliance Summary for this contract */}
                 {selectedCompliance && (
-                  <Card className="vcm-chart-card">
+                  <Card className="hover-lift-sm vcm-chart-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-emerald-500" /> Compliance Summary</CardTitle>
                     </CardHeader>
@@ -790,17 +790,17 @@ export function VendorContractManagementView() {
 
                 {/* Nav */}
                 <div className="flex justify-between">
-                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate text-xs"
                     onClick={() => { const i = contracts.findIndex((c) => c.id === selectedContract.id); if (i > 0) setSelectedContract(contracts[i - 1]); }}
                     disabled={contracts.findIndex((c) => c.id === selectedContract.id) === 0}>← Previous</Button>
-                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate text-xs"
                     onClick={() => { const i = contracts.findIndex((c) => c.id === selectedContract.id); if (i < contracts.length - 1) setSelectedContract(contracts[i + 1]); }}
                     disabled={contracts.findIndex((c) => c.id === selectedContract.id) === contracts.length - 1}>Next →</Button>
                 </div>
               </>
             ) : (
-              <Card className="vcm-chart-card">
-                <CardContent className="glass-subtle py-12 text-center">
+              <Card className="hover-lift-sm vcm-chart-card">
+                <CardContent className="inner-glow glass-subtle py-12 text-center">
                   <FileText className="h-12 w-12 text-muted-foreground/30 mx-auto mb-3" />
                   <p className="text-sm text-muted-foreground">Select a contract from the Overview tab to inspect details</p>
                 </CardContent>

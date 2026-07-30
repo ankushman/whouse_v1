@@ -311,8 +311,8 @@ export function PredictiveAnalyticsView() {
 
       {/* Anomaly summary strip */}
       <div className="grid gap-3 grid-cols-1 md:grid-cols-3">
-        <Card className="predictive-card-glow predictive-critical-glow overflow-hidden">
-          <CardContent className="glass-subtle p-4 flex items-center justify-between">
+        <Card className="hover-lift-sm predictive-card-glow predictive-critical-glow overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4 flex items-center justify-between">
             <div>
               <div className="text-xs uppercase tracking-wider text-muted-foreground">Critical Anomalies</div>
               <div className="text-3xl font-bold text-destructive mt-1 animate-pulse-subtle">{criticalCount}</div>
@@ -323,8 +323,8 @@ export function PredictiveAnalyticsView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="predictive-card-glow predictive-warning-glow overflow-hidden">
-          <CardContent className="glass-subtle p-4 flex items-center justify-between">
+        <Card className="hover-lift-sm predictive-card-glow predictive-warning-glow overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4 flex items-center justify-between">
             <div>
               <div className="text-xs uppercase tracking-wider text-muted-foreground">Warnings</div>
               <div className="text-3xl font-bold text-amber-500 mt-1">{warningCount}</div>
@@ -335,8 +335,8 @@ export function PredictiveAnalyticsView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="predictive-card-glow predictive-info-glow overflow-hidden">
-          <CardContent className="glass-subtle p-4 flex items-center justify-between">
+        <Card className="hover-lift-sm predictive-card-glow predictive-info-glow overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4 flex items-center justify-between">
             <div>
               <div className="text-xs uppercase tracking-wider text-muted-foreground">Model Confidence</div>
               <div className="text-3xl font-bold text-emerald-500 mt-1">87%</div>
@@ -477,7 +477,7 @@ export function PredictiveAnalyticsView() {
                 setDrawerOpen(true)
               }}
             >
-              <CardContent className="glass-subtle p-4">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3 flex-1 min-w-0">
                     <div
@@ -633,8 +633,8 @@ export function PredictiveAnalyticsView() {
         <TabsContent value="model" className="space-y-4">
           <div className="grid gap-3 grid-cols-2 md:grid-cols-4">
             {modelMetrics.map((m) => (
-              <Card key={m.label} className="model-metric-card overflow-hidden">
-                <CardContent className="glass-subtle p-4">
+              <Card key={m.label} className="hover-lift-sm model-metric-card overflow-hidden">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{m.label}</div>
                   <div className="text-2xl font-bold mt-1 flex items-center gap-1">
                     {m.value}
@@ -657,7 +657,7 @@ export function PredictiveAnalyticsView() {
               </CardTitle>
               <CardDescription>Ensemble of statistical + gradient-boosted models</CardDescription>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-3 text-sm">
+            <CardContent className="inner-glow glass-subtle space-y-3 text-sm">
               <div className="flex items-start gap-3 p-3 rounded-lg bg-muted/30">
                 <div className="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
                   <Brain className="h-4 w-4 text-primary" />
@@ -720,8 +720,8 @@ function PredictiveKPICard({ kpi }: { kpi: PredictiveKPI }) {
   const isPositive = (isUp && kpi.changePct > 0) || (!isUp && kpi.changePct < 0)
 
   return (
-    <Card className="predictive-kpi-card kpi-card-tilt overflow-hidden">
-      <CardContent className="glass-subtle p-4">
+    <Card className="hover-lift-sm predictive-kpi-card kpi-card-tilt overflow-hidden">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
             <Icon className="h-4 w-4 text-primary" />

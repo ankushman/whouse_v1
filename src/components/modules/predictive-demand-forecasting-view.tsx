@@ -663,7 +663,7 @@ export default function PredictiveDemandForecastingView() {
 
           <div className="pdf-chart-grid">
             {/* Forecast vs Actual with Confidence Band */}
-            <Card className="pdf-chart-card pdf-chart-full">
+            <Card className="hover-lift-sm pdf-chart-card pdf-chart-full">
               <CardHeader className="pdf-chart-header">
                 <CardTitle className="pdf-chart-title">Forecast vs Actual — 12 Month Trend with 95% Confidence Band</CardTitle>
                 <CardDescription>Blue area = confidence band, solid line = forecast, dots = actual</CardDescription>
@@ -686,7 +686,7 @@ export default function PredictiveDemandForecastingView() {
             </Card>
 
             {/* Algorithm Comparison Radar */}
-            <Card className="pdf-chart-card">
+            <Card className="hover-lift-sm pdf-chart-card">
               <CardHeader className="pdf-chart-header">
                 <CardTitle className="pdf-chart-title">Algorithm Performance Radar</CardTitle>
                 <CardDescription>Multi-dimensional accuracy comparison</CardDescription>
@@ -708,7 +708,7 @@ export default function PredictiveDemandForecastingView() {
             </Card>
 
             {/* Category Demand Bar */}
-            <Card className="pdf-chart-card">
+            <Card className="hover-lift-sm pdf-chart-card">
               <CardHeader className="pdf-chart-header">
                 <CardTitle className="pdf-chart-title">Demand by Product Category</CardTitle>
                 <CardDescription>Forecasted demand volume</CardDescription>
@@ -731,7 +731,7 @@ export default function PredictiveDemandForecastingView() {
             </Card>
 
             {/* Forecast Growth Distribution */}
-            <Card className="pdf-chart-card">
+            <Card className="hover-lift-sm pdf-chart-card">
               <CardHeader className="pdf-chart-header">
                 <CardTitle className="pdf-chart-title">Growth Forecast Distribution</CardTitle>
                 <CardDescription>Number of SKUs by growth range</CardDescription>
@@ -750,7 +750,7 @@ export default function PredictiveDemandForecastingView() {
             </Card>
 
             {/* Warehouse Forecast Accuracy */}
-            <Card className="pdf-chart-card">
+            <Card className="hover-lift-sm pdf-chart-card">
               <CardHeader className="pdf-chart-header">
                 <CardTitle className="pdf-chart-title">Warehouse Forecast Accuracy</CardTitle>
                 <CardDescription>Accuracy % and confidence by warehouse</CardDescription>
@@ -772,7 +772,7 @@ export default function PredictiveDemandForecastingView() {
             </Card>
 
             {/* Alert Severity Pie */}
-            <Card className="pdf-chart-card">
+            <Card className="hover-lift-sm pdf-chart-card">
               <CardHeader className="pdf-chart-header">
                 <CardTitle className="pdf-chart-title">Alert Severity Distribution</CardTitle>
                 <CardDescription>Current active forecast alerts</CardDescription>
@@ -817,7 +817,7 @@ export default function PredictiveDemandForecastingView() {
                 <SelectTrigger className="pdf-select-trigger"><SelectValue placeholder="Algorithm" /></SelectTrigger>
                 <SelectContent><SelectItem value="all">All Algorithms</SelectItem>{ALGORITHMS.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}</SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredForecasts, "demand-forecasts")} className="btn-outline-animate pdf-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredForecasts, "demand-forecasts")} className="press-scale btn-outline-animate pdf-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -867,7 +867,7 @@ export default function PredictiveDemandForecastingView() {
                       </div>
                     </TableCell>
                     <TableCell>
-                      <Button variant="ghost" size="sm" className="pdf-view-btn" onClick={() => openDrawer("forecast", f)}>
+                      <Button variant="ghost" size="sm" className="press-scale pdf-view-btn" onClick={() => openDrawer("forecast", f)}>
                         <Eye className="h-3.5 w-3.5" /> View
                       </Button>
                     </TableCell>
@@ -900,7 +900,7 @@ export default function PredictiveDemandForecastingView() {
                 <SelectTrigger className="pdf-select-trigger"><SelectValue placeholder="Warehouse" /></SelectTrigger>
                 <SelectContent><SelectItem value="all">All Warehouses</SelectItem>{WAREHOUSES.map((w) => <SelectItem key={w} value={w}>{w}</SelectItem>)}</SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredSeasonal, "seasonal-patterns")} className="btn-outline-animate pdf-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredSeasonal, "seasonal-patterns")} className="press-scale btn-outline-animate pdf-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -946,7 +946,7 @@ export default function PredictiveDemandForecastingView() {
                     </TableCell>
                     <TableCell className="text-sm">{sp.peakMonth}</TableCell>
                     <TableCell>
-                      <Button variant="ghost" size="sm" className="pdf-view-btn" onClick={() => openDrawer("seasonal", sp)}>
+                      <Button variant="ghost" size="sm" className="press-scale pdf-view-btn" onClick={() => openDrawer("seasonal", sp)}>
                         <Eye className="h-3.5 w-3.5" /> View
                       </Button>
                     </TableCell>
@@ -979,7 +979,7 @@ export default function PredictiveDemandForecastingView() {
                 <SelectTrigger className="pdf-select-trigger"><SelectValue placeholder="Scenario" /></SelectTrigger>
                 <SelectContent><SelectItem value="all">All Scenarios</SelectItem>{SCENARIOS.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredScenarios, "scenario-models")} className="btn-outline-animate pdf-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredScenarios, "scenario-models")} className="press-scale btn-outline-animate pdf-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -1032,7 +1032,7 @@ export default function PredictiveDemandForecastingView() {
                       </span>
                     </TableCell>
                     <TableCell>
-                      <Button variant="ghost" size="sm" className="pdf-view-btn" onClick={() => openDrawer("scenario", sm)}>
+                      <Button variant="ghost" size="sm" className="press-scale pdf-view-btn" onClick={() => openDrawer("scenario", sm)}>
                         <Eye className="h-3.5 w-3.5" /> View
                       </Button>
                     </TableCell>
@@ -1061,7 +1061,7 @@ export default function PredictiveDemandForecastingView() {
                 <SelectTrigger className="pdf-select-trigger"><SelectValue placeholder="Algorithm" /></SelectTrigger>
                 <SelectContent><SelectItem value="all">All Algorithms</SelectItem>{ALGORITHMS.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}</SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredAccuracy, "model-accuracy")} className="btn-outline-animate pdf-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredAccuracy, "model-accuracy")} className="press-scale btn-outline-animate pdf-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -1120,7 +1120,7 @@ export default function PredictiveDemandForecastingView() {
                       )}
                     </TableCell>
                     <TableCell>
-                      <Button variant="ghost" size="sm" className="pdf-view-btn" onClick={() => openDrawer("accuracy", ac)}>
+                      <Button variant="ghost" size="sm" className="press-scale pdf-view-btn" onClick={() => openDrawer("accuracy", ac)}>
                         <Eye className="h-3.5 w-3.5" /> View
                       </Button>
                     </TableCell>
@@ -1149,7 +1149,7 @@ export default function PredictiveDemandForecastingView() {
                 <SelectTrigger className="pdf-select-trigger"><SelectValue placeholder="Warehouse" /></SelectTrigger>
                 <SelectContent><SelectItem value="all">All Warehouses</SelectItem>{WAREHOUSES.map((w) => <SelectItem key={w} value={w}>{w}</SelectItem>)}</SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredAlerts, "forecast-alerts")} className="btn-outline-animate pdf-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredAlerts, "forecast-alerts")} className="press-scale btn-outline-animate pdf-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -1158,7 +1158,7 @@ export default function PredictiveDemandForecastingView() {
           {/* Alert cards */}
           <div className="pdf-alert-grid">
             {filteredAlerts.map((al) => (
-              <Card key={al.id} className="pdf-alert-card" onClick={() => openDrawer("alert", al)}>
+              <Card key={al.id} className="hover-lift-sm pdf-alert-card" onClick={() => openDrawer("alert", al)}>
                 <CardHeader className="pdf-alert-header">
                   <div className="pdf-alert-header-top">
                     <div className="flex items-center gap-2">
@@ -1253,9 +1253,9 @@ export default function PredictiveDemandForecastingView() {
             ]} />
           </div>
           <SheetFooter className="pdf-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalibrate</Button>
-            <Button size="sm" variant="outline"><Brain className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Switch Algorithm</Button>
-            <Button size="sm" className="pdf-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Run Scenario</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalibrate</Button>
+            <Button size="sm" variant="outline"><Brain className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Switch Algorithm</Button>
+            <Button size="sm" className="press-scale pdf-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Run Scenario</Button>
           </SheetFooter>
         </>
       )
@@ -1298,9 +1298,9 @@ export default function PredictiveDemandForecastingView() {
             ]} />
           </div>
           <SheetFooter className="pdf-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalculate</Button>
-            <Button size="sm" variant="outline"><Package className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Adjust Safety Stock</Button>
-            <Button size="sm" className="pdf-drawer-primary-btn"><Target className="h-3.5 w-3.5 mr-1" /> Set Targets</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalculate</Button>
+            <Button size="sm" variant="outline"><Package className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Adjust Safety Stock</Button>
+            <Button size="sm" className="press-scale pdf-drawer-primary-btn"><Target className="h-3.5 w-3.5 mr-1" /> Set Targets</Button>
           </SheetFooter>
         </>
       )
@@ -1348,9 +1348,9 @@ export default function PredictiveDemandForecastingView() {
             ]} />
           </div>
           <SheetFooter className="pdf-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalculate</Button>
-            <Button size="sm" variant="outline"><Layers className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Compare Scenarios</Button>
-            <Button size="sm" className="pdf-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Apply Plan</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalculate</Button>
+            <Button size="sm" variant="outline"><Layers className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Compare Scenarios</Button>
+            <Button size="sm" className="press-scale pdf-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Apply Plan</Button>
           </SheetFooter>
         </>
       )
@@ -1401,9 +1401,9 @@ export default function PredictiveDemandForecastingView() {
             ]} />
           </div>
           <SheetFooter className="pdf-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Re-evaluate</Button>
-            <Button size="sm" variant="outline"><BarChart3 className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Compare</Button>
-            <Button size="sm" className="pdf-drawer-primary-btn"><Sparkles className="h-3.5 w-3.5 mr-1" /> Optimize</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Re-evaluate</Button>
+            <Button size="sm" variant="outline"><BarChart3 className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Compare</Button>
+            <Button size="sm" className="press-scale pdf-drawer-primary-btn"><Sparkles className="h-3.5 w-3.5 mr-1" /> Optimize</Button>
           </SheetFooter>
         </>
       )
@@ -1454,9 +1454,9 @@ export default function PredictiveDemandForecastingView() {
             ]} />
           </div>
           <SheetFooter className="pdf-drawer-footer">
-            <Button size="sm" variant="outline"><CheckCircle2 className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Resolve</Button>
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalibrate</Button>
-            <Button size="sm" className="pdf-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Escalate</Button>
+            <Button size="sm" variant="outline"><CheckCircle2 className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Resolve</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalibrate</Button>
+            <Button size="sm" className="press-scale pdf-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Escalate</Button>
           </SheetFooter>
         </>
       )

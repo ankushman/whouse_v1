@@ -423,9 +423,9 @@ export default function CrossDockOptimizationView() {
         <TabsContent value="0" className="space-y-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {kpis.map((k, i) => (
-              <Card key={i} className="cdo-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: ["#6366f1","#0891b2","#059669","#d97706","#3b82f6","#7c3aed","#0d9488","#ea580c"][i] }}>
+              <Card key={i} className="hover-lift-sm cdo-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: ["#6366f1","#0891b2","#059669","#d97706","#3b82f6","#7c3aed","#0d9488","#ea580c"][i] }}>
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-80" style={{ background: `linear-gradient(90deg, ${["#6366f1","#0891b2","#059669","#d97706","#3b82f6","#7c3aed","#0d9488","#ea580c"][i]}, ${["#818cf8","#06b6d4","#34d399","#f59e0b","#60a5fa","#a78bfa","#14b8a6","#f97316"][i]})` }} />
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{k.label}</p>
@@ -439,9 +439,9 @@ export default function CrossDockOptimizationView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            <Card className="cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Hourly Throughput</CardTitle></CardHeader><CardContent><AreaChart data={data.hourlyThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="hour" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Inbound" stroke="#6366f1" fill="#6366f180" /><Area type="monotone" dataKey="Sorted" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Outbound" stroke="#059669" fill="#05966980" /></AreaChart></CardContent></Card>
-            <Card className="cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Hub Throughput & SLA</CardTitle></CardHeader><CardContent><BarChart data={data.hubThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="hub" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Throughput" fill="#6366f1" /><Bar dataKey="SLA" fill="#0891b2" /></BarChart></CardContent></Card>
-            <Card className="cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cross-Dock Type Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.typePie} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.typePie.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Hourly Throughput</CardTitle></CardHeader><CardContent><AreaChart data={data.hourlyThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="hour" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Area type="monotone" dataKey="Inbound" stroke="#6366f1" fill="#6366f180" /><Area type="monotone" dataKey="Sorted" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Outbound" stroke="#059669" fill="#05966980" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Hub Throughput & SLA</CardTitle></CardHeader><CardContent><BarChart data={data.hubThroughput}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="hub" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="Throughput" fill="#6366f1" /><Bar dataKey="SLA" fill="#0891b2" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cross-Dock Type Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.typePie} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>{data.typePie.map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -451,8 +451,8 @@ export default function CrossDockOptimizationView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search by hub, carrier or door..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.info("Cleared", "Filters reset") }}>Clear</Button>
           </div>
-          <Card className="card-crud-lift cdo-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift cdo-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
@@ -480,7 +480,7 @@ export default function CrossDockOptimizationView() {
                       <TableCell><ZoneBadge zone={d.zone} /></TableCell>
                       <TableCell><DwellTimeTile time={d.dwellTime} /></TableCell>
                       <TableCell><ShiftBadge shift={d.shift} /></TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="cdo-action-btn" onClick={() => { setSelectedDoor(d); toast.info("Dock Door", `Viewing ${d.door}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="cdo-action-btn" onClick={() => { setSelectedDoor(d); toast.info("Dock Door", `Viewing ${d.door}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -491,8 +491,8 @@ export default function CrossDockOptimizationView() {
 
         {/* Tab 2: Operations */}
         <TabsContent value="2" className="space-y-4">
-          <Card className="card-crud-lift cdo-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift cdo-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
@@ -520,7 +520,7 @@ export default function CrossDockOptimizationView() {
                       <TableCell><PackageCountBadge count={o.packageCount} /></TableCell>
                       <TableCell><WeightTile weight={o.totalWeight} /></TableCell>
                       <TableCell><ValueTile value={o.value} /></TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="cdo-action-btn" onClick={() => { setSelectedOp(o); toast.info("Operation", `Viewing ${o.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="cdo-action-btn" onClick={() => { setSelectedOp(o); toast.info("Operation", `Viewing ${o.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -531,8 +531,8 @@ export default function CrossDockOptimizationView() {
 
         {/* Tab 3: Sort Plan */}
         <TabsContent value="3" className="space-y-4">
-          <Card className="card-crud-lift cdo-table-card overflow-hidden">
-            <CardContent className="glass-subtle p-0">
+          <Card className="hover-lift-sm card-crud-lift cdo-table-card overflow-hidden">
+            <CardContent className="inner-glow glass-subtle p-0">
               <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
@@ -558,7 +558,7 @@ export default function CrossDockOptimizationView() {
                       <TableCell><SLABar sla={sp.sortAccuracy} /></TableCell>
                       <TableCell><PriorityBadge priority={sp.priority} /></TableCell>
                       <TableCell><OpStatusBadge status={sp.status} /></TableCell>
-                      <TableCell className="text-right"><Button size="sm" variant="ghost" className="cdo-action-btn" onClick={() => { setSelectedSort(sp); toast.info("Sort Plan", `Viewing ${sp.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
+                      <TableCell className="press-scale text-right"><Button size="sm" variant="ghost" className="cdo-action-btn" onClick={() => { setSelectedSort(sp); toast.info("Sort Plan", `Viewing ${sp.id}`) }}><Eye className="h-4 w-4" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -580,8 +580,8 @@ export default function CrossDockOptimizationView() {
               { label: "Carrier On-Time", value: data.analyticsKpis.carrierOnTime, icon: Truck, color: "from-orange-500 to-orange-600" },
               { label: "Volume Growth", value: data.analyticsKpis.volumeGrowth, icon: TrendingUp, color: "from-teal-500 to-teal-600" },
             ].map((k, i) => (
-              <Card key={i} className="cdo-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm cdo-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center gap-3">
                     <div className={cn("cdo-analytics-icon flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-white", k.color)}><k.icon className="h-4.5 w-4.5" /></div>
                     <div>
@@ -594,10 +594,10 @@ export default function CrossDockOptimizationView() {
             ))}
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Card className="cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Volume Trend</CardTitle></CardHeader><CardContent><LineChart data={data.dailyTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Inbound" stroke="#6366f1" strokeWidth={2} /><Line type="monotone" dataKey="Outbound" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="CrossDocked" stroke="#0891b2" strokeWidth={2} /></LineChart></CardContent></Card>
-            <Card className="cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Door Utilization</CardTitle></CardHeader><CardContent><BarChart data={data.doorUtilChart} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="door" type="category" tick={{ fontSize: 10 }} width={65} /><Tooltip /><Bar dataKey="Utilization" fill="#6366f1" /></BarChart></CardContent></Card>
-            <Card className="cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Carrier SLA Performance</CardTitle></CardHeader><CardContent><BarChart data={data.carrierSLAChart}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="carrier" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="SLA" fill="#0891b2" /></BarChart></CardContent></Card>
-            <Card className="cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cost Breakdown (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.costTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Labor" stackId="1" stroke="#6366f1" fill="#6366f180" /><Area type="monotone" dataKey="Equipment" stackId="1" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Overhead" stackId="1" stroke="#d97706" fill="#d9770680" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Daily Volume Trend</CardTitle></CardHeader><CardContent><LineChart data={data.dailyTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="Inbound" stroke="#6366f1" strokeWidth={2} /><Line type="monotone" dataKey="Outbound" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="CrossDocked" stroke="#0891b2" strokeWidth={2} /></LineChart></CardContent></Card>
+            <Card className="hover-lift-sm cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Door Utilization</CardTitle></CardHeader><CardContent><BarChart data={data.doorUtilChart} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 11 }} /><YAxis dataKey="door" type="category" tick={{ fontSize: 10 }} width={65} /><Tooltip /><Bar dataKey="Utilization" fill="#6366f1" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Carrier SLA Performance</CardTitle></CardHeader><CardContent><BarChart data={data.carrierSLAChart}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="carrier" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="SLA" fill="#0891b2" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm cdo-chart-card"><CardHeader><CardTitle className="text-sm font-semibold">Cost Breakdown (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={data.costTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Labor" stackId="1" stroke="#6366f1" fill="#6366f180" /><Area type="monotone" dataKey="Equipment" stackId="1" stroke="#0891b2" fill="#0891b280" /><Area type="monotone" dataKey="Overhead" stackId="1" stroke="#d97706" fill="#d9770680" /></AreaChart></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -628,8 +628,8 @@ export default function CrossDockOptimizationView() {
                 <div><p className="text-xs text-gray-500">Shift</p><ShiftBadge shift={selectedDoor.shift} /></div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button className="cdo-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => toast.success("Assigned", `${selectedDoor.door} assigned`)}>Assign</Button>
-                <Button variant="outline" className="btn-outline-animate cdo-action-btn" onClick={() => toast.info("Maintenance", `Maintenance for ${selectedDoor.door}`)}>Maintenance</Button>
+                <Button className="press-scale cdo-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => toast.success("Assigned", `${selectedDoor.door} assigned`)}>Assign</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate cdo-action-btn" onClick={() => toast.info("Maintenance", `Maintenance for ${selectedDoor.door}`)}>Maintenance</Button>
               </div>
             </div>
           </>)}
@@ -666,8 +666,8 @@ export default function CrossDockOptimizationView() {
                 <div><p className="text-xs text-gray-500">Target SLA</p><span className="text-sm font-medium">{selectedOp.targetSLA}</span></div>
               </div>
               <div className="flex gap-2 pt-2">
-                <Button className="cdo-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => toast.success("Updated", `${selectedOp.id} updated`)}>Update Status</Button>
-                <Button variant="outline" className="btn-outline-animate cdo-action-btn" onClick={() => toast.info("Reassigned", `${selectedOp.id} reassigned`)}>Reassign</Button>
+                <Button className="press-scale cdo-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => toast.success("Updated", `${selectedOp.id} updated`)}>Update Status</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate cdo-action-btn" onClick={() => toast.info("Reassigned", `${selectedOp.id} reassigned`)}>Reassign</Button>
               </div>
             </div>
           </>)}
@@ -703,8 +703,8 @@ export default function CrossDockOptimizationView() {
               </div>
               <HubBadge hub={selectedSort.hub} />
               <div className="flex gap-2 pt-2">
-                <Button className="cdo-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Executed", `Sort plan ${selectedSort.id} executed`)}>Execute</Button>
-                <Button variant="outline" className="btn-outline-animate cdo-action-btn" onClick={() => toast.info("Rescheduled", `${selectedSort.id} rescheduled`)}>Reschedule</Button>
+                <Button className="press-scale cdo-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Executed", `Sort plan ${selectedSort.id} executed`)}>Execute</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate cdo-action-btn" onClick={() => toast.info("Rescheduled", `${selectedSort.id} rescheduled`)}>Reschedule</Button>
               </div>
             </div>
           </>)}

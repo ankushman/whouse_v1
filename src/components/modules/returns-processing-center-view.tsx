@@ -416,7 +416,7 @@ export default function ReturnsProcessingCenterView() {
   const filteredDispositions = sortedData(filterData(data.dispositions, searchQ), sortField, sortDir)
 
   const SortHeader = ({ field, children }: { field: string; children: React.ReactNode }) => (
-    <Button variant="ghost" size="sm" className="rpc-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
+    <Button variant="ghost" size="sm" className="press-scale rpc-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
       <span className="flex items-center gap-1">{children}<ArrowUpDown className="h-3 w-3" /></span>
     </Button>
   )
@@ -437,7 +437,7 @@ export default function ReturnsProcessingCenterView() {
           <div className="rpc-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`rpc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -445,15 +445,15 @@ export default function ReturnsProcessingCenterView() {
             ))}
           </div>
           <div className="rpc-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="rpc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm rpc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Daily Return Volume</CardTitle></CardHeader>
               <CardContent><AreaChart data={dailyReturns}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Refund" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Replace" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Reject" stackId="a" fill="#e11d48" /></AreaChart></CardContent>
             </Card>
-            <Card className="rpc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm rpc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Return Reasons</CardTitle></CardHeader>
               <CardContent><PieChart><Pie data={reasonPie} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{reasonPie.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
-            <Card className="rpc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm rpc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Platform-wise Returns</CardTitle></CardHeader>
               <CardContent><BarChart data={platformBar}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="platform" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={60} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="Returns" fill="#d97706" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
             </Card>
@@ -481,7 +481,7 @@ export default function ReturnsProcessingCenterView() {
                     <td className="p-2"><ReturnTile amount={ret.value} /></td>
                     <td className="p-2 text-[10px] font-medium">{ret.customer}</td>
                     <td className="p-2 text-[10px] font-mono">{ret.orderId}</td>
-                    <td className="p-2 text-center"><Button variant="ghost" size="sm" className="rpc-view-btn h-7 w-7 p-0 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-amber-900/30" onClick={() => { setSelectedReturn(ret); setSheetOpen(true); toast.success("Viewing Return", `${ret.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
+                    <td className="press-scale p-2 text-center"><Button variant="ghost" size="sm" className="rpc-view-btn h-7 w-7 p-0 hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-amber-900/30" onClick={() => { setSelectedReturn(ret); setSheetOpen(true); toast.success("Viewing Return", `${ret.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -530,7 +530,7 @@ export default function ReturnsProcessingCenterView() {
                     </div>
                     <p className="text-2xl font-bold mt-1">{fmtINR(rfd.amount)}</p>
                   </div>
-                  <CardContent className="glass-subtle p-3 space-y-2">
+                  <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Method</span><RefundMethodBadge method={rfd.method} /></div>
                     <div className="badge-interactive flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Original Payment</span><Badge variant="outline" className="text-[10px] px-2 py-0.5 font-medium bg-gray-50 text-gray-600 dark:bg-gray-800 dark:text-gray-400">{rfd.originalPayment}</Badge></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Processing Time</span><ResolutionTimeTile days={rfd.processingTime} /></div>
@@ -580,7 +580,7 @@ export default function ReturnsProcessingCenterView() {
               { label: "Resale Recovery", value: fmtINR(data.dispositions.filter(x => x.type.startsWith("Resell")).reduce((s, d) => s + d.listedPrice, 0)), icon: CheckCircle, color: "text-blue-600", bg: "bg-blue-50 dark:bg-blue-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`rpc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -588,19 +588,19 @@ export default function ReturnsProcessingCenterView() {
             ))}
           </div>
           <div className="rpc-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card className="rpc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm rpc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Monthly Return Trend</CardTitle></CardHeader>
               <CardContent><LineChart data={Array.from({ length: 12 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][i], Returns: ri(40, 120, i + 200), Refunds: ri(200000, 1500000, i + 300) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="Returns" stroke="#d97706" strokeWidth={2} yAxisId={0} /><Line type="monotone" dataKey="Refunds" stroke="#059669" strokeWidth={2} yAxisId={1} /></LineChart></CardContent>
             </Card>
-            <Card className="rpc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm rpc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Category Return Rate</CardTitle></CardHeader>
               <CardContent><BarChart data={CATEGORIES.map((c, i) => ({ category: c, rate: ri(1, 8, i + 400) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="category" tick={{ fontSize: 9 }} angle={-20} textAnchor="end" height={60} /><YAxis tick={{ fontSize: 10 }} unit="%" /><Tooltip /><Bar dataKey="rate" fill="#e11d48" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
             </Card>
-            <Card className="rpc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm rpc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Top Return Reasons</CardTitle></CardHeader>
               <CardContent><BarChart data={RETURN_REASONS.map((r, i) => ({ reason: r, count: ri(5, 40, i + 500) }))} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis dataKey="reason" type="category" tick={{ fontSize: 9 }} width={90} /><Tooltip /><Bar dataKey="count" fill="#7c3aed" radius={[0, 4, 4, 0]} /></BarChart></CardContent>
             </Card>
-            <Card className="rpc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm rpc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Financial Impact (6 months)</CardTitle></CardHeader>
               <CardContent><AreaChart data={Array.from({ length: 6 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"][i], Refund: ri(500, 1500, i + 600), Logistics: ri(100, 400, i + 650), Replacement: ri(80, 300, i + 700), Recovery: ri(200, 800, i + 750) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Refund" stackId="a" fill="#e11d48" /><Area type="monotone" dataKey="Logistics" stackId="a" fill="#d97706" /><Area type="monotone" dataKey="Replacement" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Recovery" stackId="a" fill="#059669" /></AreaChart></CardContent>
             </Card>

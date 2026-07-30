@@ -141,8 +141,8 @@ export function ProductivityView() {
           { label: "Afternoon Shift", value: `${summary.afternoon}%`, icon: Sun, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
           { label: "Night Shift", value: `${summary.night}%`, icon: Moon, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
-            <CardContent className="glass-subtle flex items-center gap-3 p-4">
+          <Card key={item.label} className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
+            <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>
@@ -156,7 +156,7 @@ export function ProductivityView() {
       </div>
 
       {/* Shift Productivity Chart */}
-      <Card className="card-accent-blue card-shine rounded-xl border-border/60 shadow-sm">
+      <Card className="hover-lift-sm card-accent-blue card-shine rounded-xl border-border/60 shadow-sm">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-semibold">Shift-wise Productivity</CardTitle>
           <CardDescription className="text-xs">Daily productivity by shift</CardDescription>
@@ -179,7 +179,7 @@ export function ProductivityView() {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Warehouse Heatmap */}
-        <Card className="card-depth card-shine rounded-xl border-border/60 shadow-sm">
+        <Card className="hover-lift-sm card-depth card-shine rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Warehouse × Shift Heatmap</CardTitle>
             <CardDescription className="text-xs">Productivity % by warehouse and shift</CardDescription>
@@ -213,18 +213,18 @@ export function ProductivityView() {
         </Card>
 
         {/* Top & Low Performers */}
-        <Card className="card-depth rounded-xl border-border/60 shadow-sm">
+        <Card className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2 flex flex-row items-center justify-between">
             <div>
               <CardTitle className="text-sm font-semibold">Top Performers</CardTitle>
               <CardDescription className="text-xs">Ranked by productivity score · click to view detail</CardDescription>
             </div>
-            <Button variant="ghost" size="sm" className="h-7 text-[10px] gap-1" title="View all">
+            <Button variant="ghost" size="sm" className="press-scale h-7 text-[10px] gap-1" title="View all">
               <Eye className="size-3" />
               View All
             </Button>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-3">
+          <CardContent className="inner-glow glass-subtle space-y-3">
             {topPerformers.map((emp, idx) => {
               const rankIcon = idx === 0 ? <Medal className="h-4 w-4 text-amber-500" /> : idx === 1 ? <Medal className="h-4 w-4 text-slate-400" /> : idx === 2 ? <Medal className="h-4 w-4 text-amber-700" /> : <span className="text-xs text-muted-foreground">#{emp.rank}</span>
               return (

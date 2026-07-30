@@ -450,7 +450,7 @@ function KPIBox({ title, value, subValue, trend, trendLabel, icon: Icon, color, 
       style={{ animationDelay: `${index * 60}ms` }}
     >
       <div className={cn("h-1.5 w-full bg-gradient-to-r", c.bar)} />
-      <CardContent className="glass-subtle p-4 relative">
+      <CardContent className="inner-glow glass-subtle p-4 relative">
         <div className={cn("absolute -top-6 -right-6 w-24 h-24 rounded-full blur-xl", c.bubble)} />
         <div className="flex items-start justify-between gap-2 relative">
           <div className="space-y-1 min-w-0">
@@ -636,7 +636,7 @@ export function NonConformanceReportView() {
 
       {/* CHARTS ROW */}
       <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
-        <Card className="ncr-chart-enter">
+        <Card className="hover-lift-sm ncr-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -670,7 +670,7 @@ export function NonConformanceReportView() {
           </CardContent>
         </Card>
 
-        <Card className="ncr-chart-enter">
+        <Card className="hover-lift-sm ncr-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -709,7 +709,7 @@ export function NonConformanceReportView() {
           </CardContent>
         </Card>
 
-        <Card className="ncr-chart-enter">
+        <Card className="hover-lift-sm ncr-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -735,7 +735,7 @@ export function NonConformanceReportView() {
           </CardContent>
         </Card>
 
-        <Card className="ncr-chart-enter">
+        <Card className="hover-lift-sm ncr-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -763,7 +763,7 @@ export function NonConformanceReportView() {
       </div>
 
       {/* FILTERS + TABS + TABLE */}
-      <Card className="ncr-table-card">
+      <Card className="hover-lift-sm ncr-table-card">
         <CardHeader className="pb-3">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
@@ -810,13 +810,13 @@ export function NonConformanceReportView() {
                   <SelectItem value="minor">Minor</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleRefresh}>
                 <RefreshCw className="h-3.5 w-3.5 mr-1" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
-              <Button size="sm" className="h-8 bg-rose-600 hover:bg-rose-700" onClick={handleNewNCR}>
+              <Button size="sm" className="press-scale h-8 bg-rose-600 hover:bg-rose-700" onClick={handleNewNCR}>
                 <FilePlus className="h-3.5 w-3.5 mr-1" /> New NCR
               </Button>
             </div>
@@ -850,7 +850,7 @@ export function NonConformanceReportView() {
             })}
           </div>
         </CardHeader>
-        <CardContent className="glass-subtle p-0">
+        <CardContent className="inner-glow glass-subtle p-0">
           <div className="overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1165,20 +1165,20 @@ function NCRDetailDrawer({ ncr, open, onOpenChange }: DetailDrawerProps) {
               {ncr.closedDate && <> · <span className="font-medium">Closed:</span> {ncr.closedDate}</>}
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
               {ncr.status === "verification" && (
-                <Button size="sm" className="h-8 bg-emerald-600 hover:bg-emerald-700" onClick={handleClose}>
+                <Button size="sm" className="press-scale h-8 bg-emerald-600 hover:bg-emerald-700" onClick={handleClose}>
                   <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Close NCR
                 </Button>
               )}
               {(ncr.status === "open" || ncr.status === "investigation") && (
                 <>
-                  <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-rose-700 border-rose-300 hover:bg-rose-50" onClick={handleReject}>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-rose-700 border-rose-300 hover:bg-rose-50" onClick={handleReject}>
                     <XCircle className="h-3.5 w-3.5 mr-1" /> Reject
                   </Button>
-                  <Button size="sm" className="h-8 bg-blue-600 hover:bg-blue-700" onClick={handleApprove}>
+                  <Button size="sm" className="press-scale h-8 bg-blue-600 hover:bg-blue-700" onClick={handleApprove}>
                     <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Approve
                   </Button>
                 </>
@@ -1200,13 +1200,13 @@ function OverviewTab({ ncr }: { ncr: NonConformanceReport }) {
     <div className="space-y-4">
       {/* TOP: Defect Details + Traceability */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <Card className="ncr-card-enter border-slate-200">
+        <Card className="hover-lift-sm ncr-card-enter border-slate-200">
           <CardHeader className="pb-2">
             <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
               <Bug className="h-3.5 w-3.5 text-rose-600" /> Defect Details
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-2 pt-2">
+          <CardContent className="inner-glow glass-subtle space-y-2 pt-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-slate-500">Defect Type</span>
               <span className="text-xs font-medium text-slate-800">{ncr.defectType}</span>
@@ -1234,13 +1234,13 @@ function OverviewTab({ ncr }: { ncr: NonConformanceReport }) {
           </CardContent>
         </Card>
 
-        <Card className="ncr-card-enter border-slate-200">
+        <Card className="hover-lift-sm ncr-card-enter border-slate-200">
           <CardHeader className="pb-2">
             <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
               <History className="h-3.5 w-3.5 text-violet-600" /> Traceability
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-2 pt-2">
+          <CardContent className="inner-glow glass-subtle space-y-2 pt-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-slate-500">QIP Reference</span>
               <span className="text-xs font-mono text-blue-700 underline cursor-pointer">{ncr.qipRef}</span>
@@ -1274,13 +1274,13 @@ function OverviewTab({ ncr }: { ncr: NonConformanceReport }) {
       </div>
 
       {/* MID: Cost Analysis + Aging */}
-      <Card className="ncr-card-enter border-slate-200">
+      <Card className="hover-lift-sm ncr-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <CircleDollarSign className="h-3.5 w-3.5 text-violet-600" /> Cost Impact & Aging
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div className="rounded-md bg-violet-50 border border-violet-200 p-3">
               <div className="text-[10px] uppercase tracking-wide text-violet-700 font-semibold">Estimated Cost</div>
@@ -1307,13 +1307,13 @@ function OverviewTab({ ncr }: { ncr: NonConformanceReport }) {
       </Card>
 
       {/* NOTES */}
-      <Card className="ncr-card-enter border-amber-200 bg-amber-50/40">
+      <Card className="hover-lift-sm ncr-card-enter border-amber-200 bg-amber-50/40">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-amber-800 flex items-center gap-1.5 uppercase tracking-wide">
             <AlertTriangle className="h-3.5 w-3.5" /> NCR Notes
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <p className="text-xs text-slate-700 leading-relaxed">{ncr.notes}</p>
         </CardContent>
       </Card>
@@ -1340,13 +1340,13 @@ function RCATab({ ncr }: { ncr: NonConformanceReport }) {
         </Badge>
       </div>
 
-      <Card className="ncr-card-enter border-slate-200">
+      <Card className="hover-lift-sm ncr-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <Target className="h-3.5 w-3.5 text-violet-600" /> RCA Summary
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2 space-y-3">
+        <CardContent className="inner-glow glass-subtle pt-2 space-y-3">
           <p className="text-sm text-slate-700 leading-relaxed">{ncr.rcaSummary}</p>
           <Separator />
           <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
@@ -1371,13 +1371,13 @@ function RCATab({ ncr }: { ncr: NonConformanceReport }) {
         </CardContent>
       </Card>
 
-      <Card className="ncr-card-enter border-slate-200">
+      <Card className="hover-lift-sm ncr-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <ListChecks className="h-3.5 w-3.5 text-blue-600" /> 5-Why Analysis
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2 space-y-2">
+        <CardContent className="inner-glow glass-subtle pt-2 space-y-2">
           {[
             { why: "Why did the defect occur?", ans: "Defective units produced at supplier." },
             { why: "Why were defective units produced?", ans: "Process parameter out of spec at supplier." },
@@ -1416,8 +1416,8 @@ function CAPATab({ ncr, stats }: { ncr: NonConformanceReport; stats: { total: nu
       </div>
 
       {/* PROGRESS SUMMARY */}
-      <Card className="ncr-card-enter border-slate-200">
-        <CardContent className="glass-subtle pt-4">
+      <Card className="hover-lift-sm ncr-card-enter border-slate-200">
+        <CardContent className="inner-glow glass-subtle pt-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-semibold text-slate-700">Overall CAPA Progress</span>
             <span className="text-sm font-bold text-blue-700 tabular-nums">{stats.avgProgress.toFixed(0)}%</span>
@@ -1427,8 +1427,8 @@ function CAPATab({ ncr, stats }: { ncr: NonConformanceReport; stats: { total: nu
       </Card>
 
       {ncr.capaList.length === 0 ? (
-        <Card className="ncr-card-enter border-slate-200">
-          <CardContent className="glass-subtle pt-6 pb-6 text-center">
+        <Card className="hover-lift-sm ncr-card-enter border-slate-200">
+          <CardContent className="inner-glow glass-subtle pt-6 pb-6 text-center">
             <FileClock className="h-8 w-8 text-slate-400 mx-auto mb-2" />
             <p className="text-xs text-slate-500">No CAPA actions defined for this NCR.</p>
           </CardContent>
@@ -1439,8 +1439,8 @@ function CAPATab({ ncr, stats }: { ncr: NonConformanceReport; stats: { total: nu
             const StatusIcon = CAPA_STATUS_META[capa.status].icon
             const typeColor = capa.type === "corrective" ? "text-rose-700 bg-rose-50" : "text-blue-700 bg-blue-50"
             return (
-              <Card key={capa.id} className="ncr-card-enter border-slate-200" style={{ animationDelay: `${idx * 50}ms` }}>
-                <CardContent className="glass-subtle pt-3 pb-3">
+              <Card key={capa.id} className="hover-lift-sm ncr-card-enter border-slate-200" style={{ animationDelay: `${idx * 50}ms` }}>
+                <CardContent className="inner-glow glass-subtle pt-3 pb-3">
                   <div className="flex items-start gap-3">
                     <div className={cn("rounded-md p-1.5 ring-1 ring-inset", typeColor, "ring-current/20")}>
                       {capa.type === "corrective" ? <Wrench className="h-3.5 w-3.5" /> : <ShieldAlert className="h-3.5 w-3.5" />}
@@ -1512,13 +1512,13 @@ function DispositionTab({ ncr }: { ncr: NonConformanceReport }) {
       </div>
 
       {/* DISPOSITION OPTIONS */}
-      <Card className="ncr-card-enter border-slate-200">
+      <Card className="hover-lift-sm ncr-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <ArrowRightCircle className="h-3.5 w-3.5 text-blue-600" /> Disposition Options Considered
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {(Object.entries(DISPOSITION_META) as [Disposition, typeof DISPOSITION_META[Disposition]][]).map(([disp, meta]) => {
               const Icon = meta.icon
@@ -1553,13 +1553,13 @@ function DispositionTab({ ncr }: { ncr: NonConformanceReport }) {
       </Card>
 
       {/* COST BREAKDOWN */}
-      <Card className="ncr-card-enter border-slate-200">
+      <Card className="hover-lift-sm ncr-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <CircleDollarSign className="h-3.5 w-3.5 text-violet-600" /> Cost Breakdown
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2 space-y-2">
+        <CardContent className="inner-glow glass-subtle pt-2 space-y-2">
           <div className="flex items-center justify-between text-xs">
             <span className="text-slate-500">Material Cost (scrap value)</span>
             <span className="font-mono font-semibold text-slate-800">{formatINR(Math.round(ncr.estimatedCost * 0.6))}</span>
@@ -1601,8 +1601,8 @@ function ApprovalsTab({ ncr }: { ncr: NonConformanceReport }) {
         </div>
       </div>
 
-      <Card className="ncr-card-enter border-slate-200">
-        <CardContent className="glass-subtle pt-4">
+      <Card className="hover-lift-sm ncr-card-enter border-slate-200">
+        <CardContent className="inner-glow glass-subtle pt-4">
           <div className="space-y-3">
             {ncr.approvals.map((appr, idx) => {
               const StatusIcon = appr.status === "approved" ? CheckCircle2 : appr.status === "rejected" ? XCircle : Clock

@@ -536,7 +536,7 @@ function KPIBox({ title, value, subValue, trend, trendLabel, icon: Icon, color, 
       style={{ animationDelay: `${index * 60}ms` }}
     >
       <div className={cn("h-1.5 w-full bg-gradient-to-r", c.bar)} />
-      <CardContent className="glass-subtle p-4 relative">
+      <CardContent className="inner-glow glass-subtle p-4 relative">
         <div className={cn("absolute -top-6 -right-6 w-24 h-24 rounded-full blur-xl", c.bubble)} />
         <div className="flex items-start justify-between gap-2 relative">
           <div className="space-y-1 min-w-0">
@@ -748,7 +748,7 @@ export function QualityInspectionPlanView() {
 
       {/* CHARTS ROW */}
       <div className="grid gap-4 grid-cols-1 lg:grid-cols-2">
-        <Card className="qip-chart-enter">
+        <Card className="hover-lift-sm qip-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -780,7 +780,7 @@ export function QualityInspectionPlanView() {
           </CardContent>
         </Card>
 
-        <Card className="qip-chart-enter">
+        <Card className="hover-lift-sm qip-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -820,7 +820,7 @@ export function QualityInspectionPlanView() {
           </CardContent>
         </Card>
 
-        <Card className="qip-chart-enter">
+        <Card className="hover-lift-sm qip-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -847,7 +847,7 @@ export function QualityInspectionPlanView() {
           </CardContent>
         </Card>
 
-        <Card className="qip-chart-enter">
+        <Card className="hover-lift-sm qip-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -888,7 +888,7 @@ export function QualityInspectionPlanView() {
       </div>
 
       {/* FILTERS + TABS + TABLE */}
-      <Card className="qip-table-card">
+      <Card className="hover-lift-sm qip-table-card">
         <CardHeader className="pb-3">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
             <div>
@@ -934,15 +934,15 @@ export function QualityInspectionPlanView() {
                   <SelectItem value="minor">Minor</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleRefresh}>
                 <RefreshCw className="h-3.5 w-3.5 mr-1" />
                 Refresh
               </Button>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="h-3.5 w-3.5 mr-1" />
                 Export
               </Button>
-              <Button size="sm" className="h-8 bg-blue-600 hover:bg-blue-700" onClick={handleNewQIP}>
+              <Button size="sm" className="press-scale h-8 bg-blue-600 hover:bg-blue-700" onClick={handleNewQIP}>
                 <FilePlus className="h-3.5 w-3.5 mr-1" />
                 New QIP
               </Button>
@@ -979,7 +979,7 @@ export function QualityInspectionPlanView() {
             })}
           </div>
         </CardHeader>
-        <CardContent className="glass-subtle p-0">
+        <CardContent className="inner-glow glass-subtle p-0">
           <div className="overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1330,21 +1330,21 @@ function QIPDetailDrawer({ qip, open, onOpenChange }: DetailDrawerProps) {
               <span className="font-medium">Effective:</span> {qip.effectiveDate} · <span className="font-medium">Next Review:</span> {qip.nextReview}
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
               {qip.status === "draft" && (
-                <Button size="sm" className="h-8 bg-emerald-600 hover:bg-emerald-700" onClick={handleApprove}>
+                <Button size="sm" className="press-scale h-8 bg-emerald-600 hover:bg-emerald-700" onClick={handleApprove}>
                   <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Approve
                 </Button>
               )}
               {qip.status === "active" && (
-                <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-amber-700 border-amber-300 hover:bg-amber-50" onClick={handleSuspend}>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-amber-700 border-amber-300 hover:bg-amber-50" onClick={handleSuspend}>
                   <AlertTriangle className="h-3.5 w-3.5 mr-1" /> Suspend
                 </Button>
               )}
               {(qip.status === "active" || qip.status === "suspended" || qip.status === "in-revision") && (
-                <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleRevise}>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleRevise}>
                   <PenLine className="h-3.5 w-3.5 mr-1" /> New Revision
                 </Button>
               )}
@@ -1365,13 +1365,13 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
     <div className="space-y-4">
       {/* TOP: Ownership + Lifecycle */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <Card className="qip-card-enter border-slate-200">
+        <Card className="hover-lift-sm qip-card-enter border-slate-200">
           <CardHeader className="pb-2">
             <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
               <User className="h-3.5 w-3.5 text-blue-600" /> Ownership & Accountability
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-2 pt-2">
+          <CardContent className="inner-glow glass-subtle space-y-2 pt-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-slate-500">Plan Owner</span>
               <div className="flex items-center gap-2">
@@ -1398,13 +1398,13 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
           </CardContent>
         </Card>
 
-        <Card className="qip-card-enter border-slate-200">
+        <Card className="hover-lift-sm qip-card-enter border-slate-200">
           <CardHeader className="pb-2">
             <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
               <History className="h-3.5 w-3.5 text-violet-600" /> Lifecycle
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-2 pt-2">
+          <CardContent className="inner-glow glass-subtle space-y-2 pt-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-slate-500">Effective Date</span>
               <span className="text-xs font-medium text-slate-800">{qip.effectiveDate}</span>
@@ -1431,13 +1431,13 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
       </div>
 
       {/* MID: Inspection Performance */}
-      <Card className="qip-card-enter border-slate-200">
+      <Card className="hover-lift-sm qip-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <Activity className="h-3.5 w-3.5 text-blue-600" /> Inspection Performance (Last 30 days)
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div className="rounded-md bg-emerald-50 border border-emerald-200 p-3">
               <div className="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold flex items-center gap-1">
@@ -1478,13 +1478,13 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
       </Card>
 
       {/* CHARACTERISTICS SUMMARY */}
-      <Card className="qip-card-enter border-slate-200">
+      <Card className="hover-lift-sm qip-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <ListChecks className="h-3.5 w-3.5 text-violet-600" /> Characteristics Summary
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
             <div className="rounded-md bg-slate-50 border border-slate-200 p-2 text-center">
               <div className="text-[10px] uppercase text-slate-500 font-semibold">Total</div>
@@ -1511,13 +1511,13 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
       </Card>
 
       {/* NOTES */}
-      <Card className="qip-card-enter border-amber-200 bg-amber-50/40">
+      <Card className="hover-lift-sm qip-card-enter border-amber-200 bg-amber-50/40">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-amber-800 flex items-center gap-1.5 uppercase tracking-wide">
             <AlertTriangle className="h-3.5 w-3.5" /> Plan Notes
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <p className="text-xs text-slate-700 leading-relaxed">{qip.notes}</p>
         </CardContent>
       </Card>
@@ -1712,7 +1712,7 @@ function DefectsTab({ qip, records }: { qip: QualityInspectionPlan; records: Def
       </div>
 
       {pareto.length > 0 && (
-        <Card className="qip-card-enter border-slate-200">
+        <Card className="hover-lift-sm qip-card-enter border-slate-200">
           <CardHeader className="pb-2">
             <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
               <Bug className="h-3.5 w-3.5 text-rose-600" /> Defect Pareto
@@ -1862,13 +1862,13 @@ function SamplingTab({ qip, plans }: { qip: QualityInspectionPlan; plans: Sampli
       </div>
 
       {/* GAUGE CALIBRATION CARD */}
-      <Card className="qip-card-enter border-slate-200">
+      <Card className="hover-lift-sm qip-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <Gauge className="h-3.5 w-3.5 text-violet-600" /> Gauge Calibration Status
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {Array.from(new Set(qip.characteristics.map((c) => c.gauge))).slice(0, 6).map((g, idx) => {
               const calibDate = new Date(2026, 5 - (idx % 3), 15).toISOString().slice(0, 10)
@@ -1901,13 +1901,13 @@ function SamplingTab({ qip, plans }: { qip: QualityInspectionPlan; plans: Sampli
       </Card>
 
       {/* SAMPLE SIZE CALCULATOR CARD */}
-      <Card className="qip-card-enter border-slate-200">
+      <Card className="hover-lift-sm qip-card-enter border-slate-200">
         <CardHeader className="pb-2">
           <CardTitle className="text-xs font-semibold text-slate-700 flex items-center gap-1.5 uppercase tracking-wide">
             <Crosshair className="h-3.5 w-3.5 text-blue-600" /> Sample Size Calculation Reference
           </CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2 space-y-2">
+        <CardContent className="inner-glow glass-subtle pt-2 space-y-2">
           <div className="text-xs text-slate-600">
             Sample size for this QIP is <span className="font-bold text-blue-700">{qip.sampleSize} units</span> based on:
           </div>

@@ -405,8 +405,8 @@ export default function ThreePLIntegrationHubView() {
         <TabsContent value="0" className="tpl-tab-dash space-y-4 mt-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {dashKPIs.map((kpi, i) => (
-              <Card key={i} className="tpl-kpi-card">
-                <CardContent className="glass-subtle p-3 flex items-center gap-3">
+              <Card key={i} className="hover-lift-sm tpl-kpi-card">
+                <CardContent className="inner-glow glass-subtle p-3 flex items-center gap-3">
                   <div className={cn("h-9 w-9 rounded-lg flex items-center justify-center shrink-0", kpi.bg)}><kpi.icon className={cn("h-4 w-4", kpi.color)} /></div>
                   <div><p className="text-[10px] text-muted-foreground font-medium">{kpi.label}</p><p className={cn("text-lg font-bold leading-tight", kpi.color)}>{kpi.value}</p></div>
                 </CardContent>
@@ -414,9 +414,9 @@ export default function ThreePLIntegrationHubView() {
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="tpl-chart-card col-span-1"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Daily Sync Volume</CardTitle></CardHeader><CardContent><AreaChart data={dailySyncData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Area type="monotone" dataKey="Synced" stackId="a" stroke="#059669" fill="#059669" fillOpacity={0.3} /><Area type="monotone" dataKey="Failed" stackId="a" stroke="#e11d48" fill="#e11d48" fillOpacity={0.3} /><Area type="monotone" dataKey="Pending" stackId="a" stroke="#d97706" fill="#d97706" fillOpacity={0.3} /></AreaChart></CardContent></Card>
-            <Card className="tpl-chart-card col-span-1"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Partner Type Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={partnerTypeData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70} innerRadius={35} label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={9}>{partnerTypeData.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}</Pie><Tooltip contentStyle={{ fontSize: 11 }} /></PieChart></CardContent></Card>
-            <Card className="tpl-chart-card col-span-1"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Health by Partner Type</CardTitle></CardHeader><CardContent><BarChart data={healthByTypeData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Bar dataKey="Healthy" stackId="a" fill="#059669" /><Bar dataKey="Degraded" stackId="a" fill="#d97706" /><Bar dataKey="Down" stackId="a" fill="#e11d48" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm tpl-chart-card col-span-1"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Daily Sync Volume</CardTitle></CardHeader><CardContent><AreaChart data={dailySyncData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Area type="monotone" dataKey="Synced" stackId="a" stroke="#059669" fill="#059669" fillOpacity={0.3} /><Area type="monotone" dataKey="Failed" stackId="a" stroke="#e11d48" fill="#e11d48" fillOpacity={0.3} /><Area type="monotone" dataKey="Pending" stackId="a" stroke="#d97706" fill="#d97706" fillOpacity={0.3} /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm tpl-chart-card col-span-1"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Partner Type Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={partnerTypeData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70} innerRadius={35} label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={9}>{partnerTypeData.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}</Pie><Tooltip contentStyle={{ fontSize: 11 }} /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm tpl-chart-card col-span-1"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Health by Partner Type</CardTitle></CardHeader><CardContent><BarChart data={healthByTypeData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Bar dataKey="Healthy" stackId="a" fill="#059669" /><Bar dataKey="Degraded" stackId="a" fill="#d97706" /><Bar dataKey="Down" stackId="a" fill="#e11d48" /></BarChart></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -426,7 +426,7 @@ export default function ThreePLIntegrationHubView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" /><Input placeholder="Search partners..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="h-9 pl-8 text-xs" /></div>
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 w-[140px] text-xs"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">All Status</SelectItem>{PARTNER_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
+          <Card><CardContent className="inner-glow glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
             <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
             <SortHeader label="Company" field="company" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
             <TableHead className="text-xs">Type</TableHead>
@@ -451,7 +451,7 @@ export default function ThreePLIntegrationHubView() {
                 <TableCell className="text-[10px] font-mono">{p.fleet}</TableCell>
                 <TableCell className="text-[10px] font-mono">{p.orders.toLocaleString("en-IN")}</TableCell>
                 <TableCell className="numeric-cell text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">{formatINR(p.revenue)}</TableCell>
-                <TableCell><Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => { setSelectedPartner(p); setSelectedOrder(null); setSelectedAPI(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
+                <TableCell><Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => { setSelectedPartner(p); setSelectedOrder(null); setSelectedAPI(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
               </TableRow>
             ))}
           </TableBody></Table></CardContent></Card>
@@ -463,7 +463,7 @@ export default function ThreePLIntegrationHubView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" /><Input placeholder="Search orders..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="h-9 pl-8 text-xs" /></div>
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 w-[140px] text-xs"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">All Status</SelectItem>{INTEGRATION_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
+          <Card><CardContent className="inner-glow glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
             <SortHeader label="Order ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
             <TableHead className="text-xs">Partner</TableHead>
             <TableHead className="text-xs">Warehouse</TableHead>
@@ -486,7 +486,7 @@ export default function ThreePLIntegrationHubView() {
                 <TableCell className="text-[10px] font-mono">{o.syncTime}</TableCell>
                 <TableCell><RetryBadge count={o.retryCount} /></TableCell>
                 <TableCell className="numeric-cell text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400">{formatINR(o.value)}</TableCell>
-                <TableCell><Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => { setSelectedOrder(o); setSelectedPartner(null); setSelectedAPI(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
+                <TableCell><Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => { setSelectedOrder(o); setSelectedPartner(null); setSelectedAPI(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
               </TableRow>
             ))}
           </TableBody></Table></CardContent></Card>
@@ -498,7 +498,7 @@ export default function ThreePLIntegrationHubView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" /><Input placeholder="Search endpoints..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="h-9 pl-8 text-xs" /></div>
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 w-[140px] text-xs"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">All Status</SelectItem>{API_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
+          <Card><CardContent className="inner-glow glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
             <TableHead className="text-xs">ID</TableHead>
             <TableHead className="text-xs">Method</TableHead>
             <TableHead className="text-xs">Endpoint</TableHead>
@@ -521,7 +521,7 @@ export default function ThreePLIntegrationHubView() {
                 <TableCell><ErrorRateBar rate={a.errorRate} /></TableCell>
                 <TableCell className="text-[10px] font-mono">{a.uptime.toFixed(2)}%</TableCell>
                 <TableCell><Badge variant="outline" className="badge-interactive text-[9px] h-5">{a.version}</Badge></TableCell>
-                <TableCell><Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => { setSelectedAPI(a); setSelectedPartner(null); setSelectedOrder(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
+                <TableCell><Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => { setSelectedAPI(a); setSelectedPartner(null); setSelectedOrder(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
               </TableRow>
             ))}
           </TableBody></Table></CardContent></Card>
@@ -535,12 +535,12 @@ export default function ThreePLIntegrationHubView() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {sortedData(filterData(contracts, "status", ["id", "partner", "type", "status"]), sortField, sortDir).map((c) => (
-              <Card key={c.id} className="tpl-contract-card overflow-hidden cursor-pointer hover:shadow-md transition-shadow" onClick={() => { setSelectedContract(c); setSelectedPartner(null); setSelectedOrder(null); setSelectedAPI(null); setSheetOpen(true) }}>
+              <Card key={c.id} className="hover-lift-sm tpl-contract-card overflow-hidden cursor-pointer hover:shadow-md transition-shadow" onClick={() => { setSelectedContract(c); setSelectedPartner(null); setSelectedOrder(null); setSelectedAPI(null); setSheetOpen(true) }}>
                 <div className="tpl-contract-header bg-gradient-to-r from-indigo-600 to-emerald-600 px-4 py-2.5">
                   <div className="flex items-center justify-between"><span className="text-[10px] font-mono text-white/80">{c.id}</span><ContractStatusBadge status={c.status} /></div>
                   <p className="text-sm font-bold text-white mt-0.5 truncate">{c.partner}</p>
                 </div>
-                <CardContent className="glass-subtle p-3 space-y-2">
+                <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><PartnerTypeBadge type={c.type} /><BillingCycleBadge cycle={c.billingCycle} /></div>
                   <Separator />
                   <div className="grid grid-cols-2 gap-1.5 text-[10px]">
@@ -560,8 +560,8 @@ export default function ThreePLIntegrationHubView() {
         <TabsContent value="5" className="tpl-tab-analytics space-y-4 mt-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {analyticsKPIs.map((kpi, i) => (
-              <Card key={i} className="tpl-kpi-card">
-                <CardContent className="glass-subtle p-3 flex items-center gap-3">
+              <Card key={i} className="hover-lift-sm tpl-kpi-card">
+                <CardContent className="inner-glow glass-subtle p-3 flex items-center gap-3">
                   <div className={cn("h-9 w-9 rounded-lg flex items-center justify-center shrink-0", kpi.bg)}><kpi.icon className={cn("h-4 w-4", kpi.color)} /></div>
                   <div><p className="text-[10px] text-muted-foreground font-medium">{kpi.label}</p><p className={cn("text-lg font-bold leading-tight", kpi.color)}>{kpi.value}</p></div>
                 </CardContent>
@@ -569,10 +569,10 @@ export default function ThreePLIntegrationHubView() {
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card className="tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Monthly Order Volume</CardTitle></CardHeader><CardContent><LineChart data={monthlyVolumeData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Line type="monotone" dataKey="Direct" stroke="#6366f1" strokeWidth={2} /><Line type="monotone" dataKey="Partner" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Marketplace" stroke="#ea580c" strokeWidth={2} /></LineChart></CardContent></Card>
-            <Card className="tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Top Partner Performance</CardTitle></CardHeader><CardContent><BarChart data={partnerPerfData} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="name" tick={{ fontSize: 10 }} width={80} /><Tooltip contentStyle={{ fontSize: 11 }} /><Bar dataKey="Orders" fill="#6366f1" /><Bar dataKey="SLA" fill="#059669" /></BarChart></CardContent></Card>
-            <Card className="tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">API Usage by Method</CardTitle></CardHeader><CardContent><BarChart data={apiUsageData} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="method" tick={{ fontSize: 10 }} width={65} /><Tooltip contentStyle={{ fontSize: 11 }} /><Bar dataKey="count" fill="#0891b2" radius={[0, 4, 4, 0]} /></BarChart></CardContent></Card>
-            <Card className="tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Cost Breakdown (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={costBreakdownData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Area type="monotone" dataKey="Warehousing" stackId="a" stroke="#6366f1" fill="#6366f1" fillOpacity={0.3} /><Area type="monotone" dataKey="Transport" stackId="a" stroke="#059669" fill="#059669" fillOpacity={0.3} /><Area type="monotone" dataKey="E-com" stackId="a" stroke="#ea580c" fill="#ea580c" fillOpacity={0.3} /><Area type="monotone" dataKey="Cold Chain" stackId="a" stroke="#0891b2" fill="#0891b2" fillOpacity={0.3} /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Monthly Order Volume</CardTitle></CardHeader><CardContent><LineChart data={monthlyVolumeData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Line type="monotone" dataKey="Direct" stroke="#6366f1" strokeWidth={2} /><Line type="monotone" dataKey="Partner" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Marketplace" stroke="#ea580c" strokeWidth={2} /></LineChart></CardContent></Card>
+            <Card className="hover-lift-sm tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Top Partner Performance</CardTitle></CardHeader><CardContent><BarChart data={partnerPerfData} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="name" tick={{ fontSize: 10 }} width={80} /><Tooltip contentStyle={{ fontSize: 11 }} /><Bar dataKey="Orders" fill="#6366f1" /><Bar dataKey="SLA" fill="#059669" /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">API Usage by Method</CardTitle></CardHeader><CardContent><BarChart data={apiUsageData} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="method" tick={{ fontSize: 10 }} width={65} /><Tooltip contentStyle={{ fontSize: 11 }} /><Bar dataKey="count" fill="#0891b2" radius={[0, 4, 4, 0]} /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm tpl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Cost Breakdown (6-Month)</CardTitle></CardHeader><CardContent><AreaChart data={costBreakdownData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Area type="monotone" dataKey="Warehousing" stackId="a" stroke="#6366f1" fill="#6366f1" fillOpacity={0.3} /><Area type="monotone" dataKey="Transport" stackId="a" stroke="#059669" fill="#059669" fillOpacity={0.3} /><Area type="monotone" dataKey="E-com" stackId="a" stroke="#ea580c" fill="#ea580c" fillOpacity={0.3} /><Area type="monotone" dataKey="Cold Chain" stackId="a" stroke="#0891b2" fill="#0891b2" fillOpacity={0.3} /></AreaChart></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -640,9 +640,9 @@ export default function ThreePLIntegrationHubView() {
             )}
           </div>
           <div className="border-t px-4 py-3 flex-row gap-2 flex">
-            <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
-            <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
-            <Button size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Saved", "Changes saved")}><CheckCircle2 className="h-3 w-3 mr-1" /> Save</Button>
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
+            <Button size="sm" className="press-scale h-8 text-xs flex-1" onClick={() => toast.success("Saved", "Changes saved")}><CheckCircle2 className="h-3 w-3 mr-1" /> Save</Button>
           </div>
         </SheetContent>
       </Sheet>

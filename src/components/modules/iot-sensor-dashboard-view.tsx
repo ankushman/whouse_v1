@@ -216,8 +216,8 @@ function CostTile({ cost }: { cost: number }) {
 /* ═══════ KPI Card ═══════ */
 function KpiCard({ label, value, color, icon }: { label: string; value: string | number; color: string; icon: string }) {
   return (
-    <Card className="isd-kpi-card">
-      <CardContent className="glass-subtle p-4">
+    <Card className="hover-lift-sm isd-kpi-card">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-center gap-3">
           <div className="isd-kpi-icon" style={{ background: `${color}18`, color, width: 40, height: 40, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem" }}>{icon}</div>
           <div><p className="isd-kpi-label text-xs text-muted-foreground">{label}</p><p className="isd-kpi-value text-lg font-bold" style={{ color }}>{value}</p></div>
@@ -335,7 +335,7 @@ export default function IoTSensorDashboardView() {
           <div className="isd-tab-content space-y-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">{kpis0.map((k, i) => <KpiCard key={i} {...k} />)}</div>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="lg:col-span-2">
+              <Card className="hover-lift-sm lg:col-span-2">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">24h Sensor Readings</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -394,7 +394,7 @@ export default function IoTSensorDashboardView() {
               </select>
               <Badge variant="secondary" className="badge-interactive ml-auto text-xs">{filteredSensors.length} sensors</Badge>
             </div>
-            <Card><CardContent className="glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
+            <Card><CardContent className="inner-glow glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
               <TableHead className="text-xs h-9">Sensor</TableHead><TableHead className="text-xs h-9">Type</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Model</TableHead>
               <TableHead className="text-xs h-9">Warehouse</TableHead><TableHead className="text-xs h-9 hidden lg:table-cell">Zone</TableHead><TableHead className="text-xs h-9">Status</TableHead>
               <TableHead className="text-xs h-9 hidden sm:table-cell">Battery</TableHead><TableHead className="text-xs h-9 hidden lg:table-cell">Signal</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Last Reading</TableHead><TableHead className="text-xs h-9 w-10"></TableHead>
@@ -410,7 +410,7 @@ export default function IoTSensorDashboardView() {
                   <TableCell className="hidden sm:table-cell"><BatteryLevelBar level={sensor.battery} /></TableCell>
                   <TableCell className="hidden lg:table-cell"><SignalBadge signal={sensor.signal} /></TableCell>
                   <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{sensor.lastReading}</TableCell>
-                  <TableCell><Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openSheet(sensor.id)}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
+                  <TableCell><Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={() => openSheet(sensor.id)}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
                 </TableRow>
               ))}
             </TableBody></Table></ScrollArea></CardContent></Card>
@@ -421,7 +421,7 @@ export default function IoTSensorDashboardView() {
         {activeTab === "2" && (
           <div className="isd-tab-content space-y-4">
             <div className="flex items-center gap-2"><Activity className="h-4 w-4 text-teal-500" /><span className="text-sm text-muted-foreground">{data.readings.length} real-time readings</span></div>
-            <Card><CardContent className="glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
+            <Card><CardContent className="inner-glow glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
               <TableHead className="text-xs h-9">Reading</TableHead><TableHead className="text-xs h-9">Sensor</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Warehouse</TableHead>
               <TableHead className="text-xs h-9 hidden lg:table-cell">Zone</TableHead><TableHead className="text-xs h-9">Metric</TableHead><TableHead className="text-xs h-9">Value</TableHead>
               <TableHead className="text-xs h-9 hidden sm:table-cell">Min</TableHead><TableHead className="text-xs h-9 hidden sm:table-cell">Max</TableHead><TableHead className="text-xs h-9">Status</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Time</TableHead>
@@ -455,7 +455,7 @@ export default function IoTSensorDashboardView() {
               </select>
               <Badge variant="secondary" className="badge-interactive ml-auto text-xs">{filteredAlerts.length} alerts</Badge>
             </div>
-            <Card><CardContent className="glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
+            <Card><CardContent className="inner-glow glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
               <TableHead className="text-xs h-9">Alert</TableHead><TableHead className="text-xs h-9">Type</TableHead><TableHead className="text-xs h-9">Severity</TableHead>
               <TableHead className="text-xs h-9">Status</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Sensor</TableHead><TableHead className="text-xs h-9 hidden lg:table-cell">Warehouse</TableHead>
               <TableHead className="text-xs h-9 hidden lg:table-cell">Zone</TableHead><TableHead className="text-xs h-9">Value / Thresh</TableHead><TableHead className="text-xs h-9 hidden sm:table-cell">Duration</TableHead><TableHead className="text-xs h-9 w-10"></TableHead>
@@ -471,7 +471,7 @@ export default function IoTSensorDashboardView() {
                   <TableCell className="hidden lg:table-cell"><ZoneBadge zone={alert.zone} /></TableCell>
                   <TableCell><div className="numeric-cell flex items-center gap-1 flex-wrap"><ValueTile value={alert.value} unit="" status={alert.severity === "Critical" ? "Critical" : "Warning"} /><span className="text-muted-foreground text-xs">/</span><ValueTile value={alert.thresholdVal} unit="" status="Normal" /></div></TableCell>
                   <TableCell className="hidden sm:table-cell"><DurationTile duration={alert.duration} /></TableCell>
-                  <TableCell><Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openSheet(alert.id)}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
+                  <TableCell><Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={() => openSheet(alert.id)}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
                 </TableRow>
               ))}
             </TableBody></Table></ScrollArea></CardContent></Card>
@@ -487,14 +487,14 @@ export default function IoTSensorDashboardView() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredMaint.map(m => (
-                <Card key={m.id} className="isd-maint-card overflow-hidden">
+                <Card key={m.id} className="hover-lift-sm isd-maint-card overflow-hidden">
                   <div className="isd-maint-card-header px-4 py-2.5" style={{ background: `linear-gradient(90deg, ${MSTATUS_COL[m.status] ?? "#475569"}25, transparent)` }}>
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-mono font-semibold">{m.id}</span>
                       <MaintStatusBadge status={m.status} />
                     </div>
                   </div>
-                  <CardContent className="glass-subtle p-3 space-y-2">
+                  <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                     <div className="flex items-center gap-1.5 flex-wrap"><MaintTypeBadge type={m.type} /><PriorityBadge priority={m.priority} /></div>
                     <Separator />
                     <div className="text-xs space-y-1.5">
@@ -594,7 +594,7 @@ export default function IoTSensorDashboardView() {
             <GradientHeader from={C.teal} to={C.amber} title={selectedSensor.id} subtitle={`${selectedSensor.type} — ${selectedSensor.warehouse}`} />
             <div className="p-4 space-y-4">
               <SheetHeader className="px-0"><SheetTitle className="text-base">Sensor Details</SheetTitle><SheetDescription className="text-xs">Complete sensor information and configuration</SheetDescription></SheetHeader>
-              <Card><CardContent className="glass-subtle p-3 space-y-0">
+              <Card><CardContent className="inner-glow glass-subtle p-3 space-y-0">
                 <DetailField label="Type" value={<SensorTypeBadge type={selectedSensor.type} />} />
                 <DetailField label="Model" value={selectedSensor.model} />
                 <DetailField label="Warehouse" value={<WarehouseBadge warehouse={selectedSensor.warehouse} />} />
@@ -633,7 +633,7 @@ export default function IoTSensorDashboardView() {
             <GradientHeader from={C.rose} to={C.violet} title={selectedAlert.id} subtitle={`${selectedAlert.type} — ${selectedAlert.severity}`} />
             <div className="p-4 space-y-4">
               <SheetHeader className="px-0"><SheetTitle className="text-base">Alert Details</SheetTitle><SheetDescription className="text-xs">Complete alert information and timeline</SheetDescription></SheetHeader>
-              <Card><CardContent className="glass-subtle p-3 space-y-0">
+              <Card><CardContent className="inner-glow glass-subtle p-3 space-y-0">
                 <DetailField label="Type" value={<AlertTypeBadge type={selectedAlert.type} />} />
                 <DetailField label="Severity" value={<AlertSeverityBadge severity={selectedAlert.severity} />} />
                 <DetailField label="Status" value={<AlertStatusBadge status={selectedAlert.status} />} />
@@ -646,10 +646,10 @@ export default function IoTSensorDashboardView() {
                 <DetailField label="Impact" value={<span className="font-semibold">{selectedAlert.impact}</span>} />
                 <DetailField label="Timestamp" value={selectedAlert.timestamp} />
               </CardContent></Card>
-              <Card><CardContent className="glass-subtle p-3"><p className="text-xs text-muted-foreground mb-1">Message</p><p className="text-sm leading-relaxed">{selectedAlert.message}</p></CardContent></Card>
+              <Card><CardContent className="inner-glow glass-subtle p-3"><p className="text-xs text-muted-foreground mb-1">Message</p><p className="text-sm leading-relaxed">{selectedAlert.message}</p></CardContent></Card>
               <Card>
                 <CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Affected Sensor</CardTitle></CardHeader>
-                <CardContent className="glass-subtle space-y-0">
+                <CardContent className="inner-glow glass-subtle space-y-0">
                   <DetailField label="Sensor ID" value={<span className="font-mono">{selectedAlert.sensorId}</span>} />
                   <DetailField label="Type" value={selectedAlert.sensorType} />
                   <DetailField label="Warehouse" value={selectedAlert.warehouse} />

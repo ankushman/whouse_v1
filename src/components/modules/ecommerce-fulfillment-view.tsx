@@ -616,7 +616,7 @@ export default function EcommerceFulfillmentView() {
             ))}
 
             {/* Status Distribution Pie */}
-            <Card className="ecom-chart-card ecom-stagger-7">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-7">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: THEME.primary }}>
@@ -638,7 +638,7 @@ export default function EcommerceFulfillmentView() {
             </Card>
 
             {/* Monthly Fulfillment Trend */}
-            <Card className="ecom-chart-card ecom-stagger-8">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-8">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: THEME.secondary }}>
@@ -666,7 +666,7 @@ export default function EcommerceFulfillmentView() {
             </Card>
 
             {/* Channel Mix Donut */}
-            <Card className="ecom-chart-card ecom-stagger-9">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-9">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: THEME.accent }}>
@@ -688,7 +688,7 @@ export default function EcommerceFulfillmentView() {
             </Card>
 
             {/* Priority Distribution */}
-            <Card className="ecom-chart-card ecom-stagger-10">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-10">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: "#ec4899" }}>
@@ -710,7 +710,7 @@ export default function EcommerceFulfillmentView() {
             </Card>
 
             {/* Revenue by Channel Bar */}
-            <Card className="ecom-chart-card ecom-stagger-11">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-11">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: "#8b5cf6" }}>
@@ -733,7 +733,7 @@ export default function EcommerceFulfillmentView() {
             </Card>
 
             {/* NDR+RTO+Returns Trend */}
-            <Card className="ecom-chart-card ecom-stagger-12">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-12">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: "#dc2626" }}>
@@ -853,7 +853,7 @@ export default function EcommerceFulfillmentView() {
                       <td className="ecom-cell-partner">{o.deliveryPartner}</td>
                       <td className="ecom-cell-awb">{o.trackingNumber}</td>
                       <td>
-                        <Button size="sm" variant="outline" className="btn-outline-animate ecom-action-btn" onClick={() => openDrawer(o)}>
+                        <Button size="sm" variant="outline" className="press-scale btn-outline-animate ecom-action-btn" onClick={() => openDrawer(o)}>
                           <Eye className="w-3.5 h-3.5" />
                         </Button>
                       </td>
@@ -908,7 +908,7 @@ export default function EcommerceFulfillmentView() {
             </div>
 
             {/* Hub Zone Grid */}
-            <Card className="ecom-chart-card" style={{ marginTop: "1rem" }}>
+            <Card className="hover-lift-sm ecom-chart-card" style={{ marginTop: "1rem" }}>
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: THEME.secondary }}>
@@ -1003,7 +1003,7 @@ export default function EcommerceFulfillmentView() {
             </div>
 
             {/* NDR Reason Distribution */}
-            <Card className="ecom-chart-card ecom-stagger-7">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-7">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: THEME.danger }}>
@@ -1103,7 +1103,7 @@ export default function EcommerceFulfillmentView() {
         {activeTab === 4 && (
           <div className="ecom-partners-section">
             {/* Partner Performance Radar */}
-            <Card className="ecom-chart-card ecom-stagger-1">
+            <Card className="hover-lift-sm ecom-chart-card ecom-stagger-1">
               <CardHeader className="ecom-card-header">
                 <CardTitle className="ecom-card-title">
                   <span className="ecom-chart-title-icon" style={{ background: THEME.primary }}>

@@ -362,8 +362,8 @@ export default function CustomsDutyGstView() {
             { label: "Customs Pending", value: String(customsPending), icon: Ship, color: "text-red-600", bg: "bg-red-50 dark:bg-red-950/40", sub: "under examination / hold" },
             { label: "Total Duty Collected", value: formatINR(totalDutyCollected), icon: Globe, color: "text-teal-600", bg: "bg-teal-50 dark:bg-teal-950/40", sub: "customs + cess" },
           ].map(kpi => (
-            <Card key={kpi.label} className="cdg-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm cdg-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="cdg-label">{kpi.label}</p>
@@ -380,7 +380,7 @@ export default function CustomsDutyGstView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><IndianRupee className="h-4 w-4 text-indigo-500" />Monthly GST Collection</CardTitle>
             </CardHeader>
@@ -400,7 +400,7 @@ export default function CustomsDutyGstView() {
             </CardContent>
           </Card>
 
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><FileText className="h-4 w-4 text-teal-500" />E-Way Bill Status</CardTitle>
             </CardHeader>
@@ -423,7 +423,7 @@ export default function CustomsDutyGstView() {
             </CardContent>
           </Card>
 
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><Landmark className="h-4 w-4 text-emerald-500" />ITC Utilization Trend</CardTitle>
             </CardHeader>
@@ -443,7 +443,7 @@ export default function CustomsDutyGstView() {
             </CardContent>
           </Card>
 
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><Ship className="h-4 w-4 text-sky-500" />Port Performance Radar</CardTitle>
             </CardHeader>
@@ -506,8 +506,8 @@ export default function CustomsDutyGstView() {
             <input className="cdg-search-input" placeholder="Search invoices, GSTIN, HS code..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
         </div>
-        <Card className="cdg-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm cdg-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="cdg-table">
                 <thead>
@@ -533,7 +533,7 @@ export default function CustomsDutyGstView() {
                       <td className="cdg-amount-amber text-right">{inv.igstAmt > 0 ? `${inv.igstRate}%` : "-"}</td>
                       <td className="cdg-amount font-semibold text-right">{formatINR(inv.totalGst)}</td>
                       <td><span className={`cdg-status-badge ${STATUS_COLORS[inv.status] || ""}`}>{inv.status}</span></td>
-                      <td><Button size="sm" variant="ghost" className="cdg-action-btn" onClick={() => openDrawerInvoice(inv)}><Eye className="h-3.5 w-3.5" /></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale cdg-action-btn" onClick={() => openDrawerInvoice(inv)}><Eye className="h-3.5 w-3.5" /></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -562,8 +562,8 @@ export default function CustomsDutyGstView() {
             <input className="cdg-search-input" placeholder="Search e-way bills, vehicle, supplier..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
         </div>
-        <Card className="cdg-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm cdg-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="cdg-table">
                 <thead>
@@ -598,7 +598,7 @@ export default function CustomsDutyGstView() {
                         <span className={`cdg-status-badge ${STATUS_COLORS[ew.status] || ""}`}>{ew.status}</span>
                         {ew.extended && <Badge className="badge-interactive cdg-ext-badge ml-1">{ew.extensions}x</Badge>}
                       </td>
-                      <td><Button size="sm" variant="ghost" className="cdg-action-btn" onClick={() => openDrawerEway(ew)}><Eye className="h-3.5 w-3.5" /></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale cdg-action-btn" onClick={() => openDrawerEway(ew)}><Eye className="h-3.5 w-3.5" /></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -615,7 +615,7 @@ export default function CustomsDutyGstView() {
     return (
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><Barcode className="h-4 w-4 text-indigo-500" />Invoice Distribution by HS Chapter</CardTitle>
             </CardHeader>
@@ -632,7 +632,7 @@ export default function CustomsDutyGstView() {
             </CardContent>
           </Card>
 
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><Calculator className="h-4 w-4 text-teal-500" />GST Rate by HS Chapter</CardTitle>
             </CardHeader>
@@ -652,11 +652,11 @@ export default function CustomsDutyGstView() {
           </Card>
         </div>
 
-        <Card className="cdg-table-card border-slate-100 dark:border-slate-800 mt-4">
+        <Card className="hover-lift-sm cdg-table-card border-slate-100 dark:border-slate-800 mt-4">
           <CardHeader className="pb-2">
             <CardTitle className="cdg-title"><Stamp className="h-4 w-4 text-amber-500" />HS Code Directory — Active Chapters</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-0">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="cdg-table">
                 <thead>
@@ -704,7 +704,7 @@ export default function CustomsDutyGstView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mb-4">
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><Globe className="h-4 w-4 text-sky-500" />Import vs Export Volume</CardTitle>
             </CardHeader>
@@ -724,7 +724,7 @@ export default function CustomsDutyGstView() {
             </CardContent>
           </Card>
 
-          <Card className="cdg-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm cdg-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="cdg-title"><IndianRupee className="h-4 w-4 text-emerald-500" />Duty Collected Trend</CardTitle>
             </CardHeader>
@@ -742,8 +742,8 @@ export default function CustomsDutyGstView() {
           </Card>
         </div>
 
-        <Card className="cdg-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm cdg-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="cdg-table">
                 <thead>
@@ -769,7 +769,7 @@ export default function CustomsDutyGstView() {
                       <td className="cdg-amount-indigo text-right">{formatINR(ce.igst)}</td>
                       <td className="cdg-amount font-semibold text-right">{formatINR(ce.totalDuty)}</td>
                       <td><span className={`cdg-status-badge ${STATUS_COLORS[ce.status] || ""}`}>{ce.status}</span></td>
-                      <td><Button size="sm" variant="ghost" className="cdg-action-btn" onClick={() => openDrawerCustoms(ce)}><Eye className="h-3.5 w-3.5" /></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale cdg-action-btn" onClick={() => openDrawerCustoms(ce)}><Eye className="h-3.5 w-3.5" /></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -796,7 +796,7 @@ export default function CustomsDutyGstView() {
                   <p className="cdg-drawer-subtitle">{inv.id} | {inv.date}</p>
                 </div>
               </div>
-              <Button variant="ghost" size="sm" className="cdg-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
+              <Button variant="ghost" size="sm" className="press-scale cdg-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
             </div>
             <div className="cdg-drawer-body">
               <div className="cdg-drawer-status-row">
@@ -824,9 +824,9 @@ export default function CustomsDutyGstView() {
                 </div>
               </div>
               <div className="cdg-drawer-actions">
-                <Button size="sm" className="cdg-btn-primary"><FileCheck className="h-3.5 w-3.5 mr-1" /> File GSTR</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate cdg-btn-outline"><Copy className="h-3.5 w-3.5 mr-1" /> Copy GSTIN</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate cdg-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Download</Button>
+                <Button size="sm" className="press-scale cdg-btn-primary"><FileCheck className="h-3.5 w-3.5 mr-1" /> File GSTR</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate cdg-btn-outline"><Copy className="h-3.5 w-3.5 mr-1" /> Copy GSTIN</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate cdg-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Download</Button>
               </div>
             </div>
           </div>
@@ -846,7 +846,7 @@ export default function CustomsDutyGstView() {
                   <p className="cdg-drawer-subtitle">{ew.ewayNo.slice(0, 20)}...</p>
                 </div>
               </div>
-              <Button variant="ghost" size="sm" className="cdg-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
+              <Button variant="ghost" size="sm" className="press-scale cdg-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
             </div>
             <div className="cdg-drawer-body">
               <div className="cdg-drawer-status-row">
@@ -868,9 +868,9 @@ export default function CustomsDutyGstView() {
                 <div className="cdg-detail-item"><p className="cdg-detail-label">Taxable</p><p className="cdg-detail-value font-semibold">{formatINR(ew.taxableValue)}</p></div>
               </div>
               <div className="cdg-drawer-actions">
-                <Button size="sm" className="cdg-btn-primary"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Extend Validity</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate cdg-btn-outline"><ExternalLink className="h-3.5 w-3.5 mr-1" /> View on NIC</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate cdg-btn-outline"><Copy className="h-3.5 w-3.5 mr-1" /> Copy No.</Button>
+                <Button size="sm" className="press-scale cdg-btn-primary"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Extend Validity</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate cdg-btn-outline"><ExternalLink className="h-3.5 w-3.5 mr-1" /> View on NIC</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate cdg-btn-outline"><Copy className="h-3.5 w-3.5 mr-1" /> Copy No.</Button>
               </div>
             </div>
           </div>
@@ -890,7 +890,7 @@ export default function CustomsDutyGstView() {
                   <p className="cdg-drawer-subtitle">{ce.id} | {ce.type} | {ce.date}</p>
                 </div>
               </div>
-              <Button variant="ghost" size="sm" className="cdg-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
+              <Button variant="ghost" size="sm" className="press-scale cdg-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
             </div>
             <div className="cdg-drawer-body">
               <div className="cdg-drawer-status-row">
@@ -920,9 +920,9 @@ export default function CustomsDutyGstView() {
                 </div>
               </div>
               <div className="cdg-drawer-actions">
-                <Button size="sm" className="cdg-btn-primary"><FileCheck className="h-3.5 w-3.5 mr-1" /> Assess & Release</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate cdg-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> BOE Copy</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate cdg-btn-outline"><ExternalLink className="h-3.5 w-3.5 mr-1" /> ICEGATE</Button>
+                <Button size="sm" className="press-scale cdg-btn-primary"><FileCheck className="h-3.5 w-3.5 mr-1" /> Assess & Release</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate cdg-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> BOE Copy</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate cdg-btn-outline"><ExternalLink className="h-3.5 w-3.5 mr-1" /> ICEGATE</Button>
               </div>
             </div>
           </div>
@@ -940,8 +940,8 @@ export default function CustomsDutyGstView() {
           <p className="cdg-page-subtitle">GST filing, E-Way Bills, HS classification & customs duty management across India</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" className="cdg-btn-primary"><Download className="h-3.5 w-3.5 mr-1" /> Export GSTR</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate cdg-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Sync NIC</Button>
+          <Button size="sm" className="press-scale cdg-btn-primary"><Download className="h-3.5 w-3.5 mr-1" /> Export GSTR</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate cdg-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Sync NIC</Button>
         </div>
       </div>
 

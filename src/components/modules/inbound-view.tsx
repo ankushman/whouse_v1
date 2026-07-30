@@ -241,7 +241,7 @@ export function InboundView() {
         description="Track goods receipt and dock-to-stock operations"
         actions={
           <>
-            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
             <ExportButton onExportCSV={handleExportCSV} />
@@ -257,8 +257,8 @@ export function InboundView() {
           { label: "Completed", value: summary.completed, icon: CheckCircle2, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
           { label: "Delayed", value: summary.delayed, icon: AlertCircle, color: "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
-            <CardContent className="glass-subtle flex items-center gap-3 p-4">
+          <Card key={item.label} className="hover-lift-sm card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
+            <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>

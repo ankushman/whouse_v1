@@ -550,7 +550,7 @@ function SuppliersTab({
     <div className="sa-tab-pane">
       {/* Charts row */}
       <div className="sa-charts-row">
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Suppliers by Tier</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.suppliersByTier} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -566,7 +566,7 @@ function SuppliersTab({
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Suppliers by Approval Status</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.suppliersByApproval} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -582,7 +582,7 @@ function SuppliersTab({
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Annual Spend by Category</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.suppliersByCategory} layout="vertical" margin={{ top: 10, right: 10, bottom: 0, left: 60 }}>
@@ -601,7 +601,7 @@ function SuppliersTab({
       </div>
 
       {/* Risk distribution */}
-      <Card className="sa-chart-card sa-trend-card">
+      <Card className="hover-lift-sm sa-chart-card sa-trend-card">
         <div className="sa-chart-header"><AlertTriangle size={16} /><h3>Supplier Risk Distribution</h3></div>
         <ResponsiveContainer width="100%" height={180}>
           <BarChart data={data.suppliersByRisk} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -730,7 +730,7 @@ function OnboardingTab({ data, setDetailModal }: { data: ApiResponse; setDetailM
       </div>
 
       {/* Onboarding trend */}
-      <Card className="sa-chart-card sa-trend-card">
+      <Card className="hover-lift-sm sa-chart-card sa-trend-card">
         <div className="sa-chart-header"><Activity size={16} /><h3>Onboarding Pipeline Trend (12 Months)</h3></div>
         <ResponsiveContainer width="100%" height={260}>
           <ComposedChart data={data.onboardingTrend} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
@@ -747,7 +747,7 @@ function OnboardingTab({ data, setDetailModal }: { data: ApiResponse; setDetailM
       </Card>
 
       {/* Onboarding stage visualization */}
-      <Card className="sa-chart-card">
+      <Card className="hover-lift-sm sa-chart-card">
         <div className="sa-chart-header"><Network size={16} /><h3>Onboarding Stage Distribution</h3></div>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={Object.entries(ONBOARDING_LABELS).map(([k, v]) => ({
@@ -853,7 +853,7 @@ function AuditsTab({
     <div className="sa-tab-pane">
       {/* Charts row */}
       <div className="sa-charts-row">
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Audits by Type</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
@@ -867,7 +867,7 @@ function AuditsTab({
             </PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Audits by Status</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.auditsByStatus} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -883,7 +883,7 @@ function AuditsTab({
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Audits by Outcome</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.auditsByOutcome} layout="vertical" margin={{ top: 10, right: 10, bottom: 0, left: 60 }}>
@@ -902,7 +902,7 @@ function AuditsTab({
       </div>
 
       {/* Audit trend */}
-      <Card className="sa-chart-card sa-trend-card">
+      <Card className="hover-lift-sm sa-chart-card sa-trend-card">
         <div className="sa-chart-header"><Activity size={16} /><h3>Audit Activity & Score Trend (12 Months)</h3></div>
         <ResponsiveContainer width="100%" height={260}>
           <ComposedChart data={data.auditTrend} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
@@ -1032,7 +1032,7 @@ function FindingsTab({
     <div className="sa-tab-pane">
       {/* Charts */}
       <div className="sa-charts-row">
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Findings by Severity</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.findingsBySeverity} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -1050,7 +1050,7 @@ function FindingsTab({
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Findings by Status</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
@@ -1064,7 +1064,7 @@ function FindingsTab({
             </PieChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="sa-chart-card">
+        <Card className="hover-lift-sm sa-chart-card">
           <div className="sa-chart-header"><BarChart3 size={16} /><h3>Findings by Category</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.findingsByCategory} layout="vertical" margin={{ top: 10, right: 10, bottom: 0, left: 80 }}>
@@ -1191,7 +1191,7 @@ function FAITab({
       </div>
 
       {/* Chart */}
-      <Card className="sa-chart-card sa-trend-card">
+      <Card className="hover-lift-sm sa-chart-card sa-trend-card">
         <div className="sa-chart-header"><BarChart3 size={16} /><h3>FAI Status Distribution</h3></div>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={data.faiByStatus} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -1317,7 +1317,7 @@ function SelfAssessmentTab({
       </div>
 
       {/* Chart */}
-      <Card className="sa-chart-card sa-trend-card">
+      <Card className="hover-lift-sm sa-chart-card sa-trend-card">
         <div className="sa-chart-header"><BarChart3 size={16} /><h3>Self-Assessment Status Distribution</h3></div>
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={data.selfAssessmentByStatus} margin={{ top: 10, right: 10, bottom: 30, left: -20 }}>
@@ -1430,7 +1430,7 @@ function ScorecardsTab({ data, setDetailModal }: { data: ApiResponse; setDetailM
   return (
     <div className="sa-tab-pane">
       {/* Top 10 radar */}
-      <Card className="sa-chart-card sa-trend-card">
+      <Card className="hover-lift-sm sa-chart-card sa-trend-card">
         <div className="sa-chart-header"><Trophy size={16} /><h3>Top 10 Suppliers — Multi-Dimensional Score</h3></div>
         <ResponsiveContainer width="100%" height={350}>
           <RadarChart data={top10.map(s => ({ supplier: s.supplierName.substring(0, 12), Quality: s.qualityScore, Delivery: s.deliveryScore, Cost: s.costScore, Audit: s.auditScore, Risk: s.riskScore }))}>
@@ -1447,7 +1447,7 @@ function ScorecardsTab({ data, setDetailModal }: { data: ApiResponse; setDetailM
       </Card>
 
       {/* Top 10 table */}
-      <Card className="sa-spotlight-card">
+      <Card className="hover-lift-sm sa-spotlight-card">
         <div className="sa-chart-header"><Crown size={16} /><h3>Top 10 Suppliers (by Composite Score)</h3></div>
         <div className="sa-spotlight-list">
           {top10.map((s, i) => (
@@ -1484,7 +1484,7 @@ function ScorecardsTab({ data, setDetailModal }: { data: ApiResponse; setDetailM
       </Card>
 
       {/* Bottom 10 — needs attention */}
-      <Card className="sa-spotlight-card sa-spotlight-card-warning">
+      <Card className="hover-lift-sm sa-spotlight-card sa-spotlight-card-warning">
         <div className="sa-chart-header"><AlertTriangle size={16} /><h3>Bottom 10 Suppliers (Need Attention)</h3></div>
         <div className="sa-spotlight-list">
           {bottom10.map((s, i) => (
@@ -1545,7 +1545,7 @@ function InsightsTab({ data }: { data: ApiResponse }) {
       </div>
 
       {/* ISO 8.4 Health Scorecard */}
-      <Card className="sa-health-card">
+      <Card className="hover-lift-sm sa-health-card">
         <div className="sa-chart-header"><Gauge size={16} /><h3>ISO 9001:2015 §8.4 Health Scorecard</h3></div>
         <div className="sa-health-grid">
           <div className="sa-health-tile">
@@ -1588,7 +1588,7 @@ function InsightsTab({ data }: { data: ApiResponse }) {
       </Card>
 
       {/* Cross-module integration */}
-      <Card className="sa-integration-card">
+      <Card className="hover-lift-sm sa-integration-card">
         <div className="sa-chart-header"><Network size={16} /><h3>Cross-Module Integration Summary</h3></div>
         <div className="sa-integration-grid">
           {data.crossModule.map((cm, idx) => (

@@ -327,8 +327,8 @@ export default function ThirdPartyLogisticsView() {
             {/* KPIs */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {SUMMARY_KPIS.map((kpi) => (
-                <Card key={kpi.label} className="tpl-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={kpi.label} className="hover-lift-sm tpl-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 tpl-kpi-icon" />
                       <span className={cn("tpl-trend-badge", kpi.trend === "up" ? "tpl-trend-up" : "tpl-trend-down")}>
@@ -345,7 +345,7 @@ export default function ThirdPartyLogisticsView() {
 
             {/* Charts Row 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">SLA Performance Trend</CardTitle>
                 </CardHeader>
@@ -365,7 +365,7 @@ export default function ThirdPartyLogisticsView() {
                 </CardContent>
               </Card>
 
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Service Type Distribution</CardTitle>
                 </CardHeader>
@@ -381,7 +381,7 @@ export default function ThirdPartyLogisticsView() {
                 </CardContent>
               </Card>
 
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Partner Tier Distribution</CardTitle>
                 </CardHeader>
@@ -400,7 +400,7 @@ export default function ThirdPartyLogisticsView() {
 
             {/* Charts Row 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Monthly Billing Overview</CardTitle>
                 </CardHeader>
@@ -420,7 +420,7 @@ export default function ThirdPartyLogisticsView() {
                 </CardContent>
               </Card>
 
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Warehouse Spend Breakdown</CardTitle>
                 </CardHeader>
@@ -443,7 +443,7 @@ export default function ThirdPartyLogisticsView() {
             </div>
 
             {/* Active Alerts */}
-            <Card className="tpl-alert-card">
+            <Card className="hover-lift-sm tpl-alert-card">
               <CardHeader className="pb-2">
                 <CardTitle className="tpl-chart-title text-sm">Recent Alerts &amp; Notifications</CardTitle>
               </CardHeader>
@@ -492,8 +492,8 @@ export default function ThirdPartyLogisticsView() {
             {/* Partner Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredPartners.map((partner) => (
-                <Card key={partner.id} className="tpl-partner-card cursor-pointer hover:shadow-lg transition-shadow" onClick={() => openDrawer(partner)}>
-                  <CardContent className="glass-subtle p-4">
+                <Card key={partner.id} className="hover-lift-sm tpl-partner-card cursor-pointer hover:shadow-lg transition-shadow" onClick={() => openDrawer(partner)}>
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="tpl-partner-avatar">
@@ -555,7 +555,7 @@ export default function ThirdPartyLogisticsView() {
                 { label: "SLA Compliance", value: `${avgSla}%`, color: "tpl-sum-card-green" },
               ].map((c) => (
                 <Card key={c.label} className={c.color}>
-                  <CardContent className="glass-subtle p-3 text-center">
+                  <CardContent className="inner-glow glass-subtle p-3 text-center">
                     <div className="text-lg font-bold">{c.value}</div>
                     <div className="text-xs opacity-70">{c.label}</div>
                   </CardContent>
@@ -564,8 +564,8 @@ export default function ThirdPartyLogisticsView() {
             </div>
 
             {/* Contract Table */}
-            <Card className="card-crud-lift tpl-table-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift tpl-table-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -626,8 +626,8 @@ export default function ThirdPartyLogisticsView() {
                 { label: "Disconnected", value: String(integrations.filter((i) => i.status === "Disconnected").length), icon: WifiOff, color: "text-red-500" },
                 { label: "Maintenance", value: String(integrations.filter((i) => i.status === "Maintenance").length), icon: Wrench, color: "text-blue-500" },
               ].map((s) => (
-                <Card key={s.label} className="tpl-chart-card">
-                  <CardContent className="glass-subtle p-4 flex items-center gap-3">
+                <Card key={s.label} className="hover-lift-sm tpl-chart-card">
+                  <CardContent className="inner-glow glass-subtle p-4 flex items-center gap-3">
                     <s.icon className={cn("h-8 w-8", s.color)} />
                     <div>
                       <div className="text-xl font-bold">{s.value}</div>
@@ -640,7 +640,7 @@ export default function ThirdPartyLogisticsView() {
 
             {/* Integration Health Pie + Invoices */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Integration Health Distribution</CardTitle>
                 </CardHeader>
@@ -656,7 +656,7 @@ export default function ThirdPartyLogisticsView() {
                 </CardContent>
               </Card>
 
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Billing Status Summary</CardTitle>
                 </CardHeader>
@@ -680,7 +680,7 @@ export default function ThirdPartyLogisticsView() {
             </div>
 
             {/* Integration Table */}
-            <Card className="tpl-table-card">
+            <Card className="hover-lift-sm tpl-table-card">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <CardTitle className="tpl-chart-title text-sm">Integration Connections</CardTitle>
@@ -692,7 +692,7 @@ export default function ThirdPartyLogisticsView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -731,11 +731,11 @@ export default function ThirdPartyLogisticsView() {
             </Card>
 
             {/* Invoices Table */}
-            <Card className="tpl-table-card">
+            <Card className="hover-lift-sm tpl-table-card">
               <CardHeader className="pb-2">
                 <CardTitle className="tpl-chart-title text-sm">Recent Invoices &amp; Disputes</CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -775,11 +775,11 @@ export default function ThirdPartyLogisticsView() {
 
             {/* Disputes Table */}
             {disputes.length > 0 && (
-              <Card className="tpl-table-card">
+              <Card className="hover-lift-sm tpl-table-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Active Disputes</CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle p-0">
+                <CardContent className="inner-glow glass-subtle p-0">
                   <div className="overflow-x-auto">
                     <Table className="table-hover-highlight">
                       <TableHeader>
@@ -826,8 +826,8 @@ export default function ThirdPartyLogisticsView() {
                 { label: "Avg Response Time", value: `${rInt(15, 45)}min`, sub: "SLA target: 30min" },
                 { label: "Digital Maturity", value: `${rInt(65, 92)}%`, sub: "API/EDI adoption rate" },
               ].map((k) => (
-                <Card key={k.label} className="tpl-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={k.label} className="hover-lift-sm tpl-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="tpl-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="tpl-kpi-label text-xs">{k.label}</div>
                     <div className="tpl-kpi-sub text-xs">{k.sub}</div>
@@ -838,7 +838,7 @@ export default function ThirdPartyLogisticsView() {
 
             {/* Charts */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Cost Index Trend</CardTitle>
                 </CardHeader>
@@ -857,7 +857,7 @@ export default function ThirdPartyLogisticsView() {
                 </CardContent>
               </Card>
 
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Penalty &amp; Dispute Cost</CardTitle>
                 </CardHeader>
@@ -876,7 +876,7 @@ export default function ThirdPartyLogisticsView() {
                 </CardContent>
               </Card>
 
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Invoice Cycle Time</CardTitle>
                 </CardHeader>
@@ -895,7 +895,7 @@ export default function ThirdPartyLogisticsView() {
                 </CardContent>
               </Card>
 
-              <Card className="tpl-chart-card">
+              <Card className="hover-lift-sm tpl-chart-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Partner Performance Matrix</CardTitle>
                 </CardHeader>
@@ -935,7 +935,7 @@ export default function ThirdPartyLogisticsView() {
                     <p className="text-sm opacity-80">{selectedPartner.type} · {selectedPartner.code}</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="text-white/70 hover:text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="press-scale text-white/70 hover:text-white hover:bg-white/10">
                   <X className="h-5 w-5" />
                 </Button>
               </div>

@@ -360,7 +360,7 @@ export default function ExportDocumentationLCView() {
   }
 
   const SH = ({ label, field }: { label: string; field: string }) => (
-    <TableHead className="cursor-pointer select-none text-[11px] edl-sort-head" onClick={() => { if (sortBy === field) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortBy(field); setSortDir("asc") } }}>
+    <TableHead className="underline-animated cursor-pointer select-none text-[11px] edl-sort-head" onClick={() => { if (sortBy === field) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortBy(field); setSortDir("asc") } }}>
       <span className="flex items-center gap-1">{label} {sortBy === field && (sortDir === "asc" ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />)}</span>
     </TableHead>
   )
@@ -403,33 +403,33 @@ export default function ExportDocumentationLCView() {
       <div className="edl-dashboard space-y-4">
         <div className="edl-kpi-grid grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           {kpis.map((k, i) => (
-            <Card key={k.label} className="glass-subtle edl-kpi-card border-border/60"><CardContent className="p-3 flex items-center gap-2" style={{ animationDelay: `${i * 50}ms` }}>
+            <Card key={k.label} className="inner-glow hover-lift-sm glass-subtle edl-kpi-card border-border/60"><CardContent className="p-3 flex items-center gap-2" style={{ animationDelay: `${i * 50}ms` }}>
               <div className={cn("edl-kpi-icon p-2 rounded-lg", k.bg)}><k.icon className={cn("h-4 w-4", k.color)} /></div>
               <div><p className="text-[9px] text-muted-foreground uppercase tracking-wide leading-tight">{k.label}</p><p className={cn("edl-counter text-sm font-bold", k.color)}>{k.value}</p></div>
             </CardContent></Card>
           ))}
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Export Value</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Export Value</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={200}><LineChart data={data.monthlyExport}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 9 }} tickFormatter={v => fmtShort(v)} /><Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: number) => fmtINR(v)} />
               <Line type="monotone" dataKey="value" stroke={CC.teal} strokeWidth={2} dot={{ r: 3 }} name="Export Value" />
             </LineChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Document Status</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Document Status</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={200}><PieChart>
               <Pie data={data.docStatusDist} cx="50%" cy="50%" innerRadius={40} outerRadius={75} dataKey="value" paddingAngle={2} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={{ strokeWidth: 1 }}>
                 {[CC.emerald, CC.amber, CC.rose, CC.sky].map((c, i) => <Cell key={i} fill={c} />)}
               </Pie><Tooltip contentStyle={{ fontSize: 11 }} />
             </PieChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Shipping Bills by Port</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Shipping Bills by Port</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={200}><BarChart data={data.portBillData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="port" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 9 }} /><Tooltip contentStyle={{ fontSize: 11 }} />
               <Bar dataKey="count" fill={CC.teal} radius={[4, 4, 0, 0]} name="Bills" />
             </BarChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">LC Lifecycle Stages</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">LC Lifecycle Stages</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={200}><PieChart>
               <Pie data={data.lcLifecycle} cx="50%" cy="50%" innerRadius={40} outerRadius={75} dataKey="value" paddingAngle={2}>
                 {[CC.emerald, CC.cyan, CC.amber, CC.gold, CC.slate].map((c, i) => <Cell key={i} fill={c} />)}
@@ -467,7 +467,7 @@ export default function ExportDocumentationLCView() {
             <TableCell className="text-[10px]">{s.destination}</TableCell>
             <TableCell className="text-[10px] text-muted-foreground">{s.filedDate}</TableCell>
             <TableCell><SBStatusBadge status={s.status} /></TableCell>
-            <TableCell><Button variant="ghost" size="sm" className="edl-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(s); setDrawerType("sb") }}><Eye className="h-3 w-3 mr-1" />View</Button></TableCell>
+            <TableCell><Button variant="ghost" size="sm" className="press-scale edl-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(s); setDrawerType("sb") }}><Eye className="h-3 w-3 mr-1" />View</Button></TableCell>
           </TableRow>
         ))}</TableBody></Table></div>
         <p className="text-xs text-muted-foreground">Showing {Math.min(20, rows.length)} of {rows.length} shipping bills</p>
@@ -501,7 +501,7 @@ export default function ExportDocumentationLCView() {
             <TableCell className="text-[10px] text-muted-foreground">{l.expiryDate}</TableCell>
             <TableCell><ExpiryCountdown days={l.daysToExpiry} /></TableCell>
             <TableCell><Badge variant="outline" className={cn("text-[10px] px-2 py-0.5", l.status === "Settled" ? "bg-emerald-100 text-emerald-700 border-emerald-200" : l.status === "Closed" ? "bg-slate-100 text-slate-500 border-slate-200" : "bg-sky-100 text-sky-700 border-sky-200")}>{l.status}</Badge></TableCell>
-            <TableCell><Button variant="ghost" size="sm" className="edl-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(l); setDrawerType("lc") }}><Eye className="h-3 w-3 mr-1" />View</Button></TableCell>
+            <TableCell><Button variant="ghost" size="sm" className="press-scale edl-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(l); setDrawerType("lc") }}><Eye className="h-3 w-3 mr-1" />View</Button></TableCell>
           </TableRow>
         ))}</TableBody></Table></div>
         <p className="text-xs text-muted-foreground">Showing {Math.min(20, rows.length)} of {rows.length} LCs</p>
@@ -535,7 +535,7 @@ export default function ExportDocumentationLCView() {
             <TableCell className="text-[9px] font-mono text-muted-foreground">{inv.lcRef || "—"}</TableCell>
             <TableCell className="text-[10px] text-muted-foreground">{inv.dueDate}</TableCell>
             <TableCell><InvoiceStatusBadge status={inv.status} /></TableCell>
-            <TableCell><Button variant="ghost" size="sm" className="edl-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(inv); setDrawerType("inv") }}><Eye className="h-3 w-3 mr-1" />View</Button></TableCell>
+            <TableCell><Button variant="ghost" size="sm" className="press-scale edl-view-btn h-6 text-[10px]" onClick={() => { setDrawerData(inv); setDrawerType("inv") }}><Eye className="h-3 w-3 mr-1" />View</Button></TableCell>
           </TableRow>
         ))}</TableBody></Table></div>
         <p className="text-xs text-muted-foreground">Showing {Math.min(20, rows.length)} of {rows.length} invoices</p>
@@ -558,8 +558,8 @@ export default function ExportDocumentationLCView() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {rows.slice(0, 18).map(c => (
-            <Card key={c.id} className="edl-cert-card border-border/60 cursor-pointer hover:shadow-md transition-all" onClick={() => { setDrawerData(c); setDrawerType("cert") }}>
-              <CardContent className="glass-subtle p-4 space-y-3">
+            <Card key={c.id} className="hover-lift-sm edl-cert-card border-border/60 cursor-pointer hover:shadow-md transition-all" onClick={() => { setDrawerData(c); setDrawerType("cert") }}>
+              <CardContent className="inner-glow glass-subtle p-4 space-y-3">
                 <div className="flex items-start justify-between gap-2">
                   <div><p className="text-xs font-mono font-medium">{c.certNo}</p><p className="text-[10px] text-muted-foreground mt-0.5">{c.type}</p></div>
                   <CertStatusBadge status={c.status} />
@@ -601,19 +601,19 @@ export default function ExportDocumentationLCView() {
       <div className="edl-analytics-tab space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {cards.map(c => (
-            <Card key={c.label} className="glass-subtle edl-analytic-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+            <Card key={c.label} className="inner-glow hover-lift-sm glass-subtle edl-analytic-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
               <c.icon className={cn("h-5 w-5", c.color)} /><div><p className="text-[10px] text-muted-foreground">{c.label}</p><p className={cn("text-lg font-bold", c.color)}>{c.value}</p></div>
             </CardContent></Card>
           ))}
         </div>
         <div className="grid md:grid-cols-2 gap-4">
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Doc Volume</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Doc Volume</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={240}><BarChart data={data.monthlyDocVolume}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 9 }} /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 9 }} />
               <Bar dataKey="shipping" stackId="a" fill={CC.teal} name="Shipping Bills" /><Bar dataKey="invoices" stackId="a" fill={CC.gold} name="Invoices" /><Bar dataKey="lcs" stackId="a" fill={CC.navy} name="LCs" /><Bar dataKey="certs" stackId="a" fill={CC.burgundy} name="Certificates" />
             </BarChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Rejection by Reason</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Rejection by Reason</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={240}><BarChart data={data.rejectionReasons} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis type="number" tick={{ fontSize: 9 }} /><YAxis type="category" dataKey="reason" tick={{ fontSize: 8 }} width={110} /><Tooltip contentStyle={{ fontSize: 11 }} />
               <Bar dataKey="count" fill={CC.burgundy} radius={[0, 4, 4, 0]} name="Rejections" />
@@ -621,21 +621,21 @@ export default function ExportDocumentationLCView() {
           </CardContent></Card>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Processing Time Trend</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Processing Time Trend</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><AreaChart data={data.processingTrend}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 9 }} unit="d" /><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 9 }} />
               <Area type="monotone" dataKey="actual" stroke={CC.teal} fill={CC.teal} fillOpacity={0.15} name="Actual Days" />
               <Line type="monotone" dataKey="target" stroke={CC.rose} strokeDasharray="5 5" strokeWidth={2} dot={false} name="Target (5d)" />
             </AreaChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Compliance by Doc Type</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Compliance by Doc Type</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={220}><RadarChart data={data.complianceByType}>
               <PolarGrid stroke="#e5e7eb" /><PolarAngleAxis dataKey="type" tick={{ fontSize: 8 }} /><PolarRadiusAxis tick={{ fontSize: 8 }} domain={[60, 100]} />
               <Radar name="Compliance %" dataKey="score" stroke={CC.teal} fill={CC.teal} fillOpacity={0.2} />
             </RadarChart></ResponsiveContainer>
           </CardContent></Card>
         </div>
-        <Card className="edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Port-wise Export Value</CardTitle></CardHeader><CardContent>
+        <Card className="hover-lift-sm edl-chart-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Port-wise Export Value</CardTitle></CardHeader><CardContent>
           <ResponsiveContainer width="100%" height={200}><BarChart data={data.portExportValue}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="port" tick={{ fontSize: 9 }} /><YAxis tick={{ fontSize: 9 }} tickFormatter={v => fmtShort(v)} /><Tooltip contentStyle={{ fontSize: 11 }} formatter={(v: number) => fmtINR(v)} />
             <Bar dataKey="value" fill={CC.navy} radius={[4, 4, 0, 0]} name="Export Value" />
@@ -669,12 +669,12 @@ export default function ExportDocumentationLCView() {
           <SBStatusBadge status={drawerData.status} /><Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.port}</Badge>
         </DrawerH>
         <div className="space-y-4 px-1">
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-2">Progress</p><DocProgressTracker status={drawerData.status} /></CardContent></Card>
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">FOB Value</p><ExportValueTile value={drawerData.fobValue} trend={drawerData.trend} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-2">Progress</p><DocProgressTracker status={drawerData.status} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">FOB Value</p><ExportValueTile value={drawerData.fobValue} trend={drawerData.trend} /></CardContent></Card>
           <InfoG items={[["Type", drawerData.type], ["Port", drawerData.port], ["Destination", drawerData.destination], ["Goods", drawerData.goodsDesc], ["HS Code", drawerData.hsCode], ["Pkg Count", String(drawerData.pkgCount)], ["Gross Weight", `${drawerData.grossWeight} kg`], ["CIF Value", fmtINR(drawerData.cifValue)], ["Filed Date", drawerData.filedDate], ["Clearance Date", drawerData.clearanceDate || "Pending"]] } />
           <div className="flex gap-2 pt-2">
             {[{ label: "Verify", icon: CheckCircle2 }, { label: "Print", icon: Printer }, { label: "Submit", icon: Send }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.sbNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="press-scale btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.sbNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}
@@ -687,16 +687,16 @@ export default function ExportDocumentationLCView() {
         </DrawerH>
         <div className="space-y-4 px-1">
           <div className="flex items-center justify-center"><LCStatusRing status={drawerData.status} /></div>
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Amount (INR Equiv)</p><ExportValueTile value={drawerData.inrEquiv} trend="up" /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Amount (INR Equiv)</p><ExportValueTile value={drawerData.inrEquiv} trend="up" /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">
             {[{ label: "Amount", value: `${drawerData.currency} ${drawerData.amount.toLocaleString()}` }, { label: "Amendments", value: String(drawerData.amendmentCount) }, { label: "Port", value: drawerData.shipmentPort.split(" ")[0] }].map(m => (
-              <Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-teal-700 dark:text-teal-300">{m.value}</p></CardContent></Card>
+              <Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-teal-700 dark:text-teal-300">{m.value}</p></CardContent></Card>
             ))}
           </div>
           <InfoG items={[["Applicant", drawerData.applicant], ["Beneficiary", drawerData.beneficiary], ["Bank", drawerData.bank], ["Type", drawerData.type], ["Opened", drawerData.openedDate], ["Expiry", drawerData.expiryDate], ["Amendment Reason", drawerData.amendmentReason || "N/A"], ["Status", drawerData.status]]} />
           <div className="flex gap-2 pt-2">
             {[{ label: "Amend", icon: RefreshCw }, { label: "Present", icon: Send }, { label: "Close", icon: CheckCircle2 }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.lcNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="press-scale btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.lcNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}
@@ -708,16 +708,16 @@ export default function ExportDocumentationLCView() {
           <InvoiceStatusBadge status={drawerData.status} /><PaymentTermBadge term={drawerData.paymentTerm} />
         </DrawerH>
         <div className="space-y-4 px-1">
-          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Payment Status</p><AmountDueIndicator paid={drawerData.paidAmount} total={drawerData.totalAmount} /></CardContent></Card>
+          <Card className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Payment Status</p><AmountDueIndicator paid={drawerData.paidAmount} total={drawerData.totalAmount} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">
             {[{ label: "Total", value: drawerData.currency === "INR" ? fmtINR(drawerData.totalAmount) : `${drawerData.currency} ${drawerData.totalAmount.toLocaleString()}` }, { label: "Paid", value: fmtINR(drawerData.paidAmount) }, { label: "Balance", value: fmtINR(drawerData.totalAmount - drawerData.paidAmount) }].map(m => (
-              <Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700 dark:text-amber-300">{m.value}</p></CardContent></Card>
+              <Card key={m.label} className="inner-glow hover-lift-sm glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700 dark:text-amber-300">{m.value}</p></CardContent></Card>
             ))}
           </div>
           <InfoG items={[["Exporter", drawerData.exporter], ["Destination", drawerData.destination], ["Currency", drawerData.currency], ["LC Reference", drawerData.lcRef || "None"], ["SB Reference", drawerData.sbRef], ["Goods", drawerData.goodsDesc], ["HS Code", drawerData.hsCode], ["Invoice Date", drawerData.invoiceDate], ["Due Date", drawerData.dueDate], ["Payment Term", drawerData.paymentTerm]]} />
           <div className="flex gap-2 pt-2">
             {[{ label: "Send", icon: Send }, { label: "Revise", icon: RefreshCw }, { label: "Record Payment", icon: CheckCircle2 }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.invNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="press-scale btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.invNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}
@@ -732,7 +732,7 @@ export default function ExportDocumentationLCView() {
           <InfoG items={[["Type", drawerData.type], ["Authority", drawerData.authority], ["Applicant", drawerData.exporter], ["Destination", drawerData.destination], ["Goods", drawerData.goodsDesc], ["Applied", drawerData.appliedDate], ["Issued", drawerData.issuedDate || "Pending"], ["Expiry", drawerData.expiryDate || "N/A"], ["Status", drawerData.status]]} />
           <div className="flex gap-2 pt-2">
             {[{ label: "Download", icon: Download }, { label: "Apply", icon: Send }, { label: "Renew", icon: RefreshCw }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.certNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="press-scale btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.certNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}

@@ -224,7 +224,7 @@ export function OutboundView() {
         description="Manage dispatch operations and delivery tracking"
         actions={
           <>
-            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
             <ExportButton onExportCSV={handleExportCSV} />
@@ -243,8 +243,8 @@ export function OutboundView() {
           { label: "Dispatched", value: summary.dispatched, color: "bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400" },
           { label: "Delivered", value: summary.delivered, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
-            <CardContent className="glass-subtle p-3 text-center">
+          <Card key={item.label} className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
+            <CardContent className="inner-glow glass-subtle p-3 text-center">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
               <p className={cn("mt-1 text-xl font-bold", textColorMap[item.label])}>{item.value}</p>
             </CardContent>

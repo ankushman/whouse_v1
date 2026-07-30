@@ -268,7 +268,7 @@ export default function KittingAssemblyView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Kit Volume & Defect Rate</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Kit Volume & Defect Rate</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyTrend}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -277,7 +277,7 @@ export default function KittingAssemblyView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Kit Type Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Kit Type Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={typeDist} cx="50%" cy="50%" innerRadius={50} outerRadius={90} dataKey="count" nameKey="type" label={({ type, percent }) => `${type.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {typeDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -286,7 +286,7 @@ export default function KittingAssemblyView() {
                 </CardContent></Card>
               </div>
 
-              <Card className="kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Kit Templates Overview</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Kit Templates Overview</CardTitle></CardHeader><CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   {KIT_TEMPLATES.slice(0, 10).map((t) => (
                     <div key={t.id} className="kit-template-card rounded-lg p-3 border border-gray-200 dark:border-gray-700">
@@ -348,7 +348,7 @@ export default function KittingAssemblyView() {
                       <TableCell className="text-[10px]">{k.warehouse.split(" ")[0]}</TableCell>
                       <TableCell className="hidden md:table-cell text-[10px]">{k.assembler?.name.split(" ")[0] || "—"}</TableCell>
                       <TableCell className="hidden lg:table-cell text-[10px]">{k.dueDate}</TableCell>
-                      <TableCell><Button size="sm" variant="ghost" className="h-7 text-[10px]" onClick={() => setSelectedKit(k)}><Eye className="h-3 w-3" /></Button></TableCell>
+                      <TableCell><Button size="sm" variant="ghost" className="press-scale h-7 text-[10px]" onClick={() => setSelectedKit(k)}><Eye className="h-3 w-3" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody></Table>
@@ -414,7 +414,7 @@ export default function KittingAssemblyView() {
           {/* TAB 4: STATIONS */}
           {activeTab === "stations" && (
             <div className="mt-4 space-y-4">
-              <Card className="kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Assembly Station Utilization</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Assembly Station Utilization</CardTitle></CardHeader><CardContent>
                 <ResponsiveContainer width="100%" height={260}><BarChart data={stationUtil}>
                   <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="assembler" fontSize={10} />
                   <YAxis fontSize={11} domain={[0, 100]} unit="%" /><Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -476,7 +476,7 @@ export default function KittingAssemblyView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Inspection vs Defects</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Inspection vs Defects</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={qualityStats}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -486,7 +486,7 @@ export default function KittingAssemblyView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Defect Categories</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm kit-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Defect Categories</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={[
                       { cat: "Missing Component", count: rInt(5, 20) },
@@ -511,7 +511,7 @@ export default function KittingAssemblyView() {
           <div className="kit-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold">Kit Detail: {selectedKit.id}</h3>
-              <Button size="sm" variant="ghost" onClick={() => setSelectedKit(null)} className="h-7 w-7 p-0"><X className="h-4 w-4" /></Button>
+              <Button size="sm" variant="ghost" onClick={() => setSelectedKit(null)} className="press-scale h-7 w-7 p-0"><X className="h-4 w-4" /></Button>
             </div>
 
             <div className={cn("kit-drawer-banner rounded-lg p-3 mb-4", selectedKit.status === "Completed" || selectedKit.status === "Shipped" ? "kit-banner-completed" : selectedKit.status === "In Assembly" ? "kit-banner-assembly" : selectedKit.status === "Cancelled" ? "kit-banner-cancelled" : "kit-banner-pending")}>

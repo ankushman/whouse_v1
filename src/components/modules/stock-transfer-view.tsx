@@ -245,7 +245,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, colorClass, trend, trendV
 }) {
   return (
     <Card className={cn("stf-kpi-card", colorClass)}>
-      <CardContent className="glass-subtle p-4">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div>
             <p className="stf-kpi-label">{title}</p>
@@ -488,7 +488,7 @@ export default function StockTransferView() {
 
             {/* Charts Row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Transfer Type Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -502,7 +502,7 @@ export default function StockTransferView() {
                 </CardContent>
               </Card>
 
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Monthly Transfer Volume</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -522,7 +522,7 @@ export default function StockTransferView() {
                 </CardContent>
               </Card>
 
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Transfer Efficiency Radar</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={260}>
@@ -542,7 +542,7 @@ export default function StockTransferView() {
 
             {/* Charts Row 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Transfer Reasons Analysis</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -557,7 +557,7 @@ export default function StockTransferView() {
                 </CardContent>
               </Card>
 
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Top Transfer Routes</CardTitle></CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -603,8 +603,8 @@ export default function StockTransferView() {
               <Badge variant="outline" className="badge-interactive text-xs">{filteredTransfers.length} transfers</Badge>
             </div>
 
-            <Card className="card-crud-lift stf-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift stf-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -656,7 +656,7 @@ export default function StockTransferView() {
                           <TableCell className="stf-td"><span className="text-xs">{t.approver.name.split(' ')[0]}</span></TableCell>
                           <TableCell className="stf-td"><span className="text-xs">{t.createdDate}</span></TableCell>
                           <TableCell className="stf-td">
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setSelectedTransfer(t)}>
+                            <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => setSelectedTransfer(t)}>
                               <Eye className="h-3.5 w-3.5" />
                             </Button>
                           </TableCell>
@@ -685,7 +685,7 @@ export default function StockTransferView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Warehouse Flow (Out vs In)</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -702,7 +702,7 @@ export default function StockTransferView() {
                 </CardContent>
               </Card>
 
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Cost per Warehouse Route</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -719,9 +719,9 @@ export default function StockTransferView() {
             </div>
 
             {/* Route Table */}
-            <Card className="stf-card">
+            <Card className="hover-lift-sm stf-card">
               <CardHeader className="pb-2"><CardTitle className="stf-card-title">Warehouse Transfer Summary</CardTitle></CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -764,8 +764,8 @@ export default function StockTransferView() {
           <div className="stf-tab-content">
             <div className="flex items-center gap-3 mb-6">
               <span className="text-sm text-gray-500">View:</span>
-              <Button variant={costView === "monthly" ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setCostView("monthly")}>Monthly Trend</Button>
-              <Button variant={costView === "byWH" ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setCostView("byWH")}>By Warehouse</Button>
+              <Button variant={costView === "monthly" ? "default" : "outline"} size="sm" className="press-scale h-8 text-xs" onClick={() => setCostView("monthly")}>Monthly Trend</Button>
+              <Button variant={costView === "byWH" ? "default" : "outline"} size="sm" className="press-scale h-8 text-xs" onClick={() => setCostView("byWH")}>By Warehouse</Button>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -781,7 +781,7 @@ export default function StockTransferView() {
 
             {costView === "monthly" ? (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-                <Card className="stf-card">
+                <Card className="hover-lift-sm stf-card">
                   <CardHeader className="pb-2"><CardTitle className="stf-card-title">Cost Breakdown Trend</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
@@ -798,7 +798,7 @@ export default function StockTransferView() {
                   </CardContent>
                 </Card>
 
-                <Card className="stf-card">
+                <Card className="hover-lift-sm stf-card">
                   <CardHeader className="pb-2"><CardTitle className="stf-card-title">Savings Breakdown</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
@@ -817,7 +817,7 @@ export default function StockTransferView() {
                 </Card>
               </div>
             ) : (
-              <Card className="stf-card mb-6">
+              <Card className="hover-lift-sm stf-card mb-6">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Cost by Warehouse</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={350}>
@@ -835,7 +835,7 @@ export default function StockTransferView() {
             )}
 
             {/* Transport mode distribution */}
-            <Card className="stf-card">
+            <Card className="hover-lift-sm stf-card">
               <CardHeader className="pb-2"><CardTitle className="stf-card-title">Transport Mode Distribution</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
@@ -870,7 +870,7 @@ export default function StockTransferView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Warehouse SLA Performance</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -888,7 +888,7 @@ export default function StockTransferView() {
                 </CardContent>
               </Card>
 
-              <Card className="stf-card">
+              <Card className="hover-lift-sm stf-card">
                 <CardHeader className="pb-2"><CardTitle className="stf-card-title">Approval Workflow Analytics</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -908,9 +908,9 @@ export default function StockTransferView() {
             </div>
 
             {/* SLA Detail Table */}
-            <Card className="stf-card">
+            <Card className="hover-lift-sm stf-card">
               <CardHeader className="pb-2"><CardTitle className="stf-card-title">Warehouse SLA Detail</CardTitle></CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>

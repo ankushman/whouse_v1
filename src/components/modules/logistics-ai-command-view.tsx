@@ -371,8 +371,8 @@ export default function LogisticsAICommandView() {
         <TabsContent value="0" className="space-y-4 mt-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {kpis.map((k, i) => { const Icon = k.icon; return (
-              <Card key={i} className="lac-kpi-card border-l-4 border-l-violet-500 hover:shadow-lg transition-shadow">
-                <CardContent className="p-3">
+              <Card key={i} className="hover-lift-sm lac-kpi-card border-l-4 border-l-violet-500 hover:shadow-lg transition-shadow">
+                <CardContent className="inner-glow p-3">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p>
@@ -388,16 +388,16 @@ export default function LogisticsAICommandView() {
             )})}
           </div>
           <div className="grid md:grid-cols-3 gap-4">
-            <Card className="lac-chart-card col-span-2">
+            <Card className="hover-lift-sm lac-chart-card col-span-2">
               <CardHeader className="pb-2"><CardTitle className="text-sm">AI Model Performance (14 Days)</CardTitle></CardHeader>
               <CardContent><AreaChart data={data.dailyModelPerf} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Demand Forecast" stackId="a" fill="#7c3aed" /><Area type="monotone" dataKey="Route Optimization" stackId="a" fill="#0891b2" /><Area type="monotone" dataKey="Inventory" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Pricing" stackId="a" fill="#ea580c" /></AreaChart></CardContent>
             </Card>
-            <Card className="lac-chart-card">
+            <Card className="hover-lift-sm lac-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Prediction Types</CardTitle></CardHeader>
               <CardContent><PieChart width={240} height={240}><Pie data={data.predTypeDist} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={9}>{data.predTypeDist.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
           </div>
-          <Card className="lac-chart-card">
+          <Card className="hover-lift-sm lac-chart-card">
             <CardHeader className="pb-2"><CardTitle className="text-sm">Model Accuracy Comparison</CardTitle></CardHeader>
             <CardContent><BarChart data={data.modelAccuracy} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} domain={[70, 100]} /><Tooltip /><Bar dataKey="accuracy" fill="#7c3aed" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
           </Card>
@@ -483,7 +483,7 @@ export default function LogisticsAICommandView() {
                     <TableCell className="text-[10px] text-gray-600 dark:text-gray-400 max-w-[200px] truncate">{a.description}</TableCell>
                     <TableCell><AIScoreBar score={a.aiScore} /></TableCell>
                     <TableCell><AnomalyStatusBadge status={a.status} /></TableCell>
-                    <TableCell><Button variant="ghost" size="sm" className="h-7 text-[10px] lac-action-btn" onClick={() => openAnomalyDetail(a)}><Eye className="w-3 h-3 mr-1" />View</Button></TableCell>
+                    <TableCell><Button variant="ghost" size="sm" className="press-scale h-7 text-[10px] lac-action-btn" onClick={() => openAnomalyDetail(a)}><Eye className="w-3 h-3 mr-1" />View</Button></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -592,8 +592,8 @@ export default function LogisticsAICommandView() {
               { label: "Models Retrained", value: "47", icon: RefreshCw, color: "text-cyan-600 dark:text-cyan-400" },
               { label: "Data Sources", value: "12", icon: Activity, color: "text-blue-600 dark:text-blue-400" },
             ].map((k, i) => { const Icon = k.icon; return (
-              <Card key={i} className="lac-kpi-card border-l-4 border-l-emerald-500">
-                <CardContent className="p-3">
+              <Card key={i} className="hover-lift-sm lac-kpi-card border-l-4 border-l-emerald-500">
+                <CardContent className="inner-glow p-3">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p>
@@ -606,21 +606,21 @@ export default function LogisticsAICommandView() {
             )})}
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="lac-chart-card">
+            <Card className="hover-lift-sm lac-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Accuracy Trend</CardTitle></CardHeader>
               <CardContent><LineChart data={data.monthlyAccuracy} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} domain={[80, 100]} /><Tooltip /><Line type="monotone" dataKey="accuracy" stroke="#7c3aed" strokeWidth={2} /></LineChart></CardContent>
             </Card>
-            <Card className="lac-chart-card">
+            <Card className="hover-lift-sm lac-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Model Performance</CardTitle></CardHeader>
               <CardContent><BarChart data={data.modelPerfBar} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} domain={[70, 100]} /><Tooltip /><Bar dataKey="accuracy" fill="#0891b2" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
             </Card>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="lac-chart-card">
+            <Card className="hover-lift-sm lac-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Anomaly Distribution by Type</CardTitle></CardHeader>
               <CardContent><BarChart data={data.anomalyTypeBar} layout="vertical" height={260}><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="name" tick={{ fontSize: 9 }} width={120} /><Tooltip /><Bar dataKey="count" fill="#e11d48" radius={[0, 4, 4, 0]} /></BarChart></CardContent>
             </Card>
-            <Card className="lac-chart-card">
+            <Card className="hover-lift-sm lac-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">AI ROI Breakdown (6-Month)</CardTitle></CardHeader>
               <CardContent><AreaChart data={data.roiTrend} height={260}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={(v: number) => `${(v / 100000).toFixed(0)}L`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Labor Savings" stackId="a" fill="#7c3aed" /><Area type="monotone" dataKey="Fuel Savings" stackId="a" fill="#0891b2" /><Area type="monotone" dataKey="Inventory Savings" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Maintenance Savings" stackId="a" fill="#d97706" /></AreaChart></CardContent>
             </Card>
@@ -661,8 +661,8 @@ export default function LogisticsAICommandView() {
                 <Separator />
                 <div className="text-xs"><span className="text-gray-500">Resolution: </span><span>{selectedAnomaly.resolution}</span></div>
                 <div className="flex gap-2">
-                  <Button size="sm" className="text-xs flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Investigated", `Anomaly ${selectedAnomaly.id} marked as investigating`)}>Investigate</Button>
-                  <Button size="sm" className="text-xs flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => toast.success("Resolved", `Anomaly ${selectedAnomaly.id} resolved`)}>Mark Resolved</Button>
+                  <Button size="sm" className="press-scale text-xs flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Investigated", `Anomaly ${selectedAnomaly.id} marked as investigating`)}>Investigate</Button>
+                  <Button size="sm" className="press-scale text-xs flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => toast.success("Resolved", `Anomaly ${selectedAnomaly.id} resolved`)}>Mark Resolved</Button>
                 </div>
               </div>
             </>

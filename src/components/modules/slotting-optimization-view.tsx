@@ -415,7 +415,7 @@ export default function SlottingOptimizationView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="slot-anim-5"><CardHeader><CardTitle className="text-base">Zone Distribution</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-5"><CardHeader><CardTitle className="text-base">Zone Distribution</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart><Pie data={zoneDistribution} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name.split("(")[0].trim()} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                   {zoneDistribution.map((e, i) => <Cell key={i} fill={e.color} />)}
@@ -423,7 +423,7 @@ export default function SlottingOptimizationView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="slot-anim-6"><CardHeader><CardTitle className="text-base">Warehouse Utilization (%)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-6"><CardHeader><CardTitle className="text-base">Warehouse Utilization (%)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <BarChart data={whUtilization}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="name" className="text-xs" /><YAxis domain={[0, 100]} className="text-xs" />
@@ -434,7 +434,7 @@ export default function SlottingOptimizationView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="slot-anim-7"><CardHeader><CardTitle className="text-base">Zone Utilization vs Target</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-7"><CardHeader><CardTitle className="text-base">Zone Utilization vs Target</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <ComposedChart data={zoneUtilization}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="name" className="text-xs" /><YAxis domain={[0, 100]} className="text-xs" />
@@ -445,7 +445,7 @@ export default function SlottingOptimizationView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="slot-anim-8"><CardHeader><CardTitle className="text-base">Slotting Efficiency Trend (12 Months)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-8"><CardHeader><CardTitle className="text-base">Slotting Efficiency Trend (12 Months)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <AreaChart data={monthlyTrends}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="month" className="text-xs" /><YAxis domain={[60, 100]} className="text-xs" />
@@ -461,7 +461,7 @@ export default function SlottingOptimizationView() {
         {/* ===== TAB 2: ABC Classification ===== */}
         <TabsContent value="abc" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="slot-anim-1"><CardHeader><CardTitle className="text-base">ABC Class Distribution</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-1"><CardHeader><CardTitle className="text-base">ABC Class Distribution</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart><Pie data={abcDistribution} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                   {abcDistribution.map((e, i) => <Cell key={i} fill={e.color} />)}
@@ -469,7 +469,7 @@ export default function SlottingOptimizationView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="slot-anim-2"><CardHeader><CardTitle className="text-base">Bin Status Overview</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-2"><CardHeader><CardTitle className="text-base">Bin Status Overview</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <PieChart><Pie data={binStatusDist} cx="50%" cy="50%" outerRadius={100} innerRadius={50} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                   {binStatusDist.map((_, i) => <Cell key={i} fill={["#3b82f6", "#f59e0b", "#22c55e", "#8b5cf6", "#ef4444", "#ec4899"][i]} />)}
@@ -479,7 +479,7 @@ export default function SlottingOptimizationView() {
           </div>
 
           {/* ABC items per zone */}
-          <Card className="slot-anim-3"><CardHeader><CardTitle className="text-base">ABC Items by Zone</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm slot-anim-3"><CardHeader><CardTitle className="text-base">ABC Items by Zone</CardTitle></CardHeader><CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={ZONES.map(z => ({
                 name: `Zone ${z}`,
@@ -577,7 +577,7 @@ export default function SlottingOptimizationView() {
                       <td><div className="flex items-center gap-2">{utilBar(b.utilization)}<span className="text-xs font-medium">{b.utilization}%</span></div></td>
                       <td className="text-xs font-medium">{b.pickFreq}/day</td>
                       <td className="text-xs text-gray-500">{b.lastPick}</td>
-                      <td><Button size="sm" variant="ghost" className="h-8 w-8 p-0" onClick={() => setSelectedBin(b)}><span title="Eye"><Eye className="h-4 w-4 text-gray-500" /></span></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale h-8 w-8 p-0" onClick={() => setSelectedBin(b)}><span title="Eye"><Eye className="h-4 w-4 text-gray-500" /></span></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -595,7 +595,7 @@ export default function SlottingOptimizationView() {
               <div className="slot-drawer-panel p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-bold">{selectedBin.id} — Bin Details</h3>
-                  <Button size="sm" variant="ghost" onClick={() => setSelectedBin(null)} className="h-8 w-8 p-0"><X className="h-4 w-4" /></Button>
+                  <Button size="sm" variant="ghost" onClick={() => setSelectedBin(null)} className="press-scale h-8 w-8 p-0"><X className="h-4 w-4" /></Button>
                 </div>
 
                 <div className="slot-section-card">
@@ -648,7 +648,7 @@ export default function SlottingOptimizationView() {
           )}
 
           {/* Bin Visual Grid per Zone */}
-          <Card className="slot-anim-6"><CardHeader><CardTitle className="text-base">Bin Heatmap — Pick Frequency by Zone</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm slot-anim-6"><CardHeader><CardTitle className="text-base">Bin Heatmap — Pick Frequency by Zone</CardTitle></CardHeader><CardContent>
             <div className="space-y-4">
               {ZONES.map(z => (
                 <div key={z}>
@@ -679,7 +679,7 @@ export default function SlottingOptimizationView() {
         {/* ===== TAB 4: Pick Path ===== */}
         <TabsContent value="pickpath" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="slot-anim-1"><CardHeader><CardTitle className="text-base">Avg Travel Distance by Zone (m)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-1"><CardHeader><CardTitle className="text-base">Avg Travel Distance by Zone (m)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={pickPaths}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey={`Zone`} className="text-xs" /><YAxis className="text-xs" />
@@ -689,7 +689,7 @@ export default function SlottingOptimizationView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="slot-anim-2"><CardHeader><CardTitle className="text-base">Picks per Hour by Zone</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-2"><CardHeader><CardTitle className="text-base">Picks per Hour by Zone</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={pickPaths}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey={`Zone`} className="text-xs" /><YAxis className="text-xs" />
@@ -699,7 +699,7 @@ export default function SlottingOptimizationView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="slot-anim-3"><CardHeader><CardTitle className="text-base">Zone Efficiency Scores</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-3"><CardHeader><CardTitle className="text-base">Zone Efficiency Scores</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={pickPaths} layout="vertical"><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis type="number" domain={[0, 100]} className="text-xs" /><YAxis type="category" dataKey={`zone`} width={60} className="text-xs" />
@@ -709,7 +709,7 @@ export default function SlottingOptimizationView() {
               </ResponsiveContainer>
             </CardContent></Card>
 
-            <Card className="slot-anim-4"><CardHeader><CardTitle className="text-base">Travel Distance Trend (12 Months)</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-4"><CardHeader><CardTitle className="text-base">Travel Distance Trend (12 Months)</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={monthlyTrends}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="month" className="text-xs" /><YAxis className="text-xs" />
@@ -722,7 +722,7 @@ export default function SlottingOptimizationView() {
           </div>
 
           {/* Pick Path Performance Table */}
-          <Card className="slot-anim-5"><CardHeader><CardTitle className="text-base">Zone Performance Summary</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm slot-anim-5"><CardHeader><CardTitle className="text-base">Zone Performance Summary</CardTitle></CardHeader><CardContent>
             <div className="overflow-x-auto">
               <table className="slot-data-table">
                 <thead><tr>
@@ -770,7 +770,7 @@ export default function SlottingOptimizationView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="slot-anim-6"><CardHeader><CardTitle className="text-base">Rack Height Profile — Ergonomic Zones</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-6"><CardHeader><CardTitle className="text-base">Rack Height Profile — Ergonomic Zones</CardTitle></CardHeader><CardContent>
               <div className="space-y-1">
                 {[...ergonomicData].reverse().map((e, i) => (
                   <div key={i} className={`slot-ergo-strip ${ergoStripCls(e.label)}`}>
@@ -788,7 +788,7 @@ export default function SlottingOptimizationView() {
               </div>
             </CardContent></Card>
 
-            <Card className="slot-anim-7"><CardHeader><CardTitle className="text-base">Avg Weight & Incidents by Height Zone</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm slot-anim-7"><CardHeader><CardTitle className="text-base">Avg Weight & Incidents by Height Zone</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <ComposedChart data={ergonomicData}><CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                   <XAxis dataKey="label" className="text-xs" /><YAxis yAxisId="left" className="text-xs" /><YAxis yAxisId="right" orientation="right" className="text-xs" />
@@ -801,7 +801,7 @@ export default function SlottingOptimizationView() {
           </div>
 
           {/* Ergonomic Data Table */}
-          <Card className="slot-anim-8"><CardHeader><CardTitle className="text-base">Ergonomic Assessment Detail</CardTitle></CardHeader><CardContent>
+          <Card className="hover-lift-sm slot-anim-8"><CardHeader><CardTitle className="text-base">Ergonomic Assessment Detail</CardTitle></CardHeader><CardContent>
             <div className="overflow-x-auto">
               <table className="slot-data-table">
                 <thead><tr>

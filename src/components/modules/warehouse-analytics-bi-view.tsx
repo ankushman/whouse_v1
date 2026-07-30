@@ -273,7 +273,7 @@ export default function WarehouseBIView() {
         {/* Charts Row 1 */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {/* Monthly Throughput */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Activity className="h-4 w-4 text-indigo-500" />
@@ -298,7 +298,7 @@ export default function WarehouseBIView() {
           </Card>
 
           {/* Revenue vs Cost */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <IndianRupee className="h-4 w-4 text-teal-500" />
@@ -322,7 +322,7 @@ export default function WarehouseBIView() {
           </Card>
 
           {/* Dimension Scores */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Sparkles className="h-4 w-4 text-amber-500" />
@@ -357,7 +357,7 @@ export default function WarehouseBIView() {
         {/* Row 2: Heatmap + Quarterly Comparison */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Performance Heatmap */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <CalendarRange className="h-4 w-4 text-purple-500" />
@@ -403,7 +403,7 @@ export default function WarehouseBIView() {
           </Card>
 
           {/* Quarterly Comparison */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <ArrowLeftRight className="h-4 w-4 text-blue-500" />
@@ -443,7 +443,7 @@ export default function WarehouseBIView() {
         </div>
 
         {/* Insights */}
-        <Card className="border-indigo-100 dark:border-indigo-900/40">
+        <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <Brain className="h-4 w-4 text-indigo-500" />
@@ -516,7 +516,7 @@ export default function WarehouseBIView() {
         {/* Charts Row */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Multi-metric comparison */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <BarChart3 className="h-4 w-4 text-indigo-500" />
@@ -541,7 +541,7 @@ export default function WarehouseBIView() {
           </Card>
 
           {/* Radar chart - top 4 warehouses */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <Layers className="h-4 w-4 text-teal-500" />
@@ -567,7 +567,7 @@ export default function WarehouseBIView() {
         </div>
 
         {/* Performance Grade Distribution */}
-        <Card className="border-indigo-100 dark:border-indigo-900/40">
+        <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <Award className="h-4 w-4 text-amber-500" />
@@ -681,7 +681,7 @@ export default function WarehouseBIView() {
         </div>
 
         {/* Dimension Weights PieChart */}
-        <Card className="border-indigo-100 dark:border-indigo-900/40">
+        <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <PieIcon className="h-4 w-4 text-purple-500" />
@@ -704,7 +704,7 @@ export default function WarehouseBIView() {
         </Card>
 
         {/* Metric trend line chart */}
-        <Card className="border-indigo-100 dark:border-indigo-900/40">
+        <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <LineIcon className="h-4 w-4 text-blue-500" />
@@ -759,7 +759,7 @@ export default function WarehouseBIView() {
         {/* Charts */}
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Cost Breakdown PieChart */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <PieIcon className="h-4 w-4 text-indigo-500" />
@@ -782,7 +782,7 @@ export default function WarehouseBIView() {
           </Card>
 
           {/* Monthly Revenue, Cost, Profit */}
-          <Card className="border-indigo-100 dark:border-indigo-900/40">
+          <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center gap-2 text-sm font-semibold">
                 <BarChart3 className="h-4 w-4 text-teal-500" />
@@ -806,7 +806,7 @@ export default function WarehouseBIView() {
         </div>
 
         {/* Cost Category Table */}
-        <Card className="border-indigo-100 dark:border-indigo-900/40">
+        <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <FileText className="h-4 w-4 text-amber-500" />
@@ -916,7 +916,7 @@ export default function WarehouseBIView() {
         </div>
 
         {/* Performance Trend */}
-        <Card className="border-indigo-100 dark:border-indigo-900/40">
+        <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <Activity className="h-4 w-4 text-indigo-500" />
@@ -942,7 +942,7 @@ export default function WarehouseBIView() {
         </Card>
 
         {/* Alerts */}
-        <Card className="border-indigo-100 dark:border-indigo-900/40">
+        <Card className="hover-lift-sm border-indigo-100 dark:border-indigo-900/40">
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-sm font-semibold">
               <Megaphone className="h-4 w-4 text-amber-500" />
@@ -972,16 +972,16 @@ export default function WarehouseBIView() {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-2">
-          <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700 gap-1">
+          <Button size="sm" className="press-scale bg-indigo-600 text-white hover:bg-indigo-700 gap-1">
             <Download className="h-3.5 w-3.5" /> Export Report
           </Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
             <RefreshCw className="h-3.5 w-3.5" /> Refresh Data
           </Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
             <Settings className="h-3.5 w-3.5" /> Configure KPIs
           </Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
             <FileText className="h-3.5 w-3.5" /> Schedule Report
           </Button>
         </div>
@@ -1110,13 +1110,13 @@ export default function WarehouseBIView() {
             <div className="wabi-drawer-section">
               <div className="wabi-drawer-section-title">Quick Actions</div>
               <div className="flex flex-wrap gap-2">
-                <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700 gap-1">
+                <Button size="sm" className="press-scale bg-indigo-600 text-white hover:bg-indigo-700 gap-1">
                   <BarChart3 className="h-3.5 w-3.5" /> Full Report
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <Download className="h-3.5 w-3.5" /> Export PDF
                 </Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate gap-1">
                   <RefreshCw className="h-3.5 w-3.5" /> Compare
                 </Button>
               </div>

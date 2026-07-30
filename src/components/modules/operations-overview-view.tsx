@@ -282,8 +282,8 @@ export function OperationsOverviewView() {
       {/* ── Executive KPI Cards ── */}
       <div className="grid gap-3 grid-cols-2 md:grid-cols-4 xl:grid-cols-4 stagger-children">
         {executiveKPIs.map((kpi) => (
-          <Card key={kpi.title} className="card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
-            <CardContent className="glass-subtle p-4">
+          <Card key={kpi.title} className="hover-lift-sm card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
+            <CardContent className="inner-glow glass-subtle p-4">
               <div className="flex items-start justify-between">
                 <div className="space-y-1">
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{kpi.title}</p>
@@ -316,7 +316,7 @@ export function OperationsOverviewView() {
       <div className="grid gap-4 lg:grid-cols-3">
 
         {/* Throughput Chart */}
-        <Card className="card-accent-blue card-shine rounded-xl border-border/60 shadow-sm lg:col-span-2">
+        <Card className="hover-lift-sm card-accent-blue card-shine rounded-xl border-border/60 shadow-sm lg:col-span-2">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
               <Activity className="h-4 w-4 text-muted-foreground" />
@@ -342,7 +342,7 @@ export function OperationsOverviewView() {
         {/* Right Column */}
         <div className="space-y-4">
           {/* Health Distribution */}
-          <Card className="card-shine rounded-xl border-border/60 shadow-sm">
+          <Card className="hover-lift-sm card-shine rounded-xl border-border/60 shadow-sm">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-semibold flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-muted-foreground" />
@@ -366,14 +366,14 @@ export function OperationsOverviewView() {
           </Card>
 
           {/* Top Issues */}
-          <Card className="card-depth rounded-xl border-border/60 shadow-sm">
+          <Card className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-semibold flex items-center gap-2">
                 <AlertTriangle className="h-4 w-4 text-red-500" />
                 Top Issues
               </CardTitle>
             </CardHeader>
-            <CardContent className="glass-subtle space-y-2">
+            <CardContent className="inner-glow glass-subtle space-y-2">
               {topIssues.map((issue) => (
                 <div key={issue.id} className={cn(
                   "flex items-start gap-2.5 rounded-lg border p-2.5 text-xs transition-colors hover:bg-muted/40",
@@ -411,7 +411,7 @@ export function OperationsOverviewView() {
       <div className="grid gap-4 lg:grid-cols-3">
 
         {/* Cost Trend */}
-        <Card className="card-accent-amber card-shine rounded-xl border-border/60 shadow-sm">
+        <Card className="hover-lift-sm card-accent-amber card-shine rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
               <BarChart3 className="h-4 w-4 text-muted-foreground" />
@@ -439,7 +439,7 @@ export function OperationsOverviewView() {
         </Card>
 
         {/* Active Shipments Table */}
-        <Card className="card-depth rounded-xl border-border/60 shadow-sm lg:col-span-2">
+        <Card className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm lg:col-span-2">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
               <Truck className="h-4 w-4 text-muted-foreground" />
@@ -489,7 +489,7 @@ export function OperationsOverviewView() {
       </div>
 
       {/* ── Warehouse Grid Status ── */}
-      <Card className="card-depth rounded-xl border-border/60 shadow-sm">
+      <Card className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
             <Globe className="h-4 w-4 text-muted-foreground" />

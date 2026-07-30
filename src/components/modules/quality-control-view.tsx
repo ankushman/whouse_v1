@@ -268,8 +268,8 @@ export default function QualityControlView() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {KPIS.map((kpi) => (
-                <Card key={kpi.label} className="qci-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={kpi.label} className="hover-lift-sm qci-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 qci-kpi-icon" />
                       <span className={cn("qci-trend-badge", kpi.trend === "up" ? "qci-trend-up" : "qci-trend-down")}>
@@ -285,7 +285,7 @@ export default function QualityControlView() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Inspection Volume by Type</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -304,7 +304,7 @@ export default function QualityControlView() {
                 </CardContent>
               </Card>
 
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Defect Rate Trend</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -321,7 +321,7 @@ export default function QualityControlView() {
                 </CardContent>
               </Card>
 
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Inspection Type Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -337,7 +337,7 @@ export default function QualityControlView() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Warehouse Quality Overview</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -355,7 +355,7 @@ export default function QualityControlView() {
                 </CardContent>
               </Card>
 
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Defect Severity Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -370,7 +370,7 @@ export default function QualityControlView() {
               </Card>
             </div>
 
-            <Card className="qci-alert-card">
+            <Card className="hover-lift-sm qci-alert-card">
               <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Quality Alerts</CardTitle></CardHeader>
               <CardContent>
                 <div className="space-y-2">
@@ -413,8 +413,8 @@ export default function QualityControlView() {
               {INSPECTION_STATUSES.map((s) => {
                 const cnt = inspections.filter((i) => i.status === s).length
                 return (
-                  <Card key={s} className="qci-stat-mini cursor-pointer" onClick={() => setStatusFilter(s)}>
-                    <CardContent className="glass-subtle p-2 text-center">
+                  <Card key={s} className="hover-lift-sm qci-stat-mini cursor-pointer" onClick={() => setStatusFilter(s)}>
+                    <CardContent className="inner-glow glass-subtle p-2 text-center">
                       <div className="text-sm font-bold">{cnt}</div>
                       <div className="text-[9px] opacity-60 truncate">{s}</div>
                     </CardContent>
@@ -423,8 +423,8 @@ export default function QualityControlView() {
               })}
             </div>
 
-            <Card className="card-crud-lift qci-table-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift qci-table-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -495,7 +495,7 @@ export default function QualityControlView() {
                 { label: "Resolved", value: String(defects.filter((d) => d.status === "Resolved" || d.status === "Closed").length), color: "qci-sum-card-green" },
               ].map((c) => (
                 <Card key={c.label} className={c.color}>
-                  <CardContent className="glass-subtle p-3 text-center">
+                  <CardContent className="inner-glow glass-subtle p-3 text-center">
                     <div className="text-lg font-bold">{c.value}</div>
                     <div className="text-xs opacity-70">{c.label}</div>
                   </CardContent>
@@ -503,7 +503,7 @@ export default function QualityControlView() {
               ))}
             </div>
 
-            <Card className="qci-chart-card">
+            <Card className="hover-lift-sm qci-chart-card">
               <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Defect Category Breakdown</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={220}>
@@ -517,8 +517,8 @@ export default function QualityControlView() {
               </CardContent>
             </Card>
 
-            <Card className="card-crud-lift qci-table-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift qci-table-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -558,8 +558,8 @@ export default function QualityControlView() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {inspectors.map((insp) => (
-                <Card key={insp.id} className="qci-inspector-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={insp.id} className="hover-lift-sm qci-inspector-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="qci-inspector-avatar">{insp.avatar}</div>
@@ -582,7 +582,7 @@ export default function QualityControlView() {
               ))}
             </div>
 
-            <Card className="qci-chart-card">
+            <Card className="hover-lift-sm qci-chart-card">
               <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Sampling Plans Overview</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={220}>
@@ -597,7 +597,7 @@ export default function QualityControlView() {
               </CardContent>
             </Card>
 
-            <Card className="qci-chart-card">
+            <Card className="hover-lift-sm qci-chart-card">
               <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Standards Reference</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={220}>
@@ -623,8 +623,8 @@ export default function QualityControlView() {
                 { label: "First Pass Yield", value: `${rInt(88, 98)}%`, sub: "All inspection types" },
                 { label: "Inspector Utilization", value: `${rInt(70, 92)}%`, sub: "Productive hours" },
               ].map((k) => (
-                <Card key={k.label} className="qci-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={k.label} className="hover-lift-sm qci-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="qci-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="qci-kpi-label text-xs">{k.label}</div>
                     <div className="qci-kpi-sub text-xs">{k.sub}</div>
@@ -634,7 +634,7 @@ export default function QualityControlView() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Quality Score by Warehouse</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -649,7 +649,7 @@ export default function QualityControlView() {
                 </CardContent>
               </Card>
 
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Defect Pareto (Top Categories)</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -671,7 +671,7 @@ export default function QualityControlView() {
                 </CardContent>
               </Card>
 
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Inspector Performance</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -686,7 +686,7 @@ export default function QualityControlView() {
                 </CardContent>
               </Card>
 
-              <Card className="qci-chart-card">
+              <Card className="hover-lift-sm qci-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="qci-chart-title text-sm">Root Cause Analysis</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -727,7 +727,7 @@ export default function QualityControlView() {
                     <p className="text-sm opacity-80">{selectedInsp.productName}</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="text-white/70 hover:text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="press-scale text-white/70 hover:text-white hover:bg-white/10">
                   <X className="h-5 w-5" />
                 </Button>
               </div>

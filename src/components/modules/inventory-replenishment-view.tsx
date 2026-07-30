@@ -863,7 +863,7 @@ export function InventoryReplenishmentView() {
 
       {/* Charts row 1 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <Card className="lg:col-span-2 mrp-chart-enter">
+        <Card className="hover-lift-sm lg:col-span-2 mrp-chart-enter">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <TrendingUp className="h-4 w-4 text-blue-500" />
@@ -896,7 +896,7 @@ export function InventoryReplenishmentView() {
           </CardContent>
         </Card>
 
-        <Card className="mrp-chart-enter">
+        <Card className="hover-lift-sm mrp-chart-enter">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <Activity className="h-4 w-4 text-violet-500" />
@@ -932,7 +932,7 @@ export function InventoryReplenishmentView() {
 
       {/* Charts row 2 */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <Card className="mrp-chart-enter">
+        <Card className="hover-lift-sm mrp-chart-enter">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <Layers className="h-4 w-4 text-amber-500" />
@@ -956,7 +956,7 @@ export function InventoryReplenishmentView() {
           </CardContent>
         </Card>
 
-        <Card className="mrp-chart-enter">
+        <Card className="hover-lift-sm mrp-chart-enter">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <IndianRupee className="h-4 w-4 text-emerald-500" />
@@ -981,7 +981,7 @@ export function InventoryReplenishmentView() {
           </CardContent>
         </Card>
 
-        <Card className="mrp-chart-enter">
+        <Card className="hover-lift-sm mrp-chart-enter">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <Clock className="h-4 w-4 text-cyan-500" />
@@ -1077,8 +1077,8 @@ export function InventoryReplenishmentView() {
       </div>
 
       {/* Master Table */}
-      <Card className="card-crud-lift mrp-table-card">
-        <CardContent className="glass-subtle p-0">
+      <Card className="hover-lift-sm card-crud-lift mrp-table-card">
+        <CardContent className="inner-glow glass-subtle p-0">
           <div className="overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1266,7 +1266,7 @@ function KpiCard({
       {alert && (
         <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-rose-500 animate-pulse" />
       )}
-      <CardContent className="glass-subtle relative p-4">
+      <CardContent className="inner-glow glass-subtle relative p-4">
         <div className="flex items-center justify-between mb-2">
           <div className={cn("flex h-8 w-8 items-center justify-center rounded-lg", iconBg)}>
             <Icon className={cn("h-4 w-4", iconColor)} />
@@ -1477,7 +1477,7 @@ function ReplenishmentDetailDrawer({
 
               {/* Stock level visual */}
               <Card>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="text-xs font-medium text-muted-foreground mb-2">Stock Level Position</div>
                   <div className="relative h-8 rounded-md bg-muted overflow-hidden">
                     {/* safety zone */}
@@ -1507,7 +1507,7 @@ function ReplenishmentDetailDrawer({
               {/* Demand & Supply summary */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <Card>
-                  <CardContent className="glass-subtle p-4">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <h4 className="text-xs font-semibold flex items-center gap-1.5 mb-2">
                       <TrendingDown className="h-3.5 w-3.5 text-rose-500" /> 30-Day Demand
                     </h4>
@@ -1517,7 +1517,7 @@ function ReplenishmentDetailDrawer({
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardContent className="glass-subtle p-4">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <h4 className="text-xs font-semibold flex items-center gap-1.5 mb-2">
                       <TrendingUp className="h-3.5 w-3.5 text-emerald-500" /> 30-Day Supply
                     </h4>
@@ -1545,8 +1545,8 @@ function ReplenishmentDetailDrawer({
               </div>
 
               {/* Notes */}
-              <Card className="bg-amber-50/60 dark:bg-amber-950/20 border-amber-200/60 dark:border-amber-900/40">
-                <CardContent className="glass-subtle p-3">
+              <Card className="hover-lift-sm bg-amber-50/60 dark:bg-amber-950/20 border-amber-200/60 dark:border-amber-900/40">
+                <CardContent className="inner-glow glass-subtle p-3">
                   <div className="text-xs font-semibold text-amber-800 dark:text-amber-300 mb-1 flex items-center gap-1.5">
                     <AlertTriangle className="h-3.5 w-3.5" /> MRP Notes
                   </div>
@@ -1690,7 +1690,7 @@ function ReplenishmentDetailDrawer({
                         tone === "danger" ? "bg-rose-500" : tone === "good" ? "bg-emerald-500" : "bg-blue-500"
                       )} />
                       <Card>
-                        <CardContent className="glass-subtle p-3">
+                        <CardContent className="inner-glow glass-subtle p-3">
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex-1 min-w-0">
                               <div className="text-sm font-semibold capitalize">{lt.stage.replace("-", " ")}</div>
@@ -1727,7 +1727,7 @@ function ReplenishmentDetailDrawer({
                 <ListChecks className="h-4 w-4 text-violet-500" /> MRP Net Change Plan
               </h3>
               <Card>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="text-xs text-muted-foreground mb-2">Planning Horizon</div>
                   <div className="text-sm font-mono">{item.plan.horizon}</div>
                 </CardContent>
@@ -1776,7 +1776,7 @@ function ReplenishmentDetailDrawer({
               </Card>
 
               <Card className={cn(projectedShort ? "bg-rose-50/60 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/40" : "bg-emerald-50/60 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900/40")}>
-                <CardContent className="glass-subtle p-3">
+                <CardContent className="inner-glow glass-subtle p-3">
                   <div className={cn("text-xs font-semibold mb-1 flex items-center gap-1.5", projectedShort ? "text-rose-800 dark:text-rose-300" : "text-emerald-800 dark:text-emerald-300")}>
                     {projectedShort ? <XCircle className="h-3.5 w-3.5" /> : <CheckCircle2 className="h-3.5 w-3.5" />}
                     {projectedShort ? "Projected Shortage" : "Healthy Projection"}
@@ -1816,8 +1816,8 @@ function ReplenishmentDetailDrawer({
                     Eye
                   const TypeIcon = typeIcon
                   return (
-                    <Card key={i} className="mrp-card-enter" style={{ animationDelay: `${i * 80}ms` }}>
-                      <CardContent className="glass-subtle p-4">
+                    <Card key={i} className="hover-lift-sm mrp-card-enter" style={{ animationDelay: `${i * 80}ms` }}>
+                      <CardContent className="inner-glow glass-subtle p-4">
                         <div className="flex items-start gap-3">
                           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 shrink-0">
                             <TypeIcon className="h-4 w-4" />
@@ -1934,8 +1934,8 @@ function InfoCard({
     tone === "good" ? "text-emerald-700 dark:text-emerald-300" :
     ""
   return (
-    <Card className="bg-muted/30">
-      <CardContent className="glass-subtle p-3">
+    <Card className="hover-lift-sm bg-muted/30">
+      <CardContent className="inner-glow glass-subtle p-3">
         <div className="text-[10px] font-medium text-muted-foreground uppercase tracking-wide">{label}</div>
         <div className={cn("text-base font-bold tabular-nums mt-0.5", toneClass)}>{value}</div>
         {sub && <div className="text-[10px] text-muted-foreground/80 mt-0.5">{sub}</div>}
@@ -1956,8 +1956,8 @@ function TraceCard({
   sub: string
 }) {
   return (
-    <Card className="hover:shadow-md transition-shadow">
-      <CardContent className="glass-subtle p-3">
+    <Card className="hover-lift-sm hover:shadow-md transition-shadow">
+      <CardContent className="inner-glow glass-subtle p-3">
         <div className="flex items-center gap-2 mb-1">
           <div className="flex h-7 w-7 items-center justify-center rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400">
             <Icon className="h-3.5 w-3.5" />

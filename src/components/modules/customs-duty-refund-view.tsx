@@ -431,9 +431,9 @@ function ClaimDrawer({ data, fields, toast }: { data: ClaimRecord; fields: { lab
           ))}
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-          <Button size="sm" className="flex-1 bg-amber-600 hover:bg-amber-700 text-white" onClick={() => toast.success("Claim report downloaded")}><Download className="h-4 w-4 mr-1" /> Report</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Escalated to CBIC")}><ArrowRight className="h-4 w-4 mr-1" /> Escalate</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Claim appeal filed")}><RefreshCw className="btn-outline-animate h-4 w-4" /></Button>
+          <Button size="sm" className="press-scale flex-1 bg-amber-600 hover:bg-amber-700 text-white" onClick={() => toast.success("Claim report downloaded")}><Download className="h-4 w-4 mr-1" /> Report</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => toast.success("Escalated to CBIC")}><ArrowRight className="h-4 w-4 mr-1" /> Escalate</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Claim appeal filed")}><RefreshCw className="press-scale btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -478,9 +478,9 @@ function RodtepDrawer({ data, fields, toast }: { data: RoDTEPCredit; fields: { l
           ))}
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-          <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => toast.success("Credit transfer initiated")}><ArrowRight className="h-4 w-4 mr-1" /> Transfer</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Audit scheduled")}><ScanLine className="btn-outline-animate h-4 w-4" /></Button>
+          <Button size="sm" className="press-scale flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => toast.success("Credit transfer initiated")}><ArrowRight className="h-4 w-4 mr-1" /> Transfer</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Audit scheduled")}><ScanLine className="press-scale btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -525,9 +525,9 @@ function IGSTDrawer({ data, fields, toast }: { data: IGSTRefund; fields: { label
           ))}
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-          <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white" onClick={() => toast.success("IGST refund claim updated")}><RefreshCw className="h-4 w-4 mr-1" /> Update</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Tracking initiated")}><Eye className="btn-outline-animate h-4 w-4" /></Button>
+          <Button size="sm" className="press-scale flex-1 bg-blue-600 hover:bg-blue-700 text-white" onClick={() => toast.success("IGST refund claim updated")}><RefreshCw className="h-4 w-4 mr-1" /> Update</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Tracking initiated")}><Eye className="press-scale btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -573,9 +573,9 @@ function BondDrawer({ data, fields, toast }: { data: CustomsBond; fields: { labe
           ))}
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-          <Button size="sm" className="flex-1 bg-rose-600 hover:bg-rose-700 text-white" onClick={() => toast.success("Bond renewed")}><RefreshCw className="h-4 w-4 mr-1" /> Renew</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Obligation discharged")}><CheckCircle2 className="h-4 w-4 mr-1" /> Discharge</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Bond details downloaded")}><Download className="btn-outline-animate h-4 w-4" /></Button>
+          <Button size="sm" className="press-scale flex-1 bg-rose-600 hover:bg-rose-700 text-white" onClick={() => toast.success("Bond renewed")}><RefreshCw className="h-4 w-4 mr-1" /> Renew</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => toast.success("Obligation discharged")}><CheckCircle2 className="h-4 w-4 mr-1" /> Discharge</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Bond details downloaded")}><Download className="press-scale btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -680,8 +680,8 @@ export default function CustomsDutyRefundView() {
         <TabsContent value="0" className="space-y-4 mt-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 cdr-kpi-grid">
             {kpis.map((kpi, i) => (
-              <Card key={i} className="cdr-kpi-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default">
-                <CardContent className="glass-subtle p-4 flex items-center gap-3">
+              <Card key={i} className="hover-lift-sm cdr-kpi-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default">
+                <CardContent className="inner-glow glass-subtle p-4 flex items-center gap-3">
                   <div className={cn("p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800", kpi.color)}><kpi.icon className="h-5 w-5" /></div>
                   <div>
                     <p className="text-2xl font-bold cdr-counter-value">{kpi.value}</p>
@@ -693,7 +693,7 @@ export default function CustomsDutyRefundView() {
             ))}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="cdr-chart-card border-0 shadow-sm">
+            <Card className="hover-lift-sm cdr-chart-card border-0 shadow-sm">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Monthly Refund Pipeline</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
@@ -711,7 +711,7 @@ export default function CustomsDutyRefundView() {
                 </ResponsiveContainer>
               </CardContent>
             </Card>
-            <Card className="cdr-chart-card border-0 shadow-sm">
+            <Card className="hover-lift-sm cdr-chart-card border-0 shadow-sm">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Scheme Approval Rate vs Processing Days</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
@@ -727,7 +727,7 @@ export default function CustomsDutyRefundView() {
                 </ResponsiveContainer>
               </CardContent>
             </Card>
-            <Card className="cdr-chart-card border-0 shadow-sm">
+            <Card className="hover-lift-sm cdr-chart-card border-0 shadow-sm">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">State-wise Refund (₹ Cr)</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
@@ -741,7 +741,7 @@ export default function CustomsDutyRefundView() {
                 </ResponsiveContainer>
               </CardContent>
             </Card>
-            <Card className="cdr-chart-card border-0 shadow-sm">
+            <Card className="hover-lift-sm cdr-chart-card border-0 shadow-sm">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Refund by Product Category</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
@@ -791,7 +791,7 @@ export default function CustomsDutyRefundView() {
                   <td className="px-3 py-2 text-xs">{c.applicant}</td>
                   <td className="px-3 py-2 font-mono text-xs">{c.boeNumber}</td>
                   <td className="px-3 py-2 text-xs">{c.port}</td>
-                  <td className="px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("claim", c)}>View</Button></td>
+                  <td className="press-scale px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("claim", c)}>View</Button></td>
                 </tr>
               ))}</tbody>
             </table>
@@ -823,7 +823,7 @@ export default function CustomsDutyRefundView() {
                   <td className="px-3 py-2 text-xs font-mono">{r.creditEarned}</td>
                   <td className="px-3 py-2 text-xs font-mono">{r.creditBalance}</td>
                   <td className="px-3 py-2"><span className={cn("text-xs font-semibold", r.status === "Active" ? "text-emerald-600" : r.status === "Under Scrutiny" ? "text-amber-600" : "text-red-600")}>{r.status}</span></td>
-                  <td className="px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("rodtep", r)}>View</Button></td>
+                  <td className="press-scale px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("rodtep", r)}>View</Button></td>
                 </tr>
               ))}</tbody>
             </table>
@@ -856,7 +856,7 @@ export default function CustomsDutyRefundView() {
                   <td className="px-3 py-2 text-xs font-mono">{g.pendingAmount}</td>
                   <td className="px-3 py-2"><span className={cn("text-xs font-bold", g.status === "Fully Sanctioned" ? "text-emerald-600" : g.status === "Partially Sanctioned" ? "text-amber-600" : "text-sky-600")}>{g.status}</span></td>
                   <td className="px-3 py-2 text-xs">{g.state}</td>
-                  <td className="px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("igst", g)}>View</Button></td>
+                  <td className="press-scale px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("igst", g)}>View</Button></td>
                 </tr>
               ))}</tbody>
             </table>
@@ -889,7 +889,7 @@ export default function CustomsDutyRefundView() {
                   <td className="px-3 py-2"><span className={cn("text-xs font-semibold", b.status === "Active" ? "text-emerald-600" : b.status === "Expiring Soon" ? "text-amber-600" : b.status === "Expired" ? "text-red-600" : b.status === "Exhausted" ? "text-orange-600" : "text-slate-500")}>{b.status}</span></td>
                   <td className="px-3 py-2 text-xs">{b.importer}</td>
                   <td className="px-3 py-2 text-xs">{b.port}</td>
-                  <td className="px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("bond", b)}>View</Button></td>
+                  <td className="press-scale px-3 py-2 text-center"><Button size="sm" variant="ghost" className="cdr-action-btn h-7 px-2 text-xs" onClick={() => openDrawer("bond", b)}>View</Button></td>
                 </tr>
               ))}</tbody>
             </table>
@@ -900,8 +900,8 @@ export default function CustomsDutyRefundView() {
         <TabsContent value="5" className="space-y-4 mt-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {data.schemeAnalytics.map((sa) => (
-              <Card key={sa.id} className="cdr-scheme-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <CardContent className="glass-subtle p-4">
+              <Card key={sa.id} className="hover-lift-sm cdr-scheme-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-sm">{sa.scheme}</h3>
                     <BadgePercent className="badge-interactive h-5 w-5 text-violet-500" />

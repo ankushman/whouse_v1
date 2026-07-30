@@ -181,8 +181,8 @@ export default function DangerousGoodsHazMatView() {
             { label: "High Risk Items", value: String(highRisk), icon: AlertTriangle, color: "text-orange-600", bg: "bg-orange-50 dark:bg-orange-950/40", sub: `Risk score >= 60` },
             { label: "Total Incidents", value: String(totalIncidents), icon: ShieldAlert, color: "text-rose-600", bg: "bg-rose-50 dark:bg-rose-950/40", sub: "This quarter" },
           ].map(kpi => (
-            <Card key={kpi.label} className="hazmat-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm hazmat-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="hazmat-label">{kpi.label}</p>
@@ -199,7 +199,7 @@ export default function DangerousGoodsHazMatView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><ShieldAlert className="h-4 w-4 text-red-500" />UN Class Distribution</CardTitle>
             </CardHeader>
@@ -218,7 +218,7 @@ export default function DangerousGoodsHazMatView() {
             </CardContent>
           </Card>
 
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><TrendingUp className="h-4 w-4 text-amber-500" />Hazard Category Mix</CardTitle>
             </CardHeader>
@@ -234,7 +234,7 @@ export default function DangerousGoodsHazMatView() {
             </CardContent>
           </Card>
 
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><Flame className="h-4 w-4 text-orange-500" />Incident Trend (Monthly)</CardTitle>
             </CardHeader>
@@ -255,7 +255,7 @@ export default function DangerousGoodsHazMatView() {
             </CardContent>
           </Card>
 
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><ShieldCheck className="h-4 w-4 text-emerald-500" />Compliance Trend</CardTitle>
             </CardHeader>
@@ -324,8 +324,8 @@ export default function DangerousGoodsHazMatView() {
           </select>
         </div>
 
-        <Card className="hazmat-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm hazmat-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="hazmat-table">
                 <thead>
@@ -382,7 +382,7 @@ export default function DangerousGoodsHazMatView() {
                         </td>
                         <td><Badge className={STATUS_COLORS[item.status]}>{item.status}</Badge></td>
                         <td>
-                          <Button size="sm" variant="ghost" className="hazmat-action-btn" onClick={() => openDrawer(item)}>
+                          <Button size="sm" variant="ghost" className="press-scale hazmat-action-btn" onClick={() => openDrawer(item)}>
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
                         </td>
@@ -408,8 +408,8 @@ export default function DangerousGoodsHazMatView() {
             const zonePct = Math.min(Math.round(zItems.length / randInt(30, 60) * 100), 100)
             const zoneColor = critCount > 5 ? "#ef4444" : critCount > 2 ? "#f59e0b" : "#10b981"
             return (
-              <Card key={i} className="hazmat-zone-card border-slate-100 dark:border-slate-800" style={{ borderTopWidth: 3, borderTopColor: zoneColor }}>
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm hazmat-zone-card border-slate-100 dark:border-slate-800" style={{ borderTopWidth: 3, borderTopColor: zoneColor }}>
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <p className="font-semibold text-sm">{zone}</p>
@@ -444,7 +444,7 @@ export default function DangerousGoodsHazMatView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mt-4">
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><MapPin className="h-4 w-4 text-blue-500" />Zone Occupancy</CardTitle>
             </CardHeader>
@@ -462,7 +462,7 @@ export default function DangerousGoodsHazMatView() {
             </CardContent>
           </Card>
 
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><ThermometerSun className="h-4 w-4 text-red-500" />Temperature by Zone</CardTitle>
             </CardHeader>
@@ -498,8 +498,8 @@ export default function DangerousGoodsHazMatView() {
             const completed = inspItems.filter(it => it.status === "Approved").length
             const pending = inspItems.filter(it => it.status === "Pending Inspection").length
             return (
-              <Card key={i} className="hazmat-inspector-card border-slate-100 dark:border-slate-800">
-                <CardContent className="glass-subtle p-4">
+              <Card key={i} className="hover-lift-sm hazmat-inspector-card border-slate-100 dark:border-slate-800">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className={`hazmat-avatar ${insp.avatar}`}>
                       <Users className="h-4 w-4 text-white" />
@@ -530,7 +530,7 @@ export default function DangerousGoodsHazMatView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mt-4">
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><FileText className="h-4 w-4 text-violet-500" />SDS Compliance by Category</CardTitle>
             </CardHeader>
@@ -553,7 +553,7 @@ export default function DangerousGoodsHazMatView() {
             </CardContent>
           </Card>
 
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><Target className="h-4 w-4 text-blue-500" />Risk Score Distribution</CardTitle>
             </CardHeader>
@@ -583,8 +583,8 @@ export default function DangerousGoodsHazMatView() {
             { label: "Near Misses", value: String(monthlyIncidents[6].nearMiss), icon: AlertTriangle, color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-950/40" },
             { label: "Days Since Last", value: `${randInt(5, 45)}`, icon: Clock, color: "text-emerald-600", bg: "bg-emerald-50 dark:bg-emerald-950/40" },
           ].map(kpi => (
-            <Card key={kpi.label} className="hazmat-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm hazmat-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="hazmat-label">{kpi.label}</p>
@@ -600,7 +600,7 @@ export default function DangerousGoodsHazMatView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><TrendingDown className="h-4 w-4 text-red-500" />12-Month Incident Trend</CardTitle>
             </CardHeader>
@@ -620,7 +620,7 @@ export default function DangerousGoodsHazMatView() {
             </CardContent>
           </Card>
 
-          <Card className="hazmat-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm hazmat-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="hazmat-title"><Warehouse className="h-4 w-4 text-blue-500" />Incidents by Warehouse</CardTitle>
             </CardHeader>
@@ -672,8 +672,8 @@ export default function DangerousGoodsHazMatView() {
           <p className="hazmat-subheading">Hazardous materials tracking, compliance monitoring, and safety management</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="btn-outline-animate hazmat-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
-          <Button size="sm" className="hazmat-header-btn-primary"><Plus className="h-3.5 w-3.5" />Register Item</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate hazmat-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
+          <Button size="sm" className="press-scale hazmat-header-btn-primary"><Plus className="h-3.5 w-3.5" />Register Item</Button>
         </div>
       </div>
 
@@ -789,9 +789,9 @@ export default function DangerousGoodsHazMatView() {
               </div>
 
               <div className="hazmat-drawer-actions">
-                <Button className="hazmat-action-primary flex-1"><ClipboardCheck className="h-4 w-4" />Inspect</Button>
-                <Button variant="outline" className="btn-outline-animate hazmat-action-secondary"><FileText className="h-4 w-4" />View SDS</Button>
-                <Button variant="outline" className="btn-outline-animate hazmat-action-secondary text-red-500"><Ban className="h-4 w-4" />Restrict</Button>
+                <Button className="press-scale hazmat-action-primary flex-1"><ClipboardCheck className="h-4 w-4" />Inspect</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate hazmat-action-secondary"><FileText className="h-4 w-4" />View SDS</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate hazmat-action-secondary text-red-500"><Ban className="h-4 w-4" />Restrict</Button>
               </div>
             </div>
           </div>

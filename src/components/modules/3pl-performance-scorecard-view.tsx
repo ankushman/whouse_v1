@@ -278,14 +278,14 @@ export default function ThreePlPerformanceScorecardView() {
         <TabsContent value="0" className="tps-tab-dashboard space-y-4 mt-4">
           <div className="tps-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
             {kpis.map(k => { const Icon = k.icon; return (
-              <Card key={k.label} className="glass-subtle tps-kpi-card"><CardContent className="flex items-center gap-3 p-4">
+              <Card key={k.label} className="inner-glow hover-lift-sm glass-subtle tps-kpi-card"><CardContent className="flex items-center gap-3 p-4">
                 <div className={cn("tps-kpi-icon rounded-lg p-2", k.bg)}><Icon className={cn("h-4 w-4", k.color)} /></div>
                 <div><p className="text-[11px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
               </CardContent></Card>
             )})}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="lg:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Score Trend</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm lg:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Score Trend</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={220}><AreaChart data={monthlyTrend}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} />
                 <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -316,11 +316,11 @@ export default function ThreePlPerformanceScorecardView() {
           <div className="flex flex-wrap gap-2 items-center">
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search partners..." value={search} onChange={e => setSearch(e.target.value)} className="tps-search pl-9 h-9" /></div>
             <div className="flex gap-1">
-              <Button variant={regionFilter === "all" ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setRegionFilter("all")}>All</Button>
-              {REGIONS.map(r => (<Button key={r} variant={regionFilter === r ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setRegionFilter(r)}>{r}</Button>))}
+              <Button variant={regionFilter === "all" ? "default" : "outline"} size="sm" className="press-scale h-8 text-xs" onClick={() => setRegionFilter("all")}>All</Button>
+              {REGIONS.map(r => (<Button key={r} variant={regionFilter === r ? "default" : "outline"} size="sm" className="press-scale h-8 text-xs" onClick={() => setRegionFilter(r)}>{r}</Button>))}
             </div>
           </div>
-          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="inner-glow glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("name")}>Partner <ArrowUpDown className="inline h-3 w-3" /></TableHead>
             <TableHead className="text-xs">Region</TableHead>
             <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("score")}>Score <ArrowUpDown className="inline h-3 w-3" /></TableHead>
@@ -348,8 +348,8 @@ export default function ThreePlPerformanceScorecardView() {
         {/* TAB 2: SLA Compliance */}
         <TabsContent value="2" className="tps-tab-sla space-y-4 mt-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="flex flex-col items-center justify-center"><CardHeader className="pb-0"><CardTitle className="text-sm text-center">Overall SLA Compliance</CardTitle></CardHeader><CardContent><SLAComplianceGauge value={avgSla} /></CardContent></Card>
-            <Card className="lg:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Compliance by Status</CardTitle></CardHeader><CardContent>
+            <Card className="hover-lift-sm flex flex-col items-center justify-center"><CardHeader className="pb-0"><CardTitle className="text-sm text-center">Overall SLA Compliance</CardTitle></CardHeader><CardContent><SLAComplianceGauge value={avgSla} /></CardContent></Card>
+            <Card className="hover-lift-sm lg:col-span-2"><CardHeader className="pb-2"><CardTitle className="text-sm">Compliance by Status</CardTitle></CardHeader><CardContent>
               <ResponsiveContainer width="100%" height={160}><BarChart data={SLA_STATUSES.map(s => ({ status: s, count: slaRecords.filter(r => r.status === s).length }))}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" /><XAxis dataKey="status" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} />
                 <Tooltip /><Bar dataKey="count" name="Records" radius={[4, 4, 0, 0]}>
@@ -358,7 +358,7 @@ export default function ThreePlPerformanceScorecardView() {
               </BarChart></ResponsiveContainer>
             </CardContent></Card>
           </div>
-          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="inner-glow glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="text-xs">Partner</TableHead><TableHead className="text-xs">SLA Type</TableHead><TableHead className="text-xs">Target</TableHead>
             <TableHead className="text-xs">Actual</TableHead><TableHead className="text-xs">Status</TableHead><TableHead className="text-xs">Period</TableHead>
           </TableRow></TableHeader><TableBody>
@@ -393,7 +393,7 @@ export default function ThreePlPerformanceScorecardView() {
               <Bar dataKey="Freight" stackId="a" fill="#4338ca" /><Bar dataKey="Handling" stackId="a" fill="#d97706" /><Bar dataKey="Storage" stackId="a" fill="#059669" /><Bar dataKey="Last Mile" stackId="a" fill="#e11d48" /><Bar dataKey="Returns" stackId="a" fill="#0891b2" />
             </BarChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="inner-glow glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="text-xs">ID</TableHead><TableHead className="text-xs">Month</TableHead><TableHead className="text-xs">Category</TableHead>
             <TableHead className="text-xs">Actual</TableHead><TableHead className="text-xs">Budget</TableHead><TableHead className="text-xs">Variance</TableHead>
           </TableRow></TableHeader><TableBody>
@@ -410,9 +410,9 @@ export default function ThreePlPerformanceScorecardView() {
         {/* TAB 4: Claims & Disputes */}
         <TabsContent value="4" className="tps-tab-claims space-y-4 mt-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {CLAIM_STATUSES.map(s => (<Card key={s}><CardContent className="glass-subtle p-3 text-center"><p className="text-[11px] text-muted-foreground">{s}</p><p className="text-lg font-bold">{claims.filter(c => c.status === s).length}</p></CardContent></Card>))}
+            {CLAIM_STATUSES.map(s => (<Card key={s}><CardContent className="inner-glow hover-lift-sm glass-subtle p-3 text-center"><p className="text-[11px] text-muted-foreground">{s}</p><p className="text-lg font-bold">{claims.filter(c => c.status === s).length}</p></CardContent></Card>))}
           </div>
-          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="inner-glow glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="text-xs">Claim ID</TableHead><TableHead className="text-xs">Partner</TableHead><TableHead className="text-xs">Type</TableHead>
             <TableHead className="text-xs">Severity</TableHead><TableHead className="text-xs">Amount</TableHead><TableHead className="text-xs">Status</TableHead><TableHead className="text-xs">Resolution</TableHead>
           </TableRow></TableHeader><TableBody>
@@ -431,7 +431,7 @@ export default function ThreePlPerformanceScorecardView() {
         <TabsContent value="5" className="tps-tab-analytics space-y-4 mt-4">
           <div className="tps-analytics-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
             {analyticsKpis.map(k => { const Icon = k.icon; return (
-              <Card key={k.label}><CardContent className="glass-subtle flex items-center gap-3 p-4">
+              <Card key={k.label}><CardContent className="inner-glow hover-lift-sm glass-subtle flex items-center gap-3 p-4">
                 <div className={cn("tps-analytics-icon rounded-lg p-2", k.bg)}><Icon className={cn("h-4 w-4", k.color)} /></div>
                 <div><p className="text-[11px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
               </CardContent></Card>
@@ -507,9 +507,9 @@ export default function ThreePlPerformanceScorecardView() {
                 </div>)}
               </div>
               <SheetFooter className="tps-drawer-footer border-t px-4 py-3 flex-row gap-2">
-                <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported to CSV successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
-                <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed with latest metrics")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
-                <Button size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Saved", "Changes saved successfully")}><CheckCircle2 className="h-3 w-3 mr-1" /> Save</Button>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported to CSV successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed with latest metrics")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
+                <Button size="sm" className="press-scale h-8 text-xs flex-1" onClick={() => toast.success("Saved", "Changes saved successfully")}><CheckCircle2 className="h-3 w-3 mr-1" /> Save</Button>
               </SheetFooter>
             </>
           )}

@@ -327,7 +327,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, colorClass, trend, trendV
 }) {
   return (
     <Card className={cn("wave-kpi-card", colorClass)}>
-      <CardContent className="glass-subtle p-4">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div>
             <p className="wave-kpi-label">{title}</p>
@@ -704,7 +704,7 @@ export default function WavePlanningView() {
             {/* Charts Row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
               {/* Wave Strategy Distribution */}
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Wave Strategy Distribution</CardTitle>
                 </CardHeader>
@@ -721,7 +721,7 @@ export default function WavePlanningView() {
               </Card>
 
               {/* Warehouse Wave Performance */}
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Warehouse Wave Performance</CardTitle>
                 </CardHeader>
@@ -741,7 +741,7 @@ export default function WavePlanningView() {
               </Card>
 
               {/* Pick Efficiency Radar */}
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Picking Efficiency Radar</CardTitle>
                 </CardHeader>
@@ -764,7 +764,7 @@ export default function WavePlanningView() {
             {/* Charts Row 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
               {/* Monthly Wave & Fulfillment Trend */}
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Monthly Wave & Fulfillment Trend</CardTitle>
                 </CardHeader>
@@ -786,7 +786,7 @@ export default function WavePlanningView() {
               </Card>
 
               {/* Accuracy & Cycle Time Trend */}
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Accuracy & Cycle Time Trend</CardTitle>
                 </CardHeader>
@@ -809,7 +809,7 @@ export default function WavePlanningView() {
 
             {/* Zone Utilization */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Zone Pick Utilization</CardTitle>
                 </CardHeader>
@@ -829,7 +829,7 @@ export default function WavePlanningView() {
               </Card>
 
               {/* Top Pickers Summary */}
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Top Picker Leaderboard</CardTitle>
                 </CardHeader>
@@ -890,8 +890,8 @@ export default function WavePlanningView() {
             </div>
 
             {/* Wave Table */}
-            <Card className="card-crud-lift wave-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift wave-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -938,7 +938,7 @@ export default function WavePlanningView() {
                           <TableCell className="wave-td"><span className="text-xs">{wave.carrier}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-xs">{wave.createdDate} {wave.createdTime}</span></TableCell>
                           <TableCell className="wave-td">
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setSelectedWave(wave)}>
+                            <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => setSelectedWave(wave)}>
                               <Eye className="h-3.5 w-3.5" />
                             </Button>
                           </TableCell>
@@ -987,8 +987,8 @@ export default function WavePlanningView() {
             </div>
 
             {/* Pick Table */}
-            <Card className="card-crud-lift wave-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift wave-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -1037,7 +1037,7 @@ export default function WavePlanningView() {
                           <TableCell className="wave-td"><span className="text-xs font-mono">{pick.lotNo}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-xs">{pick.expiryDate}</span></TableCell>
                           <TableCell className="wave-td">
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setSelectedPick(pick)}>
+                            <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => setSelectedPick(pick)}>
                               <Eye className="h-3.5 w-3.5" />
                             </Button>
                           </TableCell>
@@ -1072,7 +1072,7 @@ export default function WavePlanningView() {
 
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Packing Status Distribution</CardTitle>
                 </CardHeader>
@@ -1092,7 +1092,7 @@ export default function WavePlanningView() {
                 </CardContent>
               </Card>
 
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Box Type Usage</CardTitle>
                 </CardHeader>
@@ -1111,7 +1111,7 @@ export default function WavePlanningView() {
                 </CardContent>
               </Card>
 
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Station Utilization</CardTitle>
                 </CardHeader>
@@ -1142,8 +1142,8 @@ export default function WavePlanningView() {
             </div>
 
             {/* Packing Table */}
-            <Card className="card-crud-lift wave-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift wave-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -1216,7 +1216,7 @@ export default function WavePlanningView() {
 
             {/* Performance Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Picks per Picker</CardTitle>
                 </CardHeader>
@@ -1233,7 +1233,7 @@ export default function WavePlanningView() {
                 </CardContent>
               </Card>
 
-              <Card className="wave-card">
+              <Card className="hover-lift-sm wave-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="wave-card-title">Accuracy vs Speed</CardTitle>
                 </CardHeader>
@@ -1274,15 +1274,15 @@ export default function WavePlanningView() {
                 { key: "accuracy" as const, label: "Accuracy" },
                 { key: "avgTime" as const, label: "Avg Time" },
               ].map(s => (
-                <Button key={s.key} variant={perfSort === s.key ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setPerfSort(s.key)}>
+                <Button key={s.key} variant={perfSort === s.key ? "default" : "outline"} size="sm" className="press-scale h-8 text-xs" onClick={() => setPerfSort(s.key)}>
                   {s.label}
                 </Button>
               ))}
             </div>
 
             {/* Picker Table */}
-            <Card className="card-crud-lift wave-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift wave-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>

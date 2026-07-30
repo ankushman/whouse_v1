@@ -553,7 +553,7 @@ export function FleetMaintenanceManagementView() {
             {/* Charts Row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
               {/* Vehicle Type Distribution */}
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Truck className="h-4 w-4 text-blue-500" /> Fleet Composition
@@ -572,7 +572,7 @@ export function FleetMaintenanceManagementView() {
               </Card>
 
               {/* Monthly Cost Trend */}
-              <Card className="col-span-2 fm-card">
+              <Card className="hover-lift-sm col-span-2 fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <IndianRupee className="h-4 w-4 text-green-500" /> Monthly Maintenance Cost
@@ -597,7 +597,7 @@ export function FleetMaintenanceManagementView() {
 
             {/* Charts Row 2: Warehouse Fleet + Downtime */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-cyan-500" /> Warehouse Fleet Comparison
@@ -618,7 +618,7 @@ export function FleetMaintenanceManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Timer className="h-4 w-4 text-red-500" /> Downtime by Vehicle Type (Hours)
@@ -642,7 +642,7 @@ export function FleetMaintenanceManagementView() {
 
             {/* Maintenance Type Breakdown + Upcoming Services */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Settings className="h-4 w-4 text-indigo-500" /> Maintenance Type Breakdown
@@ -662,7 +662,7 @@ export function FleetMaintenanceManagementView() {
               </Card>
 
               {/* Upcoming Services */}
-              <Card className="col-span-2 fm-card">
+              <Card className="hover-lift-sm col-span-2 fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-amber-500" /> Upcoming Scheduled Services
@@ -724,8 +724,8 @@ export function FleetMaintenanceManagementView() {
             {/* Vehicle Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
               {filtered.slice(0, 18).map(v => (
-                <Card key={v.id} className="fm-vehicle-card" onClick={() => setSelectedVehicle(v)}>
-                  <CardContent className="glass-subtle p-3">
+                <Card key={v.id} className="hover-lift-sm fm-vehicle-card" onClick={() => setSelectedVehicle(v)}>
+                  <CardContent className="inner-glow glass-subtle p-3">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <div className="fm-vehicle-icon">{VEHICLE_TYPE_ICONS[v.type]}</div>
@@ -781,7 +781,7 @@ export function FleetMaintenanceManagementView() {
 
             {/* Work Orders by Status Chart */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-blue-500" /> WOs by Status
@@ -806,7 +806,7 @@ export function FleetMaintenanceManagementView() {
               </Card>
 
               {/* All Work Orders Table */}
-              <Card className="col-span-2 fm-card">
+              <Card className="hover-lift-sm col-span-2 fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <FileText className="h-4 w-4 text-emerald-500" /> All Work Orders
@@ -870,7 +870,7 @@ export function FleetMaintenanceManagementView() {
 
             {/* Cost by Type + Cost per Warehouse */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-purple-500" /> Cost by Maintenance Type
@@ -891,7 +891,7 @@ export function FleetMaintenanceManagementView() {
                 </CardContent>
               </Card>
 
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <MapPin className="h-4 w-4 text-cyan-500" /> Maintenance Cost by Warehouse
@@ -912,7 +912,7 @@ export function FleetMaintenanceManagementView() {
             </div>
 
             {/* Cost Trend Area Chart */}
-            <Card className="fm-card">
+            <Card className="hover-lift-sm fm-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-green-500" /> Cost Trend — Preventive vs Corrective vs Emergency
@@ -942,7 +942,7 @@ export function FleetMaintenanceManagementView() {
             {/* Utilization & Health Dashboard */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Fleet Health Summary */}
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Activity className="h-4 w-4 text-emerald-500" /> Fleet Health Summary
@@ -976,7 +976,7 @@ export function FleetMaintenanceManagementView() {
               </Card>
 
               {/* Vehicles Requiring Attention */}
-              <Card className="fm-card">
+              <Card className="hover-lift-sm fm-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <AlertTriangle className="h-4 w-4 text-red-500" /> Vehicles Requiring Attention
@@ -1018,7 +1018,7 @@ export function FleetMaintenanceManagementView() {
             </div>
 
             {/* Full Service Schedule Table */}
-            <Card className="fm-card">
+            <Card className="hover-lift-sm fm-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-blue-500" /> Service Schedule Overview

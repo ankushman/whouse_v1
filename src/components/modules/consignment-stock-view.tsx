@@ -350,7 +350,7 @@ export default function ConsignmentStockView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Consumption & Settlement</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Consumption & Settlement</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyConsumption}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip formatter={(v: number) => fmtRupee(v)} /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -360,7 +360,7 @@ export default function ConsignmentStockView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Stock Value Trend</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Stock Value Trend</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><AreaChart data={monthlyStockValue}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip formatter={(v: number) => fmtRupee(v)} /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -372,7 +372,7 @@ export default function ConsignmentStockView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Consignment Value</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Consignment Value</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><BarChart data={warehouseValue} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" /><XAxis type="number" fontSize={11} tickFormatter={(v: number) => `₹${(v / 1000000).toFixed(1)}M`} /><YAxis type="category" dataKey="warehouse" fontSize={10} width={95} />
                     <Tooltip formatter={(v: number) => fmtRupee(v)} /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -382,7 +382,7 @@ export default function ConsignmentStockView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Supplier Distribution (Top 8)</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Supplier Distribution (Top 8)</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={supplierDist} cx="50%" cy="50%" innerRadius={50} outerRadius={85} dataKey="count" nameKey="name" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {supplierDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -392,7 +392,7 @@ export default function ConsignmentStockView() {
               </div>
 
               {/* Top Pending Settlements */}
-              <Card className="card-crud-lift cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertOctagon className="h-4 w-4 text-red-500" />Pending Settlements ({settlements.filter((s) => s.status === "Pending" || s.status === "Overdue").length})</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm card-crud-lift cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertOctagon className="h-4 w-4 text-red-500" />Pending Settlements ({settlements.filter((s) => s.status === "Pending" || s.status === "Overdue").length})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
@@ -432,7 +432,7 @@ export default function ConsignmentStockView() {
           {/* TAB 2: STOCK REGISTER */}
           {activeTab === "stock" && (
             <div className="mt-4 space-y-4">
-              <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-cyan-500" />Filter Consignment Stock</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-cyan-500" />Filter Consignment Stock</CardTitle></CardHeader><CardContent>
                 <div className="flex flex-wrap gap-2 items-center">
                   <div className="relative flex-1 min-w-[180px]">
                     <Search className="h-3.5 w-3.5 absolute left-2.5 top-2.5 text-gray-400" />
@@ -450,7 +450,7 @@ export default function ConsignmentStockView() {
                 </div>
               </CardContent></Card>
 
-              <Card className="card-crud-lift glass-subtle cs-chart-card"><CardContent className="p-0">
+              <Card className="inner-glow hover-lift-sm card-crud-lift glass-subtle cs-chart-card"><CardContent className="p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow className="cs-table-header">
@@ -491,7 +491,7 @@ export default function ConsignmentStockView() {
                           <TableCell className="numeric-cell text-[10px] font-mono">{s.turnoverRate}x</TableCell>
                           <TableCell className="text-[10px] font-mono">{s.daysInWarehouse}d</TableCell>
                           <TableCell>
-                            <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedStock(s) }}>
+                            <Button variant="ghost" size="sm" className="press-scale h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedStock(s) }}>
                               <Eye className="h-3 w-3" />
                             </Button>
                           </TableCell>
@@ -508,7 +508,7 @@ export default function ConsignmentStockView() {
           {activeTab === "agreements" && (
             <div className="mt-4 space-y-4">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Agreement Type Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Agreement Type Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={typeDist} cx="50%" cy="50%" innerRadius={50} outerRadius={85} dataKey="count" nameKey="name" label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {typeDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -516,7 +516,7 @@ export default function ConsignmentStockView() {
                   </PieChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Stock Status Mix</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Stock Status Mix</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={statusDist} cx="50%" cy="50%" innerRadius={45} outerRadius={80} dataKey="count" nameKey="name" label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {statusDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -525,7 +525,7 @@ export default function ConsignmentStockView() {
                 </CardContent></Card>
               </div>
 
-              <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Vendor Consignment Agreements ({agreements.length})</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Vendor Consignment Agreements ({agreements.length})</CardTitle></CardHeader><CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                   {agreements.map((a) => (
                     <div key={a.id} className="cs-agreement-card rounded-lg p-3 border border-gray-200 dark:border-gray-700">
@@ -575,7 +575,7 @@ export default function ConsignmentStockView() {
                 ))}
               </div>
 
-              <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-cyan-500" />Settlement Records ({filteredSettlements.length})</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-cyan-500" />Settlement Records ({filteredSettlements.length})</CardTitle></CardHeader><CardContent>
                 <div className="flex flex-wrap gap-2 mb-3">
                   <select className="cs-filter-select text-xs rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-2 py-1.5" value={settleStatusFilter} onChange={(e) => setSettleStatusFilter(e.target.value)}>
                     <option value="All">All Status</option>
@@ -622,7 +622,7 @@ export default function ConsignmentStockView() {
               </CardContent></Card>
 
               {/* Disputes */}
-              <Card className="card-crud-lift cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-amber-500" />Disputes ({disputes.length})</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm card-crud-lift cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-amber-500" />Disputes ({disputes.length})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
@@ -671,7 +671,7 @@ export default function ConsignmentStockView() {
                   { title: "Damage Rate", val: `${(stockItems.reduce((a, b) => a + b.qtyDamaged, 0) / stockItems.reduce((a, b) => a + b.qtyConsigned, 0) * 100).toFixed(1)}%`, sub: "Consigned qty" },
                   { title: "Settlement Cycle", val: `${rInt(25, 40)}d`, sub: "Avg days to pay" },
                 ].map((s) => (
-                  <Card key={s.title} className="cs-analytics-card rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                  <Card key={s.title} className="hover-lift-sm cs-analytics-card rounded-xl p-4 border border-gray-200 dark:border-gray-700">
                     <div className="text-[10px] font-medium text-gray-500 uppercase">{s.title}</div>
                     <div className="text-xl font-bold text-cyan-700 dark:text-cyan-400 mt-1">{s.val}</div>
                     <div className="text-[9px] text-gray-400">{s.sub}</div>
@@ -680,7 +680,7 @@ export default function ConsignmentStockView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Consumption vs Settlement Trend</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Consumption vs Settlement Trend</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyConsumption}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -690,7 +690,7 @@ export default function ConsignmentStockView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Consignment Value Decomposition</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Consignment Value Decomposition</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><AreaChart data={monthlyStockValue}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -701,7 +701,7 @@ export default function ConsignmentStockView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse-Wise Settlement Summary</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse-Wise Settlement Summary</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><BarChart data={warehouseValue}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" fontSize={10} angle={-20} textAnchor="end" height={50} /><YAxis fontSize={11} />
                     <Tooltip formatter={(v: number) => fmtRupee(v)} /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -711,7 +711,7 @@ export default function ConsignmentStockView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Dispute Breakdown</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Dispute Breakdown</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={(() => {
                       const counts: Record<string, number> = {}
@@ -743,7 +743,7 @@ export default function ConsignmentStockView() {
                     <h3 className="text-base font-bold text-white">{selectedStock.id}</h3>
                     <p className="text-xs text-white/70">{selectedStock.product.name} · {selectedStock.supplier.name}</p>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-white/70 hover:text-white hover:bg-white/10" onClick={() => setSelectedStock(null)}>
+                  <Button variant="ghost" size="sm" className="press-scale text-white/70 hover:text-white hover:bg-white/10" onClick={() => setSelectedStock(null)}>
                     <X className="h-4 w-4" />
                   </Button>
                 </div>

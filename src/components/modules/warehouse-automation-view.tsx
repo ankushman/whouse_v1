@@ -501,7 +501,7 @@ export default function WarehouseAutomationView() {
               { label: "Cost Savings", value: formatINR(costSavings), icon: <IndianRupee className="h-4 w-4 text-orange-500" /> },
             ].map(k => (
               <Card key={k.label}>
-                <CardContent className="glass-subtle p-3 flex items-center gap-3">
+                <CardContent className="inner-glow glass-subtle p-3 flex items-center gap-3">
                   <div className="rounded-lg bg-slate-50 dark:bg-slate-800 p-2">{k.icon}</div>
                   <div><p className="text-[10px] text-slate-500 dark:text-slate-400">{k.label}</p><p className="text-lg font-bold text-slate-800 dark:text-slate-100">{k.value}</p></div>
                 </CardContent>
@@ -592,7 +592,7 @@ export default function WarehouseAutomationView() {
               const color = status === "Active" ? "text-emerald-600" : status === "Idle" ? "text-slate-500" : status === "Charging" ? "text-amber-600" : "text-red-600"
               return (
                 <Card key={status}>
-                  <CardContent className="glass-subtle p-3 flex items-center gap-3">
+                  <CardContent className="inner-glow glass-subtle p-3 flex items-center gap-3">
                     <RobotStatusBadge status={status} />
                     <div><p className="text-[10px] text-slate-500 dark:text-slate-400">{status}</p><p className={cn("text-lg font-bold", color)}>{count}</p></div>
                   </CardContent>
@@ -610,7 +610,7 @@ export default function WarehouseAutomationView() {
             {filteredRobots.map(r => <RobotCard key={r.id} robot={r as unknown as typeof data.robots[0]} onClick={() => openSheet(r as unknown as typeof data.robots[0])} />)}
           </div>
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead><tr className="border-b bg-slate-50 dark:bg-slate-800 text-left text-xs text-slate-500 dark:text-slate-400">
@@ -642,7 +642,7 @@ export default function WarehouseAutomationView() {
             <Select value={taskTypeFilter} onValueChange={setTaskTypeFilter}><SelectTrigger className="w-[160px] h-9 text-sm"><SelectValue placeholder="Type" /></SelectTrigger><SelectContent>{data.TASK_TYPES.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent></Select>
           </div>
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead><tr className="border-b bg-slate-50 dark:bg-slate-800 text-left text-xs text-slate-500 dark:text-slate-400">
@@ -677,7 +677,7 @@ export default function WarehouseAutomationView() {
               { label: "Auto-recovered", value: data.errors.filter(e => e.resolution === "Auto-recovered").length, color: "text-emerald-600 dark:text-emerald-400" },
               { label: "Avg Downtime (min)", value: Math.round(data.errors.reduce((s, e) => s + e.downtime, 0) / data.errors.length), color: "text-amber-600 dark:text-amber-400" },
             ].map(k => (
-              <Card key={k.label}><CardContent className="glass-subtle p-3"><p className="text-[10px] text-slate-500 dark:text-slate-400">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
+              <Card key={k.label}><CardContent className="inner-glow hover-lift-sm glass-subtle p-3"><p className="text-[10px] text-slate-500 dark:text-slate-400">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -685,7 +685,7 @@ export default function WarehouseAutomationView() {
             <Select value={errSeverityFilter} onValueChange={setErrSeverityFilter}><SelectTrigger className="w-[130px] h-9 text-sm"><SelectValue placeholder="Severity" /></SelectTrigger><SelectContent>{data.SEVERITIES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead><tr className="border-b bg-slate-50 dark:bg-slate-800 text-left text-xs text-slate-500 dark:text-slate-400">
@@ -719,7 +719,7 @@ export default function WarehouseAutomationView() {
               { label: "Overdue", value: data.maintenance.filter(m => m.status === "Overdue").length, color: "text-amber-600 dark:text-amber-400" },
               { label: "Total Cost", value: formatINR(data.maintenance.reduce((s, m) => s + m.cost, 0)), color: "text-rose-600 dark:text-rose-400" },
             ].map(k => (
-              <Card key={k.label}><CardContent className="glass-subtle p-3"><p className="text-[10px] text-slate-500 dark:text-slate-400">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
+              <Card key={k.label}><CardContent className="inner-glow hover-lift-sm glass-subtle p-3"><p className="text-[10px] text-slate-500 dark:text-slate-400">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -728,7 +728,7 @@ export default function WarehouseAutomationView() {
             <Select value={maintTypeFilter} onValueChange={setMaintTypeFilter}><SelectTrigger className="w-[160px] h-9 text-sm"><SelectValue placeholder="Type" /></SelectTrigger><SelectContent>{data.MAINT_TYPES.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent></Select>
           </div>
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead><tr className="border-b bg-slate-50 dark:bg-slate-800 text-left text-xs text-slate-500 dark:text-slate-400">
@@ -757,7 +757,7 @@ export default function WarehouseAutomationView() {
         <TabsContent value="5" className="space-y-6 mt-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {analyticsKPIs.map(k => (
-              <Card key={k.label}><CardContent className="glass-subtle p-3"><p className="text-[10px] text-slate-500 dark:text-slate-400">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
+              <Card key={k.label}><CardContent className="inner-glow hover-lift-sm glass-subtle p-3"><p className="text-[10px] text-slate-500 dark:text-slate-400">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
             ))}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -888,13 +888,13 @@ export default function WarehouseAutomationView() {
                   </div>
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" className="flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => { toast.success("Dispatched", `${sheetRobot.id} dispatched successfully`); setSheetOpen(false) }}>
+                  <Button size="sm" className="press-scale flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => { toast.success("Dispatched", `${sheetRobot.id} dispatched successfully`); setSheetOpen(false) }}>
                     <Play className="h-3.5 w-3.5 mr-1" />Dispatch
                   </Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Charging", `${sheetRobot.id} sent to charging station`) }}>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Charging", `${sheetRobot.id} sent to charging station`) }}>
                     <Zap className="h-3.5 w-3.5 mr-1" />Charge
                   </Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Maintenance", `${sheetRobot.id} flagged for maintenance`) }}>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.warning("Maintenance", `${sheetRobot.id} flagged for maintenance`) }}>
                     <Wrench className="h-3.5 w-3.5 mr-1" />Maintain
                   </Button>
                 </div>

@@ -684,7 +684,7 @@ export default function SerialNumberTrackingView() {
             ))}
 
             {/* Status Distribution Pie */}
-            <Card className="sn-chart-card sn-stagger-7">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-7">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: THEME.primary }}>
@@ -708,7 +708,7 @@ export default function SerialNumberTrackingView() {
             </Card>
 
             {/* Scan Volume Trend */}
-            <Card className="sn-chart-card sn-stagger-8">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-8">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: THEME.secondary }}>
@@ -741,7 +741,7 @@ export default function SerialNumberTrackingView() {
             </Card>
 
             {/* Scan Method Distribution */}
-            <Card className="sn-chart-card sn-stagger-9">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-9">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: THEME.accent }}>
@@ -765,7 +765,7 @@ export default function SerialNumberTrackingView() {
             </Card>
 
             {/* Warehouse Scan Radar */}
-            <Card className="sn-chart-card sn-stagger-10">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-10">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: "#8b5cf6" }}>
@@ -790,7 +790,7 @@ export default function SerialNumberTrackingView() {
             </Card>
 
             {/* Category Distribution */}
-            <Card className="sn-chart-card sn-stagger-11">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-11">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: "#ec4899" }}>
@@ -814,7 +814,7 @@ export default function SerialNumberTrackingView() {
             </Card>
 
             {/* Compliance by Category Bar */}
-            <Card className="sn-chart-card sn-stagger-12">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-12">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: "#14b8a6" }}>
@@ -942,7 +942,7 @@ export default function SerialNumberTrackingView() {
                           </span>
                         </td>
                         <td>
-                          <Button size="sm" variant="outline" className="btn-outline-animate sn-action-btn" onClick={() => openDrawer(s)}>
+                          <Button size="sm" variant="outline" className="press-scale btn-outline-animate sn-action-btn" onClick={() => openDrawer(s)}>
                             <Eye className="w-3.5 h-3.5" />
                           </Button>
                         </td>
@@ -959,7 +959,7 @@ export default function SerialNumberTrackingView() {
         {activeTab === 2 && (
           <div className="sn-activity-section">
             {/* Event Type Distribution */}
-            <Card className="sn-chart-card sn-stagger-1">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-1">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: THEME.primary }}>
@@ -986,7 +986,7 @@ export default function SerialNumberTrackingView() {
             </Card>
 
             {/* Scan Timeline Trend */}
-            <Card className="sn-chart-card sn-stagger-2">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-2">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: THEME.secondary }}>
@@ -1126,7 +1126,7 @@ export default function SerialNumberTrackingView() {
             </div>
 
             {/* Recall Severity Pie */}
-            <Card className="sn-chart-card sn-stagger-7">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-7">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: THEME.danger }}>
@@ -1150,7 +1150,7 @@ export default function SerialNumberTrackingView() {
             </Card>
 
             {/* Recall Recovery Rate Bar */}
-            <Card className="sn-chart-card sn-stagger-8">
+            <Card className="hover-lift-sm sn-chart-card sn-stagger-8">
               <CardHeader className="sn-card-header">
                 <CardTitle className="sn-card-title">
                   <span className="sn-chart-title-icon" style={{ background: THEME.success }}>

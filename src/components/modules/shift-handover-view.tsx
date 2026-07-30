@@ -180,8 +180,8 @@ export function ShiftHandoverView() {
         {shiftSummary.map((stat) => {
           const Icon = stat.icon
           return (
-            <Card key={stat.label} className="handover-kpi-card kpi-card-tilt overflow-hidden">
-              <CardContent className="glass-subtle p-3">
+            <Card key={stat.label} className="hover-lift-sm handover-kpi-card kpi-card-tilt overflow-hidden">
+              <CardContent className="inner-glow glass-subtle p-3">
                 <div className="flex items-center justify-between">
                   <div className="h-7 w-7 rounded-md bg-primary/10 flex items-center justify-center">
                     <Icon className={cn("h-3.5 w-3.5", stat.color)} />
@@ -197,7 +197,7 @@ export function ShiftHandoverView() {
 
       <div className="grid gap-4 lg:grid-cols-3">
         {/* Left: Checklist */}
-        <Card className="lg:col-span-2">
+        <Card className="hover-lift-sm lg:col-span-2">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -211,7 +211,7 @@ export function ShiftHandoverView() {
             </div>
             <CardDescription>Toggle each task to cycle: pending → in-progress → done</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-2">
+          <CardContent className="inner-glow glass-subtle space-y-2">
             {handoverTasks.map((task, index) => {
               const status = taskStates[task.id]
               const isDone = status === "done"
@@ -270,7 +270,7 @@ export function ShiftHandoverView() {
               Handover Details
             </CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-3 text-sm">
+          <CardContent className="inner-glow glass-subtle space-y-3 text-sm">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <div className="text-[10px] uppercase text-muted-foreground">Outgoing Shift</div>
@@ -413,7 +413,7 @@ export function ShiftHandoverView() {
         "handover-finalize-card transition-all",
         canComplete && "border-primary/40 bg-primary/[0.02] handover-finalize-ready"
       )}>
-        <CardContent className="glass-subtle p-4 flex items-center justify-between gap-4">
+        <CardContent className="inner-glow glass-subtle p-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className={cn(
               "h-10 w-10 rounded-lg flex items-center justify-center",

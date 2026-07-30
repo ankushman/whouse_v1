@@ -724,7 +724,7 @@ export default function SupplierRiskManagementView() {
 
           <div className="srm-chart-grid">
             {/* Monthly Trend ComposedChart */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Monthly Risk Trend</CardTitle>
                 <CardDescription>Risk volume and score over 12 months</CardDescription>
@@ -748,7 +748,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Risk Category Distribution PieChart */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Risk by Category</CardTitle>
                 <CardDescription>Distribution across risk types</CardDescription>
@@ -767,7 +767,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Risk Level Distribution */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Risk Level Distribution</CardTitle>
                 <CardDescription>Critical / High / Medium / Low breakdown</CardDescription>
@@ -788,7 +788,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Supplier Risk Heatmap */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Top 10 Supplier Risk Matrix</CardTitle>
                 <CardDescription>Score intensity by risk category</CardDescription>
@@ -816,7 +816,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Top 10 Risks Horizontal Bar */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Top 10 Highest Risk Items</CardTitle>
                 <CardDescription>By composite risk score</CardDescription>
@@ -837,7 +837,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Mitigation Status Pie */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Mitigation Status</CardTitle>
                 <CardDescription>Current plan status distribution</CardDescription>
@@ -856,7 +856,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Warehouse Exposure */}
-            <Card className="srm-chart-card srm-chart-full">
+            <Card className="hover-lift-sm srm-chart-card srm-chart-full">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Warehouse Risk Exposure</CardTitle>
                 <CardDescription>Exposure (₹L) and risk count by warehouse</CardDescription>
@@ -913,7 +913,7 @@ export default function SupplierRiskManagementView() {
                   {WAREHOUSES.map((w) => <SelectItem key={w} value={w}>{w}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredRiskRegister, "risk-register")} className="btn-outline-animate srm-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredRiskRegister, "risk-register")} className="press-scale btn-outline-animate srm-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -965,7 +965,7 @@ export default function SupplierRiskManagementView() {
                       </span>
                     </TableCell>
                     <TableCell>
-                      <Button variant="ghost" size="sm" className="srm-view-btn" onClick={() => openDrawer("risk", r)}>
+                      <Button variant="ghost" size="sm" className="press-scale srm-view-btn" onClick={() => openDrawer("risk", r)}>
                         <Eye className="h-3.5 w-3.5" /> View
                       </Button>
                     </TableCell>
@@ -1004,7 +1004,7 @@ export default function SupplierRiskManagementView() {
                   {WAREHOUSES.map((w) => <SelectItem key={w} value={w}>{w}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredAssessments, "risk-assessments")} className="btn-outline-animate srm-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredAssessments, "risk-assessments")} className="press-scale btn-outline-animate srm-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -1055,7 +1055,7 @@ export default function SupplierRiskManagementView() {
                       </span>
                     </TableCell>
                     <TableCell>
-                      <Button variant="ghost" size="sm" className="srm-view-btn" onClick={() => openDrawer("assessment", a)}>
+                      <Button variant="ghost" size="sm" className="press-scale srm-view-btn" onClick={() => openDrawer("assessment", a)}>
                         <Eye className="h-3.5 w-3.5" /> View
                       </Button>
                     </TableCell>
@@ -1094,7 +1094,7 @@ export default function SupplierRiskManagementView() {
                   {RISK_LEVELS.map((l) => <SelectItem key={l} value={l}>{l}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredMitigations, "mitigation-plans")} className="btn-outline-animate srm-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredMitigations, "mitigation-plans")} className="press-scale btn-outline-animate srm-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -1146,7 +1146,7 @@ export default function SupplierRiskManagementView() {
                       <span className="text-xs text-muted-foreground"> / {formatINR(m.budgetSpent)} spent</span>
                     </TableCell>
                     <TableCell>
-                      <Button variant="ghost" size="sm" className="srm-view-btn" onClick={() => openDrawer("mitigation", m)}>
+                      <Button variant="ghost" size="sm" className="press-scale srm-view-btn" onClick={() => openDrawer("mitigation", m)}>
                         <Eye className="h-3.5 w-3.5" /> View
                       </Button>
                     </TableCell>
@@ -1185,7 +1185,7 @@ export default function SupplierRiskManagementView() {
                   {WAREHOUSES.map((w) => <SelectItem key={w} value={w}>{w}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredWatchlist, "supplier-watchlist")} className="btn-outline-animate srm-export-btn">
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredWatchlist, "supplier-watchlist")} className="press-scale btn-outline-animate srm-export-btn">
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
             </div>
@@ -1194,7 +1194,7 @@ export default function SupplierRiskManagementView() {
           {/* Watchlist cards */}
           <div className="srm-watchlist-grid">
             {filteredWatchlist.map((w) => (
-              <Card key={w.id} className="srm-watch-card" onClick={() => openDrawer("watchlist", w)}>
+              <Card key={w.id} className="hover-lift-sm srm-watch-card" onClick={() => openDrawer("watchlist", w)}>
                 <CardHeader className="srm-watch-header">
                   <div className="srm-watch-header-top">
                     <div className="flex items-center gap-2">
@@ -1284,7 +1284,7 @@ export default function SupplierRiskManagementView() {
 
           <div className="srm-chart-grid">
             {/* Financial Exposure Trend */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Financial Exposure Trend</CardTitle>
                 <CardDescription>Monthly exposure, breach cost, and loss tracking</CardDescription>
@@ -1306,7 +1306,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Risk Velocity */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Risk Velocity</CardTitle>
                 <CardDescription>New vs mitigated risks per month</CardDescription>
@@ -1328,7 +1328,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Category Risk Analysis */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Category Risk Analysis</CardTitle>
                 <CardDescription>Average score and critical count by category</CardDescription>
@@ -1350,7 +1350,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Radar: Risk Dimension Profile */}
-            <Card className="srm-chart-card">
+            <Card className="hover-lift-sm srm-chart-card">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Risk Dimension Profile</CardTitle>
                 <CardDescription>Top 5 supplier risk assessment averages</CardDescription>
@@ -1379,7 +1379,7 @@ export default function SupplierRiskManagementView() {
             </Card>
 
             {/* Avg Risk Score Trend */}
-            <Card className="srm-chart-card srm-chart-full">
+            <Card className="hover-lift-sm srm-chart-card srm-chart-full">
               <CardHeader className="srm-chart-header">
                 <CardTitle className="srm-chart-title">Average Risk Score Trend</CardTitle>
                 <CardDescription>Monthly average score and risk velocity</CardDescription>
@@ -1450,9 +1450,9 @@ export default function SupplierRiskManagementView() {
             ]} />
           </div>
           <SheetFooter className="srm-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Reassess</Button>
-            <Button size="sm" variant="outline"><ShieldCheck className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Create Mitigation</Button>
-            <Button size="sm" className="srm-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Escalate</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Reassess</Button>
+            <Button size="sm" variant="outline"><ShieldCheck className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Create Mitigation</Button>
+            <Button size="sm" className="press-scale srm-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Escalate</Button>
           </SheetFooter>
         </>
       )
@@ -1496,9 +1496,9 @@ export default function SupplierRiskManagementView() {
             ]} />
           </div>
           <SheetFooter className="srm-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Reassess</Button>
-            <Button size="sm" variant="outline"><ShieldCheck className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Generate Report</Button>
-            <Button size="sm" className="srm-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Initiate Mitigation</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Reassess</Button>
+            <Button size="sm" variant="outline"><ShieldCheck className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Generate Report</Button>
+            <Button size="sm" className="press-scale srm-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Initiate Mitigation</Button>
           </SheetFooter>
         </>
       )
@@ -1555,9 +1555,9 @@ export default function SupplierRiskManagementView() {
             </div>
           </div>
           <SheetFooter className="srm-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Update Status</Button>
-            <Button size="sm" variant="outline"><Ban className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Defer</Button>
-            <Button size="sm" className="srm-drawer-primary-btn"><CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Mark Complete</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Update Status</Button>
+            <Button size="sm" variant="outline"><Ban className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Defer</Button>
+            <Button size="sm" className="press-scale srm-drawer-primary-btn"><CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Mark Complete</Button>
           </SheetFooter>
         </>
       )
@@ -1606,9 +1606,9 @@ export default function SupplierRiskManagementView() {
             ]} />
           </div>
           <SheetFooter className="srm-drawer-footer">
-            <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Update Status</Button>
-            <Button size="sm" variant="outline"><Eye className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Full Profile</Button>
-            <Button size="sm" className="srm-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Escalate Now</Button>
+            <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Update Status</Button>
+            <Button size="sm" variant="outline"><Eye className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Full Profile</Button>
+            <Button size="sm" className="press-scale srm-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Escalate Now</Button>
           </SheetFooter>
         </>
       )

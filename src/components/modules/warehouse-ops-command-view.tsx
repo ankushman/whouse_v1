@@ -823,8 +823,8 @@ export default function WarehouseOpsCommandView() {
           {/* KPI Tiles */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {DATA.kpis.map(kpi => (
-              <Card key={kpi.label} className="woc-kpi-card">
-                <CardContent className="glass-subtle p-4 flex items-start gap-3">
+              <Card key={kpi.label} className="hover-lift-sm woc-kpi-card">
+                <CardContent className="inner-glow glass-subtle p-4 flex items-start gap-3">
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `${kpi.color}18`, color: kpi.color }}>
                     <kpi.icon className="h-5 w-5" />
                   </div>
@@ -940,7 +940,7 @@ export default function WarehouseOpsCommandView() {
 
           {/* Table */}
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1001,7 +1001,7 @@ export default function WarehouseOpsCommandView() {
           </Card>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1057,7 +1057,7 @@ export default function WarehouseOpsCommandView() {
           </div>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1113,7 +1113,7 @@ export default function WarehouseOpsCommandView() {
           </div>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1169,7 +1169,7 @@ export default function WarehouseOpsCommandView() {
           </div>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1239,13 +1239,13 @@ export default function WarehouseOpsCommandView() {
                       <div><span className="text-slate-500">Type:</span> <span className="font-medium">{drawerRecord.type}</span></div>
                     </div>
                     <div className="flex gap-2 pt-2 border-t">
-                      <Button size="sm" className="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white" onClick={() => { toast.success("Dock assigned successfully"); setDrawerOpen(false); }}>
+                      <Button size="sm" className="press-scale flex-1 bg-cyan-600 hover:bg-cyan-700 text-white" onClick={() => { toast.success("Dock assigned successfully"); setDrawerOpen(false); }}>
                         <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Assign
                       </Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Dock released"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Dock released"); setDrawerOpen(false); }}>
                         <Package className="h-3.5 w-3.5 mr-1" /> Release
                       </Button>
-                      <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.warning("Dock placed on hold"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="destructive" className="press-scale flex-1" onClick={() => { toast.warning("Dock placed on hold"); setDrawerOpen(false); }}>
                         <AlertTriangle className="h-3.5 w-3.5 mr-1" /> Hold
                       </Button>
                     </div>
@@ -1277,13 +1277,13 @@ export default function WarehouseOpsCommandView() {
                       <div><span className="text-slate-500">Hourly Rate:</span> <span className="font-medium">₹{drawerRecord.hourlyRate}</span></div>
                     </div>
                     <div className="flex gap-2 pt-2 border-t">
-                      <Button size="sm" className="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white" onClick={() => { toast.success("Worker reassigned"); setDrawerOpen(false); }}>
+                      <Button size="sm" className="press-scale flex-1 bg-cyan-600 hover:bg-cyan-700 text-white" onClick={() => { toast.success("Worker reassigned"); setDrawerOpen(false); }}>
                         <Users className="h-3.5 w-3.5 mr-1" /> Reassign
                       </Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Break started"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Break started"); setDrawerOpen(false); }}>
                         <Timer className="h-3.5 w-3.5 mr-1" /> Break
                       </Button>
-                      <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.warning("Worker released"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="destructive" className="press-scale flex-1" onClick={() => { toast.warning("Worker released"); setDrawerOpen(false); }}>
                         <AlertTriangle className="h-3.5 w-3.5 mr-1" /> Release
                       </Button>
                     </div>
@@ -1314,13 +1314,13 @@ export default function WarehouseOpsCommandView() {
                       <div><span className="text-slate-500">Value:</span> <span className="font-medium">{formatINR(drawerRecord.value)}</span></div>
                     </div>
                     <div className="flex gap-2 pt-2 border-t">
-                      <Button size="sm" className="flex-1 bg-orange-600 hover:bg-orange-700 text-white" onClick={() => { toast.success("Receiving started"); setDrawerOpen(false); }}>
+                      <Button size="sm" className="press-scale flex-1 bg-orange-600 hover:bg-orange-700 text-white" onClick={() => { toast.success("Receiving started"); setDrawerOpen(false); }}>
                         <Package className="h-3.5 w-3.5 mr-1" /> Receive
                       </Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Rescheduled"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Rescheduled"); setDrawerOpen(false); }}>
                         <Clock className="h-3.5 w-3.5 mr-1" /> Reschedule
                       </Button>
-                      <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.error("Shipment rejected"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="destructive" className="press-scale flex-1" onClick={() => { toast.error("Shipment rejected"); setDrawerOpen(false); }}>
                         <XCircle className="h-3.5 w-3.5 mr-1" /> Reject
                       </Button>
                     </div>
@@ -1352,13 +1352,13 @@ export default function WarehouseOpsCommandView() {
                       <div><span className="text-slate-500">Value:</span> <span className="font-medium">{formatINR(drawerRecord.value)}</span></div>
                     </div>
                     <div className="flex gap-2 pt-2 border-t">
-                      <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => { toast.success("Order shipped"); setDrawerOpen(false); }}>
+                      <Button size="sm" className="press-scale flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => { toast.success("Order shipped"); setDrawerOpen(false); }}>
                         <Truck className="h-3.5 w-3.5 mr-1" /> Ship
                       </Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Order held"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.warning("Order held"); setDrawerOpen(false); }}>
                         <AlertTriangle className="h-3.5 w-3.5 mr-1" /> Hold
                       </Button>
-                      <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.info("Priority upgraded"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="destructive" className="press-scale flex-1" onClick={() => { toast.info("Priority upgraded"); setDrawerOpen(false); }}>
                         <ArrowUpRight className="h-3.5 w-3.5 mr-1" /> Priority Up
                       </Button>
                     </div>
@@ -1393,13 +1393,13 @@ export default function WarehouseOpsCommandView() {
                       <div><span className="text-slate-500">Created:</span> <span className="font-medium">{drawerRecord.createdAt}</span></div>
                     </div>
                     <div className="flex gap-2 pt-2 border-t">
-                      <Button size="sm" className="flex-1 bg-sky-600 hover:bg-sky-700 text-white" onClick={() => { toast.info("Exception acknowledged"); setDrawerOpen(false); }}>
+                      <Button size="sm" className="press-scale flex-1 bg-sky-600 hover:bg-sky-700 text-white" onClick={() => { toast.info("Exception acknowledged"); setDrawerOpen(false); }}>
                         <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Acknowledge
                       </Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Exception escalated"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.warning("Exception escalated"); setDrawerOpen(false); }}>
                         <ArrowUpRight className="h-3.5 w-3.5 mr-1" /> Escalate
                       </Button>
-                      <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.success("Exception resolved"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="destructive" className="press-scale flex-1" onClick={() => { toast.success("Exception resolved"); setDrawerOpen(false); }}>
                         <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Resolve
                       </Button>
                     </div>

@@ -304,7 +304,7 @@ export default function TallyIntegrationView() {
 
               {/* Charts Row 1 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Sync Volume & Success</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Sync Volume & Success</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyTrend}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -314,7 +314,7 @@ export default function TallyIntegrationView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Document Type Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Document Type Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={docTypeDist} cx="50%" cy="50%" innerRadius={50} outerRadius={90} dataKey="count" nameKey="type" label={({ type, percent }) => `${type.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {docTypeDist.map((_, i) => <Cell key={i} fill={COLORS_VIOLET[i % COLORS_VIOLET.length]} />)}
@@ -325,7 +325,7 @@ export default function TallyIntegrationView() {
 
               {/* Charts Row 2 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Sync Performance</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Sync Performance</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={220}><BarChart data={warehouseSync}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" fontSize={10} angle={-25} textAnchor="end" height={50} />
                     <YAxis fontSize={11} /><Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -333,7 +333,7 @@ export default function TallyIntegrationView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">GST Rate Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">GST Rate Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={220}><PieChart>
                     <Pie data={gstDist} cx="50%" cy="50%" innerRadius={45} outerRadius={85} dataKey="count" nameKey="rate" label={({ rate, percent }) => `${rate} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {gstDist.map((_, i) => <Cell key={i} fill={COLORS_VIOLET[i % COLORS_VIOLET.length]} />)}
@@ -343,7 +343,7 @@ export default function TallyIntegrationView() {
               </div>
 
               {/* Connection Status Grid */}
-              <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Tally Company Connection Status</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Tally Company Connection Status</CardTitle></CardHeader><CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                   {COMPANIES.map((c) => (
                     <div key={c.id} className={cn("tally-company-card rounded-lg p-3 border", c.status === "Connected" ? "border-emerald-200 dark:border-emerald-800" : c.status === "Syncing" ? "border-cyan-200 dark:border-cyan-800" : "border-red-200 dark:border-red-800")}>
@@ -397,7 +397,7 @@ export default function TallyIntegrationView() {
                       <TableCell className="tabular-nums">{s.syncTime}</TableCell>
                       <TableCell className={cn("tabular-nums", s.attempts > 1 && "text-red-500 font-semibold")}>{s.attempts}</TableCell>
                       <TableCell className="hidden lg:table-cell"><span className="text-red-500 text-[10px] truncate block max-w-[120px]">{s.error || "—"}</span></TableCell>
-                      <TableCell><Button size="sm" variant="ghost" className="h-7 text-[10px]" onClick={() => setSelectedSync(s)}><Eye className="h-3 w-3" /></Button></TableCell>
+                      <TableCell><Button size="sm" variant="ghost" className="press-scale h-7 text-[10px]" onClick={() => setSelectedSync(s)}><Eye className="h-3 w-3" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody></Table>
@@ -427,7 +427,7 @@ export default function TallyIntegrationView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">WH vs Tally Balance</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">WH vs Tally Balance</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={300}><BarChart data={ledgerRecon.slice(0, 12)} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" /><XAxis type="number" fontSize={10} /><YAxis type="category" dataKey="ledger" fontSize={9} width={90} />
                     <Tooltip formatter={(v: number) => fmtRupee(v)} /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -436,7 +436,7 @@ export default function TallyIntegrationView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Discrepancy Breakdown</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Discrepancy Breakdown</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={300}><PieChart>
                     <Pie data={discrepancyDist} cx="50%" cy="50%" innerRadius={50} outerRadius={90} dataKey="count" nameKey="type" label={({ type, percent }) => `${type.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {discrepancyDist.map((_, i) => <Cell key={i} fill={COLORS_VIOLET[i % COLORS_VIOLET.length]} />)}
@@ -461,7 +461,7 @@ export default function TallyIntegrationView() {
                       <TableCell className={cn("tabular-nums", r.variancePct)}>{r.variancePct}%</TableCell>
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", r.status === "Matched" ? "tally-badge-synced" : r.status === "Pending" ? "tally-badge-queued" : "tally-badge-failed")}>{r.status}</Badge></TableCell>
                       <TableCell className="text-gray-500">{r.lastReconciled}</TableCell>
-                      <TableCell><Button size="sm" variant="ghost" className="h-7 text-[10px]"><RefreshCw className="h-3 w-3" /></Button></TableCell>
+                      <TableCell><Button size="sm" variant="ghost" className="press-scale h-7 text-[10px]"><RefreshCw className="h-3 w-3" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody></Table>
@@ -490,7 +490,7 @@ export default function TallyIntegrationView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly GST Liability</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly GST Liability</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={260}><AreaChart data={gstMonthly}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip formatter={(v: number) => fmtRupee(v)} /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -500,7 +500,7 @@ export default function TallyIntegrationView() {
                   </AreaChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">GST Rate-wise Transactions</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">GST Rate-wise Transactions</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={260}><BarChart data={gstRateTx}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="rate" fontSize={10} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -556,7 +556,7 @@ export default function TallyIntegrationView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Error Type Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Error Type Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={errorTypeDist} cx="50%" cy="50%" innerRadius={45} outerRadius={85} dataKey="count" nameKey="type" label={({ type, percent }) => `${type.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {errorTypeDist.map((_, i) => <Cell key={i} fill={COLORS_VIOLET[i % COLORS_VIOLET.length]} />)}
@@ -564,7 +564,7 @@ export default function TallyIntegrationView() {
                   </PieChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Hourly Error Trend</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm tally-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Hourly Error Trend</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={hourlyErrors}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="hour" fontSize={9} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -605,7 +605,7 @@ export default function TallyIntegrationView() {
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", e.status === "Resolved" ? "tally-badge-synced" : e.status === "Escalated" ? "tally-badge-escalated" : "tally-badge-syncing")}>{e.status}</Badge></TableCell>
                       <TableCell className="hidden lg:table-cell text-emerald-600 truncate max-w-[120px]">{e.resolution || "—"}</TableCell>
                       <TableCell className="hidden lg:table-cell tabular-nums">{e.timeToResolve || "—"}</TableCell>
-                      <TableCell><Button size="sm" variant="ghost" className="h-7 text-[10px]"><Eye className="h-3 w-3" /></Button></TableCell>
+                      <TableCell><Button size="sm" variant="ghost" className="press-scale h-7 text-[10px]"><Eye className="h-3 w-3" /></Button></TableCell>
                     </TableRow>
                   ))}
                 </TableBody></Table>
@@ -622,7 +622,7 @@ export default function TallyIntegrationView() {
           <div className="tally-drawer" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold">Sync Detail: {selectedSync.id}</h3>
-              <Button size="sm" variant="ghost" onClick={() => setSelectedSync(null)} className="h-7 w-7 p-0"><X className="h-4 w-4" /></Button>
+              <Button size="sm" variant="ghost" onClick={() => setSelectedSync(null)} className="press-scale h-7 w-7 p-0"><X className="h-4 w-4" /></Button>
             </div>
 
             {/* Status Banner */}

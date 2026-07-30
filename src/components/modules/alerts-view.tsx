@@ -127,7 +127,7 @@ export function AlertsView() {
           { label: "Acknowledged", value: summary.acknowledged, icon: CheckCircle2, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400", glow: "" },
         ].map((item) => (
           <Card key={item.label} className={cn("w-40 shrink-0 md:w-auto md:shrink card-depth rounded-xl border-border/60 shadow-sm hover-scale-sm", item.glow)}>
-            <CardContent className="glass-subtle flex items-center gap-3 p-4">
+            <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>
@@ -191,7 +191,7 @@ export function AlertsView() {
                 isAcknowledged && "opacity-60"
               )}
             >
-              <CardContent className="glass-subtle flex items-start gap-3 p-4">
+              <CardContent className="inner-glow glass-subtle flex items-start gap-3 p-4">
                 <div className={cn("mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg", config.bg)}>
                   <SevIcon className={cn("h-4 w-4", config.color)} />
                 </div>

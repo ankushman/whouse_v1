@@ -378,8 +378,8 @@ export function ReturnsReverseLogisticsView() {
 
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 returns-kpi-enter">
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <RotateCcw className="h-3 w-3" />
@@ -392,8 +392,8 @@ export function ReturnsReverseLogisticsView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Clock className="h-3 w-3" />
@@ -408,8 +408,8 @@ export function ReturnsReverseLogisticsView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <AlertTriangle className="h-3 w-3" />
@@ -429,8 +429,8 @@ export function ReturnsReverseLogisticsView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <DollarSign className="h-3 w-3" />
@@ -442,8 +442,8 @@ export function ReturnsReverseLogisticsView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Recycle className="h-3 w-3" />
@@ -466,8 +466,8 @@ export function ReturnsReverseLogisticsView() {
           </CardContent>
         </Card>
 
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <ClipboardCheck className="h-3 w-3" />
@@ -483,7 +483,7 @@ export function ReturnsReverseLogisticsView() {
       {/* Charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 returns-chart-enter">
         {/* 30-day trend */}
-        <Card className="rounded-xl border-border/60 shadow-sm lg:col-span-2">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm lg:col-span-2">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -498,7 +498,7 @@ export function ReturnsReverseLogisticsView() {
               <Badge variant="outline" className="badge-interactive text-[10px]">last 30 days</Badge>
             </div>
           </CardHeader>
-          <CardContent className="glass-subtle pt-2">
+          <CardContent className="inner-glow glass-subtle pt-2">
             <ChartContainer config={trendChartConfig} className="h-[180px] w-full">
               <AreaChart data={trend} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
                 <defs>
@@ -524,7 +524,7 @@ export function ReturnsReverseLogisticsView() {
         </Card>
 
         {/* Reason breakdown pie */}
-        <Card className="rounded-xl border-border/60 shadow-sm">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-xs font-semibold flex items-center gap-1.5">
               <Filter className="h-3.5 w-3.5" />
@@ -532,7 +532,7 @@ export function ReturnsReverseLogisticsView() {
             </CardTitle>
             <CardDescription className="text-[10px]">distribution by count</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-2">
+          <CardContent className="inner-glow glass-subtle pt-2">
             <ChartContainer config={{}} className="h-[180px] w-full">
               <PieChart>
                 <Pie
@@ -569,7 +569,7 @@ export function ReturnsReverseLogisticsView() {
       </div>
 
       {/* Disposition recovery bar chart */}
-      <Card className="rounded-xl border-border/60 shadow-sm returns-chart-enter">
+      <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm returns-chart-enter">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <div>
@@ -586,7 +586,7 @@ export function ReturnsReverseLogisticsView() {
             </Badge>
           </div>
         </CardHeader>
-        <CardContent className="glass-subtle pt-2">
+        <CardContent className="inner-glow glass-subtle pt-2">
           <ChartContainer config={recoveryChartConfig} className="h-[160px] w-full">
             <BarChart data={dispositionBreakdown} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" strokeOpacity={0.3} vertical={false} />
@@ -619,7 +619,7 @@ export function ReturnsReverseLogisticsView() {
       </Card>
 
       {/* Tabs + Filters + Table */}
-      <Card className="rounded-xl border-border/60 shadow-sm returns-table-enter">
+      <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm returns-table-enter">
         <CardHeader className="pb-2">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -632,11 +632,11 @@ export function ReturnsReverseLogisticsView() {
               </CardDescription>
             </div>
             <div className="flex items-center gap-1.5">
-              <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-xs gap-1" onClick={handleRefresh}>
+              <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-7 text-xs gap-1" onClick={handleRefresh}>
                 <RefreshCw className="h-3 w-3" />
                 Refresh
               </Button>
-              <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-xs gap-1" onClick={handleExport}>
+              <Button size="sm" variant="outline" className="press-scale btn-outline-animate h-7 text-xs gap-1" onClick={handleExport}>
                 <Download className="h-3 w-3" />
                 Export
               </Button>

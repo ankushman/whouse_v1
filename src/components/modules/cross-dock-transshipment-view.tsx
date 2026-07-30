@@ -413,7 +413,7 @@ function KpiCard({ title, value, subtitle, icon, trend, colorClass }: {
 }) {
   return (
     <Card className={`cd-kpi-card ${colorClass}`}>
-      <CardContent className="glass-subtle p-4">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div>
             <p className="cd-kpi-title">{title}</p>
@@ -630,7 +630,7 @@ export default function CrossDockTransshipmentView() {
               icon={<ScanBarcode className="h-5 w-5" />} trend="up" colorClass="cd-kpi--rose" />
 
             {/* Status Pipeline */}
-            <Card className="cd-chart-card cd-chart-card--wide">
+            <Card className="hover-lift-sm cd-chart-card cd-chart-card--wide">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <GitBranch className="h-4 w-4 mr-2" />
@@ -661,7 +661,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Monthly Throughput Trend */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <TrendingUp className="h-4 w-4 mr-2" />
@@ -685,7 +685,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Consolidation Type Distribution */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Layers className="h-4 w-4 mr-2" />
@@ -710,7 +710,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Warehouse Throughput Comparison */}
-            <Card className="cd-chart-card cd-chart-card--wide">
+            <Card className="hover-lift-sm cd-chart-card cd-chart-card--wide">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Warehouse className="h-4 w-4 mr-2" />
@@ -733,7 +733,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Transport Mode Split */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Route className="h-4 w-4 mr-2" />
@@ -758,7 +758,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Priority Distribution */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <AlertOctagon className="h-4 w-4 mr-2" />
@@ -783,7 +783,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Recent Active Transfers */}
-            <Card className="cd-chart-card cd-chart-card--full">
+            <Card className="hover-lift-sm cd-chart-card cd-chart-card--full">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Clock className="h-4 w-4 mr-2" />
@@ -857,8 +857,8 @@ export default function CrossDockTransshipmentView() {
         {activeTab === 1 && (
           <div className="cd-register-layout">
             {/* Filter Bar */}
-            <Card className="cd-filter-card">
-              <CardContent className="glass-subtle p-3">
+            <Card className="hover-lift-sm cd-filter-card">
+              <CardContent className="inner-glow glass-subtle p-3">
                 <div className="cd-filter-bar">
                   <div className="cd-filter-search">
                     <Search className="h-4 w-4 cd-filter-search-icon" />
@@ -899,8 +899,8 @@ export default function CrossDockTransshipmentView() {
             </div>
 
             {/* Shipment Table */}
-            <Card className="cd-table-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm cd-table-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="cd-register-table-wrap">
                   <table className="cd-table cd-table--full">
                     <thead>
@@ -1168,7 +1168,7 @@ export default function CrossDockTransshipmentView() {
         {activeTab === 2 && (
           <div className="cd-dock-layout">
             {/* Dock Slots */}
-            <Card className="cd-dock-card">
+            <Card className="hover-lift-sm cd-dock-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <LayoutGrid className="h-4 w-4 mr-2" />
@@ -1231,7 +1231,7 @@ export default function CrossDockTransshipmentView() {
             </div>
 
             {/* Gate Table */}
-            <Card className="cd-chart-card cd-chart-card--full">
+            <Card className="hover-lift-sm cd-chart-card cd-chart-card--full">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Waypoints className="h-4 w-4 mr-2" />
@@ -1298,7 +1298,7 @@ export default function CrossDockTransshipmentView() {
         {activeTab === 3 && (
           <div className="cd-analytics-layout">
             {/* Hourly Flow */}
-            <Card className="cd-chart-card cd-chart-card--full">
+            <Card className="hover-lift-sm cd-chart-card cd-chart-card--full">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Activity className="h-4 w-4 mr-2" />
@@ -1322,7 +1322,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Monthly OTP & Dwell Trend */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <TrendingUp className="h-4 w-4 mr-2" />
@@ -1346,7 +1346,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Cost per Unit Trend */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <IndianRupee className="h-4 w-4 mr-2" />
@@ -1367,7 +1367,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Dock Throughput Comparison */}
-            <Card className="cd-chart-card cd-chart-card--wide">
+            <Card className="hover-lift-sm cd-chart-card cd-chart-card--wide">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <BarChart3 className="h-4 w-4 mr-2" />
@@ -1390,7 +1390,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Warehouse Performance Radar */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Network className="h-4 w-4 mr-2" />
@@ -1420,7 +1420,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Consolidation Performance */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Layers className="h-4 w-4 mr-2" />
@@ -1445,7 +1445,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Status Pie */}
-            <Card className="cd-chart-card">
+            <Card className="hover-lift-sm cd-chart-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <GitBranch className="h-4 w-4 mr-2" />
@@ -1477,7 +1477,7 @@ export default function CrossDockTransshipmentView() {
         {activeTab === 4 && (
           <div className="cd-scorecard-layout">
             {/* Performance Rings */}
-            <Card className="cd-scorecard-card">
+            <Card className="hover-lift-sm cd-scorecard-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Target className="h-4 w-4 mr-2" />
@@ -1515,7 +1515,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* SLA Compliance Progress Bars */}
-            <Card className="cd-scorecard-card">
+            <Card className="hover-lift-sm cd-scorecard-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <ClipboardList className="h-4 w-4 mr-2" />
@@ -1548,7 +1548,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Key Metrics */}
-            <Card className="cd-scorecard-card">
+            <Card className="hover-lift-sm cd-scorecard-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <BarChart3 className="h-4 w-4 mr-2" />
@@ -1582,7 +1582,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Carrier Performance */}
-            <Card className="cd-scorecard-card">
+            <Card className="hover-lift-sm cd-scorecard-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Truck className="h-4 w-4 mr-2" />
@@ -1623,7 +1623,7 @@ export default function CrossDockTransshipmentView() {
             </Card>
 
             {/* Consolidation Type Success Rates */}
-            <Card className="cd-scorecard-card">
+            <Card className="hover-lift-sm cd-scorecard-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cd-chart-title">
                   <Forklift className="h-4 w-4 mr-2" />

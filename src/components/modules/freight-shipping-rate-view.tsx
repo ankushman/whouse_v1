@@ -202,8 +202,8 @@ export default function FreightShippingRateView() {
             { label: "Total Shipments", value: fmtINR(totalShipments), icon: Package, color: "text-cyan-600", bg: "bg-cyan-50 dark:bg-cyan-950/40", change: randFloat(5, 15) + "% this month" },
             { label: "Damage Rate", value: `${damageRate}%`, icon: AlertTriangle, color: "text-rose-600", bg: "bg-rose-50 dark:bg-rose-950/40", change: parseFloat(damageRate) < 1 ? "Below target" : "Needs attention" },
           ].map(kpi => (
-            <Card key={kpi.label} className="fsr-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm fsr-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="fsr-label">{kpi.label}</p>
@@ -220,7 +220,7 @@ export default function FreightShippingRateView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><TrendingUp className="h-4 w-4 text-blue-500" />Freight Spend by Mode (Monthly)</CardTitle>
             </CardHeader>
@@ -241,7 +241,7 @@ export default function FreightShippingRateView() {
             </CardContent>
           </Card>
 
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><PieChartIcon className="h-4 w-4 text-violet-500" />Freight Mode Distribution</CardTitle>
             </CardHeader>
@@ -257,7 +257,7 @@ export default function FreightShippingRateView() {
             </CardContent>
           </Card>
 
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><Ship className="h-4 w-4 text-emerald-500" />Transit Time Trend (July 2026)</CardTitle>
             </CardHeader>
@@ -276,7 +276,7 @@ export default function FreightShippingRateView() {
             </CardContent>
           </Card>
 
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><Route className="h-4 w-4 text-amber-500" />Zone Cost Comparison</CardTitle>
             </CardHeader>
@@ -343,8 +343,8 @@ export default function FreightShippingRateView() {
           </select>
         </div>
 
-        <Card className="fsr-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm fsr-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="fsr-table">
                 <thead>
@@ -382,7 +382,7 @@ export default function FreightShippingRateView() {
                       <td className="center">{rate.transitDays > 0 ? `${rate.transitDays}d` : "—"}</td>
                       <td><Badge className={STATUS_COLORS[rate.status]}>{rate.status}</Badge></td>
                       <td>
-                        <Button size="sm" variant="ghost" className="fsr-action-btn" onClick={() => openDrawer(rate)}>
+                        <Button size="sm" variant="ghost" className="press-scale fsr-action-btn" onClick={() => openDrawer(rate)}>
                           <Eye className="h-3.5 w-3.5" />
                         </Button>
                       </td>
@@ -407,8 +407,8 @@ export default function FreightShippingRateView() {
             const avgOnTime = carrierRates.length > 0 ? Math.round(carrierRates.reduce((s, r) => s + r.onTime, 0) / carrierRates.length) : 0
             const totalShip = carrierRates.reduce((s, r) => s + r.shipments, 0)
             return (
-              <Card key={carrier.id} className="fsr-carrier-card border-slate-100 dark:border-slate-800">
-                <CardContent className="glass-subtle p-4">
+              <Card key={carrier.id} className="hover-lift-sm fsr-carrier-card border-slate-100 dark:border-slate-800">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="fsr-carrier-avatar" style={{ backgroundColor: carrier.color + "18", border: `2px solid ${carrier.color}` }}>
@@ -458,7 +458,7 @@ export default function FreightShippingRateView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 mt-4">
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><BarChart3 className="h-4 w-4 text-blue-500" />Carrier Cost Comparison</CardTitle>
             </CardHeader>
@@ -477,7 +477,7 @@ export default function FreightShippingRateView() {
             </CardContent>
           </Card>
 
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><Target className="h-4 w-4 text-violet-500" />Carrier Radar (Top 5)</CardTitle>
             </CardHeader>
@@ -517,8 +517,8 @@ export default function FreightShippingRateView() {
             const avgRate = zRates.length > 0 ? Math.round(zRates.reduce((s, r) => s + r.totalRate, 0) / zRates.length) : 0
             const zoneShip = zRates.reduce((s, r) => s + r.shipments, 0)
             return (
-              <Card key={z.id} className="fsr-zone-kpi border-slate-100 dark:border-slate-800" style={{ borderLeftWidth: 4, borderLeftColor: z.color }}>
-                <CardContent className="glass-subtle p-4">
+              <Card key={z.id} className="hover-lift-sm fsr-zone-kpi border-slate-100 dark:border-slate-800" style={{ borderLeftWidth: 4, borderLeftColor: z.color }}>
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="fsr-zone-dot" style={{ backgroundColor: z.color }} />
                     <div>
@@ -543,7 +543,7 @@ export default function FreightShippingRateView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><Compass className="h-4 w-4 text-blue-500" />Cost per Zone (Stacked)</CardTitle>
             </CardHeader>
@@ -573,7 +573,7 @@ export default function FreightShippingRateView() {
             </CardContent>
           </Card>
 
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><MapPin className="h-4 w-4 text-emerald-500" />Top Routes by Volume</CardTitle>
             </CardHeader>
@@ -613,8 +613,8 @@ export default function FreightShippingRateView() {
             { label: "Avg Savings Rate", value: `${Math.round(savingsData.reduce((s, d) => s + d.rate, 0) / savingsData.length)}%`, icon: Target, color: "text-violet-600", bg: "bg-violet-50 dark:bg-violet-950/40" },
             { label: "Rates Renegotiated", value: `${randInt(12, 28)}`, icon: RefreshCw, color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-950/40" },
           ].map(kpi => (
-            <Card key={kpi.label} className="fsr-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm fsr-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="fsr-label">{kpi.label}</p>
@@ -630,7 +630,7 @@ export default function FreightShippingRateView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><TrendingDown className="h-4 w-4 text-emerald-500" />Savings Trend</CardTitle>
             </CardHeader>
@@ -650,7 +650,7 @@ export default function FreightShippingRateView() {
             </CardContent>
           </Card>
 
-          <Card className="fsr-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm fsr-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="fsr-title"><Zap className="h-4 w-4 text-amber-500" />Optimization Recommendations</CardTitle>
             </CardHeader>
@@ -696,8 +696,8 @@ export default function FreightShippingRateView() {
           <p className="fsr-subheading">Carrier rate management, cost analysis, and freight optimization across India</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="btn-outline-animate fsr-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh Rates</Button>
-          <Button size="sm" className="fsr-header-btn-primary"><Plus className="h-3.5 w-3.5" />New Rate Card</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate fsr-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh Rates</Button>
+          <Button size="sm" className="press-scale fsr-header-btn-primary"><Plus className="h-3.5 w-3.5" />New Rate Card</Button>
         </div>
       </div>
 
@@ -815,9 +815,9 @@ export default function FreightShippingRateView() {
               </div>
 
               <div className="fsr-drawer-actions">
-                <Button className="fsr-action-primary flex-1"><Edit className="h-4 w-4" />Edit Rate</Button>
-                <Button variant="outline" className="btn-outline-animate fsr-action-secondary"><RefreshCw className="h-4 w-4" />Renew</Button>
-                <Button variant="outline" className="btn-outline-animate fsr-action-secondary text-red-500"><Trash2 className="h-4 w-4" />Revoke</Button>
+                <Button className="press-scale fsr-action-primary flex-1"><Edit className="h-4 w-4" />Edit Rate</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate fsr-action-secondary"><RefreshCw className="h-4 w-4" />Renew</Button>
+                <Button variant="outline" className="press-scale btn-outline-animate fsr-action-secondary text-red-500"><Trash2 className="h-4 w-4" />Revoke</Button>
               </div>
             </div>
           </div>

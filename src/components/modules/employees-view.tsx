@@ -400,8 +400,8 @@ export function EmployeesView() {
       />
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 stagger-children">
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-4 py-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Users className="size-5 text-muted-foreground" />
             </div>
@@ -416,8 +416,8 @@ export function EmployeesView() {
           </CardContent>
         </Card>
 
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-4 py-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/60">
               <UserCheck className="size-5 text-emerald-600" />
             </div>
@@ -432,8 +432,8 @@ export function EmployeesView() {
           </CardContent>
         </Card>
 
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-4 py-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <TrendingUp className="size-5 text-muted-foreground" />
             </div>
@@ -448,8 +448,8 @@ export function EmployeesView() {
           </CardContent>
         </Card>
 
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-4 py-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <CalendarCheck className="size-5 text-muted-foreground" />
             </div>
@@ -471,7 +471,7 @@ export function EmployeesView() {
           )}
           onClick={() => setAttentionFilter(attentionFilter === "needs-attention" ? "all" : "needs-attention")}
         >
-          <CardContent className="glass-subtle flex items-center gap-4 py-4">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-4 py-4">
             <div className={cn(
               "flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors",
               needsAttentionCount > 0
@@ -519,7 +519,7 @@ export function EmployeesView() {
         </TabsList>
 
         <TabsContent value="leaderboard" className="mt-4">
-          <Card className="rounded-xl">
+          <Card className="hover-lift-sm rounded-xl">
             <CardHeader className="flex flex-row items-center justify-between pb-4 gap-4">
               <div className="flex items-center gap-2">
                 <Trophy className="size-5 text-amber-500" />
@@ -573,7 +573,7 @@ export function EmployeesView() {
         <TabsContent value="trends" className="mt-4">
           <div className="grid gap-4 lg:grid-cols-2">
             {/* Productivity Trend */}
-            <Card className="card-depth chart-card card-accent-blue shadow-card">
+            <Card className="hover-lift-sm card-depth chart-card card-accent-blue shadow-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Productivity Trend (Weekly)</CardTitle>
               </CardHeader>
@@ -596,7 +596,7 @@ export function EmployeesView() {
             </Card>
 
             {/* Error Rate Trend */}
-            <Card className="card-depth chart-card card-accent-red shadow-card">
+            <Card className="hover-lift-sm card-depth chart-card card-accent-red shadow-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Error Rate Trend (Weekly)</CardTitle>
               </CardHeader>
@@ -619,7 +619,7 @@ export function EmployeesView() {
             </Card>
 
             {/* Tasks Completed Trend */}
-            <Card className="card-depth chart-card card-accent-green shadow-card">
+            <Card className="hover-lift-sm card-depth chart-card card-accent-green shadow-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Tasks Completed Trend (Weekly)</CardTitle>
               </CardHeader>
@@ -640,7 +640,7 @@ export function EmployeesView() {
             </Card>
 
             {/* Summary comparison */}
-            <Card className="card-depth shadow-card lg:col-span-2">
+            <Card className="hover-lift-sm card-depth shadow-card lg:col-span-2">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-semibold">Weekly Performance Summary</CardTitle>
               </CardHeader>
@@ -667,7 +667,7 @@ export function EmployeesView() {
         <TabsContent value="compare" className="mt-4">
           <div className="space-y-4">
             {/* Head-to-Head: Top 5 Radar Comparison */}
-            <Card className="card-depth chart-card card-accent-blue shadow-card">
+            <Card className="hover-lift-sm card-depth chart-card card-accent-blue shadow-card">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -708,7 +708,7 @@ export function EmployeesView() {
             </Card>
 
             {/* Bar Chart: Top 5 Multi-Metric Comparison */}
-            <Card className="card-depth chart-card card-accent-green shadow-card">
+            <Card className="hover-lift-sm card-depth chart-card card-accent-green shadow-card">
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -745,7 +745,7 @@ export function EmployeesView() {
             </Card>
 
             {/* Warehouse-level Performance Comparison */}
-            <Card className="card-depth shadow-card lg:col-span-2">
+            <Card className="hover-lift-sm card-depth shadow-card lg:col-span-2">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <Building2 className="size-4 text-violet-500" />

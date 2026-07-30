@@ -375,20 +375,20 @@ export default function MultiWarehouseRebalanceView() {
               { label: "Stock Utilization", value: `${k.stockUtilization}%`, icon: <Percent className="w-4 h-4" /> },
               { label: "Pending Approvals", value: k.pendingApprovals, icon: <Timer className="w-4 h-4" /> },
             ].map((item, idx) => (
-              <Card key={idx} className="mwr-kpi-card">
+              <Card key={idx} className="hover-lift-sm mwr-kpi-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-4">
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="inner-glow glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Transfers</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.monthlyTransfers}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Inbound" fill="#0d9488" radius={[4,4,0,0]} /><Bar dataKey="Outbound" fill="#d97706" radius={[4,4,0,0]} /><Bar dataKey="Internal" fill="#7c3aed" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Stock Distribution by WH</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.warehouseDistribution}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Overstock" fill="#d97706" stackId="a" radius={[0,0,0,0]} /><Bar dataKey="Understock" fill="#dc2626" stackId="a" /><Bar dataKey="Optimal" fill="#059669" stackId="a" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Transfers</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.monthlyTransfers}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Inbound" fill="#0d9488" radius={[4,4,0,0]} /><Bar dataKey="Outbound" fill="#d97706" radius={[4,4,0,0]} /><Bar dataKey="Internal" fill="#7c3aed" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Stock Distribution by WH</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.warehouseDistribution}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Overstock" fill="#d97706" stackId="a" radius={[0,0,0,0]} /><Bar dataKey="Understock" fill="#dc2626" stackId="a" /><Bar dataKey="Optimal" fill="#059669" stackId="a" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
           </div>
-          <Card className="mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Savings Trend (6 months)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={250}><AreaChart data={data.savingsTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v/1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Area type="monotone" dataKey="Savings" stroke="#059669" fill="#d1fae5" /><Area type="monotone" dataKey="Potential" stroke="#7c3aed" fill="#ede9fe" /></AreaChart></ResponsiveContainer></CardContent></Card>
+          <Card className="hover-lift-sm mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Savings Trend (6 months)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={250}><AreaChart data={data.savingsTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v/1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Area type="monotone" dataKey="Savings" stroke="#059669" fill="#d1fae5" /><Area type="monotone" dataKey="Potential" stroke="#7c3aed" fill="#ede9fe" /></AreaChart></ResponsiveContainer></CardContent></Card>
         </TabsContent>
 
         {/* TAB 1: Transfer Orders */}
@@ -420,7 +420,7 @@ export default function MultiWarehouseRebalanceView() {
                     <td className="badge-interactive px-3 py-2"><Badge variant="outline" className="text-[10px]">{t.mode}</Badge></td>
                     <td className="px-3 py-2">{t.eta}</td>
                     <td className="px-3 py-2">{t.createdDate}</td>
-                    <td className="px-3 py-2"><Button size="sm" variant="ghost" className="mwr-action-btn h-7" onClick={() => { setDrawerRecord(t); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
+                    <td className="press-scale px-3 py-2"><Button size="sm" variant="ghost" className="mwr-action-btn h-7" onClick={() => { setDrawerRecord(t); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -457,7 +457,7 @@ export default function MultiWarehouseRebalanceView() {
                     <td className="px-3 py-2"><DaysCoverBar days={s.daysCover} /></td>
                     <td className="px-3 py-2 tabular-nums">{s.avgDailyDemand}</td>
                     <td className="px-3 py-2">{s.lastRestock}</td>
-                    <td className="px-3 py-2"><Button size="sm" variant="ghost" className="mwr-action-btn h-7" onClick={() => { toast.info("Rebalance Initiated", `Transfer for ${s.sku}`); }}><GitCompareArrows className="w-3 h-3" /></Button></td>
+                    <td className="press-scale px-3 py-2"><Button size="sm" variant="ghost" className="mwr-action-btn h-7" onClick={() => { toast.info("Rebalance Initiated", `Transfer for ${s.sku}`); }}><GitCompareArrows className="w-3 h-3" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -473,8 +473,8 @@ export default function MultiWarehouseRebalanceView() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredRules.map(r => (
-              <Card key={r.id} className="mwr-chart-card hover:shadow-md transition-shadow">
-                <CardContent className="glass-subtle p-3 space-y-2">
+              <Card key={r.id} className="hover-lift-sm mwr-chart-card hover:shadow-md transition-shadow">
+                <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                   <div className="flex items-start justify-between">
                     <div className="flex-1"><div className="font-bold text-sm">{r.ruleName}</div><div className="text-[10px] text-muted-foreground mt-0.5">{r.trigger}</div></div>
                     <RuleExecutionRing count={r.executionCount} />
@@ -507,8 +507,8 @@ export default function MultiWarehouseRebalanceView() {
               const totalSku = whStock.length;
               const healthPct = totalSku > 0 ? Math.round((optimal / totalSku) * 100) : 0;
               return (
-                <Card key={idx} className="mwr-wh-card hover:shadow-md transition-all hover:-translate-y-0.5">
-                  <CardContent className="glass-subtle p-3 space-y-2">
+                <Card key={idx} className="hover-lift-sm mwr-wh-card hover:shadow-md transition-all hover:-translate-y-0.5">
+                  <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                     <div className="flex items-center gap-2"><Warehouse className="w-4 h-4 text-teal-600" /><span className="font-bold text-sm">{String(wh)}</span></div>
                     <div className="flex gap-2 text-[10px]">
                       <span className="bg-red-100 text-red-700 px-1.5 py-0.5 rounded">{overstock} over</span>
@@ -542,18 +542,18 @@ export default function MultiWarehouseRebalanceView() {
               { label: "Avg Savings/Transfer", value: formatINR(ak.avgSavingsPerTransfer), icon: <IndianRupee className="w-4 h-4" /> },
               { label: "Excess Reduction", value: `-${ak.excessReduction}%`, icon: <TrendingDown className="w-4 h-4" /> },
             ].map((item, idx) => (
-              <Card key={idx} className="mwr-kpi-card">
+              <Card key={idx} className="hover-lift-sm mwr-kpi-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-4">
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="inner-glow glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Savings Trend (6 months)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><LineChart data={data.savingsTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v/1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Line type="monotone" dataKey="Savings" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Potential" stroke="#7c3aed" strokeDasharray="5 5" /></LineChart></ResponsiveContainer></CardContent></Card>
-            <Card className="mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.warehouseDistribution}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Overstock" fill="#d97706" stackId="a" /><Bar dataKey="Understock" fill="#dc2626" stackId="a" /><Bar dataKey="Optimal" fill="#059669" stackId="a" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Savings Trend (6 months)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><LineChart data={data.savingsTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v/1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Line type="monotone" dataKey="Savings" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="Potential" stroke="#7c3aed" strokeDasharray="5 5" /></LineChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm mwr-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.warehouseDistribution}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Bar dataKey="Overstock" fill="#d97706" stackId="a" /><Bar dataKey="Understock" fill="#dc2626" stackId="a" /><Bar dataKey="Optimal" fill="#059669" stackId="a" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -588,9 +588,9 @@ export default function MultiWarehouseRebalanceView() {
                     <div><span className="text-muted-foreground">Created</span><div className="font-medium">{String(drawerRecord.createdDate)}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="mwr-action-btn flex-1" onClick={() => { toast.success("Approved", `${drawerRecord.transferNo} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Approve</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mwr-action-btn flex-1" onClick={() => { toast.info("On Hold", `${drawerRecord.transferNo} placed on hold`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Hold</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate mwr-action-btn" onClick={() => { toast.error("Cancelled", `${drawerRecord.transferNo} cancelled`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale mwr-action-btn flex-1" onClick={() => { toast.success("Approved", `${drawerRecord.transferNo} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Approve</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mwr-action-btn flex-1" onClick={() => { toast.info("On Hold", `${drawerRecord.transferNo} placed on hold`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Hold</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate mwr-action-btn" onClick={() => { toast.error("Cancelled", `${drawerRecord.transferNo} cancelled`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}

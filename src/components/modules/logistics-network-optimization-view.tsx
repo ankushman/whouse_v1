@@ -575,7 +575,7 @@ export default function LogisticsNetworkOptimizationView() {
           </div>
           <div className="lno-chart-grid">
             {/* Monthly Cost & Reliability Composed */}
-            <Card className="lno-chart-card lno-chart-full">
+            <Card className="hover-lift-sm lno-chart-card lno-chart-full">
               <CardHeader className="lno-chart-header"><CardTitle className="lno-chart-title">Monthly Network Cost & Reliability</CardTitle><CardDescription>Cost trend and reliability over 12 months</CardDescription></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -594,7 +594,7 @@ export default function LogisticsNetworkOptimizationView() {
               </CardContent>
             </Card>
             {/* Transport Mode Pie */}
-            <Card className="lno-chart-card">
+            <Card className="hover-lift-sm lno-chart-card">
               <CardHeader className="lno-chart-header"><CardTitle className="lno-chart-title">Transport Mode Mix</CardTitle><CardDescription>Route count by transport mode</CardDescription></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -609,7 +609,7 @@ export default function LogisticsNetworkOptimizationView() {
               </CardContent>
             </Card>
             {/* Route Type Bar */}
-            <Card className="lno-chart-card">
+            <Card className="hover-lift-sm lno-chart-card">
               <CardHeader className="lno-chart-header"><CardTitle className="lno-chart-title">Route Type Distribution</CardTitle><CardDescription>Routes by category</CardDescription></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -626,7 +626,7 @@ export default function LogisticsNetworkOptimizationView() {
               </CardContent>
             </Card>
             {/* Node Utilization by Type */}
-            <Card className="lno-chart-card">
+            <Card className="hover-lift-sm lno-chart-card">
               <CardHeader className="lno-chart-header"><CardTitle className="lno-chart-title">Node Utilization by Type</CardTitle><CardDescription>Average utilization across node types</CardDescription></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -643,7 +643,7 @@ export default function LogisticsNetworkOptimizationView() {
               </CardContent>
             </Card>
             {/* Optimization Savings by Type */}
-            <Card className="lno-chart-card">
+            <Card className="hover-lift-sm lno-chart-card">
               <CardHeader className="lno-chart-header"><CardTitle className="lno-chart-title">Optimization Savings by Type</CardTitle><CardDescription>Potential cost savings (₹L)</CardDescription></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -660,7 +660,7 @@ export default function LogisticsNetworkOptimizationView() {
               </CardContent>
             </Card>
             {/* Carbon Trend */}
-            <Card className="lno-chart-card">
+            <Card className="hover-lift-sm lno-chart-card">
               <CardHeader className="lno-chart-header"><CardTitle className="lno-chart-title">Carbon Emissions Trend</CardTitle><CardDescription>Monthly CO2 emissions (tons)</CardDescription></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -688,7 +688,7 @@ export default function LogisticsNetworkOptimizationView() {
             <div className="lno-search-wrap"><Search className="h-4 w-4 lno-search-icon" /><Input placeholder="Search by node, city..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="lno-search-input" /></div>
             <div className="lno-filter-row">
               <Select value={filterNodeType} onValueChange={setFilterNodeType}><SelectTrigger className="lno-select"><SelectValue placeholder="Node Type" /></SelectTrigger><SelectContent><SelectItem value="all">All Types</SelectItem>{NODE_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}</SelectContent></Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredNodes, "network-nodes")} className="btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredNodes, "network-nodes")} className="press-scale btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
             </div>
           </div>
           <div className="lno-table-wrap">
@@ -708,7 +708,7 @@ export default function LogisticsNetworkOptimizationView() {
                   <TableCell>₹{n.costPerUnit}</TableCell>
                   <TableCell><span className={`lno-reliability-badge ${n.reliability >= 90 ? "lno-rel-high" : n.reliability >= 80 ? "lno-rel-med" : "lno-rel-low"}`}>{n.reliability}%</span></TableCell>
                   <TableCell><span className={`lno-node-status ${n.status === "Optimal" ? "lno-ns-ok" : n.status === "Near Capacity" ? "lno-ns-warn" : n.status === "Underutilized" ? "lno-ns-under" : "lno-ns-expand"}`}>{n.status}</span></TableCell>
-                  <TableCell><Button variant="ghost" size="sm" className="lno-view-btn" onClick={() => openDrawer("node", n)}><Eye className="h-3.5 w-3.5" /> View</Button></TableCell>
+                  <TableCell><Button variant="ghost" size="sm" className="press-scale lno-view-btn" onClick={() => openDrawer("node", n)}><Eye className="h-3.5 w-3.5" /> View</Button></TableCell>
                 </TableRow>
               ))}
             </TableBody></Table>
@@ -727,7 +727,7 @@ export default function LogisticsNetworkOptimizationView() {
             <div className="lno-filter-row">
               <Select value={filterMode} onValueChange={setFilterMode}><SelectTrigger className="lno-select"><SelectValue placeholder="Mode" /></SelectTrigger><SelectContent><SelectItem value="all">All Modes</SelectItem>{TRANSPORT_MODES.map((m) => <SelectItem key={m} value={m}>{m}</SelectItem>)}</SelectContent></Select>
               <Select value={filterRouteType} onValueChange={setFilterRouteType}><SelectTrigger className="lno-select"><SelectValue placeholder="Route Type" /></SelectTrigger><SelectContent><SelectItem value="all">All Types</SelectItem>{ROUTE_TYPES.map((rt) => <SelectItem key={rt} value={rt}>{rt}</SelectItem>)}</SelectContent></Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredRoutes, "network-routes")} className="btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredRoutes, "network-routes")} className="press-scale btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
             </div>
           </div>
           <div className="lno-table-wrap">
@@ -746,7 +746,7 @@ export default function LogisticsNetworkOptimizationView() {
                   <TableCell className="numeric-cell font-medium">{formatINR(r.totalCost)}</TableCell>
                   <TableCell><div className="lno-util-cell"><div className="lno-util-bar-bg"><div className="lno-util-bar-fill" style={{ width: `${r.utilization}%`, backgroundColor: r.utilization >= 85 ? "#dc2626" : r.utilization >= 60 ? "#f97316" : "#6366f1" }} /></div><span className="lno-util-val">{r.utilization}%</span></div></TableCell>
                   <TableCell><span className={`lno-reliability-badge ${r.onTimeRate >= 90 ? "lno-rel-high" : r.onTimeRate >= 80 ? "lno-rel-med" : "lno-rel-low"}`}>{r.onTimeRate}%</span></TableCell>
-                  <TableCell><Button variant="ghost" size="sm" className="lno-view-btn" onClick={() => openDrawer("route", r)}><Eye className="h-3.5 w-3.5" /> View</Button></TableCell>
+                  <TableCell><Button variant="ghost" size="sm" className="press-scale lno-view-btn" onClick={() => openDrawer("route", r)}><Eye className="h-3.5 w-3.5" /> View</Button></TableCell>
                 </TableRow>
               ))}
             </TableBody></Table>
@@ -764,7 +764,7 @@ export default function LogisticsNetworkOptimizationView() {
             <div className="lno-search-wrap"><Search className="h-4 w-4 lno-search-icon" /><Input placeholder="Search by route, description..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="lno-search-input" /></div>
             <div className="lno-filter-row">
               <Select value={filterImpact} onValueChange={setFilterImpact}><SelectTrigger className="lno-select"><SelectValue placeholder="Impact" /></SelectTrigger><SelectContent><SelectItem value="all">All Impact</SelectItem>{IMPACT_LEVELS.map((il) => <SelectItem key={il} value={il}>{il}</SelectItem>)}</SelectContent></Select>
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredOptimizations, "optimizations")} className="btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredOptimizations, "optimizations")} className="press-scale btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
             </div>
           </div>
           <div className="lno-table-wrap">
@@ -801,7 +801,7 @@ export default function LogisticsNetworkOptimizationView() {
           <div className="lno-toolbar">
             <div className="lno-search-wrap"><Search className="h-4 w-4 lno-search-icon" /><Input placeholder="Search by scenario name, type..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="lno-search-input" /></div>
             <div className="lno-filter-row">
-              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredScenarios, "scenarios")} className="btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
+              <Button variant="outline" size="sm" onClick={() => exportToCSV(filteredScenarios, "scenarios")} className="press-scale btn-outline-animate lno-export-btn"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
             </div>
           </div>
           <div className="lno-table-wrap">
@@ -820,7 +820,7 @@ export default function LogisticsNetworkOptimizationView() {
                   <TableCell><span className="lno-svc-badge">+{sc.reliabilityImprovement}%</span></TableCell>
                   <TableCell><div className="lno-feas-cell"><div className="lno-feas-bar-bg"><div className="lno-feas-bar-fill" style={{ width: `${sc.feasibility}%`, backgroundColor: sc.feasibility >= 80 ? "#22c55e" : sc.feasibility >= 60 ? "#6366f1" : "#f59e0b" }} /></div><span className="lno-feas-val">{sc.feasibility}%</span></div></TableCell>
                   <TableCell><Badge variant="outline" className="badge-interactive text-xs">{sc.complexity}</Badge></TableCell>
-                  <TableCell><Button variant="ghost" size="sm" className="lno-view-btn" onClick={() => openDrawer("scenario", sc)}><Eye className="h-3.5 w-3.5" /> View</Button></TableCell>
+                  <TableCell><Button variant="ghost" size="sm" className="press-scale lno-view-btn" onClick={() => openDrawer("scenario", sc)}><Eye className="h-3.5 w-3.5" /> View</Button></TableCell>
                 </TableRow>
               ))}
             </TableBody></Table>
@@ -861,9 +861,9 @@ export default function LogisticsNetworkOptimizationView() {
           ]} />
         </div>
         <SheetFooter className="lno-drawer-footer">
-          <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Rebalance</Button>
-          <Button size="sm" variant="outline"><MapPin className="btn-outline-animate h-3.5 w-3.5 mr-1" /> View Map</Button>
-          <Button size="sm" className="lno-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Optimize</Button>
+          <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Rebalance</Button>
+          <Button size="sm" variant="outline"><MapPin className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> View Map</Button>
+          <Button size="sm" className="press-scale lno-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Optimize</Button>
         </SheetFooter>
       </>)
     }
@@ -898,9 +898,9 @@ export default function LogisticsNetworkOptimizationView() {
           </div>
         </div>
         <SheetFooter className="lno-drawer-footer">
-          <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Reoptimize</Button>
-          <Button size="sm" variant="outline"><Truck className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Simulate</Button>
-          <Button size="sm" className="lno-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Apply</Button>
+          <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Reoptimize</Button>
+          <Button size="sm" variant="outline"><Truck className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Simulate</Button>
+          <Button size="sm" className="press-scale lno-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Apply</Button>
         </SheetFooter>
       </>)
     }
@@ -930,9 +930,9 @@ export default function LogisticsNetworkOptimizationView() {
           ]} />
         </div>
         <SheetFooter className="lno-drawer-footer">
-          <Button size="sm" variant="outline"><RefreshCw className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalculate</Button>
-          <Button size="sm" variant="outline"><BarChart3 className="btn-outline-animate h-3.5 w-3.5 mr-1" /> Compare</Button>
-          <Button size="sm" className="lno-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Implement</Button>
+          <Button size="sm" variant="outline"><RefreshCw className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Recalculate</Button>
+          <Button size="sm" variant="outline"><BarChart3 className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" /> Compare</Button>
+          <Button size="sm" className="press-scale lno-drawer-primary-btn"><Zap className="h-3.5 w-3.5 mr-1" /> Implement</Button>
         </SheetFooter>
       </>)
     }

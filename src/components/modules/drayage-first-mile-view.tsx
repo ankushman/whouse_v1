@@ -1182,8 +1182,8 @@ function KpiCard({
   color: string
 }) {
   return (
-    <Card className="dfm-kpi-card">
-      <CardContent className="glass-subtle p-4">
+    <Card className="hover-lift-sm dfm-kpi-card">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] text-muted-foreground font-medium">
@@ -1516,7 +1516,7 @@ export default function DrayageFirstMileView() {
             </Card>
 
             {/* Order Status Distribution */}
-            <Card className="md:col-span-2 lg:col-span-1">
+            <Card className="hover-lift-sm md:col-span-2 lg:col-span-1">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Order Status Distribution</CardTitle>
               </CardHeader>
@@ -1586,7 +1586,7 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle pt-0">
+            <CardContent className="inner-glow glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1707,7 +1707,7 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle pt-0">
+            <CardContent className="inner-glow glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1831,7 +1831,7 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle pt-0">
+            <CardContent className="inner-glow glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1939,7 +1939,7 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="glass-subtle pt-0">
+            <CardContent className="inner-glow glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -2129,7 +2129,7 @@ export default function DrayageFirstMileView() {
             </Card>
 
             {/* Container Type Utilization */}
-            <Card className="md:col-span-2 lg:col-span-1">
+            <Card className="hover-lift-sm md:col-span-2 lg:col-span-1">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Container Type Utilization</CardTitle>
               </CardHeader>
@@ -2182,7 +2182,7 @@ export default function DrayageFirstMileView() {
             </Card>
 
             {/* Weekly On-Time Performance */}
-            <Card className="md:col-span-2">
+            <Card className="hover-lift-sm md:col-span-2">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Weekly On-Time Performance</CardTitle>
               </CardHeader>

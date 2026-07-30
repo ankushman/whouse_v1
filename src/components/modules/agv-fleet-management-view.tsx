@@ -535,7 +535,7 @@ export default function AGVFleetManagementView() {
               { label: "Avg Speed (m/min)", value: avgSpeed, icon: <Gauge className="h-4 w-4 text-amber-500" /> },
             ].map((k) => (
               <Card key={k.label}>
-                <CardContent className="glass-subtle p-3 flex items-center gap-3">
+                <CardContent className="inner-glow glass-subtle p-3 flex items-center gap-3">
                   <div className="rounded-lg bg-slate-50 p-2">{k.icon}</div>
                   <div><p className="text-[10px] text-slate-500">{k.label}</p><p className="text-lg font-bold text-slate-800">{k.value}</p></div>
                 </CardContent>
@@ -588,7 +588,7 @@ export default function AGVFleetManagementView() {
             <div className="relative flex-1 min-w-[180px]"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-400" /><Input placeholder="Search AGVs..." value={agvSearch} onChange={(e) => setAgvSearch(e.target.value)} className="pl-8 h-9 text-sm" /></div>
             <Select value={agvStatusFilter} onValueChange={setAgvStatusFilter}><SelectTrigger className="w-[140px] h-9 text-sm"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent>{AGV_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
             <Select value={agvZoneFilter} onValueChange={setAgvZoneFilter}><SelectTrigger className="w-[130px] h-9 text-sm"><SelectValue placeholder="Zone" /></SelectTrigger><SelectContent>{ZONES.map((z) => <SelectItem key={z} value={z}>{z}</SelectItem>)}</SelectContent></Select>
-            <Button variant="outline" size="sm" onClick={() => { setAgvSortDir(agvSortDir === "asc" ? "desc" : "asc"); }}><ArrowUpDown className="btn-outline-animate h-3.5 w-3.5 mr-1" />{agvSortDir === "asc" ? "ASC" : "DESC"}</Button>
+            <Button variant="outline" size="sm" onClick={() => { setAgvSortDir(agvSortDir === "asc" ? "desc" : "asc"); }}><ArrowUpDown className="press-scale btn-outline-animate h-3.5 w-3.5 mr-1" />{agvSortDir === "asc" ? "ASC" : "DESC"}</Button>
             <Button variant="outline" size="sm" onClick={() => setAgvView(agvView === "card" ? "table" : "card")}>{agvView === "card" ? "Table" : "Cards"}</Button>
           </div>
           {agvView === "card" ? (
@@ -597,7 +597,7 @@ export default function AGVFleetManagementView() {
             </div>
           ) : (
             <Card>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead><tr className="border-b bg-slate-50 text-left text-xs text-slate-500">
@@ -655,7 +655,7 @@ export default function AGVFleetManagementView() {
               { label: "Low Battery (<20%)", value: lowBattery, color: "text-amber-600" },
               { label: "Critical (<10%)", value: criticalBattery, color: "text-red-600" },
             ].map((k) => (
-              <Card key={k.label}><CardContent className="glass-subtle p-3"><p className="text-[10px] text-slate-500">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
+              <Card key={k.label}><CardContent className="inner-glow hover-lift-sm glass-subtle p-3"><p className="text-[10px] text-slate-500">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
             ))}
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -718,7 +718,7 @@ export default function AGVFleetManagementView() {
               { label: "Overdue", value: maintOverdue, color: "text-red-600" },
               { label: "Total Cost", value: formatINR(maintTotalCost), color: "text-rose-600" },
             ].map((k) => (
-              <Card key={k.label}><CardContent className="glass-subtle p-3"><p className="text-[10px] text-slate-500">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
+              <Card key={k.label}><CardContent className="inner-glow hover-lift-sm glass-subtle p-3"><p className="text-[10px] text-slate-500">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent></Card>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -763,7 +763,7 @@ export default function AGVFleetManagementView() {
               { label: "ROI", value: `${roi}%`, color: "text-emerald-600" },
             ].map((k) => (
               <Card key={k.label}>
-                <CardContent className="glass-subtle p-3"><p className="text-[10px] text-slate-500">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent>
+                <CardContent className="inner-glow glass-subtle p-3"><p className="text-[10px] text-slate-500">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></CardContent>
               </Card>
             ))}
           </div>
@@ -869,9 +869,9 @@ export default function AGVFleetManagementView() {
                   </div>
                 ))}
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.success("Dispatched", `${drawerRecord.id} has been dispatched`); setDrawerOpen(false); }}><Play className="h-3.5 w-3.5 mr-1" />Dispatch</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Charging", `${drawerRecord.id} sent to charging station`); setDrawerOpen(false); }}><Zap className="h-3.5 w-3.5 mr-1" />Charge</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Maintenance", `${drawerRecord.id} flagged for maintenance`); setDrawerOpen(false); }}><Wrench className="h-3.5 w-3.5 mr-1" />Maintain</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.success("Dispatched", `${drawerRecord.id} has been dispatched`); setDrawerOpen(false); }}><Play className="h-3.5 w-3.5 mr-1" />Dispatch</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Charging", `${drawerRecord.id} sent to charging station`); setDrawerOpen(false); }}><Zap className="h-3.5 w-3.5 mr-1" />Charge</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.warning("Maintenance", `${drawerRecord.id} flagged for maintenance`); setDrawerOpen(false); }}><Wrench className="h-3.5 w-3.5 mr-1" />Maintain</Button>
                 </div>
               </div>
             )}
@@ -898,9 +898,9 @@ export default function AGVFleetManagementView() {
                   <MissionTimeline stage={Number(drawerRecord.stage) || 0} />
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.error("Mission Aborted", `${drawerRecord.id} has been aborted`); setDrawerOpen(false); }}><XCircle className="h-3.5 w-3.5 mr-1" />Abort</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Mission Paused", `${drawerRecord.id} has been paused`); setDrawerOpen(false); }}><Pause className="h-3.5 w-3.5 mr-1" />Pause</Button>
-                  <Button size="sm" className="flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => { toast.success("Mission Resumed", `${drawerRecord.id} has been resumed`); setDrawerOpen(false); }}><Play className="h-3.5 w-3.5 mr-1" />Resume</Button>
+                  <Button size="sm" variant="destructive" className="press-scale flex-1" onClick={() => { toast.error("Mission Aborted", `${drawerRecord.id} has been aborted`); setDrawerOpen(false); }}><XCircle className="h-3.5 w-3.5 mr-1" />Abort</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Mission Paused", `${drawerRecord.id} has been paused`); setDrawerOpen(false); }}><Pause className="h-3.5 w-3.5 mr-1" />Pause</Button>
+                  <Button size="sm" className="press-scale flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => { toast.success("Mission Resumed", `${drawerRecord.id} has been resumed`); setDrawerOpen(false); }}><Play className="h-3.5 w-3.5 mr-1" />Resume</Button>
                 </div>
               </div>
             )}
@@ -924,9 +924,9 @@ export default function AGVFleetManagementView() {
                 ))}
                 <PartsCostTile cost={Number(drawerRecord.cost) || 0} />
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" className="flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => { toast.success("Scheduled", `Maintenance ${drawerRecord.id} scheduled`); setDrawerOpen(false); }}><Clock className="h-3.5 w-3.5 mr-1" />Schedule</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Updated", `Maintenance ${drawerRecord.id} updated`); setDrawerOpen(false); }}><RefreshCw className="h-3.5 w-3.5 mr-1" />Update</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Escalated", `Maintenance ${drawerRecord.id} escalated`); setDrawerOpen(false); }}><AlertTriangle className="h-3.5 w-3.5 mr-1" />Escalate</Button>
+                  <Button size="sm" className="press-scale flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => { toast.success("Scheduled", `Maintenance ${drawerRecord.id} scheduled`); setDrawerOpen(false); }}><Clock className="h-3.5 w-3.5 mr-1" />Schedule</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Updated", `Maintenance ${drawerRecord.id} updated`); setDrawerOpen(false); }}><RefreshCw className="h-3.5 w-3.5 mr-1" />Update</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.warning("Escalated", `Maintenance ${drawerRecord.id} escalated`); setDrawerOpen(false); }}><AlertTriangle className="h-3.5 w-3.5 mr-1" />Escalate</Button>
                 </div>
               </div>
             )}

@@ -639,7 +639,7 @@ function KPIBox({ title, value, subValue, trend, trendLabel, icon: Icon, color, 
     >
       <div className={cn("absolute inset-x-0 top-0 h-1 bg-gradient-to-r", c.gradient, "to-transparent")} />
       <div className={cn("absolute -right-6 -top-6 h-20 w-20 rounded-full opacity-30 blur-2xl", c.bg)} />
-      <CardContent className="glass-subtle p-4">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1">
             <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">{title}</p>
@@ -921,7 +921,7 @@ export function ProcurementPurchaseOrdersView() {
       {/* Charts row */}
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         {/* 30-day spend trend */}
-        <Card className="po-chart-enter">
+        <Card className="hover-lift-sm po-chart-enter">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <div>
@@ -935,7 +935,7 @@ export function ProcurementPurchaseOrdersView() {
               </Badge>
             </div>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={spendTrendConfig} className="h-[220px] w-full">
               <AreaChart data={SPEND_TREND} margin={{ top: 8, right: 12, left: -4, bottom: 0 }}>
                 <defs>
@@ -971,12 +971,12 @@ export function ProcurementPurchaseOrdersView() {
         </Card>
 
         {/* Spend by Category donut */}
-        <Card className="po-chart-enter">
+        <Card className="hover-lift-sm po-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Spend by Category</CardTitle>
             <CardDescription className="text-xs">YTD procurement breakdown</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <div className="flex flex-col items-center gap-2 sm:flex-row">
               <ChartContainer config={categoryConfig} className="h-[200px] w-full sm:w-1/2">
                 <PieChart>
@@ -1014,12 +1014,12 @@ export function ProcurementPurchaseOrdersView() {
         </Card>
 
         {/* Lead time actual vs contracted */}
-        <Card className="po-chart-enter">
+        <Card className="hover-lift-sm po-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Lead Time Compliance</CardTitle>
             <CardDescription className="text-xs">Actual vs contracted lead time (days) by category</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={leadTimeConfig} className="h-[200px] w-full">
               <BarChart data={leadTimeByCategory} margin={{ top: 8, right: 8, left: -8, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" vertical={false} />
@@ -1035,12 +1035,12 @@ export function ProcurementPurchaseOrdersView() {
         </Card>
 
         {/* Approval funnel */}
-        <Card className="po-chart-enter">
+        <Card className="hover-lift-sm po-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Approval Funnel</CardTitle>
             <CardDescription className="text-xs">PO count by approval stage</CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={approvalConfig} className="h-[200px] w-full">
               <BarChart
                 data={approvalFunnel}
@@ -1063,7 +1063,7 @@ export function ProcurementPurchaseOrdersView() {
       </div>
 
       {/* Master Table Card */}
-      <Card className="po-table-card">
+      <Card className="hover-lift-sm po-table-card">
         <CardHeader className="pb-3">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
@@ -1104,13 +1104,13 @@ export function ProcurementPurchaseOrdersView() {
                   ))}
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-9" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-9" onClick={handleRefresh}>
                 <RefreshCw className="mr-1.5 h-3.5 w-3.5" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-9" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-9" onClick={handleExport}>
                 <Download className="mr-1.5 h-3.5 w-3.5" /> Export
               </Button>
-              <Button size="sm" className="h-9" onClick={handleNewPO}>
+              <Button size="sm" className="press-scale h-9" onClick={handleNewPO}>
                 <FilePlus className="mr-1.5 h-3.5 w-3.5" /> New PO
               </Button>
             </div>
@@ -1147,7 +1147,7 @@ export function ProcurementPurchaseOrdersView() {
           </div>
         </CardHeader>
 
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1492,31 +1492,31 @@ function ProcurementDetailDrawer({ po, open, onOpenChange }: DetailDrawerProps) 
               Warehouse: <span className="font-medium text-foreground">{po.warehouse}</span>
             </div>
             <div className="flex gap-1.5">
-              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="mr-1 h-3.5 w-3.5" /> Export
               </Button>
               {po.status === "pending-approval" && (
                 <>
-                  <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-red-600 hover:text-red-700" onClick={handleReject}>
+                  <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8 text-red-600 hover:text-red-700" onClick={handleReject}>
                     <XCircle className="mr-1 h-3.5 w-3.5" /> Reject
                   </Button>
-                  <Button size="sm" className="h-8" onClick={handleApprove}>
+                  <Button size="sm" className="press-scale h-8" onClick={handleApprove}>
                     <CheckCircle2 className="mr-1 h-3.5 w-3.5" /> Approve
                   </Button>
                 </>
               )}
               {po.status === "approved" && (
-                <Button size="sm" className="h-8" onClick={handleAck}>
+                <Button size="sm" className="press-scale h-8" onClick={handleAck}>
                   <ThumbsUp className="mr-1 h-3.5 w-3.5" /> Send to Vendor
                 </Button>
               )}
               {po.status === "acknowledged" && (
-                <Button size="sm" className="h-8" onClick={handleAck}>
+                <Button size="sm" className="press-scale h-8" onClick={handleAck}>
                   <Truck className="mr-1 h-3.5 w-3.5" /> Mark In-Transit
                 </Button>
               )}
               {!["draft", "pending-approval", "approved", "acknowledged"].includes(po.status) && (
-                <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleAck}>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-8" onClick={handleAck}>
                   <PenLine className="mr-1 h-3.5 w-3.5" /> Add Note
                 </Button>
               )}
@@ -1542,11 +1542,11 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
     <div className="space-y-3">
       {/* Buyer / Vendor Contact */}
       <div className="po-card-enter grid gap-3 md:grid-cols-2">
-        <Card className="overflow-hidden">
+        <Card className="hover-lift-sm overflow-hidden">
           <CardHeader className="bg-muted/40 pb-2">
             <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground">Buyer (Internal)</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-3">
+          <CardContent className="inner-glow glass-subtle p-3">
             <div className="flex items-center gap-2">
               <Avatar className="h-9 w-9">
                 <AvatarFallback className="bg-blue-100 text-xs font-semibold text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">
@@ -1571,11 +1571,11 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
           </CardContent>
         </Card>
 
-        <Card className="overflow-hidden">
+        <Card className="hover-lift-sm overflow-hidden">
           <CardHeader className="bg-muted/40 pb-2">
             <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground">Vendor Details</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-3">
+          <CardContent className="inner-glow glass-subtle p-3">
             <div className="flex items-center gap-2">
               <Avatar className="h-9 w-9">
                 <AvatarFallback className={cn("text-xs font-semibold", CATEGORY_META[po.vendorCategory].bg, CATEGORY_META[po.vendorCategory].color)}>
@@ -1610,12 +1610,12 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
       </div>
 
       {/* 6-month spend trend mock */}
-      <Card className="po-card-enter">
+      <Card className="hover-lift-sm po-card-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">6-Month Spend with Vendor</CardTitle>
           <CardDescription className="text-[11px]">Total value of POs placed with {po.vendorName}</CardDescription>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <ChartContainer
             config={{
               value: { label: "Spend (₹ Lakh)", color: "#2563eb" },
@@ -1661,7 +1661,7 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
           <CardHeader className="pb-2">
             <CardTitle className="text-sm">Receipt Progress</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-2 pt-0">
+          <CardContent className="inner-glow glass-subtle space-y-2 pt-0">
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Received vs Ordered</span>
               <span className="font-semibold">{receiptProgress}%</span>
@@ -1688,7 +1688,7 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
           <CardHeader className="pb-2">
             <CardTitle className="text-sm">Payment Progress</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle space-y-2 pt-0">
+          <CardContent className="inner-glow glass-subtle space-y-2 pt-0">
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Paid vs Payable</span>
               <span className="font-semibold">{paymentProgress}%</span>
@@ -1713,11 +1713,11 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
       </div>
 
       {/* Lead time vs SLA */}
-      <Card className="po-card-enter">
+      <Card className="hover-lift-sm po-card-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">Lead Time Analysis</CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="grid grid-cols-3 gap-2 text-center">
             <div className="rounded-lg border p-2">
               <Clock className="mx-auto mb-1 h-4 w-4 text-muted-foreground" />
@@ -1742,8 +1742,8 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
 
       {/* Notes */}
       {po.notes && (
-        <Card className="po-card-enter bg-amber-50/50 dark:bg-amber-950/20">
-          <CardContent className="glass-subtle p-3">
+        <Card className="hover-lift-sm po-card-enter bg-amber-50/50 dark:bg-amber-950/20">
+          <CardContent className="inner-glow glass-subtle p-3">
             <div className="flex items-start gap-2">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
               <div>
@@ -1760,12 +1760,12 @@ function OverviewTab({ po, receiptProgress, paymentProgress, leadTimeVariance }:
 
 function ItemsTab({ po }: { po: PurchaseOrder }) {
   return (
-    <Card className="po-card-enter">
+    <Card className="hover-lift-sm po-card-enter">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm">Line Items ({po.items.length})</CardTitle>
         <CardDescription className="text-[11px]">Parts, quantities, and pricing</CardDescription>
       </CardHeader>
-      <CardContent className="glass-subtle pt-0">
+      <CardContent className="inner-glow glass-subtle pt-0">
         <div className="overflow-x-auto">
           <Table className="table-hover-highlight">
             <TableHeader>
@@ -1831,8 +1831,8 @@ function GRNTab({ po, totalReceived, totalAccepted, totalRejected }: {
 }) {
   if (po.grnEntries.length === 0) {
     return (
-      <Card className="po-card-enter">
-        <CardContent className="glass-subtle flex flex-col items-center justify-center py-12">
+      <Card className="hover-lift-sm po-card-enter">
+        <CardContent className="inner-glow glass-subtle flex flex-col items-center justify-center py-12">
           <Package className="mb-2 h-10 w-10 text-muted-foreground/40" />
           <p className="text-sm font-medium">No GRN entries yet</p>
           <p className="text-[11px] text-muted-foreground">Goods Receipt Notes will appear here once the vendor delivers</p>
@@ -1844,22 +1844,22 @@ function GRNTab({ po, totalReceived, totalAccepted, totalRejected }: {
     <div className="space-y-3">
       {/* Summary */}
       <div className="grid grid-cols-3 gap-2">
-        <Card className="po-stat-enter">
-          <CardContent className="glass-subtle p-3 text-center">
+        <Card className="hover-lift-sm po-stat-enter">
+          <CardContent className="inner-glow glass-subtle p-3 text-center">
             <Package className="mx-auto mb-1 h-5 w-5 text-blue-600 dark:text-blue-400" />
             <div className="text-[10px] uppercase text-muted-foreground">Received</div>
             <div className="text-lg font-bold">{totalReceived}</div>
           </CardContent>
         </Card>
-        <Card className="po-stat-enter" >
-          <CardContent className="glass-subtle p-3 text-center">
+        <Card className="hover-lift-sm po-stat-enter" >
+          <CardContent className="inner-glow glass-subtle p-3 text-center">
             <CheckCircle2 className="mx-auto mb-1 h-5 w-5 text-emerald-600 dark:text-emerald-400" />
             <div className="text-[10px] uppercase text-muted-foreground">Accepted</div>
             <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{totalAccepted}</div>
           </CardContent>
         </Card>
-        <Card className="po-stat-enter">
-          <CardContent className="glass-subtle p-3 text-center">
+        <Card className="hover-lift-sm po-stat-enter">
+          <CardContent className="inner-glow glass-subtle p-3 text-center">
             <XCircle className="mx-auto mb-1 h-5 w-5 text-red-600 dark:text-red-400" />
             <div className="text-[10px] uppercase text-muted-foreground">Rejected</div>
             <div className="text-lg font-bold text-red-600 dark:text-red-400">{totalRejected}</div>
@@ -1868,11 +1868,11 @@ function GRNTab({ po, totalReceived, totalAccepted, totalRejected }: {
       </div>
 
       {/* GRN Table */}
-      <Card className="po-card-enter">
+      <Card className="hover-lift-sm po-card-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">GRN History</CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1934,8 +1934,8 @@ function GRNTab({ po, totalReceived, totalAccepted, totalRejected }: {
 function InvoicesTab({ po }: { po: PurchaseOrder }) {
   if (po.invoices.length === 0) {
     return (
-      <Card className="po-card-enter">
-        <CardContent className="glass-subtle flex flex-col items-center justify-center py-12">
+      <Card className="hover-lift-sm po-card-enter">
+        <CardContent className="inner-glow glass-subtle flex flex-col items-center justify-center py-12">
           <Receipt className="mb-2 h-10 w-10 text-muted-foreground/40" />
           <p className="text-sm font-medium">No invoices yet</p>
           <p className="text-[11px] text-muted-foreground">Vendor invoices will appear here after goods are received</p>
@@ -1951,22 +1951,22 @@ function InvoicesTab({ po }: { po: PurchaseOrder }) {
     <div className="space-y-3">
       {/* Summary */}
       <div className="grid grid-cols-3 gap-2">
-        <Card className="po-stat-enter">
-          <CardContent className="glass-subtle p-3 text-center">
+        <Card className="hover-lift-sm po-stat-enter">
+          <CardContent className="inner-glow glass-subtle p-3 text-center">
             <Receipt className="mx-auto mb-1 h-5 w-5 text-purple-600 dark:text-purple-400" />
             <div className="text-[10px] uppercase text-muted-foreground">Invoiced</div>
             <div className="text-lg font-bold">{formatINR(totalInv, true)}</div>
           </CardContent>
         </Card>
-        <Card className="po-stat-enter">
-          <CardContent className="glass-subtle p-3 text-center">
+        <Card className="hover-lift-sm po-stat-enter">
+          <CardContent className="inner-glow glass-subtle p-3 text-center">
             <Banknote className="mx-auto mb-1 h-5 w-5 text-emerald-600 dark:text-emerald-400" />
             <div className="text-[10px] uppercase text-muted-foreground">Paid</div>
             <div className="text-lg font-bold text-emerald-600 dark:text-emerald-400">{formatINR(totalPaid, true)}</div>
           </CardContent>
         </Card>
-        <Card className="po-stat-enter">
-          <CardContent className="glass-subtle p-3 text-center">
+        <Card className="hover-lift-sm po-stat-enter">
+          <CardContent className="inner-glow glass-subtle p-3 text-center">
             <Clock className="mx-auto mb-1 h-5 w-5 text-amber-600 dark:text-amber-400" />
             <div className="text-[10px] uppercase text-muted-foreground">Pending</div>
             <div className="text-lg font-bold text-amber-600 dark:text-amber-400">{formatINR(totalInv - totalPaid, true)}</div>
@@ -1975,11 +1975,11 @@ function InvoicesTab({ po }: { po: PurchaseOrder }) {
       </div>
 
       {/* Invoice Table */}
-      <Card className="po-card-enter">
+      <Card className="hover-lift-sm po-card-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">Invoice Register</CardTitle>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="overflow-x-auto">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -2038,12 +2038,12 @@ function InvoicesTab({ po }: { po: PurchaseOrder }) {
 
 function ApprovalTab({ po }: { po: PurchaseOrder }) {
   return (
-    <Card className="po-card-enter">
+    <Card className="hover-lift-sm po-card-enter">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm">Approval Workflow</CardTitle>
         <CardDescription className="text-[11px]">Multi-stage approval chain with status tracking</CardDescription>
       </CardHeader>
-      <CardContent className="glass-subtle pt-0">
+      <CardContent className="inner-glow glass-subtle pt-0">
         <div className="space-y-2">
           {po.approvals.map((step, idx) => {
             const stageLabels: Record<POApprovalStage, { label: string; icon: typeof FileText }> = {

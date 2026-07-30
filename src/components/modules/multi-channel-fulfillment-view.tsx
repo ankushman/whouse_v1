@@ -234,8 +234,8 @@ export default function MultiChannelFulfillmentView() {
           <div className="space-y-4">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {SUMMARY_KPIS.map((kpi) => (
-                <Card key={kpi.label} className="mcf-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={kpi.label} className="hover-lift-sm mcf-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 mcf-kpi-icon" />
                       <span className={cn("mcf-trend-badge", kpi.trend === "up" ? "mcf-trend-up" : "mcf-trend-down")}>
@@ -251,7 +251,7 @@ export default function MultiChannelFulfillmentView() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Order Volume by Channel</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -269,7 +269,7 @@ export default function MultiChannelFulfillmentView() {
                 </CardContent>
               </Card>
 
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Channel Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -283,7 +283,7 @@ export default function MultiChannelFulfillmentView() {
                 </CardContent>
               </Card>
 
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Fulfillment Type Split</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -299,7 +299,7 @@ export default function MultiChannelFulfillmentView() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Revenue &amp; Profit Trend</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -317,7 +317,7 @@ export default function MultiChannelFulfillmentView() {
                 </CardContent>
               </Card>
 
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Warehouse Fulfillment Breakdown</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -337,7 +337,7 @@ export default function MultiChannelFulfillmentView() {
               </Card>
             </div>
 
-            <Card className="mcf-alert-card">
+            <Card className="hover-lift-sm mcf-alert-card">
               <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Channel Alerts</CardTitle></CardHeader>
               <CardContent>
                 <div className="space-y-2">
@@ -380,8 +380,8 @@ export default function MultiChannelFulfillmentView() {
               {ORDER_STATUSES.map((s) => {
                 const cnt = orders.filter((o) => o.status === s).length
                 return (
-                  <Card key={s} className="mcf-stat-mini cursor-pointer" onClick={() => setStatusFilter(s)}>
-                    <CardContent className="glass-subtle p-2 text-center">
+                  <Card key={s} className="hover-lift-sm mcf-stat-mini cursor-pointer" onClick={() => setStatusFilter(s)}>
+                    <CardContent className="inner-glow glass-subtle p-2 text-center">
                       <div className="text-sm font-bold">{cnt}</div>
                       <div className="text-[9px] opacity-60 truncate">{s}</div>
                     </CardContent>
@@ -390,8 +390,8 @@ export default function MultiChannelFulfillmentView() {
               })}
             </div>
 
-            <Card className="card-crud-lift mcf-table-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift mcf-table-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -437,8 +437,8 @@ export default function MultiChannelFulfillmentView() {
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {channelPerformance.map((ch) => (
-                <Card key={ch.id} className="mcf-channel-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={ch.id} className="hover-lift-sm mcf-channel-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <div className="mcf-ch-icon" style={{ background: ch.color }}>{ch.name.charAt(0)}</div>
@@ -471,7 +471,7 @@ export default function MultiChannelFulfillmentView() {
         {activeTab === "carriers" && (
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Carrier Shipment Volume</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -488,7 +488,7 @@ export default function MultiChannelFulfillmentView() {
                 </CardContent>
               </Card>
 
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">On-Time Delivery Rate</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -504,9 +504,9 @@ export default function MultiChannelFulfillmentView() {
               </Card>
             </div>
 
-            <Card className="mcf-table-card">
+            <Card className="hover-lift-sm mcf-table-card">
               <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Carrier Performance Summary</CardTitle></CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -549,8 +549,8 @@ export default function MultiChannelFulfillmentView() {
                 { label: "COD Ratio", value: `${rInt(25, 45)}%`, sub: "Cash on delivery" },
                 { label: "Marketplace Share", value: `${rInt(55, 75)}%`, sub: "Of total orders" },
               ].map((k) => (
-                <Card key={k.label} className="mcf-kpi-card">
-                  <CardContent className="glass-subtle p-4">
+                <Card key={k.label} className="hover-lift-sm mcf-kpi-card">
+                  <CardContent className="inner-glow glass-subtle p-4">
                     <div className="mcf-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="mcf-kpi-label text-xs">{k.label}</div>
                     <div className="mcf-kpi-sub text-xs">{k.sub}</div>
@@ -560,7 +560,7 @@ export default function MultiChannelFulfillmentView() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Channel Revenue Share</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -574,7 +574,7 @@ export default function MultiChannelFulfillmentView() {
                 </CardContent>
               </Card>
 
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Payment Method Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -599,7 +599,7 @@ export default function MultiChannelFulfillmentView() {
                 </CardContent>
               </Card>
 
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">SLA Compliance by Channel</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -616,7 +616,7 @@ export default function MultiChannelFulfillmentView() {
                 </CardContent>
               </Card>
 
-              <Card className="mcf-chart-card">
+              <Card className="hover-lift-sm mcf-chart-card">
                 <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Order Status Pipeline</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -648,7 +648,7 @@ export default function MultiChannelFulfillmentView() {
                     <p className="text-sm opacity-80">{selectedOrder.customer}</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="text-white/70 hover:text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" onClick={() => setDrawerOpen(false)} className="press-scale text-white/70 hover:text-white hover:bg-white/10">
                   <X className="h-5 w-5" />
                 </Button>
               </div>

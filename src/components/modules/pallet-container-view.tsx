@@ -287,8 +287,8 @@ export default function PalletContainerView() {
             { label: "Total Containers", value: String(totalContainers), icon: BrickWall, color: "text-indigo-600", bg: "bg-indigo-50 dark:bg-indigo-950/40", sub: `${CONTAINER_TYPES.length} types` },
             { label: "Active TEU", value: String(activeTEU), icon: Warehouse, color: "text-teal-600", bg: "bg-teal-50 dark:bg-teal-950/40", sub: `avg stuffing ${avgStuffing}%` },
           ].map(kpi => (
-            <Card key={kpi.label} className="pcm-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="glass-subtle p-4">
+            <Card key={kpi.label} className="hover-lift-sm pcm-kpi-card border-slate-100 dark:border-slate-800">
+              <CardContent className="inner-glow glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="pcm-label">{kpi.label}</p>
@@ -305,7 +305,7 @@ export default function PalletContainerView() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><TrendingUp className="h-4 w-4 text-amber-500" />Monthly Pallet Movements</CardTitle>
             </CardHeader>
@@ -326,7 +326,7 @@ export default function PalletContainerView() {
             </CardContent>
           </Card>
 
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><Box className="h-4 w-4 text-indigo-500" />Container Throughput</CardTitle>
             </CardHeader>
@@ -346,7 +346,7 @@ export default function PalletContainerView() {
             </CardContent>
           </Card>
 
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><Layers className="h-4 w-4 text-emerald-500" />Pallet Condition Distribution</CardTitle>
             </CardHeader>
@@ -362,7 +362,7 @@ export default function PalletContainerView() {
             </CardContent>
           </Card>
 
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><MapPin className="h-4 w-4 text-sky-500" />Port Handling Performance</CardTitle>
             </CardHeader>
@@ -425,8 +425,8 @@ export default function PalletContainerView() {
             <input className="pcm-search-input" placeholder="Search pallets, location, SKU..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
         </div>
-        <Card className="pcm-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm pcm-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="pcm-table">
                 <thead>
@@ -460,7 +460,7 @@ export default function PalletContainerView() {
                       <td><span className={`pcm-status-badge ${STATUS_COLORS[p.state] || STATUS_COLORS[p.status] || ""}`}>{p.state}</span></td>
                       <td><Badge className={p.condition === "Good" || p.condition === "Excellent" ? "pcm-cond-good" : "pcm-cond-bad"}>{p.condition}</Badge></td>
                       <td><span className={`pcm-status-badge ${STATUS_COLORS[p.status] || ""}`}>{p.status}</span></td>
-                      <td><Button size="sm" variant="ghost" className="pcm-action-btn" onClick={() => openDrawerPallet(p)}><Eye className="h-3.5 w-3.5" /></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale pcm-action-btn" onClick={() => openDrawerPallet(p)}><Eye className="h-3.5 w-3.5" /></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -489,8 +489,8 @@ export default function PalletContainerView() {
             <input className="pcm-search-input" placeholder="Search container, vessel, port..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
         </div>
-        <Card className="pcm-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="glass-subtle p-0">
+        <Card className="hover-lift-sm pcm-table-card border-slate-100 dark:border-slate-800">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="pcm-table">
                 <thead>
@@ -532,7 +532,7 @@ export default function PalletContainerView() {
                       </td>
                       <td className="badge-interactive text-xs text-slate-600 dark:text-slate-400">{c.sealNo === "Pending" ? <Badge className="pcm-seal-pending">Pending</Badge> : <span className="text-[10px] font-mono">{c.sealNo}</span>}</td>
                       <td><span className={`pcm-status-badge ${STATUS_COLORS[c.status] || ""}`}>{c.status}</span></td>
-                      <td><Button size="sm" variant="ghost" className="pcm-action-btn" onClick={() => openDrawerContainer(c)}><Eye className="h-3.5 w-3.5" /></Button></td>
+                      <td><Button size="sm" variant="ghost" className="press-scale pcm-action-btn" onClick={() => openDrawerContainer(c)}><Eye className="h-3.5 w-3.5" /></Button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -549,7 +549,7 @@ export default function PalletContainerView() {
     return (
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><Layers className="h-4 w-4 text-amber-500" />Pallet Distribution by Type</CardTitle>
             </CardHeader>
@@ -568,7 +568,7 @@ export default function PalletContainerView() {
             </CardContent>
           </Card>
 
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><BrickWall className="h-4 w-4 text-indigo-500" />Container Type Distribution</CardTitle>
             </CardHeader>
@@ -585,11 +585,11 @@ export default function PalletContainerView() {
           </Card>
         </div>
 
-        <Card className="pcm-table-card border-slate-100 dark:border-slate-800 mt-4">
+        <Card className="hover-lift-sm pcm-table-card border-slate-100 dark:border-slate-800 mt-4">
           <CardHeader className="pb-2">
             <CardTitle className="pcm-title"><MapPin className="h-4 w-4 text-sky-500" />Warehouse Asset Utilization</CardTitle>
           </CardHeader>
-          <CardContent className="glass-subtle p-0">
+          <CardContent className="inner-glow glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="pcm-table">
                 <thead>
@@ -625,7 +625,7 @@ export default function PalletContainerView() {
     return (
       <Fragment>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><TrendingUp className="h-4 w-4 text-emerald-500" />Pallet Lifecycle Analysis</CardTitle>
             </CardHeader>
@@ -644,7 +644,7 @@ export default function PalletContainerView() {
             </CardContent>
           </Card>
 
-          <Card className="pcm-chart-card border-slate-100 dark:border-slate-800">
+          <Card className="hover-lift-sm pcm-chart-card border-slate-100 dark:border-slate-800">
             <CardHeader className="pb-2">
               <CardTitle className="pcm-title"><ArrowDownUp className="h-4 w-4 text-indigo-500" />Import vs Export Balance</CardTitle>
             </CardHeader>
@@ -671,8 +671,8 @@ export default function PalletContainerView() {
             const avgCond = ptPallets.length > 0 ? ptPallets.filter(p => p.condition === "Good" || p.condition === "Excellent").length / ptPallets.length * 100 : 0
             const inUse = ptPallets.filter(p => p.status === "In Use").length
             return (
-              <Card key={pt.name} className="pcm-type-card border-slate-100 dark:border-slate-800">
-                <CardContent className="glass-subtle p-4">
+              <Card key={pt.name} className="hover-lift-sm pcm-type-card border-slate-100 dark:border-slate-800">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="pcm-type-dot" style={{ background: pt.color }} />
                     <div>
@@ -709,7 +709,7 @@ export default function PalletContainerView() {
                   <p className="pcm-drawer-subtitle">{p.type} | {p.lotNo}</p>
                 </div>
               </div>
-              <Button variant="ghost" size="sm" className="pcm-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
+              <Button variant="ghost" size="sm" className="press-scale pcm-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
             </div>
             <div className="pcm-drawer-body">
               <div className="pcm-drawer-status-row">
@@ -732,9 +732,9 @@ export default function PalletContainerView() {
                 <div className="pcm-detail-item"><p className="pcm-detail-label">Next Audit</p><p className="pcm-detail-value">{p.nextAudit}</p></div>
               </div>
               <div className="pcm-drawer-actions">
-                <Button size="sm" className="pcm-btn-primary"><ScanBarcode className="h-3.5 w-3.5 mr-1" /> Scan Pallet</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><RotateCw className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><ClipboardList className="h-3.5 w-3.5 mr-1" /> Audit</Button>
+                <Button size="sm" className="press-scale pcm-btn-primary"><ScanBarcode className="h-3.5 w-3.5 mr-1" /> Scan Pallet</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate pcm-btn-outline"><RotateCw className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate pcm-btn-outline"><ClipboardList className="h-3.5 w-3.5 mr-1" /> Audit</Button>
               </div>
             </div>
           </div>
@@ -755,7 +755,7 @@ export default function PalletContainerView() {
                   <p className="pcm-drawer-subtitle">{c.type} ({c.code}) | {c.teu} TEU</p>
                 </div>
               </div>
-              <Button variant="ghost" size="sm" className="pcm-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
+              <Button variant="ghost" size="sm" className="press-scale pcm-drawer-close" onClick={() => setDrawerOpen(false)}><X className="h-4 w-4" /></Button>
             </div>
             <div className="pcm-drawer-body">
               <div className="pcm-drawer-status-row">
@@ -785,9 +785,9 @@ export default function PalletContainerView() {
                 </div>
               </div>
               <div className="pcm-drawer-actions">
-                <Button size="sm" className="pcm-btn-primary"><QrCode className="h-3.5 w-3.5 mr-1" /> Scan Container</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><ArrowRightLeft className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
-                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> DO Copy</Button>
+                <Button size="sm" className="press-scale pcm-btn-primary"><QrCode className="h-3.5 w-3.5 mr-1" /> Scan Container</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate pcm-btn-outline"><ArrowRightLeft className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
+                <Button size="sm" variant="outline" className="press-scale btn-outline-animate pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> DO Copy</Button>
               </div>
             </div>
           </div>
@@ -805,9 +805,9 @@ export default function PalletContainerView() {
           <p className="pcm-page-subtitle">Track pallets, containers, storage utilization and asset lifecycle across warehouses</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" className="pcm-btn-primary"><Plus className="h-3.5 w-3.5 mr-1" /> Add Pallet</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Audit Scan</Button>
-          <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
+          <Button size="sm" className="press-scale pcm-btn-primary"><Plus className="h-3.5 w-3.5 mr-1" /> Add Pallet</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate pcm-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Audit Scan</Button>
+          <Button size="sm" variant="outline" className="press-scale btn-outline-animate pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
         </div>
       </div>
 

@@ -495,8 +495,8 @@ export default function ReverseLogisticsEnhancementView() {
             {kpis.map((k, i) => {
               const Icon = k.icon
               return (
-                <Card key={i} className="rle-kpi-card border-l-4 border-l-rose-500 hover:shadow-lg transition-shadow">
-                  <CardContent className="glass-subtle p-3">
+                <Card key={i} className="hover-lift-sm rle-kpi-card border-l-4 border-l-rose-500 hover:shadow-lg transition-shadow">
+                  <CardContent className="inner-glow glass-subtle p-3">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p>
@@ -514,16 +514,16 @@ export default function ReverseLogisticsEnhancementView() {
             })}
           </div>
           <div className="grid md:grid-cols-3 gap-4">
-            <Card className="rle-chart-card col-span-2">
+            <Card className="hover-lift-sm rle-chart-card col-span-2">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Daily Returns Volume</CardTitle></CardHeader>
               <CardContent><AreaChart data={data.dailyVolume} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="day" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="New Request" stackId="a" fill="#e11d48" /><Area type="monotone" dataKey="Picked Up" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Processed" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Refunded" stackId="a" fill="#d97706" /></AreaChart></CardContent>
             </Card>
-            <Card className="rle-chart-card">
+            <Card className="hover-lift-sm rle-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Return Reasons</CardTitle></CardHeader>
               <CardContent><PieChart width={240} height={240}><Pie data={data.reasonDist} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false} fontSize={9}>{data.reasonDist.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
           </div>
-          <Card className="rle-chart-card">
+          <Card className="hover-lift-sm rle-chart-card">
             <CardHeader className="pb-2"><CardTitle className="text-sm">Channel Distribution</CardTitle></CardHeader>
             <CardContent><BarChart data={data.channelDist} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="value" fill="#7c3aed" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
           </Card>
@@ -572,7 +572,7 @@ export default function ReverseLogisticsEnhancementView() {
                     <TableCell className="numeric-cell text-xs font-semibold">{formatINR(r.value)}</TableCell>
                     <TableCell className="text-xs">{r.pickupDate}</TableCell>
                     <TableCell><TATBadge days={r.age} /></TableCell>
-                    <TableCell><Button variant="ghost" size="sm" className="h-7 text-[10px] rle-action-btn" onClick={() => openDetail(r)}><Eye className="w-3 h-3 mr-1" />View</Button></TableCell>
+                    <TableCell><Button variant="ghost" size="sm" className="press-scale h-7 text-[10px] rle-action-btn" onClick={() => openDetail(r)}><Eye className="w-3 h-3 mr-1" />View</Button></TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -639,9 +639,9 @@ export default function ReverseLogisticsEnhancementView() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredRefunds.map(r => (
-              <Card key={r.id} className="rle-refund-card overflow-hidden">
+              <Card key={r.id} className="hover-lift-sm rle-refund-card overflow-hidden">
                 <div className="h-1.5 bg-gradient-to-r from-rose-500 to-emerald-500" />
-                <CardContent className="glass-subtle p-3 space-y-2">
+                <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-semibold">{r.id}</span>
                     <RefundStatusBadge status={r.status} />
@@ -731,8 +731,8 @@ export default function ReverseLogisticsEnhancementView() {
             ].map((k, i) => {
               const Icon = k.icon
               return (
-                <Card key={i} className="rle-kpi-card border-l-4 border-l-emerald-500">
-                  <CardContent className="glass-subtle p-3">
+                <Card key={i} className="hover-lift-sm rle-kpi-card border-l-4 border-l-emerald-500">
+                  <CardContent className="inner-glow glass-subtle p-3">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p>
@@ -746,21 +746,21 @@ export default function ReverseLogisticsEnhancementView() {
             })}
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="rle-chart-card">
+            <Card className="hover-lift-sm rle-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Return Trend</CardTitle></CardHeader>
               <CardContent><LineChart data={data.monthlyTrend} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="returns" stroke="#e11d48" strokeWidth={2} /><Line type="monotone" dataKey="refunds" stroke="#059669" strokeWidth={2} /><Line type="monotone" dataKey="recovery" stroke="#3b82f6" strokeWidth={2} /></LineChart></CardContent>
             </Card>
-            <Card className="rle-chart-card">
+            <Card className="hover-lift-sm rle-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Category Return Rate</CardTitle></CardHeader>
               <CardContent><BarChart data={data.categoryReturnRate} height={240}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 9 }} angle={-20} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="rate" fill="#e11d48" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
             </Card>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <Card className="rle-chart-card">
+            <Card className="hover-lift-sm rle-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Channel Return Rate Comparison</CardTitle></CardHeader>
               <CardContent><BarChart data={data.channelReturnRate} layout="vertical" height={260}><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="name" tick={{ fontSize: 9 }} width={100} /><Tooltip /><Bar dataKey="rate" fill="#7c3aed" radius={[0, 4, 4, 0]} /></BarChart></CardContent>
             </Card>
-            <Card className="rle-chart-card">
+            <Card className="hover-lift-sm rle-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Cost Savings Breakdown (6-Month)</CardTitle></CardHeader>
               <CardContent><AreaChart data={data.costSavings} height={260}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={(v: number) => `${(v / 100000).toFixed(0)}L`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Area type="monotone" dataKey="Refund Savings" stackId="a" fill="#e11d48" /><Area type="monotone" dataKey="Recovery Revenue" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Restock Value" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Repair Savings" stackId="a" fill="#d97706" /></AreaChart></CardContent>
             </Card>
@@ -803,8 +803,8 @@ export default function ReverseLogisticsEnhancementView() {
                 </div>
                 <Separator />
                 <div className="flex gap-2">
-                  <Button size="sm" className="text-xs flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => { toast.success("Approved", `Return ${selectedReturn.id} approved`) }}>{selectedReturn.status === "Approved" || selectedReturn.status === "Refunded" ? "Already Approved" : "Approve Return"}</Button>
-                  <Button size="sm" className="text-xs flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => { toast.success("Refunded", `Refund initiated for ${selectedReturn.id}`) }}>{selectedReturn.status === "Refunded" ? "Refund Done" : "Process Refund"}</Button>
+                  <Button size="sm" className="press-scale text-xs flex-1 bg-rose-600 hover:bg-rose-700" onClick={() => { toast.success("Approved", `Return ${selectedReturn.id} approved`) }}>{selectedReturn.status === "Approved" || selectedReturn.status === "Refunded" ? "Already Approved" : "Approve Return"}</Button>
+                  <Button size="sm" className="press-scale text-xs flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => { toast.success("Refunded", `Refund initiated for ${selectedReturn.id}`) }}>{selectedReturn.status === "Refunded" ? "Refund Done" : "Process Refund"}</Button>
                 </div>
               </div>
             </>

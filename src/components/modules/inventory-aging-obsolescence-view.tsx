@@ -1101,7 +1101,7 @@ export default function InventoryAgingObsolescenceView() {
               { label: "Aging Health Index", value: `${data.kpis.agingHealthIndex}%`, icon: <Activity className="h-4 w-4" />, color: data.kpis.agingHealthIndex >= 65 ? "#059669" : "#e11d48" },
             ].map((kpi) => (
               <Card key={kpi.label}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: `${kpi.color}15`, color: kpi.color }}>{kpi.icon}</div>
                   <div>
                     <p className="text-[11px] text-muted-foreground">{kpi.label}</p>
@@ -1205,7 +1205,7 @@ export default function InventoryAgingObsolescenceView() {
           </div>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[520px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1235,7 +1235,7 @@ export default function InventoryAgingObsolescenceView() {
                         <TableCell><LastMovementIndicator days={rec.lastMovementDays} /></TableCell>
                         <TableCell><DispositionBadge disposition={rec.disposition} /></TableCell>
                         <TableCell>
-                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
+                          <Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
                         </TableCell>
@@ -1267,7 +1267,7 @@ export default function InventoryAgingObsolescenceView() {
           </div>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[520px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1297,7 +1297,7 @@ export default function InventoryAgingObsolescenceView() {
                         <TableCell className="numeric-cell text-xs font-medium" style={{ color: "#b45309" }}>{formatINR(rec.inventoryValue)}</TableCell>
                         <TableCell><SlowMotionScoreRing score={rec.score} /></TableCell>
                         <TableCell>
-                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
+                          <Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
                         </TableCell>
@@ -1329,7 +1329,7 @@ export default function InventoryAgingObsolescenceView() {
           </div>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[520px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1359,7 +1359,7 @@ export default function InventoryAgingObsolescenceView() {
                         <TableCell><ApprovalLevelBadge level={rec.approvalLevel} /></TableCell>
                         <TableCell className="text-xs">{rec.proposedDate}</TableCell>
                         <TableCell>
-                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
+                          <Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
                         </TableCell>
@@ -1391,7 +1391,7 @@ export default function InventoryAgingObsolescenceView() {
           </div>
 
           <Card>
-            <CardContent className="glass-subtle p-0">
+            <CardContent className="inner-glow glass-subtle p-0">
               <div className="max-h-[520px] overflow-y-auto">
                 <Table className="table-hover-highlight">
                   <TableHeader>
@@ -1423,7 +1423,7 @@ export default function InventoryAgingObsolescenceView() {
                         <TableCell><ProvisionVsActualBar provision={rec.provisionVsActual[0]} actual={rec.provisionVsActual[1]} /></TableCell>
                         <TableCell><MonthlyProvisionTrend history={rec.monthlyHistory} /></TableCell>
                         <TableCell>
-                          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
+                          <Button variant="ghost" size="icon" className="press-scale h-7 w-7" onClick={(e) => { e.stopPropagation(); openDrawer(rec); }}>
                             <Eye className="h-3.5 w-3.5" />
                           </Button>
                         </TableCell>
@@ -1453,7 +1453,7 @@ export default function InventoryAgingObsolescenceView() {
               { label: "YoY Improvement", value: `${data.analyticsKPIs.yoyImprovement > 0 ? "+" : ""}${data.analyticsKPIs.yoyImprovement}%`, icon: data.analyticsKPIs.yoyImprovement >= 0 ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />, color: data.analyticsKPIs.yoyImprovement >= 0 ? "#059669" : "#e11d48" },
             ].map((kpi) => (
               <Card key={kpi.label}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg" style={{ backgroundColor: `${kpi.color}15`, color: kpi.color }}>{kpi.icon}</div>
                   <div>
                     <p className="text-[11px] text-muted-foreground">{kpi.label}</p>
@@ -1611,13 +1611,13 @@ export default function InventoryAgingObsolescenceView() {
                   <div><span className="text-muted-foreground">Received:</span> <span className="font-medium">{(drawerRecord as SKURecord).receivedDate}</span></div>
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" className="flex-1" style={{ backgroundColor: "#b45309" }} onClick={() => { toast.info("Review Initiated", `Reviewing ${(drawerRecord as SKURecord).sku}`); setDrawerOpen(false); }}>
+                  <Button size="sm" className="press-scale flex-1" style={{ backgroundColor: "#b45309" }} onClick={() => { toast.info("Review Initiated", `Reviewing ${(drawerRecord as SKURecord).sku}`); setDrawerOpen(false); }}>
                     Review
                   </Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Disposition Initiated", `For ${(drawerRecord as SKURecord).sku}`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.warning("Disposition Initiated", `For ${(drawerRecord as SKURecord).sku}`); setDrawerOpen(false); }}>
                     Initiate Disposition
                   </Button>
-                  <Button size="sm" variant="secondary" className="flex-1" onClick={() => { toast.success("Extended", `Aging extended for ${(drawerRecord as SKURecord).sku}`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="secondary" className="press-scale flex-1" onClick={() => { toast.success("Extended", `Aging extended for ${(drawerRecord as SKURecord).sku}`); setDrawerOpen(false); }}>
                     Extend
                   </Button>
                 </div>
@@ -1656,13 +1656,13 @@ export default function InventoryAgingObsolescenceView() {
                   <div><span className="text-muted-foreground">Inventory Value:</span> <span className="font-medium" style={{ color: "#b45309" }}>{formatINR((drawerRecord as SlowMovingRecord).inventoryValue)}</span></div>
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" className="flex-1" style={{ backgroundColor: "#e11d48" }} onClick={() => { toast.info("Action Plan Created", `For ${(drawerRecord as SlowMovingRecord).sku}`); setDrawerOpen(false); }}>
+                  <Button size="sm" className="press-scale flex-1" style={{ backgroundColor: "#e11d48" }} onClick={() => { toast.info("Action Plan Created", `For ${(drawerRecord as SlowMovingRecord).sku}`); setDrawerOpen(false); }}>
                     Create Action Plan
                   </Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Escalated", `${(drawerRecord as SlowMovingRecord).sku} escalated`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.warning("Escalated", `${(drawerRecord as SlowMovingRecord).sku} escalated`); setDrawerOpen(false); }}>
                     Escalate
                   </Button>
-                  <Button size="sm" variant="secondary" className="flex-1" onClick={() => { toast.success("Resolved", `${(drawerRecord as SlowMovingRecord).sku} marked resolved`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="secondary" className="press-scale flex-1" onClick={() => { toast.success("Resolved", `${(drawerRecord as SlowMovingRecord).sku} marked resolved`); setDrawerOpen(false); }}>
                     Mark Resolved
                   </Button>
                 </div>
@@ -1701,13 +1701,13 @@ export default function InventoryAgingObsolescenceView() {
                   <div><span className="text-muted-foreground">Completed:</span> <span className="font-medium">{(drawerRecord as WriteOffRecord).completedDate}</span></div>
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" className="flex-1" style={{ backgroundColor: "#7c3aed" }} onClick={() => { toast.success("Approved", `${(drawerRecord as WriteOffRecord).woNumber} approved`); setDrawerOpen(false); }}>
+                  <Button size="sm" className="press-scale flex-1" style={{ backgroundColor: "#7c3aed" }} onClick={() => { toast.success("Approved", `${(drawerRecord as WriteOffRecord).woNumber} approved`); setDrawerOpen(false); }}>
                     Approve
                   </Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.error("Rejected", `${(drawerRecord as WriteOffRecord).woNumber} rejected`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.error("Rejected", `${(drawerRecord as WriteOffRecord).woNumber} rejected`); setDrawerOpen(false); }}>
                     Reject
                   </Button>
-                  <Button size="sm" variant="secondary" className="flex-1" onClick={() => { toast.warning("Escalated", `${(drawerRecord as WriteOffRecord).woNumber} escalated`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="secondary" className="press-scale flex-1" onClick={() => { toast.warning("Escalated", `${(drawerRecord as WriteOffRecord).woNumber} escalated`); setDrawerOpen(false); }}>
                     Escalate
                   </Button>
                 </div>
@@ -1747,13 +1747,13 @@ export default function InventoryAgingObsolescenceView() {
                   <div><ProvisionVsActualBar provision={(drawerRecord as ProvisioningRecord).provisionVsActual[0]} actual={(drawerRecord as ProvisioningRecord).provisionVsActual[1]} /></div>
                 </div>
                 <div className="flex gap-2 pt-2">
-                  <Button size="sm" className="flex-1" style={{ backgroundColor: "#475569" }} onClick={() => { toast.success("Approved", `${(drawerRecord as ProvisioningRecord).recordNo} approved`); setDrawerOpen(false); }}>
+                  <Button size="sm" className="press-scale flex-1" style={{ backgroundColor: "#475569" }} onClick={() => { toast.success("Approved", `${(drawerRecord as ProvisioningRecord).recordNo} approved`); setDrawerOpen(false); }}>
                     Approve
                   </Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Adjustment Initiated", `For ${(drawerRecord as ProvisioningRecord).recordNo}`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1" onClick={() => { toast.info("Adjustment Initiated", `For ${(drawerRecord as ProvisioningRecord).recordNo}`); setDrawerOpen(false); }}>
                     Adjust
                   </Button>
-                  <Button size="sm" variant="secondary" className="flex-1" onClick={() => { toast.warning("Released", `${(drawerRecord as ProvisioningRecord).recordNo} released`); setDrawerOpen(false); }}>
+                  <Button size="sm" variant="secondary" className="press-scale flex-1" onClick={() => { toast.warning("Released", `${(drawerRecord as ProvisioningRecord).recordNo} released`); setDrawerOpen(false); }}>
                     Release
                   </Button>
                 </div>

@@ -1039,24 +1039,24 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
             <div className="space-y-4">
               {/* Cost Summary 3-card */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <Card className="border-blue-200 dark:border-blue-900 pcv-card-enter">
+                <Card className="hover-lift-sm border-blue-200 dark:border-blue-900 pcv-card-enter">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-xs flex items-center gap-1.5 text-blue-700 dark:text-blue-300">
                       <Wallet className="h-3.5 w-3.5" /> Planned Cost
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="glass-subtle space-y-1">
+                  <CardContent className="inner-glow glass-subtle space-y-1">
                     <div className="text-xl font-bold">{fmtINRFull(item.plannedCost)}</div>
                     <div className="text-xs text-muted-foreground">{fmtNum(item.qtyPlanned)} units planned @ ₹{item.plannedUnitCost.toFixed(2)}/unit</div>
                   </CardContent>
                 </Card>
-                <Card className="border-amber-200 dark:border-amber-900 pcv-card-enter">
+                <Card className="hover-lift-sm border-amber-200 dark:border-amber-900 pcv-card-enter">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-xs flex items-center gap-1.5 text-amber-700 dark:text-amber-300">
                       <Receipt className="h-3.5 w-3.5" /> Actual Cost
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="glass-subtle space-y-1">
+                  <CardContent className="inner-glow glass-subtle space-y-1">
                     <div className="text-xl font-bold">{fmtINRFull(item.actualCost)}</div>
                     <div className="text-xs text-muted-foreground">{fmtNum(item.qtyProduced)} units produced @ ₹{item.actualUnitCost.toFixed(2)}/unit</div>
                   </CardContent>
@@ -1067,7 +1067,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                       <Scale className="h-3.5 w-3.5" /> Variance Summary
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="glass-subtle space-y-1">
+                  <CardContent className="inner-glow glass-subtle space-y-1">
                     <div className={cn("text-xl font-bold flex items-center gap-1", dirCfg.color)}>
                       <DirIcon className="h-4 w-4" />
                       {item.variance > 0 ? "+" : ""}{fmtINR(item.variance)}
@@ -1078,7 +1078,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
               </div>
 
               {/* Monthly Trend Chart */}
-              <Card className="pcv-card-enter">
+              <Card className="hover-lift-sm pcv-card-enter">
                 <CardHeader>
                   <CardTitle className="text-sm flex items-center gap-2">
                     <Activity className="h-4 w-4 text-blue-600" /> 6-Month Cost Trend (Planned vs Actual)
@@ -1110,13 +1110,13 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
               </Card>
 
               {/* Traceability */}
-              <Card className="pcv-card-enter">
+              <Card className="hover-lift-sm pcv-card-enter">
                 <CardHeader>
                   <CardTitle className="text-sm flex items-center gap-2">
                     <BookOpen className="h-4 w-4 text-purple-600" /> Traceability & Ownership
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                <CardContent className="inner-glow glass-subtle grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                   <div className="space-y-1">
                     <div className="text-muted-foreground uppercase tracking-wide text-[10px]">Production Schedule</div>
                     <div className="font-mono font-medium text-blue-700 dark:text-blue-300">{item.psRef}</div>
@@ -1153,13 +1153,13 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
               </Card>
 
               {/* Supplier card */}
-              <Card className="pcv-card-enter">
+              <Card className="hover-lift-sm pcv-card-enter">
                 <CardHeader>
                   <CardTitle className="text-sm flex items-center gap-2">
                     <Factory className="h-4 w-4 text-emerald-600" /> Supplier Context
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="glass-subtle grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <CardContent className="inner-glow glass-subtle grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
                   <div className="space-y-1">
                     <div className="text-muted-foreground uppercase tracking-wide text-[10px]">Supplier Name</div>
                     <div className="font-medium text-sm">{item.supplier}</div>
@@ -1290,7 +1290,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Quantified impact of each variance driver, sorted by absolute value</CardDescription>
                 </CardHeader>
-                <CardContent className="glass-subtle space-y-2">
+                <CardContent className="inner-glow glass-subtle space-y-2">
                   {drivers.length === 0 && (
                     <div className="text-center py-8 text-sm text-muted-foreground">
                       No significant drivers identified (variance below ₹1,000 threshold).
@@ -1347,7 +1347,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Ranked by risk score (probability × impact)</CardDescription>
                 </CardHeader>
-                <CardContent className="glass-subtle space-y-2">
+                <CardContent className="inner-glow glass-subtle space-y-2">
                   {rootCauses.map((rc) => {
                     const cfg = CATEGORY_CONFIG[rc.category]
                     const Icon = cfg.icon
@@ -1411,8 +1411,8 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
 
           {activeTab === "mitigation" && (
             <div className="space-y-4">
-              <Card className="border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/10">
-                <CardContent className="glass-subtle pt-4 grid grid-cols-3 gap-3 text-xs">
+              <Card className="hover-lift-sm border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/10">
+                <CardContent className="inner-glow glass-subtle pt-4 grid grid-cols-3 gap-3 text-xs">
                   <div>
                     <div className="text-muted-foreground uppercase tracking-wide text-[10px]">Total Estimated Savings</div>
                     <div className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{fmtINR(totalMitigationSavings)}</div>
@@ -1435,7 +1435,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Cost recovery actions with estimated savings and progress tracking</CardDescription>
                 </CardHeader>
-                <CardContent className="glass-subtle space-y-2">
+                <CardContent className="inner-glow glass-subtle space-y-2">
                   {mitigationActions.map((action) => {
                     const typeIcons: Record<PCVMitigationAction["type"], typeof Wrench> = {
                       negotiation: IndianRupee,
@@ -1499,7 +1499,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Multi-tier approval chain based on variance amount threshold</CardDescription>
                 </CardHeader>
-                <CardContent className="glass-subtle space-y-2">
+                <CardContent className="inner-glow glass-subtle space-y-2">
                   {approvals.map((ap, idx) => {
                     const levelColors: Record<PCVApproval["level"], string> = {
                       supervisor: "text-blue-700 bg-blue-50 dark:bg-blue-950/30 dark:text-blue-300",
@@ -1885,7 +1885,7 @@ export function ProductionCostVarianceView() {
       <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         <Card className={cn("relative overflow-hidden pcv-kpi-enter border-blue-200 dark:border-blue-900", kpis.criticalCount > 0 && "border-rose-300 dark:border-rose-800")}>
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-400" />
-          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
+          <CardContent className="inner-glow glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Hash className="h-3 w-3" /> Total Variance Records
@@ -1901,7 +1901,7 @@ export function ProductionCostVarianceView() {
 
         <Card className={cn("relative overflow-hidden pcv-kpi-enter", kpis.criticalCount > 0 && "border-rose-300 dark:border-rose-800")}>
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-rose-400" />
-          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
+          <CardContent className="inner-glow glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <XCircle className="h-3 w-3" /> Critical Variances
@@ -1917,9 +1917,9 @@ export function ProductionCostVarianceView() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden pcv-kpi-enter">
+        <Card className="hover-lift-sm relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-orange-400" />
-          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
+          <CardContent className="inner-glow glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <IndianRupee className="h-3 w-3" /> Total Variance
@@ -1935,9 +1935,9 @@ export function ProductionCostVarianceView() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden pcv-kpi-enter">
+        <Card className="hover-lift-sm relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400" />
-          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
+          <CardContent className="inner-glow glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <PiggyBank className="h-3 w-3" /> Favorable Variance
@@ -1949,9 +1949,9 @@ export function ProductionCostVarianceView() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden pcv-kpi-enter">
+        <Card className="hover-lift-sm relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-purple-400" />
-          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
+          <CardContent className="inner-glow glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Percent className="h-3 w-3" /> Avg Variance %
@@ -1963,9 +1963,9 @@ export function ProductionCostVarianceView() {
           </CardContent>
         </Card>
 
-        <Card className="relative overflow-hidden pcv-kpi-enter">
+        <Card className="hover-lift-sm relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-cyan-400" />
-          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
+          <CardContent className="inner-glow glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Wallet className="h-3 w-3" /> Total Planned Cost
@@ -1980,7 +1980,7 @@ export function ProductionCostVarianceView() {
 
       {/* Charts Row 1 */}
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="md:col-span-2 pcv-chart-enter">
+        <Card className="hover-lift-sm md:col-span-2 pcv-chart-enter">
           <CardHeader>
             <CardTitle className="text-sm flex items-center gap-2">
               <Activity className="h-4 w-4 text-blue-600" /> 6-Month Cost Trend (Planned vs Actual)
@@ -2011,7 +2011,7 @@ export function ProductionCostVarianceView() {
           </CardContent>
         </Card>
 
-        <Card className="pcv-chart-enter">
+        <Card className="hover-lift-sm pcv-chart-enter">
           <CardHeader>
             <CardTitle className="text-sm flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-amber-600" /> Status Distribution
@@ -2046,7 +2046,7 @@ export function ProductionCostVarianceView() {
 
       {/* Charts Row 2 */}
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="md:col-span-2 pcv-chart-enter">
+        <Card className="hover-lift-sm md:col-span-2 pcv-chart-enter">
           <CardHeader>
             <CardTitle className="text-sm flex items-center gap-2">
               <BarChart3 className="h-4 w-4 text-purple-600" /> Cost Variance by Category
@@ -2067,7 +2067,7 @@ export function ProductionCostVarianceView() {
           </CardContent>
         </Card>
 
-        <Card className="pcv-chart-enter">
+        <Card className="hover-lift-sm pcv-chart-enter">
           <CardHeader>
             <CardTitle className="text-sm flex items-center gap-2">
               <Gauge className="h-4 w-4 text-rose-600" /> Risk Distribution
@@ -2092,7 +2092,7 @@ export function ProductionCostVarianceView() {
       </div>
 
       {/* Charts Row 3 — Warehouse Variance */}
-      <Card className="pcv-chart-enter">
+      <Card className="hover-lift-sm pcv-chart-enter">
         <CardHeader>
           <CardTitle className="text-sm flex items-center gap-2">
             <Factory className="h-4 w-4 text-emerald-600" /> Cost Variance by Warehouse
@@ -2166,7 +2166,7 @@ export function ProductionCostVarianceView() {
             </div>
           </div>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           {/* Status tabs */}
           <div className="flex gap-1 flex-wrap mb-3">
             {statusTabs.map(tab => (

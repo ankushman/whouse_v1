@@ -527,22 +527,22 @@ export default function DemurrageDetentionMgmtView() {
               { label: "Avg Turnaround", value: `${k.avgTurnaround}d`, icon: <Clock className="w-4 h-4" /> },
               { label: "Savings Achieved", value: formatINR(k.savingsAchieved), icon: <TrendingUp className="w-4 h-4" /> },
             ].map((item, idx) => (
-              <Card key={idx} className="ddm-kpi-card">
+              <Card key={idx} className="hover-lift-sm ddm-kpi-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-4">
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="inner-glow glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly D&D Charges</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><AreaChart data={data.monthlyDD}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Area type="monotone" dataKey="Demurrage" stackId="1" stroke="#991b1b" fill="#fecaca" /><Area type="monotone" dataKey="Detention" stackId="1" stroke="#0d9488" fill="#99f6e4" /><Area type="monotone" dataKey="Total" stroke="#ca8a04" fill="none" strokeWidth={2} /></AreaChart></ResponsiveContainer></CardContent></Card>
-            <Card className="ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Charge Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><PieChart><Pie data={data.chargeDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.chargeDistribution.map((_: unknown, idx: number) => <Cell key={idx} fill={CHART_COLORS[idx % CHART_COLORS.length]} />)}</Pie><Tooltip formatter={(v: number) => formatINR(v)} /></PieChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly D&D Charges</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><AreaChart data={data.monthlyDD}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Area type="monotone" dataKey="Demurrage" stackId="1" stroke="#991b1b" fill="#fecaca" /><Area type="monotone" dataKey="Detention" stackId="1" stroke="#0d9488" fill="#99f6e4" /><Area type="monotone" dataKey="Total" stroke="#ca8a04" fill="none" strokeWidth={2} /></AreaChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Charge Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><PieChart><Pie data={data.chargeDistribution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.chargeDistribution.map((_: unknown, idx: number) => <Cell key={idx} fill={CHART_COLORS[idx % CHART_COLORS.length]} />)}</Pie><Tooltip formatter={(v: number) => formatINR(v)} /></PieChart></ResponsiveContainer></CardContent></Card>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Port-wise D&D</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.portwiseDD}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="port" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Bar dataKey="Demurrage" fill="#991b1b" radius={[4, 4, 0, 0]} /><Bar dataKey="Detention" fill="#0d9488" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Turnaround Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><LineChart data={data.turnaroundTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Line type="monotone" dataKey="Actual" stroke="#991b1b" strokeWidth={2} /><Line type="monotone" dataKey="Target" stroke="#0d9488" strokeDasharray="5 5" /></LineChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Port-wise D&D</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.portwiseDD}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="port" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Bar dataKey="Demurrage" fill="#991b1b" radius={[4, 4, 0, 0]} /><Bar dataKey="Detention" fill="#0d9488" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Turnaround Trend</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><LineChart data={data.turnaroundTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Line type="monotone" dataKey="Actual" stroke="#991b1b" strokeWidth={2} /><Line type="monotone" dataKey="Target" stroke="#0d9488" strokeDasharray="5 5" /></LineChart></ResponsiveContainer></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -582,7 +582,7 @@ export default function DemurrageDetentionMgmtView() {
                     <td className="px-3 py-2 font-bold tabular-nums">{formatINR(c.totalDD)}</td>
                     <td className="px-3 py-2 font-mono text-[10px]">{c.blNumber}</td>
                     <td className="px-3 py-2">{c.arrivalDate}</td>
-                    <td className="px-3 py-2"><Button size="sm" variant="ghost" className="ddm-action-btn h-7" onClick={() => { setDrawerRecord(c); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
+                    <td className="press-scale px-3 py-2"><Button size="sm" variant="ghost" className="ddm-action-btn h-7" onClick={() => { setDrawerRecord(c); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -598,8 +598,8 @@ export default function DemurrageDetentionMgmtView() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {data.freeTimeRecords.filter(r => statusFilter === "all" || r.zone === statusFilter).filter(r => searchTerm === "" || r.port.toLowerCase().includes(searchTerm.toLowerCase()) || r.container.toLowerCase().includes(searchTerm.toLowerCase())).map(r => (
-              <Card key={r.id} className="ddm-chart-card hover:shadow-md transition-shadow">
-                <CardContent className="glass-subtle p-3 space-y-2">
+              <Card key={r.id} className="hover-lift-sm ddm-chart-card hover:shadow-md transition-shadow">
+                <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2"><span className="font-bold text-sm">{String(r.type)}</span><PortBadge port={r.port} /></div>
                     <UtilizationZoneBadge zone={r.zone} />
@@ -650,7 +650,7 @@ export default function DemurrageDetentionMgmtView() {
                     <td className="px-3 py-2 font-bold tabular-nums">{formatINR(inv.total)}</td>
                     <td className="badge-interactive px-3 py-2"><Badge variant="outline" className="text-[10px]">{inv.gstType}</Badge></td>
                     <td className="px-3 py-2">{inv.dueDate}</td>
-                    <td className="px-3 py-2"><Button size="sm" variant="ghost" className="ddm-action-btn h-7" onClick={() => { setDrawerRecord(inv); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
+                    <td className="press-scale px-3 py-2"><Button size="sm" variant="ghost" className="ddm-action-btn h-7" onClick={() => { setDrawerRecord(inv); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -694,7 +694,7 @@ export default function DemurrageDetentionMgmtView() {
                     <td className="px-3 py-2 font-mono text-[10px]">{d.container}</td>
                     <td className="px-3 py-2">{d.raisedDate}</td>
                     <td className="px-3 py-2">{d.assignee}</td>
-                    <td className="px-3 py-2"><Button size="sm" variant="ghost" className="ddm-action-btn h-7" onClick={() => { setDrawerRecord(d); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
+                    <td className="press-scale px-3 py-2"><Button size="sm" variant="ghost" className="ddm-action-btn h-7" onClick={() => { setDrawerRecord(d); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -715,18 +715,18 @@ export default function DemurrageDetentionMgmtView() {
               { label: "Carrier Score", value: `${ak.carrierScore}/100`, icon: <BarChart3 className="w-4 h-4" /> },
               { label: "YoY Reduction", value: `-${ak.yoyReduction}%`, icon: <Activity className="w-4 h-4" /> },
             ].map((item, idx) => (
-              <Card key={idx} className="ddm-kpi-card">
+              <Card key={idx} className="hover-lift-sm ddm-kpi-card">
                 <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-4">
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="inner-glow glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Port-wise Comparison</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.analyticsCharts.portComparison}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="port" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Bar dataKey="Demurrage" fill="#991b1b" radius={[4, 4, 0, 0]} /><Bar dataKey="Detention" fill="#0d9488" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
-            <Card className="ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Dispute Resolution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><PieChart><Pie data={data.analyticsCharts.disputeResolution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.analyticsCharts.disputeResolution.map((_: unknown, idx: number) => <Cell key={idx} fill={CHART_COLORS[idx]} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Port-wise Comparison</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><BarChart data={data.analyticsCharts.portComparison}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="port" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${(v / 1000000).toFixed(1)}M`} /><Tooltip formatter={(v: number) => formatINR(v)} /><Legend /><Bar dataKey="Demurrage" fill="#991b1b" radius={[4, 4, 0, 0]} /><Bar dataKey="Detention" fill="#0d9488" radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+            <Card className="hover-lift-sm ddm-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Dispute Resolution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={260}><PieChart><Pie data={data.analyticsCharts.disputeResolution} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }: { name: string; percent: number }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.analyticsCharts.disputeResolution.map((_: unknown, idx: number) => <Cell key={idx} fill={CHART_COLORS[idx]} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -762,9 +762,9 @@ export default function DemurrageDetentionMgmtView() {
                     <div><span className="text-muted-foreground">Commodity</span><div className="font-medium">{String(drawerRecord.commodity)}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="ddm-action-btn flex-1" onClick={() => { toast.success("Container Released", `${drawerRecord.containerNo} marked as released`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Release</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.info("Dispute Raised", `Dispute for ${drawerRecord.containerNo}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Dispute</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.containerNo} escalated to management`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale ddm-action-btn flex-1" onClick={() => { toast.success("Container Released", `${drawerRecord.containerNo} marked as released`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Release</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.info("Dispute Raised", `Dispute for ${drawerRecord.containerNo}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Dispute</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate ddm-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.containerNo} escalated to management`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -785,9 +785,9 @@ export default function DemurrageDetentionMgmtView() {
                     <div><span className="text-muted-foreground">Due Date</span><div className="font-medium">{String(drawerRecord.dueDate)}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="ddm-action-btn flex-1" onClick={() => { toast.success("Approved", `${drawerRecord.invoiceNo} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Approve</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.warning("Disputed", `${drawerRecord.invoiceNo} disputed`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Dispute</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn" onClick={() => { toast.info("Payment Initiated", `${drawerRecord.invoiceNo}`); setDrawerOpen(false); }}><Receipt className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale ddm-action-btn flex-1" onClick={() => { toast.success("Approved", `${drawerRecord.invoiceNo} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Approve</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.warning("Disputed", `${drawerRecord.invoiceNo} disputed`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Dispute</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate ddm-action-btn" onClick={() => { toast.info("Payment Initiated", `${drawerRecord.invoiceNo}`); setDrawerOpen(false); }}><Receipt className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -810,9 +810,9 @@ export default function DemurrageDetentionMgmtView() {
                     <div><span className="text-muted-foreground">Invoice Ref</span><div className="font-mono text-[10px]">{String(drawerRecord.invoiceRef)}</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" className="ddm-action-btn flex-1" onClick={() => { toast.success("Escalated", `${drawerRecord.disputeNo} escalated`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5 mr-1" />Escalate</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.info("Accepted", `${drawerRecord.disputeNo} accepted`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Accept</Button>
-                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn" onClick={() => { toast.error("Escalated to Legal", `${drawerRecord.disputeNo}`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" className="press-scale ddm-action-btn flex-1" onClick={() => { toast.success("Escalated", `${drawerRecord.disputeNo} escalated`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5 mr-1" />Escalate</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.info("Accepted", `${drawerRecord.disputeNo} accepted`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Accept</Button>
+                    <Button size="sm" variant="outline" className="press-scale btn-outline-animate ddm-action-btn" onClick={() => { toast.error("Escalated to Legal", `${drawerRecord.disputeNo}`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}

@@ -232,7 +232,7 @@ function KpiCard({ title, value, icon: Icon, colorClass, subtitle }: {
 }) {
   return (
     <Card className={cn("cc-kpi-card", colorClass)}>
-      <CardContent className="glass-subtle p-4">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs opacity-70 mb-1">{title}</p>
@@ -442,7 +442,7 @@ export default function CycleCountView() {
 
             {/* Charts Row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Monthly Count Volume & Accuracy Trend</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -460,7 +460,7 @@ export default function CycleCountView() {
                 </CardContent>
               </Card>
 
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Count Type Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -477,7 +477,7 @@ export default function CycleCountView() {
 
             {/* Charts Row 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Warehouse Accuracy Performance</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -494,7 +494,7 @@ export default function CycleCountView() {
                 </CardContent>
               </Card>
 
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">ABC Classification Count Trend</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
@@ -514,7 +514,7 @@ export default function CycleCountView() {
 
             {/* Charts Row 3 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Variance Reasons Breakdown</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={320}>
@@ -532,7 +532,7 @@ export default function CycleCountView() {
                 </CardContent>
               </Card>
 
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Counter Accuracy vs Speed</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={320}>
@@ -553,9 +553,9 @@ export default function CycleCountView() {
             </div>
 
             {/* Warehouse Accuracy Table */}
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2"><CardTitle className="cc-card-title">Warehouse Accuracy Summary</CardTitle></CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -637,8 +637,8 @@ export default function CycleCountView() {
             </div>
 
             {/* Schedule Table */}
-            <Card className="card-crud-lift cc-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift cc-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -687,7 +687,7 @@ export default function CycleCountView() {
                           <TableCell className="cc-td"><span className="text-xs">{s.counter.name}</span></TableCell>
                           <TableCell className="cc-td"><span className="text-xs">{s.scheduledDate}</span></TableCell>
                           <TableCell className="cc-td">
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedCount(s)}><Eye className="h-3.5 w-3.5" /></Button>
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedCount(s)}><Eye className="press-scale h-3.5 w-3.5" /></Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -726,9 +726,9 @@ export default function CycleCountView() {
 
             {/* Active Counter Performance */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Counter Leaderboard</CardTitle></CardHeader>
-                <CardContent className="glass-subtle p-0">
+                <CardContent className="inner-glow glass-subtle p-0">
                   <div className="overflow-x-auto">
                     <Table className="table-hover-highlight">
                       <TableHeader>
@@ -773,7 +773,7 @@ export default function CycleCountView() {
                 </CardContent>
               </Card>
 
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Counter Speed vs Thoroughness</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={320}>
@@ -794,9 +794,9 @@ export default function CycleCountView() {
             </div>
 
             {/* Active Count Cards */}
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2"><CardTitle className="cc-card-title">Active & Paused Counts</CardTitle></CardHeader>
-              <CardContent className="glass-subtle p-0">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -837,7 +837,7 @@ export default function CycleCountView() {
                           <TableCell className="cc-td"><span className="text-sm">{s.recountCount}</span></TableCell>
                           <TableCell className="cc-td"><span className="text-xs max-w-40 truncate block">{s.notes}</span></TableCell>
                           <TableCell className="cc-td">
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedCount(s)}><Eye className="h-3.5 w-3.5" /></Button>
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedCount(s)}><Eye className="press-scale h-3.5 w-3.5" /></Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -868,7 +868,7 @@ export default function CycleCountView() {
 
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Monthly Variance Trend</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -884,7 +884,7 @@ export default function CycleCountView() {
                 </CardContent>
               </Card>
 
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Variance by ABC Class</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -903,7 +903,7 @@ export default function CycleCountView() {
             </div>
 
             {/* Zone Variance Heatmap-style Bar */}
-            <Card className="cc-card mb-6">
+            <Card className="hover-lift-sm cc-card mb-6">
               <CardHeader className="pb-2"><CardTitle className="cc-card-title">Variance by Warehouse Zone</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={280}>
@@ -932,8 +932,8 @@ export default function CycleCountView() {
             </div>
 
             {/* Variance Table */}
-            <Card className="card-crud-lift cc-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift cc-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -980,7 +980,7 @@ export default function CycleCountView() {
                           <TableCell className="cc-td"><span className="text-xs">{s.warehouse.length > 10 ? s.warehouse.substring(0, 10) + "..." : s.warehouse}</span></TableCell>
                           <TableCell className="cc-td"><span className="text-xs">{s.counter.name}</span></TableCell>
                           <TableCell className="cc-td">
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedCount(s)}><Eye className="h-3.5 w-3.5" /></Button>
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedCount(s)}><Eye className="press-scale h-3.5 w-3.5" /></Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -1012,7 +1012,7 @@ export default function CycleCountView() {
 
             {/* Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Adjustment Type Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -1026,7 +1026,7 @@ export default function CycleCountView() {
                 </CardContent>
               </Card>
 
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Monthly Adjustment Trend & Value</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={280}>
@@ -1059,8 +1059,8 @@ export default function CycleCountView() {
             </div>
 
             {/* Adjustment Table */}
-            <Card className="card-crud-lift cc-card">
-              <CardContent className="glass-subtle p-0">
+            <Card className="hover-lift-sm card-crud-lift cc-card">
+              <CardContent className="inner-glow glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader>
@@ -1113,7 +1113,7 @@ export default function CycleCountView() {
                           <TableCell className="cc-td"><span className="text-xs">{a.approver}</span></TableCell>
                           <TableCell className="cc-td"><span className="text-xs">{a.requestDate}</span></TableCell>
                           <TableCell className="cc-td">
-                            <Button variant="ghost" size="sm" onClick={() => setSelectedAdj(a)}><Eye className="h-3.5 w-3.5" /></Button>
+                            <Button variant="ghost" size="sm" onClick={() => setSelectedAdj(a)}><Eye className="press-scale h-3.5 w-3.5" /></Button>
                           </TableCell>
                         </TableRow>
                       ))}

@@ -549,7 +549,7 @@ export default function LaborManagementView() {
 
           {/* Charts Row 1 */}
           <div className="lm-overview-grid">
-            <Card className="lm-chart-card lm-stagger-7">
+            <Card className="hover-lift-sm lm-chart-card lm-stagger-7">
               <CardHeader className="pb-2">
                 <CardTitle className="lm-card-title text-sm">
                   <Briefcase className="h-4 w-4" style={{ color: "#8b5cf6" }} /> Department Distribution
@@ -570,7 +570,7 @@ export default function LaborManagementView() {
               </CardContent>
             </Card>
 
-            <Card className="lm-chart-card lm-stagger-8">
+            <Card className="hover-lift-sm lm-chart-card lm-stagger-8">
               <CardHeader className="pb-2">
                 <CardTitle className="lm-card-title text-sm">
                   <Clock className="h-4 w-4" style={{ color: "#10b981" }} /> Shift Coverage
@@ -593,7 +593,7 @@ export default function LaborManagementView() {
               </CardContent>
             </Card>
 
-            <Card className="lm-chart-card lm-stagger-9">
+            <Card className="hover-lift-sm lm-chart-card lm-stagger-9">
               <CardHeader className="pb-2">
                 <CardTitle className="lm-card-title text-sm">
                   <Calendar className="h-4 w-4" style={{ color: "#f59e0b" }} /> Weekly Attendance
@@ -619,7 +619,7 @@ export default function LaborManagementView() {
           </div>
 
           {/* Labor Cost Trend */}
-          <Card className="lm-chart-card lm-stagger-10">
+          <Card className="hover-lift-sm lm-chart-card lm-stagger-10">
             <CardHeader className="pb-2">
               <CardTitle className="lm-card-title text-sm">
                 <IndianRupee className="h-4 w-4" style={{ color: "#ec4899" }} /> Monthly Labor Cost Trend
@@ -1052,7 +1052,7 @@ export default function LaborManagementView() {
           {/* Charts Row */}
           <div className="lm-overview-grid">
             {/* Department Productivity */}
-            <Card className="lm-chart-card lm-stagger-1">
+            <Card className="hover-lift-sm lm-chart-card lm-stagger-1">
               <CardHeader className="pb-2">
                 <CardTitle className="lm-card-title text-sm">
                   <BarChart3 className="h-4 w-4" style={{ color: "#8b5cf6" }} /> Department Productivity
@@ -1076,7 +1076,7 @@ export default function LaborManagementView() {
             </Card>
 
             {/* Overtime Distribution */}
-            <Card className="lm-chart-card lm-stagger-2">
+            <Card className="hover-lift-sm lm-chart-card lm-stagger-2">
               <CardHeader className="pb-2">
                 <CardTitle className="lm-card-title text-sm">
                   <Clock className="h-4 w-4" style={{ color: "#f59e0b" }} /> Overtime Distribution
@@ -1098,7 +1098,7 @@ export default function LaborManagementView() {
             </Card>
 
             {/* Top Performers */}
-            <Card className="lm-chart-card lm-stagger-3">
+            <Card className="hover-lift-sm lm-chart-card lm-stagger-3">
               <CardHeader className="pb-2">
                 <CardTitle className="lm-card-title text-sm">
                   <Award className="h-4 w-4" style={{ color: "#10b981" }} /> Top 10 Performers
@@ -1140,7 +1140,7 @@ export default function LaborManagementView() {
           </div>
 
           {/* Overtime Approval Queue */}
-          <Card className="lm-chart-card lm-stagger-4">
+          <Card className="hover-lift-sm lm-chart-card lm-stagger-4">
             <CardHeader className="pb-2">
               <CardTitle className="lm-card-title text-sm">
                 <AlertTriangle className="h-4 w-4" style={{ color: "#f59e0b" }} /> Overtime Approval Queue

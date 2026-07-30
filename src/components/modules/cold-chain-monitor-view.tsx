@@ -208,8 +208,8 @@ function generateData() {
 // ─── KPICard ─────────────────────────────────────────────────────────────────
 function KPICard({ label, value, icon, color, sub }: { label: string; value: string; icon: React.ReactNode; color: string; sub?: string }) {
   return (
-    <Card className="ccm-kpi-card">
-      <CardContent className="p-4 flex items-center gap-3">
+    <Card className="hover-lift-sm ccm-kpi-card">
+      <CardContent className="inner-glow p-4 flex items-center gap-3">
         <div className={cn("ccm-kpi-icon flex h-10 w-10 items-center justify-center rounded-lg text-white", color)}>{icon}</div>
         <div><p className="text-xs text-muted-foreground">{label}</p><p className="text-lg font-bold">{value}</p>{sub && <p className="text-[10px] text-muted-foreground">{sub}</p>}</div>
       </CardContent>
@@ -328,16 +328,16 @@ export function ColdChainMonitorView() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-3">
-            <Card className="ccm-chart-card md:col-span-2">
+            <Card className="hover-lift-sm ccm-chart-card md:col-span-2">
               <CardHeader className="pb-2"><CardTitle className="text-sm">24h Temperature Trend</CardTitle></CardHeader>
               <CardContent><ResponsiveContainer width="100%" height={220}><AreaChart data={tempTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="hour" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Frozen" stroke={TC.blue} fill={TC.blue} fillOpacity={0.2} /><Area type="monotone" dataKey="Chill" stroke={TC.cyan} fill={TC.cyan} fillOpacity={0.2} /><Area type="monotone" dataKey="Cool" stroke={TC.emerald} fill={TC.emerald} fillOpacity={0.2} /></AreaChart></ResponsiveContainer></CardContent>
             </Card>
-            <Card className="ccm-chart-card">
+            <Card className="hover-lift-sm ccm-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Shipment Type Distribution</CardTitle></CardHeader>
               <CardContent><ResponsiveContainer width="100%" height={220}><PieChart><Pie data={shipmentTypeDist} cx="50%" cy="50%" innerRadius={40} outerRadius={75} dataKey="value" paddingAngle={2} label={{ fontSize: 9 }}>{shipmentTypeDist.map((_, i) => <Cell key={i} fill={CC[i]} />)}</Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent>
             </Card>
           </div>
-          <Card className="ccm-chart-card">
+          <Card className="hover-lift-sm ccm-chart-card">
             <CardHeader className="pb-2"><CardTitle className="text-sm">Compliance Score by Warehouse</CardTitle></CardHeader>
             <CardContent><ResponsiveContainer width="100%" height={200}><BarChart data={warehouseCompliance}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 10 }} domain={[60, 100]} /><Tooltip /><Bar dataKey="score" fill={TC.cyan} radius={[4, 4, 0, 0]} /></BarChart></ResponsiveContainer></CardContent>
           </Card>
@@ -354,8 +354,8 @@ export function ColdChainMonitorView() {
           </div>
           <div className="ccm-sensor-grid grid gap-2 md:grid-cols-2 xl:grid-cols-3 max-h-[70vh] overflow-y-auto">
             {sortedData(filterData(sensors, "zone", ["id", "zone", "status", "warehouse"]), sortField, sortDir).map(sensor => (
-              <Card key={sensor.id} className="ccm-sensor-card">
-                <CardContent className="p-3 space-y-2">
+              <Card key={sensor.id} className="hover-lift-sm ccm-sensor-card">
+                <CardContent className="inner-glow p-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold">{sensor.id}</span>
                     <SensorStatusBadge status={sensor.status} />
@@ -372,7 +372,7 @@ export function ColdChainMonitorView() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] text-muted-foreground truncate max-w-[140px]">{sensor.warehouse}</span>
-                    <Button variant="ghost" size="sm" className="ccm-eye-btn h-6 w-6 p-0" onClick={() => { setSelectedSensor(sensor); setSheetOpen(true); toast.info("Sensor Details", `Viewing ${sensor.id}`) }}><Eye className="h-3 w-3" /></Button>
+                    <Button variant="ghost" size="sm" className="press-scale ccm-eye-btn h-6 w-6 p-0" onClick={() => { setSelectedSensor(sensor); setSheetOpen(true); toast.info("Sensor Details", `Viewing ${sensor.id}`) }}><Eye className="h-3 w-3" /></Button>
                   </div>
                 </CardContent>
               </Card>
@@ -391,8 +391,8 @@ export function ColdChainMonitorView() {
           </div>
           <div className="ccm-shipment-grid grid gap-2 md:grid-cols-2 xl:grid-cols-3 max-h-[70vh] overflow-y-auto">
             {sortedData(filterData(shipments, "status", ["id", "type", "product", "warehouse", "origin", "destination"]), sortField, sortDir).map(sh => (
-              <Card key={sh.id} className="ccm-shipment-card">
-                <CardContent className="p-3 space-y-2">
+              <Card key={sh.id} className="hover-lift-sm ccm-shipment-card">
+                <CardContent className="inner-glow p-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold">{sh.id}</span>
                     <ShipmentStatusBadge status={sh.status} />
@@ -410,7 +410,7 @@ export function ColdChainMonitorView() {
                       <ValueTile val={sh.value} />
                       <ExcursionBadge count={sh.excursions} />
                     </div>
-                    <Button variant="ghost" size="sm" className="ccm-eye-btn h-6 w-6 p-0" onClick={() => { setSelectedShipment(sh); setSheetOpen(true); toast.info("Shipment Details", `Viewing ${sh.id}`) }}><Eye className="h-3 w-3" /></Button>
+                    <Button variant="ghost" size="sm" className="press-scale ccm-eye-btn h-6 w-6 p-0" onClick={() => { setSelectedShipment(sh); setSheetOpen(true); toast.info("Shipment Details", `Viewing ${sh.id}`) }}><Eye className="h-3 w-3" /></Button>
                   </div>
                 </CardContent>
               </Card>
@@ -431,7 +431,7 @@ export function ColdChainMonitorView() {
           <div className="ccm-critical-cards grid gap-2 md:grid-cols-3">
             {inventory.filter(it => it.stockStatus === "Expiring Soon" || it.stockStatus === "Expired").slice(0, 3).map(it => (
               <Card key={it.id} className={cn("ccm-critical-card border-l-4", it.stockStatus === "Expired" ? "border-l-rose-600" : "border-l-amber-500")}>
-                <CardContent className="p-3 space-y-1">
+                <CardContent className="inner-glow p-3 space-y-1">
                   <div className="flex items-center justify-between"><span className="text-xs font-bold">{it.product}</span><StockStatusBadge status={it.stockStatus} /></div>
                   <p className="text-[10px] text-muted-foreground">Batch: {it.batchNo} | Exp: {it.expiryDate}</p>
                   <p className="text-[10px]">{it.warehouse} | <TempTile temp={it.tempAtLocation} /></p>
@@ -441,8 +441,8 @@ export function ColdChainMonitorView() {
           </div>
           <div className="ccm-inv-grid grid gap-2 md:grid-cols-2 xl:grid-cols-3 max-h-[65vh] overflow-y-auto">
             {sortedData(filterData(inventory, "zone", ["id", "product", "category", "warehouse", "batchNo"]), sortField, sortDir).map(it => (
-              <Card key={it.id} className="ccm-inv-card">
-                <CardContent className="p-3 space-y-2">
+              <Card key={it.id} className="hover-lift-sm ccm-inv-card">
+                <CardContent className="inner-glow p-3 space-y-2">
                   <div className="flex items-center justify-between"><span className="text-xs font-mono font-bold">{it.id}</span><StockStatusBadge status={it.stockStatus} /></div>
                   <p className="text-xs font-medium">{it.product}</p>
                   <div className="flex gap-1 flex-wrap"><CategoryBadge cat={it.category} /><TempZoneBadge zone={it.zone} /></div>
@@ -469,7 +469,7 @@ export function ColdChainMonitorView() {
           <div className="ccm-compliance-grid grid gap-2 md:grid-cols-2 max-h-[75vh] overflow-y-auto">
             {sortedData(filterData(compliance, "severity", ["id", "complianceType", "status", "warehouse", "inspector", "findings"]), sortField, sortDir).map(cr => (
               <Card key={cr.id} className={cn("ccm-compliance-card border-l-4", cr.severity === "Critical" ? "border-l-rose-600" : cr.severity === "High" ? "border-l-amber-500" : cr.severity === "Medium" ? "border-l-orange-400" : "border-l-sky-400")}>
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="inner-glow p-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold">{cr.id}</span>
                     <SeverityBadge severity={cr.severity} />
@@ -483,7 +483,7 @@ export function ColdChainMonitorView() {
                   <p className="text-[10px] text-muted-foreground">{cr.warehouse} | {cr.inspector}</p>
                   <p className="text-[10px]">{cr.findings}</p>
                   <div className="flex justify-end">
-                    <Button variant="ghost" size="sm" className="ccm-eye-btn h-6 w-6 p-0" onClick={() => { setSelectedCompliance(cr); setSheetOpen(true); toast.info("Compliance Details", `Viewing ${cr.id}`) }}><Eye className="h-3 w-3" /></Button>
+                    <Button variant="ghost" size="sm" className="press-scale ccm-eye-btn h-6 w-6 p-0" onClick={() => { setSelectedCompliance(cr); setSheetOpen(true); toast.info("Compliance Details", `Viewing ${cr.id}`) }}><Eye className="h-3 w-3" /></Button>
                   </div>
                 </CardContent>
               </Card>
@@ -504,21 +504,21 @@ export function ColdChainMonitorView() {
             <KPICard label="Carbon Footprint" value="4.2t" icon={<Snowflake className="h-5 w-5" />} color="bg-teal-600" sub="CO₂ equivalent" />
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Card className="ccm-chart-card">
+            <Card className="hover-lift-sm ccm-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Excursion Count</CardTitle></CardHeader>
               <CardContent><ResponsiveContainer width="100%" height={200}><LineChart data={monthlyExcursions}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="count" stroke={TC.rose} strokeWidth={2} dot={{ r: 3 }} /></LineChart></ResponsiveContainer></CardContent>
             </Card>
-            <Card className="ccm-chart-card">
+            <Card className="hover-lift-sm ccm-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Energy Consumption</CardTitle></CardHeader>
               <CardContent><ResponsiveContainer width="100%" height={200}><BarChart data={warehouseEnergy} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis type="category" dataKey="name" tick={{ fontSize: 9 }} width={80} /><Tooltip /><Bar dataKey="kwh" fill={TC.amber} radius={[0, 4, 4, 0]} /></BarChart></ResponsiveContainer></CardContent>
             </Card>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            <Card className="ccm-chart-card">
+            <Card className="hover-lift-sm ccm-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Top Product Categories by Value</CardTitle></CardHeader>
               <CardContent><ResponsiveContainer width="100%" height={200}><BarChart data={productValue} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} tickFormatter={v => formatINR(v)} /><YAxis type="category" dataKey="name" tick={{ fontSize: 9 }} width={90} /><Tooltip formatter={v => formatINR(v as number)} /><Bar dataKey="value" fill={TC.violet} radius={[0, 4, 4, 0]} /></BarChart></ResponsiveContainer></CardContent>
             </Card>
-            <Card className="ccm-chart-card">
+            <Card className="hover-lift-sm ccm-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">6-Month Cost Trend</CardTitle></CardHeader>
               <CardContent><ResponsiveContainer width="100%" height={200}><AreaChart data={costTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={v => `${(v / 100000).toFixed(0)}L`} /><Tooltip formatter={v => formatINR(v as number)} /><Area type="monotone" dataKey="Energy" stackId="1" fill={TC.amber} /><Area type="monotone" dataKey="Labor" stackId="1" fill={TC.cyan} /><Area type="monotone" dataKey="Maintenance" stackId="1" fill={TC.emerald} /><Area type="monotone" dataKey="Compliance" stackId="1" fill={TC.violet} /></AreaChart></ResponsiveContainer></CardContent>
             </Card>

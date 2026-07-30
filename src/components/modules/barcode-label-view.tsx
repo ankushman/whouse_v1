@@ -661,8 +661,8 @@ function KpiCard({ title, value, icon: Icon, color, sub }: {
   title: string; value: string | number; icon: React.ElementType; color: string; sub?: string;
 }) {
   return (
-    <Card className="bl-kpi-card">
-      <CardContent className="glass-subtle p-4">
+    <Card className="hover-lift-sm bl-kpi-card">
+      <CardContent className="inner-glow glass-subtle p-4">
         <div className="flex items-center justify-between mb-2">
           <span className="bl-kpi-title text-[11px] font-medium text-muted-foreground uppercase tracking-wide">{title}</span>
           <div className="bl-kpi-icon p-1.5 rounded-lg" style={{ backgroundColor: color + "15" }}>
@@ -828,7 +828,7 @@ export default function BarcodeLabelView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bl-chart-card">
+            <Card className="hover-lift-sm bl-chart-card">
               <CardHeader><CardTitle className="text-base">Monthly Label Printing Volume</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -847,7 +847,7 @@ export default function BarcodeLabelView() {
               </CardContent>
             </Card>
 
-            <Card className="bl-chart-card">
+            <Card className="hover-lift-sm bl-chart-card">
               <CardHeader><CardTitle className="text-base">Print Status Distribution</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -870,7 +870,7 @@ export default function BarcodeLabelView() {
             </Card>
           </div>
 
-          <Card className="bl-chart-card">
+          <Card className="hover-lift-sm bl-chart-card">
             <CardHeader><CardTitle className="text-base">Label Type Distribution</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={280}>
@@ -1146,7 +1146,7 @@ export default function BarcodeLabelView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bl-chart-card">
+            <Card className="hover-lift-sm bl-chart-card">
               <CardHeader><CardTitle className="text-base">Daily Print Volume (30 Days)</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={280}>
@@ -1165,7 +1165,7 @@ export default function BarcodeLabelView() {
               </CardContent>
             </Card>
 
-            <Card className="bl-chart-card">
+            <Card className="hover-lift-sm bl-chart-card">
               <CardHeader><CardTitle className="text-base">Error Breakdown</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={280}>
@@ -1182,7 +1182,7 @@ export default function BarcodeLabelView() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card className="bl-chart-card">
+            <Card className="hover-lift-sm bl-chart-card">
               <CardHeader><CardTitle className="text-base">Compliance Trend</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={280}>
@@ -1199,7 +1199,7 @@ export default function BarcodeLabelView() {
               </CardContent>
             </Card>
 
-            <Card className="bl-chart-card">
+            <Card className="hover-lift-sm bl-chart-card">
               <CardHeader><CardTitle className="text-base">Cost Per Label by Type</CardTitle></CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={280}>
@@ -1222,7 +1222,7 @@ export default function BarcodeLabelView() {
             </Card>
           </div>
 
-          <Card className="bl-chart-card">
+          <Card className="hover-lift-sm bl-chart-card">
             <CardHeader><CardTitle className="text-base">Monthly Print Efficiency (6 Months)</CardTitle></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={280}>
@@ -1273,9 +1273,9 @@ export default function BarcodeLabelView() {
                       <div><span className="text-muted-foreground">Created Date</span><div className="font-medium">{rec.createdDate}</div></div>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bl-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => { toast.success("Template Edited", `${rec.name} updated successfully`); setDrawerOpen(false); }}><FileText className="w-3.5 h-3.5 mr-1" /> Edit</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.success("Template Duplicated", `Copy of ${rec.name} created`); setDrawerOpen(false); }}><Copy className="w-3.5 h-3.5 mr-1" /> Duplicate</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.warning("Template Archived", `${rec.name} moved to archive`); setDrawerOpen(false); }}><Archive className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" className="press-scale bl-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => { toast.success("Template Edited", `${rec.name} updated successfully`); setDrawerOpen(false); }}><FileText className="w-3.5 h-3.5 mr-1" /> Edit</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.success("Template Duplicated", `Copy of ${rec.name} created`); setDrawerOpen(false); }}><Copy className="w-3.5 h-3.5 mr-1" /> Duplicate</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn" onClick={() => { toast.warning("Template Archived", `${rec.name} moved to archive`); setDrawerOpen(false); }}><Archive className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>
@@ -1311,9 +1311,9 @@ export default function BarcodeLabelView() {
                       <div><span className="text-muted-foreground">Submitted</span><div className="font-medium">{rec.submittedAt}</div></div>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bl-action-btn flex-1 bg-amber-600 hover:bg-amber-700" onClick={() => { toast.success("Reprinting", `Job ${rec.id} sent to printer`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5 mr-1" /> Reprint</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.warning("Job Cancelled", `${rec.id} has been cancelled`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.info("Job Paused", `${rec.id} paused`); setDrawerOpen(false); }}><Pause className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" className="press-scale bl-action-btn flex-1 bg-amber-600 hover:bg-amber-700" onClick={() => { toast.success("Reprinting", `Job ${rec.id} sent to printer`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5 mr-1" /> Reprint</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.warning("Job Cancelled", `${rec.id} has been cancelled`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn" onClick={() => { toast.info("Job Paused", `${rec.id} paused`); setDrawerOpen(false); }}><Pause className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>
@@ -1350,9 +1350,9 @@ export default function BarcodeLabelView() {
                       <div className="col-span-2"><span className="text-muted-foreground">Scan Time</span><div className="font-medium">{rec.scanTime}</div></div>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bl-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => { toast.success("Re-scanning", `Barcode ${rec.barcode.slice(0, 13)} re-scanned`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5 mr-1" /> Re-scan</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.info("Investigation Started", `Looking into ${rec.id}`); setDrawerOpen(false); }}><Search className="w-3.5 h-3.5 mr-1" /> Investigate</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.success("Exported", `Scan ${rec.id} data exported`); setDrawerOpen(false); }}><Download className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" className="press-scale bl-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => { toast.success("Re-scanning", `Barcode ${rec.barcode.slice(0, 13)} re-scanned`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5 mr-1" /> Re-scan</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.info("Investigation Started", `Looking into ${rec.id}`); setDrawerOpen(false); }}><Search className="w-3.5 h-3.5 mr-1" /> Investigate</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn" onClick={() => { toast.success("Exported", `Scan ${rec.id} data exported`); setDrawerOpen(false); }}><Download className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>
@@ -1378,8 +1378,8 @@ export default function BarcodeLabelView() {
                       <ComplianceStatusBadge status={rec.status} color={data.CS_COLORS[rec.status] || "#475569"} />
                       <AuditFrequencyBadge frequency={rec.auditFrequency} />
                     </div>
-                    <Card className="bg-cyan-50 dark:bg-cyan-950/30 border-cyan-200 dark:border-cyan-800">
-                      <CardContent className="glass-subtle p-3">
+                    <Card className="hover-lift-sm bg-cyan-50 dark:bg-cyan-950/30 border-cyan-200 dark:border-cyan-800">
+                      <CardContent className="inner-glow glass-subtle p-3">
                         <div className="bl-audit-info text-[10px] text-muted-foreground uppercase">Last Audit</div>
                         <div className="text-sm font-bold">{rec.lastAudit}</div>
                         <div className="bl-audit-info text-[10px] text-muted-foreground uppercase mt-2">Next Audit</div>
@@ -1393,9 +1393,9 @@ export default function BarcodeLabelView() {
                       <div><span className="text-muted-foreground">Findings</span><div className="font-semibold tabular-nums">{rec.findings}</div></div>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bl-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => { toast.success("Audit Started", `Compliance check for ${rec.id}`); setDrawerOpen(false); }}><ClipboardCheck className="w-3.5 h-3.5 mr-1" /> Audit</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.warning("Remediation", `Fixes initiated for ${rec.id}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" /> Remediate</Button>
-                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.info("Exemption Filed", `${rec.id} exemption requested`); setDrawerOpen(false); }}><ShieldCheck className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" className="press-scale bl-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => { toast.success("Audit Started", `Compliance check for ${rec.id}`); setDrawerOpen(false); }}><ClipboardCheck className="w-3.5 h-3.5 mr-1" /> Audit</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.warning("Remediation", `Fixes initiated for ${rec.id}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" /> Remediate</Button>
+                      <Button size="sm" variant="outline" className="press-scale btn-outline-animate bl-action-btn" onClick={() => { toast.info("Exemption Filed", `${rec.id} exemption requested`); setDrawerOpen(false); }}><ShieldCheck className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>

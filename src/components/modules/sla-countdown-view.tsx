@@ -161,7 +161,7 @@ function SLACard({ item, onOpen }: { item: SLAItem; onOpen: (i: SLAItem) => void
       onClick={() => onOpen(item)}
       className={cn("card-depth overflow-hidden transition-all duration-300 hover-lift cursor-pointer", colors.bg)}
     >
-      <CardContent className="glass-subtle p-4 space-y-3">
+      <CardContent className="inner-glow glass-subtle p-4 space-y-3">
         {/* Header row */}
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
@@ -312,8 +312,8 @@ export function SLACountdownView() {
 
       {/* ── Stats Bar ── */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 stagger-children">
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Activity className="size-4 text-foreground" />
             </div>
@@ -323,8 +323,8 @@ export function SLACountdownView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/70">
               <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400" />
             </div>
@@ -334,8 +334,8 @@ export function SLACountdownView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-950/70">
               <AlertTriangle className="size-4 text-amber-600 dark:text-amber-400" />
             </div>
@@ -345,8 +345,8 @@ export function SLACountdownView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950/70">
               <TrendingDown className="size-4 text-red-600 dark:text-red-400" />
             </div>
@@ -356,8 +356,8 @@ export function SLACountdownView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-depth py-0 gap-0">
-          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
+        <Card className="hover-lift-sm card-depth py-0 gap-0">
+          <CardContent className="inner-glow glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/70">
               <Clock className="size-4 text-blue-600 dark:text-blue-400" />
             </div>
@@ -392,7 +392,7 @@ export function SLACountdownView() {
       {/* ── Charts Row ── */}
       <div className="grid gap-4 lg:grid-cols-2">
         {/* SLA Compliance Trend */}
-        <Card className="card-depth chart-card card-accent-blue shadow-card">
+        <Card className="hover-lift-sm card-depth chart-card card-accent-blue shadow-card">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <CardTitle className="text-sm font-semibold flex items-center gap-2">
@@ -425,7 +425,7 @@ export function SLACountdownView() {
         </Card>
 
         {/* Priority Breakdown */}
-        <Card className="card-depth chart-card shadow-card">
+        <Card className="hover-lift-sm card-depth chart-card shadow-card">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <CardTitle className="text-sm font-semibold flex items-center gap-2">

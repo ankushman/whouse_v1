@@ -132,7 +132,7 @@ export function CostAnalyticsView() {
             )}
             onClick={item.category ? () => openCostDrawer(item.category!) : undefined}
           >
-            <CardContent className="glass-subtle p-4">
+            <CardContent className="inner-glow glass-subtle p-4">
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground flex items-center gap-1">
@@ -158,7 +158,7 @@ export function CostAnalyticsView() {
 
       {/* Charts Row */}
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card className="card-accent-blue card-shine rounded-xl border-border/60 shadow-sm">
+        <Card className="hover-lift-sm card-accent-blue card-shine rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Trend</CardTitle>
             <CardDescription className="text-xs">Monthly cost breakdown (₹)</CardDescription>
@@ -186,7 +186,7 @@ export function CostAnalyticsView() {
           </CardContent>
         </Card>
 
-        <Card className="card-accent-amber card-shine rounded-xl border-border/60 shadow-sm">
+        <Card className="hover-lift-sm card-accent-amber card-shine rounded-xl border-border/60 shadow-sm">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Cost Breakdown</CardTitle>
             <CardDescription className="text-xs">Current month distribution by category</CardDescription>
@@ -216,7 +216,7 @@ export function CostAnalyticsView() {
       </div>
 
       {/* MoM Comparison */}
-      <Card className="card-depth rounded-xl border-border/60 shadow-sm">
+      <Card className="hover-lift-sm card-depth rounded-xl border-border/60 shadow-sm">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm font-semibold">Month-over-Month Comparison</CardTitle>
           <CardDescription className="text-xs">Last 6 months with change percentages</CardDescription>

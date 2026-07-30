@@ -370,7 +370,7 @@ export function FleetManagementProView() {
 
   /* ─── SortHeader helper ─── */
   const SortHeader = ({ label, field }: { label: string; field: string }) => (
-    <Button variant="ghost" size="sm" className="h-7 text-xs font-semibold gap-1 px-2"
+    <Button variant="ghost" size="sm" className="press-scale h-7 text-xs font-semibold gap-1 px-2"
       onClick={() => toggleSort(field)}>
       {label} <ArrowUpDown className="h-3 w-3 opacity-50" />
     </Button>
@@ -408,7 +408,7 @@ export function FleetManagementProView() {
               <KPICard title="Fleet Utilization" value={`${utilizationPct}%`} icon={TrendingUp} trend="up" change={7} colorClass="bg-violet-50 text-violet-600 dark:bg-violet-950 dark:text-violet-400" />
             </div>
             <div className="grid gap-4 md:grid-cols-3">
-              <Card className="fmp-chart-card border-border/60">
+              <Card className="hover-lift-sm fmp-chart-card border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Monthly Trips</CardTitle></CardHeader>
                 <CardContent>
                   <AreaChart data={monthlyTrips} height={220}>
@@ -422,7 +422,7 @@ export function FleetManagementProView() {
                   </AreaChart>
                 </CardContent>
               </Card>
-              <Card className="fmp-chart-card border-border/60">
+              <Card className="hover-lift-sm fmp-chart-card border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Vehicle Type Distribution</CardTitle></CardHeader>
                 <CardContent>
                   <PieChart height={220}>
@@ -434,7 +434,7 @@ export function FleetManagementProView() {
                   </PieChart>
                 </CardContent>
               </Card>
-              <Card className="fmp-chart-card border-border/60">
+              <Card className="hover-lift-sm fmp-chart-card border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Fuel Consumption by Type</CardTitle></CardHeader>
                 <CardContent>
                   <BarChart data={fuelByType} height={220}>
@@ -498,7 +498,7 @@ export function FleetManagementProView() {
                       <div><OdometerTile value={v.odometer} /></div>
                       <div><ExpiredBadge date={v.insuranceExpiry} label="Insurance" /></div>
                     </div>
-                    <Button variant="ghost" size="sm" className="shrink-0 h-8 w-8 p-0"><Eye className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="sm" className="press-scale shrink-0 h-8 w-8 p-0"><Eye className="h-3.5 w-3.5" /></Button>
                   </Card>
                 ))}
               </div>
@@ -555,7 +555,7 @@ export function FleetManagementProView() {
                       <div><ExpiredBadge date={d.licenseExpiry} label="License Exp" /></div>
                       <div><span className="text-muted-foreground">Experience:</span> {d.experience} yrs</div>
                     </div>
-                    <Button variant="ghost" size="sm" className="shrink-0 h-8 w-8 p-0"><Eye className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="sm" className="press-scale shrink-0 h-8 w-8 p-0"><Eye className="h-3.5 w-3.5" /></Button>
                   </Card>
                 ))}
               </div>
@@ -611,7 +611,7 @@ export function FleetManagementProView() {
                       <div><span className="text-muted-foreground">Revenue:</span> <RevenueTile value={t.revenue} /></div>
                       <div className="col-span-2"><span className="text-muted-foreground">Departure:</span> {t.departure}</div>
                     </div>
-                    <Button variant="ghost" size="sm" className="shrink-0 h-8 w-8 p-0"><Eye className="h-3.5 w-3.5" /></Button>
+                    <Button variant="ghost" size="sm" className="press-scale shrink-0 h-8 w-8 p-0"><Eye className="h-3.5 w-3.5" /></Button>
                   </Card>
                 ))}
               </div>
@@ -647,7 +647,7 @@ export function FleetManagementProView() {
                   className={`fmp-fm-card overflow-hidden cursor-pointer hover:shadow-md transition-shadow border-border/60 ${r.type === "Fuel" ? "border-l-4 border-l-emerald-500" : "border-l-4 border-l-orange-500"}`}
                   onClick={() => { setSelectedRecord(r); setSheetOpen(true); toast.info("Record", `${r.type}: ${r.details}`) }}>
                   <div className={`h-1.5 ${r.type === "Fuel" ? "bg-gradient-to-r from-emerald-400 to-emerald-600" : "bg-gradient-to-r from-orange-400 to-orange-600"}`} />
-                  <CardContent className="glass-subtle p-3 space-y-2">
+                  <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <Badge className={`text-[10px] ${r.type === "Fuel" ? "bg-emerald-100 text-emerald-700" : "bg-orange-100 text-orange-700"}`}>
                         {r.type === "Fuel" ? "⛽" : "🔧"} {r.type}
@@ -686,7 +686,7 @@ export function FleetManagementProView() {
               <KPICard title="Carbon Footprint" value="142 tCO₂" icon={Thermometer} trend="down" change={7} colorClass="bg-sky-50 text-sky-600 dark:bg-sky-950 dark:text-sky-400" />
             </div>
             <div className="grid gap-4 md:grid-cols-2">
-              <Card className="fmp-chart-card border-border/60">
+              <Card className="hover-lift-sm fmp-chart-card border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Monthly Fleet Costs</CardTitle></CardHeader>
                 <CardContent>
                   <LineChart data={monthlyCosts} height={240}>
@@ -699,7 +699,7 @@ export function FleetManagementProView() {
                   </LineChart>
                 </CardContent>
               </Card>
-              <Card className="fmp-chart-card border-border/60">
+              <Card className="hover-lift-sm fmp-chart-card border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Vehicle Utilization by Type</CardTitle></CardHeader>
                 <CardContent>
                   <BarChart data={utilByType} height={240} layout="vertical">
@@ -711,7 +711,7 @@ export function FleetManagementProView() {
                   </BarChart>
                 </CardContent>
               </Card>
-              <Card className="fmp-chart-card border-border/60">
+              <Card className="hover-lift-sm fmp-chart-card border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Top Routes by Revenue</CardTitle></CardHeader>
                 <CardContent>
                   <BarChart data={topRoutes} height={240} layout="vertical">
@@ -723,7 +723,7 @@ export function FleetManagementProView() {
                   </BarChart>
                 </CardContent>
               </Card>
-              <Card className="fmp-chart-card border-border/60">
+              <Card className="hover-lift-sm fmp-chart-card border-border/60">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Cost Breakdown (6 Months)</CardTitle></CardHeader>
                 <CardContent>
                   <AreaChart data={costBreakdown} height={240}>
@@ -757,7 +757,7 @@ export function FleetManagementProView() {
             <div className="space-y-4 text-sm">
               {selectedVehicle && (
                 <>
-                  <Card className="p-4 border-border/60">
+                  <Card className="hover-lift-sm p-4 border-border/60">
                     <div className="grid grid-cols-2 gap-3">
                       {Object.entries(selectedVehicle).map(([k, v]) => (
                         <div key={k}>
@@ -767,11 +767,11 @@ export function FleetManagementProView() {
                       ))}
                     </div>
                   </Card>
-                  <Card className="p-4 border-border/60">
+                  <Card className="hover-lift-sm p-4 border-border/60">
                     <p className="font-medium mb-3 text-xs">Fuel Efficiency</p>
                     <FuelEfficiencyBar value={selectedVehicle.mileage} />
                   </Card>
-                  <Card className="p-4 border-border/60">
+                  <Card className="hover-lift-sm p-4 border-border/60">
                     <p className="font-medium mb-2 text-xs">Vehicle Status</p>
                     <VehicleStatusBadge status={selectedVehicle.status} />
                     <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
@@ -797,7 +797,7 @@ export function FleetManagementProView() {
             <div className="space-y-4 text-sm">
               {selectedDriver && (
                 <>
-                  <Card className="p-4 border-border/60">
+                  <Card className="hover-lift-sm p-4 border-border/60">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white font-bold text-xl">
                         {selectedDriver.name.charAt(0)}
@@ -835,7 +835,7 @@ export function FleetManagementProView() {
             <div className="space-y-4 text-sm">
               {selectedTrip && (
                 <>
-                  <Card className="p-4 border-border/60">
+                  <Card className="hover-lift-sm p-4 border-border/60">
                     <div className="flex flex-wrap items-center gap-2 mb-3">
                       <RouteBadge route={selectedTrip.route} />
                       <TripStatusBadge status={selectedTrip.status} />
@@ -849,11 +849,11 @@ export function FleetManagementProView() {
                       ))}
                     </div>
                   </Card>
-                  <Card className="p-4 border-border/60">
+                  <Card className="hover-lift-sm p-4 border-border/60">
                     <p className="font-medium mb-2 text-xs">Load Status</p>
                     <LoadTile value={selectedTrip.load} max={25} />
                   </Card>
-                  <Card className="p-4 border-border/60">
+                  <Card className="hover-lift-sm p-4 border-border/60">
                     <p className="font-medium mb-2 text-xs">Trip Timeline</p>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <Calendar className="h-3.5 w-3.5" />
@@ -885,7 +885,7 @@ export function FleetManagementProView() {
           <ScrollArea className="mt-4 h-[80vh]">
             <div className="space-y-4 text-sm">
               {selectedRecord && (
-                <Card className="p-4 border-border/60">
+                <Card className="hover-lift-sm p-4 border-border/60">
                   <div className={`h-1.5 rounded-full mb-4 ${selectedRecord.type === "Fuel" ? "bg-gradient-to-r from-emerald-400 to-emerald-600" : "bg-gradient-to-r from-orange-400 to-orange-600"}`} />
                   <Badge className={`mb-3 text-[10px] ${selectedRecord.type === "Fuel" ? "bg-emerald-100 text-emerald-700" : "bg-orange-100 text-orange-700"}`}>
                     {selectedRecord.type === "Fuel" ? "⛽" : "🔧"} {selectedRecord.type}

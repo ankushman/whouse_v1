@@ -324,11 +324,11 @@ export function InventoryView() {
         actions={
           <div className="flex items-center gap-2">
             <ExportButton onExportCSV={handleExportCSV} />
-            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5" onClick={() => setScannerOpen(true)}>
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate gap-1.5" onClick={() => setScannerOpen(true)}>
               <ScanBarcode className="h-3.5 w-3.5" />
               Scan
             </Button>
-            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate gap-1.5">
               <RefreshCw className="h-3.5 w-3.5" />
               Refresh
             </Button>
@@ -338,8 +338,8 @@ export function InventoryView() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
-        <Card className="card-depth card-accent-blue relative overflow-hidden">
-          <CardContent className="glass-subtle p-4">
+        <Card className="hover-lift-sm card-depth card-accent-blue relative overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total SKUs</p>
@@ -351,8 +351,8 @@ export function InventoryView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-depth relative overflow-hidden">
-          <CardContent className="glass-subtle p-4">
+        <Card className="hover-lift-sm card-depth relative overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total Items</p>
@@ -364,8 +364,8 @@ export function InventoryView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-depth relative overflow-hidden border-red-200 dark:border-red-900">
-          <CardContent className="glass-subtle p-4">
+        <Card className="hover-lift-sm card-depth relative overflow-hidden border-red-200 dark:border-red-900">
+          <CardContent className="inner-glow glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Below Min Stock</p>
@@ -377,8 +377,8 @@ export function InventoryView() {
             </div>
           </CardContent>
         </Card>
-        <Card className="card-depth relative overflow-hidden">
-          <CardContent className="glass-subtle p-4">
+        <Card className="hover-lift-sm card-depth relative overflow-hidden">
+          <CardContent className="inner-glow glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Avg Accuracy</p>
@@ -394,7 +394,7 @@ export function InventoryView() {
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card className="card-accent-green card-shine">
+        <Card className="hover-lift-sm card-accent-green card-shine">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">ABC Classification</CardTitle>
             <CardDescription className="text-xs">Distribution by value class (A = High, B = Medium, C = Low)</CardDescription>
@@ -411,7 +411,7 @@ export function InventoryView() {
             </ChartContainer>
           </CardContent>
         </Card>
-        <Card className="card-accent-purple card-shine">
+        <Card className="hover-lift-sm card-accent-purple card-shine">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Category Distribution</CardTitle>
             <CardDescription className="text-xs">Inventory items per part category</CardDescription>
@@ -433,7 +433,7 @@ export function InventoryView() {
       </div>
 
       {/* Demand Forecasting Chart */}
-      <Card className="card-depth chart-card card-accent-blue card-shine">
+      <Card className="hover-lift-sm card-depth chart-card card-accent-blue card-shine">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -515,7 +515,7 @@ export function InventoryView() {
             </SelectContent>
           </Select>
           {hasActiveFilters && (
-            <Button variant="ghost" size="sm" className="h-8 text-xs text-muted-foreground" onClick={() => { setWarehouseFilter("All"); setCategoryFilter("All"); setAbcFilter("All"); }}>
+            <Button variant="ghost" size="sm" className="press-scale h-8 text-xs text-muted-foreground" onClick={() => { setWarehouseFilter("All"); setCategoryFilter("All"); setAbcFilter("All"); }}>
               Clear all
             </Button>
           )}
@@ -552,7 +552,7 @@ export function InventoryView() {
         <TabsContent value="alerts" className="mt-4">
           {stockAlerts.length === 0 ? (
             <Card>
-              <CardContent className="glass-subtle flex flex-col items-center justify-center py-12">
+              <CardContent className="inner-glow glass-subtle flex flex-col items-center justify-center py-12">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950">
                   <Package className="h-6 w-6 text-emerald-500" />
                 </div>
@@ -571,7 +571,7 @@ export function InventoryView() {
                     className="border-red-200 dark:border-red-900 cursor-pointer hover:shadow-md hover:border-red-300 dark:hover:border-red-800 transition-all"
                     onClick={() => openDetail(item as unknown as InventoryDetailRow)}
                   >
-                    <CardContent className="glass-subtle p-4">
+                    <CardContent className="inner-glow glass-subtle p-4">
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">

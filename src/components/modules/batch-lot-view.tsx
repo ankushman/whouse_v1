@@ -344,7 +344,7 @@ export default function BatchLotView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Batch Lifecycle</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Batch Lifecycle</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyBatches}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -354,7 +354,7 @@ export default function BatchLotView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Category Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Category Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={categoryDist} cx="50%" cy="50%" innerRadius={50} outerRadius={90} dataKey="count" nameKey="name" label={({ name, percent }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {categoryDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -364,7 +364,7 @@ export default function BatchLotView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Expiry Timeline Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Expiry Timeline Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><BarChart data={expiryTimeline}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="range" fontSize={10} /><YAxis fontSize={11} />
                     <Tooltip />
@@ -376,7 +376,7 @@ export default function BatchLotView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Batch Status</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse Batch Status</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><BarChart data={warehouseBatchCount} layout="vertical">
                     <CartesianGrid strokeDasharray="3 3" /><XAxis type="number" fontSize={11} /><YAxis type="category" dataKey="warehouse" fontSize={10} width={95} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -389,7 +389,7 @@ export default function BatchLotView() {
               </div>
 
               {/* Critical Expiry Alerts Quick View */}
-              <Card className="card-crud-lift bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Bell className="h-4 w-4 text-red-500" />Critical Expiry Alerts ({expiryAlerts.filter((e) => e.urgency === "Critical").length} Critical)</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm card-crud-lift bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Bell className="h-4 w-4 text-red-500" />Critical Expiry Alerts ({expiryAlerts.filter((e) => e.urgency === "Critical").length} Critical)</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
@@ -419,7 +419,7 @@ export default function BatchLotView() {
                           <TableCell className="text-[11px] font-semibold">{alert.qtyAvailable.toLocaleString()}</TableCell>
                           <TableCell><Badge className={cn("text-[9px]", URGENCY_COLORS[alert.urgency])}>{alert.urgency}</Badge></TableCell>
                           <TableCell>
-                            <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedBatch(alert) }}>
+                            <Button variant="ghost" size="sm" className="press-scale h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedBatch(alert) }}>
                               <Eye className="h-3 w-3 mr-1" />View
                             </Button>
                           </TableCell>
@@ -435,7 +435,7 @@ export default function BatchLotView() {
           {/* TAB 2: BATCH REGISTER */}
           {activeTab === "register" && (
             <div className="mt-4 space-y-4">
-              <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-violet-500" />Filter Batch Records</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Filter className="h-4 w-4 text-violet-500" />Filter Batch Records</CardTitle></CardHeader><CardContent>
                 <div className="flex flex-wrap gap-2 items-center">
                   <div className="relative flex-1 min-w-[180px]">
                     <Search className="h-3.5 w-3.5 absolute left-2.5 top-2.5 text-gray-400" />
@@ -457,7 +457,7 @@ export default function BatchLotView() {
                 </div>
               </CardContent></Card>
 
-              <Card className="card-crud-lift glass-subtle bl-chart-card"><CardContent className="p-0">
+              <Card className="inner-glow hover-lift-sm card-crud-lift glass-subtle bl-chart-card"><CardContent className="p-0">
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow className="bl-table-header">
@@ -513,7 +513,7 @@ export default function BatchLotView() {
                             <Badge className={cn("text-[9px]", b.qcStatus === "Passed" ? "bl-badge-passed" : b.qcStatus === "Failed" ? "bl-badge-failed" : "bl-badge-pending")}>{b.qcStatus}</Badge>
                           </TableCell>
                           <TableCell>
-                            <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedBatch(b) }}>
+                            <Button variant="ghost" size="sm" className="press-scale h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedBatch(b) }}>
                               <Eye className="h-3 w-3" />
                             </Button>
                           </TableCell>
@@ -553,7 +553,7 @@ export default function BatchLotView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Expiry Timeline Bucket View</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Expiry Timeline Bucket View</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={220}><BarChart data={expiryTimeline}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="range" fontSize={10} /><YAxis fontSize={11} />
                     <Tooltip />
@@ -565,7 +565,7 @@ export default function BatchLotView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Retention Policy Split</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Retention Policy Split</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={220}><PieChart>
                     <Pie data={retentionDist} cx="50%" cy="50%" innerRadius={45} outerRadius={80} dataKey="count" nameKey="name" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {retentionDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -574,7 +574,7 @@ export default function BatchLotView() {
                 </CardContent></Card>
               </div>
 
-              <Card className="card-crud-lift bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">All Expiry Alerts ({expiryAlerts.length} batches)</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm card-crud-lift bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">All Expiry Alerts ({expiryAlerts.length} batches)</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
                   <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
@@ -630,7 +630,7 @@ export default function BatchLotView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Compliance Rates</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Compliance Rates</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><AreaChart data={monthlyCompliance}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis domain={[70, 100]} fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -640,7 +640,7 @@ export default function BatchLotView() {
                   </AreaChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Storage Condition Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Storage Condition Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={storageDist} cx="50%" cy="50%" innerRadius={50} outerRadius={85} dataKey="count" nameKey="name" label={({ name, percent }) => `${name.split("(")[0].trim()} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
                       {storageDist.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
@@ -650,7 +650,7 @@ export default function BatchLotView() {
               </div>
 
               {/* Violations */}
-              <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><ShieldAlert className="h-4 w-4 text-red-500" />Compliance Violations ({complianceViolations.length})</CardTitle></CardHeader><CardContent>
+              <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><ShieldAlert className="h-4 w-4 text-red-500" />Compliance Violations ({complianceViolations.length})</CardTitle></CardHeader><CardContent>
                 <div className="flex flex-wrap gap-2 mb-3">
                   <div className="relative flex-1 min-w-[150px]">
                     <Search className="h-3.5 w-3.5 absolute left-2.5 top-2.5 text-gray-400" />
@@ -712,7 +712,7 @@ export default function BatchLotView() {
                   { title: "Waste Rate", val: `${(rand() * 3 + 0.5).toFixed(1)}%`, sub: "Expired / Total units" },
                   { title: "Recovery Rate", val: `${rInt(78, 95)}%`, sub: "Near-expiry salvage" },
                 ].map((s) => (
-                  <Card key={s.title} className="bl-analytics-card rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+                  <Card key={s.title} className="hover-lift-sm bl-analytics-card rounded-xl p-4 border border-gray-200 dark:border-gray-700">
                     <div className="text-[10px] font-medium text-gray-500 uppercase">{s.title}</div>
                     <div className="text-xl font-bold text-violet-700 dark:text-violet-400 mt-1">{s.val}</div>
                     <div className="text-[9px] text-gray-400">{s.sub}</div>
@@ -721,7 +721,7 @@ export default function BatchLotView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Batch Creation & Consumption Trend</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Batch Creation & Consumption Trend</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><ComposedChart data={monthlyBatches}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={11} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 11 }} />
@@ -732,7 +732,7 @@ export default function BatchLotView() {
                   </ComposedChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Batch Status Mix</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Batch Status Mix</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={(() => {
                       const counts: Record<string, number> = {}
@@ -746,7 +746,7 @@ export default function BatchLotView() {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse-Wise Batch Distribution</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Warehouse-Wise Batch Distribution</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><BarChart data={warehouseBatchCount}>
                     <CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="warehouse" fontSize={10} angle={-20} textAnchor="end" height={50} /><YAxis fontSize={11} />
                     <Tooltip /><Legend wrapperStyle={{ fontSize: 10 }} />
@@ -756,7 +756,7 @@ export default function BatchLotView() {
                   </BarChart></ResponsiveContainer>
                 </CardContent></Card>
 
-                <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Compliance Violations by Type</CardTitle></CardHeader><CardContent>
+                <Card className="hover-lift-sm bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Compliance Violations by Type</CardTitle></CardHeader><CardContent>
                   <ResponsiveContainer width="100%" height={240}><PieChart>
                     <Pie data={(() => {
                       const counts: Record<string, number> = {}
@@ -788,7 +788,7 @@ export default function BatchLotView() {
                     <h3 className="text-base font-bold text-white">{selectedBatch.batchNo}</h3>
                     <p className="text-xs text-white/70">{selectedBatch.lotNo} · {selectedBatch.product.name}</p>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-white/70 hover:text-white hover:bg-white/10" onClick={() => setSelectedBatch(null)}>
+                  <Button variant="ghost" size="sm" className="press-scale text-white/70 hover:text-white hover:bg-white/10" onClick={() => setSelectedBatch(null)}>
                     <X className="h-4 w-4" />
                   </Button>
                 </div>

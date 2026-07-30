@@ -283,8 +283,8 @@ const PhoneTile = ({ phone }: { phone: string }) => <span className="lmc-ph inli
 // KPI CARD
 // ═══════════════════════════════════════════════════════════════════════════════
 const KPI = ({ label, value, icon: Icon, color, change }: { label: string; value: string; icon: React.ElementType; color: string; change?: string }) => (
-  <Card className="lmc-kpi p-4 transition-shadow hover:shadow-md">
-    <CardContent className="glass-subtle flex items-center gap-3 p-0">
+  <Card className="hover-lift-sm lmc-kpi p-4 transition-shadow hover:shadow-md">
+    <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-0">
       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${color}`}><Icon className="h-5 w-5 text-white" /></div>
       <div className="min-w-0 flex-1">
         <p className="truncate text-xs text-muted-foreground">{label}</p>
@@ -361,7 +361,7 @@ export default function LastMileCustomerPortalView() {
         <KPI label="Avg Order Value" value="₹1,250" icon={BarChart3} color="bg-violet-600" change="+₹85" />
       </div>
       <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="col-span-1 lg:col-span-2">
+        <Card className="hover-lift-sm col-span-1 lg:col-span-2">
           <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Daily Delivery Volume</CardTitle></CardHeader>
           <CardContent>
             <AreaChart data={dailyVolume}>
@@ -375,7 +375,7 @@ export default function LastMileCustomerPortalView() {
         </Card>
         <Card>
           <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Delivery Type Distribution</CardTitle></CardHeader>
-          <CardContent className="glass-subtle flex items-center justify-center">
+          <CardContent className="inner-glow glass-subtle flex items-center justify-center">
             <PieChart width={280} height={280}>
               <Pie data={deliveryTypeDist} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90} label={(e) => e.name.length > 8 ? e.name.slice(0, 8) + "…" : e.name} labelLine={false} fontSize={9}>
                 {deliveryTypeDist.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}
@@ -434,7 +434,7 @@ export default function LastMileCustomerPortalView() {
                   <td className="p-3"><ValueTile value={d.value} /></td>
                   <td className="hidden p-3 md:table-cell"><AttemptsBadge attempts={d.attempts} /></td>
                   <td className="p-3">
-                    <Button size="icon" variant="ghost" className="lmc-eye h-7 w-7" onClick={() => { setSelectedDelivery(d); setSheetOpen(true); toast.info("Delivery Details", `Viewing ${d.id}`) }}>
+                    <Button size="icon" variant="ghost" className="press-scale lmc-eye h-7 w-7" onClick={() => { setSelectedDelivery(d); setSheetOpen(true); toast.info("Delivery Details", `Viewing ${d.id}`) }}>
                       <Eye className="h-4 w-4" />
                     </Button>
                   </td>
@@ -485,7 +485,7 @@ export default function LastMileCustomerPortalView() {
                   <td className="hidden p-3 md:table-cell"><RatingBar rating={Math.round(c.avgRating)} /></td>
                   <td className="hidden p-3 lg:table-cell text-xs">{c.lastOrder}</td>
                   <td className="p-3">
-                    <Button size="icon" variant="ghost" className="lmc-eye h-7 w-7" onClick={() => { setSelectedCustomer(c); setSheetOpen(true); toast.info("Customer Profile", `Viewing ${c.name}`) }}>
+                    <Button size="icon" variant="ghost" className="press-scale lmc-eye h-7 w-7" onClick={() => { setSelectedCustomer(c); setSheetOpen(true); toast.info("Customer Profile", `Viewing ${c.name}`) }}>
                       <Eye className="h-4 w-4" />
                     </Button>
                   </td>
@@ -536,7 +536,7 @@ export default function LastMileCustomerPortalView() {
                   <td className="hidden p-3 md:table-cell"><EarningsTile earnings={r.earnings} /></td>
                   <td className="hidden p-3 md:table-cell"><AcceptanceRateBar rate={r.acceptanceRate} /></td>
                   <td className="p-3">
-                    <Button size="icon" variant="ghost" className="lmc-eye h-7 w-7" onClick={() => { setSelectedRider(r); setSheetOpen(true); toast.info("Rider Profile", `Viewing ${r.name}`) }}>
+                    <Button size="icon" variant="ghost" className="press-scale lmc-eye h-7 w-7" onClick={() => { setSelectedRider(r); setSheetOpen(true); toast.info("Rider Profile", `Viewing ${r.name}`) }}>
                       <Eye className="h-4 w-4" />
                     </Button>
                   </td>
@@ -575,7 +575,7 @@ export default function LastMileCustomerPortalView() {
                   <td className="hidden p-3 md:table-cell"><ResolvedBadge resolved={f.resolved} /></td>
                   <td className="hidden p-3 lg:table-cell"><SentimentBadge sentiment={f.sentiment} /></td>
                   <td className="p-3">
-                    <Button size="icon" variant="ghost" className="lmc-eye h-7 w-7" onClick={() => { setSelectedFeedback(f); setSheetOpen(true); toast.info("Feedback", `Viewing ${f.id}`) }}>
+                    <Button size="icon" variant="ghost" className="press-scale lmc-eye h-7 w-7" onClick={() => { setSelectedFeedback(f); setSheetOpen(true); toast.info("Feedback", `Viewing ${f.id}`) }}>
                       <Eye className="h-4 w-4" />
                     </Button>
                   </td>
@@ -703,7 +703,7 @@ export default function LastMileCustomerPortalView() {
             <div className="rounded-lg border p-3"><p className="text-xs text-muted-foreground">Last Order</p><p className="text-sm font-medium">{selectedCustomer.lastOrder}</p></div>
           </div>
           <div className="rounded-lg border p-3"><p className="text-xs text-muted-foreground mb-1">Contact</p><PhoneTile phone={selectedCustomer.phone} /><p className="mt-1 text-xs">{selectedCustomer.email}</p></div>
-          <Card className="p-4"><CardHeader className="p-0 pb-2"><CardTitle className="text-xs">Monthly Spending</CardTitle></CardHeader>
+          <Card className="hover-lift-sm p-4"><CardHeader className="p-0 pb-2"><CardTitle className="text-xs">Monthly Spending</CardTitle></CardHeader>
             <AreaChart data={spendingData} height={120}>
               <XAxis dataKey="month" fontSize={10} /><YAxis fontSize={10} hide /><Tooltip />
               <Area type="monotone" dataKey="amount" fill={THEME.violet} stroke={THEME.violet} />
@@ -733,7 +733,7 @@ export default function LastMileCustomerPortalView() {
             <div className="rounded-lg border p-3"><p className="text-xs text-muted-foreground">Total KM</p><p className="text-sm font-medium">{selectedRider.totalKm.toLocaleString()} km</p></div>
             <div className="rounded-lg border p-3"><PhoneTile phone={selectedRider.phone} /></div>
           </div>
-          <Card className="p-4"><CardHeader className="p-0 pb-2"><CardTitle className="text-xs">Weekly Performance</CardTitle></CardHeader>
+          <Card className="hover-lift-sm p-4"><CardHeader className="p-0 pb-2"><CardTitle className="text-xs">Weekly Performance</CardTitle></CardHeader>
             <BarChart data={perfData} height={120}>
               <XAxis dataKey="day" fontSize={10} /><YAxis fontSize={10} hide /><Tooltip />
               <Bar dataKey="deliveries" fill={THEME.emerald} radius={[3, 3, 0, 0]} />

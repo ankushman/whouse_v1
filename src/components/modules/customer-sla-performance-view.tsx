@@ -329,8 +329,8 @@ export function CustomerSLAPerformanceView() {
 
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 csla-kpi-enter">
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Users className="h-3 w-3" />
@@ -342,8 +342,8 @@ export function CustomerSLAPerformanceView() {
             <p className="text-[10px] text-muted-foreground">{activeShipments} active shipments</p>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Target className="h-3 w-3" />
@@ -357,8 +357,8 @@ export function CustomerSLAPerformanceView() {
             <p className="text-[10px] text-muted-foreground">Target: ≥95%</p>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <CheckCircle2 className="h-3 w-3" />
@@ -369,8 +369,8 @@ export function CustomerSLAPerformanceView() {
             <p className="text-[10px] text-muted-foreground">customers above SLA</p>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <AlertTriangle className="h-3 w-3" />
@@ -381,8 +381,8 @@ export function CustomerSLAPerformanceView() {
             <p className="text-[10px] text-muted-foreground">below SLA target</p>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <XCircle className="h-3 w-3" />
@@ -393,8 +393,8 @@ export function CustomerSLAPerformanceView() {
             <p className="text-[10px] text-muted-foreground">critical action needed</p>
           </CardContent>
         </Card>
-        <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="glass-subtle p-3 space-y-1">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm hover-zoom">
+          <CardContent className="inner-glow glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Flame className="h-3 w-3" />
@@ -410,7 +410,7 @@ export function CustomerSLAPerformanceView() {
       {/* Top row charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* 30-day SLA trend */}
-        <Card className="lg:col-span-2 rounded-xl border-border/60 shadow-sm csla-chart-enter">
+        <Card className="hover-lift-sm lg:col-span-2 rounded-xl border-border/60 shadow-sm csla-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <Activity className="h-4 w-4 text-emerald-500" />
@@ -420,7 +420,7 @@ export function CustomerSLAPerformanceView() {
               Network-wide SLA % vs target · Current: {overallCompliance.toFixed(1)}%
             </CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={slaChartConfig} className="aspect-[16/6] w-full">
               <AreaChart data={slaTrend30d} margin={{ top: 4, right: 8, bottom: 0, left: -16 }}>
                 <defs>
@@ -441,7 +441,7 @@ export function CustomerSLAPerformanceView() {
         </Card>
 
         {/* Tier distribution */}
-        <Card className="rounded-xl border-border/60 shadow-sm csla-chart-enter">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm csla-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <Award className="h-4 w-4 text-violet-500" />
@@ -451,7 +451,7 @@ export function CustomerSLAPerformanceView() {
               {totalCustomers} customers · YTD value ₹{(totalValue / 10000000).toFixed(1)}Cr
             </CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0">
+          <CardContent className="inner-glow glass-subtle pt-0">
             <ChartContainer config={pieConfig} className="aspect-square w-full max-w-[180px] mx-auto">
               <PieChart>
                 <Pie
@@ -486,7 +486,7 @@ export function CustomerSLAPerformanceView() {
       {/* Top + Bottom performers */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Top performers */}
-        <Card className="rounded-xl border-border/60 shadow-sm csla-chart-enter">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm csla-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <Trophy className="h-4 w-4 text-emerald-500" />
@@ -496,7 +496,7 @@ export function CustomerSLAPerformanceView() {
               Customers exceeding or meeting SLA targets consistently
             </CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0 space-y-2">
+          <CardContent className="inner-glow glass-subtle pt-0 space-y-2">
             {topPerformers.map((c, i) => {
               const initials = c.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
               return (
@@ -536,7 +536,7 @@ export function CustomerSLAPerformanceView() {
         </Card>
 
         {/* Bottom performers (at-risk + breached) */}
-        <Card className="rounded-xl border-border/60 shadow-sm csla-chart-enter">
+        <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm csla-chart-enter">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
               <AlertCircle className="h-4 w-4 text-red-500" />
@@ -546,7 +546,7 @@ export function CustomerSLAPerformanceView() {
               Customers with SLA below target — penalty risk ₹{(bottomPerformers.reduce((s, c) => s + c.penaltyRisk, 0) / 100000).toFixed(1)}L
             </CardDescription>
           </CardHeader>
-          <CardContent className="glass-subtle pt-0 space-y-2">
+          <CardContent className="inner-glow glass-subtle pt-0 space-y-2">
             {bottomPerformers.map((c, i) => {
               const initials = c.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
               return (
@@ -587,7 +587,7 @@ export function CustomerSLAPerformanceView() {
       </div>
 
       {/* SLA comparison chart */}
-      <Card className="rounded-xl border-border/60 shadow-sm csla-chart-enter">
+      <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm csla-chart-enter">
         <CardHeader className="pb-2">
           <CardTitle className="text-sm flex items-center gap-2">
             <Target className="h-4 w-4 text-blue-500" />
@@ -597,7 +597,7 @@ export function CustomerSLAPerformanceView() {
             Actual vs Contract SLA % — bars below the orange line are at risk
           </CardDescription>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <ChartContainer config={slaChartConfig} className="aspect-[16/6] w-full">
             <BarChart data={comparisonData} margin={{ top: 4, right: 8, bottom: 0, left: -16 }} barGap={2}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted/40" vertical={false} />
@@ -622,7 +622,7 @@ export function CustomerSLAPerformanceView() {
       </Card>
 
       {/* Customer SLA master table */}
-      <Card className="rounded-xl border-border/60 shadow-sm">
+      <Card className="hover-lift-sm rounded-xl border-border/60 shadow-sm">
         <CardHeader className="pb-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
@@ -635,13 +635,13 @@ export function CustomerSLAPerformanceView() {
               </CardDescription>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="btn-outline-animate h-7 gap-1.5 text-xs" onClick={() => toast.info("Refreshing", "Syncing SLA data from WMS...")}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-7 gap-1.5 text-xs" onClick={() => toast.info("Refreshing", "Syncing SLA data from WMS...")}>
                 <RefreshCw className="h-3 w-3" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="btn-outline-animate h-7 gap-1.5 text-xs" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-7 gap-1.5 text-xs" onClick={handleExport}>
                 <Download className="h-3 w-3" /> Export
               </Button>
-              <Button size="sm" className="h-7 gap-1.5 text-xs" onClick={() => toast.info("New SLA contract", "Opening SLA contract wizard...")}>
+              <Button size="sm" className="press-scale h-7 gap-1.5 text-xs" onClick={() => toast.info("New SLA contract", "Opening SLA contract wizard...")}>
                 <Sparkles className="h-3 w-3" /> New Contract
               </Button>
             </div>
@@ -697,7 +697,7 @@ export function CustomerSLAPerformanceView() {
             </TabsList>
           </Tabs>
         </CardHeader>
-        <CardContent className="glass-subtle pt-0">
+        <CardContent className="inner-glow glass-subtle pt-0">
           <div className="rounded-lg border overflow-hidden">
             <Table className="table-hover-highlight">
               <TableHeader>
@@ -1037,10 +1037,10 @@ function CustomerSLADetailDrawer({ open, onOpenChange, customer }: CustomerSLADe
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <Button variant="outline" size="sm" className="btn-outline-animate h-7 w-7 p-0" onClick={handleCall}>
+                    <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-7 w-7 p-0" onClick={handleCall}>
                       <Phone className="h-3 w-3" />
                     </Button>
-                    <Button variant="outline" size="sm" className="btn-outline-animate h-7 w-7 p-0" onClick={handleEmail}>
+                    <Button variant="outline" size="sm" className="press-scale btn-outline-animate h-7 w-7 p-0" onClick={handleEmail}>
                       <Mail className="h-3 w-3" />
                     </Button>
                   </div>
@@ -1324,10 +1324,10 @@ function CustomerSLADetailDrawer({ open, onOpenChange, customer }: CustomerSLADe
                 </div>
               </div>
               <div className="mt-3 flex gap-2">
-                <Button variant="outline" size="sm" className="btn-outline-animate flex-1 gap-1.5 text-xs" onClick={() => toast.info("Schedule QBR", `Scheduling QBR with ${customer.name}...`)}>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate flex-1 gap-1.5 text-xs" onClick={() => toast.info("Schedule QBR", `Scheduling QBR with ${customer.name}...`)}>
                   <Calendar className="h-3.5 w-3.5" /> Schedule QBR
                 </Button>
-                <Button variant="outline" size="sm" className="btn-outline-animate flex-1 gap-1.5 text-xs" onClick={() => toast.info("Renew contract", `Initiating contract renewal for ${customer.name}...`)}>
+                <Button variant="outline" size="sm" className="press-scale btn-outline-animate flex-1 gap-1.5 text-xs" onClick={() => toast.info("Renew contract", `Initiating contract renewal for ${customer.name}...`)}>
                   <FileBarChart className="h-3.5 w-3.5" /> Renew
                 </Button>
               </div>
@@ -1337,13 +1337,13 @@ function CustomerSLADetailDrawer({ open, onOpenChange, customer }: CustomerSLADe
 
         {/* Footer */}
         <div className="sticky bottom-0 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-5 py-3 flex gap-2">
-          <Button variant="outline" size="sm" className="btn-outline-animate flex-1 gap-1.5" onClick={handleExport}>
+          <Button variant="outline" size="sm" className="press-scale btn-outline-animate flex-1 gap-1.5" onClick={handleExport}>
             <Download className="h-3.5 w-3.5" /> Export Scorecard
           </Button>
-          <Button variant="outline" size="sm" className="btn-outline-animate flex-1 gap-1.5" onClick={() => toast.info("Escalation", `Escalating ${customer.name} to senior management...`)}>
+          <Button variant="outline" size="sm" className="press-scale btn-outline-animate flex-1 gap-1.5" onClick={() => toast.info("Escalation", `Escalating ${customer.name} to senior management...`)}>
             <AlertCircle className="h-3.5 w-3.5" /> Escalate
           </Button>
-          <Button size="sm" className="flex-1 gap-1.5" onClick={() => toast.success("Acknowledge", `${customer.name} SLA status acknowledged.`)}>
+          <Button size="sm" className="press-scale flex-1 gap-1.5" onClick={() => toast.success("Acknowledge", `${customer.name} SLA status acknowledged.`)}>
             <CheckCircle2 className="h-3.5 w-3.5" /> Acknowledge
           </Button>
         </div>

@@ -363,7 +363,7 @@ export default function CustomsTradeComplianceView() {
   const filteredExports = sortedData(filterData(data.exports, searchQ), sortField, sortDir)
 
   const SortHeader = ({ field, children }: { field: string; children: React.ReactNode }) => (
-    <Button variant="ghost" size="sm" className="ctc-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
+    <Button variant="ghost" size="sm" className="press-scale ctc-sort-header h-8 px-2 text-[10px] font-semibold hover:bg-gray-100 dark:hover:bg-gray-800" onClick={() => handleSort(field)}>
       <span className="flex items-center gap-1">{children}<ArrowUpDown className="h-3 w-3" /></span>
     </Button>
   )
@@ -384,7 +384,7 @@ export default function CustomsTradeComplianceView() {
           <div className="ctc-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`ctc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -392,15 +392,15 @@ export default function CustomsTradeComplianceView() {
             ))}
           </div>
           <div className="ctc-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="ctc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ctc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Monthly Clearance Trend</CardTitle></CardHeader>
               <CardContent><AreaChart data={clearanceMonthly}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="Cleared" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Held" stackId="a" fill="#d97706" /><Area type="monotone" dataKey="Rejected" stackId="a" fill="#e11d48" /></AreaChart></CardContent>
             </Card>
-            <Card className="ctc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ctc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Shipment Type Distribution</CardTitle></CardHeader>
               <CardContent><PieChart><Pie data={typePie} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{typePie.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
-            <Card className="ctc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ctc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Port-wise Clearance</CardTitle></CardHeader>
               <CardContent><BarChart data={portBar}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="port" tick={{ fontSize: 9 }} angle={-30} textAnchor="end" height={60} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="Clearance" fill="#3b82f6" radius={[4, 4, 0, 0]} /><Bar dataKey="Hold" fill="#d97706" radius={[4, 4, 0, 0]} /></BarChart></CardContent>
             </Card>
@@ -429,7 +429,7 @@ export default function CustomsTradeComplianceView() {
                     <td className="p-2"><CHABadge name={imp.cha} /></td>
                     <td className="p-2"><RiskBadge risk={imp.riskLevel} /></td>
                     <td className="p-2"><ClearanceTimeTile hours={imp.clearanceHrs} /></td>
-                    <td className="p-2 text-center"><Button variant="ghost" size="sm" className="ctc-view-btn h-7 w-7 p-0 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-900/30" onClick={() => { setSelectedImport(imp); setSheetOpen(true); toast.success("Viewing Import", `${imp.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
+                    <td className="press-scale p-2 text-center"><Button variant="ghost" size="sm" className="ctc-view-btn h-7 w-7 p-0 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-900/30" onClick={() => { setSelectedImport(imp); setSheetOpen(true); toast.success("Viewing Import", `${imp.id} details opened`) }}><Eye className="h-3.5 w-3.5" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -458,7 +458,7 @@ export default function CustomsTradeComplianceView() {
                     <td className="p-2"><FOBValueTile value={exp.fobValue} /></td>
                     <td className="p-2 text-[10px] font-medium text-gray-600 dark:text-gray-400 truncate max-w-[120px]">{exp.vesselName}</td>
                     <td className="badge-interactive p-2"><Badge variant="outline" className={`text-[10px] px-2 py-0.5 font-medium ${exp.edpmsStatus === "Confirmed" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"}`}>{exp.edpmsStatus}</Badge></td>
-                    <td className="p-2 text-center"><Button variant="ghost" size="sm" className="ctc-view-btn h-7 w-7 p-0 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-900/30" onClick={() => toast.success("Viewing Export", `${exp.id} details opened`)}><Eye className="h-3.5 w-3.5" /></Button></td>
+                    <td className="press-scale p-2 text-center"><Button variant="ghost" size="sm" className="ctc-view-btn h-7 w-7 p-0 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-900/30" onClick={() => toast.success("Viewing Export", `${exp.id} details opened`)}><Eye className="h-3.5 w-3.5" /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -476,7 +476,7 @@ export default function CustomsTradeComplianceView() {
                   <div className={`ctc-duty-card-header p-3 ${isDuty ? "bg-gradient-to-r from-rose-500 to-rose-600" : "bg-gradient-to-r from-amber-500 to-amber-600"} text-white`}>
                     <div className="flex items-center justify-between"><DutyTypeBadge type={d.type} /><span className="text-[10px] opacity-80">{d.section}</span></div>
                   </div>
-                  <CardContent className="glass-subtle p-3 space-y-2">
+                  <CardContent className="inner-glow glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Rate</span><DutyRateBar rate={d.rate} /></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Assessed</span><span className="text-[11px] font-bold text-gray-700 dark:text-gray-300">{fmtINR(d.assessedValue)}</span></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Duty</span><DutyTile amount={d.dutyAmount} /></div>
@@ -527,7 +527,7 @@ export default function CustomsTradeComplianceView() {
               { label: "High Risk Items", value: data.imports.filter(x => ["Critical", "Prohibited"].includes(x.riskLevel)).length, icon: AlertTriangle, color: "text-red-600", bg: "bg-red-50 dark:bg-red-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`ctc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-4">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -535,19 +535,19 @@ export default function CustomsTradeComplianceView() {
             ))}
           </div>
           <div className="ctc-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card className="ctc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ctc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Monthly Duty Collection</CardTitle></CardHeader>
               <CardContent><LineChart data={Array.from({ length: 12 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][i], Duty: ri(500, 2000, i + 300), Refund: ri(50, 200, i + 400) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Line type="monotone" dataKey="Duty" stroke="#e11d48" strokeWidth={2} /><Line type="monotone" dataKey="Refund" stroke="#d97706" strokeWidth={2} /></LineChart></CardContent>
             </Card>
-            <Card className="ctc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ctc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Risk Category Distribution</CardTitle></CardHeader>
               <CardContent><PieChart><Pie data={RISK_CATEGORIES.map((r, i) => ({ name: r, value: ri(5, 40, i + 500) }))} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} labelLine={false} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{RISK_CATEGORIES.map((_, i) => <Cell key={i} fill={["#059669", "#d97706", "#f97316", "#e11d48", "#7c3aed"][i]} />)}</Pie><Tooltip /></PieChart></CardContent>
             </Card>
-            <Card className="ctc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ctc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Top HS Codes by Volume</CardTitle></CardHeader>
               <CardContent><BarChart data={Array.from({ length: 8 }, (_, i) => ({ code: `${ri(10, 99, i + 600)}${ri(10, 99, i + 700)}`, Volume: ri(20, 150, i + 800) }))} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 10 }} /><YAxis dataKey="code" type="category" tick={{ fontSize: 10 }} width={60} /><Tooltip /><Bar dataKey="Volume" fill="#3b82f6" radius={[0, 4, 4, 0]} /></BarChart></CardContent>
             </Card>
-            <Card className="ctc-chart-card hover:shadow-lg transition-shadow duration-300">
+            <Card className="hover-lift-sm ctc-chart-card hover:shadow-lg transition-shadow duration-300">
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Port Performance (6 months)</CardTitle></CardHeader>
               <CardContent><AreaChart data={Array.from({ length: 6 }, (_, i) => ({ month: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"][i], JNPT: ri(80, 150, i + 900), Chennai: ri(50, 120, i + 950), Mundra: ri(60, 130, i + 1000), Nhava: ri(70, 140, i + 1050) }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="JNPT" stackId="a" fill="#3b82f6" /><Area type="monotone" dataKey="Chennai" stackId="a" fill="#059669" /><Area type="monotone" dataKey="Mundra" stackId="a" fill="#d97706" /><Area type="monotone" dataKey="Nhava" stackId="a" fill="#7c3aed" /></AreaChart></CardContent>
             </Card>

@@ -454,7 +454,7 @@ function PortfolioTab({
     <div className="ci-tab-pane">
       {/* Charts row */}
       <div className="ci-charts-row">
-        <Card className="ci-chart-card">
+        <Card className="hover-lift-sm ci-chart-card">
           <div className="ci-chart-header"><BarChart3 size={16} /><h3>Projects by Phase</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.projectsByPhase} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -470,7 +470,7 @@ function PortfolioTab({
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="ci-chart-card">
+        <Card className="hover-lift-sm ci-chart-card">
           <div className="ci-chart-header"><BarChart3 size={16} /><h3>Projects by Status</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.projectsByStatus} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -486,7 +486,7 @@ function PortfolioTab({
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="ci-chart-card">
+        <Card className="hover-lift-sm ci-chart-card">
           <div className="ci-chart-header"><BarChart3 size={16} /><h3>Benefit by Category (₹)</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.projectsByCategory} layout="vertical" margin={{ top: 10, right: 10, bottom: 0, left: 30 }}>
@@ -505,7 +505,7 @@ function PortfolioTab({
       </div>
 
       {/* Trend chart */}
-      <Card className="ci-chart-card ci-trend-card">
+      <Card className="hover-lift-sm ci-chart-card ci-trend-card">
         <div className="ci-chart-header"><Activity size={16} /><h3>12-Month Activity Trend</h3></div>
         <ResponsiveContainer width="100%" height={260}>
           <ComposedChart data={data.projectTrend} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
@@ -645,7 +645,7 @@ function KaizenTab({
 
       {/* Charts */}
       <div className="ci-charts-row">
-        <Card className="ci-chart-card">
+        <Card className="hover-lift-sm ci-chart-card">
           <div className="ci-chart-header"><BarChart3 size={16} /><h3>Suggestions by Status</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.suggestionsByStatus} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -661,7 +661,7 @@ function KaizenTab({
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="ci-chart-card">
+        <Card className="hover-lift-sm ci-chart-card">
           <div className="ci-chart-header"><BarChart3 size={16} /><h3>Benefit by Impact Type</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.suggestionsByImpact} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
@@ -749,7 +749,7 @@ function KaizenTab({
       </div>
 
       {/* Top suggestions spotlight */}
-      <Card className="ci-spotlight-card">
+      <Card className="hover-lift-sm ci-spotlight-card">
         <div className="ci-chart-header"><Trophy size={16} /><h3>Top 10 Implemented Suggestions by Benefit</h3></div>
         <div className="ci-spotlight-list">
           {data.topSuggestions.map((s, i) => (
@@ -793,7 +793,7 @@ function PDSATab({ data, setDetailModal }: { data: ApiResponse; setDetailModal: 
 
       {/* Charts */}
       <div className="ci-charts-row">
-        <Card className="ci-chart-card">
+        <Card className="hover-lift-sm ci-chart-card">
           <div className="ci-chart-header"><BarChart3 size={16} /><h3>PDSA Stage Distribution</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={data.pdsaStageBreakdown} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -810,7 +810,7 @@ function PDSATab({ data, setDetailModal }: { data: ApiResponse; setDetailModal: 
             </BarChart>
           </ResponsiveContainer>
         </Card>
-        <Card className="ci-chart-card">
+        <Card className="hover-lift-sm ci-chart-card">
           <div className="ci-chart-header"><BarChart3 size={16} /><h3>Study Outcome Breakdown</h3></div>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
@@ -892,28 +892,28 @@ function ROITab({ data, setDetailModal }: { data: ApiResponse; setDetailModal: (
     <div className="ci-tab-pane">
       {/* Portfolio summary */}
       <div className="ci-roi-summary-grid">
-        <Card className="ci-roi-summary-card ci-roi-investment">
+        <Card className="hover-lift-sm ci-roi-summary-card ci-roi-investment">
           <Coins size={20} />
           <div>
             <div className="ci-roi-amount">{fmtINRCompact(totalInvestment)}</div>
             <div className="ci-roi-label">Total Investment</div>
           </div>
         </Card>
-        <Card className="ci-roi-summary-card ci-roi-benefit">
+        <Card className="hover-lift-sm ci-roi-summary-card ci-roi-benefit">
             <TrendingUp size={20} />
           <div>
             <div className="ci-roi-amount">{fmtINRCompact(totalBenefitROI)}</div>
             <div className="ci-roi-label">Total Benefit (Realized + Projected)</div>
           </div>
         </Card>
-        <Card className="ci-roi-summary-card ci-roi-net">
+        <Card className="hover-lift-sm ci-roi-summary-card ci-roi-net">
           <Award size={20} />
           <div>
             <div className="ci-roi-amount">{fmtINRCompact(totalNetBenefit)}</div>
             <div className="ci-roi-label">Net Benefit</div>
           </div>
         </Card>
-        <Card className="ci-roi-summary-card ci-roi-roi">
+        <Card className="hover-lift-sm ci-roi-summary-card ci-roi-roi">
           <Gauge size={20} />
           <div>
             <div className="ci-roi-amount">{data.kpis.portfolioROI}%</div>
@@ -923,7 +923,7 @@ function ROITab({ data, setDetailModal }: { data: ApiResponse; setDetailModal: (
       </div>
 
       {/* Top ROI projects */}
-      <Card className="ci-chart-card">
+      <Card className="hover-lift-sm ci-chart-card">
         <div className="ci-chart-header"><Trophy size={16} /><h3>Top 10 Projects by ROI</h3></div>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data.topROIProjects} layout="vertical" margin={{ top: 10, right: 30, bottom: 0, left: 100 }}>
@@ -1006,7 +1006,7 @@ function PracticesTab({ data, setDetailModal }: { data: ApiResponse; setDetailMo
       </div>
 
       {/* Maturity breakdown chart */}
-      <Card className="ci-chart-card">
+      <Card className="hover-lift-sm ci-chart-card">
         <div className="ci-chart-header"><BarChart3 size={16} /><h3>Best Practice Maturity Distribution</h3></div>
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={data.maturityBreakdown} margin={{ top: 10, right: 10, bottom: 0, left: -20 }}>
@@ -1076,7 +1076,7 @@ function PracticesTab({ data, setDetailModal }: { data: ApiResponse; setDetailMo
 function CrossModuleTab({ data }: { data: ApiResponse }) {
   return (
     <div className="ci-tab-pane">
-      <Card className="ci-info-card">
+      <Card className="hover-lift-sm ci-info-card">
         <div className="ci-chart-header"><Network size={16} /><h3>Cross-Module Improvement Linkage</h3></div>
         <p className="ci-info-text">
           This view shows how improvement actions originating from other modules (Audit, CAPA, Document Control, etc.)
@@ -1087,7 +1087,7 @@ function CrossModuleTab({ data }: { data: ApiResponse }) {
 
       <div className="ci-cross-module-grid">
         {data.crossModule.map((cm, idx) => (
-          <Card key={idx} className="ci-cross-module-card" style={{ borderTopColor: cm.color }}>
+          <Card key={idx} className="hover-lift-sm ci-cross-module-card" style={{ borderTopColor: cm.color }}>
             <div className="ci-cross-module-header">
               <div className="ci-cross-module-icon" style={{ background: cm.color + '20', color: cm.color }}>
                 <Network size={20} />
@@ -1126,7 +1126,7 @@ function CrossModuleTab({ data }: { data: ApiResponse }) {
         ))}
       </div>
 
-      <Card className="ci-chart-card">
+      <Card className="hover-lift-sm ci-chart-card">
         <div className="ci-chart-header"><BarChart3 size={16} /><h3>Closed-Loop Rate by Source Module</h3></div>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data.crossModule} margin={{ top: 10, right: 30, bottom: 30, left: 0 }}>
@@ -1177,7 +1177,7 @@ function InsightsTab({ data }: { data: ApiResponse }) {
       </div>
 
       {/* ISO 10.3 Health Scorecard */}
-      <Card className="ci-health-card">
+      <Card className="hover-lift-sm ci-health-card">
         <div className="ci-chart-header"><Gauge size={16} /><h3>ISO 9001:2015 §10.3 Health Scorecard</h3></div>
         <div className="ci-health-grid">
           <div className="ci-health-tile">
@@ -1220,7 +1220,7 @@ function InsightsTab({ data }: { data: ApiResponse }) {
       </Card>
 
       {/* Cross-module integration summary */}
-      <Card className="ci-integration-card">
+      <Card className="hover-lift-sm ci-integration-card">
         <div className="ci-chart-header"><Network size={16} /><h3>Cross-Module Integration Summary</h3></div>
         <div className="ci-integration-grid">
           {data.crossModule.map((cm, idx) => (

@@ -441,7 +441,7 @@ export function CargoDamageClaimsView() {
 
             {/* Charts Row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="cdc-card">
+              <Card className="hover-lift-sm cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <PieChartIcon className="h-4 w-4 text-rose-500" /> By Damage Type
@@ -459,7 +459,7 @@ export function CargoDamageClaimsView() {
                 </CardContent>
               </Card>
 
-              <Card className="col-span-2 cdc-card">
+              <Card className="hover-lift-sm col-span-2 cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <IndianRupee className="h-4 w-4 text-purple-500" /> Monthly Claims Trend
@@ -483,7 +483,7 @@ export function CargoDamageClaimsView() {
 
             {/* Charts Row 2 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="cdc-card">
+              <Card className="hover-lift-sm cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Package className="h-4 w-4 text-blue-500" /> Claims by Category
@@ -503,7 +503,7 @@ export function CargoDamageClaimsView() {
                 </CardContent>
               </Card>
 
-              <Card className="cdc-card">
+              <Card className="hover-lift-sm cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Gavel className="h-4 w-4 text-amber-500" /> Top Liable Parties
@@ -524,7 +524,7 @@ export function CargoDamageClaimsView() {
             </div>
 
             {/* Claim Status Pipeline */}
-            <Card className="cdc-card">
+            <Card className="hover-lift-sm cdc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <ClipboardCheck className="h-4 w-4 text-indigo-500" /> Claims Status Pipeline
@@ -663,13 +663,13 @@ export function CargoDamageClaimsView() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   {/* Investigation */}
-                  <Card className="cdc-card">
+                  <Card className="hover-lift-sm cdc-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm font-semibold flex items-center gap-2">
                         <ClipboardCheck className="h-4 w-4 text-blue-500" /> Investigation
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="glass-subtle space-y-3">
+                    <CardContent className="inner-glow glass-subtle space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-muted-foreground">Status</span>
                         <Badge variant={selectedClaim.investigation.status === "report_filed" ? "success" : selectedClaim.investigation.status === "not_started" ? "destructive" : "warning"} className="badge-interactive text-[10px]">
@@ -706,13 +706,13 @@ export function CargoDamageClaimsView() {
                   </Card>
 
                   {/* Insurance Response */}
-                  <Card className="cdc-card">
+                  <Card className="hover-lift-sm cdc-card">
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm font-semibold flex items-center gap-2">
                         <ShieldAlert className="h-4 w-4 text-purple-500" /> Insurance & Recovery
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="glass-subtle space-y-3">
+                    <CardContent className="inner-glow glass-subtle space-y-3">
                       {selectedClaim.insurerResponse ? (
                         <>
                           <div className="grid grid-cols-2 gap-2">
@@ -773,7 +773,7 @@ export function CargoDamageClaimsView() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="cdc-card">
+              <Card className="hover-lift-sm cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <IndianRupee className="h-4 w-4 text-green-500" /> Monthly Recovery Trend
@@ -794,7 +794,7 @@ export function CargoDamageClaimsView() {
                 </CardContent>
               </Card>
 
-              <Card className="cdc-card">
+              <Card className="hover-lift-sm cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Scale className="h-4 w-4 text-indigo-500" /> Claims by Severity vs Status
@@ -830,7 +830,7 @@ export function CargoDamageClaimsView() {
         {activeTab === 4 && (
           <div className="space-y-4">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <Card className="cdc-card">
+              <Card className="hover-lift-sm cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <Gavel className="h-4 w-4 text-amber-500" /> Liability by Party (Claim Count + Amount)
@@ -853,7 +853,7 @@ export function CargoDamageClaimsView() {
                 </CardContent>
               </Card>
 
-              <Card className="cdc-card">
+              <Card className="hover-lift-sm cdc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm font-semibold flex items-center gap-2">
                     <BarChart3 className="h-4 w-4 text-blue-500" /> Damage Type — Claimed Amount
@@ -877,7 +877,7 @@ export function CargoDamageClaimsView() {
             </div>
 
             {/* Warehouse Damage Comparison */}
-            <Card className="cdc-card">
+            <Card className="hover-lift-sm cdc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold flex items-center gap-2">
                   <Building2 className="h-4 w-4 text-cyan-500" /> Claims & Cost by Warehouse

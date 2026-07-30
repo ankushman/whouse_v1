@@ -332,8 +332,8 @@ export default function DedicatedFreightCorridorView() {
     <div className="space-y-4">
       <div className="dfc-kpi-grid grid gap-3" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
         {kpis.map((kpi, i) => (
-          <Card key={i} className="dfc-kpi-card dfc-stat-card">
-            <CardContent className="glass-subtle p-3.5">
+          <Card key={i} className="hover-lift-sm dfc-kpi-card dfc-stat-card">
+            <CardContent className="inner-glow glass-subtle p-3.5">
               <div className="flex items-center justify-between">
                 <div className="p-2 rounded-lg" style={{ background: `${kpi.color}15` }}>
                   <kpi.icon className="h-4 w-4" style={{ color: kpi.color }} />
@@ -353,9 +353,9 @@ export default function DedicatedFreightCorridorView() {
       </div>
 
       <div className="grid grid-cols-3 gap-3">
-        <Card className="col-span-2">
+        <Card className="hover-lift-sm col-span-2">
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Monthly Freight Volume (Trains)</CardTitle></CardHeader>
-          <CardContent className="glass-subtle px-4 pb-3">
+          <CardContent className="inner-glow glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={230}>
               <AreaChart data={DATA.monthlyVolume}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -371,7 +371,7 @@ export default function DedicatedFreightCorridorView() {
         </Card>
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Commodity Breakdown</CardTitle></CardHeader>
-          <CardContent className="glass-subtle px-4 pb-3 flex items-center justify-center">
+          <CardContent className="inner-glow glass-subtle px-4 pb-3 flex items-center justify-center">
             <ResponsiveContainer width="100%" height={230}>
               <PieChart>
                 <Pie data={DATA.commodityBreakdown} dataKey="volume" nameKey="commodity" cx="50%" cy="50%" outerRadius={72} innerRadius={38} paddingAngle={2} label={({ commodity, percent }) => `${commodity.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
@@ -387,7 +387,7 @@ export default function DedicatedFreightCorridorView() {
       <div className="grid grid-cols-2 gap-3">
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Punctuality Trend (%)</CardTitle></CardHeader>
-          <CardContent className="glass-subtle px-4 pb-3">
+          <CardContent className="inner-glow glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={DATA.punctualityTrend}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -404,7 +404,7 @@ export default function DedicatedFreightCorridorView() {
         </Card>
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Revenue by Corridor (₹ Cr)</CardTitle></CardHeader>
-          <CardContent className="glass-subtle px-4 pb-3">
+          <CardContent className="inner-glow glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={DATA.revenueByCorridor}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -495,8 +495,8 @@ export default function DedicatedFreightCorridorView() {
       {/* Corridor Cards */}
       <div className="grid grid-cols-2 gap-3">
         {filteredCorridors.map(c => (
-          <Card key={c.id} className="dfc-stat-card">
-            <CardContent className="glass-subtle p-4">
+          <Card key={c.id} className="hover-lift-sm dfc-stat-card">
+            <CardContent className="inner-glow glass-subtle p-4">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="text-sm font-bold">{c.name}</div>
@@ -538,7 +538,7 @@ export default function DedicatedFreightCorridorView() {
 
       <Card>
         <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Route Utilization</CardTitle></CardHeader>
-        <CardContent className="glass-subtle px-4 pb-3">
+        <CardContent className="inner-glow glass-subtle px-4 pb-3">
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={DATA.routeUtilization} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -671,16 +671,16 @@ export default function DedicatedFreightCorridorView() {
   const perfTab = (
     <div className="space-y-4">
       <div className="grid grid-cols-4 gap-3">
-        <Card className="glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Avg Punctuality</div><div className="text-lg font-bold" style={{ color: CC.violet }}>{Math.round(DATA.performanceMetrics.reduce((a, p) => a + p.punctuality, 0) / DATA.performanceMetrics.length)}%</div></CardContent></Card>
-        <Card className="glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Avg Speed</div><div className="text-lg font-bold" style={{ color: CC.sky }}>{Math.round(DATA.performanceMetrics.reduce((a, p) => a + p.avgSpeed, 0) / DATA.performanceMetrics.length)} km/h</div></CardContent></Card>
-        <Card className="glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Total Revenue</div><div className="text-lg font-bold" style={{ color: CC.emerald }}>{fmtINR(DATA.performanceMetrics.reduce((a, p) => a + p.revenue, 0))}</div></CardContent></Card>
-        <Card className="glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Total Incidents</div><div className="text-lg font-bold" style={{ color: CC.rose }}>{DATA.performanceMetrics.reduce((a, p) => a + p.incidents, 0)}</div></CardContent></Card>
+        <Card className="inner-glow hover-lift-sm glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Avg Punctuality</div><div className="text-lg font-bold" style={{ color: CC.violet }}>{Math.round(DATA.performanceMetrics.reduce((a, p) => a + p.punctuality, 0) / DATA.performanceMetrics.length)}%</div></CardContent></Card>
+        <Card className="inner-glow hover-lift-sm glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Avg Speed</div><div className="text-lg font-bold" style={{ color: CC.sky }}>{Math.round(DATA.performanceMetrics.reduce((a, p) => a + p.avgSpeed, 0) / DATA.performanceMetrics.length)} km/h</div></CardContent></Card>
+        <Card className="inner-glow hover-lift-sm glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Total Revenue</div><div className="text-lg font-bold" style={{ color: CC.emerald }}>{fmtINR(DATA.performanceMetrics.reduce((a, p) => a + p.revenue, 0))}</div></CardContent></Card>
+        <Card className="inner-glow hover-lift-sm glass-subtle dfc-stat-card"><CardContent className="p-3"><div className="text-[10px] text-gray-500">Total Incidents</div><div className="text-lg font-bold" style={{ color: CC.rose }}>{DATA.performanceMetrics.reduce((a, p) => a + p.incidents, 0)}</div></CardContent></Card>
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Speed Analysis: DFC vs Conventional</CardTitle></CardHeader>
-          <CardContent className="glass-subtle px-4 pb-3">
+          <CardContent className="inner-glow glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={DATA.speedAnalysis}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -697,7 +697,7 @@ export default function DedicatedFreightCorridorView() {
         </Card>
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Monthly Throughput (Tons)</CardTitle></CardHeader>
-          <CardContent className="glass-subtle px-4 pb-3">
+          <CardContent className="inner-glow glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={DATA.monthlyVolume}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -826,9 +826,9 @@ export default function DedicatedFreightCorridorView() {
                   <div className="flex justify-between"><span className="text-gray-500">Fuel</span><span className="font-medium">{drawerData.fuelConsumption} l/km</span></div>
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
-                  <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Live tracking activated") }}>Live Track</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule adjusted") }}>Reschedule</Button>
-                  <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Notified control room") }}><Radio className="h-3.5 w-3.5" /></Button>
+                  <Button size="sm" className="press-scale flex-1 h-8 text-xs" onClick={() => { toast.success("Live tracking activated") }}>Live Track</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule adjusted") }}>Reschedule</Button>
+                  <Button size="sm" variant="ghost" className="press-scale h-8 text-xs" onClick={() => { toast.success("Notified control room") }}><Radio className="h-3.5 w-3.5" /></Button>
                 </div>
               </>
             )}
@@ -874,8 +874,8 @@ export default function DedicatedFreightCorridorView() {
                   <div className="flex justify-between"><span className="text-gray-500">Avg Transit</span><span className="font-medium">{drawerData.avgTransitTime} hrs</span></div>
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
-                  <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Corridor report generated") }}>Report</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Capacity plan opened") }}>Capacity Plan</Button>
+                  <Button size="sm" className="press-scale flex-1 h-8 text-xs" onClick={() => { toast.success("Corridor report generated") }}>Report</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Capacity plan opened") }}>Capacity Plan</Button>
                 </div>
               </>
             )}
@@ -916,9 +916,9 @@ export default function DedicatedFreightCorridorView() {
                   <div className="flex justify-between"><span className="text-gray-500">Rail Lines</span><span className="font-medium">{drawerData.railLines}</span></div>
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
-                  <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Terminal report generated") }}>Report</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Capacity expanded") }}>Expand</Button>
-                  <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Diagram downloaded") }}><Download className="h-3.5 w-3.5" /></Button>
+                  <Button size="sm" className="press-scale flex-1 h-8 text-xs" onClick={() => { toast.success("Terminal report generated") }}>Report</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Capacity expanded") }}>Expand</Button>
+                  <Button size="sm" variant="ghost" className="press-scale h-8 text-xs" onClick={() => { toast.success("Diagram downloaded") }}><Download className="h-3.5 w-3.5" /></Button>
                 </div>
               </>
             )}
@@ -955,9 +955,9 @@ export default function DedicatedFreightCorridorView() {
                   <div className="flex justify-between col-span-2"><span className="text-gray-500">Frequency</span><span className="font-medium">{drawerData.frequency}</span></div>
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
-                  <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule confirmed") }}>Confirm</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule modified") }}>Modify</Button>
-                  <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Cancelled") }}><AlertTriangle className="h-3.5 w-3.5" /></Button>
+                  <Button size="sm" className="press-scale flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule confirmed") }}>Confirm</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule modified") }}>Modify</Button>
+                  <Button size="sm" variant="ghost" className="press-scale h-8 text-xs" onClick={() => { toast.success("Cancelled") }}><AlertTriangle className="h-3.5 w-3.5" /></Button>
                 </div>
               </>
             )}
@@ -995,8 +995,8 @@ export default function DedicatedFreightCorridorView() {
                   <div className="flex justify-between"><span className="text-gray-500">Coal Vol.</span><span className="font-medium">{(drawerData.coalVolume / 1000).toFixed(0)}K MT</span></div>
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
-                  <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Report downloaded") }}>Download</Button>
-                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Drill-down opened") }}>Drill Down</Button>
+                  <Button size="sm" className="press-scale flex-1 h-8 text-xs" onClick={() => { toast.success("Report downloaded") }}>Download</Button>
+                  <Button size="sm" variant="outline" className="press-scale btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Drill-down opened") }}>Drill Down</Button>
                 </div>
               </>
             )}

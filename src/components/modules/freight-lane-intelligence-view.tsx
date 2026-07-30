@@ -170,7 +170,7 @@ export default function FreightLaneIntelligenceView() {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={cn("hover:shadow-md transition-shadow", k.bg)}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-3">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-3">
                   <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm", k.color)}><KpiIcon name={k.icon} className={k.color} /></div>
                   <div><p className="text-[10px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
                 </CardContent>
@@ -178,9 +178,9 @@ export default function FreightLaneIntelligenceView() {
             ))}
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Volume (tons)</CardTitle></CardHeader><CardContent><AreaChart data={data.monthlyVolume}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="FTL" stackId="1" stroke="#3b82f6" fill="#bfdbfe" /><Area type="monotone" dataKey="LTL" stackId="1" stroke="#0891b2" fill="#a5f3fc" /><Area type="monotone" dataKey="Parcel" stackId="1" stroke="#d97706" fill="#fde68a" /></AreaChart></CardContent></Card>
-            <Card className="hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.modeDist} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.modeDist.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-            <Card className="hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Top 10 Corridors</CardTitle></CardHeader><CardContent><BarChart data={data.corridorPerf}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 8 }} angle={-25} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="throughput" fill="#3b82f6" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Volume (tons)</CardTitle></CardHeader><CardContent><AreaChart data={data.monthlyVolume}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Area type="monotone" dataKey="FTL" stackId="1" stroke="#3b82f6" fill="#bfdbfe" /><Area type="monotone" dataKey="LTL" stackId="1" stroke="#0891b2" fill="#a5f3fc" /><Area type="monotone" dataKey="Parcel" stackId="1" stroke="#d97706" fill="#fde68a" /></AreaChart></CardContent></Card>
+            <Card className="hover-lift-sm hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.modeDist} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.modeDist.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Top 10 Corridors</CardTitle></CardHeader><CardContent><BarChart data={data.corridorPerf}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 8 }} angle={-25} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 10 }} /><Tooltip /><Bar dataKey="throughput" fill="#3b82f6" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
           </div>
         </TabsContent>
 
@@ -216,7 +216,7 @@ export default function FreightLaneIntelligenceView() {
                   <td className="px-2 py-1.5 tabular-nums font-medium">{r.tonnage.toLocaleString()}</td>
                   <td className="px-2 py-1.5"><CorridorStatusBadge status={r.status} /></td>
                   <td className="px-2 py-1.5 min-w-[50px]"><UtilizationBar pct={r.utilization} /><span className="text-[9px] ml-1 text-muted-foreground">{r.utilization}%</span></td>
-                  <td className="px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("corridor"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
+                  <td className="press-scale px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("corridor"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
                 </tr>
               ))}
             </tbody></table>
@@ -249,7 +249,7 @@ export default function FreightLaneIntelligenceView() {
                   <td className="px-2 py-1.5 tabular-nums">{fmtINR(r.insurance)}</td>
                   <td className="px-2 py-1.5"><RateStatusBadge status={r.status} /></td>
                   <td className="px-2 py-1.5"><TrendIndicator dir={r.trend} /></td>
-                  <td className="px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("rate"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
+                  <td className="press-scale px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("rate"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
                 </tr>
               ))}
             </tbody></table>
@@ -282,7 +282,7 @@ export default function FreightLaneIntelligenceView() {
                   <td className="px-2 py-1.5"><TransitTile hrs={r.avgTransit} /></td>
                   <td className="px-2 py-1.5 tabular-nums">{r.fleetSize}</td>
                   <td className="px-2 py-1.5 tabular-nums">{r.routes}</td>
-                  <td className="px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("carrier"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
+                  <td className="press-scale px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("carrier"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
                 </tr>
               ))}
             </tbody></table>
@@ -317,7 +317,7 @@ export default function FreightLaneIntelligenceView() {
                   <td className="px-2 py-1.5 tabular-nums font-medium flex items-center gap-0.5"><Timer className="w-3 h-3 text-slate-400" />{r.eta}h</td>
                   <td className={cn("px-2 py-1.5 tabular-nums font-bold", r.delay > 12 ? "text-red-600" : r.delay > 4 ? "text-amber-600" : "text-emerald-600")}>{r.delay}h</td>
                   <td className="px-2 py-1.5"><ShipmentValueTile value={r.value} /></td>
-                  <td className="px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("transit"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
+                  <td className="press-scale px-2 py-1.5"><Button size="sm" variant="ghost" onClick={e => { e.stopPropagation(); setSelectedRow(r as unknown as Record<string, unknown>); setSheetType("transit"); setSheetOpen(true) }}><Eye className="w-3 h-3" /></Button></td>
                 </tr>
               ))}
             </tbody></table>
@@ -334,7 +334,7 @@ export default function FreightLaneIntelligenceView() {
               { label: "Savings Potential", value: fmtINR(ri(5000000, 25000000, 777)), icon: "BarChart3", color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-900/20" },
             ].map((k, i) => (
               <Card key={i} className={cn("hover:shadow-md transition-shadow", k.bg)}>
-                <CardContent className="glass-subtle flex items-center gap-3 p-3">
+                <CardContent className="inner-glow glass-subtle flex items-center gap-3 p-3">
                   <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm", k.color)}><KpiIcon name={k.icon} className={k.color} /></div>
                   <div><p className="text-[10px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
                 </CardContent>
@@ -342,10 +342,10 @@ export default function FreightLaneIntelligenceView() {
             ))}
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <Card className="hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Trend (₹/ton)</CardTitle></CardHeader><CardContent><LineChart data={data.costTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={v => fmtINR(v as number)} /><Tooltip formatter={v => fmtINR(v as number)} /><Line type="monotone" dataKey="cost" stroke="#3b82f6" strokeWidth={2} /><Line type="monotone" dataKey="target" stroke="#e11d48" strokeDasharray="5 5" /></LineChart></CardContent></Card>
-            <Card className="hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Carrier Grade Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.gradeDist} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.gradeDist.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-            <Card className="hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Efficiency</CardTitle></CardHeader><CardContent><BarChart data={data.modeEff}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 8 }} angle={-20} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 10 }} unit="%" /><Tooltip /><Bar dataKey="costEff" fill="#3b82f6" radius={[4, 4, 0, 0]} /><Bar dataKey="speed" fill="#0891b2" radius={[4, 4, 0, 0]} /><Bar dataKey="reliability" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
-            <Card className="hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Corridor Revenue</CardTitle></CardHeader><CardContent><BarChart data={data.corridorRev} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 9 }} tickFormatter={v => fmtINR(v as number)} /><YAxis dataKey="name" type="category" tick={{ fontSize: 9 }} width={90} /><Tooltip formatter={v => fmtINR(v as number)} /><Bar dataKey="revenue" fill="#7c3aed" radius={[0, 4, 4, 0]} /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Cost Trend (₹/ton)</CardTitle></CardHeader><CardContent><LineChart data={data.costTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={v => fmtINR(v as number)} /><Tooltip formatter={v => fmtINR(v as number)} /><Line type="monotone" dataKey="cost" stroke="#3b82f6" strokeWidth={2} /><Line type="monotone" dataKey="target" stroke="#e11d48" strokeDasharray="5 5" /></LineChart></CardContent></Card>
+            <Card className="hover-lift-sm hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Carrier Grade Distribution</CardTitle></CardHeader><CardContent><PieChart><Pie data={data.gradeDist} cx="50%" cy="50%" outerRadius={80} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>{data.gradeDist.map((_, i) => <Cell key={i} fill={COLORS[i % 8]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+            <Card className="hover-lift-sm hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Efficiency</CardTitle></CardHeader><CardContent><BarChart data={data.modeEff}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="mode" tick={{ fontSize: 8 }} angle={-20} textAnchor="end" height={50} /><YAxis tick={{ fontSize: 10 }} unit="%" /><Tooltip /><Bar dataKey="costEff" fill="#3b82f6" radius={[4, 4, 0, 0]} /><Bar dataKey="speed" fill="#0891b2" radius={[4, 4, 0, 0]} /><Bar dataKey="reliability" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
+            <Card className="hover-lift-sm hover:shadow-lg transition-shadow"><CardHeader className="pb-2"><CardTitle className="text-sm">Corridor Revenue</CardTitle></CardHeader><CardContent><BarChart data={data.corridorRev} layout="vertical"><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" tick={{ fontSize: 9 }} tickFormatter={v => fmtINR(v as number)} /><YAxis dataKey="name" type="category" tick={{ fontSize: 9 }} width={90} /><Tooltip formatter={v => fmtINR(v as number)} /><Bar dataKey="revenue" fill="#7c3aed" radius={[0, 4, 4, 0]} /></BarChart></CardContent></Card>
           </div>
         </TabsContent>
       </Tabs>
@@ -402,8 +402,8 @@ export default function FreightLaneIntelligenceView() {
                 </>}
               </div>
               <div className="flex gap-2 pt-3 border-t">
-                <Button size="sm" className="flex-1" onClick={() => { toast.success("Updated", "Record updated successfully"); setSheetOpen(false) }}><Zap className="w-3 h-3 mr-1" />Action</Button>
-                <Button size="sm" variant="outline" onClick={() => { toast.info("Exported", "Record exported to dashboard"); setSheetOpen(false) }}><Eye className="btn-outline-animate w-3 h-3" /></Button>
+                <Button size="sm" className="press-scale flex-1" onClick={() => { toast.success("Updated", "Record updated successfully"); setSheetOpen(false) }}><Zap className="w-3 h-3 mr-1" />Action</Button>
+                <Button size="sm" variant="outline" onClick={() => { toast.info("Exported", "Record exported to dashboard"); setSheetOpen(false) }}><Eye className="press-scale btn-outline-animate w-3 h-3" /></Button>
               </div>
             </div>
           )}

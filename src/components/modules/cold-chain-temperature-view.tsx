@@ -598,7 +598,7 @@ export default function ColdChainTemperatureView() {
               { label: "Zones Active", value: activeZones, total: data.zones.length, icon: Snowflake, color: "cc-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`cc-kpi-card ${kpi.color} cc-stagger-${Math.min(i, 5)}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between mb-2">
                     <kpi.icon className="h-4 w-4 cc-kpi-icon" />
                     {kpi.total && <span className="cc-kpi-total">/ {kpi.total}</span>}
@@ -616,7 +616,7 @@ export default function ColdChainTemperatureView() {
           {/* Zone Temperature Map + Compliance by Warehouse */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Zone Temp Map */}
-            <Card className="cc-card cc-stagger-6">
+            <Card className="hover-lift-sm cc-card cc-stagger-6">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <Thermometer className="h-4 w-4" /> Zone Temperature Map
@@ -656,7 +656,7 @@ export default function ColdChainTemperatureView() {
             </Card>
 
             {/* Compliance by Warehouse */}
-            <Card className="cc-card cc-stagger-7">
+            <Card className="hover-lift-sm cc-card cc-stagger-7">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <ShieldCheck className="h-4 w-4" /> Compliance by Warehouse
@@ -685,7 +685,7 @@ export default function ColdChainTemperatureView() {
 
           {/* 24h Temperature Trend + Zone Distribution + Energy */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="cc-card lg:col-span-2 cc-stagger-8">
+            <Card className="hover-lift-sm cc-card lg:col-span-2 cc-stagger-8">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <Activity className="h-4 w-4" /> 24h Temperature Trend (All Zones)
@@ -709,7 +709,7 @@ export default function ColdChainTemperatureView() {
               </CardContent>
             </Card>
 
-            <Card className="cc-card cc-stagger-9">
+            <Card className="hover-lift-sm cc-card cc-stagger-9">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <Layers className="h-4 w-4" /> Zone Type Distribution
@@ -737,8 +737,8 @@ export default function ColdChainTemperatureView() {
       {activeTab === 1 && (
         <div className="cc-tab-content space-y-4">
           {/* Filter Bar */}
-          <Card className="cc-filter-card">
-            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
+          <Card className="hover-lift-sm cc-filter-card">
+            <CardContent className="inner-glow glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cc-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search sensor ID or location..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cc-filter-input" />
@@ -775,7 +775,7 @@ export default function ColdChainTemperatureView() {
               { label: "Critical", value: criticalSensors, color: "cc-kpi-red" },
             ].map((kpi, i) => (
               <Card key={i} className={`cc-kpi-card ${kpi.color}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="cc-kpi-value">{kpi.value}</div>
                   <div className="cc-kpi-label">{kpi.label}</div>
                 </CardContent>
@@ -792,7 +792,7 @@ export default function ColdChainTemperatureView() {
               const battClass = sensor.batteryLevel > 80 ? "cc-batt-ok" : sensor.batteryLevel > 50 ? "cc-batt-mid" : "cc-batt-low";
               return (
                 <Card key={sensor.id} className={`cc-sensor-card ${tempClass} cc-stagger-${Math.min(i % 20, 11)}`}>
-                  <CardContent className="glass-subtle p-3">
+                  <CardContent className="inner-glow glass-subtle p-3">
                     <div className="flex items-center justify-between mb-2">
                       <span className="cc-sensor-id">{sensor.id}</span>
                       <Badge className={`cc-sensor-status ${statusClass} text-[10px] px-1.5 py-0`}>
@@ -833,7 +833,7 @@ export default function ColdChainTemperatureView() {
           </div>
 
           {/* Protocol Distribution */}
-          <Card className="cc-card">
+          <Card className="hover-lift-sm cc-card">
             <CardHeader className="pb-2">
               <CardTitle className="cc-card-title">
                 <Wifi className="h-4 w-4" /> Protocol Distribution
@@ -860,8 +860,8 @@ export default function ColdChainTemperatureView() {
       {activeTab === 2 && (
         <div className="cc-tab-content space-y-4">
           {/* Filter Bar */}
-          <Card className="cc-filter-card">
-            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
+          <Card className="hover-lift-sm cc-filter-card">
+            <CardContent className="inner-glow glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cc-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search excursion ID..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cc-filter-input" />
@@ -886,7 +886,7 @@ export default function ColdChainTemperatureView() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {/* Excursion Table */}
-            <Card className="cc-card lg:col-span-2">
+            <Card className="hover-lift-sm cc-card lg:col-span-2">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <AlertOctagon className="h-4 w-4" /> Excursion Register
@@ -928,7 +928,7 @@ export default function ColdChainTemperatureView() {
                           </td>
                           <td className="text-xs">₹{fmt(exc.estimatedLoss)}</td>
                           <td>
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setSelectedExcursion(exc)}>
+                            <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => setSelectedExcursion(exc)}>
                               <Eye className="h-3.5 w-3.5" />
                             </Button>
                           </td>
@@ -942,7 +942,7 @@ export default function ColdChainTemperatureView() {
 
             {/* Charts Column */}
             <div className="space-y-4">
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="cc-card-title text-sm">
                     <AlertTriangle className="h-4 w-4" /> Severity Distribution
@@ -969,7 +969,7 @@ export default function ColdChainTemperatureView() {
                 </CardContent>
               </Card>
 
-              <Card className="cc-card">
+              <Card className="hover-lift-sm cc-card">
                 <CardHeader className="pb-2">
                   <CardTitle className="cc-card-title text-sm">
                     <FileText className="h-4 w-4" /> Top Root Causes
@@ -993,7 +993,7 @@ export default function ColdChainTemperatureView() {
           </div>
 
           {/* Monthly Excursion Trend */}
-          <Card className="cc-card">
+          <Card className="hover-lift-sm cc-card">
             <CardHeader className="pb-2">
               <CardTitle className="cc-card-title">
                 <BarChart3 className="h-4 w-4" /> Monthly Excursion Trend
@@ -1023,7 +1023,7 @@ export default function ColdChainTemperatureView() {
               <div className="cc-drawer" onClick={(e) => e.stopPropagation()}>
                 <div className="cc-drawer-header">
                   <h3 className="cc-drawer-title">Excursion Detail: {selectedExcursion.id}</h3>
-                  <Button variant="ghost" size="sm" onClick={() => setSelectedExcursion(null)} className="h-8 w-8 p-0">
+                  <Button variant="ghost" size="sm" onClick={() => setSelectedExcursion(null)} className="press-scale h-8 w-8 p-0">
                     <XCircle className="h-4 w-4" />
                   </Button>
                 </div>
@@ -1088,8 +1088,8 @@ export default function ColdChainTemperatureView() {
       {activeTab === 3 && (
         <div className="cc-tab-content space-y-4">
           {/* Filter Bar */}
-          <Card className="cc-filter-card">
-            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
+          <Card className="hover-lift-sm cc-filter-card">
+            <CardContent className="inner-glow glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cc-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search product or SKU..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cc-filter-input" />
@@ -1117,7 +1117,7 @@ export default function ColdChainTemperatureView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {data.zones.slice(0, 8).map((zone, i) => (
               <Card key={zone.id} className={`cc-zone-detail-card cc-stagger-${Math.min(i, 7)}`}>
-                <CardContent className="glass-subtle p-3">
+                <CardContent className="inner-glow glass-subtle p-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="cc-zone-detail-name">{zone.id}</span>
                     <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="badge-interactive text-[10px] px-1.5 py-0">
@@ -1154,7 +1154,7 @@ export default function ColdChainTemperatureView() {
           </div>
 
           {/* Batch Table */}
-          <Card className="cc-card">
+          <Card className="hover-lift-sm cc-card">
             <CardHeader className="pb-2">
               <CardTitle className="cc-card-title">
                 <Package className="h-4 w-4" /> Product Batch Register
@@ -1205,7 +1205,7 @@ export default function ColdChainTemperatureView() {
                             </Badge>
                           </td>
                           <td>
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setSelectedBatch(batch)}>
+                            <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => setSelectedBatch(batch)}>
                               <Eye className="h-3.5 w-3.5" />
                             </Button>
                           </td>
@@ -1220,7 +1220,7 @@ export default function ColdChainTemperatureView() {
 
           {/* Zone Capacity + Category Distribution */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <Layers className="h-4 w-4" /> Zone Capacity Overview
@@ -1243,7 +1243,7 @@ export default function ColdChainTemperatureView() {
               </CardContent>
             </Card>
 
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <Beaker className="h-4 w-4" /> Product Category Distribution
@@ -1271,7 +1271,7 @@ export default function ColdChainTemperatureView() {
               <div className="cc-drawer" onClick={(e) => e.stopPropagation()}>
                 <div className="cc-drawer-header">
                   <h3 className="cc-drawer-title">Batch Detail: {selectedBatch.id}</h3>
-                  <Button variant="ghost" size="sm" onClick={() => setSelectedBatch(null)} className="h-8 w-8 p-0">
+                  <Button variant="ghost" size="sm" onClick={() => setSelectedBatch(null)} className="press-scale h-8 w-8 p-0">
                     <XCircle className="h-4 w-4" />
                   </Button>
                 </div>
@@ -1352,7 +1352,7 @@ export default function ColdChainTemperatureView() {
               { label: "Carbon Footprint", value: `${totalCarbon} kg`, sub: "CO₂/day", icon: Leaf, color: "cc-kpi-purple" },
             ].map((kpi, i) => (
               <Card key={i} className={`cc-kpi-card ${kpi.color}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <kpi.icon className="h-4 w-4 cc-kpi-icon mb-2" />
                   <div className="cc-kpi-value">{kpi.value}</div>
                   <div className="cc-kpi-label">{kpi.label} <span className="cc-kpi-sub">{kpi.sub}</span></div>
@@ -1363,7 +1363,7 @@ export default function ColdChainTemperatureView() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Energy by Zone */}
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <Zap className="h-4 w-4" /> Energy by Zone Type
@@ -1385,7 +1385,7 @@ export default function ColdChainTemperatureView() {
             </Card>
 
             {/* Defrost Cycles */}
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title">
                   <Snowflake className="h-4 w-4" /> Defrost Cycle Analysis
@@ -1412,7 +1412,7 @@ export default function ColdChainTemperatureView() {
           </div>
 
           {/* Energy Trend with cost */}
-          <Card className="cc-card">
+          <Card className="hover-lift-sm cc-card">
             <CardHeader className="pb-2">
               <CardTitle className="cc-card-title">
                 <TrendingUp className="h-4 w-4" /> Energy & Cost Trend (12 Months)
@@ -1438,7 +1438,7 @@ export default function ColdChainTemperatureView() {
 
           {/* PUE Trend + Carbon + Sustainability Scorecard */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title text-sm">
                   <Gauge className="h-4 w-4" /> PUE Trend
@@ -1460,7 +1460,7 @@ export default function ColdChainTemperatureView() {
               </CardContent>
             </Card>
 
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title text-sm">
                   <Leaf className="h-4 w-4" /> Carbon Footprint (kg CO₂)
@@ -1482,13 +1482,13 @@ export default function ColdChainTemperatureView() {
               </CardContent>
             </Card>
 
-            <Card className="cc-card">
+            <Card className="hover-lift-sm cc-card">
               <CardHeader className="pb-2">
                 <CardTitle className="cc-card-title text-sm">
                   <Target className="h-4 w-4" /> Sustainability Scorecard
                 </CardTitle>
               </CardHeader>
-              <CardContent className="glass-subtle space-y-3">
+              <CardContent className="inner-glow glass-subtle space-y-3">
                 {[
                   { label: "Energy Efficiency", value: 78, color: "bg-emerald-500" },
                   { label: "Carbon Reduction", value: 62, color: "bg-cyan-500" },
@@ -1512,7 +1512,7 @@ export default function ColdChainTemperatureView() {
           </div>
 
           {/* Warehouse PUE Radar */}
-          <Card className="cc-card">
+          <Card className="hover-lift-sm cc-card">
             <CardHeader className="pb-2">
               <CardTitle className="cc-card-title">
                 <Warehouse className="h-4 w-4" /> Warehouse Energy Radar

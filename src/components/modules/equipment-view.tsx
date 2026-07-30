@@ -283,7 +283,7 @@ export function EquipmentView() {
             >
               <List className="h-3.5 w-3.5" />
             </Button>
-            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
+            <Button variant="outline" size="sm" className="press-scale btn-outline-animate gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
             <ExportButton onExportCSV={handleExportCSV} />
@@ -300,8 +300,8 @@ export function EquipmentView() {
           { label: "Charging", value: stats.charging, icon: Zap, color: "bg-blue-50 dark:bg-blue-950/60", textColor: "text-blue-600" },
           { label: "Avg Battery", value: `${stats.avgBattery}%`, icon: Battery, color: "bg-muted/80 text-muted-foreground", textColor: "" },
         ].map((item) => (
-          <Card key={item.label} className="card-depth py-0 gap-0 hover-scale-sm">
-            <CardContent className="glass-subtle flex items-center gap-4 py-4">
+          <Card key={item.label} className="hover-lift-sm card-depth py-0 gap-0 hover-scale-sm">
+            <CardContent className="inner-glow glass-subtle flex items-center gap-4 py-4">
               <div className={cn("flex size-10 shrink-0 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className={cn("size-5", item.textColor || "text-muted-foreground")} />
               </div>
@@ -420,7 +420,7 @@ export function EquipmentView() {
       )}
 
       {/* Utilization Chart */}
-      <Card className="rounded-xl card-shine">
+      <Card className="hover-lift-sm rounded-xl card-shine">
         <CardHeader className="pb-2">
           <CardTitle className="text-base font-semibold">
             Equipment Utilization

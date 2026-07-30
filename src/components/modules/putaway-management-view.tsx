@@ -459,7 +459,7 @@ export default function PutawayManagementView() {
 
               {/* Charts Row 1 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Monthly Putaway Volume & Accuracy</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={280}>
@@ -476,7 +476,7 @@ export default function PutawayManagementView() {
                     </ResponsiveContainer>
                   </CardContent>
                 </Card>
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Putaway Strategy Distribution</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={280}>
@@ -493,7 +493,7 @@ export default function PutawayManagementView() {
 
               {/* Charts Row 2 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Warehouse Putaway Performance</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={260}>
@@ -509,7 +509,7 @@ export default function PutawayManagementView() {
                     </ResponsiveContainer>
                   </CardContent>
                 </Card>
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Task Priority Distribution</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={260}>
@@ -525,7 +525,7 @@ export default function PutawayManagementView() {
               </div>
 
               {/* Zone Utilization */}
-              <Card className="shadow-sm">
+              <Card className="hover-lift-sm shadow-sm">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Zone Utilization</CardTitle></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={220}>
@@ -545,7 +545,7 @@ export default function PutawayManagementView() {
               </Card>
 
               {/* Team Performance Table */}
-              <Card className="shadow-sm">
+              <Card className="hover-lift-sm shadow-sm">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Putaway Team Performance</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">
@@ -610,8 +610,8 @@ export default function PutawayManagementView() {
               </div>
 
               {/* Table */}
-              <Card className="card-crud-lift shadow-sm">
-                <CardContent className="glass-subtle p-0">
+              <Card className="hover-lift-sm card-crud-lift shadow-sm">
+                <CardContent className="inner-glow glass-subtle p-0">
                   <div className="pa-table-wrap">
                     <Table className="table-hover-highlight">
                       <TableHeader>
@@ -693,7 +693,7 @@ export default function PutawayManagementView() {
 
               {/* Charts */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Zone Utilization Radar</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={280}>
@@ -710,7 +710,7 @@ export default function PutawayManagementView() {
                     </ResponsiveContainer>
                   </CardContent>
                 </Card>
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Zone Type Distribution</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={280}>
@@ -726,7 +726,7 @@ export default function PutawayManagementView() {
               </div>
 
               {/* Zone Detail Table */}
-              <Card className="shadow-sm">
+              <Card className="hover-lift-sm shadow-sm">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Zone Details</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">
@@ -792,7 +792,7 @@ export default function PutawayManagementView() {
 
               {/* Charts */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Bin Occupancy Distribution</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={280}>
@@ -810,7 +810,7 @@ export default function PutawayManagementView() {
                     </ResponsiveContainer>
                   </CardContent>
                 </Card>
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Velocity vs Occupancy</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={280}>
@@ -828,7 +828,7 @@ export default function PutawayManagementView() {
               </div>
 
               {/* Optimization Suggestions Table */}
-              <Card className="shadow-sm">
+              <Card className="hover-lift-sm shadow-sm">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Optimization Suggestions</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">
@@ -890,7 +890,7 @@ export default function PutawayManagementView() {
 
               {/* Charts */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Putaway Cost Trend</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
@@ -907,7 +907,7 @@ export default function PutawayManagementView() {
                     </ResponsiveContainer>
                   </CardContent>
                 </Card>
-                <Card className="shadow-sm">
+                <Card className="hover-lift-sm shadow-sm">
                   <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Strategy Effectiveness</CardTitle></CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
@@ -928,7 +928,7 @@ export default function PutawayManagementView() {
               </div>
 
               {/* Improvement Areas Table */}
-              <Card className="shadow-sm">
+              <Card className="hover-lift-sm shadow-sm">
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Top Improvement Areas</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">

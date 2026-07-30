@@ -445,7 +445,7 @@ export default function HazmatDangerousGoodsView() {
               { label: "MSDS Missing", value: msdsMissing, icon: FileText, color: "haz-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`haz-kpi-card ${kpi.color} haz-stagger-${Math.min(i, 5)}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <kpi.icon className="h-4 w-4 haz-kpi-icon mb-2" />
                   <div className="haz-kpi-value">{kpi.value}</div>
                   <div className="haz-kpi-label">{kpi.label}</div>
@@ -456,7 +456,7 @@ export default function HazmatDangerousGoodsView() {
 
           {/* Class Distribution + Compliance Trend */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="haz-card">
+            <Card className="hover-lift-sm haz-card">
               <CardHeader className="pb-2">
                 <CardTitle className="haz-card-title"><Layers className="h-4 w-4" /> UN Hazard Class Distribution</CardTitle>
               </CardHeader>
@@ -474,7 +474,7 @@ export default function HazmatDangerousGoodsView() {
               </CardContent>
             </Card>
 
-            <Card className="haz-card">
+            <Card className="hover-lift-sm haz-card">
               <CardHeader className="pb-2">
                 <CardTitle className="haz-card-title"><TrendingUp className="h-4 w-4" /> Compliance Trend (12 Months)</CardTitle>
               </CardHeader>
@@ -499,7 +499,7 @@ export default function HazmatDangerousGoodsView() {
 
           {/* Incident Trend + Danger Diamond Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="haz-card">
+            <Card className="hover-lift-sm haz-card">
               <CardHeader className="pb-2">
                 <CardTitle className="haz-card-title"><AlertTriangle className="h-4 w-4" /> Monthly Incident Trend</CardTitle>
               </CardHeader>
@@ -522,7 +522,7 @@ export default function HazmatDangerousGoodsView() {
               </CardContent>
             </Card>
 
-            <Card className="haz-card">
+            <Card className="hover-lift-sm haz-card">
               <CardHeader className="pb-2">
                 <CardTitle className="haz-card-title"><TriangleAlert className="h-4 w-4" /> PPE Compliance by Class</CardTitle>
               </CardHeader>
@@ -549,8 +549,8 @@ export default function HazmatDangerousGoodsView() {
       {/* Tab 1: Chemical Inventory */}
       {activeTab === 1 && (
         <div className="haz-tab-content space-y-4">
-          <Card className="haz-filter-card">
-            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
+          <Card className="hover-lift-sm haz-filter-card">
+            <CardContent className="inner-glow glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="haz-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search product or UN#..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="haz-filter-input" />
@@ -574,7 +574,7 @@ export default function HazmatDangerousGoodsView() {
             </CardContent>
           </Card>
 
-          <Card className="haz-card">
+          <Card className="hover-lift-sm haz-card">
             <CardHeader className="pb-2">
               <CardTitle className="haz-card-title"><Beaker className="h-4 w-4" /> Chemical Inventory Register</CardTitle>
             </CardHeader>
@@ -629,7 +629,7 @@ export default function HazmatDangerousGoodsView() {
                             </Badge>
                           </td>
                           <td>
-                            <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setSelectedItem(item)}>
+                            <Button variant="ghost" size="sm" className="press-scale h-7 w-7 p-0" onClick={() => setSelectedItem(item)}>
                               <Eye className="h-3.5 w-3.5" />
                             </Button>
                           </td>
@@ -648,7 +648,7 @@ export default function HazmatDangerousGoodsView() {
               <div className="haz-drawer" onClick={(e) => e.stopPropagation()}>
                 <div className="haz-drawer-header">
                   <h3 className="haz-drawer-title">{selectedItem.id} — {selectedItem.productName}</h3>
-                  <Button variant="ghost" size="sm" onClick={() => setSelectedItem(null)} className="h-8 w-8 p-0"><XCircle className="h-4 w-4" /></Button>
+                  <Button variant="ghost" size="sm" onClick={() => setSelectedItem(null)} className="press-scale h-8 w-8 p-0"><XCircle className="h-4 w-4" /></Button>
                 </div>
                 <div className="haz-drawer-body space-y-4">
                   <div className="haz-drawer-section">
@@ -699,8 +699,8 @@ export default function HazmatDangerousGoodsView() {
       {/* Tab 2: Incident Tracker */}
       {activeTab === 2 && (
         <div className="haz-tab-content space-y-4">
-          <Card className="haz-filter-card">
-            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
+          <Card className="hover-lift-sm haz-filter-card">
+            <CardContent className="inner-glow glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="haz-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search incident ID..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="haz-filter-input" />
@@ -720,7 +720,7 @@ export default function HazmatDangerousGoodsView() {
             </CardContent>
           </Card>
 
-          <Card className="haz-card">
+          <Card className="hover-lift-sm haz-card">
             <CardHeader className="pb-2">
               <CardTitle className="haz-card-title"><AlertOctagon className="h-4 w-4" /> Safety Incident Register</CardTitle>
             </CardHeader>
@@ -768,7 +768,7 @@ export default function HazmatDangerousGoodsView() {
 
           {/* Root cause & severity charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card className="haz-card">
+            <Card className="hover-lift-sm haz-card">
               <CardHeader className="pb-2">
                 <CardTitle className="haz-card-title"><FileText className="h-4 w-4" /> Root Cause Distribution</CardTitle>
               </CardHeader>
@@ -789,7 +789,7 @@ export default function HazmatDangerousGoodsView() {
               </CardContent>
             </Card>
 
-            <Card className="haz-card">
+            <Card className="hover-lift-sm haz-card">
               <CardHeader className="pb-2">
                 <CardTitle className="haz-card-title"><IndianRupee className="h-4 w-4" /> Incident Cost Impact</CardTitle>
               </CardHeader>
@@ -820,7 +820,7 @@ export default function HazmatDangerousGoodsView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.ppeReqs.map((req, i) => (
               <Card key={req.id} className={`haz-ppe-card haz-stagger-${Math.min(i, 8)}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <span className="haz-class-badge" style={{ background: `${CLASS_COLORS[req.hazmatClass]}20`, color: CLASS_COLORS[req.hazmatClass] }}>
                       {CLASS_ICONS[req.hazmatClass]} {CLASS_LABELS[req.hazmatClass]}
@@ -861,7 +861,7 @@ export default function HazmatDangerousGoodsView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.storageZones.map((zone, i) => (
               <Card key={zone.id} className={`haz-zone-card haz-stagger-${Math.min(i, 11)}`}>
-                <CardContent className="glass-subtle p-4">
+                <CardContent className="inner-glow glass-subtle p-4">
                   <div className="flex items-center justify-between mb-2">
                     <span className="haz-zone-id">{zone.id}</span>
                     <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="badge-interactive text-[10px]">
