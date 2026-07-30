@@ -230,6 +230,8 @@ import AutomotivePartsLogisticsView from "@/components/modules/automotive-parts-
 import FmcgDistributionHubView from "@/components/modules/fmcg-distribution-hub-view"
 import MedicalDeviceLogisticsView from "@/components/modules/medical-device-logistics-view"
 import AerospacePartsTrackingView from "@/components/modules/aerospace-parts-tracking-view"
+import NuclearFuelLogisticsView from "@/components/modules/nuclear-fuel-logistics-view"
+import OilGasPipelineSupplyView from "@/components/modules/oil-gas-pipeline-supply-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -459,6 +461,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "fmcg-distribution-hub": FmcgDistributionHubView,
   "medical-device-logistics": MedicalDeviceLogisticsView,
   "aerospace-parts-tracking": AerospacePartsTrackingView,
+  "nuclear-fuel-logistics": NuclearFuelLogisticsView,
+  "oil-gas-pipeline-supply": OilGasPipelineSupplyView,
 }
 
 

@@ -220,3 +220,5 @@ export { default as AutomotivePartsLogisticsView } from './automotive-parts-logi
 export { default as FmcgDistributionHubView } from './fmcg-distribution-hub-view'
 export { default as MedicalDeviceLogisticsView } from './medical-device-logistics-view'
 export { default as AerospacePartsTrackingView } from './aerospace-parts-tracking-view'
+export { default as NuclearFuelLogisticsView } from './nuclear-fuel-logistics-view'
+export { default as OilGasPipelineSupplyView } from './oil-gas-pipeline-supply-view'

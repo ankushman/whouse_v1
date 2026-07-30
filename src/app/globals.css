@@ -52119,3 +52119,51 @@ html.theme-transition body {
 @keyframes asp-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(126,34,206,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(126,34,206,0.15); } }
 @keyframes asp-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(107,33,168,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(107,33,168,0.15); } }
 @keyframes asp-glow-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(126,34,206,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(126,34,206,0.25); } }
+
+/* ========== Nuclear Fuel Logistics (nfl-*) ========== */
+.nfl-container { animation: nfl-fade-in 0.4s ease-out; }
+.nfl-tab-trigger[data-state="active"] { background-color: #a16207; color: white; }
+.nfl-tab-trigger[data-state="active"]:hover { background-color: #854d0e; }
+.nfl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.nfl-kpi-card:hover { border-color: #a16207; box-shadow: 0 4px 12px rgba(161,98,7,0.15); }
+.nfl-kpi-value { font-variant-numeric: tabular-nums; }
+.nfl-health-ring svg { transition: transform 0.3s ease; }
+.nfl-health-ring:hover svg { transform: scale(1.05); }
+.nfl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.nfl-ring-value { font-variant-numeric: tabular-nums; }
+.nfl-fuel-badge, .nfl-radiation-badge { transition: transform 0.15s ease; }
+.nfl-fuel-badge:hover { transform: scale(1.05); }
+.nfl-cost-bar-fill { transition: width 0.6s ease; }
+.nfl-table-row { transition: background-color 0.15s ease; }
+.nfl-table-row:hover { background-color: rgba(161,98,7,0.04); }
+.nfl-chart-card { border: 1px solid #e5e7eb; }
+.nfl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes nfl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes nfl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes nfl-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(161,98,7,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(161,98,7,0.15); } }
+@keyframes nfl-pulse-dark-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(133,77,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(133,77,14,0.15); } }
+@keyframes nfl-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(161,98,7,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(161,98,7,0.25); } }
+
+/* ========== Oil & Gas Pipeline Supply (ogp-*) ========== */
+.ogp-container { animation: ogp-fade-in 0.4s ease-out; }
+.ogp-tab-trigger[data-state="active"] { background-color: #d97706; color: white; }
+.ogp-tab-trigger[data-state="active"]:hover { background-color: #b45309; }
+.ogp-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ogp-kpi-card:hover { border-color: #d97706; box-shadow: 0 4px 12px rgba(217,119,6,0.15); }
+.ogp-kpi-value { font-variant-numeric: tabular-nums; }
+.ogp-health-ring svg { transition: transform 0.3s ease; }
+.ogp-health-ring:hover svg { transform: scale(1.05); }
+.ogp-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.ogp-ring-value { font-variant-numeric: tabular-nums; }
+.ogp-material-badge, .ogp-status-badge { transition: transform 0.15s ease; }
+.ogp-material-badge:hover { transform: scale(1.05); }
+.ogp-cost-bar-fill { transition: width 0.6s ease; }
+.ogp-table-row { transition: background-color 0.15s ease; }
+.ogp-table-row:hover { background-color: rgba(217,119,6,0.04); }
+.ogp-chart-card { border: 1px solid #e5e7eb; }
+.ogp-insight-card { border: 1px solid #e5e7eb; }
+@keyframes ogp-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ogp-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ogp-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(217,119,6,0.15); } }
+@keyframes ogp-pulse-dark-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(180,83,9,0.15); } }
+@keyframes ogp-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(217,119,6,0.25); } }
