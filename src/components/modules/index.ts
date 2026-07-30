@@ -238,3 +238,5 @@ export { default as ColdChainPerishableView } from './cold-chain-perishable-view
 export { default as DefenceOrdnanceSupplyView } from './defence-ordnance-supply-view'
 export { default as ProjectCargoHeavyLiftView } from './project-cargo-heavy-lift-view'
 export { default as MedicalDeviceDistributionView } from './medical-device-distribution-view'
+export { default as ChemicalIndustrialGasesView } from './chemical-industrial-gases-view'
+export { default as SemiconductorElectronicsView } from './semiconductor-electronics-view'

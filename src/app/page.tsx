@@ -248,6 +248,8 @@ import ColdChainPerishableView from "@/components/modules/cold-chain-perishable-
 import DefenceOrdnanceSupplyView from "@/components/modules/defence-ordnance-supply-view"
 import ProjectCargoHeavyLiftView from "@/components/modules/project-cargo-heavy-lift-view"
 import MedicalDeviceDistributionView from "@/components/modules/medical-device-distribution-view"
+import ChemicalIndustrialGasesView from "@/components/modules/chemical-industrial-gases-view"
+import SemiconductorElectronicsView from "@/components/modules/semiconductor-electronics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -495,6 +497,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "defence-ordnance-supply": DefenceOrdnanceSupplyView,
   "project-cargo-heavy-lift": ProjectCargoHeavyLiftView,
   "medical-device-distribution": MedicalDeviceDistributionView,
+  "chemical-industrial-gases": ChemicalIndustrialGasesView,
+  "semiconductor-electronics": SemiconductorElectronicsView,
 }
 
 

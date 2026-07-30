@@ -52548,3 +52548,51 @@ html.theme-transition body {
 @keyframes mdd-pulse-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(5,150,105,0.15); } }
 @keyframes mdd-pulse-dark-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(4,120,87,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(4,120,87,0.15); } }
 @keyframes mdd-glow-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(5,150,105,0.25); } }
+
+/* Chemical Industrial Gases (cig) */
+.cig-container { animation: cig-fade-in 0.4s ease; }
+.cig-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.cig-tab-trigger[data-state="active"] { background-color: #ea580c; color: white; }
+.cig-tab-trigger[data-state="active"]:hover { background-color: #c2410c; }
+.cig-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.cig-kpi-card:hover { border-color: #ea580c; box-shadow: 0 4px 12px rgba(234,88,12,0.15); }
+.cig-kpi-value { font-variant-numeric: tabular-nums; }
+.cig-health-ring svg { transition: transform 0.3s ease; }
+.cig-health-ring:hover svg { transform: scale(1.05); }
+.cig-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.cig-ring-value { font-variant-numeric: tabular-nums; }
+.cig-chemical-badge, .cig-status-badge { transition: transform 0.15s ease; }
+.cig-chemical-badge:hover { transform: scale(1.05); }
+.cig-cost-bar-fill { transition: width 0.6s ease; }
+.cig-table-row { transition: background-color 0.15s ease; }
+.cig-table-row:hover { background-color: rgba(234,88,12,0.04); }
+.cig-chart-card { border: 1px solid #e5e7eb; }
+.cig-insight-card { border: 1px solid #e5e7eb; }
+@keyframes cig-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cig-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes cig-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(234,88,12,0.15); } }
+@keyframes cig-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(234,88,12,0.25); } }
+
+/* Semiconductor Electronics (see) */
+.see-container { animation: see-fade-in 0.4s ease; }
+.see-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.see-tab-trigger[data-state="active"] { background-color: #0284c7; color: white; }
+.see-tab-trigger[data-state="active"]:hover { background-color: #0369a1; }
+.see-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.see-kpi-card:hover { border-color: #0284c7; box-shadow: 0 4px 12px rgba(2,132,199,0.15); }
+.see-kpi-value { font-variant-numeric: tabular-nums; }
+.see-health-ring svg { transition: transform 0.3s ease; }
+.see-health-ring:hover svg { transform: scale(1.05); }
+.see-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.see-ring-value { font-variant-numeric: tabular-nums; }
+.see-component-badge, .see-status-badge { transition: transform 0.15s ease; }
+.see-component-badge:hover { transform: scale(1.05); }
+.see-cost-bar-fill { transition: width 0.6s ease; }
+.see-table-row { transition: background-color 0.15s ease; }
+.see-table-row:hover { background-color: rgba(2,132,199,0.04); }
+.see-chart-card { border: 1px solid #e5e7eb; }
+.see-insight-card { border: 1px solid #e5e7eb; }
+@keyframes see-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes see-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes see-pulse-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(2,132,199,0.15); } }
+@keyframes see-glow-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(2,132,199,0.25); } }
