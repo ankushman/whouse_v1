@@ -50621,3 +50621,36 @@ html.theme-transition body {
 /* ── R259: Shared Hover Animation ───────────────────────────────────────── */
 @keyframes r259-badge-glow { 0% { box-shadow: 0 0 0 rgba(0,0,0,0); } 50% { box-shadow: 0 0 12px rgba(59,130,246,0.15); } 100% { box-shadow: 0 0 0 rgba(0,0,0,0); } }
 .scr-rs-badge[title="Critical"], .lpc-bid[title="Open"] { animation: r259-badge-glow 2s infinite; }
+
+/* ── R260: Warehouse Quality Command (wqc-*) ────────────────────────────── */
+.wqc-it-badge, .wqc-def-badge, .wqc-sev-badge, .wqc-status,
+.wqc-city, .wqc-insp, .wqc-prod, .wqc-val, .wqc-acc, .wqc-dr,
+.wqc-spc, .wqc-cost, .wqc-stars, .wqc-pass { transition: all 0.15s ease; }
+.wqc-it-badge:hover, .wqc-def-badge:hover, .wqc-sev-badge:hover,
+.wqc-insp:hover, .wqc-prod:hover, .wqc-city:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.wqc-sev-badge:hover { box-shadow: 0 0 12px rgba(239,68,68,0.25); }
+.wqc-kpi { transition: all 0.2s ease; }
+.wqc-kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.1); border-color: rgba(5,150,105,0.3); }
+.wqc-chart { transition: all 0.2s ease; }
+.wqc-chart:hover { box-shadow: 0 4px 16px rgba(5,150,105,0.08); }
+.wqc-inspector-card { transition: all 0.25s ease; }
+.wqc-inspector-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.12); }
+.wqc-score:hover, .wqc-acc:hover, .wqc-dr:hover, .wqc-pass:hover { transform: scale(1.05); }
+.wqc-glow { position: relative; overflow: hidden; }
+.wqc-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #059669, #3b82f6, #7c3aed); opacity: 0; transition: opacity 0.3s ease; }
+.wqc-glow:hover::before { opacity: 1; }
+
+/* ── R260: WMS Configuration Studio (wcs-*) ──────────────────────────── */
+.wcs-zone, .wcs-slot, .wcs-eq, .wcs-es, .wcs-ls, .wcs-city,
+.wcs-val, .wcs-util, .wcs-cap, .wcs-wt, .wcs-tp, .wcs-slot-count { transition: all 0.15s ease; }
+.wcs-zone:hover, .wcs-eq:hover, .wcs-slot:hover, .wcs-city:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.wcs-kpi { transition: all 0.2s ease; }
+.wcs-kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); }
+.wcs-chart { transition: all 0.2s ease; }
+.wcs-chart:hover { box-shadow: 0 4px 16px rgba(59,130,246,0.08); }
+.wcs-layout { transition: all 0.25s ease; }
+.wcs-layout:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.12); }
+.wcs-util:hover, .wcs-cap:hover { transform: scale(1.02); }
+.wcs-glow { position: relative; overflow: hidden; }
+.wcs-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed, #0891b2); opacity: 0; transition: opacity 0.3s ease; }
+.wcs-glow:hover::before { opacity: 1; }

@@ -184,6 +184,8 @@ import LogisticsControlTowerView from "@/components/modules/logistics-control-to
 import WarehouseSmartPickingView from "@/components/modules/warehouse-smart-picking-view"
 import SupplyChainResilienceHubView from "@/components/modules/supply-chain-resilience-hub-view"
 import LogisticsProcurementCommandView from "@/components/modules/logistics-procurement-command-view"
+import WarehouseQualityCommandView from "@/components/modules/warehouse-quality-command-view"
+import WmsConfigurationStudioView from "@/components/modules/wms-configuration-studio-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -367,6 +369,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-smart-picking": WarehouseSmartPickingView,
   "supply-chain-resilience-hub": SupplyChainResilienceHubView,
   "logistics-procurement-command": LogisticsProcurementCommandView,
+  "warehouse-quality-command": WarehouseQualityCommandView,
+  "wms-configuration-studio": WmsConfigurationStudioView,
 }
 
 

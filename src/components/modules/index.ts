@@ -174,3 +174,5 @@ export { default as LogisticsControlTowerView } from './logistics-control-tower-
 export { default as WarehouseSmartPickingView } from './warehouse-smart-picking-view'
 export { default as SupplyChainResilienceHubView } from './supply-chain-resilience-hub-view'
 export { default as LogisticsProcurementCommandView } from './logistics-procurement-command-view'
+export { default as WarehouseQualityCommandView } from './warehouse-quality-command-view'
+export { default as WmsConfigurationStudioView } from './wms-configuration-studio-view'
