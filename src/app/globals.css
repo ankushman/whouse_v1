@@ -52968,3 +52968,47 @@ html.theme-transition body {
 @keyframes ssc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes ssc-pulse-navy { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,58,95,0.15); } }
 @keyframes ssc-glow-navy { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,58,95,0.25); } }
+/* ── Handicrafts & Artisan Logistics (hal-*) ── */
+.hal-root { animation: hal-fade-in 0.4s ease; }
+.hal-tab-trigger[data-state="active"] { background-color: #581c87; color: white; }
+.hal-tab-trigger[data-state="active"]:hover { background-color: #6b21a8; }
+.hal-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.hal-kpi-card:hover { border-color: #581c87; box-shadow: 0 4px 12px rgba(88,28,135,0.15); }
+.hal-kpi-value { font-variant-numeric: tabular-nums; }
+.hal-health-ring svg { transition: transform 0.3s ease; }
+.hal-health-ring:hover svg { transform: scale(1.05); }
+.hal-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.hal-ring-value { font-variant-numeric: tabular-nums; }
+.hal-craft-badge, .hal-status-badge { transition: transform 0.15s ease; }
+.hal-craft-badge:hover { transform: scale(1.05); }
+.hal-cost-bar-fill { transition: width 0.6s ease; }
+.hal-table-row { transition: background-color 0.15s ease; }
+.hal-table-row:hover { background-color: rgba(88,28,135,0.04); }
+.hal-chart-card { border: 1px solid #e5e7eb; }
+.hal-insight-card { border: 1px solid #e5e7eb; }
+@keyframes hal-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hal-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes hal-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(88,28,135,0.15); } }
+@keyframes hal-glow-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(88,28,135,0.25); } }
+/* ── Tea & Spice Supply Chain (tsl-*) ── */
+.tsl-root { animation: tsl-fade-in 0.4s ease; }
+.tsl-tab-trigger[data-state="active"] { background-color: #365314; color: white; }
+.tsl-tab-trigger[data-state="active"]:hover { background-color: #3f6212; }
+.tsl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.tsl-kpi-card:hover { border-color: #365314; box-shadow: 0 4px 12px rgba(54,83,20,0.15); }
+.tsl-kpi-value { font-variant-numeric: tabular-nums; }
+.tsl-health-ring svg { transition: transform 0.3s ease; }
+.tsl-health-ring:hover svg { transform: scale(1.05); }
+.tsl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.tsl-ring-value { font-variant-numeric: tabular-nums; }
+.tsl-product-badge, .tsl-status-badge { transition: transform 0.15s ease; }
+.tsl-product-badge:hover { transform: scale(1.05); }
+.tsl-cost-bar-fill { transition: width 0.6s ease; }
+.tsl-table-row { transition: background-color 0.15s ease; }
+.tsl-table-row:hover { background-color: rgba(54,83,20,0.04); }
+.tsl-chart-card { border: 1px solid #e5e7eb; }
+.tsl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes tsl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tsl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes tsl-pulse-lime { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(54,83,20,0.15); } }
+@keyframes tsl-glow-lime { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(54,83,20,0.25); } }

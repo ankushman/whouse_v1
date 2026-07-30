@@ -256,3 +256,5 @@ export { default as MarbleGraniteLogisticsView } from './marble-granite-logistic
 export { default as CashewProcessingLogisticsView } from './cashew-processing-logistics-view'
 export { default as CosmeticsPersonalCareLogisticsView } from './cosmetics-personal-care-logistics-view'
 export { default as SportsEquipmentSupplyChainView } from './sports-equipment-supply-chain-view'
+export { default as HandicraftsArtisanLogisticsView } from './handicrafts-artisan-logistics-view'
+export { default as TeaSpiceSupplyChainView } from './tea-spice-supply-chain-view'
