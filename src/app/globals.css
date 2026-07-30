@@ -52357,3 +52357,50 @@ html.theme-transition body {
 @keyframes amr-pulse-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(29,78,216,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(29,78,216,0.15); } }
 @keyframes amr-pulse-dark-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,64,175,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,64,175,0.15); } }
 @keyframes amr-glow-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(29,78,216,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(29,78,216,0.25); } }
+.tal-container { animation: tal-fade-in 0.4s ease; }
+.tal-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.tal-tab-trigger[data-state="active"] { background-color: #db2777; color: white; }
+.tal-tab-trigger[data-state="active"]:hover { background-color: #be185d; }
+.tal-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.tal-kpi-card:hover { border-color: #db2777; box-shadow: 0 4px 12px rgba(219,39,119,0.15); }
+.tal-kpi-value { font-variant-numeric: tabular-nums; }
+.tal-health-ring svg { transition: transform 0.3s ease; }
+.tal-health-ring:hover svg { transform: scale(1.05); }
+.tal-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.tal-ring-value { font-variant-numeric: tabular-nums; }
+.tal-garment-badge, .tal-status-badge { transition: transform 0.15s ease; }
+.tal-garment-badge:hover { transform: scale(1.05); }
+.tal-cost-bar-fill { transition: width 0.6s ease; }
+.tal-table-row { transition: background-color 0.15s ease; }
+.tal-table-row:hover { background-color: rgba(219,39,119,0.04); }
+.tal-chart-card { border: 1px solid #e5e7eb; }
+.tal-insight-card { border: 1px solid #e5e7eb; }
+@keyframes tal-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tal-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes tal-pulse-pink { 0%, 100% { box-shadow: 0 0 0 0 rgba(219,39,119,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(219,39,119,0.15); } }
+@keyframes tal-pulse-dark-pink { 0%, 100% { box-shadow: 0 0 0 0 rgba(190,24,93,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(190,24,93,0.15); } }
+@keyframes tal-glow-pink { 0%, 100% { box-shadow: 0 0 0 0 rgba(219,39,119,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(219,39,119,0.25); } }
+
+.ewc-container { animation: ewc-fade-in 0.4s ease; }
+.ewc-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.ewc-tab-trigger[data-state="active"] { background-color: #15803d; color: white; }
+.ewc-tab-trigger[data-state="active"]:hover { background-color: #166534; }
+.ewc-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ewc-kpi-card:hover { border-color: #15803d; box-shadow: 0 4px 12px rgba(21,128,61,0.15); }
+.ewc-kpi-value { font-variant-numeric: tabular-nums; }
+.ewc-health-ring svg { transition: transform 0.3s ease; }
+.ewc-health-ring:hover svg { transform: scale(1.05); }
+.ewc-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.ewc-ring-value { font-variant-numeric: tabular-nums; }
+.ewc-ewaste-badge, .ewc-status-badge { transition: transform 0.15s ease; }
+.ewc-ewaste-badge:hover { transform: scale(1.05); }
+.ewc-cost-bar-fill { transition: width 0.6s ease; }
+.ewc-table-row { transition: background-color 0.15s ease; }
+.ewc-table-row:hover { background-color: rgba(21,128,61,0.04); }
+.ewc-chart-card { border: 1px solid #e5e7eb; }
+.ewc-insight-card { border: 1px solid #e5e7eb; }
+@keyframes ewc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ewc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ewc-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(21,128,61,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(21,128,61,0.15); } }
+@keyframes ewc-pulse-dark-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(22,101,52,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(22,101,52,0.15); } }
+@keyframes ewc-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(21,128,61,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(21,128,61,0.25); } }

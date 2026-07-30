@@ -240,6 +240,8 @@ import GemJewelleryLogisticsView from "@/components/modules/gem-jewellery-logist
 import PortContainerTerminalView from "@/components/modules/port-container-terminal-view"
 import PharmaVaccineSupplyView from "@/components/modules/pharma-vaccine-supply-view"
 import AerospaceMroLogisticsView from "@/components/modules/aerospace-mro-logistics-view"
+import TextileApparelLogisticsView from "@/components/modules/textile-apparel-logistics-view"
+import EwasteCircularEconomyView from "@/components/modules/ewaste-circular-economy-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -479,6 +481,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "port-container-terminal": PortContainerTerminalView,
   "pharma-vaccine-supply": PharmaVaccineSupplyView,
   "aerospace-mro-logistics": AerospaceMroLogisticsView,
+  "textile-apparel-logistics": TextileApparelLogisticsView,
+  "ewaste-circular-economy": EwasteCircularEconomyView,
 }
 
 
