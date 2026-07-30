@@ -188,6 +188,8 @@ import WarehouseQualityCommandView from "@/components/modules/warehouse-quality-
 import WmsConfigurationStudioView from "@/components/modules/wms-configuration-studio-view"
 import DemandSensingAiView from "@/components/modules/demand-sensing-ai-view"
 import ReturnsPredictionEngineView from "@/components/modules/returns-prediction-engine-view"
+import SupplyChainDigitalTwinView from "@/components/modules/supply-chain-digital-twin-view"
+import LastMileOptimizationProView from "@/components/modules/last-mile-optimization-pro-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -375,6 +377,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "wms-configuration-studio": WmsConfigurationStudioView,
   "demand-sensing-ai": DemandSensingAiView,
   "returns-prediction-engine": ReturnsPredictionEngineView,
+  "supply-chain-digital-twin": SupplyChainDigitalTwinView,
+  "last-mile-optimization-pro": LastMileOptimizationProView,
 }
 
 

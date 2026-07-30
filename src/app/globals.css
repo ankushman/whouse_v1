@@ -50699,3 +50699,107 @@ html.theme-transition body {
 .rpe-roi-badge, .rpe-cost-badge { transition: all 0.15s ease; }
 .rpe-roi-badge:hover, .rpe-cost-badge:hover { transform: scale(1.06); }
 .rpe-risk-factor { font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════════════
+   R262: Supply Chain Digital Twin (sdt-*) styles
+   ═══════════════════════════════════════════════════════════ */
+.sdt-node-badge { transition: all 0.15s ease; cursor: pointer; }
+.sdt-node-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(6,182,212,0.25); }
+.sdt-link-badge { transition: all 0.15s ease; }
+.sdt-link-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(139,92,246,0.25); }
+.sdt-sim-badge { transition: all 0.2s ease; }
+.sdt-sim-running { animation: sdt-pulse-green 2s ease-in-out infinite; }
+.sdt-sim-failed { animation: sdt-pulse-red 1.5s ease-in-out infinite; }
+@keyframes sdt-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 0 6px rgba(5,150,105,0); } }
+@keyframes sdt-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); } }
+.sdt-throughput-bar { transition: all 0.3s ease; }
+.sdt-throughput-bar:hover > div:first-child { filter: brightness(1.15); }
+.sdt-util-gauge { transition: all 0.3s ease; }
+.sdt-util-gauge:hover > div:first-child { filter: brightness(1.15); }
+.sdt-trend { transition: color 0.2s ease; }
+.sdt-city-badge { transition: all 0.15s ease; }
+.sdt-city-badge:hover { background-color: rgba(6,182,212,0.15); }
+.sdt-kpi-tile { transition: all 0.2s ease; }
+.sdt-kpi-tile:hover { transform: translateY(-2px); }
+.sdt-value-tile { transition: all 0.2s ease; }
+.sdt-value-tile:hover { background-color: rgba(6,182,212,0.08); }
+.sdt-health-ring { transition: all 0.3s ease; }
+.sdt-health-ring:hover svg { transform: scale(1.1); }
+.sdt-health-ring svg { transition: transform 0.3s ease; }
+.sdt-latency-badge { transition: all 0.15s ease; }
+.sdt-risk-badge { transition: all 0.15s ease; cursor: pointer; }
+.sdt-risk-badge:hover { transform: scale(1.08); }
+.sdt-table { border-collapse: separate; border-spacing: 0; }
+.sdt-table-row { transition: background-color 0.15s ease; }
+.sdt-table-row:hover { background-color: rgba(6,182,212,0.06); }
+.sdt-table-row:active { background-color: rgba(6,182,212,0.12); }
+.sdt-sim-card { transition: all 0.2s ease; }
+.sdt-sim-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.sdt-insight-card { transition: all 0.2s ease; }
+.sdt-insight-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+.sdt-chart-card { transition: all 0.2s ease; }
+.sdt-chart-card:hover { box-shadow: 0 4px 15px rgba(6,182,212,0.12); }
+.sdt-detail-header { transition: all 0.3s ease; }
+.sdt-detail-header:hover { transform: scale(1.01); }
+.sdt-status-badge { transition: all 0.15s ease; }
+.sdt-status-badge:hover { transform: scale(1.05); }
+.sdt-link-status { transition: all 0.15s ease; }
+.sdt-link-status:hover { transform: scale(1.05); }
+
+/* ═══════════════════════════════════════════════════════════
+   R262: Last Mile Optimization Pro (lmo-*) styles
+   ═══════════════════════════════════════════════════════════ */
+.lmo-vehicle-badge { transition: all 0.15s ease; cursor: pointer; }
+.lmo-vehicle-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(245,158,11,0.25); }
+.lmo-delivery-badge { transition: all 0.2s ease; }
+.lmo-status-transit { animation: lmo-blink-blue 2s ease-in-out infinite; }
+.lmo-status-delivered { animation: lmo-glow-green 2.5s ease-in-out infinite; }
+.lmo-status-failed { animation: lmo-pulse-red-lmo 1.5s ease-in-out infinite; }
+@keyframes lmo-blink-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.25); } 50% { box-shadow: 0 0 0 5px rgba(59,130,246,0); } }
+@keyframes lmo-glow-green { 0%, 100% { box-shadow: 0 0 4px rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 10px rgba(5,150,105,0.5); } }
+@keyframes lmo-pulse-red-lmo { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); } }
+.lmo-sla-badge { transition: all 0.15s ease; }
+.lmo-sla-badge:hover { transform: scale(1.1); }
+.lmo-eff-bar { transition: all 0.3s ease; }
+.lmo-eff-bar:hover > div:first-child { filter: brightness(1.15); }
+.lmo-trend { transition: color 0.2s ease; }
+.lmo-city-badge { transition: all 0.15s ease; }
+.lmo-city-badge:hover { background-color: rgba(245,158,11,0.15); }
+.lmo-zone-badge { transition: all 0.15s ease; }
+.lmo-zone-badge:hover { background-color: rgba(139,92,246,0.15); }
+.lmo-kpi-tile { transition: all 0.2s ease; }
+.lmo-kpi-tile:hover { transform: translateY(-2px); }
+.lmo-value-tile { transition: all 0.2s ease; }
+.lmo-value-tile:hover { background-color: rgba(245,158,11,0.08); }
+.lmo-fuel-tile { transition: all 0.2s ease; }
+.lmo-fuel-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(245,158,11,0.15); }
+.lmo-star-rating { transition: all 0.15s ease; }
+.lmo-star-rating:hover svg { transform: scale(1.2); }
+.lmo-star-rating svg { transition: transform 0.15s ease; }
+.lmo-delivery-ring { transition: all 0.3s ease; }
+.lmo-delivery-ring:hover svg { transform: scale(1.1); }
+.lmo-delivery-ring svg { transition: transform 0.3s ease; }
+.lmo-cost-tile { transition: all 0.2s ease; }
+.lmo-cost-tile:hover { background-color: rgba(220,38,38,0.08); transform: scale(1.02); }
+.lmo-table { border-collapse: separate; border-spacing: 0; }
+.lmo-table-row { transition: background-color 0.15s ease; }
+.lmo-table-row:hover { background-color: rgba(245,158,11,0.06); }
+.lmo-table-row:active { background-color: rgba(245,158,11,0.12); }
+.lmo-fleet-card { transition: all 0.2s ease; }
+.lmo-fleet-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.lmo-insight-card { transition: all 0.2s ease; }
+.lmo-insight-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+.lmo-chart-card { transition: all 0.2s ease; }
+.lmo-chart-card:hover { box-shadow: 0 4px 15px rgba(245,158,11,0.12); }
+.lmo-detail-header { transition: all 0.3s ease; }
+.lmo-detail-header:hover { transform: scale(1.01); }
+.lmo-priority-badge { transition: all 0.15s ease; }
+.lmo-priority-badge:hover { transform: scale(1.08); }
+.lmo-veh-status { transition: all 0.15s ease; }
+.lmo-veh-status:hover { transform: scale(1.05); }
+.lmo-route-status { transition: all 0.15s ease; }
+.lmo-route-status:hover { transform: scale(1.05); }
+.lmo-fleet-summary { transition: all 0.2s ease; border-radius: 8px; }
+.lmo-fleet-summary:hover { background-color: rgba(245,158,11,0.05); }
+.lmo-zone-summary { transition: all 0.2s ease; border-radius: 8px; }
+.lmo-zone-summary:hover { background-color: rgba(139,92,246,0.05); }

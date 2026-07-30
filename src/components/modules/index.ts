@@ -178,3 +178,5 @@ export { default as WarehouseQualityCommandView } from './warehouse-quality-comm
 export { default as WmsConfigurationStudioView } from './wms-configuration-studio-view'
 export { default as DemandSensingAiView } from './demand-sensing-ai-view'
 export { default as ReturnsPredictionEngineView } from './returns-prediction-engine-view'
+export { default as SupplyChainDigitalTwinView } from './supply-chain-digital-twin-view'
+export { default as LastMileOptimizationProView } from './last-mile-optimization-pro-view'

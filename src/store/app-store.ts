@@ -184,6 +184,8 @@ export const navItems: NavItem[] = [
   { id: 'wms-configuration-studio', label: 'WMS Studio', icon: 'Grid3x3', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'demand-sensing-ai', label: 'Demand Sensing AI', icon: 'BrainCircuit', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'demand_planner', 'procurement', 'finance', 'supervisor'] },
   { id: 'returns-prediction-engine', label: 'Returns Prediction', icon: 'Target', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
+  { id: 'supply-chain-digital-twin', label: 'Digital Twin', icon: 'Network', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'demand_planner', 'procurement', 'supervisor'] },
+  { id: 'last-mile-optimization-pro', label: 'Last Mile Pro', icon: 'Navigation', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
