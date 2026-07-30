@@ -222,6 +222,8 @@ export const navItems: NavItem[] = [
   { id: 'agri-supply-chain', label: 'Agri Supply Chain', icon: 'Sprout', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'luxury-goods-logistics', label: 'Luxury Goods', icon: 'Gem', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'construction-material-tracker', label: 'Construction Materials', icon: 'HardHat', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'automotive-parts-logistics', label: 'Auto Parts', icon: 'Car', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'fmcg-distribution-hub', label: 'FMCG Hub', icon: 'ShoppingCart', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

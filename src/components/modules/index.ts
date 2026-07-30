@@ -216,3 +216,5 @@ export { default as TextileReverseLogisticsView } from './textile-reverse-logist
 export { default as AgriSupplyChainView } from './agri-supply-chain-view'
 export { default as LuxuryGoodsLogisticsView } from './luxury-goods-logistics-view'
 export { default as ConstructionMaterialTrackerView } from './construction-material-tracker-view'
+export { default as AutomotivePartsLogisticsView } from './automotive-parts-logistics-view'
+export { default as FmcgDistributionHubView } from './fmcg-distribution-hub-view'

@@ -52023,3 +52023,51 @@ html.theme-transition body {
 @keyframes cmt-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(234,88,12,0.15); } }
 @keyframes cmt-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(194,65,12,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(194,65,12,0.15); } }
 @keyframes cmt-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,88,12,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(234,88,12,0.25); } }
+
+/* ========== Automotive Parts Logistics (aup-*) ========== */
+.aup-container { animation: aup-fade-in 0.4s ease-out; }
+.aup-tab-trigger[data-state="active"] { background-color: #0284c7; color: white; }
+.aup-tab-trigger[data-state="active"]:hover { background-color: #0369a1; }
+.aup-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.aup-kpi-card:hover { border-color: #0284c7; box-shadow: 0 4px 12px rgba(2,132,199,0.15); }
+.aup-kpi-value { font-variant-numeric: tabular-nums; }
+.aup-health-ring svg { transition: transform 0.3s ease; }
+.aup-health-ring:hover svg { transform: scale(1.05); }
+.aup-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.aup-ring-value { font-variant-numeric: tabular-nums; }
+.aup-part-badge, .aup-status-badge { transition: transform 0.15s ease; }
+.aup-part-badge:hover { transform: scale(1.05); }
+.aup-cost-bar-fill { transition: width 0.6s ease; }
+.aup-table-row { transition: background-color 0.15s ease; }
+.aup-table-row:hover { background-color: rgba(2,132,199,0.04); }
+.aup-chart-card { border: 1px solid #e5e7eb; }
+.aup-insight-card { border: 1px solid #e5e7eb; }
+@keyframes aup-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes aup-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes aup-pulse-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(2,132,199,0.15); } }
+@keyframes aup-pulse-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(3,105,161,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(3,105,161,0.15); } }
+@keyframes aup-glow-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(2,132,199,0.25); } }
+
+/* ========== FMCG Distribution Hub (fmcg-*) ========== */
+.fmcg-container { animation: fmcg-fade-in 0.4s ease-out; }
+.fmcg-tab-trigger[data-state="active"] { background-color: #059669; color: white; }
+.fmcg-tab-trigger[data-state="active"]:hover { background-color: #047857; }
+.fmcg-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.fmcg-kpi-card:hover { border-color: #059669; box-shadow: 0 4px 12px rgba(5,150,105,0.15); }
+.fmcg-kpi-value { font-variant-numeric: tabular-nums; }
+.fmcg-health-ring svg { transition: transform 0.3s ease; }
+.fmcg-health-ring:hover svg { transform: scale(1.05); }
+.fmcg-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.fmcg-ring-value { font-variant-numeric: tabular-nums; }
+.fmcg-product-badge, .fmcg-status-badge { transition: transform 0.15s ease; }
+.fmcg-product-badge:hover { transform: scale(1.05); }
+.fmcg-shelf-bar-fill { transition: width 0.6s ease; }
+.fmcg-table-row { transition: background-color 0.15s ease; }
+.fmcg-table-row:hover { background-color: rgba(5,150,105,0.04); }
+.fmcg-chart-card { border: 1px solid #e5e7eb; }
+.fmcg-insight-card { border: 1px solid #e5e7eb; }
+@keyframes fmcg-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fmcg-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes fmcg-pulse-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(5,150,105,0.15); } }
+@keyframes fmcg-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(4,120,87,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(4,120,87,0.15); } }
+@keyframes fmcg-glow-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(5,150,105,0.25); } }
