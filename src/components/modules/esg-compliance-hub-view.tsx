@@ -2,7 +2,7 @@
 import { useState, useMemo } from "react";
 import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import { Activity, Leaf, Zap, Recycle, Droplets, Shield, Award, Star, TrendingUp, TrendingDown, Search, ArrowUpDown, Download, Eye, AlertTriangle } from "lucide-react";
-import { PageHeader } from "@/components/ui/page-header";
+import { PageHeader } from "@/components/shared/page-header";
 import { useToast } from "@/hooks/use-toast-helper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
