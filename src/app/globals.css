@@ -51743,3 +51743,47 @@ html.theme-transition body {
 @keyframes edc-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(6,182,212,0.15); } }
 @keyframes edc-pulse-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(16,185,129,0.15); } }
 @keyframes edc-glow-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(14,165,233,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(14,165,233,0.25); } }
+
+/* ── Customs Duty Command (cdc-*) ── */
+.cdc-root { animation: fadeIn 0.4s ease-out; }
+.cdc-tabs-list { border-radius: 12px; }
+.cdc-tab { border-radius: 8px; transition: all 0.2s; }
+.cdc-tab[data-state="active"] { background: rgba(234,179,8,0.15); color: #eab308; box-shadow: 0 0 8px rgba(234,179,8,0.2); }
+.cdc-kpi-card { transition: transform 0.2s, box-shadow 0.2s; }
+.cdc-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(234,179,8,0.1); }
+.cdc-ring-path { transition: stroke-dashoffset 1.2s ease; }
+.cdc-chart-card { border-radius: 12px; transition: box-shadow 0.2s; }
+.cdc-chart-card:hover { box-shadow: 0 4px 20px rgba(234,179,8,0.08); }
+.cdc-table-card { border-radius: 12px; }
+.cdc-table-row { transition: background-color 0.15s; }
+.cdc-table-wrap { scrollbar-width: thin; scrollbar-color: #3f3f46 transparent; }
+.cdc-insight-card { border-radius: 12px; transition: transform 0.2s, border-color 0.2s; }
+.cdc-insight-card:hover { transform: translateX(4px); }
+@keyframes cdc-grow { from { width: 0; } }
+@keyframes cdc-pulse-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,179,8,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(234,179,8,0.15); } }
+@keyframes cdc-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(245,158,11,0.15); } }
+@keyframes cdc-pulse-lime { 0%, 100% { box-shadow: 0 0 0 0 rgba(132,204,22,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(132,204,22,0.15); } }
+@keyframes cdc-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(6,182,212,0.15); } }
+@keyframes cdc-glow-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(234,179,8,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(234,179,8,0.25); } }
+
+/* ── Fleet Fuel Tracker (fft-*) ── */
+.fft-root { animation: fadeIn 0.4s ease-out; }
+.fft-tabs-list { border-radius: 12px; }
+.fft-tab { border-radius: 8px; transition: all 0.2s; }
+.fft-tab[data-state="active"] { background: rgba(239,68,68,0.15); color: #ef4444; box-shadow: 0 0 8px rgba(239,68,68,0.2); }
+.fft-kpi-card { transition: transform 0.2s, box-shadow 0.2s; }
+.fft-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(239,68,68,0.1); }
+.fft-ring-path { transition: stroke-dashoffset 1.2s ease; }
+.fft-chart-card { border-radius: 12px; transition: box-shadow 0.2s; }
+.fft-chart-card:hover { box-shadow: 0 4px 20px rgba(239,68,68,0.08); }
+.fft-table-card { border-radius: 12px; }
+.fft-table-row { transition: background-color 0.15s; }
+.fft-table-wrap { scrollbar-width: thin; scrollbar-color: #3f3f46 transparent; }
+.fft-insight-card { border-radius: 12px; transition: transform 0.2s, border-color 0.2s; }
+.fft-insight-card:hover { transform: translateX(4px); }
+@keyframes fft-grow { from { width: 0; } }
+@keyframes fft-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.15); } }
+@keyframes fft-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(249,115,22,0.15); } }
+@keyframes fft-pulse-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(16,185,129,0.15); } }
+@keyframes fft-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(6,182,212,0.15); } }
+@keyframes fft-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(239,68,68,0.25); } }

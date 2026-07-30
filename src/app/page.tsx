@@ -215,6 +215,8 @@ import DarkStoreOperationsView from "@/components/modules/dark-store-operations-
 import SmartReturnsRoutingView from "@/components/modules/smart-returns-routing-view"
 import PerishableGoodsCommandView from "@/components/modules/perishable-goods-command-view"
 import ExpressDeliveryCommandView from "@/components/modules/express-delivery-command-view"
+import CustomsDutyCommandView from "@/components/modules/customs-duty-command-view"
+import FleetFuelTrackerView from "@/components/modules/fleet-fuel-tracker-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -429,6 +431,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "smart-returns-routing": SmartReturnsRoutingView,
   "perishable-goods-command": PerishableGoodsCommandView,
   "express-delivery-command": ExpressDeliveryCommandView,
+  "customs-duty-command": CustomsDutyCommandView,
+  "fleet-fuel-tracker": FleetFuelTrackerView,
 }
 
 
