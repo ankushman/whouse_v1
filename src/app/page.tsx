@@ -198,6 +198,8 @@ import FleetTelematicsProView from "@/components/modules/fleet-telematics-pro-vi
 import DynamicPricingEngineView from "@/components/modules/dynamic-pricing-engine-view"
 import FreightLaneCommandView from "@/components/modules/freight-lane-command-view"
 import ThreePlPartnerHubView from "@/components/modules/3pl-partner-hub-view"
+import LogisticsNetworkCommandView from "@/components/modules/logistics-network-command-view"
+import TransportAnalyticsProView from "@/components/modules/transport-analytics-pro-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -395,6 +397,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "dynamic-pricing-engine": DynamicPricingEngineView,
   "freight-lane-command": FreightLaneCommandView,
   "3pl-partner-hub": ThreePlPartnerHubView,
+  "logistics-network-command": LogisticsNetworkCommandView,
+  "transport-analytics-pro": TransportAnalyticsProView,
 }
 
 

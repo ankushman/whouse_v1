@@ -51089,3 +51089,89 @@ html.theme-transition body {
 .tph-value-tile { transition: all 0.2s ease; }
 .tph-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 .tph-tabs button[data-state="active"] { background: linear-gradient(135deg, #ec4899, #f59e0b); color: white; }
+
+/* ── R267: Logistics Network Command (lnc-*) ── */
+.lnc-tabs button[data-state="active"] { background: linear-gradient(135deg, #3b82f6, #7c3aed); color: white; }
+.lnc-active { animation: lnc-pulse-green 2s infinite; }
+.lnc-overloaded { animation: lnc-pulse-red 1.5s infinite; }
+.lnc-degraded { animation: lnc-pulse-amber 2s infinite; }
+.lnc-offline { opacity: 0.6; }
+.lnc-congested { animation: lnc-pulse-red 1.5s infinite; }
+.lnc-down { opacity: 0.5; }
+.lnc-network-dot { animation: lnc-dot-pulse 2s infinite; }
+.lnc-node-type-badge { transition: all 0.2s ease; }
+.lnc-node-type-badge:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(59,130,246,0.2); }
+.lnc-status-badge { transition: all 0.2s ease; }
+.lnc-status-badge:hover { transform: scale(1.05); }
+.lnc-link-type-badge { transition: all 0.2s ease; }
+.lnc-link-type-badge:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.lnc-link-status-badge { transition: all 0.2s ease; }
+.lnc-link-status-badge:hover { transform: scale(1.05); }
+.lnc-region-badge { transition: all 0.2s ease; }
+.lnc-region-badge:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.lnc-util-bar div:last-child { transition: width 0.6s ease; }
+.lnc-throughput-bar div:last-child { transition: width 0.6s ease; }
+.lnc-kpi-tile { transition: all 0.3s ease; }
+.lnc-kpi-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.15); }
+.lnc-chart-card { transition: all 0.2s ease; }
+.lnc-chart-card:hover { box-shadow: 0 2px 8px rgba(59,130,246,0.12); }
+.lnc-table-card { transition: all 0.2s ease; }
+.lnc-table-card:hover { box-shadow: 0 2px 8px rgba(59,130,246,0.1); }
+.lnc-table-header th { position: sticky; top: 0; background: white; z-index: 1; }
+.lnc-table-row { transition: all 0.15s ease; }
+.lnc-table-row:hover { background: linear-gradient(90deg, rgba(59,130,246,0.04), rgba(124,58,237,0.04)); }
+.lnc-insight-card { transition: all 0.3s ease; border-left: 3px solid transparent; }
+.lnc-insight-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59,130,246,0.12); border-left-color: #3b82f6; }
+.lnc-health-ring svg { transition: all 0.3s ease; }
+.lnc-health-ring:hover svg { transform: scale(1.1); }
+.lnc-value-tile { transition: all 0.2s ease; }
+.lnc-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes lnc-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(5,150,105,0.15); } }
+@keyframes lnc-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 10px 3px rgba(220,38,38,0.2); } }
+@keyframes lnc-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(217,119,6,0.15); } }
+@keyframes lnc-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+/* ── R267: Transport Analytics Pro (tap-*) ── */
+.tap-tabs button[data-state="active"] { background: linear-gradient(135deg, #4f46e5, #06b6d4); color: white; }
+.tap-in-transit { animation: tap-pulse-indigo 2s infinite; }
+.tap-maintenance { animation: tap-pulse-amber 2s infinite; }
+.tap-charging { animation: tap-pulse-cyan 1.5s infinite; }
+.tap-delivering { animation: tap-pulse-green 2s infinite; }
+.tap-electric { box-shadow: 0 0 6px rgba(6,182,212,0.3); }
+.tap-excellent { animation: tap-glow-green 2s infinite; }
+.tap-critical { animation: tap-pulse-red 1.5s infinite; }
+.tap-vehicle-type-badge { transition: all 0.2s ease; }
+.tap-vehicle-type-badge:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(79,70,229,0.2); }
+.tap-status-badge { transition: all 0.2s ease; }
+.tap-status-badge:hover { transform: scale(1.05); }
+.tap-fuel-badge { transition: all 0.2s ease; }
+.tap-fuel-badge:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.tap-perf-badge { transition: all 0.2s ease; }
+.tap-perf-badge:hover { transform: scale(1.1); }
+.tap-zone-badge { transition: all 0.2s ease; }
+.tap-zone-badge:hover { transform: scale(1.05); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+.tap-util-bar div:last-child { transition: width 0.6s ease; }
+.tap-fuel-gauge div:last-child { transition: width 0.6s ease; }
+.tap-kpi-tile { transition: all 0.3s ease; }
+.tap-kpi-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(79,70,229,0.15); }
+.tap-chart-card { transition: all 0.2s ease; }
+.tap-chart-card:hover { box-shadow: 0 2px 8px rgba(79,70,229,0.12); }
+.tap-table-card { transition: all 0.2s ease; }
+.tap-table-card:hover { box-shadow: 0 2px 8px rgba(79,70,229,0.1); }
+.tap-table-header th { position: sticky; top: 0; background: white; z-index: 1; }
+.tap-table-row { transition: all 0.15s ease; }
+.tap-table-row:hover { background: linear-gradient(90deg, rgba(79,70,229,0.04), rgba(6,182,212,0.04)); }
+.tap-insight-card { transition: all 0.3s ease; border-left: 3px solid transparent; }
+.tap-insight-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(79,70,229,0.12); border-left-color: #4f46e5; }
+.tap-health-ring svg { transition: all 0.3s ease; }
+.tap-health-ring:hover svg { transform: scale(1.1); }
+.tap-value-tile { transition: all 0.2s ease; }
+.tap-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.tap-speedometer svg { transition: all 0.3s ease; }
+.tap-speedometer:hover svg { transform: scale(1.1); }
+@keyframes tap-pulse-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(79,70,229,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(79,70,229,0.15); } }
+@keyframes tap-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(217,119,6,0.15); } }
+@keyframes tap-pulse-cyan { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,182,212,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(6,182,212,0.2); } }
+@keyframes tap-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(5,150,105,0.15); } }
+@keyframes tap-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 10px 3px rgba(220,38,38,0.2); } }
+@keyframes tap-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(5,150,105,0.25); } }
