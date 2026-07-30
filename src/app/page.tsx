@@ -270,6 +270,8 @@ import HandicraftsArtisanLogisticsView from "@/components/modules/handicrafts-ar
 import TeaSpiceSupplyChainView from "@/components/modules/tea-spice-supply-chain-view"
 import FireworksCrackersLogisticsView from "@/components/modules/fireworks-crackers-logistics-view"
 import JuteCoirSupplyChainView from "@/components/modules/jute-coir-supply-chain-view"
+import MusicalInstrumentsLogisticsView from "@/components/modules/musical-instruments-logistics-view"
+import SilkTextileHeritageSupplyChainView from "@/components/modules/silk-textile-heritage-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -539,6 +541,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "tea-spice-supply-chain": TeaSpiceSupplyChainView,
   "fireworks-crackers-logistics": FireworksCrackersLogisticsView,
   "jute-coir-supply-chain": JuteCoirSupplyChainView,
+  "musical-instruments-logistics": MusicalInstrumentsLogisticsView,
+  "silk-textile-heritage-supply-chain": SilkTextileHeritageSupplyChainView,
 }
 
 

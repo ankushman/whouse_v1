@@ -53058,3 +53058,49 @@ html.theme-transition body {
 @keyframes jcs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes jcs-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(54,83,20,0.15); } }
 @keyframes jcs-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(54,83,20,0.25); } }
+
+/* ── Musical Instruments Logistics (mil-*) ── */
+.mil-root { animation: mil-fade-in 0.4s ease; }
+.mil-tab-trigger[data-state="active"] { background-color: #7e22ce; color: white; }
+.mil-tab-trigger[data-state="active"]:hover { background-color: #9333ea; }
+.mil-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mil-kpi-card:hover { border-color: #7e22ce; box-shadow: 0 4px 12px rgba(126,34,206,0.15); }
+.mil-kpi-value { font-variant-numeric: tabular-nums; }
+.mil-health-ring svg { transition: transform 0.3s ease; }
+.mil-health-ring:hover svg { transform: scale(1.05); }
+.mil-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.mil-ring-value { font-variant-numeric: tabular-nums; }
+.mil-product-badge, .mil-status-badge { transition: transform 0.15s ease; }
+.mil-product-badge:hover { transform: scale(1.05); }
+.mil-cost-bar-fill { transition: width 0.6s ease; }
+.mil-table-row { transition: background-color 0.15s ease; }
+.mil-table-row:hover { background-color: rgba(126,34,206,0.04); }
+.mil-chart-card { border: 1px solid #e5e7eb; }
+.mil-insight-card { border: 1px solid #e5e7eb; }
+@keyframes mil-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mil-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mil-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(126,34,206,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(126,34,206,0.15); } }
+@keyframes mil-glow-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(126,34,206,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(126,34,206,0.25); } }
+
+/* ── Silk & Textile Heritage Supply Chain (sth-*) ── */
+.sth-root { animation: sth-fade-in 0.4s ease; }
+.sth-tab-trigger[data-state="active"] { background-color: #b91c1c; color: white; }
+.sth-tab-trigger[data-state="active"]:hover { background-color: #dc2626; }
+.sth-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.sth-kpi-card:hover { border-color: #b91c1c; box-shadow: 0 4px 12px rgba(185,28,28,0.15); }
+.sth-kpi-value { font-variant-numeric: tabular-nums; }
+.sth-health-ring svg { transition: transform 0.3s ease; }
+.sth-health-ring:hover svg { transform: scale(1.05); }
+.sth-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.sth-ring-value { font-variant-numeric: tabular-nums; }
+.sth-product-badge, .sth-status-badge { transition: transform 0.15s ease; }
+.sth-product-badge:hover { transform: scale(1.05); }
+.sth-cost-bar-fill { transition: width 0.6s ease; }
+.sth-table-row { transition: background-color 0.15s ease; }
+.sth-table-row:hover { background-color: rgba(185,28,28,0.04); }
+.sth-chart-card { border: 1px solid #e5e7eb; }
+.sth-insight-card { border: 1px solid #e5e7eb; }
+@keyframes sth-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sth-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes sth-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(185,28,28,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(185,28,28,0.15); } }
+@keyframes sth-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(185,28,28,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(185,28,28,0.25); } }
