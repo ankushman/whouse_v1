@@ -201,3 +201,5 @@ export { default as MicroFulfillmentCenterView } from './micro-fulfillment-cente
 export { default as RailFreightCommandView } from './rail-freight-command-view'
 export { default as WarehouseSimulationLabView } from './warehouse-simulation-lab-view'
 export { default as GreenLogisticsTrackerView } from './green-logistics-tracker-view'
+export { default as DarkStoreOperationsView } from './dark-store-operations-view'
+export { default as SmartReturnsRoutingView } from './smart-returns-routing-view'

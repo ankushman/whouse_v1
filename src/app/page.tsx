@@ -211,6 +211,8 @@ import MicroFulfillmentCenterView from "@/components/modules/micro-fulfillment-c
 import RailFreightCommandView from "@/components/modules/rail-freight-command-view"
 import WarehouseSimulationLabView from "@/components/modules/warehouse-simulation-lab-view"
 import GreenLogisticsTrackerView from "@/components/modules/green-logistics-tracker-view"
+import DarkStoreOperationsView from "@/components/modules/dark-store-operations-view"
+import SmartReturnsRoutingView from "@/components/modules/smart-returns-routing-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -421,6 +423,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "rail-freight-command": RailFreightCommandView,
   "warehouse-simulation-lab": WarehouseSimulationLabView,
   "green-logistics-tracker": GreenLogisticsTrackerView,
+  "dark-store-operations": DarkStoreOperationsView,
+  "smart-returns-routing": SmartReturnsRoutingView,
 }
 
 
