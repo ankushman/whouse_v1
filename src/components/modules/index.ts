@@ -169,3 +169,4 @@ export { default as HyperlocalFulfillmentView } from './hyperlocal-fulfillment-v
 export { default as FreightLaneIntelligenceView } from './freight-lane-intelligence-view'
 export { default as OmnichannelReturnsHubView } from './omnichannel-returns-hub-view'
 export { default as AutonomousMobileRobotsFleetView } from './autonomous-mobile-robots-fleet-view'
+export { default as ConsignmentInventoryProView } from './consignment-inventory-pro-view'
