@@ -190,6 +190,8 @@ export const navItems: NavItem[] = [
   { id: 'logistics-carbon-tracker', label: 'Carbon Tracker', icon: 'Leaf', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'smart-dock-scheduler', label: 'Dock Scheduler', icon: 'Anchor', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'logistics-ai-copilot', label: 'AI Copilot', icon: 'BrainCircuit', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'demand_planner', 'procurement', 'supervisor'] },
+  { id: 'fleet-telematics-pro', label: 'Fleet Telematics', icon: 'Satellite', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'dynamic-pricing-engine', label: 'Dynamic Pricing', icon: 'Calculator', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance', 'procurement'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

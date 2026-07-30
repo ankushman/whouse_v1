@@ -50965,3 +50965,66 @@ html.theme-transition body {
 .aic-chart-card:hover { box-shadow: 0 4px 15px rgba(139,92,246,0.12); }
 .aic-detail-header { transition: all 0.3s ease; }
 .aic-detail-header:hover { transform: scale(1.01); }
+
+/* ── R265: Fleet Telematics Pro (ftp-*) ── */
+.ftp-vehicle-badge, .ftp-fuel-badge, .ftp-status-badge, .ftp-sev-badge,
+.ftp-city-badge { transition: all 0.2s ease; }
+.ftp-vehicle-badge:hover, .ftp-fuel-badge:hover, .ftp-sev-badge:hover { transform: scale(1.05); }
+.ftp-status-badge:hover { transform: scale(1.08); }
+.ftp-onroute { animation: ftp-pulse-blue 2s ease-in-out infinite; }
+.ftp-avail { animation: ftp-pulse-green 2s ease-in-out infinite; }
+.ftp-critical { animation: ftp-pulse-red 2s ease-in-out infinite; }
+@keyframes ftp-pulse-blue { 0%, 100% { box-shadow: 0 0 4px rgba(59,130,246,0.3); } 50% { box-shadow: 0 0 12px rgba(59,130,246,0.6); } }
+@keyframes ftp-pulse-green { 0%, 100% { box-shadow: 0 0 4px rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 12px rgba(5,150,105,0.6); } }
+@keyframes ftp-pulse-red { 0%, 100% { box-shadow: 0 0 6px rgba(220,38,38,0.4); } 50% { box-shadow: 0 0 16px rgba(220,38,38,0.7); } }
+.ftp-fuel-bar, .ftp-speed-gauge { transition: all 0.3s ease; }
+.ftp-fuel-bar:hover, .ftp-speed-gauge:hover { transform: scaleX(1.08); }
+.ftp-kpi-tile { transition: all 0.3s ease; }
+.ftp-kpi-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.ftp-table-card { transition: all 0.2s ease; border-radius: 8px; overflow: hidden; }
+.ftp-table-card:hover { box-shadow: 0 4px 12px rgba(59,130,246,0.08); }
+.ftp-table-header { background: linear-gradient(135deg, rgba(59,130,246,0.04), rgba(245,158,11,0.04)); }
+.ftp-table-row { transition: all 0.15s ease; }
+.ftp-table-row:hover { background-color: rgba(59,130,246,0.04); }
+.ftp-alert-card { transition: all 0.3s ease; border-radius: 8px; }
+.ftp-alert-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.ftp-alert-critical { border-left: 3px solid #dc2626; animation: ftp-glow-red 2s ease-in-out infinite; }
+@keyframes ftp-glow-red { 0%, 100% { box-shadow: 0 0 6px rgba(220,38,38,0.2); } 50% { box-shadow: 0 0 20px rgba(220,38,38,0.4); } }
+.ftp-chart-card { transition: all 0.2s ease; border-radius: 8px; }
+.ftp-chart-card:hover { box-shadow: 0 4px 15px rgba(59,130,246,0.1); }
+.ftp-insight-card { transition: all 0.3s ease; border-radius: 8px; }
+.ftp-insight-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.ftp-health-ring svg { transition: all 0.3s ease; }
+.ftp-health-ring:hover svg { transform: scale(1.1); }
+.ftp-value-tile { transition: all 0.2s ease; }
+.ftp-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ftp-tabs button[data-state="active"] { background: linear-gradient(135deg, #3b82f6, #06b6d4); color: white; }
+
+/* ── R265: Dynamic Pricing Engine (dpe-*) ── */
+.dpe-service-badge, .dpe-status-badge, .dpe-competitor-badge,
+.dpe-zone-badge { transition: all 0.2s ease; }
+.dpe-service-badge:hover, .dpe-competitor-badge:hover { transform: scale(1.05); }
+.dpe-status-badge:hover { transform: scale(1.08); }
+.dpe-active { animation: dpe-pulse-green 2s ease-in-out infinite; }
+.dpe-margin-bar { transition: all 0.3s ease; }
+.dpe-margin-bar:hover { transform: scaleX(1.08); }
+.dpe-demand { transition: all 0.2s ease; }
+.dpe-kpi-tile { transition: all 0.3s ease; }
+.dpe-kpi-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.dpe-table-card { transition: all 0.2s ease; border-radius: 8px; overflow: hidden; }
+.dpe-table-card:hover { box-shadow: 0 4px 12px rgba(139,92,246,0.08); }
+.dpe-table-header { background: linear-gradient(135deg, rgba(139,92,246,0.04), rgba(245,158,11,0.04)); }
+.dpe-table-row { transition: all 0.15s ease; }
+.dpe-table-row:hover { background-color: rgba(139,92,246,0.04); }
+.dpe-share-bar { transition: all 0.3s ease; }
+.dpe-share-bar:hover { transform: scaleX(1.15); }
+.dpe-chart-card { transition: all 0.2s ease; border-radius: 8px; }
+.dpe-chart-card:hover { box-shadow: 0 4px 15px rgba(139,92,246,0.1); }
+.dpe-insight-card { transition: all 0.3s ease; border-radius: 8px; }
+.dpe-insight-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.dpe-health-ring svg { transition: all 0.3s ease; }
+.dpe-health-ring:hover svg { transform: scale(1.1); }
+.dpe-value-tile { transition: all 0.2s ease; }
+.dpe-value-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dpe-tabs button[data-state="active"] { background: linear-gradient(135deg, #8b5cf6, #f59e0b); color: white; }
+@keyframes dpe-pulse-green { 0%, 100% { box-shadow: 0 0 4px rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 12px rgba(5,150,105,0.6); } }

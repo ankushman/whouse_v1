@@ -184,3 +184,5 @@ export { default as WarehouseAutomationHubView } from './warehouse-automation-hu
 export { default as LogisticsCarbonTrackerView } from './logistics-carbon-tracker-view'
 export { default as SmartDockSchedulerView } from './smart-dock-scheduler-view'
 export { default as LogisticsAiCopilotView } from './logistics-ai-copilot-view'
+export { default as FleetTelematicsProView } from './fleet-telematics-pro-view'
+export { default as DynamicPricingEngineView } from './dynamic-pricing-engine-view'

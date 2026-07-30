@@ -194,6 +194,8 @@ import WarehouseAutomationHubView from "@/components/modules/warehouse-automatio
 import LogisticsCarbonTrackerView from "@/components/modules/logistics-carbon-tracker-view"
 import SmartDockSchedulerView from "@/components/modules/smart-dock-scheduler-view"
 import LogisticsAiCopilotView from "@/components/modules/logistics-ai-copilot-view"
+import FleetTelematicsProView from "@/components/modules/fleet-telematics-pro-view"
+import DynamicPricingEngineView from "@/components/modules/dynamic-pricing-engine-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -387,6 +389,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "logistics-carbon-tracker": LogisticsCarbonTrackerView,
   "smart-dock-scheduler": SmartDockSchedulerView,
   "logistics-ai-copilot": LogisticsAiCopilotView,
+  "fleet-telematics-pro": FleetTelematicsProView,
+  "dynamic-pricing-engine": DynamicPricingEngineView,
 }
 
 
