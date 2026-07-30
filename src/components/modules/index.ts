@@ -234,3 +234,5 @@ export { default as TextileApparelLogisticsView } from './textile-apparel-logist
 export { default as EwasteCircularEconomyView } from './ewaste-circular-economy-view'
 export { default as SolarEnergyLogisticsView } from './solar-energy-logistics-view'
 export { default as EvBatterySupplyChainView } from './ev-battery-supply-chain-view'
+export { default as ColdChainPerishableView } from './cold-chain-perishable-view'
+export { default as DefenceOrdnanceSupplyView } from './defence-ordnance-supply-view'

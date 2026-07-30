@@ -244,6 +244,8 @@ import TextileApparelLogisticsView from "@/components/modules/textile-apparel-lo
 import EwasteCircularEconomyView from "@/components/modules/ewaste-circular-economy-view"
 import SolarEnergyLogisticsView from "@/components/modules/solar-energy-logistics-view"
 import EvBatterySupplyChainView from "@/components/modules/ev-battery-supply-chain-view"
+import ColdChainPerishableView from "@/components/modules/cold-chain-perishable-view"
+import DefenceOrdnanceSupplyView from "@/components/modules/defence-ordnance-supply-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -487,6 +489,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "ewaste-circular-economy": EwasteCircularEconomyView,
   "solar-energy-logistics": SolarEnergyLogisticsView,
   "ev-battery-supply-chain": EvBatterySupplyChainView,
+  "cold-chain-perishable": ColdChainPerishableView,
+  "defence-ordnance-supply": DefenceOrdnanceSupplyView,
 }
 
 
