@@ -52880,3 +52880,47 @@ html.theme-transition body {
 @keyframes gjs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes gjs-pulse-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(202,138,4,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(202,138,4,0.15); } }
 @keyframes gjs-glow-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(202,138,4,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(202,138,4,0.25); } }
+/* ── Marble & Granite Logistics (mgl-*) ── */
+.mgl-root { animation: mgl-fade-in 0.4s ease; }
+.mgl-tab-trigger[data-state="active"] { background-color: #78350f; color: white; }
+.mgl-tab-trigger[data-state="active"]:hover { background-color: #92400e; }
+.mgl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mgl-kpi-card:hover { border-color: #78350f; box-shadow: 0 4px 12px rgba(120,53,15,0.15); }
+.mgl-kpi-value { font-variant-numeric: tabular-nums; }
+.mgl-health-ring svg { transition: transform 0.3s ease; }
+.mgl-health-ring:hover svg { transform: scale(1.05); }
+.mgl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.mgl-ring-value { font-variant-numeric: tabular-nums; }
+.mgl-stone-badge, .mgl-status-badge { transition: transform 0.15s ease; }
+.mgl-stone-badge:hover { transform: scale(1.05); }
+.mgl-cost-bar-fill { transition: width 0.6s ease; }
+.mgl-table-row { transition: background-color 0.15s ease; }
+.mgl-table-row:hover { background-color: rgba(120,53,15,0.04); }
+.mgl-chart-card { border: 1px solid #e5e7eb; }
+.mgl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes mgl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mgl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mgl-pulse-stone { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(120,53,15,0.15); } }
+@keyframes mgl-glow-stone { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(120,53,15,0.25); } }
+/* ── Cashew Processing Logistics (cpl-*) ── */
+.cpl-root { animation: cpl-fade-in 0.4s ease; }
+.cpl-tab-trigger[data-state="active"] { background-color: #7c2d12; color: white; }
+.cpl-tab-trigger[data-state="active"]:hover { background-color: #9a3412; }
+.cpl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.cpl-kpi-card:hover { border-color: #7c2d12; box-shadow: 0 4px 12px rgba(124,45,18,0.15); }
+.cpl-kpi-value { font-variant-numeric: tabular-nums; }
+.cpl-health-ring svg { transition: transform 0.3s ease; }
+.cpl-health-ring:hover svg { transform: scale(1.05); }
+.cpl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.cpl-ring-value { font-variant-numeric: tabular-nums; }
+.cpl-product-badge, .cpl-status-badge { transition: transform 0.15s ease; }
+.cpl-product-badge:hover { transform: scale(1.05); }
+.cpl-cost-bar-fill { transition: width 0.6s ease; }
+.cpl-table-row { transition: background-color 0.15s ease; }
+.cpl-table-row:hover { background-color: rgba(124,45,18,0.04); }
+.cpl-chart-card { border: 1px solid #e5e7eb; }
+.cpl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes cpl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cpl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes cpl-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,45,18,0.15); } }
+@keyframes cpl-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,45,18,0.25); } }
