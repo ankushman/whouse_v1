@@ -232,3 +232,5 @@ export { default as PharmaVaccineSupplyView } from './pharma-vaccine-supply-view
 export { default as AerospaceMroLogisticsView } from './aerospace-mro-logistics-view'
 export { default as TextileApparelLogisticsView } from './textile-apparel-logistics-view'
 export { default as EwasteCircularEconomyView } from './ewaste-circular-economy-view'
+export { default as SolarEnergyLogisticsView } from './solar-energy-logistics-view'
+export { default as EvBatterySupplyChainView } from './ev-battery-supply-chain-view'
