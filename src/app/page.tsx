@@ -228,6 +228,8 @@ import LuxuryGoodsLogisticsView from "@/components/modules/luxury-goods-logistic
 import ConstructionMaterialTrackerView from "@/components/modules/construction-material-tracker-view"
 import AutomotivePartsLogisticsView from "@/components/modules/automotive-parts-logistics-view"
 import FmcgDistributionHubView from "@/components/modules/fmcg-distribution-hub-view"
+import MedicalDeviceLogisticsView from "@/components/modules/medical-device-logistics-view"
+import AerospacePartsTrackingView from "@/components/modules/aerospace-parts-tracking-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -455,6 +457,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "construction-material-tracker": ConstructionMaterialTrackerView,
   "automotive-parts-logistics": AutomotivePartsLogisticsView,
   "fmcg-distribution-hub": FmcgDistributionHubView,
+  "medical-device-logistics": MedicalDeviceLogisticsView,
+  "aerospace-parts-tracking": AerospacePartsTrackingView,
 }
 
 

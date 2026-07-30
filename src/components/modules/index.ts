@@ -218,3 +218,5 @@ export { default as LuxuryGoodsLogisticsView } from './luxury-goods-logistics-vi
 export { default as ConstructionMaterialTrackerView } from './construction-material-tracker-view'
 export { default as AutomotivePartsLogisticsView } from './automotive-parts-logistics-view'
 export { default as FmcgDistributionHubView } from './fmcg-distribution-hub-view'
+export { default as MedicalDeviceLogisticsView } from './medical-device-logistics-view'
+export { default as AerospacePartsTrackingView } from './aerospace-parts-tracking-view'

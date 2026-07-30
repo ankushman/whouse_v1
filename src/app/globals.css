@@ -52071,3 +52071,51 @@ html.theme-transition body {
 @keyframes fmcg-pulse-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(5,150,105,0.15); } }
 @keyframes fmcg-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(4,120,87,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(4,120,87,0.15); } }
 @keyframes fmcg-glow-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(5,150,105,0.25); } }
+
+/* ========== Medical Device Logistics (mdl-*) ========== */
+.mdl-container { animation: mdl-fade-in 0.4s ease-out; }
+.mdl-tab-trigger[data-state="active"] { background-color: #dc2626; color: white; }
+.mdl-tab-trigger[data-state="active"]:hover { background-color: #b91c1c; }
+.mdl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mdl-kpi-card:hover { border-color: #dc2626; box-shadow: 0 4px 12px rgba(220,38,38,0.15); }
+.mdl-kpi-value { font-variant-numeric: tabular-nums; }
+.mdl-health-ring svg { transition: transform 0.3s ease; }
+.mdl-health-ring:hover svg { transform: scale(1.05); }
+.mdl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.mdl-ring-value { font-variant-numeric: tabular-nums; }
+.mdl-device-badge, .mdl-regulation-badge { transition: transform 0.15s ease; }
+.mdl-device-badge:hover { transform: scale(1.05); }
+.mdl-cost-bar-fill { transition: width 0.6s ease; }
+.mdl-table-row { transition: background-color 0.15s ease; }
+.mdl-table-row:hover { background-color: rgba(220,38,38,0.04); }
+.mdl-chart-card { border: 1px solid #e5e7eb; }
+.mdl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes mdl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mdl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mdl-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(220,38,38,0.15); } }
+@keyframes mdl-pulse-dark-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(185,28,28,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(185,28,28,0.15); } }
+@keyframes mdl-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(220,38,38,0.25); } }
+
+/* ========== Aerospace Parts Tracking (asp-*) ========== */
+.asp-container { animation: asp-fade-in 0.4s ease-out; }
+.asp-tab-trigger[data-state="active"] { background-color: #7e22ce; color: white; }
+.asp-tab-trigger[data-state="active"]:hover { background-color: #6b21a8; }
+.asp-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.asp-kpi-card:hover { border-color: #7e22ce; box-shadow: 0 4px 12px rgba(126,34,206,0.15); }
+.asp-kpi-value { font-variant-numeric: tabular-nums; }
+.asp-health-ring svg { transition: transform 0.3s ease; }
+.asp-health-ring:hover svg { transform: scale(1.05); }
+.asp-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.asp-ring-value { font-variant-numeric: tabular-nums; }
+.asp-part-badge, .asp-certification-badge { transition: transform 0.15s ease; }
+.asp-part-badge:hover { transform: scale(1.05); }
+.asp-cost-bar-fill { transition: width 0.6s ease; }
+.asp-table-row { transition: background-color 0.15s ease; }
+.asp-table-row:hover { background-color: rgba(126,34,206,0.04); }
+.asp-chart-card { border: 1px solid #e5e7eb; }
+.asp-insight-card { border: 1px solid #e5e7eb; }
+@keyframes asp-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes asp-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes asp-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(126,34,206,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(126,34,206,0.15); } }
+@keyframes asp-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(107,33,168,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(107,33,168,0.15); } }
+@keyframes asp-glow-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(126,34,206,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(126,34,206,0.25); } }
