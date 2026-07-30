@@ -236,3 +236,5 @@ export { default as SolarEnergyLogisticsView } from './solar-energy-logistics-vi
 export { default as EvBatterySupplyChainView } from './ev-battery-supply-chain-view'
 export { default as ColdChainPerishableView } from './cold-chain-perishable-view'
 export { default as DefenceOrdnanceSupplyView } from './defence-ordnance-supply-view'
+export { default as ProjectCargoHeavyLiftView } from './project-cargo-heavy-lift-view'
+export { default as MedicalDeviceDistributionView } from './medical-device-distribution-view'
