@@ -264,6 +264,8 @@ import ScrapRecyclingLogisticsView from "@/components/modules/scrap-recycling-lo
 import GemsJewellerySupplyChainView from "@/components/modules/gems-jewellery-supply-chain-view"
 import MarbleGraniteLogisticsView from "@/components/modules/marble-granite-logistics-view"
 import CashewProcessingLogisticsView from "@/components/modules/cashew-processing-logistics-view"
+import CosmeticsPersonalCareLogisticsView from "@/components/modules/cosmetics-personal-care-logistics-view"
+import SportsEquipmentSupplyChainView from "@/components/modules/sports-equipment-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -527,6 +529,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "gems-jewellery-supply-chain": GemsJewellerySupplyChainView,
   "marble-granite-logistics": MarbleGraniteLogisticsView,
   "cashew-processing-logistics": CashewProcessingLogisticsView,
+  "cosmetics-personal-care-logistics": CosmeticsPersonalCareLogisticsView,
+  "sports-equipment-supply-chain": SportsEquipmentSupplyChainView,
 }
 
 

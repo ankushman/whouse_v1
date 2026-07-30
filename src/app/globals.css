@@ -52924,3 +52924,47 @@ html.theme-transition body {
 @keyframes cpl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes cpl-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,45,18,0.15); } }
 @keyframes cpl-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,45,18,0.25); } }
+/* ── Cosmetics & Personal Care Logistics (cpc-*) ── */
+.cpc-root { animation: cpc-fade-in 0.4s ease; }
+.cpc-tab-trigger[data-state="active"] { background-color: #9d174d; color: white; }
+.cpc-tab-trigger[data-state="active"]:hover { background-color: #be185d; }
+.cpc-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.cpc-kpi-card:hover { border-color: #9d174d; box-shadow: 0 4px 12px rgba(157,23,77,0.15); }
+.cpc-kpi-value { font-variant-numeric: tabular-nums; }
+.cpc-health-ring svg { transition: transform 0.3s ease; }
+.cpc-health-ring:hover svg { transform: scale(1.05); }
+.cpc-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.cpc-ring-value { font-variant-numeric: tabular-nums; }
+.cpc-product-badge, .cpc-status-badge { transition: transform 0.15s ease; }
+.cpc-product-badge:hover { transform: scale(1.05); }
+.cpc-cost-bar-fill { transition: width 0.6s ease; }
+.cpc-table-row { transition: background-color 0.15s ease; }
+.cpc-table-row:hover { background-color: rgba(157,23,77,0.04); }
+.cpc-chart-card { border: 1px solid #e5e7eb; }
+.cpc-insight-card { border: 1px solid #e5e7eb; }
+@keyframes cpc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cpc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes cpc-pulse-rose { 0%, 100% { box-shadow: 0 0 0 0 rgba(157,23,77,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(157,23,77,0.15); } }
+@keyframes cpc-glow-rose { 0%, 100% { box-shadow: 0 0 0 0 rgba(157,23,77,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(157,23,77,0.25); } }
+/* ── Sports Equipment Supply Chain (ssc-*) ── */
+.ssc-root { animation: ssc-fade-in 0.4s ease; }
+.ssc-tab-trigger[data-state="active"] { background-color: #1e3a5f; color: white; }
+.ssc-tab-trigger[data-state="active"]:hover { background-color: #1e40af; }
+.ssc-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ssc-kpi-card:hover { border-color: #1e3a5f; box-shadow: 0 4px 12px rgba(30,58,95,0.15); }
+.ssc-kpi-value { font-variant-numeric: tabular-nums; }
+.ssc-health-ring svg { transition: transform 0.3s ease; }
+.ssc-health-ring:hover svg { transform: scale(1.05); }
+.ssc-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.ssc-ring-value { font-variant-numeric: tabular-nums; }
+.ssc-product-badge, .ssc-status-badge { transition: transform 0.15s ease; }
+.ssc-product-badge:hover { transform: scale(1.05); }
+.ssc-cost-bar-fill { transition: width 0.6s ease; }
+.ssc-table-row { transition: background-color 0.15s ease; }
+.ssc-table-row:hover { background-color: rgba(30,58,95,0.04); }
+.ssc-chart-card { border: 1px solid #e5e7eb; }
+.ssc-insight-card { border: 1px solid #e5e7eb; }
+@keyframes ssc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ssc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ssc-pulse-navy { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,58,95,0.15); } }
+@keyframes ssc-glow-navy { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,58,95,0.25); } }

@@ -254,3 +254,5 @@ export { default as ScrapRecyclingLogisticsView } from './scrap-recycling-logist
 export { default as GemsJewellerySupplyChainView } from './gems-jewellery-supply-chain-view'
 export { default as MarbleGraniteLogisticsView } from './marble-granite-logistics-view'
 export { default as CashewProcessingLogisticsView } from './cashew-processing-logistics-view'
+export { default as CosmeticsPersonalCareLogisticsView } from './cosmetics-personal-care-logistics-view'
+export { default as SportsEquipmentSupplyChainView } from './sports-equipment-supply-chain-view'
