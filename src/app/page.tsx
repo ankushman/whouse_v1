@@ -200,6 +200,8 @@ import FreightLaneCommandView from "@/components/modules/freight-lane-command-vi
 import ThreePlPartnerHubView from "@/components/modules/3pl-partner-hub-view"
 import LogisticsNetworkCommandView from "@/components/modules/logistics-network-command-view"
 import TransportAnalyticsProView from "@/components/modules/transport-analytics-pro-view"
+import SmartLockerFleetView from "@/components/modules/smart-locker-fleet-view"
+import ColdChainMonitorProView from "@/components/modules/cold-chain-monitor-pro-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -399,6 +401,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "3pl-partner-hub": ThreePlPartnerHubView,
   "logistics-network-command": LogisticsNetworkCommandView,
   "transport-analytics-pro": TransportAnalyticsProView,
+  "smart-locker-fleet": SmartLockerFleetView,
+  "cold-chain-monitor-pro": ColdChainMonitorProView,
 }
 
 

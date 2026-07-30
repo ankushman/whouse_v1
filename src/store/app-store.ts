@@ -196,6 +196,8 @@ export const navItems: NavItem[] = [
   { id: '3pl-partner-hub', label: '3PL Partner Hub', icon: 'Link', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'supervisor'] },
   { id: 'logistics-network-command', label: 'Network Command', icon: 'Wifi', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'shift_lead'] },
   { id: 'transport-analytics-pro', label: 'Transport Analytics', icon: 'Rss', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'smart-locker-fleet', label: 'Smart Locker Fleet', icon: 'KeyRound', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'cold-chain-monitor-pro', label: 'Cold Chain Monitor', icon: 'Refrigerator', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
