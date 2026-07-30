@@ -280,7 +280,7 @@ export default function PickPackOptimizationView() {
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <input type="text" placeholder="Search by order ID, customer, SKU..." className="ppo-search w-full pl-9" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
-          <Badge variant="outline" className="text-xs">{filteredOrders.length} orders</Badge>
+          <Badge variant="outline" className="badge-interactive text-xs">{filteredOrders.length} orders</Badge>
         </div>
         <div className="ppo-table-wrap">
           <table className="ppo-table">
@@ -570,9 +570,9 @@ export default function PickPackOptimizationView() {
               <div className="ppo-drawer-section-title">Actions</div>
               <div className="flex flex-wrap gap-2">
                 <Button size="sm" className="bg-sky-600 text-white hover:bg-sky-700 gap-1"><ScanBarcode className="h-3.5 w-3.5" /> Assign Picker</Button>
-                <Button size="sm" variant="outline" className="gap-1"><PackageCheck className="h-3.5 w-3.5" /> Confirm Pick</Button>
-                <Button size="sm" variant="outline" className="gap-1"><Box className="h-3.5 w-3.5" /> Generate Pack</Button>
-                <Button size="sm" variant="outline" className="gap-1"><Truck className="h-3.5 w-3.5" /> Create Shipment</Button>
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1"><PackageCheck className="h-3.5 w-3.5" /> Confirm Pick</Button>
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1"><Box className="h-3.5 w-3.5" /> Generate Pack</Button>
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1"><Truck className="h-3.5 w-3.5" /> Create Shipment</Button>
               </div>
             </div>
           </div>
@@ -588,7 +588,7 @@ export default function PickPackOptimizationView() {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 shadow-lg"><Package className="h-5 w-5 text-white" /></div>
           <div><h1 className="text-lg font-bold text-gray-900 dark:text-gray-50">Pick & Pack Optimization</h1><p className="text-xs text-gray-500 dark:text-gray-400">Order picking, packing, and fulfillment efficiency management</p></div>
         </div>
-        <Badge className="bg-gradient-to-r from-sky-500 to-blue-600 text-white border-0">{fmtNum(orders.length)} Orders</Badge>
+        <Badge className="badge-interactive bg-gradient-to-r from-sky-500 to-blue-600 text-white border-0">{fmtNum(orders.length)} Orders</Badge>
       </div>
       <div className="flex gap-1 overflow-x-auto rounded-xl bg-gray-100 p-1 dark:bg-gray-800">
         {tabs.map((tab, idx) => (

@@ -62,19 +62,19 @@ import {
 function getRankBadge(rank: number) {
   if (rank === 1)
     return (
-      <Badge className="bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-100 gap-1">
+      <Badge className="badge-interactive bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-100 gap-1">
         <Crown className="size-3" /> 1st
       </Badge>
     )
   if (rank === 2)
     return (
-      <Badge className="bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-100 gap-1">
+      <Badge className="badge-interactive bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-100 gap-1">
         <Medal className="size-3" /> 2nd
       </Badge>
     )
   if (rank === 3)
     return (
-      <Badge className="bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-100 gap-1">
+      <Badge className="badge-interactive bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-100 gap-1">
         <Award className="size-3" /> 3rd
       </Badge>
     )
@@ -401,7 +401,7 @@ export function EmployeesView() {
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 stagger-children">
         <Card className="card-depth py-0 gap-0">
-          <CardContent className="flex items-center gap-4 py-4">
+          <CardContent className="glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Users className="size-5 text-muted-foreground" />
             </div>
@@ -417,7 +417,7 @@ export function EmployeesView() {
         </Card>
 
         <Card className="card-depth py-0 gap-0">
-          <CardContent className="flex items-center gap-4 py-4">
+          <CardContent className="glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/60">
               <UserCheck className="size-5 text-emerald-600" />
             </div>
@@ -433,7 +433,7 @@ export function EmployeesView() {
         </Card>
 
         <Card className="card-depth py-0 gap-0">
-          <CardContent className="flex items-center gap-4 py-4">
+          <CardContent className="glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <TrendingUp className="size-5 text-muted-foreground" />
             </div>
@@ -449,7 +449,7 @@ export function EmployeesView() {
         </Card>
 
         <Card className="card-depth py-0 gap-0">
-          <CardContent className="flex items-center gap-4 py-4">
+          <CardContent className="glass-subtle flex items-center gap-4 py-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <CalendarCheck className="size-5 text-muted-foreground" />
             </div>
@@ -471,7 +471,7 @@ export function EmployeesView() {
           )}
           onClick={() => setAttentionFilter(attentionFilter === "needs-attention" ? "all" : "needs-attention")}
         >
-          <CardContent className="flex items-center gap-4 py-4">
+          <CardContent className="glass-subtle flex items-center gap-4 py-4">
             <div className={cn(
               "flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors",
               needsAttentionCount > 0
@@ -674,7 +674,7 @@ export function EmployeesView() {
                     <GitCompareArrows className="size-4 text-blue-500" />
                     Top 5 Employees — Skill Comparison
                   </CardTitle>
-                  <Badge variant="outline" className="text-[10px]">Radar View</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px]">Radar View</Badge>
                 </div>
                 <CardDescription className="text-xs">
                   Multi-dimensional performance comparison across key metrics
@@ -715,7 +715,7 @@ export function EmployeesView() {
                     <BarChart3 className="size-4 text-emerald-500" />
                     Metric Breakdown — Top Performers
                   </CardTitle>
-                  <Badge variant="outline" className="text-[10px]">Grouped Bars</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px]">Grouped Bars</Badge>
                 </div>
                 <CardDescription className="text-xs">
                   Side-by-side comparison of productivity, attendance, and task completion rates
@@ -761,7 +761,7 @@ export function EmployeesView() {
                     <div key={wh.warehouse} className="rounded-lg border border-border/50 bg-muted/15 p-3 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-semibold">{wh.warehouse}</span>
-                        <Badge variant="outline" className="text-[9px]">
+                        <Badge variant="outline" className="badge-interactive text-[9px]">
                           {wh.count} staff
                         </Badge>
                       </div>

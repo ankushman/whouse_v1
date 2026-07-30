@@ -264,7 +264,7 @@ function SeverityBadge({ severity }: { severity: ClaimSeverity }) {
   const map: Record<ClaimSeverity, "destructive" | "warning" | "default" | "secondary"> = {
     critical: "destructive", major: "warning", moderate: "default", minor: "secondary",
   };
-  return <Badge variant={map[severity]} className="text-[10px] font-bold uppercase tracking-wider">{SEVERITY_LABELS[severity]}</Badge>;
+  return <Badge variant={map[severity]} className="badge-interactive text-[10px] font-bold uppercase tracking-wider">{SEVERITY_LABELS[severity]}</Badge>;
 }
 
 function StatusBadge({ status }: { status: ClaimStatus }) {
@@ -273,7 +273,7 @@ function StatusBadge({ status }: { status: ClaimStatus }) {
     submitted_insurer: "secondary", under_review: "secondary", approved: "success",
     partially_approved: "warning", rejected: "destructive", settled: "success", closed: "outline",
   };
-  return <Badge variant={map[status]} className="text-[10px]">{STATUS_LABELS[status]}</Badge>;
+  return <Badge variant={map[status]} className="badge-interactive text-[10px]">{STATUS_LABELS[status]}</Badge>;
 }
 
 function FormatINR(n: number): string {
@@ -644,7 +644,7 @@ export function CargoDamageClaimsView() {
                         <span className="font-mono text-sm text-white/70">{selectedClaim.claimNo}</span>
                         <SeverityBadge severity={selectedClaim.severity} />
                         <StatusBadge status={selectedClaim.status} />
-                        {selectedClaim.insuranceClaim && <Badge variant="secondary" className="text-[10px]">Insured</Badge>}
+                        {selectedClaim.insuranceClaim && <Badge variant="secondary" className="badge-interactive text-[10px]">Insured</Badge>}
                       </div>
                       <h2 className="text-lg font-bold text-white">{selectedClaim.title}</h2>
                       <p className="text-white/60 text-xs mt-1">{selectedClaim.description}</p>
@@ -669,10 +669,10 @@ export function CargoDamageClaimsView() {
                         <ClipboardCheck className="h-4 w-4 text-blue-500" /> Investigation
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="glass-subtle space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-muted-foreground">Status</span>
-                        <Badge variant={selectedClaim.investigation.status === "report_filed" ? "success" : selectedClaim.investigation.status === "not_started" ? "destructive" : "warning"} className="text-[10px]">
+                        <Badge variant={selectedClaim.investigation.status === "report_filed" ? "success" : selectedClaim.investigation.status === "not_started" ? "destructive" : "warning"} className="badge-interactive text-[10px]">
                           {selectedClaim.investigation.status.replace(/_/g, " ")}
                         </Badge>
                       </div>
@@ -712,7 +712,7 @@ export function CargoDamageClaimsView() {
                         <ShieldAlert className="h-4 w-4 text-purple-500" /> Insurance & Recovery
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3">
+                    <CardContent className="glass-subtle space-y-3">
                       {selectedClaim.insurerResponse ? (
                         <>
                           <div className="grid grid-cols-2 gap-2">

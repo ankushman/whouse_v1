@@ -379,7 +379,7 @@ export function ReturnsReverseLogisticsView() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 returns-kpi-enter">
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <RotateCcw className="h-3 w-3" />
@@ -393,7 +393,7 @@ export function ReturnsReverseLogisticsView() {
         </Card>
 
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Clock className="h-3 w-3" />
@@ -409,7 +409,7 @@ export function ReturnsReverseLogisticsView() {
         </Card>
 
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <AlertTriangle className="h-3 w-3" />
@@ -430,7 +430,7 @@ export function ReturnsReverseLogisticsView() {
         </Card>
 
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <DollarSign className="h-3 w-3" />
@@ -443,7 +443,7 @@ export function ReturnsReverseLogisticsView() {
         </Card>
 
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Recycle className="h-3 w-3" />
@@ -467,7 +467,7 @@ export function ReturnsReverseLogisticsView() {
         </Card>
 
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <ClipboardCheck className="h-3 w-3" />
@@ -495,10 +495,10 @@ export function ReturnsReverseLogisticsView() {
                   {trendInbound} inbound · {trendProcessed} processed · {Math.round((trendProcessed / Math.max(1, trendInbound)) * 100)}% throughput
                 </CardDescription>
               </div>
-              <Badge variant="outline" className="text-[10px]">last 30 days</Badge>
+              <Badge variant="outline" className="badge-interactive text-[10px]">last 30 days</Badge>
             </div>
           </CardHeader>
-          <CardContent className="pt-2">
+          <CardContent className="glass-subtle pt-2">
             <ChartContainer config={trendChartConfig} className="h-[180px] w-full">
               <AreaChart data={trend} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
                 <defs>
@@ -532,7 +532,7 @@ export function ReturnsReverseLogisticsView() {
             </CardTitle>
             <CardDescription className="text-[10px]">distribution by count</CardDescription>
           </CardHeader>
-          <CardContent className="pt-2">
+          <CardContent className="glass-subtle pt-2">
             <ChartContainer config={{}} className="h-[180px] w-full">
               <PieChart>
                 <Pie
@@ -581,12 +581,12 @@ export function ReturnsReverseLogisticsView() {
                 How returned items are being processed — and how much value is recovered
               </CardDescription>
             </div>
-            <Badge variant="outline" className="text-[10px]">
+            <Badge variant="outline" className="badge-interactive text-[10px]">
               {dispositionBreakdown.reduce((s, d) => s + d.value, 0).toLocaleString("en-IN")} recovered
             </Badge>
           </div>
         </CardHeader>
-        <CardContent className="pt-2">
+        <CardContent className="glass-subtle pt-2">
           <ChartContainer config={recoveryChartConfig} className="h-[160px] w-full">
             <BarChart data={dispositionBreakdown} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" strokeOpacity={0.3} vertical={false} />
@@ -632,11 +632,11 @@ export function ReturnsReverseLogisticsView() {
               </CardDescription>
             </div>
             <div className="flex items-center gap-1.5">
-              <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={handleRefresh}>
+              <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-xs gap-1" onClick={handleRefresh}>
                 <RefreshCw className="h-3 w-3" />
                 Refresh
               </Button>
-              <Button size="sm" variant="outline" className="h-7 text-xs gap-1" onClick={handleExport}>
+              <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-xs gap-1" onClick={handleExport}>
                 <Download className="h-3 w-3" />
                 Export
               </Button>
@@ -702,7 +702,7 @@ export function ReturnsReverseLogisticsView() {
         </CardHeader>
         <CardContent>
           <div className="rounded-md border max-h-[520px] overflow-y-auto">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader className="sticky top-0 bg-background z-10">
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="text-xs">RMA / Customer</TableHead>
@@ -727,7 +727,7 @@ export function ReturnsReverseLogisticsView() {
                           <div className="flex items-center gap-1.5">
                             <span className="text-xs font-mono font-semibold">{r.rma}</span>
                             {r.priority === "high" && (
-                              <Badge className="text-[9px] h-4 px-1 bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300">
+                              <Badge className="badge-interactive text-[9px] h-4 px-1 bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300">
                                 HIGH
                               </Badge>
                             )}
@@ -746,7 +746,7 @@ export function ReturnsReverseLogisticsView() {
                         <div className="flex flex-col">
                           <span className="text-xs font-medium">{r.partName}</span>
                           <span className="text-[10px] font-mono text-muted-foreground">{r.sku}</span>
-                          <Badge variant="outline" className="text-[9px] h-4 w-fit mt-0.5">{r.category}</Badge>
+                          <Badge variant="outline" className="badge-interactive text-[9px] h-4 w-fit mt-0.5">{r.category}</Badge>
                         </div>
                       </TableCell>
                       <TableCell className="text-right text-xs font-semibold text-number">{r.quantity}</TableCell>

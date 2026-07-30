@@ -949,7 +949,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   <DirIcon className="h-3 w-3 mr-1" />
                   {fmtPct(item.variancePct)}
                 </Badge>
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="badge-interactive text-xs">
                   ABC-{item.abc}
                 </Badge>
               </div>
@@ -1045,7 +1045,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                       <Wallet className="h-3.5 w-3.5" /> Planned Cost
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-1">
+                  <CardContent className="glass-subtle space-y-1">
                     <div className="text-xl font-bold">{fmtINRFull(item.plannedCost)}</div>
                     <div className="text-xs text-muted-foreground">{fmtNum(item.qtyPlanned)} units planned @ ₹{item.plannedUnitCost.toFixed(2)}/unit</div>
                   </CardContent>
@@ -1056,7 +1056,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                       <Receipt className="h-3.5 w-3.5" /> Actual Cost
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-1">
+                  <CardContent className="glass-subtle space-y-1">
                     <div className="text-xl font-bold">{fmtINRFull(item.actualCost)}</div>
                     <div className="text-xs text-muted-foreground">{fmtNum(item.qtyProduced)} units produced @ ₹{item.actualUnitCost.toFixed(2)}/unit</div>
                   </CardContent>
@@ -1067,7 +1067,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                       <Scale className="h-3.5 w-3.5" /> Variance Summary
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-1">
+                  <CardContent className="glass-subtle space-y-1">
                     <div className={cn("text-xl font-bold flex items-center gap-1", dirCfg.color)}>
                       <DirIcon className="h-4 w-4" />
                       {item.variance > 0 ? "+" : ""}{fmtINR(item.variance)}
@@ -1116,7 +1116,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                     <BookOpen className="h-4 w-4 text-purple-600" /> Traceability & Ownership
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                <CardContent className="glass-subtle grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                   <div className="space-y-1">
                     <div className="text-muted-foreground uppercase tracking-wide text-[10px]">Production Schedule</div>
                     <div className="font-mono font-medium text-blue-700 dark:text-blue-300">{item.psRef}</div>
@@ -1159,14 +1159,14 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                     <Factory className="h-4 w-4 text-emerald-600" /> Supplier Context
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                <CardContent className="glass-subtle grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
                   <div className="space-y-1">
                     <div className="text-muted-foreground uppercase tracking-wide text-[10px]">Supplier Name</div>
                     <div className="font-medium text-sm">{item.supplier}</div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-muted-foreground uppercase tracking-wide text-[10px]">Supplier Rating</div>
-                    <Badge className="bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300">
+                    <Badge className="badge-interactive bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300">
                       <Star className="h-3 w-3 mr-1 inline" />
                       {item.supplierRating.toFixed(1)} / 5.0
                     </Badge>
@@ -1191,7 +1191,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                 </CardHeader>
                 <CardContent>
                   <div className="overflow-x-auto rounded-md border">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow className="bg-muted/40">
                           <TableHead className="text-xs">Category</TableHead>
@@ -1239,8 +1239,8 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                         })}
                         <TableRow className="bg-muted/40 font-bold">
                           <TableCell>Total</TableCell>
-                          <TableCell className="text-right font-mono">{fmtINR(item.plannedCost)}</TableCell>
-                          <TableCell className="text-right font-mono">{fmtINR(item.actualCost)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono">{fmtINR(item.plannedCost)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono">{fmtINR(item.actualCost)}</TableCell>
                           <TableCell className={cn("text-right font-mono", dirCfg.color)}>
                             {item.variance > 0 ? "+" : ""}{fmtINR(item.variance)}
                           </TableCell>
@@ -1290,7 +1290,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Quantified impact of each variance driver, sorted by absolute value</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="glass-subtle space-y-2">
                   {drivers.length === 0 && (
                     <div className="text-center py-8 text-sm text-muted-foreground">
                       No significant drivers identified (variance below ₹1,000 threshold).
@@ -1347,7 +1347,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Ranked by risk score (probability × impact)</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="glass-subtle space-y-2">
                   {rootCauses.map((rc) => {
                     const cfg = CATEGORY_CONFIG[rc.category]
                     const Icon = cfg.icon
@@ -1412,7 +1412,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
           {activeTab === "mitigation" && (
             <div className="space-y-4">
               <Card className="border-emerald-200 dark:border-emerald-900 bg-emerald-50/30 dark:bg-emerald-950/10">
-                <CardContent className="pt-4 grid grid-cols-3 gap-3 text-xs">
+                <CardContent className="glass-subtle pt-4 grid grid-cols-3 gap-3 text-xs">
                   <div>
                     <div className="text-muted-foreground uppercase tracking-wide text-[10px]">Total Estimated Savings</div>
                     <div className="text-lg font-bold text-emerald-700 dark:text-emerald-300">{fmtINR(totalMitigationSavings)}</div>
@@ -1435,7 +1435,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Cost recovery actions with estimated savings and progress tracking</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="glass-subtle space-y-2">
                   {mitigationActions.map((action) => {
                     const typeIcons: Record<PCVMitigationAction["type"], typeof Wrench> = {
                       negotiation: IndianRupee,
@@ -1465,7 +1465,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                                 <Badge variant="outline" className={cn("text-[10px] capitalize", statusColors[action.status])}>
                                   {action.status.replace("-", " ")}
                                 </Badge>
-                                <Badge variant="outline" className="text-[10px] capitalize">
+                                <Badge variant="outline" className="badge-interactive text-[10px] capitalize">
                                   {action.type}
                                 </Badge>
                               </div>
@@ -1499,7 +1499,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                   <CardDescription className="text-xs">Multi-tier approval chain based on variance amount threshold</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="glass-subtle space-y-2">
                   {approvals.map((ap, idx) => {
                     const levelColors: Record<PCVApproval["level"], string> = {
                       supervisor: "text-blue-700 bg-blue-50 dark:bg-blue-950/30 dark:text-blue-300",
@@ -1558,7 +1558,7 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                 </CardHeader>
                 <CardContent>
                   <div className="overflow-x-auto rounded-md border">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow className="bg-muted/40">
                           <TableHead className="text-xs">JE ID</TableHead>
@@ -1589,8 +1589,8 @@ function CostVarianceDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                         ))}
                         <TableRow className="bg-muted/40 font-bold">
                           <TableCell colSpan={4}>Total</TableCell>
-                          <TableCell className="text-right font-mono text-emerald-700 dark:text-emerald-300">{fmtINR(totalDebit)}</TableCell>
-                          <TableCell className="text-right font-mono text-rose-700 dark:text-rose-300">{fmtINR(totalCredit)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-emerald-700 dark:text-emerald-300">{fmtINR(totalDebit)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-rose-700 dark:text-rose-300">{fmtINR(totalCredit)}</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
@@ -1885,7 +1885,7 @@ export function ProductionCostVarianceView() {
       <div className="grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         <Card className={cn("relative overflow-hidden pcv-kpi-enter border-blue-200 dark:border-blue-900", kpis.criticalCount > 0 && "border-rose-300 dark:border-rose-800")}>
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-400" />
-          <CardContent className="pt-4 pb-3 space-y-1">
+          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Hash className="h-3 w-3" /> Total Variance Records
@@ -1901,7 +1901,7 @@ export function ProductionCostVarianceView() {
 
         <Card className={cn("relative overflow-hidden pcv-kpi-enter", kpis.criticalCount > 0 && "border-rose-300 dark:border-rose-800")}>
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-rose-400" />
-          <CardContent className="pt-4 pb-3 space-y-1">
+          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <XCircle className="h-3 w-3" /> Critical Variances
@@ -1919,7 +1919,7 @@ export function ProductionCostVarianceView() {
 
         <Card className="relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-orange-400" />
-          <CardContent className="pt-4 pb-3 space-y-1">
+          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <IndianRupee className="h-3 w-3" /> Total Variance
@@ -1937,7 +1937,7 @@ export function ProductionCostVarianceView() {
 
         <Card className="relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400" />
-          <CardContent className="pt-4 pb-3 space-y-1">
+          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <PiggyBank className="h-3 w-3" /> Favorable Variance
@@ -1951,7 +1951,7 @@ export function ProductionCostVarianceView() {
 
         <Card className="relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-purple-400" />
-          <CardContent className="pt-4 pb-3 space-y-1">
+          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Percent className="h-3 w-3" /> Avg Variance %
@@ -1965,7 +1965,7 @@ export function ProductionCostVarianceView() {
 
         <Card className="relative overflow-hidden pcv-kpi-enter">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-cyan-400" />
-          <CardContent className="pt-4 pb-3 space-y-1">
+          <CardContent className="glass-subtle pt-4 pb-3 space-y-1">
             <div className="flex items-center justify-between">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Wallet className="h-3 w-3" /> Total Planned Cost
@@ -2166,7 +2166,7 @@ export function ProductionCostVarianceView() {
             </div>
           </div>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="glass-subtle pt-0">
           {/* Status tabs */}
           <div className="flex gap-1 flex-wrap mb-3">
             {statusTabs.map(tab => (
@@ -2190,7 +2190,7 @@ export function ProductionCostVarianceView() {
 
           {/* Master Table */}
           <div className="overflow-x-auto rounded-md border">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="bg-muted/40">
                   <TableHead className="text-xs">PCV ID / WO</TableHead>
@@ -2254,7 +2254,7 @@ export function ProductionCostVarianceView() {
                         <div className="text-[10px] text-muted-foreground font-mono">{item.partNo}</div>
                       </TableCell>
                       <TableCell>
-                        <Badge variant="outline" className="text-[10px]">{item.category}</Badge>
+                        <Badge variant="outline" className="badge-interactive text-[10px]">{item.category}</Badge>
                       </TableCell>
                       <TableCell>
                         <div className="text-xs">{item.warehouse}</div>
@@ -2272,8 +2272,8 @@ export function ProductionCostVarianceView() {
                           {riskCfg.label.split(" ")[0]}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-right font-mono text-blue-700 dark:text-blue-300">{fmtINR(item.plannedCost)}</TableCell>
-                      <TableCell className="text-right font-mono text-amber-700 dark:text-amber-300">{fmtINR(item.actualCost)}</TableCell>
+                      <TableCell className="numeric-cell text-right font-mono text-blue-700 dark:text-blue-300">{fmtINR(item.plannedCost)}</TableCell>
+                      <TableCell className="numeric-cell text-right font-mono text-amber-700 dark:text-amber-300">{fmtINR(item.actualCost)}</TableCell>
                       <TableCell className={cn("text-right font-mono font-medium", dirCfg.color)}>
                         <span className="inline-flex items-center gap-0.5">
                           <DirIcon className="h-3 w-3" />

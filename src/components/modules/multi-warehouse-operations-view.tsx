@@ -55,7 +55,7 @@ function fmtINR(n: number): string {
 
 function WHTypeBadge({ type }: { type: string }) {
   const idx = WH_TYPES.indexOf(type as typeof WH_TYPES[number])
-  return <Badge variant="outline" className="mwo-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">{idx >= 0 ? WH_EMOJI[idx] : "🏭"} {type}</Badge>
+  return <Badge variant="outline" className="badge-interactive mwo-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">{idx >= 0 ? WH_EMOJI[idx] : "🏭"} {type}</Badge>
 }
 
 function WHStatusBadge({ status }: { status: string }) {
@@ -90,7 +90,7 @@ function TransferStatusBadge({ status }: { status: string }) {
 function ResourceBadge({ name }: { name: string }) {
   const emoji = [" forklift", "🛒", "🔧", "📱", "📹", "❄️", "🔌", "🧯"]
   const idx = RESOURCES.indexOf(name as typeof RESOURCES[number])
-  return <Badge variant="outline" className="mwo-resource-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">{idx >= 0 ? emoji[idx] : "📦"} {name}</Badge>
+  return <Badge variant="outline" className="badge-interactive mwo-resource-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">{idx >= 0 ? emoji[idx] : "📦"} {name}</Badge>
 }
 
 function HealthBar({ score }: { score: number }) {
@@ -125,7 +125,7 @@ function CountTile({ count, label }: { count: number; label: string }) {
 }
 
 function CityBadge({ city }: { city: string }) {
-  return <Badge variant="outline" className="mwo-city-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"><MapPin className="h-3 w-3" /> {city}</Badge>
+  return <Badge variant="outline" className="badge-interactive mwo-city-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"><MapPin className="h-3 w-3" /> {city}</Badge>
 }
 
 function RouteTile({ from, to }: { from: string; to: string }) {
@@ -133,7 +133,7 @@ function RouteTile({ from, to }: { from: string; to: string }) {
 }
 
 function ManagerBadge({ name }: { name: string }) {
-  return <Badge variant="outline" className="mwo-manager-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"><Users className="h-3 w-3" /> {name}</Badge>
+  return <Badge variant="outline" className="badge-interactive mwo-manager-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"><Users className="h-3 w-3" /> {name}</Badge>
 }
 
 function ThroughputTile({ units }: { units: number }) {
@@ -235,7 +235,7 @@ export default function MultiWarehouseOperationsView() {
 
         <TabsContent value="0" className="mwo-tab-content space-y-4">
           <div className="mwo-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">{kpis.map((k, i) => (
-            <Card key={i} className={`mwo-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}><CardContent className="flex items-center gap-3 p-4"><div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div><div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div></CardContent></Card>
+            <Card key={i} className={`mwo-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}><CardContent className="glass-subtle flex items-center gap-3 p-4"><div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div><div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div></CardContent></Card>
           ))}</div>
           <div className="mwo-chart-grid grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card className="mwo-chart-card hover:shadow-lg transition-shadow duration-300"><CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Warehouse Capacity vs Utilization</CardTitle></CardHeader><CardContent><BarChart data={capBar}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} domain={[0, 100]} /><Tooltip /><Bar dataKey="Capacity" fill="#3b82f6" radius={[4, 4, 0, 0]} /><Bar dataKey="Utilization" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
@@ -245,7 +245,7 @@ export default function MultiWarehouseOperationsView() {
         </TabsContent>
 
         <TabsContent value="1" className="mwo-tab-content space-y-4">
-          <div className="flex gap-2 items-center"><div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search warehouses..." className="pl-9 h-9 text-sm" /></div><Badge variant="outline" className="text-xs">{filteredWH.length} records</Badge></div>
+          <div className="badge-interactive flex gap-2 items-center"><div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search warehouses..." className="pl-9 h-9 text-sm" /></div><Badge variant="outline" className="text-xs">{filteredWH.length} records</Badge></div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="mwo-wh-table w-full text-xs">
               <thead><tr className="border-b bg-gray-50 dark:bg-gray-800"><th className="p-2 text-left">Code</th><th className="p-2 text-left">Name</th><th className="p-2 text-left">Type</th><th className="p-2 text-left"><SortHeader field="status">Status</SortHeader></th><th className="p-2 text-left">City</th><th className="p-2 text-left"><SortHeader field="capacity">Capacity</SortHeader></th><th className="p-2 text-left">Throughput</th><th className="p-2 text-left">Health</th><th className="p-2 text-center">Action</th></tr></thead>
@@ -267,7 +267,7 @@ export default function MultiWarehouseOperationsView() {
         </TabsContent>
 
         <TabsContent value="2" className="mwo-tab-content space-y-4">
-          <div className="flex gap-2 items-center"><div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search transfers..." className="pl-9 h-9 text-sm" /></div><Badge variant="outline" className="text-xs">{filteredTransfers.length} transfers</Badge></div>
+          <div className="badge-interactive flex gap-2 items-center"><div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search transfers..." className="pl-9 h-9 text-sm" /></div><Badge variant="outline" className="text-xs">{filteredTransfers.length} transfers</Badge></div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="mwo-transfer-table w-full text-xs">
               <thead><tr className="border-b bg-gray-50 dark:bg-gray-800"><th className="p-2 text-left">ID</th><th className="p-2 text-left">Type</th><th className="p-2 text-left"><SortHeader field="status">Status</SortHeader></th><th className="p-2 text-left">Route</th><th className="p-2 text-left">Items</th><th className="p-2 text-left">ETA</th><th className="p-2 text-left">Cost</th><th className="p-2 text-left">Vehicle</th></tr></thead>
@@ -292,10 +292,10 @@ export default function MultiWarehouseOperationsView() {
             {data.resources.map((res) => (
               <Card key={res.id} className={`mwo-resource-card group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden ${res.status === "Needs Repair" ? "border-l-4 border-l-red-500" : res.status === "In Service" ? "border-l-4 border-l-blue-500" : "border-l-4 border-l-emerald-500"}`}>
                 <div className={`mwo-res-header p-3 ${res.status === "Needs Repair" ? "bg-gradient-to-r from-red-500 to-red-600" : res.status === "In Service" ? "bg-gradient-to-r from-blue-500 to-cyan-500" : "bg-gradient-to-r from-emerald-500 to-emerald-600"} text-white`}>
-                  <div className="flex items-center justify-between"><ResourceBadge name={res.resource} /><Badge variant="outline" className="text-[10px] px-2 py-0.5 border-white/30 text-white bg-white/10">{res.status}</Badge></div>
+                  <div className="badge-interactive flex items-center justify-between"><ResourceBadge name={res.resource} /><Badge variant="outline" className="text-[10px] px-2 py-0.5 border-white/30 text-white bg-white/10">{res.status}</Badge></div>
                   <p className="text-lg font-bold mt-1">{res.id}</p>
                 </div>
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Qty</span><CountTile count={res.quantity} label="units" /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Health</span><HealthBar score={res.health} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Next Service</span><span className="text-[10px] font-medium">{res.nextService}d</span></div>

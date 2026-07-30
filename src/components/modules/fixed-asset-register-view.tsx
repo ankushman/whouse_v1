@@ -1090,7 +1090,7 @@ export function FixedAssetRegisterView() {
               <Calendar className="w-3 h-3" />
               <span>FY 2025-26</span>
             </div>
-            <Button onClick={handleRefresh} variant="outline" size="sm" className="far-header-refresh">
+            <Button onClick={handleRefresh} variant="outline" size="sm" className="btn-outline-animate far-header-refresh">
               <RefreshCw className="w-3 h-3 mr-1" />
               Refresh
             </Button>

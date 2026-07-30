@@ -288,7 +288,7 @@ export default function PalletContainerView() {
             { label: "Active TEU", value: String(activeTEU), icon: Warehouse, color: "text-teal-600", bg: "bg-teal-50 dark:bg-teal-950/40", sub: `avg stuffing ${avgStuffing}%` },
           ].map(kpi => (
             <Card key={kpi.label} className="pcm-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="pcm-label">{kpi.label}</p>
@@ -426,7 +426,7 @@ export default function PalletContainerView() {
           </div>
         </div>
         <Card className="pcm-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="pcm-table">
                 <thead>
@@ -490,7 +490,7 @@ export default function PalletContainerView() {
           </div>
         </div>
         <Card className="pcm-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="pcm-table">
                 <thead>
@@ -530,7 +530,7 @@ export default function PalletContainerView() {
                           <span className="pcm-occ-label">{c.stuffingPercent}%</span>
                         </div>
                       </td>
-                      <td className="text-xs text-slate-600 dark:text-slate-400">{c.sealNo === "Pending" ? <Badge className="pcm-seal-pending">Pending</Badge> : <span className="text-[10px] font-mono">{c.sealNo}</span>}</td>
+                      <td className="badge-interactive text-xs text-slate-600 dark:text-slate-400">{c.sealNo === "Pending" ? <Badge className="pcm-seal-pending">Pending</Badge> : <span className="text-[10px] font-mono">{c.sealNo}</span>}</td>
                       <td><span className={`pcm-status-badge ${STATUS_COLORS[c.status] || ""}`}>{c.status}</span></td>
                       <td><Button size="sm" variant="ghost" className="pcm-action-btn" onClick={() => openDrawerContainer(c)}><Eye className="h-3.5 w-3.5" /></Button></td>
                     </tr>
@@ -589,7 +589,7 @@ export default function PalletContainerView() {
           <CardHeader className="pb-2">
             <CardTitle className="pcm-title"><MapPin className="h-4 w-4 text-sky-500" />Warehouse Asset Utilization</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="pcm-table">
                 <thead>
@@ -672,7 +672,7 @@ export default function PalletContainerView() {
             const inUse = ptPallets.filter(p => p.status === "In Use").length
             return (
               <Card key={pt.name} className="pcm-type-card border-slate-100 dark:border-slate-800">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="pcm-type-dot" style={{ background: pt.color }} />
                     <div>
@@ -733,8 +733,8 @@ export default function PalletContainerView() {
               </div>
               <div className="pcm-drawer-actions">
                 <Button size="sm" className="pcm-btn-primary"><ScanBarcode className="h-3.5 w-3.5 mr-1" /> Scan Pallet</Button>
-                <Button size="sm" variant="outline" className="pcm-btn-outline"><RotateCw className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
-                <Button size="sm" variant="outline" className="pcm-btn-outline"><ClipboardList className="h-3.5 w-3.5 mr-1" /> Audit</Button>
+                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><RotateCw className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
+                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><ClipboardList className="h-3.5 w-3.5 mr-1" /> Audit</Button>
               </div>
             </div>
           </div>
@@ -760,8 +760,8 @@ export default function PalletContainerView() {
             <div className="pcm-drawer-body">
               <div className="pcm-drawer-status-row">
                 <span className={`pcm-status-badge ${STATUS_COLORS[c.status] || ""}`}>{c.status}</span>
-                <Badge className="pcm-seal-badge">{c.sealNo === "Pending" ? "No Seal" : `Sealed`}</Badge>
-                {c.damageReported && <Badge className="pcm-dmg-badge">Damage Reported</Badge>}
+                <Badge className="badge-interactive pcm-seal-badge">{c.sealNo === "Pending" ? "No Seal" : `Sealed`}</Badge>
+                {c.damageReported && <Badge className="badge-interactive pcm-dmg-badge">Damage Reported</Badge>}
               </div>
               <div className="pcm-detail-grid">
                 <div className="pcm-detail-item"><p className="pcm-detail-label">Vessel</p><p className="pcm-detail-value">{c.vessel}</p></div>
@@ -786,8 +786,8 @@ export default function PalletContainerView() {
               </div>
               <div className="pcm-drawer-actions">
                 <Button size="sm" className="pcm-btn-primary"><QrCode className="h-3.5 w-3.5 mr-1" /> Scan Container</Button>
-                <Button size="sm" variant="outline" className="pcm-btn-outline"><ArrowRightLeft className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
-                <Button size="sm" variant="outline" className="pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> DO Copy</Button>
+                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><ArrowRightLeft className="h-3.5 w-3.5 mr-1" /> Transfer</Button>
+                <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> DO Copy</Button>
               </div>
             </div>
           </div>
@@ -806,8 +806,8 @@ export default function PalletContainerView() {
         </div>
         <div className="flex gap-2">
           <Button size="sm" className="pcm-btn-primary"><Plus className="h-3.5 w-3.5 mr-1" /> Add Pallet</Button>
-          <Button size="sm" variant="outline" className="pcm-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Audit Scan</Button>
-          <Button size="sm" variant="outline" className="pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Audit Scan</Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate pcm-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export</Button>
         </div>
       </div>
 

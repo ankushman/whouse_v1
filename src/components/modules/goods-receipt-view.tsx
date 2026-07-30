@@ -282,7 +282,7 @@ function KPICard({ title, value, icon: Icon, color, sub }: {
 }) {
   return (
     <Card className="grn-kpi-card">
-      <CardContent className="p-4 flex items-center gap-3">
+      <CardContent className="glass-subtle p-4 flex items-center gap-3">
         <div className={"grn-kpi-icon " + color}>
           <Icon className="h-5 w-5" />
         </div>
@@ -344,7 +344,7 @@ function PriorityBadge({ priority }: { priority: string }) {
 
 function QCMethodBadge({ method }: { method: string }) {
   const IconComp = QC_ICONS[method] || Eye
-  return <Badge className="grn-badge-qc-method"><IconComp className="h-3 w-3 mr-1" />{method}</Badge>
+  return <Badge className="badge-interactive grn-badge-qc-method"><IconComp className="h-3 w-3 mr-1" />{method}</Badge>
 }
 
 function QCResultBadge({ result }: { result: string }) {
@@ -583,7 +583,7 @@ export default function GoodsReceiptView() {
         <div className="flex items-center gap-2">
           <FileCheck className="h-5 w-5" style={{ color: TEAL }} />
           <h1 className="text-lg font-bold">Goods Receipt & GRN Management</h1>
-          <Badge className="grn-badge-teal">R135</Badge>
+          <Badge className="badge-interactive grn-badge-teal">R135</Badge>
         </div>
       </div>
 
@@ -697,11 +697,11 @@ export default function GoodsReceiptView() {
                 <SelectTrigger className="h-9 w-36 text-xs"><SelectValue placeholder="Priority" /></SelectTrigger>
                 <SelectContent>{["all", ...PRIORITIES].map((p) => <SelectItem key={p} value={p} className="text-xs">{p === "all" ? "All Priorities" : p}</SelectItem>)}</SelectContent>
               </Select>
-              <Button variant="outline" size="sm" className="h-9 text-xs" onClick={() => { setSearch(""); setStatusFilter("all"); setTypeFilter("all"); setPriorityFilter("all") }}><Filter className="h-3 w-3 mr-1" />Reset</Button>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-9 text-xs" onClick={() => { setSearch(""); setStatusFilter("all"); setTypeFilter("all"); setPriorityFilter("all") }}><Filter className="h-3 w-3 mr-1" />Reset</Button>
             </div>
 
             <div className="rounded-lg border overflow-auto">
-              <Table className="grn-table">
+              <Table className="table-hover-highlight grn-table">
                 <TableHeader><TableRow className="grn-table-header">
                   <TableHead className="text-[10px]">GRN#</TableHead>
                   <TableHead className="text-[10px]">PO Ref</TableHead>
@@ -739,8 +739,8 @@ export default function GoodsReceiptView() {
                       <TableCell><TypeBadge type={r.type} /></TableCell>
                       <TableCell><PriorityBadge priority={r.priority} /></TableCell>
                       <TableCell><StatusBadge status={r.status} /></TableCell>
-                      <TableCell className="text-xs text-right">₹{fmt(r.unitPrice)}</TableCell>
-                      <TableCell className="text-xs text-right font-medium">₹{fmt(r.total)}</TableCell>
+                      <TableCell className="numeric-cell text-xs text-right">₹{fmt(r.unitPrice)}</TableCell>
+                      <TableCell className="numeric-cell text-xs text-right font-medium">₹{fmt(r.total)}</TableCell>
                       <TableCell className="text-[10px]">{r.warehouse.city}</TableCell>
                       <TableCell className="text-xs">{r.receiver.name}</TableCell>
                       <TableCell className="text-[10px]">{r.date}</TableCell>
@@ -793,10 +793,10 @@ export default function GoodsReceiptView() {
               </Card>
             </div>
 
-            <Card className="grn-chart-card">
+            <Card className="card-crud-lift grn-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">QC Queue ({qcQueue.length} items)</CardTitle></CardHeader>
               <CardContent><div className="rounded-lg border overflow-auto">
-                <Table className="grn-table">
+                <Table className="table-hover-highlight grn-table">
                   <TableHeader><TableRow className="grn-table-header">
                     <TableHead className="text-[10px]">GRN#</TableHead>
                     <TableHead className="text-[10px]">Supplier</TableHead>
@@ -873,10 +873,10 @@ export default function GoodsReceiptView() {
               </Card>
             </div>
 
-            <Card className="grn-chart-card">
+            <Card className="card-crud-lift grn-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Invoice Matching Details ({invoiceData.length})</CardTitle></CardHeader>
               <CardContent><div className="rounded-lg border overflow-auto">
-                <Table className="grn-table">
+                <Table className="table-hover-highlight grn-table">
                   <TableHeader><TableRow className="grn-table-header">
                     <TableHead className="text-[10px]">Invoice#</TableHead>
                     <TableHead className="text-[10px]">GRN#</TableHead>
@@ -955,10 +955,10 @@ export default function GoodsReceiptView() {
               </Card>
             </div>
 
-            <Card className="grn-chart-card">
+            <Card className="card-crud-lift grn-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">Supplier Scorecard</CardTitle></CardHeader>
               <CardContent><div className="rounded-lg border overflow-auto">
-                <Table className="grn-table">
+                <Table className="table-hover-highlight grn-table">
                   <TableHeader><TableRow className="grn-table-header">
                     <TableHead className="text-[10px]">Supplier</TableHead>
                     <TableHead className="text-[10px]">City</TableHead>

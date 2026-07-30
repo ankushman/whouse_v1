@@ -194,7 +194,7 @@ function RefundMethodBadge({ method }: { method: string }) {
     UPI: "⚡", NEFT: "🏦", Wallet: "👛", "Credit Note": "📝", "Bank Transfer": "💳",
   }
   return (
-    <Badge variant="outline" className="rpc-refund-method-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+    <Badge variant="outline" className="badge-interactive rpc-refund-method-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
       {iconMap[method] || "💰"} {method}
     </Badge>
   )
@@ -437,7 +437,7 @@ export default function ReturnsProcessingCenterView() {
           <div className="rpc-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`rpc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -464,7 +464,7 @@ export default function ReturnsProcessingCenterView() {
         <TabsContent value="1" className="rpc-tab-content space-y-4">
           <div className="flex gap-2 items-center flex-wrap">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search returns..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredReturns.length} returns</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredReturns.length} returns</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="rpc-return-table w-full text-xs">
@@ -493,7 +493,7 @@ export default function ReturnsProcessingCenterView() {
         <TabsContent value="2" className="rpc-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search inspections..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredInspections.length} inspections</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredInspections.length} inspections</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="rpc-inspect-table w-full text-xs">
@@ -530,9 +530,9 @@ export default function ReturnsProcessingCenterView() {
                     </div>
                     <p className="text-2xl font-bold mt-1">{fmtINR(rfd.amount)}</p>
                   </div>
-                  <CardContent className="p-3 space-y-2">
+                  <CardContent className="glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Method</span><RefundMethodBadge method={rfd.method} /></div>
-                    <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Original Payment</span><Badge variant="outline" className="text-[10px] px-2 py-0.5 font-medium bg-gray-50 text-gray-600 dark:bg-gray-800 dark:text-gray-400">{rfd.originalPayment}</Badge></div>
+                    <div className="badge-interactive flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Original Payment</span><Badge variant="outline" className="text-[10px] px-2 py-0.5 font-medium bg-gray-50 text-gray-600 dark:bg-gray-800 dark:text-gray-400">{rfd.originalPayment}</Badge></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Processing Time</span><ResolutionTimeTile days={rfd.processingTime} /></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Satisfaction</span><SatisfactionBar rating={rfd.satisfaction} /></div>
                   </CardContent>
@@ -546,7 +546,7 @@ export default function ReturnsProcessingCenterView() {
         <TabsContent value="4" className="rpc-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search dispositions..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredDispositions.length} items</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredDispositions.length} items</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="rpc-disposition-table w-full text-xs">
@@ -580,7 +580,7 @@ export default function ReturnsProcessingCenterView() {
               { label: "Resale Recovery", value: fmtINR(data.dispositions.filter(x => x.type.startsWith("Resell")).reduce((s, d) => s + d.listedPrice, 0)), icon: CheckCircle, color: "text-blue-600", bg: "bg-blue-50 dark:bg-blue-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`rpc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -623,7 +623,7 @@ export default function ReturnsProcessingCenterView() {
                     <div className="rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Status</p><ReturnStatusBadge status={selectedReturn.status} /></div>
                     <div className="rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Reason</p><ReturnReasonBadge reason={selectedReturn.reason} /></div>
                     <div className="rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Platform</p><PlatformBadge platform={selectedReturn.platform} /></div>
-                    <div className="rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Category</p><Badge variant="outline" className="text-[10px] px-2 py-0.5 font-medium">{selectedReturn.category}</Badge></div>
+                    <div className="badge-interactive rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Category</p><Badge variant="outline" className="text-[10px] px-2 py-0.5 font-medium">{selectedReturn.category}</Badge></div>
                     <div className="rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Value</p><ReturnTile amount={selectedReturn.value} /></div>
                     <div className="rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Customer</p><p className="text-[11px] font-semibold">{selectedReturn.customer}</p></div>
                     <div className="rpc-detail-item p-3 rounded-lg bg-gray-50 dark:bg-gray-800"><p className="text-[10px] text-gray-500 dark:text-gray-400">Order ID</p><p className="text-[11px] font-mono font-semibold">{selectedReturn.orderId}</p></div>

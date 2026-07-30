@@ -198,7 +198,7 @@ export function EnergySustainabilityView() {
           const isImproving = kpi.change < 0 || (kpi.label === "Water Reuse" || kpi.label === "Waste Diversion" || kpi.label === "Renewable Share") && kpi.change > 0
           return (
             <Card key={kpi.id} className="esg-kpi-card kpi-card-tilt overflow-hidden">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="flex items-start justify-between">
                   <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center">
                     <Icon className="h-3.5 w-3.5 text-primary" />
@@ -234,12 +234,12 @@ export function EnergySustainabilityView() {
       {/* Top summary cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card className="energy-card-hero overflow-hidden">
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
                 <Zap className="h-5 w-5 text-amber-500" />
-                <Badge variant="outline" className="text-[10px]">
+                <Badge variant="outline" className="badge-interactive text-[10px]">
                   <Activity className="h-2.5 w-2.5 mr-1 text-emerald-500 animate-pulse" />
                   Live
                 </Badge>
@@ -261,12 +261,12 @@ export function EnergySustainabilityView() {
         </Card>
 
         <Card className="carbon-card-hero overflow-hidden">
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
                 <Leaf className="h-5 w-5 text-emerald-500" />
-                <Badge variant="outline" className="border-emerald-500/40 text-emerald-600 text-[10px]">
+                <Badge variant="outline" className="badge-interactive border-emerald-500/40 text-emerald-600 text-[10px]">
                   <TrendingDown className="h-2.5 w-2.5 mr-0.5" />
                   -12%
                 </Badge>
@@ -287,12 +287,12 @@ export function EnergySustainabilityView() {
         </Card>
 
         <Card className="water-card-hero overflow-hidden">
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
                 <Droplets className="h-5 w-5 text-blue-500" />
-                <Badge variant="outline" className="text-[10px]">
+                <Badge variant="outline" className="badge-interactive text-[10px]">
                   <TrendingUp className="h-2.5 w-2.5 mr-0.5 text-emerald-500" />
                   +6%
                 </Badge>
@@ -312,12 +312,12 @@ export function EnergySustainabilityView() {
         </Card>
 
         <Card className="efficiency-card-hero overflow-hidden">
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative">
               <div className="flex items-center justify-between">
                 <Gauge className="h-5 w-5 text-purple-500" />
-                <Badge variant="outline" className="text-[10px]">6 sites</Badge>
+                <Badge variant="outline" className="badge-interactive text-[10px]">6 sites</Badge>
               </div>
               <div className="mt-2 text-3xl font-bold">{avgEfficiency}%</div>
               <div className="text-xs text-muted-foreground">Avg efficiency score</div>
@@ -482,11 +482,11 @@ export function EnergySustainabilityView() {
                   setDrawerOpen(true)
                 }}
               >
-                <CardContent className="p-3.5">
+                <CardContent className="glass-subtle p-3.5">
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="text-sm font-semibold">{site.name}</div>
-                      <Badge variant="outline" className="text-[10px] mt-0.5 capitalize">{site.type.replace("-", " ")}</Badge>
+                      <Badge variant="outline" className="badge-interactive text-[10px] mt-0.5 capitalize">{site.type.replace("-", " ")}</Badge>
                     </div>
                     <div className="flex items-center gap-1">
                       {site.trend === "up" ? (
@@ -634,12 +634,12 @@ export function EnergySustainabilityView() {
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium">{m.year}</span>
                     {m.current && (
-                      <Badge variant="outline" className="text-[10px] border-primary/40 text-primary">
+                      <Badge variant="outline" className="badge-interactive text-[10px] border-primary/40 text-primary">
                         IN PROGRESS
                       </Badge>
                     )}
                     {m.done && (
-                      <Badge variant="outline" className="text-[10px] border-emerald-500/40 text-emerald-600">
+                      <Badge variant="outline" className="badge-interactive text-[10px] border-emerald-500/40 text-emerald-600">
                         ACHIEVED
                       </Badge>
                     )}

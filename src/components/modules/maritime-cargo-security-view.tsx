@@ -562,7 +562,7 @@ function ScanDrawer({ data, fields, toast }: { data: ScanRecord; fields: { label
           <Button size="sm" className="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white" onClick={() => toast.success("Scan report downloaded")}>
             <Download className="h-4 w-4 mr-1" /> Report
           </Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Re-scan initiated")}>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Re-scan initiated")}>
             <ScanLine className="h-4 w-4 mr-1" /> Re-scan
           </Button>
           <Button size="sm" variant="outline" onClick={() => toast.success("Flag escalated")}>
@@ -612,7 +612,7 @@ function FeedDrawer({ data, fields, toast }: { data: SurveillanceFeed; fields: {
           <Button size="sm" className="flex-1 bg-slate-700 hover:bg-slate-800 text-white" onClick={() => toast.success("Live feed opened")}>
             <Eye className="h-4 w-4 mr-1" /> Live View
           </Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Recording snapshot saved")}>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Recording snapshot saved")}>
             <Download className="h-4 w-4 mr-1" /> Snapshot
           </Button>
           <Button size="sm" variant="outline" onClick={() => toast.success("PTZ control activated")}>
@@ -667,7 +667,7 @@ function ZoneDrawer({ data, fields, toast }: { data: SecurityZone; fields: { lab
           <Button size="sm" className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white" onClick={() => toast.success("Patrol dispatched")}>
             <ShieldHalf className="h-4 w-4 mr-1" /> Patrol
           </Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Zone audit started")}>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Zone audit started")}>
             <FileSearch className="h-4 w-4 mr-1" /> Audit
           </Button>
           <Button size="sm" variant="outline" onClick={() => toast.success("Alert issued for zone")}>
@@ -718,7 +718,7 @@ function IncidentDrawer({ data, fields, toast }: { data: Incident; fields: { lab
           <Button size="sm" className="flex-1 bg-red-600 hover:bg-red-700 text-white" onClick={() => toast.success("Incident escalated")}>
             <Siren className="h-4 w-4 mr-1" /> Escalate
           </Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Investigation assigned")}>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Investigation assigned")}>
             <FileSearch className="h-4 w-4 mr-1" /> Investigate
           </Button>
           <Button size="sm" variant="outline" onClick={() => toast.success("Incident resolved")}>
@@ -769,7 +769,7 @@ function InspectionDrawer({ data, fields, toast }: { data: Inspection; fields: {
           <Button size="sm" className="flex-1 bg-teal-600 hover:bg-teal-700 text-white" onClick={() => toast.success("Inspection report generated")}>
             <Download className="h-4 w-4 mr-1" /> Report
           </Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Re-inspection scheduled")}>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Re-inspection scheduled")}>
             <ScanLine className="h-4 w-4 mr-1" /> Re-inspect
           </Button>
           <Button size="sm" variant="outline" onClick={() => toast.success("Quarantine hold placed")}>
@@ -917,7 +917,7 @@ export default function MaritimeSecurityView() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mcs-kpi-grid">
             {kpis.map((kpi, i) => (
               <Card key={i} className="mcs-kpi-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
-                <CardContent className="p-4 flex items-center gap-3">
+                <CardContent className="glass-subtle p-4 flex items-center gap-3">
                   <div className={cn("p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800", kpi.color)}>
                     <kpi.icon className="h-5 w-5" />
                   </div>
@@ -1115,7 +1115,7 @@ export default function MaritimeSecurityView() {
                 className="mcs-feed-card border-0 shadow-sm hover:shadow-md transition-all cursor-pointer"
                 onClick={() => openDrawer("feed", feed)}
               >
-                <CardContent className="p-3">
+                <CardContent className="glass-subtle p-3">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <Camera className="h-4 w-4 text-slate-400" />
@@ -1174,7 +1174,7 @@ export default function MaritimeSecurityView() {
                 className="mcs-zone-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer"
                 onClick={() => openDrawer("zone", zone)}
               >
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <h3 className="font-bold text-sm">{zone.zoneName}</h3>

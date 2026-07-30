@@ -202,7 +202,7 @@ export default function ReturnsQualityView() {
             { label: "Auto-Approved", value: String(items.filter(it => it.inspectionStatus === "Auto-Approved").length), icon: CheckCircle2, color: "text-green-600", bg: "bg-green-50 dark:bg-green-950/40", sub: "no defect found" },
           ].map(kpi => (
             <Card key={kpi.label} className="rq-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="rq-label">{kpi.label}</p>
@@ -337,7 +337,7 @@ export default function ReturnsQualityView() {
           </div>
         </div>
         <Card className="rq-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="rq-table">
                 <thead>
@@ -359,7 +359,7 @@ export default function ReturnsQualityView() {
                         <p className="text-[10px] text-slate-500">{it.sku}</p>
                       </td>
                       <td className="text-xs text-slate-600 dark:text-slate-400">{it.customer}</td>
-                      <td><Badge className="rq-platform-badge">{it.platform}</Badge></td>
+                      <td><Badge className="badge-interactive rq-platform-badge">{it.platform}</Badge></td>
                       <td className="text-xs text-slate-600 dark:text-slate-400">{it.returnReason}</td>
                       <td className="text-xs text-slate-500 max-w-[100px] truncate">{it.defectType}</td>
                       <td><span className={`rq-severity-badge ${SEVERITY_COLORS[it.severity] || ""}`}>{it.severity}</span></td>
@@ -430,7 +430,7 @@ export default function ReturnsQualityView() {
           <CardHeader className="pb-2">
             <CardTitle className="rq-title"><ClipboardCheck className="h-4 w-4 text-amber-500" />Grade Summary Table</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="rq-table">
                 <thead>
@@ -521,7 +521,7 @@ export default function ReturnsQualityView() {
           <CardHeader className="pb-2">
             <CardTitle className="rq-title"><ArrowLeftRight className="h-4 w-4 text-indigo-500" />Inspector Performance</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="rq-table">
                 <thead>
@@ -573,7 +573,7 @@ export default function ReturnsQualityView() {
             { label: "Net Recovery", value: `₹${((totalResale - totalLoss) / 100000).toFixed(2)}L`, icon: DollarSign, color: totalResale >= totalLoss ? "text-green-600" : "text-orange-600", bg: totalResale >= totalLoss ? "bg-green-50 dark:bg-green-950/40" : "bg-orange-50 dark:bg-orange-950/40" },
           ].map(kpi => (
             <Card key={kpi.label} className="rq-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="rq-label">{kpi.label}</p>
@@ -671,8 +671,8 @@ export default function ReturnsQualityView() {
             </div>
             <div className="rq-drawer-actions">
               <Button size="sm" className="rq-btn-primary"><ClipboardCheck className="h-3.5 w-3.5 mr-1" /> Complete Inspection</Button>
-              <Button size="sm" variant="outline" className="rq-btn-outline"><Camera className="h-3.5 w-3.5 mr-1" /> Add Photos</Button>
-              <Button size="sm" variant="outline" className="rq-btn-outline"><QrCode className="h-3.5 w-3.5 mr-1" /> Scan SKU</Button>
+              <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><Camera className="h-3.5 w-3.5 mr-1" /> Add Photos</Button>
+              <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><QrCode className="h-3.5 w-3.5 mr-1" /> Scan SKU</Button>
             </div>
           </div>
         </div>
@@ -689,8 +689,8 @@ export default function ReturnsQualityView() {
         </div>
         <div className="flex gap-2">
           <Button size="sm" className="rq-btn-primary"><Plus className="h-3.5 w-3.5 mr-1" /> New Inspection</Button>
-          <Button size="sm" variant="outline" className="rq-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Bulk Grade</Button>
-          <Button size="sm" variant="outline" className="rq-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export Report</Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><RefreshCw className="h-3.5 w-3.5 mr-1" /> Bulk Grade</Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate rq-btn-outline"><Download className="h-3.5 w-3.5 mr-1" /> Export Report</Button>
         </div>
       </div>
 

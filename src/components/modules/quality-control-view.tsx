@@ -250,8 +250,8 @@ export default function QualityControlView() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Badge className="qci-badge-trend qci-badge-trend-up">{totalInspections} Inspections</Badge>
-          <Badge className="qci-badge-trend qci-badge-trend-up">{inspectors.length} Inspectors</Badge>
+          <Badge className="badge-interactive qci-badge-trend qci-badge-trend-up">{totalInspections} Inspections</Badge>
+          <Badge className="badge-interactive qci-badge-trend qci-badge-trend-up">{inspectors.length} Inspectors</Badge>
         </div>
       </div>
 
@@ -269,7 +269,7 @@ export default function QualityControlView() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {KPIS.map((kpi) => (
                 <Card key={kpi.label} className="qci-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 qci-kpi-icon" />
                       <span className={cn("qci-trend-badge", kpi.trend === "up" ? "qci-trend-up" : "qci-trend-down")}>
@@ -414,7 +414,7 @@ export default function QualityControlView() {
                 const cnt = inspections.filter((i) => i.status === s).length
                 return (
                   <Card key={s} className="qci-stat-mini cursor-pointer" onClick={() => setStatusFilter(s)}>
-                    <CardContent className="p-2 text-center">
+                    <CardContent className="glass-subtle p-2 text-center">
                       <div className="text-sm font-bold">{cnt}</div>
                       <div className="text-[9px] opacity-60 truncate">{s}</div>
                     </CardContent>
@@ -423,10 +423,10 @@ export default function QualityControlView() {
               })}
             </div>
 
-            <Card className="qci-table-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift qci-table-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="qci-table-header">
                         <TableHead className="qci-th">ID</TableHead>
@@ -449,17 +449,17 @@ export default function QualityControlView() {
                           <TableCell className="qci-td text-xs">{insp.type}</TableCell>
                           <TableCell className="qci-td text-xs font-medium">{insp.productName}</TableCell>
                           <TableCell className="qci-td text-xs">{insp.supplier}</TableCell>
-                          <TableCell className="qci-td text-xs"><Badge className="qci-standard-badge text-[10px]">{insp.standard}</Badge></TableCell>
+                          <TableCell className="badge-interactive qci-td text-xs"><Badge className="qci-standard-badge text-[10px]">{insp.standard}</Badge></TableCell>
                           <TableCell className="qci-td text-xs">{insp.samplingPlan}</TableCell>
-                          <TableCell className="qci-td text-xs font-mono">{insp.sampleSize}/{insp.totalLot}</TableCell>
+                          <TableCell className="numeric-cell qci-td text-xs font-mono">{insp.sampleSize}/{insp.totalLot}</TableCell>
                           <TableCell className="qci-td text-xs">
                             <span className="text-emerald-600">{insp.passCount}</span>
                             <span className="opacity-40"> / </span>
                             <span className="text-red-500">{insp.failCount}</span>
                           </TableCell>
                           <TableCell className={cn("qci-td text-xs font-bold", insp.defectRate > 5 ? "text-red-500" : insp.defectRate > 2 ? "text-amber-500" : "text-emerald-600")}>{insp.defectRate}%</TableCell>
-                          <TableCell className="qci-td text-xs font-mono">{insp.score !== null ? insp.score : "—"}</TableCell>
-                          <TableCell className="qci-td"><Badge className={cn(STATUS_COLORS[insp.status], "text-[10px]")}>{insp.status}</Badge></TableCell>
+                          <TableCell className="numeric-cell qci-td text-xs font-mono">{insp.score !== null ? insp.score : "—"}</TableCell>
+                          <TableCell className="badge-interactive qci-td"><Badge className={cn(STATUS_COLORS[insp.status], "text-[10px]")}>{insp.status}</Badge></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -495,7 +495,7 @@ export default function QualityControlView() {
                 { label: "Resolved", value: String(defects.filter((d) => d.status === "Resolved" || d.status === "Closed").length), color: "qci-sum-card-green" },
               ].map((c) => (
                 <Card key={c.label} className={c.color}>
-                  <CardContent className="p-3 text-center">
+                  <CardContent className="glass-subtle p-3 text-center">
                     <div className="text-lg font-bold">{c.value}</div>
                     <div className="text-xs opacity-70">{c.label}</div>
                   </CardContent>
@@ -517,10 +517,10 @@ export default function QualityControlView() {
               </CardContent>
             </Card>
 
-            <Card className="qci-table-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift qci-table-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="qci-table-header">
                         <TableHead className="qci-th">ID</TableHead>
@@ -539,11 +539,11 @@ export default function QualityControlView() {
                           <TableCell className="qci-td font-mono text-xs">{d.id}</TableCell>
                           <TableCell className="qci-td font-mono text-xs">{d.inspectionId}</TableCell>
                           <TableCell className="qci-td text-xs">{d.category}</TableCell>
-                          <TableCell className="qci-td"><Badge className={cn(SEVERITY_COLORS[d.severity], "text-[10px]")}>{d.severity}</Badge></TableCell>
+                          <TableCell className="badge-interactive qci-td"><Badge className={cn(SEVERITY_COLORS[d.severity], "text-[10px]")}>{d.severity}</Badge></TableCell>
                           <TableCell className="qci-td text-xs max-w-[180px] truncate">{d.description}</TableCell>
                           <TableCell className="qci-td text-xs max-w-[150px] truncate">{d.rootCause}</TableCell>
                           <TableCell className="qci-td text-xs max-w-[150px] truncate">{d.correctiveAction || "—"}</TableCell>
-                          <TableCell className="qci-td"><Badge className={cn(STATUS_COLORS[d.status], "text-[10px]")}>{d.status}</Badge></TableCell>
+                          <TableCell className="badge-interactive qci-td"><Badge className={cn(STATUS_COLORS[d.status], "text-[10px]")}>{d.status}</Badge></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -559,7 +559,7 @@ export default function QualityControlView() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {inspectors.map((insp) => (
                 <Card key={insp.id} className="qci-inspector-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="qci-inspector-avatar">{insp.avatar}</div>
@@ -570,7 +570,7 @@ export default function QualityControlView() {
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-xs">
-                      <div className="flex items-center gap-1"><BadgeCheck className="h-3 w-3 text-sky-500" /><span>Inspections: {insp.inspections}</span></div>
+                      <div className="badge-interactive flex items-center gap-1"><BadgeCheck className="h-3 w-3 text-sky-500" /><span>Inspections: {insp.inspections}</span></div>
                       <div className="flex items-center gap-1"><Beaker className="h-3 w-3 text-amber-500" /><span>Dept: {insp.dept}</span></div>
                     </div>
                     <div className="mt-2 flex items-center gap-1">
@@ -624,7 +624,7 @@ export default function QualityControlView() {
                 { label: "Inspector Utilization", value: `${rInt(70, 92)}%`, sub: "Productive hours" },
               ].map((k) => (
                 <Card key={k.label} className="qci-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="qci-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="qci-kpi-label text-xs">{k.label}</div>
                     <div className="qci-kpi-sub text-xs">{k.sub}</div>
@@ -732,10 +732,12 @@ export default function QualityControlView() {
                 </Button>
               </div>
               <div className="flex items-center gap-2 mt-3">
+<div className="chip-group">
                 <Badge className={cn(STATUS_COLORS[selectedInsp.status])}>{selectedInsp.status}</Badge>
-                <Badge className="qci-badge-trend qci-badge-trend-up">{selectedInsp.type}</Badge>
+                <Badge className="badge-interactive qci-badge-trend qci-badge-trend-up">{selectedInsp.type}</Badge>
                 <Badge className={cn(PRIORITY_COLORS[selectedInsp.priority], "text-white")}>{selectedInsp.priority}</Badge>
-                {selectedInsp.score !== null && <Badge className="qci-score-badge text-white">{selectedInsp.score}/100</Badge>}
+                {selectedInsp.score !== null && <Badge className="badge-interactive qci-score-badge text-white">{selectedInsp.score}/100</Badge>}
+</div>
               </div>
             </div>
 

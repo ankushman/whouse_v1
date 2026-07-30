@@ -522,8 +522,8 @@ function CertDrawer({ data, fields, toast }: { data: ComplianceCert; fields: { l
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-amber-500 hover:bg-amber-600 text-white" onClick={() => toast.success("Certificate downloaded")}><Download className="h-4 w-4 mr-1" /> Download</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Renewal initiated")}><ClipboardList className="h-4 w-4 mr-1" /> Renew</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Audit scheduled")}><FileSearch className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Renewal initiated")}><ClipboardList className="h-4 w-4 mr-1" /> Renew</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Audit scheduled")}><FileSearch className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -571,8 +571,8 @@ function DeviationDrawer({ data, fields, toast }: { data: DeviationRecord; field
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-red-600 hover:bg-red-700 text-white" onClick={() => toast.success("CAPA initiated")}><AlertTriangle className="h-4 w-4 mr-1" /> CAPA</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Investigation assigned")}><FileSearch className="h-4 w-4 mr-1" /> Investigate</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Deviation resolved")}><CheckCircle2 className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Investigation assigned")}><FileSearch className="h-4 w-4 mr-1" /> Investigate</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Deviation resolved")}><CheckCircle2 className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -626,8 +626,8 @@ function AuditDrawer({ data, fields, toast }: { data: AuditRecord; fields: { lab
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white" onClick={() => toast.success("Audit report generated")}><Download className="h-4 w-4 mr-1" /> Report</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Corrective actions assigned")}><ClipboardList className="h-4 w-4 mr-1" /> Actions</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Follow-up scheduled")}><ScanLine className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Corrective actions assigned")}><ClipboardList className="h-4 w-4 mr-1" /> Actions</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Follow-up scheduled")}><ScanLine className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -675,8 +675,8 @@ function CalibrationDrawer({ data, fields, toast }: { data: CalibrationRecord; f
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => toast.success("Calibration scheduled")}><ScanLine className="h-4 w-4 mr-1" /> Calibrate</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Certificate downloaded")}><Download className="h-4 w-4 mr-1" /> Cert</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Sensor replaced")}><TestTubes className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Certificate downloaded")}><Download className="h-4 w-4 mr-1" /> Cert</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Sensor replaced")}><TestTubes className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -800,7 +800,7 @@ export default function ColdChainComplianceView() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 ccc-kpi-grid">
             {kpis.map((kpi, i) => (
               <Card key={i} className="ccc-kpi-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default">
-                <CardContent className="p-4 flex items-center gap-3">
+                <CardContent className="glass-subtle p-4 flex items-center gap-3">
                   <div className={cn("p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800", kpi.color)}>
                     <kpi.icon className="h-5 w-5" />
                   </div>
@@ -1000,7 +1000,7 @@ export default function ColdChainComplianceView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredTempLogs.slice(0, 18).map((log) => (
               <Card key={log.id} className="ccc-zone-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer" onClick={() => setDrawerOpen(false)}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <h3 className="font-bold text-sm">{log.zone}</h3>

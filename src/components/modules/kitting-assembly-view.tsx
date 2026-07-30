@@ -317,7 +317,7 @@ export default function KittingAssemblyView() {
               </div>
 
               <div className="kit-table-wrapper overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <Table><TableHeader><TableRow>
+                <Table className="table-hover-highlight"><TableHeader><TableRow>
                   <TableHead className="text-[10px]">Kit ID</TableHead><TableHead className="text-[10px]">Template</TableHead>
                   <TableHead className="text-[10px]">Type</TableHead><TableHead className="text-[10px]">Qty</TableHead>
                   <TableHead className="text-[10px]">Priority</TableHead><TableHead className="text-[10px]">Status</TableHead>
@@ -331,7 +331,7 @@ export default function KittingAssemblyView() {
                     <TableRow key={k.id} className={cn("text-xs", k.status === "In Assembly" ? "kit-row-assembly" : k.status === "QC Check" ? "kit-row-qc" : "")}>
                       <TableCell className="font-mono font-medium">{k.id}</TableCell>
                       <TableCell className="truncate max-w-[140px]">{k.template.name.split("(")[0]}</TableCell>
-                      <TableCell><Badge className="text-[9px] px-1.5 py-0 kit-badge-type">{k.type.split(" ")[0]}</Badge></TableCell>
+                      <TableCell><Badge className="badge-interactive text-[9px] px-1.5 py-0 kit-badge-type">{k.type.split(" ")[0]}</Badge></TableCell>
                       <TableCell className="tabular-nums">{k.qty}</TableCell>
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", PRIORITY_COLORS[k.priority])}>{k.priority}</Badge></TableCell>
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", STATUS_COLORS[k.status])}>{k.status.split(" ")[0]}</Badge></TableCell>
@@ -343,8 +343,8 @@ export default function KittingAssemblyView() {
                           <span className="text-[9px] tabular-nums text-gray-500">{k.progress}%</span>
                         </div>
                       </TableCell>
-                      <TableCell className="tabular-nums">{k.componentsReady}/{k.totalComponents}</TableCell>
-                      <TableCell className="font-mono">{fmtRupee(k.value)}</TableCell>
+                      <TableCell className="numeric-cell tabular-nums">{k.componentsReady}/{k.totalComponents}</TableCell>
+                      <TableCell className="numeric-cell font-mono">{fmtRupee(k.value)}</TableCell>
                       <TableCell className="text-[10px]">{k.warehouse.split(" ")[0]}</TableCell>
                       <TableCell className="hidden md:table-cell text-[10px]">{k.assembler?.name.split(" ")[0] || "—"}</TableCell>
                       <TableCell className="hidden lg:table-cell text-[10px]">{k.dueDate}</TableCell>
@@ -378,7 +378,7 @@ export default function KittingAssemblyView() {
               </div>
 
               <div className="kit-table-wrapper overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <Table><TableHeader><TableRow>
+                <Table className="table-hover-highlight"><TableHeader><TableRow>
                   <TableHead className="text-[10px]">SKU</TableHead><TableHead className="text-[10px]">Component</TableHead>
                   <TableHead className="text-[10px]">Category</TableHead><TableHead className="text-[10px]">Price ₹</TableHead>
                   <TableHead className="text-[10px]">Stock</TableHead><TableHead className="text-[10px]">Reserved</TableHead>
@@ -390,7 +390,7 @@ export default function KittingAssemblyView() {
                       <TableCell className="font-mono">{c.sku}</TableCell>
                       <TableCell className="font-medium">{c.name}</TableCell>
                       <TableCell className="text-[10px]">{c.cat}</TableCell>
-                      <TableCell className="font-mono">{c.price}</TableCell>
+                      <TableCell className="numeric-cell font-mono">{c.price}</TableCell>
                       <TableCell className="tabular-nums">{c.stock}</TableCell>
                       <TableCell className="tabular-nums text-amber-600">{c.reserved}</TableCell>
                       <TableCell className={cn("tabular-nums font-semibold", c.available < c.reorderLevel / 2 ? "text-red-500" : c.available < c.reorderLevel ? "text-amber-500" : "text-emerald-500")}>{c.available}</TableCell>
@@ -401,7 +401,7 @@ export default function KittingAssemblyView() {
                             {c.available < c.reorderLevel / 2 ? "Critical" : "Low Stock"}
                           </Badge>
                         ) : (
-                          <Badge className="text-[9px] px-1.5 py-0 kit-badge-instock">In Stock</Badge>
+                          <Badge className="badge-interactive text-[9px] px-1.5 py-0 kit-badge-instock">In Stock</Badge>
                         )}
                       </TableCell>
                     </TableRow>
@@ -423,7 +423,7 @@ export default function KittingAssemblyView() {
               </CardContent></Card>
 
               <div className="kit-table-wrapper overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <Table><TableHeader><TableRow>
+                <Table className="table-hover-highlight"><TableHeader><TableRow>
                   <TableHead className="text-[10px]">Station</TableHead><TableHead className="text-[10px]">Assembler</TableHead>
                   <TableHead className="text-[10px]">Speed</TableHead><TableHead className="text-[10px]">Cert</TableHead>
                   <TableHead className="text-[10px]">Warehouse</TableHead><TableHead className="text-[10px]">Utilization</TableHead>
@@ -435,7 +435,7 @@ export default function KittingAssemblyView() {
                       <TableCell className="font-medium">{s.station}</TableCell>
                       <TableCell>{s.assembler}</TableCell>
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", SPEED_COLORS[s.speed])}>{s.speed}</Badge></TableCell>
-                      <TableCell><Badge className="text-[9px] px-1.5 py-0 kit-badge-cert">{s.defects === 0 ? "L1" : s.defects < 2 ? "L2" : "L3"}</Badge></TableCell>
+                      <TableCell><Badge className="badge-interactive text-[9px] px-1.5 py-0 kit-badge-cert">{s.defects === 0 ? "L1" : s.defects < 2 ? "L2" : "L3"}</Badge></TableCell>
                       <TableCell className="text-[10px]">{s.warehouse.split(" ")[0]}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1.5">

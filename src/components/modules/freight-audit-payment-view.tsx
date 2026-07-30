@@ -510,7 +510,7 @@ function ResolutionRateRing({ rate }: { rate: number }) {
 function LanePerformanceCard({ record }: { record: RateRecord }) {
   return (
     <Card className="fap-lane-card">
-      <CardContent className="p-4 space-y-3">
+      <CardContent className="glass-subtle p-4 space-y-3">
         <div className="flex items-center justify-between">
           <p className="font-medium text-sm">{record.lane}</p>
           <SavingsIndicator pct={record.savingsPct} />
@@ -625,7 +625,7 @@ export default function FreightAuditPaymentView() {
           <div className="grid grid-cols-4 gap-3 fap-kpi-grid">
             {kpis.map((kpi, i) => (
               <Card key={i} className={cn("fap-kpi-card border-l-4", kpi.border, "animate-fap-fade-up")} style={{ animationDelay: `${i * 50}ms` }}>
-                <CardContent className="p-4 flex items-center gap-3">
+                <CardContent className="glass-subtle p-4 flex items-center gap-3">
                   <kpi.icon className={cn("w-5 h-5 shrink-0", kpi.color)} />
                   <div className="min-w-0">
                     <p className="text-xs text-muted-foreground truncate">{kpi.label}</p>
@@ -719,7 +719,7 @@ export default function FreightAuditPaymentView() {
           </div>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-background border-b">
@@ -794,8 +794,8 @@ export default function FreightAuditPaymentView() {
                     </div>
                     <div className="flex gap-2 pt-2">
                       <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => { toast.success("Approved", "Invoice approved for payment"); setDrawerOpen(false); }}>Approve</Button>
-                      <Button size="sm" variant="outline" className="flex-1 border-red-300 text-red-600 hover:bg-red-50" onClick={() => { toast.warning("Flagged", "Invoice has been flagged for review"); setDrawerOpen(false); }}>Flag</Button>
-                      <Button size="sm" variant="outline" className="flex-1 border-orange-300 text-orange-600 hover:bg-orange-50" onClick={() => { toast.info("Dispute Raised", "Dispute has been created"); setDrawerOpen(false); }}>Dispute</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1 border-red-300 text-red-600 hover:bg-red-50" onClick={() => { toast.warning("Flagged", "Invoice has been flagged for review"); setDrawerOpen(false); }}>Flag</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1 border-orange-300 text-orange-600 hover:bg-orange-50" onClick={() => { toast.info("Dispute Raised", "Dispute has been created"); setDrawerOpen(false); }}>Dispute</Button>
                     </div>
                   </div>
                 </>
@@ -828,7 +828,7 @@ export default function FreightAuditPaymentView() {
           </div>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-background border-b">
@@ -892,8 +892,8 @@ export default function FreightAuditPaymentView() {
                     </div>
                     <div className="flex gap-2 pt-2">
                       <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => { toast.success("Renegotiation Initiated", "Rate renegotiation request sent to carrier"); setDrawerOpen(false); }}>Renegotiate</Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.info("Benchmark Updated", "Benchmark rates have been refreshed"); setDrawerOpen(false); }}>Benchmark</Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.info("Exported", "Rate data exported to CSV"); setDrawerOpen(false); }}>Export</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Benchmark Updated", "Benchmark rates have been refreshed"); setDrawerOpen(false); }}>Benchmark</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Exported", "Rate data exported to CSV"); setDrawerOpen(false); }}>Export</Button>
                     </div>
                   </div>
                 </>
@@ -920,7 +920,7 @@ export default function FreightAuditPaymentView() {
           </div>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-background border-b">
@@ -987,8 +987,8 @@ export default function FreightAuditPaymentView() {
                     </div>
                     <div className="flex gap-2 pt-2">
                       <Button size="sm" className="flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => { toast.success("Processing", "Payment processing initiated"); setDrawerOpen(false); }}>Process</Button>
-                      <Button size="sm" variant="outline" className="flex-1 border-amber-300 text-amber-600 hover:bg-amber-50" onClick={() => { toast.warning("Held", "Payment has been put on hold"); setDrawerOpen(false); }}>Hold</Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.info("Released", "Payment hold has been released"); setDrawerOpen(false); }}>Release</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1 border-amber-300 text-amber-600 hover:bg-amber-50" onClick={() => { toast.warning("Held", "Payment has been put on hold"); setDrawerOpen(false); }}>Hold</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Released", "Payment hold has been released"); setDrawerOpen(false); }}>Release</Button>
                     </div>
                   </div>
                 </>
@@ -1015,7 +1015,7 @@ export default function FreightAuditPaymentView() {
           </div>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="overflow-x-auto max-h-[500px] overflow-y-auto">
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-background border-b">
@@ -1088,8 +1088,8 @@ export default function FreightAuditPaymentView() {
                     </div>
                     <div className="flex gap-2 pt-2">
                       <Button size="sm" className="flex-1 bg-orange-600 hover:bg-orange-700" onClick={() => { toast.warning("Escalated", "Dispute escalated to senior management"); setDrawerOpen(false); }}>Escalate</Button>
-                      <Button size="sm" variant="outline" className="flex-1 bg-emerald-600 text-white hover:bg-emerald-700" onClick={() => { toast.success("Accepted", "Dispute resolution accepted"); setDrawerOpen(false); }}>Accept</Button>
-                      <Button size="sm" variant="outline" className="flex-1 border-red-300 text-red-600 hover:bg-red-50" onClick={() => { toast.error("Legal Escalation", "Dispute escalated to legal team"); setDrawerOpen(false); }}>Legal</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1 bg-emerald-600 text-white hover:bg-emerald-700" onClick={() => { toast.success("Accepted", "Dispute resolution accepted"); setDrawerOpen(false); }}>Accept</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1 border-red-300 text-red-600 hover:bg-red-50" onClick={() => { toast.error("Legal Escalation", "Dispute escalated to legal team"); setDrawerOpen(false); }}>Legal</Button>
                     </div>
                   </div>
                 </>
@@ -1103,7 +1103,7 @@ export default function FreightAuditPaymentView() {
           <div className="grid grid-cols-4 gap-3 fap-analytics-grid">
             {analyticsCards.map((card, i) => (
               <Card key={i} className={cn("fap-analytics-card border-l-4", card.border)}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <p className="text-xs text-muted-foreground">{card.label}</p>
                   <p className="text-lg font-bold mt-1 fap-counter-value">{card.value}</p>
                 </CardContent>

@@ -370,7 +370,7 @@ export function YardManagementView() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 yard-kpi-enter">
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Truck className="h-3 w-3" />
@@ -385,7 +385,7 @@ export function YardManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Clock className="h-3 w-3" />
@@ -400,7 +400,7 @@ export function YardManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <AlertTriangle className="h-3 w-3" />
@@ -413,7 +413,7 @@ export function YardManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <LogIn className="h-3 w-3" />
@@ -426,7 +426,7 @@ export function YardManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <LogOut className="h-3 w-3" />
@@ -439,7 +439,7 @@ export function YardManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Gauge className="h-3 w-3" />
@@ -466,7 +466,7 @@ export function YardManagementView() {
               Gate-in vs gate-out per hour · Total: {gateIn24h} in / {gateOut24h} out
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={gateChartConfig} className="aspect-[16/6] w-full">
               <AreaChart data={gateActivity24h} margin={{ top: 4, right: 8, bottom: 0, left: -16 }}>
                 <defs>
@@ -501,7 +501,7 @@ export function YardManagementView() {
               {totalInYard} active vehicles across {zoneDistribution.length} zones
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={zoneChartConfig} className="aspect-square w-full max-w-[200px] mx-auto">
               <PieChart>
                 <Pie
@@ -539,13 +539,13 @@ export function YardManagementView() {
           <CardTitle className="text-sm flex items-center gap-2">
             <MapPin className="h-4 w-4 text-blue-500" />
             Live Yard Map · Chennai Hub
-            <Badge variant="outline" className="text-[9px] ml-2">RTLS Live</Badge>
+            <Badge variant="outline" className="badge-interactive text-[9px] ml-2">RTLS Live</Badge>
           </CardTitle>
           <CardDescription className="text-xs">
             Real-time slot occupancy · 30 trailer park slots + 10 cold storage + 8 bonded + 5 hazmat + 6 empty + 3 inspection
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-2">
+        <CardContent className="glass-subtle pt-2">
           {/* Trailer Park slots (A-01 to A-30) */}
           <div className="space-y-3">
             <div>
@@ -633,7 +633,7 @@ export function YardManagementView() {
             Identifies zones with bottlenecks — Hazmat & Bonded typically have higher wait times due to compliance checks
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="glass-subtle pt-0">
           <ChartContainer config={zoneChartConfig} className="aspect-[16/5] w-full">
             <BarChart data={waitByZone} margin={{ top: 4, right: 8, bottom: 0, left: -16 }}>
               <CartesianGrid strokeDasharray="3 3" className="stroke-muted/40" vertical={false} />
@@ -664,10 +664,10 @@ export function YardManagementView() {
               </CardDescription>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="h-7 gap-1.5 text-xs" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-7 gap-1.5 text-xs" onClick={handleRefresh}>
                 <RefreshCw className="h-3 w-3" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="h-7 gap-1.5 text-xs" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-7 gap-1.5 text-xs" onClick={handleExport}>
                 <Download className="h-3 w-3" /> Export
               </Button>
               <Button size="sm" className="h-7 gap-1.5 text-xs" onClick={() => toast.info("Gate-in", "Opening boom barrier & camera capture...")}>
@@ -736,9 +736,9 @@ export function YardManagementView() {
             </TabsList>
           </Tabs>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="glass-subtle pt-0">
           <div className="rounded-lg border overflow-hidden">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="text-xs">Vehicle</TableHead>
@@ -816,7 +816,7 @@ export function YardManagementView() {
                       </TableCell>
                       <TableCell>
                         {v.dockAssignment ? (
-                          <Badge variant="outline" className="text-[10px] font-mono">{v.dockAssignment}</Badge>
+                          <Badge variant="outline" className="badge-interactive text-[10px] font-mono">{v.dockAssignment}</Badge>
                         ) : (
                           <span className="text-[10px] text-muted-foreground">—</span>
                         )}

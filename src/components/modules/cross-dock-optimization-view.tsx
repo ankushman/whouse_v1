@@ -425,7 +425,7 @@ export default function CrossDockOptimizationView() {
             {kpis.map((k, i) => (
               <Card key={i} className="cdo-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: ["#6366f1","#0891b2","#059669","#d97706","#3b82f6","#7c3aed","#0d9488","#ea580c"][i] }}>
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-80" style={{ background: `linear-gradient(90deg, ${["#6366f1","#0891b2","#059669","#d97706","#3b82f6","#7c3aed","#0d9488","#ea580c"][i]}, ${["#818cf8","#06b6d4","#34d399","#f59e0b","#60a5fa","#a78bfa","#14b8a6","#f97316"][i]})` }} />
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{k.label}</p>
@@ -451,9 +451,9 @@ export default function CrossDockOptimizationView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search by hub, carrier or door..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.info("Cleared", "Filters reset") }}>Clear</Button>
           </div>
-          <Card className="cdo-table-card overflow-hidden">
-            <CardContent className="p-0">
-              <Table>
+          <Card className="card-crud-lift cdo-table-card overflow-hidden">
+            <CardContent className="glass-subtle p-0">
+              <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
                   <TableHead>Door</TableHead>
@@ -491,9 +491,9 @@ export default function CrossDockOptimizationView() {
 
         {/* Tab 2: Operations */}
         <TabsContent value="2" className="space-y-4">
-          <Card className="cdo-table-card overflow-hidden">
-            <CardContent className="p-0">
-              <Table>
+          <Card className="card-crud-lift cdo-table-card overflow-hidden">
+            <CardContent className="glass-subtle p-0">
+              <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
                   <TableHead>Type</TableHead>
@@ -531,9 +531,9 @@ export default function CrossDockOptimizationView() {
 
         {/* Tab 3: Sort Plan */}
         <TabsContent value="3" className="space-y-4">
-          <Card className="cdo-table-card overflow-hidden">
-            <CardContent className="p-0">
-              <Table>
+          <Card className="card-crud-lift cdo-table-card overflow-hidden">
+            <CardContent className="glass-subtle p-0">
+              <Table className="table-hover-highlight">
                 <TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
                   <SortHeader col="id">ID</SortHeader>
                   <TableHead>Destination</TableHead>
@@ -581,7 +581,7 @@ export default function CrossDockOptimizationView() {
               { label: "Volume Growth", value: data.analyticsKpis.volumeGrowth, icon: TrendingUp, color: "from-teal-500 to-teal-600" },
             ].map((k, i) => (
               <Card key={i} className="cdo-analytics-card overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center gap-3">
                     <div className={cn("cdo-analytics-icon flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br text-white", k.color)}><k.icon className="h-4.5 w-4.5" /></div>
                     <div>
@@ -629,7 +629,7 @@ export default function CrossDockOptimizationView() {
               </div>
               <div className="flex gap-2 pt-2">
                 <Button className="cdo-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => toast.success("Assigned", `${selectedDoor.door} assigned`)}>Assign</Button>
-                <Button variant="outline" className="cdo-action-btn" onClick={() => toast.info("Maintenance", `Maintenance for ${selectedDoor.door}`)}>Maintenance</Button>
+                <Button variant="outline" className="btn-outline-animate cdo-action-btn" onClick={() => toast.info("Maintenance", `Maintenance for ${selectedDoor.door}`)}>Maintenance</Button>
               </div>
             </div>
           </>)}
@@ -667,7 +667,7 @@ export default function CrossDockOptimizationView() {
               </div>
               <div className="flex gap-2 pt-2">
                 <Button className="cdo-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => toast.success("Updated", `${selectedOp.id} updated`)}>Update Status</Button>
-                <Button variant="outline" className="cdo-action-btn" onClick={() => toast.info("Reassigned", `${selectedOp.id} reassigned`)}>Reassign</Button>
+                <Button variant="outline" className="btn-outline-animate cdo-action-btn" onClick={() => toast.info("Reassigned", `${selectedOp.id} reassigned`)}>Reassign</Button>
               </div>
             </div>
           </>)}
@@ -704,7 +704,7 @@ export default function CrossDockOptimizationView() {
               <HubBadge hub={selectedSort.hub} />
               <div className="flex gap-2 pt-2">
                 <Button className="cdo-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Executed", `Sort plan ${selectedSort.id} executed`)}>Execute</Button>
-                <Button variant="outline" className="cdo-action-btn" onClick={() => toast.info("Rescheduled", `${selectedSort.id} rescheduled`)}>Reschedule</Button>
+                <Button variant="outline" className="btn-outline-animate cdo-action-btn" onClick={() => toast.info("Rescheduled", `${selectedSort.id} rescheduled`)}>Reschedule</Button>
               </div>
             </div>
           </>)}

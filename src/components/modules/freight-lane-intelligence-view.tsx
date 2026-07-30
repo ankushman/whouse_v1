@@ -170,7 +170,7 @@ export default function FreightLaneIntelligenceView() {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={cn("hover:shadow-md transition-shadow", k.bg)}>
-                <CardContent className="flex items-center gap-3 p-3">
+                <CardContent className="glass-subtle flex items-center gap-3 p-3">
                   <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm", k.color)}><KpiIcon name={k.icon} className={k.color} /></div>
                   <div><p className="text-[10px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
                 </CardContent>
@@ -188,7 +188,7 @@ export default function FreightLaneIntelligenceView() {
         {activeTab >= "1" && activeTab <= "4" && (
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder={searchPH} className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filtered.length} records</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filtered.length} records</Badge>
           </div>
         )}
 
@@ -334,7 +334,7 @@ export default function FreightLaneIntelligenceView() {
               { label: "Savings Potential", value: fmtINR(ri(5000000, 25000000, 777)), icon: "BarChart3", color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-900/20" },
             ].map((k, i) => (
               <Card key={i} className={cn("hover:shadow-md transition-shadow", k.bg)}>
-                <CardContent className="flex items-center gap-3 p-3">
+                <CardContent className="glass-subtle flex items-center gap-3 p-3">
                   <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm", k.color)}><KpiIcon name={k.icon} className={k.color} /></div>
                   <div><p className="text-[10px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
                 </CardContent>
@@ -403,7 +403,7 @@ export default function FreightLaneIntelligenceView() {
               </div>
               <div className="flex gap-2 pt-3 border-t">
                 <Button size="sm" className="flex-1" onClick={() => { toast.success("Updated", "Record updated successfully"); setSheetOpen(false) }}><Zap className="w-3 h-3 mr-1" />Action</Button>
-                <Button size="sm" variant="outline" onClick={() => { toast.info("Exported", "Record exported to dashboard"); setSheetOpen(false) }}><Eye className="w-3 h-3" /></Button>
+                <Button size="sm" variant="outline" onClick={() => { toast.info("Exported", "Record exported to dashboard"); setSheetOpen(false) }}><Eye className="btn-outline-animate w-3 h-3" /></Button>
               </div>
             </div>
           )}

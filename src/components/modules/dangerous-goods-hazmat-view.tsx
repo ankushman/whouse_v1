@@ -182,7 +182,7 @@ export default function DangerousGoodsHazMatView() {
             { label: "Total Incidents", value: String(totalIncidents), icon: ShieldAlert, color: "text-rose-600", bg: "bg-rose-50 dark:bg-rose-950/40", sub: "This quarter" },
           ].map(kpi => (
             <Card key={kpi.label} className="hazmat-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="hazmat-label">{kpi.label}</p>
@@ -309,7 +309,7 @@ export default function DangerousGoodsHazMatView() {
         <div className="hazmat-filter-bar">
           <div className="flex flex-wrap gap-2 flex-1">
             {Object.entries(statusCounts).map(([s, c]) => (
-              <Badge key={s} variant={statusFilter === s ? "default" : "outline"} className="hazmat-filter-badge cursor-pointer" onClick={() => setStatusFilter(s)}>
+              <Badge key={s} variant={statusFilter === s ? "default" : "outline"} className="badge-interactive hazmat-filter-badge cursor-pointer" onClick={() => setStatusFilter(s)}>
                 {s} <span className="ml-1 opacity-60">({c})</span>
               </Badge>
             ))}
@@ -325,7 +325,7 @@ export default function DangerousGoodsHazMatView() {
         </div>
 
         <Card className="hazmat-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="hazmat-table">
                 <thead>
@@ -353,14 +353,14 @@ export default function DangerousGoodsHazMatView() {
                           <div className="text-xs text-gray-500">{item.unNumber}</div>
                         </td>
                         <td>
-                          <Badge variant="outline" className="text-xs" style={{ borderColor: unCls?.color, color: unCls?.color }}>
+                          <Badge variant="outline" className="badge-interactive text-xs" style={{ borderColor: unCls?.color, color: unCls?.color }}>
                             {unCls?.name?.slice(0, 12)}
                           </Badge>
                         </td>
-                        <td><Badge className="text-xs" style={{ backgroundColor: PPE_COLORS[item.category] + "18", color: PPE_COLORS[item.category], borderColor: PPE_COLORS[item.category] + "30" }}>{item.category}</Badge></td>
+                        <td><Badge className="badge-interactive text-xs" style={{ backgroundColor: PPE_COLORS[item.category] + "18", color: PPE_COLORS[item.category], borderColor: PPE_COLORS[item.category] + "30" }}>{item.category}</Badge></td>
                         <td className="font-medium text-sm">{item.quantity} {item.unit}</td>
                         <td>
-                          <Badge variant={item.hazardLevel === "Critical" ? "destructive" : "outline"} className="text-xs">
+                          <Badge variant={item.hazardLevel === "Critical" ? "destructive" : "outline"} className="badge-interactive text-xs">
                             {item.hazardLevel === "Critical" && <Skull className="h-3 w-3 mr-1" />}
                             {item.hazardLevel}
                           </Badge>
@@ -375,9 +375,9 @@ export default function DangerousGoodsHazMatView() {
                         </td>
                         <td>
                           {item.sdsCompliant ? (
-                            <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-xs"><CheckCircle2 className="h-3 w-3 mr-1" />SDS</Badge>
+                            <Badge className="badge-interactive bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 text-xs"><CheckCircle2 className="h-3 w-3 mr-1" />SDS</Badge>
                           ) : (
-                            <Badge className="bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 text-xs"><X className="h-3 w-3 mr-1" />Missing</Badge>
+                            <Badge className="badge-interactive bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 text-xs"><X className="h-3 w-3 mr-1" />Missing</Badge>
                           )}
                         </td>
                         <td><Badge className={STATUS_COLORS[item.status]}>{item.status}</Badge></td>
@@ -409,14 +409,14 @@ export default function DangerousGoodsHazMatView() {
             const zoneColor = critCount > 5 ? "#ef4444" : critCount > 2 ? "#f59e0b" : "#10b981"
             return (
               <Card key={i} className="hazmat-zone-card border-slate-100 dark:border-slate-800" style={{ borderTopWidth: 3, borderTopColor: zoneColor }}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div>
                       <p className="font-semibold text-sm">{zone}</p>
                       <p className="text-xs text-gray-500">{zItems.length} items stored</p>
                     </div>
                     {critCount > 0 && (
-                      <Badge variant="destructive" className="text-xs">
+                      <Badge variant="destructive" className="badge-interactive text-xs">
                         <Skull className="h-3 w-3 mr-1" />{critCount} Critical
                       </Badge>
                     )}
@@ -499,7 +499,7 @@ export default function DangerousGoodsHazMatView() {
             const pending = inspItems.filter(it => it.status === "Pending Inspection").length
             return (
               <Card key={i} className="hazmat-inspector-card border-slate-100 dark:border-slate-800">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center gap-3 mb-3">
                     <div className={`hazmat-avatar ${insp.avatar}`}>
                       <Users className="h-4 w-4 text-white" />
@@ -584,7 +584,7 @@ export default function DangerousGoodsHazMatView() {
             { label: "Days Since Last", value: `${randInt(5, 45)}`, icon: Clock, color: "text-emerald-600", bg: "bg-emerald-50 dark:bg-emerald-950/40" },
           ].map(kpi => (
             <Card key={kpi.label} className="hazmat-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="hazmat-label">{kpi.label}</p>
@@ -647,9 +647,9 @@ export default function DangerousGoodsHazMatView() {
             {items.filter(it => it.incidents > 0).slice(0, 8).map((it, i) => (
               <div key={i} className="hazmat-incident-row">
                 <div className="flex items-center gap-2">
-                  <Badge variant="destructive" className="text-xs"><Skull className="h-3 w-3 mr-1" />{it.incidents} incident{it.incidents > 1 ? "s" : ""}</Badge>
+                  <Badge variant="destructive" className="badge-interactive text-xs"><Skull className="h-3 w-3 mr-1" />{it.incidents} incident{it.incidents > 1 ? "s" : ""}</Badge>
                   <span className="font-medium text-sm">{it.name}</span>
-                  <Badge variant="outline" className="text-xs">{it.unNumber}</Badge>
+                  <Badge variant="outline" className="badge-interactive text-xs">{it.unNumber}</Badge>
                 </div>
                 <div className="flex gap-4 text-xs text-gray-500 mt-1">
                   <span>{it.warehouse}</span>
@@ -672,7 +672,7 @@ export default function DangerousGoodsHazMatView() {
           <p className="hazmat-subheading">Hazardous materials tracking, compliance monitoring, and safety management</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="hazmat-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate hazmat-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
           <Button size="sm" className="hazmat-header-btn-primary"><Plus className="h-3.5 w-3.5" />Register Item</Button>
         </div>
       </div>
@@ -712,9 +712,11 @@ export default function DangerousGoodsHazMatView() {
                 </button>
               </div>
               <div className="flex gap-2 mt-3">
-                <Badge className="bg-white/20 text-white border-white/30">Class {selectedItem.unClass}</Badge>
-                <Badge className="bg-white/20 text-white border-white/30">{selectedItem.category}</Badge>
-                <Badge className="bg-white/20 text-white border-white/30">{selectedItem.status}</Badge>
+<div className="chip-group">
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">Class {selectedItem.unClass}</Badge>
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedItem.category}</Badge>
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedItem.status}</Badge>
+</div>
               </div>
             </div>
 
@@ -730,9 +732,9 @@ export default function DangerousGoodsHazMatView() {
                 </div>
                 <div className="hazmat-sds-status">
                   {selectedItem.sdsCompliant ? (
-                    <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"><CheckCircle2 className="h-3 w-3 mr-1" />SDS Compliant</Badge>
+                    <Badge className="badge-interactive bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"><CheckCircle2 className="h-3 w-3 mr-1" />SDS Compliant</Badge>
                   ) : (
-                    <Badge className="bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300"><X className="h-3 w-3 mr-1" />SDS Missing</Badge>
+                    <Badge className="badge-interactive bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300"><X className="h-3 w-3 mr-1" />SDS Missing</Badge>
                   )}
                 </div>
               </div>
@@ -763,7 +765,7 @@ export default function DangerousGoodsHazMatView() {
                 <h4 className="hazmat-drawer-section-title">PPE Requirements</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedItem.ppeRequired.map((ppe, i) => (
-                    <Badge key={i} variant="outline" className="text-xs"><ShieldCheck className="h-3 w-3 mr-1" />{ppe}</Badge>
+                    <Badge key={i} variant="outline" className="badge-interactive text-xs"><ShieldCheck className="h-3 w-3 mr-1" />{ppe}</Badge>
                   ))}
                 </div>
               </div>
@@ -788,8 +790,8 @@ export default function DangerousGoodsHazMatView() {
 
               <div className="hazmat-drawer-actions">
                 <Button className="hazmat-action-primary flex-1"><ClipboardCheck className="h-4 w-4" />Inspect</Button>
-                <Button variant="outline" className="hazmat-action-secondary"><FileText className="h-4 w-4" />View SDS</Button>
-                <Button variant="outline" className="hazmat-action-secondary text-red-500"><Ban className="h-4 w-4" />Restrict</Button>
+                <Button variant="outline" className="btn-outline-animate hazmat-action-secondary"><FileText className="h-4 w-4" />View SDS</Button>
+                <Button variant="outline" className="btn-outline-animate hazmat-action-secondary text-red-500"><Ban className="h-4 w-4" />Restrict</Button>
               </div>
             </div>
           </div>

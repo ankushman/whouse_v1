@@ -618,7 +618,7 @@ export default function LoadingDispatchView() {
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Driver Performance</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow>
                         <TableHead className="text-xs">Driver</TableHead>
@@ -676,9 +676,9 @@ export default function LoadingDispatchView() {
             </div>
 
             <Card>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow>
                         <TableHead className="text-xs">Dispatch ID</TableHead>
@@ -710,7 +710,7 @@ export default function LoadingDispatchView() {
                           <TableCell><PriorityBadge priority={r.priority} /></TableCell>
                           <TableCell><StatusBadge status={r.status} /></TableCell>
                           <TableCell className="text-xs text-right">{r.pallets}</TableCell>
-                          <TableCell className="text-xs text-right">{r.weightTons}</TableCell>
+                          <TableCell className="numeric-cell text-xs text-right">{r.weightTons}</TableCell>
                           <TableCell className="text-xs">{r.eta.slice(11, 16)}</TableCell>
                           <TableCell className="text-xs">{r.scheduledTime.slice(11, 16)}</TableCell>
                           <TableCell><button onClick={() => setSelectedRecord(r)} className="p-1 rounded hover:bg-muted"><Eye className="w-3.5 h-3.5 text-sky-600" /></button></TableCell>
@@ -790,7 +790,7 @@ export default function LoadingDispatchView() {
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Dock Assignment Table</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow>
                         <TableHead className="text-xs">Dock</TableHead>
@@ -883,7 +883,7 @@ export default function LoadingDispatchView() {
               <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Active Dispatches</CardTitle></CardHeader>
               <CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow>
                         <TableHead className="text-xs">Dispatch ID</TableHead>
@@ -907,7 +907,7 @@ export default function LoadingDispatchView() {
                           <TableCell className="text-xs">{r.vehicle}</TableCell>
                           <TableCell><VehicleTypeBadge idx={r.vehicleTypeIdx} type={r.vehicleType} /></TableCell>
                           <TableCell className="text-xs">{r.customer.city}, {r.customer.state}</TableCell>
-                          <TableCell className="text-xs text-right">{r.distance} km</TableCell>
+                          <TableCell className="numeric-cell text-xs text-right">{r.distance} km</TableCell>
                           <TableCell className="text-xs">{r.eta.slice(11, 16)}</TableCell>
                           <TableCell><StatusBadge status={r.status} /></TableCell>
                           <TableCell className="text-xs text-right">{r.speed} km/h</TableCell>
@@ -984,7 +984,7 @@ export default function LoadingDispatchView() {
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Delivery Exception Analysis</CardTitle></CardHeader>
                 <CardContent>
                   <div className="overflow-x-auto max-h-[400px]">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow>
                           <TableHead className="text-xs">Type</TableHead>
@@ -1006,7 +1006,7 @@ export default function LoadingDispatchView() {
                             <TableCell className="text-xs">{e.trend === "up" ? <ArrowUpRight className="w-3.5 h-3.5 text-rose-500" /> : <ArrowDownRight className="w-3.5 h-3.5 text-emerald-500" />}</TableCell>
                             <TableCell className="text-xs">{e.rootCause}</TableCell>
                             <TableCell className="text-xs">{e.action}</TableCell>
-                            <TableCell className="text-xs text-right">{fmtRupee(e.cost)}</TableCell>
+                            <TableCell className="numeric-cell text-xs text-right">{fmtRupee(e.cost)}</TableCell>
                             <TableCell><PriorityBadge priority={e.priority} /></TableCell>
                           </TableRow>
                         ))}

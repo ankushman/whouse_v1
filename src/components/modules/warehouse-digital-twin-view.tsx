@@ -185,7 +185,7 @@ export default function WarehouseDigitalTwinView() {
         <div className="space-y-4">
           <div className="wdt-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
             {data.kpis.map((k, i) => (
-              <Card key={i} className="wdt-kpi-card"><CardContent className="p-3">
+              <Card key={i} className="glass-subtle wdt-kpi-card"><CardContent className="p-3">
                 <div className="flex items-center gap-2"><k.icon className="h-4 w-4" style={{ color: k.color }} /><span className="text-[10px] text-gray-500">{k.label}</span></div>
                 <p className="text-lg font-bold mt-1">{k.value}</p>
                 <span className="text-[10px] text-emerald-600">{k.trend}</span>
@@ -217,7 +217,7 @@ export default function WarehouseDigitalTwinView() {
                 <Bar dataKey="twins" fill={TH.violet} radius={[0, 4, 4, 0]} /><Bar dataKey="sensors" fill={TH.cyan} radius={[0, 4, 4, 0]} />
               </BarChart>
             </CardContent></Card>
-            <Card className="wdt-summary-card"><CardHeader className="pb-1"><CardTitle className="text-xs">Platform Summary</CardTitle></CardHeader><CardContent className="space-y-2">
+            <Card className="glass-subtle wdt-summary-card"><CardHeader className="pb-1"><CardTitle className="text-xs">Platform Summary</CardTitle></CardHeader><CardContent className="space-y-2">
               <div className="wdt-stat-row flex justify-between text-xs"><span className="text-gray-500">Total Records</span><span className="font-bold">265</span></div>
               <div className="wdt-stat-row flex justify-between text-xs"><span className="text-gray-500">Active Sensors</span><span className="font-bold text-emerald-600">{data.sensors.filter(s => s.status === "Online").length}/75</span></div>
               <div className="wdt-stat-row flex justify-between text-xs"><span className="text-gray-500">Running Sims</span><span className="font-bold text-blue-600">{data.simulations.filter(s => s.status === "Running").length}/70</span></div>
@@ -235,7 +235,7 @@ export default function WarehouseDigitalTwinView() {
           <div className="flex gap-2 items-center">
             <Search className="h-4 w-4 text-gray-400" />
             <Input placeholder="Search records..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="max-w-xs h-8 text-xs" />
-            <Button variant="outline" size="sm" className="wdt-btn-sync h-8 text-xs" onClick={() => toast.info("Sync", "Data refresh initiated")}><RefreshCw className="h-3 w-3 mr-1" />Sync</Button>
+            <Button variant="outline" size="sm" className="btn-outline-animate wdt-btn-sync h-8 text-xs" onClick={() => toast.info("Sync", "Data refresh initiated")}><RefreshCw className="h-3 w-3 mr-1" />Sync</Button>
             <span className="text-[10px] text-gray-400 ml-auto">{filtered.length} {tabLabel}</span>
           </div>
           <div className="overflow-x-auto rounded-lg border">

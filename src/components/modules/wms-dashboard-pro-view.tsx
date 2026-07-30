@@ -146,7 +146,7 @@ export default function WMSDashboardProView() {
   const SearchBar = () => (
     <div className="flex items-center gap-2 mb-3">
       <div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground"/><Input placeholder="Search records..." value={search} onChange={e=>setSearch(e.target.value)} className="wdp-search pl-8 h-9 text-sm"/></div>
-      <Button variant="outline" size="sm" className="wdp-sort-btn" onClick={()=>setSortDir(d=>d==="asc"?"desc":"asc")}><ArrowUpDown className="h-4 w-4"/></Button>
+      <Button variant="outline" size="sm" className="btn-outline-animate wdp-sort-btn" onClick={()=>setSortDir(d=>d==="asc"?"desc":"asc")}><ArrowUpDown className="h-4 w-4"/></Button>
     </div>
   )
 
@@ -165,7 +165,7 @@ export default function WMSDashboardProView() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {kpis.map((k,i)=>(
                 <Card key={i} className="wdp-kpi border-border/60">
-                  <CardContent className="flex items-center gap-3 p-4">
+                  <CardContent className="glass-subtle flex items-center gap-3 p-4">
                     <div className={`wdp-kpi-icon ${k.bg} p-2.5 rounded-lg`}><k.icon className={`h-5 w-5 ${k.color}`}/></div>
                     <div><p className="text-xs text-muted-foreground">{k.label}</p><p className={`wdp-kpi-val text-lg font-bold ${k.color}`}>{k.value}</p></div>
                   </CardContent>

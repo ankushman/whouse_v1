@@ -195,7 +195,7 @@ export default function DockSchedulingYardView() {
             { label: "Yard Occupancy", value: `${yardUtil}%`, icon: ParkingCircle, color: "text-cyan-600", bg: "bg-cyan-50 dark:bg-cyan-950/40", sub: `${yardOccupancy.reduce((s, d) => s + d.occupied, 0)} vehicles in yard` },
           ].map(kpi => (
             <Card key={kpi.label} className="dsy-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="dsy-label">{kpi.label}</p>
@@ -325,7 +325,7 @@ export default function DockSchedulingYardView() {
         <div className="dsy-filter-bar">
           <div className="flex flex-wrap gap-2 flex-1">
             {Object.entries(statusCounts).map(([s, c]) => (
-              <Badge key={s} variant={statusFilter === s ? "default" : "outline"} className="dsy-filter-badge cursor-pointer" onClick={() => setStatusFilter(s)}>
+              <Badge key={s} variant={statusFilter === s ? "default" : "outline"} className="badge-interactive dsy-filter-badge cursor-pointer" onClick={() => setStatusFilter(s)}>
                 {s} <span className="ml-1 opacity-60">({c})</span>
               </Badge>
             ))}
@@ -340,7 +340,7 @@ export default function DockSchedulingYardView() {
         </div>
 
         <Card className="dsy-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="dsy-table">
                 <thead>
@@ -366,7 +366,7 @@ export default function DockSchedulingYardView() {
                         <div className="text-xs text-gray-500">{appt.vehicle}</div>
                       </td>
                       <td>
-                        <Badge variant="outline" className="dsy-dock-badge">{appt.dock}</Badge>
+                        <Badge variant="outline" className="badge-interactive dsy-dock-badge">{appt.dock}</Badge>
                         <div className="text-xs text-gray-500 mt-0.5">{appt.dockType}</div>
                       </td>
                       <td>
@@ -374,12 +374,12 @@ export default function DockSchedulingYardView() {
                         {appt.checkIn !== "—" && <div className="text-xs text-gray-500">In: {appt.checkIn.split(" ")[1]}</div>}
                       </td>
                       <td>
-                        <Badge variant="outline" className="text-xs">{appt.loadType}</Badge>
+                        <Badge variant="outline" className="badge-interactive text-xs">{appt.loadType}</Badge>
                         <div className="text-xs text-gray-500 mt-0.5">{appt.pallets} pallets</div>
                       </td>
                       <td className="font-medium">{fmtKg(appt.weight)}</td>
                       <td>
-                        <Badge className="text-xs" style={{ backgroundColor: PRIORITY_COLORS[appt.priority] + "18", color: PRIORITY_COLORS[appt.priority], borderColor: PRIORITY_COLORS[appt.priority] + "30" }}>{appt.priority}</Badge>
+                        <Badge className="badge-interactive text-xs" style={{ backgroundColor: PRIORITY_COLORS[appt.priority] + "18", color: PRIORITY_COLORS[appt.priority], borderColor: PRIORITY_COLORS[appt.priority] + "30" }}>{appt.priority}</Badge>
                       </td>
                       <td>
                         {appt.completionPct > 0 ? (
@@ -419,7 +419,7 @@ export default function DockSchedulingYardView() {
             const pct = Math.round(dock.level / dock.capacity * 100)
             return (
               <Card key={dock.id} className="dsy-dock-card border-slate-100 dark:border-slate-800" style={{ borderTopWidth: 3, borderTopColor: dock.color }}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <div className="dsy-dock-icon" style={{ backgroundColor: dock.color + "18", border: `2px solid ${dock.color}` }}>
@@ -430,7 +430,7 @@ export default function DockSchedulingYardView() {
                         <p className="text-xs text-gray-500">{dock.type}</p>
                       </div>
                     </div>
-                    <Badge variant={pct >= 90 ? "destructive" : pct >= 70 ? "default" : "outline"} className="text-xs">{pct}%</Badge>
+                    <Badge variant={pct >= 90 ? "destructive" : pct >= 70 ? "default" : "outline"} className="badge-interactive text-xs">{pct}%</Badge>
                   </div>
                   <div className="dsy-dock-bar-wrap">
                     <div className="flex justify-between text-xs mb-1">
@@ -516,10 +516,10 @@ export default function DockSchedulingYardView() {
               const color = zone.pct >= 90 ? "#ef4444" : zone.pct >= 70 ? "#f59e0b" : "#10b981"
               return (
                 <Card key={i} className="dsy-yard-card border-slate-100 dark:border-slate-800" style={{ borderLeftWidth: 4, borderLeftColor: color }}>
-                  <CardContent className="p-3">
+                  <CardContent className="glass-subtle p-3">
                     <div className="flex items-center justify-between mb-2">
                       <p className="font-semibold text-xs">{zone.zone}</p>
-                      <Badge variant={zone.pct >= 90 ? "destructive" : "outline"} className="text-xs">{zone.pct}%</Badge>
+                      <Badge variant={zone.pct >= 90 ? "destructive" : "outline"} className="badge-interactive text-xs">{zone.pct}%</Badge>
                     </div>
                     <div className="dsy-yard-bar">
                       <div className="dsy-yard-fill" style={{ width: `${Math.min(zone.pct, 100)}%`, backgroundColor: color }} />
@@ -677,7 +677,7 @@ export default function DockSchedulingYardView() {
           <p className="dsy-subheading">Loading dock allocation, truck scheduling, and yard operations across warehouses</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="dsy-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate dsy-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh</Button>
           <Button size="sm" className="dsy-header-btn-primary"><Plus className="h-3.5 w-3.5" />New Appointment</Button>
         </div>
       </div>
@@ -719,9 +719,11 @@ export default function DockSchedulingYardView() {
                 </button>
               </div>
               <div className="flex gap-2 mt-3">
-                <Badge className="bg-white/20 text-white border-white/30">{selectedAppt.dock}</Badge>
-                <Badge className="bg-white/20 text-white border-white/30">{selectedAppt.loadType}</Badge>
-                <Badge className="bg-white/20 text-white border-white/30">{selectedAppt.priority}</Badge>
+<div className="chip-group">
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedAppt.dock}</Badge>
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedAppt.loadType}</Badge>
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedAppt.priority}</Badge>
+</div>
               </div>
             </div>
 
@@ -785,8 +787,8 @@ export default function DockSchedulingYardView() {
 
               <div className="dsy-drawer-actions">
                 <Button className="dsy-action-primary flex-1"><CheckCircle2 className="h-4 w-4" />Complete</Button>
-                <Button variant="outline" className="dsy-action-secondary"><Clock className="h-4 w-4" />Reschedule</Button>
-                <Button variant="outline" className="dsy-action-secondary text-red-500"><X className="h-4 w-4" />Cancel</Button>
+                <Button variant="outline" className="btn-outline-animate dsy-action-secondary"><Clock className="h-4 w-4" />Reschedule</Button>
+                <Button variant="outline" className="btn-outline-animate dsy-action-secondary text-red-500"><X className="h-4 w-4" />Cancel</Button>
               </div>
             </div>
           </div>

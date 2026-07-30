@@ -904,11 +904,11 @@ export function ProductionScheduleView() {
           <Plus className="h-4 w-4" />
           New Schedule
         </Button>
-        <Button variant="outline" onClick={handleRefresh} className="gap-2">
+        <Button variant="outline" onClick={handleRefresh} className="btn-outline-animate gap-2">
           <RefreshCw className="h-4 w-4" />
           Refresh
         </Button>
-        <Button variant="outline" onClick={handleExport} className="gap-2">
+        <Button variant="outline" onClick={handleExport} className="btn-outline-animate gap-2">
           <Download className="h-4 w-4" />
           Export CSV
         </Button>
@@ -946,7 +946,7 @@ export function ProductionScheduleView() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <Card className="ps-kpi-enter relative overflow-hidden border-blue-200/50" style={{ animationDelay: "0ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-blue-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Total Schedules</p>
               <Hash className="h-4 w-4 text-blue-600" />
@@ -957,7 +957,7 @@ export function ProductionScheduleView() {
         </Card>
         <Card className="ps-kpi-enter relative overflow-hidden border-emerald-200/50" style={{ animationDelay: "60ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-emerald-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">On-Time Rate</p>
               <CheckCircle2 className="h-4 w-4 text-emerald-600" />
@@ -970,7 +970,7 @@ export function ProductionScheduleView() {
         </Card>
         <Card className="ps-kpi-enter relative overflow-hidden border-rose-200/50" style={{ animationDelay: "120ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-rose-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Delayed</p>
               <AlertTriangle className="h-4 w-4 text-rose-600" />
@@ -981,7 +981,7 @@ export function ProductionScheduleView() {
         </Card>
         <Card className="ps-kpi-enter relative overflow-hidden border-amber-200/50" style={{ animationDelay: "180ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-amber-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">On Hold</p>
               <CirclePause className="h-4 w-4 text-amber-600" />
@@ -992,7 +992,7 @@ export function ProductionScheduleView() {
         </Card>
         <Card className="ps-kpi-enter relative overflow-hidden border-violet-200/50" style={{ animationDelay: "240ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-violet-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Avg Utilization</p>
               <Gauge className="h-4 w-4 text-violet-600" />
@@ -1003,7 +1003,7 @@ export function ProductionScheduleView() {
         </Card>
         <Card className="ps-kpi-enter relative overflow-hidden border-orange-200/50" style={{ animationDelay: "300ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-orange-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Critical</p>
               <FlagTriangleRight className="h-4 w-4 text-orange-600" />
@@ -1204,14 +1204,14 @@ export function ProductionScheduleView() {
               Planning horizon: 2026-07-12 to 2026-08-08 · Click any bar to open schedule detail · Today marked with red line
             </CardDescription>
           </CardHeader>
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <GanttChart schedules={filteredSchedules} onBarClick={handleBarClick} selectedId={selectedSchedule?.id || null} />
           </CardContent>
         </Card>
       ) : (
-        <Card className="ps-table-card">
-          <CardContent className="p-0">
-            <Table>
+        <Card className="card-crud-lift ps-table-card">
+          <CardContent className="glass-subtle p-0">
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="bg-muted/40 hover:bg-muted/40">
                   <TableHead className="w-[130px]">Schedule ID</TableHead>
@@ -1329,7 +1329,7 @@ export function ProductionScheduleView() {
                         </TableCell>
                         <TableCell className="text-right">
                           {s.delayDays > 0 ? (
-                            <Badge variant="outline" className="bg-rose-50 text-rose-700 border-rose-200 text-xs">
+                            <Badge variant="outline" className="badge-interactive bg-rose-50 text-rose-700 border-rose-200 text-xs">
                               +{s.delayDays}d
                             </Badge>
                           ) : (
@@ -1560,7 +1560,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Production Summary</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <CardContent className="glass-subtle grid grid-cols-2 gap-4 sm:grid-cols-4">
                   <div className="ps-stat-enter space-y-1">
                     <p className="text-xs text-muted-foreground">Order Qty</p>
                     <p className="text-xl font-bold tabular-nums">{fmtNum(schedule.orderQty)}</p>
@@ -1595,7 +1595,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Schedule Window</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <CardContent className="glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-md border p-3">
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Calendar className="h-3 w-3" /> Planned Start
@@ -1643,7 +1643,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Traceability Links</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <CardContent className="glass-subtle grid grid-cols-1 gap-3 sm:grid-cols-3">
                   <button
                     onClick={() => toast.info("Navigate", `Opening Work Order: ${schedule.woRef}`)}
                     className="ps-card-enter rounded-md border border-blue-200/50 bg-blue-50/30 p-3 text-left hover:border-blue-400 hover:shadow-sm"
@@ -1685,7 +1685,7 @@ function ScheduleDetailDrawer({
 
               {/* Notes */}
               <Card className="border-amber-200/50 bg-amber-50/20">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="mt-0.5 h-4 w-4 text-amber-600" />
                     <div>
@@ -1912,7 +1912,7 @@ function ScheduleDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Capacity Summary</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <CardContent className="glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-md border p-3 bg-violet-50/30">
                     <p className="text-xs text-muted-foreground">Total Planned Hours</p>
                     <p className="mt-1 text-lg font-bold tabular-nums">{schedule.plannedHours}h</p>
@@ -1942,7 +1942,7 @@ function ScheduleDetailDrawer({
               Created: <span className="font-mono">{schedule.createdAt}</span>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={handleExport} className="gap-1">
+              <Button variant="outline" size="sm" onClick={handleExport} className="btn-outline-animate gap-1">
                 <Download className="h-3 w-3" />
                 Export
               </Button>
@@ -1959,7 +1959,7 @@ function ScheduleDetailDrawer({
                 </Button>
               )}
               {(schedule.status === "started" || schedule.status === "in-progress") && (
-                <Button variant="outline" size="sm" onClick={() => handleAction("hold")} className="gap-1 border-amber-300 text-amber-700">
+                <Button variant="outline" size="sm" onClick={() => handleAction("hold")} className="btn-outline-animate gap-1 border-amber-300 text-amber-700">
                   <CirclePause className="h-3 w-3" />
                   Hold
                 </Button>
@@ -1971,7 +1971,7 @@ function ScheduleDetailDrawer({
                 </Button>
               )}
               {schedule.status === "delayed" && (
-                <Button variant="outline" size="sm" onClick={() => handleAction("expedite")} className="gap-1 border-rose-300 text-rose-700">
+                <Button variant="outline" size="sm" onClick={() => handleAction("expedite")} className="btn-outline-animate gap-1 border-rose-300 text-rose-700">
                   <AlertTriangle className="h-3 w-3" />
                   Expedite
                 </Button>

@@ -663,7 +663,7 @@ export default function CrossDockOperationsHubView() {
             </Card>
             <Card>
               <CardHeader><CardTitle className="text-sm">Carrier Distribution</CardTitle></CardHeader>
-              <CardContent className="flex justify-center">
+              <CardContent className="glass-subtle flex justify-center">
                 <PieChart width={260} height={260}>
                   <Pie data={carrierDist} cx="50%" cy="50%" innerRadius={55} outerRadius={95} dataKey="value" paddingAngle={2}
                     label={({ name, percent }: { name: string; percent: number }) => `${name.split(" ")[0]} ${(percent * 100).toFixed(0)}%`}>
@@ -700,8 +700,8 @@ export default function CrossDockOperationsHubView() {
             <FilterButtons items={INBOUND_STATUSES} value={ibFilter} onChange={setIbFilter} />
           </div>
           <Card>
-            <CardContent className="p-0 max-h-[540px] overflow-y-auto">
-              <Table>
+            <CardContent className="glass-subtle p-0 max-h-[540px] overflow-y-auto">
+              <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   <TableHead className="cursor-pointer select-none text-xs" onClick={() => handleSort("id")}><div className="flex items-center gap-1">Shipment<ArrowUpDown className="h-3 w-3" /></div></TableHead>
                   <TableHead className="cursor-pointer select-none text-xs" onClick={() => handleSort("carrier")}><div className="flex items-center gap-1">Carrier<ArrowUpDown className="h-3 w-3" /></div></TableHead>
@@ -757,8 +757,8 @@ export default function CrossDockOperationsHubView() {
           </div>
           <StatusStrip data={dkData as unknown as Record<string, unknown>[]} statusKey="status" />
           <Card>
-            <CardContent className="p-0 max-h-[540px] overflow-y-auto">
-              <Table>
+            <CardContent className="glass-subtle p-0 max-h-[540px] overflow-y-auto">
+              <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   {["Door ID", "Type", "Status", "Current Shipment", "Carrier", "Warehouse", "Occupancy", "Throughput", "Assigned Worker"].map((h) => (
                     <TableHead key={h} className="text-xs">{h}</TableHead>
@@ -806,7 +806,7 @@ export default function CrossDockOperationsHubView() {
             <div className="grid gap-2">
               {stData.filter((t) => t.priority === "Emergency" || t.priority === "High").slice(0, 4).map((t) => (
                 <Card key={t.id} className="cdh-priority-card border-l-4" style={{ borderLeftColor: t.priority === "Emergency" ? THEME.rose : THEME.orange }}>
-                  <CardContent className="flex flex-wrap items-center gap-3 p-3">
+                  <CardContent className="glass-subtle flex flex-wrap items-center gap-3 p-3">
                     <span className="font-mono text-xs font-bold">{t.id}</span>
                     <PriorityBadge level={t.priority} /><CategoryBadge cat={t.category} /><SortStatusBadge status={t.status} />
                     <LaneBadge lane={t.lane} /><WorkerBadge name={t.worker} />
@@ -818,8 +818,8 @@ export default function CrossDockOperationsHubView() {
             </div>
           </div>
           <Card>
-            <CardContent className="p-0 max-h-[420px] overflow-y-auto">
-              <Table>
+            <CardContent className="glass-subtle p-0 max-h-[420px] overflow-y-auto">
+              <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   {[
                     ["id", "Task ID", true], ["orderId", "Order ID", true], ["source", "Source", false],
@@ -879,8 +879,8 @@ export default function CrossDockOperationsHubView() {
           </div>
           <StatusStrip data={obData as unknown as Record<string, unknown>[]} statusKey="status" />
           <Card>
-            <CardContent className="p-0 max-h-[540px] overflow-y-auto">
-              <Table>
+            <CardContent className="glass-subtle p-0 max-h-[540px] overflow-y-auto">
+              <Table className="table-hover-highlight">
                 <TableHeader><TableRow>
                   {["id", "carrier", "destination", "origin", "status", "vehicle", "driver", "departure", "eta", "pallets", "weight", "value", "tracking"].map((h) => (
                     <TableHead key={h} className="text-xs cursor-pointer select-none" onClick={() => handleSort(h)}>

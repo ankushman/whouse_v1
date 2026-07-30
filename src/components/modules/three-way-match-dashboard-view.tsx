@@ -339,7 +339,7 @@ function MatchStatusBadge({ status }: { status: string }) {
     price_variance: "warning", no_grn: "destructive", no_invoice: "destructive",
     no_match: "secondary", over_invoice: "destructive",
   };
-  return <Badge variant={colorMap[status] || "default"} className="text-xs font-medium">{MATCH_LABELS[status] || status}</Badge>;
+  return <Badge variant={colorMap[status] || "default"} className="badge-interactive text-xs font-medium">{MATCH_LABELS[status] || status}</Badge>;
 }
 
 function VarianceCell({ value, suffix = "" }: { value: number; suffix?: string }) {
@@ -452,8 +452,8 @@ export function ThreeWayMatchDashboardView() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Badge className="twm-header-badge"><IndianRupee className="h-3 w-3 mr-1" />{FormatINR(stats.totalVariance)} at risk</Badge>
-          <Badge className="twm-header-badge bg-emerald-500/20 text-emerald-200"><CheckCircle2 className="h-3 w-3 mr-1" />{stats.matchRate}% match rate</Badge>
+          <Badge className="badge-interactive twm-header-badge"><IndianRupee className="h-3 w-3 mr-1" />{FormatINR(stats.totalVariance)} at risk</Badge>
+          <Badge className="badge-interactive twm-header-badge bg-emerald-500/20 text-emerald-200"><CheckCircle2 className="h-3 w-3 mr-1" />{stats.matchRate}% match rate</Badge>
         </div>
       </div>
 
@@ -599,7 +599,7 @@ export function ThreeWayMatchDashboardView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="twm-match-table">
                     <thead>
@@ -735,7 +735,7 @@ export function ThreeWayMatchDashboardView() {
                   All Discrepancies ({matches.reduce((s, m) => s + m.discrepancies.length, 0)} total)
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto max-h-80">
                   <table className="twm-match-table">
                     <thead className="sticky top-0">
@@ -756,7 +756,7 @@ export function ThreeWayMatchDashboardView() {
                           <tr key={`${m.poId}-${i}`} className="twm-match-row">
                             <td className="font-mono text-xs">{m.poId}</td>
                             <td>
-                              <Badge variant={d.severity === "critical" ? "destructive" : d.severity === "warning" ? "warning" : "default"} className="text-[10px]">
+                              <Badge variant={d.severity === "critical" ? "destructive" : d.severity === "warning" ? "warning" : "default"} className="badge-interactive text-[10px]">
                                 {d.severity}
                               </Badge>
                             </td>
@@ -840,7 +840,7 @@ export function ThreeWayMatchDashboardView() {
                   Supplier Performance Summary
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="twm-match-table">
                     <thead>
@@ -860,14 +860,14 @@ export function ThreeWayMatchDashboardView() {
                           <td className="text-xs font-mono text-right">{s.total}</td>
                           <td className="text-xs font-mono text-right">{s.total - (s.total - s.total * s.matchRate / 100)}</td>
                           <td className="text-right">
-                            <Badge variant={s.matchRate >= 80 ? "success" : s.matchRate >= 50 ? "warning" : "destructive"} className="text-xs font-mono">
+                            <Badge variant={s.matchRate >= 80 ? "success" : s.matchRate >= 50 ? "warning" : "destructive"} className="badge-interactive text-xs font-mono">
                               {s.matchRate}%
                             </Badge>
                           </td>
                           <td className="text-xs font-mono text-right">{FormatINR(s.variance)}</td>
                           <td className="text-center">
-                            {i === 0 && <Badge className="twm-champ-badge"><Crown className="h-3 w-3 mr-0.5" /> Best</Badge>}
-                            {i === supplierStats.length - 1 && <Badge variant="destructive" className="text-xs">Review</Badge>}
+                            {i === 0 && <Badge className="badge-interactive twm-champ-badge"><Crown className="h-3 w-3 mr-0.5" /> Best</Badge>}
+                            {i === supplierStats.length - 1 && <Badge variant="destructive" className="badge-interactive text-xs">Review</Badge>}
                           </td>
                         </tr>
                       ))}
@@ -938,7 +938,7 @@ export function ThreeWayMatchDashboardView() {
                       Line-by-Line Comparison
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="p-0">
+                  <CardContent className="glass-subtle p-0">
                     <div className="overflow-x-auto">
                       <table className="twm-match-table">
                         <thead>
@@ -999,10 +999,10 @@ export function ThreeWayMatchDashboardView() {
                         Discrepancies ({selectedMatch.discrepancies.length})
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-2">
+                    <CardContent className="glass-subtle space-y-2">
                       {selectedMatch.discrepancies.map((d, i) => (
                         <div key={i} className={`twm-disc-detail ${d.severity === "critical" ? "twm-disc-critical" : d.severity === "warning" ? "twm-disc-warning" : "twm-disc-info"}`}>
-                          <Badge variant={d.severity === "critical" ? "destructive" : d.severity === "warning" ? "warning" : "default"} className="text-[10px]">
+                          <Badge variant={d.severity === "critical" ? "destructive" : d.severity === "warning" ? "warning" : "default"} className="badge-interactive text-[10px]">
                             {d.severity}
                           </Badge>
                           <span className="text-xs capitalize">{d.type.replace(/_/g, " ")}</span>
@@ -1020,7 +1020,7 @@ export function ThreeWayMatchDashboardView() {
 
                 {/* Navigation */}
                 <div className="flex justify-between">
-                  <Button variant="outline" size="sm" className="text-xs"
+                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
                     onClick={() => {
                       const idx = matches.findIndex((m) => m.poId === selectedMatch.poId);
                       if (idx > 0) setSelectedMatch(matches[idx - 1]);
@@ -1029,7 +1029,7 @@ export function ThreeWayMatchDashboardView() {
                   >
                     ← Previous PO
                   </Button>
-                  <Button variant="outline" size="sm" className="text-xs"
+                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
                     onClick={() => {
                       const idx = matches.findIndex((m) => m.poId === selectedMatch.poId);
                       if (idx < matches.length - 1) setSelectedMatch(matches[idx + 1]);
@@ -1042,7 +1042,7 @@ export function ThreeWayMatchDashboardView() {
               </div>
             ) : (
               <Card className="twm-chart-card">
-                <CardContent className="py-12 text-center">
+                <CardContent className="glass-subtle py-12 text-center">
                   <FileCheck className="h-12 w-12 text-muted-foreground/30 mx-auto mb-3" />
                   <p className="text-sm text-muted-foreground">Select a PO from the Match Overview tab to inspect its 3-way match details</p>
                 </CardContent>

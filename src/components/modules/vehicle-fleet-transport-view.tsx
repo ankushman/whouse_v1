@@ -366,7 +366,7 @@ export default function VehicleFleetTransportView() {
           </div>
         </div>
         <div className="vft-header-actions">
-          <Badge className="vft-badge-live"><span className="vft-pulse-dot" /> Live Tracking: {vehicles.filter(v => v.status === "On Trip").length} On Road</Badge>
+          <Badge className="badge-interactive vft-badge-live"><span className="vft-pulse-dot" /> Live Tracking: {vehicles.filter(v => v.status === "On Trip").length} On Road</Badge>
         </div>
       </div>
 
@@ -512,7 +512,7 @@ function DashboardTab({ onSelectVehicle, onSelectTrip }: { onSelectVehicle: (v: 
                     <td className="vft-mono">{trip.id}</td>
                     <td>{trip.route.from.replace(" DC", "").replace(" Hub", "")} → {trip.route.to.replace(" DC", "").replace(" Hub", "")}</td>
                     <td>{trip.driver.name}</td>
-                    <td><Badge className="vft-status-badge" style={{ background: `${TRIP_STATUS_COLORS[trip.status]}20`, color: TRIP_STATUS_COLORS[trip.status] }}>{trip.status}</Badge></td>
+                    <td><Badge className="badge-interactive vft-status-badge" style={{ background: `${TRIP_STATUS_COLORS[trip.status]}20`, color: TRIP_STATUS_COLORS[trip.status] }}>{trip.status}</Badge></td>
                     <td><div className="vft-progress-cell"><Progress value={Math.round(trip.distanceCovered / trip.route.distance * 100)} className="vft-progress" /><span className="vft-progress-text">{Math.round(trip.distanceCovered / trip.route.distance * 100)}%</span></div></td>
                   </tr>
                 ))}
@@ -570,7 +570,7 @@ function FleetTab({ vehicles: vList, onSelect, search, onSearchChange, statusFil
           <div key={v.id} className="vft-vehicle-card" onClick={() => onSelect(v)}>
             <div className="vft-vehicle-card-header" style={{ background: `linear-gradient(135deg, ${STATUS_COLORS[v.status]}30, ${STATUS_COLORS[v.status]}10)` }}>
               <div className="vft-vehicle-reg">{v.regNo}</div>
-              <Badge className="vft-vehicle-status-badge" style={{ background: `${STATUS_COLORS[v.status]}20`, color: STATUS_COLORS[v.status] }}>{v.status}</Badge>
+              <Badge className="badge-interactive vft-vehicle-status-badge" style={{ background: `${STATUS_COLORS[v.status]}20`, color: STATUS_COLORS[v.status] }}>{v.status}</Badge>
             </div>
             <div className="vft-vehicle-card-body">
               <div className="vft-vehicle-info-row"><Bus className="h-4 w-4" style={{ color: THEME.primary }} /><span>{v.make} {v.model}</span></div>
@@ -585,7 +585,7 @@ function FleetTab({ vehicles: vList, onSelect, search, onSearchChange, statusFil
                 <div className="vft-vehicle-driver">
                   <Users className="h-3.5 w-3.5" />
                   <span>{v.driver.name}</span>
-                  <Badge className="vft-rating-badge" style={{ background: THEME.warning + "20", color: THEME.warning }}>{v.driver.rating}</Badge>
+                  <Badge className="badge-interactive vft-rating-badge" style={{ background: THEME.warning + "20", color: THEME.warning }}>{v.driver.rating}</Badge>
                 </div>
               )}
               <div className="vft-vehicle-meta">
@@ -620,7 +620,7 @@ function TripsTab({ trips: tList, onSelect, statusFilter, onStatusFilterChange }
 
       {/* Trip Table */}
       <Card className="vft-card">
-        <CardContent className="vft-card-content">
+        <CardContent className="glass-subtle vft-card-content">
           <div className="vft-table-wrap">
             <table className="vft-table">
               <thead>
@@ -645,7 +645,7 @@ function TripsTab({ trips: tList, onSelect, statusFilter, onStatusFilterChange }
                     <td className="vft-mono">{trip.vehicleReg}</td>
                     <td>{trip.driver.name}</td>
                     <td>
-                      <Badge className="vft-cargo-badge" style={{ background: `${THEME.secondary}20`, color: THEME.secondary }}>{trip.cargoType}</Badge>
+                      <Badge className="badge-interactive vft-cargo-badge" style={{ background: `${THEME.secondary}20`, color: THEME.secondary }}>{trip.cargoType}</Badge>
                       <span className="vft-cargo-weight">{trip.cargoWeight} kg</span>
                     </td>
                     <td className="vft-mono vft-sm">{trip.departure.split(" ")[1]}</td>
@@ -657,7 +657,7 @@ function TripsTab({ trips: tList, onSelect, statusFilter, onStatusFilterChange }
                       </div>
                     </td>
                     <td>
-                      <Badge className="vft-status-badge" style={{ background: `${TRIP_STATUS_COLORS[trip.status]}20`, color: TRIP_STATUS_COLORS[trip.status] }}>
+                      <Badge className="badge-interactive vft-status-badge" style={{ background: `${TRIP_STATUS_COLORS[trip.status]}20`, color: TRIP_STATUS_COLORS[trip.status] }}>
                         {trip.status}
                       </Badge>
                       {trip.status === "Delayed" && trip.delayReason && (
@@ -714,7 +714,7 @@ function MaintenanceTab({ records, onSelectVehicle }: {
       {/* Records Table */}
       <Card className="vft-card">
         <CardHeader className="vft-card-header"><CardTitle className="vft-card-title"><Wrench className="h-4 w-4" /> Maintenance Records</CardTitle></CardHeader>
-        <CardContent className="vft-card-content">
+        <CardContent className="glass-subtle vft-card-content">
           <div className="vft-table-wrap">
             <table className="vft-table">
               <thead><tr><th>ID</th><th>Vehicle</th><th>Type</th><th>Vendor</th><th>Scheduled</th><th>Completed</th><th>Cost</th><th>Priority</th><th>Status</th></tr></thead>
@@ -728,8 +728,8 @@ function MaintenanceTab({ records, onSelectVehicle }: {
                     <td className="vft-mono vft-sm">{rec.scheduledDate}</td>
                     <td className="vft-mono vft-sm">{rec.completedDate || "—"}</td>
                     <td className="vft-mono">₹{rec.cost.toLocaleString("en-IN")}</td>
-                    <td><Badge className="vft-priority-badge" style={{ background: `${priorityColors[rec.priority]}20`, color: priorityColors[rec.priority] }}>{rec.priority}</Badge></td>
-                    <td><Badge className="vft-status-badge" style={{ background: `${statusColors[rec.status]}20`, color: statusColors[rec.status] }}>{rec.status}</Badge></td>
+                    <td><Badge className="badge-interactive vft-priority-badge" style={{ background: `${priorityColors[rec.priority]}20`, color: priorityColors[rec.priority] }}>{rec.priority}</Badge></td>
+                    <td><Badge className="badge-interactive vft-status-badge" style={{ background: `${statusColors[rec.status]}20`, color: statusColors[rec.status] }}>{rec.status}</Badge></td>
                   </tr>
                 ))}
               </tbody>
@@ -827,12 +827,14 @@ function VehicleDetailDrawer({ vehicle }: { vehicle: typeof vehicles[number] }) 
               <div className="vft-drawer-reg">{vehicle.regNo}</div>
               <div className="vft-drawer-make">{vehicle.make} {vehicle.model}</div>
             </div>
-            <Badge className="vft-drawer-status" style={{ background: `${STATUS_COLORS[vehicle.status]}30`, color: "#fff" }}>{vehicle.status}</Badge>
+            <Badge className="badge-interactive vft-drawer-status" style={{ background: `${STATUS_COLORS[vehicle.status]}30`, color: "#fff" }}>{vehicle.status}</Badge>
           </div>
           <div className="vft-drawer-badges">
-            <Badge className="vft-drawer-type-badge" style={{ background: `${THEME.secondary}30`, color: "#fff" }}>{vehicle.type}</Badge>
-            <Badge className="vft-drawer-fuel-badge" style={{ background: `${FUEL_COLORS[vehicle.fuelType]}30`, color: "#fff" }}>{vehicle.fuelType}</Badge>
-            {vehicle.gpsEnabled && <Badge className="vft-drawer-gps-badge" style={{ background: "#22c55e30", color: "#fff" }}>GPS</Badge>}
+<div className="chip-group">
+            <Badge className="badge-interactive vft-drawer-type-badge" style={{ background: `${THEME.secondary}30`, color: "#fff" }}>{vehicle.type}</Badge>
+            <Badge className="badge-interactive vft-drawer-fuel-badge" style={{ background: `${FUEL_COLORS[vehicle.fuelType]}30`, color: "#fff" }}>{vehicle.fuelType}</Badge>
+            {vehicle.gpsEnabled && <Badge className="badge-interactive vft-drawer-gps-badge" style={{ background: "#22c55e30", color: "#fff" }}>GPS</Badge>}
+</div>
           </div>
         </div>
 
@@ -881,7 +883,7 @@ function VehicleDetailDrawer({ vehicle }: { vehicle: typeof vehicles[number] }) 
                 <div className="vft-driver-name">{vehicle.driver.name}</div>
                 <div className="vft-driver-meta-row">
                   <span><Phone className="h-3 w-3" /> {vehicle.driver.phone}</span>
-                  <Badge className="vft-rating-badge" style={{ background: THEME.warning + "20", color: THEME.warning }}>{vehicle.driver.rating}</Badge>
+                  <Badge className="badge-interactive vft-rating-badge" style={{ background: THEME.warning + "20", color: THEME.warning }}>{vehicle.driver.rating}</Badge>
                 </div>
                 <div className="vft-driver-meta-row"><span>{vehicle.driver.license}</span></div>
                 <div className="vft-driver-meta-row"><span>{vehicle.driver.trips} trips • {vehicle.driver.expYears} yrs exp</span></div>
@@ -901,7 +903,7 @@ function VehicleDetailDrawer({ vehicle }: { vehicle: typeof vehicles[number] }) 
             <div key={i} className="vft-compliance-item" style={{ borderLeft: `3px solid ${item.ok ? THEME.success : THEME.danger}` }}>
               <div className="vft-compliance-label">{item.label}</div>
               <div className="vft-compliance-expiry">{item.expiry}</div>
-              <Badge className="vft-compliance-badge" style={{ background: `${item.ok ? THEME.success : THEME.danger}20`, color: item.ok ? THEME.success : THEME.danger }}>
+              <Badge className="badge-interactive vft-compliance-badge" style={{ background: `${item.ok ? THEME.success : THEME.danger}20`, color: item.ok ? THEME.success : THEME.danger }}>
                 {item.ok ? "Valid" : "Expiring Soon"}
               </Badge>
             </div>
@@ -912,8 +914,8 @@ function VehicleDetailDrawer({ vehicle }: { vehicle: typeof vehicles[number] }) 
         <div className="vft-drawer-actions">
           <Button className="vft-action-btn" style={{ background: THEME.primary, color: "#fff" }}><Navigation className="h-4 w-4" /> Track Live</Button>
           <Button className="vft-action-btn" style={{ background: THEME.secondary, color: "#fff" }}><Wrench className="h-4 w-4" /> Schedule Service</Button>
-          <Button className="vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> Documents</Button>
-          <Button className="vft-action-btn" variant="outline"><Fuel className="h-4 w-4" /> Fuel Log</Button>
+          <Button className="btn-outline-animate vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> Documents</Button>
+          <Button className="btn-outline-animate vft-action-btn" variant="outline"><Fuel className="h-4 w-4" /> Fuel Log</Button>
         </div>
       </div>
     </ScrollArea>
@@ -942,7 +944,7 @@ function TripDetailDrawer({ trip }: { trip: typeof trips[number] }) {
               <div className="vft-drawer-reg">{trip.id}</div>
               <div className="vft-drawer-make">{trip.route.from} → {trip.route.to}</div>
             </div>
-            <Badge className="vft-drawer-status" style={{ background: "#ffffff30", color: "#fff" }}>{trip.status}</Badge>
+            <Badge className="badge-interactive vft-drawer-status" style={{ background: "#ffffff30", color: "#fff" }}>{trip.status}</Badge>
           </div>
           {trip.delayReason && (
             <div className="vft-drawer-delay"><AlertTriangle className="h-4 w-4" /> Delay: {trip.delayReason}</div>
@@ -998,7 +1000,7 @@ function TripDetailDrawer({ trip }: { trip: typeof trips[number] }) {
           <div className="vft-driver-avatar"><Users className="h-6 w-6" /></div>
           <div className="vft-driver-details">
             <div className="vft-driver-name">{trip.driver.name}</div>
-            <div className="vft-driver-meta-row"><span><Phone className="h-3 w-3" /> {trip.driver.phone}</span><Badge className="vft-rating-badge" style={{ background: THEME.warning + "20", color: THEME.warning }}>{trip.driver.rating}</Badge></div>
+            <div className="badge-interactive vft-driver-meta-row"><span><Phone className="h-3 w-3" /> {trip.driver.phone}</span><Badge className="vft-rating-badge" style={{ background: THEME.warning + "20", color: THEME.warning }}>{trip.driver.rating}</Badge></div>
             <div className="vft-driver-meta-row"><span>License: {trip.driver.license}</span></div>
             <div className="vft-driver-meta-row"><span>{trip.driver.trips} trips • {trip.driver.expYears} yrs exp</span></div>
           </div>
@@ -1016,8 +1018,8 @@ function TripDetailDrawer({ trip }: { trip: typeof trips[number] }) {
         <div className="vft-drawer-actions">
           <Button className="vft-action-btn" style={{ background: THEME.primary, color: "#fff" }}><Navigation className="h-4 w-4" /> Track Live</Button>
           <Button className="vft-action-btn" style={{ background: THEME.accent, color: "#fff" }}><Phone className="h-4 w-4" /> Call Driver</Button>
-          <Button className="vft-action-btn" variant="outline"><AlertTriangle className="h-4 w-4" /> Report Issue</Button>
-          <Button className="vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> E-Way Bill</Button>
+          <Button className="btn-outline-animate vft-action-btn" variant="outline"><AlertTriangle className="h-4 w-4" /> Report Issue</Button>
+          <Button className="btn-outline-animate vft-action-btn" variant="outline"><FileText className="h-4 w-4" /> E-Way Bill</Button>
         </div>
       </div>
     </ScrollArea>

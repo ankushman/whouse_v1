@@ -352,7 +352,7 @@ export function SettingsView() {
               <CardTitle className="text-sm font-semibold animated-underline">General Settings</CardTitle>
               <CardDescription className="text-xs">Configure basic application settings</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="glass-subtle space-y-6">
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label className="text-xs">Company Name</Label>
@@ -436,7 +436,7 @@ export function SettingsView() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -447,7 +447,7 @@ export function SettingsView() {
                 />
               </div>
               <div className="max-h-[420px] overflow-y-auto rounded-md border">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader className="sticky top-0 bg-background z-10">
                     <TableRow className="hover:bg-transparent">
                       <TableHead className="text-xs">Name</TableHead>
@@ -556,7 +556,7 @@ export function SettingsView() {
                   </div>
                   <div className="space-y-1.5">
                     <Label className="text-xs">Capacity (pallets)</Label>
-                    <Input type="number" value={warehouseForm.capacity} onChange={(e) => setWarehouseForm({ ...warehouseForm, capacity: e.target.value })} placeholder="e.g. 3000" className="h-9 text-sm" />
+                    <Input type="number" value={warehouseForm.capacity} onChange={(e) => setWarehouseForm({ ...warehouseForm, capacity: e.target.value })} placeholder="e.g. 3000" className="input-focus-ring h-9 text-sm" />
                   </div>
                 </div>
                 <div className="space-y-1.5">
@@ -588,7 +588,7 @@ export function SettingsView() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -599,7 +599,7 @@ export function SettingsView() {
                 />
               </div>
               <div className="max-h-[420px] overflow-y-auto rounded-md border">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader className="sticky top-0 bg-background z-10">
                     <TableRow className="hover:bg-transparent">
                       <TableHead className="text-xs">Name</TableHead>
@@ -634,7 +634,7 @@ export function SettingsView() {
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline" className="text-[10px] font-mono">{c.code}</Badge>
+                          <Badge variant="outline" className="badge-interactive text-[10px] font-mono">{c.code}</Badge>
                         </TableCell>
                         <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{c.city}, {c.state}</TableCell>
                         <TableCell className="text-xs hidden lg:table-cell">
@@ -767,7 +767,7 @@ export function SettingsView() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -778,7 +778,7 @@ export function SettingsView() {
                 />
               </div>
               <div className="max-h-[420px] overflow-y-auto rounded-md border">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader className="sticky top-0 bg-background z-10">
                     <TableRow className="hover:bg-transparent">
                       <TableHead className="text-xs">Name</TableHead>
@@ -811,7 +811,7 @@ export function SettingsView() {
                           </div>
                         </TableCell>
                         <TableCell className="text-xs hidden sm:table-cell">
-                          <Badge variant="secondary" className="text-[10px]">{t.fleet} vehicles</Badge>
+                          <Badge variant="secondary" className="badge-interactive text-[10px]">{t.fleet} vehicles</Badge>
                         </TableCell>
                         <TableCell className="text-xs hidden md:table-cell">{t.routes} active routes</TableCell>
                         <TableCell className="text-xs hidden lg:table-cell">{t.contact}</TableCell>
@@ -863,11 +863,11 @@ export function SettingsView() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-1.5">
                     <Label className="text-xs">Fleet Size</Label>
-                    <Input type="number" value={transporterForm.fleet} onChange={(e) => setTransporterForm({ ...transporterForm, fleet: e.target.value })} placeholder="e.g. 120" className="h-9 text-sm" />
+                    <Input type="number" value={transporterForm.fleet} onChange={(e) => setTransporterForm({ ...transporterForm, fleet: e.target.value })} placeholder="e.g. 120" className="input-focus-ring h-9 text-sm" />
                   </div>
                   <div className="space-y-1.5">
                     <Label className="text-xs">Active Routes</Label>
-                    <Input type="number" value={transporterForm.routes} onChange={(e) => setTransporterForm({ ...transporterForm, routes: e.target.value })} placeholder="e.g. 45" className="h-9 text-sm" />
+                    <Input type="number" value={transporterForm.routes} onChange={(e) => setTransporterForm({ ...transporterForm, routes: e.target.value })} placeholder="e.g. 45" className="input-focus-ring h-9 text-sm" />
                   </div>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -925,7 +925,7 @@ export function SettingsView() {
               </div>
             </CardHeader>
             <CardContent>
-              <Table>
+              <Table className="table-hover-highlight">
                 <TableHeader>
                   <TableRow className="hover:bg-transparent">
                     <TableHead className="text-xs">User</TableHead>
@@ -951,7 +951,7 @@ export function SettingsView() {
                       </TableCell>
                       <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{user.email}</TableCell>
                       <TableCell>
-                        <Badge variant="outline" className="text-[10px] rounded-full">{user.role}</Badge>
+                        <Badge variant="outline" className="badge-interactive text-[10px] rounded-full">{user.role}</Badge>
                       </TableCell>
                       <TableCell>
                         <Badge className={cn("text-[10px] rounded-full", user.status === "Active" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300")}>{user.status}</Badge>
@@ -986,7 +986,7 @@ export function SettingsView() {
               </div>
             </CardHeader>
             <CardContent>
-              <Table>
+              <Table className="table-hover-highlight">
                 <TableHeader>
                   <TableRow className="hover:bg-transparent">
                     <TableHead className="text-xs">Role Name</TableHead>
@@ -1001,7 +1001,7 @@ export function SettingsView() {
                       <TableCell className="text-xs font-medium">{role.name}</TableCell>
                       <TableCell className="text-xs text-muted-foreground">{role.permissions}</TableCell>
                       <TableCell className="text-xs text-right">
-                        <Badge variant="secondary" className="text-[10px]">{role.users}</Badge>
+                        <Badge variant="secondary" className="badge-interactive text-[10px]">{role.users}</Badge>
                       </TableCell>
                       <TableCell className="text-right">
                         <Button variant="ghost" size="icon" className="h-7 w-7"><Edit className="h-3 w-3" /></Button>
@@ -1028,7 +1028,7 @@ export function SettingsView() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="glass-subtle space-y-4">
               <div className="relative max-w-xs">
                 <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
@@ -1039,7 +1039,7 @@ export function SettingsView() {
                 />
               </div>
               <div className="max-h-[480px] overflow-y-auto rounded-md border">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader className="sticky top-0 bg-background z-10">
                     <TableRow className="hover:bg-transparent">
                       <TableHead className="text-xs">KPI Name</TableHead>
@@ -1077,7 +1077,7 @@ export function SettingsView() {
                               <span className="text-xs font-medium">{kpi.label}</span>
                             </div>
                           </TableCell>
-                          <TableCell className="text-xs font-mono font-medium">{kpi.value}{kpi.unit}</TableCell>
+                          <TableCell className="numeric-cell text-xs font-mono font-medium">{kpi.value}{kpi.unit}</TableCell>
                           <TableCell>
                             <Input
                               type="number"
@@ -1143,7 +1143,7 @@ export function SettingsView() {
               <CardTitle className="text-sm font-semibold animated-underline">Notification Settings</CardTitle>
               <CardDescription className="text-xs">Configure how and when you receive notifications</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
+            <CardContent className="glass-subtle space-y-6">
               <div>
                 <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Channels</h4>
                 <SettingsSection>
@@ -1190,7 +1190,7 @@ export function SettingsView() {
                 </CardTitle>
                 <CardDescription className="text-xs">Customize the visual appearance</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-5">
+              <CardContent className="glass-subtle space-y-5">
                 <SettingRow label="Color Mode" description="Light, dark, or follow system">
                   <Select value={appearanceSettings.theme} onValueChange={(v) => { setAppearanceSettings({ ...appearanceSettings, theme: v }); setNextTheme(v); toast.success("Theme updated", `Switched to ${v} mode`) }}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
@@ -1241,7 +1241,7 @@ export function SettingsView() {
                 </CardTitle>
                 <CardDescription className="text-xs">Control density and data presentation</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-5">
+              <CardContent className="glass-subtle space-y-5">
                 <SettingRow label="Layout Density" description="Adjust spacing and sizing">
                   <Select value={appearanceSettings.density} onValueChange={(v) => { setAppearanceSettings({ ...appearanceSettings, density: v }); storeSetDensity(v as LayoutDensity); toast.success("Density updated", `Layout set to ${v}`) }}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
@@ -1292,7 +1292,7 @@ export function SettingsView() {
                 </CardTitle>
                 <CardDescription className="text-xs">Control how and when notifications are delivered</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-5">
+              <CardContent className="glass-subtle space-y-5">
                 <SettingRow label="Delivery Frequency" description="How often alerts are sent">
                   <Select value={notifPrefs.frequency} onValueChange={(v) => setNotifPrefs({ frequency: v as NotifFrequency })}>
                     <SelectTrigger className="w-[140px] h-8 text-xs">
@@ -1361,7 +1361,7 @@ export function SettingsView() {
                 </CardTitle>
                 <CardDescription className="text-xs">Configure notification sounds and delivery channels</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-5">
+              <CardContent className="glass-subtle space-y-5">
                 <SettingRow label="Notification Sound" description="Play sound for incoming alerts">
                   <Switch checked={notifPrefs.soundEnabled} onCheckedChange={(v) => setNotifPrefs({ ...notifPrefs, soundEnabled: v })} />
                 </SettingRow>

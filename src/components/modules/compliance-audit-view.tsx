@@ -323,18 +323,18 @@ export function ComplianceAuditView() {
         const outcome = v as AuditOutcome
         if (outcome === "success")
           return (
-            <Badge variant="outline" className="border-emerald-500/40 text-emerald-600 text-[10px]">
+            <Badge variant="outline" className="badge-interactive border-emerald-500/40 text-emerald-600 text-[10px]">
               <CheckCircle2 className="h-3 w-3 mr-0.5" /> Success
             </Badge>
           )
         if (outcome === "failure")
           return (
-            <Badge variant="outline" className="border-amber-500/40 text-amber-600 text-[10px]">
+            <Badge variant="outline" className="badge-interactive border-amber-500/40 text-amber-600 text-[10px]">
               <XCircle className="h-3 w-3 mr-0.5" /> Failure
             </Badge>
           )
         return (
-          <Badge variant="outline" className="border-destructive/40 text-destructive text-[10px]">
+          <Badge variant="outline" className="badge-interactive border-destructive/40 text-destructive text-[10px]">
             <ShieldAlert className="h-3 w-3 mr-0.5" /> Denied
           </Badge>
         )
@@ -404,10 +404,10 @@ export function ComplianceAuditView() {
       {/* Top summary cards */}
       <div className="grid gap-3 grid-cols-2 md:grid-cols-4">
         <Card className="compliance-score-card overflow-hidden">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-start justify-between">
               <ShieldCheck className="h-5 w-5 text-emerald-500" />
-              <Badge variant="outline" className="border-emerald-500/40 text-emerald-600 text-[10px]">
+              <Badge variant="outline" className="badge-interactive border-emerald-500/40 text-emerald-600 text-[10px]">
                 PASSING
               </Badge>
             </div>
@@ -417,10 +417,10 @@ export function ComplianceAuditView() {
           </CardContent>
         </Card>
         <Card className="compliance-findings-card overflow-hidden">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-start justify-between">
               <ScrollText className="h-5 w-5 text-blue-500" />
-              <Badge variant="outline" className="text-[10px]">{complianceDomains.length} domains</Badge>
+              <Badge variant="outline" className="badge-interactive text-[10px]">{complianceDomains.length} domains</Badge>
             </div>
             <div className="mt-2 text-3xl font-bold">{totalFindings}</div>
             <div className="text-xs text-muted-foreground mt-0.5">Open Findings</div>
@@ -428,10 +428,10 @@ export function ComplianceAuditView() {
           </CardContent>
         </Card>
         <Card className="compliance-critical-card overflow-hidden">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-start justify-between">
               <ShieldAlert className="h-5 w-5 text-destructive" />
-              <Badge variant="outline" className="border-destructive/40 text-destructive text-[10px]">
+              <Badge variant="outline" className="badge-interactive border-destructive/40 text-destructive text-[10px]">
                 PRIORITY
               </Badge>
             </div>
@@ -441,10 +441,10 @@ export function ComplianceAuditView() {
           </CardContent>
         </Card>
         <Card className="compliance-events-card overflow-hidden">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-start justify-between">
               <History className="h-5 w-5 text-purple-500" />
-              <Badge variant="outline" className="text-[10px]">Last 24h</Badge>
+              <Badge variant="outline" className="badge-interactive text-[10px]">Last 24h</Badge>
             </div>
             <div className="mt-2 text-3xl font-bold">1,038</div>
             <div className="text-xs text-muted-foreground mt-0.5">Audit Events</div>
@@ -606,7 +606,7 @@ export function ComplianceAuditView() {
                 <div className="flex items-center gap-2">
                   <KeyRound className="h-4 w-4 text-primary" />
                   <span className="text-sm font-semibold">{selectedEntry.id}</span>
-                  <Badge variant="outline" className="text-[10px] font-mono">{selectedEntry.action}</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px] font-mono">{selectedEntry.action}</Badge>
                 </div>
                 <Button
                   variant="ghost"
@@ -688,7 +688,7 @@ function ComplianceDomainCard({
         domain.status === "non-compliant" && "border-destructive/40"
       )}
     >
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-2">
             <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">

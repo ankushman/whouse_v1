@@ -234,7 +234,7 @@ function WarehouseDetailPanel({
 
   return (
     <Card className="absolute right-4 top-4 z-20 w-[280px] shadow-xl border-border/60 animate-slide-in-right-micro">
-      <CardContent className="p-4 space-y-3">
+      <CardContent className="glass-subtle p-4 space-y-3">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -375,7 +375,7 @@ function WarehouseNode({ warehouse, position, isSelected, onClick }: WarehouseNo
           isSelected && "ring-2 ring-primary/60 shadow-lg scale-[1.03]"
         )}
       >
-        <CardContent className="p-2.5">
+        <CardContent className="glass-subtle p-2.5">
           {/* Header: status dot + name */}
           <div className="flex items-center gap-1.5 mb-1.5">
             <span
@@ -461,7 +461,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
       {/* ── Stats Bar ── */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 stagger-children glass-card rounded-xl p-3">
         <Card className="card-depth py-0 gap-0 shadow-card">
-          <CardContent className="flex items-center gap-3 py-3 px-4">
+          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted/80">
               <Building2 className="size-4 text-foreground" />
             </div>
@@ -474,7 +474,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
           </CardContent>
         </Card>
         <Card className="card-depth py-0 gap-0 shadow-card">
-          <CardContent className="flex items-center gap-3 py-3 px-4">
+          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 dark:bg-emerald-950/70">
               <Navigation className="size-4 text-emerald-600 dark:text-emerald-400" />
             </div>
@@ -487,7 +487,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
           </CardContent>
         </Card>
         <Card className="card-depth py-0 gap-0 shadow-card">
-          <CardContent className="flex items-center gap-3 py-3 px-4">
+          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-50 dark:bg-amber-950/70">
               <Gauge className="size-4 text-amber-600 dark:text-amber-400" />
             </div>
@@ -500,7 +500,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
           </CardContent>
         </Card>
         <Card className="card-depth py-0 gap-0 shadow-card">
-          <CardContent className="flex items-center gap-3 py-3 px-4">
+          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 dark:bg-blue-950/70">
               <Truck className="size-4 text-blue-600 dark:text-blue-400" />
             </div>
@@ -513,7 +513,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
           </CardContent>
         </Card>
         <Card className="card-depth py-0 gap-0 shadow-card">
-          <CardContent className="flex items-center gap-3 py-3 px-4">
+          <CardContent className="glass-subtle flex items-center gap-3 py-3 px-4">
             <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-violet-50 dark:bg-violet-950/70">
               <TrendingUp className="size-4 text-violet-600 dark:text-violet-400" />
             </div>
@@ -529,7 +529,7 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
 
       {/* ── Map Container ── */}
       <Card className="overflow-hidden">
-        <CardContent className="p-0">
+        <CardContent className="glass-subtle p-0">
           {/* Map title bar */}
           <div className="flex items-center justify-between border-b border-border/40 px-4 py-3 md:px-6">
             <div className="flex items-center gap-2">
@@ -648,19 +648,19 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Active Routes Table */}
         <Card className="overflow-hidden lg:col-span-2">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="flex items-center justify-between border-b border-border/40 px-4 py-3 md:px-6">
               <div className="flex items-center gap-2">
                 <Truck className="size-4 text-muted-foreground" />
                 <h3 className="text-sm font-semibold text-foreground">Active Routes</h3>
               </div>
-              <Badge variant="outline" className="text-[10px] font-medium">
+              <Badge variant="outline" className="badge-interactive text-[10px] font-medium">
                 {ACTIVE_ROUTES.length} routes
               </Badge>
             </div>
 
             <div className="max-h-[400px] overflow-y-auto scrollbar-glass">
-              <Table className="table-row-hover table-header-sticky-glass">
+              <Table className="table-hover-highlight table-row-hover table-header-sticky-glass">
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[100px]">Route ID</TableHead>
@@ -740,12 +740,12 @@ export function WarehouseMapView({ onWarehouseClick }: WarehouseMapViewProps) {
 
         {/* Fleet Overview Panel */}
         <Card className="card-depth shadow-card overflow-hidden">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="flex items-center gap-2 border-b border-border/40 px-4 py-3">
               <Navigation className="size-4 text-muted-foreground" />
               <h3 className="text-sm font-semibold text-foreground">Fleet Overview</h3>
             </div>
-            <CardContent className="p-4 space-y-4">
+            <CardContent className="glass-subtle p-4 space-y-4">
               {/* Vehicle status breakdown */}
               {[
                 { label: "In Transit", count: 23, total: 30, color: "bg-blue-500" },

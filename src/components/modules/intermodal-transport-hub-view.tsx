@@ -252,7 +252,7 @@ export default function IntermodalTransportHubView() {
   const DrawerActions = ({ id, name }: { id: string; name: string }) => (
     <div className="flex gap-2 pt-2">
       {[{ label: "Edit", icon: Zap }, { label: "Details", icon: Target }, { label: "Report", icon: BarChart3 }].map(a => (
-        <Button key={a.label} variant="outline" size="sm" className="ith-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+        <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate ith-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
       ))}
     </div>
   )
@@ -271,7 +271,7 @@ export default function IntermodalTransportHubView() {
       <div className="ith-dashboard space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {kpis.map(k => (
-            <Card key={k.label} className="ith-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+            <Card key={k.label} className="glass-subtle ith-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
               <div className={cn("ith-kpi-icon p-2 rounded-lg", k.bg)}><k.icon className={cn("h-4 w-4", k.color)} /></div>
               <div><p className="text-[10px] text-muted-foreground uppercase tracking-wide">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
             </CardContent></Card>
@@ -335,9 +335,9 @@ export default function IntermodalTransportHubView() {
         </TableRow></TableHeader><TableBody>{rows.slice(0, 15).map(h => (
           <TableRow key={h.id} className="ith-hub-row">
             <TableCell className="text-xs font-mono">{h.id}</TableCell><TableCell className="text-xs font-medium max-w-[120px] truncate">{h.name}</TableCell>
-            <TableCell><Badge variant="outline" className="text-[10px]">{h.type}</Badge></TableCell><TableCell><RegionBadge region={h.region} /></TableCell>
+            <TableCell><Badge variant="outline" className="badge-interactive text-[10px]">{h.type}</Badge></TableCell><TableCell><RegionBadge region={h.region} /></TableCell>
             <TableCell><SBadge status={h.status} /></TableCell>
-            <TableCell><div className="w-20"><CapacityBar value={h.capacity} /><span className="text-[10px] text-muted-foreground">{h.capacity}%</span></div></TableCell>
+            <TableCell><div className="numeric-cell w-20"><CapacityBar value={h.capacity} /><span className="text-[10px] text-muted-foreground">{h.capacity}%</span></div></TableCell>
             <TableCell className="text-xs">{h.throughput.toLocaleString()}</TableCell><TableCell className="text-xs">{h.dwellTime}h</TableCell>
             <TableCell><ConnectivityScore score={h.connectivity} /></TableCell><TableCell><ActBtn d={h} t="hub" /></TableCell>
           </TableRow>
@@ -373,7 +373,7 @@ export default function IntermodalTransportHubView() {
           <TableRow key={c.id} className="ith-container-row">
             <TableCell className="text-xs font-mono">{c.id}</TableCell><TableCell className="text-[10px] max-w-[100px] truncate">{c.origin}</TableCell><TableCell className="text-[10px] max-w-[100px] truncate">{c.destination}</TableCell>
             <TableCell><ModeBadge mode={c.mode} /></TableCell><TableCell><SBadge status={c.status} /></TableCell>
-            <TableCell className="text-xs">{c.weight}t</TableCell><TableCell className="text-[10px]">{fmtDate(c.etd)}</TableCell><TableCell className="text-[10px]">{fmtDate(c.eta)}</TableCell>
+            <TableCell className="numeric-cell text-xs">{c.weight}t</TableCell><TableCell className="text-[10px]">{fmtDate(c.etd)}</TableCell><TableCell className="text-[10px]">{fmtDate(c.eta)}</TableCell>
             <TableCell className="text-xs">{c.daysInTransit}d</TableCell><TableCell><ActBtn d={c} t="container" /></TableCell>
           </TableRow>
         ))}</TableBody></Table></div>
@@ -414,7 +414,7 @@ export default function IntermodalTransportHubView() {
             <TableCell><TypeBadge type={s.type} /></TableCell><TableCell><ModeBadge mode={s.mode} /></TableCell><SBadge status={s.status} />
             <TableCell className="text-[10px]">{fmtDate(s.departure)}</TableCell><TableCell className="text-[10px]">{fmtDate(s.arrival)}</TableCell>
             <TableCell className="text-xs">{s.containers}</TableCell>
-            <TableCell><div className="w-16"><CapacityBar value={s.capacityUtil} /><span className="text-[10px] text-muted-foreground">{s.capacityUtil}%</span></div></TableCell>
+            <TableCell><div className="numeric-cell w-16"><CapacityBar value={s.capacityUtil} /><span className="text-[10px] text-muted-foreground">{s.capacityUtil}%</span></div></TableCell>
             <TableCell><ActBtn d={s} t="schedule" /></TableCell>
           </TableRow>
         ))}</TableBody></Table></div>
@@ -446,7 +446,7 @@ export default function IntermodalTransportHubView() {
               <Line type="monotone" dataKey="road" stroke={CC.orange} strokeWidth={2} name="Road" /><Line type="monotone" dataKey="rail" stroke={CC.blue} strokeWidth={2} name="Rail" /><Line type="monotone" dataKey="coastal" stroke={CC.cyan} strokeWidth={2} name="Coastal" />
             </LineChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="ith-comparison-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Comparison</CardTitle></CardHeader><CardContent className="space-y-2">
+          <Card className="glass-subtle ith-comparison-card border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Mode Comparison</CardTitle></CardHeader><CardContent className="space-y-2">
             {[{ m: "Road", cost: "\u20b93.2/t-km", time: "2-5 days", rel: "88%" }, { m: "Rail", cost: "\u20b92.1/t-km", time: "3-7 days", rel: "92%" }, { m: "Coastal", cost: "\u20b91.5/t-km", time: "5-10 days", rel: "85%" }].map(c => (
               <div key={c.m} className="ith-comparison-item flex justify-between items-center p-2 rounded-lg bg-muted/50 text-xs">
                 <span className="font-medium">{c.m}</span><div className="flex gap-4 text-[10px] text-muted-foreground"><span>{c.cost}</span><span>{c.time}</span><span>{c.rel}</span></div>
@@ -464,11 +464,11 @@ export default function IntermodalTransportHubView() {
         </TableRow></TableHeader><TableBody>{rows.slice(0, 15).map(c => (
           <TableRow key={c.id} className="ith-cost-row">
             <TableCell className="text-xs font-mono">{c.id}</TableCell><TableCell className="text-[10px] max-w-[120px] truncate">{c.route}</TableCell><ModeBadge mode={c.mode} />
-            <TableCell className="text-xs">\u20b9{c.costPerTon}/t</TableCell><TableCell className="text-xs">{c.distance}km</TableCell><TableCell className="text-xs">{c.transitDays}d</TableCell>
-            <TableCell className="text-xs">{c.reliability}%</TableCell><TableCell className="text-xs font-medium">{fmtINR(c.totalCost)}</TableCell><ActBtn d={c} t="cost" />
+            <TableCell className="numeric-cell text-xs">\u20b9{c.costPerTon}/t</TableCell><TableCell className="text-xs">{c.distance}km</TableCell><TableCell className="text-xs">{c.transitDays}d</TableCell>
+            <TableCell className="numeric-cell text-xs">{c.reliability}%</TableCell><TableCell className="text-xs font-medium">{fmtINR(c.totalCost)}</TableCell><ActBtn d={c} t="cost" />
           </TableRow>
         ))}</TableBody></Table></div>
-        <Card className="ith-savings-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+        <Card className="glass-subtle ith-savings-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
           <TrendingUp className="h-5 w-5 text-emerald-600" /><div><p className="text-sm font-medium">Potential Savings Opportunity</p><p className="text-xs text-muted-foreground">{rows.filter(r => r.reliability > 90).length} routes with &gt;90% reliability eligible for volume discounts</p></div>
         </CardContent></Card>
       </div>
@@ -492,7 +492,7 @@ export default function IntermodalTransportHubView() {
               <Line type="monotone" dataKey="target" stroke={CC.rose} strokeDasharray="5 5" strokeWidth={2} name="Target" /><Line type="monotone" dataKey="actual" stroke={CC.cyan} strokeWidth={2} dot={{ r: 3 }} name="Actual" />
             </LineChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="ith-summary-card border-border/60"><CardContent className="p-4 space-y-3">
+          <Card className="glass-subtle ith-summary-card border-border/60"><CardContent className="p-4 space-y-3">
             <h3 className="text-sm font-medium">SLA Summary</h3>
             {[
               { label: "Hubs >95% On-Time", value: data.performance.filter(p => p.onTime >= 95).length, color: "text-emerald-600" },
@@ -514,10 +514,12 @@ export default function IntermodalTransportHubView() {
         </TableRow></TableHeader><TableBody>{rows.slice(0, 15).map(p => (
           <TableRow key={p.id} className="ith-perf-row">
             <TableCell className="text-xs font-medium">{p.hub}</TableCell>
+<div className="chip-group">
             <TableCell><Badge className={cn("text-[10px]", p.onTime >= 95 ? "bg-emerald-100 text-emerald-700" : p.onTime >= 85 ? "bg-amber-100 text-amber-700" : "bg-rose-100 text-rose-700")}>{p.onTime}%</Badge></TableCell>
             <TableCell><Badge className={cn("text-[10px]", p.dwellTime < 24 ? "bg-emerald-100 text-emerald-700" : p.dwellTime <= 48 ? "bg-amber-100 text-amber-700" : "bg-rose-100 text-rose-700")}>{p.dwellTime}h</Badge></TableCell>
             <TableCell><Badge className={cn("text-[10px]", p.damageRate < 0.5 ? "bg-emerald-100 text-emerald-700" : p.damageRate <= 2 ? "bg-amber-100 text-amber-700" : "bg-rose-100 text-rose-700")}>{p.damageRate}%</Badge></TableCell>
-            <TableCell className="text-xs">{p.throughput.toLocaleString()}</TableCell><TableCell className="text-xs font-medium">{p.slaScore.toFixed(1)}%</TableCell>
+</div>
+            <TableCell className="numeric-cell text-xs">{p.throughput.toLocaleString()}</TableCell><TableCell className="text-xs font-medium">{p.slaScore.toFixed(1)}%</TableCell>
             <SBadge status={p.status} /><RegionBadge region={p.region} />
             <TableCell>{p.trend === "up" ? <ArrowUpRight className="h-3 w-3 text-emerald-600" /> : p.trend === "down" ? <ArrowDownRight className="h-3 w-3 text-rose-600" /> : <span className="text-[10px] text-muted-foreground">\u2014</span>}</TableCell>
             <ActBtn d={p} t="perf" />
@@ -563,14 +565,14 @@ export default function IntermodalTransportHubView() {
       {/* Hub Drawer */}
       <Sheet open={open && drawerType === "hub"} onOpenChange={close}><SheetContent className="ith-hub-drawer w-full sm:max-w-md overflow-y-auto">
         {drawerData && <><DrawerHeader title={`${drawerData.name} ${drawerData.id}`} >
-          <Badge className="bg-white/20 text-white text-[10px] border-0">{drawerData.type}</Badge><SBadge status={drawerData.status} />
+          <Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.type}</Badge><SBadge status={drawerData.status} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Throughput", value: `${drawerData.throughput.toLocaleString()} tons` },
             { label: "Dwell Time", value: `${drawerData.dwellTime}h` },
             { label: "Area", value: `${(drawerData.area / 1000).toFixed(0)}K sqft` },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
           <div><p className="text-[10px] text-muted-foreground mb-1">Capacity Utilization</p><CapacityBar value={drawerData.capacity} /><p className="text-[10px] text-muted-foreground mt-0.5">{drawerData.capacity}%</p></div>
           <div className="flex items-center gap-2"><span className="text-xs text-muted-foreground">Connectivity:</span><ConnectivityScore score={drawerData.connectivity} /></div>
           <InfoGrid items={[["Region", drawerData.region], ["Manager", drawerData.manager], ["Established", drawerData.established], ["Rail", drawerData.railConnected ? "Yes" : "No"], ["Port", drawerData.portConnected ? "Yes" : "No"], ["Type", drawerData.type], ["Status", drawerData.status], ["ID", drawerData.id]]} />
@@ -584,12 +586,12 @@ export default function IntermodalTransportHubView() {
           <ModeBadge mode={drawerData.mode} /><SBadge status={drawerData.status} /><SizeBadge size={drawerData.size} /><PriorityBadge priority={drawerData.priority} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><RouteTimeline origin={drawerData.origin} transfer={drawerData.transferHub} destination={drawerData.destination} mode={drawerData.mode} /></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><RouteTimeline origin={drawerData.origin} transfer={drawerData.transferHub} destination={drawerData.destination} mode={drawerData.mode} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Weight", value: `${drawerData.weight}t` },
             { label: "In Transit", value: `${drawerData.daysInTransit}d` },
             { label: "Shipper", value: drawerData.shipper },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-cyan-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-cyan-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["ETD", fmtDate(drawerData.etd)], ["ETA", fmtDate(drawerData.eta)], ["Mode", drawerData.mode], ["Size", drawerData.size], ["Priority", drawerData.priority], ["Status", drawerData.status]]} />
           <DrawerActions id={drawerData.id} name={drawerData.id} />
         </div></>}
@@ -601,12 +603,12 @@ export default function IntermodalTransportHubView() {
           <TypeBadge type={drawerData.type} /><SBadge status={drawerData.status} /><PriorityBadge priority={drawerData.priority} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><p className="text-sm font-medium">{drawerData.route}</p><div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground"><MapPin className="h-3 w-3" />{fmtDate(drawerData.departure)} <ArrowRight className="h-3 w-3" /><MapPin className="h-3 w-3" />{fmtDate(drawerData.arrival)}</div></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Route</p><p className="text-sm font-medium">{drawerData.route}</p><div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground"><MapPin className="h-3 w-3" />{fmtDate(drawerData.departure)} <ArrowRight className="h-3 w-3" /><MapPin className="h-3 w-3" />{fmtDate(drawerData.arrival)}</div></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Containers", value: drawerData.containers },
             { label: "Capacity", value: `${drawerData.capacityUtil}%` },
             { label: "Mode", value: drawerData.mode },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Type", drawerData.type], ["Status", drawerData.status], ["Departure", fmtDate(drawerData.departure)], ["Arrival", fmtDate(drawerData.arrival)], ["Priority", drawerData.priority], ["Mode", drawerData.mode]]} />
           <DrawerActions id={drawerData.id} name={drawerData.id} />
         </div></>}
@@ -623,7 +625,7 @@ export default function IntermodalTransportHubView() {
             { label: "Total Cost", value: fmtINR(drawerData.totalCost) },
             { label: "Reliability", value: `${drawerData.reliability}%` },
             { label: "Transit", value: `${drawerData.transitDays}d` },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-orange-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-orange-700">{m.value}</p></CardContent></Card>))}</div>
           <DrawerActions id={drawerData.id} name={drawerData.id} />
         </div></>}
       </SheetContent></Sheet>
@@ -631,9 +633,11 @@ export default function IntermodalTransportHubView() {
       {/* Performance Drawer */}
       <Sheet open={open && drawerType === "perf"} onOpenChange={close}><SheetContent className="ith-perf-drawer w-full sm:max-w-md overflow-y-auto">
         {drawerData && <><DrawerHeader title={drawerData.hub}>
+<div className="chip-group">
           <Badge className={cn("text-[10px]", drawerData.onTime >= 95 ? "bg-emerald-400/30 text-white border-0" : drawerData.onTime >= 85 ? "bg-amber-400/30 text-white border-0" : "bg-rose-400/30 text-white border-0")}>On-Time {drawerData.onTime}%</Badge>
           <Badge className={cn("text-[10px]", drawerData.dwellTime < 24 ? "bg-emerald-400/30 text-white border-0" : drawerData.dwellTime <= 48 ? "bg-amber-400/30 text-white border-0" : "bg-rose-400/30 text-white border-0")}>Dwell {drawerData.dwellTime}h</Badge>
           <Badge className={cn("text-[10px]", drawerData.damageRate < 0.5 ? "bg-emerald-400/30 text-white border-0" : drawerData.damageRate <= 2 ? "bg-amber-400/30 text-white border-0" : "bg-rose-400/30 text-white border-0")}>Damage {drawerData.damageRate}%</Badge>
+</div>
         </DrawerHeader>
         <div className="space-y-4 px-1">
           <div className="flex justify-center"><SLARing score={drawerData.slaScore} /></div>
@@ -641,7 +645,7 @@ export default function IntermodalTransportHubView() {
             { label: "Throughput", value: drawerData.throughput.toLocaleString() },
             { label: "Region", value: drawerData.region },
             { label: "Status", value: drawerData.status },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-blue-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Hub", drawerData.hub], ["On-Time", `${drawerData.onTime}%`], ["Dwell Time", `${drawerData.dwellTime}h`], ["Damage Rate", `${drawerData.damageRate}%`]]} />
           <DrawerActions id={drawerData.id} name={drawerData.hub} />
         </div></>}

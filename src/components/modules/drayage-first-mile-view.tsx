@@ -1183,7 +1183,7 @@ function KpiCard({
 }) {
   return (
     <Card className="dfm-kpi-card">
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] text-muted-foreground font-medium">
@@ -1586,9 +1586,9 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="pt-0">
+            <CardContent className="glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="hover:bg-transparent">
                       <SortHeader col="orderId" label="Order ID" tab="order" />
@@ -1707,9 +1707,9 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="pt-0">
+            <CardContent className="glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="hover:bg-transparent">
                       <SortHeader col="regNumber" label="Reg No." tab="truck" />
@@ -1831,9 +1831,9 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="pt-0">
+            <CardContent className="glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="hover:bg-transparent">
                       <TableHead className="text-xs">Appointment</TableHead>
@@ -1868,7 +1868,7 @@ export default function DrayageFirstMileView() {
                           <TimeSlotBadge slot={appt.timeSlot} />
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline" className="text-[10px]">{appt.appointmentType}</Badge>
+                          <Badge variant="outline" className="badge-interactive text-[10px]">{appt.appointmentType}</Badge>
                         </TableCell>
                         <TableCell>
                           <ContainerCountTile count={appt.containerCount} />
@@ -1939,9 +1939,9 @@ export default function DrayageFirstMileView() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="pt-0">
+            <CardContent className="glass-subtle pt-0">
               <div className="rounded-lg border overflow-x-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="hover:bg-transparent">
                       <TableHead className="text-xs">Container</TableHead>
@@ -2398,7 +2398,7 @@ export default function DrayageFirstMileView() {
                 <div className="flex flex-wrap items-center gap-2">
                   <AppointmentStatusBadge status={selectedAppt.status} />
                   <TimeSlotBadge slot={selectedAppt.timeSlot} />
-                  <Badge variant="outline" className="text-[10px] text-white border-white/40">
+                  <Badge variant="outline" className="badge-interactive text-[10px] text-white border-white/40">
                     {selectedAppt.appointmentType}
                   </Badge>
                 </div>

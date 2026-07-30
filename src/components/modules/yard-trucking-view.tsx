@@ -240,13 +240,13 @@ function SpotStatusBadge({ status }: { status: string }) {
 function TrailerTypeBadge({ type }: { type: string }) {
   const colors: Record<string, string> = { Flatbed: "#3b82f6", "Chassis 20ft": "#059669", "Chassis 40ft": "#0d9488", "Chassis 45ft": "#4f46e5", Tanker: "#d97706", Reefer: "#0891b2", "Open Top": "#ea580c", "Curtain Sider": "#7c3aed", Skeleton: "#6b7280", Dropside: "#92400e" }
   const c = colors[type] || "#475569"
-  return <Badge className="yt-trailer-badge text-[10px] font-mono" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{type}</Badge>
+  return <Badge className="badge-interactive yt-trailer-badge text-[10px] font-mono" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{type}</Badge>
 }
 
 function EquipmentTypeBadge({ type }: { type: string }) {
   const colors: Record<string, string> = { "Yard Truck": "#3b82f6", "Terminal Tractor": "#ea580c", "Reach Stacker": "#059669", "Top Loader": "#4f46e5", "RTG Crane": "#d97706", "Straddle Carrier": "#0891b2", "Empty Handler": "#7c3aed", "Lift Truck": "#0d9488", "Side Loader": "#92400e", "Tow Tractor": "#6b7280" }
   const c = colors[type] || "#475569"
-  return <Badge className="yt-equip-badge text-[10px] font-mono" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{type}</Badge>
+  return <Badge className="badge-interactive yt-equip-badge text-[10px] font-mono" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{type}</Badge>
 }
 
 function FuelLevelBar({ level }: { level: number }) {
@@ -262,7 +262,7 @@ function UtilizationRing({ pct }: { pct: number }) {
 function PriorityBadge({ priority }: { priority: string }) {
   const colors: Record<string, string> = { Critical: "#dc2626", High: "#ea580c", Medium: "#d97706", Low: "#3b82f6", Routine: "#6b7280" }
   const c = colors[priority] || "#475569"
-  return <Badge className="yt-priority-badge text-[10px]" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{priority}</Badge>
+  return <Badge className="badge-interactive yt-priority-badge text-[10px]" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{priority}</Badge>
 }
 
 function LocationTile({ location }: { location: string }) {
@@ -272,7 +272,7 @@ function LocationTile({ location }: { location: string }) {
 }
 
 function ContainerNumberBadge({ no }: { no: string }) {
-  return <Badge className="yt-container-badge font-mono text-[10px] bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 px-2">{no}</Badge>
+  return <Badge className="badge-interactive yt-container-badge font-mono text-[10px] bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 px-2">{no}</Badge>
 }
 
 function DriverInfoTile({ name, license, phone }: { name: string; license: string; phone: string }) {
@@ -290,7 +290,7 @@ function GpsCoordsTile({ lat, lng }: { lat: string; lng: string }) {
 function TaskTypeBadge({ type }: { type: string }) {
   const colors: Record<string, string> = { "Spot Move": "#3b82f6", "Shunt Operation": "#0d9488", "Container Inspect": "#4f46e5", "Equipment Maintenance": "#d97706", "Emergency Response": "#dc2626", "Gate Check-In": "#059669", Weighbridge: "#7c3aed", Cleaning: "#6b7280" }
   const c = colors[type] || "#475569"
-  return <Badge className="yt-task-badge text-[10px]" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{type}</Badge>
+  return <Badge className="badge-interactive yt-task-badge text-[10px]" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{type}</Badge>
 }
 
 function MaintenanceDueIndicator({ date }: { date: string }) {
@@ -298,7 +298,7 @@ function MaintenanceDueIndicator({ date }: { date: string }) {
   const due = new Date(date)
   const days = Math.max(0, Math.floor((due.getTime() - now.getTime()) / 86400000))
   const color = days <= 3 ? "#dc2626" : days <= 7 ? "#d97706" : "#059669"
-  return <Badge className="yt-maint-indicator text-[10px]" style={{ backgroundColor: `${color}18`, color, border: `1px solid ${color}40` }}>{days <= 3 ? `⚠ ${days}d` : `${days}d`}</Badge>
+  return <Badge className="badge-interactive yt-maint-indicator text-[10px]" style={{ backgroundColor: `${color}18`, color, border: `1px solid ${color}40` }}>{days <= 3 ? `⚠ ${days}d` : `${days}d`}</Badge>
 }
 
 function SpotRouteTile({ from, to, dist }: { from: string; to: string; dist: number }) {
@@ -313,7 +313,7 @@ function TurnaroundTimer({ mins }: { mins: number }) {
 function YardZoneBadge({ zone }: { zone: string }) {
   const zoneKey = zone.split(" - ")[0]
   const c = ZONE_COLORS[zoneKey] || "#475569"
-  return <Badge className="yt-zone-badge text-[10px]" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{zone.split(" - ")[0]}</Badge>
+  return <Badge className="badge-interactive yt-zone-badge text-[10px]" style={{ backgroundColor: `${c}18`, color: c, border: `1px solid ${c}40` }}>{zone.split(" - ")[0]}</Badge>
 }
 
 function OperatorBadge({ name }: { name: string }) {
@@ -409,7 +409,7 @@ export default function YardTruckingView() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 yt-shimmer">
             {data.kpis.map((k, i) => (
               <Card key={i} className="yt-kpi-card" style={{ borderLeftColor: PIE_COLORS[i % PIE_COLORS.length] }}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <p className="text-xs text-muted-foreground">{k.label}</p>
                   <p className="text-lg font-bold tabular-nums mt-1">{k.value}</p>
                   <div className="flex items-center justify-between mt-1"><TrendIndicator trend={k.change} /></div>
@@ -433,8 +433,8 @@ export default function YardTruckingView() {
           <div className="rounded-lg border overflow-hidden"><Table><TableHeader><TableRow><TableHead className="yt-table-row">#</TableHead><SortHeader label={COL_LABELS.id} field="id" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.spotType} field="spotType" sort={sort} onSort={handleSort} /><TableHead className="yt-table-row">{COL_LABELS.containerNo}</TableHead><TableHead className="yt-table-row">Route</TableHead><TableHead className="yt-table-row">{COL_LABELS.driver}</TableHead><SortHeader label={COL_LABELS.status} field="status" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.priority} field="priority" sort={sort} onSort={handleSort} /><TableHead className="yt-table-row">{COL_LABELS.distance}</TableHead><TableHead className="yt-table-row">Action</TableHead></TableRow></TableHeader><TableBody>{filteredSpots.slice(0, 30).map((r, i) => (
             <TableRow key={r.id} className="yt-table-row-hover">
               <TableCell className="text-xs tabular-nums">{i + 1}</TableCell>
-              <TableCell><Badge variant="outline" className="text-[10px] font-mono">{r.id}</Badge></TableCell>
-              <TableCell><Badge className="yt-spot-type-badge text-[10px]">{r.spotType}</Badge></TableCell>
+              <TableCell><Badge variant="outline" className="badge-interactive text-[10px] font-mono">{r.id}</Badge></TableCell>
+              <TableCell><Badge className="badge-interactive yt-spot-type-badge text-[10px]">{r.spotType}</Badge></TableCell>
               <TableCell><ContainerNumberBadge no={r.containerNo} /></TableCell>
               <TableCell><SpotRouteTile from={r.fromLoc} to={r.toLoc} dist={r.distance} /></TableCell>
               <TableCell><div className="text-xs">{r.driver}</div></TableCell>
@@ -455,7 +455,7 @@ export default function YardTruckingView() {
           <div className="rounded-lg border overflow-hidden"><Table><TableHeader><TableRow><TableHead className="yt-table-row">#</TableHead><SortHeader label={COL_LABELS.trailerId} field="id" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.trailerType} field="trailerType" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.capacity} field="capacity" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.status} field="status" sort={sort} onSort={handleSort} /><TableHead className="yt-table-row">{COL_LABELS.location}</TableHead><TableHead className="yt-table-row">{COL_LABELS.currentLoad}</TableHead><TableHead className="yt-table-row">{COL_LABELS.driver}</TableHead><TableHead className="yt-table-row">{COL_LABELS.maintDue}</TableHead><TableHead className="yt-table-row">GPS</TableHead><TableHead className="yt-table-row">Action</TableHead></TableRow></TableHeader><TableBody>{filteredTrailers.slice(0, 30).map((r, i) => (
             <TableRow key={r.id} className="yt-table-row-hover">
               <TableCell className="text-xs tabular-nums">{i + 1}</TableCell>
-              <TableCell><Badge variant="outline" className="text-[10px] font-mono">{r.id}</Badge></TableCell>
+              <TableCell><Badge variant="outline" className="badge-interactive text-[10px] font-mono">{r.id}</Badge></TableCell>
               <TableCell><TrailerTypeBadge type={r.trailerType} /></TableCell>
               <TableCell className="text-xs">{r.capacity}</TableCell>
               <TableCell><SpotStatusBadge status={r.status} /></TableCell>
@@ -478,9 +478,9 @@ export default function YardTruckingView() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredEquipment.slice(0, 24).map((r, i) => (
               <Card key={r.id} className="yt-equip-card">
-                <CardContent className="p-4 space-y-3">
+                <CardContent className="glass-subtle p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2"><Badge className="text-xs font-mono bg-slate-100 dark:bg-slate-800 px-2">{r.id}</Badge><EquipmentTypeBadge type={r.equipType} /></div>
+                    <div className="badge-interactive flex items-center gap-2"><Badge className="text-xs font-mono bg-slate-100 dark:bg-slate-800 px-2">{r.id}</Badge><EquipmentTypeBadge type={r.equipType} /></div>
                     <EquipStatusBadge status={r.status} />
                   </div>
                   <div className="flex items-center gap-3">
@@ -497,8 +497,8 @@ export default function YardTruckingView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="yt-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => toast.info("Deploying", `Equipment ${r.id} deploying`)}><PlayCircle className="w-3.5 h-3.5 mr-1" />Deploy</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn" onClick={() => toast.info("Servicing", `Equipment ${r.id} service scheduled`)}><Wrench className="w-3.5 h-3.5" /></Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("equip"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => toast.info("Servicing", `Equipment ${r.id} service scheduled`)}><Wrench className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { setDrawerRecord(r); setDrawerType("equip"); setDrawerOpen(true) }}><Eye className="w-3.5 h-3.5" /></Button>
                   </div>
                 </CardContent>
               </Card>
@@ -515,7 +515,7 @@ export default function YardTruckingView() {
           <div className="rounded-lg border overflow-hidden"><Table><TableHeader><TableRow><TableHead className="yt-table-row">#</TableHead><SortHeader label={COL_LABELS.taskId} field="id" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.taskType} field="taskType" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.priority} field="priority" sort={sort} onSort={handleSort} /><SortHeader label={COL_LABELS.status} field="status" sort={sort} onSort={handleSort} /><TableHead className="yt-table-row">{COL_LABELS.assignedTo}</TableHead><TableHead className="yt-table-row">{COL_LABELS.scheduledTime}</TableHead><TableHead className="yt-table-row">{COL_LABELS.duration}</TableHead><TableHead className="yt-table-row">{COL_LABELS.location}</TableHead><TableHead className="yt-table-row">Action</TableHead></TableRow></TableHeader><TableBody>{filteredTasks.slice(0, 30).map((r, i) => (
             <TableRow key={r.id} className="yt-table-row-hover">
               <TableCell className="text-xs tabular-nums">{i + 1}</TableCell>
-              <TableCell><Badge variant="outline" className="text-[10px] font-mono">{r.id}</Badge></TableCell>
+              <TableCell><Badge variant="outline" className="badge-interactive text-[10px] font-mono">{r.id}</Badge></TableCell>
               <TableCell><TaskTypeBadge type={r.taskType} /></TableCell>
               <TableCell><PriorityBadge priority={r.priority} /></TableCell>
               <TableCell><SpotStatusBadge status={r.status} /></TableCell>
@@ -533,7 +533,7 @@ export default function YardTruckingView() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 yt-shimmer">
             {data.analyticsKpis.map((k, i) => (
               <Card key={i} className="yt-analytics-card" style={{ borderLeftColor: PIE_COLORS[i % PIE_COLORS.length] }}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <p className="text-xs text-muted-foreground">{k.label}</p>
                   <p className="text-lg font-bold tabular-nums mt-1">{k.value}</p>
                   <TrendIndicator trend={k.trend} />
@@ -571,9 +571,9 @@ export default function YardTruckingView() {
                     <div><span className="text-muted-foreground">Distance</span><div className="tabular-nums">{rec.distance}m</div></div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" variant="outline" className="yt-action-btn flex-1" onClick={() => { toast.info("Reassigned", `Spot ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5 mr-1" />Reassign</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Reassigned", `Spot ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5 mr-1" />Reassign</Button>
                     <Button size="sm" className="yt-action-btn flex-1 bg-slate-700 hover:bg-slate-800 text-white" onClick={() => { toast.success("Tracking", `Spot ${rec.id} tracking`); setDrawerOpen(false) }}><Navigation className="w-3.5 h-3.5 mr-1" />Track</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn" onClick={() => { toast.warning("Cancelled", `Spot ${rec.id} cancelled`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Cancelled", `Spot ${rec.id} cancelled`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)
@@ -596,8 +596,8 @@ export default function YardTruckingView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="yt-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => { toast.success("Dispatched", `Trailer ${rec.id} dispatched`); setDrawerOpen(false) }}><Send className="w-3.5 h-3.5 mr-1" />Dispatch</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn flex-1" onClick={() => { toast.info("Inspecting", `Trailer ${rec.id} inspection`); setDrawerOpen(false) }}><Eye className="w-3.5 h-3.5 mr-1" />Inspect</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn" onClick={() => { toast.warning("Maintenance", `Trailer ${rec.id} maintenance`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Inspecting", `Trailer ${rec.id} inspection`); setDrawerOpen(false) }}><Eye className="w-3.5 h-3.5 mr-1" />Inspect</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Maintenance", `Trailer ${rec.id} maintenance`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)
@@ -624,8 +624,8 @@ export default function YardTruckingView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="yt-action-btn flex-1 bg-amber-600 hover:bg-amber-700 text-white" onClick={() => { toast.success("Deployed", `Equipment ${rec.id} deployed`); setDrawerOpen(false) }}><PlayCircle className="w-3.5 h-3.5 mr-1" />Deploy</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn flex-1" onClick={() => { toast.info("Servicing", `Equipment ${rec.id} service`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5 mr-1" />Service</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn" onClick={() => { toast.warning("Retired", `Equipment ${rec.id} retired`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.info("Servicing", `Equipment ${rec.id} service`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5 mr-1" />Service</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.warning("Retired", `Equipment ${rec.id} retired`); setDrawerOpen(false) }}><XCircle className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)
@@ -646,8 +646,8 @@ export default function YardTruckingView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="yt-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => { toast.success("Completed", `Task ${rec.id} completed`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Complete</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn flex-1" onClick={() => { toast.warning("Escalated", `Task ${rec.id} escalated`); setDrawerOpen(false) }}><ArrowUpRight className="w-3.5 h-3.5 mr-1" />Escalate</Button>
-                    <Button size="sm" variant="outline" className="yt-action-btn" onClick={() => { toast.info("Reassigned", `Task ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn flex-1" onClick={() => { toast.warning("Escalated", `Task ${rec.id} escalated`); setDrawerOpen(false) }}><ArrowUpRight className="w-3.5 h-3.5 mr-1" />Escalate</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate yt-action-btn" onClick={() => { toast.info("Reassigned", `Task ${rec.id} reassigned`); setDrawerOpen(false) }}><ArrowUpDown className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)

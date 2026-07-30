@@ -115,7 +115,7 @@ export function TransportationView() {
       render: (value) => {
         const TypeIcon = typeIcons[(value as string)] || Truck
         return (
-          <Badge variant="outline" className="gap-1 text-[10px] rounded-full">
+          <Badge variant="outline" className="badge-interactive gap-1 text-[10px] rounded-full">
             <TypeIcon className="h-2.5 w-2.5" />
             {value as string}
           </Badge>
@@ -229,7 +229,7 @@ export function TransportationView() {
         description="Monitor fleet, routes and delivery performance"
         actions={
           <>
-            <Button variant="outline" size="sm" className="gap-1.5">
+            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
               <Navigation className="h-3.5 w-3.5" /> Track All
             </Button>
             <ExportButton onExportCSV={handleExportCSV} />
@@ -248,7 +248,7 @@ export function TransportationView() {
           { label: "OTIF Rate", value: `${otif}%`, icon: Timer, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
           <Card key={item.label} className="card-depth card-shine hover-scale-sm rounded-xl border-border/60 shadow-sm">
-            <CardContent className="flex items-center gap-3 p-4">
+            <CardContent className="glass-subtle flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>
@@ -268,7 +268,7 @@ export function TransportationView() {
             <div className="flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
               <CardTitle className="text-sm font-semibold text-red-700 dark:text-red-300">Delayed Deliveries</CardTitle>
-              <Badge variant="destructive" className="text-[10px]">{delayedVehicles.length}</Badge>
+              <Badge variant="destructive" className="badge-interactive text-[10px]">{delayedVehicles.length}</Badge>
             </div>
           </CardHeader>
           <CardContent>

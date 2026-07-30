@@ -355,7 +355,7 @@ export default function PortCommunitySystemView() {
       <div className="pcs-kpi-grid grid grid-cols-4 gap-3" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
         {kpis.map((kpi, i) => (
           <Card key={i} className="pcs-kpi-card pcs-stat-card">
-            <CardContent className="p-3.5">
+            <CardContent className="glass-subtle p-3.5">
               <div className="flex items-center justify-between">
                 <div className="p-2 rounded-lg" style={{ background: `${kpi.color}15` }}>
                   <kpi.icon className="h-4 w-4" style={{ color: kpi.color }} />
@@ -377,7 +377,7 @@ export default function PortCommunitySystemView() {
       <div className="grid grid-cols-3 gap-3">
         <Card className="col-span-2">
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Monthly Port Throughput (TEU)</CardTitle></CardHeader>
-          <CardContent className="px-4 pb-3">
+          <CardContent className="glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={230}>
               <BarChart data={DATA.monthlyThroughput}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -393,7 +393,7 @@ export default function PortCommunitySystemView() {
         </Card>
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Vessel Type Distribution</CardTitle></CardHeader>
-          <CardContent className="px-4 pb-3 flex items-center justify-center">
+          <CardContent className="glass-subtle px-4 pb-3 flex items-center justify-center">
             <ResponsiveContainer width="100%" height={230}>
               <PieChart>
                 <Pie data={DATA.vesselTypeData} dataKey="count" nameKey="type" cx="50%" cy="50%" outerRadius={75} innerRadius={40} paddingAngle={3} label={({ type, percent }) => `${type.split(" ")[0]} ${(percent * 100).toFixed(0)}%`} labelLine={false}>
@@ -409,7 +409,7 @@ export default function PortCommunitySystemView() {
       <div className="grid grid-cols-2 gap-3">
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Port Utilization & Turnaround</CardTitle></CardHeader>
-          <CardContent className="px-4 pb-3">
+          <CardContent className="glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={DATA.portUtilData} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -425,7 +425,7 @@ export default function PortCommunitySystemView() {
         </Card>
         <Card>
           <CardHeader className="pb-2 pt-3 px-4"><CardTitle className="text-sm">Container Dwell Time Trend (Days)</CardTitle></CardHeader>
-          <CardContent className="px-4 pb-3">
+          <CardContent className="glass-subtle px-4 pb-3">
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={DATA.dwellTimeTrend}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -456,7 +456,7 @@ export default function PortCommunitySystemView() {
         <ExportButton data={filteredVessels} filename="vessels" />
       </div>
       <div className="rounded-lg border overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-gray-50 dark:bg-gray-900/50">
               {[
@@ -483,7 +483,7 @@ export default function PortCommunitySystemView() {
                 <TableCell className="text-xs">{fmtDateTime(v.eta)}</TableCell>
                 <TableCell className="text-xs">{fmtDateTime(v.etd)}</TableCell>
                 <TableCell className="text-xs text-right">{v.teuCapacity.toLocaleString()}</TableCell>
-                <TableCell className="text-xs text-right">{v.cargoWeight.toLocaleString()}</TableCell>
+                <TableCell className="numeric-cell text-xs text-right">{v.cargoWeight.toLocaleString()}</TableCell>
                 <TableCell className="text-xs">{v.flag}</TableCell>
                 <TableCell>
                   <div className="flex items-center gap-1">
@@ -513,7 +513,7 @@ export default function PortCommunitySystemView() {
         <ExportButton data={filteredContainers} filename="containers" />
       </div>
       <div className="rounded-lg border overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-gray-50 dark:bg-gray-900/50">
               {[
@@ -539,7 +539,7 @@ export default function PortCommunitySystemView() {
                 <TableCell className="text-xs">{c.port}</TableCell>
                 <TableCell className="text-xs">{c.origin}</TableCell>
                 <TableCell className="text-xs">{c.destination}</TableCell>
-                <TableCell className="text-xs text-right">{c.weight.toLocaleString()}</TableCell>
+                <TableCell className="numeric-cell text-xs text-right">{c.weight.toLocaleString()}</TableCell>
                 <TableCell className="text-xs text-right">{c.dwellTime}</TableCell>
                 <TableCell><CustomsStatusBadge status={c.customsStatus} /></TableCell>
                 <TableCell>
@@ -568,7 +568,7 @@ export default function PortCommunitySystemView() {
         <ExportButton data={filteredBerths} filename="berths" />
       </div>
       <div className="rounded-lg border overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-gray-50 dark:bg-gray-900/50">
               {[
@@ -622,7 +622,7 @@ export default function PortCommunitySystemView() {
         <ExportButton data={filteredDocs} filename="documents" />
       </div>
       <div className="rounded-lg border overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-gray-50 dark:bg-gray-900/50">
               {[
@@ -649,7 +649,7 @@ export default function PortCommunitySystemView() {
                 <TableCell className="text-xs">{doc.submittedBy}</TableCell>
                 <TableCell className="text-xs">{fmtDate(doc.submittedDate)}</TableCell>
                 <TableCell className="text-xs">{fmtDate(doc.processedDate)}</TableCell>
-                <TableCell className="text-xs text-right">{fmtINR(doc.amount)}</TableCell>
+                <TableCell className="numeric-cell text-xs text-right">{fmtINR(doc.amount)}</TableCell>
                 <TableCell className="text-xs text-gray-500 dark:text-gray-400 max-w-[120px] truncate">{doc.remarks}</TableCell>
                 <TableCell>
                   <button className="pcs-action-btn p-1.5 rounded-md" onClick={() => openDrawer("document", doc)}><Eye className="h-3.5 w-3.5 text-teal-600" /></button>
@@ -677,7 +677,7 @@ export default function PortCommunitySystemView() {
         <ExportButton data={filteredClearances} filename="clearances" />
       </div>
       <div className="rounded-lg border overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-gray-50 dark:bg-gray-900/50">
               {[
@@ -703,8 +703,8 @@ export default function PortCommunitySystemView() {
                 <TableCell className="text-xs">{cl.port}</TableCell>
                 <TableCell><ClearanceTracker stageIndex={cl.stageIndex} /></TableCell>
                 <TableCell><StatusBadge status={cl.riskStatus} /></TableCell>
-                <TableCell className="text-xs text-right">{fmtINR(cl.goodsValue)}</TableCell>
-                <TableCell className="text-xs text-right">{fmtINR(cl.dutyAmount)}</TableCell>
+                <TableCell className="numeric-cell text-xs text-right">{fmtINR(cl.goodsValue)}</TableCell>
+                <TableCell className="numeric-cell text-xs text-right">{fmtINR(cl.dutyAmount)}</TableCell>
                 <TableCell className="text-xs font-mono">{cl.ieCode}</TableCell>
                 <TableCell>
                   <button className="pcs-action-btn p-1.5 rounded-md" onClick={() => openDrawer("clearance", cl)}><Eye className="h-3.5 w-3.5 text-teal-600" /></button>
@@ -785,7 +785,7 @@ export default function PortCommunitySystemView() {
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
                   <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Voyage record opened") }}>Voyage Log</Button>
-                  <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Berth assigned") }}>Assign Berth</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Berth assigned") }}>Assign Berth</Button>
                   <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Notified agent") }}><Radio className="h-3.5 w-3.5" /></Button>
                 </div>
               </>
@@ -828,7 +828,7 @@ export default function PortCommunitySystemView() {
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
                   <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Tracking initiated") }}>Track</Button>
-                  <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Gate pass generated") }}>Gate Pass</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Gate pass generated") }}>Gate Pass</Button>
                   <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Document downloaded") }}><Download className="h-3.5 w-3.5" /></Button>
                 </div>
               </>
@@ -873,7 +873,7 @@ export default function PortCommunitySystemView() {
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
                   <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Berth allocated") }}>Allocate</Button>
-                  <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule updated") }}>Schedule</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Schedule updated") }}>Schedule</Button>
                   <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Maintenance requested") }}><AlertTriangle className="h-3.5 w-3.5" /></Button>
                 </div>
               </>
@@ -915,7 +915,7 @@ export default function PortCommunitySystemView() {
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
                   <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Approved successfully") }}>Approve</Button>
-                  <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Request revision") }}>Revise</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Request revision") }}>Revise</Button>
                   <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Downloaded") }}><Download className="h-3.5 w-3.5" /></Button>
                 </div>
               </>
@@ -964,7 +964,7 @@ export default function PortCommunitySystemView() {
                 </div>
                 <div className="flex gap-2 pt-2 border-t">
                   <Button size="sm" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Assessment completed") }}>Assess</Button>
-                  <Button size="sm" variant="outline" className="flex-1 h-8 text-xs" onClick={() => { toast.success("Examination scheduled") }}>Examine</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate flex-1 h-8 text-xs" onClick={() => { toast.success("Examination scheduled") }}>Examine</Button>
                   <Button size="sm" variant="ghost" className="h-8 text-xs" onClick={() => { toast.success("Payment processed") }}><Banknote className="h-3.5 w-3.5" /></Button>
                 </div>
               </>

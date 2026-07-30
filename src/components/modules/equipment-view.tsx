@@ -157,7 +157,7 @@ export function EquipmentView() {
       sortable: true,
       className: "w-[90px]",
       render: (value) => (
-        <Badge variant="secondary" className="text-[10px] font-normal">{value as string}</Badge>
+        <Badge variant="secondary" className="badge-interactive text-[10px] font-normal">{value as string}</Badge>
       ),
     },
     {
@@ -283,7 +283,7 @@ export function EquipmentView() {
             >
               <List className="h-3.5 w-3.5" />
             </Button>
-            <Button variant="outline" size="sm" className="gap-1.5">
+            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
             <ExportButton onExportCSV={handleExportCSV} />
@@ -301,7 +301,7 @@ export function EquipmentView() {
           { label: "Avg Battery", value: `${stats.avgBattery}%`, icon: Battery, color: "bg-muted/80 text-muted-foreground", textColor: "" },
         ].map((item) => (
           <Card key={item.label} className="card-depth py-0 gap-0 hover-scale-sm">
-            <CardContent className="flex items-center gap-4 py-4">
+            <CardContent className="glass-subtle flex items-center gap-4 py-4">
               <div className={cn("flex size-10 shrink-0 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className={cn("size-5", item.textColor || "text-muted-foreground")} />
               </div>
@@ -329,7 +329,7 @@ export function EquipmentView() {
             onClick={() => setStatusFilter(status)}
           >
             {status === "all" ? "All" : status}
-            <Badge variant="secondary" className="ml-1 h-4 px-1 text-[9px] tabular-nums">
+            <Badge variant="secondary" className="badge-interactive ml-1 h-4 px-1 text-[9px] tabular-nums">
               {status === "all"
                 ? equipmentData.length
                 : equipmentData.filter((e) => e.status === status).length}
@@ -364,10 +364,10 @@ export function EquipmentView() {
               </div>
 
               <div className="flex items-center gap-2">
-                <Badge variant="secondary" className="text-[10px] font-normal">
+                <Badge variant="secondary" className="badge-interactive text-[10px] font-normal">
                   {eq.type}
                 </Badge>
-                <Badge variant="outline" className="text-[10px] font-normal">
+                <Badge variant="outline" className="badge-interactive text-[10px] font-normal">
                   <Clock className="size-3 mr-1" />
                   {eq.hoursUsed}h used
                 </Badge>

@@ -212,7 +212,7 @@ function ConditionalBadge({ value, target, suffix = "%" }: { value: number; targ
   if (pct < -5) variant = "destructive";
   else if (pct < 0) variant = "warning";
   return (
-    <Badge variant={variant} className="text-xs font-mono">
+    <Badge variant={variant} className="badge-interactive text-xs font-mono">
       {suffix === "%" ? `${value.toFixed(1)}${suffix}` : `${value}${suffix}`}
     </Badge>
   );
@@ -656,8 +656,8 @@ export function WarehousePerformanceScorecardView() {
                       <h2 className="text-xl font-bold">{wh.name} — {wh.id}</h2>
                       <p className="text-sm text-muted-foreground">{wh.city}, {wh.region} · {wh.size.toLocaleString()} sq ft</p>
                       <div className="flex items-center gap-2 mt-1">
-                        <Badge className="wps-rank-badge">Rank #{rank}</Badge>
-                        <Badge variant="outline" className="text-xs">Region: {wh.region}</Badge>
+                        <Badge className="badge-interactive wps-rank-badge">Rank #{rank}</Badge>
+                        <Badge variant="outline" className="badge-interactive text-xs">Region: {wh.region}</Badge>
                       </div>
                     </div>
                   </div>
@@ -731,10 +731,10 @@ export function WarehousePerformanceScorecardView() {
                           <CheckCircle2 className="h-4 w-4" /> Top Strengths
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-2">
+                      <CardContent className="glass-subtle space-y-2">
                         {strengths.map((m, i) => (
                           <div key={m.name} className="flex items-center gap-2 text-sm">
-                            <Badge variant="success" className="text-xs">#{i + 1}</Badge>
+                            <Badge variant="success" className="badge-interactive text-xs">#{i + 1}</Badge>
                             <span className="flex-1">{m.name}</span>
                             <span className="font-mono text-xs">{typeof m.actual === "number" && m.actual % 1 !== 0 ? m.actual.toFixed(1) : m.actual}{m.unit}</span>
                           </div>
@@ -747,10 +747,10 @@ export function WarehousePerformanceScorecardView() {
                           <AlertTriangle className="h-4 w-4" /> Improvement Areas
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-2">
+                      <CardContent className="glass-subtle space-y-2">
                         {improvements.map((m, i) => (
                           <div key={m.name} className="flex items-center gap-2 text-sm">
-                            <Badge variant="warning" className="text-xs">#{metrics.length - 2 + i}</Badge>
+                            <Badge variant="warning" className="badge-interactive text-xs">#{metrics.length - 2 + i}</Badge>
                             <span className="flex-1">{m.name}</span>
                             <span className="font-mono text-xs">{typeof m.actual === "number" && m.actual % 1 !== 0 ? m.actual.toFixed(1) : m.actual}{m.unit}</span>
                           </div>
@@ -801,7 +801,7 @@ export function WarehousePerformanceScorecardView() {
                   Operational Metrics — All Warehouses
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="wps-metrics-table">
                     <thead>
@@ -864,7 +864,7 @@ export function WarehousePerformanceScorecardView() {
                   Financial Metrics — All Warehouses
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="wps-metrics-table">
                     <thead>
@@ -953,7 +953,7 @@ export function WarehousePerformanceScorecardView() {
                   Overall Performance Ranking — {selectedPeriod}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="wps-metrics-table">
                     <thead>
@@ -993,13 +993,13 @@ export function WarehousePerformanceScorecardView() {
                             </td>
                             <td className="text-right">
                               {streak > 0 ? (
-                                <Badge className="bg-orange-100 text-orange-700 text-xs"><Flame className="h-3 w-3 mr-0.5" /> {streak} months</Badge>
+                                <Badge className="badge-interactive bg-orange-100 text-orange-700 text-xs"><Flame className="h-3 w-3 mr-0.5" /> {streak} months</Badge>
                               ) : (
                                 <span className="text-xs text-muted-foreground">—</span>
                               )}
                             </td>
                             <td className="text-right">
-                              <Badge variant={idx < 2 ? "success" : idx < 4 ? "default" : "destructive"} className="text-xs">
+                              <Badge variant={idx < 2 ? "success" : idx < 4 ? "default" : "destructive"} className="badge-interactive text-xs">
                                 {idx < 2 ? "Excellent" : idx < 4 ? "Good" : "Needs Work"}
                               </Badge>
                             </td>
@@ -1025,7 +1025,7 @@ export function WarehousePerformanceScorecardView() {
                 };
                 return (
                   <Card key={cat} className="wps-champion-card">
-                    <CardContent className="pt-4 text-center">
+                    <CardContent className="glass-subtle pt-4 text-center">
                       <div className="wps-champion-icon">{icons[cat]}</div>
                       <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-2">Champion</div>
                       <div className="text-xs capitalize font-medium">{cat}</div>
@@ -1045,7 +1045,7 @@ export function WarehousePerformanceScorecardView() {
                   Performance Alerts — Bottom 3 Warehouses
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="glass-subtle space-y-3">
                 {ranked.slice(-3).map((wh, idx) => {
                   const metricsNeedingAttention: string[] = [];
                   if (wh.scores.operations < 80) metricsNeedingAttention.push("Operations");
@@ -1059,13 +1059,13 @@ export function WarehousePerformanceScorecardView() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <span className="font-semibold text-sm">{wh.name}</span>
-                          <Badge variant="destructive" className="text-[10px]">Score: {wh.scores.overall}</Badge>
+                          <Badge variant="destructive" className="badge-interactive text-[10px]">Score: {wh.scores.overall}</Badge>
                         </div>
                         <div className="text-xs text-muted-foreground mt-1">
                           Areas needing attention: {metricsNeedingAttention.length > 0 ? metricsNeedingAttention.join(", ") : "Multiple areas below target"}
                         </div>
                       </div>
-                      <Button size="sm" variant="outline" className="text-xs h-7" onClick={() => { setSelectedWarehouse(wh.id); setActiveTab(3); }}>
+                      <Button size="sm" variant="outline" className="btn-outline-animate text-xs h-7" onClick={() => { setSelectedWarehouse(wh.id); setActiveTab(3); }}>
                         View Details
                       </Button>
                     </div>

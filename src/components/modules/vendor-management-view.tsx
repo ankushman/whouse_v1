@@ -345,7 +345,7 @@ export function VendorManagementView() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 vendor-kpi-enter">
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Users className="h-3 w-3" />
@@ -358,7 +358,7 @@ export function VendorManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <DollarSign className="h-3 w-3" />
@@ -373,7 +373,7 @@ export function VendorManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Target className="h-3 w-3" />
@@ -388,7 +388,7 @@ export function VendorManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <ShieldCheck className="h-3 w-3" />
@@ -403,7 +403,7 @@ export function VendorManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Star className="h-3 w-3" />
@@ -416,7 +416,7 @@ export function VendorManagementView() {
           </CardContent>
         </Card>
         <Card className="rounded-xl border-border/60 shadow-sm hover-zoom">
-          <CardContent className="p-3 space-y-1">
+          <CardContent className="glass-subtle p-3 space-y-1">
             <div className="flex items-center justify-between">
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                 <Clock className="h-3 w-3" />
@@ -443,7 +443,7 @@ export function VendorManagementView() {
               Daily spend (₹) and PO count · YTD total: ₹{(totalSpend / 10000000).toFixed(2)}Cr
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={spendChartConfig} className="aspect-[16/6] w-full">
               <AreaChart data={spendTrend30d} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
                 <defs>
@@ -473,7 +473,7 @@ export function VendorManagementView() {
               {totalVendors} vendors across {categoryDistribution.length} categories
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={pieConfig} className="aspect-square w-full max-w-[200px] mx-auto">
               <PieChart>
                 <Pie
@@ -523,7 +523,7 @@ export function VendorManagementView() {
               Highest-value procurement partners this fiscal year
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-0 space-y-2">
+          <CardContent className="glass-subtle pt-0 space-y-2">
             {topVendors.map((v, i) => {
               const initials = v.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
               return (
@@ -574,7 +574,7 @@ export function VendorManagementView() {
               Top 8 vendors — Rating / On-Time % / Quality % comparison
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={ratingChartConfig} className="aspect-[16/8] w-full">
               <BarChart data={ratingComparison} margin={{ top: 4, right: 8, bottom: 0, left: -20 }} barGap={2}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted/40" vertical={false} />
@@ -609,10 +609,10 @@ export function VendorManagementView() {
               </CardDescription>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="h-7 gap-1.5 text-xs" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-7 gap-1.5 text-xs" onClick={handleRefresh}>
                 <RefreshCw className="h-3 w-3" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="h-7 gap-1.5 text-xs" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-7 gap-1.5 text-xs" onClick={handleExport}>
                 <Download className="h-3 w-3" /> Export
               </Button>
               <Button size="sm" className="h-7 gap-1.5 text-xs" onClick={() => toast.info("Onboard vendor", "Opening vendor onboarding form...")}>
@@ -684,9 +684,9 @@ export function VendorManagementView() {
             </TabsList>
           </Tabs>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="glass-subtle pt-0">
           <div className="rounded-lg border overflow-hidden">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="text-xs">Vendor</TableHead>
@@ -991,10 +991,10 @@ function VendorDetailSheet({
                 </div>
               </div>
               <div className="flex gap-1">
-                <Button variant="outline" size="sm" className="h-7 w-7 p-0" onClick={handleCall}>
+                <Button variant="outline" size="sm" className="btn-outline-animate h-7 w-7 p-0" onClick={handleCall}>
                   <Phone className="h-3 w-3" />
                 </Button>
-                <Button variant="outline" size="sm" className="h-7 w-7 p-0" onClick={handleEmail}>
+                <Button variant="outline" size="sm" className="btn-outline-animate h-7 w-7 p-0" onClick={handleEmail}>
                   <Mail className="h-3 w-3" />
                 </Button>
               </div>
@@ -1122,13 +1122,13 @@ function VendorDetailSheet({
 
           {/* Action buttons */}
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="flex-1 gap-1.5" onClick={handleExport}>
+            <Button variant="outline" size="sm" className="btn-outline-animate flex-1 gap-1.5" onClick={handleExport}>
               <Download className="h-3.5 w-3.5" /> Export Scorecard
             </Button>
-            <Button variant="outline" size="sm" className="flex-1 gap-1.5" onClick={() => toast.info("Schedule audit", `Scheduling audit for ${vendor.name}...`)}>
+            <Button variant="outline" size="sm" className="btn-outline-animate flex-1 gap-1.5" onClick={() => toast.info("Schedule audit", `Scheduling audit for ${vendor.name}...`)}>
               <Calendar className="h-3.5 w-3.5" /> Schedule Audit
             </Button>
-            <Button variant="outline" size="sm" className="flex-1 gap-1.5" onClick={() => toast.info("Renew contract", `Initiating contract renewal for ${vendor.name}...`)}>
+            <Button variant="outline" size="sm" className="btn-outline-animate flex-1 gap-1.5" onClick={() => toast.info("Renew contract", `Initiating contract renewal for ${vendor.name}...`)}>
               <FileBarChart className="h-3.5 w-3.5" /> Renew
             </Button>
           </div>

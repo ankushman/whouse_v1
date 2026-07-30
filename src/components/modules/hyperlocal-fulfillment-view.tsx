@@ -229,7 +229,7 @@ export default function HyperlocalFulfillmentView() {
             ).map((k, i) => {
               const KpiIcon = KPI_ICON_MAP[k.icon]
               return (
-              <Card key={i}><CardContent className="flex items-center gap-3 p-4">
+              <Card key={i}><CardContent className="glass-subtle flex items-center gap-3 p-4">
                 <div className={cn("rounded-lg p-2 hyl-kpi-icon", k.color)}>{KpiIcon && <KpiIcon className="h-4 w-4 text-white" />}</div>
                 <div><p className="text-[10px] text-muted-foreground">{k.t}</p><p className="text-sm font-bold">{k.v}</p><p className="text-[10px] text-muted-foreground">{k.s}</p></div>
               </CardContent></Card>
@@ -250,7 +250,7 @@ export default function HyperlocalFulfillmentView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto max-h-[420px]">
-            <Table><TableHeader><TableRow className="hyl-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="hyl-table-row">
               <SortHead col="storeId" label="Store ID" /><TableHead className="text-[10px]">Name</TableHead><TableHead className="text-[10px]">Type</TableHead><TableHead className="text-[10px]">City</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Avg Del.</TableHead><TableHead className="text-[10px]">Orders</TableHead><TableHead className="text-[10px]">SKUs</TableHead><TableHead className="text-[10px]">Riders</TableHead><TableHead className="text-[10px]">Temp</TableHead><TableHead className="w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredStores.map((s) => (
@@ -264,7 +264,7 @@ export default function HyperlocalFulfillmentView() {
                   <TableCell className="text-[10px]">{s.dailyOrders}</TableCell>
                   <TableCell className="text-[10px]">{s.skuCount.toLocaleString()}</TableCell>
                   <TableCell className="text-[10px]">{s.riderCount}</TableCell>
-                  <TableCell><Badge variant="outline" className="text-[9px] h-5">{s.tempZone}</Badge></TableCell>
+                  <TableCell><Badge variant="outline" className="badge-interactive text-[9px] h-5">{s.tempZone}</Badge></TableCell>
                   <TableCell><Eye className="h-3.5 w-3.5 text-muted-foreground" /></TableCell>
                 </TableRow>
               ))}
@@ -279,7 +279,7 @@ export default function HyperlocalFulfillmentView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto max-h-[420px]">
-            <Table><TableHeader><TableRow className="hyl-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="hyl-table-row">
               <SortHead col="orderId" label="Order ID" /><TableHead className="text-[10px]">Customer</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Channel</TableHead><TableHead className="text-[10px]">Priority</TableHead><TableHead className="text-[10px]">Items</TableHead><TableHead className="text-[10px]">Value</TableHead><TableHead className="text-[10px]">Partner</TableHead><TableHead className="w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredOrders.map((o) => (
@@ -306,7 +306,7 @@ export default function HyperlocalFulfillmentView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto max-h-[420px]">
-            <Table><TableHeader><TableRow className="hyl-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="hyl-table-row">
               <SortHead col="partnerId" label="Partner ID" /><TableHead className="text-[10px]">Name</TableHead><TableHead className="text-[10px]">Vehicle</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Deliveries</TableHead><TableHead className="text-[10px]">Rating</TableHead><TableHead className="text-[10px]">Earnings</TableHead><TableHead className="text-[10px]">Zone</TableHead><TableHead className="text-[10px]">Shift</TableHead><TableHead className="w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredPartners.map((p) => (
@@ -319,7 +319,7 @@ export default function HyperlocalFulfillmentView() {
                   <TableCell><StarRating rating={p.rating} /></TableCell>
                   <TableCell><EarningsTile amount={p.earnings} /></TableCell>
                   <TableCell className="text-[10px] max-w-[80px] truncate">{p.zone}</TableCell>
-                  <TableCell><Badge variant="outline" className="text-[9px] h-5">{p.shift}</Badge></TableCell>
+                  <TableCell><Badge variant="outline" className="badge-interactive text-[9px] h-5">{p.shift}</Badge></TableCell>
                   <TableCell><Eye className="h-3.5 w-3.5 text-muted-foreground" /></TableCell>
                 </TableRow>
               ))}
@@ -334,7 +334,7 @@ export default function HyperlocalFulfillmentView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto max-h-[420px]">
-            <Table><TableHeader><TableRow className="hyl-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="hyl-table-row">
               <SortHead col="zoneId" label="Zone ID" /><TableHead className="text-[10px]">Name</TableHead><TableHead className="text-[10px]">Type</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Density</TableHead><TableHead className="text-[10px]">Avg Freq</TableHead><TableHead className="text-[10px]">Competitors</TableHead><TableHead className="text-[10px]">Dark Stores</TableHead><TableHead className="text-[10px]">Radius</TableHead><TableHead className="w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredZones.map((z) => (
@@ -382,11 +382,11 @@ export default function HyperlocalFulfillmentView() {
                   <div className="flex flex-col gap-1"><span className="text-[10px] text-muted-foreground font-medium">Name</span><span className="text-xs font-medium">{s.name}</span></div>
                   <div className="flex flex-col gap-1"><span className="text-[10px] text-muted-foreground font-medium">Temp Zone</span><span className="text-xs">{s.tempZone}</span></div>
                 </div>
-                <div className="flex flex-wrap items-center gap-3"><DeliveryTimeTile min={s.avgDeliveryMin} /><Badge variant="outline" className="text-[10px]">{s.dailyOrders} orders/day</Badge><Badge variant="outline" className="text-[10px]">{s.skuCount.toLocaleString()} SKUs</Badge><Badge variant="outline" className="text-[10px]">{s.riderCount} riders</Badge></div>
+                <div className="badge-interactive flex flex-wrap items-center gap-3"><DeliveryTimeTile min={s.avgDeliveryMin} /><Badge variant="outline" className="text-[10px]">{s.dailyOrders} orders/day</Badge><Badge variant="outline" className="text-[10px]">{s.skuCount.toLocaleString()} SKUs</Badge><Badge variant="outline" className="text-[10px]">{s.riderCount} riders</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Store Updated", `${s.storeId} details updated`)}><TrendingUp className="h-3 w-3" />Update</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1" onClick={() => toast.info("Maintenance", `Scheduling maintenance for ${s.storeId}`)}>Maintenance</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Maintenance", `Scheduling maintenance for ${s.storeId}`)}>Maintenance</Button>
                 </div>
               </div>
             </>
@@ -402,11 +402,11 @@ export default function HyperlocalFulfillmentView() {
                   <div className="flex flex-col gap-1"><span className="text-[10px] text-muted-foreground font-medium">Customer</span><span className="text-xs font-medium">{o.customer}</span></div>
                   <div className="flex flex-col gap-1"><span className="text-[10px] text-muted-foreground font-medium">Delivery Partner</span><span className="text-xs">{o.partner}</span></div>
                 </div>
-                <div className="flex flex-wrap items-center gap-3"><ValueTile amount={o.value} /><Badge variant="outline" className="text-[10px]">{o.items} items</Badge></div>
+                <div className="badge-interactive flex flex-wrap items-center gap-3"><ValueTile amount={o.value} /><Badge variant="outline" className="text-[10px]">{o.items} items</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Updated", `Order ${o.orderId} updated`)}>Update Status</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1" onClick={() => toast.info("Tracking", `Tracking ${o.orderId}`)}>Track</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Tracking", `Tracking ${o.orderId}`)}>Track</Button>
                 </div>
               </div>
             </>
@@ -422,11 +422,11 @@ export default function HyperlocalFulfillmentView() {
                   <div className="flex flex-col gap-1"><span className="text-[10px] text-muted-foreground font-medium">Name</span><span className="text-xs font-medium">{p.name}</span></div>
                   <div className="flex flex-col gap-1"><span className="text-[10px] text-muted-foreground font-medium">Shift</span><span className="text-xs">{p.shift}</span></div>
                 </div>
-                <div className="flex flex-wrap items-center gap-3"><StarRating rating={p.rating} /><EarningsTile amount={p.earnings} /><Badge variant="outline" className="text-[10px]">{p.deliveries} deliveries</Badge></div>
+                <div className="badge-interactive flex flex-wrap items-center gap-3"><StarRating rating={p.rating} /><EarningsTile amount={p.earnings} /><Badge variant="outline" className="text-[10px]">{p.deliveries} deliveries</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Partner Updated", `${p.partnerId} updated`)}>Update</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1" onClick={() => toast.info("Assigned", `New zone assigned to ${p.name}`)}>Assign Zone</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Assigned", `New zone assigned to ${p.name}`)}>Assign Zone</Button>
                 </div>
               </div>
             </>
@@ -439,11 +439,11 @@ export default function HyperlocalFulfillmentView() {
               </div>
               <div className="p-6 space-y-4">
                 <div className="flex flex-col gap-1"><span className="text-[10px] text-muted-foreground font-medium">Zone Name</span><span className="text-xs font-medium">{z.name}</span></div>
-                <div className="flex flex-wrap items-center gap-3"><RadiusTile km={z.radius} /><Badge variant="outline" className="text-[10px]">{z.avgFreq} orders/day</Badge><Badge variant="outline" className="text-[10px]">{z.competitors} competitors</Badge><Badge variant="outline" className="text-[10px]">{z.darkStores} dark stores</Badge></div>
+                <div className="badge-interactive flex flex-wrap items-center gap-3"><RadiusTile km={z.radius} /><Badge variant="outline" className="text-[10px]">{z.avgFreq} orders/day</Badge><Badge variant="outline" className="text-[10px]">{z.competitors} competitors</Badge><Badge variant="outline" className="text-[10px]">{z.darkStores} dark stores</Badge></div>
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1" onClick={() => toast.success("Zone Updated", `${z.zoneId} updated`)}>Update</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1" onClick={() => toast.info("Expanding", `Expanding coverage for ${z.name}`)}>Expand Coverage</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1" onClick={() => toast.info("Expanding", `Expanding coverage for ${z.name}`)}>Expand Coverage</Button>
                 </div>
               </div>
             </>

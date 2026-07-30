@@ -432,8 +432,8 @@ function ClaimDrawer({ data, fields, toast }: { data: ClaimRecord; fields: { lab
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-amber-600 hover:bg-amber-700 text-white" onClick={() => toast.success("Claim report downloaded")}><Download className="h-4 w-4 mr-1" /> Report</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Escalated to CBIC")}><ArrowRight className="h-4 w-4 mr-1" /> Escalate</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Claim appeal filed")}><RefreshCw className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Escalated to CBIC")}><ArrowRight className="h-4 w-4 mr-1" /> Escalate</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Claim appeal filed")}><RefreshCw className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -479,8 +479,8 @@ function RodtepDrawer({ data, fields, toast }: { data: RoDTEPCredit; fields: { l
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => toast.success("Credit transfer initiated")}><ArrowRight className="h-4 w-4 mr-1" /> Transfer</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Audit scheduled")}><ScanLine className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Audit scheduled")}><ScanLine className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -526,8 +526,8 @@ function IGSTDrawer({ data, fields, toast }: { data: IGSTRefund; fields: { label
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white" onClick={() => toast.success("IGST refund claim updated")}><RefreshCw className="h-4 w-4 mr-1" /> Update</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Tracking initiated")}><Eye className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Statement downloaded")}><Download className="h-4 w-4 mr-1" /> Statement</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Tracking initiated")}><Eye className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -574,8 +574,8 @@ function BondDrawer({ data, fields, toast }: { data: CustomsBond; fields: { labe
         </div>
         <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
           <Button size="sm" className="flex-1 bg-rose-600 hover:bg-rose-700 text-white" onClick={() => toast.success("Bond renewed")}><RefreshCw className="h-4 w-4 mr-1" /> Renew</Button>
-          <Button size="sm" variant="outline" className="flex-1" onClick={() => toast.success("Obligation discharged")}><CheckCircle2 className="h-4 w-4 mr-1" /> Discharge</Button>
-          <Button size="sm" variant="outline" onClick={() => toast.success("Bond details downloaded")}><Download className="h-4 w-4" /></Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => toast.success("Obligation discharged")}><CheckCircle2 className="h-4 w-4 mr-1" /> Discharge</Button>
+          <Button size="sm" variant="outline" onClick={() => toast.success("Bond details downloaded")}><Download className="btn-outline-animate h-4 w-4" /></Button>
         </div>
       </div>
     </>
@@ -681,7 +681,7 @@ export default function CustomsDutyRefundView() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 cdr-kpi-grid">
             {kpis.map((kpi, i) => (
               <Card key={i} className="cdr-kpi-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default">
-                <CardContent className="p-4 flex items-center gap-3">
+                <CardContent className="glass-subtle p-4 flex items-center gap-3">
                   <div className={cn("p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800", kpi.color)}><kpi.icon className="h-5 w-5" /></div>
                   <div>
                     <p className="text-2xl font-bold cdr-counter-value">{kpi.value}</p>
@@ -901,10 +901,10 @@ export default function CustomsDutyRefundView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {data.schemeAnalytics.map((sa) => (
               <Card key={sa.id} className="cdr-scheme-card border-0 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="font-bold text-sm">{sa.scheme}</h3>
-                    <BadgePercent className="h-5 w-5 text-violet-500" />
+                    <BadgePercent className="badge-interactive h-5 w-5 text-violet-500" />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div className="text-center">

@@ -598,7 +598,7 @@ export default function ColdChainTemperatureView() {
               { label: "Zones Active", value: activeZones, total: data.zones.length, icon: Snowflake, color: "cc-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`cc-kpi-card ${kpi.color} cc-stagger-${Math.min(i, 5)}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-2">
                     <kpi.icon className="h-4 w-4 cc-kpi-icon" />
                     {kpi.total && <span className="cc-kpi-total">/ {kpi.total}</span>}
@@ -631,7 +631,7 @@ export default function ColdChainTemperatureView() {
                       <div key={zone.id} className={`cc-zone-card ${tempColor}`}>
                         <div className="cc-zone-card-header">
                           <span className="cc-zone-name">{zone.name.split(" ").slice(0, 2).join(" ")}</span>
-                          <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="text-[10px] px-1.5 py-0">
+                          <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="badge-interactive text-[10px] px-1.5 py-0">
                             {zone.compliance}
                           </Badge>
                         </div>
@@ -738,7 +738,7 @@ export default function ColdChainTemperatureView() {
         <div className="cc-tab-content space-y-4">
           {/* Filter Bar */}
           <Card className="cc-filter-card">
-            <CardContent className="p-3 flex flex-wrap items-center gap-3">
+            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cc-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search sensor ID or location..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cc-filter-input" />
@@ -775,7 +775,7 @@ export default function ColdChainTemperatureView() {
               { label: "Critical", value: criticalSensors, color: "cc-kpi-red" },
             ].map((kpi, i) => (
               <Card key={i} className={`cc-kpi-card ${kpi.color}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="cc-kpi-value">{kpi.value}</div>
                   <div className="cc-kpi-label">{kpi.label}</div>
                 </CardContent>
@@ -792,7 +792,7 @@ export default function ColdChainTemperatureView() {
               const battClass = sensor.batteryLevel > 80 ? "cc-batt-ok" : sensor.batteryLevel > 50 ? "cc-batt-mid" : "cc-batt-low";
               return (
                 <Card key={sensor.id} className={`cc-sensor-card ${tempClass} cc-stagger-${Math.min(i % 20, 11)}`}>
-                  <CardContent className="p-3">
+                  <CardContent className="glass-subtle p-3">
                     <div className="flex items-center justify-between mb-2">
                       <span className="cc-sensor-id">{sensor.id}</span>
                       <Badge className={`cc-sensor-status ${statusClass} text-[10px] px-1.5 py-0`}>
@@ -861,7 +861,7 @@ export default function ColdChainTemperatureView() {
         <div className="cc-tab-content space-y-4">
           {/* Filter Bar */}
           <Card className="cc-filter-card">
-            <CardContent className="p-3 flex flex-wrap items-center gap-3">
+            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cc-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search excursion ID..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cc-filter-input" />
@@ -912,7 +912,7 @@ export default function ColdChainTemperatureView() {
                       {filteredExcursions.map((exc) => (
                         <tr key={exc.id} className="cc-table-row">
                           <td className="font-mono text-xs">{exc.id}</td>
-                          <td><Badge variant="outline" className="text-[10px]">{exc.zone}</Badge></td>
+                          <td><Badge variant="outline" className="badge-interactive text-[10px]">{exc.zone}</Badge></td>
                           <td className="text-xs">{exc.warehouse.split(" ")[0]}</td>
                           <td className="text-xs">{fmtDur(exc.durationMin)}</td>
                           <td className="text-xs font-semibold">{exc.maxDeviation}°C</td>
@@ -923,8 +923,8 @@ export default function ColdChainTemperatureView() {
                           </td>
                           <td>
                             {exc.endTime
-                              ? <Badge variant="success" className="text-[10px]">Resolved</Badge>
-                              : <Badge variant="destructive" className="text-[10px]">Active</Badge>}
+                              ? <Badge variant="success" className="badge-interactive text-[10px]">Resolved</Badge>
+                              : <Badge variant="destructive" className="badge-interactive text-[10px]">Active</Badge>}
                           </td>
                           <td className="text-xs">₹{fmt(exc.estimatedLoss)}</td>
                           <td>
@@ -1033,7 +1033,7 @@ export default function ColdChainTemperatureView() {
                     <div className="cc-drawer-grid">
                       <div><span className="cc-drawer-label">Zone</span><span className="cc-drawer-value">{selectedExcursion.zone}</span></div>
                       <div><span className="cc-drawer-label">Warehouse</span><span className="cc-drawer-value">{selectedExcursion.warehouse}</span></div>
-                      <div><span className="cc-drawer-label">Severity</span><Badge className={`cc-sev-badge cc-sev-${selectedExcursion.severity}`}>{selectedExcursion.severity}</Badge></div>
+                      <div><span className="badge-interactive cc-drawer-label">Severity</span><Badge className={`cc-sev-badge cc-sev-${selectedExcursion.severity}`}>{selectedExcursion.severity}</Badge></div>
                       <div><span className="cc-drawer-label">Duration</span><span className="cc-drawer-value">{fmtDur(selectedExcursion.durationMin)}</span></div>
                       <div><span className="cc-drawer-label">Max Deviation</span><span className="cc-drawer-value font-semibold text-red-600">{selectedExcursion.maxDeviation}°C</span></div>
                       <div><span className="cc-drawer-label">Status</span>
@@ -1059,7 +1059,7 @@ export default function ColdChainTemperatureView() {
                     <h4 className="cc-drawer-section-title">Affected Batches ({selectedExcursion.affectedBatches.length})</h4>
                     <div className="flex flex-wrap gap-1">
                       {selectedExcursion.affectedBatches.map((b) => (
-                        <Badge key={b} variant="outline" className="text-xs font-mono">{b}</Badge>
+                        <Badge key={b} variant="outline" className="badge-interactive text-xs font-mono">{b}</Badge>
                       ))}
                     </div>
                   </div>
@@ -1089,7 +1089,7 @@ export default function ColdChainTemperatureView() {
         <div className="cc-tab-content space-y-4">
           {/* Filter Bar */}
           <Card className="cc-filter-card">
-            <CardContent className="p-3 flex flex-wrap items-center gap-3">
+            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cc-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search product or SKU..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cc-filter-input" />
@@ -1117,10 +1117,10 @@ export default function ColdChainTemperatureView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {data.zones.slice(0, 8).map((zone, i) => (
               <Card key={zone.id} className={`cc-zone-detail-card cc-stagger-${Math.min(i, 7)}`}>
-                <CardContent className="p-3">
+                <CardContent className="glass-subtle p-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="cc-zone-detail-name">{zone.id}</span>
-                    <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="text-[10px] px-1.5 py-0">
+                    <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="badge-interactive text-[10px] px-1.5 py-0">
                       {zone.compliance}
                     </Badge>
                   </div>
@@ -1184,7 +1184,7 @@ export default function ColdChainTemperatureView() {
                         <tr key={batch.id} className="cc-table-row">
                           <td className="font-mono text-xs">{batch.id}</td>
                           <td className="text-xs max-w-[160px] truncate">{batch.productName}</td>
-                          <td><Badge variant="outline" className="text-[10px]">{batch.zone}</Badge></td>
+                          <td><Badge variant="outline" className="badge-interactive text-[10px]">{batch.zone}</Badge></td>
                           <td className="text-xs">{batch.warehouse.split(" ")[0]}</td>
                           <td className="text-xs">{batch.currentTemp}°C</td>
                           <td className="text-xs">{batch.shelfLifeDays}d</td>
@@ -1200,7 +1200,7 @@ export default function ColdChainTemperatureView() {
                           </td>
                           <td className="text-xs">{batch.quantity} {batch.unit}</td>
                           <td>
-                            <Badge variant={batch.status === "active" ? "success" : batch.status === "quarantined" ? "warning" : "destructive"} className="text-[10px]">
+                            <Badge variant={batch.status === "active" ? "success" : batch.status === "quarantined" ? "warning" : "destructive"} className="badge-interactive text-[10px]">
                               {batch.status}
                             </Badge>
                           </td>
@@ -1329,7 +1329,7 @@ export default function ColdChainTemperatureView() {
                         <div>Total shelf life: <strong>{selectedBatch.shelfLifeDays} days</strong></div>
                         <div>Received: {fmtTime(selectedBatch.receivedDate)}</div>
                         <div>Expiry: {fmtTime(selectedBatch.expiryDate)}</div>
-                        <div>Zone: <Badge variant="outline" className="text-[10px]">{selectedBatch.zone}</Badge></div>
+                        <div>Zone: <Badge variant="outline" className="badge-interactive text-[10px]">{selectedBatch.zone}</Badge></div>
                       </div>
                     </div>
                   </div>
@@ -1352,7 +1352,7 @@ export default function ColdChainTemperatureView() {
               { label: "Carbon Footprint", value: `${totalCarbon} kg`, sub: "CO₂/day", icon: Leaf, color: "cc-kpi-purple" },
             ].map((kpi, i) => (
               <Card key={i} className={`cc-kpi-card ${kpi.color}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <kpi.icon className="h-4 w-4 cc-kpi-icon mb-2" />
                   <div className="cc-kpi-value">{kpi.value}</div>
                   <div className="cc-kpi-label">{kpi.label} <span className="cc-kpi-sub">{kpi.sub}</span></div>
@@ -1488,7 +1488,7 @@ export default function ColdChainTemperatureView() {
                   <Target className="h-4 w-4" /> Sustainability Scorecard
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="glass-subtle space-y-3">
                 {[
                   { label: "Energy Efficiency", value: 78, color: "bg-emerald-500" },
                   { label: "Carbon Reduction", value: 62, color: "bg-cyan-500" },

@@ -84,7 +84,7 @@ interface SummaryStatProps {
 function SummaryStat({ icon, label, value, sublabel }: SummaryStatProps) {
   return (
     <Card className="card-depth py-0 gap-0">
-      <CardContent className="flex items-center gap-4 py-4">
+      <CardContent className="glass-subtle flex items-center gap-4 py-4">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted/80">
           {icon}
         </div>
@@ -170,7 +170,7 @@ function WarehouseCard({ warehouse, onClick }: WarehouseCardProps) {
         status === "red" && "border-l-4 border-l-red-500 critical-wh-strip"
       )}
     >
-      <CardContent className="p-5 flex flex-col gap-4">
+      <CardContent className="glass-subtle p-5 flex flex-col gap-4">
         {/* ── Header Row ── */}
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">

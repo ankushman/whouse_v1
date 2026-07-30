@@ -327,7 +327,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, colorClass, trend, trendV
 }) {
   return (
     <Card className={cn("wave-kpi-card", colorClass)}>
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div>
             <p className="wave-kpi-label">{title}</p>
@@ -886,14 +886,14 @@ export default function WavePlanningView() {
                 <option value="all">All Strategies</option>
                 {WAVE_STRATEGIES.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
-              <Badge variant="outline" className="text-xs">{filteredWaves.length} waves</Badge>
+              <Badge variant="outline" className="badge-interactive text-xs">{filteredWaves.length} waves</Badge>
             </div>
 
             {/* Wave Table */}
-            <Card className="wave-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift wave-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="wave-table-header">
                         <TableHead className="wave-th">Wave ID</TableHead>
@@ -918,13 +918,13 @@ export default function WavePlanningView() {
                         <TableRow key={wave.id} className={cn("wave-table-row", idx % 2 === 0 ? "" : "wave-table-row-alt")}>
                           <TableCell className="wave-td"><span className="font-mono font-medium text-sm">{wave.id}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-xs">{wave.warehouse}</span></TableCell>
-                          <TableCell className="wave-td"><StrategyBadge strategy={wave.strategy} /></TableCell>
+                          <TableCell className="numeric-cell wave-td"><StrategyBadge strategy={wave.strategy} /></TableCell>
                           <TableCell className="wave-td"><PriorityBadge priority={wave.priority} /></TableCell>
                           <TableCell className="wave-td"><WaveStatusBadge status={wave.status} /></TableCell>
                           <TableCell className="wave-td"><span className="text-sm font-medium">{wave.orderCount}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-sm">{wave.lineCount}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-sm">{wave.pickCount}</span></TableCell>
-                          <TableCell className="wave-td"><span className="text-sm font-medium text-amber-600">{wave.pickRate}/hr</span></TableCell>
+                          <TableCell className="numeric-cell wave-td"><span className="text-sm font-medium text-amber-600">{wave.pickRate}/hr</span></TableCell>
                           <TableCell className="wave-td"><span className={cn("text-sm font-medium", wave.accuracy >= 96 ? "text-emerald-600" : "text-amber-600")}>{wave.accuracy}%</span></TableCell>
                           <TableCell className="wave-td">
                             <div className="flex items-center gap-2">
@@ -967,7 +967,7 @@ export default function WavePlanningView() {
                 <option value="all">All Status</option>
                 {PICK_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
-              <Badge variant="outline" className="text-xs">{filteredPicks.length} items</Badge>
+              <Badge variant="outline" className="badge-interactive text-xs">{filteredPicks.length} items</Badge>
             </div>
 
             {/* Pick Stats */}
@@ -987,10 +987,10 @@ export default function WavePlanningView() {
             </div>
 
             {/* Pick Table */}
-            <Card className="wave-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift wave-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="wave-table-header">
                         <TableHead className="wave-th">Pick ID</TableHead>
@@ -1138,14 +1138,14 @@ export default function WavePlanningView() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input className="wave-filter-input" placeholder="Search packing ID or order ID..." value={packSearch} onChange={e => setPackSearch(e.target.value)} />
               </div>
-              <Badge variant="outline" className="text-xs">{filteredPacking.length} records</Badge>
+              <Badge variant="outline" className="badge-interactive text-xs">{filteredPacking.length} records</Badge>
             </div>
 
             {/* Packing Table */}
-            <Card className="wave-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift wave-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="wave-table-header">
                         <TableHead className="wave-th">ID</TableHead>
@@ -1174,7 +1174,7 @@ export default function WavePlanningView() {
                           <TableCell className="wave-td"><span className="text-xs">{pack.product.name}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-sm font-medium">{pack.items}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-xs">{pack.boxType}</span></TableCell>
-                          <TableCell className="wave-td"><span className="text-xs">{pack.weightKg} kg</span></TableCell>
+                          <TableCell className="numeric-cell wave-td"><span className="text-xs">{pack.weightKg} kg</span></TableCell>
                           <TableCell className="wave-td"><span className="text-xs">{pack.dimension} cm</span></TableCell>
                           <TableCell className="wave-td"><PackStatusBadge status={pack.status} /></TableCell>
                           <TableCell className="wave-td"><span className="text-xs">{pack.carrier}</span></TableCell>
@@ -1182,8 +1182,8 @@ export default function WavePlanningView() {
                           <TableCell className="wave-td"><span className="text-xs font-mono">{pack.awbNo || "—"}</span></TableCell>
                           <TableCell className="wave-td">
                             {pack.labelPrinted
-                              ? <Badge className="wave-badge-label-printed">Printed</Badge>
-                              : <Badge className="wave-badge-label-pending">Pending</Badge>
+                              ? <Badge className="badge-interactive wave-badge-label-printed">Printed</Badge>
+                              : <Badge className="badge-interactive wave-badge-label-pending">Pending</Badge>
                             }
                           </TableCell>
                         </TableRow>
@@ -1281,10 +1281,10 @@ export default function WavePlanningView() {
             </div>
 
             {/* Picker Table */}
-            <Card className="wave-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift wave-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="wave-table-header">
                         <TableHead className="wave-th">Rank</TableHead>
@@ -1310,7 +1310,7 @@ export default function WavePlanningView() {
                           <TableCell className="wave-td"><span className="font-mono text-xs">{picker.id}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-sm font-medium">{picker.name}</span></TableCell>
                           <TableCell className="wave-td"><span className="text-xs font-medium">Zone {picker.zone}</span></TableCell>
-                          <TableCell className="wave-td"><span className="text-sm font-semibold">{picker.totalPicks}</span></TableCell>
+                          <TableCell className="numeric-cell wave-td"><span className="text-sm font-semibold">{picker.totalPicks}</span></TableCell>
                           <TableCell className="wave-td">
                             <div className="flex items-center gap-2">
                               <div className="wave-mini-bar w-16">

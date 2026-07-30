@@ -352,8 +352,8 @@ export function VendorContractManagementView() {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Badge className="vcm-header-badge"><FolderOpen className="h-3 w-3 mr-1" />{contracts.reduce((s, c) => s + c.documents.length, 0)} documents</Badge>
-          <Badge className="vcm-header-badge bg-emerald-500/20 text-emerald-200"><CheckCircle2 className="h-3 w-3 mr-1" />{stats.avgCompliance}% compliance</Badge>
+          <Badge className="badge-interactive vcm-header-badge"><FolderOpen className="h-3 w-3 mr-1" />{contracts.reduce((s, c) => s + c.documents.length, 0)} documents</Badge>
+          <Badge className="badge-interactive vcm-header-badge bg-emerald-500/20 text-emerald-200"><CheckCircle2 className="h-3 w-3 mr-1" />{stats.avgCompliance}% compliance</Badge>
         </div>
       </div>
 
@@ -481,7 +481,7 @@ export function VendorContractManagementView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="vcm-table">
                     <thead>
@@ -503,12 +503,12 @@ export function VendorContractManagementView() {
                         <tr key={c.id} className="vcm-table-row" onClick={() => setSelectedContract(c)}>
                           <td className="font-mono text-xs font-medium">{c.contractNo}</td>
                           <td className="text-xs">{c.vendorName.length > 18 ? c.vendorName.substring(0, 18) + "..." : c.vendorName}</td>
-                          <td><Badge className="text-[10px]" style={{ backgroundColor: TYPE_COLORS[c.type] + "20", color: TYPE_COLORS[c.type], border: "none" }}>{TYPE_LABELS[c.type]}</Badge></td>
+                          <td><Badge className="badge-interactive text-[10px]" style={{ backgroundColor: TYPE_COLORS[c.type] + "20", color: TYPE_COLORS[c.type], border: "none" }}>{TYPE_LABELS[c.type]}</Badge></td>
                           <td className="font-mono text-xs text-right">{FormatINR(c.value)}</td>
                           <td className="text-xs">{c.startDate}</td>
                           <td className="text-xs">{c.endDate}</td>
-                          <td><Badge variant={c.status === "active" || c.status === "renewed" ? "success" : c.status === "expiring_soon" ? "warning" : c.status === "expired" || c.status === "terminated" ? "destructive" : "default"} className="text-[10px]">{STATUS_LABELS[c.status]}</Badge></td>
-                          <td><Badge variant={c.riskLevel === "low" ? "success" : c.riskLevel === "medium" ? "warning" : "destructive"} className="text-[10px]">{c.riskLevel}</Badge></td>
+                          <td><Badge variant={c.status === "active" || c.status === "renewed" ? "success" : c.status === "expiring_soon" ? "warning" : c.status === "expired" || c.status === "terminated" ? "destructive" : "default"} className="badge-interactive text-[10px]">{STATUS_LABELS[c.status]}</Badge></td>
+                          <td><Badge variant={c.riskLevel === "low" ? "success" : c.riskLevel === "medium" ? "warning" : "destructive"} className="badge-interactive text-[10px]">{c.riskLevel}</Badge></td>
                           <td className="text-xs text-center">{c.documents.length}</td>
                           <td><ChevronRight className="h-4 w-4 text-muted-foreground" /></td>
                         </tr>
@@ -538,7 +538,7 @@ export function VendorContractManagementView() {
                           <p className="text-[10px] text-muted-foreground">{v.code} · {v.category}</p>
                         </div>
                       </div>
-                      <Badge variant={v.rating >= 85 ? "success" : v.rating >= 75 ? "warning" : "destructive"} className="text-[10px] font-mono">
+                      <Badge variant={v.rating >= 85 ? "success" : v.rating >= 75 ? "warning" : "destructive"} className="badge-interactive text-[10px] font-mono">
                         {v.rating}
                       </Badge>
                     </div>
@@ -550,11 +550,11 @@ export function VendorContractManagementView() {
                     </div>
                     <div className="mt-3 flex gap-1 flex-wrap">
                       {vContracts.slice(0, 3).map((c) => (
-                        <Badge key={c.id} className="text-[9px]" style={{ backgroundColor: TYPE_COLORS[c.type] + "20", color: TYPE_COLORS[c.type], border: "none" }}>
+                        <Badge key={c.id} className="badge-interactive text-[9px]" style={{ backgroundColor: TYPE_COLORS[c.type] + "20", color: TYPE_COLORS[c.type], border: "none" }}>
                           {TYPE_LABELS[c.type]}
                         </Badge>
                       ))}
-                      {vContracts.length > 3 && <Badge variant="secondary" className="text-[9px]">+{vContracts.length - 3}</Badge>}
+                      {vContracts.length > 3 && <Badge variant="secondary" className="badge-interactive text-[9px]">+{vContracts.length - 3}</Badge>}
                     </div>
                   </div>
                 );
@@ -606,7 +606,7 @@ export function VendorContractManagementView() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm flex items-center gap-2"><FileCheck className="h-4 w-4 text-emerald-500" /> Contract Compliance Details</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
                   <table className="vcm-table">
                     <thead>
@@ -628,10 +628,12 @@ export function VendorContractManagementView() {
                           <tr key={c.contractId} className="vcm-table-row">
                             <td className="font-mono text-xs">{contract?.contractNo || c.contractId}</td>
                             <td className="text-xs">{contract?.vendorName || "—"}</td>
-                            <td className="text-center"><Badge variant={c.insurance === "compliant" ? "success" : c.insurance === "expiring" ? "warning" : "destructive"} className="text-[10px]">{c.insurance}</Badge></td>
-                            <td className="text-center"><Badge variant={c.performanceBond === "compliant" ? "success" : c.performanceBond === "expiring" ? "warning" : "destructive"} className="text-[10px]">{c.performanceBond}</Badge></td>
-                            <td className="text-center"><Badge variant={c.certifications === "compliant" ? "success" : c.certifications === "expiring" ? "warning" : "destructive"} className="text-[10px]">{c.certifications}</Badge></td>
-                            <td className="text-center"><Badge variant={c.payments === "on_time" ? "success" : c.payments === "delayed" ? "warning" : "destructive"} className="text-[10px]">{c.payments}</Badge></td>
+<div className="chip-group">
+                            <td className="badge-interactive text-center"><Badge variant={c.insurance === "compliant" ? "success" : c.insurance === "expiring" ? "warning" : "destructive"} className="text-[10px]">{c.insurance}</Badge></td>
+                            <td className="badge-interactive text-center"><Badge variant={c.performanceBond === "compliant" ? "success" : c.performanceBond === "expiring" ? "warning" : "destructive"} className="text-[10px]">{c.performanceBond}</Badge></td>
+                            <td className="badge-interactive text-center"><Badge variant={c.certifications === "compliant" ? "success" : c.certifications === "expiring" ? "warning" : "destructive"} className="text-[10px]">{c.certifications}</Badge></td>
+                            <td className="badge-interactive text-center"><Badge variant={c.payments === "on_time" ? "success" : c.payments === "delayed" ? "warning" : "destructive"} className="text-[10px]">{c.payments}</Badge></td>
+</div>
                             <td className="text-right font-mono text-xs">{c.slaCompliance}%</td>
                             <td className="text-center">
                               <span className={`vcm-score-badge ${c.overall >= 85 ? "vcm-score-green" : c.overall >= 70 ? "vcm-score-amber" : "vcm-score-red"}`}>{c.overall}</span>
@@ -722,7 +724,7 @@ export function VendorContractManagementView() {
                               <div className="text-xs font-medium truncate">{doc.name}</div>
                               <div className="text-[10px] text-muted-foreground">{doc.type} · {doc.size} · v{doc.version} · {doc.uploadedBy}</div>
                             </div>
-                            <Badge variant="secondary" className="text-[9px] shrink-0">{doc.uploadedDate}</Badge>
+                            <Badge variant="secondary" className="badge-interactive text-[9px] shrink-0">{doc.uploadedDate}</Badge>
                           </div>
                         ))}
                       </div>
@@ -736,13 +738,13 @@ export function VendorContractManagementView() {
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm flex items-center gap-2"><PenLine className="h-4 w-4 text-orange-500" /> Amendments ({selectedContract.amendments.length})</CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-2">
+                    <CardContent className="glass-subtle space-y-2">
                       {selectedContract.amendments.map((amd) => (
                         <div key={amd.id} className="vcm-amendment-item">
-                          <Badge className="text-[10px] bg-orange-100 text-orange-700 border-none">{amd.type.replace(/_/g, " ")}</Badge>
+                          <Badge className="badge-interactive text-[10px] bg-orange-100 text-orange-700 border-none">{amd.type.replace(/_/g, " ")}</Badge>
                           <span className="text-xs font-medium flex-1">{amd.description}</span>
                           <span className="text-xs text-muted-foreground">{amd.date}</span>
-                          <Badge variant="outline" className="text-[10px]">{amd.impact}</Badge>
+                          <Badge variant="outline" className="badge-interactive text-[10px]">{amd.impact}</Badge>
                         </div>
                       ))}
                     </CardContent>
@@ -775,7 +777,7 @@ export function VendorContractManagementView() {
                                item.value === "expiring" || item.value === "delayed" ? <Clock className="h-4 w-4 text-amber-500" /> :
                                <XCircle className="h-4 w-4 text-red-500" />}
                               <span>{item.label}</span>
-                              <Badge variant={item.value === "compliant" || item.value === "on_time" ? "success" : item.value === "expiring" || item.value === "delayed" ? "warning" : "destructive"} className="text-[10px] ml-auto">
+                              <Badge variant={item.value === "compliant" || item.value === "on_time" ? "success" : item.value === "expiring" || item.value === "delayed" ? "warning" : "destructive"} className="badge-interactive text-[10px] ml-auto">
                                 {item.value.replace(/_/g, " ")}
                               </Badge>
                             </div>
@@ -788,17 +790,17 @@ export function VendorContractManagementView() {
 
                 {/* Nav */}
                 <div className="flex justify-between">
-                  <Button variant="outline" size="sm" className="text-xs"
+                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
                     onClick={() => { const i = contracts.findIndex((c) => c.id === selectedContract.id); if (i > 0) setSelectedContract(contracts[i - 1]); }}
                     disabled={contracts.findIndex((c) => c.id === selectedContract.id) === 0}>← Previous</Button>
-                  <Button variant="outline" size="sm" className="text-xs"
+                  <Button variant="outline" size="sm" className="btn-outline-animate text-xs"
                     onClick={() => { const i = contracts.findIndex((c) => c.id === selectedContract.id); if (i < contracts.length - 1) setSelectedContract(contracts[i + 1]); }}
                     disabled={contracts.findIndex((c) => c.id === selectedContract.id) === contracts.length - 1}>Next →</Button>
                 </div>
               </>
             ) : (
               <Card className="vcm-chart-card">
-                <CardContent className="py-12 text-center">
+                <CardContent className="glass-subtle py-12 text-center">
                   <FileText className="h-12 w-12 text-muted-foreground/30 mx-auto mb-3" />
                   <p className="text-sm text-muted-foreground">Select a contract from the Overview tab to inspect details</p>
                 </CardContent>

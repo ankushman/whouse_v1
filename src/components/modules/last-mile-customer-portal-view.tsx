@@ -284,7 +284,7 @@ const PhoneTile = ({ phone }: { phone: string }) => <span className="lmc-ph inli
 // ═══════════════════════════════════════════════════════════════════════════════
 const KPI = ({ label, value, icon: Icon, color, change }: { label: string; value: string; icon: React.ElementType; color: string; change?: string }) => (
   <Card className="lmc-kpi p-4 transition-shadow hover:shadow-md">
-    <CardContent className="flex items-center gap-3 p-0">
+    <CardContent className="glass-subtle flex items-center gap-3 p-0">
       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${color}`}><Icon className="h-5 w-5 text-white" /></div>
       <div className="min-w-0 flex-1">
         <p className="truncate text-xs text-muted-foreground">{label}</p>
@@ -375,7 +375,7 @@ export default function LastMileCustomerPortalView() {
         </Card>
         <Card>
           <CardHeader className="pb-2"><CardTitle className="text-sm font-medium">Delivery Type Distribution</CardTitle></CardHeader>
-          <CardContent className="flex items-center justify-center">
+          <CardContent className="glass-subtle flex items-center justify-center">
             <PieChart width={280} height={280}>
               <Pie data={deliveryTypeDist} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={90} label={(e) => e.name.length > 8 ? e.name.slice(0, 8) + "…" : e.name} labelLine={false} fontSize={9}>
                 {deliveryTypeDist.map((_, i) => <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />)}
@@ -405,8 +405,8 @@ export default function LastMileCustomerPortalView() {
           <Input placeholder="Search by ID, customer, city..." value={dSearchQ} onChange={(e) => setDSearchQ(e.target.value)} className="lmc-search pl-9" />
         </div>
         <div className="max-h-9 flex flex-wrap gap-1 overflow-y-auto">
-          <Badge variant={dStatusFilter === "all" ? "default" : "outline"} className="cursor-pointer" onClick={() => setDStatusFilter("all")}>All</Badge>
-          {DELIVERY_STATUSES.map((s) => <Badge key={s} variant={dStatusFilter === s ? "default" : "outline"} className="cursor-pointer" onClick={() => setDStatusFilter(s)}>{s}</Badge>)}
+          <Badge variant={dStatusFilter === "all" ? "default" : "outline"} className="badge-interactive cursor-pointer" onClick={() => setDStatusFilter("all")}>All</Badge>
+          {DELIVERY_STATUSES.map((s) => <Badge key={s} variant={dStatusFilter === s ? "default" : "outline"} className="badge-interactive cursor-pointer" onClick={() => setDStatusFilter(s)}>{s}</Badge>)}
         </div>
       </div>
       <Card>
@@ -456,7 +456,7 @@ export default function LastMileCustomerPortalView() {
           <Input placeholder="Search customers..." value={cSearchQ} onChange={(e) => setCSearchQ(e.target.value)} className="lmc-search pl-9" />
         </div>
         <div className="max-h-9 flex flex-wrap gap-1 overflow-y-auto">
-          {(["all", ...CUSTOMER_TIERS] as const).map((t) => <Badge key={t} variant={cTierFilter === t ? "default" : "outline"} className="cursor-pointer" onClick={() => setCTierFilter(t)}>{t === "all" ? "All" : t}</Badge>)}
+          {(["all", ...CUSTOMER_TIERS] as const).map((t) => <Badge key={t} variant={cTierFilter === t ? "default" : "outline"} className="badge-interactive cursor-pointer" onClick={() => setCTierFilter(t)}>{t === "all" ? "All" : t}</Badge>)}
         </div>
       </div>
       <Card>
@@ -507,7 +507,7 @@ export default function LastMileCustomerPortalView() {
           <Input placeholder="Search riders..." value={rSearchQ} onChange={(e) => setRSearchQ(e.target.value)} className="lmc-search pl-9" />
         </div>
         <div className="max-h-9 flex flex-wrap gap-1 overflow-y-auto">
-          {(["all", ...RIDER_STATUSES] as const).map((s) => <Badge key={s} variant={rStatusFilter === s ? "default" : "outline"} className="cursor-pointer" onClick={() => setRStatusFilter(s)}>{s === "all" ? "All" : s}</Badge>)}
+          {(["all", ...RIDER_STATUSES] as const).map((s) => <Badge key={s} variant={rStatusFilter === s ? "default" : "outline"} className="badge-interactive cursor-pointer" onClick={() => setRStatusFilter(s)}>{s === "all" ? "All" : s}</Badge>)}
         </div>
       </div>
       <Card>

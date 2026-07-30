@@ -767,7 +767,7 @@ export function CapacityPlanningView() {
                     Top Bottlenecks
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="glass-subtle space-y-2">
                   {bottlenecks.map((bn, i) => (
                     <div key={bn.id} className={`cap-bottleneck-item flex items-center justify-between p-2 rounded-lg ${SEVERITY_CONFIG[bn.severity].bg}`}>
                       <div className="flex items-center gap-2">
@@ -850,7 +850,7 @@ export function CapacityPlanningView() {
           <div className="cap-workcenters space-y-4">
             {/* Filter Bar */}
             <Card className="cap-filter-bar">
-              <CardContent className="py-3 flex flex-wrap items-center gap-3">
+              <CardContent className="glass-subtle py-3 flex flex-wrap items-center gap-3">
                 <div className="relative flex-1 min-w-[200px]">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -891,7 +891,7 @@ export function CapacityPlanningView() {
                     {WAREHOUSES.map(w => <SelectItem key={w.code} value={w.code}>{w.name}</SelectItem>)}
                   </SelectContent>
                 </Select>
-                <Badge variant="secondary" className="h-9 px-3 flex items-center gap-1">
+                <Badge variant="secondary" className="badge-interactive h-9 px-3 flex items-center gap-1">
                   <Filter className="h-3 w-3" />
                   {filteredWC.length} results
                 </Badge>
@@ -900,8 +900,8 @@ export function CapacityPlanningView() {
 
             {/* Work Center Table */}
             <Card>
-              <CardContent className="p-0">
-                <Table>
+              <CardContent className="glass-subtle p-0">
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-teal-50/50 dark:bg-teal-950/20">
                       <TableHead className="cap-table-th text-xs font-semibold">ID</TableHead>
@@ -998,12 +998,12 @@ export function CapacityPlanningView() {
                           <Clock className="h-5 w-5" />
                           <span className="font-semibold">{sn} Shift</span>
                         </div>
-                        <Badge variant="secondary" className="bg-white/20 text-white border-0">
+                        <Badge variant="secondary" className="badge-interactive bg-white/20 text-white border-0">
                           {sn === 'Morning' ? '06:00-14:00' : sn === 'Afternoon' ? '14:00-22:00' : '22:00-04:00'}
                         </Badge>
                       </div>
                     </div>
-                    <CardContent className="p-4 space-y-3">
+                    <CardContent className="glass-subtle p-4 space-y-3">
                       <div className="grid grid-cols-2 gap-3">
                         <div>
                           <div className="text-xs text-muted-foreground">Capacity</div>
@@ -1131,25 +1131,25 @@ export function CapacityPlanningView() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <Card className="cap-gap-card">
-                <CardContent className="p-4 text-center">
+                <CardContent className="glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Overloaded Weeks</div>
                   <div className="text-2xl font-bold text-red-600">{gapStats.overloadedWeeks}</div>
                 </CardContent>
               </Card>
               <Card className="cap-gap-card">
-                <CardContent className="p-4 text-center">
+                <CardContent className="glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Underutilized Weeks</div>
                   <div className="text-2xl font-bold text-sky-600">{gapStats.underutilizedWeeks}</div>
                 </CardContent>
               </Card>
               <Card className="cap-gap-card">
-                <CardContent className="p-4 text-center">
+                <CardContent className="glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Critical Gaps</div>
                   <div className="text-2xl font-bold text-amber-600">{gapStats.criticalGaps}</div>
                 </CardContent>
               </Card>
               <Card className="cap-gap-card">
-                <CardContent className="p-4 text-center">
+                <CardContent className="glass-subtle p-4 text-center">
                   <div className="text-xs text-muted-foreground uppercase">Total Gap Hours</div>
                   <div className="text-2xl font-bold text-teal-600">{gapStats.totalGapHours.toLocaleString('en-IN')}</div>
                 </CardContent>
@@ -1185,8 +1185,8 @@ export function CapacityPlanningView() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-semibold">Rough-Cut Capacity Plan</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <Table>
+              <CardContent className="glass-subtle p-0">
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-teal-50/50 dark:bg-teal-950/20">
                       <TableHead className="text-xs font-semibold">Week</TableHead>
@@ -1241,7 +1241,7 @@ export function CapacityPlanningView() {
                 const bg = status === 'On-time' ? 'bg-emerald-50 dark:bg-emerald-950/30' : status === 'Early' ? 'bg-teal-50 dark:bg-teal-950/30' : status === 'At Risk' ? 'bg-amber-50 dark:bg-amber-950/30' : 'bg-red-50 dark:bg-red-950/30'
                 return (
                   <Card key={status} className={`${bg} border-${color.replace('text-', '')}`}>
-                    <CardContent className="p-4 text-center">
+                    <CardContent className="glass-subtle p-4 text-center">
                       <div className="text-xs text-muted-foreground uppercase">{status}</div>
                       <div className={`text-2xl font-bold ${color}`}>{count}</div>
                       <div className="text-xs text-muted-foreground">orders</div>
@@ -1259,8 +1259,8 @@ export function CapacityPlanningView() {
                   Today's Production Schedule
                 </CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
-                <Table>
+              <CardContent className="glass-subtle p-0">
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-teal-50/50 dark:bg-teal-950/20">
                       <TableHead className="text-xs font-semibold">SKU</TableHead>
@@ -1324,7 +1324,7 @@ export function CapacityPlanningView() {
                     Overall OEE
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col items-center">
+                <CardContent className="glass-subtle flex flex-col items-center">
                   <ResponsiveContainer width="100%" height={200}>
                     <RadialBarChart cx="50%" cy="50%" innerRadius="60%" outerRadius="90%" data={oeeGaugeData} startAngle={180} endAngle={0}>
                       <RadialBar dataKey="value" cornerRadius={10} />
@@ -1443,7 +1443,7 @@ export function CapacityPlanningView() {
                 const isAboveTarget = pct >= hs.target * 100
                 return (
                   <Card key={hs.label} className="cap-health-tile">
-                    <CardContent className="p-3">
+                    <CardContent className="glass-subtle p-3">
                       <div className="text-xs text-muted-foreground font-medium mb-2">{hs.label}</div>
                       <div className={`text-lg font-bold tabular-nums ${isAboveTarget ? 'text-emerald-600' : 'text-amber-600'}`}>
                         {pct.toFixed(1)}%
@@ -1474,7 +1474,7 @@ export function CapacityPlanningView() {
                   Capacity Alerts
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
+              <CardContent className="glass-subtle space-y-2">
                 {capacityAlerts.map(alert => {
                   const sev = SEVERITY_CONFIG[alert.severity]
                   return (
@@ -1487,8 +1487,8 @@ export function CapacityPlanningView() {
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">{alert.description}</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <Badge variant="outline" className="text-xs h-5">{alert.source}</Badge>
-                          <Badge variant="secondary" className="text-xs h-5">{sev.label}</Badge>
+                          <Badge variant="outline" className="badge-interactive text-xs h-5">{alert.source}</Badge>
+                          <Badge variant="secondary" className="badge-interactive text-xs h-5">{sev.label}</Badge>
                         </div>
                       </div>
                     </div>
@@ -1607,7 +1607,7 @@ export function CapacityPlanningView() {
                         <div className="flex items-center gap-2">
                           <Clock className="h-4 w-4 text-muted-foreground" />
                           <span className="font-medium text-sm">{sh.name}</span>
-                          <Badge variant="outline" className="text-xs">{sh.hours}h</Badge>
+                          <Badge variant="outline" className="badge-interactive text-xs">{sh.hours}h</Badge>
                         </div>
                         <div className="flex items-center gap-4 text-sm">
                           <div className="text-right">

@@ -111,7 +111,7 @@ export function InboundView() {
       sortable: true,
       className: "w-[100px]",
       render: (value) => (
-        <Badge variant="outline" className="gap-1 text-[10px] rounded-full">
+        <Badge variant="outline" className="badge-interactive gap-1 text-[10px] rounded-full">
           {(value as string) === "Domestic" ? <Home className="h-2.5 w-2.5" /> : <Globe className="h-2.5 w-2.5" />}
           {value as string}
         </Badge>
@@ -241,7 +241,7 @@ export function InboundView() {
         description="Track goods receipt and dock-to-stock operations"
         actions={
           <>
-            <Button variant="outline" size="sm" className="gap-1.5">
+            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
             <ExportButton onExportCSV={handleExportCSV} />
@@ -258,7 +258,7 @@ export function InboundView() {
           { label: "Delayed", value: summary.delayed, icon: AlertCircle, color: "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" },
         ].map((item) => (
           <Card key={item.label} className="card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
-            <CardContent className="flex items-center gap-3 p-4">
+            <CardContent className="glass-subtle flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>

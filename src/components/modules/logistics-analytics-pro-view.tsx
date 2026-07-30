@@ -55,7 +55,7 @@ function MetricTypeBadge({ type }: { type: string }) {
   const idx = METRIC_TYPES.indexOf(type as typeof METRIC_TYPES[number])
   const emojis = ["📦", "🏗️", "💰", "🎯", "⏱️", "🔄", "🚚", "📋"]
   return (
-    <Badge variant="outline" className="lap-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
+    <Badge variant="outline" className="badge-interactive lap-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
       {idx >= 0 ? emojis[idx] : "📊"} {type}
     </Badge>
   )
@@ -131,11 +131,11 @@ function AlertSeverityBadge({ severity }: { severity: string }) {
   const pulse = severity === "Critical" || severity === "High"
   const glow = severity === "Critical"
   const colorMap: Record<string, string> = { Critical: "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400", High: "bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-400", Medium: "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400", Low: "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400", Info: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400" }
-  return <Badge variant="outline" className={`lap-severity-badge gap-1 text-[10px] px-2 py-0.5 font-bold ${pulse ? (glow ? "lap-pulse-critical-glow" : "lap-pulse-warning") : ""} ${colorMap[severity] || "bg-gray-100"}`}><AlertTriangle className="h-3 w-3" /> {severity}</Badge>
+  return <Badge variant="outline" className={`lap-severity-badge gap-1 text-[10px] px-2 py-0.5 font-bold ${pulse ? (glow ? "lap-pulse-critical-glow" : "lap-pulse-warning") : ""} ${colorMap[severity] || "bg-gray-100"}`}><AlertTriangle className="badge-interactive h-3 w-3" /> {severity}</Badge>
 }
 
 function SourceBadge({ source }: { source: string }) {
-  return <Badge variant="outline" className="lap-source-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400">{source}</Badge>
+  return <Badge variant="outline" className="badge-interactive lap-source-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400">{source}</Badge>
 }
 
 function ConfidenceTile({ pct }: { pct: number }) {
@@ -149,7 +149,7 @@ function SegmentBadge({ segment }: { segment: string }) {
 }
 
 function RegionBadge({ region }: { region: string }) {
-  return <Badge variant="outline" className="lap-region-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400"><Globe className="h-3 w-3" /> {region}</Badge>
+  return <Badge variant="outline" className="badge-interactive lap-region-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400"><Globe className="h-3 w-3" /> {region}</Badge>
 }
 
 function ValueTile({ amount }: { amount: number }) {
@@ -162,7 +162,7 @@ function PercentTile({ pct }: { pct: number }) {
 }
 
 function TimeframeBadge({ tf }: { tf: string }) {
-  return <Badge variant="outline" className="lap-timeframe-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400"><Calendar className="h-3 w-3" /> {tf}</Badge>
+  return <Badge variant="outline" className="badge-interactive lap-timeframe-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400"><Calendar className="h-3 w-3" /> {tf}</Badge>
 }
 
 function MapeTile({ value }: { value: number }) {
@@ -263,7 +263,7 @@ export default function LogisticsAnalyticsProView() {
           <div className="lap-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`lap-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -278,7 +278,7 @@ export default function LogisticsAnalyticsProView() {
         </TabsContent>
 
         <TabsContent value="1" className="lap-tab-content space-y-4">
-          <div className="flex gap-2 items-center"><div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search metrics..." className="pl-9 h-9 text-sm" /></div><Badge variant="outline" className="text-xs">{filteredMetrics.length} metrics</Badge></div>
+          <div className="badge-interactive flex gap-2 items-center"><div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search metrics..." className="pl-9 h-9 text-sm" /></div><Badge variant="outline" className="text-xs">{filteredMetrics.length} metrics</Badge></div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="lap-metric-table w-full text-xs">
               <thead><tr className="border-b bg-gray-50 dark:bg-gray-800"><th className="p-2 text-left">ID</th><th className="p-2 text-left">Type</th><th className="p-2 text-left"><SortHeader field="current">Current</SortHeader></th><th className="p-2 text-left">Trend</th><th className="p-2 text-left"><SortHeader field="target">Target</SortHeader></th><th className="p-2 text-left">Status</th><th className="p-2 text-left">WH</th><th className="p-2 text-left">Region</th><th className="p-2 text-center">Action</th></tr></thead>
@@ -307,7 +307,7 @@ export default function LogisticsAnalyticsProView() {
                   <div className="flex items-center justify-between"><ModelBadge model={fc.model} /><TimeframeBadge tf={fc.horizon} /></div>
                   <p className="text-lg font-bold mt-1">{fc.id}</p>
                 </div>
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Accuracy</span><AccuracyBar pct={fc.accuracy} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">MAPE</span><MapeTile value={fc.mape} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Metric</span><MetricTypeBadge type={fc.metric} /></div>
@@ -332,7 +332,7 @@ export default function LogisticsAnalyticsProView() {
                   <td className="p-2 text-[10px]">{a.warehouse}</td>
                   <td className="p-2"><span className="text-[10px] font-semibold">{a.value} / {a.threshold}</span></td>
                   <td className="p-2 text-[10px]">{a.timestamp}</td>
-                  <td className="p-2"><Badge variant="outline" className={`text-[10px] px-2 py-0.5 ${a.status === "Active" ? "bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400" : a.status === "Acknowledged" ? "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" : "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"}`}>{a.status}</Badge></td>
+                  <td className="badge-interactive p-2"><Badge variant="outline" className={`text-[10px] px-2 py-0.5 ${a.status === "Active" ? "bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400" : a.status === "Acknowledged" ? "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" : "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"}`}>{a.status}</Badge></td>
                 </tr>
               ))}</tbody>
             </table>

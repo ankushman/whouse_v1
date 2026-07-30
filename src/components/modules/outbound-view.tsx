@@ -114,7 +114,7 @@ export function OutboundView() {
       key: "pickingType",
       header: "Pick Type",
       render: (value) => (
-        <Badge variant="outline" className="rounded-full text-[10px]">{value as string}</Badge>
+        <Badge variant="outline" className="badge-interactive rounded-full text-[10px]">{value as string}</Badge>
       ),
     },
     {
@@ -224,7 +224,7 @@ export function OutboundView() {
         description="Manage dispatch operations and delivery tracking"
         actions={
           <>
-            <Button variant="outline" size="sm" className="gap-1.5">
+            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
               <Filter className="h-3.5 w-3.5" /> Filter
             </Button>
             <ExportButton onExportCSV={handleExportCSV} />
@@ -244,7 +244,7 @@ export function OutboundView() {
           { label: "Delivered", value: summary.delivered, color: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
           <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
-            <CardContent className="p-3 text-center">
+            <CardContent className="glass-subtle p-3 text-center">
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{item.label}</p>
               <p className={cn("mt-1 text-xl font-bold", textColorMap[item.label])}>{item.value}</p>
             </CardContent>

@@ -728,11 +728,11 @@ export function WorkOrderManagementView() {
           <Plus className="h-4 w-4" />
           New Work Order
         </Button>
-        <Button variant="outline" onClick={handleRefresh} className="gap-2">
+        <Button variant="outline" onClick={handleRefresh} className="btn-outline-animate gap-2">
           <RefreshCw className="h-4 w-4" />
           Refresh
         </Button>
-        <Button variant="outline" onClick={handleExport} className="gap-2">
+        <Button variant="outline" onClick={handleExport} className="btn-outline-animate gap-2">
           <Download className="h-4 w-4" />
           Export CSV
         </Button>
@@ -745,7 +745,7 @@ export function WorkOrderManagementView() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <Card className="wo-kpi-enter relative overflow-hidden border-blue-200/50" style={{ animationDelay: "0ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-blue-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Total WOs</p>
               <Hash className="h-4 w-4 text-blue-600" />
@@ -756,7 +756,7 @@ export function WorkOrderManagementView() {
         </Card>
         <Card className="wo-kpi-enter relative overflow-hidden border-emerald-200/50" style={{ animationDelay: "60ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-emerald-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Completed (30d)</p>
               <CheckCircle2 className="h-4 w-4 text-emerald-600" />
@@ -769,7 +769,7 @@ export function WorkOrderManagementView() {
         </Card>
         <Card className="wo-kpi-enter relative overflow-hidden border-amber-200/50" style={{ animationDelay: "120ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-amber-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Quality Hold</p>
               <CirclePause className="h-4 w-4 text-amber-600" />
@@ -780,7 +780,7 @@ export function WorkOrderManagementView() {
         </Card>
         <Card className="wo-kpi-enter relative overflow-hidden border-rose-200/50" style={{ animationDelay: "180ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-rose-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Scrap Rate</p>
               <XCircle className="h-4 w-4 text-rose-600" />
@@ -793,7 +793,7 @@ export function WorkOrderManagementView() {
         </Card>
         <Card className="wo-kpi-enter relative overflow-hidden border-violet-200/50" style={{ animationDelay: "240ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-violet-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Total Cost</p>
               <IndianRupee className="h-4 w-4 text-violet-600" />
@@ -804,7 +804,7 @@ export function WorkOrderManagementView() {
         </Card>
         <Card className="wo-kpi-enter relative overflow-hidden border-orange-200/50" style={{ animationDelay: "300ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-orange-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Linked NCRs</p>
               <FileWarning className="h-4 w-4 text-orange-600" />
@@ -974,9 +974,9 @@ export function WorkOrderManagementView() {
       </div>
 
       {/* WO Master Table */}
-      <Card className="wo-table-card">
-        <CardContent className="p-0">
-          <Table>
+      <Card className="card-crud-lift wo-table-card">
+        <CardContent className="glass-subtle p-0">
+          <Table className="table-hover-highlight">
             <TableHeader>
               <TableRow className="bg-muted/40 hover:bg-muted/40">
                 <TableHead className="w-[120px]">WO ID</TableHead>
@@ -1095,7 +1095,7 @@ export function WorkOrderManagementView() {
                       </TableCell>
                       <TableCell className="text-right">
                         {wo.ncrLinks.length > 0 ? (
-                          <Badge variant="outline" className="bg-rose-50 text-rose-700 border-rose-200 text-xs">
+                          <Badge variant="outline" className="badge-interactive bg-rose-50 text-rose-700 border-rose-200 text-xs">
                             {wo.ncrLinks.length} NCR
                           </Badge>
                         ) : (
@@ -1325,7 +1325,7 @@ function WorkOrderDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Production Progress</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <CardContent className="glass-subtle grid grid-cols-2 gap-4 sm:grid-cols-4">
                   <div className="wo-stat-enter space-y-1">
                     <p className="text-xs text-muted-foreground">Order Qty</p>
                     <p className="text-xl font-bold tabular-nums">{fmtNum(wo.orderQty)}</p>
@@ -1359,7 +1359,7 @@ function WorkOrderDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Schedule</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <CardContent className="glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-md border p-3">
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Calendar className="h-3 w-3" /> Planned Start
@@ -1411,7 +1411,7 @@ function WorkOrderDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Cost Breakdown</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <CardContent className="glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-md border p-3 bg-blue-50/30">
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Users className="h-3 w-3" /> Labor
@@ -1444,7 +1444,7 @@ function WorkOrderDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Traceability Links</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <CardContent className="glass-subtle grid grid-cols-1 gap-3 sm:grid-cols-3">
                   <button
                     onClick={() => toast.info("Navigate", `Opening BOM record: ${wo.bomRef}`)}
                     className="wo-card-enter rounded-md border border-blue-200/50 bg-blue-50/30 p-3 text-left hover:border-blue-400 hover:shadow-sm"
@@ -1481,7 +1481,7 @@ function WorkOrderDetailDrawer({
 
               {/* Notes */}
               <Card className="border-amber-200/50 bg-amber-50/20">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="mt-0.5 h-4 w-4 text-amber-600" />
                     <div>
@@ -1569,7 +1569,7 @@ function WorkOrderDetailDrawer({
                 <CardDescription className="text-xs">Raw material requirements and issue status from stores</CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-muted/40 hover:bg-muted/40">
                       <TableHead className="w-[100px]">Part No</TableHead>
@@ -1640,7 +1640,7 @@ function WorkOrderDetailDrawer({
                     No labor entries yet (WO not yet started)
                   </div>
                 ) : (
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-muted/40 hover:bg-muted/40">
                         <TableHead className="w-[180px]">Operator</TableHead>
@@ -1669,7 +1669,7 @@ function WorkOrderDetailDrawer({
                             </div>
                           </TableCell>
                           <TableCell className="text-xs">
-                            <Badge variant="outline" className="bg-blue-50 text-blue-700">
+                            <Badge variant="outline" className="badge-interactive bg-blue-50 text-blue-700">
                               {l.role}
                             </Badge>
                           </TableCell>
@@ -1697,7 +1697,7 @@ function WorkOrderDetailDrawer({
                     Linked to QIP: <span className="font-mono font-semibold text-violet-700">{wo.qipRef}</span>
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="grid grid-cols-3 gap-3">
+                <CardContent className="glass-subtle grid grid-cols-3 gap-3">
                   <div className="rounded-md border border-emerald-200/50 bg-emerald-50/30 p-3 text-center">
                     <p className="text-xs text-muted-foreground">Passed</p>
                     <p className="mt-1 text-2xl font-bold tabular-nums text-emerald-700">{inspectionPass}</p>
@@ -1714,8 +1714,8 @@ function WorkOrderDetailDrawer({
               </Card>
 
               <Card>
-                <CardContent className="p-0">
-                  <Table>
+                <CardContent className="glass-subtle p-0">
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-muted/40 hover:bg-muted/40">
                         <TableHead className="w-[60px]">Seq</TableHead>
@@ -1750,7 +1750,7 @@ function WorkOrderDetailDrawer({
                             >
                               <TableCell className="font-mono text-xs">{r.seq}</TableCell>
                               <TableCell>
-                                <Badge variant="outline" className="text-[10px] bg-muted">
+                                <Badge variant="outline" className="badge-interactive text-[10px] bg-muted">
                                   {r.inspectionType}
                                 </Badge>
                               </TableCell>
@@ -1842,7 +1842,7 @@ function WorkOrderDetailDrawer({
               Created: <span className="font-mono">{wo.createdAt}</span>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={handleExport} className="gap-1">
+              <Button variant="outline" size="sm" onClick={handleExport} className="btn-outline-animate gap-1">
                 <Download className="h-3 w-3" />
                 Export
               </Button>
@@ -1859,7 +1859,7 @@ function WorkOrderDetailDrawer({
                 </Button>
               )}
               {(wo.status === "started" || wo.status === "in-progress") && (
-                <Button variant="outline" size="sm" onClick={() => handleAction("hold")} className="gap-1 border-amber-300 text-amber-700">
+                <Button variant="outline" size="sm" onClick={() => handleAction("hold")} className="btn-outline-animate gap-1 border-amber-300 text-amber-700">
                   <CirclePause className="h-3 w-3" />
                   Quality Hold
                 </Button>

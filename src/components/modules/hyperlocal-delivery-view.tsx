@@ -1132,7 +1132,7 @@ export default function HyperlocalDeliveryView() {
         </div>
 
         {/* Promotions Table */}
-        <div className="hld-section-title" style={{ marginTop: 16 }}><BadgePercent size={16} /> Active Promotions</div>
+        <div className="badge-interactive hld-section-title" style={{ marginTop: 16 }}><BadgePercent size={16} /> Active Promotions</div>
         <div className="hld-table-wrap">
           <table className="hld-table">
             <thead>

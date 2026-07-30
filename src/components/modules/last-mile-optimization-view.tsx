@@ -158,7 +158,7 @@ export default function LastMileOptimizationView() {
             {kpis.map((k, i) => (
               <Card key={i} className="lmo-kpi-card relative overflow-hidden border-l-4" style={{ borderLeftColor: CHART_COLORS[i % CHART_COLORS.length] }}>
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r opacity-80" style={{ background: `linear-gradient(90deg, ${CHART_COLORS[i % CHART_COLORS.length]}, ${CHART_COLORS[(i + 1) % CHART_COLORS.length]})` }} />
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium text-gray-500 dark:text-gray-400">{k.label}</p>
@@ -184,7 +184,7 @@ export default function LastMileOptimizationView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search routes by ID, origin..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.success("Cleared", "All route filters have been reset") }}>Clear</Button>
           </div>
-          <Card className="lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
+          <Card className="card-crud-lift glass-subtle lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
             <SortHeader col="id">Route ID</SortHeader><TableHead>Origin</TableHead><SortHeader col="zone">Zone</SortHeader><SortHeader col="status">Status</SortHeader><SortHeader col="distance">Distance</SortHeader><SortHeader col="eta">ETA</SortHeader><TableHead>Stops</TableHead><TableHead>Fuel Cost</TableHead><SortHeader col="score">Score</SortHeader><TableHead className="text-right">Actions</TableHead>
           </TableRow></TableHeader><TableBody>
             {filteredRoutes.slice(0, 25).map((r, i) => (
@@ -196,8 +196,8 @@ export default function LastMileOptimizationView() {
                 <TableCell><DistanceTile km={r.distance} /></TableCell>
                 <TableCell><ETATile min={r.eta} /></TableCell>
                 <TableCell className="text-xs">{r.stops}</TableCell>
-                <TableCell className="text-xs font-semibold">{formatINR(r.fuelCost)}</TableCell>
-                <TableCell><div className="lmo-bar h-2 w-16 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className={cn("h-full rounded-full", r.score >= 80 ? "bg-emerald-500" : r.score >= 50 ? "bg-amber-500" : "bg-rose-500")} style={{ width: `${r.score}%` }} /></div><span className="ml-1 text-xs">{r.score}</span></TableCell>
+                <TableCell className="numeric-cell text-xs font-semibold">{formatINR(r.fuelCost)}</TableCell>
+                <TableCell><div className="numeric-cell lmo-bar h-2 w-16 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className={cn("h-full rounded-full", r.score >= 80 ? "bg-emerald-500" : r.score >= 50 ? "bg-amber-500" : "bg-rose-500")} style={{ width: `${r.score}%` }} /></div><span className="ml-1 text-xs">{r.score}</span></TableCell>
                 <TableCell className="text-right"><Button size="sm" variant="ghost" className="lmo-action-btn"><Eye className="h-4 w-4" /></Button></TableCell>
               </TableRow>
             ))}
@@ -210,7 +210,7 @@ export default function LastMileOptimizationView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search fleet by vehicle type, rider..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.success("Cleared", "All fleet filters have been reset") }}>Clear</Button>
           </div>
-          <Card className="lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
+          <Card className="card-crud-lift glass-subtle lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
             <SortHeader col="id">Vehicle ID</SortHeader><TableHead>Type</TableHead><SortHeader col="status">Status</SortHeader><SortHeader col="speed">Speed</SortHeader><TableHead>Battery/Fuel</TableHead><TableHead>Next Delivery</TableHead><TableHead>Packages</TableHead><SortHeader col="rating">Rating</SortHeader><TableHead>Rider</TableHead><TableHead className="text-right">Actions</TableHead>
           </TableRow></TableHeader><TableBody>
             {filteredFleet.slice(0, 25).map((f, i) => (
@@ -236,7 +236,7 @@ export default function LastMileOptimizationView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search by customer, pincode..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.success("Cleared", "All performance filters have been reset") }}>Clear</Button>
           </div>
-          <Card className="lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
+          <Card className="card-crud-lift glass-subtle lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
             <SortHeader col="id">Delivery ID</SortHeader><TableHead>Type</TableHead><SortHeader col="status">Status</SortHeader><SortHeader col="rating">Rating</SortHeader><SortHeader col="time">Time</SortHeader><TableHead>COD</TableHead><TableHead>Pin Code</TableHead><TableHead>Delay Reason</TableHead><TableHead>Customer</TableHead><TableHead className="text-right">Actions</TableHead>
           </TableRow></TableHeader><TableBody>
             {filteredPerf.slice(0, 25).map((p, i) => (
@@ -262,7 +262,7 @@ export default function LastMileOptimizationView() {
             <div className="relative flex-1"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" /><Input placeholder="Search hubs by city, type..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9" /></div>
             <Button variant="outline" onClick={() => { setSearchTerm(""); toast.success("Cleared", "All hub filters have been reset") }}>Clear</Button>
           </div>
-          <Card className="lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
+          <Card className="card-crud-lift glass-subtle lmo-table-card overflow-hidden"><CardContent className="p-0"><Table><TableHeader><TableRow className="bg-gray-50/80 dark:bg-gray-800/80">
             <SortHeader col="id">Hub ID</SortHeader><TableHead>Type</TableHead><SortHeader col="status">Status</SortHeader><TableHead>Capacity</TableHead><TableHead>Utilization</TableHead><SortHeader col="orders">Orders</SortHeader><TableHead>City</TableHead><TableHead>Manager</TableHead><TableHead>Hours</TableHead><TableHead className="text-right">Actions</TableHead>
           </TableRow></TableHeader><TableBody>
             {filteredHubs.slice(0, 25).map((h, i) => (
@@ -309,7 +309,7 @@ export default function LastMileOptimizationView() {
               <div><p className="text-xs text-gray-500">Optimization Score</p><div className="flex items-center gap-2"><div className="h-2 w-16 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className={cn("h-full rounded-full", selectedRoute.score >= 80 ? "bg-emerald-500" : selectedRoute.score >= 50 ? "bg-amber-500" : "bg-rose-500")} style={{ width: `${selectedRoute.score}%` }} /></div><span className="text-xs font-bold">{selectedRoute.score}</span></div></div>
             </div>
             <Separator /><div className="grid grid-cols-2 gap-3"><div><p className="text-xs text-gray-500">Rider</p><p className="text-sm font-medium">{selectedRoute.rider}</p></div><div><p className="text-xs text-gray-500">Contact</p><p className="text-sm flex items-center gap-1"><Phone className="h-3 w-3" />+91 {ri(7000, 9999, 999)}{ri(100000, 999999, 998)}</p></div></div>
-            <div className="flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => toast.success("Optimized", `Route ${selectedRoute.id} re-optimized`)}>Re-Optimize</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Reassigned", `Route ${selectedRoute.id} reassigned`)}>Reassign</Button></div>
+            <div className="btn-outline-animate flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => toast.success("Optimized", `Route ${selectedRoute.id} re-optimized`)}>Re-Optimize</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Reassigned", `Route ${selectedRoute.id} reassigned`)}>Reassign</Button></div>
           </div></>)}
         </SheetContent>
       </Sheet>
@@ -329,7 +329,7 @@ export default function LastMileOptimizationView() {
               <div><p className="text-xs text-gray-500">Rating</p><StarRating rating={selectedFleet.rating} /></div>
               <div><p className="text-xs text-gray-500">Rider</p><p className="text-sm font-medium">{selectedFleet.rider}</p></div>
             </div>
-            <div className="flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-blue-600 hover:bg-blue-700" onClick={() => toast.success("Dispatched", `Vehicle ${selectedFleet.id} dispatched`)}>Dispatch</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Maintenance", `Vehicle ${selectedFleet.id} sent for maintenance`)}>Maintenance</Button></div>
+            <div className="btn-outline-animate flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-blue-600 hover:bg-blue-700" onClick={() => toast.success("Dispatched", `Vehicle ${selectedFleet.id} dispatched`)}>Dispatch</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Maintenance", `Vehicle ${selectedFleet.id} sent for maintenance`)}>Maintenance</Button></div>
           </div></>)}
         </SheetContent>
       </Sheet>
@@ -349,7 +349,7 @@ export default function LastMileOptimizationView() {
             </div>
             {selectedPerf.delayReason && <div><p className="text-xs text-gray-500">Delay Reason</p><span className="text-sm text-rose-600 dark:text-rose-400">{selectedPerf.delayReason}</span></div>}
             <Separator /><div><p className="text-xs text-gray-500">Customer</p><p className="text-sm font-semibold">{selectedPerf.customer}</p></div>
-            <div className="flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-orange-600 hover:bg-orange-700" onClick={() => toast.success("Resolved", `Delivery ${selectedPerf.id} issue resolved`)}>Resolve</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Escalated", `Delivery ${selectedPerf.id} escalated`) }>Escalate</Button></div>
+            <div className="btn-outline-animate flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-orange-600 hover:bg-orange-700" onClick={() => toast.success("Resolved", `Delivery ${selectedPerf.id} issue resolved`)}>Resolve</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Escalated", `Delivery ${selectedPerf.id} escalated`) }>Escalate</Button></div>
           </div></>)}
         </SheetContent>
       </Sheet>
@@ -369,7 +369,7 @@ export default function LastMileOptimizationView() {
               <div><p className="text-xs text-gray-500">Daily Orders</p><p className="text-sm font-bold">{selectedHub.orders}</p></div>
               <div><p className="text-xs text-gray-500">Operating Hours</p><p className="text-sm font-mono">{selectedHub.hours}</p></div>
             </div>
-            <div className="flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Expanded", `Hub ${selectedHub.id} expansion approved`)}>Expand</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Reassigned", `Hub ${selectedHub.id} manager reassigned`)}>Reassign</Button></div>
+            <div className="btn-outline-animate flex gap-2 pt-2"><Button className="lmo-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => toast.success("Expanded", `Hub ${selectedHub.id} expansion approved`)}>Expand</Button><Button variant="outline" className="lmo-action-btn" onClick={() => toast.success("Reassigned", `Hub ${selectedHub.id} manager reassigned`)}>Reassign</Button></div>
           </div></>)}
         </SheetContent>
       </Sheet>

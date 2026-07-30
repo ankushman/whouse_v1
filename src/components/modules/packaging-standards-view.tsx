@@ -757,7 +757,7 @@ export default function PackagingStandardsView() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm"><span className="text-gray-500">Recyclability</span><span className="font-medium">{selectedSpec.recyclability}%</span></div>
                     <div className="pkg-progress-bar"><div className={`pkg-progress-fill ${selectedSpec.recyclability > 70 ? "pkg-progress-green" : "pkg-progress-amber"}`} style={{ width: `${selectedSpec.recyclability}%` }} /></div>
-                    <div className="flex justify-between text-sm mt-2"><span className="text-gray-500">Biodegradable</span><Badge variant={selectedSpec.biodegradable ? "default" : "secondary"} className="text-xs">{selectedSpec.biodegradable ? "Yes" : "No"}</Badge></div>
+                    <div className="badge-interactive flex justify-between text-sm mt-2"><span className="text-gray-500">Biodegradable</span><Badge variant={selectedSpec.biodegradable ? "default" : "secondary"} className="text-xs">{selectedSpec.biodegradable ? "Yes" : "No"}</Badge></div>
                     <div className="flex justify-between text-sm"><span className="text-gray-500">Carbon Footprint</span><span className="font-medium">{selectedSpec.carbonFootprint} kg CO2/unit</span></div>
                   </div>
                 </div>

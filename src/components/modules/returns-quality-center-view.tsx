@@ -185,7 +185,7 @@ export default function ReturnsQualityCenterView() {
         <div className="space-y-4">
           <div className="rqc-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
             {data.kpiData.map((k,i)=>(
-              <Card key={i} className="rqc-kpi-card"><CardContent className="p-3"><div className="flex items-center gap-2"><k.icon className="h-4 w-4" style={{color:k.color}}/><span className="text-[10px] text-gray-500">{k.label}</span></div><p className="text-lg font-bold mt-1">{k.value}</p><span className="text-[10px] text-emerald-600">{k.trend}</span></CardContent></Card>
+              <Card key={i} className="glass-subtle rqc-kpi-card"><CardContent className="p-3"><div className="flex items-center gap-2"><k.icon className="h-4 w-4" style={{color:k.color}}/><span className="text-[10px] text-gray-500">{k.label}</span></div><p className="text-lg font-bold mt-1">{k.value}</p><span className="text-[10px] text-emerald-600">{k.trend}</span></CardContent></Card>
             ))}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

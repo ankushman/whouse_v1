@@ -278,7 +278,7 @@ export default function ThreePlPerformanceScorecardView() {
         <TabsContent value="0" className="tps-tab-dashboard space-y-4 mt-4">
           <div className="tps-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
             {kpis.map(k => { const Icon = k.icon; return (
-              <Card key={k.label} className="tps-kpi-card"><CardContent className="flex items-center gap-3 p-4">
+              <Card key={k.label} className="glass-subtle tps-kpi-card"><CardContent className="flex items-center gap-3 p-4">
                 <div className={cn("tps-kpi-icon rounded-lg p-2", k.bg)}><Icon className={cn("h-4 w-4", k.color)} /></div>
                 <div><p className="text-[11px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
               </CardContent></Card>
@@ -320,7 +320,7 @@ export default function ThreePlPerformanceScorecardView() {
               {REGIONS.map(r => (<Button key={r} variant={regionFilter === r ? "default" : "outline"} size="sm" className="h-8 text-xs" onClick={() => setRegionFilter(r)}>{r}</Button>))}
             </div>
           </div>
-          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("name")}>Partner <ArrowUpDown className="inline h-3 w-3" /></TableHead>
             <TableHead className="text-xs">Region</TableHead>
             <TableHead className="cursor-pointer text-xs" onClick={() => handleSort("score")}>Score <ArrowUpDown className="inline h-3 w-3" /></TableHead>
@@ -338,7 +338,7 @@ export default function ThreePlPerformanceScorecardView() {
                 <TableCell className="text-xs font-mono">{p.onTimePct}%</TableCell>
                 <TableCell className="text-xs font-mono">{p.slaPct}%</TableCell>
                 <TableCell><VolumeHeatCell volume={p.monthlyVolume} /></TableCell>
-                <TableCell className="text-xs font-mono">{formatINR(p.contractValue)}</TableCell>
+                <TableCell className="numeric-cell text-xs font-mono">{formatINR(p.contractValue)}</TableCell>
                 <TableCell><StarRating rating={p.rating} /></TableCell>
               </TableRow>
             ))}
@@ -358,7 +358,7 @@ export default function ThreePlPerformanceScorecardView() {
               </BarChart></ResponsiveContainer>
             </CardContent></Card>
           </div>
-          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="text-xs">Partner</TableHead><TableHead className="text-xs">SLA Type</TableHead><TableHead className="text-xs">Target</TableHead>
             <TableHead className="text-xs">Actual</TableHead><TableHead className="text-xs">Status</TableHead><TableHead className="text-xs">Period</TableHead>
           </TableRow></TableHeader><TableBody>
@@ -393,7 +393,7 @@ export default function ThreePlPerformanceScorecardView() {
               <Bar dataKey="Freight" stackId="a" fill="#4338ca" /><Bar dataKey="Handling" stackId="a" fill="#d97706" /><Bar dataKey="Storage" stackId="a" fill="#059669" /><Bar dataKey="Last Mile" stackId="a" fill="#e11d48" /><Bar dataKey="Returns" stackId="a" fill="#0891b2" />
             </BarChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="text-xs">ID</TableHead><TableHead className="text-xs">Month</TableHead><TableHead className="text-xs">Category</TableHead>
             <TableHead className="text-xs">Actual</TableHead><TableHead className="text-xs">Budget</TableHead><TableHead className="text-xs">Variance</TableHead>
           </TableRow></TableHeader><TableBody>
@@ -410,9 +410,9 @@ export default function ThreePlPerformanceScorecardView() {
         {/* TAB 4: Claims & Disputes */}
         <TabsContent value="4" className="tps-tab-claims space-y-4 mt-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {CLAIM_STATUSES.map(s => (<Card key={s}><CardContent className="p-3 text-center"><p className="text-[11px] text-muted-foreground">{s}</p><p className="text-lg font-bold">{claims.filter(c => c.status === s).length}</p></CardContent></Card>))}
+            {CLAIM_STATUSES.map(s => (<Card key={s}><CardContent className="glass-subtle p-3 text-center"><p className="text-[11px] text-muted-foreground">{s}</p><p className="text-lg font-bold">{claims.filter(c => c.status === s).length}</p></CardContent></Card>))}
           </div>
-          <Card><CardContent className="p-0"><Table><TableHeader><TableRow>
+          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow>
             <TableHead className="text-xs">Claim ID</TableHead><TableHead className="text-xs">Partner</TableHead><TableHead className="text-xs">Type</TableHead>
             <TableHead className="text-xs">Severity</TableHead><TableHead className="text-xs">Amount</TableHead><TableHead className="text-xs">Status</TableHead><TableHead className="text-xs">Resolution</TableHead>
           </TableRow></TableHeader><TableBody>
@@ -420,7 +420,7 @@ export default function ThreePlPerformanceScorecardView() {
               <TableRow key={c.id} className="tps-claim-row cursor-pointer hover:bg-muted/50" onClick={() => openDrawer(c)}>
                 <TableCell className="text-xs font-mono">{c.claimId}</TableCell><TableCell className="text-xs font-medium">{c.partner}</TableCell>
                 <TableCell><ClaimTypeBadge type={c.type} /></TableCell><TableCell><SeverityBadge severity={c.severity} /></TableCell>
-                <TableCell className="text-xs font-mono font-semibold">{formatINR(c.amount)}</TableCell><TableCell><SLAStatusBadge status={c.status} /></TableCell>
+                <TableCell className="numeric-cell text-xs font-mono font-semibold">{formatINR(c.amount)}</TableCell><TableCell><SLAStatusBadge status={c.status} /></TableCell>
                 <TableCell><ClaimResolutionTracker stage={c.stage} /></TableCell>
               </TableRow>
             ))}
@@ -431,7 +431,7 @@ export default function ThreePlPerformanceScorecardView() {
         <TabsContent value="5" className="tps-tab-analytics space-y-4 mt-4">
           <div className="tps-analytics-kpi-grid grid grid-cols-2 md:grid-cols-4 gap-3">
             {analyticsKpis.map(k => { const Icon = k.icon; return (
-              <Card key={k.label}><CardContent className="flex items-center gap-3 p-4">
+              <Card key={k.label}><CardContent className="glass-subtle flex items-center gap-3 p-4">
                 <div className={cn("tps-analytics-icon rounded-lg p-2", k.bg)}><Icon className={cn("h-4 w-4", k.color)} /></div>
                 <div><p className="text-[11px] text-muted-foreground">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
               </CardContent></Card>
@@ -507,8 +507,8 @@ export default function ThreePlPerformanceScorecardView() {
                 </div>)}
               </div>
               <SheetFooter className="tps-drawer-footer border-t px-4 py-3 flex-row gap-2">
-                <Button variant="outline" size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported to CSV successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
-                <Button variant="outline" size="sm" className="h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed with latest metrics")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
+                <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported to CSV successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
+                <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed with latest metrics")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
                 <Button size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Saved", "Changes saved successfully")}><CheckCircle2 className="h-3 w-3 mr-1" /> Save</Button>
               </SheetFooter>
             </>

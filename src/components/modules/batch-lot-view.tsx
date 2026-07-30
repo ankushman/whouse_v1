@@ -389,9 +389,9 @@ export default function BatchLotView() {
               </div>
 
               {/* Critical Expiry Alerts Quick View */}
-              <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Bell className="h-4 w-4 text-red-500" />Critical Expiry Alerts ({expiryAlerts.filter((e) => e.urgency === "Critical").length} Critical)</CardTitle></CardHeader><CardContent>
+              <Card className="card-crud-lift bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Bell className="h-4 w-4 text-red-500" />Critical Expiry Alerts ({expiryAlerts.filter((e) => e.urgency === "Critical").length} Critical)</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
                       <TableHead className="text-[10px]">Batch No</TableHead>
                       <TableHead className="text-[10px]">Product</TableHead>
@@ -453,13 +453,13 @@ export default function BatchLotView() {
                     <option value="All">All Expiry</option>
                     {EXPIRY_STATUS.map((e) => <option key={e} value={e}>{e}</option>)}
                   </select>
-                  <Badge variant="outline" className="text-[10px]">{filteredBatches.length} results</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px]">{filteredBatches.length} results</Badge>
                 </div>
               </CardContent></Card>
 
-              <Card className="bl-chart-card"><CardContent className="p-0">
+              <Card className="card-crud-lift glass-subtle bl-chart-card"><CardContent className="p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow className="bl-table-header">
                       <TableHead className="text-[10px]">Batch No</TableHead>
                       <TableHead className="text-[10px]">Lot No</TableHead>
@@ -501,7 +501,7 @@ export default function BatchLotView() {
                               <span className="max-w-[80px] truncate">{b.storageCondition.split("(")[0]}</span>
                             </div>
                           </TableCell>
-                          <TableCell><Badge variant="outline" className="text-[9px]">{b.retentionPolicy}</Badge></TableCell>
+                          <TableCell><Badge variant="outline" className="badge-interactive text-[9px]">{b.retentionPolicy}</Badge></TableCell>
                           <TableCell>
                             <div className="flex flex-wrap gap-0.5">
                               {b.compliance.slice(0, 2).map((c) => (
@@ -574,9 +574,9 @@ export default function BatchLotView() {
                 </CardContent></Card>
               </div>
 
-              <Card className="bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">All Expiry Alerts ({expiryAlerts.length} batches)</CardTitle></CardHeader><CardContent>
+              <Card className="card-crud-lift bl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">All Expiry Alerts ({expiryAlerts.length} batches)</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
                       <TableHead className="text-[10px]">Batch</TableHead>
                       <TableHead className="text-[10px]">Product</TableHead>
@@ -602,7 +602,7 @@ export default function BatchLotView() {
                           <TableCell className="text-[10px]">{a.warehouse}</TableCell>
                           <TableCell className="text-[10px]">{a.zone}</TableCell>
                           <TableCell className="text-[11px] font-semibold">{a.qtyAvailable.toLocaleString()}</TableCell>
-                          <TableCell><Badge variant="outline" className="text-[9px]">{a.retentionPolicy}</Badge></TableCell>
+                          <TableCell><Badge variant="outline" className="badge-interactive text-[9px]">{a.retentionPolicy}</Badge></TableCell>
                           <TableCell><Badge className={cn("text-[9px]", URGENCY_COLORS[a.urgency])}>{a.urgency}</Badge></TableCell>
                         </TableRow>
                       ))}
@@ -660,10 +660,10 @@ export default function BatchLotView() {
                     <option value="All">All Status</option>
                     <option>Open</option><option>Under Review</option><option>Resolved</option><option>Escalated</option>
                   </select>
-                  <Badge variant="outline" className="text-[10px]">{filteredVio.length} results</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px]">{filteredVio.length} results</Badge>
                 </div>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
                       <TableHead className="text-[10px]">ID</TableHead>
                       <TableHead className="text-[10px]">Batch</TableHead>

@@ -133,7 +133,7 @@ function generateData() {
 /* ═══════ Visual Badge Components ═══════ */
 function SensorTypeBadge({ type }: { type: string }) {
   const idx = SENSOR_TYPES.indexOf(type as typeof SENSOR_TYPES[number])
-  return <Badge className="isd-sensor-type-badge" style={{ background: CC[idx] ?? CC[0], color: "#fff" }}>{ST_EMOJI[type] ?? "📡"} {type}</Badge>
+  return <Badge className="badge-interactive isd-sensor-type-badge" style={{ background: CC[idx] ?? CC[0], color: "#fff" }}>{ST_EMOJI[type] ?? "📡"} {type}</Badge>
 }
 
 function SensorStatusBadge({ status }: { status: string }) {
@@ -153,12 +153,12 @@ function BatteryLevelBar({ level }: { level: number }) {
 }
 
 function SignalBadge({ signal }: { signal: string }) {
-  return <Badge variant="outline" className="isd-signal-badge" style={{ borderColor: SIGNAL_COL[signal] ?? "#475569", color: SIGNAL_COL[signal] ?? "#475569" }}>📶 {signal}</Badge>
+  return <Badge variant="outline" className="badge-interactive isd-signal-badge" style={{ borderColor: SIGNAL_COL[signal] ?? "#475569", color: SIGNAL_COL[signal] ?? "#475569" }}>📶 {signal}</Badge>
 }
 
 function MetricBadge({ metric }: { metric: string }) {
   const idx = READING_METRICS.indexOf(metric as typeof READING_METRICS[number])
-  return <Badge variant="outline" className="isd-metric-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{metric}</Badge>
+  return <Badge variant="outline" className="badge-interactive isd-metric-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{metric}</Badge>
 }
 
 function ValueTile({ value, unit, status }: { value: number; unit: string; status: string }) {
@@ -168,7 +168,7 @@ function ValueTile({ value, unit, status }: { value: number; unit: string; statu
 
 function AlertTypeBadge({ type }: { type: string }) {
   const idx = ALERT_TYPES.indexOf(type as typeof ALERT_TYPES[number])
-  return <Badge variant="outline" className="isd-alert-type-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{type}</Badge>
+  return <Badge variant="outline" className="badge-interactive isd-alert-type-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{type}</Badge>
 }
 
 function AlertSeverityBadge({ severity }: { severity: string }) {
@@ -183,7 +183,7 @@ function AlertStatusBadge({ status }: { status: string }) {
 
 function MaintTypeBadge({ type }: { type: string }) {
   const idx = MAINT_TYPES.indexOf(type as typeof MAINT_TYPES[number])
-  return <Badge variant="outline" className="isd-maint-type-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{type}</Badge>
+  return <Badge variant="outline" className="badge-interactive isd-maint-type-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{type}</Badge>
 }
 
 function MaintStatusBadge({ status }: { status: string }) {
@@ -192,17 +192,17 @@ function MaintStatusBadge({ status }: { status: string }) {
 }
 
 function PriorityBadge({ priority }: { priority: string }) {
-  return <Badge className="isd-priority-badge" style={{ background: SEV_COL[priority] ?? "#475569", color: "#fff" }}>⏱ {priority}</Badge>
+  return <Badge className="badge-interactive isd-priority-badge" style={{ background: SEV_COL[priority] ?? "#475569", color: "#fff" }}>⏱ {priority}</Badge>
 }
 
 function ZoneBadge({ zone }: { zone: string }) {
   const idx = INDIAN_ZONES.indexOf(zone as typeof INDIAN_ZONES[number])
   const short = zone.replace("Zone ", "").split(" - ")[0]
-  return <Badge variant="outline" className="isd-zone-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{short}</Badge>
+  return <Badge variant="outline" className="badge-interactive isd-zone-badge" style={{ borderColor: CC[idx] ?? CC[0], color: CC[idx] ?? CC[0] }}>{short}</Badge>
 }
 
 function WarehouseBadge({ warehouse }: { warehouse: string }) {
-  return <Badge variant="secondary" className="isd-warehouse-badge">{warehouse.split(" ").slice(0, 2).join(" ")}</Badge>
+  return <Badge variant="secondary" className="badge-interactive isd-warehouse-badge">{warehouse.split(" ").slice(0, 2).join(" ")}</Badge>
 }
 
 function DurationTile({ duration }: { duration: string }) {
@@ -217,7 +217,7 @@ function CostTile({ cost }: { cost: number }) {
 function KpiCard({ label, value, color, icon }: { label: string; value: string | number; color: string; icon: string }) {
   return (
     <Card className="isd-kpi-card">
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-center gap-3">
           <div className="isd-kpi-icon" style={{ background: `${color}18`, color, width: 40, height: 40, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.1rem" }}>{icon}</div>
           <div><p className="isd-kpi-label text-xs text-muted-foreground">{label}</p><p className="isd-kpi-value text-lg font-bold" style={{ color }}>{value}</p></div>
@@ -392,9 +392,9 @@ export default function IoTSensorDashboardView() {
                 <option value="all">All Status</option>
                 {SENSOR_STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
-              <Badge variant="secondary" className="ml-auto text-xs">{filteredSensors.length} sensors</Badge>
+              <Badge variant="secondary" className="badge-interactive ml-auto text-xs">{filteredSensors.length} sensors</Badge>
             </div>
-            <Card><CardContent className="p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
+            <Card><CardContent className="glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
               <TableHead className="text-xs h-9">Sensor</TableHead><TableHead className="text-xs h-9">Type</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Model</TableHead>
               <TableHead className="text-xs h-9">Warehouse</TableHead><TableHead className="text-xs h-9 hidden lg:table-cell">Zone</TableHead><TableHead className="text-xs h-9">Status</TableHead>
               <TableHead className="text-xs h-9 hidden sm:table-cell">Battery</TableHead><TableHead className="text-xs h-9 hidden lg:table-cell">Signal</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Last Reading</TableHead><TableHead className="text-xs h-9 w-10"></TableHead>
@@ -421,7 +421,7 @@ export default function IoTSensorDashboardView() {
         {activeTab === "2" && (
           <div className="isd-tab-content space-y-4">
             <div className="flex items-center gap-2"><Activity className="h-4 w-4 text-teal-500" /><span className="text-sm text-muted-foreground">{data.readings.length} real-time readings</span></div>
-            <Card><CardContent className="p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
+            <Card><CardContent className="glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
               <TableHead className="text-xs h-9">Reading</TableHead><TableHead className="text-xs h-9">Sensor</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Warehouse</TableHead>
               <TableHead className="text-xs h-9 hidden lg:table-cell">Zone</TableHead><TableHead className="text-xs h-9">Metric</TableHead><TableHead className="text-xs h-9">Value</TableHead>
               <TableHead className="text-xs h-9 hidden sm:table-cell">Min</TableHead><TableHead className="text-xs h-9 hidden sm:table-cell">Max</TableHead><TableHead className="text-xs h-9">Status</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Time</TableHead>
@@ -434,8 +434,8 @@ export default function IoTSensorDashboardView() {
                   <TableCell className="hidden lg:table-cell"><ZoneBadge zone={r.zone} /></TableCell>
                   <TableCell><MetricBadge metric={r.metric} /></TableCell>
                   <TableCell><ValueTile value={r.value} unit={r.unit} status={r.status} /></TableCell>
-                  <TableCell className="hidden sm:table-cell"><ValueTile value={r.min} unit={r.unit} status="Normal" /></TableCell>
-                  <TableCell className="hidden sm:table-cell"><ValueTile value={r.max} unit={r.unit} status="Warning" /></TableCell>
+                  <TableCell className="numeric-cell hidden sm:table-cell"><ValueTile value={r.min} unit={r.unit} status="Normal" /></TableCell>
+                  <TableCell className="numeric-cell hidden sm:table-cell"><ValueTile value={r.max} unit={r.unit} status="Warning" /></TableCell>
                   <TableCell><SensorStatusBadge status={r.status === "Normal" ? "Online" : r.status === "Warning" ? "Low Battery" : "Error"} /></TableCell>
                   <TableCell className="text-xs text-muted-foreground hidden md:table-cell">{r.timestamp}</TableCell>
                 </TableRow>
@@ -453,9 +453,9 @@ export default function IoTSensorDashboardView() {
                 <option value="all">All Severity</option>
                 {ALERT_SEVERITIES.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
-              <Badge variant="secondary" className="ml-auto text-xs">{filteredAlerts.length} alerts</Badge>
+              <Badge variant="secondary" className="badge-interactive ml-auto text-xs">{filteredAlerts.length} alerts</Badge>
             </div>
-            <Card><CardContent className="p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
+            <Card><CardContent className="glass-subtle p-0"><ScrollArea className="max-h-[520px]"><Table><TableHeader><TableRow>
               <TableHead className="text-xs h-9">Alert</TableHead><TableHead className="text-xs h-9">Type</TableHead><TableHead className="text-xs h-9">Severity</TableHead>
               <TableHead className="text-xs h-9">Status</TableHead><TableHead className="text-xs h-9 hidden md:table-cell">Sensor</TableHead><TableHead className="text-xs h-9 hidden lg:table-cell">Warehouse</TableHead>
               <TableHead className="text-xs h-9 hidden lg:table-cell">Zone</TableHead><TableHead className="text-xs h-9">Value / Thresh</TableHead><TableHead className="text-xs h-9 hidden sm:table-cell">Duration</TableHead><TableHead className="text-xs h-9 w-10"></TableHead>
@@ -469,7 +469,7 @@ export default function IoTSensorDashboardView() {
                   <TableCell className="text-xs font-mono hidden md:table-cell">{alert.sensorId}</TableCell>
                   <TableCell className="hidden lg:table-cell"><WarehouseBadge warehouse={alert.warehouse} /></TableCell>
                   <TableCell className="hidden lg:table-cell"><ZoneBadge zone={alert.zone} /></TableCell>
-                  <TableCell><div className="flex items-center gap-1 flex-wrap"><ValueTile value={alert.value} unit="" status={alert.severity === "Critical" ? "Critical" : "Warning"} /><span className="text-muted-foreground text-xs">/</span><ValueTile value={alert.thresholdVal} unit="" status="Normal" /></div></TableCell>
+                  <TableCell><div className="numeric-cell flex items-center gap-1 flex-wrap"><ValueTile value={alert.value} unit="" status={alert.severity === "Critical" ? "Critical" : "Warning"} /><span className="text-muted-foreground text-xs">/</span><ValueTile value={alert.thresholdVal} unit="" status="Normal" /></div></TableCell>
                   <TableCell className="hidden sm:table-cell"><DurationTile duration={alert.duration} /></TableCell>
                   <TableCell><Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => openSheet(alert.id)}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
                 </TableRow>
@@ -483,7 +483,7 @@ export default function IoTSensorDashboardView() {
           <div className="isd-tab-content space-y-4">
             <div className="flex items-center gap-2">
               <div className="relative"><Search className="absolute left-2 top-2.5 h-3.5 w-3.5 text-muted-foreground" /><Input placeholder="Search maintenance..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-8 w-56 h-9" /></div>
-              <Badge variant="secondary" className="ml-auto text-xs">{filteredMaint.length} records</Badge>
+              <Badge variant="secondary" className="badge-interactive ml-auto text-xs">{filteredMaint.length} records</Badge>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredMaint.map(m => (
@@ -494,7 +494,7 @@ export default function IoTSensorDashboardView() {
                       <MaintStatusBadge status={m.status} />
                     </div>
                   </div>
-                  <CardContent className="p-3 space-y-2">
+                  <CardContent className="glass-subtle p-3 space-y-2">
                     <div className="flex items-center gap-1.5 flex-wrap"><MaintTypeBadge type={m.type} /><PriorityBadge priority={m.priority} /></div>
                     <Separator />
                     <div className="text-xs space-y-1.5">
@@ -594,7 +594,7 @@ export default function IoTSensorDashboardView() {
             <GradientHeader from={C.teal} to={C.amber} title={selectedSensor.id} subtitle={`${selectedSensor.type} — ${selectedSensor.warehouse}`} />
             <div className="p-4 space-y-4">
               <SheetHeader className="px-0"><SheetTitle className="text-base">Sensor Details</SheetTitle><SheetDescription className="text-xs">Complete sensor information and configuration</SheetDescription></SheetHeader>
-              <Card><CardContent className="p-3 space-y-0">
+              <Card><CardContent className="glass-subtle p-3 space-y-0">
                 <DetailField label="Type" value={<SensorTypeBadge type={selectedSensor.type} />} />
                 <DetailField label="Model" value={selectedSensor.model} />
                 <DetailField label="Warehouse" value={<WarehouseBadge warehouse={selectedSensor.warehouse} />} />
@@ -633,7 +633,7 @@ export default function IoTSensorDashboardView() {
             <GradientHeader from={C.rose} to={C.violet} title={selectedAlert.id} subtitle={`${selectedAlert.type} — ${selectedAlert.severity}`} />
             <div className="p-4 space-y-4">
               <SheetHeader className="px-0"><SheetTitle className="text-base">Alert Details</SheetTitle><SheetDescription className="text-xs">Complete alert information and timeline</SheetDescription></SheetHeader>
-              <Card><CardContent className="p-3 space-y-0">
+              <Card><CardContent className="glass-subtle p-3 space-y-0">
                 <DetailField label="Type" value={<AlertTypeBadge type={selectedAlert.type} />} />
                 <DetailField label="Severity" value={<AlertSeverityBadge severity={selectedAlert.severity} />} />
                 <DetailField label="Status" value={<AlertStatusBadge status={selectedAlert.status} />} />
@@ -646,10 +646,10 @@ export default function IoTSensorDashboardView() {
                 <DetailField label="Impact" value={<span className="font-semibold">{selectedAlert.impact}</span>} />
                 <DetailField label="Timestamp" value={selectedAlert.timestamp} />
               </CardContent></Card>
-              <Card><CardContent className="p-3"><p className="text-xs text-muted-foreground mb-1">Message</p><p className="text-sm leading-relaxed">{selectedAlert.message}</p></CardContent></Card>
+              <Card><CardContent className="glass-subtle p-3"><p className="text-xs text-muted-foreground mb-1">Message</p><p className="text-sm leading-relaxed">{selectedAlert.message}</p></CardContent></Card>
               <Card>
                 <CardHeader className="pb-2"><CardTitle className="text-xs font-semibold">Affected Sensor</CardTitle></CardHeader>
-                <CardContent className="space-y-0">
+                <CardContent className="glass-subtle space-y-0">
                   <DetailField label="Sensor ID" value={<span className="font-mono">{selectedAlert.sensorId}</span>} />
                   <DetailField label="Type" value={selectedAlert.sensorType} />
                   <DetailField label="Warehouse" value={selectedAlert.warehouse} />

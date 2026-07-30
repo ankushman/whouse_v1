@@ -549,7 +549,7 @@ export default function PutawayManagementView() {
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Putaway Team Performance</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow>
                           <TableHead className="text-xs">Operator</TableHead>
@@ -610,10 +610,10 @@ export default function PutawayManagementView() {
               </div>
 
               {/* Table */}
-              <Card className="shadow-sm">
-                <CardContent className="p-0">
+              <Card className="card-crud-lift shadow-sm">
+                <CardContent className="glass-subtle p-0">
                   <div className="pa-table-wrap">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow>
                           <TableHead className="text-xs">Task ID</TableHead>
@@ -646,7 +646,7 @@ export default function PutawayManagementView() {
                             <TableCell className="text-xs font-mono">{t.product.sku}</TableCell>
                             <TableCell className="text-xs max-w-[140px] truncate">{t.product.name}</TableCell>
                             <TableCell className="text-xs text-right">{t.qty}</TableCell>
-                            <TableCell className="text-xs text-right">{t.weight} kg</TableCell>
+                            <TableCell className="numeric-cell text-xs text-right">{t.weight} kg</TableCell>
                             <TableCell><StrategyBadge strategy={t.strategy} /></TableCell>
                             <TableCell><PriorityBadge priority={t.priority} /></TableCell>
                             <TableCell><StatusBadge status={t.status} /></TableCell>
@@ -730,7 +730,7 @@ export default function PutawayManagementView() {
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Zone Details</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow>
                           <TableHead className="text-xs">Zone</TableHead>
@@ -832,7 +832,7 @@ export default function PutawayManagementView() {
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Optimization Suggestions</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow>
                           <TableHead className="text-xs">Bin ID</TableHead>
@@ -932,7 +932,7 @@ export default function PutawayManagementView() {
                 <CardHeader className="pb-2"><CardTitle className="text-sm font-semibold">Top Improvement Areas</CardTitle></CardHeader>
                 <CardContent>
                   <div className="pa-table-wrap">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow>
                           <TableHead className="text-xs">Area</TableHead>

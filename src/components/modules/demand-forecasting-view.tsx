@@ -1118,14 +1118,14 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
 
           <div className="df-stat-enter mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
             <Card className="border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Last Actual</div>
                 <div className="text-xl font-bold text-zinc-900 dark:text-zinc-50">{fmtNum(item.lastActual)}</div>
                 <div className="text-[10px] text-zinc-500">{item.historyPoints} months history</div>
               </CardContent>
             </Card>
             <Card className="border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Next Period Forecast</div>
                 <div className="text-xl font-bold text-indigo-700 dark:text-indigo-300">{fmtNum(item.forecastNext)}</div>
                 <div className={cn("text-[10px] font-semibold", item.forecastChangePct >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400")}>
@@ -1134,14 +1134,14 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
               </CardContent>
             </Card>
             <Card className="border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">12-Month Forecast</div>
                 <div className="text-xl font-bold text-zinc-900 dark:text-zinc-50">{fmtNum(item.forecast12Month)}</div>
                 <div className="text-[10px] text-zinc-500">{item.forecastHorizon} months horizon</div>
               </CardContent>
             </Card>
             <Card className={cn("border backdrop-blur", item.mape < 10 ? "border-emerald-200 dark:border-emerald-900 bg-emerald-50/80 dark:bg-emerald-950/40" : item.mape < 15 ? "border-amber-200 dark:border-amber-900 bg-amber-50/80 dark:bg-amber-950/40" : "border-rose-200 dark:border-rose-900 bg-rose-50/80 dark:bg-rose-950/40")}>
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">MAPE</div>
                 <div className="text-xl font-bold text-zinc-900 dark:text-zinc-50">{item.mape.toFixed(2)}%</div>
                 <div className="text-[10px] text-zinc-500">RMSE: {fmtNum(item.rmse)} · Bias: {item.bias.toFixed(2)}%</div>
@@ -1209,7 +1209,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <Card className="df-card-enter border border-zinc-200 dark:border-zinc-800">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">3-Month Forecast</span>
                       <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
@@ -1219,7 +1219,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardContent>
                 </Card>
                 <Card className="df-card-enter border border-zinc-200 dark:border-zinc-800">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Safety Stock Rec.</span>
                       <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -1229,7 +1229,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardContent>
                 </Card>
                 <Card className="df-card-enter border border-zinc-200 dark:border-zinc-800">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Reorder Point</span>
                       <Target className="h-4 w-4 text-amber-600 dark:text-amber-400" />
@@ -1327,7 +1327,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   <CardDescription className="text-xs">6 forecasting methods ranked by MAPE (lower is better) — primary method highlighted</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                         <TableHead className="text-[10px] uppercase">Method</TableHead>
@@ -1357,10 +1357,10 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                             <TableCell className={cn("text-right font-mono text-[11px] font-bold", m.mape < 10 ? "text-emerald-700 dark:text-emerald-300" : m.mape < 15 ? "text-amber-700 dark:text-amber-300" : "text-rose-700 dark:text-rose-300")}>{m.mape.toFixed(2)}%</TableCell>
                             <TableCell className="text-right font-mono text-[11px]">{fmtNum(m.rmse)}</TableCell>
                             <TableCell className={cn("text-right font-mono text-[11px]", Math.abs(m.bias) < 5 ? "text-emerald-700 dark:text-emerald-300" : Math.abs(m.bias) < 10 ? "text-amber-700 dark:text-amber-300" : "text-rose-700 dark:text-rose-300")}>{m.bias > 0 ? "+" : ""}{m.bias.toFixed(2)}%</TableCell>
-                            <TableCell className="text-right font-mono text-[11px]">{(m.weight * 100).toFixed(0)}%</TableCell>
+                            <TableCell className="numeric-cell text-right font-mono text-[11px]">{(m.weight * 100).toFixed(0)}%</TableCell>
                             <TableCell>
                               {m.isPrimary ? (
-                                <Badge variant="outline" className="text-[10px] border-indigo-300 bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-900">
+                                <Badge variant="outline" className="badge-interactive text-[10px] border-indigo-300 bg-indigo-50 text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-900">
                                   <Star className="h-3 w-3 mr-1 fill-current" />
                                   Primary
                                 </Badge>
@@ -1474,7 +1474,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                         <TableHead className="text-[10px] uppercase">Feature</TableHead>
@@ -1515,7 +1515,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   <CardDescription className="text-xs">7 accuracy metrics vs industry benchmarks — backtested on last 12 months of holdout data</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                         <TableHead className="text-[10px] uppercase">Metric</TableHead>
@@ -1590,7 +1590,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                   const cfg = s.scenario === "pessimistic" ? { color: "rose", bg: "bg-rose-50 dark:bg-rose-950/30", border: "border-rose-200 dark:border-rose-900", text: "text-rose-700 dark:text-rose-300", icon: TrendingDown } : s.scenario === "base" ? { color: "blue", bg: "bg-blue-50 dark:bg-blue-950/30", border: "border-blue-200 dark:border-blue-900", text: "text-blue-700 dark:text-blue-300", icon: Target } : { color: "emerald", bg: "bg-emerald-50 dark:bg-emerald-950/30", border: "border-emerald-200 dark:border-emerald-900", text: "text-emerald-700 dark:text-emerald-300", icon: TrendingUp }
                   return (
                     <Card key={s.scenario} className={cn("df-card-enter border", cfg.border, cfg.bg)}>
-                      <CardContent className="p-4">
+                      <CardContent className="glass-subtle p-4">
                         <div className="flex items-center justify-between mb-2">
                           <span className={cn("text-[10px] font-bold uppercase tracking-wider", cfg.text)}>{s.scenario}</span>
                           <cfg.icon className={cn("h-4 w-4", cfg.text)} />
@@ -1654,7 +1654,7 @@ function DemandForecastDetailDrawer({ item, open, onOpenChange }: DrawerProps) {
                 <CardDescription className="text-xs">Each run retrains the ML ensemble on the latest demand history — automated retraining schedule + manual triggers</CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                       <TableHead className="text-[10px] uppercase">Run ID</TableHead>
@@ -1944,7 +1944,7 @@ export function DemandForecastingView() {
       <div className="df-kpi-enter grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         <Card className="df-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 to-purple-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">12-Mo Forecast</span>
               <LineChartIcon className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
@@ -1955,7 +1955,7 @@ export function DemandForecastingView() {
         </Card>
         <Card className="df-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Avg MAPE</span>
               <Target className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -1966,7 +1966,7 @@ export function DemandForecastingView() {
         </Card>
         <Card className="df-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/30 dark:to-cyan-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Avg Confidence</span>
               <Gauge className="h-4 w-4 text-blue-600 dark:text-blue-400" />
@@ -1977,7 +1977,7 @@ export function DemandForecastingView() {
         </Card>
         <Card className="df-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Approved</span>
               <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -1991,7 +1991,7 @@ export function DemandForecastingView() {
           {pendingReviewCount > 0 && (
             <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-amber-500 animate-ping" />
           )}
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Pending Review</span>
               <Eye className="h-4 w-4 text-amber-600 dark:text-amber-400" />
@@ -2002,7 +2002,7 @@ export function DemandForecastingView() {
         </Card>
         <Card className={cn("df-kpi-enter relative overflow-hidden border", rejectedCount > 0 ? "border-rose-200 dark:border-rose-900 bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/30 dark:to-pink-950/30" : "border-zinc-200 dark:border-zinc-800")}>
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 to-pink-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Rejected</span>
               <XCircle className="h-4 w-4 text-rose-600 dark:text-rose-400" />
@@ -2177,7 +2177,7 @@ export function DemandForecastingView() {
             )}
           >
             {tab.label}
-            <Badge variant="secondary" className="ml-1 text-[10px] h-4 px-1.5">{tab.count}</Badge>
+            <Badge variant="secondary" className="badge-interactive ml-1 text-[10px] h-4 px-1.5">{tab.count}</Badge>
           </button>
         ))}
       </div>
@@ -2224,9 +2224,9 @@ export function DemandForecastingView() {
       </div>
 
       {/* Master table */}
-      <Card className="df-table-card border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-        <CardContent className="p-0">
-          <Table>
+      <Card className="card-crud-lift df-table-card border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+        <CardContent className="glass-subtle p-0">
+          <Table className="table-hover-highlight">
             <TableHeader>
               <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                 <TableHead className="text-[10px] uppercase">Part / Description</TableHead>

@@ -68,7 +68,7 @@ function fmtINR(n: number): string {
 function InspectionTypeBadge({ type }: { type: string }) {
   const idx = INSPECTION_TYPES.indexOf(type as typeof INSPECTION_TYPES[number])
   return (
-    <Badge variant="outline" className="wsm-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
+    <Badge variant="outline" className="badge-interactive wsm-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
       {idx >= 0 ? INSPECTION_EMOJI[idx] : "📋"} {type}
     </Badge>
   )
@@ -145,7 +145,7 @@ function PPETypeBadge({ type }: { type: string }) {
   const emoji = ["🪖", "👢", "🦺", "🧤", "🥽", "👂", "🪢", "😷"]
   const idx = PPE_TYPES.indexOf(type as typeof PPE_TYPES[number])
   return (
-    <Badge variant="outline" className="wsm-ppe-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
+    <Badge variant="outline" className="badge-interactive wsm-ppe-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
       {idx >= 0 ? emoji[idx] : "🛡️"} {type}
     </Badge>
   )
@@ -169,7 +169,7 @@ function PPEStatusBadge({ status }: { status: string }) {
 
 function ComplianceTypeBadge({ type }: { type: string }) {
   return (
-    <Badge variant="outline" className="wsm-comp-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+    <Badge variant="outline" className="badge-interactive wsm-comp-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
       <ShieldCheck className="h-3 w-3" /> {type}
     </Badge>
   )
@@ -213,7 +213,7 @@ function DaysTile({ days }: { days: number }) {
 
 function ZoneBadge({ zone }: { zone: string }) {
   return (
-    <Badge variant="outline" className="wsm-zone-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
+    <Badge variant="outline" className="badge-interactive wsm-zone-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
       <Factory className="h-3 w-3" /> {zone}
     </Badge>
   )
@@ -247,7 +247,7 @@ function RiskScoreBadge({ score }: { score: number }) {
 
 function InspectorBadge({ name }: { name: string }) {
   return (
-    <Badge variant="outline" className="wsm-inspector-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
+    <Badge variant="outline" className="badge-interactive wsm-inspector-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
       <Users className="h-3 w-3" /> {name}
     </Badge>
   )
@@ -393,7 +393,7 @@ export default function WarehouseSafetyManagementView() {
           <div className="wsm-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`wsm-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -420,7 +420,7 @@ export default function WarehouseSafetyManagementView() {
         <TabsContent value="1" className="wsm-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search inspections..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredInspections.length} inspections</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredInspections.length} inspections</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="wsm-inspection-table w-full text-xs">
@@ -447,7 +447,7 @@ export default function WarehouseSafetyManagementView() {
         <TabsContent value="2" className="wsm-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search incidents..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredIncidents.length} incidents</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredIncidents.length} incidents</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="wsm-incident-table w-full text-xs">
@@ -475,7 +475,7 @@ export default function WarehouseSafetyManagementView() {
         <TabsContent value="3" className="wsm-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search PPE..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredPPE.length} records</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredPPE.length} records</Badge>
           </div>
           <div className="wsm-ppe-grid grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             {data.ppe.map((p) => (
@@ -484,7 +484,7 @@ export default function WarehouseSafetyManagementView() {
                   <div className="flex items-center justify-between"><PPETypeBadge type={p.type} /><PPEStatusBadge status={p.status} /></div>
                   <p className="text-lg font-bold mt-1">{p.id}</p>
                 </div>
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Zone</span><ZoneBadge zone={p.zone} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Issued To</span><InspectorBadge name={p.issuedTo} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Compliance</span><SafetyScoreBar score={p.complianceRate} /></div>
@@ -529,7 +529,7 @@ export default function WarehouseSafetyManagementView() {
               { label: "Total Cost", value: fmtINR(data.incidents.reduce((s, x) => s + x.cost, 0)), icon: TrendingUp, color: "text-violet-600", bg: "bg-violet-50 dark:bg-violet-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`wsm-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>

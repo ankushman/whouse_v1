@@ -132,7 +132,7 @@ export function CostAnalyticsView() {
             )}
             onClick={item.category ? () => openCostDrawer(item.category!) : undefined}
           >
-            <CardContent className="p-4">
+            <CardContent className="glass-subtle p-4">
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground flex items-center gap-1">
@@ -224,7 +224,7 @@ export function CostAnalyticsView() {
         <CardContent>
           <div className="mobile-scroll-hint -mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-x-visible md:px-0">
           <div className="table-container min-w-[540px]">
-          <Table className="table-row-hover table-stripe">
+          <Table className="table-hover-highlight table-row-hover table-stripe">
             <TableHeader className="table-header-sticky-glass">
               <TableRow className="hover:bg-transparent">
                 <TableHead className="text-xs">Month</TableHead>
@@ -260,7 +260,7 @@ export function CostAnalyticsView() {
                     onClick={() => openCostDrawer("storage", row.month)}
                     title="Click to drill into Storage cost"
                   >₹{(row.storage / 1000).toFixed(0)}K</TableCell>
-                  <TableCell className="text-xs text-right font-medium text-number">₹{(row.total / 1000).toFixed(0)}K</TableCell>
+                  <TableCell className="numeric-cell text-xs text-right font-medium text-number">₹{(row.total / 1000).toFixed(0)}K</TableCell>
                   <TableCell className="text-xs text-right">
                     <span className={cn("font-medium", row.totalChange > 0 ? "text-red-600" : row.totalChange < 0 ? "text-emerald-600" : "text-muted-foreground")}>
                       {row.totalChange > 0 ? "+" : ""}{row.totalChange}%

@@ -536,7 +536,7 @@ function KPIBox({ title, value, subValue, trend, trendLabel, icon: Icon, color, 
       style={{ animationDelay: `${index * 60}ms` }}
     >
       <div className={cn("h-1.5 w-full bg-gradient-to-r", c.bar)} />
-      <CardContent className="p-4 relative">
+      <CardContent className="glass-subtle p-4 relative">
         <div className={cn("absolute -top-6 -right-6 w-24 h-24 rounded-full blur-xl", c.bubble)} />
         <div className="flex items-start justify-between gap-2 relative">
           <div className="space-y-1 min-w-0">
@@ -758,7 +758,7 @@ export function QualityInspectionPlanView() {
                 </CardTitle>
                 <CardDescription className="text-xs mt-1">Pass rate % + total inspections per month</CardDescription>
               </div>
-              <Badge variant="outline" className="text-[10px] bg-blue-50 text-blue-700 border-blue-200">LAST 6M</Badge>
+              <Badge variant="outline" className="badge-interactive text-[10px] bg-blue-50 text-blue-700 border-blue-200">LAST 6M</Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -790,7 +790,7 @@ export function QualityInspectionPlanView() {
                 </CardTitle>
                 <CardDescription className="text-xs mt-1">Distribution of inspection plans by stage</CardDescription>
               </div>
-              <Badge variant="outline" className="text-[10px] bg-violet-50 text-violet-700 border-violet-200">5 TYPES</Badge>
+              <Badge variant="outline" className="badge-interactive text-[10px] bg-violet-50 text-violet-700 border-violet-200">5 TYPES</Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -830,7 +830,7 @@ export function QualityInspectionPlanView() {
                 </CardTitle>
                 <CardDescription className="text-xs mt-1">Most common defect types across all inspections</CardDescription>
               </div>
-              <Badge variant="outline" className="text-[10px] bg-rose-50 text-rose-700 border-rose-200">PARETO</Badge>
+              <Badge variant="outline" className="badge-interactive text-[10px] bg-rose-50 text-rose-700 border-rose-200">PARETO</Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -857,7 +857,7 @@ export function QualityInspectionPlanView() {
                 </CardTitle>
                 <CardDescription className="text-xs mt-1">Plans per severity tier with AQL level</CardDescription>
               </div>
-              <Badge variant="outline" className="text-[10px] bg-amber-50 text-amber-700 border-amber-200">3 TIERS</Badge>
+              <Badge variant="outline" className="badge-interactive text-[10px] bg-amber-50 text-amber-700 border-amber-200">3 TIERS</Badge>
             </div>
           </CardHeader>
           <CardContent>
@@ -934,11 +934,11 @@ export function QualityInspectionPlanView() {
                   <SelectItem value="minor">Minor</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" size="sm" className="h-8" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleRefresh}>
                 <RefreshCw className="h-3.5 w-3.5 mr-1" />
                 Refresh
               </Button>
-              <Button variant="outline" size="sm" className="h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="h-3.5 w-3.5 mr-1" />
                 Export
               </Button>
@@ -979,9 +979,9 @@ export function QualityInspectionPlanView() {
             })}
           </div>
         </CardHeader>
-        <CardContent className="p-0">
+        <CardContent className="glass-subtle p-0">
           <div className="overflow-x-auto">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="bg-slate-50 hover:bg-slate-50">
                   <TableHead className="h-9 text-[11px] font-semibold text-slate-600 uppercase tracking-wide w-20">QIP ID</TableHead>
@@ -1330,7 +1330,7 @@ function QIPDetailDrawer({ qip, open, onOpenChange }: DetailDrawerProps) {
               <span className="font-medium">Effective:</span> {qip.effectiveDate} · <span className="font-medium">Next Review:</span> {qip.nextReview}
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="h-8" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleExport}>
                 <Download className="h-3.5 w-3.5 mr-1" /> Export
               </Button>
               {qip.status === "draft" && (
@@ -1339,12 +1339,12 @@ function QIPDetailDrawer({ qip, open, onOpenChange }: DetailDrawerProps) {
                 </Button>
               )}
               {qip.status === "active" && (
-                <Button variant="outline" size="sm" className="h-8 text-amber-700 border-amber-300 hover:bg-amber-50" onClick={handleSuspend}>
+                <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-amber-700 border-amber-300 hover:bg-amber-50" onClick={handleSuspend}>
                   <AlertTriangle className="h-3.5 w-3.5 mr-1" /> Suspend
                 </Button>
               )}
               {(qip.status === "active" || qip.status === "suspended" || qip.status === "in-revision") && (
-                <Button variant="outline" size="sm" className="h-8" onClick={handleRevise}>
+                <Button variant="outline" size="sm" className="btn-outline-animate h-8" onClick={handleRevise}>
                   <PenLine className="h-3.5 w-3.5 mr-1" /> New Revision
                 </Button>
               )}
@@ -1371,7 +1371,7 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
               <User className="h-3.5 w-3.5 text-blue-600" /> Ownership & Accountability
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2 pt-2">
+          <CardContent className="glass-subtle space-y-2 pt-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-slate-500">Plan Owner</span>
               <div className="flex items-center gap-2">
@@ -1404,7 +1404,7 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
               <History className="h-3.5 w-3.5 text-violet-600" /> Lifecycle
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2 pt-2">
+          <CardContent className="glass-subtle space-y-2 pt-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-slate-500">Effective Date</span>
               <span className="text-xs font-medium text-slate-800">{qip.effectiveDate}</span>
@@ -1437,7 +1437,7 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
             <Activity className="h-3.5 w-3.5 text-blue-600" /> Inspection Performance (Last 30 days)
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-2">
+        <CardContent className="glass-subtle pt-2">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div className="rounded-md bg-emerald-50 border border-emerald-200 p-3">
               <div className="text-[10px] uppercase tracking-wide text-emerald-700 font-semibold flex items-center gap-1">
@@ -1484,7 +1484,7 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
             <ListChecks className="h-3.5 w-3.5 text-violet-600" /> Characteristics Summary
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-2">
+        <CardContent className="glass-subtle pt-2">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
             <div className="rounded-md bg-slate-50 border border-slate-200 p-2 text-center">
               <div className="text-[10px] uppercase text-slate-500 font-semibold">Total</div>
@@ -1517,7 +1517,7 @@ function OverviewTab({ qip, inspectionStats }: { qip: QualityInspectionPlan; ins
             <AlertTriangle className="h-3.5 w-3.5" /> Plan Notes
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-2">
+        <CardContent className="glass-subtle pt-2">
           <p className="text-xs text-slate-700 leading-relaxed">{qip.notes}</p>
         </CardContent>
       </Card>
@@ -1537,11 +1537,11 @@ function CharacteristicsTab({ qip }: { qip: QualityInspectionPlan }) {
           <h3 className="text-sm font-semibold text-slate-800">Inspection Characteristics</h3>
           <p className="text-[11px] text-slate-500">{qip.characteristics.length} characteristics defined in this QIP</p>
         </div>
-        <Badge variant="outline" className="text-[10px] bg-blue-50 text-blue-700 border-blue-200">REV {qip.revision}</Badge>
+        <Badge variant="outline" className="badge-interactive text-[10px] bg-blue-50 text-blue-700 border-blue-200">REV {qip.revision}</Badge>
       </div>
 
       <div className="rounded-md border border-slate-200 overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-slate-50">
               <TableHead className="h-8 text-[10px] font-semibold text-slate-600 uppercase w-10">#</TableHead>
@@ -1619,7 +1619,7 @@ function InspectionsTab({ qip, records }: { qip: QualityInspectionPlan; records:
       </div>
 
       <div className="rounded-md border border-slate-200 overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-slate-50">
               <TableHead className="h-8 text-[10px] font-semibold text-slate-600 uppercase w-24">Record ID</TableHead>
@@ -1734,7 +1734,7 @@ function DefectsTab({ qip, records }: { qip: QualityInspectionPlan; records: Def
       )}
 
       <div className="rounded-md border border-slate-200 overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-slate-50">
               <TableHead className="h-8 text-[10px] font-semibold text-slate-600 uppercase w-24">Defect ID</TableHead>
@@ -1806,11 +1806,11 @@ function SamplingTab({ qip, plans }: { qip: QualityInspectionPlan; plans: Sampli
           <h3 className="text-sm font-semibold text-slate-800">Sampling Plan (ANSI/ASQ Z1.4 — Level II)</h3>
           <p className="text-[11px] text-slate-500">AQL levels per severity tier — single sampling plan</p>
         </div>
-        <Badge variant="outline" className="text-[10px] bg-blue-50 text-blue-700 border-blue-200">LOT 3,201-10,000</Badge>
+        <Badge variant="outline" className="badge-interactive text-[10px] bg-blue-50 text-blue-700 border-blue-200">LOT 3,201-10,000</Badge>
       </div>
 
       <div className="rounded-md border border-slate-200 overflow-hidden">
-        <Table>
+        <Table className="table-hover-highlight">
           <TableHeader>
             <TableRow className="bg-slate-50">
               <TableHead className="h-8 text-[10px] font-semibold text-slate-600 uppercase w-24">Severity</TableHead>
@@ -1868,7 +1868,7 @@ function SamplingTab({ qip, plans }: { qip: QualityInspectionPlan; plans: Sampli
             <Gauge className="h-3.5 w-3.5 text-violet-600" /> Gauge Calibration Status
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-2">
+        <CardContent className="glass-subtle pt-2">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {Array.from(new Set(qip.characteristics.map((c) => c.gauge))).slice(0, 6).map((g, idx) => {
               const calibDate = new Date(2026, 5 - (idx % 3), 15).toISOString().slice(0, 10)
@@ -1907,7 +1907,7 @@ function SamplingTab({ qip, plans }: { qip: QualityInspectionPlan; plans: Sampli
             <Crosshair className="h-3.5 w-3.5 text-blue-600" /> Sample Size Calculation Reference
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-2 space-y-2">
+        <CardContent className="glass-subtle pt-2 space-y-2">
           <div className="text-xs text-slate-600">
             Sample size for this QIP is <span className="font-bold text-blue-700">{qip.sampleSize} units</span> based on:
           </div>

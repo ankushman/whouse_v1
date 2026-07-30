@@ -85,7 +85,7 @@ function ShipmentStatusBadge({ status }: { status: string }) {
 
 function PortBadge({ port }: { port: string }) {
   return (
-    <Badge variant="outline" className="ctc-port-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400">
+    <Badge variant="outline" className="badge-interactive ctc-port-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400">
       <Anchor className="h-3 w-3" /> {port}
     </Badge>
   )
@@ -94,7 +94,7 @@ function PortBadge({ port }: { port: string }) {
 function ShipmentTypeBadge({ type }: { type: string }) {
   const idx = SHIPMENT_TYPES.indexOf(type as typeof SHIPMENT_TYPES[number])
   return (
-    <Badge variant="outline" className="ctc-stype-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
+    <Badge variant="outline" className="badge-interactive ctc-stype-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
       {idx >= 0 ? SHIPMENT_EMOJI[idx] : "📦"} {type}
     </Badge>
   )
@@ -102,7 +102,7 @@ function ShipmentTypeBadge({ type }: { type: string }) {
 
 function OriginCountryBadge({ country }: { country: string }) {
   return (
-    <Badge variant="outline" className="ctc-origin-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
+    <Badge variant="outline" className="badge-interactive ctc-origin-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
       {country}
     </Badge>
   )
@@ -138,7 +138,7 @@ function DutyRateBar({ rate }: { rate: number }) {
 
 function LicenseTypeBadge({ type }: { type: string }) {
   return (
-    <Badge variant="outline" className="ctc-license-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
+    <Badge variant="outline" className="badge-interactive ctc-license-type-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
       {type}
     </Badge>
   )
@@ -190,7 +190,7 @@ function RiskBadge({ risk }: { risk: string }) {
 
 function CHABadge({ name }: { name: string }) {
   return (
-    <Badge variant="outline" className="ctc-cha-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
+    <Badge variant="outline" className="badge-interactive ctc-cha-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-cyan-50 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
       <Landmark className="h-3 w-3" /> {name}
     </Badge>
   )
@@ -384,7 +384,7 @@ export default function CustomsTradeComplianceView() {
           <div className="ctc-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`ctc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -411,7 +411,7 @@ export default function CustomsTradeComplianceView() {
         <TabsContent value="1" className="ctc-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search imports..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredImports.length} shipments</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredImports.length} shipments</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="ctc-import-table w-full text-xs">
@@ -441,7 +441,7 @@ export default function CustomsTradeComplianceView() {
         <TabsContent value="2" className="ctc-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search exports..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredExports.length} shipments</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredExports.length} shipments</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="ctc-export-table w-full text-xs">
@@ -457,7 +457,7 @@ export default function CustomsTradeComplianceView() {
                     <td className="p-2"><HSCodeTile code={exp.hsCode} /></td>
                     <td className="p-2"><FOBValueTile value={exp.fobValue} /></td>
                     <td className="p-2 text-[10px] font-medium text-gray-600 dark:text-gray-400 truncate max-w-[120px]">{exp.vesselName}</td>
-                    <td className="p-2"><Badge variant="outline" className={`text-[10px] px-2 py-0.5 font-medium ${exp.edpmsStatus === "Confirmed" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"}`}>{exp.edpmsStatus}</Badge></td>
+                    <td className="badge-interactive p-2"><Badge variant="outline" className={`text-[10px] px-2 py-0.5 font-medium ${exp.edpmsStatus === "Confirmed" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"}`}>{exp.edpmsStatus}</Badge></td>
                     <td className="p-2 text-center"><Button variant="ghost" size="sm" className="ctc-view-btn h-7 w-7 p-0 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-900/30" onClick={() => toast.success("Viewing Export", `${exp.id} details opened`)}><Eye className="h-3.5 w-3.5" /></Button></td>
                   </tr>
                 ))}
@@ -476,11 +476,11 @@ export default function CustomsTradeComplianceView() {
                   <div className={`ctc-duty-card-header p-3 ${isDuty ? "bg-gradient-to-r from-rose-500 to-rose-600" : "bg-gradient-to-r from-amber-500 to-amber-600"} text-white`}>
                     <div className="flex items-center justify-between"><DutyTypeBadge type={d.type} /><span className="text-[10px] opacity-80">{d.section}</span></div>
                   </div>
-                  <CardContent className="p-3 space-y-2">
+                  <CardContent className="glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Rate</span><DutyRateBar rate={d.rate} /></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Assessed</span><span className="text-[11px] font-bold text-gray-700 dark:text-gray-300">{fmtINR(d.assessedValue)}</span></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Duty</span><DutyTile amount={d.dutyAmount} /></div>
-                    <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Settlement</span><Badge variant="outline" className={`text-[10px] px-2 py-0.5 ${d.settlementStatus === "Paid" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : d.settlementStatus === "Pending" ? "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" : "bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}`}>{d.settlementStatus}</Badge></div>
+                    <div className="badge-interactive flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Settlement</span><Badge variant="outline" className={`text-[10px] px-2 py-0.5 ${d.settlementStatus === "Paid" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : d.settlementStatus === "Pending" ? "bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400" : "bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}`}>{d.settlementStatus}</Badge></div>
                     <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">CHA</span><CHABadge name={d.cha} /></div>
                   </CardContent>
                 </Card>
@@ -493,7 +493,7 @@ export default function CustomsTradeComplianceView() {
         <TabsContent value="4" className="ctc-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search licenses..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{data.licenses.length} licenses</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{data.licenses.length} licenses</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="ctc-license-table w-full text-xs">
@@ -508,7 +508,7 @@ export default function CustomsTradeComplianceView() {
                     <td className="p-2 text-[10px] font-medium text-gray-600 dark:text-gray-400">{lic.authority}</td>
                     <td className="p-2 text-[10px]">{lic.validFrom}</td>
                     <td className="p-2 text-[10px]">{lic.validTo}</td>
-                    <td className="p-2"><Badge variant="outline" className={`text-[10px] px-2 py-0.5 ${lic.renewalStatus === "Approved" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : lic.renewalStatus === "Submitted" ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" : "bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}`}>{lic.renewalStatus}</Badge></td>
+                    <td className="badge-interactive p-2"><Badge variant="outline" className={`text-[10px] px-2 py-0.5 ${lic.renewalStatus === "Approved" ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : lic.renewalStatus === "Submitted" ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" : "bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}`}>{lic.renewalStatus}</Badge></td>
                     <td className="p-2"><ComplianceScoreBar score={lic.complianceScore} /></td>
                   </tr>
                 ))}
@@ -527,7 +527,7 @@ export default function CustomsTradeComplianceView() {
               { label: "High Risk Items", value: data.imports.filter(x => ["Critical", "Prohibited"].includes(x.riskLevel)).length, icon: AlertTriangle, color: "text-red-600", bg: "bg-red-50 dark:bg-red-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`ctc-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>

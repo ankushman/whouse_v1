@@ -139,7 +139,7 @@ function PackTypeBadge({ type }: { type: string }) {
   const emoji = ["📦", "🫧", "🏗️", "✉️", "🎁", "🪵", "📋", "🧪"]
   const idx = PACK_TYPES.indexOf(type as typeof PACK_TYPES[number])
   return (
-    <Badge variant="outline" className="ecf-pack-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
+    <Badge variant="outline" className="badge-interactive ecf-pack-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
       {idx >= 0 ? emoji[idx] : "📦"} {type}
     </Badge>
   )
@@ -147,7 +147,7 @@ function PackTypeBadge({ type }: { type: string }) {
 
 function CourierBadge({ name }: { name: string }) {
   return (
-    <Badge variant="outline" className="ecf-courier-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400">
+    <Badge variant="outline" className="badge-interactive ecf-courier-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-sky-50 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400">
       <Truck className="h-3 w-3" /> {name}
     </Badge>
   )
@@ -155,7 +155,7 @@ function CourierBadge({ name }: { name: string }) {
 
 function SlotBadge({ slot }: { slot: string }) {
   return (
-    <Badge variant="outline" className="ecf-slot-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
+    <Badge variant="outline" className="badge-interactive ecf-slot-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400">
       <Clock className="h-3 w-3" /> {slot}
     </Badge>
   )
@@ -227,7 +227,7 @@ function LineItemsTile({ count }: { count: number }) {
 
 function WarehouseBadge({ name }: { name: string }) {
   return (
-    <Badge variant="outline" className="ecf-wh-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+    <Badge variant="outline" className="badge-interactive ecf-wh-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
       <Warehouse className="h-3 w-3" /> {name}
     </Badge>
   )
@@ -243,7 +243,7 @@ function ManifestBadge({ id }: { id: string }) {
 
 function PickerBadge({ name }: { name: string }) {
   return (
-    <Badge variant="outline" className="ecf-picker-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+    <Badge variant="outline" className="badge-interactive ecf-picker-badge gap-1 text-[10px] px-2 py-0.5 font-medium bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
       <Users className="h-3 w-3" /> {name}
     </Badge>
   )
@@ -390,7 +390,7 @@ export default function EcommerceFulfillmentHubView() {
           <div className="ecf-kpi-grid grid grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-4">
             {kpis.map((k, i) => (
               <Card key={i} className={`ecf-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>
@@ -417,7 +417,7 @@ export default function EcommerceFulfillmentHubView() {
         <TabsContent value="1" className="ecf-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search orders..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredOrders.length} orders</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredOrders.length} orders</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="ecf-order-table w-full text-xs">
@@ -446,7 +446,7 @@ export default function EcommerceFulfillmentHubView() {
         <TabsContent value="2" className="ecf-tab-content space-y-4">
           <div className="flex gap-2 items-center">
             <div className="relative flex-1 max-w-sm"><Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" /><Input value={searchQ} onChange={e => setSearchQ(e.target.value)} placeholder="Search picks..." className="pl-9 h-9 text-sm" /></div>
-            <Badge variant="outline" className="text-xs">{filteredPicks.length} picks</Badge>
+            <Badge variant="outline" className="badge-interactive text-xs">{filteredPicks.length} picks</Badge>
           </div>
           <div className="overflow-x-auto rounded-lg border bg-white dark:bg-gray-900">
             <table className="ecf-pick-table w-full text-xs">
@@ -476,10 +476,10 @@ export default function EcommerceFulfillmentHubView() {
             {data.packs.map((pk) => (
               <Card key={pk.id} className="ecf-pack-card group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden border-l-4 border-l-blue-500">
                 <div className="ecf-pack-card-header p-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
-                  <div className="flex items-center justify-between"><PackTypeBadge type={pk.type} /><Badge variant="outline" className="text-[10px] px-2 py-0.5 border-white/30 text-white bg-white/10">{pk.printed ? "Label Printed" : "Pending"}</Badge></div>
+                  <div className="badge-interactive flex items-center justify-between"><PackTypeBadge type={pk.type} /><Badge variant="outline" className="text-[10px] px-2 py-0.5 border-white/30 text-white bg-white/10">{pk.printed ? "Label Printed" : "Pending"}</Badge></div>
                   <p className="text-lg font-bold mt-1">{pk.id}</p>
                 </div>
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">AWB</span><ManifestBadge id={pk.awbNo} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Courier</span><CourierBadge name={pk.courier} /></div>
                   <div className="flex items-center justify-between"><span className="text-[10px] text-gray-500 dark:text-gray-400">Weight</span><WeightTile kg={pk.weight} /></div>
@@ -524,7 +524,7 @@ export default function EcommerceFulfillmentHubView() {
               { label: "Revenue", value: fmtINR(data.orders.reduce((s, o) => s + o.value, 0)), icon: IndianRupee, color: "text-violet-600", bg: "bg-violet-50 dark:bg-violet-900/20" },
             ].map((k, i) => (
               <Card key={i} className={`ecf-kpi-card group hover:shadow-md transition-all duration-300 ${k.bg}`}>
-                <CardContent className="flex items-center gap-3 p-4">
+                <CardContent className="glass-subtle flex items-center gap-3 p-4">
                   <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm ${k.color}`}><k.icon className="h-5 w-5" /></div>
                   <div className="min-w-0"><p className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">{k.label}</p><p className={`text-lg font-bold ${k.color}`}>{k.value}</p></div>
                 </CardContent>

@@ -380,7 +380,7 @@ export default function MultiWarehouseRebalanceView() {
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -417,7 +417,7 @@ export default function MultiWarehouseRebalanceView() {
                     <td className="px-3 py-2"><TransferStatusBadge status={t.status} /></td>
                     <td className="px-3 py-2"><QtyProgressBar received={t.receivedQty} total={t.qty} /></td>
                     <td className="px-3 py-2 font-bold tabular-nums">{formatINR(t.totalValue)}</td>
-                    <td className="px-3 py-2"><Badge variant="outline" className="text-[10px]">{t.mode}</Badge></td>
+                    <td className="badge-interactive px-3 py-2"><Badge variant="outline" className="text-[10px]">{t.mode}</Badge></td>
                     <td className="px-3 py-2">{t.eta}</td>
                     <td className="px-3 py-2">{t.createdDate}</td>
                     <td className="px-3 py-2"><Button size="sm" variant="ghost" className="mwr-action-btn h-7" onClick={() => { setDrawerRecord(t); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
@@ -474,14 +474,14 @@ export default function MultiWarehouseRebalanceView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {filteredRules.map(r => (
               <Card key={r.id} className="mwr-chart-card hover:shadow-md transition-shadow">
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-start justify-between">
                     <div className="flex-1"><div className="font-bold text-sm">{r.ruleName}</div><div className="text-[10px] text-muted-foreground mt-0.5">{r.trigger}</div></div>
                     <RuleExecutionRing count={r.executionCount} />
                   </div>
                   <div className="flex items-center gap-2 flex-wrap">
                     <RuleStatusBadge status={r.status} />
-                    <Badge variant="outline" className="text-[10px]">{r.category}</Badge>
+                    <Badge variant="outline" className="badge-interactive text-[10px]">{r.category}</Badge>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-[10px]">
                     <div><span className="text-muted-foreground">Source Zone</span><div className="font-medium">{r.sourceZone}</div></div>
@@ -508,7 +508,7 @@ export default function MultiWarehouseRebalanceView() {
               const healthPct = totalSku > 0 ? Math.round((optimal / totalSku) * 100) : 0;
               return (
                 <Card key={idx} className="mwr-wh-card hover:shadow-md transition-all hover:-translate-y-0.5">
-                  <CardContent className="p-3 space-y-2">
+                  <CardContent className="glass-subtle p-3 space-y-2">
                     <div className="flex items-center gap-2"><Warehouse className="w-4 h-4 text-teal-600" /><span className="font-bold text-sm">{String(wh)}</span></div>
                     <div className="flex gap-2 text-[10px]">
                       <span className="bg-red-100 text-red-700 px-1.5 py-0.5 rounded">{overstock} over</span>
@@ -547,7 +547,7 @@ export default function MultiWarehouseRebalanceView() {
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -589,8 +589,8 @@ export default function MultiWarehouseRebalanceView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="mwr-action-btn flex-1" onClick={() => { toast.success("Approved", `${drawerRecord.transferNo} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Approve</Button>
-                    <Button size="sm" variant="outline" className="mwr-action-btn flex-1" onClick={() => { toast.info("On Hold", `${drawerRecord.transferNo} placed on hold`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Hold</Button>
-                    <Button size="sm" variant="outline" className="mwr-action-btn" onClick={() => { toast.error("Cancelled", `${drawerRecord.transferNo} cancelled`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mwr-action-btn flex-1" onClick={() => { toast.info("On Hold", `${drawerRecord.transferNo} placed on hold`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Hold</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mwr-action-btn" onClick={() => { toast.error("Cancelled", `${drawerRecord.transferNo} cancelled`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}

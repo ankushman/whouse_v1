@@ -283,7 +283,7 @@ export function OperationsOverviewView() {
       <div className="grid gap-3 grid-cols-2 md:grid-cols-4 xl:grid-cols-4 stagger-children">
         {executiveKPIs.map((kpi) => (
           <Card key={kpi.title} className="card-depth hover-scale-sm rounded-xl border-border/60 shadow-sm">
-            <CardContent className="p-4">
+            <CardContent className="glass-subtle p-4">
               <div className="flex items-start justify-between">
                 <div className="space-y-1">
                   <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{kpi.title}</p>
@@ -373,7 +373,7 @@ export function OperationsOverviewView() {
                 Top Issues
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
+            <CardContent className="glass-subtle space-y-2">
               {topIssues.map((issue) => (
                 <div key={issue.id} className={cn(
                   "flex items-start gap-2.5 rounded-lg border p-2.5 text-xs transition-colors hover:bg-muted/40",
@@ -449,7 +449,7 @@ export function OperationsOverviewView() {
           </CardHeader>
           <CardContent>
             <div className="mobile-scroll-hint -mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-x-visible md:px-0">
-              <Table>
+              <Table className="table-hover-highlight">
                 <TableHeader>
                   <TableRow className="hover:bg-transparent">
                     <TableHead className="text-xs">ID</TableHead>
@@ -499,7 +499,7 @@ export function OperationsOverviewView() {
         </CardHeader>
         <CardContent>
           <div className="mobile-scroll-hint -mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-x-visible md:px-0">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="hover:bg-transparent">
                   <TableHead className="text-xs">Warehouse</TableHead>

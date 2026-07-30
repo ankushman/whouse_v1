@@ -407,7 +407,7 @@ export function ReportsView() {
   const getStatusBadge = (reportId: string) => {
     if (generatingIds.has(reportId)) {
       return (
-        <Badge variant="outline" className="text-[10px] gap-1 text-amber-600 border-amber-300 bg-amber-50 dark:text-amber-400 dark:border-amber-700 dark:bg-amber-950/40">
+        <Badge variant="outline" className="badge-interactive text-[10px] gap-1 text-amber-600 border-amber-300 bg-amber-50 dark:text-amber-400 dark:border-amber-700 dark:bg-amber-950/40">
           <Loader2 className="h-2.5 w-2.5 animate-spin" />
           Generating
         </Badge>
@@ -415,7 +415,7 @@ export function ReportsView() {
     }
     if (readyIds.has(reportId)) {
       return (
-        <Badge variant="outline" className="text-[10px] gap-1 text-emerald-600 border-emerald-300 bg-emerald-50 dark:text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950/40">
+        <Badge variant="outline" className="badge-interactive text-[10px] gap-1 text-emerald-600 border-emerald-300 bg-emerald-50 dark:text-emerald-400 dark:border-emerald-700 dark:bg-emerald-950/40">
           <CheckCircle2 className="h-2.5 w-2.5" />
           Ready
         </Badge>
@@ -427,11 +427,11 @@ export function ReportsView() {
   const getHistoryStatusBadge = (status: ReportHistoryItem["status"]) => {
     switch (status) {
       case "Completed":
-        return <Badge variant="secondary" className="text-[10px] gap-1 text-emerald-700 bg-emerald-100 dark:text-emerald-300 dark:bg-emerald-900/40"><CheckCircle2 className="h-2.5 w-2.5" />{status}</Badge>
+        return <Badge variant="secondary" className="badge-interactive text-[10px] gap-1 text-emerald-700 bg-emerald-100 dark:text-emerald-300 dark:bg-emerald-900/40"><CheckCircle2 className="h-2.5 w-2.5" />{status}</Badge>
       case "Processing":
-        return <Badge variant="secondary" className="text-[10px] gap-1 text-amber-700 bg-amber-100 dark:text-amber-300 dark:bg-amber-900/40"><Loader2 className="h-2.5 w-2.5 animate-spin" />{status}</Badge>
+        return <Badge variant="secondary" className="badge-interactive text-[10px] gap-1 text-amber-700 bg-amber-100 dark:text-amber-300 dark:bg-amber-900/40"><Loader2 className="h-2.5 w-2.5 animate-spin" />{status}</Badge>
       case "Failed":
-        return <Badge variant="secondary" className="text-[10px] gap-1 text-red-700 bg-red-100 dark:text-red-300 dark:bg-red-900/40"><AlertCircle className="h-2.5 w-2.5" />{status}</Badge>
+        return <Badge variant="secondary" className="badge-interactive text-[10px] gap-1 text-red-700 bg-red-100 dark:text-red-300 dark:bg-red-900/40"><AlertCircle className="h-2.5 w-2.5" />{status}</Badge>
     }
   }
 
@@ -445,7 +445,7 @@ export function ReportsView() {
             <Button size="sm" className="gap-1.5" onClick={handleDownloadAllPDF}>
               <FileDown className="h-3.5 w-3.5" /> Download All as PDF
             </Button>
-            <Button size="sm" variant="outline" className="gap-1.5" onClick={() => toast.info("Refreshing all reports...", "This may take a moment", { duration: 2000 })}>
+            <Button size="sm" variant="outline" className="btn-outline-animate gap-1.5" onClick={() => toast.info("Refreshing all reports...", "This may take a moment", { duration: 2000 })}>
               <RefreshCw className="h-3.5 w-3.5" /> Refresh All
             </Button>
           </div>
@@ -454,13 +454,13 @@ export function ReportsView() {
 
       {/* Schedule Banner */}
       <Card className="rounded-xl border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/30">
-        <CardContent className="flex items-center gap-loose p-4">
+        <CardContent className="glass-subtle flex items-center gap-loose p-4">
           <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
           <div className="flex-1">
             <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Automated Report Schedule</p>
             <p className="text-xs text-blue-600 dark:text-blue-400">Executive Summary: Daily 9AM • MIS: 1st of every month • Cost Analysis: 15th of every month</p>
           </div>
-          <Button variant="outline" size="sm" className="text-xs">Manage Schedule</Button>
+          <Button variant="outline" size="sm" className="btn-outline-animate text-xs">Manage Schedule</Button>
         </CardContent>
       </Card>
 
@@ -491,7 +491,7 @@ export function ReportsView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="glass-subtle space-y-3">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-muted-foreground">Last Generated</span>
                   <span className="font-medium">{report.lastGenerated}</span>
@@ -522,13 +522,13 @@ export function ReportsView() {
                   {hasCSVExport ? (
                     <ExportButton onExportCSV={exportHandlers.onExportCSV} onExportPDF={exportHandlers.onExportPDF} />
                   ) : (
-                    <Button variant="outline" size="sm" className="text-xs gap-1.5 h-8" title="Download PDF" onClick={() => handleExportPDF(report.id, report.title)}>
+                    <Button variant="outline" size="sm" className="btn-outline-animate text-xs gap-1.5 h-8" title="Download PDF" onClick={() => handleExportPDF(report.id, report.title)}>
                       <Download className="h-3 w-3" />
                       <span className="hidden sm:inline">PDF</span>
                     </Button>
                   )}
                   {report.formats.includes("excel") && !hasCSVExport && (
-                    <Button variant="outline" size="sm" className="text-xs gap-1.5 h-8" title="Download Excel">
+                    <Button variant="outline" size="sm" className="btn-outline-animate text-xs gap-1.5 h-8" title="Download Excel">
                       <FileSpreadsheet className="h-3 w-3" />
                       <span className="hidden sm:inline">Excel</span>
                     </Button>
@@ -552,9 +552,9 @@ export function ReportsView() {
           </div>
           <CardDescription className="text-xs">History of recently generated reports</CardDescription>
         </CardHeader>
-        <CardContent className="p-0">
+        <CardContent className="glass-subtle p-0">
           <div className="max-h-96 overflow-y-auto">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader className="table-header-sticky-glass">
                 <TableRow className="table-row-hover">
                   <TableHead className="text-xs">Report Name</TableHead>
@@ -569,9 +569,9 @@ export function ReportsView() {
                 {recentReports.map((item) => (
                   <TableRow key={item.id} className="table-row-hover">
                     <TableCell className="text-xs font-medium">{item.name}</TableCell>
-                    <TableCell className="text-xs text-muted-foreground">{item.generatedDate}</TableCell>
+                    <TableCell className="numeric-cell text-xs text-muted-foreground">{item.generatedDate}</TableCell>
                     <TableCell>
-                      <Badge variant="outline" className="tag-chip text-[10px] gap-1">
+                      <Badge variant="outline" className="badge-interactive tag-chip text-[10px] gap-1">
                         {item.type === "PDF" ? <FileText className="h-2.5 w-2.5 text-red-500" /> : <FileSpreadsheet className="h-2.5 w-2.5 text-emerald-600" />}
                         {item.type}
                       </Badge>

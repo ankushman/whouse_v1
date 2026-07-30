@@ -392,9 +392,9 @@ export default function ConsignmentStockView() {
               </div>
 
               {/* Top Pending Settlements */}
-              <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertOctagon className="h-4 w-4 text-red-500" />Pending Settlements ({settlements.filter((s) => s.status === "Pending" || s.status === "Overdue").length})</CardTitle></CardHeader><CardContent>
+              <Card className="card-crud-lift cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertOctagon className="h-4 w-4 text-red-500" />Pending Settlements ({settlements.filter((s) => s.status === "Pending" || s.status === "Overdue").length})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
                       <TableHead className="text-[10px]">ID</TableHead>
                       <TableHead className="text-[10px]">Supplier</TableHead>
@@ -414,9 +414,9 @@ export default function ConsignmentStockView() {
                           <TableCell className="text-[11px] font-semibold">{s.supplier.name}</TableCell>
                           <TableCell className="text-[10px]">{s.period}</TableCell>
                           <TableCell className="text-[10px]">{s.items}</TableCell>
-                          <TableCell className="text-[10px] font-mono">{fmtRupee(s.totalValue)}</TableCell>
-                          <TableCell className="text-[10px] font-mono text-amber-600">{fmtRupee(s.gstAmount)}</TableCell>
-                          <TableCell className="text-[10px] font-mono text-red-600">-{fmtRupee(s.tdsAmount)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{fmtRupee(s.totalValue)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono text-amber-600">{fmtRupee(s.gstAmount)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono text-red-600">-{fmtRupee(s.tdsAmount)}</TableCell>
                           <TableCell className="text-[10px] font-mono font-bold">{fmtRupee(s.netPayable)}</TableCell>
                           <TableCell><Badge className={cn("text-[9px]", SETTLEMENT_COLORS[s.status])}>{s.status}</Badge></TableCell>
                           <TableCell className="text-[10px] font-mono">{s.dueDate}</TableCell>
@@ -446,13 +446,13 @@ export default function ConsignmentStockView() {
                     <option value="All">All Suppliers</option>
                     {SUPPLIERS.map((s) => <option key={s.id} value={s.name}>{s.name}</option>)}
                   </select>
-                  <Badge variant="outline" className="text-[10px]">{filteredStock.length} results</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px]">{filteredStock.length} results</Badge>
                 </div>
               </CardContent></Card>
 
-              <Card className="cs-chart-card"><CardContent className="p-0">
+              <Card className="card-crud-lift glass-subtle cs-chart-card"><CardContent className="p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow className="cs-table-header">
                       <TableHead className="text-[10px]">ID</TableHead>
                       <TableHead className="text-[10px]">Product</TableHead>
@@ -482,13 +482,13 @@ export default function ConsignmentStockView() {
                           <TableCell className="text-[10px] font-mono">{s.qtyConsigned.toLocaleString()}</TableCell>
                           <TableCell className="text-[10px] font-mono text-emerald-600">{s.qtyConsumed.toLocaleString()}</TableCell>
                           <TableCell className="text-[10px] font-mono font-semibold">{s.qtyAvailable.toLocaleString()}</TableCell>
-                          <TableCell className="text-[10px] font-mono">{fmtRupee(s.consignedValue)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{fmtRupee(s.consignedValue)}</TableCell>
                           <TableCell>
                             <Badge className={cn("text-[8px]", s.settlementStatus === "Pending" ? "cs-badge-settle-pending" : s.settlementStatus === "Settled" ? "cs-badge-paid" : s.settlementStatus === "Disputed" ? "cs-badge-disputed" : "text-gray-500 bg-gray-100")}>
                               {s.settlementStatus}
                             </Badge>
                           </TableCell>
-                          <TableCell className="text-[10px] font-mono">{s.turnoverRate}x</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{s.turnoverRate}x</TableCell>
                           <TableCell className="text-[10px] font-mono">{s.daysInWarehouse}d</TableCell>
                           <TableCell>
                             <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedStock(s) }}>
@@ -541,7 +541,7 @@ export default function ConsignmentStockView() {
                       <div className="text-[9px] text-gray-500 mb-2">{a.supplier.city} · GST: {a.supplier.gst.slice(-5)}</div>
                       <div className="flex flex-wrap gap-1 mb-2">
                         <Badge className={cn("text-[8px] px-1", AGREEMENT_BG[a.type] || "")}>{a.type}</Badge>
-                        <Badge variant="outline" className="text-[8px]">{a.paymentTerms}</Badge>
+                        <Badge variant="outline" className="badge-interactive text-[8px]">{a.paymentTerms}</Badge>
                       </div>
                       <div className="grid grid-cols-2 gap-1.5 text-[10px]">
                         <div><span className="text-gray-500">Value:</span> <span className="font-semibold">{fmtRupee(a.totalValue)}</span></div>
@@ -581,10 +581,10 @@ export default function ConsignmentStockView() {
                     <option value="All">All Status</option>
                     <option>Paid</option><option>Pending</option><option>Processing</option><option>Disputed</option><option>Overdue</option>
                   </select>
-                  <Badge variant="outline" className="text-[10px]">{filteredSettlements.length} results</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px]">{filteredSettlements.length} results</Badge>
                 </div>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow className="cs-table-header">
                       <TableHead className="text-[10px]">ID</TableHead>
                       <TableHead className="text-[10px]">Supplier</TableHead>
@@ -607,9 +607,9 @@ export default function ConsignmentStockView() {
                           <TableCell className="text-[10px]">{s.warehouse}</TableCell>
                           <TableCell className="text-[10px]">{s.period}</TableCell>
                           <TableCell className="text-[10px]">{s.items}</TableCell>
-                          <TableCell className="text-[10px] font-mono">{fmtRupee(s.totalValue)}</TableCell>
-                          <TableCell className="text-[10px] font-mono text-amber-600">+{fmtRupee(s.gstAmount)}</TableCell>
-                          <TableCell className="text-[10px] font-mono text-red-600">-{fmtRupee(s.tdsAmount)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{fmtRupee(s.totalValue)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono text-amber-600">+{fmtRupee(s.gstAmount)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono text-red-600">-{fmtRupee(s.tdsAmount)}</TableCell>
                           <TableCell className="text-[10px] font-mono font-bold">{fmtRupee(s.netPayable)}</TableCell>
                           <TableCell><Badge className={cn("text-[9px]", SETTLEMENT_COLORS[s.status])}>{s.status}</Badge></TableCell>
                           <TableCell className="text-[10px] font-mono">{s.invoiceRef}</TableCell>
@@ -622,9 +622,9 @@ export default function ConsignmentStockView() {
               </CardContent></Card>
 
               {/* Disputes */}
-              <Card className="cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-amber-500" />Disputes ({disputes.length})</CardTitle></CardHeader><CardContent>
+              <Card className="card-crud-lift cs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><AlertTriangle className="h-4 w-4 text-amber-500" />Disputes ({disputes.length})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
                       <TableHead className="text-[10px]">ID</TableHead>
                       <TableHead className="text-[10px]">Supplier</TableHead>
@@ -645,7 +645,7 @@ export default function ConsignmentStockView() {
                           <TableCell className="text-[11px]">{d.issue}</TableCell>
                           <TableCell><Badge className={cn("text-[9px]", SEVERITY_COLORS[d.severity])}>{d.severity}</Badge></TableCell>
                           <TableCell className="text-[10px]">{d.warehouse}</TableCell>
-                          <TableCell className="text-[10px] font-mono font-semibold">{fmtRupee(d.amount)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono font-semibold">{fmtRupee(d.amount)}</TableCell>
                           <TableCell><Badge variant="outline" className={cn("text-[9px]",
                             d.status === "Open" ? "border-red-300 text-red-600"
                             : d.status === "Resolved" ? "border-emerald-300 text-emerald-600"

@@ -1160,7 +1160,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
               ABC-{item.abcClass}
             </Badge>
             {item.supplierRating >= 4.5 && (
-              <Badge variant="outline" className="rounded-full px-2.5 py-0.5 text-[10px] font-bold border border-amber-200 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900">
+              <Badge variant="outline" className="badge-interactive rounded-full px-2.5 py-0.5 text-[10px] font-bold border border-amber-200 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900">
                 <Star className="h-3 w-3 mr-1 fill-current" />
                 {item.supplierRating.toFixed(1)}
               </Badge>
@@ -1186,28 +1186,28 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
 
           <div className="iv-stat-enter mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
             <Card className="border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">On-Hand Qty</div>
                 <div className="text-xl font-bold text-zinc-900 dark:text-zinc-50">{fmtNum(item.qtyOnHand)} <span className="text-xs text-zinc-500 font-normal">units</span></div>
                 <div className="text-[10px] text-zinc-500">{item.daysInStock} days in stock</div>
               </CardContent>
             </Card>
             <Card className="border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Unit Cost ({method.short})</div>
                 <div className="text-xl font-bold text-zinc-900 dark:text-zinc-50">{fmtINRFull(item.unitCost)}</div>
                 <div className="text-[10px] text-zinc-500">Std: {fmtINRFull(item.stdCost)} <span className={cn(item.unitCost >= item.stdCost ? "text-rose-600" : "text-emerald-600")}>{fmtPct(((item.unitCost - item.stdCost) / item.stdCost) * 100)}</span></div>
               </CardContent>
             </Card>
             <Card className="border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Total Value</div>
                 <div className="text-xl font-bold text-emerald-700 dark:text-emerald-300">{fmtINR(item.totalValue)}</div>
                 <div className="text-[10px] text-zinc-500">{fmtINRFull(item.totalValue)} total</div>
               </CardContent>
             </Card>
             <Card className={cn("border backdrop-blur", totalReserve > 0 ? "border-rose-200 dark:border-rose-900 bg-rose-50/80 dark:bg-rose-950/40" : "border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80")}>
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Reserve</div>
                 <div className={cn("text-xl font-bold", totalReserve > 0 ? "text-rose-700 dark:text-rose-300" : "text-zinc-900 dark:text-zinc-50")}>{fmtINR(totalReserve)}</div>
                 <div className="text-[10px] text-zinc-500">{item.reservePercent.toFixed(0)}% of book value</div>
@@ -1241,7 +1241,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
             <div className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <Card className="iv-card-enter border border-zinc-200 dark:border-zinc-800">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Book Value</span>
                       <BookOpen className="h-4 w-4 text-blue-600 dark:text-blue-400" />
@@ -1251,7 +1251,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                   </CardContent>
                 </Card>
                 <Card className="iv-card-enter border border-zinc-200 dark:border-zinc-800">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Standard Value</span>
                       <Target className="h-4 w-4 text-amber-600 dark:text-amber-400" />
@@ -1261,7 +1261,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                   </CardContent>
                 </Card>
                 <Card className={cn("iv-card-enter border", totalReserve > 0 ? "border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/20" : "border-zinc-200 dark:border-zinc-800")}>
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Net Realizable Value</span>
                       <PiggyBank className="h-4 w-4 text-rose-600 dark:text-rose-400" />
@@ -1407,7 +1407,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                   <CardDescription className="text-xs">{method.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                         <TableHead className="text-[10px] uppercase">Layer ID</TableHead>
@@ -1431,8 +1431,8 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                           </TableCell>
                           <TableCell className="text-right font-mono text-[11px]">{fmtNum(layer.qtyReceived)}</TableCell>
                           <TableCell className="text-right font-mono text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">{fmtNum(layer.qtyRemaining)}</TableCell>
-                          <TableCell className="text-right font-mono text-[11px]">{fmtINRFull(layer.unitCost)}</TableCell>
-                          <TableCell className="text-right font-mono text-[11px] font-semibold">{fmtINR(layer.extendedCost)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-[11px]">{fmtINRFull(layer.unitCost)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-[11px] font-semibold">{fmtINR(layer.extendedCost)}</TableCell>
                           <TableCell className="text-right text-[11px]">
                             <Badge variant="outline" className={cn("text-[10px]", layer.ageDays > 90 ? "border-amber-300 bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900" : "border-emerald-300 bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900")}>
                               {layer.ageDays}d
@@ -1444,7 +1444,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                         <TableCell colSpan={4} className="text-right text-[11px]">TOTAL</TableCell>
                         <TableCell className="text-right font-mono text-[11px]">{fmtNum(layers.reduce((s, l) => s + l.qtyRemaining, 0))}</TableCell>
                         <TableCell className="text-right text-[11px]">—</TableCell>
-                        <TableCell className="text-right font-mono text-[11px]">{fmtINR(layers.reduce((s, l) => s + l.extendedCost, 0))}</TableCell>
+                        <TableCell className="numeric-cell text-right font-mono text-[11px]">{fmtINR(layers.reduce((s, l) => s + l.extendedCost, 0))}</TableCell>
                         <TableCell></TableCell>
                       </TableRow>
                     </TableBody>
@@ -1494,7 +1494,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                       <TableHead className="text-[10px] uppercase">Movement ID</TableHead>
@@ -1524,7 +1524,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                         <TableCell className={cn("text-right font-mono text-[11px] font-semibold", m.qty >= 0 ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300")}>
                           {m.qty > 0 ? "+" : ""}{fmtNum(m.qty)}
                         </TableCell>
-                        <TableCell className="text-right font-mono text-[10px]">{fmtINRFull(m.unitCost)}</TableCell>
+                        <TableCell className="numeric-cell text-right font-mono text-[10px]">{fmtINRFull(m.unitCost)}</TableCell>
                         <TableCell className={cn("text-right font-mono text-[11px]", m.qty >= 0 ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300")}>{fmtINR(m.extendedValue)}</TableCell>
                         <TableCell className="text-right font-mono text-[10px] text-zinc-600 dark:text-zinc-400">{fmtNum(m.balance)}</TableCell>
                         <TableCell className="text-[10px]">{m.user}</TableCell>
@@ -1542,21 +1542,21 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <Card className="iv-card-enter border border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/20">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Total Reserve</div>
                     <div className="text-2xl font-bold text-rose-700 dark:text-rose-300 mt-1">{fmtINR(totalReserve)}</div>
                     <div className="text-xs text-zinc-500">{((totalReserve / item.totalValue) * 100).toFixed(1)}% of book value</div>
                   </CardContent>
                 </Card>
                 <Card className="iv-card-enter border border-zinc-200 dark:border-zinc-800">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Active Reserves</div>
                     <div className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mt-1">{reserves.filter((r) => r.status === "active").length}</div>
                     <div className="text-xs text-zinc-500">of {reserves.length} total entries</div>
                   </CardContent>
                 </Card>
                 <Card className="iv-card-enter border border-zinc-200 dark:border-zinc-800">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Net Book Value</div>
                     <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-300 mt-1">{fmtINR(item.totalValue - totalReserve)}</div>
                     <div className="text-xs text-zinc-500">After reserves applied</div>
@@ -1575,7 +1575,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                         <TableHead className="text-[10px] uppercase">Reserve Type</TableHead>
@@ -1598,7 +1598,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                         reserves.map((r) => (
                           <TableRow key={r.reserveType + r.description} className="iv-row-warn">
                             <TableCell>
-                              <Badge variant="outline" className="text-[10px] capitalize border-rose-300 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900">
+                              <Badge variant="outline" className="badge-interactive text-[10px] capitalize border-rose-300 bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 dark:border-rose-900">
                                 {r.reserveType.replace("-", " ")}
                               </Badge>
                             </TableCell>
@@ -1606,8 +1606,8 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                               <div className="font-semibold">{r.description}</div>
                               <div className="text-zinc-500 text-[10px] max-w-[280px] truncate">{r.justification}</div>
                             </TableCell>
-                            <TableCell className="text-right font-mono text-[11px] font-semibold">{r.reservePercent}%</TableCell>
-                            <TableCell className="text-right font-mono text-[11px] font-semibold text-rose-700 dark:text-rose-300">{fmtINR(r.reserveAmount)}</TableCell>
+                            <TableCell className="numeric-cell text-right font-mono text-[11px] font-semibold">{r.reservePercent}%</TableCell>
+                            <TableCell className="numeric-cell text-right font-mono text-[11px] font-semibold text-rose-700 dark:text-rose-300">{fmtINR(r.reserveAmount)}</TableCell>
                             <TableCell>
                               <Badge variant="outline" className={cn(
                                 "text-[10px] capitalize",
@@ -1641,7 +1641,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                           <TableHead className="text-[10px] uppercase">Entry ID</TableHead>
@@ -1665,8 +1665,8 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                         ))}
                         <TableRow className="border-t-2 border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900/50 font-semibold">
                           <TableCell colSpan={4} className="text-right text-[11px]">TOTAL</TableCell>
-                          <TableCell className="text-right font-mono text-[11px]">{fmtINRFull(totalDebit)}</TableCell>
-                          <TableCell className="text-right font-mono text-[11px]">{fmtINRFull(totalCredit)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-[11px]">{fmtINRFull(totalDebit)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-[11px]">{fmtINRFull(totalCredit)}</TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell colSpan={6} className="text-right text-[11px] py-2">
@@ -1700,7 +1700,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                       <TableHead className="text-[10px] uppercase">Recon ID</TableHead>
@@ -1730,8 +1730,8 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                         <TableCell className={cn("text-right font-mono text-[11px] font-semibold", r.varianceQty === 0 ? "text-zinc-500" : r.varianceQty > 0 ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300")}>
                           {r.varianceQty > 0 ? "+" : ""}{fmtNum(r.varianceQty)}
                         </TableCell>
-                        <TableCell className="text-right font-mono text-[10px]">{fmtINR(r.bookValue)}</TableCell>
-                        <TableCell className="text-right font-mono text-[10px]">{fmtINR(r.physicalValue)}</TableCell>
+                        <TableCell className="numeric-cell text-right font-mono text-[10px]">{fmtINR(r.bookValue)}</TableCell>
+                        <TableCell className="numeric-cell text-right font-mono text-[10px]">{fmtINR(r.physicalValue)}</TableCell>
                         <TableCell className={cn("text-right font-mono text-[11px] font-semibold", r.varianceValue === 0 ? "text-zinc-500" : r.varianceValue > 0 ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300")}>
                           {r.varianceValue > 0 ? "+" : ""}{fmtINR(r.varianceValue)}
                         </TableCell>
@@ -1759,7 +1759,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
           {activeTab === "roll" && (
             <div className="space-y-4">
               <Card className="iv-card-enter border border-amber-200 dark:border-amber-900 bg-amber-50/30 dark:bg-amber-950/20">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="text-[10px] font-semibold uppercase text-amber-700 dark:text-amber-300 tracking-wider">Current Standard Cost</div>
@@ -1786,7 +1786,7 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                         <TableHead className="text-[10px] uppercase">Roll ID</TableHead>
@@ -1806,8 +1806,8 @@ function InventoryValuationDetailDrawer({ item, open, onOpenChange }: DrawerProp
                         <TableRow key={roll.rollId} className="iv-row-in">
                           <TableCell className="font-mono text-[10px]">{roll.rollId}</TableCell>
                           <TableCell className="font-mono text-[10px]">{roll.effectiveDate}</TableCell>
-                          <TableCell className="text-right font-mono text-[10px]">{fmtINRFull(roll.prevStdCost)}</TableCell>
-                          <TableCell className="text-right font-mono text-[11px] font-semibold">{fmtINRFull(roll.newStdCost)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-[10px]">{fmtINRFull(roll.prevStdCost)}</TableCell>
+                          <TableCell className="numeric-cell text-right font-mono text-[11px] font-semibold">{fmtINRFull(roll.newStdCost)}</TableCell>
                           <TableCell className={cn("text-right font-mono text-[11px] font-semibold", roll.variance >= 0 ? "text-rose-700 dark:text-rose-300" : "text-emerald-700 dark:text-emerald-300")}>
                             {roll.variance > 0 ? "+" : ""}{fmtINRFull(roll.variance)}
                           </TableCell>
@@ -2119,7 +2119,7 @@ export function InventoryValuationView() {
       <div className="iv-kpi-enter grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         <Card className="iv-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-teal-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Total Inventory Value</span>
               <Wallet className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -2130,7 +2130,7 @@ export function InventoryValuationView() {
         </Card>
         <Card className="iv-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-indigo-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">FIFO Value</span>
               <Layers className="h-4 w-4 text-blue-600 dark:text-blue-400" />
@@ -2141,7 +2141,7 @@ export function InventoryValuationView() {
         </Card>
         <Card className="iv-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 to-green-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">WAC Value</span>
               <Scale className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
@@ -2152,7 +2152,7 @@ export function InventoryValuationView() {
         </Card>
         <Card className="iv-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-amber-950/30 dark:to-yellow-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-yellow-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Standard Value</span>
               <Target className="h-4 w-4 text-amber-600 dark:text-amber-400" />
@@ -2166,7 +2166,7 @@ export function InventoryValuationView() {
           {totalReserve > 0 && (
             <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-rose-500 animate-ping" />
           )}
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Total Reserve</span>
               <PiggyBank className="h-4 w-4 text-rose-600 dark:text-rose-400" />
@@ -2177,7 +2177,7 @@ export function InventoryValuationView() {
         </Card>
         <Card className="iv-kpi-enter relative overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-purple-950/30 dark:to-fuchsia-950/30">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-500" />
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between mb-1">
               <span className="text-[10px] font-semibold uppercase text-zinc-500 dark:text-zinc-400 tracking-wider">Quarantine Value</span>
               <Archive className="h-4 w-4 text-purple-600 dark:text-purple-400" />
@@ -2387,7 +2387,7 @@ export function InventoryValuationView() {
             )}
           >
             {tab.label}
-            <Badge variant="secondary" className="ml-1 text-[10px] h-4 px-1.5">{tab.count}</Badge>
+            <Badge variant="secondary" className="badge-interactive ml-1 text-[10px] h-4 px-1.5">{tab.count}</Badge>
           </button>
         ))}
       </div>
@@ -2432,9 +2432,9 @@ export function InventoryValuationView() {
       </div>
 
       {/* Master table */}
-      <Card className="iv-table-card border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-        <CardContent className="p-0">
-          <Table>
+      <Card className="card-crud-lift iv-table-card border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+        <CardContent className="glass-subtle p-0">
+          <Table className="table-hover-highlight">
             <TableHeader>
               <TableRow className="bg-zinc-50 dark:bg-zinc-900/50">
                 <TableHead className="text-[10px] uppercase">Part / Description</TableHead>
@@ -2506,8 +2506,8 @@ export function InventoryValuationView() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right font-mono text-[11px]">{fmtNum(item.qtyOnHand)}</TableCell>
-                    <TableCell className="text-right font-mono text-[11px]">{fmtINRFull(item.unitCost)}</TableCell>
-                    <TableCell className="text-right font-mono text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">{fmtINR(item.totalValue)}</TableCell>
+                    <TableCell className="numeric-cell text-right font-mono text-[11px]">{fmtINRFull(item.unitCost)}</TableCell>
+                    <TableCell className="numeric-cell text-right font-mono text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">{fmtINR(item.totalValue)}</TableCell>
                     <TableCell className="text-right font-mono text-[11px]">
                       {item.reserveAmount > 0 ? (
                         <span className="text-rose-700 dark:text-rose-300 font-semibold">{fmtINR(item.reserveAmount)}</span>
@@ -2515,7 +2515,7 @@ export function InventoryValuationView() {
                         <span className="text-zinc-400">—</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-right font-mono text-[11px] font-semibold">{fmtINR(item.totalValue - item.reserveAmount)}</TableCell>
+                    <TableCell className="numeric-cell text-right font-mono text-[11px] font-semibold">{fmtINR(item.totalValue - item.reserveAmount)}</TableCell>
                     <TableCell>
                       <div className="text-[10px] font-semibold">{item.warehouse}</div>
                       <div className="text-[10px] text-zinc-500 font-mono">{item.binLocation}</div>

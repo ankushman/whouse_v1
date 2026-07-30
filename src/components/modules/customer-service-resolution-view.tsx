@@ -645,7 +645,7 @@ export default function CustomerServiceView() {
               onChange={e => setSearchQuery(e.target.value)}
             />
           </div>
-          <Badge variant="outline" className="text-xs">
+          <Badge variant="outline" className="badge-interactive text-xs">
             {filteredComplaints.length} tickets
           </Badge>
         </div>
@@ -1334,16 +1334,16 @@ export default function CustomerServiceView() {
                 <Button size="sm" className="bg-rose-600 text-white hover:bg-rose-700 gap-1">
                   <Phone className="h-3.5 w-3.5" /> Call Customer
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <Mail className="h-3.5 w-3.5" /> Send Email
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <MessageSquare className="h-3.5 w-3.5" /> WhatsApp
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <FileText className="h-3.5 w-3.5" /> Credit Note
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <ArrowRight className="h-3.5 w-3.5" /> Escalate
                 </Button>
               </div>
@@ -1370,7 +1370,7 @@ export default function CustomerServiceView() {
             <p className="text-xs text-gray-500 dark:text-gray-400">Complaint management, CSAT tracking, and credit notes</p>
           </div>
         </div>
-        <Badge className="bg-gradient-to-r from-rose-500 to-pink-600 text-white border-0">
+        <Badge className="badge-interactive bg-gradient-to-r from-rose-500 to-pink-600 text-white border-0">
           {fmtNum(complaints.length)} Tickets
         </Badge>
       </div>

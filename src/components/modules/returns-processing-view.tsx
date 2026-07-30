@@ -185,7 +185,7 @@ function KpiCard({ title, value, icon: Icon, colorClass, subtitle }: {
 }) {
   return (
     <Card className={cn("rp-kpi-card", colorClass)}>
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs opacity-70 mb-1">{title}</p>
@@ -354,11 +354,13 @@ export default function ReturnsProcessingView() {
             </div>
           </div>
           <div className="rp-header-badges">
-            <Badge className="rp-header-badge rp-hb-total">Returns: {totalReturns}</Badge>
-            <Badge className="rp-header-badge rp-hb-pending">{pendingQC} Pending QC</Badge>
-            <Badge className="rp-header-badge rp-hb-refunded">{totalRefunded} Refunded</Badge>
-            <Badge className="rp-header-badge rp-hb-disputed">{disputed} Disputed</Badge>
-            <Badge className="rp-header-badge rp-hb-value">₹{(totalRefundValue / 1000).toFixed(0)}K Refunded</Badge>
+<div className="chip-group">
+            <Badge className="badge-interactive rp-header-badge rp-hb-total">Returns: {totalReturns}</Badge>
+            <Badge className="badge-interactive rp-header-badge rp-hb-pending">{pendingQC} Pending QC</Badge>
+            <Badge className="badge-interactive rp-header-badge rp-hb-refunded">{totalRefunded} Refunded</Badge>
+            <Badge className="badge-interactive rp-header-badge rp-hb-disputed">{disputed} Disputed</Badge>
+            <Badge className="badge-interactive rp-header-badge rp-hb-value">₹{(totalRefundValue / 1000).toFixed(0)}K Refunded</Badge>
+</div>
           </div>
         </div>
       </div>
@@ -461,9 +463,9 @@ export default function ReturnsProcessingView() {
             {/* Processor Performance Table */}
             <Card className="rp-card">
               <CardHeader className="pb-2"><CardTitle className="rp-card-title">Returns Team Performance</CardTitle></CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="rp-table-header">
                         <TableHead className="rp-th">Processor</TableHead>
@@ -524,10 +526,10 @@ export default function ReturnsProcessingView() {
               </div>
             </div>
 
-            <Card className="rp-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift rp-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="rp-table-header">
                         <TableHead className="rp-th">RMA ID</TableHead>
@@ -567,7 +569,7 @@ export default function ReturnsProcessingView() {
                           <TableCell className="rp-td"><ChannelBadge channel={r.channel} /></TableCell>
                           <TableCell className="rp-td"><PriorityBadge priority={r.priority} /></TableCell>
                           <TableCell className="rp-td"><StatusBadge status={r.status} /></TableCell>
-                          <TableCell className="rp-td"><span className="text-sm font-medium">₹{r.refundAmount.toLocaleString("en-IN")}</span></TableCell>
+                          <TableCell className="numeric-cell rp-td"><span className="text-sm font-medium">₹{r.refundAmount.toLocaleString("en-IN")}</span></TableCell>
                           <TableCell className="rp-td"><span className="text-xs">{r.warehouse.length > 10 ? r.warehouse.substring(0, 10) + ".." : r.warehouse}</span></TableCell>
                           <TableCell className="rp-td"><span className="text-xs">{r.createdAt}</span></TableCell>
                           <TableCell className="rp-td">
@@ -643,10 +645,10 @@ export default function ReturnsProcessingView() {
               </div>
             </div>
 
-            <Card className="rp-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift rp-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="rp-table-header">
                         <TableHead className="rp-th">RMA ID</TableHead>
@@ -763,10 +765,10 @@ export default function ReturnsProcessingView() {
               </select>
             </div>
 
-            <Card className="rp-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift rp-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="rp-table-header">
                         <TableHead className="rp-th">RMA ID</TableHead>
@@ -792,7 +794,7 @@ export default function ReturnsProcessingView() {
                           <TableCell className="rp-td"><span className="text-xs truncate max-w-24 block">{r.product.name}</span></TableCell>
                           <TableCell className="rp-td"><StatusBadge status={r.status} /></TableCell>
                           <TableCell className="rp-td"><span className="text-xs">{r.refundMethod}</span></TableCell>
-                          <TableCell className="rp-td"><span className="text-sm font-bold text-pink-600">₹{r.refundAmount.toLocaleString("en-IN")}</span></TableCell>
+                          <TableCell className="numeric-cell rp-td"><span className="text-sm font-bold text-pink-600">₹{r.refundAmount.toLocaleString("en-IN")}</span></TableCell>
                           <TableCell className="rp-td">
                             <span className={cn("text-sm", r.restockValue > 0 ? "text-green-600" : "text-gray-400")}>
                               {r.restockValue > 0 ? `₹${r.restockValue.toLocaleString("en-IN")}` : "—"}
@@ -878,9 +880,9 @@ export default function ReturnsProcessingView() {
 
             <Card className="rp-card">
               <CardHeader className="pb-2"><CardTitle className="rp-card-title">Top Return Products</CardTitle></CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="rp-table-header">
                         <TableHead className="rp-th">#</TableHead>

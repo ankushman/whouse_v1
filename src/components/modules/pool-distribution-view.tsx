@@ -314,9 +314,9 @@ export default function PoolDistributionView() {
               </div>
 
               {/* Active Transit Table */}
-              <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Navigation className="h-4 w-4 text-indigo-500" />Active In-Transit Pools ({inTransitCount})</CardTitle></CardHeader><CardContent>
+              <Card className="card-crud-lift pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm flex items-center gap-2"><Navigation className="h-4 w-4 text-indigo-500" />Active In-Transit Pools ({inTransitCount})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
                       <TableHead className="text-[10px]">Pool ID</TableHead>
                       <TableHead className="text-[10px]">Route</TableHead>
@@ -337,8 +337,8 @@ export default function PoolDistributionView() {
                           <TableCell className="text-[11px]"><MapPin className="h-3 w-3 inline mr-0.5 text-teal-500" />{p.origin} → {p.destination}</TableCell>
                           <TableCell className="text-[10px] font-mono">{p.vehicle.reg}</TableCell>
                           <TableCell className="text-[11px]">{p.driver.name}</TableCell>
-                          <TableCell className="text-[11px] font-semibold">{p.totalShipments}</TableCell>
-                          <TableCell className="text-[10px] font-mono">{p.totalWeight.toLocaleString()}</TableCell>
+                          <TableCell className="numeric-cell text-[11px] font-semibold">{p.totalShipments}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{p.totalWeight.toLocaleString()}</TableCell>
                           <TableCell className="text-[10px]">
                             <div className="flex items-center gap-1.5">
                               <div className="w-12 h-1.5 rounded-full bg-gray-200 overflow-hidden">
@@ -349,7 +349,7 @@ export default function PoolDistributionView() {
                           </TableCell>
                           <TableCell className="text-[10px] font-mono">{p.departureTime}</TableCell>
                           <TableCell className="text-[10px] font-mono">{p.eta}</TableCell>
-                          <TableCell className="text-[10px] font-mono">{p.totalDistance} km</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{p.totalDistance} km</TableCell>
                           <TableCell>
                             <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedPool(p) }}>
                               <Eye className="h-3 w-3" />
@@ -381,13 +381,13 @@ export default function PoolDistributionView() {
                     <option value="All">All Routes</option>
                     {ROUTE_TYPES.map((r) => <option key={r} value={r}>{r}</option>)}
                   </select>
-                  <Badge variant="outline" className="text-[10px]">{filteredPools.length} results</Badge>
+                  <Badge variant="outline" className="badge-interactive text-[10px]">{filteredPools.length} results</Badge>
                 </div>
               </CardContent></Card>
 
-              <Card className="pd-chart-card"><CardContent className="p-0">
+              <Card className="card-crud-lift glass-subtle pd-chart-card"><CardContent className="p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow className="pd-table-header">
                       <TableHead className="text-[10px]">ID</TableHead>
                       <TableHead className="text-[10px]">Route</TableHead>
@@ -412,8 +412,8 @@ export default function PoolDistributionView() {
                           <TableCell className="text-[11px]">{p.driver.name}</TableCell>
                           <TableCell><Badge className={cn("text-[9px]", STATUS_COLORS[p.status])}>{p.status}</Badge></TableCell>
                           <TableCell><Badge className={cn("text-[9px]", PRIORITY_COLORS[p.priority])}>{p.priority}</Badge></TableCell>
-                          <TableCell className="text-[10px] font-semibold">{p.totalShipments}</TableCell>
-                          <TableCell className="text-[10px] font-mono">{p.totalWeight.toLocaleString()} kg</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-semibold">{p.totalShipments}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{p.totalWeight.toLocaleString()} kg</TableCell>
                           <TableCell className="text-[10px]">
                             <div className="flex items-center gap-1.5">
                               <div className="w-10 h-1.5 rounded-full bg-gray-200 overflow-hidden">
@@ -422,9 +422,9 @@ export default function PoolDistributionView() {
                               <span className="font-mono text-[9px]">{p.utilization}%</span>
                             </div>
                           </TableCell>
-                          <TableCell className="text-[10px] font-mono">{p.totalDistance} km</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{p.totalDistance} km</TableCell>
                           <TableCell className="text-[10px]">{p.estimatedDuration}h</TableCell>
-                          <TableCell className="text-[10px] font-mono">{fmtRupee(p.cost)}</TableCell>
+                          <TableCell className="numeric-cell text-[10px] font-mono">{fmtRupee(p.cost)}</TableCell>
                           <TableCell>
                             <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={(e) => { e.stopPropagation(); setSelectedPool(p) }}>
                               <Eye className="h-3 w-3" />
@@ -524,9 +524,9 @@ export default function PoolDistributionView() {
                 ))}
               </div>
 
-              <Card className="pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Schedule Conflicts ({scheduleConflicts.length})</CardTitle></CardHeader><CardContent>
+              <Card className="card-crud-lift pd-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Schedule Conflicts ({scheduleConflicts.length})</CardTitle></CardHeader><CardContent>
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader><TableRow>
                       <TableHead className="text-[10px]">ID</TableHead>
                       <TableHead className="text-[10px]">Pool 1</TableHead>

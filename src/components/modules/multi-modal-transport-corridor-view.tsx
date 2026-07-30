@@ -596,7 +596,7 @@ export default function MultiModalTransportCorridorView() {
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -723,7 +723,7 @@ export default function MultiModalTransportCorridorView() {
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -791,7 +791,7 @@ export default function MultiModalTransportCorridorView() {
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -843,8 +843,8 @@ export default function MultiModalTransportCorridorView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="mtc-action-btn flex-1" onClick={() => { toast.success("Rerouted", `${drawerRecord.shipmentId} rerouted successfully`); setDrawerOpen(false); }}><Navigation2 className="w-3.5 h-3.5 mr-1" />Reroute</Button>
-                    <Button size="sm" variant="outline" className="mtc-action-btn flex-1" onClick={() => { toast.info("Tracking Updated", `Fresh tracking for ${drawerRecord.shipmentId}`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5 mr-1" />Track</Button>
-                    <Button size="sm" variant="outline" className="mtc-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.shipmentId} escalated`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Tracking Updated", `Fresh tracking for ${drawerRecord.shipmentId}`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5 mr-1" />Track</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.shipmentId} escalated`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -870,8 +870,8 @@ export default function MultiModalTransportCorridorView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="mtc-action-btn flex-1" onClick={() => { toast.success("Escalated", `${drawerRecord.incidentId} escalated to management`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5 mr-1" />Escalate</Button>
-                    <Button size="sm" variant="outline" className="mtc-action-btn flex-1" onClick={() => { toast.info("Resolved", `${drawerRecord.incidentId} marked resolved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Resolve</Button>
-                    <Button size="sm" variant="outline" className="mtc-action-btn" onClick={() => { toast.error("Claim Filed", `${drawerRecord.incidentId} insurance claim`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Resolved", `${drawerRecord.incidentId} marked resolved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Resolve</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn" onClick={() => { toast.error("Claim Filed", `${drawerRecord.incidentId} insurance claim`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -896,8 +896,8 @@ export default function MultiModalTransportCorridorView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="mtc-action-btn flex-1" onClick={() => { toast.success("Optimized", `${drawerRecord.corridorName} optimization started`); setDrawerOpen(false); }}><TrendingUp className="w-3.5 h-3.5 mr-1" />Optimize</Button>
-                    <Button size="sm" variant="outline" className="mtc-action-btn flex-1" onClick={() => { toast.info("Capacity Review", `Reviewing ${drawerRecord.corridorName}`); setDrawerOpen(false); }}><Gauge className="w-3.5 h-3.5 mr-1" />Review</Button>
-                    <Button size="sm" variant="outline" className="mtc-action-btn" onClick={() => { toast.warning("Alert Set", `Alerts configured`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn flex-1" onClick={() => { toast.info("Capacity Review", `Reviewing ${drawerRecord.corridorName}`); setDrawerOpen(false); }}><Gauge className="w-3.5 h-3.5 mr-1" />Review</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate mtc-action-btn" onClick={() => { toast.warning("Alert Set", `Alerts configured`); setDrawerOpen(false); }}><Radio className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}

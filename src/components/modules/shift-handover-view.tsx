@@ -168,7 +168,7 @@ export function ShiftHandoverView() {
         title="Shift Handover"
         description={`Morning → Afternoon transition · ${new Date(now).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}`}
         actions={
-          <Badge variant="outline" className="text-xs handover-status-badge">
+          <Badge variant="outline" className="badge-interactive text-xs handover-status-badge">
             <Clock className="h-3 w-3 mr-1" />
             2h 45m remaining
           </Badge>
@@ -181,7 +181,7 @@ export function ShiftHandoverView() {
           const Icon = stat.icon
           return (
             <Card key={stat.label} className="handover-kpi-card kpi-card-tilt overflow-hidden">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="flex items-center justify-between">
                   <div className="h-7 w-7 rounded-md bg-primary/10 flex items-center justify-center">
                     <Icon className={cn("h-3.5 w-3.5", stat.color)} />
@@ -211,7 +211,7 @@ export function ShiftHandoverView() {
             </div>
             <CardDescription>Toggle each task to cycle: pending → in-progress → done</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="glass-subtle space-y-2">
             {handoverTasks.map((task, index) => {
               const status = taskStates[task.id]
               const isDone = status === "done"
@@ -270,7 +270,7 @@ export function ShiftHandoverView() {
               Handover Details
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3 text-sm">
+          <CardContent className="glass-subtle space-y-3 text-sm">
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <div className="text-[10px] uppercase text-muted-foreground">Outgoing Shift</div>
@@ -413,7 +413,7 @@ export function ShiftHandoverView() {
         "handover-finalize-card transition-all",
         canComplete && "border-primary/40 bg-primary/[0.02] handover-finalize-ready"
       )}>
-        <CardContent className="p-4 flex items-center justify-between gap-4">
+        <CardContent className="glass-subtle p-4 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className={cn(
               "h-10 w-10 rounded-lg flex items-center justify-center",
@@ -480,7 +480,7 @@ export function ShiftHandoverView() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-mono font-medium">{h.id}</span>
-                    <Badge variant="outline" className="text-[10px] capitalize">
+                    <Badge variant="outline" className="badge-interactive text-[10px] capitalize">
                       {h.status}
                     </Badge>
                   </div>
@@ -493,7 +493,7 @@ export function ShiftHandoverView() {
                   <span className="font-mono">{h.signatureHash}</span>
                 </div>
                 {i === 0 && (
-                  <Badge variant="outline" className="text-[10px] border-primary/40 text-primary">
+                  <Badge variant="outline" className="badge-interactive text-[10px] border-primary/40 text-primary">
                     <Sparkles className="h-2.5 w-2.5 mr-0.5" />
                     Latest
                   </Badge>

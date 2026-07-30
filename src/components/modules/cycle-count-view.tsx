@@ -232,7 +232,7 @@ function KpiCard({ title, value, icon: Icon, colorClass, subtitle }: {
 }) {
   return (
     <Card className={cn("cc-kpi-card", colorClass)}>
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs opacity-70 mb-1">{title}</p>
@@ -400,11 +400,13 @@ export default function CycleCountView() {
             </div>
           </div>
           <div className="cc-header-badges">
-            <Badge className="cc-header-badge cc-hb-total">Total Counts: {countSchedules.length}</Badge>
-            <Badge className="cc-header-badge cc-hb-active">{inProgressCount} Active</Badge>
-            <Badge className="cc-header-badge cc-hb-done">{completedCount} Done</Badge>
-            <Badge className="cc-header-badge cc-hb-var">{varianceItems} Variances</Badge>
-            <Badge className="cc-header-badge cc-hb-pending">{pendingApproval} Pending</Badge>
+<div className="chip-group">
+            <Badge className="badge-interactive cc-header-badge cc-hb-total">Total Counts: {countSchedules.length}</Badge>
+            <Badge className="badge-interactive cc-header-badge cc-hb-active">{inProgressCount} Active</Badge>
+            <Badge className="badge-interactive cc-header-badge cc-hb-done">{completedCount} Done</Badge>
+            <Badge className="badge-interactive cc-header-badge cc-hb-var">{varianceItems} Variances</Badge>
+            <Badge className="badge-interactive cc-header-badge cc-hb-pending">{pendingApproval} Pending</Badge>
+</div>
           </div>
         </div>
       </div>
@@ -553,9 +555,9 @@ export default function CycleCountView() {
             {/* Warehouse Accuracy Table */}
             <Card className="cc-card">
               <CardHeader className="pb-2"><CardTitle className="cc-card-title">Warehouse Accuracy Summary</CardTitle></CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="cc-table-header">
                         <TableHead className="cc-th">Warehouse</TableHead>
@@ -635,10 +637,10 @@ export default function CycleCountView() {
             </div>
 
             {/* Schedule Table */}
-            <Card className="cc-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift cc-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="cc-table-header">
                         <TableHead className="cc-th">Count ID</TableHead>
@@ -726,9 +728,9 @@ export default function CycleCountView() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
               <Card className="cc-card">
                 <CardHeader className="pb-2"><CardTitle className="cc-card-title">Counter Leaderboard</CardTitle></CardHeader>
-                <CardContent className="p-0">
+                <CardContent className="glass-subtle p-0">
                   <div className="overflow-x-auto">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow className="cc-table-header">
                           <TableHead className="cc-th">#</TableHead>
@@ -751,8 +753,8 @@ export default function CycleCountView() {
                             </TableCell>
                             <TableCell className="cc-td"><span className="text-sm font-medium">{c.name}</span></TableCell>
                             <TableCell className="cc-td"><span className="text-xs">{c.wh}</span></TableCell>
-                            <TableCell className="cc-td"><Badge className={cn("cc-badge", c.cert === "L3 Expert" ? "cc-badge-abc-a" : c.cert === "L2 Certified" ? "cc-badge-abc-b" : "cc-badge-abc-c")}>{c.cert}</Badge></TableCell>
-                            <TableCell className="cc-td"><span className="text-sm">{c.totalCounts}</span></TableCell>
+                            <TableCell className="badge-interactive cc-td"><Badge className={cn("cc-badge", c.cert === "L3 Expert" ? "cc-badge-abc-a" : c.cert === "L2 Certified" ? "cc-badge-abc-b" : "cc-badge-abc-c")}>{c.cert}</Badge></TableCell>
+                            <TableCell className="numeric-cell cc-td"><span className="text-sm">{c.totalCounts}</span></TableCell>
                             <TableCell className="cc-td">
                               <div className="flex items-center gap-2">
                                 <MiniBar value={c.accuracy} max={100} colorClass="cc-bar-teal" />
@@ -794,9 +796,9 @@ export default function CycleCountView() {
             {/* Active Count Cards */}
             <Card className="cc-card">
               <CardHeader className="pb-2"><CardTitle className="cc-card-title">Active & Paused Counts</CardTitle></CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="cc-table-header">
                         <TableHead className="cc-th">Count ID</TableHead>
@@ -930,10 +932,10 @@ export default function CycleCountView() {
             </div>
 
             {/* Variance Table */}
-            <Card className="cc-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift cc-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="cc-table-header">
                         <TableHead className="cc-th">Count ID</TableHead>
@@ -1057,10 +1059,10 @@ export default function CycleCountView() {
             </div>
 
             {/* Adjustment Table */}
-            <Card className="cc-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift cc-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="cc-table-header">
                         <TableHead className="cc-th">Adj. ID</TableHead>

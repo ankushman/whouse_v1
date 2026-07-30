@@ -853,7 +853,7 @@ export default function EcommerceFulfillmentView() {
                       <td className="ecom-cell-partner">{o.deliveryPartner}</td>
                       <td className="ecom-cell-awb">{o.trackingNumber}</td>
                       <td>
-                        <Button size="sm" variant="outline" className="ecom-action-btn" onClick={() => openDrawer(o)}>
+                        <Button size="sm" variant="outline" className="btn-outline-animate ecom-action-btn" onClick={() => openDrawer(o)}>
                           <Eye className="w-3.5 h-3.5" />
                         </Button>
                       </td>

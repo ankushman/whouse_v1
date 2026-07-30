@@ -397,7 +397,7 @@ function DefectDrawer({ d, onClose }: { d: any; onClose: () => void }) {
             <h3 className="qia-drawer-title">Defect: {d.id}</h3>
             <div className="qia-drawer-subtitle">
               <SeverityBadge severity={d.severity} />
-              {d.aiFlagged ? <Badge className="qia-ai-badge"><Cpu size={12} /> AI Flagged</Badge> : null}
+              {d.aiFlagged ? <Badge className="badge-interactive qia-ai-badge"><Cpu size={12} /> AI Flagged</Badge> : null}
               <MapPin size={13} /> {d.warehouse}
             </div>
           </div>
@@ -613,12 +613,12 @@ export default function QualityInspectionAutomationView() {
         {/* ═══ Tab 0: Dashboard ═══ */}
         <TabsContent value="0" className="qia-tab-content">
           <div className="qia-kpi-grid">
-            <Card className="qia-kpi-card qia-kpi-teal"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ScanBarcode size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Total Inspections</span><span className="qia-kpi-value">{data.inspections.length}</span><span className="qia-kpi-sub">Auto-processed: {autoProcessedCount}</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-indigo"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><Brain size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">AI Accuracy</span><span className="qia-kpi-value">{avgAIAccuracy}%</span><span className="qia-kpi-sub"><TrendingUp size={12} /> +1.8% vs last quarter</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-rose"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><AlertTriangle size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Defects Found</span><span className="qia-kpi-value">{data.defects.length}</span><span className="qia-kpi-sub">AI-flagged: {aiFlaggedDefects}</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-amber"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><IndianRupee size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Cost Saved</span><span className="qia-kpi-value">{formatINR(totalCostSaved)}</span><span className="qia-kpi-sub">Defect prevention</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-emerald"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ShieldCheck size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Pass Rate</span><span className="qia-kpi-value">{avgPassRate}%</span><span className="qia-kpi-sub">Network average</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-violet"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><Factory size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Stations Online</span><span className="qia-kpi-value">{data.stations.filter(s => s.status === "Online").length}/{data.stations.length}</span><span className="qia-kpi-sub">{data.WAREHOUSES.length} warehouses</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-teal"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ScanBarcode size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Total Inspections</span><span className="qia-kpi-value">{data.inspections.length}</span><span className="qia-kpi-sub">Auto-processed: {autoProcessedCount}</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-indigo"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><Brain size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">AI Accuracy</span><span className="qia-kpi-value">{avgAIAccuracy}%</span><span className="qia-kpi-sub"><TrendingUp size={12} /> +1.8% vs last quarter</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-rose"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><AlertTriangle size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Defects Found</span><span className="qia-kpi-value">{data.defects.length}</span><span className="qia-kpi-sub">AI-flagged: {aiFlaggedDefects}</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-amber"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><IndianRupee size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Cost Saved</span><span className="qia-kpi-value">{formatINR(totalCostSaved)}</span><span className="qia-kpi-sub">Defect prevention</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-emerald"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ShieldCheck size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Pass Rate</span><span className="qia-kpi-value">{avgPassRate}%</span><span className="qia-kpi-sub">Network average</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-violet"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><Factory size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Stations Online</span><span className="qia-kpi-value">{data.stations.filter(s => s.status === "Online").length}/{data.stations.length}</span><span className="qia-kpi-sub">{data.WAREHOUSES.length} warehouses</span></div></CardContent></Card>
           </div>
           <div className="qia-chart-grid">
             <Card className="qia-chart-card qia-chart-wide"><CardHeader className="qia-chart-header"><CardTitle className="qia-chart-title">Monthly Inspection &amp; AI Performance</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={280}><ComposedChart data={data.monthlyTrend}><CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 12 }} /><YAxis yAxisId="count" tick={{ fontSize: 12 }} /><YAxis yAxisId="rate" orientation="right" domain={[80, 100]} tick={{ fontSize: 12 }} /><Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #e5e7eb" }} /><Legend wrapperStyle={{ fontSize: 12 }} /><Bar yAxisId="count" dataKey="totalInspected" fill="#c7d2fe" name="Inspected" radius={[4, 4, 0, 0]} /><Bar yAxisId="count" dataKey="autoProcessed" fill="#0d9488" name="Auto-Processed" radius={[4, 4, 0, 0]} /><Line yAxisId="rate" type="monotone" dataKey="passRate" stroke="#6366f1" strokeWidth={2.5} dot={{ r: 4, fill: "#6366f1" }} name="Pass %" /><Line yAxisId="rate" type="monotone" dataKey="aiAccuracy" stroke="#e11d48" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }} name="AI Acc %" /></ComposedChart></ResponsiveContainer></CardContent></Card>
@@ -650,7 +650,7 @@ export default function QualityInspectionAutomationView() {
                 <option value="all">All Severity</option>
                 {data.SEVERITY_LEVELS.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
-              <Badge className="qia-count-badge">{filteredInspections.length} records</Badge>
+              <Badge className="badge-interactive qia-count-badge">{filteredInspections.length} records</Badge>
             </div>
           </div>
           <div className="qia-table-container">
@@ -672,13 +672,13 @@ export default function QualityInspectionAutomationView() {
                   <tr key={v.id} className={`qia-row ${v.status === "Failed" ? "qia-row-failed" : v.status === "Quarantined" ? "qia-row-quarantined" : ""}`} onClick={() => openDrawer(v, "inspection")}>
                     <td className="qia-mono-cell">{v.id}</td>
                     <td className="qia-mono-cell">{v.batch}</td>
-                    <td><Badge className="qia-category-badge">{v.product}</Badge></td>
-                    <td><Badge className="qia-type-badge">{v.type}</Badge></td>
+                    <td><Badge className="badge-interactive qia-category-badge">{v.product}</Badge></td>
+                    <td><Badge className="badge-interactive qia-type-badge">{v.type}</Badge></td>
                     <td><StatusBadge status={v.status} /></td>
                     <td><SeverityBadge severity={v.severity} /></td>
                     <td><ConfidenceBar value={v.aiConfidence} /></td>
                     <td className="qia-number-cell">{v.defects}</td>
-                    <td>{v.autoProcessed ? <Badge className="qia-auto-badge"><Cpu size={10} /> Yes</Badge> : <span className="qia-manual-label">{v.inspector}</span>}</td>
+                    <td>{v.autoProcessed ? <Badge className="badge-interactive qia-auto-badge"><Cpu size={10} /> Yes</Badge> : <span className="qia-manual-label">{v.inspector}</span>}</td>
                     <td><div className="qia-warehouse-cell"><MapPin size={12} />{v.warehouse}</div></td>
                   </tr>
                 ))}
@@ -699,7 +699,7 @@ export default function QualityInspectionAutomationView() {
                 <option value="all">All Severity</option>
                 {data.SEVERITY_LEVELS.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
-              <Badge className="qia-count-badge">{filteredDefects.length} defects</Badge>
+              <Badge className="badge-interactive qia-count-badge">{filteredDefects.length} defects</Badge>
             </div>
           </div>
           <div className="qia-table-container">
@@ -720,14 +720,14 @@ export default function QualityInspectionAutomationView() {
                 {filteredDefects.map(d => (
                   <tr key={d.id} className={`qia-row ${d.severity === "Critical" ? "qia-row-critical" : d.severity === "Major" ? "qia-row-major" : ""}`} onClick={() => openDrawer(d, "defect")}>
                     <td className="qia-mono-cell">{d.id}</td>
-                    <td><Badge className="qia-category-badge">{d.product}</Badge></td>
-                    <td><Badge className="qia-type-badge">{d.defectType}</Badge></td>
+                    <td><Badge className="badge-interactive qia-category-badge">{d.product}</Badge></td>
+                    <td><Badge className="badge-interactive qia-type-badge">{d.defectType}</Badge></td>
                     <td><SeverityBadge severity={d.severity} /></td>
                     <td className="qia-warehouse-cell">{d.location}</td>
-                    <td>{d.aiFlagged ? <Badge className="qia-ai-badge-sm"><Cpu size={10} /> AI</Badge> : d.detectedBy}</td>
+                    <td>{d.aiFlagged ? <Badge className="badge-interactive qia-ai-badge-sm"><Cpu size={10} /> AI</Badge> : d.detectedBy}</td>
                     <td className="qia-number-cell">{d.aiFlagged ? "Yes" : "No"}</td>
                     <td><ConfidenceBar value={d.confidence} /></td>
-                    <td><Badge className="qia-action-badge">{d.actionTaken}</Badge></td>
+                    <td><Badge className="badge-interactive qia-action-badge">{d.actionTaken}</Badge></td>
                     <td className="qia-number-cell">{formatINR(d.costImpact)}</td>
                   </tr>
                 ))}
@@ -750,13 +750,13 @@ export default function QualityInspectionAutomationView() {
                 <option value="Maintenance">Maintenance</option>
                 <option value="Offline">Offline</option>
               </select>
-              <Badge className="qia-count-badge">{filteredStations.length} stations</Badge>
+              <Badge className="badge-interactive qia-count-badge">{filteredStations.length} stations</Badge>
             </div>
           </div>
           <div className="qia-station-grid">
             {filteredStations.map(s => (
               <Card key={s.id} className={`qia-station-card ${s.status === "Offline" ? "qia-station-offline" : s.status === "Maintenance" ? "qia-station-maintenance" : ""}`} onClick={() => openDrawer(s, "station")}>
-                <CardContent className="qia-station-body">
+                <CardContent className="glass-subtle qia-station-body">
                   <div className="qia-station-header">
                     <span className={`qia-station-status-dot qia-dot-${s.status.toLowerCase()}`} />
                     <span className="qia-station-name">{s.name}</span>
@@ -787,7 +787,7 @@ export default function QualityInspectionAutomationView() {
                 <option value="all">All Warehouses</option>
                 {data.WAREHOUSES.map(w => <option key={w} value={w}>{w}</option>)}
               </select>
-              <Badge className="qia-count-badge">{filteredAI.length} models</Badge>
+              <Badge className="badge-interactive qia-count-badge">{filteredAI.length} models</Badge>
             </div>
           </div>
           <div className="qia-table-container">
@@ -809,7 +809,7 @@ export default function QualityInspectionAutomationView() {
                   <tr key={m.id} className={`qia-row ${!m.isActive ? "qia-row-inactive" : ""}`} onClick={() => openDrawer(m, "ai")}>
                     <td><div className="qia-vendor-cell"><span className="qia-vendor-name">{m.name}</span></div></td>
                     <td className="qia-mono-cell">{m.version}</td>
-                    <td><Badge className="qia-category-badge">{m.category}</Badge></td>
+                    <td><Badge className="badge-interactive qia-category-badge">{m.category}</Badge></td>
                     <td className="qia-number-cell qia-score-highlight">{formatPct(m.accuracy)}</td>
                     <td className="qia-number-cell">{formatPct(m.f1Score)}</td>
                     <td className="qia-number-cell">{formatPct(m.precision)}</td>
@@ -827,10 +827,10 @@ export default function QualityInspectionAutomationView() {
         {/* ═══ Tab 5: Cost Analysis ═══ */}
         <TabsContent value="5" className="qia-tab-content">
           <div className="qia-cost-summary-grid">
-            <Card className="qia-kpi-card qia-kpi-teal"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><TrendingDown size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Total Labor Saved</span><span className="qia-kpi-value">{formatINR(data.costs.reduce((a, b) => a + b.laborSaved, 0))}</span><span className="qia-kpi-sub">FY 2025-26</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-indigo"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><IndianRupee size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Avg ROI</span><span className="qia-kpi-value">{formatPct(data.costs.reduce((a, b) => a + b.roi, 0) / data.costs.length)}</span><span className="qia-kpi-sub">Investment return</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-rose"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ShieldAlert size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Defects Prevented</span><span className="qia-kpi-value">{data.costs.reduce((a, b) => a + b.defectsPrevented, 0).toLocaleString()}</span><span className="qia-kpi-sub">Total prevented</span></div></CardContent></Card>
-            <Card className="qia-kpi-card qia-kpi-amber"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ArrowUpRight size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Avg Throughput Gain</span><span className="qia-kpi-value">{formatPct(data.costs.reduce((a, b) => a + b.throughputGain, 0) / data.costs.length)}</span><span className="qia-kpi-sub">vs manual</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-teal"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><TrendingDown size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Total Labor Saved</span><span className="qia-kpi-value">{formatINR(data.costs.reduce((a, b) => a + b.laborSaved, 0))}</span><span className="qia-kpi-sub">FY 2025-26</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-indigo"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><IndianRupee size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Avg ROI</span><span className="qia-kpi-value">{formatPct(data.costs.reduce((a, b) => a + b.roi, 0) / data.costs.length)}</span><span className="qia-kpi-sub">Investment return</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-rose"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ShieldAlert size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Defects Prevented</span><span className="qia-kpi-value">{data.costs.reduce((a, b) => a + b.defectsPrevented, 0).toLocaleString()}</span><span className="qia-kpi-sub">Total prevented</span></div></CardContent></Card>
+            <Card className="glass-subtle qia-kpi-card qia-kpi-amber"><CardContent className="qia-kpi-body"><div className="qia-kpi-icon-wrap"><ArrowUpRight size={22} /></div><div className="qia-kpi-text"><span className="qia-kpi-label">Avg Throughput Gain</span><span className="qia-kpi-value">{formatPct(data.costs.reduce((a, b) => a + b.throughputGain, 0) / data.costs.length)}</span><span className="qia-kpi-sub">vs manual</span></div></CardContent></Card>
           </div>
           <div className="qia-chart-grid">
             <Card className="qia-chart-card qia-chart-wide"><CardHeader className="qia-chart-header"><CardTitle className="qia-chart-title">ROI &amp; Cost of Quality by Period</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={280}><ComposedChart data={data.monthlyTrend}><CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" /><XAxis dataKey="month" tick={{ fontSize: 12 }} /><YAxis tick={{ fontSize: 12 }} /><Tooltip contentStyle={{ borderRadius: 8 }} /><Legend wrapperStyle={{ fontSize: 12 }} /><Bar dataKey="laborSaved" fill="#0d9488" name="Labor Saved" radius={[4, 4, 0, 0]} /><Line type="monotone" dataKey="defectsFound" stroke="#e11d48" strokeWidth={2} name="Defects" /></ComposedChart></ResponsiveContainer></CardContent></Card>

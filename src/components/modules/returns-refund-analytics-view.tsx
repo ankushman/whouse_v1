@@ -475,7 +475,7 @@ export default function ReturnsRefundAnalyticsView() {
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
             <input type="text" placeholder="Search by ID, order, customer, reason, SKU..." className="rra-search w-full pl-9" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
           </div>
-          <Badge variant="outline" className="text-xs">{filteredReturns.length} returns</Badge>
+          <Badge variant="outline" className="badge-interactive text-xs">{filteredReturns.length} returns</Badge>
         </div>
 
         {/* Table */}
@@ -991,13 +991,13 @@ export default function ReturnsRefundAnalyticsView() {
                 <Button size="sm" className="bg-orange-600 text-white hover:bg-orange-700 gap-1">
                   <Package className="h-3.5 w-3.5" /> Process Return
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <CreditCard className="h-3.5 w-3.5" /> Issue Refund
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <Recycle className="h-3.5 w-3.5" /> Initiate Restock
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <Send className="h-3.5 w-3.5" /> Return to Vendor
                 </Button>
               </div>
@@ -1025,7 +1025,7 @@ export default function ReturnsRefundAnalyticsView() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Badge className="bg-gradient-to-r from-orange-500 to-amber-600 text-white border-0">
+          <Badge className="badge-interactive bg-gradient-to-r from-orange-500 to-amber-600 text-white border-0">
             {fmtNum(totalReturns)} Returns
           </Badge>
           <Badge variant="outline">{fmtINR(totalRefunded)} Refunded</Badge>

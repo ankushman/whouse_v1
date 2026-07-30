@@ -436,7 +436,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, trend, color }: {
   trend?: "up" | "down" | "neutral"; color: string
 }) {
   return (
-    <Card className="dfm-kpi"><CardContent className="p-4">
+    <Card className="glass-subtle dfm-kpi"><CardContent className="p-4">
       <div className="flex items-start justify-between">
         <div className="flex flex-col gap-1">
           <span className="text-[10px] text-muted-foreground font-medium">{title}</span>
@@ -647,7 +647,7 @@ export default function DigitalFreightMarketplaceView() {
             </Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="dfm-table-row">
                   <SortHeader col="id" label="Load ID" />
@@ -671,7 +671,7 @@ export default function DigitalFreightMarketplaceView() {
                     <TableCell className="text-[10px]">{String(o.shipper)}</TableCell>
                     <TableCell className="text-[10px]">{String(o.origin)}</TableCell>
                     <TableCell className="text-[10px]">{String(o.destination)}</TableCell>
-                    <TableCell className="text-[10px] font-medium">{Number(o.weight).toFixed(1)}</TableCell>
+                    <TableCell className="numeric-cell text-[10px] font-medium">{Number(o.weight).toFixed(1)}</TableCell>
                     <TableCell><VehicleTypeBadge type={String(o.vehicleType)} /></TableCell>
                     <TableCell><FreightTypeBadge type={String(o.freightType)} /></TableCell>
                     <TableCell><RateTile amount={Number(o.rate)} trend="Stable" /></TableCell>
@@ -704,7 +704,7 @@ export default function DigitalFreightMarketplaceView() {
             </Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="dfm-table-row">
                   <SortHeader col="id" label="Bid ID" />
@@ -759,7 +759,7 @@ export default function DigitalFreightMarketplaceView() {
             </Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="dfm-table-row">
                   <SortHeader col="id" label="Rate ID" />
@@ -781,7 +781,7 @@ export default function DigitalFreightMarketplaceView() {
                     <TableCell className="text-xs font-mono font-semibold">{String(r.id)}</TableCell>
                     <TableCell><LaneBadge lane={String(r.lane)} /></TableCell>
                     <TableCell><ModeBadge mode={String(r.mode)} /></TableCell>
-                    <TableCell className="text-[10px]">{formatINR(Number(r.baseRate))}</TableCell>
+                    <TableCell className="numeric-cell text-[10px]">{formatINR(Number(r.baseRate))}</TableCell>
                     <TableCell className="text-[10px]">{formatINR(Number(r.fuelSurcharge))}</TableCell>
                     <TableCell className="text-[10px]">{formatINR(Number(r.accessorial))}</TableCell>
                     <TableCell><RateTile amount={Number(r.totalRate)} trend={String(r.trend)} /></TableCell>
@@ -834,7 +834,7 @@ export default function DigitalFreightMarketplaceView() {
                     </div>
                     <div className="text-[10px] mt-1 opacity-80">{String(c.shipper)} &harr; {String(c.carrier)}</div>
                   </div>
-                  <CardContent className="p-3 space-y-2">
+                  <CardContent className="glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <LaneBadge lane={String(c.lane)} />
                       <span className="text-xs font-semibold">\u20b9{String(c.rate)}/km</span>
@@ -970,7 +970,7 @@ export default function DigitalFreightMarketplaceView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Posted", `Load ${String(selectedItem.id)} posted to marketplace`) }}><CheckCircle2 className="h-3 w-3" />Accept Bid</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Refreshed", "Bid list refreshed") }}><RefreshCw className="h-3 w-3" />Refresh</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Refreshed", "Bid list refreshed") }}><RefreshCw className="h-3 w-3" />Refresh</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Cancelled", `Load ${String(selectedItem.id)} cancelled`); setSheetOpen(false) }}><XCircle className="h-3 w-3" />Cancel</Button>
                 </div>
               </div>
@@ -1003,7 +1003,7 @@ export default function DigitalFreightMarketplaceView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Awarded", `Bid ${String(selectedItem.id)} awarded`) }}><CheckCircle2 className="h-3 w-3" />Award</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Counter", "Counter-offer sent") }}><RefreshCw className="h-3 w-3" />Counter-Offer</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Counter", "Counter-offer sent") }}><RefreshCw className="h-3 w-3" />Counter-Offer</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Rejected", `Bid ${String(selectedItem.id)} rejected`) }}><AlertTriangle className="h-3 w-3" />Reject</Button>
                 </div>
               </div>
@@ -1036,7 +1036,7 @@ export default function DigitalFreightMarketplaceView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Booked", `Rate ${String(selectedItem.id)} booked`) }}><Gavel className="h-3 w-3" />Book Rate</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Rate card exported") }}><FileDown className="h-3 w-3" />Export</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Rate card exported") }}><FileDown className="h-3 w-3" />Export</Button>
                 </div>
               </div>
             </>
@@ -1067,7 +1067,7 @@ export default function DigitalFreightMarketplaceView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.success("Renewed", `Contract ${String(selectedItem.id)} renewed`) }}><CheckCircle2 className="h-3 w-3" />Renew</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Contract exported") }}><FileDown className="h-3 w-3" />Export</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 dfm-action" onClick={() => { toast.info("Exported", "Contract exported") }}><FileDown className="h-3 w-3" />Export</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 dfm-action" onClick={() => { toast.error("Terminated", `Contract ${String(selectedItem.id)} terminated`); setSheetOpen(false) }}><AlertTriangle className="h-3 w-3" />Terminate</Button>
                 </div>
               </div>

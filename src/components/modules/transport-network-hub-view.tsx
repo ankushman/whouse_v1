@@ -164,8 +164,8 @@ export default function TransportNetworkHubView() {
         </TabsContent>
 
         <TabsContent value="1" className="tnh-route-tab space-y-4">
-          <Card><CardContent className="tnh-route-panel p-4">
-            <div className="flex gap-2 mb-4"><div className="relative flex-1"><Search className="tnh-search-icon absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search routes..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="tnh-search-input pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
+          <Card><CardContent className="glass-subtle tnh-route-panel p-4">
+            <div className="btn-outline-animate flex gap-2 mb-4"><div className="relative flex-1"><Search className="tnh-search-icon absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search routes..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="tnh-search-input pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
             <div className="tnh-route-table overflow-x-auto max-h-[420px] overflow-y-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-muted/90 backdrop-blur"><tr className="tnh-route-header">{["", "Code", "From", "To", "Mode", "Status", "Distance", "ETA", "Cost", "Vehicles"].map(h => <th key={h} className="tnh-route-th px-3 py-2 text-left text-xs font-medium whitespace-nowrap">{h}</th>)}</tr></thead><tbody>
               {sortedData(filterData(routes, searchQ), sortField, sortDir).map(r => (
                 <tr key={r.id} className="tnh-route-row border-b hover:bg-muted/40 cursor-pointer" onClick={() => { setSelectedRoute(r); setSheetOpen(true); toast.success("Route Details", `Viewing ${r.code}`) }}>
@@ -186,8 +186,8 @@ export default function TransportNetworkHubView() {
         </TabsContent>
 
         <TabsContent value="2" className="tnh-fleet-tab space-y-4">
-          <Card><CardContent className="tnh-fleet-panel p-4">
-            <div className="flex gap-2 mb-4"><div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search fleet..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
+          <Card><CardContent className="glass-subtle tnh-fleet-panel p-4">
+            <div className="btn-outline-animate flex gap-2 mb-4"><div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search fleet..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
             <div className="tnh-fleet-table overflow-x-auto max-h-[420px] overflow-y-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-muted/90 backdrop-blur"><tr>{["", "Type", "Status", "Driver", "Speed", "Fuel", "GPS", "Next", "Route"].map(h => <th key={h} className="px-3 py-2 text-left text-xs font-medium whitespace-nowrap">{h}</th>)}</tr></thead><tbody>
               {sortedData(filterData(fleet, searchQ), sortField, sortDir).map(f => (
                 <tr key={f.id} className="border-b hover:bg-muted/40">
@@ -207,8 +207,8 @@ export default function TransportNetworkHubView() {
         </TabsContent>
 
         <TabsContent value="3" className="tnh-terminal-tab space-y-4">
-          <Card><CardContent className="tnh-terminal-panel p-4">
-            <div className="flex gap-2 mb-4"><div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search terminals..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
+          <Card><CardContent className="glass-subtle tnh-terminal-panel p-4">
+            <div className="btn-outline-animate flex gap-2 mb-4"><div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search terminals..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
             <div className="tnh-terminal-table overflow-x-auto max-h-[420px] overflow-y-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-muted/90 backdrop-blur"><tr>{["Name", "City", "Type", "Status", "Capacity", "Throughput", "Staff", "Equipment", "Util %"].map(h => <th key={h} className="px-3 py-2 text-left text-xs font-medium whitespace-nowrap">{h}</th>)}</tr></thead><tbody>
               {sortedData(filterData(terminals, searchQ), sortField, sortDir).map(t => (
                 <tr key={t.id} className="border-b hover:bg-muted/40">
@@ -229,8 +229,8 @@ export default function TransportNetworkHubView() {
 
         <TabsContent value="4" className="tnh-cost-tab space-y-4">
           <Card><CardHeader><CardTitle className="tnh-cost-chart-title text-sm">Monthly Cost Trend</CardTitle></CardHeader><CardContent><AreaChart data={costTrend} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 10 }} tickFormatter={v => fmtINR(v as number)} /><Tooltip formatter={(v: number) => fmtINR(v)} /><Area type="monotone" dataKey="actual" stroke="#f97316" fill="#f97316" fillOpacity={0.15} /><Area type="monotone" dataKey="budget" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.1} /></AreaChart></CardContent></Card>
-          <Card><CardContent className="tnh-cost-panel p-4">
-            <div className="flex gap-2 mb-4"><div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search costs..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
+          <Card><CardContent className="glass-subtle tnh-cost-panel p-4">
+            <div className="btn-outline-animate flex gap-2 mb-4"><div className="relative flex-1"><Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search costs..." value={searchQ} onChange={e => setSearchQ(e.target.value)} className="pl-9" /></div><Button variant="outline" size="icon" onClick={() => toggleSort(sortField)}><ArrowUpDown className="h-4 w-4" /></Button></div>
             <div className="tnh-cost-table overflow-x-auto max-h-[360px] overflow-y-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-muted/90 backdrop-blur"><tr>{["Category", "Month", "Cost/km", "Cost/ton", "Budget", "Actual", "Savings"].map(h => <th key={h} className="px-3 py-2 text-left text-xs font-medium whitespace-nowrap">{h}</th>)}</tr></thead><tbody>
               {sortedData(filterData(costs, searchQ), sortField, sortDir).map(c => (
                 <tr key={c.id} className="border-b hover:bg-muted/40">

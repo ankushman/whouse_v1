@@ -203,7 +203,7 @@ export default function FreightShippingRateView() {
             { label: "Damage Rate", value: `${damageRate}%`, icon: AlertTriangle, color: "text-rose-600", bg: "bg-rose-50 dark:bg-rose-950/40", change: parseFloat(damageRate) < 1 ? "Below target" : "Needs attention" },
           ].map(kpi => (
             <Card key={kpi.label} className="fsr-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="fsr-label">{kpi.label}</p>
@@ -329,7 +329,7 @@ export default function FreightShippingRateView() {
         <div className="fsr-filter-bar">
           <div className="flex flex-wrap gap-2 flex-1">
             {Object.entries(statusCounts).map(([s, c]) => (
-              <Badge key={s} variant={statusFilter === s ? "default" : "outline"} className="fsr-filter-badge cursor-pointer" onClick={() => setStatusFilter(s)}>
+              <Badge key={s} variant={statusFilter === s ? "default" : "outline"} className="badge-interactive fsr-filter-badge cursor-pointer" onClick={() => setStatusFilter(s)}>
                 {s} <span className="ml-1 opacity-60">({c})</span>
               </Badge>
             ))}
@@ -344,7 +344,7 @@ export default function FreightShippingRateView() {
         </div>
 
         <Card className="fsr-table-card border-slate-100 dark:border-slate-800">
-          <CardContent className="p-0">
+          <CardContent className="glass-subtle p-0">
             <div className="overflow-x-auto">
               <table className="fsr-table">
                 <thead>
@@ -375,8 +375,8 @@ export default function FreightShippingRateView() {
                           <span>{rate.destination}</span>
                         </div>
                       </td>
-                      <td><Badge variant="outline" className="fsr-zone-badge">{rate.zone.split(" ")[1]}</Badge></td>
-                      <td><Badge className="fsr-service-badge" style={{ backgroundColor: SERVICE_COLORS[rate.service] + "18", color: SERVICE_COLORS[rate.service], borderColor: SERVICE_COLORS[rate.service] + "30" }}>{rate.service}</Badge></td>
+                      <td><Badge variant="outline" className="badge-interactive fsr-zone-badge">{rate.zone.split(" ")[1]}</Badge></td>
+                      <td><Badge className="badge-interactive fsr-service-badge" style={{ backgroundColor: SERVICE_COLORS[rate.service] + "18", color: SERVICE_COLORS[rate.service], borderColor: SERVICE_COLORS[rate.service] + "30" }}>{rate.service}</Badge></td>
                       <td className="font-medium">{fmtINR(rate.baseRate)}</td>
                       <td className="font-semibold text-blue-600 dark:text-blue-400">{fmtINR(rate.totalRate)}</td>
                       <td className="center">{rate.transitDays > 0 ? `${rate.transitDays}d` : "—"}</td>
@@ -408,7 +408,7 @@ export default function FreightShippingRateView() {
             const totalShip = carrierRates.reduce((s, r) => s + r.shipments, 0)
             return (
               <Card key={carrier.id} className="fsr-carrier-card border-slate-100 dark:border-slate-800">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
                       <div className="fsr-carrier-avatar" style={{ backgroundColor: carrier.color + "18", border: `2px solid ${carrier.color}` }}>
@@ -518,7 +518,7 @@ export default function FreightShippingRateView() {
             const zoneShip = zRates.reduce((s, r) => s + r.shipments, 0)
             return (
               <Card key={z.id} className="fsr-zone-kpi border-slate-100 dark:border-slate-800" style={{ borderLeftWidth: 4, borderLeftColor: z.color }}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="fsr-zone-dot" style={{ backgroundColor: z.color }} />
                     <div>
@@ -614,7 +614,7 @@ export default function FreightShippingRateView() {
             { label: "Rates Renegotiated", value: `${randInt(12, 28)}`, icon: RefreshCw, color: "text-amber-600", bg: "bg-amber-50 dark:bg-amber-950/40" },
           ].map(kpi => (
             <Card key={kpi.label} className="fsr-kpi-card border-slate-100 dark:border-slate-800">
-              <CardContent className="p-4">
+              <CardContent className="glass-subtle p-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="fsr-label">{kpi.label}</p>
@@ -674,7 +674,7 @@ export default function FreightShippingRateView() {
                         <p className="text-xs text-gray-500">{rec.desc}</p>
                       </div>
                       <div className="text-right">
-                        <Badge variant={rec.priority === "High" ? "destructive" : "outline"} className="text-xs">{rec.priority}</Badge>
+                        <Badge variant={rec.priority === "High" ? "destructive" : "outline"} className="badge-interactive text-xs">{rec.priority}</Badge>
                         <p className="text-sm font-bold text-emerald-600 mt-1">{rec.impact}</p>
                       </div>
                     </div>
@@ -696,7 +696,7 @@ export default function FreightShippingRateView() {
           <p className="fsr-subheading">Carrier rate management, cost analysis, and freight optimization across India</p>
         </div>
         <div className="flex gap-2">
-          <Button size="sm" variant="outline" className="fsr-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh Rates</Button>
+          <Button size="sm" variant="outline" className="btn-outline-animate fsr-header-btn"><RefreshCw className="h-3.5 w-3.5" />Refresh Rates</Button>
           <Button size="sm" className="fsr-header-btn-primary"><Plus className="h-3.5 w-3.5" />New Rate Card</Button>
         </div>
       </div>
@@ -737,9 +737,11 @@ export default function FreightShippingRateView() {
                 </button>
               </div>
               <div className="flex gap-2 mt-3">
-                <Badge className="bg-white/20 text-white border-white/30">{selectedRate.service}</Badge>
-                <Badge className="bg-white/20 text-white border-white/30">{selectedRate.zone}</Badge>
-                <Badge className="bg-white/20 text-white border-white/30">{selectedRate.status}</Badge>
+<div className="chip-group">
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedRate.service}</Badge>
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedRate.zone}</Badge>
+                <Badge className="badge-interactive bg-white/20 text-white border-white/30">{selectedRate.status}</Badge>
+</div>
               </div>
             </div>
 
@@ -814,8 +816,8 @@ export default function FreightShippingRateView() {
 
               <div className="fsr-drawer-actions">
                 <Button className="fsr-action-primary flex-1"><Edit className="h-4 w-4" />Edit Rate</Button>
-                <Button variant="outline" className="fsr-action-secondary"><RefreshCw className="h-4 w-4" />Renew</Button>
-                <Button variant="outline" className="fsr-action-secondary text-red-500"><Trash2 className="h-4 w-4" />Revoke</Button>
+                <Button variant="outline" className="btn-outline-animate fsr-action-secondary"><RefreshCw className="h-4 w-4" />Renew</Button>
+                <Button variant="outline" className="btn-outline-animate fsr-action-secondary text-red-500"><Trash2 className="h-4 w-4" />Revoke</Button>
               </div>
             </div>
           </div>

@@ -474,7 +474,7 @@ export function SupplierQualityScorecardView() {
               )}
               style={{ animationDelay: `${i * 70}ms` }}
             >
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="flex items-center justify-between mb-2">
                   <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">{kpi.label}</p>
                   <div className={cn("rounded-md p-1", kpi.bg)}>
@@ -507,12 +507,12 @@ export function SupplierQualityScorecardView() {
                   Average defect rate (PPM) across all suppliers vs target threshold
                 </CardDescription>
               </div>
-              <Badge variant="outline" className="text-[10px] bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700">
+              <Badge variant="outline" className="badge-interactive text-[10px] bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700">
                 <AlertTriangle className="h-3 w-3 mr-1" /> Day 15 spike
               </Badge>
             </div>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={defectChartConfig} className="h-[200px] w-full">
               <AreaChart data={defectTrend30d} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
                 <defs>
@@ -540,7 +540,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">{totalSuppliers} suppliers by current grade</CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={pieConfig} className="h-[200px] w-full">
               <PieChart>
                 <Pie
@@ -584,7 +584,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">Highest quality scores this quarter</CardDescription>
           </CardHeader>
-          <CardContent className="pt-0 space-y-2">
+          <CardContent className="glass-subtle pt-0 space-y-2">
             {topPerformers.map((s, i) => {
               const initials = s.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase()
               return (
@@ -632,7 +632,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">{atRiskSuppliers.length} suppliers need intervention</CardDescription>
           </CardHeader>
-          <CardContent className="pt-0 space-y-2">
+          <CardContent className="glass-subtle pt-0 space-y-2">
             {atRiskSuppliers.length === 0 ? (
               <div className="text-xs text-muted-foreground text-center py-4">No at-risk suppliers</div>
             ) : atRiskSuppliers.map((s, i) => {
@@ -676,7 +676,7 @@ export function SupplierQualityScorecardView() {
             </CardTitle>
             <CardDescription className="text-xs">Top 10 suppliers by spend</CardDescription>
           </CardHeader>
-          <CardContent className="pt-0">
+          <CardContent className="glass-subtle pt-0">
             <ChartContainer config={scoreComparisonConfig} className="h-[200px] w-full">
               <BarChart data={scoreComparison} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.4} />
@@ -702,7 +702,7 @@ export function SupplierQualityScorecardView() {
             Where quality issues are costing the most — focus areas for FY25 QA programs
           </CardDescription>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="glass-subtle pt-0">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
             {categoryDistribution.map((cat) => {
               const maxCopq = Math.max(...categoryDistribution.map(c => c.copq))
@@ -751,10 +751,10 @@ export function SupplierQualityScorecardView() {
                   className="pl-7 h-8 text-xs w-48 sqs-search-focus"
                 />
               </div>
-              <Button variant="outline" size="sm" className="h-8 text-xs" onClick={handleRefresh}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs" onClick={handleRefresh}>
                 <RefreshCw className="h-3 w-3 mr-1" /> Refresh
               </Button>
-              <Button variant="outline" size="sm" className="h-8 text-xs" onClick={handleExport}>
+              <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs" onClick={handleExport}>
                 <Download className="h-3 w-3 mr-1" /> Export
               </Button>
               <Button size="sm" className="h-8 text-xs" onClick={handleNewAudit}>
@@ -839,9 +839,9 @@ export function SupplierQualityScorecardView() {
             </Select>
           </div>
         </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="glass-subtle pt-0">
           <div className="rounded-md border overflow-x-auto">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead className="text-[10px] h-8">Supplier</TableHead>
@@ -1300,10 +1300,10 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <Button size="sm" variant="outline" className="h-7 text-[10px]" onClick={handleCall}>
+                    <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-[10px]" onClick={handleCall}>
                       <Phone className="h-3 w-3 mr-1" /> Call
                     </Button>
-                    <Button size="sm" variant="outline" className="h-7 text-[10px]" onClick={handleEmail}>
+                    <Button size="sm" variant="outline" className="btn-outline-animate h-7 text-[10px]" onClick={handleEmail}>
                       <Mail className="h-3 w-3 mr-1" /> Email
                     </Button>
                   </div>
@@ -1427,20 +1427,20 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
                 <div className="flex flex-wrap gap-1.5">
                   {supplier.isoCertified ? (
                     <>
-                      <Badge variant="outline" className="text-[10px] bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700">
+                      <Badge variant="outline" className="badge-interactive text-[10px] bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-700">
                         <ShieldCheck className="h-3 w-3 mr-1" /> ISO 9001:2015
                       </Badge>
                       {supplier.tier === "tier-1" && (
-                        <Badge variant="outline" className="text-[10px] bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700">
+                        <Badge variant="outline" className="badge-interactive text-[10px] bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700">
                           <Award className="h-3 w-3 mr-1" /> IATF 16949
                         </Badge>
                       )}
-                      <Badge variant="outline" className="text-[10px] bg-violet-50 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border-violet-300 dark:border-violet-700">
+                      <Badge variant="outline" className="badge-interactive text-[10px] bg-violet-50 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border-violet-300 dark:border-violet-700">
                         <CheckCircle2 className="h-3 w-3 mr-1" /> ISO 14001
                       </Badge>
                     </>
                   ) : (
-                    <Badge variant="outline" className="text-[10px] bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700">
+                    <Badge variant="outline" className="badge-interactive text-[10px] bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700">
                       <XCircle className="h-3 w-3 mr-1" /> Not ISO Certified
                     </Badge>
                   )}
@@ -1456,12 +1456,12 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
                 <p className="text-[10px] uppercase tracking-wide text-muted-foreground flex items-center gap-1">
                   <Package className="h-3 w-3" /> Recent Inspection Batches
                 </p>
-                <Badge variant="outline" className="text-[10px]">
+                <Badge variant="outline" className="badge-interactive text-[10px]">
                   {recentBatches.filter(b => b.status === "Accepted").length}/{recentBatches.length} accepted
                 </Badge>
               </div>
               <div className="rounded-md border overflow-hidden">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow className="bg-muted/50 hover:bg-muted/50 h-7">
                       <TableHead className="text-[9px]">Batch ID</TableHead>
@@ -1628,7 +1628,7 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
                 ))}
               </div>
               <Separator className="my-3" />
-              <Button variant="outline" size="sm" className="w-full h-7 text-[10px]" onClick={handleScheduleAudit}>
+              <Button variant="outline" size="sm" className="btn-outline-animate w-full h-7 text-[10px]" onClick={handleScheduleAudit}>
                 <Calendar className="h-3 w-3 mr-1" /> Schedule Next Audit
               </Button>
             </div>
@@ -1663,7 +1663,7 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-[11px] flex items-center gap-1.5">
                           <Icon className="h-3 w-3 text-muted-foreground" /> {m.name}
-                          <Badge variant="outline" className="text-[9px] h-4">{m.weight}%</Badge>
+                          <Badge variant="outline" className="badge-interactive text-[9px] h-4">{m.weight}%</Badge>
                         </span>
                         <div className="flex items-center gap-2">
                           <span className="text-[9px] text-muted-foreground">{m.target}</span>
@@ -1716,7 +1716,7 @@ function SupplierQualityDetailDrawer({ open, onOpenChange, supplier }: SupplierQ
         </div>
 
         <SheetFooter className="border-t px-4 py-3 flex-row gap-2">
-          <Button variant="outline" size="sm" className="h-8 text-xs flex-1" onClick={handleExportScorecard}>
+          <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={handleExportScorecard}>
             <Download className="h-3 w-3 mr-1" /> Export Scorecard
           </Button>
           {(supplier.grade === "critical" || supplier.grade === "watch") && (

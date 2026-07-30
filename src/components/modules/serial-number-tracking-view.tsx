@@ -942,7 +942,7 @@ export default function SerialNumberTrackingView() {
                           </span>
                         </td>
                         <td>
-                          <Button size="sm" variant="outline" className="sn-action-btn" onClick={() => openDrawer(s)}>
+                          <Button size="sm" variant="outline" className="btn-outline-animate sn-action-btn" onClick={() => openDrawer(s)}>
                             <Eye className="w-3.5 h-3.5" />
                           </Button>
                         </td>

@@ -824,7 +824,7 @@ export default function WarehouseOpsCommandView() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {DATA.kpis.map(kpi => (
               <Card key={kpi.label} className="woc-kpi-card">
-                <CardContent className="p-4 flex items-start gap-3">
+                <CardContent className="glass-subtle p-4 flex items-start gap-3">
                   <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `${kpi.color}18`, color: kpi.color }}>
                     <kpi.icon className="h-5 w-5" />
                   </div>
@@ -940,9 +940,9 @@ export default function WarehouseOpsCommandView() {
 
           {/* Table */}
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow>
                       <TableHead className="text-xs cursor-pointer" onClick={() => handleSort("name")}>Dock <SortIcon field="name" sortField={sortField} /></TableHead>
@@ -968,7 +968,7 @@ export default function WarehouseOpsCommandView() {
                         <TableCell><AppointmentTimeBadge status={dock.appointmentStatus} /></TableCell>
                         <TableCell><DockUtilizationBar pct={dock.utilization} /></TableCell>
                         <TableCell className="text-xs">{dock.driverName}</TableCell>
-                        <TableCell className="text-xs">{dock.cargoWeight.toLocaleString()}</TableCell>
+                        <TableCell className="numeric-cell text-xs">{dock.cargoWeight.toLocaleString()}</TableCell>
                         <TableCell><Eye className="h-3.5 w-3.5 text-slate-400" /></TableCell>
                       </TableRow>
                     ))}
@@ -1001,9 +1001,9 @@ export default function WarehouseOpsCommandView() {
           </Card>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow>
                       <TableHead className="text-xs cursor-pointer" onClick={() => handleSort("name")}>Name <SortIcon field="name" sortField={sortField} /></TableHead>
@@ -1029,7 +1029,7 @@ export default function WarehouseOpsCommandView() {
                         <TableCell className="text-xs">{w.performanceLevel}</TableCell>
                         <TableCell><ShiftProgressRing elapsed={w.shiftElapsed} total={w.shiftTotal} /></TableCell>
                         <TableCell className="text-xs">{w.tasksCompleted}/{w.tasksAssigned}</TableCell>
-                        <TableCell className="text-xs">₹{w.hourlyRate}</TableCell>
+                        <TableCell className="numeric-cell text-xs">₹{w.hourlyRate}</TableCell>
                         <TableCell><Eye className="h-3.5 w-3.5 text-slate-400" /></TableCell>
                       </TableRow>
                     ))}
@@ -1057,9 +1057,9 @@ export default function WarehouseOpsCommandView() {
           </div>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow>
                       <TableHead className="text-xs cursor-pointer" onClick={() => handleSort("poNumber")}>PO # <SortIcon field="poNumber" sortField={sortField} /></TableHead>
@@ -1085,7 +1085,7 @@ export default function WarehouseOpsCommandView() {
                         <TableCell className="text-xs">{rec.category}</TableCell>
                         <TableCell><VolumeIndicator expected={rec.expectedQty} received={rec.receivedQty} /></TableCell>
                         <TableCell><ETAIndicator eta={rec.eta} etaStatus={rec.etaStatus} /></TableCell>
-                        <TableCell className="text-xs">{formatINR(rec.value)}</TableCell>
+                        <TableCell className="numeric-cell text-xs">{formatINR(rec.value)}</TableCell>
                         <TableCell><Eye className="h-3.5 w-3.5 text-slate-400" /></TableCell>
                       </TableRow>
                     ))}
@@ -1113,9 +1113,9 @@ export default function WarehouseOpsCommandView() {
           </div>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow>
                       <TableHead className="text-xs cursor-pointer" onClick={() => handleSort("orderNo")}>Order # <SortIcon field="orderNo" sortField={sortField} /></TableHead>
@@ -1141,7 +1141,7 @@ export default function WarehouseOpsCommandView() {
                         <TableCell><SLATierBadge tier={rec.slaTier} /></TableCell>
                         <TableCell><SLACountdownTimer remaining={rec.slaRemaining} total={rec.slaHours} pct={rec.slaPct} /></TableCell>
                         <TableCell><DispatchReadinessBar readiness={rec.readiness} /></TableCell>
-                        <TableCell className="text-xs">{formatINR(rec.value)}</TableCell>
+                        <TableCell className="numeric-cell text-xs">{formatINR(rec.value)}</TableCell>
                         <TableCell><Eye className="h-3.5 w-3.5 text-slate-400" /></TableCell>
                       </TableRow>
                     ))}
@@ -1169,9 +1169,9 @@ export default function WarehouseOpsCommandView() {
           </div>
 
           <Card>
-            <CardContent className="p-0">
+            <CardContent className="glass-subtle p-0">
               <div className="max-h-[400px] overflow-y-auto">
-                <Table>
+                <Table className="table-hover-highlight">
                   <TableHeader>
                     <TableRow>
                       <TableHead className="text-xs cursor-pointer" onClick={() => handleSort("id")}>ID <SortIcon field="id" sortField={sortField} /></TableHead>
@@ -1197,7 +1197,7 @@ export default function WarehouseOpsCommandView() {
                         <TableCell><MeanTimeToResolve mttr={exc.mttr} /></TableCell>
                         <TableCell><ExceptionTrendBadge trend={exc.trend} /></TableCell>
                         <TableCell><IncidentTimeline statusIndex={exc.statusIndex} /></TableCell>
-                        <TableCell className="text-xs">{formatINR(exc.impactValue)}</TableCell>
+                        <TableCell className="numeric-cell text-xs">{formatINR(exc.impactValue)}</TableCell>
                         <TableCell><Eye className="h-3.5 w-3.5 text-slate-400" /></TableCell>
                       </TableRow>
                     ))}
@@ -1242,7 +1242,7 @@ export default function WarehouseOpsCommandView() {
                       <Button size="sm" className="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white" onClick={() => { toast.success("Dock assigned successfully"); setDrawerOpen(false); }}>
                         <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Assign
                       </Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.info("Dock released"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Dock released"); setDrawerOpen(false); }}>
                         <Package className="h-3.5 w-3.5 mr-1" /> Release
                       </Button>
                       <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.warning("Dock placed on hold"); setDrawerOpen(false); }}>
@@ -1280,7 +1280,7 @@ export default function WarehouseOpsCommandView() {
                       <Button size="sm" className="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white" onClick={() => { toast.success("Worker reassigned"); setDrawerOpen(false); }}>
                         <Users className="h-3.5 w-3.5 mr-1" /> Reassign
                       </Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.info("Break started"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Break started"); setDrawerOpen(false); }}>
                         <Timer className="h-3.5 w-3.5 mr-1" /> Break
                       </Button>
                       <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.warning("Worker released"); setDrawerOpen(false); }}>
@@ -1317,7 +1317,7 @@ export default function WarehouseOpsCommandView() {
                       <Button size="sm" className="flex-1 bg-orange-600 hover:bg-orange-700 text-white" onClick={() => { toast.success("Receiving started"); setDrawerOpen(false); }}>
                         <Package className="h-3.5 w-3.5 mr-1" /> Receive
                       </Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.info("Rescheduled"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.info("Rescheduled"); setDrawerOpen(false); }}>
                         <Clock className="h-3.5 w-3.5 mr-1" /> Reschedule
                       </Button>
                       <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.error("Shipment rejected"); setDrawerOpen(false); }}>
@@ -1355,7 +1355,7 @@ export default function WarehouseOpsCommandView() {
                       <Button size="sm" className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white" onClick={() => { toast.success("Order shipped"); setDrawerOpen(false); }}>
                         <Truck className="h-3.5 w-3.5 mr-1" /> Ship
                       </Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.warning("Order held"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Order held"); setDrawerOpen(false); }}>
                         <AlertTriangle className="h-3.5 w-3.5 mr-1" /> Hold
                       </Button>
                       <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.info("Priority upgraded"); setDrawerOpen(false); }}>
@@ -1396,7 +1396,7 @@ export default function WarehouseOpsCommandView() {
                       <Button size="sm" className="flex-1 bg-sky-600 hover:bg-sky-700 text-white" onClick={() => { toast.info("Exception acknowledged"); setDrawerOpen(false); }}>
                         <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Acknowledge
                       </Button>
-                      <Button size="sm" variant="outline" className="flex-1" onClick={() => { toast.warning("Exception escalated"); setDrawerOpen(false); }}>
+                      <Button size="sm" variant="outline" className="btn-outline-animate flex-1" onClick={() => { toast.warning("Exception escalated"); setDrawerOpen(false); }}>
                         <ArrowUpRight className="h-3.5 w-3.5 mr-1" /> Escalate
                       </Button>
                       <Button size="sm" variant="destructive" className="flex-1" onClick={() => { toast.success("Exception resolved"); setDrawerOpen(false); }}>

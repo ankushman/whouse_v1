@@ -142,7 +142,7 @@ export function ProductivityView() {
           { label: "Night Shift", value: `${summary.night}%`, icon: Moon, color: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
         ].map((item) => (
           <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
-            <CardContent className="flex items-center gap-3 p-4">
+            <CardContent className="glass-subtle flex items-center gap-3 p-4">
               <div className={cn("flex h-9 w-9 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-4 w-4" />
               </div>
@@ -224,7 +224,7 @@ export function ProductivityView() {
               View All
             </Button>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="glass-subtle space-y-3">
             {topPerformers.map((emp, idx) => {
               const rankIcon = idx === 0 ? <Medal className="h-4 w-4 text-amber-500" /> : idx === 1 ? <Medal className="h-4 w-4 text-slate-400" /> : idx === 2 ? <Medal className="h-4 w-4 text-amber-700" /> : <span className="text-xs text-muted-foreground">#{emp.rank}</span>
               return (

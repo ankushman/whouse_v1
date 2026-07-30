@@ -366,7 +366,7 @@ export default function DocumentManagementView() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {SUMMARY_KPIS.map((kpi) => (
                 <Card key={kpi.label} className="dmw-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 dmw-kpi-icon" />
                       <span className={cn("dmw-trend-badge", kpi.trend === "up" ? "dmw-trend-up" : "dmw-trend-down")}>
@@ -529,7 +529,7 @@ export default function DocumentManagementView() {
                 { label: "Locked", value: documents.filter((d) => d.isLocked).length },
               ].map((s) => (
                 <Card key={s.label} className="dmw-stat-mini">
-                  <CardContent className="p-2 text-center">
+                  <CardContent className="glass-subtle p-2 text-center">
                     <div className="text-sm font-bold">{s.value}</div>
                     <div className="text-[10px] opacity-60">{s.label}</div>
                   </CardContent>
@@ -538,10 +538,10 @@ export default function DocumentManagementView() {
             </div>
 
             {/* Documents Table */}
-            <Card className="dmw-table-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift dmw-table-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="dmw-table-header">
                         <TableHead className="dmw-th">ID</TableHead>
@@ -569,15 +569,15 @@ export default function DocumentManagementView() {
                           </TableCell>
                           <TableCell className="dmw-td text-xs">{doc.category}</TableCell>
                           <TableCell className="dmw-td">
-                            <Badge className="dmw-filetype-badge text-[10px]">{doc.fileType}</Badge>
+                            <Badge className="badge-interactive dmw-filetype-badge text-[10px]">{doc.fileType}</Badge>
                           </TableCell>
                           <TableCell className="dmw-td text-xs font-mono">{doc.version}</TableCell>
                           <TableCell className="dmw-td text-xs">{doc.author.name}</TableCell>
-                          <TableCell className="dmw-td"><Badge className={cn(CLASS_COLORS[doc.classification], "text-[10px]")}>{doc.classification}</Badge></TableCell>
+                          <TableCell className="badge-interactive dmw-td"><Badge className={cn(CLASS_COLORS[doc.classification], "text-[10px]")}>{doc.classification}</Badge></TableCell>
                           <TableCell className="dmw-td text-xs">{doc.warehouse}</TableCell>
                           <TableCell className="dmw-td text-xs">{doc.retention}</TableCell>
                           <TableCell className="dmw-td text-xs font-mono">{doc.downloads}</TableCell>
-                          <TableCell className="dmw-td"><Badge className={cn(STATUS_COLORS[doc.status], "text-[10px]")}>{doc.status}</Badge></TableCell>
+                          <TableCell className="badge-interactive dmw-td"><Badge className={cn(STATUS_COLORS[doc.status], "text-[10px]")}>{doc.status}</Badge></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -613,7 +613,7 @@ export default function DocumentManagementView() {
                 { label: "Completed", value: String(workflows.filter((w) => w.status === "Completed").length), color: "dmw-sum-card-cyan" },
               ].map((c) => (
                 <Card key={c.label} className={c.color}>
-                  <CardContent className="p-3 text-center">
+                  <CardContent className="glass-subtle p-3 text-center">
                     <div className="text-lg font-bold">{c.value}</div>
                     <div className="text-xs opacity-70">{c.label}</div>
                   </CardContent>
@@ -668,7 +668,7 @@ export default function DocumentManagementView() {
                     <div key={wf.id} className="dmw-wf-card p-3 rounded-xl border">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <Badge className="dmw-wf-id font-mono text-[10px]">{wf.id}</Badge>
+                          <Badge className="badge-interactive dmw-wf-id font-mono text-[10px]">{wf.id}</Badge>
                           <Badge className={cn(STATUS_COLORS[wf.status], "text-[10px]")}>{wf.status}</Badge>
                         </div>
                         <Badge className={cn(PRIORITY_COLORS[wf.priority], "text-[10px]")}>{wf.priority}</Badge>
@@ -726,7 +726,7 @@ export default function DocumentManagementView() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredTemplates.map((tpl) => (
                 <Card key={tpl.id} className="dmw-tpl-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="dmw-tpl-avatar">
@@ -750,7 +750,7 @@ export default function DocumentManagementView() {
                       <div className="dmw-owner-avatar">
                         <span className="text-[10px] font-bold">{tpl.owner.avatar}</span>
                       </div>
-                      <Button variant="outline" size="sm" className="dmw-use-btn text-xs">
+                      <Button variant="outline" size="sm" className="btn-outline-animate dmw-use-btn text-xs">
                         <Download className="h-3 w-3 mr-1" /> Use Template
                       </Button>
                     </div>
@@ -771,7 +771,7 @@ export default function DocumentManagementView() {
                 { label: "Workflow SLA", value: `${rInt(85, 98)}%`, sub: "Met on time" },
               ].map((k) => (
                 <Card key={k.label} className="dmw-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="dmw-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="dmw-kpi-label text-xs">{k.label}</div>
                     <div className="dmw-kpi-sub text-xs">{k.sub}</div>
@@ -874,9 +874,9 @@ export default function DocumentManagementView() {
               <CardHeader className="pb-2">
                 <CardTitle className="dmw-chart-title text-sm">Recent Version History</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="dmw-table-header">
                         <TableHead className="dmw-th">Version ID</TableHead>
@@ -931,10 +931,12 @@ export default function DocumentManagementView() {
                 </Button>
               </div>
               <div className="flex items-center gap-2 mt-3">
+<div className="chip-group">
                 <Badge className={cn(STATUS_COLORS[selectedDoc.status])}>{selectedDoc.status}</Badge>
                 <Badge className={cn(CLASS_COLORS[selectedDoc.classification])}>{selectedDoc.classification}</Badge>
-                <Badge className="dmw-badge-trend dmw-badge-trend-up flex items-center gap-1"><Download className="h-3 w-3" /> {selectedDoc.downloads}</Badge>
-                {selectedDoc.isLocked && <Badge className="dmw-badge-locked"><Lock className="h-3 w-3 mr-1" /> Locked</Badge>}
+                <Badge className="badge-interactive dmw-badge-trend dmw-badge-trend-up flex items-center gap-1"><Download className="h-3 w-3" /> {selectedDoc.downloads}</Badge>
+                {selectedDoc.isLocked && <Badge className="badge-interactive dmw-badge-locked"><Lock className="h-3 w-3 mr-1" /> Locked</Badge>}
+</div>
               </div>
             </div>
 
@@ -1011,7 +1013,7 @@ export default function DocumentManagementView() {
                 <h3 className="dmw-section-title text-sm font-semibold mb-2">Tags</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedDoc.tags.map((tag) => (
-                    <Badge key={tag} className="dmw-tag-badge text-xs"><Tag className="h-3 w-3 mr-1" />{tag}</Badge>
+                    <Badge key={tag} className="badge-interactive dmw-tag-badge text-xs"><Tag className="h-3 w-3 mr-1" />{tag}</Badge>
                   ))}
                 </div>
               </div>
@@ -1048,12 +1050,12 @@ export default function DocumentManagementView() {
               <div>
                 <h3 className="dmw-section-title text-sm font-semibold mb-2">Actions</h3>
                 <div className="flex flex-wrap gap-2">
-                  <Button variant="outline" size="sm" className="dmw-action-btn text-xs"><Download className="h-3 w-3 mr-1" /> Download</Button>
-                  <Button variant="outline" size="sm" className="dmw-action-btn text-xs"><Eye className="h-3 w-3 mr-1" /> Preview</Button>
-                  <Button variant="outline" size="sm" className="dmw-action-btn text-xs"><Edit className="h-3 w-3 mr-1" /> Edit</Button>
-                  <Button variant="outline" size="sm" className="dmw-action-btn text-xs"><Paperclip className="h-3 w-3 mr-1" /> Attach</Button>
-                  <Button variant="outline" size="sm" className="dmw-action-btn text-xs"><RotateCcw className="h-3 w-3 mr-1" /> Version</Button>
-                  <Button variant="outline" size="sm" className="dmw-action-btn text-xs"><Archive className="h-3 w-3 mr-1" /> Archive</Button>
+                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Download className="h-3 w-3 mr-1" /> Download</Button>
+                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Eye className="h-3 w-3 mr-1" /> Preview</Button>
+                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Edit className="h-3 w-3 mr-1" /> Edit</Button>
+                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Paperclip className="h-3 w-3 mr-1" /> Attach</Button>
+                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><RotateCcw className="h-3 w-3 mr-1" /> Version</Button>
+                  <Button variant="outline" size="sm" className="btn-outline-animate dmw-action-btn text-xs"><Archive className="h-3 w-3 mr-1" /> Archive</Button>
                 </div>
               </div>
             </div>

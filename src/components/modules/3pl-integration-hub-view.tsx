@@ -406,7 +406,7 @@ export default function ThreePLIntegrationHubView() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {dashKPIs.map((kpi, i) => (
               <Card key={i} className="tpl-kpi-card">
-                <CardContent className="p-3 flex items-center gap-3">
+                <CardContent className="glass-subtle p-3 flex items-center gap-3">
                   <div className={cn("h-9 w-9 rounded-lg flex items-center justify-center shrink-0", kpi.bg)}><kpi.icon className={cn("h-4 w-4", kpi.color)} /></div>
                   <div><p className="text-[10px] text-muted-foreground font-medium">{kpi.label}</p><p className={cn("text-lg font-bold leading-tight", kpi.color)}>{kpi.value}</p></div>
                 </CardContent>
@@ -426,7 +426,7 @@ export default function ThreePLIntegrationHubView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" /><Input placeholder="Search partners..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="h-9 pl-8 text-xs" /></div>
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 w-[140px] text-xs"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">All Status</SelectItem>{PARTNER_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="p-0"><Table><TableHeader><TableRow className="tpl-table-header">
+          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
             <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
             <SortHeader label="Company" field="company" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
             <TableHead className="text-xs">Type</TableHead>
@@ -450,7 +450,7 @@ export default function ThreePLIntegrationHubView() {
                 <TableCell><RatingBar rating={p.rating} /></TableCell>
                 <TableCell className="text-[10px] font-mono">{p.fleet}</TableCell>
                 <TableCell className="text-[10px] font-mono">{p.orders.toLocaleString("en-IN")}</TableCell>
-                <TableCell className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">{formatINR(p.revenue)}</TableCell>
+                <TableCell className="numeric-cell text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">{formatINR(p.revenue)}</TableCell>
                 <TableCell><Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => { setSelectedPartner(p); setSelectedOrder(null); setSelectedAPI(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
               </TableRow>
             ))}
@@ -463,7 +463,7 @@ export default function ThreePLIntegrationHubView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" /><Input placeholder="Search orders..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="h-9 pl-8 text-xs" /></div>
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 w-[140px] text-xs"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">All Status</SelectItem>{INTEGRATION_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="p-0"><Table><TableHeader><TableRow className="tpl-table-header">
+          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
             <SortHeader label="Order ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
             <TableHead className="text-xs">Partner</TableHead>
             <TableHead className="text-xs">Warehouse</TableHead>
@@ -482,10 +482,10 @@ export default function ThreePLIntegrationHubView() {
                 <TableCell className="text-[10px]">{o.warehouse}</TableCell>
                 <TableCell><IntegrationStatusBadge status={o.status} /></TableCell>
                 <TableCell className="text-[10px]">{o.orderType}</TableCell>
-                <TableCell><Badge variant="outline" className="text-[9px] h-5">{o.source}</Badge></TableCell>
+                <TableCell><Badge variant="outline" className="badge-interactive text-[9px] h-5">{o.source}</Badge></TableCell>
                 <TableCell className="text-[10px] font-mono">{o.syncTime}</TableCell>
                 <TableCell><RetryBadge count={o.retryCount} /></TableCell>
-                <TableCell className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400">{formatINR(o.value)}</TableCell>
+                <TableCell className="numeric-cell text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400">{formatINR(o.value)}</TableCell>
                 <TableCell><Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => { setSelectedOrder(o); setSelectedPartner(null); setSelectedAPI(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
               </TableRow>
             ))}
@@ -498,7 +498,7 @@ export default function ThreePLIntegrationHubView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-muted-foreground" /><Input placeholder="Search endpoints..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="h-9 pl-8 text-xs" /></div>
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-9 w-[140px] text-xs"><SelectValue /></SelectTrigger><SelectContent><SelectItem value="all">All Status</SelectItem>{API_STATUSES.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="p-0"><Table><TableHeader><TableRow className="tpl-table-header">
+          <Card><CardContent className="glass-subtle p-0"><Table><TableHeader><TableRow className="tpl-table-header">
             <TableHead className="text-xs">ID</TableHead>
             <TableHead className="text-xs">Method</TableHead>
             <TableHead className="text-xs">Endpoint</TableHead>
@@ -520,7 +520,7 @@ export default function ThreePLIntegrationHubView() {
                 <TableCell className="text-[10px] font-mono">{a.requestsToday.toLocaleString("en-IN")}</TableCell>
                 <TableCell><ErrorRateBar rate={a.errorRate} /></TableCell>
                 <TableCell className="text-[10px] font-mono">{a.uptime.toFixed(2)}%</TableCell>
-                <TableCell><Badge variant="outline" className="text-[9px] h-5">{a.version}</Badge></TableCell>
+                <TableCell><Badge variant="outline" className="badge-interactive text-[9px] h-5">{a.version}</Badge></TableCell>
                 <TableCell><Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => { setSelectedAPI(a); setSelectedPartner(null); setSelectedOrder(null); setSelectedContract(null); setSheetOpen(true) }}><Eye className="h-3.5 w-3.5" /></Button></TableCell>
               </TableRow>
             ))}
@@ -540,7 +540,7 @@ export default function ThreePLIntegrationHubView() {
                   <div className="flex items-center justify-between"><span className="text-[10px] font-mono text-white/80">{c.id}</span><ContractStatusBadge status={c.status} /></div>
                   <p className="text-sm font-bold text-white mt-0.5 truncate">{c.partner}</p>
                 </div>
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between"><PartnerTypeBadge type={c.type} /><BillingCycleBadge cycle={c.billingCycle} /></div>
                   <Separator />
                   <div className="grid grid-cols-2 gap-1.5 text-[10px]">
@@ -561,7 +561,7 @@ export default function ThreePLIntegrationHubView() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {analyticsKPIs.map((kpi, i) => (
               <Card key={i} className="tpl-kpi-card">
-                <CardContent className="p-3 flex items-center gap-3">
+                <CardContent className="glass-subtle p-3 flex items-center gap-3">
                   <div className={cn("h-9 w-9 rounded-lg flex items-center justify-center shrink-0", kpi.bg)}><kpi.icon className={cn("h-4 w-4", kpi.color)} /></div>
                   <div><p className="text-[10px] text-muted-foreground font-medium">{kpi.label}</p><p className={cn("text-lg font-bold leading-tight", kpi.color)}>{kpi.value}</p></div>
                 </CardContent>
@@ -603,7 +603,7 @@ export default function ThreePLIntegrationHubView() {
               <div className="space-y-3">
                 <div className="tpl-sheet-header bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-lg p-4">
                   <p className="text-lg font-bold text-white">{selectedOrder.id}</p>
-                  <div className="flex items-center gap-2 mt-1"><IntegrationStatusBadge status={selectedOrder.status} /><Badge variant="outline" className="text-[9px] text-white/80">{selectedOrder.source}</Badge></div>
+                  <div className="badge-interactive flex items-center gap-2 mt-1"><IntegrationStatusBadge status={selectedOrder.status} /><Badge variant="outline" className="text-[9px] text-white/80">{selectedOrder.source}</Badge></div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {[["Order ID", selectedOrder.id], ["Partner", selectedOrder.partner], ["Warehouse", selectedOrder.warehouse], ["Status", selectedOrder.status], ["Order Type", selectedOrder.orderType], ["Source System", selectedOrder.source], ["Sync Time", selectedOrder.syncTime], ["Retry Count", selectedOrder.retryCount.toString()], ["Value", formatINR(selectedOrder.value)], ["Timestamp", selectedOrder.timestamp]].map(([k, v]) => (
@@ -616,7 +616,7 @@ export default function ThreePLIntegrationHubView() {
               <div className="space-y-3">
                 <div className="tpl-sheet-header bg-gradient-to-r from-indigo-600 to-cyan-600 rounded-lg p-4">
                   <div className="flex items-center gap-2"><MethodBadge method={selectedAPI.method} /><p className="text-lg font-bold text-white">{selectedAPI.path}</p></div>
-                  <div className="flex items-center gap-2 mt-1"><APIStatusBadge status={selectedAPI.status} /><Badge variant="outline" className="text-[9px] text-white/80">{selectedAPI.version}</Badge></div>
+                  <div className="badge-interactive flex items-center gap-2 mt-1"><APIStatusBadge status={selectedAPI.status} /><Badge variant="outline" className="text-[9px] text-white/80">{selectedAPI.version}</Badge></div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {[["API ID", selectedAPI.id], ["Method", selectedAPI.method], ["Path", selectedAPI.path], ["Status", selectedAPI.status], ["Response Time", `${selectedAPI.responseTime}ms`], ["Requests Today", selectedAPI.requestsToday.toLocaleString("en-IN")], ["Error Rate", `${(selectedAPI.errorRate * 100).toFixed(1)}%`], ["Uptime", `${selectedAPI.uptime.toFixed(2)}%`], ["Last Ping", selectedAPI.lastPing], ["Version", selectedAPI.version]].map(([k, v]) => (
@@ -640,8 +640,8 @@ export default function ThreePLIntegrationHubView() {
             )}
           </div>
           <div className="border-t px-4 py-3 flex-row gap-2 flex">
-            <Button variant="outline" size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
-            <Button variant="outline" size="sm" className="h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
+            <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.success("Exported", "Record exported successfully")}><Download className="h-3 w-3 mr-1" /> Export</Button>
+            <Button variant="outline" size="sm" className="btn-outline-animate h-8 text-xs flex-1" onClick={() => toast.info("Refreshed", "Data refreshed")}><RefreshCw className="h-3 w-3 mr-1" /> Refresh</Button>
             <Button size="sm" className="h-8 text-xs flex-1" onClick={() => toast.success("Saved", "Changes saved")}><CheckCircle2 className="h-3 w-3 mr-1" /> Save</Button>
           </div>
         </SheetContent>

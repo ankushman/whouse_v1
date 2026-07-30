@@ -199,7 +199,7 @@ function CostBreakdownVisual({ energy, demand, fixed, total }: { energy: number;
 function HealthTile({ label, value, target, unit, color }: { label: string; value: number; target: number; unit: string; color: string }) {
   const pct = Math.min(Math.round(value / target * 100), 100)
   return (
-    <Card className="wem-health-tile border-border/60"><CardContent className="p-4">
+    <Card className="glass-subtle wem-health-tile border-border/60"><CardContent className="p-4">
       <div className="flex justify-between items-center mb-2"><span className="text-[10px] text-muted-foreground uppercase tracking-wide">{label}</span><span className={cn("text-xs font-bold", color)}>{value}{unit}</span></div>
       <div className="w-full h-2 rounded bg-muted overflow-hidden"><div className="h-full rounded transition-all" style={{ width: `${pct}%`, backgroundColor: color }} /></div>
       <p className="text-[10px] text-muted-foreground mt-1">Target: {target}{unit}</p>
@@ -241,7 +241,7 @@ export default function WarehouseEnergyManagementView() {
   const DrawerActions = ({ id, name }: { id: string; name: string }) => (
     <div className="flex gap-2 pt-2">
       {[{ label: "Edit", icon: Zap }, { label: "Details", icon: Target }, { label: "Report", icon: BarChart3 }].map(a => (
-        <Button key={a.label} variant="outline" size="sm" className="wem-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+        <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate wem-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${id} ${a.label.toLowerCase()} action triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
       ))}
     </div>
   )
@@ -280,7 +280,7 @@ export default function WarehouseEnergyManagementView() {
       <div className="wem-dashboard space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {kpis.map(k => (
-            <Card key={k.label} className="wem-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+            <Card key={k.label} className="glass-subtle wem-kpi-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
               <div className={cn("wem-kpi-icon p-2 rounded-lg", k.bg)}><k.icon className={cn("h-4 w-4", k.color)} /></div>
               <div><p className="text-[10px] text-muted-foreground uppercase tracking-wide">{k.label}</p><p className={cn("text-lg font-bold", k.color)}>{k.value}</p></div>
             </CardContent></Card>
@@ -374,7 +374,7 @@ export default function WarehouseEnergyManagementView() {
             const totalGen = wh.reduce((a, s) => a + s.generationKWh, 0)
             const selfSuff = wh.length ? Math.round(wh.reduce((a, s) => a + s.selfSufficiencyPct, 0) / wh.length) : 0
             return (
-              <Card key={w} className="wem-wh-solar-card border-border/60"><CardContent className="p-3">
+              <Card key={w} className="glass-subtle wem-wh-solar-card border-border/60"><CardContent className="p-3">
                 <p className="text-[10px] text-muted-foreground mb-1">{w}</p>
                 <p className="text-sm font-bold text-emerald-700">{totalCap} kW</p>
                 <div className="w-full h-1.5 rounded bg-muted mt-1 mb-1"><div className="h-full rounded bg-emerald-500" style={{ width: `${Math.min(totalCap / 1500 * 100, 100)}%` }} /></div>
@@ -394,7 +394,7 @@ export default function WarehouseEnergyManagementView() {
         </TableRow></TableHeader><TableBody>{rows.slice(0, 15).map(s => (
           <TableRow key={s.id} className="wem-solar-row">
             <TableCell className="text-xs font-mono">{s.id}</TableCell><TableCell className="text-[10px]">{s.warehouse}</TableCell>
-            <TableCell><Badge variant="outline" className="text-[10px]">{s.panelType}</Badge></TableCell>
+            <TableCell><Badge variant="outline" className="badge-interactive text-[10px]">{s.panelType}</Badge></TableCell>
             <TableCell className="text-xs">{s.capacityKW} kW</TableCell><TableCell className="text-xs">{s.generationKWh.toLocaleString()} kWh</TableCell>
             <TableCell><Badge className={cn("text-[10px]", s.performancePct >= 80 ? "bg-emerald-100 text-emerald-700" : s.performancePct >= 60 ? "bg-amber-100 text-amber-700" : "bg-rose-100 text-rose-700")}>{s.performancePct}%</Badge></TableCell>
             <TableCell><Badge className={cn("text-[10px]", s.selfSufficiencyPct >= 50 ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700")}>{s.selfSufficiencyPct}%</Badge></TableCell>
@@ -429,7 +429,7 @@ export default function WarehouseEnergyManagementView() {
               </Pie><Tooltip contentStyle={{ fontSize: 11 }} /><Legend iconSize={8} wrapperStyle={{ fontSize: 10 }} />
             </PieChart></ResponsiveContainer>
           </CardContent></Card>
-          <Card className="wem-savings-card border-border/60"><CardContent className="p-4 space-y-2">
+          <Card className="glass-subtle wem-savings-card border-border/60"><CardContent className="p-4 space-y-2">
             <div className="flex items-center gap-2"><TrendingUp className="h-4 w-4 text-emerald-600" /><span className="text-sm font-medium">Total Annual Savings</span></div>
             <p className="text-2xl font-bold text-emerald-600">{fmtINR(data.costs.reduce((a, c) => a + c.totalCost, 0) * 0.12)}</p>
             <p className="text-xs text-muted-foreground">Estimated 12% reduction via optimization</p>
@@ -450,9 +450,9 @@ export default function WarehouseEnergyManagementView() {
         </TableRow></TableHeader><TableBody>{rows.slice(0, 15).map(c => (
           <TableRow key={c.id} className="wem-cost-row">
             <TableCell className="text-xs font-mono">{c.id}</TableCell><TableCell className="text-[10px]">{c.warehouse}</TableCell>
-            <TableCell><Badge variant="outline" className="text-[10px]">{c.category}</Badge></TableCell>
-            <TableCell className="text-xs">{c.consumptionKWh.toLocaleString()}</TableCell><TableCell className="text-xs">\u20b9{c.ratePerKWh}/kWh</TableCell>
-            <TableCell className="text-xs font-medium">{fmtINR(c.totalCost)}</TableCell><TableCell className="text-[10px]">{c.period}</TableCell><ActBtn d={c} t="cost" />
+            <TableCell><Badge variant="outline" className="badge-interactive text-[10px]">{c.category}</Badge></TableCell>
+            <TableCell className="numeric-cell text-xs">{c.consumptionKWh.toLocaleString()}</TableCell><TableCell className="text-xs">\u20b9{c.ratePerKWh}/kWh</TableCell>
+            <TableCell className="numeric-cell text-xs font-medium">{fmtINR(c.totalCost)}</TableCell><TableCell className="text-[10px]">{c.period}</TableCell><ActBtn d={c} t="cost" />
           </TableRow>
         ))}</TableBody></Table></div>
       </div>
@@ -530,7 +530,7 @@ export default function WarehouseEnergyManagementView() {
           <Input placeholder="Search optimizations..." value={search} onChange={e => setSearch(e.target.value)} className="wem-search h-8 text-xs w-60" />
         </div>
         <div className="grid lg:grid-cols-2 gap-4">
-          <Card className="wem-alerts-list border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Energy Alerts</CardTitle></CardHeader><CardContent className="space-y-2 max-h-80 overflow-y-auto">
+          <Card className="glass-subtle wem-alerts-list border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Energy Alerts</CardTitle></CardHeader><CardContent className="space-y-2 max-h-80 overflow-y-auto">
             {filteredAlerts.slice(0, 12).map(a => (
               <div key={a.id} className={cn("wem-alert-item flex items-start gap-3 p-2.5 rounded-lg border-l-4", a.severity === "Critical" ? "border-l-rose-600 bg-rose-50 dark:bg-rose-950/20" : a.severity === "Warning" ? "border-l-amber-500 bg-amber-50 dark:bg-amber-950/20" : a.severity === "Info" ? "border-l-sky-500 bg-sky-50 dark:bg-sky-950/20" : "border-l-emerald-500 bg-emerald-50 dark:bg-emerald-950/20")}>
                 <AlertBadge severity={a.severity} />
@@ -539,7 +539,7 @@ export default function WarehouseEnergyManagementView() {
               </div>
             ))}
           </CardContent></Card>
-          <Card className="wem-opts-list border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Optimization Recommendations</CardTitle></CardHeader><CardContent className="space-y-2 max-h-80 overflow-y-auto">
+          <Card className="glass-subtle wem-opts-list border-border/60"><CardHeader className="pb-2"><CardTitle className="text-sm">Optimization Recommendations</CardTitle></CardHeader><CardContent className="space-y-2 max-h-80 overflow-y-auto">
             {filteredOpts.slice(0, 12).map(o => (
               <div key={o.id} className="wem-opt-item flex items-start gap-3 p-2.5 rounded-lg border border-border/60 hover:bg-muted/30 transition-colors">
                 <div className="flex-1 min-w-0">
@@ -581,14 +581,14 @@ export default function WarehouseEnergyManagementView() {
       {/* Equipment Drawer */}
       <Sheet open={open && drawerType === "equipment"} onOpenChange={close}><SheetContent className="wem-eq-drawer w-full sm:max-w-md overflow-y-auto">
         {drawerData && <><DrawerHeader title={`${drawerData.name} ${drawerData.id}`} >
-          <Badge className="bg-white/20 text-white text-[10px] border-0">{drawerData.type}</Badge><SBadge status={drawerData.status} />
+          <Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.type}</Badge><SBadge status={drawerData.status} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Power", value: `${drawerData.powerKW} kW` },
             { label: "Op. Hours", value: `${drawerData.operatingHrs.toLocaleString()}h` },
             { label: "Annual Cost", value: fmtINR(drawerData.annualCost) },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-emerald-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-emerald-700">{m.value}</p></CardContent></Card>))}</div>
           <div className="flex items-center gap-3"><span className="text-xs text-muted-foreground">Efficiency:</span><EfficiencyBadge grade={drawerData.efficiency} /><span className="text-xs text-muted-foreground">Power:</span><PowerBadge power={drawerData.powerKW} /></div>
           <InfoGrid items={[["Warehouse", drawerData.warehouse], ["Type", drawerData.type], ["Status", drawerData.status], ["Last Maint.", drawerData.lastMaint], ["ID", drawerData.id], ["Efficiency", drawerData.efficiency]]} />
           <DrawerActions id={drawerData.id} name={drawerData.name} />
@@ -598,15 +598,15 @@ export default function WarehouseEnergyManagementView() {
       {/* Solar Drawer */}
       <Sheet open={open && drawerType === "solar"} onOpenChange={close}><SheetContent className="wem-solar-drawer w-full sm:max-w-md overflow-y-auto">
         {drawerData && <><DrawerHeader title={`${drawerData.warehouse} Solar ${drawerData.id}`} >
-          <Badge className="bg-white/20 text-white text-[10px] border-0">{drawerData.panelType}</Badge><SBadge status={drawerData.status} />
+          <Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.panelType}</Badge><SBadge status={drawerData.status} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Generation vs Capacity</p><SolarProgressBar capacity={drawerData.capacityKW} generation={drawerData.generationKWh} /></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Generation vs Capacity</p><SolarProgressBar capacity={drawerData.capacityKW} generation={drawerData.generationKWh} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Capacity", value: `${drawerData.capacityKW} kW` },
             { label: "Self-Suff.", value: `${drawerData.selfSufficiencyPct}%` },
             { label: "Savings", value: fmtINR(drawerData.annualSavings) },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-emerald-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-emerald-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Warehouse", drawerData.warehouse], ["Panel Type", drawerData.panelType], ["Status", drawerData.status], ["Performance", `${drawerData.performancePct}%`], ["Area", `${drawerData.area} sqft`], ["Installed", drawerData.installedDate]]} />
           <DrawerActions id={drawerData.id} name={drawerData.warehouse} />
         </div></>}
@@ -615,7 +615,7 @@ export default function WarehouseEnergyManagementView() {
       {/* Cost Drawer */}
       <Sheet open={open && drawerType === "cost"} onOpenChange={close}><SheetContent className="wem-cost-drawer w-full sm:max-w-md overflow-y-auto">
         {drawerData && <><DrawerHeader title={`${drawerData.id} — ${drawerData.warehouse}`} >
-          <Badge className="bg-white/20 text-white text-[10px] border-0">{drawerData.category}</Badge>
+          <Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.category}</Badge>
         </DrawerHeader>
         <div className="space-y-4 px-1">
           <Card className="border-border/60"><CardHeader className="pb-1"><CardTitle className="text-xs">Cost Breakdown</CardTitle></CardHeader><CardContent><CostBreakdownVisual energy={drawerData.consumptionKWh * drawerData.ratePerKWh} demand={drawerData.demandCharge} fixed={drawerData.fixedCharge} total={drawerData.totalCost} /></CardContent></Card>
@@ -623,7 +623,7 @@ export default function WarehouseEnergyManagementView() {
             { label: "Total Cost", value: fmtINR(drawerData.totalCost) },
             { label: "Rate", value: `\u20b9${drawerData.ratePerKWh}/kWh` },
             { label: "Period", value: drawerData.period },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700">{m.value}</p></CardContent></Card>))}</div>
           <DrawerActions id={drawerData.id} name={drawerData.warehouse} />
         </div></>}
       </SheetContent></Sheet>
@@ -631,15 +631,15 @@ export default function WarehouseEnergyManagementView() {
       {/* HVAC Drawer */}
       <Sheet open={open && drawerType === "hvac"} onOpenChange={close}><SheetContent className="wem-hvac-drawer w-full sm:max-w-md overflow-y-auto">
         {drawerData && <><DrawerHeader title={`${drawerData.zone} ${drawerData.id}`} >
-          <Badge className="bg-white/20 text-white text-[10px] border-0">{drawerData.type}</Badge><SBadge status={drawerData.status} />
+          <Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.type}</Badge><SBadge status={drawerData.status} />
         </DrawerHeader>
         <div className="space-y-4 px-1">
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Temperature Control</p><TemperatureGauge setPoint={drawerData.setPoint} actual={drawerData.actualTemp} /></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Temperature Control</p><TemperatureGauge setPoint={drawerData.setPoint} actual={drawerData.actualTemp} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">{[
             { label: "Humidity", value: `${drawerData.humidity}%` },
             { label: "Energy", value: `${(drawerData.energyKWh / 1000).toFixed(1)} MWh` },
             { label: "Deviation", value: `${drawerData.deviation.toFixed(1)}\u00b0C` },
-          ].map(m => (<Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-sky-700">{m.value}</p></CardContent></Card>))}</div>
+          ].map(m => (<Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-sky-700">{m.value}</p></CardContent></Card>))}</div>
           <InfoGrid items={[["Zone", drawerData.zone], ["Warehouse", drawerData.warehouse], ["Type", drawerData.type], ["Set Point", `${drawerData.setPoint}\u00b0C`], ["Actual", `${drawerData.actualTemp}\u00b0C`], ["Energy", `${drawerData.energyKWh.toLocaleString()} kWh`]]} />
           <DrawerActions id={drawerData.id} name={drawerData.zone} />
         </div></>}

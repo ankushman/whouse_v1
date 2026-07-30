@@ -374,7 +374,7 @@ export default function TallyIntegrationView() {
               </div>
 
               <div className="tally-table-wrapper overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <Table><TableHeader><TableRow>
+                <Table className="table-hover-highlight"><TableHeader><TableRow>
                   <TableHead className="text-[10px]">Sync ID</TableHead><TableHead className="text-[10px]">Voucher</TableHead>
                   <TableHead className="text-[10px]">Company</TableHead><TableHead className="text-[10px]">Doc Type</TableHead>
                   <TableHead className="text-[10px]">Ledger Dr</TableHead><TableHead className="text-[10px]">Ledger Cr</TableHead>
@@ -391,7 +391,7 @@ export default function TallyIntegrationView() {
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", DOC_COLORS[s.docType] || "tally-badge-purchase")}>{s.docType.split(" ")[0]}</Badge></TableCell>
                       <TableCell className="max-w-[100px] truncate">{s.ledgerDr}</TableCell>
                       <TableCell className="max-w-[100px] truncate">{s.ledgerCr}</TableCell>
-                      <TableCell className="font-mono font-medium">{fmtRupee(s.amount)}</TableCell>
+                      <TableCell className="numeric-cell font-mono font-medium">{fmtRupee(s.amount)}</TableCell>
                       <TableCell className="font-mono">{fmtRupee(s.gst)}</TableCell>
                       <TableCell><Badge className={cn("text-[9px] px-1.5 py-0", STATUS_COLORS[s.status])}>{s.status}</Badge></TableCell>
                       <TableCell className="tabular-nums">{s.syncTime}</TableCell>
@@ -446,7 +446,7 @@ export default function TallyIntegrationView() {
               </div>
 
               <div className="tally-table-wrapper overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <Table><TableHeader><TableRow>
+                <Table className="table-hover-highlight"><TableHeader><TableRow>
                   <TableHead className="text-[10px]">Ledger</TableHead><TableHead className="text-[10px]">Tally Bal ₹</TableHead>
                   <TableHead className="text-[10px]">WH Bal ₹</TableHead><TableHead className="text-[10px]">Difference ₹</TableHead>
                   <TableHead className="text-[10px]">Variance %</TableHead><TableHead className="text-[10px]">Status</TableHead>
@@ -511,7 +511,7 @@ export default function TallyIntegrationView() {
               </div>
 
               <div className="tally-table-wrapper overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <Table><TableHeader><TableRow>
+                <Table className="table-hover-highlight"><TableHeader><TableRow>
                   <TableHead className="text-[10px]">Period</TableHead><TableHead className="text-[10px]">GSTR-1</TableHead>
                   <TableHead className="text-[10px]">GSTR-3B</TableHead><TableHead className="text-[10px]">Filed Date</TableHead>
                   <TableHead className="text-[10px]">Late Fee ₹</TableHead><TableHead className="text-[10px]">Status</TableHead>
@@ -584,7 +584,7 @@ export default function TallyIntegrationView() {
               </div>
 
               <div className="tally-table-wrapper overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
-                <Table><TableHeader><TableRow>
+                <Table className="table-hover-highlight"><TableHeader><TableRow>
                   <TableHead className="text-[10px]">Error ID</TableHead><TableHead className="text-[10px]">Timestamp</TableHead>
                   <TableHead className="text-[10px]">Sync ID</TableHead><TableHead className="text-[10px]">Company</TableHead>
                   <TableHead className="text-[10px]">Error Type</TableHead><TableHead className="text-[10px] hidden md:table-cell">Message</TableHead>

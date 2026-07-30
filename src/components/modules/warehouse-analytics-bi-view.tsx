@@ -975,13 +975,13 @@ export default function WarehouseBIView() {
           <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700 gap-1">
             <Download className="h-3.5 w-3.5" /> Export Report
           </Button>
-          <Button size="sm" variant="outline" className="gap-1">
+          <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
             <RefreshCw className="h-3.5 w-3.5" /> Refresh Data
           </Button>
-          <Button size="sm" variant="outline" className="gap-1">
+          <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
             <Settings className="h-3.5 w-3.5" /> Configure KPIs
           </Button>
-          <Button size="sm" variant="outline" className="gap-1">
+          <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
             <FileText className="h-3.5 w-3.5" /> Schedule Report
           </Button>
         </div>
@@ -1113,10 +1113,10 @@ export default function WarehouseBIView() {
                 <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700 gap-1">
                   <BarChart3 className="h-3.5 w-3.5" /> Full Report
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <Download className="h-3.5 w-3.5" /> Export PDF
                 </Button>
-                <Button size="sm" variant="outline" className="gap-1">
+                <Button size="sm" variant="outline" className="btn-outline-animate gap-1">
                   <RefreshCw className="h-3.5 w-3.5" /> Compare
                 </Button>
               </div>
@@ -1144,7 +1144,7 @@ export default function WarehouseBIView() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Badge className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white border-0">
+          <Badge className="badge-interactive bg-gradient-to-r from-indigo-500 to-purple-600 text-white border-0">
             8 Warehouses
           </Badge>
           <Badge variant="outline">

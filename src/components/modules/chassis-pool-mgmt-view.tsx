@@ -217,11 +217,11 @@ function StatusBadge({ status, color }: { status: string; color: string }) {
 }
 function ChassisTypeBadge({ type }: { type: string }) {
   const c = TYPE_COLORS[type] || "#475569"
-  return <Badge className="cpm-type-badge text-xs px-2 py-0.5" style={{ background: c + "18", color: c, border: `1px solid ${c}30` }}>{type}</Badge>
+  return <Badge className="badge-interactive cpm-type-badge text-xs px-2 py-0.5" style={{ background: c + "18", color: c, border: `1px solid ${c}30` }}>{type}</Badge>
 }
 function ConditionBadge({ condition }: { condition: string }) {
   const c = CONDITION_COLORS[condition] || "#475569"
-  return <Badge className="cpm-cond-badge text-xs px-2 py-0.5" style={{ background: c + "18", color: c, border: `1px solid ${c}30` }}>{condition}</Badge>
+  return <Badge className="badge-interactive cpm-cond-badge text-xs px-2 py-0.5" style={{ background: c + "18", color: c, border: `1px solid ${c}30` }}>{condition}</Badge>
 }
 function TireBar({ pct }: { pct: number }) {
   const c = pct >= 70 ? "#059669" : pct >= 40 ? "#d97706" : "#dc2626"
@@ -235,13 +235,13 @@ function TireBar({ pct }: { pct: number }) {
   )
 }
 function LocationBadge({ loc }: { loc: string }) {
-  return <Badge variant="outline" className="cpm-loc-badge text-xs px-2 py-0.5 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300"><MapPin className="w-3 h-3 mr-0.5" />{loc}</Badge>
+  return <Badge variant="outline" className="badge-interactive cpm-loc-badge text-xs px-2 py-0.5 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300"><MapPin className="w-3 h-3 mr-0.5" />{loc}</Badge>
 }
 function CustomerBadge({ customer }: { customer: string }) {
-  return <Badge className="cpm-cust-badge text-xs px-2 py-0.5 bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">{customer}</Badge>
+  return <Badge className="badge-interactive cpm-cust-badge text-xs px-2 py-0.5 bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">{customer}</Badge>
 }
 function DurationBadge({ dur }: { dur: string }) {
-  return <Badge variant="outline" className="cpm-dur-badge text-xs px-2 py-0.5 border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400">{dur}</Badge>
+  return <Badge variant="outline" className="badge-interactive cpm-dur-badge text-xs px-2 py-0.5 border-amber-300 text-amber-700 dark:border-amber-700 dark:text-amber-400">{dur}</Badge>
 }
 function PickupDropTile({ from, to }: { from: string; to: string }) {
   return (
@@ -258,14 +258,14 @@ function CostTile({ amount }: { amount: number }) {
 function PriorityBadge({ priority }: { priority: string }) {
   const colors: Record<string, string> = { Critical: "#dc2626", High: "#ea580c", Medium: "#d97706", Low: "#3b82f6", Routine: "#6b7280" }
   const c = colors[priority] || "#475569"
-  return <Badge className="cpm-priority-badge text-xs px-2 py-0.5" style={{ background: c + "18", color: c, border: `1px solid ${c}30` }}>{priority}</Badge>
+  return <Badge className="badge-interactive cpm-priority-badge text-xs px-2 py-0.5" style={{ background: c + "18", color: c, border: `1px solid ${c}30` }}>{priority}</Badge>
 }
 function FacilityBadge({ facility }: { facility: string }) {
-  return <Badge variant="outline" className="cpm-facility-badge text-xs px-2 py-0.5 border-teal-300 dark:border-teal-700 text-teal-700 dark:text-teal-400">{facility}</Badge>
+  return <Badge variant="outline" className="badge-interactive cpm-facility-badge text-xs px-2 py-0.5 border-teal-300 dark:border-teal-700 text-teal-700 dark:text-teal-400">{facility}</Badge>
 }
 function PaymentMethodBadge({ method }: { method: string }) {
   const icons: Record<string, string> = { NEFT: "🏦", RTGS: "💳", UPI: "📱", Cheque: "📝", "Letter of Credit": "📄", Cash: "💵", "Bank Transfer": "🏧", "Net Banking": "🌐" }
-  return <Badge variant="outline" className="cpm-pay-badge text-xs px-2 py-0.5 border-slate-300 dark:border-slate-600">{icons[method] || "💰"} {method}</Badge>
+  return <Badge variant="outline" className="badge-interactive cpm-pay-badge text-xs px-2 py-0.5 border-slate-300 dark:border-slate-600">{icons[method] || "💰"} {method}</Badge>
 }
 function TaxTile({ tax }: { tax: number }) {
   const cgst = Math.round(tax / 2), sgst = Math.round(tax / 2)
@@ -379,7 +379,7 @@ export default function ChassisPoolMgmtView() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 cpm-shimmer">
             {kpis.map((kpi, i) => (
               <Card key={i} className={cn("cpm-kpi cpm-kpi-anim", kpiColorClasses[i])}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div><p className="text-xs text-muted-foreground">{kpi.label}</p><p className="text-xl font-bold tabular-nums mt-1">{kpi.value}</p></div>
                     <kpi.icon className="w-8 h-8 opacity-20" style={{ color: kpi.color }} />
@@ -401,7 +401,7 @@ export default function ChassisPoolMgmtView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" /><Input placeholder="Search chassis ID, serial, owner..." className="pl-9" value={search} onChange={e => setSearch(e.target.value)} /></div>
             <Select value={filterStatus} onValueChange={setFilterStatus}><SelectTrigger className="w-[160px]"><SelectValue placeholder="Filter status" /></SelectTrigger><SelectContent>{["all", ...data.CHASSIS_STATUSES].map(s => <SelectItem key={s} value={s}>{s === "all" ? "All Statuses" : s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["chassisId", "type", "status", "owner", "location", "condition", "year", "tirePct", "lastInspection", "serial"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab1">{filteredChassis.slice(0, 30).map((c, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(c as unknown as Record<string, unknown>); setDrawerType("chassis"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{c.chassisId}</TableCell><TableCell><ChassisTypeBadge type={c.type} /></TableCell><TableCell><StatusBadge status={c.status} color={data.STATUS_COLORS[c.status] || "#475569"} /></TableCell><TableCell className="text-xs">{c.owner}</TableCell><TableCell><LocationBadge loc={c.location} /></TableCell><TableCell><ConditionBadge condition={c.condition} /></TableCell><TableCell className="text-xs tabular-nums">{c.year}</TableCell><TableCell><TireBar pct={c.tirePct} /></TableCell><TableCell className="text-xs">{c.lastInspection}</TableCell><TableCell className="text-xs font-mono">{c.serial}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Details", `Chassis ${c.chassisId} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
+          <Card><CardContent className="glass-subtle p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["chassisId", "type", "status", "owner", "location", "condition", "year", "tirePct", "lastInspection", "serial"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab1">{filteredChassis.slice(0, 30).map((c, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(c as unknown as Record<string, unknown>); setDrawerType("chassis"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{c.chassisId}</TableCell><TableCell><ChassisTypeBadge type={c.type} /></TableCell><TableCell><StatusBadge status={c.status} color={data.STATUS_COLORS[c.status] || "#475569"} /></TableCell><TableCell className="text-xs">{c.owner}</TableCell><TableCell><LocationBadge loc={c.location} /></TableCell><TableCell><ConditionBadge condition={c.condition} /></TableCell><TableCell className="text-xs tabular-nums">{c.year}</TableCell><TableCell><TireBar pct={c.tirePct} /></TableCell><TableCell className="text-xs">{c.lastInspection}</TableCell><TableCell className="text-xs font-mono">{c.serial}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Details", `Chassis ${c.chassisId} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
         </TabsContent>
 
         {/* Tab 2: Allocation & Booking */}
@@ -410,7 +410,7 @@ export default function ChassisPoolMgmtView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" /><Input placeholder="Search allocation, customer..." className="pl-9" value={search} onChange={e => setSearch(e.target.value)} /></div>
             <Select value={filterStatus} onValueChange={setFilterStatus}><SelectTrigger className="w-[160px]"><SelectValue placeholder="Filter status" /></SelectTrigger><SelectContent>{["all", ...data.ALLOC_STATUSES].map(s => <SelectItem key={s} value={s}>{s === "all" ? "All Statuses" : s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["id", "allocationType", "status", "customer", "duration", "pickup", "dropoff", "cost", "startDate", "endDate"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab2">{filteredAlloc.slice(0, 30).map((a, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(a as unknown as Record<string, unknown>); setDrawerType("alloc"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{a.id}</TableCell><TableCell className="text-xs">{a.allocationType}</TableCell><TableCell><StatusBadge status={a.status} color={data.STATUS_COLORS[a.status] || "#475569"} /></TableCell><TableCell><CustomerBadge customer={a.customer} /></TableCell><TableCell><DurationBadge dur={a.duration} /></TableCell><TableCell className="text-xs">{a.pickup}</TableCell><TableCell className="text-xs">{a.dropoff}</TableCell><TableCell><CostTile amount={a.cost} /></TableCell><TableCell className="text-xs">{a.startDate}</TableCell><TableCell className="text-xs">{a.endDate}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Allocation", `${a.id} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
+          <Card><CardContent className="numeric-cell glass-subtle p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["id", "allocationType", "status", "customer", "duration", "pickup", "dropoff", "cost", "startDate", "endDate"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab2">{filteredAlloc.slice(0, 30).map((a, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(a as unknown as Record<string, unknown>); setDrawerType("alloc"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{a.id}</TableCell><TableCell className="text-xs">{a.allocationType}</TableCell><TableCell><StatusBadge status={a.status} color={data.STATUS_COLORS[a.status] || "#475569"} /></TableCell><TableCell><CustomerBadge customer={a.customer} /></TableCell><TableCell><DurationBadge dur={a.duration} /></TableCell><TableCell className="text-xs">{a.pickup}</TableCell><TableCell className="text-xs">{a.dropoff}</TableCell><TableCell><CostTile amount={a.cost} /></TableCell><TableCell className="text-xs">{a.startDate}</TableCell><TableCell className="text-xs">{a.endDate}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Allocation", `${a.id} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
         </TabsContent>
 
         {/* Tab 3: Maintenance */}
@@ -419,7 +419,7 @@ export default function ChassisPoolMgmtView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" /><Input placeholder="Search maintenance record..." className="pl-9" value={search} onChange={e => setSearch(e.target.value)} /></div>
             <Select value={filterStatus} onValueChange={setFilterStatus}><SelectTrigger className="w-[160px]"><SelectValue placeholder="Filter status" /></SelectTrigger><SelectContent>{["all", ...data.MAINT_STATUSES].map(s => <SelectItem key={s} value={s}>{s === "all" ? "All Statuses" : s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["id", "maintType", "status", "priority", "facility", "partsCost", "laborHrs", "nextDue", "scheduledDate", "chassisId"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab3">{filteredMaint.slice(0, 30).map((m, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(m as unknown as Record<string, unknown>); setDrawerType("maint"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{m.id}</TableCell><TableCell className="text-xs">{m.maintType}</TableCell><TableCell><StatusBadge status={m.status} color={data.STATUS_COLORS[m.status] || "#475569"} /></TableCell><TableCell><PriorityBadge priority={m.priority} /></TableCell><TableCell><FacilityBadge facility={m.facility} /></TableCell><TableCell className="text-xs font-semibold tabular-nums">{formatINR(m.partsCost)}</TableCell><TableCell className="text-xs tabular-nums">{m.laborHrs}h</TableCell><TableCell className="text-xs">{m.nextDue}</TableCell><TableCell className="text-xs">{m.scheduledDate}</TableCell><TableCell className="text-xs font-mono">{m.chassisId}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Maintenance", `${m.id} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
+          <Card><CardContent className="numeric-cell glass-subtle p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["id", "maintType", "status", "priority", "facility", "partsCost", "laborHrs", "nextDue", "scheduledDate", "chassisId"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab3">{filteredMaint.slice(0, 30).map((m, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(m as unknown as Record<string, unknown>); setDrawerType("maint"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{m.id}</TableCell><TableCell className="text-xs">{m.maintType}</TableCell><TableCell><StatusBadge status={m.status} color={data.STATUS_COLORS[m.status] || "#475569"} /></TableCell><TableCell><PriorityBadge priority={m.priority} /></TableCell><TableCell><FacilityBadge facility={m.facility} /></TableCell><TableCell className="text-xs font-semibold tabular-nums">{formatINR(m.partsCost)}</TableCell><TableCell className="text-xs tabular-nums">{m.laborHrs}h</TableCell><TableCell className="text-xs">{m.nextDue}</TableCell><TableCell className="text-xs">{m.scheduledDate}</TableCell><TableCell className="text-xs font-mono">{m.chassisId}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Maintenance", `${m.id} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
         </TabsContent>
 
         {/* Tab 4: Billing */}
@@ -428,7 +428,7 @@ export default function ChassisPoolMgmtView() {
             <div className="relative flex-1 min-w-[200px]"><Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" /><Input placeholder="Search bill, customer..." className="pl-9" value={search} onChange={e => setSearch(e.target.value)} /></div>
             <Select value={filterStatus} onValueChange={setFilterStatus}><SelectTrigger className="w-[160px]"><SelectValue placeholder="Filter status" /></SelectTrigger><SelectContent>{["all", ...data.BILL_STATUSES].map(s => <SelectItem key={s} value={s}>{s === "all" ? "All Statuses" : s}</SelectItem>)}</SelectContent></Select>
           </div>
-          <Card><CardContent className="p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["id", "chargeType", "status", "customer", "paymentMethod", "amount", "tax", "dueDate", "paidDate", "chassisId"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab4">{filteredBill.slice(0, 30).map((b, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(b as unknown as Record<string, unknown>); setDrawerType("bill"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{b.id}</TableCell><TableCell className="text-xs">{b.chargeType}</TableCell><TableCell><StatusBadge status={b.status} color={data.STATUS_COLORS[b.status] || "#475569"} /></TableCell><TableCell><CustomerBadge customer={b.customer} /></TableCell><TableCell><PaymentMethodBadge method={b.paymentMethod} /></TableCell><TableCell className="text-xs font-bold tabular-nums">{formatINR(b.amount)}</TableCell><TableCell className="text-xs tabular-nums">{formatINR(b.tax)}</TableCell><TableCell><DueDateIndicator date={b.dueDate} /></TableCell><TableCell className="text-xs">{b.paidDate}</TableCell><TableCell className="text-xs font-mono">{b.chassisId}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Billing", `${b.id} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
+          <Card><CardContent className="numeric-cell glass-subtle p-0"><div className="overflow-x-auto"><Table><TableHeader><TableRow>{["id", "chargeType", "status", "customer", "paymentMethod", "amount", "tax", "dueDate", "paidDate", "chassisId"].map(col => <SortHeader key={col} col={col} label={data.COL_LABELS[col] || col} />)}<TableHead className="text-xs">Actions</TableHead></TableRow></TableHeader><TableBody className="cpm-table cpm-table-tab4">{filteredBill.slice(0, 30).map((b, i) => (<TableRow key={i} className="cursor-pointer" onClick={() => { setDrawerRecord(b as unknown as Record<string, unknown>); setDrawerType("bill"); setDrawerOpen(true); }}><TableCell className="text-xs font-mono">{b.id}</TableCell><TableCell className="text-xs">{b.chargeType}</TableCell><TableCell><StatusBadge status={b.status} color={data.STATUS_COLORS[b.status] || "#475569"} /></TableCell><TableCell><CustomerBadge customer={b.customer} /></TableCell><TableCell><PaymentMethodBadge method={b.paymentMethod} /></TableCell><TableCell className="text-xs font-bold tabular-nums">{formatINR(b.amount)}</TableCell><TableCell className="text-xs tabular-nums">{formatINR(b.tax)}</TableCell><TableCell><DueDateIndicator date={b.dueDate} /></TableCell><TableCell className="text-xs">{b.paidDate}</TableCell><TableCell className="text-xs font-mono">{b.chassisId}</TableCell><TableCell><Button size="sm" variant="ghost" className="cpm-action-btn" onClick={e => { e.stopPropagation(); toast.info("Billing", `${b.id} details`) }}><Eye className="w-3.5 h-3.5" /></Button></TableCell></TableRow>))}</TableBody></Table></div></CardContent></Card>
         </TabsContent>
 
         {/* Tab 5: Pool Analytics */}
@@ -445,7 +445,7 @@ export default function ChassisPoolMgmtView() {
               { label: "Satisfaction", value: `${data.analytics.customerSatisfaction}%`, idx: 7 },
             ].map((kpi, i) => (
               <Card key={i} className={cn("cpm-analytics-card", kpiColorClasses[kpi.idx])} style={{ borderLeftColor: ["#334155", "#0d9488", "#4f46e5", "#e11d48", "#059669", "#d97706", "#ea580c", "#0891b2"][kpi.idx] }}>
-                <CardContent className="p-4"><p className="text-xs text-muted-foreground">{kpi.label}</p><p className="text-lg font-bold tabular-nums mt-1">{kpi.value}</p></CardContent>
+                <CardContent className="glass-subtle p-4"><p className="text-xs text-muted-foreground">{kpi.label}</p><p className="text-lg font-bold tabular-nums mt-1">{kpi.value}</p></CardContent>
               </Card>
             ))}
           </div>
@@ -481,8 +481,8 @@ export default function ChassisPoolMgmtView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="cpm-action-btn flex-1 bg-slate-700 hover:bg-slate-800" onClick={() => { toast.success("Allocated", `${rec.chassisId} allocated`); setDrawerOpen(false) }}><Truck className="w-3.5 h-3.5 mr-1" />Allocate</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn flex-1" onClick={() => { toast.info("Maintenance", `${rec.chassisId} sent for maintenance`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5 mr-1" />Maintain</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn" onClick={() => { toast.info("Inspection", `${rec.chassisId} inspection scheduled`); setDrawerOpen(false) }}><Search className="w-3.5 h-3.5 mr-1" />Inspect</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn flex-1" onClick={() => { toast.info("Maintenance", `${rec.chassisId} sent for maintenance`); setDrawerOpen(false) }}><Wrench className="w-3.5 h-3.5 mr-1" />Maintain</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn" onClick={() => { toast.info("Inspection", `${rec.chassisId} inspection scheduled`); setDrawerOpen(false) }}><Search className="w-3.5 h-3.5 mr-1" />Inspect</Button>
                   </div>
                 </div>
               </>)
@@ -506,8 +506,8 @@ export default function ChassisPoolMgmtView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="cpm-action-btn flex-1 bg-teal-600 hover:bg-teal-700" onClick={() => { toast.success("Extended", `${rec.id} extended`); setDrawerOpen(false) }}><Clock className="w-3.5 h-3.5 mr-1" />Extend</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn flex-1" onClick={() => { toast.info("Returned", `${rec.id} returned`); setDrawerOpen(false) }}><RotateCcw className="w-3.5 h-3.5 mr-1" />Return</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn" onClick={() => { toast.warning("Shortfall", `${rec.id} shortfall reported`); setDrawerOpen(false) }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Shortfall</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn flex-1" onClick={() => { toast.info("Returned", `${rec.id} returned`); setDrawerOpen(false) }}><RotateCcw className="w-3.5 h-3.5 mr-1" />Return</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn" onClick={() => { toast.warning("Shortfall", `${rec.id} shortfall reported`); setDrawerOpen(false) }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Shortfall</Button>
                   </div>
                 </div>
               </>)
@@ -531,8 +531,8 @@ export default function ChassisPoolMgmtView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="cpm-action-btn flex-1 bg-amber-600 hover:bg-amber-700" onClick={() => { toast.success("Approved", `${rec.id} approved`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Approve</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn flex-1" onClick={() => { toast.info("Rescheduled", `${rec.id} rescheduled`); setDrawerOpen(false) }}><CalendarDays className="w-3.5 h-3.5 mr-1" />Reschedule</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn" onClick={() => { toast.success("Completed", `${rec.id} completed`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn flex-1" onClick={() => { toast.info("Rescheduled", `${rec.id} rescheduled`); setDrawerOpen(false) }}><CalendarDays className="w-3.5 h-3.5 mr-1" />Reschedule</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn" onClick={() => { toast.success("Completed", `${rec.id} completed`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5" /></Button>
                   </div>
                 </div>
               </>)
@@ -556,8 +556,8 @@ export default function ChassisPoolMgmtView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="cpm-action-btn flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={() => { toast.success("Sent", `${rec.id} sent to customer`); setDrawerOpen(false) }}><Send className="w-3.5 h-3.5 mr-1" />Send</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn flex-1" onClick={() => { toast.success("Paid", `${rec.id} marked as paid`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Mark Paid</Button>
-                    <Button size="sm" variant="outline" className="cpm-action-btn" onClick={() => { toast.warning("Disputed", `${rec.id} disputed`); setDrawerOpen(false) }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Dispute</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn flex-1" onClick={() => { toast.success("Paid", `${rec.id} marked as paid`); setDrawerOpen(false) }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Mark Paid</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate cpm-action-btn" onClick={() => { toast.warning("Disputed", `${rec.id} disputed`); setDrawerOpen(false) }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Dispute</Button>
                   </div>
                 </div>
               </>)

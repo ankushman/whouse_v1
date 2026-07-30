@@ -328,7 +328,7 @@ export default function ThirdPartyLogisticsView() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {SUMMARY_KPIS.map((kpi) => (
                 <Card key={kpi.label} className="tpl-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 tpl-kpi-icon" />
                       <span className={cn("tpl-trend-badge", kpi.trend === "up" ? "tpl-trend-up" : "tpl-trend-down")}>
@@ -493,7 +493,7 @@ export default function ThirdPartyLogisticsView() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {filteredPartners.map((partner) => (
                 <Card key={partner.id} className="tpl-partner-card cursor-pointer hover:shadow-lg transition-shadow" onClick={() => openDrawer(partner)}>
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="tpl-partner-avatar">
@@ -516,7 +516,7 @@ export default function ThirdPartyLogisticsView() {
                     </div>
                     <div className="flex flex-wrap gap-1 mb-3">
                       {partner.services.map((s) => (
-                        <Badge key={s} className="tpl-service-tag text-[10px]">{s}</Badge>
+                        <Badge key={s} className="badge-interactive tpl-service-tag text-[10px]">{s}</Badge>
                       ))}
                     </div>
                     <div className="flex items-center justify-between">
@@ -555,7 +555,7 @@ export default function ThirdPartyLogisticsView() {
                 { label: "SLA Compliance", value: `${avgSla}%`, color: "tpl-sum-card-green" },
               ].map((c) => (
                 <Card key={c.label} className={c.color}>
-                  <CardContent className="p-3 text-center">
+                  <CardContent className="glass-subtle p-3 text-center">
                     <div className="text-lg font-bold">{c.value}</div>
                     <div className="text-xs opacity-70">{c.label}</div>
                   </CardContent>
@@ -564,10 +564,10 @@ export default function ThirdPartyLogisticsView() {
             </div>
 
             {/* Contract Table */}
-            <Card className="tpl-table-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift tpl-table-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="tpl-table-header">
                         <TableHead className="tpl-th">Contract ID</TableHead>
@@ -590,9 +590,9 @@ export default function ThirdPartyLogisticsView() {
                           <TableCell className="tpl-td text-xs font-medium">{c.partner.name}</TableCell>
                           <TableCell className="tpl-td text-xs">{c.warehouse}</TableCell>
                           <TableCell className="tpl-td text-xs">{c.service}</TableCell>
-                          <TableCell className="tpl-td text-xs font-mono">{fmtRupee(c.value)}</TableCell>
+                          <TableCell className="numeric-cell tpl-td text-xs font-mono">{fmtRupee(c.value)}</TableCell>
                           <TableCell className="tpl-td text-xs">{c.billingCycle}</TableCell>
-                          <TableCell className="tpl-td text-xs">{c.penaltyRate}%</TableCell>
+                          <TableCell className="numeric-cell tpl-td text-xs">{c.penaltyRate}%</TableCell>
                           <TableCell className="tpl-td text-xs">
                             <div className="flex items-center gap-2">
                               <div className="tpl-progress-bar h-1.5 w-16 rounded-full bg-gray-200 dark:bg-gray-700">
@@ -627,7 +627,7 @@ export default function ThirdPartyLogisticsView() {
                 { label: "Maintenance", value: String(integrations.filter((i) => i.status === "Maintenance").length), icon: Wrench, color: "text-blue-500" },
               ].map((s) => (
                 <Card key={s.label} className="tpl-chart-card">
-                  <CardContent className="p-4 flex items-center gap-3">
+                  <CardContent className="glass-subtle p-4 flex items-center gap-3">
                     <s.icon className={cn("h-8 w-8", s.color)} />
                     <div>
                       <div className="text-xl font-bold">{s.value}</div>
@@ -692,9 +692,9 @@ export default function ThirdPartyLogisticsView() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="tpl-table-header">
                         <TableHead className="tpl-th">ID</TableHead>
@@ -715,8 +715,8 @@ export default function ThirdPartyLogisticsView() {
                           <TableCell className="tpl-td font-mono text-xs">{intg.id}</TableCell>
                           <TableCell className="tpl-td text-xs font-medium">{intg.partner.name}</TableCell>
                           <TableCell className="tpl-td text-xs">{intg.type}</TableCell>
-                          <TableCell className="tpl-td text-xs"><Badge className="tpl-protocol-badge text-[10px]">{intg.protocol}</Badge></TableCell>
-                          <TableCell className="tpl-td"><Badge className={cn(STATUS_COLORS[intg.status], "text-[10px]")}>{intg.status}</Badge></TableCell>
+                          <TableCell className="badge-interactive tpl-td text-xs"><Badge className="tpl-protocol-badge text-[10px]">{intg.protocol}</Badge></TableCell>
+                          <TableCell className="badge-interactive tpl-td"><Badge className={cn(STATUS_COLORS[intg.status], "text-[10px]")}>{intg.status}</Badge></TableCell>
                           <TableCell className={cn("tpl-td text-xs font-mono", intg.latency < 300 ? "text-emerald-600" : intg.latency < 1000 ? "text-amber-500" : "text-red-500")}>{intg.latency}ms</TableCell>
                           <TableCell className={cn("tpl-td text-xs", intg.uptime >= 99 ? "text-emerald-600" : "text-amber-500")}>{intg.uptime}%</TableCell>
                           <TableCell className={cn("tpl-td text-xs", intg.errorRate < 1 ? "text-emerald-600" : "text-red-500")}>{intg.errorRate}%</TableCell>
@@ -735,9 +735,9 @@ export default function ThirdPartyLogisticsView() {
               <CardHeader className="pb-2">
                 <CardTitle className="tpl-chart-title text-sm">Recent Invoices &amp; Disputes</CardTitle>
               </CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="tpl-table-header">
                         <TableHead className="tpl-th">Invoice</TableHead>
@@ -758,13 +758,13 @@ export default function ThirdPartyLogisticsView() {
                           <TableCell className="tpl-td font-mono text-xs">{inv.id}</TableCell>
                           <TableCell className="tpl-td text-xs font-medium">{inv.partner.name}</TableCell>
                           <TableCell className="tpl-td text-xs">{inv.period}</TableCell>
-                          <TableCell className="tpl-td text-xs font-mono">{fmtRupee(inv.baseAmount)}</TableCell>
+                          <TableCell className="numeric-cell tpl-td text-xs font-mono">{fmtRupee(inv.baseAmount)}</TableCell>
                           <TableCell className="tpl-td text-xs font-mono">{fmtRupee(inv.gst)}</TableCell>
                           <TableCell className="tpl-td text-xs font-mono">{fmtRupee(inv.tds)}</TableCell>
                           <TableCell className={cn("tpl-td text-xs font-mono", inv.penalty > 0 ? "text-red-500" : "text-gray-400")}>{fmtRupee(inv.penalty)}</TableCell>
                           <TableCell className={cn("tpl-td text-xs font-mono", inv.discount > 0 ? "text-emerald-600" : "text-gray-400")}>-{fmtRupee(inv.discount)}</TableCell>
-                          <TableCell className="tpl-td text-xs font-mono font-bold">{fmtRupee(inv.netAmount)}</TableCell>
-                          <TableCell className="tpl-td"><Badge className={cn(STATUS_COLORS[inv.status], "text-[10px]")}>{inv.status}</Badge></TableCell>
+                          <TableCell className="numeric-cell tpl-td text-xs font-mono font-bold">{fmtRupee(inv.netAmount)}</TableCell>
+                          <TableCell className="badge-interactive tpl-td"><Badge className={cn(STATUS_COLORS[inv.status], "text-[10px]")}>{inv.status}</Badge></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -779,9 +779,9 @@ export default function ThirdPartyLogisticsView() {
                 <CardHeader className="pb-2">
                   <CardTitle className="tpl-chart-title text-sm">Active Disputes</CardTitle>
                 </CardHeader>
-                <CardContent className="p-0">
+                <CardContent className="glass-subtle p-0">
                   <div className="overflow-x-auto">
-                    <Table>
+                    <Table className="table-hover-highlight">
                       <TableHeader>
                         <TableRow className="tpl-table-header">
                           <TableHead className="tpl-th">Dispute ID</TableHead>
@@ -801,9 +801,9 @@ export default function ThirdPartyLogisticsView() {
                             <TableCell className="tpl-td text-xs font-medium">{d.partner.name}</TableCell>
                             <TableCell className="tpl-td text-xs font-mono">{d.invoice}</TableCell>
                             <TableCell className="tpl-td text-xs">{d.category}</TableCell>
-                            <TableCell className="tpl-td text-xs font-mono font-bold text-red-500">{fmtRupee(d.amount)}</TableCell>
-                            <TableCell className="tpl-td"><Badge className={cn(PRIORITY_COLORS[d.priority], "text-[10px]")}>{d.priority}</Badge></TableCell>
-                            <TableCell className="tpl-td"><Badge className={cn(STATUS_COLORS[d.status], "text-[10px]")}>{d.status}</Badge></TableCell>
+                            <TableCell className="numeric-cell tpl-td text-xs font-mono font-bold text-red-500">{fmtRupee(d.amount)}</TableCell>
+                            <TableCell className="badge-interactive tpl-td"><Badge className={cn(PRIORITY_COLORS[d.priority], "text-[10px]")}>{d.priority}</Badge></TableCell>
+                            <TableCell className="badge-interactive tpl-td"><Badge className={cn(STATUS_COLORS[d.status], "text-[10px]")}>{d.status}</Badge></TableCell>
                             <TableCell className="tpl-td text-xs max-w-[250px] truncate">{d.description}</TableCell>
                           </TableRow>
                         ))}
@@ -827,7 +827,7 @@ export default function ThirdPartyLogisticsView() {
                 { label: "Digital Maturity", value: `${rInt(65, 92)}%`, sub: "API/EDI adoption rate" },
               ].map((k) => (
                 <Card key={k.label} className="tpl-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="tpl-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="tpl-kpi-label text-xs">{k.label}</div>
                     <div className="tpl-kpi-sub text-xs">{k.sub}</div>
@@ -940,9 +940,11 @@ export default function ThirdPartyLogisticsView() {
                 </Button>
               </div>
               <div className="flex items-center gap-2 mt-3">
+<div className="chip-group">
                 <Badge className={cn(TIER_COLORS[selectedPartner.tier])}>{selectedPartner.tier} Tier</Badge>
                 <Badge className={cn(STATUS_COLORS[selectedPartner.status])}>{selectedPartner.status}</Badge>
-                <Badge className="tpl-badge-trend tpl-badge-trend-up flex items-center gap-1"><Star className="h-3 w-3" /> {selectedPartner.rating}/5.0</Badge>
+                <Badge className="badge-interactive tpl-badge-trend tpl-badge-trend-up flex items-center gap-1"><Star className="h-3 w-3" /> {selectedPartner.rating}/5.0</Badge>
+</div>
               </div>
             </div>
 
@@ -996,7 +998,7 @@ export default function ThirdPartyLogisticsView() {
                 <h3 className="tpl-section-title text-sm font-semibold mb-2">Active Services</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedPartner.services.map((s) => (
-                    <Badge key={s} className="tpl-service-badge"><Zap className="h-3 w-3 mr-1" />{s}</Badge>
+                    <Badge key={s} className="badge-interactive tpl-service-badge"><Zap className="h-3 w-3 mr-1" />{s}</Badge>
                   ))}
                 </div>
               </div>
@@ -1058,7 +1060,7 @@ export default function ThirdPartyLogisticsView() {
                       <div className="flex items-center gap-2">
                         {intg.status === "Connected" ? <Wifi className="h-3.5 w-3.5 text-emerald-500" /> : <WifiOff className="h-3.5 w-3.5 text-red-500" />}
                         <span className="font-medium">{intg.type}</span>
-                        <Badge className="tpl-protocol-badge text-[9px]">{intg.protocol}</Badge>
+                        <Badge className="badge-interactive tpl-protocol-badge text-[9px]">{intg.protocol}</Badge>
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="font-mono">{intg.latency}ms</span>

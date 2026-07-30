@@ -320,7 +320,7 @@ function PriorityBadge({ priority }: { priority: Priority }) {
   const map: Record<Priority, "destructive" | "warning" | "secondary" | "outline"> = {
     critical: "destructive", high: "warning", medium: "secondary", low: "outline",
   };
-  return <Badge variant={map[priority]} className="text-[10px] font-bold uppercase tracking-wider">{priority}</Badge>;
+  return <Badge variant={map[priority]} className="badge-interactive text-[10px] font-bold uppercase tracking-wider">{priority}</Badge>;
 }
 
 function StatusBadge({ status }: { status: WorkOrderStatus }) {
@@ -328,14 +328,14 @@ function StatusBadge({ status }: { status: WorkOrderStatus }) {
     scheduled: "outline", in_progress: "warning", parts_ordered: "secondary",
     awaiting_approval: "default", completed: "success", cancelled: "destructive",
   };
-  return <Badge variant={map[status]} className="text-[10px]">{STATUS_LABELS[status]}</Badge>;
+  return <Badge variant={map[status]} className="badge-interactive text-[10px]">{STATUS_LABELS[status]}</Badge>;
 }
 
 function VehicleStatusBadge({ status }: { status: VehicleStatus }) {
   const map: Record<VehicleStatus, "success" | "warning" | "destructive" | "secondary"> = {
     operational: "success", under_maintenance: "warning", out_of_service: "destructive", decommissioned: "secondary",
   };
-  return <Badge variant={map[status]} className="text-[10px]">{VEHICLE_STATUS_LABELS[status]}</Badge>;
+  return <Badge variant={map[status]} className="badge-interactive text-[10px]">{VEHICLE_STATUS_LABELS[status]}</Badge>;
 }
 
 function FormatINR(n: number): string {
@@ -678,12 +678,12 @@ export function FleetMaintenanceManagementView() {
                           <div className="flex items-center gap-2 flex-1">
                             {VEHICLE_TYPE_ICONS[v.type]}
                             <span className="text-xs font-medium">{v.name}</span>
-                            <Badge variant="outline" className="text-[10px]">{v.assetTag}</Badge>
-                            <Badge variant="secondary" className="text-[10px]">{v.warehouse.split(" ")[0]}</Badge>
+                            <Badge variant="outline" className="badge-interactive text-[10px]">{v.assetTag}</Badge>
+                            <Badge variant="secondary" className="badge-interactive text-[10px]">{v.warehouse.split(" ")[0]}</Badge>
                           </div>
                           <div className="flex items-center gap-2">
                             <span className="text-xs text-muted-foreground">{v.nextServiceDate}</span>
-                            <Badge variant={urgent ? "destructive" : daysUntil <= 14 ? "warning" : "success"} className="text-[10px]">
+                            <Badge variant={urgent ? "destructive" : daysUntil <= 14 ? "warning" : "success"} className="badge-interactive text-[10px]">
                               {daysUntil > 0 ? `${daysUntil}d` : "Overdue"}
                             </Badge>
                           </div>
@@ -725,7 +725,7 @@ export function FleetMaintenanceManagementView() {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
               {filtered.slice(0, 18).map(v => (
                 <Card key={v.id} className="fm-vehicle-card" onClick={() => setSelectedVehicle(v)}>
-                  <CardContent className="p-3">
+                  <CardContent className="glass-subtle p-3">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <div className="fm-vehicle-icon">{VEHICLE_TYPE_ICONS[v.type]}</div>
@@ -1006,7 +1006,7 @@ export function FleetMaintenanceManagementView() {
                             </div>
                             <div className="flex gap-1">
                               {issues.map((issue, i) => (
-                                <Badge key={i} variant={issue.includes("critical") ? "destructive" : "warning"} className="text-[10px]">{issue}</Badge>
+                                <Badge key={i} variant={issue.includes("critical") ? "destructive" : "warning"} className="badge-interactive text-[10px]">{issue}</Badge>
                               ))}
                             </div>
                           </div>
@@ -1049,7 +1049,7 @@ export function FleetMaintenanceManagementView() {
                             <td className="text-xs text-muted-foreground">{v.warehouse.split(" ")[0]}</td>
                             <td className="text-xs text-muted-foreground">{v.lastServiceDate}</td>
                             <td className="text-xs">
-                              <Badge variant={daysUntil <= 0 ? "destructive" : daysUntil <= 7 ? "warning" : daysUntil <= 14 ? "secondary" : "outline"} className="text-[10px]">
+                              <Badge variant={daysUntil <= 0 ? "destructive" : daysUntil <= 7 ? "warning" : daysUntil <= 14 ? "secondary" : "outline"} className="badge-interactive text-[10px]">
                                 {v.nextServiceDate} ({daysUntil > 0 ? `${daysUntil}d` : "Overdue"})
                               </Badge>
                             </td>

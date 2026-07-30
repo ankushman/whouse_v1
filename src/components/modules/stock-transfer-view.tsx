@@ -245,7 +245,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, colorClass, trend, trendV
 }) {
   return (
     <Card className={cn("stf-kpi-card", colorClass)}>
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div>
             <p className="stf-kpi-label">{title}</p>
@@ -600,13 +600,13 @@ export default function StockTransferView() {
                 <option value="all">All Types</option>
                 {TRANSFER_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
               </select>
-              <Badge variant="outline" className="text-xs">{filteredTransfers.length} transfers</Badge>
+              <Badge variant="outline" className="badge-interactive text-xs">{filteredTransfers.length} transfers</Badge>
             </div>
 
-            <Card className="stf-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift stf-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="stf-table-header">
                         <TableHead className="stf-th">Transfer ID</TableHead>
@@ -648,7 +648,7 @@ export default function StockTransferView() {
                           <TableCell className="stf-td"><span className="text-sm font-semibold">{t.qty}</span><span className="text-xs text-gray-400 ml-0.5">{t.unit}</span></TableCell>
                           <TableCell className="stf-td"><span className="text-xs">{t.reason.length > 18 ? t.reason.substring(0, 18) + "..." : t.reason}</span></TableCell>
                           <TableCell className="stf-td"><span className="text-xs">{t.transportMode.length > 12 ? t.transportMode.substring(0, 12) + "..." : t.transportMode}</span></TableCell>
-                          <TableCell className="stf-td"><span className="text-sm font-medium text-cyan-600">{t.cost.toLocaleString('en-IN')}</span></TableCell>
+                          <TableCell className="numeric-cell stf-td"><span className="text-sm font-medium text-cyan-600">{t.cost.toLocaleString('en-IN')}</span></TableCell>
                           <TableCell className="stf-td">
                             <span className="text-sm">{t.estDays}d</span>
                             {t.actualDays && <span className={cn("text-xs ml-1", t.actualDays <= t.estDays ? "text-emerald-600" : "text-red-600")}>({t.actualDays}d)</span>}
@@ -721,9 +721,9 @@ export default function StockTransferView() {
             {/* Route Table */}
             <Card className="stf-card">
               <CardHeader className="pb-2"><CardTitle className="stf-card-title">Warehouse Transfer Summary</CardTitle></CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="stf-table-header">
                         <TableHead className="stf-th">Warehouse</TableHead>
@@ -741,8 +741,8 @@ export default function StockTransferView() {
                           <TableCell className="stf-td"><span className="text-sm font-medium">{r.name}</span></TableCell>
                           <TableCell className="stf-td"><span className="text-sm text-cyan-600 font-semibold">{r.outgoing}</span></TableCell>
                           <TableCell className="stf-td"><span className="text-sm text-amber-600 font-semibold">{r.incoming}</span></TableCell>
-                          <TableCell className="stf-td"><span className="text-sm font-bold">{r.total}</span></TableCell>
-                          <TableCell className="stf-td"><span className="text-sm">₹{r.avgCost.toLocaleString('en-IN')}</span></TableCell>
+                          <TableCell className="numeric-cell stf-td"><span className="text-sm font-bold">{r.total}</span></TableCell>
+                          <TableCell className="numeric-cell stf-td"><span className="text-sm">₹{r.avgCost.toLocaleString('en-IN')}</span></TableCell>
                           <TableCell className="stf-td"><span className="text-sm">{r.avgDays}d</span></TableCell>
                           <TableCell className="stf-td">
                             <span className={cn("text-sm font-medium", r.incoming - r.outgoing > 0 ? "text-emerald-600" : r.incoming - r.outgoing < 0 ? "text-red-600" : "text-gray-500")}>
@@ -910,9 +910,9 @@ export default function StockTransferView() {
             {/* SLA Detail Table */}
             <Card className="stf-card">
               <CardHeader className="pb-2"><CardTitle className="stf-card-title">Warehouse SLA Detail</CardTitle></CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="stf-table-header">
                         <TableHead className="stf-th">Warehouse</TableHead>

@@ -476,7 +476,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, trend, color }: {
 }) {
   return (
     <Card className="fmc-kpi-card">
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] text-muted-foreground font-medium">{title}</span>
@@ -614,7 +614,7 @@ export default function FirstMileCollectionView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="fmc-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="fmc-table-row">
               <SortHeader col="pickupId" label="Pickup ID" /><TableHead className="text-[10px]">Supplier</TableHead><TableHead className="text-[10px]">Commodity</TableHead><TableHead className="text-[10px]">Location</TableHead><TableHead className="text-[10px]">Dest Hub</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Type</TableHead><TableHead className="text-[10px]">Time</TableHead><TableHead className="text-[10px]">Weight</TableHead><TableHead className="text-[10px] w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredOrders.map((o) => (
@@ -642,7 +642,7 @@ export default function FirstMileCollectionView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="fmc-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="fmc-table-row">
               <SortHeader col="routeId" label="Route ID" /><TableHead className="text-[10px]">Name</TableHead><TableHead className="text-[10px]">Stops</TableHead><TableHead className="text-[10px]">Distance</TableHead><TableHead className="text-[10px]">Time (Est/Act)</TableHead><TableHead className="text-[10px]">Driver</TableHead><TableHead className="text-[10px]">Vehicle</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Efficiency</TableHead><TableHead className="text-[10px]">Fuel Cost</TableHead><TableHead className="text-[10px] w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredRoutes.map((r) => (
@@ -671,7 +671,7 @@ export default function FirstMileCollectionView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="fmc-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="fmc-table-row">
               <SortHeader col="driverId" label="Driver ID" /><TableHead className="text-[10px]">Name</TableHead><TableHead className="text-[10px]">Phone</TableHead><TableHead className="text-[10px]">Vehicle</TableHead><TableHead className="text-[10px]">Plate</TableHead><TableHead className="text-[10px]">Location</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Trips</TableHead><TableHead className="text-[10px]">Rating</TableHead><TableHead className="text-[10px]">Earnings</TableHead><TableHead className="text-[10px]">Shift</TableHead><TableHead className="text-[10px] w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredDrivers.map((d) => (
@@ -701,7 +701,7 @@ export default function FirstMileCollectionView() {
             <Select value={statusFilter} onValueChange={setStatusFilter}><SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue placeholder="Status" /></SelectTrigger><SelectContent><SelectItem value="all">All Statuses</SelectItem>{statuses.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="fmc-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="fmc-table-row">
               <SortHeader col="supplierId" label="Supplier ID" /><TableHead className="text-[10px]">Name</TableHead><TableHead className="text-[10px]">Category</TableHead><TableHead className="text-[10px]">Location</TableHead><TableHead className="text-[10px]">Hub</TableHead><TableHead className="text-[10px]">Contact</TableHead><TableHead className="text-[10px]">Frequency</TableHead><TableHead className="text-[10px]">Volume</TableHead><TableHead className="text-[10px]">Status</TableHead><TableHead className="text-[10px]">Compliance</TableHead><TableHead className="text-[10px]">Last Pickup</TableHead><TableHead className="text-[10px] w-[40px]" />
             </TableRow></TableHeader><TableBody>
               {filteredSuppliers.map((s) => (
@@ -773,7 +773,7 @@ export default function FirstMileCollectionView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.info("Reassigning", `Reassigning ${(selectedItem as unknown as PickupOrder).pickupId}`); setDrawerOpen(false) }}><RefreshCw className="h-3 w-3" />Reassign</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.success("Tracking", `Live tracking for ${(selectedItem as unknown as PickupOrder).pickupId}`) }}><Navigation className="h-3 w-3" />Track</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.success("Tracking", `Live tracking for ${(selectedItem as unknown as PickupOrder).pickupId}`) }}><Navigation className="h-3 w-3" />Track</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.error("Cancelled", `Pickup ${(selectedItem as unknown as PickupOrder).pickupId} cancelled`); setDrawerOpen(false) }}><XCircle className="h-3 w-3" />Cancel Pickup</Button>
                 </div>
               </div>
@@ -797,7 +797,7 @@ export default function FirstMileCollectionView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.info("Optimizing", `Optimizing ${(selectedItem as unknown as RouteRecord).routeId}`); setDrawerOpen(false) }}><BarChart3 className="h-3 w-3" />Optimize</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.success("Reassigned", `Route ${(selectedItem as unknown as RouteRecord).routeId} reassigned`) }}><RefreshCw className="h-3 w-3" />Reassign</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.success("Reassigned", `Route ${(selectedItem as unknown as RouteRecord).routeId} reassigned`) }}><RefreshCw className="h-3 w-3" />Reassign</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.warning("Closing", `Route ${(selectedItem as unknown as RouteRecord).routeId} closed`); setDrawerOpen(false) }}><XCircle className="h-3 w-3" />Close Route</Button>
                 </div>
               </div>
@@ -821,7 +821,7 @@ export default function FirstMileCollectionView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.success("Trip Assigned", `New trip for ${(selectedItem as unknown as DriverRecord).name}`) }}><Package className="h-3 w-3" />Assign Trip</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.info("Calling", `Calling ${(selectedItem as unknown as DriverRecord).phone}`) }}><Phone className="h-3 w-3" />Contact</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.info("Calling", `Calling ${(selectedItem as unknown as DriverRecord).phone}`) }}><Phone className="h-3 w-3" />Contact</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.warning("Deactivated", `Driver ${(selectedItem as unknown as DriverRecord).name} deactivated`); setDrawerOpen(false) }}><XCircle className="h-3 w-3" />Deactivate</Button>
                 </div>
               </div>
@@ -846,7 +846,7 @@ export default function FirstMileCollectionView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.success("Scheduled", `Pickup scheduled for ${(selectedItem as unknown as SupplierRecord).name}`) }}><CalendarDays className="h-3 w-3" />Schedule Pickup</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.info("Audit", `Audit initiated for ${(selectedItem as unknown as SupplierRecord).name}`) }}><ShieldCheck className="h-3 w-3" />Audit</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.info("Audit", `Audit initiated for ${(selectedItem as unknown as SupplierRecord).name}`) }}><ShieldCheck className="h-3 w-3" />Audit</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 fmc-action-btn" onClick={() => { toast.warning("Deactivated", `Supplier ${(selectedItem as unknown as SupplierRecord).name} deactivated`); setDrawerOpen(false) }}><XCircle className="h-3 w-3" />Deactivate</Button>
                 </div>
               </div>

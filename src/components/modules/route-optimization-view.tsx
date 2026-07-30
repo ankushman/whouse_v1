@@ -150,7 +150,7 @@ export function RouteOptimizationView() {
               </SelectContent>
             </Select>
             <ExportButton onExportCSV={handleExportCSV} />
-            <Button variant="outline" size="sm" className="gap-1.5">
+            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
               <Zap className="h-3.5 w-3.5" />
               Optimize All
             </Button>
@@ -162,7 +162,7 @@ export function RouteOptimizationView() {
       <div className="stagger-children grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {summaryCards.map((card) => (
           <Card key={card.label} className="card-depth shadow-card hover-lift-sm">
-            <CardContent className="flex items-center gap-4 p-4">
+            <CardContent className="glass-subtle flex items-center gap-4 p-4">
               <div className={cn("flex size-10 shrink-0 items-center justify-center rounded-xl", card.color)}>
                 <card.icon className="size-5" />
               </div>
@@ -186,7 +186,7 @@ export function RouteOptimizationView() {
               Optimized Routes
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="glass-subtle space-y-3">
             {filteredRoutes.map((route) => {
               const status = statusStyles[route.status]
               return (
@@ -283,7 +283,7 @@ export function RouteOptimizationView() {
                 Optimization Suggestions
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="glass-subtle space-y-3">
               {suggestions.map((s, i) => {
                 const prio = priorityStyles[s.priority]
                 return (

@@ -826,11 +826,11 @@ export function SupplierCorrectiveActionRequestView() {
           <PenLine className="h-4 w-4" />
           New SCAR
         </Button>
-        <Button variant="outline" onClick={handleRefresh} className="gap-2">
+        <Button variant="outline" onClick={handleRefresh} className="btn-outline-animate gap-2">
           <RefreshCw className="h-4 w-4" />
           Refresh
         </Button>
-        <Button variant="outline" onClick={handleExport} className="gap-2">
+        <Button variant="outline" onClick={handleExport} className="btn-outline-animate gap-2">
           <Download className="h-4 w-4" />
           Export CSV
         </Button>
@@ -843,7 +843,7 @@ export function SupplierCorrectiveActionRequestView() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         <Card className="scar-kpi-enter relative overflow-hidden border-blue-200/50" style={{ animationDelay: "0ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-blue-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Total SCARs</p>
               <Hash className="h-4 w-4 text-blue-600" />
@@ -854,7 +854,7 @@ export function SupplierCorrectiveActionRequestView() {
         </Card>
         <Card className="scar-kpi-enter relative overflow-hidden border-emerald-200/50" style={{ animationDelay: "60ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-emerald-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Effectiveness</p>
               <ThumbsUp className="h-4 w-4 text-emerald-600" />
@@ -867,7 +867,7 @@ export function SupplierCorrectiveActionRequestView() {
         </Card>
         <Card className="scar-kpi-enter relative overflow-hidden border-rose-200/50" style={{ animationDelay: "120ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-rose-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Critical SCARs</p>
               <AlertOctagon className="h-4 w-4 text-rose-600" />
@@ -878,7 +878,7 @@ export function SupplierCorrectiveActionRequestView() {
         </Card>
         <Card className="scar-kpi-enter relative overflow-hidden border-amber-200/50" style={{ animationDelay: "180ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-amber-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Overdue</p>
               <Clock className="h-4 w-4 text-amber-600" />
@@ -889,7 +889,7 @@ export function SupplierCorrectiveActionRequestView() {
         </Card>
         <Card className="scar-kpi-enter relative overflow-hidden border-violet-200/50" style={{ animationDelay: "240ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-violet-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Cost Impact</p>
               <IndianRupee className="h-4 w-4 text-violet-600" />
@@ -900,7 +900,7 @@ export function SupplierCorrectiveActionRequestView() {
         </Card>
         <Card className="scar-kpi-enter relative overflow-hidden border-orange-200/50" style={{ animationDelay: "300ms" }}>
           <div className="absolute right-0 top-0 h-12 w-12 rounded-bl-full bg-orange-100/60 blur-lg" />
-          <CardContent className="p-4 relative">
+          <CardContent className="glass-subtle p-4 relative">
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium text-muted-foreground">Avg Aging</p>
               <Clock className="h-4 w-4 text-orange-600" />
@@ -1068,9 +1068,9 @@ export function SupplierCorrectiveActionRequestView() {
       </div>
 
       {/* SCAR Master Table */}
-      <Card className="scar-table-card">
-        <CardContent className="p-0">
-          <Table>
+      <Card className="card-crud-lift scar-table-card">
+        <CardContent className="glass-subtle p-0">
+          <Table className="table-hover-highlight">
             <TableHeader>
               <TableRow className="bg-muted/40 hover:bg-muted/40">
                 <TableHead className="w-[130px]">SCAR ID</TableHead>
@@ -1416,7 +1416,7 @@ function SCARDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Defect Details</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="glass-subtle space-y-3">
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     <div className="rounded-md border p-3">
                       <p className="text-xs text-muted-foreground">Defect Type</p>
@@ -1478,7 +1478,7 @@ function SCARDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">SCAR Lifecycle Timeline</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <CardContent className="glass-subtle grid grid-cols-2 gap-3 sm:grid-cols-4">
                   <div className="rounded-md border p-3">
                     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Calendar className="h-3 w-3" /> Issue Date
@@ -1528,7 +1528,7 @@ function SCARDetailDrawer({
 
               {/* Notes */}
               <Card className="border-amber-200/50 bg-amber-50/20">
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="mt-0.5 h-4 w-4 text-amber-600" />
                     <div>
@@ -1610,7 +1610,7 @@ function SCARDetailDrawer({
                     No containment actions yet (SCAR still in draft)
                   </div>
                 ) : (
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="bg-muted/40 hover:bg-muted/40">
                         <TableHead className="w-[100px]">ID</TableHead>
@@ -1880,7 +1880,7 @@ function SCARDetailDrawer({
                 <CardHeader className="pb-2">
                   <CardTitle className="text-sm">Cost Impact Summary</CardTitle>
                 </CardHeader>
-                <CardContent className="grid grid-cols-3 gap-3">
+                <CardContent className="glass-subtle grid grid-cols-3 gap-3">
                   <div className="rounded-md border border-rose-200/50 bg-rose-50/30 p-3 text-center">
                     <CircleDollarSign className="mx-auto h-5 w-5 text-rose-600" />
                     <p className="mt-1 text-[10px] text-muted-foreground">Cost Impact</p>
@@ -1910,7 +1910,7 @@ function SCARDetailDrawer({
               {scar.closedDate && <> · Closed: <span className="font-mono">{scar.closedDate}</span></>}
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={handleExport} className="gap-1">
+              <Button variant="outline" size="sm" onClick={handleExport} className="btn-outline-animate gap-1">
                 <Download className="h-3 w-3" />
                 Export
               </Button>
@@ -1938,14 +1938,14 @@ function SCARDetailDrawer({
                     <CheckCircle2 className="h-3 w-3" />
                     Close (Effective)
                   </Button>
-                  <Button variant="outline" size="sm" onClick={() => handleAction("reject")} className="gap-1 border-rose-300 text-rose-700">
+                  <Button variant="outline" size="sm" onClick={() => handleAction("reject")} className="btn-outline-animate gap-1 border-rose-300 text-rose-700">
                     <XCircle className="h-3 w-3" />
                     Reject
                   </Button>
                 </>
               )}
               {(scar.status === "in-progress" || scar.status === "acknowledged") && (
-                <Button variant="outline" size="sm" onClick={() => handleAction("escalate")} className="gap-1 border-amber-300 text-amber-700">
+                <Button variant="outline" size="sm" onClick={() => handleAction("escalate")} className="btn-outline-animate gap-1 border-amber-300 text-amber-700">
                   <AlertTriangle className="h-3 w-3" />
                   Escalate
                 </Button>

@@ -403,7 +403,7 @@ export default function ExportDocumentationLCView() {
       <div className="edl-dashboard space-y-4">
         <div className="edl-kpi-grid grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
           {kpis.map((k, i) => (
-            <Card key={k.label} className="edl-kpi-card border-border/60"><CardContent className="p-3 flex items-center gap-2" style={{ animationDelay: `${i * 50}ms` }}>
+            <Card key={k.label} className="glass-subtle edl-kpi-card border-border/60"><CardContent className="p-3 flex items-center gap-2" style={{ animationDelay: `${i * 50}ms` }}>
               <div className={cn("edl-kpi-icon p-2 rounded-lg", k.bg)}><k.icon className={cn("h-4 w-4", k.color)} /></div>
               <div><p className="text-[9px] text-muted-foreground uppercase tracking-wide leading-tight">{k.label}</p><p className={cn("edl-counter text-sm font-bold", k.color)}>{k.value}</p></div>
             </CardContent></Card>
@@ -462,7 +462,7 @@ export default function ExportDocumentationLCView() {
             <TableCell className="text-[10px]">{s.exporter.split(" ").slice(0, 2).join(" ")}</TableCell>
             <TableCell className="text-[10px]">{s.port.split(" ")[0]}</TableCell>
             <TableCell className="text-[9px] max-w-[100px] truncate">{s.type}</TableCell>
-            <TableCell className="text-[10px] font-medium">{fmtShort(s.fobValue)}</TableCell>
+            <TableCell className="numeric-cell text-[10px] font-medium">{fmtShort(s.fobValue)}</TableCell>
             <TableCell className="text-[10px]">{s.goodsDesc}</TableCell>
             <TableCell className="text-[10px]">{s.destination}</TableCell>
             <TableCell className="text-[10px] text-muted-foreground">{s.filedDate}</TableCell>
@@ -496,7 +496,7 @@ export default function ExportDocumentationLCView() {
             <TableCell><LCTypeBadge type={l.type} /></TableCell>
             <TableCell className="text-[10px]">{l.bank}</TableCell>
             <TableCell><CurrencyBadge currency={l.currency} /></TableCell>
-            <TableCell className="text-[10px] font-medium">{`${l.currency} ${l.amount.toLocaleString()}`}</TableCell>
+            <TableCell className="numeric-cell text-[10px] font-medium">{`${l.currency} ${l.amount.toLocaleString()}`}</TableCell>
             <TableCell className="text-[10px] max-w-[100px] truncate">{l.applicant}</TableCell>
             <TableCell className="text-[10px] text-muted-foreground">{l.expiryDate}</TableCell>
             <TableCell><ExpiryCountdown days={l.daysToExpiry} /></TableCell>
@@ -530,7 +530,7 @@ export default function ExportDocumentationLCView() {
             <TableCell className="text-[10px] max-w-[100px] truncate">{inv.exporter.split(" ").slice(0, 2).join(" ")}</TableCell>
             <TableCell className="text-[10px]">{inv.destination}</TableCell>
             <TableCell><PaymentTermBadge term={inv.paymentTerm} /></TableCell>
-            <TableCell className="text-[10px] font-medium">{inv.currency === "INR" ? fmtShort(inv.totalAmount) : `${inv.currency} ${inv.totalAmount.toLocaleString()}`}</TableCell>
+            <TableCell className="numeric-cell text-[10px] font-medium">{inv.currency === "INR" ? fmtShort(inv.totalAmount) : `${inv.currency} ${inv.totalAmount.toLocaleString()}`}</TableCell>
             <TableCell className="text-[10px]">{inv.currency}</TableCell>
             <TableCell className="text-[9px] font-mono text-muted-foreground">{inv.lcRef || "—"}</TableCell>
             <TableCell className="text-[10px] text-muted-foreground">{inv.dueDate}</TableCell>
@@ -559,7 +559,7 @@ export default function ExportDocumentationLCView() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {rows.slice(0, 18).map(c => (
             <Card key={c.id} className="edl-cert-card border-border/60 cursor-pointer hover:shadow-md transition-all" onClick={() => { setDrawerData(c); setDrawerType("cert") }}>
-              <CardContent className="p-4 space-y-3">
+              <CardContent className="glass-subtle p-4 space-y-3">
                 <div className="flex items-start justify-between gap-2">
                   <div><p className="text-xs font-mono font-medium">{c.certNo}</p><p className="text-[10px] text-muted-foreground mt-0.5">{c.type}</p></div>
                   <CertStatusBadge status={c.status} />
@@ -601,7 +601,7 @@ export default function ExportDocumentationLCView() {
       <div className="edl-analytics-tab space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {cards.map(c => (
-            <Card key={c.label} className="edl-analytic-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
+            <Card key={c.label} className="glass-subtle edl-analytic-card border-border/60"><CardContent className="p-4 flex items-center gap-3">
               <c.icon className={cn("h-5 w-5", c.color)} /><div><p className="text-[10px] text-muted-foreground">{c.label}</p><p className={cn("text-lg font-bold", c.color)}>{c.value}</p></div>
             </CardContent></Card>
           ))}
@@ -666,15 +666,15 @@ export default function ExportDocumentationLCView() {
       {/* Shipping Bill Drawer */}
       <Sheet open={open && drawerType === "sb"} onOpenChange={close}><SheetContent className="edl-sb-drawer w-full sm:max-w-md overflow-y-auto">
         {drawerData && <><DrawerH title={drawerData.sbNo} desc={`${drawerData.id} | ${drawerData.exporter}`}>
-          <SBStatusBadge status={drawerData.status} /><Badge className="bg-white/20 text-white text-[10px] border-0">{drawerData.port}</Badge>
+          <SBStatusBadge status={drawerData.status} /><Badge className="badge-interactive bg-white/20 text-white text-[10px] border-0">{drawerData.port}</Badge>
         </DrawerH>
         <div className="space-y-4 px-1">
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-2">Progress</p><DocProgressTracker status={drawerData.status} /></CardContent></Card>
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">FOB Value</p><ExportValueTile value={drawerData.fobValue} trend={drawerData.trend} /></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-2">Progress</p><DocProgressTracker status={drawerData.status} /></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">FOB Value</p><ExportValueTile value={drawerData.fobValue} trend={drawerData.trend} /></CardContent></Card>
           <InfoG items={[["Type", drawerData.type], ["Port", drawerData.port], ["Destination", drawerData.destination], ["Goods", drawerData.goodsDesc], ["HS Code", drawerData.hsCode], ["Pkg Count", String(drawerData.pkgCount)], ["Gross Weight", `${drawerData.grossWeight} kg`], ["CIF Value", fmtINR(drawerData.cifValue)], ["Filed Date", drawerData.filedDate], ["Clearance Date", drawerData.clearanceDate || "Pending"]] } />
           <div className="flex gap-2 pt-2">
             {[{ label: "Verify", icon: CheckCircle2 }, { label: "Print", icon: Printer }, { label: "Submit", icon: Send }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.sbNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.sbNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}
@@ -687,16 +687,16 @@ export default function ExportDocumentationLCView() {
         </DrawerH>
         <div className="space-y-4 px-1">
           <div className="flex items-center justify-center"><LCStatusRing status={drawerData.status} /></div>
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Amount (INR Equiv)</p><ExportValueTile value={drawerData.inrEquiv} trend="up" /></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Amount (INR Equiv)</p><ExportValueTile value={drawerData.inrEquiv} trend="up" /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">
             {[{ label: "Amount", value: `${drawerData.currency} ${drawerData.amount.toLocaleString()}` }, { label: "Amendments", value: String(drawerData.amendmentCount) }, { label: "Port", value: drawerData.shipmentPort.split(" ")[0] }].map(m => (
-              <Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-teal-700 dark:text-teal-300">{m.value}</p></CardContent></Card>
+              <Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-teal-700 dark:text-teal-300">{m.value}</p></CardContent></Card>
             ))}
           </div>
           <InfoG items={[["Applicant", drawerData.applicant], ["Beneficiary", drawerData.beneficiary], ["Bank", drawerData.bank], ["Type", drawerData.type], ["Opened", drawerData.openedDate], ["Expiry", drawerData.expiryDate], ["Amendment Reason", drawerData.amendmentReason || "N/A"], ["Status", drawerData.status]]} />
           <div className="flex gap-2 pt-2">
             {[{ label: "Amend", icon: RefreshCw }, { label: "Present", icon: Send }, { label: "Close", icon: CheckCircle2 }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.lcNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.lcNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}
@@ -708,16 +708,16 @@ export default function ExportDocumentationLCView() {
           <InvoiceStatusBadge status={drawerData.status} /><PaymentTermBadge term={drawerData.paymentTerm} />
         </DrawerH>
         <div className="space-y-4 px-1">
-          <Card className="border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Payment Status</p><AmountDueIndicator paid={drawerData.paidAmount} total={drawerData.totalAmount} /></CardContent></Card>
+          <Card className="glass-subtle border-border/60"><CardContent className="p-3"><p className="text-[10px] text-muted-foreground mb-1">Payment Status</p><AmountDueIndicator paid={drawerData.paidAmount} total={drawerData.totalAmount} /></CardContent></Card>
           <div className="grid grid-cols-3 gap-3">
             {[{ label: "Total", value: drawerData.currency === "INR" ? fmtINR(drawerData.totalAmount) : `${drawerData.currency} ${drawerData.totalAmount.toLocaleString()}` }, { label: "Paid", value: fmtINR(drawerData.paidAmount) }, { label: "Balance", value: fmtINR(drawerData.totalAmount - drawerData.paidAmount) }].map(m => (
-              <Card key={m.label} className="border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700 dark:text-amber-300">{m.value}</p></CardContent></Card>
+              <Card key={m.label} className="glass-subtle border-border/60"><CardContent className="p-3 text-center"><p className="text-[10px] text-muted-foreground">{m.label}</p><p className="text-sm font-bold text-amber-700 dark:text-amber-300">{m.value}</p></CardContent></Card>
             ))}
           </div>
           <InfoG items={[["Exporter", drawerData.exporter], ["Destination", drawerData.destination], ["Currency", drawerData.currency], ["LC Reference", drawerData.lcRef || "None"], ["SB Reference", drawerData.sbRef], ["Goods", drawerData.goodsDesc], ["HS Code", drawerData.hsCode], ["Invoice Date", drawerData.invoiceDate], ["Due Date", drawerData.dueDate], ["Payment Term", drawerData.paymentTerm]]} />
           <div className="flex gap-2 pt-2">
             {[{ label: "Send", icon: Send }, { label: "Revise", icon: RefreshCw }, { label: "Record Payment", icon: CheckCircle2 }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.invNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.invNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}
@@ -732,7 +732,7 @@ export default function ExportDocumentationLCView() {
           <InfoG items={[["Type", drawerData.type], ["Authority", drawerData.authority], ["Applicant", drawerData.exporter], ["Destination", drawerData.destination], ["Goods", drawerData.goodsDesc], ["Applied", drawerData.appliedDate], ["Issued", drawerData.issuedDate || "Pending"], ["Expiry", drawerData.expiryDate || "N/A"], ["Status", drawerData.status]]} />
           <div className="flex gap-2 pt-2">
             {[{ label: "Download", icon: Download }, { label: "Apply", icon: Send }, { label: "Renew", icon: RefreshCw }].map(a => (
-              <Button key={a.label} variant="outline" size="sm" className="edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.certNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
+              <Button key={a.label} variant="outline" size="sm" className="btn-outline-animate edl-action-btn flex-1 text-xs h-8" onClick={() => toast.success(a.label, `${drawerData.certNo} ${a.label.toLowerCase()} triggered`)}><a.icon className="h-3 w-3 mr-1" />{a.label}</Button>
             ))}
           </div>
         </div></>}

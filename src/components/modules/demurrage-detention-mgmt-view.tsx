@@ -532,7 +532,7 @@ export default function DemurrageDetentionMgmtView() {
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -599,7 +599,7 @@ export default function DemurrageDetentionMgmtView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {data.freeTimeRecords.filter(r => statusFilter === "all" || r.zone === statusFilter).filter(r => searchTerm === "" || r.port.toLowerCase().includes(searchTerm.toLowerCase()) || r.container.toLowerCase().includes(searchTerm.toLowerCase())).map(r => (
               <Card key={r.id} className="ddm-chart-card hover:shadow-md transition-shadow">
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2"><span className="font-bold text-sm">{String(r.type)}</span><PortBadge port={r.port} /></div>
                     <UtilizationZoneBadge zone={r.zone} />
@@ -607,7 +607,7 @@ export default function DemurrageDetentionMgmtView() {
                   <div className="flex items-center gap-2"><ShippingLineBadge line={r.shippingLine} /><span className="font-mono text-[10px] text-muted-foreground">{r.container}</span></div>
                   <div className="w-full"><FreeTimeBar used={r.utilization} /><div className="flex justify-between text-[10px] mt-1"><span className="text-muted-foreground">{r.usedDays}/{r.totalDays} days</span><span className="font-bold tabular-nums">{r.utilization}%</span></div></div>
                   <div className="flex items-center justify-between"><CountdownTimer hours={r.remainingHours} /><span className="text-[10px] text-muted-foreground">Expiry: {r.expiryDate}</span></div>
-                  {r.extensionStatus !== "N/A" && <Badge variant="outline" className="text-[10px]">{String(r.extensionStatus)}</Badge>}
+                  {r.extensionStatus !== "N/A" && <Badge variant="outline" className="badge-interactive text-[10px]">{String(r.extensionStatus)}</Badge>}
                 </CardContent>
               </Card>
             ))}
@@ -648,7 +648,7 @@ export default function DemurrageDetentionMgmtView() {
                     <td className="px-3 py-2 tabular-nums text-red-600">{formatINR(inv.demurrage)}</td>
                     <td className="px-3 py-2 tabular-nums text-amber-600">{formatINR(inv.detention)}</td>
                     <td className="px-3 py-2 font-bold tabular-nums">{formatINR(inv.total)}</td>
-                    <td className="px-3 py-2"><Badge variant="outline" className="text-[10px]">{inv.gstType}</Badge></td>
+                    <td className="badge-interactive px-3 py-2"><Badge variant="outline" className="text-[10px]">{inv.gstType}</Badge></td>
                     <td className="px-3 py-2">{inv.dueDate}</td>
                     <td className="px-3 py-2"><Button size="sm" variant="ghost" className="ddm-action-btn h-7" onClick={() => { setDrawerRecord(inv); setDrawerOpen(true); }}><Eye className="w-3 h-3" /></Button></td>
                   </tr>
@@ -720,7 +720,7 @@ export default function DemurrageDetentionMgmtView() {
                   <CardTitle className="text-xs text-muted-foreground font-medium">{item.label}</CardTitle>
                   <span className="text-muted-foreground">{item.icon}</span>
                 </CardHeader>
-                <CardContent className="px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
+                <CardContent className="glass-subtle px-4 pb-3"><div className="text-xl font-bold tabular-nums">{item.value}</div></CardContent>
               </Card>
             ))}
           </div>
@@ -763,8 +763,8 @@ export default function DemurrageDetentionMgmtView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="ddm-action-btn flex-1" onClick={() => { toast.success("Container Released", `${drawerRecord.containerNo} marked as released`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Release</Button>
-                    <Button size="sm" variant="outline" className="ddm-action-btn flex-1" onClick={() => { toast.info("Dispute Raised", `Dispute for ${drawerRecord.containerNo}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Dispute</Button>
-                    <Button size="sm" variant="outline" className="ddm-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.containerNo} escalated to management`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.info("Dispute Raised", `Dispute for ${drawerRecord.containerNo}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" />Dispute</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn" onClick={() => { toast.warning("Escalated", `${drawerRecord.containerNo} escalated to management`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -786,8 +786,8 @@ export default function DemurrageDetentionMgmtView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="ddm-action-btn flex-1" onClick={() => { toast.success("Approved", `${drawerRecord.invoiceNo} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Approve</Button>
-                    <Button size="sm" variant="outline" className="ddm-action-btn flex-1" onClick={() => { toast.warning("Disputed", `${drawerRecord.invoiceNo} disputed`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Dispute</Button>
-                    <Button size="sm" variant="outline" className="ddm-action-btn" onClick={() => { toast.info("Payment Initiated", `${drawerRecord.invoiceNo}`); setDrawerOpen(false); }}><Receipt className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.warning("Disputed", `${drawerRecord.invoiceNo} disputed`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" />Dispute</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn" onClick={() => { toast.info("Payment Initiated", `${drawerRecord.invoiceNo}`); setDrawerOpen(false); }}><Receipt className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -811,8 +811,8 @@ export default function DemurrageDetentionMgmtView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="ddm-action-btn flex-1" onClick={() => { toast.success("Escalated", `${drawerRecord.disputeNo} escalated`); setDrawerOpen(false); }}><Zap className="w-3.5 h-3.5 mr-1" />Escalate</Button>
-                    <Button size="sm" variant="outline" className="ddm-action-btn flex-1" onClick={() => { toast.info("Accepted", `${drawerRecord.disputeNo} accepted`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Accept</Button>
-                    <Button size="sm" variant="outline" className="ddm-action-btn" onClick={() => { toast.error("Escalated to Legal", `${drawerRecord.disputeNo}`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn flex-1" onClick={() => { toast.info("Accepted", `${drawerRecord.disputeNo} accepted`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" />Accept</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ddm-action-btn" onClick={() => { toast.error("Escalated to Legal", `${drawerRecord.disputeNo}`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}

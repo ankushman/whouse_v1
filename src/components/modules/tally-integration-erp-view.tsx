@@ -615,7 +615,7 @@ function ConfidenceBar({ confidence }: { confidence: number }) {
 function LedgerPairCard({ wms, tally, confidence }: { wms: string; tally: string; confidence: number }) {
   return (
     <Card className="tie-ledger-pair-card border-2">
-      <CardContent className="p-3">
+      <CardContent className="glass-subtle p-3">
         <div className="flex items-center justify-between gap-2">
           <div className="text-center flex-1">
             <div className="text-[10px] text-muted-foreground uppercase">WMS Account</div>
@@ -675,7 +675,7 @@ function GSTModeTile({ cgst, sgst, igst }: { cgst: number; sgst: number; igst: n
   const total = cgst + sgst + igst;
   return (
     <Card className="bg-gradient-to-br from-teal-50 to-emerald-50 dark:from-teal-950/30 dark:to-emerald-950/30 border-teal-200 dark:border-teal-800">
-      <CardContent className="p-3 space-y-2">
+      <CardContent className="glass-subtle p-3 space-y-2">
         <div className="text-[10px] text-muted-foreground uppercase font-semibold">GST Breakdown</div>
         <div className="flex gap-2">
           {cgst > 0 && (
@@ -711,7 +711,7 @@ function AmountSyncIndicator({ wmsAmt, tallyAmt }: { wmsAmt: number; tallyAmt: n
   const diff = wmsAmt - tallyAmt;
   return (
     <Card className={cn("border", matched ? "border-emerald-200 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/20" : "border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/20")}>
-      <CardContent className="p-3 flex items-center justify-between">
+      <CardContent className="glass-subtle p-3 flex items-center justify-between">
         <div className="text-center">
           <div className="text-[10px] text-muted-foreground">WMS</div>
           <div className="text-sm font-bold tabular-nums">{formatINR(wmsAmt)}</div>
@@ -938,7 +938,7 @@ export default function TallyIntegrationERPView() {
         description="Manage data synchronization between WMS and Tally/SAP/Zoho ERP systems"
         actions={
           <div className="flex gap-2">
-            <Button size="sm" variant="outline" className="tie-action-btn" onClick={() => toast.info("Sync Initiated", "Full sync started across all ERP connections")}>
+            <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn" onClick={() => toast.info("Sync Initiated", "Full sync started across all ERP connections")}>
               <RefreshCw className="w-4 h-4 mr-1" /> Force Sync All
             </Button>
           </div>
@@ -975,7 +975,7 @@ export default function TallyIntegrationERPView() {
               { label: "Integrity Score", value: `${data.kpis.integrityScore}%`, suffix: "", color: "border-l-rose-500", icon: <ShieldCheck className="w-4 h-4 text-rose-600" /> },
             ].map((kpi, i) => (
               <Card key={kpi.label} className={cn("tie-kpi-card", kpi.color)} style={{ animationDelay: `${i * 50}ms` }}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div className="tie-counter-value">
                       <div className="text-xl font-bold tabular-nums">{typeof kpi.value === "number" ? kpi.value.toLocaleString("en-IN") : kpi.value}</div>
@@ -1138,7 +1138,7 @@ export default function TallyIntegrationERPView() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 tie-ledger-grid">
             {filteredMappings.map((map) => (
               <Card key={map.id} className="tie-ledger-card hover:shadow-md transition-shadow cursor-pointer" onClick={() => openDrawer(map, "ledger")}>
-                <CardContent className="p-4 space-y-3">
+                <CardContent className="glass-subtle p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-xs text-muted-foreground">{map.id}</span>
                     <MappingStatusBadge status={map.status} />
@@ -1302,7 +1302,7 @@ export default function TallyIntegrationERPView() {
               { label: "Auto-Match Rate", value: `${data.analyticsKpis.autoMatchRate}%`, color: "border-l-violet-500" },
             ].map((kpi, i) => (
               <Card key={kpi.label} className={cn("tie-analytics-card", kpi.color)} style={{ animationDelay: `${i * 50}ms` }}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="tie-counter-value">
                     <div className="text-xl font-bold tabular-nums">{kpi.value}</div>
                     <div className="text-[11px] text-muted-foreground">{kpi.label}</div>
@@ -1349,7 +1349,7 @@ export default function TallyIntegrationERPView() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <Card className="tie-chart-card">
               <CardHeader className="pb-2"><CardTitle className="text-sm">ERP Connection Health</CardTitle></CardHeader>
-              <CardContent className="flex justify-center">
+              <CardContent className="glass-subtle flex justify-center">
                 <HealthGaugeSVG score={data.analyticsKpis.erpHealthScore} />
               </CardContent>
             </Card>
@@ -1417,8 +1417,8 @@ export default function TallyIntegrationERPView() {
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" className="tie-action-btn flex-1" onClick={() => { toast.success("Sync Job Started", `${drawerRecord.id} is now running`); setDrawerOpen(false); }}><Play className="w-3.5 h-3.5 mr-1" /> Run</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn flex-1" onClick={() => { toast.warning("Job Cancelled", `${drawerRecord.id} has been cancelled`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn" onClick={() => toast.info("Viewing Log", `Opening sync log for ${drawerRecord.id}`)}><Eye className="w-3.5 h-3.5" /></Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn flex-1" onClick={() => { toast.warning("Job Cancelled", `${drawerRecord.id} has been cancelled`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn" onClick={() => toast.info("Viewing Log", `Opening sync log for ${drawerRecord.id}`)}><Eye className="w-3.5 h-3.5" /></Button>
                 </div>
               </>
             )}
@@ -1448,8 +1448,8 @@ export default function TallyIntegrationERPView() {
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" className="tie-action-btn flex-1" onClick={() => { toast.success("Mapping Confirmed", `Ledger mapping ${drawerRecord.id} saved`); setDrawerOpen(false); }}><Link2 className="w-3.5 h-3.5 mr-1" /> Map</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn flex-1" onClick={() => { toast.warning("Mapping Removed", `Ledger mapping ${drawerRecord.id} unmapped`); setDrawerOpen(false); }}><Unlink className="w-3.5 h-3.5 mr-1" /> Unmap</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn" onClick={() => toast.info("Edit Mode", `Editing ${drawerRecord.id}`)}><Edit3 className="w-3.5 h-3.5" /></Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn flex-1" onClick={() => { toast.warning("Mapping Removed", `Ledger mapping ${drawerRecord.id} unmapped`); setDrawerOpen(false); }}><Unlink className="w-3.5 h-3.5 mr-1" /> Unmap</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn" onClick={() => toast.info("Edit Mode", `Editing ${drawerRecord.id}`)}><Edit3 className="w-3.5 h-3.5" /></Button>
                 </div>
               </>
             )}
@@ -1482,8 +1482,8 @@ export default function TallyIntegrationERPView() {
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" className="tie-action-btn flex-1" onClick={() => { toast.success("Voucher Synced", `${drawerRecord.voucherNumber} synced to ERP`); setDrawerOpen(false); }}><SyncIcon className="w-3.5 h-3.5 mr-1" /> Sync</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn flex-1" onClick={() => { toast.success("Voucher Approved", `${drawerRecord.voucherNumber} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Approve</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn" onClick={() => { toast.warning("Reversal Initiated", `${drawerRecord.voucherNumber} reversal started`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5" /></Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn flex-1" onClick={() => { toast.success("Voucher Approved", `${drawerRecord.voucherNumber} approved`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Approve</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn" onClick={() => { toast.warning("Reversal Initiated", `${drawerRecord.voucherNumber} reversal started`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5" /></Button>
                 </div>
               </>
             )}
@@ -1510,8 +1510,8 @@ export default function TallyIntegrationERPView() {
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" className="tie-action-btn flex-1" onClick={() => { toast.success("Stock Synced", `${drawerRecord.sku} synced to Tally`); setDrawerOpen(false); }}><SyncIcon className="w-3.5 h-3.5 mr-1" /> Sync</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn flex-1" onClick={() => { toast.info("Adjustment Created", `Adjustment for ${drawerRecord.sku}`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5 mr-1" /> Adjust</Button>
-                  <Button size="sm" variant="outline" className="tie-action-btn" onClick={() => { toast.warning("Variance Ignored", `${drawerRecord.sku} marked as ignored`); setDrawerOpen(false); }}><EyeOff className="w-3.5 h-3.5" /></Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn flex-1" onClick={() => { toast.info("Adjustment Created", `Adjustment for ${drawerRecord.sku}`); setDrawerOpen(false); }}><Scale className="w-3.5 h-3.5 mr-1" /> Adjust</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate tie-action-btn" onClick={() => { toast.warning("Variance Ignored", `${drawerRecord.sku} marked as ignored`); setDrawerOpen(false); }}><EyeOff className="w-3.5 h-3.5" /></Button>
                 </div>
               </>
             )}

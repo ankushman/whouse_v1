@@ -391,7 +391,7 @@ function StatusBadge({ status }: { status: XDockStatus }) {
     : status === "cancelled" ? "secondary"
     : "default";
   return (
-    <Badge variant={variant as "default" | "destructive" | "outline" | "secondary" | "success" | "warning"} className="cd-status-badge cd-status--${status}">
+    <Badge variant={variant as "default" | "destructive" | "outline" | "secondary" | "success" | "warning"} className="badge-interactive cd-status-badge cd-status--${status}">
       <span className="cd-status-dot" style={{ backgroundColor: STATUS_COLORS[status] }} />
       {STATUS_LABELS[status]}
     </Badge>
@@ -413,7 +413,7 @@ function KpiCard({ title, value, subtitle, icon, trend, colorClass }: {
 }) {
   return (
     <Card className={`cd-kpi-card ${colorClass}`}>
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div>
             <p className="cd-kpi-title">{title}</p>
@@ -573,15 +573,15 @@ export default function CrossDockTransshipmentView() {
             </div>
           </div>
           <div className="cd-header-badges">
-            <Badge variant="outline" className="cd-header-badge cd-header-badge--active">
+            <Badge variant="outline" className="badge-interactive cd-header-badge cd-header-badge--active">
               <Activity className="h-3 w-3 mr-1" />
               {activeCount} Active
             </Badge>
-            <Badge variant="destructive" className="cd-header-badge">
+            <Badge variant="destructive" className="badge-interactive cd-header-badge">
               <AlertTriangle className="h-3 w-3 mr-1" />
               {delayedCount} Delayed
             </Badge>
-            <Badge variant="success" className="cd-header-badge cd-header-badge--success">
+            <Badge variant="success" className="badge-interactive cd-header-badge cd-header-badge--success">
               <CheckCircle2 className="h-3 w-3 mr-1" />
               {otpRate}% OTP
             </Badge>
@@ -858,7 +858,7 @@ export default function CrossDockTransshipmentView() {
           <div className="cd-register-layout">
             {/* Filter Bar */}
             <Card className="cd-filter-card">
-              <CardContent className="p-3">
+              <CardContent className="glass-subtle p-3">
                 <div className="cd-filter-bar">
                   <div className="cd-filter-search">
                     <Search className="h-4 w-4 cd-filter-search-icon" />
@@ -900,7 +900,7 @@ export default function CrossDockTransshipmentView() {
 
             {/* Shipment Table */}
             <Card className="cd-table-card">
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="cd-register-table-wrap">
                   <table className="cd-table cd-table--full">
                     <thead>
@@ -1137,16 +1137,16 @@ export default function CrossDockTransshipmentView() {
                           <span className="cd-inspector-label">Damage</span>
                           <span className="cd-inspector-value">
                             {selectedShipment.damageFlag
-                              ? <Badge variant="destructive"><AlertTriangle className="h-3 w-3 mr-1" />Reported</Badge>
-                              : <Badge variant="success"><CheckCircle2 className="h-3 w-3 mr-1" />None</Badge>}
+                              ? <Badge variant="destructive"><AlertTriangle className="badge-interactive h-3 w-3 mr-1" />Reported</Badge>
+                              : <Badge variant="success"><CheckCircle2 className="badge-interactive h-3 w-3 mr-1" />None</Badge>}
                           </span>
                         </div>
                         <div className="cd-inspector-flag">
                           <span className="cd-inspector-label">Quality Hold</span>
                           <span className="cd-inspector-value">
                             {selectedShipment.qualityHold
-                              ? <Badge variant="warning"><ShieldCheck className="h-3 w-3 mr-1" />On Hold</Badge>
-                              : <Badge variant="success"><CheckCircle2 className="h-3 w-3 mr-1" />Clear</Badge>}
+                              ? <Badge variant="warning"><ShieldCheck className="badge-interactive h-3 w-3 mr-1" />On Hold</Badge>
+                              : <Badge variant="success"><CheckCircle2 className="badge-interactive h-3 w-3 mr-1" />Clear</Badge>}
                           </span>
                         </div>
                       </div>

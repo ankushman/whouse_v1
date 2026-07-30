@@ -507,7 +507,7 @@ export default function ContainerFreightStationView() {
               { label: "Total Packages", value: fmt(totalPackages), icon: Boxes, color: "cfs-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color} cfs-stagger-${Math.min(i, 5)}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-2">
                     <kpi.icon className="h-4 w-4 cfs-kpi-icon" />
                     {kpi.total && <span className="cfs-kpi-total">/ {kpi.total}</span>}
@@ -567,7 +567,7 @@ export default function ContainerFreightStationView() {
               <CardHeader className="pb-2">
                 <CardTitle className="cfs-card-title"><Globe2 className="h-4 w-4" /> Movement &amp; Size</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="glass-subtle space-y-4">
                 <div>
                   <div className="text-xs font-semibold text-muted-foreground mb-2">Movement Type</div>
                   <div className="h-36">
@@ -649,7 +649,7 @@ export default function ContainerFreightStationView() {
       {activeTab === 1 && (
         <div className="cfs-tab-content space-y-4">
           <Card className="cfs-filter-card">
-            <CardContent className="p-3 flex flex-wrap items-center gap-3">
+            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cfs-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search ID or container..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cfs-filter-input" />
@@ -713,7 +713,7 @@ export default function ContainerFreightStationView() {
                         <td className="text-xs">{c.warehouse.split(" ")[0]}</td>
                         <td className="text-xs max-w-[120px] truncate">{c.shippingLine}</td>
                         <td>
-                          <Badge className="cfs-status-badge text-[10px]" style={{ background: `${STATUS_COLORS[c.status]}20`, color: STATUS_COLORS[c.status] }}>
+                          <Badge className="badge-interactive cfs-status-badge text-[10px]" style={{ background: `${STATUS_COLORS[c.status]}20`, color: STATUS_COLORS[c.status] }}>
                             {STATUS_LABELS[c.status]}
                           </Badge>
                         </td>
@@ -756,7 +756,7 @@ export default function ContainerFreightStationView() {
                     <div className="cfs-drawer-grid">
                       <div><span className="cfs-drawer-label">Size</span><span className="cfs-drawer-value">{SIZE_LABELS[selectedContainer.size]}</span></div>
                       <div><span className="cfs-drawer-label">Movement</span><span className="cfs-drawer-value capitalize">{selectedContainer.movement}</span></div>
-                      <div><span className="cfs-drawer-label">Status</span><Badge className="cfs-status-badge" style={{ background: `${STATUS_COLORS[selectedContainer.status]}20`, color: STATUS_COLORS[selectedContainer.status] }}>{STATUS_LABELS[selectedContainer.status]}</Badge></div>
+                      <div><span className="badge-interactive cfs-drawer-label">Status</span><Badge className="cfs-status-badge" style={{ background: `${STATUS_COLORS[selectedContainer.status]}20`, color: STATUS_COLORS[selectedContainer.status] }}>{STATUS_LABELS[selectedContainer.status]}</Badge></div>
                       <div><span className="cfs-drawer-label">Warehouse</span><span className="cfs-drawer-value">{selectedContainer.warehouse}</span></div>
                       <div><span className="cfs-drawer-label">Weight</span><span className="cfs-drawer-value">{fmt(selectedContainer.grossWeight)} kg</span></div>
                       <div><span className="cfs-drawer-label">Packages</span><span className="cfs-drawer-value">{fmt(selectedContainer.packages)}</span></div>
@@ -816,7 +816,7 @@ export default function ContainerFreightStationView() {
       {activeTab === 2 && (
         <div className="cfs-tab-content space-y-4">
           <Card className="cfs-filter-card">
-            <CardContent className="p-3 flex flex-wrap items-center gap-3">
+            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="cfs-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search doc name or ID..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="cfs-filter-input" />
@@ -837,7 +837,7 @@ export default function ContainerFreightStationView() {
               { label: "Rejected", value: data.docs.filter((d) => d.status === "rejected").length, color: "cfs-kpi-red" },
             ]).map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="cfs-kpi-value">{kpi.value}</div>
                   <div className="cfs-kpi-label">{kpi.label}</div>
                 </CardContent>
@@ -873,7 +873,7 @@ export default function ContainerFreightStationView() {
                         <td className="text-xs">{d.docType}</td>
                         <td className="font-mono text-xs">{d.containerId}</td>
                         <td>
-                          <Badge className="cfs-doc-badge text-[10px]" style={{ background: `${DOC_STATUS_COLORS[d.status]}20`, color: DOC_STATUS_COLORS[d.status] }}>
+                          <Badge className="badge-interactive cfs-doc-badge text-[10px]" style={{ background: `${DOC_STATUS_COLORS[d.status]}20`, color: DOC_STATUS_COLORS[d.status] }}>
                             {d.status}
                           </Badge>
                         </td>
@@ -966,7 +966,7 @@ export default function ContainerFreightStationView() {
               { label: "Replaced", value: data.seals.filter((s) => s.status === "replaced").length, color: "cfs-kpi-amber" },
             ].map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="cfs-kpi-value">{kpi.value}</div>
                   <div className="cfs-kpi-label">{kpi.label}</div>
                 </CardContent>
@@ -1057,7 +1057,7 @@ export default function ContainerFreightStationView() {
               { label: "Avg Daily Rate", value: `₹${Math.round(data.storage.reduce((s, e) => s + e.dailyRate, 0) / data.storage.length)}`, icon: Receipt, color: "cfs-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`cfs-kpi-card ${kpi.color}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <kpi.icon className="h-4 w-4 cfs-kpi-icon mb-2" />
                   <div className="cfs-kpi-value">{kpi.value}</div>
                   <div className="cfs-kpi-label">{kpi.label}</div>

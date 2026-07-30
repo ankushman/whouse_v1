@@ -837,7 +837,7 @@ export default function EWayBillGSTComplianceView() {
           <div className="ewb-kpi-grid grid grid-cols-2 gap-3 lg:grid-cols-4">
             {kpis.map((kpi, i) => (
               <Card key={i} className={cn("ewb-kpi-card border-l-4", kpi.color)}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <p className="text-[11px] text-muted-foreground uppercase tracking-wide">{kpi.label}</p>
@@ -995,7 +995,7 @@ export default function EWayBillGSTComplianceView() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
             {filteredVM.map((vm, idx) => (
               <Card key={vm.id} className={cn("ewb-vm-card ewb-row-stripe", idx % 2 === 1 && "bg-muted/20")}>
-                <CardContent className="p-4 space-y-3">
+                <CardContent className="glass-subtle p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <VehiclePlateBadge plate={vm.vehiclePlate} regState={vm.regState} />
                     <VehicleChangeIndicator oldPlate={vm.oldVehiclePlate} />
@@ -1021,7 +1021,7 @@ export default function EWayBillGSTComplianceView() {
                       <span className={cn("rounded-full border px-1.5 py-0.5 text-[10px] font-semibold", VEHICLE_STATUS_COLORS[vm.status] || "")}>{vm.status}</span>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" className="ewb-action-btn w-full text-xs" onClick={() => openDrawer(vm)}>
+                  <Button variant="outline" size="sm" className="btn-outline-animate ewb-action-btn w-full text-xs" onClick={() => openDrawer(vm)}>
                     <Eye className="w-3.5 h-3.5 mr-1" /> View Details
                   </Button>
                 </CardContent>
@@ -1141,7 +1141,7 @@ export default function EWayBillGSTComplianceView() {
           <div className="ewb-kpi-grid grid grid-cols-2 gap-3 lg:grid-cols-4">
             {analyticsKpis.map((kpi, i) => (
               <Card key={i} className={cn("ewb-analytics-card border-l-4", kpi.color)}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <p className="text-[11px] text-muted-foreground uppercase tracking-wide">{kpi.label}</p>
@@ -1302,7 +1302,7 @@ export default function EWayBillGSTComplianceView() {
                     <StateCodeBadge name={drawerRecord.toState} code={drawerRecord.toCode} />
                   </div>
                   <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-blue-200 dark:border-blue-800">
-                    <CardContent className="p-3 flex items-center justify-between">
+                    <CardContent className="glass-subtle p-3 flex items-center justify-between">
                       <div>
                         <div className="text-[10px] text-muted-foreground uppercase">Invoice Value</div>
                         <div className="text-lg font-bold tabular-nums">{formatINR(drawerRecord.value)}</div>
@@ -1325,8 +1325,8 @@ export default function EWayBillGSTComplianceView() {
                   <DistanceIndicator distance={drawerRecord.distance} />
                   <div className="flex gap-2">
                     <Button size="sm" className="ewb-action-btn flex-1" onClick={() => { toast.success("E-Way Bill Extended", `${drawerRecord.ewbNumber} validity extended by 3 days`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5 mr-1" /> Extend</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn flex-1" onClick={() => { toast.success("E-Way Bill Cancelled", `${drawerRecord.ewbNumber} has been cancelled`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn" onClick={() => toast.info("Printing E-Way Bill", `Generating PDF for ${drawerRecord.ewbNumber}`)}><Printer className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn flex-1" onClick={() => { toast.success("E-Way Bill Cancelled", `${drawerRecord.ewbNumber} has been cancelled`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn" onClick={() => toast.info("Printing E-Way Bill", `Generating PDF for ${drawerRecord.ewbNumber}`)}><Printer className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -1362,8 +1362,8 @@ export default function EWayBillGSTComplianceView() {
                   )}
                   <div className="flex gap-2">
                     <Button size="sm" className="ewb-action-btn flex-1" onClick={() => { toast.success("Vehicle Reassigned", `${drawerRecord.vehiclePlate} has been reassigned`); setDrawerOpen(false); }}><RefreshCw className="w-3.5 h-3.5 mr-1" /> Reassign</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn flex-1" onClick={() => toast.info("Report Filed", `Incident report for ${drawerRecord.vehiclePlate}`)}><FileText className="w-3.5 h-3.5 mr-1" /> Report</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn" onClick={() => { toast.success("Marked Complete", `${drawerRecord.vehiclePlate} delivery completed`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn flex-1" onClick={() => toast.info("Report Filed", `Incident report for ${drawerRecord.vehiclePlate}`)}><FileText className="w-3.5 h-3.5 mr-1" /> Report</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn" onClick={() => { toast.success("Marked Complete", `${drawerRecord.vehiclePlate} delivery completed`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -1388,8 +1388,8 @@ export default function EWayBillGSTComplianceView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="ewb-action-btn flex-1" onClick={() => { toast.success("Return Filed", `${drawerRecord.returnType} for ${drawerRecord.period}`); setDrawerOpen(false); }}><FileUp className="w-3.5 h-3.5 mr-1" /> File</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn flex-1" onClick={() => toast.info("Downloaded", `${drawerRecord.returnType} PDF downloaded`)}><FileDown className="w-3.5 h-3.5 mr-1" /> Download</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn" onClick={() => toast.info("Revision Started", `Opening revision for ${drawerRecord.returnType}`)}><RefreshCw className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn flex-1" onClick={() => toast.info("Downloaded", `${drawerRecord.returnType} PDF downloaded`)}><FileDown className="w-3.5 h-3.5 mr-1" /> Download</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn" onClick={() => toast.info("Revision Started", `Opening revision for ${drawerRecord.returnType}`)}><RefreshCw className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}
@@ -1413,8 +1413,8 @@ export default function EWayBillGSTComplianceView() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" className="ewb-action-btn flex-1" onClick={() => { toast.success("ITC Accepted", `${drawerRecord.invoiceNumber} ITC accepted`); setDrawerOpen(false); }}><CheckCircle2 className="w-3.5 h-3.5 mr-1" /> Accept</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn flex-1" onClick={() => { toast.success("ITC Rejected", `${drawerRecord.invoiceNumber} ITC rejected`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5 mr-1" /> Reject</Button>
-                    <Button size="sm" variant="outline" className="ewb-action-btn" onClick={() => toast.warning("Escalated", `${drawerRecord.invoiceNumber} escalated for review`)}><ArrowUp className="w-3.5 h-3.5" /></Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn flex-1" onClick={() => { toast.success("ITC Rejected", `${drawerRecord.invoiceNumber} ITC rejected`); setDrawerOpen(false); }}><XCircle className="w-3.5 h-3.5 mr-1" /> Reject</Button>
+                    <Button size="sm" variant="outline" className="btn-outline-animate ewb-action-btn" onClick={() => toast.warning("Escalated", `${drawerRecord.invoiceNumber} escalated for review`)}><ArrowUp className="w-3.5 h-3.5" /></Button>
                   </div>
                 </>
               )}

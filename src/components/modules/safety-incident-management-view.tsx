@@ -276,14 +276,14 @@ function SeverityBadge({ severity }: { severity: Severity }) {
   const colorMap: Record<Severity, "destructive" | "warning" | "default" | "secondary"> = {
     critical: "destructive", major: "warning", moderate: "default", minor: "secondary",
   };
-  return <Badge variant={colorMap[severity]} className="text-[10px] font-bold uppercase tracking-wider">{SEVERITY_LABELS[severity]}</Badge>;
+  return <Badge variant={colorMap[severity]} className="badge-interactive text-[10px] font-bold uppercase tracking-wider">{SEVERITY_LABELS[severity]}</Badge>;
 }
 
 function StatusBadge({ status }: { status: Status }) {
   const colorMap: Record<Status, "destructive" | "warning" | "default" | "secondary" | "outline"> = {
     open: "destructive", investigating: "warning", root_cause_found: "default", corrective_action: "secondary", closed: "outline",
   };
-  return <Badge variant={colorMap[status]} className="text-[10px]">{STATUS_LABELS[status]}</Badge>;
+  return <Badge variant={colorMap[status]} className="badge-interactive text-[10px]">{STATUS_LABELS[status]}</Badge>;
 }
 
 function FormatINR(n: number): string {
@@ -596,7 +596,7 @@ export function SafetyIncidentManagementView() {
                     <ShieldCheck className="h-4 w-4 text-emerald-500" /> Safety Culture — Leading Indicators
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="glass-subtle space-y-3">
                   {safetyCulture.map((item) => {
                     const pct = Math.min((item.value / item.target) * 100, 100);
                     return (
@@ -793,8 +793,8 @@ export function SafetyIncidentManagementView() {
                         <span className="font-mono text-sm text-white/70">{selectedIncident.incidentNo}</span>
                         <SeverityBadge severity={selectedIncident.severity} />
                         <StatusBadge status={selectedIncident.status} />
-                        {selectedIncident.oshaRecordable && <Badge variant="destructive" className="text-[10px]">OSHA</Badge>}
-                        {selectedIncident.nearMiss && <Badge variant="warning" className="text-[10px]">Near Miss</Badge>}
+                        {selectedIncident.oshaRecordable && <Badge variant="destructive" className="badge-interactive text-[10px]">OSHA</Badge>}
+                        {selectedIncident.nearMiss && <Badge variant="warning" className="badge-interactive text-[10px]">Near Miss</Badge>}
                       </div>
                       <h2 className="text-lg font-bold text-white">{selectedIncident.title}</h2>
                       <p className="text-white/60 text-xs mt-1">{selectedIncident.description}</p>
@@ -826,7 +826,7 @@ export function SafetyIncidentManagementView() {
                       {selectedIncident.rootCauseAnalysis ? (
                         <div className="space-y-4">
                           <div className="sim-rca-method">
-                            <Badge variant="outline" className="text-xs">{selectedIncident.rootCauseAnalysis.method}</Badge>
+                            <Badge variant="outline" className="badge-interactive text-xs">{selectedIncident.rootCauseAnalysis.method}</Badge>
                             <span className="text-xs text-muted-foreground">Analysis Method</span>
                           </div>
 
@@ -889,10 +889,12 @@ export function SafetyIncidentManagementView() {
                               </div>
                             </div>
                             <div className="flex flex-wrap gap-1.5">
-                              {selectedIncident.injuryRecord.firstAid && <Badge variant="secondary" className="text-[10px]">First Aid</Badge>}
-                              {selectedIncident.injuryRecord.medicalTreatment && <Badge variant="warning" className="text-[10px]">Medical Treatment</Badge>}
-                              {selectedIncident.injuryRecord.lostTime && <Badge variant="destructive" className="text-[10px]">Lost Time ({selectedIncident.injuryRecord.daysLost}d)</Badge>}
-                              {selectedIncident.injuryRecord.restrictedDuty && <Badge variant="outline" className="text-[10px]">Restricted Duty</Badge>}
+<div className="chip-group">
+                              {selectedIncident.injuryRecord.firstAid && <Badge variant="secondary" className="badge-interactive text-[10px]">First Aid</Badge>}
+                              {selectedIncident.injuryRecord.medicalTreatment && <Badge variant="warning" className="badge-interactive text-[10px]">Medical Treatment</Badge>}
+                              {selectedIncident.injuryRecord.lostTime && <Badge variant="destructive" className="badge-interactive text-[10px]">Lost Time ({selectedIncident.injuryRecord.daysLost}d)</Badge>}
+                              {selectedIncident.injuryRecord.restrictedDuty && <Badge variant="outline" className="badge-interactive text-[10px]">Restricted Duty</Badge>}
+</div>
                             </div>
                             {selectedIncident.injuryRecord.daysLost > 0 && (
                               <div className="sim-days-lost">
@@ -922,7 +924,7 @@ export function SafetyIncidentManagementView() {
                                 <div className="flex items-center gap-2">
                                   <User className="h-3.5 w-3.5 text-muted-foreground" />
                                   <span className="text-xs font-medium">{w.name}</span>
-                                  <Badge variant="outline" className="text-[10px]">{w.role}</Badge>
+                                  <Badge variant="outline" className="badge-interactive text-[10px]">{w.role}</Badge>
                                 </div>
                                 <p className="text-[11px] text-muted-foreground mt-1 ml-5.5">{w.statement}</p>
                               </div>
@@ -1058,7 +1060,7 @@ export function SafetyIncidentManagementView() {
                           <td className="text-xs text-muted-foreground">{ca.dueDate}</td>
                           <td><SeverityBadge severity={ca.priority} /></td>
                           <td>
-                            <Badge variant={ca.status === "completed" ? "success" : ca.status === "in_progress" ? "secondary" : "warning"} className="text-[10px]">
+                            <Badge variant={ca.status === "completed" ? "success" : ca.status === "in_progress" ? "secondary" : "warning"} className="badge-interactive text-[10px]">
                               {ca.status === "completed" ? "Completed" : ca.status === "in_progress" ? "In Progress" : "Pending"}
                             </Badge>
                           </td>
@@ -1107,7 +1109,7 @@ export function SafetyIncidentManagementView() {
                     <FileText className="h-4 w-4 text-indigo-500" /> Regulatory Compliance Checklist
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="glass-subtle space-y-2">
                   {[
                     { item: "OSHA 300 Log Maintained", status: "compliant", note: "Updated weekly" },
                     { item: "OSHA 300A Annual Summary", status: "compliant", note: "Posted Feb 1" },
@@ -1128,7 +1130,7 @@ export function SafetyIncidentManagementView() {
                          item.status === "expiring" ? <AlertTriangle className="h-4 w-4 text-amber-500" /> :
                          <XCircle className="h-4 w-4 text-red-500" />}
                         <span className="text-xs font-medium flex-1">{item.item}</span>
-                        <Badge variant={item.status === "compliant" ? "success" : item.status === "expiring" ? "warning" : "destructive"} className="text-[10px]">
+                        <Badge variant={item.status === "compliant" ? "success" : item.status === "expiring" ? "warning" : "destructive"} className="badge-interactive text-[10px]">
                           {item.status}
                         </Badge>
                       </div>

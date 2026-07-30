@@ -352,7 +352,7 @@ function SeverityBadge({ severity }: { severity: string }) {
 }
 function RefundMethodBadge({ method }: { method: string }) {
   const icons: Record<string, string> = { "Original Payment": "💳", "UPI Refund": "📱", "Bank Transfer": "🏦", "Wallet Credit": "💎", "Store Credit": "🏪", "NEFT": "💰", "Gift Card": "🎁" }
-  return <Badge className="text-[10px] px-1.5 py-0 font-medium bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300">{icons[method] ?? ""} {method}</Badge>
+  return <Badge className="badge-interactive text-[10px] px-1.5 py-0 font-medium bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300">{icons[method] ?? ""} {method}</Badge>
 }
 function RefundStatusBadge({ status }: { status: string }) {
   return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", REFUND_STATUS_COLORS[status] ?? "bg-gray-100 text-gray-700")}>{status}</Badge>
@@ -361,7 +361,7 @@ function ConditionGradeBadge({ grade }: { grade: string }) {
   return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", GRADE_COLORS[grade] ?? "bg-gray-100 text-gray-700")}>{grade}</Badge>
 }
 function RecoveryChannelBadge({ channel }: { channel: string }) {
-  return <Badge className="text-[10px] px-1.5 py-0 font-medium bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300">{channel}</Badge>
+  return <Badge className="badge-interactive text-[10px] px-1.5 py-0 font-medium bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300">{channel}</Badge>
 }
 function RecoveryStatusBadge({ status }: { status: string }) {
   return <Badge className={cn("text-[10px] px-1.5 py-0 font-medium", RECOVERY_STATUS_COLORS[status] ?? "bg-gray-100 text-gray-700")}>{status}</Badge>
@@ -496,7 +496,7 @@ export default function ReverseLogisticsEnhancementView() {
               const Icon = k.icon
               return (
                 <Card key={i} className="rle-kpi-card border-l-4 border-l-rose-500 hover:shadow-lg transition-shadow">
-                  <CardContent className="p-3">
+                  <CardContent className="glass-subtle p-3">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p>
@@ -545,7 +545,7 @@ export default function ReverseLogisticsEnhancementView() {
             </Select>
           </div>
           <div className="border rounded-lg overflow-auto max-h-[520px]">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow>
                   <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
@@ -569,7 +569,7 @@ export default function ReverseLogisticsEnhancementView() {
                     <TableCell><ReturnReasonBadge reason={r.reason} /></TableCell>
                     <TableCell><ChannelBadge channel={r.channel} /></TableCell>
                     <TableCell><ReturnStatusBadge status={r.status} /></TableCell>
-                    <TableCell className="text-xs font-semibold">{formatINR(r.value)}</TableCell>
+                    <TableCell className="numeric-cell text-xs font-semibold">{formatINR(r.value)}</TableCell>
                     <TableCell className="text-xs">{r.pickupDate}</TableCell>
                     <TableCell><TATBadge days={r.age} /></TableCell>
                     <TableCell><Button variant="ghost" size="sm" className="h-7 text-[10px] rle-action-btn" onClick={() => openDetail(r)}><Eye className="w-3 h-3 mr-1" />View</Button></TableCell>
@@ -589,7 +589,7 @@ export default function ReverseLogisticsEnhancementView() {
             </div>
           </div>
           <div className="border rounded-lg overflow-auto max-h-[520px]">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow>
                   <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
@@ -613,7 +613,7 @@ export default function ReverseLogisticsEnhancementView() {
                     <TableCell><QualityResultBadge result={ins.result} /></TableCell>
                     <TableCell><DefectTypeBadge type={ins.defectType} /></TableCell>
                     <TableCell><SeverityBadge severity={ins.severity} /></TableCell>
-                    <TableCell><Badge className="text-[10px] px-1.5 py-0 font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">{ins.action}</Badge></TableCell>
+                    <TableCell><Badge className="badge-interactive text-[10px] px-1.5 py-0 font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">{ins.action}</Badge></TableCell>
                     <TableCell className="text-[10px] text-gray-600 dark:text-gray-400 max-w-[140px] truncate">{ins.notes}</TableCell>
                   </TableRow>
                 ))}
@@ -641,7 +641,7 @@ export default function ReverseLogisticsEnhancementView() {
             {filteredRefunds.map(r => (
               <Card key={r.id} className="rle-refund-card overflow-hidden">
                 <div className="h-1.5 bg-gradient-to-r from-rose-500 to-emerald-500" />
-                <CardContent className="p-3 space-y-2">
+                <CardContent className="glass-subtle p-3 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-semibold">{r.id}</span>
                     <RefundStatusBadge status={r.status} />
@@ -683,7 +683,7 @@ export default function ReverseLogisticsEnhancementView() {
             </Select>
           </div>
           <div className="border rounded-lg overflow-auto max-h-[520px]">
-            <Table>
+            <Table className="table-hover-highlight">
               <TableHeader>
                 <TableRow>
                   <SortHeader label="ID" field="id" sortField={sortField} sortDir={sortDir} onSort={handleSort} />
@@ -704,8 +704,8 @@ export default function ReverseLogisticsEnhancementView() {
                     <TableCell className="text-xs font-mono">{rc.product}</TableCell>
                     <TableCell><ConditionGradeBadge grade={rc.conditionGrade} /></TableCell>
                     <TableCell><RecoveryChannelBadge channel={rc.recoveryChannel} /></TableCell>
-                    <TableCell className="text-xs font-semibold">{formatINR(rc.listedPrice)}</TableCell>
-                    <TableCell className="text-xs font-semibold">{formatINR(rc.soldPrice)}</TableCell>
+                    <TableCell className="numeric-cell text-xs font-semibold">{formatINR(rc.listedPrice)}</TableCell>
+                    <TableCell className="numeric-cell text-xs font-semibold">{formatINR(rc.soldPrice)}</TableCell>
                     <TableCell><RecoveryPctBar pct={rc.recoveryPct} /></TableCell>
                     <TableCell><RecoveryStatusBadge status={rc.status} /></TableCell>
                     <TableCell className="text-xs font-mono">{rc.daysToSell}d</TableCell>
@@ -732,7 +732,7 @@ export default function ReverseLogisticsEnhancementView() {
               const Icon = k.icon
               return (
                 <Card key={i} className="rle-kpi-card border-l-4 border-l-emerald-500">
-                  <CardContent className="p-3">
+                  <CardContent className="glass-subtle p-3">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{k.label}</p>

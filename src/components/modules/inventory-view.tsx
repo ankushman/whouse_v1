@@ -222,7 +222,7 @@ export function InventoryView() {
       sortable: true,
       className: "w-[100px]",
       render: (value) => (
-        <Badge variant="outline" className="text-[10px] font-normal">{value as string}</Badge>
+        <Badge variant="outline" className="badge-interactive text-[10px] font-normal">{value as string}</Badge>
       ),
     },
     {
@@ -324,11 +324,11 @@ export function InventoryView() {
         actions={
           <div className="flex items-center gap-2">
             <ExportButton onExportCSV={handleExportCSV} />
-            <Button variant="outline" size="sm" className="gap-1.5" onClick={() => setScannerOpen(true)}>
+            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5" onClick={() => setScannerOpen(true)}>
               <ScanBarcode className="h-3.5 w-3.5" />
               Scan
             </Button>
-            <Button variant="outline" size="sm" className="gap-1.5">
+            <Button variant="outline" size="sm" className="btn-outline-animate gap-1.5">
               <RefreshCw className="h-3.5 w-3.5" />
               Refresh
             </Button>
@@ -339,7 +339,7 @@ export function InventoryView() {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 stagger-children">
         <Card className="card-depth card-accent-blue relative overflow-hidden">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total SKUs</p>
@@ -352,7 +352,7 @@ export function InventoryView() {
           </CardContent>
         </Card>
         <Card className="card-depth relative overflow-hidden">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Total Items</p>
@@ -365,7 +365,7 @@ export function InventoryView() {
           </CardContent>
         </Card>
         <Card className="card-depth relative overflow-hidden border-red-200 dark:border-red-900">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Below Min Stock</p>
@@ -378,7 +378,7 @@ export function InventoryView() {
           </CardContent>
         </Card>
         <Card className="card-depth relative overflow-hidden">
-          <CardContent className="p-4">
+          <CardContent className="glass-subtle p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">Avg Accuracy</p>
@@ -440,7 +440,7 @@ export function InventoryView() {
               <BrainCircuit className="size-4 text-muted-foreground" />
               <CardTitle className="text-sm font-semibold">Demand Forecasting</CardTitle>
             </div>
-            <Badge variant="outline" className="text-[10px] font-normal text-emerald-600 border-emerald-200 dark:text-emerald-400 dark:border-emerald-800">
+            <Badge variant="outline" className="badge-interactive text-[10px] font-normal text-emerald-600 border-emerald-200 dark:text-emerald-400 dark:border-emerald-800">
               Forecast Accuracy: 94.2%
             </Badge>
           </div>
@@ -527,11 +527,11 @@ export function InventoryView() {
         <TabsList className="h-9">
           <TabsTrigger value="variance" className="text-xs">
             Inventory Items
-            {filteredItems.length > 0 && (<Badge variant="secondary" className="ml-1.5 h-4 px-1.5 text-[10px]">{filteredItems.length}</Badge>)}
+            {filteredItems.length > 0 && (<Badge variant="secondary" className="badge-interactive ml-1.5 h-4 px-1.5 text-[10px]">{filteredItems.length}</Badge>)}
           </TabsTrigger>
           <TabsTrigger value="alerts" className="text-xs">
             Stock Alerts
-            {stockAlerts.length > 0 && (<Badge variant="destructive" className="ml-1.5 h-4 px-1.5 text-[10px]">{stockAlerts.length}</Badge>)}
+            {stockAlerts.length > 0 && (<Badge variant="destructive" className="badge-interactive ml-1.5 h-4 px-1.5 text-[10px]">{stockAlerts.length}</Badge>)}
           </TabsTrigger>
         </TabsList>
 
@@ -552,7 +552,7 @@ export function InventoryView() {
         <TabsContent value="alerts" className="mt-4">
           {stockAlerts.length === 0 ? (
             <Card>
-              <CardContent className="flex flex-col items-center justify-center py-12">
+              <CardContent className="glass-subtle flex flex-col items-center justify-center py-12">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-950">
                   <Package className="h-6 w-6 text-emerald-500" />
                 </div>
@@ -571,7 +571,7 @@ export function InventoryView() {
                     className="border-red-200 dark:border-red-900 cursor-pointer hover:shadow-md hover:border-red-300 dark:hover:border-red-800 transition-all"
                     onClick={() => openDetail(item as unknown as InventoryDetailRow)}
                   >
-                    <CardContent className="p-4">
+                    <CardContent className="glass-subtle p-4">
                       <div className="flex items-start justify-between gap-2">
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
@@ -580,7 +580,7 @@ export function InventoryView() {
                           </div>
                           <p className="mt-1 font-mono text-[10px] text-muted-foreground">{item.sku}</p>
                         </div>
-                        <Badge variant="outline" className="shrink-0 text-[10px]">{item.abcClass}</Badge>
+                        <Badge variant="outline" className="badge-interactive shrink-0 text-[10px]">{item.abcClass}</Badge>
                       </div>
                       <div className="mt-3 space-y-2">
                         <div className="flex items-center justify-between text-[11px]">

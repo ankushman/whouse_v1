@@ -212,8 +212,8 @@ export default function MultiChannelFulfillmentView() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Badge className="mcf-badge-trend mcf-badge-trend-up">{totalOrders} Orders</Badge>
-          <Badge className="mcf-badge-trend mcf-badge-trend-up">{CHANNELS.length} Channels</Badge>
+          <Badge className="badge-interactive mcf-badge-trend mcf-badge-trend-up">{totalOrders} Orders</Badge>
+          <Badge className="badge-interactive mcf-badge-trend mcf-badge-trend-up">{CHANNELS.length} Channels</Badge>
         </div>
       </div>
 
@@ -235,7 +235,7 @@ export default function MultiChannelFulfillmentView() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {SUMMARY_KPIS.map((kpi) => (
                 <Card key={kpi.label} className="mcf-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-center justify-between mb-2">
                       <kpi.icon className="h-4 w-4 mcf-kpi-icon" />
                       <span className={cn("mcf-trend-badge", kpi.trend === "up" ? "mcf-trend-up" : "mcf-trend-down")}>
@@ -381,7 +381,7 @@ export default function MultiChannelFulfillmentView() {
                 const cnt = orders.filter((o) => o.status === s).length
                 return (
                   <Card key={s} className="mcf-stat-mini cursor-pointer" onClick={() => setStatusFilter(s)}>
-                    <CardContent className="p-2 text-center">
+                    <CardContent className="glass-subtle p-2 text-center">
                       <div className="text-sm font-bold">{cnt}</div>
                       <div className="text-[9px] opacity-60 truncate">{s}</div>
                     </CardContent>
@@ -390,10 +390,10 @@ export default function MultiChannelFulfillmentView() {
               })}
             </div>
 
-            <Card className="mcf-table-card">
-              <CardContent className="p-0">
+            <Card className="card-crud-lift mcf-table-card">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="mcf-table-header">
                         <TableHead className="mcf-th">Order</TableHead>
@@ -413,16 +413,16 @@ export default function MultiChannelFulfillmentView() {
                       {filteredOrders.slice(0, 35).map((o) => (
                         <TableRow key={o.id} className="mcf-table-row cursor-pointer" onClick={() => openDrawer(o)}>
                           <TableCell className="mcf-td font-mono text-xs">{o.id}</TableCell>
-                          <TableCell className="mcf-td"><Badge className="mcf-channel-badge text-[10px]" style={{ background: `${o.channel.color}15`, color: o.channel.color, borderColor: `${o.channel.color}30` }}>{o.channel.name}</Badge></TableCell>
+                          <TableCell className="badge-interactive mcf-td"><Badge className="mcf-channel-badge text-[10px]" style={{ background: `${o.channel.color}15`, color: o.channel.color, borderColor: `${o.channel.color}30` }}>{o.channel.name}</Badge></TableCell>
                           <TableCell className="mcf-td text-xs max-w-[120px] truncate">{o.customer}</TableCell>
-                          <TableCell className="mcf-td"><Badge className="mcf-type-badge text-[10px]">{o.fulfillmentType}</Badge></TableCell>
+                          <TableCell className="badge-interactive mcf-td"><Badge className="mcf-type-badge text-[10px]">{o.fulfillmentType}</Badge></TableCell>
                           <TableCell className="mcf-td text-xs font-mono">{o.items}</TableCell>
-                          <TableCell className="mcf-td text-xs font-mono">{fmtRupee(o.totalValue)}</TableCell>
+                          <TableCell className="numeric-cell mcf-td text-xs font-mono">{fmtRupee(o.totalValue)}</TableCell>
                           <TableCell className="mcf-td text-xs">{o.paymentMethod}</TableCell>
                           <TableCell className="mcf-td text-xs">{o.carrier}</TableCell>
                           <TableCell className="mcf-td text-xs">{o.warehouse}</TableCell>
                           <TableCell className="mcf-td text-xs">{o.slaHours}h</TableCell>
-                          <TableCell className="mcf-td"><Badge className={cn(STATUS_COLORS[o.status], "text-[10px]")}>{o.status}</Badge></TableCell>
+                          <TableCell className="badge-interactive mcf-td"><Badge className={cn(STATUS_COLORS[o.status], "text-[10px]")}>{o.status}</Badge></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -438,7 +438,7 @@ export default function MultiChannelFulfillmentView() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {channelPerformance.map((ch) => (
                 <Card key={ch.id} className="mcf-channel-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <div className="mcf-ch-icon" style={{ background: ch.color }}>{ch.name.charAt(0)}</div>
@@ -506,9 +506,9 @@ export default function MultiChannelFulfillmentView() {
 
             <Card className="mcf-table-card">
               <CardHeader className="pb-2"><CardTitle className="mcf-chart-title text-sm">Carrier Performance Summary</CardTitle></CardHeader>
-              <CardContent className="p-0">
+              <CardContent className="glass-subtle p-0">
                 <div className="overflow-x-auto">
-                  <Table>
+                  <Table className="table-hover-highlight">
                     <TableHeader>
                       <TableRow className="mcf-table-header">
                         <TableHead className="mcf-th">Carrier</TableHead>
@@ -526,7 +526,7 @@ export default function MultiChannelFulfillmentView() {
                           <TableCell className="mcf-td text-xs font-medium">{c.name}</TableCell>
                           <TableCell className="mcf-td font-mono text-xs">{c.shipments}</TableCell>
                           <TableCell className="mcf-td font-mono text-xs">{c.delivered}</TableCell>
-                          <TableCell className="mcf-td font-mono text-xs">{fmtRupee(c.avgCost)}</TableCell>
+                          <TableCell className="numeric-cell mcf-td font-mono text-xs">{fmtRupee(c.avgCost)}</TableCell>
                           <TableCell className={cn("mcf-td text-xs font-bold", c.onTimeRate >= 95 ? "text-emerald-600" : c.onTimeRate >= 85 ? "text-amber-500" : "text-red-500")}>{c.onTimeRate}%</TableCell>
                           <TableCell className={cn("mcf-td text-xs", c.damageRate < 1 ? "text-emerald-600" : "text-red-500")}>{c.damageRate}%</TableCell>
                           <TableCell className="mcf-td font-mono text-xs">{c.avgTransit}d</TableCell>
@@ -550,7 +550,7 @@ export default function MultiChannelFulfillmentView() {
                 { label: "Marketplace Share", value: `${rInt(55, 75)}%`, sub: "Of total orders" },
               ].map((k) => (
                 <Card key={k.label} className="mcf-kpi-card">
-                  <CardContent className="p-4">
+                  <CardContent className="glass-subtle p-4">
                     <div className="mcf-kpi-value text-lg font-bold">{k.value}</div>
                     <div className="mcf-kpi-label text-xs">{k.label}</div>
                     <div className="mcf-kpi-sub text-xs">{k.sub}</div>
@@ -653,9 +653,11 @@ export default function MultiChannelFulfillmentView() {
                 </Button>
               </div>
               <div className="flex items-center gap-2 mt-3">
-                <Badge className="mcf-channel-badge" style={{ background: `${selectedOrder.channel.color}30`, color: "#fff", borderColor: `${selectedOrder.channel.color}50` }}>{selectedOrder.channel.name}</Badge>
+<div className="chip-group">
+                <Badge className="badge-interactive mcf-channel-badge" style={{ background: `${selectedOrder.channel.color}30`, color: "#fff", borderColor: `${selectedOrder.channel.color}50` }}>{selectedOrder.channel.name}</Badge>
                 <Badge className={cn(STATUS_COLORS[selectedOrder.status])}>{selectedOrder.status}</Badge>
                 <Badge className={cn(PRIORITY_COLORS[selectedOrder.priority], "text-white")}>{selectedOrder.priority}</Badge>
+</div>
               </div>
             </div>
 

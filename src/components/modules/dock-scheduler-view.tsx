@@ -231,7 +231,7 @@ function DockCard({
         </button>
       </CardHeader>
 
-      <CardContent className="px-3 pb-3">
+      <CardContent className="glass-subtle px-3 pb-3">
         {assignment && dock.status === "occupied" ? (
           <div className="space-y-2.5">
             <div className="flex items-center gap-1.5">
@@ -240,7 +240,7 @@ function DockCard({
               ) : (
                 <ArrowUpFromLine className="h-3 w-3 text-emerald-500" />
               )}
-              <Badge variant="outline" className="text-[9px] px-1.5">
+              <Badge variant="outline" className="badge-interactive text-[9px] px-1.5">
                 {assignment.type === "inbound" ? "IN" : "OUT"}
               </Badge>
               <Badge className={cn("text-[9px] px-1.5", priorityColors[assignment.priority])}>
@@ -318,7 +318,7 @@ function DockCard({
               <Clock className="h-2.5 w-2.5" />
               Arriving at {assignment.startTime}
             </div>
-            <Button size="sm" variant="outline" className="w-full h-6 text-[9px] gap-1">
+            <Button size="sm" variant="outline" className="btn-outline-animate w-full h-6 text-[9px] gap-1">
               <X className="h-2.5 w-2.5" /> Cancel Reservation
             </Button>
           </div>
@@ -327,7 +327,7 @@ function DockCard({
             <Wrench className="h-5 w-5 text-red-400" />
             <p className="text-[10px] font-medium text-red-600 dark:text-red-400">Under Maintenance</p>
             <p className="text-[9px] text-muted-foreground">Estimated repair: 2h</p>
-            <Button size="sm" variant="outline" className="h-6 text-[9px] gap-1 mt-1">
+            <Button size="sm" variant="outline" className="btn-outline-animate h-6 text-[9px] gap-1 mt-1">
               <RotateCcw className="h-2.5 w-2.5" /> Mark Available
             </Button>
           </div>
@@ -422,7 +422,7 @@ function SortableQueuedVehicle({
       </div>
       {!isOverlay && (
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="text-[9px] gap-1">
+          <Badge variant="outline" className="badge-interactive text-[9px] gap-1">
             <Clock className="h-2.5 w-2.5" />
             <span className="text-number">{vehicle.waitTime}</span>m
           </Badge>
@@ -451,7 +451,7 @@ function SortableQueuedVehicle({
               </SelectContent>
             </Select>
           ) : (
-            <Button size="sm" variant="outline" className="h-6 text-[9px] gap-1" disabled>
+            <Button size="sm" variant="outline" className="btn-outline-animate h-6 text-[9px] gap-1" disabled>
               No docks
             </Button>
           )}
@@ -878,7 +878,7 @@ export function DockSchedulerView() {
           { label: "Utilization", value: `${summary.utilization}%`, icon: Zap, color: summary.utilization > 80 ? "bg-red-50 text-red-600 dark:bg-red-950 dark:text-red-400" : summary.utilization > 60 ? "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" : "bg-emerald-50 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400" },
         ].map((item) => (
           <Card key={item.label} className="card-depth rounded-xl border-border/60 shadow-sm">
-            <CardContent className="p-3 text-center">
+            <CardContent className="glass-subtle p-3 text-center">
               <div className={cn("mx-auto mb-1.5 flex h-7 w-7 items-center justify-center rounded-lg", item.color)}>
                 <item.icon className="h-3.5 w-3.5" />
               </div>
@@ -891,7 +891,7 @@ export function DockSchedulerView() {
 
       {/* Utilization Bar */}
       <Card className="card-depth rounded-xl border-border/60 shadow-sm">
-        <CardContent className="p-4">
+        <CardContent className="glass-subtle p-4">
           <div className="flex items-center justify-between mb-2">
             <p className="text-xs font-semibold">Dock Utilization Overview</p>
             <p className={cn("text-xs font-bold text-number",
@@ -966,13 +966,13 @@ export function DockSchedulerView() {
           <MapPin className="h-4 w-4 text-muted-foreground" />
           <h3 className="text-sm font-semibold">Dock Board</h3>
           {simulating && (
-            <Badge variant="outline" className="text-[10px] gap-1 border-amber-300 text-amber-600 bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:bg-amber-950/40">
+            <Badge variant="outline" className="badge-interactive text-[10px] gap-1 border-amber-300 text-amber-600 bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:bg-amber-950/40">
               <FastForward className="h-2.5 w-2.5 animate-pulse" />
               Simulating
             </Badge>
           )}
           {availableDocks.length > 0 && queuedVehicles.length > 0 && (
-            <Badge variant="outline" className="ml-auto text-[10px] gap-1 border-emerald-300 text-emerald-600 bg-emerald-50 dark:border-emerald-700 dark:text-emerald-400 dark:bg-emerald-950/40 dock-dnd-hint">
+            <Badge variant="outline" className="badge-interactive ml-auto text-[10px] gap-1 border-emerald-300 text-emerald-600 bg-emerald-50 dark:border-emerald-700 dark:text-emerald-400 dark:bg-emerald-950/40 dock-dnd-hint">
               <GripVertical className="h-2.5 w-2.5" />
               Drag a queue vehicle onto any <span className="font-semibold">available</span> dock
             </Badge>
@@ -1001,7 +1001,7 @@ export function DockSchedulerView() {
             <div className="flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
               <CardTitle className="text-sm font-semibold">Waiting Queue</CardTitle>
-              <Badge variant="secondary" className="text-[10px]"><span className="text-number">{queuedVehicles.length}</span> vehicles</Badge>
+              <Badge variant="secondary" className="badge-interactive text-[10px]"><span className="text-number">{queuedVehicles.length}</span> vehicles</Badge>
               <span className="ml-auto text-[10px] text-muted-foreground hidden sm:flex items-center gap-1">
                 <GripVertical className="size-3" />
                 Drag to reorder or assign
@@ -1095,7 +1095,7 @@ export function DockSchedulerView() {
                     <span>{vehicle.supplier}</span>
                   </div>
                 </div>
-                <Badge variant="outline" className="text-[10px] gap-1 shrink-0">
+                <Badge variant="outline" className="badge-interactive text-[10px] gap-1 shrink-0">
                   <Clock className="h-2.5 w-2.5" />
                   <span className="text-number">{vehicle.waitTime}</span>m
                 </Badge>

@@ -445,7 +445,7 @@ export default function HazmatDangerousGoodsView() {
               { label: "MSDS Missing", value: msdsMissing, icon: FileText, color: "haz-kpi-blue" },
             ].map((kpi, i) => (
               <Card key={i} className={`haz-kpi-card ${kpi.color} haz-stagger-${Math.min(i, 5)}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <kpi.icon className="h-4 w-4 haz-kpi-icon mb-2" />
                   <div className="haz-kpi-value">{kpi.value}</div>
                   <div className="haz-kpi-label">{kpi.label}</div>
@@ -550,7 +550,7 @@ export default function HazmatDangerousGoodsView() {
       {activeTab === 1 && (
         <div className="haz-tab-content space-y-4">
           <Card className="haz-filter-card">
-            <CardContent className="p-3 flex flex-wrap items-center gap-3">
+            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="haz-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search product or UN#..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="haz-filter-input" />
@@ -624,7 +624,7 @@ export default function HazmatDangerousGoodsView() {
                             </div>
                           </td>
                           <td>
-                            <Badge variant={item.complianceStatus === "compliant" ? "success" : item.complianceStatus === "warning" ? "warning" : "destructive"} className="text-[10px]">
+                            <Badge variant={item.complianceStatus === "compliant" ? "success" : item.complianceStatus === "warning" ? "warning" : "destructive"} className="badge-interactive text-[10px]">
                               {item.complianceStatus}
                             </Badge>
                           </td>
@@ -669,7 +669,7 @@ export default function HazmatDangerousGoodsView() {
                       {selectedItem.boilingPoint !== null && <div><span className="haz-drawer-label">Boiling Point</span><span className="haz-drawer-value">{selectedItem.boilingPoint}°C</span></div>}
                       {selectedItem.radiationLevel !== null && <div><span className="haz-drawer-label">Radiation</span><span className="haz-drawer-value text-red-600">{selectedItem.radiationLevel} μSv/h</span></div>}
                       {selectedItem.phLevel !== null && <div><span className="haz-drawer-label">pH Level</span><span className="haz-drawer-value">{selectedItem.phLevel}</span></div>}
-                      <div><span className="haz-drawer-label">PPE Required</span><Badge variant={selectedItem.ppeRequired === "full" ? "destructive" : selectedItem.ppeRequired === "intermediate" ? "warning" : "outline"} className="text-[10px]">{selectedItem.ppeRequired.toUpperCase()}</Badge></div>
+                      <div><span className="badge-interactive haz-drawer-label">PPE Required</span><Badge variant={selectedItem.ppeRequired === "full" ? "destructive" : selectedItem.ppeRequired === "intermediate" ? "warning" : "outline"} className="text-[10px]">{selectedItem.ppeRequired.toUpperCase()}</Badge></div>
                       <div><span className="haz-drawer-label">MSDS</span>{selectedItem.msdsAvailable ? <CheckCircle2 className="h-4 w-4 text-emerald-500" /> : <XCircle className="h-4 w-4 text-red-500" />}</div>
                     </div>
                   </div>
@@ -677,7 +677,7 @@ export default function HazmatDangerousGoodsView() {
                     <div className="haz-drawer-section">
                       <h4 className="haz-drawer-section-title">Incompatibles</h4>
                       <div className="flex flex-wrap gap-1">
-                        {selectedItem.incompatibles.map((inc) => <Badge key={inc} variant="destructive" className="text-[10px]">{inc}</Badge>)}
+                        {selectedItem.incompatibles.map((inc) => <Badge key={inc} variant="destructive" className="badge-interactive text-[10px]">{inc}</Badge>)}
                       </div>
                     </div>
                   )}
@@ -700,7 +700,7 @@ export default function HazmatDangerousGoodsView() {
       {activeTab === 2 && (
         <div className="haz-tab-content space-y-4">
           <Card className="haz-filter-card">
-            <CardContent className="p-3 flex flex-wrap items-center gap-3">
+            <CardContent className="glass-subtle p-3 flex flex-wrap items-center gap-3">
               <div className="haz-filter-search">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Search incident ID..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="haz-filter-input" />
@@ -746,7 +746,7 @@ export default function HazmatDangerousGoodsView() {
                         <td className="font-mono text-xs">{inc.id}</td>
                         <td className="text-xs">{inc.type}</td>
                         <td>
-                          <Badge className="haz-sev-badge text-[10px]" style={{ background: `${SEVERITY_COLORS[inc.severity]}20`, color: SEVERITY_COLORS[inc.severity] }}>
+                          <Badge className="badge-interactive haz-sev-badge text-[10px]" style={{ background: `${SEVERITY_COLORS[inc.severity]}20`, color: SEVERITY_COLORS[inc.severity] }}>
                             {inc.severity}
                           </Badge>
                         </td>
@@ -756,7 +756,7 @@ export default function HazmatDangerousGoodsView() {
                         <td className="text-xs font-semibold">{inc.casualties || "—"}</td>
                         <td className="text-xs">{inc.responseTimeMin}min</td>
                         <td>
-                          {inc.resolved ? <Badge variant="success" className="text-[10px]">Resolved</Badge> : <Badge variant="destructive" className="text-[10px]">Open</Badge>}
+                          {inc.resolved ? <Badge variant="success" className="badge-interactive text-[10px]">Resolved</Badge> : <Badge variant="destructive" className="text-[10px]">Open</Badge>}
                         </td>
                       </tr>
                     ))}
@@ -820,12 +820,12 @@ export default function HazmatDangerousGoodsView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.ppeReqs.map((req, i) => (
               <Card key={req.id} className={`haz-ppe-card haz-stagger-${Math.min(i, 8)}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-3">
                     <span className="haz-class-badge" style={{ background: `${CLASS_COLORS[req.hazmatClass]}20`, color: CLASS_COLORS[req.hazmatClass] }}>
                       {CLASS_ICONS[req.hazmatClass]} {CLASS_LABELS[req.hazmatClass]}
                     </span>
-                    <Badge variant={req.level === "full" ? "destructive" : req.level === "intermediate" ? "warning" : "outline"} className="text-[10px]">
+                    <Badge variant={req.level === "full" ? "destructive" : req.level === "intermediate" ? "warning" : "outline"} className="badge-interactive text-[10px]">
                       {req.level.toUpperCase()}
                     </Badge>
                   </div>
@@ -861,10 +861,10 @@ export default function HazmatDangerousGoodsView() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {data.storageZones.map((zone, i) => (
               <Card key={zone.id} className={`haz-zone-card haz-stagger-${Math.min(i, 11)}`}>
-                <CardContent className="p-4">
+                <CardContent className="glass-subtle p-4">
                   <div className="flex items-center justify-between mb-2">
                     <span className="haz-zone-id">{zone.id}</span>
-                    <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="text-[10px]">
+                    <Badge variant={zone.compliance === "compliant" ? "success" : zone.compliance === "warning" ? "warning" : "destructive"} className="badge-interactive text-[10px]">
                       {zone.compliance}
                     </Badge>
                   </div>

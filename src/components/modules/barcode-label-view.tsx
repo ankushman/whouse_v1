@@ -662,7 +662,7 @@ function KpiCard({ title, value, icon: Icon, color, sub }: {
 }) {
   return (
     <Card className="bl-kpi-card">
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-center justify-between mb-2">
           <span className="bl-kpi-title text-[11px] font-medium text-muted-foreground uppercase tracking-wide">{title}</span>
           <div className="bl-kpi-icon p-1.5 rounded-lg" style={{ backgroundColor: color + "15" }}>
@@ -1274,8 +1274,8 @@ export default function BarcodeLabelView() {
                     </div>
                     <div className="flex gap-2">
                       <Button size="sm" className="bl-action-btn flex-1 bg-emerald-600 hover:bg-emerald-700" onClick={() => { toast.success("Template Edited", `${rec.name} updated successfully`); setDrawerOpen(false); }}><FileText className="w-3.5 h-3.5 mr-1" /> Edit</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn flex-1" onClick={() => { toast.success("Template Duplicated", `Copy of ${rec.name} created`); setDrawerOpen(false); }}><Copy className="w-3.5 h-3.5 mr-1" /> Duplicate</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn" onClick={() => { toast.warning("Template Archived", `${rec.name} moved to archive`); setDrawerOpen(false); }}><Archive className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.success("Template Duplicated", `Copy of ${rec.name} created`); setDrawerOpen(false); }}><Copy className="w-3.5 h-3.5 mr-1" /> Duplicate</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.warning("Template Archived", `${rec.name} moved to archive`); setDrawerOpen(false); }}><Archive className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>
@@ -1312,8 +1312,8 @@ export default function BarcodeLabelView() {
                     </div>
                     <div className="flex gap-2">
                       <Button size="sm" className="bl-action-btn flex-1 bg-amber-600 hover:bg-amber-700" onClick={() => { toast.success("Reprinting", `Job ${rec.id} sent to printer`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5 mr-1" /> Reprint</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn flex-1" onClick={() => { toast.warning("Job Cancelled", `${rec.id} has been cancelled`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn" onClick={() => { toast.info("Job Paused", `${rec.id} paused`); setDrawerOpen(false); }}><Pause className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.warning("Job Cancelled", `${rec.id} has been cancelled`); setDrawerOpen(false); }}><Ban className="w-3.5 h-3.5 mr-1" /> Cancel</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.info("Job Paused", `${rec.id} paused`); setDrawerOpen(false); }}><Pause className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>
@@ -1351,8 +1351,8 @@ export default function BarcodeLabelView() {
                     </div>
                     <div className="flex gap-2">
                       <Button size="sm" className="bl-action-btn flex-1 bg-violet-600 hover:bg-violet-700" onClick={() => { toast.success("Re-scanning", `Barcode ${rec.barcode.slice(0, 13)} re-scanned`); setDrawerOpen(false); }}><RotateCcw className="w-3.5 h-3.5 mr-1" /> Re-scan</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn flex-1" onClick={() => { toast.info("Investigation Started", `Looking into ${rec.id}`); setDrawerOpen(false); }}><Search className="w-3.5 h-3.5 mr-1" /> Investigate</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn" onClick={() => { toast.success("Exported", `Scan ${rec.id} data exported`); setDrawerOpen(false); }}><Download className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.info("Investigation Started", `Looking into ${rec.id}`); setDrawerOpen(false); }}><Search className="w-3.5 h-3.5 mr-1" /> Investigate</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.success("Exported", `Scan ${rec.id} data exported`); setDrawerOpen(false); }}><Download className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>
@@ -1379,7 +1379,7 @@ export default function BarcodeLabelView() {
                       <AuditFrequencyBadge frequency={rec.auditFrequency} />
                     </div>
                     <Card className="bg-cyan-50 dark:bg-cyan-950/30 border-cyan-200 dark:border-cyan-800">
-                      <CardContent className="p-3">
+                      <CardContent className="glass-subtle p-3">
                         <div className="bl-audit-info text-[10px] text-muted-foreground uppercase">Last Audit</div>
                         <div className="text-sm font-bold">{rec.lastAudit}</div>
                         <div className="bl-audit-info text-[10px] text-muted-foreground uppercase mt-2">Next Audit</div>
@@ -1394,8 +1394,8 @@ export default function BarcodeLabelView() {
                     </div>
                     <div className="flex gap-2">
                       <Button size="sm" className="bl-action-btn flex-1 bg-cyan-600 hover:bg-cyan-700" onClick={() => { toast.success("Audit Started", `Compliance check for ${rec.id}`); setDrawerOpen(false); }}><ClipboardCheck className="w-3.5 h-3.5 mr-1" /> Audit</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn flex-1" onClick={() => { toast.warning("Remediation", `Fixes initiated for ${rec.id}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" /> Remediate</Button>
-                      <Button size="sm" variant="outline" className="bl-action-btn" onClick={() => { toast.info("Exemption Filed", `${rec.id} exemption requested`); setDrawerOpen(false); }}><ShieldCheck className="w-3.5 h-3.5" /></Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn flex-1" onClick={() => { toast.warning("Remediation", `Fixes initiated for ${rec.id}`); setDrawerOpen(false); }}><AlertTriangle className="w-3.5 h-3.5 mr-1" /> Remediate</Button>
+                      <Button size="sm" variant="outline" className="btn-outline-animate bl-action-btn" onClick={() => { toast.info("Exemption Filed", `${rec.id} exemption requested`); setDrawerOpen(false); }}><ShieldCheck className="w-3.5 h-3.5" /></Button>
                     </div>
                   </div>
                 </>

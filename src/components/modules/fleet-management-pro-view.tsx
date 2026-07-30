@@ -67,7 +67,7 @@ function fmtINR(n: number): string {
 function VehicleTypeBadge({ type }: { type: string }) {
   const idx = VEHICLE_TYPES.indexOf(type as typeof VEHICLE_TYPES[number])
   return (
-    <Badge variant="outline" className="fmp-vtype-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
+    <Badge variant="outline" className="badge-interactive fmp-vtype-badge gap-1 text-[10px] px-2 py-0.5 font-medium">
       {idx >= 0 ? VEHICLE_EMOJI[idx] : "🚛"} {type}
     </Badge>
   )
@@ -189,7 +189,7 @@ function CostTile({ value }: { value: number }) {
 
 function RouteBadge({ route }: { route: string }) {
   return (
-    <Badge variant="outline" className="fmp-route text-[10px] gap-1 px-2 py-0.5">
+    <Badge variant="outline" className="badge-interactive fmp-route text-[10px] gap-1 px-2 py-0.5">
       <Navigation className="h-3 w-3" />{route}
     </Badge>
   )
@@ -647,7 +647,7 @@ export function FleetManagementProView() {
                   className={`fmp-fm-card overflow-hidden cursor-pointer hover:shadow-md transition-shadow border-border/60 ${r.type === "Fuel" ? "border-l-4 border-l-emerald-500" : "border-l-4 border-l-orange-500"}`}
                   onClick={() => { setSelectedRecord(r); setSheetOpen(true); toast.info("Record", `${r.type}: ${r.details}`) }}>
                   <div className={`h-1.5 ${r.type === "Fuel" ? "bg-gradient-to-r from-emerald-400 to-emerald-600" : "bg-gradient-to-r from-orange-400 to-orange-600"}`} />
-                  <CardContent className="p-3 space-y-2">
+                  <CardContent className="glass-subtle p-3 space-y-2">
                     <div className="flex items-center justify-between">
                       <Badge className={`text-[10px] ${r.type === "Fuel" ? "bg-emerald-100 text-emerald-700" : "bg-orange-100 text-orange-700"}`}>
                         {r.type === "Fuel" ? "⛽" : "🔧"} {r.type}

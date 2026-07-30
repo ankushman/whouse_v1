@@ -413,7 +413,7 @@ function KpiCard({ title, value, subtitle, icon: Icon, trend, color }: {
 }) {
   return (
     <Card className="sph-kpi">
-      <CardContent className="p-4">
+      <CardContent className="glass-subtle p-4">
         <div className="flex items-start justify-between">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] text-muted-foreground font-medium">{title}</span>
@@ -585,7 +585,7 @@ export default function SmartPackagingHubView() {
             </Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="sph-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="sph-table-row">
               <SortHeader col="id" label="Order ID" />
               <TableHead className="text-[10px]">Customer</TableHead>
               <TableHead className="text-[10px]">SKU</TableHead>
@@ -635,7 +635,7 @@ export default function SmartPackagingHubView() {
             </Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="sph-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="sph-table-row">
               <SortHeader col="id" label="Material ID" />
               <TableHead className="text-[10px]">Type</TableHead>
               <TableHead className="text-[10px]">Grade</TableHead>
@@ -681,7 +681,7 @@ export default function SmartPackagingHubView() {
             </Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="sph-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="sph-table-row">
               <SortHeader col="id" label="Record ID" />
               <TableHead className="text-[10px]">Metric</TableHead>
               <TableHead className="text-[10px]">Category</TableHead>
@@ -697,7 +697,7 @@ export default function SmartPackagingHubView() {
                   <TableCell className="text-xs font-mono font-semibold">{s.id}</TableCell>
                   <TableCell><MetricTypeBadge m={String(s.metricType)} /></TableCell>
                   <TableCell className="text-[10px]">{s.category}</TableCell>
-                  <TableCell className="text-[10px] font-medium">{s.currentValue}</TableCell>
+                  <TableCell className="numeric-cell text-[10px] font-medium">{s.currentValue}</TableCell>
                   <TableCell className="text-[10px] text-muted-foreground">{s.target}</TableCell>
                   <TableCell><AchievementBar pct={Number(s.achievement)} /></TableCell>
                   <TableCell className="text-[10px]">{s.period}</TableCell>
@@ -725,7 +725,7 @@ export default function SmartPackagingHubView() {
             </Select>
           </div>
           <div className="rounded-md border overflow-auto">
-            <Table><TableHeader><TableRow className="sph-table-row">
+            <Table className="table-hover-highlight"><TableHeader><TableRow className="sph-table-row">
               <SortHeader col="id" label="Check ID" />
               <TableHead className="text-[10px]">Order</TableHead>
               <TableHead className="text-[10px]">Inspector</TableHead>
@@ -847,7 +847,7 @@ export default function SmartPackagingHubView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.success("Updated", `Order ${String(selectedItem.id)} updated`) }}><CheckCircle2 className="h-3 w-3" />Update</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Reprinting", "Label reprinted") }}><RefreshCw className="h-3 w-3" />Reprint Label</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Reprinting", "Label reprinted") }}><RefreshCw className="h-3 w-3" />Reprint Label</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.error("Cancelled", `Order ${String(selectedItem.id)} cancelled`); setDrawerOpen(false) }}><XCircle className="h-3 w-3" />Cancel</Button>
                 </div>
               </div>
@@ -878,7 +878,7 @@ export default function SmartPackagingHubView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.success("Reordered", `Material ${String(selectedItem.id)} reordered`) }}><RefreshCw className="h-3 w-3" />Reorder</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Exported", "Stock report exported") }}><FileDown className="h-3 w-3" />Export</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Exported", "Stock report exported") }}><FileDown className="h-3 w-3" />Export</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.error("Archived", `Material ${String(selectedItem.id)} archived`); setDrawerOpen(false) }}><XCircle className="h-3 w-3" />Archive</Button>
                 </div>
               </div>
@@ -907,7 +907,7 @@ export default function SmartPackagingHubView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.success("Saved", "Sustainability record updated") }}><CheckCircle2 className="h-3 w-3" />Update</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Exported", "Sustainability report exported") }}><FileDown className="h-3 w-3" />Export</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Exported", "Sustainability report exported") }}><FileDown className="h-3 w-3" />Export</Button>
                 </div>
               </div>
             </>
@@ -938,7 +938,7 @@ export default function SmartPackagingHubView() {
                 <Separator />
                 <div className="flex flex-wrap gap-2">
                   <Button size="sm" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.success("Recorded", "QC check recorded") }}><CheckCircle2 className="h-3 w-3" />Save</Button>
-                  <Button size="sm" variant="outline" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Retest", "Retest scheduled") }}><RefreshCw className="h-3 w-3" />Schedule Retest</Button>
+                  <Button size="sm" variant="outline" className="btn-outline-animate h-8 text-xs gap-1 sph-action" onClick={() => { toast.info("Retest", "Retest scheduled") }}><RefreshCw className="h-3 w-3" />Schedule Retest</Button>
                   <Button size="sm" variant="destructive" className="h-8 text-xs gap-1 sph-action" onClick={() => { toast.warning("Escalated", "QC check escalated to QA lead") }}><AlertTriangle className="h-3 w-3" />Escalate</Button>
                 </div>
               </div>
