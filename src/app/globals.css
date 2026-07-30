@@ -53104,3 +53104,49 @@ html.theme-transition body {
 @keyframes sth-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes sth-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(185,28,28,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(185,28,28,0.15); } }
 @keyframes sth-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(185,28,28,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(185,28,28,0.25); } }
+
+/* ── Ayurveda & Herbal Products Logistics (ahl-*) ── */
+.ahl-root { animation: ahl-fade-in 0.4s ease; }
+.ahl-tab-trigger[data-state="active"] { background-color: #065f46; color: white; }
+.ahl-tab-trigger[data-state="active"]:hover { background-color: #047857; }
+.ahl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ahl-kpi-card:hover { border-color: #065f46; box-shadow: 0 4px 12px rgba(6,95,70,0.15); }
+.ahl-kpi-value { font-variant-numeric: tabular-nums; }
+.ahl-health-ring svg { transition: transform 0.3s ease; }
+.ahl-health-ring:hover svg { transform: scale(1.05); }
+.ahl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.ahl-ring-value { font-variant-numeric: tabular-nums; }
+.ahl-product-badge, .ahl-status-badge { transition: transform 0.15s ease; }
+.ahl-product-badge:hover { transform: scale(1.05); }
+.ahl-cost-bar-fill { transition: width 0.6s ease; }
+.ahl-table-row { transition: background-color 0.15s ease; }
+.ahl-table-row:hover { background-color: rgba(6,95,70,0.04); }
+.ahl-chart-card { border: 1px solid #e5e7eb; }
+.ahl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes ahl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ahl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ahl-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,95,70,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(6,95,70,0.15); } }
+@keyframes ahl-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(6,95,70,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(6,95,70,0.25); } }
+
+/* ── Organic Food Supply Chain (ofc-*) ── */
+.ofc-root { animation: ofc-fade-in 0.4s ease; }
+.ofc-tab-trigger[data-state="active"] { background-color: #9a3412; color: white; }
+.ofc-tab-trigger[data-state="active"]:hover { background-color: #c2410c; }
+.ofc-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ofc-kpi-card:hover { border-color: #9a3412; box-shadow: 0 4px 12px rgba(154,52,18,0.15); }
+.ofc-kpi-value { font-variant-numeric: tabular-nums; }
+.ofc-health-ring svg { transition: transform 0.3s ease; }
+.ofc-health-ring:hover svg { transform: scale(1.05); }
+.ofc-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.ofc-ring-value { font-variant-numeric: tabular-nums; }
+.ofc-product-badge, .ofc-status-badge { transition: transform 0.15s ease; }
+.ofc-product-badge:hover { transform: scale(1.05); }
+.ofc-cost-bar-fill { transition: width 0.6s ease; }
+.ofc-table-row { transition: background-color 0.15s ease; }
+.ofc-table-row:hover { background-color: rgba(154,52,18,0.04); }
+.ofc-chart-card { border: 1px solid #e5e7eb; }
+.ofc-insight-card { border: 1px solid #e5e7eb; }
+@keyframes ofc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ofc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ofc-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(154,52,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(154,52,18,0.15); } }
+@keyframes ofc-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(154,52,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(154,52,18,0.25); } }

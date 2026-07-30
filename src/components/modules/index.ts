@@ -262,3 +262,5 @@ export { default as FireworksCrackersLogisticsView } from './fireworks-crackers-
 export { default as JuteCoirSupplyChainView } from './jute-coir-supply-chain-view'
 export { default as MusicalInstrumentsLogisticsView } from './musical-instruments-logistics-view'
 export { default as SilkTextileHeritageSupplyChainView } from './silk-textile-heritage-supply-chain-view'
+export { default as AyurvedaHerbalProductsLogisticsView } from './ayurveda-herbal-products-logistics-view'
+export { default as OrganicFoodSupplyChainView } from './organic-food-supply-chain-view'
