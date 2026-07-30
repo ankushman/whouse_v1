@@ -213,6 +213,8 @@ import WarehouseSimulationLabView from "@/components/modules/warehouse-simulatio
 import GreenLogisticsTrackerView from "@/components/modules/green-logistics-tracker-view"
 import DarkStoreOperationsView from "@/components/modules/dark-store-operations-view"
 import SmartReturnsRoutingView from "@/components/modules/smart-returns-routing-view"
+import PerishableGoodsCommandView from "@/components/modules/perishable-goods-command-view"
+import ExpressDeliveryCommandView from "@/components/modules/express-delivery-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -425,6 +427,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "green-logistics-tracker": GreenLogisticsTrackerView,
   "dark-store-operations": DarkStoreOperationsView,
   "smart-returns-routing": SmartReturnsRoutingView,
+  "perishable-goods-command": PerishableGoodsCommandView,
+  "express-delivery-command": ExpressDeliveryCommandView,
 }
 
 
