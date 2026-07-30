@@ -258,3 +258,5 @@ export { default as CosmeticsPersonalCareLogisticsView } from './cosmetics-perso
 export { default as SportsEquipmentSupplyChainView } from './sports-equipment-supply-chain-view'
 export { default as HandicraftsArtisanLogisticsView } from './handicrafts-artisan-logistics-view'
 export { default as TeaSpiceSupplyChainView } from './tea-spice-supply-chain-view'
+export { default as FireworksCrackersLogisticsView } from './fireworks-crackers-logistics-view'
+export { default as JuteCoirSupplyChainView } from './jute-coir-supply-chain-view'

@@ -53012,3 +53012,49 @@ html.theme-transition body {
 @keyframes tsl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes tsl-pulse-lime { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(54,83,20,0.15); } }
 @keyframes tsl-glow-lime { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(54,83,20,0.25); } }
+
+/* ── Fireworks & Crackers Logistics (fwl-*) ── */
+.fwl-root { animation: fwl-fade-in 0.4s ease; }
+.fwl-tab-trigger[data-state="active"] { background-color: #991b1b; color: white; }
+.fwl-tab-trigger[data-state="active"]:hover { background-color: #b91c1c; }
+.fwl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.fwl-kpi-card:hover { border-color: #991b1b; box-shadow: 0 4px 12px rgba(153,27,27,0.15); }
+.fwl-kpi-value { font-variant-numeric: tabular-nums; }
+.fwl-health-ring svg { transition: transform 0.3s ease; }
+.fwl-health-ring:hover svg { transform: scale(1.05); }
+.fwl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.fwl-ring-value { font-variant-numeric: tabular-nums; }
+.fwl-product-badge, .fwl-status-badge { transition: transform 0.15s ease; }
+.fwl-product-badge:hover { transform: scale(1.05); }
+.fwl-cost-bar-fill { transition: width 0.6s ease; }
+.fwl-table-row { transition: background-color 0.15s ease; }
+.fwl-table-row:hover { background-color: rgba(153,27,27,0.04); }
+.fwl-chart-card { border: 1px solid #e5e7eb; }
+.fwl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes fwl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fwl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes fwl-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(153,27,27,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(153,27,27,0.15); } }
+@keyframes fwl-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(153,27,27,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(153,27,27,0.25); } }
+
+/* ── Jute & Coir Supply Chain (jcs-*) ── */
+.jcs-root { animation: jcs-fade-in 0.4s ease; }
+.jcs-tab-trigger[data-state="active"] { background-color: #365314; color: white; }
+.jcs-tab-trigger[data-state="active"]:hover { background-color: #3f6212; }
+.jcs-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.jcs-kpi-card:hover { border-color: #365314; box-shadow: 0 4px 12px rgba(54,83,20,0.15); }
+.jcs-kpi-value { font-variant-numeric: tabular-nums; }
+.jcs-health-ring svg { transition: transform 0.3s ease; }
+.jcs-health-ring:hover svg { transform: scale(1.05); }
+.jcs-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.jcs-ring-value { font-variant-numeric: tabular-nums; }
+.jcs-product-badge, .jcs-status-badge { transition: transform 0.15s ease; }
+.jcs-product-badge:hover { transform: scale(1.05); }
+.jcs-cost-bar-fill { transition: width 0.6s ease; }
+.jcs-table-row { transition: background-color 0.15s ease; }
+.jcs-table-row:hover { background-color: rgba(54,83,20,0.04); }
+.jcs-chart-card { border: 1px solid #e5e7eb; }
+.jcs-insight-card { border: 1px solid #e5e7eb; }
+@keyframes jcs-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes jcs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes jcs-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(54,83,20,0.15); } }
+@keyframes jcs-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(54,83,20,0.25); } }
