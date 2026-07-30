@@ -230,6 +230,8 @@ export const navItems: NavItem[] = [
   { id: 'oil-gas-pipeline-supply', label: 'Oil & Gas', icon: 'Drill', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'mining-minerals-logistics', label: 'Mining & Minerals', icon: 'Pickaxe', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'defence-supply-chain', label: 'Defence Supply', icon: 'Sword', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'seed-agri-input-logistics', label: 'Seeds & Agri', icon: 'Wheat', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'dairy-milk-supply-chain', label: 'Dairy & Milk', icon: 'MilkOff', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

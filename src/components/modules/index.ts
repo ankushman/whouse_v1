@@ -224,3 +224,5 @@ export { default as NuclearFuelLogisticsView } from './nuclear-fuel-logistics-vi
 export { default as OilGasPipelineSupplyView } from './oil-gas-pipeline-supply-view'
 export { default as MiningMineralsLogisticsView } from './mining-minerals-logistics-view'
 export { default as DefenceSupplyChainView } from './defence-supply-chain-view'
+export { default as SeedAgriInputLogisticsView } from './seed-agri-input-logistics-view'
+export { default as DairyMilkSupplyChainView } from './dairy-milk-supply-chain-view'

@@ -234,6 +234,8 @@ import NuclearFuelLogisticsView from "@/components/modules/nuclear-fuel-logistic
 import OilGasPipelineSupplyView from "@/components/modules/oil-gas-pipeline-supply-view"
 import MiningMineralsLogisticsView from "@/components/modules/mining-minerals-logistics-view"
 import DefenceSupplyChainView from "@/components/modules/defence-supply-chain-view"
+import SeedAgriInputLogisticsView from "@/components/modules/seed-agri-input-logistics-view"
+import DairyMilkSupplyChainView from "@/components/modules/dairy-milk-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -467,6 +469,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "oil-gas-pipeline-supply": OilGasPipelineSupplyView,
   "mining-minerals-logistics": MiningMineralsLogisticsView,
   "defence-supply-chain": DefenceSupplyChainView,
+  "seed-agri-input-logistics": SeedAgriInputLogisticsView,
+  "dairy-milk-supply-chain": DairyMilkSupplyChainView,
 }
 
 
