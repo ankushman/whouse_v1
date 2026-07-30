@@ -52836,3 +52836,47 @@ html.theme-transition body {
 @keyframes lfs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes lfs-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(180,83,9,0.15); } }
 @keyframes lfs-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(180,83,9,0.25); } }
+/* ── Scrap & Recycling Logistics (srl-*) ── */
+.srl-root { animation: srl-fade-in 0.4s ease; }
+.srl-tab-trigger[data-state="active"] { background-color: #047857; color: white; }
+.srl-tab-trigger[data-state="active"]:hover { background-color: #065f46; }
+.srl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.srl-kpi-card:hover { border-color: #047857; box-shadow: 0 4px 12px rgba(4,120,87,0.15); }
+.srl-kpi-value { font-variant-numeric: tabular-nums; }
+.srl-health-ring svg { transition: transform 0.3s ease; }
+.srl-health-ring:hover svg { transform: scale(1.05); }
+.srl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.srl-ring-value { font-variant-numeric: tabular-nums; }
+.srl-material-badge, .srl-status-badge { transition: transform 0.15s ease; }
+.srl-material-badge:hover { transform: scale(1.05); }
+.srl-cost-bar-fill { transition: width 0.6s ease; }
+.srl-table-row { transition: background-color 0.15s ease; }
+.srl-table-row:hover { background-color: rgba(4,120,87,0.04); }
+.srl-chart-card { border: 1px solid #e5e7eb; }
+.srl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes srl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes srl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes srl-pulse-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(4,120,87,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(4,120,87,0.15); } }
+@keyframes srl-glow-emerald { 0%, 100% { box-shadow: 0 0 0 0 rgba(4,120,87,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(4,120,87,0.25); } }
+/* ── Gems & Jewellery Supply Chain (gjs-*) ── */
+.gjs-root { animation: gjs-fade-in 0.4s ease; }
+.gjs-tab-trigger[data-state="active"] { background-color: #ca8a04; color: white; }
+.gjs-tab-trigger[data-state="active"]:hover { background-color: #a16207; }
+.gjs-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.gjs-kpi-card:hover { border-color: #ca8a04; box-shadow: 0 4px 12px rgba(202,138,4,0.15); }
+.gjs-kpi-value { font-variant-numeric: tabular-nums; }
+.gjs-health-ring svg { transition: transform 0.3s ease; }
+.gjs-health-ring:hover svg { transform: scale(1.05); }
+.gjs-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.gjs-ring-value { font-variant-numeric: tabular-nums; }
+.gjs-product-badge, .gjs-status-badge { transition: transform 0.15s ease; }
+.gjs-product-badge:hover { transform: scale(1.05); }
+.gjs-cost-bar-fill { transition: width 0.6s ease; }
+.gjs-table-row { transition: background-color 0.15s ease; }
+.gjs-table-row:hover { background-color: rgba(202,138,4,0.04); }
+.gjs-chart-card { border: 1px solid #e5e7eb; }
+.gjs-insight-card { border: 1px solid #e5e7eb; }
+@keyframes gjs-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gjs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes gjs-pulse-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(202,138,4,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(202,138,4,0.15); } }
+@keyframes gjs-glow-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(202,138,4,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(202,138,4,0.25); } }

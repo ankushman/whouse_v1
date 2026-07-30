@@ -250,3 +250,5 @@ export { default as RubberTyreLogisticsView } from './rubber-tyre-logistics-view
 export { default as PaintsCoatingsSupplyChainView } from './paints-coatings-supply-chain-view'
 export { default as PaperPulpLogisticsView } from './paper-pulp-logistics-view'
 export { default as LeatherFootwearSupplyChainView } from './leather-footwear-supply-chain-view'
+export { default as ScrapRecyclingLogisticsView } from './scrap-recycling-logistics-view'
+export { default as GemsJewellerySupplyChainView } from './gems-jewellery-supply-chain-view'
