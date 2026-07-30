@@ -192,3 +192,5 @@ export { default as LogisticsNetworkCommandView } from './logistics-network-comm
 export { default as TransportAnalyticsProView } from './transport-analytics-pro-view'
 export { default as SmartLockerFleetView } from './smart-locker-fleet-view'
 export { default as ColdChainMonitorProView } from './cold-chain-monitor-pro-view'
+export { default as CrossBorderLogisticsView } from './cross-border-logistics-view'
+export { default as WarehouseDigitalFloorPlanView } from './warehouse-digital-floor-plan-view'

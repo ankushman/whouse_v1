@@ -202,6 +202,8 @@ import LogisticsNetworkCommandView from "@/components/modules/logistics-network-
 import TransportAnalyticsProView from "@/components/modules/transport-analytics-pro-view"
 import SmartLockerFleetView from "@/components/modules/smart-locker-fleet-view"
 import ColdChainMonitorProView from "@/components/modules/cold-chain-monitor-pro-view"
+import CrossBorderLogisticsView from "@/components/modules/cross-border-logistics-view"
+import WarehouseDigitalFloorPlanView from "@/components/modules/warehouse-digital-floor-plan-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -403,6 +405,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "transport-analytics-pro": TransportAnalyticsProView,
   "smart-locker-fleet": SmartLockerFleetView,
   "cold-chain-monitor-pro": ColdChainMonitorProView,
+  "cross-border-logistics": CrossBorderLogisticsView,
+  "warehouse-digital-floor-plan": WarehouseDigitalFloorPlanView,
 }
 
 
