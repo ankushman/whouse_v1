@@ -254,6 +254,8 @@ import SteelMetalsSupplyChainView from "@/components/modules/steel-metals-supply
 import DataCenterEquipmentView from "@/components/modules/data-center-equipment-view"
 import CementBuildingMaterialsView from "@/components/modules/cement-building-materials-view"
 import TelecomTowerInfrastructureView from "@/components/modules/telecom-tower-infrastructure-view"
+import SugarEthanolLogisticsView from "@/components/modules/sugar-ethanol-logistics-view"
+import FertilizerAgriChemicalsView from "@/components/modules/fertilizer-agri-chemicals-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -507,6 +509,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "data-center-equipment": DataCenterEquipmentView,
   "cement-building-materials": CementBuildingMaterialsView,
   "telecom-tower-infrastructure": TelecomTowerInfrastructureView,
+  "sugar-ethanol-logistics": SugarEthanolLogisticsView,
+  "fertilizer-agri-chemicals": FertilizerAgriChemicalsView,
 }
 
 

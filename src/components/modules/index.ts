@@ -244,3 +244,5 @@ export { default as SteelMetalsSupplyChainView } from './steel-metals-supply-cha
 export { default as DataCenterEquipmentView } from './data-center-equipment-view'
 export { default as CementBuildingMaterialsView } from './cement-building-materials-view'
 export { default as TelecomTowerInfrastructureView } from './telecom-tower-infrastructure-view'
+export { default as SugarEthanolLogisticsView } from './sugar-ethanol-logistics-view'
+export { default as FertilizerAgriChemicalsView } from './fertilizer-agri-chemicals-view'
