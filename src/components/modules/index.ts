@@ -222,3 +222,5 @@ export { default as MedicalDeviceLogisticsView } from './medical-device-logistic
 export { default as AerospacePartsTrackingView } from './aerospace-parts-tracking-view'
 export { default as NuclearFuelLogisticsView } from './nuclear-fuel-logistics-view'
 export { default as OilGasPipelineSupplyView } from './oil-gas-pipeline-supply-view'
+export { default as MiningMineralsLogisticsView } from './mining-minerals-logistics-view'
+export { default as DefenceSupplyChainView } from './defence-supply-chain-view'

@@ -52167,3 +52167,51 @@ html.theme-transition body {
 @keyframes ogp-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(217,119,6,0.15); } }
 @keyframes ogp-pulse-dark-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(180,83,9,0.15); } }
 @keyframes ogp-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(217,119,6,0.25); } }
+
+/* ========== Mining & Minerals Logistics (mml-*) ========== */
+.mml-container { animation: mml-fade-in 0.4s ease-out; }
+.mml-tab-trigger[data-state="active"] { background-color: #78716c; color: white; }
+.mml-tab-trigger[data-state="active"]:hover { background-color: #57534e; }
+.mml-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mml-kpi-card:hover { border-color: #78716c; box-shadow: 0 4px 12px rgba(120,113,108,0.15); }
+.mml-kpi-value { font-variant-numeric: tabular-nums; }
+.mml-health-ring svg { transition: transform 0.3s ease; }
+.mml-health-ring:hover svg { transform: scale(1.05); }
+.mml-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.mml-ring-value { font-variant-numeric: tabular-nums; }
+.mml-mineral-badge, .mml-transport-badge { transition: transform 0.15s ease; }
+.mml-mineral-badge:hover { transform: scale(1.05); }
+.mml-cost-bar-fill { transition: width 0.6s ease; }
+.mml-table-row { transition: background-color 0.15s ease; }
+.mml-table-row:hover { background-color: rgba(120,113,108,0.04); }
+.mml-chart-card { border: 1px solid #e5e7eb; }
+.mml-insight-card { border: 1px solid #e5e7eb; }
+@keyframes mml-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mml-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mml-pulse-stone { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,113,108,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(120,113,108,0.15); } }
+@keyframes mml-pulse-dark-stone { 0%, 100% { box-shadow: 0 0 0 0 rgba(87,83,78,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(87,83,78,0.15); } }
+@keyframes mml-glow-stone { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,113,108,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(120,113,108,0.25); } }
+
+/* ========== Defence Supply Chain (dsc-*) ========== */
+.dsc-container { animation: dsc-fade-in 0.4s ease-out; }
+.dsc-tab-trigger[data-state="active"] { background-color: #1e3a5f; color: white; }
+.dsc-tab-trigger[data-state="active"]:hover { background-color: #172554; }
+.dsc-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.dsc-kpi-card:hover { border-color: #1e3a5f; box-shadow: 0 4px 12px rgba(30,58,95,0.15); }
+.dsc-kpi-value { font-variant-numeric: tabular-nums; }
+.dsc-health-ring svg { transition: transform 0.3s ease; }
+.dsc-health-ring:hover svg { transform: scale(1.05); }
+.dsc-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.dsc-ring-value { font-variant-numeric: tabular-nums; }
+.dsc-supply-badge, .dsc-clearance-badge { transition: transform 0.15s ease; }
+.dsc-supply-badge:hover { transform: scale(1.05); }
+.dsc-cost-bar-fill { transition: width 0.6s ease; }
+.dsc-table-row { transition: background-color 0.15s ease; }
+.dsc-table-row:hover { background-color: rgba(30,58,95,0.04); }
+.dsc-chart-card { border: 1px solid #e5e7eb; }
+.dsc-insight-card { border: 1px solid #e5e7eb; }
+@keyframes dsc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dsc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes dsc-pulse-navy { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,58,95,0.15); } }
+@keyframes dsc-pulse-dark-navy { 0%, 100% { box-shadow: 0 0 0 0 rgba(23,37,84,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(23,37,84,0.15); } }
+@keyframes dsc-glow-navy { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,58,95,0.25); } }
