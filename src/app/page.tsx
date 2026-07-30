@@ -258,6 +258,8 @@ import SugarEthanolLogisticsView from "@/components/modules/sugar-ethanol-logist
 import FertilizerAgriChemicalsView from "@/components/modules/fertilizer-agri-chemicals-view"
 import RubberTyreLogisticsView from "@/components/modules/rubber-tyre-logistics-view"
 import PaintsCoatingsSupplyChainView from "@/components/modules/paints-coatings-supply-chain-view"
+import PaperPulpLogisticsView from "@/components/modules/paper-pulp-logistics-view"
+import LeatherFootwearSupplyChainView from "@/components/modules/leather-footwear-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -515,6 +517,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "fertilizer-agri-chemicals": FertilizerAgriChemicalsView,
   "rubber-tyre-logistics": RubberTyreLogisticsView,
   "paints-coatings-supply-chain": PaintsCoatingsSupplyChainView,
+  "paper-pulp-logistics": PaperPulpLogisticsView,
+  "leather-footwear-supply-chain": LeatherFootwearSupplyChainView,
 }
 
 

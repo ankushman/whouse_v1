@@ -52788,3 +52788,51 @@ html.theme-transition body {
 @keyframes pcs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes pcs-pulse-fuchsia { 0%, 100% { box-shadow: 0 0 0 0 rgba(162,28,175,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(162,28,175,0.15); } }
 @keyframes pcs-glow-fuchsia { 0%, 100% { box-shadow: 0 0 0 0 rgba(162,28,175,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(162,28,175,0.25); } }
+
+/* Paper Pulp Logistics (ppl) */
+.ppl-container { animation: ppl-fade-in 0.4s ease; }
+.ppl-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.ppl-tab-trigger[data-state="active"] { background-color: #0f766e; color: white; }
+.ppl-tab-trigger[data-state="active"]:hover { background-color: #115e59; }
+.ppl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ppl-kpi-card:hover { border-color: #0f766e; box-shadow: 0 4px 12px rgba(15,118,110,0.15); }
+.ppl-kpi-value { font-variant-numeric: tabular-nums; }
+.ppl-health-ring svg { transition: transform 0.3s ease; }
+.ppl-health-ring:hover svg { transform: scale(1.05); }
+.ppl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.ppl-ring-value { font-variant-numeric: tabular-nums; }
+.ppl-paper-badge, .ppl-status-badge { transition: transform 0.15s ease; }
+.ppl-paper-badge:hover { transform: scale(1.05); }
+.ppl-cost-bar-fill { transition: width 0.6s ease; }
+.ppl-table-row { transition: background-color 0.15s ease; }
+.ppl-table-row:hover { background-color: rgba(15,118,110,0.04); }
+.ppl-chart-card { border: 1px solid #e5e7eb; }
+.ppl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes ppl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ppl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ppl-pulse-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(15,118,110,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(15,118,110,0.15); } }
+@keyframes ppl-glow-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(15,118,110,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(15,118,110,0.25); } }
+
+/* Leather Footwear Supply Chain (lfs) */
+.lfs-container { animation: lfs-fade-in 0.4s ease; }
+.lfs-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.lfs-tab-trigger[data-state="active"] { background-color: #b45309; color: white; }
+.lfs-tab-trigger[data-state="active"]:hover { background-color: #92400e; }
+.lfs-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.lfs-kpi-card:hover { border-color: #b45309; box-shadow: 0 4px 12px rgba(180,83,9,0.15); }
+.lfs-kpi-value { font-variant-numeric: tabular-nums; }
+.lfs-health-ring svg { transition: transform 0.3s ease; }
+.lfs-health-ring:hover svg { transform: scale(1.05); }
+.lfs-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.lfs-ring-value { font-variant-numeric: tabular-nums; }
+.lfs-leather-badge, .lfs-status-badge { transition: transform 0.15s ease; }
+.lfs-leather-badge:hover { transform: scale(1.05); }
+.lfs-cost-bar-fill { transition: width 0.6s ease; }
+.lfs-table-row { transition: background-color 0.15s ease; }
+.lfs-table-row:hover { background-color: rgba(180,83,9,0.04); }
+.lfs-chart-card { border: 1px solid #e5e7eb; }
+.lfs-insight-card { border: 1px solid #e5e7eb; }
+@keyframes lfs-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes lfs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes lfs-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(180,83,9,0.15); } }
+@keyframes lfs-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(180,83,9,0.25); } }

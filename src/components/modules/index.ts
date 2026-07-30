@@ -248,3 +248,5 @@ export { default as SugarEthanolLogisticsView } from './sugar-ethanol-logistics-
 export { default as FertilizerAgriChemicalsView } from './fertilizer-agri-chemicals-view'
 export { default as RubberTyreLogisticsView } from './rubber-tyre-logistics-view'
 export { default as PaintsCoatingsSupplyChainView } from './paints-coatings-supply-chain-view'
+export { default as PaperPulpLogisticsView } from './paper-pulp-logistics-view'
+export { default as LeatherFootwearSupplyChainView } from './leather-footwear-supply-chain-view'
