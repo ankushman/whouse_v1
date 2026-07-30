@@ -192,6 +192,8 @@ import SupplyChainDigitalTwinView from "@/components/modules/supply-chain-digita
 import LastMileOptimizationProView from "@/components/modules/last-mile-optimization-pro-view"
 import WarehouseAutomationHubView from "@/components/modules/warehouse-automation-hub-view"
 import LogisticsCarbonTrackerView from "@/components/modules/logistics-carbon-tracker-view"
+import SmartDockSchedulerView from "@/components/modules/smart-dock-scheduler-view"
+import LogisticsAiCopilotView from "@/components/modules/logistics-ai-copilot-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -383,6 +385,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "last-mile-optimization-pro": LastMileOptimizationProView,
   "warehouse-automation-hub": WarehouseAutomationHubView,
   "logistics-carbon-tracker": LogisticsCarbonTrackerView,
+  "smart-dock-scheduler": SmartDockSchedulerView,
+  "logistics-ai-copilot": LogisticsAiCopilotView,
 }
 
 

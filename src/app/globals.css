@@ -50894,3 +50894,74 @@ html.theme-transition body {
 .lct-detail-header:hover { transform: scale(1.01); }
 .lct-cert-badge { transition: all 0.15s ease; }
 .lct-cert-badge:hover { transform: scale(1.05); }
+
+/* ═══════════════════════════════════════════════════════════
+   R264: Smart Dock Scheduler (sds-*) styles
+   ═══════════════════════════════════════════════════════════ */
+.sds-dock-badge { transition: all 0.15s ease; cursor: pointer; }
+.sds-dock-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(59,130,246,0.25); }
+.sds-status-badge { transition: all 0.2s ease; }
+.sds-available { animation: sds-pulse-green 2s ease-in-out infinite; }
+.sds-blocked { animation: sds-pulse-red 1.5s ease-in-out infinite; }
+@keyframes sds-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 0 6px rgba(5,150,105,0); } }
+@keyframes sds-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); } }
+.sds-appt-badge { transition: all 0.15s ease; }
+.sds-appt-badge:hover { transform: scale(1.05); }
+.sds-util-bar { transition: all 0.3s ease; }
+.sds-util-bar:hover > div:first-child { filter: brightness(1.15); }
+.sds-trend { transition: color 0.2s ease; }
+.sds-city-badge { transition: all 0.15s ease; }
+.sds-city-badge:hover { background-color: rgba(59,130,246,0.15); }
+.sds-kpi-tile { transition: all 0.2s ease; }
+.sds-kpi-tile:hover { transform: translateY(-2px); }
+.sds-value-tile { transition: all 0.2s ease; }
+.sds-value-tile:hover { background-color: rgba(59,130,246,0.08); }
+.sds-health-ring { transition: all 0.3s ease; }
+.sds-health-ring:hover svg { transform: scale(1.1); }
+.sds-health-ring svg { transition: transform 0.3s ease; }
+.sds-table { border-collapse: separate; border-spacing: 0; }
+.sds-table-row { transition: background-color 0.15s ease; }
+.sds-table-row:hover { background-color: rgba(59,130,246,0.06); }
+.sds-chart-card { transition: all 0.2s ease; }
+.sds-chart-card:hover { box-shadow: 0 4px 15px rgba(59,130,246,0.12); }
+.sds-detail-header { transition: all 0.3s ease; }
+.sds-detail-header:hover { transform: scale(1.01); }
+
+/* ═══════════════════════════════════════════════════════════
+   R264: Logistics AI Copilot (aic-*) styles
+   ═══════════════════════════════════════════════════════════ */
+.aic-module-badge { transition: all 0.15s ease; cursor: pointer; }
+.aic-module-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(139,92,246,0.25); }
+.aic-sugg-badge { transition: all 0.15s ease; }
+.aic-sugg-badge:hover { transform: scale(1.05); box-shadow: 0 2px 6px rgba(5,150,105,0.2); }
+.aic-status-badge { transition: all 0.2s ease; }
+.aic-new { animation: aic-pulse-blue 2s ease-in-out infinite; }
+.aic-implemented { animation: aic-pulse-green 2.5s ease-in-out infinite; }
+@keyframes aic-pulse-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.3); } 50% { box-shadow: 0 0 0 6px rgba(59,130,246,0); } }
+@keyframes aic-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 0 6px rgba(5,150,105,0); } }
+.aic-conf-bar { transition: all 0.3s ease; }
+.aic-conf-bar:hover > div:first-child { filter: brightness(1.15); }
+.aic-trend { transition: color 0.2s ease; }
+.aic-city-badge { transition: all 0.15s ease; }
+.aic-city-badge:hover { background-color: rgba(139,92,246,0.15); }
+.aic-kpi-tile { transition: all 0.2s ease; }
+.aic-kpi-tile:hover { transform: translateY(-2px); }
+.aic-value-tile { transition: all 0.2s ease; }
+.aic-value-tile:hover { background-color: rgba(139,92,246,0.08); }
+.aic-health-ring { transition: all 0.3s ease; }
+.aic-health-ring:hover svg { transform: scale(1.1); }
+.aic-health-ring svg { transition: transform 0.3s ease; }
+.aic-savings-tile { transition: all 0.2s ease; }
+.aic-savings-tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(5,150,105,0.15); }
+.aic-star-rating { transition: all 0.15s ease; }
+.aic-star-rating:hover svg { transform: scale(1.2); }
+.aic-star-rating svg { transition: transform 0.15s ease; }
+.aic-table { border-collapse: separate; border-spacing: 0; }
+.aic-table-row { transition: background-color 0.15s ease; }
+.aic-table-row:hover { background-color: rgba(139,92,246,0.06); }
+.aic-model-card { transition: all 0.2s ease; }
+.aic-model-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.aic-chart-card { transition: all 0.2s ease; }
+.aic-chart-card:hover { box-shadow: 0 4px 15px rgba(139,92,246,0.12); }
+.aic-detail-header { transition: all 0.3s ease; }
+.aic-detail-header:hover { transform: scale(1.01); }

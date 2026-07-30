@@ -182,3 +182,5 @@ export { default as SupplyChainDigitalTwinView } from './supply-chain-digital-tw
 export { default as LastMileOptimizationProView } from './last-mile-optimization-pro-view'
 export { default as WarehouseAutomationHubView } from './warehouse-automation-hub-view'
 export { default as LogisticsCarbonTrackerView } from './logistics-carbon-tracker-view'
+export { default as SmartDockSchedulerView } from './smart-dock-scheduler-view'
+export { default as LogisticsAiCopilotView } from './logistics-ai-copilot-view'
