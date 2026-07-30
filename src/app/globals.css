@@ -50581,3 +50581,43 @@ html.theme-transition body {
 .wsp-glow { position: relative; overflow: hidden; }
 .wsp-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #059669, #3b82f6, #7c3aed); opacity: 0; transition: opacity 0.3s ease; }
 .wsp-glow:hover::before { opacity: 1; }
+
+/* ── R259: Supply Chain Resilience Hub (scr-*) ──────────────────────────── */
+.scr-rt-badge, .scr-rs-badge, .scr-bcp-badge, .scr-alt-badge,
+.scr-city, .scr-region, .scr-supp, .scr-val, .scr-resilience { transition: all 0.15s ease; }
+.scr-rt-badge:hover, .scr-rs-badge:hover, .scr-bcp-badge:hover,
+.scr-alt-badge:hover, .scr-supp:hover, .scr-region:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.scr-rs-badge:hover { box-shadow: 0 0 12px rgba(239,68,68,0.25); }
+.scr-kpi { transition: all 0.2s ease; }
+.scr-kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,0.1); border-color: rgba(220,38,38,0.3); }
+.scr-chart { transition: all 0.2s ease; }
+.scr-chart:hover { box-shadow: 0 4px 16px rgba(220,38,38,0.08); }
+.scr-bcp-card { transition: all 0.25s ease; }
+.scr-bcp-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,0.12); }
+.scr-region-card { transition: all 0.25s ease; }
+.scr-region-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,38,38,0.12); }
+.scr-score:hover, .scr-impact:hover, .scr-mit:hover { transform: scale(1.05); }
+.scr-glow { position: relative; overflow: hidden; }
+.scr-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #dc2626, #ea580c, #d97706); opacity: 0; transition: opacity 0.3s ease; }
+.scr-glow:hover::before { opacity: 1; }
+
+/* ── R259: Logistics Procurement Command (lpc-*) ───────────────────────── */
+.lpc-type, .lpc-bid, .lpc-lane, .lpc-carrier, .lpc-city,
+.lpc-eval, .lpc-cs, .lpc-val, .lpc-priority { transition: all 0.15s ease; }
+.lpc-type:hover, .lpc-bid:hover, .lpc-lane:hover, .lpc-carrier:hover,
+.lpc-cs:hover, .lpc-eval:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.lpc-bid:hover { box-shadow: 0 0 10px rgba(59,130,246,0.2); }
+.lpc-kpi { transition: all 0.2s ease; }
+.lpc-kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); }
+.lpc-chart { transition: all 0.2s ease; }
+.lpc-chart:hover { box-shadow: 0 4px 16px rgba(59,130,246,0.08); }
+.lpc-contract { transition: all 0.25s ease; }
+.lpc-contract:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.12); }
+.lpc-score:hover, .lpc-savings:hover, .lpc-rate:hover { transform: scale(1.05); }
+.lpc-glow { position: relative; overflow: hidden; }
+.lpc-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3b82f6, #7c3aed, #0891b2); opacity: 0; transition: opacity 0.3s ease; }
+.lpc-glow:hover::before { opacity: 1; }
+
+/* ── R259: Shared Hover Animation ───────────────────────────────────────── */
+@keyframes r259-badge-glow { 0% { box-shadow: 0 0 0 rgba(0,0,0,0); } 50% { box-shadow: 0 0 12px rgba(59,130,246,0.15); } 100% { box-shadow: 0 0 0 rgba(0,0,0,0); } }
+.scr-rs-badge[title="Critical"], .lpc-bid[title="Open"] { animation: r259-badge-glow 2s infinite; }

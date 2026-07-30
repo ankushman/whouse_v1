@@ -178,6 +178,8 @@ export const navItems: NavItem[] = [
   { id: 'consignment-inventory-pro', label: 'Consignment Pro', icon: 'Archive', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance', 'supervisor'] },
   { id: 'logistics-control-tower', label: 'Control Tower', icon: 'MonitorSmartphone', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
   { id: 'warehouse-smart-picking', label: 'Smart Picking', icon: 'Crosshair', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
+  { id: 'supply-chain-resilience-hub', label: 'Resilience Hub', icon: 'HeartPulse', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'finance'] },
+  { id: 'logistics-procurement-command', label: 'Procurement Cmd', icon: 'Handshake', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement', 'finance', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

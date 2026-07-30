@@ -182,6 +182,8 @@ import AutonomousMobileRobotsFleetView from "@/components/modules/autonomous-mob
 import ConsignmentInventoryProView from "@/components/modules/consignment-inventory-pro-view"
 import LogisticsControlTowerView from "@/components/modules/logistics-control-tower-view"
 import WarehouseSmartPickingView from "@/components/modules/warehouse-smart-picking-view"
+import SupplyChainResilienceHubView from "@/components/modules/supply-chain-resilience-hub-view"
+import LogisticsProcurementCommandView from "@/components/modules/logistics-procurement-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -363,6 +365,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "consignment-inventory-pro": ConsignmentInventoryProView,
   "logistics-control-tower": LogisticsControlTowerView,
   "warehouse-smart-picking": WarehouseSmartPickingView,
+  "supply-chain-resilience-hub": SupplyChainResilienceHubView,
+  "logistics-procurement-command": LogisticsProcurementCommandView,
 }
 
 

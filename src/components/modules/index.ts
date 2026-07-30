@@ -172,3 +172,5 @@ export { default as AutonomousMobileRobotsFleetView } from './autonomous-mobile-
 export { default as ConsignmentInventoryProView } from './consignment-inventory-pro-view'
 export { default as LogisticsControlTowerView } from './logistics-control-tower-view'
 export { default as WarehouseSmartPickingView } from './warehouse-smart-picking-view'
+export { default as SupplyChainResilienceHubView } from './supply-chain-resilience-hub-view'
+export { default as LogisticsProcurementCommandView } from './logistics-procurement-command-view'
