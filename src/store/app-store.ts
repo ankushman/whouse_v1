@@ -216,6 +216,8 @@ export const navItems: NavItem[] = [
   { id: 'multi-modal-transport', label: 'Multi-Modal Hub', icon: 'Waypoints', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'supply-chain-risk', label: 'SCM Risk', icon: 'ShieldAlert', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'warehouse-safety', label: 'Warehouse Safety', icon: 'HardHat', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
+  { id: 'pharma-logistics', label: 'Pharma Logistics', icon: 'HeartPulse', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'e-waste-reverse-logistics', label: 'E-Waste Recycling', icon: 'Recycle', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
