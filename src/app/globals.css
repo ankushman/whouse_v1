@@ -50803,3 +50803,94 @@ html.theme-transition body {
 .lmo-fleet-summary:hover { background-color: rgba(245,158,11,0.05); }
 .lmo-zone-summary { transition: all 0.2s ease; border-radius: 8px; }
 .lmo-zone-summary:hover { background-color: rgba(139,92,246,0.05); }
+
+/* ═══════════════════════════════════════════════════════════
+   R263: Warehouse Automation Hub (wah-*) styles
+   ═══════════════════════════════════════════════════════════ */
+.wah-robot-badge { transition: all 0.15s ease; cursor: pointer; }
+.wah-robot-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(139,92,246,0.25); }
+.wah-task-badge { transition: all 0.15s ease; }
+.wah-task-badge:hover { transform: scale(1.05); box-shadow: 0 2px 6px rgba(5,150,105,0.2); }
+.wah-status-badge { transition: all 0.2s ease; }
+.wah-active { animation: wah-pulse-green 2s ease-in-out infinite; }
+.wah-error { animation: wah-pulse-red 1.5s ease-in-out infinite; }
+.wah-charging { animation: wah-blink-cyan 2s ease-in-out infinite; }
+@keyframes wah-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 0 6px rgba(5,150,105,0); } }
+@keyframes wah-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); } }
+@keyframes wah-blink-cyan { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.wah-battery-gauge { transition: all 0.3s ease; }
+.wah-battery-gauge:hover > div:first-child { filter: brightness(1.15); }
+.wah-eff-bar { transition: all 0.3s ease; }
+.wah-eff-bar:hover > div:first-child { filter: brightness(1.15); }
+.wah-trend { transition: color 0.2s ease; }
+.wah-city-badge { transition: all 0.15s ease; }
+.wah-city-badge:hover { background-color: rgba(139,92,246,0.15); }
+.wah-kpi-tile { transition: all 0.2s ease; }
+.wah-kpi-tile:hover { transform: translateY(-2px); }
+.wah-value-tile { transition: all 0.2s ease; }
+.wah-value-tile:hover { background-color: rgba(139,92,246,0.08); }
+.wah-health-ring { transition: all 0.3s ease; }
+.wah-health-ring:hover svg { transform: scale(1.1); }
+.wah-health-ring svg { transition: transform 0.3s ease; }
+.wah-temp-badge { transition: all 0.15s ease; }
+.wah-temp-badge:hover { transform: scale(1.1); }
+.wah-uptime-badge { transition: all 0.15s ease; }
+.wah-table { border-collapse: separate; border-spacing: 0; }
+.wah-table-row { transition: background-color 0.15s ease; }
+.wah-table-row:hover { background-color: rgba(139,92,246,0.06); }
+.wah-table-row:active { background-color: rgba(139,92,246,0.12); }
+.wah-alert-card { transition: all 0.2s ease; }
+.wah-alert-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.wah-alert-crit { animation: wah-glow-red 2s ease-in-out infinite; }
+@keyframes wah-glow-red { 0%, 100% { box-shadow: 0 0 4px rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 10px rgba(220,38,38,0.5); } }
+.wah-chart-card { transition: all 0.2s ease; }
+.wah-chart-card:hover { box-shadow: 0 4px 15px rgba(139,92,246,0.12); }
+.wah-insight-card { transition: all 0.2s ease; }
+.wah-insight-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+.wah-detail-header { transition: all 0.3s ease; }
+.wah-detail-header:hover { transform: scale(1.01); }
+.wah-priority-badge { transition: all 0.15s ease; }
+.wah-priority-badge:hover { transform: scale(1.08); }
+
+/* ═══════════════════════════════════════════════════════════
+   R263: Logistics Carbon Tracker (lct-*) styles
+   ═══════════════════════════════════════════════════════════ */
+.lct-mode-badge { transition: all 0.15s ease; cursor: pointer; }
+.lct-mode-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(5,150,105,0.25); }
+.lct-source-badge { transition: all 0.15s ease; }
+.lct-source-badge:hover { transform: scale(1.05); box-shadow: 0 2px 6px rgba(139,92,246,0.2); }
+.lct-compliance-badge { transition: all 0.2s ease; }
+.lct-compliant { animation: lct-pulse-green 2.5s ease-in-out infinite; }
+.lct-non-compliant { animation: lct-pulse-red 1.5s ease-in-out infinite; }
+@keyframes lct-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.3); } 50% { box-shadow: 0 0 0 6px rgba(5,150,105,0); } }
+@keyframes lct-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(220,38,38,0.3); } 50% { box-shadow: 0 0 0 6px rgba(220,38,38,0); } }
+.lct-offset-badge { transition: all 0.15s ease; }
+.lct-offset-badge:hover { transform: scale(1.05); }
+.lct-trend { transition: color 0.2s ease; }
+.lct-city-badge { transition: all 0.15s ease; }
+.lct-city-badge:hover { background-color: rgba(5,150,105,0.15); }
+.lct-kpi-tile { transition: all 0.2s ease; }
+.lct-kpi-tile:hover { transform: translateY(-2px); }
+.lct-value-tile { transition: all 0.2s ease; }
+.lct-value-tile:hover { background-color: rgba(5,150,105,0.08); }
+.lct-green-ring { transition: all 0.3s ease; }
+.lct-green-ring:hover svg { transform: scale(1.1); }
+.lct-green-ring svg { transition: transform 0.3s ease; }
+.lct-emission-bar { transition: all 0.3s ease; }
+.lct-emission-bar:hover > div:first-child { filter: brightness(1.15); }
+.lct-score-badge { transition: all 0.15s ease; }
+.lct-score-badge:hover { transform: scale(1.1); }
+.lct-table { border-collapse: separate; border-spacing: 0; }
+.lct-table-row { transition: background-color 0.15s ease; }
+.lct-table-row:hover { background-color: rgba(5,150,105,0.06); }
+.lct-table-row:active { background-color: rgba(5,150,105,0.12); }
+.lct-offset-card { transition: all 0.2s ease; }
+.lct-offset-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.lct-chart-card { transition: all 0.2s ease; }
+.lct-chart-card:hover { box-shadow: 0 4px 15px rgba(5,150,105,0.12); }
+.lct-insight-card { transition: all 0.2s ease; }
+.lct-insight-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+.lct-detail-header { transition: all 0.3s ease; }
+.lct-detail-header:hover { transform: scale(1.01); }
+.lct-cert-badge { transition: all 0.15s ease; }
+.lct-cert-badge:hover { transform: scale(1.05); }

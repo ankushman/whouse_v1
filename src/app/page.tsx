@@ -190,6 +190,8 @@ import DemandSensingAiView from "@/components/modules/demand-sensing-ai-view"
 import ReturnsPredictionEngineView from "@/components/modules/returns-prediction-engine-view"
 import SupplyChainDigitalTwinView from "@/components/modules/supply-chain-digital-twin-view"
 import LastMileOptimizationProView from "@/components/modules/last-mile-optimization-pro-view"
+import WarehouseAutomationHubView from "@/components/modules/warehouse-automation-hub-view"
+import LogisticsCarbonTrackerView from "@/components/modules/logistics-carbon-tracker-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -379,6 +381,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "returns-prediction-engine": ReturnsPredictionEngineView,
   "supply-chain-digital-twin": SupplyChainDigitalTwinView,
   "last-mile-optimization-pro": LastMileOptimizationProView,
+  "warehouse-automation-hub": WarehouseAutomationHubView,
+  "logistics-carbon-tracker": LogisticsCarbonTrackerView,
 }
 
 
