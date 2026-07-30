@@ -180,6 +180,8 @@ import FreightLaneIntelligenceView from "@/components/modules/freight-lane-intel
 import OmnichannelReturnsHubView from "@/components/modules/omnichannel-returns-hub-view"
 import AutonomousMobileRobotsFleetView from "@/components/modules/autonomous-mobile-robots-fleet-view"
 import ConsignmentInventoryProView from "@/components/modules/consignment-inventory-pro-view"
+import LogisticsControlTowerView from "@/components/modules/logistics-control-tower-view"
+import WarehouseSmartPickingView from "@/components/modules/warehouse-smart-picking-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -359,6 +361,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "omnichannel-returns-hub": OmnichannelReturnsHubView,
   "autonomous-mobile-robots-fleet": AutonomousMobileRobotsFleetView,
   "consignment-inventory-pro": ConsignmentInventoryProView,
+  "logistics-control-tower": LogisticsControlTowerView,
+  "warehouse-smart-picking": WarehouseSmartPickingView,
 }
 
 

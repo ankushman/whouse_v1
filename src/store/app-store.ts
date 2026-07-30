@@ -176,6 +176,8 @@ export const navItems: NavItem[] = [
   { id: 'omnichannel-returns-hub', label: 'Omnichannel Returns', icon: 'RotateCcw', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
   { id: 'autonomous-mobile-robots-fleet', label: 'AMR Fleet', icon: 'Bot', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
   { id: 'consignment-inventory-pro', label: 'Consignment Pro', icon: 'Archive', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance', 'supervisor'] },
+  { id: 'logistics-control-tower', label: 'Control Tower', icon: 'MonitorSmartphone', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
+  { id: 'warehouse-smart-picking', label: 'Smart Picking', icon: 'Crosshair', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator', 'shift_lead'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

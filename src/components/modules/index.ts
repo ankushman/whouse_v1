@@ -170,3 +170,5 @@ export { default as FreightLaneIntelligenceView } from './freight-lane-intellige
 export { default as OmnichannelReturnsHubView } from './omnichannel-returns-hub-view'
 export { default as AutonomousMobileRobotsFleetView } from './autonomous-mobile-robots-fleet-view'
 export { default as ConsignmentInventoryProView } from './consignment-inventory-pro-view'
+export { default as LogisticsControlTowerView } from './logistics-control-tower-view'
+export { default as WarehouseSmartPickingView } from './warehouse-smart-picking-view'

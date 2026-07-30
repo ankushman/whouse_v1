@@ -50529,3 +50529,55 @@ html.theme-transition body {
 /* ── Number Ticker ─────────────────────────────────────────────────────── */
 .number-ticker { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
 .number-ticker-animate { animation: r258-count-up 0.4s ease-out; }
+
+/* ── R258: Logistics Control Tower (lct-*) ──────────────────────────────────── */
+.lct-ot-badge, .lct-os-badge, .lct-ac-badge, .lct-as-badge, .lct-tm-badge,
+.lct-ts-badge, .lct-st-badge, .lct-carrier, .lct-city, .lct-wh, .lct-resolved,
+.lct-priority { transition: all 0.15s ease; }
+.lct-ot-badge:hover, .lct-os-badge:hover, .lct-tm-badge:hover,
+.lct-ts-badge:hover, .lct-carrier:hover, .lct-city:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.lct-as-badge:hover { box-shadow: 0 0 12px rgba(239,68,68,0.25); }
+.lct-kpi-card { transition: all 0.2s ease; }
+.lct-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,70,229,0.1); border-color: rgba(79,70,229,0.3); }
+.lct-chart-card { transition: all 0.2s ease; }
+.lct-chart-card:hover { box-shadow: 0 4px 16px rgba(79,70,229,0.08); }
+.lct-hub-card { transition: all 0.25s ease; }
+.lct-hub-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,70,229,0.12); }
+.lct-val-tile, .lct-health, .lct-sla, .lct-cost, .lct-thr-bar { transition: all 0.15s ease; }
+.lct-health:hover { transform: scale(1.08); }
+.lct-thr-bar:hover div:first-child { box-shadow: 0 0 8px rgba(79,70,229,0.3); }
+
+/* ── R258: Warehouse Smart Picking (wsp-*) ────────────────────────────────── */
+.wsp-method, .wsp-status, .wsp-zone, .wsp-priority, .wsp-sku, .wsp-slot,
+.wsp-algo, .wsp-err, .wsp-picker, .wsp-effort { transition: all 0.15s ease; }
+.wsp-method:hover, .wsp-status:hover, .wsp-sku:hover,
+.wsp-slot:hover, .wsp-algo:hover, .wsp-err:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.wsp-status:hover { box-shadow: 0 0 10px rgba(5,150,105,0.25); }
+.wsp-priority:hover { box-shadow: 0 0 10px rgba(239,68,68,0.2); }
+.wsp-algo:hover { box-shadow: 0 0 12px rgba(124,58,237,0.2); }
+.wsp-kpi { transition: all 0.2s ease; }
+.wsp-kpi:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.1); border-color: rgba(5,150,105,0.3); }
+.wsp-chart { transition: all 0.2s ease; }
+.wsp-chart:hover { box-shadow: 0 4px 16px rgba(5,150,105,0.08); }
+.wsp-picker-card { transition: all 0.25s ease; }
+.wsp-picker-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.12); }
+.wsp-zone-card { transition: all 0.25s ease; }
+.wsp-zone-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(5,150,105,0.12); }
+.wsp-accuracy, .wsp-speed, .wsp-uph, .wsp-rate-bar, .wsp-travel { transition: all 0.15s ease; }
+.wsp-accuracy:hover, .wsp-uph:hover { transform: scale(1.05); }
+.wsp-rate-bar:hover div:first-child { box-shadow: 0 0 8px rgba(5,150,105,0.3); }
+
+/* ── R258: Live Status Badges ────────────────────────────────────────────── */
+.live-pulse { animation: lct-live-pulse 2s infinite; }
+@keyframes lct-live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* ── R258: Table Row Hover Effects ────────────────────────────────────────── */
+.lct-row-hover:hover, .wsp-row-hover:hover { background: linear-gradient(90deg, transparent 0%, rgba(79,70,229,0.03) 100%); }
+
+/* ── R258: Card Glow Effects ──────────────────────────────────────────────── */
+.lct-glow { position: relative; overflow: hidden; }
+.lct-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #4f46e5, #3b82f6, #06b6d4); opacity: 0; transition: opacity 0.3s ease; }
+.lct-glow:hover::before { opacity: 1; }
+.wsp-glow { position: relative; overflow: hidden; }
+.wsp-glow::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #059669, #3b82f6, #7c3aed); opacity: 0; transition: opacity 0.3s ease; }
+.wsp-glow:hover::before { opacity: 1; }
