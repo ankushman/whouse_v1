@@ -177,6 +177,7 @@ import SmartLockerNetworkView from "@/components/modules/smart-locker-network-vi
 import ReturnsQualityCenterView from "@/components/modules/returns-quality-center-view"
 import HyperlocalFulfillmentView from "@/components/modules/hyperlocal-fulfillment-view"
 import FreightLaneIntelligenceView from "@/components/modules/freight-lane-intelligence-view"
+import OmnichannelReturnsHubView from "@/components/modules/omnichannel-returns-hub-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -353,6 +354,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "returns-quality-center": ReturnsQualityCenterView,
   "hyperlocal-fulfillment": HyperlocalFulfillmentView,
   "freight-lane-intelligence": FreightLaneIntelligenceView,
+  "omnichannel-returns-hub": OmnichannelReturnsHubView,
 }
 
 
