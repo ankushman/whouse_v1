@@ -228,3 +228,5 @@ export { default as SeedAgriInputLogisticsView } from './seed-agri-input-logisti
 export { default as DairyMilkSupplyChainView } from './dairy-milk-supply-chain-view'
 export { default as GemJewelleryLogisticsView } from './gem-jewellery-logistics-view'
 export { default as PortContainerTerminalView } from './port-container-terminal-view'
+export { default as PharmaVaccineSupplyView } from './pharma-vaccine-supply-view'
+export { default as AerospaceMroLogisticsView } from './aerospace-mro-logistics-view'

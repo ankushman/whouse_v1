@@ -238,6 +238,8 @@ import SeedAgriInputLogisticsView from "@/components/modules/seed-agri-input-log
 import DairyMilkSupplyChainView from "@/components/modules/dairy-milk-supply-chain-view"
 import GemJewelleryLogisticsView from "@/components/modules/gem-jewellery-logistics-view"
 import PortContainerTerminalView from "@/components/modules/port-container-terminal-view"
+import PharmaVaccineSupplyView from "@/components/modules/pharma-vaccine-supply-view"
+import AerospaceMroLogisticsView from "@/components/modules/aerospace-mro-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -475,6 +477,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "dairy-milk-supply-chain": DairyMilkSupplyChainView,
   "gem-jewellery-logistics": GemJewelleryLogisticsView,
   "port-container-terminal": PortContainerTerminalView,
+  "pharma-vaccine-supply": PharmaVaccineSupplyView,
+  "aerospace-mro-logistics": AerospaceMroLogisticsView,
 }
 
 
