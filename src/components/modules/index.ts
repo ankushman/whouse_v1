@@ -240,3 +240,5 @@ export { default as ProjectCargoHeavyLiftView } from './project-cargo-heavy-lift
 export { default as MedicalDeviceDistributionView } from './medical-device-distribution-view'
 export { default as ChemicalIndustrialGasesView } from './chemical-industrial-gases-view'
 export { default as SemiconductorElectronicsView } from './semiconductor-electronics-view'
+export { default as SteelMetalsSupplyChainView } from './steel-metals-supply-chain-view'
+export { default as DataCenterEquipmentView } from './data-center-equipment-view'

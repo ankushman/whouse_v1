@@ -52596,3 +52596,51 @@ html.theme-transition body {
 @keyframes see-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes see-pulse-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(2,132,199,0.15); } }
 @keyframes see-glow-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(2,132,199,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(2,132,199,0.25); } }
+
+/* Steel Metals Supply Chain (stm) */
+.stm-container { animation: stm-fade-in 0.4s ease; }
+.stm-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.stm-tab-trigger[data-state="active"] { background-color: #475569; color: white; }
+.stm-tab-trigger[data-state="active"]:hover { background-color: #334155; }
+.stm-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.stm-kpi-card:hover { border-color: #475569; box-shadow: 0 4px 12px rgba(71,85,105,0.15); }
+.stm-kpi-value { font-variant-numeric: tabular-nums; }
+.stm-health-ring svg { transition: transform 0.3s ease; }
+.stm-health-ring:hover svg { transform: scale(1.05); }
+.stm-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.stm-ring-value { font-variant-numeric: tabular-nums; }
+.stm-metal-badge, .stm-status-badge { transition: transform 0.15s ease; }
+.stm-metal-badge:hover { transform: scale(1.05); }
+.stm-cost-bar-fill { transition: width 0.6s ease; }
+.stm-table-row { transition: background-color 0.15s ease; }
+.stm-table-row:hover { background-color: rgba(71,85,105,0.04); }
+.stm-chart-card { border: 1px solid #e5e7eb; }
+.stm-insight-card { border: 1px solid #e5e7eb; }
+@keyframes stm-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes stm-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes stm-pulse-slate { 0%, 100% { box-shadow: 0 0 0 0 rgba(71,85,105,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(71,85,105,0.15); } }
+@keyframes stm-glow-slate { 0%, 100% { box-shadow: 0 0 0 0 rgba(71,85,105,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(71,85,105,0.25); } }
+
+/* Data Center Equipment (dce) */
+.dce-container { animation: dce-fade-in 0.4s ease; }
+.dce-tabs-list { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.dce-tab-trigger[data-state="active"] { background-color: #4338ca; color: white; }
+.dce-tab-trigger[data-state="active"]:hover { background-color: #3730a3; }
+.dce-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.dce-kpi-card:hover { border-color: #4338ca; box-shadow: 0 4px 12px rgba(67,56,202,0.15); }
+.dce-kpi-value { font-variant-numeric: tabular-nums; }
+.dce-health-ring svg { transition: transform 0.3s ease; }
+.dce-health-ring:hover svg { transform: scale(1.05); }
+.dce-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.dce-ring-value { font-variant-numeric: tabular-nums; }
+.dce-equip-badge, .dce-status-badge { transition: transform 0.15s ease; }
+.dce-equip-badge:hover { transform: scale(1.05); }
+.dce-cost-bar-fill { transition: width 0.6s ease; }
+.dce-table-row { transition: background-color 0.15s ease; }
+.dce-table-row:hover { background-color: rgba(67,56,202,0.04); }
+.dce-chart-card { border: 1px solid #e5e7eb; }
+.dce-insight-card { border: 1px solid #e5e7eb; }
+@keyframes dce-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dce-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes dce-pulse-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(67,56,202,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(67,56,202,0.15); } }
+@keyframes dce-glow-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(67,56,202,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(67,56,202,0.25); } }

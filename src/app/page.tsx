@@ -250,6 +250,8 @@ import ProjectCargoHeavyLiftView from "@/components/modules/project-cargo-heavy-
 import MedicalDeviceDistributionView from "@/components/modules/medical-device-distribution-view"
 import ChemicalIndustrialGasesView from "@/components/modules/chemical-industrial-gases-view"
 import SemiconductorElectronicsView from "@/components/modules/semiconductor-electronics-view"
+import SteelMetalsSupplyChainView from "@/components/modules/steel-metals-supply-chain-view"
+import DataCenterEquipmentView from "@/components/modules/data-center-equipment-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -499,6 +501,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "medical-device-distribution": MedicalDeviceDistributionView,
   "chemical-industrial-gases": ChemicalIndustrialGasesView,
   "semiconductor-electronics": SemiconductorElectronicsView,
+  "steel-metals-supply-chain": SteelMetalsSupplyChainView,
+  "data-center-equipment": DataCenterEquipmentView,
 }
 
 
