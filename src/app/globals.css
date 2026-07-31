@@ -54288,3 +54288,71 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* ============================================================================
+   R333: Pochampally Ikat Telangana (pit-*) + Kutch Bandhani Gujarat (kbn-*)
+   ============================================================================ */
+
+.pit-root {
+  animation: pitFadeIn 0.4s ease-out;
+}
+.pit-root .health-ring svg circle:last-child {
+  animation: pitRingPulse 2s ease-in-out infinite;
+}
+.pit-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.pit-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.pit-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.pit-root table tbody tr {
+  animation: pitRowSlide 0.3s ease-out;
+}
+
+.kbn-root {
+  animation: kbnFadeIn 0.4s ease-out;
+}
+.kbn-root .health-ring svg circle:last-child {
+  animation: kbnRingPulse 2s ease-in-out infinite;
+}
+.kbn-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.kbn-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.kbn-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.kbn-root table tbody tr {
+  animation: kbnRowSlide 0.3s ease-out;
+}
+
+@keyframes pitFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pitRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes pitRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes kbnFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes kbnRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes kbnRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

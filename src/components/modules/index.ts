@@ -318,3 +318,5 @@ export { default as SankhedaLacquerwareGujaratLogisticsView } from './sankheda-l
 export { default as TanjorePaintingTamilNaduLogisticsView } from './tanjore-painting-tamil-nadu-logistics-view'
 export { default as PatolaDoubleIkatGujaratLogisticsView } from './patola-double-ikat-gujarat-logistics-view'
 export { default as ChikankariEmbroideryLucknowLogisticsView } from './chikankari-embroidery-lucknow-logistics-view'
+export { default as PochampallyIkatTelanganaLogisticsView } from './pochampally-ikat-telangana-logistics-view'
+export { default as KutchBandhaniGujaratLogisticsView } from './kutch-bandhani-gujarat-logistics-view'

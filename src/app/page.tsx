@@ -328,6 +328,8 @@ import SankhedaLacquerwareGujaratLogisticsView from "@/components/modules/sankhe
 import TanjorePaintingTamilNaduLogisticsView from "@/components/modules/tanjore-painting-tamil-nadu-logistics-view"
 import PatolaDoubleIkatGujaratLogisticsView from "@/components/modules/patola-double-ikat-gujarat-logistics-view"
 import ChikankariEmbroideryLucknowLogisticsView from "@/components/modules/chikankari-embroidery-lucknow-logistics-view"
+import PochampallyIkatTelanganaLogisticsView from "@/components/modules/pochampally-ikat-telangana-logistics-view"
+import KutchBandhaniGujaratLogisticsView from "@/components/modules/kutch-bandhani-gujarat-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -655,6 +657,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "tanjore-painting-tamil-nadu-logistics": TanjorePaintingTamilNaduLogisticsView,
   "patola-double-ikat-gujarat-logistics": PatolaDoubleIkatGujaratLogisticsView,
   "chikankari-embroidery-lucknow-logistics": ChikankariEmbroideryLucknowLogisticsView,
+  "pochampally-ikat-telangana-logistics": PochampallyIkatTelanganaLogisticsView,
+  "kutch-bandhani-gujarat-logistics": KutchBandhaniGujaratLogisticsView,
 }
 
 
