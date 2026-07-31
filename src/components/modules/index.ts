@@ -274,3 +274,5 @@ export { default as GlassCeramicsSupplyChainView } from './glass-ceramics-supply
 export { default as HandicraftWoodworkLogisticsView } from './handicraft-woodwork-logistics-view'
 export { default as BambooCaneProductsSupplyChainView } from './bamboo-cane-products-supply-chain-view'
 export { default as LacquerwareLacBanglesLogisticsView } from './lacquerware-lac-bangles-logistics-view'
+export { default as ZariZardoziEmbroideryLogisticsView } from './zari-zardozi-embroidery-logistics-view'
+export { default as PuppetryTraditionalToysLogisticsView } from './puppetry-traditional-toys-logistics-view'

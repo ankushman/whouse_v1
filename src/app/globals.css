@@ -53380,3 +53380,49 @@ html.theme-transition body {
 @keyframes llb-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes llb-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,45,18,0.15); } }
 @keyframes llb-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,45,18,0.25); } }
+
+/* ── Zari & Zardozi Embroidery Logistics (zze-*) ── */
+.zze-root { animation: zze-fade-in 0.3s ease-out; }
+.zze-root * { box-sizing: border-box; }
+.zze-badge { letter-spacing: 0.02em; }
+.zze-status { border: 1px solid #ffe4e6; }
+.zze-costbar div { transition: width 0.6s ease; }
+.zze-kpi { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.zze-kpi:hover { border-color: #722f37; box-shadow: 0 4px 12px rgba(114,47,55,0.15); }
+.zze-value { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.zze-value:hover { border-color: #88333d; }
+.zze-health-grid { border: 1px solid #e5e7eb; }
+.zze-health-ring svg { transition: transform 0.3s ease; }
+.zze-health-ring:hover svg { transform: scale(1.05); }
+.zze-table-card { border: 1px solid #e5e7eb; overflow-x: auto; }
+.zze-table-card tbody tr { transition: background-color 0.15s ease; }
+.zze-table-card tbody tr:hover { background-color: rgba(114,47,55,0.04); }
+.zze-insight { border: 1px solid #e5e7eb; transition: all 0.2s ease; }
+.zze-insight:hover { border-color: #722f37; box-shadow: 0 2px 8px rgba(114,47,55,0.1); }
+@keyframes zze-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes zze-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes zze-pulse-rose { 0%, 100% { box-shadow: 0 0 0 0 rgba(114,47,55,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(114,47,55,0.15); } }
+@keyframes zze-glow-rose { 0%, 100% { box-shadow: 0 0 0 0 rgba(114,47,55,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(114,47,55,0.25); } }
+
+/* ── Puppetry & Traditional Toys Logistics (ptt-*) ── */
+.ptt-root { animation: ptt-fade-in 0.3s ease-out; }
+.ptt-root * { box-sizing: border-box; }
+.ptt-badge { letter-spacing: 0.02em; }
+.ptt-status { border: 1px solid #ede9fe; }
+.ptt-costbar div { transition: width 0.6s ease; }
+.ptt-kpi { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ptt-kpi:hover { border-color: #3b0764; box-shadow: 0 4px 12px rgba(59,7,100,0.15); }
+.ptt-value { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.ptt-value:hover { border-color: #4c1d95; }
+.ptt-health-grid { border: 1px solid #e5e7eb; }
+.ptt-health-ring svg { transition: transform 0.3s ease; }
+.ptt-health-ring:hover svg { transform: scale(1.05); }
+.ptt-table-card { border: 1px solid #e5e7eb; overflow-x: auto; }
+.ptt-table-card tbody tr { transition: background-color 0.15s ease; }
+.ptt-table-card tbody tr:hover { background-color: rgba(59,7,100,0.04); }
+.ptt-insight { border: 1px solid #e5e7eb; transition: all 0.2s ease; }
+.ptt-insight:hover { border-color: #3b0764; box-shadow: 0 2px 8px rgba(59,7,100,0.1); }
+@keyframes ptt-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ptt-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ptt-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,7,100,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(59,7,100,0.15); } }
+@keyframes ptt-glow-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,7,100,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(59,7,100,0.25); } }
