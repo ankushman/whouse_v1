@@ -53942,3 +53942,33 @@ html.theme-transition body {
 @keyframes bmc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes bmc-pulse-slate { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,41,59,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,41,59,0.15); } }
 @keyframes bmc-glow-slate { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,41,59,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,41,59,0.25); } }
+.kva-root { animation: kva-fade-in 0.3s ease-out; }
+.kva-badge { transition: transform 0.15s; }
+.kva-badge:hover { transform: scale(1.05); }
+.kva-status { transition: background-color 0.15s; }
+.kva-costbar { transition: width 0.4s ease-out; }
+.kva-table-card { transition: box-shadow 0.2s; }
+.kva-table-card:hover { box-shadow: 0 4px 16px rgba(180,83,9,0.08); }
+.kva-health-grid { transition: box-shadow 0.2s; }
+.kva-health-grid:hover { box-shadow: 0 2px 12px rgba(180,83,9,0.1); }
+.kva-insight { transition: all 0.25s; border-left: 3px solid #b45309; }
+.kva-insight:hover { border-color: #d97706; box-shadow: 0 2px 8px rgba(180,83,9,0.1); }
+@keyframes kva-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes kva-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes kva-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(180,83,9,0.15); } }
+@keyframes kva-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(180,83,9,0.25); } }
+.ppw-root { animation: ppw-fade-in 0.3s ease-out; }
+.ppw-badge { transition: transform 0.15s; }
+.ppw-badge:hover { transform: scale(1.05); }
+.ppw-status { transition: background-color 0.15s; }
+.ppw-costbar { transition: width 0.4s ease-out; }
+.ppw-table-card { transition: box-shadow 0.2s; }
+.ppw-table-card:hover { box-shadow: 0 4px 16px rgba(159,18,57,0.08); }
+.ppw-health-grid { transition: box-shadow 0.2s; }
+.ppw-health-grid:hover { box-shadow: 0 2px 12px rgba(159,18,57,0.1); }
+.ppw-insight { transition: all 0.25s; border-left: 3px solid #9f1239; }
+.ppw-insight:hover { border-color: #e11d48; box-shadow: 0 2px 8px rgba(159,18,57,0.1); }
+@keyframes ppw-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ppw-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ppw-pulse-crimson { 0%, 100% { box-shadow: 0 0 0 0 rgba(159,18,57,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(159,18,57,0.15); } }
+@keyframes ppw-glow-crimson { 0%, 100% { box-shadow: 0 0 0 0 rgba(159,18,57,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(159,18,57,0.25); } }

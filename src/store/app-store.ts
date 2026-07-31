@@ -306,6 +306,8 @@ export const navItems: NavItem[] = [
   { id: 'dhokra-bell-metal-craft-logistics', label: 'Dhokra Bell Metal Craft', icon: 'Axe', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'phad-painting-rajasthan-logistics', label: 'Phad Painting Rajasthan', icon: 'Flag', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'bidriware-metal-craft-karnataka-logistics', label: 'Bidriware Metal Craft Karnataka', icon: 'Hexagon', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'kalamkari-veil-art-andhra-logistics', label: 'Kalamkari Veil Art Andhra', icon: 'Grape', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'pichwai-painting-rajasthan-logistics', label: 'Pichwai Painting Rajasthan', icon: 'Sun', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
