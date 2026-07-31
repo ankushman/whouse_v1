@@ -54681,3 +54681,43 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+.gda-root { animation: gdaFadeIn 0.3s ease-out; }
+.gda-badge { transition: transform 0.15s; }
+.gda-badge:hover { transform: scale(1.05); }
+.gda-cost-bar { transition: width 0.6s ease-out; }
+.gda-health-ring { transition: stroke-dashoffset 0.8s ease-out; }
+.gda-kpi-tile { transition: box-shadow 0.2s ease; }
+.gda-kpi-tile:hover { box-shadow: 0 2px 8px rgba(180,83,9,0.10); }
+.gda-row { transition: background-color 0.15s; }
+@keyframes gdaFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gdaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(180,83,9,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(180,83,9,0.04); }
+}
+@keyframes gdaRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.psa-root { animation: psaFadeIn 0.3s ease-out; }
+.psa-badge { transition: transform 0.15s; }
+.psa-badge:hover { transform: scale(1.05); }
+.psa-cost-bar { transition: width 0.6s ease-out; }
+.psa-health-ring { transition: stroke-dashoffset 0.8s ease-out; }
+.psa-kpi-tile { transition: box-shadow 0.2s ease; }
+.psa-kpi-tile:hover { box-shadow: 0 2px 8px rgba(15,118,110,0.10); }
+.psa-row { transition: background-color 0.15s; }
+@keyframes psaFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes psaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(15,118,110,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(15,118,110,0.04); }
+}
+@keyframes psaRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

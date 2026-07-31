@@ -339,6 +339,8 @@ import KashmirSozniEmbroideryLogisticsView from "@/components/modules/kashmir-so
 import WarliTribalPaintingMaharashtraLogisticsView from "@/components/modules/warli-tribal-painting-maharashtra-logistics-view"
 import ChanderiSilkWeavingMadhyaPradeshLogisticsView from "@/components/modules/chanderi-silk-weaving-madhya-pradesh-logistics-view"
 import KangraPaintingHimachalPradeshLogisticsView from "@/components/modules/kangra-painting-himachal-pradesh-logistics-view"
+import GodnaTattooArtMadhyaPradeshLogisticsView from "@/components/modules/godna-tattoo-art-madhya-pradesh-logistics-view"
+import PatuaScrollArtWestBengalLogisticsView from "@/components/modules/patua-scroll-art-west-bengal-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -677,6 +679,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warli-tribal-painting-maharashtra-logistics": WarliTribalPaintingMaharashtraLogisticsView,
   "chanderi-silk-weaving-madhya-pradesh-logistics": ChanderiSilkWeavingMadhyaPradeshLogisticsView,
   "kangra-painting-himachal-pradesh-logistics": KangraPaintingHimachalPradeshLogisticsView,
+  "godna-tattoo-art-madhya-pradesh-logistics": GodnaTattooArtMadhyaPradeshLogisticsView,
+  "patua-scroll-art-west-bengal-logistics": PatuaScrollArtWestBengalLogisticsView,
 }
 
 

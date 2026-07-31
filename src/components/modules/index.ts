@@ -329,3 +329,5 @@ export { default as KashmirSozniEmbroideryLogisticsView } from './kashmir-sozni-
 export { default as WarliTribalPaintingMaharashtraLogisticsView } from './warli-tribal-painting-maharashtra-logistics-view'
 export { default as ChanderiSilkWeavingMadhyaPradeshLogisticsView } from './chanderi-silk-weaving-madhya-pradesh-logistics-view'
 export { default as KangraPaintingHimachalPradeshLogisticsView } from './kangra-painting-himachal-pradesh-logistics-view'
+export { default as GodnaTattooArtMadhyaPradeshLogisticsView } from './godna-tattoo-art-madhya-pradesh-logistics-view'
+export { default as PatuaScrollArtWestBengalLogisticsView } from './patua-scroll-art-west-bengal-logistics-view'
