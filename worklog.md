@@ -4,6 +4,46 @@
 ---
 
 ---
+Task ID: R330
+Agent: Main Agent (Cron Loop)
+Task: R330 — Nirmal Painting Telangana + Cheriyal Scroll Art Telangana
+
+Work Log:
+- Read worklog.md: R329 complete (commit 1ddf7dd), 316 views, 316 navItems, 54,124 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R330)
+- R329 commit 1ddf7dd already pushed
+- Slug verification: nirmal-painting-telangana-logistics and cheriyal-scroll-art-telangana-logistics both clear
+- Icons: Palette (Nirmal) and ScrollText (Cheriyal) already in iconMap — reused, no new icons (186 total unchanged)
+
+- Created Nirmal Painting Telangana Logistics (npt-*, #991b1b deep crimson red): 253 lines, 8 products (Nirmal Wooden Mysore Box/Gold-Foil Mughal Panel/Floral Lacquer Coaster Set/Nirmal Painted Tray/Miniature Temple Panel/Bird Motif Decorative Plate/Nirmal Jewel Box/Nirmal Wall Hanging Frame), 8 painters (Nirmal Town Artisan Guild/Kakatiya Heritage Painters/Adilabad Nirmal Society/Nizamabad Folk Art Centre/Kamareddy Nirmal Colony/Nirmal Rural Craft Workshop/Bodhan Nirmal Cooperative/Dichpalli Artisan Collective), 6 statuses (GI Nirmal Painting Mark/IS 16910 Nirmal Art Grade A/Foam-Padded Wooden Box/Enclosed Truck Transit/Dry Storage 20-28C/Gold Foil Adhesion QC), 4 insight cards (700-year Kakatiya tradition, IS 16910 Nirmal art standards, foam-padded wooden box packaging, AI gold foil pattern verification)
+- Created Cheriyal Scroll Art Telangana Logistics (csa-*, #78350f deep gold brown): 253 lines, 8 products (Cheriyal Puranic Scroll/Narasimha Avatar Scroll/Ramayana Story Panel/Markandeya Legend Scroll/Shiva Tandava Narrative/Goddess Durga Battle Scroll/Krishna Gopashtami Scroll/Cheriyal Masks Set), 8 painters (Cheriyal Nakashi Guild/Jangaon Scroll Art Society/Warangal Heritage Painters/Siddipet Nakashi Colony/Yadadri Cheriyal Workshop/Karimnagar Folk Art Centre/Nalgonda Scroll Collective/Medak Cheriyal Heritage Studio), 6 statuses (GI Cheriyal Scroll Art Mark/IS 16911 Nakashi Art Grade A/Cloth-Rolled Scroll Tube/Flatbed Truck Transit/Dry Storage 18-28C/Natural Dye Fastness QC), 4 insight cards (800-year Kakatiya Nakashi tradition, IS 16911 Nakashi art standards, cloth-rolled scroll tube packaging, AI natural dye authentication)
+- Main agent wrote both modules directly (matching exact 253-line template format)
+- Registered: +2 exports, +2 imports, +2 viewMap, +2 navItems
+- Icons: Palette reused, ScrollText reused — 186 total unchanged
+- CSS: +30 lines (npt-* + csa-*, 8 keyframe animations)
+- TSC: 0 errors | Git pushed: commit 433ba43
+
+Stage Summary:
+- NEW MODULE: Nirmal Painting Telangana Logistics (253 lines, 12 components, 60 records)
+- NEW MODULE: Cheriyal Scroll Art Telangana Logistics (253 lines, 12 components, 60 records)
+- ICONS: 186 total (Palette, ScrollText reused)
+- Total navItems: 318 | VIEW FILES: 318 | CSS: 54,154 lines
+- ZERO src/ TSC errors | Git pushed: commit 433ba43
+
+## Updated Project Status (Post Round 330)
+- STATUS: STABLE (Turbopack OOM persists)
+- VIEW FILES: 318 | NAVITEMS: 318 | CSS: 54,154 lines
+- ICONMAP: 186 icons | TSC: 0 errors | GITHUB: Pushed (commit 433ba43)
+
+PRIORITY NEXT:
+1. Create new modules (Sankheda Lacquerware Gujarat, Tanjore Painting Tamil Nadu)
+2. CSS splitting to resolve Turbopack OOM (CRITICAL — 54K+ lines)
+3. SearchFilterToolbar into 5-10 more modules
+4. Cross-module drill-down navigation
+
+---
+
+---
 Task ID: R329
 Agent: Main Agent (Cron Loop)
 Task: R329 — Kanchipuram Silk Saree + Gond Tribal Art Madhya Pradesh
