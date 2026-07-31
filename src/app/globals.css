@@ -53426,3 +53426,49 @@ html.theme-transition body {
 @keyframes ptt-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes ptt-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,7,100,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(59,7,100,0.15); } }
 @keyframes ptt-glow-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,7,100,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(59,7,100,0.25); } }
+
+/* ── Makhana Fox Nut Processing Logistics (mfn-*) ── */
+.mfn-root { animation: mfn-fade-in 0.3s ease-out; }
+.mfn-root * { box-sizing: border-box; }
+.mfn-badge { letter-spacing: 0.02em; }
+.mfn-status { border: 1px solid #e0f2fe; }
+.mfn-costbar div { transition: width 0.6s ease; }
+.mfn-kpi { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mfn-kpi:hover { border-color: #1e3a5f; box-shadow: 0 4px 12px rgba(30,58,95,0.15); }
+.mfn-value { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mfn-value:hover { border-color: #1e4d7b; }
+.mfn-health-grid { border: 1px solid #e5e7eb; }
+.mfn-health-ring svg { transition: transform 0.3s ease; }
+.mfn-health-ring:hover svg { transform: scale(1.05); }
+.mfn-table-card { border: 1px solid #e5e7eb; overflow-x: auto; }
+.mfn-table-card tbody tr { transition: background-color 0.15s ease; }
+.mfn-table-card tbody tr:hover { background-color: rgba(30,58,95,0.04); }
+.mfn-insight { border: 1px solid #e5e7eb; transition: all 0.2s ease; }
+.mfn-insight:hover { border-color: #1e3a5f; box-shadow: 0 2px 8px rgba(30,58,95,0.1); }
+@keyframes mfn-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mfn-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mfn-pulse-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,58,95,0.15); } }
+@keyframes mfn-glow-sky { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,58,95,0.25); } }
+
+/* ── Madhubani Folk Art Supply Chain (mfa-*) ── */
+.mfa-root { animation: mfa-fade-in 0.3s ease-out; }
+.mfa-root * { box-sizing: border-box; }
+.mfa-badge { letter-spacing: 0.02em; }
+.mfa-status { border: 1px solid #fef9c3; }
+.mfa-costbar div { transition: width 0.6s ease; }
+.mfa-kpi { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mfa-kpi:hover { border-color: #713f12; box-shadow: 0 4px 12px rgba(113,63,18,0.15); }
+.mfa-value { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.mfa-value:hover { border-color: #854d0e; }
+.mfa-health-grid { border: 1px solid #e5e7eb; }
+.mfa-health-ring svg { transition: transform 0.3s ease; }
+.mfa-health-ring:hover svg { transform: scale(1.05); }
+.mfa-table-card { border: 1px solid #e5e7eb; overflow-x: auto; }
+.mfa-table-card tbody tr { transition: background-color 0.15s ease; }
+.mfa-table-card tbody tr:hover { background-color: rgba(113,63,18,0.04); }
+.mfa-insight { border: 1px solid #e5e7eb; transition: all 0.2s ease; }
+.mfa-insight:hover { border-color: #713f12; box-shadow: 0 2px 8px rgba(113,63,18,0.1); }
+@keyframes mfa-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mfa-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mfa-pulse-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(113,63,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(113,63,18,0.15); } }
+@keyframes mfa-glow-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(113,63,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(113,63,18,0.25); } }

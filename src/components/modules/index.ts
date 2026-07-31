@@ -276,3 +276,5 @@ export { default as BambooCaneProductsSupplyChainView } from './bamboo-cane-prod
 export { default as LacquerwareLacBanglesLogisticsView } from './lacquerware-lac-bangles-logistics-view'
 export { default as ZariZardoziEmbroideryLogisticsView } from './zari-zardozi-embroidery-logistics-view'
 export { default as PuppetryTraditionalToysLogisticsView } from './puppetry-traditional-toys-logistics-view'
+export { default as MakhanaFoxNutProcessingLogisticsView } from './makhana-fox-nut-processing-logistics-view'
+export { default as MadhubaniFolkArtSupplyChainView } from './madhubani-folk-art-supply-chain-view'
