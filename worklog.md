@@ -1,5 +1,32 @@
 ---
 ---
+Task ID: R349
+Agent: Main Agent (Cron Loop)
+Task: R349 — Bastar Iron Craft Chhattisgarh (new) + Bamboo Cane Products Supply Chain overwrite
+
+Work Log:
+- Read worklog.md: R348 complete (commit eb19ee7), 342 views, 342 navItems, 54,926 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R349)
+- Discovered esg-compliance-hub-view.tsx was orphaned (not in index.ts, page.tsx, or app-store.ts) — added to barrel index.ts as bugfix
+- Slug verification: bastar-iron-craft-chhattisgarh-logistics CLEAR; bamboo-cane-products-supply-chain ALREADY EXISTS
+- CSS prefixes: bic-* CLEAR, bcp-* already exists (22 lines in globals.css)
+- Icons: Hammer (Bastar, already in iconMap line), Trees (Bamboo, already existed) — no new icons (186 unchanged)
+- Bamboo Cane had MANUFACTURERS/manufacturer/product fields, 242 lines — completely overwritten to 253 lines
+
+- Created Bastar Iron Craft Chhattisgarh Logistics (bic-*, #431407 deep iron brown): 253 lines, 8 products (Bastar Iron Devi Sculpture, Iron Horse Figure, Iron Elephant Motif, Iron Tree of Life Panel, Iron Snake Spiral Stand, Iron Bell Metal Bowl, Iron Dancer Figurine, Iron Village Scene Relief), 8 artisans (Bastar Iron Craft Guild CG, Jagdalpur Metal Workers CG, Kondagaon Loha Shilp Cluster, Dantewada Iron Artisan Cooperative, Kanker Iron Forge Society CG, Narayanpur Traditional Iron CG, Sukma Bastar Craft Collective, Bijapur Iron Worker Community CG), 6 statuses, 4 insight cards (1200-year lost-wax metal casting heritage, IS 16794 iron craft standards, foam wrap individual box packaging, AI craft verification)
+- Overwrote Bamboo Cane Products Supply Chain (bcp-*, #14532d deep green): 253 lines, MANUFACTURERS→ARTISANS field fix, genRecords, 60 records, 4 insight cards (1500-year NE India tribal basketry, IS 15984 bamboo standards & borer treatment QC, strap bundled packaging, AI species verification)
+- Registered Bastar in 3 files; Bamboo already registered
+- BUGFIX: Added esg-compliance-hub to barrel index.ts (orphaned module)
+- CSS: +21 lines (bic-* 7 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit d8d9e5c
+
+Stage Summary:
+- 343 views, 343 navItems, 54,947 CSS lines, 335 barrel exports (333 + Bastar + ESG fix)
+- Bamboo Cane fixed: MANUFACTURERS→ARTISANS, 242→253 lines, full template compliance
+- esg-compliance-hub was orphaned (not in any registration file) — added to barrel index.ts only
+- Remaining overwrite candidates: carpet-rug (243), glass-ceramics (243), handicraft-woodwork (243), handloom-cotton (243), incense-dhoop (243), terracotta-pottery (243), ayurveda-herbal (244), and 20+ more at 244-245 lines
+- Next round suggestions: Molela Terracotta RJ (new) + one of the 243-line overwrites (carpet-rug or glass-ceramics)
+---
 ---
 Task ID: R348
 Agent: Main Agent (Cron Loop)
