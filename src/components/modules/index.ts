@@ -340,4 +340,5 @@ export { default as AipanArtAlmoraLogisticsView } from './aipan-art-almora-logis
 export { default as KinnauriShawlHimachalPradeshLogisticsView } from './kinnauri-shawl-himachal-pradesh-logistics-view'
 export { default as BastarIronCraftChhattisgarhLogisticsView } from './bastar-iron-craft-chhattisgarh-logistics-view'
 export { default as MolelaTerracottaRajasthanLogisticsView } from './molela-terracotta-rajasthan-logistics-view'
+export { default as SungudiSareeTamilNaduLogisticsView } from './sungudi-saree-tamil-nadu-logistics-view'
 export { default as PembarthiMetalCraftTelanganaLogisticsView } from './pembarthi-metal-craft-telangana-logistics-view'

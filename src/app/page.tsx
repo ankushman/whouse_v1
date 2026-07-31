@@ -349,6 +349,7 @@ import AipanArtAlmoraLogisticsView from "@/components/modules/aipan-art-almora-l
 import KinnauriShawlHimachalPradeshLogisticsView from "@/components/modules/kinnauri-shawl-himachal-pradesh-logistics-view"
 import BastarIronCraftChhattisgarhLogisticsView from "@/components/modules/bastar-iron-craft-chhattisgarh-logistics-view"
 import MolelaTerracottaRajasthanLogisticsView from "@/components/modules/molela-terracotta-rajasthan-logistics-view"
+import SungudiSareeTamilNaduLogisticsView from "@/components/modules/sungudi-saree-tamil-nadu-logistics-view"
 import PembarthiMetalCraftTelanganaLogisticsView from "@/components/modules/pembarthi-metal-craft-telangana-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -698,6 +699,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "kinnauri-shawl-himachal-pradesh-logistics": KinnauriShawlHimachalPradeshLogisticsView,
   "bastar-iron-craft-chhattisgarh-logistics": BastarIronCraftChhattisgarhLogisticsView,
   "molela-terracotta-rajasthan-logistics": MolelaTerracottaRajasthanLogisticsView,
+  "sungudi-saree-tamil-nadu-logistics": SungudiSareeTamilNaduLogisticsView,
   "pembarthi-metal-craft-telangana-logistics": PembarthiMetalCraftTelanganaLogisticsView,
 }
 
