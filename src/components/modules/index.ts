@@ -334,3 +334,4 @@ export { default as PatuaScrollArtWestBengalLogisticsView } from './patua-scroll
 export { default as SauraTribalArtOdishaLogisticsView } from './saura-tribal-art-odisha-logistics-view'
 export { default as ChambaRumalEmbroideryHimachalPradeshLogisticsView } from './chamba-rumal-embroidery-himachal-pradesh-logistics-view'
 export { default as ThangkaPaintingLadakhLogisticsView } from './thangka-painting-ladakh-logistics-view'
+export { default as PembarthiMetalCraftTelanganaLogisticsView } from './pembarthi-metal-craft-telangana-logistics-view'

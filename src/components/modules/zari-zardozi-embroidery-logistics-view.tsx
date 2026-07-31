@@ -7,78 +7,77 @@ import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 const COLORS = ['#722f37', '#88333d', '#a33a46', '#be4450', '#d94f5a', '#521e24', '#622830', '#fce7f1']
-const PRODUCTS = ['Real Zari Silk Saree', 'Zardozi Bridal Lehenga', 'Kundan Zari Dupatta', 'Gold Thread Brocade', 'Zari Pashmina Shawl', 'Silver Zari Embroidered Panel', 'Zardozi Clutch Bag', 'Zari Lace Trim Roll']
-const MANUFACTURERS = ['Surat Zari Mills GJ', 'Varanasi Brocade UP', 'Bhagalpur Silk Cluster', 'Kanchipuram Zari TN', 'Murshidabad Zardozi WB', 'Jaipur Kundan RJ', 'Lucknow Chikan Zari UP', 'Mysore Zari Palace KA']
-const STATUSES = ['GI Zari Certified', 'BIS Gold Purity 92%', 'Silk Folded', 'Padded Box Transit', 'Dehumid Vault Store', 'Thread Count QC']
+const PRODUCTS = ['Real Zari Silk Saree', 'Zardozi Bridal Lehenga', 'Kundan Zari Dupatta', 'Gold Thread Brocade Panel', 'Zari Pashmina Shawl', 'Silver Zari Embroidered Panel', 'Zardozi Clutch Bag', 'Zari Lace Trim Roll']
+const ARTISANS = ['Surat Zari Mills Guild', 'Varanasi Brocade Art Society', 'Bhagalpur Silk Cluster Cooperative', 'Kanchipuram Zari Heritage Studio', 'Murshidabad Zardozi Workshop', 'Jaipur Kundan Art Centre', 'Lucknow Chikan Zari Colony', 'Mysore Palace Zari Atelier']
+const STATUSES = ['GI Zari Certified', 'BIS Gold Purity 92%', 'Silk Folded Box Pack', 'Padded Truck Transit', 'Dehumid Vault Store 20-25C', 'Thread Count QC']
 
 const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
 const ProductBadge = ({ name }: { name: string }) => (
-  <span className="zze-badge inline-block px-2 py-0.5 rounded text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
 )
 
 const StatusBadge = ({ status }: { status: string }) => (
-  <span className="zze-status inline-block px-2 py-0.5 rounded text-xs font-medium bg-rose-100 text-rose-800">{status}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-rose-100 text-rose-800">{status}</span>
 )
 
 const CostBar = ({ cost, max }: { cost: number; max: number }) => (
-  <div className="zze-costbar w-full bg-rose-100 rounded h-2"><div className="bg-rose-700 h-2 rounded" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+  <div className="w-24 h-2 bg-rose-200 rounded-full overflow-hidden"><div className="h-full bg-rose-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
 )
 
-const HealthRing = ({ value, label, size = 64 }: { value: number; label: string; size?: number }) => {
-  const r = (size - 8) / 2
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
   return (
-    <div className="zze-health-ring flex flex-col items-center">
-      <svg width={size} height={size}><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={4} /><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#722f37" strokeWidth={4} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" transform={`rotate(-90 ${size/2} ${size/2})`} /></svg>
-      <span className="text-xs font-semibold" style={{ color: COLORS[0] }}>{value}%</span>
-      <span className="text-[10px] text-gray-500">{label}</span>
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#fce7f1" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
     </div>
   )
 }
 
-const KpiTile = ({ label, value, icon }: { label: string; value: string; icon: string }) => (
-  <Card className="zze-kpi"><CardContent className="p-4"><div className="flex items-center gap-3"><span className="text-2xl">{icon}</span><div><p className="text-xs text-gray-500">{label}</p><p className="text-xl font-bold" style={{ color: COLORS[0] }}>{value}</p></div></div></CardContent></Card>
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
 )
 
 const ValueTile = ({ label, value }: { label: string; value: string }) => (
-  <Card className="zze-value"><CardContent className="p-4"><p className="text-xs text-gray-500">{label}</p><p className="text-lg font-semibold" style={{ color: COLORS[1] }}>{value}</p></CardContent></Card>
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
 )
 
-const genRecords = (startIdx: number) => Array.from({ length: 20 }, (_, i) => {
-  const idx = startIdx + i
-  const units = ['pieces', 'sets', 'meters', 'rolls']
-  return {
-    id: `ZZE-${String(idx).padStart(4, '0')}`, product: PRODUCTS[idx % 8], manufacturer: MANUFACTURERS[idx % 8],
-    status: STATUSES[idx % 6], qty: ri(10, 500, 15 + idx * 12), unit: units[idx % 4],
-    cost: ri(50000, 800000, 75000 + idx * 28000), date: `2025-07-${String(ri(1, 28, idx % 28 + 1)).padStart(2, '0')}`,
-  }
-})
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `ZZE-${String(offset + i + 1).padStart(4, '0')}`,
+    painter: ARTISANS[(offset + i) % ARTISANS.length], ware: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 32, ((offset + i) * 29) % 32) + 1,
+    cost: ri(8000, 96000, ((offset + i) * 14389) % 88000) + 8000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
+  }))
 
 const zariRecords = [
-  { id: 'ZZE-0001', product: 'Real Zari Silk Saree', manufacturer: 'Surat Zari Mills GJ', status: 'GI Zari Certified', qty: 120, unit: 'pieces', cost: 480000, date: '2025-07-02' },
-  { id: 'ZZE-0002', product: 'Zardozi Bridal Lehenga', manufacturer: 'Varanasi Brocade UP', status: 'BIS Gold Purity 92%', qty: 30, unit: 'pieces', cost: 720000, date: '2025-07-04' },
-  { id: 'ZZE-0003', product: 'Kundan Zari Dupatta', manufacturer: 'Bhagalpur Silk Cluster', status: 'Silk Folded', qty: 200, unit: 'pieces', cost: 180000, date: '2025-07-05' },
-  { id: 'ZZE-0004', product: 'Gold Thread Brocade', manufacturer: 'Kanchipuram Zari TN', status: 'Padded Box Transit', qty: 80, unit: 'meters', cost: 350000, date: '2025-07-07' },
-  { id: 'ZZE-0005', product: 'Zari Pashmina Shawl', manufacturer: 'Murshidabad Zardozi WB', status: 'Dehumid Vault Store', qty: 60, unit: 'pieces', cost: 420000, date: '2025-07-08' },
-  { id: 'ZZE-0006', product: 'Silver Zari Embroidered Panel', manufacturer: 'Jaipur Kundan RJ', status: 'Thread Count QC', qty: 150, unit: 'meters', cost: 195000, date: '2025-07-10' },
-  { id: 'ZZE-0007', product: 'Zardozi Clutch Bag', manufacturer: 'Lucknow Chikan Zari UP', status: 'GI Zari Certified', qty: 250, unit: 'pieces', cost: 125000, date: '2025-07-11' },
-  { id: 'ZZE-0008', product: 'Zari Lace Trim Roll', manufacturer: 'Mysore Zari Palace KA', status: 'BIS Gold Purity 92%', qty: 400, unit: 'rolls', cost: 88000, date: '2025-07-13' },
-  { id: 'ZZE-0009', product: 'Real Zari Silk Saree', manufacturer: 'Surat Zari Mills GJ', status: 'Silk Folded', qty: 110, unit: 'pieces', cost: 440000, date: '2025-07-14' },
-  { id: 'ZZE-0010', product: 'Zardozi Bridal Lehenga', manufacturer: 'Varanasi Brocade UP', status: 'Padded Box Transit', qty: 25, unit: 'pieces', cost: 600000, date: '2025-07-15' },
-  { id: 'ZZE-0011', product: 'Kundan Zari Dupatta', manufacturer: 'Bhagalpur Silk Cluster', status: 'Dehumid Vault Store', qty: 180, unit: 'pieces', cost: 162000, date: '2025-07-16' },
-  { id: 'ZZE-0012', product: 'Gold Thread Brocade', manufacturer: 'Kanchipuram Zari TN', status: 'Thread Count QC', qty: 75, unit: 'meters', cost: 328000, date: '2025-07-17' },
-  { id: 'ZZE-0013', product: 'Zari Pashmina Shawl', manufacturer: 'Murshidabad Zardozi WB', status: 'GI Zari Certified', qty: 55, unit: 'pieces', cost: 385000, date: '2025-07-18' },
-  { id: 'ZZE-0014', product: 'Silver Zari Embroidered Panel', manufacturer: 'Jaipur Kundan RJ', status: 'BIS Gold Purity 92%', qty: 140, unit: 'meters', cost: 182000, date: '2025-07-19' },
-  { id: 'ZZE-0015', product: 'Zardozi Clutch Bag', manufacturer: 'Lucknow Chikan Zari UP', status: 'Silk Folded', qty: 230, unit: 'pieces', cost: 115000, date: '2025-07-20' },
-  { id: 'ZZE-0016', product: 'Zari Lace Trim Roll', manufacturer: 'Mysore Zari Palace KA', status: 'Padded Box Transit', qty: 380, unit: 'rolls', cost: 83600, date: '2025-07-21' },
-  { id: 'ZZE-0017', product: 'Real Zari Silk Saree', manufacturer: 'Surat Zari Mills GJ', status: 'Dehumid Vault Store', qty: 100, unit: 'pieces', cost: 400000, date: '2025-07-22' },
-  { id: 'ZZE-0018', product: 'Zardozi Bridal Lehenga', manufacturer: 'Varanasi Brocade UP', status: 'Thread Count QC', qty: 22, unit: 'pieces', cost: 528000, date: '2025-07-23' },
-  { id: 'ZZE-0019', product: 'Kundan Zari Dupatta', manufacturer: 'Bhagalpur Silk Cluster', status: 'GI Zari Certified', qty: 165, unit: 'pieces', cost: 148500, date: '2025-07-24' },
-  { id: 'ZZE-0020', product: 'Gold Thread Brocade', manufacturer: 'Kanchipuram Zari TN', status: 'BIS Gold Purity 92%', qty: 70, unit: 'meters', cost: 306000, date: '2025-07-25' },
+  { id: 'ZZE-0001', painter: 'Surat Zari Mills Guild', ware: 'Real Zari Silk Saree', status: 'GI Zari Certified', qty: 4, cost: 92000, date: '2024-01-08' },
+  { id: 'ZZE-0002', painter: 'Varanasi Brocade Art Society', ware: 'Zardozi Bridal Lehenga', status: 'BIS Gold Purity 92%', qty: 2, cost: 95000, date: '2024-01-22' },
+  { id: 'ZZE-0003', painter: 'Bhagalpur Silk Cluster Cooperative', ware: 'Kundan Zari Dupatta', status: 'Silk Folded Box Pack', qty: 6, cost: 38000, date: '2024-02-05' },
+  { id: 'ZZE-0004', painter: 'Kanchipuram Zari Heritage Studio', ware: 'Gold Thread Brocade Panel', status: 'Padded Truck Transit', qty: 3, cost: 78000, date: '2024-02-18' },
+  { id: 'ZZE-0005', painter: 'Murshidabad Zardozi Workshop', ware: 'Zari Pashmina Shawl', status: 'Dehumid Vault Store 20-25C', qty: 5, cost: 55000, date: '2024-03-02' },
+  { id: 'ZZE-0006', painter: 'Jaipur Kundan Art Centre', ware: 'Silver Zari Embroidered Panel', status: 'Thread Count QC', qty: 8, cost: 28000, date: '2024-03-15' },
+  { id: 'ZZE-0007', painter: 'Lucknow Chikan Zari Colony', ware: 'Zardozi Clutch Bag', status: 'GI Zari Certified', qty: 10, cost: 18000, date: '2024-03-28' },
+  { id: 'ZZE-0008', painter: 'Mysore Palace Zari Atelier', ware: 'Zari Lace Trim Roll', status: 'BIS Gold Purity 92%', qty: 12, cost: 15000, date: '2024-04-10' },
+  { id: 'ZZE-0009', painter: 'Surat Zari Mills Guild', ware: 'Zardozi Bridal Lehenga', status: 'Silk Folded Box Pack', qty: 2, cost: 94000, date: '2024-04-22' },
+  { id: 'ZZE-0010', painter: 'Varanasi Brocade Art Society', ware: 'Real Zari Silk Saree', status: 'Padded Truck Transit', qty: 4, cost: 68000, date: '2024-05-05' },
+  { id: 'ZZE-0011', painter: 'Bhagalpur Silk Cluster Cooperative', ware: 'Kundan Zari Dupatta', status: 'Dehumid Vault Store 20-25C', qty: 6, cost: 42000, date: '2024-05-18' },
+  { id: 'ZZE-0012', painter: 'Kanchipuram Zari Heritage Studio', ware: 'Gold Thread Brocade Panel', status: 'Thread Count QC', qty: 3, cost: 82000, date: '2024-05-30' },
+  { id: 'ZZE-0013', painter: 'Murshidabad Zardozi Workshop', ware: 'Zari Pashmina Shawl', status: 'GI Zari Certified', qty: 5, cost: 50000, date: '2024-06-12' },
+  { id: 'ZZE-0014', painter: 'Jaipur Kundan Art Centre', ware: 'Silver Zari Embroidered Panel', status: 'BIS Gold Purity 92%', qty: 7, cost: 32000, date: '2024-06-24' },
+  { id: 'ZZE-0015', painter: 'Lucknow Chikan Zari Colony', ware: 'Zardozi Clutch Bag', status: 'Silk Folded Box Pack', qty: 10, cost: 20000, date: '2024-07-06' },
+  { id: 'ZZE-0016', painter: 'Mysore Palace Zari Atelier', ware: 'Zari Lace Trim Roll', status: 'Padded Truck Transit', qty: 12, cost: 14000, date: '2024-07-18' },
+  { id: 'ZZE-0017', painter: 'Surat Zari Mills Guild', ware: 'Real Zari Silk Saree', status: 'Dehumid Vault Store 20-25C', qty: 4, cost: 88000, date: '2024-07-30' },
+  { id: 'ZZE-0018', painter: 'Varanasi Brocade Art Society', ware: 'Zardozi Bridal Lehenga', status: 'Thread Count QC', qty: 2, cost: 96000, date: '2024-08-10' },
+  { id: 'ZZE-0019', painter: 'Bhagalpur Silk Cluster Cooperative', ware: 'Kundan Zari Dupatta', status: 'GI Zari Certified', qty: 6, cost: 44000, date: '2024-08-22' },
+  { id: 'ZZE-0020', painter: 'Kanchipuram Zari Heritage Studio', ware: 'Gold Thread Brocade Panel', status: 'BIS Gold Purity 92%', qty: 3, cost: 76000, date: '2024-09-03' },
 ]
-
 
 export default function ZariZardoziEmbroideryLogisticsView() {
   const [tab, setTab] = useState('dashboard')
@@ -87,138 +86,138 @@ export default function ZariZardoziEmbroideryLogisticsView() {
   const allRecords = [...zariRecords, ...genRecords(21), ...genRecords(41)]
 
   const filteredRecords = useMemo(() => {
-    return allRecords.filter(r => {
-      if (searchQuery && !r.id.toLowerCase().includes(searchQuery.toLowerCase()) && !r.product.toLowerCase().includes(searchQuery.toLowerCase())) return false
-      return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string))
-    })
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.ware.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
   }, [searchQuery, activeFilters, allRecords])
 
+
   const filterGroups = [
-    { key: 'product', label: 'Product', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.product === p).length })) },
-    { key: 'status', label: 'Status', options: STATUSES.map(s => ({ value: s, label: s, count: allRecords.filter(r => r.status === s).length })) },
+    { key: 'ware', label: 'Ware', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.ware === p).length })) },
+    { key: 'painter', label: 'Painter', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.painter === p).length })) },
   ]
 
-  const trendData = PRODUCTS.slice(0, 6).map((p, i) => ({ name: p.split(' ').slice(0, 2).join(' '), shipments: 6 + i * 4, cost: 120000 + i * 45000 }))
-  const mfgChart = MANUFACTURERS.slice(0, 6).map((m, i) => ({ name: m.split(' ').slice(0, 2).join(' '), volume: 40 + i * 35, revenue: 8 + i * 5 }))
-  const statusPie = STATUSES.map((s, i) => ({ name: s.split(' ').slice(0, 2).join(' '), value: 6 + i * 3 }))
+
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(5, 28, allRecords.length * 0.14 + i * 4) }))
+  const artisanChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.painter === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
   const maxCost = Math.max(...allRecords.map(r => r.cost))
 
+
   return (
-    <div className="zze-root space-y-6 p-6">
+    <div className="zem-root space-y-6 p-6">
       <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Zari & Zardozi Embroidery' }]} />
-      <PageHeader title="Zari & Zardozi Embroidery Logistics" description="Track gold and silver zari thread textiles, zardozi hand-embroidered bridal couture, kundan work, and brocade fabrics from India's legendary weaving clusters to luxury retail markets" />
-      <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="bg-rose-50">
+      <PageHeader title="Zari & Zardozi Embroidery Logistics" description="Indian Zari and Zardozi metallic thread embroidery supply chain with BIS gold purity certification, thread count QC, silk folded box packaging, and GI Zari Mark across 8 heritage artisan clusters in Surat, Varanasi, Kanchipuram, and Lucknow" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-rose-100">
           <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
           <TabsTrigger value="shipments">Shipments</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
         <TabsContent value="dashboard" className="space-y-6">
           <div className="grid grid-cols-4 gap-4">
-            <KpiTile icon="✨" label="Total Shipments" value={String(allRecords.length)} />
-            <KpiTile icon="🏭" label="Weaving Clusters" value={String(MANUFACTURERS.length)} />
-            <KpiTile icon="💰" label="Total Value" value={`₹${(allRecords.reduce((a, r) => a + r.cost, 0) / 100000).toFixed(1)}L`} />
-            <KpiTile icon="📈" label="Avg Cost" value={`₹${Math.round(allRecords.reduce((a, r) => a + r.cost, 0) / allRecords.length).toLocaleString()}`} />
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Active Ware" value={PRODUCTS.length} />
+            <KpiTile label="Artisan Clusters" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-
-          <Card className="zze-health-grid">
-            <CardHeader><CardTitle>Operational Health</CardTitle></CardHeader>
-            <CardContent>
-              <div className="flex justify-around">
-                <HealthRing value={90} label="GI Zari" />
-                <HealthRing value={85} label="Gold 92%" />
-                <HealthRing value={88} label="Silk Fold" />
-                <HealthRing value={82} label="Box Ship" />
-                <HealthRing value={93} label="Vault" />
-                <HealthRing value={78} label="Thread QC" />
-              </div>
-            </CardContent>
-          </Card>
-
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="GI Tag" value={95} />
+            <HealthRing label="BIS 92%" value={90} />
+            <HealthRing label="Silk" value={87} />
+            <HealthRing label="Padded" value={83} />
+            <HealthRing label="Vault" value={89} />
+            <HealthRing label="Thread" value={92} />
+          </div>
           <div className="grid grid-cols-4 gap-4">
-            <ValueTile label="Surat Output" value="240 units" />
-            <ValueTile label="Vault Stored" value="18 Lots" />
-            <ValueTile label="Wedding Season" value="85%" />
-            <ValueTile label="Export Ready" value="70%" />
+            <ValueTile label="Artisan Families" value="500+" />
+            <ValueTile label="Tradition" value="Since Mughal Era" />
+            <ValueTile label="Export Markets" value="15 Countries" />
+            <ValueTile label="Annual Revenue" value="₹8.5 Crore" />
           </div>
         </TabsContent>
-
-        <TabsContent value="shipments" className="space-y-4">
-          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={(key, value) => setActiveFilters(p => ({ ...p, [key]: p[key]?.includes(value) ? p[key].filter((v: string) => v !== value) : [...(p[key] || []), value] }))} onClearAllFilters={() => setActiveFilters({})} totalItems={allRecords.length} filteredCount={filteredRecords.length} onRefresh={() => {}} placeholder="Search by ID, product, cluster, or lot..." />
-
-          <Card className="zze-table-card">
-            <CardContent className="p-0">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b bg-rose-50">
-                    <th className="p-3 text-left">ID</th>
-                    <th className="p-3 text-left">Product</th>
-                    <th className="p-3 text-left">Cluster</th>
-                    <th className="p-3 text-left">Status</th>
-                    <th className="p-3 text-right">Qty</th>
-                    <th className="p-3 text-right">Cost</th>
-                    <th className="p-3 text-left">Cost Bar</th>
-                    <th className="p-3 text-left">Date</th>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search Zari and Zardozi embroidery shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-rose-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Ware</th>
+                  <th className="p-3 text-left font-medium">Painter</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-rose-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.ware} /></td>
+                    <td className="p-3">{record.painter}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['pcs', 'sets', 'meters', 'rolls'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filteredRecords.slice(0, 15).map(r => (
-                    <tr key={r.id} className="border-b hover:bg-rose-50/50">
-                      <td className="p-3 font-mono text-xs">{r.id}</td>
-                      <td className="p-3"><ProductBadge name={r.product} /></td>
-                      <td className="p-3 text-xs">{r.manufacturer}</td>
-                      <td className="p-3"><StatusBadge status={r.status} /></td>
-                      <td className="p-3 text-right">{r.qty} {r.unit}</td>
-                      <td className="p-3 text-right">₹{r.cost.toLocaleString()}</td>
-                      <td className="p-3 w-28"><CostBar cost={r.cost} max={maxCost} /></td>
-                      <td className="p-3 text-xs text-gray-500">{r.date}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </TabsContent>
-
         <TabsContent value="analytics" className="space-y-6">
           <div className="grid grid-cols-2 gap-6">
             <Card>
               <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
               <CardContent>
-                <LineChart width={500} height={250} data={trendData}>
+                <LineChart width={500} height={300} data={trendData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={11} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="month" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
                   <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
-                  <Line type="monotone" dataKey="cost" stroke={COLORS[3]} strokeWidth={2} />
                 </LineChart>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader><CardTitle>Cluster Volume</CardTitle></CardHeader>
+              <CardHeader><CardTitle>Artisan Volume</CardTitle></CardHeader>
               <CardContent>
-                <BarChart width={500} height={250} data={mfgChart}>
+                <BarChart width={500} height={300} data={artisanChart}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={10} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="name" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="volume" fill={COLORS[0]} />
-                  <Bar dataKey="revenue" fill={COLORS[3]} />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {artisanChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
                 </BarChart>
               </CardContent>
             </Card>
           </div>
-
           <Card>
             <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
             <CardContent>
               <PieChart width={500} height={300}>
-                <Pie data={statusPie} cx={200} cy={150} outerRadius={100} dataKey="value" label>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
                   {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip />
@@ -227,16 +226,28 @@ export default function ZariZardoziEmbroideryLogisticsView() {
             </CardContent>
           </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <Card className="zze-insight"><CardHeader><CardTitle>Surat & Varanasi Zari Heritage</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Surat in Gujarat produces 70% of India's zari thread, drawing fine gold and silver wire through diamond dies to create filigree threads as thin as 0.02mm. Varanasi's Banarasi brocade weaves real zari into silk sarees using 5,600 traditional pit looms across 4 lakh weavers. A single Banarasi zari saree takes 15-45 days to complete. The GI tag for Banarasi Zari Sarees and Brocades was registered in 2009 under the Geographical Indications Act. India's zari industry is valued at ₹15,000 crore with exports to 45 countries including UAE, US, and UK.</p></CardContent></Card>
-            <Card className="zze-insight"><CardHeader><CardTitle>Zardozi & Kundan Craft Traditions</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Zardozi, a Mughal-era hand-embroidery technique using gold-coated metallic thread, pearls, and semi-precious stones, is practiced in Lucknow, Bhopal, and Agra. A single zardozi bridal lehenga requires 30-60 days of handwork by 4-6 artisans. Kundan zari work combines glass-setting (kundan) with gold thread embroidery, originating in Rajasthan's royal courts. Murshidabad in West Bengal produces silver zari on tussar silk. The craft supports 8 lakh artisans nationally with annual production worth ₹6,500 crore across bridal couture, home decor, and luxury accessories.</p></CardContent></Card>
-            <Card className="zze-insight"><CardHeader><CardTitle>BIS Gold Purity & Vault Storage</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">BIS IS 1417 certifies gold purity in zari thread: real zari must contain minimum 92% gold (22 karat) for premium grade, while imitation zari uses metallic polyester. Surat's zari testing lab processes 15,000 samples annually. Luxury zari textiles require dehumidified vault storage at 45-55% relative humidity to prevent silver tarnishing and gold thread oxidation. Silk-zari products must be acid-free tissue wrapped with silica gel packs. Insurance valuation for a bridal lehenga shipment can exceed ₹1 crore per lot, requiring armed transit security.</p></CardContent></Card>
-            <Card className="zze-insight"><CardHeader><CardTitle>AI Thread Quality & Blockchain Provenance</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">AI-powered machine vision inspects zari thread uniformity and detects counterfeit metallic-coated polyester versus real gold wire with 98.7% accuracy. Blockchain provenance tracks raw gold from refinery to finished zari saree, ensuring ethical sourcing and purity verification. Machine learning forecasts wedding-season demand for zardozi lehenga with 88% accuracy based on social media trend analysis. Smart RFID tags embedded in luxury zari packaging enable real-time location tracking and anti-theft monitoring across the supply chain from artisan workshop to retail boutique.</p></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Zari & Zardozi — Mughal-Era Metallic Thread Embroidery Heritage</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Zari and Zardozi embroidery represents one of the most opulent and technically demanding textile art traditions in the Indian subcontinent, having been continuously practised for over five centuries since its introduction to India during the Mughal imperial period when Persian master embroiderers brought the technique of creating intricate metallic thread embroidery designs to the royal Mughal court workshops of Agra, Delhi, and Lahore in the sixteenth century CE, establishing an artisanal tradition that subsequently spread across the major textile production centres of India including Varanasi where the Brocade weaving community adapted the Zari technique to create the legendary Banarasi Zari silk saris that remain among the most prized bridal textiles in Indian wedding culture, Surat where the Zari thread manufacturing industry produces the finest quality metallic yarn used across India's textile embroidery sector, Kanchipuram where the temple city silk weavers incorporate Zari borders into the iconic Kanchipuram silk saris that define South Indian bridal tradition, and Lucknow where the Chikan embroidery artisans combine delicate white thread shadow work with Zari accent borders creating the elegant Lucknow Chikan Zari aesthetic that is sought after by discerning textile collectors worldwide. The Zari technique involves the creation of metallic thread from pure gold or silver that is drawn through progressively finer dies to produce extremely thin metallic wire which is then wound around a core silk or cotton yarn to create the Zari thread that forms the basis of both Zari weaving and Zardozi embroidery techniques. In authentic Zari production, the gold or silver content of the metallic wire must meet the BIS certification standard of minimum 92% precious metal purity for GI-certified Zari thread used in premium textile applications including bridal saris, temple hangings, and royal ceremonial textiles where the gold or silver content directly determines the luminosity, durability, and market value of the finished Zari embroidery work. The Zardozi embroidery technique extends the Zari weaving tradition into the domain of three-dimensional surface embroidery where the Zari thread is combined with additional decorative materials including pearl beads or moti, precious and semi-precious stones or kundan, sequins or sitara, and coiled metallic wire or dabka to create elaborate raised embroidery designs that stand above the fabric surface creating a sculptural textile art form that has been used for centuries to create the elaborate bridal lehengas, royal court costumes, temple deity garments, and ceremonial textile furnishings that characterise the highest expressions of Indian textile artistry where the Zardozi master artisan must possess extraordinary technical skill in needlework, metal thread manipulation, and decorative stone setting to produce the intricate multi-layered embroidery compositions that define the Zardozi aesthetic vocabulary derived from the Mughal court artistic tradition of floral arabesques, hunting scenes, and palace garden motifs that continue to inspire contemporary Zardozi artisans across the five hundred active artisan families working in the major Zari and Zardozi production centres of India.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>BIS Gold Purity Standards & Thread Count QC for Zari Embroidery</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Bureau of Indian Standards gold purity certification framework for Zari metallic thread establishes the quality benchmark that distinguishes authentic Zari embroidery textiles created with genuine precious metal thread from the growing volume of imitation Zari textiles produced with synthetic metallic yarns containing no gold or silver content that have increasingly appeared in both the domestic Indian textile market and international online retail platforms serving the Indian diaspora community and global textile art collectors who seek authenticated Zari and Zardozi embroidery for bridal wear, ceremonial use, and institutional collection purposes. The BIS certification standard for GI-certified Zari thread mandates minimum gold purity of 92% for gold Zari thread and minimum silver purity of 92% for silver Zari thread verified through fire assay testing and X-ray fluorescence spectroscopy confirming the precious metal content meets the certification threshold while also verifying the absence of hazardous metal contaminants including cadmium, lead, and nickel that are prohibited in textile applications under the Indian textile safety regulations. The thread count quality control standards for Zari weaving specify minimum thread density of 120 threads per inch in the Zari border weave section and minimum of 80 threads per inch in the main body fabric section of authentic Banarasi Zari silk saris, with the Zari thread comprising no less than 15% of the total thread count in the border section ensuring sufficient metallic thread density to produce the characteristic luminous Zari border pattern that defines the Banarasi Zari silk sari aesthetic. Thread count verification is performed using a standardised linen tester magnification device at 10x magnification counting the individual thread intersections within a one-inch square area at five randomly selected positions across the Zari border section and three positions across the body fabric section, with minimum thread count compliance required at all measurement positions to achieve the GI Banarasi Zari certification status that enables premium market pricing and international collector recognition. The Zardozi embroidery thread count standards specify minimum needle density of 250 stitches per square centimetre for Grade A Zardozi embroidery where the intricate raised metal thread patterns must achieve sufficient stitch density to produce a continuous metallic surface that fully conceals the base fabric within the embroidered design area, with supplementary materials including kundan stones, sequins, and dabka coils counted as additional decorative density elements that must meet minimum per-square-centimetre density requirements specified in the IS certification standard for each Zardozi embroidery grade classification that distinguishes masterwork-level Zardozi from commercial-grade production used in fashion and bridal wear applications.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Silk Folded Box Packaging for Zari and Zardozi Textile Transit</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Silk folded box packaging with acid-free tissue interleaving has been specifically developed for the Zari and Zardozi embroidery logistics supply chain to protect the delicate metallic thread surfaces, raised Zardozi embroidery elements, Kundan stone settings, and silk fabric substrates that characterise authentic Zari and Zardozi textiles from the physical and environmental hazards encountered during transit from the artisan production centres in Varanasi, Surat, Lucknow, and Kanchipuram to domestic bridal and ceremonial textile retailers across Mumbai, Delhi, Kolkata, and Chennai, and international export destinations serving the Indian diaspora bridal market in the United States, United Kingdom, Canada, the Gulf Cooperation Council states, and Southeast Asia where Zari and Zardozi embroidery textiles are in high demand for wedding trousseau, festival ceremonial wear, and temple deity garment applications that require pristine preservation conditions during international shipping through multiple climatic zones. The packaging specification utilises acid-free tissue paper of minimum 40 GSM with pH range 6.5 to 7.5 as the primary interleaving material providing a chemically inert protective layer that prevents metallic thread tarnishing, silk fabric acid degradation, and Kundan stone setting adhesive softening during transit through the variable humidity conditions encountered along the supply chain from the artisan workshop to the end consumer. Each Zari or Zardozi textile is inspected under standardised D65 daylight illumination verifying metallic thread surface integrity and luminosity, Zardozi embroidery dimension stability and stone setting security, silk fabric colour fastness and weave quality, and overall artistic quality before being carefully folded using the traditional bias-fold technique where the textile is folded diagonally at 45 degrees to the warp-weft grain direction minimising crease stress on both the silk fabric substrate and the Zari metallic thread patterns that are particularly susceptible to kinking and breakage when folded along the warp or weft direction where the metallic thread experiences maximum tensile stress at the fold point. The folded textile with acid-free tissue interleave at each fold layer is placed within a rigid inner box constructed from 2.5-millimetre acid-free greyboard with smooth inner surface finish preventing abrasion damage to the Zardozi raised embroidery elements during transit, then sealed within a moisture-barrier outer shipping container constructed from 5-millimetre double-wall corrugated fibreboard with silica gel desiccant packets maintaining relative humidity below 45% protecting against metallic thread tarnishing caused by atmospheric sulphur compounds and humidity condensation that would compromise the gold or silver Zari thread luminosity and the Kundan stone setting adhesive stability during the extended transit periods required for international shipping to overseas markets where Zari and Zardozi bridal textiles command premium prices reflecting the extraordinary artisan skill and precious material content that defines this irreplaceable Indian textile embroidery heritage tradition.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>AI Metallic Thread Analysis & Zari Heritage Market Expansion</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Artificial intelligence and computational image analysis technologies are being progressively deployed to authenticate Zari and Zardozi embroidery textiles and verify the distinctive metallic thread composition characteristics, embroidery stitch density patterns, and Mughal-era design vocabulary elements that distinguish genuine Zari and Zardozi textiles created by traditional artisan families from the growing volume of synthetic metallic yarn textiles and machine-embroidered imitations that have increasingly appeared in both the domestic Indian bridal textile market and international online retail platforms serving the global demand for Indian metallic thread embroidery art. The AI authentication system for Zari and Zardozi employs ultra-high-resolution scanning at 1200 dots per inch combined with energy-dispersive X-ray spectroscopy mapping to verify the metallic thread composition across the entire embroidered surface, analysing the gold or silver content distribution patterns characteristic of authentic hand-drawn Zari thread where the precious metal wire exhibits subtle diameter variations of plus or minus 2 micrometres reflecting the traditional die-drawing process that cannot be replicated by the uniform diameter of synthetic metallic yarn produced by industrial extrusion processes, the embroidery stitch density and directional pattern characteristics where hand-embroidered Zardozi exhibits subtle stitch spacing variations reflecting the individual artisan's rhythmic needlework tempo that produces distinctive density gradients across the embroidered surface that differ from the mathematically uniform stitch spacing of computerised embroidery machines, and the Kundan stone setting quality characteristics where hand-set Kundan stones exhibit subtle placement angle variations reflecting the artisan's manual stone positioning technique that differs from the precisely aligned stone placement of machine-set rhinestone imitations used on commercial-grade Zardozi reproductions. Machine learning algorithms trained on authenticated Zari and Zardozi reference samples from all major production centres including Varanasi, Surat, Lucknow, Kanchipuram, and Jaipur can verify textile authenticity with 96% accuracy by detecting subtle artisan signatures including the metallic thread surface texture characteristics where authentic gold Zari thread exhibits a microscopically granular surface texture from the traditional hand-hammering and die-drawing processes that differs fundamentally from the smooth metallic sheen of synthetic polyester metallic yarn, the Zardozi embroidery layer structure characteristics where authentic hand-embroidered Zardozi produces a three-dimensional raised surface profile with variable heights reflecting the individual artisan's stitch tension control during the multi-layer embroidery construction process where each design element may require five to eight separate embroidery passes building up the raised surface incrementally, and the overall design compositional accuracy within the established Mughal-era Zardozi design canons that define the spatial arrangement of floral motifs, geometric border patterns, and decorative dividers according to the specific visual vocabulary maintained across the approximately five hundred active artisan families in India's major Zari and Zardozi production centres where this extraordinary Mughal-era metallic thread embroidery heritage tradition continues to produce some of the world's most technically sophisticated and visually opulent textile art objects.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
     </div>
   )
 }
+
