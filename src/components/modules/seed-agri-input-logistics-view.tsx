@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/shared/page-header'
@@ -6,229 +6,248 @@ import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
 import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const COLORS = ['#65a30d', '#4d7c0f', '#84cc16', '#a3e635', '#bef264', '#3f6212', '#365314', '#ecfccb']
+const COLORS = ['#166534', '#15803d', '#16a34a', '#22c55e', '#4ade80', '#14532d', '#052e16', '#dcfce7']
+const PRODUCTS = ['Bt Cotton Seed Batch', 'Basmati Paddy Seed', 'Hybrid Maize Seed Lot', 'Mustard Rapeseed Pack', 'Soybean Seed Container', 'Wheat Certified Seed', 'Groundnut Kernel Seed', 'Sorghum Jowar Seed']
+const ARTISANS = ['Rajasthan Krishì Beej Nigam RAJ', 'Nuziveedu Seeds HYD', 'Kaveri Seed Co BLR', 'Advanta India MUM', 'Ankur Seeds LKO', 'J.K. Agri Genetics GNT', 'Phulambri Seeds NGP', 'Shriram Bioseeds HYD']
+const STATUSES = ['IS 10064 Seed Grade A', 'Germination Pct Above 85', 'Moisture Below 12 Pct', 'Genetic Purity Verify', 'Seed Treatment Coating QC', 'Phytosanitary Cert OK']
 
-const INPUT_TYPES = ['Certified Seeds', 'Hybrid Seeds', 'Fertilizers (NPK)', 'Pesticides', 'Micro-nutrients', 'Farm Machinery Parts', 'Drip Irrigation Kits', 'Organic Manure']
-const SUPPLIERS = ['IFFCO Kandla', 'NFL Noida', 'KRIBHCO Noida', 'Nuziveedu Seeds Hyderabad', 'Kaveri Seed Mysore', 'Coromandel Vijayawada', 'Rallis Mumbai', 'UPL Ltd Mumbai']
-const LOT_STATUS = ['Lab Certified', 'Under Testing', 'Dispatched', 'In Warehouse', 'Quarantine', 'Pending QC']
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-const agriRecords = [
-  { id: 'SAL-0001', input: 'Certified Seeds', description: 'Bt Cotton MECH-162 Breeder Seed 500g', supplier: 'Nuziveedu Seeds Hyderabad', quantity: 12000, unit: 'packets', lot_status: 'Lab Certified', lot: 'LOT-SAL-2841', destination: 'Cotton Hub Jalgaon', received: '2026-07-30', batch: 'SAL-B2026-0721', cost_inr: 8400000, germination_pct: 98.2, validity: '2027-03-30' },
-  { id: 'SAL-0002', input: 'Fertilizers (NPK)', description: 'Urea 46% N Prilled Bag 50kg', supplier: 'IFFCO Kandla', quantity: 85000, unit: 'bags', lot_status: 'Dispatched', lot: 'LOT-SAL-2838', destination: 'IFFCO Bhubaneswar', received: '2026-07-30', batch: 'SAL-B2026-0720', cost_inr: 127500000, germination_pct: 0, validity: '2028-07-30' },
-  { id: 'SAL-0003', input: 'Hybrid Seeds', description: 'Pusa RH-10 Basmati Hybrid 5kg', supplier: 'Kaveri Seed Mysore', quantity: 5000, unit: 'packets', lot_status: 'Under Testing', lot: 'LOT-SAL-2812', destination: 'Kisan Hub Karnal', received: '2026-07-29', batch: 'SAL-B2026-0719', cost_inr: 12500000, germination_pct: 96.8, validity: '2027-01-29' },
-  { id: 'SAL-0004', input: 'Pesticides', description: 'Imidacloprid 17.8% SL Insecticide 1L', supplier: 'UPL Ltd Mumbai', quantity: 25000, unit: 'bottles', lot_status: 'Lab Certified', lot: 'LOT-SAL-2827', destination: 'Agri Hub Sangli', received: '2026-07-29', batch: 'SAL-B2026-0718', cost_inr: 18750000, germination_pct: 0, validity: '2027-07-29' },
-  { id: 'SAL-0005', input: 'Micro-nutrients', description: 'Zinc Sulphate Heptahydrate 21% Zn 25kg', supplier: 'Coromandel Vijayawada', quantity: 15000, unit: 'bags', lot_status: 'In Warehouse', lot: 'LOT-SAL-2831', destination: 'KVK Warangal', received: '2026-07-28', batch: 'SAL-B2026-0716', cost_inr: 6750000, germination_pct: 0, validity: '2028-07-28' },
-  { id: 'SAL-0006', input: 'Farm Machinery Parts', description: 'Tractor Fuel Filter Assembly Mahindra 575', supplier: 'Rallis Mumbai', quantity: 800, unit: 'sets', lot_status: 'Dispatched', lot: 'LOT-SAL-2840', destination: 'Mahindra Hub Indore', received: '2026-07-28', batch: 'SAL-B2026-0715', cost_inr: 9600000, germination_pct: 0, validity: 'N/A' },
-  { id: 'SAL-0007', input: 'Drip Irrigation Kits', description: '16mm Drip Lateral 1000m Roll CRI Certified', supplier: 'NFL Noida', quantity: 3000, unit: 'rolls', lot_status: 'Lab Certified', lot: 'LOT-SAL-2808', destination: 'Jal Bhagirathi Jodhpur', received: '2026-07-27', batch: 'SAL-B2026-0714', cost_inr: 54000000, germination_pct: 0, validity: '2030-07-27' },
-  { id: 'SAL-0008', input: 'Organic Manure', description: 'Vermicompost 5kg Bag NPK 1.5-1-1.5', supplier: 'KRIBHCO Noida', quantity: 45000, unit: 'bags', lot_status: 'Quarantine', lot: 'LOT-SAL-2837', destination: 'Organic Hub Mysore', received: '2026-07-27', batch: 'SAL-B2026-0713', cost_inr: 11250000, germination_pct: 0, validity: '2027-07-27' },
-  { id: 'SAL-0009', input: 'Certified Seeds', description: 'Mustard Pusa Bold 1kg Certified', supplier: 'Nuziveedu Seeds Hyderabad', quantity: 18000, unit: 'packets', lot_status: 'Lab Certified', lot: 'LOT-SAL-2839', destination: 'Mustard Hub Alwar', received: '2026-07-26', batch: 'SAL-B2026-0711', cost_inr: 5400000, germination_pct: 97.5, validity: '2027-04-26' },
-  { id: 'SAL-0010', input: 'Fertilizers (NPK)', description: 'DAP 18:46:00 Granular 50kg Bag', supplier: 'IFFCO Kandla', quantity: 62000, unit: 'bags', lot_status: 'Dispatched', lot: 'LOT-SAL-2826', destination: 'IFFCO Lucknow', received: '2026-07-26', batch: 'SAL-B2026-0710', cost_inr: 155000000, germination_pct: 0, validity: '2028-07-26' },
-  { id: 'SAL-0011', input: 'Hybrid Seeds', description: 'KMH-483 Maize Hybrid 4kg Packet', supplier: 'Kaveri Seed Mysore', quantity: 8000, unit: 'packets', lot_status: 'Under Testing', lot: 'LOT-SAL-2811', destination: 'Maize Hub Hyderabad', received: '2026-07-25', batch: 'SAL-B2026-0708', cost_inr: 20000000, germination_pct: 95.2, validity: '2027-01-25' },
-  { id: 'SAL-0012', input: 'Pesticides', description: 'Chlorpyrifos 20% EC Emulsifiable 1L', supplier: 'UPL Ltd Mumbai', quantity: 32000, unit: 'bottles', lot_status: 'Pending QC', lot: 'LOT-SAL-2807', destination: 'Agri Hub Nashik', received: '2026-07-25', batch: 'SAL-B2026-0707', cost_inr: 22400000, germination_pct: 0, validity: '2027-07-25' },
-  { id: 'SAL-0013', input: 'Micro-nutrients', description: 'Borax 10.5% B 500g Pack Micronutrient', supplier: 'Coromandel Vijayawada', quantity: 50000, unit: 'packs', lot_status: 'Lab Certified', lot: 'LOT-SAL-2830', destination: 'KVK Guntur', received: '2026-07-24', batch: 'SAL-B2026-0705', cost_inr: 7500000, germination_pct: 0, validity: '2028-07-24' },
-  { id: 'SAL-0014', input: 'Farm Machinery Parts', description: 'PTO Shaft Assembly TAFE 8445 4WD', supplier: 'Rallis Mumbai', quantity: 400, unit: 'sets', lot_status: 'In Warehouse', lot: 'LOT-SAL-2825', destination: 'TAFE Hub Chennai', received: '2026-07-24', batch: 'SAL-B2026-0704', cost_inr: 7200000, germination_pct: 0, validity: 'N/A' },
-  { id: 'SAL-0015', input: 'Drip Irrigation Kits', description: 'Online Dripper 8 LPH CRI Kit 1 Acre', supplier: 'NFL Noida', quantity: 4500, unit: 'kits', lot_status: 'Lab Certified', lot: 'LOT-SAL-2836', destination: 'PMKSY Hub Aurangabad', received: '2026-07-23', batch: 'SAL-B2026-0702', cost_inr: 67500000, germination_pct: 0, validity: '2030-07-23' },
-  { id: 'SAL-0016', input: 'Organic Manure', description: 'Neem Cake 5kg Pelletized Azadirachtin 3000ppm', supplier: 'KRIBHCO Noida', quantity: 60000, unit: 'bags', lot_status: 'Dispatched', lot: 'LOT-SAL-2824', destination: 'Organic Hub Hubli', received: '2026-07-23', batch: 'SAL-B2026-0701', cost_inr: 9000000, germination_pct: 0, validity: '2027-07-23' },
-  { id: 'SAL-0017', input: 'Certified Seeds', description: 'Pusa-1121 Basmati CSR-30 Certified 5kg', supplier: 'Kaveri Seed Mysore', quantity: 6000, unit: 'packets', lot_status: 'Lab Certified', lot: 'LOT-SAL-2823', destination: 'Basmati Hub Karnal', received: '2026-07-22', batch: 'SAL-B2026-0629', cost_inr: 21000000, germination_pct: 99.1, validity: '2027-04-22' },
-  { id: 'SAL-0018', input: 'Fertilizers (NPK)', description: 'MOP 60% K2O Muriate of Potash 50kg', supplier: 'IFFCO Kandla', quantity: 40000, unit: 'bags', lot_status: 'In Warehouse', lot: 'LOT-SAL-2822', destination: 'Spice Hub Kochi', received: '2026-07-22', batch: 'SAL-B2026-0628', cost_inr: 120000000, germination_pct: 0, validity: '2028-07-22' },
-  { id: 'SAL-0019', input: 'Hybrid Seeds', description: 'Arka Vikas Tomato Hybrid 10g', supplier: 'Nuziveedu Seeds Hyderabad', quantity: 25000, unit: 'packets', lot_status: 'Under Testing', lot: 'LOT-SAL-2810', destination: 'Horti Hub Bengaluru', received: '2026-07-21', batch: 'SAL-B2026-0625', cost_inr: 6250000, germination_pct: 94.8, validity: '2026-12-21' },
-  { id: 'SAL-0020', input: 'Pesticides', description: 'Mancozeb 75% WP Fungicide 1kg', supplier: 'UPL Ltd Mumbai', quantity: 18000, unit: 'packets', lot_status: 'Lab Certified', lot: 'LOT-SAL-2821', destination: 'Grape Hub Nashik', received: '2026-07-21', batch: 'SAL-B2026-0624', cost_inr: 10800000, germination_pct: 0, validity: '2027-07-21' },
-]
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
 
-const genRecords = (start: number) => {
-  const statuses = ['Lab Certified', 'Under Testing', 'Dispatched', 'In Warehouse', 'Quarantine', 'Pending QC']
-  const destinations = ['Cotton Hub Jalgaon', 'Kisan Hub Karnal', 'Agri Hub Sangli', 'KVK Warangal', 'Mahindra Hub Indore', 'Jal Bhagirathi Jodhpur', 'Organic Hub Mysore', 'Maize Hub Hyderabad']
-  return Array.from({ length: 40 }, (_, i) => ({
-    id: `SAL-${String(start + i).padStart(4, '0')}`,
-    input: INPUT_TYPES[(start + i) % 8],
-    description: `${INPUT_TYPES[(start + i) % 8]} Lot ${String((start + i) % 99 + 1).padStart(3, '0')}`,
-    supplier: SUPPLIERS[(start + i) % 8],
-    quantity: Math.round(100 + Math.random() * 99900),
-    unit: ['packets', 'bags', 'bottles', 'sets', 'rolls', 'kits', 'packs', 'units'][i % 8],
-    lot_status: statuses[(start + i) % 6],
-    lot: `LOT-SAL-${String(2821 + start + i)}`,
-    destination: destinations[(start + i) % 8],
-    received: `2026-07-${String(20 - Math.floor((start + i) / 10)).padStart(2, '0')}`,
-    batch: `SAL-B2026-${String(624 - Math.floor((start + i) / 3)).padStart(4, '0')}`,
-    cost_inr: Math.round(2000000 + Math.random() * 200000000),
-    germination_pct: INPUT_TYPES[(start + i) % 8].includes('Seed') ? Math.round((92 + Math.random() * 8) * 10) / 10 : 0,
-    validity: `202${7 + ((start + i) % 3)}-${String(((start + i) % 12) + 1).padStart(2, '0')}-28`,
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-green-200 rounded-full overflow-hidden"><div className="h-full bg-green-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#dcfce7" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
+}
+
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
+
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
+)
+
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `SAG-${String(offset + i + 1).padStart(4, '0')}`,
+    supplier: ARTISANS[(offset + i) % ARTISANS.length], variety: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 20, ((offset + i) * 19) % 20) + 1,
+    cost: ri(4000, 56000, ((offset + i) * 11107) % 52000) + 4000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-const allAgri = [...agriRecords, ...genRecords(21), ...genRecords(61)]
-
-function ri(min: number, max: number, value: number) {
-  return Math.max(min, Math.min(max, value))
-}
-
-const filterGroups = [
-  {
-    key: 'input',
-    label: 'Input Type',
-    options: INPUT_TYPES.map(t => ({ label: t, value: t, count: allAgri.filter(r => r.input === t).length })),
-  },
-  {
-    key: 'supplier',
-    label: 'Supplier',
-    options: SUPPLIERS.map(s => ({ label: s, value: s, count: allAgri.filter(r => r.supplier === s).length })),
-  },
-  {
-    key: 'lot_status',
-    label: 'Lot Status',
-    options: LOT_STATUS.map(s => ({ label: s, value: s, count: allAgri.filter(r => r.lot_status === s).length })),
-  },
+const seedrecords = [
+  { id: 'SAG-0001', supplier: ' कृषि बीज निगम RAJ', variety: 'Bt Cotton Seed Batch', status: 'IS 10064 Seed Grade A', qty: 15, cost: 52000, date: '2024-01-15' },
+  { id: 'SAG-0002', supplier: 'Nuziveedu Seeds HYD', variety: 'Basmati Paddy Seed', status: 'Germination Pct Above 85', qty: 10, cost: 38000, date: '2024-01-28' },
+  { id: 'SAG-0003', supplier: 'Kaveri Seed Co BLR', variety: 'Hybrid Maize Seed Lot', status: 'Moisture Below 12 Pct', qty: 8, cost: 46000, date: '2024-02-10' },
+  { id: 'SAG-0004', supplier: 'Advanta India MUM', variety: 'Mustard Rapeseed Pack', status: 'Genetic Purity Verify', qty: 12, cost: 28000, date: '2024-02-22' },
+  { id: 'SAG-0005', supplier: 'Ankur Seeds LKO', variety: 'Soybean Seed Container', status: 'Seed Treatment Coating QC', qty: 6, cost: 42000, date: '2024-03-08' },
+  { id: 'SAG-0006', supplier: 'J.K. Agri Genetics GNT', variety: 'Wheat Certified Seed', status: 'Phytosanitary Cert OK', qty: 18, cost: 22000, date: '2024-03-20' },
+  { id: 'SAG-0007', supplier: 'Phulambri Seeds NGP', variety: 'Groundnut Kernel Seed', status: 'IS 10064 Seed Grade A', qty: 5, cost: 56000, date: '2024-04-03' },
+  { id: 'SAG-0008', supplier: 'Shriram Bioseeds HYD', variety: 'Sorghum Jowar Seed', status: 'Germination Pct Above 85', qty: 14, cost: 16000, date: '2024-04-16' },
+  { id: 'SAG-0009', supplier: ' कृषि बीज निगम RAJ', variety: 'Basmati Paddy Seed', status: 'Moisture Below 12 Pct', qty: 9, cost: 40000, date: '2024-04-28' },
+  { id: 'SAG-0010', supplier: 'Nuziveedu Seeds HYD', variety: 'Bt Cotton Seed Batch', status: 'Genetic Purity Verify', qty: 11, cost: 48000, date: '2024-05-10' },
+  { id: 'SAG-0011', supplier: 'Kaveri Seed Co BLR', variety: 'Hybrid Maize Seed Lot', status: 'Seed Treatment Coating QC', qty: 7, cost: 34000, date: '2024-05-23' },
+  { id: 'SAG-0012', supplier: 'Advanta India MUM', variety: 'Mustard Rapeseed Pack', status: 'Phytosanitary Cert OK', qty: 13, cost: 20000, date: '2024-06-05' },
+  { id: 'SAG-0013', supplier: 'Ankur Seeds LKO', variety: 'Soybean Seed Container', status: 'IS 10064 Seed Grade A', qty: 4, cost: 52000, date: '2024-06-18' },
+  { id: 'SAG-0014', supplier: 'J.K. Agri Genetics GNT', variety: 'Wheat Certified Seed', status: 'Germination Pct Above 85', qty: 16, cost: 18000, date: '2024-07-01' },
+  { id: 'SAG-0015', supplier: 'Phulambri Seeds NGP', variety: 'Groundnut Kernel Seed', status: 'Moisture Below 12 Pct', qty: 8, cost: 44000, date: '2024-07-14' },
+  { id: 'SAG-0016', supplier: 'Shriram Bioseeds HYD', variety: 'Sorghum Jowar Seed', status: 'Genetic Purity Verify', qty: 10, cost: 30000, date: '2024-07-26' },
+  { id: 'SAG-0017', supplier: ' कृषि बीज निगम RAJ', variety: 'Bt Cotton Seed Batch', status: 'Seed Treatment Coating QC', qty: 6, cost: 50000, date: '2024-08-08' },
+  { id: 'SAG-0018', supplier: 'Nuziveedu Seeds HYD', variety: 'Basmati Paddy Seed', status: 'Phytosanitary Cert OK', qty: 12, cost: 26000, date: '2024-08-20' },
+  { id: 'SAG-0019', supplier: 'Kaveri Seed Co BLR', variety: 'Hybrid Maize Seed Lot', status: 'IS 10064 Seed Grade A', qty: 5, cost: 54000, date: '2024-09-02' },
+  { id: 'SAG-0020', supplier: 'Advanta India MUM', variety: 'Mustard Rapeseed Pack', status: 'Germination Pct Above 85', qty: 15, cost: 14000, date: '2024-09-14' },
 ]
-
-function InputBadge({ input }: { input: string }) {
-  const colors: Record<string, string> = { 'Certified Seeds': 'bg-green-100 text-green-800', 'Hybrid Seeds': 'bg-lime-100 text-lime-800', 'Fertilizers (NPK)': 'bg-emerald-100 text-emerald-800', Pesticides: 'bg-red-100 text-red-800', 'Micro-nutrients': 'bg-teal-100 text-teal-800', 'Farm Machinery Parts': 'bg-gray-100 text-gray-800', 'Drip Irrigation Kits': 'bg-sky-100 text-sky-800', 'Organic Manure': 'bg-amber-100 text-amber-800' }
-  return <span className={`sal-input-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[input] || 'bg-gray-100 text-gray-800'}`}>{input}</span>
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const colors: Record<string, string> = { 'Lab Certified': 'bg-green-100 text-green-800', 'Under Testing': 'bg-yellow-100 text-yellow-800', Dispatched: 'bg-blue-100 text-blue-800', 'In Warehouse': 'bg-cyan-100 text-cyan-800', Quarantine: 'bg-red-100 text-red-800', 'Pending QC': 'bg-gray-200 text-gray-700' }
-  return <span className={`sal-status-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-700'}`}>{status}</span>
-}
-
-function CostBar({ cost }: { cost: number }) {
-  const pct = ri(0, 100, (cost / 200000000) * 100)
-  const color = cost >= 100000000 ? 'bg-lime-600' : cost >= 50000000 ? 'bg-lime-500' : cost >= 10000000 ? 'bg-lime-400' : 'bg-lime-300'
-  return <div className="sal-cost-bar flex items-center gap-2"><div className="h-2 w-20 rounded-full bg-gray-200"><div className={`sal-cost-bar-fill h-2 rounded-full ${color} transition-all`} style={{ width: `${pct}%` }} /></div><span className="text-xs text-gray-500">{'₹' + (cost / 10000000).toFixed(1) + 'Cr'}</span></div>
-}
-
-function HealthRing({ value, label, color }: { value: number; label: string; color: string }) {
-  const r = 28, cx = 35, cy = 35, sw = 5
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
-  return <div className="sal-health-ring flex flex-col items-center"><svg width={70} height={70} className="-rotate-90"><circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={circ} strokeDashoffset={offset} className="sal-ring-path" strokeLinecap="round" /></svg><span className="sal-ring-value mt-1 text-sm font-bold" style={{ color }}>{value}%</span><span className="text-xs text-gray-500">{label}</span></div>
-}
-
-function KpiTile({ title, value, sub }: { title: string; value: string; sub: string }) {
-  return <Card className="sal-kpi-card"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="sal-kpi-value mt-1 text-2xl font-bold">{value}</p><p className="text-xs text-gray-400 mt-0.5">{sub}</p></CardContent></Card>
-}
-
-function ValueTile({ title, value, trend }: { title: string; value: string; trend: string }) {
-  const up = trend.startsWith('+')
-  return <Card className="sal-value-tile"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="mt-1 text-xl font-bold">{value}</p><p className={`text-xs mt-0.5 ${up ? 'text-green-600' : 'text-red-500'}`}>{trend}</p></CardContent></Card>
-}
 
 export default function SeedAgriInputLogisticsView() {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [tab, setTab] = useState('dashboard')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
 
-  const toggleFilter = (key: string, value: string) => {
-    setActiveFilters(prev => {
-      const curr = prev[key] || []
-      const next = curr.includes(value) ? curr.filter(v => v !== value) : [...curr, value]
-      return next.length > 0 ? { ...prev, [key]: next } : Object.fromEntries(Object.entries(prev).filter(([k]) => k !== key))
-    })
-  }
+  const allRecords = [...seedrecords, ...genRecords(21), ...genRecords(41)]
 
-  const filtered = allAgri.filter(a => {
-    const q = searchQuery.toLowerCase()
-    if (q && !a.id.toLowerCase().includes(q) && !a.input.toLowerCase().includes(q) && !a.description.toLowerCase().includes(q) && !a.supplier.toLowerCase().includes(q) && !a.destination.toLowerCase().includes(q)) return false
-    return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(a[key as keyof typeof a] as string))
-  })
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.variety.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-  const totalCost = allAgri.reduce((s, a) => s + a.cost_inr, 0)
-  const certified = allAgri.filter(a => a.lot_status === 'Lab Certified').length
-  const inTesting = allAgri.filter(a => a.lot_status === 'Under Testing').length
-
-  const monthlyData = [
-    { month: 'Jan', lots: 92, value_cr: 48, quality: 97 },
-    { month: 'Feb', lots: 108, value_cr: 62, quality: 96 },
-    { month: 'Mar', lots: 145, value_cr: 85, quality: 98 },
-    { month: 'Apr', lots: 78, value_cr: 38, quality: 95 },
-    { month: 'May', lots: 132, value_cr: 72, quality: 97 },
-    { month: 'Jun', lots: 55, value_cr: 28, quality: 94 },
-    { month: 'Jul', lots: 156, value_cr: 88, quality: 98 },
+  const filterGroups = [
+    { key: 'variety', label: 'Variety', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.variety === p).length })) },
+    { key: 'supplier', label: 'Supplier', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.supplier === p).length })) },
   ]
-  const inputData = INPUT_TYPES.map(t => ({ input: t, count: allAgri.filter(r => r.input === t).length }))
-  const supplierData = SUPPLIERS.map(s => ({ supplier: s, count: allAgri.filter(r => r.supplier === s).length }))
 
-  const tabs = [
-    { value: 'dashboard', label: 'Dashboard' },
-    { value: 'inventory', label: 'Inventory' },
-    { value: 'analytics', label: 'Analytics' },
-    { value: 'insights', label: 'Insights' },
-  ]
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const supplierChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.supplier === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
-    <div className="sal-container space-y-4">
-      <PageHeader title="Seed & Agri Input Logistics" description="Agricultural input supply chain with ICAR certified seed tracking, IS:NSS fertilizer quality assurance, CIB pesticide compliance, and PMKSY drip irrigation distribution across Indian farming regions" />
-      <ModuleBreadcrumb items={[{ label: 'Agri Logistics' }, { label: 'Seeds & Inputs' }]} />
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="sal-tabs-list">
-          {tabs.map(t => <TabsTrigger key={t.value} value={t.value} className="sal-tab-trigger">{t.label}</TabsTrigger>)}
+    <div className="sag-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Seed Agri Input' }]} />
+      <PageHeader title="Seed Agri Input Logistics" description="Indian seed and agricultural input supply chain with IS 10064 seed grade certification, germination percentage testing above 85, moisture content verification below 12 percent, genetic purity analysis, seed treatment coating quality control, and phytosanitary certification across 8 major seed suppliers in Rajasthan Hyderabad Bangalore and Mumbai" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-green-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
-        <TabsContent value="dashboard" className="sal-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <KpiTile title="Total Lots" value={allAgri.length.toString()} sub="Agri input consignments" />
-            <KpiTile title="Total Value" value={`₹${(totalCost / 10000000).toFixed(0)}Cr`} sub="Inventory value" />
-            <KpiTile title="Lab Certified" value={certified.toString()} sub={`${((certified / allAgri.length) * 100).toFixed(0)}% cleared`} />
-            <KpiTile title="Under Testing" value={inTesting.toString()} sub="Pending lab results" />
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Seed Varieties" value={PRODUCTS.length} />
+            <KpiTile label="Suppliers" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-          <div className="grid gap-4 grid-cols-3 md:grid-cols-6">
-            <HealthRing value={98} label="Seed Germination" color="#65a30d" />
-            <HealthRing value={96} label="Fertilizer Purity" color="#4d7c0f" />
-            <HealthRing value={94} label="Pesticide Efficacy" color="#84cc16" />
-            <HealthRing value={97} label="Kharif Ready" color="#3f6212" />
-            <HealthRing value={92} label="Rabi Stocked" color="#365314" />
-            <HealthRing value={99} label="Organic Cert" color="#a3e635" />
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="Grade" value={94} />
+            <HealthRing label="Germ" value={91} />
+            <HealthRing label="Moisture" value={89} />
+            <HealthRing label="Purity" value={92} />
+            <HealthRing label="Coating" value={87} />
+            <HealthRing label="Phyto" value={95} />
           </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="sal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Lot Volume & Quality Index</CardTitle></CardHeader><CardContent><LineChart data={monthlyData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Line type="monotone" dataKey="lots" stroke="#65a30d" strokeWidth={2} /><Line type="monotone" dataKey="quality" stroke="#4d7c0f" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
-            <Card className="sal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Inventory by Input Type</CardTitle></CardHeader><CardContent><BarChart data={inputData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="input" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="count" fill="#65a30d" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="sal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Supplier Distribution</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={supplierData} dataKey="count" nameKey="supplier" cx="50%" cy="50%" outerRadius={70} label={({ supplier, count }) => `${count}`}>{supplierData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="India Seed Market" value="₹45K Crore" />
+            <ValueTile label="NSP Coverage" value="35M Hectares" />
+            <ValueTile label="Certified Seed" value="82 Percent" />
+            <ValueTile label="Rabi Season" value="Active Now" />
           </div>
         </TabsContent>
-
-        <TabsContent value="inventory" className="sal-tab-content space-y-4 mt-4">
-          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={allAgri.length} filteredCount={filtered.length} onRefresh={() => {}} placeholder="Search by ID, input type, supplier, destination, or lot..." />
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="sal-table w-full text-sm">
-              <thead><tr className="sal-table-header bg-gray-50"><th className="px-3 py-2 text-left font-medium">ID</th><th className="px-3 py-2 text-left font-medium">Input Type</th><th className="px-3 py-2 text-left font-medium">Status</th><th className="px-3 py-2 text-left font-medium">Qty</th><th className="px-3 py-2 text-left font-medium">Cost</th><th className="px-3 py-2 text-left font-medium">Supplier</th><th className="px-3 py-2 text-left font-medium">Destination</th><th className="px-3 py-2 text-left font-medium">Lot</th><th className="px-3 py-2 text-left font-medium">Valid</th></tr></thead>
-              <tbody>{filtered.slice(0, 20).map(a => (
-                <tr key={a.id} className="sal-table-row border-t hover:bg-gray-50 transition-colors">
-                  <td className="px-3 py-2 font-mono text-xs">{a.id}</td>
-                  <td className="px-3 py-2"><InputBadge input={a.input} /></td>
-                  <td className="px-3 py-2"><StatusBadge status={a.lot_status} /></td>
-                  <td className="px-3 py-2 text-xs">{a.quantity.toLocaleString('en-IN')} {a.unit}</td>
-                  <td className="px-3 py-2"><CostBar cost={a.cost_inr} /></td>
-                  <td className="px-3 py-2 text-xs">{a.supplier}</td>
-                  <td className="px-3 py-2 text-xs">{a.destination}</td>
-                  <td className="px-3 py-2 text-xs font-mono">{a.lot}</td>
-                  <td className="px-3 py-2 text-xs">{a.validity}</td>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search seed agri input shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-green-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Variety</th>
+                  <th className="p-3 text-left font-medium">Supplier</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
                 </tr>
-              ))}</tbody>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-green-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.variety} /></td>
+                    <td className="p-3">{record.supplier}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['bags', 'lots', 'packs', 'containers'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </TabsContent>
-
-        <TabsContent value="analytics" className="sal-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <ValueTile title="Avg Lot Value" value="₹6.2Cr" trend="+9.5% vs last quarter" />
-            <ValueTile title="Seed Germination" value="97.4%" trend="+0.8% improved" />
-            <ValueTile title="Kharif Readiness" value="96.8%" trend="+2.1% on target" />
-            <ValueTile title="Organic Share" value="14.2%" trend="+3.4% growing" />
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Supplier Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={supplierChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {supplierChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="sal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Value by Input Category</CardTitle></CardHeader><CardContent><BarChart data={INPUT_TYPES.map(t => ({ input: t, total: allAgri.filter(r => r.input === t).reduce((s, r) => s + r.cost_inr, 0) / 10000000 }))} width={400} height={250}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="input" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="total" fill="#4d7c0f" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="sal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Lot Status Breakdown</CardTitle></CardHeader><CardContent><PieChart width={400} height={250}><Pie data={LOT_STATUS.map(s => ({ status: s, count: allAgri.filter(a => a.lot_status === s).length }))} dataKey="count" nameKey="status" cx="50%" cy="50%" outerRadius={80} label>{LOT_STATUS.map((_, i) => <Cell key={i} fill={['#22c55e','#eab308','#3b82f6','#06b6d4','#ef4444','#9ca3af'][i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="sal-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="sal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">ICAR Seed Certification Digital Portal</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Real-time integration with Indian Council of Agricultural Research (ICAR) seed certification system tracking 18 State Seed Certification Agencies across India. Automated germination, purity, and vigor testing results uploaded within 48 hours from 42 notified seed testing labs. Blockchain seed traceability from breeder to farmer enabling 100% provenance verification. Integration with Sub-Committee on Crop Standards ensuring NSC and truthfully labelled seed compliance.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-lime-100 px-2 py-0.5 text-lime-800">Critical</span><span className="text-gray-400">Live</span></div></CardContent></Card>
-            <Card className="sal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">PMKSY Per Drop More Crop Integration</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Pradhan Mantri Krishi Sinchayee Yojana micro-irrigation distribution tracking across 28 states and 642 districts. Real-time installation verification via GPS-tagged photographs from 2,400+ authorized dealers. Automated subsidy disbursement tracking through DBT (Direct Benefit Transfer) for 18.5 lakh farmers. IoT-enabled soil moisture sensors on 45,000+ hectare clusters optimizing water-use efficiency from 35% to 72%.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-green-800">Operational</span><span className="text-gray-400">Q3 2026</span></div></CardContent></Card>
-            <Card className="sal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">NBS Soil Health Card Fertilizer Recommendation</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Nutrient Based Subsidy (NBS) scheme integration linking Soil Health Card recommendations from 14.5 crore farmers to precise fertilizer inventory allocation. AI-driven crop-wise NPK demand forecasting model covering 464 districts with 91.5% accuracy for Kharif 2026. Automated customized fertilizer blend prescriptions reducing overuse of urea by 18% while maintaining yield. Real-time tracking of 240+ custom blending units across India.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-emerald-800">Strategic</span><span className="text-gray-400">FY2027</span></div></CardContent></Card>
-            <Card className="sal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Drone Spraying Pesticide Logistics Network</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Kisan Drone Didi program logistics managing 2,500+ agricultural drones across 750 Women Self Help Groups for precision pesticide application. Automated flight planning and spray volume calculation per acre based on crop type, pest density, and wind conditions. Real-time pesticide inventory linked to drone refill stations ensuring zero stockout during critical spraying windows. Integration with ICAR CIB&amp;RC approved chemical list enforcing only registered pesticide usage across 425 formulations.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-teal-100 px-2 py-0.5 text-teal-800">Innovation</span><span className="text-gray-400">Pilot</span></div></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>India Seed Industry — INR 45,000 Crore Agricultural Input Ecosystem</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Indian seed industry represents one of the most strategically important agricultural input sectors of the Indian economy having grown from a government-dominated seed distribution system established during the Green Revolution in the nineteen sixties to a vibrant public-private partnership ecosystem valued at approximately forty-five thousand crore Indian rupees serving over one hundred and forty million Indian farming households across all twenty-eight states and eight union territories where the Indian seed supply chain encompasses the complete value chain from basic breeder seed production through foundation seed multiplication to certified truthfully labelled seed processing packaging storage distribution and retail sales through a network of over seven hundred thousand seed retail outlets operated by licensed seed dealers and agricultural input distributors across rural and semi-urban India where the National Seed Policy established in two thousand and two by the Government of India created the regulatory framework for the modern Indian seed industry administered through the Seeds Act nineteen sixty-six and the Seeds Control Order nineteen eighty-three enforced by the Central Seed Certification Board and state seed certification agencies that govern seed quality standards variety registration and certification procedures seed import and export regulations and intellectual property protection for plant varieties through the Protection of Plant Varieties and Farmers Rights Authority where the Indian seed industry produces certified seed for all major food grain crops including rice wheat maize bajra jowar and ragi covering approximately one hundred and forty million hectares of cultivated area under the National Seed Project covering field crops vegetables oilseeds pulses fibre crops and fodder crops serving the complete spectrum of Indian agriculture from subsistence rainfed farming in the semi-arid Deccan plateau to intensive irrigated commercial farming in the Punjab Haryana and western Uttar Pradesh cereal bowl region where the seed logistics operations involve complex temperature and humidity controlled storage at over three thousand seed godowns operated by state seed corporations and private seed companies requiring precise inventory management lot tracking and quality assurance testing at each stage of the seed supply chain from breeder seed production farms to foundation seed processing facilities to certified seed packaging and distribution warehouses ensuring seed viability germination vigour and genetic purity are maintained throughout the complete supply chain from production to farmer delivery.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>IS 10064 Seed Grade & Germination Testing Framework</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The IS 10064 Indian Standard for seed testing provides the comprehensive national quality assurance framework for the Indian seed industry establishing the seed grade classification system and testing protocols that determine whether seed lots meet the minimum quality standards required for certification and commercial distribution under the Seeds Act nineteen sixty-six where the IS 10064 framework classifies seeds into four certification classes including breeder seed which is the initial generation seed produced by the plant breeder under direct supervision of the breeding institution foundation seed which is the first generation progeny of breeder seed produced under supervision of the state seed certification agency registered seed which is the progeny of foundation seed produced by licensed seed producers under certification agency inspection and truthfully labelled seed which is seed produced and labelled by the producer without formal certification agency inspection where each seed class has specified minimum quality parameters for germination percentage physical purity moisture content and genetic purity that must be confirmed through standardised testing procedures conducted in accordance with IS 10064 testing methodology at accredited seed testing laboratories where the germination test counts the number of normal seedlings emerging from four replicate samples of one hundred seeds each placed on moist germination paper at the specified temperature regime for the crop species counted after seven days for most field crops and fourteen days for slower germinating species confirming minimum germination percentage of eighty-five percent for certified cereal seeds and seventy-five percent for certified vegetable seeds ensuring the seed lot will produce adequate crop stand establishment under field conditions where the genetic purity test uses grow-out test methodology where a sample of two hundred seeds from the test lot is sown in a controlled field plot and the resulting plants are examined at flowering stage for off-type variant and contaminant plants confirming minimum genetic purity of ninety-eight percent for certified seed ensuring the seed lot is true to the declared variety description without significant genetic contamination from other varieties or wild relatives that would compromise crop uniformity and yield performance.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Seed Moisture Content & Treatment Coating Quality</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The seed moisture content verification and seed treatment coating quality control protocols form essential components of the Indian seed quality assurance framework ensuring that seed lots maintain safe moisture levels for storage viability and receive effective chemical or biological treatment coating that protects the seed from soil-borne pathogens and insect pests during the critical germination and early seedling establishment phase where the seed moisture content test measures the percentage weight of water in the seed sample using the oven-drying method specified in IS 10064 where a weighed seed sample is dried in a ventilated oven at one hundred and five degrees Celsius plus or minus two degrees for seventeen hours for most field crop seeds and the moisture content is calculated as the percentage weight loss due to water evaporation confirming maximum moisture content of twelve percent for certified cereal and legume seeds and ten percent for certified vegetable seeds ensuring the seed lot has been adequately dried before packaging to prevent mould growth heating and accelerated viability loss during storage in the seed godown where seed moisture above the specified maximum causes rapid viability decline due to increased respiration rate and fungal proliferation that can reduce seed germination percentage by two to three percent per month in warm humid storage conditions while seed moisture below eight percent causes excessive seed brittleness and mechanical damage during handling and seed coating operations requiring precise moisture management within the specified range throughout the processing storage and distribution cycle where the seed treatment coating quality test evaluates the uniformity and adhesion of the chemical or biological seed treatment coating applied to the seed surface using a calibrated seed treatment coating machine that applies the specified dosage of fungicide insecticide and micronutrient coating material measured as grams of active ingredient per kilogram of seed confirming coating uniformity within plus or minus ten percent of the target dosage across the seed lot with minimum coating adhesion retention of ninety-five percent after the standardised seed coating abrasion test conducted in a laboratory rotary coating abrasion tester for five minutes at sixty revolutions per minute ensuring the seed treatment coating remains intact during seed handling bagging transport and sowing operations without significant coating detachment that would reduce the effectiveness of the seed treatment in protecting the seed and emerging seedling from soil-borne pathogens including Fusarium Rhizoctonia Pythium and insect pests including soil-dwelling beetle larvae and wireworms that can cause devastating crop stand losses in untreated seed lots.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Phytosanitary Certification & Seed Cold Chain Logistics</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The phytosanitary certification and seed cold chain logistics framework for the Indian seed industry ensures that seed lots meet the plant quarantine requirements for domestic and international movement and are stored and transported under controlled environmental conditions that maintain seed viability and vigour throughout the complete supply chain from processing facility to farm gate where the phytosanitary certification issued by the National Plant Protection Organisation under the International Plant Protection Convention confirms that the seed lot has been inspected and tested for regulated quarantine pests including exotic weed seeds plant pathogen spores and insect contaminants in accordance with IS 6185 seed health testing methodology confirming freedom from all regulated quarantine pests listed in the Indian Plant Quarantine Order and the importing country phytosanitary requirements ensuring the seed lot complies with both domestic interstate movement restrictions and international phytosanitary import requirements of destination countries for seed export consignments where the seed cold chain logistics infrastructure maintains seed storage temperature between five and fifteen degrees Celsius for most field crop seeds and between two and eight degrees Celsius for breeder seed and foundation seed stocks using Refrigerator storage units and temperature-controlled warehouse facilities equipped with calibrated digital temperature and humidity monitoring systems with continuous data logging and automated alert activation when storage temperature exceeds the specified upper limit ensuring consistent cool dry storage conditions throughout the annual storage period that may extend up to twelve months for kharif season seed produced in the preceding rabi season or up to eight months for rabi season seed produced in the preceding kharif season where the seed warehouse racking system uses galvanised steel pallet racking with moisture barrier flooring and stack height limitations of four metres maximum to prevent compression damage to seed bags in the lower stack positions while the warehouse ventilation system maintains airflow of minimum zero point five metres per second across all storage zones preventing stagnant air pockets that could cause localised temperature and humidity increases leading to seed quality deterioration in the affected storage zones where the seed distribution logistics employ a multi-modal transport network of temperature-controlled trucks rail wagons and containerised coastal shipping connecting the seed production and processing facilities in the major seed producing states of Karnataka Telangana Rajasthan and Maharashtra with seed distribution hubs in all major agricultural states ensuring timely seed delivery to farmers within the optimal sowing window for each crop season.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
     </div>
   )
 }
+
+
+

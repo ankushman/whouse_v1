@@ -55130,3 +55130,23 @@ html.theme-transition body {
 @keyframes txaFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes txaPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(124, 58, 237, 0); } }
 @keyframes txaRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* bgh-* — Bagh Print Madhya Pradesh Logistics */
+.bgh-root { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%); }
+.bgh-root .card { border: 1px solid #fbbf24; border-radius: 0.75rem; }
+.bgh-root table thead { background: #fef3c7; }
+.bgh-root table tbody tr:hover { background: rgba(180, 83, 9, 0.06); }
+.bgh-root .inline-flex.items-center.rounded-full { border: 1px solid #d97706; }
+@keyframes bghFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bghPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(180, 83, 9, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(180, 83, 9, 0); } }
+@keyframes bghRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* sag-* — Seed Agri Input Logistics */
+.sag-root { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%); }
+.sag-root .card { border: 1px solid #4ade80; border-radius: 0.75rem; }
+.sag-root table thead { background: #dcfce7; }
+.sag-root table tbody tr:hover { background: rgba(22, 101, 52, 0.06); }
+.sag-root .inline-flex.items-center.rounded-full { border: 1px solid #16a34a; }
+@keyframes sagFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sagPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(22, 101, 52, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(22, 101, 52, 0); } }
+@keyframes sagRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }

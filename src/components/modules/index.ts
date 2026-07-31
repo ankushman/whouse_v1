@@ -349,3 +349,4 @@ export { default as WarliMaharashtraLogisticsView } from './warli-maharashtra-lo
 export { default as GondMadhyaLogisticsView } from './gond-madhya-logistics-view'
 export { default as KalighatBengalLogisticsView } from './kalighat-bengal-logistics-view'
 export { default as CheriyalScrollArtTelanganaLogisticsView } from './cheriyal-scroll-art-telangana-logistics-view'
+export { default as BaghPrintMadhyaLogisticsView } from './bagh-print-madhya-logistics-view'
