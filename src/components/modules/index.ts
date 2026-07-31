@@ -359,3 +359,4 @@ export { default as MeenakariUdaipurRajasthanLogisticsView } from './meenakari-u
 export { default as DhokraChhattisgarhLogisticsView } from './dhokra-chhattisgarh-logistics-view'
 export { default as BidriKarnatakaLogisticsView } from './bidri-karnataka-logistics-view'
 export { default as GondArtMadhyaPradeshLogisticsView } from './gond-art-madhya-pradesh-logistics-view'
+export { default as MadhubaniBiharLogisticsView } from './madhubani-bihar-logistics-view'

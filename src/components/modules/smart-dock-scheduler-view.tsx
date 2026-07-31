@@ -1,136 +1,253 @@
-"use client"
-import { useState, useMemo } from "react"
-import { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { Anchor, Clock, Truck, AlertTriangle, CheckCircle2, BarChart3, TrendingUp, TrendingDown, Zap, Eye, Search, Thermometer, Wrench, MapPin, Package, Timer, ArrowUpDown, Radio } from "lucide-react"
-import { PageHeader } from "@/components/shared/page-header"
-import { SearchFilterToolbar } from "@/components/shared/search-filter-toolbar"
-import { ModuleBreadcrumb } from "@/components/shared/module-breadcrumb"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
+import React, { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const DOCK_TYPES = ["loading", "unloading", "cross_dock", "cold_storage", "hazardous", "bulk"] as const
-const DOCK_EMOJI: Record<string, string> = { loading: "\U0001f4e5", unloading: "\U0001f4e4", cross_dock: "\u27a1\ufe0f", cold_storage: "\u2744\ufe0f", hazardous: "\u2622\ufe0f", bulk: "\U0001f4e6" }
-const DOCK_STATUS = ["available", "occupied", "maintenance", "reserved", "blocked"] as const
-const APPT_STATUS = ["scheduled", "checked_in", "loading", "unloading", "completed", "cancelled", "delayed"] as const
-const CITIES = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", "Ahmedabad"] as const
-const MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
-const TH = { pri: "#3b82f6", sec: "#f59e0b", ok: "#059669", warn: "#d97706", err: "#dc2626" }
-const PC = ["#3b82f6", "#f59e0b", "#059669", "#dc2626", "#8b5cf6", "#06b6d4", "#ec4899", "#14b8a6"]
+const COLORS = ['#1e40af', '#1e3a8a', '#2563eb', '#3b82f6', '#60a5fa', '#1d4ed8', '#172554', '#eff6ff']
+const PRODUCTS = ['Loading Bay Alpha', 'Unloading Bay Bravo', 'Cross Dock Charlie', 'Cold Storage Delta', 'Hazardous Bay Echo', 'Bulk Platform Foxtrot', 'Drive-In Rack Golf', 'Yard Marshalling Hotel']
+const ARTISANS = ['Mumbai ICD Warehouse MH', 'Delhi TIS Freight Terminal DL', 'Chennai Container Port TN', 'Kolkata Dock System WB', 'Bangalore Distribution KA', 'Hyderabad Hub TS', 'Pune Sorting Centre MH', 'Ahmedabad Logistics GJ']
+const STATUSES = ['Bay Operations Certified', 'Dock Leveler QC Check', 'Appointment Scheduler Active', 'Carrier Allocation Verified', 'Vehicle Turnaround Valid', 'Safety Compliance Audit']
 
-function seededRandom(seed: number): number { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x) }
-function ri(min: number, max: number, seed: number): number { return Math.floor(seededRandom(seed) * (max - min + 1)) + min }
-function pick<T>(arr: readonly T[], seed: number): T { return arr[Math.floor(seededRandom(seed) * arr.length)] }
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-function DockTypeBadge({ type }: { type: string }) {
-  const cols: Record<string, string> = { loading: "bg-blue-100 text-blue-700 dark:bg-blue-900/30", unloading: "bg-amber-100 text-amber-700 dark:bg-amber-900/30", cross_dock: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30", cold_storage: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30", hazardous: "bg-red-100 text-red-700 dark:bg-red-900/30", bulk: "bg-violet-100 text-violet-700 dark:bg-violet-900/30" }
-  return <span className={"sds-dock-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[type] || "bg-gray-100 text-gray-700")}>{DOCK_EMOJI[type] || "\u2022"} {type.replace(/_/g, " ")}</span>
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
+
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-blue-100 text-blue-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-blue-200 rounded-full overflow-hidden"><div className="h-full bg-blue-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#eff6ff" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
 }
 
-function DockStatusBadge({ status }: { status: string }) {
-  const cols: Record<string, string> = { available: "sds-available bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 shadow-[0_0_6px_rgba(5,150,105,0.3)]", occupied: "sds-occupied bg-blue-100 text-blue-700 dark:bg-blue-900/30", maintenance: "sds-maint bg-amber-100 text-amber-700 dark:bg-amber-900/30", reserved: "sds-reserved bg-violet-100 text-violet-700 dark:bg-violet-900/30", blocked: "sds-blocked bg-red-100 text-red-700 dark:bg-red-900/30 shadow-[0_0_8px_rgba(220,38,38,0.4)]" }
-  const icons: Record<string, React.ReactNode> = { available: <CheckCircle2 className="w-3 h-3" />, occupied: <Truck className="w-3 h-3" />, maintenance: <Wrench className="w-3 h-3" />, reserved: <Clock className="w-3 h-3" />, blocked: <AlertTriangle className="w-3 h-3" /> }
-  return <span className={"sds-status-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[status] || "")}>{icons[status]} {status}</span>
-}
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
 
-function ApptStatusBadge({ status }: { status: string }) {
-  const cols: Record<string, string> = { scheduled: "bg-gray-100 text-gray-600", checked_in: "bg-blue-100 text-blue-700", loading: "bg-violet-100 text-violet-700", unloading: "bg-amber-100 text-amber-700", completed: "bg-emerald-100 text-emerald-700", cancelled: "bg-red-100 text-red-700", delayed: "bg-red-100 text-red-700 shadow-[0_0_6px_rgba(220,38,38,0.3)]" }
-  return <span className={"sds-appt-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[status] || "")}>{status.replace(/_/g, " ")}</span>
-}
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[2] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[2] }}>{value}</p></Card>
+)
 
-function UtilBar({ value }: { value: number }) {
-  const col = value >= 80 ? TH.err : value >= 50 ? TH.warn : TH.ok
-  return <div className="sds-util-bar flex items-center gap-1.5"><div className="w-16 h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className="h-full rounded-full transition-all" style={{ width: value + "%", backgroundColor: col }}/></div><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span></div>
-}
-
-function TrendIndicator({ value }: { value: number }) {
-  const pos = value > 0; const col = pos ? TH.ok : TH.err
-  return <span className="sds-trend inline-flex items-center gap-0.5 text-[10px] font-semibold" style={{ color: col }}>{pos ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}{Math.abs(value).toFixed(1)}%</span>
-}
-
-function CityBadge({ city }: { city: string }) { return <span className="sds-city-badge inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/20">{city}</span> }
-
-function KpiTile({ label, value, icon, trend, color }: { label: string; value: string; icon: React.ReactNode; trend: number; color: string }) { return <Card className="sds-kpi-tile glass-subtle hover:shadow-lg transition-shadow border-l-4" style={{ borderLeftColor: color }}><CardContent className="p-3"><div className="flex items-center justify-between"><span className="text-[10px] text-muted-foreground">{label}</span>{icon}</div><div className="text-xl font-bold mt-1">{value}</div><TrendIndicator value={trend}/></CardContent></Card> }
-
-function ValueTile({ label, value }: { label: string; value: string | number }) { return <div className="sds-value-tile text-center p-2 rounded-lg bg-gray-50 dark:bg-gray-800/50"><div className="text-sm font-bold">{value}</div><div className="text-[10px] text-muted-foreground">{label}</div></div> }
-
-function HealthRing({ value, label }: { value: number; label: string }) { const col = value >= 90 ? TH.ok : value >= 70 ? TH.warn : TH.err; const r = 18, circ = 2 * Math.PI * r, offset = circ - (value / 100) * circ; return <div className="sds-health-ring flex flex-col items-center gap-1"><svg width={48} height={48} className="-rotate-90"><circle cx={24} cy={24} r={r} fill="none" stroke="currentColor" strokeWidth={3} className="text-gray-200 dark:text-gray-700"/><circle cx={24} cy={24} r={r} fill="none" stroke={col} strokeWidth={3} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" className="transition-all"/></svg><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span><span className="text-[9px] text-muted-foreground">{label}</span></div> }
-
-function genDocks() {
-  return Array.from({ length: 40 }, (_, i) => ({
-    id: "DK-" + String(i + 1).padStart(3, "0"),
-    type: pick(DOCK_TYPES, i * 3 + 1),
-    name: pick(["Gate Alpha", "Gate Bravo", "Gate Charlie", "Gate Delta", "Bay 1", "Bay 2", "Dock East", "Dock West", "Platform A", "Ramp B"], i * 3 + 2),
-    city: pick(CITIES, i * 3 + 3),
-    status: pick(DOCK_STATUS, i + 5),
-    utilization: ri(10, 95, i + 7),
-    throughput: ri(5, 50, i + 11),
-    avgWait: ri(5, 120, i + 13),
-    capacity: ri(2, 8, i + 17),
-    currentLoad: ri(0, 8, i + 19),
-    temperature: ri(18, 35, i + 23),
-    lastService: "2026-07-" + String(ri(1, 30, i + 29)).padStart(2, "0"),
-    equipment: pick(["Conveyor", "Forklift", "Pallet Jack", "Scanner", "Scale", "Chiller"], i + 31)
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `SDK-${String(offset + i + 1).padStart(4, '0')}`,
+    dock: ARTISANS[(offset + i) % ARTISANS.length], equipment: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(2, 18, ((offset + i) * 19) % 17) + 2,
+    cost: ri(8000, 95000, ((offset + i) * 11307) % 87000) + 8000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-function genAppointments() {
-  return Array.from({ length: 60 }, (_, i) => ({
-    id: "APT-" + String(i + 1).padStart(5, "0"),
-    dock: "DK-" + String(ri(1, 40, i + 7)).padStart(3, "0"),
-    carrier: pick(["BlueDart", "Delhivery", "DTDC", "XpressBees", "Ecom Express", "Shadowfax", "Spoton", "Amazon Truck"], i + 11),
-    vehicle: pick(["TRK-" + String(ri(100, 999, i + 13)), "VAN-" + String(ri(100, 999, i + 17)), "FLT-" + String(ri(10, 99, i + 19))], i + 23),
-    status: pick(APPT_STATUS, i + 29),
-    scheduledTime: String(ri(6, 22, i + 31)).padStart(2, "0") + ":" + String(ri(0, 59, i + 37)).padStart(2, "0"),
-    actualTime: String(ri(6, 23, i + 41)).padStart(2, "0") + ":" + String(ri(0, 59, i + 43)).padStart(2, "0"),
-    delay: ri(-15, 90, i + 47),
-    pallets: ri(1, 40, i + 51),
-    weight: ri(100, 8000, i + 53),
-    priority: pick(["high", "medium", "low"], i + 57),
-    date: "2026-07-" + String(ri(1, 30, i + 59)).padStart(2, "0")
-  }))
-}
-
-function genCharts() {
-  const hourly = MO.map((m, i) => ({ month: m, scheduled: ri(200, 800, i + 101), completed: ri(150, 750, i + 151), delayed: ri(10, 80, i + 201), cancelled: ri(5, 30, i + 251) }))
-  const typeDist = DOCK_TYPES.map((t, i) => ({ type: t, count: ri(3, 12, i + 301), avgUtil: ri(40, 90, i + 351) }))
-  const waitLine = MO.map((m, i) => ({ month: m, avgWait: ri(15, 90, i + 401), target: 30, peakWait: ri(60, 180, i + 451) }))
-  return { hourly, typeDist, waitLine }
-}
+const dockrecords = [
+  { id: 'SDK-0001', dock: 'Mumbai ICD Warehouse MH', equipment: 'Loading Bay Alpha', status: 'Bay Operations Certified', qty: 8, cost: 85000, date: '2024-01-05' },
+  { id: 'SDK-0002', dock: 'Delhi TIS Freight Terminal DL', equipment: 'Unloading Bay Bravo', status: 'Dock Leveler QC Check', qty: 6, cost: 72000, date: '2024-01-18' },
+  { id: 'SDK-0003', dock: 'Chennai Container Port TN', equipment: 'Cross Dock Charlie', status: 'Appointment Scheduler Active', qty: 10, cost: 56000, date: '2024-01-31' },
+  { id: 'SDK-0004', dock: 'Kolkata Dock System WB', equipment: 'Cold Storage Delta', status: 'Carrier Allocation Verified', qty: 4, cost: 92000, date: '2024-02-13' },
+  { id: 'SDK-0005', dock: 'Bangalore Distribution KA', equipment: 'Hazardous Bay Echo', status: 'Vehicle Turnaround Valid', qty: 12, cost: 34000, date: '2024-02-26' },
+  { id: 'SDK-0006', dock: 'Hyderabad Hub TS', equipment: 'Bulk Platform Foxtrot', status: 'Safety Compliance Audit', qty: 7, cost: 88000, date: '2024-03-10' },
+  { id: 'SDK-0007', dock: 'Pune Sorting Centre MH', equipment: 'Drive-In Rack Golf', status: 'Bay Operations Certified', qty: 14, cost: 28000, date: '2024-03-23' },
+  { id: 'SDK-0008', dock: 'Ahmedabad Logistics GJ', equipment: 'Yard Marshalling Hotel', status: 'Dock Leveler QC Check', qty: 5, cost: 94000, date: '2024-04-05' },
+  { id: 'SDK-0009', dock: 'Mumbai ICD Warehouse MH', equipment: 'Loading Bay Alpha', status: 'Appointment Scheduler Active', qty: 9, cost: 64000, date: '2024-04-18' },
+  { id: 'SDK-0010', dock: 'Delhi TIS Freight Terminal DL', equipment: 'Unloading Bay Bravo', status: 'Carrier Allocation Verified', qty: 11, cost: 42000, date: '2024-05-01' },
+  { id: 'SDK-0011', dock: 'Chennai Container Port TN', equipment: 'Cross Dock Charlie', status: 'Vehicle Turnaround Valid', qty: 6, cost: 80000, date: '2024-05-14' },
+  { id: 'SDK-0012', dock: 'Kolkata Dock System WB', equipment: 'Cold Storage Delta', status: 'Safety Compliance Audit', qty: 13, cost: 30000, date: '2024-05-27' },
+  { id: 'SDK-0013', dock: 'Bangalore Distribution KA', equipment: 'Hazardous Bay Echo', status: 'Bay Operations Certified', qty: 4, cost: 90000, date: '2024-06-09' },
+  { id: 'SDK-0014', dock: 'Hyderabad Hub TS', equipment: 'Bulk Platform Foxtrot', status: 'Dock Leveler QC Check', qty: 8, cost: 68000, date: '2024-06-22' },
+  { id: 'SDK-0015', dock: 'Pune Sorting Centre MH', equipment: 'Drive-In Rack Golf', status: 'Appointment Scheduler Active', qty: 10, cost: 52000, date: '2024-07-05' },
+  { id: 'SDK-0016', dock: 'Ahmedabad Logistics GJ', equipment: 'Yard Marshalling Hotel', status: 'Carrier Allocation Verified', qty: 6, cost: 82000, date: '2024-07-18' },
+  { id: 'SDK-0017', dock: 'Mumbai ICD Warehouse MH', equipment: 'Loading Bay Alpha', status: 'Vehicle Turnaround Valid', qty: 15, cost: 24000, date: '2024-07-31' },
+  { id: 'SDK-0018', dock: 'Delhi TIS Freight Terminal DL', equipment: 'Unloading Bay Bravo', status: 'Safety Compliance Audit', qty: 7, cost: 95000, date: '2024-08-13' },
+  { id: 'SDK-0019', dock: 'Chennai Container Port TN', equipment: 'Cross Dock Charlie', status: 'Bay Operations Certified', qty: 9, cost: 60000, date: '2024-08-26' },
+  { id: 'SDK-0020', dock: 'Kolkata Dock System WB', equipment: 'Cold Storage Delta', status: 'Dock Leveler QC Check', qty: 11, cost: 38000, date: '2024-09-08' },
+]
 
 export default function SmartDockSchedulerView() {
-  const [tab, setTab] = useState("dashboard")
-  const [search, setSearch] = useState("")
-  const [detail, setDetail] = useState<Record<string, unknown> | null>(null)
-  const [sortField, setSortField] = useState("id")
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc")
+  const [tab, setTab] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
-  const docks = useMemo(() => genDocks(), [])
-  const appointments = useMemo(() => genAppointments(), [])
-  const charts = useMemo(() => genCharts(), [])
-  const toggleSort = (f: string) => { if (sortField === f) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortField(f); setSortDir("asc") } }
-  const sortIcon = (f: string) => sortField === f ? (sortDir === "asc" ? "\u2191" : "\u2193") : ""
-  const filterDocks = useMemo(() => { if (!search) return docks; const lq = search.toLowerCase(); return docks.filter(d => Object.values(d).some(v => typeof v === "string" && v.toLowerCase().includes(lq))) }, [docks, search])
-  const sortedDocks = useMemo(() => [...filterDocks].sort((a, b) => { const va = a[sortField as keyof typeof a], vb = b[sortField as keyof typeof b]; if (va == null || vb == null) return 0; return sortDir === "asc" ? String(va).localeCompare(String(vb), undefined, { numeric: true }) : -String(va).localeCompare(String(vb), undefined, { numeric: true }) }), [filterDocks, sortField, sortDir])
-  const filterAppts = useMemo(() => { if (!search) return appointments; const lq = search.toLowerCase(); return appointments.filter(a => Object.values(a).some(v => typeof v === "string" && v.toLowerCase().includes(lq))) }, [appointments, search])
-  const availDocks = docks.filter(d => d.status === "available").length
-  const avgUtil = Math.round(docks.reduce((s, d) => s + d.utilization, 0) / docks.length)
-  const avgWait = Math.round(docks.reduce((s, d) => s + d.avgWait, 0) / docks.length)
-  const completedAppts = appointments.filter(a => a.status === "completed").length
-  const handleRefresh = () => { setSearch(""); setSortField("id"); setSortDir("asc"); setActiveFilters({}) }
-  const toggleFilter = (group: string, value: string) => { setActiveFilters(prev => { const cur = prev[group] || []; const next = cur.includes(value) ? cur.filter(v => v !== value) : [...cur, value]; if (next.length === 0) { const { [group]: _, ...rest } = prev; return rest } return { ...prev, [group]: next } }) }
-  const clearAllFilters = () => setActiveFilters({})
-  const totalActiveFilters = Object.values(activeFilters).reduce((s, v) => s + v.length, 0)
-  const dockFilterGroups = useMemo(() => { const tc: Record<string, number> = {}; const sc: Record<string, number> = {}; docks.forEach(d => { tc[d.type] = (tc[d.type] || 0) + 1; sc[d.status] = (sc[d.status] || 0) + 1 }); return [{ key: "type", label: "Type", options: Object.entries(tc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }, { key: "status", label: "Status", options: Object.entries(sc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }] }, [docks])
 
-  const tab0 = (<div className="space-y-4"><div className="grid grid-cols-2 md:grid-cols-4 gap-3"><KpiTile label="Available Docks" value={String(availDocks)} icon={<Anchor className="w-4 h-4 text-blue-500"/>} trend={5.2} color={TH.pri}/><KpiTile label="Avg Utilization" value={avgUtil + "%"} icon={<Zap className="w-4 h-4 text-amber-500"/>} trend={2.3} color={TH.sec}/><KpiTile label="Avg Wait Time" value={avgWait + " min"} icon={<Clock className="w-4 h-4 text-red-500"/>} trend={-8.1} color={TH.err}/><KpiTile label="Completed" value={String(completedAppts)} icon={<CheckCircle2 className="w-4 h-4 text-emerald-500"/>} trend={11.4} color={TH.ok}/></div><div className="grid grid-cols-2 md:grid-cols-4 gap-3"><HealthRing value={100 - avgUtil} label="Free Capacity"/><HealthRing value={Math.round(appointments.filter(a => a.status === "completed").length / appointments.length * 100)} label="On-Time"/><HealthRing value={95} label="Equipment"/><HealthRing value={Math.round((1 - docks.filter(d => d.status === "blocked").length / docks.length) * 100)} label="Operational"/></div><div className="grid grid-cols-1 md:grid-cols-2 gap-3"><Card className="sds-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Appointment Volume</CardTitle></CardHeader><CardContent><AreaChart data={charts.hourly} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="month" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Area type="monotone" dataKey="scheduled" stroke={TH.pri} fill={TH.pri} fillOpacity={0.2}/><Area type="monotone" dataKey="completed" stroke={TH.ok} fill={TH.ok} fillOpacity={0.15}/><Line type="monotone" dataKey="delayed" stroke={TH.err} strokeWidth={2} dot={{ r: 3 }}/></AreaChart></CardContent></Card><Card className="sds-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Dock Type & Utilization</CardTitle></CardHeader><CardContent><BarChart data={charts.typeDist} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="type" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Bar dataKey="count" fill={TH.pri} radius={[2, 2, 0, 0]}/><Bar dataKey="avgUtil" fill={TH.sec} radius={[2, 2, 0, 0]}/></BarChart></CardContent></Card><Card className="sds-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Wait Time Trend</CardTitle></CardHeader><CardContent><LineChart data={charts.waitLine} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="month" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Line type="monotone" dataKey="avgWait" stroke={TH.warn} strokeWidth={2} dot={{ r: 3 }}/><Line type="monotone" dataKey="target" stroke={TH.ok} strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }}/><Line type="monotone" dataKey="peakWait" stroke={TH.err} strokeWidth={2} dot={{ r: 3 }}/></LineChart></CardContent></Card><Card className="sds-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Dock Status Distribution</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={DOCK_STATUS.map(s => ({ name: s, value: docks.filter(d => d.status === s).length }))} cx="50%" cy="50%" outerRadius={70} dataKey="value" label={({ name, percent }) => name + " " + (percent * 100).toFixed(0) + "%"} labelLine={false}>{DOCK_STATUS.map((_, i) => <Cell key={i} fill={PC[i % PC.length]}/>)}</Pie><Tooltip contentStyle={{ fontSize: 10 }}/></PieChart></CardContent></Card></div></div>)
+  const allRecords = [...dockrecords, ...genRecords(21), ...genRecords(41)]
 
-  const tab1 = (<div className="space-y-3"><ModuleBreadcrumb items={[{ label: "Warehouse" }, { label: "Dock Scheduling" }, { label: "Docks" }]}/><SearchFilterToolbar searchQuery={search} onSearchChange={setSearch} onClearSearch={() => setSearch("")} activeFilters={activeFilters} filterGroups={dockFilterGroups} onToggleFilter={toggleFilter} onClearAllFilters={clearAllFilters} totalItems={docks.length} filteredCount={sortedDocks.length} onRefresh={handleRefresh} placeholder="Search docks by name, type..." /><div className="rounded-lg border overflow-auto max-h-[calc(100vh-340px)]"><table className="sds-table w-full text-xs"><thead className="bg-blue-50 dark:bg-blue-900/20 sticky top-0"><tr><th className="p-2 text-left cursor-pointer select-none" onClick={() => toggleSort("id")}>ID {sortIcon("id")}</th><th className="p-2 text-left">Name</th><th className="p-2 text-left">Type</th><th className="p-2 text-left">City</th><th className="p-2 text-left">Status</th><th className="p-2 text-left">Utilization</th><th className="p-2 text-right">Throughput</th><th className="p-2 text-right">Wait</th><th className="p-2 text-left">Equipment</th></tr></thead><tbody>{sortedDocks.map(d => <tr key={d.id} className="sds-table-row border-t hover:bg-blue-50/50 dark:hover:bg-blue-900/10 cursor-pointer" onClick={() => setDetail(d as unknown as Record<string, unknown>)}><td className="p-2 font-mono">{d.id}</td><td className="p-2 font-medium">{d.name}</td><td className="p-2"><DockTypeBadge type={d.type}/></td><td className="p-2"><CityBadge city={d.city}/></td><td className="p-2"><DockStatusBadge status={d.status}/></td><td className="p-2"><UtilBar value={d.utilization}/></td><td className="p-2 text-right">{d.throughput}/hr</td><td className="p-2 text-right">{d.avgWait} min</td><td className="p-2 text-[10px]">{d.equipment}</td></tr>)}</tbody></table></div><div className="flex items-center justify-between text-[10px] text-muted-foreground"><span>Showing {sortedDocks.length} of {docks.length} docks</span>{totalActiveFilters > 0 && <span>{totalActiveFilters} filters</span>}</div></div>)
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.equipment.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-  const tab2 = (<div className="space-y-3"><ModuleBreadcrumb items={[{ label: "Warehouse" }, { label: "Dock Scheduling" }, { label: "Appointments" }]}/><SearchFilterToolbar searchQuery={search} onSearchChange={setSearch} onClearSearch={() => setSearch("")} activeFilters={activeFilters} filterGroups={[]} onToggleFilter={toggleFilter} onClearAllFilters={clearAllFilters} totalItems={appointments.length} filteredCount={filterAppts.length} onRefresh={handleRefresh} placeholder="Search appointments..." /><div className="rounded-lg border overflow-auto max-h-[calc(100vh-340px)]"><table className="sds-table w-full text-xs"><thead className="bg-amber-50 dark:bg-amber-900/20 sticky top-0"><tr><th className="p-2 text-left cursor-pointer select-none" onClick={() => toggleSort("id")}>ID {sortIcon("id")}</th><th className="p-2 text-left">Carrier</th><th className="p-2 text-left">Dock</th><th className="p-2 text-left">Status</th><th className="p-2 text-left">Scheduled</th><th className="p-2 text-left">Actual</th><th className="p-2 text-right">Delay</th><th className="p-2 text-right">Pallets</th><th className="p-2 text-left">Priority</th></tr></thead><tbody>{filterAppts.map(ap => <tr key={ap.id} className="sds-table-row border-t hover:bg-amber-50/50 dark:hover:bg-amber-900/10 cursor-pointer" onClick={() => setDetail(ap as unknown as Record<string, unknown>)}><td className="p-2 font-mono">{ap.id}</td><td className="p-2 font-medium">{ap.carrier}</td><td className="p-2 font-mono text-[10px]">{ap.dock}</td><td className="p-2"><ApptStatusBadge status={ap.status}/></td><td className="p-2 text-[10px]">{ap.scheduledTime}</td><td className="p-2 text-[10px]">{ap.actualTime}</td><td className="p-2 text-right"><span className="text-[10px] font-bold" style={{ color: ap.delay > 15 ? TH.err : ap.delay > 0 ? TH.warn : TH.ok }}>{ap.delay > 0 ? "+" + ap.delay : "0"} min</span></td><td className="p-2 text-right">{ap.pallets}</td><td className="p-2"><span className={"inline-flex px-1.5 py-0.5 rounded text-[10px] font-medium " + (ap.priority === "high" ? "bg-red-100 text-red-700" : ap.priority === "medium" ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700")}>{ap.priority}</span></td></tr>)}</tbody></table></div><div className="text-[10px] text-muted-foreground text-right">{filterAppts.length} appointments</div></div>)
+  const filterGroups = [
+    { key: 'equipment', label: 'Equipment', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.equipment === p).length })) },
+    { key: 'dock', label: 'Dock', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.dock === p).length })) },
+  ]
 
-  const tabs = [{ key: "dashboard", label: "Dashboard", icon: <BarChart3 className="w-3.5 h-3.5" />, content: tab0 }, { key: "docks", label: "Docks", icon: <Anchor className="w-3.5 h-3.5" />, content: tab1 }, { key: "appointments", label: "Appointments", icon: <Clock className="w-3.5 h-3.5" />, content: tab2 }]
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(6, 25, allRecords.length * 0.10 + i * 4) }))
+  const dockChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.dock === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
-  return (<div className="space-y-4 p-4"><PageHeader title="Smart Dock Scheduler" description="AI-powered dock scheduling with real-time bay management, appointment optimization, and wait time analytics"/><div className="flex items-center gap-3 flex-wrap"><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30"><Anchor className="w-3 h-3 text-blue-600"/><span className="text-[10px] font-semibold text-blue-700 dark:text-blue-300">{availDocks} Docks Available</span></div><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30"><CheckCircle2 className="w-3 h-3 text-emerald-600"/><span className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{completedAppts} Completed Today</span></div><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30"><Clock className="w-3 h-3 text-amber-600"/><span className="text-[10px] font-semibold text-amber-700 dark:text-amber-300">{avgWait} min Avg Wait</span></div><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-violet-100 dark:bg-violet-900/30"><Radio className="w-3 h-3 text-violet-600"/><span className="text-[10px] font-semibold text-violet-700 dark:text-violet-300">{docks.length} Total Docks</span></div></div><Tabs value={tab} onValueChange={setTab}><TabsList className="bg-gradient-to-r from-blue-500/10 to-amber-500/10 p-0.5 h-9">{tabs.map(t => <TabsTrigger key={t.key} value={t.key} className="text-xs gap-1.5 data-[state=active]:bg-blue-600 data-[state=active]:text-white">{t.icon}{t.label}</TabsTrigger>)}</TabsList>{tabs.map(t => tab === t.key && <div key={t.key} className="mt-3">{t.content}</div>)}</Tabs><Sheet open={!!detail} onOpenChange={() => setDetail(null)}><SheetContent className="w-[420px] overflow-y-auto"><SheetHeader><SheetTitle className="text-sm">Detail View</SheetTitle></SheetHeader>{detail && <div className="mt-4 space-y-3"><div className="sds-detail-header rounded-lg p-4 bg-gradient-to-br from-blue-500 to-amber-600 text-white"><div className="text-lg font-bold">{String(detail.id)}</div><div className="text-xs opacity-80 mt-1">{String(detail.name || detail.carrier || "Record")}</div></div>{Object.entries(detail).filter(([k]) => k !== "id").map(([k, v]) => <div key={k} className="flex items-center justify-between py-1.5 border-b"><span className="text-[10px] text-muted-foreground capitalize">{k.replace(/_/g, " ")}</span><span className="text-xs font-medium">{typeof v === "number" ? v.toLocaleString() : String(v)}</span></div>)}</div>}</SheetContent></Sheet></div>)
+  return (
+    <div className="sds-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Warehouse' }, { label: 'Dock Scheduling' }]} />
+      <PageHeader title="Smart Dock Scheduler" description="Indian warehouse dock scheduling and bay management with bay operations certification dock leveler quality control appointment scheduling optimisation carrier allocation verification vehicle turnaround tracking and safety compliance audit across 8 logistics hubs in Mumbai Delhi Chennai Kolkata Bangalore Hyderabad Pune and Ahmedabad" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-blue-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
+        </TabsList>
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Docks" value={allRecords.length} />
+            <KpiTile label="Bay Types" value={PRODUCTS.length} />
+            <KpiTile label="Warehouse Hubs" value={ARTISANS.length} />
+            <KpiTile label="Avg Throughput" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
+          </div>
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="Operations" value={91} />
+            <HealthRing label="Leveler" value={88} />
+            <HealthRing label="Scheduler" value={94} />
+            <HealthRing label="Carrier" value={86} />
+            <HealthRing label="Turnaround" value={89} />
+            <HealthRing label="Safety" value={95} />
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="Active Bays" value="42 Bays" />
+            <ValueTile label="Peak Capacity" value="1,200/hr" />
+            <ValueTile label="Avg Wait" value="18 min" />
+            <ValueTile label="Utilisation" value="78%" />
+          </div>
+        </TabsContent>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search dock scheduling records..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-blue-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Equipment</th>
+                  <th className="p-3 text-left font-medium">Dock</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Throughput</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-blue-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.equipment} /></td>
+                    <td className="p-3">{record.dock}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} pallets/hr</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </TabsContent>
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Dock Throughput Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Hub Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={dockChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {dockChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
+          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Smart Dock Scheduling — Indian Warehouse Bay Management System</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Smart dock scheduling represents the application of AI-powered optimisation algorithms and real-time sensor technology to the management of warehouse loading and unloading bay operations across the Indian logistics and supply chain industry where modern Indian warehouses and inland container depots ICDs operated by major logistics operators including the Container Corporation of India CONCOR DP World Adani Ports and Special Economic Zones the National Industrial Corridor Development Corporation and private third-party logistics providers face increasing pressure to maximise dock throughput while minimising vehicle wait times and turnaround delays that cost the Indian logistics industry an estimated twelve thousand crore rupees annually in demurrage charges and delayed shipment penalties where the smart dock scheduling system integrates with existing warehouse management systems WMS and enterprise resource planning ERP platforms to provide real-time visibility into dock bay availability appointment scheduling carrier allocation vehicle turnaround tracking and equipment utilisation across the eight major Indian logistics hub cities of Mumbai with the Nhava Sheva ICD and JNPT port complexes Delhi with the TIS freight terminal and ICD Patparganj Chennai with the Chennai Container Terminal and Kamarajar Port Kolkata with the Syama Prasad Mookerjee Port facilities Bangalore with the Karnataka logistics distribution centre Hyderabad with the FMCG and pharmaceutical distribution hub Pune with the Chakan Talegaon industrial warehousing zone and Ahmedabad with the Gujarat logistics corridor terminal where the scheduling system manages six distinct dock bay types including the loading bay for outbound shipment staging the unloading bay for inbound goods receiving the cross dock for transfer of goods directly from inbound to outbound vehicles without intermediate storage the cold storage dock for temperature-controlled perishable goods handling the hazardous materials bay for chemicals and dangerous goods with safety compliance protocols and the bulk platform for high-volume commodity handling operations each with specialised equipment configurations scheduling requirements and safety protocols.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Bay Operations Certification and Dock Leveler Quality Control Standards</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The bay operations certification and dock leveler quality control standards establish the primary operational quality assurance framework for Indian warehouse dock scheduling systems that ensures safe efficient and compliant dock bay operations across all facility types and cargo categories where the bay operations certification evaluates the operational readiness of each dock bay through a comprehensive twelve-point inspection checklist covering bay floor condition confirming flatness within plus or minus five millimetres across the entire bay surface area dock door functionality confirming automatic or manual doors open and close within specified time limits dock lighting levels confirming minimum three hundred lux illumination across the working zone dock ventilation confirming adequate air exchange rates for enclosed bay areas safety barrier systems confirming bumper guards wheel chocks and dock locks are present and functional floor marking and signage confirming designated pedestrian walkways vehicle approach zones and cargo staging areas are clearly marked and visible emergency equipment confirming fire extinguishers spill containment kits and first aid stations are accessible and within expiry date where the dock leveler quality control test evaluates the mechanical performance and safety compliance of the hydraulic or mechanical dock levelers that bridge the gap between the warehouse dock platform and the delivery vehicle cargo bed where the leveler capacity test verifies the rated load capacity of each dock leveler by subjecting it to the full rated load for sixty seconds confirming the platform deflection remains within the manufacturer specified maximum deflection limit and the hydraulic system maintains stable platform height without drift or settling during the loaded hold period where the leveler operation test measures the cycle time for complete platform extension lip deployment and retraction confirming the full cycle completes within the manufacturer specified time typically eight to twelve seconds for hydraulic units where the lip extension test verifies the lip extends to the full designed length and the lip angle is within the acceptable range for safe vehicle transition.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Appointment Scheduler Optimisation and Carrier Allocation Verification</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The appointment scheduler optimisation and carrier allocation verification protocols manage the advanced booking scheduling and real-time optimisation of dock appointment slots for incoming carrier vehicles ensuring maximum dock utilisation while preventing congestion conflicts and excessive wait times where the appointment scheduling system uses a constraint-based optimisation algorithm that considers dock bay type compatibility with cargo category required equipment availability at each bay skilled labour availability for specialised cargo handling time-window constraints for time-sensitive perishable or pharmaceutical shipments carrier preference and priority tier level historical carrier punctuality performance scores and real-time dock congestion levels across the facility to generate optimised appointment time slots that minimise total vehicle wait time while maximising throughput across all available dock bays where the appointment slot management system provides dynamic slot allocation based on real-time demand patterns adjusting slot duration and bay assignment as conditions change throughout the operating day where the carrier allocation verification protocol confirms that each dock appointment is matched to the correct carrier based on the carrier identification number vehicle registration plate and driver credentials verified against the pre-registered carrier database confirming the carrier has valid insurance documentation current fitness certificate for the vehicle and appropriate dangerous goods handling certification for hazardous material shipments where the allocation verification also confirms the assigned dock bay is compatible with the vehicle type and cargo dimensions ensuring adequate clearance height width and weight capacity at the assigned bay and that all required unloading or loading equipment including forklifts pallet jacks conveyors and specialised handling attachments is available and pre-staged at the assigned dock bay at least fifteen minutes before the scheduled appointment time reducing the vehicle turnaround time by eliminating equipment preparation delays.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Vehicle Turnaround Tracking and Safety Compliance Audit Framework</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The vehicle turnaround tracking and safety compliance audit framework provides the performance measurement and regulatory compliance infrastructure for the Indian warehouse dock scheduling system ensuring all dock operations meet the operational efficiency targets mandated by the facility management and the safety compliance requirements mandated by the Indian Factory Act the Occupational Safety Health and Welfare Act and the Goods and Services Tax GST e-way bill regulations for goods movement documentation where the vehicle turnaround tracking system measures the complete turnaround time for each vehicle from the moment the vehicle arrives at the facility gate and receives a gate pass to the moment the vehicle departs after completing loading or unloading broken down into four measurable time segments including the gate-to-dock travel time measured from gate pass issuance to vehicle arrival at the assigned dock bay the check-in processing time measured from vehicle arrival at the dock to completion of documentation verification and cargo inspection the loading or unloading time measured from the start of cargo operations to completion and the check-out and departure time measured from completion of cargo operations to vehicle departure through the facility gate where the turnaround tracking system calculates real-time turnaround performance metrics including the average turnaround time per dock bay per shift and per carrier the turnaround time distribution histogram showing the spread of individual turnaround times the percentage of vehicles meeting the target turnaround time of forty-five minutes for standard cargo and sixty minutes for temperature-controlled cargo and the demurrage exposure calculation showing the financial risk from vehicles exceeding the maximum allowed turnaround time where the safety compliance audit protocol conducts systematic inspections of dock safety practices including verification that all dock personnel are wearing required personal protective equipment including safety vests hard hats and steel-toed boots confirmation that dock lighting provides adequate illumination for safe cargo handling operations in all operating conditions verification that fire suppression equipment is accessible and functional at each dock bay and confirmation that hazardous material handling procedures including spill containment and emergency shutdown protocols are being followed at hazardous materials dock bays.</p></CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
 }
+
+
+

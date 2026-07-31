@@ -368,6 +368,7 @@ import MeenakariUdaipurRajasthanLogisticsView from "@/components/modules/meenaka
 import DhokraChhattisgarhLogisticsView from "@/components/modules/dhokra-chhattisgarh-logistics-view"
 import BidriKarnatakaLogisticsView from "@/components/modules/bidri-karnataka-logistics-view"
 import GondArtMadhyaPradeshLogisticsView from "@/components/modules/gond-art-madhya-pradesh-logistics-view"
+import MadhubaniBiharLogisticsView from "@/components/modules/madhubani-bihar-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -735,6 +736,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "dhokra-chhattisgarh-logistics": DhokraChhattisgarhLogisticsView,
   "bidri-karnataka-logistics": BidriKarnatakaLogisticsView,
   "gond-art-madhya-pradesh-logistics": GondArtMadhyaPradeshLogisticsView,
+  "madhubani-bihar-logistics": MadhubaniBiharLogisticsView,
 }
 
 
