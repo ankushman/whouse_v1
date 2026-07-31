@@ -54152,3 +54152,71 @@ html.theme-transition body {
 @keyframes csa-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes csa-pulse-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(120,53,15,0.15); } }
 @keyframes csa-glow-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(120,53,15,0.25); } }
+
+/* ============================================================================
+   R331: Sankheda Lacquerware Gujarat (slg-*) + Tanjore Painting Tamil Nadu (tpn-*)
+   ============================================================================ */
+
+.slg-root {
+  animation: slgFadeIn 0.4s ease-out;
+}
+.slg-root .health-ring svg circle:last-child {
+  animation: slgRingPulse 2s ease-in-out infinite;
+}
+.slg-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.slg-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.slg-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.slg-root table tbody tr {
+  animation: slgRowSlide 0.3s ease-out;
+}
+
+.tpn-root {
+  animation: tpnFadeIn 0.4s ease-out;
+}
+.tpn-root .health-ring svg circle:last-child {
+  animation: tpnRingPulse 2s ease-in-out infinite;
+}
+.tpn-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.tpn-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.tpn-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.tpn-root table tbody tr {
+  animation: tpnRowSlide 0.3s ease-out;
+}
+
+@keyframes slgFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slgRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes slgRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes tpnFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes tpnRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes tpnRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

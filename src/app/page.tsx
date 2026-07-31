@@ -324,6 +324,8 @@ import KanchipuramSilkSareeLogisticsView from "@/components/modules/kanchipuram-
 import GondTribalArtMadhyaPradeshLogisticsView from "@/components/modules/gond-tribal-art-madhya-pradesh-logistics"
 import NirmalPaintingTelanganaLogisticsView from "@/components/modules/nirmal-painting-telangana-logistics"
 import CheriyalScrollArtTelanganaLogisticsView from "@/components/modules/cheriyal-scroll-art-telangana-logistics"
+import SankhedaLacquerwareGujaratLogisticsView from "@/components/modules/sankheda-lacquerware-gujarat-logistics-view"
+import TanjorePaintingTamilNaduLogisticsView from "@/components/modules/tanjore-painting-tamil-nadu-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -647,6 +649,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "gond-tribal-art-madhya-pradesh-logistics": GondTribalArtMadhyaPradeshLogisticsView,
   "nirmal-painting-telangana-logistics": NirmalPaintingTelanganaLogisticsView,
   "cheriyal-scroll-art-telangana-logistics": CheriyalScrollArtTelanganaLogisticsView,
+  "sankheda-lacquerware-gujarat-logistics": SankhedaLacquerwareGujaratLogisticsView,
+  "tanjore-painting-tamil-nadu-logistics": TanjorePaintingTamilNaduLogisticsView,
 }
 
 

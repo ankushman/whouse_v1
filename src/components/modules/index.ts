@@ -314,3 +314,5 @@ export { default as KanchipuramSilkSareeLogisticsView } from './kanchipuram-silk
 export { default as GondTribalArtMadhyaPradeshLogisticsView } from './gond-tribal-art-madhya-pradesh-logistics'
 export { default as NirmalPaintingTelanganaLogisticsView } from './nirmal-painting-telangana-logistics'
 export { default as CheriyalScrollArtTelanganaLogisticsView } from './cheriyal-scroll-art-telangana-logistics'
+export { default as SankhedaLacquerwareGujaratLogisticsView } from './sankheda-lacquerware-gujarat-logistics-view'
+export { default as TanjorePaintingTamilNaduLogisticsView } from './tanjore-painting-tamil-nadu-logistics-view'
