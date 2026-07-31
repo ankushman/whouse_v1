@@ -340,6 +340,7 @@ export const navItems: NavItem[] = [
   { id: 'saura-tribal-art-odisha-logistics', label: 'Saura Tribal Art OD', icon: 'TreePine', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'chamba-rumal-embroidery-himachal-pradesh-logistics', label: 'Chamba Rumal HP', icon: 'Shirt', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'thangka-painting-ladakh-logistics', label: 'Thangka Painting Ladakh', icon: 'MountainSnow', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'kolam-floor-art-tamil-nadu-logistics', label: 'Kolam Floor Art TN', icon: 'Flower', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'pembarthi-metal-craft-telangana-logistics', label: 'Pembarthi Metal Craft TG', icon: 'Hammer', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
