@@ -1,6 +1,43 @@
 ---
 
 ---
+Task ID: R336
+Agent: Main Agent (Cron Loop)
+Task: R336 — Warli Tribal Painting Maharashtra + Chanderi Silk Weaving MP
+
+Work Log:
+- Read worklog.md: R335 complete (commit d937f48), 327 views, 327 navItems, 54,477 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R336)
+- R335 commit d937f48 already pushed
+- Slug verification: warli-tribal-painting-maharashtra-logistics and chanderi-silk-weaving-madhya-pradesh-logistics both clear
+- Icons: Triangle (Warli) and Gem (Chanderi) already in iconMap — reused, no new icons (186 total unchanged)
+
+- Created Warli Tribal Painting Maharashtra Logistics (wtp-*, #7c2d12 deep earth brown): 253 lines, 8 products (Warli Harvest Festival Mural/Warli Tarpa Dance Painting/Maharashtra Warli Tree of Life/Warli Wedding Ceremony Panel/Warli Hunting Scene Canvas/Warli Fishing Community Mural/Warli Farming Cycle Painting/Warli Cosmic Spiral Canvas), 8 painters (Adivasi Warli Artisan Guild/Dahanu Tribal Painters Society/Talasari Warli Heritage Centre/Jawhar Adivasi Art Cooperative/Palghar Warli Painting Colony/Mokhada Tribal Art Society/Wada Warli Craft Studio/Vikramgad Warli Artists Guild), 6 statuses (GI Warli Painting Mark/IS 16922 Warli Art Grade A/Rigid Cardboard Flat Pack/Enclosed Truck Transit/Dry Storage 18-30C/Rice Paste Adhesion QC), 4 insight cards (4,500-year Adivasi wall art tradition, IS 16922 rice paste adhesion standards, rigid cardboard flat pack packaging, AI geometric pattern verification)
+- Created Chanderi Silk Weaving Madhya Pradesh Logistics (csw-*, #5b21b6 deep violet): 253 lines, 8 products (Chanderi Silk Saree MP/Chanderi Cotton Silk Stole/MP Chanderi Butidar Fabric/Chanderi Ekta Pattern Suit/Madhya Pradesh Chanderi Dupatta/Chanderi Handloom Lehenga Set/MP Chanderi Temple Border Saree/Chanderi Pure Silk Kurta Fabric), 8 weavers (Chanderi Weavers Artisan Guild/Ashoknagar Silk Weaving Society/Isagarh Heritage Weavers Colony/Mungaoli Chanderi Cooperative/Shadpur Chanderi Workshop/Biaora Silk Weaving Centre/Guna Chanderi Handloom Studio/Lalitpur Chanderi Craft Society), 6 statuses (GI Chanderi Silk Mark/IS 16923 Chanderi Textile Grade A/Muslin Roll with Tissue Interleave/Air-Conditioned Truck Transit/Humidity-Free Vault 20-25C/Weft Alignment QC), 4 insight cards (900-year Bundelkhand heritage textile tradition, IS 16923 weft alignment standards, muslin roll tissue interleave packaging, AI weft pattern analysis)
+- Registered: +2 exports, +2 imports, +2 viewMap, +2 navItems
+- Icons: Triangle reused, Gem reused — 186 total unchanged
+- CSS: +51 lines (wtp-* + csw-*, 6 keyframe animations)
+- TSC: 0 errors | Git pushed: commit 26bf8a4
+
+Stage Summary:
+- NEW MODULE: Warli Tribal Painting Maharashtra Logistics (253 lines, 12 components, 60 records)
+- NEW MODULE: Chanderi Silk Weaving Madhya Pradesh Logistics (253 lines, 12 components, 60 records)
+- ICONS: 186 total (Triangle, Gem reused)
+- Total navItems: 329 | VIEW FILES: 329 | CSS: 54,528 lines
+- ZERO src/ TSC errors | Git pushed: commit 26bf8a4
+
+## Updated Project Status (Post Round 336)
+- STATUS: STABLE (Turbopack OOM persists)
+- VIEW FILES: 329 | NAVITEMS: 329 | CSS: 54,528 lines
+- ICONMAP: 186 icons | TSC: 0 errors | GITHUB: Pushed (commit 26bf8a4)
+
+PRIORITY NEXT:
+1. Create new modules (Madhubani, Miniature, Pipli, Sozni, Bandhani, Pochampally, Warli, Chanderi all exist — choose: Kantha Embroidery Bengal, Kangra Painting Himachal Pradesh)
+2. CSS splitting to resolve Turbopack OOM (CRITICAL — 54K+ lines)
+3. SearchFilterToolbar into 5-10 more modules
+4. Cross-module drill-down navigation
+
+---
 Task ID: R335
 Agent: Main Agent (Cron Loop)
 Task: R335 — Kashmir Sozni Embroidery + Madhubani Painting Bihar overwrite
