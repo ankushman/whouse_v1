@@ -343,6 +343,7 @@ import GodnaTattooArtMadhyaPradeshLogisticsView from "@/components/modules/godna
 import PatuaScrollArtWestBengalLogisticsView from "@/components/modules/patua-scroll-art-west-bengal-logistics-view"
 import SauraTribalArtOdishaLogisticsView from "@/components/modules/saura-tribal-art-odisha-logistics-view"
 import ChambaRumalEmbroideryHimachalPradeshLogisticsView from "@/components/modules/chamba-rumal-embroidery-himachal-pradesh-logistics-view"
+import ThangkaPaintingLadakhLogisticsView from "@/components/modules/thangka-painting-ladakh-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -685,6 +686,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "patua-scroll-art-west-bengal-logistics": PatuaScrollArtWestBengalLogisticsView,
   "saura-tribal-art-odisha-logistics": SauraTribalArtOdishaLogisticsView,
   "chamba-rumal-embroidery-himachal-pradesh-logistics": ChambaRumalEmbroideryHimachalPradeshLogisticsView,
+  "thangka-painting-ladakh-logistics": ThangkaPaintingLadakhLogisticsView,
 }
 
 
