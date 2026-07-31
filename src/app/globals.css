@@ -53692,3 +53692,47 @@ html.theme-transition body {
 @keyframes kpa-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes kpa-pulse-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,27,75,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,27,75,0.15); } }
 @keyframes kpa-glow-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,27,75,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,27,75,0.25); } }
+
+/* Chhau Mask Dance (cmd-*) */
+.cmd-root { animation: cmd-fade-in 0.3s ease-out; }
+.cmd-badge { transition: all 0.2s; }
+.cmd-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(124,45,18,0.15); }
+.cmd-kpi { transition: all 0.25s; border-left: 3px solid #7c2d12; }
+.cmd-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(124,45,18,0.12); }
+.cmd-value { transition: all 0.2s; background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); }
+.cmd-value:hover { transform: scale(1.02); }
+.cmd-health-ring { transition: transform 0.2s; }
+.cmd-health-ring:hover { transform: scale(1.08); }
+.cmd-costbar { transition: width 0.6s ease; }
+.cmd-table-card { transition: box-shadow 0.2s; }
+.cmd-table-card:hover { box-shadow: 0 4px 16px rgba(124,45,18,0.08); }
+.cmd-health-grid { transition: box-shadow 0.2s; }
+.cmd-health-grid:hover { box-shadow: 0 2px 12px rgba(124,45,18,0.1); }
+.cmd-insight { transition: all 0.25s; border-left: 3px solid #7c2d12; }
+.cmd-insight:hover { border-color: #c2410c; box-shadow: 0 2px 8px rgba(124,45,18,0.1); }
+@keyframes cmd-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cmd-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes cmd-pulse-sienna { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,45,18,0.15); } }
+@keyframes cmd-glow-sienna { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,45,18,0.25); } }
+
+/* Kantha Embroidery Bengal (keb-*) */
+.keb-root { animation: keb-fade-in 0.3s ease-out; }
+.keb-badge { transition: all 0.2s; }
+.keb-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(54,83,20,0.15); }
+.keb-kpi { transition: all 0.25s; border-left: 3px solid #365314; }
+.keb-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(54,83,20,0.12); }
+.keb-value { transition: all 0.2s; background: linear-gradient(135deg, #f7fee7 0%, #ecfccb 100%); }
+.keb-value:hover { transform: scale(1.02); }
+.keb-health-ring { transition: transform 0.2s; }
+.keb-health-ring:hover { transform: scale(1.08); }
+.keb-costbar { transition: width 0.6s ease; }
+.keb-table-card { transition: box-shadow 0.2s; }
+.keb-table-card:hover { box-shadow: 0 4px 16px rgba(54,83,20,0.08); }
+.keb-health-grid { transition: box-shadow 0.2s; }
+.keb-health-grid:hover { box-shadow: 0 2px 12px rgba(54,83,20,0.1); }
+.keb-insight { transition: all 0.25s; border-left: 3px solid #365314; }
+.keb-insight:hover { border-color: #4d7c0f; box-shadow: 0 2px 8px rgba(54,83,20,0.1); }
+@keyframes keb-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes keb-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes keb-pulse-olive { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(54,83,20,0.15); } }
+@keyframes keb-glow-olive { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(54,83,20,0.25); } }

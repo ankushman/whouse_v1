@@ -294,6 +294,8 @@ export const navItems: NavItem[] = [
   { id: 'thanjavur-bronze-sculpture-supply-chain', label: 'Thanjavur Bronze Sculpture', icon: 'Orbit', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kondapalli-bommalu-toys-logistics', label: 'Kondapalli Bommalu Toys', icon: 'Dice5', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kalamkari-pen-art-logistics', label: 'Kalamkari Pen Art', icon: 'PenTool', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'chhau-mask-dance-logistics', label: 'Chhau Mask Dance', icon: 'Drama', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'kantha-embroidery-bengal-logistics', label: 'Kantha Embroidery Bengal', icon: 'Brush', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

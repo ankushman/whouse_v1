@@ -288,3 +288,5 @@ export { default as ChikankariLucknowEmbroideryView } from './chikankari-lucknow
 export { default as ThanjavurBronzeSculptureSupplyChainView } from './thanjavur-bronze-sculpture-supply-chain-view'
 export { default as KondapalliBommaluToysLogisticsView } from './kondapalli-bommalu-toys-logistics-view'
 export { default as KalamkariPenArtLogisticsView } from './kalamkari-pen-art-logistics-view'
+export { default as ChhauMaskDanceLogisticsView } from './chhau-mask-dance-logistics-view'
+export { default as KanthaEmbroideryBengalLogisticsView } from './kantha-embroidery-bengal-logistics-view'
