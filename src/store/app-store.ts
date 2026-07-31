@@ -329,6 +329,8 @@ export const navItems: NavItem[] = [
   { id: 'miniature-painting-rajasthan-logistics', label: 'Miniature Painting RJ', icon: 'Crown', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'odisha-pipli-applique-logistics', label: 'Pipli Applique OD', icon: 'TreePine', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kashmir-sozni-embroidery-logistics', label: 'Kashmir Sozni', icon: 'PenTool', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'warli-tribal-painting-maharashtra-logistics', label: 'Warli Painting MH', icon: 'Triangle', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'chanderi-silk-weaving-madhya-pradesh-logistics', label: 'Chanderi Silk MP', icon: 'Gem', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

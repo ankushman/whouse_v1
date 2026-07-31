@@ -333,6 +333,8 @@ import KutchBandhaniGujaratLogisticsView from "@/components/modules/kutch-bandha
 import MiniaturePaintingRajasthanLogisticsView from "@/components/modules/miniature-painting-rajasthan-logistics-view"
 import OdishaPipliAppliqueLogisticsView from "@/components/modules/odisha-pipli-applique-logistics-view"
 import KashmirSozniEmbroideryLogisticsView from "@/components/modules/kashmir-sozni-embroidery-logistics-view"
+import WarliTribalPaintingMaharashtraLogisticsView from "@/components/modules/warli-tribal-painting-maharashtra-logistics-view"
+import ChanderiSilkWeavingMadhyaPradeshLogisticsView from "@/components/modules/chanderi-silk-weaving-madhya-pradesh-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -665,6 +667,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "miniature-painting-rajasthan-logistics": MiniaturePaintingRajasthanLogisticsView,
   "odisha-pipli-applique-logistics": OdishaPipliAppliqueLogisticsView,
   "kashmir-sozni-embroidery-logistics": KashmirSozniEmbroideryLogisticsView,
+  "warli-tribal-painting-maharashtra-logistics": WarliTribalPaintingMaharashtraLogisticsView,
+  "chanderi-silk-weaving-madhya-pradesh-logistics": ChanderiSilkWeavingMadhyaPradeshLogisticsView,
 }
 
 

@@ -54475,3 +54475,54 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+/* === Warli Tribal Painting Maharashtra Logistics (wtp-*) === */
+.wtp-root {
+  --wtp-bg: #fffbeb;
+  --wtp-fg: #7c2d12;
+  --wtp-accent: #92400e;
+  --wtp-muted: #fde68a;
+  background: linear-gradient(135deg, var(--wtp-bg) 0%, #fef3c7 100%);
+  min-height: 100vh;
+  animation: wtpFadeIn 0.5s ease-out;
+}
+.wtp-root:hover {
+  animation: wtpPulse 2s ease-in-out infinite;
+}
+@keyframes wtpFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes wtpPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(124,45,18,0.04); }
+}
+@keyframes wtpRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* === Chanderi Silk Weaving Madhya Pradesh Logistics (csw-*) === */
+.csw-root {
+  --csw-bg: #f5f3ff;
+  --csw-fg: #5b21b6;
+  --csw-accent: #6d28d9;
+  --csw-muted: #ddd6fe;
+  background: linear-gradient(135deg, var(--csw-bg) 0%, #ede9fe 100%);
+  min-height: 100vh;
+  animation: cswFadeIn 0.5s ease-out;
+}
+.csw-root:hover {
+  animation: cswPulse 2s ease-in-out infinite;
+}
+@keyframes cswFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cswPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(91,33,182,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(91,33,182,0.04); }
+}
+@keyframes cswRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
