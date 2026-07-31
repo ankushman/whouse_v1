@@ -1,5 +1,32 @@
 ---
 ---
+Task ID: R367
+Agent: Main Agent (Cron Loop)
+Task: R367 — Dhokra Chhattisgarh (new) + Mining Minerals Logistics overwrite
+
+Work Log:
+- Read worklog.md: R366 complete (commit 06d647a), 360 module files, 358 exports, 360 navItems, ~55,223 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R367)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: dhokra-chhattisgarh-logistics CLEAR; mining-minerals-logistics ALREADY EXISTS
+- CSS prefixes: dhk-* CLEAR; mml-* old prefix exists (module uses mmn-* now); mmn-* CSS NOT found so added both dhk-* and mmn-*
+- Icons: Wheat (Dhokra, already in iconMap), Pickaxe (Mining, already existed) — no new icons
+- Mining Minerals had 234 lines — overwritten to 253 lines with genRecords, correct field names (mine, mineral)
+
+- Created Dhokra Chhattisgarh (dhk-*, #92400e deep amber-brown): 253 lines, 8 products (Dhokra Horse figurine, Dhokra Elephant pair, Dhokra Tree of Life, Dhokra Peacock Stand, Dhokra Dancing Girl, Dhokra Snake Basket Handle, Dhokra Fish Wall Panel, Dhokra Tortoise Incense), 8 artisans (Bastar Dhokra Craft CG, Jagdalpur Lost Wax Guild CG, Kondagaon Tribal Art CG, Dantewada Bronze Atelier CG, Sarguja Dhokra Cluster CG, Kanker Metalworkers CG, Raipur Heritage Foundry CG, Narayanpur Tribal Collective CG), 6 statuses, 4 insight cards
+- Overwrote Mining Minerals Logistics (mmn-*, #78350f dark brown, 234->253): 253 lines, 8 minerals (Iron Ore Fines, Coal ROM, Bauxite Ore, Copper Concentrate, Manganese Ore, Limestone Aggregate, Chromite Ore, Lead-Zinc Concentrate), 8 mines (NMDC Bailadila CG, Coal India Singrauli MP, Hindalco Bokaro JH, HCL Malanjkhand MP, MOIL Balaghat MH, ACC Jamul CG, TATA Steel Noamundi JH, Vedanta Jharsuguda OD), 6 statuses, 4 insight cards
+- Registered Dhokra in 3 files; Mining already registered
+- CSS: +11 lines (dhk-* 5 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit 85ab6dd
+
+Stage Summary:
+- 361 module files (1 new Dhokra), 359 exports, 361 navItems, ~55,234 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Mining Minerals updated from 234 to 253 lines with genRecords, 60 records
+- Remaining 234-line modules: 1 (nuclear-fuel-logistics) — final 234-line module
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: R368 should target the final 234-line module (nuclear-fuel-logistics) to complete the 234-line elimination program
+---
 Task ID: R366
 Agent: Main Agent (Cron Loop)
 Task: R366 — Meenakari Udaipur Rajasthan (new) + Medical Device Logistics overwrite
