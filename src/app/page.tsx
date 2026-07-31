@@ -288,6 +288,8 @@ import ZariZardoziEmbroideryLogisticsView from "@/components/modules/zari-zardoz
 import PuppetryTraditionalToysLogisticsView from "@/components/modules/puppetry-traditional-toys-logistics-view"
 import MakhanaFoxNutProcessingLogisticsView from "@/components/modules/makhana-fox-nut-processing-logistics-view"
 import MadhubaniFolkArtSupplyChainView from "@/components/modules/madhubani-folk-art-supply-chain-view"
+import SaffronKesarProcessingLogisticsView from "@/components/modules/saffron-kesar-processing-logistics-view"
+import PashminaWoolSupplyChainView from "@/components/modules/pashmina-wool-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -575,6 +577,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "puppetry-traditional-toys-logistics": PuppetryTraditionalToysLogisticsView,
   "makhana-fox-nut-processing-logistics": MakhanaFoxNutProcessingLogisticsView,
   "madhubani-folk-art-supply-chain": MadhubaniFolkArtSupplyChainView,
+  "saffron-kesar-processing-logistics": SaffronKesarProcessingLogisticsView,
+  "pashmina-wool-supply-chain": PashminaWoolSupplyChainView,
 }
 
 

@@ -278,3 +278,5 @@ export { default as ZariZardoziEmbroideryLogisticsView } from './zari-zardozi-em
 export { default as PuppetryTraditionalToysLogisticsView } from './puppetry-traditional-toys-logistics-view'
 export { default as MakhanaFoxNutProcessingLogisticsView } from './makhana-fox-nut-processing-logistics-view'
 export { default as MadhubaniFolkArtSupplyChainView } from './madhubani-folk-art-supply-chain-view'
+export { default as SaffronKesarProcessingLogisticsView } from './saffron-kesar-processing-logistics-view'
+export { default as PashminaWoolSupplyChainView } from './pashmina-wool-supply-chain-view'

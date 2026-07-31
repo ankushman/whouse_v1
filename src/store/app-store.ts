@@ -284,6 +284,8 @@ export const navItems: NavItem[] = [
   { id: 'puppetry-traditional-toys-logistics', label: 'Puppetry & Traditional Toys', icon: 'Blocks', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'makhana-fox-nut-processing-logistics', label: 'Makhana Fox Nut Processing', icon: 'Flower', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'madhubani-folk-art-supply-chain', label: 'Madhubani Folk Art', icon: 'Frame', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'saffron-kesar-processing-logistics', label: 'Saffron Kesar Processing', icon: 'Flower2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'pashmina-wool-supply-chain', label: 'Pashmina Wool Supply Chain', icon: 'MountainSnow', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
