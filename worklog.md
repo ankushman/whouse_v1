@@ -1,6 +1,44 @@
 ---
 
 ---
+Task ID: R335
+Agent: Main Agent (Cron Loop)
+Task: R335 — Kashmir Sozni Embroidery + Madhubani Painting Bihar overwrite
+
+Work Log:
+- Read worklog.md: R334 complete (commit 00aa58e), 326 views, 326 navItems, 54,426 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R335)
+- R334 commit 00aa58e already pushed
+- Discovered Madhubani Painting Bihar already existed (registered in prior round but module file was older). Decided to overwrite with fresh 253-line template.
+- Discovered 8 modules missing from barrel index.ts (compliance-audit, customer-sla-performance, energy-sustainability, predictive-analytics, returns-reverse-logistics, shift-handover, vendor-management, yard-management) — these use named exports imported directly in page.tsx, not a bug.
+- Slug verification: kashmir-sozni-embroidery-logistics confirmed clear (new); madhubani-painting-bihar-logistics already existed (overwrote)
+- Icons: PenTool (Kashmir Sozni) and Paintbrush (Madhubani) already in iconMap — reused, no new icons (186 total unchanged)
+
+- Created Kashmir Sozni Embroidery Logistics (kse-*, #1a4d2e deep forest green): 253 lines, 8 products (Kashmir Sozni Pashmina Shawl/Sozni Embroidered Cashmere Stole/Kashmir Crewel Sozni Panel/Sozni Chain Stitch Rug/Kashmir Sozni Silk Saree Border/Sozni Needle Work Kurta Set/Kashmir Ari Sozni Wall Hanging/Sozni Embroidered Cushion Cover Set), 8 embroiderers (Srinagar Sozni Artisan Guild/Downtown Srinagar Embroidery Society/Nowgam Sozni Workshop Colony/Naseem Bagh Heritage Embroiderers/Hazratbal Sozni Craft Centre/Ganderbal Kashmir Embroidery Guild/Badgam Sozni Cooperative Society/Pampore Heritage Sozni Studio), 6 statuses (GI Kashmir Sozni Mark/IS 16920 Sozni Embroidery Grade A/Acid-Free Tissue Flat Pack/Temperature-Controlled Van Transit/Moisture-Free Storage 18-25C/Stitch Count Density QC), 4 insight cards (600-year Kashmir Valley needlework tradition, IS 16920 stitch density standards, acid-free tissue flat pack packaging, AI stitch pattern verification)
+- Overwrote Madhubani Painting Bihar Logistics (mbi-*, #6b21a8 deep purple): 253 lines, refreshed content with same template format
+- Registered Kashmir Sozni in 4 files (index.ts, page.tsx, app-store.ts, app-layout.tsx unchanged); Madhubani already registered — removed duplicate entries after TSC caught them
+- CSS: +51 lines (kse-* + mbi-*, 6 keyframe animations)
+- TSC: 0 errors in src/ | Git pushed: commit d937f48
+
+Stage Summary:
+- NEW MODULE: Kashmir Sozni Embroidery Logistics (253 lines, 12 components, 60 records)
+- OVERWRITTEN MODULE: Madhubani Painting Bihar Logistics (253 lines, refreshed content)
+- ICONS: 186 total (PenTool, Paintbrush reused)
+- Total navItems: 327 | VIEW FILES: 327 | CSS: 54,477 lines
+- ZERO src/ TSC errors | Git pushed: commit d937f48
+
+## Updated Project Status (Post Round 335)
+- STATUS: STABLE (Turbopack OOM persists)
+- VIEW FILES: 327 | NAVITEMS: 327 | CSS: 54,477 lines
+- ICONMAP: 186 icons | TSC: 0 errors | GITHUB: Pushed (commit d937f48)
+
+PRIORITY NEXT:
+1. Create new modules (Madhubani, Miniature Painting, Pipli, Bandhani, Pochampally already exist — choose: Warli Tribal Painting Maharashtra, Chanderi Silk Weaving MP)
+2. CSS splitting to resolve Turbopack OOM (CRITICAL — 54K+ lines)
+3. SearchFilterToolbar into 5-10 more modules
+4. Cross-module drill-down navigation
+
+---
 Task ID: R334
 Agent: Main Agent (Cron Loop)
 Task: R334 — Miniature Painting Rajasthan + Odisha Pipli Applique
