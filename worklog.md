@@ -4,6 +4,48 @@
 
 ---
 
+Task ID: R321
+Agent: Main Agent (Cron Loop)
+Task: R321 — Kerala Mural Painting + Warli Tribal Art Maharashtra
+
+Work Log:
+- Read worklog.md: R320 complete (commit 83f8261), 298 views, 298 navItems, 53,826 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R321)
+- R320 commit 83f8261 already pushed
+- Slug verification: kerala-mural-painting-logistics and warli-tribal-art-maharashtra-logistics both clear
+- Icons: BookOpen and Footprints NEW — added to imports + iconMap (184 total)
+- NOTE: Both subagents deviated significantly from standard template (wrong SearchFilterToolbar props, wrong import paths, wrong filterGroups types). Rewrote both modules completely to match standard 253-line template.
+
+- Created Kerala Mural Painting Logistics (kmp-*, #166534 deep forest green): 253 lines, 8 products (Guruvayur Temple Mural/Padmanabhaswamy Palace Fresco/Krishnattam Dance Mural/Mattancherry Palace Wall Art/Sree Padmanabha Mural Scroll/Vaishnava Temple Mural Set/Shiva Parvati Mural Panel/Ramayana Epic Kerala Mural), 8 artisans (Guruvayur Mural School/Trivandrum Palace Artists/Thrissur Temple Art Guild/Kochi Heritage Painters/Palakkad Mural Studio/Kozhikode Traditional Art/Kannur Temple Artists/Ernakulam Mural Centre), 6 statuses (GI Kerala Mural Mark/IS 16792 Fresco Grade A/Acid-Free Canvas Roll/Enclosed Truck Transit/Humidity-Free Vault 20-25C/Mineral Pigment QC), 4 insight cards (300-year temple tradition, IS 16792 fresco standards, acid-free canvas packaging, AI temple art digitisation)
+- Created Warli Tribal Art Maharashtra Logistics (wtm-*, #78350f deep earthy brown): 253 lines, 8 products (Warli Marriage Scene Painting/Tarpa Dance Warli Panel/Harvest Festival Warli Art/Village Life Warli Canvas/Sacred Tree Warli Mural/Hunting Scene Warli Scroll/Wedding Procession Warli/Solar System Warli Folk Art), 8 artisans (Dahanu Adivasi Warli Group/Jawhar Tribal Art Centre/Palghar Warli Artists/Mokhada Folk Art Colony/Talasari Adivasi Cluster/Vikramgad Warli Studio/Wada Rural Art Collective/Shahapur Warli Painters), 6 statuses (GI Warli Tribal Art Mark/IS 16793 Folk Paint Grade A/Rice-Paste Treated Canvas/Shock-Proof Van Transit/Dust-Free Storage 20-28C/Earth Pigment QC), 4 insight cards (2,500-year Adivasi tradition, IS 16793 folk paint standards, rice-paste fragility packaging, AI tribal art documentation)
+- Registered: +2 exports, +2 imports, +2 viewMap, +2 navItems
+- Icons: BookOpen, Footprints new (184 total)
+- CSS: +44 lines (kmp-* + wtm-*, 8 keyframe animations)
+- TSC: 0 errors | Git pushed: commit 4fddc0c
+
+Stage Summary:
+- NEW MODULE: Kerala Mural Painting Logistics (253 lines, 12 components, 60 records)
+- NEW MODULE: Warli Tribal Art Maharashtra Logistics (253 lines, 12 components, 60 records)
+- ICONS: 184 total (BookOpen, Footprints new)
+- MILESTONE: 300 VIEW FILES | 300 NAVITEMS
+- Total navItems: 300 | VIEW FILES: 300 | CSS: 53,870 lines
+- ZERO src/ TSC errors | Git pushed: commit 4fddc0c
+
+## Updated Project Status (Post Round 321)
+- STATUS: STABLE (Turbopack OOM persists)
+- VIEW FILES: 300 | NAVITEMS: 300 | CSS: 53,870 lines
+- ICONMAP: 184 icons | TSC: 0 errors | GITHUB: Pushed (commit 4fddc0c)
+
+PRIORITY NEXT:
+1. Create new modules (Roghan Painting Gujarat, Dhokra Bell Metal Craft)
+2. CSS splitting to resolve Turbopack OOM (CRITICAL — 53K+ lines)
+3. SearchFilterToolbar into 5-10 more modules
+4. Cross-module drill-down navigation
+
+---
+
+---
+
 Task ID: R320
 Agent: Main Agent (Cron Loop)
 Task: R320 — Madhubani Painting Bihar + Pattachitra Odisha
