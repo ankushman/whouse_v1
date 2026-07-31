@@ -316,6 +316,8 @@ import SaurashtraAppliqueGujaratLogisticsView from "@/components/modules/saurash
 import ManipuriBlackPotteryLogisticsView from "@/components/modules/manipuri-black-pottery-logistics-view"
 import NagaWoodCarvingNagalandLogisticsView from "@/components/modules/naga-wood-carving-nagaland-logistics-view"
 import SantiniketanBatikBengalLogisticsView from "@/components/modules/santiniketan-batik-bengal-logistics-view"
+import KashmirPapierMacheLogisticsView from "@/components/modules/kashmir-papier-mache-logistics-view"
+import MysoreRosewoodInlayLogisticsView from "@/components/modules/mysore-rosewood-inlay-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -631,6 +633,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "manipuri-black-pottery-logistics": ManipuriBlackPotteryLogisticsView,
   "naga-wood-carving-nagaland-logistics": NagaWoodCarvingNagalandLogisticsView,
   "santiniketan-batik-bengal-logistics": SantiniketanBatikBengalLogisticsView,
+  "kashmir-papier-mache-logistics": KashmirPapierMacheLogisticsView,
+  "mysore-rosewood-inlay-logistics": MysoreRosewoodInlayLogisticsView,
 }
 
 

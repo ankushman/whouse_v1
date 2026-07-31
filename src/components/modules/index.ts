@@ -306,3 +306,5 @@ export { default as SaurashtraAppliqueGujaratLogisticsView } from './saurashtra-
 export { default as ManipuriBlackPotteryLogisticsView } from './manipuri-black-pottery-logistics-view'
 export { default as NagaWoodCarvingNagalandLogisticsView } from './naga-wood-carving-nagaland-logistics-view'
 export { default as SantiniketanBatikBengalLogisticsView } from './santiniketan-batik-bengal-logistics-view'
+export { default as KashmirPapierMacheLogisticsView } from './kashmir-papier-mache-logistics-view'
+export { default as MysoreRosewoodInlayLogisticsView } from './mysore-rosewood-inlay-logistics-view'
