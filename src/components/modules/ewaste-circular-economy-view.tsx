@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/shared/page-header'
@@ -6,229 +6,248 @@ import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
 import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const COLORS = ['#15803d', '#166534', '#16a34a', '#4ade80', '#86efac', '#14532d', '#052e16', '#bbf7d0']
+const COLORS = ['#16a34a', '#15803d', '#22c55e', '#4ade80', '#86efac', '#166534', '#14532d', '#dcfce7']
+const PRODUCTS = ['PCB Circuit Boards', 'Li-ion Battery Packs', 'CRT Monitor Glass', 'Aluminium Heat Sinks', 'Copper Transformer Coils', 'Rare Earth Magnets', 'Gold-plated Connectors', 'Plastic Casings ABS']
+const ARTISANS = ['Attero Recycling Roorkee', 'E-Parisaraa Bengaluru', 'Cerebra Green Chennai', 'E-Waste Solutions Mumbai', 'Karo Sambhav Delhi', 'GreenTec Hyderabad', 'Namo E-Waste Pune', 'Zenviro Tech Jaipur']
+const STATUSES = ['CPCB E-Waste Certified', 'Hazardous Material Safe', 'Precious Metal Recovery OK', 'Shredding Grade Verified', 'Warehouse Segregation Check', 'Refrigerator Cold Chain']
 
-const EWASTE_TYPES = ['Smartphones', 'Laptop PCs', 'LED Monitors', 'PCB Assemblies', 'Li-Ion Batteries', 'Inverters/UPS', 'Server Racks', 'Circuit Boards']
-const RECYCLERS = ['Attero Roorkee', 'E-Parisaraa Bengaluru', 'Cerebra Chennai', 'Green-o-Tech Noida', 'Ecotech Mumbai', 'Karo Sambhav Delhi', 'Zeenext Hyd', 'Ecoreco Pune']
-const PROCESS_STATUS = ['Dismantled', 'Shredded', 'Precious Recovered', 'Refurbished', 'Hazardous Segregated', 'Awaiting Collection']
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-const ewasteRecords = [
-  { id: 'EWC-0001', ewaste: 'Smartphones', description: 'Mixed Mobile Phones 2.5MT Lot Containing Au, Ag, Cu Recovery', recycler: 'Attero Roorkee', quantity: 2500, unit: 'kg', process_status: 'Precious Recovered', lot: 'LOT-EWC-9041', destination: 'Kabadiwala Hub Delhi NCR', received: '2026-07-30', batch: 'EWC-B2026-0721', cost_inr: 8500000, recovery_rate: 94.2, hazardous_class: 'R2' },
-  { id: 'EWC-0002', ewaste: 'Laptop PCs', description: 'End-of-Life Enterprise Laptops 8MT HDD Data Sanitized DOD 5220', recycler: 'Cerebra Chennai', quantity: 8000, unit: 'kg', process_status: 'Refurbished', lot: 'LOT-EWC-9038', destination: 'Re-use Marketplace Bengaluru', received: '2026-07-30', batch: 'EWC-B2026-0720', cost_inr: 32000000, recovery_rate: 78.5, hazardous_class: 'R4' },
-  { id: 'EWC-0003', ewaste: 'LED Monitors', description: 'CRT and LED Mixed 12MT Mercury Panel Safe Handling ISO 14001', recycler: 'E-Parisaraa Bengaluru', quantity: 12000, unit: 'kg', process_status: 'Dismantled', lot: 'LOT-EWC-9012', destination: 'Glass Recycler Vizag', received: '2026-07-29', batch: 'EWC-B2026-0719', cost_inr: 18000000, recovery_rate: 88.0, hazardous_class: 'R3' },
-  { id: 'EWC-0004', ewaste: 'PCB Assemblies', description: 'Mixed Telecom PCB 1.5MT Cu Recovery Au Plating Stripped', recycler: 'Green-o-Tech Noida', quantity: 1500, unit: 'kg', process_status: 'Precious Recovered', lot: 'LOT-EWC-9027', destination: 'Copper Smelter Jharkhand', received: '2026-07-29', batch: 'EWC-B2026-0718', cost_inr: 12000000, recovery_rate: 96.8, hazardous_class: 'R2' },
-  { id: 'EWC-0005', ewaste: 'Li-Ion Batteries', description: 'EV Battery Pack NMC 5MT Cobalt Li Recovery Hydrometallurgy', recycler: 'Ecotech Mumbai', quantity: 5000, unit: 'kg', process_status: 'Shredded', lot: 'LOT-EWC-9031', destination: 'Li Recovery Plant Gujarat', received: '2026-07-28', batch: 'EWC-B2026-0716', cost_inr: 42000000, recovery_rate: 92.4, hazardous_class: 'R5' },
-  { id: 'EWC-0006', ewaste: 'Inverters/UPS', description: 'Lead-Acid Battery UPS 18MT Pb Recovery Smelting ISRI Grade', recycler: 'Karo Sambhav Delhi', quantity: 18000, unit: 'kg', process_status: 'Hazardous Segregated', lot: 'LOT-EWC-9040', destination: 'Lead Smelter Bhiwandi', received: '2026-07-28', batch: 'EWC-B2026-0715', cost_inr: 8600000, recovery_rate: 97.2, hazardous_class: 'R6' },
-  { id: 'EWC-0007', ewaste: 'Server Racks', description: 'Data Center Decom 4MT Mixed Servers HDD Cryptographic Erase', recycler: 'Zeenext Hyd', quantity: 4000, unit: 'kg', process_status: 'Dismantled', lot: 'LOT-EWC-9008', destination: 'Cloud Datacenter Secunderabad', received: '2026-07-27', batch: 'EWC-B2026-0714', cost_inr: 28000000, recovery_rate: 85.0, hazardous_class: 'R4' },
-  { id: 'EWC-0008', ewaste: 'Circuit Boards', description: 'BGA Multi-Layer PCB 0.8MT Gold Fingers IC Chip Recovery', recycler: 'Ecoreco Pune', quantity: 800, unit: 'kg', process_status: 'Precious Recovered', lot: 'LOT-EWC-9037', destination: 'Precious Metal Refinery Mumbai', received: '2026-07-27', batch: 'EWC-B2026-0713', cost_inr: 22000000, recovery_rate: 98.5, hazardous_class: 'R2' },
-  { id: 'EWC-0009', ewaste: 'Smartphones', description: 'Apple Samsung Mixed Lot 3MT Battery Segregated Safe Discharge', recycler: 'Attero Roorkee', quantity: 3000, unit: 'kg', process_status: 'Dismantled', lot: 'LOT-EWC-9039', destination: 'Li Recovery Roorkee', received: '2026-07-26', batch: 'EWC-B2026-0711', cost_inr: 10500000, recovery_rate: 91.0, hazardous_class: 'R5' },
-  { id: 'EWC-0010', ewaste: 'Laptop PCs', description: 'Govt Office E-Waste 6MT CPCB Registered Collection Center', recycler: 'E-Parisaraa Bengaluru', quantity: 6000, unit: 'kg', process_status: 'Awaiting Collection', lot: 'LOT-EWC-9026', destination: 'KSPCB Warehouse Bengaluru', received: '2026-07-26', batch: 'EWC-B2026-0710', cost_inr: 15000000, recovery_rate: 0, hazardous_class: 'R1' },
-  { id: 'EWC-0011', ewaste: 'LED Monitors', description: 'IT Park Clearance 15MT Mixed IT Equipment Asset Tagged', recycler: 'Cerebra Chennai', quantity: 15000, unit: 'kg', process_status: 'Dismantled', lot: 'LOT-EWC-9011', destination: 'DigiLocker Asset TN', received: '2026-07-25', batch: 'EWC-B2026-0708', cost_inr: 24000000, recovery_rate: 86.5, hazardous_class: 'R3' },
-  { id: 'EWC-0012', ewaste: 'PCB Assemblies', description: 'Defence PCB Scrap 0.5MT ITAR Controlled Classified Destruction', recycler: 'Green-o-Tech Noida', quantity: 500, unit: 'kg', process_status: 'Shredded', lot: 'LOT-EWC-9007', destination: 'DRDO Hyderabad', received: '2026-07-25', batch: 'EWC-B2026-0707', cost_inr: 18000000, recovery_rate: 99.1, hazardous_class: 'R2' },
-  { id: 'EWC-0013', ewaste: 'Li-Ion Batteries', description: 'Two-Wheeler EV Battery NCM 3.2MT Collection from Bajaj Chakan', recycler: 'Ecotech Mumbai', quantity: 3200, unit: 'kg', process_status: 'Awaiting Collection', lot: 'LOT-EWC-9030', destination: 'FAME II Collection Pune', received: '2026-07-24', batch: 'EWC-B2026-0705', cost_inr: 26000000, recovery_rate: 0, hazardous_class: 'R5' },
-  { id: 'EWC-0014', ewaste: 'Inverters/UPS', description: 'Solar Power Plant UPS 8MT Acid Neutralization ETP Treatment', recycler: 'Karo Sambhav Delhi', quantity: 8000, unit: 'kg', process_status: 'Hazardous Segregated', lot: 'LOT-EWC-9025', destination: 'Solar E-Waste Hub Jaipur', received: '2026-07-24', batch: 'EWC-B2026-0704', cost_inr: 6200000, recovery_rate: 96.0, hazardous_class: 'R6' },
-  { id: 'EWC-0015', ewaste: 'Server Racks', description: 'Banking Data Center 6MT RBI Compliant Degaussing Cryptographic Erase', recycler: 'Zeenext Hyd', quantity: 6000, unit: 'kg', process_status: 'Dismantled', lot: 'LOT-EWC-9036', destination: 'SBI Data Center Mumbai', received: '2026-07-23', batch: 'EWC-B2026-0702', cost_inr: 38000000, recovery_rate: 82.0, hazardous_class: 'R4' },
-  { id: 'EWC-0016', ewaste: 'Circuit Boards', description: 'Consumer Electronics Mixed PCB 1.2MT Cu Au Ag Urban Mining', recycler: 'Ecoreco Pune', quantity: 1200, unit: 'kg', process_status: 'Precious Recovered', lot: 'LOT-EWC-9024', destination: 'Urban Mine Hub Mumbai', received: '2026-07-23', batch: 'EWC-B2026-0701', cost_inr: 32000000, recovery_rate: 97.8, hazardous_class: 'R2' },
-  { id: 'EWC-0017', ewaste: 'Smartphones', description: 'Telecom Tower Battery Backup 2.8MT LiFePO4 Cells Recovery', recycler: 'Attero Roorkee', quantity: 2800, unit: 'kg', process_status: 'Shredded', lot: 'LOT-EWC-9023', destination: 'Jio Tower Collection Pan-India', received: '2026-07-22', batch: 'EWC-B2026-0629', cost_inr: 9800000, recovery_rate: 93.5, hazardous_class: 'R5' },
-  { id: 'EWC-0018', ewaste: 'Laptop PCs', description: 'ITI Training Center 4MT Mixed IT Assets State Govt Surplus', recycler: 'E-Parisaraa Bengaluru', quantity: 4000, unit: 'kg', process_status: 'Refurbished', lot: 'LOT-EWC-9022', destination: 'State IT Dept Bengaluru', received: '2026-07-22', batch: 'EWC-B2026-0628', cost_inr: 12000000, recovery_rate: 72.0, hazardous_class: 'R4' },
-  { id: 'EWC-0019', ewaste: 'LED Monitors', description: 'Hospital Biomedical LCD 2MT Fluorescent Tube Hg Segregation', recycler: 'Cerebra Chennai', quantity: 2000, unit: 'kg', process_status: 'Hazardous Segregated', lot: 'LOT-EWC-9010', destination: 'BMW Bio-Medical Waste TN', received: '2026-07-21', batch: 'EWC-B2026-0625', cost_inr: 8400000, recovery_rate: 84.0, hazardous_class: 'R6' },
-  { id: 'EWC-0020', ewaste: 'PCB Assemblies', description: 'Smart Meter PCB 1.8MT IS 16430 BIS Certified E-Waste Lot', recycler: 'Green-o-Tech Noida', quantity: 1800, unit: 'kg', process_status: 'Shredded', lot: 'LOT-EWC-9021', destination: 'Smart Meter Hub Noida', received: '2026-07-21', batch: 'EWC-B2026-0624', cost_inr: 14000000, recovery_rate: 95.2, hazardous_class: 'R2' },
-]
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
 
-const genRecords = (start: number) => {
-  const statuses = ['Dismantled', 'Shredded', 'Precious Recovered', 'Refurbished', 'Hazardous Segregated', 'Awaiting Collection']
-  const destinations = ['Kabadiwala Hub Delhi', 'Re-use Marketplace Bengaluru', 'Glass Recycler Vizag', 'Copper Smelter Jharkhand', 'Li Recovery Plant Gujarat', 'Lead Smelter Bhiwandi', 'Cloud Datacenter Hyd', 'Precious Metal Mumbai']
-  return Array.from({ length: 40 }, (_, i) => ({
-    id: `EWC-${String(start + i).padStart(4, '0')}`,
-    ewaste: EWASTE_TYPES[(start + i) % 8],
-    description: `${EWASTE_TYPES[(start + i) % 8]} Lot ${String((start + i) % 99 + 1).padStart(3, '0')}`,
-    recycler: RECYCLERS[(start + i) % 8],
-    quantity: Math.round(200 + Math.random() * 18000),
-    unit: 'kg',
-    process_status: statuses[(start + i) % 6],
-    lot: `LOT-EWC-${String(9021 + start + i)}`,
-    destination: destinations[(start + i) % 8],
-    received: `2026-07-${String(20 - Math.floor((start + i) / 10)).padStart(2, '0')}`,
-    batch: `EWC-B2026-${String(624 - Math.floor((start + i) / 3)).padStart(4, '0')}`,
-    cost_inr: Math.round(2000000 + Math.random() * 45000000),
-    recovery_rate: statuses[(start + i) % 6] === 'Awaiting Collection' ? 0 : Math.round((80 + Math.random() * 20) * 10) / 10,
-    hazardous_class: ['R1', 'R2', 'R3', 'R4', 'R5', 'R6'][i % 6],
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-green-100 text-green-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-green-200 rounded-full overflow-hidden"><div className="h-full bg-green-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#dcfce7" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
+}
+
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
+
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
+)
+
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `EWC-${String(offset + i + 1).padStart(4, '0')}`,
+    facility: ARTISANS[(offset + i) % ARTISANS.length], material: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 40, ((offset + i) * 19) % 40) + 1,
+    cost: ri(2500, 85000, ((offset + i) * 21307) % 82500) + 2500,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-const allEwaste = [...ewasteRecords, ...genRecords(21), ...genRecords(61)]
-
-function ri(min: number, max: number, value: number) {
-  return Math.max(min, Math.min(max, value))
-}
-
-const filterGroups = [
-  {
-    key: 'ewaste',
-    label: 'E-Waste Type',
-    options: EWASTE_TYPES.map(t => ({ label: t, value: t, count: allEwaste.filter(r => r.ewaste === t).length })),
-  },
-  {
-    key: 'recycler',
-    label: 'Recycler',
-    options: RECYCLERS.map(r => ({ label: r, value: r, count: allEwaste.filter(rec => rec.recycler === r).length })),
-  },
-  {
-    key: 'process_status',
-    label: 'Process Status',
-    options: PROCESS_STATUS.map(s => ({ label: s, value: s, count: allEwaste.filter(r => r.process_status === s).length })),
-  },
+const ewasterecords = [
+  { id: 'EWC-0001', facility: 'Attero Recycling Roorkee', material: 'PCB Circuit Boards', status: 'CPCB E-Waste Certified', qty: 30, cost: 82000, date: '2024-01-15' },
+  { id: 'EWC-0002', facility: 'E-Parisaraa Bengaluru', material: 'Li-ion Battery Packs', status: 'Hazardous Material Safe', qty: 20, cost: 75000, date: '2024-01-28' },
+  { id: 'EWC-0003', facility: 'Cerebra Green Chennai', material: 'CRT Monitor Glass', status: 'Precious Metal Recovery OK', qty: 35, cost: 42000, date: '2024-02-10' },
+  { id: 'EWC-0004', facility: 'E-Waste Solutions Mumbai', material: 'Aluminium Heat Sinks', status: 'Shredding Grade Verified', qty: 25, cost: 38000, date: '2024-02-22' },
+  { id: 'EWC-0005', facility: 'Karo Sambhav Delhi', material: 'Copper Transformer Coils', status: 'Warehouse Segregation Check', qty: 15, cost: 85000, date: '2024-03-08' },
+  { id: 'EWC-0006', facility: 'GreenTec Hyderabad', material: 'Rare Earth Magnets', status: 'Refrigerator Cold Chain', qty: 10, cost: 80000, date: '2024-03-20' },
+  { id: 'EWC-0007', facility: 'Namo E-Waste Pune', material: 'Gold-plated Connectors', status: 'CPCB E-Waste Certified', qty: 40, cost: 28000, date: '2024-04-03' },
+  { id: 'EWC-0008', facility: 'Zenviro Tech Jaipur', material: 'Plastic Casings ABS', status: 'Hazardous Material Safe', qty: 30, cost: 15000, date: '2024-04-16' },
+  { id: 'EWC-0009', facility: 'Attero Recycling Roorkee', material: 'PCB Circuit Boards', status: 'Precious Metal Recovery OK', qty: 20, cost: 78000, date: '2024-04-28' },
+  { id: 'EWC-0010', facility: 'E-Parisaraa Bengaluru', material: 'Li-ion Battery Packs', status: 'Shredding Grade Verified', qty: 35, cost: 68000, date: '2024-05-10' },
+  { id: 'EWC-0011', facility: 'Cerebra Green Chennai', material: 'CRT Monitor Glass', status: 'Warehouse Segregation Check', qty: 25, cost: 40000, date: '2024-05-23' },
+  { id: 'EWC-0012', facility: 'E-Waste Solutions Mumbai', material: 'Aluminium Heat Sinks', status: 'Refrigerator Cold Chain', qty: 15, cost: 82000, date: '2024-06-05' },
+  { id: 'EWC-0013', facility: 'Karo Sambhav Delhi', material: 'Copper Transformer Coils', status: 'CPCB E-Waste Certified', qty: 30, cost: 72000, date: '2024-06-18' },
+  { id: 'EWC-0014', facility: 'GreenTec Hyderabad', material: 'Rare Earth Magnets', status: 'Hazardous Material Safe', qty: 10, cost: 85000, date: '2024-07-01' },
+  { id: 'EWC-0015', facility: 'Namo E-Waste Pune', material: 'Gold-plated Connectors', status: 'Precious Metal Recovery OK', qty: 40, cost: 25000, date: '2024-07-14' },
+  { id: 'EWC-0016', facility: 'Zenviro Tech Jaipur', material: 'Plastic Casings ABS', status: 'Shredding Grade Verified', qty: 20, cost: 48000, date: '2024-07-26' },
+  { id: 'EWC-0017', facility: 'Attero Recycling Roorkee', material: 'PCB Circuit Boards', status: 'Warehouse Segregation Check', qty: 30, cost: 80000, date: '2024-08-08' },
+  { id: 'EWC-0018', facility: 'E-Parisaraa Bengaluru', material: 'Li-ion Battery Packs', status: 'Refrigerator Cold Chain', qty: 35, cost: 65000, date: '2024-08-20' },
+  { id: 'EWC-0019', facility: 'Cerebra Green Chennai', material: 'CRT Monitor Glass', status: 'CPCB E-Waste Certified', qty: 25, cost: 44000, date: '2024-09-02' },
+  { id: 'EWC-0020', facility: 'E-Waste Solutions Mumbai', material: 'Aluminium Heat Sinks', status: 'Hazardous Material Safe', qty: 15, cost: 82000, date: '2024-09-14' },
 ]
-
-function EwasteBadge({ ewaste }: { ewaste: string }) {
-  const colors: Record<string, string> = { Smartphones: 'bg-slate-100 text-slate-800', 'Laptop PCs': 'bg-blue-100 text-blue-800', 'LED Monitors': 'bg-purple-100 text-purple-800', 'PCB Assemblies': 'bg-green-100 text-green-800', 'Li-Ion Batteries': 'bg-red-100 text-red-800', 'Inverters/UPS': 'bg-amber-100 text-amber-800', 'Server Racks': 'bg-cyan-100 text-cyan-800', 'Circuit Boards': 'bg-emerald-100 text-emerald-800' }
-  return <span className={`ewc-ewaste-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[ewaste] || 'bg-gray-100 text-gray-800'}`}>{ewaste}</span>
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const colors: Record<string, string> = { Dismantled: 'bg-blue-100 text-blue-800', Shredded: 'bg-green-100 text-green-800', 'Precious Recovered': 'bg-yellow-100 text-yellow-800', Refurbished: 'bg-teal-100 text-teal-800', 'Hazardous Segregated': 'bg-red-100 text-red-800', 'Awaiting Collection': 'bg-gray-200 text-gray-700' }
-  return <span className={`ewc-status-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-700'}`}>{status}</span>
-}
-
-function CostBar({ cost }: { cost: number }) {
-  const pct = ri(0, 100, (cost / 50000000) * 100)
-  const color = cost >= 35000000 ? 'bg-green-600' : cost >= 15000000 ? 'bg-green-500' : cost >= 5000000 ? 'bg-green-400' : 'bg-green-300'
-  return <div className="ewc-cost-bar flex items-center gap-2"><div className="h-2 w-20 rounded-full bg-gray-200"><div className={`ewc-cost-bar-fill h-2 rounded-full ${color} transition-all`} style={{ width: `${pct}%` }} /></div><span className="text-xs text-gray-500">{'₹' + (cost / 10000000).toFixed(1) + 'Cr'}</span></div>
-}
-
-function HealthRing({ value, label, color }: { value: number; label: string; color: string }) {
-  const r = 28, cx = 35, cy = 35, sw = 5
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
-  return <div className="ewc-health-ring flex flex-col items-center"><svg width={70} height={70} className="-rotate-90"><circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={circ} strokeDashoffset={offset} className="ewc-ring-path" strokeLinecap="round" /></svg><span className="ewc-ring-value mt-1 text-sm font-bold" style={{ color }}>{value}%</span><span className="text-xs text-gray-500">{label}</span></div>
-}
-
-function KpiTile({ title, value, sub }: { title: string; value: string; sub: string }) {
-  return <Card className="ewc-kpi-card"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="ewc-kpi-value mt-1 text-2xl font-bold">{value}</p><p className="text-xs text-gray-400 mt-0.5">{sub}</p></CardContent></Card>
-}
-
-function ValueTile({ title, value, trend }: { title: string; value: string; trend: string }) {
-  const up = trend.startsWith('+')
-  return <Card className="ewc-value-tile"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="mt-1 text-xl font-bold">{value}</p><p className={`text-xs mt-0.5 ${up ? 'text-green-600' : 'text-red-500'}`}>{trend}</p></CardContent></Card>
-}
 
 export default function EwasteCircularEconomyView() {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [tab, setTab] = useState('dashboard')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
 
-  const toggleFilter = (key: string, value: string) => {
-    setActiveFilters(prev => {
-      const curr = prev[key] || []
-      const next = curr.includes(value) ? curr.filter(v => v !== value) : [...curr, value]
-      return next.length > 0 ? { ...prev, [key]: next } : Object.fromEntries(Object.entries(prev).filter(([k]) => k !== key))
-    })
-  }
+  const allRecords = [...ewasterecords, ...genRecords(21), ...genRecords(41)]
 
-  const filtered = allEwaste.filter(e => {
-    const q = searchQuery.toLowerCase()
-    if (q && !e.id.toLowerCase().includes(q) && !e.ewaste.toLowerCase().includes(q) && !e.description.toLowerCase().includes(q) && !e.recycler.toLowerCase().includes(q) && !e.destination.toLowerCase().includes(q)) return false
-    return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(e[key as keyof typeof e] as string))
-  })
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.material.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-  const totalCost = allEwaste.reduce((s, e) => s + e.cost_inr, 0)
-  const recovered = allEwaste.filter(e => e.process_status === 'Precious Recovered').length
-  const dismantled = allEwaste.filter(e => e.process_status === 'Dismantled').length
-
-  const monthlyData = [
-    { month: 'Jan', tons: 45, value_cr: 28, recovery: 92 },
-    { month: 'Feb', tons: 62, value_cr: 38, recovery: 94 },
-    { month: 'Mar', tons: 85, value_cr: 55, recovery: 95 },
-    { month: 'Apr', tons: 38, value_cr: 22, recovery: 91 },
-    { month: 'May', tons: 72, value_cr: 48, recovery: 93 },
-    { month: 'Jun', tons: 28, value_cr: 15, recovery: 90 },
-    { month: 'Jul', tons: 92, value_cr: 62, recovery: 96 },
+  const filterGroups = [
+    { key: 'material', label: 'Material', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.material === p).length })) },
+    { key: 'facility', label: 'Facility', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.facility === p).length })) },
   ]
-  const ewasteData = EWASTE_TYPES.map(t => ({ ewaste: t, count: allEwaste.filter(r => r.ewaste === t).length }))
-  const recyclerData = RECYCLERS.map(r => ({ recycler: r, count: allEwaste.filter(rec => rec.recycler === r).length }))
 
-  const tabs = [
-    { value: 'dashboard', label: 'Dashboard' },
-    { value: 'collection', label: 'Collection' },
-    { value: 'analytics', label: 'Analytics' },
-    { value: 'insights', label: 'Insights' },
-  ]
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const facilityChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 1).join(' '), volume: allRecords.filter(r => r.facility === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
-    <div className="ewc-container space-y-4">
-      <PageHeader title="E-Waste Circular Economy" description="End-of-life electronics reverse logistics with CPCB E-Waste (Management) Rules 2022 compliance, EPR authorization tracking, extended producer responsibility fulfillment, and urban mining precious metal recovery across India's 312 authorized e-waste recyclers" />
-      <ModuleBreadcrumb items={[{ label: 'Sustainability' }, { label: 'E-Waste Circular' }]} />
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="ewc-tabs-list">
-          {tabs.map(t => <TabsTrigger key={t.value} value={t.value} className="ewc-tab-trigger">{t.label}</TabsTrigger>)}
+    <div className="ewc-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'E-Waste Circular' }]} />
+      <PageHeader title="E-Waste Circular Economy Logistics" description="Indian e-waste circular economy supply chain with CPCB e-waste certification hazardous material handling precious metal recovery shredding grade verification warehouse segregation and Refrigerator cold chain for lithium battery and rare earth magnet storage across eight authorised recycling facilities in Roorkee Bengaluru Chennai Mumbai Delhi Hyderabad Pune and Jaipur" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-green-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
-        <TabsContent value="dashboard" className="ewc-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <KpiTile title="Total Lots" value={allEwaste.length.toString()} sub="E-waste consignments" />
-            <KpiTile title="Total Value" value={`₹${(totalCost / 10000000).toFixed(0)}Cr`} sub="Processing value" />
-            <KpiTile title="Precious Recovered" value={recovered.toString()} sub={`${((recovered / allEwaste.length) * 100).toFixed(0)}% Au/Ag/Cu extracted`} />
-            <KpiTile title="Dismantled" value={dismantled.toString()} sub="Processed this month" />
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Material Types" value={PRODUCTS.length} />
+            <KpiTile label="Facilities" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-          <div className="grid gap-4 grid-cols-3 md:grid-cols-6">
-            <HealthRing value={95} label="CPCB Compliance" color="#15803d" />
-            <HealthRing value={93} label="Au Recovery" color="#166534" />
-            <HealthRing value={97} label="Cu Recovery" color="#16a34a" />
-            <HealthRing value={89} label="EPR Targets" color="#14532d" />
-            <HealthRing value={96} label="Li Recovery" color="#052e16" />
-            <HealthRing value={92} label="Refurbish Rate" color="#4ade80" />
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="CPCB" value={95} />
+            <HealthRing label="Hazard" value={90} />
+            <HealthRing label="Recovery" value={88} />
+            <HealthRing label="Shred" value={92} />
+            <HealthRing label="Segregate" value={87} />
+            <HealthRing label="Cold" value={84} />
           </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="ewc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Tonnage & Recovery Rate %</CardTitle></CardHeader><CardContent><LineChart data={monthlyData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Line type="monotone" dataKey="tons" stroke="#15803d" strokeWidth={2} /><Line type="monotone" dataKey="recovery" stroke="#166534" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
-            <Card className="ewc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Collection by E-Waste Type</CardTitle></CardHeader><CardContent><BarChart data={ewasteData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="ewaste" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="count" fill="#15803d" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="ewc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Recycler Distribution</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={recyclerData} dataKey="count" nameKey="recycler" cx="50%" cy="50%" outerRadius={70} label={({ recycler, count }) => `${count}`}>{recyclerData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="Annual E-Waste" value="3.2 MTPA" />
+            <ValueTile label="Recovery Rate" value="32%" />
+            <ValueTile label="Gold Recovery" value="₹180 Cr" />
+            <ValueTile label="Formal Recyclers" value="468 CPCB" />
           </div>
         </TabsContent>
-
-        <TabsContent value="collection" className="ewc-tab-content space-y-4 mt-4">
-          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={allEwaste.length} filteredCount={filtered.length} onRefresh={() => {}} placeholder="Search by ID, e-waste type, recycler, destination, or lot..." />
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="ewc-table w-full text-sm">
-              <thead><tr className="ewc-table-header bg-gray-50"><th className="px-3 py-2 text-left font-medium">ID</th><th className="px-3 py-2 text-left font-medium">E-Waste</th><th className="px-3 py-2 text-left font-medium">Status</th><th className="px-3 py-2 text-left font-medium">Weight</th><th className="px-3 py-2 text-left font-medium">Value</th><th className="px-3 py-2 text-left font-medium">Recycler</th><th className="px-3 py-2 text-left font-medium">Destination</th><th className="px-3 py-2 text-left font-medium">Lot</th><th className="px-3 py-2 text-left font-medium">Rec%</th></tr></thead>
-              <tbody>{filtered.slice(0, 20).map(e => (
-                <tr key={e.id} className="ewc-table-row border-t hover:bg-gray-50 transition-colors">
-                  <td className="px-3 py-2 font-mono text-xs">{e.id}</td>
-                  <td className="px-3 py-2"><EwasteBadge ewaste={e.ewaste} /></td>
-                  <td className="px-3 py-2"><StatusBadge status={e.process_status} /></td>
-                  <td className="px-3 py-2 text-xs">{(e.quantity / 1000).toFixed(1)}T {e.unit}</td>
-                  <td className="px-3 py-2"><CostBar cost={e.cost_inr} /></td>
-                  <td className="px-3 py-2 text-xs">{e.recycler}</td>
-                  <td className="px-3 py-2 text-xs">{e.destination}</td>
-                  <td className="px-3 py-2 text-xs font-mono">{e.lot}</td>
-                  <td className="px-3 py-2 text-xs">{e.recovery_rate > 0 ? e.recovery_rate + '%' : 'N/A'}</td>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search e-waste circular shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-green-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Material</th>
+                  <th className="p-3 text-left font-medium">Facility</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
                 </tr>
-              ))}</tbody>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-green-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.material} /></td>
+                    <td className="p-3">{record.facility}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['kg', 'units', 'sets', 'pcs'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </TabsContent>
-
-        <TabsContent value="analytics" className="ewc-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <ValueTile title="Avg Recovery Rate" value="93.4%" trend="+1.8% improved" />
-            <ValueTile title="Urban Mining Value" value="₹12.5Cr" trend="+22.5% vs last year" />
-            <ValueTile title="EPR Fulfillment" value="89.2%" trend="+6.4% on target" />
-            <ValueTile title="Refurbish Revenue" value="₹4.8Cr" trend="+15.2% growing" />
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Facility Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={facilityChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {facilityChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="ewc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Value by E-Waste Category</CardTitle></CardHeader><CardContent><BarChart data={EWASTE_TYPES.map(t => ({ ewaste: t, total: allEwaste.filter(r => r.ewaste === t).reduce((s, r) => s + r.cost_inr, 0) / 10000000 }))} width={400} height={250}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="ewaste" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="total" fill="#166534" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="ewc-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Process Status Breakdown</CardTitle></CardHeader><CardContent><PieChart width={400} height={250}><Pie data={PROCESS_STATUS.map(s => ({ status: s, count: allEwaste.filter(e => e.process_status === s).length }))} dataKey="count" nameKey="status" cx="50%" cy="50%" outerRadius={80} label>{PROCESS_STATUS.map((_, i) => <Cell key={i} fill={['#3b82f6','#22c55e','#eab308','#14b8a6','#ef4444','#9ca3af'][i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="ewc-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="ewc-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">CPCB E-Waste Management Rules 2022 Digital Tracking</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Central Pollution Control Board (CPCB) E-Waste (Management) Rules 2022 compliance tracking across 312 authorized dismantlers and recyclers in 28 states. Automated Extended Producer Responsibility (EPR) portal integration for 1,200+ producers meeting annual collection targets under Schedule IV. Real-time hazardous waste manifest tracking (Form 4) from collection center to recycler ensuring 100% chain-of-custody documentation. Integration with SPCB/PCC digital E-waste authorization renewal system with 180-day advance compliance alerts. Online EPR certificate generation and annual return filing (Form 3) for all PRO (Producer Responsibility Organizations) across India.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-green-800">Critical</span><span className="text-gray-400">Live</span></div></CardContent></Card>
-            <Card className="ewc-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Urban Mining Precious Metal Recovery Analytics</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>AI-powered urban mining analytics tracking gold, silver, copper, palladium, and rare earth recovery from 8,500+ MT of e-waste processed annually across India. Real-time hydrometallurgical and pyrometallurgical process optimization achieving 99.2% copper recovery from PCB assemblies and 94.8% gold dissolution from BGA chips. Integration with London Bullion Market Association (LBMA) pricing feed for real-time recovered precious metal valuation. Blockchain-anchored material balance sheets for each processing batch ensuring transparent audit trail for customs and excise compliance. Predictive feedstock quality assessment using XRF spectrometer data for optimal smelter feed blending.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-emerald-800">Operational</span><span className="text-gray-400">Q3 2026</span></div></CardContent></Card>
-            <Card className="ewc-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Li-Ion Battery EV Waste Circular Economy</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>FAME II and PM E-DRIVE scheme integration tracking 48,000+ metric tonnes of EV battery waste from 2,200+ collection points across India. Real-time Li-Ion battery health assessment using OCV voltage and internal resistance measurements for 2nd life vs recycling routing decisions. Automated NMC/LFP chemistry identification and cobalt/lithium/nickel recovery tracking for 8 authorized battery recyclers under Battery Waste Management Rules 2022. Integration with vehicle scrappage facility (RSF) network for mandatory EV battery pre-dismantle extraction under Central Motor Vehicles Rules. AI-powered battery degradation prediction model using BMS telemetry data enabling proactive collection scheduling before catastrophic cell failure.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-teal-100 px-2 py-0.5 text-teal-800">Strategic</span><span className="text-gray-400">FY2027</span></div></CardContent></Card>
-            <Card className="ewc-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">AI E-Waste Sorting & Robotic Dismantling</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Computer vision-based automated e-waste sorting system classifying 42 device categories with 98.6% accuracy at 120 items per minute throughput. Robotic dismantling cell with 6-axis robotic arm handling hazardous CRT and Li-Ion battery extraction reducing worker exposure to mercury and lead fumes by 100%. Integration with IoT-enabled smart bins across 4,500+ bulk consumer and corporate collection points with fill-level monitoring and automated pickup scheduling. Digital Material Passport for each collected device tracking composition, weight, and recovery potential through the entire circular value chain. AI-driven demand-supply matching between collection centers and recyclers optimizing logistics costs by 28% and reducing average transit time by 35%.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-lime-100 px-2 py-0.5 text-lime-800">Innovation</span><span className="text-gray-400">Pilot</span></div></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>India E-Waste Circular Economy — 3.2 Million Tonnes Annual Generation</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Indian e-waste circular economy represents one of the fastest growing and most critically important waste management and resource recovery ecosystems in India generating approximately three point two million metric tonnes of electronic waste annually from discarded computers mobile phones televisions household appliances industrial electronics and IT equipment with the e-waste generation rate growing at fifteen percent per annum driven by increasing electronic device penetration shortening product replacement cycles and the rapid obsolescence of consumer electronic products across India where the formal e-waste recycling sector currently processes only approximately thirty-two percent of the total e-waste generated with the remaining sixty-eight percent handled by the informal sector through unregulated dismantling and recycling operations that pose significant environmental and health hazards due to improper handling of hazardous materials including lead mercury cadmium chromium brominated flame retardants and persistent organic pollutants contained in electronic waste where the formal e-waste recycling sector comprises four hundred sixty-eight CPCB-authorised e-waste recycling facilities operating across India providing environmentally compliant collection transportation dismantling shredding refining and disposal services for all categories of electronic waste under the E-Waste Management Rules twenty-two twenty-two administered by the Central Pollution Control Board requiring authorised facilities to maintain documented chain of custody environmental clearance certificates hazardous waste authorisation and extended producer responsibility compliance for all electronic equipment brands operating in India where the e-waste circular economy recovers significant quantities of precious metals including gold silver platinum palladium and rare earth elements from electronic waste generating approximately INR eighteen hundred crore in annual precious metal recovery value while diverting hazardous electronic waste from landfill disposal and informal processing that causes environmental contamination and public health risks.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>CPCB Certification & Hazardous Material Handling Standards</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Central Pollution Control Board certification and hazardous material handling standards for Indian e-waste recycling establish the regulatory framework ensuring all authorised e-waste facilities comply with environmental protection and occupational safety requirements where CPCB e-waste certification requires facilities to obtain Environmental Clearance under the Environmental Protection Act nineteen eighty-six and Hazardous Waste Authorisation under the Hazardous and Other Wastes Management Rules twenty-two twenty-two confirming the facility has implemented adequate pollution control systems including effluent treatment plant for liquid waste management air pollution control equipment including HEPA filtration and activated carbon adsorption for emission control and hazardous waste storage facilities meeting the specified containment liner and leak detection requirements where the hazardous material handling standard requires trained and certified personnel using appropriate personal protective equipment including chemical-resistant gloves safety goggles respiratory protection and anti-static clothing when handling hazardous electronic components including lead-acid batteries mercury-containing LCD panels cadmium-plated connectors and brominated flame retardant PCB assemblies where the hazardous material safety test verifies that all e-waste shipments are properly classified labelled and documented according to the Basel Convention hazardous waste classification system confirming each waste stream category including hazardous and non-hazardous fractions is correctly identified segregated and stored in designated containment areas with appropriate warning signage spill containment systems and emergency response equipment ensuring the facility maintains complete compliance with the hazardous waste handling requirements throughout the collection dismantling shredding and refining process sequence where non-compliance with hazardous material handling standards can result in environmental contamination of soil and groundwater resources from lead leaching mercury vapour release and brominated flame retardant dispersion causing long-term ecological damage and public health impacts in communities surrounding the recycling facility.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Precious Metal Recovery & Shredding Grade Verification</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The precious metal recovery and shredding grade verification processes for Indian e-waste recycling establish the technical framework for maximising resource recovery from electronic waste while maintaining consistent output material quality for downstream refining and manufacturing applications where the precious metal recovery process extracts gold silver platinum palladium and copper from printed circuit boards through a multi-stage hydrometallurgical refining sequence including shredding to less than two millimetre particle size acid leaching in concentrated nitric acid and aqua regia solution solvent extraction using selective organic extractants and electrowinning or precipitation to recover purified metal products confirming gold recovery rate above ninety-five percent and silver recovery rate above ninety-eight percent from the PCB feed material where the precious metal recovery test uses atomic absorption spectroscopy to verify the purity of recovered gold confirming minimum purity of ninety-nine point five percent meeting the London Bullion Market Association good delivery standard for recovered gold suitable for resale to jewellery and electronics manufacturers where the shredding grade verification test evaluates the particle size distribution and material composition of the shredded e-waste output using mechanical sieving analysis confirming shredded particle size between one and five millimetres for optimal downstream separation efficiency and material liberation ensuring the shredding process produces consistent output quality with metal content between forty and sixty percent by weight plastic and rubber content between twenty and thirty percent and glass and ceramic content between ten and twenty percent enabling effective downstream density separation magnetic separation eddy current separation and optical sorting to recover individual material streams including copper aluminium steel and precious metal concentrates for refining and recycled material pellets for manufacturing input where the overall material recovery rate for the formal Indian e-waste recycling sector averages thirty-two percent with significant opportunity for improvement through advanced automated sorting and refining technology adoption.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Refrigerator Cold Chain & Lithium Battery Safety Storage</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Refrigerator cold chain storage and lithium battery safety storage infrastructure for Indian e-waste logistics represents the critical temperature-controlled and fire safety framework required for hazardous electronic waste components including lithium-ion battery packs requiring climate-controlled storage at fifteen to twenty-five degrees Celsius in dedicated fire-rated battery storage facilities equipped with thermal runaway detection and suppression systems preventing catastrophic battery fires that have caused significant property damage and environmental contamination at e-waste collection and recycling facilities worldwide where the Refrigerator cold chain storage maintains lithium-ion battery packs within the specified temperature and humidity parameters preventing thermal degradation electrolyte leakage and spontaneous combustion risk that increases significantly when lithium batteries are stored at elevated temperatures above thirty degrees Celsius or exposed to direct sunlight moisture ingress or physical damage during transportation and storage where the fire safety storage system requires dedicated battery storage rooms constructed with two-hour fire-rated walls and ceilings automatic sprinkler suppression systems thermal monitoring sensors with alarm thresholds set at fifty degrees Celsius providing early warning of thermal runaway onset and fire suppression equipment including Class D dry powder extinguishers specifically rated for lithium metal fires and automatic fire suppression systems activated by thermal sensor detection where the rare earth magnet storage requires temperature-controlled environment below thirty degrees Celsius preventing demagnetisation and oxidation of neodymium iron boron magnets recovered from hard disk drives and electric motor assemblies where the Refrigerator cold chain logistics network for hazardous e-waste components operates through specialised temperature-controlled transport vehicles equipped with GPS tracking real-time temperature monitoring fire detection systems and electronic manifest documentation ensuring complete chain of custody from collection point through authorised transport to the authorised e-waste recycling facility maintaining environmental and safety compliance throughout the hazardous material logistics chain.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
     </div>
   )
 }
+
+
+

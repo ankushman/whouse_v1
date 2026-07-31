@@ -354,3 +354,4 @@ export { default as BagruBlockPrintRajasthanLogisticsView } from './bagru-block-
 export { default as KalamkariPenArtAndhraLogisticsView } from './kalamkari-pen-art-andhra-logistics-view'
 export { default as DabuPrintRajasthanLogisticsView } from './dabu-print-rajasthan-logistics-view'
 export { default as RoganGujaratLogisticsView } from './rogan-gujarat-logistics-view'
+export { default as SanjhiPaperCuttingUpLogisticsView } from './sanjhi-paper-cutting-up-logistics-view'

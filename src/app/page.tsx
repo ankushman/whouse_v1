@@ -363,6 +363,7 @@ import BagruBlockPrintRajasthanLogisticsView from "@/components/modules/bagru-bl
 import KalamkariPenArtAndhraLogisticsView from "@/components/modules/kalamkari-pen-art-andhra-logistics-view"
 import DabuPrintRajasthanLogisticsView from "@/components/modules/dabu-print-rajasthan-logistics-view"
 import RoganGujaratLogisticsView from "@/components/modules/rogan-gujarat-logistics-view"
+import SanjhiPaperCuttingUpLogisticsView from "@/components/modules/sanjhi-paper-cutting-up-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -725,6 +726,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "kalamkari-pen-art-andhra-logistics": KalamkariPenArtAndhraLogisticsView,
   "dabu-print-rajasthan-logistics": DabuPrintRajasthanLogisticsView,
   "rogan-gujarat-logistics": RoganGujaratLogisticsView,
+  "sanjhi-paper-cutting-up-logistics": SanjhiPaperCuttingUpLogisticsView,
 }
 
 
