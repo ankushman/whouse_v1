@@ -362,3 +362,4 @@ export { default as GondArtMadhyaPradeshLogisticsView } from './gond-art-madhya-
 export { default as MadhubaniBiharLogisticsView } from './madhubani-bihar-logistics-view'
 export { default as KalamkariAndhraLogisticsView } from './kalamkari-andhra-logistics-view'
 export { default as PatolaGujaratLogisticsView } from './patola-gujarat-logistics-view'
+export { default as KasutiKarnatakaLogisticsView } from './kasuti-karnataka-logistics-view'

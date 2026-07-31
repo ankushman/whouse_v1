@@ -367,6 +367,7 @@ export const navItems: NavItem[] = [
   { id: 'madhubani-bihar-logistics', label: 'Madhubani Bihar', icon: 'Palette', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kalamkari-andhra-logistics', label: 'Kalamkari AP', icon: 'PenTool', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'patola-gujarat-logistics', label: 'Patola Gujarat', icon: 'Gem', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'kasuti-karnataka-logistics', label: 'Kasuti Karnataka', icon: 'Scissors', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

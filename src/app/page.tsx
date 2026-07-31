@@ -371,6 +371,7 @@ import GondArtMadhyaPradeshLogisticsView from "@/components/modules/gond-art-mad
 import MadhubaniBiharLogisticsView from "@/components/modules/madhubani-bihar-logistics-view"
 import KalamkariAndhraLogisticsView from "@/components/modules/kalamkari-andhra-logistics-view"
 import PatolaGujaratLogisticsView from "@/components/modules/patola-gujarat-logistics-view"
+import KasutiKarnatakaLogisticsView from "@/components/modules/kasuti-karnataka-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -741,6 +742,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "madhubani-bihar-logistics": MadhubaniBiharLogisticsView,
   "kalamkari-andhra-logistics": KalamkariAndhraLogisticsView,
   "patola-gujarat-logistics": PatolaGujaratLogisticsView,
+  "kasuti-karnataka-logistics": KasutiKarnatakaLogisticsView,
 }
 
 

@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+"""Generate port-operations-hub-view.tsx overwrite at exactly 253 lines."""
+import textwrap
+
+content = textwrap.dedent('''\
 import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -248,6 +253,17 @@ export default function PortOperationsHubView() {
     </div>
   )
 }
+''')
 
+# Pad to exactly 253 lines
+text = content.rstrip('\n')
+lines = text.split('\n')
+while len(lines) < 253:
+    lines.append('')
+text = '\n'.join(lines) + '\n'
+assert text.count('\n') == 253, f"Expected 253 newlines, got {text.count('\n')}"
+print(f"Generated {len(lines)} lines")
 
-
+with open('/home/z/my-project/src/components/modules/port-operations-hub-view.tsx', 'w') as f:
+    f.write(text)
+print("Written port-operations-hub-view.tsx")
