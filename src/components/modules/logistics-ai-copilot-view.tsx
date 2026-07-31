@@ -1,130 +1,253 @@
-"use client"
-import { useState, useMemo } from "react"
-import { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { BrainCircuit, Sparkles, MessageSquare, BarChart3, TrendingUp, TrendingDown, Lightbulb, Target, Zap, CheckCircle2, Clock, AlertTriangle, Search, Eye, FileText, ArrowRight, Star, ThumbsUp, ThumbsDown, Bot } from "lucide-react"
-import { PageHeader } from "@/components/shared/page-header"
-import { SearchFilterToolbar } from "@/components/shared/search-filter-toolbar"
-import { ModuleBreadcrumb } from "@/components/shared/module-breadcrumb"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
+import React, { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const AI_MODULES = ["demand_forecast", "route_optimizer", "inventory_agent", "risk_analyzer", "cost_predictor", "supplier_eval", "shipment_tracker", "warehouse_planner"] as const
-const AI_EMOJI: Record<string, string> = { demand_forecast: "\U0001f4ca", route_optimizer: "\U0001f5fa", inventory_agent: "\U0001f4e6", risk_analyzer: "\u26a0\ufe0f", cost_predictor: "\U0001f4b0", supplier_eval: "\U0001f91d", shipment_tracker: "\U0001f4e8", warehouse_planner: "\U0001f3ed" }
-const SUGGESTION_TYPES = ["cost_saving", "efficiency", "risk_mitigation", "automation", "capacity", "quality", "sustainability", "customer_exp"] as const
-const SUGG_EMOJI: Record<string, string> = { cost_saving: "\U0001f4b0", efficiency: "\u26a1", risk_mitigation: "\U0001f6e1", automation: "\U0001f916", capacity: "\U0001f4e6", quality: "\u2b50", sustainability: "\U0001f333", customer_exp: "\u2764\ufe0f" }
-const INSIGHT_STATUS = ["new", "reviewed", "implemented", "dismissed", "expired"] as const
-const CITIES = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", "Ahmedabad"] as const
-const MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
-const TH = { pri: "#8b5cf6", sec: "#f59e0b", ok: "#059669", warn: "#d97706", err: "#dc2626" }
-const PC = ["#8b5cf6", "#f59e0b", "#059669", "#dc2626", "#3b82f6", "#06b6d4", "#ec4899", "#14b8a6"]
+const COLORS = ['#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe', '#5b21b6', '#4c1d95', '#f5f3ff']
+const PRODUCTS = ['Demand Forecast Model', 'Route Optimisation Engine', 'Inventory Replenishment AI', 'Warehouse Slotting Optimiser', 'Carrier Selection Agent', 'Anomaly Detection Module', 'Predictive Maintenance AI', 'Natural Language Query']
+const MODELS = ['GPT-4o Warehouse', 'Claude Logistics', 'Gemini Supply Chain', 'Llama 3 Ops Model', 'Mistral Warehouse AI', 'Mixtral Inventory', 'Phi-3 Mini Agent', 'DeepSeek Planner']
+const STATUSES = ['Model Accuracy Verified', 'Hallucination Check Pass', 'Latency SLA Met', 'Data Privacy Audit OK', 'Integration Test Green', 'Production Deploy Approved']
 
-function seededRandom(seed: number): number { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x) }
-function ri(min: number, max: number, seed: number): number { return Math.floor(seededRandom(seed) * (max - min + 1)) + min }
-function pick<T>(arr: readonly T[], seed: number): T { return arr[Math.floor(seededRandom(seed) * arr.length)] }
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-function AiModuleBadge({ module }: { module: string }) {
-  const cols: Record<string, string> = { demand_forecast: "bg-violet-100 text-violet-700 dark:bg-violet-900/30", route_optimizer: "bg-blue-100 text-blue-700 dark:bg-blue-900/30", inventory_agent: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30", risk_analyzer: "bg-red-100 text-red-700 dark:bg-red-900/30", cost_predictor: "bg-amber-100 text-amber-700 dark:bg-amber-900/30", supplier_eval: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30", shipment_tracker: "bg-pink-100 text-pink-700 dark:bg-pink-900/30", warehouse_planner: "bg-orange-100 text-orange-700 dark:bg-orange-900/30" }
-  return <span className={"aic-module-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[module] || "bg-gray-100 text-gray-700")}>{AI_EMOJI[module] || "\u2022"} {module.replace(/_/g, " ")}</span>
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
+
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-violet-100 text-violet-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-violet-200 rounded-full overflow-hidden"><div className="h-full bg-violet-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#f5f3ff" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
 }
 
-function SuggTypeBadge({ type }: { type: string }) { return <span className="aic-sugg-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30">{SUGG_EMOJI[type] || "\u2022"} {type.replace(/_/g, " ")}</span> }
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
 
-function InsightStatusBadge({ status }: { status: string }) {
-  const cols: Record<string, string> = { new: "aic-new bg-blue-100 text-blue-700 dark:bg-blue-900/30 shadow-[0_0_6px_rgba(59,130,246,0.3)]", reviewed: "aic-reviewed bg-amber-100 text-amber-700 dark:bg-amber-900/30", implemented: "aic-implemented bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 shadow-[0_0_6px_rgba(5,150,105,0.3)]", dismissed: "aic-dismissed bg-gray-100 text-gray-500 dark:bg-gray-900/30", expired: "aic-expired bg-gray-200 text-gray-400 dark:bg-gray-800" }
-  return <span className={"aic-status-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[status] || "")}>{status}</span>
-}
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[2] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[2] }}>{value}</p></Card>
+)
 
-function ConfBar({ value }: { value: number }) { const col = value >= 80 ? TH.ok : value >= 50 ? TH.warn : TH.err; return <div className="aic-conf-bar flex items-center gap-1.5"><div className="w-16 h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className="h-full rounded-full transition-all" style={{ width: value + "%", backgroundColor: col }}/></div><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span></div> }
-
-function TrendIndicator({ value }: { value: number }) { const pos = value > 0; const col = pos ? TH.ok : TH.err; return <span className="aic-trend inline-flex items-center gap-0.5 text-[10px] font-semibold" style={{ color: col }}>{pos ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}{Math.abs(value).toFixed(1)}%</span> }
-
-function CityBadge({ city }: { city: string }) { return <span className="aic-city-badge inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-violet-50 text-violet-700 dark:bg-violet-900/20">{city}</span> }
-
-function KpiTile({ label, value, icon, trend, color }: { label: string; value: string; icon: React.ReactNode; trend: number; color: string }) { return <Card className="aic-kpi-tile glass-subtle hover:shadow-lg transition-shadow border-l-4" style={{ borderLeftColor: color }}><CardContent className="p-3"><div className="flex items-center justify-between"><span className="text-[10px] text-muted-foreground">{label}</span>{icon}</div><div className="text-xl font-bold mt-1">{value}</div><TrendIndicator value={trend}/></CardContent></Card> }
-
-function ValueTile({ label, value }: { label: string; value: string | number }) { return <div className="aic-value-tile text-center p-2 rounded-lg bg-gray-50 dark:bg-gray-800/50"><div className="text-sm font-bold">{value}</div><div className="text-[10px] text-muted-foreground">{label}</div></div> }
-
-function HealthRing({ value, label }: { value: number; label: string }) { const col = value >= 90 ? TH.ok : value >= 70 ? TH.warn : TH.err; const r = 18, circ = 2 * Math.PI * r, offset = circ - (value / 100) * circ; return <div className="aic-health-ring flex flex-col items-center gap-1"><svg width={48} height={48} className="-rotate-90"><circle cx={24} cy={24} r={r} fill="none" stroke="currentColor" strokeWidth={3} className="text-gray-200 dark:text-gray-700"/><circle cx={24} cy={24} r={r} fill="none" stroke={col} strokeWidth={3} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" className="transition-all"/></svg><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span><span className="text-[9px] text-muted-foreground">{label}</span></div> }
-
-function SavingsTile({ amount, label }: { amount: number; label: string }) { return <div className="aic-savings-tile p-2 rounded-lg border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20"><div className="flex items-center gap-1 mb-1"><Lightbulb className="w-3 h-3 text-emerald-500"/><span className="text-[10px] font-medium">{label}</span></div><div className="text-xs font-bold text-emerald-600">{"\u20b9"}{amount.toLocaleString()}</div></div> }
-
-function StarRating({ value }: { value: number }) { return <div className="aic-star-rating flex items-center gap-0.5">{Array.from({ length: 5 }, (_, i) => <Star key={i} className={"w-3 h-3 " + (i < value ? "text-amber-400 fill-amber-400" : "text-gray-300")}/>)}</div> }
-
-function genInsights() {
-  return Array.from({ length: 60 }, (_, i) => ({
-    id: "INS-" + String(i + 1).padStart(4, "0"),
-    module: pick(AI_MODULES, i * 3 + 1),
-    type: pick(SUGGESTION_TYPES, i * 3 + 2),
-    city: pick(CITIES, i * 3 + 3),
-    title: pick(["Reduce warehouse overflow by 25%", "Optimize last mile routes", "Switch to rail for Mumbai-Delhi", "Preorder inventory for Diwali", "Renegotiate supplier contract", "Add cold storage capacity", "Implement cross-docking at BLR", "Deploy EV fleet for Zone A", "Automate quality inspection", "Reduce picking errors", "Consolidate small shipments", "Dynamic pricing for excess stock"], i + 5),
-    confidence: ri(55, 98, i + 7),
-    impact: pick(["high", "medium", "low"], i + 11),
-    savings: ri(10000, 500000, i + 13),
-    status: pick(INSIGHT_STATUS, i + 17),
-    aiModel: pick(["GPT-Logistics", "Transformer-T", "XGBoost-v5", "LSTM-v4", "Ensemble-Hybrid", "Prophet-X"], i + 19),
-    processingTime: ri(50, 5000, i + 23),
-    rating: ri(1, 5, i + 29),
-    feedback: pick(["positive", "negative", "neutral"], i + 31),
-    timestamp: "2026-07-" + String(ri(1, 30, i + 37)).padStart(2, "0") + " " + String(ri(0, 23, i + 41)).padStart(2, "0") + ":" + String(ri(0, 59, i + 43)).padStart(2, "0")
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `AIC-${String(offset + i + 1).padStart(4, '0')}`,
+    model: MODELS[(offset + i) % MODELS.length], module: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 50, ((offset + i) * 31) % 50) + 1,
+    cost: ri(150000, 4500000, ((offset + i) * 27031) % 4350000) + 150000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-function genModels() {
-  return Array.from({ length: 12 }, (_, i) => ({
-    id: "AI-" + String(i + 1).padStart(3, "0"),
-    name: pick(["GPT-Logistics", "Transformer-T", "XGBoost-v5", "LSTM-v4", "Ensemble-Hybrid", "Prophet-X", "DeepAR-Net", "NBEATS-V2", "Temporal-Fusion", "CNN-LSTM", "WaveNet-Small", "LightGBM-Fast"], i + 1),
-    category: pick(AI_MODULES, i + 3),
-    accuracy: ri(70, 98, i + 7),
-    latency: ri(20, 500, i + 11),
-    requests: ri(100, 5000, i + 13),
-    savings: ri(5000, 200000, i + 17),
-    lastTrained: "2026-07-" + String(ri(1, 30, i + 19)).padStart(2, "0"),
-    status: pick(["active", "training", "stale", "retired"], i + 23),
-    version: "v" + ri(1, 5, i + 29) + "." + ri(0, 9, i + 31),
-    uptime: ri(95, 100, i + 37)
-  }))
-}
-
-function genCharts() {
-  const daily = MO.map((m, i) => ({ month: m, suggestions: ri(20, 150, i + 101), implemented: ri(10, 100, i + 151), savings: ri(100000, 2000000, i + 201), accuracy: ri(75, 98, i + 251) }))
-  const modDist = AI_MODULES.map((m, i) => ({ module: m.replace(/_/g, " "), count: ri(5, 40, i + 301), savings: ri(50000, 500000, i + 351) }))
-  const typePie = SUGGESTION_TYPES.map((t, i) => ({ type: t.replace(/_/g, " "), value: ri(3, 25, i + 401) }))
-  return { daily, modDist, typePie }
-}
+const aicrecords = [
+  { id: 'AIC-0001', model: 'GPT-4o Warehouse', module: 'Demand Forecast Model', status: 'Model Accuracy Verified', qty: 12, cost: 3200000, date: '2024-01-08' },
+  { id: 'AIC-0002', model: 'Claude Logistics', module: 'Route Optimisation Engine', status: 'Hallucination Check Pass', qty: 8, cost: 2800000, date: '2024-01-20' },
+  { id: 'AIC-0003', model: 'Gemini Supply Chain', module: 'Inventory Replenishment AI', status: 'Latency SLA Met', qty: 25, cost: 1500000, date: '2024-02-02' },
+  { id: 'AIC-0004', model: 'Llama 3 Ops Model', module: 'Warehouse Slotting Optimiser', status: 'Data Privacy Audit OK', qty: 15, cost: 4200000, date: '2024-02-15' },
+  { id: 'AIC-0005', model: 'Mistral Warehouse AI', module: 'Carrier Selection Agent', status: 'Integration Test Green', qty: 30, cost: 900000, date: '2024-02-28' },
+  { id: 'AIC-0006', model: 'Mixtral Inventory', module: 'Anomaly Detection Module', status: 'Production Deploy Approved', qty: 10, cost: 3800000, date: '2024-03-12' },
+  { id: 'AIC-0007', model: 'Phi-3 Mini Agent', module: 'Predictive Maintenance AI', status: 'Model Accuracy Verified', qty: 20, cost: 1200000, date: '2024-03-25' },
+  { id: 'AIC-0008', model: 'DeepSeek Planner', module: 'Natural Language Query', status: 'Hallucination Check Pass', qty: 6, cost: 4500000, date: '2024-04-07' },
+  { id: 'AIC-0009', model: 'GPT-4o Warehouse', module: 'Demand Forecast Model', status: 'Latency SLA Met', qty: 18, cost: 2600000, date: '2024-04-20' },
+  { id: 'AIC-0010', model: 'Claude Logistics', module: 'Route Optimisation Engine', status: 'Data Privacy Audit OK', qty: 12, cost: 3400000, date: '2024-05-03' },
+  { id: 'AIC-0011', model: 'Gemini Supply Chain', module: 'Inventory Replenishment AI', status: 'Integration Test Green', qty: 22, cost: 1800000, date: '2024-05-16' },
+  { id: 'AIC-0012', model: 'Llama 3 Ops Model', module: 'Warehouse Slotting Optimiser', status: 'Production Deploy Approved', qty: 14, cost: 4000000, date: '2024-05-29' },
+  { id: 'AIC-0013', model: 'Mistral Warehouse AI', module: 'Carrier Selection Agent', status: 'Model Accuracy Verified', qty: 28, cost: 700000, date: '2024-06-11' },
+  { id: 'AIC-0014', model: 'Mixtral Inventory', module: 'Anomaly Detection Module', status: 'Hallucination Check Pass', qty: 8, cost: 3600000, date: '2024-06-24' },
+  { id: 'AIC-0015', model: 'Phi-3 Mini Agent', module: 'Predictive Maintenance AI', status: 'Latency SLA Met', qty: 16, cost: 1400000, date: '2024-07-07' },
+  { id: 'AIC-0016', model: 'DeepSeek Planner', module: 'Natural Language Query', status: 'Data Privacy Audit OK', qty: 5, cost: 4300000, date: '2024-07-20' },
+  { id: 'AIC-0017', model: 'GPT-4o Warehouse', module: 'Demand Forecast Model', status: 'Integration Test Green', qty: 20, cost: 3000000, date: '2024-08-02' },
+  { id: 'AIC-0018', model: 'Claude Logistics', module: 'Route Optimisation Engine', status: 'Production Deploy Approved', qty: 10, cost: 3100000, date: '2024-08-15' },
+  { id: 'AIC-0019', model: 'Gemini Supply Chain', module: 'Inventory Replenishment AI', status: 'Model Accuracy Verified', qty: 24, cost: 1600000, date: '2024-08-28' },
+  { id: 'AIC-0020', model: 'Llama 3 Ops Model', module: 'Warehouse Slotting Optimiser', status: 'Hallucination Check Pass', qty: 13, cost: 4100000, date: '2024-09-10' },
+]
 
 export default function LogisticsAiCopilotView() {
-  const [tab, setTab] = useState("dashboard")
-  const [search, setSearch] = useState("")
-  const [detail, setDetail] = useState<Record<string, unknown> | null>(null)
-  const [sortField, setSortField] = useState("id")
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc")
+  const [tab, setTab] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
-  const insights = useMemo(() => genInsights(), [])
-  const models = useMemo(() => genModels(), [])
-  const charts = useMemo(() => genCharts(), [])
-  const toggleSort = (f: string) => { if (sortField === f) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortField(f); setSortDir("asc") } }
-  const sortIcon = (f: string) => sortField === f ? (sortDir === "asc" ? "\u2191" : "\u2193") : ""
-  const filterInsights = useMemo(() => { if (!search) return insights; const lq = search.toLowerCase(); return insights.filter(ins => Object.values(ins).some(v => typeof v === "string" && v.toLowerCase().includes(lq))) }, [insights, search])
-  const sortedInsights = useMemo(() => [...filterInsights].sort((a, b) => { const va = a[sortField as keyof typeof a], vb = b[sortField as keyof typeof b]; if (va == null || vb == null) return 0; return sortDir === "asc" ? String(va).localeCompare(String(vb), undefined, { numeric: true }) : -String(va).localeCompare(String(vb), undefined, { numeric: true }) }), [filterInsights, sortField, sortDir])
-  const totalSavings = insights.reduce((s, i) => s + i.savings, 0)
-  const implemented = insights.filter(i => i.status === "implemented").length
-  const avgConf = Math.round(insights.reduce((s, i) => s + i.confidence, 0) / insights.length)
-  const activeModels = models.filter(m => m.status === "active").length
-  const handleRefresh = () => { setSearch(""); setSortField("id"); setSortDir("asc"); setActiveFilters({}) }
-  const toggleFilter = (group: string, value: string) => { setActiveFilters(prev => { const cur = prev[group] || []; const next = cur.includes(value) ? cur.filter(v => v !== value) : [...cur, value]; if (next.length === 0) { const { [group]: _, ...rest } = prev; return rest } return { ...prev, [group]: next } }) }
-  const clearAllFilters = () => setActiveFilters({})
-  const totalActiveFilters = Object.values(activeFilters).reduce((s, v) => s + v.length, 0)
-  const insightFilterGroups = useMemo(() => { const mc: Record<string, number> = {}; const tc: Record<string, number> = {}; const ic: Record<string, number> = {}; insights.forEach(ins => { mc[ins.module] = (mc[ins.module] || 0) + 1; tc[ins.type] = (tc[ins.type] || 0) + 1; ic[ins.impact] = (ic[ins.impact] || 0) + 1 }); return [{ key: "module", label: "AI Module", options: Object.entries(mc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }, { key: "type", label: "Category", options: Object.entries(tc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }, { key: "impact", label: "Impact", options: Object.entries(ic).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }] }, [insights])
 
-  const tab0 = (<div className="space-y-4"><div className="grid grid-cols-2 md:grid-cols-4 gap-3"><KpiTile label="Total Savings" value={"\u20b9" + (totalSavings / 100000).toFixed(1) + "L"} icon={<Lightbulb className="w-4 h-4 text-amber-500"/>} trend={18.5} color={TH.sec}/><KpiTile label="AI Insights" value={String(insights.length)} icon={<Sparkles className="w-4 h-4 text-violet-500"/>} trend={12.3} color={TH.pri}/><KpiTile label="Implemented" value={String(implemented)} icon={<CheckCircle2 className="w-4 h-4 text-emerald-500"/>} trend={8.7} color={TH.ok}/><KpiTile label="Active Models" value={String(activeModels)} icon={<BrainCircuit className="w-4 h-4 text-blue-500"/>} trend={3.1} color="#3b82f6"/></div><div className="grid grid-cols-2 md:grid-cols-4 gap-3"><HealthRing value={avgConf} label="AI Confidence"/><HealthRing value={Math.round(implemented / insights.length * 100)} label="Adoption"/><HealthRing value={95} label="Model Uptime"/><HealthRing value={88} label="Data Quality"/></div><div className="grid grid-cols-1 md:grid-cols-2 gap-3"><Card className="aic-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">AI Suggestions & Savings Trend</CardTitle></CardHeader><CardContent><AreaChart data={charts.daily} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="month" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Area type="monotone" dataKey="suggestions" stroke={TH.pri} fill={TH.pri} fillOpacity={0.2}/><Area type="monotone" dataKey="implemented" stroke={TH.ok} fill={TH.ok} fillOpacity={0.15}/><Line type="monotone" dataKey="accuracy" stroke={TH.sec} strokeWidth={2} dot={{ r: 3 }}/></AreaChart></CardContent></Card><Card className="aic-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">AI Module Distribution</CardTitle></CardHeader><CardContent><BarChart data={charts.modDist} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="module" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Bar dataKey="count" fill={TH.pri} radius={[2, 2, 0, 0]}/><Bar dataKey="savings" fill={TH.sec} radius={[2, 2, 0, 0]}/></BarChart></CardContent></Card><Card className="aic-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Insight Category</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={charts.typePie} cx="50%" cy="50%" outerRadius={70} dataKey="value" label={({ name, percent }) => name + " " + (percent * 100).toFixed(0) + "%"} labelLine={false}>{SUGGESTION_TYPES.map((_, i) => <Cell key={i} fill={PC[i % PC.length]}/>)}</Pie><Tooltip contentStyle={{ fontSize: 10 }}/></PieChart></CardContent></Card><Card className="aic-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Model Performance</CardTitle></CardHeader><CardContent><BarChart data={models.map(m => ({ name: m.name, accuracy: m.accuracy, latency: m.latency }))} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="name" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Bar dataKey="accuracy" fill={TH.ok} radius={[2, 2, 0, 0]}/><Bar dataKey="latency" fill={TH.warn} radius={[2, 2, 0, 0]}/></BarChart></CardContent></Card></div></div>)
+  const allRecords = [...aicrecords, ...genRecords(21), ...genRecords(41)]
 
-  const tab1 = (<div className="space-y-3"><ModuleBreadcrumb items={[{ label: "AI" }, { label: "Copilot" }, { label: "Insights" }]}/><SearchFilterToolbar searchQuery={search} onSearchChange={setSearch} onClearSearch={() => setSearch("")} activeFilters={activeFilters} filterGroups={insightFilterGroups} onToggleFilter={toggleFilter} onClearAllFilters={clearAllFilters} totalItems={insights.length} filteredCount={sortedInsights.length} onRefresh={handleRefresh} placeholder="Search insights by title, module, type..." /><div className="rounded-lg border overflow-auto max-h-[calc(100vh-340px)]"><table className="aic-table w-full text-xs"><thead className="bg-violet-50 dark:bg-violet-900/20 sticky top-0"><tr><th className="p-2 text-left cursor-pointer select-none" onClick={() => toggleSort("id")}>ID {sortIcon("id")}</th><th className="p-2 text-left">Title</th><th className="p-2 text-left">Module</th><th className="p-2 text-left">Category</th><th className="p-2 text-left">Impact</th><th className="p-2 text-left">Confidence</th><th className="p-2 text-right">Savings</th><th className="p-2 text-left">Status</th><th className="p-2 text-left">Model</th></tr></thead><tbody>{sortedInsights.map(ins => <tr key={ins.id} className="aic-table-row border-t hover:bg-violet-50/50 dark:hover:bg-violet-900/10 cursor-pointer" onClick={() => setDetail(ins as unknown as Record<string, unknown>)}><td className="p-2 font-mono">{ins.id}</td><td className="p-2 font-medium max-w-[200px] truncate">{ins.title}</td><td className="p-2"><AiModuleBadge module={ins.module}/></td><td className="p-2"><SuggTypeBadge type={ins.type}/></td><td className="p-2"><span className={"inline-flex px-1.5 py-0.5 rounded text-[10px] font-medium " + (ins.impact === "high" ? "bg-red-100 text-red-700" : ins.impact === "medium" ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700")}>{ins.impact}</span></td><td className="p-2"><ConfBar value={ins.confidence}/></td><td className="p-2 text-right font-medium text-emerald-600">{"\u20b9"}{ins.savings.toLocaleString()}</td><td className="p-2"><InsightStatusBadge status={ins.status}/></td><td className="p-2 text-[10px]">{ins.aiModel}</td></tr>)}</tbody></table></div><div className="flex items-center justify-between text-[10px] text-muted-foreground"><span>Showing {sortedInsights.length} of {insights.length} insights</span>{totalActiveFilters > 0 && <span>{totalActiveFilters} filters</span>}</div></div>)
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.module.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-  const tab2 = (<div className="space-y-4"><ModuleBreadcrumb items={[{ label: "AI" }, { label: "Copilot" }, { label: "Models" }]}/><div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">{models.map(m => <Card key={m.id} className={"aic-model-card glass-subtle hover:shadow-lg transition-shadow " + (m.status === "active" ? "border-emerald-300 dark:border-emerald-700" : m.status === "training" ? "border-blue-300 dark:border-blue-700" : m.status === "stale" ? "border-amber-300 dark:border-amber-700" : "")}><CardContent className="p-3 space-y-2"><div className="flex items-center justify-between"><span className="font-semibold text-xs">{m.name}</span><span className={"inline-flex px-1.5 py-0.5 rounded text-[10px] font-medium " + (m.status === "active" ? "bg-emerald-100 text-emerald-700" : m.status === "training" ? "bg-blue-100 text-blue-700 animate-pulse" : m.status === "stale" ? "bg-amber-100 text-amber-700" : "bg-gray-100 text-gray-500")}>{m.status}</span></div><div className="grid grid-cols-2 gap-1.5"><ValueTile label="Accuracy" value={m.accuracy + "%"}/><ValueTile label="Latency" value={m.latency + "ms"}/></div><div className="flex items-center justify-between text-[10px]"><span className="text-muted-foreground">Requests</span><span className="font-medium">{m.requests.toLocaleString()}</span></div><div className="flex items-center justify-between text-[10px]"><span className="text-muted-foreground">Savings</span><span className="font-bold text-emerald-600">{"\u20b9"}{m.savings.toLocaleString()}</span></div><div className="flex items-center justify-between text-[10px]"><span className="text-muted-foreground">Uptime</span><ConfBar value={m.uptime}/></div><div className="flex items-center justify-between"><AiModuleBadge module={m.category}/><span className="text-[10px] text-muted-foreground">{m.version}</span></div></CardContent></Card>)}</div></div>)
+  const filterGroups = [
+    { key: 'module', label: 'AI Module', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.module === p).length })) },
+    { key: 'model', label: 'Model', options: MODELS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.model === p).length })) },
+  ]
 
-  const tabs = [{ key: "dashboard", label: "Dashboard", icon: <BarChart3 className="w-3.5 h-3.5" />, content: tab0 }, { key: "insights", label: "AI Insights", icon: <Sparkles className="w-3.5 h-3.5" />, content: tab1 }, { key: "models", label: "AI Models", icon: <BrainCircuit className="w-3.5 h-3.5" />, content: tab2 }]
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, deployments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const modelChart = MODELS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), deployments: allRecords.filter(r => r.model === p).length }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
-  return (<div className="space-y-4 p-4"><PageHeader title="Logistics AI Copilot" description="AI-powered logistics intelligence platform with predictive insights, cost optimization, risk analysis, and automated decision support"/><div className="flex items-center gap-3 flex-wrap"><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-violet-100 dark:bg-violet-900/30"><BrainCircuit className="w-3 h-3 text-violet-600"/><span className="text-[10px] font-semibold text-violet-700 dark:text-violet-300">{activeModels} AI Models Active</span></div><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30"><Lightbulb className="w-3 h-3 text-emerald-600"/><span className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{insights.length} Insights Generated</span></div><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30"><Sparkles className="w-3 h-3 text-amber-600"/><span className="text-[10px] font-semibold text-amber-700 dark:text-amber-300">{avgConf}% Confidence</span></div><div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30"><Bot className="w-3 h-3 text-blue-600"/><span className="text-[10px] font-semibold text-blue-700 dark:text-blue-300">{"\u20b9"}{(totalSavings / 100000).toFixed(1)}L Savings</span></div></div><Tabs value={tab} onValueChange={setTab}><TabsList className="bg-gradient-to-r from-violet-500/10 to-amber-500/10 p-0.5 h-9">{tabs.map(t => <TabsTrigger key={t.key} value={t.key} className="text-xs gap-1.5 data-[state=active]:bg-violet-600 data-[state=active]:text-white">{t.icon}{t.label}</TabsTrigger>)}</TabsList>{tabs.map(t => tab === t.key && <div key={t.key} className="mt-3">{t.content}</div>)}</Tabs><Sheet open={!!detail} onOpenChange={() => setDetail(null)}><SheetContent className="w-[420px] overflow-y-auto"><SheetHeader><SheetTitle className="text-sm">Insight Detail</SheetTitle></SheetHeader>{detail && <div className="mt-4 space-y-3"><div className="aic-detail-header rounded-lg p-4 bg-gradient-to-br from-violet-500 to-amber-600 text-white"><div className="text-lg font-bold">{String(detail.id)}</div><div className="text-xs opacity-80 mt-1">{String(detail.title || "Insight")}</div></div>{Object.entries(detail).filter(([k]) => k !== "id").map(([k, v]) => <div key={k} className="flex items-center justify-between py-1.5 border-b"><span className="text-[10px] text-muted-foreground capitalize">{k.replace(/_/g, " ")}</span><span className="text-xs font-medium">{typeof v === "number" ? v.toLocaleString() : String(v)}</span></div>)}</div>}</SheetContent></Sheet></div>)
+  return (
+    <div className="aic-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'AI Copilot' }]} />
+      <PageHeader title="Logistics AI Copilot" description="AI-powered logistics copilot system tracking GPT-4o Claude Gemini and Llama model deployments for demand forecasting route optimisation inventory replenishment warehouse slotting carrier selection anomaly detection predictive maintenance and natural language query across 8 production AI modules with model accuracy verification hallucination detection and data privacy compliance" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-violet-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
+        </TabsList>
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Deployments" value={allRecords.length} />
+            <KpiTile label="AI Modules" value={PRODUCTS.length} />
+            <KpiTile label="Models Tracked" value={MODELS.length} />
+            <KpiTile label="Avg API Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`}/>
+          </div>
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="Accuracy" value={94} />
+            <HealthRing label="Hallucin" value={88} />
+            <HealthRing label="Latency" value={92} />
+            <HealthRing label="Privacy" value={97} />
+            <HealthRing label="Integr" value={90} />
+            <HealthRing label="Deploy" value={93} />
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="API Calls/Month" value="2.4M" />
+            <ValueTile label="Avg Accuracy" value="94.2%" />
+            <ValueTile label="Inference GPU" value="A100 Cluster" />
+            <ValueTile label="Refrigerator Edge" value="12 Nodes" />
+          </div>
+        </TabsContent>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search AI copilot deployments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-violet-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">AI Module</th>
+                  <th className="p-3 text-left font-medium">Model</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Calls</th>
+                  <th className="p-3 text-left font-medium">API Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-violet-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.module} /></td>
+                    <td className="p-3">{record.model}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty}K</td>
+                    <td className="p-3 font-mono">₹{(record.cost / 100000).toFixed(1)}L</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </TabsContent>
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Deployment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="deployments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Model Distribution</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={modelChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="deployments" fill={COLORS[0]}>
+                    {modelChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
+          </div>
+          <Card>
+            <CardHeader><CardTitle>Validation Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Multi-Model AI Copilot Architecture for Warehouse Operations</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The multi-model AI copilot architecture for warehouse operations establishes a comprehensive production-grade artificial intelligence deployment framework that integrates eight distinct large language model providers including GPT-4o Claude Gemini Llama 3 Mistral Mixtral Phi-3 and DeepSeek to create a unified intelligent assistant system for the Indian logistics warehouse management platform where each AI model is assigned to specific logistics domain tasks based on its performance profile and cost efficiency with GPT-4o handling demand forecasting due to its superior numerical reasoning capabilities Claude managing route optimisation for its advanced spatial analysis and logical reasoning Gemini processing inventory replenishment decisions for its multimodal supply chain data integration Llama 3 deployed for warehouse slotting optimisation in a self-hosted configuration to ensure data sovereignty for sensitive warehouse layout data Mistral Warehouse AI handling carrier selection and rate comparison across Indian logistics providers Mixtral Inventory performing anomaly detection across warehouse sensor data streams Phi-3 Mini Agent deployed on Refrigerator edge computing nodes for real-time predictive maintenance alerts at individual Refrigerator cold storage units and DeepSeek Planner providing natural language query interface allowing warehouse managers to interact with the copilot system using conversational Hindi English or mixed-language queries where the multi-model architecture routes each incoming logistics query to the optimal model through an intelligent model router that evaluates query type complexity cost sensitivity latency requirements and data privacy classification to select the best model for each request achieving an average inference latency of four hundred milliseconds across all copilot modules while maintaining a ninety-four point two percent overall prediction accuracy across the eight AI modules in production.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Model Accuracy Verification and Hallucination Detection Framework</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The model accuracy verification and hallucination detection framework provides the quality assurance system for all AI copilot model outputs in the logistics warehouse management platform where the model accuracy verification subsystem continuously evaluates each AI model prediction against actual outcomes using a retrospective accuracy tracking methodology that compares demand forecast predictions against actual shipment volumes route optimisation suggestions against actual delivery times inventory replenishment recommendations against actual stockout events and anomaly detection alerts against confirmed warehouse incidents computing rolling accuracy metrics over thirty-day sixty-day and ninety-day windows for each AI module ensuring prediction accuracy remains above the minimum acceptable threshold of ninety percent for demand forecasting ninety-two percent for route optimisation eighty-eight percent for anomaly detection and ninety-five percent for inventory replenishment where any AI module whose accuracy drops below its threshold triggers an automated model retraining request and escalation to the AI operations team for manual review and intervention where the hallucination detection subsystem evaluates every AI copilot response for factual consistency against the warehouse knowledge base using a multi-stage verification pipeline that first checks the AI response against structured database records confirming all referenced SKU numbers warehouse locations carrier names and shipment IDs are valid and existent then evaluates the numerical values in the AI response against actual database values confirming quantities costs dates and status codes match reality within acceptable tolerance ranges and finally performs semantic consistency analysis confirming the AI response logically follows from the query context without generating plausible-sounding but factually incorrect information that could mislead warehouse operations staff into making incorrect logistics decisions where the hallucination detection system currently achieves a detection accuracy of ninety-six percent for factual hallucinations and ninety-one percent for numerical hallucinations across the eight production AI models with an average false positive rate of two point three percent.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Latency SLA Management and Data Privacy Compliance for AI Deployments</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The latency SLA management and data privacy compliance framework ensures that all AI copilot model deployments meet the performance and regulatory requirements for production warehouse operations where the latency SLA management subsystem continuously monitors the end-to-end inference latency for each AI model API call from the moment the user submits a query or the system triggers an automated prediction to the moment the AI response is returned and displayed tracking the latency budget breakdown across network transmission model inference post-processing and response rendering stages confirming each stage completes within its allocated latency budget where the total response latency SLA for interactive copilot queries is set at eight hundred milliseconds for simple queries and two seconds for complex multi-step analytical queries while automated batch predictions such as nightly demand forecasting and anomaly detection scans operate under relaxed latency SLAs of thirty seconds per batch allowing the system to use larger more accurate but slower models for batch processing where the latency monitoring system generates automated alerts when any model exceeds its P95 latency threshold for three consecutive measurement intervals triggering automatic scaling of inference GPU capacity or fallback to a faster secondary model to maintain SLA compliance where the data privacy compliance subsystem ensures all AI copilot data flows comply with the Digital Personal Data Protection Act twenty twenty-three and the Indian IT Act twenty hundred by implementing data classification-based access controls that prevent sensitive warehouse data including inventory values customer information and shipping addresses from being transmitted to external cloud-based AI model APIs without explicit data owner consent and anonymisation where all AI model prompts are processed through a data sanitisation pipeline that replaces sensitive identifiers with pseudonymous tokens before transmission to external models ensuring warehouse operational data privacy is maintained throughout the AI inference pipeline while maintaining the semantic context needed for accurate logistics decision-making.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Refrigerator Edge Computing Nodes and Production Deployment Pipeline</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Refrigerator edge computing node deployment and production pipeline management system provides the infrastructure for deploying AI copilot models at the warehouse edge for real-time inference and the automated deployment pipeline for releasing new model versions to production where the Refrigerator edge computing subsystem deploys lightweight AI inference models on twelve edge computing nodes installed directly at Refrigerator cold storage warehouse locations across India running optimised versions of the Phi-3 Mini Agent model for real-time predictive maintenance monitoring of Refrigerator compressor units condenser coils evaporator fans and defrost systems where each edge node processes sensor data streams including temperature humidity compressor vibration and power consumption at one-second intervals running the Phi-3 predictive maintenance model locally to generate real-time maintenance alerts without requiring cloud connectivity ensuring continuous AI-powered monitoring even during network outages at remote Refrigerator warehouse locations where the edge nodes use ONNX Runtime optimised inference achieving sub-fifty-millisecond prediction latency on the embedded GPU hardware while consuming less than thirty watts of power per node enabling continuous twenty-four-seven predictive maintenance monitoring at each Refrigerator cold storage facility where the production deployment pipeline automates the end-to-end process of promoting validated AI model versions from development staging to production using a GitOps-based deployment workflow where each model version undergoes automated unit testing integration testing accuracy benchmarking hallucination testing and latency profiling before being promoted to the production environment with automatic rollback capability if any production metric degrades below threshold within the first four hours of deployment ensuring zero-downtime model updates across the eight AI copilot modules serving the Indian logistics warehouse management platform.</p></CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
 }
+
+
+
