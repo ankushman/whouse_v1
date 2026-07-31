@@ -1,0 +1,27 @@
+---
+Task ID: R352
+Agent: Main Agent (Cron Loop)
+Task: R352 — Kinhal Woodcraft Karnataka (new) + Handloom Cotton Supply Chain overwrite
+
+Work Log:
+- Read worklog.md: R351 complete (commit c30b13e), 345 views, 345 navItems, 54,989 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R352)
+- QA: Dev server can't start (Turbopack OOM, known issue, 54K+ CSS lines); TSC is sole QA gate
+- Slug verification: kinhal-woodcraft-karnataka-logistics CLEAR; handloom-cotton-supply-chain ALREADY EXISTS
+- CSS prefixes: kwc-* CLEAR, hcl-* already exists (from handloom old prefix)
+- Icons: Trees (Kinhal, already in iconMap), Shirt (Handloom, already existed) — no new icons (186 unchanged)
+- Handloom Cotton had 243 lines — completely overwritten to 253 lines with field fixes and genRecords
+- Kinhal Woodcraft created as new module at exactly 253 lines with template compliance
+
+- Created Kinhal Woodcraft Karnataka Logistics (kwc-*, #5b3a29 deep brown): 253 lines, 8 products (Lacquerware Elephant Toy, Marionette Doll Set, Carved Hanuman Figurine, Wooden Tamburi Instrument, Lacquerware Spice Box, Temple Mural Panel, Turning Lathe Top Set, Polished Sandalwood Box), 8 artisans (Kinhal Lacquer Artisans Guild KA, Koppal Woodcraft Cooperative KA, Gangavathi Kinhal Society, Kushtagi Traditional Artisans KA, Yelburga Wood Carvers Guild KA, Hospet Heritage Crafts Cluster, Bellary Kinhal Workshop Network, Raichur Traditional Toy Makers KA), 6 statuses, 4 insight cards (500-year Vijayanagara lacquerware toy heritage, IS 15856 toy safety standards & Wrightia wood moisture QC, bubble wrap corrugated box packaging, AI design cataloguing & heritage market development)
+- Overwrote Handloom Cotton Supply Chain (hcl-*, #1e40af deep blue): 253 lines, 8 products (Cotton Khadi Fabric, Muslin Dhoti, Cotton Bed Sheet, Linen Salwar Suit, Cotton Table Runner, Ikat Stole, Jamdani Saree, Cotton Napkin Set), 8 artisans (Varanasi Handloom Weavers UP, Pochampally Ikat Society Telangana, Sualkuchi Silk Cluster Assam, Chanderi Weavers MP, Kanchipuram Cotton Guild TN, Phulia Handloom Society Odisha, Kotpad Tribal Weavers Odisha, Bhagalpur Tussar Cluster Bihar), 6 statuses, 4 insight cards (5000-year Vedic era textile heritage, IS 16784 handloom certification & cotton count tensile QC, neem-treated storage packaging, digital loom integration & weavers empowerment)
+- Registered Kinhal in 3 files (index.ts, page.tsx, app-store.ts); Handloom already registered
+- CSS: +21 lines (kwc-* 7 rules + 3 keyframes); Handloom hcl-* CSS already existed (no change)
+- TSC: 0 errors | Git pushed: commit 5005f4d
+
+Stage Summary:
+- 346 views (1 new Kinhal), 346 navItems, ~55,010 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Handloom Cotton updated from 243 to 253 lines with genRecords, 60 records, correct field names
+- Remaining non-253 overwrite candidates: ~80 modules (ongoing overwrite program)
+- Turbopack OOM persists; CSS splitting remains critical priority
