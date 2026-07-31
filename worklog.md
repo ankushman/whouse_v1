@@ -1,5 +1,32 @@
 ---
 ---
+Task ID: R358
+Agent: Main Agent (Cron Loop)
+Task: R358 — Kalighat Bengal (new) + ESG Compliance Hub overwrite
+
+Work Log:
+- Read worklog.md: R357 complete (commit a74d3d2), 351 views, 351 navItems, ~55,102 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R358)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: kalighat-bengal-logistics CLEAR; esg-compliance-hub ALREADY EXISTS
+- CSS prefixes: kal-* CLEAR; esg-* already exists (kept existing CSS for overwrite)
+- Icons: Brush (Kalighat, already in iconMap), Leaf (ESG, already existed) — no new icons (186 unchanged)
+- ESG Compliance Hub had 234 lines — completely overwritten to 253 lines with genRecords, correct field names
+
+- Created Kalighat Bengal Logistics (kal-*, #be123c crimson rose): 253 lines, 8 products (Babu Bibi Painting, Cat Fish Art, Goddess Kali Scroll, Horse Rider Mural, Religious Procession, Ox Cart Scene, Deity Dance Panel, Urban Life Canvas), 8 artisans (Kalighat Patua Guild Kolkata, Kumartuli Clay Artists, Howrah Society, Serampore Scroll Painters, Barrackpore Cluster, Chinsurah Heritage, Hooghly Cooperative, Chandannagar Traditional), 6 statuses, 4 insight cards (225-year Kolkata Patua folk painting heritage, natural pigment binder & paper standards, acid-free sleeve box packaging, dehumidified archive & heritage market)
+- Overwrote ESG Compliance Hub (esg-*, #065f46 deep emerald): 253 lines, 8 products (Carbon Emissions Report, ESG Risk Dossier, Supply Chain Audit, Climate Scorecard, Green Bond Verification, Scope 3 Tracker, Social Impact Assessment, Governance Audit), 8 artisans (BSE ESG Advisory, CRISIL, KPMG, EY Climate, DNV, S&P Global, TERI, CII-ITC), 6 statuses, 4 insight cards (SEBI BRSR mandatory disclosure, GRI Standards alignment, CDP carbon verification & TCFD, SBTi validation & green finance growth)
+- Registered Kalighat in 3 files (index.ts, page.tsx, app-store.ts); ESG already registered
+- CSS: +10 lines (kal-* 5 rules + 3 keyframes + comment + blank); ESG esg-* CSS kept existing
+- TSC: 0 errors | Git pushed: commit efecd64
+
+Stage Summary:
+- 352 views (1 new Kalighat), 352 navItems, ~55,112 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- ESG Compliance Hub updated from 234 to 253 lines with genRecords, 60 records, correct field names
+- Remaining non-253 overwrite candidates: ~255 modules (ongoing overwrite program)
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue overwrite program targeting 234-line modules batch
+---
 Task ID: R357
 Agent: Main Agent (Cron Loop)
 Task: R357 — Gond Madhya Pradesh (new) + Gem Jewellery Logistics overwrite
