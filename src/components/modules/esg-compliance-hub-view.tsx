@@ -1,234 +1,253 @@
-"use client";
-import { useState, useMemo } from "react";
-import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
-import { Activity, Leaf, Zap, Recycle, Droplets, Shield, Award, Star, TrendingUp, TrendingDown, Search, ArrowUpDown, Download, Eye, AlertTriangle } from "lucide-react";
-import { PageHeader } from "@/components/shared/page-header";
-import { useToast } from "@/hooks/use-toast-helper";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import React, { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const sR = (s: number) => { const x = Math.sin(s + 1) * 10000; return x - Math.floor(x); };
-const ri = (a: number, b: number, s: number) => Math.floor(sR(s) * (b - a + 1)) + a;
-const fmtINR = (n: number) => `\u20B9${n >= 1e7 ? (n / 1e7).toFixed(2) + " Cr" : n >= 1e5 ? (n / 1e5).toFixed(2) + " L" : n.toLocaleString("en-IN")}`;
-const CL = ["#059669", "#3b82f6", "#d97706", "#7c3aed", "#0891b2", "#e11d48", "#64748b", "#f59e0b"];
-const filterData = <T,>(d: T[], q: string) => q ? d.filter((r) => Object.values(r as Record<string, string | number>).some((v) => String(v).toLowerCase().includes(q.toLowerCase()))) : d;
-const sortData = <T,>(d: T[], f: string, dir: string) => [...d].sort((a, b) => {
-  const av = (a as unknown as Record<string, string | number>)[f], bv = (b as unknown as Record<string, string | number>)[f];
-  return dir === "asc" ? (av > bv ? 1 : av < bv ? -1 : 0) : (av < bv ? 1 : av > bv ? -1 : 0);
-});
+const COLORS = ['#065f46', '#047857', '#059669', '#10b981', '#34d399', '#022c22', '#022c22', '#d1fae5']
+const PRODUCTS = ['Carbon Emissions Report', 'ESG Risk Assessment Dossier', 'Supply Chain Audit Report', 'Climate Resilience Scorecard', 'Green Bond Verification', 'Scope 3 Emissions Tracker', 'Social Impact Assessment', 'Governance Compliance Audit']
+const ARTISANS = ['BSE ESG Advisory Mumbai MH', 'CRISIL ESG Ratings Mumbai MH', 'KPMG ESG Advisory Bengaluru KA', 'EY Climate Change Delhi NCR', 'DNV Sustainability Chennai TN', 'S&P Global Ratings Mumbai MH', 'TERI Green Audit New Delhi', 'CII-ITC Sustainability Delhi']
+const STATUSES = ['SEBI BRSR Filed', 'GRI Standards Aligned', 'TCFD Disclosed', 'CDP Carbon Verified', 'SBTi Validated', 'Pending Third-Party Audit']
 
-const ES = [{ n: "Transport", e: "\uD83D\uDE9B" }, { n: "Warehouse", e: "\uD83C\uDFED" }, { n: "Cold Chain", e: "\u2744\uFE0F" }, { n: "Packaging", e: "\uD83D\uDCE6" }, { n: "Equipment", e: "\u2699\uFE0F" }, { n: "Electricity", e: "\u26A1" }, { n: "Travel", e: "\u2708\uFE0F" }, { n: "Waste", e: "\uD83D\uDDD1\uFE0F" }] as const;
-const SC = ["Scope 1 Direct", "Scope 2 Electric", "Scope 3 Transport", "Scope 4 Upstream", "Scope 5 Downstream", "Scope 6 Other"] as const;
-const EN = [{ n: "Solar", e: "\u2600\uFE0F" }, { n: "Grid", e: "\uD83C\uDFED" }, { n: "Diesel", e: "\uD83D\uDEE2\uFE0F" }, { n: "Wind", e: "\uD83C\uDF2C\uFE0F" }, { n: "Biomass", e: "\uD83C\uDF3F" }, { n: "Gas", e: "\u26FD" }, { n: "Battery", e: "\uD83D\uDD0B" }, { n: "Cogeneration", e: "\uD83D\uDD04" }] as const;
-const ST = ["Active", "Maintenance", "Standby", "New", "Upgrading", "Decommissioned"] as const;
-const WT = [{ n: "Cardboard", e: "\uD83D\uDCE6" }, { n: "Plastic", e: "\uD83E\uDDF4" }, { n: "Paper", e: "\uD83D\uDCC4" }, { n: "Metal", e: "\uD83D\uDD29" }, { n: "E-Waste", e: "\uD83D\uDCBB" }, { n: "Organic", e: "\uD83C\uDF42" }, { n: "Hazardous", e: "\u2622\uFE0F" }, { n: "Glass", e: "\uD83E\uDEE9" }] as const;
-const DM = ["Recycle", "Reuse", "Compost", "Incinerate", "Landfill", "Special Treatment"] as const;
-const CATS = ["Labor Rights", "Health & Safety", "Community Impact", "Diversity", "Training", "Fair Wages", "Anti-Corruption", "Data Privacy"] as const;
-const CST = ["Compliant", "Partial", "Non-Compliant", "Under Review", "Remediation", "Certified"] as const;
-const WHS = ["Mumbai WH", "Delhi WH", "Chennai WH", "Bangalore WH", "Kolkata WH", "Hyderabad WH", "Pune WH", "Ahmedabad WH"] as const;
-const AUD = ["SGS India", "Bureau Veritas", "TUV Nord", "Intertek", "DNV GL", "EY India", "KPMG India", "PwC India"] as const;
-const MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const DEPTS = ["Logistics", "Warehousing", "Fleet", "Procurement", "HR", "Finance", "Operations", "IT"];
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-const genEm = () => Array.from({ length: 75 }, (_, i) => {
-  const s = ES[i % 8], sc = SC[i % 6], em = ri(50, 500, i * 7), rd = ri(2, 30, i * 3);
-  return { id: i + 1, source: s.n, emoji: s.e, scope: sc, emission: em, cost: em * ri(800, 2500, i * 11), reduction: rd, offset: ri(5, 60, i * 13), netEmission: +(em * (1 - rd / 100)).toFixed(1), period: MO[i % 12] + " 2024", trend: rd >= 15 ? "down" : "up" };
-});
-const genEn = () => Array.from({ length: 70 }, (_, i) => {
-  const s = EN[i % 8], st = ST[i % 6], g = ri(500, 5000, i * 5), ef = ri(40, 98, i * 9);
-  return { id: i + 1, source: s.n, emoji: s.e, status: st, generation: g, consumption: g - ri(10, 200, i * 4), cost: g * ri(5, 15, i * 8), efficiency: ef, capacity: +(ri(1, 50, i * 6) / 10).toFixed(1), location: WHS[i % 8], green: ["Solar", "Wind", "Biomass", "Cogeneration"].includes(s.n) };
-});
-const genWa = () => Array.from({ length: 55 }, (_, i) => {
-  const w = WT[i % 8], d = DM[i % 6], q = ri(100, 5000, i * 3), rr = ri(20, 95, i * 7);
-  return { id: i + 1, type: w.n, emoji: w.e, disposal: d, quantity: q, cost: q * ri(2, 20, i * 5), recyclingRate: rr, revenue: +(q * rr / 100 * ri(5, 30, i * 9)), warehouse: WHS[i % 8], compliant: rr >= 60 };
-});
-const genCo = () => Array.from({ length: 65 }, (_, i) => {
-  const cat = CATS[i % 8], st = CST[i % 6], sc = ri(30, 100, i * 4);
-  return { id: i + 1, category: cat, status: st, score: sc, auditDate: `2024-${String(ri(1, 12, i * 2)).padStart(2, "0")}-${String(ri(1, 28, i * 3)).padStart(2, "0")}`, auditor: AUD[i % 8], findings: ri(0, 15, i * 5), riskLevel: ["Critical", "High", "Medium", "Low"][ri(0, 3, i * 6)] as string, certified: st === "Certified" };
-});
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
 
-const KpiIcon = ({ n, cls, color }: { n: string; cls: string; color: string }) => {
-  const m: Record<string, any> = { Activity, AlertTriangle, Zap, Recycle, Droplets, Shield, Award, Star };
-  const Ic = m[n]; return Ic ? <Ic className={cls} style={{ color }} /> : null;
-};
-const EmissionSourceBadge = ({ emoji, name }: { emoji: string; name: string }) => <Badge className="esg-emission-src" variant="outline"><span className="mr-1">{emoji}</span>{name}</Badge>;
-const ScopeBadge = ({ scope }: { scope: string }) => { const i = SC.indexOf(scope as any); return <Badge className="esg-scope-badge" style={{ background: CL[i % 6] + "22", color: CL[i % 6], borderColor: CL[i % 6] }} variant="outline">{scope}</Badge>; };
-const TrendIndicator = ({ trend }: { trend: string }) => trend === "up" ? <TrendingUp className="h-4 w-4 text-red-500" /> : <TrendingDown className="h-4 w-4 text-emerald-500" />;
-const EmissionTile = ({ value }: { value: number }) => <div className="esg-emission-tile rounded px-2 py-1 text-center text-xs font-semibold" style={{ background: value > 300 ? "#fee2e2" : "#dcfce7", color: value > 300 ? "#dc2626" : "059669" }}>{value} tCO\u2082e</div>;
-const OffsetTile = ({ value }: { value: number }) => <div className="esg-offset-tile rounded bg-emerald-100 px-2 py-1 text-center text-xs font-semibold text-emerald-700">{value} tCO\u2082e</div>;
-const EnergySourceBadge = ({ emoji, name }: { emoji: string; name: string }) => <Badge className="esg-energy-src" variant="outline"><span className="mr-1">{emoji}</span>{name}</Badge>;
-const EnergyStatusBadge = ({ status }: { status: string }) => { const i = ST.indexOf(status as any); return <Badge className={`esg-energy-status ${status === "Active" ? "esg-pulse" : ""}`} style={{ background: CL[i % 6] + "22", color: CL[i % 6] }} variant="outline">{status}</Badge>; };
-const EfficiencyBar = ({ val }: { val: number }) => <div className="esg-eff-bar h-2 w-full rounded-full bg-gray-200"><div className="h-2 rounded-full" style={{ width: `${val}%`, background: val > 80 ? "#059669" : val > 60 ? "#3b82f6" : val > 40 ? "#d97706" : "#e11d48" }} /></div>;
-const GreenBadge = () => <Badge className="esg-green-badge gap-1 bg-emerald-100 text-emerald-700"><Leaf className="h-3 w-3" />Renewable</Badge>;
-const WasteTypeBadge = ({ emoji, name }: { emoji: string; name: string }) => <Badge className="esg-waste-type" variant="outline"><span className="mr-1">{emoji}</span>{name}</Badge>;
-const DisposalBadge = ({ method }: { method: string }) => { const i = DM.indexOf(method as any); return <Badge className="esg-disposal-badge" style={{ background: CL[i % 6] + "22", color: CL[i % 6] }} variant="outline">{method}</Badge>; };
-const RecyclingRateBar = ({ val }: { val: number }) => <div className="esg-recycle-bar h-2 w-full rounded-full bg-gray-200"><div className="h-2 rounded-full" style={{ width: `${val}%`, background: val > 75 ? "#059669" : val > 50 ? "#3b82f6" : val > 30 ? "#d97706" : "#e11d48" }} /></div>;
-const CategoryBadge = ({ cat }: { cat: string }) => { const i = CATS.indexOf(cat as any); return <Badge className="esg-cat-badge" style={{ background: CL[i % 6] + "22", color: CL[i % 6] }} variant="outline">{cat}</Badge>; };
-const ComplianceBadge = ({ status }: { status: string }) => { const i = CST.indexOf(status as any); return <Badge className={`esg-compliance-badge ${status === "Compliant" ? "esg-pulse" : ""}`} style={{ background: CL[i % 6] + "22", color: CL[i % 6] }} variant="outline">{status}</Badge>; };
-const RiskLevelBadge = ({ level }: { level: string }) => { const c = ({ Critical: "#e11d48", High: "#d97706", Medium: "#3b82f6", Low: "#059669" } as Record<string, string>)[level] || "#64748b"; return <Badge className={`esg-risk-badge ${level === "Critical" ? "esg-critical-glow" : ""}`} style={{ background: c + "22", color: c }} variant="outline">{level}</Badge>; };
-const CertBadge = () => <Badge className="esg-cert-badge gap-1 bg-amber-100 text-amber-700"><Award className="h-3 w-3" />Certified</Badge>;
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-800">{status}</span>
+)
 
-export default function ESGComplianceHubView() {
-  const [activeTab, setActiveTab] = useState("0");
-  const [searchQ, setSearchQ] = useState("");
-  const [sortField, setSortField] = useState("id");
-  const [sortDir, setSortDir] = useState("asc");
-  const [sheetOpen, setSheetOpen] = useState(false);
-  const [selRec, setSelRec] = useState<Record<string, any> | null>(null);
-  const { toast } = useToast();
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-emerald-200 rounded-full overflow-hidden"><div className="h-full bg-emerald-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
 
-  const emissions = useMemo(() => genEm(), []);
-  const energy = useMemo(() => genEn(), []);
-  const waste = useMemo(() => genWa(), []);
-  const compliance = useMemo(() => genCo(), []);
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#d1fae5" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
+}
 
-  const kpis = [
-    { label: "ESG Score", value: "78.5", icon: "Activity", color: "#059669" },
-    { label: "Carbon Emissions", value: "2,450 tCO\u2082e", icon: "AlertTriangle", color: "#e11d48" },
-    { label: "Energy Saved", value: "1.8 L kWh", icon: "Zap", color: "#d97706" },
-    { label: "Waste Recycled", value: "72.3%", icon: "Recycle", color: "#0891b2" },
-    { label: "Water Saved", value: "45.2 KL", icon: "Droplets", color: "#3b82f6" },
-    { label: "Compliance Score", value: "85.6", icon: "Shield", color: "#059669" },
-    { label: "Certifications", value: "12", icon: "Award", color: "#7c3aed" },
-    { label: "Stakeholder Rating", value: "4.2/5", icon: "Star", color: "#d97706" },
-  ];
-  const mTrend = MO.map((m, i) => ({ month: m, scope1: ri(100, 300, i * 3), scope2: ri(50, 200, i * 5), scope3: ri(80, 250, i * 7) }));
-  const ePillars = [{ name: "Environmental", value: 35 }, { name: "Social", value: 40 }, { name: "Governance", value: 25 }];
-  const dScores = DEPTS.map((d, i) => ({ dept: d, score: ri(55, 95, i * 11) }));
-  const esgTrend = MO.map((m, i) => ({ month: m, score: +(60 + i * 1.8 + ri(0, 5, i * 2)).toFixed(1) }));
-  const cBySrc = ES.map((s, i) => ({ name: s.n, value: ri(200, 2000, i * 9) }));
-  const eMix = [{ name: "Energy", green: energy.filter((e) => e.green).reduce((a, e) => a + e.generation, 0), nonGreen: energy.filter((e) => !e.green).reduce((a, e) => a + e.generation, 0) }];
-  const compByCat = CATS.map((c, i) => ({ cat: c, score: ri(50, 100, i * 7) }));
-  const TABS = ["ESG Dashboard", "Carbon Footprint", "Energy Management", "Waste & Recycling", "Social Compliance", "ESG Analytics"];
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
 
-  const openRec = (r: any) => { setSelRec(r); setSheetOpen(true); };
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
+)
+
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `ESG-${String(offset + i + 1).padStart(4, '0')}`,
+    painter: ARTISANS[(offset + i) % ARTISANS.length], ware: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 20, ((offset + i) * 19) % 20) + 1,
+    cost: ri(4000, 52000, ((offset + i) * 10707) % 48000) + 4000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
+  }))
+
+const esgrecords = [
+  { id: 'ESG-0001', painter: 'BSE ESG Advisory Mumbai MH', ware: 'Carbon Emissions Report', status: 'SEBI BRSR Filed', qty: 3, cost: 48000, date: '2024-01-15' },
+  { id: 'ESG-0002', painter: 'CRISIL ESG Ratings Mumbai MH', ware: 'ESG Risk Assessment Dossier', status: 'GRI Standards Aligned', qty: 5, cost: 36000, date: '2024-01-28' },
+  { id: 'ESG-0003', painter: 'KPMG ESG Advisory Bengaluru KA', ware: 'Supply Chain Audit Report', status: 'TCFD Disclosed', qty: 2, cost: 52000, date: '2024-02-10' },
+  { id: 'ESG-0004', painter: 'EY Climate Change Delhi NCR', ware: 'Climate Resilience Scorecard', status: 'CDP Carbon Verified', qty: 7, cost: 22000, date: '2024-02-22' },
+  { id: 'ESG-0005', painter: 'DNV Sustainability Chennai TN', ware: 'Green Bond Verification', status: 'SBTi Validated', qty: 4, cost: 44000, date: '2024-03-08' },
+  { id: 'ESG-0006', painter: 'S&P Global Ratings Mumbai MH', ware: 'Scope 3 Emissions Tracker', status: 'Pending Third-Party Audit', qty: 6, cost: 28000, date: '2024-03-20' },
+  { id: 'ESG-0007', painter: 'TERI Green Audit New Delhi', ware: 'Social Impact Assessment', status: 'SEBI BRSR Filed', qty: 2, cost: 50000, date: '2024-04-03' },
+  { id: 'ESG-0008', painter: 'CII-ITC Sustainability Delhi', ware: 'Governance Compliance Audit', status: 'GRI Standards Aligned', qty: 8, cost: 16000, date: '2024-04-16' },
+  { id: 'ESG-0009', painter: 'BSE ESG Advisory Mumbai MH', ware: 'ESG Risk Assessment Dossier', status: 'TCFD Disclosed', qty: 4, cost: 40000, date: '2024-04-28' },
+  { id: 'ESG-0010', painter: 'CRISIL ESG Ratings Mumbai MH', ware: 'Carbon Emissions Report', status: 'CDP Carbon Verified', qty: 3, cost: 48000, date: '2024-05-10' },
+  { id: 'ESG-0011', painter: 'KPMG ESG Advisory Bengaluru KA', ware: 'Supply Chain Audit Report', status: 'SBTi Validated', qty: 5, cost: 32000, date: '2024-05-23' },
+  { id: 'ESG-0012', painter: 'EY Climate Change Delhi NCR', ware: 'Climate Resilience Scorecard', status: 'Pending Third-Party Audit', qty: 6, cost: 20000, date: '2024-06-05' },
+  { id: 'ESG-0013', painter: 'DNV Sustainability Chennai TN', ware: 'Green Bond Verification', status: 'SEBI BRSR Filed', qty: 3, cost: 46000, date: '2024-06-18' },
+  { id: 'ESG-0014', painter: 'S&P Global Ratings Mumbai MH', ware: 'Scope 3 Emissions Tracker', status: 'GRI Standards Aligned', qty: 7, cost: 24000, date: '2024-07-01' },
+  { id: 'ESG-0015', painter: 'TERI Green Audit New Delhi', ware: 'Social Impact Assessment', status: 'TCFD Disclosed', qty: 2, cost: 52000, date: '2024-07-14' },
+  { id: 'ESG-0016', painter: 'CII-ITC Sustainability Delhi', ware: 'Governance Compliance Audit', status: 'CDP Carbon Verified', qty: 10, cost: 12000, date: '2024-07-26' },
+  { id: 'ESG-0017', painter: 'BSE ESG Advisory Mumbai MH', ware: 'Carbon Emissions Report', status: 'SBTi Validated', qty: 4, cost: 42000, date: '2024-08-08' },
+  { id: 'ESG-0018', painter: 'CRISIL ESG Ratings Mumbai MH', ware: 'ESG Risk Assessment Dossier', status: 'Pending Third-Party Audit', qty: 5, cost: 30000, date: '2024-08-20' },
+  { id: 'ESG-0019', painter: 'KPMG ESG Advisory Bengaluru KA', ware: 'Supply Chain Audit Report', status: 'SEBI BRSR Filed', qty: 3, cost: 50000, date: '2024-09-02' },
+  { id: 'ESG-0020', painter: 'EY Climate Change Delhi NCR', ware: 'Climate Resilience Scorecard', status: 'GRI Standards Aligned', qty: 8, cost: 18000, date: '2024-09-14' },
+]
+
+export default function EsgComplianceHubView() {
+  const [tab, setTab] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
+
+  const allRecords = [...esgrecords, ...genRecords(21), ...genRecords(41)]
+
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.ware.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
+
+  const filterGroups = [
+    { key: 'ware', label: 'Ware', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.ware === p).length })) },
+    { key: 'painter', label: 'Painter', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.painter === p).length })) },
+  ]
+
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const artisanChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.painter === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
-    <div className="esg-hub space-y-4 p-4">
-      <PageHeader title="ESG Compliance Hub" description="Environmental, Social & Governance compliance monitoring for Indian logistics and warehousing operations" />
-      <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v); setSearchQ(""); setSortField("id"); setSortDir("asc"); }}>
-        <TabsList className="esg-tabs-wrap flex-wrap">{TABS.map((t, i) => <TabsTrigger key={i} value={String(i)} className="esg-tab">{t}</TabsTrigger>)}</TabsList>
-
-        {activeTab === "0" && (
-          <div className="esg-dashboard space-y-4">
-            <div className="grid grid-cols-4 gap-3">
-              {kpis.map((k, i) => <Card key={i}><CardContent className="inner-glow hover-lift-sm esg-kpi flex items-center gap-3 p-4"><KpiIcon n={k.icon} cls="h-5 w-5" color={k.color} /><div><p className="text-xs text-muted-foreground">{k.label}</p><p className="text-lg font-bold">{k.value}</p></div></CardContent></Card>)}
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              <Card><CardHeader className="pb-2"><CardTitle className="esg-chart-title text-sm">Monthly Emission Trend (tCO\u2082e)</CardTitle></CardHeader><CardContent><AreaChart data={mTrend} width={320} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={10} /><YAxis fontSize={10} /><Tooltip /><Area type="monotone" dataKey="scope1" stackId="1" stroke="#e11d48" fill="#e11d4844" name="Scope 1" /><Area type="monotone" dataKey="scope2" stackId="1" stroke="#d97706" fill="#d9770644" name="Scope 2" /><Area type="monotone" dataKey="scope3" stackId="1" stroke="#7c3aed" fill="#7c3aed44" name="Scope 3" /></AreaChart></CardContent></Card>
-              <Card><CardHeader className="pb-2"><CardTitle className="esg-chart-title text-sm">ESG Pillars</CardTitle></CardHeader><CardContent><PieChart width={320} height={200}><Pie data={ePillars} cx="50%" cy="50%" outerRadius={70} dataKey="value" label>{ePillars.map((_, i) => <Cell key={i} fill={CL[i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-              <Card><CardHeader className="pb-2"><CardTitle className="esg-chart-title text-sm">Department ESG Scores</CardTitle></CardHeader><CardContent><BarChart data={dScores} width={320} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="dept" fontSize={9} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={10} domain={[0, 100]} /><Tooltip /><Bar dataKey="score" fill="#059669" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
-            </div>
+    <div className="esg-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'ESG Compliance' }]} />
+      <PageHeader title="ESG Compliance Hub" description="India ESG compliance and sustainability reporting supply chain with SEBI BRSR filing, GRI Standards alignment, TCFD climate disclosure, CDP carbon verification, SBTi validation, and third-party audit management across 8 advisory centres including BSE, CRISIL, KPMG and TERI" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-emerald-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
+        </TabsList>
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Active Ware" value={PRODUCTS.length} />
+            <KpiTile label="Advisory Centres" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-        )}
-
-        {activeTab === "1" && (() => {
-          const data = sortData(filterData(emissions as unknown as Record<string, string | number>[], searchQ) as unknown as Record<string, string | number>[], sortField, sortDir);
-          return (
-            <div className="esg-carbon space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="relative flex-1"><Search className="esg-search-icon absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search emissions..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="pl-8" /></div>
-                <Select value={sortField} onValueChange={setSortField}><SelectTrigger className="esg-sort-select w-36"><SelectValue /></SelectTrigger><SelectContent>{["id", "emission", "cost", "reduction", "netEmission"].map((f) => <SelectItem key={f} value={f}>{f}</SelectItem>)}</SelectContent></Select>
-                <Button variant="outline" size="sm" onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}><ArrowUpDown className="press-scale h-4 w-4" />{sortDir}</Button>
-                <Button variant="outline" size="sm" onClick={() => toast.success("Exported", "Carbon emission data exported successfully")}><Download className="press-scale h-4 w-4" /></Button>
-                <Badge variant="secondary" className="esg-count-badge">{(data as any[]).length} records</Badge>
-              </div>
-              <div className="esg-table-wrap max-h-[500px] overflow-auto rounded border">
-                <Table><TableHeader><TableRow className="esg-carbon-header"><TableHead>Source</TableHead><TableHead>Scope</TableHead><TableHead>Emission</TableHead><TableHead>Cost</TableHead><TableHead>Reduction</TableHead><TableHead>Offset</TableHead><TableHead>Net</TableHead><TableHead>Period</TableHead><TableHead>Trend</TableHead><TableHead></TableHead></TableRow></TableHeader>
-                <TableBody>{(data as any[]).slice(0, 30).map((r) => <TableRow key={r.id} className="press-scale esg-carbon-row"><TableCell><EmissionSourceBadge emoji={r.emoji} name={r.source} /></TableCell><TableCell><ScopeBadge scope={r.scope} /></TableCell><TableCell><EmissionTile value={r.emission} /></TableCell><TableCell className="text-sm">{fmtINR(r.cost)}</TableCell><TableCell className="text-sm text-emerald-600">{r.reduction}%</TableCell><TableCell><OffsetTile value={r.offset} /></TableCell><TableCell className="text-sm font-semibold">{r.netEmission}</TableCell><TableCell className="text-xs">{r.period}</TableCell><TableCell><TrendIndicator trend={r.trend} /></TableCell><TableCell><Button variant="ghost" size="sm" onClick={() => openRec(r)}><Eye className="h-4 w-4" /></Button></TableCell></TableRow>)}</TableBody></Table>
-              </div>
-            </div>);
-        })()}
-
-        {activeTab === "2" && (() => {
-          const data = sortData(filterData(energy as unknown as Record<string, string | number>[], searchQ) as unknown as Record<string, string | number>[], sortField, sortDir);
-          return (
-            <div className="esg-energy-tab space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="relative flex-1"><Search className="esg-search-icon absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search energy records..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="pl-8" /></div>
-                <Select value={sortField} onValueChange={setSortField}><SelectTrigger className="esg-sort-select w-36"><SelectValue /></SelectTrigger><SelectContent>{["id", "generation", "consumption", "cost", "efficiency", "capacity"].map((f) => <SelectItem key={f} value={f}>{f}</SelectItem>)}</SelectContent></Select>
-                <Button variant="outline" size="sm" onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}><ArrowUpDown className="press-scale h-4 w-4" />{sortDir}</Button>
-                <Button variant="outline" size="sm" onClick={() => toast.success("Exported", "Energy data exported successfully")}><Download className="press-scale h-4 w-4" /></Button>
-                <Badge variant="secondary" className="esg-count-badge">{energy.length} records</Badge>
-              </div>
-              <div className="esg-table-wrap max-h-[500px] overflow-auto rounded border">
-                <Table><TableHeader><TableRow className="esg-energy-header"><TableHead>Source</TableHead><TableHead>Status</TableHead><TableHead>Generation</TableHead><TableHead>Consumption</TableHead><TableHead>Cost</TableHead><TableHead>Efficiency</TableHead><TableHead>Capacity</TableHead><TableHead>Location</TableHead><TableHead>Green</TableHead><TableHead></TableHead></TableRow></TableHeader>
-                <TableBody>{(data as any[]).slice(0, 30).map((r) => <TableRow key={r.id} className="press-scale esg-energy-row"><TableCell><EnergySourceBadge emoji={r.emoji} name={r.source} /></TableCell><TableCell><EnergyStatusBadge status={r.status} /></TableCell><TableCell className="text-sm">{r.generation.toLocaleString()} kWh</TableCell><TableCell className="text-sm">{r.consumption.toLocaleString()} kWh</TableCell><TableCell className="text-sm">{fmtINR(r.cost)}</TableCell><TableCell><div className="w-20 space-y-0.5"><EfficiencyBar val={r.efficiency} /><span className="text-xs">{r.efficiency}%</span></div></TableCell><TableCell className="text-sm">{r.capacity} MW</TableCell><TableCell className="text-xs">{r.location}</TableCell><TableCell>{r.green ? <GreenBadge /> : <span className="text-xs text-muted-foreground">\u2014</span>}</TableCell><TableCell><Button variant="ghost" size="sm" onClick={() => openRec(r)}><Eye className="h-4 w-4" /></Button></TableCell></TableRow>)}</TableBody></Table>
-              </div>
-            </div>);
-        })()}
-
-        {activeTab === "3" && (() => {
-          const data = sortData(filterData(waste as unknown as Record<string, string | number>[], searchQ) as unknown as Record<string, string | number>[], sortField, sortDir);
-          return (
-            <div className="esg-waste-tab space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="relative flex-1"><Search className="esg-search-icon absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search waste records..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="pl-8" /></div>
-                <Select value={sortField} onValueChange={setSortField}><SelectTrigger className="esg-sort-select w-36"><SelectValue /></SelectTrigger><SelectContent>{["id", "quantity", "cost", "recyclingRate", "revenue"].map((f) => <SelectItem key={f} value={f}>{f}</SelectItem>)}</SelectContent></Select>
-                <Button variant="outline" size="sm" onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}><ArrowUpDown className="press-scale h-4 w-4" />{sortDir}</Button>
-                <Button variant="outline" size="sm" onClick={() => toast.success("Exported", "Waste data exported successfully")}><Download className="press-scale h-4 w-4" /></Button>
-                <Badge variant="secondary" className="esg-count-badge">{waste.length} records</Badge>
-              </div>
-              <div className="esg-table-wrap max-h-[500px] overflow-auto rounded border">
-                <Table><TableHeader><TableRow className="esg-waste-header"><TableHead>Type</TableHead><TableHead>Disposal</TableHead><TableHead>Quantity</TableHead><TableHead>Cost</TableHead><TableHead>Recycle Rate</TableHead><TableHead>Revenue</TableHead><TableHead>Warehouse</TableHead><TableHead>Compliant</TableHead><TableHead></TableHead></TableRow></TableHeader>
-                <TableBody>{(data as any[]).slice(0, 30).map((r) => <TableRow key={r.id} className="press-scale esg-waste-row"><TableCell><WasteTypeBadge emoji={r.emoji} name={r.type} /></TableCell><TableCell><DisposalBadge method={r.disposal} /></TableCell><TableCell className="text-sm">{r.quantity.toLocaleString()} kg</TableCell><TableCell className="text-sm">{fmtINR(r.cost)}</TableCell><TableCell><div className="w-20 space-y-0.5"><RecyclingRateBar val={r.recyclingRate} /><span className="text-xs">{r.recyclingRate}%</span></div></TableCell><TableCell className="text-sm text-emerald-600">{fmtINR(r.revenue)}</TableCell><TableCell className="text-xs">{r.warehouse}</TableCell><TableCell>{r.compliant ? <ComplianceBadge status="Compliant" /> : <Badge variant="outline" className="text-red-500">Non-Compliant</Badge>}</TableCell><TableCell><Button variant="ghost" size="sm" onClick={() => openRec(r)}><Eye className="h-4 w-4" /></Button></TableCell></TableRow>)}</TableBody></Table>
-              </div>
-            </div>);
-        })()}
-
-        {activeTab === "4" && (() => {
-          const data = sortData(filterData(compliance as unknown as Record<string, string | number>[], searchQ) as unknown as Record<string, string | number>[], sortField, sortDir);
-          return (
-            <div className="esg-social-tab space-y-3">
-              <div className="flex items-center gap-2">
-                <div className="relative flex-1"><Search className="esg-search-icon absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" /><Input placeholder="Search compliance records..." value={searchQ} onChange={(e) => setSearchQ(e.target.value)} className="pl-8" /></div>
-                <Select value={sortField} onValueChange={setSortField}><SelectTrigger className="esg-sort-select w-36"><SelectValue /></SelectTrigger><SelectContent>{["id", "score", "findings", "auditDate"].map((f) => <SelectItem key={f} value={f}>{f}</SelectItem>)}</SelectContent></Select>
-                <Button variant="outline" size="sm" onClick={() => setSortDir((d) => d === "asc" ? "desc" : "asc")}><ArrowUpDown className="press-scale h-4 w-4" />{sortDir}</Button>
-                <Button variant="outline" size="sm" onClick={() => toast.success("Exported", "Compliance data exported successfully")}><Download className="press-scale h-4 w-4" /></Button>
-                <Badge variant="secondary" className="esg-count-badge">{compliance.length} records</Badge>
-              </div>
-              <div className="esg-table-wrap max-h-[500px] overflow-auto rounded border">
-                <Table><TableHeader><TableRow className="esg-social-header"><TableHead>Category</TableHead><TableHead>Status</TableHead><TableHead>Score</TableHead><TableHead>Audit Date</TableHead><TableHead>Auditor</TableHead><TableHead>Findings</TableHead><TableHead>Risk</TableHead><TableHead>Cert</TableHead><TableHead></TableHead></TableRow></TableHeader>
-                <TableBody>{(data as any[]).slice(0, 30).map((r) => <TableRow key={r.id} className="press-scale esg-social-row"><TableCell><CategoryBadge cat={r.category} /></TableCell><TableCell><ComplianceBadge status={r.status} /></TableCell><TableCell><div className="w-20 space-y-0.5"><EfficiencyBar val={r.score} /><span className="text-xs">{r.score}/100</span></div></TableCell><TableCell className="text-xs">{r.auditDate}</TableCell><TableCell className="text-xs">{r.auditor}</TableCell><TableCell className="text-sm">{r.findings}</TableCell><TableCell><RiskLevelBadge level={r.riskLevel} /></TableCell><TableCell>{r.certified ? <CertBadge /> : <span className="text-xs text-muted-foreground">\u2014</span>}</TableCell><TableCell><Button variant="ghost" size="sm" onClick={() => openRec(r)}><Eye className="h-4 w-4" /></Button></TableCell></TableRow>)}</TableBody></Table>
-              </div>
-            </div>);
-        })()}
-
-        {activeTab === "5" && (
-          <div className="esg-analytics grid grid-cols-2 gap-4">
-            <Card><CardHeader className="pb-2"><CardTitle className="esg-chart-title text-sm">ESG Score Trend (12 Months)</CardTitle></CardHeader><CardContent><LineChart data={esgTrend} width={420} height={220}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={10} /><YAxis fontSize={10} domain={[50, 100]} /><Tooltip /><Line type="monotone" dataKey="score" stroke="#059669" strokeWidth={2} dot={{ fill: "#059669", r: 3 }} /></LineChart></CardContent></Card>
-            <Card><CardHeader className="pb-2"><CardTitle className="esg-chart-title text-sm">Carbon Emissions by Source</CardTitle></CardHeader><CardContent><PieChart width={420} height={220}><Pie data={cBySrc} cx="50%" cy="50%" outerRadius={80} dataKey="value" label>{cBySrc.map((_, i) => <Cell key={i} fill={CL[i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-            <Card><CardHeader className="pb-2"><CardTitle className="esg-chart-title text-sm">Energy Mix: Green vs Non-Green</CardTitle></CardHeader><CardContent><BarChart data={eMix} width={420} height={220}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" fontSize={10} /><YAxis fontSize={10} /><Tooltip /><Bar dataKey="green" fill="#059669" name="Green" radius={[4, 4, 0, 0]} /><Bar dataKey="nonGreen" fill="#e11d48" name="Non-Green" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
-            <Card><CardHeader className="pb-2"><CardTitle className="esg-chart-title text-sm">Compliance by Category</CardTitle></CardHeader><CardContent><BarChart data={compByCat} layout="vertical" width={420} height={220}><CartesianGrid strokeDasharray="3 3" /><XAxis type="number" fontSize={10} domain={[0, 100]} /><YAxis dataKey="cat" type="category" fontSize={9} width={110} /><Tooltip /><Bar dataKey="score" fill="#3b82f6" radius={[0, 4, 4, 0]} /></BarChart></CardContent></Card>
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="BRSR" value={94} />
+            <HealthRing label="GRI" value={89} />
+            <HealthRing label="TCFD" value={86} />
+            <HealthRing label="CDP" value={91} />
+            <HealthRing label="SBTi" value={83} />
+            <HealthRing label="Audit" value={88} />
           </div>
-        )}
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="BRSR Filed" value="1,850+ Cos" />
+            <ValueTile label="India ESG AUM" value="₹42,000 Cr" />
+            <ValueTile label="Advisory Firms" value="200+" />
+            <ValueTile label="YoY Growth" value="+38.2%" />
+          </div>
+        </TabsContent>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search ESG compliance shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-emerald-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Ware</th>
+                  <th className="p-3 text-left font-medium">Painter</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-emerald-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.ware} /></td>
+                    <td className="p-3">{record.painter}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['reports', 'dossiers', 'audits', 'scorecards'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </TabsContent>
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Advisory Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={artisanChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {artisanChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
+          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>India ESG Framework — SEBI BRSR Mandatory Disclosure Regime</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">India ESG compliance and sustainability reporting framework has undergone a transformative expansion since the Securities and Exchange Board of India SEBI mandated Business Responsibility and Sustainability Reporting BRSR for the top one thousand listed companies by market capitalisation from the financial year twenty twenty-two twenty-three onwards establishing India as one of the most comprehensive emerging market ESG disclosure regimes globally where the BRSR framework requires structured annual disclosure across nine principles covering environmental stewardship including greenhouse gas emissions water consumption waste management and biodiversity impact social responsibility including employee welfare supply chain labour standards community development and human rights due diligence and governance integrity including board diversity anti-corruption policies stakeholder engagement and ethical business conduct where the BRSR format is aligned with the globally recognised GRI Standards Global Reporting Initiative providing international comparability of Indian corporate ESG disclosures while incorporating India-specific metrics relevant to the national context including National Ambient Air Quality Standards compliance wastewater treatment plant efficiency solid waste management and recycling rates and corporate social development expenditure aligned with the Companies Act Schedule VII requirements where the SEBI BRSR Lite format introduced for the top one thousand listed companies provides a streamlined disclosure framework with mandatory quantitative parameters and voluntary qualitative narrative sections enabling smaller companies to comply with ESG disclosure requirements without excessive reporting burden where the BRSR assurance framework introduced by SEBI in twenty twenty-three requires limited assurance of quantitative BRSR disclosures by independent third-party assurance providers approved by SEBI enhancing the reliability and credibility of ESG data reported by Indian listed companies where the ESG advisory ecosystem in India has expanded rapidly to serve the growing compliance demand with over two hundred dedicated ESG advisory firms and sustainability consultancies operating across major Indian cities including Mumbai where BSE ESG Advisory provides BRSR filing support and ESG rating services and Bengaluru where KPMG EY Deloitte and PwC maintain dedicated ESG advisory practices serving Indian corporate clients on BRSR compliance GRI alignment TCFD climate disclosure and SBTi target validation creating a comprehensive ESG advisory supply chain that manages the end-to-end process of data collection verification assurance and regulatory filing for Indian corporate sustainability reporting requirements.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>SEBI BRSR Filing & GRI Standards Alignment Protocol</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The SEBI BRSR filing protocol establishes the mandatory annual submission process for Indian listed companies requiring electronic filing of the completed BRSR disclosure through the BSE and NSE exchange filing portals within the prescribed timeline of sixty days from the end of each financial year with the BRSR disclosure comprising one hundred and forty-nine individual data points across the nine BRSR principles where the quantitative environmental parameters require disclosure of Scope one direct greenhouse gas emissions Scope two indirect emissions from purchased electricity and Scope three upstream and downstream supply chain emissions calculated in accordance with the GHG Protocol Corporate Standard providing internationally comparable carbon footprint data for Indian listed companies where the energy consumption disclosure requires reporting of total electricity consumption in megawatt hours renewable energy share as percentage of total energy consumption and energy intensity measured as energy consumed per unit of revenue providing investors with standardised metrics for evaluating corporate energy transition progress where the water consumption disclosure requires reporting of total freshwater withdrawal groundwater recharge rainwater harvesting volume and water recycling rate measured in accordance with the CDP Water Security questionnaire methodology providing comprehensive water stewardship metrics aligned with international reporting frameworks where the waste management disclosure requires reporting of total solid waste generated hazardous waste quantities waste recycling rate and plastic waste management compliance with the Plastic Waste Management Rules twenty sixteen providing detailed waste management transparency for Indian listed companies where the GRI Standards alignment mapping requires Indian companies reporting under BRSR to map their BRSR disclosures to the corresponding GRI Standards disclosure requirements enabling international investors to compare Indian corporate ESG performance against global benchmarks where the alignment mapping covers GRI Standard one Universal two hundred series Topic-specific economic disclosures three hundred series Environmental disclosures and four hundred series Social disclosures providing comprehensive coverage of the GRI Standards framework within the BRSR reporting structure where the BRSR assurance protocol requires independent third-party assurance providers to verify the accuracy completeness and reliability of the quantitative BRSR disclosures using ISAE three thousand assurance engagements methodology providing limited assurance opinion on whether the BRSR quantitative disclosures are free from material misstatement confirming the reliability of the ESG data presented to investors and stakeholders for investment decision-making and corporate sustainability performance evaluation.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>CDP Carbon Verification & TCFD Climate Disclosure Supply Chain</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The CDP carbon verification and TCFD Task Force on Climate-related Financial Disclosures compliance supply chain manages the end-to-end process of carbon footprint measurement verification and climate risk disclosure for Indian companies participating in the global CDP carbon disclosure programme and complying with the SEBI-mandated climate-related financial disclosures aligned with the TCFD recommendations where the CDP India programme manages carbon disclosure responses from over two hundred Indian companies annually across three questionnaires covering climate change water security and forests providing standardised carbon emissions and environmental impact data for institutional investors with combined assets under management exceeding one hundred thirty trillion US dollars globally who use CDP data for investment decision-making and corporate engagement on climate transition progress where the CDP carbon verification process requires Indian companies to submit detailed carbon emissions data including Scope one direct emissions from owned and controlled sources Scope two indirect emissions from purchased electricity steam heating and cooling and Scope three upstream and downstream emissions from the company's value chain calculated using the GHG Protocol Corporate Standard and Corporate Value Chain Standard with all emissions data verified by an accredited third-party verification body in accordance with ISO fourteen thousand six four greenhouse gas verification methodology confirming the accuracy completeness and consistency of the reported emissions data within a reasonable level of assurance providing investors with verified carbon footprint data for evaluating corporate climate transition progress where the TCFD disclosure framework aligned with the SEBI BRSR climate disclosure requirements mandates Indian companies to report across four pillars of climate governance including governance structure for climate-related risks and opportunities strategy for managing climate transition impacts risk management processes for identifying and assessing climate-related financial risks and metrics and targets for tracking climate performance including Scope one two and three greenhouse gas emissions science-based emissions reduction targets validated by the Science Based Targets initiative SBTi and climate scenario analysis using the TCFD recommended two-degree Celsius and four degree Celsius warming scenarios to assess the financial resilience of the company's business model under different climate transition pathways providing investors with comprehensive forward-looking climate risk assessment data for evaluating the long-term climate resilience of Indian listed companies in the context of the global energy transition and net-zero emissions commitment framework.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>SBTi Validation & India Green Finance Market Growth</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Science Based Targets initiative SBTi validation framework provides the globally recognised gold standard for corporate emissions reduction target setting requiring Indian companies to commit to emissions reduction targets aligned with the latest climate science including the Paris Agreement goals of limiting global warming to one point five degrees Celsius above pre-industrial levels where the SBTi validation process requires companies to submit detailed near-term emissions reduction targets covering Scope one and Scope two emissions for the period twenty twenty-five to twenty thirty and long-term net-zero commitments for twenty fifty covering all three scopes with the targets validated against the SBTi criteria including minimum absolute emissions reduction of forty-two percent by twenty thirty for one point five degree Celsius aligned targets and absolute net-zero emissions by twenty fifty with residual emissions addressed through verified carbon removal credits where the SBTi validation supply chain in India involves ESG advisory firms including BSE ESG Advisory KPMG EY DNV and S&P Global working with Indian corporate clients on target setting methodology selection emissions base year establishment decarbonisation pathway modelling and SBTi submission and validation managing the comprehensive validation process that typically requires twelve to eighteen months from initial target commitment to final SBTi validation providing Indian companies with internationally recognised science-based emissions reduction targets that demonstrate credible climate transition commitment to global investors and stakeholders. The India green finance market has experienced extraordinary growth driven by the convergence of SEBI BRSR mandatory ESG disclosure requirements growing investor demand for ESG-aligned investment products and increasing corporate commitment to science-based emissions reduction targets with the India ESG mutual fund category growing from zero to over forty-two thousand crore rupees in assets under management within three years of the BRSR mandate demonstrating the transformative impact of regulatory ESG disclosure requirements on capital market allocation where SEBI has introduced the BRSR Core framework requiring value chain disclosure by the top two hundred fifty listed companies from financial year twenty twenty-five twenty-six onwards extending ESG transparency requirements to Scope three supply chain emissions and lifecycle impact assessment creating a comprehensive ESG compliance supply chain that will drive continued growth in the Indian ESG advisory sustainability consulting and green finance market serving the growing demand for credible verified corporate sustainability performance data and science-based climate transition planning across the Indian corporate landscape.</p></CardContent>
+            </Card>
+          </div>
+        </TabsContent>
       </Tabs>
-
-      <Sheet open={!!(sheetOpen && selRec)} onOpenChange={setSheetOpen}>
-        <SheetContent className="esg-sheet">
-          <div className="esg-sheet-gradient -mx-6 -mt-6 mb-6 h-28 rounded-b-2xl bg-gradient-to-r from-emerald-600 via-blue-600 to-violet-600 flex items-end p-6 pb-4">
-            <div><p className="text-xs font-medium uppercase tracking-wider text-white/70">Record Details</p>
-            <p className="text-lg font-bold text-white">{activeTab === "1" ? (selRec?.source ?? "") : activeTab === "2" ? (selRec?.source ?? "") : activeTab === "3" ? (selRec?.type ?? "") : activeTab === "4" ? (selRec?.category ?? "") : "Details"}</p></div>
-          </div>
-          <SheetHeader><SheetTitle className="esg-sheet-title">Record #{selRec?.id}</SheetTitle></SheetHeader>
-          {selRec && (
-            <div className="esg-sheet-body mt-4 space-y-3">
-              {Object.entries(selRec).filter(([k]) => k !== "id" && k !== "emoji").map(([k, v]) => (
-                <div key={k} className="esg-sheet-row flex justify-between border-b border-muted pb-2">
-                  <span className="text-sm text-muted-foreground capitalize">{k}</span>
-                  <span className="text-sm font-medium">{typeof v === "number" && (k.includes("cost") || k.includes("revenue")) ? fmtINR(v) : String(v)}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </SheetContent>
-      </Sheet>
     </div>
-  );
+  )
 }
+
+
+

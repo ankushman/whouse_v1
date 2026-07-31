@@ -357,6 +357,7 @@ import RoganArtGujaratLogisticsView from "@/components/modules/rogan-art-gujarat
 import PichwaiRajasthanLogisticsView from "@/components/modules/pichwai-rajasthan-logistics-view"
 import WarliMaharashtraLogisticsView from "@/components/modules/warli-maharashtra-logistics-view"
 import GondMadhyaLogisticsView from "@/components/modules/gond-madhya-logistics-view"
+import KalighatBengalLogisticsView from "@/components/modules/kalighat-bengal-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -713,6 +714,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "pichwai-rajasthan-logistics": PichwaiRajasthanLogisticsView,
   "warli-maharashtra-logistics": WarliMaharashtraLogisticsView,
   "gond-madhya-logistics": GondMadhyaLogisticsView,
+  "kalighat-bengal-logistics": KalighatBengalLogisticsView,
 }
 
 
