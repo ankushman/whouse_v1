@@ -6,77 +6,77 @@ import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
 import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const COLORS = ['#1e1b4b', '#312e81', '#4338ca', '#6366f1', '#a5b4fc', '#1e1a4b', '#0f0e2a', '#eef2ff']
-const PRODUCTS = ['Srikalahasti Tree of Life Panel', 'Machilipatnam Mythological Scroll', 'Ramayana Block Print Yard', 'Aranya Nature Motif Saree', 'Bhagavata Purana Hanging', 'Panchatantra Story Panel', 'Dashavatara Kalamkari Mural', 'Kalamkari Temple Canopy']
-const ARTISTS = ['Srikalahasti Pen Art Guild', 'Machilipatnam Block Studio', 'Pedana Kalamkari Centre', 'Tirupati Temple Art Unit', 'Nellore Hand-Paint Cluster', 'Rajahmundry Pen Art Studio', 'Kakinada Textile Hub', 'Eluru Natural Dye Unit']
-const STATUSES = ['GI Kalamkari Craft Mark', 'IS 16794 Textile Print Grade A', 'Acid-Free Tissue Roll', 'Humidity-Controlled Truck', 'Dark Dry Storage 18-22C', 'Dye Colourfast QC']
+const COLORS = ['#4338ca', '#3730a3', '#312e81', '#1e1b4b', '#6366f1', '#4f46e5', '#4338ca', '#eef2ff']
+const PRODUCTS = ['Srikalahasti Tree of Life Panel', 'AP Kalamkari Ramayana Scroll', 'Machilipatnam Mythological Hanging', 'Kalamkari Dashavatara Mural', 'AP Kalamkari Panchatantra Panel', 'Kalamkari Aranya Nature Motif', 'Kalamkari Bhagavata Purana Cloth', 'AP Kalamkari Temple Canopy']
+const ARTISANS = ['Srikalahasti Pen Art Guild', 'Machilipatnam Block Studio', 'Pedana Kalamkari Centre', 'Tirupati Temple Art Cooperative', 'Nellore Kalamkari Painters Colony', 'Rajahmundry Pen Art Cluster', 'Kakinada Textile Art Society', 'Eluru Natural Dye Craft Studio']
+const STATUSES = ['GI Kalamkari Craft Mark', 'IS 16794 Kalamkari Art Grade A', 'Cotton Roll Flat Pack', 'Humidity-Controlled Truck', 'Dark Dry Storage 18-22C', 'Natural Dye Colourfast QC']
 
 const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
 const ProductBadge = ({ name }: { name: string }) => (
-  <span className="kpa-badge inline-block px-2 py-0.5 rounded text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
 )
 
 const StatusBadge = ({ status }: { status: string }) => (
-  <span className="kpa-status inline-block px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">{status}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-indigo-100 text-indigo-800">{status}</span>
 )
 
 const CostBar = ({ cost, max }: { cost: number; max: number }) => (
-  <div className="kpa-costbar w-full bg-indigo-100 rounded h-2"><div className="bg-indigo-700 h-2 rounded" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+  <div className="w-24 h-2 bg-indigo-200 rounded-full overflow-hidden"><div className="h-full bg-indigo-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
 )
 
-const HealthRing = ({ value, label, size = 64 }: { value: number; label: string; size?: number }) => {
-  const r = (size - 8) / 2
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
   return (
-    <div className="kpa-health-ring flex flex-col items-center">
-      <svg width={size} height={size}><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={4} /><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#1e1b4b" strokeWidth={4} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" transform={`rotate(-90 ${size/2} ${size/2})`} /></svg>
-      <span className="text-xs font-semibold" style={{ color: COLORS[0] }}>{value}%</span>
-      <span className="text-[10px] text-gray-500">{label}</span>
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#eef2ff" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
     </div>
   )
 }
 
-const KpiTile = ({ label, value, icon }: { label: string; value: string; icon: string }) => (
-  <Card className="kpa-kpi"><CardContent className="p-4"><div className="flex items-center gap-3"><span className="text-2xl">{icon}</span><div><p className="text-xs text-gray-500">{label}</p><p className="text-xl font-bold" style={{ color: COLORS[0] }}>{value}</p></div></div></CardContent></Card>
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
 )
 
 const ValueTile = ({ label, value }: { label: string; value: string }) => (
-  <Card className="kpa-value"><CardContent className="p-4"><p className="text-xs text-gray-500">{label}</p><p className="text-lg font-semibold" style={{ color: COLORS[1] }}>{value}</p></CardContent></Card>
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
 )
 
-const genRecords = (startIdx: number) => Array.from({ length: 20 }, (_, i) => {
-  const idx = startIdx + i
-  const units = ['pcs', 'm', 'yards', 'panels']
-  return {
-    id: `KPA-${String(idx).padStart(4, '0')}`, product: PRODUCTS[idx % 8], artist: ARTISTS[idx % 8],
-    status: STATUSES[idx % 6], qty: ri(3, 50, 5 + idx * 2), unit: units[idx % 4],
-    cost: ri(8000, 250000, 12000 + idx * 12000), date: `2025-07-${String(ri(1, 28, idx % 28 + 1)).padStart(2, '0')}`,
-  }
-})
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `KPA-${String(offset + i + 1).padStart(4, '0')}`,
+    painter: ARTISANS[(offset + i) % ARTISANS.length], ware: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 35, ((offset + i) * 31) % 35) + 1,
+    cost: ri(5000, 98000, ((offset + i) * 14173) % 93000) + 5000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
+  }))
 
 const kalamkariRecords = [
-  { id: 'KPA-0001', product: 'Srikalahasti Tree of Life Panel', artist: 'Srikalahasti Pen Art Guild', status: 'GI Kalamkari Craft Mark', qty: 5, unit: 'pcs', cost: 35000, date: '2025-07-02' },
-  { id: 'KPA-0002', product: 'Machilipatnam Mythological Scroll', artist: 'Machilipatnam Block Studio', status: 'IS 16794 Textile Print Grade A', qty: 18, unit: 'm', cost: 72000, date: '2025-07-04' },
-  { id: 'KPA-0003', product: 'Ramayana Block Print Yard', artist: 'Pedana Kalamkari Centre', status: 'Acid-Free Tissue Roll', qty: 12, unit: 'yards', cost: 48000, date: '2025-07-05' },
-  { id: 'KPA-0004', product: 'Aranya Nature Motif Saree', artist: 'Tirupati Temple Art Unit', status: 'Humidity-Controlled Truck', qty: 25, unit: 'panels', cost: 125000, date: '2025-07-07' },
-  { id: 'KPA-0005', product: 'Bhagavata Purana Hanging', artist: 'Nellore Hand-Paint Cluster', status: 'Dark Dry Storage 18-22C', qty: 3, unit: 'pcs', cost: 180000, date: '2025-07-08' },
-  { id: 'KPA-0006', product: 'Panchatantra Story Panel', artist: 'Rajahmundry Pen Art Studio', status: 'Dye Colourfast QC', qty: 15, unit: 'm', cost: 65000, date: '2025-07-10' },
-  { id: 'KPA-0007', product: 'Dashavatara Kalamkari Mural', artist: 'Kakinada Textile Hub', status: 'GI Kalamkari Craft Mark', qty: 8, unit: 'yards', cost: 95000, date: '2025-07-11' },
-  { id: 'KPA-0008', product: 'Kalamkari Temple Canopy', artist: 'Eluru Natural Dye Unit', status: 'IS 16794 Textile Print Grade A', qty: 4, unit: 'panels', cost: 210000, date: '2025-07-13' },
-  { id: 'KPA-0009', product: 'Srikalahasti Tree of Life Panel', artist: 'Srikalahasti Pen Art Guild', status: 'Acid-Free Tissue Roll', qty: 20, unit: 'pcs', cost: 28000, date: '2025-07-14' },
-  { id: 'KPA-0010', product: 'Machilipatnam Mythological Scroll', artist: 'Machilipatnam Block Studio', status: 'Humidity-Controlled Truck', qty: 30, unit: 'm', cost: 88000, date: '2025-07-15' },
-  { id: 'KPA-0011', product: 'Ramayana Block Print Yard', artist: 'Pedana Kalamkari Centre', status: 'Dark Dry Storage 18-22C', qty: 10, unit: 'yards', cost: 55000, date: '2025-07-16' },
-  { id: 'KPA-0012', product: 'Aranya Nature Motif Saree', artist: 'Tirupati Temple Art Unit', status: 'Dye Colourfast QC', qty: 35, unit: 'panels', cost: 145000, date: '2025-07-17' },
-  { id: 'KPA-0013', product: 'Bhagavata Purana Hanging', artist: 'Nellore Hand-Paint Cluster', status: 'GI Kalamkari Craft Mark', qty: 6, unit: 'pcs', cost: 195000, date: '2025-07-18' },
-  { id: 'KPA-0014', product: 'Panchatantra Story Panel', artist: 'Rajahmundry Pen Art Studio', status: 'IS 16794 Textile Print Grade A', qty: 22, unit: 'm', cost: 78000, date: '2025-07-19' },
-  { id: 'KPA-0015', product: 'Dashavatara Kalamkari Mural', artist: 'Kakinada Textile Hub', status: 'Acid-Free Tissue Roll', qty: 7, unit: 'yards', cost: 88000, date: '2025-07-20' },
-  { id: 'KPA-0016', product: 'Kalamkari Temple Canopy', artist: 'Eluru Natural Dye Unit', status: 'Humidity-Controlled Truck', qty: 4, unit: 'panels', cost: 240000, date: '2025-07-21' },
-  { id: 'KPA-0017', product: 'Srikalahasti Tree of Life Panel', artist: 'Srikalahasti Pen Art Guild', status: 'Dark Dry Storage 18-22C', qty: 14, unit: 'pcs', cost: 42000, date: '2025-07-22' },
-  { id: 'KPA-0018', product: 'Machilipatnam Mythological Scroll', artist: 'Machilipatnam Block Studio', status: 'Dye Colourfast QC', qty: 28, unit: 'm', cost: 96000, date: '2025-07-23' },
-  { id: 'KPA-0019', product: 'Ramayana Block Print Yard', artist: 'Pedana Kalamkari Centre', status: 'GI Kalamkari Craft Mark', qty: 16, unit: 'yards', cost: 62000, date: '2025-07-24' },
-  { id: 'KPA-0020', product: 'Aranya Nature Motif Saree', artist: 'Tirupati Temple Art Unit', status: 'IS 16794 Textile Print Grade A', qty: 40, unit: 'panels', cost: 168000, date: '2025-07-25' },
+  { id: 'KPA-0001', painter: 'Srikalahasti Pen Art Guild', ware: 'Srikalahasti Tree of Life Panel', status: 'GI Kalamkari Craft Mark', qty: 5, cost: 35000, date: '2024-01-12' },
+  { id: 'KPA-0002', painter: 'Machilipatnam Block Studio', ware: 'AP Kalamkari Ramayana Scroll', status: 'IS 16794 Kalamkari Art Grade A', qty: 18, cost: 72000, date: '2024-01-25' },
+  { id: 'KPA-0003', painter: 'Pedana Kalamkari Centre', ware: 'Machilipatnam Mythological Hanging', status: 'Cotton Roll Flat Pack', qty: 12, cost: 48000, date: '2024-02-08' },
+  { id: 'KPA-0004', painter: 'Tirupati Temple Art Cooperative', ware: 'Kalamkari Dashavatara Mural', status: 'Humidity-Controlled Truck', qty: 25, cost: 95000, date: '2024-02-20' },
+  { id: 'KPA-0005', painter: 'Nellore Kalamkari Painters Colony', ware: 'AP Kalamkari Panchatantra Panel', status: 'Dark Dry Storage 18-22C', qty: 3, cost: 80000, date: '2024-03-05' },
+  { id: 'KPA-0006', painter: 'Rajahmundry Pen Art Cluster', ware: 'Kalamkari Aranya Nature Motif', status: 'Natural Dye Colourfast QC', qty: 15, cost: 65000, date: '2024-03-18' },
+  { id: 'KPA-0007', painter: 'Kakinada Textile Art Society', ware: 'Kalamkari Bhagavata Purana Cloth', status: 'GI Kalamkari Craft Mark', qty: 8, cost: 55000, date: '2024-03-30' },
+  { id: 'KPA-0008', painter: 'Eluru Natural Dye Craft Studio', ware: 'AP Kalamkari Temple Canopy', status: 'IS 16794 Kalamkari Art Grade A', qty: 4, cost: 110000, date: '2024-04-12' },
+  { id: 'KPA-0009', painter: 'Srikalahasti Pen Art Guild', ware: 'AP Kalamkari Ramayana Scroll', status: 'Cotton Roll Flat Pack', qty: 20, cost: 28000, date: '2024-04-24' },
+  { id: 'KPA-0010', painter: 'Machilipatnam Block Studio', ware: 'Srikalahasti Tree of Life Panel', status: 'Humidity-Controlled Truck', qty: 30, cost: 88000, date: '2024-05-06' },
+  { id: 'KPA-0011', painter: 'Pedana Kalamkari Centre', ware: 'Machilipatnam Mythological Hanging', status: 'Dark Dry Storage 18-22C', qty: 10, cost: 42000, date: '2024-05-18' },
+  { id: 'KPA-0012', painter: 'Tirupati Temple Art Cooperative', ware: 'Kalamkari Dashavatara Mural', status: 'Natural Dye Colourfast QC', qty: 35, cost: 145000, date: '2024-05-30' },
+  { id: 'KPA-0013', painter: 'Nellore Kalamkari Painters Colony', ware: 'AP Kalamkari Panchatantra Panel', status: 'GI Kalamkari Craft Mark', qty: 6, cost: 95000, date: '2024-06-12' },
+  { id: 'KPA-0014', painter: 'Rajahmundry Pen Art Cluster', ware: 'Kalamkari Aranya Nature Motif', status: 'IS 16794 Kalamkari Art Grade A', qty: 7, cost: 75000, date: '2024-06-24' },
+  { id: 'KPA-0015', painter: 'Kakinada Textile Art Society', ware: 'Kalamkari Bhagavata Purana Cloth', status: 'Cotton Roll Flat Pack', qty: 14, cost: 58000, date: '2024-07-06' },
+  { id: 'KPA-0016', painter: 'Eluru Natural Dye Craft Studio', ware: 'AP Kalamkari Temple Canopy', status: 'Humidity-Controlled Truck', qty: 9, cost: 122000, date: '2024-07-18' },
+  { id: 'KPA-0017', painter: 'Srikalahasti Pen Art Guild', ware: 'Kalamkari Dashavatara Mural', status: 'Dark Dry Storage 18-22C', qty: 5, cost: 68000, date: '2024-07-30' },
+  { id: 'KPA-0018', painter: 'Machilipatnam Block Studio', ware: 'Srikalahasti Tree of Life Panel', status: 'Natural Dye Colourfast QC', qty: 22, cost: 38000, date: '2024-08-10' },
+  { id: 'KPA-0019', painter: 'Pedana Kalamkari Centre', ware: 'AP Kalamkari Ramayana Scroll', status: 'GI Kalamkari Craft Mark', qty: 11, cost: 52000, date: '2024-08-22' },
+  { id: 'KPA-0020', painter: 'Tirupati Temple Art Cooperative', ware: 'Machilipatnam Mythological Hanging', status: 'IS 16794 Kalamkari Art Grade A', qty: 16, cost: 86000, date: '2024-09-03' },
 ]
 
 export default function KalamkariPenArtLogisticsView() {
@@ -86,150 +86,135 @@ export default function KalamkariPenArtLogisticsView() {
   const allRecords = [...kalamkariRecords, ...genRecords(21), ...genRecords(41)]
 
   const filteredRecords = useMemo(() => {
-    return allRecords.filter(r => {
-      if (searchQuery && !r.id.toLowerCase().includes(searchQuery.toLowerCase()) && !r.product.toLowerCase().includes(searchQuery.toLowerCase())) return false
-      return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string))
-    })
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.ware.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
   }, [searchQuery, activeFilters, allRecords])
 
   const filterGroups = [
-    { key: 'product', label: 'Product', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.product === p).length })) },
-    { key: 'artist', label: 'Artist', options: ARTISTS.map(a => ({ value: a, label: a, count: allRecords.filter(r => r.artist === a).length })) },
+    { key: 'ware', label: 'Ware', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.ware === p).length })) },
+    { key: 'painter', label: 'Painter', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.painter === p).length })) },
   ]
 
-  const trendData = PRODUCTS.slice(0, 6).map((p, i) => ({ name: p.split(' ').slice(0, 2).join(' '), shipments: 4 + i * 3, cost: 80000 + i * 65000 }))
-  const artistChart = ARTISTS.slice(0, 6).map((a, i) => ({ name: a.split(' ').slice(0, 2).join(' '), volume: 15 + i * 8, revenue: 10 + i * 5 }))
-  const statusPie = STATUSES.map((s, i) => ({ name: s.split(' ').slice(0, 2).join(' '), value: 5 + i * 4 }))
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(5, 30, allRecords.length * 0.14 + i * 4) }))
+  const artisanChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.painter === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
   const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
     <div className="kpa-root space-y-6 p-6">
-      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Kalamkari Pen Art' }]} />
-      <PageHeader title="Kalamkari Pen Art Logistics" description="Track Andhra Pradesh's 3,000-year kalamkari pen-work tradition from Srikalahasti and Machilipatnam through vegetable dye preparation, hand-painting, GI-tagged quality certification, and light-sensitive packaging for heritage textile export markets" />
-      <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="bg-indigo-50">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Kalamkari Pen Art AP' }]} />
+      <PageHeader title="Kalamkari Pen Art Andhra Pradesh Logistics" description="Kalamkari pen art hand-painted textile supply chain with IS 16794 Kalamkari art compliance, natural dye colourfast QC, cotton roll flat pack packaging, and GI Kalamkari Craft Mark certification across 8 heritage artisan clusters in Srikalahasti, Machilipatnam, and Tirupati districts" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-indigo-100">
           <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
           <TabsTrigger value="shipments">Shipments</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
         <TabsContent value="dashboard" className="space-y-6">
           <div className="grid grid-cols-4 gap-4">
-            <KpiTile icon="🎨" label="Total Panels" value={String(allRecords.length)} />
-            <KpiTile icon="🏭" label="Artist Clusters" value={String(ARTISTS.length)} />
-            <KpiTile icon="💰" label="Total Value" value={`₹${(allRecords.reduce((a, r) => a + r.cost, 0) / 10000000).toFixed(2)}Cr`} />
-            <KpiTile icon="📈" label="Avg Panel" value={`₹${Math.round(allRecords.reduce((a, r) => a + r.cost, 0) / allRecords.length).toLocaleString()}`} />
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Active Ware" value={PRODUCTS.length} />
+            <KpiTile label="Artisan Clusters" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-
-          <Card className="kpa-health-grid">
-            <CardHeader><CardTitle>Quality Compliance</CardTitle></CardHeader>
-            <CardContent>
-              <div className="flex justify-around">
-                <HealthRing value={96} label="GI Tag" />
-                <HealthRing value={92} label="IS 16794" />
-                <HealthRing value={88} label="Acid-Free" />
-                <HealthRing value={81} label="HC Truck" />
-                <HealthRing value={90} label="Dark Store" />
-                <HealthRing value={94} label="Dye QC" />
-              </div>
-            </CardContent>
-          </Card>
-
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="GI Tag" value={96} />
+            <HealthRing label="IS 16794" value={91} />
+            <HealthRing label="Cotton" value={87} />
+            <HealthRing label="Humi Truck" value={82} />
+            <HealthRing label="Dark Store" value={90} />
+            <HealthRing label="Dye QC" value={94} />
+          </div>
           <div className="grid grid-cols-4 gap-4">
-            <ValueTile label="Artisan Families" value="5,000+" />
-            <ValueTile label="Annual Production" value="8 Lakh m" />
-            <ValueTile label="Export Markets" value="35 Countries" />
-            <ValueTile label="Heritage Age" value="3,000 Years" />
+            <ValueTile label="Artisan Families" value="50+" />
+            <ValueTile label="Kalamkari Tradition" value="Since 16th C" />
+            <ValueTile label="Export Markets" value="15 Countries" />
+            <ValueTile label="Annual Revenue" value="₹6.8 Crore" />
           </div>
         </TabsContent>
-
-        <TabsContent value="shipments" className="space-y-4">
+        <TabsContent value="shipments" className="space-y-6">
           <SearchFilterToolbar
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             onClearSearch={() => setSearchQuery('')}
             activeFilters={activeFilters}
             filterGroups={filterGroups}
-            onToggleFilter={(key, value) => setActiveFilters(p => ({ ...p, [key]: p[key]?.includes(value) ? p[key].filter((v: string) => v !== value) : [...(p[key] || []), value] }))}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
             onClearAllFilters={() => setActiveFilters({})}
             totalItems={allRecords.length}
             filteredCount={filteredRecords.length}
             onRefresh={() => {}}
-            placeholder="Search by ID, product, or artist..."
+            placeholder="Search Kalamkari pen art shipments..."
           />
-
-          <Card className="kpa-table-card">
-            <CardContent className="p-0">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b bg-indigo-50">
-                    <th className="p-3 text-left">ID</th>
-                    <th className="p-3 text-left">Product</th>
-                    <th className="p-3 text-left">Artist</th>
-                    <th className="p-3 text-left">Status</th>
-                    <th className="p-3 text-right">Qty</th>
-                    <th className="p-3 text-right">Cost</th>
-                    <th className="p-3 text-left">Cost Bar</th>
-                    <th className="p-3 text-left">Date</th>
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-indigo-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Ware</th>
+                  <th className="p-3 text-left font-medium">Painter</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-indigo-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.ware} /></td>
+                    <td className="p-3">{record.painter}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['pcs', 'sets', 'pairs', 'units'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filteredRecords.slice(0, 15).map(r => (
-                    <tr key={r.id} className="border-b hover:bg-indigo-50/50">
-                      <td className="p-3 font-mono text-xs">{r.id}</td>
-                      <td className="p-3"><ProductBadge name={r.product} /></td>
-                      <td className="p-3 text-xs">{r.artist}</td>
-                      <td className="p-3"><StatusBadge status={r.status} /></td>
-                      <td className="p-3 text-right">{r.qty} {r.unit}</td>
-                      <td className="p-3 text-right">₹{r.cost.toLocaleString()}</td>
-                      <td className="p-3 w-28"><CostBar cost={r.cost} max={maxCost} /></td>
-                      <td className="p-3 text-xs text-gray-500">{r.date}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </TabsContent>
-
         <TabsContent value="analytics" className="space-y-6">
           <div className="grid grid-cols-2 gap-6">
             <Card>
               <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
               <CardContent>
-                <LineChart width={500} height={250} data={trendData}>
+                <LineChart width={500} height={300} data={trendData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={11} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="month" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
                   <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
-                  <Line type="monotone" dataKey="cost" stroke={COLORS[3]} strokeWidth={2} />
                 </LineChart>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader><CardTitle>Artist Volume</CardTitle></CardHeader>
+              <CardHeader><CardTitle>Artisan Volume</CardTitle></CardHeader>
               <CardContent>
-                <BarChart width={500} height={250} data={artistChart}>
+                <BarChart width={500} height={300} data={artisanChart}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={10} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="name" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="volume" fill={COLORS[0]} />
-                  <Bar dataKey="revenue" fill={COLORS[3]} />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {artisanChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
                 </BarChart>
               </CardContent>
             </Card>
           </div>
-
           <Card>
             <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
             <CardContent>
               <PieChart width={500} height={300}>
-                <Pie data={statusPie} cx={200} cy={150} outerRadius={100} dataKey="value" label>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
                   {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip />
@@ -238,13 +223,28 @@ export default function KalamkariPenArtLogisticsView() {
             </CardContent>
           </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <Card className="kpa-insight"><CardHeader><CardTitle>Srikalahasti — India's 3,000-Year Pen Art Tradition</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Srikalahasti in Andhra Pradesh's Tirupati district is the birthplace of kalamkari (pen-work), one of India's oldest textile art forms dating to 3,000 years when temple painters narrated Hindu epics on fabric using a bamboo pen (kalam) dipped in fermented vegetable dyes. Two distinct traditions exist: Srikalahasti style uses freehand pen drawing depicting mythological scenes from Ramayana, Mahabharata, and Bhagavata Purana on cotton fabric; Machilipatnam style combines hand-block printing with pen detailing for repetitive patterns. GI-tagged Kalamkari was registered in 2010 covering both traditions. The craft supports 5,000 artisan families across Srikalahasti, Machilipatnam, Pedana, and Tirupati clusters. Annual production reaches 8 lakh metres of kalamkari fabric valued at Rs 180 crore with exports to 35 countries including USA, UK, Japan, and Australia. UNESCO listed kalamkari among India's Intangible Cultural Heritage in 2023.</p></CardContent></Card>
-            <Card className="kpa-insight"><CardHeader><CardTitle>IS 16794 Textile Print &amp; Vegetable Dye Standards</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">IS 16794 covers hand-printed and pen-drawn textile quality including colour fastness to washing (minimum Grade 4 on ISO 105-C06), light fastness (minimum Grade 5 on ISO 105-B02 for vegetable-dyed textiles), and rubbing fastness (minimum Grade 3 dry, Grade 2 wet on ISO 105-X12). Vegetable dye preparation requires minimum 72-hour fermentation for alizarin red (from madder root, Rubia tinctorum), 48-hour oxidation for indigo blue (from Indigofera tinctoria), and 24-hour boiling for myrobalan yellow (from Terminalia chebula). Fabric base is 100% cotton handloom with thread count 60-80 counts for panel-grade and 80-120 counts for saree-grade. pH of finished fabric must be 5.5-7.0 to prevent skin irritation. Heavy metal content below 50 ppm for lead, 25 ppm for cadmium, and 10 ppm for arsenic per IS 16474 eco-textile standard. Tensile strength minimum 180 N in warp and 140 N in weft direction.</p></CardContent></Card>
-            <Card className="kpa-insight"><CardHeader><CardTitle>Light-Sensitive Artwork Packaging &amp; Transport</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Kalamkari artwork uses natural vegetable dyes extremely sensitive to UV light and humidity. Acid-free tissue paper (pH 7.5-8.5, lignin-free) wrapping prevents dye migration during 48-72 hour transit. Each panel is rolled on acid-free cardboard tube (diameter 5cm) with outer polyester protective sleeve. From Srikalahasti to Chennai port (380 km) takes 8-9 hours via NH16 in humidity-controlled trucks maintaining 18-22 degrees Celsius and 40-50% relative humidity. Storage must be in dark, dry conditions (below 200 lux light) to prevent indigo blue and alizarin red from fading. Exposure to direct sunlight for 4+ hours causes irreversible colour degradation. Damage rate reduced from 18% to 3% under AP Handicrafts Export Promotion packaging programme since 2019, covering 2,500 artisans across Chittoor, Krishna, and East Godavari districts.</p></CardContent></Card>
-            <Card className="kpa-insight"><CardHeader><CardTitle>AI Motif Digitisation &amp; Heritage Textile Market</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">AI-powered digital scanning of heritage kalamkari motifs creates production-ready block templates in 4 hours versus 15 days for hand-carved teak blocks, while machine learning classifies dye colour accuracy from spectrophotometer readings at 97% precision. Automated pattern matching detects counterfeit machine-printed kalamkari with 91% accuracy by analysing brush stroke irregularities unique to hand-drawn art. India's kalamkari export grew 220% from Rs 42 crore (2019) to Rs 135 crore (2025), targeting Rs 300 crore by 2028. International fashion houses (Gucci, Alexander McQueen) source Srikalahasti panels for luxury collections priced at $800-5,000 per metre. Online platforms account for 45% of new export orders with USA (35%), UK (20%), and Japan (15%) as top buyers. Blockchain provenance from dye preparation to finished artwork combats machine-printed fakes estimated at Rs 50 crore annually.</p></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Kalamkari Pen Art — 500-Year Andhra Pradesh Hand-Painted Textile Tradition</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">Kalamkari is a profoundly significant hand-painted textile art tradition originating from the southern Indian state of Andhra Pradesh that has been continuously practised for over five centuries as a combined artistic and textile craft tradition where elaborate mythological narrative scenes from the Hindu epics and Puranas are meticulously painted onto cotton fabric using a bamboo pen dipped in natural vegetable dye solutions, creating large-scale narrative cloth panels and temple hangings that serve as visual storytelling media for religious education, temple decoration, and ceremonial purposes within the Telugu-speaking cultural regions of Andhra Pradesh where the two major Kalamkari traditions of Srikalahasti pen art and Machilipatnam block-printed Kalamkari have maintained distinct but complementary artistic identities over centuries of continuous creative practice. The Srikalahasti Kalamkari pen art tradition is characterised by the exclusive use of a handcrafted bamboo pen instrument known as a kalam that serves as both the drawing tool and the dye delivery mechanism, where the artisan fills the hollow bamboo shaft with natural dye solution and draws directly onto the prepared cotton fabric surface creating precise freehand lines and detailed figurative forms that cannot be replicated through block printing or screen printing techniques, with the entire narrative composition built up through successive applications of different natural dye colours each requiring separate kalam applications and intermediate mordant treatment processes that fix the vegetable dyes permanently into the cotton fibre substrate through complex chemical bonding reactions between the natural dye molecules and the metallic salt mordants prepared from alum iron and tannin-rich myrobalan fruit extract. The Kalamkari narrative repertoire encompasses the complete spectrum of Hindu mythological literature adapted into visual narrative format for the cotton cloth medium, including the most widely represented and commercially valued compositions such as the Ramayana narrative scrolls depicting the complete life story of Prince Rama from his birth through his fourteen-year exile, the battle against the demon king Ravana, and his triumphant return to Ayodhya rendered as a continuous sequential narrative across cloth panels measuring up to thirty metres in length, the Dashavatara series depicting the ten major incarnations of Lord Vishnu from Matsya the fish avatar through Kalki the future avatar in the distinctive Kalamkari figurative style characterised by bold outlined forms filled with flat colour areas using natural vegetable dye pigments, the Bhagavata Purana panels illustrating the sacred stories of Lord Krishna's divine pastimes and miraculous deeds drawn from the twelfth-century devotional text by Vyasa that forms the scriptural foundation for much of the Kalamkari narrative tradition practised in the temple town of Srikalahasti where approximately fifty active artisan families sustain this irreplaceable textile art heritage tradition across the Srikalahasti, Machilipatnam, and Pedana production centres of Andhra Pradesh.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>IS 16794 Kalamkari Art Standards & Natural Dye Colourfast QC</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">The IS 16794 standard for Kalamkari hand-painted textile art establishes India's first dedicated quality certification framework for this 500-year-old Andhra Pradesh textile painting tradition, specifying comprehensive requirements for natural vegetable dye composition derived from the Andhra ecological zone, hand-painted bamboo pen application technique verification, cotton fabric substrate quality parameters, colour fastness durability under tropical humidity conditions, and mythological narrative compositional accuracy that collectively distinguish authentic hand-painted Kalamkari textiles created by traditional artisan families from block-printed and screen-printed reproductions and mass-produced digital imitations that have increasingly appeared in both domestic Indian textile art markets and international online retail platforms serving collectors and museums seeking authenticated Kalamkari for cultural preservation and exhibition purposes. The natural vegetable dye composition requirements for IS 16794 Grade A certification mandate exclusively natural vegetable-derived pigments sourced from the Andhra Pradesh ecological zone, including deep red from the Alizarin lactone dye extracted from the roots of the Indian madder plant Rubia cordifolia cultivated across the Rayalaseema region for the vibrant red passages that dominate Kalamkari compositions depicting battle scenes and divine manifestations, indigo blue from the fermented Indigofera tinctoria plant leaves processed through traditional Andhra fermentation techniques for the auspicious blue zones representing divine figures and celestial elements, deep yellow from the pomegranate rind Punica granatum extract combined with alum mordant for the golden zones representing divine light and spiritual illumination, and iron-based black from the reaction between jaggery fermented iron filings and the myrobalan tannin mordant for the precise outline work that defines the figurative forms and decorative border patterns characteristic of the Kalamkari visual vocabulary, with spectrophotometric verification confirming natural vegetable dye origin and excluding any synthetic dye formulations including azo dyes, reactive dyes, and vat dye dispersions that produce characteristically different spectral absorption profiles detectable through laboratory analysis comparing sample dye crystalline structures against certified natural vegetable dye reference standards maintained in the IS 16794 standard appendix. Natural dye colourfast verification for Grade A certification mandates accelerated wash fastness testing through five standard wash cycles per ISO 105-C06 with maximum permitted colour change measured through CIELAB Delta E values not exceeding 5.0 units for red pigments and 3.0 units for indigo blue pigments, ensuring the natural vegetable dyes retain their original chromatic intensity and tonal depth under repeated washing and extended display conditions encountered during the multi-year lifecycle of authenticated Kalamkari textiles in temple, museum, and private collector environments.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Cotton Roll Flat Pack Packaging for Kalamkari Hand-Painted Textiles</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">Cotton roll flat pack packaging has been specifically developed for the Kalamkari hand-painted textile logistics supply chain to protect the hand-painted natural vegetable dye surfaces, mythological narrative compositions, and cotton fabric substrates that characterise authentic Kalamkari textiles from the physical and environmental hazards encountered during transit from the Andhra Pradesh artisan workshops to domestic gallery destinations across Hyderabad, Delhi, and Chennai, and international export destinations serving the global textile art collector community in Europe, North America, and Southeast Asia where significant institutional and private collections of Indian textile art actively seek authenticated Kalamkari panels for acquisition and exhibition purposes requiring museum-quality preservation during international shipping through multiple climatic zones including the high-humidity coastal conditions of Andhra Pradesh and the varying temperature regimes encountered during air cargo transit to temperate international destinations. The packaging specification utilises plain weave unbleached cotton fabric with minimum grammage of 100 GSM and pH range 6.5 to 7.5 as the primary interleaving material providing a breathable protective layer compatible with the natural vegetable dye chemistry of Kalamkari textiles, preventing friction damage to the hand-painted surfaces while allowing adequate air circulation to prevent moisture condensation that could cause natural dye bleeding or cotton fibre degradation during transit through the humid coastal regions of Andhra Pradesh's Bay of Bengal coastline and the varying climatic conditions encountered during multi-modal transportation to international destinations. Each Kalamkari textile is inspected under standardised D65 daylight illumination verifying natural vegetable dye surface integrity, narrative scene compositional completeness, cotton fabric condition, and overall artistic quality before being interleaved with acid-free tissue paper between successive painted sections when the textile is partially unrolled for inspection, then carefully rolled around a custom-cut acid-free cardboard tube with the painted surface facing outward to prevent pigment-to-pigment contact during rolled storage, secured with cotton tying tape at four equidistant points along the roll length, and placed within a rigid outer shipping container constructed from 5-millimetre double-wall corrugated fibreboard with internal cushioning strips of polyethylene foam at all four edges providing shock absorption protection against the impact and vibration forces encountered during road transport from the artisan workshops through Andhra Pradesh's highway distribution networks and subsequent air cargo transit to international destinations serving the global demand for authenticated Indian hand-painted textile art.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>AI Bamboo Pen Stroke Authentication & Kalamkari Heritage Market Expansion</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">Artificial intelligence and computational image analysis technologies are being progressively deployed to authenticate Kalamkari hand-painted textiles and verify the distinctive bamboo pen stroke patterns, natural vegetable dye spectral signatures, and mythological narrative compositions that distinguish genuine Kalamkari artworks created by traditional Andhra Pradesh artisan families from the growing volume of block-printed, screen-printed, and digitally printed reproductions that have increasingly appeared in both domestic Indian textile art markets and international online retail platforms serving the global demand for authenticated Indian hand-painted textile art. The AI authentication system for Kalamkari employs ultra-high-resolution scanning at 4800 dots per inch combined with multispectral imaging across the visible and near-infrared spectrum from 400 to 900 nanometres wavelength range to capture the complete surface topography and natural vegetable dye composition of finished Kalamkari textiles, analysing the hand-painted bamboo pen stroke direction and pressure patterns characteristic of the traditional kalam instrument where the artisan controls dye flow through the hollow bamboo shaft by adjusting finger pressure on the cotton wool reservoir plug creating distinctive line width variations that reflect the artisan's hand-eye coordination and cannot be replicated by mechanical printing processes, the natural vegetable dye particle distribution characteristics that differ fundamentally from the uniform pigment dispersion of synthetic printing inks and reactive dye formulations used in commercial textile printing, and the mythological narrative scene compositional accuracy within the established Kalamkari canons that define the spatial arrangement of divine figures, architectural elements, natural landscape features, sequential narrative frame borders, and decorative pattern elements according to the specific visual vocabulary of the Srikalahasti and Machilipatnam Kalamkari painting traditions transmitted through generations of artisan families over five centuries of continuous creative practice in the Andhra Pradesh textile art heartland. Machine learning algorithms trained on authenticated Kalamkari reference samples from all major production centres can verify artwork authenticity with 96% accuracy by detecting subtle hand-painting signatures including the characteristic bamboo pen stroke width variation that reflects the artisan's finger pressure modulation during kalam instrument application, the natural vegetable dye particle aggregation patterns visible through high-magnification imaging that differ fundamentally from machine-printed pigment deposition, and the narrative scene proportion accuracy within the established Kalamkari canons that define the spatial arrangement of Ramayana sequential narrative panels, Dashavatara divine incarnation compositions, and decorative border patterns according to the specific visual vocabulary of the Andhra Pradesh Kalamkari hand-painted textile tradition as practised across approximately fifty active artisan families in the Srikalahasti, Machilipatnam, Pedana, and Tirupati production centres where this unique combination of bamboo pen technique, natural vegetable dye chemistry, and Hindu mythological narrative art continues to sustain one of India's most technically demanding and culturally significant textile art heritage traditions.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>

@@ -332,3 +332,4 @@ export { default as KangraPaintingHimachalPradeshLogisticsView } from './kangra-
 export { default as GodnaTattooArtMadhyaPradeshLogisticsView } from './godna-tattoo-art-madhya-pradesh-logistics-view'
 export { default as PatuaScrollArtWestBengalLogisticsView } from './patua-scroll-art-west-bengal-logistics-view'
 export { default as SauraTribalArtOdishaLogisticsView } from './saura-tribal-art-odisha-logistics-view'
+export { default as ChambaRumalEmbroideryHimachalPradeshLogisticsView } from './chamba-rumal-embroidery-himachal-pradesh-logistics-view'
