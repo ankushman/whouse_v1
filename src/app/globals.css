@@ -53560,3 +53560,47 @@ html.theme-transition body {
 @keyframes bpj-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes bpj-pulse-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,64,175,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,64,175,0.15); } }
 @keyframes bpj-glow-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,64,175,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,64,175,0.25); } }
+
+/* Kashmir Walnut Wood Carving (kww-*) */
+.kww-root { animation: kww-fade-in 0.3s ease-out; }
+.kww-badge { transition: all 0.2s; }
+.kww-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(63,35,5,0.15); }
+.kww-kpi { transition: all 0.25s; border-left: 3px solid #3f2305; }
+.kww-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(63,35,5,0.12); }
+.kww-value { transition: all 0.2s; background: linear-gradient(135deg, #f5f0e6 0%, #faf7f0 100%); }
+.kww-value:hover { transform: scale(1.02); }
+.kww-health-ring { transition: transform 0.2s; }
+.kww-health-ring:hover { transform: scale(1.08); }
+.kww-costbar { transition: width 0.6s ease; }
+.kww-table-card { transition: box-shadow 0.2s; }
+.kww-table-card:hover { box-shadow: 0 4px 16px rgba(63,35,5,0.08); }
+.kww-health-grid { transition: box-shadow 0.2s; }
+.kww-health-grid:hover { box-shadow: 0 2px 12px rgba(63,35,5,0.1); }
+.kww-insight { transition: all 0.25s; border-left: 3px solid #3f2305; }
+.kww-insight:hover { border-color: #78522d; box-shadow: 0 2px 8px rgba(63,35,5,0.1); }
+@keyframes kww-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes kww-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes kww-pulse-walnut { 0%, 100% { box-shadow: 0 0 0 0 rgba(63,35,5,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(63,35,5,0.15); } }
+@keyframes kww-glow-walnut { 0%, 100% { box-shadow: 0 0 0 0 rgba(63,35,5,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(63,35,5,0.25); } }
+
+/* Assam Silk Muga Weaving (asm-*) */
+.asm-root { animation: asm-fade-in 0.3s ease-out; }
+.asm-badge { transition: all 0.2s; }
+.asm-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(133,77,14,0.15); }
+.asm-kpi { transition: all 0.25s; border-left: 3px solid #854d0e; }
+.asm-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(133,77,14,0.12); }
+.asm-value { transition: all 0.2s; background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+.asm-value:hover { transform: scale(1.02); }
+.asm-health-ring { transition: transform 0.2s; }
+.asm-health-ring:hover { transform: scale(1.08); }
+.asm-costbar { transition: width 0.6s ease; }
+.asm-table-card { transition: box-shadow 0.2s; }
+.asm-table-card:hover { box-shadow: 0 4px 16px rgba(133,77,14,0.08); }
+.asm-health-grid { transition: box-shadow 0.2s; }
+.asm-health-grid:hover { box-shadow: 0 2px 12px rgba(133,77,14,0.1); }
+.asm-insight { transition: all 0.25s; border-left: 3px solid #854d0e; }
+.asm-insight:hover { border-color: #ca8a04; box-shadow: 0 2px 8px rgba(133,77,14,0.1); }
+@keyframes asm-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes asm-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes asm-pulse-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(133,77,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(133,77,14,0.15); } }
+@keyframes asm-glow-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(133,77,14,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(133,77,14,0.25); } }

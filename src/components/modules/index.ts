@@ -282,3 +282,5 @@ export { default as SaffronKesarProcessingLogisticsView } from './saffron-kesar-
 export { default as PashminaWoolSupplyChainView } from './pashmina-wool-supply-chain-view'
 export { default as SandstoneCarvingSupplyChainView } from './sandstone-carving-supply-chain-view'
 export { default as BluePotteryJaipurLogisticsView } from './blue-pottery-jaipur-logistics-view'
+export { default as KashmirWalnutWoodCarvingSupplyChainView } from './kashmir-walnut-wood-carving-supply-chain-view'
+export { default as AssamSilkMugaWeavingSupplyChainView } from './assam-silk-muga-weaving-supply-chain-view'
