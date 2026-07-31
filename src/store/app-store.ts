@@ -318,6 +318,8 @@ export const navItems: NavItem[] = [
   { id: 'rajasthan-blue-pottery-logistics', label: 'Rajasthan Blue Pottery', icon: 'Flower2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kanchipuram-silk-saree-logistics', label: 'Kanchipuram Silk Saree', icon: 'Gem', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'gond-tribal-art-madhya-pradesh-logistics', label: 'Gond Tribal Art MP', icon: 'Feather', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'nirmal-painting-telangana-logistics', label: 'Nirmal Painting Telangana', icon: 'Palette', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'cheriyal-scroll-art-telangana-logistics', label: 'Cheriyal Scroll Art', icon: 'ScrollText', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

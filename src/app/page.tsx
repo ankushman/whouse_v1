@@ -322,6 +322,8 @@ import AssamBambooCraftLogisticsView from "@/components/modules/assam-bamboo-cra
 import RajasthanBluePotteryLogisticsView from "@/components/modules/rajasthan-blue-pottery-logistics"
 import KanchipuramSilkSareeLogisticsView from "@/components/modules/kanchipuram-silk-saree-logistics"
 import GondTribalArtMadhyaPradeshLogisticsView from "@/components/modules/gond-tribal-art-madhya-pradesh-logistics"
+import NirmalPaintingTelanganaLogisticsView from "@/components/modules/nirmal-painting-telangana-logistics"
+import CheriyalScrollArtTelanganaLogisticsView from "@/components/modules/cheriyal-scroll-art-telangana-logistics"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -643,6 +645,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "rajasthan-blue-pottery-logistics": RajasthanBluePotteryLogisticsView,
   "kanchipuram-silk-saree-logistics": KanchipuramSilkSareeLogisticsView,
   "gond-tribal-art-madhya-pradesh-logistics": GondTribalArtMadhyaPradeshLogisticsView,
+  "nirmal-painting-telangana-logistics": NirmalPaintingTelanganaLogisticsView,
+  "cheriyal-scroll-art-telangana-logistics": CheriyalScrollArtTelanganaLogisticsView,
 }
 
 
