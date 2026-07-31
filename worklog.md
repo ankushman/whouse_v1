@@ -1,5 +1,36 @@
 ---
 ---
+Task ID: R376
+Agent: Main Agent (Cron Loop)
+Task: R376 — Phulkari Embroidery Punjab (new) + Cross-Border Logistics overwrite 188->253
+
+Work Log:
+- Read worklog.md: R375 complete (commit a195e7f), 369 module files, 367 exports, 369 navItems, ~55,310 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R376); 470 errors in scripts/gen-r352.tsx.ts (non-src, ignored)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: phulkari-embroidery-punjab-logistics CLEAR; cross-border-logistics ALREADY EXISTS
+- CSS prefixes: phk-* CLEAR; cbl-* already exists (kept existing CSS for overwrite)
+- Icons: Flower2 (Phulkari, already in iconMap and lucide-react); Globe (Cross-Border, already existed) — no new icons
+- Cross-Border Logistics had 188 lines (shortest module at R375 end) — overwritten to 253 lines with genRecords, correct field names (port, product)
+- POST-R376 VERIFICATION: Shortest modules now 189 lines (warehouse-digital-floor-plan); 188-line module eliminated
+
+- Created Phulkari Embroidery Punjab (phk-*, #b45309 amber): 253 lines, 8 products (Phulkari Bagh Shawl, Phulkari Chope Wedding Dupatta, Phulkari Tilpatra Scarf, Phulkari Neelakshi Stole, Phulkari Sainchi Frock Panel, Phulkari Chamba Rumal Border, Phulkari Darshan Dwar Curtain, Phulkari Suber Phulkari Frame), 8 artisans (Amritsar Phulkari Cluster PB, Patiala Handloom Guild PB, Ludhiana Embroidery Society PB, Jalandhar Craft Collective PB, Bathinda Heritage Arts PB, Firozpur Rural Phulkari PB, Mohali Traditional Cluster PB, Hoshiarpur Silk Society PB), 6 statuses, 4 insight cards
+- Overwrote Cross-Border Logistics (cbl-*, #0ea5e9 sky blue, 188->253): 253 lines, 8 cargo types (Container Expat Cargo, Bulk Commodity Shipment, Perishable Cross-Trade, Hazardous Material Pack, Document Courier Pack, Oversized Equipment Move, Pharmaceutical Temperature, E-Commerce Parcel Batch), 8 ports (Nhava Sheva Gateway MH, Tughlakabad ICD Delhi DL, Chennai Auto Hub Terminal TN, Kolkata Land Port WB, Mundra Special Economic GJ, Kandla Free Zone Gujarat GJ, Cochin Maritime Terminal KL, Visakhapatnam Port AP), 6 statuses, 4 insight cards
+- Fixed JSX closing tag issue in both modules: KpiTile and ValueTile used </div> instead of </CardContent>
+- Registered Phulkari in 3 files; Cross-Border already registered
+- CSS: +8 lines (phk-* 5 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit 3300fe3
+
+Stage Summary:
+- 370 module files (1 new Phulkari), 362 exports, 370 navItems, ~55,318 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Cross-Border Logistics upgraded from 188 to 253 lines — previously shortest module eliminated
+- Shortest remaining module: 189 lines (warehouse-digital-floor-plan)
+- All sub-189-line modules now completely eliminated
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue targeting non-253 modules by ascending line count (189-line modules next)
+- Available Indian art slugs: Consider Nirmal Painting Telangana, Phad Painting Rajasthan, Ajrakh Block Print Kutch, Kutch Mud Art Lippan, Tarakasi Silver Filigree Odisha
+---
 Task ID: R375
 Agent: Main Agent (Cron Loop)
 Task: R375 — Chanderi Madhya Pradesh (new) + Consignment Inventory Pro overwrite 184->253
