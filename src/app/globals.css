@@ -53196,3 +53196,49 @@ html.theme-transition body {
 @keyframes bcw-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes bcw-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(146,64,14,0.15); } }
 @keyframes bcw-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(146,64,14,0.25); } }
+
+/* ── Incense & Dhoop Logistics (idl-*) ── */
+.idl-root { animation: idl-fade-in 0.4s ease; }
+.idl-tab-trigger[data-state="active"] { background-color: #701a75; color: white; }
+.idl-tab-trigger[data-state="active"]:hover { background-color: #86198f; }
+.idl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.idl-kpi-card:hover { border-color: #701a75; box-shadow: 0 4px 12px rgba(112,26,117,0.15); }
+.idl-kpi-value { font-variant-numeric: tabular-nums; }
+.idl-health-ring svg { transition: transform 0.3s ease; }
+.idl-health-ring:hover svg { transform: scale(1.05); }
+.idl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.idl-ring-value { font-variant-numeric: tabular-nums; }
+.idl-product-badge, .idl-status-badge { transition: transform 0.15s ease; }
+.idl-product-badge:hover { transform: scale(1.05); }
+.idl-cost-bar-fill { transition: width 0.6s ease; }
+.idl-table-row { transition: background-color 0.15s ease; }
+.idl-table-row:hover { background-color: rgba(112,26,117,0.04); }
+.idl-chart-card { border: 1px solid #e5e7eb; }
+.idl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes idl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes idl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes idl-pulse-fuchsia { 0%, 100% { box-shadow: 0 0 0 0 rgba(112,26,117,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(112,26,117,0.15); } }
+@keyframes idl-glow-fuchsia { 0%, 100% { box-shadow: 0 0 0 0 rgba(112,26,117,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(112,26,117,0.25); } }
+
+/* ── Terracotta & Pottery Supply Chain (tps-*) ── */
+.tps-root { animation: tps-fade-in 0.4s ease; }
+.tps-tab-trigger[data-state="active"] { background-color: #92400e; color: white; }
+.tps-tab-trigger[data-state="active"]:hover { background-color: #b45309; }
+.tps-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.tps-kpi-card:hover { border-color: #92400e; box-shadow: 0 4px 12px rgba(146,64,14,0.15); }
+.tps-kpi-value { font-variant-numeric: tabular-nums; }
+.tps-health-ring svg { transition: transform 0.3s ease; }
+.tps-health-ring:hover svg { transform: scale(1.05); }
+.tps-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.tps-ring-value { font-variant-numeric: tabular-nums; }
+.tps-product-badge, .tps-status-badge { transition: transform 0.15s ease; }
+.tps-product-badge:hover { transform: scale(1.05); }
+.tps-cost-bar-fill { transition: width 0.6s ease; }
+.tps-table-row { transition: background-color 0.15s ease; }
+.tps-table-row:hover { background-color: rgba(146,64,14,0.04); }
+.tps-chart-card { border: 1px solid #e5e7eb; }
+.tps-insight-card { border: 1px solid #e5e7eb; }
+@keyframes tps-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tps-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes tps-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(146,64,14,0.15); } }
+@keyframes tps-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(146,64,14,0.25); } }

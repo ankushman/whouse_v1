@@ -276,6 +276,8 @@ import AyurvedaHerbalProductsLogisticsView from "@/components/modules/ayurveda-h
 import OrganicFoodSupplyChainView from "@/components/modules/organic-food-supply-chain-view"
 import PlywoodPlyboardLogisticsView from "@/components/modules/plywood-plyboard-logistics-view"
 import BrassCopperWareSupplyChainView from "@/components/modules/brass-copper-ware-supply-chain-view"
+import IncenseDhoopLogisticsView from "@/components/modules/incense-dhoop-logistics-view"
+import TerracottaPotterySupplyChainView from "@/components/modules/terracotta-pottery-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -551,6 +553,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "organic-food-supply-chain": OrganicFoodSupplyChainView,
   "plywood-plyboard-logistics": PlywoodPlyboardLogisticsView,
   "brass-copper-ware-supply-chain": BrassCopperWareSupplyChainView,
+  "incense-dhoop-logistics": IncenseDhoopLogisticsView,
+  "terracotta-pottery-supply-chain": TerracottaPotterySupplyChainView,
 }
 
 

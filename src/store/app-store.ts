@@ -272,6 +272,8 @@ export const navItems: NavItem[] = [
   { id: 'organic-food-supply-chain', label: 'Organic Food', icon: 'Carrot', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'plywood-plyboard-logistics', label: 'Plywood & Plyboard', icon: 'TreePine', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'brass-copper-ware-supply-chain', label: 'Brass & Copper Ware', icon: 'Lamp', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'incense-dhoop-logistics', label: 'Incense & Dhoop', icon: 'FlameKindling', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'terracotta-pottery-supply-chain', label: 'Terracotta & Pottery', icon: 'CookingPot', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

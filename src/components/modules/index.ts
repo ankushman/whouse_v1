@@ -266,3 +266,5 @@ export { default as AyurvedaHerbalProductsLogisticsView } from './ayurveda-herba
 export { default as OrganicFoodSupplyChainView } from './organic-food-supply-chain-view'
 export { default as PlywoodPlyboardLogisticsView } from './plywood-plyboard-logistics-view'
 export { default as BrassCopperWareSupplyChainView } from './brass-copper-ware-supply-chain-view'
+export { default as IncenseDhoopLogisticsView } from './incense-dhoop-logistics-view'
+export { default as TerracottaPotterySupplyChainView } from './terracotta-pottery-supply-chain-view'
