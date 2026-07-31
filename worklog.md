@@ -1,4 +1,42 @@
 ---
+---
+Task ID: R338
+Agent: Main Agent (Cron Loop)
+Task: R338 — Bhil Tribal Art MP (new) + Tanjore Painting TN overwrite
+
+Work Log:
+- Read worklog.md: R337 complete (commit ee2fd20), 330 views, 330 navItems, 54,579 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R338)
+- R337 commit ee2fd20 already pushed
+- Slug verification: bhil-tribal-art-madhya-pradesh-logistics CLEAR; tanjore-painting-tamil-nadu-logistics ALREADY EXISTS
+- CSS prefixes: bta-* CLEAR, tjp-* CLEAR
+- Icons: Palette (Bhil) and Frame (Tanjore, already existed) both in iconMap — reused, no new icons (186 unchanged)
+- Tanjore module was overwritten with fresh 253-line template (already existed from earlier round)
+
+- Created Bhil Tribal Art Madhya Pradesh Logistics (bta-*, #4a1d96 deep indigo): 253 lines, 8 products, 8 painters, 6 statuses, 4 insight cards
+- Overwrote Tanjore Painting Tamil Nadu Logistics (tjp-*, #7c2d12 deep burnt orange): 253 lines, refreshed content
+- Registered Bhil in 3 files (index.ts, page.tsx, app-store.ts); Tanjore already registered — no duplicate entries
+- CSS: +52 lines (bta-* + tjp-*, 6 keyframe animations)
+- TSC: 0 errors | Git pushed: commit 597ae21
+
+Stage Summary:
+- NEW MODULE: Bhil Tribal Art Madhya Pradesh Logistics (253 lines, 12 components, 60 records)
+- OVERWRITTEN MODULE: Tanjore Painting Tamil Nadu Logistics (253 lines, refreshed content)
+- ICONS: 186 total (Palette reused, Frame already existed)
+- Total navItems: 331 | VIEW FILES: 331 | CSS: 54,631 lines
+- ZERO src/ TSC errors | Git pushed: commit 597ae21
+
+## Updated Project Status (Post Round 338)
+- STATUS: STABLE (Turbopack OOM persists)
+- VIEW FILES: 331 | NAVITEMS: 331 | CSS: 54,631 lines
+- ICONMAP: 186 icons | TSC: 0 errors | GITHUB: Pushed (commit 597ae21)
+- NOTE: Tanjore Painting Tamil Nadu was overwritten with fresh template (already existed from earlier round)
+
+PRIORITY NEXT:
+1. Create new modules (choose: Roghan Painting Gujarat, Sanjhi Paper Art UP)
+2. CSS splitting to resolve Turbopack OOM (CRITICAL — 54K+ lines)
+3. SearchFilterToolbar into 5-10 more modules
+4. Cross-module drill-down navigation
 
 ---
 Task ID: R337
