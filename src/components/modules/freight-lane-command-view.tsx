@@ -1,183 +1,253 @@
-"use client"
-import { useState, useMemo } from "react"
-import { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { Workflow, Zap, AlertTriangle, CheckCircle2, BarChart3, TrendingUp, TrendingDown, MapPin, Package, Timer, ArrowUpDown, Radio, Truck, Ship, TrainFront, Plane, Gauge, Clock, DollarSign } from "lucide-react"
-import { PageHeader } from "@/components/shared/page-header"
-import { SearchFilterToolbar } from "@/components/shared/search-filter-toolbar"
-import { ModuleBreadcrumb } from "@/components/shared/module-breadcrumb"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
+import React, { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const MODES = ["road", "rail", "air", "sea", "multimodal"] as const
-const MODE_EMOJI: Record<string, string> = { road: "\U0001f69a", rail: "\U0001f682", air: "\u2708\ufe0f", sea: "\U0001f6e2\ufe0f", multimodal: "\U0001f517" }
-const LANE_STATUS = ["active", "under_maintenance", "congested", "disrupted", "seasonal", "planned"] as const
-const PRIORITY = ["critical", "high", "medium", "low"] as const
-const CITIES = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Lucknow"] as const
-const MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
-const TH = { pri: "#06b6d4", sec: "#f59e0b", ok: "#059669", warn: "#d97706", err: "#dc2626" }
-const PC = ["#06b6d4", "#f59e0b", "#059669", "#dc2626", "#8b5cf6", "#ec4899", "#14b8a6", "#3b82f6"]
+const COLORS = ['#065f46', '#047857', '#059669', '#10b981', '#34d399', '#064e3b', '#022c22', '#ecfdf5']
+const PRODUCTS = ['NH48 Mumbai Delhi', 'NH44 Srinagar Kanyakumari', 'NH27 Gujarat Assam', 'NH6 Kolkata Mumbai', 'NH4 Mumbai Chennai', 'NH7 Varanasi Kanyakumari', 'NH5 Jharkhand Odisha', 'NH2 Delhi Kolkata']
+const ARTISANS = ['Nagpur Freight Hub MH', 'Kolkata Port Corridor WB', 'Chennai Gateway Terminal TN', 'Mumbai Western Corridor MH', 'Delhi Northern Hub DL', 'Bangalore Southern Hub KA', 'Hyderabad Central Hub TS', 'Ahmedabad Western Link GJ']
+const STATUSES = ['NHAI Lane Certified', 'Toll Plaza Compliance QC', 'Axle Load Weight Test', 'Route Optimization Verified', 'ETC Fastag Integration Check', 'Safety Audit Compliance']
 
-function seededRandom(seed: number): number { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x) }
-function ri(min: number, max: number, seed: number): number { return Math.floor(seededRandom(seed) * (max - min + 1)) + min }
-function pick<T>(arr: readonly T[], seed: number): T { return arr[Math.floor(seededRandom(seed) * arr.length)] }
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-function ModeBadge({ mode }: { mode: string }) {
-  const cols: Record<string, string> = { road: "bg-blue-100 text-blue-700 dark:bg-blue-900/30", rail: "bg-red-100 text-red-700 dark:bg-red-900/30", air: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30", sea: "bg-violet-100 text-violet-700 dark:bg-violet-900/30", multimodal: "bg-amber-100 text-amber-700 dark:bg-amber-900/30" }
-  return <span className={"flc-mode-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[mode] || "bg-gray-100 text-gray-700")}>{MODE_EMOJI[mode] || "\u2022"} {mode}</span>
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
+
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-emerald-200 rounded-full overflow-hidden"><div className="h-full bg-emerald-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#ecfdf5" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
 }
 
-function StatusBadge({ status }: { status: string }) {
-  const cols: Record<string, string> = { active: "flc-active bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 shadow-[0_0_6px_rgba(5,150,105,0.3)]", under_maintenance: "bg-amber-100 text-amber-700 dark:bg-amber-900/30", congested: "flc-congested bg-red-100 text-red-700 dark:bg-red-900/30 shadow-[0_0_6px_rgba(220,38,38,0.3)]", disrupted: "flc-disrupted bg-red-100 text-red-700 dark:bg-red-900/30 shadow-[0_0_8px_rgba(220,38,38,0.4)]", seasonal: "bg-blue-100 text-blue-700 dark:bg-blue-900/30", planned: "bg-gray-100 text-gray-600" }
-  return <span className={"flc-status-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[status] || "")}>{status.replace(/_/g, " ")}</span>
-}
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
 
-function PriorityBadge({ priority }: { priority: string }) {
-  const cols: Record<string, string> = { critical: "bg-red-100 text-red-700 dark:bg-red-900/30", high: "bg-amber-100 text-amber-700", medium: "bg-blue-100 text-blue-700", low: "bg-gray-100 text-gray-600" }
-  return <span className={"flc-priority-badge inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold " + (cols[priority] || "")}>{priority.toUpperCase()}</span>
-}
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[2] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[2] }}>{value}</p></Card>
+)
 
-function UtilBar({ value }: { value: number }) {
-  const col = value >= 90 ? TH.err : value >= 70 ? TH.warn : TH.ok
-  return <div className="flc-util-bar flex items-center gap-1.5"><div className="w-16 h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className="h-full rounded-full transition-all" style={{ width: value + "%", backgroundColor: col }}/></div><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span></div>
-}
-
-function TrendIndicator({ value }: { value: number }) {
-  const pos = value > 0; const col = pos ? TH.ok : TH.err
-  return <span className="flc-trend inline-flex items-center gap-0.5 text-[10px] font-semibold" style={{ color: col }}>{pos ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}{Math.abs(value).toFixed(1)}%</span>
-}
-
-function CityBadge({ city }: { city: string }) { return <span className="flc-city-badge inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-cyan-50 text-cyan-700 dark:bg-cyan-900/20">{city}</span> }
-
-function KpiTile({ label, value, icon, trend, color }: { label: string; value: string; icon: React.ReactNode; trend: number; color: string }) { return <Card className="flc-kpi-tile glass-subtle hover:shadow-lg transition-shadow border-l-4" style={{ borderLeftColor: color }}><CardContent className="p-3"><div className="flex items-center justify-between"><span className="text-[10px] text-muted-foreground">{label}</span>{icon}</div><div className="text-xl font-bold mt-1">{value}</div><TrendIndicator value={trend}/></CardContent></Card> }
-
-function ValueTile({ label, value }: { label: string; value: string | number }) { return <div className="flc-value-tile text-center p-2 rounded-lg bg-gray-50 dark:bg-gray-800/50"><div className="text-sm font-bold">{value}</div><div className="text-[10px] text-muted-foreground">{label}</div></div> }
-
-function HealthRing({ value, label }: { value: number; label: string }) { const col = value >= 90 ? TH.ok : value >= 70 ? TH.warn : TH.err; const r = 18, circ = 2 * Math.PI * r, offset = circ - (value / 100) * circ; return <div className="flc-health-ring flex flex-col items-center gap-1"><svg width={48} height={48} className="-rotate-90"><circle cx={24} cy={24} r={r} fill="none" stroke="currentColor" strokeWidth={3} className="text-gray-200 dark:text-gray-700"/><circle cx={24} cy={24} r={r} fill="none" stroke={col} strokeWidth={3} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" className="transition-all"/></svg><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span><span className="text-[9px] text-muted-foreground">{label}</span></div> }
-
-function genLanes() {
-  return Array.from({ length: 60 }, (_, i) => ({
-    id: "LN-" + String(i + 1).padStart(4, "0"),
-    name: pick(["NH-48 Delhi-Mumbai", "NH-44 Delhi-Chennai", "NH-8 Mumbai-Ahmedabad", "Eastern Freight Corridor", "Western Dedicated Corridor", "Delhi-Kolkata Route", "Mumbai-Bangalore Express", "Chennai-Hyderabad Route", "North-South Express", "Golden Quadrilateral", "Port-to-Factory Link", "SEZ Hub Connector"], i + 1),
-    mode: pick(MODES, i * 3 + 2),
-    origin: pick(CITIES, i * 3 + 3),
-    dest: pick(CITIES, i * 3 + 5),
-    distance: ri(100, 2500, i + 7),
-    transitTime: ri(2, 72, i + 11),
-    cost: ri(5000, 500000, i + 17),
-    utilization: ri(20, 98, i + 23),
-    onTime: ri(60, 99, i + 29),
-    status: pick(LANE_STATUS, i + 37),
-    priority: pick(PRIORITY, i + 43),
-    shipments: ri(10, 500, i + 47),
-    incidents: ri(0, 15, i + 53),
-    avgSpeed: ri(20, 80, i + 59)
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `FLC-${String(offset + i + 1).padStart(4, '0')}`,
+    hub: ARTISANS[(offset + i) % ARTISANS.length], lane: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(20, 500, ((offset + i) * 19) % 480) + 20,
+    cost: ri(50000, 800000, ((offset + i) * 11307) % 750000) + 50000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-function genShipments() {
-  return Array.from({ length: 40 }, (_, i) => ({
-    id: "SHP-" + String(i + 1).padStart(5, "0"),
-    lane: "LN-" + String(ri(1, 60, i + 7)).padStart(4, "0"),
-    carrier: pick(["BlueDart", "Delhivery", "DFLC", "Container Corp", "IRFC", "Spoton", "XpressBees", "DHL Supply Chain"], i + 11),
-    status: pick(["in_transit", "delivered", "delayed", "at_hub", "customs_hold", "cancelled"], i + 19),
-    eta: String(ri(1, 48, i + 27)) + "h",
-    weight: ri(50, 20000, i + 31),
-    value: ri(10000, 5000000, i + 37),
-    priority: pick(PRIORITY, i + 43),
-    origin: pick(CITIES, i + 47),
-    dest: pick(CITIES, i + 53)
-  }))
-}
-
-function genCharts() {
-  const throughput = MO.map((m, i) => ({ month: m, shipments: ri(2000, 8000, i + 101), onTime: ri(70, 98, i + 151), cost: ri(1000000, 5000000, i + 201) }))
-  const modeDist = MODES.map((m, i) => ({ mode: m, lanes: ri(5, 25, i + 301), volume: ri(100, 2000, i + 351) }))
-  const incLine = MO.map((m, i) => ({ month: m, critical: ri(1, 10, i + 401), major: ri(5, 20, i + 451), minor: ri(10, 40, i + 501) }))
-  return { throughput, modeDist, incLine }
-}
+const freightrecords = [
+  { id: 'FLC-0001', hub: 'Nagpur Freight Hub MH', lane: 'NH48 Mumbai Delhi', status: 'NHAI Lane Certified', qty: 320, cost: 750000, date: '2024-01-04' },
+  { id: 'FLC-0002', hub: 'Kolkata Port Corridor WB', lane: 'NH44 Srinagar Kanyakumari', status: 'Toll Plaza Compliance QC', qty: 180, cost: 620000, date: '2024-01-17' },
+  { id: 'FLC-0003', hub: 'Chennai Gateway Terminal TN', lane: 'NH27 Gujarat Assam', status: 'Axle Load Weight Test', qty: 450, cost: 480000, date: '2024-01-30' },
+  { id: 'FLC-0004', hub: 'Mumbai Western Corridor MH', lane: 'NH6 Kolkata Mumbai', status: 'Route Optimization Verified', qty: 280, cost: 700000, date: '2024-02-12' },
+  { id: 'FLC-0005', hub: 'Delhi Northern Hub DL', lane: 'NH4 Mumbai Chennai', status: 'ETC Fastag Integration Check', qty: 500, cost: 380000, date: '2024-02-25' },
+  { id: 'FLC-0006', hub: 'Bangalore Southern Hub KA', lane: 'NH7 Varanasi Kanyakumari', status: 'Safety Audit Compliance', qty: 220, cost: 780000, date: '2024-03-09' },
+  { id: 'FLC-0007', hub: 'Hyderabad Central Hub TS', lane: 'NH5 Jharkhand Odisha', status: 'NHAI Lane Certified', qty: 350, cost: 550000, date: '2024-03-22' },
+  { id: 'FLC-0008', hub: 'Ahmedabad Western Link GJ', lane: 'NH2 Delhi Kolkata', status: 'Toll Plaza Compliance QC', qty: 160, cost: 800000, date: '2024-04-04' },
+  { id: 'FLC-0009', hub: 'Nagpur Freight Hub MH', lane: 'NH48 Mumbai Delhi', status: 'Axle Load Weight Test', qty: 420, cost: 420000, date: '2024-04-17' },
+  { id: 'FLC-0010', hub: 'Kolkata Port Corridor WB', lane: 'NH44 Srinagar Kanyakumari', status: 'Route Optimization Verified', qty: 290, cost: 680000, date: '2024-04-30' },
+  { id: 'FLC-0011', hub: 'Chennai Gateway Terminal TN', lane: 'NH27 Gujarat Assam', status: 'ETC Fastag Integration Check', qty: 380, cost: 500000, date: '2024-05-13' },
+  { id: 'FLC-0012', hub: 'Mumbai Western Corridor MH', lane: 'NH6 Kolkata Mumbai', status: 'Safety Audit Compliance', qty: 240, cost: 720000, date: '2024-05-26' },
+  { id: 'FLC-0013', hub: 'Delhi Northern Hub DL', lane: 'NH4 Mumbai Chennai', status: 'NHAI Lane Certified', qty: 460, cost: 400000, date: '2024-06-08' },
+  { id: 'FLC-0014', hub: 'Bangalore Southern Hub KA', lane: 'NH7 Varanasi Kanyakumari', status: 'Toll Plaza Compliance QC', qty: 200, cost: 760000, date: '2024-06-21' },
+  { id: 'FLC-0015', hub: 'Hyderabad Central Hub TS', lane: 'NH5 Jharkhand Odisha', status: 'Axle Load Weight Test', qty: 340, cost: 580000, date: '2024-07-04' },
+  { id: 'FLC-0016', hub: 'Ahmedabad Western Link GJ', lane: 'NH2 Delhi Kolkata', status: 'Route Optimization Verified', qty: 270, cost: 660000, date: '2024-07-17' },
+  { id: 'FLC-0017', hub: 'Nagpur Freight Hub MH', lane: 'NH48 Mumbai Delhi', status: 'ETC Fastag Integration Check', qty: 490, cost: 350000, date: '2024-07-30' },
+  { id: 'FLC-0018', hub: 'Kolkata Port Corridor WB', lane: 'NH44 Srinagar Kanyakumari', status: 'Safety Audit Compliance', qty: 310, cost: 600000, date: '2024-08-12' },
+  { id: 'FLC-0019', hub: 'Chennai Gateway Terminal TN', lane: 'NH27 Gujarat Assam', status: 'NHAI Lane Certified', qty: 430, cost: 460000, date: '2024-08-25' },
+  { id: 'FLC-0020', hub: 'Mumbai Western Corridor MH', lane: 'NH6 Kolkata Mumbai', status: 'Toll Plaza Compliance QC', qty: 250, cost: 740000, date: '2024-09-07' },
+]
 
 export default function FreightLaneCommandView() {
-  const [tab, setTab] = useState("dashboard")
-  const [search, setSearch] = useState("")
-  const [sortCol, setSortCol] = useState<string | null>(null)
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc")
+  const [tab, setTab] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
-  const lanes = useMemo(() => genLanes(), [])
-  const shipments = useMemo(() => genShipments(), [])
-  const charts = useMemo(() => genCharts(), [])
-  const filterLanes = useMemo(() => { let res = lanes; if (search) { const q = search.toLowerCase(); res = res.filter(l => Object.values(l).some(val => typeof val === "string" && val.toLowerCase().includes(q))) } for (const [k, vals] of Object.entries(activeFilters)) { if (vals.length > 0) res = res.filter(l => vals.includes(String(l[k as keyof typeof l]))) } return res }, [lanes, search, activeFilters])
-  const sortedLanes = useMemo(() => { if (!sortCol) return filterLanes; return [...filterLanes].sort((a: any, b: any) => { const av = a[sortCol], bv = b[sortCol]; const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv; return sortDir === "asc" ? cmp : -cmp }) }, [filterLanes, sortCol, sortDir])
-  const toggleSort = (col: string) => { if (sortCol === col) { setSortDir(d => d === "asc" ? "desc" : "asc") } else { setSortCol(col); setSortDir("asc") } }
-  const toggleFilter = (group: string, value: string) => { setActiveFilters(prev => { const cur = prev[group] || []; const next = cur.includes(value) ? cur.filter(v => v !== value) : [...cur, value]; if (next.length === 0) { const { [group]: _, ...rest } = prev; return rest } return { ...prev, [group]: next } }) }
-  const clearAllFilters = () => setActiveFilters({})
-  const handleRefresh = () => { setSearch(""); setActiveFilters({}); setSortCol(null) }
 
-  const laneFilterGroups = useMemo(() => { const mc: Record<string, number> = {}; const sc: Record<string, number> = {}; const pc: Record<string, number> = {}; lanes.forEach(l => { mc[l.mode] = (mc[l.mode] || 0) + 1; sc[l.status] = (sc[l.status] || 0) + 1; pc[l.priority] = (pc[l.priority] || 0) + 1 }); return [{ key: "mode", label: "Mode", options: Object.entries(mc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }, { key: "status", label: "Status", options: Object.entries(sc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }, { key: "priority", label: "Priority", options: Object.entries(pc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }] }, [lanes])
+  const allRecords = [...freightrecords, ...genRecords(21), ...genRecords(41)]
 
-  return <div className="space-y-4 p-4">
-    <PageHeader title="Freight Lane Command Center" description="End-to-end transport corridor management with real-time visibility and optimization"/>
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.lane.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-    <Tabs value={tab} onValueChange={setTab}>
-      <TabsList className="grid grid-cols-4 w-full flc-tabs">
-        <TabsTrigger value="dashboard"><BarChart3 className="w-3 h-3 mr-1"/>Dashboard</TabsTrigger>
-        <TabsTrigger value="lanes"><Workflow className="w-3 h-3 mr-1"/>Lanes</TabsTrigger>
-        <TabsTrigger value="shipments"><Package className="w-3 h-3 mr-1"/>Shipments</TabsTrigger>
-        <TabsTrigger value="insights"><TrendingUp className="w-3 h-3 mr-1"/>Insights</TabsTrigger>
-      </TabsList>
+  const filterGroups = [
+    { key: 'lane', label: 'Lane', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.lane === p).length })) },
+    { key: 'hub', label: 'Hub', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.hub === p).length })) },
+  ]
 
-      <TabsContent value="dashboard" className="space-y-4">
-        <div className="grid grid-cols-4 gap-3">
-          <KpiTile label="Active Lanes" value={String(lanes.filter((l: any) => l.status === "active").length)} icon={<Workflow className="w-4 h-4" style={{ color: TH.pri }}/>} trend={8.2} color={TH.pri}/>
-          <KpiTile label="Avg Utilization" value="74%" icon={<Gauge className="w-4 h-4" style={{ color: TH.ok }}/>} trend={4.1} color={TH.ok}/>
-          <KpiTile label="Incidents" value={String(lanes.reduce((s: number, l: any) => s + l.incidents, 0))} icon={<AlertTriangle className="w-4 h-4" style={{ color: TH.err }}/>} trend={-12.5} color={TH.err}/>
-          <KpiTile label="On-Time Rate" value="91%" icon={<Clock className="w-4 h-4" style={{ color: TH.sec }}/>} trend={3.3} color={TH.sec}/>
-        </div>
-        <div className="grid grid-cols-4 gap-3">
-          <HealthRing value={92} label="Uptime"/>
-          <HealthRing value={74} label="Util"/>
-          <HealthRing value={91} label="On-Time"/>
-          <HealthRing value={85} label="Capacity"/>
-        </div>
-        <div className="grid grid-cols-3 gap-3">
-          <Card className="flc-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Shipment Throughput</CardTitle></CardHeader><CardContent className="p-2"><AreaChart data={charts.throughput} height={180}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="month" fontSize={10}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Area type="monotone" dataKey="shipments" stroke={TH.pri} fill={TH.pri} fillOpacity={0.2}/></AreaChart></CardContent></Card>
-          <Card className="flc-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Mode Distribution</CardTitle></CardHeader><CardContent className="p-2"><BarChart data={charts.modeDist} height={180}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="mode" fontSize={9}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Bar dataKey="lanes" fill={TH.sec}/></BarChart></CardContent></Card>
-          <Card className="flc-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Incident Trend</CardTitle></CardHeader><CardContent className="p-2"><LineChart data={charts.incLine} height={180}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="month" fontSize={10}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Line type="monotone" dataKey="critical" stroke={TH.err}/><Line type="monotone" dataKey="major" stroke={TH.warn}/><Line type="monotone" dataKey="minor" stroke={TH.ok}/></LineChart></CardContent></Card>
-        </div>
-      </TabsContent>
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(30, 120, allRecords.length * 0.10 + i * 6) }))
+  const hubChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.hub === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
-      <TabsContent value="lanes" className="space-y-4">
-        <ModuleBreadcrumb items={[{ label: "Dashboard" }, { label: "Lanes" }]}/>
-        <SearchFilterToolbar searchQuery={search} onSearchChange={setSearch} onClearSearch={() => setSearch("")} activeFilters={activeFilters} filterGroups={laneFilterGroups} onToggleFilter={toggleFilter} onClearAllFilters={clearAllFilters} totalItems={lanes.length} filteredCount={filterLanes.length} onRefresh={handleRefresh} placeholder="Search lanes..."/>
-        <Card className="flc-table-card"><CardContent className="p-2"><div className="overflow-x-auto"><table className="w-full text-[11px]"><thead><tr className="border-b flc-table-header"><th className="p-1.5 text-left cursor-pointer hover:bg-gray-100" onClick={() => toggleSort("id")}>ID <ArrowUpDown className="w-3 h-3 inline"/></th><th className="p-1.5 text-left">Lane Name</th><th className="p-1.5 text-left">Mode</th><th className="p-1.5 text-left">Route</th><th className="p-1.5 text-left">Distance</th><th className="p-1.5 text-left">Util</th><th className="p-1.5 text-left">On-Time</th><th className="p-1.5 text-left">Status</th><th className="p-1.5 text-left">Priority</th><th className="p-1.5 text-left">Shipments</th></tr></thead><tbody>
-          {sortedLanes.map((l: any) => <tr key={l.id} className="border-b hover:bg-cyan-50/50 dark:hover:bg-cyan-900/10 flc-table-row"><td className="p-1.5 font-mono">{l.id}</td><td className="p-1.5 font-medium text-[10px]">{l.name}</td><td className="p-1.5"><ModeBadge mode={l.mode}/></td><td className="p-1.5">{l.origin} - {l.dest}</td><td className="p-1.5">{l.distance} km</td><td className="p-1.5"><UtilBar value={l.utilization}/></td><td className="p-1.5"><span className={"text-[10px] font-bold " + (l.onTime >= 90 ? "text-emerald-600" : l.onTime >= 75 ? "text-amber-600" : "text-red-600")}>{l.onTime}%</span></td><td className="p-1.5"><StatusBadge status={l.status}/></td><td className="p-1.5"><PriorityBadge priority={l.priority}/></td><td className="p-1.5">{l.shipments}</td></tr>)}
-          </tbody></table></div></CardContent></Card>
-      </TabsContent>
-
-      <TabsContent value="shipments" className="space-y-4">
-        <ModuleBreadcrumb items={[{ label: "Dashboard" }, { label: "Shipments" }]}/>
-        <div className="grid grid-cols-4 gap-3">
-          <ValueTile label="In Transit" value={String(shipments.filter((s: any) => s.status === "in_transit").length)}/>
-          <ValueTile label="Delivered" value={String(shipments.filter((s: any) => s.status === "delivered").length)}/>
-          <ValueTile label="Delayed" value={String(shipments.filter((s: any) => s.status === "delayed").length)}/>
-          <ValueTile label="Avg Transit" value="18h"/>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <Card className="flc-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Monthly Cost</CardTitle></CardHeader><CardContent className="p-2"><AreaChart data={charts.throughput} height={200}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="month" fontSize={10}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Area type="monotone" dataKey="cost" stroke={TH.err} fill={TH.err} fillOpacity={0.15}/></AreaChart></CardContent></Card>
-          <Card className="flc-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Mode Distribution</CardTitle></CardHeader><CardContent className="p-2"><PieChart height={200}><Pie data={MODES.map((m, i) => ({ name: m, value: ri(10, 50, i + 601) }))} cx="50%" cy="50%" outerRadius={60} dataKey="value" label><Cell fill={PC[0]}/><Cell fill={PC[1]}/><Cell fill={PC[2]}/><Cell fill={PC[3]}/><Cell fill={PC[4]}/></Pie><Tooltip contentStyle={{ fontSize: 11 }}/></PieChart></CardContent></Card>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="insights" className="space-y-4">
-        <ModuleBreadcrumb items={[{ label: "Dashboard" }, { label: "Insights" }]}/>
-        <div className="grid grid-cols-2 gap-3">
-          <Card className="flc-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><AlertTriangle className="w-3 h-3 text-red-500"/>Congestion Hotspots</div><div className="text-[10px] text-muted-foreground">NH-48 Delhi-Gurgaon and Mumbai-Pune expressway show peak congestion. Average delay increased 22% this month. Recommend time-slot scheduling and alternative routing during peak hours.</div></Card>
-          <Card className="flc-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><Workflow className="w-3 h-3 text-cyan-500"/>Multimodal Opportunity</div><div className="text-[10px] text-muted-foreground">12 high-volume lanes could benefit from multi-modal shift. Rail-sea combo on Delhi-Chennai route saves 35% cost. Air-road for time-critical shipments on 5 lanes.</div></Card>
-          <Card className="flc-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><DollarSign className="w-3 h-3 text-amber-500"/>Cost Optimization</div><div className="text-[10px] text-muted-foreground">Backhaul optimization on 8 lanes could reduce empty miles by 18%. Consolidation centers at Jaipur and Lucknow can improve load factors by 25%.</div></Card>
-          <Card className="flc-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><Zap className="w-3 h-3 text-emerald-500"/>Digital Corridor</div><div className="text-[10px] text-muted-foreground">Implement GPS tracking on 15 unmonitored lanes. Real-time ETA accuracy currently at 78%. Predictive delay modeling can improve customer SLA by 15%.</div></Card>
-        </div>
-      </TabsContent>
-    </Tabs>
-  </div>
+  return (
+    <div className="flc-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Freight Lanes' }]} />
+      <PageHeader title="Freight Lane Command" description="Indian national highway freight lane management with NHAI lane certification toll plaza compliance quality control axle load weight testing route optimization verification ETC Fastag integration and safety audit compliance across 8 freight hubs on national highway corridors NH48 NH44 NH27 NH6 NH4 NH7 NH5 and NH2" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-emerald-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
+        </TabsList>
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Active Lanes" value={allRecords.length} />
+            <KpiTile label="NH Corridors" value={PRODUCTS.length} />
+            <KpiTile label="Freight Hubs" value={ARTISANS.length} />
+            <KpiTile label="Avg Lane Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
+          </div>
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="NHAI" value={93} />
+            <HealthRing label="Toll" value={87} />
+            <HealthRing label="Weight" value={91} />
+            <HealthRing label="Route" value={88} />
+            <HealthRing label="Fastag" value={95} />
+            <HealthRing label="Safety" value={90} />
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="National Highways" value="8 Active" />
+            <ValueTile label="Daily Volume" value="12,000 TPH" />
+            <ValueTile label="Avg Transit" value="36 hours" />
+            <ValueTile label="Lane Network" value="14,500 km" />
+          </div>
+        </TabsContent>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search freight lane records..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-emerald-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Lane</th>
+                  <th className="p-3 text-left font-medium">Hub</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Volume</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-emerald-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.lane} /></td>
+                    <td className="p-3">{record.hub}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} TPH/day</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </TabsContent>
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Lane Volume Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Hub Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={hubChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {hubChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
+          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Freight Lane Command — Indian National Highway Logistics Network</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The freight lane command system manages the strategic allocation and operational monitoring of freight transportation lanes across the Indian national highway network operated by the National Highways Authority of India NHAI which maintains a total network of over one lakh forty thousand kilometres of national highways carrying approximately sixty-five percent of India total freight traffic by volume and approximately eighty percent by value where the Indian road freight industry employs over twelve million truck drivers fleet operators and logistics support personnel moving an estimated four point six billion metric tonnes of freight annually with a total market value exceeding two lakh crore rupees where the freight lane command system covers eight primary national highway freight corridors including the NH48 connecting Mumbai to Delhi spanning approximately one thousand four hundred kilometres through Gujarat Rajasthan and Haryana carrying the highest freight density of any Indian national highway corridor handling approximately thirty thousand tonnes per day of industrial agricultural and consumer goods where the NH44 connecting Srinagar to Kanyakumari is the longest national highway at approximately three thousand seven hundred forty-five kilometres traversing the entire north-south length of India through Jammu and Kashmir Punjab Haryana Delhi Rajasthan Madhya Pradesh Maharashtra Telangana Andhra Pradesh Karnataka and Tamil Nadu providing the primary north-south freight backbone corridor where the NH27 connecting Gujarat to Assam is the newly designated east-west corridor spanning over three thousand five hundred kilometres connecting the western industrial port of Porbandar to the eastern river port of Guwahati providing critical east-west freight connectivity across Rajasthan Madhya Pradesh Chhattisgarh Odisha Jharkhand Bihar and West Bengal where the NH6 NH4 NH7 NH5 and NH2 corridors provide supplementary freight connectivity linking major industrial centres port cities and consumption markets across the Indian subcontinent with the freight lane command system optimising lane allocation route scheduling toll compliance and safety monitoring across all eight corridors through a centralised management platform.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>NHAI Lane Certification and Toll Plaza Compliance Standards</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The NHAI lane certification and toll plaza compliance standards establish the regulatory and operational quality framework for Indian national highway freight lane operations ensuring all freight transportation activities comply with the National Highways Authority of India regulations the Central Motor Vehicles Rules the Indian Road Congress guidelines and the Indian Toll Bridge and Ferries Rules where the NHAI lane certification test evaluates each freight lane against a comprehensive checklist of infrastructure and operational requirements including road surface condition confirming the pavement roughness index measured by the bump integrator method is within the acceptable range of two thousand to three thousand millimetres per kilometre confirming a smooth riding surface without significant potholes rutting or surface cracking that could damage freight vehicles or cargo lane width confirming the minimum lane width of three point seven five metres as specified by IRC standards for national highway design with adequate shoulder width of one point five metres on each side for emergency stopping and vehicle recovery operations bridge load capacity confirming all bridges and flyovers on the freight lane are rated for the standard Indian Class A loading of seventy tonnes single axle and the Class B loading of forty tonnes tandem axle used by heavy commercial freight vehicles gradient and curvature confirming the maximum gradient does not exceed five percent on plain terrain three percent on rolling terrain and four percent on hilly terrain and the horizontal curve radius meets the minimum design speed requirements for the posted speed limit where the toll plaza compliance test evaluates the electronic toll collection ETC system readiness confirming all designated freight lanes are equipped with functional FASTag RFID readers capable of reading ISO 18000-6C compliant FASTag transponders at vehicle speeds of up to forty kilometres per hour with a read accuracy exceeding ninety-nine point five percent confirming the toll transaction processing time is less than two seconds per vehicle and the FASTag account balance verification API is available twenty-four hours a day with system uptime exceeding ninety-nine point nine percent.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Axle Load Weight Testing and Route Optimization Verification</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The axle load weight testing and route optimization verification protocols ensure the legal weight compliance and operational efficiency of freight transportation across the Indian national highway network where the axle load weight test monitors the compliance of each freight vehicle with the legal axle weight limits specified by the Central Motor Vehicles Rules and enforced through the network of weigh-in-motion WIM stations and static weighing bridges operated by the NHAI regional offices and state transport departments where the legal maximum axle load limits for Indian freight vehicles are seven tonnes for single axle ten point five tonnes for tandem axle with one metre spacing eighteen tonnes for tandem axle with one point two metre spacing twenty-one tonnes for tridem axle with one point two metre spacing and a maximum gross vehicle weight of forty-nine tonnes for two-axle rigid trucks fifty-five tonnes for three-axle rigid trucks and fifty-five tonnes for articulated tractor-trailer combinations where the WIM station weight test measures the dynamic weight of each axle of every freight vehicle passing through the WIM sensor array at highway speed confirming each axle weight is within five percent of the legal maximum for that axle configuration where overloaded vehicles are flagged for mandatory static weighing at the nearest weigh bridge and subject to penalty assessment under the Motor Vehicles Act provisions where the route optimization verification test evaluates the efficiency of the freight route planning algorithm used by the freight lane command system to assign each freight movement to the optimal national highway corridor based on the freight origin and destination points cargo type and weight constraints required delivery time window real-time traffic congestion data toll cost per kilometre fuel consumption per route segment and availability of rest stops and driver changeover facilities along the route where the route optimization test compares the algorithm-selected route against three alternative routes for a sample of one thousand freight movements per month confirming the algorithm-selected route is within five percent of the theoretical minimum-cost route for at least ninety percent of test cases ensuring the route optimization system delivers consistent cost savings and transit time improvements across the freight lane network.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>ETC Fastag Integration Check and Safety Audit Framework</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The ETC Fastag integration check and safety audit framework provide the electronic toll collection compliance monitoring and operational safety assurance infrastructure for the Indian national highway freight lane management system where the ETC Fastag integration test verifies the seamless operation of the electronic toll collection system across all toll plazas on the designated freight lanes confirming the FASTag RFID reader system at each toll plaza correctly reads the FASTag transponder mounted on each freight vehicle windshield at the specified operating frequency of eight hundred sixty to nine hundred sixty megahertz in the UHF band confirming the reader antenna gain and polarization are correctly configured for reliable reading of FASTag tags mounted at the standard windshield position at a height between one point two and two metres above road level and at vehicle approach speeds between zero and forty kilometres per hour where the integration test also verifies the real-time communication between the toll plaza RFID reader system and the central FASTag account management server confirming transaction data is transmitted within two seconds of the vehicle passing the reader antenna with a transaction success rate exceeding ninety-nine point five percent and confirming the FASTag account balance deduction is accurately reflected in the vehicle owner account within five seconds of the transaction completion where the safety audit protocol conducts systematic inspections of operational safety practices across all designated freight lanes covering vehicle safety including verification that all freight vehicles carry valid fitness certificates insurance certificates and pollution under control PUC certificates driver safety including verification that all drivers hold valid commercial driving licences have completed the mandatory minimum rest period of eleven consecutive hours per day and are not operating under fatigue or intoxication cargo safety including verification that hazardous materials are correctly labelled packaged and documented in accordance with the Road Transport of Hazardous Goods Rules and emergency preparedness including verification that each toll plaza and freight hub maintains functional emergency response equipment including fire extinguishers first aid kits emergency communication systems and vehicle recovery equipment.</p></CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
 }
+
+
+
