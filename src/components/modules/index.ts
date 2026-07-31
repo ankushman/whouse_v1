@@ -296,3 +296,5 @@ export { default as MadhubaniPaintingBiharLogisticsView } from './madhubani-pain
 export { default as PattachitraOdishaLogisticsView } from './pattachitra-odisha-logistics-view'
 export { default as KeralaMuralPaintingLogisticsView } from './kerala-mural-painting-logistics-view'
 export { default as WarliTribalArtMaharashtraLogisticsView } from './warli-tribal-art-maharashtra-logistics-view'
+export { default as RoghanPaintingGujaratLogisticsView } from './roghan-painting-gujarat-logistics-view'
+export { default as DhokraBellMetalCraftLogisticsView } from './dhokra-bell-metal-craft-logistics-view'

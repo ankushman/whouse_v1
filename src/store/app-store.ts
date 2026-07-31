@@ -302,6 +302,8 @@ export const navItems: NavItem[] = [
   { id: 'pattachitra-odisha-logistics', label: 'Pattachitra Odisha', icon: 'ScrollText', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kerala-mural-painting-logistics', label: 'Kerala Mural Painting', icon: 'BookOpen', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'warli-tribal-art-maharashtra-logistics', label: 'Warli Tribal Art Maharashtra', icon: 'Footprints', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'roghan-painting-gujarat-logistics', label: 'Roghan Painting Gujarat', icon: 'Lamp', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'dhokra-bell-metal-craft-logistics', label: 'Dhokra Bell Metal Craft', icon: 'Axe', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

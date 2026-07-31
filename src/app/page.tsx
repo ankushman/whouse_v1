@@ -306,6 +306,8 @@ import MadhubaniPaintingBiharLogisticsView from "@/components/modules/madhubani-
 import PattachitraOdishaLogisticsView from "@/components/modules/pattachitra-odisha-logistics-view"
 import KeralaMuralPaintingLogisticsView from "@/components/modules/kerala-mural-painting-logistics-view"
 import WarliTribalArtMaharashtraLogisticsView from "@/components/modules/warli-tribal-art-maharashtra-logistics-view"
+import RoghanPaintingGujaratLogisticsView from "@/components/modules/roghan-painting-gujarat-logistics-view"
+import DhokraBellMetalCraftLogisticsView from "@/components/modules/dhokra-bell-metal-craft-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -611,6 +613,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "pattachitra-odisha-logistics": PattachitraOdishaLogisticsView,
   "kerala-mural-painting-logistics": KeralaMuralPaintingLogisticsView,
   "warli-tribal-art-maharashtra-logistics": WarliTribalArtMaharashtraLogisticsView,
+  "roghan-painting-gujarat-logistics": RoghanPaintingGujaratLogisticsView,
+  "dhokra-bell-metal-craft-logistics": DhokraBellMetalCraftLogisticsView,
 }
 
 
