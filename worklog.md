@@ -1,5 +1,33 @@
 ---
 ---
+Task ID: R360
+Agent: Main Agent (Cron Loop)
+Task: R360 — Bagh Print Madhya Pradesh (new) + Seed Agri Input Logistics overwrite
+
+Work Log:
+- Read worklog.md: R359 complete (commit 1bbfd02), 347 module files, 353 navItems, ~55,132 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R360)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: bagh-print-madhya-logistics CLEAR (no pre-registration anywhere); seed-agri-input-logistics ALREADY EXISTS
+- CSS prefixes: bgh-* CLEAR; sag-* CLEAR (no existing CSS for seed-agri)
+- Icons: Droplets (Bagh Print, already in iconMap), Wheat (Seed, already existed) — no new icons
+- Seed Agri Input had 234 lines — completely overwritten to 253 lines with genRecords, correct field names
+- Fixed syntax error: ARTISANS array had missing opening bracket — fixed inline
+
+- Created Bagh Print Madhya Pradesh (bgh-*, #b45309 amber brown): 253 lines, 8 products (Parrot Floral Panel, Mango Tree Panel, Jungle Forest Print, Lotus Pond Scroll, Peacock Dance Panel, Vine Trellis Mural, Sunset Garden Scroll, Tribal Animal Panel), 8 artisans (Bagh Print Artisan Cooperative, Dhar Heritage Guild, Bagh Udyog Village Cluster, Jhabua Block Printer Society, Alirajpur Traditional, Dhar Handloom Collective, Mandla Artisans Guild, Kukshi Block Printers), 6 statuses, 4 insight cards (1000-year MP hand block printing heritage, alizarin red mordant QC & indigo vat dye fastness, hand block impression depth & fabric shrinkage analysis, natural dye pigment audit & heritage market development)
+- Overwrote Seed Agri Input Logistics (sag-*, #166534 deep forest green): 253 lines, 8 products (Bt Cotton Seed, Basmati Paddy Seed, Hybrid Maize Seed, Mustard Rapeseed Pack, Soybean Seed Container, Wheat Certified Seed, Groundnut Kernel Seed, Sorghum Jowar Seed), 8 suppliers (Rajasthan Krishì Beej Nigam, Nuziveedu Seeds, Kaveri Seed Co, Advanta India, Ankur Seeds, J.K. Agri Genetics, Phulambri Seeds, Shriram Bioseeds), 6 statuses, 4 insight cards (INR 45K Crore India seed industry, IS 10064 seed grade & germination testing, moisture content & treatment coating QC, phytosanitary certification & Refrigerator cold chain logistics)
+- Registered Bagh in 3 files (index.ts, page.tsx, app-store.ts); Seed already registered
+- CSS: +20 lines (bgh-* 5 rules + 3 keyframes + sag-* 5 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit f923c6a
+
+Stage Summary:
+- 348 module files (1 new Bagh Print), 345 exports, 354 navItems, ~55,152 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Seed Agri Input updated from 234 to 253 lines with genRecords, 60 records, correct field names
+- Remaining non-253 overwrite candidates: ~253 modules (8 still at 234 lines)
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue overwrite program targeting remaining 8 234-line modules
+---
 Task ID: R359
 Agent: Main Agent (Cron Loop)
 Task: R359 — Cheriyal Scroll Art Telangana (new) + Textile Apparel Logistics overwrite
