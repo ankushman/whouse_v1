@@ -355,6 +355,7 @@ import SungudiSareeTamilNaduLogisticsView from "@/components/modules/sungudi-sar
 import PembarthiMetalCraftTelanganaLogisticsView from "@/components/modules/pembarthi-metal-craft-telangana-logistics-view"
 import RoganArtGujaratLogisticsView from "@/components/modules/rogan-art-gujarat-logistics-view"
 import PichwaiRajasthanLogisticsView from "@/components/modules/pichwai-rajasthan-logistics-view"
+import WarliMaharashtraLogisticsView from "@/components/modules/warli-maharashtra-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -709,6 +710,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "pembarthi-metal-craft-telangana-logistics": PembarthiMetalCraftTelanganaLogisticsView,
   "rogan-art-gujarat-logistics": RoganArtGujaratLogisticsView,
   "pichwai-rajasthan-logistics": PichwaiRajasthanLogisticsView,
+  "warli-maharashtra-logistics": WarliMaharashtraLogisticsView,
 }
 
 

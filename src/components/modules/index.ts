@@ -346,3 +346,4 @@ export { default as SungudiSareeTamilNaduLogisticsView } from './sungudi-saree-t
 export { default as PembarthiMetalCraftTelanganaLogisticsView } from './pembarthi-metal-craft-telangana-logistics-view'
 export { default as RoganArtGujaratLogisticsView } from './rogan-art-gujarat-logistics-view'
 export { default as PichwaiRajasthanLogisticsView } from './pichwai-rajasthan-logistics-view'
+export { default as WarliMaharashtraLogisticsView } from './warli-maharashtra-logistics-view'

@@ -55060,3 +55060,23 @@ html.theme-transition body {
 @keyframes picFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes picPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(168, 85, 247, 0); } }
 @keyframes picRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* war-* — Warli Maharashtra Logistics */
+.war-root { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%); }
+.war-root .card { border: 1px solid #fcd34d; border-radius: 0.75rem; }
+.war-root table thead { background: #fef3c7; }
+.war-root table tbody tr:hover { background: rgba(217, 119, 6, 0.06); }
+.war-root .inline-flex.items-center.rounded-full { border: 1px solid #fbbf24; }
+@keyframes warFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes warPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(217, 119, 6, 0); } }
+@keyframes warRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* aer-* — Aerospace MRO Logistics */
+.aer-root { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%); }
+.aer-root .card { border: 1px solid #93c5fd; border-radius: 0.75rem; }
+.aer-root table thead { background: #dbeafe; }
+.aer-root table tbody tr:hover { background: rgba(59, 130, 246, 0.06); }
+.aer-root .inline-flex.items-center.rounded-full { border: 1px solid #60a5fa; }
+@keyframes aerFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes aerPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); } }
+@keyframes aerRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
