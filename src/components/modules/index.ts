@@ -368,3 +368,4 @@ export { default as ChanderiMadhyaPradeshLogisticsView } from './chanderi-madhya
 export { default as PhulkariEmbroideryPunjabLogisticsView } from './phulkari-embroidery-punjab-logistics-view'
 export { default as TarakasiSilverFiligreeOdishaLogisticsView } from './tarakasi-silver-filigree-odisha-logistics-view'
 export { default as AjrakhBlockPrintKutchLogisticsView } from './ajrakh-block-print-kutch-logistics-view'
+export { default as PattachitraWestBengalLogisticsView } from './pattachitra-west-bengal-logistics-view'

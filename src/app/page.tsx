@@ -377,6 +377,7 @@ import ChanderiMadhyaPradeshLogisticsView from "@/components/modules/chanderi-ma
 import PhulkariEmbroideryPunjabLogisticsView from "@/components/modules/phulkari-embroidery-punjab-logistics-view"
 import TarakasiSilverFiligreeOdishaLogisticsView from "@/components/modules/tarakasi-silver-filigree-odisha-logistics-view"
 import AjrakhBlockPrintKutchLogisticsView from "@/components/modules/ajrakh-block-print-kutch-logistics-view"
+import PattachitraWestBengalLogisticsView from "@/components/modules/pattachitra-west-bengal-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -753,6 +754,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "phulkari-embroidery-punjab-logistics": PhulkariEmbroideryPunjabLogisticsView,
   "tarakasi-silver-filigree-odisha-logistics": TarakasiSilverFiligreeOdishaLogisticsView,
   "ajrakh-block-print-kutch-logistics": AjrakhBlockPrintKutchLogisticsView,
+  "pattachitra-west-bengal-logistics": PattachitraWestBengalLogisticsView,
 }
 
 
