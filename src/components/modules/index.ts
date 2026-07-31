@@ -302,3 +302,5 @@ export { default as PhadPaintingRajasthanLogisticsView } from './phad-painting-r
 export { default as BidriwareMetalCraftKarnatakaLogisticsView } from './bidriware-metal-craft-karnataka-logistics-view'
 export { default as KalamkariVeilArtAndhraLogisticsView } from './kalamkari-veil-art-andhra-logistics-view'
 export { default as PichwaiPaintingRajasthanLogisticsView } from './pichwai-painting-rajasthan-logistics-view'
+export { default as SaurashtraAppliqueGujaratLogisticsView } from './saurashtra-applique-gujarat-logistics-view'
+export { default as ManipuriBlackPotteryLogisticsView } from './manipuri-black-pottery-logistics-view'

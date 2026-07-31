@@ -312,6 +312,8 @@ import PhadPaintingRajasthanLogisticsView from "@/components/modules/phad-painti
 import BidriwareMetalCraftKarnatakaLogisticsView from "@/components/modules/bidriware-metal-craft-karnataka-logistics-view"
 import KalamkariVeilArtAndhraLogisticsView from "@/components/modules/kalamkari-veil-art-andhra-logistics-view"
 import PichwaiPaintingRajasthanLogisticsView from "@/components/modules/pichwai-painting-rajasthan-logistics-view"
+import SaurashtraAppliqueGujaratLogisticsView from "@/components/modules/saurashtra-applique-gujarat-logistics-view"
+import ManipuriBlackPotteryLogisticsView from "@/components/modules/manipuri-black-pottery-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -623,6 +625,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "bidriware-metal-craft-karnataka-logistics": BidriwareMetalCraftKarnatakaLogisticsView,
   "kalamkari-veil-art-andhra-logistics": KalamkariVeilArtAndhraLogisticsView,
   "pichwai-painting-rajasthan-logistics": PichwaiPaintingRajasthanLogisticsView,
+  "saurashtra-applique-gujarat-logistics": SaurashtraAppliqueGujaratLogisticsView,
+  "manipuri-black-pottery-logistics": ManipuriBlackPotteryLogisticsView,
 }
 
 

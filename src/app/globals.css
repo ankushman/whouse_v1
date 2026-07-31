@@ -53972,3 +53972,33 @@ html.theme-transition body {
 @keyframes ppw-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes ppw-pulse-crimson { 0%, 100% { box-shadow: 0 0 0 0 rgba(159,18,57,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(159,18,57,0.15); } }
 @keyframes ppw-glow-crimson { 0%, 100% { box-shadow: 0 0 0 0 rgba(159,18,57,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(159,18,57,0.25); } }
+.sap-root { animation: sap-fade-in 0.3s ease-out; }
+.sap-badge { transition: transform 0.15s; }
+.sap-badge:hover { transform: scale(1.05); }
+.sap-status { transition: background-color 0.15s; }
+.sap-costbar { transition: width 0.4s ease-out; }
+.sap-table-card { transition: box-shadow 0.2s; }
+.sap-table-card:hover { box-shadow: 0 4px 16px rgba(14,116,144,0.08); }
+.sap-health-grid { transition: box-shadow 0.2s; }
+.sap-health-grid:hover { box-shadow: 0 2px 12px rgba(14,116,144,0.1); }
+.sap-insight { transition: all 0.25s; border-left: 3px solid #0e7490; }
+.sap-insight:hover { border-color: #0891b2; box-shadow: 0 2px 8px rgba(14,116,144,0.1); }
+@keyframes sap-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sap-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes sap-pulse-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(14,116,144,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(14,116,144,0.15); } }
+@keyframes sap-glow-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(14,116,144,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(14,116,144,0.25); } }
+.mbp-root { animation: mbp-fade-in 0.3s ease-out; }
+.mbp-badge { transition: transform 0.15s; }
+.mbp-badge:hover { transform: scale(1.05); }
+.mbp-status { transition: background-color 0.15s; }
+.mbp-costbar { transition: width 0.4s ease-out; }
+.mbp-table-card { transition: box-shadow 0.2s; }
+.mbp-table-card:hover { box-shadow: 0 4px 16px rgba(41,37,36,0.08); }
+.mbp-health-grid { transition: box-shadow 0.2s; }
+.mbp-health-grid:hover { box-shadow: 0 2px 12px rgba(41,37,36,0.1); }
+.mbp-insight { transition: all 0.25s; border-left: 3px solid #292524; }
+.mbp-insight:hover { border-color: #44403c; box-shadow: 0 2px 8px rgba(41,37,36,0.1); }
+@keyframes mbp-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mbp-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mbp-pulse-stone { 0%, 100% { box-shadow: 0 0 0 0 rgba(41,37,36,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(41,37,36,0.15); } }
+@keyframes mbp-glow-stone { 0%, 100% { box-shadow: 0 0 0 0 rgba(41,37,36,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(41,37,36,0.25); } }
