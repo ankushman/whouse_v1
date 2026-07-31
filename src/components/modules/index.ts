@@ -363,3 +363,4 @@ export { default as MadhubaniBiharLogisticsView } from './madhubani-bihar-logist
 export { default as KalamkariAndhraLogisticsView } from './kalamkari-andhra-logistics-view'
 export { default as PatolaGujaratLogisticsView } from './patola-gujarat-logistics-view'
 export { default as KasutiKarnatakaLogisticsView } from './kasuti-karnataka-logistics-view'
+export { default as BanjaraEmbroideryTelanganaLogisticsView } from './banjara-embroidery-telangana-logistics-view'

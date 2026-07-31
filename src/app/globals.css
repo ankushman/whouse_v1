@@ -55290,3 +55290,12 @@ html.theme-transition body {
 @keyframes ksu-spin{from{stroke-dashoffset:var(--ksu-offset,0)}to{stroke-dashoffset:0}}
 @keyframes ksu-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
 @keyframes ksu-slide{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.bel-root{--bel-bg:linear-gradient(135deg,#fef2f2 0%,#fecaca 100%);--bel-ring:#dc2626;--bel-glow:rgba(220,38,38,0.12)}
+.bel-root .bel-health-ring svg circle:last-child{animation:bel-spin 4s linear infinite}
+.bel-root table tbody tr:hover{background:rgba(220,38,38,0.04);box-shadow:inset 0 0 0 1px rgba(220,38,38,0.08)}
+.bel-root .bel-kpi-tile:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(220,38,38,0.15)}
+.bel-root .bel-chart-card{border:1px solid rgba(220,38,38,0.08)}
+@keyframes bel-spin{from{stroke-dashoffset:var(--bel-offset,0)}to{stroke-dashoffset:0}}
+@keyframes bel-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+@keyframes bel-slide{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
