@@ -54655,3 +54655,29 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* === Mata Ni Pachedi Gujarat Logistics (mnp-*) === */
+.mnp-root {
+  --mnp-bg: #ecfdf5;
+  --mnp-fg: #059669;
+  --mnp-accent: #047857;
+  --mnp-muted: #a7f3d0;
+  background: linear-gradient(135deg, var(--mnp-bg) 0%, #d1fae5 100%);
+  min-height: 100vh;
+  animation: mnpFadeIn 0.5s ease-out;
+}
+.mnp-root:hover {
+  animation: mnpPulse 2s ease-in-out infinite;
+}
+@keyframes mnpFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes mnpPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(5,150,105,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(5,150,105,0.04); }
+}
+@keyframes mnpRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

@@ -7,76 +7,76 @@ import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 const COLORS = ['#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ede9fe', '#6d28d9', '#5b21b6', '#f5f3ff']
-const PRODUCTS = ['Devnarayan Phad Scroll', 'Pabuji Rath Phad', 'Bhilwara Epic Scroll', 'Rajasthani Folk Hero Panel', 'Temple Procession Phad', 'Ancestral Legend Phad', 'Wedding Ceremony Phad', 'Battle Scene Scroll']
-const PAINTERS = ['Bhilwara Phad Painter Guild', 'Shahpura Chitrakar Samiti', 'Bijolia Traditional Painters', 'Kumbhalgarh Art Colony', 'Devnarayan Temple Artists', 'Chittorgarh Folk Art Guild', 'Rajsamand Phad Studio', 'Nathdwara Scroll Centre']
-const STATUSES = ['GI Phad Painting Mark', 'IS 16796 Folk Scroll Grade A', 'Canvas Roll Cloth Wrap', 'Flatbed Truck Transit', 'Dust-Free Storage 20-28C', 'Natural Dye QC']
+const PRODUCTS = ['Devnarayan Phad Scroll Panel', 'Pabuji Rathod Epic Phad', 'Bhilwara Hero Legend Scroll', 'Rajasthani Folk Devotion Panel', 'Temple Procession Phad Cloth', 'Ancestral Hero Worship Scroll', 'Royal Court Scene Phad', 'Battle Narrative Scroll Panel']
+const PAINTERS = ['Bhilwara Phad Painter Guild', 'Shahpura Chitrakar Samiti', 'Bijolia Traditional Phad Artists', 'Kumbhalgarh Folk Art Colony', 'Devnarayan Temple Painter Society', 'Chittorgarh Scroll Art Guild', 'Rajsamand Phad Heritage Studio', 'Nathdwara Devotional Art Centre']
+const STATUSES = ['GI Phad Painting Mark', 'IS 16796 Folk Scroll Grade A', 'Canvas Roll Cloth Wrap', 'Flatbed Truck Transit', 'Dust-Free Storage 20-28C', 'Natural Pigment Fidelity QC']
 
 const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
 const ProductBadge = ({ name }: { name: string }) => (
-  <span className="ppr-badge inline-block px-2 py-0.5 rounded text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
 )
 
 const StatusBadge = ({ status }: { status: string }) => (
-  <span className="ppr-status inline-block px-2 py-0.5 rounded text-xs font-medium bg-violet-100 text-violet-800">{status}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-violet-100 text-violet-800">{status}</span>
 )
 
 const CostBar = ({ cost, max }: { cost: number; max: number }) => (
-  <div className="ppr-costbar w-full bg-violet-100 rounded h-2"><div className="bg-violet-700 h-2 rounded" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+  <div className="w-24 h-2 bg-violet-200 rounded-full overflow-hidden"><div className="h-full bg-violet-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
 )
 
-const HealthRing = ({ value, label, size = 64 }: { value: number; label: string; size?: number }) => {
-  const r = (size - 8) / 2
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
   return (
-    <div className="ppr-health-ring flex flex-col items-center">
-      <svg width={size} height={size}><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={4} /><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#7c3aed" strokeWidth={4} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" transform={`rotate(-90 ${size/2} ${size/2})`} /></svg>
-      <span className="text-xs font-semibold" style={{ color: COLORS[0] }}>{value}%</span>
-      <span className="text-[10px] text-gray-500">{label}</span>
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#f5f3ff" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
     </div>
   )
 }
 
-const KpiTile = ({ label, value, icon }: { label: string; value: string; icon: string }) => (
-  <Card className="ppr-kpi"><CardContent className="p-4"><div className="flex items-center gap-3"><span className="text-2xl">{icon}</span><div><p className="text-xs text-gray-500">{label}</p><p className="text-xl font-bold" style={{ color: COLORS[0] }}>{value}</p></div></div></CardContent></Card>
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
 )
 
 const ValueTile = ({ label, value }: { label: string; value: string }) => (
-  <Card className="ppr-value"><CardContent className="p-4"><p className="text-xs text-gray-500">{label}</p><p className="text-lg font-semibold" style={{ color: COLORS[1] }}>{value}</p></CardContent></Card>
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
 )
 
-const genRecords = (startIdx: number) => Array.from({ length: 20 }, (_, i) => {
-  const idx = startIdx + i
-  const units = ['scrolls', 'panels', 'sets', 'rolls']
-  return {
-    id: `PPR-${String(idx).padStart(4, '0')}`, scroll: PRODUCTS[idx % 8], painter: PAINTERS[idx % 8],
-    status: STATUSES[idx % 6], qty: ri(3, 50, 5 + idx * 2), unit: units[idx % 4],
-    cost: ri(15000, 280000, 18000 + idx * 14000), date: `2024-${String(ri(1, 12, idx % 12 + 1)).padStart(2, '0')}-${String(ri(1, 28, idx % 28 + 1)).padStart(2, '0')}`,
-  }
-})
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `PPR-${String(offset + i + 1).padStart(4, '0')}`,
+    painter: PAINTERS[(offset + i) % PAINTERS.length], ware: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 35, ((offset + i) * 31) % 35) + 1,
+    cost: ri(5000, 98000, ((offset + i) * 14173) % 93000) + 5000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
+  }))
 
 const phadRecords = [
-  { id: 'PPR-0001', scroll: 'Devnarayan Phad Scroll', painter: 'Bhilwara Phad Painter Guild', status: 'GI Phad Painting Mark', qty: 5, unit: 'scrolls', cost: 185000, date: '2024-01-15' },
-  { id: 'PPR-0002', scroll: 'Pabuji Rath Phad', painter: 'Shahpura Chitrakar Samiti', status: 'IS 16796 Folk Scroll Grade A', qty: 12, unit: 'scrolls', cost: 142000, date: '2024-02-03' },
-  { id: 'PPR-0003', scroll: 'Bhilwara Epic Scroll', painter: 'Bijolia Traditional Painters', status: 'Canvas Roll Cloth Wrap', qty: 8, unit: 'scrolls', cost: 96000, date: '2024-02-18' },
-  { id: 'PPR-0004', scroll: 'Rajasthani Folk Hero Panel', painter: 'Kumbhalgarh Art Colony', status: 'Flatbed Truck Transit', qty: 20, unit: 'panels', cost: 228000, date: '2024-03-05' },
-  { id: 'PPR-0005', scroll: 'Temple Procession Phad', painter: 'Devnarayan Temple Artists', status: 'Dust-Free Storage 20-28C', qty: 3, unit: 'scrolls', cost: 210000, date: '2024-03-12' },
-  { id: 'PPR-0006', scroll: 'Ancestral Legend Phad', painter: 'Chittorgarh Folk Art Guild', status: 'Natural Dye QC', qty: 15, unit: 'scrolls', cost: 78000, date: '2024-03-20' },
-  { id: 'PPR-0007', scroll: 'Wedding Ceremony Phad', painter: 'Rajsamand Phad Studio', status: 'GI Phad Painting Mark', qty: 10, unit: 'sets', cost: 156000, date: '2024-04-02' },
-  { id: 'PPR-0008', scroll: 'Battle Scene Scroll', painter: 'Nathdwara Scroll Centre', status: 'IS 16796 Folk Scroll Grade A', qty: 4, unit: 'scrolls', cost: 268000, date: '2024-04-10' },
-  { id: 'PPR-0009', scroll: 'Devnarayan Phad Scroll', painter: 'Shahpura Chitrakar Samiti', status: 'Canvas Roll Cloth Wrap', qty: 25, unit: 'scrolls', cost: 35000, date: '2024-04-18' },
-  { id: 'PPR-0010', scroll: 'Pabuji Rath Phad', painter: 'Bhilwara Phad Painter Guild', status: 'Flatbed Truck Transit', qty: 18, unit: 'scrolls', cost: 195000, date: '2024-05-01' },
-  { id: 'PPR-0011', scroll: 'Bhilwara Epic Scroll', painter: 'Kumbhalgarh Art Colony', status: 'Dust-Free Storage 20-28C', qty: 7, unit: 'sets', cost: 58000, date: '2024-05-10' },
-  { id: 'PPR-0012', scroll: 'Rajasthani Folk Hero Panel', painter: 'Chittorgarh Folk Art Guild', status: 'Natural Dye QC', qty: 30, unit: 'panels', cost: 242000, date: '2024-05-18' },
-  { id: 'PPR-0013', scroll: 'Temple Procession Phad', painter: 'Devnarayan Temple Artists', status: 'GI Phad Painting Mark', qty: 6, unit: 'scrolls', cost: 163000, date: '2024-05-25' },
-  { id: 'PPR-0014', scroll: 'Ancestral Legend Phad', painter: 'Rajsamand Phad Studio', status: 'IS 16796 Folk Scroll Grade A', qty: 22, unit: 'scrolls', cost: 92000, date: '2024-06-03' },
-  { id: 'PPR-0015', scroll: 'Wedding Ceremony Phad', painter: 'Bijolia Traditional Painters', status: 'Canvas Roll Cloth Wrap', qty: 9, unit: 'sets', cost: 118000, date: '2024-06-10' },
-  { id: 'PPR-0016', scroll: 'Battle Scene Scroll', painter: 'Nathdwara Scroll Centre', status: 'Flatbed Truck Transit', qty: 4, unit: 'scrolls', cost: 245000, date: '2024-06-18' },
-  { id: 'PPR-0017', scroll: 'Devnarayan Phad Scroll', painter: 'Chittorgarh Folk Art Guild', status: 'Dust-Free Storage 20-28C', qty: 16, unit: 'scrolls', cost: 48000, date: '2024-06-25' },
-  { id: 'PPR-0018', scroll: 'Pabuji Rath Phad', painter: 'Rajsamand Phad Studio', status: 'Natural Dye QC', qty: 28, unit: 'rolls', cost: 128000, date: '2024-07-02' },
-  { id: 'PPR-0019', scroll: 'Bhilwara Epic Scroll', painter: 'Devnarayan Temple Artists', status: 'GI Phad Painting Mark', qty: 11, unit: 'scrolls', cost: 68000, date: '2024-07-10' },
-  { id: 'PPR-0020', scroll: 'Rajasthani Folk Hero Panel', painter: 'Kumbhalgarh Art Colony', status: 'IS 16796 Folk Scroll Grade A', qty: 35, unit: 'panels', cost: 256000, date: '2024-07-18' },
+  { id: 'PPR-0001', painter: 'Bhilwara Phad Painter Guild', ware: 'Devnarayan Phad Scroll Panel', status: 'GI Phad Painting Mark', qty: 3, cost: 92000, date: '2024-01-10' },
+  { id: 'PPR-0002', painter: 'Shahpura Chitrakar Samiti', ware: 'Pabuji Rathod Epic Phad', status: 'IS 16796 Folk Scroll Grade A', qty: 5, cost: 78000, date: '2024-01-23' },
+  { id: 'PPR-0003', painter: 'Bijolia Traditional Phad Artists', ware: 'Bhilwara Hero Legend Scroll', status: 'Canvas Roll Cloth Wrap', qty: 4, cost: 85000, date: '2024-02-06' },
+  { id: 'PPR-0004', painter: 'Kumbhalgarh Folk Art Colony', ware: 'Rajasthani Folk Devotion Panel', status: 'Flatbed Truck Transit', qty: 7, cost: 52000, date: '2024-02-18' },
+  { id: 'PPR-0005', painter: 'Devnarayan Temple Painter Society', ware: 'Temple Procession Phad Cloth', status: 'Dust-Free Storage 20-28C', qty: 6, cost: 68000, date: '2024-03-02' },
+  { id: 'PPR-0006', painter: 'Chittorgarh Scroll Art Guild', ware: 'Ancestral Hero Worship Scroll', status: 'Natural Pigment Fidelity QC', qty: 8, cost: 42000, date: '2024-03-15' },
+  { id: 'PPR-0007', painter: 'Rajsamand Phad Heritage Studio', ware: 'Royal Court Scene Phad', status: 'GI Phad Painting Mark', qty: 3, cost: 95000, date: '2024-03-28' },
+  { id: 'PPR-0008', painter: 'Nathdwara Devotional Art Centre', ware: 'Battle Narrative Scroll Panel', status: 'IS 16796 Folk Scroll Grade A', qty: 9, cost: 35000, date: '2024-04-10' },
+  { id: 'PPR-0009', painter: 'Bhilwara Phad Painter Guild', ware: 'Pabuji Rathod Epic Phad', status: 'Canvas Roll Cloth Wrap', qty: 5, cost: 72000, date: '2024-04-22' },
+  { id: 'PPR-0010', painter: 'Shahpura Chitrakar Samiti', ware: 'Devnarayan Phad Scroll Panel', status: 'Flatbed Truck Transit', qty: 4, cost: 88000, date: '2024-05-05' },
+  { id: 'PPR-0011', painter: 'Bijolia Traditional Phad Artists', ware: 'Bhilwara Hero Legend Scroll', status: 'Dust-Free Storage 20-28C', qty: 7, cost: 55000, date: '2024-05-17' },
+  { id: 'PPR-0012', painter: 'Kumbhalgarh Folk Art Colony', ware: 'Rajasthani Folk Devotion Panel', status: 'Natural Pigment Fidelity QC', qty: 6, cost: 64000, date: '2024-05-30' },
+  { id: 'PPR-0013', painter: 'Devnarayan Temple Painter Society', ware: 'Temple Procession Phad Cloth', status: 'GI Phad Painting Mark', qty: 3, cost: 91000, date: '2024-06-12' },
+  { id: 'PPR-0014', painter: 'Chittorgarh Scroll Art Guild', ware: 'Ancestral Hero Worship Scroll', status: 'IS 16796 Folk Scroll Grade A', qty: 8, cost: 40000, date: '2024-06-24' },
+  { id: 'PPR-0015', painter: 'Rajsamand Phad Heritage Studio', ware: 'Royal Court Scene Phad', status: 'Canvas Roll Cloth Wrap', qty: 10, cost: 28000, date: '2024-07-06' },
+  { id: 'PPR-0016', painter: 'Nathdwara Devotional Art Centre', ware: 'Battle Narrative Scroll Panel', status: 'Flatbed Truck Transit', qty: 5, cost: 75000, date: '2024-07-18' },
+  { id: 'PPR-0017', painter: 'Bhilwara Phad Painter Guild', ware: 'Rajasthani Folk Devotion Panel', status: 'Dust-Free Storage 20-28C', qty: 4, cost: 82000, date: '2024-07-30' },
+  { id: 'PPR-0018', painter: 'Shahpura Chitrakar Samiti', ware: 'Devnarayan Phad Scroll Panel', status: 'Natural Pigment Fidelity QC', qty: 7, cost: 48000, date: '2024-08-10' },
+  { id: 'PPR-0019', painter: 'Bijolia Traditional Phad Artists', ware: 'Pabuji Rathod Epic Phad', status: 'GI Phad Painting Mark', qty: 6, cost: 60000, date: '2024-08-22' },
+  { id: 'PPR-0020', painter: 'Kumbhalgarh Folk Art Colony', ware: 'Bhilwara Hero Legend Scroll', status: 'IS 16796 Folk Scroll Grade A', qty: 5, cost: 70000, date: '2024-09-03' },
 ]
 
 export default function PhadPaintingRajasthanLogisticsView() {
@@ -86,150 +86,135 @@ export default function PhadPaintingRajasthanLogisticsView() {
   const allRecords = [...phadRecords, ...genRecords(21), ...genRecords(41)]
 
   const filteredRecords = useMemo(() => {
-    return allRecords.filter(r => {
-      if (searchQuery && !r.id.toLowerCase().includes(searchQuery.toLowerCase()) && !r.scroll.toLowerCase().includes(searchQuery.toLowerCase())) return false
-      return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string))
-    })
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.ware.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
   }, [searchQuery, activeFilters, allRecords])
 
   const filterGroups = [
-    { key: 'scroll', label: 'Scroll', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.scroll === p).length })) },
+    { key: 'ware', label: 'Ware', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.ware === p).length })) },
     { key: 'painter', label: 'Painter', options: PAINTERS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.painter === p).length })) },
   ]
 
-  const trendData = PRODUCTS.slice(0, 6).map((p, i) => ({ name: p.split(' ').slice(0, 2).join(' '), shipments: 4 + i * 3, cost: 18000 + i * 65000 }))
-  const painterChart = PAINTERS.slice(0, 6).map((a, i) => ({ name: a.split(' ').slice(0, 2).join(' '), volume: 15 + i * 8, revenue: 10 + i * 5 }))
-  const statusPie = STATUSES.map((s, i) => ({ name: s.split(' ').slice(0, 2).join(' '), value: 5 + i * 4 }))
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(5, 30, allRecords.length * 0.14 + i * 4) }))
+  const painterChart = PAINTERS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.painter === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
   const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
     <div className="ppr-root space-y-6 p-6">
-      <ModuleBreadcrumb items={[{ label: 'Modules' }, { label: 'Phad Painting Rajasthan' }]} />
-      <PageHeader title="Phad Painting Rajasthan Logistics" description="Bhilwara Phad scroll painting tradition tracking — Bhopa bard performances, Devnarayan and Pabuji epic narrative cloth scrolls, GI certification logistics, canvas roll packaging, dust-free transit for Rajasthani folk art export" />
-      <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="bg-violet-50">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Phad Painting Rajasthan' }]} />
+      <PageHeader title="Phad Painting Rajasthan Logistics" description="Phad epic narrative scroll painting supply chain with IS 16796 folk scroll grade compliance, natural pigment fidelity QC, canvas roll cloth wrap packaging, and GI Phad Painting Mark certification across 8 heritage artisan clusters in Bhilwara, Shahpura, and Chittorgarh districts of Rajasthan" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-violet-100">
           <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
           <TabsTrigger value="shipments">Shipments</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
         <TabsContent value="dashboard" className="space-y-6">
           <div className="grid grid-cols-4 gap-4">
-            <KpiTile icon="🖼️" label="Total Shipments" value={String(allRecords.length)} />
-            <KpiTile icon="👨\u200D🎨" label="Active Painters" value={String(PAINTERS.length)} />
-            <KpiTile icon="✅" label="GI Certified" value="94%" />
-            <KpiTile icon="🚛" label="Avg Transit" value="4.2 days" />
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Active Ware" value={PRODUCTS.length} />
+            <KpiTile label="Painter Clusters" value={PAINTERS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-
-          <Card className="ppr-health-grid">
-            <CardHeader><CardTitle>Quality Compliance</CardTitle></CardHeader>
-            <CardContent>
-              <div className="flex justify-around">
-                <HealthRing value={97} label="GI Tag" />
-                <HealthRing value={93} label="IS 16796" />
-                <HealthRing value={89} label="Canvas" />
-                <HealthRing value={84} label="Truck" />
-                <HealthRing value={91} label="Storage" />
-                <HealthRing value={95} label="Dye" />
-              </div>
-            </CardContent>
-          </Card>
-
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="GI Tag" value={96} />
+            <HealthRing label="IS 16796" value={92} />
+            <HealthRing label="Canvas" value={89} />
+            <HealthRing label="Truck" value={85} />
+            <HealthRing label="Dust Free" value={91} />
+            <HealthRing label="Pigment" value={94} />
+          </div>
           <div className="grid grid-cols-4 gap-4">
-            <ValueTile label="Painting Schools" value="12 Villages" />
-            <ValueTile label="Annual Output" value="2,800 Scrolls" />
-            <ValueTile label="Export Markets" value="14 Countries" />
-            <ValueTile label="Heritage Age" value="700 Years" />
+            <ValueTile label="Artisan Families" value="35+" />
+            <ValueTile label="Phad Tradition" value="Since 14th C" />
+            <ValueTile label="Export Markets" value="11 Countries" />
+            <ValueTile label="Annual Revenue" value="₹5.5 Crore" />
           </div>
         </TabsContent>
-
-        <TabsContent value="shipments" className="space-y-4">
+        <TabsContent value="shipments" className="space-y-6">
           <SearchFilterToolbar
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
             onClearSearch={() => setSearchQuery('')}
             activeFilters={activeFilters}
             filterGroups={filterGroups}
-            onToggleFilter={(key, value) => setActiveFilters(p => ({ ...p, [key]: p[key]?.includes(value) ? p[key].filter((v: string) => v !== value) : [...(p[key] || []), value] }))}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
             onClearAllFilters={() => setActiveFilters({})}
             totalItems={allRecords.length}
             filteredCount={filteredRecords.length}
             onRefresh={() => {}}
-            placeholder="Search by ID, scroll, or painter..."
+            placeholder="Search Phad painting shipments..."
           />
-
-          <Card className="ppr-table-card">
-            <CardContent className="p-0">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b bg-violet-50">
-                    <th className="p-3 text-left">ID</th>
-                    <th className="p-3 text-left">Scroll</th>
-                    <th className="p-3 text-left">Painter</th>
-                    <th className="p-3 text-left">Status</th>
-                    <th className="p-3 text-right">Qty</th>
-                    <th className="p-3 text-right">Cost</th>
-                    <th className="p-3 text-left">Cost Bar</th>
-                    <th className="p-3 text-left">Date</th>
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-violet-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Ware</th>
+                  <th className="p-3 text-left font-medium">Painter</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-violet-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.ware} /></td>
+                    <td className="p-3">{record.painter}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['pcs', 'sets', 'pairs', 'units'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filteredRecords.slice(0, 15).map(r => (
-                    <tr key={r.id} className="border-b hover:bg-violet-50/50">
-                      <td className="p-3 font-mono text-xs">{r.id}</td>
-                      <td className="p-3"><ProductBadge name={r.scroll} /></td>
-                      <td className="p-3 text-xs">{r.painter}</td>
-                      <td className="p-3"><StatusBadge status={r.status} /></td>
-                      <td className="p-3 text-right">{r.qty} {r.unit}</td>
-                      <td className="p-3 text-right">₹{r.cost.toLocaleString()}</td>
-                      <td className="p-3 w-28"><CostBar cost={r.cost} max={maxCost} /></td>
-                      <td className="p-3 text-xs text-gray-500">{r.date}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </TabsContent>
-
         <TabsContent value="analytics" className="space-y-6">
           <div className="grid grid-cols-2 gap-6">
             <Card>
               <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
               <CardContent>
-                <LineChart width={500} height={250} data={trendData}>
+                <LineChart width={500} height={300} data={trendData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={11} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="month" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
                   <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
-                  <Line type="monotone" dataKey="cost" stroke={COLORS[3]} strokeWidth={2} />
                 </LineChart>
               </CardContent>
             </Card>
             <Card>
               <CardHeader><CardTitle>Painter Volume</CardTitle></CardHeader>
               <CardContent>
-                <BarChart width={500} height={250} data={painterChart}>
+                <BarChart width={500} height={300} data={painterChart}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={10} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="name" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="volume" fill={COLORS[0]} />
-                  <Bar dataKey="revenue" fill={COLORS[3]} />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {painterChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
                 </BarChart>
               </CardContent>
             </Card>
           </div>
-
           <Card>
             <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
             <CardContent>
               <PieChart width={500} height={300}>
-                <Pie data={statusPie} cx={200} cy={150} outerRadius={100} dataKey="value" label>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
                   {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip />
@@ -238,13 +223,28 @@ export default function PhadPaintingRajasthanLogisticsView() {
             </CardContent>
           </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <Card className="ppr-insight"><CardHeader><CardTitle>Bhilwara Phad Scroll Painting — 700 Years of Rajasthani Narrative Art</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Phad painting is a revered seven-hundred-year-old Rajasthani folk art form originating from Bhilwara district, depicting the epic narratives of folk deities Devnarayan and Pabuji who are venerated by rural communities across southern Rajasthan. The Bhopa bards serve as both painters and performers, creating elaborate narrative cloth scrolls using natural vegetable dyes and mineral pigments on handwoven cotton fabric. During ritual performances, the Phad scroll is unrolled like a ceremonial flag while the Bhopa narrates the divine epics accompanied by the Ravanhatta string instrument and the Bopi singer. Each Phad painting measures between five to thirty feet in length and contains meticulously detailed scenes of divine battles, temple processions, celestial events, and heroic deeds passed down through specific painter families. The tradition represents a unique intersection of visual storytelling, religious devotion, and community identity that continues to thrive in Bhilwara, Shahpura, and surrounding rural landscapes of Rajasthan.</p></CardContent></Card>
-            <Card className="ppr-insight"><CardHeader><CardTitle>IS 16796 Folk Scroll Quality Standards for Traditional Cloth Paintings</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">IS 16796 establishes comprehensive quality benchmarks for traditional Indian folk scroll paintings including Phad art, covering substrate preparation, natural dye specifications, colour fastness grading, and finished product classification. Base cloth substrate must meet minimum thread count and tensile strength parameters suitable for long-term preservation and repeated unrolling during Bhopa ritual performances. Natural dye specifications mandate all colouring agents be derived from traditional sources including indigo for blue, turmeric and pomegranate rind for yellow, iron oxide for red and black, with chemical fastness tests conducted under controlled laboratory conditions. Colour fastness grading follows a standardized scale evaluating resistance to light exposure, moisture, and friction over accelerated aging periods specific to Rajasthan arid climate conditions. Geographic Indication certification under the GI Phad Painting Mark provides additional authentication verifying each scroll originates from the designated Bhilwara region and adheres to traditional Bhopa painter methodologies passed down through hereditary artisan lineages across twelve painting villages in the region.</p></CardContent></Card>
-            <Card className="ppr-insight"><CardHeader><CardTitle>Canvas Roll Packaging &amp; Dust-Free Surface Transit for Phad Cloth Art</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Phad cloth paintings require specialised canvas roll packaging to protect irreplaceable hand-painted artworks from environmental damage during surface transit across Rajasthan eight hundred to twelve hundred kilometre logistics corridors from Bhilwara craft villages to Delhi and Mumbai export terminals. Each completed Phad scroll is first wrapped in acid-free interleaf tissue paper preventing pigment transfer between painted surfaces and providing a barrier against atmospheric pollutants. The wrapped scroll is placed within custom-sized corrugated roll tubes engineered with internal cushioning of unbleached cotton batting absorbing vibration shocks during flatbed truck transit. Temperature control between twenty to twenty-eight degrees Celsius is maintained throughout the supply chain using insulated transport vehicles with real-time climate monitoring sensors. Dust-free storage facilities across the Rajasthan logistics network feature HEPA filtration systems and humidity regulation preventing mould growth on the cotton cloth substrate. The entire packaging chain is documented through digital tracking providing end-to-end visibility from Bhopa painter workshops to final gallery destinations ensuring complete provenance reporting.</p></CardContent></Card>
-            <Card className="ppr-insight"><CardHeader><CardTitle>AI Phad Art Authentication &amp; Rajasthani Folk Art Export Market Expansion</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Artificial intelligence is transforming Phad painting authentication and Rajasthani folk art export market expansion through advanced computational pattern analysis and provenance verification. Convolutional neural network models trained on authenticated Phad painting samples identify distinctive Bhopa brushstroke patterns, natural dye pigment composition signatures, and compositional motifs unique to individual painter lineages across Bhilwara twelve painting villages. Computer vision systems measure design symmetry and narrative sequence accuracy within tight tolerances, verifying the traditional cloth scroll painting technique that defines authentic Phad craft. India Phad art export revenue has grown substantially driven by increasing demand from museums and cultural institutions across fourteen countries including United States, United Kingdom, Japan, France, and Germany. Blockchain-based provenance tracking from natural dye preparation through cloth scroll painting, GI certification, canvas roll packaging, and shipping documentation combats reproduction fraud estimated at significant annual losses, with each authenticated piece carrying a unique digital certificate on the Rajasthan Handicrafts Registry linking to the originating Bhopa painter family.</p></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Phad Painting — 700-Year Rajasthani Epic Narrative Scroll Tradition</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">Phad painting is one of India's most distinctive and culturally significant narrative scroll art traditions, originating in the Bhilwara district of Rajasthan where the Joshi family of priest-painters has maintained this extraordinary folk art form for over seven centuries, creating elaborate rectangular cloth paintings measuring up to 15 feet in length and 5 feet in width that depict the complete legendary narratives of folk deities and hero-saints including the most revered Phad subjects of Devnarayan, an incarnation of Lord Vishnu worshipped by the Gujjar pastoral community of Rajasthan, and Pabuji Rathod, a fourteenth-century Rajput hero whose legendary deeds of courage, chivalry, and divine intervention have been celebrated through Phad recitation performances across the desert landscapes of Marwar and Mewar regions of Rajasthan for generations. The Phad painting tradition is unique among Indian art forms in that the painted scroll is not merely a decorative artwork but serves as the sacred visual scripture for an elaborate night-long musical recitation ceremony known as Phad Bachi, where the Bhopa priest-singer unfolds the painted scroll in the village courtyard or temple precinct and sings the epic narrative of Devnarayan or Pabuji while his wife the Bhopi accompanies with a lamp illuminating specific sections of the scroll as the narrative progresses through the sequential episodes depicted in the painting, creating an immersive multimedia storytelling experience that combines visual art, devotional music, and oral narrative performance into a unified ceremonial event that has been the primary mode of religious and cultural transmission in the rural communities of southeastern Rajasthan for centuries. The painting technique employs natural mineral pigments including red ochre from the Aravalli ranges for the dominant red tones that characterise Phad compositions, yellow orpiment for golden highlights, green earth pigment from the Jaipur mineral belt for verdant landscape zones, indigo blue from the Gujarat cultivation areas for sky and water elements, and lamp black from burnt mustard oil for the bold black outlines that define the narrative figures and architectural elements, all ground by hand and mixed with gum arabic binder from the kejri tree before being applied using handcrafted squirrel-hair brushes capable of producing the remarkably fine line work that distinguishes the Joshi Phad painting tradition from other Indian folk art styles.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>IS 16796 Folk Scroll Standards & Natural Pigment Fidelity QC</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">The IS 16796 standard for Phad painting establishes India's dedicated quality certification framework for this seven-century Rajasthani narrative scroll art tradition, specifying requirements for natural mineral pigment composition, cotton canvas substrate quality, hand-painted application technique verification, narrative iconographic accuracy, and colour fastness durability that collectively distinguish genuine hand-painted Phad scrolls from screen-printed, digitally printed, and hand-painted imitations produced outside the traditional Joshi family artisan lineage that lack the authentic pigment preparation knowledge, compositional canons, and brush stroke precision that define the genuine Bhilwara Phad painting tradition recognised under the Geographical Indications registry of India as a protected heritage art form originating specifically from the Bhilwara and Shahpura regions of southeastern Rajasthan. The natural pigment composition requirements for IS 16796 Grade A certification mandate exclusively natural mineral pigments sourced from the designated Rajasthan geological zones including red ochre from the Bhilwara-Aravlli laterite formations providing the characteristic warm red that dominates authentic Phad compositions and forms the background colour of all genuine Phad scrolls, yellow orpiment from the Jaipur-Bharatpur mineral belt for golden yellow accent areas in royal court scenes and deity ornamentation zones, indigo blue from the Kutch-Gujarat cultivation areas for sky and water elements that provide the characteristic chromatic contrast against the dominant red ground of the Phad scroll composition, and lamp black produced by burning pure mustard oil in a controlled flame and collecting the carbon soot deposit on a cooled metal surface providing the deep black outlines and shadow areas that define the narrative figures, architectural structures, and decorative border patterns characteristic of the Joshi family Phad painting technique with its distinctive bold black contour lines measuring approximately 1.5 to 2.0 millimetres in width. Natural pigment fidelity verification for Grade A certification mandates spectrophotometric analysis of pigment samples extracted from non-critical border areas of each certified Phad scroll, comparing absorption spectra across the 380 to 780 nanometres visible range against certified natural pigment reference profiles maintained in the IS 16796 standard appendix, with maximum permitted spectral deviation of 6% from reference profiles for red ochre pigments and 4% for indigo blue pigments, ensuring that only genuine naturally prepared mineral pigments meeting the specified geological origin and chemical composition requirements qualify for Grade A certification of Phad painting artworks destined for institutional collection, museum acquisition, and international cultural heritage art market distribution channels.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Canvas Roll Cloth Wrap Packaging for Phad Scroll Paintings</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">Canvas roll cloth wrap packaging has been specifically developed for the Phad painting logistics supply chain to protect the large-format hand-painted cotton cloth scrolls that can measure up to 15 feet in length from the numerous physical and environmental hazards encountered during transit from the Bhilwara and Shahpura artisan workshops to domestic temple destinations across Rajasthan, Gujarat, and Maharashtra, and international export destinations including museum textile collections in Europe, North America, and East Asia where the increasing international recognition of Phad painting as one of India's most important intangible cultural heritage art forms has generated growing institutional demand from major museums and cultural organisations seeking to acquire authenticated IS 16796 Grade A certified Phad scrolls for permanent collection and temporary exhibition programmes showcasing the rich diversity of Indian narrative painting traditions. The canvas roll packaging specification employs unbleached cotton duck canvas with minimum grammage of 250 GSM providing a robust protective outer wrapping layer with sufficient tensile strength to withstand the handling stresses encountered during the rolling and unrolling operations required for large-format Phad scroll transportation, with pH range between 6.5 and 7.5 ensuring no acidic chemical interaction with the natural mineral pigments applied to the Phad scroll surface during extended transit periods that may extend to several weeks for sea freight shipments to international destinations. Each Phad scroll undergoes pre-packaging inspection under standardised D65 daylight illumination verifying mineral pigment surface integrity, narrative composition completeness, painted figure and architectural element condition, and overall scroll structural stability including verification of the canvas substrate attachment points and edge binding integrity that maintain the scroll's structural coherence throughout the rolling and transit operations. The inspected Phad scroll is carefully rolled around a custom-dimensioned seasoned hardwood dowel with diameter matched to the scroll width providing gentle curvature support that prevents creasing or folding of the painted cotton cloth surface, then wrapped in the protective cotton duck canvas outer layer with acid-free tissue paper interleaving between the painted surface and the canvas wrap, secured with cotton tying straps at minimum five evenly spaced positions along the roll length, and placed within a custom-built wooden crate constructed from seasoned kiln-dried pine with moisture content not exceeding 12 percent and lined with polyethylene foam cushioning strips along all internal surfaces providing shock absorption protection against the impact and vibration forces encountered during multi-modal transit through road, rail, and air cargo networks from the Rajasthani artisan workshops to domestic and international destination points.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>AI Narrative Compositional Analysis & Phad Heritage Market Development</CardTitle></CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">Artificial intelligence and computational art analysis technologies are being deployed to authenticate Phad scroll paintings and verify the distinctive hand-painted brush stroke characteristics, natural pigment composition profiles, and narrative compositional structures that distinguish genuine Joshi family Phad scrolls from the growing volume of non-authentic Phad-style paintings produced by artists outside the traditional Bhilwara-Shahpura artisan lineage and by machine-printed reproduction processes that have increasingly attempted to replicate the distinctive visual vocabulary and narrative arrangement of genuine Phad painting for both domestic Rajasthani souvenir markets and international online art retail platforms where the unique aesthetic appeal of Phad scroll compositions featuring bold red grounds, animated narrative figures, and elaborate architectural border patterns has attracted collector interest from buyers unfamiliar with the specific authentication criteria that distinguish genuine heritage Phad paintings from derivative works. The AI verification system for Phad art employs ultra-high-resolution digital scanning at 4800 dots per inch combined with infrared reflectography at near-infrared wavelengths from 750 to 1100 nanometres to capture both the visible surface topography and subsurface pigment layer structure of finished Phad scrolls, analysing the hand-painted brush stroke direction and pressure variation patterns, mineral pigment particle size distribution characteristics visible through high-magnification imaging, and the compositional spatial relationships between narrative figures, architectural elements, decorative border patterns, and ground colour zones against a comprehensive reference database containing authenticated Phad masterworks from the principal Joshi family workshops in Bhilwara, Shahpura, and surrounding districts of southeastern Rajasthan where the approximately 35 remaining active Phad painter families maintain the authentic tradition. Machine learning algorithms trained on this reference dataset can verify Phad painting authenticity with 97.5% accuracy by detecting the characteristic hand-application signatures including the consistent brush stroke width of approximately 1.5 to 2.0 millimetres for contour outlines produced by the traditional Joshi squirrel-hair brush technique, the natural mineral pigment layer structure visible through infrared reflectography that reveals the characteristic two-layer application sequence where underdrawing lines are applied first in lamp black followed by colour fills in mineral pigments producing a distinctive subsurface layer boundary pattern, and the compositional proportion accuracy within the established Phad narrative canons that define the spatial arrangement of the Devnarayan or Pabuji epic episodes across the scroll surface according to the specific visual storytelling sequence transmitted through the Joshi family painting tradition for over seven centuries.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
