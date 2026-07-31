@@ -369,3 +369,4 @@ export { default as PhulkariEmbroideryPunjabLogisticsView } from './phulkari-emb
 export { default as TarakasiSilverFiligreeOdishaLogisticsView } from './tarakasi-silver-filigree-odisha-logistics-view'
 export { default as AjrakhBlockPrintKutchLogisticsView } from './ajrakh-block-print-kutch-logistics-view'
 export { default as PattachitraWestBengalLogisticsView } from './pattachitra-west-bengal-logistics-view'
+export { default as PithoraTribalArtChhattisgarhLogisticsView } from './pithora-tribal-art-chhattisgarh-logistics-view'

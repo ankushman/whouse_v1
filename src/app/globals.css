@@ -55340,3 +55340,11 @@ html.theme-transition body {
 @keyframes pwb-fade-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pwb-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
 @keyframes pwb-slide{from{transform:translateX(-6px);opacity:0}to{transform:translateX(0);opacity:1}}
+/* ═══════════ R380: Pithora Tribal Art Chhattisgarh (piw-*) ═══════════ */
+.piw-root{--piw-primary:#c2410c;--piw-bg:#fff7ed;--piw-border:rgba(194,65,12,0.12);padding:20px;max-width:1440px;margin:0 auto}
+.piw-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.piw-kpi-tile{transition:all 0.3s ease;animation:piw-fade-in 0.4s ease}
+.piw-kpi-tile:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(194,65,12,0.15)}
+@keyframes piw-fade-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes piw-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+@keyframes piw-slide{from{transform:translateX(-6px);opacity:0}to{transform:translateX(0);opacity:1}}
