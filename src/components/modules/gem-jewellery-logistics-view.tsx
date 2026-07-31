@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/shared/page-header'
@@ -6,229 +6,248 @@ import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
 import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const COLORS = ['#7c3aed', '#6d28d9', '#8b5cf6', '#a78bfa', '#c4b5fd', '#5b21b6', '#4c1d95', '#ddd6fe']
+const COLORS = ['#7c2d12', '#9a3412', '#c2410c', '#ea580c', '#f97316', '#431407', '#7c2d12', '#fed7aa']
+const PRODUCTS = ['Kundan Polki Necklace Set', 'Jadau Rajasthani Bridal Set', 'Temple Gold jewellery Chennai', 'Kundan Meenakari Bangle Set', 'Navratna Nine-Gem Pendant', 'Polki Diamond Chandbali Earrings', 'Meenakari Enamel Pendant Set', 'Kundan Pearl Rani Haar']
+const ARTISANS = ['Rajasthan Kundan Artisans Jaipur', 'Surat Diamond Cutting Guild GJ', 'Mumbai Jewellery Exporters MH', 'Kolkata Gem Palace WB', 'Chennai Temple Jewellery TN', 'Jaipur Jadau Heritage Cluster RJ', 'Trichy Diamond Workers TN', 'Ahmedabad Zari Craftsmen GJ']
+const STATUSES = ['BIS Hallmark Verified', 'GJEPC Certified', 'Diamond Grading Done', 'Tamper-Proof Vault Box', 'Refrigerator Vault Storage', 'Karat Purity XRF Test']
 
-const GEM_TYPES = ['Diamonds', 'Gold Bullion', 'Ruby', 'Emerald', 'Sapphire', 'Pearls', 'Platinum', 'Kundan Sets']
-const JEWELLERS = ['Tanishq Bangalore', 'Kalyan Chennai', 'Malabar Kochi', 'PC Jeweller Delhi', 'Titan Caratlane', 'Senco Kolkata', 'TBZ Mumbai', 'Gitanjali Surat']
-const CUSTODY_STATUS = ['BIS Hallmarked', 'Under Assay', 'In Transit', 'Vault Stored', 'Customs Cleared', 'Pending Audit']
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-const gemRecords = [
-  { id: 'GJL-0001', gem: 'Diamonds', description: 'Round Brilliant Cut 2.5ct VVS1 D IF GIA Cert', jeweller: 'Tanishq Bangalore', quantity: 150, unit: 'carats', custody_status: 'BIS Hallmarked', lot: 'LOT-GJL-9041', destination: 'Tanishq Hub Bengaluru', received: '2026-07-30', batch: 'GJL-B2026-0721', cost_inr: 285000000, clarity_grade: 'VVS1', karat_purity: 99.9 },
-  { id: 'GJL-0002', gem: 'Gold Bullion', description: '24K London Good Delivery Bar 999.9 Fine 12.5kg', jeweller: 'Malabar Kochi', quantity: 42, unit: 'bars', custody_status: 'Vault Stored', lot: 'LOT-GJL-9038', destination: 'Malabar Vault Ernakulam', received: '2026-07-30', batch: 'GJL-B2026-0720', cost_inr: 780000000, clarity_grade: 'N/A', karat_purity: 99.9 },
-  { id: 'GJL-0003', gem: 'Ruby', description: 'Natural Burma Ruby 3.8ct Pigeon Blood Unheated GRS', jeweller: 'Kalyan Chennai', quantity: 85, unit: 'carats', custody_status: 'Under Assay', lot: 'LOT-GJL-9012', destination: 'Kalyan Gem Lab Chennai', received: '2026-07-29', batch: 'GJL-B2026-0719', cost_inr: 142000000, clarity_grade: 'VS1', karat_purity: 0 },
-  { id: 'GJL-0004', gem: 'Emerald', description: 'Colombian Emerald 5.2ct Grass Green Gubelin Cert', jeweller: 'PC Jeweller Delhi', quantity: 60, unit: 'carats', custody_status: 'Customs Cleared', lot: 'LOT-GJL-9027', destination: 'PC Jeweller Vault Noida', received: '2026-07-29', batch: 'GJL-B2026-0718', cost_inr: 98000000, clarity_grade: 'VS2', karat_purity: 0 },
-  { id: 'GJL-0005', gem: 'Sapphire', description: 'Sri Lanka Blue Sapphire 4.1ct Royal Blue Untreated', jeweller: 'Titan Caratlane', quantity: 45, unit: 'carats', custody_status: 'BIS Hallmarked', lot: 'LOT-GJL-9031', destination: 'Caratlane Safe Hyderabad', received: '2026-07-28', batch: 'GJL-B2026-0716', cost_inr: 67000000, clarity_grade: 'VVS2', karat_purity: 0 },
-  { id: 'GJL-0006', gem: 'Pearls', description: 'South Sea Pearl 14mm Golden AAA Grade Strand', jeweller: 'Senco Kolkata', quantity: 320, unit: 'pieces', custody_status: 'In Transit', lot: 'LOT-GJL-9040', destination: 'Senco Gallery Kolkata', received: '2026-07-28', batch: 'GJL-B2026-0715', cost_inr: 45000000, clarity_grade: 'AAA', karat_purity: 0 },
-  { id: 'GJL-0007', gem: 'Platinum', description: '950 Pt Platinum Bar 1kg London Platinum Fix', jeweller: 'TBZ Mumbai', quantity: 28, unit: 'bars', custody_status: 'Vault Stored', lot: 'LOT-GJL-9008', destination: 'TBZ Strongroom Mumbai', received: '2026-07-27', batch: 'GJL-B2026-0714', cost_inr: 195000000, clarity_grade: 'N/A', karat_purity: 95.0 },
-  { id: 'GJL-0008', gem: 'Kundan Sets', description: 'Rajasthani Kundan Polki Bridal Set 22K 180g', jeweller: 'Gitanjali Surat', quantity: 12, unit: 'sets', custody_status: 'Pending Audit', lot: 'LOT-GJL-9037', destination: 'Gitanjali Workshop Surat', received: '2026-07-27', batch: 'GJL-B2026-0713', cost_inr: 58000000, clarity_grade: 'N/A', karat_purity: 91.6 },
-  { id: 'GJL-0009', gem: 'Diamonds', description: 'Princess Cut 1.8ct E VS2 IGI Certified Loose', jeweller: 'Malabar Kochi', quantity: 200, unit: 'carats', custody_status: 'BIS Hallmarked', lot: 'LOT-GJL-9039', destination: 'Malabar Hub Trivandrum', received: '2026-07-26', batch: 'GJL-B2026-0711', cost_inr: 168000000, clarity_grade: 'VS2', karat_purity: 0 },
-  { id: 'GJL-0010', gem: 'Gold Bullion', description: '22K Gold Biscuit 10g BIS Hallmark 916', jeweller: 'Kalyan Chennai', quantity: 15000, unit: 'units', custody_status: 'In Transit', lot: 'LOT-GJL-9026', destination: 'Kalyan Vault Coimbatore', received: '2026-07-26', batch: 'GJL-B2026-0710', cost_inr: 920000000, clarity_grade: 'N/A', karat_purity: 91.6 },
-  { id: 'GJL-0011', gem: 'Ruby', description: 'Thai Ruby 2.4ct Heated SI GRS Bangkok Cert', jeweller: 'Titan Caratlane', quantity: 120, unit: 'carats', custody_status: 'Under Assay', lot: 'LOT-GJL-9011', destination: 'Caratlane Lab Bengaluru', received: '2026-07-25', batch: 'GJL-B2026-0708', cost_inr: 72000000, clarity_grade: 'SI1', karat_purity: 0 },
-  { id: 'GJL-0012', gem: 'Emerald', description: 'Zambian Emerald 3.1ct Green GIA Certified', jeweller: 'PC Jeweller Delhi', quantity: 75, unit: 'carats', custody_status: 'Customs Cleared', lot: 'LOT-GJL-9007', destination: 'PC Jeweller Hub Jaipur', received: '2026-07-25', batch: 'GJL-B2026-0707', cost_inr: 56000000, clarity_grade: 'SI2', karat_purity: 0 },
-  { id: 'GJL-0013', gem: 'Sapphire', description: 'Madagascar Yellow Sapphire 4.5ct Unheated', jeweller: 'Senco Kolkata', quantity: 35, unit: 'carats', custody_status: 'BIS Hallmarked', lot: 'LOT-GJL-9030', destination: 'Senco Vault Howrah', received: '2026-07-24', batch: 'GJL-B2026-0705', cost_inr: 41000000, clarity_grade: 'VVS1', karat_purity: 0 },
-  { id: 'GJL-0014', gem: 'Pearls', description: 'Japanese Akoya Pearl 8mm AAA White Strand 18inch', jeweller: 'TBZ Mumbai', quantity: 480, unit: 'pieces', custody_status: 'In Transit', lot: 'LOT-GJL-9025', destination: 'TBZ Gallery Pune', received: '2026-07-24', batch: 'GJL-B2026-0704', cost_inr: 32000000, clarity_grade: 'AAA', karat_purity: 0 },
-  { id: 'GJL-0015', gem: 'Platinum', description: 'Pt950 Wedding Band Set 18g Engraved', jeweller: 'Tanishq Bangalore', quantity: 85, unit: 'sets', custody_status: 'Vault Stored', lot: 'LOT-GJL-9036', destination: 'Tanishq Vault Mysore', received: '2026-07-23', batch: 'GJL-B2026-0702', cost_inr: 24000000, clarity_grade: 'N/A', karat_purity: 95.0 },
-  { id: 'GJL-0016', gem: 'Kundan Sets', description: 'Jadau Meenakari Temple Set 22K 220g Rajasthan', jeweller: 'Gitanjali Surat', quantity: 8, unit: 'sets', custody_status: 'Pending Audit', lot: 'LOT-GJL-9024', destination: 'Gitanjali Showroom Jaipur', received: '2026-07-23', batch: 'GJL-B2026-0701', cost_inr: 62000000, clarity_grade: 'N/A', karat_purity: 91.6 },
-  { id: 'GJL-0017', gem: 'Diamonds', description: 'Emerald Cut 3.2ct G VS1 GIA Excellent Polish', jeweller: 'Kalyan Chennai', quantity: 95, unit: 'carats', custody_status: 'BIS Hallmarked', lot: 'LOT-GJL-9023', destination: 'Kalyan Hub Madurai', received: '2026-07-22', batch: 'GJL-B2026-0629', cost_inr: 210000000, clarity_grade: 'VS1', karat_purity: 0 },
-  { id: 'GJL-0018', gem: 'Gold Bullion', description: '24K Gold Coin 1oz BIS Hallmark 999.9', jeweller: 'Malabar Kochi', quantity: 8000, unit: 'coins', custody_status: 'Vault Stored', lot: 'LOT-GJL-9022', destination: 'Malabar Safe Calicut', received: '2026-07-22', batch: 'GJL-B2026-0628', cost_inr: 580000000, clarity_grade: 'N/A', karat_purity: 99.9 },
-  { id: 'GJL-0019', gem: 'Ruby', description: 'Mozambique Ruby 2.8ct Heated VVS1 GRS', jeweller: 'Senco Kolkata', quantity: 55, unit: 'carats', custody_status: 'Under Assay', lot: 'LOT-GJL-9010', destination: 'Senco Lab Guwahati', received: '2026-07-21', batch: 'GJL-B2026-0625', cost_inr: 49000000, clarity_grade: 'VVS1', karat_purity: 0 },
-  { id: 'GJL-0020', gem: 'Emerald', description: 'Brazilian Emerald 4.0ct Green IGI Certified', jeweller: 'Titan Caratlane', quantity: 40, unit: 'carats', custody_status: 'Customs Cleared', lot: 'LOT-GJL-9021', destination: 'Caratlane Hub Mumbai', received: '2026-07-21', batch: 'GJL-B2026-0624', cost_inr: 38000000, clarity_grade: 'VS1', karat_purity: 0 },
-]
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
 
-const genRecords = (start: number) => {
-  const statuses = ['BIS Hallmarked', 'Under Assay', 'In Transit', 'Vault Stored', 'Customs Cleared', 'Pending Audit']
-  const destinations = ['Tanishq Hub Bengaluru', 'Malabar Vault Ernakulam', 'Kalyan Gem Lab Chennai', 'PC Jeweller Vault Noida', 'Caratlane Safe Hyderabad', 'Senco Gallery Kolkata', 'TBZ Strongroom Mumbai', 'Gitanjali Workshop Surat']
-  return Array.from({ length: 40 }, (_, i) => ({
-    id: `GJL-${String(start + i).padStart(4, '0')}`,
-    gem: GEM_TYPES[(start + i) % 8],
-    description: `${GEM_TYPES[(start + i) % 8]} Lot ${String((start + i) % 99 + 1).padStart(3, '0')}`,
-    jeweller: JEWELLERS[(start + i) % 8],
-    quantity: Math.round(5 + Math.random() * 500),
-    unit: ['carats', 'bars', 'pieces', 'sets', 'units', 'coins', 'grams', 'lots'][i % 8],
-    custody_status: statuses[(start + i) % 6],
-    lot: `LOT-GJL-${String(9021 + start + i)}`,
-    destination: destinations[(start + i) % 8],
-    received: `2026-07-${String(20 - Math.floor((start + i) / 10)).padStart(2, '0')}`,
-    batch: `GJL-B2026-${String(624 - Math.floor((start + i) / 3)).padStart(4, '0')}`,
-    cost_inr: Math.round(5000000 + Math.random() * 500000000),
-    clarity_grade: ['VVS1', 'VS1', 'VS2', 'SI1', 'AAA', 'N/A', 'VVS2', 'SI2'][i % 8],
-    karat_purity: GEM_TYPES[(start + i) % 8].includes('Gold') || GEM_TYPES[(start + i) % 8].includes('Platinum') || GEM_TYPES[(start + i) % 8].includes('Kundan') ? Math.round((90 + Math.random() * 10) * 10) / 10 : 0,
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-orange-100 text-orange-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-orange-200 rounded-full overflow-hidden"><div className="h-full bg-orange-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#fed7aa" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
+}
+
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
+
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
+)
+
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `GJM-${String(offset + i + 1).padStart(4, '0')}`,
+    painter: ARTISANS[(offset + i) % ARTISANS.length], ware: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 20, ((offset + i) * 19) % 20) + 1,
+    cost: ri(4000, 52000, ((offset + i) * 10707) % 48000) + 4000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-const allGem = [...gemRecords, ...genRecords(21), ...genRecords(61)]
-
-function ri(min: number, max: number, value: number) {
-  return Math.max(min, Math.min(max, value))
-}
-
-const filterGroups = [
-  {
-    key: 'gem',
-    label: 'Gem Type',
-    options: GEM_TYPES.map(t => ({ label: t, value: t, count: allGem.filter(r => r.gem === t).length })),
-  },
-  {
-    key: 'jeweller',
-    label: 'Jeweller',
-    options: JEWELLERS.map(j => ({ label: j, value: j, count: allGem.filter(r => r.jeweller === j).length })),
-  },
-  {
-    key: 'custody_status',
-    label: 'Custody Status',
-    options: CUSTODY_STATUS.map(s => ({ label: s, value: s, count: allGem.filter(r => r.custody_status === s).length })),
-  },
+const gemrecords = [
+  { id: 'GJM-0001', painter: 'Rajasthan Kundan Artisans Jaipur', ware: 'Kundan Polki Necklace Set', status: 'BIS Hallmark Verified', qty: 3, cost: 48000, date: '2024-01-15' },
+  { id: 'GJM-0002', painter: 'Surat Diamond Cutting Guild GJ', ware: 'Jadau Rajasthani Bridal Set', status: 'GJEPC Certified', qty: 5, cost: 36000, date: '2024-01-28' },
+  { id: 'GJM-0003', painter: 'Mumbai Jewellery Exporters MH', ware: 'Temple Gold jewellery Chennai', status: 'Diamond Grading Done', qty: 2, cost: 52000, date: '2024-02-10' },
+  { id: 'GJM-0004', painter: 'Kolkata Gem Palace WB', ware: 'Kundan Meenakari Bangle Set', status: 'Tamper-Proof Vault Box', qty: 7, cost: 22000, date: '2024-02-22' },
+  { id: 'GJM-0005', painter: 'Chennai Temple Jewellery TN', ware: 'Navratna Nine-Gem Pendant', status: 'Refrigerator Vault Storage', qty: 4, cost: 44000, date: '2024-03-08' },
+  { id: 'GJM-0006', painter: 'Jaipur Jadau Heritage Cluster RJ', ware: 'Polki Diamond Chandbali Earrings', status: 'Karat Purity XRF Test', qty: 6, cost: 28000, date: '2024-03-20' },
+  { id: 'GJM-0007', painter: 'Trichy Diamond Workers TN', ware: 'Meenakari Enamel Pendant Set', status: 'BIS Hallmark Verified', qty: 2, cost: 50000, date: '2024-04-03' },
+  { id: 'GJM-0008', painter: 'Ahmedabad Zari Craftsmen GJ', ware: 'Kundan Pearl Rani Haar', status: 'GJEPC Certified', qty: 8, cost: 16000, date: '2024-04-16' },
+  { id: 'GJM-0009', painter: 'Rajasthan Kundan Artisans Jaipur', ware: 'Jadau Rajasthani Bridal Set', status: 'Diamond Grading Done', qty: 4, cost: 40000, date: '2024-04-28' },
+  { id: 'GJM-0010', painter: 'Surat Diamond Cutting Guild GJ', ware: 'Kundan Polki Necklace Set', status: 'Tamper-Proof Vault Box', qty: 3, cost: 48000, date: '2024-05-10' },
+  { id: 'GJM-0011', painter: 'Mumbai Jewellery Exporters MH', ware: 'Temple Gold jewellery Chennai', status: 'Refrigerator Vault Storage', qty: 5, cost: 32000, date: '2024-05-23' },
+  { id: 'GJM-0012', painter: 'Kolkata Gem Palace WB', ware: 'Kundan Meenakari Bangle Set', status: 'Karat Purity XRF Test', qty: 6, cost: 20000, date: '2024-06-05' },
+  { id: 'GJM-0013', painter: 'Chennai Temple Jewellery TN', ware: 'Navratna Nine-Gem Pendant', status: 'BIS Hallmark Verified', qty: 3, cost: 46000, date: '2024-06-18' },
+  { id: 'GJM-0014', painter: 'Jaipur Jadau Heritage Cluster RJ', ware: 'Polki Diamond Chandbali Earrings', status: 'GJEPC Certified', qty: 7, cost: 24000, date: '2024-07-01' },
+  { id: 'GJM-0015', painter: 'Trichy Diamond Workers TN', ware: 'Meenakari Enamel Pendant Set', status: 'Diamond Grading Done', qty: 2, cost: 52000, date: '2024-07-14' },
+  { id: 'GJM-0016', painter: 'Ahmedabad Zari Craftsmen GJ', ware: 'Kundan Pearl Rani Haar', status: 'Tamper-Proof Vault Box', qty: 10, cost: 12000, date: '2024-07-26' },
+  { id: 'GJM-0017', painter: 'Rajasthan Kundan Artisans Jaipur', ware: 'Kundan Polki Necklace Set', status: 'Refrigerator Vault Storage', qty: 4, cost: 42000, date: '2024-08-08' },
+  { id: 'GJM-0018', painter: 'Surat Diamond Cutting Guild GJ', ware: 'Jadau Rajasthani Bridal Set', status: 'Karat Purity XRF Test', qty: 5, cost: 30000, date: '2024-08-20' },
+  { id: 'GJM-0019', painter: 'Mumbai Jewellery Exporters MH', ware: 'Temple Gold jewellery Chennai', status: 'BIS Hallmark Verified', qty: 3, cost: 50000, date: '2024-09-02' },
+  { id: 'GJM-0020', painter: 'Kolkata Gem Palace WB', ware: 'Kundan Meenakari Bangle Set', status: 'GJEPC Certified', qty: 8, cost: 18000, date: '2024-09-14' },
 ]
-
-function GemBadge({ gem }: { gem: string }) {
-  const colors: Record<string, string> = { Diamonds: 'bg-sky-100 text-sky-800', 'Gold Bullion': 'bg-yellow-100 text-yellow-800', Ruby: 'bg-red-100 text-red-800', Emerald: 'bg-green-100 text-green-800', Sapphire: 'bg-blue-100 text-blue-800', Pearls: 'bg-amber-100 text-amber-100', Platinum: 'bg-gray-100 text-gray-800', 'Kundan Sets': 'bg-purple-100 text-purple-800' }
-  return <span className={`gjl-gem-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[gem] || 'bg-gray-100 text-gray-800'}`}>{gem}</span>
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const colors: Record<string, string> = { 'BIS Hallmarked': 'bg-green-100 text-green-800', 'Under Assay': 'bg-yellow-100 text-yellow-800', 'In Transit': 'bg-blue-100 text-blue-800', 'Vault Stored': 'bg-cyan-100 text-cyan-800', 'Customs Cleared': 'bg-indigo-100 text-indigo-800', 'Pending Audit': 'bg-gray-200 text-gray-700' }
-  return <span className={`gjl-status-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-700'}`}>{status}</span>
-}
-
-function CostBar({ cost }: { cost: number }) {
-  const pct = ri(0, 100, (cost / 500000000) * 100)
-  const color = cost >= 300000000 ? 'bg-violet-600' : cost >= 100000000 ? 'bg-violet-500' : cost >= 50000000 ? 'bg-violet-400' : 'bg-violet-300'
-  return <div className="gjl-cost-bar flex items-center gap-2"><div className="h-2 w-20 rounded-full bg-gray-200"><div className={`gjl-cost-bar-fill h-2 rounded-full ${color} transition-all`} style={{ width: `${pct}%` }} /></div><span className="text-xs text-gray-500">{'₹' + (cost / 10000000).toFixed(1) + 'Cr'}</span></div>
-}
-
-function HealthRing({ value, label, color }: { value: number; label: string; color: string }) {
-  const r = 28, cx = 35, cy = 35, sw = 5
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
-  return <div className="gjl-health-ring flex flex-col items-center"><svg width={70} height={70} className="-rotate-90"><circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={circ} strokeDashoffset={offset} className="gjl-ring-path" strokeLinecap="round" /></svg><span className="gjl-ring-value mt-1 text-sm font-bold" style={{ color }}>{value}%</span><span className="text-xs text-gray-500">{label}</span></div>
-}
-
-function KpiTile({ title, value, sub }: { title: string; value: string; sub: string }) {
-  return <Card className="gjl-kpi-card"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="gjl-kpi-value mt-1 text-2xl font-bold">{value}</p><p className="text-xs text-gray-400 mt-0.5">{sub}</p></CardContent></Card>
-}
-
-function ValueTile({ title, value, trend }: { title: string; value: string; trend: string }) {
-  const up = trend.startsWith('+')
-  return <Card className="gjl-value-tile"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="mt-1 text-xl font-bold">{value}</p><p className={`text-xs mt-0.5 ${up ? 'text-green-600' : 'text-red-500'}`}>{trend}</p></CardContent></Card>
-}
 
 export default function GemJewelleryLogisticsView() {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [tab, setTab] = useState('dashboard')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
 
-  const toggleFilter = (key: string, value: string) => {
-    setActiveFilters(prev => {
-      const curr = prev[key] || []
-      const next = curr.includes(value) ? curr.filter(v => v !== value) : [...curr, value]
-      return next.length > 0 ? { ...prev, [key]: next } : Object.fromEntries(Object.entries(prev).filter(([k]) => k !== key))
-    })
-  }
+  const allRecords = [...gemrecords, ...genRecords(21), ...genRecords(41)]
 
-  const filtered = allGem.filter(g => {
-    const q = searchQuery.toLowerCase()
-    if (q && !g.id.toLowerCase().includes(q) && !g.gem.toLowerCase().includes(q) && !g.description.toLowerCase().includes(q) && !g.jeweller.toLowerCase().includes(q) && !g.destination.toLowerCase().includes(q)) return false
-    return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(g[key as keyof typeof g] as string))
-  })
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.ware.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-  const totalCost = allGem.reduce((s, g) => s + g.cost_inr, 0)
-  const hallmarked = allGem.filter(g => g.custody_status === 'BIS Hallmarked').length
-  const inAssay = allGem.filter(g => g.custody_status === 'Under Assay').length
-
-  const monthlyData = [
-    { month: 'Jan', shipments: 42, value_cr: 180, purity: 99 },
-    { month: 'Feb', shipments: 58, value_cr: 245, purity: 99 },
-    { month: 'Mar', shipments: 85, value_cr: 380, purity: 98 },
-    { month: 'Apr', shipments: 36, value_cr: 155, purity: 99 },
-    { month: 'May', shipments: 72, value_cr: 310, purity: 98 },
-    { month: 'Jun', shipments: 28, value_cr: 120, purity: 99 },
-    { month: 'Jul', shipments: 95, value_cr: 420, purity: 99 },
+  const filterGroups = [
+    { key: 'ware', label: 'Ware', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.ware === p).length })) },
+    { key: 'painter', label: 'Painter', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.painter === p).length })) },
   ]
-  const gemData = GEM_TYPES.map(t => ({ gem: t, count: allGem.filter(r => r.gem === t).length }))
-  const jewellerData = JEWELLERS.map(j => ({ jeweller: j, count: allGem.filter(r => r.jeweller === j).length }))
 
-  const tabs = [
-    { value: 'dashboard', label: 'Dashboard' },
-    { value: 'inventory', label: 'Inventory' },
-    { value: 'analytics', label: 'Analytics' },
-    { value: 'insights', label: 'Insights' },
-  ]
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const artisanChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.painter === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
-    <div className="gjl-container space-y-4">
-      <PageHeader title="Gem & Jewellery Logistics" description="High-value gemstone and precious metal logistics with BIS hallmarking compliance, GIA/IGI certification tracking, RBI gold bond integration, and secure vault chain-of-custody across India's top jewellers and bullion dealers" />
-      <ModuleBreadcrumb items={[{ label: 'Valuables' }, { label: 'Gems & Jewellery' }]} />
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="gjl-tabs-list">
-          {tabs.map(t => <TabsTrigger key={t.value} value={t.value} className="gjl-tab-trigger">{t.label}</TabsTrigger>)}
+    <div className="gjm-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Gem Jewellery' }]} />
+      <PageHeader title="Gem Jewellery Logistics" description="India gem jewellery supply chain with BIS hallmark verification, GJEPC certification, diamond grading protocols, tamper-proof vault box packaging, Refrigerator vault storage, and karat purity XRF testing across 8 jewellery centres including Jaipur Kundan, Surat Diamond, and Mumbai Export" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-orange-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
-        <TabsContent value="dashboard" className="gjl-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <KpiTile title="Total Consignments" value={allGem.length.toString()} sub="Gem & precious metal lots" />
-            <KpiTile title="Total Value" value={`₹${(totalCost / 10000000).toFixed(0)}Cr`} sub="Vault inventory value" />
-            <KpiTile title="BIS Hallmarked" value={hallmarked.toString()} sub={`${((hallmarked / allGem.length) * 100).toFixed(0)}% certified`} />
-            <KpiTile title="Under Assay" value={inAssay.toString()} sub="Pending certification" />
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Active Ware" value={PRODUCTS.length} />
+            <KpiTile label="Jewellery Centres" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-          <div className="grid gap-4 grid-cols-3 md:grid-cols-6">
-            <HealthRing value={99} label="Diamond Clarity" color="#7c3aed" />
-            <HealthRing value={98} label="Gold Purity" color="#6d28d9" />
-            <HealthRing value={96} label="Ruby Grading" color="#8b5cf6" />
-            <HealthRing value={97} label="Vault Security" color="#5b21b6" />
-            <HealthRing value={95} label="Customs ETA" color="#4c1d95" />
-            <HealthRing value={99} label="Chain Custody" color="#a78bfa" />
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="BIS" value={96} />
+            <HealthRing label="GJEPC" value={93} />
+            <HealthRing label="Diamond" value={91} />
+            <HealthRing label="Vault" value={88} />
+            <HealthRing label="Storage" value={95} />
+            <HealthRing label="XRF" value={94} />
           </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="gjl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Shipment Volume & Purity Index</CardTitle></CardHeader><CardContent><LineChart data={monthlyData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Line type="monotone" dataKey="shipments" stroke="#7c3aed" strokeWidth={2} /><Line type="monotone" dataKey="purity" stroke="#6d28d9" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
-            <Card className="gjl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Inventory by Gem Type</CardTitle></CardHeader><CardContent><BarChart data={gemData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="gem" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="count" fill="#7c3aed" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="gjl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Jeweller Distribution</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={jewellerData} dataKey="count" nameKey="jeweller" cx="50%" cy="50%" outerRadius={70} label={({ jeweller, count }) => `${count}`}>{jewellerData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="India Gems Export" value="₹2.8 Lakh Cr" />
+            <ValueTile label="Gold Holdings" value="25,000 Ton" />
+            <ValueTile label="Artisan Workforce" value="5 Million+" />
+            <ValueTile label="Annual Growth" value="+12.4%" />
           </div>
         </TabsContent>
-
-        <TabsContent value="inventory" className="gjl-tab-content space-y-4 mt-4">
-          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={allGem.length} filteredCount={filtered.length} onRefresh={() => {}} placeholder="Search by ID, gem type, jeweller, destination, or lot..." />
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="gjl-table w-full text-sm">
-              <thead><tr className="gjl-table-header bg-gray-50"><th className="px-3 py-2 text-left font-medium">ID</th><th className="px-3 py-2 text-left font-medium">Gem Type</th><th className="px-3 py-2 text-left font-medium">Status</th><th className="px-3 py-2 text-left font-medium">Qty</th><th className="px-3 py-2 text-left font-medium">Value</th><th className="px-3 py-2 text-left font-medium">Jeweller</th><th className="px-3 py-2 text-left font-medium">Destination</th><th className="px-3 py-2 text-left font-medium">Lot</th><th className="px-3 py-2 text-left font-medium">Purity</th></tr></thead>
-              <tbody>{filtered.slice(0, 20).map(g => (
-                <tr key={g.id} className="gjl-table-row border-t hover:bg-gray-50 transition-colors">
-                  <td className="px-3 py-2 font-mono text-xs">{g.id}</td>
-                  <td className="px-3 py-2"><GemBadge gem={g.gem} /></td>
-                  <td className="px-3 py-2"><StatusBadge status={g.custody_status} /></td>
-                  <td className="px-3 py-2 text-xs">{g.quantity.toLocaleString('en-IN')} {g.unit}</td>
-                  <td className="px-3 py-2"><CostBar cost={g.cost_inr} /></td>
-                  <td className="px-3 py-2 text-xs">{g.jeweller}</td>
-                  <td className="px-3 py-2 text-xs">{g.destination}</td>
-                  <td className="px-3 py-2 text-xs font-mono">{g.lot}</td>
-                  <td className="px-3 py-2 text-xs">{g.karat_purity > 0 ? g.karat_purity + 'K' : g.clarity_grade}</td>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search gem jewellery shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-orange-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Ware</th>
+                  <th className="p-3 text-left font-medium">Painter</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
                 </tr>
-              ))}</tbody>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-orange-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.ware} /></td>
+                    <td className="p-3">{record.painter}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['sets', 'pieces', 'necklaces', 'bangles'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </TabsContent>
-
-        <TabsContent value="analytics" className="gjl-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <ValueTile title="Avg Lot Value" value="₹18.5Cr" trend="+12.4% vs last quarter" />
-            <ValueTile title="Diamond Yield" value="97.2%" trend="+1.1% improved" />
-            <ValueTile title="Gold Recovery" value="99.6%" trend="+0.3% on target" />
-            <ValueTile title="Vault Utilization" value="82.4%" trend="+5.8% optimized" />
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Jewellery Centre Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={artisanChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {artisanChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="gjl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Value by Gem Category</CardTitle></CardHeader><CardContent><BarChart data={GEM_TYPES.map(t => ({ gem: t, total: allGem.filter(r => r.gem === t).reduce((s, r) => s + r.cost_inr, 0) / 10000000 }))} width={400} height={250}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="gem" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="total" fill="#6d28d9" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="gjl-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Custody Status Breakdown</CardTitle></CardHeader><CardContent><PieChart width={400} height={250}><Pie data={CUSTODY_STATUS.map(s => ({ status: s, count: allGem.filter(g => g.custody_status === s).length }))} dataKey="count" nameKey="status" cx="50%" cy="50%" outerRadius={80} label>{CUSTODY_STATUS.map((_, i) => <Cell key={i} fill={['#22c55e','#eab308','#3b82f6','#06b6d4','#6366f1','#9ca3af'][i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="gjl-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="gjl-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">BIS Hallmarking Digital Integration</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Bureau of Indian Standards (BIS) hallmarking real-time verification across 350+ hallmarking centres in India. HUID (Hallmark Unique Identification) tracking system integrated with jewellery logistics ensuring 100% traceability from assay to retail. Automated BIS registration renewal alerts for 14,500+ registered jewellers. Integration with Jewellers Association India (GJF) compliance database for annual audit scheduling. Real-time gold karat purity verification with XRF spectrometer data feed from 42 regional assay offices.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-violet-100 px-2 py-0.5 text-violet-800">Critical</span><span className="text-gray-400">Live</span></div></CardContent></Card>
-            <Card className="gjl-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">GIA/IGI Certification Blockchain Vault</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Gemological Institute of America (GIA) and International Gemological Institute (IGI) certificate verification with immutable blockchain storage. Real-time cross-referencing of 4Cs (Cut, Color, Clarity, Carat) against submitted certificates detecting 99.7% forgery attempts. Automated alert system for lab-grown vs natural diamond classification ensuring transparent disclosure. Integration with 28 Indian customs ports for duty-free gold import verification under Advance Authorization scheme. Digital twin of each gemstone with 3D scanning for insurance claim validation.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-indigo-800">Strategic</span><span className="text-gray-400">Q3 2026</span></div></CardContent></Card>
-            <Card className="gjl-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">RBI Sovereign Gold Bond Supply Tracking</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Reserve Bank of India Sovereign Gold Bond (SGB) series logistics and allotment tracking across 2026 tranche calendar. Automated allocation from RBI mint to 12,500+ post office distribution centres and 340+ bank branches. Real-time SGB redemption and maturity processing with 2.5% fixed interest tracking. Integration with India Bullion and Jewellers Association (IBJA) daily gold price feed for transparent pricing. SMS-based investor notification system for bond issuance, interest payment, and premature redemption across 48 lakh registered holders.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-purple-100 px-2 py-0.5 text-purple-800">Operational</span><span className="text-gray-400">FY2027</span></div></CardContent></Card>
-            <Card className="gjl-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">AI Gemstone Valuation & Fraud Detection</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Machine learning gemstone valuation model trained on 2.8 million historical transactions across IBJA auction data, Christie's and Sotheby's Indian sale records. Real-time anomaly detection identifying artificially enhanced or treated gemstones with 98.4% accuracy. Computer vision integration for automated clarity and color grading reducing human assay time by 65%. Predictive pricing engine for rough gemstone procurement from African and Australian mines via Gemfields and Rio Tinto supply channels. Integration with SEBI PMVVY gold deposit scheme compliance monitoring.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-fuchsia-100 px-2 py-0.5 text-fuchsia-800">Innovation</span><span className="text-gray-400">Pilot</span></div></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>India Gem Jewellery — USD 75 Billion Heritage Craft Ecosystem</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">India gem jewellery supply chain represents the world's largest jewellery manufacturing and consumption ecosystem with annual domestic and export revenue exceeding seventy-five billion US dollars employing over five million artisans goldsmiths diamond cutters and jewellery designers across eight major jewellery manufacturing centres where Jaipur in Rajasthan is globally renowned as the premier centre for Kundan and Jadau jewellery where master artisans set uncut diamonds Polki and glass-foil backed gemstones into elaborately crafted twenty-two karat gold frames using the traditional Kundan technique of inserting thin gold foil strips between the gemstone and the gold bezel creating a jewel-encrusted surface of extraordinary visual brilliance that has been patronised by Rajasthani royal families for over four hundred years where Surat in Gujarat processes approximately ninety percent of the world's diamond rough output with over four lakh diamond cutting and polishing workers operating sophisticated laser cutting and automated bruting machinery transforming rough diamonds into polished brilliant-cut gemstones that feed the global diamond jewellery supply chain where Mumbai serves as India's primary jewellery export hub with the Bharat Diamond Bourse being the world's largest diamond exchange facilitating the trade of polished diamonds gemstones and finished jewellery to international buyers across eighty-five countries where Chennai and Trichy in Tamil Nadu are renowned centres for South Indian temple jewellery tradition crafting elaborate gold ornaments inspired by the classical temple architecture motifs of the Pallava and Chola dynasties where Kolkata in West Bengal maintains the heritage of the legendary Kundan and Meenakari jewellery tradition patronised by the Nawabi courts of Lucknow and Murshidabad where Ahmedabad in Gujarat contributes specialised Zari metal thread and filigree work used in contemporary Indian bridal jewellery design where the India gem jewellery supply chain logistics involves managing the flow of precious raw materials including gold bullion imported through designated nominated agencies approved by the Reserve Bank of India rough diamonds imported through authorised diamond trading hubs certified gemstones sourced from international gem markets and precious metal consumables including silver platinum and palladium through a secure logistics infrastructure featuring armoured transit vehicles GPS-tracked high-value shipments and bonded warehouse facilities that maintain the chain-of-custody documentation required for BIS hallmark certification and GJEPC export compliance across the entire jewellery supply chain from raw material procurement to finished product distribution to retail jewellery showrooms and international buyers.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>BIS Hallmark & GJEPC Certification Quality Framework</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Bureau of Indian Standards BIS hallmarking framework for gold jewellery and artefacts establishes the mandatory quality assurance certification system under the BIS Hallmarking Act twenty sixteen requiring every piece of gold jewellery sold in India to bear the BIS hallmark certifying the karat purity fineness of the gold metal confirming the gold content matches the declared karat value within the tolerance limits specified in IS 1417 gold jewellery standards where the BIS hallmark comprises the BIS logo the assaying and hallmarking centre mark the jeweller identification mark and the karat purity fineness number such as twenty-two karat gold designated as 22K916 confirming minimum gold content of ninety-one point six percent by weight where the BIS certified assaying centres perform karat purity testing using X-ray fluorescence XRF spectroscopy providing non-destructive elemental analysis of the jewellery metal composition confirming the gold content silver content copper content and any other alloying elements present in the jewellery piece within the tolerance limits specified in IS 1417 with the XRF measurement accuracy of plus or minus zero point one karat for gold purity confirming the hallmark accuracy for twenty-two karat gold jewellery falls between ninety-one point five and ninety-one point seven percent gold content by weight where the Gem Jewellery Export Promotion Council GJEPC certification provides the export quality assurance framework for Indian gem and jewellery products destined for international markets requiring compliance with the Kimberley Process Certification Scheme KPCS for diamond shipments certifying that rough diamonds have been sourced from conflict-free origins through documented chain-of-custody procedures from mine to export point where the GJEPC certification includes diamond grading reports issued by GJEPC-certified gemmological laboratories providing the four Cs assessment of cut colour clarity and carat weight for polished diamonds in accordance with international diamond grading standards established by the Gemmological Institute of America GIA and the International Diamond Council IDC where the BIS hallmark verification process for high-value jewellery sets weighing over fifty grams requires individual hallmarking of each component piece within the set with the BIS hallmark stamped on the heaviest component while lighter components receive a collective set hallmark with total weight and karat purity declaration verified through XRF analysis confirming batch-level karat purity consistency across all components of the jewellery set ensuring consumer confidence in the declared gold purity of Indian jewellery products through the rigorous BIS hallmark certification framework that is recognised as one of the most comprehensive mandatory jewellery hallmarking systems in the global jewellery industry.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Tamper-Proof Vault Box for High-Value Jewellery Transit</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Tamper-proof vault box packaging with multi-layer security seals GPS real-time tracking and armoured vehicle escort has been specifically designed for the Indian gem jewellery supply chain to protect high-value jewellery consignments valued at lakhs and crores of rupees from theft pilferage and unauthorised access during transit from jewellery manufacturing centres to retail showrooms exhibition venues and export shipping terminals across India where the vault box specification utilises twelve gauge mild steel construction with minimum wall thickness of two millimetres providing drill resistance measured as minimum drilling time of fifteen minutes with standard HSS drill bits in accordance with IS 3648 safe construction testing methodology ensuring the vault box provides physical resistance against forced entry attempts during transit where the vault box locking system employs dual-key seven-lever tumbler locks requiring two separate keys held by different authorised personnel to open the vault box preventing any single individual from gaining unauthorised access to the high-value jewellery consignment where each vault box is sealed with three independent tamper-evident security seals including one electronic RFID-enabled seal that logs the date time and location of every seal status check to a central security monitoring system providing continuous chain-of-custody visibility throughout the transit cycle where the GPS tracking device installed within each vault box transmits real-time location data at sixty-second intervals to the jewellery logistics command centre confirming the vault box is following the authorised transit route and enabling immediate response to any unauthorised route deviation or prolonged stationary period that could indicate a security breach where the armoured vehicle escort specification requires minimum ballistic protection level of BR6 rated to resist attack from nine millimetre handgun and five point five six millimetre rifle ammunition measured in accordance with EN 1522 European standard for armoured vehicle protection ensuring the vehicle provides ballistic resistance sufficient to protect the high-value jewellery consignment from armed robbery attempts during road transit where the vault box interior uses velvet-lined cushioned compartments with individual soft pouch packaging for each jewellery piece preventing metal-to-metal contact scratching and gemstone abrasion damage during the vibration and shock of road transit ensuring each high-value jewellery piece arrives at its destination in pristine condition maintaining the display quality and market value required for retail presentation and exhibition display of Indian gem jewellery products.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Refrigerator Vault Storage & Indian Jewellery Market Growth</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Refrigerator vault storage with multi-layer security access control and climate-regulated internal environment has been established for the Indian gem jewellery supply chain to provide the highest level of physical security and environmental protection for high-value jewellery inventory awaiting distribution to retail showrooms exhibition venues and international export shipments where the Refrigerator vault storage specification maintains internal temperature between eighteen and twenty-two degrees Celsius with relative humidity between forty and fifty percent providing a climate-controlled environment that prevents tarnishing of silver jewellery components oxidation of copper alloy findings and degradation of organic materials such as pearl thread and silk cord used in traditional Indian stringed jewellery where the vault access control system requires biometric authentication combining fingerprint recognition and iris scanning with dual-authorisation entry protocol requiring two authorised personnel to simultaneously present valid biometric credentials before the vault door releases preventing any single individual from gaining unauthorised access to the high-value jewellery inventory stored within the vault where the vault security infrastructure includes multi-layer access control with mantrap entry vestibule requiring sequential authentication at two separate access points before reaching the jewellery storage area with each access event logged to the central security monitoring system with timestamp video recording and personnel identification providing complete audit trail documentation for insurance compliance and regulatory review purposes where the vault storage racking system uses individual jewellery compartment lockers constructed from sixteen gauge steel with individual tamper-evident seals and RFID-enabled inventory tags providing real-time inventory visibility and automated discrepancy alerts when any jewellery item is moved from its designated storage location without proper authorisation. The Indian jewellery market growth trajectory driven by rising household incomes increasing wedding expenditure growth expanding middle-class consumer base and government initiatives promoting hallmarking and consumer protection through the BIS mandatory hallmarking programme has positioned India as the fastest-growing major jewellery market globally with annual growth exceeding twelve percent driven by the cultural significance of gold jewellery in Indian weddings festivals and investment portfolios where gold jewellery serves simultaneously as adornment cultural symbol and financial investment for Indian households with cumulative private gold holdings estimated at over twenty-five thousand tonnes representing the largest private gold reserves of any nation providing a massive domestic market foundation for the Indian gem jewellery supply chain that continues to expand both in terms of domestic retail penetration and international export growth across major markets including the United States United Arab Emirates United Kingdom and East Asian countries.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
     </div>
   )
 }
+
+
+

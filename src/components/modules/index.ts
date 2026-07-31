@@ -347,3 +347,4 @@ export { default as PembarthiMetalCraftTelanganaLogisticsView } from './pembarth
 export { default as RoganArtGujaratLogisticsView } from './rogan-art-gujarat-logistics-view'
 export { default as PichwaiRajasthanLogisticsView } from './pichwai-rajasthan-logistics-view'
 export { default as WarliMaharashtraLogisticsView } from './warli-maharashtra-logistics-view'
+export { default as GondMadhyaLogisticsView } from './gond-madhya-logistics-view'
