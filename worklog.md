@@ -1,5 +1,32 @@
 ---
 ---
+Task ID: R356
+Agent: Main Agent (Cron Loop)
+Task: R356 — Warli Maharashtra (new) + Aerospace MRO Logistics overwrite
+
+Work Log:
+- Read worklog.md: R355 complete (commit 89377df), 349 views, 349 navItems, ~55,062 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R356)
+- QA: Dev server OOM on Turbopack (known issue, 55K+ CSS lines); TSC sole QA gate
+- Slug verification: warli-maharashtra-logistics CLEAR; aerospace-mro-logistics ALREADY EXISTS
+- CSS prefixes: war-* CLEAR, aer-* CLEAR (aerospace had no dedicated CSS before)
+- Icons: Users (Warli, already in iconMap), PlaneTakeoff (Aerospace, already existed) — no new icons (186 unchanged)
+- Aerospace MRO had 234 lines with wrong field names (PART_TYPES/MRO_FACILITIES/CERT_STATUS) — completely overwritten to 253 lines
+
+- Created Warli Maharashtra Logistics (war-*, #78350f warm earth brown): 253 lines, 8 products (Harvest Dance Panel, Wedding Procession Art, Tree of Life Mural, Fishing Scene Canvas, Tarpa Dance Scroll, Village Festival Panel, Animal Herd Mural, Hunting Scene Painting), 8 artisans (Warli Adivasi Art Cooperative MH, Dahanu Forest Tribe Artists MH, Jawhar Warli Heritage Guild MH, Palghar Tribal Painters MH, Mokhada Warli Village Cluster MH, Talasari Adivasi Society MH, Vikramgad Warli Collective MH, Wada Warli Traditional Artists MH), 6 statuses, 4 insight cards (2500 BC Adivasi tribal wall painting heritage, rice paste pigment QC & mud wall adhesion standards, flat cardboard box packaging, dry room storage & heritage market)
+- Overwrote Aerospace MRO Logistics (aer-*, #1e3a8a deep blue): 253 lines, 8 products (Turbofan Engine Blade, Landing Gear Assembly, Avionics LRU Module, Hydraulic Actuator Unit, APU Starter Generator, Composite Fuselage Panel, Flight Control Rod End, Fuel System Valve Block), 8 artisans (HAL Bengaluru MRO KA, Air India Engineering Delhi, GMR Aero Technics Hyderabad, AIESL Maintenance Mumbai, Boeing India MRO Nagpur, Airbus India TAT Delhi, SR Technics Bombay MH, Pratt Whitney Service HYD), 6 statuses, 4 insight cards (USD 2.1B India aviation MRO hub ecosystem, DGCA certification & dual-release quality framework, ESD-protected avionics packaging, bonded warehouse & MRO growth strategy)
+- Registered Warli in 3 files (index.ts, page.tsx, app-store.ts); Aerospace already registered
+- CSS: +20 lines (war-* 5 rules + 3 keyframes + aer-* 5 rules + 3 keyframes + 2 comments + 2 blanks)
+- TSC: 0 errors | Git pushed: commit d20819a
+
+Stage Summary:
+- 350 views (1 new Warli), 350 navItems, ~55,082 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Aerospace MRO updated from 234 to 253 lines with correct field names, genRecords, 60 records
+- Remaining non-253 overwrite candidates: ~257 modules (ongoing overwrite program)
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue overwrite program targeting 234-line modules batch
+---
 Task ID: R355
 Agent: Main Agent (Cron Loop)
 Task: R355 — Pichwai Rajasthan (new) + Dairy Milk Supply Chain overwrite
