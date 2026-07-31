@@ -308,3 +308,5 @@ export { default as NagaWoodCarvingNagalandLogisticsView } from './naga-wood-car
 export { default as SantiniketanBatikBengalLogisticsView } from './santiniketan-batik-bengal-logistics-view'
 export { default as KashmirPapierMacheLogisticsView } from './kashmir-papier-mache-logistics-view'
 export { default as MysoreRosewoodInlayLogisticsView } from './mysore-rosewood-inlay-logistics-view'
+export { default as AssamBambooCraftLogisticsView } from './assam-bamboo-craft-logistics'
+export { default as RajasthanBluePotteryLogisticsView } from './rajasthan-blue-pottery-logistics'
