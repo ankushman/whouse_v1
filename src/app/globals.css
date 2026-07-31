@@ -53648,3 +53648,47 @@ html.theme-transition body {
 @keyframes tbs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes tbs-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(88,28,135,0.15); } }
 @keyframes tbs-glow-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(88,28,135,0.25); } }
+
+/* Kondapalli Bommalu Toys (kbt-*) */
+.kbt-root { animation: kbt-fade-in 0.3s ease-out; }
+.kbt-badge { transition: all 0.2s; }
+.kbt-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(185,28,28,0.15); }
+.kbt-kpi { transition: all 0.25s; border-left: 3px solid #b91c1c; }
+.kbt-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(185,28,28,0.12); }
+.kbt-value { transition: all 0.2s; background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%); }
+.kbt-value:hover { transform: scale(1.02); }
+.kbt-health-ring { transition: transform 0.2s; }
+.kbt-health-ring:hover { transform: scale(1.08); }
+.kbt-costbar { transition: width 0.6s ease; }
+.kbt-table-card { transition: box-shadow 0.2s; }
+.kbt-table-card:hover { box-shadow: 0 4px 16px rgba(185,28,28,0.08); }
+.kbt-health-grid { transition: box-shadow 0.2s; }
+.kbt-health-grid:hover { box-shadow: 0 2px 12px rgba(185,28,28,0.1); }
+.kbt-insight { transition: all 0.25s; border-left: 3px solid #b91c1c; }
+.kbt-insight:hover { border-color: #ef4444; box-shadow: 0 2px 8px rgba(185,28,28,0.1); }
+@keyframes kbt-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes kbt-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes kbt-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(185,28,28,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(185,28,28,0.15); } }
+@keyframes kbt-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(185,28,28,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(185,28,28,0.25); } }
+
+/* Kalamkari Pen Art (kpa-*) */
+.kpa-root { animation: kpa-fade-in 0.3s ease-out; }
+.kpa-badge { transition: all 0.2s; }
+.kpa-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(30,27,75,0.15); }
+.kpa-kpi { transition: all 0.25s; border-left: 3px solid #1e1b4b; }
+.kpa-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(30,27,75,0.12); }
+.kpa-value { transition: all 0.2s; background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%); }
+.kpa-value:hover { transform: scale(1.02); }
+.kpa-health-ring { transition: transform 0.2s; }
+.kpa-health-ring:hover { transform: scale(1.08); }
+.kpa-costbar { transition: width 0.6s ease; }
+.kpa-table-card { transition: box-shadow 0.2s; }
+.kpa-table-card:hover { box-shadow: 0 4px 16px rgba(30,27,75,0.08); }
+.kpa-health-grid { transition: box-shadow 0.2s; }
+.kpa-health-grid:hover { box-shadow: 0 2px 12px rgba(30,27,75,0.1); }
+.kpa-insight { transition: all 0.25s; border-left: 3px solid #1e1b4b; }
+.kpa-insight:hover { border-color: #4338ca; box-shadow: 0 2px 8px rgba(30,27,75,0.1); }
+@keyframes kpa-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes kpa-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes kpa-pulse-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,27,75,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,27,75,0.15); } }
+@keyframes kpa-glow-indigo { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,27,75,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,27,75,0.25); } }
