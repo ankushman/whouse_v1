@@ -278,6 +278,8 @@ export const navItems: NavItem[] = [
   { id: 'carpet-rug-logistics', label: 'Carpet & Rug', icon: 'BedDouble', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'glass-ceramics-supply-chain', label: 'Glass & Ceramics', icon: 'Beaker', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'handicraft-woodwork-logistics', label: 'Handicraft Woodwork', icon: 'Axe', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'bamboo-cane-products-supply-chain', label: 'Bamboo & Cane', icon: 'Trees', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'lacquerware-lac-bangles-logistics', label: 'Lacquerware & Lac Bangles', icon: 'Lollipop', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

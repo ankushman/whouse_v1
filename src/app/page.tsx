@@ -282,6 +282,8 @@ import HandloomCottonSupplyChainView from "@/components/modules/handloom-cotton-
 import CarpetRugLogisticsView from "@/components/modules/carpet-rug-logistics-view"
 import GlassCeramicsSupplyChainView from "@/components/modules/glass-ceramics-supply-chain-view"
 import HandicraftWoodworkLogisticsView from "@/components/modules/handicraft-woodwork-logistics-view"
+import BambooCaneProductsSupplyChainView from "@/components/modules/bamboo-cane-products-supply-chain-view"
+import LacquerwareLacBanglesLogisticsView from "@/components/modules/lacquerware-lac-bangles-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -563,6 +565,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "carpet-rug-logistics": CarpetRugLogisticsView,
   "glass-ceramics-supply-chain": GlassCeramicsSupplyChainView,
   "handicraft-woodwork-logistics": HandicraftWoodworkLogisticsView,
+  "bamboo-cane-products-supply-chain": BambooCaneProductsSupplyChainView,
+  "lacquerware-lac-bangles-logistics": LacquerwareLacBanglesLogisticsView,
 }
 
 

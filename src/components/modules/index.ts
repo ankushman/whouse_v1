@@ -272,3 +272,5 @@ export { default as HandloomCottonSupplyChainView } from './handloom-cotton-supp
 export { default as CarpetRugLogisticsView } from './carpet-rug-logistics-view'
 export { default as GlassCeramicsSupplyChainView } from './glass-ceramics-supply-chain-view'
 export { default as HandicraftWoodworkLogisticsView } from './handicraft-woodwork-logistics-view'
+export { default as BambooCaneProductsSupplyChainView } from './bamboo-cane-products-supply-chain-view'
+export { default as LacquerwareLacBanglesLogisticsView } from './lacquerware-lac-bangles-logistics-view'

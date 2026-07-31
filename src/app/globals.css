@@ -53334,3 +53334,49 @@ html.theme-transition body {
 @keyframes hwl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes hwl-pulse-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(120,53,15,0.15); } }
 @keyframes hwl-glow-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(120,53,15,0.25); } }
+
+/* ── Bamboo & Cane Products Supply Chain (bcp-*) ── */
+.bcp-root { animation: bcp-fade-in 0.3s ease-out; }
+.bcp-root * { box-sizing: border-box; }
+.bcp-badge { letter-spacing: 0.02em; }
+.bcp-status { border: 1px solid #d1fae5; }
+.bcp-costbar div { transition: width 0.6s ease; }
+.bcp-kpi { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.bcp-kpi:hover { border-color: #14532d; box-shadow: 0 4px 12px rgba(20,83,45,0.15); }
+.bcp-value { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.bcp-value:hover { border-color: #166534; }
+.bcp-health-grid { border: 1px solid #e5e7eb; }
+.bcp-health-ring svg { transition: transform 0.3s ease; }
+.bcp-health-ring:hover svg { transform: scale(1.05); }
+.bcp-table-card { border: 1px solid #e5e7eb; overflow-x: auto; }
+.bcp-table-card tbody tr { transition: background-color 0.15s ease; }
+.bcp-table-card tbody tr:hover { background-color: rgba(20,83,45,0.04); }
+.bcp-insight { border: 1px solid #e5e7eb; transition: all 0.2s ease; }
+.bcp-insight:hover { border-color: #14532d; box-shadow: 0 2px 8px rgba(20,83,45,0.1); }
+@keyframes bcp-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bcp-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes bcp-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(20,83,45,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(20,83,45,0.15); } }
+@keyframes bcp-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(20,83,45,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(20,83,45,0.25); } }
+
+/* ── Lacquerware & Lac Bangles Logistics (llb-*) ── */
+.llb-root { animation: llb-fade-in 0.3s ease-out; }
+.llb-root * { box-sizing: border-box; }
+.llb-badge { letter-spacing: 0.02em; }
+.llb-status { border: 1px solid #ffedd5; }
+.llb-costbar div { transition: width 0.6s ease; }
+.llb-kpi { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.llb-kpi:hover { border-color: #7c2d12; box-shadow: 0 4px 12px rgba(124,45,18,0.15); }
+.llb-value { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.llb-value:hover { border-color: #9a3412; }
+.llb-health-grid { border: 1px solid #e5e7eb; }
+.llb-health-ring svg { transition: transform 0.3s ease; }
+.llb-health-ring:hover svg { transform: scale(1.05); }
+.llb-table-card { border: 1px solid #e5e7eb; overflow-x: auto; }
+.llb-table-card tbody tr { transition: background-color 0.15s ease; }
+.llb-table-card tbody tr:hover { background-color: rgba(124,45,18,0.04); }
+.llb-insight { border: 1px solid #e5e7eb; transition: all 0.2s ease; }
+.llb-insight:hover { border-color: #7c2d12; box-shadow: 0 2px 8px rgba(124,45,18,0.1); }
+@keyframes llb-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes llb-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes llb-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,45,18,0.15); } }
+@keyframes llb-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,45,18,0.25); } }
