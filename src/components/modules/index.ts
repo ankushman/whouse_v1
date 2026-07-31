@@ -264,3 +264,5 @@ export { default as MusicalInstrumentsLogisticsView } from './musical-instrument
 export { default as SilkTextileHeritageSupplyChainView } from './silk-textile-heritage-supply-chain-view'
 export { default as AyurvedaHerbalProductsLogisticsView } from './ayurveda-herbal-products-logistics-view'
 export { default as OrganicFoodSupplyChainView } from './organic-food-supply-chain-view'
+export { default as PlywoodPlyboardLogisticsView } from './plywood-plyboard-logistics-view'
+export { default as BrassCopperWareSupplyChainView } from './brass-copper-ware-supply-chain-view'

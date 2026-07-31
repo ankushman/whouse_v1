@@ -274,6 +274,8 @@ import MusicalInstrumentsLogisticsView from "@/components/modules/musical-instru
 import SilkTextileHeritageSupplyChainView from "@/components/modules/silk-textile-heritage-supply-chain-view"
 import AyurvedaHerbalProductsLogisticsView from "@/components/modules/ayurveda-herbal-products-logistics-view"
 import OrganicFoodSupplyChainView from "@/components/modules/organic-food-supply-chain-view"
+import PlywoodPlyboardLogisticsView from "@/components/modules/plywood-plyboard-logistics-view"
+import BrassCopperWareSupplyChainView from "@/components/modules/brass-copper-ware-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -547,6 +549,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "silk-textile-heritage-supply-chain": SilkTextileHeritageSupplyChainView,
   "ayurveda-herbal-products-logistics": AyurvedaHerbalProductsLogisticsView,
   "organic-food-supply-chain": OrganicFoodSupplyChainView,
+  "plywood-plyboard-logistics": PlywoodPlyboardLogisticsView,
+  "brass-copper-ware-supply-chain": BrassCopperWareSupplyChainView,
 }
 
 
