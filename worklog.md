@@ -1,5 +1,35 @@
 ---
 ---
+Task ID: R359
+Agent: Main Agent (Cron Loop)
+Task: R359 — Cheriyal Scroll Art Telangana (new) + Textile Apparel Logistics overwrite
+
+Work Log:
+- Read worklog.md: R358 complete (commit efecd64), 352 views, 352 navItems, ~55,112 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R359)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: cheriyal-scroll-art-telangana-logistics — navItem already existed (pre-registered), module file MISSING
+- CSS prefixes: che-* CLEAR; txa-* CLEAR (no existing CSS for textile-apparel)
+- Icons: ScrollText (Cheriyal, already in iconMap), Scissors (Textile, already existed) — no new icons
+- Found and fixed duplicate cheriyal entries in index.ts (wrong slug no -view), page.tsx (import + viewMap), app-store (navItem)
+- Textile Apparel had 234 lines — completely overwritten to 253 lines with genRecords, correct field names
+
+- Created Cheriyal Scroll Art Telangana (che-*, #9f1239 deep rose): 253 lines, 8 products (Coiling Snake Scroll, Markandeya Panel, Vishnu Dashavatara Scroll, Krishna Gopika Panel, Shiva Parvathi Scroll, Ramayana Episode Panel, Hanuman Sundarkand Scroll, Village Deity Mask Panel), 8 artisans (Cheriyal Nakashi Art Guild, Warangal Heritage Society, Jangaon Painters, Siddipet Collective, Medak Cooperative, Narsapur Traditional, Karimnagar Folk, Hyderabad Academy), 6 statuses, 4 insight cards (500-year Telangana Nakashi scroll painting heritage, Nakkashi line boldness QC & khadi canvas standards, naphthalene fumigation & tamarind seed gum binder, narrative fidelity audit & heritage market growth)
+- Overwrote Textile Apparel Logistics (txa-*, #7c3aed violet): 253 lines, 8 products (Organic Cotton, Silk Blend, Denim Twill, Linen Flax, Polyester Knit, Wool Worsted, Rayon Viscose, Chiffon Georgette), 8 artisans (Tirupur Knitwear, Bhilwara Mills, Surat Polyester, Erode Handloom, Ichalkaranji Weaving, Ludhiana Wool, Bhiwani Cotton, Kanchipuram Silk), 6 statuses, 4 insight cards (USD 190B India textile ecosystem, IS 16793 grade & fibre tensile strength, moisture regain & grammage verification, warehouse Refrigerator storage & export market strategy)
+- Registered Cheriyal in index.ts (deduped old wrong-slug entry), page.tsx (deduped old import+viewMap), app-store (deduped duplicate navItem)
+- Textile already registered in all 3 files
+- CSS: +20 lines (che-* 5 rules + 3 keyframes + txa-* 5 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit 1bbfd02
+
+Stage Summary:
+- 347 module files (1 new Cheriyal), 344 exports in index.ts, 353 navItems in app-store, ~55,132 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Textile Apparel updated from 234 to 253 lines with genRecords, 60 records, correct field names
+- Fixed pre-existing duplicate cheriyal registrations across 3 files
+- Remaining non-253 overwrite candidates: ~254 modules (ongoing overwrite program)
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue overwrite program targeting 234-line modules batch
+---
 Task ID: R358
 Agent: Main Agent (Cron Loop)
 Task: R358 — Kalighat Bengal (new) + ESG Compliance Hub overwrite
