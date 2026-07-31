@@ -55170,3 +55170,23 @@ html.theme-transition body {
 @keyframes kkaFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes kkaPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(49, 46, 129, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(49, 46, 129, 0); } }
 @keyframes kkaRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Dabu Print Rajasthan - dab- prefix */
+.dab-container { animation: dabFadeIn 0.4s ease-out; }
+.dab-tab-trigger[data-state="active"] { background-color: #374151; color: white; }
+.dab-tab-trigger[data-state="active"]:hover { background-color: #4b5563; }
+.dab-root table tbody tr:hover { background: rgba(55, 65, 81, 0.06); }
+.dab-root .inline-flex.items-center.rounded-full { border: 1px solid #4b5563; }
+@keyframes dabFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes dabPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(55, 65, 81, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(55, 65, 81, 0); } }
+@keyframes dabRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Automotive Parts Logistics - aut- prefix */
+.aut-container { animation: autFadeIn 0.4s ease-out; }
+.aut-tab-trigger[data-state="active"] { background-color: #0284c7; color: white; }
+.aut-tab-trigger[data-state="active"]:hover { background-color: #0369a1; }
+.aut-root table tbody tr:hover { background: rgba(2, 132, 199, 0.06); }
+.aut-root .inline-flex.items-center.rounded-full { border: 1px solid #0284c7; }
+@keyframes autFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes autPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(2, 132, 199, 0); } }
+@keyframes autRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }

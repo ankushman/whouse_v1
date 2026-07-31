@@ -357,6 +357,7 @@ export const navItems: NavItem[] = [
   { id: 'bagh-print-madhya-logistics', label: 'Bagh Print MP', icon: 'Droplets', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'bagru-block-print-rajasthan-logistics', label: 'Bagru Block Print RJ', icon: 'Droplets', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kalamkari-pen-art-andhra-logistics', label: 'Kalamkari Pen Art AP', icon: 'PenTool', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'dabu-print-rajasthan-logistics', label: 'Dabu Print RJ', icon: 'Droplets', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
