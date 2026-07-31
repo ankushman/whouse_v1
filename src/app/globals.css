@@ -55150,3 +55150,13 @@ html.theme-transition body {
 @keyframes sagFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes sagPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(22, 101, 52, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(22, 101, 52, 0); } }
 @keyframes sagRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* brp-* — Bagru Block Print Rajasthan Logistics */
+.brp-root { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%); }
+.brp-root .card { border: 1px solid #fb923c; border-radius: 0.75rem; }
+.brp-root table thead { background: #ffedd5; }
+.brp-root table tbody tr:hover { background: rgba(194, 65, 12, 0.06); }
+.brp-root .inline-flex.items-center.rounded-full { border: 1px solid #ea580c; }
+@keyframes brpFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes brpPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(194, 65, 12, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(194, 65, 12, 0); } }
+@keyframes brpRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }

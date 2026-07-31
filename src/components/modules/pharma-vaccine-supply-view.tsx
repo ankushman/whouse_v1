@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/shared/page-header'
@@ -6,229 +6,248 @@ import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
 import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const COLORS = ['#0d9488', '#0f766e', '#14b8a6', '#5eead4', '#99f6e4', '#115e59', '#134e4a', '#ccfbf1']
+const COLORS = ['#0d9488', '#14b8a6', '#2dd4bf', '#5eead4', '#99f6e4', '#0f766e', '#115e59', '#ccfbf1']
+const PRODUCTS = ['Covid mRNA Vaccine Vial', 'BCG Tuberculosis Dose', 'OPV Polio Drops Pack', 'DPT Triple Antigen Vial', 'Hepatitis B Vaccine Vial', 'MMR Measles Mumps Vial', 'Pentavalent Combo Vial', 'Rotavirus Oral Dose Pack']
+const ARTISANS = ['Serum Institute of India PNE', 'Bharat Biotech HYD', 'Biological Evans HYD', 'Zydus Cadila AHM', 'Panacea Biotec NDLM', 'HLL Lifecare TRV', 'Indian Immunologicals HYD', 'Bio-Med Gurgaon HR']
+const STATUSES = ['WHO Prequal Status OK', 'Cold Chain 2-8 Deg Maintained', 'Potency Assay Above Threshold', 'Vial Integrity Seal Check', 'Batch Release CDSCO', 'Endotoxin Level Below Limit']
 
-const VACCINE_TYPES = ['Covid mRNA', 'BCG Tuberculosis', 'OPV Polio', 'DPT Triple', 'Hepatitis B', 'MMR Measles', 'Pentavalent', 'Rotavirus']
-const MANUFACTURERS = ['SII Pune', 'Bharat Biotech Hyd', 'Biologicals E Hyd', 'Zydus Cadila', 'Panacea Biotik', 'HLL Lifecare', 'CDL Kasauli', 'BCG Lab Chennai']
-const COLD_STATUS = ['2-8°C Compliant', 'Frozen Valid', 'Temp Excursion', 'In Transit Monitored', 'Quarantine Hold', 'Pending Release']
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-const vaccineRecords = [
-  { id: 'PVS-0001', vaccine: 'Covid mRNA', description: 'Covaxin BBV152 0.5ml IM Dose Adult booster lot', manufacturer: 'Bharat Biotech Hyd', quantity: 2500000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9041', destination: 'GoVax Hub Delhi', received: '2026-07-30', batch: 'PVS-B2026-0721', cost_inr: 62500000, shelf_months: 18, who_prequal: true },
-  { id: 'PVS-0002', vaccine: 'BCG Tuberculosis', description: 'BCG Danish 1331 0.1ml ID Newborn Dose WHO', manufacturer: 'BCG Lab Chennai', quantity: 8000000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9038', destination: 'UWIP Hub Mumbai', received: '2026-07-30', batch: 'PVS-B2026-0720', cost_inr: 48000000, shelf_months: 24, who_prequal: true },
-  { id: 'PVS-0003', vaccine: 'OPV Polio', description: 'bOPV Monovalent Type 2 2 Drops Per Dose', manufacturer: 'Biologicals E Hyd', quantity: 15000000, unit: 'doses', cold_status: 'Frozen Valid', lot: 'LOT-PVS-9012', destination: 'Pulse Polio Bengaluru', received: '2026-07-29', batch: 'PVS-B2026-0719', cost_inr: 22500000, shelf_months: 6, who_prequal: true },
-  { id: 'PVS-0004', vaccine: 'DPT Triple', description: 'DPT Type II Adsorbed 0.5ml IM 6wk Infant', manufacturer: 'SII Pune', quantity: 6000000, unit: 'doses', cold_status: 'In Transit Monitored', lot: 'LOT-PVS-9027', destination: 'UIP Hub Lucknow', received: '2026-07-29', batch: 'PVS-B2026-0718', cost_inr: 36000000, shelf_months: 36, who_prequal: true },
-  { id: 'PVS-0005', vaccine: 'Hepatitis B', description: 'Engerix-B Recombinant 10mcg 3-Dose Schedule', manufacturer: 'Zydus Cadila', quantity: 3200000, unit: 'doses', cold_status: 'Temp Excursion', lot: 'LOT-PVS-9031', destination: 'NACO Hub Kolkata', received: '2026-07-28', batch: 'PVS-B2026-0716', cost_inr: 51200000, shelf_months: 48, who_prequal: true },
-  { id: 'PVS-0006', vaccine: 'MMR Measles', description: 'Mumps Measles Rubella 0.5ml SC 9mo Child', manufacturer: 'SII Pune', quantity: 5500000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9040', destination: 'MR Campaign Chennai', received: '2026-07-28', batch: 'PVS-B2026-0715', cost_inr: 44000000, shelf_months: 24, who_prequal: true },
-  { id: 'PVS-0007', vaccine: 'Pentavalent', description: 'DPT-HepB-Hib EasyFive 0.5ml IM 6-14wk', manufacturer: 'Panacea Biotik', quantity: 4500000, unit: 'doses', cold_status: 'Quarantine Hold', lot: 'LOT-PVS-9008', destination: 'Penta Hub Jaipur', received: '2026-07-27', batch: 'PVS-B2026-0714', cost_inr: 90000000, shelf_months: 30, who_prequal: true },
-  { id: 'PVS-0008', vaccine: 'Rotavirus', description: 'Rotavac 5-Dose Oral Live Attenuated 1ml Infant', manufacturer: 'Bharat Biotech Hyd', quantity: 7000000, unit: 'doses', cold_status: 'Pending Release', lot: 'LOT-PVS-9037', destination: 'Introduc Hub Patna', received: '2026-07-27', batch: 'PVS-B2026-0713', cost_inr: 42000000, shelf_months: 24, who_prequal: true },
-  { id: 'PVS-0009', vaccine: 'Covid mRNA', description: 'Corbevax Recombinant Protein 0.5ml IM 12-14yr', manufacturer: 'Biologicals E Hyd', quantity: 1800000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9039', destination: 'CoWIN Hub Hyderabad', received: '2026-07-26', batch: 'PVS-B2026-0711', cost_inr: 27000000, shelf_months: 12, who_prequal: false },
-  { id: 'PVS-0010', vaccine: 'BCG Tuberculosis', description: 'BCG Russia 0.05ml ID Neonatal LTBI Prophylaxis', manufacturer: 'CDL Kasauli', quantity: 4200000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9026', destination: 'RNTCP Hub Nagpur', received: '2026-07-26', batch: 'PVS-B2026-0710', cost_inr: 21000000, shelf_months: 18, who_prequal: true },
-  { id: 'PVS-0011', vaccine: 'OPV Polio', description: 'IPV Sabin Inactivated 0.5ml IM 6wk 14wk Booster', manufacturer: 'SII Pune', quantity: 9500000, unit: 'doses', cold_status: 'In Transit Monitored', lot: 'LOT-PVS-9011', destination: 'IPV Hub Guwahati', received: '2026-07-25', batch: 'PVS-B2026-0708', cost_inr: 47500000, shelf_months: 24, who_prequal: true },
-  { id: 'PVS-0012', vaccine: 'DPT Triple', description: 'DTwP Whole Cell 0.5ml IM 18mo Booster UIP', manufacturer: 'HLL Lifecare', quantity: 5800000, unit: 'doses', cold_status: 'Temp Excursion', lot: 'LOT-PVS-9007', destination: 'Mission Indradhanush Bhopal', received: '2026-07-25', batch: 'PVS-B2026-0707', cost_inr: 29000000, shelf_months: 36, who_prequal: true },
-  { id: 'PVS-0013', vaccine: 'Hepatitis B', description: 'GeneVac-B Recombinant 10mcg 3-Dose Adult', manufacturer: 'Zydus Cadila', quantity: 2200000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9030', destination: 'NACO Hub Thiruvananthapuram', received: '2026-07-24', batch: 'PVS-B2026-0705', cost_inr: 35200000, shelf_months: 48, who_prequal: true },
-  { id: 'PVS-0014', vaccine: 'MMR Measles', description: 'MR Vac Measles Rubella 0.5ml SC 2nd Dose 16mo', manufacturer: 'Biologicals E Hyd', quantity: 4800000, unit: 'doses', cold_status: 'Frozen Valid', lot: 'LOT-PVS-9025', destination: 'MR Drive Chandigarh', received: '2026-07-24', batch: 'PVS-B2026-0704', cost_inr: 33600000, shelf_months: 24, who_prequal: true },
-  { id: 'PVS-0015', vaccine: 'Pentavalent', description: 'Tritanrix-HepB-Hib GSK 0.5ml IM 6wk Primary', manufacturer: 'SII Pune', quantity: 3500000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9036', destination: 'Penta Hub Bhubaneswar', received: '2026-07-23', batch: 'PVS-B2026-0702', cost_inr: 70000000, shelf_months: 30, who_prequal: true },
-  { id: 'PVS-0016', vaccine: 'Rotavirus', description: 'Rotasiil 3-Dose Liquid Lyophilized 1ml 6-10-14wk', manufacturer: 'Bharat Biotech Hyd', quantity: 6200000, unit: 'doses', cold_status: 'Quarantine Hold', lot: 'LOT-PVS-9024', destination: 'Introduc Hub Indore', received: '2026-07-23', batch: 'PVS-B2026-0701', cost_inr: 37200000, shelf_months: 24, who_prequal: true },
-  { id: 'PVS-0017', vaccine: 'Covid mRNA', description: 'iNCOVACC Intranasal BBV154 Booster 4th Dose', manufacturer: 'Bharat Biotech Hyd', quantity: 1200000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9023', destination: 'Nasal Hub Ahmedabad', received: '2026-07-22', batch: 'PVS-B2026-0629', cost_inr: 18000000, shelf_months: 6, who_prequal: false },
-  { id: 'PVS-0018', vaccine: 'BCG Tuberculosis', description: 'BCG Tokyo 0.05ml ID School Entry 5yr Mantoux', manufacturer: 'BCG Lab Chennai', quantity: 6500000, unit: 'doses', cold_status: 'In Transit Monitored', lot: 'LOT-PVS-9022', destination: 'School Health Hub Pune', received: '2026-07-22', batch: 'PVS-B2026-0628', cost_inr: 32500000, shelf_months: 24, who_prequal: true },
-  { id: 'PVS-0019', vaccine: 'OPV Polio', description: 'mOPV2 Monovalent Sabin 2 Drops OPV Supplemental', manufacturer: 'Panacea Biotik', quantity: 11000000, unit: 'doses', cold_status: '2-8°C Compliant', lot: 'LOT-PVS-9010', destination: 'SNID Jharkhand Ranchi', received: '2026-07-21', batch: 'PVS-B2026-0625', cost_inr: 27500000, shelf_months: 6, who_prequal: true },
-  { id: 'PVS-0020', vaccine: 'DPT Triple', description: 'Tdap Adult Booster 0.5ml IM 10yr Tetanus', manufacturer: 'HLL Lifecare', quantity: 1500000, unit: 'doses', cold_status: 'Pending Release', lot: 'LOT-PVS-9021', destination: 'ANM Kit Hub Vizag', received: '2026-07-21', batch: 'PVS-B2026-0624', cost_inr: 12000000, shelf_months: 36, who_prequal: true },
-]
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
 
-const genRecords = (start: number) => {
-  const statuses = ['2-8°C Compliant', 'Frozen Valid', 'Temp Excursion', 'In Transit Monitored', 'Quarantine Hold', 'Pending Release']
-  const destinations = ['GoVax Hub Delhi', 'UWIP Hub Mumbai', 'Pulse Polio Bengaluru', 'UIP Hub Lucknow', 'NACO Hub Kolkata', 'MR Campaign Chennai', 'Penta Hub Jaipur', 'Introduc Hub Patna']
-  return Array.from({ length: 40 }, (_, i) => ({
-    id: `PVS-${String(start + i).padStart(4, '0')}`,
-    vaccine: VACCINE_TYPES[(start + i) % 8],
-    description: `${VACCINE_TYPES[(start + i) % 8]} Lot ${String((start + i) % 99 + 1).padStart(3, '0')}`,
-    manufacturer: MANUFACTURERS[(start + i) % 8],
-    quantity: Math.round(500000 + Math.random() * 14500000),
-    unit: 'doses',
-    cold_status: statuses[(start + i) % 6],
-    lot: `LOT-PVS-${String(9021 + start + i)}`,
-    destination: destinations[(start + i) % 8],
-    received: `2026-07-${String(20 - Math.floor((start + i) / 10)).padStart(2, '0')}`,
-    batch: `PVS-B2026-${String(624 - Math.floor((start + i) / 3)).padStart(4, '0')}`,
-    cost_inr: Math.round(5000000 + Math.random() * 95000000),
-    shelf_months: Math.round(6 + Math.random() * 42),
-    who_prequal: Math.random() > 0.15,
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-teal-100 text-teal-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-teal-200 rounded-full overflow-hidden"><div className="h-full bg-teal-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#ccfbf1" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
+}
+
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
+
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
+)
+
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `PVS-${String(offset + i + 1).padStart(4, '0')}`,
+    manufacturer: ARTISANS[(offset + i) % ARTISANS.length], vaccine: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 20, ((offset + i) * 19) % 20) + 1,
+    cost: ri(8000, 72000, ((offset + i) * 11107) % 64000) + 8000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-const allVaccine = [...vaccineRecords, ...genRecords(21), ...genRecords(61)]
-
-function ri(min: number, max: number, value: number) {
-  return Math.max(min, Math.min(max, value))
-}
-
-const filterGroups = [
-  {
-    key: 'vaccine',
-    label: 'Vaccine Type',
-    options: VACCINE_TYPES.map(t => ({ label: t, value: t, count: allVaccine.filter(r => r.vaccine === t).length })),
-  },
-  {
-    key: 'manufacturer',
-    label: 'Manufacturer',
-    options: MANUFACTURERS.map(m => ({ label: m, value: m, count: allVaccine.filter(r => r.manufacturer === m).length })),
-  },
-  {
-    key: 'cold_status',
-    label: 'Cold Chain Status',
-    options: COLD_STATUS.map(s => ({ label: s, value: s, count: allVaccine.filter(r => r.cold_status === s).length })),
-  },
+const pharmarecords = [
+  { id: 'PVS-0001', manufacturer: 'Serum Institute of India PNE', vaccine: 'Covid mRNA Vaccine Vial', status: 'WHO Prequal Status OK', qty: 12, cost: 68000, date: '2024-01-15' },
+  { id: 'PVS-0002', manufacturer: 'Bharat Biotech HYD', vaccine: 'BCG Tuberculosis Dose', status: 'Cold Chain 2-8 Deg Maintained', qty: 8, cost: 52000, date: '2024-01-28' },
+  { id: 'PVS-0003', manufacturer: 'Biological Evans HYD', vaccine: 'OPV Polio Drops Pack', status: 'Potency Assay Above Threshold', qty: 15, cost: 60000, date: '2024-02-10' },
+  { id: 'PVS-0004', manufacturer: 'Zydus Cadila AHM', vaccine: 'DPT Triple Antigen Vial', status: 'Vial Integrity Seal Check', qty: 6, cost: 44000, date: '2024-02-22' },
+  { id: 'PVS-0005', manufacturer: 'Panacea Biotec NDLM', vaccine: 'Hepatitis B Vaccine Vial', status: 'Batch Release CDSCO', qty: 10, cost: 58000, date: '2024-03-08' },
+  { id: 'PVS-0006', manufacturer: 'HLL Lifecare TRV', vaccine: 'MMR Measles Mumps Vial', status: 'Endotoxin Level Below Limit', qty: 4, cost: 70000, date: '2024-03-20' },
+  { id: 'PVS-0007', manufacturer: 'Indian Immunologicals HYD', vaccine: 'Pentavalent Combo Vial', status: 'WHO Prequal Status OK', qty: 14, cost: 48000, date: '2024-04-03' },
+  { id: 'PVS-0008', manufacturer: 'Bio-Med Gurgaon HR', vaccine: 'Rotavirus Oral Dose Pack', status: 'Cold Chain 2-8 Deg Maintained', qty: 7, cost: 36000, date: '2024-04-16' },
+  { id: 'PVS-0009', manufacturer: 'Serum Institute of India PNE', vaccine: 'BCG Tuberculosis Dose', status: 'Potency Assay Above Threshold', qty: 11, cost: 54000, date: '2024-04-28' },
+  { id: 'PVS-0010', manufacturer: 'Bharat Biotech HYD', vaccine: 'Covid mRNA Vaccine Vial', status: 'Vial Integrity Seal Check', qty: 9, cost: 64000, date: '2024-05-10' },
+  { id: 'PVS-0011', manufacturer: 'Biological Evans HYD', vaccine: 'OPV Polio Drops Pack', status: 'Batch Release CDSCO', qty: 16, cost: 42000, date: '2024-05-23' },
+  { id: 'PVS-0012', manufacturer: 'Zydus Cadila AHM', vaccine: 'DPT Triple Antigen Vial', status: 'Endotoxin Level Below Limit', qty: 5, cost: 70000, date: '2024-06-05' },
+  { id: 'PVS-0013', manufacturer: 'Panacea Biotec NDLM', vaccine: 'Hepatitis B Vaccine Vial', status: 'WHO Prequal Status OK', qty: 8, cost: 56000, date: '2024-06-18' },
+  { id: 'PVS-0014', manufacturer: 'HLL Lifecare TRV', vaccine: 'MMR Measles Mumps Vial', status: 'Cold Chain 2-8 Deg Maintained', qty: 13, cost: 38000, date: '2024-07-01' },
+  { id: 'PVS-0015', manufacturer: 'Indian Immunologicals HYD', vaccine: 'Pentavalent Combo Vial', status: 'Potency Assay Above Threshold', qty: 3, cost: 72000, date: '2024-07-14' },
+  { id: 'PVS-0016', manufacturer: 'Bio-Med Gurgaon HR', vaccine: 'Rotavirus Oral Dose Pack', status: 'Vial Integrity Seal Check', qty: 10, cost: 46000, date: '2024-07-26' },
+  { id: 'PVS-0017', manufacturer: 'Serum Institute of India PNE', vaccine: 'Covid mRNA Vaccine Vial', status: 'Batch Release CDSCO', qty: 6, cost: 66000, date: '2024-08-08' },
+  { id: 'PVS-0018', manufacturer: 'Bharat Biotech HYD', vaccine: 'BCG Tuberculosis Dose', status: 'Endotoxin Level Below Limit', qty: 12, cost: 32000, date: '2024-08-20' },
+  { id: 'PVS-0019', manufacturer: 'Biological Evans HYD', vaccine: 'OPV Polio Drops Pack', status: 'WHO Prequal Status OK', qty: 7, cost: 58000, date: '2024-09-02' },
+  { id: 'PVS-0020', manufacturer: 'Zydus Cadila AHM', vaccine: 'DPT Triple Antigen Vial', status: 'Cold Chain 2-8 Deg Maintained', qty: 14, cost: 40000, date: '2024-09-14' },
 ]
-
-function VaccineBadge({ vaccine }: { vaccine: string }) {
-  const colors: Record<string, string> = { 'Covid mRNA': 'bg-rose-100 text-rose-800', 'BCG Tuberculosis': 'bg-orange-100 text-orange-800', 'OPV Polio': 'bg-green-100 text-green-800', 'DPT Triple': 'bg-blue-100 text-blue-800', 'Hepatitis B': 'bg-yellow-100 text-yellow-800', 'MMR Measles': 'bg-purple-100 text-purple-800', Pentavalent: 'bg-teal-100 text-teal-800', Rotavirus: 'bg-indigo-100 text-indigo-800' }
-  return <span className={`pvs-vaccine-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[vaccine] || 'bg-gray-100 text-gray-800'}`}>{vaccine}</span>
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const colors: Record<string, string> = { '2-8°C Compliant': 'bg-green-100 text-green-800', 'Frozen Valid': 'bg-blue-100 text-blue-800', 'Temp Excursion': 'bg-red-100 text-red-800', 'In Transit Monitored': 'bg-yellow-100 text-yellow-800', 'Quarantine Hold': 'bg-orange-100 text-orange-800', 'Pending Release': 'bg-gray-200 text-gray-700' }
-  return <span className={`pvs-status-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-700'}`}>{status}</span>
-}
-
-function CostBar({ cost }: { cost: number }) {
-  const pct = ri(0, 100, (cost / 100000000) * 100)
-  const color = cost >= 80000000 ? 'bg-teal-600' : cost >= 40000000 ? 'bg-teal-500' : cost >= 20000000 ? 'bg-teal-400' : 'bg-teal-300'
-  return <div className="pvs-cost-bar flex items-center gap-2"><div className="h-2 w-20 rounded-full bg-gray-200"><div className={`pvs-cost-bar-fill h-2 rounded-full ${color} transition-all`} style={{ width: `${pct}%` }} /></div><span className="text-xs text-gray-500">{'₹' + (cost / 10000000).toFixed(1) + 'Cr'}</span></div>
-}
-
-function HealthRing({ value, label, color }: { value: number; label: string; color: string }) {
-  const r = 28, cx = 35, cy = 35, sw = 5
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
-  return <div className="pvs-health-ring flex flex-col items-center"><svg width={70} height={70} className="-rotate-90"><circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={circ} strokeDashoffset={offset} className="pvs-ring-path" strokeLinecap="round" /></svg><span className="pvs-ring-value mt-1 text-sm font-bold" style={{ color }}>{value}%</span><span className="text-xs text-gray-500">{label}</span></div>
-}
-
-function KpiTile({ title, value, sub }: { title: string; value: string; sub: string }) {
-  return <Card className="pvs-kpi-card"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="pvs-kpi-value mt-1 text-2xl font-bold">{value}</p><p className="text-xs text-gray-400 mt-0.5">{sub}</p></CardContent></Card>
-}
-
-function ValueTile({ title, value, trend }: { title: string; value: string; trend: string }) {
-  const up = trend.startsWith('+')
-  return <Card className="pvs-value-tile"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="mt-1 text-xl font-bold">{value}</p><p className={`text-xs mt-0.5 ${up ? 'text-green-600' : 'text-red-500'}`}>{trend}</p></CardContent></Card>
-}
 
 export default function PharmaVaccineSupplyView() {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [tab, setTab] = useState('dashboard')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
 
-  const toggleFilter = (key: string, value: string) => {
-    setActiveFilters(prev => {
-      const curr = prev[key] || []
-      const next = curr.includes(value) ? curr.filter(v => v !== value) : [...curr, value]
-      return next.length > 0 ? { ...prev, [key]: next } : Object.fromEntries(Object.entries(prev).filter(([k]) => k !== key))
-    })
-  }
+  const allRecords = [...pharmarecords, ...genRecords(21), ...genRecords(41)]
 
-  const filtered = allVaccine.filter(v => {
-    const q = searchQuery.toLowerCase()
-    if (q && !v.id.toLowerCase().includes(q) && !v.vaccine.toLowerCase().includes(q) && !v.description.toLowerCase().includes(q) && !v.manufacturer.toLowerCase().includes(q) && !v.destination.toLowerCase().includes(q)) return false
-    return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(v[key as keyof typeof v] as string))
-  })
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.vaccine.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-  const totalCost = allVaccine.reduce((s, v) => s + v.cost_inr, 0)
-  const compliant = allVaccine.filter(v => v.cold_status === '2-8°C Compliant').length
-  const excursions = allVaccine.filter(v => v.cold_status === 'Temp Excursion').length
-
-  const monthlyData = [
-    { month: 'Jan', doses: 85, value_cr: 42, cold_pct: 98 },
-    { month: 'Feb', doses: 102, value_cr: 58, cold_pct: 97 },
-    { month: 'Mar', doses: 145, value_cr: 82, cold_pct: 99 },
-    { month: 'Apr', doses: 68, value_cr: 32, cold_pct: 96 },
-    { month: 'May', doses: 128, value_cr: 70, cold_pct: 98 },
-    { month: 'Jun', doses: 42, value_cr: 18, cold_pct: 95 },
-    { month: 'Jul', doses: 158, value_cr: 92, cold_pct: 99 },
+  const filterGroups = [
+    { key: 'vaccine', label: 'Vaccine', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.vaccine === p).length })) },
+    { key: 'manufacturer', label: 'Manufacturer', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.manufacturer === p).length })) },
   ]
-  const vaccineData = VACCINE_TYPES.map(t => ({ vaccine: t, count: allVaccine.filter(r => r.vaccine === t).length }))
-  const mfrData = MANUFACTURERS.map(m => ({ manufacturer: m, count: allVaccine.filter(r => r.manufacturer === m).length }))
 
-  const tabs = [
-    { value: 'dashboard', label: 'Dashboard' },
-    { value: 'cold-chain', label: 'Cold Chain' },
-    { value: 'analytics', label: 'Analytics' },
-    { value: 'insights', label: 'Insights' },
-  ]
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const mfgChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.manufacturer === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
-    <div className="pvs-container space-y-4">
-      <PageHeader title="Pharma Vaccine Supply Chain" description="National immunization cold chain logistics with WHO prequalification compliance, eVIN real-time temperature monitoring, UIP Mission Indradhanush tracking, and CoWIN digital vaccination record integration across India's 28,000+ cold chain points" />
-      <ModuleBreadcrumb items={[{ label: 'Healthcare' }, { label: 'Vaccine Supply' }]} />
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="pvs-tabs-list">
-          {tabs.map(t => <TabsTrigger key={t.value} value={t.value} className="pvs-tab-trigger">{t.label}</TabsTrigger>)}
+    <div className="pvs-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Pharma Vaccine' }]} />
+      <PageHeader title="Pharma Vaccine Supply" description="Indian pharma vaccine supply chain with WHO prequalification status, cold chain two to eight degree Celsius maintenance, potency assay verification, vial integrity seal inspection, CDSCO batch release certification, and endotoxin level testing across 8 major vaccine manufacturers in Pune Hyderabad and Ahmedabad" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-teal-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
-        <TabsContent value="dashboard" className="pvs-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <KpiTile title="Total Lots" value={allVaccine.length.toString()} sub="Vaccine consignments tracked" />
-            <KpiTile title="Total Value" value={`₹${(totalCost / 10000000).toFixed(0)}Cr`} sub="Cold chain inventory value" />
-            <KpiTile title="2-8°C Compliant" value={compliant.toString()} sub={`${((compliant / allVaccine.length) * 100).toFixed(0)}% cold compliant`} />
-            <KpiTile title="Temp Excursions" value={excursions.toString()} sub="Deviation events logged" />
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Vaccine Types" value={PRODUCTS.length} />
+            <KpiTile label="Manufacturers" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-          <div className="grid gap-4 grid-cols-3 md:grid-cols-6">
-            <HealthRing value={98} label="Cold Chain Uptime" color="#0d9488" />
-            <HealthRing value={96} label="WHO Prequal Rate" color="#0f766e" />
-            <HealthRing value={94} label="VVM Stage 2" color="#14b8a6" />
-            <HealthRing value={97} label="Ice Pack Valid" color="#115e59" />
-            <HealthRing value={99} label="EVM Score" color="#134e4a" />
-            <HealthRing value={93} label="Last Mile Reach" color="#5eead4" />
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="WHO" value={96} />
+            <HealthRing label="Cold" value={94} />
+            <HealthRing label="Potency" value={92} />
+            <HealthRing label="Seal" value={97} />
+            <HealthRing label="Batch" value={95} />
+            <HealthRing label="Endotoxin" value={93} />
           </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="pvs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Dose Volume & Cold Compliance %</CardTitle></CardHeader><CardContent><LineChart data={monthlyData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Line type="monotone" dataKey="doses" stroke="#0d9488" strokeWidth={2} /><Line type="monotone" dataKey="cold_pct" stroke="#0f766e" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
-            <Card className="pvs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Inventory by Vaccine Type</CardTitle></CardHeader><CardContent><BarChart data={vaccineData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="vaccine" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="count" fill="#0d9488" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="pvs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Manufacturer Distribution</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={mfrData} dataKey="count" nameKey="manufacturer" cx="50%" cy="50%" outerRadius={70} label={({ manufacturer, count }) => `${count}`}>{mfrData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="India Doses/Year" value="3.8 Billion" />
+            <ValueTile label="Cold Chain Points" value="28,000+" />
+            <ValueTile label="UNICEF Supply" value="60 Percent" />
+            <ValueTile label="Pipeline Value" value="₹52K Crore" />
           </div>
         </TabsContent>
-
-        <TabsContent value="cold-chain" className="pvs-tab-content space-y-4 mt-4">
-          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={allVaccine.length} filteredCount={filtered.length} onRefresh={() => {}} placeholder="Search by ID, vaccine type, manufacturer, destination, or lot..." />
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="pvs-table w-full text-sm">
-              <thead><tr className="pvs-table-header bg-gray-50"><th className="px-3 py-2 text-left font-medium">ID</th><th className="px-3 py-2 text-left font-medium">Vaccine</th><th className="px-3 py-2 text-left font-medium">Cold Status</th><th className="px-3 py-2 text-left font-medium">Doses</th><th className="px-3 py-2 text-left font-medium">Value</th><th className="px-3 py-2 text-left font-medium">Manufacturer</th><th className="px-3 py-2 text-left font-medium">Destination</th><th className="px-3 py-2 text-left font-medium">Lot</th><th className="px-3 py-2 text-left font-medium">Shelf</th></tr></thead>
-              <tbody>{filtered.slice(0, 20).map(v => (
-                <tr key={v.id} className="pvs-table-row border-t hover:bg-gray-50 transition-colors">
-                  <td className="px-3 py-2 font-mono text-xs">{v.id}</td>
-                  <td className="px-3 py-2"><VaccineBadge vaccine={v.vaccine} /></td>
-                  <td className="px-3 py-2"><StatusBadge status={v.cold_status} /></td>
-                  <td className="px-3 py-2 text-xs">{(v.quantity / 1000000).toFixed(1)}M {v.unit}</td>
-                  <td className="px-3 py-2"><CostBar cost={v.cost_inr} /></td>
-                  <td className="px-3 py-2 text-xs">{v.manufacturer}</td>
-                  <td className="px-3 py-2 text-xs">{v.destination}</td>
-                  <td className="px-3 py-2 text-xs font-mono">{v.lot}</td>
-                  <td className="px-3 py-2 text-xs">{v.shelf_months}mo</td>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search pharma vaccine shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-teal-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Vaccine</th>
+                  <th className="p-3 text-left font-medium">Manufacturer</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
                 </tr>
-              ))}</tbody>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-teal-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.vaccine} /></td>
+                    <td className="p-3">{record.manufacturer}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['vials', 'doses', 'packs', 'lots'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </TabsContent>
-
-        <TabsContent value="analytics" className="pvs-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <ValueTile title="Avg Lot Value" value="₹4.8Cr" trend="+7.2% vs last quarter" />
-            <ValueTile title="Cold Compliance" value="98.4%" trend="+0.6% improved" />
-            <ValueTile title="WHO Prequal Share" value="85.2%" trend="+2.1% on target" />
-            <ValueTile title="Last Mile Delivery" value="93.6%" trend="+4.8% expanded" />
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Manufacturer Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={mfgChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {mfgChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="pvs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Value by Vaccine Category</CardTitle></CardHeader><CardContent><BarChart data={VACCINE_TYPES.map(t => ({ vaccine: t, total: allVaccine.filter(r => r.vaccine === t).reduce((s, r) => s + r.cost_inr, 0) / 10000000 }))} width={400} height={250}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="vaccine" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="total" fill="#0f766e" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="pvs-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Cold Chain Status Breakdown</CardTitle></CardHeader><CardContent><PieChart width={400} height={250}><Pie data={COLD_STATUS.map(s => ({ status: s, count: allVaccine.filter(v => v.cold_status === s).length }))} dataKey="count" nameKey="status" cx="50%" cy="50%" outerRadius={80} label>{COLD_STATUS.map((_, i) => <Cell key={i} fill={['#22c55e','#3b82f6','#ef4444','#eab308','#f97316','#9ca3af'][i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="pvs-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="pvs-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">eVIN Electronic Vaccine Intelligence Network</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Real-time eVIN temperature and stock monitoring across 28,000+ cold chain points in all 36 states and UTs. Automated SMS-based temperature alerts to 4,500+ Cold Chain Handlers (CCH) when vaccines breach 2-8°C threshold. IoT-enabled digital data loggers on 12,000+ ice-lined refrigerators (ILRs) and deep freezers with 15-minute polling interval. Integration with UNICEF Immunization Logistics Management System (iLM) for international vaccine procurement tracking. Real-time VVM (Vaccine Vial Monitor) stage monitoring with AI-predicted shelf life degradation models.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-teal-100 px-2 py-0.5 text-teal-800">Critical</span><span className="text-gray-400">Live</span></div></CardContent></Card>
-            <Card className="pvs-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">CoWIN Digital Vaccination Platform Integration</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>CoWIN beneficiary registration and vaccination certificate data feed for demand forecasting across 1,500+ districts. AI-powered vaccine demand prediction model using CoWIN vaccination trends, birth registry data, and disease outbreak surveillance. Automated stockout prediction 72 hours in advance enabling proactive redistribution from surplus to deficit districts. Integration with Ayushman Bharat Health ID for universal immunization coverage tracking achieving 95% DPT3 coverage target. Real-time adverse event following immunization (AEFI) reporting linked to specific vaccine lot numbers for pharmacovigilance.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-emerald-800">Operational</span><span className="text-gray-400">Q3 2026</span></div></CardContent></Card>
-            <Card className="pvs-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Mission Indradhanush Catch-Up Campaign Logistics</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Intensified Mission Indradhanush (IMI) 5.0 micro-planning logistics for 250+ high-focus districts with {'<'}40% routine immunization coverage. Mobile vaccination team deployment with GPS-tracked cold boxes serving 4,200+ hard-to-reach areas including tribal, border, and urban slum pockets. Pre-positioned vaccine buffer stocks at 850+ session sites with automated reorder triggers at 30% stock level. Integration with ASHA worker mobile app for real-time headcount and vaccine utilization reporting. Temperature excursion management with 15-minute response SLA and vaccine wastage tracking below 5% national target.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-green-800">Strategic</span><span className="text-gray-400">FY2027</span></div></CardContent></Card>
-            <Card className="pvs-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">AI Cold Chain Route Optimization & Predictive Excursion</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Machine learning route optimization model for vaccine delivery vehicles across 18,000+ delivery routes reducing cold chain breach risk by 40%. Predictive temperature excursion model using weather data, road conditions, and vehicle refrigeration unit performance data achieving 92% accuracy. Integration with India Meteorological Department (IMD) heatwave alerts triggering proactive cold chain rerouting during extreme temperature events. Automated ILR defrost scheduling and cold box ice pack conditioning cycle optimization reducing energy consumption by 18%. Digital twin simulation of national cold chain network for pandemic preparedness and surge capacity planning.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-cyan-100 px-2 py-0.5 text-cyan-800">Innovation</span><span className="text-gray-400">Pilot</span></div></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>India Vaccine Industry — 3.8 Billion Doses Annual Supply Chain</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Indian vaccine industry represents one of the most strategically critical pharmaceutical manufacturing sectors globally with India producing approximately three point eight billion vaccine doses annually supplying over sixty percent of the global vaccine demand through the United Nations procurement agencies UNICEF and the Pan American Health Organisation where the Indian vaccine manufacturing ecosystem is concentrated in three major pharmaceutical clusters including the Pune cluster centred on the Serum Institute of India which is the world's largest vaccine manufacturer by volume producing over one point five billion doses annually of vaccines including diphtheria pertussis tetanus measles mumps rubella polio and COVID-19 vaccines the Hyderabad cluster including Bharat Biotech Biological Evans and Indian Immunologicals producing a diverse portfolio of viral bacterial and recombinant vaccines and the Ahmedabad cluster including Zydus Cadila developing novel DNA and mRNA vaccine platforms where the Indian vaccine supply chain logistics operations are among the most temperature-sensitive and time-critical pharmaceutical distribution challenges in global healthcare requiring continuous cold chain maintenance between two and eight degrees Celsius from the manufacturing facility fill-finish line through primary packaging secondary packaging cold room storage refrigerated transport and last-mile delivery to over twenty-eight thousand immunisation cold chain points across India including primary health centres community health centres district hospitals and state vaccine stores where the vaccine cold chain infrastructure employs over sixty thousand cold chain equipment units including ice-lined refrigerators deep freezers cold boxes vaccine carriers and ice packs maintained by the Universal Immunisation Programme and the National Health Mission with continuous temperature monitoring using digital data loggers and GSM-based remote monitoring systems that provide real-time temperature visibility across the complete vaccine distribution network ensuring vaccine potency is maintained from manufacturer to administration point where the Serum Institute of India alone operates over one hundred refrigerated vehicles and three hundred cold storage warehouses across India creating the world's largest dedicated vaccine cold chain logistics network that delivers vaccines to immunisation points in every Indian state and union territory including remote and underserved areas in the northeastern hill states the Himalayan region and the island territories of Andaman Nicobar and Lakshadweep.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>WHO Prequalification & CDSCO Batch Release Framework</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The WHO prequalification status and CDSCO batch release certification framework establishes the dual quality assurance architecture for the Indian vaccine supply chain ensuring that all vaccine products meet both international quality standards for UN procurement and domestic regulatory requirements for distribution within the Indian national immunisation programme where the WHO prequalification process evaluates vaccine manufacturing facilities through comprehensive dossier review and on-site inspection by WHO assessment teams confirming compliance with WHO Good Manufacturing Practices WHO good laboratory practices and WHO prequalification standards for vaccine quality including potency safety purity and sterility testing conducted at the manufacturer quality control laboratory using validated test methods and reference standards established by the WHO Biological Reference Laboratory programme where the WHO prequalification status is the primary quality credential required for Indian vaccine manufacturers to supply vaccines through UNICEF the Global Alliance for Vaccines and Immunisation and other international procurement agencies that collectively purchase over two billion doses of vaccines annually from Indian manufacturers where the CDSCO Central Drugs Standard Control Organisation batch release testing conducted at the Central Drugs Laboratory Kasauli provides the statutory quality assurance mechanism for all vaccines distributed within India under the Drugs and Cosmetics Act requiring independent potency identity sterility and safety testing of each vaccine batch at the national control laboratory before CDSCO batch release certification authorising the vaccine batch for distribution and administration where the CDSCO batch release process requires submission of batch manufacturing records batch analysis certificates and representative batch samples by the vaccine manufacturer to the Central Drugs Laboratory where each batch undergoes independent laboratory testing confirming potency above the minimum specified limit identity matching the declared vaccine strain composition sterility confirming absence of bacterial or fungal contamination and safety confirming absence of residual host cell protein DNA and endotoxin above the specified maximum limits before the CDSCO grants the batch release certificate enabling distribution of the vaccine batch through the national immunisation programme cold chain network.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Vaccine Potency Assay & Vial Integrity Seal Standards</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The vaccine potency assay and vial integrity seal verification protocols form the critical quality control framework that ensures each vaccine dose delivered through the Indian immunisation supply chain maintains the minimum effective antigen content required to generate protective immune response in the vaccinated individual where the vaccine potency assay measures the biological activity of the vaccine antigen using in-vivo or in-vitro assay methods specified in the Indian Pharmacopoeia and WHO technical recommendation series for each vaccine type where the in-vivo potency test for live attenuated vaccines such as BCG measles and polio vaccines measures the ability of the vaccine virus to replicate in susceptible cell culture systems or animal models confirming minimum virus titre above the specified threshold typically expressed as plaque forming units per millilitre or colony forming units per millilitre ensuring sufficient live virus content in each vaccine dose to establish productive infection and generate protective immunity in the vaccinated individual while the in-vitro potency test for inactivated vaccines such as DPT hepatitis B and tetanus vaccines measures the antigen content using enzyme-linked immunosorbent assay or toxin neutralisation methods confirming minimum antigen concentration above the specified threshold expressed as international units per millilitre or micrograms per millilitre ensuring sufficient antigen content to generate protective antibody response after immunisation where the vaccine potency test acceptance criterion requires minimum potency of eighty percent of the declared potency value with lower confidence limit of ninety-five percent confirming that each tested vaccine batch contains sufficient antigen content to provide protective immunity throughout the vaccine shelf life period of typically twenty-four months for liquid vaccines and thirty-six months for lyophilised vaccines where the potency decline during shelf life storage must remain within the specified range when stored at the recommended Refrigerator temperature of two to eight degrees Celsius throughout the complete distribution cycle from manufacturing facility to administration point where the vial integrity seal verification test examines each vaccine vial for container closure system integrity confirming the rubber stopper aluminium seal and flip-off cap provide a hermetic seal that prevents microbial ingress and maintains vaccine sterility throughout the cold chain distribution period using vacuum decay testing or dye ingress testing methodology in accordance with ISO 8362-5 injectable container closure integrity standards confirming container closure integrity of one hundred percent of tested vials ensuring no compromised seals exist that could permit microbial contamination of the vaccine during cold chain storage and distribution.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Cold Chain 2-8 Deg Logistics & Endotoxin Testing</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The vaccine cold chain two to eight degree Celsius logistics and endotoxin testing framework for the Indian vaccine supply chain establishes the temperature-controlled distribution infrastructure and biological safety testing protocols that ensure vaccine products maintain their declared potency safety and sterility throughout the complete distribution cycle from manufacturing facility to immunisation point where the cold chain logistics specification maintains vaccine storage temperature within the range of two to eight degrees Celsius at all points in the distribution chain including the manufacturer cold room the regional vaccine store the district vaccine store the primary health centre refrigerator and the vaccine carrier used for last-mile outreach immunisation sessions where each cold chain node employs calibrated digital temperature loggers with continuous monitoring and GSM-based remote alert systems that trigger automatic notifications when storage temperature exceeds the specified range of two to eight degrees Celsius or when cold chain equipment experiences power failure malfunction or door-open events that could compromise the vaccine storage temperature where the Indian Universal Immunisation Programme operates over twenty-eight thousand cold chain points across the country connected by a network of state-operated refrigerated transport vehicles and contracted cold chain logistics providers maintaining continuous temperature-controlled vaccine movement from the six major vaccine manufacturing facilities in Pune Hyderabad Ahmedabad Mumbai Bangalore and Chennai to immunisation points in all twenty-eight states and eight union territories where the Refrigerator storage facilities at regional and district vaccine stores maintain backup power through diesel generators and solar-powered battery systems ensuring continuous cold chain operation during the frequent power supply interruptions that characterise the electrical infrastructure in many rural and semi-urban areas of India where the endotoxin testing framework measures the level of bacterial endotoxin using the Limulus Amebocyte Lysate test in accordance with the Indian Pharmacopoeia and USP eighty-five bacterial endotoxins test methodology confirming endotoxin content below the specified maximum limit for each vaccine type typically five endotoxin units per kilogram body weight for parenteral vaccines ensuring the vaccine product does not contain endotoxin contamination at levels that could cause pyrogenic reactions fever chills or hypotension in vaccine recipients particularly in paediatric patients who constitute the primary target population for the Indian national immunisation programme.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
     </div>
   )
 }
+
+
+
