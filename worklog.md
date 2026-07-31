@@ -1,5 +1,32 @@
 ---
 ---
+Task ID: R361
+Agent: Main Agent (Cron Loop)
+Task: R361 — Bagru Block Print Rajasthan (new) + Pharma Vaccine Supply overwrite
+
+Work Log:
+- Read worklog.md: R360 complete (commit f923c6a), 348 module files, 354 navItems, ~55,152 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R361)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: bagru-block-print-rajasthan-logistics CLEAR; pharma-vaccine-supply ALREADY EXISTS
+- CSS prefixes: brp-* CLEAR; pvs-* already exists (kept existing CSS for overwrite)
+- Icons: Droplets (Bagru, already in iconMap), Syringe (Pharma, already existed) — no new icons
+- Pharma Vaccine had 234 lines — completely overwritten to 253 lines with genRecords, correct field names
+
+- Created Bagru Block Print Rajasthan (brp-*, #c2410c deep orange): 253 lines, 8 products (Indigo Floral Saree, Red Black Bed Sheet, Syahi Gerua Yardage, Mor Peacock Panel, Tree of Life Scroll, Sola Singhar Runners, Jharokha Curtain Panel, Champak Flower Bolt), 8 artisans (Bagru Chhipa Mohalla, Sanganer Guild, Jaipur Heritage, Malviya Nagar Coop, Chaksu Traditional, Phagi Society, Jobner Village, Kishangarh Hand), 6 statuses, 4 insight cards (400-year Rajasthan Chhipa block printing heritage, indigo fermentation vat QC & Syahi black mud resist, Gerua alizarin mordant QC & Bagru motif registration, wash fastness testing & heritage market development)
+- Overwrote Pharma Vaccine Supply (pvs-* existing teal, 234→253 lines): 253 lines, 8 products (Covid mRNA, BCG, OPV Polio, DPT Triple, Hepatitis B, MMR, Pentavalent, Rotavirus), 8 manufacturers (Serum Institute, Bharat Biotech, Biological Evans, Zydus Cadila, Panacea Biotec, HLL Lifecare, Indian Immunologicals, Bio-Med), 6 statuses, 4 insight cards (3.8B doses India vaccine supply chain, WHO prequal & CDSCO batch release, potency assay & vial integrity standards, Refrigerator cold chain 2-8 deg & endotoxin testing)
+- Registered Bagru in 3 files (index.ts, page.tsx, app-store.ts); Pharma already registered
+- CSS: +10 lines (brp-* 5 rules + 3 keyframes); pvs-* CSS kept existing
+- TSC: 0 errors | Git pushed: commit 767a1bd
+
+Stage Summary:
+- 349 module files (1 new Bagru), 346 exports, 355 navItems, ~55,162 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Pharma Vaccine updated from 234 to 253 lines with genRecords, 60 records, correct field names
+- Remaining non-253 overwrite candidates: ~252 modules (7 still at 234 lines)
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue overwrite program targeting remaining 7 234-line modules
+---
 Task ID: R360
 Agent: Main Agent (Cron Loop)
 Task: R360 — Bagh Print Madhya Pradesh (new) + Seed Agri Input Logistics overwrite
