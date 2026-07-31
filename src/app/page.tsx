@@ -366,6 +366,7 @@ import RoganGujaratLogisticsView from "@/components/modules/rogan-gujarat-logist
 import SanjhiPaperCuttingUpLogisticsView from "@/components/modules/sanjhi-paper-cutting-up-logistics-view"
 import MeenakariUdaipurRajasthanLogisticsView from "@/components/modules/meenakari-udaipur-rajasthan-logistics-view"
 import DhokraChhattisgarhLogisticsView from "@/components/modules/dhokra-chhattisgarh-logistics-view"
+import BidriKarnatakaLogisticsView from "@/components/modules/bidri-karnataka-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -731,6 +732,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "sanjhi-paper-cutting-up-logistics": SanjhiPaperCuttingUpLogisticsView,
   "meenakari-udaipur-rajasthan-logistics": MeenakariUdaipurRajasthanLogisticsView,
   "dhokra-chhattisgarh-logistics": DhokraChhattisgarhLogisticsView,
+  "bidri-karnataka-logistics": BidriKarnatakaLogisticsView,
 }
 
 

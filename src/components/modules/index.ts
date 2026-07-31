@@ -357,3 +357,4 @@ export { default as RoganGujaratLogisticsView } from './rogan-gujarat-logistics-
 export { default as SanjhiPaperCuttingUpLogisticsView } from './sanjhi-paper-cutting-up-logistics-view'
 export { default as MeenakariUdaipurRajasthanLogisticsView } from './meenakari-udaipur-rajasthan-logistics-view'
 export { default as DhokraChhattisgarhLogisticsView } from './dhokra-chhattisgarh-logistics-view'
+export { default as BidriKarnatakaLogisticsView } from './bidri-karnataka-logistics-view'
