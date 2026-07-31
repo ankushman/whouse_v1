@@ -54945,3 +54945,24 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* ── Molela Terracotta Rajasthan Logistics (mol-*) ── */
+.mol-root { animation: molFadeIn 0.3s ease-out; }
+.mol-root * { box-sizing: border-box; }
+.mol-root table { border-collapse: collapse; }
+.mol-root tr:nth-child(even) { background: rgba(120, 53, 15, 0.04); }
+.mol-root .mol-badge { border-radius: 9999px; }
+.mol-root svg circle:last-child { transition: stroke-dashoffset 0.6s ease; }
+.mol-root .mol-insight p { max-height: 220px; overflow-y: auto; }
+@keyframes molFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes molPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes molRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

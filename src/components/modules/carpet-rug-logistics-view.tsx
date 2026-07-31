@@ -8,218 +8,214 @@ import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Cart
 
 const COLORS = ['#7c2d12', '#9a3412', '#c2410c', '#ea580c', '#f97316', '#431407', '#6b2f10', '#fff7ed']
 const PRODUCTS = ['Handknotted Silk 6x9', 'Kashmir Woollen Rug 5x8', 'Jute Braided Mat 8x10', 'Dhurrie Cotton Flatweave', 'Moroccan Tufted 4x6', 'Prayer Namaz Mat', 'Carpet Runner 2.5x12', 'Shaggy Polyester 6x6']
-const MANUFACTURERS = ['Mirzapur Bhadohi UP', 'Srinagar Kashmir', 'Agra Carpet Hub', 'Jaipur Handknotted', 'Panipat Haryana', 'Eluru Andhra Pradesh', 'Gurgaon NCR Workshop', 'Nepal Border Export']
-const STATUSES = ['GI Carpet Mark', 'IS 1541 Certified', 'In Transit Pallet', 'Warehouse Stacked', 'GST 12% Pending', 'Knot Density QC']
+const ARTISANS = ['Mirzapur Bhadohi UP', 'Srinagar Kashmir', 'Agra Carpet Hub', 'Jaipur Handknotted RJ', 'Panipat Haryana', 'Eluru Andhra Pradesh', 'Gurgaon NCR Workshop', 'Nepal Border Export']
+const STATUSES = ['GI Carpet Mark', 'IS 1541 Certified', 'Rolled Pallet Transit', 'Warehouse Stacked', 'GST 12% Pending', 'Knot Density QC']
 
 const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
 const ProductBadge = ({ name }: { name: string }) => (
-  <span className="crl-badge inline-block px-2 py-0.5 rounded text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
 )
 
 const StatusBadge = ({ status }: { status: string }) => (
-  <span className="crl-status inline-block px-2 py-0.5 rounded text-xs font-medium bg-orange-100 text-orange-800">{status}</span>
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-orange-100 text-orange-800">{status}</span>
 )
 
 const CostBar = ({ cost, max }: { cost: number; max: number }) => (
-  <div className="crl-costbar w-full bg-orange-100 rounded h-2"><div className="bg-orange-700 h-2 rounded" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+  <div className="w-24 h-2 bg-orange-200 rounded-full overflow-hidden"><div className="h-full bg-orange-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
 )
 
-const HealthRing = ({ value, label, size = 64 }: { value: number; label: string; size?: number }) => {
-  const r = (size - 8) / 2
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
   return (
-    <div className="crl-health-ring flex flex-col items-center">
-      <svg width={size} height={size}><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e2e8f0" strokeWidth={4} /><circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#7c2d12" strokeWidth={4} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" transform={`rotate(-90 ${size/2} ${size/2})`} /></svg>
-      <span className="text-xs font-semibold" style={{ color: COLORS[0] }}>{value}%</span>
-      <span className="text-[10px] text-gray-500">{label}</span>
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#fff7ed" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
     </div>
   )
 }
 
-const KpiTile = ({ label, value, icon }: { label: string; value: string; icon: string }) => (
-  <Card className="crl-kpi"><CardContent className="p-4"><div className="flex items-center gap-3"><span className="text-2xl">{icon}</span><div><p className="text-xs text-gray-500">{label}</p><p className="text-xl font-bold" style={{ color: COLORS[0] }}>{value}</p></div></div></CardContent></Card>
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
 )
 
 const ValueTile = ({ label, value }: { label: string; value: string }) => (
-  <Card className="crl-value"><CardContent className="p-4"><p className="text-xs text-gray-500">{label}</p><p className="text-lg font-semibold" style={{ color: COLORS[1] }}>{value}</p></CardContent></Card>
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
 )
 
-const genRecords = (startIdx: number) => Array.from({ length: 20 }, (_, i) => {
-  const idx = startIdx + i
-  const units = ['sqft', 'pieces', 'rolls', 'sets']
-  return {
-    id: `CRL-${String(idx).padStart(4, '0')}`, product: PRODUCTS[idx % 8], manufacturer: MANUFACTURERS[idx % 8],
-    status: STATUSES[idx % 6], qty: ri(50, 2000, 100 + idx * 60), unit: units[idx % 4],
-    cost: ri(25000, 800000, 40000 + idx * 22000), date: `2025-07-${String(ri(1, 28, idx % 28 + 1)).padStart(2, '0')}`,
-  }
-})
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `CRP-${String(offset + i + 1).padStart(4, '0')}`,
+    painter: ARTISANS[(offset + i) % ARTISANS.length], ware: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 20, ((offset + i) * 19) % 20) + 1,
+    cost: ri(8000, 120000, ((offset + i) * 14051) % 112000) + 8000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
+  }))
 
 const carpetRecords = [
-  { id: 'CRL-0001', product: 'Handknotted Silk 6x9', manufacturer: 'Mirzapur Bhadohi UP', status: 'GI Carpet Mark', qty: 200, unit: 'sqft', cost: 480000, date: '2025-07-02' },
-  { id: 'CRL-0002', product: 'Kashmir Woollen Rug 5x8', manufacturer: 'Srinagar Kashmir', status: 'IS 1541 Certified', qty: 150, unit: 'pieces', cost: 375000, date: '2025-07-04' },
-  { id: 'CRL-0003', product: 'Jute Braided Mat 8x10', manufacturer: 'Agra Carpet Hub', status: 'In Transit Pallet', qty: 800, unit: 'sqft', cost: 96000, date: '2025-07-05' },
-  { id: 'CRL-0004', product: 'Dhurrie Cotton Flatweave', manufacturer: 'Jaipur Handknotted', status: 'Warehouse Stacked', qty: 500, unit: 'pieces', cost: 125000, date: '2025-07-07' },
-  { id: 'CRL-0005', product: 'Moroccan Tufted 4x6', manufacturer: 'Panipat Haryana', status: 'GST 12% Pending', qty: 300, unit: 'pieces', cost: 90000, date: '2025-07-08' },
-  { id: 'CRL-0006', product: 'Prayer Namaz Mat', manufacturer: 'Eluru Andhra Pradesh', status: 'Knot Density QC', qty: 1200, unit: 'pieces', cost: 60000, date: '2025-07-10' },
-  { id: 'CRL-0007', product: 'Carpet Runner 2.5x12', manufacturer: 'Gurgaon NCR Workshop', status: 'GI Carpet Mark', qty: 100, unit: 'rolls', cost: 150000, date: '2025-07-11' },
-  { id: 'CRL-0008', product: 'Shaggy Polyester 6x6', manufacturer: 'Nepal Border Export', status: 'IS 1541 Certified', qty: 250, unit: 'pieces', cost: 62500, date: '2025-07-13' },
-  { id: 'CRL-0009', product: 'Handknotted Silk 6x9', manufacturer: 'Mirzapur Bhadohi UP', status: 'In Transit Pallet', qty: 180, unit: 'sqft', cost: 432000, date: '2025-07-14' },
-  { id: 'CRL-0010', product: 'Kashmir Woollen Rug 5x8', manufacturer: 'Srinagar Kashmir', status: 'Warehouse Stacked', qty: 130, unit: 'pieces', cost: 325000, date: '2025-07-15' },
-  { id: 'CRL-0011', product: 'Jute Braided Mat 8x10', manufacturer: 'Agra Carpet Hub', status: 'GST 12% Pending', qty: 750, unit: 'sqft', cost: 90000, date: '2025-07-16' },
-  { id: 'CRL-0012', product: 'Dhurrie Cotton Flatweave', manufacturer: 'Jaipur Handknotted', status: 'Knot Density QC', qty: 480, unit: 'pieces', cost: 120000, date: '2025-07-17' },
-  { id: 'CRL-0013', product: 'Moroccan Tufted 4x6', manufacturer: 'Panipat Haryana', status: 'GI Carpet Mark', qty: 280, unit: 'pieces', cost: 84000, date: '2025-07-18' },
-  { id: 'CRL-0014', product: 'Prayer Namaz Mat', manufacturer: 'Eluru Andhra Pradesh', status: 'IS 1541 Certified', qty: 1100, unit: 'pieces', cost: 55000, date: '2025-07-19' },
-  { id: 'CRL-0015', product: 'Carpet Runner 2.5x12', manufacturer: 'Gurgaon NCR Workshop', status: 'In Transit Pallet', qty: 90, unit: 'rolls', cost: 135000, date: '2025-07-20' },
-  { id: 'CRL-0016', product: 'Shaggy Polyester 6x6', manufacturer: 'Nepal Border Export', status: 'Warehouse Stacked', qty: 230, unit: 'pieces', cost: 57500, date: '2025-07-21' },
-  { id: 'CRL-0017', product: 'Handknotted Silk 6x9', manufacturer: 'Mirzapur Bhadohi UP', status: 'GST 12% Pending', qty: 160, unit: 'sqft', cost: 384000, date: '2025-07-22' },
-  { id: 'CRL-0018', product: 'Kashmir Woollen Rug 5x8', manufacturer: 'Srinagar Kashmir', status: 'Knot Density QC', qty: 120, unit: 'pieces', cost: 300000, date: '2025-07-23' },
-  { id: 'CRL-0019', product: 'Jute Braided Mat 8x10', manufacturer: 'Agra Carpet Hub', status: 'GI Carpet Mark', qty: 700, unit: 'sqft', cost: 84000, date: '2025-07-24' },
-  { id: 'CRL-0020', product: 'Dhurrie Cotton Flatweave', manufacturer: 'Jaipur Handknotted', status: 'IS 1541 Certified', qty: 450, unit: 'pieces', cost: 112500, date: '2025-07-25' },
+  { id: 'CRP-0001', painter: 'Mirzapur Bhadohi UP', ware: 'Handknotted Silk 6x9', status: 'GI Carpet Mark', qty: 4, cost: 115000, date: '2024-01-17' },
+  { id: 'CRP-0002', painter: 'Srinagar Kashmir', ware: 'Kashmir Woollen Rug 5x8', status: 'IS 1541 Certified', qty: 6, cost: 88000, date: '2024-01-30' },
+  { id: 'CRP-0003', painter: 'Agra Carpet Hub', ware: 'Jute Braided Mat 8x10', status: 'Rolled Pallet Transit', qty: 8, cost: 24000, date: '2024-02-12' },
+  { id: 'CRP-0004', painter: 'Jaipur Handknotted RJ', ware: 'Dhurrie Cotton Flatweave', status: 'Warehouse Stacked', qty: 10, cost: 18000, date: '2024-02-24' },
+  { id: 'CRP-0005', painter: 'Panipat Haryana', ware: 'Moroccan Tufted 4x6', status: 'GST 12% Pending', qty: 5, cost: 52000, date: '2024-03-09' },
+  { id: 'CRP-0006', painter: 'Eluru Andhra Pradesh', ware: 'Prayer Namaz Mat', qty: 12, cost: 12000, date: '2024-03-22', status: 'Knot Density QC' },
+  { id: 'CRP-0007', painter: 'Gurgaon NCR Workshop', ware: 'Carpet Runner 2.5x12', status: 'GI Carpet Mark', qty: 3, cost: 68000, date: '2024-04-04' },
+  { id: 'CRP-0008', painter: 'Nepal Border Export', ware: 'Shaggy Polyester 6x6', status: 'IS 1541 Certified', qty: 4, cost: 42000, date: '2024-04-17' },
+  { id: 'CRP-0009', painter: 'Mirzapur Bhadohi UP', ware: 'Handknotted Silk 6x9', status: 'Rolled Pallet Transit', qty: 3, cost: 108000, date: '2024-04-30' },
+  { id: 'CRP-0010', painter: 'Srinagar Kashmir', ware: 'Kashmir Woollen Rug 5x8', status: 'Warehouse Stacked', qty: 5, cost: 92000, date: '2024-05-12' },
+  { id: 'CRP-0011', painter: 'Agra Carpet Hub', ware: 'Jute Braided Mat 8x10', status: 'GST 12% Pending', qty: 8, cost: 22000, date: '2024-05-24' },
+  { id: 'CRP-0012', painter: 'Jaipur Handknotted RJ', ware: 'Dhurrie Cotton Flatweave', status: 'Knot Density QC', qty: 10, cost: 16000, date: '2024-06-06' },
+  { id: 'CRP-0013', painter: 'Panipat Haryana', ware: 'Moroccan Tufted 4x6', status: 'GI Carpet Mark', qty: 4, cost: 58000, date: '2024-06-18' },
+  { id: 'CRP-0014', painter: 'Eluru Andhra Pradesh', ware: 'Prayer Namaz Mat', status: 'IS 1541 Certified', qty: 15, cost: 10000, date: '2024-06-30' },
+  { id: 'CRP-0015', painter: 'Gurgaon NCR Workshop', ware: 'Carpet Runner 2.5x12', status: 'Rolled Pallet Transit', qty: 3, cost: 64000, date: '2024-07-12' },
+  { id: 'CRP-0016', painter: 'Nepal Border Export', ware: 'Shaggy Polyester 6x6', status: 'Warehouse Stacked', qty: 4, cost: 40000, date: '2024-07-24' },
+  { id: 'CRP-0017', painter: 'Mirzapur Bhadohi UP', ware: 'Handknotted Silk 6x9', status: 'GST 12% Pending', qty: 2, cost: 120000, date: '2024-08-06' },
+  { id: 'CRP-0018', painter: 'Srinagar Kashmir', ware: 'Kashmir Woollen Rug 5x8', status: 'Knot Density QC', qty: 6, cost: 84000, date: '2024-08-18' },
+  { id: 'CRP-0019', painter: 'Agra Carpet Hub', ware: 'Jute Braided Mat 8x10', status: 'GI Carpet Mark', qty: 8, cost: 26000, date: '2024-08-30' },
+  { id: 'CRP-0020', painter: 'Jaipur Handknotted RJ', ware: 'Dhurrie Cotton Flatweave', status: 'IS 1541 Certified', qty: 10, cost: 20000, date: '2024-09-11' },
 ]
-
-
 
 export default function CarpetRugLogisticsView() {
   const [tab, setTab] = useState('dashboard')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
+
   const allRecords = [...carpetRecords, ...genRecords(21), ...genRecords(41)]
 
   const filteredRecords = useMemo(() => {
-    return allRecords.filter(r => {
-      if (searchQuery && !r.id.toLowerCase().includes(searchQuery.toLowerCase()) && !r.product.toLowerCase().includes(searchQuery.toLowerCase())) return false
-      return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string))
-    })
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.ware.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
   }, [searchQuery, activeFilters, allRecords])
 
   const filterGroups = [
-    { key: 'product', label: 'Product', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.product === p).length })) },
-    { key: 'status', label: 'Status', options: STATUSES.map(s => ({ value: s, label: s, count: allRecords.filter(r => r.status === s).length })) },
+    { key: 'ware', label: 'Ware', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.ware === p).length })) },
+    { key: 'painter', label: 'Painter', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.painter === p).length })) },
   ]
 
-  const trendData = PRODUCTS.slice(0, 6).map((p, i) => ({ name: p.split(' ').slice(0, 2).join(' '), shipments: 8 + i * 5, cost: 60000 + i * 35000 }))
-  const mfgChart = MANUFACTURERS.slice(0, 6).map((m, i) => ({ name: m.split(' ').slice(0, 2).join(' '), volume: 100 + i * 80, revenue: 7 + i * 5 }))
-  const statusPie = STATUSES.map((s, i) => ({ name: s.split(' ').slice(0, 2).join(' '), value: 6 + i * 3 }))
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 24, allRecords.length * 0.11 + i * 3) }))
+  const artisanChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.painter === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
   const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
-    <div className="crl-root space-y-6 p-6">
+    <div className="crp-root space-y-6 p-6">
       <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Carpet & Rug' }]} />
-      <PageHeader title="Carpet & Rug Logistics" description="Track handknotted silk carpets, Kashmir woollen rugs, dhurries, and tufted floor coverings from India's carpet capitals to global markets" />
-      <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="bg-orange-50">
+      <PageHeader title="Carpet Rug Logistics" description="Indian carpet and rug supply chain with IS 1541 certification, knot density QC, rolled pallet transit packaging, GI Carpet Mark, and GST compliance across 8 weaving centres in Bhadohi, Kashmir, Agra, Jaipur, and Panipat" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-orange-100">
           <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
           <TabsTrigger value="shipments">Shipments</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
         <TabsContent value="dashboard" className="space-y-6">
           <div className="grid grid-cols-4 gap-4">
-            <KpiTile icon="🧶" label="Total Shipments" value={String(allRecords.length)} />
-            <KpiTile icon="🏭" label="Manufacturing Clusters" value={String(MANUFACTURERS.length)} />
-            <KpiTile icon="💰" label="Total Value" value={`₹${(allRecords.reduce((a, r) => a + r.cost, 0) / 100000).toFixed(1)}L`} />
-            <KpiTile icon="📈" label="Avg Cost" value={`₹${Math.round(allRecords.reduce((a, r) => a + r.cost, 0) / allRecords.length).toLocaleString()}`} />
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Active Ware" value={PRODUCTS.length} />
+            <KpiTile label="Weaving Centres" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-
-          <Card className="crl-health-grid">
-            <CardHeader><CardTitle>Operational Health</CardTitle></CardHeader>
-            <CardContent>
-              <div className="flex justify-around">
-                <HealthRing value={87} label="GI Mark" />
-                <HealthRing value={80} label="IS 1541" />
-                <HealthRing value={74} label="Pallet" />
-                <HealthRing value={90} label="Stack" />
-                <HealthRing value={85} label="GST 12%" />
-                <HealthRing value={78} label="Knot QC" />
-              </div>
-            </CardContent>
-          </Card>
-
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="GI Tag" value={92} />
+            <HealthRing label="IS 1541" value={88} />
+            <HealthRing label="Rolled" value={85} />
+            <HealthRing label="Stacked" value={80} />
+            <HealthRing label="GST" value={76} />
+            <HealthRing label="Knot" value={90} />
+          </div>
           <div className="grid grid-cols-4 gap-4">
-            <ValueTile label="Silk Carpet Stock" value="540 sqft" />
-            <ValueTile label="Kashmir Rugs" value="520 pieces" />
-            <ValueTile label="In Pallet Transit" value="14 Lots" />
-            <ValueTile label="Export Certified" value="32 Batches" />
+            <ValueTile label="Weaver Families" value="2000+" />
+            <ValueTile label="Tradition" value="Since 16th C" />
+            <ValueTile label="Export Markets" value="40+ Countries" />
+            <ValueTile label="Annual Revenue" value="₹85 Crore" />
           </div>
         </TabsContent>
-
-        <TabsContent value="shipments" className="space-y-4">
-          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={(key, value) => setActiveFilters(p => ({ ...p, [key]: p[key]?.includes(value) ? p[key].filter((v: string) => v !== value) : [...(p[key] || []), value] }))} onClearAllFilters={() => setActiveFilters({})} totalItems={allRecords.length} filteredCount={filteredRecords.length} onRefresh={() => {}} placeholder="Search by ID, product, manufacturer, or lot..." />
-
-          <Card className="crl-table-card">
-            <CardContent className="p-0">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b bg-orange-50">
-                    <th className="p-3 text-left">ID</th>
-                    <th className="p-3 text-left">Product</th>
-                    <th className="p-3 text-left">Manufacturer</th>
-                    <th className="p-3 text-left">Status</th>
-                    <th className="p-3 text-right">Qty</th>
-                    <th className="p-3 text-right">Cost</th>
-                    <th className="p-3 text-left">Cost Bar</th>
-                    <th className="p-3 text-left">Date</th>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search carpet rug shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-orange-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Ware</th>
+                  <th className="p-3 text-left font-medium">Painter</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-orange-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.ware} /></td>
+                    <td className="p-3">{record.painter}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['pcs', 'sets', 'units', 'pairs'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filteredRecords.slice(0, 15).map(r => (
-                    <tr key={r.id} className="border-b hover:bg-orange-50/50">
-                      <td className="p-3 font-mono text-xs">{r.id}</td>
-                      <td className="p-3"><ProductBadge name={r.product} /></td>
-                      <td className="p-3 text-xs">{r.manufacturer}</td>
-                      <td className="p-3"><StatusBadge status={r.status} /></td>
-                      <td className="p-3 text-right">{r.qty} {r.unit}</td>
-                      <td className="p-3 text-right">₹{r.cost.toLocaleString()}</td>
-                      <td className="p-3 w-28"><CostBar cost={r.cost} max={maxCost} /></td>
-                      <td className="p-3 text-xs text-gray-500">{r.date}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </TabsContent>
-
         <TabsContent value="analytics" className="space-y-6">
           <div className="grid grid-cols-2 gap-6">
             <Card>
               <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
               <CardContent>
-                <LineChart width={500} height={250} data={trendData}>
+                <LineChart width={500} height={300} data={trendData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={11} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="month" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
                   <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
-                  <Line type="monotone" dataKey="cost" stroke={COLORS[3]} strokeWidth={2} />
                 </LineChart>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader><CardTitle>Cluster Volume</CardTitle></CardHeader>
+              <CardHeader><CardTitle>Artisan Volume</CardTitle></CardHeader>
               <CardContent>
-                <BarChart width={500} height={250} data={mfgChart}>
+                <BarChart width={500} height={300} data={artisanChart}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" fontSize={10} />
-                  <YAxis fontSize={11} />
+                  <XAxis dataKey="name" />
+                  <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="volume" fill={COLORS[0]} />
-                  <Bar dataKey="revenue" fill={COLORS[3]} />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {artisanChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
                 </BarChart>
               </CardContent>
             </Card>
           </div>
-
           <Card>
             <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
             <CardContent>
               <PieChart width={500} height={300}>
-                <Pie data={statusPie} cx={200} cy={150} outerRadius={100} dataKey="value" label>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
                   {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
                 <Tooltip />
@@ -228,16 +224,30 @@ export default function CarpetRugLogisticsView() {
             </CardContent>
           </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <Card className="crl-insight"><CardHeader><CardTitle>Bhadohi-Mirzapur Carpet Capital</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Bhadohi in Uttar Pradesh is the world's largest carpet manufacturing cluster, producing 90% of India's carpets across 500+ units employing 2.5 lakh artisans. The cluster exports ₹5,200 crore worth of handknotted and tufted carpets annually to USA (35%), Germany (15%), and UK (10%). A single 9x12-foot handknotted silk carpet takes 4-6 months with 400-1,000 knots per square inch, commanding ₹5-20 lakh per piece.</p></CardContent></Card>
-            <Card className="crl-insight"><CardHeader><CardTitle>Kashmir Silk Carpet Tradition</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Kashmir silk carpets are renowned for Persian-inspired designs with 2,000-4,000 knots per square inch using pure mulberry silk on cotton warp. A single 6x9-foot carpet employs 3-4 weavers for 12-18 months. The ₹800 crore Kashmir carpet industry supports 40,000 artisan families. GI registration since 2008 protects against counterfeit imports. Walnut-tree dye extraction produces signature red and navy colourfast pigments.</p></CardContent></Card>
-            <Card className="crl-insight"><CardHeader><CardTitle>Carpet Storage & Moth Prevention</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">IS 1541 classifies carpets into handknotted, handtufted, and flatweave categories with specific storage norms. Wool carpets require naphthalene or cedar-chip moth repellent sachets every 2 sqm. Warehouse stacking limited to 8-roll height with carpet-core PVC tubes preventing crush damage. Silk carpets stored in nitrogen-flushed containers prevent oxidation yellowing. Transit packaging requires multi-wall corrugated boxes with 200 GSM inner lining.</p></CardContent></Card>
-            <Card className="crl-insight"><CardHeader><CardTitle>AI Knot Count & Design Verification</CardTitle></CardHeader><CardContent><p className="text-sm text-gray-600">Digital knot-counting cameras achieve 99.2% accuracy by analyzing carpet back patterns at 200x magnification. AI design-matching algorithms compare finished carpet patterns against CAD templates with pixel-level precision. Blockchain-based provenance tracking from Bhadohi looms to US retail floors ensures authenticity. Predictive demand analytics using seasonal colour-trend data from Instagram and Pinterest optimize production planning.</p></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Indian Carpet Weaving — 500-Year Bhadohi Kashmir Mirzapur Handknotted Heritage</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Indian carpet weaving represents one of the most economically significant and culturally celebrated textile handicraft traditions of the Indian subcontinent having been continuously practised for over five centuries across the major carpet weaving centres of Bhadohi and Mirzapur in Uttar Pradesh, Srinagar and Anantnag in Kashmir, Agra in Uttar Pradesh, Jaipur in Rajasthan, Panipat in Haryana, Eluru in Andhra Pradesh, and the Nepal-India border production clusters where hereditary weaving communities create extraordinarily diverse handknotted, hand-tufted, flatweave, and pile-woven carpets and rugs serving both the premium international luxury carpet market and the domestic Indian home furnishing market where Indian carpets command significant global market share across all product categories from the finest Kashmir silk handknotted carpets to the mass-market Panipat tufted and woven rugs used in residential and commercial flooring applications throughout India and exported to over forty countries worldwide. The Indian carpet weaving tradition is distinguished by its extraordinary regional diversity where the Kashmir carpet tradition produces the finest quality silk and woollen handknotted carpets using the traditional Persian Senneh and Jufti knot techniques on vertical looms creating carpets with knot densities exceeding 400 knots per square inch in the premium silk carpet category producing intricate floral medallion, tree-of-life, and hunting scene designs in silk pile on cotton or silk foundations that represent the pinnacle of Indian handknotted carpet craftsmanship requiring individual carpet weaving times of 12 to 24 months for a single 6 by 9 foot silk carpet, while the Bhadohi-Mirzapur carpet cluster produces the largest volume of Indian handknotted and hand-tufted woollen carpets serving the mid-range and export market categories where the traditional Indo-Nepalese knot technique and the modern hand-tufted technique produce carpets with knot densities ranging from 60 to 200 knots per square inch in a wide range of Persian, Turkish, and contemporary geometric designs providing the primary carpet export production base of the Indian carpet industry accounting for over 80 percent of total Indian carpet export volume. The Bhadohi-Mirzapur carpet cluster in Uttar Pradesh is the largest carpet production concentration in the world employing over two hundred thousand weaver families across approximately five hundred villages in the Bhadohi, Mirzapur, Varanasi, and Jaunpur districts where the carpet weaving tradition has been the primary economic activity for over five hundred years creating an extraordinarily concentrated production ecosystem with complete supply chain integration from raw wool and silk sourcing through dyeing, spinning, weaving, finishing, and export logistics that produces carpets for all major international market segments from the premium handknotted category through the mass-market hand-tufted and machine-woven categories.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>IS 1541 Carpet Standards & Knot Density QC</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The IS 1541 standard for handknotted carpets and rugs establishes India's comprehensive quality certification framework for the handknotted carpet industry specifying requirements for raw material quality including wool fibre fineness and tensile strength, silk yarn denier and lustre rating, cotton foundation yarn quality, dye colourfastness ratings, knot density per square inch measured by standardised pick glass counting methodology, pile height uniformity across the carpet surface, selvedge construction quality, dimensional stability after wet cleaning, and overall carpet quality grading parameters that collectively distinguish certified Indian handknotted carpets from machine-woven and power-loom reproductions that increasingly compete with handknotted products in both domestic and international markets. The knot density requirements for IS 1541 Grade A certification mandate minimum 200 knots per square inch measured by counting knots within a one-inch by one-inch area at five randomly selected points across the carpet surface using a standardised pick glass and counting lens in accordance with IS 1541 Annexure A testing methodology where the measured knot density at all five test points must fall within plus or minus 10 percent of the declared knot density for the product grade ensuring consistent weaving quality across the entire carpet surface without localised areas of reduced knot density that indicate quality defects or substandard weaving technique that would compromise the carpet quality, durability, and aesthetic appearance where consistent knot density is the primary quality indicator of handknotted carpet craftsmanship reflecting the skill and precision of the individual weaver in maintaining uniform knot spacing and tension across the entire carpet surface during the weaving process that may extend over 12 to 24 months for premium quality carpets. The dye colourfastness requirements for Grade A certification mandate minimum colourfastness rating of Grade 4 on the ISO 105-C06 wash fastness scale and Grade 4 on the ISO 105-B02 light fastness scale measured by standardised colourfastness testing methodology ensuring the carpet dyes maintain their colour intensity and do not exhibit significant fading, bleeding, or colour transfer under normal use and cleaning conditions where dye quality is a critical quality parameter for handknotted carpets where the premium pricing of handknotted products relative to machine-woven alternatives is substantially dependent on the dye quality and colourfastness performance as carpets with poor dye colourfastness exhibit colour fading and bleeding during use significantly reducing the aesthetic value and service life of the finished carpet product.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Rolled Pallet Transit Packaging for Carpet & Rug Logistics</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Rolled pallet transit packaging with moisture-barrier outer wrapping and industrial strapping has been specifically developed for the Indian carpet and rug logistics supply chain to protect the diverse range of handknotted, hand-tufted, and flatweave carpet products from the physical, environmental, and contamination hazards encountered during transit from the Bhadohi, Mirzapur, Kashmir, Agra, Jaipur, and Panipat weaving centres to domestic distribution hubs across India and international export destinations serving over forty countries worldwide where Indian carpets are exported as containerised shipments through the major Indian port gateways of Nhava Sheva, Mundra, and Chennai connecting the carpet production centres to the global carpet market through established sea freight logistics corridors. The packaging specification utilises a rolled carpet packaging technique where each carpet is tightly rolled around a rigid cardboard core tube with minimum diameter of 10 centimetres providing structural support for the rolled carpet and enabling efficient handling and stacking during warehouse storage and transit operations where the rolled format minimises the carpet footprint and maximises container utilisation efficiency in export shipments achieving average container loading densities of 2500 to 3500 square metres of carpet per standard 20-foot container depending on carpet thickness and pile height. Each carpet is inspected under standardised D65 daylight illumination verifying knot density meets the IS 1541 Grade A parameters using the pick glass counting method at five randomly selected points confirming uniform knot density across the entire carpet surface, pile height uniformity verified through digital thickness gauge measurement at eight reference points confirming pile height falls within the specified tolerance parameters for the product grade ensuring consistent surface texture and appearance across the carpet surface, selvedge construction quality verified through visual inspection and manual tension testing confirming the selvedge edges are securely bound and possess adequate tensile strength to prevent selvedge unravelling during the rolling and handling operations, and dimensional accuracy confirmed through calibrated tape measurement at three width and three length reference points ensuring the finished carpet dimensions fall within the plus or minus 2 percent tolerance of the specified finished dimensions. The inspected carpet is rolled tightly around the core tube with the pile surface facing inward to protect the pile from abrasion during handling and transit, wrapped in polyethylene moisture-barrier film providing primary environmental protection against humidity and moisture exposure during the transit cycle, wrapped in protective Kraft paper providing secondary cushioning and abrasion protection, and finally secured with polyester strapping at three points along the rolled length providing structural stability during handling and transit operations where the strapped roll is placed on wooden pallets for containerised export shipments enabling efficient fork-lift handling and secure stacking within the shipping container.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>AI Knot Analysis & Indian Carpet Heritage Market Development</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Artificial intelligence and machine vision technologies are being progressively deployed to authenticate Indian handknotted carpets and verify the knot construction characteristics, pile surface quality parameters, and design execution accuracy that distinguish genuine handknotted carpets produced by traditional Indian weaving communities from machine-woven and power-loom reproductions that replicate the visual appearance of handknotted carpet designs at significantly lower production costs while lacking the distinctive material quality, structural characteristics, and handcraft authenticity of genuine handknotted products. The AI authentication system for Indian carpets employs high-resolution macro imaging at 200 dots per inch combined with structured light three-dimensional surface profiling to capture the complete surface morphology and structural characteristics of finished carpet products analysing the knot construction signatures where handknotted carpets on traditional looms produce distinctive surface characteristics including individual knot asymmetry reflecting the manual knot-tying technique of the weaver, minor row spacing irregularities reflecting the hand-beat weft insertion technique, and natural pile height variation across the carpet surface reflecting the manual pile trimming process that differs from the mechanically uniform surface texture of machine-woven carpets where the automated jacquard and power-loom mechanisms produce perfectly regular knot patterns, row spacing, and pile height that lack the characteristic handcrafted surface variations of genuine handknotted products. The AI-powered Indian carpet heritage market development platform connects the traditional weaving communities in Bhadohi, Mirzapur, Kashmir, and the other major carpet weaving centres directly with institutional buyers including the Carpet Export Promotion Council, state government handicraft emporiums, international carpet wholesalers and retailers in the United States, Germany, United Kingdom, Saudi Arabia, and Australia, premium interior design firms seeking authentic Indian handknotted carpets for luxury residential and hospitality projects, and online carpet marketplaces where the GI Carpet Mark and IS 1541 certification collectively provide the quality assurance and provenance documentation framework needed to establish premium market positioning for authentic Indian handknotted carpets in both domestic and international carpet markets where growing consumer awareness of handknotted craftsmanship quality and preference for sustainable artisanal products creates significant market opportunities for genuine Indian handknotted carpet products from the traditional weaving communities of Bhadohi, Mirzapur, Kashmir, and the other established Indian carpet weaving centres.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
     </div>
   )
 }
+
+
+
