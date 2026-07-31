@@ -345,3 +345,4 @@ export { default as MolelaTerracottaRajasthanLogisticsView } from './molela-terr
 export { default as SungudiSareeTamilNaduLogisticsView } from './sungudi-saree-tamil-nadu-logistics-view'
 export { default as PembarthiMetalCraftTelanganaLogisticsView } from './pembarthi-metal-craft-telangana-logistics-view'
 export { default as RoganArtGujaratLogisticsView } from './rogan-art-gujarat-logistics-view'
+export { default as PichwaiRajasthanLogisticsView } from './pichwai-rajasthan-logistics-view'
