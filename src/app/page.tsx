@@ -346,6 +346,7 @@ import ChambaRumalEmbroideryHimachalPradeshLogisticsView from "@/components/modu
 import ThangkaPaintingLadakhLogisticsView from "@/components/modules/thangka-painting-ladakh-logistics-view"
 import KolamFloorArtTamilNaduLogisticsView from "@/components/modules/kolam-floor-art-tamil-nadu-logistics-view"
 import KinhalWoodcraftKarnatakaLogisticsView from "@/components/modules/kinhal-woodcraft-karnataka-logistics-view"
+import SikkiGrassWeavingBiharLogisticsView from "@/components/modules/sikki-grass-weaving-bihar-logistics-view"
 import AipanArtAlmoraLogisticsView from "@/components/modules/aipan-art-almora-logistics-view"
 import KinnauriShawlHimachalPradeshLogisticsView from "@/components/modules/kinnauri-shawl-himachal-pradesh-logistics-view"
 import BastarIronCraftChhattisgarhLogisticsView from "@/components/modules/bastar-iron-craft-chhattisgarh-logistics-view"
@@ -697,6 +698,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "thangka-painting-ladakh-logistics": ThangkaPaintingLadakhLogisticsView,
   "kolam-floor-art-tamil-nadu-logistics": KolamFloorArtTamilNaduLogisticsView,
   "kinhal-woodcraft-karnataka-logistics": KinhalWoodcraftKarnatakaLogisticsView,
+  "sikki-grass-weaving-bihar-logistics": SikkiGrassWeavingBiharLogisticsView,
   "aipan-art-almora-logistics": AipanArtAlmoraLogisticsView,
   "kinnauri-shawl-himachal-pradesh-logistics": KinnauriShawlHimachalPradeshLogisticsView,
   "bastar-iron-craft-chhattisgarh-logistics": BastarIronCraftChhattisgarhLogisticsView,

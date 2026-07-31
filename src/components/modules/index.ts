@@ -337,6 +337,7 @@ export { default as ChambaRumalEmbroideryHimachalPradeshLogisticsView } from './
 export { default as ThangkaPaintingLadakhLogisticsView } from './thangka-painting-ladakh-logistics-view'
 export { default as KolamFloorArtTamilNaduLogisticsView } from './kolam-floor-art-tamil-nadu-logistics-view'
 export { default as KinhalWoodcraftKarnatakaLogisticsView } from './kinhal-woodcraft-karnataka-logistics-view'
+export { default as SikkiGrassWeavingBiharLogisticsView } from './sikki-grass-weaving-bihar-logistics-view'
 export { default as AipanArtAlmoraLogisticsView } from './aipan-art-almora-logistics-view'
 export { default as KinnauriShawlHimachalPradeshLogisticsView } from './kinnauri-shawl-himachal-pradesh-logistics-view'
 export { default as BastarIronCraftChhattisgarhLogisticsView } from './bastar-iron-craft-chhattisgarh-logistics-view'
