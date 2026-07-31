@@ -54424,3 +54424,54 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+/* === Kashmir Sozni Embroidery Logistics (kse-*) === */
+.kse-root {
+  --kse-bg: #f0fdf4;
+  --kse-fg: #1a4d2e;
+  --kse-accent: #2d6a4f;
+  --kse-muted: #bbf7d0;
+  background: linear-gradient(135deg, var(--kse-bg) 0%, #ecfdf5 100%);
+  min-height: 100vh;
+  animation: kseFadeIn 0.5s ease-out;
+}
+.kse-root:hover {
+  animation: ksePulse 2s ease-in-out infinite;
+}
+@keyframes kseFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ksePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(26,77,46,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(26,77,46,0.04); }
+}
+@keyframes kseRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* === Madhubani Painting Bihar Logistics (mbi-*) === */
+.mbi-root {
+  --mbi-bg: #faf5ff;
+  --mbi-fg: #6b21a8;
+  --mbi-accent: #7e22ce;
+  --mbi-muted: #e9d5ff;
+  background: linear-gradient(135deg, var(--mbi-bg) 0%, #f3e8ff 100%);
+  min-height: 100vh;
+  animation: mbiFadeIn 0.5s ease-out;
+}
+.mbi-root:hover {
+  animation: mbiPulse 2s ease-in-out infinite;
+}
+@keyframes mbiFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes mbiPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(107,33,168,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(107,33,168,0.04); }
+}
+@keyframes mbiRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

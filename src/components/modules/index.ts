@@ -322,3 +322,4 @@ export { default as PochampallyIkatTelanganaLogisticsView } from './pochampally-
 export { default as KutchBandhaniGujaratLogisticsView } from './kutch-bandhani-gujarat-logistics-view'
 export { default as MiniaturePaintingRajasthanLogisticsView } from './miniature-painting-rajasthan-logistics-view'
 export { default as OdishaPipliAppliqueLogisticsView } from './odisha-pipli-applique-logistics-view'
+export { default as KashmirSozniEmbroideryLogisticsView } from './kashmir-sozni-embroidery-logistics-view'
