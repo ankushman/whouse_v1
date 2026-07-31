@@ -1,181 +1,253 @@
-"use client"
-import { useState, useMemo } from "react"
-import { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { Link, Zap, AlertTriangle, CheckCircle2, BarChart3, TrendingUp, TrendingDown, MapPin, Package, Timer, ArrowUpDown, Radio, Star, ShieldCheck, Award, Users, DollarSign, Handshake, Target } from "lucide-react"
-import { PageHeader } from "@/components/shared/page-header"
-import { SearchFilterToolbar } from "@/components/shared/search-filter-toolbar"
-import { ModuleBreadcrumb } from "@/components/shared/module-breadcrumb"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
+import React, { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const PARTNER_TYPE = ["warehousing", "transport", "last_mile", "cold_chain", "cross_dock", "returns", "customs", "fulfillment"] as const
-const TYPE_EMOJI: Record<string, string> = { warehousing: "\U0001f3e2", transport: "\U0001f69a", last_mile: "\U0001f3ce\ufe0f", cold_chain: "\u2744\ufe0f", cross_dock: "\u27a1\ufe0f", returns: "\U0001f504", customs: "\U0001f6e1\ufe0f", fulfillment: "\U0001f4e6" }
-const PARTNER_STATUS = ["active", "probation", "suspended", "under_review", "inactive"] as const
-const SLA_LEVEL = ["gold", "silver", "bronze", "standard"] as const
-const CITIES = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", "Ahmedabad"] as const
-const MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
-const TH = { pri: "#ec4899", sec: "#f59e0b", ok: "#059669", warn: "#d97706", err: "#dc2626" }
-const PC = ["#ec4899", "#f59e0b", "#059669", "#dc2626", "#8b5cf6", "#06b6d4", "#14b8a6", "#3b82f6"]
+const COLORS = ['#be185d', '#9d174d', '#db2777', '#ec4899', '#f472b6', '#831843', '#500724', '#fdf2f8']
+const PRODUCTS = ['Warehousing Partner', 'Transport Partner', 'Last Mile Partner', 'Cold Chain Partner', 'Cross Dock Partner', 'Returns Partner', 'Customs Brokerage', 'Fulfilment Partner']
+const ARTISANS = ['BlueDart Express MH', 'Delhivery Logistics DL', 'DTDC Express KA', 'XpressBees Logistics MH', 'Ecom Express KA', 'Shadowfax Networks DL', 'Spoton Logistics GJ', 'DHL Supply Chain MH']
+const STATUSES = ['FIEO Partner Certified', 'SLA Gold Compliance QC', 'On-Time Delivery Rate Test', 'Damage Ratio Threshold Check', 'Revenue Per Shipment Audit', 'Contract Renewal Eligibility Test']
 
-function seededRandom(seed: number): number { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x) }
-function ri(min: number, max: number, seed: number): number { return Math.floor(seededRandom(seed) * (max - min + 1)) + min }
-function pick<T>(arr: readonly T[], seed: number): T { return arr[Math.floor(seededRandom(seed) * arr.length)] }
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-function TypeBadge({ type }: { type: string }) {
-  const cols: Record<string, string> = { warehousing: "bg-blue-100 text-blue-700 dark:bg-blue-900/30", transport: "bg-amber-100 text-amber-700 dark:bg-amber-900/30", last_mile: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30", cold_chain: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30", cross_dock: "bg-violet-100 text-violet-700 dark:bg-violet-900/30", returns: "bg-red-100 text-red-700 dark:bg-red-900/30", customs: "bg-orange-100 text-orange-700 dark:bg-orange-900/30", fulfillment: "bg-pink-100 text-pink-700 dark:bg-pink-900/30" }
-  return <span className={"tph-type-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[type] || "bg-gray-100 text-gray-700")}>{TYPE_EMOJI[type] || "\u2022"} {type.replace(/_/g, " ")}</span>
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
+
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-pink-100 text-pink-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-pink-200 rounded-full overflow-hidden"><div className="h-full bg-pink-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#fdf2f8" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
 }
 
-function StatusBadge({ status }: { status: string }) {
-  const cols: Record<string, string> = { active: "tph-active bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 shadow-[0_0_6px_rgba(5,150,105,0.3)]", probation: "bg-amber-100 text-amber-700 dark:bg-amber-900/30", suspended: "tph-suspended bg-red-100 text-red-700 dark:bg-red-900/30 shadow-[0_0_8px_rgba(220,38,38,0.4)]", under_review: "bg-violet-100 text-violet-700 dark:bg-violet-900/30", inactive: "bg-gray-200 text-gray-500" }
-  return <span className={"tph-status-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[status] || "")}>{status.replace(/_/g, " ")}</span>
-}
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
 
-function SlaBadge({ level }: { level: string }) {
-  const cols: Record<string, string> = { gold: "tph-gold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 shadow-[0_0_6px_rgba(202,138,4,0.3)]", silver: "bg-gray-200 text-gray-700 dark:bg-gray-700/30", bronze: "bg-orange-100 text-orange-700 dark:bg-orange-900/30", standard: "bg-blue-100 text-blue-700 dark:bg-blue-900/30" }
-  return <span className={"tph-sla-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[level] || "")}><Award className="w-3 h-3"/>{level}</span>
-}
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[2] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[2] }}>{value}</p></Card>
+)
 
-function ScoreBar({ value }: { value: number }) {
-  const col = value >= 90 ? TH.ok : value >= 70 ? TH.warn : TH.err
-  return <div className="tph-score-bar flex items-center gap-1.5"><div className="w-16 h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className="h-full rounded-full transition-all" style={{ width: value + "%", backgroundColor: col }}/></div><span className="text-[10px] font-bold" style={{ color: col }}>{value}</span></div>
-}
-
-function StarRating({ rating }: { rating: number }) { return <span className="tph-stars inline-flex gap-0.5">{[1,2,3,4,5].map(i => <Star key={i} className={"w-3 h-3 " + (i <= rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300")} style={{ fill: i <= rating ? "#facc15" : "none" }}/>)}</span> }
-
-function TrendIndicator({ value }: { value: number }) {
-  const pos = value > 0; const col = pos ? TH.ok : TH.err
-  return <span className="tph-trend inline-flex items-center gap-0.5 text-[10px] font-semibold" style={{ color: col }}>{pos ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}{Math.abs(value).toFixed(1)}%</span>
-}
-
-function CityBadge({ city }: { city: string }) { return <span className="tph-city-badge inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-pink-50 text-pink-700 dark:bg-pink-900/20">{city}</span> }
-
-function KpiTile({ label, value, icon, trend, color }: { label: string; value: string; icon: React.ReactNode; trend: number; color: string }) { return <Card className="tph-kpi-tile glass-subtle hover:shadow-lg transition-shadow border-l-4" style={{ borderLeftColor: color }}><CardContent className="p-3"><div className="flex items-center justify-between"><span className="text-[10px] text-muted-foreground">{label}</span>{icon}</div><div className="text-xl font-bold mt-1">{value}</div><TrendIndicator value={trend}/></CardContent></Card> }
-
-function ValueTile({ label, value }: { label: string; value: string | number }) { return <div className="tph-value-tile text-center p-2 rounded-lg bg-gray-50 dark:bg-gray-800/50"><div className="text-sm font-bold">{value}</div><div className="text-[10px] text-muted-foreground">{label}</div></div> }
-
-function HealthRing({ value, label }: { value: number; label: string }) { const col = value >= 90 ? TH.ok : value >= 70 ? TH.warn : TH.err; const r = 18, circ = 2 * Math.PI * r, offset = circ - (value / 100) * circ; return <div className="tph-health-ring flex flex-col items-center gap-1"><svg width={48} height={48} className="-rotate-90"><circle cx={24} cy={24} r={r} fill="none" stroke="currentColor" strokeWidth={3} className="text-gray-200 dark:text-gray-700"/><circle cx={24} cy={24} r={r} fill="none" stroke={col} strokeWidth={3} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round" className="transition-all"/></svg><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span><span className="text-[9px] text-muted-foreground">{label}</span></div> }
-
-function genPartners() {
-  return Array.from({ length: 50 }, (_, i) => ({
-    id: "3PL-" + String(i + 1).padStart(4, "0"),
-    name: pick(["BlueDart Express", "Delhivery Logistics", "DTDC Express", "XpressBees", "Ecom Express", "Shadowfax", "Spoton Logistics", "DHL Supply Chain", "FedEx India", "Gati Ltd", "TNT Express", "Allcargo Logistics", "VRL Logistics", "TCI Express", "SafeExpress"], i + 1),
-    type: pick(PARTNER_TYPE, i * 3 + 2),
-    city: pick(CITIES, i * 3 + 3),
-    sla: pick(SLA_LEVEL, i + 7),
-    status: pick(PARTNER_STATUS, i + 15),
-    score: ri(40, 99, i + 23),
-    rating: ri(2, 5, i + 29),
-    shipments: ri(50, 5000, i + 37),
-    onTime: ri(60, 99, i + 43),
-    damage: ri(0, 5, i + 49),
-    revenue: ri(100000, 10000000, i + 53),
-    contractEnd: "2026-" + String(ri(8, 12, i + 59)).padStart(2, "0") + "-" + String(ri(1, 28, i + 61)).padStart(2, "0")
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `TPL-${String(offset + i + 1).padStart(4, '0')}`,
+    partner: ARTISANS[(offset + i) % ARTISANS.length], service: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(50, 5000, ((offset + i) * 19) % 4950) + 50,
+    cost: ri(100000, 10000000, ((offset + i) * 11307) % 9900000) + 100000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-function genContracts() {
-  return Array.from({ length: 30 }, (_, i) => ({
-    id: "CTR-" + String(i + 1).padStart(4, "0"),
-    partner: pick(["BlueDart", "Delhivery", "DTDC", "XpressBees", "Ecom Express", "Shadowfax", "Spoton", "DHL"], i + 7),
-    type: pick(PARTNER_TYPE, i + 15),
-    value: ri(500000, 20000000, i + 23),
-    start: "2026-01-" + String(ri(1, 28, i + 29)).padStart(2, "0"),
-    end: "2026-" + String(ri(6, 12, i + 37)).padStart(2, "0") + "-" + String(ri(1, 28, i + 41)).padStart(2, "0"),
-    status: pick(["active", "expiring_soon", "expired", "renewed", "terminated"], i + 47),
-    penalty: ri(0, 500000, i + 53)
-  }))
-}
-
-function genCharts() {
-  const spend = MO.map((m, i) => ({ month: m, spend: ri(5000000, 20000000, i + 101), partners: ri(20, 50, i + 151), sla: ri(80, 98, i + 201) }))
-  const typeDist = PARTNER_TYPE.map((t, i) => ({ type: t.replace(/_/g, " "), count: ri(3, 15, i + 301), avgScore: ri(60, 95, i + 351) }))
-  const scoreLine = MO.map((m, i) => ({ month: m, avgScore: ri(70, 95, i + 401), onTime: ri(75, 99, i + 451) }))
-  return { spend, typeDist, scoreLine }
-}
+const threeplrecords = [
+  { id: 'TPL-0001', partner: 'BlueDart Express MH', service: 'Warehousing Partner', status: 'FIEO Partner Certified', qty: 1200, cost: 8500000, date: '2024-01-05' },
+  { id: 'TPL-0002', partner: 'Delhivery Logistics DL', service: 'Transport Partner', status: 'SLA Gold Compliance QC', qty: 980, cost: 7200000, date: '2024-01-18' },
+  { id: 'TPL-0003', partner: 'DTDC Express KA', service: 'Last Mile Partner', status: 'On-Time Delivery Rate Test', qty: 2400, cost: 4800000, date: '2024-01-31' },
+  { id: 'TPL-0004', partner: 'XpressBees Logistics MH', service: 'Cold Chain Partner', status: 'Damage Ratio Threshold Check', qty: 650, cost: 9200000, date: '2024-02-13' },
+  { id: 'TPL-0005', partner: 'Ecom Express KA', service: 'Cross Dock Partner', status: 'Revenue Per Shipment Audit', qty: 3200, cost: 3400000, date: '2024-02-26' },
+  { id: 'TPL-0006', partner: 'Shadowfax Networks DL', service: 'Returns Partner', status: 'Contract Renewal Eligibility Test', qty: 1500, cost: 8800000, date: '2024-03-10' },
+  { id: 'TPL-0007', partner: 'Spoton Logistics GJ', service: 'Customs Brokerage', status: 'FIEO Partner Certified', qty: 800, cost: 9500000, date: '2024-03-23' },
+  { id: 'TPL-0008', partner: 'DHL Supply Chain MH', service: 'Fulfilment Partner', status: 'SLA Gold Compliance QC', qty: 1800, cost: 6400000, date: '2024-04-05' },
+  { id: 'TPL-0009', partner: 'BlueDart Express MH', service: 'Warehousing Partner', status: 'On-Time Delivery Rate Test', qty: 2100, cost: 5200000, date: '2024-04-18' },
+  { id: 'TPL-0010', partner: 'Delhivery Logistics DL', service: 'Transport Partner', status: 'Damage Ratio Threshold Check', qty: 950, cost: 8000000, date: '2024-05-01' },
+  { id: 'TPL-0011', partner: 'DTDC Express KA', service: 'Last Mile Partner', status: 'Revenue Per Shipment Audit', qty: 2800, cost: 3600000, date: '2024-05-14' },
+  { id: 'TPL-0012', partner: 'XpressBees Logistics MH', service: 'Cold Chain Partner', status: 'Contract Renewal Eligibility Test', qty: 720, cost: 9000000, date: '2024-05-27' },
+  { id: 'TPL-0013', partner: 'Ecom Express KA', service: 'Cross Dock Partner', status: 'FIEO Partner Certified', qty: 3500, cost: 2800000, date: '2024-06-09' },
+  { id: 'TPL-0014', partner: 'Shadowfax Networks DL', service: 'Returns Partner', status: 'SLA Gold Compliance QC', qty: 1100, cost: 7600000, date: '2024-06-22' },
+  { id: 'TPL-0015', partner: 'Spoton Logistics GJ', service: 'Customs Brokerage', status: 'On-Time Delivery Rate Test', qty: 1400, cost: 5800000, date: '2024-07-05' },
+  { id: 'TPL-0016', partner: 'DHL Supply Chain MH', service: 'Fulfilment Partner', status: 'Damage Ratio Threshold Check', qty: 2000, cost: 4200000, date: '2024-07-18' },
+  { id: 'TPL-0017', partner: 'BlueDart Express MH', service: 'Warehousing Partner', status: 'Revenue Per Shipment Audit', qty: 2600, cost: 3000000, date: '2024-07-31' },
+  { id: 'TPL-0018', partner: 'Delhivery Logistics DL', service: 'Transport Partner', status: 'Contract Renewal Eligibility Test', qty: 900, cost: 9800000, date: '2024-08-13' },
+  { id: 'TPL-0019', partner: 'DTDC Express KA', service: 'Last Mile Partner', status: 'FIEO Partner Certified', qty: 1900, cost: 6000000, date: '2024-08-26' },
+  { id: 'TPL-0020', partner: 'XpressBees Logistics MH', service: 'Cold Chain Partner', status: 'SLA Gold Compliance QC', qty: 1600, cost: 4600000, date: '2024-09-08' },
+]
 
 export default function ThreePlPartnerHubView() {
-  const [tab, setTab] = useState("dashboard")
-  const [search, setSearch] = useState("")
-  const [sortCol, setSortCol] = useState<string | null>(null)
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc")
+  const [tab, setTab] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
-  const partners = useMemo(() => genPartners(), [])
-  const contracts = useMemo(() => genContracts(), [])
-  const charts = useMemo(() => genCharts(), [])
-  const filterPartners = useMemo(() => { let res = partners; if (search) { const q = search.toLowerCase(); res = res.filter(p => Object.values(p).some(val => typeof val === "string" && val.toLowerCase().includes(q))) } for (const [k, vals] of Object.entries(activeFilters)) { if (vals.length > 0) res = res.filter(p => vals.includes(String(p[k as keyof typeof p]))) } return res }, [partners, search, activeFilters])
-  const sortedPartners = useMemo(() => { if (!sortCol) return filterPartners; return [...filterPartners].sort((a: any, b: any) => { const av = a[sortCol], bv = b[sortCol]; const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv; return sortDir === "asc" ? cmp : -cmp }) }, [filterPartners, sortCol, sortDir])
-  const toggleSort = (col: string) => { if (sortCol === col) { setSortDir(d => d === "asc" ? "desc" : "asc") } else { setSortCol(col); setSortDir("asc") } }
-  const toggleFilter = (group: string, value: string) => { setActiveFilters(prev => { const cur = prev[group] || []; const next = cur.includes(value) ? cur.filter(v => v !== value) : [...cur, value]; if (next.length === 0) { const { [group]: _, ...rest } = prev; return rest } return { ...prev, [group]: next } }) }
-  const clearAllFilters = () => setActiveFilters({})
-  const handleRefresh = () => { setSearch(""); setActiveFilters({}); setSortCol(null) }
 
-  const partnerFilterGroups = useMemo(() => { const tc: Record<string, number> = {}; const sc: Record<string, number> = {}; const slac: Record<string, number> = {}; partners.forEach(p => { tc[p.type] = (tc[p.type] || 0) + 1; sc[p.status] = (sc[p.status] || 0) + 1; slac[p.sla] = (slac[p.sla] || 0) + 1 }); return [{ key: "type", label: "Type", options: Object.entries(tc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }, { key: "status", label: "Status", options: Object.entries(sc).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }, { key: "sla", label: "SLA Tier", options: Object.entries(slac).map(([value, count]) => ({ value, count })).sort((a, b) => b.count - a.count) }] }, [partners])
+  const allRecords = [...threeplrecords, ...genRecords(21), ...genRecords(41)]
 
-  return <div className="space-y-4 p-4">
-    <PageHeader title="3PL Partner Hub" description="Comprehensive partner management with SLA tracking, performance scoring and contract lifecycle"/>
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.service.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-    <Tabs value={tab} onValueChange={setTab}>
-      <TabsList className="grid grid-cols-4 w-full tph-tabs">
-        <TabsTrigger value="dashboard"><BarChart3 className="w-3 h-3 mr-1"/>Dashboard</TabsTrigger>
-        <TabsTrigger value="partners"><Users className="w-3 h-3 mr-1"/>Partners</TabsTrigger>
-        <TabsTrigger value="contracts"><Handshake className="w-3 h-3 mr-1"/>Contracts</TabsTrigger>
-        <TabsTrigger value="insights"><TrendingUp className="w-3 h-3 mr-1"/>Insights</TabsTrigger>
-      </TabsList>
+  const filterGroups = [
+    { key: 'service', label: 'Service', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.service === p).length })) },
+    { key: 'partner', label: 'Partner', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.partner === p).length })) },
+  ]
 
-      <TabsContent value="dashboard" className="space-y-4">
-        <div className="grid grid-cols-4 gap-3">
-          <KpiTile label="Active Partners" value={String(partners.filter((p: any) => p.status === "active").length)} icon={<Users className="w-4 h-4" style={{ color: TH.pri }}/>} trend={10.5} color={TH.pri}/>
-          <KpiTile label="Avg Score" value="82" icon={<Star className="w-4 h-4" style={{ color: TH.sec }}/>} trend={5.2} color={TH.sec}/>
-          <KpiTile label="SLA Compliance" value="91%" icon={<ShieldCheck className="w-4 h-4" style={{ color: TH.ok }}/>} trend={3.8} color={TH.ok}/>
-          <KpiTile label="Active Contracts" value={String(contracts.filter((c: any) => c.status === "active").length)} icon={<Handshake className="w-4 h-4" style={{ color: TH.warn }}/>} trend={2.1} color={TH.warn}/>
-        </div>
-        <div className="grid grid-cols-4 gap-3">
-          <HealthRing value={88} label="On-Time"/>
-          <HealthRing value={91} label="SLA"/>
-          <HealthRing value={82} label="Quality"/>
-          <HealthRing value={76} label="Retention"/>
-        </div>
-        <div className="grid grid-cols-3 gap-3">
-          <Card className="tph-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Monthly Spend</CardTitle></CardHeader><CardContent className="p-2"><AreaChart data={charts.spend} height={180}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="month" fontSize={10}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Area type="monotone" dataKey="spend" stroke={TH.pri} fill={TH.pri} fillOpacity={0.2}/></AreaChart></CardContent></Card>
-          <Card className="tph-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Partner Type Distribution</CardTitle></CardHeader><CardContent className="p-2"><BarChart data={charts.typeDist} height={180}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="type" fontSize={8}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Bar dataKey="count" fill={TH.sec}/></BarChart></CardContent></Card>
-          <Card className="tph-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Performance Trend</CardTitle></CardHeader><CardContent className="p-2"><LineChart data={charts.scoreLine} height={180}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="month" fontSize={10}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Line type="monotone" dataKey="avgScore" stroke={TH.ok}/><Line type="monotone" dataKey="onTime" stroke={TH.pri}/></LineChart></CardContent></Card>
-        </div>
-      </TabsContent>
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(50, 120, allRecords.length * 0.10 + i * 8) }))
+  const partnerChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 1).join(' '), volume: allRecords.filter(r => r.partner === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
-      <TabsContent value="partners" className="space-y-4">
-        <ModuleBreadcrumb items={[{ label: "Dashboard" }, { label: "Partners" }]}/>
-        <SearchFilterToolbar searchQuery={search} onSearchChange={setSearch} onClearSearch={() => setSearch("")} activeFilters={activeFilters} filterGroups={partnerFilterGroups} onToggleFilter={toggleFilter} onClearAllFilters={clearAllFilters} totalItems={partners.length} filteredCount={filterPartners.length} onRefresh={handleRefresh} placeholder="Search partners..."/>
-        <Card className="tph-table-card"><CardContent className="p-2"><div className="overflow-x-auto"><table className="w-full text-[11px]"><thead><tr className="border-b tph-table-header"><th className="p-1.5 text-left cursor-pointer hover:bg-gray-100" onClick={() => toggleSort("id")}>ID <ArrowUpDown className="w-3 h-3 inline"/></th><th className="p-1.5 text-left">Partner</th><th className="p-1.5 text-left">Type</th><th className="p-1.5 text-left">City</th><th className="p-1.5 text-left">SLA</th><th className="p-1.5 text-left">Score</th><th className="p-1.5 text-left">Rating</th><th className="p-1.5 text-left">On-Time</th><th className="p-1.5 text-left">Shipments</th><th className="p-1.5 text-left">Status</th></tr></thead><tbody>
-          {sortedPartners.map((p: any) => <tr key={p.id} className="border-b hover:bg-pink-50/50 dark:hover:bg-pink-900/10 tph-table-row"><td className="p-1.5 font-mono">{p.id}</td><td className="p-1.5 font-medium">{p.name}</td><td className="p-1.5"><TypeBadge type={p.type}/></td><td className="p-1.5"><CityBadge city={p.city}/></td><td className="p-1.5"><SlaBadge level={p.sla}/></td><td className="p-1.5"><ScoreBar value={p.score}/></td><td className="p-1.5"><StarRating rating={p.rating}/></td><td className="p-1.5"><span className={"text-[10px] font-bold " + (p.onTime >= 90 ? "text-emerald-600" : p.onTime >= 75 ? "text-amber-600" : "text-red-600")}>{p.onTime}%</span></td><td className="p-1.5">{p.shipments}</td><td className="p-1.5"><StatusBadge status={p.status}/></td></tr>)}
-          </tbody></table></div></CardContent></Card>
-      </TabsContent>
-
-      <TabsContent value="contracts" className="space-y-4">
-        <ModuleBreadcrumb items={[{ label: "Dashboard" }, { label: "Contracts" }]}/>
-        <div className="grid grid-cols-4 gap-3">
-          <ValueTile label="Active" value={String(contracts.filter((c: any) => c.status === "active").length)}/>
-          <ValueTile label="Expiring Soon" value={String(contracts.filter((c: any) => c.status === "expiring_soon").length)}/>
-          <ValueTile label="Expired" value={String(contracts.filter((c: any) => c.status === "expired").length)}/>
-          <ValueTile label="Total Value" value="\u20b98.5Cr"/>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <Card className="tph-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">Spend Trend</CardTitle></CardHeader><CardContent className="p-2"><AreaChart data={charts.spend} height={200}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="month" fontSize={10}/><YAxis fontSize={10}/><Tooltip contentStyle={{ fontSize: 11 }}/><Area type="monotone" dataKey="spend" stroke={TH.pri} fill={TH.pri} fillOpacity={0.15}/></AreaChart></CardContent></Card>
-          <Card className="tph-chart-card"><CardHeader className="p-2 pb-0"><CardTitle className="text-xs">SLA Tier Distribution</CardTitle></CardHeader><CardContent className="p-2"><PieChart height={200}><Pie data={SLA_LEVEL.map((s, i) => ({ name: s, value: ri(3, 20, i + 601) }))} cx="50%" cy="50%" outerRadius={60} dataKey="value" label><Cell fill={PC[0]}/><Cell fill={PC[1]}/><Cell fill={PC[2]}/><Cell fill={PC[3]}/></Pie><Tooltip contentStyle={{ fontSize: 11 }}/></PieChart></CardContent></Card>
-        </div>
-      </TabsContent>
-
-      <TabsContent value="insights" className="space-y-4">
-        <ModuleBreadcrumb items={[{ label: "Dashboard" }, { label: "Insights" }]}/>
-        <div className="grid grid-cols-2 gap-3">
-          <Card className="tph-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><Star className="w-3 h-3 text-amber-500"/>Top Performers</div><div className="text-[10px] text-muted-foreground">5 partners scored above 95 this quarter. BlueDart and Delhivery lead in transport with 99% on-time. Shadowfax excels in last-mile with lowest cost-per-delivery at Rs 35.</div></Card>
-          <Card className="tph-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><AlertTriangle className="w-3 h-3 text-red-500"/>At-Risk Partners</div><div className="text-[10px] text-muted-foreground">3 partners on probation with scores below 60. 2 partners have SLA compliance under 70%. Recommend corrective action plans and 30-day improvement targets.</div></Card>
-          <Card className="tph-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><Target className="w-3 h-3 text-cyan-500"/>Contract Optimization</div><div className="text-[10px] text-muted-foreground">8 contracts expiring in next 90 days. Consolidating cold-chain partners from 5 to 3 could save 18% annually. Multi-year commitments yield 12% rate advantage.</div></Card>
-          <Card className="tph-insight-card p-4"><div className="text-xs font-semibold mb-2 flex items-center gap-1"><DollarSign className="w-3 h-3 text-emerald-500"/>Revenue Impact</div><div className="text-[10px] text-muted-foreground">Partner-driven revenue grew 22% QoQ. Cross-dock partners contributed 15% of fulfillment capacity. Returns processing partners reduced reverse logistics cost by 28%.</div></Card>
-        </div>
-      </TabsContent>
-    </Tabs>
-  </div>
+  return (
+    <div className="tph-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Warehouse' }, { label: '3PL Partners' }]} />
+      <PageHeader title="3PL Partner Hub" description="Indian third-party logistics partner management with FIEO partner certification SLA Gold compliance quality control on-time delivery rate testing damage ratio threshold monitoring revenue per shipment auditing and contract renewal eligibility verification across 8 major 3PL partners including BlueDart Delhivery DTDC XpressBees Ecom Express Shadowfax Spoton and DHL Supply Chain" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-pink-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
+        </TabsList>
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Partners" value={allRecords.length} />
+            <KpiTile label="Service Types" value={PRODUCTS.length} />
+            <KpiTile label="Active 3PLs" value={ARTISANS.length} />
+            <KpiTile label="Avg Shipment Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
+          </div>
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="FIEO" value={92} />
+            <HealthRing label="SLA" value={88} />
+            <HealthRing label="On-Time" value={85} />
+            <HealthRing label="Damage" value={93} />
+            <HealthRing label="Revenue" value={90} />
+            <HealthRing label="Contract" value={87} />
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="Gold Partners" value="12 Active" />
+            <ValueTile label="Annual Volume" value="48,000" />
+            <ValueTile label="Avg On-Time" value="91%" />
+            <ValueTile label="Total Contract" value="₹85 Crore" />
+          </div>
+        </TabsContent>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search 3PL partner records..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-pink-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Service</th>
+                  <th className="p-3 text-left font-medium">Partner</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Shipments</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-pink-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.service} /></td>
+                    <td className="p-3">{record.partner}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty.toLocaleString()} shipments</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </TabsContent>
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Volume Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Partner Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={partnerChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {partnerChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
+          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>3PL Partner Hub — Indian Third-Party Logistics Partner Management</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The 3PL partner hub represents the centralised management platform for overseeing all third-party logistics partnerships across the Indian supply chain industry where major logistics operators rely on a diversified network of specialised third-party service providers to deliver comprehensive end-to-end logistics coverage spanning warehousing transportation last-mile delivery cold chain logistics cross-docking operations returns management customs brokerage and fulfilment services where the Indian 3PL market is valued at approximately twelve billion US dollars and is projected to grow at a compound annual growth rate of eighteen percent through twenty thirty driven by the rapid expansion of e-commerce the implementation of the Goods and Services Tax GST that unified the national supply chain the development of dedicated freight corridors and the increasing adoption of technology-driven logistics optimisation where the 3PL partner hub manages eight primary service categories including warehousing partners who operate distribution centres and fulfilment warehouses across major Indian logistics hubs providing storage inventory management and order processing services transport partners who operate long-haul and regional freight networks connecting manufacturing centres to distribution hubs using road rail and air transport modes last-mile partners who provide final delivery services to end customers through a combination of company-owned fleet gig worker networks and local delivery agents cold-chain partners who maintain temperature-controlled storage and transport for perishable food pharmaceuticals and temperature-sensitive industrial products cross-dock partners who operate transfer facilities where goods are received sorted and immediately dispatched to outbound vehicles without intermediate storage returns partners who manage the reverse logistics process for product returns exchanges and refurbishment customs brokerage partners who handle import and export documentation compliance and clearance for international shipments and fulfilment partners who provide comprehensive pick-pack-ship services for e-commerce and direct-to-consumer brands where the hub tracks performance metrics for all partner relationships including FIEO Federation of Indian Export Organisations partner certification status SLA Gold compliance ratings on-time delivery performance damage ratios revenue per shipment and contract renewal eligibility across the eight major Indian 3PL operators.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>SLA Gold Compliance QC and On-Time Delivery Rate Testing Standards</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The SLA Gold compliance quality control and on-time delivery rate testing standards establish the primary performance measurement framework for Indian third-party logistics partner assessment that ensures all contracted 3PL partners maintain the service quality levels required by the master service agreements governing each partner relationship where the SLA Gold compliance test evaluates each partner against a comprehensive set of service level indicators covering five primary performance dimensions including pickup timing measured as the percentage of shipments picked up within the contracted pickup window typically four hours from booking confirmation delivery timing measured as the percentage of shipments delivered within the contracted delivery window based on the service tier selected by the customer including same-day next-day two-day and standard delivery service information accuracy measured as the percentage of tracking events that are correctly updated within the specified time tolerance of thirty minutes from the actual event occurrence customer complaint rate measured as the number of customer complaints received per ten thousand shipments processed and damage and loss rate measured as the percentage of shipments that experience visible product damage or complete loss during the logistics process where the SLA Gold tier requires a minimum composite score of ninety-five percent across all five performance dimensions while the SLA Silver tier requires ninety percent and the SLA Bronze tier requires eighty-five percent with partners falling below eighty-five percent placed on probation with a sixty-day improvement plan requirement where the on-time delivery rate test specifically measures the percentage of shipments that are delivered to the final customer within the contracted delivery window calculated as the number of on-time deliveries divided by the total number of delivery attempts multiplied by one hundred where the test uses a fifteen-minute grace period beyond the contracted delivery window to account for minor scheduling variations in last-mile delivery routes where the on-time rate is calculated separately for each service tier and each delivery zone including metro Tier-1 city Tier-2 city and Tier-3 and rural delivery zones ensuring the partner maintains consistent on-time performance across all service categories and geographic coverage areas.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Damage Ratio Threshold Monitoring and Revenue Per Shipment Audit</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The damage ratio threshold monitoring and revenue per shipment audit protocols provide the quality assurance and financial performance measurement infrastructure for the Indian 3PL partner management system where the damage ratio threshold test measures the percentage of shipments that experience visible product damage during the logistics handling and transport process covering all stages from warehouse pickup through sorting hub processing line-haul transport and final-mile delivery where the damage ratio is calculated as the number of damage-confirmed shipments divided by the total number of shipments processed multiplied by one hundred where the test uses a four-level damage classification system covering minor damage where the outer packaging shows dents or crushing but the product inside is undamaged moderate damage where the product shows visible cosmetic damage but remains fully functional severe damage where the product functionality is compromised but the product is still partially usable and total loss where the product is completely destroyed or rendered non-functional where the maximum acceptable damage ratio threshold is set at zero point five percent for standard cargo zero point three percent for fragile and high-value cargo and zero point one percent for temperature-sensitive pharmaceutical cargo with partners exceeding their assigned threshold placed on performance improvement plans requiring root cause analysis corrective action implementation and weekly damage rate reporting until the ratio is brought within the acceptable threshold for three consecutive reporting periods where the revenue per shipment audit calculates the average revenue generated per shipment handled by each 3PL partner across all service categories providing a financial efficiency metric that reflects the value-added services quality of service and operational efficiency of each partner where the revenue per shipment is calculated by dividing the total logistics revenue generated through each partner by the total number of shipments processed by that partner during the reporting period where the audit compares the revenue per shipment against the contracted rate card and industry benchmarks to identify partners who are delivering above-average financial value through premium service quality and partners whose revenue per shipment is below benchmark due to service quality issues volume concentration in lower-value service categories or rate leakage through unapproved discounting.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Contract Renewal Eligibility Test and 3PL Ecosystem Expansion</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The contract renewal eligibility test and 3PL ecosystem expansion framework provides the partner lifecycle management and strategic growth infrastructure for the Indian third-party logistics partner management system where the contract renewal eligibility test evaluates each partner relationship against a multi-criteria assessment framework to determine whether the partner qualifies for contract renewal at the end of the current contract period where the eligibility assessment considers five primary criteria including the cumulative SLA compliance score across the full contract period requiring a minimum average SLA score of ninety percent for Gold tier renewal and eighty-five percent for Silver tier renewal the financial health assessment confirming the partner maintains adequate insurance coverage working capital and financial stability through verified financial statements and bank references the capacity expansion readiness assessment evaluating the partner ability to scale operations by a minimum of twenty-five percent for peak season demand spikes including available fleet capacity warehouse space and trained personnel the technology integration compliance assessment confirming the partner maintains compatible technology systems including real-time API-based tracking integration electronic proof of delivery barcode scanning and automated warehouse management system connectivity and the regulatory compliance assessment confirming the partner maintains all required licences and certifications including the FIEO registration Goods and Services Tax registration motor vehicle insurance warehouse safety certification and employee safety training compliance where the 3PL ecosystem expansion strategy focuses on developing partner capabilities in underserved logistics categories including specialised cold-chain infrastructure for pharmaceutical and vaccine logistics last-mile drone delivery partnerships for remote area coverage and green logistics partnerships with electric vehicle fleet operators to reduce the carbon footprint of the logistics network while expanding geographic coverage to Tier-3 and Tier-4 cities where 3PL penetration remains below fifteen percent offering significant growth potential for established partners willing to invest in regional infrastructure and local last-mile delivery networks.</p></CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
 }
+
+
+

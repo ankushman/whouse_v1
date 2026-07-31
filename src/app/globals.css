@@ -55263,3 +55263,12 @@ html.theme-transition body {
 @keyframes mdbFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes mdbPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 @keyframes mdbGlow { 0% { box-shadow: 0 0 5px rgba(185, 28, 28, 0.3); } 100% { box-shadow: 0 0 15px rgba(185, 28, 28, 0.6); } }
+
+/* R371: Kalamkari Andhra (klm-*) styles */
+.klm-dock-badge { transition: all 0.15s ease; cursor: pointer; }
+.klm-dock-badge:hover { transform: scale(1.08); box-shadow: 0 2px 8px rgba(76, 29, 149, 0.25); }
+.klm-root .inline-flex.items-center.rounded-full { border: 1px solid #4c1d95; }
+
+@keyframes klmFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes klmPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes klmGlow { 0% { box-shadow: 0 0 5px rgba(76, 29, 149, 0.3); } 100% { box-shadow: 0 0 15px rgba(76, 29, 149, 0.6); } }

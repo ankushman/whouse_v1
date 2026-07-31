@@ -360,3 +360,4 @@ export { default as DhokraChhattisgarhLogisticsView } from './dhokra-chhattisgar
 export { default as BidriKarnatakaLogisticsView } from './bidri-karnataka-logistics-view'
 export { default as GondArtMadhyaPradeshLogisticsView } from './gond-art-madhya-pradesh-logistics-view'
 export { default as MadhubaniBiharLogisticsView } from './madhubani-bihar-logistics-view'
+export { default as KalamkariAndhraLogisticsView } from './kalamkari-andhra-logistics-view'
