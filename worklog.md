@@ -1,5 +1,36 @@
 ---
 ---
+Task ID: R380
+Agent: Main Agent (Cron Loop)
+Task: R380 — Pithora Tribal Art Chhattisgarh (new) + AMR Fleet overwrite 201->253
+
+Work Log:
+- Read worklog.md: R379 complete (commit 7798313), 373 module files, 365 exports, 373 navItems, ~55,342 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R380); 470 errors in scripts/gen-r352.tsx.ts (non-src, ignored)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- ptr-* prefix was taken (Port Return module), switched to piw-* for Pithora
+- Slug verification: pithora-tribal-art-chhattisgarh-logistics CLEAR; autonomous-mobile-robots-fleet ALREADY EXISTS
+- CSS prefixes: piw-* CLEAR; amr-* already exists (kept existing CSS for overwrite)
+- Icons: MountainSnow (Pithora, already in iconMap and lucide-react); Bot (AMR, already existed) — no new icons
+- AMR Fleet had 201 lines (shortest module at R379 end) — overwritten to 253 lines with genRecords, correct field names (warehouse, product)
+- POST-R380 VERIFICATION: Shortest modules now 204 lines (dynamic-pricing-engine); 201-line module eliminated
+
+- Created Pithora Tribal Art Chhattisgarh (piw-*, #c2410c burnt orange): 253 lines, 8 products (Pithora Marriage Procession, Pithora Horse Ritual Mural, Pithora Tree of Life Panel, Pithora Bull Fertility Scroll, Pithora Seven Horse Canvas, Pithora Wedding Chariot Art, Pithora Tribal Dance Mural, Pithora Sacred Fish Pond), 8 artisans (Bastar Pithora Guild CG, Dantewada Tribal Art CG, Kanker Rural Painters CG, Raipur Heritage Tribal CG, Jagdalpur Rathwa Community CG, Bilaspur Adivasi Society CG, Korba Forest Art Cluster CG, Dhamtari Canvas Craft CG), 6 statuses, 4 insight cards
+- Overwrote AMR Fleet (amr-*, #059669 emerald, 201->253): 253 lines, 8 robot types (AMR Pallet Jack Robot, AMR Forklift Auton, AMR Sortation Unit, AMR Goods-to-Person, AMR Tugger Heavy Haul, AMR Shelf Transporter, AMR Order Picking Bot, AMR Inventory Scanner), 8 automation hubs, 6 statuses, 4 insight cards
+- Registered Pithora in 3 files; AMR already registered
+- CSS: +8 lines (piw-* 5 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit ee92df7
+
+Stage Summary:
+- 374 module files (1 new Pithora), 366 exports, 374 navItems, ~55,350 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- AMR Fleet upgraded from 201 to 253 lines — previously shortest module eliminated
+- Shortest remaining module: 204 lines (dynamic-pricing-engine)
+- All sub-204-line modules now completely eliminated
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue targeting non-253 modules by ascending line count (204-line modules next)
+- Available Indian art slugs: Warli Tribal Maharashtra, Kanjivaram Silk Tamil Nadu, Kashmir Willow Wicker, Tirupati Kalamkari Andhra, Kalamkari Masulipatnam Andhra
+---
 Task ID: R379
 Agent: Main Agent (Cron Loop)
 Task: R379 — Pattachitra West Bengal (new) + Cold Chain Monitor Pro overwrite 197->253
