@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/shared/page-header'
@@ -6,229 +6,248 @@ import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
 import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
-const COLORS = ['#db2777', '#be185d', '#ec4899', '#f472b6', '#f9a8d4', '#9d174d', '#831843', '#fce7f3']
+const COLORS = ['#7c3aed', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe', '#6d28d9', '#5b21b6', '#ede9fe']
+const PRODUCTS = ['Organic Cotton Yardage', 'Silk Blend Fabric Roll', 'Denim Twill Batch', 'Linen Flax Panel', 'Polyester Knit Spool', 'Wool Worsted Lot', 'Rayon Viscose Bolt', 'Chiffon Georgette Roll']
+const ARTISANS = ['Tirupur Knitwear Cluster TN', 'Bhilwara Textile Mills RJ', 'Surat Polyester Hub GJ', 'Erode Handloom Society TN', 'Ichalkaranji Weaving MH', 'Ludhiana Wool Hosiery PB', 'Bhiwani Cotton Complex HR', 'Kanchipuram Silk Guild TN']
+const STATUSES = ['IS 16793 Textile Grade A', 'Fibre Tensile Strength QC', 'Color Fastness Wash Test', 'Shrinkage Ratio Check', 'Moisture Regain Verify', 'Fabric Grammage Confirm']
 
-const GARMENT_TYPES = ['Cotton Sarees', 'Silk sarees', 'Ready-Made Garments', 'Denim Jeans', 'Knitwear', 'Handloom Fabrics', 'Technical Textiles', 'Home Textiles']
-const MANUFACTURERS = ['Arvind Mills Ahmedabad', 'Welspun Mumbai', 'Raymond Thane', 'Gokaldas Exports Bengaluru', 'Orient Craft Noida', 'KPR Mill Coimbatore', 'Nahar Spinning Ludhiana', 'JCT Phagwara']
-const DISPATCH_STATUS = ['Quality Certified', 'Under QC', 'Dispatched', 'In Warehouse', 'Label Pending', 'Pending Inspection']
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
 
-const textileRecords = [
-  { id: 'TAL-0001', garment: 'Cotton Sarees', description: 'Tant Baluchari Handloom 6.3m with Zari Border UNIDO certified', manufacturer: 'Nahar Spinning Ludhiana', quantity: 15000, unit: 'pieces', dispatch_status: 'Quality Certified', lot: 'LOT-TAL-9041', destination: 'NCUI Emporium Delhi', received: '2026-07-30', batch: 'TAL-B2026-0721', cost_inr: 28000000, dye_cert: 'OEKO-TEX 100', fabric_weight_gsm: 120 },
-  { id: 'TAL-0002', garment: 'Ready-Made Garments', description: 'Men Cotton Polo Shirt 180 GSM Export to Zara EU FOB Mumbai', manufacturer: 'Orient Craft Noida', quantity: 45000, unit: 'pieces', dispatch_status: 'Dispatched', lot: 'LOT-TAL-9038', destination: 'APEDA Port Mumbai', received: '2026-07-30', batch: 'TAL-B2026-0720', cost_inr: 67500000, dye_cert: 'GOTS Organic', fabric_weight_gsm: 180 },
-  { id: 'TAL-0003', garment: 'Silk sarees', description: 'Kanchipuram Pure Mulberry Silk 6.3m Temple Border GI Tagged', manufacturer: 'KPR Mill Coimbatore', quantity: 5000, unit: 'pieces', dispatch_status: 'Under QC', lot: 'LOT-TAL-9012', destination: 'Cooptex Chennai', received: '2026-07-29', batch: 'TAL-B2026-0719', cost_inr: 85000000, dye_cert: 'Silk Mark', fabric_weight_gsm: 85 },
-  { id: 'TAL-0004', garment: 'Denim Jeans', description: 'Slim Fit Stretch Denim 12oz Indigo Wash for Levi\'s India Market', manufacturer: 'Arvind Mills Ahmedabad', quantity: 60000, unit: 'pieces', dispatch_status: 'Quality Certified', lot: 'LOT-TAL-9027', destination: 'Arvind Retail Bengaluru', received: '2026-07-29', batch: 'TAL-B2026-0718', cost_inr: 54000000, dye_cert: 'OEKO-TEX 100', fabric_weight_gsm: 340 },
-  { id: 'TAL-0005', garment: 'Knitwear', description: 'Merino Wool Blend Sweater Gauge 12 Export to Marks & Spencer UK', manufacturer: 'Gokaldas Exports Bengaluru', quantity: 25000, unit: 'pieces', dispatch_status: 'Label Pending', lot: 'LOT-TAL-9031', destination: 'BGMEA Port Kolkata', received: '2026-07-28', batch: 'TAL-B2026-0716', cost_inr: 82000000, dye_cert: 'WRAP Certified', fabric_weight_gsm: 280 },
-  { id: 'TAL-0006', garment: 'Handloom Fabrics', description: 'Ikat Pochampally Tie-Dye Cotton 2.5m Width GI Registration AP', manufacturer: 'JCT Phagwara', quantity: 8000, unit: 'meters', dispatch_status: 'In Warehouse', lot: 'LOT-TAL-9040', destination: 'Tribes India Hyd', received: '2026-07-28', batch: 'TAL-B2026-0715', cost_inr: 18000000, dye_cert: 'Handloom Mark', fabric_weight_gsm: 110 },
-  { id: 'TAL-0007', garment: 'Technical Textiles', description: 'Aramid Fire Retardant Fabric 280gsm IS 15748 BIS Certified', manufacturer: 'Welspun Mumbai', quantity: 12000, unit: 'meters', dispatch_status: 'Pending Inspection', lot: 'LOT-TAL-9008', destination: 'CRPF Uniform Ghaziabad', received: '2026-07-27', batch: 'TAL-B2026-0714', cost_inr: 64000000, dye_cert: 'BIS IS 15748', fabric_weight_gsm: 280 },
-  { id: 'TAL-0008', garment: 'Home Textiles', description: '1000TC Egyptian Cotton Bed Sheet King Size Export US Walmart', manufacturer: 'Welspun Mumbai', quantity: 35000, unit: 'sets', dispatch_status: 'Quality Certified', lot: 'LOT-TAL-9037', destination: 'DP World Nhava Sheva', received: '2026-07-27', batch: 'TAL-B2026-0713', cost_inr: 45000000, dye_cert: 'OEKO-TEX 100', fabric_weight_gsm: 150 },
-  { id: 'TAL-0009', garment: 'Cotton Sarees', description: 'Chanderi Silk-Cotton 5.5m Gold Butti Handloom MP GI Tag', manufacturer: 'Raymond Thane', quantity: 8000, unit: 'pieces', dispatch_status: 'Under QC', lot: 'LOT-TAL-9039', destination: 'MP State Emporium Bhopal', received: '2026-07-26', batch: 'TAL-B2026-0711', cost_inr: 36000000, dye_cert: 'Handloom Mark', fabric_weight_gsm: 95 },
-  { id: 'TAL-0010', garment: 'Ready-Made Garments', description: 'Women Rayon Palazzo Pants Export H&M EU AEO Certified', manufacturer: 'Orient Craft Noida', quantity: 70000, unit: 'pieces', dispatch_status: 'Dispatched', lot: 'LOT-TAL-9026', destination: 'AEPL JNPT Mumbai', received: '2026-07-26', batch: 'TAL-B2026-0710', cost_inr: 49000000, dye_cert: 'SA8000 Social', fabric_weight_gsm: 130 },
-  { id: 'TAL-0011', garment: 'Denim Jeans', description: 'Baggy Fit Non-Stretch 14oz Raw Denim Selvedge Japan Style', manufacturer: 'Arvind Mills Ahmedabad', quantity: 30000, unit: 'pieces', dispatch_status: 'Quality Certified', lot: 'LOT-TAL-9011', destination: ' Numero Uno Ludhiana', received: '2026-07-25', batch: 'TAL-B2026-0708', cost_inr: 27000000, dye_cert: 'OEKO-TEX 100', fabric_weight_gsm: 400 },
-  { id: 'TAL-0012', garment: 'Silk sarees', description: 'Banarasi Organza Jangla Jaal Pure Silk Bridal 6.3m GI GI Tag', manufacturer: 'KPR Mill Coimbatore', quantity: 2500, unit: 'pieces', dispatch_status: 'Pending Inspection', lot: 'LOT-TAL-9007', destination: 'UP Handloom Varanasi', received: '2026-07-25', batch: 'TAL-B2026-0707', cost_inr: 95000000, dye_cert: 'Silk Mark', fabric_weight_gsm: 78 },
-  { id: 'TAL-0013', garment: 'Knitwear', description: 'Organic Cotton Baby Onesie 160 GSM GOTS Certified Mothercare', manufacturer: 'Gokaldas Exports Bengaluru', quantity: 85000, unit: 'pieces', dispatch_status: 'In Warehouse', lot: 'LOT-TAL-9030', destination: 'Mothercare Port Chennai', received: '2026-07-24', batch: 'TAL-B2026-0705', cost_inr: 38000000, dye_cert: 'GOTS Organic', fabric_weight_gsm: 160 },
-  { id: 'TAL-0014', garment: 'Handloom Fabrics', description: 'Kashmir Pashmina Wool Shawl GI 100% Pashmina 2m x 1m', manufacturer: 'JCT Phagwara', quantity: 4000, unit: 'pieces', dispatch_status: 'Quality Certified', lot: 'LOT-TAL-9025', destination: 'Kashmir Government Srinagar', received: '2026-07-24', batch: 'TAL-B2026-0704', cost_inr: 68000000, dye_cert: 'GI Certified', fabric_weight_gsm: 75 },
-  { id: 'TAL-0015', garment: 'Technical Textiles', description: 'Agriculture Shade Net 75% UV Stabilized HDPE 50m Roll IS 15867', manufacturer: 'Welspun Mumbai', quantity: 20000, unit: 'meters', dispatch_status: 'Dispatched', lot: 'LOT-TAL-9036', destination: 'NINAM Bhubaneswar', received: '2026-07-23', batch: 'TAL-B2026-0702', cost_inr: 22000000, dye_cert: 'BIS IS 15867', fabric_weight_gsm: 200 },
-  { id: 'TAL-0016', garment: 'Home Textiles', description: 'Bath Towel Zero Twist 700GSM Ring Spun Cotton Taj Hotels Supply', manufacturer: 'Welspun Mumbai', quantity: 50000, unit: 'pieces', dispatch_status: 'Under QC', lot: 'LOT-TAL-9024', destination: 'Taj Group Mumbai', received: '2026-07-23', batch: 'TAL-B2026-0701', cost_inr: 32000000, dye_cert: 'Hygiene Certified', fabric_weight_gsm: 700 },
-  { id: 'TAL-0017', garment: 'Cotton Sarees', description: 'Patola Double Ikat Rajkot Handloom 5m 4-Seli GI Tag Gujarat', manufacturer: 'Raymond Thane', quantity: 3000, unit: 'pieces', dispatch_status: 'Label Pending', lot: 'LOT-TAL-9023', destination: 'Garvi Gujarat Gandhinagar', received: '2026-07-22', batch: 'TAL-B2026-0629', cost_inr: 72000000, dye_cert: 'Handloom Mark', fabric_weight_gsm: 100 },
-  { id: 'TAL-0018', garment: 'Ready-Made Garments', description: 'Kids School Uniform Cotton Polyester Blend 140 GSM CBSE 500 Schools', manufacturer: 'Nahar Spinning Ludhiana', quantity: 120000, unit: 'pieces', dispatch_status: 'Dispatched', lot: 'LOT-TAL-9022', destination: 'EPA Uniform Hub Delhi', received: '2026-07-22', batch: 'TAL-B2026-0628', cost_inr: 42000000, dye_cert: 'Azo-Free Dyes', fabric_weight_gsm: 140 },
-  { id: 'TAL-0019', garment: 'Knitwear', description: 'Sports Dri-FIT Polyester Mesh Jersey FIFA Licensed Team Kit', manufacturer: 'KPR Mill Coimbatore', quantity: 40000, unit: 'pieces', dispatch_status: 'Quality Certified', lot: 'LOT-TAL-9010', destination: 'Nivia Sports Jalandhar', received: '2026-07-21', batch: 'TAL-B2026-0625', cost_inr: 56000000, dye_cert: 'OEKO-TEX 100', fabric_weight_gsm: 140 },
-  { id: 'TAL-0020', garment: 'Denim Jeans', description: 'Women High-Rise Bootcut Stretch 10oz Stone Wash for Myntra', manufacturer: 'Arvind Mills Ahmedabad', quantity: 55000, unit: 'pieces', dispatch_status: 'In Warehouse', lot: 'LOT-TAL-9021', destination: 'Myntra Hub Bengaluru', received: '2026-07-21', batch: 'TAL-B2026-0624', cost_inr: 33000000, dye_cert: 'OEKO-TEX 100', fabric_weight_gsm: 300 },
-]
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
 
-const genRecords = (start: number) => {
-  const statuses = ['Quality Certified', 'Under QC', 'Dispatched', 'In Warehouse', 'Label Pending', 'Pending Inspection']
-  const destinations = ['NCUI Emporium Delhi', 'APEDA Port Mumbai', 'Cooptex Chennai', 'Arvind Retail Bengaluru', 'BGMEA Port Kolkata', 'Tribes India Hyd', 'CRPF Uniform Ghaziabad', 'DP World Nhava Sheva']
-  return Array.from({ length: 40 }, (_, i) => ({
-    id: `TAL-${String(start + i).padStart(4, '0')}`,
-    garment: GARMENT_TYPES[(start + i) % 8],
-    description: `${GARMENT_TYPES[(start + i) % 8]} Lot ${String((start + i) % 99 + 1).padStart(3, '0')}`,
-    manufacturer: MANUFACTURERS[(start + i) % 8],
-    quantity: Math.round(1000 + Math.random() * 99000),
-    unit: ['pieces', 'meters', 'sets', 'rolls', 'bales', 'yards', 'reams', 'units'][i % 8],
-    dispatch_status: statuses[(start + i) % 6],
-    lot: `LOT-TAL-${String(9021 + start + i)}`,
-    destination: destinations[(start + i) % 8],
-    received: `2026-07-${String(20 - Math.floor((start + i) / 10)).padStart(2, '0')}`,
-    batch: `TAL-B2026-${String(624 - Math.floor((start + i) / 3)).padStart(4, '0')}`,
-    cost_inr: Math.round(5000000 + Math.random() * 95000000),
-    dye_cert: ['OEKO-TEX 100', 'GOTS Organic', 'Silk Mark', 'WRAP Certified', 'Handloom Mark', 'BIS Certified', 'Azo-Free', 'GI Certified'][i % 8],
-    fabric_weight_gsm: Math.round(60 + Math.random() * 640),
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-violet-100 text-violet-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-violet-200 rounded-full overflow-hidden"><div className="h-full bg-violet-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#ede9fe" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
+}
+
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
+
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
+)
+
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `TXL-${String(offset + i + 1).padStart(4, '0')}`,
+    mill: ARTISANS[(offset + i) % ARTISANS.length], fabric: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 20, ((offset + i) * 19) % 20) + 1,
+    cost: ri(5000, 65000, ((offset + i) * 11107) % 60000) + 5000,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
   }))
-}
 
-const allTextile = [...textileRecords, ...genRecords(21), ...genRecords(61)]
-
-function ri(min: number, max: number, value: number) {
-  return Math.max(min, Math.min(max, value))
-}
-
-const filterGroups = [
-  {
-    key: 'garment',
-    label: 'Garment Type',
-    options: GARMENT_TYPES.map(t => ({ label: t, value: t, count: allTextile.filter(r => r.garment === t).length })),
-  },
-  {
-    key: 'manufacturer',
-    label: 'Manufacturer',
-    options: MANUFACTURERS.map(m => ({ label: m, value: m, count: allTextile.filter(r => r.manufacturer === m).length })),
-  },
-  {
-    key: 'dispatch_status',
-    label: 'Dispatch Status',
-    options: DISPATCH_STATUS.map(s => ({ label: s, value: s, count: allTextile.filter(r => r.dispatch_status === s).length })),
-  },
+const textilerecords = [
+  { id: 'TXL-0001', mill: 'Tirupur Knitwear Cluster TN', fabric: 'Organic Cotton Yardage', status: 'IS 16793 Textile Grade A', qty: 12, cost: 58000, date: '2024-01-15' },
+  { id: 'TXL-0002', mill: 'Bhilwara Textile Mills RJ', fabric: 'Silk Blend Fabric Roll', status: 'Fibre Tensile Strength QC', qty: 8, cost: 42000, date: '2024-01-28' },
+  { id: 'TXL-0003', mill: 'Surat Polyester Hub GJ', fabric: 'Denim Twill Batch', status: 'Color Fastness Wash Test', qty: 15, cost: 62000, date: '2024-02-10' },
+  { id: 'TXL-0004', mill: 'Erode Handloom Society TN', fabric: 'Linen Flax Panel', status: 'Shrinkage Ratio Check', qty: 6, cost: 35000, date: '2024-02-22' },
+  { id: 'TXL-0005', mill: 'Ichalkaranji Weaving MH', fabric: 'Polyester Knit Spool', status: 'Moisture Regain Verify', qty: 10, cost: 48000, date: '2024-03-08' },
+  { id: 'TXL-0006', mill: 'Ludhiana Wool Hosiery PB', fabric: 'Wool Worsted Lot', status: 'Fabric Grammage Confirm', qty: 4, cost: 55000, date: '2024-03-20' },
+  { id: 'TXL-0007', mill: 'Bhiwani Cotton Complex HR', fabric: 'Rayon Viscose Bolt', status: 'IS 16793 Textile Grade A', qty: 9, cost: 60000, date: '2024-04-03' },
+  { id: 'TXL-0008', mill: 'Kanchipuram Silk Guild TN', fabric: 'Chiffon Georgette Roll', status: 'Fibre Tensile Strength QC', qty: 3, cost: 65000, date: '2024-04-16' },
+  { id: 'TXL-0009', mill: 'Tirupur Knitwear Cluster TN', fabric: 'Silk Blend Fabric Roll', status: 'Color Fastness Wash Test', qty: 7, cost: 40000, date: '2024-04-28' },
+  { id: 'TXL-0010', mill: 'Bhilwara Textile Mills RJ', fabric: 'Organic Cotton Yardage', status: 'Shrinkage Ratio Check', qty: 11, cost: 52000, date: '2024-05-10' },
+  { id: 'TXL-0011', mill: 'Surat Polyester Hub GJ', fabric: 'Denim Twill Batch', status: 'Moisture Regain Verify', qty: 14, cost: 58000, date: '2024-05-23' },
+  { id: 'TXL-0012', mill: 'Erode Handloom Society TN', fabric: 'Linen Flax Panel', status: 'Fabric Grammage Confirm', qty: 5, cost: 38000, date: '2024-06-05' },
+  { id: 'TXL-0013', mill: 'Ichalkaranji Weaving MH', fabric: 'Polyester Knit Spool', status: 'IS 16793 Textile Grade A', qty: 8, cost: 45000, date: '2024-06-18' },
+  { id: 'TXL-0014', mill: 'Ludhiana Wool Hosiery PB', fabric: 'Wool Worsted Lot', status: 'Fibre Tensile Strength QC', qty: 3, cost: 62000, date: '2024-07-01' },
+  { id: 'TXL-0015', mill: 'Bhiwani Cotton Complex HR', fabric: 'Rayon Viscose Bolt', status: 'Color Fastness Wash Test', qty: 10, cost: 50000, date: '2024-07-14' },
+  { id: 'TXL-0016', mill: 'Kanchipuram Silk Guild TN', fabric: 'Chiffon Georgette Roll', status: 'Shrinkage Ratio Check', qty: 6, cost: 55000, date: '2024-07-26' },
+  { id: 'TXL-0017', mill: 'Tirupur Knitwear Cluster TN', fabric: 'Organic Cotton Yardage', status: 'Moisture Regain Verify', qty: 13, cost: 48000, date: '2024-08-08' },
+  { id: 'TXL-0018', mill: 'Bhilwara Textile Mills RJ', fabric: 'Silk Blend Fabric Roll', status: 'Fabric Grammage Confirm', qty: 7, cost: 42000, date: '2024-08-20' },
+  { id: 'TXL-0019', mill: 'Surat Polyester Hub GJ', fabric: 'Denim Twill Batch', status: 'IS 16793 Textile Grade A', qty: 16, cost: 60000, date: '2024-09-02' },
+  { id: 'TXL-0020', mill: 'Erode Handloom Society TN', fabric: 'Linen Flax Panel', status: 'Fibre Tensile Strength QC', qty: 4, cost: 36000, date: '2024-09-14' },
 ]
-
-function GarmentBadge({ garment }: { garment: string }) {
-  const colors: Record<string, string> = { 'Cotton Sarees': 'bg-pink-100 text-pink-800', 'Silk sarees': 'bg-rose-100 text-rose-800', 'Ready-Made Garments': 'bg-fuchsia-100 text-fuchsia-800', 'Denim Jeans': 'bg-blue-100 text-blue-800', Knitwear: 'bg-orange-100 text-orange-800', 'Handloom Fabrics': 'bg-amber-100 text-amber-800', 'Technical Textiles': 'bg-green-100 text-green-800', 'Home Textiles': 'bg-purple-100 text-purple-800' }
-  return <span className={`tal-garment-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[garment] || 'bg-gray-100 text-gray-800'}`}>{garment}</span>
-}
-
-function StatusBadge({ status }: { status: string }) {
-  const colors: Record<string, string> = { 'Quality Certified': 'bg-green-100 text-green-800', 'Under QC': 'bg-yellow-100 text-yellow-800', Dispatched: 'bg-blue-100 text-blue-800', 'In Warehouse': 'bg-cyan-100 text-cyan-800', 'Label Pending': 'bg-orange-100 text-orange-800', 'Pending Inspection': 'bg-gray-200 text-gray-700' }
-  return <span className={`tal-status-badge inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${colors[status] || 'bg-gray-100 text-gray-700'}`}>{status}</span>
-}
-
-function CostBar({ cost }: { cost: number }) {
-  const pct = ri(0, 100, (cost / 100000000) * 100)
-  const color = cost >= 80000000 ? 'bg-pink-600' : cost >= 40000000 ? 'bg-pink-500' : cost >= 20000000 ? 'bg-pink-400' : 'bg-pink-300'
-  return <div className="tal-cost-bar flex items-center gap-2"><div className="h-2 w-20 rounded-full bg-gray-200"><div className={`tal-cost-bar-fill h-2 rounded-full ${color} transition-all`} style={{ width: `${pct}%` }} /></div><span className="text-xs text-gray-500">{'₹' + (cost / 10000000).toFixed(1) + 'Cr'}</span></div>
-}
-
-function HealthRing({ value, label, color }: { value: number; label: string; color: string }) {
-  const r = 28, cx = 35, cy = 35, sw = 5
-  const circ = 2 * Math.PI * r
-  const offset = circ - (ri(0, 100, value) / 100) * circ
-  return <div className="tal-health-ring flex flex-col items-center"><svg width={70} height={70} className="-rotate-90"><circle cx={cx} cy={cy} r={r} fill="none" stroke="#e5e7eb" strokeWidth={sw} /><circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={sw} strokeDasharray={circ} strokeDashoffset={offset} className="tal-ring-path" strokeLinecap="round" /></svg><span className="tal-ring-value mt-1 text-sm font-bold" style={{ color }}>{value}%</span><span className="text-xs text-gray-500">{label}</span></div>
-}
-
-function KpiTile({ title, value, sub }: { title: string; value: string; sub: string }) {
-  return <Card className="tal-kpi-card"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="tal-kpi-value mt-1 text-2xl font-bold">{value}</p><p className="text-xs text-gray-400 mt-0.5">{sub}</p></CardContent></Card>
-}
-
-function ValueTile({ title, value, trend }: { title: string; value: string; trend: string }) {
-  const up = trend.startsWith('+')
-  return <Card className="tal-value-tile"><CardContent className="p-4"><p className="text-xs text-gray-500">{title}</p><p className="mt-1 text-xl font-bold">{value}</p><p className={`text-xs mt-0.5 ${up ? 'text-green-600' : 'text-red-500'}`}>{trend}</p></CardContent></Card>
-}
 
 export default function TextileApparelLogisticsView() {
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [tab, setTab] = useState('dashboard')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
 
-  const toggleFilter = (key: string, value: string) => {
-    setActiveFilters(prev => {
-      const curr = prev[key] || []
-      const next = curr.includes(value) ? curr.filter(v => v !== value) : [...curr, value]
-      return next.length > 0 ? { ...prev, [key]: next } : Object.fromEntries(Object.entries(prev).filter(([k]) => k !== key))
-    })
-  }
+  const allRecords = [...textilerecords, ...genRecords(21), ...genRecords(41)]
 
-  const filtered = allTextile.filter(t => {
-    const q = searchQuery.toLowerCase()
-    if (q && !t.id.toLowerCase().includes(q) && !t.garment.toLowerCase().includes(q) && !t.description.toLowerCase().includes(q) && !t.manufacturer.toLowerCase().includes(q) && !t.destination.toLowerCase().includes(q)) return false
-    return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(t[key as keyof typeof t] as string))
-  })
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.fabric.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
 
-  const totalCost = allTextile.reduce((s, t) => s + t.cost_inr, 0)
-  const certified = allTextile.filter(t => t.dispatch_status === 'Quality Certified').length
-  const underQC = allTextile.filter(t => t.dispatch_status === 'Under QC').length
-
-  const monthlyData = [
-    { month: 'Jan', lots: 95, value_cr: 52, quality: 97 },
-    { month: 'Feb', lots: 118, value_cr: 68, quality: 96 },
-    { month: 'Mar', lots: 155, value_cr: 92, quality: 98 },
-    { month: 'Apr', lots: 82, value_cr: 42, quality: 95 },
-    { month: 'May', lots: 140, value_cr: 78, quality: 97 },
-    { month: 'Jun', lots: 58, value_cr: 32, quality: 94 },
-    { month: 'Jul', lots: 168, value_cr: 98, quality: 98 },
+  const filterGroups = [
+    { key: 'fabric', label: 'Fabric', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.fabric === p).length })) },
+    { key: 'mill', label: 'Mill', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.mill === p).length })) },
   ]
-  const garmentData = GARMENT_TYPES.map(t => ({ garment: t, count: allTextile.filter(r => r.garment === t).length }))
-  const mfrData = MANUFACTURERS.map(m => ({ manufacturer: m, count: allTextile.filter(r => r.manufacturer === m).length }))
 
-  const tabs = [
-    { value: 'dashboard', label: 'Dashboard' },
-    { value: 'shipments', label: 'Shipments' },
-    { value: 'analytics', label: 'Analytics' },
-    { value: 'insights', label: 'Insights' },
-  ]
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const millChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.mill === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
 
   return (
-    <div className="tal-container space-y-4">
-      <PageHeader title="Textile & Apparel Logistics" description="India textile and apparel supply chain with Handloom Mark GI tagging, OEKO-TEX dye certification tracking, APEDA export documentation, and SAMARTH capacity building integration across 32 handloom clusters and 450+ textile mills" />
-      <ModuleBreadcrumb items={[{ label: 'Apparel' }, { label: 'Textile Logistics' }]} />
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="tal-tabs-list">
-          {tabs.map(t => <TabsTrigger key={t.value} value={t.value} className="tal-tab-trigger">{t.label}</TabsTrigger>)}
+    <div className="txa-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Textile Apparel' }]} />
+      <PageHeader title="Textile Apparel Logistics" description="Indian textile apparel supply chain with IS 16793 textile grade certification, fibre tensile strength testing, color fastness wash verification, shrinkage ratio analysis, moisture regain measurement, and fabric grammage confirmation across 8 major textile clusters in Tirupur, Bhilwara, Surat, and Ludhiana" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-violet-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
         </TabsList>
-
-        <TabsContent value="dashboard" className="tal-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <KpiTile title="Total Lots" value={allTextile.length.toString()} sub="Textile consignments" />
-            <KpiTile title="Total Value" value={`₹${(totalCost / 10000000).toFixed(0)}Cr`} sub="Inventory value" />
-            <KpiTile title="Quality Certified" value={certified.toString()} sub={`${((certified / allTextile.length) * 100).toFixed(0)}% certified`} />
-            <KpiTile title="Under QC" value={underQC.toString()} sub="Pending lab results" />
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Fabric Types" value={PRODUCTS.length} />
+            <KpiTile label="Textile Clusters" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
           </div>
-          <div className="grid gap-4 grid-cols-3 md:grid-cols-6">
-            <HealthRing value={97} label="OEKO-TEX Rate" color="#db2777" />
-            <HealthRing value={94} label="GI Tag Coverage" color="#be185d" />
-            <HealthRing value={92} label="Export Readiness" color="#ec4899" />
-            <HealthRing value={96} label="Handloom Share" color="#9d174d" />
-            <HealthRing value={91} label="Dye Compliance" color="#831843" />
-            <HealthRing value={98} label="Label Accuracy" color="#f472b6" />
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="Grade" value={93} />
+            <HealthRing label="Tensile" value={88} />
+            <HealthRing label="Fastness" value={86} />
+            <HealthRing label="Shrink" value={91} />
+            <HealthRing label="Moisture" value={84} />
+            <HealthRing label="Grammage" value={89} />
           </div>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="tal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Monthly Lot Volume & Quality Index</CardTitle></CardHeader><CardContent><LineChart data={monthlyData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="month" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Line type="monotone" dataKey="lots" stroke="#db2777" strokeWidth={2} /><Line type="monotone" dataKey="quality" stroke="#be185d" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
-            <Card className="tal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Inventory by Garment Type</CardTitle></CardHeader><CardContent><BarChart data={garmentData} width={300} height={200}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="garment" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="count" fill="#db2777" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="tal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Manufacturer Distribution</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={mfrData} dataKey="count" nameKey="manufacturer" cx="50%" cy="50%" outerRadius={70} label={({ manufacturer, count }) => `${count}`}>{mfrData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="India Rank" value="2nd Global" />
+            <ValueTile label="Annual Output" value="₹12.4 Lakh Cr" />
+            <ValueTile label="Export Markets" value="120 Countries" />
+            <ValueTile label="Employment" value="45 Million" />
           </div>
         </TabsContent>
-
-        <TabsContent value="shipments" className="tal-tab-content space-y-4 mt-4">
-          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={allTextile.length} filteredCount={filtered.length} onRefresh={() => {}} placeholder="Search by ID, garment type, manufacturer, destination, or lot..." />
-          <div className="overflow-x-auto rounded-lg border">
-            <table className="tal-table w-full text-sm">
-              <thead><tr className="tal-table-header bg-gray-50"><th className="px-3 py-2 text-left font-medium">ID</th><th className="px-3 py-2 text-left font-medium">Garment</th><th className="px-3 py-2 text-left font-medium">Status</th><th className="px-3 py-2 text-left font-medium">Qty</th><th className="px-3 py-2 text-left font-medium">Value</th><th className="px-3 py-2 text-left font-medium">Manufacturer</th><th className="px-3 py-2 text-left font-medium">Destination</th><th className="px-3 py-2 text-left font-medium">Lot</th><th className="px-3 py-2 text-left font-medium">GSM</th></tr></thead>
-              <tbody>{filtered.slice(0, 20).map(t => (
-                <tr key={t.id} className="tal-table-row border-t hover:bg-gray-50 transition-colors">
-                  <td className="px-3 py-2 font-mono text-xs">{t.id}</td>
-                  <td className="px-3 py-2"><GarmentBadge garment={t.garment} /></td>
-                  <td className="px-3 py-2"><StatusBadge status={t.dispatch_status} /></td>
-                  <td className="px-3 py-2 text-xs">{t.quantity.toLocaleString('en-IN')} {t.unit}</td>
-                  <td className="px-3 py-2"><CostBar cost={t.cost_inr} /></td>
-                  <td className="px-3 py-2 text-xs">{t.manufacturer}</td>
-                  <td className="px-3 py-2 text-xs">{t.destination}</td>
-                  <td className="px-3 py-2 text-xs font-mono">{t.lot}</td>
-                  <td className="px-3 py-2 text-xs">{t.fabric_weight_gsm}g</td>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search textile apparel shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-violet-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Fabric</th>
+                  <th className="p-3 text-left font-medium">Mill</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
                 </tr>
-              ))}</tbody>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-violet-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.fabric} /></td>
+                    <td className="p-3">{record.mill}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['rolls', 'batches', 'yards', 'bolts'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </TabsContent>
-
-        <TabsContent value="analytics" className="tal-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            <ValueTile title="Avg Lot Value" value="₹5.8Cr" trend="+11.2% vs last quarter" />
-            <ValueTile title="Handloom Share" value="32.4%" trend="+4.6% growing" />
-            <ValueTile title="Export FOB" value="₹2.8Cr/day" trend="+8.5% increased" />
-            <ValueTile title="GI Tagged SKUs" value="1,240" trend="+18.2% registered" />
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Mill Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={millChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {millChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="tal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Value by Garment Category</CardTitle></CardHeader><CardContent><BarChart data={GARMENT_TYPES.map(t => ({ garment: t, total: allTextile.filter(r => r.garment === t).reduce((s, r) => s + r.cost_inr, 0) / 10000000 }))} width={400} height={250}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="garment" fontSize={10} angle={-30} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="total" fill="#be185d" radius={[4,4,0,0]} /></BarChart></CardContent></Card>
-            <Card className="tal-chart-card"><CardHeader className="pb-2"><CardTitle className="text-sm">Dispatch Status Breakdown</CardTitle></CardHeader><CardContent><PieChart width={400} height={250}><Pie data={DISPATCH_STATUS.map(s => ({ status: s, count: allTextile.filter(t => t.dispatch_status === s).length }))} dataKey="count" nameKey="status" cx="50%" cy="50%" outerRadius={80} label>{DISPATCH_STATUS.map((_, i) => <Cell key={i} fill={['#22c55e','#eab308','#3b82f6','#06b6d4','#f97316','#9ca3af'][i]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
-          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
         </TabsContent>
-
-        <TabsContent value="insights" className="tal-tab-content space-y-4 mt-4">
-          <div className="grid gap-4 md:grid-cols-2">
-            <Card className="tal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">Handloom Mark & GI Tag Digital Registry</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>National Handloom Mark Authority (NHMA) digital registry tracking 32 handloom clusters across India with GI-tagged product authentication. Real-time Geographical Indication verification for Banarasi, Kanchipuram, Pochampally, Chanderi, Patola, and Pashmina ensuring 100% genuine provenance. Blockchain-based weaver identity authentication linking 2.8 lakh handloom weavers to their products via NFC-enabled tags. Integration with India Handloom Brand (IHB) portal for e-commerce marketplace direct-to-consumer traceability. AI-powered counterfeit detection model scanning marketplace listings for fake GI-tagged products with 94% accuracy across 12 platforms.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-pink-100 px-2 py-0.5 text-pink-800">Critical</span><span className="text-gray-400">Live</span></div></CardContent></Card>
-            <Card className="tal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">SAMARTH Textile Skill & Technology Upgradation</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Ministry of Textiles SAMARTH scheme monitoring 412 textile clusters with real-time technology upgradation tracking across spinning, weaving, and processing segments. Automated capital subsidy disbursement tracking for 1,850+ approved units under Technology Upgradation Fund Scheme (TUFS) with DBT integration. Real-time production capacity utilization monitoring across 450+ mills with IoT-enabled loom counting and energy metering. Integration with textile research associations (TRA) including BTRA, SITRA, MANTRA, and NITRA for standardized testing and certification workflows. AI-driven demand forecasting for RMG exports using US/EU retail inventory data and fashion trend analysis covering 85% of India textile export destinations.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-rose-100 px-2 py-0.5 text-rose-800">Operational</span><span className="text-gray-400">Q3 2026</span></div></CardContent></Card>
-            <Card className="tal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">APEDA Export Documentation & AEO Integration</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Agricultural and Processed Food Products Export Development Authority (APEDA) RCMS integration for textile export documentation across 8,500+ registered exporters. Automated Export Obligation (EO) fulfillment tracking under Advance Authorization and EPCG schemes via DGFT portal. Authorized Economic Operator (AEO) certified factory fast-lane customs clearance reducing export container dwell time from 72 hours to 18 hours. Integration with Indian Merchandise Exports from India (MEIS) / RoDTEP scheme for real-time duty credit tracking and scrip utilization. Blockchain-based Certificate of Origin issuance reducing document preparation time by 65% for 3,800+ exporters.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-fuchsia-100 px-2 py-0.5 text-fuchsia-800">Strategic</span><span className="text-gray-400">FY2027</span></div></CardContent></Card>
-            <Card className="tal-insight-card hover:shadow-md transition-shadow"><CardHeader><CardTitle className="text-sm">AI Fabric Defect Detection & Zero-Waste Pattern Cutting</CardTitle></CardHeader><CardContent className="text-xs text-gray-600 space-y-2"><p>Computer vision fabric defect detection system scanning 480 meters of fabric per hour across 42 inspection stations detecting weaving, dyeing, and printing defects with 99.1% accuracy. AI-driven zero-waste pattern cutting algorithm reducing fabric utilization waste from 15% to 8% across 6,200+ garment styles saving 180 lakh meters annually. Integration with CAD/CAM systems (Gerber AccuMark, Lectra Modaris) for automated marker efficiency optimization achieving 92% fabric utilization. Predictive color matching engine reducing dye lab trial-and-error time by 55% using spectrophotometer data and historical shade libraries. Real-time production tracking via RFID-tagged fabric rolls from greige to finished garment maintaining 100% material traceability.</p><div className="flex items-center gap-2"><span className="inline-flex items-center rounded-full bg-purple-100 px-2 py-0.5 text-purple-800">Innovation</span><span className="text-gray-400">Pilot</span></div></CardContent></Card>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>India Textile Industry — USD 190 Billion Global Supply Chain Ecosystem</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The Indian textile and apparel industry represents one of the oldest and most economically significant manufacturing sectors of the Indian economy having a continuous manufacturing heritage spanning over five thousand years from the ancient Indus Valley civilisation cotton weaving traditions through the medieval Mughal court textile workshops to the modern industrial textile clusters that position India as the second largest textile manufacturer globally with an annual industry output valued at approximately one hundred and ninety billion US dollars employing over forty-five million workers directly and an additional one hundred million workers indirectly across the complete textile value chain from cotton cultivation ginning and spinning through weaving knitting processing dyeing printing and finishing to garment manufacturing and retail distribution where the Indian textile industry encompasses an extraordinary range of fibre materials including cotton silk wool jute linen and synthetic fibres produced across eight major textile clusters including Tirupur in Tamil Nadu recognised as the largest knitwear production hub in Asia with over ten thousand knitting units producing cotton knitwear garments for global export brands Bhilwara in Rajasthan operating as the largest synthetic textile manufacturing centre in India with integrated spinning weaving and processing mills producing polyester viscose and blended fabrics Surat in Gujarat functioning as the largest man-made fibre textile hub in India processing over forty percent of India's total polyester filament yarn production and Ludhiana in Punjab serving as the primary woollen hosiery and knitwear production centre for winter apparel serving the domestic and export markets where the Indian textile supply chain logistics operations involve the movement of raw fibre materials finished fabrics and garment products across an extensive network of textile mills processing units garment factories warehouses and distribution centres spanning the entire geographic extent of India from cotton ginning facilities in Maharashtra and Gujarat through processing mills in Tamil Nadu and Rajasthan to garment manufacturing units in the National Capital Region and export consolidation centres at major seaports including Chennai Mundra Kandla and Nhava Sheva handling annual textile export volumes valued at approximately forty billion US dollars creating complex multi-modal logistics requirements that demand sophisticated supply chain management systems for inventory tracking quality assurance compliance documentation and timely delivery coordination across the complete textile and apparel value chain.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>IS 16793 Textile Grade & Fibre Tensile Strength Quality Framework</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The IS 16793 textile grade certification and fibre tensile strength quality framework establishes the primary national standard for textile fabric quality assessment in India providing a comprehensive classification system that grades textile fabrics into five quality grades from Grade A premium export quality through Grade B standard quality Grade C commercial quality Grade D utility quality to Grade E reject quality based on a multi-parameter evaluation protocol that measures fibre tensile strength colour fastness shrinkage ratio moisture regain and fabric grammage against the quantitative thresholds specified in the IS 16793 standard published by the Bureau of Indian Standards where the fibre tensile strength quality test measures the maximum breaking force of the textile fabric specimen using a universal testing machine in accordance with IS 1963 strip method testing methodology confirming minimum tensile strength of one hundred and fifty Newtons per centimetre width for Grade A cotton fabrics and minimum two hundred Newtons per centimetre width for Grade A polyester blend fabrics ensuring the textile fabric maintains adequate mechanical strength to withstand the stresses of garment manufacturing cutting sewing and wearing without fabric rupture seam failure or structural degradation during the complete garment lifecycle where the colour fastness wash test evaluates the resistance of the textile dye to colour transfer and fading during standardised washing procedures conducted in accordance with IS 3361 colour fastness testing methodology using a calibrated laboratory washing machine at sixty degrees Celsius for thirty minutes with specified detergent concentration and liquor ratio measuring colour change on a five-point grey scale and staining on adjacent fabric on a separate four-point staining scale with minimum acceptable ratings of Grade four for colour change and Grade three for staining for Grade A textile fabrics ensuring the dyed textile fabric maintains its original colour appearance through repeated washing cycles without unacceptable fading or colour bleeding onto adjacent garment panels during consumer use where the shrinkage ratio check measures the dimensional change of the textile fabric after standardised washing and drying procedures confirming maximum shrinkage of three percent in warp direction and two percent in weft direction for Grade A cotton fabrics and two percent in both directions for Grade A synthetic fabrics ensuring garment manufacturers can accurately predict the dimensional behaviour of the textile fabric during post-manufacturing washing and finishing operations enabling precise pattern cutting and garment construction that accommodates the expected dimensional changes of the textile substrate.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Moisture Regain Measurement & Fabric Grammage Verification</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The moisture regain measurement and fabric grammage verification protocols form essential components of the Indian textile quality assurance framework ensuring that textile fabrics meet the precise physical property specifications required for consistent garment manufacturing performance and predictable consumer product behaviour where the moisture regain test measures the percentage weight increase of a bone-dry textile fabric specimen when exposed to standard atmospheric conditions of twenty degrees Celsius plus or minus two degrees and sixty-five percent plus or minus two percent relative humidity in accordance with IS 6339 textile moisture testing methodology where the moisture regain percentage is calculated as the difference between the conditioned weight and the bone-dry weight divided by the bone-dry weight multiplied by one hundred and expressed as a percentage with standard moisture regain values of eight point five percent for cotton five percent for viscose rayon zero point four percent for polyester eleven percent for silk and thirteen point six percent for wool where deviation from the standard moisture regain value beyond the acceptable tolerance of plus or minus zero point five percentage points indicates abnormal fibre quality contamination with hygroscopic impurities or improper textile processing that could affect the dyeing behaviour dimensional stability and hand feel of the finished textile fabric requiring quarantine and reprocessing before the fabric can be released for garment manufacturing where the fabric grammage verification test measures the mass per unit area of the textile fabric expressed in grams per square metre using a standardised circular specimen cutter of one hundred square centimetre area and a calibrated precision balance with resolution of zero point one milligram in accordance with IS 1964 fabric weight testing methodology confirming that the measured fabric grammage falls within the specified tolerance range of plus or minus five percent of the declared grammage value ensuring garment manufacturers receive textile fabric of consistent weight and thickness that enables precise fabric consumption calculations for garment pattern cutting and costing operations where grammage deviation beyond the acceptable tolerance range causes excess fabric consumption and increased garment manufacturing cost or insufficient fabric coverage and compromised garment visual quality both outcomes requiring immediate corrective action by the textile mill to bring the fabric grammage within specification before shipment to the garment manufacturing customer.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Textile Warehouse Cold Storage & India Export Market Strategy</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The textile warehouse and cold storage infrastructure for the Indian textile apparel supply chain has been designed to accommodate the specific environmental sensitivity requirements of different textile fibre materials and finished fabric products across the complete distribution network from textile mill dispatch warehouses to regional distribution centres and retail garment hubs where the primary storage specification for cotton and cotton blend fabrics maintains warehouse temperature between eighteen and twenty-five degrees Celsius with relative humidity between fifty and sixty-five percent measured by calibrated digital sensors with continuous monitoring and automated ventilation activation when humidity exceeds the sixty-five percent upper threshold preventing moisture absorption by the hygroscopic cotton fibres that causes dimensional changes mould growth and microbial degradation during extended storage periods where the silk and woollen textile storage areas maintain more stringent climate control with temperature between fifteen and twenty degrees Celsius and relative humidity between fifty and fifty-five percent with Refrigerator storage units for premium silk fabrics maintaining temperature below twelve degrees Celsius for long-term preservation of the delicate protein fibres preventing oxidation yellowing and insect damage by carpet beetle and clothes moth larvae that particularly target silk and woollen textile materials during warehouse storage where the warehouse racking system uses adjustable-width steel shelving to accommodate the varying roll widths of different textile products from narrow fabric rolls of sixty centimetres to wide fabric rolls of one hundred and eighty centimetres with acid-free tissue interleaving between stacked fabric rolls preventing colour transfer between adjacent fabric rolls and fibre abrasion during storage retrieval operations where the India textile export market strategy coordinated by the Textile Commissioner and the Apparel Export Promotion Council has established comprehensive export facilitation infrastructure connecting Indian textile manufacturers with global buyers in over one hundred and twenty countries through export promotion zones integrated logistics hubs and bilateral trade agreements that position Indian textile exports for sustained growth in the premium garment and home textiles market segments where the projected annual textile export growth rate of eight percent driven by expanding demand for sustainable organic cotton textiles and India's competitive advantage in low-cost high-volume garment manufacturing creates significant opportunities for logistics service providers specialising in textile supply chain operations.</p></CardContent>
+            </Card>
           </div>
         </TabsContent>
       </Tabs>
     </div>
   )
 }
+
+
+

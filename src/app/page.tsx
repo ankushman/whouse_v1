@@ -323,7 +323,6 @@ import RajasthanBluePotteryLogisticsView from "@/components/modules/rajasthan-bl
 import KanchipuramSilkSareeLogisticsView from "@/components/modules/kanchipuram-silk-saree-logistics"
 import GondTribalArtMadhyaPradeshLogisticsView from "@/components/modules/gond-tribal-art-madhya-pradesh-logistics"
 import NirmalPaintingTelanganaLogisticsView from "@/components/modules/nirmal-painting-telangana-logistics"
-import CheriyalScrollArtTelanganaLogisticsView from "@/components/modules/cheriyal-scroll-art-telangana-logistics"
 import SankhedaLacquerwareGujaratLogisticsView from "@/components/modules/sankheda-lacquerware-gujarat-logistics-view"
 import TanjorePaintingTamilNaduLogisticsView from "@/components/modules/tanjore-painting-tamil-nadu-logistics-view"
 import PatolaDoubleIkatGujaratLogisticsView from "@/components/modules/patola-double-ikat-gujarat-logistics-view"
@@ -358,6 +357,7 @@ import PichwaiRajasthanLogisticsView from "@/components/modules/pichwai-rajastha
 import WarliMaharashtraLogisticsView from "@/components/modules/warli-maharashtra-logistics-view"
 import GondMadhyaLogisticsView from "@/components/modules/gond-madhya-logistics-view"
 import KalighatBengalLogisticsView from "@/components/modules/kalighat-bengal-logistics-view"
+import CheriyalScrollArtTelanganaLogisticsView from "@/components/modules/cheriyal-scroll-art-telangana-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -680,7 +680,6 @@ const viewMap: Record<string, React.ComponentType> = {
   "kanchipuram-silk-saree-logistics": KanchipuramSilkSareeLogisticsView,
   "gond-tribal-art-madhya-pradesh-logistics": GondTribalArtMadhyaPradeshLogisticsView,
   "nirmal-painting-telangana-logistics": NirmalPaintingTelanganaLogisticsView,
-  "cheriyal-scroll-art-telangana-logistics": CheriyalScrollArtTelanganaLogisticsView,
   "sankheda-lacquerware-gujarat-logistics": SankhedaLacquerwareGujaratLogisticsView,
   "tanjore-painting-tamil-nadu-logistics": TanjorePaintingTamilNaduLogisticsView,
   "patola-double-ikat-gujarat-logistics": PatolaDoubleIkatGujaratLogisticsView,
@@ -715,6 +714,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "warli-maharashtra-logistics": WarliMaharashtraLogisticsView,
   "gond-madhya-logistics": GondMadhyaLogisticsView,
   "kalighat-bengal-logistics": KalighatBengalLogisticsView,
+  "cheriyal-scroll-art-telangana-logistics": CheriyalScrollArtTelanganaLogisticsView,
 }
 
 

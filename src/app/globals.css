@@ -55110,3 +55110,23 @@ html.theme-transition body {
 @keyframes kalFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes kalPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(225, 29, 72, 0); } }
 @keyframes kalRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* che-* — Cheriyal Scroll Art Telangana Logistics */
+.che-root { background: linear-gradient(135deg, #fff1f2 0%, #fecdd3 50%, #fda4af 100%); }
+.che-root .card { border: 1px solid #f87171; border-radius: 0.75rem; }
+.che-root table thead { background: #ffe4e6; }
+.che-root table tbody tr:hover { background: rgba(159, 18, 57, 0.06); }
+.che-root .inline-flex.items-center.rounded-full { border: 1px solid #e11d48; }
+@keyframes cheFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes chePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(159, 18, 57, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(159, 18, 57, 0); } }
+@keyframes cheRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* txa-* — Textile Apparel Logistics */
+.txa-root { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #ddd6fe 100%); }
+.txa-root .card { border: 1px solid #a78bfa; border-radius: 0.75rem; }
+.txa-root table thead { background: #ede9fe; }
+.txa-root table tbody tr:hover { background: rgba(124, 58, 237, 0.06); }
+.txa-root .inline-flex.items-center.rounded-full { border: 1px solid #8b5cf6; }
+@keyframes txaFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes txaPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(124, 58, 237, 0); } }
+@keyframes txaRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }

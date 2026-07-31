@@ -314,7 +314,6 @@ export { default as RajasthanBluePotteryLogisticsView } from './rajasthan-blue-p
 export { default as KanchipuramSilkSareeLogisticsView } from './kanchipuram-silk-saree-logistics'
 export { default as GondTribalArtMadhyaPradeshLogisticsView } from './gond-tribal-art-madhya-pradesh-logistics'
 export { default as NirmalPaintingTelanganaLogisticsView } from './nirmal-painting-telangana-logistics'
-export { default as CheriyalScrollArtTelanganaLogisticsView } from './cheriyal-scroll-art-telangana-logistics'
 export { default as SankhedaLacquerwareGujaratLogisticsView } from './sankheda-lacquerware-gujarat-logistics-view'
 export { default as TanjorePaintingTamilNaduLogisticsView } from './tanjore-painting-tamil-nadu-logistics-view'
 export { default as PatolaDoubleIkatGujaratLogisticsView } from './patola-double-ikat-gujarat-logistics-view'
@@ -349,3 +348,4 @@ export { default as PichwaiRajasthanLogisticsView } from './pichwai-rajasthan-lo
 export { default as WarliMaharashtraLogisticsView } from './warli-maharashtra-logistics-view'
 export { default as GondMadhyaLogisticsView } from './gond-madhya-logistics-view'
 export { default as KalighatBengalLogisticsView } from './kalighat-bengal-logistics-view'
+export { default as CheriyalScrollArtTelanganaLogisticsView } from './cheriyal-scroll-art-telangana-logistics-view'
