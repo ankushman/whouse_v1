@@ -323,6 +323,7 @@ export { default as KutchBandhaniGujaratLogisticsView } from './kutch-bandhani-g
 export { default as MiniaturePaintingRajasthanLogisticsView } from './miniature-painting-rajasthan-logistics-view'
 export { default as OdishaPipliAppliqueLogisticsView } from './odisha-pipli-applique-logistics-view'
 export { default as BhilTribalArtMadhyaPradeshLogisticsView } from './bhil-tribal-art-madhya-pradesh-logistics-view'
+export { default as SanjhiPaperArtUttarPradeshLogisticsView } from './sanjhi-paper-art-uttar-pradesh-logistics-view'
 export { default as KashmirSozniEmbroideryLogisticsView } from './kashmir-sozni-embroidery-logistics-view'
 export { default as WarliTribalPaintingMaharashtraLogisticsView } from './warli-tribal-painting-maharashtra-logistics-view'
 export { default as ChanderiSilkWeavingMadhyaPradeshLogisticsView } from './chanderi-silk-weaving-madhya-pradesh-logistics-view'

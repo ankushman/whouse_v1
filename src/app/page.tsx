@@ -333,6 +333,7 @@ import KutchBandhaniGujaratLogisticsView from "@/components/modules/kutch-bandha
 import MiniaturePaintingRajasthanLogisticsView from "@/components/modules/miniature-painting-rajasthan-logistics-view"
 import OdishaPipliAppliqueLogisticsView from "@/components/modules/odisha-pipli-applique-logistics-view"
 import BhilTribalArtMadhyaPradeshLogisticsView from "@/components/modules/bhil-tribal-art-madhya-pradesh-logistics-view"
+import SanjhiPaperArtUttarPradeshLogisticsView from "@/components/modules/sanjhi-paper-art-uttar-pradesh-logistics-view"
 import KashmirSozniEmbroideryLogisticsView from "@/components/modules/kashmir-sozni-embroidery-logistics-view"
 import WarliTribalPaintingMaharashtraLogisticsView from "@/components/modules/warli-tribal-painting-maharashtra-logistics-view"
 import ChanderiSilkWeavingMadhyaPradeshLogisticsView from "@/components/modules/chanderi-silk-weaving-madhya-pradesh-logistics-view"
@@ -669,6 +670,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "miniature-painting-rajasthan-logistics": MiniaturePaintingRajasthanLogisticsView,
   "odisha-pipli-applique-logistics": OdishaPipliAppliqueLogisticsView,
   "bhil-tribal-art-madhya-pradesh-logistics": BhilTribalArtMadhyaPradeshLogisticsView,
+  "sanjhi-paper-art-uttar-pradesh-logistics": SanjhiPaperArtUttarPradeshLogisticsView,
   "kashmir-sozni-embroidery-logistics": KashmirSozniEmbroideryLogisticsView,
   "warli-tribal-painting-maharashtra-logistics": WarliTribalPaintingMaharashtraLogisticsView,
   "chanderi-silk-weaving-madhya-pradesh-logistics": ChanderiSilkWeavingMadhyaPradeshLogisticsView,
