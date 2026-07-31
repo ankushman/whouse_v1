@@ -292,3 +292,5 @@ export { default as ChhauMaskDanceLogisticsView } from './chhau-mask-dance-logis
 export { default as KanthaEmbroideryBengalLogisticsView } from './kantha-embroidery-bengal-logistics-view'
 export { default as RajasthanPuppetryLogisticsView } from './rajasthan-puppetry-logistics-view'
 export { default as BanarasiSilkWeavingLogisticsView } from './banarasi-silk-weaving-logistics-view'
+export { default as MadhubaniPaintingBiharLogisticsView } from './madhubani-painting-bihar-logistics-view'
+export { default as PattachitraOdishaLogisticsView } from './pattachitra-odisha-logistics-view'

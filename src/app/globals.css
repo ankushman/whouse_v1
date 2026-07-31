@@ -53780,3 +53780,47 @@ html.theme-transition body {
 @keyframes bsw-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes bsw-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(88,28,135,0.15); } }
 @keyframes bsw-glow-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(88,28,135,0.25); } }
+
+/* Madhubani Painting Bihar (mpb-*) */
+.mpb-root { animation: mpb-fade-in 0.3s ease-out; }
+.mpb-badge { transition: all 0.2s; }
+.mpb-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(146,64,14,0.15); }
+.mpb-kpi { transition: all 0.25s; border-left: 3px solid #92400e; }
+.mpb-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(146,64,14,0.12); }
+.mpb-value { transition: all 0.2s; background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+.mpb-value:hover { transform: scale(1.02); }
+.mpb-health-ring { transition: transform 0.2s; }
+.mpb-health-ring:hover { transform: scale(1.08); }
+.mpb-costbar { transition: width 0.6s ease; }
+.mpb-table-card { transition: box-shadow 0.2s; }
+.mpb-table-card:hover { box-shadow: 0 4px 16px rgba(146,64,14,0.08); }
+.mpb-health-grid { transition: box-shadow 0.2s; }
+.mpb-health-grid:hover { box-shadow: 0 2px 12px rgba(146,64,14,0.1); }
+.mpb-insight { transition: all 0.25s; border-left: 3px solid #92400e; }
+.mpb-insight:hover { border-color: #ca8a04; box-shadow: 0 2px 8px rgba(146,64,14,0.1); }
+@keyframes mpb-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mpb-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes mpb-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(146,64,14,0.15); } }
+@keyframes mpb-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(146,64,14,0.25); } }
+
+/* Pattachitra Odisha (pco-*) */
+.pco-root { animation: pco-fade-in 0.3s ease-out; }
+.pco-badge { transition: all 0.2s; }
+.pco-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(17,94,89,0.15); }
+.pco-kpi { transition: all 0.25s; border-left: 3px solid #115e59; }
+.pco-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(17,94,89,0.12); }
+.pco-value { transition: all 0.2s; background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
+.pco-value:hover { transform: scale(1.02); }
+.pco-health-ring { transition: transform 0.2s; }
+.pco-health-ring:hover { transform: scale(1.08); }
+.pco-costbar { transition: width 0.6s ease; }
+.pco-table-card { transition: box-shadow 0.2s; }
+.pco-table-card:hover { box-shadow: 0 4px 16px rgba(17,94,89,0.08); }
+.pco-health-grid { transition: box-shadow 0.2s; }
+.pco-health-grid:hover { box-shadow: 0 2px 12px rgba(17,94,89,0.1); }
+.pco-insight { transition: all 0.25s; border-left: 3px solid #115e59; }
+.pco-insight:hover { border-color: #0d9488; box-shadow: 0 2px 8px rgba(17,94,89,0.1); }
+@keyframes pco-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pco-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes pco-pulse-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(17,94,89,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(17,94,89,0.15); } }
+@keyframes pco-glow-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(17,94,89,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(17,94,89,0.25); } }
