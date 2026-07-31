@@ -351,3 +351,4 @@ export { default as KalighatBengalLogisticsView } from './kalighat-bengal-logist
 export { default as CheriyalScrollArtTelanganaLogisticsView } from './cheriyal-scroll-art-telangana-logistics-view'
 export { default as BaghPrintMadhyaLogisticsView } from './bagh-print-madhya-logistics-view'
 export { default as BagruBlockPrintRajasthanLogisticsView } from './bagru-block-print-rajasthan-logistics-view'
+export { default as KalamkariPenArtAndhraLogisticsView } from './kalamkari-pen-art-andhra-logistics-view'

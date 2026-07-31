@@ -360,6 +360,7 @@ import KalighatBengalLogisticsView from "@/components/modules/kalighat-bengal-lo
 import CheriyalScrollArtTelanganaLogisticsView from "@/components/modules/cheriyal-scroll-art-telangana-logistics-view"
 import BaghPrintMadhyaLogisticsView from "@/components/modules/bagh-print-madhya-logistics-view"
 import BagruBlockPrintRajasthanLogisticsView from "@/components/modules/bagru-block-print-rajasthan-logistics-view"
+import KalamkariPenArtAndhraLogisticsView from "@/components/modules/kalamkari-pen-art-andhra-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -719,6 +720,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "cheriyal-scroll-art-telangana-logistics": CheriyalScrollArtTelanganaLogisticsView,
   "bagh-print-madhya-logistics": BaghPrintMadhyaLogisticsView,
   "bagru-block-print-rajasthan-logistics": BagruBlockPrintRajasthanLogisticsView,
+  "kalamkari-pen-art-andhra-logistics": KalamkariPenArtAndhraLogisticsView,
 }
 
 

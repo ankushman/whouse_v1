@@ -1,0 +1,253 @@
+import React, { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { PageHeader } from '@/components/shared/page-header'
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar'
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
+
+const COLORS = ['#312e81', '#4338ca', '#6366f1', '#818cf8', '#a5b4fc', '#1e1b4b', '#3730a3', '#e0e7ff']
+const PRODUCTS = ['Kalamkari Tree of Life Panel', 'Kalamkari Dasavatara Scroll', 'Kalamkari Ramayana Wall Hanging', 'Kalamkari Shiva Parvathi Panel', 'Kalamkari Mahabharata Yardage', 'Kalamkari Panchatantra Panel', 'Kalamkari Gopika Krishna Scroll', 'Kalamkari Temple Procession Mural']
+const ARTISANS = ['Srikalahasti Pen Art Guild AP', 'Machilipatnam Kalamkari Collective AP', 'Kaligiri Village Artists AP', 'Polaki Weaving Cluster AP', 'Venkatagiri Handloom Society AP', 'Nellore Heritage Printers AP', 'Tirupati Devasthanam Artists AP', 'Chittoor Kalamkari Cooperative AP']
+const STATUSES = ['GI AP Kalamkari Mark', 'Pen Line Fineness QC', 'Natural Dye Mordant Test', 'Myrobalan Fixation Check', 'Alizarin Red Fastness QC', 'Narrative Fidelity Audit']
+
+const ri = (min: number, max: number, value: number) => Math.max(min, Math.min(max, value))
+
+const ProductBadge = ({ name }: { name: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium" style={{ backgroundColor: COLORS[7], color: COLORS[0] }}>{name}</span>
+)
+
+const StatusBadge = ({ status }: { status: string }) => (
+  <span className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-indigo-100 text-indigo-800">{status}</span>
+)
+
+const CostBar = ({ cost, max }: { cost: number; max: number }) => (
+  <div className="w-24 h-2 bg-indigo-200 rounded-full overflow-hidden"><div className="h-full bg-indigo-700 rounded-full" style={{ width: `${ri(0, 100, (cost / max) * 100)}%` }} /></div>
+)
+
+const HealthRing = ({ label, value, size = 80 }: { label: string; value: number; size?: number }) => {
+  const r = (size - 12) / 2
+  const c = 2 * Math.PI * r
+  return (
+    <div className="flex flex-col items-center gap-1">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#e0e7ff" strokeWidth="6" />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={COLORS[0]} strokeWidth="6" strokeDasharray={`${c}`} strokeDashoffset={c - (value / 100) * c} strokeLinecap="round" />
+      </svg>
+      <span className="text-xs font-medium" style={{ color: COLORS[0] }}>{label} {value}%</span>
+    </div>
+  )
+}
+
+const KpiTile = ({ label, value }: { label: string; value: string | number }) => (
+  <Card className="p-4"><p className="text-sm text-muted-foreground">{label}</p><p className="text-2xl font-bold mt-1">{value}</p></Card>
+)
+
+const ValueTile = ({ label, value }: { label: string; value: string }) => (
+  <Card className="p-4 border-l-4" style={{ borderLeftColor: COLORS[1] }}><p className="text-sm text-muted-foreground">{label}</p><p className="text-lg font-semibold mt-1" style={{ color: COLORS[1] }}>{value}</p></Card>
+)
+
+const genRecords = (offset: number) =>
+  Array.from({ length: 20 }, (_, i) => ({
+    id: `KKA-${String(offset + i + 1).padStart(4, '0')}`,
+    artist: ARTISANS[(offset + i) % ARTISANS.length], design: PRODUCTS[(offset + i) % PRODUCTS.length],
+    status: STATUSES[(offset + i) % STATUSES.length], qty: ri(1, 20, ((offset + i) * 19) % 20) + 1,
+    cost: ri(4200, 55000, ((offset + i) * 11107) % 50800) + 4200,
+    date: new Date(2024, ((offset + i) % 12), ri(1, 28, (offset + i) % 28)).toISOString().slice(0, 10),
+  }))
+
+const kalamkarirecords = [
+  { id: 'KKA-0001', artist: 'Srikalahasti Pen Art Guild AP', design: 'Kalamkari Tree of Life Panel', status: 'GI AP Kalamkari Mark', qty: 5, cost: 52000, date: '2024-01-15' },
+  { id: 'KKA-0002', artist: 'Machilipatnam Kalamkari Collective AP', design: 'Kalamkari Dasavatara Scroll', status: 'Pen Line Fineness QC', qty: 8, cost: 34000, date: '2024-01-28' },
+  { id: 'KKA-0003', artist: 'Kaligiri Village Artists AP', design: 'Kalamkari Ramayana Wall Hanging', status: 'Natural Dye Mordant Test', qty: 3, cost: 55000, date: '2024-02-10' },
+  { id: 'KKA-0004', artist: 'Polaki Weaving Cluster AP', design: 'Kalamkari Shiva Parvathi Panel', status: 'Myrobalan Fixation Check', qty: 7, cost: 24000, date: '2024-02-22' },
+  { id: 'KKA-0005', artist: 'Venkatagiri Handloom Society AP', design: 'Kalamkari Mahabharata Yardage', status: 'Alizarin Red Fastness QC', qty: 4, cost: 48000, date: '2024-03-08' },
+  { id: 'KKA-0006', artist: 'Nellore Heritage Printers AP', design: 'Kalamkari Panchatantra Panel', status: 'Narrative Fidelity Audit', qty: 6, cost: 30000, date: '2024-03-20' },
+  { id: 'KKA-0007', artist: 'Tirupati Devasthanam Artists AP', design: 'Kalamkari Gopika Krishna Scroll', status: 'GI AP Kalamkari Mark', qty: 2, cost: 55000, date: '2024-04-03' },
+  { id: 'KKA-0008', artist: 'Chittoor Kalamkari Cooperative AP', design: 'Kalamkari Temple Procession Mural', status: 'Pen Line Fineness QC', qty: 10, cost: 16000, date: '2024-04-16' },
+  { id: 'KKA-0009', artist: 'Srikalahasti Pen Art Guild AP', design: 'Kalamkari Dasavatara Scroll', status: 'Natural Dye Mordant Test', qty: 5, cost: 46000, date: '2024-04-28' },
+  { id: 'KKA-0010', artist: 'Machilipatnam Kalamkari Collective AP', design: 'Kalamkari Tree of Life Panel', status: 'Myrobalan Fixation Check', qty: 8, cost: 38000, date: '2024-05-10' },
+  { id: 'KKA-0011', artist: 'Kaligiri Village Artists AP', design: 'Kalamkari Ramayana Wall Hanging', status: 'Alizarin Red Fastness QC', qty: 3, cost: 50000, date: '2024-05-23' },
+  { id: 'KKA-0012', artist: 'Polaki Weaving Cluster AP', design: 'Kalamkari Shiva Parvathi Panel', status: 'Narrative Fidelity Audit', qty: 6, cost: 26000, date: '2024-06-05' },
+  { id: 'KKA-0013', artist: 'Venkatagiri Handloom Society AP', design: 'Kalamkari Mahabharata Yardage', status: 'GI AP Kalamkari Mark', qty: 4, cost: 52000, date: '2024-06-18' },
+  { id: 'KKA-0014', artist: 'Nellore Heritage Printers AP', design: 'Kalamkari Panchatantra Panel', status: 'Pen Line Fineness QC', qty: 9, cost: 20000, date: '2024-07-01' },
+  { id: 'KKA-0015', artist: 'Tirupati Devasthanam Artists AP', design: 'Kalamkari Gopika Krishna Scroll', status: 'Natural Dye Mordant Test', qty: 7, cost: 32000, date: '2024-07-14' },
+  { id: 'KKA-0016', artist: 'Chittoor Kalamkari Cooperative AP', design: 'Kalamkari Temple Procession Mural', status: 'Myrobalan Fixation Check', qty: 5, cost: 40000, date: '2024-07-26' },
+  { id: 'KKA-0017', artist: 'Srikalahasti Pen Art Guild AP', design: 'Kalamkari Tree of Life Panel', status: 'Alizarin Red Fastness QC', qty: 3, cost: 55000, date: '2024-08-08' },
+  { id: 'KKA-0018', artist: 'Machilipatnam Kalamkari Collective AP', design: 'Kalamkari Dasavatara Scroll', status: 'Narrative Fidelity Audit', qty: 6, cost: 28000, date: '2024-08-20' },
+  { id: 'KKA-0019', artist: 'Kaligiri Village Artists AP', design: 'Kalamkari Ramayana Wall Hanging', status: 'GI AP Kalamkari Mark', qty: 4, cost: 48000, date: '2024-09-02' },
+  { id: 'KKA-0020', artist: 'Polaki Weaving Cluster AP', design: 'Kalamkari Shiva Parvathi Panel', status: 'Pen Line Fineness QC', qty: 8, cost: 22000, date: '2024-09-14' },
+]
+
+export default function KalamkariPenArtAndhraLogisticsView() {
+  const [tab, setTab] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({})
+
+  const allRecords = [...kalamkarirecords, ...genRecords(21), ...genRecords(41)]
+
+  const filteredRecords = useMemo(() => {
+    if (!searchQuery && Object.keys(activeFilters).every(k => !activeFilters[k].length)) return allRecords
+    const sq = searchQuery.toLowerCase()
+    return allRecords.filter(r => { if (sq && !r.id.toLowerCase().includes(sq) && !r.design.toLowerCase().includes(sq)) return false; return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string)); })
+  }, [searchQuery, activeFilters, allRecords])
+
+  const filterGroups = [
+    { key: 'design', label: 'Design', options: PRODUCTS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.design === p).length })) },
+    { key: 'artist', label: 'Artist', options: ARTISANS.map(p => ({ value: p, label: p, count: allRecords.filter(r => r.artist === p).length })) },
+  ]
+
+  const trendData = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((m, i) => ({ month: m, shipments: ri(4, 20, allRecords.length * 0.10 + i * 3) }))
+  const artistChart = ARTISANS.map(p => ({ name: p.split(' ').slice(0, 2).join(' '), volume: allRecords.filter(r => r.artist === p).reduce((s, r) => s + r.qty, 0) }))
+  const statusPie = STATUSES.map(s => ({ name: s, value: allRecords.filter(r => r.status === s).length }))
+  const maxCost = Math.max(...allRecords.map(r => r.cost))
+
+  return (
+    <div className="kka-root space-y-6 p-6">
+      <ModuleBreadcrumb items={[{ label: 'Logistics' }, { label: 'Kalamkari Pen Art' }]} />
+      <PageHeader title="Kalamkari Pen Art Andhra Pradesh Logistics" description="Andhra Pradesh Srikalahasti Kalamkari pen-drawn textile supply chain with GI AP Kalamkari Mark certification, pen line fineness quality control, natural dye mordant testing, myrobalan fixation verification, alizarin red fastness analysis, and narrative fidelity audit across 8 pen art artisan clusters in Srikalahasti Machilipatnam and Tirupati regions" />
+      <Tabs defaultValue="dashboard" className="space-y-6">
+        <TabsList className="bg-indigo-100">
+          <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsTrigger value="shipments">Shipments</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="insights">Insights</TabsTrigger>
+        </TabsList>
+        <TabsContent value="dashboard" className="space-y-6">
+          <div className="grid grid-cols-4 gap-4">
+            <KpiTile label="Total Shipments" value={allRecords.length} />
+            <KpiTile label="Active Designs" value={PRODUCTS.length} />
+            <KpiTile label="Artist Clusters" value={ARTISANS.length} />
+            <KpiTile label="Avg Cost" value={`₹${Math.round(allRecords.reduce((s, r) => s + r.cost, 0) / allRecords.length).toLocaleString()}`} />
+          </div>
+          <div className="grid grid-cols-6 gap-4">
+            <HealthRing label="GI Tag" value={94} />
+            <HealthRing label="Pen Line" value={89} />
+            <HealthRing label="Dye QC" value={86} />
+            <HealthRing label="Myrobalan" value={91} />
+            <HealthRing label="Alizarin" value={87} />
+            <HealthRing label="Fidelity" value={92} />
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+            <ValueTile label="Pen Art Families" value="35 Active" />
+            <ValueTile label="Tradition" value="Since 3000 BC" />
+            <ValueTile label="Export Markets" value="18 Countries" />
+            <ValueTile label="Annual Revenue" value="₹4.2 Crore" />
+          </div>
+        </TabsContent>
+        <TabsContent value="shipments" className="space-y-6">
+          <SearchFilterToolbar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onClearSearch={() => setSearchQuery('')}
+            activeFilters={activeFilters}
+            filterGroups={filterGroups}
+            onToggleFilter={(group, val) => setActiveFilters(prev => ({ ...prev, [group]: prev[group]?.includes(val) ? prev[group].filter(v => v !== val) : [...(prev[group] || []), val] }))}
+            onClearAllFilters={() => setActiveFilters({})}
+            totalItems={allRecords.length}
+            filteredCount={filteredRecords.length}
+            onRefresh={() => {}}
+            placeholder="Search Kalamkari pen art shipments..."
+          />
+          <div className="rounded-lg border">
+            <table className="w-full text-sm">
+              <thead className="bg-indigo-100">
+                <tr>
+                  <th className="p-3 text-left font-medium">ID</th>
+                  <th className="p-3 text-left font-medium">Design</th>
+                  <th className="p-3 text-left font-medium">Artist</th>
+                  <th className="p-3 text-left font-medium">Status</th>
+                  <th className="p-3 text-left font-medium">Qty</th>
+                  <th className="p-3 text-left font-medium">Cost</th>
+                  <th className="p-3 text-left font-medium">Cost Bar</th>
+                  <th className="p-3 text-left font-medium">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map(record => (
+                  <tr key={record.id} className="border-t hover:bg-indigo-50/50">
+                    <td className="p-3 font-mono text-xs">{record.id}</td>
+                    <td className="p-3"><ProductBadge name={record.design} /></td>
+                    <td className="p-3">{record.artist}</td>
+                    <td className="p-3"><StatusBadge status={record.status} /></td>
+                    <td className="p-3">{record.qty} {['scrolls', 'panels', 'hangings', 'murals'][parseInt(record.id.slice(4)) % 4]}</td>
+                    <td className="p-3 font-mono">₹{record.cost.toLocaleString()}</td>
+                    <td className="p-3"><CostBar cost={record.cost} max={maxCost} /></td>
+                    <td className="p-3">{record.date}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </TabsContent>
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Shipment Trend</CardTitle></CardHeader>
+              <CardContent>
+                <LineChart width={500} height={300} data={trendData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="shipments" stroke={COLORS[0]} strokeWidth={2} />
+                </LineChart>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Artist Volume</CardTitle></CardHeader>
+              <CardContent>
+                <BarChart width={500} height={300} data={artistChart}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="volume" fill={COLORS[0]}>
+                    {artistChart.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                  </Bar>
+                </BarChart>
+              </CardContent>
+            </Card>
+          </div>
+          <Card>
+            <CardHeader><CardTitle>Status Distribution</CardTitle></CardHeader>
+            <CardContent>
+              <PieChart width={500} height={300}>
+                <Pie data={statusPie} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
+                  {statusPie.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="insights" className="space-y-6">
+          <div className="grid grid-cols-2 gap-6">
+            <Card>
+              <CardHeader><CardTitle>Kalamkari Pen Art — Ancient Andhra Temple Narrative Textile Painting Tradition</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">Kalamkari pen art represents one of the most ancient and culturally significant narrative textile painting traditions of India having originated approximately three thousand years ago in the Srikalahasti region of Andhra Pradesh near the sacred Swarnamukhi River where traditional pen artists belonging to the Balija and Padmashali communities developed a unique freehand pen-drawn narrative painting technique on unbleached cotton fabric that produces elaborate mythological narrative panels depicting stories from the Ramayana Mahabharata Bhagavata Purana and other Hindu epics rendered entirely with a hand-held bamboo pen or kalam dipped in natural dye solutions creating intricate detailed line drawings with remarkable fineness and artistic expressiveness that distinguishes Srikalahasti Kalamkari pen art from the Machilipatnam Kalamkari block printing tradition which uses carved blocks instead of freehand pen work where the Srikalahasti pen art technique involves seventeen distinct process stages beginning with fabric preparation through myrobalan mordanting pen drawing with a fermented iron-based black ink called kasim prepared from jaggery water rusted iron filings and palm jaggery fermented for fifteen days in an earthen pot producing a rich permanent black outline that defines all narrative figures and decorative elements followed by sequential dyeing applications using natural alizarin red from madder root indigo blue from Indigofera tinctoria leaf fermentation yellow from pomegranate rind and myrobalan green from Terminalia chebula fruit creating a rich polychromatic narrative textile panel that serves simultaneously as devotional temple art and portable narrative storytelling medium where the elaborate Kalamkari narrative panels typically measure two metres in length and one metre in width depicting continuous narrative sequences from Hindu mythology with multiple episodes rendered in a horizontal scroll format with detailed figure drawing architectural elements landscape features and decorative border patterns that demonstrate the extraordinary penmanship and narrative skill of the Srikalahasti Kalamkari pen artist families who have preserved this tradition through unbroken hereditary practice spanning many generations.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Pen Line Fineness QC & Natural Dye Mordant Testing Standards</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The pen line fineness quality control and natural dye mordant testing protocols for Kalamkari pen art establish the primary technical quality assurance framework for the traditional Srikalahasti pen drawing and natural dyeing processes that define the authentic Kalamkari pen art visual quality and colour fastness characteristics where the pen line fineness test measures the width consistency and sharpness of the kasim iron-based black outline lines drawn by the Kalamkari pen artist using digital microscopy analysis confirming minimum line width of zero point three millimetres for fine detail lines and maximum line width of one point two millimetres for bold contour lines with line edge definition confirming smooth continuous pen strokes without feathering bleeding or jagged edges that would indicate incorrect kasim ink viscosity or improper pen tip conditioning where the kasim ink preparation test evaluates the iron tannate concentration in the fermented kasim black ink solution using spectrophotometric analysis confirming iron concentration between six and ten percent by weight and tannin content between four and eight percent producing the deep permanent black colour that penetrates the cotton fibre sufficiently to resist fading during subsequent mordanting and dyeing stages where the natural dye mordant test evaluates the myrobalan Terminalia chebula mordant concentration applied to the fabric before pen drawing confirming myrobalan concentration between twelve and eighteen percent by weight ensuring adequate fibre preparation for both the kasim black ink adhesion and the subsequent alizarin red mordant printing process where the myrobalan mordant treatment produces the characteristic yellowish ground colour on the cotton fabric that serves as the base tone for all subsequent natural dye applications providing the warm natural background colour that distinguishes authentic Kalamkari pen art textiles from synthetic dye reproductions that lack the subtle warm undertone produced by the traditional myrobalan mordant preparation.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Myrobalan Fixation QC & Alizarin Red Fastness Verification</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The myrobalan fixation quality control and alizarin red fastness verification protocols ensure the colour permanence and technical quality of authentic Srikalahasti Kalamkari pen art textiles where the myrobalan fixation test measures the degree of myrobalan mordant binding to the cotton fibre using wash testing at sixty degrees Celsius with ECE reference detergent confirming minimum myrobalan fixation retention of eighty-five percent after three standard wash cycles ensuring the myrobalan mordant remains sufficiently bound to the cotton fibre to provide effective mordanting for both the kasim iron black outline and the subsequent alizarin red dye application without the mordant leaching out during the multiple washing and dyeing stages that characterise the Kalamkari production process where inadequate myrobalan fixation produces pale washed-out colour with poor fastness ratings while excessive myrobalan concentration causes fabric yellowing and stiffness that diminishes the desirable soft draping quality of the finished Kalamkari textile where the alizarin red fastness test evaluates the colour permanence of the madder root-derived alizarin red dye using the ISO 105-C06 standardised washing procedure repeated for five cycles measuring colour change on the five-point grey scale and staining on adjacent multifibre fabric on the four-point staining scale confirming minimum ratings of four for colour change and three for staining ensuring the deep red colour characteristic of premium Srikalahasti Kalamkari maintains its vibrancy and definition after repeated laundering without significant fading colour bleeding or loss of contrast between the red pattern areas and the black kasim outline that defines the crisp graphic quality of the Kalamkari narrative composition where the alizarin red is applied through a complex mordant paste printing process using alum mordant stamped onto specific areas of the pen-drawn fabric followed by alum mordant fixation heating at eighty degrees Celsius for forty-five minutes producing the permanent red colour that contrasts with the black kasim outline and indigo blue background areas.</p></CardContent>
+            </Card>
+            <Card>
+              <CardHeader><CardTitle>Narrative Fidelity Audit & Kalamkari Heritage Market Development</CardTitle></CardHeader>
+              <CardContent><p className="text-sm text-muted-foreground leading-relaxed">The narrative fidelity audit and Kalamkari heritage market development framework provides the cultural authenticity assurance and market infrastructure for the Srikalahasti Kalamkari pen art supply chain ensuring that all GI-certified Kalamkari pen art products faithfully represent the traditional narrative textile painting tradition while connecting the Srikalahasti pen artist families with growing institutional and consumer demand for authentic hand-painted narrative textiles where the narrative fidelity audit examines each completed Kalamkari panel against the authorised narrative sequence reference library maintained by the Srikalahasti Pen Art Guild containing detailed documentation of over two hundred traditional Kalamkari narrative compositions from the Ramayana Mahabharata Bhagavata Purana and other classical Hindu texts verifying that the painted narrative faithfully reproduces the authorised episode sequence with correct iconographic representation of all deities figures and narrative elements including proper mudras hand gestures appropriate attributes and weapons for each deity figure accurate anatomical proportions following the traditional Kalamkari figure drawing canons specified in the Shilpa Shastra texts and correct spatial composition maintaining the traditional horizontal scroll narrative format with consistent figure scale proportion and spacing across the complete panel ensuring the Kalamkari textile faithfully represents the cultural and religious narrative tradition without modern simplification alteration or omission that would compromise its cultural authenticity and devotional significance where the Kalamkari heritage market development initiative led by the Andhra Pradesh State Handicrafts Development Corporation in collaboration with the Srikalahasti Pen Art Guild and the Tirumala Tirupati Devasthanams has established institutional procurement programmes connecting the thirty-five active Srikalahasti Kalamkari artist families with temple commissions government emporium retail networks and international museum and gallery exhibitions including the Victoria and Albert Museum London the Metropolitan Museum of Art New York and the National Museum New Delhi creating sustainable market demand for authentic GI-certified Kalamkari pen art textiles with projected annual revenue growth of fifteen percent driven by expanding global appreciation for Indian narrative textile art traditions.</p></CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
+
+
+
