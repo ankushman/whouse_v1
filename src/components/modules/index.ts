@@ -331,3 +331,4 @@ export { default as ChanderiSilkWeavingMadhyaPradeshLogisticsView } from './chan
 export { default as KangraPaintingHimachalPradeshLogisticsView } from './kangra-painting-himachal-pradesh-logistics-view'
 export { default as GodnaTattooArtMadhyaPradeshLogisticsView } from './godna-tattoo-art-madhya-pradesh-logistics-view'
 export { default as PatuaScrollArtWestBengalLogisticsView } from './patua-scroll-art-west-bengal-logistics-view'
+export { default as SauraTribalArtOdishaLogisticsView } from './saura-tribal-art-odisha-logistics-view'

@@ -54721,3 +54721,43 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+.sta-root { animation: staFadeIn 0.3s ease-out; }
+.sta-badge { transition: transform 0.15s; }
+.sta-badge:hover { transform: scale(1.05); }
+.sta-cost-bar { transition: width 0.6s ease-out; }
+.sta-health-ring { transition: stroke-dashoffset 0.8s ease-out; }
+.sta-kpi-tile { transition: box-shadow 0.2s ease; }
+.sta-kpi-tile:hover { box-shadow: 0 2px 8px rgba(133,77,14,0.10); }
+.sta-row { transition: background-color 0.15s; }
+@keyframes staFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes staPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(133,77,14,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(133,77,14,0.04); }
+}
+@keyframes staRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.ppa-root { animation: ppaFadeIn 0.3s ease-out; }
+.ppa-badge { transition: transform 0.15s; }
+.ppa-badge:hover { transform: scale(1.05); }
+.ppa-cost-bar { transition: width 0.6s ease-out; }
+.ppa-health-ring { transition: stroke-dashoffset 0.8s ease-out; }
+.ppa-kpi-tile { transition: box-shadow 0.2s ease; }
+.ppa-kpi-tile:hover { box-shadow: 0 2px 8px rgba(190,24,93,0.10); }
+.ppa-row { transition: background-color 0.15s; }
+@keyframes ppaFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ppaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(190,24,93,0.08); }
+  50% { box-shadow: 0 0 12px 2px rgba(190,24,93,0.04); }
+}
+@keyframes ppaRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

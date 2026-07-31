@@ -337,6 +337,7 @@ export const navItems: NavItem[] = [
   { id: 'kangra-painting-himachal-pradesh-logistics', label: 'Kangra HP', icon: 'Sun', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'godna-tattoo-art-madhya-pradesh-logistics', label: 'Godna Tattoo Art MP', icon: 'Paintbrush', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'patua-scroll-art-west-bengal-logistics', label: 'Patua Scroll Art WB', icon: 'BookOpen', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'saura-tribal-art-odisha-logistics', label: 'Saura Tribal Art OD', icon: 'TreePine', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
