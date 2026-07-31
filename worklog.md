@@ -1,5 +1,33 @@
 ---
 ---
+Task ID: R364
+Agent: Main Agent (Cron Loop)
+Task: R364 — Rogan Gujarat Art (new) + Construction Material Tracker overwrite
+
+Work Log:
+- Read worklog.md: R363 complete (commit 868a5b2), 357 module files, 355 exports, 357 navItems, ~55,193 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R364)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: rogan-gujarat-logistics CLEAR; construction-material-tracker ALREADY EXISTS
+- CSS prefixes: rgn-* CLEAR; cmt-* already exists (kept existing CSS for overwrite)
+- Icons: Palette (Rogan, already in iconMap), HardHat (Construction, already existed) — no new icons
+- Construction Material had 234 lines — completely overwritten to 253 lines with genRecords, correct field names
+- Initially planned Kangra Pahari Painting HP but discovered it already exists (different slug: kangra-painting-himachal-pradesh-logistics). Switched to Rogan Gujarat Art.
+
+- Created Rogan Gujarat Art (rgn-*, #be123c deep rose): 253 lines, 8 products (Tree of Life Panel, Peacock Feather Scroll, Floral Vine Yardage, Sunburst Medallion, Fish Pond Mural, Lotus Pond Hanging, Camel Procession Panel, Bird Paradise Curtain), 8 artisans (Nirona Rogan Art Guild, Bhuj Heritage Rogan Society, Ludiya Village Rogan, Anjar Traditional Printers, Gandhidham Craft Collective, Mandvi Coastal Artisans, Rapar Desert Cluster, Bhachau Village Guild), 6 statuses, 4 insight cards (1600-year Kutch freehand painted textile tradition, castor oil viscosity QC & rogan paste consistency, pattern symmetry analysis & wash fastness, freehand precision audit & heritage market)
+- Overwrote Construction Material Tracker (cmt-*, #ea580c orange, 234->253 lines): 253 lines, 8 materials (OPC 53 Cement, TMT Steel Rebar 12mm, Clay Bricks Class A, River Sand Zone II, Coarse Aggregate 20mm, Seasoned Timber Sal, Vitrified Floor Tiles, PVC Electrical Conduit), 8 project sites (Mumbai Metro Line 9, Delhi Smart City, Bengaluru Airport T3, Hyderabad IT Corridor, Chennai Port Expansion, Pune Highway NH48, Kolkata Bridge, Nagpur MIHAN), 6 statuses, 4 insight cards (INR 85L Cr construction material ecosystem, BIS IS 269 & cube strength verification, moisture content & particle size standards, Refrigerator cold storage & infrastructure logistics)
+- Registered Rogan in 3 files (index.ts, page.tsx, app-store.ts); Construction already registered
+- CSS: +10 lines (rgn-* 5 rules + 3 keyframes); cmt-* CSS kept existing
+- TSC: 0 errors | Git pushed: commit dfc4984
+
+Stage Summary:
+- 358 module files (1 new Rogan), 356 exports, 358 navItems, ~55,203 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Construction Material updated from 234 to 253 lines with genRecords, 60 records, correct field names
+- Remaining non-253 overwrite candidates: ~250 modules (4 still at 234 lines)
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue overwrite program targeting remaining 4 234-line modules (ewaste, medical-device, mining-minerals, nuclear-fuel)
+---
 Task ID: R363
 Agent: Main Agent (Cron Loop)
 Task: R363 — Dabu Print Rajasthan (new) + Automotive Parts Logistics overwrite
