@@ -1,5 +1,35 @@
 ---
 ---
+Task ID: R375
+Agent: Main Agent (Cron Loop)
+Task: R375 — Chanderi Madhya Pradesh (new) + Consignment Inventory Pro overwrite 184->253
+
+Work Log:
+- Read worklog.md: R374 complete (commit 992cfc1), 368 module files, 366 exports, 368 navItems, ~55,300 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R375); 470 errors in scripts/gen-r352.tsx.ts (non-src, ignored)
+- QA: Dev server OOM on Turbopack (known issue); TSC sole QA gate
+- Slug verification: chanderi-madhya-pradesh-logistics CLEAR; consignment-inventory-pro ALREADY EXISTS
+- CSS prefixes: chd-* CLEAR; cip-* already exists (kept existing CSS for overwrite)
+- Icons: Crown (Chanderi, already in iconMap and lucide-react); Archive (Consignment, already existed) — no new icons
+- Consignment Inventory Pro had 184 lines (shortest module at R374 end) — overwritten to 253 lines with genRecords, correct field names (warehouse, lot)
+- POST-R375 VERIFICATION: Shortest modules now 188 lines (cross-border-logistics); 184-line module eliminated
+
+- Created Chanderi Madhya Pradesh (chd-*, #854d0e dark gold): 253 lines, 8 products (Chanderi Silk Butidar Saree, Chanderi Cotton-Ikat Wrap, Chanderi Gold Zari Pallu, Chanderi Butis Mulmul Dupatta, Chanderi Floral Tissue Silk, Chanderi Peacock Motif Stole, Chanderi Temple Border Shawl, Chanderi Royal Navratan Fabric), 8 artisans (Chanderi Weavers MP Cluster, Ashoknagar Silk Society MP, Isagarh Handloom Guild MP, Mungaoli Textile Art MP, Guna Chanderi Cooperative MP, Shivpuri Heritage Weave MP, Vidisha Silk Cluster MP, Sironj Craft Workshop MP), 6 statuses, 4 insight cards
+- Overwrote Consignment Inventory Pro (cip-*, #059669 emerald, 184->253): 253 lines, 8 lot types (FIFO Lot Inventory, LIFO Batch Stock, FEFO Perishable Lot, Serial Tracked Unit, Consignment Owner Stock, Cross-Docked Shipment, Safety Reserve Buffer, Seasonal Demand Buffer), 8 warehouse hubs, 6 statuses, 4 insight cards
+- Registered Chanderi in 3 files; Consignment already registered
+- CSS: +8 lines (chd-* 5 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit a195e7f
+
+Stage Summary:
+- 369 module files (1 new Chanderi), 367 exports, 369 navItems, ~55,308 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Consignment Inventory Pro upgraded from 184 to 253 lines — previously shortest module eliminated
+- Shortest remaining modules: 188 lines (cross-border-logistics), 189 (warehouse-digital-floor-plan)
+- All sub-185-line modules now completely eliminated
+- Turbopack OOM persists; CSS splitting remains critical priority
+- Next: Continue targeting non-253 modules by ascending line count (188-line modules next)
+- Available Indian art slugs: bagh-print-madhya-pradesh-logistics
+---
 Task ID: R374
 Agent: Main Agent (Cron Loop)
 Task: R374 — Banjara Embroidery Telangana (new) + Returns Quality Lab overwrite 182->253
