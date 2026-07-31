@@ -54987,3 +54987,24 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* ── Kinhal Woodcraft Karnataka Logistics (kwc-*) ── */
+.kwc-root { animation: kwcFadeIn 0.3s ease-out; }
+.kwc-root * { box-sizing: border-box; }
+.kwc-root table { border-collapse: collapse; }
+.kwc-root tr:nth-child(even) { background: rgba(91, 58, 41, 0.04); }
+.kwc-root .kwc-badge { border-radius: 9999px; }
+.kwc-root svg circle:last-child { transition: stroke-dashoffset 0.6s ease; }
+.kwc-root .kwc-insight p { max-height: 220px; overflow-y: auto; }
+@keyframes kwcFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes kwcPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes kwcRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
