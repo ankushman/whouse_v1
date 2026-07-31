@@ -4,6 +4,45 @@
 
 ---
 
+Task ID: R325
+Agent: Main Agent (Cron Loop)
+Task: R325 — Saurashtra Applique Gujarat + Manipuri Black Pottery
+
+Work Log:
+- Read worklog.md: R324 complete (commit 661ff71), 306 views, 306 navItems, 53,974 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R325)
+- R324 commit 661ff71 already pushed
+- Slug verification: saurashtra-applique-gujarat-logistics and manipuri-black-pottery-logistics both clear
+- Icons: Scissors (already in iconMap, reused for applique), Kiln not in lucide-react → switched to CookingPot (already in iconMap). 184 total unchanged
+
+- Created Saurashtra Applique Gujarat Logistics (sap-*, #0e7490 deep teal): 253 lines, 8 products (Tree of Life Applique Panel/Saurashtra Geometric Wall Hanging/Camel Motif Applique Quilt/Peacock Patchwork Curtain/Mandala Applique Bedspread/Floral Applique Table Runner/Elephant Procession Wall Panel/Star Patchwork Cushion Set), 8 stitchers (Bhuj Katab Stitchers Guild/Rajkot Applique Collective/Junagadh Patchwork Centre/Jamnagar Traditional Quilters/Porbandar Textile Art Society/Surendranagar Applique Studio/Wankaner Heritage Stitchers/Veraval Coastal Applique Guild), 6 statuses (GI Saurashtra Applique Mark/IS 16800 Patchwork Textile Grade A/Cotton Flat Fold Bundle/Palletised Truck Transit/Moisture-Free Storage 20-28C/Stitch Tension QC), 4 insight cards (500-year Katab tradition, IS 16800 patchwork standards, cotton flat fold packaging, AI stitch authentication)
+- Created Manipuri Black Pottery Logistics (mbp-*, #292524 deep stone black): 253 lines, 8 products (Manipuri Black Rice Bowl/Chirona-Polished Vase/Tangkhul Naga Storage Jar/Bee Wax Coated Water Pot/Manipuri Black Incense Burner/Andro Clay Cooking Pot/Traditional Black Tea Set/Ceremonial Offerings Pot Set), 8 potters (Andro Village Potter Women/Nungbi Heritage Clay Guild/Ukhrul Black Pottery Centre/Imphal Traditional Potters/Thoubal Clay Artisan Colony/Bishnupur Earthenware Studio/Churachandpur Tribal Potters/Senapati Naga Ceramic Society), 6 statuses (GI Manipuri Pottery Mark/IS 16801 Black Earthenware Grade A/Straw-Padded Clay Box/Enclosed Truck Transit/Dry Storage 20-30C/Bee Wax Finish QC), 4 insight cards (800-year Tangkhul Naga tradition, IS 16801 earthenware standards, straw-padded packaging, AI bee wax analysis)
+- Both modules correct 253 lines, 0 TSC errors after icon fix (Kiln→CookingPot)
+- Registered: +2 exports, +2 imports, +2 viewMap, +2 navItems
+- Icons: Scissors reused, CookingPot reused — 184 total unchanged
+- CSS: +44 lines (sap-* + mbp-*, 8 keyframe animations)
+- TSC: 0 errors | Git pushed: commit a76cba3
+
+Stage Summary:
+- NEW MODULE: Saurashtra Applique Gujarat Logistics (253 lines, 12 components, 60 records)
+- NEW MODULE: Manipuri Black Pottery Logistics (253 lines, 12 components, 60 records)
+- ICONS: 184 total (Scissors, CookingPot both reused)
+- Total navItems: 308 | VIEW FILES: 308 | CSS: 54,004 lines
+- ZERO src/ TSC errors | Git pushed: commit a76cba3
+
+## Updated Project Status (Post Round 325)
+- STATUS: STABLE (Turbopack OOM persists)
+- VIEW FILES: 308 | NAVITEMS: 308 | CSS: 54,004 lines
+- ICONMAP: 184 icons | TSC: 0 errors | GITHUB: Pushed (commit a76cba3)
+
+PRIORITY NEXT:
+1. Create new modules (Chikankari Lucknow Embroidery expansion, Naga Wood Carving)
+2. CSS splitting to resolve Turbopack OOM (CRITICAL — 54K+ lines)
+3. SearchFilterToolbar into 5-10 more modules
+4. Cross-module drill-down navigation
+
+---
+
 Task ID: R324
 Agent: Main Agent (Cron Loop)
 Task: R324 — Kalamkari Veil Art Andhra Pradesh + Pichwai Painting Rajasthan
