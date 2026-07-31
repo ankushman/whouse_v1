@@ -1,4 +1,6 @@
-import React, { useState, useMemo } from 'react'
+#!/usr/bin/env python3
+"""Generate consignment-inventory-pro-view.tsx overwrite at exactly 253 lines."""
+content = r"""import React, { useState, useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageHeader } from '@/components/shared/page-header'
@@ -248,6 +250,16 @@ export default function ConsignmentInventoryProView() {
     </div>
   )
 }
+"""
 
+text = content.rstrip('\n')
+lines = text.split('\n')
+while len(lines) < 253:
+    lines.append('')
+text = '\n'.join(lines) + '\n'
+assert text.count('\n') == 253, f"Expected 253 newlines, got {text.count('\n')}"
+print(f"Generated {len(lines)} lines")
 
-
+with open('/home/z/my-project/src/components/modules/consignment-inventory-pro-view.tsx', 'w') as f:
+    f.write(text)
+print("Written consignment-inventory-pro-view.tsx")

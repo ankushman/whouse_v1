@@ -364,3 +364,4 @@ export { default as KalamkariAndhraLogisticsView } from './kalamkari-andhra-logi
 export { default as PatolaGujaratLogisticsView } from './patola-gujarat-logistics-view'
 export { default as KasutiKarnatakaLogisticsView } from './kasuti-karnataka-logistics-view'
 export { default as BanjaraEmbroideryTelanganaLogisticsView } from './banjara-embroidery-telangana-logistics-view'
+export { default as ChanderiMadhyaPradeshLogisticsView } from './chanderi-madhya-pradesh-logistics-view'

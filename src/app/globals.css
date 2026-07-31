@@ -55299,3 +55299,12 @@ html.theme-transition body {
 @keyframes bel-spin{from{stroke-dashoffset:var(--bel-offset,0)}to{stroke-dashoffset:0}}
 @keyframes bel-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
 @keyframes bel-slide{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+.chd-root{--chd-bg:linear-gradient(135deg,#fef9c3 0%,#fef08a 100%);--chd-ring:#854d0e;--chd-glow:rgba(133,77,14,0.12)}
+.chd-root .chd-health-ring svg circle:last-child{animation:chd-spin 4s linear infinite}
+.chd-root table tbody tr:hover{background:rgba(133,77,14,0.04);box-shadow:inset 0 0 0 1px rgba(133,77,14,0.08)}
+.chd-root .chd-kpi-tile:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(133,77,14,0.15)}
+.chd-root .chd-chart-card{border:1px solid rgba(133,77,14,0.08)}
+@keyframes chd-spin{from{stroke-dashoffset:var(--chd-offset,0)}to{stroke-dashoffset:0}}
+@keyframes chd-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+@keyframes chd-slide{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
