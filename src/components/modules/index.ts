@@ -325,3 +325,4 @@ export { default as OdishaPipliAppliqueLogisticsView } from './odisha-pipli-appl
 export { default as KashmirSozniEmbroideryLogisticsView } from './kashmir-sozni-embroidery-logistics-view'
 export { default as WarliTribalPaintingMaharashtraLogisticsView } from './warli-tribal-painting-maharashtra-logistics-view'
 export { default as ChanderiSilkWeavingMadhyaPradeshLogisticsView } from './chanderi-silk-weaving-madhya-pradesh-logistics-view'
+export { default as KangraPaintingHimachalPradeshLogisticsView } from './kangra-painting-himachal-pradesh-logistics-view'
