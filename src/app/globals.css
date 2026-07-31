@@ -53516,3 +53516,47 @@ html.theme-transition body {
 @keyframes pws-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes pws-pulse-gray { 0%, 100% { box-shadow: 0 0 0 0 rgba(55,65,81,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(55,65,81,0.15); } }
 @keyframes pws-glow-gray { 0%, 100% { box-shadow: 0 0 0 0 rgba(55,65,81,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(55,65,81,0.25); } }
+
+/* Sandstone Carving Supply Chain (scc-*) */
+.scc-root { animation: scc-fade-in 0.3s ease-out; }
+.scc-badge { transition: all 0.2s; }
+.scc-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(146,64,14,0.15); }
+.scc-kpi { transition: all 0.25s; border-left: 3px solid #92400e; }
+.scc-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(146,64,14,0.12); }
+.scc-value { transition: all 0.2s; background: linear-gradient(135deg, #fef9c3 0%, #fefce8 100%); }
+.scc-value:hover { transform: scale(1.02); }
+.scc-health-ring { transition: transform 0.2s; }
+.scc-health-ring:hover { transform: scale(1.08); }
+.scc-costbar { transition: width 0.6s ease; }
+.scc-table-card { transition: box-shadow 0.2s; }
+.scc-table-card:hover { box-shadow: 0 4px 16px rgba(146,64,14,0.08); }
+.scc-health-grid { transition: box-shadow 0.2s; }
+.scc-health-grid:hover { box-shadow: 0 2px 12px rgba(146,64,14,0.1); }
+.scc-insight { transition: all 0.25s; border-left: 3px solid #92400e; }
+.scc-insight:hover { border-color: #ca8a04; box-shadow: 0 2px 8px rgba(146,64,14,0.1); }
+@keyframes scc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes scc-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(146,64,14,0.15); } }
+@keyframes scc-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(146,64,14,0.25); } }
+
+/* Blue Pottery Jaipur Logistics (bpj-*) */
+.bpj-root { animation: bpj-fade-in 0.3s ease-out; }
+.bpj-badge { transition: all 0.2s; }
+.bpj-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(30,64,175,0.15); }
+.bpj-kpi { transition: all 0.25s; border-left: 3px solid #1e40af; }
+.bpj-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(30,64,175,0.12); }
+.bpj-value { transition: all 0.2s; background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%); }
+.bpj-value:hover { transform: scale(1.02); }
+.bpj-health-ring { transition: transform 0.2s; }
+.bpj-health-ring:hover { transform: scale(1.08); }
+.bpj-costbar { transition: width 0.6s ease; }
+.bpj-table-card { transition: box-shadow 0.2s; }
+.bpj-table-card:hover { box-shadow: 0 4px 16px rgba(30,64,175,0.08); }
+.bpj-health-grid { transition: box-shadow 0.2s; }
+.bpj-health-grid:hover { box-shadow: 0 2px 12px rgba(30,64,175,0.1); }
+.bpj-insight { transition: all 0.25s; border-left: 3px solid #1e40af; }
+.bpj-insight:hover { border-color: #2563eb; box-shadow: 0 2px 8px rgba(30,64,175,0.1); }
+@keyframes bpj-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bpj-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes bpj-pulse-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,64,175,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,64,175,0.15); } }
+@keyframes bpj-glow-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,64,175,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,64,175,0.25); } }

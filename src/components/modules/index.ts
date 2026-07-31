@@ -280,3 +280,5 @@ export { default as MakhanaFoxNutProcessingLogisticsView } from './makhana-fox-n
 export { default as MadhubaniFolkArtSupplyChainView } from './madhubani-folk-art-supply-chain-view'
 export { default as SaffronKesarProcessingLogisticsView } from './saffron-kesar-processing-logistics-view'
 export { default as PashminaWoolSupplyChainView } from './pashmina-wool-supply-chain-view'
+export { default as SandstoneCarvingSupplyChainView } from './sandstone-carving-supply-chain-view'
+export { default as BluePotteryJaipurLogisticsView } from './blue-pottery-jaipur-logistics-view'

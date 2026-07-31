@@ -286,6 +286,8 @@ export const navItems: NavItem[] = [
   { id: 'madhubani-folk-art-supply-chain', label: 'Madhubani Folk Art', icon: 'Frame', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'saffron-kesar-processing-logistics', label: 'Saffron Kesar Processing', icon: 'Flower2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'pashmina-wool-supply-chain', label: 'Pashmina Wool Supply Chain', icon: 'MountainSnow', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'sandstone-carving-supply-chain', label: 'Sandstone Carving Supply Chain', icon: 'Columns', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'blue-pottery-jaipur-logistics', label: 'Blue Pottery Jaipur', icon: 'Castle', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

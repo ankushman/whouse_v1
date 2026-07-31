@@ -290,6 +290,8 @@ import MakhanaFoxNutProcessingLogisticsView from "@/components/modules/makhana-f
 import MadhubaniFolkArtSupplyChainView from "@/components/modules/madhubani-folk-art-supply-chain-view"
 import SaffronKesarProcessingLogisticsView from "@/components/modules/saffron-kesar-processing-logistics-view"
 import PashminaWoolSupplyChainView from "@/components/modules/pashmina-wool-supply-chain-view"
+import SandstoneCarvingSupplyChainView from "@/components/modules/sandstone-carving-supply-chain-view"
+import BluePotteryJaipurLogisticsView from "@/components/modules/blue-pottery-jaipur-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -579,6 +581,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "madhubani-folk-art-supply-chain": MadhubaniFolkArtSupplyChainView,
   "saffron-kesar-processing-logistics": SaffronKesarProcessingLogisticsView,
   "pashmina-wool-supply-chain": PashminaWoolSupplyChainView,
+  "sandstone-carving-supply-chain": SandstoneCarvingSupplyChainView,
+  "blue-pottery-jaipur-logistics": BluePotteryJaipurLogisticsView,
 }
 
 
