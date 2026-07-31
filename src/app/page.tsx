@@ -374,6 +374,7 @@ import PatolaGujaratLogisticsView from "@/components/modules/patola-gujarat-logi
 import KasutiKarnatakaLogisticsView from "@/components/modules/kasuti-karnataka-logistics-view"
 import BanjaraEmbroideryTelanganaLogisticsView from "@/components/modules/banjara-embroidery-telangana-logistics-view"
 import ChanderiMadhyaPradeshLogisticsView from "@/components/modules/chanderi-madhya-pradesh-logistics-view"
+import PhulkariEmbroideryPunjabLogisticsView from "@/components/modules/phulkari-embroidery-punjab-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -747,6 +748,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "kasuti-karnataka-logistics": KasutiKarnatakaLogisticsView,
   "banjara-embroidery-telangana-logistics": BanjaraEmbroideryTelanganaLogisticsView,
   "chanderi-madhya-pradesh-logistics": ChanderiMadhyaPradeshLogisticsView,
+  "phulkari-embroidery-punjab-logistics": PhulkariEmbroideryPunjabLogisticsView,
 }
 
 

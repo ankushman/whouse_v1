@@ -365,3 +365,4 @@ export { default as PatolaGujaratLogisticsView } from './patola-gujarat-logistic
 export { default as KasutiKarnatakaLogisticsView } from './kasuti-karnataka-logistics-view'
 export { default as BanjaraEmbroideryTelanganaLogisticsView } from './banjara-embroidery-telangana-logistics-view'
 export { default as ChanderiMadhyaPradeshLogisticsView } from './chanderi-madhya-pradesh-logistics-view'
+export { default as PhulkariEmbroideryPunjabLogisticsView } from './phulkari-embroidery-punjab-logistics-view'
