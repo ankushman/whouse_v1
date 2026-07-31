@@ -320,3 +320,5 @@ export { default as PatolaDoubleIkatGujaratLogisticsView } from './patola-double
 export { default as ChikankariEmbroideryLucknowLogisticsView } from './chikankari-embroidery-lucknow-logistics-view'
 export { default as PochampallyIkatTelanganaLogisticsView } from './pochampally-ikat-telangana-logistics-view'
 export { default as KutchBandhaniGujaratLogisticsView } from './kutch-bandhani-gujarat-logistics-view'
+export { default as MiniaturePaintingRajasthanLogisticsView } from './miniature-painting-rajasthan-logistics-view'
+export { default as OdishaPipliAppliqueLogisticsView } from './odisha-pipli-applique-logistics-view'

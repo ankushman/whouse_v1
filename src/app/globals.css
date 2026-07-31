@@ -54356,3 +54356,71 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* ============================================================================
+   R334: Miniature Painting Rajasthan (mpr-*) + Odisha Pipli Applique (opa-*)
+   ============================================================================ */
+
+.mpr-root {
+  animation: mprFadeIn 0.4s ease-out;
+}
+.mpr-root .health-ring svg circle:last-child {
+  animation: mprRingPulse 2s ease-in-out infinite;
+}
+.mpr-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.mpr-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.mpr-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.mpr-root table tbody tr {
+  animation: mprRowSlide 0.3s ease-out;
+}
+
+.opa-root {
+  animation: opaFadeIn 0.4s ease-out;
+}
+.opa-root .health-ring svg circle:last-child {
+  animation: opaRingPulse 2s ease-in-out infinite;
+}
+.opa-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.opa-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.opa-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.opa-root table tbody tr {
+  animation: opaRowSlide 0.3s ease-out;
+}
+
+@keyframes mprFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes mprRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes mprRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes opaFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes opaRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes opaRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
