@@ -294,3 +294,5 @@ export { default as RajasthanPuppetryLogisticsView } from './rajasthan-puppetry-
 export { default as BanarasiSilkWeavingLogisticsView } from './banarasi-silk-weaving-logistics-view'
 export { default as MadhubaniPaintingBiharLogisticsView } from './madhubani-painting-bihar-logistics-view'
 export { default as PattachitraOdishaLogisticsView } from './pattachitra-odisha-logistics-view'
+export { default as KeralaMuralPaintingLogisticsView } from './kerala-mural-painting-logistics-view'
+export { default as WarliTribalArtMaharashtraLogisticsView } from './warli-tribal-art-maharashtra-logistics-view'

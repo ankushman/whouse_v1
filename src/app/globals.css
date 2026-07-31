@@ -53824,3 +53824,47 @@ html.theme-transition body {
 @keyframes pco-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes pco-pulse-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(17,94,89,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(17,94,89,0.15); } }
 @keyframes pco-glow-teal { 0%, 100% { box-shadow: 0 0 0 0 rgba(17,94,89,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(17,94,89,0.25); } }
+
+/* Kerala Mural Painting (kmp-*) */
+.kmp-root { animation: kmp-fade-in 0.3s ease-out; }
+.kmp-badge { transition: all 0.2s; }
+.kmp-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(22,101,52,0.15); }
+.kmp-kpi { transition: all 0.25s; border-left: 3px solid #166534; }
+.kmp-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(22,101,52,0.12); }
+.kmp-value { transition: all 0.2s; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+.kmp-value:hover { transform: scale(1.02); }
+.kmp-health-ring { transition: transform 0.2s; }
+.kmp-health-ring:hover { transform: scale(1.08); }
+.kmp-costbar { transition: width 0.6s ease; }
+.kmp-table-card { transition: box-shadow 0.2s; }
+.kmp-table-card:hover { box-shadow: 0 4px 16px rgba(22,101,52,0.08); }
+.kmp-health-grid { transition: box-shadow 0.2s; }
+.kmp-health-grid:hover { box-shadow: 0 2px 12px rgba(22,101,52,0.1); }
+.kmp-insight { transition: all 0.25s; border-left: 3px solid #166534; }
+.kmp-insight:hover { border-color: #16a34a; box-shadow: 0 2px 8px rgba(22,101,52,0.1); }
+@keyframes kmp-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes kmp-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes kmp-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(22,101,52,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(22,101,52,0.15); } }
+@keyframes kmp-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(22,101,52,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(22,101,52,0.25); } }
+
+/* Warli Tribal Art Maharashtra (wtm-*) */
+.wtm-root { animation: wtm-fade-in 0.3s ease-out; }
+.wtm-badge { transition: all 0.2s; }
+.wtm-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(120,53,15,0.15); }
+.wtm-kpi { transition: all 0.25s; border-left: 3px solid #78350f; }
+.wtm-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(120,53,15,0.12); }
+.wtm-value { transition: all 0.2s; background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+.wtm-value:hover { transform: scale(1.02); }
+.wtm-health-ring { transition: transform 0.2s; }
+.wtm-health-ring:hover { transform: scale(1.08); }
+.wtm-costbar { transition: width 0.6s ease; }
+.wtm-table-card { transition: box-shadow 0.2s; }
+.wtm-table-card:hover { box-shadow: 0 4px 16px rgba(120,53,15,0.08); }
+.wtm-health-grid { transition: box-shadow 0.2s; }
+.wtm-health-grid:hover { box-shadow: 0 2px 12px rgba(120,53,15,0.1); }
+.wtm-insight { transition: all 0.25s; border-left: 3px solid #78350f; }
+.wtm-insight:hover { border-color: #a16207; box-shadow: 0 2px 8px rgba(120,53,15,0.1); }
+@keyframes wtm-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes wtm-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes wtm-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(120,53,15,0.15); } }
+@keyframes wtm-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(120,53,15,0.25); } }
