@@ -300,6 +300,8 @@ import KondapalliBommaluToysLogisticsView from "@/components/modules/kondapalli-
 import KalamkariPenArtLogisticsView from "@/components/modules/kalamkari-pen-art-logistics-view"
 import ChhauMaskDanceLogisticsView from "@/components/modules/chhau-mask-dance-logistics-view"
 import KanthaEmbroideryBengalLogisticsView from "@/components/modules/kantha-embroidery-bengal-logistics-view"
+import RajasthanPuppetryLogisticsView from "@/components/modules/rajasthan-puppetry-logistics-view"
+import BanarasiSilkWeavingLogisticsView from "@/components/modules/banarasi-silk-weaving-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -599,6 +601,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "kalamkari-pen-art-logistics": KalamkariPenArtLogisticsView,
   "chhau-mask-dance-logistics": ChhauMaskDanceLogisticsView,
   "kantha-embroidery-bengal-logistics": KanthaEmbroideryBengalLogisticsView,
+  "rajasthan-puppetry-logistics": RajasthanPuppetryLogisticsView,
+  "banarasi-silk-weaving-logistics": BanarasiSilkWeavingLogisticsView,
 }
 
 

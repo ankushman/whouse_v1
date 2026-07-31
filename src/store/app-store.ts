@@ -296,6 +296,8 @@ export const navItems: NavItem[] = [
   { id: 'kalamkari-pen-art-logistics', label: 'Kalamkari Pen Art', icon: 'PenTool', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'chhau-mask-dance-logistics', label: 'Chhau Mask Dance', icon: 'Drama', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kantha-embroidery-bengal-logistics', label: 'Kantha Embroidery Bengal', icon: 'Brush', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'rajasthan-puppetry-logistics', label: 'Rajasthan Puppetry', icon: 'Music', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'banarasi-silk-weaving-logistics', label: 'Banarasi Silk Weaving', icon: 'Diamond', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

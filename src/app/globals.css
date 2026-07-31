@@ -53736,3 +53736,47 @@ html.theme-transition body {
 @keyframes keb-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes keb-pulse-olive { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(54,83,20,0.15); } }
 @keyframes keb-glow-olive { 0%, 100% { box-shadow: 0 0 0 0 rgba(54,83,20,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(54,83,20,0.25); } }
+
+/* Rajasthan Puppetry (rpl-*) */
+.rpl-root { animation: rpl-fade-in 0.3s ease-out; }
+.rpl-badge { transition: all 0.2s; }
+.rpl-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(153,27,27,0.15); }
+.rpl-kpi { transition: all 0.25s; border-left: 3px solid #991b1b; }
+.rpl-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(153,27,27,0.12); }
+.rpl-value { transition: all 0.2s; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); }
+.rpl-value:hover { transform: scale(1.02); }
+.rpl-health-ring { transition: transform 0.2s; }
+.rpl-health-ring:hover { transform: scale(1.08); }
+.rpl-costbar { transition: width 0.6s ease; }
+.rpl-table-card { transition: box-shadow 0.2s; }
+.rpl-table-card:hover { box-shadow: 0 4px 16px rgba(153,27,27,0.08); }
+.rpl-health-grid { transition: box-shadow 0.2s; }
+.rpl-health-grid:hover { box-shadow: 0 2px 12px rgba(153,27,27,0.1); }
+.rpl-insight { transition: all 0.25s; border-left: 3px solid #991b1b; }
+.rpl-insight:hover { border-color: #dc2626; box-shadow: 0 2px 8px rgba(153,27,27,0.1); }
+@keyframes rpl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rpl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes rpl-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(153,27,27,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(153,27,27,0.15); } }
+@keyframes rpl-glow-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(153,27,27,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(153,27,27,0.25); } }
+
+/* Banarasi Silk Weaving (bsw-*) */
+.bsw-root { animation: bsw-fade-in 0.3s ease-out; }
+.bsw-badge { transition: all 0.2s; }
+.bsw-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(88,28,135,0.15); }
+.bsw-kpi { transition: all 0.25s; border-left: 3px solid #581c87; }
+.bsw-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(88,28,135,0.12); }
+.bsw-value { transition: all 0.2s; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); }
+.bsw-value:hover { transform: scale(1.02); }
+.bsw-health-ring { transition: transform 0.2s; }
+.bsw-health-ring:hover { transform: scale(1.08); }
+.bsw-costbar { transition: width 0.6s ease; }
+.bsw-table-card { transition: box-shadow 0.2s; }
+.bsw-table-card:hover { box-shadow: 0 4px 16px rgba(88,28,135,0.08); }
+.bsw-health-grid { transition: box-shadow 0.2s; }
+.bsw-health-grid:hover { box-shadow: 0 2px 12px rgba(88,28,135,0.1); }
+.bsw-insight { transition: all 0.25s; border-left: 3px solid #581c87; }
+.bsw-insight:hover { border-color: #7c3aed; box-shadow: 0 2px 8px rgba(88,28,135,0.1); }
+@keyframes bsw-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bsw-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes bsw-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(88,28,135,0.15); } }
+@keyframes bsw-glow-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(88,28,135,0.25); } }

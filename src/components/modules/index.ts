@@ -290,3 +290,5 @@ export { default as KondapalliBommaluToysLogisticsView } from './kondapalli-bomm
 export { default as KalamkariPenArtLogisticsView } from './kalamkari-pen-art-logistics-view'
 export { default as ChhauMaskDanceLogisticsView } from './chhau-mask-dance-logistics-view'
 export { default as KanthaEmbroideryBengalLogisticsView } from './kantha-embroidery-bengal-logistics-view'
+export { default as RajasthanPuppetryLogisticsView } from './rajasthan-puppetry-logistics-view'
+export { default as BanarasiSilkWeavingLogisticsView } from './banarasi-silk-weaving-logistics-view'
