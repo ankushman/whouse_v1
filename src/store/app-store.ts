@@ -372,6 +372,7 @@ export const navItems: NavItem[] = [
   { id: 'chanderi-madhya-pradesh-logistics', label: 'Chanderi MP', icon: 'Crown', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'phulkari-embroidery-punjab-logistics', label: 'Phulkari PB', icon: 'Flower2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'tarakasi-silver-filigree-odisha-logistics', label: 'Tarakasi OR', icon: 'Diamond', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'ajrakh-block-print-kutch-logistics', label: 'Ajrakh Kutch', icon: 'Stamp', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
