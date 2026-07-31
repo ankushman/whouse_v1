@@ -1,5 +1,30 @@
 ---
 ---
+Task ID: R350
+Agent: Main Agent (Cron Loop)
+Task: R350 — Molela Terracotta Rajasthan (new) + Carpet Rug Logistics overwrite
+
+Work Log:
+- Read worklog.md: R349 complete (commit d8d9e5c), 343 views, 343 navItems, 54,947 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R350)
+- Slug verification: molela-terracotta-rajasthan-logistics CLEAR; carpet-rug-logistics ALREADY EXISTS
+- CSS prefixes: mol-* CLEAR, crp-* already exists (from carpet-rug old prefix — kept existing CSS)
+- Icons: Sun (Molela, already in iconMap), BedDouble (Carpet, already existed) — no new icons (186 unchanged)
+- Carpet Rug had MANUFACTURERS/manufacturer fields, 243 lines — completely overwritten to 253 lines
+
+- Created Molela Terracotta Rajasthan Logistics (mol-*, #78350f deep amber brown): 253 lines, 8 products (Molela Terracotta Devi Panel, Clay Horse Figure, Terracotta Elephant Idol, Clay Village Scene Relief, Terracotta Snake Spiral, Clay Sun God Plaque, Terracotta Bullock Cart Toy, Clay Tree of Life Panel), 8 artisans (Molela Artisan Guild RJ, Udaipur Clay Craft Society, Rajsamand Murtikar Colony RJ, Nathdwara Terracotta Cluster, Kumbhalgarh Clay Workers RJ, Chittorgarh Terracotta Cooperative, Bhilwara Clay Mould Society RJ, Bali Terracotta Artisan Centre RJ), 6 statuses, 4 insight cards (1300-year Mewar clay craft heritage, IS 16795 Molela clay standards, foam wrap corrugated box packaging, AI firing analysis)
+- Overwrote Carpet Rug Logistics (crp-*, #7c2d12 deep rust): 253 lines, MANUFACTURERS→ARTISANS field fix, genRecords, 60 records, 4 insight cards (500-year Bhadohi Kashmir carpet weaving, IS 1541 knot density standards, rolled pallet transit packaging, AI knot analysis)
+- Registered Molela in 3 files; Carpet Rug already registered
+- CSS: +21 lines (mol-* 7 rules + 3 keyframes)
+- TSC: 0 errors | Git pushed: commit b945b38
+
+Stage Summary:
+- 344 views, 344 navItems, 54,968 CSS lines, 336 barrel exports (334 + Molela + ESG fix from R349)
+- Carpet Rug fixed: MANUFACTURERS→ARTISANS, 243→253 lines, full template compliance
+- Remaining overwrite candidates at 243 lines: glass-ceramics, handicraft-woodwork, handloom-cotton, incense-dhoop, terracotta-pottery
+- Remaining overwrite candidates at 244 lines: ayurveda-herbal, brass-copper-ware, cashew, cosmetics, fireworks, gems-jewellery, handicrafts-artisan, jute-coir, marble-granite, musical-instruments, organic-food, plywood, silk-textile-heritage, sports-equipment, tea-spice
+- Next round suggestions: Sungudi Saree TN (new) + glass-ceramics-supply-chain overwrite (243→253)
+---
 Task ID: R349
 Agent: Main Agent (Cron Loop)
 Task: R349 — Bastar Iron Craft Chhattisgarh (new) + Bamboo Cane Products Supply Chain overwrite
