@@ -53242,3 +53242,49 @@ html.theme-transition body {
 @keyframes tps-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes tps-pulse-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(146,64,14,0.15); } }
 @keyframes tps-glow-amber { 0%, 100% { box-shadow: 0 0 0 0 rgba(146,64,14,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(146,64,14,0.25); } }
+
+/* ── Handloom Cotton Supply Chain (hlc-*) ── */
+.hlc-root { animation: hlc-fade-in 0.4s ease; }
+.hlc-tab-trigger[data-state="active"] { background-color: #1e3a5f; color: white; }
+.hlc-tab-trigger[data-state="active"]:hover { background-color: #1e40af; }
+.hlc-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.hlc-kpi-card:hover { border-color: #1e3a5f; box-shadow: 0 4px 12px rgba(30,58,95,0.15); }
+.hlc-kpi-value { font-variant-numeric: tabular-nums; }
+.hlc-health-ring svg { transition: transform 0.3s ease; }
+.hlc-health-ring:hover svg { transform: scale(1.05); }
+.hlc-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.hlc-ring-value { font-variant-numeric: tabular-nums; }
+.hlc-product-badge, .hlc-status-badge { transition: transform 0.15s ease; }
+.hlc-product-badge:hover { transform: scale(1.05); }
+.hlc-cost-bar-fill { transition: width 0.6s ease; }
+.hlc-table-row { transition: background-color 0.15s ease; }
+.hlc-table-row:hover { background-color: rgba(30,58,95,0.04); }
+.hlc-chart-card { border: 1px solid #e5e7eb; }
+.hlc-insight-card { border: 1px solid #e5e7eb; }
+@keyframes hlc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hlc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes hlc-pulse-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,58,95,0.15); } }
+@keyframes hlc-glow-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,58,95,0.25); } }
+
+/* ── Carpet & Rug Logistics (crl-*) ── */
+.crl-root { animation: crl-fade-in 0.4s ease; }
+.crl-tab-trigger[data-state="active"] { background-color: #7c2d12; color: white; }
+.crl-tab-trigger[data-state="active"]:hover { background-color: #9a3412; }
+.crl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.crl-kpi-card:hover { border-color: #7c2d12; box-shadow: 0 4px 12px rgba(124,45,18,0.15); }
+.crl-kpi-value { font-variant-numeric: tabular-nums; }
+.crl-health-ring svg { transition: transform 0.3s ease; }
+.crl-health-ring:hover svg { transform: scale(1.05); }
+.crl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.crl-ring-value { font-variant-numeric: tabular-nums; }
+.crl-product-badge, .crl-status-badge { transition: transform 0.15s ease; }
+.crl-product-badge:hover { transform: scale(1.05); }
+.crl-cost-bar-fill { transition: width 0.6s ease; }
+.crl-table-row { transition: background-color 0.15s ease; }
+.crl-table-row:hover { background-color: rgba(124,45,18,0.04); }
+.crl-chart-card { border: 1px solid #e5e7eb; }
+.crl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes crl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes crl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes crl-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,45,18,0.15); } }
+@keyframes crl-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,45,18,0.25); } }

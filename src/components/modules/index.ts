@@ -268,3 +268,5 @@ export { default as PlywoodPlyboardLogisticsView } from './plywood-plyboard-logi
 export { default as BrassCopperWareSupplyChainView } from './brass-copper-ware-supply-chain-view'
 export { default as IncenseDhoopLogisticsView } from './incense-dhoop-logistics-view'
 export { default as TerracottaPotterySupplyChainView } from './terracotta-pottery-supply-chain-view'
+export { default as HandloomCottonSupplyChainView } from './handloom-cotton-supply-chain-view'
+export { default as CarpetRugLogisticsView } from './carpet-rug-logistics-view'

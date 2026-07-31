@@ -278,6 +278,8 @@ import PlywoodPlyboardLogisticsView from "@/components/modules/plywood-plyboard-
 import BrassCopperWareSupplyChainView from "@/components/modules/brass-copper-ware-supply-chain-view"
 import IncenseDhoopLogisticsView from "@/components/modules/incense-dhoop-logistics-view"
 import TerracottaPotterySupplyChainView from "@/components/modules/terracotta-pottery-supply-chain-view"
+import HandloomCottonSupplyChainView from "@/components/modules/handloom-cotton-supply-chain-view"
+import CarpetRugLogisticsView from "@/components/modules/carpet-rug-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -555,6 +557,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "brass-copper-ware-supply-chain": BrassCopperWareSupplyChainView,
   "incense-dhoop-logistics": IncenseDhoopLogisticsView,
   "terracotta-pottery-supply-chain": TerracottaPotterySupplyChainView,
+  "handloom-cotton-supply-chain": HandloomCottonSupplyChainView,
+  "carpet-rug-logistics": CarpetRugLogisticsView,
 }
 
 
