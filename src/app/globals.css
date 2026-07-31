@@ -55316,3 +55316,11 @@ html.theme-transition body {
 @keyframes phk-fade-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes phk-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
 @keyframes phk-slide{from{transform:translateX(-6px);opacity:0}to{transform:translateX(0);opacity:1}}
+/* ═══════════ R377: Tarakasi Silver Filigree Odisha (tkf-*) ═══════════ */
+.tkf-root{--tkf-primary:#6d28d9;--tkf-bg:#f5f3ff;--tkf-border:rgba(109,40,217,0.12);padding:20px;max-width:1440px;margin:0 auto}
+.tkf-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.tkf-kpi-tile{transition:all 0.3s ease;animation:tkf-fade-in 0.4s ease}
+.tkf-kpi-tile:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(109,40,217,0.15)}
+@keyframes tkf-fade-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tkf-pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+@keyframes tkf-slide{from{transform:translateX(-6px);opacity:0}to{transform:translateX(0);opacity:1}}

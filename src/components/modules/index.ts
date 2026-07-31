@@ -366,3 +366,4 @@ export { default as KasutiKarnatakaLogisticsView } from './kasuti-karnataka-logi
 export { default as BanjaraEmbroideryTelanganaLogisticsView } from './banjara-embroidery-telangana-logistics-view'
 export { default as ChanderiMadhyaPradeshLogisticsView } from './chanderi-madhya-pradesh-logistics-view'
 export { default as PhulkariEmbroideryPunjabLogisticsView } from './phulkari-embroidery-punjab-logistics-view'
+export { default as TarakasiSilverFiligreeOdishaLogisticsView } from './tarakasi-silver-filigree-odisha-logistics-view'
