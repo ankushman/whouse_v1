@@ -53912,3 +53912,33 @@ html.theme-transition body {
 @keyframes dbc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes dbc-pulse-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,58,95,0.15); } }
 @keyframes dbc-glow-blue { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,58,95,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,58,95,0.25); } }
+.ppr-root { animation: ppr-fade-in 0.3s ease-out; }
+.ppr-badge { transition: transform 0.15s; }
+.ppr-badge:hover { transform: scale(1.05); }
+.ppr-status { transition: background-color 0.15s; }
+.ppr-costbar { transition: width 0.4s ease-out; }
+.ppr-table-card { transition: box-shadow 0.2s; }
+.ppr-table-card:hover { box-shadow: 0 4px 16px rgba(124,58,237,0.08); }
+.ppr-health-grid { transition: box-shadow 0.2s; }
+.ppr-health-grid:hover { box-shadow: 0 2px 12px rgba(124,58,237,0.1); }
+.ppr-insight { transition: all 0.25s; border-left: 3px solid #7c3aed; }
+.ppr-insight:hover { border-color: #8b5cf6; box-shadow: 0 2px 8px rgba(124,58,237,0.1); }
+@keyframes ppr-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes ppr-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes ppr-pulse-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,58,237,0.15); } }
+@keyframes ppr-glow-violet { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,58,237,0.25); } }
+.bmc-root { animation: bmc-fade-in 0.3s ease-out; }
+.bmc-badge { transition: transform 0.15s; }
+.bmc-badge:hover { transform: scale(1.05); }
+.bmc-status { transition: background-color 0.15s; }
+.bmc-costbar { transition: width 0.4s ease-out; }
+.bmc-table-card { transition: box-shadow 0.2s; }
+.bmc-table-card:hover { box-shadow: 0 4px 16px rgba(30,41,59,0.08); }
+.bmc-health-grid { transition: box-shadow 0.2s; }
+.bmc-health-grid:hover { box-shadow: 0 2px 12px rgba(30,41,59,0.1); }
+.bmc-insight { transition: all 0.25s; border-left: 3px solid #1e293b; }
+.bmc-insight:hover { border-color: #334155; box-shadow: 0 2px 8px rgba(30,41,59,0.1); }
+@keyframes bmc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bmc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes bmc-pulse-slate { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,41,59,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(30,41,59,0.15); } }
+@keyframes bmc-glow-slate { 0%, 100% { box-shadow: 0 0 0 0 rgba(30,41,59,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(30,41,59,0.25); } }
