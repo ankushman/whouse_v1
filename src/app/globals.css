@@ -55029,3 +55029,24 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* ── Rogan Art Gujarat Logistics (rog-*) ── */
+.rog-root { animation: rogFadeIn 0.3s ease-out; }
+.rog-root * { box-sizing: border-box; }
+.rog-root table { border-collapse: collapse; }
+.rog-root tr:nth-child(even) { background: rgba(153, 27, 27, 0.04); }
+.rog-root .rog-badge { border-radius: 9999px; }
+.rog-root svg circle:last-child { transition: stroke-dashoffset 0.6s ease; }
+.rog-root .rog-insight p { max-height: 220px; overflow-y: auto; }
+@keyframes rogFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes rogPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes rogRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
