@@ -294,6 +294,8 @@ import SandstoneCarvingSupplyChainView from "@/components/modules/sandstone-carv
 import BluePotteryJaipurLogisticsView from "@/components/modules/blue-pottery-jaipur-logistics-view"
 import KashmirWalnutWoodCarvingSupplyChainView from "@/components/modules/kashmir-walnut-wood-carving-supply-chain-view"
 import AssamSilkMugaWeavingSupplyChainView from "@/components/modules/assam-silk-muga-weaving-supply-chain-view"
+import ChikankariLucknowEmbroideryView from "@/components/modules/chikankari-lucknow-embroidery-view"
+import ThanjavurBronzeSculptureSupplyChainView from "@/components/modules/thanjavur-bronze-sculpture-supply-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -587,6 +589,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "blue-pottery-jaipur-logistics": BluePotteryJaipurLogisticsView,
   "kashmir-walnut-wood-carving-supply-chain": KashmirWalnutWoodCarvingSupplyChainView,
   "assam-silk-muga-weaving-supply-chain": AssamSilkMugaWeavingSupplyChainView,
+  "chikankari-lucknow-embroidery": ChikankariLucknowEmbroideryView,
+  "thanjavur-bronze-sculpture-supply-chain": ThanjavurBronzeSculptureSupplyChainView,
 }
 
 

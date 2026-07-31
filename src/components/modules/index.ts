@@ -284,3 +284,5 @@ export { default as SandstoneCarvingSupplyChainView } from './sandstone-carving-
 export { default as BluePotteryJaipurLogisticsView } from './blue-pottery-jaipur-logistics-view'
 export { default as KashmirWalnutWoodCarvingSupplyChainView } from './kashmir-walnut-wood-carving-supply-chain-view'
 export { default as AssamSilkMugaWeavingSupplyChainView } from './assam-silk-muga-weaving-supply-chain-view'
+export { default as ChikankariLucknowEmbroideryView } from './chikankari-lucknow-embroidery-view'
+export { default as ThanjavurBronzeSculptureSupplyChainView } from './thanjavur-bronze-sculpture-supply-chain-view'

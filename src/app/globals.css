@@ -53604,3 +53604,47 @@ html.theme-transition body {
 @keyframes asm-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes asm-pulse-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(133,77,14,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(133,77,14,0.15); } }
 @keyframes asm-glow-gold { 0%, 100% { box-shadow: 0 0 0 0 rgba(133,77,14,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(133,77,14,0.25); } }
+
+/* Chikankari Lucknow Embroidery (clk-*) */
+.clk-root { animation: clk-fade-in 0.3s ease-out; }
+.clk-badge { transition: all 0.2s; }
+.clk-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(190,24,93,0.15); }
+.clk-kpi { transition: all 0.25s; border-left: 3px solid #be185d; }
+.clk-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(190,24,93,0.12); }
+.clk-value { transition: all 0.2s; background: linear-gradient(135deg, #fce7f3 0%, #fdf2f8 100%); }
+.clk-value:hover { transform: scale(1.02); }
+.clk-health-ring { transition: transform 0.2s; }
+.clk-health-ring:hover { transform: scale(1.08); }
+.clk-costbar { transition: width 0.6s ease; }
+.clk-table-card { transition: box-shadow 0.2s; }
+.clk-table-card:hover { box-shadow: 0 4px 16px rgba(190,24,93,0.08); }
+.clk-health-grid { transition: box-shadow 0.2s; }
+.clk-health-grid:hover { box-shadow: 0 2px 12px rgba(190,24,93,0.1); }
+.clk-insight { transition: all 0.25s; border-left: 3px solid #be185d; }
+.clk-insight:hover { border-color: #ec4899; box-shadow: 0 2px 8px rgba(190,24,93,0.1); }
+@keyframes clk-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes clk-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes clk-pulse-pink { 0%, 100% { box-shadow: 0 0 0 0 rgba(190,24,93,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(190,24,93,0.15); } }
+@keyframes clk-glow-pink { 0%, 100% { box-shadow: 0 0 0 0 rgba(190,24,93,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(190,24,93,0.25); } }
+
+/* Thanjavur Bronze Sculpture (tbs-*) */
+.tbs-root { animation: tbs-fade-in 0.3s ease-out; }
+.tbs-badge { transition: all 0.2s; }
+.tbs-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(88,28,135,0.15); }
+.tbs-kpi { transition: all 0.25s; border-left: 3px solid #581c87; }
+.tbs-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(88,28,135,0.12); }
+.tbs-value { transition: all 0.2s; background: linear-gradient(135deg, #f3e8ff 0%, #faf5ff 100%); }
+.tbs-value:hover { transform: scale(1.02); }
+.tbs-health-ring { transition: transform 0.2s; }
+.tbs-health-ring:hover { transform: scale(1.08); }
+.tbs-costbar { transition: width 0.6s ease; }
+.tbs-table-card { transition: box-shadow 0.2s; }
+.tbs-table-card:hover { box-shadow: 0 4px 16px rgba(88,28,135,0.08); }
+.tbs-health-grid { transition: box-shadow 0.2s; }
+.tbs-health-grid:hover { box-shadow: 0 2px 12px rgba(88,28,135,0.1); }
+.tbs-insight { transition: all 0.25s; border-left: 3px solid #581c87; }
+.tbs-insight:hover { border-color: #9333ea; box-shadow: 0 2px 8px rgba(88,28,135,0.1); }
+@keyframes tbs-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes tbs-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes tbs-pulse-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(88,28,135,0.15); } }
+@keyframes tbs-glow-purple { 0%, 100% { box-shadow: 0 0 0 0 rgba(88,28,135,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(88,28,135,0.25); } }

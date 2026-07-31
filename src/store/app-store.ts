@@ -290,6 +290,8 @@ export const navItems: NavItem[] = [
   { id: 'blue-pottery-jaipur-logistics', label: 'Blue Pottery Jaipur', icon: 'Castle', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'kashmir-walnut-wood-carving-supply-chain', label: 'Kashmir Walnut Wood Carving', icon: 'TreeDeciduous', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'assam-silk-muga-weaving-supply-chain', label: 'Assam Silk & Muga Weaving', icon: 'Grape', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'chikankari-lucknow-embroidery', label: 'Chikankari Lucknow Embroidery', icon: 'Feather', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'thanjavur-bronze-sculpture-supply-chain', label: 'Thanjavur Bronze Sculpture', icon: 'Orbit', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
