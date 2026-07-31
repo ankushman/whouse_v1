@@ -53288,3 +53288,49 @@ html.theme-transition body {
 @keyframes crl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
 @keyframes crl-pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(124,45,18,0.15); } }
 @keyframes crl-glow-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(124,45,18,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(124,45,18,0.25); } }
+
+/* ── Glass & Ceramics Supply Chain (gcc-*) ── */
+.gcc-root { animation: gcc-fade-in 0.4s ease; }
+.gcc-tab-trigger[data-state="active"] { background-color: #14532d; color: white; }
+.gcc-tab-trigger[data-state="active"]:hover { background-color: #166534; }
+.gcc-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.gcc-kpi-card:hover { border-color: #14532d; box-shadow: 0 4px 12px rgba(20,83,45,0.15); }
+.gcc-kpi-value { font-variant-numeric: tabular-nums; }
+.gcc-health-ring svg { transition: transform 0.3s ease; }
+.gcc-health-ring:hover svg { transform: scale(1.05); }
+.gcc-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.gcc-ring-value { font-variant-numeric: tabular-nums; }
+.gcc-product-badge, .gcc-status-badge { transition: transform 0.15s ease; }
+.gcc-product-badge:hover { transform: scale(1.05); }
+.gcc-cost-bar-fill { transition: width 0.6s ease; }
+.gcc-table-row { transition: background-color 0.15s ease; }
+.gcc-table-row:hover { background-color: rgba(20,83,45,0.04); }
+.gcc-chart-card { border: 1px solid #e5e7eb; }
+.gcc-insight-card { border: 1px solid #e5e7eb; }
+@keyframes gcc-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes gcc-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes gcc-pulse-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(20,83,45,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(20,83,45,0.15); } }
+@keyframes gcc-glow-green { 0%, 100% { box-shadow: 0 0 0 0 rgba(20,83,45,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(20,83,45,0.25); } }
+
+/* ── Handicraft Woodwork Logistics (hwl-*) ── */
+.hwl-root { animation: hwl-fade-in 0.4s ease; }
+.hwl-tab-trigger[data-state="active"] { background-color: #78350f; color: white; }
+.hwl-tab-trigger[data-state="active"]:hover { background-color: #92400e; }
+.hwl-kpi-card { transition: all 0.2s ease; border: 1px solid #e5e7eb; }
+.hwl-kpi-card:hover { border-color: #78350f; box-shadow: 0 4px 12px rgba(120,53,15,0.15); }
+.hwl-kpi-value { font-variant-numeric: tabular-nums; }
+.hwl-health-ring svg { transition: transform 0.3s ease; }
+.hwl-health-ring:hover svg { transform: scale(1.05); }
+.hwl-ring-path { transition: stroke-dashoffset 0.8s ease; }
+.hwl-ring-value { font-variant-numeric: tabular-nums; }
+.hwl-product-badge, .hwl-status-badge { transition: transform 0.15s ease; }
+.hwl-product-badge:hover { transform: scale(1.05); }
+.hwl-cost-bar-fill { transition: width 0.6s ease; }
+.hwl-table-row { transition: background-color 0.15s ease; }
+.hwl-table-row:hover { background-color: rgba(120,53,15,0.04); }
+.hwl-chart-card { border: 1px solid #e5e7eb; }
+.hwl-insight-card { border: 1px solid #e5e7eb; }
+@keyframes hwl-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes hwl-grow { from { transform: scale(0.95); } to { transform: scale(1); } }
+@keyframes hwl-pulse-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(120,53,15,0.15); } }
+@keyframes hwl-glow-yellow { 0%, 100% { box-shadow: 0 0 0 0 rgba(120,53,15,0.2); } 50% { box-shadow: 0 0 10px 3px rgba(120,53,15,0.25); } }

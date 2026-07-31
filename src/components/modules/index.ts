@@ -270,3 +270,5 @@ export { default as IncenseDhoopLogisticsView } from './incense-dhoop-logistics-
 export { default as TerracottaPotterySupplyChainView } from './terracotta-pottery-supply-chain-view'
 export { default as HandloomCottonSupplyChainView } from './handloom-cotton-supply-chain-view'
 export { default as CarpetRugLogisticsView } from './carpet-rug-logistics-view'
+export { default as GlassCeramicsSupplyChainView } from './glass-ceramics-supply-chain-view'
+export { default as HandicraftWoodworkLogisticsView } from './handicraft-woodwork-logistics-view'
