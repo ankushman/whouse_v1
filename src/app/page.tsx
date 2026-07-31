@@ -346,6 +346,7 @@ import ChambaRumalEmbroideryHimachalPradeshLogisticsView from "@/components/modu
 import ThangkaPaintingLadakhLogisticsView from "@/components/modules/thangka-painting-ladakh-logistics-view"
 import KolamFloorArtTamilNaduLogisticsView from "@/components/modules/kolam-floor-art-tamil-nadu-logistics-view"
 import AipanArtAlmoraLogisticsView from "@/components/modules/aipan-art-almora-logistics-view"
+import KinnauriShawlHimachalPradeshLogisticsView from "@/components/modules/kinnauri-shawl-himachal-pradesh-logistics-view"
 import PembarthiMetalCraftTelanganaLogisticsView from "@/components/modules/pembarthi-metal-craft-telangana-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
@@ -692,6 +693,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "thangka-painting-ladakh-logistics": ThangkaPaintingLadakhLogisticsView,
   "kolam-floor-art-tamil-nadu-logistics": KolamFloorArtTamilNaduLogisticsView,
   "aipan-art-almora-logistics": AipanArtAlmoraLogisticsView,
+  "kinnauri-shawl-himachal-pradesh-logistics": KinnauriShawlHimachalPradeshLogisticsView,
   "pembarthi-metal-craft-telangana-logistics": PembarthiMetalCraftTelanganaLogisticsView,
 }
 
