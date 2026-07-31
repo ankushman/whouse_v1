@@ -1,5 +1,31 @@
 ---
 ---
+Task ID: R354
+Agent: Main Agent (Cron Loop)
+Task: R354 — Rogan Art Gujarat (new) + Incense Dhoop Logistics overwrite
+
+Work Log:
+- Read worklog.md: R353 complete (commit d8e9820), 347 views, 347 navItems, ~55,031 CSS, 0 TSC errors
+- TSC check: 0 errors in src/ confirmed (pre-R354)
+- QA: Dev server OOM (known); TSC sole QA gate
+- Slug verification: rogan-art-gujarat-logistics CLEAR; incense-dhoop-logistics ALREADY EXISTS
+- CSS prefixes: rog-* CLEAR, ind-* already exists (kept existing CSS for overwrite)
+- Icons: Paintbrush (Rogan, already in iconMap), FlameKindling (Incense, already existed) — no new icons (186 unchanged)
+- Incense Dhoop had 243 lines — completely overwritten to 253 lines with genRecords, correct field names
+
+- Created Rogan Art Gujarat Logistics (rog-*, #991b1b deep red): 253 lines, 8 products (Tree of Life Panel, Floral Textile Art, Peacock Design Scroll, Abstract Canvas, Mandala Art Panel, Camel Decorative Panel, Bride Palanquin Art, Heritage Wall Hanging), 8 artisans (Rogan Art Heritage Guild Kutch, Nirona Village Artisans Gujarat, Bhuj Rogan Collective Gujarat, Anjar Traditional Painters Gujarat, Mundra Art Cluster Gujarat, Mandvi Rogan Society Gujarat, Rapar Village Craftsmen Gujarat, Abdasa Rogan Workshop Gujarat), 6 statuses, 4 insight cards (400-year Kutch castor oil painting heritage, castor oil pigment QC & hand-painted finish standards, flat pack carton packaging, climate storage & heritage market development)
+- Overwrote Incense Dhoop Logistics (ind-*, #78350f deep amber): 253 lines, 8 products (Premium Bamboo Stick Incense, Masala Dhoop Cone Set, Loban Benzoin Resin, Chandan Sandalwood Dhoop, Rose Petal Agarbatti, Camphor Tablet Box, Herbal Hawan Samagri, Cow Dung Dhoop Cake), 8 artisans (Karnataka Agarbatti Association KA, Mysore Sandal Oil Factory KA, Perfume City Kannauj UP, Jaipur Incense Guild RJ, Varanasi Dhoop Artisans UP, Kolkata Fragrance Society WB, Mumbai Aromatic Works MH, Tirupati Temple Dhoop AP), 6 statuses, 4 insight cards (5000-year Vedic agarbatti heritage, IS 19038 incense standards & bamboo QC, shrink wrap seal packaging, dry room storage & heritage market)
+- Registered Rogan in 3 files (index.ts, page.tsx, app-store.ts); Incense already registered
+- CSS: +21 lines (rog-* 7 rules + 3 keyframes); Ind ind-* CSS kept existing
+- TSC: 0 errors | Git pushed: commit c51b5a0
+
+Stage Summary:
+- 348 views (1 new Rogan), 348 navItems, ~55,052 CSS lines, 0 TSC errors
+- Both modules at exactly 253 lines with full template compliance
+- Incense Dhoop updated from 243 to 253 lines with genRecords, 60 records, correct field names
+- Remaining non-253 overwrite candidates: ~260 modules (ongoing overwrite program)
+- Turbopack OOM persists; CSS splitting remains critical priority
+---
 Task ID: R353
 Agent: Main Agent (Cron Loop)
 Task: R353 — Sikki Grass Weaving Bihar (new) + Silk & Textile Heritage Supply Chain overwrite
