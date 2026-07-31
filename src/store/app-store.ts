@@ -322,6 +322,8 @@ export const navItems: NavItem[] = [
   { id: 'cheriyal-scroll-art-telangana-logistics', label: 'Cheriyal Scroll Art', icon: 'ScrollText', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'sankheda-lacquerware-gujarat-logistics', label: 'Sankheda Lacquerware', icon: 'Paintbrush', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'tanjore-painting-tamil-nadu-logistics', label: 'Tanjore Painting TN', icon: 'Frame', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'patola-double-ikat-gujarat-logistics', label: 'Patola Double Ikat', icon: 'Sparkles', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'chikankari-embroidery-lucknow-logistics', label: 'Chikankari Lucknow', icon: 'Scissors', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

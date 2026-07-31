@@ -326,6 +326,8 @@ import NirmalPaintingTelanganaLogisticsView from "@/components/modules/nirmal-pa
 import CheriyalScrollArtTelanganaLogisticsView from "@/components/modules/cheriyal-scroll-art-telangana-logistics"
 import SankhedaLacquerwareGujaratLogisticsView from "@/components/modules/sankheda-lacquerware-gujarat-logistics-view"
 import TanjorePaintingTamilNaduLogisticsView from "@/components/modules/tanjore-painting-tamil-nadu-logistics-view"
+import PatolaDoubleIkatGujaratLogisticsView from "@/components/modules/patola-double-ikat-gujarat-logistics-view"
+import ChikankariEmbroideryLucknowLogisticsView from "@/components/modules/chikankari-embroidery-lucknow-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -651,6 +653,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "cheriyal-scroll-art-telangana-logistics": CheriyalScrollArtTelanganaLogisticsView,
   "sankheda-lacquerware-gujarat-logistics": SankhedaLacquerwareGujaratLogisticsView,
   "tanjore-painting-tamil-nadu-logistics": TanjorePaintingTamilNaduLogisticsView,
+  "patola-double-ikat-gujarat-logistics": PatolaDoubleIkatGujaratLogisticsView,
+  "chikankari-embroidery-lucknow-logistics": ChikankariEmbroideryLucknowLogisticsView,
 }
 
 

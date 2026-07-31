@@ -54220,3 +54220,71 @@ html.theme-transition body {
   from { opacity: 0; transform: translateX(-6px); }
   to { opacity: 1; transform: translateX(0); }
 }
+
+/* ============================================================================
+   R332: Patola Double Ikat Gujarat (pdi-*) + Chikankari Embroidery Lucknow (cel-*)
+   ============================================================================ */
+
+.pdi-root {
+  animation: pdiFadeIn 0.4s ease-out;
+}
+.pdi-root .health-ring svg circle:last-child {
+  animation: pdiRingPulse 2s ease-in-out infinite;
+}
+.pdi-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.pdi-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.pdi-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.pdi-root table tbody tr {
+  animation: pdiRowSlide 0.3s ease-out;
+}
+
+.cel-root {
+  animation: celFadeIn 0.4s ease-out;
+}
+.cel-root .health-ring svg circle:last-child {
+  animation: celRingPulse 2s ease-in-out infinite;
+}
+.cel-root .kpi-tile {
+  transition: transform 0.2s ease;
+}
+.cel-root .kpi-tile:hover {
+  transform: translateY(-2px);
+}
+.cel-root .cost-bar-fill {
+  transition: width 0.6s ease;
+}
+.cel-root table tbody tr {
+  animation: celRowSlide 0.3s ease-out;
+}
+
+@keyframes pdiFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pdiRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes pdiRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes celFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes celRingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes celRowSlide {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: translateX(0); }
+}

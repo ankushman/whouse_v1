@@ -316,3 +316,5 @@ export { default as NirmalPaintingTelanganaLogisticsView } from './nirmal-painti
 export { default as CheriyalScrollArtTelanganaLogisticsView } from './cheriyal-scroll-art-telangana-logistics'
 export { default as SankhedaLacquerwareGujaratLogisticsView } from './sankheda-lacquerware-gujarat-logistics-view'
 export { default as TanjorePaintingTamilNaduLogisticsView } from './tanjore-painting-tamil-nadu-logistics-view'
+export { default as PatolaDoubleIkatGujaratLogisticsView } from './patola-double-ikat-gujarat-logistics-view'
+export { default as ChikankariEmbroideryLucknowLogisticsView } from './chikankari-embroidery-lucknow-logistics-view'
