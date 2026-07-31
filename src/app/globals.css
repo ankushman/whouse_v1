@@ -55210,3 +55210,14 @@ html.theme-transition body {
 @keyframes sjcFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes sjcPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.3); } 50% { box-shadow: 0 0 0 6px rgba(109, 40, 217, 0); } }
 @keyframes sjcRowSlide { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+
+/* Meenakari Udaipur Rajasthan Logistics - mnk-* */
+.mnk-root { animation: mnkFadeIn 0.4s ease-out; }
+.mnk-tab-trigger[data-state="active"] { background-color: #c2410c; color: white; }
+.mnk-tab-trigger[data-state="active"]:hover { background-color: #ea580c; }
+.mnk-root table tbody tr:hover { background: rgba(194, 65, 12, 0.06); }
+.mnk-root .inline-flex.items-center.rounded-full { border: 1px solid #ea580c; }
+
+@keyframes mnkFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mnkPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes mnkGlow { 0% { box-shadow: 0 0 5px rgba(194, 65, 12, 0.3); } 100% { box-shadow: 0 0 15px rgba(194, 65, 12, 0.6); } }
