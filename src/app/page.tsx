@@ -314,6 +314,8 @@ import KalamkariVeilArtAndhraLogisticsView from "@/components/modules/kalamkari-
 import PichwaiPaintingRajasthanLogisticsView from "@/components/modules/pichwai-painting-rajasthan-logistics-view"
 import SaurashtraAppliqueGujaratLogisticsView from "@/components/modules/saurashtra-applique-gujarat-logistics-view"
 import ManipuriBlackPotteryLogisticsView from "@/components/modules/manipuri-black-pottery-logistics-view"
+import NagaWoodCarvingNagalandLogisticsView from "@/components/modules/naga-wood-carving-nagaland-logistics-view"
+import SantiniketanBatikBengalLogisticsView from "@/components/modules/santiniketan-batik-bengal-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -627,6 +629,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "pichwai-painting-rajasthan-logistics": PichwaiPaintingRajasthanLogisticsView,
   "saurashtra-applique-gujarat-logistics": SaurashtraAppliqueGujaratLogisticsView,
   "manipuri-black-pottery-logistics": ManipuriBlackPotteryLogisticsView,
+  "naga-wood-carving-nagaland-logistics": NagaWoodCarvingNagalandLogisticsView,
+  "santiniketan-batik-bengal-logistics": SantiniketanBatikBengalLogisticsView,
 }
 
 

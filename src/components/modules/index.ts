@@ -304,3 +304,5 @@ export { default as KalamkariVeilArtAndhraLogisticsView } from './kalamkari-veil
 export { default as PichwaiPaintingRajasthanLogisticsView } from './pichwai-painting-rajasthan-logistics-view'
 export { default as SaurashtraAppliqueGujaratLogisticsView } from './saurashtra-applique-gujarat-logistics-view'
 export { default as ManipuriBlackPotteryLogisticsView } from './manipuri-black-pottery-logistics-view'
+export { default as NagaWoodCarvingNagalandLogisticsView } from './naga-wood-carving-nagaland-logistics-view'
+export { default as SantiniketanBatikBengalLogisticsView } from './santiniketan-batik-bengal-logistics-view'

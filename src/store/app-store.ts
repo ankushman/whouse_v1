@@ -310,6 +310,8 @@ export const navItems: NavItem[] = [
   { id: 'pichwai-painting-rajasthan-logistics', label: 'Pichwai Painting Rajasthan', icon: 'Sun', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'saurashtra-applique-gujarat-logistics', label: 'Saurashtra Applique Gujarat', icon: 'Scissors', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'manipuri-black-pottery-logistics', label: 'Manipuri Black Pottery', icon: 'CookingPot', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'naga-wood-carving-nagaland-logistics', label: 'Naga Wood Carving Nagaland', icon: 'TentTree', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'santiniketan-batik-bengal-logistics', label: 'Santiniketan Batik Bengal', icon: 'Church', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

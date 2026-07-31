@@ -197,6 +197,8 @@ import {
   Footprints,
   Flag,
   Hexagon,
+  TentTree,
+  Church,
 } from "lucide-react"
 import { useAppStore, navItems, type Role, type NavItem } from "@/store/app-store"
 import { warehouses } from "@/data/mock-data"
@@ -439,6 +441,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Footprints,
   Flag,
   Hexagon,
+  TentTree,
+  Church,
 } as const
 const recentNotifications = [
   { id: "1", title: "SLA Breach", desc: "Gurugram Hub dock-to-stock exceeded 4hrs", severity: "critical", time: "5m ago" },
