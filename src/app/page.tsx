@@ -320,6 +320,8 @@ import KashmirPapierMacheLogisticsView from "@/components/modules/kashmir-papier
 import MysoreRosewoodInlayLogisticsView from "@/components/modules/mysore-rosewood-inlay-logistics-view"
 import AssamBambooCraftLogisticsView from "@/components/modules/assam-bamboo-craft-logistics"
 import RajasthanBluePotteryLogisticsView from "@/components/modules/rajasthan-blue-pottery-logistics"
+import KanchipuramSilkSareeLogisticsView from "@/components/modules/kanchipuram-silk-saree-logistics"
+import GondTribalArtMadhyaPradeshLogisticsView from "@/components/modules/gond-tribal-art-madhya-pradesh-logistics"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -639,6 +641,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "mysore-rosewood-inlay-logistics": MysoreRosewoodInlayLogisticsView,
   "assam-bamboo-craft-logistics": AssamBambooCraftLogisticsView,
   "rajasthan-blue-pottery-logistics": RajasthanBluePotteryLogisticsView,
+  "kanchipuram-silk-saree-logistics": KanchipuramSilkSareeLogisticsView,
+  "gond-tribal-art-madhya-pradesh-logistics": GondTribalArtMadhyaPradeshLogisticsView,
 }
 
 

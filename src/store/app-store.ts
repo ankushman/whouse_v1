@@ -316,6 +316,8 @@ export const navItems: NavItem[] = [
   { id: 'mysore-rosewood-inlay-logistics', label: 'Mysore Rosewood Inlay', icon: 'Gem', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'assam-bamboo-craft-logistics', label: 'Assam Bamboo Craft', icon: 'Trees', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'rajasthan-blue-pottery-logistics', label: 'Rajasthan Blue Pottery', icon: 'Flower2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'kanchipuram-silk-saree-logistics', label: 'Kanchipuram Silk Saree', icon: 'Gem', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'gond-tribal-art-madhya-pradesh-logistics', label: 'Gond Tribal Art MP', icon: 'Feather', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

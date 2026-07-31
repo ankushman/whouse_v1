@@ -310,3 +310,5 @@ export { default as KashmirPapierMacheLogisticsView } from './kashmir-papier-mac
 export { default as MysoreRosewoodInlayLogisticsView } from './mysore-rosewood-inlay-logistics-view'
 export { default as AssamBambooCraftLogisticsView } from './assam-bamboo-craft-logistics'
 export { default as RajasthanBluePotteryLogisticsView } from './rajasthan-blue-pottery-logistics'
+export { default as KanchipuramSilkSareeLogisticsView } from './kanchipuram-silk-saree-logistics'
+export { default as GondTribalArtMadhyaPradeshLogisticsView } from './gond-tribal-art-madhya-pradesh-logistics'
