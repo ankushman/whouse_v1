@@ -54,6 +54,8 @@ import { AirCargoPanel } from "@/components/shared/air-cargo-panel"
 import { HazardousMaterialPanel } from "@/components/shared/hazardous-material-panel"
 import { FleetVehicleTrackerPanel } from "@/components/shared/fleet-vehicle-tracker-panel"
 import { SlabRackingUtilizationPanel } from "@/components/shared/slab-racking-utilization-panel"
+import { DockSchedulingPanel } from "@/components/shared/dock-scheduling-panel"
+import { CrossdockTransferPanel } from "@/components/shared/crossdock-transfer-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -655,6 +657,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <SlabRackingUtilizationPanel />
+          </CardContent>
+        </Card>
+
+        {/* Dock Scheduling */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <DockSchedulingPanel />
+          </CardContent>
+        </Card>
+
+        {/* Crossdock Transfers */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CrossdockTransferPanel />
           </CardContent>
         </Card>
       </div>
