@@ -56,6 +56,8 @@ import { FleetVehicleTrackerPanel } from "@/components/shared/fleet-vehicle-trac
 import { SlabRackingUtilizationPanel } from "@/components/shared/slab-racking-utilization-panel"
 import { DockSchedulingPanel } from "@/components/shared/dock-scheduling-panel"
 import { CrossdockTransferPanel } from "@/components/shared/crossdock-transfer-panel"
+import { ReturnsProcessingPanel } from "@/components/shared/returns-processing-panel"
+import { QualityInspectionPanel } from "@/components/shared/quality-inspection-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -671,6 +673,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <CrossdockTransferPanel />
+          </CardContent>
+        </Card>
+
+        {/* Returns Processing */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ReturnsProcessingPanel />
+          </CardContent>
+        </Card>
+
+        {/* Quality Inspection */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <QualityInspectionPanel />
           </CardContent>
         </Card>
       </div>
