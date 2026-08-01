@@ -64,3 +64,5 @@ export { SearchFilterToolbar } from "./search-filter-toolbar"
 export { ModuleBreadcrumb } from "./module-breadcrumb"
 export { AirCargoPanel } from './air-cargo-panel'
 export { HazardousMaterialPanel } from './hazardous-material-panel'
+export { FleetVehicleTrackerPanel } from './fleet-vehicle-tracker-panel'
+export { SlabRackingUtilizationPanel } from './slab-racking-utilization-panel'

@@ -52,6 +52,8 @@ import { WeatherPanel } from "@/components/shared/weather-panel"
 import { PullToRefreshContainer } from "@/components/shared/pull-to-refresh-container"
 import { AirCargoPanel } from "@/components/shared/air-cargo-panel"
 import { HazardousMaterialPanel } from "@/components/shared/hazardous-material-panel"
+import { FleetVehicleTrackerPanel } from "@/components/shared/fleet-vehicle-tracker-panel"
+import { SlabRackingUtilizationPanel } from "@/components/shared/slab-racking-utilization-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -639,6 +641,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <HazardousMaterialPanel />
+          </CardContent>
+        </Card>
+
+        {/* Fleet Vehicle Tracker */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <FleetVehicleTrackerPanel />
+          </CardContent>
+        </Card>
+
+        {/* Slab Racking Utilization */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <SlabRackingUtilizationPanel />
           </CardContent>
         </Card>
       </div>
