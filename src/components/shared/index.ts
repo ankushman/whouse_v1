@@ -62,3 +62,5 @@ export { YardDetailDrawer, type YardVehicleDetail, type YardZone, type VehicleSt
 export { SharedModuleDrawer, ProgressBar, PillBadge, InfoBlock } from "./shared-module-drawer"
 export { SearchFilterToolbar } from "./search-filter-toolbar"
 export { ModuleBreadcrumb } from "./module-breadcrumb"
+export { AirCargoPanel } from './air-cargo-panel'
+export { HazardousMaterialPanel } from './hazardous-material-panel'

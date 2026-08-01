@@ -50,6 +50,8 @@ import { ShipmentTrackingTable } from "@/components/shared/shipment-tracking-tab
 import { WarehouseHealthMonitor } from "@/components/shared/warehouse-health-monitor"
 import { WeatherPanel } from "@/components/shared/weather-panel"
 import { PullToRefreshContainer } from "@/components/shared/pull-to-refresh-container"
+import { AirCargoPanel } from "@/components/shared/air-cargo-panel"
+import { HazardousMaterialPanel } from "@/components/shared/hazardous-material-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -623,6 +625,20 @@ export function DashboardView() {
                 <Bar dataKey="night" fill="var(--color-night)" radius={[3, 3, 0, 0]} />
               </BarChart>
             </ChartContainer>
+          </CardContent>
+        </Card>
+
+        {/* Air Cargo */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <AirCargoPanel />
+          </CardContent>
+        </Card>
+
+        {/* Hazardous Materials */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <HazardousMaterialPanel />
           </CardContent>
         </Card>
       </div>
