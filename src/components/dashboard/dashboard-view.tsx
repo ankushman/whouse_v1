@@ -60,6 +60,8 @@ import { ReturnsProcessingPanel } from "@/components/shared/returns-processing-p
 import { QualityInspectionPanel } from "@/components/shared/quality-inspection-panel"
 import { LaborProductivityTrackerPanel } from "@/components/shared/labor-productivity-tracker-panel"
 import { ColdChainMonitoringPanel } from "@/components/shared/cold-chain-monitoring-panel"
+import { ThreePLVendorScorecardPanel } from "@/components/shared/three-pl-vendor-scorecard-panel"
+import { SlottingOptimizerPanel } from "@/components/shared/slotting-optimizer-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -703,6 +705,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <ColdChainMonitoringPanel />
+          </CardContent>
+        </Card>
+
+        {/* 3PL Vendor Scorecard */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ThreePLVendorScorecardPanel />
+          </CardContent>
+        </Card>
+
+        {/* Slotting Optimizer */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <SlottingOptimizerPanel />
           </CardContent>
         </Card>
       </div>
