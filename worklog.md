@@ -1,5 +1,25 @@
 ---
 ---
+Task ID: R476 — Dock Scheduling + Crossdock Transfer
+Agent: Main Agent (Cron Loop)
+Task: R476 — Create dock door scheduling with berth allocation, trailer queue, and Indian carrier appointment management. Plus crossdock transfer operations with sort-to-light/put wall methods, chase vehicles, and SLA tracking.
+
+Work Log:
+- Read worklog.md: R475 (commit 03727f1) added FleetVehicleTrackerPanel + SlabRackingUtilizationPanel (67 shared components)
+- TSC pre-validation: 0 errors in src/
+- Created `src/components/shared/dock-scheduling-panel.tsx` (316 lines) — 10 dock doors across 6 Indian DCs, 4 door types (Inbound/Outbound/Cross-Dock/Staging), 5 statuses (Loading/Unloading/Waiting/Available/Maintenance), 7 Indian carriers (TCI Express/Delhivery/Ekart Logistics/BlueDart/Rivigo/Safexpress/DHL Express), 3 views (Dock Doors with carrier+vehicle+operator display, Schedule Timeline sorted by appointment, Carrier Analytics with dock usage + waiting queue). Waiting doors (DSK-02, DSK-07) pulse amber, maintenance (DSK-09) pulses red. CSS prefix: dsk-*
+- Created `src/components/shared/crossdock-transfer-panel.tsx` (324 lines) — 10 crossdock transfers across 6 DC-to-DC lanes, 4 sort methods (Scan-Based/Sort-to-Light/Put Wall/Auto Sort), 5 statuses (In Progress/Sorting/In Transit/Completed/SLA Overdue), 3 priority levels (High/Medium/Low), scan progress bar visualization, 3 views (Transfers with scan bar + route display, Sort Methods throughput analysis, DC Lane Flow with active lanes + overdue alerts). Overdue transfer (CDT-07) pulses red. Fixed missing Calendar import caught during pre-TSC review. CSS prefix: cdt-*
+- Registered both in shared/index.ts (67→69 exports) and dashboard-view.tsx (665→681 lines)
+- CSS appended to globals.css (55,664→55,833 lines, +169 CSS for dsk-* and cdt-*)
+- TSC: 0 errors | Git pushed: commit f6e4294
+
+Stage Summary:
+- 69 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 681 lines | globals.css: 55,833 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Returns processing panel, quality inspection panel, labor productivity tracker, or rebuild R470-R473 components lost in R380 collision ***
+
+---
 Task ID: R475 — Fleet Vehicle Tracker + Slab Racking Utilization
 Agent: Main Agent (Cron Loop)
 Task: R475 — Create fleet vehicle GPS tracker with Indian truck brands (Ashok Leyland/Tata/Eicher/BharatBenz/Mahindra), fuel efficiency monitoring, driver management, and route compliance. Plus warehouse slab racking utilization with rack type analysis, weight distribution, and capacity monitoring.
