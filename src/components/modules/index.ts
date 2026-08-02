@@ -404,3 +404,5 @@ export { default as CementLogisticsCommandView } from './cement-logistics-comman
 export { default as MiningLogisticsCommandView } from './mining-logistics-command-view'
 export { default as PetroleumPipelineCommandView } from './petroleum-pipeline-command-view'
 export { default as SteelLogisticsCommandView } from './steel-logistics-command-view'
+export { default as GrainSiloLogisticsView } from './grain-silo-logistics-view'
+export { default as DefenseSupplyCommandView } from './defense-supply-command-view'

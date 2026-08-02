@@ -414,6 +414,8 @@ import CementLogisticsCommandView from "@/components/modules/cement-logistics-co
 import MiningLogisticsCommandView from "@/components/modules/mining-logistics-command-view"
 import PetroleumPipelineCommandView from "@/components/modules/petroleum-pipeline-command-view"
 import SteelLogisticsCommandView from "@/components/modules/steel-logistics-command-view"
+import GrainSiloLogisticsView from "@/components/modules/grain-silo-logistics-view"
+import DefenseSupplyCommandView from "@/components/modules/defense-supply-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -827,6 +829,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "mining-logistics-command": MiningLogisticsCommandView,
   "petroleum-pipeline-command": PetroleumPipelineCommandView,
   "steel-logistics-command": SteelLogisticsCommandView,
+  "grain-silo-logistics": GrainSiloLogisticsView,
+  "defense-supply-command": DefenseSupplyCommandView,
 }
 
 

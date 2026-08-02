@@ -59141,3 +59141,43 @@ html.theme-transition body {
 .stl-insight { transition: all 0.25s ease; border-left: 3px solid #dcfce7; }
 .stl-insight:hover { box-shadow: 0 6px 20px rgba(21, 128, 61, 0.12); transform: translateY(-2px); }
 @keyframes stl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ========== Grain Silo Logistics (gsl-*) ========== */
+.gsl-root { animation: gsl-fade 0.3s ease; }
+.gsl-kpis { display: grid; }
+.gsl-kpi { transition: all 0.2s ease; border-left: 3px solid #d97706; }
+.gsl-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(180, 83, 9, 0.12); }
+.gsl-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.gsl-kpi-val { margin: 4px 0; }
+.gsl-kpi-sub { font-size: 11px; }
+.gsl-chart { transition: all 0.25s ease; }
+.gsl-chart:hover { box-shadow: 0 4px 16px rgba(180, 83, 9, 0.08); }
+.gsl-tab { transition: all 0.15s ease; }
+.gsl-badge { font-size: 11px; }
+.gsl-table-wrap { max-height: 520px; overflow-y: auto; }
+.gsl-row-critical { border-left: 3px solid #dc2626 !important; }
+.gsl-row-warning { border-left: 3px solid #d97706 !important; }
+.gsl-row-info { border-left: 3px solid #2563eb !important; }
+.gsl-insight { transition: all 0.25s ease; border-left: 3px solid #fef3c7; }
+.gsl-insight:hover { box-shadow: 0 6px 20px rgba(180, 83, 9, 0.12); transform: translateY(-2px); }
+@keyframes gsl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ========== Defense Supply Command (dsc-*) ========== */
+.dsc-root { animation: dsc-fade 0.3s ease; }
+.dsc-kpis { display: grid; }
+.dsc-kpi { transition: all 0.2s ease; border-left: 3px solid #475569; }
+.dsc-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(51, 65, 85, 0.12); }
+.dsc-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.dsc-kpi-val { margin: 4px 0; }
+.dsc-kpi-sub { font-size: 11px; }
+.dsc-chart { transition: all 0.25s ease; }
+.dsc-chart:hover { box-shadow: 0 4px 16px rgba(51, 65, 85, 0.08); }
+.dsc-tab { transition: all 0.15s ease; }
+.dsc-badge { font-size: 11px; }
+.dsc-table-wrap { max-height: 520px; overflow-y: auto; }
+.dsc-row-critical { border-left: 3px solid #dc2626 !important; }
+.dsc-row-warning { border-left: 3px solid #d97706 !important; }
+.dsc-row-info { border-left: 3px solid #2563eb !important; }
+.dsc-insight { transition: all 0.25s ease; border-left: 3px solid #f1f5f9; }
+.dsc-insight:hover { box-shadow: 0 6px 20px rgba(51, 65, 85, 0.12); transform: translateY(-2px); }
+@keyframes dsc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
