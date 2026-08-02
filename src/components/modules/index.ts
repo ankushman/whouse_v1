@@ -426,3 +426,5 @@ export { default as RailwayFreightLogisticsView } from './railway-freight-logist
 export { default as AerospacePartsLogisticsView } from './aerospace-parts-logistics-view'
 export { default as DefenceOrdnanceLogisticsView } from './defence-ordnance-logistics-view'
 export { default as ColdChainPharmaLogisticsView } from './cold-chain-pharma-logistics-view'
+export { default as MetroRailOperationsLogisticsView } from './metro-rail-operations-logistics-view'
+export { default as TelecomTowerLogisticsView } from './telecom-tower-logistics-view'

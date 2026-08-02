@@ -436,6 +436,8 @@ import RailwayFreightLogisticsView from "@/components/modules/railway-freight-lo
 import AerospacePartsLogisticsView from "@/components/modules/aerospace-parts-logistics-view"
 import DefenceOrdnanceLogisticsView from "@/components/modules/defence-ordnance-logistics-view"
 import ColdChainPharmaLogisticsView from "@/components/modules/cold-chain-pharma-logistics-view"
+import MetroRailOperationsLogisticsView from "@/components/modules/metro-rail-operations-logistics-view"
+import TelecomTowerLogisticsView from "@/components/modules/telecom-tower-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -871,6 +873,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "aerospace-parts-logistics": AerospacePartsLogisticsView,
   "defence-ordnance-logistics": DefenceOrdnanceLogisticsView,
   "cold-chain-pharma-logistics": ColdChainPharmaLogisticsView,
+  "metro-rail-operations-logistics": MetroRailOperationsLogisticsView,
+  "telecom-tower-logistics": TelecomTowerLogisticsView,
 }
 
 

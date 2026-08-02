@@ -59587,3 +59587,50 @@ html.theme-transition body {
 .ccl-insight h3{transition:color .2s}
 .ccl-insight:hover h3{color:#065f46}
 @keyframes ccl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* Metro Rail Operations Logistics - mrl-* */
+.mrl-root{font-family:'Inter',system-ui,sans-serif;animation:mrl-fadeIn .4s ease-out}
+.mrl-tabs{border-bottom:2px solid #e5e7eb}
+.mrl-tab{transition:all .2s ease;cursor:pointer;position:relative}
+.mrl-tab:hover{transform:translateY(-1px)}
+.mrl-tab::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:transparent;transition:background .2s}
+.mrl-tab:hover::after{background:#2e8b57}
+.mrl-kpi{transition:all .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.mrl-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(26,71,42,.15)}
+.mrl-kpi-val{transition:color .3s}
+.mrl-kpi:hover .mrl-kpi-val{color:#1a472a}
+.mrl-chart{transition:box-shadow .3s ease}
+.mrl-chart:hover{box-shadow:0 4px 16px rgba(26,71,42,.12)}
+.mrl-badge{transition:transform .15s ease}
+.mrl-badge:hover{transform:scale(1.05)}
+.mrl-table-wrap{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.mrl-row-warning{border-left:3px solid #f59e0b;background:rgba(254,243,199,.6)!important}
+.mrl-row-info{border-left:3px solid #3b82f6;background:rgba(219,234,254,.6)!important}
+.mrl-insight{transition:all .3s ease;border-left:3px solid transparent}
+.mrl-insight:hover{border-left-color:#1a472a;box-shadow:0 4px 12px rgba(26,71,42,.1)}
+.mrl-insight h3{transition:color .2s}
+.mrl-insight:hover h3{color:#1a472a}
+@keyframes mrl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Telecom Tower Logistics - ttl-* */
+.ttl-root{font-family:'Inter',system-ui,sans-serif;animation:ttl-fadeIn .4s ease-out}
+.ttl-tabs{border-bottom:2px solid #e5e7eb}
+.ttl-tab{transition:all .2s ease;cursor:pointer;position:relative}
+.ttl-tab:hover{transform:translateY(-1px)}
+.ttl-tab::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:transparent;transition:background .2s}
+.ttl-tab:hover::after{background:#4338ca}
+.ttl-kpi{transition:all .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.ttl-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(49,46,129,.15)}
+.ttl-kpi-val{transition:color .3s}
+.ttl-kpi:hover .ttl-kpi-val{color:#312e81}
+.ttl-chart{transition:box-shadow .3s ease}
+.ttl-chart:hover{box-shadow:0 4px 16px rgba(49,46,129,.12)}
+.ttl-badge{transition:transform .15s ease}
+.ttl-badge:hover{transform:scale(1.05)}
+.ttl-table-wrap{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.ttl-row-warning{border-left:3px solid #f59e0b;background:rgba(254,243,199,.6)!important}
+.ttl-row-info{border-left:3px solid #3b82f6;background:rgba(219,234,254,.6)!important}
+.ttl-insight{transition:all .3s ease;border-left:3px solid transparent}
+.ttl-insight:hover{border-left-color:#312e81;box-shadow:0 4px 12px rgba(49,46,129,.1)}
+.ttl-insight h3{transition:color .2s}
+.ttl-insight:hover h3{color:#312e81}
+@keyframes ttl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
