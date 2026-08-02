@@ -76,6 +76,8 @@ import { ValueAddedServicesPanel } from "@/components/shared/value-added-service
 import { LastMileDeliveryPanel } from "@/components/shared/last-mile-delivery-panel"
 import { WarehouseEnergyAnalyticsPanel } from "@/components/shared/warehouse-energy-analytics-panel"
 import { SafetyCompliancePanel } from "@/components/shared/safety-compliance-panel"
+import { CarrierSLAScorecardPanel } from "@/components/shared/carrier-sla-scorecard-panel"
+import { ReverseLogisticsHubPanel } from "@/components/shared/reverse-logistics-hub-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -831,6 +833,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <SafetyCompliancePanel />
+          </CardContent>
+        </Card>
+
+        {/* Carrier SLA Scorecard */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CarrierSLAScorecardPanel />
+          </CardContent>
+        </Card>
+
+        {/* Reverse Logistics Hub */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ReverseLogisticsHubPanel />
           </CardContent>
         </Card>
       </div>

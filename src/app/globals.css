@@ -56836,3 +56836,54 @@ html.theme-transition body {
 @keyframes scm-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
 .scm-noncompliant-pulse{animation:scm-noncompliant-pulse 2s ease infinite}
 .scm-pending-border{border-left:3px solid #f59e0b}
+/* ===== CSL - Carrier SLA Scorecard Panel ===== */
+.csl-stat-card{transition:all .2s ease;border:1px solid transparent}
+.csl-stat-card:hover{border-color:hsl(var(--primary)/.15);transform:translateY(-1px)}
+.csl-filter-pill{transition:all .15s ease}
+.csl-filter-pill:hover{background:hsl(var(--muted))}
+.csl-filter-clear{transition:all .15s ease}
+.csl-carrier-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.csl-carrier-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.csl-sla-bar{transition:width .5s ease}
+.csl-id-badge{font-size:10px;font-weight:600;letter-spacing:.3px}
+.csl-volume-tag{font-weight:600;letter-spacing:.2px}
+.csl-insights-row > div{transition:all .2s ease}
+.csl-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+.csl-region-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.csl-region-card:hover{border-color:hsl(var(--primary)/.15);box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.csl-claims-header{border-color:hsl(var(--primary)/.15);background:hsl(var(--primary)/.03)}
+.csl-claims-row{transition:all .2s ease}
+.csl-claims-row:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.csl-alerts-list{transition:all .2s ease}
+.csl-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.csl-alert-dot{animation:csl-dot-blink 1.2s ease infinite}
+@keyframes csl-critical-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes csl-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.csl-critical-pulse{animation:csl-critical-pulse 2s ease infinite}
+.csl-atrisk-border{border-left:3px solid #f59e0b}
+
+/* ===== RLH - Reverse Logistics Hub Panel ===== */
+.rlh-stat-card{transition:all .2s ease;border:1px solid transparent}
+.rlh-stat-card:hover{border-color:hsl(var(--primary)/.15);transform:translateY(-1px)}
+.rlh-filter-pill{transition:all .15s ease}
+.rlh-filter-pill:hover{background:hsl(var(--muted))}
+.rlh-filter-clear{transition:all .15s ease}
+.rlh-return-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.rlh-return-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.rlh-id-badge{font-size:10px;font-weight:600;letter-spacing:.3px}
+.rlh-disp-tag{font-weight:600;letter-spacing:.2px}
+.rlh-grade-tag{font-weight:700;letter-spacing:.3px}
+.rlh-insights-row > div{transition:all .2s ease}
+.rlh-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+.rlh-disp-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.rlh-disp-card:hover{border-color:hsl(var(--primary)/.15);box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.rlh-recovery-header{border-color:hsl(var(--primary)/.15);background:hsl(var(--primary)/.03)}
+.rlh-recovery-row{transition:all .2s ease}
+.rlh-recovery-row:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.rlh-alerts-list{transition:all .2s ease}
+.rlh-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.rlh-alert-dot{animation:rlh-dot-blink 1.2s ease infinite}
+@keyframes rlh-dispose-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes rlh-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.rlh-dispose-pulse{animation:rlh-dispose-pulse 2s ease infinite}
+.rlh-queue-border{border-left:3px solid #94a3b8}
