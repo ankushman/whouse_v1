@@ -37,3 +37,4 @@ export function ModuleBreadcrumb({ items, className }: ModuleBreadcrumbProps) {
     </nav>
   )
 }
+export default ModuleBreadcrumb

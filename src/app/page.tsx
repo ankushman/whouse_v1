@@ -390,6 +390,8 @@ import PortVesselTrackerView from "@/components/modules/port-vessel-tracker-view
 import SmartPackagingIntelligenceView from "@/components/modules/smart-packaging-intelligence-view"
 import FreightBookingCommandView from "@/components/modules/freight-booking-command-view"
 import WarehouseShuttleOpsView from "@/components/modules/warehouse-shuttle-ops-view"
+import TransportRateIntelligenceView from "@/components/modules/transport-rate-intelligence-view"
+import VehicleInspectionComplianceView from "@/components/modules/vehicle-inspection-compliance-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -779,6 +781,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "smart-packaging-intelligence": SmartPackagingIntelligenceView,
   "freight-booking-command": FreightBookingCommandView,
   "warehouse-shuttle-ops": WarehouseShuttleOpsView,
+  "transport-rate-intelligence": TransportRateIntelligenceView,
+  "vehicle-inspection-compliance": VehicleInspectionComplianceView,
 }
 
 

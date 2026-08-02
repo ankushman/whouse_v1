@@ -174,3 +174,4 @@ export function SearchFilterToolbar({
     </div>
   )
 }
+export default SearchFilterToolbar

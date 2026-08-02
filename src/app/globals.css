@@ -58554,3 +58554,41 @@ html.theme-transition body {
 .wso-insight-card { transition: box-shadow 0.2s; }
 .wso-insight-card:hover { box-shadow: 0 4px 12px rgba(225, 29, 72, 0.12); }
 @keyframes wso-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== TRI (Transport Rate Intelligence) ===== */
+.tri-root { padding: 0; }
+.tri-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.tri-kpi { padding: 16px 20px; }
+.tri-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.tri-chart { margin-bottom: 20px; }
+.tri-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.tri-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.tri-table thead th { background: #0891b2; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.tri-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.tri-table tbody tr:hover { background: #ecfeff; }
+.tri-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.tri-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.tri-ratebar { transition: width 0.3s ease; }
+.tri-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.tri-insight { transition: box-shadow 0.2s; }
+.tri-insight:hover { box-shadow: 0 4px 12px rgba(8, 145, 178, 0.12); }
+@keyframes tri-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== VIC (Vehicle Inspection & Compliance) ===== */
+.vic-root { padding: 0; }
+.vic-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.vic-kpi { padding: 16px 20px; }
+.vic-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.vic-chart { margin-bottom: 20px; }
+.vic-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.vic-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.vic-table thead th { background: #7c3aed; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.vic-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.vic-table tbody tr:hover { background: #f5f3ff; }
+.vic-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.vic-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.vic-fitnessbar { transition: width 0.3s ease; }
+.vic-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.vic-insight { transition: box-shadow 0.2s; }
+.vic-insight:hover { box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12); }
+@keyframes vic-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
