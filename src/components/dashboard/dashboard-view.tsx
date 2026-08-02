@@ -78,6 +78,8 @@ import { WarehouseEnergyAnalyticsPanel } from "@/components/shared/warehouse-ene
 import { SafetyCompliancePanel } from "@/components/shared/safety-compliance-panel"
 import { CarrierSLAScorecardPanel } from "@/components/shared/carrier-sla-scorecard-panel"
 import { ReverseLogisticsHubPanel } from "@/components/shared/reverse-logistics-hub-panel"
+import { IoTSensorDashboardPanel } from "@/components/shared/iot-sensor-dashboard-panel"
+import { MultiModalTransportPlannerPanel } from "@/components/shared/multi-modal-transport-planner-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -847,6 +849,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <ReverseLogisticsHubPanel />
+          </CardContent>
+        </Card>
+
+        {/* IoT Sensor Dashboard */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <IoTSensorDashboardPanel />
+          </CardContent>
+        </Card>
+
+        {/* Multi-Modal Transport Planner */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <MultiModalTransportPlannerPanel />
           </CardContent>
         </Card>
       </div>

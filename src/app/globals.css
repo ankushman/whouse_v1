@@ -56887,3 +56887,55 @@ html.theme-transition body {
 @keyframes rlh-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
 .rlh-dispose-pulse{animation:rlh-dispose-pulse 2s ease infinite}
 .rlh-queue-border{border-left:3px solid #94a3b8}
+/* ===== IOT - IoT Sensor Dashboard Panel ===== */
+.iot-stat-card{transition:all .2s ease;border:1px solid transparent}
+.iot-stat-card:hover{border-color:hsl(var(--primary)/.15);transform:translateY(-1px)}
+.iot-filter-pill{transition:all .15s ease}
+.iot-filter-pill:hover{background:hsl(var(--muted))}
+.iot-filter-clear{transition:all .15s ease}
+.iot-sensor-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.iot-sensor-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.iot-range-bar{transition:width .5s ease}
+.iot-batt-bar{transition:width .5s ease}
+.iot-id-badge{font-size:10px;font-weight:600;letter-spacing:.3px}
+.iot-value-display{font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.iot-insights-row > div{transition:all .2s ease}
+.iot-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+.iot-zone-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.iot-zone-card:hover{border-color:hsl(var(--primary)/.15);box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.iot-health-header{border-color:hsl(var(--primary)/.15);background:hsl(var(--primary)/.03)}
+.iot-health-row{transition:all .2s ease}
+.iot-health-row:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.iot-alerts-list{transition:all .2s ease}
+.iot-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.iot-alert-dot{animation:iot-dot-blink 1.2s ease infinite}
+@keyframes iot-critical-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes iot-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.iot-critical-pulse{animation:iot-critical-pulse 2s ease infinite}
+.iot-alert-border{border-left:3px solid #f59e0b}
+.iot-offline-border{border-left:3px solid #94a3b8;border-style:dashed}
+
+/* ===== MMP - Multi-Modal Transport Planner Panel ===== */
+.mmp-stat-card{transition:all .2s ease;border:1px solid transparent}
+.mmp-stat-card:hover{border-color:hsl(var(--primary)/.15);transform:translateY(-1px)}
+.mmp-filter-pill{transition:all .15s ease}
+.mmp-filter-pill:hover{background:hsl(var(--muted))}
+.mmp-filter-clear{transition:all .15s ease}
+.mmp-route-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.mmp-route-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.mmp-id-badge{font-size:10px;font-weight:600;letter-spacing:.3px}
+.mmp-priority-tag{font-weight:600;letter-spacing:.2px}
+.mmp-insights-row > div{transition:all .2s ease}
+.mmp-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+.mmp-mode-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.mmp-mode-card:hover{border-color:hsl(var(--primary)/.15);box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.mmp-carbon-header{border-color:hsl(var(--primary)/.15);background:hsl(var(--primary)/.03)}
+.mmp-carbon-row{transition:all .2s ease}
+.mmp-carbon-row:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.mmp-alerts-list{transition:all .2s ease}
+.mmp-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.mmp-alert-dot{animation:mmp-dot-blink 1.2s ease infinite}
+@keyframes mmp-delayed-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes mmp-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.mmp-delayed-pulse{animation:mmp-delayed-pulse 2s ease infinite}
+.mmp-reroute-border{border-left:3px solid #f59e0b}

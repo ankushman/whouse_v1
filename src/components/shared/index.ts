@@ -90,3 +90,5 @@ export { WarehouseEnergyAnalyticsPanel } from './warehouse-energy-analytics-pane
 export { SafetyCompliancePanel } from './safety-compliance-panel'
 export { CarrierSLAScorecardPanel } from './carrier-sla-scorecard-panel'
 export { ReverseLogisticsHubPanel } from './reverse-logistics-hub-panel'
+export { IoTSensorDashboardPanel } from './iot-sensor-dashboard-panel'
+export { MultiModalTransportPlannerPanel } from './multi-modal-transport-planner-panel'
