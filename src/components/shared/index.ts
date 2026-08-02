@@ -120,3 +120,5 @@ export { PredictiveMaintenanceAnalyticsPanel } from './predictive-maintenance-an
 export { DemandSensingAnalyticsPanel } from './demand-sensing-analytics-panel'
 export { ThirdPartyLogisticsPanel } from './third-party-logistics-panel'
 export { WarehouseNetworkMonitoringPanel } from './warehouse-network-monitoring-panel'
+export { QualityManagementPanel } from './quality-management-panel'
+export { FulfillmentAnalyticsPanel } from './fulfillment-analytics-panel'
