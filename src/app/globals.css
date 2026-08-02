@@ -59221,3 +59221,43 @@ html.theme-transition body {
 .epl-insight { transition: all 0.25s ease; border-left: 3px solid #ede9fe; }
 .epl-insight:hover { box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12); transform: translateY(-2px); }
 @keyframes epl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ========== Metro Rail Logistics (mrl-*) ========== */
+.mrl-root { animation: mrl-fade 0.3s ease; }
+.mrl-kpis { display: grid; }
+.mrl-kpi { transition: all 0.2s ease; border-left: 3px solid #0891b2; }
+.mrl-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(14, 116, 144, 0.12); }
+.mrl-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.mrl-kpi-val { margin: 4px 0; }
+.mrl-kpi-sub { font-size: 11px; }
+.mrl-chart { transition: all 0.25s ease; }
+.mrl-chart:hover { box-shadow: 0 4px 16px rgba(14, 116, 144, 0.08); }
+.mrl-tab { transition: all 0.15s ease; }
+.mrl-badge { font-size: 11px; }
+.mrl-table-wrap { max-height: 520px; overflow-y: auto; }
+.mrl-row-critical { border-left: 3px solid #dc2626 !important; }
+.mrl-row-warning { border-left: 3px solid #d97706 !important; }
+.mrl-row-info { border-left: 3px solid #2563eb !important; }
+.mrl-insight { transition: all 0.25s ease; border-left: 3px solid #cffafe; }
+.mrl-insight:hover { box-shadow: 0 6px 20px rgba(14, 116, 144, 0.12); transform: translateY(-2px); }
+@keyframes mrl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ========== Quick Commerce Logistics (qcl-*) ========== */
+.qcl-root { animation: qcl-fade 0.3s ease; }
+.qcl-kpis { display: grid; }
+.qcl-kpi { transition: all 0.2s ease; border-left: 3px solid #ef4444; }
+.qcl-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.12); }
+.qcl-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.qcl-kpi-val { margin: 4px 0; }
+.qcl-kpi-sub { font-size: 11px; }
+.qcl-chart { transition: all 0.25s ease; }
+.qcl-chart:hover { box-shadow: 0 4px 16px rgba(220, 38, 38, 0.08); }
+.qcl-tab { transition: all 0.15s ease; }
+.qcl-badge { font-size: 11px; }
+.qcl-table-wrap { max-height: 520px; overflow-y: auto; }
+.qcl-row-critical { border-left: 3px solid #dc2626 !important; }
+.qcl-row-warning { border-left: 3px solid #d97706 !important; }
+.qcl-row-info { border-left: 3px solid #2563eb !important; }
+.qcl-insight { transition: all 0.25s ease; border-left: 3px solid #fee2e2; }
+.qcl-insight:hover { box-shadow: 0 6px 20px rgba(220, 38, 38, 0.12); transform: translateY(-2px); }
+@keyframes qcl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }

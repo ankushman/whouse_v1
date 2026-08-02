@@ -418,6 +418,8 @@ import GrainSiloLogisticsView from "@/components/modules/grain-silo-logistics-vi
 import DefenseSupplyCommandView from "@/components/modules/defense-supply-command-view"
 import RiverWaterwayLogisticsView from "@/components/modules/river-waterway-logistics-view"
 import ExpressParcelLogisticsView from "@/components/modules/express-parcel-logistics-view"
+import MetroRailLogisticsView from "@/components/modules/metro-rail-logistics-view"
+import QuickCommerceLogisticsView from "@/components/modules/quick-commerce-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -835,6 +837,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "defense-supply-command": DefenseSupplyCommandView,
   "river-waterway-logistics": RiverWaterwayLogisticsView,
   "express-parcel-logistics": ExpressParcelLogisticsView,
+  "metro-rail-logistics": MetroRailLogisticsView,
+  "quick-commerce-logistics": QuickCommerceLogisticsView,
 }
 
 
