@@ -1,5 +1,83 @@
 ---
 ---
+Task ID: R276 — ICD Container Yard Intelligence + Warehouse Space & Capacity Planner
+Agent: Main Agent (Cron Loop)
+Task: R276 — 2 new Indian logistics modules for ICD/container yard operations and warehouse space utilization planning
+
+Work Log:
+- Read worklog.md: R275 complete (commit e3c9cbe), 384 modules, 390 navItems, 58,690 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/ (1 error in skills/ — not our code)
+- Duplicate check: 0 duplicate navItems, 0 duplicate imports
+- agent-browser QA skipped (dev server OOM, known infra issue — TSC used as QA gate)
+
+- Created ICD Container Yard Intelligence module (R276a):
+  * FILE: src/components/modules/icd-container-yard-intelligence-view.tsx (268 lines)
+  * 4 tabs: Dashboard | Container Registry | Yard Analytics | Insights
+  * Theme: Sky blue #0369a1, CSS prefix: icy-*
+  * Tab 0 (Dashboard): 4 KPIs (Containers in Yard, Total TEU, Avg Dwell Time, Active Reefers), BarChart monthly TEU by trade type (EXIM/Domestic/Empty), PieChart container type distribution, AreaChart yard utilization vs capacity, LineChart dwell time vs target
+  * Tab 1 (Container Registry): SearchFilterToolbar (4 filter groups: type/status/location/tradeType) + ModuleBreadcrumb, 14 container records with ContainerNo badge, Type badge, Status badge (6 states), ICD location, Trade type, Shipping line, Vessel, Gate-In, Dwell days (color-coded), Customs status, Hazmat badge, Reefer temp badge, Weight, VGM, Seal number
+  * Tab 2 (Yard Analytics): BarChart TEU by ICD location, PieChart hazmat vs general distribution, BarChart dwell time by trade type
+  * Tab 3 (Insights): 4 deep insight cards (India ICD network 161 facilities, Reefer cold chain integrity, Customs bonded area & AEO, CONCOR rake & DFC integration)
+  * 8 container types, 6 statuses, 8 ICD locations, 6 trade types, 14 data records
+  * Warning rows (Under Customs): amber bg with left border
+
+- Created Warehouse Space & Capacity Planner module (R276b):
+  * FILE: src/components/modules/warehouse-space-capacity-planner-view.tsx (267 lines)
+  * 4 tabs: Dashboard | Location Registry | Utilization Analytics | Insights
+  * Theme: Amber #b45309, CSS prefix: wsp-*
+  * Tab 0 (Dashboard): 4 KPIs (Optimal Locations, Avg Utilization, Over Capacity, Pallet Occupancy), BarChart monthly capacity breakdown (utilized/reserved/maintenance), BarChart zone utilization, LineChart cube vs weight utilization, PieChart location type distribution
+  * Tab 1 (Location Registry): SearchFilterToolbar (4 filter groups: warehouse/zone/locationType/status) + ModuleBreadcrumb, 14 location records with LocationId badge, Warehouse, Zone badge, Aisle/Rack/Level/Position, Type badge, SKU, Capacity % bar (color-coded by threshold), Cube %, Weight %, Status badge (6 states), Last Put/Pick times, Turnover rate, Pallet occupancy
+  * Tab 2 (Utilization Analytics): BarChart utilization by warehouse, Stacked AreaChart turnover rate distribution (high/medium/low), LineChart projected vs actual capacity plan
+  * Tab 3 (Insights): 4 deep insight cards (India warehouse market 340M sq ft, ABC-XYZ slotting optimization, Cube utilization strategies, Build vs Lease vs Shared expansion)
+  * 6 zones, 6 location types, 6 capacity statuses, 6 warehouses, 14 data records
+  * Critical rows (Over Capacity): red bg; Warning (Near Capacity/Under Maintenance): amber
+
+- Registered both modules in 3 files:
+  * src/components/modules/index.ts: +IcdContainerYardIntelligenceView +WarehouseSpaceCapacityPlannerView (389->391 exports)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (icd-container-yard-intelligence: icon Container group operations, warehouse-space-capacity-planner: icon LayoutGrid group warehouse)
+
+- CSS additions: 52 lines (icy-* sky blue + wsp-* amber classes with critical/warning row highlighting, capacity bars, dwell badges, insights grid, keyframe animations)
+
+- TSC FINAL: 0 errors in src/ (1 pre-existing error in skills/ — not our code)
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports
+- Git: commit b482e03 pushed to origin/main
+
+Stage Summary:
+- NEW MODULE: ICD Container Yard Intelligence (268 lines, 8 visual components, 14 container records, 4 tabs)
+- NEW MODULE: Warehouse Space & Capacity Planner (267 lines, 8 visual components, 14 location records, 4 tabs)
+- Total module files: 386 (was 384, +2)
+- Total navItems: 392 (was 390, +2)
+- CSS: 58,742 lines (+52 from R276)
+- Total data: 28 records across both modules
+- ZERO src/ TSC errors
+- ZERO duplicate entries
+- GITHUB: Pushed to origin/main (b482e03)
+
+## Updated Project Status (Post Round 276)
+- STATUS: STABLE — ALL modules compile, 0 TSC errors, 0 duplicates
+- MODULE FILES: 386 | NAVITEMS: 392
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: 58,742 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate entries (monitor each round)
+- Many older modules still use default imports for shared components (works due to added default exports, but should migrate to named imports)
+- SearchFilterToolbar not integrated into all table-based modules
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (suggestions: Multi-Modal Rail-Road Hub, Logistics Insurance Claims, Last-Mile Dark Store Ops)
+2. Migrate remaining modules from default to named imports for shared components
+3. Cross-module drill-down navigation (click value → navigate to related module)
+4. Real-time WebSocket events for live updates
+5. Mobile experience enhancements with sheet drawers
+6. Dashboard home page widgets enhancement
+7. Always verify no duplicate entries from concurrent cron jobs before adding new ones
+---
 Task ID: R275 — GST Invoice & E-Invoicing Command + Freight Invoice Reconciliation
 Agent: Main Agent (Cron Loop)
 Task: R275 — 2 new Indian logistics modules for GST e-invoicing compliance and freight invoice audit/reconciliation
