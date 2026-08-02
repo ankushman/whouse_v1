@@ -59059,3 +59059,45 @@ html.theme-transition body {
 .pcc-insight:hover { box-shadow: 0 6px 20px rgba(8, 145, 178, 0.12); transform: translateY(-2px); }
 @keyframes pcc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
 @keyframes pcc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
+
+/* === Cement Logistics Command (cmt-*) — Amber #92400e === */
+.cmt-root { animation: cmt-fade 0.4s ease-out; }
+.cmt-tab { transition: all 0.2s ease; }
+.cmt-tab:hover { background: rgba(146, 64, 14, 0.06); }
+.cmt-kpi { transition: all 0.25s ease; border-left: 3px solid #fef3c7; }
+.cmt-kpi:hover { box-shadow: 0 4px 16px rgba(146, 64, 14, 0.1); transform: translateY(-2px); border-left-color: #92400e; }
+.cmt-kpi-label { text-transform: uppercase; letter-spacing: 0.05em; }
+.cmt-kpi-val { transition: color 0.2s ease; }
+.cmt-kpi:hover .cmt-kpi-val { color: #78350f; }
+.cmt-chart { transition: box-shadow 0.25s ease; }
+.cmt-chart:hover { box-shadow: 0 4px 16px rgba(146, 64, 14, 0.08); }
+.cmt-badge { font-weight: 600; letter-spacing: 0.02em; }
+.cmt-table-wrap { font-variant-numeric: tabular-nums; }
+.cmt-row-critical { border-left: 3px solid #dc2626 !important; }
+.cmt-row-warning { border-left: 3px solid #d97706 !important; }
+.cmt-row-info { border-left: 3px solid #2563eb !important; }
+.cmt-insight { transition: all 0.25s ease; border-left: 3px solid #fef3c7; }
+.cmt-insight:hover { box-shadow: 0 6px 20px rgba(146, 64, 14, 0.12); transform: translateY(-2px); }
+@keyframes cmt-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes cmt-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
+
+/* === Mining Logistics Command (mlc-*) — Indigo #4338ca === */
+.mlc-root { animation: mlc-fade 0.4s ease-out; }
+.mlc-tab { transition: all 0.2s ease; }
+.mlc-tab:hover { background: rgba(67, 56, 202, 0.06); }
+.mlc-kpi { transition: all 0.25s ease; border-left: 3px solid #e0e7ff; }
+.mlc-kpi:hover { box-shadow: 0 4px 16px rgba(67, 56, 202, 0.1); transform: translateY(-2px); border-left-color: #4338ca; }
+.mlc-kpi-label { text-transform: uppercase; letter-spacing: 0.05em; }
+.mlc-kpi-val { transition: color 0.2s ease; }
+.mlc-kpi:hover .mlc-kpi-val { color: #3730a3; }
+.mlc-chart { transition: box-shadow 0.25s ease; }
+.mlc-chart:hover { box-shadow: 0 4px 16px rgba(67, 56, 202, 0.08); }
+.mlc-badge { font-weight: 600; letter-spacing: 0.02em; }
+.mlc-table-wrap { font-variant-numeric: tabular-nums; }
+.mlc-row-critical { border-left: 3px solid #dc2626 !important; }
+.mlc-row-warning { border-left: 3px solid #d97706 !important; }
+.mlc-row-info { border-left: 3px solid #2563eb !important; }
+.mlc-insight { transition: all 0.25s ease; border-left: 3px solid #e0e7ff; }
+.mlc-insight:hover { box-shadow: 0 6px 20px rgba(67, 56, 202, 0.12); transform: translateY(-2px); }
+@keyframes mlc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes mlc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
