@@ -59538,3 +59538,52 @@ html.theme-transition body {
 .apl-insight h3{transition:color .2s}
 .apl-insight:hover h3{color:#1a237e}
 @keyframes apl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* Defence Ordnance Logistics - dol-* */
+.dol-root{font-family:'Inter',system-ui,sans-serif;animation:dol-fadeIn .4s ease-out}
+.dol-tabs{border-bottom:2px solid #e5e7eb}
+.dol-tab{transition:all .2s ease;cursor:pointer;position:relative}
+.dol-tab:hover{transform:translateY(-1px)}
+.dol-tab::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:transparent;transition:background .2s}
+.dol-tab:hover::after{background:#6b2c2c}
+.dol-kpi{transition:all .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.dol-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,29,29,.15)}
+.dol-kpi-val{transition:color .3s}
+.dol-kpi:hover .dol-kpi-val{color:#4a1d1d}
+.dol-chart{transition:box-shadow .3s ease}
+.dol-chart:hover{box-shadow:0 4px 16px rgba(74,29,29,.12)}
+.dol-badge{transition:transform .15s ease}
+.dol-badge:hover{transform:scale(1.05)}
+.dol-table-wrap{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.dol-row-critical{border-left:3px solid #dc2626;background:rgba(254,226,226,.6)!important}
+.dol-row-warning{border-left:3px solid #f59e0b;background:rgba(254,243,199,.6)!important}
+.dol-row-info{border-left:3px solid #3b82f6;background:rgba(219,234,254,.6)!important}
+.dol-insight{transition:all .3s ease;border-left:3px solid transparent}
+.dol-insight:hover{border-left-color:#4a1d1d;box-shadow:0 4px 12px rgba(74,29,29,.1)}
+.dol-insight h3{transition:color .2s}
+.dol-insight:hover h3{color:#4a1d1d}
+@keyframes dol-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Cold Chain Pharma Logistics - ccl-* */
+.ccl-root{font-family:'Inter',system-ui,sans-serif;animation:ccl-fadeIn .4s ease-out}
+.ccl-tabs{border-bottom:2px solid #e5e7eb}
+.ccl-tab{transition:all .2s ease;cursor:pointer;position:relative}
+.ccl-tab:hover{transform:translateY(-1px)}
+.ccl-tab::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:transparent;transition:background .2s}
+.ccl-tab:hover::after{background:#059669}
+.ccl-kpi{transition:all .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.ccl-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(6,95,70,.15)}
+.ccl-kpi-val{transition:color .3s}
+.ccl-kpi:hover .ccl-kpi-val{color:#065f46}
+.ccl-chart{transition:box-shadow .3s ease}
+.ccl-chart:hover{box-shadow:0 4px 16px rgba(6,95,70,.12)}
+.ccl-badge{transition:transform .15s ease}
+.ccl-badge:hover{transform:scale(1.05)}
+.ccl-table-wrap{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.ccl-row-critical{border-left:3px solid #dc2626;background:rgba(254,226,226,.6)!important}
+.ccl-row-warning{border-left:3px solid #f59e0b;background:rgba(254,243,199,.6)!important}
+.ccl-row-info{border-left:3px solid #3b82f6;background:rgba(219,234,254,.6)!important}
+.ccl-insight{transition:all .3s ease;border-left:3px solid transparent}
+.ccl-insight:hover{border-left-color:#065f46;box-shadow:0 4px 12px rgba(6,95,70,.1)}
+.ccl-insight h3{transition:color .2s}
+.ccl-insight:hover h3{color:#065f46}
+@keyframes ccl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}

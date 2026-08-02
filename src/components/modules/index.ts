@@ -424,3 +424,5 @@ export { default as MiningEquipmentLogisticsView } from './mining-equipment-logi
 export { default as InlandWaterwayLogisticsView } from './inland-waterway-logistics-view'
 export { default as RailwayFreightLogisticsView } from './railway-freight-logistics-view'
 export { default as AerospacePartsLogisticsView } from './aerospace-parts-logistics-view'
+export { default as DefenceOrdnanceLogisticsView } from './defence-ordnance-logistics-view'
+export { default as ColdChainPharmaLogisticsView } from './cold-chain-pharma-logistics-view'
