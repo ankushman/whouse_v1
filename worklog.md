@@ -1,5 +1,110 @@
 ---
 ---
+Task ID: R274 — Fix 105 TSC Errors + FASTag Toll Intelligence + Warehouse Labour Workforce Analytics
+Agent: Main Agent (Cron Loop)
+Task: R274 — Major bug fix round (105→0 TSC errors) + 2 new Indian logistics modules
+
+Work Log:
+- Read worklog.md: R273 complete (commit 8c77ce2), 380 modules, 386 navItems, 101 TSC errors
+- TSC pre-validation: 101 errors (was 105 in R273, 4 fixed by shared component default exports)
+- Duplicate check: 0 duplicate navItems, 0 duplicate imports
+
+MAJOR BUG FIXES (101 errors → 0):
+1. src/types/store.ts: Expanded NavGroup from 3 values to 8 (+transport, warehouse, fleet, returns, sustainability)
+   Expanded Role from 11 values to 16 (+operations_planner, fleet_manager, facilities, hr, quality) — fixed 20 app-store errors
+
+2. src/components/dashboard/dashboard-view.tsx:
+   - Removed 31 duplicate import statements (TS2300 duplicate identifiers)
+   - Fixed missing `import {` before recharts components (TS1109/TS1434 syntax error)
+
+3. src/components/shared/index.ts: Deduplicated 9 duplicate panel re-exports
+
+4. src/app/page.tsx: Fixed ESG import from named `{ ESGComplianceHubView }` to default `ESGComplianceHubView`
+
+5. Fixed 11 missing Lucide icon imports across 9 shared panel files:
+   - carbon-footprint-tracker-panel: +Target
+   - cold-chain-analytics-panel: +Thermometer
+   - gate-management-panel: +UserCheck, PackageSearch, Clock
+   - iot-sensor-dashboard-panel: +Users
+   - labor-management-panel: +UserCheck
+   - order-wave-management-panel: +ShoppingCart
+   - returns-analytics-hub-panel: +Clock
+   - three-pl-contract-management-panel: +IndianRupee
+   - warehouse-automation-panel: +CheckCircle
+
+6. container-tracking-analytics-panel.tsx: Removed duplicate "20ft GP" property (TS1117)
+
+7. freight-booking-command-view.tsx: Updated to new shared component interfaces (subtitle→description, SearchFilterToolbar props)
+
+8. port-vessel-tracker-view.tsx: Updated SearchFilterToolbar to new interface
+
+- Created FASTag Toll Intelligence module (R274a):
+  * FILE: src/components/modules/fastag-toll-intelligence-view.tsx (180 lines)
+  * 4 tabs: Dashboard | Toll Transactions | Cost Analytics | Insights
+  * Theme: Orange #ea580c, CSS prefix: fti-*
+  * Tab 0: 4 KPIs (Clean Processed, Total Toll, Penalties, Avg FASTag Transit), BarChart FASTag vs Cash, BarChart volume by highway, PieChart payment mode, LineChart savings vs penalty
+  * Tab 1: SearchFilterToolbar (4 filter groups) + ModuleBreadcrumb, 14 toll records with HighwayBadge, VehicleBadge, PaymentBadge, StatusBadge (6 states), TollBar, PenaltyBadge, AccuracyBadge, FleetName
+  * Tab 2: BarChart toll/km by highway, AreaChart FASTag adoption trend, BarChart cost by vehicle category
+  * Tab 3: 4 deep insight cards (FASTag 94.7% penetration, Toll cost route optimization, NHAI penalty framework, Unified toll analytics)
+  * 8 Indian NH corridors, 8 vehicle categories, 6 payment modes, 6 statuses, 14 data records
+
+- Created Warehouse Labour Workforce Analytics module (R274b):
+  * FILE: src/components/modules/warehouse-labour-workforce-analytics-view.tsx (242 lines)
+  * 4 tabs: Dashboard | Workforce Registry | Productivity Metrics | Insights
+  * Theme: Teal #0d9488, CSS prefix: wlwa-*
+  * Tab 0: 4 KPIs (Active Workforce, Avg UPH, Avg Attendance, Total Overtime), BarChart perm vs contract headcount, PieChart department distribution, PieChart shift distribution, LineChart UPH vs target
+  * Tab 1: SearchFilterToolbar (4 filter groups) + ModuleBreadcrumb, 14 worker records with DeptBadge, ShiftBadge, SkillBadge (4 levels), StatusBadge (6 states), UPHBar, AttendanceBadge, SafetyScoreBadge, ESI/PF numbers, OvertimeBadge
+  * Tab 2: BarChart safety incidents, AreaChart attendance trend, BarChart UPH by department
+  * Tab 3: 4 deep insight cards (India warehouse labour market, CLRA compliance, ESIC/PF automation, UPH productivity benchmarking)
+  * 8 departments, 6 shifts, 6 skill levels, 6 statuses, 14 data records
+
+- Registered both modules in 3 files:
+  * src/components/modules/index.ts: +FastagTollIntelligenceView +WarehouseLabourWorkforceAnalyticsView (385->387 exports)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (fastag-toll-intelligence: icon Receipt group transport, warehouse-labour-workforce-analytics: icon Users group warehouse)
+
+- CSS additions: 38 lines (fti-* orange + wlwa-* teal classes)
+
+- TSC FINAL: 0 errors in src/ (down from 101, the MAJOR achievement of this round)
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports
+- Git: commit 976dba7 pushed to origin/main
+
+Stage Summary:
+- BUG FIX: ALL 105 pre-existing TSC errors resolved (101 found this round → 0)
+- NEW MODULE: FASTag Toll Intelligence (180 lines, 8 visual components, 14 toll records, 4 tabs)
+- NEW MODULE: Warehouse Labour Workforce Analytics (242 lines, 8 visual components, 14 worker records, 4 tabs)
+- Total module files: 382 (was 380, +2)
+- Total navItems: 388 (was 386, +2)
+- CSS: 58,632 lines (+38 from R274)
+- Total data: 28 records across both modules
+- ZERO src/ TSC errors (was 105 before this round)
+- ZERO duplicate entries
+- GITHUB: Pushed to origin/main (976dba7)
+
+## Updated Project Status (Post Round 274)
+- STATUS: STABLE — ALL modules compile, 0 TSC errors, 0 duplicates
+- MODULE FILES: 382 | NAVITEMS: 388
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: 58,632 lines
+- TSC: 0 errors in src/ (MAJOR FIX: was 105)
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate entries (monitor each round)
+- Many older modules still use default imports for shared components (works due to added default exports, but should migrate to named imports)
+- SearchFilterToolbar not integrated into all table-based modules
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (suggestions: Cargo Terminal Ops, Logistics Insurance Claims)
+2. Migrate remaining 319 modules from default to named imports for shared components
+3. Cross-module drill-down navigation (click value → navigate to related module)
+4. Real-time WebSocket events for live updates
+5. Mobile experience enhancements with sheet drawers
+6. Dashboard home page widgets enhancement
+7. Always verify no duplicate entries from concurrent cron jobs before adding new ones
+---
 Task ID: R273 — Transport Rate Intelligence + Vehicle Inspection & Compliance
 Agent: Main Agent (Cron Loop)
 Task: R273 — 2 new logistics modules for Indian freight rate benchmarking and vehicle inspection/RTO compliance management
