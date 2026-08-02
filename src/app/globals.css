@@ -57461,3 +57461,63 @@ html.theme-transition body {
 .lmo-part-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .lmo-part-row { transition: all 0.2s; }
 .lmo-part-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* ===== LCI: Logistics Cost Intelligence ===== */
+.lci-stat-card { transition: all 0.2s; }
+.lci-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.lci-filter-pill { transition: all 0.15s ease; }
+.lci-filter-pill:hover { transform: translateY(-1px); }
+.lci-filter-clear { transition: all 0.15s; }
+.lci-insights-row > div { transition: all 0.2s; }
+.lci-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.lci-alerts-list { animation: lci-fadeIn 0.3s ease; }
+@keyframes lci-fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.lci-route-card { transition: all 0.2s; }
+.lci-route-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.lci-critical-pulse { border-left: 3px solid #ef4444; animation: lci-pulse 2s infinite; }
+@keyframes lci-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.15); } 50% { box-shadow: 0 0 0 4px rgba(239,68,68,0); } }
+.lci-warning-border { border-left: 3px solid #f59e0b; }
+.lci-id-badge { font-variant-numeric: tabular-nums; }
+.lci-mode-tag { font-weight: 500; }
+
+/* LCI: breakdown view */
+.lci-bd-header { transition: all 0.2s; }
+.lci-bd-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.lci-bd-row { transition: all 0.2s; }
+.lci-bd-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* LCI: variance view */
+.lci-var-header { transition: all 0.2s; }
+.lci-var-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.lci-var-row { transition: all 0.2s; }
+.lci-var-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* ===== WEM: Warehouse Energy Management ===== */
+.wem-stat-card { transition: all 0.2s; }
+.wem-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wem-filter-pill { transition: all 0.15s ease; }
+.wem-filter-pill:hover { transform: translateY(-1px); }
+.wem-filter-clear { transition: all 0.15s; }
+.wem-insights-row > div { transition: all 0.2s; }
+.wem-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wem-alerts-list { animation: wem-fadeIn 0.3s ease; }
+@keyframes wem-fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.wem-zone-card { transition: all 0.2s; }
+.wem-zone-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wem-critical-pulse { border-left: 3px solid #ef4444; animation: wem-pulse 2s infinite; }
+@keyframes wem-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.15); } 50% { box-shadow: 0 0 0 4px rgba(239,68,68,0); } }
+.wem-warning-border { border-left: 3px solid #f59e0b; }
+.wem-id-badge { font-variant-numeric: tabular-nums; }
+.wem-src-tag { font-weight: 500; }
+
+/* WEM: energy view */
+.wem-eng-header { transition: all 0.2s; }
+.wem-eng-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wem-eng-row { transition: all 0.2s; }
+.wem-eng-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* WEM: sustainability view */
+.wem-green-header { transition: all 0.2s; }
+.wem-green-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wem-green-row { transition: all 0.2s; }
+.wem-green-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }

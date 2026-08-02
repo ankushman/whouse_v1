@@ -110,3 +110,5 @@ export { WarehouseSafetyMonitoringPanel } from './warehouse-safety-monitoring-pa
 export { PackagingOptimizationPanel } from './packaging-optimization-panel'
 export { ContainerTrackingAnalyticsPanel } from './container-tracking-analytics-panel'
 export { LastMileOptimizationPanel } from './last-mile-optimization-panel'
+export { LogisticsCostIntelligencePanel } from './logistics-cost-intelligence-panel'
+export { WarehouseEnergyManagementPanel } from './warehouse-energy-management-panel'

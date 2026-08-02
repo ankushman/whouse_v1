@@ -98,6 +98,8 @@ import { WarehouseSafetyMonitoringPanel } from "@/components/shared/warehouse-sa
 import { PackagingOptimizationPanel } from "@/components/shared/packaging-optimization-panel"
 import { ContainerTrackingAnalyticsPanel } from "@/components/shared/container-tracking-analytics-panel"
 import { LastMileOptimizationPanel } from "@/components/shared/last-mile-optimization-panel"
+import { LogisticsCostIntelligencePanel } from "@/components/shared/logistics-cost-intelligence-panel"
+import { WarehouseEnergyManagementPanel } from "@/components/shared/warehouse-energy-management-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -1007,6 +1009,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <LastMileOptimizationPanel />
+          </CardContent>
+        </Card>
+
+        {/* Logistics Cost Intelligence */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <LogisticsCostIntelligencePanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Energy Management */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseEnergyManagementPanel />
           </CardContent>
         </Card>
       </div>
