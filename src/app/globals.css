@@ -58109,3 +58109,35 @@ html.theme-transition body {
 .cxp-svc-card { transition: all 0.2s; }
 .cxp-svc-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes cxp-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Carrier Performance Deep Dive (cpd-*) */
+.cpd-filter-pill { transition: all 0.15s; cursor: pointer; }
+.cpd-filter-pill:hover { border-color: hsl(var(--primary)); }
+.cpd-item-card { transition: all 0.2s; }
+.cpd-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cpd-critical { background: linear-gradient(135deg, #fef2f2, #fff); border-color: #fca5a5; animation: cpd-pulse 2s infinite; }
+.cpd-warning { background: linear-gradient(135deg, #fffbeb, #fff); border-left: 3px solid #f59e0b; }
+.cpd-alert-text { color: #dc2626; font-weight: 500; padding: 4px 8px; background: #fef2f2; border-radius: 4px; }
+.cpd-perf-card { transition: all 0.2s; }
+.cpd-perf-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cpd-fin-card { transition: all 0.2s; }
+.cpd-fin-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cpd-otp-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.cpd-rev-bar { background: linear-gradient(90deg, #8b5cf6, #7c3aed); transition: width 0.3s; }
+@keyframes cpd-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Warehouse Capacity Planning (wcp-*) */
+.wcp-filter-pill { transition: all 0.15s; cursor: pointer; }
+.wcp-filter-pill:hover { border-color: hsl(var(--primary)); }
+.wcp-item-card { transition: all 0.2s; }
+.wcp-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wcp-critical { background: linear-gradient(135deg, #fef2f2, #fff); border-color: #fca5a5; animation: wcp-pulse 2s infinite; }
+.wcp-warning { background: linear-gradient(135deg, #fffbeb, #fff); border-left: 3px solid #f59e0b; }
+.wcp-alert-text { color: #dc2626; font-weight: 500; padding: 4px 8px; background: #fef2f2; border-radius: 4px; }
+.wcp-exp-card { transition: all 0.2s; }
+.wcp-exp-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wcp-res-card { transition: all 0.2s; }
+.wcp-res-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wcp-util-bar { background: linear-gradient(90deg, #f59e0b, #ef4444); transition: width 0.3s; }
+.wcp-res-bar { background: linear-gradient(90deg, #3b82f6, #6366f1); transition: width 0.3s; }
+@keyframes wcp-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
