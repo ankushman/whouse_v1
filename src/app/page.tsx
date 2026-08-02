@@ -400,6 +400,8 @@ import IcdContainerYardIntelligenceView from "@/components/modules/icd-container
 import WarehouseSpaceCapacityPlannerView from "@/components/modules/warehouse-space-capacity-planner-view"
 import ShipmentTrackingMilestoneView from "@/components/modules/shipment-tracking-milestone-view"
 import TransitInsuranceClaimsView from "@/components/modules/transit-insurance-claims-view"
+import EwayBillExpiryTrackerView from "@/components/modules/eway-bill-expiry-tracker-view"
+import InlandContainerDepotCommandView from "@/components/modules/inland-container-depot-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -799,6 +801,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-space-capacity-planner": WarehouseSpaceCapacityPlannerView,
   "shipment-tracking-milestone": ShipmentTrackingMilestoneView,
   "transit-insurance-claims": TransitInsuranceClaimsView,
+  "eway-bill-expiry-tracker": EwayBillExpiryTrackerView,
+  "inland-container-depot-command": InlandContainerDepotCommandView,
 }
 
 

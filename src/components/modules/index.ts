@@ -390,3 +390,5 @@ export { default as IcdContainerYardIntelligenceView } from './icd-container-yar
 export { default as WarehouseSpaceCapacityPlannerView } from './warehouse-space-capacity-planner-view'
 export { default as ShipmentTrackingMilestoneView } from './shipment-tracking-milestone-view'
 export { default as TransitInsuranceClaimsView } from './transit-insurance-claims-view'
+export { default as EwayBillExpiryTrackerView } from './eway-bill-expiry-tracker-view'
+export { default as InlandContainerDepotCommandView } from './inland-container-depot-command-view'

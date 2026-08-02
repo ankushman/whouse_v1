@@ -58793,3 +58793,59 @@ html.theme-transition body {
 .tic-insight { transition: box-shadow 0.2s; }
 .tic-insight:hover { box-shadow: 0 4px 12px rgba(67, 56, 202, 0.12); }
 @keyframes tic-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* === E-Way Bill Expiry Tracker (ewt-*) - Sky Blue #0369a1 === */
+.ewt-root { animation: ewt-fade 0.3s ease-out; }
+.ewt-tabs { display: flex; gap: 4px; border-bottom: 2px solid #e2e8f0; padding-bottom: 0; }
+.ewt-tab { padding: 8px 16px; font-size: 0.875rem; font-weight: 500; border-radius: 8px 8px 0 0; transition: all 0.2s; cursor: pointer; border: none; background: transparent; }
+.ewt-tab:hover { background: #f0f9ff; }
+.ewt-tab.active { background: #0369a1; color: white; }
+.ewt-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ewt-kpi { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s, transform 0.15s; }
+.ewt-kpi:hover { box-shadow: 0 4px 16px rgba(3, 105, 161, 0.1); transform: translateY(-1px); }
+.ewt-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.ewt-kpi-val { font-size: 1.5rem; font-weight: 700; color: #0369a1; }
+.ewt-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.ewt-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s; }
+.ewt-chart:hover { box-shadow: 0 2px 12px rgba(3, 105, 161, 0.08); }
+.ewt-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.ewt-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.ewt-table-wrap table { border-collapse: collapse; width: 100%; }
+.ewt-table-wrap th { background: #f0f9ff; border-bottom: 2px solid #bae6fd; }
+.ewt-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #f0f9ff; vertical-align: middle; }
+.ewt-table-wrap tr:hover { background: #f0f9ff40; }
+.ewt-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.ewt-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.ewt-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.ewt-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.ewt-insight { transition: box-shadow 0.2s, transform 0.15s; }
+.ewt-insight:hover { box-shadow: 0 6px 20px rgba(3, 105, 161, 0.12); transform: translateY(-2px); }
+@keyframes ewt-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* === Inland Container Depot Command (icd-*) - Amber #b45309 === */
+.icd-root { animation: icd-fade 0.3s ease-out; }
+.icd-tabs { display: flex; gap: 4px; border-bottom: 2px solid #e2e8f0; padding-bottom: 0; }
+.icd-tab { padding: 8px 16px; font-size: 0.875rem; font-weight: 500; border-radius: 8px 8px 0 0; transition: all 0.2s; cursor: pointer; border: none; background: transparent; }
+.icd-tab:hover { background: #fffbeb; }
+.icd-tab.active { background: #b45309; color: white; }
+.icd-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.icd-kpi { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s, transform 0.15s; }
+.icd-kpi:hover { box-shadow: 0 4px 16px rgba(180, 83, 9, 0.1); transform: translateY(-1px); }
+.icd-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.icd-kpi-val { font-size: 1.5rem; font-weight: 700; color: #b45309; }
+.icd-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.icd-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s; }
+.icd-chart:hover { box-shadow: 0 2px 12px rgba(180, 83, 9, 0.08); }
+.icd-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.icd-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.icd-table-wrap table { border-collapse: collapse; width: 100%; }
+.icd-table-wrap th { background: #fffbeb; border-bottom: 2px solid #fcd34d; }
+.icd-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #fefce8; vertical-align: middle; }
+.icd-table-wrap tr:hover { background: #fffbeb40; }
+.icd-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.icd-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.icd-row-info { background: #fff7ed !important; border-left: 3px solid #ea580c; }
+.icd-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.icd-insight { transition: box-shadow 0.2s, transform 0.15s; }
+.icd-insight:hover { box-shadow: 0 6px 20px rgba(180, 83, 9, 0.12); transform: translateY(-2px); }
+@keyframes icd-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }

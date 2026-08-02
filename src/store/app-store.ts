@@ -396,6 +396,8 @@ export const navItems: NavItem[] = [
   { id: 'warehouse-space-capacity-planner', label: 'Space Planner', icon: 'LayoutGrid', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner'] },
   { id: 'shipment-tracking-milestone', label: 'Shipment Tracking', icon: 'Target', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'logistics', 'operations_planner', 'warehouse_manager'] },
   { id: 'transit-insurance-claims', label: 'Insurance Claims', icon: 'ShieldCheck', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'finance', 'logistics'] },
+  { id: 'eway-bill-expiry-tracker', label: 'E-Way Bill Expiry', icon: 'ScrollText', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'procurement', 'logistics'] },
+  { id: 'inland-container-depot-command', label: 'ICD Command', icon: 'Container', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'operations_planner'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
