@@ -1,6 +1,27 @@
 ---
 ---
 ---
+Task ID: R481 — Inventory Replenishment + Freight Rate Optimizer
+Agent: Main Agent (Cron Loop)
+Task: R481 — Create inventory replenishment management panel with automated reorder tracking, safety stock monitoring, lead time analysis, vendor replenishment cycles, and stockout risk alerts for Indian FMCG/e-commerce. Plus freight rate optimizer with multi-carrier rate comparison, lane optimization, spot vs contract rate analysis, fuel surcharge tracking, and savings projection.
+
+Work Log:
+- Read worklog.md: R480 (commit 36693a6) added DemandSensingAnalyticsPanel + WarehouseSimulationPanel (79 shared components). R480 worklog entry was already present.
+- TSC pre-validation: 0 errors in src/
+- Created `src/components/shared/inventory-replenishment-panel.tsx` (261 lines) — 10 SKUs (Parle-G/Samsung M14/Amul Butter/Nike Air Max/Dabur Chyawanprash/boAt Airdopes/Tata Salt/Levi's 501/IKEA KALLAX/Noise ColorFit) across 6 Indian DCs, 6 categories (FMCG/Electronics/Dairy/Ayurveda/Apparel/Furniture), 4 replenishment methods (Min-Max/MRP/Reorder Point/JIT), 5 statuses (Auto-Replenished/Critical Low/On Track/Overstocked/Pending Approval), ROP + safety stock + cover days tracking, stock level bar with color coding, order quantity display, active alerts list (stockout risk + low cover + pending approval), 3 views (SKUs with stock+cover bars+alerts, Category Analysis with avg stock level+critical count, Method Analysis with auto rate+avg lead+total qty). Critical SKUs (IRP-02 Samsung M14, IRP-06 boAt) pulse red, pending (IRP-08 Levi's) blink border. CSS prefix: irp-*
+- Created `src/components/shared/freight-rate-optimizer-panel.tsx` (248 lines) — 10 freight lanes across 4 transport modes (Road/Rail/Air/Sea) with mode-specific icons, 10 Indian carriers (TCI Express/Rivigo/Indian Railways/Delhivery/BlueDart Aviation/Safexpress/Ekart Logistics/Container Corp/Maersk India/Xpressbee), spot vs contract rate comparison, fuel surcharge tracking (₹/kg), compliance bars, rate deviation % display, savings analysis per lane, rate intel summary bar (spot premium %), 3 views (Lanes with rate+compliance bars+mode icons, Savings Analysis with total savings+per-lane breakdown, Carrier Performance with avg rate+compliance+volume metrics). Critical spike (FRO-05 Delhi→Chennai Air) pulses red, high cost (FRO-02, FRO-10) amber left border. CSS prefix: fro-*
+- Cleaned unused imports from both components (Truck, Warehouse, TrendingDown, BarChart3, Shield, Activity, ArrowRightLeft, CheckCircle, XCircle, IndianRupee from replenishment; ArrowUpRight, ArrowDownRight, BarChart3, MapPin, Globe, Target, Timer, ChevronDown, IndianRupee, RefreshCw from freight)
+- Registered both in shared/index.ts (79→81 exports) and dashboard-view.tsx (745→761 lines)
+- CSS appended to globals.css (56,498→56,676 lines, +178 CSS for irp-* and fro-*)
+- TSC: 0 errors | Git pushed: commit e7ec3ad
+
+Stage Summary:
+- 81 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 761 lines | globals.css: 56,676 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Automated putaway system, pick-path optimizer, container unloading, or cargo insurance panels ***
+
+---
 Task ID: R480 — Demand Sensing Analytics + Warehouse Simulation
 Agent: Main Agent (Cron Loop)
 Task: R480 — Create AI-powered demand sensing analytics with SKU forecasting, seasonality trends, MAPE tracking, confidence scoring, and signal source analysis. Plus warehouse simulation panel with what-if scenario modeling, throughput projection, bottleneck detection, and capacity planning.
