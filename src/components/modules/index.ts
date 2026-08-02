@@ -402,3 +402,5 @@ export { default as RailwayFreightTerminalView } from './railway-freight-termina
 export { default as PharmaColdChainView } from './pharma-cold-chain-view'
 export { default as CementLogisticsCommandView } from './cement-logistics-command-view'
 export { default as MiningLogisticsCommandView } from './mining-logistics-command-view'
+export { default as PetroleumPipelineCommandView } from './petroleum-pipeline-command-view'
+export { default as SteelLogisticsCommandView } from './steel-logistics-command-view'

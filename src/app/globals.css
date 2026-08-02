@@ -59101,3 +59101,43 @@ html.theme-transition body {
 .mlc-insight:hover { box-shadow: 0 6px 20px rgba(67, 56, 202, 0.12); transform: translateY(-2px); }
 @keyframes mlc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
 @keyframes mlc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
+
+/* === Petroleum Pipeline Command (ppc-*) — Rose #be123c === */
+.ppc-root { animation: ppc-fade 0.4s ease-out; }
+.ppc-tab { transition: all 0.2s ease; }
+.ppc-tab:hover { background: rgba(190, 18, 60, 0.06); }
+.ppc-kpi { transition: all 0.25s ease; border-left: 3px solid #ffe4e6; }
+.ppc-kpi:hover { box-shadow: 0 4px 16px rgba(190, 18, 60, 0.1); transform: translateY(-2px); border-left-color: #be123c; }
+.ppc-kpi-label { text-transform: uppercase; letter-spacing: 0.05em; }
+.ppc-kpi-val { transition: color 0.2s ease; }
+.ppc-kpi:hover .ppc-kpi-val { color: #9f1239; }
+.ppc-chart { transition: box-shadow 0.25s ease; }
+.ppc-chart:hover { box-shadow: 0 4px 16px rgba(190, 18, 60, 0.08); }
+.ppc-badge { font-weight: 600; letter-spacing: 0.02em; }
+.ppc-table-wrap { font-variant-numeric: tabular-nums; }
+.ppc-row-critical { border-left: 3px solid #dc2626 !important; }
+.ppc-row-warning { border-left: 3px solid #d97706 !important; }
+.ppc-row-info { border-left: 3px solid #2563eb !important; }
+.ppc-insight { transition: all 0.25s ease; border-left: 3px solid #ffe4e6; }
+.ppc-insight:hover { box-shadow: 0 6px 20px rgba(190, 18, 60, 0.12); transform: translateY(-2px); }
+@keyframes ppc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* === Steel Logistics Command (stl-*) — Green #15803d === */
+.stl-root { animation: stl-fade 0.4s ease-out; }
+.stl-tab { transition: all 0.2s ease; }
+.stl-tab:hover { background: rgba(21, 128, 61, 0.06); }
+.stl-kpi { transition: all 0.25s ease; border-left: 3px solid #dcfce7; }
+.stl-kpi:hover { box-shadow: 0 4px 16px rgba(21, 128, 61, 0.1); transform: translateY(-2px); border-left-color: #15803d; }
+.stl-kpi-label { text-transform: uppercase; letter-spacing: 0.05em; }
+.stl-kpi-val { transition: color 0.2s ease; }
+.stl-kpi:hover .stl-kpi-val { color: #166534; }
+.stl-chart { transition: box-shadow 0.25s ease; }
+.stl-chart:hover { box-shadow: 0 4px 16px rgba(21, 128, 61, 0.08); }
+.stl-badge { font-weight: 600; letter-spacing: 0.02em; }
+.stl-table-wrap { font-variant-numeric: tabular-nums; }
+.stl-row-critical { border-left: 3px solid #dc2626 !important; }
+.stl-row-warning { border-left: 3px solid #d97706 !important; }
+.stl-row-info { border-left: 3px solid #2563eb !important; }
+.stl-insight { transition: all 0.25s ease; border-left: 3px solid #dcfce7; }
+.stl-insight:hover { box-shadow: 0 6px 20px rgba(21, 128, 61, 0.12); transform: translateY(-2px); }
+@keyframes stl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
