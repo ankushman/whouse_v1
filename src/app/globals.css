@@ -59381,3 +59381,39 @@ html.theme-transition body {
 .cmt-insight { transition: all 0.25s ease; border-left: 3px solid #e7e5e4; }
 .cmt-insight:hover { box-shadow: 0 6px 20px rgba(120, 113, 108, 0.12); transform: translateY(-2px); }
 @keyframes cmt-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* Newsprint Publishing Logistics (npl-*) - Teal #0f766e */
+.npl-root { animation: npl-fade 0.4s ease-out; }
+.npl-tabs { position: relative; }
+.npl-tab { transition: all 0.15s ease; }
+.npl-tab:hover { box-shadow: 0 -2px 0 #0f766e inset; }
+.npl-kpi { transition: all 0.25s ease; border-left: 3px solid #0f766e; }
+.npl-kpi:hover { box-shadow: 0 4px 12px rgba(15, 118, 110, 0.1); transform: translateY(-1px); }
+.npl-chart { transition: box-shadow 0.2s ease; }
+.npl-chart:hover { box-shadow: 0 2px 8px rgba(15, 118, 110, 0.08); }
+.npl-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.npl-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.npl-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.npl-row-warning { border-left: 3px solid #d97706 !important; }
+.npl-row-info { border-left: 3px solid #2563eb !important; }
+.npl-insight { transition: all 0.25s ease; border-left: 3px solid #99f6e4; }
+.npl-insight:hover { box-shadow: 0 6px 20px rgba(15, 118, 110, 0.12); transform: translateY(-2px); }
+@keyframes npl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* Steel Scrap Recycling Logistics (ssr-*) - Amber #b45309 */
+.ssr-root { animation: ssr-fade 0.4s ease-out; }
+.ssr-tabs { position: relative; }
+.ssr-tab { transition: all 0.15s ease; }
+.ssr-tab:hover { box-shadow: 0 -2px 0 #b45309 inset; }
+.ssr-kpi { transition: all 0.25s ease; border-left: 3px solid #b45309; }
+.ssr-kpi:hover { box-shadow: 0 4px 12px rgba(180, 83, 9, 0.1); transform: translateY(-1px); }
+.ssr-chart { transition: box-shadow 0.2s ease; }
+.ssr-chart:hover { box-shadow: 0 2px 8px rgba(180, 83, 9, 0.08); }
+.ssr-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.ssr-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.ssr-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.ssr-row-warning { border-left: 3px solid #d97706 !important; }
+.ssr-row-info { border-left: 3px solid #2563eb !important; }
+.ssr-insight { transition: all 0.25s ease; border-left: 3px solid #fbbf24; }
+.ssr-insight:hover { box-shadow: 0 6px 20px rgba(180, 83, 9, 0.12); transform: translateY(-2px); }
+@keyframes ssr-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
