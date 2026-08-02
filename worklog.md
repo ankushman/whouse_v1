@@ -1,5 +1,27 @@
 ---
 ---
+Task ID: R491 — 3PL Contract Management + Labor Management
+Agent: Main Agent (Cron Loop)
+Task: R491 — Create 3PL contract management panel with vendor MSA tracking, SLA scoring, KPI compliance monitoring, penalty tracking, dispute management, contract renewal status, payment terms, risk assessment, utilization tracking, and multi-vendor performance comparison for Indian logistics 3PL partners. Plus labor management panel with warehouse workforce tracking, shift management, productivity scoring, attendance monitoring, safety score analytics, overtime tracking, certification management, performance reviews, and department-level analytics for Indian DC workforce.
+
+Work Log:
+- Read worklog.md: R490 (commit b10917b) added DemandForecastingPanel + WarehouseSlottingOptimizerPanel (99 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: all 51 icons verified present in lucide-react
+- Created `src/components/shared/three-pl-contract-management-panel.tsx` (260 lines) — 10 3PL contracts (TCI Express/Delhivery/DHL Supply Chain/Snowman Logistics/Safexpress/BlueDart Aviation/Rivigo/Ekart Logistics/Container Corp/Shadowfax), 10 contract types (Fulfillment/Last Mile/3PL/Cold Chain/Distribution/Express/Line Haul/E-commerce/Rail Logistics/Quick Commerce), contract values ₹8L-₹7.2Cr, SLA scores 0-98%, KPI tracking (68-97/100), penalty tracking (₹54K-₹12L), 5 MSA statuses (Active/Under Review/Expiring/Draft/Renewal Pending), payment terms (Net 15/30/45/60), renewal types (Auto-Renew/Manual/Negotiation/Renewal Pending), 3 risk levels (Low/Medium/High), utilization 0-95%, dispute tracking (0-3), INR formatting, 3 views (Contracts with type+SLA+KPI+util+renewal, Performance with sorted SLA bars+penalty+util+disputes, Compliance with status-sorted MSA list+expiry+renewal+terms). Expiring (Snowman PCM-04) pulses red, Draft (Rivigo PCM-07) dashed border. CSS prefix: pcm-*
+- Created `src/components/shared/labor-management-panel.tsx` (270 lines) — 10 workers across 8 departments (Warehouse Ops/Order Fulfillment/Receiving/Quality Control/Dispatch/Shipping/Inventory/Value Add), 6 Indian DCs, 3 shifts (Morning/Afternoon/Night) with color-coded badges, 10 roles (Shift Supervisor/Picker/Forklift Operator/QC Inspector/Packer/Team Lead/Loader/Inventory Clerk/VAS Operator), hourly rates ₹240-₹420, productivity 72-118%, attendance 72-99%, safety scores 65-100, overtime 0-52h, certifications (1-3 per worker), 4 statuses (Active/Warning/Critical/On Leave), 5 performance levels (Excellent/Good/Average/Needs Improvement/Poor), monthly cost calculation, 3 views (Workforce with shift+productivity+attendance+safety+cost, Performance with sorted productivity bars+performance ratings+hours+cost, Safety with sorted safety score bars+certs+OT+attendance). Critical (Deepak LMN-09 safety 65, attendance 72%) pulses red, Warning (Suresh LMN-03) amber border. CSS prefix: lmn-*
+- Fixed bug: LMN panel had `item.perfColors` instead of `item.hourlyRate` in JSX
+- Cleaned unused imports: FileCheck, FileWarning, IndianRupee, TrendingUp, BarChart3, Zap, Package, Truck, XCircle, Percent, Eye, Users from PCM; UserCheck, UserX, UserMinus, IndianRupee, BarChart3, CheckCircle, XCircle, Percent, Eye, ClipboardList, Timer from LMN
+- Registered both in shared/index.ts (99→101 exports) and dashboard-view.tsx (905→921 lines)
+- CSS appended to globals.css (57,032→57,078 lines, +46 CSS for pcm-* and lmn-*)
+- TSC: 0 errors | Git pushed: commit 46e5ef3
+
+Stage Summary:
+- 101 shared .tsx files total (+2 this round) — crossed 100 milestone!
+- dashboard-view.tsx: 921 lines | globals.css: 57,078 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Fleet telematics dashboard, digital twin visualization, warehouse automation panel, or returns analytics hub ***
+---
 Task ID: R490 — Demand Forecasting + Warehouse Slotting Optimizer
 Agent: Main Agent (Cron Loop)
 Task: R490 — Create demand forecasting panel with SKU-level demand prediction using multiple ML models (ARIMA/XGBoost/Prophet/LSTM), forecast vs actual variance tracking, accuracy scoring, confidence levels, stock days monitoring, safety stock alerts, seasonality analysis, and multi-model comparison. Plus warehouse slotting optimizer panel with golden zone/mid-flow/bulk rack/cold storage slot management, velocity-based slotting (A+ to D+), pick frequency tracking, ergonomic scoring, replenishment rate monitoring, rebalance recommendations, and zone-level analytics for Indian warehouse DCs.
