@@ -70,6 +70,8 @@ import { FulfillmentAnalyticsPanel } from "@/components/shared/fulfillment-analy
 import { ReturnsProcessingAnalyticsPanel } from "@/components/shared/returns-processing-analytics-panel"
 import { CrossDockOperationsPanel } from "@/components/shared/cross-dock-operations-panel"
 import { YardManagementOptimizationPanel } from "@/components/shared/yard-management-optimization-panel"
+import { PalletManagementPanel } from "@/components/shared/pallet-management-panel"
+import { ManifestManagementPanel } from "@/components/shared/manifest-management-panel"
 import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
 import { InventoryReplenishmentPanel } from "@/components/shared/inventory-replenishment-panel"
 import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
@@ -120,6 +122,8 @@ import { FulfillmentAnalyticsPanel } from "@/components/shared/fulfillment-analy
 import { ReturnsProcessingAnalyticsPanel } from "@/components/shared/returns-processing-analytics-panel"
 import { CrossDockOperationsPanel } from "@/components/shared/cross-dock-operations-panel"
 import { YardManagementOptimizationPanel } from "@/components/shared/yard-management-optimization-panel"
+import { PalletManagementPanel } from "@/components/shared/pallet-management-panel"
+import { ManifestManagementPanel } from "@/components/shared/manifest-management-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -835,6 +839,18 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <PalletManagementPanel />
+          </CardContent>
+        </Card>
+
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ManifestManagementPanel />
+          </CardContent>
+        </Card>
+
         {/* Warehouse Simulation */}
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
@@ -1180,6 +1196,16 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <YardManagementOptimizationPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <PalletManagementPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ManifestManagementPanel />
           </CardContent>
         </Card>
       </div>
