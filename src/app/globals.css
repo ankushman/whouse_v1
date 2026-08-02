@@ -59489,3 +59489,52 @@ html.theme-transition body {
 .iwl-insight { transition: all 0.25s ease; border-left: 3px solid #93c5fd; }
 .iwl-insight:hover { box-shadow: 0 6px 20px rgba(30, 58, 95, 0.12); transform: translateY(-2px); }
 @keyframes iwl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+/* Railway Freight Logistics - rfl-* */
+.rfl-root{font-family:'Inter',system-ui,sans-serif;animation:rfl-fadeIn .4s ease-out}
+.rfl-tabs{border-bottom:2px solid #e5e7eb}
+.rfl-tab{transition:all .2s ease;cursor:pointer;position:relative}
+.rfl-tab:hover{transform:translateY(-1px)}
+.rfl-tab::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:transparent;transition:background .2s}
+.rfl-tab:hover::after{background:#3282b8}
+.rfl-kpi{transition:all .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.rfl-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(15,76,117,.15)}
+.rfl-kpi-val{transition:color .3s}
+.rfl-kpi:hover .rfl-kpi-val{color:#0f4c75}
+.rfl-chart{transition:box-shadow .3s ease}
+.rfl-chart:hover{box-shadow:0 4px 16px rgba(15,76,117,.12)}
+.rfl-badge{transition:transform .15s ease}
+.rfl-badge:hover{transform:scale(1.05)}
+.rfl-table-wrap{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.rfl-row-critical{border-left:3px solid #dc2626;background:rgba(254,226,226,.6)!important}
+.rfl-row-warning{border-left:3px solid #f59e0b;background:rgba(254,243,199,.6)!important}
+.rfl-row-info{border-left:3px solid #3b82f6;background:rgba(219,234,254,.6)!important}
+.rfl-insight{transition:all .3s ease;border-left:3px solid transparent}
+.rfl-insight:hover{border-left-color:#0f4c75;box-shadow:0 4px 12px rgba(15,76,117,.1)}
+.rfl-insight h3{transition:color .2s}
+.rfl-insight:hover h3{color:#0f4c75}
+@keyframes rfl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Aerospace Parts Logistics - apl-* */
+.apl-root{font-family:'Inter',system-ui,sans-serif;animation:apl-fadeIn .4s ease-out}
+.apl-tabs{border-bottom:2px solid #e5e7eb}
+.apl-tab{transition:all .2s ease;cursor:pointer;position:relative}
+.apl-tab:hover{transform:translateY(-1px)}
+.apl-tab::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:transparent;transition:background .2s}
+.apl-tab:hover::after{background:#303f9f}
+.apl-kpi{transition:all .3s ease;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.apl-kpi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(26,35,126,.15)}
+.apl-kpi-val{transition:color .3s}
+.apl-kpi:hover .apl-kpi-val{color:#1a237e}
+.apl-chart{transition:box-shadow .3s ease}
+.apl-chart:hover{box-shadow:0 4px 16px rgba(26,35,126,.12)}
+.apl-badge{transition:transform .15s ease}
+.apl-badge:hover{transform:scale(1.05)}
+.apl-table-wrap{box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.apl-row-critical{border-left:3px solid #dc2626;background:rgba(254,226,226,.6)!important}
+.apl-row-warning{border-left:3px solid #f59e0b;background:rgba(254,243,199,.6)!important}
+.apl-row-info{border-left:3px solid #3b82f6;background:rgba(219,234,254,.6)!important}
+.apl-insight{transition:all .3s ease;border-left:3px solid transparent}
+.apl-insight:hover{border-left-color:#1a237e;box-shadow:0 4px 12px rgba(26,35,126,.1)}
+.apl-insight h3{transition:color .2s}
+.apl-insight:hover h3{color:#1a237e}
+@keyframes apl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}

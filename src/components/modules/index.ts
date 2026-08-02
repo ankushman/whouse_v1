@@ -422,3 +422,5 @@ export { default as CourierExpressLogisticsView } from './courier-express-logist
 export { default as PetroleumTankFarmLogisticsView } from './petroleum-tank-farm-logistics-view'
 export { default as MiningEquipmentLogisticsView } from './mining-equipment-logistics-view'
 export { default as InlandWaterwayLogisticsView } from './inland-waterway-logistics-view'
+export { default as RailwayFreightLogisticsView } from './railway-freight-logistics-view'
+export { default as AerospacePartsLogisticsView } from './aerospace-parts-logistics-view'
