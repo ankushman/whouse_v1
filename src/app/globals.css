@@ -56559,3 +56559,62 @@ html.theme-transition body {
 .fro-spike-pulse{animation:fro-spike-pulse 2s ease infinite}
 .fro-bar-pulse{animation:fro-bar-pulse 1.5s ease infinite}
 .fro-highcost-border{border-left:3px solid #f59e0b}
+
+/* ========== R482: Automated Putaway Panel (apu-*) ========== */
+.apu-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.apu-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.apu-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.apu-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.apu-filter-clear{transition:background .15s ease}
+.apu-filter-clear:hover{background:rgba(239,68,68,.1)}
+.apu-task-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.apu-task-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.apu-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.apu-priority{letter-spacing:.02em}
+.apu-zone-card{transition:all .2s ease}
+.apu-zone-card:hover{border-color:hsl(var(--primary)/.2)}
+.apu-zone-dot{box-shadow:0 0 4px currentColor}
+.apu-op-card{transition:all .2s ease}
+.apu-op-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.apu-op-metric{transition:background .15s ease}
+.apu-op-metric:hover{background:rgba(0,0,0,.04)}
+.apu-alerts-list{transition:all .2s ease}
+.apu-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.apu-alert-dot{animation:apu-dot-blink 1.2s ease infinite}
+.apu-insights-row > div{transition:all .2s ease}
+.apu-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes apu-failed-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes apu-bar-progress{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes apu-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.apu-failed-pulse{animation:apu-failed-pulse 2s ease infinite}
+.apu-bar-progress{animation:apu-bar-progress 1.5s ease infinite}
+.apu-hold-border{border-left:3px solid #f59e0b}
+
+/* ========== R482: Pick Path Optimizer Panel (ppo-*) ========== */
+.ppo-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.ppo-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.ppo-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.ppo-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.ppo-filter-clear{transition:background .15s ease}
+.ppo-filter-clear:hover{background:rgba(239,68,68,.1)}
+.ppo-path-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.ppo-path-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.ppo-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.ppo-complexity{letter-spacing:.02em}
+.ppo-method-card{transition:all .2s ease}
+.ppo-method-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.ppo-method-metric{transition:background .15s ease}
+.ppo-method-metric:hover{background:rgba(0,0,0,.04)}
+.ppo-eff-header{transition:all .15s ease}
+.ppo-eff-header:hover{background:hsl(var(--muted)/.3)}
+.ppo-eff-row{transition:all .2s ease}
+.ppo-eff-row:hover{border-color:hsl(var(--primary)/.2)}
+.ppo-alerts-list{transition:all .2s ease}
+.ppo-alerts-list:hover{border-color:rgba(245,158,11,.4)}
+.ppo-alert-dot{animation:ppo-dot-blink 1.2s ease infinite}
+.ppo-insights-row > div{transition:all .2s ease}
+.ppo-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes ppo-failed-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes ppo-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.ppo-failed-pulse{animation:ppo-failed-pulse 2s ease infinite}
+.ppo-notopt-border{border-left:3px solid #f59e0b}
