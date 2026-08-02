@@ -428,3 +428,5 @@ export { default as DefenceOrdnanceLogisticsView } from './defence-ordnance-logi
 export { default as ColdChainPharmaLogisticsView } from './cold-chain-pharma-logistics-view'
 export { default as MetroRailOperationsLogisticsView } from './metro-rail-operations-logistics-view'
 export { default as TelecomTowerLogisticsView } from './telecom-tower-logistics-view'
+export { default as OversizeOdcTransportLogisticsView } from './oversize-odc-transport-logistics-view'
+export { default as ParcelSortationLogisticsView } from './parcel-sortation-logistics-view'

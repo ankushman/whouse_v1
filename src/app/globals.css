@@ -59634,3 +59634,42 @@ html.theme-transition body {
 .ttl-insight h3{transition:color .2s}
 .ttl-insight:hover h3{color:#312e81}
 @keyframes ttl-fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* R297a: Oversize ODC Transport Logistics - odc-* amber/brown theme */
+.odc-root { font-family: 'Inter', system-ui, sans-serif; }
+.odc-tabs { gap: 0.25rem; }
+.odc-tab { transition: all 0.2s; cursor: pointer; }
+.odc-tab:hover { background: #fef3c7; }
+.odc-kpi { transition: box-shadow 0.2s; }
+.odc-kpi:hover { box-shadow: 0 2px 8px rgba(74,55,40,0.12); }
+.odc-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.odc-kpi-val { font-size: 1.5rem; line-height: 1.3; }
+.odc-chart { transition: box-shadow 0.2s; }
+.odc-chart:hover { box-shadow: 0 2px 12px rgba(74,55,40,0.1); }
+.odc-badge { font-weight: 600; letter-spacing: 0.02em; }
+.odc-row-critical { border-left: 4px solid #ef4444; }
+.odc-row-warning { border-left: 4px solid #f59e0b; }
+.odc-row-info { border-left: 4px solid #3b82f6; }
+.odc-insight h3 { line-height: 1.4; }
+.odc-insight p { line-height: 1.7; }
+.odc-table-wrap { overflow-x: auto; }
+.odc-table-wrap table { min-width: 1600px; }
+
+/* R297b: Parcel Sortation Logistics - psl-* orange/burnt theme */
+.psl-root { font-family: 'Inter', system-ui, sans-serif; }
+.psl-tabs { gap: 0.25rem; }
+.psl-tab { transition: all 0.2s; cursor: pointer; }
+.psl-tab:hover { background: #fff7ed; }
+.psl-kpi { transition: box-shadow 0.2s; }
+.psl-kpi:hover { box-shadow: 0 2px 8px rgba(124,45,18,0.12); }
+.psl-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.psl-kpi-val { font-size: 1.5rem; line-height: 1.3; }
+.psl-chart { transition: box-shadow 0.2s; }
+.psl-chart:hover { box-shadow: 0 2px 12px rgba(124,45,18,0.1); }
+.psl-badge { font-weight: 600; letter-spacing: 0.02em; }
+.psl-row-critical { border-left: 4px solid #ef4444; }
+.psl-row-warning { border-left: 4px solid #f59e0b; }
+.psl-row-info { border-left: 4px solid #3b82f6; }
+.psl-insight h3 { line-height: 1.4; }
+.psl-insight p { line-height: 1.7; }
+.psl-table-wrap { overflow-x: auto; }
+.psl-table-wrap table { min-width: 1600px; }
