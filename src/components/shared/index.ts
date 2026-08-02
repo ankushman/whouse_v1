@@ -100,3 +100,5 @@ export { ThreePLContractManagementPanel } from './three-pl-contract-management-p
 export { LaborManagementPanel } from './labor-management-panel'
 export { FleetTelematicsPanel } from './fleet-telematics-panel'
 export { WarehouseAutomationPanel } from './warehouse-automation-panel'
+export { ReturnsAnalyticsHubPanel } from './returns-analytics-hub-panel'
+export { OrderWaveManagementPanel } from './order-wave-management-panel'

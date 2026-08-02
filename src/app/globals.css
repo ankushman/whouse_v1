@@ -57122,3 +57122,75 @@ html.theme-transition body {
 .wam-maint-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes wam-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
 @keyframes wam-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* ============================================================================
+ * R493 — Returns Analytics Hub (rah-*) + Order Wave Management (owm-*)
+ * ============================================================================ */
+
+/* RAH: stat cards, filter pills, insights row, alerts list */
+.rah-stat-card { transition: all 0.2s; }
+.rah-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.rah-filter-pill { transition: all 0.15s; }
+.rah-filter-pill:hover { transform: scale(1.05); }
+.rah-filter-clear:hover { background: rgba(239, 68, 68, 0.1); }
+.rah-insights-row > div { transition: all 0.2s; }
+.rah-insights-row > div:hover { border-color: rgba(99, 102, 241, 0.3); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.rah-alerts-list { animation: rah-slide-in 0.3s ease-out; }
+@keyframes rah-slide-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.rah-alert-dot { animation: rah-dot-pulse 2s infinite; }
+@keyframes rah-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* RAH: returns cards */
+.rah-returns-card { transition: all 0.2s; }
+.rah-returns-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.rah-critical-pulse { border-color: rgba(239, 68, 68, 0.4); animation: rah-pulse-red 2s infinite; }
+@keyframes rah-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+.rah-warning-border { border-left: 3px solid rgba(245, 158, 11, 0.6); }
+.rah-id-badge, .rah-reason-tag, .rah-refund-stat { transition: all 0.15s; }
+.rah-id-badge:hover, .rah-reason-tag:hover { transform: scale(1.03); }
+
+/* RAH: reasons view */
+.rah-reasons-header { transition: all 0.2s; }
+.rah-reasons-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.rah-reason-row { transition: all 0.2s; }
+.rah-reason-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-color: rgba(99, 102, 241, 0.2); }
+
+/* RAH: fraud view */
+.rah-fraud-header { transition: all 0.2s; }
+.rah-fraud-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.rah-fraud-row { transition: all 0.2s; }
+.rah-fraud-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* OWM: stat cards, filter pills, insights row, alerts list */
+.owm-stat-card { transition: all 0.2s; }
+.owm-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.owm-filter-pill { transition: all 0.15s; }
+.owm-filter-pill:hover { transform: scale(1.05); }
+.owm-filter-clear:hover { background: rgba(239, 68, 68, 0.1); }
+.owm-insights-row > div { transition: all 0.2s; }
+.owm-insights-row > div:hover { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.owm-alerts-list { animation: owm-slide-in 0.3s ease-out; }
+@keyframes owm-slide-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.owm-alert-dot { animation: owm-dot-pulse 2s infinite; }
+@keyframes owm-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* OWM: wave cards */
+.owm-wave-card { transition: all 0.2s; }
+.owm-wave-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.owm-critical-pulse { border-color: rgba(239, 68, 68, 0.4); animation: owm-pulse-red 2s infinite; }
+@keyframes owm-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+.owm-warning-border { border-left: 3px solid rgba(245, 158, 11, 0.6); }
+.owm-id-badge, .owm-type-tag, .owm-priority-tag { transition: all 0.15s; }
+.owm-id-badge:hover, .owm-type-tag:hover, .owm-priority-tag:hover { transform: scale(1.03); }
+
+/* OWM: performance view */
+.owm-perf-header { transition: all 0.2s; }
+.owm-perf-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.owm-perf-row { transition: all 0.2s; }
+.owm-perf-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* OWM: zones view */
+.owm-zones-header { transition: all 0.2s; }
+.owm-zones-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.owm-zone-row { transition: all 0.2s; }
+.owm-zone-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-color: rgba(16, 185, 129, 0.2); }

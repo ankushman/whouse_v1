@@ -88,6 +88,8 @@ import { ThreePLContractManagementPanel } from "@/components/shared/three-pl-con
 import { LaborManagementPanel } from "@/components/shared/labor-management-panel"
 import { FleetTelematicsPanel } from "@/components/shared/fleet-telematics-panel"
 import { WarehouseAutomationPanel } from "@/components/shared/warehouse-automation-panel"
+import { ReturnsAnalyticsHubPanel } from "@/components/shared/returns-analytics-hub-panel"
+import { OrderWaveManagementPanel } from "@/components/shared/order-wave-management-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -927,6 +929,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <WarehouseAutomationPanel />
+          </CardContent>
+        </Card>
+
+        {/* Returns Analytics Hub */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ReturnsAnalyticsHubPanel />
+          </CardContent>
+        </Card>
+
+        {/* Order Wave Management */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <OrderWaveManagementPanel />
           </CardContent>
         </Card>
       </div>
