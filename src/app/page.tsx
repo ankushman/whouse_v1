@@ -450,6 +450,8 @@ import DataCenterCoolingLogisticsView from "@/components/modules/data-center-coo
 import SpaceLaunchLogisticsView from "@/components/modules/space-launch-logistics-view"
 import DefenseLogisticsView from "@/components/modules/defense-logistics-view"
 import AviationGroundHandlingLogisticsView from "@/components/modules/aviation-ground-handling-logistics-view"
+import SmartCityLogisticsView from "@/components/modules/smart-city-logistics-view"
+import SmartGridPowerLogisticsView from "@/components/modules/smart-grid-power-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -899,6 +901,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "space-launch-logistics": SpaceLaunchLogisticsView,
   "defense-logistics": DefenseLogisticsView,
   "aviation-ground-handling": AviationGroundHandlingLogisticsView,
+  "smart-city-logistics": SmartCityLogisticsView,
+  "smart-grid-power": SmartGridPowerLogisticsView,
 }
 
 

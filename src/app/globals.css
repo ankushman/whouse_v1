@@ -59859,3 +59859,39 @@ html.theme-transition body {
 .agh-insight { border-left: 4px solid var(--accent); }
 .agh-insight h3 { color: var(--accent); }
 @keyframes agh-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ===== Smart City Logistics (R303a) — Amber Gold #422006 ===== */
+.scy-root { --accent: #422006; --accent-light: #fffbeb; }
+.scy-tabs { border-bottom-color: var(--accent); }
+.scy-tab { transition: all 0.2s; }
+.scy-tab:hover { background: var(--accent-light); }
+.scy-kpi { border-left: 3px solid var(--accent); }
+.scy-kpi-val { color: var(--accent); }
+.scy-chart { border-top: 3px solid var(--accent); }
+.scy-badge { letter-spacing: 0.02em; }
+.scy-table-wrap { border-color: #fde68a; }
+.scy-table-wrap th { background: #fffbeb; color: var(--accent); }
+.scy-row-critical { animation: scy-pulse 2s infinite; }
+.scy-row-warning { border-left-color: #f59e0b; }
+.scy-row-info { border-left-color: #3b82f6; }
+.scy-insight { border-left: 4px solid var(--accent); }
+.scy-insight h3 { color: var(--accent); }
+@keyframes scy-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ===== Smart Grid Power (R303b) — Slate Dark #0f172a ===== */
+.sgr-root { --accent: #0f172a; --accent-light: #f8fafc; }
+.sgr-tabs { border-bottom-color: var(--accent); }
+.sgr-tab { transition: all 0.2s; }
+.sgr-tab:hover { background: var(--accent-light); }
+.sgr-kpi { border-left: 3px solid var(--accent); }
+.sgr-kpi-val { color: var(--accent); }
+.sgr-chart { border-top: 3px solid var(--accent); }
+.sgr-badge { letter-spacing: 0.02em; }
+.sgr-table-wrap { border-color: #cbd5e1; }
+.sgr-table-wrap th { background: #f8fafc; color: var(--accent); }
+.sgr-row-critical { animation: sgr-pulse 2s infinite; }
+.sgr-row-warning { border-left-color: #f59e0b; }
+.sgr-row-info { border-left-color: #3b82f6; }
+.sgr-insight { border-left: 4px solid var(--accent); }
+.sgr-insight h3 { color: var(--accent); }
+@keyframes sgr-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }

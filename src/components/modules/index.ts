@@ -440,3 +440,5 @@ export { default as DataCenterCoolingLogisticsView } from './data-center-cooling
 export { default as SpaceLaunchLogisticsView } from './space-launch-logistics-view'
 export { default as DefenseLogisticsView } from './defense-logistics-view'
 export { default as AviationGroundHandlingLogisticsView } from './aviation-ground-handling-logistics-view'
+export { default as SmartCityLogisticsView } from './smart-city-logistics-view'
+export { default as SmartGridPowerLogisticsView } from './smart-grid-power-logistics-view'
