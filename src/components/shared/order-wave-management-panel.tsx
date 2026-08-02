@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
   Waves, Users, Target, Zap, Package,
-  CheckCircle, XCircle, AlertTriangle, Timer, Gauge, Layers
+  CheckCircle, XCircle, AlertTriangle, Timer, Gauge, Layers, ShoppingCart
 } from "lucide-react"
 
 const raw = [

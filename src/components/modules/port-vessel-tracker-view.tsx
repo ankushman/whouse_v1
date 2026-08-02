@@ -88,7 +88,7 @@ export default function PortVesselTrackerView() {
         </TabsContent>
         <TabsContent value="vessels">
           <ModuleBreadcrumb items={[{ label: "Port Tracker" }, { label: "Vessels" }]} />
-          <SearchFilterToolbar groups={filterGroups} activeFilters={activeFilters} onToggle={toggleFilter} onClear={() => setActiveFilters({})} />
+          <SearchFilterToolbar searchQuery="" onSearchChange={() => {}} onClearSearch={() => {}} activeFilters={activeFilters} filterGroups={filterGroups.map(g => ({ key: g.key, label: g.label, options: g.options }))} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={vessels.length} filteredCount={filtered.length} />
           <Card style={{ marginTop: 16, overflow: "auto" }}><CardContent style={{ padding: 0 }}>
             <table className="pvt-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead><tr style={{ background: "#0891b210", borderBottom: "2px solid #0891b2" }}>{["ID", "Vessel", "Port", "Type", "Status", "TEU", "Cargo", "Wait", "Berth", "ETA", "ETD", "Operator"].map(h => <th key={h} style={{ padding: "10px 12px", textAlign: "left", fontWeight: 600, color: "#164e63", whiteSpace: "nowrap" }}>{h}</th>)}</tr></thead>

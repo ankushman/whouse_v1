@@ -382,3 +382,5 @@ export { default as FreightBookingCommandView } from './freight-booking-command-
 export { default as WarehouseShuttleOpsView } from './warehouse-shuttle-ops-view'
 export { default as TransportRateIntelligenceView } from './transport-rate-intelligence-view'
 export { default as VehicleInspectionComplianceView } from './vehicle-inspection-compliance-view'
+export { default as FastagTollIntelligenceView } from './fastag-toll-intelligence-view'
+export { default as WarehouseLabourWorkforceAnalyticsView } from './warehouse-labour-workforce-analytics-view'

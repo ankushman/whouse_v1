@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import {
   FileText, Clock,
   Building2, Shield, ShieldCheck, AlertTriangle,
-  Target, CheckCircle, Lock, Scale, RefreshCw
+  Target, CheckCircle, Lock, Scale, RefreshCw, IndianRupee
 } from "lucide-react"
 
 const raw = [

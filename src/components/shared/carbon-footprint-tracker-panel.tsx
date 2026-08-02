@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
   Leaf, Truck, TrendingDown, MapPin, Globe, Recycle, Wind, Cloud,
-  AlertTriangle, CheckCircle, XCircle, Route
+  AlertTriangle, CheckCircle, XCircle, Route, Target
 } from "lucide-react"
 
 const raw = [

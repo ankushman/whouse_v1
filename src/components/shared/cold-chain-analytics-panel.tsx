@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
   Snowflake, ThermometerSnowflake, AlertTriangle,
-  CheckCircle, XCircle, Target, Zap, MapPin, Package, Shield, FileText
+  CheckCircle, XCircle, Target, Zap, MapPin, Package, Shield, FileText, Thermometer
 } from "lucide-react"
 
 const raw = [

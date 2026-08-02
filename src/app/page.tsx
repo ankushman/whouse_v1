@@ -47,7 +47,7 @@ import { ContinualImprovementView } from "@/components/modules/continual-improve
 import { FixedAssetRegisterView } from "@/components/modules/fixed-asset-register-view"
 import { SupplierAuditView } from "@/components/modules/supplier-audit-view"
 import { ESGSustainabilityAuditView } from "@/components/modules/esg-sustainability-audit-view"
-import { ESGComplianceHubView } from "@/components/modules/esg-compliance-hub-view"
+import ESGComplianceHubView from "@/components/modules/esg-compliance-hub-view"
 import { CapacityPlanningView } from "@/components/modules/capacity-planning-view"
 import { WarehousePerformanceScorecardView } from "@/components/modules/warehouse-performance-scorecard-view"
 import { ThreeWayMatchDashboardView } from "@/components/modules/three-way-match-dashboard-view"
@@ -392,6 +392,8 @@ import FreightBookingCommandView from "@/components/modules/freight-booking-comm
 import WarehouseShuttleOpsView from "@/components/modules/warehouse-shuttle-ops-view"
 import TransportRateIntelligenceView from "@/components/modules/transport-rate-intelligence-view"
 import VehicleInspectionComplianceView from "@/components/modules/vehicle-inspection-compliance-view"
+import FastagTollIntelligenceView from "@/components/modules/fastag-toll-intelligence-view"
+import WarehouseLabourWorkforceAnalyticsView from "@/components/modules/warehouse-labour-workforce-analytics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -783,6 +785,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-shuttle-ops": WarehouseShuttleOpsView,
   "transport-rate-intelligence": TransportRateIntelligenceView,
   "vehicle-inspection-compliance": VehicleInspectionComplianceView,
+  "fastag-toll-intelligence": FastagTollIntelligenceView,
+  "warehouse-labour-workforce-analytics": WarehouseLabourWorkforceAnalyticsView,
 }
 
 

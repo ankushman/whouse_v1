@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
-  Users, Clock,
+  Users, Clock, UserCheck,
   AlertTriangle, TrendingUp, Target, Zap,
   Shield, ShieldCheck, HardHat, Award, Briefcase
 } from "lucide-react"

@@ -15,8 +15,13 @@ export type Role =
   | 'logistics'
   | 'shift_lead'
   | 'finance'
+  | 'operations_planner'
+  | 'fleet_manager'
+  | 'facilities'
+  | 'hr'
+  | 'quality'
 
-export type NavGroup = "operations" | "analytics" | "system"
+export type NavGroup = "operations" | "analytics" | "system" | "transport" | "warehouse" | "fleet" | "returns" | "sustainability"
 
 export interface NavItem {
   id: string

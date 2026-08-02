@@ -58592,3 +58592,41 @@ html.theme-transition body {
 .vic-insight { transition: box-shadow 0.2s; }
 .vic-insight:hover { box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12); }
 @keyframes vic-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== FTI (FASTag Toll Intelligence) ===== */
+.fti-root { padding: 0; }
+.fti-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.fti-kpi { padding: 16px 20px; }
+.fti-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.fti-chart { margin-bottom: 20px; }
+.fti-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.fti-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.fti-table thead th { background: #ea580c; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.fti-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.fti-table tbody tr:hover { background: #fff7ed; }
+.fti-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.fti-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.fti-tollbar { transition: width 0.3s ease; }
+.fti-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.fti-insight { transition: box-shadow 0.2s; }
+.fti-insight:hover { box-shadow: 0 4px 12px rgba(234, 88, 12, 0.12); }
+@keyframes fti-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== WLWA (Warehouse Labour Workforce Analytics) ===== */
+.wlwa-root { padding: 0; }
+.wlwa-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.wlwa-kpi { padding: 16px 20px; }
+.wlwa-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.wlwa-chart { margin-bottom: 20px; }
+.wlwa-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.wlwa-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wlwa-table thead th { background: #0d9488; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.wlwa-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.wlwa-table tbody tr:hover { background: #f0fdfa; }
+.wlwa-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.wlwa-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.wlwa-uphbar { transition: width 0.3s ease; }
+.wlwa-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.wlwa-insight { transition: box-shadow 0.2s; }
+.wlwa-insight:hover { box-shadow: 0 4px 12px rgba(13, 148, 136, 0.12); }
+@keyframes wlwa-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

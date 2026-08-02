@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
   Bot, Cpu, Wrench, Zap, AlertTriangle, Clock,
-  Activity, Target,
+  Activity, Target, CheckCircle,
   XCircle, Wifi, Thermometer
 } from "lucide-react"
 

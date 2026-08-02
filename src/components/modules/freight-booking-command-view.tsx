@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
-import PageHeader from "@/components/shared/page-header";
-import SearchFilterToolbar from "@/components/shared/search-filter-toolbar";
-import ModuleBreadcrumb from "@/components/shared/module-breadcrumb";
+import { PageHeader } from "@/components/shared/page-header";
+import { SearchFilterToolbar } from "@/components/shared/search-filter-toolbar";
+import { ModuleBreadcrumb } from "@/components/shared/module-breadcrumb";
 
 const COLORS = ["#4f46e5", "#6366f1", "#818cf8", "#a5b4fc", "#4338ca", "#3730a3", "#312e81", "#e0e7ff"];
 const CORRIDORS = ["Mumbai-Delhi NH8","Delhi-Chennai NH44","Bangalore-Hyderabad NH44","Kolkata-Mumbai NH6","Chennai-Kolkata NH16","Delhi-Kolkata NH19","Mumbai-Bangalore NH48","Pune-Hyderabad NH65"];
@@ -79,7 +79,12 @@ export default function FreightBookingCommandView() {
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
   const [search, setSearch] = useState("");
 
-  const filterGroups = [{ key: "corridor", label: "Corridor", options: CORRIDORS }, { key: "carrier", label: "Carrier", options: CARRIERS }, { key: "bookingType", label: "Type", options: BOOKING_TYPES }, { key: "status", label: "Status", options: STATUS }];
+  const filterGroups = [
+    { key: "corridor", label: "Corridor", options: CORRIDORS.map(c => ({ value: c, count: bookings.filter(b => b.corridor === c).length })) },
+    { key: "carrier", label: "Carrier", options: CARRIERS.map(c => ({ value: c, count: bookings.filter(b => b.carrier === c).length })) },
+    { key: "bookingType", label: "Type", options: BOOKING_TYPES.map(t => ({ value: t, count: bookings.filter(b => b.bookingType === t).length })) },
+    { key: "status", label: "Status", options: STATUS.map(s => ({ value: s, count: bookings.filter(b => b.status === s).length })) },
+  ];
 
   const toggleFilter = (k: string, v: string) => setActiveFilters(p => (function(){ const n={...p}; n[k]=(p[k]||[]).filter(x=>x!==v); if(n[k].length===0) delete n[k]; return n })());
 
@@ -99,7 +104,7 @@ export default function FreightBookingCommandView() {
     <div className="fbc-root p-6 space-y-6">
       <PageHeader
         title="Freight Booking Command"
-        subtitle="Manage spot rates, contract bookings, and carrier selection across major freight corridors"
+        description="Manage spot rates, contract bookings, and carrier selection across major freight corridors"
       />
       <div className="fbc-tabs flex gap-1 border-b border-gray-200">
         {TABS.map((t, i) => (
@@ -158,7 +163,7 @@ export default function FreightBookingCommandView() {
       {tab === 1 && (
         <div className="fbc-bookings space-y-4">
           <ModuleBreadcrumb items={[{ label: "Freight", href: "#" }, { label: "Bookings", href: "#" }]} />
-          <SearchFilterToolbar search={search} onSearchChange={setSearch} filters={activeFilters} onToggle={toggleFilter} groups={filterGroups} />
+          <SearchFilterToolbar searchQuery={search} onSearchChange={setSearch} onClearSearch={() => setSearch("")} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={bookings.length} filteredCount={filtered.length} />
           <div className="fbc-table-wrap overflow-x-auto bg-white rounded-lg border">
             <table className="w-full text-sm">
               <thead>

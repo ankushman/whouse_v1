@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import {
   Thermometer, Droplets, Radio, Wifi, WifiOff,
   Battery, Activity, AlertTriangle,
-  MapPin, Signal, Eye
+  MapPin, Signal, Eye, Users
 } from "lucide-react"
 
 const raw = [

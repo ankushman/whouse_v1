@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import {
   RotateCcw, TrendingDown, AlertTriangle, ShoppingCart,
   RefreshCw, CreditCard, Shield, FileText,
-  PackageCheck, PackageX, PackageOpen, ThumbsDown
+  PackageCheck, PackageX, PackageOpen, ThumbsDown, Clock
 } from "lucide-react"
 
 const raw = [
