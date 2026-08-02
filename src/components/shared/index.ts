@@ -74,3 +74,5 @@ export { LaborProductivityTrackerPanel } from './labor-productivity-tracker-pane
 export { ColdChainMonitoringPanel } from './cold-chain-monitoring-panel'
 export { ThreePLVendorScorecardPanel } from './three-pl-vendor-scorecard-panel'
 export { SlottingOptimizerPanel } from './slotting-optimizer-panel'
+export { DemandSensingAnalyticsPanel } from './demand-sensing-analytics-panel'
+export { WarehouseSimulationPanel } from './warehouse-simulation-panel'

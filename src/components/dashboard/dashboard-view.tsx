@@ -62,6 +62,8 @@ import { LaborProductivityTrackerPanel } from "@/components/shared/labor-product
 import { ColdChainMonitoringPanel } from "@/components/shared/cold-chain-monitoring-panel"
 import { ThreePLVendorScorecardPanel } from "@/components/shared/three-pl-vendor-scorecard-panel"
 import { SlottingOptimizerPanel } from "@/components/shared/slotting-optimizer-panel"
+import { DemandSensingAnalyticsPanel } from "@/components/shared/demand-sensing-analytics-panel"
+import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -719,6 +721,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <SlottingOptimizerPanel />
+          </CardContent>
+        </Card>
+
+        {/* Demand Sensing Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <DemandSensingAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Simulation */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseSimulationPanel />
           </CardContent>
         </Card>
       </div>
