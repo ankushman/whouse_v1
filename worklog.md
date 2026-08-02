@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R496 — Warehouse Safety Monitoring + Packaging Optimization
+Agent: Main Agent (Cron Loop)
+Task: R496 — Create warehouse safety monitoring panel with safety incident tracking, PPE compliance monitoring, hazard zone management, fire safety equipment tracking, near-miss/incident/chemical spill/vehicle incident/rack collapse/fire risk type classification, severity levels, safety audit scoring, emergency drill tracking, Indian Factory Act compliance, inspector management, worker exposure tracking, area temperature/humidity monitoring, and 10 Indian DC safety analytics. Plus packaging optimization panel with SKU-level packaging analysis, material type tracking (10 materials), void fill optimization, sustainability scoring, recyclability and recycled content tracking, damage rate monitoring, dimensional vs actual weight analysis, material cost optimization, annual volume forecasting, savings potential calculation, INR cost formatting, eco-score analytics, and 10 Indian DC packaging optimization.
+
+Work Log:
+- Read worklog.md: R495 (commit 62db07e) added ColdChainAnalyticsPanel + WarehouseDigitalTwinPanel (109 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: HardHat, ShieldCheck, Flame, Thermometer, Gauge, Eye, Heart, Scale all OK; Clock, Leaf, TrendingUp removed (unused)
+- Created `src/components/shared/warehouse-safety-monitoring-panel.tsx` (261 lines) — 10 safety areas across 9 incident types (Near Miss/PPE Violation/Slip-Fall/Equipment Malfunction/Ergonomic Risk/Rack Collapse Risk/Chemical Spill/Vehicle Incident/Fire Risk) with color badges, 4 severity levels (Low/Medium/High/Critical) with color badges, PPE compliance 72-98%, hazard levels 1-5 with dot indicators, audit scores 42-94/100, fire extinguishers 3-10, exits 2-5, emergency drills 1-6, 10 Indian DCs, 7 safety inspectors, 10 cities, temperature 32-38°C, humidity 30-82%, workers 15-45/area, 5 statuses (Compliant/Under Review/Non-Compliant/Critical/Shutdown), 3 views (Areas with type+severity+PPE+audit+incidents+workers, Compliance with sorted audit score bars+drills+extinguishers+exits, Hazards with sorted hazard level dots+incidents+workers+inspectors). Shutdown (WSM-09 Jaipur Returns Processing, audit 42, 7 incidents, fire risk) pulse red, Critical (WSM-04 Chennai Conveyor Belt audit 62, WSM-06 Hyderabad Rack Zone audit 58, WSM-07 Kolkata Chemical Store audit 55) pulse red, Non-Compliant/Under Review amber border. CSS prefix: wsm-*
+- Created `src/components/shared/packaging-optimization-panel.tsx` (272 lines) — 10 SKUs across 9 categories (Electronics/Fashion/Dairy/Beauty/Furniture/FMCG/Appliances/Footwear/Pharma) with color badges, 10 materials (Corrugated Box/Poly Mailer/EPS Foam+Box/Double Wall Box/Rigid Box+Insert/Flat Pack Box/Shrink Wrap+Box/Molded Pulp Tray/Shoe Box/Glass Jar+Foam) with color badges, void fill 8-55%, sustainability scores 22-82/100, recyclability true/false, recycled content 0-70%, damage rate 0.1-2.1%, dimension weight vs actual weight comparison, material cost INR 12-185/unit, annual volume 45K-890K units, savings potential 0-25%, INR formatting (₹Cr/₹L/₹K), 5 statuses (Optimized/Overpackaged/At Risk/Needs Review/Critical), 10 Indian DCs, 3 views (Packages with material+size+weight+void%+eco+savings, Sustainability with sorted eco-score bars+recyclable+recycled+volume, Cost with sorted annual cost+savings bars+void+volume). Critical (PKO-10 Dabur Chyawanprash, glass jar+foam, void 55%, non-recyclable, eco 22/100) pulse red, Overpackaged (PKO-02 Levi's Poly Mailer void 45%, PKO-05 Nykaa Rigid Box void 52%) and At Risk (PKO-03 Amul EPS Foam void 28%) amber border. CSS prefix: pko-*
+- Cleaned unused imports: Clock from WSM (statCard references verified: ShieldCheck, Flame, AlertTriangle, Eye); Leaf, TrendingUp from PKO (statCard references verified: Box, CheckCircle, Target, Zap)
+- Registered both in shared/index.ts (106 exports) and dashboard-view.tsx (985→1000 lines)
+- CSS appended to globals.css (57,340→57,402 lines, +62 CSS for wsm-* and pko-*)
+- TSC: 0 errors | Git pushed: commit 4875458
+
+Stage Summary:
+- 109 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 1000 lines | globals.css: 57,402 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Container tracking analytics, last mile optimization, logistics cost intelligence, or reverse logistics hub ***
+---
 Task ID: R495 — Cold Chain Analytics + Warehouse Digital Twin
 Agent: Main Agent (Cron Loop)
 Task: R495 — Create cold chain analytics panel with cold room temperature monitoring, FSSAI/WHO-GMP compliance tracking, spoilage risk scoring, temperature excursion detection, shelf life prediction, energy consumption analytics, occupancy management, product loss prevention, and Indian cold chain logistics optimization. Plus warehouse digital twin panel with virtual warehouse mirroring, real-time sync status, model accuracy tracking, simulation engine (what-if scenarios), bottleneck detection, capacity utilization, throughput forecasting, zone/floor/slot management, and multi-DC digital twin coordination for Indian warehouse operations.
