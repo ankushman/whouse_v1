@@ -58010,3 +58010,35 @@ html.theme-transition body {
 .sps-fin-card { transition: all 0.2s; }
 .sps-fin-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes sps-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Warehouse Automation Metrics — wam-* */
+.wam-filter-pill { transition: all 0.15s; }
+.wam-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.wam-card-grid { max-height: 420px; overflow-y: auto; }
+.wam-item-card { transition: all 0.2s; }
+.wam-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.wam-critical { border-left: 4px solid #dc2626; animation: wam-pulse 2s infinite; }
+.wam-warning { border-left: 4px solid #f59e0b; }
+.wam-alert-text { color: #dc2626; font-weight: 600; }
+.wam-uptime-bar { background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 9999px; }
+.wam-perf-card { transition: all 0.2s; }
+.wam-perf-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wam-maint-card { transition: all 0.2s; }
+.wam-maint-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes wam-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Billing Invoice Analytics — bia-* */
+.bia-filter-pill { transition: all 0.15s; }
+.bia-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.bia-card-grid { max-height: 420px; overflow-y: auto; }
+.bia-item-card { transition: all 0.2s; }
+.bia-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.bia-critical { border-left: 4px solid #dc2626; animation: bia-pulse 2s infinite; }
+.bia-warning { border-left: 4px solid #f59e0b; }
+.bia-alert-text { color: #dc2626; font-weight: 600; }
+.bia-aging-bar { background: linear-gradient(90deg, #f59e0b, #ef4444); border-radius: 9999px; }
+.bia-aging-card { transition: all 0.2s; }
+.bia-aging-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.bia-coll-card { transition: all 0.2s; }
+.bia-coll-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes bia-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

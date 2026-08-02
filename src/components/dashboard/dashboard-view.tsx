@@ -80,6 +80,8 @@ import { TransportAnalyticsPanel } from "@/components/shared/transport-analytics
 import { FleetManagementPanel } from "@/components/shared/fleet-management-panel"
 import { LabourSchedulingPanel } from "@/components/shared/labour-scheduling-panel"
 import { SupplierPerformanceScorecard } from "@/components/shared/supplier-performance-scorecard"
+import { WarehouseAutomationMetricsPanel } from "@/components/shared/warehouse-automation-metrics-panel"
+import { BillingInvoiceAnalyticsPanel } from "@/components/shared/billing-invoice-analytics-panel"
 import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
 import { InventoryReplenishmentPanel } from "@/components/shared/inventory-replenishment-panel"
 import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
@@ -140,6 +142,8 @@ import { TransportAnalyticsPanel } from "@/components/shared/transport-analytics
 import { FleetManagementPanel } from "@/components/shared/fleet-management-panel"
 import { LabourSchedulingPanel } from "@/components/shared/labour-scheduling-panel"
 import { SupplierPerformanceScorecard } from "@/components/shared/supplier-performance-scorecard"
+import { WarehouseAutomationMetricsPanel } from "@/components/shared/warehouse-automation-metrics-panel"
+import { BillingInvoiceAnalyticsPanel } from "@/components/shared/billing-invoice-analytics-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -812,6 +816,20 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
+        {/* Warehouse Automation Metrics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseAutomationMetricsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Billing Invoice Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <BillingInvoiceAnalyticsPanel />
+          </CardContent>
+        </Card>
+
         {/* 3PL Vendor Scorecard */}
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
@@ -940,6 +958,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <SupplierPerformanceScorecard />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Automation Metrics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseAutomationMetricsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Billing Invoice Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <BillingInvoiceAnalyticsPanel />
           </CardContent>
         </Card>
 
@@ -1338,6 +1370,16 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <SupplierPerformanceScorecard />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseAutomationMetricsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <BillingInvoiceAnalyticsPanel />
           </CardContent>
         </Card>
       </div>
