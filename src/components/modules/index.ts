@@ -410,3 +410,5 @@ export { default as RiverWaterwayLogisticsView } from './river-waterway-logistic
 export { default as ExpressParcelLogisticsView } from './express-parcel-logistics-view'
 export { default as MetroRailLogisticsView } from './metro-rail-logistics-view'
 export { default as QuickCommerceLogisticsView } from './quick-commerce-logistics-view'
+export { default as LpgDistributionLogisticsView } from './lpg-distribution-logistics-view'
+export { default as EWasteRecyclingLogisticsView } from './e-waste-recycling-logistics-view'

@@ -420,6 +420,8 @@ import RiverWaterwayLogisticsView from "@/components/modules/river-waterway-logi
 import ExpressParcelLogisticsView from "@/components/modules/express-parcel-logistics-view"
 import MetroRailLogisticsView from "@/components/modules/metro-rail-logistics-view"
 import QuickCommerceLogisticsView from "@/components/modules/quick-commerce-logistics-view"
+import LpgDistributionLogisticsView from "@/components/modules/lpg-distribution-logistics-view"
+import EWasteRecyclingLogisticsView from "@/components/modules/e-waste-recycling-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -839,6 +841,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "express-parcel-logistics": ExpressParcelLogisticsView,
   "metro-rail-logistics": MetroRailLogisticsView,
   "quick-commerce-logistics": QuickCommerceLogisticsView,
+  "lpg-distribution-logistics": LpgDistributionLogisticsView,
+  "e-waste-recycling-logistics": EWasteRecyclingLogisticsView,
 }
 
 
