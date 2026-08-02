@@ -1,4 +1,85 @@
 ---
+Task ID: R295 — Defence Ordnance Logistics + Cold Chain Pharma Logistics
+Agent: Main Agent (Cron Loop)
+Task: R295 — 2 new Indian logistics modules for defence ordnance supply chain (OFB AVNL BEL BDL MIDHANI, 155mm Bofors Kalyani artillery, BrahMos Akash Astra Pralay Agni missile systems, INSAS AK-203 small arms, demolition explosives, armoured T-90 Arjun spares, armed escort convoy, DQA quality inspection, TOP SECRET security classification) and cold chain pharma logistics (Serum Institute vaccines, Biocon biologics mAb, Dr Reddys insulin, Bharat Biotech Covaxin, 2-8C GDP compliance, WHO pre-qualified, reefer trucks passive cold boxes IoT temp monitoring, blood bank frozen plasma organ transport)
+
+Work Log:
+- Read worklog.md: R294 complete (commit 512269b), 422 modules, 428 navItems, 59,532 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/
+- Duplicate check: 0 duplicate navItem IDs, 0 duplicate imports, 0 duplicate exports
+- agent-browser QA skipped (dev server OOM, known infra issue — TSC used as QA gate)
+
+- Created Defence Ordnance Logistics module (R295a):
+  * FILE: src/components/modules/defence-ordnance-logistics-view.tsx (~200 lines)
+  * 4 tabs: Dashboard | Shipment Registry | Defence Analytics | Insights
+  * Theme: Dark Red #4a1d1d, CSS prefix: dol-*
+  * Tab 0: 4 KPIs (In Transit, Loading/DQA, Delivered/Cleared, Total Shipment Value), BarChart monthly ordnance (Artillery/Small Arms/Missile/Vehicle), PieChart category distribution (8 types), LineChart readiness vs 95% target, BarChart command performance
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/category/zone/mode) + ModuleBreadcrumb, 14 shipment records with Consignment No badge (red), arsenal, zone, category, description, weight (T/kg), origin, destination, unit command, mode, ship/ETA dates, transit days, value (₹L/₹Cr), security class (TOP SEC/RESTR/PROT), status (6 states), remarks
+  * Tab 2: BarChart volume by command, stacked AreaChart by category corridor (Artillery/Small Arms/Missile), BarChart avg transit days by transport mode
+  * Tab 3: 4 insights (₹80K crore OFB-BEL-BDL ecosystem 41 factories, 155mm Bofors Kalyani Pinaka Smerch ammo supply chain, security escort DQA ammunition storage regulations, missile BrahMos Akash Astra Pralay Agni warhead logistics)
+  * 8 arsenals, 8 categories, 6 shipment statuses, 6 transport modes, 6 zones, 14 records
+  * Critical rows (Armed Escort Transit): red bg; Warning (DQA/Loading Dock): amber bg; Info (Convoy Moving): blue bg
+
+- Created Cold Chain Pharma Logistics module (R295b):
+  * FILE: src/components/modules/cold-chain-pharma-logistics-view.tsx (~200 lines)
+  * 4 tabs: Dashboard | Shipment Registry | Pharma Analytics | Insights
+  * Theme: Emerald #065f46, CSS prefix: ccl-*
+  * Tab 0: 4 KPIs (In Transit, Hub/Alert, Delivered, Total Cold Chain Value), BarChart monthly cold chain (Vaccine/Insulin/Biologic/Plasma), PieChart category distribution (8 types), LineChart compliance vs 99% target, BarChart facility performance
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/category/zone/mode) + ModuleBreadcrumb, 14 shipment records with Batch No badge (emerald), facility, zone, category, description, weight (T/kg), shipper, consignee, mode, origin, destination, ship/ETA dates, transit days, value (₹L/₹Cr), temp range (2-8C/15-25C/-20C), status (6 states), remarks
+  * Tab 2: BarChart volume by zone, stacked AreaChart by category corridor (Vaccine/Insulin/Biologic), BarChart avg transit days by transport mode
+  * Tab 3: 4 insights (₹35K crore market 2-8C GDP WHO pre-qualified, reefer trucks cold boxes IoT loggers GDP compliance, vaccine cold chain EPI Indradhanush COVID-19 UIP logistics, pharma export blood bank temperature logistics growth)
+  * 8 facilities, 8 categories, 6 shipment statuses, 6 transport modes, 6 zones, 14 records
+  * Critical rows (Temp Excursion Alert): red bg; Warning (Customs Bio-Security): amber bg; Info (Reefer Moving/Hub Transfer): blue bg
+
+- Fixed TSC error: import path typo @/components/module-breadcrumb -> @/components/shared/module-breadcrumb
+
+- Registered both modules in 3 files:
+  * src/components/modules/index.ts: +DefenceOrdnanceLogisticsView +ColdChainPharmaLogisticsView (427->429 exports)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (defence-ordnance-logistics: icon ShieldAlert group operations, cold-chain-pharma-logistics: icon Snowflake group operations)
+
+- CSS additions: 41 lines (dol-* dark red + ccl-* emerald classes with row highlighting, hover effects, keyframe animations)
+
+- TSC FINAL: 0 errors in src/
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports (8 entries = 2 modules x 4 files)
+- Git: commit eee6ae3 pushed to origin/main
+
+Stage Summary:
+- NEW MODULE: Defence Ordnance Logistics (~200 lines, 8 visual components, 14 shipment records, 4 tabs)
+- NEW MODULE: Cold Chain Pharma Logistics (~200 lines, 8 visual components, 14 shipment records, 4 tabs)
+- Total module files: 424 (was 422, +2)
+- Total navItems: 430 (was 428, +2)
+- CSS: 59,581 lines (+41 from R295)
+- Total data: 28 records across both modules
+- ZERO src/ TSC errors
+- ZERO duplicate entries
+- GITHUB: Pushed to origin/main (eee6ae3)
+
+## Updated Project Status (Post Round 295)
+- STATUS: STABLE — ALL modules compile, 0 TSC errors, 0 duplicates
+- MODULE FILES: 424 | NAVITEMS: 430
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: 59,581 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate entries (monitor each round)
+- Many older modules still use default imports for shared components (works due to added default exports, but should migrate to named imports)
+- SearchFilterToolbar not integrated into all table-based modules
+- JSX escaping gotcha: &gt;= does NOT work inside template literals within JSX expressions — must use >=
+- Variable shadowing gotcha: map(r => ... records.filter(r => ...)) — inner r shadows outer, rename inner vars
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (suggestions: Metro Rail Operations, Telecom Tower Logistics, Port Terminal Operations, Solar Panel Recycling Logistics, Pipeline Integrity Logistics, e-Commerce Fulfillment, Oversize ODC Transport)
+2. Migrate remaining modules from default to named imports for shared components
+3. Cross-module drill-down navigation (click value -> navigate to related module)
+4. Real-time WebSocket events for live updates
+5. Mobile experience enhancements with sheet drawers
+6. Dashboard home page widgets enhancement
+7. Always verify no duplicate entries from concurrent cron jobs before adding new ones
 Task ID: R294 — Railway Freight Logistics + Aerospace Parts Logistics
 Agent: Main Agent (Cron Loop)
 Task: R294 — 2 new Indian logistics modules for railway freight supply chain (CONCOR ICD, FCI food grain rakes 58-wagon, coal iron ore BOXN wagon, WAG-12 12,000HP locomotive, DFCCIL Western/Eastern Dedicated Freight Corridor, automobile BCACBM flat wagon, POL tank wagon) and aerospace parts supply chain (HAL LCA Tejas Dhruv, DRDO AMCA, ISRO GSLV Vikas CE-20 engines, GE CFM56 LEAP turbofan MRO, Boeing Airbus landing gear, AESA radar LRU, AOG emergency logistics, DGCA certification)
