@@ -57338,3 +57338,65 @@ html.theme-transition body {
 .wdt-cap-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .wdt-cap-row { transition: all 0.2s; }
 .wdt-cap-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* ===== WSM: Warehouse Safety Monitoring ===== */
+.wsm-stat-card { transition: all 0.2s; }
+.wsm-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wsm-filter-pill { transition: all 0.15s ease; }
+.wsm-filter-pill:hover { transform: translateY(-1px); }
+.wsm-filter-clear { transition: all 0.15s; }
+.wsm-insights-row > div { transition: all 0.2s; }
+.wsm-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wsm-alerts-list { animation: wsm-fadeIn 0.3s ease; }
+@keyframes wsm-fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.wsm-area-card { transition: all 0.2s; }
+.wsm-area-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wsm-critical-pulse { border-left: 3px solid #ef4444; animation: wsm-pulse 2s infinite; }
+@keyframes wsm-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.15); } 50% { box-shadow: 0 0 0 4px rgba(239,68,68,0); } }
+.wsm-warning-border { border-left: 3px solid #f59e0b; }
+.wsm-id-badge { font-variant-numeric: tabular-nums; }
+.wsm-type-tag { font-weight: 500; }
+.wsm-sev-tag { font-weight: 500; }
+
+/* WSM: compliance view */
+.wsm-comp-header { transition: all 0.2s; }
+.wsm-comp-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wsm-comp-row { transition: all 0.2s; }
+.wsm-comp-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* WSM: hazards view */
+.wsm-haz-header { transition: all 0.2s; }
+.wsm-haz-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wsm-haz-row { transition: all 0.2s; }
+.wsm-haz-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* ===== PKO: Packaging Optimization ===== */
+.pko-stat-card { transition: all 0.2s; }
+.pko-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.pko-filter-pill { transition: all 0.15s ease; }
+.pko-filter-pill:hover { transform: translateY(-1px); }
+.pko-filter-clear { transition: all 0.15s; }
+.pko-insights-row > div { transition: all 0.2s; }
+.pko-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.pko-alerts-list { animation: pko-fadeIn 0.3s ease; }
+@keyframes pko-fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.pko-pkg-card { transition: all 0.2s; }
+.pko-pkg-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.pko-critical-pulse { border-left: 3px solid #ef4444; animation: pko-pulse 2s infinite; }
+@keyframes pko-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.15); } 50% { box-shadow: 0 0 0 4px rgba(239,68,68,0); } }
+.pko-warning-border { border-left: 3px solid #f59e0b; }
+.pko-id-badge { font-variant-numeric: tabular-nums; }
+.pko-cat-tag { font-weight: 500; }
+.pko-mat-tag { font-weight: 500; }
+
+/* PKO: sustainability view */
+.pko-eco-header { transition: all 0.2s; }
+.pko-eco-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.pko-eco-row { transition: all 0.2s; }
+.pko-eco-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* PKO: cost view */
+.pko-cost-header { transition: all 0.2s; }
+.pko-cost-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.pko-cost-row { transition: all 0.2s; }
+.pko-cost-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }

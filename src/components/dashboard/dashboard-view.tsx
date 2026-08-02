@@ -94,6 +94,8 @@ import { CarbonFootprintTrackerPanel } from "@/components/shared/carbon-footprin
 import { SmartDockSchedulerPanel } from "@/components/shared/smart-dock-scheduler-panel"
 import { ColdChainAnalyticsPanel } from "@/components/shared/cold-chain-analytics-panel"
 import { WarehouseDigitalTwinPanel } from "@/components/shared/warehouse-digital-twin-panel"
+import { WarehouseSafetyMonitoringPanel } from "@/components/shared/warehouse-safety-monitoring-panel"
+import { PackagingOptimizationPanel } from "@/components/shared/packaging-optimization-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -975,6 +977,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <WarehouseDigitalTwinPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Safety Monitoring */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseSafetyMonitoringPanel />
+          </CardContent>
+        </Card>
+
+        {/* Packaging Optimization */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <PackagingOptimizationPanel />
           </CardContent>
         </Card>
       </div>
