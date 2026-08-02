@@ -59787,3 +59787,39 @@ html.theme-transition body {
 .hsr-insight { border-left: 4px solid var(--accent); }
 .hsr-insight h3 { color: var(--accent); }
 @keyframes hsr-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ===== Data Center Cooling Logistics (R301a) — Deep Sky #0c4a6e ===== */
+.dcc-root { --accent: #0c4a6e; --accent-light: #f0f9ff; }
+.dcc-tabs { border-bottom-color: var(--accent); }
+.dcc-tab { transition: all 0.2s; }
+.dcc-tab:hover { background: var(--accent-light); }
+.dcc-kpi { border-left: 3px solid var(--accent); }
+.dcc-kpi-val { color: var(--accent); }
+.dcc-chart { border-top: 3px solid var(--accent); }
+.dcc-badge { letter-spacing: 0.02em; }
+.dcc-table-wrap { border-color: #bae6fd; }
+.dcc-table-wrap th { background: #f0f9ff; color: var(--accent); }
+.dcc-row-critical { animation: dcc-pulse 2s infinite; }
+.dcc-row-warning { border-left-color: #f59e0b; }
+.dcc-row-info { border-left-color: #3b82f6; }
+.dcc-insight { border-left: 4px solid var(--accent); }
+.dcc-insight h3 { color: var(--accent); }
+@keyframes dcc-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ===== Space Launch Logistics (R301b) — Deep Orange #431407 ===== */
+.spl-root { --accent: #431407; --accent-light: #fff7ed; }
+.spl-tabs { border-bottom-color: var(--accent); }
+.spl-tab { transition: all 0.2s; }
+.spl-tab:hover { background: var(--accent-light); }
+.spl-kpi { border-left: 3px solid var(--accent); }
+.spl-kpi-val { color: var(--accent); }
+.spl-chart { border-top: 3px solid var(--accent); }
+.spl-badge { letter-spacing: 0.02em; }
+.spl-table-wrap { border-color: #fed7aa; }
+.spl-table-wrap th { background: #fff7ed; color: var(--accent); }
+.spl-row-critical { animation: spl-pulse 2s infinite; }
+.spl-row-warning { border-left-color: #f59e0b; }
+.spl-row-info { border-left-color: #3b82f6; }
+.spl-insight { border-left: 4px solid var(--accent); }
+.spl-insight h3 { color: var(--accent); }
+@keyframes spl-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }

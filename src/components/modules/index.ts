@@ -436,3 +436,5 @@ export { default as PortTerminalOperationsLogisticsView } from './port-terminal-
 export { default as EvBatteryRecyclingLogisticsView } from './ev-battery-recycling-logistics-view'
 export { default as InlandWaterwaysLogisticsView } from './inland-waterways-logistics-view'
 export { default as HsrLogisticsView } from './hsr-logistics-view'
+export { default as DataCenterCoolingLogisticsView } from './data-center-cooling-logistics-view'
+export { default as SpaceLaunchLogisticsView } from './space-launch-logistics-view'

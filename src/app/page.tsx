@@ -446,6 +446,8 @@ import PortTerminalOperationsLogisticsView from "@/components/modules/port-termi
 import EvBatteryRecyclingLogisticsView from "@/components/modules/ev-battery-recycling-logistics-view"
 import InlandWaterwaysLogisticsView from "@/components/modules/inland-waterways-logistics-view"
 import HsrLogisticsView from "@/components/modules/hsr-logistics-view"
+import DataCenterCoolingLogisticsView from "@/components/modules/data-center-cooling-logistics-view"
+import SpaceLaunchLogisticsView from "@/components/modules/space-launch-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -891,6 +893,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "ev-battery-recycling-logistics": EvBatteryRecyclingLogisticsView,
   "inland-waterways-logistics": InlandWaterwaysLogisticsView,
   "hsr-logistics": HsrLogisticsView,
+  "data-center-cooling-logistics": DataCenterCoolingLogisticsView,
+  "space-launch-logistics": SpaceLaunchLogisticsView,
 }
 
 
