@@ -57030,3 +57030,49 @@ html.theme-transition body {
 .wso-ergo-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes wso-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
 @keyframes wso-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === 3PL Contract Management Panel (pcm-*) === */
+.pcm-stat-card { transition: all 0.2s; }
+.pcm-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.pcm-filter-pill { transition: all 0.15s; border: 1px solid transparent; }
+.pcm-filter-pill:hover { border-color: hsl(var(--primary) / 0.3); }
+.pcm-filter-clear { transition: all 0.15s; }
+.pcm-insights-row > div { transition: all 0.2s; }
+.pcm-insights-row > div:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.pcm-contract-card { transition: all 0.2s; }
+.pcm-contract-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.pcm-critical-pulse { animation: pcm-pulse 2s ease-in-out infinite; }
+.pcm-draft-border { border-left: 3px dashed hsl(var(--muted-foreground) / 0.3); }
+.pcm-id-badge { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+.pcm-type-tag { font-weight: 600; letter-spacing: 0.02em; }
+.pcm-alert-dot { animation: pcm-dot-pulse 1.5s ease-in-out infinite; }
+.pcm-alerts-list { backdrop-filter: blur(8px); }
+.pcm-perf-row { transition: all 0.2s; }
+.pcm-perf-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.pcm-compliance-row { transition: all 0.2s; }
+.pcm-compliance-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes pcm-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+@keyframes pcm-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === Labor Management Panel (lmn-*) === */
+.lmn-stat-card { transition: all 0.2s; }
+.lmn-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.lmn-filter-pill { transition: all 0.15s; border: 1px solid transparent; }
+.lmn-filter-pill:hover { border-color: hsl(var(--primary) / 0.3); }
+.lmn-filter-clear { transition: all 0.15s; }
+.lmn-insights-row > div { transition: all 0.2s; }
+.lmn-insights-row > div:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.lmn-worker-card { transition: all 0.2s; }
+.lmn-worker-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.lmn-critical-pulse { animation: lmn-pulse 2s ease-in-out infinite; }
+.lmn-warning-border { border-left: 3px solid hsl(var(--amber-500)); }
+.lmn-id-badge { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+.lmn-shift-tag { font-weight: 600; letter-spacing: 0.02em; }
+.lmn-alert-dot { animation: lmn-dot-pulse 1.5s ease-in-out infinite; }
+.lmn-alerts-list { backdrop-filter: blur(8px); }
+.lmn-perf-row { transition: all 0.2s; }
+.lmn-perf-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.lmn-safety-row { transition: all 0.2s; }
+.lmn-safety-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes lmn-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+@keyframes lmn-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }

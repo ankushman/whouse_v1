@@ -84,6 +84,8 @@ import { WarehouseNetworkOptimizationPanel } from "@/components/shared/warehouse
 import { CrossBorderTradePanel } from "@/components/shared/cross-border-trade-panel"
 import { DemandForecastingPanel } from "@/components/shared/demand-forecasting-panel"
 import { WarehouseSlottingOptimizerPanel } from "@/components/shared/warehouse-slotting-optimizer-panel"
+import { ThreePLContractManagementPanel } from "@/components/shared/three-pl-contract-management-panel"
+import { LaborManagementPanel } from "@/components/shared/labor-management-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -895,6 +897,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <WarehouseSlottingOptimizerPanel />
+          </CardContent>
+        </Card>
+
+        {/* 3PL Contract Management */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ThreePLContractManagementPanel />
+          </CardContent>
+        </Card>
+
+        {/* Labor Management */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <LaborManagementPanel />
           </CardContent>
         </Card>
       </div>

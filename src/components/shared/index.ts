@@ -96,3 +96,5 @@ export { WarehouseNetworkOptimizationPanel } from './warehouse-network-optimizat
 export { CrossBorderTradePanel } from './cross-border-trade-panel'
 export { DemandForecastingPanel } from './demand-forecasting-panel'
 export { WarehouseSlottingOptimizerPanel } from './warehouse-slotting-optimizer-panel'
+export { ThreePLContractManagementPanel } from './three-pl-contract-management-panel'
+export { LaborManagementPanel } from './labor-management-panel'
