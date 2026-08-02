@@ -59453,3 +59453,39 @@ html.theme-transition body {
 .ptf-insight { transition: all 0.25s ease; border-left: 3px solid #7dd3fc; }
 .ptf-insight:hover { box-shadow: 0 6px 20px rgba(3, 105, 161, 0.12); transform: translateY(-2px); }
 @keyframes ptf-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* Mining Equipment Logistics (mel-*) - Yellow #78350f */
+.mel-root { animation: mel-fade 0.4s ease-out; }
+.mel-tabs { position: relative; }
+.mel-tab { transition: all 0.15s ease; }
+.mel-tab:hover { box-shadow: 0 -2px 0 #78350f inset; }
+.mel-kpi { transition: all 0.25s ease; border-left: 3px solid #78350f; }
+.mel-kpi:hover { box-shadow: 0 4px 12px rgba(120, 53, 15, 0.1); transform: translateY(-1px); }
+.mel-chart { transition: box-shadow 0.2s ease; }
+.mel-chart:hover { box-shadow: 0 2px 8px rgba(120, 53, 15, 0.08); }
+.mel-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.mel-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.mel-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.mel-row-warning { border-left: 3px solid #d97706 !important; }
+.mel-row-info { border-left: 3px solid #2563eb !important; }
+.mel-insight { transition: all 0.25s ease; border-left: 3px solid #fef08a; }
+.mel-insight:hover { box-shadow: 0 6px 20px rgba(120, 53, 15, 0.12); transform: translateY(-2px); }
+@keyframes mel-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* Inland Waterway Logistics (iwl-*) - Blue #1e3a5f */
+.iwl-root { animation: iwl-fade 0.4s ease-out; }
+.iwl-tabs { position: relative; }
+.iwl-tab { transition: all 0.15s ease; }
+.iwl-tab:hover { box-shadow: 0 -2px 0 #1e3a5f inset; }
+.iwl-kpi { transition: all 0.25s ease; border-left: 3px solid #1e3a5f; }
+.iwl-kpi:hover { box-shadow: 0 4px 12px rgba(30, 58, 95, 0.1); transform: translateY(-1px); }
+.iwl-chart { transition: box-shadow 0.2s ease; }
+.iwl-chart:hover { box-shadow: 0 2px 8px rgba(30, 58, 95, 0.08); }
+.iwl-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.iwl-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.iwl-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.iwl-row-warning { border-left: 3px solid #d97706 !important; }
+.iwl-row-info { border-left: 3px solid #2563eb !important; }
+.iwl-insight { transition: all 0.25s ease; border-left: 3px solid #93c5fd; }
+.iwl-insight:hover { box-shadow: 0 6px 20px rgba(30, 58, 95, 0.12); transform: translateY(-2px); }
+@keyframes iwl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }

@@ -420,3 +420,5 @@ export { default as NewsprintPublishingLogisticsView } from './newsprint-publish
 export { default as SteelScrapRecyclingLogisticsView } from './steel-scrap-recycling-logistics-view'
 export { default as CourierExpressLogisticsView } from './courier-express-logistics-view'
 export { default as PetroleumTankFarmLogisticsView } from './petroleum-tank-farm-logistics-view'
+export { default as MiningEquipmentLogisticsView } from './mining-equipment-logistics-view'
+export { default as InlandWaterwayLogisticsView } from './inland-waterway-logistics-view'

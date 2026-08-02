@@ -430,6 +430,8 @@ import NewsprintPublishingLogisticsView from "@/components/modules/newsprint-pub
 import SteelScrapRecyclingLogisticsView from "@/components/modules/steel-scrap-recycling-logistics-view"
 import CourierExpressLogisticsView from "@/components/modules/courier-express-logistics-view"
 import PetroleumTankFarmLogisticsView from "@/components/modules/petroleum-tank-farm-logistics-view"
+import MiningEquipmentLogisticsView from "@/components/modules/mining-equipment-logistics-view"
+import InlandWaterwayLogisticsView from "@/components/modules/inland-waterway-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -859,6 +861,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "steel-scrap-recycling-logistics": SteelScrapRecyclingLogisticsView,
   "courier-express-logistics": CourierExpressLogisticsView,
   "petroleum-tank-farm-logistics": PetroleumTankFarmLogisticsView,
+  "mining-equipment-logistics": MiningEquipmentLogisticsView,
+  "inland-waterway-logistics": InlandWaterwayLogisticsView,
 }
 
 
