@@ -58141,3 +58141,36 @@ html.theme-transition body {
 .wcp-util-bar { background: linear-gradient(90deg, #f59e0b, #ef4444); transition: width 0.3s; }
 .wcp-res-bar { background: linear-gradient(90deg, #3b82f6, #6366f1); transition: width 0.3s; }
 @keyframes wcp-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Sustainability Tracking (sus-*) */
+.sus-filter-pill { transition: all 0.15s; cursor: pointer; }
+.sus-filter-pill:hover { border-color: hsl(var(--primary)); }
+.sus-item-card { transition: all 0.2s; }
+.sus-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sus-critical { background: linear-gradient(135deg, #fef2f2, #fff); border-color: #fca5a5; animation: sus-pulse 2s infinite; }
+.sus-warning { background: linear-gradient(135deg, #fffbeb, #fff); border-left: 3px solid #f59e0b; }
+.sus-alert-text { color: #dc2626; font-weight: 500; padding: 4px 8px; background: #fef2f2; border-radius: 4px; }
+.sus-energy-card { transition: all 0.2s; }
+.sus-energy-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sus-waste-card { transition: all 0.2s; }
+.sus-waste-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sus-solar-bar { background: linear-gradient(90deg, #f59e0b, #22c55e); transition: width 0.3s; }
+.sus-recycle-bar { background: linear-gradient(90deg, #06b6d4, #22c55e); transition: width 0.3s; }
+@keyframes sus-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Dock Analytics Deep Dive (dad-*) */
+.dad-filter-pill { transition: all 0.15s; cursor: pointer; }
+.dad-filter-pill:hover { border-color: hsl(var(--primary)); }
+.dad-item-card { transition: all 0.2s; }
+.dad-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dad-critical { background: linear-gradient(135deg, #fef2f2, #fff); border-color: #fca5a5; animation: dad-pulse 2s infinite; }
+.dad-warning { background: linear-gradient(135deg, #fffbeb, #fff); border-left: 3px solid #f59e0b; }
+.dad-alert-text { color: #dc2626; font-weight: 500; padding: 4px 8px; background: #fef2f2; border-radius: 4px; }
+.dad-turn-card { transition: all 0.2s; }
+.dad-turn-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dad-util-card { transition: all 0.2s; }
+.dad-util-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dad-turn-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.dad-turn-over { background: linear-gradient(90deg, #f59e0b, #ef4444) !important; }
+.dad-util-bar { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s; }
+@keyframes dad-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

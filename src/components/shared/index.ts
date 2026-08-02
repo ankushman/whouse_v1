@@ -143,3 +143,5 @@ export { WarehouseNetworkAnalyticsPanel } from './warehouse-network-analytics-pa
 export { CustomerExperiencePanel } from './customer-experience-panel'
 export { CarrierPerformanceDeepDivePanel } from './carrier-performance-deep-dive-panel'
 export { WarehouseCapacityPlanningPanel } from './warehouse-capacity-planning-panel'
+export { SustainabilityTrackingPanel } from './sustainability-tracking-panel'
+export { DockAnalyticsDeepDivePanel } from './dock-analytics-deep-dive-panel'
