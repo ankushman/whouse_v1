@@ -1,6 +1,29 @@
 ---
 ---
 ---
+Task ID: R483 — Container Unloading + Cargo Insurance
+Agent: Main Agent (Cron Loop)
+Task: R483 — Create container unloading operations panel with vessel tracking, hazmat handling, crane assignment, team performance, damage reporting, and progress monitoring for Indian seaport DCs. Plus cargo insurance management panel with multi-mode policy tracking, coverage analysis, claim management, insurer comparison, and endorsement status for Indian logistics.
+
+Work Log:
+- Read worklog.md: R482 (commit 93964b6) added AutomatedPutawayPanel + PickPathOptimizerPanel (83 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: Unboxing does NOT exist in lucide-react — used PackageOpen, PackageMinus, Scale, ThermometerSun as alternatives
+- Created `src/components/shared/container-unloading-panel.tsx` (247 lines) — 10 containers across 7 Indian ports (Nhava Sheva/Mundra/Chennai/Kandla/Visakhapatnam/Kolkata/Tuticorin), 4 major vessel lines (MSC Isabella/CMA CGM Marco Polo/Maersk Elba/Ever Given + others), 2 container types (20ft/40ft HQ), 6 statuses (Completed/Unloading/Queued/Delayed/Inspection/Damage Report), hazmat cargo badges with glow animation, progress bar + crane assignment + team tracking, damage count per container, exception alerts (damage report CUL-10 12 pkgs + delayed CUL-04 + hazmat CUL-05), 3 views (Containers with progress bars+HAZ badges+temp, Teams with done/weight/damage metrics, Damage Report with total+per-container breakdown). Damage Report (CUL-10, 12 pkgs) pulses red, delayed (CUL-04) amber left border. CSS prefix: cul-*
+- Created `src/components/shared/cargo-insurance-panel.tsx` (261 lines) — 10 policies across 4 transport modes (Sea/Air/Rail/Road) with mode-specific icons, 7 Indian insurers (Bajaj Allianz/HDFC ERGO/ICICI Lombard/New India Assurance/United India Insurance/Oriental Insurance), 6 statuses (Active/Claim Filed/Expired/Pending Renewal/Claim Approved/Under Review), 4+ coverage types (All Risk/Warehouse to Warehouse/ICC-A/ICC-B/Rail Cargo/Transit Only), premium tracking, declared vs insured coverage bar, claim tracking with amount display, endorsement status badge, route + transit time, Indian rupee amount formatting (₹Cr/₹L/₹K), 3 views (Policies with coverage bars+mode icons+endorse badges, Insurers with coverage/premium/claims aggregate metrics, Claims with sorted breakdown+status). Claim Filed (CIG-02 ₹1.9L, CIG-10 ₹3.4L) pulse red, expired (CIG-04) grey border, pending renewal (CIG-08) amber border. CSS prefix: cig-*
+- Cleaned unused imports from both components (Clock, Timer, CheckCircle, BarChart3 from container; CheckCircle, BarChart3, Activity, PackageSearch, TrendingDown, ArrowRightLeft, RefreshCw from insurance)
+- Registered both in shared/index.ts (83→85 exports) and dashboard-view.tsx (777→793 lines)
+- CSS appended to globals.css (56,844→57,040 lines, +196 CSS for cul-* and cig-*)
+- TSC: 0 errors | Git pushed: commit fd7594f
+
+Stage Summary:
+- 85 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 793 lines | globals.css: 57,040 lines
+- TSC: 0 errors in src/
+- R470-R473 components lost in R380 collision now ALL rebuilt: pick-path-optimizer (R482), container-unloading (R483), cargo-insurance (R483). Only rail-consignment remaining from the lost set.
+- *** NEXT PHASE: Rail consignment tracking, or new logistics panels (gate management, value-added services, carrier SLA monitoring, warehouse energy analytics) ***
+
+---
 Task ID: R482 — Automated Putaway + Pick Path Optimizer
 Agent: Main Agent (Cron Loop)
 Task: R482 — Create automated putaway system panel with pallet-directed putaway, zone assignment, scan compliance, cube utilization tracking, operator management, and exception alerts for Indian warehouses. Plus pick path optimizer with multi-strategy routing (S-Shape/Largest Gap/Midpoint/Combined), distance optimization, picker performance analytics, accuracy tracking, and route complexity assessment.
