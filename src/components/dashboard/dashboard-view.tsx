@@ -69,6 +69,7 @@ import { QualityManagementPanel } from "@/components/shared/quality-management-p
 import { FulfillmentAnalyticsPanel } from "@/components/shared/fulfillment-analytics-panel"
 import { ReturnsProcessingAnalyticsPanel } from "@/components/shared/returns-processing-analytics-panel"
 import { CrossDockOperationsPanel } from "@/components/shared/cross-dock-operations-panel"
+import { YardManagementOptimizationPanel } from "@/components/shared/yard-management-optimization-panel"
 import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
 import { InventoryReplenishmentPanel } from "@/components/shared/inventory-replenishment-panel"
 import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
@@ -118,6 +119,7 @@ import { QualityManagementPanel } from "@/components/shared/quality-management-p
 import { FulfillmentAnalyticsPanel } from "@/components/shared/fulfillment-analytics-panel"
 import { ReturnsProcessingAnalyticsPanel } from "@/components/shared/returns-processing-analytics-panel"
 import { CrossDockOperationsPanel } from "@/components/shared/cross-dock-operations-panel"
+import { YardManagementOptimizationPanel } from "@/components/shared/yard-management-optimization-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -827,6 +829,12 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <YardManagementOptimizationPanel />
+          </CardContent>
+        </Card>
+
         {/* Warehouse Simulation */}
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
@@ -1167,6 +1175,11 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <CrossDockOperationsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <YardManagementOptimizationPanel />
           </CardContent>
         </Card>
       </div>
