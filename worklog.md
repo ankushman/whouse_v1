@@ -1,4 +1,87 @@
 ---
+Task ID: R293 — Mining Equipment Logistics + Inland Waterway Logistics
+Agent: Main Agent (Cron Loop)
+Task: R293 — 2 new Indian logistics modules for mining heavy equipment supply chain (Coal India/Hindalco/Vedanta/NMDC HEMM fleet, walking dragline, hydraulic shovel, dump truck, multi-axle trailer, SPMT) and inland water transport (IWAI, NW-1 Ganga 1620km, NW-2 Brahmaputra, NW-3 West Coast, barge Ro-Ro cargo, Jal Marg Vikas Project)
+
+Work Log:
+- Read worklog.md: R292 complete (commit d1d929f), 418 modules, 424 navItems, 59,467 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/
+- Duplicate check: 0 duplicate navItem IDs, 0 duplicate imports, 0 duplicate exports
+- agent-browser QA skipped (dev server OOM, known infra issue — TSC used as QA gate)
+
+- Created Mining Equipment Logistics module (R293a):
+  * FILE: src/components/modules/mining-equipment-logistics-view.tsx (195 lines)
+  * 4 tabs: Dashboard | Equipment Registry | Mining Analytics | Insights
+  * Theme: Yellow #78350f, CSS prefix: mel-*
+  * Tab 0: 4 KPIs (In Transit, Transport/Assembly, Commissioned, Total Equipment Value), BarChart monthly shipments (Excavator/Truck/Conveyor/Drill), PieChart category distribution (8 types), LineChart fleet utilization vs 90% target, BarChart mine performance
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/category/zone/mode) + ModuleBreadcrumb, 14 equipment records with Work Order badge (yellow), mine, zone, category, equipment, weight (T/KT), customer, mode, ship/ETA dates, transit days, value (Cr), oversize flag (OS/STD), status (6 states), remarks
+  * Tab 2: BarChart volume by zone, stacked AreaChart by category corridor, BarChart avg transit days by transport mode
+  * Tab 3: 4 insights (Rs 8,000 crore annual spend CIL/Hindalco/Vedanta fleet, dragline/shovel/dump truck/crusher/drilling rig transport methods, lifecycle procurement assembly operation maintenance, MMDR Act safety environment compliance deep sea mining)
+  * 8 mines, 8 categories, 6 equipment statuses, 6 transport modes, 6 zones, 14 records
+  * Warning rows (At Site Assembly): amber bg; Info (In Transit/Rail Freight): blue bg
+
+- Created Inland Waterway Logistics module (R293b):
+  * FILE: src/components/modules/inland-waterway-logistics-view.tsx (195 lines)
+  * 4 tabs: Dashboard | Voyage Registry | Waterway Analytics | Insights
+  * Theme: Blue #1e3a5f, CSS prefix: iwl-*
+  * Tab 0: 4 KPIs (Sailing, At Port/Lock, Discharged, Total Revenue), BarChart monthly cargo (Coal/FlyAsh/Grain/Steel), PieChart category distribution (8 types), LineChart waterway utilization vs 80% target, BarChart terminal throughput
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/category/waterway/mode) + ModuleBreadcrumb, 14 voyage records with Voyage No badge (blue), terminal, waterway, category, cargo, weight (T/KT), consignee, mode, sail/ETA dates, transit days, revenue (lakhs), priority flag, status (6 states), remarks
+  * Tab 2: BarChart volume by waterway, stacked AreaChart by category corridor, BarChart avg transit days by vessel mode
+  * Tab 3: 4 insights (111 National Waterways 20,000km navigable IWAI, barge Ro-Ro hopper dredger ferry vessels, cargo mix coal fly ash food grains fertilizer steel containers, JMVP Jal Marg Vikas future Brahmaputra decarbonization river cruises)
+  * 8 terminals, 8 categories, 6 voyage statuses, 6 vessel modes, 6 waterways, 14 records
+  * Warning rows (Lock Transit): amber bg; Info (Sailing Upstream/Downstream): blue bg
+
+- Fixed TSC error: consigne -> consignee typo in inland-waterway record IWL-0012
+
+- Registered both modules in 3 files:
+  * src/components/modules/index.ts: +MiningEquipmentLogisticsView +InlandWaterwayLogisticsView (423->425 exports)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (mining-equipment-logistics: icon Pickaxe group operations, inland-waterway-logistics: icon Waves group operations)
+
+- CSS additions: 41 lines (mel-* yellow + iwl-* blue classes with row highlighting, hover effects, keyframe animations)
+
+- TSC FINAL: 0 errors in src/
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports
+- Git: commit 14d6ff0 pushed to origin/main
+
+Stage Summary:
+- NEW MODULE: Mining Equipment Logistics (195 lines, 8 visual components, 14 equipment records, 4 tabs)
+- NEW MODULE: Inland Waterway Logistics (195 lines, 8 visual components, 14 voyage records, 4 tabs)
+- Total module files: 420 (was 418, +2)
+- Total navItems: 426 (was 424, +2)
+- CSS: 59,508 lines (+41 from R293)
+- Total data: 28 records across both modules
+- ZERO src/ TSC errors
+- ZERO duplicate entries
+- GITHUB: Pushed to origin/main (14d6ff0)
+
+## Updated Project Status (Post Round 293)
+- STATUS: STABLE — ALL modules compile, 0 TSC errors, 0 duplicates
+- MODULE FILES: 420 | NAVITEMS: 426
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: 59,508 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate entries (monitor each round)
+- Many older modules still use default imports for shared components (works due to added default exports, but should migrate to named imports)
+- SearchFilterToolbar not integrated into all table-based modules
+- JSX escaping gotcha: &gt;= does NOT work inside template literals within JSX expressions — must use >=
+- Variable shadowing gotcha: map(r => ... records.filter(r => ...)) — inner r shadows outer, rename inner vars
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (suggestions: Railway Freight Logistics, Solar Panel Recycling, Defence Ordnance Logistics, Aerospace Parts Logistics, Port Terminal Operations, Metro Rail Operations, Defence Ordnance Supply, Telecom Tower Logistics)
+2. Migrate remaining modules from default to named imports for shared components
+3. Cross-module drill-down navigation (click value -> navigate to related module)
+4. Real-time WebSocket events for live updates
+5. Mobile experience enhancements with sheet drawers
+6. Dashboard home page widgets enhancement
+7. Always verify no duplicate entries from concurrent cron jobs before adding new ones
+
+---
 Task ID: R292 — Courier Express Logistics + Petroleum Tank Farm Logistics
 Agent: Main Agent (Cron Loop)
 Task: R292 — 2 new Indian logistics modules for courier express supply chain (BlueDart/Delhivery/DTDC, 15 lakh+ daily parcels, sortation hubs, air cargo, surface linehaul, last-mile 2W/3W, COD/RTO/NDR) and petroleum tank farm storage (IOC/BPCL/HPCL, 80+ terminals, 40L KL storage, pipeline/rail/road receipt, BS-VI quality, tank dispensing, ATF hydrant)
