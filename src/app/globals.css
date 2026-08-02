@@ -59712,3 +59712,42 @@ html.theme-transition body {
 .spr-insight p { line-height: 1.7; }
 .spr-table-wrap { overflow-x: auto; }
 .spr-table-wrap table { min-width: 1600px; }
+/* R299a: Port Terminal Operations - pto-* dark navy theme */
+.pto-root { font-family: 'Inter', system-ui, sans-serif; }
+.pto-tabs { gap: 0.25rem; }
+.pto-tab { transition: all 0.2s; cursor: pointer; }
+.pto-tab:hover { background: #f1f5f9; }
+.pto-kpi { transition: box-shadow 0.2s; }
+.pto-kpi:hover { box-shadow: 0 2px 8px rgba(30,58,95,0.12); }
+.pto-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.pto-kpi-val { font-size: 1.5rem; line-height: 1.3; }
+.pto-chart { transition: box-shadow 0.2s; }
+.pto-chart:hover { box-shadow: 0 2px 12px rgba(30,58,95,0.1); }
+.pto-badge { font-weight: 600; letter-spacing: 0.02em; }
+.pto-row-critical { border-left: 4px solid #ef4444; }
+.pto-row-warning { border-left: 4px solid #f59e0b; }
+.pto-row-info { border-left: 4px solid #3b82f6; }
+.pto-insight h3 { line-height: 1.4; }
+.pto-insight p { line-height: 1.7; }
+.pto-table-wrap { overflow-x: auto; }
+.pto-table-wrap table { min-width: 1600px; }
+
+/* R299b: EV Battery Recycling - evr-* dark red theme */
+.evr-root { font-family: 'Inter', system-ui, sans-serif; }
+.evr-tabs { gap: 0.25rem; }
+.evr-tab { transition: all 0.2s; cursor: pointer; }
+.evr-tab:hover { background: #fef2f2; }
+.evr-kpi { transition: box-shadow 0.2s; }
+.evr-kpi:hover { box-shadow: 0 2px 8px rgba(69,10,10,0.12); }
+.evr-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.evr-kpi-val { font-size: 1.5rem; line-height: 1.3; }
+.evr-chart { transition: box-shadow 0.2s; }
+.evr-chart:hover { box-shadow: 0 2px 12px rgba(69,10,10,0.1); }
+.evr-badge { font-weight: 600; letter-spacing: 0.02em; }
+.evr-row-critical { border-left: 4px solid #ef4444; }
+.evr-row-warning { border-left: 4px solid #f59e0b; }
+.evr-row-info { border-left: 4px solid #3b82f6; }
+.evr-insight h3 { line-height: 1.4; }
+.evr-insight p { line-height: 1.7; }
+.evr-table-wrap { overflow-x: auto; }
+.evr-table-wrap table { min-width: 1600px; }

@@ -432,3 +432,5 @@ export { default as OversizeOdcTransportLogisticsView } from './oversize-odc-tra
 export { default as ParcelSortationLogisticsView } from './parcel-sortation-logistics-view'
 export { default as PipelineIntegrityLogisticsView } from './pipeline-integrity-logistics-view'
 export { default as SolarPanelRecyclingLogisticsView } from './solar-panel-recycling-logistics-view'
+export { default as PortTerminalOperationsLogisticsView } from './port-terminal-operations-logistics-view'
+export { default as EvBatteryRecyclingLogisticsView } from './ev-battery-recycling-logistics-view'

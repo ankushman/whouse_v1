@@ -442,6 +442,8 @@ import OversizeOdcTransportLogisticsView from "@/components/modules/oversize-odc
 import ParcelSortationLogisticsView from "@/components/modules/parcel-sortation-logistics-view"
 import PipelineIntegrityLogisticsView from "@/components/modules/pipeline-integrity-logistics-view"
 import SolarPanelRecyclingLogisticsView from "@/components/modules/solar-panel-recycling-logistics-view"
+import PortTerminalOperationsLogisticsView from "@/components/modules/port-terminal-operations-logistics-view"
+import EvBatteryRecyclingLogisticsView from "@/components/modules/ev-battery-recycling-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -883,6 +885,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "parcel-sortation-logistics": ParcelSortationLogisticsView,
   "pipeline-integrity-logistics": PipelineIntegrityLogisticsView,
   "solar-panel-recycling-logistics": SolarPanelRecyclingLogisticsView,
+  "port-terminal-operations-logistics": PortTerminalOperationsLogisticsView,
+  "ev-battery-recycling-logistics": EvBatteryRecyclingLogisticsView,
 }
 
 
