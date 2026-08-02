@@ -398,3 +398,5 @@ export { default as FmcgSuperstockistNetworkView } from './fmcg-superstockist-ne
 export { default as AutomotiveLogisticsCommandView } from './automotive-logistics-command-view'
 export { default as AirCargoTerminalView } from './air-cargo-terminal-view'
 export { default as AgriWarehousingCommandView } from './agri-warehousing-command-view'
+export { default as RailwayFreightTerminalView } from './railway-freight-terminal-view'
+export { default as PharmaColdChainView } from './pharma-cold-chain-view'

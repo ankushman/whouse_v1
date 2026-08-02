@@ -408,6 +408,8 @@ import FmcgSuperstockistNetworkView from "@/components/modules/fmcg-superstockis
 import AutomotiveLogisticsCommandView from "@/components/modules/automotive-logistics-command-view"
 import AirCargoTerminalView from "@/components/modules/air-cargo-terminal-view"
 import AgriWarehousingCommandView from "@/components/modules/agri-warehousing-command-view"
+import RailwayFreightTerminalView from "@/components/modules/railway-freight-terminal-view"
+import PharmaColdChainView from "@/components/modules/pharma-cold-chain-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -815,6 +817,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "automotive-logistics-command": AutomotiveLogisticsCommandView,
   "air-cargo-terminal": AirCargoTerminalView,
   "agri-warehousing-command": AgriWarehousingCommandView,
+  "railway-freight-terminal": RailwayFreightTerminalView,
+  "pharma-cold-chain": PharmaColdChainView,
 }
 
 

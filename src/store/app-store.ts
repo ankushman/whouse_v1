@@ -404,6 +404,8 @@ export const navItems: NavItem[] = [
   { id: 'automotive-logistics-command', label: 'Auto Logistics', icon: 'Car', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'air-cargo-terminal', label: 'Air Cargo Terminal', icon: 'PlaneTakeoff', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'agri-warehousing-command', label: 'Agri Warehouse', icon: 'Wheat', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'railway-freight-terminal', label: 'Railway Freight', icon: 'TrainFront', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'pharma-cold-chain', label: 'Pharma Cold Chain', icon: 'ThermometerSnowflake', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

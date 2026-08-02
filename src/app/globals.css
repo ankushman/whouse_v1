@@ -59017,3 +59017,45 @@ html.theme-transition body {
 .awc-insight:hover { box-shadow: 0 6px 20px rgba(22, 163, 74, 0.12); transform: translateY(-2px); }
 @keyframes awc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
 @keyframes awc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
+
+/* === Railway Freight Terminal (rft-*) — Red #b91c1c === */
+.rft-root { animation: rft-fade 0.4s ease-out; }
+.rft-tab { transition: all 0.2s ease; }
+.rft-tab:hover { background: rgba(185, 28, 28, 0.06); }
+.rft-kpi { transition: all 0.25s ease; border-left: 3px solid #fecaca; }
+.rft-kpi:hover { box-shadow: 0 4px 16px rgba(185, 28, 28, 0.1); transform: translateY(-2px); border-left-color: #b91c1c; }
+.rft-kpi-label { text-transform: uppercase; letter-spacing: 0.05em; }
+.rft-kpi-val { transition: color 0.2s ease; }
+.rft-kpi:hover .rft-kpi-val { color: #991b1b; }
+.rft-chart { transition: box-shadow 0.25s ease; }
+.rft-chart:hover { box-shadow: 0 4px 16px rgba(185, 28, 28, 0.08); }
+.rft-badge { font-weight: 600; letter-spacing: 0.02em; }
+.rft-table-wrap { font-variant-numeric: tabular-nums; }
+.rft-row-critical { border-left: 3px solid #b91c1c !important; }
+.rft-row-warning { border-left: 3px solid #d97706 !important; }
+.rft-row-info { border-left: 3px solid #2563eb !important; }
+.rft-insight { transition: all 0.25s ease; border-left: 3px solid #fecaca; }
+.rft-insight:hover { box-shadow: 0 6px 20px rgba(185, 28, 28, 0.12); transform: translateY(-2px); }
+@keyframes rft-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes rft-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
+
+/* === Pharma Cold Chain (pcc-*) — Cyan #0891b2 === */
+.pcc-root { animation: pcc-fade 0.4s ease-out; }
+.pcc-tab { transition: all 0.2s ease; }
+.pcc-tab:hover { background: rgba(8, 145, 178, 0.06); }
+.pcc-kpi { transition: all 0.25s ease; border-left: 3px solid #cffafe; }
+.pcc-kpi:hover { box-shadow: 0 4px 16px rgba(8, 145, 178, 0.1); transform: translateY(-2px); border-left-color: #0891b2; }
+.pcc-kpi-label { text-transform: uppercase; letter-spacing: 0.05em; }
+.pcc-kpi-val { transition: color 0.2s ease; }
+.pcc-kpi:hover .pcc-kpi-val { color: #0e7490; }
+.pcc-chart { transition: box-shadow 0.25s ease; }
+.pcc-chart:hover { box-shadow: 0 4px 16px rgba(8, 145, 178, 0.08); }
+.pcc-badge { font-weight: 600; letter-spacing: 0.02em; }
+.pcc-table-wrap { font-variant-numeric: tabular-nums; }
+.pcc-row-critical { border-left: 3px solid #dc2626 !important; }
+.pcc-row-warning { border-left: 3px solid #d97706 !important; }
+.pcc-row-info { border-left: 3px solid #2563eb !important; }
+.pcc-insight { transition: all 0.25s ease; border-left: 3px solid #cffafe; }
+.pcc-insight:hover { box-shadow: 0 6px 20px rgba(8, 145, 178, 0.12); transform: translateY(-2px); }
+@keyframes pcc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes pcc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
