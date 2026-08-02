@@ -57266,3 +57266,75 @@ html.theme-transition body {
 .sds-util-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .sds-util-row { transition: all 0.2s; }
 .sds-util-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* ============================================================================
+ * R495 — Cold Chain Analytics (cca-*) + Warehouse Digital Twin (wdt-*)
+ * ============================================================================ */
+
+/* CCA: stat cards, filter pills, insights row, alerts list */
+.cca-stat-card { transition: all 0.2s; }
+.cca-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cca-filter-pill { transition: all 0.15s; }
+.cca-filter-pill:hover { transform: scale(1.05); }
+.cca-filter-clear:hover { background: rgba(239, 68, 68, 0.1); }
+.cca-insights-row > div { transition: all 0.2s; }
+.cca-insights-row > div:hover { border-color: rgba(6, 182, 212, 0.3); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.cca-alerts-list { animation: cca-slide-in 0.3s ease-out; }
+@keyframes cca-slide-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.cca-alert-dot { animation: cca-dot-pulse 2s infinite; }
+@keyframes cca-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* CCA: room cards */
+.cca-room-card { transition: all 0.2s; }
+.cca-room-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cca-critical-pulse { border-color: rgba(239, 68, 68, 0.4); animation: cca-pulse-red 2s infinite; }
+@keyframes cca-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+.cca-warning-border { border-left: 3px solid rgba(245, 158, 11, 0.6); }
+.cca-id-badge, .cca-cat-tag, .cca-compliance-tag { transition: all 0.15s; }
+.cca-id-badge:hover, .cca-cat-tag:hover, .cca-compliance-tag:hover { transform: scale(1.03); }
+
+/* CCA: risk view */
+.cca-risk-header { transition: all 0.2s; }
+.cca-risk-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.cca-risk-row { transition: all 0.2s; }
+.cca-risk-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* CCA: energy view */
+.cca-energy-header { transition: all 0.2s; }
+.cca-energy-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.cca-energy-row { transition: all 0.2s; }
+.cca-energy-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* WDT: stat cards, filter pills, insights row, alerts list */
+.wdt-stat-card { transition: all 0.2s; }
+.wdt-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wdt-filter-pill { transition: all 0.15s; }
+.wdt-filter-pill:hover { transform: scale(1.05); }
+.wdt-filter-clear:hover { background: rgba(239, 68, 68, 0.1); }
+.wdt-insights-row > div { transition: all 0.2s; }
+.wdt-insights-row > div:hover { border-color: rgba(168, 85, 247, 0.3); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.wdt-alerts-list { animation: wdt-slide-in 0.3s ease-out; }
+@keyframes wdt-slide-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.wdt-alert-dot { animation: wdt-dot-pulse 2s infinite; }
+@keyframes wdt-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* WDT: twin cards */
+.wdt-twin-card { transition: all 0.2s; }
+.wdt-twin-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wdt-critical-pulse { border-color: rgba(239, 68, 68, 0.4); animation: wdt-pulse-red 2s infinite; }
+@keyframes wdt-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+.wdt-warning-border { border-left: 3px solid rgba(245, 158, 11, 0.6); }
+.wdt-id-badge, .wdt-sync-tag, .wdt-version-tag, .wdt-sim-tag { transition: all 0.15s; }
+.wdt-id-badge:hover, .wdt-sync-tag:hover, .wdt-version-tag:hover, .wdt-sim-tag:hover { transform: scale(1.03); }
+
+/* WDT: simulation view */
+.wdt-sim-header { transition: all 0.2s; }
+.wdt-sim-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wdt-sim-row { transition: all 0.2s; }
+.wdt-sim-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* WDT: capacity view */
+.wdt-cap-header { transition: all 0.2s; }
+.wdt-cap-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wdt-cap-row { transition: all 0.2s; }
+.wdt-cap-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
