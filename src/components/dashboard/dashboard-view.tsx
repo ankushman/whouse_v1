@@ -86,6 +86,8 @@ import { DemandForecastingPanel } from "@/components/shared/demand-forecasting-p
 import { WarehouseSlottingOptimizerPanel } from "@/components/shared/warehouse-slotting-optimizer-panel"
 import { ThreePLContractManagementPanel } from "@/components/shared/three-pl-contract-management-panel"
 import { LaborManagementPanel } from "@/components/shared/labor-management-panel"
+import { FleetTelematicsPanel } from "@/components/shared/fleet-telematics-panel"
+import { WarehouseAutomationPanel } from "@/components/shared/warehouse-automation-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -911,6 +913,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <LaborManagementPanel />
+          </CardContent>
+        </Card>
+
+        {/* Fleet Telematics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <FleetTelematicsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Automation */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseAutomationPanel />
           </CardContent>
         </Card>
       </div>

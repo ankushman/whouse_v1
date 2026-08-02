@@ -57076,3 +57076,49 @@ html.theme-transition body {
 .lmn-safety-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes lmn-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
 @keyframes lmn-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === Fleet Telematics Panel (flt-*) === */
+.flt-stat-card { transition: all 0.2s; }
+.flt-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.flt-filter-pill { transition: all 0.15s; border: 1px solid transparent; }
+.flt-filter-pill:hover { border-color: hsl(var(--primary) / 0.3); }
+.flt-filter-clear { transition: all 0.15s; }
+.flt-insights-row > div { transition: all 0.2s; }
+.flt-insights-row > div:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.flt-vehicle-card { transition: all 0.2s; }
+.flt-vehicle-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.flt-critical-pulse { animation: flt-pulse 2s ease-in-out infinite; }
+.flt-warning-border { border-left: 3px solid hsl(var(--amber-500)); }
+.flt-id-badge { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+.flt-type-tag { font-weight: 600; letter-spacing: 0.02em; }
+.flt-alert-dot { animation: flt-dot-pulse 1.5s ease-in-out infinite; }
+.flt-alerts-list { backdrop-filter: blur(8px); }
+.flt-fuel-row { transition: all 0.2s; }
+.flt-fuel-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.flt-health-row { transition: all 0.2s; }
+.flt-health-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes flt-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+@keyframes flt-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === Warehouse Automation Panel (wam-*) === */
+.wam-stat-card { transition: all 0.2s; }
+.wam-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wam-filter-pill { transition: all 0.15s; border: 1px solid transparent; }
+.wam-filter-pill:hover { border-color: hsl(var(--primary) / 0.3); }
+.wam-filter-clear { transition: all 0.15s; }
+.wam-insights-row > div { transition: all 0.2s; }
+.wam-insights-row > div:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.wam-machine-card { transition: all 0.2s; }
+.wam-machine-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wam-critical-pulse { animation: wam-pulse 2s ease-in-out infinite; }
+.wam-warning-border { border-left: 3px solid hsl(var(--amber-500)); }
+.wam-id-badge { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+.wam-type-tag { font-weight: 600; letter-spacing: 0.02em; }
+.wam-alert-dot { animation: wam-dot-pulse 1.5s ease-in-out infinite; }
+.wam-alerts-list { backdrop-filter: blur(8px); }
+.wam-util-row { transition: all 0.2s; }
+.wam-util-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wam-maint-row { transition: all 0.2s; }
+.wam-maint-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes wam-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+@keyframes wam-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
