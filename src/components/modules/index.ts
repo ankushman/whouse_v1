@@ -396,3 +396,5 @@ export { default as FreightForwardingCommandView } from './freight-forwarding-co
 export { default as CoastalShippingWaterwayView } from './coastal-shipping-waterway-view'
 export { default as FmcgSuperstockistNetworkView } from './fmcg-superstockist-network-view'
 export { default as AutomotiveLogisticsCommandView } from './automotive-logistics-command-view'
+export { default as AirCargoTerminalView } from './air-cargo-terminal-view'
+export { default as AgriWarehousingCommandView } from './agri-warehousing-command-view'

@@ -58963,3 +58963,57 @@ html.theme-transition body {
 .alc-insight { transition: box-shadow 0.2s, transform 0.15s; }
 .alc-insight:hover { box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12); transform: translateY(-2px); }
 @keyframes alc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ── Air Cargo Terminal (act-*) ── */
+.act-root { animation: act-fade 0.35s ease-out; }
+.act-tabs { position: relative; }
+.act-tab { transition: all 0.2s ease; cursor: pointer; border: none; outline: none; }
+.act-tab:hover { background: #f1f5f9; }
+.act-tab[aria-selected="true"] { box-shadow: 0 2px 8px rgba(71, 85, 105, 0.3); }
+.act-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.act-kpi { transition: box-shadow 0.2s, transform 0.15s; animation: act-fade 0.4s ease-out both; }
+.act-kpi:hover { box-shadow: 0 4px 16px rgba(71, 85, 105, 0.15); transform: translateY(-2px); }
+.act-kpi-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; }
+.act-kpi-val { font-size: 1.5rem; font-weight: 800; color: #334155; margin: 4px 0; }
+.act-kpi-sub { font-size: 0.65rem; color: #9ca3af; }
+.act-chart { transition: box-shadow 0.2s; }
+.act-chart:hover { box-shadow: 0 4px 12px rgba(71, 85, 105, 0.1); }
+.act-badge { transition: transform 0.15s; }
+.act-badge:hover { transform: scale(1.05); }
+.act-table-wrap { transition: box-shadow 0.2s; }
+.act-table-wrap:hover { box-shadow: 0 2px 12px rgba(71, 85, 105, 0.08); }
+.act-row-critical { background: #fef2f2 !important; border-left: 3px solid #ef4444; animation: act-pulse 2s ease-in-out infinite; }
+.act-row-warning { background: #fffbeb !important; border-left: 3px solid #f59e0b; }
+.act-row-info { background: #f0f9ff !important; border-left: 3px solid #0ea5e9; }
+.act-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.act-insight { transition: box-shadow 0.2s, transform 0.15s; }
+.act-insight:hover { box-shadow: 0 6px 20px rgba(71, 85, 105, 0.12); transform: translateY(-2px); }
+@keyframes act-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes act-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }
+
+/* ── Agri Warehousing Command (awc-*) ── */
+.awc-root { animation: awc-fade 0.35s ease-out; }
+.awc-tabs { position: relative; }
+.awc-tab { transition: all 0.2s ease; cursor: pointer; border: none; outline: none; }
+.awc-tab:hover { background: #f0fdf4; }
+.awc-tab[aria-selected="true"] { box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3); }
+.awc-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.awc-kpi { transition: box-shadow 0.2s, transform 0.15s; animation: awc-fade 0.4s ease-out both; }
+.awc-kpi:hover { box-shadow: 0 4px 16px rgba(22, 163, 74, 0.15); transform: translateY(-2px); }
+.awc-kpi-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; }
+.awc-kpi-val { font-size: 1.5rem; font-weight: 800; color: #15803d; margin: 4px 0; }
+.awc-kpi-sub { font-size: 0.65rem; color: #9ca3af; }
+.awc-chart { transition: box-shadow 0.2s; }
+.awc-chart:hover { box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1); }
+.awc-badge { transition: transform 0.15s; }
+.awc-badge:hover { transform: scale(1.05); }
+.awc-table-wrap { transition: box-shadow 0.2s; }
+.awc-table-wrap:hover { box-shadow: 0 2px 12px rgba(22, 163, 74, 0.08); }
+.awc-row-critical { background: #fef2f2 !important; border-left: 3px solid #ef4444; animation: awc-pulse 2s ease-in-out infinite; }
+.awc-row-warning { background: #fffbeb !important; border-left: 3px solid #f59e0b; }
+.awc-row-info { background: #f0f9ff !important; border-left: 3px solid #0ea5e9; }
+.awc-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.awc-insight { transition: box-shadow 0.2s, transform 0.15s; }
+.awc-insight:hover { box-shadow: 0 6px 20px rgba(22, 163, 74, 0.12); transform: translateY(-2px); }
+@keyframes awc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+@keyframes awc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.92; } }

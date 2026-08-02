@@ -406,6 +406,8 @@ import FreightForwardingCommandView from "@/components/modules/freight-forwardin
 import CoastalShippingWaterwayView from "@/components/modules/coastal-shipping-waterway-view"
 import FmcgSuperstockistNetworkView from "@/components/modules/fmcg-superstockist-network-view"
 import AutomotiveLogisticsCommandView from "@/components/modules/automotive-logistics-command-view"
+import AirCargoTerminalView from "@/components/modules/air-cargo-terminal-view"
+import AgriWarehousingCommandView from "@/components/modules/agri-warehousing-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -811,6 +813,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "coastal-shipping-waterway": CoastalShippingWaterwayView,
   "fmcg-superstockist-network": FmcgSuperstockistNetworkView,
   "automotive-logistics-command": AutomotiveLogisticsCommandView,
+  "air-cargo-terminal": AirCargoTerminalView,
+  "agri-warehousing-command": AgriWarehousingCommandView,
 }
 
 
