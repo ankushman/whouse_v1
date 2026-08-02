@@ -448,3 +448,5 @@ export { default as SemiconductorFabLogisticsView } from './semiconductor-fab-lo
 export { default as OffshoreWindLogisticsView } from './offshore-wind-logistics-view'
 export { default as LithiumBatteryCellLogisticsView } from './lithium-battery-cell-logistics-view'
 export { default as CarbonCaptureStorageLogisticsView } from './carbon-capture-storage-logistics-view'
+export { default as NuclearPowerPlantLogisticsView } from './nuclear-power-plant-logistics-view'
+export { default as ElectricBusFleetLogisticsView } from './electric-bus-fleet-logistics-view'
