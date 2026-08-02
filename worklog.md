@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R488 — IoT Sensor Dashboard + Multi-Modal Transport Planner
+Agent: Main Agent (Cron Loop)
+Task: R488 — Create IoT sensor monitoring dashboard with real-time temperature, humidity, motion, and occupancy sensor tracking across Indian warehouse zones, battery/signal health monitoring, threshold alerting, firmware version management, and sensor health analytics. Plus multi-modal transport planning panel with route optimization across road/rail/air/sea modes, cost comparison, carbon footprint analysis, transit time tracking, reliability scoring, and carrier performance for Indian logistics network.
+
+Work Log:
+- Read worklog.md: R487 (commit 328c4c8) added CarrierSLAScorecardPanel + ReverseLogisticsHubPanel (93 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: all 41 icons verified present in lucide-react
+- Created `src/components/shared/iot-sensor-dashboard-panel.tsx` (260 lines) — 10 IoT sensors across 6 Indian DCs (Mumbai DC-1/Delhi DC-2/Bengaluru DC-3/Chennai DC-6/Kolkata DC-5/Hyderabad DC-4), 4 sensor types (Temperature/Humidity/Motion/Occupancy) with type-specific icons, 4 statuses (Online/Alert/Critical/Offline), sensor IDs (TMP/HUM/MOV/OCC prefixed), value display with range bars (min-max), threshold alerts (high/low), battery level monitoring (5-100%) with color coding, signal strength (Strong/Medium/Weak/None) with icons, firmware version tracking (v2.9-v3.3), location info, last reading timestamp, 3 views (Sensors with large value display+range bars+battery+signal+FW, Zones with per-DC sensor list+online counts, Health with sorted battery bars+signal+FW+alert counts). Critical (IOT-08 Kolkata Yard 36.2°C+22% battery) pulses red, Alert (IOT-02 Cold Chain -21.3°C, IOT-05 Bengaluru 82% humidity+38% battery, IOT-06 dock 94% occupancy) amber border, Offline (IOT-10 freezer 5% battery) dashed grey border. CSS prefix: iot-*
+- Created `src/components/shared/multi-modal-transport-planner-panel.tsx` (263 lines) — 10 routes across 8 Indian cities (Mumbai/Delhi/Chennai/Kolkata/Bengaluru/Hyderabad/Nhava Sheva/Mundra), 5 transport modes (Road/Rail/Air/Sea/Road+Rail) with mode-specific icons, 10 carriers (TCI Express/Indian Railways/BlueDart Aviation/Maersk India/Rivigo/Container Corp/Indigo Cargo/MSC India/Delhivery/Safexpress), 7 cargo types, 3 priorities (Express/Standard/Economy), 4 statuses (Recommended/Active/Delayed/Rerouted), distance+transit time+cost+CO2 per route, reliability scoring (72-98%), route info with via points and highway names, CO2/km+cost/km analysis, INR formatting, 3 views (Routes with mode icons+priority badges+via+CO2/km+reliability, Modes with per-mode aggregate distance/cost/CO2/reliability, Carbon with sorted CO2+cost/km+weight breakdown). Delayed (MMP-06 Kolkata→Bengaluru Rail 72%) pulses red, Rerouted (MMP-09 Mumbai→Hyderabad Road) amber border. CSS prefix: mmp-*
+- Cleaned unused imports (CheckCircle, RefreshCw, Zap from IoT; CheckCircle, BarChart3, Activity from MMP)
+- Registered both in shared/index.ts (93→95 exports) and dashboard-view.tsx (857→873 lines)
+- CSS appended to globals.css (56,889→56,941 lines, +52 CSS for iot-* and mmp-*)
+- TSC: 0 errors | Git pushed: commit 8f5964f
+
+Stage Summary:
+- 95 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 873 lines | globals.css: 56,941 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Cross-border trade panel, warehouse network optimization, 3PL contract management, or digital twin visualization ***
+---
 Task ID: R487 — Carrier SLA Scorecard + Reverse Logistics Hub
 Agent: Main Agent (Cron Loop)
 Task: R487 — Create carrier SLA scorecard with multi-modal carrier performance scoring, OTIF tracking, damage/loss monitoring, cost per shipment analysis, claims management, and trend indicators for Indian logistics carriers. Plus reverse logistics hub with returns processing, refurbishment tracking, disposal/recycling management, grade assessment, recovery rate analysis, and vendor coordination for Indian e-commerce returns.
