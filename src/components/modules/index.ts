@@ -370,5 +370,5 @@ export { default as TarakasiSilverFiligreeOdishaLogisticsView } from './tarakasi
 export { default as AjrakhBlockPrintKutchLogisticsView } from './ajrakh-block-print-kutch-logistics-view'
 export { default as PattachitraWestBengalLogisticsView } from './pattachitra-west-bengal-logistics-view'
 export { default as PithoraTribalArtChhattisgarhLogisticsView } from './pithora-tribal-art-chhattisgarh-logistics-view'
-export { default as DemandSensingAiView } from './demand-sensing-ai-view'
-export { default as ReturnsPredictionEngineView } from './returns-prediction-engine-view'
+export { default as WarehouseEnergyAnalyticsView } from './warehouse-energy-analytics-view'
+export { default as RouteIntelligenceHubView } from './route-intelligence-hub-view'

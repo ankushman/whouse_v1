@@ -58368,3 +58368,42 @@ html.theme-transition body {
 .rpe-insight-card { transition: box-shadow 0.2s; }
 .rpe-insight-card:hover { box-shadow: 0 4px 12px rgba(234, 88, 12, 0.10); }
 @keyframes rpe-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== R262a: Warehouse Energy Analytics (wea-*) ===== */
+.wea-root { padding: 24px; max-width: 1440px; margin: 0 auto; }
+.wea-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.wea-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.wea-kpi { padding: 16px; text-align: center; }
+.wea-chart-row { margin-bottom: 20px; }
+.wea-chart-row > div { min-height: 320px; }
+.wea-table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e5e7eb; }
+.wea-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wea-table thead { background: #f0fdf4; }
+.wea-table th { padding: 10px 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #dcfce7; font-size: 12px; white-space: nowrap; }
+.wea-table td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.wea-table tbody tr:hover { background: #f0fdf4; }
+.wea-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.wea-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.wea-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.wea-insight-card { transition: box-shadow 0.2s; }
+.wea-insight-card:hover { box-shadow: 0 4px 12px rgba(22, 163, 74, 0.10); }
+
+/* ===== R262b: Route Intelligence Hub (rih-*) ===== */
+.rih-root { padding: 24px; max-width: 1440px; margin: 0 auto; }
+.rih-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.rih-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.rih-kpi { padding: 16px; text-align: center; }
+.rih-chart-row { margin-bottom: 20px; }
+.rih-chart-row > div { min-height: 320px; }
+.rih-table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e5e7eb; }
+.rih-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.rih-table thead { background: #f0fdfa; }
+.rih-table th { padding: 10px 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #ccfbf1; font-size: 12px; white-space: nowrap; }
+.rih-table td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.rih-table tbody tr:hover { background: #f0fdfa; }
+.rih-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.rih-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.rih-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.rih-insight-card { transition: box-shadow 0.2s; }
+.rih-insight-card:hover { box-shadow: 0 4px 12px rgba(13, 148, 136, 0.10); }
+@keyframes rih-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
