@@ -58688,3 +58688,55 @@ html.theme-transition body {
 .fir-insight { transition: box-shadow 0.2s; }
 .fir-insight:hover { box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12); }
 @keyframes fir-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ===== ICD Container Yard Intelligence (icy-*) ===== */
+.icy-root { font-family: system-ui, -apple-system, sans-serif; }
+.icy-tabs { border-bottom: 2px solid #e2e8f0; }
+.icy-tab { transition: all 0.15s ease; cursor: pointer; border: none; outline: none; }
+.icy-tab:hover { background: #f0f9ff; }
+.icy-tab.active { background: #0369a1; color: white; }
+.icy-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.icy-kpi { border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; background: white; transition: box-shadow 0.2s; }
+.icy-kpi:hover { box-shadow: 0 2px 8px rgba(3, 105, 161, 0.1); }
+.icy-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.icy-kpi-val { font-size: 1.5rem; font-weight: 700; color: #0369a1; }
+.icy-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.icy-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+.icy-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.icy-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.icy-table-wrap table { border-collapse: collapse; }
+.icy-table-wrap th { background: #f9fafb; border-bottom: 1px solid #e5e7eb; }
+.icy-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.icy-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.icy-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.icy-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.icy-insight { transition: box-shadow 0.2s; }
+.icy-insight:hover { box-shadow: 0 4px 12px rgba(3, 105, 161, 0.12); }
+@keyframes icy-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ===== Warehouse Space & Capacity Planner (wsp-*) ===== */
+.wsp-root { font-family: system-ui, -apple-system, sans-serif; }
+.wsp-tabs { border-bottom: 2px solid #e2e8f0; }
+.wsp-tab { transition: all 0.15s ease; cursor: pointer; border: none; outline: none; }
+.wsp-tab:hover { background: #fffbeb; }
+.wsp-tab.active { background: #d97706; color: white; }
+.wsp-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.wsp-kpi { border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; background: white; transition: box-shadow 0.2s; }
+.wsp-kpi:hover { box-shadow: 0 2px 8px rgba(217, 119, 6, 0.1); }
+.wsp-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.wsp-kpi-val { font-size: 1.5rem; font-weight: 700; color: #b45309; }
+.wsp-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.wsp-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+.wsp-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.wsp-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.wsp-table-wrap table { border-collapse: collapse; }
+.wsp-table-wrap th { background: #f9fafb; border-bottom: 1px solid #e5e7eb; }
+.wsp-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.wsp-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.wsp-capbar { transition: width 0.4s ease; }
+.wsp-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.wsp-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.wsp-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.wsp-insight { transition: box-shadow 0.2s; }
+.wsp-insight:hover { box-shadow: 0 4px 12px rgba(217, 119, 6, 0.12); }
+@keyframes wsp-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }

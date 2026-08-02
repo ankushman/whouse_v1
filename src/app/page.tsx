@@ -396,6 +396,8 @@ import FastagTollIntelligenceView from "@/components/modules/fastag-toll-intelli
 import WarehouseLabourWorkforceAnalyticsView from "@/components/modules/warehouse-labour-workforce-analytics-view"
 import GstInvoiceEInvoicingCommandView from "@/components/modules/gst-invoice-e-invoicing-command-view"
 import FreightInvoiceReconciliationView from "@/components/modules/freight-invoice-reconciliation-view"
+import IcdContainerYardIntelligenceView from "@/components/modules/icd-container-yard-intelligence-view"
+import WarehouseSpaceCapacityPlannerView from "@/components/modules/warehouse-space-capacity-planner-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -791,6 +793,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "warehouse-labour-workforce-analytics": WarehouseLabourWorkforceAnalyticsView,
   "gst-invoice-e-invoicing-command": GstInvoiceEInvoicingCommandView,
   "freight-invoice-reconciliation": FreightInvoiceReconciliationView,
+  "icd-container-yard-intelligence": IcdContainerYardIntelligenceView,
+  "warehouse-space-capacity-planner": WarehouseSpaceCapacityPlannerView,
 }
 
 

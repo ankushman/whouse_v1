@@ -386,3 +386,5 @@ export { default as FastagTollIntelligenceView } from './fastag-toll-intelligenc
 export { default as WarehouseLabourWorkforceAnalyticsView } from './warehouse-labour-workforce-analytics-view'
 export { default as GstInvoiceEInvoicingCommandView } from './gst-invoice-e-invoicing-command-view'
 export { default as FreightInvoiceReconciliationView } from './freight-invoice-reconciliation-view'
+export { default as IcdContainerYardIntelligenceView } from './icd-container-yard-intelligence-view'
+export { default as WarehouseSpaceCapacityPlannerView } from './warehouse-space-capacity-planner-view'

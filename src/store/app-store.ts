@@ -392,6 +392,8 @@ export const navItems: NavItem[] = [
   { id: 'warehouse-labour-workforce-analytics', label: 'Labour Workforce', icon: 'Users', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner', 'hr'] },
   { id: 'gst-invoice-e-invoicing-command', label: 'GST E-Invoicing', icon: 'QrCode', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'finance', 'operations_planner'] },
   { id: 'freight-invoice-reconciliation', label: 'Freight Audit', icon: 'Scale', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'finance', 'logistics'] },
+  { id: 'icd-container-yard-intelligence', label: 'ICD Yard Intel', icon: 'Container', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'logistics', 'operations_planner'] },
+  { id: 'warehouse-space-capacity-planner', label: 'Space Planner', icon: 'LayoutGrid', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
