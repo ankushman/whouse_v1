@@ -1,5 +1,84 @@
 ---
 ---
+Task ID: R275 — GST Invoice & E-Invoicing Command + Freight Invoice Reconciliation
+Agent: Main Agent (Cron Loop)
+Task: R275 — 2 new Indian logistics modules for GST e-invoicing compliance and freight invoice audit/reconciliation
+
+Work Log:
+- Read worklog.md: R274 complete (commit 976dba7), 382 modules, 388 navItems, 58,632 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/ (1 error in skills/ — not our code)
+- Duplicate check: 0 duplicate navItems, 0 duplicate imports
+- agent-browser QA skipped (dev server OOM, known infra issue — TSC used as QA gate)
+
+- Created GST Invoice & E-Invoicing Command module (R275a):
+  * FILE: src/components/modules/gst-invoice-e-invoicing-command-view.tsx (299 lines)
+  * 4 tabs: Dashboard | Invoice Registry | IRN Analytics | Insights
+  * Theme: Teal #0f766e, CSS prefix: gie-*
+  * Tab 0 (Dashboard): 4 KPIs (IRNs Generated, Total Taxable Value, Total GST Collected, Avg IRN Generation), BarChart monthly invoice volume by type (B2B/B2C/Export), PieChart GST rate distribution, LineChart IRN success rate trend, BarChart invoice volume by state
+  * Tab 1 (Invoice Registry): SearchFilterToolbar (4 filter groups: invoiceType/gstRate/status/state) + ModuleBreadcrumb, 14 invoice records with IRN badge (truncated hex), GSTIN badge, Type badge, GST Rate badge, CGST/SGST/IGST columns, Amount bar, Status badge (6 states), Ack No, E-Way Bill linked badge, ITC eligible badge
+  * Tab 2 (IRN Analytics): Stacked AreaChart CGST vs SGST vs IGST collection trend, LineChart IRN generation latency trend, BarChart invoice value by supplier
+  * Tab 3 (Insights): 4 deep insight cards (E-invoicing mandate expansion, E-way bill automation & IRN linkage, ITC reconciliation via GSTR-2B, Multi-state GST compliance management)
+  * 6 invoice types, 5 GST rates, 6 IRN statuses, 8 suppliers, 8 states, 14 data records
+  * Critical rows (Failed IRN): red bg; Warning (Pending/Retry Queue): amber
+  * Fixed TSC error: variable name collision in filterGroups (r reused in nested arrow function → renamed to gr)
+
+- Created Freight Invoice Reconciliation module (R275b):
+  * FILE: src/components/modules/freight-invoice-reconciliation-view.tsx (269 lines)
+  * 4 tabs: Dashboard | Invoice Ledger | Discrepancy Analytics | Insights
+  * Theme: Violet #7c3aed, CSS prefix: fir-*
+  * Tab 0 (Dashboard): 4 KPIs (3-Way Matched, Total Invoiced, Total Variance, Discrepancies), BarChart monthly match/discrepancy/pending, PieChart discrepancy type distribution, LineChart cost recovery vs leakage trend, BarChart carrier volume vs discrepancy
+  * Tab 1 (Invoice Ledger): SearchFilterToolbar (4 filter groups: carrier/corridor/matchStatus/discrepancyType) + ModuleBreadcrumb, 14 freight invoice records with Carrier badge, Corridor, PO number, Shipment ID, PO/GRN/Invoice amounts, Variance bar (+red), Variance % badge (color-coded by severity), Discrepancy type badge, Match Status badge (6 states), Payment Status badge (5 states), Approver, Remarks
+  * Tab 2 (Discrepancy Analytics): BarChart variance by corridor, AreaChart match rate trend, BarChart discrepancy recovery timeline
+  * Tab 3 (Insights): 4 deep insight cards (Freight invoice leakage \u20b918K crore, 3-way matching PO/Invoice/GRN, Carrier scorecard integration, GST-compliant freight automation)
+  * 8 carriers, 8 corridors, 6 match statuses, 6 discrepancy types, 14 data records
+  * Critical rows (Amount Mismatch/1-Way Only): red bg; Warning (2-Way Partial/PO Mismatch/Pending Review): amber
+
+- Registered both modules in 3 files:
+  * src/components/modules/index.ts: +GstInvoiceEInvoicingCommandView +FreightInvoiceReconciliationView (387->389 exports)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (gst-invoice-e-invoicing-command: icon QrCode group operations, freight-invoice-reconciliation: icon Scale group analytics)
+
+- CSS additions: 58 lines (gie-* teal + fir-* violet classes with critical/warning row highlighting, amount bars, variance bars, insights grid, keyframe animations)
+
+- TSC FINAL: 0 errors in src/ (1 pre-existing error in skills/ — not our code)
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports
+- Git: commit e3c9cbe pushed to origin/main
+
+Stage Summary:
+- NEW MODULE: GST Invoice & E-Invoicing Command (299 lines, 8 visual components, 14 invoice records, 4 tabs)
+- NEW MODULE: Freight Invoice Reconciliation (269 lines, 8 visual components, 14 invoice records, 4 tabs)
+- Total module files: 384 (was 382, +2)
+- Total navItems: 390 (was 388, +2)
+- CSS: 58,690 lines (+58 from R275)
+- Total data: 28 records across both modules
+- ZERO src/ TSC errors
+- ZERO duplicate entries
+- GITHUB: Pushed to origin/main (e3c9cbe)
+
+## Updated Project Status (Post Round 275)
+- STATUS: STABLE — ALL modules compile, 0 TSC errors, 0 duplicates
+- MODULE FILES: 384 | NAVITEMS: 390
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: 58,690 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate entries (monitor each round)
+- Many older modules still use default imports for shared components (works due to added default exports, but should migrate to named imports)
+- SearchFilterToolbar not integrated into all table-based modules
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (suggestions: Cargo Terminal Operations, Logistics Insurance Claims, Multi-Modal Rail-Road)
+2. Migrate remaining 319 modules from default to named imports for shared components
+3. Cross-module drill-down navigation (click value → navigate to related module)
+4. Real-time WebSocket events for live updates
+5. Mobile experience enhancements with sheet drawers
+6. Dashboard home page widgets enhancement
+7. Always verify no duplicate entries from concurrent cron jobs before adding new ones
+---
 Task ID: R274 — Fix 105 TSC Errors + FASTag Toll Intelligence + Warehouse Labour Workforce Analytics
 Agent: Main Agent (Cron Loop)
 Task: R274 — Major bug fix round (105→0 TSC errors) + 2 new Indian logistics modules
