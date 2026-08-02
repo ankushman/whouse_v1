@@ -57881,3 +57881,37 @@ html.theme-transition body {
 .mfm-fin-row { transition: border-color 0.15s ease; }
 .mfm-fin-row:hover { border-color: rgba(99,102,241,0.3); }
 @keyframes mfm-hold-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.25); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.12); } }
+
+/* sla-* Slotting Analytics */
+.sla-stat-card { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.sla-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.sla-filter-pill { transition: all 0.12s ease; }
+.sla-filter-pill:hover { transform: scale(1.04); }
+.sla-slot-card { transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.sla-slot-card:hover { border-color: rgba(139,92,246,0.3); }
+.sla-warning-border { border-left: 3px solid rgba(245,158,11,0.6); }
+.sla-critical-pulse { animation: sla-critical-glow 1.5s ease-in-out infinite; }
+.sla-overload-pulse { animation: sla-overload-glow 2s ease-in-out infinite; }
+.sla-alert-dot { animation: cdo-dot-pulse 1.2s ease-in-out infinite; }
+.sla-vel-row { transition: border-color 0.15s ease; }
+.sla-vel-row:hover { border-color: rgba(139,92,246,0.3); }
+.sla-place-row { transition: border-color 0.15s ease; }
+.sla-place-row:hover { border-color: rgba(34,197,94,0.3); }
+@keyframes sla-critical-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.25); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.12); } }
+@keyframes sla-overload-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.2); } 50% { box-shadow: 0 0 6px 2px rgba(249,115,22,0.1); } }
+
+/* ecf-* E-commerce Fulfilment */
+.ecf-stat-card { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.ecf-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+.ecf-filter-pill { transition: all 0.12s ease; }
+.ecf-filter-pill:hover { transform: scale(1.04); }
+.ecf-order-card { transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+.ecf-order-card:hover { border-color: rgba(249,115,22,0.3); }
+.ecf-warning-border { border-left: 3px solid rgba(245,158,11,0.6); }
+.ecf-delayed-pulse { animation: ecf-delayed-glow 1.5s ease-in-out infinite; }
+.ecf-alert-dot { animation: cdo-dot-pulse 1.2s ease-in-out infinite; }
+.ecf-perf-row { transition: border-color 0.15s ease; }
+.ecf-perf-row:hover { border-color: rgba(249,115,22,0.3); }
+.ecf-chan-row { transition: border-color 0.15s ease; }
+.ecf-chan-row:hover { border-color: rgba(14,165,233,0.3); }
+@keyframes ecf-delayed-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.25); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.12); } }
