@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R499 — Supply Chain Visibility + Shipping Exception Management
+Agent: Main Agent (Cron Loop)
+Task: R499 — Create supply chain visibility panel with end-to-end pipeline tracking across 10 Indian logistics lanes, 5 stages (Procurement/In-Transit/Customs/Last Mile/Delivered), 4 transport modes (Road/Sea/Rail/Air), 8 Indian suppliers (Tata Steel/Reliance Logistics/Adani Ports/Mahindra SCM/Asian Paints Supply/Dalmia Cement/Britannia Industries/ITC Distribution), lead time and ETA analytics, on-time % tracking, inventory visibility, risk scoring 1-10/10, pipeline value analytics, multi-echelon order tracking, supplier scorecard aggregation, and demand-supply matching. Plus shipping exception management panel with 10 exception cases, 8 exception types (Delay/Damage/Misroute/Shortage/Customs Hold/Weather Disruption/Carrier Failure/Address Mismatch), 4 severity levels (Low/Medium/High/Critical), 5 escalation levels (L1 Agent to L5 VP), 4 root cause categories (Carrier Delay/Weather/Road Condition/Documentation Error), resolution time tracking 2-72h, financial impact analytics, customer impact scoring 1-10/10, SLA breach detection with glow animation, carrier analysis, and Indian city lane tracking.
+
+Work Log:
+- Read worklog.md: R498 (commit 97ebf9c) added LogisticsCostIntelligencePanel + WarehouseEnergyManagementPanel (113 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: Eye, Globe, Route, Target, AlertTriangle, CheckCircle, XCircle, TrendingUp, Package, MapPin, IndianRupee, Activity, AlertOctagon, Siren, Clock, ShieldAlert, Truck, User all OK; Truck, Ship, Plane, Train removed from SCV (unused); Wrench, TrendingUp, Package, Timer removed from SEM (unused)
+- Created `src/components/shared/supply-chain-visibility-panel.tsx` (270 lines) — 10 lanes across 4 modes (Road/Sea/Rail/Air) with color badges, 5 stages (Procurement/In-Transit/Customs/Last Mile/Delivered) with color badges, 8 suppliers, lead time 2-14d, on-time 55-98%, risk score 1-9/10, inventory 1200-22000 units, value ₹560K-₹1.25Cr, orders 34-210, 4 statuses (On Track/Delayed/At Risk/Critical), INR formatting, 3 views (Pipeline with stage+mode+supplier+lead+stock+risk+value, Suppliers with aggregated on-time+delayed+value+risk, Risk with sorted risk score bars+on-time+delayed+stock+value). Critical (SCV-07 Hyderabad-Jaipur, on-time 55%, risk 9/10, 28/34 delayed) pulse red, Delayed/At Risk (SCV-02, SCV-05, SCV-08) amber border. CSS prefix: scv-*
+- Created `src/components/shared/shipping-exception-management-panel.tsx` (278 lines) — 10 exceptions across 8 types (Delay/Damage/Misroute/Shortage/Customs Hold/Weather Disruption/Carrier Failure/Address Mismatch) with color badges, 4 severity levels (Low/Medium/High/Critical) with color badges, 5 escalation levels (L1 Agent/L2 Supervisor/L3 Manager/L4 Director/L5 VP), 4 root causes (Carrier Delay/Weather/Road Condition/Documentation Error) with color badges, resolution time 2-72h, impact ₹5K-₹8.5L, customer impact 1-10/10, SLA breach flag with glow animation, 6 carriers, 4 statuses (Open/Escalated/Resolved/Closed), INR formatting, 3 views (Exceptions with type+severity+escalation+carrier+SLA+impact+cust, RCA with aggregated count+time+breach+cust by root cause, Impact with sorted financial impact bars+cust score+resolution+status). Critical open (SEM-07 Carrier Failure, 72h, impact ₹8.5L, cust 10/10) and SLA breaches (SEM-04, SEM-06, SEM-07, SEM-10) pulse red, Open/Escalated amber border. CSS prefix: sem-*
+- Cleaned unused imports: Truck/Ship/Plane/Train from SCV (statCard references verified: Route, IndianRupee, Target, AlertTriangle; insights: TrendingUp, Globe, AlertTriangle); Wrench/TrendingUp/Package/Timer from SEM (statCard references verified: AlertOctagon, Siren, ShieldAlert, IndianRupee; insights: Siren, IndianRupee, ShieldAlert)
+- Registered both in shared/index.ts (112 exports) and dashboard-view.tsx (1033→1049 lines)
+- CSS appended to globals.css (57,523→57,583 lines, +60 CSS for scv-* and sem-*)
+- TSC: 0 errors | Git pushed: commit de3579a
+
+Stage Summary:
+- 115 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 1049 lines | globals.css: 57,583 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Warehouse labor analytics, 3PL contract optimization, demand sensing refinement, or customs compliance tracker ***
+---
 Task ID: R498 — Logistics Cost Intelligence + Warehouse Energy Management
 Agent: Main Agent (Cron Loop)
 Task: R498 — Create logistics cost intelligence panel with route-level cost breakdown (fuel/labor/toll/GST), multi-modal cost comparison (Road/Sea/Rail/Air), budget tracking with variance analysis, cost per km and cost per package analytics, carrier cost ranking, Indian highway route tracking, NH8/NH44/NH48/NH16/NH27 routes, GST compliance, diesel backup cost tracking, high-cost air freight analytics, and multi-carrier cost intelligence for Indian logistics. Plus warehouse energy management panel with zone-level energy consumption tracking, solar generation analytics, peak/off-peak load management, energy efficiency scoring, CO2 emissions monitoring, solar mix percentage, energy source management (Grid/Solar/Diesel/Battery), temperature and humidity correlation, area-based consumption (kWh/sqm), monthly energy cost tracking, sustainability analytics, and 10 Indian DC energy optimization.
