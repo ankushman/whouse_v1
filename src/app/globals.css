@@ -58042,3 +58042,37 @@ html.theme-transition body {
 .bia-coll-card { transition: all 0.2s; }
 .bia-coll-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes bia-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Demand Forecasting Panel — dfo-* */
+.dfo-filter-pill { transition: all 0.15s; }
+.dfo-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.dfo-card-grid { max-height: 420px; overflow-y: auto; }
+.dfo-item-card { transition: all 0.2s; }
+.dfo-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.dfo-critical { border-left: 4px solid #dc2626; animation: dfo-pulse 2s infinite; }
+.dfo-warning { border-left: 4px solid #f59e0b; }
+.dfo-alert-text { color: #dc2626; font-weight: 600; }
+.dfo-acc-bar { background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 9999px; }
+.dfo-stock-bar { background: linear-gradient(90deg, #6366f1, #4f46e5); border-radius: 9999px; }
+.dfo-acc-card { transition: all 0.2s; }
+.dfo-acc-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dfo-inv-card { transition: all 0.2s; }
+.dfo-inv-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes dfo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Safety Compliance Panel — sfc-* */
+.sfc-filter-pill { transition: all 0.15s; }
+.sfc-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.sfc-card-grid { max-height: 420px; overflow-y: auto; }
+.sfc-item-card { transition: all 0.2s; }
+.sfc-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.sfc-critical { border-left: 4px solid #dc2626; animation: sfc-pulse 2s infinite; }
+.sfc-warning { border-left: 4px solid #f59e0b; }
+.sfc-alert-text { color: #dc2626; font-weight: 600; }
+.sfc-compliance-badge { background: #dbeafe; color: #1d4ed8; font-size: 0.65rem; padding: 1px 6px; border-radius: 9999px; }
+.sfc-risk-bar { border-radius: 9999px; }
+.sfc-risk-card { transition: all 0.2s; }
+.sfc-risk-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sfc-audit-card { transition: all 0.2s; }
+.sfc-audit-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes sfc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

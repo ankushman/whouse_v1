@@ -1,259 +1,215 @@
 "use client"
 
 import React, { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import {
-  Shield, ShieldCheck, ClipboardCheck, AlertTriangle,
-  Users, FileCheck, Award, Clock, Target
+  Shield, AlertTriangle, CheckCircle, Zap
 } from "lucide-react"
 
 const raw = [
-  { id: "SCM-01", dc: "Mumbai DC-1", category: "Fire Safety", item: "Smoke Detector Zone A", standard: "NBC 2016", status: "Compliant", lastAudit: "2026-07-15", nextDue: "2026-10-15", score: 98, auditor: "Safety First India", risk: "Low", findings: 0, corrective: 0, severity: "info" },
-  { id: "SCM-02", dc: "Delhi DC-2", category: "PPE Compliance", item: "Hard Hat Usage Receiving", standard: "Factories Act 1948", status: "Non-Compliant", lastAudit: "2026-07-20", nextDue: "2026-08-20", score: 42, auditor: "Bureau Veritas India", risk: "High", findings: 3, corrective: 2, severity: "critical" },
-  { id: "SCM-03", dc: "Bengaluru DC-3", category: "Electrical Safety", item: "Panel Inspection Zone B", standard: "IS 3043", status: "Compliant", lastAudit: "2026-06-28", nextDue: "2026-12-28", score: 95, auditor: "TUV India", risk: "Low", findings: 0, corrective: 0, severity: "info" },
-  { id: "SCM-04", dc: "Kolkata DC-5", category: "Emergency Exit", item: "Exit Route Zone D Blocked", standard: "NFPA 101", status: "Non-Compliant", lastAudit: "2026-07-25", nextDue: "2026-08-25", score: 35, auditor: "Safety First India", risk: "Critical", findings: 5, corrective: 3, severity: "critical" },
-  { id: "SCM-05", dc: "Chennai DC-6", category: "Machinery Safety", item: "Conveyor Guard Inspection", standard: "IS 5208", status: "Pending Review", lastAudit: "2026-07-10", nextDue: "2026-08-10", score: 78, auditor: "SGS India", risk: "Medium", findings: 2, corrective: 1, severity: "warning" },
-  { id: "SCM-06", dc: "Hyderabad DC-4", category: "Chemical Storage", item: "Hazmat Segregation Cold Chain", standard: "MSDS Compliance", status: "Compliant", lastAudit: "2026-07-18", nextDue: "2027-01-18", score: 92, auditor: "Intertek India", risk: "Low", findings: 1, corrective: 1, severity: "info" },
-  { id: "SCM-07", dc: "Mumbai DC-1", category: "Ergonomics", item: "Manual Lifting Limit Check", standard: "Factories Act 1948", status: "Pending Review", lastAudit: "2026-07-22", nextDue: "2026-08-22", score: 70, auditor: "Bureau Veritas India", risk: "Medium", findings: 1, corrective: 0, severity: "warning" },
-  { id: "SCM-08", dc: "Delhi DC-2", category: "Fire Safety", item: "Sprinkler System Test", standard: "NBC 2016", status: "Compliant", lastAudit: "2026-07-05", nextDue: "2026-10-05", score: 100, auditor: "Safety First India", risk: "Low", findings: 0, corrective: 0, severity: "info" },
-  { id: "SCM-09", dc: "Bengaluru DC-3", category: "Noise Exposure", item: "Packing Station dB Monitoring", standard: "OSHA/IS 7333", status: "Non-Compliant", lastAudit: "2026-07-28", nextDue: "2026-08-28", score: 55, auditor: "TUV India", risk: "High", findings: 2, corrective: 1, severity: "warning" },
-  { id: "SCM-10", dc: "Kolkata DC-5", category: "Training", item: "Forklift Operator Cert", standard: "Factories Act 1948", status: "Overdue", lastAudit: "2026-03-15", nextDue: "2026-07-15", score: 20, auditor: "SGS India", risk: "Critical", findings: 4, corrective: 0, severity: "critical" },
+  { id: "SFC-01", incident: "Fire Drill Q3", type: "Fire Safety", zone: "A1-A3 All", severity: "Low", status: "Completed", date: "25 Jul 2026", inspector: "Ravi Sharma", compliance: "OSHA 1910", hub: "MUM-HUB1", region: "West", action: "Drill completed, 98% evacuation in 4.2min", nextAudit: "25 Oct 2026", riskScore: 15, findings: 0, corrective: 0 },
+  { id: "SFC-02", incident: "Forklift Near Miss", type: "Material Handling", zone: "B2-Picking", severity: "High", status: "Open", date: "01 Aug 2026", inspector: "Anita R", compliance: "ISO 45001", hub: "DEL-HUB2", region: "North", action: "Operator retraining scheduled, barriers installed", nextAudit: "15 Aug 2026", riskScore: 78, findings: 2, corrective: 1 },
+  { id: "SFC-03", incident: "Cold Room Temp Excursion", type: "Cold Chain", zone: "F1-Cold Storage", severity: "Critical", status: "Escalated", date: "30 Jul 2026", inspector: "Kavitha N", compliance: "HACCP", hub: "MAA-HUB4", region: "South", action: "Compressor replaced, 3hr excursion, vaccine batch quarantined", nextAudit: "02 Aug 2026", riskScore: 92, findings: 3, corrective: 2 },
+  { id: "SFC-04", incident: "PPE Non-Compliance", type: "Workplace Safety", zone: "D1-QA", severity: "Medium", status: "Resolved", date: "28 Jul 2026", inspector: "Manoj K", compliance: "OSHA 1910", hub: "CCU-HUB7", region: "East", action: "3 workers counseled, PPE dispensers added at entry", nextAudit: "28 Oct 2026", riskScore: 42, findings: 1, corrective: 1 },
+  { id: "SFC-05", incident: "Rack Collapse Risk", type: "Structural", zone: "A2-Storage", severity: "High", status: "In Progress", date: "02 Aug 2026", inspector: "Deepak T", compliance: "FEM 10.2.02", hub: "BLR-HUB3", region: "South", action: "Selective rack inspection underway, section cordoned", nextAudit: "09 Aug 2026", riskScore: 85, findings: 4, corrective: 3 },
+  { id: "SFC-06", incident: "Chemical Spill Minor", type: "Hazmat", zone: "E2-Hazmat", severity: "Medium", status: "Resolved", date: "27 Jul 2026", inspector: "Vikram J", compliance: "OSHA 1910.120", hub: "HYD-HUB5", region: "South", action: "Acetone spill 2L contained, SDS reviewed, signage updated", nextAudit: "27 Oct 2026", riskScore: 48, findings: 1, corrective: 1 },
+  { id: "SFC-07", incident: "Emergency Exit Blocked", type: "Fire Safety", zone: "C2-Pack", severity: "High", status: "Resolved", date: "29 Jul 2026", inspector: "Sunita B", compliance: "NBC 2016", hub: "PNQ-HUB6", region: "West", action: "Exit cleared, pallets relocated, daily check protocol added", nextAudit: "29 Oct 2026", riskScore: 72, findings: 2, corrective: 2 },
+  { id: "SFC-08", incident: "Ergonomic Assessment Due", type: "Ergonomics", zone: "B1-Picking", severity: "Low", status: "Scheduled", date: "05 Aug 2026", inspector: "Lakshmi P", compliance: "NIOSH Guidelines", hub: "DEL-HUB2", region: "North", action: "Annual ergonomic assessment for picking stations", nextAudit: "05 Aug 2026", riskScore: 25, findings: 0, corrective: 0 },
+  { id: "SFC-09", incident: "Load Securing Failure", type: "Transport Safety", zone: "E1-Dispatch", severity: "High", status: "Open", date: "03 Aug 2026", inspector: "Rajesh Kumar", compliance: "AIS 018", hub: "JAI-HUB9", region: "North", action: "Shifting load on NH8 detected, strap tension protocol revised", nextAudit: "10 Aug 2026", riskScore: 80, findings: 2, corrective: 1 },
+  { id: "SFC-10", incident: "First Aid Kit Expired", type: "Workplace Safety", zone: "All Zones", severity: "Low", status: "Completed", date: "26 Jul 2026", inspector: "Priya Sharma", compliance: "OSHA 1910.151", hub: "MUM-HUB1", region: "West", action: "All 12 first aid kits restocked, expiry tracking system added", nextAudit: "26 Jan 2027", riskScore: 18, findings: 1, corrective: 1 },
 ]
 
-interface SCMItem {
-  id: string; dc: string; category: string; item: string; standard: string
-  status: string; lastAudit: string; nextDue: string; score: number
-  auditor: string; risk: string; findings: number; corrective: number
-  severity: string
+interface SFCItem {
+  id: string; incident: string; type: string; zone: string; severity: string; status: string
+  date: string; inspector: string; compliance: string; hub: string; region: string
+  action: string; nextAudit: string; riskScore: number; findings: number; corrective: number
 }
 
-const items: SCMItem[] = raw.map((r: any) => ({
-  id: r.id, dc: r.dc, category: r.category, item: r.item,
-  standard: r.standard, status: r.status, lastAudit: r.lastAudit,
-  nextDue: r.nextDue, score: r.score, auditor: r.auditor,
-  risk: r.risk, findings: r.findings, corrective: r.corrective,
-  severity: r.severity,
+type Rec = any
+const items: SFCItem[] = raw.map((r: Rec) => ({
+  id: r.id, incident: r.incident, type: r.type, zone: r.zone, severity: r.severity, status: r.status,
+  date: r.date, inspector: r.inspector, compliance: r.compliance, hub: r.hub, region: r.region,
+  action: r.action, nextAudit: r.nextAudit, riskScore: r.riskScore, findings: r.findings, corrective: r.corrective,
 }))
 
-const statusColors: Record<string, string> = {
-  "Compliant": "text-emerald-600 font-semibold", "Non-Compliant": "text-red-600 font-semibold",
-  "Pending Review": "text-amber-600 font-semibold", "Overdue": "text-red-600 font-semibold",
+const typeColors: Record<string, string> = {
+  "Fire Safety": "bg-red-100 text-red-700", "Material Handling": "bg-orange-100 text-orange-700",
+  "Cold Chain": "bg-cyan-100 text-cyan-700", "Workplace Safety": "bg-amber-100 text-amber-700",
+  "Structural": "bg-violet-100 text-violet-700", "Hazmat": "bg-rose-100 text-rose-700",
+  "Ergonomics": "bg-blue-100 text-blue-700", "Transport Safety": "bg-indigo-100 text-indigo-700",
 }
-const riskColors: Record<string, string> = {
+
+const sevColors: Record<string, string> = {
   "Critical": "bg-red-100 text-red-700", "High": "bg-orange-100 text-orange-700",
   "Medium": "bg-amber-100 text-amber-700", "Low": "bg-emerald-100 text-emerald-700",
 }
-const categories = [...new Set(items.map(i => i.category))]
-const dcNames = [...new Set(items.map(i => i.dc))]
-const compliant = items.filter(i => i.status === "Compliant").length
-const nonCompliant = items.filter(i => i.status === "Non-Compliant" || i.status === "Overdue").length
-const pending = items.filter(i => i.status === "Pending Review").length
-const avgScore = Math.round(items.reduce((s, i) => s + i.score, 0) / items.length)
-const totalFindings = items.reduce((s, i) => s + i.findings, 0)
-const totalCorrective = items.reduce((s, i) => s + i.corrective, 0)
 
-type Rec = any
-type FV = Record<string, string>
-type VT = "audits" | "categories" | "compliance"
-
-function statCard(label: string, val: string, icon: React.ElementType, accent: string) {
-  const SIcon = icon
-  return <div className={`scm-stat-card rounded-lg p-3 ${accent}`}><div className="flex items-center gap-2 mb-1"><SIcon className="h-4 w-4 opacity-70" /><span className="text-xs font-medium opacity-70">{label}</span></div><div className="text-lg font-bold">{val}</div></div>
+const statusColors: Record<string, string> = {
+  "Completed": "text-emerald-600 font-semibold", "Open": "text-orange-600 font-semibold",
+  "Escalated": "text-red-600 font-semibold", "Resolved": "text-blue-600 font-semibold",
+  "In Progress": "text-amber-600 font-semibold", "Scheduled": "text-gray-500 font-semibold",
 }
 
-export function SafetyCompliancePanel() {
-  const [activeFilters, setActiveFilters] = useState<FV>({})
-  const [view, setView] = useState<VT>("audits")
+const riskColor = (v: number) => v >= 80 ? "text-red-600" : v >= 50 ? "text-amber-600" : "text-emerald-600"
+const riskBarColor = (v: number) => v >= 80 ? "#dc2626" : v >= 50 ? "#f59e0b" : "#22c55e"
 
-  const filtered = items.filter((r) => {
-    type Rec = any
-    const p: FV = Object.assign({}, activeFilters)
-    return Object.entries(p).every(([k, v]) => r[k as keyof Rec] === v)
-  })
-
-  const toggle = (k: string, nv: string | undefined) => {
-    const n = Object.assign({}, activeFilters)
-    if (nv === undefined) { delete n[k] } else { n[k] = nv }
-    setActiveFilters(n)
-  }
-
-  const insights = [
-    { icon: ShieldCheck, title: "Score", desc: `${avgScore}/100 avg compliance score`, accent: "text-emerald-500" },
-    { icon: AlertTriangle, title: "Findings", desc: `${totalFindings} total, ${totalCorrective} in progress`, accent: "text-red-500" },
-    { icon: Award, title: "Compliant", desc: `${compliant}/${items.length} items pass audit`, accent: "text-blue-500" },
+const SafetyCompliancePanel: React.FC = () => {
+  const [activeFilters, setActiveFilters] = useState<Record<string, string>>({})
+  const [view, setView] = useState<"incidents" | "risk" | "audits">("incidents")
+  const filters = [
+    { key: "type", label: "Type", options: ["Fire Safety", "Material Handling", "Cold Chain", "Workplace Safety", "Structural", "Hazmat", "Ergonomics", "Transport Safety"] },
+    { key: "severity", label: "Severity", options: ["Critical", "High", "Medium", "Low"] },
+    { key: "status", label: "Status", options: ["Completed", "Open", "Escalated", "Resolved", "In Progress", "Scheduled"] },
+    { key: "region", label: "Region", options: ["West", "North", "South", "East"] },
   ]
 
-  const alerts = [
-    ...items.filter(i => i.status === "Overdue").map(i => ({ id: i.id, msg: `${i.dc}: ${i.item} \u2014 OVERDUE since ${i.nextDue}`, severity: "critical" as const })),
-    ...items.filter(i => i.status === "Non-Compliant").map(i => ({ id: i.id, msg: `${i.dc}: ${i.item} \u2014 ${i.findings} findings (${i.risk} risk)`, severity: "critical" as const })),
-    ...items.filter(i => i.status === "Pending Review").map(i => ({ id: i.id, msg: `${i.dc}: ${i.item} \u2014 review due by ${i.nextDue}`, severity: "warning" as const })),
-  ].slice(0, 6)
+  const toggleFilter = (key: string, value: string) => {
+    setActiveFilters(prev => {
+      const n = Object.assign({}, prev)
+      if (n[key] === value) { delete n[key] } else { n[key] = value }
+      return n
+    })
+  }
+
+  const filtered = items.filter((r: Rec) =>
+    Object.entries(activeFilters).every(([k, v]) => r[k as keyof Rec] === v)
+  )
+
+  const totalInc = filtered.length
+  const openInc = filtered.filter(r => r.status === "Open" || r.status === "Escalated" || r.status === "In Progress").length
+  const avgRisk = totalInc ? Math.round(filtered.reduce((s, r) => s + r.riskScore, 0) / totalInc) : 0
+  const totalFindings = filtered.reduce((s, r) => s + r.findings, 0)
+
+  const insights = [
+    { label: "Total Incidents", value: totalInc, icon: Shield, bg: "bg-blue-50" },
+    { label: "Open Cases", value: openInc, icon: AlertTriangle, bg: "bg-red-50" },
+    { label: "Avg Risk Score", value: avgRisk, icon: Zap, bg: "bg-amber-50" },
+    { label: "Findings", value: totalFindings, icon: CheckCircle, bg: "bg-violet-50" },
+  ]
+
+  const isCritical = (r: SFCItem) => r.severity === "Critical" || r.status === "Escalated"
+  const isWarning = (r: SFCItem) => r.severity === "High" && r.status !== "Resolved" && r.status !== "Completed"
 
   return (
-    <Card className="card-depth overflow-hidden border-primary/10">
-      <CardContent className="p-4">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-red-100 flex items-center justify-center"><Shield className="h-4 w-4 text-red-600" /></div>
-            <div><h3 className="text-sm font-bold">Safety Compliance</h3><p className="text-xs opacity-60">{items.length} checks | {categories.length} categories</p></div>
-          </div>
-          <div className="flex gap-1">
-            {(["audits", "categories", "compliance"] as VT[]).map(v => (
-              <Button key={v} size="sm" variant={view === v ? "default" : "outline"} className="h-7 text-xs px-2" onClick={() => setView(v)}>
-                {v === "audits" ? "Audits" : v === "categories" ? "Categories" : "Score"}
-              </Button>
+    <div className="space-y-3">
+      <div className="grid grid-cols-4 gap-3">
+        {insights.map(sc => {
+          const SIcon = sc.icon as React.ElementType
+          return (
+            <div key={sc.label} className={`${sc.bg} rounded-lg p-3`}>
+              <div className="flex items-center gap-2 mb-1"><SIcon className="w-4 h-4 text-muted-foreground" /><span className="text-xs text-muted-foreground">{sc.label}</span></div>
+              <div className="text-lg font-bold">{sc.value}</div>
+            </div>
+          )
+        })}
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {filters.map(f => (
+          <div key={f.key} className="flex items-center gap-1">
+            <span className="text-xs text-muted-foreground mr-1">{f.label}:</span>
+            {f.options.map(o => (
+              <button key={o} onClick={() => toggleFilter(f.key, o)}
+                className={`sfc-filter-pill text-xs px-2 py-0.5 rounded-full border ${activeFilters[f.key] === o ? "bg-primary text-primary-foreground border-primary" : "bg-background border-muted-foreground/20"}`}>{o}</button>
             ))}
           </div>
-        </div>
+        ))}
+      </div>
 
-        <div className="grid grid-cols-4 gap-2 mb-3">
-          {statCard("Compliant", String(compliant), ShieldCheck, "bg-emerald-50/50")}
-          {statCard("Non-Compliant", String(nonCompliant), AlertTriangle, "bg-red-50/50")}
-          {statCard("Pending", String(pending), Clock, "bg-amber-50/50")}
-          {statCard("Avg Score", `${avgScore}/100`, Target, "bg-blue-50/50")}
-        </div>
+      <div className="flex gap-2">
+        {(["incidents", "risk", "audits"] as const).map(v => (
+          <Button key={v} variant={view === v ? "default" : "outline"} size="sm" onClick={() => setView(v)} className="text-xs">{v.charAt(0).toUpperCase() + v.slice(1)}</Button>
+        ))}
+      </div>
 
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {categories.map(c => {
-            const active = activeFilters.category === c
-            return <span key={c} onClick={() => toggle("category", active ? undefined : c)} className={`scm-filter-pill text-xs px-2 py-0.5 rounded-full cursor-pointer select-none ${active ? "bg-primary text-primary-foreground" : "bg-muted/60 text-muted-foreground hover:bg-muted"}`}>{c}</span>
-          })}
-          {dcNames.map(d => {
-            const active = activeFilters.dc === d
-            return <span key={d} onClick={() => toggle("dc", active ? undefined : d)} className={`scm-filter-pill text-xs px-2 py-0.5 rounded-full cursor-pointer select-none ${active ? "bg-primary text-primary-foreground" : "bg-muted/60 text-muted-foreground hover:bg-muted"}`}>{d.split(" ")[0]}</span>
-          })}
-          {(activeFilters.category || activeFilters.dc) && <span onClick={() => setActiveFilters({})} className="scm-filter-clear text-xs px-1.5 py-0.5 rounded cursor-pointer text-red-500 hover:bg-red-50">\u2715</span>}
-        </div>
-
-        <div className="scm-insights-row flex gap-2 mb-3">
-          {insights.map((sc, idx) => { const Ic = sc.icon; return (
-            <div key={idx} className="flex-1 rounded-md border p-2 bg-muted/20">
-              <div className="flex items-center gap-1.5 mb-0.5"><Ic className={`h-3.5 w-3.5 ${sc.accent}`} /><span className="text-[10px] font-semibold">{sc.title}</span></div>
-              <p className="text-[11px] opacity-70">{sc.desc}</p>
-            </div>
-          )})}
-        </div>
-
-        {alerts.length > 0 && (
-          <div className="scm-alerts-list rounded-lg border border-red-200/50 bg-red-50/30 p-2 mb-3 space-y-1">
-            <div className="text-[10px] font-semibold text-red-600 mb-1 flex items-center gap-1"><AlertTriangle className="h-3 w-3" />Safety Alerts ({alerts.length})</div>
-            {alerts.map((a, idx) => (
-              <div key={idx} className="flex items-start gap-1.5 text-[10px]">
-                <span className={`scm-alert-dot h-1.5 w-1.5 rounded-full mt-0.5 shrink-0 ${a.severity === "critical" ? "bg-red-500" : "bg-amber-500"}`} />
-                <span className="text-foreground/80"><span className="font-mono opacity-60">{a.id}</span> {a.msg}</span>
+      {view === "incidents" && (
+        <div className="sfc-card-grid space-y-2">
+          {filtered.map(r => (
+            <div key={r.id} className={`sfc-item-card p-3 rounded-lg border ${isCritical(r) ? "sfc-critical" : isWarning(r) ? "sfc-warning" : "bg-card"}`}>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-muted-foreground">{r.id}</span>
+                  <span className="font-semibold text-sm">{r.incident}</span>
+                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${typeColors[r.type]}`}>{r.type}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${sevColors[r.severity]}`}>{r.severity}</span>
+                  <span className={`text-xs ${statusColors[r.status]}`}>{r.status}</span>
+                </div>
               </div>
-            ))}
-          </div>
-        )}
-
-        {view === "audits" && (
-          <div className="space-y-1.5">
-            {filtered.map(item => {
-              const isNonCompliant = item.status === "Non-Compliant"
-              const isOverdue = item.status === "Overdue"
-              const scoreColor = item.score >= 80 ? "text-emerald-600" : item.score >= 60 ? "text-amber-600" : "text-red-600"
-              return (
-                <div key={item.id} className={`scm-audit-card rounded-lg border p-2.5 bg-card ${isNonCompliant || isOverdue ? "scm-noncompliant-pulse" : item.status === "Pending Review" ? "scm-pending-border" : ""}`}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <div className="flex items-center gap-2">
-                      <span className="scm-id-badge text-[10px] font-mono px-1.5 py-0.5 rounded bg-red-100 text-red-700">{item.id}</span>
-                      <span className="text-xs font-semibold">{item.item}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className={`scm-risk-tag text-[10px] px-1.5 py-0.5 rounded font-semibold ${riskColors[item.risk] || "bg-slate-100"}`}>{item.risk}</span>
-                      <span className={`text-[10px] ${statusColors[item.status] || "text-muted-foreground"}`}>{item.status}</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-[11px] mb-1.5">
-                    <div className="flex items-center gap-1"><Shield className="h-3 w-3 opacity-40" />{item.dc} \u2014 {item.category}</div>
-                    <div className="flex items-center gap-1"><FileCheck className="h-3 w-3 opacity-40" />{item.standard}</div>
-                    <div className="flex items-center gap-1"><Clock className="h-3 w-3 opacity-40" />Last: {item.lastAudit} | Due: {item.nextDue}</div>
-                    <div className="flex items-center gap-1"><Users className="h-3 w-3 opacity-40" />Auditor: {item.auditor.split(" ")[0]}</div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 text-[10px] text-muted-foreground">
-                    <div>Score: <span className={`font-bold ${scoreColor}`}>{item.score}/100</span></div>
-                    <div>Findings: <span className={`font-medium ${item.findings > 0 ? "text-red-600" : "text-foreground"}`}>{item.findings}</span></div>
-                    <div>Corrective: <span className="font-medium">{item.corrective}/{item.findings}</span></div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        )}
-
-        {view === "categories" && (
-          <div className="space-y-2">
-            {categories.map(cat => {
-              const catItems = items.filter(i => i.category === cat)
-              const catCompliant = catItems.filter(i => i.status === "Compliant").length
-              const catScore = Math.round(catItems.reduce((s, i) => s + i.score, 0) / catItems.length)
-              const catFindings = catItems.reduce((s, i) => s + i.findings, 0)
-              return (
-                <div key={cat} className="scm-category-card rounded-lg border p-2.5 bg-card">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <div className="flex items-center gap-2">
-                      <ClipboardCheck className="h-4 w-4 text-slate-500" />
-                      <span className="text-xs font-semibold">{cat}</span>
-                    </div>
-                    <div className="flex gap-2 text-[10px]">
-                      <span className="text-emerald-600">{catCompliant}/{catItems.length} pass</span>
-                      <span className={`font-bold ${catScore >= 80 ? "text-emerald-600" : catScore >= 60 ? "text-amber-600" : "text-red-600"}`}>{catScore}/100</span>
-                    </div>
-                  </div>
-                  <div className="space-y-0.5">
-                    {catItems.map(ci => (
-                      <div key={ci.id} className="flex items-center justify-between text-[10px]">
-                        <span className="flex items-center gap-1.5"><span className="font-mono opacity-50">{ci.id}</span>{ci.dc.split(" ")[0]} \u2014 <span className="opacity-60">{ci.item.slice(0, 25)}</span></span>
-                        <span className={statusColors[ci.status] || ""}>{ci.status}</span>
-                      </div>
-                    ))}
-                  </div>
-                  {catFindings > 0 && <div className="text-[10px] text-red-500 mt-1">{catFindings} open findings</div>}
-                </div>
-              )
-            })}
-          </div>
-        )}
-
-        {view === "compliance" && (
-          <div className="space-y-2">
-            <div className="scm-score-header rounded-lg border p-2 bg-blue-50/50">
-              <div className="grid grid-cols-4 gap-2 text-center">
-                <div><div className="text-lg font-bold text-emerald-600">{compliant}</div><div className="text-[10px] opacity-50">Compliant</div></div>
-                <div><div className="text-lg font-bold text-red-600">{nonCompliant}</div><div className="text-[10px] opacity-50">Non-Compliant</div></div>
-                <div><div className="text-lg font-bold text-amber-600">{totalFindings}</div><div className="text-[10px] opacity-50">Total Findings</div></div>
-                <div><div className="text-lg font-bold text-blue-600">{avgScore}/100</div><div className="text-[10px] opacity-50">Avg Score</div></div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                <div>Zone: <span className="font-medium">{r.zone}</span></div>
+                <div>Inspector: <span className="font-medium">{r.inspector}</span></div>
+                <div>Compliance: <span className="sfc-compliance-badge">{r.compliance}</span></div>
+                <div>Date: <span className="font-medium">{r.date}</span></div>
+                <div>Risk Score: <span className={`font-medium ${riskColor(r.riskScore)}`}>{r.riskScore}/100</span></div>
+                <div>Findings: <span className="font-medium">{r.findings} ({r.corrective} corrective)</span></div>
               </div>
+              <div className="text-xs text-muted-foreground mt-2">Action: {r.action}</div>
+              <div className="flex items-center justify-between mt-1 text-xs text-muted-foreground">
+                <span>{r.hub}, {r.region}</span>
+                <span>Next Audit: {r.nextAudit}</span>
+              </div>
+              {isCritical(r) && <div className="sfc-alert-text text-xs mt-2">Escalated — immediate management attention required</div>}
             </div>
-            {items.sort((a, b) => a.score - b.score).map(item => {
-              const scoreColor = item.score >= 80 ? "text-emerald-600" : item.score >= 60 ? "text-amber-600" : "text-red-600"
-              return (
-                <div key={item.id} className="scm-score-row rounded-lg border p-2 bg-card">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10px] opacity-50">{item.id}</span>
-                      <span className="text-xs font-semibold">{item.dc.split(" ")[0]}</span>
-                      <span className="text-[10px] opacity-50">{item.category}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-16 rounded-full bg-muted overflow-hidden">
-                        <div className={`scm-score-bar h-full rounded-full ${item.score >= 80 ? "bg-emerald-500" : item.score >= 60 ? "bg-amber-500" : "bg-red-500"}`} style={{ width: `${item.score}%` }} />
-                      </div>
-                      <span className={`text-[10px] font-bold ${scoreColor}`}>{item.score}</span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 gap-2 text-[10px] text-muted-foreground">
-                    <div>Risk: <span className={`scm-risk-inline font-medium px-1 py-0.5 rounded text-[9px] ${riskColors[item.risk] || ""}`}>{item.risk}</span></div>
-                    <div>Findings: <span className="font-medium">{item.findings}</span></div>
-                    <div>Standard: <span className="font-medium text-foreground">{item.standard}</span></div>
-                  </div>
+          ))}
+        </div>
+      )}
+
+      {view === "risk" && (
+        <div className="space-y-2">
+          {[...filtered].sort((a, b) => b.riskScore - a.riskScore).map(r => (
+            <div key={r.id} className="sfc-risk-card p-3 rounded-lg border bg-card">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-muted-foreground">{r.id}</span>
+                  <span className="font-semibold text-sm">{r.incident}</span>
+                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${sevColors[r.severity]}`}>{r.severity}</span>
                 </div>
-              )
-            })}
-          </div>
-        )}
-      </CardContent>
-    </Card>
+                <span className={`text-lg font-bold ${riskColor(r.riskScore)}`}>{r.riskScore}</span>
+              </div>
+              <div className="w-full bg-muted rounded-full h-2 mb-2"><div className="sfc-risk-bar h-2 rounded-full" style={{ width: `${r.riskScore}%`, backgroundColor: riskBarColor(r.riskScore) }} /></div>
+              <div className="grid grid-cols-4 gap-2 text-xs">
+                <div>Type: <span className={`px-1.5 py-0.5 rounded-full ${typeColors[r.type]}`}>{r.type}</span></div>
+                <div>Status: <span className={`font-medium ${statusColors[r.status]}`}>{r.status}</span></div>
+                <div>Findings: <span className="font-medium">{r.findings}</span></div>
+                <div>Hub: <span className="font-medium">{r.hub}</span></div>
+              </div>
+              <div className="text-xs text-muted-foreground mt-2">{r.action}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {view === "audits" && (
+        <div className="space-y-2">
+          {[...filtered].sort((a, b) => new Date(a.nextAudit).getTime() - new Date(b.nextAudit).getTime()).map(r => (
+            <div key={r.id} className="sfc-audit-card p-3 rounded-lg border bg-card">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-muted-foreground">{r.id}</span>
+                  <span className="font-semibold text-sm">{r.incident}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="sfc-compliance-badge">{r.compliance}</span>
+                  <span className={`text-xs ${statusColors[r.status]}`}>{r.status}</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                <div>Next Audit: <span className="font-medium">{r.nextAudit}</span></div>
+                <div>Inspector: <span className="font-medium">{r.inspector}</span></div>
+                <div>Zone: <span className="font-medium">{r.zone}</span></div>
+                <div>Risk: <span className={`font-medium ${riskColor(r.riskScore)}`}>{r.riskScore}/100</span></div>
+                <div>Hub: <span className="font-medium">{r.hub}</span></div>
+                <div>Severity: <span className={`px-1.5 py-0.5 rounded-full ${sevColors[r.severity]}`}>{r.severity}</span></div>
+              </div>
+              <div className="text-xs text-muted-foreground mt-2">{r.action}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }
+
+export { SafetyCompliancePanel }
