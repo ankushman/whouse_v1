@@ -67,6 +67,8 @@ import { ThirdPartyLogisticsPanel } from "@/components/shared/third-party-logist
 import { WarehouseNetworkMonitoringPanel } from "@/components/shared/warehouse-network-monitoring-panel"
 import { QualityManagementPanel } from "@/components/shared/quality-management-panel"
 import { FulfillmentAnalyticsPanel } from "@/components/shared/fulfillment-analytics-panel"
+import { ReturnsProcessingAnalyticsPanel } from "@/components/shared/returns-processing-analytics-panel"
+import { CrossDockOperationsPanel } from "@/components/shared/cross-dock-operations-panel"
 import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
 import { InventoryReplenishmentPanel } from "@/components/shared/inventory-replenishment-panel"
 import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
@@ -114,6 +116,8 @@ import { ThirdPartyLogisticsPanel } from "@/components/shared/third-party-logist
 import { WarehouseNetworkMonitoringPanel } from "@/components/shared/warehouse-network-monitoring-panel"
 import { QualityManagementPanel } from "@/components/shared/quality-management-panel"
 import { FulfillmentAnalyticsPanel } from "@/components/shared/fulfillment-analytics-panel"
+import { ReturnsProcessingAnalyticsPanel } from "@/components/shared/returns-processing-analytics-panel"
+import { CrossDockOperationsPanel } from "@/components/shared/cross-dock-operations-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -809,6 +813,20 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
+        {/* Returns Processing Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ReturnsProcessingAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Cross-Dock Operations */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CrossDockOperationsPanel />
+          </CardContent>
+        </Card>
+
         {/* Warehouse Simulation */}
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
@@ -1135,6 +1153,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <FulfillmentAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Returns Processing Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ReturnsProcessingAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Cross-Dock Operations */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CrossDockOperationsPanel />
           </CardContent>
         </Card>
       </div>

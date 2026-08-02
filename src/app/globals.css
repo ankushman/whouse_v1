@@ -57787,3 +57787,47 @@ html.theme-transition body {
 .fla-sla-row:hover { border-color: rgba(59,130,246,0.3); }
 @keyframes fla-critical-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.15); } }
 @keyframes fla-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === RPA (Returns Processing Analytics Panel) === */
+.rpa-stat-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.rpa-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.rpa-filter-pill { transition: all 0.15s ease; }
+.rpa-insights-row > div { transition: border-color 0.2s ease; }
+.rpa-insights-row > div:hover { border-color: rgba(244,63,94,0.3); }
+.rpa-alert-dot { animation: rpa-dot-pulse 2s ease-in-out infinite; }
+.rpa-id-badge { font-variant-numeric: tabular-nums; }
+.rpa-reason-tag { font-weight: 500; }
+.rpa-grade-tag { font-weight: 600; }
+.rpa-ret-card { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.rpa-ret-card:hover { border-color: rgba(244,63,94,0.2); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.rpa-overdue-pulse { animation: rpa-overdue-pulse 2s ease-in-out infinite; }
+.rpa-overdue-pulse { border-left: 3px solid #ef4444; }
+.rpa-warning-border { border-left: 3px solid #f59e0b; }
+.rpa-grade-row { transition: border-color 0.15s ease; }
+.rpa-grade-row:hover { border-color: rgba(16,185,129,0.3); }
+.rpa-fin-row { transition: border-color 0.15s ease; }
+.rpa-fin-row:hover { border-color: rgba(245,158,11,0.3); }
+@keyframes rpa-overdue-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.15); } }
+@keyframes rpa-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === CDO (Cross-Dock Operations Panel) === */
+.cdo-stat-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.cdo-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.cdo-filter-pill { transition: all 0.15s ease; }
+.cdo-insights-row > div { transition: border-color 0.2s ease; }
+.cdo-insights-row > div:hover { border-color: rgba(99,102,241,0.3); }
+.cdo-alert-dot { animation: cdo-dot-pulse 2s ease-in-out infinite; }
+.cdo-id-badge { font-variant-numeric: tabular-nums; }
+.cdo-mode-tag { font-weight: 500; }
+.cdo-pri-tag { font-weight: 500; }
+.cdo-lane-card { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.cdo-lane-card:hover { border-color: rgba(99,102,241,0.2); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.cdo-critical-pulse { animation: cdo-critical-pulse 2s ease-in-out infinite; }
+.cdo-critical-pulse { border-left: 3px solid #ef4444; }
+.cdo-warning-border { border-left: 3px solid #f59e0b; }
+.cdo-tp-row { transition: border-color 0.15s ease; }
+.cdo-tp-row:hover { border-color: rgba(34,197,94,0.3); }
+.cdo-dock-row { transition: border-color 0.15s ease; }
+.cdo-dock-row:hover { border-color: rgba(99,102,241,0.3); }
+@keyframes cdo-critical-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.15); } }
+@keyframes cdo-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
