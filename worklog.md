@@ -6605,3 +6605,88 @@ PRIORITY NEXT (for cron job):
 4. Mobile experience enhancements with sheet drawers
 5. Dashboard home page widgets enhancement
 6. Manually integrate SearchFilterToolbar into remaining table-based modules
+---
+Task ID: R262
+Agent: Main Agent (Cron Loop)
+Task: R262 — Warehouse Energy Analytics + Route Intelligence Hub + Fix Duplicate Entries
+
+Work Log:
+- Read worklog.md: R261 complete, but concurrent cron (31b81a8) added many more modules
+- TSC pre-validation: 0 errors in src/
+- SWC parse: all src/ directories OK
+- Dev server OOM (known infra issue)
+
+- BUG FIX — Duplicate navItems discovered:
+  * demand-sensing-ai appeared at lines 184 AND 378 in app-store.ts
+  * returns-prediction-engine appeared at lines 185 AND 379 in app-store.ts
+  * Same duplicates in page.tsx (imports + viewMap) and modules/index.ts (exports)
+  * Root cause: Concurrent cron job added these entries at different positions
+  * Fixed by removing the duplicate entries at lines 378-379 (store), 382-383+762-763 (page.tsx), 373-374 (index.ts)
+  * Verified: 0 duplicate navItem IDs, 0 duplicate imports after fix
+
+- Created Warehouse Energy Analytics module (R262a, commit 5c96de8):
+  * FILE: src/components/modules/warehouse-energy-analytics-view.tsx (209 lines)
+  * 4 tabs: Dashboard | Consumption | Energy Sources | Insights
+  * Theme: Green #16a34a + Teal #0d9488, CSS prefix: wea-*
+  * Tab 0 (Dashboard): 4 KPIs, consumption by warehouse BarChart, cost vs solar AreaChart, CO2 by source BarChart
+  * Tab 1 (Consumption): SearchFilterToolbar with 4 filter groups (warehouse/zone/source/cert), 58 records with WarehouseBadge, ZoneBadge (cold=teal), SourceBadge (green=solar/wind/biomass), CertBadge (uncertified=red), EfficiencyRing (SVG), ConsumpBar
+  * Tab 2 (Energy Sources): Zone-wise consumption vs efficiency LineChart, energy mix PieChart
+  * Tab 3 (Insights): 4 deep insight cards on solar ROI, cold chain energy, power factor correction, diesel phase-out
+  * 8 warehouses, 8 zones, 6 energy sources, 6 certifications, 58 data records
+  * Critical rows (>=5 alerts): red background + left border; Warning rows (>=3 alerts): amber background + left border
+
+- Created Route Intelligence Hub module (R262b, commit 5c96de8):
+  * FILE: src/components/modules/route-intelligence-hub-view.tsx (214 lines)
+  * 4 tabs: Dashboard | Routes | Analytics | Insights
+  * Theme: Teal #0d9488 + Amber #f59e0b, CSS prefix: rih-*
+  * Tab 0 (Dashboard): 4 KPIs, on-time % by corridor BarChart, ETA deviation LineChart, cost vs load factor by vehicle BarChart
+  * Tab 1 (Routes): SearchFilterToolbar with 4 filter groups (corridor/vehicle/condition/weather), 58 records with CorridorBadge, VehicleBadge, ConditionBadge (poor/flooded/accident=red), WeatherBadge (heavy rain/fog/thunder=red), DeviationBar, LoadRing (SVG), OnTimeBadge, driver rating
+  * Tab 2 (Analytics): Route condition PieChart, distance vs cost AreaChart
+  * Tab 3 (Insights): 4 deep insight cards on Mumbai-Delhi corridor, monsoon impact, vehicle utilization, driver safety analytics
+  * 8 corridors, 8 vehicle types, 8 road conditions, 8 weather types, 58 data records
+  * Critical rows (>=3 incidents): red background + left border; Delayed rows: amber background + left border
+
+- Registered both modules in 3 files (icons Zap + Route already in iconMap):
+  * src/components/modules/index.ts: +WarehouseEnergyAnalyticsView +RouteIntelligenceHubView
+  * src/app/page.tsx: imports + viewMap entries
+  * src/store/app-store.ts: 2 new navItems (warehouse-energy-analytics: icon Zap group sustainability, route-intelligence-hub: icon Route group transport)
+
+- CSS: +56 lines to globals.css (wea-* + rih-* classes with critical/warning row highlighting)
+
+- TSC final: 0 errors in src/
+- SWC parse: 2/2 new modules OK
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports
+- Git: commit 5c96de8 pushed to origin/main
+
+Stage Summary:
+- BUG FIX: Removed 3 sets of duplicate entries caused by concurrent cron job
+- NEW MODULE: Warehouse Energy Analytics (209 lines, 7 visual components, 58 data records, 4 tabs)
+- NEW MODULE: Route Intelligence Hub (214 lines, 8 visual components, 58 data records, 4 tabs)
+- Total module files: 376 (was 374, +2)
+- CSS: ~58,428 lines (+56 from R262)
+- Total data: 116 records across both modules
+- ZERO src/ TSC errors
+- ZERO duplicate navItem IDs or imports
+- GITHUB: Pushed to origin/main (5c96de8)
+
+## Updated Project Status (Post Round 262)
+- STATUS: STABLE — All modules compile, duplicates fixed, all registrations clean
+- MODULE FILES: 376 | NAVITEMS: 375 (after removing 2 duplicates)
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: ~58,428 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate navItems/imports (FIXED this round, but pattern risk remains)
+- SearchFilterToolbar not integrated into all table-based modules
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (Driver Performance Hub, Load Optimization Command)
+2. Cross-module drill-down navigation (click value -> navigate to related module)
+3. Real-time WebSocket events for live updates
+4. Mobile experience enhancements with sheet drawers
+5. Dashboard home page widgets enhancement
+6. Always check for and clean up duplicate entries from concurrent cron jobs
