@@ -59915,3 +59915,23 @@ html.theme-transition body {
 .ghy-table-wrap table tbody tr { transition: background-color 0.15s ease; }
 .ghy-table-wrap table tbody tr:hover { background-color: rgba(6, 78, 59, 0.04); }
 .ghy-registry .ghy-table-wrap table { border-collapse: separate; border-spacing: 0; }
+
+/* ── R304a: Semiconductor Fab Logistics (sfl-*) ────────────────────── */
+.sfl-root { font-family: 'Inter', system-ui, sans-serif; }
+.sfl-tabs .sfl-tab { transition: all 0.2s ease; }
+.sfl-tabs .sfl-tab:hover { transform: translateY(-1px); }
+.sfl-dashboard .grid > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.sfl-dashboard .grid > div:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(30, 27, 75, 0.15); }
+.sfl-table-wrap table tbody tr { transition: background-color 0.15s ease; }
+.sfl-table-wrap table tbody tr:hover { background-color: rgba(30, 27, 75, 0.04); }
+.sfl-registry .sfl-table-wrap table { border-collapse: separate; border-spacing: 0; }
+
+/* ── R304b: Offshore Wind Turbine Logistics (owf-*) ──────────────── */
+.owf-root { font-family: 'Inter', system-ui, sans-serif; }
+.owf-tabs .owf-tab { transition: all 0.2s ease; }
+.owf-tabs .owf-tab:hover { transform: translateY(-1px); }
+.owf-dashboard .grid > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.owf-dashboard .grid > div:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15); }
+.owf-table-wrap table tbody tr { transition: background-color 0.15s ease; }
+.owf-table-wrap table tbody tr:hover { background-color: rgba(15, 23, 42, 0.04); }
+.owf-registry .owf-table-wrap table { border-collapse: separate; border-spacing: 0; }
