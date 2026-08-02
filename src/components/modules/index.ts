@@ -388,3 +388,5 @@ export { default as GstInvoiceEInvoicingCommandView } from './gst-invoice-e-invo
 export { default as FreightInvoiceReconciliationView } from './freight-invoice-reconciliation-view'
 export { default as IcdContainerYardIntelligenceView } from './icd-container-yard-intelligence-view'
 export { default as WarehouseSpaceCapacityPlannerView } from './warehouse-space-capacity-planner-view'
+export { default as ShipmentTrackingMilestoneView } from './shipment-tracking-milestone-view'
+export { default as TransitInsuranceClaimsView } from './transit-insurance-claims-view'

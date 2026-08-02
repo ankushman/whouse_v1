@@ -394,6 +394,8 @@ export const navItems: NavItem[] = [
   { id: 'freight-invoice-reconciliation', label: 'Freight Audit', icon: 'Scale', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'finance', 'logistics'] },
   { id: 'icd-container-yard-intelligence', label: 'ICD Yard Intel', icon: 'Container', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'logistics', 'operations_planner'] },
   { id: 'warehouse-space-capacity-planner', label: 'Space Planner', icon: 'LayoutGrid', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner'] },
+  { id: 'shipment-tracking-milestone', label: 'Shipment Tracking', icon: 'Target', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'logistics', 'operations_planner', 'warehouse_manager'] },
+  { id: 'transit-insurance-claims', label: 'Insurance Claims', icon: 'ShieldCheck', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'finance', 'logistics'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
