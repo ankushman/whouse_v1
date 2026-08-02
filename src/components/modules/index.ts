@@ -414,3 +414,5 @@ export { default as LpgDistributionLogisticsView } from './lpg-distribution-logi
 export { default as EWasteRecyclingLogisticsView } from './e-waste-recycling-logistics-view'
 export { default as DairyFarmLogisticsView } from './dairy-farm-logistics-view'
 export { default as TextileMillLogisticsView } from './textile-mill-logistics-view'
+export { default as FmcgDistributionLogisticsView } from './fmcg-distribution-logistics-view'
+export { default as CementBlendLogisticsView } from './cement-blend-logistics-view'

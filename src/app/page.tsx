@@ -424,6 +424,8 @@ import LpgDistributionLogisticsView from "@/components/modules/lpg-distribution-
 import EWasteRecyclingLogisticsView from "@/components/modules/e-waste-recycling-logistics-view"
 import DairyFarmLogisticsView from "@/components/modules/dairy-farm-logistics-view"
 import TextileMillLogisticsView from "@/components/modules/textile-mill-logistics-view"
+import FmcgDistributionLogisticsView from "@/components/modules/fmcg-distribution-logistics-view"
+import CementBlendLogisticsView from "@/components/modules/cement-blend-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -847,6 +849,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "e-waste-recycling-logistics": EWasteRecyclingLogisticsView,
   "dairy-farm-logistics": DairyFarmLogisticsView,
   "textile-mill-logistics": TextileMillLogisticsView,
+  "fmcg-distribution-logistics": FmcgDistributionLogisticsView,
+  "cement-blend-logistics": CementBlendLogisticsView,
 }
 
 

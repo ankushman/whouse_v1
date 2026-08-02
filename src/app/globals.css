@@ -59341,3 +59341,43 @@ html.theme-transition body {
 .txl-insight { transition: all 0.25s ease; border-left: 3px solid #ede9fe; }
 .txl-insight:hover { box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12); transform: translateY(-2px); }
 @keyframes txl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ===== FMCG Distribution Logistics (fmcg-*) ===== */
+.fmcg-root { animation: fmcg-fade 0.3s ease; }
+.fmcg-tab { transition: all 0.2s ease; }
+.fmcg-tab:hover { background: rgba(220, 38, 38, 0.08); }
+.fmcg-kpi { border-left: 3px solid #dc2626; transition: all 0.2s ease; }
+.fmcg-kpi:hover { box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1); transform: translateY(-1px); }
+.fmcg-kpi-label { letter-spacing: 0.025em; }
+.fmcg-kpi-val { font-variant-numeric: tabular-nums; }
+.fmcg-kpi-sub { margin-top: 2px; }
+.fmcg-chart { transition: box-shadow 0.2s ease; }
+.fmcg-chart:hover { box-shadow: 0 2px 8px rgba(220, 38, 38, 0.08); }
+.fmcg-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.fmcg-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.fmcg-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.fmcg-row-warning { border-left: 3px solid #d97706 !important; }
+.fmcg-row-info { border-left: 3px solid #2563eb !important; }
+.fmcg-insight { transition: all 0.25s ease; border-left: 3px solid #fee2e2; }
+.fmcg-insight:hover { box-shadow: 0 6px 20px rgba(220, 38, 38, 0.12); transform: translateY(-2px); }
+@keyframes fmcg-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ===== Cement Blend Logistics (cmt-*) ===== */
+.cmt-root { animation: cmt-fade 0.3s ease; }
+.cmt-tab { transition: all 0.2s ease; }
+.cmt-tab:hover { background: rgba(120, 113, 108, 0.08); }
+.cmt-kpi { border-left: 3px solid #78716c; transition: all 0.2s ease; }
+.cmt-kpi:hover { box-shadow: 0 4px 12px rgba(120, 113, 108, 0.1); transform: translateY(-1px); }
+.cmt-kpi-label { letter-spacing: 0.025em; }
+.cmt-kpi-val { font-variant-numeric: tabular-nums; }
+.cmt-kpi-sub { margin-top: 2px; }
+.cmt-chart { transition: box-shadow 0.2s ease; }
+.cmt-chart:hover { box-shadow: 0 2px 8px rgba(120, 113, 108, 0.08); }
+.cmt-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.cmt-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.cmt-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.cmt-row-warning { border-left: 3px solid #d97706 !important; }
+.cmt-row-info { border-left: 3px solid #2563eb !important; }
+.cmt-insight { transition: all 0.25s ease; border-left: 3px solid #e7e5e4; }
+.cmt-insight:hover { box-shadow: 0 6px 20px rgba(120, 113, 108, 0.12); transform: translateY(-2px); }
+@keyframes cmt-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
