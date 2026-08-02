@@ -162,6 +162,8 @@ import { PickPerformanceAnalyticsPanel } from "@/components/shared/pick-performa
 import { InventoryHealthMonitorPanel } from "@/components/shared/inventory-health-monitor-panel"
 import { MultiModalOptimizationPanel } from "@/components/shared/multi-modal-optimization-panel"
 import { PackagingAnalyticsPanel } from "@/components/shared/packaging-analytics-panel"
+import { OrderAccuracyDashboardPanel } from "@/components/shared/order-accuracy-dashboard-panel"
+import { CrossBorderCompliancePanel } from "@/components/shared/cross-border-compliance-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -918,6 +920,11 @@ export function DashboardView() {
             <MultiModalOptimizationPanel />
           </CardContent>
         </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <OrderAccuracyDashboardPanel />
+          </CardContent>
+        </Card>
 
         {/* 3PL Vendor Scorecard */}
         <Card className="card-depth overflow-hidden border-primary/10">
@@ -1130,6 +1137,11 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <MultiModalOptimizationPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <OrderAccuracyDashboardPanel />
           </CardContent>
         </Card>
 
@@ -1593,6 +1605,11 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <PackagingAnalyticsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CrossBorderCompliancePanel />
           </CardContent>
         </Card>
       </div>

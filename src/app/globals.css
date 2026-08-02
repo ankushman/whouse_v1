@@ -58240,3 +58240,38 @@ html.theme-transition body {
 .pka-cost-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 .pka-sust-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes pka-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* OAC - Order Accuracy Dashboard Panel */
+.oac-filter-pill { transition: all 0.15s; }
+.oac-filter-pill:hover { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+.oac-card-grid { }
+.oac-item-card { transition: all 0.2s; }
+.oac-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.oac-critical { border-color: #ef4444; border-left: 3px solid #ef4444; animation: oac-pulse 2s infinite; background: linear-gradient(135deg, #fef2f2, #fff5f5); }
+.oac-warning { border-left: 3px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fffef5); }
+.oac-alert-text { color: #dc2626; font-weight: 500; }
+.oac-err-bar { background: linear-gradient(90deg, #ef4444, #dc2626); transition: width 0.3s; }
+.oac-err-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.oac-sla-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.oac-sla-breach { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.oac-sla-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.oac-empty-state { color: #6b7280; border: 1px dashed #e5e7eb; border-radius: 0.5rem; }
+@keyframes oac-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* CBC - Cross Border Compliance Panel */
+.cbc-filter-pill { transition: all 0.15s; }
+.cbc-filter-pill:hover { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+.cbc-card-grid { }
+.cbc-item-card { transition: all 0.2s; }
+.cbc-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cbc-critical { border-color: #ef4444; border-left: 3px solid #ef4444; animation: cbc-pulse 2s infinite; background: linear-gradient(135deg, #fef2f2, #fff5f5); }
+.cbc-warning { border-left: 3px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fffef5); }
+.cbc-alert-text { color: #dc2626; font-weight: 500; }
+.cbc-risk-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.cbc-risk-high { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.cbc-risk-med { background: linear-gradient(90deg, #f59e0b, #d97706) !important; }
+.cbc-risk-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cbc-doc-bar { background: linear-gradient(90deg, #3b82f6, #6366f1); transition: width 0.3s; }
+.cbc-doc-expiring { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.cbc-doc-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes cbc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

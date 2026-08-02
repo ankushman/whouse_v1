@@ -149,3 +149,5 @@ export { PickPerformanceAnalyticsPanel } from './pick-performance-analytics-pane
 export { InventoryHealthMonitorPanel } from './inventory-health-monitor-panel'
 export { MultiModalOptimizationPanel } from './multi-modal-optimization-panel'
 export { PackagingAnalyticsPanel } from './packaging-analytics-panel'
+export { OrderAccuracyDashboardPanel } from './order-accuracy-dashboard-panel'
+export { CrossBorderCompliancePanel } from './cross-border-compliance-panel'
