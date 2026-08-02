@@ -430,3 +430,5 @@ export { default as MetroRailOperationsLogisticsView } from './metro-rail-operat
 export { default as TelecomTowerLogisticsView } from './telecom-tower-logistics-view'
 export { default as OversizeOdcTransportLogisticsView } from './oversize-odc-transport-logistics-view'
 export { default as ParcelSortationLogisticsView } from './parcel-sortation-logistics-view'
+export { default as PipelineIntegrityLogisticsView } from './pipeline-integrity-logistics-view'
+export { default as SolarPanelRecyclingLogisticsView } from './solar-panel-recycling-logistics-view'

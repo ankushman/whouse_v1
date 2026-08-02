@@ -59673,3 +59673,42 @@ html.theme-transition body {
 .psl-insight p { line-height: 1.7; }
 .psl-table-wrap { overflow-x: auto; }
 .psl-table-wrap table { min-width: 1600px; }
+/* R298a: Pipeline Integrity Logistics - pil-* sky blue theme */
+.pil-root { font-family: 'Inter', system-ui, sans-serif; }
+.pil-tabs { gap: 0.25rem; }
+.pil-tab { transition: all 0.2s; cursor: pointer; }
+.pil-tab:hover { background: #f0f9ff; }
+.pil-kpi { transition: box-shadow 0.2s; }
+.pil-kpi:hover { box-shadow: 0 2px 8px rgba(12,74,110,0.12); }
+.pil-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.pil-kpi-val { font-size: 1.5rem; line-height: 1.3; }
+.pil-chart { transition: box-shadow 0.2s; }
+.pil-chart:hover { box-shadow: 0 2px 12px rgba(12,74,110,0.1); }
+.pil-badge { font-weight: 600; letter-spacing: 0.02em; }
+.pil-row-critical { border-left: 4px solid #ef4444; }
+.pil-row-warning { border-left: 4px solid #f59e0b; }
+.pil-row-info { border-left: 4px solid #3b82f6; }
+.pil-insight h3 { line-height: 1.4; }
+.pil-insight p { line-height: 1.7; }
+.pil-table-wrap { overflow-x: auto; }
+.pil-table-wrap table { min-width: 1600px; }
+
+/* R298b: Solar Panel Recycling Logistics - spr-* lime green theme */
+.spr-root { font-family: 'Inter', system-ui, sans-serif; }
+.spr-tabs { gap: 0.25rem; }
+.spr-tab { transition: all 0.2s; cursor: pointer; }
+.spr-tab:hover { background: #f7fee7; }
+.spr-kpi { transition: box-shadow 0.2s; }
+.spr-kpi:hover { box-shadow: 0 2px 8px rgba(54,83,20,0.12); }
+.spr-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.spr-kpi-val { font-size: 1.5rem; line-height: 1.3; }
+.spr-chart { transition: box-shadow 0.2s; }
+.spr-chart:hover { box-shadow: 0 2px 12px rgba(54,83,20,0.1); }
+.spr-badge { font-weight: 600; letter-spacing: 0.02em; }
+.spr-row-critical { border-left: 4px solid #ef4444; }
+.spr-row-warning { border-left: 4px solid #f59e0b; }
+.spr-row-info { border-left: 4px solid #3b82f6; }
+.spr-insight h3 { line-height: 1.4; }
+.spr-insight p { line-height: 1.7; }
+.spr-table-wrap { overflow-x: auto; }
+.spr-table-wrap table { min-width: 1600px; }

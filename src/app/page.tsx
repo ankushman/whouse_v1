@@ -440,6 +440,8 @@ import MetroRailOperationsLogisticsView from "@/components/modules/metro-rail-op
 import TelecomTowerLogisticsView from "@/components/modules/telecom-tower-logistics-view"
 import OversizeOdcTransportLogisticsView from "@/components/modules/oversize-odc-transport-logistics-view"
 import ParcelSortationLogisticsView from "@/components/modules/parcel-sortation-logistics-view"
+import PipelineIntegrityLogisticsView from "@/components/modules/pipeline-integrity-logistics-view"
+import SolarPanelRecyclingLogisticsView from "@/components/modules/solar-panel-recycling-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -879,6 +881,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "telecom-tower-logistics": TelecomTowerLogisticsView,
   "oversize-odc-transport-logistics": OversizeOdcTransportLogisticsView,
   "parcel-sortation-logistics": ParcelSortationLogisticsView,
+  "pipeline-integrity-logistics": PipelineIntegrityLogisticsView,
+  "solar-panel-recycling-logistics": SolarPanelRecyclingLogisticsView,
 }
 
 
