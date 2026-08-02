@@ -56736,3 +56736,51 @@ html.theme-transition body {
 @keyframes gmt-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
 .gmt-rejected-pulse{animation:gmt-rejected-pulse 2s ease infinite}
 .gmt-hold-border{border-left:3px solid #f59e0b}
+/* ===== VAS - Value-Added Services Panel ===== */
+.vas-stat-card{transition:all .2s ease;border:1px solid transparent}
+.vas-stat-card:hover{border-color:hsl(var(--primary)/.15);transform:translateY(-1px)}
+.vas-filter-pill{transition:all .15s ease}
+.vas-filter-pill:hover{background:hsl(var(--muted))}
+.vas-filter-clear{transition:all .15s ease}
+.vas-service-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.vas-service-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.vas-progress-bar{transition:width .5s ease}
+.vas-id-badge{font-size:10px;font-weight:600;letter-spacing:.3px}
+.vas-priority-tag{font-weight:600;letter-spacing:.2px}
+.vas-insights-row > div{transition:all .2s ease}
+.vas-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+.vas-operator-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.vas-operator-card:hover{border-color:hsl(var(--primary)/.15)}
+.vas-profit-header{border-color:hsl(var(--primary)/.15);background:hsl(var(--primary)/.03)}
+.vas-profit-row{transition:all .2s ease}
+.vas-profit-row:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.vas-alerts-list{transition:all .2s ease}
+.vas-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.vas-alert-dot{animation:vas-dot-blink 1.2s ease infinite}
+@keyframes vas-delayed-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes vas-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.vas-delayed-pulse{animation:vas-delayed-pulse 2s ease infinite}
+
+/* ===== LMD - Last-Mile Delivery Panel ===== */
+.lmd-stat-card{transition:all .2s ease;border:1px solid transparent}
+.lmd-stat-card:hover{border-color:hsl(var(--primary)/.15);transform:translateY(-1px)}
+.lmd-filter-pill{transition:all .15s ease}
+.lmd-filter-pill:hover{background:hsl(var(--muted))}
+.lmd-filter-clear{transition:all .15s ease}
+.lmd-shipment-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.lmd-shipment-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.lmd-id-badge{font-size:10px;font-weight:600;letter-spacing:.3px}
+.lmd-insights-row > div{transition:all .2s ease}
+.lmd-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+.lmd-partner-card{transition:all .2s ease;border:1px solid hsl(var(--border))}
+.lmd-partner-card:hover{border-color:hsl(var(--primary)/.15);box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.lmd-perf-header{border-color:hsl(var(--primary)/.15);background:hsl(var(--primary)/.03)}
+.lmd-perf-row{transition:all .2s ease}
+.lmd-perf-row:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.lmd-alerts-list{transition:all .2s ease}
+.lmd-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.lmd-alert-dot{animation:lmd-dot-blink 1.2s ease infinite}
+@keyframes lmd-failed-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes lmd-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.lmd-failed-pulse{animation:lmd-failed-pulse 2s ease infinite}
+.lmd-delayed-border{border-left:3px solid #f59e0b}

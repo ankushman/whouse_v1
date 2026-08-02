@@ -72,6 +72,8 @@ import { ContainerUnloadingPanel } from "@/components/shared/container-unloading
 import { CargoInsurancePanel } from "@/components/shared/cargo-insurance-panel"
 import { RailConsignmentPanel } from "@/components/shared/rail-consignment-panel"
 import { GateManagementPanel } from "@/components/shared/gate-management-panel"
+import { ValueAddedServicesPanel } from "@/components/shared/value-added-services-panel"
+import { LastMileDeliveryPanel } from "@/components/shared/last-mile-delivery-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -799,6 +801,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <GateManagementPanel />
+          </CardContent>
+        </Card>
+
+        {/* Value-Added Services */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ValueAddedServicesPanel />
+          </CardContent>
+        </Card>
+
+        {/* Last-Mile Delivery */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <LastMileDeliveryPanel />
           </CardContent>
         </Card>
       </div>
