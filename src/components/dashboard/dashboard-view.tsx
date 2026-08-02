@@ -63,6 +63,8 @@ import { ColdChainMonitoringPanel } from "@/components/shared/cold-chain-monitor
 import { ThreePLVendorScorecardPanel } from "@/components/shared/three-pl-vendor-scorecard-panel"
 import { SlottingOptimizerPanel } from "@/components/shared/slotting-optimizer-panel"
 import { DemandSensingAnalyticsPanel } from "@/components/shared/demand-sensing-analytics-panel"
+import { ThirdPartyLogisticsPanel } from "@/components/shared/third-party-logistics-panel"
+import { WarehouseNetworkMonitoringPanel } from "@/components/shared/warehouse-network-monitoring-panel"
 import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
 import { InventoryReplenishmentPanel } from "@/components/shared/inventory-replenishment-panel"
 import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
@@ -106,6 +108,8 @@ import { WarehouseLaborAnalyticsPanel } from "@/components/shared/warehouse-labo
 import { CustomsComplianceTrackerPanel } from "@/components/shared/customs-compliance-tracker-panel"
 import { PredictiveMaintenanceAnalyticsPanel } from "@/components/shared/predictive-maintenance-analytics-panel"
 import { DemandSensingAnalyticsPanel } from "@/components/shared/demand-sensing-analytics-panel"
+import { ThirdPartyLogisticsPanel } from "@/components/shared/third-party-logistics-panel"
+import { WarehouseNetworkMonitoringPanel } from "@/components/shared/warehouse-network-monitoring-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -773,6 +777,20 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
+        {/* 3PL Contract Optimization */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ThirdPartyLogisticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Network Monitoring */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseNetworkMonitoringPanel />
+          </CardContent>
+        </Card>
+
         {/* Warehouse Simulation */}
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
@@ -1071,6 +1089,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <DemandSensingAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* 3PL Contract Optimization */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ThirdPartyLogisticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Network Monitoring */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseNetworkMonitoringPanel />
           </CardContent>
         </Card>
       </div>

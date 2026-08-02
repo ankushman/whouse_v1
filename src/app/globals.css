@@ -57699,3 +57699,45 @@ html.theme-transition body {
 .dsa-sea-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .dsa-sea-row { transition: all 0.2s; }
 .dsa-sea-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* === TPO (3PL Contract Optimization Panel) === */
+.tpo-stat-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.tpo-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.tpo-filter-pill { transition: all 0.15s ease; }
+.tpo-insights-row > div { transition: border-color 0.2s ease; }
+.tpo-insights-row > div:hover { border-color: rgba(139,92,246,0.3); }
+.tpo-alert-dot { animation: tpo-dot-pulse 2s ease-in-out infinite; }
+.tpo-id-badge { font-variant-numeric: tabular-nums; }
+.tpo-contract-tag { font-weight: 500; }
+.tpo-contract-card { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.tpo-contract-card:hover { border-color: rgba(139,92,246,0.2); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.tpo-breach-pulse { animation: tpo-breach-pulse 2s ease-in-out infinite; }
+.tpo-breach-pulse { border-left: 3px solid #ef4444; }
+.tpo-warning-border { border-left: 3px solid #f59e0b; }
+.tpo-perf-row { transition: border-color 0.15s ease; }
+.tpo-perf-row:hover { border-color: rgba(34,197,94,0.3); }
+.tpo-fin-row { transition: border-color 0.15s ease; }
+.tpo-fin-row:hover { border-color: rgba(245,158,11,0.3); }
+@keyframes tpo-breach-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.15); } }
+@keyframes tpo-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === WNM (Warehouse Network Monitoring Panel) === */
+.wnm-stat-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.wnm-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.wnm-filter-pill { transition: all 0.15s ease; }
+.wnm-insights-row > div { transition: border-color 0.2s ease; }
+.wnm-insights-row > div:hover { border-color: rgba(6,182,212,0.3); }
+.wnm-alert-dot { animation: wnm-dot-pulse 2s ease-in-out infinite; }
+.wnm-id-badge { font-variant-numeric: tabular-nums; }
+.wnm-role-tag { font-weight: 500; }
+.wnm-net-card { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.wnm-net-card:hover { border-color: rgba(6,182,212,0.2); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.wnm-critical-pulse { animation: wnm-critical-pulse 2s ease-in-out infinite; }
+.wnm-critical-pulse { border-left: 3px solid #ef4444; }
+.wnm-warning-border { border-left: 3px solid #f59e0b; }
+.wnm-cap-row { transition: border-color 0.15s ease; }
+.wnm-cap-row:hover { border-color: rgba(6,182,212,0.3); }
+.wnm-topo-row { transition: border-color 0.15s ease; }
+.wnm-topo-row:hover { border-color: rgba(99,102,241,0.3); }
+@keyframes wnm-critical-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.15); } }
+@keyframes wnm-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
