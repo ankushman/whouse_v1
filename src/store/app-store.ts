@@ -456,6 +456,8 @@ export const navItems: NavItem[] = [
   { id: 'carbon-capture-storage', label: 'Carbon Capture', icon: 'Flame', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'nuclear-power-plant', label: 'Nuclear Power Plant', icon: 'Atom', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'electric-bus-fleet', label: 'Electric Bus Fleet', icon: 'Bus', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'solar-farm-construction', label: 'Solar Farm Construction', icon: 'Sun', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'waste-to-energy-plant', label: 'Waste-to-Energy Plant', icon: 'FlameKindling', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

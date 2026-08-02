@@ -59971,3 +59971,19 @@ html.theme-transition body {
 .ebf-tab:hover { background: rgba(6, 95, 70, 0.08); }
 .ebf-dashboard, .ebf-registry, .ebf-analytics, .ebf-insights { animation: fadeIn 0.3s ease; }
 .ebf-table-wrap { box-shadow: 0 1px 3px rgba(6, 95, 70, 0.1); }
+
+/* === Solar Farm Construction Logistics (sfc-*) === */
+.sfc-root { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); }
+.sfc-tabs { border-bottom: 2px solid #92400e; }
+.sfc-tab { transition: all 0.2s; }
+.sfc-tab:hover { background: rgba(146, 64, 14, 0.08); }
+.sfc-dashboard, .sfc-registry, .sfc-analytics, .sfc-insights { animation: fadeIn 0.3s ease; }
+.sfc-table-wrap { box-shadow: 0 1px 3px rgba(146, 64, 14, 0.1); }
+
+/* === Waste-to-Energy Plant Logistics (wte-*) === */
+.wte-root { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); }
+.wte-tabs { border-bottom: 2px solid #7c2d12; }
+.wte-tab { transition: all 0.2s; }
+.wte-tab:hover { background: rgba(124, 45, 18, 0.08); }
+.wte-dashboard, .wte-registry, .wte-analytics, .wte-insights { animation: fadeIn 0.3s ease; }
+.wte-table-wrap { box-shadow: 0 1px 3px rgba(124, 45, 18, 0.1); }

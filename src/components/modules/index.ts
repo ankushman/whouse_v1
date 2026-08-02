@@ -450,3 +450,5 @@ export { default as LithiumBatteryCellLogisticsView } from './lithium-battery-ce
 export { default as CarbonCaptureStorageLogisticsView } from './carbon-capture-storage-logistics-view'
 export { default as NuclearPowerPlantLogisticsView } from './nuclear-power-plant-logistics-view'
 export { default as ElectricBusFleetLogisticsView } from './electric-bus-fleet-logistics-view'
+export { default as SolarFarmConstructionLogisticsView } from './solar-farm-construction-logistics-view'
+export { default as WasteToEnergyPlantLogisticsView } from './waste-to-energy-plant-logistics-view'

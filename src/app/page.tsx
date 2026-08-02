@@ -460,6 +460,8 @@ import LithiumBatteryCellLogisticsView from "@/components/modules/lithium-batter
 import CarbonCaptureStorageLogisticsView from "@/components/modules/carbon-capture-storage-logistics-view"
 import NuclearPowerPlantLogisticsView from "@/components/modules/nuclear-power-plant-logistics-view"
 import ElectricBusFleetLogisticsView from "@/components/modules/electric-bus-fleet-logistics-view"
+import SolarFarmConstructionLogisticsView from "@/components/modules/solar-farm-construction-logistics-view"
+import WasteToEnergyPlantLogisticsView from "@/components/modules/waste-to-energy-plant-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -919,6 +921,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "carbon-capture-storage": CarbonCaptureStorageLogisticsView,
   "nuclear-power-plant": NuclearPowerPlantLogisticsView,
   "electric-bus-fleet": ElectricBusFleetLogisticsView,
+  "solar-farm-construction": SolarFarmConstructionLogisticsView,
+  "waste-to-energy-plant": WasteToEnergyPlantLogisticsView,
 }
 
 
