@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R494 — Carbon Footprint Tracker + Smart Dock Scheduler
+Agent: Main Agent (Cron Loop)
+Task: R494 — Create carbon footprint tracker panel with route-level CO2 emissions tracking, transport mode emissions (Road/Rail/Sea/Air), scope 1/2/3 classification, fuel type emissions (Diesel/CNG/Electric/HFO/Jet Fuel/VLSFO/Sustainable Aviation), carbon intensity per km, offset credits, baseline comparison, compliance tracking (Bharat Stage VI/IMO 2020/ICAO CORSIA), sustainability KPIs, cost-per-ton analytics, and savings percentage for Indian logistics. Plus smart dock scheduler panel with dock door management, appointment scheduling, truck check-in/out tracking, dwell time monitoring, dock utilization percentage, loading/unloading status, gate assignment, equipment tracking, overtime detection, no-show alerts, crossdock coordination, and DC-level dock operations for Indian warehouse operations.
+
+Work Log:
+- Read worklog.md: R493 (commit b50ffa5) added ReturnsAnalyticsHubPanel + OrderWaveManagementPanel (105 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: Loading does NOT exist (used existing icons), Cloud verified OK, all others OK
+- Created `src/components/shared/carbon-footprint-tracker-panel.tsx` (281 lines) — 10 routes across 4 modes (Road/Rail/Sea/Air) with color badges, 7 fuel types (Diesel/CNG/Electric/HFO/Jet Fuel/VLSFO/Sustainable Aviation) with color badges, 2 scopes (Scope 1/Scope 2), 3 compliance standards (Bharat Stage VI/IMO 2020/ICAO CORSIA), emissions 28-5,200T CO2, intensity 0.054-1.256 kgCO2/km, offsets 0-800T, saving -5% to +43%, 8 Indian carriers + 4 international, 6 regions, cost ₹6,500-₹3.4L, formatTons (KT/T), INR formatting, 3 views (Emissions with mode+fuel+compliance+intensity+saving, Transport with mode-grouped total emissions+avg intensity+saving+trips, Offsets with sorted offset bars+gross/net/saving). Over Budget (CFT-04 Air Mumbai-Dubai, CFT-10 Air Delhi-London) pulse red, At Risk (CFT-08 Sea Kolkata-Colombo) amber border. CSS prefix: cft-*
+- Created `src/components/shared/smart-dock-scheduler-panel.tsx` (274 lines) — 10 docks across 3 types (Inbound/Outbound/Crossdock) with color badges, 10 Indian vehicles, 8 carriers (TCI/Delhivery/Rivigo/Snowman/Ecom Express/Safexpress/BlueDart/Container Corp/XpressBees/Shadowfax), 9 DCs (Mumbai DC1 through Jaipur DC9), dwell time 0-185min, max dwell 60-120min, dock utilization 0-100%, 4 equipment types (Forklift/Conveyor/Pallet Jack/Reach Truck), pallets 24-88, weight 1.8-22T, 4 gates (A-D), 3 priorities, 7 statuses (Loading/Unloading/Completed/Waiting/Scheduled/Delayed/No Show/Overtime), check-in/out scheduling, next appointment tracking, 3 views (Docks with type+priority+vehicle+dwell progress bar+util+schedule, Schedule with time-sorted appointment list+status, Utilization with sorted util% bars+dwell+equipment+pallets). Overtime (SDS-10 D-10 185min vs 90max) and No Show (SDS-09 D-09) pulse red, Delayed (SDS-06 D-06) amber border. CSS prefix: sds-*
+- Cleaned unused imports: Ship, Plane, TrainFront, Fuel, Target, TreePine, Zap, Percent, Activity from CFT (Cloud verified used in statCard reference); Users, ArrowDown, Gauge, Route, ClipboardCheck from SDS (Package verified used in statCard reference)
+- Registered both in shared/index.ts (105→107 exports) and dashboard-view.tsx (953→969 lines)
+- CSS appended to globals.css (57,196→57,268 lines, +72 CSS for cft-* and sds-*)
+- TSC: 0 errors | Git pushed: commit 0741640
+
+Stage Summary:
+- 107 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 969 lines | globals.css: 57,268 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Cold chain analytics panel, warehouse digital twin visualization, warehouse safety monitoring panel, or last mile optimization analytics ***
+---
 Task ID: R493 — Returns Analytics Hub + Order Wave Management
 Agent: Main Agent (Cron Loop)
 Task: R493 — Create returns analytics hub panel with RMA tracking, return rate analysis, reason breakdown, refund cost processing, customer segment analysis, quality correlation scoring, fraud detection scoring, RMA aging analysis, multi-channel return tracking, carrier reverse logistics, and category-level return rate analytics for Indian e-commerce/logistics. Plus order wave management panel with wave planning, batch picking optimization, wave release scheduling, picker assignment, order cutoff management, wave completion tracking, SLA adherence, pick accuracy scoring, UPH productivity, zone utilization, multi-method picking (Discrete/Batch/Wave/Cluster/Zone), and DC-level wave coordination for Indian warehouse operations.
