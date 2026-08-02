@@ -59181,3 +59181,43 @@ html.theme-transition body {
 .dsc-insight { transition: all 0.25s ease; border-left: 3px solid #f1f5f9; }
 .dsc-insight:hover { box-shadow: 0 6px 20px rgba(51, 65, 85, 0.12); transform: translateY(-2px); }
 @keyframes dsc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ========== River Waterway Logistics (rwl-*) ========== */
+.rwl-root { animation: rwl-fade 0.3s ease; }
+.rwl-kpis { display: grid; }
+.rwl-kpi { transition: all 0.2s ease; border-left: 3px solid #0284c7; }
+.rwl-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(3, 105, 161, 0.12); }
+.rwl-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.rwl-kpi-val { margin: 4px 0; }
+.rwl-kpi-sub { font-size: 11px; }
+.rwl-chart { transition: all 0.25s ease; }
+.rwl-chart:hover { box-shadow: 0 4px 16px rgba(3, 105, 161, 0.08); }
+.rwl-tab { transition: all 0.15s ease; }
+.rwl-badge { font-size: 11px; }
+.rwl-table-wrap { max-height: 520px; overflow-y: auto; }
+.rwl-row-critical { border-left: 3px solid #dc2626 !important; }
+.rwl-row-warning { border-left: 3px solid #d97706 !important; }
+.rwl-row-info { border-left: 3px solid #2563eb !important; }
+.rwl-insight { transition: all 0.25s ease; border-left: 3px solid #e0f2fe; }
+.rwl-insight:hover { box-shadow: 0 6px 20px rgba(3, 105, 161, 0.12); transform: translateY(-2px); }
+@keyframes rwl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ========== Express Parcel Logistics (epl-*) ========== */
+.epl-root { animation: epl-fade 0.3s ease; }
+.epl-kpis { display: grid; }
+.epl-kpi { transition: all 0.2s ease; border-left: 3px solid #8b5cf6; }
+.epl-kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12); }
+.epl-kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.epl-kpi-val { margin: 4px 0; }
+.epl-kpi-sub { font-size: 11px; }
+.epl-chart { transition: all 0.25s ease; }
+.epl-chart:hover { box-shadow: 0 4px 16px rgba(124, 58, 237, 0.08); }
+.epl-tab { transition: all 0.15s ease; }
+.epl-badge { font-size: 11px; }
+.epl-table-wrap { max-height: 520px; overflow-y: auto; }
+.epl-row-critical { border-left: 3px solid #dc2626 !important; }
+.epl-row-warning { border-left: 3px solid #d97706 !important; }
+.epl-row-info { border-left: 3px solid #2563eb !important; }
+.epl-insight { transition: all 0.25s ease; border-left: 3px solid #ede9fe; }
+.epl-insight:hover { box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12); transform: translateY(-2px); }
+@keyframes epl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }

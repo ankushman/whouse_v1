@@ -406,3 +406,5 @@ export { default as PetroleumPipelineCommandView } from './petroleum-pipeline-co
 export { default as SteelLogisticsCommandView } from './steel-logistics-command-view'
 export { default as GrainSiloLogisticsView } from './grain-silo-logistics-view'
 export { default as DefenseSupplyCommandView } from './defense-supply-command-view'
+export { default as RiverWaterwayLogisticsView } from './river-waterway-logistics-view'
+export { default as ExpressParcelLogisticsView } from './express-parcel-logistics-view'
