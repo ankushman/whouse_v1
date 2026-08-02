@@ -104,6 +104,8 @@ import { SupplyChainVisibilityPanel } from "@/components/shared/supply-chain-vis
 import { ShippingExceptionManagementPanel } from "@/components/shared/shipping-exception-management-panel"
 import { WarehouseLaborAnalyticsPanel } from "@/components/shared/warehouse-labor-analytics-panel"
 import { CustomsComplianceTrackerPanel } from "@/components/shared/customs-compliance-tracker-panel"
+import { PredictiveMaintenanceAnalyticsPanel } from "@/components/shared/predictive-maintenance-analytics-panel"
+import { DemandSensingAnalyticsPanel } from "@/components/shared/demand-sensing-analytics-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -1055,6 +1057,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <CustomsComplianceTrackerPanel />
+          </CardContent>
+        </Card>
+
+        {/* Predictive Maintenance Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <PredictiveMaintenanceAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Demand Sensing Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <DemandSensingAnalyticsPanel />
           </CardContent>
         </Card>
       </div>
