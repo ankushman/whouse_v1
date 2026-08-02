@@ -376,3 +376,5 @@ export { default as WarehouseLifecycleTrackerView } from './warehouse-lifecycle-
 export { default as ReturnsQualityAssessmentView } from './returns-quality-assessment-view'
 export { default as DriverPerformanceHubView } from './driver-performance-hub-view'
 export { default as LoadOptimizationCommandView } from './load-optimization-command-view'
+export { default as PortVesselTrackerView } from './port-vessel-tracker-view'
+export { default as SmartPackagingIntelligenceView } from './smart-packaging-intelligence-view'

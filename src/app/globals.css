@@ -58482,3 +58482,39 @@ html.theme-transition body {
 .rqa-insight-card { transition: box-shadow 0.2s; }
 .rqa-insight-card:hover { box-shadow: 0 4px 12px rgba(217, 119, 6, 0.12); }
 @keyframes rqa-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== PVT (Port Vessel Tracker) ===== */
+.pvt-root { padding: 0; }
+.pvt-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.pvt-kpi { padding: 16px 20px; }
+.pvt-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.pvt-chart-row { margin-bottom: 20px; }
+.pvt-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.pvt-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.pvt-table thead th { background: #0891b2; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.pvt-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.pvt-table tbody tr:hover { background: #ecfeff; }
+.pvt-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.pvt-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.pvt-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.pvt-insight-card { transition: box-shadow 0.2s; }
+.pvt-insight-card:hover { box-shadow: 0 4px 12px rgba(8, 145, 178, 0.12); }
+@keyframes pvt-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== SPI (Smart Packaging Intelligence) ===== */
+.spi-root { padding: 0; }
+.spi-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.spi-kpi { padding: 16px 20px; }
+.spi-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.spi-chart-row { margin-bottom: 20px; }
+.spi-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.spi-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.spi-table thead th { background: #059669; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.spi-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.spi-table tbody tr:hover { background: #ecfdf5; }
+.spi-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.spi-row-warning { background: #fffbeb !important; border-left: 3px solid #f59e0b; }
+.spi-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.spi-insight-card { transition: box-shadow 0.2s; }
+.spi-insight-card:hover { box-shadow: 0 4px 12px rgba(5, 150, 105, 0.12); }
+@keyframes spi-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

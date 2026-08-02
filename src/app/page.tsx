@@ -386,6 +386,8 @@ import DriverPerformanceHubView from "@/components/modules/driver-performance-hu
 import LoadOptimizationCommandView from "@/components/modules/load-optimization-command-view"
 import WarehouseLifecycleTrackerView from "@/components/modules/warehouse-lifecycle-tracker-view"
 import ReturnsQualityAssessmentView from "@/components/modules/returns-quality-assessment-view"
+import PortVesselTrackerView from "@/components/modules/port-vessel-tracker-view"
+import SmartPackagingIntelligenceView from "@/components/modules/smart-packaging-intelligence-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -771,6 +773,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "load-optimization-command": LoadOptimizationCommandView,
   "warehouse-lifecycle-tracker": WarehouseLifecycleTrackerView,
   "returns-quality-assessment": ReturnsQualityAssessmentView,
+  "port-vessel-tracker": PortVesselTrackerView,
+  "smart-packaging-intelligence": SmartPackagingIntelligenceView,
 }
 
 
