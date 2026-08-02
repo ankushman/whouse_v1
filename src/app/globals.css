@@ -57977,3 +57977,36 @@ html.theme-transition body {
 .flm-util-row { transition: border-color 0.15s ease; }
 .flm-util-row:hover { border-color: rgba(16,185,129,0.3); }
 @keyframes flm-breakdown-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.25); } 50% { box-shadow: 0 0 8px 2px rgba(239,68,68,0.12); } }
+
+/* Labour Scheduling Panel — lab-* */
+.lab-filter-pill { transition: all 0.15s; }
+.lab-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.lab-card-grid { max-height: 420px; overflow-y: auto; }
+.lab-item-card { transition: all 0.2s; }
+.lab-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.lab-critical { border-left: 4px solid #dc2626; animation: lab-pulse 2s infinite; }
+.lab-warning { border-left: 4px solid #f59e0b; }
+.lab-alert-text { color: #dc2626; font-weight: 600; }
+.lab-cert-badge { background: #dbeafe; color: #1d4ed8; font-size: 0.65rem; padding: 1px 6px; border-radius: 9999px; }
+.lab-perf-bar { background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 9999px; }
+.lab-comp-card { transition: all 0.2s; }
+.lab-comp-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes lab-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Supplier Performance Scorecard — sps-* */
+.sps-filter-pill { transition: all 0.15s; }
+.sps-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.sps-card-grid { max-height: 420px; overflow-y: auto; }
+.sps-item-card { transition: all 0.2s; }
+.sps-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.sps-critical { border-left: 4px solid #dc2626; animation: sps-pulse 2s infinite; }
+.sps-warning { border-left: 4px solid #f59e0b; }
+.sps-alert-text { color: #dc2626; font-weight: 600; }
+.sps-cert-badge { background: #dbeafe; color: #1d4ed8; font-size: 0.65rem; padding: 1px 6px; border-radius: 9999px; }
+.sps-quality-bar { background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 9999px; }
+.sps-value-bar { background: linear-gradient(90deg, #6366f1, #4f46e5); border-radius: 9999px; }
+.sps-quality-card { transition: all 0.2s; }
+.sps-quality-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sps-fin-card { transition: all 0.2s; }
+.sps-fin-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes sps-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
