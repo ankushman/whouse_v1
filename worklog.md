@@ -1,4 +1,23 @@
 ---
+Task ID: R305 — Lithium Battery Cell + Carbon Capture Storage Logistics
+Agent: Main Agent (Cron Loop)
+Task: R305 — 2 new Indian logistics modules for lithium-ion battery cell manufacturing (Tata AutoComp Exicom Amara Raja Ola Mahindra ELVA Reliance NEW Age Ather Lucid — NMC 811 LFP NMC 622 solid-state Na-Ion cell, cathode Umicore EcoPro BASF, anode BTR Shanshan Posco, dry room assembly, formation cycling aging, BMS, thermal cooling plate) and carbon capture storage CCUS (NTPC Vindhyachal Tata Steel Dalmia Cement Reliance Adani JSW UltraTech IOCL — post-combustion amine scrubber, pre-combustion WGS, oxy-fuel ASU, membrane CO2 separation, calcium looping, DAC, CO2 compression 150 bar, pipeline API 5L)
+
+Work Log:
+- Read worklog: R304 complete (commit 260122b), 442 modules, 448 navItems, 59,937 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate check: 0 duplicates for lithium-battery-cell, carbon-capture-storage
+- Icons: Battery (li-ion), Flame (CCUS) verified in app-layout.tsx
+- Created Lithium Battery Cell Logistics (R305a): ~162 lines, lbc-* amber, 14 records, 4 tabs
+- Created Carbon Capture Storage Logistics (R305b): ~165 lines, ccs-* stone, 14 records, 4 tabs
+- Registered both in index.ts, page.tsx, app-store.ts
+- CSS: 21 lines appended
+- TSC FINAL: 0 errors in src/components/modules
+- Git: commit 26d01bb pushed to origin/main
+
+Stage Summary:
+- MODULE FILES: 444 (+2) | NAVITEMS: 450 (+2) | CSS: 59,957 lines (+20)
+- TSC: 0 errors (modules) | GITHUB: pushed (26d01bb)
 Task ID: R304 — Semiconductor Fab + Offshore Wind Turbine Logistics
 Agent: Main Agent (Cron Loop)
 Task: R304 — 2 new Indian logistics modules for semiconductor fab (Tata Semiconductor Osmanabad, Micron Gujarat, IGSS Chandigarh, Kaynes Mysore, SPEL Noida, Dixon Noida, CG Power Indore, Syrma SGS Chennai — ASML EUV/DUV lithography, 300mm wafer, cleanroom HEPA, UPW 18MΩ, ion implanter, CMP slurry, ATE handler, process gas) and offshore wind turbine (Vestas V164 8MW, SGRE SG 14-222 DD 14MW, GE Haliade-X 12MW, Adani Green, NTPC Renewable, O2 Power Mytrah — monopile foundation 60m 800T, subsea inter-array 33kV, export cable 220kV HVDC, offshore substation topside/jacket, jack-up vessel, cable laying vessel, SCADA)
