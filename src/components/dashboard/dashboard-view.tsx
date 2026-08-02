@@ -166,6 +166,7 @@ import { OrderAccuracyDashboardPanel } from "@/components/shared/order-accuracy-
 import { CrossBorderCompliancePanel } from "@/components/shared/cross-border-compliance-panel"
 import { LaborManagementAnalyticsPanel } from "@/components/shared/labor-management-analytics-panel"
 import { ColdChainMonitoringPanel } from "@/components/shared/cold-chain-monitoring-panel"
+import { WarehouseLifecycleTrackerPanel } from "@/components/shared/warehouse-lifecycle-tracker-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -932,6 +933,11 @@ export function DashboardView() {
             <LaborManagementAnalyticsPanel />
           </CardContent>
         </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseLifecycleTrackerPanel />
+          </CardContent>
+        </Card>
 
         {/* 3PL Vendor Scorecard */}
         <Card className="card-depth overflow-hidden border-primary/10">
@@ -1154,6 +1160,11 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <LaborManagementAnalyticsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseLifecycleTrackerPanel />
           </CardContent>
         </Card>
 
@@ -1627,6 +1638,11 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <ColdChainMonitoringPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseLifecycleTrackerPanel />
           </CardContent>
         </Card>
       </div>

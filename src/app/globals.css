@@ -58312,3 +58312,21 @@ html.theme-transition body {
 .ccm-temp-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 .ccm-energy-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes ccm-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* WLT - Warehouse Lifecycle Tracker Panel */
+.wlt-filter-pill { transition: all 0.15s; }
+.wlt-filter-pill:hover { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+.wlt-card-grid { }
+.wlt-item-card { transition: all 0.2s; }
+.wlt-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wlt-critical { border-color: #ef4444; border-left: 3px solid #ef4444; animation: wlt-pulse 2s infinite; background: linear-gradient(135deg, #fef2f2, #fff5f5); }
+.wlt-warning { border-left: 3px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fffef5); }
+.wlt-alert-text { color: #dc2626; font-weight: 500; }
+.wlt-budget-bar { background: linear-gradient(90deg, #3b82f6, #6366f1); transition: width 0.3s; }
+.wlt-budget-over { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.wlt-budget-warn { background: linear-gradient(90deg, #f59e0b, #d97706) !important; }
+.wlt-timeline-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.wlt-timeline-early { background: linear-gradient(90deg, #3b82f6, #6366f1) !important; }
+.wlt-budget-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wlt-timeline-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes wlt-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
