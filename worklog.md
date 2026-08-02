@@ -1,5 +1,83 @@
 ---
 ---
+Task ID: R278 — E-Way Bill Expiry Tracker + Inland Container Depot Command
+Agent: Main Agent (Cron Loop)
+Task: R278 — 2 new Indian logistics modules for GST e-way bill expiry monitoring/tracking and ICD container depot operations management
+
+Work Log:
+- Read worklog.md: R277 complete (commit 9ba9a9c), 388 modules, 394 navItems, 58,795 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/ (pre-existing errors in mini-services/, scripts/, skills/ — not our code)
+- Duplicate check: 0 duplicate navItem IDs, 0 duplicate imports, 0 duplicate exports
+- agent-browser QA skipped (dev server OOM, known infra issue — TSC used as QA gate)
+
+- Created E-Way Bill Expiry Tracker module (R278a):
+  * FILE: src/components/modules/eway-bill-expiry-tracker-view.tsx (187 lines)
+  * 4 tabs: Dashboard | E-Way Bill Registry | Expiry Analytics | Insights
+  * Theme: Sky blue #0369a1, CSS prefix: ewt-*
+  * Tab 0: 4 KPIs (Active E-Way Bills, Expiring Soon, Expired, Total Invoice Value), BarChart monthly generated/expired/extended, PieChart expiry distribution, LineChart compliance trend vs 95% target, BarChart transporter compliance scorecard
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/transporter/goodsType/fromState) + ModuleBreadcrumb, 14 e-way bill records with EWB No badge, generate date, valid till, transporter, from/to state, goods type, HSN code, invoice value, tax amount, vehicle no, distance, status (6 states), extension count, transit scan count, last scan, consignor, consignee, doc type, reason code
+  * Tab 2: BarChart by goods type, stacked AreaChart expiry volume by state corridor, BarChart extension frequency by transporter
+  * Tab 3: 4 insights (85 crore+ e-way bills since GST 2017, auto-extension workflow, transit scan compliance IRN-linked, consolidated bills and master documents)
+  * 8 transporters, 6 statuses, 8 goods types, 8 states, 14 records
+  * Critical rows (Expired): red bg; Warning rows (Expiring Soon): amber bg
+
+- Created Inland Container Depot Command module (R278b):
+  * FILE: src/components/modules/inland-container-depot-command-view.tsx (186 lines)
+  * 4 tabs: Dashboard | Container Registry | Depot Analytics | Insights
+  * Theme: Amber #b45309, CSS prefix: icd-*
+  * Tab 0: 4 KPIs (Available Units, Occupied, Under Customs, Total TEU), BarChart monthly TEU by trade type (Export/Import/Domestic), PieChart container type distribution, LineChart dwell time trend vs 7-day target, BarChart depot utilization %
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/depot/containerType/tradeType) + ModuleBreadcrumb, 14 container records with Container No badge, Type badge, Status badge (6 states), Depot, Trade type, Shipping line, Vessel, BL No, Weight, Commodity, Hazmat badge, Reefer temp badge, Gate In/Out, Dwell days (color-coded), Customs status, Seal no, VGM weight, Damage flag, Remarks
+  * Tab 2: BarChart TEU by shipping line, stacked AreaChart trade type volume by depot, BarChart dwell time by depot
+  * Tab 3: 4 insights (161 ICD facilities 6.2M TEU/yr, dwell time 7.2d vs global 3d, AEO/RMS risk management, CONCOR rail operations & DFC integration)
+  * 8 shipping lines, 6 statuses, 8 container types, 6 trade types, 8 depots, 14 records
+  * Warning rows (Under Customs): amber bg; Info rows (Maintenance): orange bg
+
+- Registered both modules in 3 files:
+  * src/components/modules/index.ts: +EwayBillExpiryTrackerView +InlandContainerDepotCommandView (393->395 exports)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (eway-bill-expiry-tracker: icon ScrollText group system, inland-container-depot-command: icon Container group operations)
+
+- CSS additions: 56 lines (ewt-* sky blue + icd-* amber classes with critical/warning row highlighting, hover effects, keyframe animations)
+
+- TSC FINAL: 0 errors in src/
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports
+- Git: commit 1a980c2 pushed to origin/main
+
+Stage Summary:
+- NEW MODULE: E-Way Bill Expiry Tracker (187 lines, 8 visual components, 14 e-way bill records, 4 tabs)
+- NEW MODULE: Inland Container Depot Command (186 lines, 8 visual components, 14 container records, 4 tabs)
+- Total module files: 390 (was 388, +2)
+- Total navItems: 396 (was 394, +2)
+- CSS: 58,851 lines (+56 from R278)
+- Total data: 28 records across both modules
+- ZERO src/ TSC errors
+- ZERO duplicate entries
+- GITHUB: Pushed to origin/main (1a980c2)
+
+## Updated Project Status (Post Round 278)
+- STATUS: STABLE — ALL modules compile, 0 TSC errors, 0 duplicates
+- MODULE FILES: 390 | NAVITEMS: 396
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: 58,851 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate entries (monitor each round)
+- Many older modules still use default imports for shared components (works due to added default exports, but should migrate to named imports)
+- SearchFilterToolbar not integrated into all table-based modules
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (suggestions: Cargo Terminal Operations, Freight Forwarding Command, Coastal Shipping Network, Agri Warehousing Command, FMCG Distribution Analytics)
+2. Migrate remaining modules from default to named imports for shared components
+3. Cross-module drill-down navigation (click value → navigate to related module)
+4. Real-time WebSocket events for live updates
+5. Mobile experience enhancements with sheet drawers
+6. Dashboard home page widgets enhancement
+7. Always verify no duplicate entries from concurrent cron jobs before adding new ones
+---
 Task ID: R277 — Shipment Tracking & Milestone + Transit Insurance & Claims
 Agent: Main Agent (Cron Loop)
 Task: R277 — 2 new Indian logistics modules for shipment lifecycle tracking and transit insurance claims management
