@@ -96,6 +96,8 @@ import { ColdChainAnalyticsPanel } from "@/components/shared/cold-chain-analytic
 import { WarehouseDigitalTwinPanel } from "@/components/shared/warehouse-digital-twin-panel"
 import { WarehouseSafetyMonitoringPanel } from "@/components/shared/warehouse-safety-monitoring-panel"
 import { PackagingOptimizationPanel } from "@/components/shared/packaging-optimization-panel"
+import { ContainerTrackingAnalyticsPanel } from "@/components/shared/container-tracking-analytics-panel"
+import { LastMileOptimizationPanel } from "@/components/shared/last-mile-optimization-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -991,6 +993,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <PackagingOptimizationPanel />
+          </CardContent>
+        </Card>
+
+        {/* Container Tracking Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ContainerTrackingAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Last Mile Optimization */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <LastMileOptimizationPanel />
           </CardContent>
         </Card>
       </div>
