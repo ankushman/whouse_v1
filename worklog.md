@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R486 — Warehouse Energy Analytics + Safety Compliance
+Agent: Main Agent (Cron Loop)
+Task: R486 — Create warehouse energy analytics panel with power consumption tracking, solar generation monitoring, HVAC efficiency analysis, carbon footprint measurement, cost optimization, and sustainability scoring across Indian DCs. Plus safety compliance monitoring panel with Indian regulatory standards (NBC 2016/Factories Act 1948/IS standards), audit tracking, risk assessment, PPE compliance, fire safety, and corrective action management.
+
+Work Log:
+- Read worklog.md: R485 (commit 5f4769e) added ValueAddedServicesPanel + LastMileDeliveryPanel (89 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: all 37 icons verified present in lucide-react
+- Created `src/components/shared/warehouse-energy-analytics-panel.tsx` (262 lines) — 10 zones across 6 Indian DCs (Mumbai DC-1/Delhi DC-2/Bengaluru DC-3/Kolkata DC-5/Chennai DC-6/Hyderabad DC-4), 5 zone types (A-Receiving/B-Pick Pack/C-Storage/D-Shipping/E-Cold Chain/F-VAS Area), 3 energy sources (Grid/Grid+Solar/Solar), 4 statuses (Optimal/Normal/Over Budget/Critical), consumption vs budget progress bars, solar % per zone, HVAC/lighting/equipment cost breakdown, CO2 emissions per zone, efficiency scoring (52-96%), peak load monitoring, temperature display, INR cost formatting, 3 views (Zones with budget+efficiency bars+source badges+solar+temp, Cost with sorted breakdown+HVAC%, Green/Sustainability with renewable share+CO2/kWh+solar generated). Critical zones (WEA-06 Hyderabad Cold Chain 52%, WEA-10 Kolkata Cold Chain 52%) pulse red, over budget (WEA-02, WEA-04) amber border. CSS prefix: wea-*
+- Created `src/components/shared/safety-compliance-panel.tsx` (259 lines) — 10 compliance checks across 6 Indian DCs, 7 categories (Fire Safety/PPE Compliance/Electrical Safety/Emergency Exit/Machinery Safety/Chemical Storage/Ergonomics/Fire Safety-2/Noise Exposure/Training), 5 Indian auditors (Safety First India/Bureau Veritas India/TUV India/SGS India/Intertek India), 6 standards (NBC 2016/Factories Act 1948/IS 3043/NFPA 101/IS 5208/MSDS/OSHA-IS 7333), 4 statuses (Compliant/Non-Compliant/Pending Review/Overdue), 4 risk levels (Critical/High/Medium/Low), compliance score 0-100 with color-coded bars, findings+corrective action tracking, audit dates+next due, 3 views (Audits with score bars+risk badges+standard refs+auditor, Categories with per-category compliance breakdown+findings, Score with sorted compliance analysis+score bars+risk inline badges). Non-compliant (SCM-02 PPE, SCM-04 Exit, SCM-10 Training) + overdue pulse red, pending (SCM-05, SCM-07) amber border. CSS prefix: scm-*
+- Cleaned unused imports (Battery, BatteryCharging, TrendingDown, CheckCircle, Activity from energy; CheckCircle, Flame, HardHat, Eye, Timer, Activity from safety)
+- Registered both in shared/index.ts (89→91 exports) and dashboard-view.tsx (825→841 lines)
+- CSS appended to globals.css (56,786→56,838 lines, +52 CSS for wea-* and scm-*)
+- TSC: 0 errors | Git pushed: commit d9e45ac
+
+Stage Summary:
+- 91 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 841 lines | globals.css: 56,838 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Carrier SLA scorecard, reverse logistics hub, warehouse network optimization, or multi-modal transport planner ***
+---
 Task ID: R485 — Value-Added Services + Last-Mile Delivery
 Agent: Main Agent (Cron Loop)
 Task: R485 — Create value-added services panel with kitting, labeling, gift wrapping, price tagging, quality rework, shrink wrapping, returns refurbishment, palletization, custom packaging, and serial stamping across Indian DCs with operator tracking, defect rate monitoring, and profitability analysis. Plus last-mile delivery tracker with Indian delivery partners, COD tracking, customer ratings, POD verification, SLA monitoring, and multi-view performance analytics.
