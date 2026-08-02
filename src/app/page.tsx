@@ -47,6 +47,7 @@ import { ContinualImprovementView } from "@/components/modules/continual-improve
 import { FixedAssetRegisterView } from "@/components/modules/fixed-asset-register-view"
 import { SupplierAuditView } from "@/components/modules/supplier-audit-view"
 import { ESGSustainabilityAuditView } from "@/components/modules/esg-sustainability-audit-view"
+import { ESGComplianceHubView } from "@/components/modules/esg-compliance-hub-view"
 import { CapacityPlanningView } from "@/components/modules/capacity-planning-view"
 import { WarehousePerformanceScorecardView } from "@/components/modules/warehouse-performance-scorecard-view"
 import { ThreeWayMatchDashboardView } from "@/components/modules/three-way-match-dashboard-view"
@@ -383,6 +384,8 @@ import WarehouseEnergyAnalyticsView from "@/components/modules/warehouse-energy-
 import RouteIntelligenceHubView from "@/components/modules/route-intelligence-hub-view"
 import DriverPerformanceHubView from "@/components/modules/driver-performance-hub-view"
 import LoadOptimizationCommandView from "@/components/modules/load-optimization-command-view"
+import WarehouseLifecycleTrackerView from "@/components/modules/warehouse-lifecycle-tracker-view"
+import ReturnsQualityAssessmentView from "@/components/modules/returns-quality-assessment-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -429,6 +432,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "fixed-asset-register": FixedAssetRegisterView,
   "supplier-audit": SupplierAuditView,
   "esg-sustainability-audit": ESGSustainabilityAuditView,
+  "esg-compliance-hub": ESGComplianceHubView,
   "capacity-planning": CapacityPlanningView,
   "warehouse-performance-scorecard": WarehousePerformanceScorecardView,
   "three-way-match": ThreeWayMatchDashboardView,
@@ -765,6 +769,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "route-intelligence-hub": RouteIntelligenceHubView,
   "driver-performance-hub": DriverPerformanceHubView,
   "load-optimization-command": LoadOptimizationCommandView,
+  "warehouse-lifecycle-tracker": WarehouseLifecycleTrackerView,
+  "returns-quality-assessment": ReturnsQualityAssessmentView,
 }
 
 

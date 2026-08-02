@@ -35,6 +35,7 @@ export const navItems: NavItem[] = [
   { id: 'predictive-analytics', label: 'Predictive Analytics', icon: 'Brain', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'energy-sustainability', label: 'Energy & ESG', icon: 'Leaf', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'esg-sustainability-audit', label: 'ESG Audit', icon: 'Globe', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
+  { id: 'esg-compliance-hub', label: 'ESG Compliance Hub', icon: 'ShieldCheck', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'continual-improvement', label: 'Continual Improvement', icon: 'Rocket', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'fixed-asset-register', label: 'Fixed Assets', icon: 'Building', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager'] },
   { id: 'capacity-planning', label: 'Capacity Planning', icon: 'Gauge', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
@@ -379,6 +380,8 @@ export const navItems: NavItem[] = [
   { id: 'route-intelligence-hub', label: 'Route Intelligence', icon: 'Route', group: 'transport', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'fleet_manager'] },
   { id: 'driver-performance-hub', label: 'Driver Performance', icon: 'Users', group: 'fleet', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'fleet_manager', 'hr'] },
   { id: 'load-optimization-command', label: 'Load Optimization', icon: 'Calculator', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'operations_planner'] },
+  { id: 'warehouse-lifecycle-tracker', label: 'Warehouse Lifecycle', icon: 'Building2', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'facilities'] },
+  { id: 'returns-quality-assessment', label: 'Returns Quality', icon: 'ClipboardCheck', group: 'returns', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'quality'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
