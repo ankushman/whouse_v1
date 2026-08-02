@@ -58518,3 +58518,39 @@ html.theme-transition body {
 .spi-insight-card { transition: box-shadow 0.2s; }
 .spi-insight-card:hover { box-shadow: 0 4px 12px rgba(5, 150, 105, 0.12); }
 @keyframes spi-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== FBC (Freight Booking Command) ===== */
+.fbc-root { padding: 0; }
+.fbc-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.fbc-kpi { padding: 16px 20px; }
+.fbc-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.fbc-chart-row { margin-bottom: 20px; }
+.fbc-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.fbc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.fbc-table thead th { background: #4f46e5; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.fbc-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.fbc-table tbody tr:hover { background: #eef2ff; }
+.fbc-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.fbc-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.fbc-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.fbc-insight-card { transition: box-shadow 0.2s; }
+.fbc-insight-card:hover { box-shadow: 0 4px 12px rgba(79, 70, 229, 0.12); }
+@keyframes fbc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== WSO (Warehouse Shuttle Ops) ===== */
+.wso-root { padding: 0; }
+.wso-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.wso-kpi { padding: 16px 20px; }
+.wso-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.wso-chart-row { margin-bottom: 20px; }
+.wso-table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid #e5e7eb; }
+.wso-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.wso-table thead th { background: #e11d48; color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; font-size: 12px; position: sticky; top: 0; }
+.wso-table tbody td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.wso-table tbody tr:hover { background: #fff1f2; }
+.wso-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.wso-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.wso-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.wso-insight-card { transition: box-shadow 0.2s; }
+.wso-insight-card:hover { box-shadow: 0 4px 12px rgba(225, 29, 72, 0.12); }
+@keyframes wso-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

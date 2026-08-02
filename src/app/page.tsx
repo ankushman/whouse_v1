@@ -388,6 +388,8 @@ import WarehouseLifecycleTrackerView from "@/components/modules/warehouse-lifecy
 import ReturnsQualityAssessmentView from "@/components/modules/returns-quality-assessment-view"
 import PortVesselTrackerView from "@/components/modules/port-vessel-tracker-view"
 import SmartPackagingIntelligenceView from "@/components/modules/smart-packaging-intelligence-view"
+import FreightBookingCommandView from "@/components/modules/freight-booking-command-view"
+import WarehouseShuttleOpsView from "@/components/modules/warehouse-shuttle-ops-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -775,6 +777,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "returns-quality-assessment": ReturnsQualityAssessmentView,
   "port-vessel-tracker": PortVesselTrackerView,
   "smart-packaging-intelligence": SmartPackagingIntelligenceView,
+  "freight-booking-command": FreightBookingCommandView,
+  "warehouse-shuttle-ops": WarehouseShuttleOpsView,
 }
 
 

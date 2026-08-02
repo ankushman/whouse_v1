@@ -384,6 +384,8 @@ export const navItems: NavItem[] = [
   { id: 'returns-quality-assessment', label: 'Returns Quality', icon: 'ClipboardCheck', group: 'returns', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'quality'] },
   { id: 'port-vessel-tracker', label: 'Port Vessel Tracker', icon: 'Anchor', group: 'transport', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics'] },
   { id: 'smart-packaging-intelligence', label: 'Smart Packaging AI', icon: 'PackageCheck', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner'] },
+  { id: 'freight-booking-command', label: 'Freight Booking', icon: 'FileText', group: 'transport', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics'] },
+  { id: 'warehouse-shuttle-ops', label: 'Shuttle Operations', icon: 'Waypoints', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

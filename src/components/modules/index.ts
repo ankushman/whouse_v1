@@ -378,3 +378,5 @@ export { default as DriverPerformanceHubView } from './driver-performance-hub-vi
 export { default as LoadOptimizationCommandView } from './load-optimization-command-view'
 export { default as PortVesselTrackerView } from './port-vessel-tracker-view'
 export { default as SmartPackagingIntelligenceView } from './smart-packaging-intelligence-view'
+export { default as FreightBookingCommandView } from './freight-booking-command-view'
+export { default as WarehouseShuttleOpsView } from './warehouse-shuttle-ops-view'
