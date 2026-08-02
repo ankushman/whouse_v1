@@ -59751,3 +59751,39 @@ html.theme-transition body {
 .evr-insight p { line-height: 1.7; }
 .evr-table-wrap { overflow-x: auto; }
 .evr-table-wrap table { min-width: 1600px; }
+
+/* ===== Inland Waterways Logistics (R300a) — Deep Teal #134e4a ===== */
+.iwl-root { --accent: #134e4a; --accent-light: #ccfbf1; }
+.iwl-tabs { border-bottom-color: var(--accent); }
+.iwl-tab { transition: all 0.2s; }
+.iwl-tab:hover { background: var(--accent-light); }
+.iwl-kpi { border-left: 3px solid var(--accent); }
+.iwl-kpi-val { color: var(--accent); }
+.iwl-chart { border-top: 3px solid var(--accent); }
+.iwl-badge { letter-spacing: 0.02em; }
+.iwl-table-wrap { border-color: #99f6e4; }
+.iwl-table-wrap th { background: #f0fdfa; color: var(--accent); }
+.iwl-row-critical { animation: iwl-pulse 2s infinite; }
+.iwl-row-warning { border-left-color: #f59e0b; }
+.iwl-row-info { border-left-color: #3b82f6; }
+.iwl-insight { border-left: 4px solid var(--accent); }
+.iwl-insight h3 { color: var(--accent); }
+@keyframes iwl-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ===== HSR High-Speed Rail Logistics (R300b) — Electric Purple #581c87 ===== */
+.hsr-root { --accent: #581c87; --accent-light: #f3e8ff; }
+.hsr-tabs { border-bottom-color: var(--accent); }
+.hsr-tab { transition: all 0.2s; }
+.hsr-tab:hover { background: var(--accent-light); }
+.hsr-kpi { border-left: 3px solid var(--accent); }
+.hsr-kpi-val { color: var(--accent); }
+.hsr-chart { border-top: 3px solid var(--accent); }
+.hsr-badge { letter-spacing: 0.02em; }
+.hsr-table-wrap { border-color: #ddd6fe; }
+.hsr-table-wrap th { background: #faf5ff; color: var(--accent); }
+.hsr-row-critical { animation: hsr-pulse 2s infinite; }
+.hsr-row-warning { border-left-color: #f59e0b; }
+.hsr-row-info { border-left-color: #3b82f6; }
+.hsr-insight { border-left: 4px solid var(--accent); }
+.hsr-insight h3 { color: var(--accent); }
+@keyframes hsr-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }

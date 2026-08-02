@@ -444,6 +444,8 @@ import PipelineIntegrityLogisticsView from "@/components/modules/pipeline-integr
 import SolarPanelRecyclingLogisticsView from "@/components/modules/solar-panel-recycling-logistics-view"
 import PortTerminalOperationsLogisticsView from "@/components/modules/port-terminal-operations-logistics-view"
 import EvBatteryRecyclingLogisticsView from "@/components/modules/ev-battery-recycling-logistics-view"
+import InlandWaterwaysLogisticsView from "@/components/modules/inland-waterways-logistics-view"
+import HsrLogisticsView from "@/components/modules/hsr-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -887,6 +889,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "solar-panel-recycling-logistics": SolarPanelRecyclingLogisticsView,
   "port-terminal-operations-logistics": PortTerminalOperationsLogisticsView,
   "ev-battery-recycling-logistics": EvBatteryRecyclingLogisticsView,
+  "inland-waterways-logistics": InlandWaterwaysLogisticsView,
+  "hsr-logistics": HsrLogisticsView,
 }
 
 
