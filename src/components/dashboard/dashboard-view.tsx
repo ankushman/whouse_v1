@@ -76,6 +76,8 @@ import { SlottingAnalyticsPanel } from "@/components/shared/slotting-analytics-p
 import { EcommerceFulfilmentPanel } from "@/components/shared/ecommerce-fulfilment-panel"
 import { ShipmentVisibilityPanel } from "@/components/shared/shipment-visibility-panel"
 import { ColdChainMonitoringPanel } from "@/components/shared/cold-chain-monitoring-panel"
+import { TransportAnalyticsPanel } from "@/components/shared/transport-analytics-panel"
+import { FleetManagementPanel } from "@/components/shared/fleet-management-panel"
 import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
 import { InventoryReplenishmentPanel } from "@/components/shared/inventory-replenishment-panel"
 import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
@@ -132,6 +134,8 @@ import { SlottingAnalyticsPanel } from "@/components/shared/slotting-analytics-p
 import { EcommerceFulfilmentPanel } from "@/components/shared/ecommerce-fulfilment-panel"
 import { ShipmentVisibilityPanel } from "@/components/shared/shipment-visibility-panel"
 import { ColdChainMonitoringPanel } from "@/components/shared/cold-chain-monitoring-panel"
+import { TransportAnalyticsPanel } from "@/components/shared/transport-analytics-panel"
+import { FleetManagementPanel } from "@/components/shared/fleet-management-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -778,6 +782,18 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <TransportAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <FleetManagementPanel />
+          </CardContent>
+        </Card>
+
         {/* 3PL Vendor Scorecard */}
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
@@ -880,6 +896,18 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <ColdChainMonitoringPanel />
+          </CardContent>
+        </Card>
+
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <TransportAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <FleetManagementPanel />
           </CardContent>
         </Card>
 
@@ -1258,6 +1286,16 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <ColdChainMonitoringPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <TransportAnalyticsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <FleetManagementPanel />
           </CardContent>
         </Card>
       </div>
