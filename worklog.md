@@ -1,6 +1,30 @@
 ---
 ---
 ---
+Task ID: R484 — Rail Consignment + Gate Management
+Agent: Main Agent (Cron Loop)
+Task: R484 — Create rail consignment tracking panel with Indian Railways freight management, wagon tracking, demurrage monitoring, commodity-level analysis, and cost tracking across Indian rail network. Plus gate management panel with vehicle check-in/check-out, seal verification, document status tracking, gate assignment, and throughput analytics for DC entry/exit management.
+
+Work Log:
+- Read worklog.md: R483 (commit fd7594f) added ContainerUnloadingPanel + CargoInsurancePanel (85 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: Gate does NOT exist in lucide-react — used DoorOpen as alternative
+- Created `src/components/shared/rail-consignment-panel.tsx` (256 lines) — 10 Indian Railways consignments (12433 Rajdhani/12309 Rajdhani/12621 Tamil Nadu/12259 Duronto/12951 Mumbai Rajdhani/12627 Karnataka/12301 Howrah Rajdhani/12521 Rapti Sagar/12611 Garib Rath/12431 Trivandrum Rajdhani), 10 commodities (Auto Parts/FMCG/Textiles/Steel/Electronics/Pharma/Machinery/Spices/Paper/Rubber), 4 wagon types (Box N/Box HL/Open BCN/Flat BCN), 8 statuses (In Transit/Arrived/Loading/Demurrage/Customs Hold/Dispatched/Completed/Delayed), tracking progress bar, demurrage charges (₹K formatting), priority badges, 3 views (Consignments with track bars+priority badges+train names, Cargo by commodity with weight/packages/issue status, Costs with advance+demurrage sorted breakdown). Demurrage (RCN-04 ₹4.2K) pulses red, customs hold (RCN-06 Pharma) amber left border. CSS prefix: rcn-*
+- Created `src/components/shared/gate-management-panel.tsx` (247 lines) — 10 vehicles across 5 gates, 9 Indian carriers (TCI Express/Delhivery/Ekart Logistics/Rivigo/BlueDart/Safexpress/DHL Supply Chain/DTDC/Xpressbee/Snowman), 2 types (Inbound/Outbound), 5 purposes (Delivery/Pickup/Return Pickup/Express Pickup/Cross-Dock/Scheduled Delivery/Last Mile/Cold Chain), 5 statuses (Completed/Processing/Queued/Rejected/Security Hold), 4 load types (Palletized/Loose/Boxed/Container/Sorted/Refrigerated), seal verification + doc status tracking (Verified/Pending/Under Review/Invalid), wait time monitoring, 3 views (Vehicles with type+seal+doc badges, Gates with active/done counts, Throughput with IN/OUT counts+avg wait+completed sorted by wait time). Rejected (GMT-05 BlueDart invalid docs) pulses red, security hold (GMT-08 DTDC 22min) amber left border. CSS prefix: gmt-*
+- *** R470-R473 lost components from R380 collision NOW ALL FULLY REBUILT: pick-path-optimizer (R482), container-unloading (R483), cargo-insurance (R483), rail-consignment (R484) ***
+- Cleaned unused imports from both components (Clock, Gauge, TrendingUp, FileText, Truck, Activity from rail; ScanBarcode, UserCheck, PackageSearch, Warehouse, Clock, BarChart3, Activity, Printer, FileText, Shield, IndianRupee from gate)
+- Registered both in shared/index.ts (85→87 exports) and dashboard-view.tsx (793→809 lines)
+- CSS appended to globals.css (57,040→57,214 lines, +174 CSS for rcn-* and gmt-*)
+- TSC: 0 errors | Git pushed: commit d1947c1
+
+Stage Summary:
+- 87 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 809 lines | globals.css: 57,214 lines
+- TSC: 0 errors in src/
+- R470-R473 rebuild COMPLETE: all 4 lost components now restored
+- *** NEXT PHASE: New logistics panels — value-added services, warehouse energy analytics, last-mile delivery tracking, or safety compliance monitoring ***
+
+---
 Task ID: R483 — Container Unloading + Cargo Insurance
 Agent: Main Agent (Cron Loop)
 Task: R483 — Create container unloading operations panel with vessel tracking, hazmat handling, crane assignment, team performance, damage reporting, and progress monitoring for Indian seaport DCs. Plus cargo insurance management panel with multi-mode policy tracking, coverage analysis, claim management, insurer comparison, and endorsement status for Indian logistics.
