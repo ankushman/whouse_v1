@@ -100,6 +100,8 @@ import { ContainerTrackingAnalyticsPanel } from "@/components/shared/container-t
 import { LastMileOptimizationPanel } from "@/components/shared/last-mile-optimization-panel"
 import { LogisticsCostIntelligencePanel } from "@/components/shared/logistics-cost-intelligence-panel"
 import { WarehouseEnergyManagementPanel } from "@/components/shared/warehouse-energy-management-panel"
+import { SupplyChainVisibilityPanel } from "@/components/shared/supply-chain-visibility-panel"
+import { ShippingExceptionManagementPanel } from "@/components/shared/shipping-exception-management-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -1023,6 +1025,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <WarehouseEnergyManagementPanel />
+          </CardContent>
+        </Card>
+
+        {/* Supply Chain Visibility */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <SupplyChainVisibilityPanel />
+          </CardContent>
+        </Card>
+
+        {/* Shipping Exception Management */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ShippingExceptionManagementPanel />
           </CardContent>
         </Card>
       </div>

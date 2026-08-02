@@ -112,3 +112,5 @@ export { ContainerTrackingAnalyticsPanel } from './container-tracking-analytics-
 export { LastMileOptimizationPanel } from './last-mile-optimization-panel'
 export { LogisticsCostIntelligencePanel } from './logistics-cost-intelligence-panel'
 export { WarehouseEnergyManagementPanel } from './warehouse-energy-management-panel'
+export { SupplyChainVisibilityPanel } from './supply-chain-visibility-panel'
+export { ShippingExceptionManagementPanel } from './shipping-exception-management-panel'

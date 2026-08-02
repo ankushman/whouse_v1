@@ -57521,3 +57521,63 @@ html.theme-transition body {
 .wem-green-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .wem-green-row { transition: all 0.2s; }
 .wem-green-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* SCV: Supply Chain Visibility Panel */
+.scv-stat-card { transition: all 0.2s; }
+.scv-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.06); transform: translateY(-1px); }
+.scv-filter-pill { transition: all 0.15s; }
+.scv-filter-pill:hover { transform: scale(1.05); }
+.scv-filter-clear { transition: all 0.15s; }
+.scv-filter-clear:hover { transform: scale(1.1); }
+.scv-insights-row > div { transition: all 0.2s; }
+.scv-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.scv-alerts-list { transition: all 0.2s; }
+.scv-alerts-list:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.08); }
+.scv-pipe-card { transition: all 0.2s; }
+.scv-pipe-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-1px); }
+.scv-critical-pulse { border-color: #ef4444; animation: scv-pulse 2s ease-in-out infinite; }
+.scv-warning-border { border-left: 3px solid #f59e0b; }
+@keyframes scv-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 12px 4px rgba(239,68,68,0.15); } }
+
+/* SCV: suppliers view */
+.scv-sup-header { transition: all 0.2s; }
+.scv-sup-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.scv-sup-row { transition: all 0.2s; }
+.scv-sup-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* SCV: risk view */
+.scv-risk-header { transition: all 0.2s; }
+.scv-risk-header:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.06); }
+.scv-risk-row { transition: all 0.2s; }
+.scv-risk-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* SEM: Shipping Exception Management Panel */
+.sem-stat-card { transition: all 0.2s; }
+.sem-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.06); transform: translateY(-1px); }
+.sem-filter-pill { transition: all 0.15s; }
+.sem-filter-pill:hover { transform: scale(1.05); }
+.sem-filter-clear { transition: all 0.15s; }
+.sem-filter-clear:hover { transform: scale(1.1); }
+.sem-insights-row > div { transition: all 0.2s; }
+.sem-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.sem-alerts-list { transition: all 0.2s; }
+.sem-alerts-list:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.08); }
+.sem-exc-card { transition: all 0.2s; }
+.sem-exc-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-1px); }
+.sem-critical-pulse { border-color: #ef4444; animation: sem-pulse 2s ease-in-out infinite; }
+.sem-warning-border { border-left: 3px solid #f59e0b; }
+@keyframes sem-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 12px 4px rgba(239,68,68,0.15); } }
+.sem-sla-badge { animation: sem-sla-glow 3s ease-in-out infinite; }
+@keyframes sem-sla-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+/* SEM: RCA view */
+.sem-rca-header { transition: all 0.2s; }
+.sem-rca-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.sem-rca-row { transition: all 0.2s; }
+.sem-rca-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* SEM: impact view */
+.sem-imp-header { transition: all 0.2s; }
+.sem-imp-header:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.06); }
+.sem-imp-row { transition: all 0.2s; }
+.sem-imp-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
