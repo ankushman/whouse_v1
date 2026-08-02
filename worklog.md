@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R487 — Carrier SLA Scorecard + Reverse Logistics Hub
+Agent: Main Agent (Cron Loop)
+Task: R487 — Create carrier SLA scorecard with multi-modal carrier performance scoring, OTIF tracking, damage/loss monitoring, cost per shipment analysis, claims management, and trend indicators for Indian logistics carriers. Plus reverse logistics hub with returns processing, refurbishment tracking, disposal/recycling management, grade assessment, recovery rate analysis, and vendor coordination for Indian e-commerce returns.
+
+Work Log:
+- Read worklog.md: R486 (commit d9e45ac) added WarehouseEnergyAnalyticsPanel + SafetyCompliancePanel (91 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: all 45 icons verified present in lucide-react
+- Created `src/components/shared/carrier-sla-scorecard-panel.tsx` (255 lines) — 10 Indian carriers (TCI Express/Delhivery/BlueDart Aviation/Rivigo/Safexpress/Container Corp/Ekart/DTDC/Xpressbee/Maersk India), 4 transport modes (Road/Air/Rail/Sea) with mode-specific icons, 7 regions (North India/Pan India/Metro/West India/South India/East India/West Coast), SLA scores 72-98.1 with color-coded progress bars, OTIF 80-95%, damage rates 0.39-5.56%, avg cost per shipment (₹380-₹8.5K), response time tracking, claims (open/total), volume tiers (Low/Medium/High/Very High), trend arrows (up/down green/red), contract status (Active/Under Review/Expiring), 3 views (Carriers with SLA bars+volume tags+trend+mode icons, Regions with carrier breakdown+aggregate metrics, Claims with sorted open claims+damage/loss). Critical (Maersk 72.0, 5.56% damage) pulses red, At Risk (Container Corp 74.6, DTDC 76.2) amber border. CSS prefix: csl-*
+- Created `src/components/shared/reverse-logistics-hub-panel.tsx` (262 lines) — 10 return items across 6 Indian DCs, 10 vendors (Samsung India/Nike India/Amul/boAt Lifestyle/IKEA India/Parle Products/Dabur India/Levi's India/Noise India/Tata Consumer), 6 dispositions (Refurbish/Restock/Dispose/Recycle/Repair/Repack) with color-coded badges, 5 channels (Online/Retail/Quick Commerce/Pharmacy), 7 statuses (Completed/Inspecting/Refurbishing/Disposing/In Queue/Processing/Repackaging), grade A-F color system, refund+refurb cost+resale value with INR formatting, turnaround time tracking, recovery rate calculation, reverse pickup carrier tracking, 3 views (Returns with disposition+grade badges+reason+carrier+TAT, Disposition with per-type qty+loss+recovery net breakdown, Recovery with sorted resale value+net profit analysis). Dispose (Amul Butter RLH-03) pulses red, In Queue (boAt RLH-04) grey border. CSS prefix: rlh-*
+- Cleaned unused imports (PackageOpen, Wrench, Timer, Truck from RLH; CheckCircle, BarChart3, IndianRupee, Shield from CSL)
+- Registered both in shared/index.ts (91→93 exports) and dashboard-view.tsx (841→857 lines)
+- CSS appended to globals.css (56,838→56,889 lines, +51 CSS for csl-* and rlh-*)
+- TSC: 0 errors | Git pushed: commit 328c4c8
+
+Stage Summary:
+- 93 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 857 lines | globals.css: 56,889 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: Warehouse network optimization, multi-modal transport planner, cross-border trade panel, or IoT sensor dashboard ***
+---
 Task ID: R486 — Warehouse Energy Analytics + Safety Compliance
 Agent: Main Agent (Cron Loop)
 Task: R486 — Create warehouse energy analytics panel with power consumption tracking, solar generation monitoring, HVAC efficiency analysis, carbon footprint measurement, cost optimization, and sustainability scoring across Indian DCs. Plus safety compliance monitoring panel with Indian regulatory standards (NBC 2016/Factories Act 1948/IS standards), audit tracking, risk assessment, PPE compliance, fire safety, and corrective action management.
