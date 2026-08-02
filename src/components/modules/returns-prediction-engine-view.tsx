@@ -1,273 +1,223 @@
 "use client"
-import { useState, useMemo } from "react"
-import { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
-import { Brain, TrendingUp, TrendingDown, ShieldAlert, ShieldCheck, Target, Search, ArrowUpDown, AlertTriangle, Package, Recycle, DollarSign, Clock, CheckCircle2, XCircle, Lightbulb, ArrowRight } from "lucide-react"
-import { PageHeader } from "@/components/shared/page-header"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { Input } from "@/components/ui/input"
+import { useState, useMemo } from "react";
+import { AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { PageHeader } from "@/components/shared/page-header";
+import { SearchFilterToolbar } from "@/components/shared/search-filter-toolbar";
+import { ModuleBreadcrumb } from "@/components/shared/module-breadcrumb";
 
-// ── Constants ──
-const RETURN_REASONS = ["defective", "wrong_item", "size_issue", "color_mismatch", "damaged_shipping", "changed_mind", "late_delivery", "quality_below"] as const
-const REASON_EMOJI: Record<string, string> = { defective: "\u274c", wrong_item: "\U0001f504", size_issue: "\U0001f4cf", color_mismatch: "\U0001f3a8", damaged_shipping: "\U0001f4e6", changed_mind: "\U0001f914", late_delivery: "\u23f0", quality_below: "\u2622\ufe0f" }
-const CATEGORIES = ["electronics", "fashion", "grocery", "pharma", "furniture", "beauty", "sports", "auto"] as const
-const CAT_EMOJI: Record<string, string> = { electronics: "\U0001f4bb", fashion: "\U0001f457", grocery: "\U0001f34e", pharma: "\U0001f48a", furniture: "\U0001f6cb", beauty: "\U0001f9f5", sports: "\u26bd", auto: "\U0001f697" }
-const RISK_LEVELS = ["low", "medium", "high", "critical"] as const
-const CITIES = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", "Ahmedabad"] as const
-const MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const
-const TH = { pri: "#d97706", sec: "#dc2626", ok: "#059669", info: "#3b82f6" }
-const PC = ["#d97706", "#dc2626", "#3b82f6", "#059669", "#7c3aed", "#06b6d4", "#ec4899", "#8b5cf6"]
+const COLORS = ["#ea580c", "#f97316", "#fb923c", "#fdba74", "#c2410c", "#9a3412", "#7c2d12", "#431407"];
+const CATEGORIES = ["Electronics", "Apparel", "FMCG", "Pharma", "Home & Living", "Beauty", "Footwear", "Accessories"];
+const REASONS = ["Defective", "Wrong Size", "Color Mismatch", "Damaged Transit", "Wrong Item", "Quality Issue", "Not as Described", "Changed Mind"];
+const CHANNELS = ["D2C Website", "Marketplace", "Retail Store", "Social Commerce", "Catalogue"];
+const STATUSES = ["Return Received", "Inspecting", "Refund Initiated", "Resale Ready", "Disposed", "Vendor Return"];
 
-// ── Utilities ──
-function seededRandom(seed: number): number { const x = Math.sin(seed * 9301 + 49297) * 233280; return x - Math.floor(x) }
-function ri(min: number, max: number, seed: number): number { return Math.floor(seededRandom(seed) * (max - min + 1)) + min }
-function pick<T>(arr: readonly T[], seed: number): T { return arr[Math.floor(seededRandom(seed) * arr.length)] }
-function filterData<T extends Record<string, unknown>>(d: T[], q: string): T[] { if (!q) return d; const lq = q.toLowerCase(); return d.filter(r => Object.values(r).some(v => typeof v === "string" && v.toLowerCase().includes(lq))) }
-function sortedData<T extends Record<string, unknown>>(d: T[], f: string, dir: "asc" | "desc"): T[] { return [...d].sort((a, b) => { const va = a[f], vb = b[f]; if (va == null || vb == null) return 0; const cmp = String(va).localeCompare(String(vb), undefined, { numeric: true }); return dir === "asc" ? cmp : -cmp }) }
+function ri(min: number, max: number, value: number) {
+  return Math.max(min, Math.min(max, value));
+}
 
-// ── Visual Components ──
+interface ReturnRecord {
+  id: string;
+  category: string;
+  reason: string;
+  channel: string;
+  status: string;
+  orderId: string;
+  returnRate: number;
+  predictedReturn: number;
+  predictionAccuracy: number;
+  refundAmount: number;
+  resaleValue: number;
+  processingDays: number;
+  customerSat: number;
+  repeatReturn: boolean;
+  ageDays: number;
+  warehouse: string;
+}
+
+function CategoryBadge({ category }: { category: string }) {
+  const c = COLORS[CATEGORIES.indexOf(category) % COLORS.length];
+  return <span style={{ background: `${c}22`, color: c, padding: "2px 10px", borderRadius: 12, fontSize: 12, fontWeight: 600, display: "inline-block", minWidth: 90, textAlign: "center" }}>{category}</span>;
+}
+
 function ReasonBadge({ reason }: { reason: string }) {
-  const cols: Record<string, string> = { defective: "bg-red-100 text-red-700 dark:bg-red-900/30", wrong_item: "bg-blue-100 text-blue-700 dark:bg-blue-900/30", size_issue: "bg-amber-100 text-amber-700 dark:bg-amber-900/30", color_mismatch: "bg-pink-100 text-pink-700 dark:bg-pink-900/30", damaged_shipping: "bg-orange-100 text-orange-700 dark:bg-orange-900/30", changed_mind: "bg-violet-100 text-violet-700 dark:bg-violet-900/30", late_delivery: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30", quality_below: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30" }
-  return <span className={"rpe-reason-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[reason] || "bg-gray-100 text-gray-700")}>{REASON_EMOJI[reason] || "\u2022"} {reason.replace(/_/g, " ")}</span>
+  const isDefective = reason === "Defective" || reason === "Damaged Transit";
+  return <span style={{ background: isDefective ? "#dc262622" : "#f9731622", color: isDefective ? "#dc2626" : "#ea580c", padding: "2px 10px", borderRadius: 12, fontSize: 12, fontWeight: 600 }}>{reason}</span>;
 }
 
-function CatBadge({ cat }: { cat: string }) {
-  return <span className={"rpe-cat-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-700 dark:bg-amber-900/30"}>{CAT_EMOJI[cat] || "\u2022"} {cat}</span>
+function ChannelBadge({ channel }: { channel: string }) {
+  const colors = ["#7c3aed", "#0891b2", "#16a34a", "#d97706", "#dc2626"];
+  const i = CHANNELS.indexOf(channel) % colors.length;
+  return <span style={{ background: `${colors[i]}22`, color: colors[i], padding: "2px 10px", borderRadius: 12, fontSize: 12, fontWeight: 600 }}>{channel}</span>;
 }
 
-function RiskBadge({ risk }: { risk: string }) {
-  const cols: Record<string, string> = { low: "rpe-risk-low bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30", medium: "rpe-risk-med bg-amber-100 text-amber-700 dark:bg-amber-900/30", high: "rpe-risk-high bg-red-100 text-red-700 dark:bg-red-900/30 shadow-[0_0_6px_rgba(220,38,38,0.3)]", critical: "rpe-risk-critical bg-red-200 text-red-800 dark:bg-red-900/40 shadow-[0_0_10px_rgba(220,38,38,0.5)] animate-pulse" }
-  return <span className={"rpe-risk-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold " + (cols[risk] || "")}>{risk.toUpperCase()}</span>
+function StatusBadge({ status }: { status: string }) {
+  const colors: Record<string, string> = { "Return Received": "#3b82f6", "Inspecting": "#d97706", "Refund Initiated": "#8b5cf6", "Resale Ready": "#16a34a", "Disposed": "#6b7280", "Vendor Return": "#ea580c" };
+  const c = colors[status] || "#6b7280";
+  return <span style={{ background: `${c}22`, color: c, padding: "2px 10px", borderRadius: 12, fontSize: 12, fontWeight: 600 }}>{status}</span>;
 }
 
-function CityBadge({ city }: { city: string }) {
-  return <span className="rpe-city-badge inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-amber-50 text-amber-700 dark:bg-amber-900/20">{city}</span>
+function RefundBar({ amount, max }: { amount: number; max: number }) {
+  const pct = ri(0, 100, (amount / max) * 100);
+  return <div style={{ display: "flex", alignItems: "center", gap: 6 }}><div style={{ width: 80, height: 6, background: "#f3f4f6", borderRadius: 3, overflow: "hidden" }}><div style={{ width: `${pct}%`, height: "100%", background: "#ea580c", borderRadius: 3 }} /></div><span style={{ fontSize: 11, color: "#6b7280" }}>\u20b9{(amount / 1000).toFixed(1)}K</span></div>;
 }
 
-function ProbGauge({ value }: { value: number }) {
-  const col = value >= 70 ? TH.sec : value >= 40 ? TH.pri : TH.ok
-  return <div className="rpe-prob-gauge flex items-center gap-1.5"><div className="w-16 h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"><div className="h-full rounded-full transition-all" style={{ width: value + "%", backgroundColor: col }}/></div><span className="text-[10px] font-bold" style={{ color: col }}>{value}%</span></div>
+function SatRing({ sat }: { sat: number }) {
+  const r = 18, sw = 3, circ = 2 * Math.PI * r, off = circ * (1 - ri(0, 100, sat) / 100);
+  const col = sat >= 80 ? "#16a34a" : sat >= 60 ? "#d97706" : "#dc2626";
+  return <svg width={44} height={44}><circle cx={22} cy={22} r={r} fill="none" stroke="#e5e7eb" strokeWidth={sw} /><circle cx={22} cy={22} r={r} fill="none" stroke={col} strokeWidth={sw} strokeDasharray={circ} strokeDashoffset={off} strokeLinecap="round" transform="rotate(-90 22 22)" /><text x={22} y={26} textAnchor="middle" fontSize={11} fontWeight={700} fill={col}>{sat}</text></svg>;
 }
 
-function CostBadge({ cost }: { cost: number }) {
-  const col = cost >= 5000 ? TH.sec : cost >= 2000 ? TH.pri : TH.ok
-  return <span className="rpe-cost-badge inline-flex items-center gap-1 text-[10px] font-bold" style={{ color: col }}><DollarSign className="w-3 h-3"/>{cost.toLocaleString()}</span>
+function KpiTile({ label, value, unit, color }: { label: string; value: number; unit: string; color?: string }) {
+  return <Card><CardContent className="rpe-kpi"><div style={{ fontSize: 13, color: "#6b7280" }}>{label}</div><div style={{ fontSize: 26, fontWeight: 800, color: color || "#ea580c" }}>{value.toLocaleString()}<span style={{ fontSize: 13, fontWeight: 400 }}>{unit}</span></div></CardContent></Card>;
 }
 
-function TrendIndicator({ value }: { value: number }) {
-  const neg = value < 0; const col = neg ? TH.sec : TH.ok
-  return <span className="rpe-trend-indicator inline-flex items-center gap-0.5 text-[10px] font-semibold" style={{ color: col }}>{neg ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}{Math.abs(value).toFixed(1)}%</span>
+function RepeatBadge({ repeat }: { repeat: boolean }) {
+  return <span style={{ background: repeat ? "#dc262622" : "#16a34a22", color: repeat ? "#dc2626" : "#16a34a", padding: "2px 8px", borderRadius: 10, fontSize: 11, fontWeight: 600 }}>{repeat ? "Repeat" : "First"}</span>;
 }
 
-function ValueTile({ label, value, icon, trend }: { label: string; value: string; icon: React.ReactNode; trend: number }) {
-  return <Card className="rpe-value-tile glass-subtle hover:shadow-lg transition-shadow"><CardContent className="p-3"><div className="flex items-center justify-between"><span className="text-[10px] text-muted-foreground">{label}</span>{icon}</div><div className="text-xl font-bold mt-1">{value}</div><TrendIndicator value={trend}/></CardContent></Card>
+const WAREHOUSES = ["Mumbai Central MH", "Delhi NCR Hub DL", "Bangalore South KA", "Chennai Coastal TN", "Kolkata East WB", "Hyderabad Deccan TS", "Pune West MH", "Jaipur North RJ"];
+
+function genRecords(offset: number): ReturnRecord[] {
+  return Array.from({ length: 20 }, (_, i) => ({
+    id: `RPE-${String(offset + i + 1).padStart(4, "0")}`,
+    category: CATEGORIES[(offset + i) % CATEGORIES.length],
+    reason: REASONS[(offset + i) % REASONS.length],
+    channel: CHANNELS[(offset + i) % CHANNELS.length],
+    status: STATUSES[(offset + i) % STATUSES.length],
+    orderId: `ORD-2026-${String((offset + i) * 7 % 900 + 100).padStart(4, "0")}`,
+    returnRate: ri(2, 18, 3 + ((offset + i) * 5) % 15),
+    predictedReturn: ri(1, 20, 2 + ((offset + i) * 7) % 18),
+    predictionAccuracy: ri(58, 97, 62 + ((offset + i) * 11) % 35),
+    refundAmount: ri(350, 28000, 500 + ((offset + i) * 1400) % 27500),
+    resaleValue: ri(100, 18000, 150 + ((offset + i) * 900) % 17850),
+    processingDays: ri(1, 14, 2 + ((offset + i) * 3) % 12),
+    customerSat: ri(25, 95, 35 + ((offset + i) * 13) % 60),
+    repeatReturn: (offset + i) % 5 === 0,
+    ageDays: ri(2, 30, 3 + ((offset + i) * 7) % 27),
+    warehouse: WAREHOUSES[(offset + i) % WAREHOUSES.length],
+  }));
 }
 
-function SavingsTile({ label, value }: { label: string; value: string }) {
-  return <div className="rpe-savings-tile p-3 rounded-lg border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20 text-center"><div className="text-lg font-bold text-emerald-600">{value}</div><div className="text-[10px] text-muted-foreground">{label}</div></div>
-}
+const hand: ReturnRecord[] = [
+  { id: "RPE-0001", category: "Electronics", reason: "Defective", channel: "D2C Website", status: "Inspecting", orderId: "ORD-2026-0147", returnRate: 8.2, predictedReturn: 7.5, predictionAccuracy: 91, refundAmount: 18500, resaleValue: 8200, processingDays: 5, customerSat: 72, repeatReturn: false, ageDays: 7, warehouse: "Mumbai Central MH" },
+  { id: "RPE-0002", category: "Apparel", reason: "Wrong Size", channel: "Marketplace", status: "Refund Initiated", orderId: "ORD-2026-0298", returnRate: 15.4, predictedReturn: 14.8, predictionAccuracy: 96, refundAmount: 2400, resaleValue: 1800, processingDays: 3, customerSat: 85, repeatReturn: true, ageDays: 4, warehouse: "Delhi NCR Hub DL" },
+  { id: "RPE-0003", category: "FMCG", reason: "Damaged Transit", channel: "D2C Website", status: "Return Received", orderId: "ORD-2026-0456", returnRate: 3.1, predictedReturn: 3.8, predictionAccuracy: 88, refundAmount: 850, resaleValue: 0, processingDays: 2, customerSat: 68, repeatReturn: false, ageDays: 5, warehouse: "Bangalore South KA" },
+  { id: "RPE-0004", category: "Beauty", reason: "Color Mismatch", channel: "Social Commerce", status: "Disposed", orderId: "ORD-2026-0612", returnRate: 12.6, predictedReturn: 11.2, predictionAccuracy: 89, refundAmount: 3200, resaleValue: 0, processingDays: 8, customerSat: 55, repeatReturn: true, ageDays: 12, warehouse: "Chennai Coastal TN" },
+  { id: "RPE-0005", category: "Home & Living", reason: "Not as Described", channel: "Catalogue", status: "Vendor Return", orderId: "ORD-2026-0789", returnRate: 6.8, predictedReturn: 7.2, predictionAccuracy: 94, refundAmount: 8500, resaleValue: 6200, processingDays: 10, customerSat: 78, repeatReturn: false, ageDays: 18, warehouse: "Kolkata East WB" },
+  { id: "RPE-0006", category: "Footwear", reason: "Wrong Size", channel: "Marketplace", status: "Resale Ready", orderId: "ORD-2026-0834", returnRate: 16.2, predictedReturn: 15.5, predictionAccuracy: 96, refundAmount: 4500, resaleValue: 3200, processingDays: 4, customerSat: 88, repeatReturn: false, ageDays: 6, warehouse: "Hyderabad Deccan TS" },
+  { id: "RPE-0007", category: "Accessories", reason: "Quality Issue", channel: "Retail Store", status: "Inspecting", orderId: "ORD-2026-0921", returnRate: 5.4, predictedReturn: 6.1, predictionAccuracy: 87, refundAmount: 6800, resaleValue: 4100, processingDays: 6, customerSat: 62, repeatReturn: true, ageDays: 14, warehouse: "Pune West MH" },
+  { id: "RPE-0008", category: "Electronics", reason: "Changed Mind", channel: "D2C Website", status: "Refund Initiated", orderId: "ORD-2026-1056", returnRate: 4.2, predictedReturn: 4.0, predictionAccuracy: 95, refundAmount: 22000, resaleValue: 18500, processingDays: 3, customerSat: 92, repeatReturn: false, ageDays: 3, warehouse: "Jaipur North RJ" },
+  { id: "RPE-0009", category: "Apparel", reason: "Wrong Item", channel: "Social Commerce", status: "Return Received", orderId: "ORD-2026-1178", returnRate: 7.8, predictedReturn: 8.5, predictionAccuracy: 92, refundAmount: 1800, resaleValue: 1200, processingDays: 2, customerSat: 70, repeatReturn: false, ageDays: 5, warehouse: "Mumbai Central MH" },
+  { id: "RPE-0010", category: "Pharma", reason: "Defective", channel: "Retail Store", status: "Disposed", orderId: "ORD-2026-1290", returnRate: 1.2, predictedReturn: 1.5, predictionAccuracy: 80, refundAmount: 4200, resaleValue: 0, processingDays: 12, customerSat: 42, repeatReturn: true, ageDays: 25, warehouse: "Delhi NCR Hub DL" },
+];
 
-function StrategyBadge({ status }: { status: string }) {
-  const cols: Record<string, string> = { active: "rpe-strategy-active bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30", planned: "rpe-strategy-plan bg-blue-100 text-blue-700 dark:bg-blue-900/30", piloting: "rpe-strategy-pilot bg-violet-100 text-violet-700 dark:bg-violet-900/30", completed: "rpe-strategy-done bg-gray-100 text-gray-600 dark:bg-gray-800" }
-  return <span className={"rpe-strategy-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold " + (cols[status] || "")}>{status}</span>
-}
+const gen = [...genRecords(10), ...genRecords(30), ...genRecords(50)];
+const allRecords = [...hand, ...gen];
 
-function ProgressRing({ pct }: { pct: number }) {
-  const col = pct >= 80 ? TH.ok : pct >= 50 ? TH.info : TH.pri
-  const r = 18; const circ = 2 * Math.PI * r; const off = circ * (1 - pct / 100)
-  return <svg width={44} height={44} className="rpe-progress-ring"><circle cx={22} cy={22} r={r} fill="none" stroke="currentColor" strokeWidth={3} className="text-gray-200 dark:text-gray-700"/><circle cx={22} cy={22} r={r} fill="none" stroke={col} strokeWidth={3} strokeDasharray={circ} strokeDashoffset={off} strokeLinecap="round" transform="rotate(-90 22 22)"/><text x={22} y={22} textAnchor="middle" dominantBaseline="central" className="text-[9px] font-bold fill-current" style={{ color: col }}>{pct}%</text></svg>
-}
+const filterGroups = [
+  { key: "category", label: "Category", options: CATEGORIES.map(c => ({ label: c, value: c, count: Math.floor(Math.random() * 10) + 5 })) },
+  { key: "reason", label: "Reason", options: REASONS.map(r => ({ label: r, value: r, count: Math.floor(Math.random() * 10) + 5 })) },
+  { key: "channel", label: "Channel", options: CHANNELS.map(c => ({ label: c, value: c, count: Math.floor(Math.random() * 10) + 5 })) },
+  { key: "status", label: "Status", options: STATUSES.map(s => ({ label: s, value: s, count: Math.floor(Math.random() * 10) + 5 })) },
+];
 
-function ROIIndicator({ roi }: { roi: number }) {
-  const col = roi >= 200 ? TH.ok : roi >= 100 ? TH.info : TH.pri
-  return <span className="rpe-roi-badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold" style={{ backgroundColor: col + "20", color: col }}>{roi}x ROI</span>
-}
+const insights = [
+  { title: "Apparel Return Rate Hotspots", desc: "Apparel and footwear categories consistently show the highest return rates at 15-18%, driven primarily by size and fit issues. The prediction model achieves 96% accuracy on size-related returns by analyzing purchase history, brand size charts, and customer measurement profiles. Implementing AI-powered size recommendation widgets on product pages reduced size-related returns by 23% in pilot testing." },
+  { title: "Reverse Logistics Cost Optimization", desc: "Average return processing cost of Rs 280 per unit includes inspection, repackaging, quality grading, and restocking labor. The system identifies high-resale-value items for priority processing, reducing average processing time from 8 days to 3.4 days for items with resale potential above 60%. This prioritization saves an estimated 1.8Cr monthly in expedited handling costs." },
+  { title: "Repeat Returner Behavioral Patterns", desc: "Analysis of 12,000 return transactions identified 847 customers with 3 or more returns in 6 months, accounting for 22% of all return volume despite representing only 3.2% of the customer base. These patterns correlate strongly with specific product categories and purchase channels, enabling proactive intervention through personalized fit guides and enhanced product imagery." },
+  { title: "Vendor Return Quality Escalation", desc: "Pharmaceutical and beauty product returns flagged as vendor-quality defects trigger automated batch investigation workflows. In Q2 2026, 15 vendor batches were flagged with defect rates exceeding 5%, resulting in 4 vendor scorecard downgrades and 2 supply contract reviews. The system prevents defective batches from reaching customers by enabling pre-shipment quality sampling based on return prediction signals." },
+];
 
-// ── Data Generators ──
-function genPredictions() {
-  return Array.from({ length: 80 }, (_, i) => {
-    const reason = pick(RETURN_REASONS, i * 3 + 1)
-    const cat = pick(CATEGORIES, i * 3 + 2)
-    return {
-      id: "RP-" + String(i + 1).padStart(4, "0"),
-      orderId: "ORD-" + String(ri(100000, 999999, i + 7)).padStart(6, "0"),
-      category: cat,
-      reason: reason,
-      city: pick(CITIES, i * 3 + 3),
-      returnProb: ri(5, 95, i + 11),
-      risk: pick(RISK_LEVELS, i + 13),
-      estimatedCost: ri(200, 15000, i + 17),
-      predictedDate: `2026-08-${String(ri(1, 31, i + 19)).padStart(2, "0")}`,
-      model: pick(["RandomForest", "XGBoost-Returns", "NeuralNet-V2", "LogisticReg", "Ensemble-Returns", "LightGBM-R"], i + 23),
-      confidence: ri(50, 97, i + 29),
-      customerSegment: pick(["Premium", "Regular", "First-time", "Wholesale", "Loyalty"], i + 31)
-    }
-  })
-}
-
-function genRisks() {
-  return Array.from({ length: 60 }, (_, i) => {
-    const cat = pick(CATEGORIES, i * 3 + 1)
-    return {
-      id: "RSK-" + String(i + 1).padStart(4, "0"),
-      category: cat,
-      city: pick(CITIES, i * 3 + 2),
-      riskFactor: pick(["supplier_quality", "packaging", "shipping_carrier", "last_mile", "customer_expectation", "product_complexity", "storage_conditions", "handling_procedures"], i + 3),
-      riskLevel: pick(RISK_LEVELS, i + 7),
-      returnRate: ri(2, 35, i + 11),
-      avgCostPerReturn: ri(300, 8000, i + 13),
-      monthlyImpact: ri(10, 500, i + 17),
-      trend: pick(["increasing", "decreasing", "stable", "spike"], i + 19),
-      mitigation: pick(["Improve packaging", "Switch carrier", "Better QC", "Enhanced inspection", "Customer education", "Improve product desc", "Better handling SOP"], i + 23)
-    }
-  })
-}
-
-function genStrategies() {
-  return Array.from({ length: 16 }, (_, i) => {
-    const st = pick(["active", "planned", "piloting", "completed"] as const, i * 2 + 1)
-    return {
-      id: "STR-" + String(i + 1).padStart(3, "0"),
-      name: pick(["Enhanced Pre-Ship QC", "AI Size Recommendation", "Virtual Try-On", "Improved Packaging", "Carrier Scorecard", "Customer Feedback Loop", "Predictive QA Gates", "Return Reason Dashboard", "Auto-Refund Threshold", "Restock Automation", "Product Photo Accuracy", "Dimensional Check AI", "Smart Return Routing", "Quality Correlation AI", "Supplier Penalty Program", "Last-Mile Protection"], i + 2),
-      status: st,
-      reductionPct: ri(5, 45, i + 7),
-      savings: ri(50000, 2000000, i + 11),
-      roi: ri(80, 400, i + 13),
-      progress: st === "completed" ? 100 : ri(10, 90, i + 17),
-      category: pick(CATEGORIES, i + 19),
-      startDate: `2026-${String(ri(1, 7, i + 23)).padStart(2, "0")}-${String(ri(1, 28, i + 29)).padStart(2, "0")}`
-    }
-  })
-}
-
-function genCharts() {
-  const monthly = MO.map((m, i) => ({ month: m, actual_returns: ri(200, 1200, i + 101), predicted_returns: ri(200, 1200, i + 151), prevented: ri(50, 400, i + 201), cost_savings: ri(100000, 800000, i + 251) }))
-  const reasonPie = RETURN_REASONS.map((r, i) => ({ name: r.replace(/_/g, " "), value: ri(50, 800, i + 301) }))
-  const catBar = CATEGORIES.map((c, i) => ({ category: c, return_rate: ri(3, 28, i + 401), cost: ri(50000, 500000, i + 451) }))
-  const riskLine = MO.map((m, i) => ({ month: m, avg_risk: +(ri(15, 55, i + 501) / 10).toFixed(1), high_risk_count: ri(5, 40, i + 551) }))
-  return { monthly, reasonPie, catBar, riskLine }
-}
-
-// ── Main Component ──
 export default function ReturnsPredictionEngineView() {
-  const [tab, setTab] = useState("dashboard")
-  const [search, setSearch] = useState("")
-  const [sortField, setSortField] = useState("id")
-  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc")
-  const [detail, setDetail] = useState<Record<string, unknown> | null>(null)
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
 
-  const predictions = useMemo(() => genPredictions(), [])
-  const risks = useMemo(() => genRisks(), [])
-  const strategies = useMemo(() => genStrategies(), [])
-  const charts = useMemo(() => genCharts(), [])
-  const filtPreds = useMemo(() => sortedData(filterData(predictions, search), sortField, sortDir), [predictions, search, sortField, sortDir])
-  const filtRisks = useMemo(() => sortedData(filterData(risks, search), sortField, sortDir), [risks, search, sortField, sortDir])
+  const filtered = useMemo(() => {
+    return allRecords.filter(r => {
+      if (searchQuery && !r.id.toLowerCase().includes(searchQuery.toLowerCase()) && !r.orderId.toLowerCase().includes(searchQuery.toLowerCase()) && !r.category.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      return Object.entries(activeFilters).every(([key, vals]) => vals.length === 0 || vals.includes(r[key as keyof typeof r] as string));
+    });
+  }, [searchQuery, activeFilters]);
 
-  const toggleSort = (f: string) => { if (sortField === f) setSortDir(d => d === "asc" ? "desc" : "asc"); else { setSortField(f); setSortDir("asc") } }
-  const sortIcon = (f: string) => sortField === f ? (sortDir === "asc" ? "\u2191" : "\u2193") : ""
+  const totalRecords = allRecords.length;
+  const filteredCount = filtered.length;
+  const totalRefund = allRecords.reduce((s, r) => s + r.refundAmount, 0);
+  const avgAccuracy = Math.round(allRecords.reduce((s, r) => s + r.predictionAccuracy, 0) / allRecords.length);
+  const avgProcessing = (allRecords.reduce((s, r) => s + r.processingDays, 0) / allRecords.length).toFixed(1);
+  const repeatCount = allRecords.filter(r => r.repeatReturn).length;
 
-  const avgReturnRate = Math.round(risks.reduce((s, r) => s + r.returnRate, 0) / risks.length)
-  const totalCost = predictions.reduce((s, p) => s + p.estimatedCost, 0)
-  const highRiskCount = risks.filter(r => r.riskLevel === "high" || r.riskLevel === "critical").length
-  const activeStrategies = strategies.filter(s => s.status === "active" || s.status === "piloting").length
+  const reasonData = REASONS.map(reason => ({ name: reason, count: allRecords.filter(r => r.reason === reason).length, refund: Math.round(allRecords.filter(r => r.reason === reason).reduce((s, r) => s + r.refundAmount, 0) / 1000) }));
 
-  const tab0 = (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <ValueTile label="Avg Return Rate" value={avgReturnRate + "%"} icon={<Package className="w-4 h-4 text-amber-500"/>} trend={-4.2}/>
-        <ValueTile label="Total Cost at Risk" value={"\u20b9" + (totalCost / 100000).toFixed(1) + "L"} icon={<DollarSign className="w-4 h-4 text-red-500"/>} trend={6.8}/>
-        <ValueTile label="High Risk Items" value={highRiskCount.toString()} icon={<ShieldAlert className="w-4 h-4 text-red-500"/>} trend={2.1}/>
-        <ValueTile label="Active Strategies" value={activeStrategies.toString()} icon={<Lightbulb className="w-4 h-4 text-blue-500"/>} trend={15.5}/>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <Card className="rpe-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Returns Trend (Actual vs Predicted)</CardTitle></CardHeader><CardContent><AreaChart data={charts.monthly} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="month" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Area type="monotone" dataKey="actual_returns" stroke={TH.pri} fill={TH.pri} fillOpacity={0.2}/><Area type="monotone" dataKey="predicted_returns" stroke={TH.sec} fill={TH.sec} fillOpacity={0.15}/></AreaChart></CardContent></Card>
-        <Card className="rpe-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Return Reasons Distribution</CardTitle></CardHeader><CardContent><PieChart width={300} height={200}><Pie data={charts.reasonPie} cx="50%" cy="50%" outerRadius={70} dataKey="value" label={({ name, percent }) => name + " " + (percent * 100).toFixed(0) + "%"} labelLine={false}>{charts.reasonPie.map((_, i) => <Cell key={i} fill={PC[i % PC.length]}/>)}</Pie><Tooltip contentStyle={{ fontSize: 10 }}/></PieChart></CardContent></Card>
-        <Card className="rpe-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Return Rate & Cost by Category</CardTitle></CardHeader><CardContent><BarChart data={charts.catBar} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="category" tick={{ fontSize: 9 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Bar dataKey="return_rate" fill={TH.pri} radius={[2, 2, 0, 0]}/><Bar dataKey="cost" fill={TH.sec} radius={[2, 2, 0, 0]}/></BarChart></CardContent></Card>
-        <Card className="rpe-chart-card glass-subtle"><CardHeader className="pb-1"><CardTitle className="text-xs">Risk Score Trend</CardTitle></CardHeader><CardContent><LineChart data={charts.riskLine} height={200}><CartesianGrid strokeDasharray="3 3" opacity={0.3}/><XAxis dataKey="month" tick={{ fontSize: 10 }}/><YAxis tick={{ fontSize: 10 }}/><Tooltip contentStyle={{ fontSize: 10 }}/><Line type="monotone" dataKey="avg_risk" stroke={TH.pri} strokeWidth={2} dot={{ r: 3 }}/><Line type="monotone" dataKey="high_risk_count" stroke={TH.sec} strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3 }}/></LineChart></CardContent></Card>
-      </div>
-    </div>
-  )
+  const channelData = CHANNELS.map(ch => ({ name: ch, returns: allRecords.filter(r => r.channel === ch).length, rate: Math.round(allRecords.filter(r => r.channel === ch).reduce((s, r) => s + r.returnRate, 0) / allRecords.filter(r => r.channel === ch).length * 10) / 10 }));
 
-  const tab1 = (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2"><Search className="w-4 h-4 text-muted-foreground"/><Input placeholder="Search predictions..." value={search} onChange={e => setSearch(e.target.value)} className="h-8 text-xs max-w-xs"/></div>
-      <div className="rounded-lg border overflow-auto max-h-[calc(100vh-280px)]">
-        <table className="rpe-table w-full text-xs"><thead className="bg-amber-50 dark:bg-amber-900/20 sticky top-0"><tr><th className="p-2 text-left cursor-pointer select-none" onClick={() => toggleSort("id")}>ID {sortIcon("id")}</th><th className="p-2 text-left">Order</th><th className="p-2 text-left">Category</th><th className="p-2 text-left">Reason</th><th className="p-2 text-left">City</th><th className="p-2 text-left">Return Prob</th><th className="p-2 text-left">Risk</th><th className="p-2 text-right">Est. Cost</th><th className="p-2 text-left">Segment</th><th className="p-2 text-left">Model</th></tr></thead><tbody>{filtPreds.map(p => <tr key={p.id as string} className="rpe-table-row border-t hover:bg-amber-50/50 dark:hover:bg-amber-900/10 cursor-pointer" onClick={() => setDetail(p)}><td className="p-2 font-mono">{p.id as string}</td><td className="p-2 font-mono text-[10px]">{p.orderId as string}</td><td className="p-2"><CatBadge cat={p.category as string}/></td><td className="p-2"><ReasonBadge reason={p.reason as string}/></td><td className="p-2"><CityBadge city={p.city as string}/></td><td className="p-2"><ProbGauge value={p.returnProb as number}/></td><td className="p-2"><RiskBadge risk={p.risk as string}/></td><td className="p-2 text-right"><CostBadge cost={p.estimatedCost as number}/></td><td className="p-2 text-[10px]">{p.customerSegment as string}</td><td className="p-2 text-[10px]">{p.model as string}</td></tr>)}</tbody></table>
-      </div>
-      <div className="text-[10px] text-muted-foreground text-right">{filtPreds.length} predictions</div>
-    </div>
-  )
-
-  const tab2 = (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2"><Search className="w-4 h-4 text-muted-foreground"/><Input placeholder="Search risks..." value={search} onChange={e => setSearch(e.target.value)} className="h-8 text-xs max-w-xs"/></div>
-      <div className="rounded-lg border overflow-auto max-h-[calc(100vh-280px)]">
-        <table className="rpe-table w-full text-xs"><thead className="bg-red-50 dark:bg-red-900/20 sticky top-0"><tr><th className="p-2 text-left cursor-pointer select-none" onClick={() => toggleSort("id")}>ID {sortIcon("id")}</th><th className="p-2 text-left">Category</th><th className="p-2 text-left">City</th><th className="p-2 text-left">Risk Factor</th><th className="p-2 text-left">Level</th><th className="p-2 text-right">Return Rate</th><th className="p-2 text-right">Avg Cost</th><th className="p-2 text-right">Monthly Impact</th><th className="p-2 text-left">Trend</th><th className="p-2 text-left">Mitigation</th></tr></thead><tbody>{filtRisks.map(r => <tr key={r.id as string} className="rpe-table-row border-t hover:bg-red-50/50 dark:hover:bg-red-900/10 cursor-pointer" onClick={() => setDetail(r)}><td className="p-2 font-mono">{r.id as string}</td><td className="p-2"><CatBadge cat={r.category as string}/></td><td className="p-2"><CityBadge city={r.city as string}/></td><td className="p-2"><span className="rpe-risk-factor text-[10px] font-medium">{(r.riskFactor as string).replace(/_/g, " ")}</span></td><td className="p-2"><RiskBadge risk={r.riskLevel as string}/></td><td className="p-2 text-right font-semibold">{r.returnRate}%</td><td className="p-2 text-right"><CostBadge cost={r.avgCostPerReturn as number}/></td><td className="p-2 text-right">{r.monthlyImpact}</td><td className="p-2"><span className="rpe-trend-cell text-[10px]">{r.trend as string}</span></td><td className="p-2 text-[10px] max-w-[150px] truncate">{r.mitigation as string}</td></tr>)}</tbody></table>
-      </div>
-      <div className="text-[10px] text-muted-foreground text-right">{filtRisks.length} risk items</div>
-    </div>
-  )
-
-  const tab3 = (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {strategies.slice(0, 8).map(s => {
-          const sv = "Rs." + (s.savings / 100000).toFixed(1) + "L"
-          return <SavingsTile key={s.id} label={s.name} value={sv}/>
-        })}
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {strategies.map(s => (
-          <Card key={s.id} className="rpe-strategy-card glass-subtle hover:shadow-lg transition-shadow">
-            <CardContent className="p-3 space-y-2">
-              <div className="flex items-center justify-between"><span className="font-semibold text-xs">{s.name}</span><StrategyBadge status={s.status}/></div>
-              <div className="flex items-center gap-4">
-                <ProgressRing pct={s.progress}/>
-                <div className="flex-1 space-y-1">
-                  <div className="flex items-center justify-between text-[10px]"><span className="text-muted-foreground">Reduction</span><span className="font-semibold">{s.reductionPct}%</span></div>
-                  <div className="flex items-center justify-between text-[10px]"><span className="text-muted-foreground">Savings</span><span className="font-semibold text-emerald-600">\u20b9{(s.savings / 100000).toFixed(1)}L</span></div>
-                </div>
-              </div>
-              <div className="flex items-center justify-between"><ROIIndicator roi={s.roi}/><CatBadge cat={s.category}/></div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  )
-
-  const tabs = [
-    { key: "dashboard", label: "Dashboard", icon: <Target className="w-3.5 h-3.5" />, content: tab0 },
-    { key: "predictions", label: "Return Predictions", icon: <Brain className="w-3.5 h-3.5" />, content: tab1 },
-    { key: "risks", label: "Risk Analysis", icon: <ShieldAlert className="w-3.5 h-3.5" />, content: tab2 },
-    { key: "strategies", label: "Reduction Strategies", icon: <Lightbulb className="w-3.5 h-3.5" />, content: tab3 }
-  ]
+  const statusData = STATUSES.map(st => ({ name: st, count: allRecords.filter(r => r.status === st).length }));
 
   return (
-    <div className="space-y-4 p-4">
-      <PageHeader title="Returns Prediction Engine" description="AI-powered return risk prediction with multi-factor analysis, cost modeling, and proactive reduction strategies"/>
-      <div className="flex items-center gap-3 flex-wrap">
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30"><ShieldAlert className="w-3 h-3 text-amber-600"/><span className="text-[10px] font-semibold text-amber-700 dark:text-amber-300">{highRiskCount} High Risk</span></div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30"><ShieldCheck className="w-3 h-3 text-emerald-600"/><span className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">{activeStrategies} Strategies Active</span></div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30"><Recycle className="w-3 h-3 text-blue-600"/><span className="text-[10px] font-semibold text-blue-700 dark:text-blue-300">{avgReturnRate}% Avg Return</span></div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-100 dark:bg-red-900/30"><DollarSign className="w-3 h-3 text-red-600"/><span className="text-[10px] font-semibold text-red-700 dark:text-red-300">\u20b9{(totalCost/100000).toFixed(0)}L Cost at Risk</span></div>
-      </div>
-      <Tabs value={tab} onValueChange={setTab}>
-        <TabsList className="bg-gradient-to-r from-amber-500/10 to-red-500/10 p-0.5 h-9">
-          {tabs.map(t => <TabsTrigger key={t.key} value={t.key} className="text-xs gap-1.5 data-[state=active]:bg-amber-600 data-[state=active]:text-white">{t.icon}{t.label}</TabsTrigger>)}
-        </TabsList>
-        {tabs.map(t => tab === t.key && <div key={t.key} className="mt-3">{t.content}</div>)}
+    <div className="rpe-root">
+      <ModuleBreadcrumb items={[{ label: "Reverse Logistics", href: "/" }, { label: "Returns Prediction Engine" }]} />
+      <PageHeader title="Returns Prediction Engine" description="ML-powered return prediction and reverse logistics optimization with category-specific risk scoring, vendor quality tracking, and customer behavior analytics across 8 product categories" />
+      <Tabs defaultValue="dashboard">
+        <TabsList className="rpe-tab-list"><TabsTrigger value="dashboard">Dashboard</TabsTrigger><TabsTrigger value="returns">Returns</TabsTrigger><TabsTrigger value="analytics">Analytics</TabsTrigger><TabsTrigger value="insights">Insights</TabsTrigger></TabsList>
+        <TabsContent value="dashboard">
+          <div className="rpe-kpi-grid">
+            <KpiTile label="Total Returns" value={totalRecords} unit="" />
+            <KpiTile label="Total Refund" value={Math.round(totalRefund / 100000)} unit="L" color="#dc2626" />
+            <KpiTile label="Pred. Accuracy" value={avgAccuracy} unit="%" color="#16a34a" />
+            <KpiTile label="Avg Processing" value={parseFloat(avgProcessing)} unit=" days" color="#d97706" />
+          </div>
+          <div className="rpe-chart-row">
+            <Card><CardHeader><CardTitle>Return Reasons Distribution</CardTitle></CardHeader><CardContent><BarChart data={reasonData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" fontSize={10} /><YAxis fontSize={11} /><Tooltip /><Bar dataKey="count" fill="#ea580c" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
+          </div>
+          <div className="rpe-chart-row">
+            <Card><CardHeader><CardTitle>Return Rate by Channel</CardTitle></CardHeader><CardContent><LineChart data={channelData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" fontSize={10} /><YAxis fontSize={11} /><Tooltip /><Line type="monotone" dataKey="rate" stroke="#ea580c" strokeWidth={2} /><Line type="monotone" dataKey="returns" stroke="#7c3aed" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
+          </div>
+          <div className="rpe-chart-row">
+            <Card><CardHeader><CardTitle>Return Status Breakdown</CardTitle></CardHeader><CardContent><PieChart><Pie data={statusData} dataKey="count" nameKey="name" cx="50%" cy="50%" outerRadius={100} label fontSize={11}>{statusData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /></PieChart></CardContent></Card>
+          </div>
+        </TabsContent>
+        <TabsContent value="returns">
+          <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery("")} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={(k, v) => setActiveFilters(p => { const arr = p[k] || []; return arr.includes(v) ? (function(){ const n = {...p}; n[k] = arr.filter(x => x !== v); if(n[k].length === 0) delete n[k]; return n })() : {...p, [k]: [...arr, v]} })} onClearAllFilters={() => setActiveFilters({})} totalItems={totalRecords} filteredCount={filteredCount} onRefresh={() => {}} placeholder="Search by ID, order, or category..." />
+          <div className="rpe-table-wrap">
+            <table className="rpe-table">
+              <thead><tr><th>ID</th><th>Order</th><th>Category</th><th>Reason</th><th>Channel</th><th>Status</th><th>Return %</th><th>Pred. %</th><th>Acc.</th><th>Refund</th><th>Resale</th><th>Sat.</th><th>Repeat</th><th>Days</th></tr></thead>
+              <tbody>{filtered.map(r => (
+                <tr key={r.id}>
+                  <td style={{ fontWeight: 700, fontSize: 12 }}>{r.id}</td>
+                  <td style={{ fontSize: 11, color: "#6b7280" }}>{r.orderId}</td>
+                  <td><CategoryBadge category={r.category} /></td>
+                  <td><ReasonBadge reason={r.reason} /></td>
+                  <td><ChannelBadge channel={r.channel} /></td>
+                  <td><StatusBadge status={r.status} /></td>
+                  <td style={{ fontSize: 12, fontWeight: 600 }}>{r.returnRate}%</td>
+                  <td style={{ fontSize: 12 }}>{r.predictedReturn}%</td>
+                  <td style={{ fontSize: 12, fontWeight: 600, color: r.predictionAccuracy >= 90 ? "#16a34a" : r.predictionAccuracy >= 75 ? "#d97706" : "#dc2626" }}>{r.predictionAccuracy}%</td>
+                  <td><RefundBar amount={r.refundAmount} max={30000} /></td>
+                  <td style={{ fontSize: 11, color: "#16a34a" }}>\u20b9{(r.resaleValue / 1000).toFixed(1)}K</td>
+                  <td><SatRing sat={r.customerSat} /></td>
+                  <td><RepeatBadge repeat={r.repeatReturn} /></td>
+                  <td style={{ fontSize: 12, textAlign: "center", color: r.processingDays > 7 ? "#dc2626" : "#16a34a" }}>{r.processingDays}d</td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+        </TabsContent>
+        <TabsContent value="analytics">
+          <div className="rpe-chart-row">
+            <Card><CardHeader><CardTitle>Refund Amount by Reason</CardTitle></CardHeader><CardContent><BarChart data={reasonData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" fontSize={10} /><YAxis fontSize={11} /><Tooltip /><Bar dataKey="refund" fill="#f97316" radius={[4, 4, 0, 0]} /></BarChart></CardContent></Card>
+          </div>
+          <div className="rpe-chart-row">
+            <Card><CardHeader><CardTitle>Repeat vs First-Time Returners Trend</CardTitle></CardHeader><CardContent><AreaChart data={WAREHOUSES.map(w => ({ name: w.split(" ").slice(0, 2).join(" "), repeat: allRecords.filter(r => r.warehouse === w && r.repeatReturn).length, first: allRecords.filter(r => r.warehouse === w && !r.repeatReturn).length }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" fontSize={10} /><YAxis fontSize={11} /><Tooltip /><Area type="monotone" dataKey="repeat" stroke="#dc2626" fill="#dc262622" /><Area type="monotone" dataKey="first" stroke="#16a34a" fill="#16a34a22" /></AreaChart></CardContent></Card>
+          </div>
+          <div className="rpe-chart-row">
+            <Card><CardHeader><CardTitle>Category-wise Return Rate vs Prediction Accuracy</CardTitle></CardHeader><CardContent><LineChart data={CATEGORIES.map(c => { const recs = allRecords.filter(r => r.category === c); return { name: c, rate: Math.round(recs.reduce((s, r) => s + r.returnRate, 0) / recs.length * 10) / 10, accuracy: Math.round(recs.reduce((s, r) => s + r.predictionAccuracy, 0) / recs.length) } })}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" fontSize={10} /><YAxis fontSize={11} /><Tooltip /><Line type="monotone" dataKey="rate" stroke="#ea580c" strokeWidth={2} /><Line type="monotone" dataKey="accuracy" stroke="#7c3aed" strokeWidth={2} strokeDasharray="5 5" /></LineChart></CardContent></Card>
+          </div>
+        </TabsContent>
+        <TabsContent value="insights">
+          <div className="rpe-insights-grid">{insights.map((ins, i) => <Card key={i} className="rpe-insight-card"><CardHeader><CardTitle>{ins.title}</CardTitle></CardHeader><CardContent><p style={{ fontSize: 13, lineHeight: 1.7, color: "#4b5563" }}>{ins.desc}</p></CardContent></Card>)}</div>
+        </TabsContent>
       </Tabs>
-      <Sheet open={!!detail} onOpenChange={() => setDetail(null)}>
-        <SheetContent className="w-[420px] overflow-y-auto">
-          <SheetHeader><SheetTitle className="text-sm">Detail View</SheetTitle></SheetHeader>
-          {detail && <div className="mt-4 space-y-3">
-            <div className="rpe-detail-header rounded-lg p-4 bg-gradient-to-br from-amber-500 to-red-600 text-white"><div className="text-lg font-bold">{String(detail.id)}</div><div className="text-xs opacity-80 mt-1">{String(detail.category || detail.riskFactor || detail.reason || "Record")}</div></div>
-            {Object.entries(detail).filter(([k]) => k !== "id").map(([k, v]) => <div key={k} className="flex items-center justify-between py-1.5 border-b"><span className="text-[10px] text-muted-foreground capitalize">{k.replace(/_/g, " ")}</span><span className="text-xs font-medium">{typeof v === "number" ? v.toLocaleString() : String(v)}</span></div>)}
-          </div>}
-        </SheetContent>
-      </Sheet>
     </div>
-  )
+  );
 }
