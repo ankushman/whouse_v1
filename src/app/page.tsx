@@ -402,6 +402,8 @@ import ShipmentTrackingMilestoneView from "@/components/modules/shipment-trackin
 import TransitInsuranceClaimsView from "@/components/modules/transit-insurance-claims-view"
 import EwayBillExpiryTrackerView from "@/components/modules/eway-bill-expiry-tracker-view"
 import InlandContainerDepotCommandView from "@/components/modules/inland-container-depot-command-view"
+import FreightForwardingCommandView from "@/components/modules/freight-forwarding-command-view"
+import CoastalShippingWaterwayView from "@/components/modules/coastal-shipping-waterway-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -803,6 +805,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "transit-insurance-claims": TransitInsuranceClaimsView,
   "eway-bill-expiry-tracker": EwayBillExpiryTrackerView,
   "inland-container-depot-command": InlandContainerDepotCommandView,
+  "freight-forwarding-command": FreightForwardingCommandView,
+  "coastal-shipping-waterway": CoastalShippingWaterwayView,
 }
 
 

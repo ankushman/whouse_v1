@@ -58849,3 +58849,60 @@ html.theme-transition body {
 .icd-insight { transition: box-shadow 0.2s, transform 0.15s; }
 .icd-insight:hover { box-shadow: 0 6px 20px rgba(180, 83, 9, 0.12); transform: translateY(-2px); }
 @keyframes icd-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* === Freight Forwarding Command Center (ffc-*) - Indigo #4f46e5 === */
+.ffc-root { animation: ffc-fade 0.3s ease-out; }
+.ffc-tabs { display: flex; gap: 4px; border-bottom: 2px solid #e2e8f0; padding-bottom: 0; }
+.ffc-tab { padding: 8px 16px; font-size: 0.875rem; font-weight: 500; border-radius: 8px 8px 0 0; transition: all 0.2s; cursor: pointer; border: none; background: transparent; }
+.ffc-tab:hover { background: #eef2ff; }
+.ffc-tab.active { background: #4f46e5; color: white; }
+.ffc-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.ffc-kpi { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s, transform 0.15s; }
+.ffc-kpi:hover { box-shadow: 0 4px 16px rgba(79, 70, 229, 0.1); transform: translateY(-1px); }
+.ffc-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.ffc-kpi-val { font-size: 1.5rem; font-weight: 700; color: #4f46e5; }
+.ffc-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.ffc-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s; }
+.ffc-chart:hover { box-shadow: 0 2px 12px rgba(79, 70, 229, 0.08); }
+.ffc-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.ffc-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.ffc-table-wrap table { border-collapse: collapse; width: 100%; }
+.ffc-table-wrap th { background: #eef2ff; border-bottom: 2px solid #c7d2fe; }
+.ffc-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #eef2ff; vertical-align: middle; }
+.ffc-table-wrap tr:hover { background: #eef2ff40; }
+.ffc-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.ffc-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.ffc-row-info { background: #eef2ff !important; border-left: 3px solid #4f46e5; }
+.ffc-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.ffc-insight { transition: box-shadow 0.2s, transform 0.15s; }
+.ffc-insight:hover { box-shadow: 0 6px 20px rgba(79, 70, 229, 0.12); transform: translateY(-2px); }
+@keyframes ffc-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* === Coastal Shipping & Inland Waterway (csw-*) - Teal #0d9488 === */
+.csw-root { animation: csw-fade 0.3s ease-out; }
+.csw-tabs { display: flex; gap: 4px; border-bottom: 2px solid #e2e8f0; padding-bottom: 0; }
+.csw-tab { padding: 8px 16px; font-size: 0.875rem; font-weight: 500; border-radius: 8px 8px 0 0; transition: all 0.2s; cursor: pointer; border: none; background: transparent; }
+.csw-tab:hover { background: #f0fdfa; }
+.csw-tab.active { background: #0d9488; color: white; }
+.csw-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.csw-kpi { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s, transform 0.15s; }
+.csw-kpi:hover { box-shadow: 0 4px 16px rgba(13, 148, 136, 0.1); transform: translateY(-1px); }
+.csw-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.csw-kpi-val { font-size: 1.5rem; font-weight: 700; color: #0d9488; }
+.csw-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.csw-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; transition: box-shadow 0.2s; }
+.csw-chart:hover { box-shadow: 0 2px 12px rgba(13, 148, 136, 0.08); }
+.csw-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.csw-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.csw-table-wrap table { border-collapse: collapse; width: 100%; }
+.csw-table-wrap th { background: #f0fdfa; border-bottom: 2px solid #99f6e4; }
+.csw-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #f0fdfa; vertical-align: middle; }
+.csw-table-wrap tr:hover { background: #f0fdfa40; }
+.csw-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.csw-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.csw-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.csw-utilbar { border-radius: 4px; transition: width 0.3s; }
+.csw-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.csw-insight { transition: box-shadow 0.2s, transform 0.15s; }
+.csw-insight:hover { box-shadow: 0 6px 20px rgba(13, 148, 136, 0.12); transform: translateY(-2px); }
+@keyframes csw-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }

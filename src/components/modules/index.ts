@@ -392,3 +392,5 @@ export { default as ShipmentTrackingMilestoneView } from './shipment-tracking-mi
 export { default as TransitInsuranceClaimsView } from './transit-insurance-claims-view'
 export { default as EwayBillExpiryTrackerView } from './eway-bill-expiry-tracker-view'
 export { default as InlandContainerDepotCommandView } from './inland-container-depot-command-view'
+export { default as FreightForwardingCommandView } from './freight-forwarding-command-view'
+export { default as CoastalShippingWaterwayView } from './coastal-shipping-waterway-view'
