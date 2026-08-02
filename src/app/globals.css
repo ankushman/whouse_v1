@@ -56678,3 +56678,61 @@ html.theme-transition body {
 @keyframes cig-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
 .cig-claim-pulse{animation:cig-claim-pulse 2s ease infinite}
 .cig-expired-border{border-left:3px solid #94a3b8}
+
+/* ========== R484: Rail Consignment Panel (rcn-*) ========== */
+.rcn-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.rcn-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.rcn-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.rcn-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.rcn-filter-clear{transition:background .15s ease}
+.rcn-filter-clear:hover{background:rgba(239,68,68,.1)}
+.rcn-item-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.rcn-item-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.rcn-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.rcn-priority{letter-spacing:.02em}
+.rcn-comm-card{transition:all .2s ease}
+.rcn-comm-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.rcn-comm-metric{transition:background .15s ease}
+.rcn-comm-metric:hover{background:rgba(0,0,0,.04)}
+.rcn-cost-header{transition:all .15s ease}
+.rcn-cost-header:hover{background:rgba(0,0,0,.04)}
+.rcn-cost-row{transition:all .2s ease}
+.rcn-cost-row:hover{border-color:hsl(var(--primary)/.2)}
+.rcn-alerts-list{transition:all .2s ease}
+.rcn-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.rcn-alert-dot{animation:rcn-dot-blink 1.2s ease infinite}
+.rcn-insights-row > div{transition:all .2s ease}
+.rcn-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes rcn-dmg-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes rcn-bar-progress{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes rcn-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.rcn-dmg-pulse{animation:rcn-dmg-pulse 2s ease infinite}
+.rcn-bar-progress{animation:rcn-bar-progress 1.5s ease infinite}
+.rcn-hold-border{border-left:3px solid #f59e0b}
+
+/* ========== R484: Gate Management Panel (gmt-*) ========== */
+.gmt-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.gmt-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.gmt-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.gmt-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.gmt-filter-clear{transition:background .15s ease}
+.gmt-filter-clear:hover{background:rgba(239,68,68,.1)}
+.gmt-vehicle-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.gmt-vehicle-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.gmt-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.gmt-type-tag{letter-spacing:.02em}
+.gmt-gate-card{transition:all .2s ease}
+.gmt-gate-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.gmt-thru-header{transition:all .15s ease}
+.gmt-thru-header:hover{background:rgba(0,0,0,.04)}
+.gmt-thru-row{transition:all .2s ease}
+.gmt-thru-row:hover{border-color:hsl(var(--primary)/.2)}
+.gmt-alerts-list{transition:all .2s ease}
+.gmt-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.gmt-alert-dot{animation:gmt-dot-blink 1.2s ease infinite}
+.gmt-insights-row > div{transition:all .2s ease}
+.gmt-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes gmt-rejected-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes gmt-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.gmt-rejected-pulse{animation:gmt-rejected-pulse 2s ease infinite}
+.gmt-hold-border{border-left:3px solid #f59e0b}

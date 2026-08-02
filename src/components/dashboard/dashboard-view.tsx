@@ -70,6 +70,8 @@ import { AutomatedPutawayPanel } from "@/components/shared/automated-putaway-pan
 import { PickPathOptimizerPanel } from "@/components/shared/pick-path-optimizer-panel"
 import { ContainerUnloadingPanel } from "@/components/shared/container-unloading-panel"
 import { CargoInsurancePanel } from "@/components/shared/cargo-insurance-panel"
+import { RailConsignmentPanel } from "@/components/shared/rail-consignment-panel"
+import { GateManagementPanel } from "@/components/shared/gate-management-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -783,6 +785,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <CargoInsurancePanel />
+          </CardContent>
+        </Card>
+
+        {/* Rail Consignment */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <RailConsignmentPanel />
+          </CardContent>
+        </Card>
+
+        {/* Gate Management */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <GateManagementPanel />
           </CardContent>
         </Card>
       </div>
