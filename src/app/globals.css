@@ -58407,3 +58407,42 @@ html.theme-transition body {
 .rih-insight-card { transition: box-shadow 0.2s; }
 .rih-insight-card:hover { box-shadow: 0 4px 12px rgba(13, 148, 136, 0.10); }
 @keyframes rih-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== R263a: Driver Performance Hub (dph-*) ===== */
+.dph-root { padding: 24px; max-width: 1440px; margin: 0 auto; }
+.dph-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.dph-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.dph-kpi { padding: 16px; text-align: center; }
+.dph-chart-row { margin-bottom: 20px; }
+.dph-chart-row > div { min-height: 320px; }
+.dph-table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e5e7eb; }
+.dph-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.dph-table thead { background: #faf5ff; }
+.dph-table th { padding: 10px 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #ede9fe; font-size: 12px; white-space: nowrap; }
+.dph-table td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.dph-table tbody tr:hover { background: #faf5ff; }
+.dph-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.dph-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.dph-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.dph-insight-card { transition: box-shadow 0.2s; }
+.dph-insight-card:hover { box-shadow: 0 4px 12px rgba(124, 58, 237, 0.10); }
+
+/* ===== R263b: Load Optimization Command (loc-*) ===== */
+.loc-root { padding: 24px; max-width: 1440px; margin: 0 auto; }
+.loc-tab-list { margin-bottom: 20px; flex-wrap: wrap; }
+.loc-kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.loc-kpi { padding: 16px; text-align: center; }
+.loc-chart-row { margin-bottom: 20px; }
+.loc-chart-row > div { min-height: 320px; }
+.loc-table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e5e7eb; }
+.loc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.loc-table thead { background: #fef2f2; }
+.loc-table th { padding: 10px 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #fecaca; font-size: 12px; white-space: nowrap; }
+.loc-table td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.loc-table tbody tr:hover { background: #fef2f2; }
+.loc-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.loc-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.loc-insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.loc-insight-card { transition: box-shadow 0.2s; }
+.loc-insight-card:hover { box-shadow: 0 4px 12px rgba(220, 38, 38, 0.10); }
+@keyframes loc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

@@ -381,6 +381,8 @@ import PattachitraWestBengalLogisticsView from "@/components/modules/pattachitra
 import PithoraTribalArtChhattisgarhLogisticsView from "@/components/modules/pithora-tribal-art-chhattisgarh-logistics-view"
 import WarehouseEnergyAnalyticsView from "@/components/modules/warehouse-energy-analytics-view"
 import RouteIntelligenceHubView from "@/components/modules/route-intelligence-hub-view"
+import DriverPerformanceHubView from "@/components/modules/driver-performance-hub-view"
+import LoadOptimizationCommandView from "@/components/modules/load-optimization-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -761,6 +763,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "pithora-tribal-art-chhattisgarh-logistics": PithoraTribalArtChhattisgarhLogisticsView,
   "warehouse-energy-analytics": WarehouseEnergyAnalyticsView,
   "route-intelligence-hub": RouteIntelligenceHubView,
+  "driver-performance-hub": DriverPerformanceHubView,
+  "load-optimization-command": LoadOptimizationCommandView,
 }
 
 

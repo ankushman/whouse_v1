@@ -377,6 +377,8 @@ export const navItems: NavItem[] = [
   { id: 'pithora-tribal-art-chhattisgarh-logistics', label: 'Pithora CG', icon: 'MountainSnow', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'warehouse-energy-analytics', label: 'Energy Analytics', icon: 'Zap', group: 'sustainability', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'facilities', 'finance'] },
   { id: 'route-intelligence-hub', label: 'Route Intelligence', icon: 'Route', group: 'transport', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'fleet_manager'] },
+  { id: 'driver-performance-hub', label: 'Driver Performance', icon: 'Users', group: 'fleet', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'fleet_manager', 'hr'] },
+  { id: 'load-optimization-command', label: 'Load Optimization', icon: 'Calculator', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'operations_planner'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

@@ -372,3 +372,5 @@ export { default as PattachitraWestBengalLogisticsView } from './pattachitra-wes
 export { default as PithoraTribalArtChhattisgarhLogisticsView } from './pithora-tribal-art-chhattisgarh-logistics-view'
 export { default as WarehouseEnergyAnalyticsView } from './warehouse-energy-analytics-view'
 export { default as RouteIntelligenceHubView } from './route-intelligence-hub-view'
+export { default as DriverPerformanceHubView } from './driver-performance-hub-view'
+export { default as LoadOptimizationCommandView } from './load-optimization-command-view'
