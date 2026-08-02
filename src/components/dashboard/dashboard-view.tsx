@@ -90,6 +90,8 @@ import { FleetTelematicsPanel } from "@/components/shared/fleet-telematics-panel
 import { WarehouseAutomationPanel } from "@/components/shared/warehouse-automation-panel"
 import { ReturnsAnalyticsHubPanel } from "@/components/shared/returns-analytics-hub-panel"
 import { OrderWaveManagementPanel } from "@/components/shared/order-wave-management-panel"
+import { CarbonFootprintTrackerPanel } from "@/components/shared/carbon-footprint-tracker-panel"
+import { SmartDockSchedulerPanel } from "@/components/shared/smart-dock-scheduler-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -943,6 +945,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <OrderWaveManagementPanel />
+          </CardContent>
+        </Card>
+
+        {/* Carbon Footprint Tracker */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CarbonFootprintTrackerPanel />
+          </CardContent>
+        </Card>
+
+        {/* Smart Dock Scheduler */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <SmartDockSchedulerPanel />
           </CardContent>
         </Card>
       </div>

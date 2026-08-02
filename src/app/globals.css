@@ -57194,3 +57194,75 @@ html.theme-transition body {
 .owm-zones-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
 .owm-zone-row { transition: all 0.2s; }
 .owm-zone-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-color: rgba(16, 185, 129, 0.2); }
+
+/* ============================================================================
+ * R494 — Carbon Footprint Tracker (cft-*) + Smart Dock Scheduler (sds-*)
+ * ============================================================================ */
+
+/* CFT: stat cards, filter pills, insights row, alerts list */
+.cft-stat-card { transition: all 0.2s; }
+.cft-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cft-filter-pill { transition: all 0.15s; }
+.cft-filter-pill:hover { transform: scale(1.05); }
+.cft-filter-clear:hover { background: rgba(239, 68, 68, 0.1); }
+.cft-insights-row > div { transition: all 0.2s; }
+.cft-insights-row > div:hover { border-color: rgba(34, 197, 94, 0.3); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.cft-alerts-list { animation: cft-slide-in 0.3s ease-out; }
+@keyframes cft-slide-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.cft-alert-dot { animation: cft-dot-pulse 2s infinite; }
+@keyframes cft-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* CFT: emission cards */
+.cft-emission-card { transition: all 0.2s; }
+.cft-emission-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cft-critical-pulse { border-color: rgba(239, 68, 68, 0.4); animation: cft-pulse-red 2s infinite; }
+@keyframes cft-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+.cft-warning-border { border-left: 3px solid rgba(245, 158, 11, 0.6); }
+.cft-id-badge, .cft-mode-tag, .cft-fuel-tag { transition: all 0.15s; }
+.cft-id-badge:hover, .cft-mode-tag:hover, .cft-fuel-tag:hover { transform: scale(1.03); }
+
+/* CFT: transport view */
+.cft-transport-header { transition: all 0.2s; }
+.cft-transport-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.cft-mode-row { transition: all 0.2s; }
+.cft-mode-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-color: rgba(6, 182, 212, 0.2); }
+
+/* CFT: offsets view */
+.cft-offsets-header { transition: all 0.2s; }
+.cft-offsets-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.cft-offset-row { transition: all 0.2s; }
+.cft-offset-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* SDS: stat cards, filter pills, insights row, alerts list */
+.sds-stat-card { transition: all 0.2s; }
+.sds-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sds-filter-pill { transition: all 0.15s; }
+.sds-filter-pill:hover { transform: scale(1.05); }
+.sds-filter-clear:hover { background: rgba(239, 68, 68, 0.1); }
+.sds-insights-row > div { transition: all 0.2s; }
+.sds-insights-row > div:hover { border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.sds-alerts-list { animation: sds-slide-in 0.3s ease-out; }
+@keyframes sds-slide-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.sds-alert-dot { animation: sds-dot-pulse 2s infinite; }
+@keyframes sds-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* SDS: dock cards */
+.sds-dock-card { transition: all 0.2s; }
+.sds-dock-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.sds-critical-pulse { border-color: rgba(239, 68, 68, 0.4); animation: sds-pulse-red 2s infinite; }
+@keyframes sds-pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+.sds-warning-border { border-left: 3px solid rgba(245, 158, 11, 0.6); }
+.sds-id-badge, .sds-dock-tag, .sds-type-tag, .sds-priority-tag { transition: all 0.15s; }
+.sds-id-badge:hover, .sds-dock-tag:hover, .sds-type-tag:hover, .sds-priority-tag:hover { transform: scale(1.03); }
+
+/* SDS: schedule view */
+.sds-schedule-header { transition: all 0.2s; }
+.sds-schedule-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.sds-schedule-row { transition: all 0.2s; }
+.sds-schedule-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* SDS: utilization view */
+.sds-util-header { transition: all 0.2s; }
+.sds-util-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.sds-util-row { transition: all 0.2s; }
+.sds-util-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
