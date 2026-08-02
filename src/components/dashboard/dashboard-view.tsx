@@ -164,6 +164,8 @@ import { MultiModalOptimizationPanel } from "@/components/shared/multi-modal-opt
 import { PackagingAnalyticsPanel } from "@/components/shared/packaging-analytics-panel"
 import { OrderAccuracyDashboardPanel } from "@/components/shared/order-accuracy-dashboard-panel"
 import { CrossBorderCompliancePanel } from "@/components/shared/cross-border-compliance-panel"
+import { LaborManagementAnalyticsPanel } from "@/components/shared/labor-management-analytics-panel"
+import { ColdChainMonitoringPanel } from "@/components/shared/cold-chain-monitoring-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -925,6 +927,11 @@ export function DashboardView() {
             <OrderAccuracyDashboardPanel />
           </CardContent>
         </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <LaborManagementAnalyticsPanel />
+          </CardContent>
+        </Card>
 
         {/* 3PL Vendor Scorecard */}
         <Card className="card-depth overflow-hidden border-primary/10">
@@ -1142,6 +1149,11 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <OrderAccuracyDashboardPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <LaborManagementAnalyticsPanel />
           </CardContent>
         </Card>
 
@@ -1610,6 +1622,11 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <CrossBorderCompliancePanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ColdChainMonitoringPanel />
           </CardContent>
         </Card>
       </div>

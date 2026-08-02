@@ -3,243 +3,229 @@
 import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
-  Thermometer, Snowflake, AlertTriangle, CheckCircle, TrendingDown, Activity, Zap, MapPin
+  Thermometer, Snowflake, AlertTriangle, Activity
 } from "lucide-react"
 
 const raw = [
-  { id: "CCM-01", product: "Covid-19 Vaccines (Covaxin)", category: "Vaccines", origin: "Serum Institute Pune", dest: "Delhi Govt Depot", carrier: "Snowman Logistics", tempTarget: -20, tempActual: -18.5, humidity: 45, sensor: "Active", battery: 92, lastPing: "2 min ago", shelfLife: "6 months", qty: 50000, dose: "0.5ml", who: true, fssai: true, status: "Optimal", excursion: 0, transit: 4.2, total: 12, bl: "SNW-VR-4812" },
-  { id: "CCM-02", product: "Insulin Glargine 100U/ml", category: "Biologics", origin: "Biocon Bengaluru", dest: "Apollo Chennai", carrier: "ColdStar Express", tempTarget: 4, tempActual: 5.2, humidity: 52, sensor: "Active", battery: 78, lastPing: "5 min ago", shelfLife: "24 months", qty: 12000, dose: "10ml", who: false, fssai: true, status: "At Risk", excursion: 1, transit: 6.1, total: 10, bl: "CSE-BIO-2210" },
-  { id: "CCM-03", product: "Fresh Alphonso Mangoes", category: "Perishable", origin: "Ratnagiri Farms", dest: "DMart Mumbai Hub", carrier: "ColdChain India", tempTarget: 5, tempActual: 4.8, humidity: 88, sensor: "Active", battery: 95, lastPing: "1 min ago", shelfLife: "14 days", qty: 8000, dose: "N/A", who: false, fssai: true, status: "Optimal", excursion: 0, transit: 2.1, total: 6, bl: "CCI-MNG-1190" },
-  { id: "CCM-04", product: "Oncology Drug (Cisplatin)", category: "Pharma", origin: "Cipla Goa", dest: "Tata Memorial Mumbai", carrier: "BlueDart Cold", tempTarget: 8, tempActual: 22.4, humidity: 68, sensor: "Alarm", battery: 45, lastPing: "15 min ago", shelfLife: "18 months", qty: 2400, dose: "50ml", who: true, fssai: true, status: "Critical", excursion: 4, transit: 5.8, total: 8, bl: "BDC-ONC-5521" },
-  { id: "CCM-05", product: "Butter Amul 500g", category: "Dairy", origin: "Amul Anand GC", dest: "Spencer Hyderabad", carrier: "Adani Cold", tempTarget: 4, tempActual: 3.9, humidity: 42, sensor: "Active", battery: 88, lastPing: "3 min ago", shelfLife: "6 months", qty: 25000, dose: "N/A", who: false, fssai: true, status: "Optimal", excursion: 0, transit: 8.4, total: 16, bl: "ADC-BTR-3321" },
-  { id: "CCM-06", product: "HPV Vaccine (Cervarix)", category: "Vaccines", origin: "GSK Barnala", dest: " Karnataka PHC", carrier: "Zipline Cold", tempTarget: 2, tempActual: 2.1, humidity: 50, sensor: "Active", battery: 71, lastPing: "8 min ago", shelfLife: "24 months", qty: 18000, dose: "0.5ml", who: true, fssai: true, status: "Optimal", excursion: 0, transit: 1.2, total: 4, bl: "ZPC-HPV-7712" },
-  { id: "CCM-07", product: "Atlantic Salmon Fillet", category: "Seafood", origin: "Kochi Port", dest: "ITC Grand Chola Chennai", carrier: "ColdChain India", tempTarget: -2, tempActual: -1.2, humidity: 92, sensor: "Active", battery: 62, lastPing: "4 min ago", shelfLife: "5 days", qty: 3200, dose: "N/A", who: false, fssai: true, status: "At Risk", excursion: 1, transit: 3.5, total: 10, bl: "CCI-SAL-2291" },
-  { id: "CCM-08", product: "mRNA Covid Booster (mRNA-1273)", category: "Vaccines", origin: "Biological E Hyd", dest: "AIIMS Delhi", carrier: "Snowman Logistics", tempTarget: -20, tempActual: -19.8, humidity: 40, sensor: "Active", battery: 98, lastPing: "1 min ago", shelfLife: "9 months", qty: 80000, dose: "0.5ml", who: true, fssai: true, status: "Optimal", excursion: 0, transit: 0.5, total: 8, bl: "SNW-MRNA-4471" },
-  { id: "CCM-09", product: "Red Blood Cells (Packed)", category: "Blood Bank", origin: "Rotary Tissue Bank Kochi", dest: "AIIMS Jodhpur", carrier: "BlueDart Cold", tempTarget: 4, tempActual: 9.5, humidity: 55, sensor: "Alarm", battery: 32, lastPing: "22 min ago", shelfLife: "42 days", qty: 500, dose: "350ml", who: false, fssai: true, status: "Critical", excursion: 2, transit: 3.0, total: 12, bl: "BDC-BLD-8816" },
-  { id: "CCM-10", product: "Organic Milk Amul 1L", category: "Dairy", origin: "Mother Dairy Delhi", dest: "BigBasket Noida", carrier: "Delhivery Cold", tempTarget: 4, tempActual: 4.1, humidity: 38, sensor: "Active", battery: 85, lastPing: "2 min ago", shelfLife: "5 days", qty: 15000, dose: "N/A", who: false, fssai: true, status: "Optimal", excursion: 0, transit: 1.8, total: 3, bl: "DHC-MLK-1184" },
+  { id: "CCM-01", chamber: "Cold Room A1", hub: "MUM-HUB1", commodity: "Dairy Products", capacity: 5000, current: 3200, setTemp: 4, actualTemp: 4.2, humidity: 85, doorOpen: 12, lastDefrost: "2h ago", energyUsage: 245, status: "Optimal", compressor: "Running", backup: "Standby", alarmCount: 0, avgTemp: 4.1, region: "West" },
+  { id: "CCM-02", chamber: "Freezer B2", hub: "DEL-HUB2", commodity: "Frozen Food", capacity: 8000, current: 7500, setTemp: -18, actualTemp: -15.8, humidity: 45, doorOpen: 28, lastDefrost: "8h ago", energyUsage: 420, status: "Temp Deviation", compressor: "Overloaded", backup: "Active", alarmCount: 3, avgTemp: -16.2, region: "North" },
+  { id: "CCM-03", chamber: "Pharma Vault C1", hub: "BLR-HUB3", commodity: "Vaccines", capacity: 2000, current: 1800, setTemp: 2, actualTemp: 2.1, humidity: 40, doorOpen: 4, lastDefrost: "1h ago", energyUsage: 180, status: "Optimal", compressor: "Running", backup: "Standby", alarmCount: 0, avgTemp: 2.0, region: "South" },
+  { id: "CCM-04", chamber: "Chill Zone D3", hub: "MAA-HUB4", commodity: "Fresh Produce", capacity: 6000, current: 4500, setTemp: 8, actualTemp: 9.8, humidity: 92, doorOpen: 22, lastDefrost: "6h ago", energyUsage: 310, status: "At Risk", compressor: "Running", backup: "Standby", alarmCount: 2, avgTemp: 9.2, region: "South" },
+  { id: "CCM-05", chamber: "Deep Freeze E1", hub: "HYD-HUB5", commodity: "Ice Cream", capacity: 3000, current: 2800, setTemp: -25, actualTemp: -24.5, humidity: 30, doorOpen: 8, lastDefrost: "4h ago", energyUsage: 380, status: "Optimal", compressor: "Running", backup: "Standby", alarmCount: 0, avgTemp: -24.8, region: "South" },
+  { id: "CCM-06", chamber: "Banana Ripening F1", hub: "CCU-HUB7", commodity: "Bananas", capacity: 4000, current: 3500, setTemp: 14, actualTemp: 15.5, humidity: 95, doorOpen: 15, lastDefrost: "3h ago", energyUsage: 195, status: "Temp Deviation", compressor: "Cycling", backup: "Standby", alarmCount: 2, avgTemp: 15.0, region: "East" },
+  { id: "CCM-07", chamber: "Meat Locker G2", hub: "AMD-HUB9", commodity: "Fresh Meat", capacity: 3500, current: 2800, setTemp: 0, actualTemp: 0.3, humidity: 80, doorOpen: 10, lastDefrost: "2h ago", energyUsage: 285, status: "Optimal", compressor: "Running", backup: "Standby", alarmCount: 0, avgTemp: 0.2, region: "West" },
+  { id: "CCM-08", chamber: "Floral Cooler H1", hub: "PNQ-HUB6", commodity: "Flowers", capacity: 1500, current: 800, setTemp: 5, actualTemp: 5.2, humidity: 88, doorOpen: 6, lastDefrost: "1h ago", energyUsage: 120, status: "Optimal", compressor: "Running", backup: "Standby", alarmCount: 0, avgTemp: 5.1, region: "West" },
+  { id: "CCM-09", chamber: "Chemical Store I1", hub: "DEL-HUB2", commodity: "Reagents", capacity: 1000, current: 950, setTemp: 10, actualTemp: 13.2, humidity: 55, doorOpen: 5, lastDefrost: "12h ago", energyUsage: 150, status: "Critical", compressor: "Failed", backup: "Active", alarmCount: 5, avgTemp: 11.8, region: "North" },
+  { id: "CCM-10", chamber: "Beverage Vault J2", hub: "BLR-HUB3", commodity: "Juices", capacity: 7000, current: 5200, setTemp: 6, actualTemp: 6.1, humidity: 75, doorOpen: 9, lastDefrost: "2h ago", energyUsage: 220, status: "Optimal", compressor: "Running", backup: "Standby", alarmCount: 0, avgTemp: 6.0, region: "South" },
 ]
 
 interface CCMItem {
-  id: string; product: string; category: string; origin: string; dest: string; carrier: string
-  tempTarget: number; tempActual: number; humidity: number; sensor: string; battery: number
-  lastPing: string; shelfLife: string; qty: number; dose: string; who: boolean; fssai: boolean
-  status: string; excursion: number; transit: number; total: number; bl: string
+  id: string; chamber: string; hub: string; commodity: string; capacity: number
+  current: number; setTemp: number; actualTemp: number; humidity: number
+  doorOpen: number; lastDefrost: string; energyUsage: number; status: string
+  compressor: string; backup: string; alarmCount: number; avgTemp: number; region: string
 }
 
 type Rec = any
 const items: CCMItem[] = raw.map((r: Rec) => ({
-  id: r.id, product: r.product, category: r.category, origin: r.origin, dest: r.dest, carrier: r.carrier,
-  tempTarget: r.tempTarget, tempActual: r.tempActual, humidity: r.humidity, sensor: r.sensor, battery: r.battery,
-  lastPing: r.lastPing, shelfLife: r.shelfLife, qty: r.qty, dose: r.dose, who: r.who, fssai: r.fssai,
-  status: r.status, excursion: r.excursion, transit: r.transit, total: r.total, bl: r.bl,
+  id: r.id, chamber: r.chamber, hub: r.hub, commodity: r.commodity, capacity: r.capacity,
+  current: r.current, setTemp: r.setTemp, actualTemp: r.actualTemp, humidity: r.humidity,
+  doorOpen: r.doorOpen, lastDefrost: r.lastDefrost, energyUsage: r.energyUsage, status: r.status,
+  compressor: r.compressor, backup: r.backup, alarmCount: r.alarmCount, avgTemp: r.avgTemp, region: r.region,
 }))
 
-const catColors: Record<string, string> = {
-  "Vaccines": "bg-violet-100 text-violet-700", "Biologics": "bg-pink-100 text-pink-700",
-  "Perishable": "bg-lime-100 text-lime-700", "Pharma": "bg-blue-100 text-blue-700",
-  "Dairy": "bg-amber-100 text-amber-700", "Seafood": "bg-cyan-100 text-cyan-700",
-  "Blood Bank": "bg-red-100 text-red-700",
+const commodityColors: Record<string, string> = {
+  "Dairy Products": "bg-blue-100 text-blue-700", "Frozen Food": "bg-cyan-100 text-cyan-700",
+  "Vaccines": "bg-emerald-100 text-emerald-700", "Fresh Produce": "bg-green-100 text-green-700",
+  "Ice Cream": "bg-indigo-100 text-indigo-700", "Bananas": "bg-yellow-100 text-yellow-700",
+  "Fresh Meat": "bg-rose-100 text-rose-700", "Flowers": "bg-pink-100 text-pink-700",
+  "Reagents": "bg-orange-100 text-orange-700", "Juices": "bg-amber-100 text-amber-700",
 }
 
 const statusColors: Record<string, string> = {
-  "Optimal": "text-emerald-600 font-semibold", "At Risk": "text-orange-600 font-semibold", "Critical": "text-red-600 font-semibold",
+  "Optimal": "text-emerald-600 font-semibold", "At Risk": "text-amber-600 font-semibold",
+  "Temp Deviation": "text-red-600 font-semibold", "Critical": "text-red-600 font-semibold",
 }
 
-const fmtQty = (v: number) => v >= 1000 ? `${(v / 1000).toFixed(0)}K` : v.toString()
+const tempColor = (actual: number, set: number) => {
+  const diff = Math.abs(actual - set)
+  if (set >= 0) return diff <= 1 ? "text-emerald-600" : diff <= 2 ? "text-amber-600" : "text-red-600"
+  return diff <= 2 ? "text-emerald-600" : diff <= 3 ? "text-amber-600" : "text-red-600"
+}
+const humColor = (v: number) => v >= 40 && v <= 90 ? "text-emerald-600" : v >= 30 && v <= 95 ? "text-amber-600" : "text-red-600"
+const energyColor = (v: number) => v >= 350 ? "text-red-600" : v >= 250 ? "text-amber-600" : "text-emerald-600"
+const utilColor = (cur: number, cap: number) => {
+  const pct = cur / cap * 100
+  return pct >= 90 ? "text-red-600" : pct >= 75 ? "text-amber-600" : "text-emerald-600"
+}
 
 const ColdChainMonitoringPanel: React.FC = () => {
   const [activeFilters, setActiveFilters] = useState<Record<string, string>>({})
-  const [view, setView] = useState<"shipments" | "compliance" | "sensors">("shipments")
+  const [view, setView] = useState<"chambers" | "temperature" | "energy">("chambers")
   const filters = [
-    { key: "category", label: "Category", options: ["Vaccines", "Biologics", "Perishable", "Pharma", "Dairy", "Seafood", "Blood Bank"] },
-    { key: "status", label: "Status", options: ["Optimal", "At Risk", "Critical"] },
-    { key: "sensor", label: "Sensor", options: ["Active", "Alarm"] },
+    { key: "status", label: "Status", options: ["Optimal", "At Risk", "Temp Deviation", "Critical"] },
+    { key: "compressor", label: "Compressor", options: ["Running", "Cycling", "Overloaded", "Failed"] },
   ]
 
-  const toggleFilter = (k: string, v: string) => setActiveFilters((p: Record<string, string>) => {
-    const n = Object.assign({}, p)
-    if (n[k] === v) { delete n[k] } else { n[k] = v }
-    return n
-  })
+  const toggleFilter = (key: string, value: string) => {
+    setActiveFilters(prev => {
+      const n = Object.assign({}, prev)
+      if (n[key] === value) { delete n[key] } else { n[key] = value }
+      return n
+    })
+  }
 
-  const filtered = items.filter((r: Rec) => Object.entries(activeFilters).every(([k, v]) => r[k as keyof Rec] === v))
+  const filtered = items.filter((r: Rec) =>
+    Object.entries(activeFilters).every(([k, v]) => r[k as keyof Rec] === v)
+  )
 
-  const stats = [
-    { label: "Active Sensors", value: items.filter(i => i.sensor === "Active").length.toString(), icon: Activity, color: "bg-emerald-50 text-emerald-600" },
-    { label: "Temp Excursions", value: items.filter(i => i.excursion > 0).length.toString(), icon: Thermometer, color: "bg-red-50 text-red-600" },
-    { label: "Critical Alarms", value: items.filter(i => i.status === "Critical").length.toString(), icon: Zap, color: "bg-amber-50 text-amber-600" },
-    { label: "WHO Certified", value: items.filter(i => i.who).length.toString(), icon: CheckCircle, color: "bg-blue-50 text-blue-600" },
-  ]
+  const totalChambers = filtered.length
+  const optimalCount = filtered.filter(r => r.status === "Optimal").length
+  const totalAlarms = filtered.reduce((s, r) => s + r.alarmCount, 0)
+  const totalEnergy = filtered.reduce((s, r) => s + r.energyUsage, 0)
 
   const insights = [
-    { icon: AlertTriangle, title: "Critical: CCM-04 Cisplatin", desc: "Temperature at 22.4\u00b0C vs 8\u00b0C target. 4 excursions logged. Battery at 45%. Sensor alarm active 15min ago. Oncology drug shipment for Tata Memorial at risk.", color: "text-red-500" },
-    { icon: Snowflake, title: "Battery Alert: CCM-09 Blood", desc: "Packed RBC unit at 9.5\u00b0C (target 4\u00b0C). Battery critically low at 32%. Last ping 22min ago. 42-day shelf life, transit 3/12h.", color: "text-orange-500" },
-    { icon: TrendingDown, title: "At Risk: CCM-02 Insulin", desc: "Biocon Insulin Glargine at 5.2\u00b0C vs 4\u00b0C target. 1 excursion today. Humidity 52% within range. Apollo Chennai delivery in 4h.", color: "text-amber-500" },
+    { label: "Chambers", value: totalChambers, icon: Snowflake, bg: "bg-blue-50" },
+    { label: "Optimal", value: optimalCount, icon: Activity, bg: "bg-emerald-50" },
+    { label: "Alarms", value: totalAlarms, icon: AlertTriangle, bg: "bg-amber-50" },
+    { label: "Energy kWh", value: totalEnergy, icon: Thermometer, bg: "bg-violet-50" },
   ]
+
+  const isCritical = (r: CCMItem) => r.status === "Critical" || r.compressor === "Failed" || r.alarmCount >= 4
+  const isWarning = (r: CCMItem) => r.status === "Temp Deviation" || r.status === "At Risk" || r.compressor === "Overloaded"
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-4 gap-2">
-        {stats.map((sc) => { const SIcon = sc.icon as React.ElementType; return (
-          <div key={sc.label} className={`ccm-stat-card rounded-lg border p-3 ${sc.color.split(" ")[0]}`}>
-            <div className="flex items-center gap-2 mb-1">
-              <SIcon className="h-4 w-4" />
-              <span className="text-xs font-medium opacity-70">{sc.label}</span>
+      <div className="grid grid-cols-4 gap-3">
+        {insights.map(sc => {
+          const SIcon = sc.icon as React.ElementType
+          return (
+            <div key={sc.label} className={`${sc.bg} rounded-lg p-3`}>
+              <div className="flex items-center gap-2 mb-1"><SIcon className="w-4 h-4 text-muted-foreground" /><span className="text-xs text-muted-foreground">{sc.label}</span></div>
+              <div className="text-lg font-bold">{sc.value}</div>
             </div>
-            <p className={`text-lg font-bold ${sc.color.split(" ")[1]}`}>{sc.value}</p>
+          )
+        })}
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {filters.map(f => (
+          <div key={f.key} className="flex items-center gap-1">
+            <span className="text-xs text-muted-foreground mr-1">{f.label}:</span>
+            {f.options.map(o => (
+              <button key={o} onClick={() => toggleFilter(f.key, o)}
+                className={`ccm-filter-pill text-xs px-2 py-0.5 rounded-full border ${activeFilters[f.key] === o ? "bg-primary text-primary-foreground border-primary" : "bg-background border-muted-foreground/20"}`}>{o}</button>
+            ))}
           </div>
-        )})}
-      </div>
-
-      <div className="flex flex-wrap gap-1.5">
-        {filters.map(f => f.options.map(opt => {
-          const active = activeFilters[f.key] === opt
-          return <button key={`${f.key}-${opt}`} onClick={() => toggleFilter(f.key, opt)}
-            className={`ccm-filter-pill px-2 py-0.5 rounded-full text-xs border ${active ? "bg-primary text-primary-foreground border-primary" : "bg-background hover:bg-muted border-muted-foreground/20"}`}>{opt}</button>
-        }))}
-        {Object.keys(activeFilters).length > 0 && <button onClick={() => setActiveFilters({})}
-          className="px-2 py-0.5 rounded-full text-xs border border-red-200 text-red-500 hover:bg-red-50">Clear</button>}
-      </div>
-
-      <div className="grid grid-cols-3 gap-2">
-        {insights.map(ins => { const IIcon = ins.icon as React.ElementType; return (
-          <div key={ins.title} className="rounded-lg border p-2.5 flex items-start gap-2">
-            <IIcon className={`h-4 w-4 mt-0.5 flex-shrink-0 ${ins.color}`} />
-            <div><p className="text-xs font-semibold">{ins.title}</p><p className="text-[11px] text-muted-foreground mt-0.5">{ins.desc}</p></div>
-          </div>
-        )})}
-      </div>
-
-      <div className="flex gap-1.5">
-        {(["shipments", "compliance", "sensors"] as const).map(v => (
-          <Button key={v} size="sm" variant={view === v ? "default" : "outline"} onClick={() => setView(v)}
-            className="text-xs h-7 capitalize">{v}</Button>
         ))}
       </div>
 
-      {view === "shipments" && filtered.map(item => {
-        const isCritical = item.status === "Critical"
-        const isAtRisk = item.status === "At Risk"
-        const tempOk = Math.abs(item.tempActual - item.tempTarget) <= 1
-        const transitPct = Math.round((item.transit / item.total) * 100)
-        return (
-          <div key={item.id} className={`ccm-shipment-card rounded-lg border p-3 ${isCritical ? "ccm-critical-pulse" : ""} ${isAtRisk ? "ccm-warning-border" : ""}`}>
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-bold">{item.id}</span>
-                <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${catColors[item.category] || "bg-gray-100 text-gray-600"}`}>{item.category}</span>
-                {isCritical && <span className="ccm-alert-dot h-2 w-2 rounded-full bg-red-500 inline-block" />}
-              </div>
-              <span className={statusColors[item.status]}>{item.status}</span>
-            </div>
-            <div className="text-[11px] font-medium mb-1.5">{item.product}</div>
-            <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground mb-1.5">
-              <MapPin className="h-3 w-3" /><span>{item.origin}</span>
-              <span className="text-xs">&rarr;</span><span>{item.dest}</span>
-            </div>
-            <div className="flex items-center gap-4 text-[11px] mb-2">
-              <span className={tempOk ? "text-emerald-600 font-medium" : "text-red-600 font-medium"}>
-                <Thermometer className="h-3 w-3 inline mr-0.5" />{item.tempActual}\u00b0C / {item.tempTarget}\u00b0C
-              </span>
-              <span>Humidity: {item.humidity}%</span>
-              <span>Shelf: {item.shelfLife}</span>
-              <span>Qty: {fmtQty(item.qty)} {item.dose !== "N/A" ? `x ${item.dose}` : "units"}</span>
-            </div>
-            <div className="flex items-center gap-4 text-[11px] mb-2">
-              <span className="text-muted-foreground">{item.carrier}</span>
-              <span>{item.bl}</span>
-            </div>
-            <div className="flex items-center gap-4 text-[11px] mb-2">
-              <span className={`flex items-center gap-1 ${item.sensor === "Alarm" ? "text-red-500 font-medium" : "text-emerald-500"}`}>
-                <span className={`h-1.5 w-1.5 rounded-full ${item.sensor === "Alarm" ? "bg-red-500" : "bg-emerald-500"}`} />
-                {item.sensor}
-              </span>
-              <span>Signal: {item.lastPing}</span>
-              <span>Battery: {item.battery}%</span>
-              <span>Excursions: {item.excursion}</span>
-            </div>
-            <div className="w-full bg-muted rounded-full h-1.5 mb-1">
-              <div className={`h-1.5 rounded-full transition-all ${isCritical ? "bg-red-500" : isAtRisk ? "bg-amber-500" : "bg-primary"}`} style={{ width: `${transitPct}%` }} />
-            </div>
-            <div className="flex items-center justify-between text-[10px] text-muted-foreground">
-              <span>Transit: {item.transit}h / {item.total}h ({transitPct}%)</span>
-              <div className="flex gap-2">
-                {item.who && <span className="px-1 py-0.5 rounded text-[9px] bg-blue-100 text-blue-600">WHO</span>}
-                {item.fssai && <span className="px-1 py-0.5 rounded text-[9px] bg-green-100 text-green-600">FSSAI</span>}
-              </div>
-            </div>
-          </div>
-        )
-      })}
+      <div className="flex gap-2">
+        {(["chambers", "temperature", "energy"] as const).map(v => (
+          <Button key={v} variant={view === v ? "default" : "outline"} size="sm" onClick={() => setView(v)} className="text-xs">{v.charAt(0).toUpperCase() + v.slice(1)}</Button>
+        ))}
+      </div>
 
-      {view === "compliance" && filtered.map(item => {
-        const tempDev = item.tempActual - item.tempTarget
-        const isCritical = item.status === "Critical"
-        return (
-          <div key={item.id} className={`ccm-compliance-row rounded-lg border p-3 ${isCritical ? "ccm-critical-pulse" : "ccm-compliance-row"}`}>
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-bold">{item.id}</span>
-                <span className="text-[11px] font-medium">{item.product}</span>
-              </div>
-              <span className={statusColors[item.status]}>{item.status}</span>
-            </div>
-            <div className="grid grid-cols-4 gap-3 text-[11px]">
-              <div>
-                <span className="text-muted-foreground block text-[10px]">Temperature</span>
-                <span className={Math.abs(tempDev) <= 1 ? "text-emerald-600" : "text-red-600"}>
-                  {item.tempActual}\u00b0C ({tempDev > 0 ? "+" : ""}{tempDev.toFixed(1)}\u00b0C)
-                </span>
-              </div>
-              <div>
-                <span className="text-muted-foreground block text-[10px]">Humidity</span>
-                <span className={item.humidity >= 40 && item.humidity <= 70 ? "text-emerald-600" : "text-amber-600"}>{item.humidity}%</span>
-              </div>
-              <div>
-                <span className="text-muted-foreground block text-[10px]">Sensor / Battery</span>
-                <span>{item.sensor} / {item.battery}%</span>
-              </div>
-              <div>
-                <span className="text-muted-foreground block text-[10px]">Certifications</span>
-                <div className="flex gap-1">
-                  {item.who && <span className="px-1 py-0.5 rounded text-[9px] bg-blue-100 text-blue-600">WHO</span>}
-                  {item.fssai && <span className="px-1 py-0.5 rounded text-[9px] bg-green-100 text-green-600">FSSAI</span>}
+      {view === "chambers" && (
+        <div className="ccm-card-grid space-y-2">
+          {filtered.map(r => (
+            <div key={r.id} className={`ccm-item-card p-3 rounded-lg border ${isCritical(r) ? "ccm-critical" : isWarning(r) ? "ccm-warning" : "bg-card"}`}>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-muted-foreground">{r.id}</span>
+                  <span className="font-semibold text-sm">{r.chamber}</span>
+                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${commodityColors[r.commodity]}`}>{r.commodity}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className={`text-xs ${statusColors[r.status]}`}>{r.status}</span>
+                  <span className="text-xs text-muted-foreground">{r.hub}</span>
                 </div>
               </div>
-            </div>
-          </div>
-        )
-      })}
-
-      {view === "sensors" && filtered.map(item => {
-        const battPct = item.battery
-        const isCritical = item.status === "Critical"
-        return (
-          <div key={item.id} className={`ccm-sensor-row rounded-lg border p-3 ${isCritical ? "ccm-critical-pulse" : ""}`}>
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <Activity className="h-4 w-4 text-muted-foreground" />
-                <span className="font-mono text-xs font-bold">{item.id}</span>
-                <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${item.sensor === "Alarm" ? "bg-red-100 text-red-700" : "bg-emerald-100 text-emerald-700"}`}>{item.sensor}</span>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs">
+                <div>Temp: <span className={`font-medium ${tempColor(r.actualTemp, r.setTemp)}`}>{r.actualTemp}\u00b0C</span> / Set: {r.setTemp}\u00b0C | Avg: {r.avgTemp}\u00b0C</div>
+                <div>Humidity: <span className={`font-medium ${humColor(r.humidity)}`}>{r.humidity}%</span> | Doors: <span className="font-medium">{r.doorOpen}</span> | Defrost: {r.lastDefrost}</div>
               </div>
-              <span className="text-[11px] text-muted-foreground">{item.lastPing}</span>
+              <div className="grid grid-cols-4 gap-2 mt-2 text-xs">
+                <div>Util: <span className={`font-medium ${utilColor(r.current, r.capacity)}`}>{r.current}/{r.capacity}</span></div>
+                <div>Energy: <span className={`font-medium ${energyColor(r.energyUsage)}`}>{r.energyUsage} kWh</span></div>
+                <div>Compressor: <span className="font-medium">{r.compressor}</span></div>
+                <div>Backup: <span className="font-medium">{r.backup}</span></div>
+              </div>
+              <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
+                <span>Alarms: <span className={r.alarmCount > 0 ? "text-red-600 font-medium" : "text-emerald-600"}>{r.alarmCount}</span></span>
+                <span>{r.region}</span>
+              </div>
+              {isCritical(r) && <div className="ccm-alert-text text-xs mt-2">Chamber critical — temp {r.actualTemp}\u00b0C vs set {r.setTemp}\u00b0C, compressor {r.compressor}, {r.alarmCount} alarms</div>}
             </div>
-            <div className="flex items-center gap-4 text-[11px] mb-2">
-              <span className="font-medium">{item.product}</span>
-              <span className={battPct > 60 ? "text-emerald-600" : battPct > 30 ? "text-amber-600" : "text-red-600"}>
-                Battery: {battPct}%
-              </span>
+          ))}
+        </div>
+      )}
+
+      {view === "temperature" && (
+        <div className="space-y-2">
+          {[...filtered].sort((a, b) => Math.abs(b.actualTemp - b.setTemp) - Math.abs(a.actualTemp - a.setTemp)).map(r => {
+            const dev = Math.abs(r.actualTemp - r.setTemp)
+            return (
+              <div key={r.id} className="ccm-temp-card p-3 rounded-lg border bg-card">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs text-muted-foreground">{r.id}</span>
+                    <span className="font-semibold text-sm">{r.chamber}</span>
+                    <span className={`text-xs px-1.5 py-0.5 rounded-full ${commodityColors[r.commodity]}`}>{r.commodity}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className={`text-lg font-bold ${tempColor(r.actualTemp, r.setTemp)}`}>{r.actualTemp}\u00b0C</span>
+                    <span className="text-xs text-muted-foreground">/ {r.setTemp}\u00b0C</span>
+                    {dev > 2 && <span className="text-xs text-red-600 font-medium">+{dev.toFixed(1)}\u00b0</span>}
+                  </div>
+                </div>
+                <div className="w-full bg-muted rounded-full h-2 mb-2"><div className={`ccm-temp-bar h-2 rounded-full ${dev > 3 ? "ccm-temp-crit" : dev > 2 ? "ccm-temp-warn" : ""}`} style={{ width: `${Math.min(Math.max((1 - dev / 10) * 100, 10), 100)}%` }} /></div>
+                <div className="grid grid-cols-4 gap-2 text-xs">
+                  <div>Avg Temp: <span className="font-medium">{r.avgTemp}\u00b0C</span></div>
+                  <div>Humidity: <span className={`font-medium ${humColor(r.humidity)}`}>{r.humidity}%</span></div>
+                  <div>Doors: <span className="font-medium">{r.doorOpen}</span></div>
+                  <div>Defrost: <span className="font-medium">{r.lastDefrost}</span></div>
+                </div>
+                <div className="flex items-center gap-2 mt-2 text-xs">
+                  <span className={`text-xs ${statusColors[r.status]}`}>{r.status}</span>
+                  <span className="text-muted-foreground">{r.hub} | Compressor: {r.compressor} | Alarms: {r.alarmCount}</span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )}
+
+      {view === "energy" && (
+        <div className="space-y-2">
+          {[...filtered].sort((a, b) => b.energyUsage - a.energyUsage).map(r => (
+            <div key={r.id} className="ccm-energy-card p-3 rounded-lg border bg-card">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-muted-foreground">{r.id}</span>
+                  <span className="font-semibold text-sm">{r.chamber}</span>
+                  <span className={`text-xs px-1.5 py-0.5 rounded-full ${commodityColors[r.commodity]}`}>{r.commodity}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className={`text-lg font-bold ${energyColor(r.energyUsage)}`}>{r.energyUsage}</span>
+                  <span className="text-xs text-muted-foreground">kWh</span>
+                </div>
+              </div>
+              <div className="w-full bg-muted rounded-full h-2 mb-2"><div className={`ccm-energy-bar h-2 rounded-full ${r.energyUsage >= 350 ? "ccm-energy-high" : r.energyUsage >= 250 ? "ccm-energy-med" : ""}`} style={{ width: `${Math.min(r.energyUsage / 500 * 100, 100)}%` }} /></div>
+              <div className="grid grid-cols-4 gap-2 text-xs">
+                <div>Util: <span className={`font-medium ${utilColor(r.current, r.capacity)}`}>{r.current}/{r.capacity}</span></div>
+                <div>Temp: <span className={`font-medium ${tempColor(r.actualTemp, r.setTemp)}`}>{r.actualTemp}\u00b0C</span></div>
+                <div>Compressor: <span className="font-medium">{r.compressor}</span></div>
+                <div>Doors: <span className="font-medium">{r.doorOpen}</span></div>
+              </div>
+              <div className="flex items-center gap-2 mt-2 text-xs">
+                <span className={`text-xs ${statusColors[r.status]}`}>{r.status}</span>
+                <span className="text-muted-foreground">{r.hub} | Alarms: {r.alarmCount} | {r.region}</span>
+              </div>
             </div>
-            <div className="w-full bg-muted rounded-full h-1.5 mb-1">
-              <div className={`h-1.5 rounded-full transition-all ${battPct > 60 ? "bg-emerald-500" : battPct > 30 ? "bg-amber-500" : "bg-red-500"}`} style={{ width: `${battPct}%` }} />
-            </div>
-            <div className="flex items-center justify-between text-[10px] text-muted-foreground">
-              <span>{item.carrier} &middot; {item.bl}</span>
-              <span>Temp: {item.tempActual}\u00b0C / {item.tempTarget}\u00b0C &middot; Humidity: {item.humidity}%</span>
-            </div>
-          </div>
-        )
-      })}
+          ))}
+        </div>
+      )}
     </div>
   )
 }

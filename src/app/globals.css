@@ -58275,3 +58275,40 @@ html.theme-transition body {
 .cbc-doc-expiring { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
 .cbc-doc-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes cbc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* LMA - Labor Management Analytics Panel */
+.lma-filter-pill { transition: all 0.15s; }
+.lma-filter-pill:hover { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+.lma-card-grid { }
+.lma-item-card { transition: all 0.2s; }
+.lma-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.lma-critical { border-color: #ef4444; border-left: 3px solid #ef4444; animation: lma-pulse 2s infinite; background: linear-gradient(135deg, #fef2f2, #fff5f5); }
+.lma-warning { border-left: 3px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fffef5); }
+.lma-alert-text { color: #dc2626; font-weight: 500; }
+.lma-prod-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.lma-prod-low { background: linear-gradient(90deg, #f59e0b, #d97706) !important; }
+.lma-ret-bar { background: linear-gradient(90deg, #3b82f6, #6366f1); transition: width 0.3s; }
+.lma-ret-high { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.lma-ret-med { background: linear-gradient(90deg, #f59e0b, #d97706) !important; }
+.lma-prod-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.lma-ret-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes lma-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* CCM - Cold Chain Monitoring Panel */
+.ccm-filter-pill { transition: all 0.15s; }
+.ccm-filter-pill:hover { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+.ccm-card-grid { }
+.ccm-item-card { transition: all 0.2s; }
+.ccm-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ccm-critical { border-color: #ef4444; border-left: 3px solid #ef4444; animation: ccm-pulse 2s infinite; background: linear-gradient(135deg, #fef2f2, #eef2ff); }
+.ccm-warning { border-left: 3px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #f0f9ff); }
+.ccm-alert-text { color: #dc2626; font-weight: 500; }
+.ccm-temp-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.ccm-temp-crit { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.ccm-temp-warn { background: linear-gradient(90deg, #f59e0b, #d97706) !important; }
+.ccm-energy-bar { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s; }
+.ccm-energy-high { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.ccm-energy-med { background: linear-gradient(90deg, #f59e0b, #d97706) !important; }
+.ccm-temp-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ccm-energy-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes ccm-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
