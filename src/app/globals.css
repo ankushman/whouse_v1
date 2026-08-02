@@ -59987,3 +59987,19 @@ html.theme-transition body {
 .wte-tab:hover { background: rgba(124, 45, 18, 0.08); }
 .wte-dashboard, .wte-registry, .wte-analytics, .wte-insights { animation: fadeIn 0.3s ease; }
 .wte-table-wrap { box-shadow: 0 1px 3px rgba(124, 45, 18, 0.1); }
+
+/* === Hydroelectric Dam Construction Logistics (hdc-*) === */
+.hdc-root { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
+.hdc-tabs { border-bottom: 2px solid #134e4a; }
+.hdc-tab { transition: all 0.2s; }
+.hdc-tab:hover { background: rgba(19, 78, 74, 0.08); }
+.hdc-dashboard, .hdc-registry, .hdc-analytics, .hdc-insights { animation: fadeIn 0.3s ease; }
+.hdc-table-wrap { box-shadow: 0 1px 3px rgba(19, 78, 74, 0.1); }
+
+/* === Tunnel Boring Machine Logistics (tbm-*) === */
+.tbm-root { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); }
+.tbm-tabs { border-bottom: 2px solid #1e293b; }
+.tbm-tab { transition: all 0.2s; }
+.tbm-tab:hover { background: rgba(30, 41, 59, 0.08); }
+.tbm-dashboard, .tbm-registry, .tbm-analytics, .tbm-insights { animation: fadeIn 0.3s ease; }
+.tbm-table-wrap { box-shadow: 0 1px 3px rgba(30, 41, 59, 0.1); }

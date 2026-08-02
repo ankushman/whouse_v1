@@ -452,3 +452,5 @@ export { default as NuclearPowerPlantLogisticsView } from './nuclear-power-plant
 export { default as ElectricBusFleetLogisticsView } from './electric-bus-fleet-logistics-view'
 export { default as SolarFarmConstructionLogisticsView } from './solar-farm-construction-logistics-view'
 export { default as WasteToEnergyPlantLogisticsView } from './waste-to-energy-plant-logistics-view'
+export { default as HydroelectricDamConstructionLogisticsView } from './hydroelectric-dam-construction-logistics-view'
+export { default as TunnelBoringMachineLogisticsView } from './tunnel-boring-machine-logistics-view'

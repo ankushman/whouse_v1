@@ -462,6 +462,8 @@ import NuclearPowerPlantLogisticsView from "@/components/modules/nuclear-power-p
 import ElectricBusFleetLogisticsView from "@/components/modules/electric-bus-fleet-logistics-view"
 import SolarFarmConstructionLogisticsView from "@/components/modules/solar-farm-construction-logistics-view"
 import WasteToEnergyPlantLogisticsView from "@/components/modules/waste-to-energy-plant-logistics-view"
+import HydroelectricDamConstructionLogisticsView from "@/components/modules/hydroelectric-dam-construction-logistics-view"
+import TunnelBoringMachineLogisticsView from "@/components/modules/tunnel-boring-machine-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -923,6 +925,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "electric-bus-fleet": ElectricBusFleetLogisticsView,
   "solar-farm-construction": SolarFarmConstructionLogisticsView,
   "waste-to-energy-plant": WasteToEnergyPlantLogisticsView,
+  "hydroelectric-dam-construction": HydroelectricDamConstructionLogisticsView,
+  "tunnel-boring-machine": TunnelBoringMachineLogisticsView,
 }
 
 
