@@ -1,4 +1,23 @@
 ---
+Task ID: R304 — Semiconductor Fab + Offshore Wind Turbine Logistics
+Agent: Main Agent (Cron Loop)
+Task: R304 — 2 new Indian logistics modules for semiconductor fab (Tata Semiconductor Osmanabad, Micron Gujarat, IGSS Chandigarh, Kaynes Mysore, SPEL Noida, Dixon Noida, CG Power Indore, Syrma SGS Chennai — ASML EUV/DUV lithography, 300mm wafer, cleanroom HEPA, UPW 18MΩ, ion implanter, CMP slurry, ATE handler, process gas) and offshore wind turbine (Vestas V164 8MW, SGRE SG 14-222 DD 14MW, GE Haliade-X 12MW, Adani Green, NTPC Renewable, O2 Power Mytrah — monopile foundation 60m 800T, subsea inter-array 33kV, export cable 220kV HVDC, offshore substation topside/jacket, jack-up vessel, cable laying vessel, SCADA)
+
+Work Log:
+- Read worklog: R303 complete (commit 8b09239), 440 modules, 446 navItems, 59,917 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate check: 0 duplicates for semiconductor-fab, offshore-wind
+- Icons: CircuitBoard (semiconductor), Ship (offshore wind) verified in app-layout.tsx
+- Created Semiconductor Fab Logistics (R304a): ~168 lines, sfl-* indigo, 14 records, 4 tabs
+- Created Offshore Wind Turbine Logistics (R304b): ~168 lines, owf-* navy dark, 14 records, 4 tabs
+- Registered both in index.ts, page.tsx, app-store.ts
+- CSS: 21 lines appended
+- TSC FINAL: 0 errors in src/components/modules
+- Git: commit 260122b pushed to origin/main
+
+Stage Summary:
+- MODULE FILES: 442 (+2) | NAVITEMS: 448 (+2) | CSS: 59,937 lines (+20)
+- TSC: 0 errors (modules) | GITHUB: pushed (260122b)
 Task ID: R303 — Subsea Cable Laying + Green Hydrogen Energy Logistics + Bug Fixes
 Agent: Main Agent (Cron Loop)
 Task: R303 — Bug fixes (smart-grid-power 3 TSC errors, smart-city 1 TSC error) + 2 new Indian logistics modules for subsea cable laying (SMW5 SMW6 I-ME-WE BBG Tata Comm Reliance Jio BSNL, cable ship turntable, repeater amplifier, landing station CLS, ROV submarine inspection, marine survey sonar, subsea burial 1500m) and green hydrogen energy (NTPC Dadri Reliance Jamnagar Adani Kandla IOCL Panipat, alkaline PEM SOEC electrolyzer, fuel cell PEMFC, H2 storage 350 bar, compressor, green ammonia Haber-Bosch, pipeline API 5L)
