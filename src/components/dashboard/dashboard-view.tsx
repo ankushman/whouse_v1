@@ -68,6 +68,8 @@ import { InventoryReplenishmentPanel } from "@/components/shared/inventory-reple
 import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
 import { AutomatedPutawayPanel } from "@/components/shared/automated-putaway-panel"
 import { PickPathOptimizerPanel } from "@/components/shared/pick-path-optimizer-panel"
+import { ContainerUnloadingPanel } from "@/components/shared/container-unloading-panel"
+import { CargoInsurancePanel } from "@/components/shared/cargo-insurance-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -767,6 +769,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <PickPathOptimizerPanel />
+          </CardContent>
+        </Card>
+
+        {/* Container Unloading */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <ContainerUnloadingPanel />
+          </CardContent>
+        </Card>
+
+        {/* Cargo Insurance */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CargoInsurancePanel />
           </CardContent>
         </Card>
       </div>

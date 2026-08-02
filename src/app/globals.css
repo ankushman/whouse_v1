@@ -56618,3 +56618,63 @@ html.theme-transition body {
 @keyframes ppo-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
 .ppo-failed-pulse{animation:ppo-failed-pulse 2s ease infinite}
 .ppo-notopt-border{border-left:3px solid #f59e0b}
+
+/* ========== R483: Container Unloading Panel (cul-*) ========== */
+.cul-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.cul-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cul-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.cul-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.cul-filter-clear{transition:background .15s ease}
+.cul-filter-clear:hover{background:rgba(239,68,68,.1)}
+.cul-item-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.cul-item-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cul-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.cul-hazmat{letter-spacing:.03em;animation:cul-hazmat-glow 2s ease infinite}
+.cul-team-card{transition:all .2s ease}
+.cul-team-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.cul-team-metric{transition:background .15s ease}
+.cul-team-metric:hover{background:rgba(0,0,0,.04)}
+.cul-dmg-header{transition:all .15s ease}
+.cul-dmg-header:hover{background:rgba(239,68,68,.08)}
+.cul-dmg-row{transition:all .2s ease}
+.cul-dmg-row:hover{border-color:hsl(var(--primary)/.2)}
+.cul-alerts-list{transition:all .2s ease}
+.cul-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.cul-alert-dot{animation:cul-dot-blink 1.2s ease infinite}
+.cul-insights-row > div{transition:all .2s ease}
+.cul-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes cul-dmg-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes cul-bar-progress{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes cul-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes cul-hazmat-glow{0%,100%{box-shadow:0 0 2px rgba(249,115,22,.2)}50%{box-shadow:0 0 6px rgba(249,115,22,.4)}}
+.cul-dmg-pulse{animation:cul-dmg-pulse 2s ease infinite}
+.cul-bar-progress{animation:cul-bar-progress 1.5s ease infinite}
+.cul-delayed-border{border-left:3px solid #f59e0b}
+
+/* ========== R483: Cargo Insurance Panel (cig-*) ========== */
+.cig-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.cig-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cig-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.cig-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.cig-filter-clear{transition:background .15s ease}
+.cig-filter-clear:hover{background:rgba(239,68,68,.1)}
+.cig-policy-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.cig-policy-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cig-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.cig-insurer-card{transition:all .2s ease}
+.cig-insurer-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.cig-insurer-metric{transition:background .15s ease}
+.cig-insurer-metric:hover{background:rgba(0,0,0,.04)}
+.cig-claim-header{transition:all .15s ease}
+.cig-claim-header:hover{background:rgba(239,68,68,.08)}
+.cig-claim-row{transition:all .2s ease}
+.cig-claim-row:hover{border-color:hsl(var(--primary)/.2)}
+.cig-alerts-list{transition:all .2s ease}
+.cig-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.cig-alert-dot{animation:cig-dot-blink 1.2s ease infinite}
+.cig-insights-row > div{transition:all .2s ease}
+.cig-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes cig-claim-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes cig-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.cig-claim-pulse{animation:cig-claim-pulse 2s ease infinite}
+.cig-expired-border{border-left:3px solid #94a3b8}
