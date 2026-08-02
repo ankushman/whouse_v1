@@ -57581,3 +57581,63 @@ html.theme-transition body {
 .sem-imp-header:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.06); }
 .sem-imp-row { transition: all 0.2s; }
 .sem-imp-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* WLA: Warehouse Labor Analytics Panel */
+.wla-stat-card { transition: all 0.2s; }
+.wla-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.06); transform: translateY(-1px); }
+.wla-filter-pill { transition: all 0.15s; }
+.wla-filter-pill:hover { transform: scale(1.05); }
+.wla-filter-clear { transition: all 0.15s; }
+.wla-filter-clear:hover { transform: scale(1.1); }
+.wla-insights-row > div { transition: all 0.2s; }
+.wla-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.wla-alerts-list { transition: all 0.2s; }
+.wla-alerts-list:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.08); }
+.wla-shift-card { transition: all 0.2s; }
+.wla-shift-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-1px); }
+.wla-critical-pulse { border-color: #ef4444; animation: wla-pulse 2s ease-in-out infinite; }
+.wla-warning-border { border-left: 3px solid #f59e0b; }
+@keyframes wla-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 12px 4px rgba(239,68,68,0.15); } }
+
+/* WLA: productivity view */
+.wla-prod-header { transition: all 0.2s; }
+.wla-prod-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wla-prod-row { transition: all 0.2s; }
+.wla-prod-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* WLA: cost view */
+.wla-cost-header { transition: all 0.2s; }
+.wla-cost-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.wla-cost-row { transition: all 0.2s; }
+.wla-cost-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* CCT: Customs Compliance Tracker Panel */
+.cct-stat-card { transition: all 0.2s; }
+.cct-stat-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.06); transform: translateY(-1px); }
+.cct-filter-pill { transition: all 0.15s; }
+.cct-filter-pill:hover { transform: scale(1.05); }
+.cct-filter-clear { transition: all 0.15s; }
+.cct-filter-clear:hover { transform: scale(1.1); }
+.cct-insights-row > div { transition: all 0.2s; }
+.cct-insights-row > div:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+.cct-alerts-list { transition: all 0.2s; }
+.cct-alerts-list:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.08); }
+.cct-ship-card { transition: all 0.2s; }
+.cct-ship-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-1px); }
+.cct-critical-pulse { border-color: #ef4444; animation: cct-pulse 2s ease-in-out infinite; }
+.cct-warning-border { border-left: 3px solid #f59e0b; }
+@keyframes cct-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); } 50% { box-shadow: 0 0 12px 4px rgba(239,68,68,0.15); } }
+.cct-exam-badge { animation: cct-exam-glow 3s ease-in-out infinite; }
+@keyframes cct-exam-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+/* CCT: duty view */
+.cct-duty-header { transition: all 0.2s; }
+.cct-duty-header:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+.cct-duty-row { transition: all 0.2s; }
+.cct-duty-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+/* CCT: risk view */
+.cct-risk-header { transition: all 0.2s; }
+.cct-risk-header:hover { box-shadow: 0 2px 6px rgba(239,68,68,0.06); }
+.cct-risk-row { transition: all 0.2s; }
+.cct-risk-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }

@@ -114,3 +114,5 @@ export { LogisticsCostIntelligencePanel } from './logistics-cost-intelligence-pa
 export { WarehouseEnergyManagementPanel } from './warehouse-energy-management-panel'
 export { SupplyChainVisibilityPanel } from './supply-chain-visibility-panel'
 export { ShippingExceptionManagementPanel } from './shipping-exception-management-panel'
+export { WarehouseLaborAnalyticsPanel } from './warehouse-labor-analytics-panel'
+export { CustomsComplianceTrackerPanel } from './customs-compliance-tracker-panel'

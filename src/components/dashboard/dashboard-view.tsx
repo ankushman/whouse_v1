@@ -102,6 +102,8 @@ import { LogisticsCostIntelligencePanel } from "@/components/shared/logistics-co
 import { WarehouseEnergyManagementPanel } from "@/components/shared/warehouse-energy-management-panel"
 import { SupplyChainVisibilityPanel } from "@/components/shared/supply-chain-visibility-panel"
 import { ShippingExceptionManagementPanel } from "@/components/shared/shipping-exception-management-panel"
+import { WarehouseLaborAnalyticsPanel } from "@/components/shared/warehouse-labor-analytics-panel"
+import { CustomsComplianceTrackerPanel } from "@/components/shared/customs-compliance-tracker-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -1039,6 +1041,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <ShippingExceptionManagementPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Labor Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseLaborAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Customs Compliance Tracker */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <CustomsComplianceTrackerPanel />
           </CardContent>
         </Card>
       </div>
