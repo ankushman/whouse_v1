@@ -59823,3 +59823,39 @@ html.theme-transition body {
 .spl-insight { border-left: 4px solid var(--accent); }
 .spl-insight h3 { color: var(--accent); }
 @keyframes spl-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ===== Defense Logistics (R302a) — Navy Blue #1e3a5f ===== */
+.def-root { --accent: #1e3a5f; --accent-light: #f0f4f8; }
+.def-tabs { border-bottom-color: var(--accent); }
+.def-tab { transition: all 0.2s; }
+.def-tab:hover { background: var(--accent-light); }
+.def-kpi { border-left: 3px solid var(--accent); }
+.def-kpi-val { color: var(--accent); }
+.def-chart { border-top: 3px solid var(--accent); }
+.def-badge { letter-spacing: 0.02em; }
+.def-table-wrap { border-color: #bfdbfe; }
+.def-table-wrap th { background: #f0f4f8; color: var(--accent); }
+.def-row-combat { animation: def-pulse 2s infinite; }
+.def-row-warning { border-left-color: #f59e0b; }
+.def-row-info { border-left-color: #3b82f6; }
+.def-insight { border-left: 4px solid var(--accent); }
+.def-insight h3 { color: var(--accent); }
+@keyframes def-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ===== Aviation Ground Handling (R302b) — Forest Green #064e3b ===== */
+.agh-root { --accent: #064e3b; --accent-light: #ecfdf5; }
+.agh-tabs { border-bottom-color: var(--accent); }
+.agh-tab { transition: all 0.2s; }
+.agh-tab:hover { background: var(--accent-light); }
+.agh-kpi { border-left: 3px solid var(--accent); }
+.agh-kpi-val { color: var(--accent); }
+.agh-chart { border-top: 3px solid var(--accent); }
+.agh-badge { letter-spacing: 0.02em; }
+.agh-table-wrap { border-color: #a7f3d0; }
+.agh-table-wrap th { background: #ecfdf5; color: var(--accent); }
+.agh-row-critical { animation: agh-pulse 2s infinite; }
+.agh-row-warning { border-left-color: #f59e0b; }
+.agh-row-info { border-left-color: #3b82f6; }
+.agh-insight { border-left: 4px solid var(--accent); }
+.agh-insight h3 { color: var(--accent); }
+@keyframes agh-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }

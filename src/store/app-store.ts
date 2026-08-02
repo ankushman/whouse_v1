@@ -444,6 +444,8 @@ export const navItems: NavItem[] = [
   { id: 'hsr-logistics', label: 'HSR High-Speed Rail', icon: 'Zap', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'data-center-cooling-logistics', label: 'Data Center Cooling', icon: 'Snowflake', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'space-launch-logistics', label: 'Space Launch', icon: 'Rocket', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'defense-logistics', label: 'Defense Logistics', icon: 'Shield', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'aviation-ground-handling', label: 'Aviation GSE', icon: 'PlaneTakeoff', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

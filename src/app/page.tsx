@@ -448,6 +448,8 @@ import InlandWaterwaysLogisticsView from "@/components/modules/inland-waterways-
 import HsrLogisticsView from "@/components/modules/hsr-logistics-view"
 import DataCenterCoolingLogisticsView from "@/components/modules/data-center-cooling-logistics-view"
 import SpaceLaunchLogisticsView from "@/components/modules/space-launch-logistics-view"
+import DefenseLogisticsView from "@/components/modules/defense-logistics-view"
+import AviationGroundHandlingLogisticsView from "@/components/modules/aviation-ground-handling-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -895,6 +897,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "hsr-logistics": HsrLogisticsView,
   "data-center-cooling-logistics": DataCenterCoolingLogisticsView,
   "space-launch-logistics": SpaceLaunchLogisticsView,
+  "defense-logistics": DefenseLogisticsView,
+  "aviation-ground-handling": AviationGroundHandlingLogisticsView,
 }
 
 

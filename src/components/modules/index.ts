@@ -438,3 +438,5 @@ export { default as InlandWaterwaysLogisticsView } from './inland-waterways-logi
 export { default as HsrLogisticsView } from './hsr-logistics-view'
 export { default as DataCenterCoolingLogisticsView } from './data-center-cooling-logistics-view'
 export { default as SpaceLaunchLogisticsView } from './space-launch-logistics-view'
+export { default as DefenseLogisticsView } from './defense-logistics-view'
+export { default as AviationGroundHandlingLogisticsView } from './aviation-ground-handling-logistics-view'
