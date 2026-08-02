@@ -139,3 +139,5 @@ export { WarehouseAutomationMetricsPanel } from './warehouse-automation-metrics-
 export { BillingInvoiceAnalyticsPanel } from './billing-invoice-analytics-panel'
 export { DemandForecastingPanel } from './demand-forecasting-panel'
 export { SafetyCompliancePanel } from './safety-compliance-panel'
+export { WarehouseNetworkAnalyticsPanel } from './warehouse-network-analytics-panel'
+export { CustomerExperiencePanel } from './customer-experience-panel'

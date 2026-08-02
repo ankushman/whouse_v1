@@ -58076,3 +58076,36 @@ html.theme-transition body {
 .sfc-audit-card { transition: all 0.2s; }
 .sfc-audit-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes sfc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Warehouse Network Analytics — wna-* */
+.wna-filter-pill { transition: all 0.15s; }
+.wna-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.wna-card-grid { max-height: 420px; overflow-y: auto; }
+.wna-item-card { transition: all 0.2s; }
+.wna-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.wna-critical { border-left: 4px solid #dc2626; animation: wna-pulse 2s infinite; }
+.wna-warning { border-left: 4px solid #f59e0b; }
+.wna-alert-text { color: #dc2626; font-weight: 600; }
+.wna-util-bar { background: linear-gradient(90deg, #f59e0b, #ef4444); border-radius: 9999px; }
+.wna-cost-bar { background: linear-gradient(90deg, #6366f1, #4f46e5); border-radius: 9999px; }
+.wna-cap-card { transition: all 0.2s; }
+.wna-cap-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wna-fin-card { transition: all 0.2s; }
+.wna-fin-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes wna-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Customer Experience Panel — cxp-* */
+.cxp-filter-pill { transition: all 0.15s; }
+.cxp-filter-pill:hover { background: hsl(var(--accent)); color: white; }
+.cxp-card-grid { max-height: 420px; overflow-y: auto; }
+.cxp-item-card { transition: all 0.2s; }
+.cxp-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.cxp-critical { border-left: 4px solid #dc2626; animation: cxp-pulse 2s infinite; }
+.cxp-warning { border-left: 4px solid #f59e0b; }
+.cxp-alert-text { color: #dc2626; font-weight: 600; }
+.cxp-nps-bar { background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 9999px; }
+.cxp-sat-card { transition: all 0.2s; }
+.cxp-sat-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.cxp-svc-card { transition: all 0.2s; }
+.cxp-svc-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes cxp-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
