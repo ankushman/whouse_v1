@@ -64,6 +64,8 @@ import { ThreePLVendorScorecardPanel } from "@/components/shared/three-pl-vendor
 import { SlottingOptimizerPanel } from "@/components/shared/slotting-optimizer-panel"
 import { DemandSensingAnalyticsPanel } from "@/components/shared/demand-sensing-analytics-panel"
 import { WarehouseSimulationPanel } from "@/components/shared/warehouse-simulation-panel"
+import { InventoryReplenishmentPanel } from "@/components/shared/inventory-replenishment-panel"
+import { FreightRateOptimizerPanel } from "@/components/shared/freight-rate-optimizer-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -735,6 +737,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <WarehouseSimulationPanel />
+          </CardContent>
+        </Card>
+
+        {/* Inventory Replenishment */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <InventoryReplenishmentPanel />
+          </CardContent>
+        </Card>
+
+        {/* Freight Rate Optimizer */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <FreightRateOptimizerPanel />
           </CardContent>
         </Card>
       </div>

@@ -56496,3 +56496,66 @@ html.theme-transition body {
 @keyframes wsm-pulse-red{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.2)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
 @keyframes wsm-blink{0%,100%{opacity:1}50%{opacity:.6}}
 @media(max-width:640px){.wsm-stats-grid{grid-template-columns:repeat(3,1fr)}.wsm-grid{grid-template-columns:1fr}.wsm-anal-view{grid-template-columns:1fr}.wsm-detail-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ========== R481: Inventory Replenishment Panel (irp-*) ========== */
+.irp-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.irp-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.irp-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.irp-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.irp-filter-pill.active{border-color:var(--primary);color:var(--primary-foreground)}
+.irp-filter-clear{transition:background .15s ease}
+.irp-filter-clear:hover{background:rgba(239,68,68,.1)}
+.irp-sku-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.irp-sku-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.irp-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.irp-cat-card{transition:all .2s ease}
+.irp-cat-card:hover{border-color:hsl(var(--primary)/.2)}
+.irp-cat-dot{box-shadow:0 0 4px currentColor}
+.irp-cat-critical{animation:irp-text-pulse 1.5s ease infinite}
+.irp-method-card{transition:all .2s ease}
+.irp-method-card:hover{border-color:hsl(var(--primary)/.2)}
+.irp-method-metric{transition:background .15s ease}
+.irp-method-metric:hover{background:rgba(0,0,0,.04)}
+.irp-alerts-list{transition:all .2s ease}
+.irp-alerts-list:hover{border-color:rgba(239,68,68,.4)}
+.irp-alert-dot{animation:irp-dot-blink 1.2s ease infinite}
+.irp-insights-row > div{transition:all .2s ease}
+.irp-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes irp-critical-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes irp-pending-blink{0%,100%{border-color:hsl(var(--border))}50%{border-color:hsl(var(--primary)/.4)}}
+@keyframes irp-bar-pulse{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes irp-text-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes irp-dot-blink{0%,100%{opacity:1}50%{opacity:.3}}
+.irp-critical-pulse{animation:irp-critical-pulse 2s ease infinite}
+.irp-pending-blink{animation:irp-pending-blink 1.5s ease infinite}
+.irp-bar-pulse{animation:irp-bar-pulse 1.5s ease infinite}
+
+/* ========== R481: Freight Rate Optimizer Panel (fro-*) ========== */
+.fro-stat-card{min-height:0;background:var(--card);border:1px solid hsl(var(--border));transition:box-shadow .2s ease}
+.fro-stat-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.fro-filter-pill{transition:all .15s ease;border:1px solid transparent}
+.fro-filter-pill:hover{transform:translateY(-1px);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.fro-filter-clear{transition:background .15s ease}
+.fro-filter-clear:hover{background:rgba(239,68,68,.1)}
+.fro-lane-card{transition:all .2s ease;border-color:hsl(var(--border))}
+.fro-lane-card:hover{border-color:hsl(var(--primary)/.3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.fro-id-badge{border:1px solid hsl(var(--border));letter-spacing:.02em}
+.fro-savings-row{transition:all .2s ease}
+.fro-savings-row:hover{border-color:hsl(var(--primary)/.2)}
+.fro-savings-header{transition:all .15s ease}
+.fro-savings-header:hover{background:hsl(var(--muted)/.3)}
+.fro-carrier-card{transition:all .2s ease}
+.fro-carrier-card:hover{border-color:hsl(var(--primary)/.2);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.fro-carrier-metric{transition:background .15s ease}
+.fro-carrier-metric:hover{background:rgba(0,0,0,.04)}
+.fro-mode-tag{transition:all .15s ease}
+.fro-mode-tag:hover{background:hsl(var(--muted))}
+.fro-rate-alert{transition:all .2s ease}
+.fro-rate-alert:hover{border-color:rgba(245,158,11,.4)}
+.fro-insights-row > div{transition:all .2s ease}
+.fro-insights-row > div:hover{border-color:hsl(var(--primary)/.2);background:hsl(var(--muted)/.3)}
+@keyframes fro-spike-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.15)}50%{box-shadow:0 0 0 8px rgba(239,68,68,0)}}
+@keyframes fro-bar-pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.fro-spike-pulse{animation:fro-spike-pulse 2s ease infinite}
+.fro-bar-pulse{animation:fro-bar-pulse 1.5s ease infinite}
+.fro-highcost-border{border-left:3px solid #f59e0b}
