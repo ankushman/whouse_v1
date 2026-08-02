@@ -58174,3 +58174,37 @@ html.theme-transition body {
 .dad-turn-over { background: linear-gradient(90deg, #f59e0b, #ef4444) !important; }
 .dad-util-bar { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s; }
 @keyframes dad-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Pick Performance Analytics (ppa-*) */
+.ppa-filter-pill { transition: all 0.15s; cursor: pointer; }
+.ppa-filter-pill:hover { border-color: hsl(var(--primary)); }
+.ppa-item-card { transition: all 0.2s; }
+.ppa-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ppa-critical { background: linear-gradient(135deg, #fef2f2, #fff); border-color: #fca5a5; animation: ppa-pulse 2s infinite; }
+.ppa-warning { background: linear-gradient(135deg, #fffbeb, #fff); border-left: 3px solid #f59e0b; }
+.ppa-alert-text { color: #dc2626; font-weight: 500; padding: 4px 8px; background: #fef2f2; border-radius: 4px; }
+.ppa-prod-card { transition: all 0.2s; }
+.ppa-prod-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ppa-method-card { transition: all 0.2s; }
+.ppa-method-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ppa-uph-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.ppa-uph-under { background: linear-gradient(90deg, #f59e0b, #ef4444) !important; }
+.ppa-rate-bar { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s; }
+@keyframes ppa-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* Inventory Health Monitor (ihm-*) */
+.ihm-filter-pill { transition: all 0.15s; cursor: pointer; }
+.ihm-filter-pill:hover { border-color: hsl(var(--primary)); }
+.ihm-item-card { transition: all 0.2s; }
+.ihm-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ihm-critical { background: linear-gradient(135deg, #fef2f2, #fff); border-color: #fca5a5; animation: ihm-pulse 2s infinite; }
+.ihm-warning { background: linear-gradient(135deg, #fffbeb, #fff); border-left: 3px solid #f59e0b; }
+.ihm-alert-text { color: #dc2626; font-weight: 500; padding: 4px 8px; background: #fef2f2; border-radius: 4px; }
+.ihm-aging-card { transition: all 0.2s; }
+.ihm-aging-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ihm-value-card { transition: all 0.2s; }
+.ihm-value-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.ihm-aging-bar { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s; }
+.ihm-aging-critical { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.ihm-value-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+@keyframes ihm-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }

@@ -145,3 +145,5 @@ export { CarrierPerformanceDeepDivePanel } from './carrier-performance-deep-dive
 export { WarehouseCapacityPlanningPanel } from './warehouse-capacity-planning-panel'
 export { SustainabilityTrackingPanel } from './sustainability-tracking-panel'
 export { DockAnalyticsDeepDivePanel } from './dock-analytics-deep-dive-panel'
+export { PickPerformanceAnalyticsPanel } from './pick-performance-analytics-panel'
+export { InventoryHealthMonitorPanel } from './inventory-health-monitor-panel'

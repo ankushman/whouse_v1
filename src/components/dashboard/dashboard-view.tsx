@@ -158,6 +158,8 @@ import { CarrierPerformanceDeepDivePanel } from "@/components/shared/carrier-per
 import { WarehouseCapacityPlanningPanel } from "@/components/shared/warehouse-capacity-planning-panel"
 import { SustainabilityTrackingPanel } from "@/components/shared/sustainability-tracking-panel"
 import { DockAnalyticsDeepDivePanel } from "@/components/shared/dock-analytics-deep-dive-panel"
+import { PickPerformanceAnalyticsPanel } from "@/components/shared/pick-performance-analytics-panel"
+import { InventoryHealthMonitorPanel } from "@/components/shared/inventory-health-monitor-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -898,6 +900,18 @@ export function DashboardView() {
           </CardContent>
         </Card>
 
+        {/* Pick Performance Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <PickPerformanceAnalyticsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <InventoryHealthMonitorPanel />
+          </CardContent>
+        </Card>
+
         {/* 3PL Vendor Scorecard */}
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
@@ -1092,6 +1106,18 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <DockAnalyticsDeepDivePanel />
+          </CardContent>
+        </Card>
+
+        {/* Pick Performance Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <PickPerformanceAnalyticsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <InventoryHealthMonitorPanel />
           </CardContent>
         </Card>
 
@@ -1540,6 +1566,16 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <DockAnalyticsDeepDivePanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <PickPerformanceAnalyticsPanel />
+          </CardContent>
+        </Card>
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <InventoryHealthMonitorPanel />
           </CardContent>
         </Card>
       </div>
