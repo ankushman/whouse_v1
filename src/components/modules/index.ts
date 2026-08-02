@@ -446,3 +446,5 @@ export { default as SubseaCableLayingLogisticsView } from './subsea-cable-laying
 export { default as GreenHydrogenEnergyLogisticsView } from './green-hydrogen-energy-logistics-view'
 export { default as SemiconductorFabLogisticsView } from './semiconductor-fab-logistics-view'
 export { default as OffshoreWindLogisticsView } from './offshore-wind-logistics-view'
+export { default as LithiumBatteryCellLogisticsView } from './lithium-battery-cell-logistics-view'
+export { default as CarbonCaptureStorageLogisticsView } from './carbon-capture-storage-logistics-view'

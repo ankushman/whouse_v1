@@ -59935,3 +59935,23 @@ html.theme-transition body {
 .owf-table-wrap table tbody tr { transition: background-color 0.15s ease; }
 .owf-table-wrap table tbody tr:hover { background-color: rgba(15, 23, 42, 0.04); }
 .owf-registry .owf-table-wrap table { border-collapse: separate; border-spacing: 0; }
+
+/* ── R305a: Lithium Battery Cell Logistics (lbc-*) ─────────────────── */
+.lbc-root { font-family: 'Inter', system-ui, sans-serif; }
+.lbc-tabs .lbc-tab { transition: all 0.2s ease; }
+.lbc-tabs .lbc-tab:hover { transform: translateY(-1px); }
+.lbc-dashboard .grid > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.lbc-dashboard .grid > div:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(120, 53, 15, 0.15); }
+.lbc-table-wrap table tbody tr { transition: background-color 0.15s ease; }
+.lbc-table-wrap table tbody tr:hover { background-color: rgba(120, 53, 15, 0.04); }
+.lbc-registry .lbc-table-wrap table { border-collapse: separate; border-spacing: 0; }
+
+/* ── R305b: Carbon Capture Storage Logistics (ccs-*) ─────────────── */
+.ccs-root { font-family: 'Inter', system-ui, sans-serif; }
+.ccs-tabs .ccs-tab { transition: all 0.2s ease; }
+.ccs-tabs .ccs-tab:hover { transform: translateY(-1px); }
+.ccs-dashboard .grid > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.ccs-dashboard .grid > div:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(28, 25, 23, 0.15); }
+.ccs-table-wrap table tbody tr { transition: background-color 0.15s ease; }
+.ccs-table-wrap table tbody tr:hover { background-color: rgba(28, 25, 23, 0.04); }
+.ccs-registry .ccs-table-wrap table { border-collapse: separate; border-spacing: 0; }
