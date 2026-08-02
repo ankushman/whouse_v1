@@ -56984,3 +56984,49 @@ html.theme-transition body {
 .cbt-duty-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 @keyframes cbt-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
 @keyframes cbt-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === Demand Forecasting Panel (dfo-*) === */
+.dfo-stat-card { transition: all 0.2s; }
+.dfo-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dfo-filter-pill { transition: all 0.15s; border: 1px solid transparent; }
+.dfo-filter-pill:hover { border-color: hsl(var(--primary) / 0.3); }
+.dfo-filter-clear { transition: all 0.15s; }
+.dfo-insights-row > div { transition: all 0.2s; }
+.dfo-insights-row > div:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.dfo-forecast-card { transition: all 0.2s; }
+.dfo-forecast-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dfo-critical-pulse { animation: dfo-pulse 2s ease-in-out infinite; }
+.dfo-warning-border { border-left: 3px solid hsl(var(--amber-500)); }
+.dfo-id-badge { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+.dfo-category-tag { font-weight: 600; letter-spacing: 0.02em; }
+.dfo-alert-dot { animation: dfo-dot-pulse 1.5s ease-in-out infinite; }
+.dfo-alerts-list { backdrop-filter: blur(8px); }
+.dfo-model-card { transition: all 0.2s; }
+.dfo-model-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.dfo-alert-row { transition: all 0.2s; }
+.dfo-alert-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes dfo-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+@keyframes dfo-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* === Warehouse Slotting Optimizer Panel (wso-*) === */
+.wso-stat-card { transition: all 0.2s; }
+.wso-stat-card:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wso-filter-pill { transition: all 0.15s; border: 1px solid transparent; }
+.wso-filter-pill:hover { border-color: hsl(var(--primary) / 0.3); }
+.wso-filter-clear { transition: all 0.15s; }
+.wso-insights-row > div { transition: all 0.2s; }
+.wso-insights-row > div:hover { box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.wso-slot-card { transition: all 0.2s; }
+.wso-slot-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wso-critical-pulse { animation: wso-pulse 2s ease-in-out infinite; }
+.wso-warning-border { border-left: 3px solid hsl(var(--amber-500)); }
+.wso-id-badge { font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+.wso-type-tag { font-weight: 600; letter-spacing: 0.02em; }
+.wso-alert-dot { animation: wso-dot-pulse 1.5s ease-in-out infinite; }
+.wso-alerts-list { backdrop-filter: blur(8px); }
+.wso-zone-card { transition: all 0.2s; }
+.wso-zone-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.wso-ergo-row { transition: all 0.2s; }
+.wso-ergo-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes wso-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); } 50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); } }
+@keyframes wso-dot-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }

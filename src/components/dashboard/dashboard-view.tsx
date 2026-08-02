@@ -82,6 +82,8 @@ import { IoTSensorDashboardPanel } from "@/components/shared/iot-sensor-dashboar
 import { MultiModalTransportPlannerPanel } from "@/components/shared/multi-modal-transport-planner-panel"
 import { WarehouseNetworkOptimizationPanel } from "@/components/shared/warehouse-network-optimization-panel"
 import { CrossBorderTradePanel } from "@/components/shared/cross-border-trade-panel"
+import { DemandForecastingPanel } from "@/components/shared/demand-forecasting-panel"
+import { WarehouseSlottingOptimizerPanel } from "@/components/shared/warehouse-slotting-optimizer-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -879,6 +881,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <CrossBorderTradePanel />
+          </CardContent>
+        </Card>
+
+        {/* Demand Forecasting */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <DemandForecastingPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Slotting Optimizer */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseSlottingOptimizerPanel />
           </CardContent>
         </Card>
       </div>
