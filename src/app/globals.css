@@ -58208,3 +58208,35 @@ html.theme-transition body {
 .ihm-aging-critical { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
 .ihm-value-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
 @keyframes ihm-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* MMO - Multi-Modal Optimization Panel */
+.mmo-filter-pill { transition: all 0.15s; }
+.mmo-filter-pill:hover { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+.mmo-card-grid { }
+.mmo-item-card { transition: all 0.2s; }
+.mmo-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.mmo-critical { border-color: #ef4444; border-left: 3px solid #ef4444; animation: mmo-pulse 2s infinite; background: linear-gradient(135deg, #fef2f2, #fff5f5); }
+.mmo-warning { border-left: 3px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fffef5); }
+.mmo-alert-text { color: #dc2626; font-weight: 500; }
+.mmo-cost-bar { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s; }
+.mmo-otp-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.mmo-otp-low { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.mmo-cost-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.mmo-perf-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes mmo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* PKA - Packaging Analytics Panel */
+.pka-filter-pill { transition: all 0.15s; }
+.pka-filter-pill:hover { background: hsl(var(--accent)); color: hsl(var(--accent-foreground)); }
+.pka-card-grid { }
+.pka-item-card { transition: all 0.2s; }
+.pka-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.pka-critical { border-color: #ef4444; border-left: 3px solid #ef4444; animation: pka-pulse 2s infinite; background: linear-gradient(135deg, #fef2f2, #fff5f5); }
+.pka-warning { border-left: 3px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fffef5); }
+.pka-alert-text { color: #dc2626; font-weight: 500; }
+.pka-cost-bar { background: linear-gradient(90deg, #3b82f6, #8b5cf6); transition: width 0.3s; }
+.pka-eco-bar { background: linear-gradient(90deg, #22c55e, #16a34a); transition: width 0.3s; }
+.pka-eco-low { background: linear-gradient(90deg, #ef4444, #dc2626) !important; }
+.pka-cost-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.pka-sust-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+@keyframes pka-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
