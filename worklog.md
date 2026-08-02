@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R489 — Warehouse Network Optimization + Cross-Border Trade
+Agent: Main Agent (Cron Loop)
+Task: R489 — Create warehouse network optimization panel with DC network topology, hub-and-spoke analysis, inter-DC transfer flows, network utilization tracking, capacity planning, bottleneck detection, expansion planning, and network cost analysis across Indian logistics DCs. Plus cross-border trade panel with Indian customs management, HS code tracking, GST/duty calculation, CHA coordination, SEZ handling, documentation verification, risk flagging, vessel/flight tracking, and compliance analytics for India's import/export logistics.
+
+Work Log:
+- Read worklog.md: R488 (commit 8f5964f) added IoTSensorDashboardPanel + MultiModalTransportPlannerPanel (95 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: Globe, Ship, Plane, Truck, FileCheck, Landmark, Shield, ArrowRightLeft, Package, Clock, IndianRupee, AlertTriangle, Stamp, Receipt, FileText, BarChart3, TrendingUp, Target, Scale, Lock, Unlock — all present; Customs, TruckRamp do NOT exist (not needed)
+- Created `src/components/shared/warehouse-network-optimization-panel.tsx` (263 lines) — 10 DC nodes (Mumbai DC-1 Hub/Delhi DC-2 Hub/Bengaluru DC-3 Spoke/Hyderabad DC-4 Spoke/Kolkata DC-5 Spoke/Chennai DC-6 Hub/Pune DC-7 Fulfillment/Jaipur DC-8 Spoke/Ahmedabad DC-9 Fulfillment/Lucknow DC-10 Spoke), 4 regions (West/North/South/East India), 3 DC types (Hub/Spoke/Fulfillment) with color-coded badges, capacity utilization tracking (70-102%) with color bars, monthly volume (8K-42K units), inbound+outbound+inter-DC transfer breakdown, network cost per DC (₹8.6L-₹51.2L), efficiency scoring 70-92%, 2-7 connections per DC, avg transit time, bottleneck detection (Delhi/Kolkata/Jaipur), expansion planning (Bengaluru/Kolkata/Jaipur), INR formatting, 3 views (Nodes with utilization% bars+type badges+efficiency+bottleneck/expansion tags, Flows with transfer ratio progress bars+link counts, Capacity with sorted utilization bars+cost/unit+free capacity). Over Capacity (Kolkata DC-5 102%, Jaipur DC-8 100%) pulses red, bottleneck (Delhi DC-2 Under Pressure) amber border. CSS prefix: wno-*
+- Created `src/components/shared/cross-border-trade-panel.tsx` (281 lines) — 10 shipments across 9 countries (UAE/Belgium/Germany/UK/Sri Lanka/Tanzania/Saudi Arabia/Mexico + SEZ), 10 Indian shippers (Reliance Industries/Tata Motors/Dr Reddy Labs/Wipro Enterprise/ITC Ltd/Mahindra & Mahindra/Sun Pharma/Bajaj Electricals/Larsen & Toubro/Maruti Suzuki), 10 consignees, 5 carriers (Maersk India/MSC India/Hapag-Lloyd/Emirates SkyCargo/British Airways Cargo), Sea+Air modes with dynamic icons, HS code tracking, trade value (₹6.8Cr-₹85Cr), customs duty calculation, GST rates 0-28%, 5 statuses (Cleared/In Transit/Customs Hold/Documentation/SEZ Clearance), 4 doc statuses (Verified/Pending/Under Review/Invalid) with lock/unlock icons, 3 risk levels (Low/Medium/High), vessel/flight tracking, ETA, clearance days, IGM/AWB references, 5 CHAs (V Xport/DHL/Expeditors/BlueDart/Container Corp), INR formatting, 3 views (Shipments with vessel+HS code+doc status+risk badge+ETA+CHA, Compliance with status-sorted list+doc verification+lock icons+clearance days, Duty with sorted duty amounts+effective rate bars+SEZ count+net value). Customs Hold (Dr Reddy's CBT-03, L&T CBT-09 invalid docs) pulse red, Documentation Pending (ITC CBT-05, Bajaj CBT-08) amber border. CSS prefix: cbt-*
+- Cleaned unused imports: Globe, Truck, TrainFront, ArrowRightLeft, TrendingDown, Activity from WNO; ArrowRightLeft, Package, Receipt, BarChart3, Activity from CBT
+- Registered both in shared/index.ts (95→97 exports) and dashboard-view.tsx (873→889 lines)
+- CSS appended to globals.css (56,941→56,986 lines, +45 CSS for wno-* and cbt-*)
+- TSC: 0 errors | Git pushed: commit 6c01ed6
+
+Stage Summary:
+- 97 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 889 lines | globals.css: 56,986 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: 3PL contract management, digital twin visualization, demand forecasting panel, or warehouse slotting optimization ***
+---
 Task ID: R488 — IoT Sensor Dashboard + Multi-Modal Transport Planner
 Agent: Main Agent (Cron Loop)
 Task: R488 — Create IoT sensor monitoring dashboard with real-time temperature, humidity, motion, and occupancy sensor tracking across Indian warehouse zones, battery/signal health monitoring, threshold alerting, firmware version management, and sensor health analytics. Plus multi-modal transport planning panel with route optimization across road/rail/air/sea modes, cost comparison, carbon footprint analysis, transit time tracking, reliability scoring, and carrier performance for Indian logistics network.
