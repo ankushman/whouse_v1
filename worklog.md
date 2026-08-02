@@ -1,5 +1,26 @@
 ---
 ---
+Task ID: R501 — Predictive Maintenance Analytics + Demand Sensing Analytics
+Agent: Main Agent (Cron Loop)
+Task: R501 — Create predictive maintenance analytics panel with equipment health scoring, MTBF/MTTR reliability metrics, vibration and temperature sensor monitoring, maintenance scheduling with overdue detection, asset lifecycle tracking, vendor management, downtime cost analysis, risk scoring 1-10/10, 10 equipment types (Conveyor/Forklift/Refrigeration/Dock Equip/Sorter/Packaging/Material Handling/IT Equipment/Storage System/Energy System), age and cycle tracking, and 10 Indian DC asset fleet management. Plus demand sensing analytics panel with real-time demand signal detection, forecast accuracy tracking, weather impact analytics (Normal/Heavy Rain/Heat Wave), seasonal demand patterns (Diwali/Monsoon/Summer/Back to School/Regular), festival surge prediction, multi-channel demand visibility, confidence scoring, stock days coverage, lead time optimization, variance analysis, Indian FMCG/fashion/electronics demand patterns, and 8 Indian supplier tracking.
+
+Work Log:
+- Read worklog.md: R500 (commit 3830eb0) added WarehouseLaborAnalyticsPanel + CustomsComplianceTrackerPanel (117 shared components)
+- TSC pre-validation: 0 errors in src/
+- Verified icons: Wrench, Gauge, Thermometer, Activity, AlertTriangle, CheckCircle, XCircle, Timer, Zap, Settings, Brain, TrendingUp, BarChart3, Sun, CloudRain, Flame, ShoppingBag, Target, Calendar all OK; Target/Clock/TrendingUp removed from PMA (unused); TrendingDown/IndianRupee/Cloud removed from DSA (unused)
+- Created `src/components/shared/predictive-maintenance-analytics-panel.tsx` (258 lines) — 10 assets across 10 types with color badges, health 38-95%, MTBF 96-720h, MTTR 1.5-18h, vibration 0.2-7.1mm/s, temp -18 to 78C, age 2-14yr, cycles 45K-340K, maintenance cost 8K-62K/month, downtime 2-48h, risk score 1-10, overdue tracking, 10 vendors (Siemens India/Toyota Material/Blue Star/Rite-Hite/Beumer Group/Lantech/Crown Equip/Zebra Tech/SSI Schaefer/ABB India), 4 statuses (Healthy/Warning/At Risk/Critical), INR formatting, 3 views (Assets with type+health+MTBF+MTTR+vibration+temp+cycles, Reliability with sorted health% bars+MTBF+MTTR+age+cycles, Cost with sorted maint cost bars+downtime+loss+health+vendor). Critical (PMA-04 Dock Leveler DL-4, health 45%, vibration 6.2, 36h downtime, OVERDUE; PMA-07 Pallet Jack PJ-12, health 38%, vibration 7.1, 48h downtime, OVERDUE) pulse red, At Risk/Warning (PMA-02, PMA-06, PMA-09) amber border. CSS prefix: pma-*
+- Created `src/components/shared/demand-sensing-analytics-panel.tsx` (261 lines) — 10 products across 7 categories (FMCG/Fashion/Electronics/Gifting/Appliances/Health/Education/Dairy), 6 demand signals (Festival Surge/Seasonal Drop/Trend Driven/Weather Spike/Seasonal Peak/Steady State) with color badges, weather icons (Sun/CloudRain/Flame), accuracy 65-96%, forecast vs actual variance -13.9% to +40%, confidence 48-96%, stock days 4-35, lead time 2-21d, 4 demand levels (Stable/Moderate/High/Spike/Critical), 8 suppliers (LT Foods/Arvind/Nillkin/Bisleri/ITC Gifts/Voltas/Dabur/Wildcraft/Decathlon/Amul), 4 statuses (Accurate/Warning/Missed/Critical Miss), 3 views (Signals with weather icon+signal+demand+stock+confidence+forecast/actual, Accuracy with sorted accuracy% bars+confidence+variance+signal+stock, Seasonal with aggregated accuracy+forecast+actual+stock+channels by season). Critical Miss (DSA-04 Water, 37.1% miss, heat wave, stock 5d) pulse red, Missed/Warning (DSA-02, DSA-06, DSA-08, DSA-09) amber border. CSS prefix: dsa-*
+- Cleaned unused imports: Target/Clock/TrendingUp from PMA; TrendingDown/IndianRupee/Cloud from DSA
+- Registered both in shared/index.ts (116 exports) and dashboard-view.tsx (1065→1081 lines)
+- CSS appended to globals.css (57,643→57,701 lines, +58 CSS for pma-* and dsa-*)
+- TSC: 0 errors | Git pushed: commit c2ff2a5
+
+Stage Summary:
+- 119 shared .tsx files total (+2 this round)
+- dashboard-view.tsx: 1081 lines | globals.css: 57,701 lines
+- TSC: 0 errors in src/
+- *** NEXT PHASE: 3PL contract optimization, warehouse network monitoring, quality management system, or fulfillment analytics ***
+---
 Task ID: R500 — Warehouse Labor Analytics + Customs Compliance Tracker
 Agent: Main Agent (Cron Loop)
 Task: R500 — Create warehouse labor analytics panel with shift-level workforce tracking across 10 Indian DCs, 4 skill levels (Semi-Skilled/Skilled/Specialized/Trainee), headcount and attendance analytics, UPH (units per hour) productivity tracking, cost per unit and monthly labor cost analysis, overtime monitoring, training hours compliance, safety incident tracking, supervisor management, and Indian labor law (Factories Act/ESIC/PF) compliance scoring. Plus customs compliance tracker panel with Bill of Entry management, HS code classification, 8+ origin country tracking, 7 Indian port coverage (Nhava Sheva/Chennai/Kolkata/Mundra/Cochin/Visakhapatnam/Tuticorin), 5 trade regimes (Normal/SAARC/SAFTA/ASEAN/SEZ), duty rate analytics (Basic+IGST+Cess+SWS), assessed value and duty amount calculation, IGST rate tracking, dwell time monitoring, physical examination flagging, hazardous cargo classification, customs broker management, risk scoring, and Indian Customs Act compliance.
