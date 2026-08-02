@@ -404,6 +404,8 @@ import EwayBillExpiryTrackerView from "@/components/modules/eway-bill-expiry-tra
 import InlandContainerDepotCommandView from "@/components/modules/inland-container-depot-command-view"
 import FreightForwardingCommandView from "@/components/modules/freight-forwarding-command-view"
 import CoastalShippingWaterwayView from "@/components/modules/coastal-shipping-waterway-view"
+import FmcgSuperstockistNetworkView from "@/components/modules/fmcg-superstockist-network-view"
+import AutomotiveLogisticsCommandView from "@/components/modules/automotive-logistics-command-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -807,6 +809,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "inland-container-depot-command": InlandContainerDepotCommandView,
   "freight-forwarding-command": FreightForwardingCommandView,
   "coastal-shipping-waterway": CoastalShippingWaterwayView,
+  "fmcg-superstockist-network": FmcgSuperstockistNetworkView,
+  "automotive-logistics-command": AutomotiveLogisticsCommandView,
 }
 
 

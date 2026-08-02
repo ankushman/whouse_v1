@@ -394,3 +394,5 @@ export { default as EwayBillExpiryTrackerView } from './eway-bill-expiry-tracker
 export { default as InlandContainerDepotCommandView } from './inland-container-depot-command-view'
 export { default as FreightForwardingCommandView } from './freight-forwarding-command-view'
 export { default as CoastalShippingWaterwayView } from './coastal-shipping-waterway-view'
+export { default as FmcgSuperstockistNetworkView } from './fmcg-superstockist-network-view'
+export { default as AutomotiveLogisticsCommandView } from './automotive-logistics-command-view'

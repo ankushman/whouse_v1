@@ -400,6 +400,8 @@ export const navItems: NavItem[] = [
   { id: 'inland-container-depot-command', label: 'ICD Command', icon: 'Container', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'operations_planner'] },
   { id: 'freight-forwarding-command', label: 'Freight Forwarding', icon: 'Globe2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'procurement'] },
   { id: 'coastal-shipping-waterway', label: 'Coastal & Waterway', icon: 'Waves', group: 'transport', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics'] },
+  { id: 'fmcg-superstockist-network', label: 'FMCG Superstockist', icon: 'ShoppingCart', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'automotive-logistics-command', label: 'Auto Logistics', icon: 'Car', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor', 'operator'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
