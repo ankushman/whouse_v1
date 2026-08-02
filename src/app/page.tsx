@@ -422,6 +422,8 @@ import MetroRailLogisticsView from "@/components/modules/metro-rail-logistics-vi
 import QuickCommerceLogisticsView from "@/components/modules/quick-commerce-logistics-view"
 import LpgDistributionLogisticsView from "@/components/modules/lpg-distribution-logistics-view"
 import EWasteRecyclingLogisticsView from "@/components/modules/e-waste-recycling-logistics-view"
+import DairyFarmLogisticsView from "@/components/modules/dairy-farm-logistics-view"
+import TextileMillLogisticsView from "@/components/modules/textile-mill-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -843,6 +845,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "quick-commerce-logistics": QuickCommerceLogisticsView,
   "lpg-distribution-logistics": LpgDistributionLogisticsView,
   "e-waste-recycling-logistics": EWasteRecyclingLogisticsView,
+  "dairy-farm-logistics": DairyFarmLogisticsView,
+  "textile-mill-logistics": TextileMillLogisticsView,
 }
 
 

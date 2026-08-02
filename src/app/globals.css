@@ -59301,3 +59301,43 @@ html.theme-transition body {
 .ewr-insight { transition: all 0.25s ease; border-left: 3px solid #d1fae5; }
 .ewr-insight:hover { box-shadow: 0 6px 20px rgba(5, 150, 105, 0.12); transform: translateY(-2px); }
 @keyframes ewr-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ===== Dairy Farm Logistics (dfl-*) ===== */
+.dfl-root { animation: dfl-fade 0.3s ease; }
+.dfl-tab { transition: all 0.2s ease; }
+.dfl-tab:hover { background: rgba(3, 105, 161, 0.08); }
+.dfl-kpi { border-left: 3px solid #0369a1; transition: all 0.2s ease; }
+.dfl-kpi:hover { box-shadow: 0 4px 12px rgba(3, 105, 161, 0.1); transform: translateY(-1px); }
+.dfl-kpi-label { letter-spacing: 0.025em; }
+.dfl-kpi-val { font-variant-numeric: tabular-nums; }
+.dfl-kpi-sub { margin-top: 2px; }
+.dfl-chart { transition: box-shadow 0.2s ease; }
+.dfl-chart:hover { box-shadow: 0 2px 8px rgba(3, 105, 161, 0.08); }
+.dfl-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.dfl-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.dfl-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.dfl-row-warning { border-left: 3px solid #d97706 !important; }
+.dfl-row-info { border-left: 3px solid #2563eb !important; }
+.dfl-insight { transition: all 0.25s ease; border-left: 3px solid #bae6fd; }
+.dfl-insight:hover { box-shadow: 0 6px 20px rgba(3, 105, 161, 0.12); transform: translateY(-2px); }
+@keyframes dfl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ===== Textile Mill Logistics (txl-*) ===== */
+.txl-root { animation: txl-fade 0.3s ease; }
+.txl-tab { transition: all 0.2s ease; }
+.txl-tab:hover { background: rgba(124, 58, 237, 0.08); }
+.txl-kpi { border-left: 3px solid #7c3aed; transition: all 0.2s ease; }
+.txl-kpi:hover { box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1); transform: translateY(-1px); }
+.txl-kpi-label { letter-spacing: 0.025em; }
+.txl-kpi-val { font-variant-numeric: tabular-nums; }
+.txl-kpi-sub { margin-top: 2px; }
+.txl-chart { transition: box-shadow 0.2s ease; }
+.txl-chart:hover { box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08); }
+.txl-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.txl-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.txl-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.txl-row-warning { border-left: 3px solid #d97706 !important; }
+.txl-row-info { border-left: 3px solid #2563eb !important; }
+.txl-insight { transition: all 0.25s ease; border-left: 3px solid #ede9fe; }
+.txl-insight:hover { box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12); transform: translateY(-2px); }
+@keyframes txl-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
