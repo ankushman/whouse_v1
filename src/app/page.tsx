@@ -452,6 +452,8 @@ import DefenseLogisticsView from "@/components/modules/defense-logistics-view"
 import AviationGroundHandlingLogisticsView from "@/components/modules/aviation-ground-handling-logistics-view"
 import SmartCityLogisticsView from "@/components/modules/smart-city-logistics-view"
 import SmartGridPowerLogisticsView from "@/components/modules/smart-grid-power-logistics-view"
+import SubseaCableLayingLogisticsView from "@/components/modules/subsea-cable-laying-logistics-view"
+import GreenHydrogenEnergyLogisticsView from "@/components/modules/green-hydrogen-energy-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -903,6 +905,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "aviation-ground-handling": AviationGroundHandlingLogisticsView,
   "smart-city-logistics": SmartCityLogisticsView,
   "smart-grid-power": SmartGridPowerLogisticsView,
+  "subsea-cable-laying": SubseaCableLayingLogisticsView,
+  "green-hydrogen-energy": GreenHydrogenEnergyLogisticsView,
 }
 
 

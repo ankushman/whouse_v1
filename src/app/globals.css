@@ -59895,3 +59895,23 @@ html.theme-transition body {
 .sgr-insight { border-left: 4px solid var(--accent); }
 .sgr-insight h3 { color: var(--accent); }
 @keyframes sgr-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+/* ── R303a: Subsea Cable Laying Logistics (scl-*) ──────────────────────── */
+.scl-root { font-family: 'Inter', system-ui, sans-serif; }
+.scl-tabs .scl-tab { transition: all 0.2s ease; }
+.scl-tabs .scl-tab:hover { transform: translateY(-1px); }
+.scl-dashboard .grid > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.scl-dashboard .grid > div:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(12, 45, 72, 0.15); }
+.scl-table-wrap table tbody tr { transition: background-color 0.15s ease; }
+.scl-table-wrap table tbody tr:hover { background-color: rgba(12, 45, 72, 0.04); }
+.scl-registry .sgr-table-wrap table { border-collapse: separate; border-spacing: 0; }
+
+/* ── R303b: Green Hydrogen Energy Logistics (ghy-*) ──────────────────── */
+.ghy-root { font-family: 'Inter', system-ui, sans-serif; }
+.ghy-tabs .ghy-tab { transition: all 0.2s ease; }
+.ghy-tabs .ghy-tab:hover { transform: translateY(-1px); }
+.ghy-dashboard .grid > div { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.ghy-dashboard .grid > div:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(6, 78, 59, 0.15); }
+.ghy-table-wrap table tbody tr { transition: background-color 0.15s ease; }
+.ghy-table-wrap table tbody tr:hover { background-color: rgba(6, 78, 59, 0.04); }
+.ghy-registry .ghy-table-wrap table { border-collapse: separate; border-spacing: 0; }
