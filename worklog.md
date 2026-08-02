@@ -1,4 +1,23 @@
 ---
+Task ID: R308 — Hydroelectric Dam Construction + Tunnel Boring Machine Logistics
+Agent: Main Agent (Cron Loop)
+Task: R308 — 2 new Indian logistics modules for hydroelectric dam construction (NHPC NTPC SJVN THDC NEEPCO NHDC JKPDC AP Genco — 3000MW concrete gravity 1500MW earthfill rockfill 800MW arch 500MW run-of-river 1200MW underground pumped storage, Francis Pelton Kaplan reversible turbine, penstock steel liner, spillway gate hoist, Satluj Brahmaputra Narmada Indus Ganga basin) and tunnel boring machine (LT Afcons Dilip Buildcon JK Infra Gulfar SP Shapoorji ITD NCC — TBM 6.3m EPB 12.5m slurry 8.5m hard rock 14.5m mixed ground, Herrenknecht Robbins CRCHI Kawasaki Hitachi Zosen, Mumbai Coastal Road Delhi RRTS Chennai Metro Bangalore Metro Kolkata East-West NATM drill blast)
+
+Work Log:
+- Read worklog: R307 complete (commit 6baadb1), 448 modules, 460 navItems, 59,989 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate check: 0 duplicates for hydroelectric-dam-construction, tunnel-boring-machine
+- Icons: Droplets (hydro dam), Drill (TBM) verified in app-layout.tsx iconMap
+- Created Hydroelectric Dam Construction Logistics (R308a): ~223 lines, hdc-* deep teal #134e4a, 14 records, 4 tabs
+- Created Tunnel Boring Machine Logistics (R308b): ~512 lines, tbm-* dark slate #1e293b, 14 records, 4 tabs
+- Registered both in index.ts (449 exports), page.tsx, app-store.ts (462 navItems)
+- CSS: 16 lines appended to globals.css (60,005 lines total)
+- TSC FINAL: 0 errors in src/components/modules
+- Git: commit 9797e1b pushed to origin/main
+
+Stage Summary:
+- MODULE FILES: 450 (+2) | NAVITEMS: 462 (+2) | CSS: 60,005 lines (+16)
+- TSC: 0 errors (modules) | GITHUB: pushed (9797e1b)
 Task ID: R307 — Solar Farm Construction + Waste-to-Energy Plant Logistics
 Agent: Main Agent (Cron Loop)
 Task: R307 — 2 new Indian logistics modules for solar farm construction (Adani Green Reliance Tata Power NTPC Azure ReNew Greenko Vikram Solar — 500MW Mono PERC tracker 250MW bifacial 1GW HJT floating 100MW agrivoltaic, Bhadla Pavagada Kurnool Jaisalmer, pile foundation NEXTracker Arctech SMA Huawei TMEIC inverter, grid connectivity COD) and waste-to-energy plant (NEpra Green Ramky Enviro Ecotech Abellon GreenZest Ecoman MGS Jindal SAW — 14MW mass burn 8MW RDF 25MW gasification 5MW biomethanation 12MW pyrolysis, MSW RDF tire plastic organic, boiler reactor SCR bag filter, CPCB EU MoEFCC emission)
