@@ -74,6 +74,8 @@ import { RailConsignmentPanel } from "@/components/shared/rail-consignment-panel
 import { GateManagementPanel } from "@/components/shared/gate-management-panel"
 import { ValueAddedServicesPanel } from "@/components/shared/value-added-services-panel"
 import { LastMileDeliveryPanel } from "@/components/shared/last-mile-delivery-panel"
+import { WarehouseEnergyAnalyticsPanel } from "@/components/shared/warehouse-energy-analytics-panel"
+import { SafetyCompliancePanel } from "@/components/shared/safety-compliance-panel"
 import { cn } from "@/lib/utils"
 import { useAppStore } from "@/store/app-store"
 import { useRealtimeKpi } from "@/hooks/use-realtime-kpi"
@@ -815,6 +817,20 @@ export function DashboardView() {
         <Card className="card-depth overflow-hidden border-primary/10">
           <CardContent className="p-4">
             <LastMileDeliveryPanel />
+          </CardContent>
+        </Card>
+
+        {/* Warehouse Energy Analytics */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <WarehouseEnergyAnalyticsPanel />
+          </CardContent>
+        </Card>
+
+        {/* Safety Compliance */}
+        <Card className="card-depth overflow-hidden border-primary/10">
+          <CardContent className="p-4">
+            <SafetyCompliancePanel />
           </CardContent>
         </Card>
       </div>
