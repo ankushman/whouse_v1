@@ -1,4 +1,85 @@
 ---
+Task ID: R291 — Newsprint Publishing Logistics + Steel Scrap Recycling Logistics
+Agent: Main Agent (Cron Loop)
+Task: R291 — 2 new Indian logistics modules for newsprint publishing supply chain (Dainik Jagran/TOI/Malayala Manorama, 1300+ newspapers, CTP platemaking, web offset presses, press van/rail/hawker distribution) and steel scrap recycling (30 MT annually, Alang shipbreaking, EAF/IF melting, HMS/SS/Al/Cu recovery, RVSF vehicle scrapping)
+
+Work Log:
+- Read worklog.md: R290 complete (commit b952c94), 414 modules, 420 navItems, 59,385 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/
+- Duplicate check: 0 duplicate navItem IDs, 0 duplicate imports, 0 duplicate exports
+- agent-browser QA skipped (dev server OOM, known infra issue — TSC used as QA gate)
+
+- Created Newsprint Publishing Logistics module (R291a):
+  * FILE: src/components/modules/newsprint-publishing-logistics-view.tsx (195 lines)
+  * 4 tabs: Dashboard | Edition Registry | Publishing Analytics | Insights
+  * Theme: Teal #0f766e, CSS prefix: npl-*
+  * Tab 0: 4 KPIs (In Print/Platemaking, In Transit/Dispatched, Delivered/At Hub, Total Ad Revenue), BarChart monthly editions (English/Hindi/Regional/Tabloid), PieChart category distribution (8 types), LineChart print efficiency vs 97.5% target, BarChart press performance
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/category/zone/mode) + ModuleBreadcrumb, 14 edition records with Edition ID badge (teal), press, zone, category, title, copies (K), vendor, mode, print/ETA dates, transit hours, ad revenue (lakhs), breaking flag (BRK/REG), status (6 states), remarks
+  * Tab 2: BarChart edition volume by zone, stacked AreaChart copies by category corridor (English/Hindi/Regional), BarChart avg transit hours by transport mode
+  * Tab 3: 4 insights (Rs 32,000 crore industry 1300+ newspapers 46 crore daily readers, editorial to plate to print 11hr overnight cycle, press van rail wagon hawker multi-tier distribution, CTP web offset digital integration revenue transformation)
+  * 8 presses, 8 categories, 6 edition statuses, 6 transport modes, 6 zones, 14 records
+  * Warning rows (Platemaking/Printing): amber bg; Info (In Transit/Dispatched): blue bg; no critical rows
+
+- Created Steel Scrap Recycling Logistics module (R291b):
+  * FILE: src/components/modules/steel-scrap-recycling-logistics-view.tsx (195 lines)
+  * 4 tabs: Dashboard | Scrap Registry | Recycling Analytics | Insights
+  * Theme: Amber #b45309, CSS prefix: ssr-*
+  * Tab 0: 4 KPIs (Collection/Weighed, Processing/EAF, Recycled/Dispatched, Total Scrap Value), BarChart monthly scrap (HMS/Turnings/CastIron/Auto), PieChart category distribution (8 types), LineChart recovery rate vs 95% target, BarChart yard performance
+  * Tab 1: SearchFilterToolbar (4 filter groups: status/category/zone/mode) + ModuleBreadcrumb, 14 scrap records with Lot ID badge (amber), yard, zone, category, grade, weight (T), supplier, mode, collect/ETA dates, transit days, value (lakhs), priority flag (PRIO/STD), status (6 states), remarks
+  * Tab 2: BarChart scrap volume by zone, stacked AreaChart collection by category corridor (HMS/Turnings/CastIron), BarChart avg transit days by transport mode
+  * Tab 3: 4 insights (30 MT annually Rs 1.5L Cr market Alang world largest shipbreaking, collection sorting shredding melting casting EAF process, Hyva tipper rail wagon container logistics, green steel circular economy EAF carbon reduction RVSF blockchain)
+  * 8 yards, 8 categories, 6 scrap statuses, 6 transport modes, 6 zones, 14 records
+  * Critical rows (Melting/EAF): red bg; Warning (Processing/Graded): amber bg; Info (In Transit): blue bg
+
+- Registered both modules in 3 files:
+  * src/components/modules/index.ts: +NewsprintPublishingLogisticsView +SteelScrapRecyclingLogisticsView (419->421 exports)
+  * src/app/page.tsx: +2 imports + 2 viewMap entries
+  * src/store/app-store.ts: +2 navItems (newsprint-publishing-logistics: icon Rss group operations, steel-scrap-recycling-logistics: icon Siren group operations)
+
+- CSS additions: 41 lines (npl-* teal + ssr-* amber classes with row highlighting, hover effects, keyframe animations)
+
+- TSC FINAL: 0 errors in src/
+- Duplicate verification: 0 duplicate navItem IDs, 0 duplicate imports
+- Git: commit c2e30f3 pushed to origin/main
+
+Stage Summary:
+- NEW MODULE: Newsprint Publishing Logistics (195 lines, 8 visual components, 14 edition records, 4 tabs)
+- NEW MODULE: Steel Scrap Recycling Logistics (195 lines, 8 visual components, 14 scrap records, 4 tabs)
+- Total module files: 416 (was 414, +2)
+- Total navItems: 422 (was 420, +2)
+- CSS: 59,426 lines (+41 from R291)
+- Total data: 28 records across both modules
+- ZERO src/ TSC errors
+- ZERO duplicate entries
+- GITHUB: Pushed to origin/main (c2e30f3)
+
+## Updated Project Status (Post Round 291)
+- STATUS: STABLE — ALL modules compile, 0 TSC errors, 0 duplicates
+- MODULE FILES: 416 | NAVITEMS: 422
+- SHARED COMPONENTS: 151 (150 .tsx + index.ts)
+- HOOKS: 13
+- CSS: 59,426 lines
+- TSC: 0 errors in src/
+- GITHUB: Pushed to origin/main
+
+KNOWN ISSUES:
+- Dev server OOM / Build OOM: known infra issue, TSC + SWC passes as QA gate
+- Concurrent cron jobs can create duplicate entries (monitor each round)
+- Many older modules still use default imports for shared components (works due to added default exports, but should migrate to named imports)
+- SearchFilterToolbar not integrated into all table-based modules
+- JSX escaping gotcha: &gt;= does NOT work inside template literals within JSX expressions — must use >=
+- Variable shadowing gotcha: map(r => ... records.filter(r => ...)) — inner r shadows outer, rename inner vars
+
+PRIORITY NEXT (for cron job):
+1. Create new logistics modules (suggestions: Port Terminal Operations, Railway Freight Logistics, Solar Panel Recycling, Mining Equipment Logistics, Petroleum Tank Farm, Courier Express Logistics, Defence Ordnance Supply, Aerospace Parts Logistics)
+2. Migrate remaining modules from default to named imports for shared components
+3. Cross-module drill-down navigation (click value -> navigate to related module)
+4. Real-time WebSocket events for live updates
+5. Mobile experience enhancements with sheet drawers
+6. Dashboard home page widgets enhancement
+7. Always verify no duplicate entries from concurrent cron jobs before adding new ones
+
+---
 Task ID: R290 — FMCG Distribution Logistics + Cement Blend Logistics
 Agent: Main Agent (Cron Loop)
 Task: R290 — 2 new Indian logistics modules for FMCG distribution network (HUL/Nestle/ITC/Britannia supply chain, modern trade, general trade) and cement industry (UltraTech/Ambuja/Shree, clinkerization, bulk cement transport, RMC mixers)
