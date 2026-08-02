@@ -394,6 +394,8 @@ import TransportRateIntelligenceView from "@/components/modules/transport-rate-i
 import VehicleInspectionComplianceView from "@/components/modules/vehicle-inspection-compliance-view"
 import FastagTollIntelligenceView from "@/components/modules/fastag-toll-intelligence-view"
 import WarehouseLabourWorkforceAnalyticsView from "@/components/modules/warehouse-labour-workforce-analytics-view"
+import GstInvoiceEInvoicingCommandView from "@/components/modules/gst-invoice-e-invoicing-command-view"
+import FreightInvoiceReconciliationView from "@/components/modules/freight-invoice-reconciliation-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -787,6 +789,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "vehicle-inspection-compliance": VehicleInspectionComplianceView,
   "fastag-toll-intelligence": FastagTollIntelligenceView,
   "warehouse-labour-workforce-analytics": WarehouseLabourWorkforceAnalyticsView,
+  "gst-invoice-e-invoicing-command": GstInvoiceEInvoicingCommandView,
+  "freight-invoice-reconciliation": FreightInvoiceReconciliationView,
 }
 
 

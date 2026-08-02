@@ -58630,3 +58630,61 @@ html.theme-transition body {
 .wlwa-insight { transition: box-shadow 0.2s; }
 .wlwa-insight:hover { box-shadow: 0 4px 12px rgba(13, 148, 136, 0.12); }
 @keyframes wlwa-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
+
+/* ===== GST Invoice & E-Invoicing Command (gie-*) ===== */
+.gie-root { font-family: system-ui, -apple-system, sans-serif; }
+.gie-tabs { border-bottom: 2px solid #e2e8f0; }
+.gie-tab { transition: all 0.15s ease; cursor: pointer; border: none; outline: none; }
+.gie-tab:hover { background: #f0fdfa; }
+.gie-tab.active { background: #0f766e; color: white; }
+.gie-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.gie-kpi { border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; background: white; transition: box-shadow 0.2s; }
+.gie-kpi:hover { box-shadow: 0 2px 8px rgba(15, 118, 110, 0.1); }
+.gie-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.gie-kpi-val { font-size: 1.5rem; font-weight: 700; color: #0f766e; }
+.gie-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.gie-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+.gie-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.gie-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.gie-table-wrap table { border-collapse: collapse; }
+.gie-table-wrap th { background: #f9fafb; border-bottom: 1px solid #e5e7eb; }
+.gie-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.gie-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.gie-irn { font-size: 0.7rem; background: #ccfbf1; color: #0f766e; }
+.gie-amount-bar { transition: width 0.4s ease; background: #14b8a6; }
+.gie-eway { background: #dcfce7; color: #16a34a; }
+.gie-itc { background: #ccfbf1; color: #0f766e; }
+.gie-no-itc { background: #f1f5f9; color: #94a3b8; }
+.gie-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.gie-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.gie-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.gie-insight { transition: box-shadow 0.2s; }
+.gie-insight:hover { box-shadow: 0 4px 12px rgba(15, 118, 110, 0.12); }
+@keyframes gie-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ===== Freight Invoice Reconciliation (fir-*) ===== */
+.fir-root { font-family: system-ui, -apple-system, sans-serif; }
+.fir-tabs { border-bottom: 2px solid #e2e8f0; }
+.fir-tab { transition: all 0.15s ease; cursor: pointer; border: none; outline: none; }
+.fir-tab:hover { background: #f5f3ff; }
+.fir-tab.active { background: #7c3aed; color: white; }
+.fir-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.fir-kpi { border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; background: white; transition: box-shadow 0.2s; }
+.fir-kpi:hover { box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1); }
+.fir-kpi-label { font-size: 0.75rem; color: #6b7280; margin-bottom: 4px; }
+.fir-kpi-val { font-size: 1.5rem; font-weight: 700; color: #7c3aed; }
+.fir-kpi-sub { font-size: 0.75rem; color: #9ca3af; margin-top: 2px; }
+.fir-chart { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; }
+.fir-chart h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; color: #1f2937; }
+.fir-table-wrap { overflow-x: auto; background: white; border: 1px solid #e2e8f0; border-radius: 8px; }
+.fir-table-wrap table { border-collapse: collapse; }
+.fir-table-wrap th { background: #f9fafb; border-bottom: 1px solid #e5e7eb; }
+.fir-table-wrap td { padding: 8px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: middle; }
+.fir-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 500; }
+.fir-varbar { transition: width 0.4s ease; background: #ef4444; }
+.fir-row-critical { background: #fef2f2 !important; border-left: 3px solid #dc2626; }
+.fir-row-warning { background: #fffbeb !important; border-left: 3px solid #d97706; }
+.fir-insights { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.fir-insight { transition: box-shadow 0.2s; }
+.fir-insight:hover { box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12); }
+@keyframes fir-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }

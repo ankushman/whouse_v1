@@ -384,3 +384,5 @@ export { default as TransportRateIntelligenceView } from './transport-rate-intel
 export { default as VehicleInspectionComplianceView } from './vehicle-inspection-compliance-view'
 export { default as FastagTollIntelligenceView } from './fastag-toll-intelligence-view'
 export { default as WarehouseLabourWorkforceAnalyticsView } from './warehouse-labour-workforce-analytics-view'
+export { default as GstInvoiceEInvoicingCommandView } from './gst-invoice-e-invoicing-command-view'
+export { default as FreightInvoiceReconciliationView } from './freight-invoice-reconciliation-view'

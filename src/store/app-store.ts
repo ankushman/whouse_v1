@@ -390,6 +390,8 @@ export const navItems: NavItem[] = [
   { id: 'vehicle-inspection-compliance', label: 'Vehicle Inspection', icon: 'ClipboardCheck', group: 'transport', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner', 'logistics'] },
   { id: 'fastag-toll-intelligence', label: 'FASTag Toll Intel', icon: 'Receipt', group: 'transport', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'finance'] },
   { id: 'warehouse-labour-workforce-analytics', label: 'Labour Workforce', icon: 'Users', group: 'warehouse', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'operations_planner', 'hr'] },
+  { id: 'gst-invoice-e-invoicing-command', label: 'GST E-Invoicing', icon: 'QrCode', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'finance', 'operations_planner'] },
+  { id: 'freight-invoice-reconciliation', label: 'Freight Audit', icon: 'Scale', group: 'analytics', roles: ['super_admin', 'executive', 'regional_manager', 'finance', 'logistics'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
