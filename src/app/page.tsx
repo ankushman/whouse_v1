@@ -428,6 +428,8 @@ import FmcgDistributionLogisticsView from "@/components/modules/fmcg-distributio
 import CementBlendLogisticsView from "@/components/modules/cement-blend-logistics-view"
 import NewsprintPublishingLogisticsView from "@/components/modules/newsprint-publishing-logistics-view"
 import SteelScrapRecyclingLogisticsView from "@/components/modules/steel-scrap-recycling-logistics-view"
+import CourierExpressLogisticsView from "@/components/modules/courier-express-logistics-view"
+import PetroleumTankFarmLogisticsView from "@/components/modules/petroleum-tank-farm-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -855,6 +857,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "cement-blend-logistics": CementBlendLogisticsView,
   "newsprint-publishing-logistics": NewsprintPublishingLogisticsView,
   "steel-scrap-recycling-logistics": SteelScrapRecyclingLogisticsView,
+  "courier-express-logistics": CourierExpressLogisticsView,
+  "petroleum-tank-farm-logistics": PetroleumTankFarmLogisticsView,
 }
 
 

@@ -59417,3 +59417,39 @@ html.theme-transition body {
 .ssr-insight { transition: all 0.25s ease; border-left: 3px solid #fbbf24; }
 .ssr-insight:hover { box-shadow: 0 6px 20px rgba(180, 83, 9, 0.12); transform: translateY(-2px); }
 @keyframes ssr-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* Courier Express Logistics (cxr-*) - Indigo #4338ca */
+.cxr-root { animation: cxr-fade 0.4s ease-out; }
+.cxr-tabs { position: relative; }
+.cxr-tab { transition: all 0.15s ease; }
+.cxr-tab:hover { box-shadow: 0 -2px 0 #4338ca inset; }
+.cxr-kpi { transition: all 0.25s ease; border-left: 3px solid #4338ca; }
+.cxr-kpi:hover { box-shadow: 0 4px 12px rgba(67, 56, 202, 0.1); transform: translateY(-1px); }
+.cxr-chart { transition: box-shadow 0.2s ease; }
+.cxr-chart:hover { box-shadow: 0 2px 8px rgba(67, 56, 202, 0.08); }
+.cxr-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.cxr-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.cxr-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.cxr-row-warning { border-left: 3px solid #d97706 !important; }
+.cxr-row-info { border-left: 3px solid #2563eb !important; }
+.cxr-insight { transition: all 0.25s ease; border-left: 3px solid #a5b4fc; }
+.cxr-insight:hover { box-shadow: 0 6px 20px rgba(67, 56, 202, 0.12); transform: translateY(-2px); }
+@keyframes cxr-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* Petroleum Tank Farm Logistics (ptf-*) - Sky #0369a1 */
+.ptf-root { animation: ptf-fade 0.4s ease-out; }
+.ptf-tabs { position: relative; }
+.ptf-tab { transition: all 0.15s ease; }
+.ptf-tab:hover { box-shadow: 0 -2px 0 #0369a1 inset; }
+.ptf-kpi { transition: all 0.25s ease; border-left: 3px solid #0369a1; }
+.ptf-kpi:hover { box-shadow: 0 4px 12px rgba(3, 105, 161, 0.1); transform: translateY(-1px); }
+.ptf-chart { transition: box-shadow 0.2s ease; }
+.ptf-chart:hover { box-shadow: 0 2px 8px rgba(3, 105, 161, 0.08); }
+.ptf-badge { font-variant-numeric: tabular-nums; letter-spacing: 0.01em; }
+.ptf-table-wrap th { position: sticky; top: 0; z-index: 1; background: #f9fafb; }
+.ptf-row-critical { border-left: 3px solid #dc2626 !important; background-color: rgba(220, 38, 38, 0.04) !important; }
+.ptf-row-warning { border-left: 3px solid #d97706 !important; }
+.ptf-row-info { border-left: 3px solid #2563eb !important; }
+.ptf-insight { transition: all 0.25s ease; border-left: 3px solid #7dd3fc; }
+.ptf-insight:hover { box-shadow: 0 6px 20px rgba(3, 105, 161, 0.12); transform: translateY(-2px); }
+@keyframes ptf-fade { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
