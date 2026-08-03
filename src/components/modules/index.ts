@@ -511,3 +511,5 @@ export { default as GreenSteelLogisticsView } from './green-steel-logistics-view
 export { default as WindTurbineBladeRecyclingLogisticsView } from './wind-turbine-blade-recycling-logistics-view'
 export { default as SmartGridOSLogisticsView } from './smart-grid-os-logistics-view'
 export { default as SludgeToEnergyLogisticsView } from './sludge-to-energy-logistics-view'
+export { default as SmartCityResilienceHubLogisticsView } from './smart-city-resilience-hub-logistics-view'
+export { default as UrbanCanopyMicroclimateLogisticsView } from './urban-canopy-microclimate-logistics-view'
