@@ -1,4 +1,52 @@
 ---
+Task ID: R389 — Zirconium Alloy Logistics + Lithium Refining Logistics
+Agent: Main Agent (Cron Loop)
+Task: R389 — 2 new Indian logistics modules for zirconium alloy nuclear/ceramic supply chain and lithium refining/extraction supply chain.
+
+Work Log:
+- Read worklog: R388 complete (commit 5aab7ca), 617 modules, 621 navItems, ~61,358 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 13 candidates tested, all confirmed clean
+  - Selected zirconium-alloy-logistics (zra-*, Shield violet #7c3aed) and lithium-refining-logistics (ltr-*, Battery lime #65a30d)
+  - Icons verified in iconMap (Shield and Battery available)
+- Created Zirconium Alloy Logistics (R389a): 205 lines, zra-* violet #7c3aed, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: NFC, MIDHANI, DRDO DMRL, Bharat Forge, IGCAR, BARC, SAIL Durgapur, Gujarat Fluorochemicals, Rajasthan Nuclear Materials, Coimbatore Zirconium Industries, IREL Chavara, Assam Nuclear Materials, Rajasthan Lithium Corp, UP Zirconium Works
+  - 14 alloy grades: Zircaloy-2, Zr-2.5Nb, Zr-Cu, Zr-702 CP, Zircaloy-4, Zr-1Nb, Zr-Ti, ZrO2 YSZ TBC, Zr-Sn dental, ZrSiO4 zircon sand, Zr-4 RPV, ZrO2-SiC armour, Zr-Cr-Fe weld
+  - Applications: PHWR fuel cladding, pressure tube, vacuum getter, HNO3 reactor, FBTR fast breeder, fuel spacer grid, naval condenser, AESA TBC, AHWR prototype, dental implant, foundry facing, RPV internals, NIJ Level IV armour, aerospace welding
+  - &#8377;1,918 Cr total investment, avg 90.5% Zr content across all grades
+- Created Lithium Refining Logistics (R389b): 205 lines, ltr-* lime #65a30d, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Karnataka Mineral Corp, MAN Industries, Hindustan Copper, Indian Rare Earths, Dalmia Cement, Rajasthan State Mines, West Bengal Mineral Dev, Gujarat Fluorochemicals, Rajasthan Lithium Corp, Tamil Nadu Mineral, Odisha Lithium Project, Assam Lithium Explorations, Gujarat Lithium Technologies, UP New Energy
+  - 14 process types: Hard Rock Spodumene, Brine Salar, Brine Continental, Pegmatite Lepidolite, Clay Li Recovery, Pegmatite Petalite, Brine Geothermal, Direct Lithium Extraction
+  - Applications: EV battery cell/pack, grid storage LFP, glass-ceramic cooktop, cement additive, heat-resistant glass, Li-ion consumer cell, aerospace Al-Li alloy, lithium grease, smartphone battery, semiconductor battery, naval condenser
+  - &#8377;3,020 Cr total investment, avg 99.16% Li purity across all processes
+- Fixed TSC error: JSX Analytics chart used `&#38;&#38;` and `( )` which are invalid in JSX — replaced with simplified category names and `return` statement with block body
+- TSC: 0 errors in src/ after fix
+- Three-file registration: index.ts (617), page.tsx (1139 viewMap entries), app-store.ts (623 navItems)
+- CSS appended: 79 new rules (61,437 total)
+- Git commit: 2390da8, pushed to main
+
+Stage Summary:
+- Project now: 619 modules, 623 navItems, ~61,437 CSS lines, 1139 viewMap entries, 0 TSC errors
+- Zirconium alloy: NFC Zircaloy-2 &#8377;12,500Cr nuclear, IGCAR FBTR Zr-4 &#8377;8,500Cr fast breeder, Zr-702 chemical &#8377;6,200Cr nitric acid, ZrO2 TBC &#8377;4,200Cr + armour &#8377;6,800Cr
+- Lithium refining: EV Li-ion &#8377;25,000Cr by 2030, DLE &#8377;5,500Cr, grid storage &#8377;12,500Cr, aerospace Al-Li &#8377;3,200Cr, grease &#8377;1,500Cr, glass &#8377;800Cr
+- Delayed: LTR-B2404 (10d, lepidolite import), LTR-B2412 (12d, monsoon), ZRA-B2412 (12d, monsoon)
+- Next candidates (pre-validated): bismuth-alloy, tantalum-alloy, magnesium-alloy, molybdenum-sheet, indium-compound, selenium-metal
+
+**Project Current State:**
+- 619 module view files, 623 navItems, ~61,437 CSS lines, 1139 viewMap entries
+- TSC clean (0 errors in src/)
+- R389 complete, stable state
+
+**Risks / Next Priorities:**
+- globals.css at 61K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 619+ modules, dev server OOM risk — continue TSC-only QA approach
+- JSX inline analytics charts: avoid `&&`, `(`, `)` in category names — use simple labels and `return` block with separate `const pct` variable
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Next candidates: bismuth-alloy, tantalum-alloy, magnesium-alloy, molybdenum-sheet
+
+---
 Task ID: R388 — Alumina Ceramic Logistics + Chromium Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R388 — 2 new Indian logistics modules for alumina ceramic technical ceramics supply chain and chromium stainless steel / superalloy supply chain.
