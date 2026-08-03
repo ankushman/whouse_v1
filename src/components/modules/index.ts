@@ -578,3 +578,5 @@ export { default as FuelCellTruckLogisticsView } from './fuel-cell-truck-logisti
 export { default as AramidFiberLogisticsView } from './aramid-fiber-logistics-view'
 export { default as SiliconCarbideLogisticsView } from './silicon-carbide-logistics-view'
 export { default as VaccineColdChainLogisticsView } from './vaccine-cold-chain-logistics-view'
+export { default as GalliumNitrideLogisticsView } from './gallium-nitride-logistics-view'
+export { default as DroneDeliveryMedicalLogisticsView } from './drone-delivery-medical-logistics-view'

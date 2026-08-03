@@ -60548,3 +60548,33 @@ html.theme-transition body {
 .vcc-status-badge { font-size: 10px; }
 .vcc-insight-card { transition: transform 0.15s; }
 .vcc-insight-card:hover { transform: translateY(-1px); }
+
+/* ===== Gallium Nitride Logistics (gan-*) ===== */
+.gan-logistics-container { background: linear-gradient(135deg, #fff5f5 0%, #fff1f2 50%, #fef2f2 100%); }
+.gan-kpi-card { transition: all 0.3s ease; }
+.gan-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(225, 29, 72, 0.15); }
+.gan-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.gan-tab-btn:hover { transform: scale(1.02); }
+.gan-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.gan-chart-card:hover { box-shadow: 0 2px 8px rgba(225, 29, 72, 0.1); }
+.gan-bar-fill { animation: ganBarGrow 0.8s ease-out forwards; }
+.gan-table-row { transition: background-color 0.15s ease; }
+.gan-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.gan-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.gan-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(225, 29, 72, 0.12); }
+@keyframes ganBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
+
+/* ===== Drone Delivery Medical Logistics (ddm-*) ===== */
+.ddm-logistics-container { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%); }
+.ddm-kpi-card { transition: all 0.3s ease; }
+.ddm-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15); }
+.ddm-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.ddm-tab-btn:hover { transform: scale(1.02); }
+.ddm-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.ddm-chart-card:hover { box-shadow: 0 2px 8px rgba(2, 132, 199, 0.1); }
+.ddm-bar-fill { animation: ddmBarGrow 0.8s ease-out forwards; }
+.ddm-table-row { transition: background-color 0.15s ease; }
+.ddm-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.ddm-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.ddm-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12); }
+@keyframes ddmBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
