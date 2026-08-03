@@ -517,3 +517,5 @@ export { default as IndustrialHeatDecarbonizationLogisticsView } from './industr
 export { default as UrbanCoolIslandCreationLogisticsView } from './urban-cool-island-creation-logistics-view'
 export { default as DigitalTwinWaterInfrastructureLogisticsView } from './digital-twin-water-infrastructure-logistics-view'
 export { default as BioJetFuelLogisticsView } from './bio-jet-fuel-logistics-view'
+export { default as EVChargingHubLogisticsView } from './ev-charging-hub-logistics-view'
+export { default as HydrogenBlendingNetworkLogisticsView } from './hydrogen-blending-network-logistics-view'

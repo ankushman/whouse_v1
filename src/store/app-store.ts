@@ -523,6 +523,8 @@ export const navItems: NavItem[] = [
   { id: 'urban-cool-island-creation', label: 'Urban Cool Island Creation', icon: 'Snowflake', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'digital-twin-water-infrastructure', label: 'Digital Twin Water Infrastructure', icon: 'Droplets', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'bio-jet-fuel-logistics', label: 'Bio Jet Fuel Logistics', icon: 'PlaneTakeoff', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'ev-charging-hub-logistics', label: 'EV Charging Hub Logistics', icon: 'Zap', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'hydrogen-blending-network-logistics', label: 'Hydrogen Blending Network Logistics', icon: 'FlaskConical', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
