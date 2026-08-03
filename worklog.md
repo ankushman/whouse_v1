@@ -10422,3 +10422,31 @@ Work Log:
 Stage Summary:
 - MODULE FILES: 546 (+2) | NAVITEMS: 557 (+2) | CSS: 60,198 lines (+2)
 - TSC: 0 errors (src/) | GITHUB: pushed (93bddf2)
+---
+Task ID: R357 — Piezoelectric Energy Logistics + Flywheel Energy Storage
+Agent: Main Agent (Cron Loop)
+Task: R357 — 2 new Indian logistics modules for piezoelectric energy harvesting and flywheel energy storage.
+
+Work Log:
+- Read worklog: R356 complete (commit 93bddf2), 546 modules, 557 navItems, 60,198 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 25 candidates tested
+  - Already exist: ammonia-cracking-logistics
+  - Selected piezoelectric-energy-logistics (pel-*, Zap #7e22ce) and flywheel-energy-storage (fes-*, RotateCcw #166534)
+  - Icons verified in iconMap (Zap and RotateCcw available)
+- Created Piezoelectric Energy Logistics (R357a): 189 lines, pel-* purple #7e22ce, 14 records
+  - 14 installations across 13 Indian states (Maharashtra, Delhi, Karnataka, TN, Telangana, WB, Kerala, UP, Odisha, Assam, MP, Gujarat, Rajasthan)
+  - 14 piezo types: PZT-5H Ceramic Tile, PVDF Polymer Strip, BaTiO3 Single Crystal, PZT-4 Railway Pad, PMN-PT Crystal Stack, AlN Thin Film, Lead-Free KNN Ceramic, PZT-5A Walkway Tile, Bimorph Cantilever Array, PVDF-TrFE Copolymer, PZT-8 High Power Disk, PZN-PT Relaxor Crystal, Flexible Piezo Rubber, Macro Fiber Composite MFC
+  - 5,640 kW total power output, 74.9% avg efficiency, &#8377;5,460 Cr investment
+- Created Flywheel Energy Storage (R357b): 189 lines, fes-* green #166534, 14 records
+  - 14 installations across 13 Indian states (Maharashtra, Delhi, Karnataka, TN, Telangana, WB, Gujarat, Rajasthan, Kerala, UP, Odisha, Assam, MP)
+  - 7 flywheel types: Steel Rotor 10K-20K RPM, Carbon Composite 25K-40K RPM, Magnetic Levitation 45K-50K RPM, Superconducting 55K-60K RPM
+  - 1,050 MWh total storage, 30,214 RPM avg max, &#8377;7,010 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (552), page.tsx (1073 viewMap entries), app-store.ts (559 navItems)
+- CSS: 2 lines appended (60,200 total)
+- Git: commit dc1fe2b pushed
+
+Stage Summary:
+- MODULE FILES: 548 (+2) | NAVITEMS: 559 (+2) | CSS: 60,200 lines (+2)
+- TSC: 0 errors (src/) | GITHUB: pushed (dc1fe2b)
