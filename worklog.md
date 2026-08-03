@@ -1,4 +1,55 @@
 ---
+Task ID: R394 — Inconel Superalloy Logistics + Copper Nickel Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R394 — 2 new Indian logistics modules for Inconel nickel superalloy supply chain and copper-nickel alloy supply chain. Also cleaned up ghost tungsten-carbide-logistics entry (file deleted in prior session, export/import/navItem orphaned).
+
+Work Log:
+- Read worklog: R393 complete (commit 3fc7f8c), 625 modules, 629 navItems, ~61,633 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 15 candidates tested
+  - tungsten-carbide-alloy: had name collision with existing tungsten-carbide (different theme name but same export name TungstenCarbideLogisticsView) — SKIPPED
+  - inconel-superalloy: CLEAN, isa-* CLEAN
+  - copper-nickel-alloy: CLEAN, cna-* CLEAN
+  - manganese-alloy: CONFLICT in all 3 files
+  - silicon-carbide: CONFLICT in all 3 files
+  - graphite-electrode: CONFLICT in all 3 files
+  - zirconium-alloy: CONFLICT
+  - hafnium-alloy: CONFLICT
+  - niobium-alloy: CONFLICT
+  - Selected: inconel-superalloy-logistics (isa-*, Factory emerald #059669) and copper-nickel-alloy-logistics (cna-*, Layers teal #0d9488)
+  - Icons verified: Factory and Layers both confirmed in iconMap
+- BUG FIX: Removed ghost tungsten-carbide-logistics entry from index.ts (line 583), page.tsx (line 1103/1334), app-store.ts (line 589) — file was deleted in prior session but references remained
+- Created Inconel Superalloy Logistics (R394a): ~155 lines, isa-* emerald #059669, 14 records
+  - 14 alloy grades: Inconel 718, 625, 600, 713C, 690, 825, X-750, 601, 617, 276 (C276), HX (Haynes 230), 718 Plate, 625 Wire, 718 Bar
+  - 14 manufacturers: MIDHANI, DRDO DMRL, BEL, Bharat Forge, IGCAR, HAL, SAIL, Gujarat Fluorochemicals, Rajasthan Nickel Alloys, Tamil Nadu Nickel Alloys, Odisha Nickel Refinery, Assam Nickel Works, Gujarat Nickel Technologies, UP Nickel Alloys
+  - Applications: HAL Su-30MKI turbine disc, ISRO PSLV rocket chamber, BEL furnace wire, GE 9FA turbine blade, NPCIL Kudankulam SG tube, HAL Dhruv exhaust, BHEL turbine spring, Reliance Jamnagar cracker, NPCIL reactor flange, IOCL Panipat reformer, DRDO AMCA engine bay, L&amp;T offshore flare overlay, Tata Steel annealing furnace bell, NTPC FGD scrubber
+  - &#8377;2,650 Cr total investment, avg 57.8% Ni content
+- Created Copper Nickel Alloy Logistics (R394b): ~155 lines, cna-* teal #0d9488, 14 records
+  - 14 grades/forms: CuNi 90/10 C70600 tube, CuNi 70/30 C71500 cast dome, CuNi 90/10 sheet, CuNi 70/30 tube, CuNi 90/10 desal tube, CuNi 80/20 C71000 brake pipe, CuNi 90/10 sheathing plate, CuNi 70/30 TC wire, CuNi 90/10 fitting, CuNi 70/30 coinage strip, CuNi 90/10 HVAC tube, CuNi 70/30 water injection tube, CuNi 80/20 resistor sheet, CuNi 90/10 aquaculture mesh
+  - 14 manufacturers: Hindalco, DRDO DMRL, BEL, Bharat Forge, IGCAR, Sterlite Copper, SAIL, Gujarat Fluorochemicals, Rajasthan Copper Alloys, Tamil Nadu Copper Works, Odisha Copper Industries, Assam Copper Works, Gujarat Copper Technologies, UP Copper Alloys
+  - Applications: Mazagon Dock seawater piping, GRSE sonar dome, BEL radar HX, Tata Power condenser, NPCIL desalination, DMRC metro brake, ONGC offshore platform, Reliance thermocouple, Kirloskar pump fitting, SPMCIL coinage, Blue Star HVAC chiller, Oil India water injection, ABB earthing resistor, RGCA fish farming
+  - &#8377;1,439 Cr total investment, avg 80.3% Cu content
+  - Delayed: CNA-B2412 (12d, monsoon logistics)
+- TSC: 0 errors in src/ after ghost cleanup and new module creation
+- Three-file registration + ghost cleanup: index.ts (617), page.tsx (1143 viewMap entries), app-store.ts (626 navItems)
+- CSS appended: 30 new rules (61,663 total)
+- Git commit: b4c8f35, pushed to main
+
+Stage Summary:
+- Project now: 625 modules, 626 navItems, ~61,663 CSS lines, 1143 viewMap entries, 0 TSC errors
+- Note: 626 navItems (not 631) due to ghost tungsten-carbide entry cleanup
+- Inconel: IN 718 HAL &#8377;9,500Cr, IN 625 ISRO &#8377;7,200Cr, IN 690 NPCIL &#8377;6,800Cr, IN 601 Reliance &#8377;5,800Cr
+- Copper Nickel: CuNi 90/10 Mazagon &#8377;6,800Cr, CuNi 70/30 GRSE &#8377;4,500Cr, CuNi 70/30 Tata &#8377;5,500Cr, CuNi 70/30 SPMCIL &#8377;2,800Cr
+
+**Project Current State:**
+- 625 module view files, 626 navItems, ~61,663 CSS lines, 1143 viewMap entries, 0 TSC errors
+
+**Risks:**
+- globals.css 61K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- More ghost entries may exist (tungsten-carbide was not caught for 3+ iterations)
+- Next clean candidates: beryllium-alloy (bea-*), platinum-alloy (pta-*), gold-alloy (goa-*), aluminium-bronze (aba-*), nickel-powder (npw-*)
+
+---
 Task ID: R393 — Cobalt Superalloy Logistics + Titanium Sheet Logistics
 Agent: Main Agent (Cron Loop)
 Task: R393 — 2 new Indian logistics modules for cobalt superalloy supply chain and titanium sheet/plate/foil supply chain.
