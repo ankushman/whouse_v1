@@ -495,6 +495,8 @@ import CarbonNanotubeProductionLogisticsView from "@/components/modules/carbon-n
 import GrapheneProductionLogisticsView from "@/components/modules/graphene-production-logistics-view"
 import GeothermalEnergyLogisticsView from "@/components/modules/geothermal-energy-logistics-view"
 import AutonomousVehicleLogisticsView from "@/components/modules/autonomous-vehicle-logistics-view"
+import PerovskiteSolarCellManufacturingLogisticsView from "@/components/modules/perovskite-solar-cell-manufacturing-logistics-view"
+import HydrogenFuelCellStackLogisticsView from "@/components/modules/hydrogen-fuel-cell-stack-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -989,6 +991,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "graphene-production": GrapheneProductionLogisticsView,
   "geothermal-energy": GeothermalEnergyLogisticsView,
   "autonomous-vehicle": AutonomousVehicleLogisticsView,
+  "perovskite-solar-cell-manufacturing": PerovskiteSolarCellManufacturingLogisticsView,
+  "hydrogen-fuel-cell-stack": HydrogenFuelCellStackLogisticsView,
 }
 
 
