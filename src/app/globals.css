@@ -60758,3 +60758,48 @@ html.theme-transition body {
 .mga-status-dot-processing { background: #eab308; }
 .mga-status-dot-delayed { background: #ef4444; }
 .mga-chart-gradient { background: linear-gradient(90deg, #14b8a6 0%, #22d3ee 100%); }
+/* === Tantalum Capacitor Logistics (R378a) === tac-* red #dc2626 */
+.tac-kpi-card { border-left: 4px solid #dc2626; background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); }
+.tac-kpi-card:hover { box-shadow: 0 4px 12px rgba(220,38,38,0.15); transform: translateY(-1px); }
+.tac-tab-active { background: #dc2626; color: #fff; box-shadow: 0 2px 8px rgba(220,38,38,0.3); }
+.tac-tab-inactive:hover { background: #fee2e2; color: #dc2626; }
+.tac-filter-active { background: #dc2626; color: #fff; border-color: #dc2626; }
+.tac-filter-inactive:hover { border-color: #dc2626; color: #dc2626; }
+.tac-bar-fill { background: linear-gradient(90deg, #dc2626 0%, #f43f5e 100%); }
+.tac-bar-bg { background: #fef2f2; border-radius: 9999px; }
+.tac-delayed-row { border-left: 4px solid #ef4444; background: rgba(254,226,226,0.3); }
+.tac-table-header { background: #fef2f2; }
+.tac-insight-card { border-left: 4px solid #dc2626; }
+.tac-badge-delivered { background: #dcfce7; color: #166534; }
+.tac-badge-transit { background: #dbeafe; color: #1e40af; }
+.tac-badge-processing { background: #fef9c3; color: #854d0e; }
+.tac-badge-delayed { background: #fecaca; color: #991b1b; }
+.tac-type-card { background: #fef2f2; border: 1px solid #fee2e2; border-radius: 0.5rem; }
+.tac-status-dot-delivered { background: #22c55e; }
+.tac-status-dot-transit { background: #3b82f6; }
+.tac-status-dot-processing { background: #eab308; }
+.tac-status-dot-delayed { background: #ef4444; }
+.tac-chart-gradient { background: linear-gradient(90deg, #ef4444 0%, #fb7185 100%); }
+
+/* === Gallium Arsenide Logistics (R378b) === gaas-* purple #9333ea */
+.gaas-kpi-card { border-left: 4px solid #9333ea; background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); }
+.gaas-kpi-card:hover { box-shadow: 0 4px 12px rgba(147,51,234,0.15); transform: translateY(-1px); }
+.gaas-tab-active { background: #9333ea; color: #fff; box-shadow: 0 2px 8px rgba(147,51,234,0.3); }
+.gaas-tab-inactive:hover { background: #f3e8ff; color: #9333ea; }
+.gaas-filter-active { background: #9333ea; color: #fff; border-color: #9333ea; }
+.gaas-filter-inactive:hover { border-color: #9333ea; color: #9333ea; }
+.gaas-bar-fill { background: linear-gradient(90deg, #9333ea 0%, #a855f7 100%); }
+.gaas-bar-bg { background: #faf5ff; border-radius: 9999px; }
+.gaas-delayed-row { border-left: 4px solid #ef4444; background: rgba(254,226,226,0.3); }
+.gaas-table-header { background: #faf5ff; }
+.gaas-insight-card { border-left: 4px solid #9333ea; }
+.gaas-badge-delivered { background: #dcfce7; color: #166534; }
+.gaas-badge-transit { background: #dbeafe; color: #1e40af; }
+.gaas-badge-processing { background: #fef9c3; color: #854d0e; }
+.gaas-badge-delayed { background: #fecaca; color: #991b1b; }
+.gaas-device-card { background: #faf5ff; border: 1px solid #f3e8ff; border-radius: 0.5rem; }
+.gaas-status-dot-delivered { background: #22c55e; }
+.gaas-status-dot-transit { background: #3b82f6; }
+.gaas-status-dot-processing { background: #eab308; }
+.gaas-status-dot-delayed { background: #ef4444; }
+.gaas-chart-gradient { background: linear-gradient(90deg, #a855f7 0%, #c084fc 100%); }

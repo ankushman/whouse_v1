@@ -590,3 +590,5 @@ export { default as MolybdenumAlloyLogisticsView } from './molybdenum-alloy-logi
 export { default as IndiumPhosphideLogisticsView } from './indium-phosphide-logistics-view'
 export { default as CobaltAlloyLogisticsView } from './cobalt-alloy-logistics-view'
 export { default as MagnesiumAlloyLogisticsView } from './magnesium-alloy-logistics-view'
+export { default as TantalumCapacitorLogisticsView } from './tantalum-capacitor-logistics-view'
+export { default as GalliumArsenideLogisticsView } from './gallium-arsenide-logistics-view'
