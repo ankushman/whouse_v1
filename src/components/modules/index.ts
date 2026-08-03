@@ -596,3 +596,5 @@ export { default as HafniumAlloyLogisticsView } from './hafnium-alloy-logistics-
 export { default as ZirconiaCeramicLogisticsView } from './zirconia-ceramic-logistics-view'
 export { default as ScandiumAlloyLogisticsView } from './scandium-alloy-logistics-view'
 export { default as NickelSuperalloyLogisticsView } from './nickel-superalloy-logistics-view'
+export { default as TitaniumSpongeLogisticsView } from './titanium-sponge-logistics-view'
+export { default as BoronCarbideLogisticsView } from './boron-carbide-logistics-view'

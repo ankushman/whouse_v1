@@ -60897,3 +60897,50 @@ html.theme-transition body {
 .nss-gradient { background: linear-gradient(135deg, #475569, #64748b); }
 .nss-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #e2e8f0; color: #475569; }
 .nss-divider { border-top: 1px solid #e2e8f0; }
+/* === Titanium Sponge Logistics (tis-*) — Cyan #0891b2 === */
+.tis-card-bg { background: linear-gradient(135deg, #ecfeff, #cffafe); }
+.tis-badge { background: #0891b2; color: white; }
+.tis-kpi-card { border-left: 4px solid #0891b2; background: rgba(8, 145, 178, 0.08); }
+.tis-bar-fill { background: #0891b2; }
+.tis-bar-track { background: #cffafe; }
+.tis-tab-active { border-bottom: 2px solid #0891b2; color: #0891b2; }
+.tis-insight-card { border-left: 4px solid #0891b2; }
+.tis-header-title { color: #0891b2; }
+.tis-row-hover:hover { background: rgba(8, 145, 178, 0.05); }
+.tis-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.tis-filter-active { background: #0891b2; color: white; }
+.tis-priority-critical { background: #dc2626; color: white; }
+.tis-priority-high { background: #f59e0b; color: white; }
+.tis-status-delivered { background: #0891b2; color: white; }
+.tis-status-in-transit { background: #3b82f6; color: white; }
+.tis-status-processing { background: #8b5cf6; color: white; }
+.tis-status-delayed { background: #ef4444; color: white; }
+.tis-ring { box-shadow: 0 0 0 2px #0891b2; }
+.tis-dot { width: 8px; height: 8px; border-radius: 50%; background: #0891b2; }
+.tis-gradient { background: linear-gradient(135deg, #0891b2, #06b6d4); }
+.tis-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #cffafe; color: #0891b2; }
+.tis-divider { border-top: 1px solid #cffafe; }
+
+/* === Boron Carbide Logistics (brc-*) — Indigo #4f46e5 === */
+.brc-card-bg { background: linear-gradient(135deg, #eef2ff, #e0e7ff); }
+.brc-badge { background: #4f46e5; color: white; }
+.brc-kpi-card { border-left: 4px solid #4f46e5; background: rgba(79, 70, 229, 0.08); }
+.brc-bar-fill { background: #4f46e5; }
+.brc-bar-track { background: #e0e7ff; }
+.brc-tab-active { border-bottom: 2px solid #4f46e5; color: #4f46e5; }
+.brc-insight-card { border-left: 4px solid #4f46e5; }
+.brc-header-title { color: #4f46e5; }
+.brc-row-hover:hover { background: rgba(79, 70, 229, 0.05); }
+.brc-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.brc-filter-active { background: #4f46e5; color: white; }
+.brc-priority-critical { background: #dc2626; color: white; }
+.brc-priority-high { background: #f59e0b; color: white; }
+.brc-status-delivered { background: #4f46e5; color: white; }
+.brc-status-in-transit { background: #3b82f6; color: white; }
+.brc-status-processing { background: #8b5cf6; color: white; }
+.brc-status-delayed { background: #ef4444; color: white; }
+.brc-ring { box-shadow: 0 0 0 2px #4f46e5; }
+.brc-dot { width: 8px; height: 8px; border-radius: 50%; background: #4f46e5; }
+.brc-gradient { background: linear-gradient(135deg, #4f46e5, #6366f1); }
+.brc-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #e0e7ff; color: #4f46e5; }
+.brc-divider { border-top: 1px solid #e0e7ff; }
