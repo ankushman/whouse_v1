@@ -464,6 +464,8 @@ import SolarFarmConstructionLogisticsView from "@/components/modules/solar-farm-
 import WasteToEnergyPlantLogisticsView from "@/components/modules/waste-to-energy-plant-logistics-view"
 import HydroelectricDamConstructionLogisticsView from "@/components/modules/hydroelectric-dam-construction-logistics-view"
 import TunnelBoringMachineLogisticsView from "@/components/modules/tunnel-boring-machine-logistics-view"
+import LngTerminalLogisticsView from "@/components/modules/lng-terminal-logistics-view"
+import MonorailSystemLogisticsView from "@/components/modules/monorail-system-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -927,6 +929,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "waste-to-energy-plant": WasteToEnergyPlantLogisticsView,
   "hydroelectric-dam-construction": HydroelectricDamConstructionLogisticsView,
   "tunnel-boring-machine": TunnelBoringMachineLogisticsView,
+  "lng-terminal": LngTerminalLogisticsView,
+  "monorail-system": MonorailSystemLogisticsView,
 }
 
 

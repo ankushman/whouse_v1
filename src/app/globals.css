@@ -60003,3 +60003,19 @@ html.theme-transition body {
 .tbm-tab:hover { background: rgba(30, 41, 59, 0.08); }
 .tbm-dashboard, .tbm-registry, .tbm-analytics, .tbm-insights { animation: fadeIn 0.3s ease; }
 .tbm-table-wrap { box-shadow: 0 1px 3px rgba(30, 41, 59, 0.1); }
+
+/* === LNG Terminal Logistics (lng-*) === */
+.lng-root { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+.lng-tabs { border-bottom: 2px solid #0c1e3a; }
+.lng-tab { transition: all 0.2s; }
+.lng-tab:hover { background: rgba(12, 30, 58, 0.08); }
+.lng-dashboard, .lng-registry, .lng-analytics, .lng-insights { animation: fadeIn 0.3s ease; }
+.lng-table-wrap { box-shadow: 0 1px 3px rgba(12, 30, 58, 0.1); }
+
+/* === Monorail System Logistics (mnr-*) === */
+.mnr-root { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); }
+.mnr-tabs { border-bottom: 2px solid #5b21b6; }
+.mnr-tab { transition: all 0.2s; }
+.mnr-tab:hover { background: rgba(91, 33, 182, 0.08); }
+.mnr-dashboard, .mnr-registry, .mnr-analytics, .mnr-insights { animation: fadeIn 0.3s ease; }
+.mnr-table-wrap { box-shadow: 0 1px 3px rgba(91, 33, 182, 0.1); }
