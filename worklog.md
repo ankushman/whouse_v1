@@ -11466,20 +11466,57 @@ Stage Summary:
 - Next candidates (pre-validated): palladium-catalyst, silver-paste, lithium-refining, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush, silicon-metal, alumina-ceramic, cobalt-alloy, manganese-alloy, chromium-alloy
 
 **Project Current State:**
-- 611 module view files, 615 navItems, ~61,198 CSS lines, 1131 viewMap entries
+- 613 module view files, 617 navItems, ~61,240 CSS lines, 1133 viewMap entries
 - TSC clean (0 errors in src/)
-- R385 complete, stable state
+- R386 complete, stable state
 - Dev server OOM with 600+ modules — continue TSC-only QA approach
 
 **Risks / Next Priorities:**
 - globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
-- With 611+ modules, dev server OOM risk — continue TSC-only QA approach
+- With 613+ modules, dev server OOM risk — continue TSC-only QA approach
 - NavItem label overwrite risk when inserting new entries — verify adjacent labels
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
-- JSX escaping: < must use &#60; inside JSX text content (not <)
+- JSX escaping: &#60; in JSX expression causes TSC error — use useMemo variable instead
+
+---
+Task ID: R386 — Silver Paste Logistics + Silicon Metal Logistics
+Agent: Main Agent (Cron Loop)
+Task: R386 — 2 new Indian logistics modules for silver paste/conductive ink supply chain and silicon metal/polysilicon supply chain.
+
+Work Log:
+- Read worklog: R385 complete (commit be1f678), 611 modules, 615 navItems, ~61,198 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 8 candidates tested, all confirmed clean
+  - Selected silver-paste-logistics (sps-*, Star slate #475569) and silicon-metal-logistics (sim-*, Sun amber #d97706)
+  - Icons verified in iconMap (Star and Sun available)
+- Created Silver Paste Logistics (R386a): ~260 lines, sps-* slate #475569, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Heraeus, DuPont, MacDermid Alpha, Indium Corp, Samsung SDI, DRDO DMRL, Johnson Matthey, Gujarat Fluorochemicals, RSMS, IIT Madras, NALCO, Oil India, Adani Defence, TASL
+  - 14 paste types: Ag epoxy 87%, Ag thick film 75%, SAC305 3%Ag, Ag sinter 90% nanoparticle, Ag ICA 82%, Ag braze 65%, Ag conductive ink 70% flake, PERC rear 72%, Ag bio 60% ionic, Ag nanowire 55%, CIGS metallization 68%, Ag EMI shielding 40%, Ag bonding wire 4%, Ag flip chip 85%
+  - Applications: die attach, solar PV metallization, SMT reflow, SiC EV sintering, LED chip bonding, aero engine brazing, RFID antenna printing, PERC solar cell, antimicrobial coating, flexible touch sensor, thin film solar, radar EMI shielding, missile wire bonding, satellite ASIC BGA
+  - &#8377;2,368 Cr total investment, avg 60% Ag content across all paste types
+- Created Silicon Metal Logistics (R386b): ~260 lines, sim-* amber #d97706, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Wacker Chemie, Hindalco, Tata Steel, Bharat Forge, Vedanta, HAL, Dalmia Cement, Gujarat Fluorochemicals, RSMS, IIT Madras, NALCO, Oil India, Adani Defence, TASL
+  - 14 grade types: Polysilicon 9N, MG-Si 98.5%, FeSi 75%, FeSi 45% inoculant, Si metal 99%, RBSC SiC ceramic, silica fume 92%, fumed silica nano, quartzite 99%, Si wafer 11N, FeSiMg nodulizer, silica gel desiccant, SiAlON ceramic, Polysilicon 11N electronic
+  - Applications: solar PV wafer, aluminium alloying, BOF deoxidation, ductile iron inoculation, silicone polymer synthesis, ceramic armour, UHPC concrete, tyre rubber reinforcement, glass container, MEMS pressure sensor, DI pipe nodulizer, gas pipeline dehydration, missile radar radome, CMOS logic fab
+  - &#8377;1,932 Cr total investment, covering polysilicon to silica full spectrum
+- Fixed TSC error: &#60; in JSX expression is invalid — moved filter to useMemo variable (industrialRecords)
+- Three-file registration: index.ts (610), page.tsx (1133 viewMap entries), app-store.ts (617 navItems)
+- CSS appended: 42 new rules (~61,240 total)
+- TSC post-validation: 0 errors in src/
+- Duplicate verification: 4 entries per module — all correct
+- Git commit: abc1770, pushed to main
+
+Stage Summary:
+- Project now: 613 modules, 617 navItems, ~61,240 CSS lines, 1133 viewMap entries, 0 TSC errors
+- Silver paste: solar PV Ag paste &#8377;42,500Cr market, Ag sinter SiC EV &#8377;28,000Cr, SAC305 SMT &#8377;10,800Cr, Ag braze aerospace &#8377;15,000Cr
+- Silicon metal: polysilicon &#8377;70,000Cr import substitution, FeSi steel &#8377;10,000Cr, silicone polymer &#8377;12,000Cr, SiC armour &#8377;28,000Cr
+- Delayed: SPS-B2404 (10d, Ag nanoparticle import), SPS-B2412 (12d, monsoon), SIM-B2404 (10d, quartzite), SIM-B2412 (12d, monsoon)
+- Next candidates (pre-validated): rare-gas, carbon-brush, alumina-ceramic, chromium-alloy, zirconium-alloy, lithium-refining
 
 ---
 Task ID: R385 — Graphite Electrode Logistics + Manganese Alloy Logistics
