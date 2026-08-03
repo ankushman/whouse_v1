@@ -238,7 +238,6 @@ import DefenceSupplyChainView from "@/components/modules/defence-supply-chain-vi
 import SeedAgriInputLogisticsView from "@/components/modules/seed-agri-input-logistics-view"
 import DairyMilkSupplyChainView from "@/components/modules/dairy-milk-supply-chain-view"
 import GemJewelleryLogisticsView from "@/components/modules/gem-jewellery-logistics-view"
-import PortContainerTerminalView from "@/components/modules/port-container-terminal-view"
 import PharmaVaccineSupplyView from "@/components/modules/pharma-vaccine-supply-view"
 import AerospaceMroLogisticsView from "@/components/modules/aerospace-mro-logistics-view"
 import TextileApparelLogisticsView from "@/components/modules/textile-apparel-logistics-view"
@@ -492,6 +491,8 @@ import DirectAirCaptureLogisticsView from "@/components/modules/direct-air-captu
 import FloatingSolarFarmLogisticsView from "@/components/modules/floating-solar-farm-logistics-view"
 import TidalEnergyLogisticsView from "@/components/modules/tidal-energy-logistics-view"
 import HydrogenFuelStationLogisticsView from "@/components/modules/hydrogen-fuel-station-logistics-view"
+import CarbonNanotubeProductionLogisticsView from "@/components/modules/carbon-nanotube-production-logistics-view"
+import GrapheneProductionLogisticsView from "@/components/modules/graphene-production-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -729,7 +730,6 @@ const viewMap: Record<string, React.ComponentType> = {
   "seed-agri-input-logistics": SeedAgriInputLogisticsView,
   "dairy-milk-supply-chain": DairyMilkSupplyChainView,
   "gem-jewellery-logistics": GemJewelleryLogisticsView,
-  "port-container-terminal": PortContainerTerminalView,
   "pharma-vaccine-supply": PharmaVaccineSupplyView,
   "aerospace-mro-logistics": AerospaceMroLogisticsView,
   "textile-apparel-logistics": TextileApparelLogisticsView,
@@ -983,6 +983,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "floating-solar-farm": FloatingSolarFarmLogisticsView,
   "tidal-energy": TidalEnergyLogisticsView,
   "hydrogen-fuel-station": HydrogenFuelStationLogisticsView,
+  "carbon-nanotube-production": CarbonNanotubeProductionLogisticsView,
+  "graphene-production": GrapheneProductionLogisticsView,
 }
 
 
