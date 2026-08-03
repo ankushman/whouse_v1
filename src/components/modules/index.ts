@@ -535,3 +535,5 @@ export { default as RailwayElectrificationView } from './railway-electrification
 export { default as SatelliteIotLogisticsView } from './satellite-iot-logistics-view'
 export { default as PlasmaArcRecyclingView } from './plasma-arc-recycling-view'
 export { default as GreenRoofInfrastructureView } from './green-roof-infrastructure-view'
+export { default as WasteHeatRecoveryView } from './waste-heat-recovery-view'
+export { default as FloatingOffshoreWindView } from './floating-offshore-wind-view'
