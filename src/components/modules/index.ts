@@ -606,3 +606,5 @@ export { default as PalladiumCatalystLogisticsView } from './palladium-catalyst-
 export { default as TungstenHeavyAlloyLogisticsView } from './tungsten-heavy-alloy-logistics-view'
 export { default as GraphiteElectrodeLogisticsView } from './graphite-electrode-logistics-view'
 export { default as ManganeseAlloyLogisticsView } from './manganese-alloy-logistics-view'
+export { default as SilverPasteLogisticsView } from './silver-paste-logistics-view'
+export { default as SiliconMetalLogisticsView } from './silicon-metal-logistics-view'
