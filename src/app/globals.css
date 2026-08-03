@@ -61557,3 +61557,54 @@ html.theme-transition body {
 .sme-priority-medium { color: #ca8a04; font-weight: 500; }
 .sme-priority-low { color: #65a30d; font-weight: 500; }
 .sme-se-indicator { background: linear-gradient(90deg, #green-500, #emerald-500); }
+/* R392a: Nickel Brazing Alloy Logistics (nba-*, orange #ea580c) */
+.nba-b2401-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2402-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2403-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2404-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2405-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2406-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2407-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2408-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2409-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2410-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2411-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2412-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2413-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-b2414-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-card-accent { border-left: 4px solid #ea580c; }
+.nba-badge-accent { background: rgba(234, 88, 12, 0.12); color: #ea580c; border: 1px solid rgba(234, 88, 12, 0.3); }
+.nba-tab-active { border-bottom: 2px solid #ea580c; color: #ea580c; font-weight: 600; }
+.nba-kpi-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.06); }
+.nba-chart-bar { background: linear-gradient(90deg, #ea580c, #fb923c); }
+.nba-insight-card { border-left: 4px solid #ea580c; }
+.nba-filter-active { background: #ea580c; color: white; border: 1px solid #ea580c; }
+.nba-table-header { background: rgba(234, 88, 12, 0.08); border-bottom: 2px solid #ea580c; }
+.nba-table-row:hover { background: rgba(234, 88, 12, 0.04); }
+.nba-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+
+/* R392b: Vanadium Alloy Logistics (vaa-*, violet #7c3aed) */
+.vaa-b2401-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2402-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2403-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2404-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2405-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2406-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2407-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2408-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2409-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2410-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2411-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2412-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2413-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-b2414-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-card-accent { border-left: 4px solid #7c3aed; }
+.vaa-badge-accent { background: rgba(124, 58, 237, 0.12); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.3); }
+.vaa-tab-active { border-bottom: 2px solid #7c3aed; color: #7c3aed; font-weight: 600; }
+.vaa-kpi-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+.vaa-chart-bar { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+.vaa-insight-card { border-left: 4px solid #7c3aed; }
+.vaa-filter-active { background: #7c3aed; color: white; border: 1px solid #7c3aed; }
+.vaa-table-header { background: rgba(124, 58, 237, 0.08); border-bottom: 2px solid #7c3aed; }
+.vaa-table-row:hover { background: rgba(124, 58, 237, 0.04); }
+.vaa-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }

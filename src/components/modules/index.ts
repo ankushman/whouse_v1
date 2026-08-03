@@ -600,7 +600,6 @@ export { default as TitaniumSpongeLogisticsView } from './titanium-sponge-logist
 export { default as BoronCarbideLogisticsView } from './boron-carbide-logistics-view'
 export { default as NiobiumAlloyLogisticsView } from './niobium-alloy-logistics-view'
 export { default as PlatinumGroupMetalLogisticsView } from './platinum-group-metal-logistics-view'
-export { default as VanadiumAlloyLogisticsView } from './vanadium-alloy-logistics-view'
 export { default as SiliconNitrideLogisticsView } from './silicon-nitride-logistics-view'
 export { default as PalladiumCatalystLogisticsView } from './palladium-catalyst-logistics-view'
 export { default as TungstenHeavyAlloyLogisticsView } from './tungsten-heavy-alloy-logistics-view'
@@ -618,3 +617,5 @@ export { default as BismuthAlloyLogisticsView } from './bismuth-alloy-logistics-
 export { default as TantalumAlloyLogisticsView } from './tantalum-alloy-logistics-view'
 export { default as MolybdenumSheetLogisticsView } from './molybdenum-sheet-logistics-view'
 export { default as SeleniumMetalLogisticsView } from './selenium-metal-logistics-view'
+export { default as NickelBrazingAlloyLogisticsView } from './nickel-brazing-alloy-logistics-view'
+export { default as VanadiumAlloyLogisticsView } from './vanadium-alloy-logistics-view'

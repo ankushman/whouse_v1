@@ -1120,7 +1120,6 @@ const viewMap: Record<string, React.ComponentType> = {
   "boron-carbide-logistics": BoronCarbideLogisticsView,
   "niobium-alloy-logistics": NiobiumAlloyLogisticsView,
   "platinum-group-metal-logistics": PlatinumGroupMetalLogisticsView,
-  "vanadium-alloy-logistics": VanadiumAlloyLogisticsView,
   "silicon-nitride-logistics": SiliconNitrideLogisticsView,
   "palladium-catalyst-logistics": PalladiumCatalystLogisticsView,
   "tungsten-heavy-alloy-logistics": TungstenHeavyAlloyLogisticsView,
@@ -1138,6 +1137,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "tantalum-alloy-logistics": TantalumAlloyLogisticsView,
   "molybdenum-sheet-logistics": MolybdenumSheetLogisticsView,
   "selenium-metal-logistics": SeleniumMetalLogisticsView,
+  "nickel-brazing-alloy-logistics": NickelBrazingAlloyLogisticsView,
+  "vanadium-alloy-logistics": VanadiumAlloyLogisticsView,
 }
 
 
@@ -1346,7 +1347,6 @@ import TitaniumSpongeLogisticsView from "@/components/modules/titanium-sponge-lo
 import BoronCarbideLogisticsView from "@/components/modules/boron-carbide-logistics-view"
 import NiobiumAlloyLogisticsView from "@/components/modules/niobium-alloy-logistics-view"
 import PlatinumGroupMetalLogisticsView from "@/components/modules/platinum-group-metal-logistics-view"
-import VanadiumAlloyLogisticsView from "@/components/modules/vanadium-alloy-logistics-view"
 import SiliconNitrideLogisticsView from "@/components/modules/silicon-nitride-logistics-view"
 import PalladiumCatalystLogisticsView from "@/components/modules/palladium-catalyst-logistics-view"
 import TungstenHeavyAlloyLogisticsView from "@/components/modules/tungsten-heavy-alloy-logistics-view"
@@ -1364,3 +1364,5 @@ import BismuthAlloyLogisticsView from "@/components/modules/bismuth-alloy-logist
 import TantalumAlloyLogisticsView from "@/components/modules/tantalum-alloy-logistics-view"
 import MolybdenumSheetLogisticsView from "@/components/modules/molybdenum-sheet-logistics-view"
 import SeleniumMetalLogisticsView from "@/components/modules/selenium-metal-logistics-view"
+import NickelBrazingAlloyLogisticsView from "@/components/modules/nickel-brazing-alloy-logistics-view"
+import VanadiumAlloyLogisticsView from "@/components/modules/vanadium-alloy-logistics-view"
