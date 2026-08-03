@@ -60389,3 +60389,27 @@ html.theme-transition body {
 .kib-root .kib-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
 .kib-root .kib-insight-card:hover { box-shadow: 0 4px 12px rgba(126,34,206,0.12); }
 .kib-root .kib-insight-title { color: #3b0764; }
+/* R367a — Aluminium-Air Battery Logistics (aal-*) */
+.aal-root { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%); }
+.aal-root .aal-kpi-card { border-left: 4px solid #1e3a5f; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(30,58,95,0.1); }
+.aal-root .aal-kpi-label { color: #1e40af; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.aal-root .aal-kpi-value { color: #0f172a; font-variant-numeric: tabular-nums; }
+.aal-root .aal-chart-title { color: #1e3a5f; }
+.aal-root .aal-tab { min-width: 90px; }
+.aal-root .aal-record-card { transition: all 0.2s ease; }
+.aal-root .aal-record-card:hover { box-shadow: 0 4px 12px rgba(30,58,95,0.15); transform: translateY(-1px); }
+.aal-root .aal-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.aal-root .aal-insight-card:hover { box-shadow: 0 4px 12px rgba(30,58,95,0.12); }
+.aal-root .aal-insight-title { color: #0f172a; }
+/* R367b — Syngas Logistics (syg-*) */
+.syg-root { background: linear-gradient(135deg, #f7fee7 0%, #ecfccb 50%, #d9f99d 100%); }
+.syg-root .syg-kpi-card { border-left: 4px solid #3f6212; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(63,98,18,0.1); }
+.syg-root .syg-kpi-label { color: #4d7c0f; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.syg-root .syg-kpi-value { color: #1a2e05; font-variant-numeric: tabular-nums; }
+.syg-root .syg-chart-title { color: #3f6212; }
+.syg-root .syg-tab { min-width: 90px; }
+.syg-root .syg-record-card { transition: all 0.2s ease; }
+.syg-root .syg-record-card:hover { box-shadow: 0 4px 12px rgba(63,98,18,0.15); transform: translateY(-1px); }
+.syg-root .syg-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.syg-root .syg-insight-card:hover { box-shadow: 0 4px 12px rgba(63,98,18,0.12); }
+.syg-root .syg-insight-title { color: #1a2e05; }

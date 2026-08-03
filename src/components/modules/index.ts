@@ -568,3 +568,5 @@ export { default as BioMethaneLogisticsView } from './bio-methane-logistics-view
 export { default as VanadiumElectrolyteLogisticsView } from './vanadium-electrolyte-logistics-view'
 export { default as SiliconAnodeLogisticsView } from './silicon-anode-logistics-view'
 export { default as PotassiumIonBatteryLogisticsView } from './potassium-ion-battery-logistics-view'
+export { default as AluminiumAirBatteryLogisticsView } from './aluminium-air-battery-logistics-view'
+export { default as SyngasLogisticsView } from './syngas-logistics-view'
