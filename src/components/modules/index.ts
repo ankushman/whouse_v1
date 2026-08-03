@@ -499,3 +499,5 @@ export { default as BiojetFuelLogisticsView } from './biojet-fuel-logistics-view
 export { default as RareEarthMineralsLogisticsView } from './rare-earth-minerals-logistics-view'
 export { default as HydrogenPipelineLogisticsView } from './hydrogen-pipeline-logistics-view'
 export { default as CarbonTradingLogisticsView } from './carbon-trading-logistics-view'
+export { default as DeepSeaMiningLogisticsView } from './deep-sea-mining-logistics-view'
+export { default as BiocharLogisticsView } from './biochar-logistics-view'
