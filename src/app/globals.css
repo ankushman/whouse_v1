@@ -60316,3 +60316,28 @@ html.theme-transition body {
 .ssc-record-card:hover { box-shadow: 0 2px 8px rgba(30,58,95,0.12); transform: translateY(-1px); }
 .ssc-insight-card:hover { box-shadow: 0 4px 12px rgba(30,58,95,0.15); }
 .ssc-insight-title { color: #1e3a5f; }
+/* ─── R364a: Smart Textile Logistics (stl-*, #4a1d96 purple-900) ─── */
+.stl-root { --stl-accent: #4a1d96; --stl-accent-light: #f5f3ff; }
+.stl-kpi-card { border-left: 3px solid var(--stl-accent); }
+.stl-kpi-label { color: #4a1d96; }
+.stl-kpi-value { color: #2e1065; }
+.stl-chart-title { color: #4a1d96; }
+.stl-tab { transition: all 0.2s ease; }
+.stl-tab:hover { background: #f5f3ff !important; }
+.stl-record-card { transition: all 0.2s ease; }
+.stl-record-card:hover { box-shadow: 0 2px 8px rgba(74,29,150,0.12); transform: translateY(-1px); }
+.stl-insight-card:hover { box-shadow: 0 4px 12px rgba(74,29,150,0.15); }
+.stl-insight-title { color: #4a1d96; }
+
+/* ─── R364b: e-Fuel Logistics (efl-*, #14532d green-950) ─── */
+.efl-root { --efl-accent: #14532d; --efl-accent-light: #f0fdf4; }
+.efl-kpi-card { border-left: 3px solid var(--efl-accent); }
+.efl-kpi-label { color: #14532d; }
+.efl-kpi-value { color: #052e16; }
+.efl-chart-title { color: #14532d; }
+.efl-tab { transition: all 0.2s ease; }
+.efl-tab:hover { background: #f0fdf4 !important; }
+.efl-record-card { transition: all 0.2s ease; }
+.efl-record-card:hover { box-shadow: 0 2px 8px rgba(20,83,45,0.12); transform: translateY(-1px); }
+.efl-insight-card:hover { box-shadow: 0 4px 12px rgba(20,83,45,0.15); }
+.efl-insight-title { color: #14532d; }

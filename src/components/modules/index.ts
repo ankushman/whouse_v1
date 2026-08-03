@@ -562,3 +562,5 @@ export { default as NeodymiumMagnetLogisticsView } from './neodymium-magnet-logi
 export { default as ManganeseSulphateLogisticsView } from './manganese-sulphate-logistics-view'
 export { default as CobaltFreeBatteryLogisticsView } from './cobalt-free-battery-logistics-view'
 export { default as SolidStateCoolingLogisticsView } from './solid-state-cooling-logistics-view'
+export { default as SmartTextileLogisticsView } from './smart-textile-logistics-view'
+export { default as EFuelLogisticsView } from './e-fuel-logistics-view'
