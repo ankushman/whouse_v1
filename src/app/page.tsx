@@ -478,6 +478,8 @@ import PortContainerTerminalLogisticsView from "@/components/modules/port-contai
 import SubmarineTunnelLogisticsView from "@/components/modules/submarine-tunnel-logistics-view"
 import SupercapacitorEnergyStorageLogisticsView from "@/components/modules/supercapacitor-energy-storage-logistics-view"
 import OffshoreWindInstallationLogisticsView from "@/components/modules/offshore-wind-installation-logistics-view"
+import SuperconductingCableTransmissionLogisticsView from "@/components/modules/superconducting-cable-transmission-logistics-view"
+import DeepWaterDrillingPlatformLogisticsView from "@/components/modules/deep-water-drilling-platform-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -955,6 +957,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "submarine-tunnel": SubmarineTunnelLogisticsView,
   "supercapacitor-energy-storage": SupercapacitorEnergyStorageLogisticsView,
   "offshore-wind-installation": OffshoreWindInstallationLogisticsView,
+  "superconducting-cable-transmission": SuperconductingCableTransmissionLogisticsView,
+  "deep-water-drilling-platform": DeepWaterDrillingPlatformLogisticsView,
 }
 
 

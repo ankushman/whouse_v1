@@ -468,3 +468,5 @@ export { default as PortContainerTerminalLogisticsView } from './port-container-
 export { default as SubmarineTunnelLogisticsView } from './submarine-tunnel-logistics-view'
 export { default as SupercapacitorEnergyStorageLogisticsView } from './supercapacitor-energy-storage-logistics-view'
 export { default as OffshoreWindInstallationLogisticsView } from './offshore-wind-installation-logistics-view'
+export { default as SuperconductingCableTransmissionLogisticsView } from './superconducting-cable-transmission-logistics-view'
+export { default as DeepWaterDrillingPlatformLogisticsView } from './deep-water-drilling-platform-logistics-view'

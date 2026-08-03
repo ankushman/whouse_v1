@@ -60127,3 +60127,7 @@ html.theme-transition body {
 .owi-insights { animation: owiFadeIn 0.4s ease-out; }
 .owi-table-wrap { box-shadow: 0 1px 3px rgba(30, 58, 95, 0.1); }
 @keyframes owiFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* === Superconducting Cable Transmission Logistics (sct-*) === */
+.sct-root{background:linear-gradient(135deg,#fef3c7,#fff7ed)}.sct-tabs{border-color:#d6d3d1}.sct-tab:hover{background:#fffbeb}.sct-dash,.sct-reg,.sct-analytics,.sct-insights{animation:sctFadeIn .4s ease-out}@keyframes sctFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.sct-table-wrap{box-shadow:0 1px 3px rgba(0,0,0,.06)}
+/* === Deep Water Drilling Platform Logistics (dwp-*) === */
+.dwp-root{background:linear-gradient(135deg,#eff6ff,#f0f9ff)}.dwp-tabs{border-color:#d6d3d1}.dwp-tab:hover{background:#eff6ff}.dwp-dash,.dwp-reg,.dwp-analytics,.dwp-insights{animation:dwpFadeIn .4s ease-out}@keyframes dwpFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.dwp-table-wrap{box-shadow:0 1px 3px rgba(0,0,0,.06)}
