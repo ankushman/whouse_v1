@@ -61608,3 +61608,26 @@ html.theme-transition body {
 .vaa-table-header { background: rgba(124, 58, 237, 0.08); border-bottom: 2px solid #7c3aed; }
 .vaa-table-row:hover { background: rgba(124, 58, 237, 0.04); }
 .vaa-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+/* R393 — Cobalt Superalloy Logistics */
+.border-l-red-600 { border-left-color: #dc2626; }
+.bg-red-50\/30 { background-color: rgba(254, 226, 226, 0.3); }
+.text-red-800 { color: #991b1b; }
+.border-b-2.border-red-600 { border-color: #dc2626; }
+.bg-red-100 { background-color: #fee2e2; }
+.bg-red-600 { background-color: #dc2626; }
+.bg-orange-100 { background-color: #ffedd5; }
+.bg-orange-600 { background-color: #ea580c; }
+.bg-indigo-100 { background-color: #e0e7ff; }
+.bg-indigo-600 { background-color: #4f46e5; }
+.border-l-rose-500 { border-left-color: #f43f5e; }
+.border-l-sky-500 { border-left-color: #0ea5e9; }
+.border-l-amber-500 { border-left-color: #f59e0b; }
+/* R393 — Titanium Sheet Logistics */
+.border-l-amber-600 { border-left-color: #d97706; }
+.bg-amber-50\/30 { background-color: rgba(255, 251, 235, 0.3); }
+.text-amber-800 { color: #92400e; }
+.border-b-2.border-amber-600 { border-color: #d97706; }
+.bg-amber-100 { background-color: #fef3c7; }
+.bg-amber-600 { background-color: #d97706; }
+.bg-yellow-100 { background-color: #fef9c3; }
+.bg-yellow-600 { background-color: #ca8a04; }

@@ -619,3 +619,5 @@ export { default as MolybdenumSheetLogisticsView } from './molybdenum-sheet-logi
 export { default as SeleniumMetalLogisticsView } from './selenium-metal-logistics-view'
 export { default as NickelBrazingAlloyLogisticsView } from './nickel-brazing-alloy-logistics-view'
 export { default as VanadiumAlloyLogisticsView } from './vanadium-alloy-logistics-view'
+export { default as CobaltSuperalloyLogisticsView } from './cobalt-superalloy-logistics-view'
+export { default as TitaniumSheetLogisticsView } from './titanium-sheet-logistics-view'
