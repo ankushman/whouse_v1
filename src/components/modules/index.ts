@@ -523,3 +523,5 @@ export { default as AgrivoltaicsLogisticsView } from './agrivoltaics-logistics-v
 export { default as AutonomousPortLogisticsView } from './autonomous-port-logistics-view'
 export { default as QuantumComputingLogisticsView } from './quantum-computing-logistics-view'
 export { default as CarbonSequestrationLogisticsView } from './carbon-sequestration-logistics-view'
+export { default as GreenCementLogisticsView } from './green-cement-logistics-view'
+export { default as AIChipLogisticsView } from './ai-chip-logistics-view'
