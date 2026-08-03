@@ -10709,3 +10709,42 @@ Stage Summary:
 - With 560+ modules, dev server OOM risk — continue TSC-only QA approach
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+---
+Task ID: R366 — Silicon Anode Logistics + Potassium-Ion Battery Logistics
+Agent: Main Agent (Cron Loop)
+Task: R366 — 2 new Indian logistics modules for silicon anode material supply chains and potassium-ion battery cell manufacturing logistics.
+
+Work Log:
+- Read worklog: R365 complete (commit f602959), 564 modules, 575 navItems, 60,368 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 8 candidates tested, all clean
+  - Selected silicon-anode-logistics (sil-*, Diamond #0f766e) and potassium-ion-battery-logistics (kib-*, Sparkles #7e22ce)
+  - Icons verified in iconMap (Diamond at line 195, Sparkles at line 43)
+- Created Silicon Anode Logistics (R366a): 195 lines, sil-* teal #0f766e, 14 records
+  - 14 facilities across 12 states (Karnataka, Telangana, Maharashtra, Gujarat, TN, West Bengal, Odisha, Haryana, Rajasthan, UP, Kerala, MP, Assam)
+  - 14 anode types: Nano-Si Composite/SiOx 1.5V/Porous Si Nanowire/SiC Nanoparticle/Si-Graphite Alloy/Si-Carbon Microsphere/Metallurgical Si Micropowder/Si-Polymer Binder/Amorphous Si Thin Film/Recycled Si from PV/Si-Graphene 3D/Si Preform Solid-State/Si-Carbon Coated/Bio-Silica Si Nano
+  - 9,750 TPA total capacity, 2,714 mAh/g avg specific capacity, 918 avg cycle life, ₹3,795 Cr investment
+- Created Potassium-Ion Battery Logistics (R366b): 195 lines, kib-* purple #7e22ce, 14 records
+  - 14 facilities across 12 states (Karnataka, Telangana, Maharashtra, Gujarat, TN, West Bengal, Odisha, Rajasthan, UP, Assam, AP, Kerala, MP)
+  - 14 cell types: K-Ion Prismatic 100Ah/Cylindrical 4680/Container 500kWh/Pouch 200Ah/Marine 280Ah/Telecom 50Ah/Mining LFP 100Ah/Prismatic 150Ah/Agri Pump 300Ah/DC Rack 200Ah/Home 10kWh/Microgrid 100kWh/Defence Module 200Ah/Fishing Boat 150Ah
+  - 900 MWh total capacity, 144 Wh/kg avg energy density, 4,029 avg cycle life, ₹3,370 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (571), page.tsx (1091 viewMap entries), app-store.ts (577 navItems)
+- CSS: 25 lines appended (60,392 total, +25 lines)
+- Git: commit 333c83c pushed
+
+Stage Summary:
+- MODULE FILES: 566 (+2) | NAVITEMS: 577 (+2) | CSS: 60,392 lines (+25)
+- TSC: 0 errors (src/) | GITHUB: pushed (333c83c)
+
+**Project Current State:**
+- 566 module view files, 577 navItems, 60,392 CSS lines, 1091 viewMap entries
+- TSC clean (0 errors in src/)
+- R366 complete, stable state
+- Next candidates: aluminium-air-logistics, methanol-fuel-logistics, syngas-logistics, graphene-battery-logistics, titanium-alloy-logistics, carbon-capture-logistics
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 560+ modules, dev server OOM risk — continue TSC-only QA approach
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
