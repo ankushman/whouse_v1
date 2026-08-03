@@ -60035,3 +60035,19 @@ html.theme-transition body {
 .crp-tab:hover { background: rgba(6, 78, 59, 0.08); }
 .crp-dashboard, .crp-registry, .crp-analytics, .crp-insights { animation: fadeIn 0.3s ease; }
 .crp-table-wrap { box-shadow: 0 1px 3px rgba(6, 78, 59, 0.1); }
+
+/* === Bridge Construction Logistics (brc-*) === */
+.brc-root { background: linear-gradient(135deg, #fafaf9 0%, #f5f5f4 100%); }
+.brc-tabs { border-bottom: 2px solid #292524; }
+.brc-tab { transition: all 0.2s; }
+.brc-tab:hover { background: rgba(41, 37, 36, 0.08); }
+.brc-dashboard, .brc-registry, .brc-analytics, .brc-insights { animation: fadeIn 0.3s ease; }
+.brc-table-wrap { box-shadow: 0 1px 3px rgba(41, 37, 36, 0.1); }
+
+/* === Desalination Plant Logistics (dsp-*) === */
+.dsp-root { background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); }
+.dsp-tabs { border-bottom: 2px solid #164e63; }
+.dsp-tab { transition: all 0.2s; }
+.dsp-tab:hover { background: rgba(22, 78, 99, 0.08); }
+.dsp-dashboard, .dsp-registry, .dsp-analytics, .dsp-insights { animation: fadeIn 0.3s ease; }
+.dsp-table-wrap { box-shadow: 0 1px 3px rgba(22, 78, 99, 0.1); }

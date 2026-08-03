@@ -458,3 +458,5 @@ export { default as LngTerminalLogisticsView } from './lng-terminal-logistics-vi
 export { default as MonorailSystemLogisticsView } from './monorail-system-logistics-view'
 export { default as DroneDeliveryLogisticsView } from './drone-delivery-logistics-view'
 export { default as CableCarRopewayLogisticsView } from './cable-car-ropeway-logistics-view'
+export { default as BridgeConstructionLogisticsView } from './bridge-construction-logistics-view'
+export { default as DesalinationPlantLogisticsView } from './desalination-plant-logistics-view'

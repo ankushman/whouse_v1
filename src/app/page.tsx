@@ -468,6 +468,8 @@ import LngTerminalLogisticsView from "@/components/modules/lng-terminal-logistic
 import MonorailSystemLogisticsView from "@/components/modules/monorail-system-logistics-view"
 import DroneDeliveryLogisticsView from "@/components/modules/drone-delivery-logistics-view"
 import CableCarRopewayLogisticsView from "@/components/modules/cable-car-ropeway-logistics-view"
+import BridgeConstructionLogisticsView from "@/components/modules/bridge-construction-logistics-view"
+import DesalinationPlantLogisticsView from "@/components/modules/desalination-plant-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -935,6 +937,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "monorail-system": MonorailSystemLogisticsView,
   "drone-delivery": DroneDeliveryLogisticsView,
   "cable-car-ropeway": CableCarRopewayLogisticsView,
+  "bridge-construction": BridgeConstructionLogisticsView,
+  "desalination-plant": DesalinationPlantLogisticsView,
 }
 
 
