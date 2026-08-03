@@ -472,3 +472,5 @@ export { default as SuperconductingCableTransmissionLogisticsView } from './supe
 export { default as DeepWaterDrillingPlatformLogisticsView } from './deep-water-drilling-platform-logistics-view'
 export { default as NuclearPowerPlantConstructionLogisticsView } from './nuclear-power-plant-construction-logistics-view'
 export { default as SatelliteLaunchComplexLogisticsView } from './satellite-launch-complex-logistics-view'
+export { default as QuantumCommunicationNetworkLogisticsView } from './quantum-communication-network-logistics-view'
+export { default as SpaceDebrisRemovalLogisticsView } from './space-debris-removal-logistics-view'

@@ -478,6 +478,8 @@ export const navItems: NavItem[] = [
   { id: 'deep-water-drilling-platform', label: 'Deep Water Drilling Platform', icon: 'Drill', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'nuclear-power-plant-construction', label: 'Nuclear Power Plant Construction', icon: 'Zap', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'satellite-launch-complex', label: 'Satellite Launch Complex', icon: 'Rocket', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'quantum-communication-network', label: 'Quantum Communication Network', icon: 'Shield', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'space-debris-removal', label: 'Space Debris Removal', icon: 'Satellite', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

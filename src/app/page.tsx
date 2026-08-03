@@ -482,6 +482,8 @@ import SuperconductingCableTransmissionLogisticsView from "@/components/modules/
 import DeepWaterDrillingPlatformLogisticsView from "@/components/modules/deep-water-drilling-platform-logistics-view"
 import NuclearPowerPlantConstructionLogisticsView from "@/components/modules/nuclear-power-plant-construction-logistics-view"
 import SatelliteLaunchComplexLogisticsView from "@/components/modules/satellite-launch-complex-logistics-view"
+import QuantumCommunicationNetworkLogisticsView from "@/components/modules/quantum-communication-network-logistics-view"
+import SpaceDebrisRemovalLogisticsView from "@/components/modules/space-debris-removal-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -963,6 +965,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "deep-water-drilling-platform": DeepWaterDrillingPlatformLogisticsView,
   "nuclear-power-plant-construction": NuclearPowerPlantConstructionLogisticsView,
   "satellite-launch-complex": SatelliteLaunchComplexLogisticsView,
+  "quantum-communication-network": QuantumCommunicationNetworkLogisticsView,
+  "space-debris-removal": SpaceDebrisRemovalLogisticsView,
 }
 
 
