@@ -610,3 +610,5 @@ export { default as SilverPasteLogisticsView } from './silver-paste-logistics-vi
 export { default as SiliconMetalLogisticsView } from './silicon-metal-logistics-view'
 export { default as RareGasLogisticsView } from './rare-gas-logistics-view'
 export { default as CarbonBrushLogisticsView } from './carbon-brush-logistics-view'
+export { default as AluminaCeramicLogisticsView } from './alumina-ceramic-logistics-view'
+export { default as ChromiumAlloyLogisticsView } from './chromium-alloy-logistics-view'

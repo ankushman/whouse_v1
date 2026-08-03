@@ -61275,3 +61275,84 @@ html.theme-transition body {
 .cbl-card-header { font-size: 0.875rem; font-weight: 600; padding-bottom: 0.5rem; }
 .cbl-card-content { padding: 0.5rem 0; }
 .cbl-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
+/* R388 — Alumina Ceramic Logistics (sky-600) */
+.alc-kpi-card { border-left: 4px solid #0284c7; background: rgba(224, 242, 254, 0.3); }
+.alc-tab-active { border-bottom: 2px solid #0284c7; color: #0c4a6e; }
+.alc-bar-fill { background: #0284c7; }
+.alc-bar-track { background: #e0f2fe; }
+.alc-bar-fill-alt { background: #2563eb; }
+.alc-bar-track-alt { background: #dbeafe; }
+.alc-insight-card { border-left: 4px solid #0284c7; }
+.alc-insight-alt-1 { border-left: 4px solid #ef4444; }
+.alc-insight-alt-2 { border-left: 4px solid #10b981; }
+.alc-insight-alt-3 { border-left: 4px solid #a855f7; }
+.alc-delayed-row { border-left: 4px solid #ef4444; background: rgba(254, 226, 226, 0.3); }
+.alc-badge-active { background: #0284c7; color: white; }
+.alc-badge-inactive { border: 1px solid #bae6fd; color: #0284c7; }
+.alc-chart-title { font-size: 0.875rem; font-weight: 600; color: #1e293b; }
+.alc-kpi-value { font-size: 1.5rem; font-weight: 700; color: #0c4a6e; }
+.alc-kpi-label { font-size: 0.75rem; color: #6b7280; }
+.alc-table-header { font-size: 0.875rem; font-weight: 600; padding: 0.5rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.alc-table-cell { padding: 0.5rem; font-size: 0.875rem; }
+.alc-table-mono { padding: 0.5rem; font-size: 0.75rem; font-family: monospace; }
+.alc-filter-input { max-width: 20rem; }
+.alc-filter-badge { cursor: pointer; }
+.alc-filter-badge-active { background: #0284c7; color: white; }
+.alc-filter-badge-inactive { border: 1px solid #bae6fd; color: #0284c7; background: transparent; }
+.alc-zone-bar-track { background: #dbeafe; }
+.alc-zone-bar-fill { background: #2563eb; }
+.alc-priority-bar-track { background: #fef3c7; }
+.alc-priority-bar-fill { background: #d97706; }
+.alc-status-bar-track { background: #e0f2fe; }
+.alc-status-bar-fill { background: #0284c7; }
+.alc-range-bar-track { background: #e0f2fe; }
+.alc-range-bar-fill { background: #0284c7; }
+.alc-card-wrapper { border-radius: 0.5rem; padding: 1rem; background: white; }
+.alc-card-header { font-size: 0.875rem; font-weight: 600; padding-bottom: 0.5rem; }
+.alc-card-content { padding: 0.5rem 0; }
+.alc-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
+.alc-purity-bar-track { background: #e0f2fe; }
+.alc-purity-bar-fill { background: #0284c7; }
+.alc-hardness-bar-track { background: #dbeafe; }
+.alc-hardness-bar-fill { background: #2563eb; }
+
+/* R388 — Chromium Alloy Logistics (emerald-600) */
+.cra-kpi-card { border-left: 4px solid #047857; background: rgba(209, 250, 229, 0.3); }
+.cra-tab-active { border-bottom: 2px solid #047857; color: #064e3b; }
+.cra-bar-fill { background: #047857; }
+.cra-bar-track { background: #d1fae5; }
+.cra-bar-fill-alt { background: #16a34a; }
+.cra-bar-track-alt { background: #dcfce7; }
+.cra-insight-card { border-left: 4px solid #047857; }
+.cra-insight-alt-1 { border-left: 4px solid #0284c7; }
+.cra-insight-alt-2 { border-left: 4px solid #f97316; }
+.cra-insight-alt-3 { border-left: 4px solid #f43f5e; }
+.cra-delayed-row { border-left: 4px solid #ef4444; background: rgba(254, 226, 226, 0.3); }
+.cra-badge-active { background: #047857; color: white; }
+.cra-badge-inactive { border: 1px solid #6ee7b7; color: #047857; }
+.cra-chart-title { font-size: 0.875rem; font-weight: 600; color: #1e293b; }
+.cra-kpi-value { font-size: 1.5rem; font-weight: 700; color: #064e3b; }
+.cra-kpi-label { font-size: 0.75rem; color: #6b7280; }
+.cra-table-header { font-size: 0.875rem; font-weight: 600; padding: 0.5rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.cra-table-cell { padding: 0.5rem; font-size: 0.875rem; }
+.cra-table-mono { padding: 0.5rem; font-size: 0.75rem; font-family: monospace; }
+.cra-filter-input { max-width: 20rem; }
+.cra-filter-badge { cursor: pointer; }
+.cra-filter-badge-active { background: #047857; color: white; }
+.cra-filter-badge-inactive { border: 1px solid #6ee7b7; color: #047857; background: transparent; }
+.cra-zone-bar-track { background: #dcfce7; }
+.cra-zone-bar-fill { background: #16a34a; }
+.cra-priority-bar-track { background: #fef3c7; }
+.cra-priority-bar-fill { background: #d97706; }
+.cra-status-bar-track { background: #d1fae5; }
+.cra-status-bar-fill { background: #047857; }
+.cra-family-bar-track { background: #d1fae5; }
+.cra-family-bar-fill { background: #047857; }
+.cra-card-wrapper { border-radius: 0.5rem; padding: 1rem; background: white; }
+.cra-card-header { font-size: 0.875rem; font-weight: 600; padding-bottom: 0.5rem; }
+.cra-card-content { padding: 0.5rem 0; }
+.cra-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
+.cra-cr-bar-track { background: #d1fae5; }
+.cra-cr-bar-fill { background: #047857; }
+.cra-hardness-bar-track { background: #dcfce7; }
+.cra-hardness-bar-fill { background: #16a34a; }
