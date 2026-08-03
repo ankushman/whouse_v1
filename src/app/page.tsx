@@ -1076,6 +1076,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "gravity-energy-storage": GravityEnergyStorageView,
   "compressed-air-energy-storage": CompressedAirEnergyStorageView,
   "hydrogen-liquefaction-logistics": HydrogenLiquefactionLogisticsView,
+  "mycelium-logistics": MyceliumLogisticsView,
+  "sodium-ion-logistics": SodiumIonLogisticsView,
 }
 
 
@@ -1240,3 +1242,5 @@ import IronAirBatteryLogisticsView from "@/components/modules/iron-air-battery-l
 import GravityEnergyStorageView from "@/components/modules/gravity-energy-storage-view"
 import CompressedAirEnergyStorageView from "@/components/modules/compressed-air-energy-storage-view"
 import HydrogenLiquefactionLogisticsView from "@/components/modules/hydrogen-liquefaction-logistics-view"
+import MyceliumLogisticsView from "@/components/modules/mycelium-logistics-view"
+import SodiumIonLogisticsView from "@/components/modules/sodium-ion-logistics-view"

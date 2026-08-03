@@ -556,3 +556,5 @@ export { default as IronAirBatteryLogisticsView } from './iron-air-battery-logis
 export { default as GravityEnergyStorageView } from './gravity-energy-storage-view'
 export { default as CompressedAirEnergyStorageView } from './compressed-air-energy-storage-view'
 export { default as HydrogenLiquefactionLogisticsView } from './hydrogen-liquefaction-logistics-view'
+export { default as MyceliumLogisticsView } from './mycelium-logistics-view'
+export { default as SodiumIonLogisticsView } from './sodium-ion-logistics-view'
