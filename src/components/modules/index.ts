@@ -542,3 +542,5 @@ export { default as TidalEnergyLogisticsView } from './tidal-energy-logistics-vi
 export { default as HydrogenRefuelingLogisticsView } from './hydrogen-refueling-logistics-view'
 export { default as EVTelematicsPlatformView } from './ev-telematics-platform-view'
 export { default as UrbanMiningLogisticsView } from './urban-mining-logistics-view'
+export { default as SmartCampusLogisticsView } from './smart-campus-logistics-view'
+export { default as NanoMaterialLogisticsView } from './nano-material-logistics-view'

@@ -1062,6 +1062,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "hydrogen-refueling-logistics": HydrogenRefuelingLogisticsView,
   "ev-telematics-platform": EVTelematicsPlatformView,
   "urban-mining-logistics": UrbanMiningLogisticsView,
+  "smart-campus-logistics": SmartCampusLogisticsView,
+  "nano-material-logistics": NanoMaterialLogisticsView,
 }
 
 
@@ -1208,6 +1210,8 @@ import UndergroundEnergyStorageView from "@/components/modules/underground-energ
 import HydrogenRefuelingLogisticsView from "@/components/modules/hydrogen-refueling-logistics-view"
 import EVTelematicsPlatformView from "@/components/modules/ev-telematics-platform-view"
 import UrbanMiningLogisticsView from "@/components/modules/urban-mining-logistics-view"
+import SmartCampusLogisticsView from "@/components/modules/smart-campus-logistics-view"
+import NanoMaterialLogisticsView from "@/components/modules/nano-material-logistics-view"
 import SmartCityResilienceHubLogisticsView from "@/components/modules/smart-city-resilience-hub-logistics-view"
 import UrbanCanopyMicroclimateLogisticsView from "@/components/modules/urban-canopy-microclimate-logistics-view"
 import SmartGridOSLogisticsView from "@/components/modules/smart-grid-os-logistics-view"
