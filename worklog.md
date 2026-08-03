@@ -11226,3 +11226,54 @@ Stage Summary:
 - Gallium arsenide module covers AESA radar, 5G mmWave, space solar cells, LiDAR, satellite comms, night vision and thermal imaging
 - Delayed: TAC-B2407 (Kolkata→Bengaluru, 10d), TAC-B2412 (Jorhat→Nazira, 11d), GAAS-B2407 (Kolkata→Ghaziabad, 10d), GAAS-B2413 (Guwahati→Bengaluru, 12d)
 - Next candidates (pre-validated): hafnium-alloy, scandium-alloy, niobium-alloy, zirconia-ceramic, nickel-superalloy, platinum-group-metal, palladium-catalyst, silver-paste
+---
+Task ID: R379 — Hafnium Alloy Logistics + Zirconia Ceramic Logistics
+Agent: Main Agent (Cron Loop)
+Task: R379 — 2 new Indian logistics modules for hafnium strategic alloys and advanced zirconia ceramics.
+
+Work Log:
+- Read worklog: R378 complete (commit dd42392), 597 modules, 601 navItems, 60,820 CSS
+- TSC pre-validation: 0 errors in src/ (only pre-existing errors in skills/mini-services)
+- Dev server: OOM killed (expected with 600+ modules, using TSC-only QA)
+- Duplicate theme search: 15 candidates tested, all confirmed clean
+  - Selected hafnium-alloy-logistics (haf-*, ShieldCheck #059669) and zirconia-ceramic-logistics (zrc-*, Crown #e11d48)
+  - Icons verified in iconMap (ShieldCheck and Crown available)
+- Created Hafnium Alloy Logistics (R379a): ~245 lines, haf-* emerald #059669, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, IGCAR, HAL Aero Engines, DRDO DMRL, Tata Advanced Materials, BEL, Hindalco, PRL Ahmedabad, Rajasthan State Mines, IIT Madras, NALCO, Oil India, Gujarat Fluorochemicals, TASL
+  - 14 alloy grades: Hf-10Nb-Zr (C103 mod), Hf-2.5Nb, HfC-Coated C103, Hf-Ta-C (UHTC), Hf-Ni-Al, HfO2 Thin Film, Hf-Zr Sponge, HfB2, Hf-Ti, HfSiC CMC, Hf-Cr, Hf-W, HfN Sputter Target, Hf-Mo
+  - Applications: rocket nozzle, nuclear control blade, turbine TBC, hypersonic nose cap, aero combustor, DRAM capacitor, welding electrode, re-entry heat shield, naval desalination, gas turbine shroud, petrochemical cracker, geothermal casing, semiconductor gate electrode, missile radome
+  - ₹3,273 Cr total investment, avg 1,213°C max temp across 14 grades
+- Created Zirconia Ceramic Logistics (R379b): ~250 lines, zrc-* rose #e11d48, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Bharat Ceramics, MIDHANI, Saint-Gobain, DRDO DMRL, Tata Advanced Materials, BEL, CGCRI, Reliance SBR, Rajasthan State Mines, IIT Madras, Indian Rare Earths, Oil India, Gujarat Fluorochemicals, TASL
+  - 14 ceramic types: 3Y-TZP, Mg-PSZ, 8Y-FSZ, Ce-TZP, ZTA, Sc-Stabilized ZrO2, Bioglass-Zirconia, TZP Grinding Media, Calcined Zircon, Y-TZP/PEEK, Fused Zirconia (CaO), TZP Valve Seat, Nano-ZrO2 (8nm), ZrO2-WC Composite
+  - Applications: knee joint femoral, TBC coating, O2 sensor, armour plate, cutting tool, SOFC electrolyte, dental implant, grinding media, refractory lining, spine fusion cage, foundry coating, pipeline valve, FCC catalyst support, spindle bearing
+  - ₹1,568 Cr total investment, avg 6.9 MPa√m fracture toughness
+- Three-file registration completed: index.ts (597 lines), page.tsx (1119 viewMap entries), app-store.ts (603 navItems)
+- CSS appended: 42 new rules for haf-* (emerald) and zrc-* (rose) themes (~60,862 total)
+- TSC post-validation: 0 errors in src/ on first pass
+- Git commit: bd9465e, pushed to main
+
+Stage Summary:
+- Project now: 599 modules, 603 navItems, ~60,862 CSS lines, 1119 viewMap entries, 0 TSC errors
+- Hafnium alloy module covers strategic nuclear (control blades, welding), space (nozzle, heat shield, radome), hypersonic (UHTC nose cap), aerospace (TBC), and semiconductor (HfO2, HfN) applications
+- Zirconia ceramic module covers biomedical (orthopaedic, dental, spinal), defence (armour), aerospace (TBC, cutting tools), energy (SOFC electrolytes), foundry, mining, refinery catalysts, and machine tool bearings
+- Both modules use established patterns: dual-jump Record type assertion, for...of filter loops, correct PageHeader signature
+- Delayed: HAF-B2404 (Hyderabad→Chandigarh, 10d, hafnium sponge import quarantine), HAF-B2412 (Jorhat→Surajkund, 12d, Ladakh transport), ZRC-B2404 (Hyderabad→Pune, 10d, CeO2 precursor), ZRC-B2412 (Jorhat→Duliajan, 12d, monsoon flooding)
+- Next candidates (pre-validated): scandium-alloy, niobium-alloy, nickel-superalloy, platinum-group-metal, palladium-catalyst, silver-paste, lithium-refining, vanadium-alloy, titanium-sponge, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush
+
+**Project Current State:**
+- 599 module view files, 603 navItems, ~60,862 CSS lines, 1119 viewMap entries
+- TSC clean (0 errors in src/)
+- R379 complete, stable state
+- Dev server OOM with 600+ modules — continue TSC-only QA approach
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 599+ modules, dev server OOM risk — continue TSC-only QA approach
+- NavItem label overwrite risk when inserting new entries — verify adjacent labels
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Object.entries(map) arithmetic requires explicit [string, number][] type assertion
+- PageHeader must import from @/components/shared (not @/components/page-header)
