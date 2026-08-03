@@ -622,3 +622,5 @@ export { default as CobaltSuperalloyLogisticsView } from './cobalt-superalloy-lo
 export { default as TitaniumSheetLogisticsView } from './titanium-sheet-logistics-view'
 export { default as InconelLogisticsView } from './inconel-superalloy-logistics-view'
 export { default as CopperNickelAlloyLogisticsView } from './copper-nickel-alloy-logistics-view'
+export { default as BerylliumAlloyLogisticsView } from './beryllium-alloy-logistics-view'
+export { default as PlatinumAlloyLogisticsView } from './platinum-alloy-logistics-view'

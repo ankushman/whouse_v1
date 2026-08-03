@@ -61658,3 +61658,27 @@ html.theme-transition body {
 .bg-teal-600 { background-color: #0d9488; }
 .bg-cyan-100 { background-color: #cffafe; }
 .bg-cyan-600 { background-color: #0891b2; }
+
+/* R395a — Beryllium Alloy Logistics (bea-*) emerald */
+.beryllium-alloy-logistics .space-y-6 > :first-child { border-left: 3px solid #059669; }
+.beryllium-alloy-logistics .grid > div:nth-child(1) { border-top: 2px solid #059669; }
+.beryllium-alloy-logistics .grid > div:nth-child(2) { border-top: 2px solid #34d399; }
+.beryllium-alloy-logistics .grid > div:nth-child(3) { border-top: 2px solid #10b981; }
+.beryllium-alloy-logistics .grid > div:nth-child(4) { border-top: 2px solid #6ee7b7; }
+.beryllium-alloy-logistics .border-b button { transition: all 0.2s; }
+.beryllium-alloy-logistics .border-b button:hover { background: #ecfdf5; }
+.beryllium-alloy-logistics table thead { background: #f0fdf4; }
+.beryllium-alloy-logistics table tbody tr:hover { background: #ecfdf5; }
+.beryllium-alloy-logistics .text-emerald-600 { letter-spacing: 0.025em; }
+
+/* R395b — Platinum Alloy Logistics (pta-*) purple */
+.platinum-alloy-logistics .space-y-6 > :first-child { border-left: 3px solid #7c3aed; }
+.platinum-alloy-logistics .grid > div:nth-child(1) { border-top: 2px solid #7c3aed; }
+.platinum-alloy-logistics .grid > div:nth-child(2) { border-top: 2px solid #a78bfa; }
+.platinum-alloy-logistics .grid > div:nth-child(3) { border-top: 2px solid #8b5cf6; }
+.platinum-alloy-logistics .grid > div:nth-child(4) { border-top: 2px solid #c4b5fd; }
+.platinum-alloy-logistics .border-b button { transition: all 0.2s; }
+.platinum-alloy-logistics .border-b button:hover { background: #f5f3ff; }
+.platinum-alloy-logistics table thead { background: #faf5ff; }
+.platinum-alloy-logistics table tbody tr:hover { background: #f5f3ff; }
+.platinum-alloy-logistics .text-purple-600 { letter-spacing: 0.025em; }
