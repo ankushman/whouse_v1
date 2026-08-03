@@ -60019,3 +60019,19 @@ html.theme-transition body {
 .mnr-tab:hover { background: rgba(91, 33, 182, 0.08); }
 .mnr-dashboard, .mnr-registry, .mnr-analytics, .mnr-insights { animation: fadeIn 0.3s ease; }
 .mnr-table-wrap { box-shadow: 0 1px 3px rgba(91, 33, 182, 0.1); }
+
+/* === Drone Delivery Logistics (drn-*) === */
+.drn-root { background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); }
+.drn-tabs { border-bottom: 2px solid #312e81; }
+.drn-tab { transition: all 0.2s; }
+.drn-tab:hover { background: rgba(49, 46, 129, 0.08); }
+.drn-dashboard, .drn-registry, .drn-analytics, .drn-insights { animation: fadeIn 0.3s ease; }
+.drn-table-wrap { box-shadow: 0 1px 3px rgba(49, 46, 129, 0.1); }
+
+/* === Cable Car Ropeway Logistics (crp-*) === */
+.crp-root { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); }
+.crp-tabs { border-bottom: 2px solid #064e3b; }
+.crp-tab { transition: all 0.2s; }
+.crp-tab:hover { background: rgba(6, 78, 59, 0.08); }
+.crp-dashboard, .crp-registry, .crp-analytics, .crp-insights { animation: fadeIn 0.3s ease; }
+.crp-table-wrap { box-shadow: 0 1px 3px rgba(6, 78, 59, 0.1); }

@@ -456,3 +456,5 @@ export { default as HydroelectricDamConstructionLogisticsView } from './hydroele
 export { default as TunnelBoringMachineLogisticsView } from './tunnel-boring-machine-logistics-view'
 export { default as LngTerminalLogisticsView } from './lng-terminal-logistics-view'
 export { default as MonorailSystemLogisticsView } from './monorail-system-logistics-view'
+export { default as DroneDeliveryLogisticsView } from './drone-delivery-logistics-view'
+export { default as CableCarRopewayLogisticsView } from './cable-car-ropeway-logistics-view'
