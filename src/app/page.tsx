@@ -488,6 +488,8 @@ import SolidStateBatteryManufacturingLogisticsView from "@/components/modules/so
 import GreenAmmoniaProductionLogisticsView from "@/components/modules/green-ammonia-production-logistics-view"
 import FusionEnergyReactorLogisticsView from "@/components/modules/fusion-energy-reactor-logistics-view"
 import OceanWaveEnergyLogisticsView from "@/components/modules/ocean-wave-energy-logistics-view"
+import DirectAirCaptureLogisticsView from "@/components/modules/direct-air-capture-logistics-view"
+import FloatingSolarFarmLogisticsView from "@/components/modules/floating-solar-farm-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -975,6 +977,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "green-ammonia-production": GreenAmmoniaProductionLogisticsView,
   "fusion-energy-reactor": FusionEnergyReactorLogisticsView,
   "ocean-wave-energy": OceanWaveEnergyLogisticsView,
+  "direct-air-capture": DirectAirCaptureLogisticsView,
+  "floating-solar-farm": FloatingSolarFarmLogisticsView,
 }
 
 

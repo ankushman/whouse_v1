@@ -478,3 +478,5 @@ export { default as SolidStateBatteryManufacturingLogisticsView } from './solid-
 export { default as GreenAmmoniaProductionLogisticsView } from './green-ammonia-production-logistics-view'
 export { default as FusionEnergyReactorLogisticsView } from './fusion-energy-reactor-logistics-view'
 export { default as OceanWaveEnergyLogisticsView } from './ocean-wave-energy-logistics-view'
+export { default as DirectAirCaptureLogisticsView } from './direct-air-capture-logistics-view'
+export { default as FloatingSolarFarmLogisticsView } from './floating-solar-farm-logistics-view'
