@@ -11157,3 +11157,38 @@ Stage Summary:
 - Both modules use established patterns: dual-jump Record type assertion, for...of filter loops, correct PageHeader signature
 - Delayed shipment tracking: MOL-B2404 (Pune→Mumbai, 10d), MOL-B2414 (Lucknow→Kanpur, 13d), INP-B2407 (Kolkata→Aurangabad, 9d), INP-B2412 (Bhubaneswar→Bhopal, 12d)
 - Next candidates (pre-validated): cobalt-alloy, magnesium-alloy, tantalum-capacitor, gallium-arsenide, hafnium-alloy, scandium-alloy
+---
+Task ID: R377 — Cobalt Alloy Logistics + Magnesium Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R377 — 2 new Indian logistics modules for cobalt-based superalloys and lightweight magnesium alloys.
+
+Work Log:
+- Read worklog: R376 complete (commit e18319e), 593 modules, 597 navItems, 60,720 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 24 candidates tested, all confirmed clean
+  - Selected cobalt-alloy-logistics (coa-*, Atom #2563eb) and magnesium-alloy-logistics (mga-*, Feather #0d9488)
+  - Icons verified in iconMap (Atom and Feather available)
+- Created Cobalt Alloy Logistics (R377a): ~235 lines, coa-* blue #2563eb, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: HAL, MIDHANI, Hindustan Aeronautics, Tata Advanced Materials, IGCAR, DRDO DMRL, Hindalco, Reliance SBR, Rajasthan State Mines, Elgi Ultra Castings, NALCO, Oil India, Gujarat Fluorochemicals, TASL
+  - 14 alloy grades: Stellite 6, Haynes 25 (L605), MP159, UMCo-50, Co-25Re, Stellite 21, Vitallium, Tribaloy T-400, Stellite 1, Co-Sm, Co-Mo Catalyst, Stellite 6B, Co-WC Composite, Co-Ni-Cr-W
+  - Applications: turbine blade, gas turbine liner, landing gear bolt, gas valve, nuclear control rod, hip implant, dental crown, pump shaft, mining drill, generator magnet, desulfurization catalyst, wellhead valve, wire drawing die, missile nozzle
+  - ₹2,467 Cr total investment, 14 alloy grades, 13 cities
+- Created Magnesium Alloy Logistics (R377b): ~240 lines, mga-* teal #0d9488, 14 records
+  - 14 records across 13 cities (Pune, Bengaluru, Chennai, Hyderabad, Mumbai, Noida, Kolkata, Coimbatore, Ahmedabad, Jaipur, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Mahindra, HAL, Hyundai Motor India, DRDO DMRL, Tata Motors, Lava International, IIT Kharagpur, TVS Motor, Adani Defence, Rajasthan State Mines, NALCO, Oil India, IIT Gandhinagar, TASL
+  - 14 alloy grades: AZ91D, WE43, AM60B, ZK60A, AZ31B, Mg-Li LA103, AZ61A, AM50A, Elektron 21, Pure Mg, AZ80A, AZ31B-F, Mg-Gd-Y-Zr GW103, Elektron 675
+  - Applications: steering wheel frame, helicopter gearbox, instrument panel, missile airframe, EV seat frame, laptop chassis, railway window frame, motorcycle cradle, UAV wing spar, steel desulfurization, fan blade hub, offshore walkway, EV battery enclosure, satellite panel frame
+  - ₹1,847 Cr total investment, 14 alloy grades, 13 cities
+- Three-file registration completed: index.ts (593 lines), page.tsx (1113 viewMap entries), app-store.ts (599 navItems)
+- CSS appended: 42 new rules for coa-* (blue) and mga-* (teal) themes
+- TSC post-validation: 0 errors in src/
+- Git commit: ccb68b1, pushed to main
+
+Stage Summary:
+- Project now: 595 modules, 599 navItems, ~60,770 CSS lines, 1113 viewMap entries, 0 TSC errors
+- Cobalt alloy module covers high-value strategic materials: Stellite wear alloys, Haynes superalloys, Co-Re nuclear alloys, biomedical Co-Cr-Mo, Co-Sm magnets, Co-Mo catalysts
+- Magnesium alloy module covers lightweight revolution: automotive EV, aerospace helicopter/UAV/missile, consumer electronics, railway, offshore, space satellite
+- Both modules use established patterns: dual-jump Record type assertion, for...of filter loops, correct PageHeader signature
+- Delayed shipment tracking: COA-B2404 (Pune→Vadodara, 10d), COA-B2412 (Jorhat→Jorhat, 11d), MGA-B2406 (Noida→Noida, 10d), MGA-B2412 (Jorhat→Mumbai, 12d)
+- Next candidates (pre-validated): tantalum-capacitor, gallium-arsenide, hafnium-alloy, scandium-alloy, niobium-alloy, zirconia-ceramic, nickel-superalloy, platinum-group-metal
