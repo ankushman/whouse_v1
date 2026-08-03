@@ -10532,3 +10532,30 @@ Work Log:
 Stage Summary:
 - MODULE FILES: 554 (+2) | NAVITEMS: 565 (+2) | CSS: 60,236 lines (+12)
 - TSC: 0 errors (src/) | GITHUB: pushed (903d9ef)
+---
+Task ID: R361 — Mycelium Logistics + Sodium Ion Battery Logistics
+Agent: Main Agent (Cron Loop)
+Task: R361 — 2 new Indian logistics modules for mycelium supply chains and sodium-ion battery manufacturing logistics.
+
+Work Log:
+- Read worklog: R360 complete (commit 903d9ef), 554 modules, 565 navItems, 60,236 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 18 candidates tested, all clean
+  - Selected mycelium-logistics (myc-*, Trees #166534) and sodium-ion-logistics (sir-*, Atom #7e22ce)
+  - Icons verified in iconMap (Trees at line 420, Atom at line 385)
+- Created Mycelium Logistics (R361a): 189 lines, myc-* green #166534, 14 records
+  - 14 facilities across 13 states+J&K (Karnataka, Uttarakhand, Assam, J&K, Maharashtra, MP, TN, Meghalaya, Telangana, Jharkhand, Kerala, Odisha, Manipur, Gujarat)
+  - 14 species: Ganoderma Reishi/Pleurotus Oyster/Volvariella Paddy/Morchella Morel/Agaricus Button/Phanerochaete Bioremediation/Ganoderma Bio-Leather/Lentinula Shiitake/Mycelium Foam/Pleurotus King Oyster/Trametes Coir/Mycelium Brick/Hericium Lions Mane/Cordyceps militaris
+  - 139,850 TPA total production, 23.4 kg/m3 avg yield, ₹1,498 Cr investment
+- Created Sodium Ion Battery Logistics (R361b): 189 lines, sir-* purple #7e22ce, 14 records
+  - 14 facilities across 10 states (Karnataka, Gujarat, Telangana, Maharashtra, TN, West Bengal, Odisha, UP, Rajasthan, Assam)
+  - 14 cell types: NaCrO2/NaFeHCF/HC-Na/Na3V2(PO4)3/NaNiMnO2/NaTi2(PO4)3/Na3V2(SO4)3/HC Fast-Charge/NaMnHCF/NaVPO4F/NaC6H4O2/Na0.67MnO2/HC-Na 145Wh/Na3Fe2(PO4)2
+  - 1,185 MWh total capacity, 120 Wh/kg avg energy density, ₹2,988 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (560), page.tsx (1081 viewMap entries), app-store.ts (567 navItems)
+- CSS: 2 blocks appended (60,248 total, +12 lines)
+- Git: commit 86e619e pushed
+
+Stage Summary:
+- MODULE FILES: 556 (+2) | NAVITEMS: 567 (+2) | CSS: 60,248 lines (+12)
+- TSC: 0 errors (src/) | GITHUB: pushed (86e619e)
