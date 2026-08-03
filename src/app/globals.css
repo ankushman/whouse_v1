@@ -60200,3 +60200,25 @@ html.theme-transition body {
 .fes-root { --fes-primary: #166534; }
 .tel-root { --tel-primary: #be123c; }
 .dle-root { --dle-primary: #0369a1; }
+.iab-root { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); min-height: 100vh; }
+.iab-tab { cursor: pointer; }
+.iab-tab:hover { background: #fef3c7; }
+.iab-kpi-card { border-radius: 12px; background: white; box-shadow: 0 1px 3px rgba(120,53,15,0.08); }
+.iab-kpi-label { color: #78350f; font-weight: 500; }
+.iab-kpi-value { color: #92400e; }
+.iab-chart-title { color: #78350f; }
+.iab-record-card { border-radius: 10px; transition: box-shadow 0.2s; }
+.iab-record-card:hover { box-shadow: 0 4px 12px rgba(120,53,15,0.12); }
+.iab-insight-card { border-radius: 12px; background: linear-gradient(135deg, #fffbeb 0%, #fef9c3 100%); }
+.iab-insight-title { color: #78350f; }
+.ges-root { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); min-height: 100vh; }
+.ges-tab { cursor: pointer; }
+.ges-tab:hover { background: #e2e8f0; }
+.ges-kpi-card { border-radius: 12px; background: white; box-shadow: 0 1px 3px rgba(30,41,59,0.08); }
+.ges-kpi-label { color: #334155; font-weight: 500; }
+.ges-kpi-value { color: #1e293b; }
+.ges-chart-title { color: #334155; }
+.ges-record-card { border-radius: 10px; transition: box-shadow 0.2s; }
+.ges-record-card:hover { box-shadow: 0 4px 12px rgba(30,41,59,0.12); }
+.ges-insight-card { border-radius: 12px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
+.ges-insight-title { color: #1e293b; }

@@ -1072,6 +1072,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "flywheel-energy-storage": FlywheelEnergyStorageView,
   "thermo-electric-logistics": ThermoElectricLogisticsView,
   "direct-lithium-extraction-logistics": DirectLithiumExtractionLogisticsView,
+  "iron-air-battery-logistics": IronAirBatteryLogisticsView,
+  "gravity-energy-storage": GravityEnergyStorageView,
 }
 
 
@@ -1232,3 +1234,5 @@ import PiezoelectricEnergyLogisticsView from "@/components/modules/piezoelectric
 import FlywheelEnergyStorageView from "@/components/modules/flywheel-energy-storage-view"
 import ThermoElectricLogisticsView from "@/components/modules/thermo-electric-logistics-view"
 import DirectLithiumExtractionLogisticsView from "@/components/modules/direct-lithium-extraction-logistics-view"
+import IronAirBatteryLogisticsView from "@/components/modules/iron-air-battery-logistics-view"
+import GravityEnergyStorageView from "@/components/modules/gravity-energy-storage-view"

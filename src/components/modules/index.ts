@@ -552,3 +552,5 @@ export { default as PiezoelectricEnergyLogisticsView } from './piezoelectric-ene
 export { default as FlywheelEnergyStorageView } from './flywheel-energy-storage-view'
 export { default as ThermoElectricLogisticsView } from './thermo-electric-logistics-view'
 export { default as DirectLithiumExtractionLogisticsView } from './direct-lithium-extraction-logistics-view'
+export { default as IronAirBatteryLogisticsView } from './iron-air-battery-logistics-view'
+export { default as GravityEnergyStorageView } from './gravity-energy-storage-view'
