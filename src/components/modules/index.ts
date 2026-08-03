@@ -507,3 +507,5 @@ export { default as CarbonCaptureUtilizationLogisticsView } from './carbon-captu
 export { default as ElectricFerryLogisticsView } from './electric-ferry-logistics-view'
 export { default as MicrogridManagementLogisticsView } from './microgrid-management-logistics-view'
 export { default as MoltenSaltStorageLogisticsView } from './molten-salt-storage-logistics-view'
+export { default as GreenSteelLogisticsView } from './green-steel-logistics-view'
+export { default as WindTurbineBladeRecyclingLogisticsView } from './wind-turbine-blade-recycling-logistics-view'
