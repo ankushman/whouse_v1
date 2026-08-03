@@ -78,6 +78,34 @@ Stage Summary:
 - MODULE FILES: 533 (+2) | NAVITEMS: 545 (+2) | CSS: 60,186 lines (+2)
 - TSC: 0 errors (src/) | GITHUB: pushed (0d8f0af)
 ---
+Task ID: R351 — Biomass Gasification + Underground Energy Storage
+Agent: Main Agent (Cron Loop)
+Task: R351 — 2 new Indian logistics modules for biomass gasification and underground energy storage.
+
+Work Log:
+- Read worklog: R350 complete (commit 0d8f0af), 533 modules, 545 navItems, 60,186 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 10 candidates tested
+  - graphene-production-logistics already exists (removed from candidates)
+  - biomass-gasification-logistics and underground-energy-storage confirmed unique
+  - Selected biomass-gasification-logistics (bgl-*, Factory #9a3412) and underground-energy-storage (ues-*, Pickaxe #4338ca)
+- Created Biomass Gasification Logistics (R351a): ~195 lines, bgl-* amber #9a3412, 14 records
+  - 14 plants across 13 Indian states (Gujarat, TN, UP, MP, Maharashtra, Odisha, Karnataka, Punjab, Rajasthan, Assam, AP, Chhattisgarh, Kerala, Jharkhand)
+  - 14 feedstock types: Rice Husk, Coir Pith, Bagasse, MSW, Cotton Stalk, Casuarina, Coffee Husk, Paddy Straw, Mustard Stalk, Bamboo, Groundnut Shell, Mahua Seedcake, Coconut Shell, Coal Overburden
+  - 8,830 TPD capacity, 132 MW syngas, &#8377;6,940 Cr investment
+- Created Underground Energy Storage (R351b): ~200 lines, ues-* indigo #4338ca, 14 records
+  - 14 sites across 11 Indian states (AP, Rajasthan, Karnataka, MP, Jharkhand, Gujarat, Maharashtra, Odisha, Telangana, TN)
+  - 8 storage types: Salt Cavern CAES, Aquifer Thermal, Abandoned Mine CAES, Hard Rock Battery, Coal Mine Pumped Hydro, Limestone Cavern TES, Sandstone Aquifer CAES, Basalt Cavern CAES
+  - 10,000 MWh total capacity, &#8377;22,550 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (541), page.tsx (1062 viewMap), app-store.ts (547 navItems)
+- CSS: 2 lines appended (60,188 total)
+- Git: commit 5325360 pushed
+
+Stage Summary:
+- MODULE FILES: 535 (+2) | NAVITEMS: 547 (+2) | CSS: 60,188 lines (+2)
+- TSC: 0 errors (src/) | GITHUB: pushed (5325360)
+---
 ---
 Task ID: R347 — Green Ammonia Logistics + Carbon Trading Platform
 Agent: Main Agent (Cron Loop)
