@@ -506,6 +506,8 @@ import AmmoniaCrackingLogisticsView from "@/components/modules/ammonia-cracking-
 import SpaceLaunchVehicleLogisticsView from "@/components/modules/space-launch-vehicle-logistics-view"
 import BiojetFuelLogisticsView from "@/components/modules/biojet-fuel-logistics-view"
 import RareEarthMineralsLogisticsView from "@/components/modules/rare-earth-minerals-logistics-view"
+import HydrogenPipelineLogisticsView from "@/components/modules/hydrogen-pipeline-logistics-view"
+import CarbonTradingLogisticsView from "@/components/modules/carbon-trading-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -1011,6 +1013,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "space-launch-vehicle": SpaceLaunchVehicleLogisticsView,
   "biojet-fuel": BiojetFuelLogisticsView,
   "rare-earth-minerals": RareEarthMineralsLogisticsView,
+  "hydrogen-pipeline": HydrogenPipelineLogisticsView,
+  "carbon-trading": CarbonTradingLogisticsView,
 }
 
 

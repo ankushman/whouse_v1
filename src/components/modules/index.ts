@@ -497,3 +497,5 @@ export { default as AmmoniaCrackingLogisticsView } from './ammonia-cracking-logi
 export { default as SpaceLaunchVehicleLogisticsView } from './space-launch-vehicle-logistics-view'
 export { default as BiojetFuelLogisticsView } from './biojet-fuel-logistics-view'
 export { default as RareEarthMineralsLogisticsView } from './rare-earth-minerals-logistics-view'
+export { default as HydrogenPipelineLogisticsView } from './hydrogen-pipeline-logistics-view'
+export { default as CarbonTradingLogisticsView } from './carbon-trading-logistics-view'
