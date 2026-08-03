@@ -476,3 +476,5 @@ export { default as QuantumCommunicationNetworkLogisticsView } from './quantum-c
 export { default as SpaceDebrisRemovalLogisticsView } from './space-debris-removal-logistics-view'
 export { default as SolidStateBatteryManufacturingLogisticsView } from './solid-state-battery-manufacturing-logistics-view'
 export { default as GreenAmmoniaProductionLogisticsView } from './green-ammonia-production-logistics-view'
+export { default as FusionEnergyReactorLogisticsView } from './fusion-energy-reactor-logistics-view'
+export { default as OceanWaveEnergyLogisticsView } from './ocean-wave-energy-logistics-view'
