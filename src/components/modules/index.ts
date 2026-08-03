@@ -521,3 +521,5 @@ export { default as EVChargingHubLogisticsView } from './ev-charging-hub-logisti
 export { default as HydrogenBlendingNetworkLogisticsView } from './hydrogen-blending-network-logistics-view'
 export { default as AgrivoltaicsLogisticsView } from './agrivoltaics-logistics-view'
 export { default as AutonomousPortLogisticsView } from './autonomous-port-logistics-view'
+export { default as QuantumComputingLogisticsView } from './quantum-computing-logistics-view'
+export { default as CarbonSequestrationLogisticsView } from './carbon-sequestration-logistics-view'
