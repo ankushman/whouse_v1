@@ -1,4 +1,53 @@
 ---
+Task ID: R387 — Rare Gas Logistics + Carbon Brush Logistics
+Agent: Main Agent (Cron Loop)
+Task: R387 — 2 new Indian logistics modules for rare gas (helium/argon/xenon/neon/krypton) supply chain and carbon brush / commutator material supply chain.
+
+Work Log:
+- Read worklog: R386 complete (commit abc1770), 613 modules, 617 navItems, ~61,240 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 13 candidates tested, all confirmed clean
+  - Selected rare-gas-logistics (rga-*, Atom teal #0d9488) and carbon-brush-logistics (cbl-*, CircuitBoard amber #b45309)
+  - Icons verified in iconMap (Atom and CircuitBoard available)
+- Created Rare Gas Logistics (R387a): 205 lines, rga-* teal #0d9488, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: INOX Air Products, Bhuruka Gases, Linde India, Ellenbarrie, National Oxygen, Signature Gases, BOC India, Gujarat Fluorochemicals, Rajasthan State Gases, Sri Varu Gases, Orissa Gases, Assam Air Products, Gujarat Petrochem Synthetics, UP State Oxygen Gases
+  - 14 gas types: Helium 5N/4N5/6N/4N, Argon 4N5/3N5/4N, Xenon 4N/3N, Neon 5N/4N, Krypton 4N/5N
+  - Applications: MRI cryogenics, TIG welding shield, satellite ion thruster, excimer laser lithography, insulated window, aero engine leak detection, steel AOD degassing, quantum computing dilution fridge, dental titanium casting, fibre optic drawing, medical imaging CT, oil pipeline purging, flash lamp laser, neon signage
+  - &#8377;1,805 Cr total investment, avg 99.998% purity across all gas batches
+- Created Carbon Brush Logistics (R387b): 205 lines, cbl-* amber #b45309, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Morgan Advanced Materials, Helwig Carbon, Schunk Carbon, Nippon Carbon India, Carbon Brushes India, Hindustan Carbon, Bengal Carbon Products, Gujarat Carbon Industries, Rajasthan Carbon Works, Coimbatore Carbon Industries, Odisha Carbon Industries, Assam Carbon Products, Gujarat Fluorochemicals, UP Carbon Industries
+  - 14 brush grades: EG-214D/CM-5/SA-45/EG-375/DC-8/CM-2/EG-345F/SA-32/CM-8/EG-214/DC-7/SA-45/CM-15/EG-375
+  - Applications: railway traction motor, EV motor controller, wind turbine slip ring, industrial alternator, steel mill reversing motor, elevator gearless motor, textile spinning motor, cement kiln drive, mining winder motor, agricultural pump motor, port quay crane, tea estate generator, petrochemical compressor, sugar mill crusher
+  - &#8377;1,298 Cr total investment, avg 15 A/cm2 current density across all brush grades
+- Fixed export style: changed named export to export default function for registration compatibility
+- TSC: 0 errors in src/ on first pass
+- Three-file registration: index.ts (613), page.tsx (1135 viewMap entries), app-store.ts (619 navItems)
+- CSS appended: 73 new rules (61,277 total)
+- TSC post-validation: 0 errors in src/
+- Duplicate verification: 4 entries per module (export + import + viewMap + navItem) — all correct
+- Git commit: aab0fdc, pushed to main
+
+Stage Summary:
+- Project now: 615 modules, 619 navItems, ~61,277 CSS lines, 1135 viewMap entries, 0 TSC errors
+- Rare gas: Helium MRI cryogenics &#8377;8,500Cr, Xenon ISRO ion thruster &#8377;4,200Cr, Argon welding/steel &#8377;9,000Cr, Neon excimer lithography &#8377;2,800Cr, Krypton insulated windows &#8377;3,200Cr
+- Carbon brush: Railway traction &#8377;8,500Cr (108M brushes/yr), EV DC motor &#8377;3,200Cr, Wind turbine slip ring &#8377;4,100Cr, Steel mill reversing &#8377;5,500Cr
+- Delayed: RGA-B2404 (10d, Ukraine neon supply), RGA-B2412 (12d, monsoon), CBL-B2404 (10d, graphite import), CBL-B2412 (12d, monsoon)
+- Next candidates (pre-validated): alumina-ceramic, chromium-alloy, zirconium-alloy, lithium-refining, bismuth-alloy, tantalum-alloy
+
+**Project Current State:**
+- 615 module view files, 619 navItems, ~61,277 CSS lines, 1135 viewMap entries
+- TSC clean (0 errors in src/)
+- R387 complete, stable state
+
+**Risks / Next Priorities:**
+- globals.css at 61K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 615+ modules, dev server OOM risk — continue TSC-only QA approach
+- Non-src/ TSC errors persist in scripts/ and skills/ (socket.io missing, gen-r195/r208 scripts) — not blocking
+- Next candidates: alumina-ceramic, chromium-alloy, zirconium-alloy, lithium-refining
+
+---
 Task ID: R375 — Diamond Synthetic Logistics + Rare Earth Magnet Logistics
 Agent: Main Agent (Cron Loop)
 Task: R375 — 2 new Indian logistics modules for synthetic diamond and rare earth magnet supply chains.
