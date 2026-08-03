@@ -60291,3 +60291,28 @@ html.theme-transition body {
 .mns-record-card:hover { box-shadow: 0 2px 8px rgba(124,45,18,0.12); transform: translateY(-1px); }
 .mns-insight-card:hover { box-shadow: 0 4px 12px rgba(124,45,18,0.15); }
 .mns-insight-title { color: #7c2d12; }
+/* ─── R363a: Cobalt-Free Battery Logistics (cfb-*, #065f46 emerald-900) ─── */
+.cfb-root { --cfb-accent: #065f46; --cfb-accent-light: #ecfdf5; }
+.cfb-kpi-card { border-left: 3px solid var(--cfb-accent); }
+.cfb-kpi-label { color: #065f46; }
+.cfb-kpi-value { color: #022c22; }
+.cfb-chart-title { color: #065f46; }
+.cfb-tab { transition: all 0.2s ease; }
+.cfb-tab:hover { background: #ecfdf5 !important; }
+.cfb-record-card { transition: all 0.2s ease; }
+.cfb-record-card:hover { box-shadow: 0 2px 8px rgba(6,95,70,0.12); transform: translateY(-1px); }
+.cfb-insight-card:hover { box-shadow: 0 4px 12px rgba(6,95,70,0.15); }
+.cfb-insight-title { color: #065f46; }
+
+/* ─── R363b: Solid-State Cooling Logistics (ssc-*, #1e3a5f blue-950) ─── */
+.ssc-root { --ssc-accent: #1e3a5f; --ssc-accent-light: #eff6ff; }
+.ssc-kpi-card { border-left: 3px solid var(--ssc-accent); }
+.ssc-kpi-label { color: #1e3a5f; }
+.ssc-kpi-value { color: #172554; }
+.ssc-chart-title { color: #1e3a5f; }
+.ssc-tab { transition: all 0.2s ease; }
+.ssc-tab:hover { background: #eff6ff !important; }
+.ssc-record-card { transition: all 0.2s ease; }
+.ssc-record-card:hover { box-shadow: 0 2px 8px rgba(30,58,95,0.12); transform: translateY(-1px); }
+.ssc-insight-card:hover { box-shadow: 0 4px 12px rgba(30,58,95,0.15); }
+.ssc-insight-title { color: #1e3a5f; }
