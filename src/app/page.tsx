@@ -502,6 +502,8 @@ import NuclearSmrLogisticsView from "@/components/modules/nuclear-smr-logistics-
 import LithiumExtractionLogisticsView from "@/components/modules/lithium-extraction-logistics-view"
 import CarbonCaptureStorageLogisticsView from "@/components/modules/carbon-capture-storage-logistics-view"
 import GreenMethanolLogisticsView from "@/components/modules/green-methanol-logistics-view"
+import AmmoniaCrackingLogisticsView from "@/components/modules/ammonia-cracking-logistics-view"
+import SpaceLaunchVehicleLogisticsView from "@/components/modules/space-launch-vehicle-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -1003,6 +1005,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "lithium-extraction": LithiumExtractionLogisticsView,
   "carbon-capture-storage": CarbonCaptureStorageLogisticsView,
   "green-methanol": GreenMethanolLogisticsView,
+  "ammonia-cracking": AmmoniaCrackingLogisticsView,
+  "space-launch-vehicle": SpaceLaunchVehicleLogisticsView,
 }
 
 
