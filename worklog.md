@@ -1,4 +1,24 @@
 ---
+Task ID: R321 — Direct Air Capture + Floating Solar Farm Logistics
+Agent: Main Agent (Cron Loop)
+Task: R321 — 2 new Indian logistics modules for direct air capture (IISc CSIR-IICT NCL IIT-M GSFC IIT-ISM FRI TIFR IIT-KGP CAZRI VSSC Reliance BARC — Solid Amine PEI-silica MOF Mg-MOF-74 UiO-66-NH2 Zeolite 13X/5A Liquid Solvent KOH NaOH Aqueous MEA Biochar CNT Aerogel Amine Oxide Polymer, TSA MSA LSA PSA VPS ECS Ca-Looping, 150-1200TPD 2800-12000kWh/T 78-95% efficiency 94-99.9% purity, 10MT CO2/yr 2050 target 450/tonne credit 8500Cr) and floating solar farm (NTPC TSGENCO MPPKVVCL MSEDCL MANIREDA APGENCO KSEB HPSEBL NE Solar — Mono PERC Float Bifacial Float HJT Float Thin-Film Float, 50-600MW 18.5-26.8% efficiency 1.2-8.5ha HDPE Pontoon Concrete Mooring Steel Pile Eco Anchor Modular Frame, Ramagundam Srisailam Koyna Idukki Rihand Loktak Ujani Gobind Sagar Nagarjuna Sagar, 10GW on dams by 2030 MNRE)
+
+Work Log:
+- Read worklog: R320 complete (commit bc7b53e), 474 modules, 486 navItems, 60,145 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate check: direct-air-capture and floating-solar-farm confirmed unique
+- Icons: Droplets (DAC), Sun (floating solar) verified in iconMap
+- Created Direct Air Capture Logistics (R321a): ~175 lines, dac-* dark sky #0c4a6e, 14 records
+- Created Floating Solar Farm Logistics (R321b): ~175 lines, fsf-* amber #b45309, 14 records
+- Used correct pattern: FilterGroup.label, Record<string, string[]>, &gt; for JSX text
+- ModuleBreadcrumb import correct (@/components/shared/module-breadcrumb)
+- Registered both in index.ts (482), page.tsx, app-store.ts (488 navItems)
+- CSS: 2 lines appended (60,147 total)
+- TSC FINAL: 0 errors | Git: commit 51998ef pushed
+
+Stage Summary:
+- MODULE FILES: 476 (+2) | NAVITEMS: 488 (+2) | CSS: 60,147 lines (+2)
+- TSC: 0 errors (modules) | GITHUB: pushed (51998ef)
 Task ID: R320 — Fusion Energy Reactor + Ocean Wave Energy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R320 — 2 new Indian logistics modules for fusion energy reactor (ITER-India IPR IISc BARC IGCAR L&T NCL Saha VSSC Bhopal-AMPRI DAE — Tokamak TF Coil Divertor FirstWall Cryostat Blanket NBI VacuumVessel DiagnosticPort Stellarator Coil PlasmaHeating TritiumBreeder MagneticSensor CoolingWaterLoop, 80-220MK 150-1000ms 0.5-5.0MW/m2 SST-1 ADITYA-U ITER DEMO STEAM Compact-Stellarator 2500Cr) and ocean wave energy (NIOT CWRDM L&T IISc NIO IIT-KGP COEP VSSC SVNIT Jadavpur PDPU — OWC PointAbsorber Buoy Attenuator Snake Overtopping Device Oscillating WaveSurge Submerged PressureDifferential Rotating MassGyroscope, 50-600kW 1.2-4.0m 5-12s 6-30m capture 28-45% efficiency, Vizag Lakshadweep Goa Kanyakumari Andaman Kerala Puri Sundarbans Daman Maldives, MNRE 40GW potential 45Cr)
