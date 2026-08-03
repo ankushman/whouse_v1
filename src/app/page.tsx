@@ -1084,6 +1084,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "solid-state-cooling-logistics": SolidStateCoolingLogisticsView,
   "smart-textile-logistics": SmartTextileLogisticsView,
   "e-fuel-logistics": EFuelLogisticsView,
+  "bio-methane-logistics": BioMethaneLogisticsView,
+  "vanadium-electrolyte-logistics": VanadiumElectrolyteLogisticsView,
 }
 
 
@@ -1256,3 +1258,5 @@ import CobaltFreeBatteryLogisticsView from "@/components/modules/cobalt-free-bat
 import SolidStateCoolingLogisticsView from "@/components/modules/solid-state-cooling-logistics-view"
 import SmartTextileLogisticsView from "@/components/modules/smart-textile-logistics-view"
 import EFuelLogisticsView from "@/components/modules/e-fuel-logistics-view"
+import BioMethaneLogisticsView from "@/components/modules/bio-methane-logistics-view"
+import VanadiumElectrolyteLogisticsView from "@/components/modules/vanadium-electrolyte-logistics-view"

@@ -564,3 +564,5 @@ export { default as CobaltFreeBatteryLogisticsView } from './cobalt-free-battery
 export { default as SolidStateCoolingLogisticsView } from './solid-state-cooling-logistics-view'
 export { default as SmartTextileLogisticsView } from './smart-textile-logistics-view'
 export { default as EFuelLogisticsView } from './e-fuel-logistics-view'
+export { default as BioMethaneLogisticsView } from './bio-methane-logistics-view'
+export { default as VanadiumElectrolyteLogisticsView } from './vanadium-electrolyte-logistics-view'

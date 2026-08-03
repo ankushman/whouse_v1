@@ -60341,3 +60341,27 @@ html.theme-transition body {
 .efl-record-card:hover { box-shadow: 0 2px 8px rgba(20,83,45,0.12); transform: translateY(-1px); }
 .efl-insight-card:hover { box-shadow: 0 4px 12px rgba(20,83,45,0.15); }
 .efl-insight-title { color: #14532d; }
+/* R365a — Bio-Methane Logistics (bml-*) */
+.bml-root { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%); }
+.bml-root .bml-kpi-card { border-left: 4px solid #78350f; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(120,53,15,0.1); }
+.bml-root .bml-kpi-label { color: #92400e; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.bml-root .bml-kpi-value { color: #451a03; font-variant-numeric: tabular-nums; }
+.bml-root .bml-chart-title { color: #78350f; }
+.bml-root .bml-tab { min-width: 90px; }
+.bml-root .bml-record-card { transition: all 0.2s ease; }
+.bml-root .bml-record-card:hover { box-shadow: 0 4px 12px rgba(120,53,15,0.15); transform: translateY(-1px); }
+.bml-root .bml-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.bml-root .bml-insight-card:hover { box-shadow: 0 4px 12px rgba(120,53,15,0.12); }
+.bml-root .bml-insight-title { color: #451a03; }
+/* R365b — Vanadium Electrolyte Logistics (vel-*) */
+.vel-root { background: linear-gradient(135deg, #fff1f2 0%, #fce7f3 50%, #fbcfe8 100%); }
+.vel-root .vel-kpi-card { border-left: 4px solid #831843; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(131,24,67,0.1); }
+.vel-root .vel-kpi-label { color: #9f1239; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.vel-root .vel-kpi-value { color: #4c0519; font-variant-numeric: tabular-nums; }
+.vel-root .vel-chart-title { color: #831843; }
+.vel-root .vel-tab { min-width: 90px; }
+.vel-root .vel-record-card { transition: all 0.2s ease; }
+.vel-root .vel-record-card:hover { box-shadow: 0 4px 12px rgba(131,24,67,0.15); transform: translateY(-1px); }
+.vel-root .vel-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.vel-root .vel-insight-card:hover { box-shadow: 0 4px 12px rgba(131,24,67,0.12); }
+.vel-root .vel-insight-title { color: #4c0519; }
