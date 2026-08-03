@@ -509,3 +509,5 @@ export { default as MicrogridManagementLogisticsView } from './microgrid-managem
 export { default as MoltenSaltStorageLogisticsView } from './molten-salt-storage-logistics-view'
 export { default as GreenSteelLogisticsView } from './green-steel-logistics-view'
 export { default as WindTurbineBladeRecyclingLogisticsView } from './wind-turbine-blade-recycling-logistics-view'
+export { default as SmartGridOSLogisticsView } from './smart-grid-os-logistics-view'
+export { default as SludgeToEnergyLogisticsView } from './sludge-to-energy-logistics-view'
