@@ -61356,3 +61356,82 @@ html.theme-transition body {
 .cra-cr-bar-fill { background: #047857; }
 .cra-hardness-bar-track { background: #dcfce7; }
 .cra-hardness-bar-fill { background: #16a34a; }
+/* R389 — Zirconium Alloy Logistics (violet-600) */
+.zra-kpi-card { border-left: 4px solid #7c3aed; background: rgba(245, 243, 255, 0.3); }
+.zra-tab-active { border-bottom: 2px solid #7c3aed; color: #4c1d95; }
+.zra-bar-fill { background: #7c3aed; }
+.zra-bar-track { background: #ede9fe; }
+.zra-bar-fill-alt { background: #9333ea; }
+.zra-bar-track-alt { background: #f3e8ff; }
+.zra-insight-card { border-left: 4px solid #7c3aed; }
+.zra-insight-alt-1 { border-left: 4px solid #f43f5e; }
+.zra-insight-alt-2 { border-left: 4px solid #0284c7; }
+.zra-insight-alt-3 { border-left: 4px solid #f59e0b; }
+.zra-delayed-row { border-left: 4px solid #ef4444; background: rgba(254, 226, 226, 0.3); }
+.zra-badge-active { background: #7c3aed; color: white; }
+.zra-badge-inactive { border: 1px solid #c4b5fd; color: #7c3aed; }
+.zra-chart-title { font-size: 0.875rem; font-weight: 600; color: #1e293b; }
+.zra-kpi-value { font-size: 1.5rem; font-weight: 700; color: #4c1d95; }
+.zra-kpi-label { font-size: 0.75rem; color: #6b7280; }
+.zra-table-header { font-size: 0.875rem; font-weight: 600; padding: 0.5rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.zra-table-cell { padding: 0.5rem; font-size: 0.875rem; }
+.zra-table-mono { padding: 0.5rem; font-size: 0.75rem; font-family: monospace; }
+.zra-filter-input { max-width: 20rem; }
+.zra-filter-badge { cursor: pointer; }
+.zra-filter-badge-active { background: #7c3aed; color: white; }
+.zra-filter-badge-inactive { border: 1px solid #c4b5fd; color: #7c3aed; background: transparent; }
+.zra-zone-bar-track { background: #f3e8ff; }
+.zra-zone-bar-fill { background: #9333ea; }
+.zra-priority-bar-track { background: #fef3c7; }
+.zra-priority-bar-fill { background: #d97706; }
+.zra-status-bar-track { background: #ede9fe; }
+.zra-status-bar-fill { background: #7c3aed; }
+.zra-category-bar-track { background: #ede9fe; }
+.zra-category-bar-fill { background: #7c3aed; }
+.zra-card-wrapper { border-radius: 0.5rem; padding: 1rem; background: white; }
+.zra-card-header { font-size: 0.875rem; font-weight: 600; padding-bottom: 0.5rem; }
+.zra-card-content { padding: 0.5rem 0; }
+.zra-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
+.zra-zr-bar-track { background: #ede9fe; }
+.zra-zr-bar-fill { background: #7c3aed; }
+.zra-corrosion-bar-track { background: #f3e8ff; }
+.zra-corrosion-bar-fill { background: #9333ea; }
+
+/* R389 — Lithium Refining Logistics (lime-600) */
+.ltr-kpi-card { border-left: 4px solid #65a30d; background: rgba(236, 253, 245, 0.3); }
+.ltr-tab-active { border-bottom: 2px solid #65a30d; color: #365314; }
+.ltr-bar-fill { background: #65a30d; }
+.ltr-bar-track { background: #dcfce7; }
+.ltr-bar-fill-alt { background: #16a34a; }
+.ltr-bar-track-alt { background: #d1fae5; }
+.ltr-insight-card { border-left: 4px solid #65a30d; }
+.ltr-insight-alt-1 { border-left: 4px solid #0284c7; }
+.ltr-insight-alt-2 { border-left: 4px solid #f97316; }
+.ltr-insight-alt-3 { border-left: 4px solid #a855f7; }
+.ltr-delayed-row { border-left: 4px solid #ef4444; background: rgba(254, 226, 226, 0.3); }
+.ltr-badge-active { background: #65a30d; color: white; }
+.ltr-badge-inactive { border: 1px solid #bef264; color: #65a30d; }
+.ltr-chart-title { font-size: 0.875rem; font-weight: 600; color: #1e293b; }
+.ltr-kpi-value { font-size: 1.5rem; font-weight: 700; color: #365314; }
+.ltr-kpi-label { font-size: 0.75rem; color: #6b7280; }
+.ltr-table-header { font-size: 0.875rem; font-weight: 600; padding: 0.5rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.ltr-table-cell { padding: 0.5rem; font-size: 0.875rem; }
+.ltr-table-mono { padding: 0.5rem; font-size: 0.75rem; font-family: monospace; }
+.ltr-filter-input { max-width: 20rem; }
+.ltr-filter-badge { cursor: pointer; }
+.ltr-filter-badge-active { background: #65a30d; color: white; }
+.ltr-filter-badge-inactive { border: 1px solid #bef264; color: #65a30d; background: transparent; }
+.ltr-zone-bar-track { background: #d1fae5; }
+.ltr-zone-bar-fill { background: #16a34a; }
+.ltr-priority-bar-track { background: #fef3c7; }
+.ltr-priority-bar-fill { background: #d97706; }
+.ltr-status-bar-track { background: #dcfce7; }
+.ltr-status-bar-fill { background: #65a30d; }
+.ltr-process-bar-track { background: #dcfce7; }
+.ltr-process-bar-fill { background: #16a34a; }
+.ltr-card-wrapper { border-radius: 0.5rem; padding: 1rem; background: white; }
+.ltr-card-header { font-size: 0.875rem; font-weight: 600; padding-bottom: 0.5rem; }
+.ltr-card-content { padding: 0.5rem 0; }
+.ltr-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
+.ltr-purity-bar-track { background: #dcfce7; }
+.ltr-purity-bar-fill { background: #65a30d; }
