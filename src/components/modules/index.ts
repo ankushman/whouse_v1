@@ -519,3 +519,5 @@ export { default as DigitalTwinWaterInfrastructureLogisticsView } from './digita
 export { default as BioJetFuelLogisticsView } from './bio-jet-fuel-logistics-view'
 export { default as EVChargingHubLogisticsView } from './ev-charging-hub-logistics-view'
 export { default as HydrogenBlendingNetworkLogisticsView } from './hydrogen-blending-network-logistics-view'
+export { default as AgrivoltaicsLogisticsView } from './agrivoltaics-logistics-view'
+export { default as AutonomousPortLogisticsView } from './autonomous-port-logistics-view'
