@@ -496,6 +496,8 @@ export const navItems: NavItem[] = [
   { id: 'hydrogen-fuel-cell-stack', label: 'H2 Fuel Cell Stack', icon: 'Zap', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'vanadium-redox-flow-battery', label: 'Vanadium Redox Flow', icon: 'Battery', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'solid-oxide-electrolyzer', label: 'SOEC Electrolyzer', icon: 'Hammer', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'nuclear-smr', label: 'Nuclear SMR', icon: 'Atom', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'lithium-extraction', label: 'Lithium Extraction', icon: 'Recycle', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

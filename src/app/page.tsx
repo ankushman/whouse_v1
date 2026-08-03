@@ -499,6 +499,8 @@ import PerovskiteSolarCellManufacturingLogisticsView from "@/components/modules/
 import HydrogenFuelCellStackLogisticsView from "@/components/modules/hydrogen-fuel-cell-stack-logistics-view"
 import VanadiumRedoxFlowBatteryLogisticsView from "@/components/modules/vanadium-redox-flow-battery-logistics-view"
 import SolidOxideElectrolyzerLogisticsView from "@/components/modules/solid-oxide-electrolyzer-logistics-view"
+import NuclearSmrLogisticsView from "@/components/modules/nuclear-smr-logistics-view"
+import LithiumExtractionLogisticsView from "@/components/modules/lithium-extraction-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -997,6 +999,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "hydrogen-fuel-cell-stack": HydrogenFuelCellStackLogisticsView,
   "vanadium-redox-flow-battery": VanadiumRedoxFlowBatteryLogisticsView,
   "solid-oxide-electrolyzer": SolidOxideElectrolyzerLogisticsView,
+  "nuclear-smr": NuclearSmrLogisticsView,
+  "lithium-extraction": LithiumExtractionLogisticsView,
 }
 
 

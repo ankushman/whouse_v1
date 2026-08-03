@@ -490,3 +490,5 @@ export { default as PerovskiteSolarCellManufacturingLogisticsView } from './pero
 export { default as HydrogenFuelCellStackLogisticsView } from './hydrogen-fuel-cell-stack-logistics-view'
 export { default as VanadiumRedoxFlowBatteryLogisticsView } from './vanadium-redox-flow-battery-logistics-view'
 export { default as SolidOxideElectrolyzerLogisticsView } from './solid-oxide-electrolyzer-logistics-view'
+export { default as NuclearSmrLogisticsView } from './nuclear-smr-logistics-view'
+export { default as LithiumExtractionLogisticsView } from './lithium-extraction-logistics-view'
