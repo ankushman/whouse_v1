@@ -1068,6 +1068,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "vertical-farm-logistics": VerticalFarmLogisticsView,
   "carbon-fiber-logistics": CarbonFiberLogisticsView,
   "phase-change-material-logistics": PhaseChangeMaterialLogisticsView,
+  "piezoelectric-energy-logistics": PiezoelectricEnergyLogisticsView,
+  "flywheel-energy-storage": FlywheelEnergyStorageView,
 }
 
 
@@ -1224,3 +1226,5 @@ import SmartGridOSLogisticsView from "@/components/modules/smart-grid-os-logisti
 import SludgeToEnergyLogisticsView from "@/components/modules/sludge-to-energy-logistics-view"
 import CarbonFiberLogisticsView from "@/components/modules/carbon-fiber-logistics-view"
 import PhaseChangeMaterialLogisticsView from "@/components/modules/phase-change-material-logistics-view"
+import PiezoelectricEnergyLogisticsView from "@/components/modules/piezoelectric-energy-logistics-view"
+import FlywheelEnergyStorageView from "@/components/modules/flywheel-energy-storage-view"

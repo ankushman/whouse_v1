@@ -548,3 +548,5 @@ export { default as BioPlasticLogisticsView } from './bio-plastic-logistics-view
 export { default as VerticalFarmLogisticsView } from './vertical-farm-logistics-view'
 export { default as CarbonFiberLogisticsView } from './carbon-fiber-logistics-view'
 export { default as PhaseChangeMaterialLogisticsView } from './phase-change-material-logistics-view'
+export { default as PiezoelectricEnergyLogisticsView } from './piezoelectric-energy-logistics-view'
+export { default as FlywheelEnergyStorageView } from './flywheel-energy-storage-view'

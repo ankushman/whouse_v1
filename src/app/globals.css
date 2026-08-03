@@ -60196,3 +60196,5 @@ html.theme-transition body {
 .vfl-root{background:linear-gradient(135deg,#f7fee7 0%,#ecfccb 100%)}.vfl-kpi-card{background:linear-gradient(135deg,#3f6212,#65a30d);color:#fff;border:none;border-radius:12px}.vfl-kpi-label{color:#d9f99d !important}.vfl-kpi-value{color:#fff !important}.vfl-tab{cursor:pointer;transition:all .2s ease}.vfl-tab:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(63,98,18,.15)}.vfl-chart-title{color:#3f6212}.vfl-record-card{transition:all .15s ease;box-shadow:0 1px 3px rgba(0,0,0,.05)}.vfl-record-card:hover{box-shadow:0 4px 12px rgba(63,98,18,.12);transform:translateY(-1px)}.vfl-insight-card{transition:all .15s ease}.vfl-insight-card:hover{box-shadow:0 4px 16px rgba(63,98,18,.15);transform:translateY(-2px)}.vfl-insight-title{color:#3f6212}
 .cfl-root { --cfl-primary: #374151; }
 .pcm-root { --pcm-primary: #92400e; }
+.pel-root { --pel-primary: #7e22ce; }
+.fes-root { --fes-primary: #166534; }
