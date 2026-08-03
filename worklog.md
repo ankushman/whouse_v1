@@ -10914,3 +10914,46 @@ Stage Summary:
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
+---
+Task ID: R371 — Silicon Carbide Logistics + Vaccine Cold Chain Logistics
+Agent: Main Agent (Cron Loop)
+Task: R371 — 2 new Indian logistics modules for silicon carbide semiconductor supply chain and vaccine cold chain distribution.
+
+Work Log:
+- Read worklog: R370 complete (commit 313722b), 574 modules, 585 navItems, 60,516 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 22 candidates tested, all clean
+  - Selected silicon-carbide-logistics (sic-*, CircuitBoard #047857) and vaccine-cold-chain-logistics (vcc-*, Syringe #be123c)
+  - Icons verified in iconMap (CircuitBoard at line 158, Syringe at line 150)
+- Created Silicon Carbide Logistics (R371a): 220 lines, sic-* emerald #047857, 14 records
+  - 14 records across 13 cities (Bengaluru, Gandhinagar, Hyderabad, Pune, Noida, Chennai, Mumbai, Kolkata, Jaipur, Coimbatore, Bhubaneswar, Ahmedabad, Guwahati, Thiruvananthapuram)
+  - 12 device types: MOSFET 650/900/1200/1700/3300V, Schottky 650/1200V, JFET 1200V, Substrate 150mm, Gate Driver ASIC, Heating Element, Radiation-hardened 1700V
+  - Applications: EV inverter, solar, railway traction, wind turbine, EV charger, datacenter UPS, motor drive, HVDC, EV AC charger, compressor VFD, satellite power
+  - &#8377;2,377 Cr total investment, 99.0% avg efficiency
+- Created Vaccine Cold Chain Logistics (R371b): 221 lines, vcc-* rose #be123c, 14 records
+  - 14 records across 13 cities (Pune, Hyderabad, Ahmedabad, Bengaluru, New Delhi, Chennai, Mumbai, Bhubaneswar, Gandhinagar, Guwahati, Kolkata, Thiruvananthapuram, Bhopal, Srinagar)
+  - 14 vaccine types: Covishield, Covaxin, ZyCoV-D, Corbevax, BCG, OPV, rDNA Hepatitis B, Rotavac, HPV (Cervavac), Japanese Encephalitis, DTP, mRNA COVID Booster, Measles-Rubella, PCV13
+  - Storage: -20&#176;C frozen (OPV, mRNA) and 2-8&#176;C standard (12 vaccines)
+  - 5.2M total doses, &#8377;844 Cr total investment
+- Fixed navItem label overwrite bug (aramid-fiber label accidentally changed to 'Silicon Carbide')
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (580), page.tsx (1101 viewMap entries), app-store.ts (587 navItems)
+- CSS: 38 lines appended (60,551 total)
+- Git: commit ff2e46d pushed
+
+Stage Summary:
+- MODULE FILES: 576 (+2) | NAVITEMS: 587 (+2) | CSS: 60,551 lines (+38)
+- TSC: 0 errors (src/) | GITHUB: pushed (ff2e46d)
+
+**Project Current State:**
+- 576 module view files, 587 navItems, 60,551 CSS lines, 1101 viewMap entries
+- TSC clean (0 errors in src/)
+- R371 complete, stable state
+- Next candidates: gallium-nitride-logistics, hemp-fiber-logistics, tungsten-carbide-logistics, drone-delivery-medical-logistics, compressed-hydrogen-logistics
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 576+ modules, dev server OOM risk — continue TSC-only QA approach
+- NavItem label overwrite risk when inserting new entries — verify adjacent labels
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
