@@ -60638,3 +60638,33 @@ html.theme-transition body {
 .bcu-insight-card { border-radius: 12px; transition: all 0.2s ease; }
 .bcu-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(71, 85, 105, 0.12); }
 @keyframes bcuBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
+
+/* ===== Diamond Synthetic Logistics (dsn-*) ===== */
+.dsn-logistics-container { background: linear-gradient(135deg, #ecfeff 0%, #cffafe 50%, #a5f3fc 100%); }
+.dsn-kpi-card { transition: all 0.3s ease; }
+.dsn-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15); }
+.dsn-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.dsn-tab-btn:hover { transform: scale(1.02); }
+.dsn-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.dsn-chart-card:hover { box-shadow: 0 2px 8px rgba(6, 182, 212, 0.1); }
+.dsn-bar-fill { animation: dsnBarGrow 0.8s ease-out forwards; }
+.dsn-table-row { transition: background-color 0.15s ease; }
+.dsn-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.dsn-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.dsn-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(6, 182, 212, 0.12); }
+@keyframes dsnBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
+
+/* ===== Rare Earth Magnet Logistics (rem-*) ===== */
+.rem-logistics-container { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%); }
+.rem-kpi-card { transition: all 0.3s ease; }
+.rem-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15); }
+.rem-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.rem-tab-btn:hover { transform: scale(1.02); }
+.rem-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.rem-chart-card:hover { box-shadow: 0 2px 8px rgba(5, 150, 105, 0.1); }
+.rem-bar-fill { animation: remBarGrow 0.8s ease-out forwards; }
+.rem-table-row { transition: background-color 0.15s ease; }
+.rem-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.rem-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.rem-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(5, 150, 105, 0.12); }
+@keyframes remBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }

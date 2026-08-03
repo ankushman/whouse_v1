@@ -584,3 +584,5 @@ export { default as TungstenCarbideLogisticsView } from './tungsten-carbide-logi
 export { default as HempFiberLogisticsView } from './hemp-fiber-logistics-view'
 export { default as SiliconPhotonicsLogisticsView } from './silicon-photonics-logistics-view'
 export { default as BerylliumCopperLogisticsView } from './beryllium-copper-logistics-view'
+export { default as DiamondSyntheticLogisticsView } from './diamond-synthetic-logistics-view'
+export { default as RareEarthMagnetLogisticsView } from './rare-earth-magnet-logistics-view'
