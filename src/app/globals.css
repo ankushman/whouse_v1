@@ -61497,3 +61497,63 @@ html.theme-transition body {
 .taa-cv-indicator { background: linear-gradient(90deg, #zinc-500, #slate-600); }
 .taa-investment-indicator { background: linear-gradient(90deg, #slate-500, #gray-600); }
 .taa-aerospace-highlight { background: rgba(71, 85, 105, 0.12); border: 1px solid rgba(71, 85, 105, 0.25); }
+/* R391a: Molybdenum Sheet Logistics (msa-*, blue #2563eb) */
+.msa-b2401-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2402-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2403-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2404-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2405-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2406-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2407-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2408-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2409-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2410-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2411-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2412-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2413-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-b2414-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-card-accent { border-left: 4px solid #2563eb; }
+.msa-badge-accent { background: rgba(37, 99, 235, 0.12); color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.3); }
+.msa-tab-active { border-bottom: 2px solid #2563eb; color: #2563eb; font-weight: 600; }
+.msa-kpi-card { border-left: 4px solid #2563eb; background: rgba(37, 99, 235, 0.06); }
+.msa-chart-bar { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+.msa-insight-card { border-left: 4px solid #2563eb; }
+.msa-filter-active { background: #2563eb; color: white; border: 1px solid #2563eb; }
+.msa-table-header { background: rgba(37, 99, 235, 0.08); border-bottom: 2px solid #2563eb; }
+.msa-table-row:hover { background: rgba(37, 99, 235, 0.04); }
+.msa-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.msa-priority-critical { color: #dc2626; font-weight: 700; }
+.msa-priority-high { color: #ea580c; font-weight: 600; }
+.msa-priority-medium { color: #ca8a04; font-weight: 500; }
+.msa-thickness-indicator { background: linear-gradient(90deg, #blue-500, #sky-500); }
+
+/* R391b: Selenium Metal Logistics (sme-*, green #16a34a) */
+.sme-b2401-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2402-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2403-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2404-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2405-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2406-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2407-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2408-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2409-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2410-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2411-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2412-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2413-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-b2414-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-card-accent { border-left: 4px solid #16a34a; }
+.sme-badge-accent { background: rgba(22, 163, 74, 0.12); color: #16a34a; border: 1px solid rgba(22, 163, 74, 0.3); }
+.sme-tab-active { border-bottom: 2px solid #16a34a; color: #16a34a; font-weight: 600; }
+.sme-kpi-card { border-left: 4px solid #16a34a; background: rgba(22, 163, 74, 0.06); }
+.sme-chart-bar { background: linear-gradient(90deg, #16a34a, #4ade80); }
+.sme-insight-card { border-left: 4px solid #16a34a; }
+.sme-filter-active { background: #16a34a; color: white; border: 1px solid #16a34a; }
+.sme-table-header { background: rgba(22, 163, 74, 0.08); border-bottom: 2px solid #16a34a; }
+.sme-table-row:hover { background: rgba(22, 163, 74, 0.04); }
+.sme-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.sme-priority-critical { color: #dc2626; font-weight: 700; }
+.sme-priority-high { color: #ea580c; font-weight: 600; }
+.sme-priority-medium { color: #ca8a04; font-weight: 500; }
+.sme-priority-low { color: #65a30d; font-weight: 500; }
+.sme-se-indicator { background: linear-gradient(90deg, #green-500, #emerald-500); }

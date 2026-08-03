@@ -616,3 +616,5 @@ export { default as ZirconiumAlloyLogisticsView } from './zirconium-alloy-logist
 export { default as LithiumRefiningLogisticsView } from './lithium-refining-logistics-view'
 export { default as BismuthAlloyLogisticsView } from './bismuth-alloy-logistics-view'
 export { default as TantalumAlloyLogisticsView } from './tantalum-alloy-logistics-view'
+export { default as MolybdenumSheetLogisticsView } from './molybdenum-sheet-logistics-view'
+export { default as SeleniumMetalLogisticsView } from './selenium-metal-logistics-view'
