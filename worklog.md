@@ -1,4 +1,24 @@
 ---
+Task ID: R329 — Ammonia Cracking + Space Launch Vehicle Logistics
+Agent: Main Agent (Cron Loop)
+Task: R329 — 2 new Indian logistics modules for ammonia cracking (Reliance IISc BHEL L&amp;T IFFCO RCF Tata Thermax KPIT BEML TCS Ola MIDHANI — Autothermal Membrane Reactor Thermal Plasma Electrochemical, Ni-Al2O3 Ru-Cs-MgO Pd-Ag Fe-Cr SOE Non-Catalytic Ni-La2O3, 40-350TPD 94-99% conversion 99.95-99.9999% H2 purity, H2 Station FC Fleet Industrial Heat Steel Cement Shipping Power Mining Railway Data Center Glass Fertilizer). Space launch vehicle (ISRO NSIL LPSC ASL DRDO ITR Agnikul Sathyabama MIDHANI — GSLV Mk-III LVM3 PSLV-XL PSLV-DL PSLV-CA SSLV NGLV Gaganyaan Human-Rated RLV Reusable Agni-V Sounding RH-560 Agnikul Agnibaan, Cryogenic CE-20 Solid HTPB Semi-Cryo LOX+Kerosene LOX+Methane All-Solid, 100-12000kg payload 300-12000kg LEO 5000-50000/kg cost, Navigation EarthObs Gaganyaan OneWeb MIRV Commercial Cubesat RLV Test).
+
+Work Log:
+- Read worklog: R328 complete (commit 19f8585), 489 modules, 501 navItems, 60,161 CSS
+- TSC pre-validation: 0 errors in core files
+- Duplicate check: ammonia-cracking and space-launch-vehicle confirmed unique
+- Icons: Flame (ammonia cracking), Rocket (space launch) verified in iconMap
+- Created Ammonia Cracking Logistics (R329a): ~180 lines, amc-* rose #be123c, 14 records
+- Created Space Launch Vehicle Logistics (R329b): ~185 lines, slv-* indigo #4338ca, 14 records
+- Used correct pattern: FilterGroup.label, Record&lt;string, string[]&gt;, JSX &amp; entities
+- Registered both in index.ts (497), page.tsx, app-store.ts (503 navItems)
+- CSS: 2 lines appended (60,163 total)
+- TSC FINAL: 0 errors | Git: commit aa6f22e pushed
+
+Stage Summary:
+- MODULE FILES: 491 (+2) | NAVITEMS: 503 (+2) | CSS: 60,163 lines (+2)
+- TSC: 0 errors (modules) | GITHUB: pushed (aa6f22e)
+---
 Task ID: R328 — CCS Upgrade + Green Methanol Logistics
 Agent: Main Agent (Cron Loop)
 Task: R328 — Upgraded carbon capture storage module + new green methanol logistics. CCS (NTPC Tata Reliance ACC NALCO GAIL IFFCO Adani JSW Thermax IIT-B BARC ONGC — Post-Combustion Amine Pre-Combustion Selexol MDEA Oxy-Fuel Chemical Looping DAC Solid Sorbent DAC Liquid Solvent Post-Combustion Membrane, Deep Saline Aquifer Depleted Gas Reservoir Enhanced Oil Recovery Basalt Mineralization Enhanced Coal Bed Methane, 200-6000TPD 80-98% capture 4500-22000 per tonne, Coal Power Steel Cement Refinery LNG Fertilizer Aluminum Data Center Direct Air). Green Methanol (Reliance NTPC Adani Thermax IIT-D BARC NHPC Renuka Sula KIRAN BASF Ola Maersk Evergreen Hapag-Lloyd SCI — Green H2+CO2 Biomass Gasification e-Methanol Electrolysis Biogas Reforming, Renewable H2 Biomass CO2 Solar H2 Flue CO2 Wind H2 DAC CO2 Nuclear H2 MSW Biogas Bagasse Rice Husk Spent Wash, 80-800TPD 99-99.9% purity 0.01-0.5 gCO2/MJ, Marine Fuel Shipping Bunker Chemical Feedstock Transport Fuel Power Generation Cooking Fuel).
