@@ -61682,3 +61682,27 @@ html.theme-transition body {
 .platinum-alloy-logistics table thead { background: #faf5ff; }
 .platinum-alloy-logistics table tbody tr:hover { background: #f5f3ff; }
 .platinum-alloy-logistics .text-purple-600 { letter-spacing: 0.025em; }
+
+/* R396a — Gold Alloy Logistics (goa-*) amber */
+.gold-alloy-logistics .space-y-6 > :first-child { border-left: 3px solid #d97706; }
+.gold-alloy-logistics .grid > div:nth-child(1) { border-top: 2px solid #d97706; }
+.gold-alloy-logistics .grid > div:nth-child(2) { border-top: 2px solid #f59e0b; }
+.gold-alloy-logistics .grid > div:nth-child(3) { border-top: 2px solid #fbbf24; }
+.gold-alloy-logistics .grid > div:nth-child(4) { border-top: 2px solid #fcd34d; }
+.gold-alloy-logistics .border-b button { transition: all 0.2s; }
+.gold-alloy-logistics .border-b button:hover { background: #fffbeb; }
+.gold-alloy-logistics table thead { background: #fefce8; }
+.gold-alloy-logistics table tbody tr:hover { background: #fffbeb; }
+.gold-alloy-logistics .text-amber-600 { letter-spacing: 0.025em; }
+
+/* R396b — Aluminium Bronze Logistics (aba-*) orange */
+.aluminium-bronze-logistics .space-y-6 > :first-child { border-left: 3px solid #c2410c; }
+.aluminium-bronze-logistics .grid > div:nth-child(1) { border-top: 2px solid #c2410c; }
+.aluminium-bronze-logistics .grid > div:nth-child(2) { border-top: 2px solid #ea580c; }
+.aluminium-bronze-logistics .grid > div:nth-child(3) { border-top: 2px solid #f97316; }
+.aluminium-bronze-logistics .grid > div:nth-child(4) { border-top: 2px solid #fb923c; }
+.aluminium-bronze-logistics .border-b button { transition: all 0.2s; }
+.aluminium-bronze-logistics .border-b button:hover { background: #fff7ed; }
+.aluminium-bronze-logistics table thead { background: #fef3e2; }
+.aluminium-bronze-logistics table tbody tr:hover { background: #fff7ed; }
+.aluminium-bronze-logistics .text-orange-700 { letter-spacing: 0.025em; }

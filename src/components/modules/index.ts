@@ -624,3 +624,5 @@ export { default as InconelLogisticsView } from './inconel-superalloy-logistics-
 export { default as CopperNickelAlloyLogisticsView } from './copper-nickel-alloy-logistics-view'
 export { default as BerylliumAlloyLogisticsView } from './beryllium-alloy-logistics-view'
 export { default as PlatinumAlloyLogisticsView } from './platinum-alloy-logistics-view'
+export { default as GoldAlloyLogisticsView } from './gold-alloy-logistics-view'
+export { default as AluminiumBronzeLogisticsView } from './aluminium-bronze-logistics-view'
