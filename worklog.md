@@ -1,4 +1,32 @@
 ---
+Task ID: R347 — Green Ammonia Logistics + Carbon Trading Platform
+Agent: Main Agent (Cron Loop)
+Task: R347 — 2 new Indian logistics modules for green ammonia (Gujarat Maharashtra Odisha UP Rajasthan AP MP Tamil Nadu — SAIL Tata Chemicals Adani Reliance NTPC IOCL IFFCO Chambal Deepak NFCL RCF GSFC MP Glycols Solar Electric, electrolytic Haber biomass gasification SOE ATR+CCS SMR+CCS methane pyrolysis AEM alkaline, 14 plants green premium avg 38%, target 18000Cr). Carbon trading (Maharashtra Gujarat Karnataka Delhi Rajasthan WB Telangana Odisha Jharkhand Kerala — ICX PXIL NCDEX MCX GCX CBX, PAT VCS CDM Domestic EU CBAM Hybrid Nature-Based Blue Carbon, 14 entities 85L credits avg INR 850/credit, target 25000Cr).
+
+Work Log:
+- Read worklog: R346 complete (commit 08f8f0b), 525 modules, 537 navItems, 60,180 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 16 candidates tested, all confirmed clean
+  - Selected green-ammonia-logistics (gam-*, FlaskConical #059669) and carbon-trading-platform (ctp-*, Scale #ca8a04)
+  - Icons verified in iconMap
+- Created Green Ammonia Logistics (R347a): 223 lines, gam-* emerald #059669, 14 records
+  - 14 plants across Gujarat, Maharashtra, Odisha, UP, Rajasthan, AP, MP, Tamil Nadu
+  - 8 processes: electrolytic Haber, biomass gasification, SOE, ATR+CCS, SMR+CCS, methane pyrolysis, AEM, alkaline
+  - Companies: SAIL, Tata Chemicals, Adani, Reliance, NTPC, IOCL, IFFCO, Chambal, Deepak, NFCL, RCF, GSFC, MP Glycols, Solar Electric
+- Created Carbon Trading Platform (R347b): 223 lines, ctp-* gold #ca8a04, 14 records
+  - 14 entities across Maharashtra, Gujarat, Karnataka, Delhi, Rajasthan, WB, Telangana, Odisha, Jharkhand, Kerala
+  - 6 exchanges: ICX, PXIL, NCDEX, MCX, GCX, CBX
+  - 8 market types: PAT compliance, VCS voluntary, CDM offset, domestic, EU CBAM international, hybrid, nature-based, blue carbon
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (533), page.tsx (1054 viewMap entries), app-store.ts (539 navItems)
+- CSS: 1 line appended (60,181 total)
+- Git: commit d5030ec pushed
+
+Stage Summary:
+- MODULE FILES: 527 (+2) | NAVITEMS: 539 (+2) | CSS: 60,181 lines (+1)
+- TSC: 0 errors (src/) | GITHUB: pushed (d5030ec)
+---
+---
 Task ID: R346 — Hyperloop Logistics + Urban Air Mobility
 Agent: Main Agent (Cron Loop)
 Task: R346 — 2 new Indian logistics modules for hyperloop (Mumbai-Delhi Bengaluru-Chennai Delhi-Kolkata Hyderabad-Vizag Ahmedabad-Pune Chennai-Trivandrum Kolkata-Bhubaneswar Jaipur-Udaipur Lucknow-Varanasi Goa-Mumbai Nagpur-Jabalpur Indore-Mysuru Sri City-Pune Gandhinagar-Gir — Virgin Hyperloop HTT Zeleros Hardt TransPod DP World, maglev vacuum tube passive levitation electromagnetic superconducting FluxJet, 9690 km 5500Cr avg speed 950km/h, target 500000Cr). Urban air mobility (Delhi Mumbai Bengaluru Chennai Hyderabad Kolkata Ahmedabad Pune Guwahati Jaipur Kochi Visakhapatnam Lucknow Indore — BLADE India Joby Aviation InterGlobe Volaris Eve Air Mobility, Lilium Jet Joby S4 Archer Midnight Eve Eve Beta Alia, 14 vertiports 200-460 km range 2690Cr, target 40000Cr).
