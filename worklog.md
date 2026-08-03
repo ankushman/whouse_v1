@@ -10826,3 +10826,47 @@ Stage Summary:
 - With 570+ modules, dev server OOM risk — continue TSC-only QA approach
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+---
+Task ID: R369 — Titanium Alloy Logistics + Green Ammonia Shipping Logistics
+Agent: Main Agent (Cron Loop)
+Task: R369 — 2 new Indian logistics modules for titanium alloy aerospace/defence/biomedical supply chain and green ammonia export/shipping logistics.
+
+Work Log:
+- Read worklog: R368 complete (commit 9ad19ab), 570 modules, 581 navItems, 60,442 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 8 candidates tested
+  - Already exist: carbon-capture-storage, carbon-capture-utilization, ammonia-cracking, perovskite-solar, flywheel-energy-storage
+  - Selected titanium-alloy-logistics (tal-*, Hammer #475569) and green-ammonia-shipping-logistics (gasl-*, Atom #0891b2)
+  - Icons verified in iconMap (Hammer at line 159, Atom at line 142)
+- Created Titanium Alloy Logistics (R369a): 222 lines, tal-* slate #475569, 14 records
+  - 14 records across 13 Indian cities (Bengaluru, Hyderabad, Mumbai, Coimbatore, Ranchi, Vizag, Ahmedabad, Delhi, Kolkata, Thiruvananthapuram, Chennai, Nagpur, Jaipur, Pune)
+  - 11 alloy grades: Ti-6Al-4V, Ti-6Al-7Nb, Ti-5Al-2.5Sn, CP Grade 4, CP Grade 2, Ti-3Al-8V-6Cr-4Mo-4Zr, Ti-6Al-2Sn-4Zr-2Mo, Ti-48Al-2Cr-2Nb, Ti-Nb-Zr-Sn, Ti-10V-2Fe-3Al, Ti-6Al-4V ELI
+  - Applications: LCA Tejas airframe, ISRO rocket nozzle, PHWR reactor, compressor blade, hip implant, submarine hull, pharma reactor, AMCA fighter, turbocharger wheel, satellite tank, bone screw, landing gear, solar desalination, artillery barrel
+  - &#8377;4,835 Cr total investment, 875 MPa avg tensile strength, 14 batches
+- Created Green Ammonia Shipping Logistics (R369b): 221 lines, gasl-* cyan #0891b2, 14 records
+  - 14 records across 13 Indian ports (Kandla, Ennore, Paradip, Mundra, Vizag, Haldia, Tuticorin, Mormugao, Chennai, Cochin, Nagpur, Dahej, Dhamra, Hazira)
+  - 10 ammonia types: Electrolysis Green, SMR+CCS Blue, Methane Pyrolysis Turquoise, Solid Oxide Green, ATR+CCS Blue, Biomass Gasification Green, Anion Exchange Green, Pipeline Green, Plasma Turquoise, Partial Oxidation Blue
+  - Export destinations: Rotterdam, Fujairah, Yokohama, Incheon, Hamburg, Singapore, Colombo, Kobe, Busan
+  - 214,000 MT total volume, &#8377;3,970 Cr total investment, 4,250 kWh/MT avg energy density
+- TSC fixes: PageHeader import from @/components/shared, Object.entries type assertions for arithmetic
+- TSC: 0 errors in src/ after fixes
+- Registered in index.ts (576), page.tsx (1097 viewMap entries), app-store.ts (583 navItems)
+- CSS: 40 lines appended (60,482 total)
+- Git: commit c4b57f4 pushed
+
+Stage Summary:
+- MODULE FILES: 572 (+2) | NAVITEMS: 583 (+2) | CSS: 60,482 lines (+40)
+- TSC: 0 errors (src/) | GITHUB: pushed (c4b57f4)
+
+**Project Current State:**
+- 572 module view files, 583 navItems, 60,482 CSS lines, 1097 viewMap entries
+- TSC clean (0 errors in src/)
+- R369 complete, stable state
+- Next candidates: carbon-fiber-logistics, hydrogen-truck-logistics, rare-earth-element-logistics, bio-jet-fuel-logistics
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 572+ modules, dev server OOM risk — continue TSC-only QA approach
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Object.entries(map) arithmetic requires explicit [string, number][] type assertion
