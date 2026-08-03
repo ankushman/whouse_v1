@@ -1,4 +1,52 @@
 ---
+Task ID: R400 — Cobalt Powder Logistics + Copper Powder Logistics
+Agent: Main Agent (Cron Loop)
+Task: R400 — 2 new Indian logistics modules for cobalt powder supply chain and copper powder supply chain.
+
+Work Log:
+- Read worklog: R399 complete (commit 870846a), 635 modules, 636 navItems, ~61,790 CSS
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate theme search: 5 candidates tested
+  - cobalt-powder: CLEAN, cpw-* CLEAN
+  - copper-powder: CLEAN, cop-* CLEAN
+  - iron-powder: CLEAN (not used this round)
+  - manganese-steel: mns-* has overlap (excluded)
+  - silicon-steel: sis-* has overlap (excluded)
+  - Selected: cobalt-powder-logistics (cpw-*, FlameKindling violet #7c3aed) and copper-powder-logistics (cop-*, Waves emerald #059669)
+  - Icons verified: FlameKindling and Waves both confirmed in iconMap
+- Created Cobalt Powder Logistics (R400a): ~130 lines, cpw-* violet #7c3aed, 14 records
+  - 14 powder grades: Co-Cr-Mo F75 Atomized, Co-Ni-Al LMD Superalloy, Co-59 Radio Pellet, Co-W 50/50 Thermal, Co-Li-Mn NMC 811, Co-Cr-W Stellite 6, Co 99.95% Spherical, Co-Sm 65/35 Magnets, Co-Cr Stellite 21, Co-Mo 50/50 Desulph, Co-Cr-W-Ni Aero, Co 99.9% Carbide Binder, Co-Fe 50/50 Soft Mag, Co-Ni-Cr-W Alloy 718
+  - 14 manufacturers: MIDHANI, DRDO DMRL, IGCAR, Bharat Forge, Exide, SAIL, Gujarat Fluorochemicals, Rajasthan Cobalt, Tamil Nadu Cobalt, Odisha Cobalt, Assam Cobalt, Gujarat Cobalt Tech, UP Cobalt, BHEL
+  - Applications: Stryker 3D-print hip, HAL Tejas blade repair, Tata Memorial radiotherapy, BHEL TBC, Exide NMC cathode, Crompton valve seat, Tata SmCo magnet, BEL AESA radar, Dentworks dental, IOCL HDS, Wipro GE F414 MRO, Sandvik WC-Co binder, BEL EMI filter, BHEL turbine blade
+  - &#8377;6,620 Cr total investment, avg 62.1% Co content
+  - Delayed: CPW-B2412 (12d, monsoon Gujarat)
+- Created Copper Powder Logistics (R400b): ~130 lines, cop-* emerald #059669, 14 records
+  - 14 powder grades: Pure Cu 99.99% PM, Cu-Cr-Zr 99.8%, Cu-Ni 70/30 Monel, Cu-OFHC 99.99%, Cu-Sn 88/12 Bronze, Cu-Ag 99.97%, Cu-Fe 95/5 P/M, Cu-Zn 65/35 Brass, Cu-Al 95/5 Bronze, Cu-Ni-Si C7025, Cu-Cr 99.5% Additive, Cu-Ni-P 97/2/1 PCB, Cu-Be 98/2, Cu-W 80/20 Contact
+  - 14 manufacturers: Hindalco Novelis, DRDO DMRL, MIDHANI, IGCAR, Bharat Forge, Hindustan Copper, Gujarat Copper, Rajasthan Copper, Tamil Nadu Copper, Odisha Copper, Assam Copper, Gujarat Copper Tech, UP Copper, BHEL
+  - Applications: Bajaj brake pad sinter, ISRO rocket nozzle, Mazagon Dock sub piping, NPCIL nuclear motor, Bharat Forge bush, BEL relay, Mahindra structural, Kirloskar valve, CSL propeller, SCL IC leadframe, GE HX 3D print, AT&S PCB plating, Molex connector, ABB switchgear
+  - &#8377;5,210 Cr total investment, avg 92.7% Cu content
+  - Delayed: COP-B2412 (13d, monsoon Gujarat)
+- Both modules generated via Python raw string scripts (gen_r400a.py, gen_r400b.py)
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (636), page.tsx (1155 viewMap entries), app-store.ts (638 navItems)
+- CSS appended: 22 new rules (~61,819 total)
+- Git commit: dfaca0d, pushed to main
+
+Stage Summary:
+- Project now: 637 module view files, 638 navItems, ~61,819 CSS lines, 1155 viewMap entries, 0 TSC errors in src/
+- Cobalt Powder: Tata Memorial &#8377;750Cr, DRDO aero &#8377;680Cr, BHEL turbine &#8377;560Cr, Exide NMC &#8377;580Cr
+- Copper Powder: ISRO rocket &#8377;580Cr, Molex Cu-Be &#8377;520Cr, GE AM &#8377;480Cr, NPCIL nuclear &#8377;350Cr
+- Delayed: CPW-B2412 (12d), COP-B2412 (13d) — both monsoon Gujarat corridor
+
+**Project Current State:**
+- 637 module view files, 638 navItems, ~61,819 CSS lines, 1155 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 61K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Ghost modules: molybdenum-alloy, vanadium-alloy, tantalum-alloy (export-only, 29-31KB files)
+- Next clean candidates: iron-powder (ipw-*), manganese-steel (mns-* mild overlap), silicon-steel (sis-* mild overlap), silver-alloy (sla-* conflict)
+
+---
 Task ID: R399 — Lead Alloy Logistics + Zinc Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R399 — 2 new Indian logistics modules for lead alloy supply chain and zinc alloy supply chain.
