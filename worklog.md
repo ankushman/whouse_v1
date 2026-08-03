@@ -1,4 +1,24 @@
 ---
+Task ID: R327 — Nuclear SMR + Lithium Extraction Logistics
+Agent: Main Agent (Cron Loop)
+Task: R327 — 2 new Indian logistics modules for nuclear SMR (BARC IGCAR NPCIL BHEL L&amp;T DRDO ISRO Tata Reliance MDL Thermax BEL — PWR Integral HTGR MSR FNR BWR, 5-300MW 28-85% efficiency, Grid/Industrial H2/Steel/Mining/Data Center/Marine/District Heating/Space, 70000Cr NPCIL SMR 2047) and lithium extraction (GSFC RSMML AMNL ONGC DRDO NIOT Lohum CSMCRI — DLE Adsorption Ion Exchange Solvent Extraction Hard Rock Clay Leaching Geothermal Seawater Recycling, 20-500TPD 95-99.9% purity, Battery/Technical Grade, EV and Storage, 18000Cr Critical Mineral Mission)
+
+Work Log:
+- Read worklog: R326 complete (commit 573e129), 486 modules, 498 navItems, 60,157 CSS
+- TSC pre-validation: 0 errors in core files
+- Duplicate check: nuclear-smr and lithium-extraction confirmed unique
+- Icons: Atom (SMR), Recycle (Li) verified in iconMap
+- Created Nuclear SMR Logistics (R327a): ~180 lines, smr-* orange #9a3412, 14 records
+- Created Lithium Extraction Logistics (R327b): ~185 lines, lix-* teal #0d9488, 14 records
+- Used correct pattern: FilterGroup.label, Record&lt;string, string[]&gt;, JSX entities
+- Registered both in index.ts (495), page.tsx, app-store.ts (500 navItems)
+- CSS: 2 lines appended (60,159 total)
+- TSC FINAL: 0 errors | Git: commit 3a852bd pushed
+
+Stage Summary:
+- MODULE FILES: 488 (+2) | NAVITEMS: 500 (+2) | CSS: 60,159 lines (+2)
+- TSC: 0 errors (modules) | GITHUB: pushed (3a852bd)
+---
 Task ID: R326 — Vanadium Redox Flow Battery + Solid Oxide Electrolyzer Logistics
 Agent: Main Agent (Cron Loop)
 Task: R326 — 2 new Indian logistics modules for vanadium redox flow battery (L&T IISc CSIR-IICT V-Guard Tata Power Reliance Jio RCF Railways BEL Defense Gamesa Adani Green Exicom IIT-D BEML — All-Vanadium V-Iron Hybrid Vanadium-Bromine Organic VRFB, VOSO4/V2(SO4)3 VCl3/FeCl2 VBr3/NaBr Quinone/TEMPO Alloxazine/Viologen, 0.1-100MWh 0.01-25MW 65-79% efficiency 8000-25000 cycles, Grid Scale Industrial UPS Telecom Tower Microgrid Island EV Charging Data Center Railway Substation Military Forward Base Wind Farm Hospital University Research Mining Solar Park Buffer Port Container, 6800Cr India VRFB 2030) and solid oxide electrolyzer cell (Tata Steel L&T BHEL IOCL Thermax VSSC Cummins HAL Shree Cement IISc BARC BHAVINI NALco HCL ACC — Planar/Tubular ASC/ESC, YSZ ScSZ GDC-YSZ LSGM GDC 3YSZ, 700-900C 87-97% efficiency 100-15000 Nm3/h, Green Steel Ammonia Synthesis Refinery Desulfurization Syngas Methanol Power-to-Gas Fuel Cell APU Cement Decarbonization e-Fuels Aviation Glass Manufacturing Copper Smelting Data Center H2 Aluminum Nuclear H2, 18000Cr National H2 Mission)
