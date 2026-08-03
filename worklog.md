@@ -10669,3 +10669,43 @@ Stage Summary:
 - TSC clean (0 errors in src/)
 - R364 complete, stable state
 - Next candidates: bio-methane-logistics, vanadium-electrolyte-logistics, silicon-anode-logistics, potassium-ion-logistics, aluminium-air-logistics
+---
+Task ID: R365 — Bio-Methane Logistics + Vanadium Electrolyte Logistics
+Agent: Main Agent (Cron Loop)
+Task: R365 — 2 new Indian logistics modules for bio-methane compressed bio-gas supply chains and vanadium redox flow battery electrolyte production logistics.
+
+Work Log:
+- Read worklog: R364 complete (commit b8f96ca), 562 modules, 573 navItems, 60,343 CSS
+- TSC pre-validation: 0 errors in src/
+- agent-browser QA: dev server not running (OOM risk with 560+ modules), preview URL shows 404 — confirmed TSC-only QA approach
+- Duplicate theme search: 10 candidates tested, all clean
+  - Selected bio-methane-logistics (bml-*, Flame #78350f) and vanadium-electrolyte-logistics (vel-*, Beaker #831843)
+  - Icons verified in iconMap (Flame at line 80, Beaker at line 174)
+- Created Bio-Methane Logistics (R365a): 193 lines, bml-* amber #78350f, 14 records
+  - 14 facilities across 13 states (MP, Maharashtra, Gujarat, West Bengal, UP, Tamil Nadu, Rajasthan, Assam, Karnataka, Jharkhand, Punjab)
+  - 14 feedstock types: MSW AD/Crop Residue/Cattle Dung/Market Vegetable/Poultry Litter/Coir Pith/Jatropha Seedcake/Water Hyacinth/Sewage Sludge/Mixed Organic/Rice Husk/FSE Waste/Fish Waste/Brewery Spent Grain
+  - 4,530 TPD total capacity, 55.8% avg methane yield, 95.2% avg purity, ₹1,800 Cr investment
+- Created Vanadium Electrolyte Logistics (R365b): 195 lines, vel-* rose #831843, 14 records
+  - 14 facilities across 12 states (Karnataka, Telangana, Maharashtra, Odisha, TN, Gujarat, West Bengal, Rajasthan, UP, Kerala, MP, AP, Assam)
+  - 14 electrolyte types: VOSO4 1.6M Sulphate/V2O5 2M Sulphate/VCl3 Chloride/VOSO4 1.5M Mining/VBr3 Bromide/VOSO4 2M High-Density/VOSO4 1.6M Utility/VOSO4 1.8M Solar/VOSO4 1.5M Agricultural/VOSO4 2M Tech-Park/VOSO4 1.6M Marine/VOSO4 1.5M Mining MP/VOSO4 1.8M Port/VOSO4 1.6M NE-Grid
+  - 39,600 KL total capacity, 27.4 Wh/L avg energy density, 99.2% avg purity, ₹2,730 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (569), page.tsx (1089 viewMap entries), app-store.ts (575 navItems)
+- CSS: 25 lines appended (60,368 total, +25 lines)
+- Git: commit f602959 pushed
+
+Stage Summary:
+- MODULE FILES: 564 (+2) | NAVITEMS: 575 (+2) | CSS: 60,368 lines (+25)
+- TSC: 0 errors (src/) | GITHUB: pushed (f602959)
+
+**Project Current State:**
+- 564 module view files, 575 navItems, 60,368 CSS lines, 1089 viewMap entries
+- TSC clean (0 errors in src/)
+- R365 complete, stable state
+- Next candidates: silicon-anode-logistics, potassium-ion-logistics, aluminium-air-logistics, methanol-fuel-logistics, syngas-logistics, graphene-battery-logistics, titanium-alloy-logistics, carbon-capture-logistics
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 560+ modules, dev server OOM risk — continue TSC-only QA approach
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
