@@ -1,4 +1,35 @@
 ---
+Task ID: R375 — Diamond Synthetic Logistics + Rare Earth Magnet Logistics
+Agent: Main Agent (Cron Loop)
+Task: R375 — 2 new Indian logistics modules for synthetic diamond and rare earth magnet supply chains.
+
+Work Log:
+- Read worklog: R374 complete (commit df7db32), 582 modules, 593 navItems, 60,640 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 20 candidates tested, all confirmed clean
+  - Selected diamond-synthetic-logistics (dsn-*, Diamond #06b6d4) and rare-earth-magnet-logistics (rem-*, Flame #059669)
+  - Icons verified in iconMap (Diamond and Flame available)
+- Created Diamond Synthetic Logistics (R375a): 226 lines, dsn-* cyan #06b6d4, 14 records
+  - 14 records across 13 cities (Surat, Bengaluru, Mumbai, Hyderabad, Pune, Chennai, Jaipur, Noida, Ahmedabad, Kolkata, Coimbatore, Guwahati, Thiruvananthapuram, Lucknow)
+  - 14 manufacturers: EDS, IIa, Element Six, DRDO, Spark, CSIR-CGCRI, RDW, Apex, GND, BDC, SAM, NEDH, VSSC, UDP
+  - 14 types: CVD Single Crystal/Electronic Grade/Quantum Grade/Radiation Detector/Optical Window/X-Ray Window/Phonon Substrate, HPHT Industrial/Gem Quality/Abrasive Grit, Detonation Nano Diamond, CVD Electrode, CVD Wear Coating, CVD X-Ray Window
+  - Applications: jewellery, semiconductor heat spreader, PCD cutting tool, nuclear dosimeter, EV melee, laser window, bearing lapping, quantum qubit, drug delivery, water treatment, mining drill, satellite payload, 5G RF filter
+  - 2,391 Cr total investment, 31,000+ carats across all batches
+- Created Rare Earth Magnet Logistics (R375b): 228 lines, rem-* emerald #059669, 14 records
+  - 14 records across 13 cities (Hyderabad, Mumbai, Pune, Bengaluru, Chennai, Noida, Bhubaneswar, Ahmedabad, Jaipur, Coimbatore, Guwahati, Srinagar, Gandhinagar, Kolkata)
+  - 14 manufacturers: REEH, TRE, Aether, BEL, IREL, Magneto, IREL Odisha, GMP, RRE, TNMW, NEREH, KMC, GNFC, BMW
+  - 12 magnet types: NdFeB N52/N48/N48SH/N48UH/N45EH/N42/N42UH/N50/N35, SmCo 1:5/Sm2Co17, AlNiCo 5, Ferrite Y30 RE-doped
+  - Applications: EV traction motor, satellite reaction wheel, wind turbine generator, AESA radar TRM, MRI gradient coil, EV motor rotor, hypersonic missile, magnetic separator, audio speaker, elevator traction, EV charger, military compass, battery BMS, 5G circulator
+  - 1,876 Cr total investment, flux density 0.48-1.45T, temp range 80-500°C
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (588), page.tsx (1109 viewMap entries), app-store.ts (595 navItems)
+- CSS: 30 lines appended (60,670 total)
+- Git: commit 7a83b6a pushed
+
+Stage Summary:
+- MODULE FILES: 584 (+2) | NAVITEMS: 595 (+2) | CSS: 60,670 lines (+30)
+- TSC: 0 errors (src/) | GITHUB: pushed (7a83b6a)
+---
 Task ID: R374 — Silicon Photonics Logistics + Beryllium Copper Logistics
 Agent: Main Agent (Cron Loop)
 Task: R374 — 2 new Indian logistics modules for silicon photonics chip supply chain and beryllium copper alloy supply chain.
