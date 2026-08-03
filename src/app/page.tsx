@@ -484,6 +484,8 @@ import NuclearPowerPlantConstructionLogisticsView from "@/components/modules/nuc
 import SatelliteLaunchComplexLogisticsView from "@/components/modules/satellite-launch-complex-logistics-view"
 import QuantumCommunicationNetworkLogisticsView from "@/components/modules/quantum-communication-network-logistics-view"
 import SpaceDebrisRemovalLogisticsView from "@/components/modules/space-debris-removal-logistics-view"
+import SolidStateBatteryManufacturingLogisticsView from "@/components/modules/solid-state-battery-manufacturing-logistics-view"
+import GreenAmmoniaProductionLogisticsView from "@/components/modules/green-ammonia-production-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -967,6 +969,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "satellite-launch-complex": SatelliteLaunchComplexLogisticsView,
   "quantum-communication-network": QuantumCommunicationNetworkLogisticsView,
   "space-debris-removal": SpaceDebrisRemovalLogisticsView,
+  "solid-state-battery-manufacturing": SolidStateBatteryManufacturingLogisticsView,
+  "green-ammonia-production": GreenAmmoniaProductionLogisticsView,
 }
 
 

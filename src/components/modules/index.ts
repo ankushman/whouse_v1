@@ -474,3 +474,5 @@ export { default as NuclearPowerPlantConstructionLogisticsView } from './nuclear
 export { default as SatelliteLaunchComplexLogisticsView } from './satellite-launch-complex-logistics-view'
 export { default as QuantumCommunicationNetworkLogisticsView } from './quantum-communication-network-logistics-view'
 export { default as SpaceDebrisRemovalLogisticsView } from './space-debris-removal-logistics-view'
+export { default as SolidStateBatteryManufacturingLogisticsView } from './solid-state-battery-manufacturing-logistics-view'
+export { default as GreenAmmoniaProductionLogisticsView } from './green-ammonia-production-logistics-view'
