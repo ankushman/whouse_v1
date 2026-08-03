@@ -602,3 +602,5 @@ export { default as NiobiumAlloyLogisticsView } from './niobium-alloy-logistics-
 export { default as PlatinumGroupMetalLogisticsView } from './platinum-group-metal-logistics-view'
 export { default as VanadiumAlloyLogisticsView } from './vanadium-alloy-logistics-view'
 export { default as SiliconNitrideLogisticsView } from './silicon-nitride-logistics-view'
+export { default as PalladiumCatalystLogisticsView } from './palladium-catalyst-logistics-view'
+export { default as TungstenHeavyAlloyLogisticsView } from './tungsten-heavy-alloy-logistics-view'
