@@ -60437,3 +60437,40 @@ html.theme-transition body {
 .gbl-root .gbl-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
 .gbl-root .gbl-insight-card:hover { box-shadow: 0 4px 12px rgba(55,48,163,0.12); }
 .gbl-root .gbl-insight-title { color: #1e1b4b; }
+/* R369a — Titanium Alloy Logistics (tal-*) */
+.tal-tab-btn { transition: all 0.2s; }
+.tal-tab-active { box-shadow: 0 2px 4px rgba(100,116,139,0.3); }
+.tal-kpi-card { transition: transform 0.15s; }
+.tal-kpi-card:hover { transform: translateY(-1px); }
+.tal-chart-card { animation: fadeIn 0.3s ease-out; }
+.tal-bar { transition: width 0.6s ease-out; }
+.tal-search-input { max-width: 280px; }
+.tal-filter-group { gap: 4px; }
+.tal-filter-badge { transition: all 0.15s; }
+.tal-filter-badge:hover { opacity: 0.85; }
+.tal-table-wrap { max-height: 420px; overflow-y: auto; }
+.tal-table-header { background: rgba(100,116,139,0.06); }
+.tal-table-row { transition: background 0.15s; }
+.tal-table-row:hover { background: rgba(100,116,139,0.04); }
+.tal-status-badge { font-size: 10px; }
+.tal-insight-card { transition: transform 0.15s; }
+.tal-insight-card:hover { transform: translateY(-1px); }
+
+/* R369b — Green Ammonia Shipping Logistics (gasl-*) */
+.gasl-tab-btn { transition: all 0.2s; }
+.gasl-tab-active { box-shadow: 0 2px 4px rgba(8,145,178,0.3); }
+.gasl-kpi-card { transition: transform 0.15s; }
+.gasl-kpi-card:hover { transform: translateY(-1px); }
+.gasl-chart-card { animation: fadeIn 0.3s ease-out; }
+.gasl-bar { transition: width 0.6s ease-out; }
+.gasl-search-input { max-width: 280px; }
+.gasl-filter-group { gap: 4px; }
+.gasl-filter-badge { transition: all 0.15s; }
+.gasl-filter-badge:hover { opacity: 0.85; }
+.gasl-table-wrap { max-height: 420px; overflow-y: auto; }
+.gasl-table-header { background: rgba(8,145,178,0.06); }
+.gasl-table-row { transition: background 0.15s; }
+.gasl-table-row:hover { background: rgba(8,145,178,0.04); }
+.gasl-status-badge { font-size: 10px; }
+.gasl-insight-card { transition: transform 0.15s; }
+.gasl-insight-card:hover { transform: translateY(-1px); }

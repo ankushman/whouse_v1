@@ -572,3 +572,5 @@ export { default as AluminiumAirBatteryLogisticsView } from './aluminium-air-bat
 export { default as SyngasLogisticsView } from './syngas-logistics-view'
 export { default as MethanolFuelLogisticsView } from './methanol-fuel-logistics-view'
 export { default as GrapheneBatteryLogisticsView } from './graphene-battery-logistics-view'
+export { default as TitaniumAlloyLogisticsView } from './titanium-alloy-logistics-view'
+export { default as GreenAmmoniaShippingLogisticsView } from './green-ammonia-shipping-logistics-view'
