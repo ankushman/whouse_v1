@@ -1023,6 +1023,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "biochar": BiocharLogisticsView,
   "hydrogen-storage": HydrogenStorageLogisticsView,
   "plasma-gasification": PlasmaGasificationLogisticsView,
+  "carbon-capture-utilization": CarbonCaptureUtilizationLogisticsView,
+  "electric-ferry": ElectricFerryLogisticsView,
 }
 
 
@@ -1134,3 +1136,5 @@ export default function Home() {
     </SidebarProvider>
   )
 }
+import CarbonCaptureUtilizationLogisticsView from "@/components/modules/carbon-capture-utilization-logistics-view"
+import ElectricFerryLogisticsView from "@/components/modules/electric-ferry-logistics-view"

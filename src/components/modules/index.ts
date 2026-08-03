@@ -503,3 +503,5 @@ export { default as DeepSeaMiningLogisticsView } from './deep-sea-mining-logisti
 export { default as BiocharLogisticsView } from './biochar-logistics-view'
 export { default as HydrogenStorageLogisticsView } from './hydrogen-storage-logistics-view'
 export { default as PlasmaGasificationLogisticsView } from './plasma-gasification-logistics-view'
+export { default as CarbonCaptureUtilizationLogisticsView } from './carbon-capture-utilization-logistics-view'
+export { default as ElectricFerryLogisticsView } from './electric-ferry-logistics-view'
