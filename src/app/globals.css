@@ -60222,3 +60222,25 @@ html.theme-transition body {
 .ges-record-card:hover { box-shadow: 0 4px 12px rgba(30,41,59,0.12); }
 .ges-insight-card { border-radius: 12px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); }
 .ges-insight-title { color: #1e293b; }
+.cas-root { background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%); min-height: 100vh; }
+.cas-tab { cursor: pointer; }
+.cas-tab:hover { background: #cffafe; }
+.cas-kpi-card { border-radius: 12px; background: white; box-shadow: 0 1px 3px rgba(14,116,144,0.08); }
+.cas-kpi-label { color: #0e7490; font-weight: 500; }
+.cas-kpi-value { color: #155e75; }
+.cas-chart-title { color: #0e7490; }
+.cas-record-card { border-radius: 10px; transition: box-shadow 0.2s; }
+.cas-record-card:hover { box-shadow: 0 4px 12px rgba(14,116,144,0.12); }
+.cas-insight-card { border-radius: 12px; background: linear-gradient(135deg, #ecfeff 0%, #a5f3fc 100%); }
+.cas-insight-title { color: #155e75; }
+.hyl-root { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); min-height: 100vh; }
+.hyl-tab { cursor: pointer; }
+.hyl-tab:hover { background: #dbeafe; }
+.hyl-kpi-card { border-radius: 12px; background: white; box-shadow: 0 1px 3px rgba(29,78,216,0.08); }
+.hyl-kpi-label { color: #1d4ed8; font-weight: 500; }
+.hyl-kpi-value { color: #1e40af; }
+.hyl-chart-title { color: #1d4ed8; }
+.hyl-record-card { border-radius: 10px; transition: box-shadow 0.2s; }
+.hyl-record-card:hover { box-shadow: 0 4px 12px rgba(29,78,216,0.12); }
+.hyl-insight-card { border-radius: 12px; background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%); }
+.hyl-insight-title { color: #1e40af; }

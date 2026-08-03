@@ -554,3 +554,5 @@ export { default as ThermoElectricLogisticsView } from './thermo-electric-logist
 export { default as DirectLithiumExtractionLogisticsView } from './direct-lithium-extraction-logistics-view'
 export { default as IronAirBatteryLogisticsView } from './iron-air-battery-logistics-view'
 export { default as GravityEnergyStorageView } from './gravity-energy-storage-view'
+export { default as CompressedAirEnergyStorageView } from './compressed-air-energy-storage-view'
+export { default as HydrogenLiquefactionLogisticsView } from './hydrogen-liquefaction-logistics-view'

@@ -1074,6 +1074,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "direct-lithium-extraction-logistics": DirectLithiumExtractionLogisticsView,
   "iron-air-battery-logistics": IronAirBatteryLogisticsView,
   "gravity-energy-storage": GravityEnergyStorageView,
+  "compressed-air-energy-storage": CompressedAirEnergyStorageView,
+  "hydrogen-liquefaction-logistics": HydrogenLiquefactionLogisticsView,
 }
 
 
@@ -1236,3 +1238,5 @@ import ThermoElectricLogisticsView from "@/components/modules/thermo-electric-lo
 import DirectLithiumExtractionLogisticsView from "@/components/modules/direct-lithium-extraction-logistics-view"
 import IronAirBatteryLogisticsView from "@/components/modules/iron-air-battery-logistics-view"
 import GravityEnergyStorageView from "@/components/modules/gravity-energy-storage-view"
+import CompressedAirEnergyStorageView from "@/components/modules/compressed-air-energy-storage-view"
+import HydrogenLiquefactionLogisticsView from "@/components/modules/hydrogen-liquefaction-logistics-view"
