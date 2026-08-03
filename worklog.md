@@ -11122,3 +11122,38 @@ Stage Summary:
 - NavItem label overwrite risk when inserting new entries — verify adjacent labels
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+---
+Task ID: R376 — Molybdenum Alloy Logistics + Indium Phosphide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R376 — 2 new Indian logistics modules for molybdenum alloy and indium phosphide photonic supply chains.
+
+Work Log:
+- Read worklog: R375 complete (commit df7db32), 591 modules, 593 navItems, 60,670 CSS
+- TSC pre-validation: 0 errors in src/ (only pre-existing errors in scripts/skills/mini-services)
+- Duplicate theme search: 21 candidates tested, all confirmed clean
+  - Selected molybdenum-alloy-logistics (mol-*, Hexagon #7c3aed) and indium-phosphide-logistics (inp-*, CircuitBoard #d97706)
+  - Icons verified in iconMap (Hexagon and CircuitBoard available)
+- Created Molybdenum Alloy Logistics (R376a): ~235 lines, mol-* violet #7c3aed, 14 records
+  - 14 records across 13 cities (Mumbai, Bengaluru, Hyderabad, Pune, Chennai, Noida, Kolkata, Ahmedabad, Coimbatore, Jaipur, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, HAL, Saint-Gobain, Bajaj Steel, IGCAR, DMRDL, Hindalco, Reliance SBR, Elgi Ultra, Rajasthan State Mines, NALCO, Oil India, Gujarat Fluorochemicals, Tata Advanced Systems
+  - 14 alloy grades: TZM, Mo-14Re, Mo-5W, Mo-La2O3, Mo-41Re, TZC, Mo-Cu(15/85), Pure Mo(99.95%), Mo-Ni(50/50), Pure Mo(99.9%), Mo-Si-B, TZM (oilfield), Mo-Hf-C, Mo-30W
+  - Applications: die casting, turbine blade root, glass melting electrode, welding core wire, space reactor shield, missile nozzle throat, heat sink, catalyst support, sputtering target, X-ray anode, UHTC coating, MWD tool, plasma torch, kinetic energy penetrator
+  - ₹2,708 Cr total investment, 14 alloy grades, 14 cities
+- Created Indium Phosphide Logistics (R376b): ~235 lines, inp-* amber #d97706, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Gandhinagar, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Lucknow)
+  - 14 manufacturers: SCL, IICT-CSIR, Tata Electronics, KPIT Technologies, CEERI, Bharat Semi, CGCRI, IIT Gandhinagar, PRL Ahmedabad, MNIT Jaipur, PSG Tech, IICT Bhubaneswar, IIT Guwahati, DRDO IRDE
+  - 14 wafer types: SI InP, HEMT epiwafer, Photodiode Epiwafer, Laser Diode, THz Emitter, Photonic IC, Waveguide Epiwafer, Solar Cell, IR Detector, LED Epiwafer, Modulator, THz Detector, Quantum Dot, IR Camera FPA
+  - Applications: 5G mmWave PA, satellite HEMT, 100G optical receiver, LiDAR, THz security, SiPh transceiver, EDFA, space solar, hyperspectral imager, micro-LED, EAM, NDT, single-photon source, night vision
+  - ₹2,955 Cr total investment, 14 wafer types, 13 cities
+- Three-file registration completed: index.ts (591 lines), page.tsx (1111 viewMap entries), app-store.ts (597 navItems)
+- CSS appended: 42 new rules for mol-* (violet) and inp-* (amber) themes
+- TSC post-validation: 0 errors in src/
+- Git commit: e18319e, pushed to main
+
+Stage Summary:
+- Project now: 593 modules, 597 navItems, ~60,720 CSS lines, 1111 viewMap entries, 0 TSC errors
+- Molybdenum alloy module covers strategic high-temperature alloys for defence, aerospace, petroleum, semiconductor, and medical applications
+- Indium phosphide module covers emerging photonics market: 5G, LiDAR, quantum computing, optical networking, space solar
+- Both modules use established patterns: dual-jump Record type assertion, for...of filter loops, correct PageHeader signature
+- Delayed shipment tracking: MOL-B2404 (Pune→Mumbai, 10d), MOL-B2414 (Lucknow→Kanpur, 13d), INP-B2407 (Kolkata→Aurangabad, 9d), INP-B2412 (Bhubaneswar→Bhopal, 12d)
+- Next candidates (pre-validated): cobalt-alloy, magnesium-alloy, tantalum-capacitor, gallium-arsenide, hafnium-alloy, scandium-alloy
