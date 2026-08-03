@@ -60944,3 +60944,81 @@ html.theme-transition body {
 .brc-gradient { background: linear-gradient(135deg, #4f46e5, #6366f1); }
 .brc-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #e0e7ff; color: #4f46e5; }
 .brc-divider { border-top: 1px solid #e0e7ff; }
+
+/* ═══════ R382a Niobium Alloy Logistics (nba-*) amber #b45309 ═══════ */
+.nba-card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(180, 83, 9, 0.15); }
+.nba-card-hover { transition: all 0.25s ease; }
+.nba-badge-glow { box-shadow: 0 0 8px rgba(180, 83, 9, 0.4); }
+.nba-row-hover:hover { background-color: rgba(180, 83, 9, 0.06); }
+.nba-row-hover { transition: background-color 0.15s ease; }
+.nba-header-gradient { background: linear-gradient(135deg, #b45309 0%, #92400e 100%); }
+.nba-tab-active { border-bottom: 3px solid #b45309; color: #b45309; font-weight: 600; }
+.nba-progress-bar { background: linear-gradient(90deg, #f59e0b, #b45309); border-radius: 9999px; }
+.nba-progress-track { background: rgba(180, 83, 9, 0.1); border-radius: 9999px; }
+.nba-card-border { border-left: 4px solid #b45309; }
+.nba-tooltip-bg { background-color: #b45309; color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
+.nba-status-delivered { border-left: 4px solid #22c55e; background-color: rgba(34, 197, 94, 0.08); }
+.nba-status-delayed { border-left: 4px solid #ef4444; background-color: rgba(239, 68, 68, 0.08); }
+.nba-status-transit { border-left: 4px solid #f59e0b; background-color: rgba(245, 158, 11, 0.08); }
+.nba-status-processing { border-left: 4px solid #3b82f6; background-color: rgba(59, 130, 246, 0.08); }
+.nba-insight-card { border-left: 4px solid #b45309; }
+.nba-kpi-card { border-left: 4px solid #b45309; background: linear-gradient(135deg, rgba(180, 83, 9, 0.04), rgba(180, 83, 9, 0.01)); }
+.nba-search-focus:focus { box-shadow: 0 0 0 2px rgba(180, 83, 9, 0.3); border-color: #b45309; }
+.nba-badge-active { background-color: #b45309; color: white; }
+.nba-badge-outline { border: 1px solid #b45309; color: #b45309; background: transparent; }
+.nba-chart-bar { background: linear-gradient(to top, #b45309, #f59e0b); border-radius: 4px 4px 0 0; }
+.nba-footer-border { border-top: 1px solid rgba(180, 83, 9, 0.2); }
+.nba-section-title { color: #b45309; font-weight: 700; font-size: 14px; }
+.nba-empty-state { color: #78716c; font-style: italic; }
+.nba-filter-active { background-color: rgba(180, 83, 9, 0.1); border-color: #b45309; }
+.nba-table-header { background-color: rgba(180, 83, 9, 0.05); font-weight: 600; color: #78716c; }
+.nba-monospace { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; }
+.nba-pulse-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #b45309; animation: nba-pulse 2s infinite; }
+.nba-shimmer { background: linear-gradient(90deg, transparent, rgba(180, 83, 9, 0.08), transparent); background-size: 200% 100%; animation: nba-shimmer 2s infinite; }
+@keyframes nba-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+@keyframes nba-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.nba-stagger-1 { animation-delay: 0.05s; }
+.nba-stagger-2 { animation-delay: 0.1s; }
+.nba-stagger-3 { animation-delay: 0.15s; }
+.nba-stagger-4 { animation-delay: 0.2s; }
+.nba-hover-lift:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(180, 83, 9, 0.12); }
+.nba-hover-lift { transition: all 0.2s ease; }
+
+/* ═══════ R382b Platinum Group Metal Logistics (pgm-*) violet #7c3aed ═══════ */
+.pgm-card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(124, 58, 237, 0.15); }
+.pgm-card-hover { transition: all 0.25s ease; }
+.pgm-badge-glow { box-shadow: 0 0 8px rgba(124, 58, 237, 0.4); }
+.pgm-row-hover:hover { background-color: rgba(124, 58, 237, 0.06); }
+.pgm-row-hover { transition: background-color 0.15s ease; }
+.pgm-header-gradient { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
+.pgm-tab-active { border-bottom: 3px solid #7c3aed; color: #7c3aed; font-weight: 600; }
+.pgm-progress-bar { background: linear-gradient(90deg, #a78bfa, #7c3aed); border-radius: 9999px; }
+.pgm-progress-track { background: rgba(124, 58, 237, 0.1); border-radius: 9999px; }
+.pgm-card-border { border-left: 4px solid #7c3aed; }
+.pgm-tooltip-bg { background-color: #7c3aed; color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
+.pgm-status-delivered { border-left: 4px solid #22c55e; background-color: rgba(34, 197, 94, 0.08); }
+.pgm-status-delayed { border-left: 4px solid #ef4444; background-color: rgba(239, 68, 68, 0.08); }
+.pgm-status-transit { border-left: 4px solid #f59e0b; background-color: rgba(245, 158, 11, 0.08); }
+.pgm-status-processing { border-left: 4px solid #3b82f6; background-color: rgba(59, 130, 246, 0.08); }
+.pgm-insight-card { border-left: 4px solid #7c3aed; }
+.pgm-kpi-card { border-left: 4px solid #7c3aed; background: linear-gradient(135deg, rgba(124, 58, 237, 0.04), rgba(124, 58, 237, 0.01)); }
+.pgm-search-focus:focus { box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3); border-color: #7c3aed; }
+.pgm-badge-active { background-color: #7c3aed; color: white; }
+.pgm-badge-outline { border: 1px solid #7c3aed; color: #7c3aed; background: transparent; }
+.pgm-chart-bar { background: linear-gradient(to top, #7c3aed, #a78bfa); border-radius: 4px 4px 0 0; }
+.pgm-footer-border { border-top: 1px solid rgba(124, 58, 237, 0.2); }
+.pgm-section-title { color: #7c3aed; font-weight: 700; font-size: 14px; }
+.pgm-empty-state { color: #78716c; font-style: italic; }
+.pgm-filter-active { background-color: rgba(124, 58, 237, 0.1); border-color: #7c3aed; }
+.pgm-table-header { background-color: rgba(124, 58, 237, 0.05); font-weight: 600; color: #78716c; }
+.pgm-monospace { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; }
+.pgm-pulse-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #7c3aed; animation: pgm-pulse 2s infinite; }
+.pgm-shimmer { background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.08), transparent); background-size: 200% 100%; animation: pgm-shimmer 2s infinite; }
+@keyframes pgm-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+@keyframes pgm-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.pgm-stagger-1 { animation-delay: 0.05s; }
+.pgm-stagger-2 { animation-delay: 0.1s; }
+.pgm-stagger-3 { animation-delay: 0.15s; }
+.pgm-stagger-4 { animation-delay: 0.2s; }
+.pgm-hover-lift:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12); }
+.pgm-hover-lift { transition: all 0.2s ease; }
