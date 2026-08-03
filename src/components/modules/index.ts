@@ -558,3 +558,5 @@ export { default as CompressedAirEnergyStorageView } from './compressed-air-ener
 export { default as HydrogenLiquefactionLogisticsView } from './hydrogen-liquefaction-logistics-view'
 export { default as MyceliumLogisticsView } from './mycelium-logistics-view'
 export { default as SodiumIonLogisticsView } from './sodium-ion-logistics-view'
+export { default as NeodymiumMagnetLogisticsView } from './neodymium-magnet-logistics-view'
+export { default as ManganeseSulphateLogisticsView } from './manganese-sulphate-logistics-view'
