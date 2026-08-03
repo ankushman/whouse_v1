@@ -1,4 +1,53 @@
 ---
+Task ID: R390 — Bismuth Alloy Logistics + Tantalum Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R390 — 2 new Indian logistics modules for bismuth alloy lead-free solder/shielding/thermoelectric supply chain and tantalum alloy aerospace/capacitor/chemical reactor supply chain.
+
+Work Log:
+- Read worklog: R389 complete (commit 2390da8), 619 modules, 623 navItems, ~61,437 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 6 candidates tested, bismuth-alloy and tantalum-alloy confirmed clean
+  - magnesium-alloy had index.ts conflict; mma- and ica- prefixes conflicted
+  - Selected bismuth-alloy-logistics (bia-*, FlaskConical purple #9333ea) and tantalum-alloy-logistics (taa-*, ShieldCheck slate #475569)
+  - Icons verified: FlaskConical and ShieldCheck available in iconMap
+- Created Bismuth Alloy Logistics (R390a): ~205 lines, bia-* purple #9333ea, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, DRDO DMRL, BEL, Kirloskar Electric, IGCAR, Amrit Bismuth Industries, Hindustan Copper, Gujarat Fluorochemicals, Rajasthan Bismuth Corp, Tamil Nadu Bismuth Alloys, Odisha Non-Ferrous Alloys, Assam Bismuth Refinery, Gujarat Bismuth Technologies, UP Bismuth Works
+  - 14 alloy grades: Bi-Sn-42, Bi-Pb-Sn Eutectic, Bi-In-48, Bi-Ag-2.5, Bi-208Pb, Bi-Sn-Ag Ternary, Bi-Cu-1.5, Bi-Zn-Alloy, Bi-Ag-12, Bi-Sb-8, Bi-Tl-10, Bi-Sn-Ag-Cu Quad, Bi-Li-0.3, Bi-Te-5
+  - Applications: lead-free solder BEL, fuse alloy avionics, thermal interface ISRO, contact alloy ABB VCB, spallation target BARC ADS, pharma capsule seal Cipla, free-machining steel SAIL, galvanising anode Hindalco, dental casting Dentsply, bullet core OFB green ammo, cryogenic valve INOX AP, solder paste ITI 5G, radiation shielding BARC gamma, thermoelectric DRDO cooling vest
+  - &#8377;1,940 Cr total investment, avg 81.6% Bi content across all grades
+- Created Tantalum Alloy Logistics (R390b): ~205 lines, taa-* slate #475569, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: HAL, MIDHANI, DRDO DMRL, Bharat Forge, IGCAR, India Rare Earths, Hindustan Copper, Gujarat Fluorochemicals, Rajasthan Tantalum Corp, Tamil Nadu Tantalum Industries, Odisha Tantalum Refinery, Assam Tantalum Works, Gujarat Tantalum Technologies, UP Tantalum Alloys
+  - 14 alloy grades: Ta-10W, Ta-2.5Sn, Ta-Hf-2, Ta-10Nb, Ta-110, Ta2O5 Powder, Ta-Sintered Anode, Ta-Nb Alloy Sheet, Ta-W-Nb Trimetal, Ta-5Mo, Ta-7.5W-3.5Nb, Ta Foil 25um, Ta-40Nb, Ta-Cr-0.2
+  - Applications: turbine blade HAL Su-30, chemical reactor Hindustan Zinc, missile nozzle DRDO Agni-V, vacuum furnace BHEL HIP, corrosion probe BARC PHWR, capacitor dielectric Murata SMD, sintered anode TDK solid cap, superconductor cavity DAE synchrotron, orthopaedic implant Stryker hip, heat exchanger Linde HCl, X-ray target Wipro GE CT, thin film sputtering IITG, surgical instrument JJ ophthalmic, anti-corrosion liner IOCL
+  - &#8377;1,952 Cr total investment, avg 86.7% Ta content across all grades
+- TSC: 0 errors in src/ on first pass
+- Three-file registration: index.ts (619), page.tsx (1139 viewMap entries), app-store.ts (625 navItems)
+- CSS appended: 62 new rules (61,499 total)
+- Git commit: c903a4d, pushed to main
+
+Stage Summary:
+- Project now: 621 modules, 625 navItems, ~61,499 CSS lines, 1139 viewMap entries, 0 TSC errors
+- Bismuth alloy: lead-free solder &#8377;3,200Cr BEL/ITI, radiation shielding &#8377;8,500Cr BARC Bi-Li, ADS spallation &#8377;9,500Cr Bi-Pb, thermoelectric &#8377;4,200Cr DRDO Bi-Te
+- Tantalum alloy: aerospace Ta-10W &#8377;8,200Cr HAL Su-30, capacitors &#8377;6,800Cr Murata/TDK 500M units, chemical reactors &#8377;6,500Cr MIDHANI, SRF cavities &#8377;9,200Cr DAE
+- Delayed: BIA-B2412 (12d, monsoon), TAA-B2412 (12d, monsoon)
+- Next candidates (pre-validated): magnesium-alloy (prefix conflict mma-), molybdenum-sheet, indium-compound (prefix conflict ica-), selenium-metal, titanium-alloy, tungsten-carbide
+
+**Project Current State:**
+- 621 module view files, 625 navItems, ~61,499 CSS lines, 1139 viewMap entries
+- TSC clean (0 errors in src/)
+- R390 complete, stable state
+
+**Risks / Next Priorities:**
+- globals.css at 61K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 621+ modules, dev server OOM risk — continue TSC-only QA approach
+- mma- prefix conflicts (maritime, nickel, hafnium, palladium, cement modules) — magnesium alloy needs different prefix
+- ica- prefix conflicts (palladium, wind-recycling) — indium compound needs different prefix
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Next clean candidates: molybdenum-sheet (msa-), selenium-metal (sme-), titanium-alloy (tia-), tungsten-carbide (wca-)
+
+---
 Task ID: R389 — Zirconium Alloy Logistics + Lithium Refining Logistics
 Agent: Main Agent (Cron Loop)
 Task: R389 — 2 new Indian logistics modules for zirconium alloy nuclear/ceramic supply chain and lithium refining/extraction supply chain.
