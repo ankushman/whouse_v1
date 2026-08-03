@@ -490,6 +490,8 @@ import FusionEnergyReactorLogisticsView from "@/components/modules/fusion-energy
 import OceanWaveEnergyLogisticsView from "@/components/modules/ocean-wave-energy-logistics-view"
 import DirectAirCaptureLogisticsView from "@/components/modules/direct-air-capture-logistics-view"
 import FloatingSolarFarmLogisticsView from "@/components/modules/floating-solar-farm-logistics-view"
+import TidalEnergyLogisticsView from "@/components/modules/tidal-energy-logistics-view"
+import HydrogenFuelStationLogisticsView from "@/components/modules/hydrogen-fuel-station-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -979,6 +981,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "ocean-wave-energy": OceanWaveEnergyLogisticsView,
   "direct-air-capture": DirectAirCaptureLogisticsView,
   "floating-solar-farm": FloatingSolarFarmLogisticsView,
+  "tidal-energy": TidalEnergyLogisticsView,
+  "hydrogen-fuel-station": HydrogenFuelStationLogisticsView,
 }
 
 
