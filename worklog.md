@@ -1,4 +1,25 @@
 ---
+Task ID: R332 — Deep Sea Mining + Biochar Supply Chain Logistics
+Agent: Main Agent (Cron Loop)
+Task: R332 — 2 new Indian logistics modules for deep sea mining (NIOT ISRO HAL BARC NTPC IREL MOES NODCO — Polymetallic Nodules Cobalt-Rich Crusts SMS, CIOB Andaman Carlsberg Rodrigues, 1800-5200m depth, Battery Cathode Steel Superalloy REE Electronics Fertilizer, Deep Ocean Mission 15000Cr). Biochar (IARI ICAR IFFCO Reliance Adani ACC TATA KIRAN TNAU — Slow Fast Pyrolysis Torrefaction HTC, Rice Husk Bagasse Coconut Shell Paddy Straw Bamboo MSW, 30-85% carbon 20-70% yield, Soil Amendment Carbon Credit Water Filtration Concrete, National Biochar Mission 3500Cr).
+
+Work Log:
+- Read worklog: R331 complete (commit 356a8b2), 495 modules, 507 navItems, 60,165 CSS
+- TSC pre-validation: 0 errors in core module files
+- Duplicate check: deep-sea-mining and biochar confirmed unique
+- Icons: Anchor (deep-sea), Sprout (biochar) verified in iconMap
+- Created Deep Sea Mining Logistics (R332a): ~200 lines, dsm-* navy #1e3a5f, 14 records
+- Created Biochar Supply Chain Logistics (R332b): ~200 lines, bch-* lime #65a30d, 14 records
+- Used correct pattern: FilterGroup.label, Record<string, string[]>, JSX &#8594; &#8377; HTML entities
+- Registered both in index.ts (503), page.tsx, app-store.ts (509 navItems)
+- CSS: 1 line appended (60,166 total — compressed CSS blocks)
+- TSC FINAL: 0 errors in modules/page/store | Git: commit 1c1675d pushed
+
+Stage Summary:
+- MODULE FILES: 497 (+2) | NAVITEMS: 509 (+2) | CSS: 60,166 lines (+1)
+- TSC: 0 errors (modules) | GITHUB: pushed (1c1675d)
+---
+---
 Task ID: R331 — Hydrogen Pipeline + Carbon Trading Logistics
 Agent: Main Agent (Cron Loop)
 Task: R331 — 2 new Indian logistics modules for hydrogen pipeline (NTPC GAIL Adani Reliance SAIL JSW BARC NPCIL IFFCO TATA NTPC ACC BPCL — Green Blue Grey H2, Electrolytic Solar Wind Nuclear Hydro, NG Reformer CCS, Biomass Gasification, Coal Gasifier, 15-100bar 4-24in 600-7000kg/hr, Refinery Steel DRI Fertilizer FC Power Cement Shipping Export, National H2 Pipeline Grid 25000km target). Carbon trading (Reliance Tata NTPC JSW Hindalco NALCO BPCL NFL TCS Thermax Mahindra ITC Amazon — REC Verra VCU EU ETS Green H2 Certificate, Compliance Voluntary, Power Steel Cement Aluminum Refinery Shipping EV Forestry, Indian Carbon Market ICTS EU CBAM IMO GHG, 2200-6200 per tonne).
