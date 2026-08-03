@@ -61730,3 +61730,32 @@ html.theme-transition body {
 .chromium-sheet-logistics table thead { background: #e0e7ff; }
 .chromium-sheet-logistics table tbody tr:hover { background: #eef2ff; }
 .chromium-sheet-logistics .text-indigo-600 { letter-spacing: 0.025em; }
+/* R398a - Tungsten Sheet Logistics (teal) */
+.tungsten-sheet-logistics .bg-teal-600\/10 { background-color: rgba(13, 148, 136, 0.1); }
+.tungsten-sheet-logistics .text-teal-600 { color: #0d9488; }
+.tungsten-sheet-logistics .border-teal-600 { border-color: #0d9488; }
+.tungsten-sheet-logistics .bg-teal-50 { background-color: #f0fdfa; }
+.tungsten-sheet-logistics .hover\:bg-teal-50:hover { background-color: #f0fdfa; }
+.tungsten-sheet-logistics .border-teal-500 { border-color: #14b8a6; }
+.tungsten-sheet-logistics .shadow-teal-100 { box-shadow: 0 1px 3px rgba(13, 148, 136, 0.1); }
+.tungsten-sheet-logistics .ring-teal-500\/20 { --tw-ring-color: rgba(20, 184, 166, 0.2); }
+.tungsten-sheet-logistics .from-teal-50 { --tw-gradient-from: #f0fdfa; }
+.tungsten-sheet-logistics .to-teal-100 { --tw-gradient-to: #ccfbf1; }
+.tungsten-sheet-logistics .divide-teal-200 > :not([hidden]) ~ :not([hidden]) { border-color: #99f6e4; }
+.tungsten-sheet-logistics .accent-teal-600 { accent-color: #0d9488; }
+.tungsten-sheet-logistics .scrollbar-teal-600::-webkit-scrollbar-thumb { background-color: #0d9488; }
+
+/* R398b - Palladium Alloy Logistics (rose) */
+.palladium-alloy-logistics .bg-rose-600\/10 { background-color: rgba(225, 29, 72, 0.1); }
+.palladium-alloy-logistics .text-rose-600 { color: #e11d48; }
+.palladium-alloy-logistics .border-rose-600 { border-color: #e11d48; }
+.palladium-alloy-logistics .bg-rose-50 { background-color: #fff1f2; }
+.palladium-alloy-logistics .hover\:bg-rose-50:hover { background-color: #fff1f2; }
+.palladium-alloy-logistics .border-rose-500 { border-color: #f43f5e; }
+.palladium-alloy-logistics .shadow-rose-100 { box-shadow: 0 1px 3px rgba(225, 29, 72, 0.1); }
+.palladium-alloy-logistics .ring-rose-500\/20 { --tw-ring-color: rgba(244, 63, 94, 0.2); }
+.palladium-alloy-logistics .from-rose-50 { --tw-gradient-from: #fff1f2; }
+.palladium-alloy-logistics .to-rose-100 { --tw-gradient-to: #ffe4e6; }
+.palladium-alloy-logistics .divide-rose-200 > :not([hidden]) ~ :not([hidden]) { border-color: #fecdd3; }
+.palladium-alloy-logistics .accent-rose-600 { accent-color: #e11d48; }
+.palladium-alloy-logistics .scrollbar-rose-600::-webkit-scrollbar-thumb { background-color: #e11d48; }
