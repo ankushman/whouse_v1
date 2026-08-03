@@ -566,3 +566,5 @@ export { default as SmartTextileLogisticsView } from './smart-textile-logistics-
 export { default as EFuelLogisticsView } from './e-fuel-logistics-view'
 export { default as BioMethaneLogisticsView } from './bio-methane-logistics-view'
 export { default as VanadiumElectrolyteLogisticsView } from './vanadium-electrolyte-logistics-view'
+export { default as SiliconAnodeLogisticsView } from './silicon-anode-logistics-view'
+export { default as PotassiumIonBatteryLogisticsView } from './potassium-ion-battery-logistics-view'

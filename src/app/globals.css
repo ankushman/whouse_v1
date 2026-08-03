@@ -60365,3 +60365,27 @@ html.theme-transition body {
 .vel-root .vel-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
 .vel-root .vel-insight-card:hover { box-shadow: 0 4px 12px rgba(131,24,67,0.12); }
 .vel-root .vel-insight-title { color: #4c0519; }
+/* R366a — Silicon Anode Logistics (sil-*) */
+.sil-root { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 50%, #99f6e4 100%); }
+.sil-root .sil-kpi-card { border-left: 4px solid #0f766e; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(15,118,110,0.1); }
+.sil-root .sil-kpi-label { color: #115e59; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.sil-root .sil-kpi-value { color: #042f2e; font-variant-numeric: tabular-nums; }
+.sil-root .sil-chart-title { color: #0f766e; }
+.sil-root .sil-tab { min-width: 90px; }
+.sil-root .sil-record-card { transition: all 0.2s ease; }
+.sil-root .sil-record-card:hover { box-shadow: 0 4px 12px rgba(15,118,110,0.15); transform: translateY(-1px); }
+.sil-root .sil-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.sil-root .sil-insight-card:hover { box-shadow: 0 4px 12px rgba(15,118,110,0.12); }
+.sil-root .sil-insight-title { color: #042f2e; }
+/* R366b — Potassium-Ion Battery Logistics (kib-*) */
+.kib-root { background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #e9d5ff 100%); }
+.kib-root .kib-kpi-card { border-left: 4px solid #7e22ce; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(126,34,206,0.1); }
+.kib-root .kib-kpi-label { color: #6b21a8; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.kib-root .kib-kpi-value { color: #3b0764; font-variant-numeric: tabular-nums; }
+.kib-root .kib-chart-title { color: #7e22ce; }
+.kib-root .kib-tab { min-width: 90px; }
+.kib-root .kib-record-card { transition: all 0.2s ease; }
+.kib-root .kib-record-card:hover { box-shadow: 0 4px 12px rgba(126,34,206,0.15); transform: translateY(-1px); }
+.kib-root .kib-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.kib-root .kib-insight-card:hover { box-shadow: 0 4px 12px rgba(126,34,206,0.12); }
+.kib-root .kib-insight-title { color: #3b0764; }
