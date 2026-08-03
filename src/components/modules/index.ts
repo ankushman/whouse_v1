@@ -632,3 +632,5 @@ export { default as TungstenSheetLogisticsView } from './tungsten-sheet-logistic
 export { default as PalladiumAlloyLogisticsView } from './palladium-alloy-logistics-view'
 export { default as LeadAlloyLogisticsView } from './lead-alloy-logistics-view'
 export { default as ZincAlloyLogisticsView } from './zinc-alloy-logistics-view'
+export { default as CobaltPowderLogisticsView } from './cobalt-powder-logistics-view'
+export { default as CopperPowderLogisticsView } from './copper-powder-logistics-view'
