@@ -604,3 +604,5 @@ export { default as VanadiumAlloyLogisticsView } from './vanadium-alloy-logistic
 export { default as SiliconNitrideLogisticsView } from './silicon-nitride-logistics-view'
 export { default as PalladiumCatalystLogisticsView } from './palladium-catalyst-logistics-view'
 export { default as TungstenHeavyAlloyLogisticsView } from './tungsten-heavy-alloy-logistics-view'
+export { default as GraphiteElectrodeLogisticsView } from './graphite-electrode-logistics-view'
+export { default as ManganeseAlloyLogisticsView } from './manganese-alloy-logistics-view'
