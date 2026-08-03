@@ -11379,3 +11379,53 @@ Stage Summary:
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
+---
+Task ID: R382 — Niobium Alloy Logistics + Platinum Group Metal Logistics
+Agent: Main Agent (Cron Loop)
+Task: R382 — 2 new Indian logistics modules for strategic niobium alloys and platinum group metals.
+
+Work Log:
+- Read worklog: R381 complete (commit b67f067), 603 modules, 607 navItems, ~60,946 CSS
+- TSC pre-validation: 0 errors in src/ (only pre-existing errors in skills/mini-services/scripts)
+- Dev server: OOM expected with 600+ modules — TSC-only QA approach
+- Duplicate theme search: 13 candidates tested, all confirmed clean
+  - Selected niobium-alloy-logistics (nba-*, Atom #b45309) and platinum-group-metal-logistics (pgm-*, Sparkles #7c3aed)
+  - Icons verified in iconMap (Atom and Sparkles available)
+- Created Niobium Alloy Logistics (R382a): ~260 lines, nba-* amber #b45309, 14 records
+  - 14 records across 13 cities (Hyderabad, Bengaluru, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Hindalco, Tata Advanced Materials, IGCAR, BHEL, Reliance SBR, Gujarat Fluorochemicals, Rajasthan State Mines, IIT Madras, NALCO, Oil India, Adani Defence, TASL
+  - 14 alloy grades: C-103, Nb-1Zr, Ferroniobium FeNb-65, Nb-10W-1Zr-0.1C, Nb-1%Zr Nuclear, FSX-414, NbTi, Nb3Sn A15, Nb2O5, NbSi2, FeNb60V5, Nb-28Ta-3W, NbZrMo, Nb-10W-10Ta
+  - Applications: PSLV nozzle, Kaveri combustor, HSLA steel X80 pipeline, HSTDV hypersonic, PFBR nuclear vessel, BHEL turbine vane, MRI magnet, SST-1 fusion, ore processing, turbocharger, AHSS, subsea pipeline, Astra Mk3, GSAT satellite
+  - &#8377;3,213 Cr total investment, avg 803&#176;C max temp
+- Created Platinum Group Metal Logistics (R382b): ~260 lines, pgm-* violet #7c3aed, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Hindustan Platinum, DRDO DMRL, ISRO LPSC, Bharat Forge, IGCAR, IRE, MIDHANI, GFCL, RSM, IIT Madras, NALCO, Oil India, Tata Chemicals, TASL
+  - 14 metal types: Pt 99.95% TWC, Pt-Rh 90:10, Ir 99.99%, Pd 99.95% H2, Pt 99.99% electrolyzer, Ru 99.9%, Pt-Rh 80:20, Pd 99.9% pharma, Pt 99.5% jewellery, IrO2, Pt 99.99% fuel cell, Pt 99.9% reforming, Pd 99.95% diesel, Rh 99.95% SCR
+  - Applications: Maruti catalytic converter, Saint-Gobain glass fibre, ISRO satellite thruster, IOCL H2 purification, NTPC green H2 electrolyzer, WD HDD plating, RIL nitric acid, Zydus pharma, PC Jeweller, Honeywell pH sensor, BHEL fuel cell, BPCL reforming, Tata Motors diesel, Cummins SCR
+  - &#8377;18,410 Cr total investment, 22,935g total PGM weight
+- Three-file registration: index.ts (603), page.tsx (1125 viewMap entries), app-store.ts (609 navItems)
+- CSS appended: 84 new rules (~61,030 total)
+- TSC post-validation: 0 errors in src/ on first pass
+- Git commit: 47f7083, pushed to main
+
+Stage Summary:
+- Project now: 605 modules, 609 navItems, ~61,030 CSS lines, 1125 viewMap entries, 0 TSC errors
+- Niobium alloy: aerospace, nuclear, superconducting, steel microalloying, hypersonic, defence, automotive
+- PGM: automotive catalysts, glass fibre, satellite, green hydrogen, fuel cells, jewellery, refining, SCR
+- Delayed: NBA-B2404 (10d, W powder), NBA-B2412 (12d, monsoon), PGM-B2404 (10d, Pd sheet), PGM-B2412 (12d, monsoon)
+- Next candidates: palladium-catalyst, silver-paste, lithium-refining, vanadium-alloy, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush, silicon-metal, alumina-ceramic, silicon-nitride
+
+**Project Current State:**
+- 605 module view files, 609 navItems, ~61,030 CSS lines, 1125 viewMap entries
+- TSC clean (0 errors in src/)
+- R382 complete, stable state
+- Dev server OOM with 600+ modules — continue TSC-only QA approach
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 605+ modules, dev server OOM risk — continue TSC-only QA approach
+- NavItem label overwrite risk when inserting new entries — verify adjacent labels
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Object.entries(map) arithmetic requires explicit [string, number][] type assertion
+- PageHeader must import from @/components/shared (not @/components/page-header)
