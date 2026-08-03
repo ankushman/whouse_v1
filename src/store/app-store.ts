@@ -485,7 +485,6 @@ export const navItems: NavItem[] = [
   { id: 'ocean-wave-energy', label: 'Ocean Wave Energy', icon: 'Waves', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'direct-air-capture', label: 'Direct Air Capture', icon: 'Droplets', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'floating-solar-farm', label: 'Floating Solar Farm', icon: 'Sun', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
-  { id: 'tidal-energy', label: 'Tidal Energy', icon: 'Anchor', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'hydrogen-fuel-station', label: 'H2 Fuel Station', icon: 'Fuel', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'carbon-nanotube-production', label: 'Carbon Nanotube Production', icon: 'Beaker', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'graphene-production', label: 'Graphene Production', icon: 'Microscope', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
@@ -545,6 +544,8 @@ export const navItems: NavItem[] = [
   { id: 'floating-offshore-wind', label: 'Floating Offshore Wind', icon: 'Gauge', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'biomass-gasification-logistics', label: 'Biomass Gasification', icon: 'Factory', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'underground-energy-storage', label: 'Underground Storage', icon: 'Pickaxe', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'tidal-energy-logistics', label: 'Tidal Energy', icon: 'Droplets', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'hydrogen-refueling-logistics', label: 'H2 Refueling', icon: 'Fuel', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

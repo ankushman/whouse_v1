@@ -999,7 +999,6 @@ const viewMap: Record<string, React.ComponentType> = {
   "ocean-wave-energy": OceanWaveEnergyLogisticsView,
   "direct-air-capture": DirectAirCaptureLogisticsView,
   "floating-solar-farm": FloatingSolarFarmLogisticsView,
-  "tidal-energy": TidalEnergyLogisticsView,
   "hydrogen-fuel-station": HydrogenFuelStationLogisticsView,
   "carbon-nanotube-production": CarbonNanotubeProductionLogisticsView,
   "graphene-production": GrapheneProductionLogisticsView,
@@ -1059,6 +1058,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "floating-offshore-wind": FloatingOffshoreWindView,
   "biomass-gasification-logistics": BiomassGasificationLogisticsView,
   "underground-energy-storage": UndergroundEnergyStorageView,
+  "tidal-energy-logistics": TidalEnergyLogisticsView,
+  "hydrogen-refueling-logistics": HydrogenRefuelingLogisticsView,
 }
 
 
@@ -1202,6 +1203,7 @@ import WasteHeatRecoveryView from "@/components/modules/waste-heat-recovery-view
 import FloatingOffshoreWindView from "@/components/modules/floating-offshore-wind-view"
 import BiomassGasificationLogisticsView from "@/components/modules/biomass-gasification-logistics-view"
 import UndergroundEnergyStorageView from "@/components/modules/underground-energy-storage-view"
+import HydrogenRefuelingLogisticsView from "@/components/modules/hydrogen-refueling-logistics-view"
 import SmartCityResilienceHubLogisticsView from "@/components/modules/smart-city-resilience-hub-logistics-view"
 import UrbanCanopyMicroclimateLogisticsView from "@/components/modules/urban-canopy-microclimate-logistics-view"
 import SmartGridOSLogisticsView from "@/components/modules/smart-grid-os-logistics-view"
