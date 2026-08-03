@@ -1090,6 +1090,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "potassium-ion-battery-logistics": PotassiumIonBatteryLogisticsView,
   "aluminium-air-battery-logistics": AluminiumAirBatteryLogisticsView,
   "syngas-logistics": SyngasLogisticsView,
+  "methanol-fuel-logistics": MethanolFuelLogisticsView,
+  "graphene-battery-logistics": GrapheneBatteryLogisticsView,
 }
 
 
@@ -1268,3 +1270,5 @@ import SiliconAnodeLogisticsView from "@/components/modules/silicon-anode-logist
 import PotassiumIonBatteryLogisticsView from "@/components/modules/potassium-ion-battery-logistics-view"
 import AluminiumAirBatteryLogisticsView from "@/components/modules/aluminium-air-battery-logistics-view"
 import SyngasLogisticsView from "@/components/modules/syngas-logistics-view"
+import MethanolFuelLogisticsView from "@/components/modules/methanol-fuel-logistics-view"
+import GrapheneBatteryLogisticsView from "@/components/modules/graphene-battery-logistics-view"

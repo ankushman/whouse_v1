@@ -570,3 +570,5 @@ export { default as SiliconAnodeLogisticsView } from './silicon-anode-logistics-
 export { default as PotassiumIonBatteryLogisticsView } from './potassium-ion-battery-logistics-view'
 export { default as AluminiumAirBatteryLogisticsView } from './aluminium-air-battery-logistics-view'
 export { default as SyngasLogisticsView } from './syngas-logistics-view'
+export { default as MethanolFuelLogisticsView } from './methanol-fuel-logistics-view'
+export { default as GrapheneBatteryLogisticsView } from './graphene-battery-logistics-view'

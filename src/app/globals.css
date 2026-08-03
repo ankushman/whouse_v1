@@ -60413,3 +60413,27 @@ html.theme-transition body {
 .syg-root .syg-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
 .syg-root .syg-insight-card:hover { box-shadow: 0 4px 12px rgba(63,98,18,0.12); }
 .syg-root .syg-insight-title { color: #1a2e05; }
+/* R368a — Methanol Fuel Logistics (mfl-*) */
+.mfl-root { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%); }
+.mfl-root .mfl-kpi-card { border-left: 4px solid #065f46; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(6,95,70,0.1); }
+.mfl-root .mfl-kpi-label { color: #047857; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.mfl-root .mfl-kpi-value { color: #022c22; font-variant-numeric: tabular-nums; }
+.mfl-root .mfl-chart-title { color: #065f46; }
+.mfl-root .mfl-tab { min-width: 90px; }
+.mfl-root .mfl-record-card { transition: all 0.2s ease; }
+.mfl-root .mfl-record-card:hover { box-shadow: 0 4px 12px rgba(6,95,70,0.15); transform: translateY(-1px); }
+.mfl-root .mfl-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.mfl-root .mfl-insight-card:hover { box-shadow: 0 4px 12px rgba(6,95,70,0.12); }
+.mfl-root .mfl-insight-title { color: #022c22; }
+/* R368b — Graphene Battery Logistics (gbl-*) */
+.gbl-root { background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%); }
+.gbl-root .gbl-kpi-card { border-left: 4px solid #3730a3; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); box-shadow: 0 1px 3px rgba(55,48,163,0.1); }
+.gbl-root .gbl-kpi-label { color: #4338ca; font-weight: 500; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; }
+.gbl-root .gbl-kpi-value { color: #1e1b4b; font-variant-numeric: tabular-nums; }
+.gbl-root .gbl-chart-title { color: #3730a3; }
+.gbl-root .gbl-tab { min-width: 90px; }
+.gbl-root .gbl-record-card { transition: all 0.2s ease; }
+.gbl-root .gbl-record-card:hover { box-shadow: 0 4px 12px rgba(55,48,163,0.15); transform: translateY(-1px); }
+.gbl-root .gbl-insight-card { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); transition: all 0.2s ease; }
+.gbl-root .gbl-insight-card:hover { box-shadow: 0 4px 12px rgba(55,48,163,0.12); }
+.gbl-root .gbl-insight-title { color: #1e1b4b; }
