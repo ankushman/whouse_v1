@@ -1,4 +1,51 @@
 ---
+Task ID: R391 — Molybdenum Sheet Logistics + Selenium Metal Logistics
+Agent: Main Agent (Cron Loop)
+Task: R391 — 2 new Indian logistics modules for molybdenum sheet/plate/foil supply chain and selenium metal/compound supply chain.
+
+Work Log:
+- Read worklog: R390 complete (commit c903a4d), 621 modules, 625 navItems, ~61,499 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 4 candidates tested, molybdenum-sheet and selenium-metal confirmed clean (tia-/wca- themes had index.ts conflicts)
+  - Selected molybdenum-sheet-logistics (msa-*, Sun blue #2563eb) and selenium-metal-logistics (sme-*, Atom green #16a34a)
+  - Icons verified: Sun and Atom available in iconMap
+- Created Molybdenum Sheet Logistics (R391a): ~205 lines, msa-* blue #2563eb, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, DRDO DMRL, HAL, Bharat Forge, IGCAR, HDRA, Hindustan Steel/SAIL, Gujarat Fluorochemicals, Rajasthan Molybdenum Corp, Tamil Nadu Molybdenum Alloys, Odisha Molybdenum Refinery, Assam Molybdenum Industries, Gujarat Molybdenum Technologies, UP Molybdenum Works
+  - 14 sheet types: TZM Sheet, Mo-La2O3 ODS Sheet, Pure Mo Sheet 0.1mm, Mo-Cu Composite Sheet, Mo-Re 47% Sheet, Mo-14Re Sheet, Mo-Cr 30% Sheet, Mo Sputtering Target, Mo-5SiB Silicide Sheet, Mo-Ni Clad Sheet, Pure Mo Plate 25mm, Mo-SiC Composite Sheet, Mo-Ir 5% Clad Sheet, Mo-Cu-W Laminate
+  - Applications: glass melting electrode Asahi India, SSB rocket nozzle DRDO, X-ray window ISRO Chandrayaan, SiC heat sink Tata Electronics, SST-1 fusion divertor IPR, CNC tool holder BFW, petrochemical cracking tube Haldia, TFT-LCD sputtering target Micron, Tejas turbine seal HAL, space solar frame Vikram Solar, uranium crucible UCIL, brake disc Bajaj Auto, chlor-alkali anode Grasim, LED substrate Cree India
+  - &#8377;1,940 Cr total investment, avg 85.7% Mo content across all sheet types
+- Created Selenium Metal Logistics (R391b): ~205 lines, sme-* green #16a34a, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: Advani-Oerlikon, MIDHANI, BEL, Kirloskar Electric, IGCAR, BRIT/DAE, Raman Spectroscopy India, Exide Industries, Gujarat Fluorochemicals, Rajasthan Selenium Corp, Tamil Nadu Selenium Industries, Odisha Selenium Refinery, Assam Selenium Works, Gujarat Selenium Technologies, UP Selenium Alloys
+  - 14 selenium forms: Se Powder 99.5%, CIGS Sputtering Target, Se Rectifier Plate, CdSe Photocell, Se-75 Radioisotope, ZnSe Lens, Pb-Se Battery Alloy, SeO2 Dioxide, Se Nanopowder, SeS2 Sulfide, H2SeO3 Selenous Acid, Bi2Se2Te Telluride, a-Se Copier Drum, CdSe/ZnS Quantum Dots
+  - Applications: glass decolorizer Asahi India, CIGS solar Tata Power, HV rectifier BHEL, street light sensor LED India, medical imaging Se-75 AIIMS, CO2 laser optics ZnSe SLAC, lead-acid battery Exide, ruby glass Modi Glass, nano-fungicide UPL, rubber vulcanisation MRF, diesel desulphurisation Indian Oil, thermoelectric DRDO WHRG, laser printer OPC Canon, QD-OLED display LG India
+  - &#8377;1,014 Cr total investment, avg 63.5% Se content across all forms
+- TSC: 0 errors in src/ on first pass
+- Three-file registration: index.ts (621), page.tsx (1141 viewMap entries), app-store.ts (627 navItems)
+- CSS appended: 62 new rules (61,561 total)
+- Git commit: 79fd1ba, pushed to main
+
+Stage Summary:
+- Project now: 623 modules, 627 navItems, ~61,561 CSS lines, 1141 viewMap entries, 0 TSC errors
+- Molybdenum sheet: TZM electrodes &#8377;5,800Cr glass, Mo-Re fusion &#8377;10,500Cr SST-1, sputtering targets &#8377;5,000Cr display, Mo-SiB aero &#8377;4,800Cr Tejas
+- Selenium metal: CIGS solar &#8377;6,500Cr 100GW target, QD-OLED &#8377;8,500Cr LG 2M panels, Se-75 medical &#8377;3,800Cr 500 hospitals, rubber vulcanisation &#8377;1,600Cr 1.8B tyres
+- Delayed: MSA-B2412 (12d, monsoon), SME-B2412 (12d, monsoon)
+- Next candidates: titanium-alloy (theme conflict in index.ts), tungsten-carbide (theme conflict), nickel-brazing-alloy, vanadium-alloy, cobalt-superalloy
+
+**Project Current State:**
+- 623 module view files, 627 navItems, ~61,561 CSS lines, 1141 viewMap entries
+- TSC clean (0 errors in src/)
+- R391 complete, stable state
+
+**Risks / Next Priorities:**
+- globals.css at 61K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 623+ modules, dev server OOM risk — continue TSC-only QA approach
+- titanium-alloy and tungsten-carbide have theme name conflicts in index.ts — need unique naming
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Next clean candidates: nickel-brazing-alloy (nba-*), vanadium-alloy (vaa-*), cobalt-superalloy (csa-*)
+
+---
 Task ID: R390 — Bismuth Alloy Logistics + Tantalum Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R390 — 2 new Indian logistics modules for bismuth alloy lead-free solder/shielding/thermoelectric supply chain and tantalum alloy aerospace/capacitor/chemical reactor supply chain.
