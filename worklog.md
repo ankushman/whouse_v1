@@ -10504,3 +10504,31 @@ Work Log:
 Stage Summary:
 - MODULE FILES: 552 (+2) | NAVITEMS: 563 (+2) | CSS: 60,214 lines (+12)
 - TSC: 0 errors (src/) | GITHUB: pushed (f0eb102)
+---
+Task ID: R360 — Compressed Air Energy Storage + Hydrogen Liquefaction Logistics
+Agent: Main Agent (Cron Loop)
+Task: R360 — 2 new Indian logistics modules for compressed air energy storage and hydrogen liquefaction supply chains.
+
+Work Log:
+- Read worklog: R359 complete (commit f0eb102), 552 modules, 563 navItems, 60,224 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 20 candidates tested, all clean
+  - Selected compressed-air-energy-storage (cas-*, Waves #0e7490) and hydrogen-liquefaction-logistics (hyl-*, Snowflake #1d4ed8)
+  - Icons verified in iconMap (Waves at line 324, Snowflake at line 399)
+- Created Compressed Air Energy Storage (R360a): 189 lines, cas-* cyan #0e7490, 14 records
+  - 14 facilities across 13 states+Ladakh+Arunachal Pradesh (Chhattisgarh, Gujarat, Karnataka, Odisha, MP, Jharkhand, TN, Rajasthan, Maharashtra, AP, Kerala, Assam)
+  - 14 storage types: Salt Cavern/Above Ground/Mine Shaft/Lined Rock/Adiabatic/Coal Mine/Underwater/Sandstone Aquifer/Hard Rock/Mountain/Salt Dome/Delta Aquifer/Basalt Cavern/High Altitude
+  - 1,270 MWh total capacity, 66.8% avg efficiency, ₹5,890 Cr investment
+- Created Hydrogen Liquefaction Logistics (R360b): 189 lines, hyl-* blue #1d4ed8, 14 records
+  - 14 facilities across 12 states+Ladakh (Jharkhand, Gujarat, Kerala, Maharashtra, AP, Karnataka, Madhya Pradesh, TN, West Bengal, Assam, Rajasthan, UP)
+  - 14 liquefier types: Brazed Plate/Turbo-Brayton/Linde Claude/Reverse Brayton/Pre-Cooled Claude/Pulse Tube/Mixed Refrigerant/Helium Pre-Cooled/Indigenous Claude/Modular Brayton/Small Scale/Solar-Powered/High Altitude/Hybrid Claude-Brayton
+  - 663 TPD total capacity, 12.1 kWh/kg avg energy use, ₹7,410 Cr investment
+- TSC fix: HYL record #9 had capacityMWh instead of capacityTPD — fixed inline; also cleaned (r as any) casts after interface was unified
+- TSC: 0 errors in src/ on second pass (1 error found and fixed)
+- Registered in index.ts (558), page.tsx (1079 viewMap entries), app-store.ts (565 navItems)
+- CSS: 2 blocks appended (60,236 total, +12 lines)
+- Git: commit 903d9ef pushed
+
+Stage Summary:
+- MODULE FILES: 554 (+2) | NAVITEMS: 565 (+2) | CSS: 60,236 lines (+12)
+- TSC: 0 errors (src/) | GITHUB: pushed (903d9ef)
