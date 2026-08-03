@@ -636,3 +636,5 @@ export { default as CobaltPowderLogisticsView } from './cobalt-powder-logistics-
 export { default as CopperPowderLogisticsView } from './copper-powder-logistics-view'
 export { default as IronPowderLogisticsView } from './iron-powder-logistics-view'
 export { default as ManganesePowderLogisticsView } from './manganese-powder-logistics-view'
+export { default as ChromiumPowderLogisticsView } from './chromium-powder-logistics-view'
+export { default as TinAlloyLogisticsView } from './tin-alloy-logistics-view'

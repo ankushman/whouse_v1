@@ -61860,3 +61860,46 @@ html.theme-transition body {
 .mnp-tab-inactive { color: #78716c; }
 .mnp-tab-inactive:hover { color: #d97706; background-color: rgba(217,119,6,0.04); }
 @keyframes mnp-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+/* R402a - Chromium Powder Logistics (crp-* indigo #4f46e5) */
+.crp-dashboard-card { border-left: 3px solid #4f46e5; }
+.crp-dashboard-card:hover { box-shadow: 0 0 12px rgba(79,70,229,0.15); transform: translateY(-1px); }
+.crp-registry-card { border-left: 3px solid #818cf8; }
+.crp-registry-card:hover { box-shadow: 0 0 12px rgba(79,70,229,0.12); }
+.crp-analytics-card { border-left: 3px solid #a5b4fc; }
+.crp-analytics-card:hover { box-shadow: 0 0 12px rgba(79,70,229,0.1); }
+.crp-insights-card { border-left: 3px solid #c7d2fe; }
+.crp-insights-card:hover { box-shadow: 0 0 12px rgba(79,70,229,0.08); }
+.crp-badge { background-color: rgba(79,70,229,0.1); color: #4f46e5; border: 1px solid rgba(79,70,229,0.2); }
+.crp-badge:hover { background-color: rgba(79,70,229,0.2); }
+.crp-status-delivered { color: #16a34a; font-weight: 600; }
+.crp-status-delayed { color: #dc2626; font-weight: 600; animation: crp-pulse 2s infinite; }
+.crp-priority-critical { color: #4f46e5; font-weight: 700; }
+.crp-priority-high { color: #818cf8; font-weight: 600; }
+.crp-table-header { background: linear-gradient(135deg, #4f46e5, #818cf8); color: white; }
+.crp-table-row:hover { background-color: rgba(79,70,229,0.04); }
+.crp-tab-active { border-bottom: 2px solid #4f46e5; color: #4f46e5; font-weight: 600; }
+.crp-tab-inactive { color: #78716c; }
+.crp-tab-inactive:hover { color: #4f46e5; background-color: rgba(79,70,229,0.04); }
+@keyframes crp-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* R402b - Tin Alloy Logistics (tna-* sky #0284c7) */
+.tna-dashboard-card { border-left: 3px solid #0284c7; }
+.tna-dashboard-card:hover { box-shadow: 0 0 12px rgba(2,132,199,0.15); transform: translateY(-1px); }
+.tna-registry-card { border-left: 3px solid #38bdf8; }
+.tna-registry-card:hover { box-shadow: 0 0 12px rgba(2,132,199,0.12); }
+.tna-analytics-card { border-left: 3px solid #7dd3fc; }
+.tna-analytics-card:hover { box-shadow: 0 0 12px rgba(2,132,199,0.1); }
+.tna-insights-card { border-left: 3px solid #bae6fd; }
+.tna-insights-card:hover { box-shadow: 0 0 12px rgba(2,132,199,0.08); }
+.tna-badge { background-color: rgba(2,132,199,0.1); color: #0284c7; border: 1px solid rgba(2,132,199,0.2); }
+.tna-badge:hover { background-color: rgba(2,132,199,0.2); }
+.tna-status-delivered { color: #16a34a; font-weight: 600; }
+.tna-status-delayed { color: #dc2626; font-weight: 600; animation: tna-pulse 2s infinite; }
+.tna-priority-critical { color: #0284c7; font-weight: 700; }
+.tna-priority-high { color: #38bdf8; font-weight: 600; }
+.tna-table-header { background: linear-gradient(135deg, #0284c7, #38bdf8); color: white; }
+.tna-table-row:hover { background-color: rgba(2,132,199,0.04); }
+.tna-tab-active { border-bottom: 2px solid #0284c7; color: #0284c7; font-weight: 600; }
+.tna-tab-inactive { color: #78716c; }
+.tna-tab-inactive:hover { color: #0284c7; background-color: rgba(2,132,199,0.04); }
+@keyframes tna-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
