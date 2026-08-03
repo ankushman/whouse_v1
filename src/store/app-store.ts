@@ -594,6 +594,8 @@ export const navItems: NavItem[] = [
     { id: 'rare-earth-magnet-logistics', label: 'Rare Earth Magnet', icon: 'Flame', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
     { id: 'molybdenum-alloy-logistics', label: 'Molybdenum Alloy', icon: 'Hexagon', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
     { id: 'indium-phosphide-logistics', label: 'Indium Phosphide', icon: 'CircuitBoard', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+    { id: 'cobalt-alloy-logistics', label: 'Cobalt Alloy', icon: 'Atom', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+    { id: 'magnesium-alloy-logistics', label: 'Magnesium Alloy', icon: 'Feather', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

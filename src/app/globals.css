@@ -60713,3 +60713,48 @@ html.theme-transition body {
 .inp-status-dot-processing { background: #eab308; }
 .inp-status-dot-delayed { background: #ef4444; }
 .inp-chart-gradient { background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%); }
+/* === Cobalt Alloy Logistics (R377a) === coa-* blue #2563eb */
+.coa-kpi-card { border-left: 4px solid #2563eb; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+.coa-kpi-card:hover { box-shadow: 0 4px 12px rgba(37,99,235,0.15); transform: translateY(-1px); }
+.coa-tab-active { background: #2563eb; color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
+.coa-tab-inactive:hover { background: #dbeafe; color: #2563eb; }
+.coa-filter-active { background: #2563eb; color: #fff; border-color: #2563eb; }
+.coa-filter-inactive:hover { border-color: #2563eb; color: #2563eb; }
+.coa-bar-fill { background: linear-gradient(90deg, #2563eb 0%, #6366f1 100%); }
+.coa-bar-bg { background: #f0f5ff; border-radius: 9999px; }
+.coa-delayed-row { border-left: 4px solid #ef4444; background: rgba(254,226,226,0.3); }
+.coa-table-header { background: #eff6ff; }
+.coa-insight-card { border-left: 4px solid #2563eb; }
+.coa-badge-delivered { background: #dcfce7; color: #166534; }
+.coa-badge-transit { background: #dbeafe; color: #1e40af; }
+.coa-badge-processing { background: #fef9c3; color: #854d0e; }
+.coa-badge-delayed { background: #fecaca; color: #991b1b; }
+.coa-grade-card { background: #eff6ff; border: 1px solid #dbeafe; border-radius: 0.5rem; }
+.coa-status-dot-delivered { background: #22c55e; }
+.coa-status-dot-transit { background: #3b82f6; }
+.coa-status-dot-processing { background: #eab308; }
+.coa-status-dot-delayed { background: #ef4444; }
+.coa-chart-gradient { background: linear-gradient(90deg, #3b82f6 0%, #818cf8 100%); }
+
+/* === Magnesium Alloy Logistics (R377b) === mga-* teal #0d9488 */
+.mga-kpi-card { border-left: 4px solid #0d9488; background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
+.mga-kpi-card:hover { box-shadow: 0 4px 12px rgba(13,148,136,0.15); transform: translateY(-1px); }
+.mga-tab-active { background: #0d9488; color: #fff; box-shadow: 0 2px 8px rgba(13,148,136,0.3); }
+.mga-tab-inactive:hover { background: #ccfbf1; color: #0d9488; }
+.mga-filter-active { background: #0d9488; color: #fff; border-color: #0d9488; }
+.mga-filter-inactive:hover { border-color: #0d9488; color: #0d9488; }
+.mga-bar-fill { background: linear-gradient(90deg, #0d9488 0%, #06b6d4 100%); }
+.mga-bar-bg { background: #f0fdfa; border-radius: 9999px; }
+.mga-delayed-row { border-left: 4px solid #ef4444; background: rgba(254,226,226,0.3); }
+.mga-table-header { background: #f0fdfa; }
+.mga-insight-card { border-left: 4px solid #0d9488; }
+.mga-badge-delivered { background: #dcfce7; color: #166534; }
+.mga-badge-transit { background: #dbeafe; color: #1e40af; }
+.mga-badge-processing { background: #fef9c3; color: #854d0e; }
+.mga-badge-delayed { background: #fecaca; color: #991b1b; }
+.mga-grade-card { background: #f0fdfa; border: 1px solid #ccfbf1; border-radius: 0.5rem; }
+.mga-status-dot-delivered { background: #22c55e; }
+.mga-status-dot-transit { background: #3b82f6; }
+.mga-status-dot-processing { background: #eab308; }
+.mga-status-dot-delayed { background: #ef4444; }
+.mga-chart-gradient { background: linear-gradient(90deg, #14b8a6 0%, #22d3ee 100%); }

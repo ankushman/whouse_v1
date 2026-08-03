@@ -588,3 +588,5 @@ export { default as DiamondSyntheticLogisticsView } from './diamond-synthetic-lo
 export { default as RareEarthMagnetLogisticsView } from './rare-earth-magnet-logistics-view'
 export { default as MolybdenumAlloyLogisticsView } from './molybdenum-alloy-logistics-view'
 export { default as IndiumPhosphideLogisticsView } from './indium-phosphide-logistics-view'
+export { default as CobaltAlloyLogisticsView } from './cobalt-alloy-logistics-view'
+export { default as MagnesiumAlloyLogisticsView } from './magnesium-alloy-logistics-view'
