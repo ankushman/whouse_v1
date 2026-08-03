@@ -61022,3 +61022,81 @@ html.theme-transition body {
 .pgm-stagger-4 { animation-delay: 0.2s; }
 .pgm-hover-lift:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(124, 58, 237, 0.12); }
 .pgm-hover-lift { transition: all 0.2s ease; }
+
+/* ═══════ R383a Vanadium Alloy Logistics (van-*) red #dc2626 ═══════ */
+.van-card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(220, 38, 38, 0.15); }
+.van-card-hover { transition: all 0.25s ease; }
+.van-badge-glow { box-shadow: 0 0 8px rgba(220, 38, 38, 0.4); }
+.van-row-hover:hover { background-color: rgba(220, 38, 38, 0.06); }
+.van-row-hover { transition: background-color 0.15s ease; }
+.van-header-gradient { background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); }
+.van-tab-active { border-bottom: 3px solid #dc2626; color: #dc2626; font-weight: 600; }
+.van-progress-bar { background: linear-gradient(90deg, #f87171, #dc2626); border-radius: 9999px; }
+.van-progress-track { background: rgba(220, 38, 38, 0.1); border-radius: 9999px; }
+.van-card-border { border-left: 4px solid #dc2626; }
+.van-tooltip-bg { background-color: #dc2626; color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
+.van-status-delivered { border-left: 4px solid #22c55e; background-color: rgba(34, 197, 94, 0.08); }
+.van-status-delayed { border-left: 4px solid #ef4444; background-color: rgba(239, 68, 68, 0.08); }
+.van-status-transit { border-left: 4px solid #f59e0b; background-color: rgba(245, 158, 11, 0.08); }
+.van-status-processing { border-left: 4px solid #3b82f6; background-color: rgba(59, 130, 246, 0.08); }
+.van-insight-card { border-left: 4px solid #dc2626; }
+.van-kpi-card { border-left: 4px solid #dc2626; background: linear-gradient(135deg, rgba(220, 38, 38, 0.04), rgba(220, 38, 38, 0.01)); }
+.van-search-focus:focus { box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.3); border-color: #dc2626; }
+.van-badge-active { background-color: #dc2626; color: white; }
+.van-badge-outline { border: 1px solid #dc2626; color: #dc2626; background: transparent; }
+.van-chart-bar { background: linear-gradient(to top, #dc2626, #f87171); border-radius: 4px 4px 0 0; }
+.van-footer-border { border-top: 1px solid rgba(220, 38, 38, 0.2); }
+.van-section-title { color: #dc2626; font-weight: 700; font-size: 14px; }
+.van-empty-state { color: #78716c; font-style: italic; }
+.van-filter-active { background-color: rgba(220, 38, 38, 0.1); border-color: #dc2626; }
+.van-table-header { background-color: rgba(220, 38, 38, 0.05); font-weight: 600; color: #78716c; }
+.van-monospace { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; }
+.van-pulse-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #dc2626; animation: van-pulse 2s infinite; }
+.van-shimmer { background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.08), transparent); background-size: 200% 100%; animation: van-shimmer 2s infinite; }
+@keyframes van-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+@keyframes van-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.van-stagger-1 { animation-delay: 0.05s; }
+.van-stagger-2 { animation-delay: 0.1s; }
+.van-stagger-3 { animation-delay: 0.15s; }
+.van-stagger-4 { animation-delay: 0.2s; }
+.van-hover-lift:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.12); }
+.van-hover-lift { transition: all 0.2s ease; }
+
+/* ═══════ R383b Silicon Nitride Logistics (si3-*) emerald #059669 ═══════ */
+.si3-card-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 25px -5px rgba(5, 150, 105, 0.15); }
+.si3-card-hover { transition: all 0.25s ease; }
+.si3-badge-glow { box-shadow: 0 0 8px rgba(5, 150, 105, 0.4); }
+.si3-row-hover:hover { background-color: rgba(5, 150, 105, 0.06); }
+.si3-row-hover { transition: background-color 0.15s ease; }
+.si3-header-gradient { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+.si3-tab-active { border-bottom: 3px solid #059669; color: #059669; font-weight: 600; }
+.si3-progress-bar { background: linear-gradient(90deg, #34d399, #059669); border-radius: 9999px; }
+.si3-progress-track { background: rgba(5, 150, 105, 0.1); border-radius: 9999px; }
+.si3-card-border { border-left: 4px solid #059669; }
+.si3-tooltip-bg { background-color: #059669; color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; }
+.si3-status-delivered { border-left: 4px solid #22c55e; background-color: rgba(34, 197, 94, 0.08); }
+.si3-status-delayed { border-left: 4px solid #ef4444; background-color: rgba(239, 68, 68, 0.08); }
+.si3-status-transit { border-left: 4px solid #f59e0b; background-color: rgba(245, 158, 11, 0.08); }
+.si3-status-processing { border-left: 4px solid #3b82f6; background-color: rgba(59, 130, 246, 0.08); }
+.si3-insight-card { border-left: 4px solid #059669; }
+.si3-kpi-card { border-left: 4px solid #059669; background: linear-gradient(135deg, rgba(5, 150, 105, 0.04), rgba(5, 150, 105, 0.01)); }
+.si3-search-focus:focus { box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.3); border-color: #059669; }
+.si3-badge-active { background-color: #059669; color: white; }
+.si3-badge-outline { border: 1px solid #059669; color: #059669; background: transparent; }
+.si3-chart-bar { background: linear-gradient(to top, #059669, #34d399); border-radius: 4px 4px 0 0; }
+.si3-footer-border { border-top: 1px solid rgba(5, 150, 105, 0.2); }
+.si3-section-title { color: #059669; font-weight: 700; font-size: 14px; }
+.si3-empty-state { color: #78716c; font-style: italic; }
+.si3-filter-active { background-color: rgba(5, 150, 105, 0.1); border-color: #059669; }
+.si3-table-header { background-color: rgba(5, 150, 105, 0.05); font-weight: 600; color: #78716c; }
+.si3-monospace { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12px; }
+.si3-pulse-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #059669; animation: si3-pulse 2s infinite; }
+.si3-shimmer { background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.08), transparent); background-size: 200% 100%; animation: si3-shimmer 2s infinite; }
+@keyframes si3-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+@keyframes si3-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.si3-stagger-1 { animation-delay: 0.05s; }
+.si3-stagger-2 { animation-delay: 0.1s; }
+.si3-stagger-3 { animation-delay: 0.15s; }
+.si3-stagger-4 { animation-delay: 0.2s; }
+.si3-hover-lift:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(5, 150, 105, 0.12); }
+.si3-hover-lift { transition: all 0.2s ease; }

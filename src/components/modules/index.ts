@@ -600,3 +600,5 @@ export { default as TitaniumSpongeLogisticsView } from './titanium-sponge-logist
 export { default as BoronCarbideLogisticsView } from './boron-carbide-logistics-view'
 export { default as NiobiumAlloyLogisticsView } from './niobium-alloy-logistics-view'
 export { default as PlatinumGroupMetalLogisticsView } from './platinum-group-metal-logistics-view'
+export { default as VanadiumAlloyLogisticsView } from './vanadium-alloy-logistics-view'
+export { default as SiliconNitrideLogisticsView } from './silicon-nitride-logistics-view'
