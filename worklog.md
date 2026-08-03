@@ -131,6 +131,34 @@ Stage Summary:
 - MODULE FILES: 536 (+1 net, tidal refreshed) | NAVITEMS: 547 (same, tidal-energy replaced by tidal-energy-logistics) | CSS: 60,190 lines (+2)
 - TSC: 0 errors (src/) | GITHUB: pushed (e54c329)
 ---
+Task ID: R353 — EV Telematics Platform + Urban Mining Logistics
+Agent: Main Agent (Cron Loop)
+Task: R353 — 2 new Indian logistics modules for EV telematics platform and urban mining logistics.
+
+Work Log:
+- Read worklog: R352 complete (commit e54c329), 536 modules, 547 navItems, 60,190 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 16 candidates tested
+  - Already exist: solid-state, geothermal, direct-air, cold-chain, agrivoltaic, wave-energy, smart-locker, microgrid
+  - Selected ev-telematics-platform (evt-*, Wifi #1e3a5f) and urban-mining-logistics (uml-*, Recycle #78350f)
+  - Icons verified in iconMap (Wifi and Recycle available)
+- Created EV Telematics Platform (R353a): ~195 lines, evt-* navy blue #1e3a5f, 14 records
+  - 14 fleet operations across 13 Indian cities (Bengaluru, Delhi NCR, Mumbai, Hyderabad, Pune, Chennai, Kolkata, Ahmedabad, Jaipur, Kochi, Lucknow, Indore, Guwahati, Bhubaneswar)
+  - 12 protocols: OBD-II CAN 4G LTE, J1939 MQTT NB-IoT, OBD-II UDS 5G SA, CAN 2.0 LoRaWAN, BLE Mesh WiFi 6, OBD-II Sigfox LPWAN, J1939 GSM Edge, OBD-II CAN 4G VoLTE, BLE 5.0 NB-IoT, MQTT 5G NR, CAN LoRa GPS LBS, NB-IoT GSM Satellite, OBD-II CAN 5G D2D
+  - 89,500 total fleet monitored, 7,960 km coverage, &#8377;4,775 Cr investment
+- Created Urban Mining Logistics (R353b): ~195 lines, uml-* amber #78350f, 14 records
+  - 14 urban mining sites across 13 Indian states (Delhi, Karnataka, Maharashtra, TN, Telangana, WB, Rajasthan, Gujarat, MP, UP, Odisha, Kerala, Assam)
+  - 14 waste types: E-Waste PCB Recovery, Li-Ion Battery Recovery, Construction Debris Aggregate, End-of-Life Vehicle Shredding, Server Farm Hardware, Aluminium Dross Processing, Copper Wire Recovery, Marble Slurry Processing, Textile Waste Regeneration, Multi-Layer Packaging Recovery, End-of-Life Tyre Pyrolysis, Steel Slag Aggregate, Ship Breaking Steel Recovery, Glass Cullet Processing
+  - 10,090 TPD total throughput, 83.9% avg recovery, &#8377;4,420 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (544), page.tsx (1064 viewMap), app-store.ts (549 navItems)
+- CSS: 2 lines appended (60,192 total)
+- Git: commit f08a060 pushed
+
+Stage Summary:
+- MODULE FILES: 538 (+2) | NAVITEMS: 549 (+2) | CSS: 60,192 lines (+2)
+- TSC: 0 errors (src/) | GITHUB: pushed (f08a060)
+---
 ---
 Task ID: R347 — Green Ammonia Logistics + Carbon Trading Platform
 Agent: Main Agent (Cron Loop)
