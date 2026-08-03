@@ -10450,3 +10450,30 @@ Work Log:
 Stage Summary:
 - MODULE FILES: 548 (+2) | NAVITEMS: 559 (+2) | CSS: 60,200 lines (+2)
 - TSC: 0 errors (src/) | GITHUB: pushed (dc1fe2b)
+---
+Task ID: R358 — Thermo Electric Logistics + Direct Lithium Extraction Logistics
+Agent: Main Agent (Cron Loop)
+Task: R358 — 2 new Indian logistics modules for thermoelectric generators and direct lithium extraction.
+
+Work Log:
+- Read worklog: R357 complete (commit dc1fe2b), 548 modules, 559 navItems, 60,200 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 20 candidates tested, all clean
+  - Selected thermo-electric-logistics (tel-*, FlameKindling #be123c) and direct-lithium-extraction-logistics (dle-*, Droplets #0369a1)
+  - Icons verified in iconMap (FlameKindling and Droplets available)
+- Created Thermo Electric Logistics (R358a): 189 lines, tel-* rose #be123c, 14 records
+  - 14 facilities across 12 Indian states (Jharkhand, Odisha, Chhattisgarh, Maharashtra, AP, Karnataka, Gujarat, TN, Rajasthan, Telangana, West Bengal, Madhya Pradesh, Kerala, Ladakh)
+  - 14 module types: Bi2Te3 Industrial, PbTe High Temp, SiGe Aerospace, Skutterudite CoSb3, Half-Heusler NiTiSn, Bi2Te3 Data Center, PbTe LNG, Mg3Sb2 Eco-Friendly, Bi2Te3 Power Plant Condenser, SiGe Military RTG, PbTe Boiler Exhaust, Clathrate Ba8Ga16Ge30, Oxide Perovskite Ca3Co4O9, AgSbTe2 Silver Antimonide
+  - 7,840 kW total output, 10.1% avg efficiency, &#8377;5,920 Cr investment
+- Created Direct Lithium Extraction Logistics (R358b): 189 lines, dle-* sky blue #0369a1, 14 records
+  - 14 facilities across 12 Indian states (Gujarat, Rajasthan, Ladakh, AP, TN, Karnataka, Maharashtra, West Bengal, Telangana, Odisha, Assam)
+  - 14 source types: Continental Brine Aquifer, Sambhar Lake Brine, Groundwater Brine, High-Altitude Brine Spring, Seawater Desalination Brine, Brackish Water Estuary, Geothermal Brine, Oilfield Produced Water, River Estuary Brine, Granite Weathered Zone, Solar Evaporation Pond, Laterite Leachate, Brahmaputra Floodplain, Saline Playa Brine
+  - 661 TPD total Li output, 84.4% avg recovery, &#8377;5,360 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (554), page.tsx (1075 viewMap entries), app-store.ts (561 navItems)
+- CSS: 2 lines appended (60,202 total)
+- Git: commit bd40fd7 pushed
+
+Stage Summary:
+- MODULE FILES: 550 (+2) | NAVITEMS: 561 (+2) | CSS: 60,202 lines (+2)
+- TSC: 0 errors (src/) | GITHUB: pushed (bd40fd7)
