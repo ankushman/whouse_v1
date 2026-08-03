@@ -1035,6 +1035,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "urban-canopy-microclimate": UrbanCanopyMicroclimateLogisticsView,
   "industrial-heat-decarbonization": IndustrialHeatDecarbonizationLogisticsView,
   "urban-cool-island-creation": UrbanCoolIslandCreationLogisticsView,
+  "digital-twin-water-infrastructure": DigitalTwinWaterInfrastructureLogisticsView,
+  "bio-jet-fuel-logistics": BioJetFuelLogisticsView,
 }
 
 
@@ -1154,6 +1156,8 @@ import GreenSteelLogisticsView from "@/components/modules/green-steel-logistics-
 import WindTurbineBladeRecyclingLogisticsView from "@/components/modules/wind-turbine-blade-recycling-logistics-view"
 import IndustrialHeatDecarbonizationLogisticsView from "@/components/modules/industrial-heat-decarbonization-logistics-view"
 import UrbanCoolIslandCreationLogisticsView from "@/components/modules/urban-cool-island-creation-logistics-view"
+import DigitalTwinWaterInfrastructureLogisticsView from "@/components/modules/digital-twin-water-infrastructure-logistics-view"
+import BioJetFuelLogisticsView from "@/components/modules/bio-jet-fuel-logistics-view"
 import SmartCityResilienceHubLogisticsView from "@/components/modules/smart-city-resilience-hub-logistics-view"
 import UrbanCanopyMicroclimateLogisticsView from "@/components/modules/urban-canopy-microclimate-logistics-view"
 import SmartGridOSLogisticsView from "@/components/modules/smart-grid-os-logistics-view"

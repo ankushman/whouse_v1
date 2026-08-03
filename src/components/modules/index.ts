@@ -515,3 +515,5 @@ export { default as SmartCityResilienceHubLogisticsView } from './smart-city-res
 export { default as UrbanCanopyMicroclimateLogisticsView } from './urban-canopy-microclimate-logistics-view'
 export { default as IndustrialHeatDecarbonizationLogisticsView } from './industrial-heat-decarbonization-logistics-view'
 export { default as UrbanCoolIslandCreationLogisticsView } from './urban-cool-island-creation-logistics-view'
+export { default as DigitalTwinWaterInfrastructureLogisticsView } from './digital-twin-water-infrastructure-logistics-view'
+export { default as BioJetFuelLogisticsView } from './bio-jet-fuel-logistics-view'
