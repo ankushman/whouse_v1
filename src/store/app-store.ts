@@ -519,6 +519,8 @@ export const navItems: NavItem[] = [
   { id: 'sludge-to-energy', label: 'Sludge-to-Energy', icon: 'Atom', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'smart-city-resilience-hub', label: 'Smart City Resilience Hub', icon: 'ShieldCheck', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'urban-canopy-microclimate', label: 'Urban Canopy Microclimate', icon: 'TreeDeciduous', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'industrial-heat-decarbonization', label: 'Industrial Heat Decarbonization', icon: 'Flame', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'urban-cool-island-creation', label: 'Urban Cool Island Creation', icon: 'Snowflake', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

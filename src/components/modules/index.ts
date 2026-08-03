@@ -513,3 +513,5 @@ export { default as SmartGridOSLogisticsView } from './smart-grid-os-logistics-v
 export { default as SludgeToEnergyLogisticsView } from './sludge-to-energy-logistics-view'
 export { default as SmartCityResilienceHubLogisticsView } from './smart-city-resilience-hub-logistics-view'
 export { default as UrbanCanopyMicroclimateLogisticsView } from './urban-canopy-microclimate-logistics-view'
+export { default as IndustrialHeatDecarbonizationLogisticsView } from './industrial-heat-decarbonization-logistics-view'
+export { default as UrbanCoolIslandCreationLogisticsView } from './urban-cool-island-creation-logistics-view'
