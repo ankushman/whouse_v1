@@ -1,4 +1,27 @@
 ---
+Task ID: R317 — Nuclear Power Plant Construction + Satellite Launch Complex Logistics
+Agent: Main Agent (Cron Loop)
+Task: R317 — 2 new Indian logistics modules for nuclear power plant construction (NPCIL L&T BHEL GE Hitachi Toshiba JSW Rosatom Westinghouse CNNC — PHWR-700MWe indigenous D2O natural uranium VVER-1000/1200 Russian PWR EPR-1600 French AP1000-1150MW US BWR-90MW Tarapur AHWR-300MW thorium SMR-300MW modular HTGR-250MW gas-cooled, Kudankulam Jaitapur Kovvada Mithi Virdi Tarapur Chutka Gorakhpur Banswara 22480MW 2032 three-stage thorium cycle NPCIL BARC DAE) and satellite launch complex (ISRO Antrix NSIL Skyroot Agnikul Pixxel Bellatrix Dhruva — PSLV-XL 3800kg SSO GSLV Mk-II 2500kg GTO LVM3 4000kg GTO SSLV 500kg LEO RLV-TD 150kg suborbital RH-560 sounding PSLV-CA 1100kg Gaganyaan 8500kg, Sriharikota SHAR Thumba Chandipur Balasore IN-SPACe 57 PSLV private space economy 62500Cr)
+
+Work Log:
+- Read worklog: R316 complete (commit 604c31a), 466 modules, 478 navItems, 60,133 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/components/modules
+- Dev server OOM (known), skipped agent-browser QA
+- Duplicate check: 0 duplicates for nuclear-power-plant-construction, satellite-launch-complex
+- Icons: Zap (nuclear), Rocket (satellite) verified in app-layout.tsx iconMap
+- Created Nuclear Power Plant Construction Logistics (R317a): ~175 lines, npc-* forest green #14532d, 14 records, 4 tabs
+- Created Satellite Launch Complex Logistics (R317b): ~175 lines, slc-* deep purple #581c87, 14 records, 4 tabs
+- Fixed TSC error: SLC-0005 record had duplicate shipDate/transitDays fields and missing remarks — reordered fields and added remarks
+- ModuleBreadcrumb import correct from start (@/components/shared/module-breadcrumb)
+- SearchFilterToolbar props correct
+- Registered both in index.ts (474 exports), page.tsx, app-store.ts (480 navItems)
+- CSS: 4 lines appended to globals.css (60,137 lines total)
+- TSC FINAL: 0 errors in src/components/modules
+- Git: commit c675599 pushed to origin/main
+
+Stage Summary:
+- MODULE FILES: 468 (+2) | NAVITEMS: 480 (+2) | CSS: 60,137 lines (+4)
+- TSC: 0 errors (modules) | GITHUB: pushed (c675599)
 Task ID: R316 — Superconducting Cable Transmission + Deep Water Drilling Platform Logistics
 Agent: Main Agent (Cron Loop)
 Task: R316 — 2 new Indian logistics modules for superconducting cable transmission (Sterlite KEI Finolex Havells Polycab RR Kabel TEC LS Cable — HTS 275kV DC REBCO 2G CC 2000MW 400kV AC 1200MVA MgB2 66kV cryocooled 300MW BSCCO 132kV 200MVA REBCO 500kV HVDC 3000MW cryogenic link 33kV 150MW superconducting transformer 220kV 500MVA fault current limiter 40kA LN2 77K liquid nitrogen cryogenic cooling Nexans Havells Siemens BHEL, Gujarat Maharashtra Tamil Nadu Rajasthan Karnataka MP UP West Bengal PLI scheme 45000Cr) and deep water drilling platform (ONGC Oil India Reliance Aban Essar Shriram Dolphin — semi-sub 500m jack-up 150m DP3 drillship 3000m tender-assisted 200m FPSO 1500m compliant tower 400m SPAR 1000m tension leg platform 600m, MWD LWD MPD managed pressure drilling Schlumberger Halliburton Baker Hughes, KG Mumbai Assam Cambay Rajasthan Cauvery Kutch Andaman deepwater NELP OALP)
