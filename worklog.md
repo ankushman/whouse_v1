@@ -1,4 +1,29 @@
 ---
+Task ID: R334 — Carbon Capture Utilization + Electric Ferry Logistics
+Agent: Main Agent (Cron Loop)
+Task: R334 — 2 new Indian logistics modules for carbon capture utilization (NTPC Reliance IFFCO ACC CarbonClean Thermax Tata Steel GAIL BCCL BPCL ONGC Shree Cement IARI — Post-Combustion Amine Pre-Combustion Selexol Oxy-Fuel DAC Calcium Looping Chemical Looping Membrane Electrochemical BECCS, EOR Urea Methanol Building Material Algae Biofuel Food-Grade CO2 Carbon Negative Credit, 250000TPA target 12500Cr). Electric ferry (Mazagon Cochin Ship Garden Reach CESU L&amp;T ABG Goa Shipyard GRSE CSSL — Battery Electric Hydrogen FC Hybrid Diesel/LNG, Passenger Ro-Ro Cargo Catamaran, Ganges Brahmaputra Hooghly Coastal Andaman Lakshadweep, 1500 vessels target 8200Cr).
+
+Work Log:
+- Read worklog: R333 complete (commit 412daf3), 499 modules, 511 navItems, 60,167 CSS
+- TSC pre-validation: 0 errors in core module files
+- Duplicate check: carbon-capture-utilization and electric-ferry confirmed unique
+  - vanadium-redox-flow-battery ALREADY EXISTS (skipped)
+  - solid-state-battery-manufacturing ALREADY EXISTS (skipped)
+- Icons: Recycle (CCU), Ship (electric ferry) verified in iconMap
+- Created Carbon Capture Utilization Logistics (R334a): ~215 lines, ccu-* teal #0d9488, 14 records
+- Created Electric Ferry Logistics (R334b): ~215 lines, efy-* sky #0284c7, 14 records
+- Fixed typo: feedstack → feedstock in CCU-0009 record
+- Used correct pattern: FilterGroup.label, Record&lt;string, string[]&gt;, JSX &amp;#8594; &amp;#8377; &amp;#8212; &amp;amp; HTML entities
+- Registered both in index.ts (507), page.tsx, app-store.ts (513 navItems)
+- CSS: 1 line appended (60,168 total — compressed CSS blocks)
+- TSC FINAL: 0 errors in modules/page/store | Git: commit 0eb1548 pushed
+
+Stage Summary:
+- MODULE FILES: 501 (+2) | NAVITEMS: 513 (+2) | CSS: 60,168 lines (+1)
+- TSC: 0 errors (modules) | GITHUB: pushed (0eb1548)
+---
+
+---
 Task ID: R333 — Hydrogen Storage + Plasma Gasification Logistics
 Agent: Main Agent (Cron Loop)
 Task: R333 — 2 new Indian logistics modules for hydrogen storage (Hexagon Toyota ISRO BARC CSIR-IMMT Reliance BHEL Adani Chiyoda — CGH2 Type IV III I, LH2 Cryogenic, Metal Hydride MgH2 LaNi5 TiFe, Salt Cavern LRC, LOHC MCH/Toluene, NH3 Chemical, FC Bus Space Launch Grid Defense Telecom, National H2 Storage 18000Cr). Plasma gasification (NTPC BWC CERC Reliance IOCL BARC NPCIL CERC IARI CSIR-NML — DC Arc RF Torch Transfer Arc Induction Thermal Plasma, MSW Medical E-Waste ASR Sludge Fly Ash Tire Asbestos Nuclear Waste, Syngas Power Green H2 Metal Recovery Vitrification Destruction, Swachh Bharat 6500Cr).
