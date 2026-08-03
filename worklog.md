@@ -1,4 +1,52 @@
 ---
+Task ID: R393 — Cobalt Superalloy Logistics + Titanium Sheet Logistics
+Agent: Main Agent (Cron Loop)
+Task: R393 — 2 new Indian logistics modules for cobalt superalloy supply chain and titanium sheet/plate/foil supply chain.
+
+Work Log:
+- Read worklog: R392 complete (commit 3b4f532), 623 modules, 627 navItems, ~61,610 CSS
+- TSC pre-validation: 0 errors in src/ (only non-blocking errors in examples/ and mini-services/)
+- Duplicate theme search: 6 candidates tested
+  - cobalt-superalloy: CLEAN, csb-* CLEAN
+  - titanium-sheet-alloy: CLEAN, tsa-* CLEAN
+  - tungsten-carbide-alloy: CLEAN, wca-* CLEAN (not used this round)
+  - zirconium-alloy: CONFLICT in all 3 files
+  - hafnium-alloy: CONFLICT in all 3 files
+  - niobium-alloy: CONFLICT in all 3 files
+  - Selected: cobalt-superalloy-logistics (csb-*, Flame red #dc2626) and titanium-sheet-logistics (tsa-*, Hammer amber #d97706)
+  - Icons verified: Flame and Hammer both confirmed in iconMap
+- Created Cobalt Superalloy Logistics (R393a): ~155 lines, csb-* red #dc2626, 14 records
+  - 14 alloy grades: L-605, Mar-M509, Stellite 6, Stellite 21, Haynes 188, CoCrMo F75, Stellite 12, UMCo-50, Stellite 706, L-605 Tube, CoNiCrAlY, Stellite 6B, Haynes 25 Wire, CoCrW F90
+  - 14 manufacturers: MIDHANI, DRDO DMRL, BEL, Bharat Forge, IGCAR, HAL, SAIL, Gujarat Fluorochemicals, Rajasthan Cobalt Industries, Tamil Nadu Cobalt Alloys, Odisha Cobalt Refinery, Assam Cobalt Works, Gujarat Cobalt Technologies, UP Cobalt Alloys
+  - Applications: HAL Su-30MKI HPT blade, DRDO Agni-V nozzle throat, BHEL turbine valve seat, GE India turbine bucket, IGCAR PFBR heat exchanger, Stryker hip implant, Tata Steel saw blade, Asahi India glass mould, Kirloskar pump shaft, Linde HCl reformer, NTPC TBC bond coat, Bajaj steel wire guide, BHEL governor spring, L&amp;T offshore riser
+  - &#8377;1,987 Cr total investment, avg 55.8% Co content
+  - Delayed: CSB-B2412 (14d, monsoon logistics)
+- Created Titanium Sheet Logistics (R393b): ~155 lines, tsa-* amber #d97706, 14 records
+  - 14 sheet types: Ti-6Al-4V Plate 12mm, Ti-15V-3Cr-3Al-3Sn Sheet 1.5mm, Cp-Ti Grade 2 Foil 0.1mm, Ti-6Al-4V ELI Plate 25mm, Ti-5Al-2.5Sn Sheet 3mm, Ti-3Al-2.5V Tube 1mm wall, Cp-Ti Grade 1 Plate 6mm, Ti-6Al-7Nb Sheet 2mm, Ti-6Al-4V Sheet 0.5mm, Ti-13Cu Sheet 1mm, Ti-6Al-2Mo-2Fe Sheet 4mm, Cp-Ti Grade 3 Sheet 2mm, Ti-8Al-1Mo-1V Sheet 3mm, Ti-6Al-4V Sheet 1mm
+  - 14 manufacturers: MIDHANI, DRDO DMRL, BEL, Bharat Forge, HAL, IGCAR, SAIL, Gujarat Fluorochemicals, Rajasthan Titanium Industries, Tamil Nadu Titanium Alloys, Odisha Titanium Refinery, Assam Titanium Works, Gujarat Titanium Technologies, UP Titanium Alloys
+  - Applications: HAL Tejas wing spar, DRDO Nirbhay cruise missile wing, BEL CW filter mesh, OFB Bhim armour panel, NPCIL desalination HX, HAL Su-30 hydraulic line, Hindalco anode basket, Zimmer bone plate, Vikram Solar space PV frame, GRSE naval propeller, ISRO Gaganyaan heat shield, JK Paper pulp washer, BHEL compressor disc, L&amp;T tower facade
+  - &#8377;2,088 Cr total investment, avg 91.3% Ti content
+  - Delayed: TSA-B2412 (13d, monsoon logistics)
+- Fixed TSC: JSX comparison operators in Thickness Category Distribution chart (replaced &lt;/&gt; HTML entities with proper JS < > operators in expression blocks)
+- TSC: 0 errors in src/ after fix
+- Three-file registration: index.ts (616), page.tsx (1143 viewMap entries), app-store.ts (629 navItems)
+- CSS appended: 22 new rules (61,633 total)
+- Git commit: 3fc7f8c, pushed to main
+
+Stage Summary:
+- Project now: 625 modules, 629 navItems, ~61,633 CSS lines, 1143 viewMap entries, 0 TSC errors
+- Cobalt superalloy: L-605 HAL HPT &#8377;8,200Cr, Mar-M509 DRDO &#8377;6,500Cr, CoCrMo Stryker &#8377;3,500Cr, CoNiCrAlY NTPC &#8377;4,500Cr
+- Titanium sheet: Ti-6-4 HAL Tejas &#8377;15,000Cr, Ti-15-3 DRDO &#8377;5,500Cr, Cp-Ti NPCIL &#8377;4,200Cr, Ti-6-7Nb Zimmer &#8377;2,200Cr
+- Delayed: CSB-B2412 (14d), TSA-B2412 (13d)
+
+**Project Current State:**
+- 625 module view files, 629 navItems, ~61,633 CSS lines, 1143 viewMap entries, 0 TSC errors
+
+**Risks:**
+- globals.css 61K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Next clean candidates: tungsten-carbide-alloy (wca-*), nickel-powder (npw-*), chromium-sheet (crs-*)
+
+---
 Task ID: R392 — Nickel Brazing Alloy Logistics + Vanadium Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R392 — 2 new Indian logistics modules for nickel brazing filler metal supply chain and vanadium alloy/compound supply chain. Replaced existing vanadium-alloy module with expanded version.
