@@ -505,3 +505,5 @@ export { default as HydrogenStorageLogisticsView } from './hydrogen-storage-logi
 export { default as PlasmaGasificationLogisticsView } from './plasma-gasification-logistics-view'
 export { default as CarbonCaptureUtilizationLogisticsView } from './carbon-capture-utilization-logistics-view'
 export { default as ElectricFerryLogisticsView } from './electric-ferry-logistics-view'
+export { default as MicrogridManagementLogisticsView } from './microgrid-management-logistics-view'
+export { default as MoltenSaltStorageLogisticsView } from './molten-salt-storage-logistics-view'

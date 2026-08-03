@@ -1025,6 +1025,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "plasma-gasification": PlasmaGasificationLogisticsView,
   "carbon-capture-utilization": CarbonCaptureUtilizationLogisticsView,
   "electric-ferry": ElectricFerryLogisticsView,
+  "microgrid-management": MicrogridManagementLogisticsView,
+  "molten-salt-storage": MoltenSaltStorageLogisticsView,
 }
 
 
@@ -1138,3 +1140,5 @@ export default function Home() {
 }
 import CarbonCaptureUtilizationLogisticsView from "@/components/modules/carbon-capture-utilization-logistics-view"
 import ElectricFerryLogisticsView from "@/components/modules/electric-ferry-logistics-view"
+import MicrogridManagementLogisticsView from "@/components/modules/microgrid-management-logistics-view"
+import MoltenSaltStorageLogisticsView from "@/components/modules/molten-salt-storage-logistics-view"
