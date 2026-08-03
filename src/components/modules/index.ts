@@ -466,3 +466,5 @@ export { default as HydrogenProductionFacilityLogisticsView } from './hydrogen-p
 export { default as FlyoverInterchangeLogisticsView } from './flyover-interchange-logistics-view'
 export { default as PortContainerTerminalLogisticsView } from './port-container-terminal-logistics-view'
 export { default as SubmarineTunnelLogisticsView } from './submarine-tunnel-logistics-view'
+export { default as SupercapacitorEnergyStorageLogisticsView } from './supercapacitor-energy-storage-logistics-view'
+export { default as OffshoreWindInstallationLogisticsView } from './offshore-wind-installation-logistics-view'
