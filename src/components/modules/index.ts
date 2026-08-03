@@ -608,3 +608,5 @@ export { default as GraphiteElectrodeLogisticsView } from './graphite-electrode-
 export { default as ManganeseAlloyLogisticsView } from './manganese-alloy-logistics-view'
 export { default as SilverPasteLogisticsView } from './silver-paste-logistics-view'
 export { default as SiliconMetalLogisticsView } from './silicon-metal-logistics-view'
+export { default as RareGasLogisticsView } from './rare-gas-logistics-view'
+export { default as CarbonBrushLogisticsView } from './carbon-brush-logistics-view'

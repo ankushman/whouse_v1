@@ -61202,3 +61202,76 @@ html.theme-transition body {
 .sim-status-delayed { border-left: 3px solid #dc2626; }
 .sim-status-transit { border-left: 3px solid #2563eb; }
 @keyframes sim-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+/* R387 — Rare Gas Logistics (teal-600) */
+.rga-kpi-card { border-left: 4px solid #0d9488; background: rgba(204, 251, 241, 0.3); }
+.rga-tab-active { border-bottom: 2px solid #0d9488; color: #115e59; }
+.rga-bar-fill { background: #0d9488; }
+.rga-bar-track { background: #ccfbf1; }
+.rga-bar-fill-alt { background: #0891b2; }
+.rga-bar-track-alt { background: #cffafe; }
+.rga-insight-card { border-left: 4px solid #0d9488; }
+.rga-insight-alt-1 { border-left: 4px solid #6366f1; }
+.rga-insight-alt-2 { border-left: 4px solid #a855f7; }
+.rga-insight-alt-3 { border-left: 4px solid #f43f5e; }
+.rga-delayed-row { border-left: 4px solid #ef4444; background: rgba(254, 226, 226, 0.3); }
+.rga-badge-active { background: #0d9488; color: white; }
+.rga-badge-inactive { border: 1px solid #99f6e4; color: #0d9488; }
+.rga-chart-title { font-size: 0.875rem; font-weight: 600; color: #1e293b; }
+.rga-kpi-value { font-size: 1.5rem; font-weight: 700; color: #115e59; }
+.rga-kpi-label { font-size: 0.75rem; color: #6b7280; }
+.rga-table-header { font-size: 0.875rem; font-weight: 600; padding: 0.5rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.rga-table-cell { padding: 0.5rem; font-size: 0.875rem; }
+.rga-table-mono { padding: 0.5rem; font-size: 0.75rem; font-family: monospace; }
+.rga-filter-input { max-width: 20rem; }
+.rga-filter-badge { cursor: pointer; }
+.rga-filter-badge-active { background: #0d9488; color: white; }
+.rga-filter-badge-inactive { border: 1px solid #99f6e4; color: #0d9488; background: transparent; }
+.rga-zone-bar-track { background: #ccfbf1; }
+.rga-zone-bar-fill { background: #0891b2; }
+.rga-priority-bar-track { background: #fef3c7; }
+.rga-priority-bar-fill { background: #d97706; }
+.rga-status-bar-track { background: #ccfbf1; }
+.rga-status-bar-fill { background: #0d9488; }
+.rga-range-bar-track { background: #e0e7ff; }
+.rga-range-bar-fill { background: #6366f1; }
+.rga-card-wrapper { border-radius: 0.5rem; padding: 1rem; background: white; }
+.rga-card-header { font-size: 0.875rem; font-weight: 600; padding-bottom: 0.5rem; }
+.rga-card-content { padding: 0.5rem 0; }
+.rga-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
+
+/* R387 — Carbon Brush Logistics (amber-600) */
+.cbl-kpi-card { border-left: 4px solid #b45309; background: rgba(254, 243, 199, 0.3); }
+.cbl-tab-active { border-bottom: 2px solid #b45309; color: #78350f; }
+.cbl-bar-fill { background: #b45309; }
+.cbl-bar-track { background: #fef3c7; }
+.cbl-bar-fill-alt { background: #ea580c; }
+.cbl-bar-track-alt { background: #ffedd5; }
+.cbl-insight-card { border-left: 4px solid #b45309; }
+.cbl-insight-alt-1 { border-left: 4px solid #10b981; }
+.cbl-insight-alt-2 { border-left: 4px solid #3b82f6; }
+.cbl-insight-alt-3 { border-left: 4px solid #a855f7; }
+.cbl-delayed-row { border-left: 4px solid #ef4444; background: rgba(254, 226, 226, 0.3); }
+.cbl-badge-active { background: #b45309; color: white; }
+.cbl-badge-inactive { border: 1px solid #fcd34d; color: #b45309; }
+.cbl-chart-title { font-size: 0.875rem; font-weight: 600; color: #1e293b; }
+.cbl-kpi-value { font-size: 1.5rem; font-weight: 700; color: #78350f; }
+.cbl-kpi-label { font-size: 0.75rem; color: #6b7280; }
+.cbl-table-header { font-size: 0.875rem; font-weight: 600; padding: 0.5rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+.cbl-table-cell { padding: 0.5rem; font-size: 0.875rem; }
+.cbl-table-mono { padding: 0.5rem; font-size: 0.75rem; font-family: monospace; }
+.cbl-filter-input { max-width: 20rem; }
+.cbl-filter-badge { cursor: pointer; }
+.cbl-filter-badge-active { background: #b45309; color: white; }
+.cbl-filter-badge-inactive { border: 1px solid #fcd34d; color: #b45309; background: transparent; }
+.cbl-zone-bar-track { background: #ffedd5; }
+.cbl-zone-bar-fill { background: #ea580c; }
+.cbl-priority-bar-track { background: #ffe4e6; }
+.cbl-priority-bar-fill { background: #e11d48; }
+.cbl-status-bar-track { background: #fef3c7; }
+.cbl-status-bar-fill { background: #b45309; }
+.cbl-range-bar-track { background: #e0e7ff; }
+.cbl-range-bar-fill { background: #6366f1; }
+.cbl-card-wrapper { border-radius: 0.5rem; padding: 1rem; background: white; }
+.cbl-card-header { font-size: 0.875rem; font-weight: 600; padding-bottom: 0.5rem; }
+.cbl-card-content { padding: 0.5rem 0; }
+.cbl-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
