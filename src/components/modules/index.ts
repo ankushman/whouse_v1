@@ -527,3 +527,5 @@ export { default as GreenCementLogisticsView } from './green-cement-logistics-vi
 export { default as AIChipLogisticsView } from './ai-chip-logistics-view'
 export { default as EVBatterySwappingView } from './ev-battery-swapping-view'
 export { default as OceanEnergyView } from './ocean-energy-view'
+export { default as HyperloopLogisticsView } from './hyperloop-logistics-view'
+export { default as UrbanAirMobilityView } from './urban-air-mobility-view'
