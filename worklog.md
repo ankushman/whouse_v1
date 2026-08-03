@@ -1,4 +1,61 @@
 ---
+Task ID: R396 — Gold Alloy Logistics + Aluminium Bronze Logistics
+Agent: Main Agent (Cron Loop)
+Task: R396 — 2 new Indian logistics modules for gold alloy supply chain and aluminium bronze naval/marine alloy supply chain.
+
+Work Log:
+- Read worklog: R395 complete (commit 6e055cb), 627 modules, 628 navItems, ~61,685 CSS
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate theme search: 12 candidates tested
+  - gold-alloy: CLEAN, goa-* CLEAN
+  - aluminium-bronze: CLEAN, aba-* CLEAN
+  - nickel-powder: CLEAN (not used this round)
+  - chromium-sheet: CLEAN (not used this round)
+  - tungsten-sheet: CLEAN (not used this round)
+  - silver-alloy: CLEAN (not used this round)
+  - lead-alloy: CLEAN (not used this round)
+  - zinc-alloy: CLEAN (not used this round)
+  - manganese-steel: CLEAN (not used this round)
+  - silicon-steel: CLEAN (not used this round)
+  - tantalum-alloy: CONFLICT (export-only ghost in index.ts)
+  - palladium-alloy: CLEAN (not used this round)
+  - Selected: gold-alloy-logistics (goa-*, Trophy amber #d97706) and aluminium-bronze-logistics (aba-*, Shield orange #c2410c)
+  - Icons verified: Trophy and Shield both confirmed in iconMap
+- NOTE: tantalum-alloy is another ghost module (export-only in index.ts, like molybdenum/vanadium)
+- Created Gold Alloy Logistics (R396a): ~130 lines, goa-* amber #d97706, 14 records
+  - 14 grades: 24K Fine Gold 999.9, Au-Ni 95/5, Au-Pt 90/10, 22K Jewellery 916, Au-Ag 60/40, 18K Rose Gold 750, Au-Pd 50/50 Dental, Au-Sn 80/20, Au-Be 99.6/0.4, 24K LBMA Bar, Au-Pt-Rh Contact, Au-Ag-Cu 18K, Au-W 97/3, 24K Granules 999.5
+  - 14 manufacturers: Mumbai Bullion Association, DRDO DMRL, BEL, Rajasthan Gold Refinery, IGCAR, Hindustan Gold, Gujarat Gold Industries, Tamil Nadu Gold Works, Odisha Gold Refinery, Bombay Gold Exchange, Assam Gold Industries, Gujarat Gold Technologies, UP Gold Alloys, Delhi Gold Refinery
+  - Applications: RBI SGB, ISRO connector, BEL wire bond, Tirupati temple, IGCAR nuclear braze, Titan watch, dental crown, LED die attach, BHEL relay, RBI reserve bar, pacemaker electrode, ISRO PCB, Wipro GE X-ray, SCL semiconductor wire
+  - &#8377;18,530 Cr total investment, avg 21.4K karat
+  - Delayed: GOA-B2411 (8d, monsoon Assam)
+- Created Aluminium Bronze Logistics (R396b): ~130 lines, aba-* orange #c2410c, 14 records
+  - 14 grades: C95500 (CuAl10Fe5Ni5), C95700 (CuAl9Fe4Ni4), C61400 (CuAl8Fe3), C63000 (CuAl10Ni5Fe4), C95200 (CuAl6Si2Fe), C95400 (CuAl10Fe3), C95800 (CuAl11Fe6Ni6), C62300 (CuAl9Ni5Fe3), C94000 (CuAl7Si3)
+  - 14 manufacturers: Mazagon Dock, GRSE, Hindustan Shipyard, BEL, Cochin Shipyard, L&T Shipbuilding, Indian Navy, Reliance Petrochemical, Rajasthan Bronze Industries, Tamil Nadu Bronze Works, Odisha Copper Industries, Assam Copper Works, Gujarat Bronze Technologies, UP Bronze Alloys
+  - Applications: MDL warship propeller, GRSE corvette pump, HSL sea valve, BEL radar mast, CSL LNG bearing, L&T desal pump, Navy submarine fitting, Reliance refinery HEx, L&T metro bracket, Adani crane fastener, ONGC offshore riser, NHPC dam gate, Kirloskar valve stem, BHEL winch gear
+  - &#8377;3,665 Cr total investment, avg 9.4% Al content
+  - Delayed: ABA-B2412 (9d, monsoon Brahmaputra)
+- Fixed JSX: Title text `(>=650 MPa)` contained literal `>` in JSX text — changed to `(650+ MPa)`
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (629), page.tsx (1147 viewMap entries), app-store.ts (630 navItems)
+- CSS appended: 22 new rules (~61,707 total)
+- Git commit: ef2260c, pushed to main
+
+Stage Summary:
+- Project now: 629 modules, 630 navItems, ~61,707 CSS lines, 1147 viewMap entries, 0 TSC errors in src/
+- Gold: RBI Reserve &#8377;8,500Cr, SGB &#8377;4,500Cr, Temple &#8377;2,800Cr, Nuclear &#8377;410Cr
+- Aluminium Bronze: Navy Sub &#8377;10,500Cr, ONGC Riser &#8377;9,750Cr, MDL Propeller &#8377;8,500Cr, IGCAR LNG &#8377;6,500Cr
+- Delayed: GOA-B2411 (8d), ABA-B2412 (9d)
+- Ghost modules count: tantalum-alloy now added to list (molybdenum, vanadium, tantalum)
+
+**Project Current State:**
+- 629 module view files, 630 navItems, ~61,707 CSS lines, 1147 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 61K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Ghost modules: molybdenum-alloy, vanadium-alloy, tantalum-alloy (export-only, files 29-31KB)
+- Next clean candidates: nickel-powder (npw-*), chromium-sheet (crs-*), tungsten-sheet (tws-*), silver-alloy (sla-*), lead-alloy (lda-*), zinc-alloy (zna-*), manganese-steel (mns-*), silicon-steel (sis-*), palladium-alloy (pda-*)
+
+---
 Task ID: R395 — Beryllium Alloy Logistics + Platinum Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R395 — 2 new Indian logistics modules for beryllium-copper/pure beryllium supply chain and platinum-group metal alloy supply chain.
