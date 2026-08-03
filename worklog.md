@@ -11328,3 +11328,54 @@ Stage Summary:
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
+---
+Task ID: R381 — Titanium Sponge Logistics + Boron Carbide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R381 — 2 new Indian logistics modules for titanium sponge production and boron carbide ceramics.
+
+Work Log:
+- Read worklog: R380 complete (commit 774c33d), 601 modules, 605 navItems, 60,904 CSS
+- TSC pre-validation: 0 errors in src/ (only pre-existing errors in skills/mini-services)
+- Dev server: OOM expected with 600+ modules — TSC-only QA approach
+- Duplicate theme search: 15 candidates tested, all confirmed clean
+  - Selected titanium-sponge-logistics (tis-*, MountainSnow #0891b2) and boron-carbide-logistics (brc-*, Hammer #4f46e5)
+  - Icons verified in iconMap (MountainSnow and Hammer available)
+- Created Titanium Sponge Logistics (R381a): ~255 lines, tis-* cyan #0891b2, 14 records
+  - 14 records across 13 cities (Mumbai, Hyderabad, Bengaluru, Chennai, Pune, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, DRDO DMRL, TASL, ISRO NPPC, Bharat Forge, BEL, Hindalco, Adani Defence, RSM, IIT Madras, IRE, Oil India, Gujarat Fluorochemicals, Tata Advanced Systems
+  - 14 process routes: Kroll (Mg Reduction), Hunter (Na Reduction), Armstrong (NaCl), FCC Cambridge (Fluoride), Becher Slag, FFC Electrolytic, various product forms
+  - Applications: Tejas/AMCA airframe forging, missile body, landing gear, rocket motor case, connecting rod, sonar dome, welding wire, hip implant, TiO2 pigment, 3D printing powder, synthetic rutile, offshore HX, MIM powder, Astra missile
+  - ₹1,649 Cr total investment, avg 99.3% purity
+- Created Boron Carbide Logistics (R381b): ~255 lines, brc-* indigo #4f46e5, 14 records
+  - 14 records across 13 cities (Pune, Hyderabad, Mumbai, Bengaluru, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: DRDO DMRL, MIDHANI, Saint-Gobain, ISRO LPSC, TASL, BEL, CGCRI, Reliance SBR, RSM, IIT Madras, NALCO, Oil India, Gujarat Fluorochemicals, HAL
+  - 14 product forms: Hot Pressed Plate, Reaction Bonded Brake, Slip Cast Nozzle, Neutron Absorber Pellet, Vehicle Armour Tile, IR Seeker Dome, CVD Substrate, Abrasive Grain, B4C Powder, PVD Nano Coating, Boric Acid Precursor, Wear Liner, Thermocouple Sheath, Helicopter Armour Tile
+  - Applications: infantry body armour, aircraft brake disc, sandblasting nozzle, nuclear reactor shielding, APC hull armour, IR seeker dome, thermoelectric generator, bearing lapping, defence ceramics feed, turbine erosion coating, B4C synthesis, drilling mud pump, steel melt sensor, helicopter floor armour
+  - ₹1,646 Cr total investment, avg 30 GPa hardness (structural grades)
+- Three-file registration completed: index.ts (601 lines), page.tsx (1123 viewMap entries), app-store.ts (607 navItems)
+- CSS appended: 42 new rules for tis-* (cyan) and brc-* (indigo) themes (~60,946 total)
+- TSC post-validation: 0 errors in src/ on first pass
+- Git commit: b67f067, pushed to main
+
+Stage Summary:
+- Project now: 603 modules, 607 navItems, ~60,946 CSS lines, 1123 viewMap entries, 0 TSC errors
+- Titanium sponge module covers Kroll/Hunter/Armstrong/FFC process routes for aerospace (Tejas/AMCA 480+1300 tonnes Ti), space (PSLV motor cases), naval (sonar domes), biomedical (hip implants), AM (3D printing powder), and automotive (racing)
+- Boron carbide module covers defence armour (2M body armour sets, 4600 APC modernization), nuclear shielding (PFBR neutron absorbers), aerospace brakes (Tejas B4C-SiC), industrial abrasives (sandblasting/lapping), oilfield wear, and specialty IR seeker domes
+- Both modules use established patterns: dual-jump Record type assertion, for...of filter loops, correct PageHeader signature
+- Delayed: TIS-B2404 (Chennai→Trivandrum, 10d, MgCl2 waste clearance), TIS-B2412 (Mumbai→Jorhat, 12d, monsoon), BRC-B2404 (Kalpakkam→Kalpakkam, 10d, enriched boron import), BRC-B2412 (Chavara→Jorhat, 12d, monsoon)
+- Next candidates (pre-validated): niobium-alloy, platinum-group-metal, palladium-catalyst, silver-paste, lithium-refining, vanadium-alloy, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush, silicon-metal, alumina-ceramic, silicon-nitride
+
+**Project Current State:**
+- 603 module view files, 607 navItems, ~60,946 CSS lines, 1123 viewMap entries
+- TSC clean (0 errors in src/)
+- R381 complete, stable state
+- Dev server OOM with 600+ modules — continue TSC-only QA approach
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 603+ modules, dev server OOM risk — continue TSC-only QA approach
+- NavItem label overwrite risk when inserting new entries — verify adjacent labels
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Object.entries(map) arithmetic requires explicit [string, number][] type assertion
+- PageHeader must import from @/components/shared (not @/components/page-header)
