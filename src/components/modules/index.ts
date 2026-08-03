@@ -544,3 +544,5 @@ export { default as EVTelematicsPlatformView } from './ev-telematics-platform-vi
 export { default as UrbanMiningLogisticsView } from './urban-mining-logistics-view'
 export { default as SmartCampusLogisticsView } from './smart-campus-logistics-view'
 export { default as NanoMaterialLogisticsView } from './nano-material-logistics-view'
+export { default as BioPlasticLogisticsView } from './bio-plastic-logistics-view'
+export { default as VerticalFarmLogisticsView } from './vertical-farm-logistics-view'

@@ -550,6 +550,8 @@ export const navItems: NavItem[] = [
   { id: 'urban-mining-logistics', label: 'Urban Mining', icon: 'Recycle', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'smart-campus-logistics', label: 'Smart Campus', icon: 'Building2', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'nano-material-logistics', label: 'Nano Material', icon: 'Microscope', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'bio-plastic-logistics', label: 'Bio Plastic', icon: 'Leaf', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'vertical-farm-logistics', label: 'Vertical Farm', icon: 'Sprout', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]
