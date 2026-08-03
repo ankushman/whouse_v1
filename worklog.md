@@ -1,4 +1,61 @@
 ---
+Task ID: R395 — Beryllium Alloy Logistics + Platinum Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R395 — 2 new Indian logistics modules for beryllium-copper/pure beryllium supply chain and platinum-group metal alloy supply chain.
+
+Work Log:
+- Read worklog: R394 complete (commit b4c8f35), 625 modules, 626 navItems, ~61,663 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 12 candidates tested
+  - beryllium-alloy: CLEAN, bea-* CLEAN
+  - platinum-alloy: CLEAN, pta-* CLEAN
+  - gold-alloy: CLEAN (not used this round)
+  - aluminium-bronze: CLEAN (not used this round)
+  - nickel-powder: CLEAN (not used this round)
+  - chromium-sheet: CLEAN (not used this round)
+  - tungsten-sheet: CLEAN (not used this round)
+  - silver-alloy: CLEAN (not used this round)
+  - lead-alloy: CLEAN (not used this round)
+  - zinc-alloy: CLEAN (not used this round)
+  - molybdenum-alloy: CONFLICT (export-only ghost in index.ts)
+  - vanadium-alloy: CONFLICT (export-only ghost in index.ts)
+  - Selected: beryllium-alloy-logistics (bea-*, Atom emerald #059669) and platinum-alloy-logistics (pta-*, Diamond purple #7c3aed)
+  - Icons verified: Atom and Diamond both confirmed in iconMap
+- NOTE: Found ghost modules molybdenum-alloy and vanadium-alloy (exported in index.ts but not registered in page.tsx/app-store.ts) — files exist but not wired. Left for future fix.
+- Created Beryllium Alloy Logistics (R395a): ~130 lines, bea-* emerald #059669, 14 records
+  - 14 alloy grades: Be-Cu C17200, C17510, C17200 HT, Be Metal S-200F, C17400 Strip, C17200 Wire, S-65C, C17500 Bar, C17200 Sheet, C17410 Plate, BeO Ceramic Grade, C17200 Tube, S-200F Block, C17500 Tube
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Bharat Forge, HAL, IGCAR, SAIL, Gujarat Fluorochemicals, Rajasthan Beryllium Industries, Tamil Nadu Beryllium Alloys, Odisha Beryllium Refinery, Assam Beryllium Works, Gujarat Beryllium Technologies, UP Beryllium Alloys, ISRO ISTRAC
+  - Applications: ISRO satellite gimbal, BEL radar waveguide, Cummins fuel injector, DRDO chopper disc, IGCAR neutron reflector, BEL connector contact, ISRO NISAR optical bench, L&T welding electrode, TE relay contact, ABB switchgear contact, BHEL heat sink, Telecom India undersea cable, BARC particle accelerator, ONGC oilfield tool
+  - &#8377;3,716 Cr total investment, avg 22.8% Be content (bimodal: Be-Cu ~1.9% and pure Be ~98%)
+  - Delayed: BEA-B2412 (8d, monsoon Brahmaputra)
+- Created Platinum Alloy Logistics (R395b): ~130 lines, pta-* purple #7c3aed, 14 records
+  - 14 alloy grades: Pt-Ir 90/10, Pt-Rh 70/30, Pt-Pd 50/50, Pt-Co 95/5, Pt-Ru 95/5, Pt-Pd-Rh Trimetallic, Pt Wire 99.99%, Pt-Ni 90/10, Pt-Ir 80/20, Pt-Pd 60/40, Pt-Ru 80/20, Pt Wire 99.95%, Pt-Co 97/3
+  - 14 manufacturers: Hindustan Platinum, DRDO DMRL, BEL, ONGC, Bharat Forge, Tata Steel, IGCAR, Gujarat Platinum Industries, Rajasthan Platinum Alloys, Tamil Nadu Platinum Works, Odisha Platinum Refinery, Assam Platinum Works, Gujarat Platinum Technologies, UP Platinum Alloys
+  - Applications: Mico Bosch spark plug, Nagarjuna catalyst gauze, ISRO thick film paste, BHEL thermocouple, Linde Ti anode, Tata Motors catalytic converter, NPCIL reference electrode, Reliance fuel cell MEA, Sahajanand medical stent, BHEL glass seal, IOCL fuel cell catalyst, Recron glass fiber bushing, Lupin pharma electrode, HAL aviation sensor
+  - &#8377;5,200 Cr total investment, avg 79.4% Pt content
+  - Delayed: PTA-B2412 (9d, monsoon Assam)
+- BUG FIX: Write tool HTML-escaped JSX entities in both files (&lt; &gt; &amp; written as literal text). Fixed via Python script regeneration (platinum) and MultiEdit patching (beryllium className={})
+- TSC: 0 errors in src/components/modules after fixes
+- Three-file registration: index.ts (627), page.tsx (1145 viewMap entries), app-store.ts (628 navItems)
+- CSS appended: 22 new rules (~61,685 total)
+- Git commit: 6e055cb, pushed to main
+
+Stage Summary:
+- Project now: 627 modules, 628 navItems, ~61,685 CSS lines, 1145 viewMap entries, 0 TSC errors in src/
+- Beryllium: S-200F BARC &#8377;13,500Cr, S-65C ISRO &#8377;19,200Cr, BeO BHEL &#8377;6,300Cr, C17200 ISRO &#8377;8,400Cr
+- Platinum: Pt-Rh DRDO &#8377;20,400Cr, Pt-Ni Reliance &#8377;22,500Cr, Pt-Ru IOCL &#8377;17,700Cr, Pt-Ir Bosch &#8377;12,600Cr
+- Delayed: BEA-B2412 (8d), PTA-B2412 (9d)
+- Ghost modules discovered: molybdenum-alloy-logistics-view.tsx (31KB), vanadium-alloy-logistics-view.tsx (29KB) — exported in index.ts but not registered in page.tsx/store
+
+**Project Current State:**
+- 627 module view files, 628 navItems, ~61,685 CSS lines, 1145 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 61K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Ghost modules molybdenum-alloy and vanadium-alloy need registration or cleanup
+- Next clean candidates: gold-alloy (goa-*), aluminium-bronze (aba-*), nickel-powder (npw-*), chromium-sheet (crs-*), tungsten-sheet (tws-*), silver-alloy (sla-*), lead-alloy (lda-*), zinc-alloy (zna-*)
+
+---
 Task ID: R394 — Inconel Superalloy Logistics + Copper Nickel Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R394 — 2 new Indian logistics modules for Inconel nickel superalloy supply chain and copper-nickel alloy supply chain. Also cleaned up ghost tungsten-carbide-logistics entry (file deleted in prior session, export/import/navItem orphaned).
