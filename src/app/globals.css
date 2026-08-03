@@ -60803,3 +60803,50 @@ html.theme-transition body {
 .gaas-status-dot-processing { background: #eab308; }
 .gaas-status-dot-delayed { background: #ef4444; }
 .gaas-chart-gradient { background: linear-gradient(90deg, #a855f7 0%, #c084fc 100%); }
+/* === Hafnium Alloy Logistics (haf-*) — Emerald #059669 === */
+.haf-card-bg { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+.haf-badge { background: #059669; color: white; }
+.haf-kpi-card { border-left: 4px solid #059669; background: rgba(5, 150, 105, 0.08); }
+.haf-bar-fill { background: #059669; }
+.haf-bar-track { background: #d1fae5; }
+.haf-tab-active { border-bottom: 2px solid #059669; color: #059669; }
+.haf-insight-card { border-left: 4px solid #059669; }
+.haf-header-title { color: #059669; }
+.haf-row-hover:hover { background: rgba(5, 150, 105, 0.05); }
+.haf-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.haf-filter-active { background: #059669; color: white; }
+.haf-priority-critical { background: #dc2626; color: white; }
+.haf-priority-high { background: #f59e0b; color: white; }
+.haf-status-delivered { background: #059669; color: white; }
+.haf-status-in-transit { background: #3b82f6; color: white; }
+.haf-status-processing { background: #8b5cf6; color: white; }
+.haf-status-delayed { background: #ef4444; color: white; }
+.haf-ring { box-shadow: 0 0 0 2px #059669; }
+.haf-dot { width: 8px; height: 8px; border-radius: 50%; background: #059669; }
+.haf-gradient { background: linear-gradient(135deg, #059669, #0d9488); }
+.haf-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #d1fae5; color: #059669; }
+.haf-divider { border-top: 1px solid #d1fae5; }
+
+/* === Zirconia Ceramic Logistics (zrc-*) — Rose #e11d48 === */
+.zrc-card-bg { background: linear-gradient(135deg, #fff1f2, #fecdd3); }
+.zrc-badge { background: #e11d48; color: white; }
+.zrc-kpi-card { border-left: 4px solid #e11d48; background: rgba(225, 29, 72, 0.08); }
+.zrc-bar-fill { background: #e11d48; }
+.zrc-bar-track { background: #fecdd3; }
+.zrc-tab-active { border-bottom: 2px solid #e11d48; color: #e11d48; }
+.zrc-insight-card { border-left: 4px solid #e11d48; }
+.zrc-header-title { color: #e11d48; }
+.zrc-row-hover:hover { background: rgba(225, 29, 72, 0.05); }
+.zrc-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.zrc-filter-active { background: #e11d48; color: white; }
+.zrc-priority-critical { background: #dc2626; color: white; }
+.zrc-priority-high { background: #f59e0b; color: white; }
+.zrc-status-delivered { background: #e11d48; color: white; }
+.zrc-status-in-transit { background: #3b82f6; color: white; }
+.zrc-status-processing { background: #8b5cf6; color: white; }
+.zrc-status-delayed { background: #ef4444; color: white; }
+.zrc-ring { box-shadow: 0 0 0 2px #e11d48; }
+.zrc-dot { width: 8px; height: 8px; border-radius: 50%; background: #e11d48; }
+.zrc-gradient { background: linear-gradient(135deg, #e11d48, #f43f5e); }
+.zrc-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #fecdd3; color: #e11d48; }
+.zrc-divider { border-top: 1px solid #fecdd3; }
