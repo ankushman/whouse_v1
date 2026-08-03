@@ -1,4 +1,42 @@
 ---
+Task ID: R392 — Nickel Brazing Alloy Logistics + Vanadium Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R392 — 2 new Indian logistics modules for nickel brazing filler metal supply chain and vanadium alloy/compound supply chain. Replaced existing vanadium-alloy module with expanded version.
+
+Work Log:
+- Read worklog: R391 complete (commit 79fd1ba), 623 modules, 627 navItems, ~61,561 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: nickel-brazing-alloy CLEAN, vanadium-alloy existed in index.ts
+  - Selected nickel-brazing-alloy-logistics (nba-*, Cog orange #ea580c) and vanadium-alloy-logistics (vaa-*, Crown violet #7c3aed)
+  - Removed old vanadium-alloy entries from index.ts (line 603), page.tsx (line 1123/1351), app-store.ts (line 609)
+- Created Nickel Brazing Alloy Logistics (R392a): ~205 lines, nba-* orange #ea580c, 14 records
+  - 14 alloy grades: BNi-2, BNi-5, BNi-7, Ni-Cr-P Amorphous, BNi-1a, BNi-3, Ni-P Eutectic, Ni-Mn-Si-C, BNi-6, Ni-Si-B, BNi-9, BNi-2 Ring, Ni-Pd-Mn, Ni-Cr-Si-C
+  - Applications: HAL Su-30 engine spool, DRDO Agni-V thrust chamber, NPCIL Kudankulam SG tube-to-tubesheet, Tata Cummins turbocharger blade, IOCL SOFC interconnect, NTPC gas turbine blade repair
+  - &#8377;1,516 Cr total investment, avg 84.1% Ni content
+- Created Vanadium Alloy Logistics (R392b): ~205 lines, vaa-* violet #7c3aed, 14 records (replaced prior module)
+  - 14 alloy grades: V-4Cr-4Ti, Ti-6Al-4V, Nb-V microalloy, V-5Cr-5Ti, V-N HSLA, V-N Rail R350HT, V-Rebar Fe-500D, V2O5 Catalyst, V-Mo-Cr Tool Steel, V-N Ship Plate, Al-5V Master, V-Cr-Al Petro, NaVO3 VRB, 50CrV4 Spring
+  - Applications: IPR DEMO fusion, HAL Tejas airframe, DAE SRF cavity, IGCAR PFBR, L&amp;T MTHL bridge, Indian Railways, Reliance VRB 50MWh
+  - &#8377;1,847 Cr total investment, avg 30.9% V content
+- Fixed TSC errors: duplicate vanadium-alloy entries + VAA-B2414 missing batchNo
+- TSC: 0 errors in src/ after fixes
+- CSS appended: 62 new rules (61,621 total)
+- Git commit: 3b4f532, pushed to main
+
+Stage Summary:
+- Project now: 623 modules, 627 navItems, ~61,621 CSS lines, 1141 viewMap entries, 0 TSC errors
+- Nickel brazing: BNi-2 aero &#8377;5,800Cr, BNi-1a nuclear &#8377;6,200Cr, amorphous &#8377;3,200Cr, BNi-6 fuel cell &#8377;4,800Cr
+- Vanadium alloy: Ti-6-4 &#8377;15,000Cr Tejas, VRB &#8377;8,500Cr Reliance, V-N HSLA &#8377;1,800Cr, V-4Cr-4Ti fusion &#8377;9,800Cr
+- Delayed: NBA-B2412 (12d), VAA-B2412 (12d)
+- Next candidates: cobalt-superalloy (csb-*), titanium-sheet-alloy (tsa-*), tungsten-carbide-alloy (wca-*)
+
+**Project Current State:**
+- 623 module view files, 627 navItems, ~61,621 CSS lines, 1141 viewMap entries, 0 TSC errors
+
+**Risks:**
+- globals.css 61K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- csa- prefix conflicts, next clean: csb-*, tsa-*, wca-*
+
+---
 Task ID: R391 — Molybdenum Sheet Logistics + Selenium Metal Logistics
 Agent: Main Agent (Cron Loop)
 Task: R391 — 2 new Indian logistics modules for molybdenum sheet/plate/foil supply chain and selenium metal/compound supply chain.
