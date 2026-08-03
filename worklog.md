@@ -10559,3 +10559,41 @@ Work Log:
 Stage Summary:
 - MODULE FILES: 556 (+2) | NAVITEMS: 567 (+2) | CSS: 60,248 lines (+12)
 - TSC: 0 errors (src/) | GITHUB: pushed (86e619e)
+---
+Task ID: R362 — Neodymium Magnet Logistics + Manganese Sulphate Logistics
+Agent: Main Agent (Cron Loop)
+Task: R362 — 2 new Indian logistics modules for neodymium-iron-boron magnet supply chains and manganese sulphate production logistics.
+
+Work Log:
+- Read worklog: R361 complete (commit 86e619e), 556 modules, 567 navItems, 60,248 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 12 candidates tested, all clean
+  - Selected neodymium-magnet-logistics (ndm-*, Gem #92400e) and manganese-sulphate-logistics (mns-*, Pickaxe #7c2d12)
+  - Icons verified in iconMap (Gem at line 382, Pickaxe at line 387)
+- Created Neodymium Magnet Logistics (R362a): 189 lines, ndm-* amber #92400e, 14 records
+  - 14 facilities across 12 states+NE (AP, Odisha, Karnataka, Kerala, Maharashtra, TN, Gujarat, Telangana, Rajasthan, Jharkhand, Chhattisgarh, West Bengal, MP, Assam)
+  - 14 magnet types: NdFeB N52 Sintered/N48SH/N42 bonded injection/N50 Coastal/N48 Arc Segment/N44 bonded compression/N52SH Sintered/N50 Defence/N46 Arid/N42 Iron Region/N48 Mining/N44 Metro/N40 Central/N42 Hill
+  - 755 TPD total capacity, 1.39T avg grade, 99.0% avg purity, ₹4,543 Cr investment
+- Created Manganese Sulphate Logistics (R362b): 189 lines, mns-* orange-brown #7c2d12, 14 records
+  - 14 facilities across 13 states (Maharashtra, MP, Odisha, Chhattisgarh, AP, Jharkhand, West Bengal, Karnataka, Rajasthan, Gujarat, Kerala, Assam, Telangana, UP)
+  - 14 process types: Pyrolusite Acid Leach/Rhodochrosite Leach/Manganese Nodule Leach/Slag Leach Recovery/Pyrolusite Roast Leach/Manganite Acid Digest/Wad Leach/Electrolytic Recrystallization/Psilomelane Leach/Sea Water Mn Recovery/Beach Sand Mn Leach/Bio-Oxidation Leach/High-Purity Recrystallization/Pyrolusite Direct Leach
+  - 967 TPD total capacity, 97.9% avg purity, 91.8% avg recovery, ₹3,902 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (562), page.tsx (1083 viewMap entries), app-store.ts (569 navItems)
+- CSS: 25 lines appended (60,293 total, +25 lines)
+- Git: commit 0269249 pushed
+
+Stage Summary:
+- MODULE FILES: 558 (+2) | NAVITEMS: 569 (+2) | CSS: 60,293 lines (+25)
+- TSC: 0 errors (src/) | GITHUB: pushed (0269249)
+
+**Project Current State:**
+- 558 module view files, 569 navItems, 60,293 CSS lines, 1083 viewMap entries
+- TSC clean (0 errors in src/)
+- R362 complete, stable state
+- Next candidates: cobalt-free-battery-logistics, solid-state-cooling, smart-textile-logistics, bio-methane-logistics, methanol-fuel-logistics, e-fuel-logistics, vanadium-electrolyte-logistics, silicon-anode-logistics
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 500+ modules, dev server OOM risk — continue TSC-only QA approach
+- Icon availability must be checked before each module (Magnet icon does NOT exist in iconMap)
