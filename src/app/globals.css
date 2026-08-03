@@ -60067,3 +60067,23 @@ html.theme-transition body {
 .bmp-tab:hover { background: rgba(20, 83, 45, 0.08); }
 .bmp-dashboard, .bmp-registry, .bmp-analytics, .bmp-insights { animation: fadeIn 0.3s ease; }
 .bmp-table-wrap { box-shadow: 0 1px 3px rgba(20, 83, 45, 0.1); }
+/* R313a - Hydrogen Production Facility Logistics */
+.hpf-root { background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 50%, #e0f2fe 100%); min-height: 100vh; }
+.hpf-tabs { border-color: #bfdbfe; }
+.hpf-tab { transition: all 0.2s ease; }
+.hpf-dash { animation: hpfFadeIn 0.4s ease-out; }
+.hpf-reg { animation: hpfFadeIn 0.4s ease-out; }
+.hpf-analytics { animation: hpfFadeIn 0.4s ease-out; }
+.hpf-insights { animation: hpfFadeIn 0.4s ease-out; }
+.hpf-table-wrap { box-shadow: 0 1px 3px rgba(30, 58, 95, 0.1); }
+@keyframes hpfFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* R313b - Flyover Interchange Logistics */
+.foi-root { background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 50%, #ede9fe 100%); min-height: 100vh; }
+.foi-tabs { border-color: #ddd6fe; }
+.foi-tab { transition: all 0.2s ease; }
+.foi-dash { animation: foiFadeIn 0.4s ease-out; }
+.foi-reg { animation: foiFadeIn 0.4s ease-out; }
+.foi-analytics { animation: foiFadeIn 0.4s ease-out; }
+.foi-insights { animation: foiFadeIn 0.4s ease-out; }
+.foi-table-wrap { box-shadow: 0 1px 3px rgba(74, 25, 66, 0.1); }
+@keyframes foiFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }

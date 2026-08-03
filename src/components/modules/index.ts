@@ -462,3 +462,5 @@ export { default as BridgeConstructionLogisticsView } from './bridge-constructio
 export { default as DesalinationPlantLogisticsView } from './desalination-plant-logistics-view'
 export { default as SolarThermalCspLogisticsView } from './solar-thermal-csp-logistics-view'
 export { default as BiomassPowerPlantLogisticsView } from './biomass-power-plant-logistics-view'
+export { default as HydrogenProductionFacilityLogisticsView } from './hydrogen-production-facility-logistics-view'
+export { default as FlyoverInterchangeLogisticsView } from './flyover-interchange-logistics-view'
