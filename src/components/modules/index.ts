@@ -574,3 +574,5 @@ export { default as MethanolFuelLogisticsView } from './methanol-fuel-logistics-
 export { default as GrapheneBatteryLogisticsView } from './graphene-battery-logistics-view'
 export { default as TitaniumAlloyLogisticsView } from './titanium-alloy-logistics-view'
 export { default as GreenAmmoniaShippingLogisticsView } from './green-ammonia-shipping-logistics-view'
+export { default as FuelCellTruckLogisticsView } from './fuel-cell-truck-logistics-view'
+export { default as AramidFiberLogisticsView } from './aramid-fiber-logistics-view'
