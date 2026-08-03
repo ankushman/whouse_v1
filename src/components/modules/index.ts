@@ -594,3 +594,5 @@ export { default as TantalumCapacitorLogisticsView } from './tantalum-capacitor-
 export { default as GalliumArsenideLogisticsView } from './gallium-arsenide-logistics-view'
 export { default as HafniumAlloyLogisticsView } from './hafnium-alloy-logistics-view'
 export { default as ZirconiaCeramicLogisticsView } from './zirconia-ceramic-logistics-view'
+export { default as ScandiumAlloyLogisticsView } from './scandium-alloy-logistics-view'
+export { default as NickelSuperalloyLogisticsView } from './nickel-superalloy-logistics-view'

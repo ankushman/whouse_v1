@@ -60850,3 +60850,50 @@ html.theme-transition body {
 .zrc-gradient { background: linear-gradient(135deg, #e11d48, #f43f5e); }
 .zrc-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #fecdd3; color: #e11d48; }
 .zrc-divider { border-top: 1px solid #fecdd3; }
+/* === Scandium Alloy Logistics (sca-*) — Orange #ea580c === */
+.sca-card-bg { background: linear-gradient(135deg, #fff7ed, #ffedd5); }
+.sca-badge { background: #ea580c; color: white; }
+.sca-kpi-card { border-left: 4px solid #ea580c; background: rgba(234, 88, 12, 0.08); }
+.sca-bar-fill { background: #ea580c; }
+.sca-bar-track { background: #ffedd5; }
+.sca-tab-active { border-bottom: 2px solid #ea580c; color: #ea580c; }
+.sca-insight-card { border-left: 4px solid #ea580c; }
+.sca-header-title { color: #ea580c; }
+.sca-row-hover:hover { background: rgba(234, 88, 12, 0.05); }
+.sca-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.sca-filter-active { background: #ea580c; color: white; }
+.sca-priority-critical { background: #dc2626; color: white; }
+.sca-priority-high { background: #f59e0b; color: white; }
+.sca-status-delivered { background: #ea580c; color: white; }
+.sca-status-in-transit { background: #3b82f6; color: white; }
+.sca-status-processing { background: #8b5cf6; color: white; }
+.sca-status-delayed { background: #ef4444; color: white; }
+.sca-ring { box-shadow: 0 0 0 2px #ea580c; }
+.sca-dot { width: 8px; height: 8px; border-radius: 50%; background: #ea580c; }
+.sca-gradient { background: linear-gradient(135deg, #ea580c, #f97316); }
+.sca-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #ffedd5; color: #ea580c; }
+.sca-divider { border-top: 1px solid #ffedd5; }
+
+/* === Nickel Superalloy Logistics (nss-*) — Slate #475569 === */
+.nss-card-bg { background: linear-gradient(135deg, #f8fafc, #e2e8f0); }
+.nss-badge { background: #475569; color: white; }
+.nss-kpi-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.08); }
+.nss-bar-fill { background: #475569; }
+.nss-bar-track { background: #e2e8f0; }
+.nss-tab-active { border-bottom: 2px solid #475569; color: #475569; }
+.nss-insight-card { border-left: 4px solid #475569; }
+.nss-header-title { color: #475569; }
+.nss-row-hover:hover { background: rgba(71, 85, 105, 0.05); }
+.nss-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.nss-filter-active { background: #475569; color: white; }
+.nss-priority-critical { background: #dc2626; color: white; }
+.nss-priority-high { background: #f59e0b; color: white; }
+.nss-status-delivered { background: #475569; color: white; }
+.nss-status-in-transit { background: #3b82f6; color: white; }
+.nss-status-processing { background: #8b5cf6; color: white; }
+.nss-status-delayed { background: #ef4444; color: white; }
+.nss-ring { box-shadow: 0 0 0 2px #475569; }
+.nss-dot { width: 8px; height: 8px; border-radius: 50%; background: #475569; }
+.nss-gradient { background: linear-gradient(135deg, #475569, #64748b); }
+.nss-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 9999px; font-size: 12px; background: #e2e8f0; color: #475569; }
+.nss-divider { border-top: 1px solid #e2e8f0; }
