@@ -495,3 +495,5 @@ export { default as CarbonCaptureStorageLogisticsView } from './carbon-capture-s
 export { default as GreenMethanolLogisticsView } from './green-methanol-logistics-view'
 export { default as AmmoniaCrackingLogisticsView } from './ammonia-cracking-logistics-view'
 export { default as SpaceLaunchVehicleLogisticsView } from './space-launch-vehicle-logistics-view'
+export { default as BiojetFuelLogisticsView } from './biojet-fuel-logistics-view'
+export { default as RareEarthMineralsLogisticsView } from './rare-earth-minerals-logistics-view'
