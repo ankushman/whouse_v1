@@ -525,3 +525,5 @@ export { default as QuantumComputingLogisticsView } from './quantum-computing-lo
 export { default as CarbonSequestrationLogisticsView } from './carbon-sequestration-logistics-view'
 export { default as GreenCementLogisticsView } from './green-cement-logistics-view'
 export { default as AIChipLogisticsView } from './ai-chip-logistics-view'
+export { default as EVBatterySwappingView } from './ev-battery-swapping-view'
+export { default as OceanEnergyView } from './ocean-energy-view'
