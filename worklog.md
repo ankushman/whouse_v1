@@ -51,6 +51,33 @@ Stage Summary:
 - MODULE FILES: 531 (+2) | NAVITEMS: 543 (+2) | CSS: 60,184 lines (+2)
 - TSC: 0 errors (src/) | GITHUB: pushed (0faab77)
 ---
+Task ID: R350 — Waste Heat Recovery + Floating Offshore Wind
+Agent: Main Agent (Cron Loop)
+Task: R350 — 2 new Indian logistics modules for waste heat recovery and floating offshore wind.
+
+Work Log:
+- Read worklog: R349 complete (commit 0faab77), 531 modules, 543 navItems, 60,184 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 10 candidates tested, all confirmed clean
+  - Selected waste-heat-recovery (whr-*, Thermometer #dc2626) and floating-offshore-wind (fos-*, Gauge #0f766e)
+  - Icons verified in iconMap (Thermometer and Gauge available)
+- Created Waste Heat Recovery (R350a): ~195 lines, whr-* red #dc2626, 14 records
+  - 14 industrial facilities across 10 Indian states (Jharkhand, Gujarat, Chhattisgarh, Karnataka, AP, Odisha, Maharashtra, WB, Rajasthan, TN, UP, Kerala)
+  - 5 industries: Steel Smelting, Steel Rolling, Steel Making, Petrochemical Refining, Cement Clinkering, Cement Kiln, Oil Refining, Power Generation
+  - 573 MW total recovery, &#8377;4,950 Cr investment, &#8377;2,010 Cr annual savings
+- Created Floating Offshore Wind (R350b): ~200 lines, fos-* teal #0f766e, 14 records
+  - 14 floating wind farms across 12 Indian coastal states/UTs (Gujarat, Tamil Nadu, Maharashtra, Kerala, Odisha, Karnataka, AP, WB, Goa, Puducherry, Andaman)
+  - 4 platform types: Semi-Sub, Spar-Buoy, Tension Leg, 10-18 MW turbines
+  - 3,625 MW total capacity, &#8377;27,730 Cr investment, 25-80m water depth range
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (539), page.tsx (1060 viewMap), app-store.ts (545 navItems)
+- CSS: 2 lines appended (60,186 total)
+- Git: commit 0d8f0af pushed
+
+Stage Summary:
+- MODULE FILES: 533 (+2) | NAVITEMS: 545 (+2) | CSS: 60,186 lines (+2)
+- TSC: 0 errors (src/) | GITHUB: pushed (0d8f0af)
+---
 ---
 Task ID: R347 — Green Ammonia Logistics + Carbon Trading Platform
 Agent: Main Agent (Cron Loop)
