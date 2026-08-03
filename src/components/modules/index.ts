@@ -470,3 +470,5 @@ export { default as SupercapacitorEnergyStorageLogisticsView } from './supercapa
 export { default as OffshoreWindInstallationLogisticsView } from './offshore-wind-installation-logistics-view'
 export { default as SuperconductingCableTransmissionLogisticsView } from './superconducting-cable-transmission-logistics-view'
 export { default as DeepWaterDrillingPlatformLogisticsView } from './deep-water-drilling-platform-logistics-view'
+export { default as NuclearPowerPlantConstructionLogisticsView } from './nuclear-power-plant-construction-logistics-view'
+export { default as SatelliteLaunchComplexLogisticsView } from './satellite-launch-complex-logistics-view'

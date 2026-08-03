@@ -480,6 +480,8 @@ import SupercapacitorEnergyStorageLogisticsView from "@/components/modules/super
 import OffshoreWindInstallationLogisticsView from "@/components/modules/offshore-wind-installation-logistics-view"
 import SuperconductingCableTransmissionLogisticsView from "@/components/modules/superconducting-cable-transmission-logistics-view"
 import DeepWaterDrillingPlatformLogisticsView from "@/components/modules/deep-water-drilling-platform-logistics-view"
+import NuclearPowerPlantConstructionLogisticsView from "@/components/modules/nuclear-power-plant-construction-logistics-view"
+import SatelliteLaunchComplexLogisticsView from "@/components/modules/satellite-launch-complex-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -959,6 +961,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "offshore-wind-installation": OffshoreWindInstallationLogisticsView,
   "superconducting-cable-transmission": SuperconductingCableTransmissionLogisticsView,
   "deep-water-drilling-platform": DeepWaterDrillingPlatformLogisticsView,
+  "nuclear-power-plant-construction": NuclearPowerPlantConstructionLogisticsView,
+  "satellite-launch-complex": SatelliteLaunchComplexLogisticsView,
 }
 
 
