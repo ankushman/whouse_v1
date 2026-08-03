@@ -60511,3 +60511,40 @@ html.theme-transition body {
 .arf-status-badge { font-size: 10px; }
 .arf-insight-card { transition: transform 0.15s; }
 .arf-insight-card:hover { transform: translateY(-1px); }
+/* R371a — Silicon Carbide Logistics (sic-*) */
+.sic-tab-btn { transition: all 0.2s; }
+.sic-tab-active { box-shadow: 0 2px 4px rgba(4,120,87,0.3); }
+.sic-kpi-card { transition: transform 0.15s; }
+.sic-kpi-card:hover { transform: translateY(-1px); }
+.sic-chart-card { animation: fadeIn 0.3s ease-out; }
+.sic-bar { transition: width 0.6s ease-out; }
+.sic-search-input { max-width: 280px; }
+.sic-filter-group { gap: 4px; }
+.sic-filter-badge { transition: all 0.15s; }
+.sic-filter-badge:hover { opacity: 0.85; }
+.sic-table-wrap { max-height: 420px; overflow-y: auto; }
+.sic-table-header { background: rgba(4,120,87,0.06); }
+.sic-table-row { transition: background 0.15s; }
+.sic-table-row:hover { background: rgba(4,120,87,0.04); }
+.sic-status-badge { font-size: 10px; }
+.sic-insight-card { transition: transform 0.15s; }
+.sic-insight-card:hover { transform: translateY(-1px); }
+
+/* R371b — Vaccine Cold Chain Logistics (vcc-*) */
+.vcc-tab-btn { transition: all 0.2s; }
+.vcc-tab-active { box-shadow: 0 2px 4px rgba(159,18,57,0.3); }
+.vcc-kpi-card { transition: transform 0.15s; }
+.vcc-kpi-card:hover { transform: translateY(-1px); }
+.vcc-chart-card { animation: fadeIn 0.3s ease-out; }
+.vcc-bar { transition: width 0.6s ease-out; }
+.vcc-search-input { max-width: 280px; }
+.vcc-filter-group { gap: 4px; }
+.vcc-filter-badge { transition: all 0.15s; }
+.vcc-filter-badge:hover { opacity: 0.85; }
+.vcc-table-wrap { max-height: 420px; overflow-y: auto; }
+.vcc-table-header { background: rgba(159,18,57,0.06); }
+.vcc-table-row { transition: background 0.15s; }
+.vcc-table-row:hover { background: rgba(159,18,57,0.04); }
+.vcc-status-badge { font-size: 10px; }
+.vcc-insight-card { transition: transform 0.15s; }
+.vcc-insight-card:hover { transform: translateY(-1px); }

@@ -576,3 +576,5 @@ export { default as TitaniumAlloyLogisticsView } from './titanium-alloy-logistic
 export { default as GreenAmmoniaShippingLogisticsView } from './green-ammonia-shipping-logistics-view'
 export { default as FuelCellTruckLogisticsView } from './fuel-cell-truck-logistics-view'
 export { default as AramidFiberLogisticsView } from './aramid-fiber-logistics-view'
+export { default as SiliconCarbideLogisticsView } from './silicon-carbide-logistics-view'
+export { default as VaccineColdChainLogisticsView } from './vaccine-cold-chain-logistics-view'
