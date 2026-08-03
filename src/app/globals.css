@@ -60051,3 +60051,19 @@ html.theme-transition body {
 .dsp-tab:hover { background: rgba(22, 78, 99, 0.08); }
 .dsp-dashboard, .dsp-registry, .dsp-analytics, .dsp-insights { animation: fadeIn 0.3s ease; }
 .dsp-table-wrap { box-shadow: 0 1px 3px rgba(22, 78, 99, 0.1); }
+
+/* === Solar Thermal CSP Logistics (csp-*) === */
+.csp-root { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); }
+.csp-tabs { border-bottom: 2px solid #9a3412; }
+.csp-tab { transition: all 0.2s; }
+.csp-tab:hover { background: rgba(154, 52, 18, 0.08); }
+.csp-dashboard, .csp-registry, .csp-analytics, .csp-insights { animation: fadeIn 0.3s ease; }
+.csp-table-wrap { box-shadow: 0 1px 3px rgba(154, 52, 18, 0.1); }
+
+/* === Biomass Power Plant Logistics (bmp-*) === */
+.bmp-root { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+.bmp-tabs { border-bottom: 2px solid #14532d; }
+.bmp-tab { transition: all 0.2s; }
+.bmp-tab:hover { background: rgba(20, 83, 45, 0.08); }
+.bmp-dashboard, .bmp-registry, .bmp-analytics, .bmp-insights { animation: fadeIn 0.3s ease; }
+.bmp-table-wrap { box-shadow: 0 1px 3px rgba(20, 83, 45, 0.1); }

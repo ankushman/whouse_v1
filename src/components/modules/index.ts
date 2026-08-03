@@ -460,3 +460,5 @@ export { default as DroneDeliveryLogisticsView } from './drone-delivery-logistic
 export { default as CableCarRopewayLogisticsView } from './cable-car-ropeway-logistics-view'
 export { default as BridgeConstructionLogisticsView } from './bridge-construction-logistics-view'
 export { default as DesalinationPlantLogisticsView } from './desalination-plant-logistics-view'
+export { default as SolarThermalCspLogisticsView } from './solar-thermal-csp-logistics-view'
+export { default as BiomassPowerPlantLogisticsView } from './biomass-power-plant-logistics-view'

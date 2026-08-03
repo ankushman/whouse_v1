@@ -470,6 +470,8 @@ import DroneDeliveryLogisticsView from "@/components/modules/drone-delivery-logi
 import CableCarRopewayLogisticsView from "@/components/modules/cable-car-ropeway-logistics-view"
 import BridgeConstructionLogisticsView from "@/components/modules/bridge-construction-logistics-view"
 import DesalinationPlantLogisticsView from "@/components/modules/desalination-plant-logistics-view"
+import SolarThermalCspLogisticsView from "@/components/modules/solar-thermal-csp-logistics-view"
+import BiomassPowerPlantLogisticsView from "@/components/modules/biomass-power-plant-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -939,6 +941,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "cable-car-ropeway": CableCarRopewayLogisticsView,
   "bridge-construction": BridgeConstructionLogisticsView,
   "desalination-plant": DesalinationPlantLogisticsView,
+  "solar-thermal-csp": SolarThermalCspLogisticsView,
+  "biomass-power-plant": BiomassPowerPlantLogisticsView,
 }
 
 
