@@ -61817,3 +61817,46 @@ html.theme-transition body {
 .copper-powder-logistics .divide-emerald-200 > :not([hidden]) ~ :not([hidden]) { border-color: #a7f3d0; }
 .copper-powder-logistics .accent-emerald-600 { accent-color: #059669; }
 .copper-powder-logistics .scrollbar-emerald-600::-webkit-scrollbar-thumb { background-color: #059669; }
+/* R401a - Iron Powder Logistics (ipw-* orange #ea580c) */
+.ipw-dashboard-card { border-left: 3px solid #ea580c; }
+.ipw-dashboard-card:hover { box-shadow: 0 0 12px rgba(234,88,12,0.15); transform: translateY(-1px); }
+.ipw-registry-card { border-left: 3px solid #fb923c; }
+.ipw-registry-card:hover { box-shadow: 0 0 12px rgba(234,88,12,0.12); }
+.ipw-analytics-card { border-left: 3px solid #fdba74; }
+.ipw-analytics-card:hover { box-shadow: 0 0 12px rgba(234,88,12,0.1); }
+.ipw-insights-card { border-left: 3px solid #fed7aa; }
+.ipw-insights-card:hover { box-shadow: 0 0 12px rgba(234,88,12,0.08); }
+.ipw-badge { background-color: rgba(234,88,12,0.1); color: #ea580c; border: 1px solid rgba(234,88,12,0.2); }
+.ipw-badge:hover { background-color: rgba(234,88,12,0.2); }
+.ipw-status-delivered { color: #16a34a; font-weight: 600; }
+.ipw-status-delayed { color: #dc2626; font-weight: 600; animation: ipw-pulse 2s infinite; }
+.ipw-priority-critical { color: #ea580c; font-weight: 700; }
+.ipw-priority-high { color: #f59e0b; font-weight: 600; }
+.ipw-table-header { background: linear-gradient(135deg, #ea580c, #fb923c); color: white; }
+.ipw-table-row:hover { background-color: rgba(234,88,12,0.04); }
+.ipw-tab-active { border-bottom: 2px solid #ea580c; color: #ea580c; font-weight: 600; }
+.ipw-tab-inactive { color: #78716c; }
+.ipw-tab-inactive:hover { color: #ea580c; background-color: rgba(234,88,12,0.04); }
+@keyframes ipw-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* R401b - Manganese Powder Logistics (mnp-* amber #d97706) */
+.mnp-dashboard-card { border-left: 3px solid #d97706; }
+.mnp-dashboard-card:hover { box-shadow: 0 0 12px rgba(217,119,6,0.15); transform: translateY(-1px); }
+.mnp-registry-card { border-left: 3px solid #fbbf24; }
+.mnp-registry-card:hover { box-shadow: 0 0 12px rgba(217,119,6,0.12); }
+.mnp-analytics-card { border-left: 3px solid #fcd34d; }
+.mnp-analytics-card:hover { box-shadow: 0 0 12px rgba(217,119,6,0.1); }
+.mnp-insights-card { border-left: 3px solid #fde68a; }
+.mnp-insights-card:hover { box-shadow: 0 0 12px rgba(217,119,6,0.08); }
+.mnp-badge { background-color: rgba(217,119,6,0.1); color: #d97706; border: 1px solid rgba(217,119,6,0.2); }
+.mnp-badge:hover { background-color: rgba(217,119,6,0.2); }
+.mnp-status-delivered { color: #16a34a; font-weight: 600; }
+.mnp-status-delayed { color: #dc2626; font-weight: 600; animation: mnp-pulse 2s infinite; }
+.mnp-priority-critical { color: #d97706; font-weight: 700; }
+.mnp-priority-high { color: #f59e0b; font-weight: 600; }
+.mnp-table-header { background: linear-gradient(135deg, #d97706, #fbbf24); color: white; }
+.mnp-table-row:hover { background-color: rgba(217,119,6,0.04); }
+.mnp-tab-active { border-bottom: 2px solid #d97706; color: #d97706; font-weight: 600; }
+.mnp-tab-inactive { color: #78716c; }
+.mnp-tab-inactive:hover { color: #d97706; background-color: rgba(217,119,6,0.04); }
+@keyframes mnp-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
