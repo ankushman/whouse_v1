@@ -1066,6 +1066,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "nano-material-logistics": NanoMaterialLogisticsView,
   "bio-plastic-logistics": BioPlasticLogisticsView,
   "vertical-farm-logistics": VerticalFarmLogisticsView,
+  "carbon-fiber-logistics": CarbonFiberLogisticsView,
+  "phase-change-material-logistics": PhaseChangeMaterialLogisticsView,
 }
 
 
@@ -1220,3 +1222,5 @@ import SmartCityResilienceHubLogisticsView from "@/components/modules/smart-city
 import UrbanCanopyMicroclimateLogisticsView from "@/components/modules/urban-canopy-microclimate-logistics-view"
 import SmartGridOSLogisticsView from "@/components/modules/smart-grid-os-logistics-view"
 import SludgeToEnergyLogisticsView from "@/components/modules/sludge-to-energy-logistics-view"
+import CarbonFiberLogisticsView from "@/components/modules/carbon-fiber-logistics-view"
+import PhaseChangeMaterialLogisticsView from "@/components/modules/phase-change-material-logistics-view"
