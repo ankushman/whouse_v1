@@ -11429,3 +11429,53 @@ Stage Summary:
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
+---
+Task ID: R383 — Vanadium Alloy Logistics + Silicon Nitride Logistics
+Agent: Main Agent (Cron Loop)
+Task: R383 — 2 new Indian logistics modules for strategic vanadium alloys and silicon nitride ceramics.
+
+Work Log:
+- Read worklog: R382 complete (commit 47f7083), 605 modules, 609 navItems, ~61,030 CSS
+- TSC pre-validation: 0 errors in src/ (only pre-existing errors in skills/mini-services/scripts)
+- Dev server: OOM expected with 600+ modules — TSC-only QA approach
+- Duplicate theme search: 16 candidates tested, all confirmed clean
+  - Selected vanadium-alloy-logistics (van-*, Gauge #dc2626) and silicon-nitride-logistics (si3-*, Hexagon #059669)
+  - Icons verified in iconMap (Gauge and Hexagon available)
+- Created Vanadium Alloy Logistics (R383a): ~260 lines, van-* red #dc2626, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, IGCAR, SAIL BSP, JSW Steel, GFCL, RSM, IIT Madras, NALCO, Oil India, Adani Defence, TASL
+  - 14 alloy grades: Ti-6Al-4V, V-4Cr-4Ti, FeV-50, Ti-10V-2Fe-3Al, V-5Cr-5Ti, FeV-80, FeV-50Nb, V2O5, Vanadium Slag, AMZ-4 BMG, FeV-50 Standard, V-5Cr-5Ti Clad, Ti-6242S, Ti-5553
+  - Applications: Tejas airframe forging, SST-2 fusion first wall, HSLA rebar Fe550D, Airbus A320neo landing gear, PFBR blanket, R350HT rail steel, X100 pipeline, V2O5 sulphuric acid catalyst, VRFB energy storage, EV motor BMG sleeve, automotive spring steel, subsea flowline, AMCA engine blade, GSAT satellite bracket
+  - &#8377;2,964 Cr total investment, avg 720MPa yield strength across structural alloys
+- Created Silicon Nitride Logistics (R383b): ~215 lines, si3-* emerald #059669, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: DRDO DMRL, MIDHANI, Saint-Gobain, Bharat Forge, IGCAR, BEL, Hindalco Novelis, Reliance SBR, RSM, IIT Madras, NALCO, GFCL, Tata Elxsi, TASL
+  - 14 product types: HPSN, RBSN, SRBSN, GPSN, SSN, Si3N4-AlN Substrate, Si3N4 Foam, Porous Si3N4 Filter, Si3N4 Grinding Media, SiAlON, Si3N4-SiC Refractory, Si3N4 Seal Ring, Si3N4 Nozzle, Si3N4 Radome
+  - Applications: BHEL turbine bearing roller, Cummins glow plug, Sandvik cutting insert, SKF EV bearing ball, BHAVINI nuclear tongs, Samsung LED substrate, Hindalco smelter insulation, RIL molten metal filter, UltraTech grinding media, BHEL thermocouple sheath, Hindalco kiln furniture, ONGC subsea seal, Tata Elxsi wire bonder, BDL Astra radome
+  - &#8377;2,241 Cr total investment, avg 5.4 MPa&#8730;m fracture toughness
+- Three-file registration: index.ts (605), page.tsx (1127 viewMap entries), app-store.ts (611 navItems)
+- CSS appended: 84 new rules (~61,114 total)
+- TSC post-validation: 0 errors in src/ on first pass
+- Git commit: e9b4d2d, pushed to main
+
+Stage Summary:
+- Project now: 607 modules, 611 navItems, ~61,114 CSS lines, 1127 viewMap entries, 0 TSC errors
+- Vanadium alloy: Ti-6Al-4V aerospace, V-4Cr-4Ti fusion, FeV microalloying (rebar/rail/pipeline), VRFB energy storage, V2O5 catalyst, BMG for EV
+- Silicon nitride: turbine bearings, cutting tools (SRBSN for Inconel), nuclear fuel handling, LED substrates, missile radomes, EV motor bearings, semiconductor nozzles
+- Delayed: VAN-B2404 (10d, beta forging rework), VAN-B2412 (12d, monsoon), SI3-B2404 (10d, GPSN furnace rework), SI3-B2412 (12d, monsoon)
+- Next candidates (pre-validated): palladium-catalyst, silver-paste, lithium-refining, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush, silicon-metal, alumina-ceramic, cobalt-alloy, manganese-alloy, chromium-alloy
+
+**Project Current State:**
+- 607 module view files, 611 navItems, ~61,114 CSS lines, 1127 viewMap entries
+- TSC clean (0 errors in src/)
+- R383 complete, stable state
+- Dev server OOM with 600+ modules — continue TSC-only QA approach
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 607+ modules, dev server OOM risk — continue TSC-only QA approach
+- NavItem label overwrite risk when inserting new entries — verify adjacent labels
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Object.entries(map) arithmetic requires explicit [string, number][] type assertion
+- PageHeader must import from @/components/shared (not @/components/page-header)
