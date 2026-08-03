@@ -488,3 +488,5 @@ export { default as GeothermalEnergyLogisticsView } from './geothermal-energy-lo
 export { default as AutonomousVehicleLogisticsView } from './autonomous-vehicle-logistics-view'
 export { default as PerovskiteSolarCellManufacturingLogisticsView } from './perovskite-solar-cell-manufacturing-logistics-view'
 export { default as HydrogenFuelCellStackLogisticsView } from './hydrogen-fuel-cell-stack-logistics-view'
+export { default as VanadiumRedoxFlowBatteryLogisticsView } from './vanadium-redox-flow-battery-logistics-view'
+export { default as SolidOxideElectrolyzerLogisticsView } from './solid-oxide-electrolyzer-logistics-view'

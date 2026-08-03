@@ -497,6 +497,8 @@ import GeothermalEnergyLogisticsView from "@/components/modules/geothermal-energ
 import AutonomousVehicleLogisticsView from "@/components/modules/autonomous-vehicle-logistics-view"
 import PerovskiteSolarCellManufacturingLogisticsView from "@/components/modules/perovskite-solar-cell-manufacturing-logistics-view"
 import HydrogenFuelCellStackLogisticsView from "@/components/modules/hydrogen-fuel-cell-stack-logistics-view"
+import VanadiumRedoxFlowBatteryLogisticsView from "@/components/modules/vanadium-redox-flow-battery-logistics-view"
+import SolidOxideElectrolyzerLogisticsView from "@/components/modules/solid-oxide-electrolyzer-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -993,6 +995,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "autonomous-vehicle": AutonomousVehicleLogisticsView,
   "perovskite-solar-cell-manufacturing": PerovskiteSolarCellManufacturingLogisticsView,
   "hydrogen-fuel-cell-stack": HydrogenFuelCellStackLogisticsView,
+  "vanadium-redox-flow-battery": VanadiumRedoxFlowBatteryLogisticsView,
+  "solid-oxide-electrolyzer": SolidOxideElectrolyzerLogisticsView,
 }
 
 
