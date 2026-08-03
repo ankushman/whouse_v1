@@ -1053,6 +1053,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "carbon-trading-platform": CarbonTradingPlatformView,
   "railway-electrification": RailwayElectrificationView,
   "satellite-iot-logistics": SatelliteIotLogisticsView,
+  "plasma-arc-recycling": PlasmaArcRecyclingView,
+  "green-roof-infrastructure": GreenRoofInfrastructureView,
 }
 
 
@@ -1190,6 +1192,8 @@ import GreenAmmoniaLogisticsView from "@/components/modules/green-ammonia-logist
 import CarbonTradingPlatformView from "@/components/modules/carbon-trading-platform-view"
 import RailwayElectrificationView from "@/components/modules/railway-electrification-view"
 import SatelliteIotLogisticsView from "@/components/modules/satellite-iot-logistics-view"
+import PlasmaArcRecyclingView from "@/components/modules/plasma-arc-recycling-view"
+import GreenRoofInfrastructureView from "@/components/modules/green-roof-infrastructure-view"
 import SmartCityResilienceHubLogisticsView from "@/components/modules/smart-city-resilience-hub-logistics-view"
 import UrbanCanopyMicroclimateLogisticsView from "@/components/modules/urban-canopy-microclimate-logistics-view"
 import SmartGridOSLogisticsView from "@/components/modules/smart-grid-os-logistics-view"

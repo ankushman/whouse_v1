@@ -533,3 +533,5 @@ export { default as GreenAmmoniaLogisticsView } from './green-ammonia-logistics-
 export { default as CarbonTradingPlatformView } from './carbon-trading-platform-view'
 export { default as RailwayElectrificationView } from './railway-electrification-view'
 export { default as SatelliteIotLogisticsView } from './satellite-iot-logistics-view'
+export { default as PlasmaArcRecyclingView } from './plasma-arc-recycling-view'
+export { default as GreenRoofInfrastructureView } from './green-roof-infrastructure-view'
