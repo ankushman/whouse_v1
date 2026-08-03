@@ -1,4 +1,27 @@
 ---
+Task ID: R328 — CCS Upgrade + Green Methanol Logistics
+Agent: Main Agent (Cron Loop)
+Task: R328 — Upgraded carbon capture storage module + new green methanol logistics. CCS (NTPC Tata Reliance ACC NALCO GAIL IFFCO Adani JSW Thermax IIT-B BARC ONGC — Post-Combustion Amine Pre-Combustion Selexol MDEA Oxy-Fuel Chemical Looping DAC Solid Sorbent DAC Liquid Solvent Post-Combustion Membrane, Deep Saline Aquifer Depleted Gas Reservoir Enhanced Oil Recovery Basalt Mineralization Enhanced Coal Bed Methane, 200-6000TPD 80-98% capture 4500-22000 per tonne, Coal Power Steel Cement Refinery LNG Fertilizer Aluminum Data Center Direct Air). Green Methanol (Reliance NTPC Adani Thermax IIT-D BARC NHPC Renuka Sula KIRAN BASF Ola Maersk Evergreen Hapag-Lloyd SCI — Green H2+CO2 Biomass Gasification e-Methanol Electrolysis Biogas Reforming, Renewable H2 Biomass CO2 Solar H2 Flue CO2 Wind H2 DAC CO2 Nuclear H2 MSW Biogas Bagasse Rice Husk Spent Wash, 80-800TPD 99-99.9% purity 0.01-0.5 gCO2/MJ, Marine Fuel Shipping Bunker Chemical Feedstock Transport Fuel Power Generation Cooking Fuel).
+
+Work Log:
+- Read worklog: R327 complete (commit 3a852bd), 488 modules, 500 navItems, 60,159 CSS
+- TSC pre-validation: 0 errors in core files
+- Duplicate check: carbon-capture-storage FOUND existing (at line 456 app-store) — OVERWRITE upgrade
+- green-methanol confirmed unique
+- Icons: Factory (CCS upgrade), LeafyGreen (green methanol) verified
+- Created upgraded Carbon Capture Storage Logistics (R328a): ~180 lines, ccs-* slate #475569, 14 records
+- BUG FIX: Removed duplicate carbon-capture-storage entries from index.ts (old line 450), page.tsx (old import line 459, old viewMap line 961), app-store.ts (old navItem line 456)
+- Created Green Methanol Logistics (R328b): ~185 lines, gmh-* green #15803d, 14 records
+- Used correct pattern: FilterGroup.label, Record&lt;string, string[]&gt;, JSX &amp; entities
+- Registered clean: index.ts (488), page.tsx, app-store.ts (501 navItems)
+- CSS: 2 lines appended (60,161 total)
+- TSC FINAL: 0 errors | Git: commit 19f8585 pushed
+
+Stage Summary:
+- MODULE FILES: 489 (+1 green-methanol, CCS was upgrade net 0) | NAVITEMS: 501 (+1) | CSS: 60,161 lines (+2)
+- TSC: 0 errors (modules) | GITHUB: pushed (19f8585)
+- BUG FIX: Resolved duplicate carbon-capture-storage key across all 3 registration files
+---
 Task ID: R327 — Nuclear SMR + Lithium Extraction Logistics
 Agent: Main Agent (Cron Loop)
 Task: R327 — 2 new Indian logistics modules for nuclear SMR (BARC IGCAR NPCIL BHEL L&amp;T DRDO ISRO Tata Reliance MDL Thermax BEL — PWR Integral HTGR MSR FNR BWR, 5-300MW 28-85% efficiency, Grid/Industrial H2/Steel/Mining/Data Center/Marine/District Heating/Space, 70000Cr NPCIL SMR 2047) and lithium extraction (GSFC RSMML AMNL ONGC DRDO NIOT Lohum CSMCRI — DLE Adsorption Ion Exchange Solvent Extraction Hard Rock Clay Leaching Geothermal Seawater Recycling, 20-500TPD 95-99.9% purity, Battery/Technical Grade, EV and Storage, 18000Cr Critical Mineral Mission)
