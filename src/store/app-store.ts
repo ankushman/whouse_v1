@@ -453,7 +453,6 @@ export const navItems: NavItem[] = [
   { id: 'semiconductor-fab', label: 'Semiconductor Fab', icon: 'CircuitBoard', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'offshore-wind', label: 'Offshore Wind', icon: 'Ship', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'lithium-battery-cell', label: 'Li-Ion Battery Cell', icon: 'Battery', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
-  { id: 'carbon-capture-storage', label: 'Carbon Capture', icon: 'Flame', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'nuclear-power-plant', label: 'Nuclear Power Plant', icon: 'Atom', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'electric-bus-fleet', label: 'Electric Bus Fleet', icon: 'Bus', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'solar-farm-construction', label: 'Solar Farm Construction', icon: 'Sun', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
@@ -498,6 +497,8 @@ export const navItems: NavItem[] = [
   { id: 'solid-oxide-electrolyzer', label: 'SOEC Electrolyzer', icon: 'Hammer', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'nuclear-smr', label: 'Nuclear SMR', icon: 'Atom', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'lithium-extraction', label: 'Lithium Extraction', icon: 'Recycle', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'carbon-capture-storage', label: 'Carbon Capture Storage', icon: 'Factory', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
+  { id: 'green-methanol', label: 'Green Methanol', icon: 'LeafyGreen', group: 'operations', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager', 'logistics', 'supervisor'] },
   { id: 'reports', label: 'Reports', icon: 'FileBarChart', group: 'system', roles: ['super_admin', 'executive', 'regional_manager', 'warehouse_manager'] },
   { id: 'settings', label: 'Settings', icon: 'Settings', group: 'system', roles: ['super_admin', 'executive'] },
 ]

@@ -456,7 +456,6 @@ import GreenHydrogenEnergyLogisticsView from "@/components/modules/green-hydroge
 import SemiconductorFabLogisticsView from "@/components/modules/semiconductor-fab-logistics-view"
 import OffshoreWindLogisticsView from "@/components/modules/offshore-wind-logistics-view"
 import LithiumBatteryCellLogisticsView from "@/components/modules/lithium-battery-cell-logistics-view"
-import CarbonCaptureStorageLogisticsView from "@/components/modules/carbon-capture-storage-logistics-view"
 import NuclearPowerPlantLogisticsView from "@/components/modules/nuclear-power-plant-logistics-view"
 import ElectricBusFleetLogisticsView from "@/components/modules/electric-bus-fleet-logistics-view"
 import SolarFarmConstructionLogisticsView from "@/components/modules/solar-farm-construction-logistics-view"
@@ -501,6 +500,8 @@ import VanadiumRedoxFlowBatteryLogisticsView from "@/components/modules/vanadium
 import SolidOxideElectrolyzerLogisticsView from "@/components/modules/solid-oxide-electrolyzer-logistics-view"
 import NuclearSmrLogisticsView from "@/components/modules/nuclear-smr-logistics-view"
 import LithiumExtractionLogisticsView from "@/components/modules/lithium-extraction-logistics-view"
+import CarbonCaptureStorageLogisticsView from "@/components/modules/carbon-capture-storage-logistics-view"
+import GreenMethanolLogisticsView from "@/components/modules/green-methanol-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -956,7 +957,6 @@ const viewMap: Record<string, React.ComponentType> = {
   "semiconductor-fab": SemiconductorFabLogisticsView,
   "offshore-wind": OffshoreWindLogisticsView,
   "lithium-battery-cell": LithiumBatteryCellLogisticsView,
-  "carbon-capture-storage": CarbonCaptureStorageLogisticsView,
   "nuclear-power-plant": NuclearPowerPlantLogisticsView,
   "electric-bus-fleet": ElectricBusFleetLogisticsView,
   "solar-farm-construction": SolarFarmConstructionLogisticsView,
@@ -1001,6 +1001,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "solid-oxide-electrolyzer": SolidOxideElectrolyzerLogisticsView,
   "nuclear-smr": NuclearSmrLogisticsView,
   "lithium-extraction": LithiumExtractionLogisticsView,
+  "carbon-capture-storage": CarbonCaptureStorageLogisticsView,
+  "green-methanol": GreenMethanolLogisticsView,
 }
 
 

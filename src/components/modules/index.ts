@@ -447,7 +447,6 @@ export { default as GreenHydrogenEnergyLogisticsView } from './green-hydrogen-en
 export { default as SemiconductorFabLogisticsView } from './semiconductor-fab-logistics-view'
 export { default as OffshoreWindLogisticsView } from './offshore-wind-logistics-view'
 export { default as LithiumBatteryCellLogisticsView } from './lithium-battery-cell-logistics-view'
-export { default as CarbonCaptureStorageLogisticsView } from './carbon-capture-storage-logistics-view'
 export { default as NuclearPowerPlantLogisticsView } from './nuclear-power-plant-logistics-view'
 export { default as ElectricBusFleetLogisticsView } from './electric-bus-fleet-logistics-view'
 export { default as SolarFarmConstructionLogisticsView } from './solar-farm-construction-logistics-view'
@@ -492,3 +491,5 @@ export { default as VanadiumRedoxFlowBatteryLogisticsView } from './vanadium-red
 export { default as SolidOxideElectrolyzerLogisticsView } from './solid-oxide-electrolyzer-logistics-view'
 export { default as NuclearSmrLogisticsView } from './nuclear-smr-logistics-view'
 export { default as LithiumExtractionLogisticsView } from './lithium-extraction-logistics-view'
+export { default as CarbonCaptureStorageLogisticsView } from './carbon-capture-storage-logistics-view'
+export { default as GreenMethanolLogisticsView } from './green-methanol-logistics-view'

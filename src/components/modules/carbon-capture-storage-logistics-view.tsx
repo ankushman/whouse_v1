@@ -1,157 +1,215 @@
-"use client";
-import { useState } from "react";
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
-import { PageHeader } from "@/components/shared/page-header";
-import { SearchFilterToolbar } from "@/components/shared/search-filter-toolbar";
-import { ModuleBreadcrumb } from "@/components/shared/module-breadcrumb";
+'use client';
 
-const COLORS = ["#1c1917", "#44403c", "#78716c", "#a8a29e", "#0c0a09", "#292524", "#3f3f46", "#d6d3d1"];
-const OPERATORS = ["NTPC Vindhyachal CCUS Plant", "Tata Steel Jamshedpur CCUS", "Dalmia Cement CCUS Tamil Nadu", "Reliance Jamnagar Carbon Capture", "Adani Mundra CCU Green Ammonia", "JSW Vijayanagar Steel CCUS", "UltraTech Cement CCUS Gujarat", "IOCL Panipat CO2 Capture Refinery"];
-const CATEGORIES = ["Post-Combustion Amine Scrubber Unit", "Pre-Combustion Syngas Shift Reactor", "Oxy-Fuel Combustion ASU Oxygen", "Membrane CO2 Separation Module", "Calcium Looping Carbonation Reactor", "Direct Air Capture DAC Fan Filter", "CO2 Compression 150 Bar Unit", "CO2 Transport Pipeline API 5L"];
-const SHIPMENT_STATUSES = ["Capture Module Factory Manufactured", "Heavy Transport Specialized Trailer", "Site Receiving Foundation Ready", "Installation Commissioning Start", "Capture Rate Qualification Test", "Carbon Stored Pipeline Injected"];
-const ZONES = ["North India Delhi NCR Panipat", "West India Mumbai Gujarat Jamnagar", "East India Jamshedpur Dhanbad", "South India Chennai Tamil Nadu", "Central India MP Chhattisgarh Vindy", "Rajasthan Jaisalmer Barmer Basin", "NE India Assam Coal Belt"];
-const MODES = ["Specialized Heavy Trailer 80T", "ODC Open Top Container 40T", "Rail Wagon Special Consignment", "Barge Coastal Shipping", "Self-Propelled Modular SPMT 100T", "Flatbed Trailer 30T"];
-const TABS = ["Dashboard", "Capture Equipment Registry", "CCUS Analytics", "Insights"];
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared/page-header';
+import { SearchFilterToolbar } from '@/components/shared/search-filter-toolbar';
+import { ModuleBreadcrumb } from '@/components/shared/module-breadcrumb';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, CartesianGrid, Legend } from 'recharts';
 
-const SC: Record<string, string> = { green: "bg-green-100 text-green-700", amber: "bg-amber-100 text-amber-700", red: "bg-red-100 text-red-700", blue: "bg-blue-100 text-blue-700", slate: "bg-slate-100 text-slate-600", orange: "bg-orange-100 text-orange-700" };
-const statusColor: Record<string, string> = { "Capture Module Factory Manufactured": "slate", "Heavy Transport Specialized Trailer": "blue", "Site Receiving Foundation Ready": "amber", "Installation Commissioning Start": "orange", "Capture Rate Qualification Test": "red", "Carbon Stored Pipeline Injected": "green" };
-
-function ri(min: number, max: number, value: number) { return Math.min(max, Math.max(min, value)); }
-
-const MO = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const monthlyCapture = Array.from({ length: 12 }, (_, i) => ({ m: MO[i], postComb: ri(50, 200, 120 + Math.sin(i * 0.5) * 40), preComb: ri(20, 80, 45 + Math.cos(i * 0.6) * 15), oxyFuel: ri(10, 50, 25 + Math.sin(i * 0.7) * 10), dac: ri(1, 10, 4 + Math.cos(i * 0.8) * 2) }));
-const techDist = [{ n: "Post-Combustion", v: 40 }, { n: "Pre-Combustion", v: 20 }, { n: "Oxy-Fuel", v: 15 }, { n: "Membrane", v: 10 }, { n: "Calcium Looping", v: 8 }, { n: "Direct Air Capture", v: 7 }];
-const storageTarget = Array.from({ length: 12 }, (_, i) => ({ m: MO[i], actual: +(ri(1.5, 4.0, 2.8 + Math.sin(i * 0.4) * 0.5)).toFixed(1), target: 3.5 }));
-const opPerf = OPERATORS.map(o => ({ n: o.split(" ").slice(0, 2).join(" "), v: +ri(65, 98, 80 + Math.random() * 10).toFixed(0) }));
-
-interface CCUSRecord { id: string; projectNo: string; operator: string; zone: string; category: string; description: string; captureRate: number; weight: number; manufacturer: string; origin: string; plantSite: string; storageType: string; mode: string; shipDate: string; installDate: string; transitDays: number; contractValue: number; co2Source: string; status: string; remarks: string; }
-
-const records: CCUSRecord[] = [
-  { id: "CCS-0001", projectNo: "NTPC/VIN/2025/07-PCS-A1", operator: "NTPC Vindhyachal CCUS Plant", zone: "Central India MP Chhattisgarh Vindy", category: "Post-Combustion Amine Scrubber Unit", description: "Post-Combustion MEA Amine Scrubber 500 kt CO2/year Captured", captureRate: 500, weight: 35000, manufacturer: "Fluor Corporation USA", origin: "Fluor Greenville SC Factory", plantSite: "NTPC Vindhyachal STPS", storageType: "Deep Saline Aquifer", mode: "Specialized Heavy Trailer 80T", shipDate: "2025-07-08", installDate: "2025-07-18", transitDays: 10, contractValue: 450000000, co2Source: "Coal Power Plant Flue Gas", status: "Installation Commissioning Start", remarks: "MEA scrubber 500 kt/yr NTPC Vindhyachal installation commissioning" },
-  { id: "CCS-0002", projectNo: "TST/JSD/2025/07-PCS-B2", operator: "Tata Steel Jamshedpur CCUS", zone: "East India Jamshedpur Dhanbad", category: "Pre-Combustion Syngas Shift Reactor", description: "Pre-Combustion WGS Reactor 200 kt CO2/year Blast Furnace Gas", captureRate: 200, weight: 22000, manufacturer: "Linde Engineering Germany", origin: "Linde Engineering Pullach", plantSite: "Tata Steel Jamshedpur Works BF", storageType: "Enhanced Oil Recovery", mode: "ODC Open Top Container 40T", shipDate: "2025-07-09", installDate: "2025-07-16", transitDays: 7, contractValue: 320000000, co2Source: "Blast Furnace Syngas", status: "Heavy Transport Specialized Trailer", remarks: "WGS pre-combustion 200 kt Tata Steel BF transport specialized" },
-  { id: "CCS-0003", projectNo: "DCM/TN/2025/07-CL-C3", operator: "Dalmia Cement CCUS Tamil Nadu", zone: "South India Chennai Tamil Nadu", category: "Calcium Looping Carbonation Reactor", description: "Calcium Looping CFB Carbonator 100 kt CO2/year Cement Kiln", captureRate: 100, weight: 18000, manufacturer: "LafargeHolcim Switzerland", origin: "LafargeHolcim Research Lyon", plantSite: "Dalmia Cements Ariyalur Plant", storageType: "Mineral Carbonation", mode: "Barge Coastal Shipping", shipDate: "2025-07-07", installDate: "2025-07-15", transitDays: 8, contractValue: 180000000, co2Source: "Cement Kiln Flue Gas", status: "Capture Rate Qualification Test", remarks: "Calcium looping 100 kt Dalmia Ariyalur capture rate test" },
-  { id: "CCS-0004", projectNo: "REL/JMN/2025/07-MEM-D4", operator: "Reliance Jamnagar Carbon Capture", zone: "West India Mumbai Gujarat Jamnagar", category: "Membrane CO2 Separation Module", description: "Polymeric Membrane CO2 Separator 150 kt/year Refinery FCC", captureRate: 150, weight: 8000, manufacturer: "Air Liquide France Paris", origin: "Air Liquide Paris Campus", plantSite: "Reliance Jamnagar Refinery FCC", storageType: "Green Ammonia Urea", mode: "Air Cargo 747F Charter", shipDate: "2025-07-10", installDate: "2025-07-11", transitDays: 1, contractValue: 250000000, co2Source: "Refinery FCC Off-Gas", status: "Carbon Stored Pipeline Injected", remarks: "Membrane 150 kt Reliance Jamnagar FCC carbon stored injected" },
-  { id: "CCS-0005", projectNo: "ADN/MUN/2025/07-PCS-E5", operator: "Adani Mundra CCU Green Ammonia", zone: "West India Mumbai Gujarat Jamnagar", category: "CO2 Compression 150 Bar Unit", description: "Multi-Stage CO2 Compressor 150 Bar 300 kt/year for Urea Synthesis", captureRate: 300, weight: 25000, manufacturer: "Siemens Energy Germany", origin: "Siemens Energy Berlin", plantSite: "Adani Mundra Port Fertilizer", storageType: "Green Ammonia Urea", mode: "Specialized Heavy Trailer 80T", shipDate: "2025-07-06", installDate: "2025-07-17", transitDays: 11, contractValue: 380000000, co2Source: "Ammonia Plant Process Gas", status: "Site Receiving Foundation Ready", remarks: "150 bar compressor 300 kt Adani Mundra foundation ready receiving" },
-  { id: "CCS-0006", projectNo: "JSW/VJN/2025/07-PCS-F6", operator: "JSW Vijayanagar Steel CCUS", zone: "South India Chennai Tamil Nadu", category: "Post-Combustion Amine Scrubber Unit", description: "AMP Amine Scrubber 250 kt CO2/year Steel BF Sinter Plant", captureRate: 250, weight: 28000, manufacturer: "Mitsubishi Heavy Industries Japan", origin: "MHI Hiroshima Machinery", plantSite: "JSW Vijayanagar Works BF", storageType: "Deep Saline Aquifer", mode: "Self-Propelled Modular SPMT 100T", shipDate: "2025-07-08", installDate: "2025-07-19", transitDays: 11, contractValue: 420000000, co2Source: "Steel BF Sinter Flue Gas", status: "Heavy Transport Specialized Trailer", remarks: "AMP amine scrubber 250 kt JSW Vijayanagar SPMT transport" },
-  { id: "CCS-0007", projectNo: "UTK/GJR/2025/07-DAC-G7", operator: "UltraTech Cement CCUS Gujarat", zone: "West India Mumbai Gujarat Jamnagar", category: "Direct Air Capture DAC Fan Filter", description: "DAC Solid Sorbent 10 kt CO2/year Direct Air Capture Pilot", captureRate: 10, weight: 5000, manufacturer: "Carbon Engineering Canada", origin: "CE Squamish BC Plant", plantSite: "UltraTech Cement Gujarat Plant", storageType: "Mineral Carbonation", mode: "Flatbed Trailer 30T", shipDate: "2025-07-09", installDate: "2025-07-14", transitDays: 5, contractValue: 95000000, co2Source: "Ambient Air Direct Capture", status: "Capture Rate Qualification Test", remarks: "DAC solid sorbent 10 kt pilot UltraTech Gujarat capture test" },
-  { id: "CCS-0008", projectNo: "IOCL/PNP/2025/07-OXY-H8", operator: "IOCL Panipat CO2 Capture Refinery", zone: "North India Delhi NCR Panipat", category: "Oxy-Fuel Combustion ASU Oxygen", description: "Air Separation Unit ASU 500 TPD O2 for Oxy-Fuel 180 kt CO2/yr", captureRate: 180, weight: 45000, manufacturer: "Air Products USA Allentown", origin: "Air Products Allentown Factory", plantSite: "IOCL Panipat Refinery FCC", storageType: "Enhanced Oil Recovery", mode: "Self-Propelled Modular SPMT 100T", shipDate: "2025-07-07", installDate: "2025-07-20", transitDays: 13, contractValue: 520000000, co2Source: "Refinery Oxy-Fuel Flue Gas", status: "Capture Module Factory Manufactured", remarks: "ASU 500 TPD O2 IOCL Panipat oxy-fuel factory manufactured" },
-  { id: "CCS-0009", projectNo: "NTPC/VIN/2025/07-CMP-I9", operator: "NTPC Vindhyachal CCUS Plant", zone: "Central India MP Chhattisgarh Vindy", category: "CO2 Transport Pipeline API 5L", description: "API 5L X65 12-inch CO2 Pipeline 80km to Storage Site", captureRate: 0, weight: 60000, manufacturer: "Jindal Saw Mumbai", origin: "Jindal Saw Kandla Pipe Mill", plantSite: "Vindhyachal to Saline Aquifer Route", storageType: "Deep Saline Aquifer", mode: "Rail Wagon Special Consignment", shipDate: "2025-07-10", installDate: "2025-07-17", transitDays: 7, contractValue: 280000000, co2Source: "Pipeline Transport", status: "Installation Commissioning Start", remarks: "API 5L X65 80km CO2 pipeline NTPC Vindhyachal installation" },
-  { id: "CCS-0010", projectNo: "TST/JSD/2025/07-DAC-J10", operator: "Tata Steel Jamshedpur CCUS", zone: "East India Jamshedpur Dhanbad", category: "Direct Air Capture DAC Fan Filter", description: "DAC Liquid Solvent KOH 5 kt CO2/year R&D Pilot", captureRate: 5, weight: 3500, manufacturer: "Climeworks Switzerland Zurich", origin: "Climeworks Hinwil Plant", plantSite: "Tata Steel Jamshedpur R&D Center", storageType: "Mineral Carbonation", mode: "Air Cargo 747F Charter", shipDate: "2025-07-11", installDate: "2025-07-12", transitDays: 1, contractValue: 68000000, co2Source: "Ambient Air DAC", status: "Carbon Stored Pipeline Injected", remarks: "DAC KOH 5 kt pilot Tata Steel R&D carbon stored injected" },
-  { id: "CCS-0011", projectNo: "DCM/TN/2025/07-MEM-K11", operator: "Dalmia Cement CCUS Tamil Nadu", zone: "South India Chennai Tamil Nadu", category: "Membrane CO2 Separation Module", description: "Ceramic Membrane 50 kt CO2/year High Temp Cement Preheater", captureRate: 50, weight: 6000, manufacturer: "BASF Germany Ludwigshafen", origin: "BASF Ludwigshafen Factory", plantSite: "Dalmia Cements Dalmiapuram Plant", storageType: "Green Concrete Curing", mode: "Barge Coastal Shipping", shipDate: "2025-07-08", installDate: "2025-07-15", transitDays: 7, contractValue: 120000000, co2Source: "Cement Preheater Gas", status: "Site Receiving Foundation Ready", remarks: "Ceramic membrane 50 kt Dalmia Dalmiapuram receiving foundation" },
-  { id: "CCS-0012", projectNo: "REL/JMN/2025/07-CL-L12", operator: "Reliance Jamnagar Carbon Capture", zone: "West India Mumbai Gujarat Jamnagar", category: "Calcium Looping Carbonation Reactor", description: "Calcium Looping Carbonator 120 kt CO2/year Petrochemical FCC", captureRate: 120, weight: 20000, manufacturer: "ThyssenKrupp Germany", origin: "TK Uhde Dortmund Factory", plantSite: "Reliance Jamnagar Petrochemical", storageType: "Green Ammonia Urea", mode: "Specialized Heavy Trailer 80T", shipDate: "2025-07-09", installDate: "2025-07-18", transitDays: 9, contractValue: 210000000, co2Source: "Petrochemical FCC Off-Gas", status: "Heavy Transport Specialized Trailer", remarks: "Calcium looping 120 kt Reliance petrochemical specialized transport" },
-  { id: "CCS-0013", projectNo: "ADN/MUN/2025/07-PCS-M13", operator: "Adani Mundra CCU Green Ammonia", zone: "West India Mumbai Gujarat Jamnagar", category: "Post-Combustion Amine Scrubber Unit", description: "MEA Scrubber 400 kt CO2/year Natural Gas Reforming H2 Plant", captureRate: 400, weight: 30000, manufacturer: "Shell Cansolv Canada", origin: "Shell Cansolv Ottawa Factory", plantSite: "Adani Mundra Green H2 Plant", storageType: "Green Ammonia Synthesis", mode: "ODC Open Top Container 40T", shipDate: "2025-07-07", installDate: "2025-07-19", transitDays: 12, contractValue: 480000000, co2Source: "SMR Flue Gas H2 Plant", status: "Capture Rate Qualification Test", remarks: "MEA 400 kt Adani green H2 SMR capture rate qualification" },
-  { id: "CCS-0014", projectNo: "JSW/VJN/2025/07-CMP-N14", operator: "JSW Vijayanagar Steel CCUS", zone: "South India Chennai Tamil Nadu", category: "CO2 Transport Pipeline API 5L", description: "API 5L X70 16-inch CO2 Pipeline 50km to EOR Site", captureRate: 0, weight: 40000, manufacturer: "Welspun Corp Mumbai", origin: "Welspun Anjar Pipe Mill", plantSite: "JSW Vijayanagar to EOR Basin", storageType: "Enhanced Oil Recovery", mode: "Rail Wagon Special Consignment", shipDate: "2025-07-10", installDate: "2025-07-16", transitDays: 6, contractValue: 180000000, co2Source: "Pipeline Transport", status: "Installation Commissioning Start", remarks: "API 5L X70 50km CO2 pipeline JSW Vijayanagar installation" },
-];
-
-const transitCount = records.filter(r => r.status === "Heavy Transport Specialized Trailer").length;
-const liveCount = records.filter(r => r.status === "Carbon Stored Pipeline Injected").length;
-const totalCapture = records.reduce((s, r) => s + r.captureRate, 0);
-const totalContract = records.reduce((s, r) => s + r.contractValue, 0);
-
-function formatINR(v: number) {
-  if (v >= 10000000) return "\u20b9" + (v / 10000000).toFixed(1) + " Cr";
-  if (v >= 100000) return "\u20b9" + (v / 100000).toFixed(1) + " L";
-  return "\u20b9" + (v / 1000).toFixed(1) + " K";
+interface CCSRecord {
+  id: string;
+  batchNo: string;
+  captureTech: string;
+  storageType: string;
+  source: string;
+  capacityTPD: number;
+  captureRate: number;
+  costPerTonne: number;
+  status: string;
+  priority: string;
+  origin: string;
+  destination: string;
+  shipDate: string;
+  transitDays: number;
+  zone: string;
+  remarks: string;
 }
 
+const records: CCSRecord[] = [
+  { id: 'CCS-0001', batchNo: 'CCS-B2401', captureTech: 'Post-Combustion Amine', storageType: 'Deep Saline Aquifer', source: 'Coal Power Plant', capacityTPD: 3500, captureRate: 90, costPerTonne: 5200, status: 'In Transit', priority: 'Critical', origin: 'Singrauli (NTPC)', destination: 'Banda (Vindhyachal Aquifer)', shipDate: '2026-07-20', transitDays: 2, zone: 'North', remarks: 'NTPC 500MW post-combustion amine scrubbing CO2 pipeline injection' },
+  { id: 'CCS-0002', batchNo: 'CCS-B2402', captureTech: 'Pre-Combustion Selexol', storageType: 'Depleted Gas Reservoir', source: 'Steel Blast Furnace', capacityTPD: 5000, captureRate: 95, costPerTonne: 6800, status: 'Delivered', priority: 'High', origin: 'Jamshedpur (Tata Steel)', destination: 'Raniganj (ONGC Reservoir)', shipDate: '2026-07-18', transitDays: 3, zone: 'East', remarks: 'Tata Steel BF gas pre-combustion Selexol CO2 for EOR + storage' },
+  { id: 'CCS-0003', batchNo: 'CCS-B2403', captureTech: 'Oxy-Fuel Combustion', storageType: 'Enhanced Oil Recovery', source: 'Cement Kiln', capacityTPD: 4200, captureRate: 97, costPerTonne: 7500, status: 'Processing', priority: 'Critical', origin: 'Mumbai (ACC Cement)', destination: 'Mumbai Offshore (ONGC)', shipDate: '2026-07-23', transitDays: 1, zone: 'West', remarks: 'ACC cement kiln oxy-fuel CO2 for Mumbai High EOR offshore' },
+  { id: 'CCS-0004', batchNo: 'CCS-B2404', captureTech: 'Post-Combustion Amine', storageType: 'Basalt Mineralization', source: 'Refinery FCC', capacityTPD: 2800, captureRate: 88, costPerTonne: 5500, status: 'In Transit', priority: 'High', origin: 'Jamnagar (Reliance Refinery)', destination: 'Kutch (Basalt Formation)', shipDate: '2026-07-19', transitDays: 1, zone: 'West', remarks: 'Reliance FCC unit CO2 basalt mineralization permanent storage' },
+  { id: 'CCS-0005', batchNo: 'CCS-B2405', captureTech: 'DAC (Solid Sorbent)', storageType: 'Deep Saline Aquifer', source: 'Direct Air Capture', capacityTPD: 500, captureRate: 92, costPerTonne: 18000, status: 'Delayed', priority: 'High', origin: 'Jaisalmer (DAC Plant 1)', destination: 'Barmer (Aquifer Injection)', shipDate: '2026-07-12', transitDays: 16, zone: 'North', remarks: 'DAC sorbent replacement delay CSIR-NCL supply chain monsoon' },
+  { id: 'CCS-0006', batchNo: 'CCS-B2406', captureTech: 'Chemical Looping', storageType: 'Enhanced Coal Bed Methane', source: 'Petrochemical Cracker', capacityTPD: 3200, captureRate: 96, costPerTonne: 6200, status: 'Delivered', priority: 'Medium', origin: 'Vadodara (Reliance Petrochem)', destination: 'Surat (Coal Bed Methane)', shipDate: '2026-07-16', transitDays: 1, zone: 'West', remarks: 'Reliance petrochemical cracker CLC CO2 for ECBM Surat basin' },
+  { id: 'CCS-0007', batchNo: 'CCS-B2407', captureTech: 'Post-Combustion Membrane', storageType: 'Depleted Oil Reservoir', source: 'Gas Turbine CHP', capacityTPD: 1500, captureRate: 85, costPerTonne: 4800, status: 'In Transit', priority: 'Medium', origin: 'Gandhinagar (GSECL Gas)', destination: 'Ahmedabad (Cambay Reservoir)', shipDate: '2026-07-21', transitDays: 1, zone: 'West', remarks: 'GSECL gas turbine membrane CO2 injection Cambay basin depleted' },
+  { id: 'CCS-0008', batchNo: 'CCS-B2408', captureTech: 'Pre-Combustion MDEA', storageType: 'Deep Saline Aquifer', source: 'Fertilizer Plant', capacityTPD: 2200, captureRate: 94, costPerTonne: 4500, status: 'Delivered', priority: 'High', origin: 'Sindri (IFFCO)', destination: 'Hazaribag (Aquifer Site)', shipDate: '2026-07-15', transitDays: 3, zone: 'East', remarks: 'IFFCO fertilizer MDEA sweetening CO2 aquifer storage Hazaribag' },
+  { id: 'CCS-0009', batchNo: 'CCS-B2409', captureTech: 'Oxy-Fuel Combustion', storageType: 'Enhanced Oil Recovery', source: 'Aluminum Smelter', capacityTPD: 6000, captureRate: 98, costPerTonne: 8200, status: 'Processing', priority: 'Critical', origin: 'Korba (NALCO Smelter)', destination: 'Rajahmundry (ONGC EOR)', shipDate: '2026-07-24', transitDays: 4, zone: 'East', remarks: 'NALCO anode bake furnace oxy-fuel CO2 Godavari basin EOR' },
+  { id: 'CCS-0010', batchNo: 'CCS-B2410', captureTech: 'Post-Combustion Amine', storageType: 'Basalt Mineralization', source: 'LNG Terminal', capacityTPD: 1200, captureRate: 90, costPerTonne: 5800, status: 'In Transit', priority: 'Medium', origin: 'Dahej (GAIL LNG)', destination: 'Bharuch (Deccan Basalt)', shipDate: '2026-07-22', transitDays: 1, zone: 'West', remarks: 'GAIL LNG regasification CO2 basalt mineralization Deccan trap' },
+  { id: 'CCS-0011', batchNo: 'CCS-B2411', captureTech: 'DAC (Liquid Solvent)', storageType: 'Deep Saline Aquifer', source: 'Direct Air Capture', capacityTPD: 300, captureRate: 95, costPerTonne: 22000, status: 'Delivered', priority: 'Low', origin: 'Leh (IIT-B DAC High Alt)', destination: 'Leh Valley (Aquifer)', shipDate: '2026-07-17', transitDays: 0, zone: 'North', remarks: 'IIT-Bombay high-altitude DAC KOH solvent low-temp aquifer' },
+  { id: 'CCS-0012', batchNo: 'CCS-B2412', captureTech: 'Post-Combustion Amine', storageType: 'Enhanced Oil Recovery', source: 'Thermal Power Station', capacityTPD: 4500, captureRate: 92, costPerTonne: 5000, status: 'Delayed', priority: 'Critical', origin: 'Mundra (Adani Power)', destination: 'Mumbai Offshore (ONGC)', shipDate: '2026-07-11', transitDays: 19, zone: 'West', remarks: 'Adani 660MW amine CO2 pipeline rupture Gujarat monsoon repair' },
+  { id: 'CCS-0013', batchNo: 'CCS-B2413', captureTech: 'Chemical Looping', storageType: 'Basalt Mineralization', source: 'Iron Ore Pellet Plant', capacityTPD: 3800, captureRate: 94, costPerTonne: 7000, status: 'In Transit', priority: 'High', origin: 'Bellary (JSW Steel)', destination: 'Raichur (Cuddapah Basalt)', shipDate: '2026-07-20', transitDays: 2, zone: 'South', remarks: 'JSW pellet plant CLC CO2 Cuddapah supergroup basalt storage' },
+  { id: 'CCS-0014', batchNo: 'CCS-B2414', captureTech: 'Post-Combustion Membrane', storageType: 'Depleted Gas Reservoir', source: 'Data Center', capacityTPD: 200, captureRate: 80, costPerTonne: 12000, status: 'Processing', priority: 'Low', origin: 'Pune (Tata Power DC)', destination: 'Dombivli (Krishna Godavari)', shipDate: '2026-07-25', transitDays: 1, zone: 'West', remarks: 'Tata DC gas turbine membrane CO2 small-scale pilot storage' },
+];
+
+const filterGroups = [
+  { label: 'Status', key: 'status', options: [
+    { value: 'In Transit', count: 5 }, { value: 'Delivered', count: 4 }, { value: 'Processing', count: 3 }, { value: 'Delayed', count: 2 },
+  ]},
+  { label: 'Capture Tech', key: 'captureTech', options: [
+    { value: 'Post-Combustion Amine', count: 4 }, { value: 'Oxy-Fuel Combustion', count: 2 }, { value: 'Chemical Looping', count: 2 }, { value: 'DAC (Solid Sorbent)', count: 1 },
+  ]},
+  { label: 'Source', key: 'source', options: [
+    { value: 'Coal Power Plant', count: 1 }, { value: 'Steel Blast Furnace', count: 1 }, { value: 'Cement Kiln', count: 1 }, { value: 'Refinery FCC', count: 1 }, { value: 'Direct Air Capture', count: 2 },
+  ]},
+  { label: 'Priority', key: 'priority', options: [
+    { value: 'Critical', count: 4 }, { value: 'High', count: 4 }, { value: 'Medium', count: 3 }, { value: 'Low', count: 3 },
+  ]},
+  { label: 'Zone', key: 'zone', options: [
+    { value: 'West', count: 7 }, { value: 'East', count: 4 }, { value: 'North', count: 3 },
+  ]},
+];
+
+const statusColor: Record<string, string> = { 'Critical': 'bg-red-100 text-red-800 border-red-300', 'High': 'bg-amber-100 text-amber-800 border-amber-300', 'Medium': 'bg-blue-100 text-blue-800 border-blue-300', 'Low': 'bg-green-100 text-green-800 border-green-300' };
+const statusBadge: Record<string, string> = { 'In Transit': 'bg-blue-100 text-blue-800', 'Delivered': 'bg-green-100 text-green-800', 'Processing': 'bg-amber-100 text-800', 'Delayed': 'bg-red-100 text-red-800' };
+
+const kpis = [
+  { title: 'Total CCS Units', value: 14, sub: 'Capture Installations', color: 'text-slate-800' },
+  { title: 'Combined Capacity', value: '38,400 TPD', sub: 'CO2 Captured', color: 'text-gray-700' },
+  { title: 'Avg Capture Rate', value: '92.0%', sub: 'Oxy-Fuel 97-98% Peak', color: 'text-zinc-700' },
+  { title: 'National Target', value: '\u20b935,000Cr', sub: 'CCUS Mission 2030', color: 'text-neutral-700' },
+];
+
 export default function CarbonCaptureStorageLogisticsView() {
-  const [tab, setTab] = useState(0);
-  const [search, setSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [activeFilters, setActiveFilters] = useState<Record<string, string[]>>({});
-  const filterGroups = [
-    { key: "operator", label: "Operator", options: OPERATORS.map(o => ({ value: o, count: records.filter(rec => rec.operator === o).length })) },
-    { key: "category", label: "Category", options: CATEGORIES.map(c => ({ value: c, count: records.filter(rec => rec.category === c).length })) },
-    { key: "status", label: "Status", options: SHIPMENT_STATUSES.map(s => ({ value: s, count: records.filter(rec => rec.status === s).length })) },
-    { key: "zone", label: "Zone", options: ZONES.map(z => ({ value: z, count: records.filter(rec => rec.zone === z).length })) },
-    { key: "storageType", label: "Storage", options: Array.from(new Set(records.map(r => r.storageType))).map(s => ({ value: s, count: records.filter(rec => rec.storageType === s).length })) },
+  const [activeTab, setActiveTab] = useState('dashboard');
+
+  const toggleFilter = (key: string, value: string) => {
+    setActiveFilters((prev) => ((prev) => {
+      const next = { ...prev };
+      const arr = next[key] || [];
+      if (arr.includes(value)) { next[key] = arr.filter((v: string) => v !== value); if (next[key].length === 0) delete next[key]; } else { next[key] = [...arr, value]; }
+      return next;
+    })(prev));
+  };
+
+  const filteredRecords = useMemo(() => {
+    return records.filter((r) => {
+      if (searchQuery && !`${r.id} ${r.batchNo} ${r.captureTech} ${r.storageType} ${r.source} ${r.origin} ${r.destination}`.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      for (const [k, vs] of Object.entries(activeFilters)) { if (vs.length > 0 && !vs.includes(String(r[k as keyof CCSRecord]))) return false; }
+      return true;
+    });
+  }, [searchQuery, activeFilters]);
+
+  const capacityByTech = useMemo(() => {
+    const map = new Map<string, number>();
+    records.forEach((r) => { map.set(r.captureTech.split(' ')[0], (map.get(r.captureTech.split(' ')[0]) || 0) + r.capacityTPD); });
+    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([name, capacityTPD]) => ({ name: name.slice(0, 12), capacityTPD }));
+  }, []);
+
+  const storageDistribution = useMemo(() => {
+    const map = new Map<string, number>();
+    records.forEach((r) => { const s = r.storageType.split(' ').slice(0, 2).join(' '); map.set(s, (map.get(s) || 0) + 1); });
+    return Array.from(map.entries()).map(([name, value]) => ({ name, value }));
+  }, []);
+
+  const captureTrend = useMemo(() => [
+    { year: '2020', tpd: 2000 }, { year: '2021', tpd: 5000 }, { year: '2022', tpd: 9000 }, { year: '2023', tpd: 14000 }, { year: '2024', tpd: 22000 }, { year: '2025', tpd: 30000 }, { year: '2026', tpd: 38400 },
+  ], []);
+
+  const costData = useMemo(() => {
+    return records.filter((_, i) => i % 2 === 0).map((r) => ({ name: r.batchNo.slice(-2), cost: r.costPerTonne / 1000 }));
+  }, []);
+
+  const zoneDistribution = useMemo(() => {
+    const map = new Map<string, number>();
+    records.forEach((r) => { map.set(r.zone, (map.get(r.zone) || 0) + 1); });
+    return Array.from(map.entries()).map(([name, value]) => ({ name, value }));
+  }, []);
+
+  const rateBySource = useMemo(() => {
+    const map = new Map<string, number>();
+    records.forEach((r) => { map.set(r.source.split(' ')[0], (map.get(r.source.split(' ')[0]) || 0) + r.captureRate); });
+    return Array.from(map.entries()).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([name, rate]) => ({ name: name.slice(0, 10), rate }));
+  }, []);
+
+  const COLORS = ['#475569', '#64748b', '#0f766e', '#b45309', '#7c3aed', '#dc2626'];
+
+  const tabs = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'registry', label: 'Registry' },
+    { id: 'analytics', label: 'Analytics' },
+    { id: 'insights', label: 'Insights' },
   ];
-  const filtered = records.filter(r => {
-    if (search && !Object.values(r).some(v => String(v).toLowerCase().includes(search.toLowerCase()))) return false;
-    for (const [key, vals] of Object.entries(activeFilters)) { if (vals.length > 0 && !vals.includes(String(r[key as keyof CCUSRecord]))) return false; }
-    return true;
-  });
-  const toggleFilter = ((key: string, val: string) => setActiveFilters(p => { const np = {...p}; const arr = np[key] || []; np[key] = arr.includes(val) ? arr.filter(v => v !== val) : [...arr, val]; return np; }));
 
   return (
-    <div className="ccs-root p-6 space-y-6">
-      <PageHeader title="Carbon Capture Storage Logistics" description="India CCUS carbon capture utilization and storage logistics covering post-combustion amine scrubber, pre-combustion syngas shift, oxy-fuel ASU, membrane CO2 separation, calcium looping, direct air capture DAC, CO2 compression 150 bar, pipeline transport for NTPC Tata Steel Dalmia Reliance Adani JSW UltraTech IOCL power steel cement refinery" />
-      <div className="ccs-tabs flex gap-1 border-b border-gray-200">
-        {TABS.map((t, i) => (<button key={t} onClick={() => setTab(i)} className={`ccs-tab px-4 py-2 text-sm font-medium rounded-t ${tab === i ? "bg-[#1c1917] text-white" : "text-gray-600 hover:bg-[#1c1917]/10"}`}>{t}</button>))}
+    <div className="ccs-logistics-view space-y-4 p-4">
+      <ModuleBreadcrumb items={[{ label: 'Operations' }, { label: 'Carbon Management' }, { label: 'CCS Logistics' }]} />
+      <PageHeader title="Carbon Capture &amp; Storage Logistics" description="Indian CCUS supply chain \u2014 post-combustion amine, pre-combustion Selexol/MDEA, oxy-fuel, chemical looping, DAC for power, steel, cement, refinery, and direct air capture with aquifer, EOR, basalt storage" />
+
+      <div className="ccs-kpi-grid grid grid-cols-2 lg:grid-cols-4 gap-3">
+        {kpis.map((kpi) => (
+          <Card key={kpi.title} className="ccs-kpi-card">
+            <CardHeader className="pb-2"><CardTitle className="text-xs font-medium text-muted-foreground">{kpi.title}</CardTitle></CardHeader>
+            <CardContent><p className={`text-2xl font-bold ${kpi.color}`}>{kpi.value}</p><p className="text-xs text-muted-foreground mt-1">{kpi.sub}</p></CardContent>
+          </Card>
+        ))}
       </div>
 
-      {tab === 0 && (
-        <div className="ccs-dashboard space-y-6">
-          <div className="grid grid-cols-4 gap-4">
-            {[{ label: "Total Capture Capacity", value: `${totalCapture.toLocaleString()} kt/yr`, color: "bg-[#1c1917]" }, { label: "Carbon Stored", value: `${liveCount} Sites`, color: "bg-[#44403c]" }, { label: "In Transit", value: `${transitCount}`, color: "bg-[#292524]" }, { label: "Total Contract", value: formatINR(totalContract), color: "bg-[#0c0a09]" }].map((kpi, i) => (
-              <div key={i} className={`${kpi.color} text-white rounded-lg p-4`}><div className="text-xs opacity-80">{kpi.label}</div><div className="text-xl font-bold mt-1">{kpi.value}</div></div>
-            ))}
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">Monthly CO2 Capture (kt CO2)</h3><BarChart data={monthlyCapture}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="m" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Bar dataKey="postComb" fill="#1c1917" name="Post-Comb" /><Bar dataKey="preComb" fill="#44403c" name="Pre-Comb" /><Bar dataKey="oxyFuel" fill="#78716c" name="Oxy-Fuel" /><Bar dataKey="dac" fill="#a8a29e" name="DAC" /></BarChart></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">CCUS Technology Distribution</h3><PieChart><Pie data={techDist} cx="50%" cy="50%" outerRadius={80} dataKey="v" nameKey="n" label>{techDist.map((_, i) => <Cell key={i} fill={COLORS[i]} />)}</Pie><Tooltip /><Legend /></PieChart></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">CO2 Stored (MT) vs Target 3.5 MT/yr</h3><LineChart data={storageTarget}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="m" fontSize={12} /><YAxis fontSize={12} domain={[1, 5]} /><Tooltip /><Legend /><Line type="monotone" dataKey="actual" stroke="#1c1917" name="Stored MT" /><Line type="monotone" dataKey="target" stroke="#ef4444" name="Target 3.5 MT" strokeDasharray="5 5" /></LineChart></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">Operator CCUS Performance</h3><BarChart data={opPerf}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="n" fontSize={10} angle={-20} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="v" fill="#292524" name="Score" /></BarChart></div>
-          </div>
+      <div className="ccs-tab-bar flex gap-1 border-b">
+        {tabs.map((tab) => (
+          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`ccs-tab-btn px-4 py-2 text-sm font-medium transition-colors ${activeTab === tab.id ? 'border-b-2 border-slate-700 text-slate-800' : 'text-muted-foreground hover:text-foreground'}`}>{tab.label}</button>
+        ))}
+      </div>
+
+      {activeTab !== 'registry' && (
+        <SearchFilterToolbar searchQuery={searchQuery} onSearchChange={setSearchQuery} onClearSearch={() => setSearchQuery('')} filterGroups={filterGroups} activeFilters={activeFilters} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={records.length} filteredCount={filteredRecords.length} />
+      )}
+
+      {activeTab === 'dashboard' && (
+        <div className="ccs-dashboard-grid grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">Capacity by Capture Tech (TPD)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={capacityByTech}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="capacityTPD" fill="#475569" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">Storage Type Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><PieChart><Pie data={storageDistribution} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}><Cell fill="#475569" /><Cell fill="#64748b" /><Cell fill="#0f766e" /><Cell fill="#b45309" /><Cell fill="#7c3aed" /></Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">India CCS Capacity Growth (TPD)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><LineChart data={captureTrend}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="year" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Line type="monotone" dataKey="tpd" stroke="#64748b" strokeWidth={2} /></LineChart></ResponsiveContainer></CardContent></Card>
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">Cost per Tonne CO2 (x\u20b91K)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={costData}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="cost" fill="#0f766e" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
         </div>
       )}
 
-      {tab === 1 && (
-        <div className="ccs-registry space-y-4">
-          <ModuleBreadcrumb items={[{ label: "CCUS", href: "#" }, { label: "Capture Equipment Registry", href: "#" }]} />
-          <SearchFilterToolbar searchQuery={search} onSearchChange={setSearch} onClearSearch={() => setSearch("")} activeFilters={activeFilters} filterGroups={filterGroups} onToggleFilter={toggleFilter} onClearAllFilters={() => setActiveFilters({})} totalItems={records.length} filteredCount={filtered.length} />
-          <div className="ccs-table-wrap overflow-x-auto bg-white rounded-lg border">
-            <table className="w-full text-sm"><thead><tr className="border-b bg-gray-50">{"ID,Project No,Operator,Zone,Category,Description,Capture (kt/yr),Weight (kg),Manufacturer,Origin,Plant Site,Storage Type,Mode,Ship Date,Install Date,Transit (d),Contract (\u20b9),CO2 Source,Status,Remarks"
-                .split(",").map(h => (<th key={h} className="px-3 py-2 text-left text-xs font-medium text-gray-500 whitespace-nowrap">{h}</th>))}</tr></thead>
-            <tbody>{filtered.map(r => {
-              const sc = statusColor[r.status] || "slate";
-              return (<tr key={r.id} className={`border-b ${sc === "red" ? "bg-red-50 border-l-4 border-l-red-500" : sc === "amber" ? "bg-amber-50 border-l-4 border-l-amber-500" : sc === "blue" ? "bg-blue-50 border-l-4 border-l-blue-500" : sc === "green" ? "bg-green-50 border-l-4 border-l-green-500" : sc === "orange" ? "bg-orange-50 border-l-4 border-l-orange-500" : ""}`}>
-                <td className="px-3 py-2 font-medium">{r.id}</td>
-                <td className="px-3 py-2">{r.projectNo}</td>
-                <td className="px-3 py-2">{r.operator}</td>
-                <td className="px-3 py-2">{r.zone}</td>
-                <td className="px-3 py-2">{r.category}</td>
-                <td className="px-3 py-2">{r.description}</td>
-                <td className="px-3 py-2 text-right">{r.captureRate || "-"}</td>
-                <td className="px-3 py-2 text-right">{r.weight.toLocaleString()}</td>
-                <td className="px-3 py-2">{r.manufacturer}</td>
-                <td className="px-3 py-2">{r.origin}</td>
-                <td className="px-3 py-2">{r.plantSite}</td>
-                <td className="px-3 py-2">{r.storageType}</td>
-                <td className="px-3 py-2">{r.mode}</td>
-                <td className="px-3 py-2">{r.shipDate}</td>
-                <td className="px-3 py-2">{r.installDate}</td>
-                <td className="px-3 py-2 text-center">{r.transitDays}</td>
-                <td className="px-3 py-2 text-right">{formatINR(r.contractValue)}</td>
-                <td className="px-3 py-2"><span className={`px-2 py-0.5 rounded-full text-xs ${SC[sc] || SC.slate}`}>{r.co2Source}</span></td>
-                <td className="px-3 py-2"><span className={`px-2 py-0.5 rounded-full text-xs ${SC[sc] || SC.slate}`}>{r.status}</span></td>
-                <td className="px-3 py-2">{r.remarks}</td>
-              </tr>);
-            })}</tbody></table>
-          </div>
+      {activeTab === 'registry' && (
+        <div className="ccs-registry-table overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead><tr className="border-b bg-slate-50">
+              <th className="px-2 py-2 text-left">ID</th><th className="px-2 py-2 text-left">Batch</th><th className="px-2 py-2 text-left">Capture Tech</th><th className="px-2 py-2 text-left">Storage</th><th className="px-2 py-2 text-left">Source</th><th className="px-2 py-2 text-right">TPD</th><th className="px-2 py-2 text-right">Rate%</th><th className="px-2 py-2 text-left">Status</th><th className="px-2 py-2 text-left">Priority</th><th className="px-2 py-2 text-left">Route</th><th className="px-2 py-2 text-left">Remarks</th>
+            </tr></thead>
+            <tbody>
+              {filteredRecords.map((r) => (
+                <tr key={r.id} className={`ccs-table-row border-b hover:bg-slate-50/50 ${r.status === 'Delayed' ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}>
+                  <td className="px-2 py-2 font-mono text-xs">{r.id}</td>
+                  <td className="px-2 py-2 text-xs">{r.batchNo}</td>
+                  <td className="px-2 py-2 text-xs">{r.captureTech}</td>
+                  <td className="px-2 py-2 text-xs">{r.storageType}</td>
+                  <td className="px-2 py-2 text-xs">{r.source}</td>
+                  <td className="px-2 py-2 text-right font-mono">{r.capacityTPD}</td>
+                  <td className="px-2 py-2 text-right font-mono">{r.captureRate}</td>
+                  <td className="px-2 py-2"><Badge variant="outline" className={statusBadge[r.status]}>{r.status}</Badge></td>
+                  <td className="px-2 py-2"><Badge variant="outline" className={statusColor[r.priority]}>{r.priority}</Badge></td>
+                  <td className="px-2 py-2 text-xs">{r.origin} \u2192 {r.destination}</td>
+                  <td className="px-2 py-2 text-xs text-muted-foreground">{r.remarks}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
 
-      {tab === 2 && (
-        <div className="ccs-analytics space-y-4">
-          <ModuleBreadcrumb items={[{ label: "CCUS", href: "#" }, { label: "CCUS Analytics", href: "#" }]} />
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">Monthly CO2 Capture (kt CO2)</h3><BarChart data={monthlyCapture}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="m" fontSize={12} /><YAxis fontSize={12} /><Tooltip /><Legend /><Bar dataKey="postComb" fill="#1c1917" name="Post-Comb" /><Bar dataKey="preComb" fill="#44403c" name="Pre-Comb" /><Bar dataKey="oxyFuel" fill="#78716c" name="Oxy-Fuel" /><Bar dataKey="dac" fill="#a8a29e" name="DAC" /></BarChart></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">CCUS Technology Distribution</h3><PieChart><Pie data={techDist} cx="50%" cy="50%" outerRadius={80} dataKey="v" nameKey="n" label>{techDist.map((_, i) => <Cell key={i} fill={COLORS[i]} />)}</Pie><Tooltip /><Legend /></PieChart></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">CO2 Stored (MT) vs Target</h3><LineChart data={storageTarget}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="m" fontSize={12} /><YAxis fontSize={12} domain={[1, 5]} /><Tooltip /><Legend /><Line type="monotone" dataKey="actual" stroke="#1c1917" name="Stored MT" /><Line type="monotone" dataKey="target" stroke="#ef4444" name="Target 3.5 MT" strokeDasharray="5 5" /></LineChart></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-gray-500 mb-2">Operator CCUS Performance</h3><BarChart data={opPerf}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="n" fontSize={10} angle={-20} textAnchor="end" height={50} /><YAxis fontSize={12} /><Tooltip /><Bar dataKey="v" fill="#292524" name="Score" /></BarChart></div>
-          </div>
+      {activeTab === 'analytics' && (
+        <div className="ccs-analytics-grid grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">Zone Distribution</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><PieChart><Pie data={zoneDistribution} cx="50%" cy="50%" innerRadius={50} outerRadius={80} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}><Cell fill="#475569" /><Cell fill="#64748b" /><Cell fill="#0f766e" /></Pie><Tooltip /></PieChart></ResponsiveContainer></CardContent></Card>
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">Capture Rate by Source (%)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={rateBySource}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="rate" fill="#475569" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></CardContent></Card>
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">Capture Rate vs Cost (Batch)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><LineChart data={records.slice(0, 8).map((r) => ({ name: r.batchNo.slice(-2), rate: r.captureRate, cost: r.costPerTonne / 100 }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 11 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Legend /><Line type="monotone" dataKey="rate" stroke="#64748b" strokeWidth={2} name="Rate%" /><Line type="monotone" dataKey="cost" stroke="#b45309" strokeWidth={2} name="Cost \u20b9x100" /></LineChart></ResponsiveContainer></CardContent></Card>
+          <Card className="ccs-chart-card"><CardHeader><CardTitle className="text-sm">Capacity by Storage Type (TPD)</CardTitle></CardHeader><CardContent><ResponsiveContainer width="100%" height={220}><BarChart data={Array.from(new Map(records.map((r) => [r.storageType.split(' ').slice(0, 2).join(' '), records.filter((x) => x.storageType === r.storageType).reduce((sum, x) => sum + x.capacityTPD, 0)])).entries()).map(([name, capacityTPD]) => ({ name, capacityTPD }))}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="name" tick={{ fontSize: 10 }} /><YAxis tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="capacityTPD" fill="#7c3aed" radius={[4,4,0,0]} name="TPD" /></BarChart></ResponsiveContainer></CardContent></Card>
         </div>
       )}
 
-      {tab === 3 && (
-        <div className="ccs-insights space-y-4">
-          <ModuleBreadcrumb items={[{ label: "CCUS", href: "#" }, { label: "Insights", href: "#" }]} />
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-[#1c1917] mb-2">India CCUS Mission Net Zero 2070 Target</h3><p className="text-xs text-gray-600">India committed to net zero by 2070 at COP26 Glasgow. NTPC, Tata Steel, Dalmia Cement and Reliance are leading CCUS deployment with post-combustion amine scrubbers, pre-combustion WGS reactors and membrane separation modules. India coal-fired power plants emit 1.8 Gt CO2/year, steel and cement add 800 Mt. CCUS can capture 35-40% of industrial CO2, targeting 750 Mt CO2/year capture capacity by 2050 under the National CCUS Mission.</p></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-[#1c1917] mb-2">CO2 Storage in Deccan Basalt and Saline Aquifers</h3><p className="text-xs text-gray-600">India has 500+ Gt CO2 storage potential in Deccan Basalt formations (Maharashtra MP Gujarat), deep saline aquifers in Rajasthan-Gujarat basins, and depleted oil gas fields in Assam Mumbai Offshore. ONGC is mapping storage sites. CO2 pipeline infrastructure from capture plants to injection sites requires 80-200 km API 5L X65 X70 steel pipelines at 100-150 bar, similar to natural gas pipeline logistics.</p></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-[#1c1917] mb-2">Direct Air Capture DAC Growing from Pilot Scale</h3><p className="text-xs text-gray-600">UltraTech Cement and Tata Steel are piloting Direct Air Capture from Climeworks and Carbon Engineering, capturing CO2 directly from ambient air using solid sorbent (DAC-1) and liquid solvent (DAC-2) technology. DAC cost at $400-600/ton CO2 is falling toward $200-300 target by 2030. India R&D at IIT Bombay and CSIR-NCL is developing low-cost amine-functionalized silica sorbents for high temperature high humidity Indian climate conditions.</p></div>
-            <div className="bg-white rounded-lg border p-4"><h3 className="text-sm font-medium text-[#1c1917] mb-2">Carbon Utilization Green Concrete Ammonia Methanol</h3><p className="text-xs text-gray-600">Captured CO2 is utilized in green concrete curing (Dalmia UltraTech), green ammonia synthesis (Adani Reliance IOCL), methanol production (NTPC), enhanced oil recovery (ONGC OIL India), and mineral carbonation building blocks. India CCUS policy incentivizes utilization over storage via carbon credits under PAT scheme. Green ammonia from captured CO2 and green H2 is India pathway to $2/kg ammonia export competing with grey ammonia from Gadwar-Kandla-Mundra.</p></div>
-          </div>
+      {activeTab === 'insights' && (
+        <div className="ccs-insights-grid grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card className="ccs-insight-card border-l-4 border-l-slate-700"><CardHeader><CardTitle className="text-sm text-slate-800">NTPC Singrauli: India&apos;s Largest Post-Combustion CCS</CardTitle></CardHeader><CardContent><p className="text-xs text-muted-foreground">NTPC Singrauli commissioned 3,500 TPD post-combustion amine scrubbing unit (CCS-0001) on 500MW Unit-13 — India&apos;s first utility-scale CCS on coal power plant. MEA-based solvent at 30% concentration with lean/rich heat exchanger recovering 85% of regeneration energy. CO2 compressed to 150bar for pipeline transport to Vindhyachal deep saline aquifer at 1,200m depth. Storage capacity: 50MT CO2 over 25 years in Bhandra sandstone formation with 30m caprock seal. NTPC targeting CCS retrofit on 10GW of coal fleet by 2035 — total investment \u20b915,000Cr. Carbon credit monetization: \u20b94,500/tonne CO2 at current EU ETS price equivalent, generating \u20b91,600Cr annual revenue from carbon offsets. Ministry of Power mandating CCS-ready design for all new coal plants above 300MW.</p></CardContent></Card>
+          <Card className="ccs-insight-card border-l-4 border-l-red-600"><CardHeader><CardTitle className="text-sm text-red-700">Delayed Batches: CCS-0005 and CCS-0012</CardTitle></CardHeader><CardContent><p className="text-xs text-muted-foreground">CCS-0005 (Jaisalmer DAC Plant to Barmer, 16-day delay): 500 TPD direct air capture using solid amine sorbent from CSIR-NCL Pune — sorbent cartridge replacement delayed by monsoon flooding on NH11 from Ahmedabad. DAC plant operates at Rajasthan desert ambient 45C — 30% higher energy for fan blowers vs temperate DAC. Sorbent degradation rate 5% per 1,000 cycles requiring quarterly replacement. CCS-0012 (Mundra Adani Power to Mumbai Offshore, 19-day delay): 4,500 TPD CO2 pipeline from Adani Mundra 660MW plant ruptured at 47km mark due to Gujarat monsoon ground subsidence. Pipeline section replaced with API 5L X70 grade — higher corrosion resistance. Adani Power estimated \u20b925Cr production loss during 19-day outage. Offshore ONGC Mumbai High EOR injection delayed to August — 800,000 barrel incremental oil recovery at risk.</p></CardContent></Card>
+          <Card className="ccs-insight-card border-l-4 border-l-teal-600"><CardHeader><CardTitle className="text-sm text-teal-700">Tata Steel Jamshedpur: Green Steel CCS Pioneer</CardTitle></CardHeader><CardContent><p className="text-xs text-muted-foreground">Tata Steel Jamshedpur deployed 5,000 TPD pre-combustion Selexol CO2 capture (CCS-0002) on blast furnace gas — the first Indian steelmaker to implement CCUS at commercial scale. Selexol physical solvent removes CO2 from shifted syngas at 40bar pressure with 95% capture rate, producing 99.5% pure CO2 for pipeline transport to ONGC Raniganj depleted reservoir for enhanced oil recovery. Dual benefit: 500,000 barrels incremental oil recovery over 10 years plus permanent CO2 storage. Tata Steel targeting net-zero by 2035 — CCS contributing 40% of emission reduction alongside electric arc furnace transition and hydrogen-based direct reduced iron. Deccan basalts near Jamshedpur offer additional 10GT permanent mineralization storage capacity. Green steel premium: \u20b94,000/tonne for CCS-certified steel in European export market.</p></CardContent></Card>
+          <Card className="ccs-insight-card border-l-4 border-l-amber-600"><CardHeader><CardTitle className="text-sm text-amber-700">Reliance Jamnagar: Basalt Mineralization Breakthrough</CardTitle></CardHeader><CardContent><p className="text-xs text-muted-foreground">Reliance Jamnagar refinery deployed 2,800 TPD CO2 for Deccan Trap basalt mineralization (CCS-0004) — India&apos;s first in-situ mineral carbonation project. CO2 injected into vesicular basalt at 500-800m depth where it reacts with calcium-magnesium silicate minerals forming stable carbonate crystals within 2-5 years. Unlike aquifer storage requiring caprock integrity monitoring for millennia, basalt mineralization permanently locks CO2 as solid rock within years. Kutch basalt formation: 30GT storage capacity covering 5,000 sq km. Reliance partnering with IIT-B for mineralization kinetics optimization — carbFix methodology adapted from Iceland. Cost: \u20b95,500/tonne vs \u20b912,000 for DAC-to-mineralization pathway. Reliance targeting 50,000 TPD by 2028 across Jamnagar, Vadodara, and Hazira refinery complex.</p></CardContent></Card>
         </div>
       )}
     </div>
