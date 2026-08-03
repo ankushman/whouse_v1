@@ -1,4 +1,56 @@
 ---
+Task ID: R401 — Iron Powder Logistics + Manganese Powder Logistics
+Agent: Main Agent (Cron Loop)
+Task: R401 — 2 new Indian logistics modules for iron powder supply chain and manganese powder supply chain.
+
+Work Log:
+- Read worklog: R400 complete (commit f67a71f), 637 modules, 638 navItems, ~61,819 CSS
+- TSC pre-validation: 0 errors in src/components/modules
+- Dev server: OOM as expected with 637 modules (not usable for visual QA)
+- Duplicate theme search: 8 candidates tested
+  - iron-powder: CLEAN, ipw-* CLEAN
+  - manganese-powder: CLEAN, mnp-* CLEAN
+  - nickel-powder: EXISTS (already registered, excluded)
+  - chromium-powder: CLEAN (not used this round)
+  - tin-alloy: CLEAN (not used this round)
+  - titanium-powder: CLEAN (not used this round)
+  - magnesium-powder: CLEAN (not used this round)
+  - aluminum-powder: CLEAN (not used this round)
+  - Selected: iron-powder-logistics (ipw-*, Target orange #ea580c) and manganese-powder-logistics (mnp-*, Axe amber #d97706)
+  - Icons verified: Target and Axe both confirmed in iconMap
+- Created Iron Powder Logistics (R401a): ~130 lines, ipw-* orange #ea580c, 14 records
+  - 14 powder grades: Pure Fe 99.9% Water Atomized, Fe-2%Ni-0.5%C Distalloy, Fe-Cr-Al 23/5 Kanthal, Fe-14Cr-2W ODS Ferritic, Fe-3%Si M-4 Electrical, Fe-0.6%C Forged Preform, Sponge Fe 98.5% Reduced, Fe-50%Ni Permalloy, Fe-P-Cu 98% Structural, Fe 99.95% Carbonyl, Fe-12%Cr Stainless 410, Fe-2%Cu Brazing Filler, Fe 99.99% Magnetic, Fe-17Cr ODS PM2000
+  - 14 manufacturers: Tata Steel, SAIL, MIDHANI, DRDO DMRL, Hindustan Steel, Bharat Forge, Gujarat Iron Powders, Rajasthan Iron Alloys, Tamil Nadu Iron Works, Odisha Iron Corporation, Assam Iron Powder, Gujarat Iron Tech, UP Iron Industries, BHEL
+  - Applications: Bajaj auto PM sprocket, Mahindra gear, Havells heater element, IGCAR nuclear cladding, CG motor core, Tata Motors con rod, Ador welding electrode, ABB CT core, NRB bearing, BEL EMI shield, Godrej cutlery MIM, ESAB diamond tool brazing, L&T inductor core, BHEL turbine exhaust
+  - &#8377;4,695 Cr total investment, avg 90.1% Fe content
+  - Delayed: IPW-B2412 (14d, monsoon Gujarat)
+- Created Manganese Powder Logistics (R401b): ~130 lines, mnp-* amber #d97706, 14 records
+  - 14 powder grades: Electrolytic Mn 99.9% Flakes, Fe-Mn 78/22 HC Ferro, Mn-Cu 85/15 Damping, Mn-12%Al TWIP Steel, MnO2 92% Electrolytic, Si-Mn 65/17 Ferro, Mn 99.7% Electrolytic Flake, Mn-Si-Cr 60/20/15, Mn-0.8%C Steel Shot, MnO 78% Ferromanganese, Mn 99.95% Ultra-Pure, Mn-Ni 50/50 Superalloy, Mn-Fe 60/40 Soft Mag, Mn-Cr 70/20 Wear Res
+  - 14 manufacturers: Manganese Ore India (MOIL), SAIL, MIDHANI, DRDO DMRL, Hindustan Copper, Shyam Metaliks, Gujarat Mn Alloys, Rajasthan Mn Industries, Tamil Nadu Mn Works, Odisha Mn Ore Corp, Assam Mn Mines, Gujarat Mn Technologies, UP Mn Alloys, BHEL
+  - Applications: Tata Steel deoxidizer, SAIL rail alloy, Mazagon Dock submarine hull, Mahindra TWIP crash, Panasonic dry cell, JSW spring steel, NAL aerospace alloy, BHEL wear plate, L&T shot blasting, Kirloskar foundry, BEL semiconductor target, Wipro Aero turbine seal, CG Power transformer, Indian Railways track
+  - &#8377;5,230 Cr total investment, avg 76.8% Mn content
+  - Delayed: MNP-B2412 (15d, monsoon Gujarat)
+- Both modules generated via Python raw string scripts (gen_r401a.py, gen_r401b.py)
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (638), page.tsx (1157 viewMap entries), app-store.ts (640 navItems)
+- CSS appended: 22 new rules (~61,862 total)
+- Git commit: 1cddabd, pushed to main
+
+Stage Summary:
+- Project now: 639 module view files, 640 navItems, ~61,862 CSS lines, 1157 viewMap entries, 0 TSC errors in src/
+- Iron Powder: IGCAR nuclear ODS &#8377;620Cr, BHEL PM2000 &#8377;520Cr, BEL carbonyl &#8377;380Cr, Assam Mn &#8377;490Cr &#8594; wait, corrected: BEL &#8377;380Cr, L&T magnetic &#8377;310Cr
+- Manganese Powder: Mazagon Dock sub &#8377;590Cr, BHEL wear &#8377;340Cr, Wipro Aero &#8377;385Cr, BEL semiconductor &#8377;420Cr, Indian Railways &#8377;540Cr
+- Delayed: IPW-B2412 (14d), MNP-B2412 (15d) &#8212; both monsoon Gujarat corridor
+
+**Project Current State:**
+- 639 module view files, 640 navItems, ~61,862 CSS lines, 1157 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 61K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Ghost modules: molybdenum-alloy, vanadium-alloy, tantalum-alloy (export-only, 29-31KB files)
+- Next clean candidates: chromium-powder (crp-*), tin-alloy (tna-*), titanium-powder (tip-*), magnesium-powder (mgp-*), aluminum-powder (alp-*)
+
+---
 Task ID: R400 — Cobalt Powder Logistics + Copper Powder Logistics
 Agent: Main Agent (Cron Loop)
 Task: R400 — 2 new Indian logistics modules for cobalt powder supply chain and copper powder supply chain.
