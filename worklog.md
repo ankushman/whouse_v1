@@ -11277,3 +11277,54 @@ Stage Summary:
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
+---
+Task ID: R380 — Scandium Alloy Logistics + Nickel Superalloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R380 — 2 new Indian logistics modules for strategic scandium alloys and nickel superalloys.
+
+Work Log:
+- Read worklog: R379 complete (commit bd9465e), 599 modules, 603 navItems, 60,862 CSS
+- TSC pre-validation: 0 errors in src/ (only pre-existing errors in skills/mini-services)
+- Dev server: OOM expected with 600+ modules — TSC-only QA approach
+- Duplicate theme search: 18 candidates tested, all confirmed clean
+  - Selected scandium-alloy-logistics (sca-*, Target #ea580c) and nickel-superalloy-logistics (nss-*, Shield #475569)
+  - Icons verified in iconMap (Target and Shield available)
+- Created Scandium Alloy Logistics (R380a): ~250 lines, sca-* orange #ea580c, 14 records
+  - 14 records across 13 cities (Bengaluru, Hyderabad, Pune, Chennai, Mumbai, Noida, Kolkata, Ahmedabad, Coimbatore, Jaipur, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: HAL, DRDO DMRL, TASL, MIDHANI, IIT Madras, BEL, Hindalco, Reliance SBR, Rajasthan State Mines, NALCO, Oil India, Gujarat Fluorochemicals, Tata Elxsi
+  - 14 alloy grades: Al-0.4Sc-0.1Zr, Al-6Mg-0.3Sc, Al-2.5Li-0.2Sc, Mg-4Sc, Al-3.5Cu-1.3Li-0.3Sc, Al-0.5Sc wire, Al-2Sc master, Al-0.35Sc-0.15Zr, ScSZ (10%Sc2O3), Sc2O3, Sc2(SO4)3, Al-0.3Sc, ScF3, Al-2Li-0.2Sc-0.1Zr
+  - Applications: welded airframe panel, missile airframe tube, AMCA wing spar, bicycle frame, satellite panel, electronic enclosure weld, automotive body panel, EV battery enclosure, SOFC electrolyte, metal halide lamp, scandium extraction pilot, pipeline repair, optical coating, UAV wing spar
+  - ₹1,968 Cr total investment, avg 451MPa yield strength
+- Created Nickel Superalloy Logistics (R380b): ~255 lines, nss-* slate #475569, 14 records
+  - 14 records across 13 cities (Pune, Hyderabad, Mumbai, Bengaluru, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: HAL, MIDHANI, TASL, IGCAR, BHEL, DRDO DMRL, Hindalco, Reliance SBR, Rajasthan State Mines, IIT Madras, NALCO, Oil India, Gujarat Fluorochemicals, Cummins India
+  - 14 alloy grades: Inconel 718, Inconel 625, Hastelloy X, Inconel 600, Inconel 713C, Waspaloy, Monel 400, Inconel 825, Nimonic 80A, CM247LC, Inconel 690, Inconel 725, Inconel 601, RR1000
+  - Applications: turbine disc, gas turbine combustor, aero afterburner, nuclear SG tube, turbine bucket, turbine blade, desalination HX, FGD absorber, turbocharger rotor, IGCC gasifier, nuclear waste canister, subsea pipeline, petrochemical cracker, landing gear cylinder
+  - ₹2,963 Cr total investment, avg 849°C max temp
+- Three-file registration completed: index.ts (599 lines), page.tsx (1121 viewMap entries), app-store.ts (605 navItems)
+- CSS appended: 42 new rules for sca-* (orange) and nss-* (slate) themes (~60,904 total)
+- TSC post-validation: 0 errors in src/ on first pass
+- Git commit: 774c33d, pushed to main
+
+Stage Summary:
+- Project now: 601 modules, 605 navItems, ~60,904 CSS lines, 1121 viewMap entries, 0 TSC errors
+- Scandium alloy module covers aerospace welding (Al-Sc for Tejas/AMCA), missile airframes (Astra Mk3), lightweight Al-Li-Sc for satellites/UAVs, EV battery enclosures, SOFC electrolytes, optical coatings, and India's first indigenous Sc extraction from bauxite residue
+- Nickel superalloy module covers the full spectrum: gas turbine (Inconel 718/625/713C/Waspaloy), nuclear (Inconel 600/690), petrochemical (Inconel 601/825), offshore (Inconel 725), desalination (Monel 400), turbocharger (Nimonic 80A), IGCC (CM247LC), and fighter landing gear (RR1000)
+- Both modules use established patterns: dual-jump Record type assertion, for...of filter loops, correct PageHeader signature
+- Delayed: SCA-B2404 (Chennai→Ludhiana, 10d, Sc flake import customs), SCA-B2412 (Jorhat→Duliajan, 12d, monsoon flooding), NSS-B2404 (Kalpakkam→Kalpakkam, 10d, tube dimension inspection), NSS-B2412 (Jorhat→Mumbai Offshore, 12d, monsoon logistics)
+- Next candidates (pre-validated): niobium-alloy, platinum-group-metal, palladium-catalyst, silver-paste, lithium-refining, vanadium-alloy, titanium-sponge, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush, silicon-metal, boron-carbide
+
+**Project Current State:**
+- 601 module view files, 605 navItems, ~60,904 CSS lines, 1121 viewMap entries
+- TSC clean (0 errors in src/)
+- R380 complete, stable state
+- Dev server OOM with 600+ modules — continue TSC-only QA approach
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 601+ modules, dev server OOM risk — continue TSC-only QA approach
+- NavItem label overwrite risk when inserting new entries — verify adjacent labels
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+- Object.entries(map) arithmetic requires explicit [string, number][] type assertion
+- PageHeader must import from @/components/shared (not @/components/page-header)
