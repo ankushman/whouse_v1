@@ -61706,3 +61706,27 @@ html.theme-transition body {
 .aluminium-bronze-logistics table thead { background: #fef3e2; }
 .aluminium-bronze-logistics table tbody tr:hover { background: #fff7ed; }
 .aluminium-bronze-logistics .text-orange-700 { letter-spacing: 0.025em; }
+
+/* R397a — Nickel Powder Logistics (npw-*) slate */
+.nickel-powder-logistics .space-y-6 > :first-child { border-left: 3px solid #475569; }
+.nickel-powder-logistics .grid > div:nth-child(1) { border-top: 2px solid #475569; }
+.nickel-powder-logistics .grid > div:nth-child(2) { border-top: 2px solid #64748b; }
+.nickel-powder-logistics .grid > div:nth-child(3) { border-top: 2px solid #94a3b8; }
+.nickel-powder-logistics .grid > div:nth-child(4) { border-top: 2px solid #cbd5e1; }
+.nickel-powder-logistics .border-b button { transition: all 0.2s; }
+.nickel-powder-logistics .border-b button:hover { background: #f8fafc; }
+.nickel-powder-logistics table thead { background: #f1f5f9; }
+.nickel-powder-logistics table tbody tr:hover { background: #f8fafc; }
+.nickel-powder-logistics .text-slate-600 { letter-spacing: 0.025em; }
+
+/* R397b — Chromium Sheet Logistics (crs-*) indigo */
+.chromium-sheet-logistics .space-y-6 > :first-child { border-left: 3px solid #4f46e5; }
+.chromium-sheet-logistics .grid > div:nth-child(1) { border-top: 2px solid #4f46e5; }
+.chromium-sheet-logistics .grid > div:nth-child(2) { border-top: 2px solid #6366f1; }
+.chromium-sheet-logistics .grid > div:nth-child(3) { border-top: 2px solid #818cf8; }
+.chromium-sheet-logistics .grid > div:nth-child(4) { border-top: 2px solid #a5b4fc; }
+.chromium-sheet-logistics .border-b button { transition: all 0.2s; }
+.chromium-sheet-logistics .border-b button:hover { background: #eef2ff; }
+.chromium-sheet-logistics table thead { background: #e0e7ff; }
+.chromium-sheet-logistics table tbody tr:hover { background: #eef2ff; }
+.chromium-sheet-logistics .text-indigo-600 { letter-spacing: 0.025em; }

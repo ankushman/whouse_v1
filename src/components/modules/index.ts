@@ -626,3 +626,5 @@ export { default as BerylliumAlloyLogisticsView } from './beryllium-alloy-logist
 export { default as PlatinumAlloyLogisticsView } from './platinum-alloy-logistics-view'
 export { default as GoldAlloyLogisticsView } from './gold-alloy-logistics-view'
 export { default as AluminiumBronzeLogisticsView } from './aluminium-bronze-logistics-view'
+export { default as NickelPowderLogisticsView } from './nickel-powder-logistics-view'
+export { default as ChromiumSheetLogisticsView } from './chromium-sheet-logistics-view'
