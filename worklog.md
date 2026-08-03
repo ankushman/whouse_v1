@@ -1,4 +1,24 @@
 ---
+Task ID: R312 — Solar Thermal CSP + Biomass Power Plant Logistics
+Agent: Main Agent (Cron Loop)
+Task: R312 — 2 new Indian logistics modules for solar thermal CSP (NGEL NTPC Reliance Abhijit Godawari Megha Essel Acme Tata Power — parabolic trough 50MW solar tower 100MW molten salt Fresnel dish Scheffler, HTF Therminol VP1 molten salt 60/40, Rajasthan Gujarat Telangana) and biomass power plant (Thermax BHEL Jindal Clariant Bihar Clarke GE Wartsila — bagasse cogeneration 25MW rice husk gasifier 10MW CFB 50MW biogas AD 5MW wood chip pellet poultry MSW, sugar mill boiler ESP baghouse)
+
+Work Log:
+- Read worklog: R311 complete (commit f5b758e), 456 modules, 468 navItems, 60,053 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate check: 0 duplicates for solar-thermal-csp, biomass-power-plant
+- Icons: Sun (CSP), TreePine (biomass) verified in app-layout.tsx iconMap
+- Created Solar Thermal CSP Logistics (R312a): ~250 lines (after TSC fix rewrite), csp-* deep orange #9a3412, 14 records, 4 tabs
+- Created Biomass Power Plant Logistics (R312b): ~188 lines, bmp-* forest green #14532d, 14 records, 4 tabs
+- Fixed CSP module: filterGroups options type string[] -> {value,count}[], SearchFilterToolbar props names, Record<string,unknown> cast
+- Registered both in index.ts (457 exports), page.tsx, app-store.ts (470 navItems)
+- CSS: 16 lines appended to globals.css (60,069 lines total)
+- TSC FINAL: 0 errors in src/components/modules
+- Git: commit 5b9b6d4 pushed to origin/main
+
+Stage Summary:
+- MODULE FILES: 458 (+2) | NAVITEMS: 470 (+2) | CSS: 60,069 lines (+16)
+- TSC: 0 errors (modules) | GITHUB: pushed (5b9b6d4)
 Task ID: R311 — Bridge Construction + Desalination Plant Logistics
 Agent: Main Agent (Cron Loop)
 Task: R311 — 2 new Indian logistics modules for bridge construction (LT Afcons Dilip Buildcon Gammon Simplex NCC SP ITD — cable-stayed 500m extradosed steel truss railway 300m box girder viaduct 2km arch 150m bowstring 250m, pile driving pier column girder erection cable stay tensioning, MTHL 21.8km Bogibeel Chenab 359m Ganga Narmada Hooghly) and desalination plant (VA Tech Wabag Nikkai IDE Doosan Veolia SUEZ Hitachi BARC — SWRO 100MLD MSF 200MLD MED-TVC 50MLD solar desal 10MLD hybrid 300MLD, membrane spiral wound HP pump ERD intake pipeline, Chennai Minjur Mumbai Jamnagar Kalpakkam)
