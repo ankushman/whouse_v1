@@ -1,4 +1,23 @@
 ---
+Task ID: R325 — Perovskite Solar Cell Manufacturing + Hydrogen Fuel Cell Stack Logistics
+Agent: Main Agent (Cron Loop)
+Task: R325 — 2 new Indian logistics modules for perovskite solar cell manufacturing (IISc TIFR NCL-CSIR TATA Power Solar Adani Solar PRL-ISRO VSSC IIT-KGP IIT-D IIT-M NALCO Cochin Univ Thermax DRDO BEL RITES — Inverted p-i-n Normal n-i-p Tandem Perov-Si, MAPbI3 FAPbI3 CsFAMA FA0.85MA0.15 MAPbBr3 2D/3D Ruddlesden CsPbI2Br CsFAPbI, 19.8-32.8% efficiency 25-1500cm2 71-3624W, BIPV Facade Utility Scale Space Solar Flexible Portable Indoor PV Sensor Concentrated PV Agrivoltaic EV Solar Roof Rooftop C&I Transparent Window Solar Lantern Floating PV Railway Station Roof Defense Field Unit, 8500Cr India 2030 Perovskite Market) and hydrogen fuel cell stack assembly (BHEL Ashok Leyland IISc FC Lab VSSC ISRO Maruti Suzuki Thermax BEML DRDO GRSE Shipyard Reliance Jio HAL Airport Ola EV RCF Railways MDL Naval — PEM SOFC AFC DMFC, 2-300kW 42-85% efficiency 5000-60000hrs stack life, Bus Fleet Truck Freight Telecom Tower Railway Locomotive Spacecraft EPS Forklift Fleet Hotel CHP Mining Dump Truck Military Field Unit Marine Vessel Data Center UPS Airport GSE Submarine AIP City Taxi Fleet, 25000Cr Green Hydrogen FC 2030)
+
+Work Log:
+- Read worklog: R324 complete (commit aa671a4), 482 modules, 494 navItems, 60,153 CSS
+- TSC pre-validation: 0 errors in core files
+- Duplicate check: perovskite-solar-cell-manufacturing and hydrogen-fuel-cell-stack confirmed unique
+- Icons: Sun (perovskite), Zap (fuel cell) verified in iconMap
+- Created Perovskite Solar Cell Manufacturing Logistics (R325a): ~175 lines, psk-* amber #b45309, 14 records
+- Created Hydrogen Fuel Cell Stack Logistics (R325b): ~180 lines, fcs-* cyan #0c4a6e, 14 records
+- Used correct pattern: FilterGroup.label, Record<string, string[]>, JSX entities
+- Registered both in index.ts (490), page.tsx, app-store.ts (496 navItems)
+- CSS: 2 lines appended (60,155 total)
+- TSC FINAL: 0 errors | Git: commit 6f9b4c3 pushed
+
+Stage Summary:
+- MODULE FILES: 484 (+2) | NAVITEMS: 496 (+2) | CSS: 60,155 lines (+2)
+- TSC: 0 errors (modules) | GITHUB: pushed (6f9b4c3)
 Task ID: R324 — Geothermal Energy + Autonomous Vehicle Logistics
 Agent: Main Agent (Cron Loop)
 Task: R324 — 2 new Indian logistics modules for geothermal energy (ONGC BHEL L&T THERMAX GSECL SJVN OIL DRDO GSI IIT-Roorkee GSECL JSEB WBREDA LREDA MPURJA CIL BEML — Binary ORC Flash Steam EGS Enhanced Ground Source HP, 100-3800m 120-340C 1.5-25MW, Puga Valley Ladakh Cambay Basin Gujarat Manikaran HP Tapovan Uttarakhand Tattapani Son-Narmada MP Unai Surajkund Bakkhali Barren Island Chhumathang Bengaluru Gandhinagar, 10000MW Puga potential 4850Cr MNRE Geothermal Programme) and autonomous vehicle logistics (Tata Motors TVS Logistics Mahindra Ashok Leyland BEML Piaggio Switch Mobility VE Commercial DJI India Ouster Qualcomm Velodyne — L3 Conditional L4 Autonomous L5 Full, Tractor-Trailer Container Prime Mover Last-Mile Van Tanker Truck Flatbed Carrier Refrigerated Truck Mining Dump Truck Terminal Tractor Drone Delivery, 50-800km 1.5-100T payload, Mumbai-Delhi NH48 Chennai-Kolkata NH16 Bengaluru City Grid Gujarat Refinery JNPT Port Hyderabad-Bangalore Kerala Medicine Supply Coal India Jharia Kandla-Mundra Pune-Mumbai Chennai Port, 35000Cr 2030 AV Logistics Market)
