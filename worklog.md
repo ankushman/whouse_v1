@@ -1,4 +1,25 @@
 ---
+Task ID: R331 — Hydrogen Pipeline + Carbon Trading Logistics
+Agent: Main Agent (Cron Loop)
+Task: R331 — 2 new Indian logistics modules for hydrogen pipeline (NTPC GAIL Adani Reliance SAIL JSW BARC NPCIL IFFCO TATA NTPC ACC BPCL — Green Blue Grey H2, Electrolytic Solar Wind Nuclear Hydro, NG Reformer CCS, Biomass Gasification, Coal Gasifier, 15-100bar 4-24in 600-7000kg/hr, Refinery Steel DRI Fertilizer FC Power Cement Shipping Export, National H2 Pipeline Grid 25000km target). Carbon trading (Reliance Tata NTPC JSW Hindalco NALCO BPCL NFL TCS Thermax Mahindra ITC Amazon — REC Verra VCU EU ETS Green H2 Certificate, Compliance Voluntary, Power Steel Cement Aluminum Refinery Shipping EV Forestry, Indian Carbon Market ICTS EU CBAM IMO GHG, 2200-6200 per tonne).
+
+Work Log:
+- Read worklog: R330 complete (commit aebcf06), 493 modules, 505 navItems, 60,164 CSS
+- TSC pre-validation: 0 errors in core module files
+- Duplicate check: hydrogen-pipeline and carbon-trading confirmed unique
+- Icons: Network (hydrogen pipeline), Scale (carbon trading) verified in iconMap
+- Created Hydrogen Pipeline Logistics (R331a): ~200 lines, hp2-* cyan #0891b2, 14 records
+- Created Carbon Trading Logistics (R331b): ~195 lines, cbt-* emerald #059669, 14 records
+- Used correct pattern: FilterGroup.label, Record<string, string[]>, JSX &#8594; &#8377; HTML entities
+- Registered both in index.ts (501), page.tsx, app-store.ts (507 navItems)
+- CSS: 1 line appended (60,165 total — compressed CSS blocks)
+- TSC FINAL: 0 errors in modules/page/store | Git: commit 356a8b2 pushed
+
+Stage Summary:
+- MODULE FILES: 495 (+2) | NAVITEMS: 507 (+2) | CSS: 60,165 lines (+1)
+- TSC: 0 errors (modules) | GITHUB: pushed (356a8b2)
+---
+---
 Task ID: R330 — Biojet Fuel (SAF) + Rare Earth Minerals Logistics
 Agent: Main Agent (Cron Loop)
 Task: R330 — 2 new Indian logistics modules for biojet/SAF (IOC Praj Reliance IIT-D SAIL Godrej DRDO IAF IndiGo Air India SpiceJet BlueDart Emirates Lufthansa — HEFA ATJ SIP Fischer-Tropsch, UCO Jatropha Algae Biomass Corn Ethanol, 80-90% CI reduction ASTM D7566, Commercial Defense Regional Cargo Aviation). Rare earth minerals (IREL NMDC BARC DRDO-BEL BEML Tata Motors CSIR-IMMT ISRO — Monazite Bastnasite Xenotime Ion-Adsorption Clay, Alkaline Digestion Acid Baking Solvent Extraction, NdFeB Magnets EV Motors Wind Turbines Defense Nuclear Thorium).
