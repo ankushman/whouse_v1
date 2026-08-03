@@ -614,3 +614,5 @@ export { default as AluminaCeramicLogisticsView } from './alumina-ceramic-logist
 export { default as ChromiumAlloyLogisticsView } from './chromium-alloy-logistics-view'
 export { default as ZirconiumAlloyLogisticsView } from './zirconium-alloy-logistics-view'
 export { default as LithiumRefiningLogisticsView } from './lithium-refining-logistics-view'
+export { default as BismuthAlloyLogisticsView } from './bismuth-alloy-logistics-view'
+export { default as TantalumAlloyLogisticsView } from './tantalum-alloy-logistics-view'

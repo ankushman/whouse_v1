@@ -61435,3 +61435,65 @@ html.theme-transition body {
 .ltr-insight-text { font-size: 0.75rem; color: #6b7280; line-height: 1.5; }
 .ltr-purity-bar-track { background: #dcfce7; }
 .ltr-purity-bar-fill { background: #65a30d; }
+/* R390a: Bismuth Alloy Logistics (bia-*, purple #9333ea) */
+.bia-b2401-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2402-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2403-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2404-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2405-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2406-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2407-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2408-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2409-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2410-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2411-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2412-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2413-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-b2414-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-card-accent { border-left: 4px solid #9333ea; }
+.bia-badge-accent { background: rgba(147, 51, 234, 0.12); color: #9333ea; border: 1px solid rgba(147, 51, 234, 0.3); }
+.bia-tab-active { border-bottom: 2px solid #9333ea; color: #9333ea; font-weight: 600; }
+.bia-kpi-card { border-left: 4px solid #9333ea; background: rgba(147, 51, 234, 0.06); }
+.bia-chart-bar { background: linear-gradient(90deg, #9333ea, #c084fc); }
+.bia-insight-card { border-left: 4px solid #9333ea; }
+.bia-filter-active { background: #9333ea; color: white; border: 1px solid #9333ea; }
+.bia-table-header { background: rgba(147, 51, 234, 0.08); border-bottom: 2px solid #9333ea; }
+.bia-table-row:hover { background: rgba(147, 51, 234, 0.04); }
+.bia-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.bia-priority-critical { color: #dc2626; font-weight: 700; }
+.bia-priority-high { color: #ea580c; font-weight: 600; }
+.bia-priority-medium { color: #ca8a04; font-weight: 500; }
+.bia-melting-indicator { background: linear-gradient(90deg, #fuchsia-500, #purple-600); }
+.bia-investment-indicator { background: linear-gradient(90deg, #purple-500, #violet-600); }
+
+/* R390b: Tantalum Alloy Logistics (taa-*, slate #475569) */
+.taa-b2401-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2402-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2403-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2404-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2405-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2406-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2407-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2408-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2409-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2410-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2411-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2412-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2413-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-b2414-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-card-accent { border-left: 4px solid #475569; }
+.taa-badge-accent { background: rgba(71, 85, 105, 0.12); color: #475569; border: 1px solid rgba(71, 85, 105, 0.3); }
+.taa-tab-active { border-bottom: 2px solid #475569; color: #475569; font-weight: 600; }
+.taa-kpi-card { border-left: 4px solid #475569; background: rgba(71, 85, 105, 0.06); }
+.taa-chart-bar { background: linear-gradient(90deg, #475569, #94a3b8); }
+.taa-insight-card { border-left: 4px solid #475569; }
+.taa-filter-active { background: #475569; color: white; border: 1px solid #475569; }
+.taa-table-header { background: rgba(71, 85, 105, 0.08); border-bottom: 2px solid #475569; }
+.taa-table-row:hover { background: rgba(71, 85, 105, 0.04); }
+.taa-delayed-row { border-left: 4px solid #ef4444; background: rgba(239, 68, 68, 0.08); }
+.taa-priority-critical { color: #dc2626; font-weight: 700; }
+.taa-priority-high { color: #ea580c; font-weight: 600; }
+.taa-priority-medium { color: #ca8a04; font-weight: 500; }
+.taa-cv-indicator { background: linear-gradient(90deg, #zinc-500, #slate-600); }
+.taa-investment-indicator { background: linear-gradient(90deg, #slate-500, #gray-600); }
+.taa-aerospace-highlight { background: rgba(71, 85, 105, 0.12); border: 1px solid rgba(71, 85, 105, 0.25); }
