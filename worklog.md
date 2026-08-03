@@ -10787,3 +10787,42 @@ Stage Summary:
 - With 560+ modules, dev server OOM risk — continue TSC-only QA approach
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+---
+Task ID: R368 — Methanol Fuel Logistics + Graphene Battery Logistics
+Agent: Main Agent (Cron Loop)
+Task: R368 — 2 new Indian logistics modules for green methanol fuel supply chains and graphene battery material production logistics.
+
+Work Log:
+- Read worklog: R367 complete (commit c9139ff), 568 modules, 579 navItems, 60,417 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 4 candidates tested, all clean
+  - Selected methanol-fuel-logistics (mfl-*, Droplets #065f46) and graphene-battery-logistics (gbl-*, Hexagon #3730a3)
+  - Icons verified in iconMap (Droplets at line 157, Hexagon at line 199)
+- Created Methanol Fuel Logistics (R368a): 195 lines, mfl-* emerald #065f46, 14 records
+  - 14 facilities across 12 states (Maharashtra, Kerala, Jharkhand, Karnataka, Gujarat, West Bengal, TN, Telangana, Odisha, MP, Assam, AP, UP)
+  - 14 fuel types: Biomass/e-Methanol Maritime/Coal CTL/MSW Plasma/CO2 Hydrogenation/Jute Waste/Green Bunker/Syngas OTM/LNG Autothermal/Soya Waste/Bamboo/Bio-MeOH Marine/Fish Waste/Wheat Straw
+  - 3,520 KLPD total capacity, 81.8% avg carbon reduction, 15.7 MJ/L avg energy, ₹4,855 Cr investment
+- Created Graphene Battery Logistics (R368b): 195 lines, gbl-* indigo #3730a3, 14 records
+  - 14 facilities across 12 states (Karnataka, Telangana, Maharashtra, Gujarat, TN, West Bengal, Odisha, Rajasthan, UP, Assam, Kerala, AP)
+  - 14 material types: CVD Monolayer/GO Separator/Graphene-LFP Cathode/Graphene-Silicon/rGO Thermal/Supercap Electrode/Exfoliated Powder/EMI Shield/Conductive Ink/Quantum Dot/Anti-Corrosion/Bio-Sensor/Desalination Membrane/Aerogel Casing
+  - 1,148 TPA total capacity, 13,471 S/m avg conductivity, 6.7 avg layers, ₹4,245 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (575), page.tsx (1095 viewMap entries), app-store.ts (581 navItems)
+- CSS: 25 lines appended (60,442 total, +25 lines)
+- Git: commit 9ad19ab pushed
+
+Stage Summary:
+- MODULE FILES: 570 (+2) | NAVITEMS: 581 (+2) | CSS: 60,442 lines (+25)
+- TSC: 0 errors (src/) | GITHUB: pushed (9ad19ab)
+
+**Project Current State:**
+- 570 module view files, 581 navItems, 60,442 CSS lines, 1095 viewMap entries
+- TSC clean (0 errors in src/)
+- R368 complete, stable state
+- Next candidates: titanium-alloy-logistics, carbon-capture-logistics
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 570+ modules, dev server OOM risk — continue TSC-only QA approach
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
