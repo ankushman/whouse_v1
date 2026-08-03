@@ -11466,19 +11466,59 @@ Stage Summary:
 - Next candidates (pre-validated): palladium-catalyst, silver-paste, lithium-refining, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush, silicon-metal, alumina-ceramic, cobalt-alloy, manganese-alloy, chromium-alloy
 
 **Project Current State:**
-- 609 module view files, 613 navItems, ~61,156 CSS lines, 1129 viewMap entries
+- 611 module view files, 615 navItems, ~61,198 CSS lines, 1131 viewMap entries
 - TSC clean (0 errors in src/)
-- R384 complete, stable state
+- R385 complete, stable state
 - Dev server OOM with 600+ modules — continue TSC-only QA approach
 
 **Risks / Next Priorities:**
 - globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
-- With 609+ modules, dev server OOM risk — continue TSC-only QA approach
+- With 611+ modules, dev server OOM risk — continue TSC-only QA approach
 - NavItem label overwrite risk when inserting new entries — verify adjacent labels
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
+- JSX escaping: < must use &#60; inside JSX text content (not <)
+
+---
+Task ID: R385 — Graphite Electrode Logistics + Manganese Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R385 — 2 new Indian logistics modules for graphite electrode/carbon material supply chain and manganese alloy supply chain.
+
+Work Log:
+- Read worklog: R384 complete (commit a588647), 609 modules, 613 navItems, ~61,156 CSS
+- TSC pre-validation: 0 errors in src/
+- Dev server: OOM expected with 600+ modules — TSC-only QA approach
+- Duplicate theme search: 12 candidates tested, molybdenum-alloy and beryllium-copper excluded (already exist)
+  - Selected graphite-electrode-logistics (gel-*, Cog gray #374151) and manganese-alloy-logistics (mna-*, Factory rose #9f1239)
+  - Icons verified in iconMap (Cog and Factory available)
+- Created Graphite Electrode Logistics (R385a): ~260 lines, gel-* gray #374151, 14 records
+  - 14 records across 13 cities (Bhilai, Bengaluru, Mumbai, Pune, Hyderabad, Chennai, Noida, Ahmedabad, Kolkata, Jaipur, Coimbatore, Guwahati, Bhubaneswar, Lucknow)
+  - 14 manufacturers: HEG, Graphite India, Reliance Industries, Bharat Forge, MIDHANI, IGCAR, Sunflag Iron, Gujarat Fluorochemicals, SAIL Rourkela, RSMS, IIT Madras, Oil India, NALCO, TASL
+  - 14 electrode types: UHP 600mm, HP 500mm, RP 300mm, UHP 700mm, isotropic 200mm, nuclear grade 100mm, HP 400mm, impervious 150mm, UHP 500mm pin joint, carbon block 500mm, graphite foam 300mm, impervious 250mm CVD, prebaked anode 500mm, composite 350mm C/C
+  - Applications: EAF steelmaking, ladle furnace, aluminium smelter, die steel EDM, HTGR nuclear moderator, mini blast furnace, fluorine cell anode, silicon furnace, EV thermal management, petrochemical CVD, aluminium potline, scramjet C/C combustor
+  - &#8377;1,957 Cr total investment, avg 1.66 g/cm3 density across all electrodes
+- Created Manganese Alloy Logistics (R385b): ~260 lines, mna-* rose #9f1239, 14 records
+  - 14 records across 13 cities (Bhilai, Bengaluru, Mumbai, Pune, Hyderabad, Chennai, Noida, Ahmedabad, Kolkata, Jaipur, Coimbatore, Guwahati, Bhubaneswar, Lucknow)
+  - 14 manufacturers: SAIL Bhilai, Tata Steel, JSW Steel, Bharat Forge, MIDHANI, MOIL, BALCO, Gujarat Fluorochemicals, Dalmia Cement, RSMS, IIT Madras, Oil India, NALCO, TASL
+  - 14 alloy grades: FeMn 75C7, SiMn 65-17, FeMn LC, Hadfield 12Mn-1C, Mn-Cu alloy, EMD 92%, Al-Mn 3004, MnSO4, FeMn slag, MnO2 pyrolusite, LiMn2O4 spinel, Mn-Cr weld overlay, Mn-Al bronze, 9%Mn cryogenic
+  - Applications: BOF deoxidation, EAF alloying, stainless AOD refining, rail crossing frogs, naval propeller, dry cell battery, beverage can sheet, fertilizer micronutrient, cement additive, glass decolorizer, Li-ion cathode, pipeline wear protection, desalination plant, ISRO LH2 cryogenic tank
+  - &#8377;1,672 Cr total investment, avg 43% Mn content across all grades
+- Fixed TSC error: <5% unescaped in JSX text content (GEL-B2414 C/C composite remark) — changed to &#60;5%
+- Fixed typo: alloyType to alloyGrade in MNA-0012 record
+- Three-file registration: index.ts (608), page.tsx (1131 viewMap entries), app-store.ts (615 navItems)
+- CSS appended: 42 new rules (~61,198 total)
+- TSC post-validation: 0 errors in src/ after fix
+- Duplicate verification: 4 entries per module — all correct
+- Git commit: be1f678, pushed to main
+
+Stage Summary:
+- Project now: 611 modules, 615 navItems, ~61,198 CSS lines, 1131 viewMap entries, 0 TSC errors
+- Graphite electrode: UHP EAF electrodes, prebaked aluminium anodes, nuclear PGS HTGR, fine-grain EDM, impervious fluorine anode, C/C scramjet composite
+- Manganese alloy: FeMn/SiMn steel deoxidation, Hadfield rail crossings, EMD dry cell batteries, LiMn2O4 Li-ion cathode, 9%Mn cryogenic steel ISRO, Mn-Al bronze desalination
+- Delayed: GEL-B2404 (10d, needle coke import), GEL-B2412 (12d, monsoon), MNA-B2404 (10d, Mn ore allocation), MNA-B2412 (12d, monsoon)
+- Next candidates (pre-validated): silver-paste, lithium-refining, rare-gas, carbon-brush, silicon-metal, alumina-ceramic, chromium-alloy, zirconium-alloy
 
 ---
 Task ID: R384 — Palladium Catalyst Logistics + Tungsten Heavy Alloy Logistics
