@@ -582,3 +582,5 @@ export { default as GalliumNitrideLogisticsView } from './gallium-nitride-logist
 export { default as DroneDeliveryMedicalLogisticsView } from './drone-delivery-medical-logistics-view'
 export { default as TungstenCarbideLogisticsView } from './tungsten-carbide-logistics-view'
 export { default as HempFiberLogisticsView } from './hemp-fiber-logistics-view'
+export { default as SiliconPhotonicsLogisticsView } from './silicon-photonics-logistics-view'
+export { default as BerylliumCopperLogisticsView } from './beryllium-copper-logistics-view'

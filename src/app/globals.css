@@ -60608,3 +60608,33 @@ html.theme-transition body {
 .hfl-insight-card { border-radius: 12px; transition: all 0.2s ease; }
 .hfl-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(101, 163, 13, 0.12); }
 @keyframes hflBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
+
+/* ===== Silicon Photonics Logistics (sip-*) ===== */
+.sip-logistics-container { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #ddd6fe 100%); }
+.sip-kpi-card { transition: all 0.3s ease; }
+.sip-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15); }
+.sip-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.sip-tab-btn:hover { transform: scale(1.02); }
+.sip-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.sip-chart-card:hover { box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1); }
+.sip-bar-fill { animation: sipBarGrow 0.8s ease-out forwards; }
+.sip-table-row { transition: background-color 0.15s ease; }
+.sip-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.sip-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.sip-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(139, 92, 246, 0.12); }
+@keyframes sipBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
+
+/* ===== Beryllium Copper Logistics (bcu-*) ===== */
+.bcu-logistics-container { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%); }
+.bcu-kpi-card { transition: all 0.3s ease; }
+.bcu-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(71, 85, 105, 0.15); }
+.bcu-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.bcu-tab-btn:hover { transform: scale(1.02); }
+.bcu-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.bcu-chart-card:hover { box-shadow: 0 2px 8px rgba(71, 85, 105, 0.1); }
+.bcu-bar-fill { animation: bcuBarGrow 0.8s ease-out forwards; }
+.bcu-table-row { transition: background-color 0.15s ease; }
+.bcu-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.bcu-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.bcu-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(71, 85, 105, 0.12); }
+@keyframes bcuBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
