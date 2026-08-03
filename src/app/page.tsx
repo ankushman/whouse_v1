@@ -1100,7 +1100,6 @@ const viewMap: Record<string, React.ComponentType> = {
   "vaccine-cold-chain-logistics": VaccineColdChainLogisticsView,
   "gallium-nitride-logistics": GalliumNitrideLogisticsView,
   "drone-delivery-medical-logistics": DroneDeliveryMedicalLogisticsView,
-  "tungsten-carbide-logistics": TungstenCarbideLogisticsView,
   "hemp-fiber-logistics": HempFiberLogisticsView,
   "silicon-photonics-logistics": SiliconPhotonicsLogisticsView,
   "beryllium-copper-logistics": BerylliumCopperLogisticsView,
@@ -1141,6 +1140,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "vanadium-alloy-logistics": VanadiumAlloyLogisticsView,
   "cobalt-superalloy-logistics": CobaltSuperalloyLogisticsView,
   "titanium-sheet-logistics": TitaniumSheetLogisticsView,
+  "inconel-superalloy-logistics": InconelLogisticsView,
+  "copper-nickel-alloy-logistics": CopperNickelAlloyLogisticsView,
 }
 
 
@@ -1329,7 +1330,6 @@ import SiliconCarbideLogisticsView from "@/components/modules/silicon-carbide-lo
 import VaccineColdChainLogisticsView from "@/components/modules/vaccine-cold-chain-logistics-view"
 import GalliumNitrideLogisticsView from "@/components/modules/gallium-nitride-logistics-view"
 import DroneDeliveryMedicalLogisticsView from "@/components/modules/drone-delivery-medical-logistics-view"
-import TungstenCarbideLogisticsView from "@/components/modules/tungsten-carbide-logistics-view"
 import HempFiberLogisticsView from "@/components/modules/hemp-fiber-logistics-view"
 import SiliconPhotonicsLogisticsView from "@/components/modules/silicon-photonics-logistics-view"
 import BerylliumCopperLogisticsView from "@/components/modules/beryllium-copper-logistics-view"
@@ -1370,3 +1370,5 @@ import NickelBrazingAlloyLogisticsView from "@/components/modules/nickel-brazing
 import VanadiumAlloyLogisticsView from "@/components/modules/vanadium-alloy-logistics-view"
 import CobaltSuperalloyLogisticsView from "@/components/modules/cobalt-superalloy-logistics-view"
 import TitaniumSheetLogisticsView from "@/components/modules/titanium-sheet-logistics-view"
+import InconelLogisticsView from "@/components/modules/inconel-superalloy-logistics-view"
+import CopperNickelAlloyLogisticsView from "@/components/modules/copper-nickel-alloy-logistics-view"

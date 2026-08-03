@@ -580,7 +580,6 @@ export { default as SiliconCarbideLogisticsView } from './silicon-carbide-logist
 export { default as VaccineColdChainLogisticsView } from './vaccine-cold-chain-logistics-view'
 export { default as GalliumNitrideLogisticsView } from './gallium-nitride-logistics-view'
 export { default as DroneDeliveryMedicalLogisticsView } from './drone-delivery-medical-logistics-view'
-export { default as TungstenCarbideLogisticsView } from './tungsten-carbide-logistics-view'
 export { default as HempFiberLogisticsView } from './hemp-fiber-logistics-view'
 export { default as SiliconPhotonicsLogisticsView } from './silicon-photonics-logistics-view'
 export { default as BerylliumCopperLogisticsView } from './beryllium-copper-logistics-view'
@@ -621,3 +620,5 @@ export { default as NickelBrazingAlloyLogisticsView } from './nickel-brazing-all
 export { default as VanadiumAlloyLogisticsView } from './vanadium-alloy-logistics-view'
 export { default as CobaltSuperalloyLogisticsView } from './cobalt-superalloy-logistics-view'
 export { default as TitaniumSheetLogisticsView } from './titanium-sheet-logistics-view'
+export { default as InconelLogisticsView } from './inconel-superalloy-logistics-view'
+export { default as CopperNickelAlloyLogisticsView } from './copper-nickel-alloy-logistics-view'
