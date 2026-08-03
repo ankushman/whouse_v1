@@ -586,3 +586,5 @@ export { default as SiliconPhotonicsLogisticsView } from './silicon-photonics-lo
 export { default as BerylliumCopperLogisticsView } from './beryllium-copper-logistics-view'
 export { default as DiamondSyntheticLogisticsView } from './diamond-synthetic-logistics-view'
 export { default as RareEarthMagnetLogisticsView } from './rare-earth-magnet-logistics-view'
+export { default as MolybdenumAlloyLogisticsView } from './molybdenum-alloy-logistics-view'
+export { default as IndiumPhosphideLogisticsView } from './indium-phosphide-logistics-view'
