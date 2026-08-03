@@ -1060,6 +1060,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "underground-energy-storage": UndergroundEnergyStorageView,
   "tidal-energy-logistics": TidalEnergyLogisticsView,
   "hydrogen-refueling-logistics": HydrogenRefuelingLogisticsView,
+  "ev-telematics-platform": EVTelematicsPlatformView,
+  "urban-mining-logistics": UrbanMiningLogisticsView,
 }
 
 
@@ -1204,6 +1206,8 @@ import FloatingOffshoreWindView from "@/components/modules/floating-offshore-win
 import BiomassGasificationLogisticsView from "@/components/modules/biomass-gasification-logistics-view"
 import UndergroundEnergyStorageView from "@/components/modules/underground-energy-storage-view"
 import HydrogenRefuelingLogisticsView from "@/components/modules/hydrogen-refueling-logistics-view"
+import EVTelematicsPlatformView from "@/components/modules/ev-telematics-platform-view"
+import UrbanMiningLogisticsView from "@/components/modules/urban-mining-logistics-view"
 import SmartCityResilienceHubLogisticsView from "@/components/modules/smart-city-resilience-hub-logistics-view"
 import UrbanCanopyMicroclimateLogisticsView from "@/components/modules/urban-canopy-microclimate-logistics-view"
 import SmartGridOSLogisticsView from "@/components/modules/smart-grid-os-logistics-view"

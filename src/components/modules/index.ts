@@ -540,3 +540,5 @@ export { default as BiomassGasificationLogisticsView } from './biomass-gasificat
 export { default as UndergroundEnergyStorageView } from './underground-energy-storage-view'
 export { default as TidalEnergyLogisticsView } from './tidal-energy-logistics-view'
 export { default as HydrogenRefuelingLogisticsView } from './hydrogen-refueling-logistics-view'
+export { default as EVTelematicsPlatformView } from './ev-telematics-platform-view'
+export { default as UrbanMiningLogisticsView } from './urban-mining-logistics-view'
