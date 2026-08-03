@@ -10748,3 +10748,42 @@ Stage Summary:
 - With 560+ modules, dev server OOM risk — continue TSC-only QA approach
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
+---
+Task ID: R367 — Aluminium-Air Battery Logistics + Syngas Logistics
+Agent: Main Agent (Cron Loop)
+Task: R367 — 2 new Indian logistics modules for aluminium-air battery supply chains and syngas production/distribution logistics.
+
+Work Log:
+- Read worklog: R366 complete (commit 333c83c), 566 modules, 577 navItems, 60,392 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 8 candidates tested, all clean
+  - Selected aluminium-air-battery-logistics (aal-*, PlaneTakeoff #1e3a5f) and syngas-logistics (syg-*, FlaskConical #3f6212)
+  - Icons verified in iconMap (PlaneTakeoff at line 151, FlaskConical at line 136)
+- Created Aluminium-Air Battery Logistics (R367a): 195 lines, aal-* blue #1e3a5f, 14 records
+  - 14 facilities across 12 states (Karnataka, Telangana, Maharashtra, West Bengal, TN, Gujarat, UP, Odisha, Rajasthan, Assam, AP, MP, Kerala)
+  - 14 battery types: Al-Air Drone/Telcom/Marine/Rail/Defence/Emergency/Village/Mining/Alumina Co-Product/EV Range Extender/Fishing/Remote Area/Naval/2W Swap
+  - 776,000 kWh total capacity, 368 Wh/kg avg energy density, 139 avg cycle life, ₹4,845 Cr investment
+- Created Syngas Logistics (R367b): 195 lines, syg-* lime #3f6212, 14 records
+  - 14 facilities across 10 states (Jharkhand, Chhattisgarh, Gujarat, Karnataka, Maharashtra, AP, Odisha, West Bengal, Telangana, Kerala, TN)
+  - 14 gasifier types: Entrained Flow Coal/Downdraft Biomass/Fluidised Bed Petcoke/UCG In-Situ/Plasma MSW/Rotary Kiln MSW/Top-Charge Coal/FB Refuse/Fixed Bed Coal DRI/Downdraft Jute/CFB Rice/Updraft Coir/Partial Oxidation Naphtha/Slurry Feed Coal
+  - 22,500 TPD total capacity, 13.0 MJ/m3 avg heating value, 77.5% avg carbon efficiency, ₹6,410 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (573), page.tsx (1093 viewMap entries), app-store.ts (579 navItems)
+- CSS: 25 lines appended (60,417 total, +25 lines)
+- Git: commit c9139ff pushed
+
+Stage Summary:
+- MODULE FILES: 568 (+2) | NAVITEMS: 579 (+2) | CSS: 60,417 lines (+25)
+- TSC: 0 errors (src/) | GITHUB: pushed (c9139ff)
+
+**Project Current State:**
+- 568 module view files, 579 navItems, 60,417 CSS lines, 1093 viewMap entries
+- TSC clean (0 errors in src/)
+- R367 complete, stable state
+- Next candidates: methanol-fuel-logistics, graphene-battery-logistics, titanium-alloy-logistics, carbon-capture-logistics
+
+**Risks / Next Priorities:**
+- globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
+- With 560+ modules, dev server OOM risk — continue TSC-only QA approach
+- All non-void JSX elements must use closing tags, never self-closing />
+- Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
