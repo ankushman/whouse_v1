@@ -510,6 +510,8 @@ import HydrogenPipelineLogisticsView from "@/components/modules/hydrogen-pipelin
 import CarbonTradingLogisticsView from "@/components/modules/carbon-trading-logistics-view"
 import DeepSeaMiningLogisticsView from "@/components/modules/deep-sea-mining-logistics-view"
 import BiocharLogisticsView from "@/components/modules/biochar-logistics-view"
+import HydrogenStorageLogisticsView from "@/components/modules/hydrogen-storage-logistics-view"
+import PlasmaGasificationLogisticsView from "@/components/modules/plasma-gasification-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -1019,6 +1021,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "carbon-trading": CarbonTradingLogisticsView,
   "deep-sea-mining": DeepSeaMiningLogisticsView,
   "biochar": BiocharLogisticsView,
+  "hydrogen-storage": HydrogenStorageLogisticsView,
+  "plasma-gasification": PlasmaGasificationLogisticsView,
 }
 
 
