@@ -484,3 +484,5 @@ export { default as TidalEnergyLogisticsView } from './tidal-energy-logistics-vi
 export { default as HydrogenFuelStationLogisticsView } from './hydrogen-fuel-station-logistics-view'
 export { default as CarbonNanotubeProductionLogisticsView } from './carbon-nanotube-production-logistics-view'
 export { default as GrapheneProductionLogisticsView } from './graphene-production-logistics-view'
+export { default as GeothermalEnergyLogisticsView } from './geothermal-energy-logistics-view'
+export { default as AutonomousVehicleLogisticsView } from './autonomous-vehicle-logistics-view'

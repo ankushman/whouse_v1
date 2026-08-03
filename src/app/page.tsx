@@ -493,6 +493,8 @@ import TidalEnergyLogisticsView from "@/components/modules/tidal-energy-logistic
 import HydrogenFuelStationLogisticsView from "@/components/modules/hydrogen-fuel-station-logistics-view"
 import CarbonNanotubeProductionLogisticsView from "@/components/modules/carbon-nanotube-production-logistics-view"
 import GrapheneProductionLogisticsView from "@/components/modules/graphene-production-logistics-view"
+import GeothermalEnergyLogisticsView from "@/components/modules/geothermal-energy-logistics-view"
+import AutonomousVehicleLogisticsView from "@/components/modules/autonomous-vehicle-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -985,6 +987,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "hydrogen-fuel-station": HydrogenFuelStationLogisticsView,
   "carbon-nanotube-production": CarbonNanotubeProductionLogisticsView,
   "graphene-production": GrapheneProductionLogisticsView,
+  "geothermal-energy": GeothermalEnergyLogisticsView,
+  "autonomous-vehicle": AutonomousVehicleLogisticsView,
 }
 
 
