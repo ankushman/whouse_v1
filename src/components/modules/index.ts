@@ -464,3 +464,5 @@ export { default as SolarThermalCspLogisticsView } from './solar-thermal-csp-log
 export { default as BiomassPowerPlantLogisticsView } from './biomass-power-plant-logistics-view'
 export { default as HydrogenProductionFacilityLogisticsView } from './hydrogen-production-facility-logistics-view'
 export { default as FlyoverInterchangeLogisticsView } from './flyover-interchange-logistics-view'
+export { default as PortContainerTerminalLogisticsView } from './port-container-terminal-logistics-view'
+export { default as SubmarineTunnelLogisticsView } from './submarine-tunnel-logistics-view'

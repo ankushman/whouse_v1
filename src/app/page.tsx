@@ -474,6 +474,8 @@ import SolarThermalCspLogisticsView from "@/components/modules/solar-thermal-csp
 import BiomassPowerPlantLogisticsView from "@/components/modules/biomass-power-plant-logistics-view"
 import HydrogenProductionFacilityLogisticsView from "@/components/modules/hydrogen-production-facility-logistics-view"
 import FlyoverInterchangeLogisticsView from "@/components/modules/flyover-interchange-logistics-view"
+import PortContainerTerminalLogisticsView from "@/components/modules/port-container-terminal-logistics-view"
+import SubmarineTunnelLogisticsView from "@/components/modules/submarine-tunnel-logistics-view"
 import { DashboardSkeleton } from "@/components/shared/dashboard-skeleton"
 import { ViewErrorBoundary } from "@/components/shared/view-error-boundary"
 import { cn } from "@/lib/utils"
@@ -947,6 +949,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "biomass-power-plant": BiomassPowerPlantLogisticsView,
   "hydrogen-production-facility": HydrogenProductionFacilityLogisticsView,
   "flyover-interchange": FlyoverInterchangeLogisticsView,
+  "port-container-terminal": PortContainerTerminalLogisticsView,
+  "submarine-tunnel": SubmarineTunnelLogisticsView,
 }
 
 

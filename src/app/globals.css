@@ -60087,3 +60087,23 @@ html.theme-transition body {
 .foi-insights { animation: foiFadeIn 0.4s ease-out; }
 .foi-table-wrap { box-shadow: 0 1px 3px rgba(74, 25, 66, 0.1); }
 @keyframes foiFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* R314a - Port Container Terminal Logistics */
+.pct-root { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%); min-height: 100vh; }
+.pct-tabs { border-color: #7dd3fc; }
+.pct-tab { transition: all 0.2s ease; }
+.pct-dash { animation: pctFadeIn 0.4s ease-out; }
+.pct-reg { animation: pctFadeIn 0.4s ease-out; }
+.pct-analytics { animation: pctFadeIn 0.4s ease-out; }
+.pct-insights { animation: pctFadeIn 0.4s ease-out; }
+.pct-table-wrap { box-shadow: 0 1px 3px rgba(12, 74, 110, 0.1); }
+@keyframes pctFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* R314b - Submarine Tunnel Logistics */
+.smt-root { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 50%, #99f6e4 100%); min-height: 100vh; }
+.smt-tabs { border-color: #5eead4; }
+.smt-tab { transition: all 0.2s ease; }
+.smt-dash { animation: smtFadeIn 0.4s ease-out; }
+.smt-reg { animation: smtFadeIn 0.4s ease-out; }
+.smt-analytics { animation: smtFadeIn 0.4s ease-out; }
+.smt-insights { animation: smtFadeIn 0.4s ease-out; }
+.smt-table-wrap { box-shadow: 0 1px 3px rgba(19, 78, 74, 0.1); }
+@keyframes smtFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
