@@ -60578,3 +60578,33 @@ html.theme-transition body {
 .ddm-insight-card { border-radius: 12px; transition: all 0.2s ease; }
 .ddm-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12); }
 @keyframes ddmBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
+
+/* ===== Tungsten Carbide Logistics (tcb-*) ===== */
+.tcb-logistics-container { background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fef3c7 100%); }
+.tcb-kpi-card { transition: all 0.3s ease; }
+.tcb-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(234, 88, 12, 0.15); }
+.tcb-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.tcb-tab-btn:hover { transform: scale(1.02); }
+.tcb-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.tcb-chart-card:hover { box-shadow: 0 2px 8px rgba(234, 88, 12, 0.1); }
+.tcb-bar-fill { animation: tcbBarGrow 0.8s ease-out forwards; }
+.tcb-table-row { transition: background-color 0.15s ease; }
+.tcb-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.tcb-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.tcb-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(234, 88, 12, 0.12); }
+@keyframes tcbBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
+
+/* ===== Hemp Fiber Logistics (hfl-*) ===== */
+.hfl-logistics-container { background: linear-gradient(135deg, #f7fee7 0%, #ecfccb 50%, #d9f99d 100%); }
+.hfl-kpi-card { transition: all 0.3s ease; }
+.hfl-kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(101, 163, 13, 0.15); }
+.hfl-tab-btn { font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0.01em; }
+.hfl-tab-btn:hover { transform: scale(1.02); }
+.hfl-chart-card { border-radius: 12px; transition: all 0.2s ease; }
+.hfl-chart-card:hover { box-shadow: 0 2px 8px rgba(101, 163, 13, 0.1); }
+.hfl-bar-fill { animation: hflBarGrow 0.8s ease-out forwards; }
+.hfl-table-row { transition: background-color 0.15s ease; }
+.hfl-filter-btn { font-family: 'Inter', system-ui, sans-serif; }
+.hfl-insight-card { border-radius: 12px; transition: all 0.2s ease; }
+.hfl-insight-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(101, 163, 13, 0.12); }
+@keyframes hflBarGrow { from { width: 0 !important; } to { width: var(--target-width, 100%); } }
