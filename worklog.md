@@ -25,6 +25,32 @@ Stage Summary:
 - MODULE FILES: 529 (+2) | NAVITEMS: 541 (+2) | CSS: 60,182 lines (+1)
 - TSC: 0 errors (src/) | GITHUB: pushed (246ea24)
 ---
+Task ID: R349 — Plasma Arc Recycling + Green Roof Infrastructure
+Agent: Main Agent (Cron Loop)
+Task: R349 — 2 new Indian logistics modules for plasma arc recycling and green roof infrastructure logistics.
+
+Work Log:
+- Read worklog: R348 complete (commit 246ea24), 529 modules, 541 navItems, 60,182 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: 10 candidates tested, all confirmed clean
+  - Selected plasma-arc-recycling (par-*, Zap #c026d3) and green-roof-infrastructure (gri-*, LeafyGreen #15803d)
+- Created Plasma Arc Recycling (R349a): ~190 lines, par-* fuchsia #c026d3, 14 records
+  - 14 facilities: Delhi, Mumbai, Bengaluru, Chennai, Hyderabad, Kolkata, Pune, Ahmedabad, Jaipur, Lucknow, Indore, Kochi, Coimbatore, Visakhapatnam
+  - 7 technologies: DC Plasma Arc, AC Plasma Torch, Transferred Arc, Non-Transferred Arc, Plasma Pyrolysis, Vitrification Plasma, Plasma Gasification
+  - 4,360 TPD capacity, &#8377;14,960 Cr investment
+- Created Green Roof Infrastructure (R349b): ~190 lines, gri-* green #15803d, 14 records
+  - 14 installations: Delhi, Mumbai, Bengaluru, Chennai, Hyderabad, Kolkata, Pune, Ahmedabad, Jaipur, Lucknow, Indore, Kochi, Guwahati, Bhubaneswar
+  - 8 roof types: Intensive, Extensive, Rooftop Farm, Solar-Green Hybrid, Biodiverse Brown, Modular, Living Wall Terrace, Stormwater
+  - 99,300 sqm area, 338,000 L stormwater retention, &#8377;4,785 Cr investment
+- TSC: 0 errors in src/ on first pass
+- Registered in index.ts (537), page.tsx (1058 viewMap), app-store.ts (543 navItems)
+- CSS: 2 lines appended (60,184 total)
+- Git: commit 0faab77 pushed
+
+Stage Summary:
+- MODULE FILES: 531 (+2) | NAVITEMS: 543 (+2) | CSS: 60,184 lines (+2)
+- TSC: 0 errors (src/) | GITHUB: pushed (0faab77)
+---
 ---
 Task ID: R347 — Green Ammonia Logistics + Carbon Trading Platform
 Agent: Main Agent (Cron Loop)
