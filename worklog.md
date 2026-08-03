@@ -11466,16 +11466,53 @@ Stage Summary:
 - Next candidates (pre-validated): palladium-catalyst, silver-paste, lithium-refining, rare-gas, tungsten-heavy-alloy, graphite-electrode, carbon-brush, silicon-metal, alumina-ceramic, cobalt-alloy, manganese-alloy, chromium-alloy
 
 **Project Current State:**
-- 607 module view files, 611 navItems, ~61,114 CSS lines, 1127 viewMap entries
+- 609 module view files, 613 navItems, ~61,156 CSS lines, 1129 viewMap entries
 - TSC clean (0 errors in src/)
-- R383 complete, stable state
+- R384 complete, stable state
 - Dev server OOM with 600+ modules — continue TSC-only QA approach
 
 **Risks / Next Priorities:**
 - globals.css at 60K+ lines — Edit tool unusable, must use bash heredoc for CSS
-- With 607+ modules, dev server OOM risk — continue TSC-only QA approach
+- With 609+ modules, dev server OOM risk — continue TSC-only QA approach
 - NavItem label overwrite risk when inserting new entries — verify adjacent labels
 - All non-void JSX elements must use closing tags, never self-closing />
 - Non-src/ TSC errors persist in scripts/ and skills/ — not blocking
 - Object.entries(map) arithmetic requires explicit [string, number][] type assertion
 - PageHeader must import from @/components/shared (not @/components/page-header)
+
+---
+Task ID: R384 — Palladium Catalyst Logistics + Tungsten Heavy Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R384 — 2 new Indian logistics modules for palladium catalyst supply chain and tungsten heavy alloy supply chain.
+
+Work Log:
+- Read worklog: R383 complete (commit e9b4d2d), 607 modules, 611 navItems, ~61,114 CSS
+- TSC pre-validation: 0 errors in src/ (only pre-existing errors in skills/mini-services/scripts)
+- Dev server: OOM expected with 600+ modules — TSC-only QA approach
+- Duplicate theme search: 13 candidates tested, cobalt-alloy excluded (already exists)
+  - Selected palladium-catalyst-logistics (pdc-*, FlaskConical purple #7e22ce) and tungsten-heavy-alloy-logistics (wha-*, Hammer orange #c2410c)
+  - Icons verified in iconMap (FlaskConical and Hammer available)
+- Created Palladium Catalyst Logistics (R384a): ~260 lines, pdc-* purple #7e22ce, 14 records
+  - 14 records across 13 cities (Gurugram, Hyderabad, Mumbai, Bengaluru, Pune, Chennai, Noida, Ahmedabad, Kolkata, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Lucknow)
+  - 14 manufacturers: Johnson Matthey, Hindustan Platinum, Viney Chemicals, Dr. Reddys, Bharat Forge, Chennai Petroleum, HAL, Gujarat Fluorochemicals, IOCL R&amp;D, Rajasthan State Mines, IIT Madras, Oil India, NALCO, TASL
+  - 14 catalyst types: Pd/C 5%, Pd/Al2O3 1%, PdCl2, Pd(OH)2/C Pearlman, Pd/Zeolite 0.5%, Pd-Ag 40:60 membrane, Pd/SiO2 2%, Pd Black, Pd-Re 5:1, Pd/TiO2 0.3%, Pd/C 10%, Pd/Sn 3:1, Pd/Ni 1:10, Pd/C 3%
+  - Applications: refinery hydrotreating, auto TWC, Wacker oxidation, pharma API hydrogenation, diesel DPF, H2 purification membrane, fuel cell electrode, Suzuki coupling, reforming, water treatment, transfer H2, PDH propane, etherification, groundwater dechlorination
+  - &#8377;2,042 Cr total investment, avg 639 m2/g surface area across all catalysts
+- Created Tungsten Heavy Alloy Logistics (R384b): ~260 lines, wha-* orange #c2410c, 14 records
+  - 14 records across 13 cities (Hyderabad, Bengaluru, Mumbai, Pune, Chennai, Noida, Kolkata, Ahmedabad, Jaipur, Coimbatore, Bhubaneswar, Guwahati, Gandhinagar, Lucknow)
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, IGCAR, BEL, SAIL Bhilai, Gujarat Fluorochemicals, Rajasthan State Mines, IIT Madras, NALCO, Oil India, Adani Defence, TASL
+  - 14 alloy grades: D178 (90W-6Ni-4Fe), W-Ni-Cu 97W, W-Ni-Fe 93W, W-Cu 80W-20Cu, W-Re 95W-5Re, W-Ni-Fe 91W, W-Heavy Metal 95W, W-Ni-Cu 90W, W-Ni-Mn 95W, W-Cr 70W-30Cr, W-Ni-Fe 92W, W-Ag 50W-50Ag, W-Ni-Co 94W-4Ni-2Co, W-Re-Os 96W-3Re-1Os
+  - Applications: KE penetrator tank ammo, PSLV counterweight, BARC radiation shielding, EDM electrode, fusion divertor, BrahMos missile fin, crusher liner, CT X-ray target, ordnance fragmentation shell, plasma spray coating, ONGC MWD tool, electrical contact switchgear, smart munition casing, satellite thruster nozzle
+  - &#8377;2,749 Cr total investment, avg 17.3 g/cm3 density across all alloys
+- Three-file registration: index.ts (606), page.tsx (1129 viewMap entries), app-store.ts (613 navItems)
+- CSS appended: 42 new rules (~61,156 total)
+- TSC post-validation: 0 errors in src/ on first pass
+- Duplicate verification: 4 entries per module (export + import + viewMap + navItem) — all correct
+- Git commit: a588647, pushed to main
+
+Stage Summary:
+- Project now: 609 modules, 613 navItems, ~61,156 CSS lines, 1129 viewMap entries, 0 TSC errors
+- Palladium catalyst: Pd/C hydrogenation, Pd/Al2O3 auto TWC, Pd-Ag H2 membrane, Pd/SiO2 fuel cell, Pd Black cross-coupling, Pd/C groundwater dechlorination
+- Tungsten heavy alloy: D178 KE penetrator, W-Re fusion divertor, 93W-Ni-Fe nuclear shielding, W-Cu EDM, W-Ni-Co smart munition, W-Re-Os satellite thruster
+- Delayed: PDC-B2404 (10d, FDA import docs), PDC-B2412 (12d, monsoon), WHA-B2404 (10d, W powder import), WHA-B2412 (12d, monsoon)
+- Next candidates (pre-validated): silver-paste, lithium-refining, rare-gas, graphite-electrode, carbon-brush, silicon-metal, alumina-ceramic, manganese-alloy, chromium-alloy
