@@ -1,4 +1,26 @@
 ---
+Task ID: R320 — Fusion Energy Reactor + Ocean Wave Energy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R320 — 2 new Indian logistics modules for fusion energy reactor (ITER-India IPR IISc BARC IGCAR L&T NCL Saha VSSC Bhopal-AMPRI DAE — Tokamak TF Coil Divertor FirstWall Cryostat Blanket NBI VacuumVessel DiagnosticPort Stellarator Coil PlasmaHeating TritiumBreeder MagneticSensor CoolingWaterLoop, 80-220MK 150-1000ms 0.5-5.0MW/m2 SST-1 ADITYA-U ITER DEMO STEAM Compact-Stellarator 2500Cr) and ocean wave energy (NIOT CWRDM L&T IISc NIO IIT-KGP COEP VSSC SVNIT Jadavpur PDPU — OWC PointAbsorber Buoy Attenuator Snake Overtopping Device Oscillating WaveSurge Submerged PressureDifferential Rotating MassGyroscope, 50-600kW 1.2-4.0m 5-12s 6-30m capture 28-45% efficiency, Vizag Lakshadweep Goa Kanyakumari Andaman Kerala Puri Sundarbans Daman Maldives, MNRE 40GW potential 45Cr)
+
+Work Log:
+- Read worklog: R319 complete (commit 760a7d3), 472 modules, 484 navItems, 60,143 CSS, 0 TSC errors
+- TSC pre-validation: 0 errors in src/components/modules
+- Duplicate check: fusion-energy-reactor and ocean-wave-energy confirmed unique
+- Icons: Atom (fusion), Waves (ocean wave) verified in iconMap
+- Created Fusion Energy Reactor Logistics (R320a): ~220 lines, fer-* deep purple #581c87, 14 records
+- Created Ocean Wave Energy Logistics (R320b): ~220 lines, owe-* dark cyan #0c4a6e, 14 records
+- Fixed TSC: JSX text '>' must be '&gt;' in both modules (fer: >10MW/m2, owe: Hs > 4m)
+- Used correct R319 pattern: FilterGroup.label, Record<string, string[]>, toggleFilter array
+- ModuleBreadcrumb import correct (@/components/shared/module-breadcrumb)
+- Registered both in index.ts (480), page.tsx, app-store.ts (486 navItems)
+- CSS: 2 lines appended (60,145 total)
+- TSC FINAL: 0 errors | Git: commit bc7b53e pushed
+
+Stage Summary:
+- MODULE FILES: 474 (+2) | NAVITEMS: 486 (+2) | CSS: 60,145 lines (+2)
+- TSC: 0 errors (modules) | GITHUB: pushed (bc7b53e)
+- KEY FIX: JSX > must be &gt; in text content
 Task ID: R319 — Solid-State Battery Manufacturing + Green Ammonia Production Logistics
 Agent: Main Agent (Cron Loop)
 Task: R319 — 2 new Indian logistics modules for solid-state battery manufacturing (Tata JSW IIT-M TIFR BARC IISc ARCI NCL IIT-D IIT-K IIT-G SAC-ISRO PRL VSSC PSG Tech — Sulfide Li6PS5Cl LGPS Argyrodite 420-450Wh/kg Oxide LLZO Garnet-NASICON 380-400Wh/kg Polymer PEO-LiTFSI PVDF-HFP 260-300Wh/kg Halide Li3YCl6 Li3InCl6 340-350Wh/kg, National Battery Mission 100GWh 2030 PLI 18000Cr) and green ammonia production (Reliance NTPC Adani Oil India IOCL SJVN BHAVINI BPCL NALCO — Green H2 Haber-Bosch PEM/AWE/SOE Electrolyser Biomass Gasification Nuclear HTGR CCS Methane Pyrolysis, 400-3500TPD 4500-8000/T 0.02-0.40kgCO2/kgNH3 99.2-99.9% purity, National Green Hydrogen Mission 5MTPA SIGHT 2400Cr)
