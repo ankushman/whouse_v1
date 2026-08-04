@@ -1,4 +1,46 @@
 ---
+Task ID: R413 — Niobium Powder Logistics + Vanadium Sheet Logistics
+Agent: Main Agent (Cron Loop)
+Task: R413 — 2 new Indian logistics modules for niobium powder supply chain and vanadium sheet supply chain.
+
+Work Log:
+- Read worklog: R412 complete (commit 31e5613), 661 modules, 666 navItems, ~62,139 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: niobium-powder CLEAN, vanadium-sheet CLEAN
+- Icons verified: Hexagon and Flame both confirmed in iconMap
+- Created Niobium Powder Logistics (R413a): ~110 lines, nbp-* slate #475569, 14 records
+  - 14 grades: Nb 99.9% Spherical, Nb-1Zr Atomized, NbC Nano Carbide, Nb3Sn Superconductor, Nb HDH, Nb2O5 Optical, Nb-Ti Wire, Ferro Nb, Plasma Spherical, K2NbF7 Precursor, Nb-10W-1Zr, Nb Rod Stock, Nb5Si3 Silicide, Nb Plate Powder
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Bharat Forge, IGCAR, Tata Advanced Materials, Gujarat Niobium Tech, Rajasthan Niobium Corp, NALCO, Tamil Nadu Niobium Corp, Gujarat Nb Products, Assam Niobium Metals, UP Niobium Industries, SAIL, BHEL
+  - Applications: ISRO AM engine, DRDO nozzle, Sandvik cutting tool, IGCAR fusion magnet, Tata Steel PVD, Carl Zeiss coating, HLL MRI, SAIL HSLA steel, L&T AM heat exchanger, BEL capacitor, ISRO thruster, BHEL welding, HAL CMC blade, Reliance refinery liner
+  - Rs 7,870 Cr total, avg 99.89% purity
+  - Delayed: NBP-B2412 (27d, monsoon UP, BHEL nuclear welding electrode)
+- Created Vanadium Sheet Logistics (R413b): ~110 lines, vns-* orange #ea580c, 14 records
+  - 14 grades: V-4Cr-4Ti Sheet, VMAT Aerospace, V2O5 Cathode, FeV Master Alloy, V-5Cr-5Ti Nuclear, V2O5 Catalyst, VN Nitride, V-10Ti-5Cr Armour, NH4VO3 Precursor, V-15Cr-5Ti Hip, V2O5 Aerospace, V-4Cr-4Ti Breeder, V-5% Steel Rebar, V2O5 Petrochemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, IGCAR, Gujarat Vanadium Tech, Rajasthan Vanadium Corp, NALCO, Tamil Nadu Vanadium Corp, Gujarat V Products, Assam Vanadium Metals, UP Vanadium Industries, SAIL, BHEL
+  - Applications: IGCAR fusion blanket, HAL jet blade, Reliance VRFB, Tata Steel rebar, BHAVINI FBR duct, Reliance H2SO4, Wipro hard coating, BEL armour, Exicom VRFB, NPCIL SFR, DRDO SRB, IGCAR breeder, L&T seismic, IOC desulphurization
+  - Rs 7,430 Cr total, avg 93.6% purity
+  - Delayed: VNS-B2412 (27d, monsoon UP, IGCAR tritium breeder)
+- Both modules generated via Python raw string scripts (gen_r413a.py, gen_r413b.py)
+- Bug fixes: &#858594; malformed entity in NBP-0008 corrected to &#8594;
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (662), page.tsx (1183 viewMap entries), app-store.ts (668 navItems)
+- CSS appended: 4 new rules (~62,149 total)
+- Git commit: 8cffb75, pushed to main
+
+Stage Summary:
+- Project now: 663 module view files, 668 navItems, ~62,149 CSS lines, 1183 viewMap entries, 0 TSC errors in src/
+- Niobium Powder: IGCAR Nb3Sn Rs 890Cr, HLL Nb-Ti MRI Rs 760Cr, ISRO AM Rs 720Cr, DRDO nozzle Rs 680Cr
+- Vanadium Sheet: BHAVINI FBR Rs 850Cr, IGCAR blanket Rs 780Cr, HAL blade Rs 690Cr, NPCIL SFR Rs 680Cr
+- Delayed: NBP-B2412 (27d), VNS-B2412 (27d) — both monsoon UP corridor
+
+**Project Current State:**
+- 663 module view files, 668 navItems, ~62,149 CSS lines, 1183 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Next clean candidates: tantalum-powder, gallium-arsenide, indium-phosphide, selenium-compound
+
+---
 Task ID: R412 — Thallium Compound Logistics + Cadmium Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R412 — 2 new Indian logistics modules for thallium compound supply chain and cadmium alloy supply chain.
