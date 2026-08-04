@@ -1,4 +1,46 @@
 ---
+Task ID: R410 — Ruthenium Catalyst Logistics + Bismuth Telluride Logistics
+Agent: Main Agent (Cron Loop)
+Task: R410 — 2 new Indian logistics modules for ruthenium catalyst supply chain and bismuth telluride thermoelectric supply chain.
+
+Work Log:
+- Read worklog: R409 complete (commit cfc2f8b), 655 modules, 656 navItems, ~62,127 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: ruthenium-catalyst CLEAN, bismuth-telluride CLEAN
+- Icons verified: FlaskConical and Thermometer both confirmed in iconMap
+- Created Ruthenium Catalyst Logistics (R410a): ~110 lines, ruc-* violet #7c3aed, 14 records
+  - 14 grades: Ru/C 5% Al2O3, RuO2 99.99% Electrode, Ru/Al2O3 1% Hydrogenation, Ru/C 3% Raney, Ru-Ta 3/97 Oxide, Ru/C 5% PEM FC, RuCl3 xH2O Precursor, Ru/SiO2 2% Dehydrogenation, Ru 99.95% Sputter, Ru/Ir 70/30 Ti Anode, Ru/TiO2 1.5% Photocatalyst, Ru/AC 4% Oxidation, Ru/Zeolite 2% FCC, Ru/Al2O3 0.5% CO Shift
+  - 14 manufacturers: Reliance Industries, DRDO DMRL, IGCAR, Bharat Forge, MIDHANI, Gujarat Ru Catalysts, Haldia Ru Chemicals, Rajasthan Noble Metals, NALCO, Gujarat Ru Products, Tamil Nadu Ru Corp, UP Ru Chemicals, Assam Noble Metals, SAIL
+  - Applications: Reliance ammonia, Adani chlor-alkali, IOC refinery, Sun Pharma API, BEL supercap, BHEL PEM FC, L&T metathesis, GAIL PDH, Seagate HDD, Adani Green electrolyzer, L&T water treatment, Wipro VOC, BPCL FCC, Tata Steel syngas
+  - Rs 6,120 Cr total, avg 15.1% Ru
+  - Delayed: RUC-B2412 (26d, monsoon UP, Wipro VOC abatement)
+- Created Bismuth Telluride Logistics (R410b): ~110 lines, btd-* rose #e11d48, 14 records
+  - 14 grades: Bi2Te3 99.999% n-type, Bi0.5Sb1.5Te3 p-type, Bi2Te2.7Se0.3 n-type, Bi2Te3 99.99% Bulk, Bi2Te3 p-type doped, Bi2Te3 Nanostructured, Bi-Sb-Te Thin Film, Bi2Te3 99.9% Powder, Bi2Te3/SiC Composite, Bi0.3Sb1.7Te3 p-type, Bi2Te3 Hot-Pressed, Bi2Te3 p-type Bulk, Bi2Te3 99.95% Ingot, Bi2Te3/SiO2 Nanocomposite
+  - 14 manufacturers: Sterlite Thermoelectrics, DRDO DMRL, Tata Power Solar, Bharat Forge, IGCAR, Gujarat Bi2Te3 Tech, Rajasthan Thermoelectric, NALCO, Tamil Nadu Thermoelectric, Gujarat Bi2Te3 Products, Assam Thermoelectric, UP Thermoelectric, SAIL, BHEL
+  - Applications: Voltas Peltier, DRDO soldier vest, Tata Steel WHR, Mahindra seat cooler, ISRO RTG, Wipro CPU cooler, BEL IR sensor, HPCL LD cooler, Thermax process, RailTel EDFA, Jio 5G shelter, HLL blood bank, Maruti exhaust TEG, NTPC sensor
+  - Rs 6,260 Cr total, avg ZT 0.99
+  - Delayed: BTD-B2412 (26d, monsoon UP, HLL blood bank cooler)
+- Both modules generated via Python raw string scripts (gen_r410a.py, gen_r410b.py)
+- Bug fix: #858594 -> #8594 in BTD-0007 remarks (malformed entity)
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (657), page.tsx (1177 viewMap entries), app-store.ts (662 navItems)
+- CSS appended: 4 new rules (~62,131 total)
+- Git commit: a07f60d, pushed to main
+
+Stage Summary:
+- Project now: 657 module view files, 662 navItems, ~62,131 CSS lines, 1177 viewMap entries, 0 TSC errors in src/
+- Ruthenium Catalyst: Reliance ammonia Ru/C Rs 620Cr, BHEL PEM FC Rs 710Cr, Tata Steel WHR Rs 720Cr, Seagate sputter Rs 580Cr
+- Bismuth Telluride: Tata Steel WHR TEG Rs 720Cr, DRDO soldier vest Rs 480Cr, ISRO RTG Rs 550Cr, Maruti exhaust TEG Rs 540Cr
+- Delayed: RUC-B2412 (26d), BTD-B2412 (26d) — both monsoon UP corridor
+
+**Project Current State:**
+- 657 module view files, 662 navItems, ~62,131 CSS lines, 1177 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Next clean candidates: lithium-metal, beryllium-oxide, thallium-compound
+
+---
 Task ID: R409 — Rhenium Alloy Logistics + Cadmium Sulphide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R409 — 2 new Indian logistics modules for rhenium alloy supply chain and cadmium sulphide supply chain.
