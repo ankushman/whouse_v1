@@ -1,44 +1,46 @@
 ---
-Task ID: R482 — Molybdenum Disilicide Logistics + Hafnium Carbide Logistics
+Task ID: R483 — Tantalum Carbide Logistics + Niobium Carbide Logistics
 Agent: Main Agent (Cron Loop)
-Task: R482 — 2 new Indian logistics modules for molybdenum disilicide (MoSi2) furnace heating element/thermoelectric generator/scramjet liner supply chain and hafnium carbide (HfC) UHTC TPS/rocket nozzle/fusion first-wall supply chain.
+Task: R483 — 2 new Indian logistics modules for tantalum carbide (TaC) UHTC composite/cutting tool cermet/diffusion barrier supply chain and niobium carbide (NbC) grain inhibitor/superconducting RF/steel precipitate supply chain.
 
 Work Log:
-- Read worklog: R481 complete (commit fa9076c), 788 exports, ~63,746 CSS
+- Read worklog: R482 complete (commit 9df5e3c), 790 exports, ~63,810 CSS
 - TSC pre-validation: 0 errors in src/
-- Candidates verified clean: MoSi2 (0 refs), HfC (0 refs)
-- Icons: TowerControl (0 uses, VALID), Bolt (0 uses, VALID)
-- Created Molybdenum Disilicide Logistics (R482a): 228 lines, mos-* orange-dark #9a3412, 14 records
-  - Rs 10,560 Cr total, avg 99.52%, MP 2030 degC, density 6.24 g/cm3
-  - Delayed: MOS-A2412 (28d, Visakhapatnam, sub turbocharger rotor coating)
-- Created Hafnium Carbide Logistics (R482b): 228 lines, hfc-* blue-dark #1e40af, 14 records
-  - Rs 16,340 Cr total, avg 99.72%, MP 3958 degC, density 12.67 g/cm3
-  - **Highest melting point known material** (~3958 degC) — second highest investment after UO2
-  - Delayed: HFC-A2412 (28d, Visakhapatnam, sub SSBN UHTC pressure vessel liner)
+- Candidates verified: TaC (0 refs, OK), SiC (ALREADY EXISTS — swapped to NbC)
+- NbC verified clean (0 refs)
+- Icons: Apple (0 uses, VALID), ArrowRight (0 uses, VALID)
+- Created Tantalum Carbide Logistics (R483a): 228 lines, tac-* pink-dark #be185d, 14 records
+  - Rs 14,820 Cr total, avg 99.63%, MP 3985 degC, density 14.49 g/cm3
+  - TaC: second highest melting point (3985 degC), used in HfC-TaC UHTC composites
+  - Delayed: TAC-A2412 (28d, Visakhapatnam, sub SSBN core reflector)
+- Created Niobium Carbide Logistics (R483b): 228 lines, nbc-* amber-dark #854d0e, 14 records
+  - Rs 11,080 Cr total, avg 99.55%, MP 3610 degC, density 7.82 g/cm3
+  - NbC: critical grain growth inhibitor for sub-micron WC-Co tools
+  - Delayed: NBC-A2412 (28d, Visakhapatnam, sub SSK propeller shaft bearing)
 - TSC: 0 errors in src/
-- Registration: index.ts (790 exports), page.tsx (1320 viewMap), app-store.ts (802 navItems)
-- CSS: 16 new rules (~63,810 total)
-- Git commit: 9605798, pushed
+- Registration: index.ts (792 exports), page.tsx (1322 viewMap), app-store.ts (804 navItems)
+- CSS: 16 new rules (~63,874 total)
+- Git commit: 0e15d67, pushed
 
 Stage Summary:
-- Project: 790 module exports, 802 navItems, ~63,810 CSS, 1320 viewMap, 0 TSC errors
-- Session total (R464-R482): 38 new modules, 19 rounds, 0 TSC errors
-- Visakhapatnam monsoon: 22nd consecutive round — systemic
+- Project: 792 module exports, 804 navItems, ~63,874 CSS, 1322 viewMap, 0 TSC errors
+- Session total (R464-R483): 40 new modules, 20 rounds, 0 TSC errors — SESSION MILESTONE
+- Visakhapatnam monsoon: 23rd consecutive round — systemic
 
 **Project Current State:**
-- 790 exports, 802 navItems, ~63,810 CSS, 1320 viewMap, 0 TSC errors in src/
-- Candidate pool: 42 remaining names from R479 expanded scan
+- 792 exports, 804 navItems, ~63,874 CSS, 1322 viewMap, 0 TSC errors in src/
+- Candidate pool: ~39 remaining (SiC consumed this round by collision detection)
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA
-- Visakhapatnam monsoon: 22 rounds — CRITICAL systemic delay
-- HfC: extremely high melting point material, strategic defense (hypersonic), limited suppliers
-- MoSi2: pesting oxidation at 400-700 degC range, embrittlement risk
+- Visakhapatnam monsoon: 23 rounds — CRITICAL systemic
+- TaC: tantalum conflict-mineral, high-cost, limited supply chain for defense UHTC
 
-**Next Round R483 Suggested Candidates:**
-- Tantalum Carbide (TaC) — refractory cermet, cutting tool, diffusion barrier
-- Silicon Carbide (SiC) — power electronics, abrasive, ceramic armor, semiconductor wafer
-- OR: niobium-carbide (NbC), chromium-carbide (Cr3C2), vanadium-carbide (VC)
+**Next Round R484 Suggested Candidates:**
+- Chromium Carbide (Cr3C2) — thermal spray wear coatings, supersonic particle deposition
+- Vanadium Carbide (VC) — tool steel grain refiner, hydrogen storage, superconductor
+- OR: hafnium-diboride (HfB2), magnesium-diboride (MgB2), lanthanum-hexaboride (LaB6)
 
 **Available Clean Icons:**
-- Thermometer (0 uses), ArrowRight (0 uses), Compass (1 use), Scan (1 use), Bomb (1 use)
+- Banana (0 uses), Calendar (0 uses), Grip (0 uses), Vibrate (0 uses)
+- Plus many from R471 expanded scan pool
