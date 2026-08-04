@@ -62518,3 +62518,27 @@ html.theme-transition body {
 .mno-shimmer { background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.08), transparent); animation: mno-shimmer 3s infinite; }
 @keyframes mno-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .mno-hover:hover { background: rgba(13, 148, 136, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R438a: Cobalt Oxide Logistics - Cyan #0891b2 */
+.coo-pulse { animation: coo-pulse-anim 2s ease-in-out infinite; }
+@keyframes coo-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.coo-glow { box-shadow: 0 0 20px rgba(8, 145, 178, 0.3); }
+.coo-gradient { background: linear-gradient(135deg, rgba(8, 145, 178, 0.15), rgba(8, 145, 178, 0.05)); }
+.coo-border { border-color: rgba(8, 145, 178, 0.4); }
+.coo-text { color: #0891b2; }
+.coo-badge { background: rgba(8, 145, 178, 0.15); color: #0891b2; border: 1px solid rgba(8, 145, 178, 0.3); }
+.coo-shimmer { background: linear-gradient(90deg, transparent, rgba(8, 145, 178, 0.08), transparent); animation: coo-shimmer 3s infinite; }
+@keyframes coo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.coo-hover:hover { background: rgba(8, 145, 178, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R438b: Iron Oxide Logistics - Dark Red #991b1b */
+.feo-pulse { animation: feo-pulse-anim 2s ease-in-out infinite; }
+@keyframes feo-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.feo-glow { box-shadow: 0 0 20px rgba(153, 27, 27, 0.3); }
+.feo-gradient { background: linear-gradient(135deg, rgba(153, 27, 27, 0.15), rgba(153, 27, 27, 0.05)); }
+.feo-border { border-color: rgba(153, 27, 27, 0.4); }
+.feo-text { color: #991b1b; }
+.feo-badge { background: rgba(153, 27, 27, 0.15); color: #991b1b; border: 1px solid rgba(153, 27, 27, 0.3); }
+.feo-shimmer { background: linear-gradient(90deg, transparent, rgba(153, 27, 27, 0.08), transparent); animation: feo-shimmer 3s infinite; }
+@keyframes feo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.feo-hover:hover { background: rgba(153, 27, 27, 0.1); transform: translateY(-1px); transition: all 0.2s; }
