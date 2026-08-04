@@ -63490,3 +63490,25 @@ html.theme-transition body {
 .zrb-badge { background: #be123c22; color: #be123c; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
 .zrb-shimmer { background: linear-gradient(90deg, #be123c11, #be123c44, #be123c11); background-size: 200% 100%; animation: zrb-gradient 2s infinite; }
 .zrb-hover:hover { background-color: #be123c11; }
+
+/* R474: Aluminum Gallium Nitride Logistics (agn-*) - Sky #0369a1 */
+@keyframes agn-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes agn-glow { 0%, 100% { box-shadow: 0 0 5px #0369a144; } 50% { box-shadow: 0 0 20px #0369a188; } }
+@keyframes agn-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.agn-card { transition: all 0.3s ease; border-left: 4px solid #0369a1; }
+.agn-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #0369a133; }
+.agn-text { color: #0369a1; }
+.agn-badge { background: #0369a122; color: #0369a1; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.agn-shimmer { background: linear-gradient(90deg, #0369a111, #0369a144, #0369a111); background-size: 200% 100%; animation: agn-gradient 2s infinite; }
+.agn-hover:hover { background-color: #0369a111; }
+
+/* R474: Indium Gallium Arsenide Logistics (iga-*) - Purple #7e22ce */
+@keyframes iga-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes iga-glow { 0%, 100% { box-shadow: 0 0 5px #7e22ce44; } 50% { box-shadow: 0 0 20px #7e22ce88; } }
+@keyframes iga-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.iga-card { transition: all 0.3s ease; border-left: 4px solid #7e22ce; }
+.iga-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #7e22ce33; }
+.iga-text { color: #7e22ce; }
+.iga-badge { background: #7e22ce22; color: #7e22ce; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.iga-shimmer { background: linear-gradient(90deg, #7e22ce11, #7e22ce44, #7e22ce11); background-size: 200% 100%; animation: iga-gradient 2s infinite; }
+.iga-hover:hover { background-color: #7e22ce11; }
