@@ -63086,3 +63086,23 @@ html.theme-transition body {
 .inm-badge { background-color: rgba(79, 70, 229, 0.15); color: #4f46e5; border: 1px solid rgba(79, 70, 229, 0.3); }
 .inm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(79, 70, 229, 0.08) 50%, transparent 100%); animation: inm-pulse 2s ease-in-out infinite; }
 .inm-hover:hover { background-color: rgba(79, 70, 229, 0.1); border-color: #4f46e5; }
+
+/* === Gallium Metal Logistics (GAM) — R456 === */
+@keyframes gam-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes gam-glow { 0%, 100% { box-shadow: 0 0 8px rgba(3, 105, 161, 0.3); } 50% { box-shadow: 0 0 20px rgba(3, 105, 161, 0.6); } }
+.gam-gradient { background: linear-gradient(135deg, #0369a1 0%, #0284c7 50%, #38bdf8 100%); }
+.gam-border { border-color: #0369a1; }
+.gam-text { color: #0369a1; }
+.gam-badge { background-color: rgba(3, 105, 161, 0.15); color: #0369a1; border: 1px solid rgba(3, 105, 161, 0.3); }
+.gam-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(3, 105, 161, 0.08) 50%, transparent 100%); animation: gam-pulse 2s ease-in-out infinite; }
+.gam-hover:hover { background-color: rgba(3, 105, 161, 0.1); border-color: #0369a1; }
+
+/* === Tellurium Metal Logistics (TLM) — R456 === */
+@keyframes tlm-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes tlm-glow { 0%, 100% { box-shadow: 0 0 8px rgba(147, 51, 234, 0.3); } 50% { box-shadow: 0 0 20px rgba(147, 51, 234, 0.6); } }
+.tlm-gradient { background: linear-gradient(135deg, #9333ea 0%, #a855f7 50%, #c084fc 100%); }
+.tlm-border { border-color: #9333ea; }
+.tlm-text { color: #9333ea; }
+.tlm-badge { background-color: rgba(147, 51, 234, 0.15); color: #9333ea; border: 1px solid rgba(147, 51, 234, 0.3); }
+.tlm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.08) 50%, transparent 100%); animation: tlm-pulse 2s ease-in-out infinite; }
+.tlm-hover:hover { background-color: rgba(147, 51, 234, 0.1); border-color: #9333ea; }
