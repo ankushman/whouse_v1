@@ -654,3 +654,5 @@ export { default as VanadiumPowderLogisticsView } from './vanadium-powder-logist
 export { default as ZirconiumPowderLogisticsView } from './zirconium-powder-logistics-view'
 export { default as RutheniumCatalystLogisticsView } from './ruthenium-catalyst-logistics-view'
 export { default as BismuthTellurideLogisticsView } from './bismuth-telluride-logistics-view'
+export { default as LithiumMetalLogisticsView } from './lithium-metal-logistics-view'
+export { default as BerylliumOxideLogisticsView } from './beryllium-oxide-logistics-view'

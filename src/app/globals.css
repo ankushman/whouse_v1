@@ -62129,3 +62129,7 @@ html.theme-transition body {
 .ruc-kpi { background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(124,58,237,0.02)); border-left: 3px solid #7c3aed; }
 .btd-logistics-card:hover { box-shadow: 0 4px 12px rgba(225,29,72,0.15); transform: translateY(-1px); transition: all 0.2s; }
 .btd-kpi { background: linear-gradient(135deg, rgba(225,29,72,0.05), rgba(225,29,72,0.02)); border-left: 3px solid #e11d48; }
+.lit-logistics-card:hover { box-shadow: 0 4px 12px rgba(13,148,136,0.15); transform: translateY(-1px); transition: all 0.2s; }
+.lit-kpi { background: linear-gradient(135deg, rgba(13,148,136,0.05), rgba(13,148,136,0.02)); border-left: 3px solid #0d9488; }
+.bro-logistics-card:hover { box-shadow: 0 4px 12px rgba(5,150,105,0.15); transform: translateY(-1px); transition: all 0.2s; }
+.bro-kpi { background: linear-gradient(135deg, rgba(5,150,105,0.05), rgba(5,150,105,0.02)); border-left: 3px solid #059669; }
