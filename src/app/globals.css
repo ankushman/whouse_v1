@@ -63198,3 +63198,27 @@ html.theme-transition body {
 .mnm-shimmer { background: linear-gradient(90deg, #47556908 25%, #47556922 50%, #47556908 75%); background-size: 200% 100%; animation: mnm-shimmer-anim 2s infinite; }
 @keyframes mnm-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .mnm-hover:hover { box-shadow: 0 4px 20px #47556933; transform: translateY(-1px); }
+
+/* R461 — Chromium Sulfate Logistics (crs) — violet #7c3aed */
+.crs-pulse { animation: crs-pulse-anim 2s ease-in-out infinite; }
+@keyframes crs-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.crs-glow { box-shadow: 0 0 16px #7c3aed44; }
+.crs-gradient { background: linear-gradient(135deg, #7c3aed22, #7c3aed08); }
+.crs-border { border-left: 3px solid #7c3aed; }
+.crs-text { color: #7c3aed; }
+.crs-badge { background: #7c3aed18; color: #7c3aed; }
+.crs-shimmer { background: linear-gradient(90deg, #7c3aed08 25%, #7c3aed22 50%, #7c3aed08 75%); background-size: 200% 100%; animation: crs-shimmer-anim 2s infinite; }
+@keyframes crs-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.crs-hover:hover { box-shadow: 0 4px 20px #7c3aed33; transform: translateY(-1px); }
+
+/* R461 — Nickel Carbonate Logistics (nic) — teal-green #059669 */
+.nic-pulse { animation: nic-pulse-anim 2s ease-in-out infinite; }
+@keyframes nic-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.nic-glow { box-shadow: 0 0 16px #05966944; }
+.nic-gradient { background: linear-gradient(135deg, #05966922, #05966908); }
+.nic-border { border-left: 3px solid #059669; }
+.nic-text { color: #059669; }
+.nic-badge { background: #05966918; color: #059669; }
+.nic-shimmer { background: linear-gradient(90deg, #05966908 25%, #05966922 50%, #05966908 75%); background-size: 200% 100%; animation: nic-shimmer-anim 2s infinite; }
+@keyframes nic-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.nic-hover:hover { box-shadow: 0 4px 20px #05966933; transform: translateY(-1px); }

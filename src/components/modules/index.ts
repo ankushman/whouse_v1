@@ -751,3 +751,5 @@ export { default as CobaltCarbonateLogisticsView } from './cobalt-carbonate-logi
 export { default as ZincSulfateLogisticsView } from './zinc-sulfate-logistics-view'
 export { default as CopperSulfateLogisticsView } from './copper-sulfate-logistics-view'
 export { default as ManganeseMetalLogisticsView } from './manganese-metal-logistics-view'
+export { default as ChromiumSulfateLogisticsView } from './chromium-sulfate-logistics-view'
+export { default as NickelCarbonateLogisticsView } from './nickel-carbonate-logistics-view'
