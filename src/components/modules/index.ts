@@ -729,3 +729,5 @@ export { default as LutetiumOxideLogisticsView } from './lutetium-oxide-logistic
 export { default as ThuliumOxideLogisticsView } from './thulium-oxide-logistics-view'
 export { default as ScandiumOxideLogisticsView } from './scandium-oxide-logistics-view'
 export { default as ManganeseElectrolyticLogisticsView } from './manganese-electrolytic-logistics-view'
+export { default as ChromiumMetalLogisticsView } from './chromium-metal-logistics-view'
+export { default as MolybdenumMetalLogisticsView } from './molybdenum-metal-logistics-view'

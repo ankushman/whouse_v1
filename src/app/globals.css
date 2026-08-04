@@ -62894,3 +62894,59 @@ html.theme-transition body {
 .mne-hover:hover {
   background-color: rgba(67, 56, 202, 0.08);
 }
+
+/* R450a — Chromium Metal Logistics (crm-*) */
+@keyframes crm-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.crm-glow {
+  box-shadow: 0 0 15px rgba(185, 28, 28, 0.4);
+}
+.crm-gradient {
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+}
+.crm-border {
+  border-color: #b91c1c;
+}
+.crm-text {
+  color: #b91c1c;
+}
+.crm-badge {
+  background-color: rgba(185, 28, 28, 0.15);
+  color: #b91c1c;
+}
+.crm-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(185, 28, 28, 0.1), transparent);
+}
+.crm-hover:hover {
+  background-color: rgba(185, 28, 28, 0.08);
+}
+
+/* R450b — Molybdenum Metal Logistics (mom-*) */
+@keyframes mom-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.mom-glow {
+  box-shadow: 0 0 15px rgba(14, 116, 144, 0.4);
+}
+.mom-gradient {
+  background: linear-gradient(135deg, #0e7490, #0891b2);
+}
+.mom-border {
+  border-color: #0e7490;
+}
+.mom-text {
+  color: #0e7490;
+}
+.mom-badge {
+  background-color: rgba(14, 116, 144, 0.15);
+  color: #0e7490;
+}
+.mom-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(14, 116, 144, 0.1), transparent);
+}
+.mom-hover:hover {
+  background-color: rgba(14, 116, 144, 0.08);
+}
