@@ -62614,3 +62614,31 @@ html.theme-transition body {
 .moo-shimmer { background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.08), transparent); animation: moo-shimmer 3s infinite; }
 @keyframes moo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .moo-hover:hover { background: rgba(5, 150, 105, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* Cerium Oxide Logistics - CEO */
+@keyframes ceo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ceo-glow { 0%, 100% { box-shadow: 0 0 5px #e11d4844; } 50% { box-shadow: 0 0 20px #e11d4866; } }
+@keyframes ceo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes ceo-border { 0%, 100% { border-color: #e11d4866; } 50% { border-color: #e11d4833; } }
+.ceo-pulse { animation: ceo-pulse 2s ease-in-out infinite; }
+.ceo-glow { animation: ceo-glow 2s ease-in-out infinite; }
+.ceo-gradient { background: linear-gradient(135deg, #e11d4822, #e11d4811, #e11d4822); background-size: 200% 200%; animation: ceo-gradient 3s ease infinite; }
+.ceo-text { color: #e11d48; }
+.ceo-badge { background-color: #e11d4822; color: #e11d48; }
+.ceo-shimmer { background: linear-gradient(90deg, transparent, #e11d4811, transparent); background-size: 200% 100%; animation: ceo-shimmer 2s infinite; }
+@keyframes ceo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ceo-hover:hover { border-color: #e11d4866; box-shadow: 0 0 10px #e11d4833; }
+
+/* Lanthanum Oxide Logistics - LAO */
+@keyframes lao-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes lao-glow { 0%, 100% { box-shadow: 0 0 5px #c026d344; } 50% { box-shadow: 0 0 20px #c026d366; } }
+@keyframes lao-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes lao-border { 0%, 100% { border-color: #c026d366; } 50% { border-color: #c026d333; } }
+.lao-pulse { animation: lao-pulse 2s ease-in-out infinite; }
+.lao-glow { animation: lao-glow 2s ease-in-out infinite; }
+.lao-gradient { background: linear-gradient(135deg, #c026d322, #c026d311, #c026d322); background-size: 200% 200%; animation: lao-gradient 3s ease infinite; }
+.lao-text { color: #c026d3; }
+.lao-badge { background-color: #c026d322; color: #c026d3; }
+.lao-shimmer { background: linear-gradient(90deg, transparent, #c026d311, transparent); background-size: 200% 100%; animation: lao-shimmer 2s infinite; }
+@keyframes lao-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.lao-hover:hover { border-color: #c026d366; box-shadow: 0 0 10px #c026d333; }

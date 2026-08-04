@@ -713,3 +713,5 @@ export { default as AluminumOxideLogisticsView } from './aluminum-oxide-logistic
 export { default as VanadiumOxideLogisticsView } from './vanadium-oxide-logistics-view'
 export { default as TungstenOxideLogisticsView } from './tungsten-oxide-logistics-view'
 export { default as MolybdenumOxideLogisticsView } from './molybdenum-oxide-logistics-view'
+export { default as CeriumOxideLogisticsView } from './cerium-oxide-logistics-view'
+export { default as LanthanumOxideLogisticsView } from './lanthanum-oxide-logistics-view'
