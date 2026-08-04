@@ -1,4 +1,46 @@
 ---
+Task ID: R454 — Zinc Dust Logistics + Antimony Metal Logistics
+Agent: Main Agent (Cron Loop)
+Task: R454 — 2 new Indian logistics modules for zinc dust (Zn) galvanizing spray/battery anode/rubber activator/submarine hull CP supply chain and antimony metal (Sb) battery grid/PET catalyst/flame retardant/submarine battery supply chain.
+
+Work Log:
+- Read worklog: R453 complete (commit 87bb3e5), 732 exports, ~63,048 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: zinc-dust (CLEAN), antimony-metal (CLEAN), bismuth-metal (CLEAN), indium-metal (CLEAN), gallium-metal (CLEAN), tellurium-metal (CLEAN)
+- Icons verified: ThermometerSun (0 uses, confirmed), Compass (0 uses, confirmed)
+- Created Zinc Dust Logistics (R454a): 228 lines, znd-* lime #65a30d, 14 records
+  - 14 grades: Zn Dust 99.9% Galvanizing Spray, Zn Dust 99.7% Rocket Propellant Additive, Zn Dust 99.5% Zinc Oxide Feedstock, Zn Dust 99.0% Sacrificial Anode, Zn Dust 99.8% Automotive Undercoat, Zn Dust 99.3% Zinc-Air Battery, Zn Dust 99.6% Rubber Curing Activator, Zn Dust 98.5% Crop Nutrient Foliar, Zn Dust 99.4% Corrosion Inhibitor, Zn Dust 99.95% Anti-Corrosion Paint Pigment, Zn Dust 99.2% Die Casting Alloy, Zn Dust 99.8% Submarine Hull CP, Zn Dust 99.6% Warship Smoke Screening, Zn Dust 97% General Metallurgical
+  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: SAIL HDG line, DRDO Akash Zn propellant, ZnO nanoparticle feedstock, Port Trust jetty anode, Maruti chassis Zn spray, BHEL Zn-air grid storage, Kerala rubber ZnO activator, Rajasthan wheat Zn foliar, Numaligarh refinery CWI, Asian Paints Zn-rich primer, auto door handle Zamak, IN Navy SSK hull Zn block, DRDO naval smoke grenade, SAIL brass furnace charge
+  - Rs 12,100 Cr total, avg 99.35%, density 7.14 g/cm3
+  - Delayed: ZND-A2412 (28d, monsoon Visakhapatnam, submarine hull zinc block)
+- Created Antimony Metal Logistics (R454b): 228 lines, sbm-* red #dc2626, 14 records
+  - 14 grades: Sb 99.9% Lead-Acid Battery Grid, Sb 99.95% Explosive Priming Mixture, Sb 99.7% PET Catalyst, Sb 99.5% Babbitt Bearing Alloy, Sb 99.85% Flame Retardant Synergist, Sb 99.8% Semiconductor Diode, Sb 99.93% Glass Opacifier, Sb 99.0% Cable Sheathing PVC, Sb 99.6% Ammunition Hardening, Sb 99.95% Type Metal Alloy, Sb 99.3% Rubber Vulcanization, Sb 99.8% Submarine Battery Grid, Sb 99.6% Warship Missile Tracer, Sb 97% General Alloy Hardener
+  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Exide Pb-Sb grid alloy, OFB Sb-based initiator, Reliance PET Sb2O3 cat, BHEL Babbitt sleeve bearing, Halogen-free FR textile, DRDO IR detector In-Sb, Videocon CRT Sb2O3, PowerGrid cable Sb2O3, OFB bullet Pb-Sb core, Printing press type alloy, MRF tyre Sb vulcanizer, IN Navy SSK Pb-Sb battery, DRDO BrahMos tracer flare, SAIL Pb-Sb sheet roller
+  - Rs 12,100 Cr total, avg 99.35%, density 6.69 g/cm3
+  - Delayed: SBM-A2412 (28d, monsoon Visakhapatnam, submarine Pb-Sb battery grid)
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (734 exports), page.tsx (1264 viewMap entries), app-store.ts (742 navItems)
+- CSS appended: 16 new rules (~63,068 total)
+- Git commit: ae9bf75, pushed to main
+
+Stage Summary:
+- Project now: 734 module exports, 742 navItems, ~63,068 CSS lines, 1264 viewMap entries, 0 TSC errors in src/
+- Zinc Dust: Submarine hull Zn block &#8377;960Cr, Zn-rich primer &#8377;940Cr, galvanizing spray &#8377;920Cr, warship smoke &#8377;900Cr
+- Antimony Metal: Submarine Pb-Sb battery &#8377;960Cr, explosive primer &#8377;900Cr, missile tracer &#8377;900Cr, battery grid &#8377;920Cr
+- Delayed: ZND-A2412 (28d), SBM-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 734 module exports, 742 navItems, ~63,068 CSS lines, 1264 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 63K+ lines, dev server OOM — TSC-only QA gate
+- Zn dust 99.9% galvanizing grade imported from China/Peru — automotive supply chain dependency
+- Sb 99.95% explosive grade — controlled material, defense procurement bottleneck
+- Next clean candidates: bismuth-metal, indium-metal, gallium-metal, tellurium-metal, cadmium-metal, magnesium-metal
+---
+---
 Task ID: R453 — Copper Cathode Logistics + Tin Metal Logistics
 Agent: Main Agent (Cron Loop)
 Task: R453 — 2 new Indian logistics modules for copper cathode (Cu) power cable/PCB trace/motor winding/submarine propulsion supply chain and tin metal (Sn) SMT solder/float glass/bronze bearing/submarine sonar dome supply chain.
