@@ -63246,3 +63246,27 @@ html.theme-transition body {
 .amv-shimmer { background: linear-gradient(90deg, #dc262608 25%, #dc262622 50%, #dc262608 75%); background-size: 200% 100%; animation: amv-shimmer-anim 2s infinite; }
 @keyframes amv-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .amv-hover:hover { box-shadow: 0 4px 20px #dc262633; transform: translateY(-1px); }
+
+/* R463 — Lithium Carbonate Logistics (lic) — rose-dark #be123c */
+.lic-pulse { animation: lic-pulse-anim 2s ease-in-out infinite; }
+@keyframes lic-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.lic-glow { box-shadow: 0 0 16px #be123c44; }
+.lic-gradient { background: linear-gradient(135deg, #be123c22, #be123c08); }
+.lic-border { border-left: 3px solid #be123c; }
+.lic-text { color: #be123c; }
+.lic-badge { background: #be123c18; color: #be123c; }
+.lic-shimmer { background: linear-gradient(90deg, #be123c08 25%, #be123c22 50%, #be123c08 75%); background-size: 200% 100%; animation: lic-shimmer-anim 2s infinite; }
+@keyframes lic-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.lic-hover:hover { box-shadow: 0 4px 20px #be123c33; transform: translateY(-1px); }
+
+/* R463 — Sodium Sulfate Logistics (sos) — slate #64748b */
+.sos-pulse { animation: sos-pulse-anim 2s ease-in-out infinite; }
+@keyframes sos-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.sos-glow { box-shadow: 0 0 16px #64748b44; }
+.sos-gradient { background: linear-gradient(135deg, #64748b22, #64748b08); }
+.sos-border { border-left: 3px solid #64748b; }
+.sos-text { color: #64748b; }
+.sos-badge { background: #64748b18; color: #64748b; }
+.sos-shimmer { background: linear-gradient(90deg, #64748b08 25%, #64748b22 50%, #64748b08 75%); background-size: 200% 100%; animation: sos-shimmer-anim 2s infinite; }
+@keyframes sos-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.sos-hover:hover { box-shadow: 0 4px 20px #64748b33; transform: translateY(-1px); }

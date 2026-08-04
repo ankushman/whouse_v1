@@ -755,3 +755,5 @@ export { default as ChromiumSulfateLogisticsView } from './chromium-sulfate-logi
 export { default as NickelCarbonateLogisticsView } from './nickel-carbonate-logistics-view'
 export { default as SeleniumDioxideLogisticsView } from './selenium-dioxide-logistics-view'
 export { default as AmmoniumVanadateLogisticsView } from './ammonium-vanadate-logistics-view'
+export { default as LithiumCarbonateLogisticsView } from './lithium-carbonate-logistics-view'
+export { default as SodiumSulfateLogisticsView } from './sodium-sulfate-logistics-view'
