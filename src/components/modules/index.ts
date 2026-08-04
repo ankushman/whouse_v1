@@ -723,3 +723,5 @@ export { default as EuropiumOxideLogisticsView } from './europium-oxide-logistic
 export { default as TerbiumOxideLogisticsView } from './terbium-oxide-logistics-view'
 export { default as DysprosiumOxideLogisticsView } from './dysprosium-oxide-logistics-view'
 export { default as HolmiumOxideLogisticsView } from './holmium-oxide-logistics-view'
+export { default as ErbiumOxideLogisticsView } from './erbium-oxide-logistics-view'
+export { default as YtterbiumOxideLogisticsView } from './ytterbium-oxide-logistics-view'

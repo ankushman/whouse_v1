@@ -62754,3 +62754,31 @@ html.theme-transition body {
 .hoo-shimmer { background: linear-gradient(90deg, transparent, #b4530911, transparent); background-size: 200% 100%; animation: hoo-shimmer 2s infinite; }
 @keyframes hoo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .hoo-hover:hover { border-color: #b4530966; box-shadow: 0 0 10px #b4530933; }
+
+/* Erbium Oxide Logistics - ERO */
+@keyframes ero-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ero-glow { 0%, 100% { box-shadow: 0 0 5px #be123c44; } 50% { box-shadow: 0 0 20px #be123c66; } }
+@keyframes ero-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes ero-border { 0%, 100% { border-color: #be123c66; } 50% { border-color: #be123c33; } }
+.ero-pulse { animation: ero-pulse 2s ease-in-out infinite; }
+.ero-glow { animation: ero-glow 2s ease-in-out infinite; }
+.ero-gradient { background: linear-gradient(135deg, #be123c22, #be123c11, #be123c22); background-size: 200% 200%; animation: ero-gradient 3s ease infinite; }
+.ero-text { color: #be123c; }
+.ero-badge { background-color: #be123c22; color: #be123c; }
+.ero-shimmer { background: linear-gradient(90deg, transparent, #be123c11, transparent); background-size: 200% 100%; animation: ero-shimmer 2s infinite; }
+@keyframes ero-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ero-hover:hover { border-color: #be123c66; box-shadow: 0 0 10px #be123c33; }
+
+/* Ytterbium Oxide Logistics - YBO */
+@keyframes ybo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ybo-glow { 0%, 100% { box-shadow: 0 0 5px #1e40af44; } 50% { box-shadow: 0 0 20px #1e40af66; } }
+@keyframes ybo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes ybo-border { 0%, 100% { border-color: #1e40af66; } 50% { border-color: #1e40af33; } }
+.ybo-pulse { animation: ybo-pulse 2s ease-in-out infinite; }
+.ybo-glow { animation: ybo-glow 2s ease-in-out infinite; }
+.ybo-gradient { background: linear-gradient(135deg, #1e40af22, #1e40af11, #1e40af22); background-size: 200% 200%; animation: ybo-gradient 3s ease infinite; }
+.ybo-text { color: #1e40af; }
+.ybo-badge { background-color: #1e40af22; color: #1e40af; }
+.ybo-shimmer { background: linear-gradient(90deg, transparent, #1e40af11, transparent); background-size: 200% 100%; animation: ybo-shimmer 2s infinite; }
+@keyframes ybo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ybo-hover:hover { border-color: #1e40af66; box-shadow: 0 0 10px #1e40af33; }
