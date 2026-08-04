@@ -1,4 +1,50 @@
 ---
+Task ID: R431 — Aluminium Nitride Logistics + Lithium Carbide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R431 — 2 new Indian logistics modules for aluminium nitride (AlN) ceramic substrate/thermal management/semiconductor/defense/space supply chain and lithium carbide (Li2C2) tritium breeder/nuclear fusion/battery chemistry/high-energy supply chain.
+
+Work Log:
+- Read worklog: R430 complete (commit 700350c), 693 exports, ~62,352 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: aluminium-nitride, lithium-carbide, hafnium-oxide, zirconium-carbide — ALL CLEAN (boron-nitride skipped, pre-existing)
+- Icons verified: Microchip (confirmed), Flame (confirmed)
+- Generator fix: slug with hyphens invalid as JS variable — changed to slug.replace('-','_') for const name
+- Entity fix: esc() double-encoding &#8377; to &amp;#8377; — rewrote esc() with regex to skip already-valid entities
+- Created Aluminium Nitride Logistics (R431a): 228 lines, aln-* indigo #6366f1, 14 records
+  - 14 grades: AlN 99.9% RF Substrate, AlN 99.5% LED Heat Sink, AlN 99.8% Power Module, AlN 99.0% Brake Disc, AlN 99.7% Radar T/R, AlN 99.3% Gas Insulator, AlN 99.6% HEMT Package, AlN 98.5% Heat Spreader, AlN 99.2% Optocoupler, AlN 99.9% Cryo Sensor, AlN 99.4% Solar Inverter, AlN 99.8% Sonar Array, AlN 99.6% Missile Seeker, AlN 97% Metallurgical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, Shyam Ceramics, BHEL R&D, Godrej Ceramics, Rajasthan Ceramics, Assam Ceramics, Gujarat Ceramics, UP Ceramics, Vizag Ceramics, DRDO TBRL, SAIL Ceramics
+  - Applications: 5G base station, LED thermal, EV inverter, rail brake, AESA radar, GIS bushing, GaN-on-AlN RF, server CPU cooler, fiber optic relay, space cryostat, PV power module, submarine bow sonar, RF homing head, blast furnace liner
+  - Rs 8,760 Cr total, avg 99.15%, thermal conductivity 160-230 W/mK
+  - Delayed: ALN-A2412 (28d, monsoon Visakhapatnam, submarine bow sonar array AlN substrate)
+- Created Lithium Carbide Logistics (R431b): 228 lines, lc-* amber #f59e0b, 14 records
+  - 14 grades: Li2C2 99.9% Breeder Grade, Li2C2 99.5% Battery Precursor, Li2C2 99.7% Tritium Source, Li2C2 99.0% Acetylene Gen, Li2C2 99.8% Nuclear Shield, Li2C2 99.3% EV Battery, Li2C2 99.6% Rocket Fuel, Li2C2 98.5% Steel Degasser, Li2C2 99.2% Pharma Inter, Li2C2 99.95% Fusion Demo, Li2C2 99.1% Grid Storage, Li2C2 99.8% Submarine Battery, Li2C2 99.4% Missile Battery, Li2C2 97% General Purpose
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Lithium, Assam Chemicals, Gujarat Lithium, UP Lithium, Vizag Lithium, DRDO TBRL, SAIL Lithium
+  - Applications: Fusion blanket, Li-ion anode, ITER component, industrial acetylene, fast breeder shielding, solid state EV cell, ISRO rocket fuel, metallurgical degasser, pharma synthesis, SST-1 tokamak, Na-ion grid storage, Li-S air submarine cell, missile TPG thruster, chemical feedstock
+  - Rs 8,760 Cr total, avg 99.23%, density 2.48-2.64 g/cm3
+  - Delayed: LC-A2412 (28d, monsoon Visakhapatnam, GRSE Project 75I Li-S air submarine battery)
+- HTML entity scan: 14 (ALN) + 14 (LC) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (695 exports), page.tsx (1218 viewMap entries), app-store.ts (700 navItems)
+- CSS appended: 16 new rules (~62,376 total)
+- Git commit: c1d2ef7, pushed to main
+
+Stage Summary:
+- Project now: 695 module exports, 700 navItems, ~62,376 CSS lines, 1218 viewMap entries, 0 TSC errors in src/
+- Aluminium Nitride: Submarine sonar &#8377;940Cr, AESA radar &#8377;900Cr, 5G RF &#8377;920Cr, GaN HEMT &#8377;940Cr
+- Lithium Carbide: Submarine battery &#8377;940Cr, Fusion breeder &#8377;920Cr, ITER &#8377;940Cr, SST-1 tokamak &#8377;960Cr
+- Delayed: ALN-A2412 (28d), LC-A2412 (28d) — both monsoon Visakhapatnam corridor
+- Generator lessons: hyphenated slugs need underscore conversion for JS var names; esc() must not double-encode HTML entities
+
+**Project Current State:**
+- 695 module exports, 700 navItems, ~62,376 CSS lines, 1218 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- AlN 99.9% aerospace-grade imported from Japan/EU — limited domestic hot-press capacity
+- Li2C2 99.95% fusion-grade imported from Russia/China — ITER strategic dependency
+- Next clean candidates: hafnium-oxide, zirconium-carbide, boron-carbide, silicon-nitride, tungsten-carbide
+---
+---
 Task ID: R430 — Titanium Diboride Logistics + Silicon Carbide Whisker Logistics
 Agent: Main Agent (Cron Loop)
 Task: R430 — 2 new Indian logistics modules for titanium diboride (TiB2) ultra-hard ceramic/armor/aerospace/hypersonic/nuclear/defense supply chain and silicon carbide whisker (SiCw) reinforcement ceramic/MMC/aerospace/EV/naval/defense supply chain.
