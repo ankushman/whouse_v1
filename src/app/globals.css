@@ -62350,3 +62350,27 @@ html.theme-transition body {
 .siliconcarbidewhisker-logistics-view .text-teal-700 { color: #0f766e; }
 .siliconcarbidewhisker-logistics-view .bg-teal-500 { background-color: #14b8a6; }
 .siliconcarbidewhisker-logistics-view .bg-teal-500\/20 { background-color: rgb(20 184 166 / 0.2); }
+
+/* R431a: Aluminium Nitride Logistics - Indigo #6366f1 */
+.aln-pulse { animation: aln-pulse-anim 2s ease-in-out infinite; }
+@keyframes aln-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.aln-glow { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+.aln-gradient { background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.05)); }
+.aln-border { border-color: rgba(99, 102, 241, 0.4); }
+.aln-text { color: #6366f1; }
+.aln-badge { background: rgba(99, 102, 241, 0.15); color: #6366f1; border: 1px solid rgba(99, 102, 241, 0.3); }
+.aln-shimmer { background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.08), transparent); animation: aln-shimmer 3s infinite; }
+@keyframes aln-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.aln-hover:hover { background: rgba(99, 102, 241, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R431b: Lithium Carbide Logistics - Amber #f59e0b */
+.lc-pulse { animation: lc-pulse-anim 2s ease-in-out infinite; }
+@keyframes lc-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.lc-glow { box-shadow: 0 0 20px rgba(245, 158, 11, 0.3); }
+.lc-gradient { background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05)); }
+.lc-border { border-color: rgba(245, 158, 11, 0.4); }
+.lc-text { color: #f59e0b; }
+.lc-badge { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+.lc-shimmer { background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.08), transparent); animation: lc-shimmer 3s infinite; }
+@keyframes lc-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.lc-hover:hover { background: rgba(245, 158, 11, 0.1); transform: translateY(-1px); transition: all 0.2s; }
