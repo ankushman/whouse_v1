@@ -63468,3 +63468,25 @@ html.theme-transition body {
 .gap-badge { background: #05966922; color: #059669; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
 .gap-shimmer { background: linear-gradient(90deg, #05966911, #05966944, #05966911); background-size: 200% 100%; animation: gap-gradient 2s infinite; }
 .gap-hover:hover { background-color: #05966911; }
+
+/* R473: Silicon Germanium Logistics (sge-*) - Indigo #4f46e5 */
+@keyframes sge-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes sge-glow { 0%, 100% { box-shadow: 0 0 5px #4f46e544; } 50% { box-shadow: 0 0 20px #4f46e588; } }
+@keyframes sge-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.sge-card { transition: all 0.3s ease; border-left: 4px solid #4f46e5; }
+.sge-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #4f46e533; }
+.sge-text { color: #4f46e5; }
+.sge-badge { background: #4f46e522; color: #4f46e5; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.sge-shimmer { background: linear-gradient(90deg, #4f46e511, #4f46e544, #4f46e511); background-size: 200% 100%; animation: sge-gradient 2s infinite; }
+.sge-hover:hover { background-color: #4f46e511; }
+
+/* R473: Zirconium Diboride Logistics (zrb-*) - Rose #be123c */
+@keyframes zrb-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes zrb-glow { 0%, 100% { box-shadow: 0 0 5px #be123c44; } 50% { box-shadow: 0 0 20px #be123c88; } }
+@keyframes zrb-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.zrb-card { transition: all 0.3s ease; border-left: 4px solid #be123c; }
+.zrb-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #be123c33; }
+.zrb-text { color: #be123c; }
+.zrb-badge { background: #be123c22; color: #be123c; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.zrb-shimmer { background: linear-gradient(90deg, #be123c11, #be123c44, #be123c11); background-size: 200% 100%; animation: zrb-gradient 2s infinite; }
+.zrb-hover:hover { background-color: #be123c11; }

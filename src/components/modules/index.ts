@@ -775,3 +775,5 @@ export { default as CadmiumSulfideLogisticsView } from './cadmium-sulfide-logist
 export { default as ZincSelenideLogisticsView } from './zinc-selenide-logistics-view'
 export { default as CadmiumTellurideLogisticsView } from './cadmium-telluride-logistics-view'
 export { default as GalliumPhosphideLogisticsView } from './gallium-phosphide-logistics-view'
+export { default as SiliconGermaniumLogisticsView } from './silicon-germanium-logistics-view'
+export { default as ZirconiumDiborideLogisticsView } from './zirconium-diboride-logistics-view'
