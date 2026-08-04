@@ -1,42 +1,43 @@
 ---
-Task ID: R468 — Magnesium Ingot Logistics + Yttria-Stabilized Zirconia Logistics
+Task ID: R469 — Lead Zirconate Logistics + Hafnium Dioxide Logistics
 Agent: Main Agent (Cron Loop)
-Task: R468 — 2 new Indian logistics modules for magnesium ingot (Mg) airframe alloy/die-cast chassis/submarine ballast/flare decoy supply chain and yttria-stabilized zirconia (YSZ) thermal barrier coating/SOFC electrolyte/submarine reactor shield/hypersonic scramjet supply chain.
+Task: R469 — 2 new Indian logistics modules for lead zirconate (PbZrO3) FeRAM ferroelectric/submarine sonar piezo/PZT actuator/towed array hydrophone supply chain and hafnium dioxide (HfO2) gate oxide/DRAM capacitor/submarine reactor/hypersonic TPS supply chain.
 
 Work Log:
-- Read worklog: R467 complete (commit d8149b4), 760 exports, ~63,360 CSS
+- Read worklog: R468 complete (commit 5837495), 762 exports, ~63,382 CSS
 - TSC pre-validation: 0 errors in src/
-- R468 candidates selected:
-  - Magnesium Ingot (Mg) — CLEAN, confirmed 0 existing references
-  - Yttria-Stabilized Zirconia (YSZ) — CLEAN, confirmed 0 existing references
-- Icons verified: Bomb (0 uses, confirmed VALID), Braces (0 uses, confirmed VALID)
-- Created Magnesium Ingot Logistics (R468a): 228 lines, mgi-* gray-metal #6b7280, 14 records
-  - 14 grades: Mg 99.9% Fighter Airframe, 99.95% Aerospace Wheel, 99.7% Die-Cast Engine Block, 99.85% Submarine Ballast Bracket, 99.3% Steel Desulfurization, 99.8% Laptop Casing, 99.0% Sacrificial Anode, 99.6% Warship Deck Grating, 99.92% EV Fire Suppression, 99.4% Textile Spinning, 99.8% Telecom Tower, 99.85% Submarine Escape Hull, 99.95% Flare Decoy, 98.0% General
-  - Applications: HAL Tejas panel, HAL wheel forge, Tata Motors block, Mazagon Dock ballast, SAIL desulf, Dixon laptop, GAIL anode, GRSE grating, Ola fire suppress, Arvind spinning, Jio tower, IN Navy escape hull, DRDO flare, SAIL alloy
-  - Rs 11,920 Cr total, avg 99.54%, melting point 650 degC, density 1.74 g/cm3
-  - Delayed: MGI-A2412 (28d, monsoon Visakhapatnam, submarine SSK escape chamber pressure vessel)
-- Created YSZ Logistics (R468b): 228 lines, ysz-* amber-dark #b45309, 14 records
-  - 14 grades: YSZ 99.9% GT Blade TBC, 99.95% SOFC Electrolyte, 99.7% Turbo Piston TBC, 99.85% Submarine Exhaust Tile, 99.3% O2 Lambda Sensor, 99.8% Warship GT Combustor, 99.0% Dental Crown, 99.6% Missile Radome, 99.92% Nuclear Cladding, 99.4% Cutting Tool Insert, 99.8% Steel Casting Nozzle, 99.85% Submarine Reactor Shield, 99.95% Scramjet Liner, 98.0% General
-  - Applications: HAL Tejas TBC, BHEL SOFC, Cummins piston TBC, Mazagon Dock exhaust, MICO Bosch O2, GRSE LM2500 liner, Apolo dental, DRDO Astra radome, NPCIL cladding, Sandvik insert, Tata Steel nozzle, IN Navy SSBN shield, DRDO scramjet liner, SAIL refractory
-  - Rs 12,620 Cr total, avg 99.58%, melting point 2715 degC, density 6.05 g/cm3
-  - Delayed: YSZ-A2412 (28d, monsoon Visakhapatnam, submarine SSBN nuclear reactor thermal containment shield)
+- Candidate pool nearly depleted (5 remaining from original list). Expanded scan: tested 31 new compound names, found 21 CLEAN candidates:
+  - antimony-trisulfide, cadmium-sulfide, zinc-selenide, cadmium-telluride, gallium-phosphide, aluminum-gallium-nitride, indium-gallium-arsenide, silicon-germanium, zirconium-diboride, hafnium-dioxide, aluminum-oxide-nano, calcium-fluoride, barium-fluoride, lithium-fluoride, sodium-fluoride, potassium-fluoride, lead-fluoride, strontium-fluoride, thorium-oxide, uranium-oxide, lead-zirconate
+  - 10 already existed: vanadium-pentoxide, strontium-titanate, barium-titanate, bismuth-telluride, gallium-nitride, indium-phosphide, titanium-diboride, magnesium-oxide + 2 from original pool
+- R469 candidates: Lead Zirconate (CLEAN), Hafnium Dioxide (CLEAN)
+- Icons verified: BrickWall (0 uses, confirmed VALID), Briefcase (0 uses, confirmed VALID)
+- Created Lead Zirconate Logistics (R469a): 228 lines, pbz-* indigo #4338ca, 14 records
+  - 14 grades: PbZrO3 99.9% FeRAM, 99.95% Submarine Sonar Piezo, 99.7% PZT Actuator, 99.85% GT Igniter, 99.3% NDT Transducer, 99.8% Warship ASW Array, 99.0% Diesel Piezo Injector, 99.6% Missile Accelerometer, 99.92% 5G SAW Filter, 99.4% Medical Ultrasound, 99.8% Pyroelectric IR, 99.85% Towed Array Hydrophone, 99.95% Hypersonic Tunnel Sensor, 98.0% General
+  - Applications: IISc FeRAM, NPOL sonar, ISRO PZT, BHEL igniter, Tata Steel NDT, BEL ASW, Cummins injector, DRDO Astra accel, IIT-G SAW, Wipro GE ultrasound, Honeywell pyro IR, IN Navy towed hydro, DRDO tunnel, SAIL ceramic
+  - Rs 12,280 Cr total, avg 99.55%, melting point 1570 degC, density 7.10 g/cm3
+  - Delayed: PBZ-A2412 (28d, monsoon Visakhapatnam, submarine SSK towed array passive hydrophone listening)
+- Created Hafnium Dioxide Logistics (R469b): 228 lines, hfo-* brown-dark #7c2d12, 14 records
+  - 14 grades: HfO2 99.9% Gate Oxide, 99.95% Submarine Control Rod, 99.7% DRAM Capacitor, 99.85% Warship Stealth RAM, 99.3% UV Lithography AR, 99.8% Submarine Reactor Liner, 99.0% Lamp Filament, 99.6% Missile IR Seeker, 99.92% FeFET Neuromorphic, 99.4% Plasma Etch Liner, 99.8% Thermocouple Tube, 99.85% Submarine Rad Shield, 99.95% Hypersonic TPS, 98.0% General
+  - Applications: IISc gate dielec, NPCIL control rod, IISc DRAM, BEL Naval RAM, IIT-K AR coat, NPCIL reactor liner, Surya Roshni filament, DRDO Astra IR, IIT-G FeFET, Applied Mat liner, BHEL TC tube, IN Navy rad shield, DRDO HSTDV TPS, SAIL refractory
+  - Rs 12,820 Cr total, avg 99.58%, melting point 2758 degC, density 9.68 g/cm3
+  - Delayed: HFO-A2412 (28d, monsoon Visakhapatnam, submarine SSK radiation shielding gamma attenuation tile)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (762 exports), page.tsx (1292 viewMap entries), app-store.ts (774 navItems)
-- CSS appended: 16 new rules (~63,382 total)
-- Git commit: 5837495, pushed to main
+- Three-file registration: index.ts (764 exports), page.tsx (1294 viewMap entries), app-store.ts (776 navItems)
+- CSS appended: 16 new rules (~63,404 total)
+- Git commit: 517fbcb, pushed to main
 
 Stage Summary:
-- Project now: 762 module exports, 774 navItems, ~63,382 CSS lines, 1292 viewMap entries, 0 TSC errors in src/
-- Magnesium Ingot: Submarine escape hull &#8377;940Cr, flare decoy &#8377;900Cr, fighter airframe &#8377;840Cr, warship grating &#8377;860Cr
-- YSZ: Submarine reactor shield &#8377;960Cr, scramjet liner &#8377;980Cr, GT blade TBC &#8377;920Cr, SOFC electrolyte &#8377;960Cr
-- Delayed: MGI-A2412 (28d), YSZ-A2412 (28d) — both monsoon Visakhapatnam naval corridor (8th consecutive round)
+- Project now: 764 module exports, 776 navItems, ~63,404 CSS lines, 1294 viewMap entries, 0 TSC errors in src/
+- Lead Zirconate: Submarine towed array &#8377;960Cr, FeRAM &#8377;880Cr, sonar piezo &#8377;960Cr, missile accel &#8377;900Cr
+- Hafnium Dioxide: Submarine rad shield &#8377;960Cr, hypersonic TPS &#8377;980Cr, reactor liner &#8377;960Cr, gate oxide &#8377;920Cr
+- Delayed: PBZ-A2412 (28d), HFO-A2412 (28d) — both monsoon Visakhapatnam naval corridor (9th consecutive round)
 
 **Project Current State:**
-- 762 module exports, 774 navItems, ~63,382 CSS lines, 1292 viewMap entries, 0 TSC errors in src/
+- 764 module exports, 776 navItems, ~63,404 CSS lines, 1294 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- Mg 99.95% — China controls 85% global production, critical lightweight alloy for defense, India imports 80%+
-- YSZ 99.95% — Australia/South Africa/India supply, critical for gas turbine TBC and nuclear, strategic defense material
-- Visakhapatnam monsoon corridor: 8 consecutive rounds — EXTREME systemic pattern, recommend emergency route diversification to Paradip/Chennai
-- Next candidates pool: 5 clean names remaining (zirconium-silicate, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride, + more exotic). Pool nearly depleted, will need to scan for new compound candidates soon.
+- PbZrO3 99.95% — China/Japan supply dominance, critical for submarine sonar and defense ferroelectrics, India imports 95%+
+- HfO2 99.95% — Australia/USA duopoly (Hf co-produced with Zr), critical for semiconductor nodes and nuclear, India imports 100%
+- Visakhapatnam monsoon corridor: 9 consecutive rounds — EXTREME, recommend emergency logistics route change
+- Candidate pool: refreshed to ~21 clean names after R469 expansion scan. Sufficient for ~10 more rounds.
