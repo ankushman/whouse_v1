@@ -1,4 +1,47 @@
 ---
+Task ID: R435 — Zinc Oxide Logistics + Tin Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R435 — 2 new Indian logistics modules for zinc oxide (ZnO) varistor/UV blocker/rubber vulcanization/TCO electrode supply chain and tin oxide (SnO2) TCO electrode/gas sensor/display/smart glass supply chain.
+
+Work Log:
+- Read worklog: R434 complete (commit 260b03d), 701 exports, ~62,448 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: zinc-oxide (CLEAN), tin-oxide (CLEAN), lead-oxide (CLEAN), nickel-oxide (CLEAN), copper-oxide (CLEAN), manganese-oxide (CLEAN)
+- Icons verified: ShieldCheck (confirmed), Lightbulb (confirmed)
+- Created Zinc Oxide Logistics (R435a): 227 lines, zno-* green #16a34a, 14 records
+  - 14 grades: ZnO 99.9% Varistor, ZnO 99.7% Rubber Vulcanize, ZnO 99.5% Sunscreen Nano, ZnO 99.0% Ceramic Glaze, ZnO 99.8% Anti-Corrosion, ZnO 99.3% Gas Sensor, ZnO 99.6% UV LED Phosphor, ZnO 98.5% Animal Feed, ZnO 99.4% Spintronics, ZnO 99.95% Transparent Electrode, ZnO 99.2% Cement Additive, ZnO 99.8% Submarine Anode, ZnO 99.6% Smoke Grenade, ZnO 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Surge arrester varistor, MRF radial tire vulcanization, sunscreen nano-ZnO, ceramic wall tile glaze, marine anti-corrosion paint, CO gas sensor, UV LED phosphor, animal zinc feed, dilute magnetic semiconductor, TCO transparent electrode film, cement quick-set, submarine cathodic protection anode, DRDO IR smoke grenade, hot-dip galvanizing
+  - Rs 8,760 Cr total, avg 99.33%, melting point 1940-1975 degC
+  - Delayed: ZNO-A2412 (28d, monsoon Visakhapatnam, submarine cathodic protection ZnO anode)
+- Created Tin Oxide Logistics (R435b): 227 lines, sno-* amber #854d0e, 14 records
+  - 14 grades: SnO2 99.99% ITO Target, SnO2 99.9% Gas Sensor Array, SnO2 99.95% LCD Electrode, SnO2 99.0% Solar Cell TCO, SnO2 99.7% EMI Shielding, SnO2 99.5% Catalyst, SnO2 99.8% Smart Glass, SnO2 98.5% Ceramic Glaze, SnO2 99.6% Flame Retardant, SnO2 99.98% OLED Anode, SnO2 99.3% Anti-Reflect, SnO2 99.8% Submarine Periscope, SnO2 99.7% Missile Seeker, SnO2 97% General Glass
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Electronics, Bharat Forge, Shyam Ceramics, BHEL R&D, Godrej Ceramics, Rajasthan Ceramics, Assam Ceramics, Gujarat Ceramics, UP Ceramics, Vizag Ceramics, DRDO TBRL, SAIL Ceramics
+  - Applications: Touch panel ITO sputtering target, CBRN gas sensor array, LCD flat panel electrode, solar PV TCO front contact, RF EMI shielding coating, methanol synthesis catalyst, electrochromic smart glass, ceramic opacifier, textile flame retardant, flexible OLED anode, solar anti-reflective coating, submarine periscope optical coating, DRDO missile IR seeker dome, bottle glass opacifier
+  - Rs 8,760 Cr total, avg 99.35%, melting point 1590-1630 degC
+  - Delayed: SNO-A2412 (28d, monsoon Visakhapatnam, submarine periscope SnO2 optical coating)
+- HTML entity scan: 14 (ZNO) + 14 (SNO) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (703 exports), page.tsx (1226 viewMap entries), app-store.ts (708 navItems)
+- CSS appended: 16 new rules (~62,472 total)
+- Git commit: 6b1ccfd, pushed to main
+
+Stage Summary:
+- Project now: 703 module exports, 708 navItems, ~62,472 CSS lines, 1226 viewMap entries, 0 TSC errors in src/
+- Zinc Oxide: Submarine anode &#8377;940Cr, TCO electrode &#8377;940Cr, varistor &#8377;900Cr, UV LED &#8377;880Cr
+- Tin Oxide: Submarine periscope &#8377;940Cr, OLED anode &#8377;960Cr, ITO target &#8377;940Cr, missile seeker &#8377;900Cr
+- Delayed: ZNO-A2412 (28d), SNO-A2412 (28d) — both monsoon Visakhapatnam corridor
+
+**Project Current State:**
+- 703 module exports, 708 navItems, ~62,472 CSS lines, 1226 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- SnO2 99.99% ITO target-grade imported from Japan/South Korea — display panel supply chain risk
+- ZnO 99.95% TCO-grade — no domestic sputtering target production
+- Next clean candidates: lead-oxide, nickel-oxide, copper-oxide, manganese-oxide, cobalt-oxide, iron-oxide
+---
+---
 Task ID: R434 — Strontium Titanate Logistics + Yttrium Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R434 — 2 new Indian logistics modules for strontium titanate (SrTiO3) perovskite substrate/microwave resonator/high-k capacitor/quantum well supply chain and yttrium oxide (Y2O3) YAG laser host/phosphor/thermal barrier/superconductor supply chain.
