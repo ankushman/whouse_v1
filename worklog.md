@@ -1,43 +1,39 @@
 ---
-Task ID: R475 — Nano Alumina Logistics + Lanthanum Fluoride Logistics
+Task ID: R476 — Barium Fluoride Logistics + Cerium Fluoride Logistics
 Agent: Main Agent (Cron Loop)
-Task: R475 — 2 new Indian logistics modules for nano alumina (Al2O3-nano) CMP slurry/ceramic armor/bio-ceramic/catalyst support supply chain and lanthanum fluoride (LaF3) DUV optical coating/fluoride ion battery/fiber laser/scintillator supply chain.
+Task: R476 — 2 new Indian logistics modules for barium fluoride (BaF2) fast scintillator/EUV optic/IR window/neutron detection supply chain and cerium fluoride (CeF3) gamma scintillator/UV optic/glass polish/catalytic washcoat supply chain.
 
 Work Log:
-- Read worklog: R474 complete (commit 3b5a0ad), 774 exports, ~63,490 CSS
-- TSC pre-validation: 0 errors in src/
-- R475 candidates verified clean:
-  - Nano Alumina (Al2O3-nano) — CLEAN
-  - Lanthanum Fluoride (LaF3) — CLEAN
-- Icons: Fish (0 uses, VALID), Shell (0 uses, VALID)
-- Created Nano Alumina Logistics (R475a): 228 lines, aon-* blue #1d4ed8, 14 records
-  - Grades: Al2O3-nano CMP Slurry, Ceramic Armor, Bio-Ceramic Implant, FCC Catalyst, Fluoride Adsorbent, Missile Radome Coat, Cutting Tool Insert, Refractory Brick, LED Phosphor, Battery Separator, Desiccant, Sub Propeller Coat, Hypersonic TPS, General
-  - Rs 11,920 Cr total, avg 99.68%, MP 2072 degC, density 3.95 g/cm3
-  - Delayed: AON-A2412 (28d, Visakhapatnam monsoon, submarine SSK propeller erosion coat)
-- Created Lanthanum Fluoride Logistics (R475b): 228 lines, ltf-* teal-dark #0f766e, 14 records
-  - Grades: LaF3 DUV AR Coat, FIB Electrolyte, Fiber Laser Host, Scintillator, Mg Smelting Flux, Missile IR Dome, Arc Lamp Electrode, Space Mirror Coat, Neutron Control Rod, Fiber Preform, Welding Flux, Sub Sonar Transducer, Hypersonic Tunnel Window, General
-  - Rs 12,120 Cr total, avg 99.70%, MP 1493 degC, density 5.94 g/cm3
-  - Delayed: LTF-A2412 (28d, Visakhapatnam monsoon, submarine SSK sonar transducer acoustic match coat)
+- Read worklog: R475 complete (commit ee11f9f), 776 exports, ~63,506 CSS
+- TSC pre-validation: 0 errors
+- Candidates verified clean: BaF2 (0 refs), CeF3 (0 refs)
+- Icons: Space (0 uses, VALID), Clover (0 uses, VALID)
+- Created Barium Fluoride Logistics (R476a): 228 lines, baf-* violet-dark #6d28d9, 14 records
+  - Rs 12,100 Cr total, avg 99.69%, MP 1368 degC, density 4.89 g/cm3
+  - Delayed: BAF-A2412 (28d, Visakhapatnam, sub SSK periscope UV-NIR lens)
+- Created Cerium Fluoride Logistics (R476b): 228 lines, cef-* amber-dark #b45309, 14 records
+  - Rs 12,060 Cr total, avg 99.69%, MP 1460 degC, density 6.16 g/cm3
+  - Delayed: CEF-A2412 (28d, Visakhapatnam, sub SSK hull anti-fouling paint)
 - TSC: 0 errors
-- Registration: index.ts (776 exports), page.tsx (1306 viewMap), app-store.ts (788 navItems)
-- CSS: 16 new rules (~63,506 total)
-- Git commit: ee11f9f, pushed
+- Registration: index.ts (778 exports), page.tsx (1308 viewMap), app-store.ts (790 navItems)
+- CSS: 16 new rules (~63,522 total)
+- Git commit: 4cde7cf, pushed
 
 Stage Summary:
-- Project: 776 module exports, 788 navItems, ~63,506 CSS lines, 1306 viewMap entries, 0 TSC errors
-- Session total (R464-R475): 24 new modules, 12 rounds, 0 TSC errors
-- Delayed: AON-A2412 + LTF-A2412 (15th consecutive Visakhapatnam monsoon round)
+- Project: 778 module exports, 790 navItems, ~63,522 CSS, 1308 viewMap, 0 TSC errors
+- Session total (R464-R476): 26 new modules, 13 rounds, 0 TSC errors
+- Visakhapatnam monsoon: 16th consecutive round
 
 **Project Current State:**
-- 776 exports, 788 navItems, ~63,506 CSS, 1306 viewMap, 0 TSC errors
+- 778 exports, 790 navItems, ~63,522 CSS, 1308 viewMap, 0 TSC errors
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA
-- Visakhapatnam monsoon: 15 consecutive rounds — EXTREME, recommend route diversification
-- Al2O3-nano CMP: Japan/US dominates semiconductor-grade CMP, India import-dependent
-- LaF3: lanthanum is REE (China 60% supply), critical for UV optics + fluoride battery R&D
-- Candidate pool: ~9 clean names (BaF2, LiF, NaF, KF, PbF2, SrF2, ThO2, UO2, zirconium-silicate)
+- Visakhapatnam monsoon: 16 rounds — CRITICAL systemic, route diversification overdue
+- BaF2: barium toxic soluble compounds, EU RoHS concern for specific applications
+- CeF3: cerium REE (China 60%), dual-use nuclear + automotive catalytic
+- Candidate pool: ~7 clean names (LiF, NaF, KF, PbF2, SrF2, ThO2, UO2, zirconium-silicate)
 
-**Next Round R476 Suggested Candidates:**
-- Barium Fluoride (BaF2) — fast scintillator, UV optics, EUV lithography
-- Cerium Fluoride (CeF3) — gamma scintillator, UV transparent, polish powder
+**Next Round R477 Suggested Candidates:**
+- Lithium Fluoride (LiF) — fusion reactor blanket, UV optic, Mg reduction flux
+- Sodium Fluoride (NaF) — uranium enrichment UF4 feed, dental health, glass etch
