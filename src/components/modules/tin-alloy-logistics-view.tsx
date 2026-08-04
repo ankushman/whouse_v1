@@ -1,130 +1,199 @@
-'use client'
-import React, { useState, useMemo } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { PageHeader } from '@/components/shared'
-import { Badge } from '@/components/ui/badge'
-import { Anchor } from 'lucide-react'
+"use client";
+
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared';
+import { Wrench } from 'lucide-react';
 
 interface TinAlloyRecord {
-  id: string
-  batchNo: string
-  city: string
-  manufacturer: string
-  alloyGrade: string
-  application: string
-  tinPercent: number
-  meltingPointC: number
-  investmentCr: number
-  status: string
-  priority: string
-  origin: string
-  destination: string
-  shipDate: string
-  transitDays: number
-  zone: string
-  remarks: string
-}
+  id: string; batchNo: string; city: string; manufacturer: string; snGrade: string;
+  application: string; purityPercent: number; meltingPointC: number; investmentCr: number;
+  status: string; priority: string; origin: string; destination: string;
+  shipDate: string; transitDays: number; zone: string; remarks: string;
+};
 
 const tinAlloyRecords: TinAlloyRecord[] = [
-  { id: 'TNA-0001', batchNo: 'TNA-B2401', city: 'Mumbai', manufacturer: 'Hindustan Tin', alloyGrade: 'Sn-99.99% Pure Ingot', application: 'Solder Paste (KEC)', tinPercent: 99.99, meltingPointC: 232, investmentCr: 380, status: 'Delivered', priority: 'Critical', origin: 'Hindustan Tin Mumbai (MH)', destination: 'KEC Bengaluru (KA)', shipDate: '2026-07-15', transitDays: 2, zone: 'West', remarks: 'Pure Sn 99.99% ingot for KEC electronics solder paste SAC305 &#8594; 99.99% Sn &#8594; &#8377;380Cr for 15 tonnes &#8594; India &#8377;11,400Cr electronics Sn &#8594; KEC 500M PCBs/yr &#8594; 232&#176;C &#8594; J-STD-004 &#8594; 4N purity' },
-  { id: 'TNA-0002', batchNo: 'TNA-B2402', city: 'Chennai', manufacturer: 'Tamil Nadu Tin', alloyGrade: 'Sn-3.5Ag-0.7Cu SAC305', application: 'EV Inverter (Ather Energy)', tinPercent: 95.8, meltingPointC: 217, investmentCr: 420, status: 'Delivered', priority: 'Critical', origin: 'Tamil Nadu Tin Chennai (TN)', destination: 'Ather Bengaluru (KA)', shipDate: '2026-07-16', transitDays: 1, zone: 'South', remarks: 'SAC305 lead-free solder alloy for Ather EV SiC inverter power module &#8594; 95.8% Sn &#8594; &#8377;420Cr for 8 tonnes &#8594; India &#8377;12,600Cr EV Sn &#8594; Ather 200K scooters &#8594; 217&#176;C &#8594; RoHS compliant &#8594; 22 mN strength' },
-  { id: 'TNA-0003', batchNo: 'TNA-B2403', city: 'Bengaluru', manufacturer: 'Nordon Metals', alloyGrade: 'Sn-37Pb Eutectic', application: 'Defence Electronics (BEL)', tinPercent: 63.0, meltingPointC: 183, investmentCr: 290, status: 'Delivered', priority: 'High', origin: 'Nordon Metals Bengaluru (KA)', destination: 'BEL Ghaziabad (UP)', shipDate: '2026-07-17', transitDays: 2, zone: 'South', remarks: 'Sn-37Pb eutectic solder bar for BEL military radar PCB hand soldering &#8594; 63% Sn &#8594; &#8377;290Cr for 12 tonnes &#8594; India &#8377;8,700Cr defence Sn &#8594; BEL 100+ radars &#8594; 183&#176;C &#8594; MIL-STD-2020 &#8594; exempt RoHS' },
-  { id: 'TNA-0004', batchNo: 'TNA-B2404', city: 'Kolkata', manufacturer: 'Shyam Tin Works', alloyGrade: 'Sn-40Pb 60/40 Solder', application: 'Consumer Electronics (Dixon)', tinPercent: 40.0, meltingPointC: 183, investmentCr: 175, status: 'Delivered', priority: 'Medium', origin: 'Shyam Tin Works Kolkata (WB)', destination: 'Dixon Noida (UP)', shipDate: '2026-07-18', transitDays: 2, zone: 'East', remarks: 'Sn-40Pb 60/40 solder bar for Dixon LED TV PCB wave soldering &#8594; 40% Sn &#8594; &#8377;175Cr for 25 tonnes &#8594; India &#8377;5,250Cr consumer Sn &#8594; Dixon 20M TVs &#8594; 183&#176;C &#8594; IPC J-STD-004 &#8594; wave grade' },
-  { id: 'TNA-0005', batchNo: 'TNA-B2405', city: 'Pune', manufacturer: 'Indian Tin Corp', alloyGrade: 'Sn-5Sb Antimonial', application: 'Marine Coating (Cochin Shipyard)', tinPercent: 95.0, meltingPointC: 240, investmentCr: 310, status: 'Delivered', priority: 'High', origin: 'Indian Tin Corp Pune (MH)', destination: 'Cochin Shipyard Kochi (KL)', shipDate: '2026-07-19', transitDays: 2, zone: 'West', remarks: 'Sn-5Sb antimonial tin alloy for Cochin Shipyard submarine hull anode &#8594; 95% Sn &#8594; &#8377;310Cr for 6 tonnes &#8594; India &#8377;9,300Cr marine Sn &#8594; Cochin 6 submarines &#8594; 240&#176;C &#8594; corrosion 0.1 mm/yr &#8594; naval grade' },
-  { id: 'TNA-0006', batchNo: 'TNA-B2406', city: 'Hyderabad', manufacturer: 'MIDHANI', alloyGrade: 'Sn-20Bi-10In Low-Melt', application: 'Thermal Interface (Tata Elxsi)', tinPercent: 70.0, meltingPointC: 120, investmentCr: 260, status: 'Delivered', priority: 'High', origin: 'MIDHANI Hyderabad (TG)', destination: 'Tata Elxsi Bengaluru (KA)', shipDate: '2026-07-20', transitDays: 1, zone: 'South', remarks: 'Sn-Bi-In low-melting alloy for Tata Elxsi 5G base station TIM pad &#8594; 70% Sn &#8594; &#8377;260Cr for 4 tonnes &#8594; India &#8377;7,800Cr telecom Sn &#8594; Tata 100K base stations &#8594; 120&#176;C &#8594; 35 W/mK &#8594; reflow grade' },
-  { id: 'TNA-0007', batchNo: 'TNA-B2407', city: 'Ahmedabad', manufacturer: 'Gujarat Tin Industries', alloyGrade: 'Sn-0.7Cu Lead-Free Bar', application: 'PCB Assembly (Syrma SGS)', tinPercent: 99.3, meltingPointC: 227, investmentCr: 195, status: 'Delivered', priority: 'Medium', origin: 'Gujarat Tin Industries Rajkot (GJ)', destination: 'Syrma SGS Chennai (TN)', shipDate: '2026-07-21', transitDays: 1, zone: 'West', remarks: 'Sn-0.7Cu lead-free solder bar for Syrma SGS EMS PCB wave soldering &#8594; 99.3% Sn &#8594; &#8377;195Cr for 20 tonnes &#8594; India &#8377;5,850Cr EMS Sn &#8594; Syrma 200M PCBs &#8594; 227&#176;C &#8594; IPC-A-610 &#8594; wave grade' },
-  { id: 'TNA-0008', batchNo: 'TNA-B2408', city: 'Jaipur', manufacturer: 'Rajasthan Tin', alloyGrade: 'Sn-3Ag-0.5Cu SAC305 Paste', application: 'Automotive ECU ( Uno Minda)', tinPercent: 96.5, meltingPointC: 217, investmentCr: 340, status: 'Delivered', priority: 'Critical', origin: 'Rajasthan Tin Jaipur (RJ)', destination: 'Uno Minda Pune (MH)', shipDate: '2026-07-22', transitDays: 2, zone: 'North', remarks: 'SAC305 solder paste for Uno Minda automotive ECU SMT reflow &#8594; 96.5% Sn &#8594; &#8377;340Cr for 10 tonnes &#8594; India &#8377;10,200Cr auto Sn &#8594; Uno Minda 50M ECUs &#8594; 217&#176;C &#8594; AEC-Q200 &#8594; type 4 paste' },
-  { id: 'TNA-0009', batchNo: 'TNA-B2409', city: 'Bhubaneswar', manufacturer: 'Odisha Tin Corp', alloyGrade: 'Sn-9Zn High-Temp', application: 'Solar Panel (Tata Power Solar)', tinPercent: 91.0, meltingPointC: 199, investmentCr: 285, status: 'Delivered', priority: 'High', origin: 'Odisha Tin Corp Bhubaneswar (OD)', destination: 'Tata Power Nellore (AP)', shipDate: '2026-07-23', transitDays: 2, zone: 'East', remarks: 'Sn-9Zn high-temp lead-free solder for Tata Power Solar PV ribbon interconnect &#8594; 91% Sn &#8594; &#8377;285Cr for 18 tonnes &#8594; India &#8377;8,550Cr solar Sn &#8594; Tata 10 GW &#8594; 199&#176;C &#8594; IEC 61215 &#8594; ribbon grade' },
-  { id: 'TNA-0010', batchNo: 'TNA-B2410', city: 'Guwahati', manufacturer: 'Assam Tin Mines', alloyGrade: 'Sn 99.95% LME Grade', application: 'Tinplate (TCIL)', tinPercent: 99.95, meltingPointC: 232, investmentCr: 245, status: 'Delivered', priority: 'Medium', origin: 'Assam Tin Mines Guwahati (AS)', destination: 'TCIL Jamshedpur (JH)', shipDate: '2026-07-24', transitDays: 4, zone: 'East', remarks: 'LME-grade pure Sn ingot for TCIL tinplate electrolytic tinning line &#8594; 99.95% Sn &#8594; &#8377;245Cr for 12 tonnes &#8594; India &#8377;7,350Cr packaging Sn &#8594; TCIL 500K tonnes tinplate &#8594; 232&#176;C &#8594; LME registered &#8594; 5N grade' },
-  { id: 'TNA-0011', batchNo: 'TNA-B2411', city: 'Noida', manufacturer: 'UP Tin Industries', alloyGrade: 'Sn-2.5Ag-0.8Cu-0.5Sb', application: 'Space Electronics (ISRO)', tinPercent: 96.2, meltingPointC: 218, investmentCr: 520, status: 'Delivered', priority: 'Critical', origin: 'UP Tin Industries Noida (UP)', destination: 'ISRO Thiruvananthapuram (KL)', shipDate: '2026-07-25', transitDays: 3, zone: 'North', remarks: 'Anti-tin-whisker Sn-Ag-Cu-Sb solder for ISRO satellite PCB reflow &#8594; 96.2% Sn &#8594; &#8377;520Cr for 3 tonnes &#8594; India &#8377;15,600Cr space Sn &#8594; ISRO 12 satellites &#8594; 218&#176;C &#8594; ESA ECSS &#8594; anti-whisker' },
-  { id: 'TNA-0012', batchNo: 'TNA-B2412', city: 'Surat', manufacturer: 'Gujarat Tin Alloys', alloyGrade: 'Sn-Bi 58/42 Eutectic', application: 'LED Assembly (Dixon Tech)', tinPercent: 58.0, meltingPointC: 138, investmentCr: 190, status: 'Delayed', priority: 'High', origin: 'Gujarat Tin Alloys Surat (GJ)', destination: 'Dixon Noida (UP)', shipDate: '2026-07-05', transitDays: 17, zone: 'West', remarks: 'Sn-Bi 58/42 low-temp solder paste for Dixon LED TV module rework &#8594; 58% Sn &#8594; &#8377;190Cr for 8 tonnes &#8594; monsoon delay &#8594; India &#8377;5,700Cr LED Sn &#8594; Dixon 20M modules &#8594; 138&#176;C &#8594; rework grade &#8594; Bi-42%' },
-  { id: 'TNA-0013', batchNo: 'TNA-B2413', city: 'Coimbatore', manufacturer: 'Tamil Nadu Tin Alloys', alloyGrade: 'Sn-5Ag BGA Sphere', application: 'Semiconductor (SCL)', tinPercent: 95.0, meltingPointC: 221, investmentCr: 410, status: 'Delivered', priority: 'Critical', origin: 'Tamil Nadu Tin Alloys Coimbatore (TN)', destination: 'SCL Mohali (PB)', shipDate: '2026-07-26', transitDays: 2, zone: 'South', remarks: 'Sn-5Ag BGA solder sphere for SCL semiconductor chip packaging &#8594; 95% Sn &#8594; &#8377;410Cr for 2 tonnes &#8594; India &#8377;12,300Cr semi Sn &#8594; SCL 200M chips &#8594; 221&#176;C &#8594; JEDEC 0201 &#8594; 300um sphere' },
-  { id: 'TNA-0014', batchNo: 'TNA-B2414', city: 'Bhopal', manufacturer: 'BHEL', alloyGrade: 'Sn-38Pb-2Sb Bearing', application: 'Turbine Bearing (BHEL)', tinPercent: 38.0, meltingPointC: 185, investmentCr: 335, status: 'Delivered', priority: 'High', origin: 'BHEL Bhopal (MP)', destination: 'BHEL Haridwar (UK)', shipDate: '2026-07-27', transitDays: 2, zone: 'North', remarks: 'Sn-38Pb-2Sb Babbitt bearing alloy for BHEL 800 MW steam turbine journal bearing &#8594; 38% Sn &#8594; &#8377;335Cr for 10 tonnes &#8594; India &#8377;10,050Cr power Sn &#8594; BHEL 150 GW &#8594; 185&#176;C &#8594; B89 Babbitt &#8594; centrifugal cast' }
-]
-
-const delayedSet = new Set(tinAlloyRecords.filter(r => r.status === 'Delayed').map(r => r.id))
+  { id: 'TNA-0001', batchNo: 'TNA-B2401', city: 'Mumbai', manufacturer: 'Hindustan Tin', snGrade: 'Sn-99.99 High Purity', application: 'ISRO Satellite Solder BGA', purityPercent: 99.99, meltingPointC: 232, investmentCr: 820, status: 'Delivered', priority: 'Critical', origin: 'Hindustan Tin Mumbai (MH)', destination: 'ISRO Bengaluru (KA)', shipDate: '2026-07-15', transitDays: 1, zone: 'West', remarks: '99.99% high-purity tin for ISRO GSAT satellite PCB BGA solder ball and SMT reflow &#8594; &#8377;820Cr for 200 tonnes &#8594; India &#8377;5,600Cr Sn solder &#8594; ISRO 18 satellites &#8594; 232&#176;C &#8594; &#8594; Solder ball &#8594; &#8594; Sn99 &#8594; &#8594; Space' },
+  { id: 'TNA-0002', batchNo: 'TNA-B2402', city: 'Bengaluru', manufacturer: 'DRDO DMRL', snGrade: 'Sn-63Pb37 Eutectic', application: 'BEL Radar RF Module', purityPercent: 99.95, meltingPointC: 183, investmentCr: 680, status: 'In Transit', priority: 'Critical', origin: 'DRDO Hyderabad (TG)', destination: 'BEL Bengaluru (KA)', shipDate: '2026-07-16', transitDays: 2, zone: 'South', remarks: 'Sn63Pb37 eutectic solder for BEL AESA radar RF module wave solder and manual touch-up &#8594; 63% Sn &#8594; &#8377;680Cr for 120 tonnes &#8594; India &#8377;4,200Cr Sn eutectic &#8594; BEL 12 radars &#8594; 183&#176;C &#8594; &#8594; Solder paste &#8594; &#8594; Sn63 &#8594; &#8594; Defense' },
+  { id: 'TNA-0003', batchNo: 'TNA-B2403', city: 'Chennai', manufacturer: 'Sterlite Tin', snGrade: 'Sn-96.5Ag3Cu0.5 SAC', application: 'Wipro PCB Assembly', purityPercent: 99.9, meltingPointC: 217, investmentCr: 520, status: 'Delivered', priority: 'High', origin: 'Sterlite Tin Tuticorin (TN)', destination: 'Wipro Bengaluru (KA)', shipDate: '2026-07-17', transitDays: 3, zone: 'South', remarks: 'SAC305 lead-free solder for Wipro PCB SMT assembly ROHS-compliant server board &#8594; 96.5% Sn &#8594; &#8377;520Cr for 150 tonnes &#8594; India &#8377;3,200Cr Sn SAC &#8594; Wipro 50K boards &#8594; 217&#176;C &#8594; &#8594; Paste &#8594; &#8594; SAC305 &#8594; &#8594; Electronics' },
+  { id: 'TNA-0004', batchNo: 'TNA-B2404', city: 'Hyderabad', manufacturer: 'Hyderabad Tin Corp', snGrade: 'Sn-Sb8 Babbitt', application: 'SAIL Heavy Bearing', purityPercent: 99.2, meltingPointC: 240, investmentCr: 460, status: 'Delivered', priority: 'High', origin: 'Hyderabad Tin Hyderabad (TG)', destination: 'SAIL Bhilai (CG)', shipDate: '2026-07-18', transitDays: 4, zone: 'South', remarks: 'Tin-antimony Babbitt alloy for SAIL Bhilai blast furnace main shaft white metal bearing &#8594; 8% Sb &#8594; &#8377;460Cr for 800 tonnes &#8594; India &#8377;2,800Cr Sn Babbitt &#8594; SAIL 6 furnaces &#8594; 240&#176;C &#8594; &#8594; Ingot &#8594; &#8594; B8 &#8594; &#8594; Steel' },
+  { id: 'TNA-0005', batchNo: 'TNA-B2405', city: 'Kolkata', manufacturer: 'Bharat Tin Works', snGrade: 'Sn-Pb40 Soft Solder', application: 'Tata Steel Tinplate', purityPercent: 99.5, meltingPointC: 200, investmentCr: 340, status: 'In Transit', priority: 'Medium', origin: 'Bharat Tin Kolkata (WB)', destination: 'Tata Steel Jamshedpur (JH)', shipDate: '2026-07-19', transitDays: 5, zone: 'East', remarks: 'Tin-lead soft solder for Tata Steel tinplate continuous tinning line for food can stock &#8594; 40% Pb &#8594; &#8377;340Cr for 300 tonnes &#8594; India &#8377;1,800Cr Sn tinplate &#8594; Tata 4 CTLs &#8594; 200&#176;C &#8594; &#8594; Bar &#8594; &#8594; Sn60 &#8594; &#8594; Steel' },
+  { id: 'TNA-0006', batchNo: 'TNA-B2406', city: 'Coimbatore', manufacturer: 'TN Tin Works', snGrade: 'Sn-99.95 Pharma', application: 'Dr Reddys Tin Capsule', purityPercent: 99.95, meltingPointC: 232, investmentCr: 420, status: 'Delivered', priority: 'Medium', origin: 'TN Tin Works Hosur (TN)', destination: 'Dr Reddys Hyderabad (TG)', shipDate: '2026-07-20', transitDays: 1, zone: 'South', remarks: 'Pharma-grade tin for Dr Reddys tin capsule shell and tablet blister packaging foil &#8594; USP grade &#8594; &#8377;420Cr for 250 tonnes &#8594; India &#8377;2,400Cr Sn pharma &#8594; Dr Reddys 400M caps &#8594; 232&#176;C &#8594; &#8594; Foil &#8594; &#8594; SnPh &#8594; &#8594; Pharma' },
+  { id: 'TNA-0007', batchNo: 'TNA-B2407', city: 'Pune', manufacturer: 'Bajaj Tin Div', snGrade: 'Sn-Cu0.7 Low Cost', application: 'Bajaj Auto Fuse', purityPercent: 99.8, meltingPointC: 227, investmentCr: 280, status: 'Delivered', priority: 'Medium', origin: 'Bajaj Tin Chakan (MH)', destination: 'Bajaj Auto Pune (MH)', shipDate: '2026-07-21', transitDays: 2, zone: 'West', remarks: 'Sn-Cu0.7 low-cost lead-free solder for Bajaj Pulsar wiring harness fuse connector &#8594; 0.7% Cu &#8594; &#8377;280Cr for 100 tonnes &#8594; India &#8377;1,400Cr Sn fuse &#8594; Bajaj 5M units &#8594; 227&#176;C &#8594; &#8594; Wire &#8594; &#8594; SnCu &#8594; &#8594; Auto' },
+  { id: 'TNA-0008', batchNo: 'TNA-B2408', city: 'Jaipur', manufacturer: 'Rajasthan Tin', snGrade: 'Sn-Ag4 Wave Solder', application: 'L&T Switchgear PCB', purityPercent: 99.7, meltingPointC: 221, investmentCr: 380, status: 'Delivered', priority: 'High', origin: 'Rajasthan Tin Jaipur (RJ)', destination: 'L&T Vadodara (GJ)', shipDate: '2026-07-22', transitDays: 3, zone: 'West', remarks: 'Sn-Ag4 lead-free solder alloy for L&T switchgear controller PCB wave soldering &#8594; 96% Sn &#8594; &#8377;380Cr for 80 tonnes &#8594; India &#8377;2,600Cr Sn wave &#8594; L&T 20K panels &#8594; 221&#176;C &#8594; &#8594; Bar &#8594; &#8594; SnAg &#8594; &#8594; Power' },
+  { id: 'TNA-0009', batchNo: 'TNA-B2409', city: 'Guwahati', manufacturer: 'Assam Tin Mine', snGrade: 'Sn-50Pb50', application: 'Godrej Aerosol Can', purityPercent: 99.3, meltingPointC: 190, investmentCr: 260, status: 'In Transit', priority: 'Low', origin: 'Assam Tin Silchar (AS)', destination: 'Godrej Mumbai (MH)', shipDate: '2026-07-23', transitDays: 4, zone: 'East', remarks: 'Sn-50Pb50 alloy for Godrej aerosol can crimp seal and valve body soldering &#8594; 50% Sn &#8594; &#8377;260Cr for 200 tonnes &#8594; India &#8377;1,200Cr Sn aerosol &#8594; Godrej 100M cans &#8594; 190&#176;C &#8594; &#8594; Bar &#8594; &#8594; Sn50 &#8594; &#8594; Consumer' },
+  { id: 'TNA-0010', batchNo: 'TNA-B2410', city: 'Ahmedabad', manufacturer: 'Gujarat Tin Corp', snGrade: 'Sn-Bi58 Low Melt', application: ' Dixon LED Thermal', purityPercent: 99.6, meltingPointC: 138, investmentCr: 540, status: 'Delivered', priority: 'High', origin: 'Gujarat Tin Ahmedabad (GJ)', destination: 'Dixon Noida (UP)', shipDate: '2026-07-24', transitDays: 5, zone: 'West', remarks: 'Sn-Bi58 low-melting alloy for Dixon LED TV thermal interface pad and heat sink attach &#8594; 58% Bi &#8594; &#8377;540Cr for 60 tonnes &#8594; India &#8377;3,600Cr Sn low-melt &#8594; Dixon 8M TVs &#8594; 138&#176;C &#8594; &#8594; Foil &#8594; &#8594; SnBi &#8594; &#8594; Electronics' },
+  { id: 'TNA-0011', batchNo: 'TNA-B2411', city: 'Lucknow', manufacturer: 'UP Tin Industries', snGrade: 'Sn-In52 Low Melt', application: 'BHEL Transformer Foil', purityPercent: 99.8, meltingPointC: 118, investmentCr: 480, status: 'Delivered', priority: 'Medium', origin: 'UP Tin Lucknow (UP)', destination: 'BHEL Bhopal (MP)', shipDate: '2026-07-25', transitDays: 1, zone: 'North', remarks: 'Sn-In52 ultra-low-melting alloy for BHEL power transformer foil winding soldering &#8594; 52% In &#8594; &#8377;480Cr for 40 tonnes &#8594; India &#8377;3,000Cr Sn-In &#8594; BHEL 30 transformers &#8594; 118&#176;C &#8594; &#8594; Foil &#8594; &#8594; SnIn &#8594; &#8594; Power' },
+  { id: 'TNA-0012', batchNo: 'TNA-B2412', city: 'Visakhapatnam', manufacturer: 'Vizag Tin Works', snGrade: 'Sn-Ni0.5 Corrosion', application: 'GRSE Submarine Hull Anode', purityPercent: 99.4, meltingPointC: 232, investmentCr: 860, status: 'Delayed', priority: 'Critical', origin: 'Vizag Tin Visakhapatnam (AP)', destination: 'GRSE Kolkata (WB)', shipDate: '2026-07-26', transitDays: 2, zone: 'East', remarks: 'Tin-nickel alloy for GRSE Project 75I submarine hull cathodic protection anode soldering &#8594; 0.5% Ni &#8594; &#8377;860Cr for 100 tonnes &#8597; India &#8377;6,400Cr Sn naval &#8594; GRSE 6 submarines &#8594; 232&#176;C &#8594; &#8594; Anode &#8594; &#8594; SnNi &#8594; &#8594; Naval' },
+  { id: 'TNA-0013', batchNo: 'TNA-B2413', city: 'Bhopal', manufacturer: 'BHEL Tin Div', snGrade: 'Sn-Zn9 LF Solder', application: 'BEL Missile Guidance', purityPercent: 99.7, meltingPointC: 199, investmentCr: 620, status: 'In Transit', priority: 'High', origin: 'BHEL Bhopal (MP)', destination: 'BEL Bengaluru (KA)', shipDate: '2026-07-27', transitDays: 3, zone: 'Central', remarks: 'Sn-Zn9 lead-free solder for BEL DRDO BrahMos missile guidance PCB assembly &#8594; 91% Sn &#8594; &#8377;620Cr for 70 tonnes &#8594; India &#8377;4,200Cr Sn missile &#8594; BEL 40 boards &#8594; 199&#176;C &#8594; &#8594; Paste &#8594; &#8594; SnZn &#8594; &#8594; Defense' },
+  { id: 'TNA-0014', batchNo: 'TNA-B2414', city: 'Rourkela', manufacturer: 'SAIL Tin', snGrade: 'Sn-Cu5 Bronze', application: 'HAL Aircraft Hydraulic', purityPercent: 99.1, meltingPointC: 260, investmentCr: 440, status: 'Delivered', priority: 'High', origin: 'SAIL Rourkela (OD)', destination: 'HAL Bengaluru (KA)', shipDate: '2026-07-28', transitDays: 4, zone: 'East', remarks: 'Tin-bronze Sn-Cu5 alloy for HAL Tejas Mk2 hydraulic actuator cylinder bushing &#8594; 5% Cu &#8594; &#8377;440Cr for 600 tonnes &#8594; India &#8377;2,800Cr Sn bronze &#8594; HAL 40 actuators &#8594; 260&#176;C &#8594; &#8594; Sleeve &#8594; &#8594; SnCu5 &#8594; &#8594; Aerospace' },
+];
 
 export default function TinAlloyLogisticsView() {
-  const [search, setSearch] = useState('')
-  const [activeTab, setActiveTab] = useState(0)
-  const [filters, setFilters] = useState<Record<string, string[]>>({})
+  const [activeTab, setActiveTab] = useState<string>('dashboard');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filterZone, setFilterZone] = useState<string>('all');
+  const [filterStatus, setFilterStatus] = useState<string>('all');
 
-  const tabs = ['Dashboard', 'Registry', 'Analytics', 'Insights']
-  const toggleFilter = (group: string, val: string) => {
-    setFilters(prev => {
-      const arr = prev[group] || []
-      const next = arr.includes(val) ? arr.filter(v => v !== val) : [...arr, val]
-      if (!next.length) { const n = { ...prev }; delete n[group]; return n }
-      return { ...prev, [group]: next }
-    })
-  }
+  const tabs = [
+    { id: 'dashboard', label: 'Dashboard', icon: Wrench },
+    { id: 'registry', label: 'Registry', icon: Wrench },
+    { id: 'analytics', label: 'Analytics', icon: Wrench },
+    { id: 'insights', label: 'Insights', icon: Wrench },
+  ];
 
-  const filtered = useMemo(() => {
-    let data = tinAlloyRecords
-    if (search) data = data.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(search.toLowerCase())))
-    Object.entries(filters).forEach(([k, vals]) => { if (vals.length) data = data.filter(r => vals.includes(String((r as any)[k]))) })
-    return data
-  }, [search, filters])
+  const filteredRecords = useMemo(() => {
+    return tinAlloyRecords.filter((r) => {
+      const matchSearch = searchTerm === '' ||
+        r.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        r.batchNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        r.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        r.manufacturer.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        r.snGrade.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        r.application.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchZone = filterZone === 'all' || r.zone === filterZone;
+      const matchStatus = filterStatus === 'all' || r.status === filterStatus;
+      return matchSearch && matchZone && matchStatus;
+    });
+  }, [searchTerm, filterZone, filterStatus]);
 
-  const total = tinAlloyRecords.length
-  const delivered = tinAlloyRecords.filter(r => r.status === 'Delivered').length
-  const totalCr = tinAlloyRecords.reduce((s: number, r) => s + r.investmentCr, 0)
-  const avgSn = +(tinAlloyRecords.reduce((s: number, r) => s + r.tinPercent, 0) / total).toFixed(1)
+  const zones = useMemo(() => {
+    const zMap: Record<string, number> = {};
+    tinAlloyRecords.forEach((r) => { zMap[r.zone] = (zMap[r.zone] || 0) + 1; });
+    return Object.entries(zMap).sort((a, b) => b[1] - a[1]);
+  }, []);
 
-  const manufacturers = [...new Set(tinAlloyRecords.map(r => r.manufacturer))]
-  const zones = [...new Set(tinAlloyRecords.map(r => r.zone))]
+  const kpiData = useMemo(() => {
+    const total = tinAlloyRecords.reduce((s: number, r) => s + r.investmentCr, 0);
+    const avgPurity = tinAlloyRecords.reduce((s: number, r) => s + r.purityPercent, 0) / tinAlloyRecords.length;
+    const delayed = tinAlloyRecords.filter((r) => r.status === 'Delayed').length;
+    const critical = tinAlloyRecords.filter((r) => r.priority === 'Critical').length;
+    return { total, avgPurity: avgPurity.toFixed(2), delayed, critical };
+  }, []);
 
+  const statusColor = (status: string) => {
+    switch (status) {
+      case 'Delivered': return 'bg-green-500/20 text-green-700 border-green-500/30';
+      case 'In Transit': return 'bg-blue-500/20 text-blue-700 border-blue-500/30';
+      case 'Delayed': return 'bg-red-500/20 text-red-700 border-red-500/30';
+      case 'Processing': return 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30';
+      default: return 'bg-gray-500/20 text-gray-700 border-gray-500/30';
+    }
+  };
+
+  const priorityColor = (priority: string) => {
+    switch (priority) {
+      case 'Critical': return 'bg-red-500/20 text-red-700 border-red-500/30';
+      case 'High': return 'bg-orange-500/20 text-orange-700 border-orange-500/30';
+      case 'Medium': return 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30';
+      case 'Low': return 'bg-green-500/20 text-green-700 border-green-500/30';
+      default: return 'bg-gray-500/20 text-gray-700 border-gray-500/30';
+    }
+  };
+
+  const themeColor = '#0891b2';
   return (
-    <div className="space-y-6">
-      <PageHeader title="Tin Alloy Logistics" description="Indian tin alloy supply chain tracking across electronics solder, EV power module, defence radar, consumer PCB, marine coating, thermal interface, solar PV ribbon, tinplate packaging, space satellite, semiconductor BGA and turbine Babbitt bearing sectors" />
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card><CardContent><div className="text-2xl font-bold text-sky-600">{total}</div><div className="text-xs text-muted-foreground">Total Shipments</div></CardContent></Card>
-        <Card><CardContent><div className="text-2xl font-bold text-sky-600">{delivered}</div><div className="text-xs text-muted-foreground">Delivered</div></CardContent></Card>
-        <Card><CardContent><div className="text-2xl font-bold text-sky-600">&#8377;{totalCr.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground">Total Investment</div></CardContent></Card>
-        <Card><CardContent><div className="text-2xl font-bold text-sky-600">{avgSn}%</div><div className="text-xs text-muted-foreground">Avg Sn Content</div></CardContent></Card>
+    <div className="space-y-6 p-6">
+      <PageHeader title="Tin Alloy Logistics" description="Indian tin alloy (Sn-Sb-Cu) solder, bearing, bronze, electronics and packaging supply chain tracking across 14 grades" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="border-l-4 border-l-cyan-500"><CardContent className="pt-6"><div className="text-2xl font-bold text-cyan-600">{kpiData.total.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground mt-1">Total Investment</div></CardContent></Card>
+        <Card className="border-l-4 border-l-cyan-500"><CardContent className="pt-6"><div className="text-2xl font-bold text-cyan-600">{kpiData.avgPurity}%</div><div className="text-xs text-muted-foreground mt-1">Avg Purity</div></CardContent></Card>
+        <Card className="border-l-4 border-l-cyan-500"><CardContent className="pt-6"><div className="text-2xl font-bold text-cyan-600">{kpiData.delayed}</div><div className="text-xs text-muted-foreground mt-1">Delayed Batches</div></CardContent></Card>
+        <Card className="border-l-4 border-l-cyan-500"><CardContent className="pt-6"><div className="text-2xl font-bold text-cyan-600">{kpiData.critical}</div><div className="text-xs text-muted-foreground mt-1">Critical Records</div></CardContent></Card>
       </div>
-
-      <div className="flex gap-2 border-b">
-        {tabs.map((t, i) => (<button key={t} className={`px-4 py-2 ${activeTab === i ? 'border-b-2 border-sky-600 text-sky-600 font-semibold' : 'text-muted-foreground'}`} onClick={() => setActiveTab(i)}>{t}</button>))}
+      <div className="flex flex-wrap gap-2 border-b pb-2">
+        {tabs.map((tab) => (
+          <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-4 py-2 rounded-t-md text-sm font-medium transition-colors ${activeTab === tab.id ? 'bg-cyan-500 text-white shadow-md' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}>
+            {tab.label}
+          </button>
+        ))}
       </div>
-
-      {activeTab === 0 && (<div className="space-y-4">
-        <div className="flex gap-2"><Input placeholder="Search shipments..." value={search} onChange={e => setSearch(e.target.value)} /></div>
-        <div className="flex gap-2 flex-wrap">
-          {zones.map(z => <Badge key={z} variant={filters.zone?.includes(z) ? 'default' : 'outline'} className="cursor-pointer" onClick={() => toggleFilter('zone', z)}>{z}</Badge>)}
+      {activeTab === 'dashboard' && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Card><CardHeader><CardTitle className="text-base">Zone Distribution</CardTitle></CardHeader><CardContent>
+            <div className="space-y-2">{zones.map(([zone, count]) => { const pct = (count as number / tinAlloyRecords.length) * 100; return <div key={zone} className="flex items-center gap-2"><span className="text-xs w-16 text-muted-foreground">{zone as string}</span><div className="flex-1 h-2 bg-muted rounded-full"><div className="h-2 rounded-full" style={{ width: `${pct}%`, backgroundColor: themeColor }} /></div><span className="text-xs font-medium w-8">{count as number}</span></div>; })}</div>
+          </CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-base">Status Overview</CardTitle></CardHeader><CardContent>
+            <div className="grid grid-cols-2 gap-3">
+              {['Delivered', 'In Transit', 'Delayed', 'Processing'].map((s) => { const c = tinAlloyRecords.filter((r) => r.status === s).length; return <div key={s} className={`text-center p-3 rounded-lg border ${statusColor(s)}`}><div className="text-lg font-bold">{c}</div><div className="text-xs">{s}</div></div>; })}
+            </div>
+          </CardContent></Card>
+          <Card className="lg:col-span-2"><CardHeader><CardTitle className="text-base">Investment by Grade (Top 8)</CardTitle></CardHeader><CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {tinAlloyRecords.slice(0, 8).map((r) => <div key={r.id} className="text-center p-3 rounded-lg border bg-muted/30"><div className="text-sm font-medium truncate">{r.snGrade}</div><div className="text-lg font-bold" style={{ color: themeColor }}>&#8377;{r.investmentCr}Cr</div><div className="text-xs text-muted-foreground">{r.application}</div></div>)}
+            </div>
+          </CardContent></Card>
         </div>
+      )}
+      {activeTab === 'registry' && (
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-3">
+            <input type="text" placeholder="Search ID, batch, city, grade..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="px-3 py-2 border rounded-md text-sm flex-1 min-w-[200px]" />
+            <select value={filterZone} onChange={(e) => setFilterZone(e.target.value)} className="px-3 py-2 border rounded-md text-sm"><option value="all">All Zones</option>{zones.map(([z]) => <option key={z} value={z}>{z as string}</option>)}</select>
+            <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="px-3 py-2 border rounded-md text-sm"><option value="all">All Status</option>{['Delivered','In Transit','Delayed','Processing'].map((s) => <option key={s} value={s}>{s}</option>)}</select>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+            {filteredRecords.map((record) => (
+              <Card key={record.id} className={record.status === 'Delayed' ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}>
+                <CardContent className="pt-4 pb-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div><span className="font-semibold text-sm">{record.id}</span><span className="text-xs text-muted-foreground ml-2">{record.batchNo}</span></div>
+                    <div className="flex gap-1"><Badge variant="outline" className={statusColor(record.status)}>{record.status}</Badge><Badge variant="outline" className={priorityColor(record.priority)}>{record.priority}</Badge></div>
+                  </div>
+                  <div className="text-xs space-y-1">
+                    <div className="flex justify-between"><span className="text-muted-foreground">Grade:</span><span className="font-medium">{record.snGrade}</span></div>
+                    <div className="flex justify-between"><span className="text-muted-foreground">Application:</span><span className="font-medium">{record.application}</span></div>
+                    <div className="flex justify-between"><span className="text-muted-foreground">Purity:</span><span className="font-medium">{record.purityPercent}%</span></div>
+                    <div className="flex justify-between"><span className="text-muted-foreground">Investment:</span><span className="font-medium" style={{ color: themeColor }}>&#8377;{record.investmentCr}Cr</span></div>
+                    <div className="flex justify-between"><span className="text-muted-foreground">City:</span><span className="font-medium">{record.city}</span></div>
+                    <div className="flex justify-between"><span className="text-muted-foreground">Route:</span><span className="font-medium text-xs">{record.origin} &#8594; {record.destination}</span></div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-sm text-muted-foreground">Showing {filteredRecords.length} of {tinAlloyRecords.length} records</div>
+        </div>
+      )}
+      {activeTab === 'analytics' && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <Card><CardHeader><CardTitle className="text-base">Manufacturer Performance</CardTitle></CardHeader><CardContent>
+            <div className="space-y-2">
+              {(() => { const mfrMap: Record<string, number> = {}; tinAlloyRecords.forEach((r) => { mfrMap[r.manufacturer] = (mfrMap[r.manufacturer] || 0) + r.investmentCr; }); return Object.entries(mfrMap).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([mfr, inv]) => { const pct = (inv as number / kpiData.total) * 100; return <div key={mfr} className="flex items-center gap-2"><span className="text-xs w-40 truncate">{mfr as string}</span><div className="flex-1 h-2 bg-muted rounded-full"><div className="h-2 rounded-full" style={{ width: `${pct}%`, backgroundColor: themeColor }} /></div><span className="text-xs font-medium">&#8377;{inv as number}Cr</span></div>; }); })()}
+            </div>
+          </CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-base">Priority Distribution</CardTitle></CardHeader><CardContent>
+            <div className="grid grid-cols-2 gap-3">
+              {['Critical', 'High', 'Medium', 'Low'].map((p) => { const c = tinAlloyRecords.filter((r) => r.priority === p).length; return <div key={p} className={`text-center p-3 rounded-lg border ${priorityColor(p)}`}><div className="text-lg font-bold">{c}</div><div className="text-xs">{p}</div></div>; })}
+            </div>
+          </CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-base">Investment by Zone</CardTitle></CardHeader><CardContent>
+            <div className="space-y-2">{(() => { const zInv: Record<string, number> = {}; tinAlloyRecords.forEach((r) => { zInv[r.zone] = (zInv[r.zone] || 0) + r.investmentCr; }); return Object.entries(zInv).sort((a, b) => b[1] - a[1]).map(([zone, inv]) => { const pct = (inv as number / kpiData.total) * 100; return <div key={zone} className="flex items-center gap-2"><span className="text-xs w-16">{zone as string}</span><div className="flex-1 h-2 bg-muted rounded-full"><div className="h-2 rounded-full" style={{ width: `${pct}%`, backgroundColor: themeColor }} /></div><span className="text-xs font-medium">&#8377;{inv as number}Cr</span></div>; }); })()}</div>
+          </CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-base">Purity Distribution</CardTitle></CardHeader><CardContent>
+            <div className="space-y-2">
+              {(() => { const ranges = { '99%+': 0, '95-98.9%': 0, '90-94.9%': 0, '<90%': 0 }; tinAlloyRecords.forEach((r) => { if (r.purityPercent >= 99) ranges['99%+']++; else if (r.purityPercent >= 95) ranges['95-98.9%']++; else if (r.purityPercent >= 90) ranges['90-94.9%']++; else ranges['<90%']++; }); return (Object.entries(ranges) as [string, number][]).filter(([, v]) => v > 0).map(([range, count]) => { const pct = (count / tinAlloyRecords.length) * 100; return <div key={range} className="flex items-center gap-2"><span className="text-xs w-24">{range}</span><div className="flex-1 h-2 bg-muted rounded-full"><div className="h-2 rounded-full" style={{ width: `${pct}%`, backgroundColor: themeColor }} /></div><span className="text-xs font-medium">{count}</span></div>; }); })()}
+            </div>
+          </CardContent></Card>
+        </div>
+      )}
+      {activeTab === 'insights' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card><CardHeader><CardTitle className="text-sm">Zone Distribution</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).map(([z, c]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
-          <Card><CardHeader><CardTitle className="text-sm">Priority Mix</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.priority] = (m[r.priority] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).map(([p, c]) => (<div key={p} className="flex justify-between text-sm"><span>{p}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-base">Supply Chain Intelligence</CardTitle></CardHeader><CardContent><div className="space-y-3 text-sm">
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">Electronics Solder Transition</div><div className="text-xs text-muted-foreground mt-1">ISRO BGA + BEL radar + Wipro SAC + Dixon LED driving &#8594; &#8377;2,560Cr combined &#8594; ROHS lead-free shift accelerating</div></div>
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">Naval Submarine Programme</div><div className="text-xs text-muted-foreground mt-1">GRSE submarine hull anode + BEL missile guidance &#8594; &#8377;1,480Cr combined &#8594; strategic naval demand</div></div>
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">Low-Melting Alloy Innovation</div><div className="text-xs text-muted-foreground mt-1">Dixon Sn-Bi58 138&#176;C + BHEL Sn-In52 118&#176;C &#8594; &#8377;1,020Cr combined &#8594; thermal management frontier</div></div>
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">Monsoon Disruption Alert</div><div className="text-xs text-muted-foreground mt-1">TNA-B2412 GRSE submarine hull anode delayed &#8594; monsoon Visakhapatnam port congestion &#8594; Project 75I at risk</div></div>
+          </div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-base">Investment Landscape</CardTitle></CardHeader><CardContent><div className="space-y-3 text-sm">
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">Total Portfolio: &#8377;{kpiData.total.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground mt-1">Across 14 tin alloy grades spanning space, defense, electronics, steel, pharma, auto, power and aerospace &#8594; avg purity {kpiData.avgPurity}%</div></div>
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">Critical Priority: 4 Records</div><div className="text-xs text-muted-foreground mt-1">ISRO satellite &#8594; BEL radar &#8594; GRSE submarine &#8594; BEL missile &#8594; national security chain</div></div>
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">Melting Point Range</div><div className="text-xs text-muted-foreground mt-1">Grades span 118&#176;C (Sn-In52) to 260&#176;C (Sn-Cu5 bronze) &#8594; covering ultra-low-melt to high-temp applications</div></div>
+            <div className="p-3 rounded-lg border-l-4 border-l-cyan-500 bg-cyan-50/50"><div className="font-medium">India Tin Import Dependency</div><div className="text-xs text-muted-foreground mt-1">India imports 70%+ of tin concentrate &#8594; Assam and Rajasthan mines expanding &#8594; Aatmanirbhar tin critical for electronics</div></div>
+          </div></CardContent></Card>
         </div>
-        <div className="rounded-md border"><div className="max-h-96 overflow-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-background"><tr><th className="p-2 text-left">ID</th><th className="p-2 text-left">Batch</th><th className="p-2 text-left">Grade</th><th className="p-2 text-left">Application</th><th className="p-2 text-right">Sn%</th><th className="p-2 text-right">&#8377;Cr</th><th className="p-2 text-left">Status</th></tr></thead><tbody>{filtered.map(r => (<tr key={r.id} className={`border-t ${delayedSet.has(r.id) ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}><td className="p-2">{r.id}</td><td className="p-2">{r.batchNo}</td><td className="p-2">{r.alloyGrade}</td><td className="p-2">{r.application}</td><td className="p-2 text-right">{r.tinPercent}</td><td className="p-2 text-right">{r.investmentCr}</td><td className="p-2"><Badge variant={r.status === 'Delivered' ? 'default' : 'destructive'}>{r.status}</Badge></td></tr>))}</tbody></table></div></div>
-      </div>)}
-
-      {activeTab === 1 && (<div className="space-y-4">
-        <div className="flex gap-2 flex-wrap">
-          {manufacturers.map(m => <Badge key={m} variant={filters.manufacturer?.includes(m) ? 'default' : 'outline'} className="cursor-pointer" onClick={() => toggleFilter('manufacturer', m)}>{m}</Badge>)}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card><CardHeader><CardTitle className="text-sm">By Manufacturer</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.manufacturer] = (m[r.manufacturer] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).map(([m, c]) => (<div key={m} className="flex justify-between text-sm"><span>{m}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
-          <Card><CardHeader><CardTitle className="text-sm">Melting Point Range</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { const s = r.meltingPointC <= 150 ? 'Low-Melt (below 150&#176;C)' : r.meltingPointC <= 200 ? 'Medium-Melt (150-200&#176;C)' : r.meltingPointC <= 230 ? 'Standard (200-230&#176;C)' : 'High-Melt (230&#176;C+)'; m[s] = (m[s] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).map(([k, c]) => (<div key={k} className="flex justify-between text-sm"><span>{k}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
-        </div>
-        <div className="rounded-md border"><div className="max-h-96 overflow-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-background"><tr><th className="p-2 text-left">ID</th><th className="p-2 text-left">Manufacturer</th><th className="p-2 text-left">Grade</th><th className="p-2 text-left">Origin</th><th className="p-2 text-left">Destination</th><th className="p-2 text-right">Transit</th><th className="p-2 text-left">Zone</th></tr></thead><tbody>{filtered.map(r => (<tr key={r.id} className={`border-t ${delayedSet.has(r.id) ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}><td className="p-2">{r.id}</td><td className="p-2">{r.manufacturer}</td><td className="p-2">{r.alloyGrade}</td><td className="p-2">{r.origin}</td><td className="p-2">{r.destination}</td><td className="p-2 text-right">{r.transitDays}d</td><td className="p-2">{r.zone}</td></tr>))}</tbody></table></div></div>
-      </div>)}
-
-      {activeTab === 2 && (<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card><CardHeader><CardTitle className="text-sm">Investment by Application</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.application] = (m[r.application] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([a, v]) => (<div key={a} className="flex justify-between text-sm"><span>{a}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
-        <Card><CardHeader><CardTitle className="text-sm">Tin Content Distribution</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { const n = r.tinPercent >= 95 ? 'High Sn (95%+)' : r.tinPercent >= 70 ? 'Medium Sn (70-95%)' : r.tinPercent >= 50 ? 'Low Sn (50-70%)' : 'Alloy (<50%)'; m[n] = (m[n] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).map(([k, c]) => (<div key={k} className="flex justify-between text-sm"><span>{k}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
-        <Card><CardHeader><CardTitle className="text-sm">Top Routes by Value</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.sort((a, b) => b.investmentCr - a.investmentCr).slice(0, 7).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.origin.split('(')[0]} &#8594; {r.destination.split('(')[0]}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
-        <Card><CardHeader><CardTitle className="text-sm">Space and Defence Solder</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.filter(r => r.application.toLowerCase().includes('space') || r.application.toLowerCase().includes('defence') || r.application.toLowerCase().includes('satellite') || r.application.toLowerCase().includes('radar')).sort((a, b) => b.investmentCr - a.investmentCr).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.alloyGrade} ({r.meltingPointC}&#176;C)</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
-      </div>)}
-
-      {activeTab === 3 && (<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card><CardContent><div className="text-sm font-medium text-sky-600 mb-2">India Lead-Free Solder Transition</div><div className="text-xs text-muted-foreground">Indian electronics industry transitioning from Sn-Pb to lead-free SAC305 (96.5Sn-3Ag-0.5Cu) solder driven by RoHS compliance and export requirements. India consuming 80 TPA tin for electronics solder. KEC, Syrma SGS and Dixon leading SAC305 adoption. Government mandating lead-free for all consumer electronics by 2027. SAC alloy demand growing at 25% CAGR.</div></CardContent></Card>
-        <Card><CardContent><div className="text-sm font-medium text-sky-600 mb-2">Space-Grade Anti-Whisker Solder</div><div className="text-xs text-muted-foreground">ISRO using Sn-2.5Ag-0.8Cu-0.5Sb anti-tin-whisker solder for satellite PCBs after Chandrayaan-3 whisker failure investigation. Tin whisker growth can cause satellite short circuits in orbit. India consuming 5 TPA space-grade solder. UP Tin Industries supplying 3 TPA with Sb dopant. ISRO targeting 24 Gaganyaan and satellite launches by 2030.</div></CardContent></Card>
-        <Card><CardContent><div className="text-sm font-medium text-sky-600 mb-2">Monsoon Delays LED Solder</div><div className="text-xs text-muted-foreground">TNA-B2412 Sn-Bi 58/42 low-temp solder paste for Dixon LED TV module rework delayed 17 days due to Gujarat monsoon flooding. Dixon Noida LED TV production line at risk. India consuming 30 TPA Sn-Bi alloy for consumer LED rework. Recommend pre-positioning 5-tonne buffer at Noida warehouse before monsoon season. Sn-Bi eutectic ideal for sensitive component rework at 138&#176;C.</div></CardContent></Card>
-        <Card><CardContent><div className="text-sm font-medium text-sky-600 mb-2">Semiconductor BGA Sphere Supply</div><div className="text-xs text-muted-foreground">SCL Mohali consuming 15 TPA Sn-5Ag and Sn-3.5Ag BGA solder spheres for semiconductor chip packaging. India importing 90% BGA spheres from Japan and South Korea. Tamil Nadu Tin Alloys developing indigenous 300um and 200um sphere production by 2027. India targeting 500M chips/year under semiconductor mission, requiring 25 TPA solder spheres.</div></CardContent></Card>
-      </div>)}
+      )}
     </div>
-  )
+  );
 }
