@@ -731,3 +731,5 @@ export { default as ScandiumOxideLogisticsView } from './scandium-oxide-logistic
 export { default as ManganeseElectrolyticLogisticsView } from './manganese-electrolytic-logistics-view'
 export { default as ChromiumMetalLogisticsView } from './chromium-metal-logistics-view'
 export { default as MolybdenumMetalLogisticsView } from './molybdenum-metal-logistics-view'
+export { default as TungstenMetalLogisticsView } from './tungsten-metal-logistics-view'
+export { default as PhosphorusRedLogisticsView } from './phosphorus-red-logistics-view'
