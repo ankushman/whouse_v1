@@ -62566,3 +62566,27 @@ html.theme-transition body {
 .sio-shimmer { background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.08), transparent); animation: sio-shimmer 3s infinite; }
 @keyframes sio-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .sio-hover:hover { background: rgba(168, 85, 247, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R440a: Aluminum Oxide Logistics - Blue #2563eb */
+.alo-pulse { animation: alo-pulse-anim 2s ease-in-out infinite; }
+@keyframes alo-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.alo-glow { box-shadow: 0 0 20px rgba(37, 99, 235, 0.3); }
+.alo-gradient { background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(37, 99, 235, 0.05)); }
+.alo-border { border-color: rgba(37, 99, 235, 0.4); }
+.alo-text { color: #2563eb; }
+.alo-badge { background: rgba(37, 99, 235, 0.15); color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.3); }
+.alo-shimmer { background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.08), transparent); animation: alo-shimmer 3s infinite; }
+@keyframes alo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.alo-hover:hover { background: rgba(37, 99, 235, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R440b: Vanadium Oxide Logistics - Amber #d97706 */
+.vno-pulse { animation: vno-pulse-anim 2s ease-in-out infinite; }
+@keyframes vno-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.vno-glow { box-shadow: 0 0 20px rgba(217, 119, 6, 0.3); }
+.vno-gradient { background: linear-gradient(135deg, rgba(217, 119, 6, 0.15), rgba(217, 119, 6, 0.05)); }
+.vno-border { border-color: rgba(217, 119, 6, 0.4); }
+.vno-text { color: #d97706; }
+.vno-badge { background: rgba(217, 119, 6, 0.15); color: #d97706; border: 1px solid rgba(217, 119, 6, 0.3); }
+.vno-shimmer { background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.08), transparent); animation: vno-shimmer 3s infinite; }
+@keyframes vno-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.vno-hover:hover { background: rgba(217, 119, 6, 0.1); transform: translateY(-1px); transition: all 0.2s; }
