@@ -1,42 +1,40 @@
 ---
-Task ID: R461 — Chromium Sulfate Logistics + Nickel Carbonate Logistics
+Task ID: R462 — Selenium Dioxide Logistics + Ammonium Vanadate Logistics
 Agent: Main Agent (Cron Loop)
-Task: R461 — 2 new Indian logistics modules for chromium sulfate (Cr2(SO4)3) leather tanning/chromic anodize/refractory/submarine non-magnetic hull supply chain and nickel carbonate (NiCO3) stainless steel/superalloy/NCA cathode/submarine Monel propeller shaft supply chain.
+Task: R462 — 2 new Indian logistics modules for selenium dioxide (SeO2) photoreceptor/glass decolorizer/CZTSSe solar/submarine optronic mast supply chain and ammonium vanadate (NH4VO3) catalyst/VRFB battery/ferrovanadium/submarine V-AIP fuel cell supply chain.
 
 Work Log:
-- Read worklog: R460 complete (commit 38b981d), 746 exports, ~63,200 CSS
+- Read worklog: R461 complete (commit 0f09c47), 748 exports, ~63,224 CSS
 - TSC pre-validation: 0 errors in src/
-- Candidate scan: chromium-sulfate (CLEAN), nickel-carbonate (CLEAN), selenium-dioxide (CLEAN), ammonium-vanadate (CLEAN), silicon-nitride (EXISTS), tungsten-metal (EXISTS)
-- Icons verified: Bug (0 uses, confirmed), Cable (0 uses, confirmed)
-- Created Chromium Sulfate Logistics (R461a): 227 lines, crs-* violet #7c3aed, 14 records
-  - 14 grades: Cr2(SO4)3 99.5% Leather Tanning, 99.9% Corrosion Inhibitor, 99.3% Pigment Chrome Green, 99.7% Wood Preservative CCA, 99.85% Textile Mordant, 99.8% Refractory Bond, 99.6% Water Treatment, 99.0% Ceramic Chrome Alumina, 99.4% Catalyst Cr2O3, 99.92% Aerospace Chromic Anodize, 99.2% Magnetic Tape CrO2, 99.9% Submarine Non-Magnetic Hull, 99.8% Warship GT Blade, 98.0% General Industrial
-  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: Kanpur chrome-tan leather, HAL Tejas chromate conv, Morbi chrome green glaze, Rajasthan CCA Cr treat, Bhilwara chrome mordant, SAIL Cr-Mg refractory, Pune municipal Cr flocc, Morbi Cr-Al2O3 setter, IOC Guwahati Cr cat, HAL chromic anodize bath, SME CrO2 tape precursor, IN Navy SSK non-mag Cr steel, DRDO naval GT blade Cr, SAIL Cr process liquor
-  - Rs 12,100 Cr total, avg 99.35%, density 3.01 g/cm3
-  - Delayed: CRS-A2412 (28d, monsoon Visakhapatnam, submarine non-magnetic Cr-Ni steel)
-- Created Nickel Carbonate Logistics (R461b): 227 lines, nic-* teal-green #059669, 14 records
-  - 14 grades: NiCO3 99.9% SS Austenitic, 99.95% Superalloy Turbine, 99.5% Electroplating Bright, 99.7% EV NCA Cathode, 99.85% Ra-Ni Catalyst, 99.6% Magnetic Bond, 99.8% Coinage Cu-Ni, 99.3% Ceramic Frit, 99.4% Welding Electrode, 99.92% Ni-Ti SMA, 99.2% Ni-Cd Battery, 99.95% Submarine Monel Shaft, 99.8% Warship Inconel Blade, 98.0% General Industrial
-  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: Jindal SS 304 Ni charge, HAL Tejas GT IN718 disc, Tata Steel bright Ni plate, Exide NCA Li cathode, IOC Haldia Ra-Ni cat, BHEL NdFeB bond Ni coat, SPMCIL Cu-Ni coin strip, Rajasthan Ni frit glaze, Ador Ni-alloy electrode, DRDO Ni-Ti SMA actuator, Exide Ni-Cd pocket plate, IN Navy SSK Monel shaft, DRDO naval Inconel blade, SAIL Ni alloy charge
-  - Rs 12,100 Cr total, avg 99.35%, density 4.39 g/cm3
-  - Delayed: NIC-A2412 (28d, monsoon Visakhapatnam, submarine Monel K-500 propeller shaft)
+- Candidate scan: selenium-dioxide (CLEAN), ammonium-vanadate (CLEAN), lithium-carbonate (CLEAN), sodium-sulfate (CLEAN), cobalt-oxide (EXISTS), nickel-sulfate (EXISTS)
+- Icons verified: Citrus (0 uses, confirmed), Clock (0 uses, confirmed)
+- Created Selenium Dioxide Logistics (R462a): 227 lines, sed-* amber-dark #a16207, 14 records
+  - 14 grades: SeO2 99.5% Glass Decolorizer, 99.9% Photoreceptor, 99.3% CdSe Pigment, 99.7% Rubber Vulcanization, 99.85% CZTSSe Solar, 99.8% Se Rectifier, 99.6% Anti-Dandruff, 99.0% Vitamin Supplement, 99.4% SS Passivate, 99.92% CIGS Semiconductor, 99.2% Fungicide, 99.95% Submarine Optronic Mast, 99.8% Warship IR Lens, 97.5% General
+  - Applications: Asahi glass SeO2 decolor, HP LaserJet Se drum, Asahi CdSe ruby glass, MRF Se-accel tyre cure, Tata Power CZTSSe PV, BHEL legacy Se rectifier, HUL SeS2 anti-dandruff, Abbott Se vitamin tab, Jindal SS Se passivate, IISc CIGS Se target, IFFCO Se foliar, IN Navy SSK optronic mast, DRDO naval IR GeSe lens, SAIL steel Se deox
+  - Rs 12,100 Cr total, avg 99.35%, density 3.95 g/cm3
+  - Delayed: SED-A2412 (28d, monsoon Visakhapatnam, submarine optronic mast Se-cell)
+- Created Ammonium Vanadate Logistics (R462b): 227 lines, amv-* red #dc2626, 14 records
+  - 14 grades: NH4VO3 99.5% H2SO4 Catalyst, 99.9% Ceramic Pigment, 99.3% Glass UV Absorber, 99.7% Ferrovanadium Feed, 99.85% VRFB Battery, 99.8% Phthalic Anhydride, 99.6% Dye Mordant, 99.0% Corrosion Inhibitor, 99.4% Maleic Anhydride, 99.92% Li-V Battery, 99.2% Desulfurization, 99.95% Submarine V-AIP, 99.8% Warship SCR DeNOx, 98.0% General
+  - Applications: Tata Chemicals V2O5 pellet, Morbi V-blue ceramic, Asahi V-UV glass, SAIL FeV80 V feed, Tata Power VRFB electrolyte, Thirumalai V2O5 PA cat, Bhilwara V-dye fixative, Asian Paints V-inhibitor, IOC Haldia MA cat, IISc Li-V battery, NTPC V2O5 DeSOx, IN Navy SSK V-AIP stack, DRDO naval LM2500 SCR, SAIL V2O5 process cat
+  - Rs 12,100 Cr total, avg 99.35%, density 2.33 g/cm3
+  - Delayed: AMV-A2412 (28d, monsoon Visakhapatnam, submarine V-AIP fuel cell stack)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (748 exports), page.tsx (1278 viewMap entries), app-store.ts (760 navItems)
-- CSS appended: 16 new rules (~63,224 total)
-- Git commit: 0f09c47, pushed to main
+- Three-file registration: index.ts (750 exports), page.tsx (1280 viewMap entries), app-store.ts (762 navItems)
+- CSS appended: 16 new rules (~63,248 total)
+- Git commit: 32b3f47, pushed to main
 
 Stage Summary:
-- Project now: 748 module exports, 760 navItems, ~63,224 CSS lines, 1278 viewMap entries, 0 TSC errors in src/
-- Chromium Sulfate: Submarine non-mag &#8377;960Cr, aerospace anodize &#8377;960Cr, warship GT blade &#8377;960Cr, corrosion inhibitor &#8377;900Cr
-- Nickel Carbonate: Submarine Monel &#8377;960Cr, Ni-Ti SMA &#8377;960Cr, superalloy &#8377;960Cr, NCA cathode &#8377;920Cr
-- Delayed: CRS-A2412 (28d), NIC-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+- Project now: 750 module exports, 762 navItems, ~63,248 CSS lines, 1280 viewMap entries, 0 TSC errors in src/
+- Selenium Dioxide: Submarine optronic &#8377;960Cr, CIGS semiconductor &#8377;960Cr, photoreceptor &#8377;900Cr, CZTSSe solar &#8377;880Cr
+- Ammonium Vanadate: Submarine V-AIP &#8377;960Cr, Li-V battery &#8377;960Cr, VRFB &#8377;920Cr, H2SO4 catalyst &#8377;940Cr
+- Delayed: SED-A2412 (28d), AMV-A2412 (28d) — both monsoon Visakhapatnam naval corridor
 
 **Project Current State:**
-- 748 module exports, 760 navItems, ~63,224 CSS lines, 1278 viewMap entries, 0 TSC errors in src/
+- 750 module exports, 762 navItems, ~63,248 CSS lines, 1280 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- Cr2(SO4)3 — EU REACH restriction on Cr(VI), trivalent Cr (III) compliance required for leather/textile export
-- NiCO3 99.95% superalloy — Indonesia/Norway export dependency, strategic defense material
-- NiCO3 99.92% Ni-Ti SMA — niche shape-memory alloy, limited global suppliers
-- Next clean candidates: selenium-dioxide, ammonium-vanadate, cobalt-oxide, nickel-sulfate, lithium-carbonate, sodium-sulfate
+- SeO2 99.9% photoreceptor — Se is scarce (68th in crust), imported from China/Japan/Korea
+- NH4VO3 99.95% V-AIP — strategic naval AIP technology, China/Russia supply dependency
+- NH4VO3 99.92% Li-V battery — emerging cathode, limited global production
+- Next clean candidates: lithium-carbonate, sodium-sulfate, beryllium-oxide, zirconium-oxide, neodymium-oxide, yttrium-oxide
