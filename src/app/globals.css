@@ -62782,3 +62782,59 @@ html.theme-transition body {
 .ybo-shimmer { background: linear-gradient(90deg, transparent, #1e40af11, transparent); background-size: 200% 100%; animation: ybo-shimmer 2s infinite; }
 @keyframes ybo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .ybo-hover:hover { border-color: #1e40af66; box-shadow: 0 0 10px #1e40af33; }
+
+/* R448a — Lutetium Oxide Logistics (luo-*) */
+@keyframes luo-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.luo-glow {
+  box-shadow: 0 0 15px rgba(109, 40, 217, 0.4);
+}
+.luo-gradient {
+  background: linear-gradient(135deg, #6d28d9, #7c3aed);
+}
+.luo-border {
+  border-color: #6d28d9;
+}
+.luo-text {
+  color: #6d28d9;
+}
+.luo-badge {
+  background-color: rgba(109, 40, 217, 0.15);
+  color: #6d28d9;
+}
+.luo-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(109, 40, 217, 0.1), transparent);
+}
+.luo-hover:hover {
+  background-color: rgba(109, 40, 217, 0.08);
+}
+
+/* R448b — Thulium Oxide Logistics (tmo-*) */
+@keyframes tmo-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.tmo-glow {
+  box-shadow: 0 0 15px rgba(8, 145, 178, 0.4);
+}
+.tmo-gradient {
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
+}
+.tmo-border {
+  border-color: #0891b2;
+}
+.tmo-text {
+  color: #0891b2;
+}
+.tmo-badge {
+  background-color: rgba(8, 145, 178, 0.15);
+  color: #0891b2;
+}
+.tmo-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(8, 145, 178, 0.1), transparent);
+}
+.tmo-hover:hover {
+  background-color: rgba(8, 145, 178, 0.08);
+}
