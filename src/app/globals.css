@@ -63336,3 +63336,25 @@ html.theme-transition body {
 @keyframes ito-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .ito-shimmer { background: linear-gradient(90deg, transparent, rgba(14, 116, 144, 0.1), transparent); background-size: 200% 100%; animation: ito-shimmer 3s infinite; }
 .ito-hover:hover { background-color: rgba(14, 116, 144, 0.1); }
+
+/* === R467: Aluminum Nitride Logistics (aln, #0369a1) === */
+@keyframes aln-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes aln-glow { 0%, 100% { box-shadow: 0 0 5px #0369a1; } 50% { box-shadow: 0 0 15px #0369a1; } }
+.aln-gradient { background: linear-gradient(135deg, #0369a1, #075985); }
+.aln-border { border-color: #0369a1; }
+.aln-text { color: #0369a1; }
+.aln-badge { background-color: rgba(3, 105, 161, 0.2); color: #0369a1; }
+@keyframes aln-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.aln-shimmer { background: linear-gradient(90deg, transparent, rgba(3, 105, 161, 0.1), transparent); background-size: 200% 100%; animation: aln-shimmer 3s infinite; }
+.aln-hover:hover { background-color: rgba(3, 105, 161, 0.1); }
+
+/* === R467: Samarium Cobalt Logistics (smc, #9f1239) === */
+@keyframes smc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes smc-glow { 0%, 100% { box-shadow: 0 0 5px #9f1239; } 50% { box-shadow: 0 0 15px #9f1239; } }
+.smc-gradient { background: linear-gradient(135deg, #9f1239, #881337); }
+.smc-border { border-color: #9f1239; }
+.smc-text { color: #9f1239; }
+.smc-badge { background-color: rgba(159, 18, 57, 0.2); color: #9f1239; }
+@keyframes smc-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.smc-shimmer { background: linear-gradient(90deg, transparent, rgba(159, 18, 57, 0.1), transparent); background-size: 200% 100%; animation: smc-shimmer 3s infinite; }
+.smc-hover:hover { background-color: rgba(159, 18, 57, 0.1); }

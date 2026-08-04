@@ -1284,6 +1284,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "germanium-dioxide-logistics": GermaniumDioxideLogisticsView,
   "rhenium-metal-logistics": RheniumMetalLogisticsView,
   "indium-tin-oxide-logistics": IndiumTinOxideLogisticsView,
+  "aluminum-nitride-logistics": AluminumNitrideLogisticsView,
+  "samarium-cobalt-logistics": SamariumCobaltLogisticsView,
 }
 
 
@@ -1655,3 +1657,5 @@ import NiobiumPentoxideLogisticsView from "@/components/modules/niobium-pentoxid
 import GermaniumDioxideLogisticsView from "@/components/modules/germanium-dioxide-logistics-view"
 import RheniumMetalLogisticsView from "@/components/modules/rhenium-metal-logistics-view"
 import IndiumTinOxideLogisticsView from "@/components/modules/indium-tin-oxide-logistics-view"
+import AluminumNitrideLogisticsView from "@/components/modules/aluminum-nitride-logistics-view"
+import SamariumCobaltLogisticsView from "@/components/modules/samarium-cobalt-logistics-view"

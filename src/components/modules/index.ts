@@ -763,3 +763,5 @@ export { default as NiobiumPentoxideLogisticsView } from './niobium-pentoxide-lo
 export { default as GermaniumDioxideLogisticsView } from './germanium-dioxide-logistics-view'
 export { default as RheniumMetalLogisticsView } from './rhenium-metal-logistics-view'
 export { default as IndiumTinOxideLogisticsView } from './indium-tin-oxide-logistics-view'
+export { default as AluminumNitrideLogisticsView } from './aluminum-nitride-logistics-view'
+export { default as SamariumCobaltLogisticsView } from './samarium-cobalt-logistics-view'
