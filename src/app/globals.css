@@ -62053,3 +62053,29 @@ html.theme-transition body {
 .zirconium-powder-logistics .card-content { padding: 0.75rem 1rem; }
 .zirconium-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
 .zirconium-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
+/* ═══════════════════════════════════════════════════════════════ R407a: Indium Alloy Logistics (ida-*) ═══════════════════════════════════════════════════════════════ */
+.ida-module { --ida-primary: #0d9488; --ida-light: #ccfbf1; --ida-dark: #134e4a; }
+.ida-kpi-card { background: linear-gradient(135deg, var(--ida-light) 0%, white 100%); border-left: 3px solid var(--ida-primary); }
+.ida-kpi-card .text-2xl { color: var(--ida-dark); }
+.ida-tab-active { border-bottom-color: var(--ida-primary) !important; color: var(--ida-dark) !important; }
+.ida-table-header { background: var(--ida-primary); color: white; }
+.ida-table-row:hover { background: var(--ida-light); }
+.ida-delayed-row { border-left: 4px solid #ef4444 !important; background: rgba(239,68,68,0.08) !important; }
+.ida-insight-title { color: var(--ida-primary); font-weight: 600; font-size: 0.875rem; }
+.ida-chart-card { border-top: 3px solid var(--ida-primary); }
+.ida-badge-critical { background: #fef2f2; color: #991b1b; }
+.ida-badge-high { background: #fffbeb; color: #92400e; }
+.ida-badge-medium { background: #f0fdf4; color: #166534; }
+/* ═══════════════════════════════════════════════════════════════ R407b: Platinum Powder Logistics (ptp-*) ═══════════════════════════════════════════════════════════════ */
+.ptp-module { --ptp-primary: #c026d3; --ptp-light: #fae8ff; --ptp-dark: #701a75; }
+.ptp-kpi-card { background: linear-gradient(135deg, var(--ptp-light) 0%, white 100%); border-left: 3px solid var(--ptp-primary); }
+.ptp-kpi-card .text-2xl { color: var(--ptp-dark); }
+.ptp-tab-active { border-bottom-color: var(--ptp-primary) !important; color: var(--ptp-dark) !important; }
+.ptp-table-header { background: var(--ptp-primary); color: white; }
+.ptp-table-row:hover { background: var(--ptp-light); }
+.ptp-delayed-row { border-left: 4px solid #ef4444 !important; background: rgba(239,68,68,0.08) !important; }
+.ptp-insight-title { color: var(--ptp-primary); font-weight: 600; font-size: 0.875rem; }
+.ptp-chart-card { border-top: 3px solid var(--ptp-primary); }
+.ptp-badge-critical { background: #fef2f2; color: #991b1b; }
+.ptp-badge-high { background: #fffbeb; color: #92400e; }
+.ptp-badge-medium { background: #f0fdf4; color: #166534; }

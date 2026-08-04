@@ -1106,6 +1106,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "diamond-synthetic-logistics": DiamondSyntheticLogisticsView,
   "rare-earth-magnet-logistics": RareEarthMagnetLogisticsView,
   "molybdenum-alloy-logistics": MolybdenumAlloyLogisticsView,
+  "indium-alloy-logistics": IndiumAlloyLogisticsView,
   "indium-phosphide-logistics": IndiumPhosphideLogisticsView,
   "cobalt-alloy-logistics": CobaltAlloyLogisticsView,
   "magnesium-alloy-logistics": MagnesiumAlloyLogisticsView,
@@ -1119,6 +1120,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "boron-carbide-logistics": BoronCarbideLogisticsView,
   "niobium-alloy-logistics": NiobiumAlloyLogisticsView,
   "platinum-group-metal-logistics": PlatinumGroupMetalLogisticsView,
+  "platinum-powder-logistics": PlatinumPowderLogisticsView,
   "silicon-nitride-logistics": SiliconNitrideLogisticsView,
   "palladium-catalyst-logistics": PalladiumCatalystLogisticsView,
   "tungsten-heavy-alloy-logistics": TungstenHeavyAlloyLogisticsView,
@@ -1360,6 +1362,7 @@ import BerylliumCopperLogisticsView from "@/components/modules/beryllium-copper-
 import DiamondSyntheticLogisticsView from "@/components/modules/diamond-synthetic-logistics-view"
 import RareEarthMagnetLogisticsView from "@/components/modules/rare-earth-magnet-logistics-view"
 import MolybdenumAlloyLogisticsView from "@/components/modules/molybdenum-alloy-logistics-view"
+import IndiumAlloyLogisticsView from "@/components/modules/indium-alloy-logistics-view"
 import IndiumPhosphideLogisticsView from "@/components/modules/indium-phosphide-logistics-view"
 import CobaltAlloyLogisticsView from "@/components/modules/cobalt-alloy-logistics-view"
 import MagnesiumAlloyLogisticsView from "@/components/modules/magnesium-alloy-logistics-view"
@@ -1373,6 +1376,7 @@ import TitaniumSpongeLogisticsView from "@/components/modules/titanium-sponge-lo
 import BoronCarbideLogisticsView from "@/components/modules/boron-carbide-logistics-view"
 import NiobiumAlloyLogisticsView from "@/components/modules/niobium-alloy-logistics-view"
 import PlatinumGroupMetalLogisticsView from "@/components/modules/platinum-group-metal-logistics-view"
+import PlatinumPowderLogisticsView from "@/components/modules/platinum-powder-logistics-view"
 import SiliconNitrideLogisticsView from "@/components/modules/silicon-nitride-logistics-view"
 import PalladiumCatalystLogisticsView from "@/components/modules/palladium-catalyst-logistics-view"
 import TungstenHeavyAlloyLogisticsView from "@/components/modules/tungsten-heavy-alloy-logistics-view"
