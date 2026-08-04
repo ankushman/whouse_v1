@@ -63380,3 +63380,25 @@ html.theme-transition body {
 @keyframes ysz-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .ysz-shimmer { background: linear-gradient(90deg, transparent, rgba(180, 83, 9, 0.1), transparent); background-size: 200% 100%; animation: ysz-shimmer 3s infinite; }
 .ysz-hover:hover { background-color: rgba(180, 83, 9, 0.1); }
+
+/* === R469: Lead Zirconate Logistics (pbz, #4338ca) === */
+@keyframes pbz-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes pbz-glow { 0%, 100% { box-shadow: 0 0 5px #4338ca; } 50% { box-shadow: 0 0 15px #4338ca; } }
+.pbz-gradient { background: linear-gradient(135deg, #4338ca, #312e81); }
+.pbz-border { border-color: #4338ca; }
+.pbz-text { color: #4338ca; }
+.pbz-badge { background-color: rgba(67, 56, 202, 0.2); color: #4338ca; }
+@keyframes pbz-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.pbz-shimmer { background: linear-gradient(90deg, transparent, rgba(67, 56, 202, 0.1), transparent); background-size: 200% 100%; animation: pbz-shimmer 3s infinite; }
+.pbz-hover:hover { background-color: rgba(67, 56, 202, 0.1); }
+
+/* === R469: Hafnium Dioxide Logistics (hfo, #7c2d12) === */
+@keyframes hfo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes hfo-glow { 0%, 100% { box-shadow: 0 0 5px #7c2d12; } 50% { box-shadow: 0 0 15px #7c2d12; } }
+.hfo-gradient { background: linear-gradient(135deg, #7c2d12, #431407); }
+.hfo-border { border-color: #7c2d12; }
+.hfo-text { color: #7c2d12; }
+.hfo-badge { background-color: rgba(124, 45, 18, 0.2); color: #7c2d12; }
+@keyframes hfo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.hfo-shimmer { background: linear-gradient(90deg, transparent, rgba(124, 45, 18, 0.1), transparent); background-size: 200% 100%; animation: hfo-shimmer 3s infinite; }
+.hfo-hover:hover { background-color: rgba(124, 45, 18, 0.1); }
