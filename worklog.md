@@ -1,42 +1,42 @@
 ---
-Task ID: R459 — Cobalt Carbonate Logistics + Zinc Sulfate Logistics
+Task ID: R460 — Copper Sulfate Logistics + Manganese Metal Logistics
 Agent: Main Agent (Cron Loop)
-Task: R459 — 2 new Indian logistics modules for cobalt carbonate (CoCO3) NMC cathode/superalloy binder/ceramic pigment/submarine sonar magnet supply chain and zinc sulfate (ZnSO4) fertilizer/Zn-ion battery/galvanizing bath/submarine hull CP supply chain.
+Task: R460 — 2 new Indian logistics modules for copper sulfate (CuSO4) fungicide/electroplating/mining flotation/submarine anti-fouling paint supply chain and manganese metal (Mn) FeMn/SiMn steel/Hadfield armour/Al-Mn aerospace/submarine HSLA-80 hull supply chain.
 
 Work Log:
-- Read worklog: R458 complete (commit 50ce829), 742 exports, ~63,152 CSS
+- Read worklog: R459 complete (commit 9f756cd), 744 exports, ~63,176 CSS
 - TSC pre-validation: 0 errors in src/
-- Candidate scan: cobalt-carbonate (CLEAN), zinc-sulfate (CLEAN), copper-sulfate (CLEAN), manganese-metal (CLEAN), chromium-sulfate (CLEAN), nickel-carbonate (CLEAN)
-- Icons verified: Heart (0 uses, confirmed), Map (0 uses, confirmed)
-- Created Cobalt Carbonate Logistics (R459a): 227 lines, cbc-* cobalt-blue #1d4ed8, 14 records
-  - 14 grades: CoCO3 99.9% Li-Ion Battery Precursor, CoCO3 99.95% Superalloy Binder, CoCO3 99.5% Ceramic Pigment Blue, CoCO3 99.7% Hardmetal WC-Co Binder, CoCO3 99.85% Animal Feed Trace Mineral, CoCO3 99.3% Magnetic Alloy Alnico, CoCO3 99.8% Catalyst Petroleum HDS, CoCO3 99.0% Electroplating Anode, CoCO3 99.6% Rubber Adhesion Promoter, CoCO3 99.92% EV Battery NCM-811, CoCO3 99.4% Polyester Dye Catalyst, CoCO3 99.95% Submarine Sonar Magnet, CoCO3 99.8% Warship Gas Turbine Blade, CoCO3 97.5% General Industrial Grade
+- Candidate scan: copper-sulfate (CLEAN), manganese-metal (CLEAN), chromium-sulfate (CLEAN), nickel-carbonate (CLEAN), selenium-dioxide (CLEAN), ammonium-vanadate (CLEAN)
+- Icons verified: BadgeCheck (0 uses, confirmed), Bean (0 uses, confirmed)
+- Created Copper Sulfate Logistics (R460a): 227 lines, cus-* copper-brown #b45309, 14 records
+  - 14 grades: CuSO4 99.5% Agricultural Fungicide, CuSO4 99.9% Electroplating Bath, CuSO4 99.3% Animal Feed, CuSO4 99.7% Mining Flotation, CuSO4 99.85% Water Treatment Algicide, CuSO4 99.8% Textile Mordant, CuSO4 99.6% Pigment Manufacturing, CuSO4 99.0% Battery Electrolyte, CuSO4 99.4% Soil Amendment, CuSO4 99.95% Analytical Crystal, CuSO4 99.2% Leather Tanning, CuSO4 99.9% Submarine Anti-Fouling, CuSO4 99.8% Warship Sonar Electrode, CuSO4 98.0% General Industrial
   - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: Exide NMC-622 Li cell, HAL Tejas Ni-Co blade, Corning Co-blue glass frit, Sandvik WC-Co carbide, Amul dairy Co premix, BHEL generator Alnico mag, IOC Vadodara Co-Mo HDS, Rajasthan Co bright plate, MRF brass Co-plated tyre, Ola Electric NCM-811 pack, Bhilwara Co-blue dye mord, IN Navy SSK sonar Alnico, DRDO naval LM2500 Co blade, SAIL steel Co charge
-  - Rs 12,100 Cr total, avg 99.35%, density 4.13 g/cm3
-  - Delayed: CBC-A2412 (28d, monsoon Visakhapatnam, submarine sonar Alnico magnet)
-- Created Zinc Sulfate Logistics (R459b): 227 lines, zns-* cyan #0e7490, 14 records
-  - 14 grades: ZnSO4 99.5% Agricultural Micronutrient, ZnSO4 99.9% Zn-Ion Battery Electrolyte, ZnSO4 99.3% Animal Feed Supplement, ZnSO4 99.7% Galvanizing Zinc Bath, ZnSO4 99.0% Water Treatment Coagulant, ZnSO4 99.8% Rayon Viscose Spin Bath, ZnSO4 99.6% Zinc Plating Electrolyte, ZnSO4 99.1% Wood Preservative, ZnSO4 99.4% Fungicide Zineb/Ziram, ZnSO4 99.85% Lithium Battery Zn Anode, ZnSO4 99.2% Dental Cement Zinc Phosphate, ZnSO4 99.9% Submarine Zinc Anode CP, ZnSO4 99.7% Warship Smoke Screening, ZnSO4 98.0% General Industrial Grade
+  - Applications: Maharashtra grape vineyard Cu spray, BEL PCB Cu plate, Amul dairy Cu premix, Hindalco Khetri Cu float, NTPC Talcher Cu algicide, Bhilwara Cu dye mordant, Sudarshan CuPC blue pigment, Exide Pb-Cu battery, Assam tea Cu foliar, IISc analytical CuSO4, Kanpur leather Cu tan, IN Navy SSK Cu anti-fouling, DRDO naval Cu electrode, SAIL process CuSO4
+  - Rs 12,100 Cr total, avg 99.35%, density 3.6 g/cm3
+  - Delayed: CUS-A2412 (28d, monsoon Visakhapatnam, submarine Cu anti-fouling paint)
+- Created Manganese Metal Logistics (R460b): 227 lines, mnm-* slate-grey #475569, 14 records
+  - 14 grades: Mn 99.9% Ferromanganese FeMn75, Mn 99.95% Silicomanganese SiMn65, Mn 99.7% Al-Mn Can Sheet, Mn 99.5% Hadfield Steel Mn12%, Mn 99.8% HSLA Bridge Girder, Mn 99.6% SS 200 Series, Mn 99.85% Dry Cell MnO2, Mn 99.3% Welding Flux, Mn 99.4% Fertilizer Grade, Mn 99.92% Aerospace 2000-Al, Mn 99.1% Al Bronze Propeller, Mn 99.95% Submarine HSLA-80, Mn 99.8% Warship Mangalloy Armour, Mn 98.0% General Metallurgical
   - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: IFFCO Zn foliar spray, IISc Zn-ion pouch cell, Venkateshwara Zn feed, SAIL HDG bath replenish, Kolkata ZWC flocculant, Grasim Viscose ZnSO4 bath, Tata Steel Zn electroplate, Rajasthan CCA Zn treat, UPL Zineb fungicide, IISc Zn-Li prototype, Dental ZnPO4 cement, IN Navy SSK Zn anode plate, DRDO naval ZnO smoke, SAIL ZnSO4 pickle liquor
-  - Rs 12,100 Cr total, avg 99.35%, density 3.54 g/cm3
-  - Delayed: ZNS-A2412 (28d, monsoon Visakhapatnam, submarine Zn anode plate)
+  - Applications: SAIL BOF FeMn75 charge, Tata Steel SiMn65 ladle, Hindalco Al-Mn can, Indian Railways Mn12 frog, L&amp;T HSLA bridge, Jindal SS 201 Cr-Mn, Eveready MnO2 cell, Ador Welding Mn flux, IFFCO Mn foliar, HAL Tejas Al-Mn skin, Mazagon Dock Cu-Mn prop, IN Navy SSK HSLA-80 hull, DRDO naval Mn12 armour, SAIL Mn foundry
+  - Rs 12,100 Cr total, avg 99.35%, density 7.21 g/cm3
+  - Delayed: MNM-A2412 (28d, monsoon Visakhapatnam, submarine HSLA-80 pressure hull)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (744 exports), page.tsx (1274 viewMap entries), app-store.ts (756 navItems)
-- CSS appended: 16 new rules (~63,176 total)
-- Git commit: 9f756cd, pushed to main
+- Three-file registration: index.ts (746 exports), page.tsx (1276 viewMap entries), app-store.ts (758 navItems)
+- CSS appended: 16 new rules (~63,200 total)
+- Git commit: 38b981d, pushed to main
 
 Stage Summary:
-- Project now: 744 module exports, 756 navItems, ~63,176 CSS lines, 1274 viewMap entries, 0 TSC errors in src/
-- Cobalt Carbonate: Submarine sonar &#8377;960Cr, NCM-811 EV &#8377;960Cr, superalloy &#8377;960Cr, NMC-622 &#8377;940Cr
-- Zinc Sulfate: Submarine Zn anode &#8377;960Cr, Zn-ion battery &#8377;940Cr, Zn-Li hybrid &#8377;960Cr, galvanizing &#8377;860Cr
-- Delayed: CBC-A2412 (28d), ZNS-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+- Project now: 746 module exports, 758 navItems, ~63,200 CSS lines, 1276 viewMap entries, 0 TSC errors in src/
+- Copper Sulfate: Submarine anti-fouling &#8377;960Cr, analytical &#8377;880Cr, electroplating &#8377;900Cr, mining flotation &#8377;860Cr
+- Manganese Metal: Submarine HSLA-80 &#8377;960Cr, aerospace Al-Mn &#8377;960Cr, Hadfield armour &#8377;940Cr, FeMn75 &#8377;880Cr
+- Delayed: CUS-A2412 (28d), MNM-A2412 (28d) — both monsoon Visakhapatnam naval corridor
 
 **Project Current State:**
-- 744 module exports, 756 navItems, ~63,176 CSS lines, 1274 viewMap entries, 0 TSC errors in src/
+- 746 module exports, 758 navItems, ~63,200 CSS lines, 1276 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- CoCO3 99.92% NCM-811 grade — DRC controls 70% global Co, critical EV battery supply chain risk
-- CoCO3 99.95% superalloy grade — strategic defense material, imported from China/Finland
-- ZnSO4 99.85% Zn-Li hybrid grade — emerging battery chemistry, limited Indian production capacity
-- Next clean candidates: copper-sulfate, manganese-metal, chromium-sulfate, nickel-carbonate, silicon-metal, titanium-sponge
+- Mn 99.95% HSLA-80 grade — critical submarine pressure hull steel, South Africa/Australia import dependency
+- CuSO4 99.9% anti-fouling grade — IMO environmental regulation tightening, Cu-based biocides under review
+- Mn 99.92% aerospace grade — strategic for Tejas Mk2, limited Indian primary Mn production
+- Next clean candidates: chromium-sulfate, nickel-carbonate, selenium-dioxide, ammonium-vanadate, silicon-nitride, tungsten-metal
