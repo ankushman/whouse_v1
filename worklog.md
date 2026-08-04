@@ -1,4 +1,47 @@
 ---
+Task ID: R425 — Refractory Ceramic Logistics + Cobalt Sulphate Logistics
+Agent: Main Agent (Cron Loop)
+Task: R425 — 2 new Indian logistics modules for refractory ceramic (Al2O3/ZrO2/MgO/SiC) steelmaking/defense/nuclear/aerospace supply chain and cobalt sulphate (CoSO4) battery/superalloy/pigment/catalyst supply chain.
+
+Work Log:
+- Read worklog: R424 complete (commit 32450a7), 681 exports, ~62,271 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: refractory-ceramic, cobalt-sulphate, aluminium-powder, zirconium-fluoride, nickel-chromium, molybdenum-disulphide, tungsten-disulphide, silicon-wafer, germanium-ingot, vanadium-pentoxide — ALL CLEAN (beryllium-oxide skipped, pre-existing)
+- Icons verified: FlameKindling (confirmed in iconMap), Droplets (confirmed)
+- Unified generator: created gen_r425.py as single script generating BOTH modules via shared gen_module() function
+- Created Refractory Ceramic Logistics (R425a): 200 lines, rc-* orange #ea580c, 14 records
+  - 14 grades: Al2O3 99.8% Dense, ZrO2 97% YSZ, MgO 98% Basic, SiC 99% Crucible, Al2O3 95% IFB, ZrO2 99% Nuclear, SiC 97% Kiln, Al2O3 92% Castable, MgO 96% Ladle, ZrO2 95% Missile, SiC 95% Nozzle, Al2O3 99.5% Submarine, ZrO2 98% Warhead, MgO 93% General
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Carborundum Universal, BHEL R&D, Mahindra Steel, Rajasthan Ceramics, Assam Refractories, Gujarat Refractories, UP Refractories, Vizag Refractories, DRDO TBRL, SAIL Refractories
+  - Applications: SAIL blast furnace, BEL Tejas TBC, JSW BOF, Bharat Forge crucible, L&T warship exhaust, BHEL GT, Mahindra EV kiln, Indian Railways RCF, Tata ladle, IGCAR PFBR, Adani tundish, GRSE sonar dome, DRDO BrahMos radome, SAIL coke oven
+  - Rs 8,760 Cr total, avg 96.83% purity, density 1800-5680 kg/m3
+  - Delayed: RC-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I sonar dome alumina)
+- Created Cobalt Sulphate Logistics (R425b): 200 lines, cos-* sky #0284c7, 14 records
+  - 14 grades: CoSO4 99.9% Battery, CoSO4 99.5% Superalloy, CoSO4 98% Pigment, CoSO4 97% Hardmetal, CoSO4 99.7% Catalyst, CoSO4 99% Magnetic, CoSO4 98% EV, CoSO4 96% Electroplating, CoSO4 95% Agriculture, CoSO4 99.8% Nuclear, CoSO4 97% Dyes, CoSO4 99% Submarine, CoSO4 99.5% Missile, CoSO4 94% General
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Indian Rare Earths, BHEL R&D, Mahindra Steel, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Exide Li-Ion, BEL Tejas turbine, Asian Paints pigment, Bharat Forge WC-Co, IOCL hydrocracking, BHEL GT sensor, Mahindra NCM, Jindal plating, IFFCO fertilizer, IGCAR PFBR, Arvind textile, GRSE submarine, DRDO Nirbhay, SAIL corrosion
+  - Rs 8,760 Cr total, avg 98.16% purity, Co content 18.5-21.0%
+  - Delayed: COS-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I submarine battery cooling)
+- HTML entity scan: 39 (RC) + 37 (COS) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (683 exports), page.tsx (1206 viewMap entries), app-store.ts (688 navItems)
+- CSS appended: 8 new rules (~62,280 total)
+- Git commit: 1f149d7, pushed to main
+
+Stage Summary:
+- Project now: 683 module exports, 688 navItems, ~62,280 CSS lines, 1206 viewMap entries, 0 TSC errors in src/
+- Refractory Ceramic: GRSE sonar dome &#8377;960Cr, IGCAR nuclear &#8377;900Cr, DRDO radome &#8377;880Cr, SAIL furnace &#8377;920Cr
+- Cobalt Sulphate: IGCAR nuclear &#8377;920Cr, GRSE submarine &#8377;940Cr, Exide battery &#8377;880Cr, DRDO Nirbhay &#8377;860Cr
+- Delayed: RC-B2412 (28d), COS-B2412 (28d) — both monsoon Visakhapatnam corridor
+
+**Project Current State:**
+- 683 module exports, 688 navItems, ~62,280 CSS lines, 1206 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- CoSO4: 90% imported from DRC, 80% refined in China — Atmanirbhar cobalt critical
+- Refractory: ZrO2 YSZ heavily import-dependent — ISRO/DRDO strategic stockpile needed
+- Next clean candidates: aluminium-powder, zirconium-fluoride, nickel-chromium, molybdenum-disulphide
+---
 Task ID: R424 — Manganese Silicon Logistics + Manganese Sulphide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R424 — 2 new Indian logistics modules for manganese silicon (FeMnSi) steelmaking/defense/nuclear/rail supply chain and manganese sulphide (MnS) pharma/steel/battery/nuclear/lubricant supply chain.
