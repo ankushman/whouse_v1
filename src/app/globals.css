@@ -63222,3 +63222,27 @@ html.theme-transition body {
 .nic-shimmer { background: linear-gradient(90deg, #05966908 25%, #05966922 50%, #05966908 75%); background-size: 200% 100%; animation: nic-shimmer-anim 2s infinite; }
 @keyframes nic-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .nic-hover:hover { box-shadow: 0 4px 20px #05966933; transform: translateY(-1px); }
+
+/* R462 — Selenium Dioxide Logistics (sed) — amber-dark #a16207 */
+.sed-pulse { animation: sed-pulse-anim 2s ease-in-out infinite; }
+@keyframes sed-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.sed-glow { box-shadow: 0 0 16px #a1620744; }
+.sed-gradient { background: linear-gradient(135deg, #a1620722, #a1620708); }
+.sed-border { border-left: 3px solid #a16207; }
+.sed-text { color: #a16207; }
+.sed-badge { background: #a1620718; color: #a16207; }
+.sed-shimmer { background: linear-gradient(90deg, #a1620708 25%, #a1620722 50%, #a1620708 75%); background-size: 200% 100%; animation: sed-shimmer-anim 2s infinite; }
+@keyframes sed-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.sed-hover:hover { box-shadow: 0 4px 20px #a1620733; transform: translateY(-1px); }
+
+/* R462 — Ammonium Vanadate Logistics (amv) — red #dc2626 */
+.amv-pulse { animation: amv-pulse-anim 2s ease-in-out infinite; }
+@keyframes amv-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.amv-glow { box-shadow: 0 0 16px #dc262644; }
+.amv-gradient { background: linear-gradient(135deg, #dc262622, #dc262608); }
+.amv-border { border-left: 3px solid #dc2626; }
+.amv-text { color: #dc2626; }
+.amv-badge { background: #dc262618; color: #dc2626; }
+.amv-shimmer { background: linear-gradient(90deg, #dc262608 25%, #dc262622 50%, #dc262608 75%); background-size: 200% 100%; animation: amv-shimmer-anim 2s infinite; }
+@keyframes amv-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.amv-hover:hover { box-shadow: 0 4px 20px #dc262633; transform: translateY(-1px); }

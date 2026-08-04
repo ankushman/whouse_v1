@@ -753,3 +753,5 @@ export { default as CopperSulfateLogisticsView } from './copper-sulfate-logistic
 export { default as ManganeseMetalLogisticsView } from './manganese-metal-logistics-view'
 export { default as ChromiumSulfateLogisticsView } from './chromium-sulfate-logistics-view'
 export { default as NickelCarbonateLogisticsView } from './nickel-carbonate-logistics-view'
+export { default as SeleniumDioxideLogisticsView } from './selenium-dioxide-logistics-view'
+export { default as AmmoniumVanadateLogisticsView } from './ammonium-vanadate-logistics-view'
