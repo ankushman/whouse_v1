@@ -63066,3 +63066,23 @@ html.theme-transition body {
 .sbm-badge { background-color: rgba(220, 38, 38, 0.15); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); }
 .sbm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(220, 38, 38, 0.08) 50%, transparent 100%); animation: sbm-pulse 2s ease-in-out infinite; }
 .sbm-hover:hover { background-color: rgba(220, 38, 38, 0.1); border-color: #dc2626; }
+
+/* === Bismuth Metal Logistics (BSM) — R455 === */
+@keyframes bsm-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes bsm-glow { 0%, 100% { box-shadow: 0 0 8px rgba(190, 24, 93, 0.3); } 50% { box-shadow: 0 0 20px rgba(190, 24, 93, 0.6); } }
+.bsm-gradient { background: linear-gradient(135deg, #be185d 0%, #ec4899 50%, #f472b6 100%); }
+.bsm-border { border-color: #be185d; }
+.bsm-text { color: #be185d; }
+.bsm-badge { background-color: rgba(190, 24, 93, 0.15); color: #be185d; border: 1px solid rgba(190, 24, 93, 0.3); }
+.bsm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(190, 24, 93, 0.08) 50%, transparent 100%); animation: bsm-pulse 2s ease-in-out infinite; }
+.bsm-hover:hover { background-color: rgba(190, 24, 93, 0.1); border-color: #be185d; }
+
+/* === Indium Metal Logistics (INM) — R455 === */
+@keyframes inm-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes inm-glow { 0%, 100% { box-shadow: 0 0 8px rgba(79, 70, 229, 0.3); } 50% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.6); } }
+.inm-gradient { background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%); }
+.inm-border { border-color: #4f46e5; }
+.inm-text { color: #4f46e5; }
+.inm-badge { background-color: rgba(79, 70, 229, 0.15); color: #4f46e5; border: 1px solid rgba(79, 70, 229, 0.3); }
+.inm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(79, 70, 229, 0.08) 50%, transparent 100%); animation: inm-pulse 2s ease-in-out infinite; }
+.inm-hover:hover { background-color: rgba(79, 70, 229, 0.1); border-color: #4f46e5; }

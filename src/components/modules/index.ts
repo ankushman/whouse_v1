@@ -739,3 +739,5 @@ export { default as CopperCathodeLogisticsView } from './copper-cathode-logistic
 export { default as TinMetalLogisticsView } from './tin-metal-logistics-view'
 export { default as ZincDustLogisticsView } from './zinc-dust-logistics-view'
 export { default as AntimonyMetalLogisticsView } from './antimony-metal-logistics-view'
+export { default as BismuthMetalLogisticsView } from './bismuth-metal-logistics-view'
+export { default as IndiumMetalLogisticsView } from './indium-metal-logistics-view'
