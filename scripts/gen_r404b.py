@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Generate silicon-powder-logistics-view.tsx (R404b)"""
+
+code = r"""'use client';
+
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared';
+import { CircuitBoard } from 'lucide-react';
+
+interface SiliconPowderRecord {
+  id: string;
+  batchNo: string;
+  city: string;
+  manufacturer: string;
+  powderGrade: string;
+  application: string;
+  siliconPercent: number;
+  particleSizeNm: number;
+  investmentCr: number;
+  status: string;
+  priority: string;
+  origin: string;
+  destination: string;
+  shipDate: string;
+  transitDays: number;
+  zone: string;
+  remarks: string;
+}
+
+const siliconPowderRecords: SiliconPowderRecord[] = [
+  { id: 'SPP-0001', batchNo: 'SPP-B2401', city: 'Mumbai', manufacturer: 'Hindustan Semiconductor', powderGrade: 'MG-Si 98.5% Metallurgical', application: 'Solar Cell (Adani Solar)', siliconPercent: 98.5, particleSizeNm: 45000, investmentCr: 320, status: 'Delivered', priority: 'Critical', origin: 'Hindustan Semiconductor Mumbai (MH)', destination: 'Adani Solar Mundra (GJ)', shipDate: '2026-07-15', transitDays: 1, zone: 'West', remarks: 'Metallurgical grade silicon for Adani Solar polysilicon feedstock &#8594; 98.5% Si &#8594; &#8377;320Cr for 200 tonnes &#8594; India &#8377;9,600Cr solar Si &#8594; Adani 10 GW &#8594; 45um PSD &#8594; Siemens process &#8594; upgraded to SoG' },
+  { id: 'SPP-0002', batchNo: 'SPP-B2402', city: 'Bengaluru', manufacturer: 'IIT-B Nanoelectronics', powderGrade: 'SoG-Si 99.9999% Semiconductor', application: 'Logic Fab (Tata Semiconductor)', siliconPercent: 99.9999, particleSizeNm: 300000, investmentCr: 780, status: 'Delivered', priority: 'Critical', origin: 'IIT-B Research Park (KA)', destination: 'Tata Semi Dholera (GJ)', shipDate: '2026-07-16', transitDays: 2, zone: 'South', remarks: 'Electronic grade 6N silicon wafer for Tata Semiconductor 28nm fab &#8594; 99.9999% Si &#8594; &#8377;780Cr for 50,000 wafers &#8594; India &#8377;23,400Cr semi Si &#8594; Tata &#8377;76,000Cr fab &#8594; 300mm &#8594; CZ grown &#8594; CZ+float zone' },
+  { id: 'SPP-0003', batchNo: 'SPP-B2403', city: 'Chennai', manufacturer: 'DRDO DMRL', powderGrade: 'SiC Nano 50nm', application: 'Thermal Barrier (DRDO HSTDV)', siliconPercent: 63.4, particleSizeNm: 50, investmentCr: 290, status: 'Delivered', priority: 'Critical', origin: 'DRDO DMRL Hyderabad (TG)', destination: 'DRDO TBRL Chandigarh (PB)', shipDate: '2026-07-17', transitDays: 2, zone: 'South', remarks: 'Nano-SiC powder for HSTDV scramjet thermal barrier coating &#8594; 63.4% Si as SiC &#8594; &#8377;290Cr for 2 tonnes &#8594; India &#8377;8,700Cr defence SiC &#8594; DRDO Mach 7 &#8594; 50nm PSD &#8594; 2700&#176;C &#8594; plasma spray' },
+  { id: 'SPP-0004', batchNo: 'SPP-B2404', city: 'Hyderabad', manufacturer: 'Bharat Silicon', powderGrade: 'SiO2 99.8% High-Purity', application: 'Glass Fiber (Sterling and Wilson)', siliconPercent: 46.7, particleSizeNm: 10000, investmentCr: 145, status: 'Delivered', priority: 'High', origin: 'Bharat Silicon Hyderabad (TG)', destination: 'Sterling Wilson Pune (MH)', shipDate: '2026-07-18', transitDays: 1, zone: 'South', remarks: 'High-purity silica for Sterling and Wilson solar glass fiber &#8594; 46.7% Si as SiO2 &#8594; &#8377;145Cr for 100 tonnes &#8594; India &#8377;4,350Cr glass Si &#8594; Sterling 5 GW &#8594; 10um PSD &#8594; 1600&#176;C melt &#8594; fused quartz' },
+  { id: 'SPP-0005', batchNo: 'SPP-B2405', city: 'Kolkata', manufacturer: 'SAIL Silicon', powderGrade: 'FeSi 75% Ferrosilicon', application: 'Steel Deoxidizer (Tata Steel)', siliconPercent: 75.0, particleSizeNm: 50000, investmentCr: 210, status: 'Delivered', priority: 'High', origin: 'SAIL Bhilai (CG)', destination: 'Tata Steel Jamshedpur (JH)', shipDate: '2026-07-19', transitDays: 2, zone: 'East', remarks: '75% ferrosilicon for Tata Steel BOF deoxidation &#8594; 75% Si with Fe &#8594; &#8377;210Cr for 500 tonnes &#8594; India &#8377;6,300Cr steel Si &#8594; Tata 35 MTPA &#8594; 50um &#8594; oxygen control &#8594; lumpy grade' },
+  { id: 'SPP-0006', batchNo: 'SPP-B2406', city: 'Pune', manufacturer: 'Tata Advanced Materials', powderGrade: 'Si 99.999% Polysilicon', application: 'Solar Wafer (Tata Power Solar)', siliconPercent: 99.999, particleSizeNm: 100000, investmentCr: 450, status: 'Delivered', priority: 'Critical', origin: 'TAM Bengaluru (KA)', destination: 'Tata Power Solar Nanded (MH)', shipDate: '2026-07-20', transitDays: 1, zone: 'West', remarks: 'Solar-grade polysilicon for Tata Power Solar PV wafer slicing &#8594; 99.999% Si &#8594; &#8377;450Cr for 80 tonnes &#8594; India &#8377;13,500Cr solar Si &#8594; Tata 4 GW &#8594; 100mm ingot &#8594; Siemens &#8594; 156mm wafer' },
+  { id: 'SPP-0007', batchNo: 'SPP-B2407', city: 'Ahmedabad', manufacturer: 'Gujarat Silicon Tech', powderGrade: 'Nano-Si 20nm Lithium Anode', application: 'EV Battery (Ather Energy)', siliconPercent: 99.9, particleSizeNm: 20, investmentCr: 360, status: 'Delivered', priority: 'High', origin: 'Gujarat Silicon Tech Ahmedabad (GJ)', destination: 'Ather Bengaluru (KA)', shipDate: '2026-07-21', transitDays: 1, zone: 'West', remarks: 'Nano-silicon anode material for Ather 450X Gen3 lithium-ion battery &#8594; 99.9% Si &#8594; &#8377;360Cr for 5 tonnes &#8594; India &#8377;10,800Cr EV Si &#8594; Ather 200K &#8594; 20nm PSD &#8594; 3500 mAh/g &#8594; CVD grown' },
+  { id: 'SPP-0008', batchNo: 'SPP-B2408', city: 'Jaipur', manufacturer: 'Rajasthan Silicon', powderGrade: 'Silica Fume 92% SiO2', application: 'HPC Concrete (L&T)', siliconPercent: 43.1, particleSizeNm: 200, investmentCr: 95, status: 'Delivered', priority: 'Medium', origin: 'Rajasthan Silicon Udaipur (RJ)', destination: 'L&T Mumbai (MH)', shipDate: '2026-07-22', transitDays: 2, zone: 'North', remarks: 'Micro-silica for L&T high-performance concrete 100 MPa &#8594; 43.1% Si as SiO2 &#8594; &#8377;95Cr for 200 tonnes &#8594; India &#8377;2,850Cr concrete Si &#8594; L&T 500 projects &#8594; 200nm &#8594; pozzolanic &#8594; densified' },
+  { id: 'SPP-0009', batchNo: 'SPP-B2409', city: 'Coimbatore', manufacturer: 'Tamil Nadu Silicon', powderGrade: 'Si3N4 99% Silicon Nitride', application: 'Ceramic Bearing (Wipro Aero)', siliconPercent: 60.1, particleSizeNm: 500, investmentCr: 420, status: 'Delivered', priority: 'Critical', origin: 'Tamil Nadu Silicon Hosur (TN)', destination: 'Wipro Aero Bengaluru (KA)', shipDate: '2026-07-23', transitDays: 1, zone: 'South', remarks: 'Silicon nitride ceramic for Wipro Aero GE F414 hybrid ceramic bearing &#8594; 60.1% Si as Si3N4 &#8594; &#8377;420Cr for 3 tonnes &#8594; India &#8377;12,600Cr aero Si3N4 &#8594; Wipro 200 engines &#8594; 500nm &#8594; 1400&#176;C &#8594; HIP sintered' },
+  { id: 'SPP-0010', batchNo: 'SPP-B2410', city: 'Bhubaneswar', manufacturer: 'NALCO', powderGrade: 'Silica Sand 99.5% Glass Grade', application: 'LCD Panel (Dixon Tech)', siliconPercent: 46.6, particleSizeNm: 100000, investmentCr: 115, status: 'Delivered', priority: 'Medium', origin: 'NALCO Puri (OD)', destination: 'Dixon Noida (UP)', shipDate: '2026-07-24', transitDays: 3, zone: 'East', remarks: 'High-purity silica for Dixon Tech LCD TV panel glass substrate &#8594; 46.6% Si as SiO2 &#8594; &#8377;115Cr for 300 tonnes &#8594; India &#8377;3,450Cr display Si &#8594; Dixon 10M TVs &#8594; 100um &#8594; TFT-LCD &#8594; float glass' },
+  { id: 'SPP-0011', batchNo: 'SPP-B2411', city: 'Guwahati', manufacturer: 'Assam Silicon', powderGrade: 'Si-Fe 15% Low-Alloy', application: 'Transformer Core (ABB India)', siliconPercent: 85.0, particleSizeNm: 80000, investmentCr: 280, status: 'Delivered', priority: 'High', origin: 'Assam Silicon Guwahati (AS)', destination: 'ABB Vadodara (GJ)', shipDate: '2026-07-25', transitDays: 4, zone: 'East', remarks: 'Electrical steel Si-Fe for ABB 800 MVA transformer core &#8594; 85% Si with Fe &#8594; &#8377;280Cr for 100 tonnes &#8594; India &#8377;8,400Cr power Si &#8594; ABB 500 units &#8594; 80um &#8594; 1.5T &#8594; CRGO grade' },
+  { id: 'SPP-0012', batchNo: 'SPP-B2412', city: 'Surat', manufacturer: 'Gujarat Nano Si', powderGrade: 'Si Anode Composite 100nm', application: 'Battery Cell (Exicom Tele)', siliconPercent: 92.0, particleSizeNm: 100, investmentCr: 410, status: 'Delayed', priority: 'Critical', origin: 'Gujarat Nano Si Surat (GJ)', destination: 'Exicom Gurgaon (HR)', shipDate: '2026-07-01', transitDays: 21, zone: 'West', remarks: 'Nano-silicon anode composite for Exicom 5G base station Li-ion battery &#8594; 92% Si &#8594; &#8377;410Cr for 4 tonnes &#8594; monsoon delay &#8594; India &#8377;12,300Cr telecom Si &#8594; Exicom 100K cells &#8594; 100nm PSD &#8594; 2800 mAh/g &#8594; ball milled' },
+  { id: 'SPP-0013', batchNo: 'SPP-B2413', city: 'Noida', manufacturer: 'UP Silicon Industries', powderGrade: 'Si Wafer 300mm N-type', application: 'Logic IC (SCL)', siliconPercent: 99.9999, particleSizeNm: 300000, investmentCr: 620, status: 'Delivered', priority: 'Critical', origin: 'UP Silicon Noida (UP)', destination: 'SCL Mohali (PB)', shipDate: '2026-07-26', transitDays: 1, zone: 'North', remarks: 'N-type CZ silicon wafer for SCL 28nm CMOS logic fab &#8594; 99.9999% Si &#8594; &#8377;620Cr for 40,000 wafers &#8594; India &#8377;18,600Cr semi Si &#8594; SCL 28nm &#8594; 300mm &#8594; 1.2 ohm-cm &#8594; CZ+anneal' },
+  { id: 'SPP-0014', batchNo: 'SPP-B2414', city: 'Bhopal', manufacturer: 'BHEL', powderGrade: 'SiC Whisker 0.5um', application: 'Turbine Blade Coating (BHEL)', siliconPercent: 63.4, particleSizeNm: 500, investmentCr: 340, status: 'Delivered', priority: 'High', origin: 'BHEL Bhopal (MP)', destination: 'BHEL Trichy (TN)', shipDate: '2026-07-27', transitDays: 2, zone: 'North', remarks: 'SiC whisker reinforcement for BHEL 800MW gas turbine blade CMAS-resistant coating &#8594; 63.4% Si as SiC &#8594; &#8377;340Cr for 2 tonnes &#8594; India &#8377;10,200Cr power SiC &#8594; BHEL 42 turbines &#8594; 500nm &#8594; 1400&#176;C &#8594; EB-PVD' }
+];
+
+const tabs = ['Dashboard', 'Registry', 'Analytics', 'Insights'] as const;
+type Tab = typeof tabs[number];
+const priorityColors: Record<string, string> = { Critical: 'bg-red-100 text-red-800', High: 'bg-amber-100 text-amber-800', Medium: 'bg-green-100 text-green-800', Low: 'bg-slate-100 text-slate-600' };
+const delayedSet = new Set(siliconPowderRecords.filter(r => r.status === 'Delayed').map(r => r.id));
+
+export default function SiliconPowderLogisticsView() {
+  const [activeTab, setActiveTab] = useState<Tab>('Dashboard');
+  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const toggleFilter = (k: string, v: string) => { setFilters(p => { const s = { ...p }; const a = s[k] || []; const i = a.indexOf(v); if (i > -1) { a.splice(i, 1); if (!a.length) delete s[k]; } else s[k] = [...a, v]; return s; }); };
+  const filtered = useMemo(() => {
+    let d = siliconPowderRecords;
+    if (search) { const q = search.toLowerCase(); d = d.filter(r => r.id.toLowerCase().includes(q) || r.batchNo.toLowerCase().includes(q) || r.powderGrade.toLowerCase().includes(q) || r.application.toLowerCase().includes(q) || r.city.toLowerCase().includes(q) || r.manufacturer.toLowerCase().includes(q)); }
+    Object.entries(filters).forEach(([k, vs]) => { if (vs.length) d = d.filter(r => { const v = String((r as Record<string, unknown>)[k] ?? ''); return vs.some(x => v.toLowerCase().includes(x.toLowerCase())); }); });
+    return d;
+  }, [search, filters]);
+  const totalCr = filtered.reduce((s: number, r) => s + r.investmentCr, 0);
+  const avgSi = filtered.length ? filtered.reduce((s: number, r) => s + r.siliconPercent, 0) / filtered.length : 0;
+  const delayedCount = filtered.filter(r => r.status === 'Delayed').length;
+
+  return (
+    <div className="space-y-6">
+      <PageHeader title="Silicon Powder Logistics" description="Indian silicon powder supply chain tracking from metallurgical grade to 6N semiconductor across solar, battery, electronics and aerospace sectors" />
+      <div className="flex gap-2 border-b">
+        {tabs.map(t => (<button key={t} onClick={() => setActiveTab(t)} className={`px-4 py-2 text-sm font-medium ${activeTab === t ? 'border-b-2 border-cyan-500 text-cyan-700' : 'text-muted-foreground hover:text-foreground'}`}>{t}</button>))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card><CardContent><div className="text-2xl font-bold text-cyan-600">{filtered.length}</div><div className="text-xs text-muted-foreground">Total Shipments</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-cyan-600">&#8377;{totalCr.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground">Total Investment</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-cyan-600">{avgSi.toFixed(1)}%</div><div className="text-xs text-muted-foreground">Avg Si Content</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-red-500">{delayedCount}</div><div className="text-xs text-muted-foreground">Delayed Shipments</div></CardContent></Card>
+      </div>
+      {(activeTab === 'Dashboard' || activeTab === 'Registry') && (
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <input placeholder="Search ID, grade, application, city..." value={search} onChange={e => setSearch(e.target.value)} className="border rounded-md px-3 py-1.5 text-sm flex-1 min-w-48" />
+            {['status', 'priority', 'zone'].map(f => { const opts = [...new Set(siliconPowderRecords.map(r => (r as Record<string, unknown>)[f] as string))]; return (<div key={f} className="flex flex-wrap gap-1">{opts.map(o => (<Badge key={o} variant={(filters[f] || []).includes(o) ? 'default' : 'outline'} className="cursor-pointer text-xs" onClick={() => toggleFilter(f, o)}>{o}</Badge>))}</div>); })}
+          </div>
+          <div className="rounded-md border"><div className="max-h-96 overflow-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-background"><tr><th className="p-2 text-left">ID</th><th className="p-2 text-left">Batch</th><th className="p-2 text-left">Grade</th><th className="p-2 text-left">Application</th><th className="p-2 text-right">Si%</th><th className="p-2 text-right">&#8377;Cr</th><th className="p-2 text-left">Status</th></tr></thead><tbody>{filtered.map(r => (<tr key={r.id} className={`border-t ${delayedSet.has(r.id) ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}><td className="p-2">{r.id}</td><td className="p-2">{r.batchNo}</td><td className="p-2">{r.powderGrade}</td><td className="p-2">{r.application}</td><td className="p-2 text-right">{r.siliconPercent}</td><td className="p-2 text-right">{r.investmentCr}</td><td className="p-2"><Badge variant={r.status === 'Delivered' ? 'default' : 'destructive'}>{r.status}</Badge></td></tr>))}</tbody></table></div></div>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Analytics') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card><CardHeader><CardTitle className="text-sm">Investment by Application</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.application] = (m[r.application] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([a, v]) => (<div key={a} className="flex justify-between text-sm"><span>{a}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Shipments by Zone</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).map(([z, c]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Routes by Value</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.sort((a, b) => b.investmentCr - a.investmentCr).slice(0, 7).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.origin.split('(')[0]} &#8594; {r.destination.split('(')[0]}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Semiconductor Grade</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.filter(r => r.application.toLowerCase().includes('semi') || r.application.toLowerCase().includes('logic') || r.application.toLowerCase().includes('wafer') || r.application.toLowerCase().includes('ic ') || r.application.toLowerCase().includes('fab')).sort((a, b) => b.investmentCr - a.investmentCr).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.powderGrade} ({r.particleSizeNm}nm)</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">By Priority</CardTitle></CardHeader><CardContent><div className="space-y-2">{Object.entries(filtered.reduce((m, r) => { m[r.priority] = (m[r.priority] || 0) + 1; return m }, {} as Record<string, number>)).map(([p, c]) => (<div key={p} className="flex justify-between text-sm"><span className={priorityColors[p] || ''}>{p}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Si Purity Distribution</CardTitle></CardHeader><CardContent><div className="space-y-2">{[{ l: 'Electronic 6N (99.9999%)', f: filtered.filter(r => r.siliconPercent >= 99.999).length }, { l: 'Solar 5N (99.999%)', f: filtered.filter(r => r.siliconPercent >= 99.99 && r.siliconPercent < 99.999).length }, { l: 'High Purity (98-99.9%)', f: filtered.filter(r => r.siliconPercent >= 98 && r.siliconPercent < 99.99).length }, { l: 'Industrial (<98%)', f: filtered.filter(r => r.siliconPercent < 98).length }].map(b => (<div key={b.l} className="flex justify-between text-sm"><span>{b.l}</span><span className="font-medium">{b.f}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Manufacturers</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.manufacturer] = (m[r.manufacturer] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([m, v]) => (<div key={m} className="flex justify-between text-sm"><span>{m}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Avg Transit Days</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.length ? (Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || [] as number[]).concat(r.transitDays); return m }, {} as Record<string, number[]>)) as [string, number[]][]).map(([z, d]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{(d.reduce((s, n) => s + n, 0) / d.length).toFixed(1)}d</span></div>)) : []}</div></CardContent></Card>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Insights') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card><CardContent><div className="text-sm font-medium text-cyan-600 mb-2">Tata Semiconductor 28nm Fab</div><div className="text-xs text-muted-foreground">Tata Electronics 28nm CMOS fab at Dholera, Gujarat, consuming 100,000 wafers/year of 6N electronic-grade silicon. &#8377;76,000Cr fab investment under India Semiconductor Mission. First indigenous logic fab targeting automotive MCU and display driver IC by 2028. Demands 50 TPA polysilicon from upgraded metallurgical silicon.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-cyan-600 mb-2">Nano-Si Battery Anode Revolution</div><div className="text-xs text-muted-foreground">Ather Energy and Exicom adopting 100nm nano-silicon anode material boosting Li-ion energy density from 250 to 400 Wh/kg. Gujarat Nano Si scaling to 20 TPA. India targeting 100 GWh cell capacity by 2030 requiring 4,000 tonnes nano-Si annually. &#8377;8,500Cr nano-silicon market projected by 2030.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-cyan-600 mb-2">SiC Aerospace Ceramics</div><div className="text-xs text-muted-foreground">DRDO and Wipro Aero developing SiC ceramic bearings and thermal barrier coatings for hypersonic vehicles and GE F414 engines. SiC nano powder enables 1400&#176;C service temperature. BHEL adopting SiC whisker-reinforced coatings for 800MW gas turbines. India importing 90% SiC ceramic powder &#8594; local capacity targeting 10 TPA by 2029.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-cyan-600 mb-2">Solar Silicon Scale-Up</div><div className="text-xs text-muted-foreground">Adani Solar and Tata Power Solar consuming 300+ TPA metallurgical and solar-grade silicon for PV cells. India targeting 100 GW solar by 2030 requiring 5,000 tonnes polysilicon annually. Gujarat Silicon Tech commissioning &#8377;12,000Cr SoG-Si plant at Mundra. Domestic MG-Si to SoG-Si upgrade critical for import reduction from China.</div></CardContent></Card>
+        </div>
+      )}
+    </div>
+  );
+}
+"""
+
+import os
+outpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src', 'components', 'modules', 'silicon-powder-logistics-view.tsx')
+outpath = os.path.normpath(outpath)
+with open(outpath, 'w') as f:
+    f.write(code.strip() + '\n')
+print(f"Generated: {outpath}")
+print(f"Size: {os.path.getsize(outpath)} bytes")

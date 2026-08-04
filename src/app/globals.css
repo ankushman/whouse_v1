@@ -61946,3 +61946,38 @@ html.theme-transition body {
 .mgp-tab-inactive { color: #78716c; }
 .mgp-tab-inactive:hover { color: #65a30d; background-color: rgba(101,163,13,0.04); }
 @keyframes mgp-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+/* R404a - Aluminum Powder Logistics */
+.aluminum-powder-logistics .space-y-6 > :first-child { border-left: 4px solid #64748b; padding-left: 12px; }
+.aluminum-powder-logistics .text-slate-600 { color: #475569; }
+.aluminum-powder-logistics .border-slate-500 { border-color: #64748b; }
+.aluminum-powder-logistics .text-2xl.font-bold.text-slate-600 { color: #475569; font-weight: 700; font-size: 1.5rem; line-height: 2rem; }
+.aluminum-powder-logistics .grid.grid-cols-1.md\:grid-cols-4 > .rounded-lg { border: 1px solid #e2e8f0; border-radius: 0.5rem; }
+.aluminum-powder-logistics table { width: 100%; border-collapse: collapse; }
+.aluminum-powder-logistics table th { padding: 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; }
+.aluminum-powder-logistics table td { padding: 0.5rem; font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
+.aluminum-powder-logistics table tr.border-l-4.border-l-red-500 { border-left: 4px solid #ef4444; background-color: rgba(254, 226, 226, 0.3); }
+.aluminum-powder-logistics .bg-red-50\/30 { background-color: rgba(254, 226, 226, 0.3); }
+.aluminum-powder-logistics .card { border-radius: 0.5rem; border: 1px solid #e2e8f0; }
+.aluminum-powder-logistics .card-header { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
+.aluminum-powder-logistics .card-title { font-size: 0.875rem; font-weight: 600; }
+.aluminum-powder-logistics .card-content { padding: 0.75rem 1rem; }
+.aluminum-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
+.aluminum-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
+/* R404b - Silicon Powder Logistics */
+.silicon-powder-logistics .space-y-6 > :first-child { border-left: 4px solid #0891b2; padding-left: 12px; }
+.silicon-powder-logistics .text-cyan-600 { color: #0891b2; }
+.silicon-powder-logistics .text-cyan-700 { color: #0e7490; }
+.silicon-powder-logistics .border-cyan-500 { border-color: #06b6d4; }
+.silicon-powder-logistics .text-2xl.font-bold.text-cyan-600 { color: #0891b2; font-weight: 700; font-size: 1.5rem; line-height: 2rem; }
+.silicon-powder-logistics .grid.grid-cols-1.md\:grid-cols-4 > .rounded-lg { border: 1px solid #e2e8f0; border-radius: 0.5rem; }
+.silicon-powder-logistics table { width: 100%; border-collapse: collapse; }
+.silicon-powder-logistics table th { padding: 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #0891b2; }
+.silicon-powder-logistics table td { padding: 0.5rem; font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
+.silicon-powder-logistics table tr.border-l-4.border-l-red-500 { border-left: 4px solid #ef4444; background-color: rgba(254, 226, 226, 0.3); }
+.silicon-powder-logistics .bg-red-50\/30 { background-color: rgba(254, 226, 226, 0.3); }
+.silicon-powder-logistics .card { border-radius: 0.5rem; border: 1px solid #e2e8f0; }
+.silicon-powder-logistics .card-header { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
+.silicon-powder-logistics .card-title { font-size: 0.875rem; font-weight: 600; }
+.silicon-powder-logistics .card-content { padding: 0.75rem 1rem; }
+.silicon-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
+.silicon-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
