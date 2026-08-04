@@ -61981,3 +61981,39 @@ html.theme-transition body {
 .silicon-powder-logistics .card-content { padding: 0.75rem 1rem; }
 .silicon-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
 .silicon-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
+/* R405a - Antimony Alloy Logistics */
+.antimony-alloy-logistics .space-y-6 > :first-child { border-left: 4px solid #7c3aed; padding-left: 12px; }
+.antimony-alloy-logistics .text-violet-600 { color: #7c3aed; }
+.antimony-alloy-logistics .text-violet-700 { color: #6d28d9; }
+.antimony-alloy-logistics .border-violet-500 { border-color: #8b5cf6; }
+.antimony-alloy-logistics .text-2xl.font-bold.text-violet-600 { color: #7c3aed; font-weight: 700; font-size: 1.5rem; line-height: 2rem; }
+.antimony-alloy-logistics .grid.grid-cols-1.md\:grid-cols-4 > .rounded-lg { border: 1px solid #e2e8f0; border-radius: 0.5rem; }
+.antimony-alloy-logistics table { width: 100%; border-collapse: collapse; }
+.antimony-alloy-logistics table th { padding: 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #7c3aed; }
+.antimony-alloy-logistics table td { padding: 0.5rem; font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
+.antimony-alloy-logistics table tr.border-l-4.border-l-red-500 { border-left: 4px solid #ef4444; background-color: rgba(254, 226, 226, 0.3); }
+.antimony-alloy-logistics .bg-red-50\/30 { background-color: rgba(254, 226, 226, 0.3); }
+.antimony-alloy-logistics .card { border-radius: 0.5rem; border: 1px solid #e2e8f0; }
+.antimony-alloy-logistics .card-header { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
+.antimony-alloy-logistics .card-title { font-size: 0.875rem; font-weight: 600; }
+.antimony-alloy-logistics .card-content { padding: 0.75rem 1rem; }
+.antimony-alloy-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
+.antimony-alloy-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
+/* R405b - Tungsten Powder Logistics */
+.tungsten-powder-logistics .space-y-6 > :first-child { border-left: 4px solid #e11d48; padding-left: 12px; }
+.tungsten-powder-logistics .text-rose-600 { color: #e11d48; }
+.tungsten-powder-logistics .text-rose-700 { color: #be123c; }
+.tungsten-powder-logistics .border-rose-500 { border-color: #f43f5e; }
+.tungsten-powder-logistics .text-2xl.font-bold.text-rose-600 { color: #e11d48; font-weight: 700; font-size: 1.5rem; line-height: 2rem; }
+.tungsten-powder-logistics .grid.grid-cols-1.md\:grid-cols-4 > .rounded-lg { border: 1px solid #e2e8f0; border-radius: 0.5rem; }
+.tungsten-powder-logistics table { width: 100%; border-collapse: collapse; }
+.tungsten-powder-logistics table th { padding: 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #e11d48; }
+.tungsten-powder-logistics table td { padding: 0.5rem; font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
+.tungsten-powder-logistics table tr.border-l-4.border-l-red-500 { border-left: 4px solid #ef4444; background-color: rgba(254, 226, 226, 0.3); }
+.tungsten-powder-logistics .bg-red-50\/30 { background-color: rgba(254, 226, 226, 0.3); }
+.tungsten-powder-logistics .card { border-radius: 0.5rem; border: 1px solid #e2e8f0; }
+.tungsten-powder-logistics .card-header { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
+.tungsten-powder-logistics .card-title { font-size: 0.875rem; font-weight: 600; }
+.tungsten-powder-logistics .card-content { padding: 0.75rem 1rem; }
+.tungsten-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
+.tungsten-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }

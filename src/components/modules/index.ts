@@ -642,3 +642,5 @@ export { default as TitaniumPowderLogisticsView } from './titanium-powder-logist
 export { default as MagnesiumPowderLogisticsView } from './magnesium-powder-logistics-view'
 export { default as AluminumPowderLogisticsView } from './aluminum-powder-logistics-view'
 export { default as SiliconPowderLogisticsView } from './silicon-powder-logistics-view'
+export { default as AntimonyAlloyLogisticsView } from './antimony-alloy-logistics-view'
+export { default as TungstenPowderLogisticsView } from './tungsten-powder-logistics-view'
