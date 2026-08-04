@@ -727,3 +727,5 @@ export { default as ErbiumOxideLogisticsView } from './erbium-oxide-logistics-vi
 export { default as YtterbiumOxideLogisticsView } from './ytterbium-oxide-logistics-view'
 export { default as LutetiumOxideLogisticsView } from './lutetium-oxide-logistics-view'
 export { default as ThuliumOxideLogisticsView } from './thulium-oxide-logistics-view'
+export { default as ScandiumOxideLogisticsView } from './scandium-oxide-logistics-view'
+export { default as ManganeseElectrolyticLogisticsView } from './manganese-electrolytic-logistics-view'

@@ -62838,3 +62838,59 @@ html.theme-transition body {
 .tmo-hover:hover {
   background-color: rgba(8, 145, 178, 0.08);
 }
+
+/* R449a — Scandium Oxide Logistics (sco-*) */
+@keyframes sco-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.sco-glow {
+  box-shadow: 0 0 15px rgba(5, 150, 105, 0.4);
+}
+.sco-gradient {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+.sco-border {
+  border-color: #059669;
+}
+.sco-text {
+  color: #059669;
+}
+.sco-badge {
+  background-color: rgba(5, 150, 105, 0.15);
+  color: #059669;
+}
+.sco-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.1), transparent);
+}
+.sco-hover:hover {
+  background-color: rgba(5, 150, 105, 0.08);
+}
+
+/* R449b — Manganese Electrolytic Logistics (mne-*) */
+@keyframes mne-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.mne-glow {
+  box-shadow: 0 0 15px rgba(67, 56, 202, 0.4);
+}
+.mne-gradient {
+  background: linear-gradient(135deg, #4338ca, #6366f1);
+}
+.mne-border {
+  border-color: #4338ca;
+}
+.mne-text {
+  color: #4338ca;
+}
+.mne-badge {
+  background-color: rgba(67, 56, 202, 0.15);
+  color: #4338ca;
+}
+.mne-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(67, 56, 202, 0.1), transparent);
+}
+.mne-hover:hover {
+  background-color: rgba(67, 56, 202, 0.08);
+}
