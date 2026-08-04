@@ -62278,3 +62278,12 @@ html.theme-transition body {
 .cobalt-sulphate-logistics-view .text-sky-600 { color: #0284c7; }
 .cobalt-sulphate-logistics-view .bg-sky-500 { background-color: #0284c7; }
 .cobalt-sulphate-logistics-view .bg-sky-50\/50 { background-color: rgba(240, 249, 255, 0.5); }
+/* R426 — Aluminium Powder Logistics + Zirconium Fluoride Logistics */
+.aluminium-powder-logistics-view .border-l-slate-500 { border-left-color: #475569; }
+.aluminium-powder-logistics-view .text-slate-600 { color: #475569; }
+.aluminium-powder-logistics-view .bg-slate-500 { background-color: #475569; }
+.aluminium-powder-logistics-view .bg-slate-50\/50 { background-color: rgba(248, 250, 252, 0.5); }
+.zirconium-fluoride-logistics-view .border-l-fuchsia-500 { border-left-color: #a21caf; }
+.zirconium-fluoride-logistics-view .text-fuchsia-600 { color: #a21caf; }
+.zirconium-fluoride-logistics-view .bg-fuchsia-500 { background-color: #a21caf; }
+.zirconium-fluoride-logistics-view .bg-fuchsia-50\/50 { background-color: rgba(253, 242, 255, 0.5); }

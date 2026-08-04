@@ -681,4 +681,5 @@ export { default as ManganeseSiliconLogisticsView } from './manganese-silicon-lo
 export { default as ManganeseSulphideLogisticsView } from './manganese-sulphide-logistics-view'
 export { default as RefractoryCeramicLogisticsView } from './refractory-ceramic-logistics-view'
 export { default as CobaltSulphateLogisticsView } from './cobalt-sulphate-logistics-view'
-
+export { default as AluminiumPowderLogisticsView } from './aluminium-powder-logistics-view'
+export { default as ZirconiumFluorideLogisticsView } from './zirconium-fluoride-logistics-view'
