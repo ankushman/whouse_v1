@@ -63446,3 +63446,25 @@ html.theme-transition body {
 .zns-badge { background: #0d948822; color: #0d9488; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
 .zns-shimmer { background: linear-gradient(90deg, #0d948811, #0d948844, #0d948811); background-size: 200% 100%; animation: zns-gradient 2s infinite; }
 .zns-hover:hover { background-color: #0d948811; }
+
+/* R472: Cadmium Telluride Logistics (cdt-*) - Amber #d97706 */
+@keyframes cdt-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes cdt-glow { 0%, 100% { box-shadow: 0 0 5px #d9770644; } 50% { box-shadow: 0 0 20px #d9770688; } }
+@keyframes cdt-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.cdt-card { transition: all 0.3s ease; border-left: 4px solid #d97706; }
+.cdt-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #d9770633; }
+.cdt-text { color: #d97706; }
+.cdt-badge { background: #d9770622; color: #d97706; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.cdt-shimmer { background: linear-gradient(90deg, #d9770611, #d9770644, #d9770611); background-size: 200% 100%; animation: cdt-gradient 2s infinite; }
+.cdt-hover:hover { background-color: #d9770611; }
+
+/* R472: Gallium Phosphide Logistics (gap-*) - Emerald #059669 */
+@keyframes gap-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes gap-glow { 0%, 100% { box-shadow: 0 0 5px #05966944; } 50% { box-shadow: 0 0 20px #05966988; } }
+@keyframes gap-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.gap-card { transition: all 0.3s ease; border-left: 4px solid #059669; }
+.gap-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #05966933; }
+.gap-text { color: #059669; }
+.gap-badge { background: #05966922; color: #059669; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.gap-shimmer { background: linear-gradient(90deg, #05966911, #05966944, #05966911); background-size: 200% 100%; animation: gap-gradient 2s infinite; }
+.gap-hover:hover { background-color: #05966911; }

@@ -773,3 +773,5 @@ export { default as AntimonyTrisulfideLogisticsView } from './antimony-trisulfid
 export { default as CalciumFluorideLogisticsView } from './calcium-fluoride-logistics-view'
 export { default as CadmiumSulfideLogisticsView } from './cadmium-sulfide-logistics-view'
 export { default as ZincSelenideLogisticsView } from './zinc-selenide-logistics-view'
+export { default as CadmiumTellurideLogisticsView } from './cadmium-telluride-logistics-view'
+export { default as GalliumPhosphideLogisticsView } from './gallium-phosphide-logistics-view'
