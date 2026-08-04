@@ -787,3 +787,5 @@ export { default as LithiumFluorideLogisticsView } from './lithium-fluoride-logi
 export { default as SodiumFluorideLogisticsView } from './sodium-fluoride-logistics-view'
 export { default as PotassiumFluorideLogisticsView } from './potassium-fluoride-logistics-view'
 export { default as LeadFluorideLogisticsView } from './lead-fluoride-logistics-view'
+export { default as StrontiumFluorideLogisticsView } from './strontium-fluoride-logistics-view'
+export { default as ThoriumDioxideLogisticsView } from './thorium-dioxide-logistics-view'

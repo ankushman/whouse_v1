@@ -63600,3 +63600,23 @@ html.theme-transition body {
 .pbf-badge { background: #64748b22; color: #64748b; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
 .pbf-shimmer { background: linear-gradient(90deg, #64748b11, #64748b44, #64748b11); background-size: 200% 100%; animation: pbf-gradient 2s infinite; }
 .pbf-hover:hover { background-color: #64748b11; }
+
+/* R479a - Strontium Fluoride Logistics (srf) - dark cyan #0e7490 */
+@keyframes srf-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes srf-glow { 0% { box-shadow: 0 0 5px #0e749044; } 100% { box-shadow: 0 0 20px #0e749088; } }
+.srf-gradient { background: linear-gradient(135deg, #0e7490, #164e63); }
+.srf-border { border-color: #0e749066; }
+.srf-text { color: #0e7490; }
+.srf-badge { background-color: #0e749022; color: #22d3ee; }
+.srf-shimmer { background: linear-gradient(90deg, #0e749011 25%, #0e749044 50%, #0e749011 75%); }
+.srf-hover:hover { background-color: #0e749015; }
+
+/* R479b - Thorium Dioxide Logistics (tho) - dark yellow #a16207 */
+@keyframes tho-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes tho-glow { 0% { box-shadow: 0 0 5px #a1620744; } 100% { box-shadow: 0 0 20px #a1620788; } }
+.tho-gradient { background: linear-gradient(135deg, #a16207, #713f12); }
+.tho-border { border-color: #a1620766; }
+.tho-text { color: #a16207; }
+.tho-badge { background-color: #a1620722; color: #fbbf24; }
+.tho-shimmer { background: linear-gradient(90deg, #a1620711 25%, #a1620744 50%, #a1620711 75%); }
+.tho-hover:hover { background-color: #a1620715; }
