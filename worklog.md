@@ -1,42 +1,42 @@
 ---
-Task ID: R465 — Niobium Pentoxide Logistics + Germanium Dioxide Logistics
+Task ID: R466 — Rhenium Metal Logistics + Indium Tin Oxide Logistics
 Agent: Main Agent (Cron Loop)
-Task: R465 — 2 new Indian logistics modules for niobium pentoxide (Nb2O5) MLCC dielectric/LiNbO3 substrate/submarine sonar/hypersonic TPS supply chain and germanium dioxide (GeO2) IR optical lens/fiber optic preform/submarine periscope/5G photonics supply chain.
+Task: R466 — 2 new Indian logistics modules for rhenium metal (Re) turbine blade/superalloy nozzle/submarine reactor shield/hypersonic scramjet supply chain and indium tin oxide (ITO) touch panel/fighter HUD/solar TCO/submarine periscope display supply chain.
 
 Work Log:
-- Read worklog: R464 complete (commit abf716b), 754 exports, ~63,294 CSS
+- Read worklog: R465 complete (commit ab05b33), 756 exports, ~63,316 CSS
 - TSC pre-validation: 0 errors in src/
-- R465 candidates selected from remaining clean pool:
-  - Niobium Pentoxide (Nb2O5) — CLEAN, confirmed 0 existing references
-  - Germanium Dioxide (GeO2) — CLEAN, confirmed 0 existing references
-- Icons verified: Pentagon (0 uses, confirmed VALID), Cylinder (0 uses, confirmed VALID)
-- Created Niobium Pentoxide Logistics (R465a): 228 lines, nbp-* purple #7e22ce, 14 records
-  - 14 grades: Nb2O5 99.9% MLCC Dielectric, 99.95% LiNbO3 Substrate, 99.7% Optical AR Coat, 99.85% Solid-State Battery, 99.3% Ferroelectric Memory, 99.8% Submarine Sonar Piezo, 99.0% Catalytic Exhaust, 99.6% Warship Laser Window, 99.92% Superconducting RF Cavity, 99.4% Fiber Bragg Grating, 99.8% LED Phosphor Host, 99.85% Submarine Torpedo Gyro, 99.95% Hypersonic TPS Tile, 98.0% General
-  - Applications: Murata MLCC, IISc LiNbO3 SAW, BEL Optronic IR, IIT-M Na-ion, IIT-K FeRAM, NPOL sonar piezo, RIL refinery catalyst, BEL Naval laser, IISc SRF cavity, Sterlite FBG, Dixon LED, IN Navy torpedo gyro, DRDO HSTDV TPS, SAIL refractory
-  - Rs 12,400 Cr total, avg 99.53%, melting point 1512 degC, density 4.60 g/cm3
-  - Delayed: NBP-A2412 (28d, monsoon Visakhapatnam, submarine torpedo guidance gyro INS navigation)
-- Created Germanium Dioxide Logistics (R465b): 228 lines, ged-* yellow-dark #ca8a04, 14 records
-  - 14 grades: GeO2 99.9% IR Optical Lens, 99.95% Fiber Optic Preform, 99.7% PE Polymerization Catalyst, 99.85% Gamma-Ray Detector, 99.3% LED Phosphor Emitter, 99.8% Submarine Periscope IR, 99.0% Silicone Reinforce, 99.6% Warship FLIR, 99.92% 5G Photonic Transceiver, 99.4% Solar Cell AR Coat, 99.8% Strain Gauge, 99.85% Submarine Sonar Dome, 99.95% Cherenkov Detector, 98.0% General
-  - Applications: BEL IR lens, Sterlite fiber preform, RIL PE catalyst, BRIT HPGe detector, Dixon LED, Mazagon Dock periscope, ABB silicone, BEL Naval FLIR, IIT-G 5G photonics, Adani Solar AR, GE Aviation strain, IN Navy sonar dome, IISc Cherenkov, SAIL optical blank
-  - Rs 12,120 Cr total, avg 99.52%, melting point 1116 degC, density 4.23 g/cm3
-  - Delayed: GED-A2412 (28d, monsoon Visakhapatnam, submarine hull sonar dome acoustic transparent)
+- R466 candidates selected:
+  - Rhenium Metal (Re) — CLEAN, confirmed 0 existing references
+  - Indium Tin Oxide (ITO) — CLEAN, confirmed 0 existing references
+- Icons verified: Languages (0 uses, confirmed VALID), Telescope (0 uses, confirmed VALID)
+- Created Rhenium Metal Logistics (R466a): 228 lines, rem-* navy-steel #1e3a5f, 14 records
+  - 14 grades: Re 99.9% Single Crystal Turbine Blade, 99.95% Superalloy Nozzle Vane, 99.7% Rocket Combustion Chamber, 99.85% Pt-Re Reforming Catalyst, 99.3% Incandescent Filament, 99.8% Gas Turbine Combustor, 99.0% Electrical Contact, 99.6% Warship GT Blade, 99.92% Pt-Re Thermocouple, 99.4% X-Ray Tube Target, 99.8% FCC Catalyst, 99.85% Submarine Reactor Shield, 99.95% Hypersonic Scramjet, 98.0% General
+  - Applications: HAL Tejas turbine, GE Aviation superalloy, ISRO PSLV chamber, HPCL reformer, Surya Roshni filament, BHEL GT combustor, Mico Bosch contact, GRSE LM2500 blade, IISc thermocouple, Wipro GE X-ray, IOCL FCC cat, IN Navy SSBN shield, DRDO scramjet nozzle, SAIL alloy
+  - Rs 12,920 Cr total, avg 99.56%, melting point 3186 degC, density 21.02 g/cm3
+  - Delayed: REM-A2412 (28d, monsoon Visakhapatnam, submarine SSBN nuclear reactor containment shield)
+- Created Indium Tin Oxide Logistics (R466b): 228 lines, ito-* cyan-dark #0e7490, 14 records
+  - 14 grades: ITO 99.9% Touch Panel Conductor, 99.95% Fighter HUD Coating, 99.7% LCD Electrode, 99.85% Solar TCO Front, 99.3% EMI Shield Window, 99.8% Submarine Periscope Display, 99.0% Defog Windshield, 99.6% Warship Bridge Console, 99.92% OLED Anode, 99.4% Smart Glass EC, 99.8% Anti-Static Film, 99.85% Submarine Sonar Display, 99.95% Hypersonic IR Seeker, 98.0% General
+  - Applications: Dixon touch, HAL Tejas HUD, Dixon LCD, Adani Solar TCO, BEL EMI shield, Mazagon Dock display, HAL windshield heat, GRSE bridge console, IIT-G OLED anode, Saint-Gobain smart glass, Flex ESD packaging, IN Navy sonar display, DRDO Astra IR dome, SAIL ITO coating
+  - Rs 12,120 Cr total, avg 99.53%, density 7.15 g/cm3
+  - Delayed: ITO-A2412 (28d, monsoon Visakhapatnam, submarine sonar display panel acoustic operator)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (756 exports), page.tsx (1286 viewMap entries), app-store.ts (768 navItems)
-- CSS appended: 16 new rules (~63,316 total)
-- Git commit: ab05b33, pushed to main
+- Three-file registration: index.ts (758 exports), page.tsx (1288 viewMap entries), app-store.ts (770 navItems)
+- CSS appended: 16 new rules (~63,338 total)
+- Git commit: aacf4b4, pushed to main
 
 Stage Summary:
-- Project now: 756 module exports, 768 navItems, ~63,316 CSS lines, 1286 viewMap entries, 0 TSC errors in src/
-- Niobium Pentoxide: Submarine torpedo gyro &#8377;960Cr, hypersonic TPS &#8377;980Cr, SRF cavity &#8377;960Cr, MLCC dielectric &#8377;880Cr
-- Germanium Dioxide: Submarine sonar dome &#8377;960Cr, periscope IR &#8377;940Cr, 5G photonics &#8377;960Cr, fiber preform &#8377;940Cr
-- Delayed: NBP-A2412 (28d), GED-A2412 (28d) — both monsoon Visakhapatnam naval corridor (5th consecutive round)
+- Project now: 758 module exports, 770 navItems, ~63,338 CSS lines, 1288 viewMap entries, 0 TSC errors in src/
+- Rhenium Metal: Submarine SSBN reactor &#8377;960Cr, scramjet nozzle &#8377;980Cr, turbine blade &#8377;960Cr, rocket chamber &#8377;940Cr
+- Indium Tin Oxide: Fighter HUD &#8377;960Cr, submarine sonar display &#8377;960Cr, solar TCO &#8377;900Cr, OLED anode &#8377;940Cr
+- Delayed: REM-A2412 (28d), ITO-A2412 (28d) — both monsoon Visakhapatnam naval corridor (6th consecutive round)
 
 **Project Current State:**
-- 756 module exports, 768 navItems, ~63,316 CSS lines, 1286 viewMap entries, 0 TSC errors in src/
+- 758 module exports, 770 navItems, ~63,338 CSS lines, 1288 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- Nb2O5 99.95% — Brazil/Canada duopoly, critical for LiNbO3 electro-optics and hypersonic TPS, India imports 98%+
-- GeO2 99.95% — China controls 70% global germanium supply, export controls since 2023, critical defense and telecom material
-- Visakhapatnam monsoon corridor: 5 consecutive rounds with delayed naval items — systemic weather/logistics risk
-- Next candidates pool: 11 clean names remaining (rhenium-metal, indium-tin-oxide, magnesium-ingot, aluminum-nitride, zirconium-silicate, yttrium-stabilized-zirconia, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride, samarium-cobalt, + more exotic)
+- Re 99.95% — Chile/USA/China supply, extremely rare (0.0007% crust abundance), critical for defense jet engines, India imports 100%
+- ITO 99.95% — China controls 60% indium supply, export restrictions since 2023, critical for defense displays and solar panels
+- Visakhapatnam monsoon corridor: 6 consecutive rounds with delayed naval items — escalating systemic risk, recommend route diversification
+- Next candidates pool: 9 clean names remaining (magnesium-ingot, aluminum-nitride, zirconium-silicate, yttrium-stabilized-zirconia, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride, samarium-cobalt, + more exotic)
