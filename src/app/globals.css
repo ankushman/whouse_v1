@@ -62191,3 +62191,17 @@ html.theme-transition body {
 .slg-registry .slg-record:nth-child(odd) { background: rgba(14, 165, 233, 0.04); }
 .slg-analytics .slg-bar { background: linear-gradient(90deg, #0ea5e9, #38bdf8); border-radius: 4px; }
 .slg-insights .slg-insight-card { border-left: 4px solid #0ea5e9; background: rgba(14, 165, 233, 0.06); }
+
+/* ── Magnesia Dolomite Supply Chain (mgo-*) ── */
+/* mgo-* — Magnesia Dolomite Logistics */
+.mgo-dashboard .mgo-card { border-left: 4px solid #dc2626; }
+.mgo-registry .mgo-record:nth-child(odd) { background: rgba(220, 38, 38, 0.04); }
+.mgo-analytics .mgo-bar { background: linear-gradient(90deg, #dc2626, #f87171); border-radius: 4px; }
+.mgo-insights .mgo-insight-card { border-left: 4px solid #dc2626; background: rgba(220, 38, 38, 0.06); }
+
+/* ── Chromium Oxide Supply Chain (cro-*) ── */
+/* cro-* — Chromium Oxide Logistics */
+.cro-dashboard .cro-card { border-left: 4px solid #7c3aed; }
+.cro-registry .cro-record:nth-child(odd) { background: rgba(124, 58, 237, 0.04); }
+.cro-analytics .cro-bar { background: linear-gradient(90deg, #7c3aed, #a78bfa); border-radius: 4px; }
+.cro-insights .cro-insight-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }

@@ -667,3 +667,5 @@ export { default as ZirconiumOxideLogisticsView } from './zirconium-oxide-logist
 export { default as BoronNitrideLogisticsView } from './boron-nitride-logistics-view'
 export { default as GraphitePowderLogisticsView } from './graphite-powder-logistics-view'
 export { default as SilicaGlassLogisticsView } from './silica-glass-logistics-view'
+export { default as MagnesiaDolomiteLogisticsView } from './magnesia-dolomite-logistics-view'
+export { default as ChromiumOxideLogisticsView } from './chromium-oxide-logistics-view'
