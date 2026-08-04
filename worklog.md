@@ -1,43 +1,52 @@
 ---
-Task ID: R470 — Antimony Trisulfide Logistics + Calcium Fluoride Logistics
+Task ID: R471 — Cadmium Sulfide Logistics + Zinc Selenide Logistics
 Agent: Main Agent (Cron Loop)
-Task: R470 — 2 new Indian logistics modules for antimony trisulfide (Sb2S3) solar absorber/warship IR camo/submarine periscope filter/solid-state battery supply chain and calcium fluoride (CaF2) DUV lithography/excimer laser/submarine sonar window/nuclear fuel salt supply chain.
+Task: R471 — 2 new Indian logistics modules for cadmium sulfide (CdS) thin-film PV/photoresistor/pigment/quantum dot supply chain and zinc selenide (ZnSe) CO2 laser window/thermal imaging/LED/night vision supply chain.
 
 Work Log:
-- Read worklog: R469 complete (commit 517fbcb), 764 exports, ~63,404 CSS
+- Read worklog: R470 complete (commit 3bcf0e9), 766 exports, ~63,426 CSS
 - TSC pre-validation: 0 errors in src/
-- R470 candidates selected from expanded pool (21 clean names after R469 scan):
-  - Antimony Trisulfide (Sb2S3) — CLEAN, confirmed 0 existing references
-  - Calcium Fluoride (CaF2) — CLEAN, confirmed 0 existing references
-- Icons verified: Accessibility (0 uses, confirmed VALID), Earth (0 uses, confirmed VALID)
-- Created Antimony Trisulfide Logistics (R470a): 228 lines, ats-* pink-dark #831843, 14 records
-  - 14 grades: Sb2S3 99.9% Solar Absorber, 99.95% Warship IR Camo, 99.7% SWIR Photodetector, 99.85% Match Ignition, 99.3% FR Textile, 99.8% Sub Periscope IR, 99.0% Match Striker, 99.6% Missile Smoke, 99.92% Solid-State Cathode, 99.4% Vidicon Tube, 99.8% Brake Lining, 99.85% Submarine Hull Anode, 99.95% Hypersonic IR Dome, 98.0% General
-  - Applications: Tata Power PV, BEL Naval IR, IISc SWIR, OFB ordnance, Bhilwara FR, Mazagon Dock IR, Wimco striker, DRDO smoke, IIT-G solid-state, BEL Optronic, Bosch brake, IN Navy hull anode, DRDO HSTDV IR, SAIL pigment
-  - Rs 12,040 Cr total, avg 99.54%, melting point 550 degC, density 4.64 g/cm3
-  - Delayed: ATS-A2412 (28d, monsoon Visakhapatnam, submarine SSK hull cathodic protection anode)
-- Created Calcium Fluoride Logistics (R470b): 228 lines, caf-* cyan-steel #155e75, 14 records
-  - 14 grades: CaF2 99.9% DUV Lithography Lens, 99.95% Excimer Laser Window, 99.7% Submarine Periscope Prism, 99.85% Space Telescope Mirror, 99.3% Al Smelting Flux, 99.8% Warship Laser Window, 99.0% Fluorescent Lamp Phosphor, 99.6% Missile IR Dome, 99.92% Nuclear Fuel Salt, 99.4% Fiber Preform, 99.8% Welding Flux, 99.85% Submarine Sonar Window, 99.95% Hypersonic Thermal Lens, 98.0% General
-  - Applications: IISc DUV, IISc excimer, Mazagon Dock prism, ISRO mirror, Hindalco flux, BEL Naval laser, Surya Roshni lamp, DRDO Astra dome, BARC fuel salt, Sterlite fiber, SAIL weld, IN Navy sonar window, DRDO HSTDV lens, SAIL fluorspar
-  - Rs 12,360 Cr total, avg 99.56%, melting point 1418 degC, density 3.18 g/cm3
-  - Delayed: CAF-A2412 (28d, monsoon Visakhapatnam, submarine SSK sonar acoustic transparent window)
+- Agent-browser QA: skipped — dev server OOM at 63K+ CSS lines (known limitation)
+- Icon pool expansion: scanned 1610 lucide-react icons, found 30+ CLEAN unused candidates
+  - Previously only ~4 known clean icons remained (Fan, FerrisWheel — Crown/Diamond already used)
+  - New pool includes: Binoculars, DraftingCompass, ShieldHalf, Coffee, Ruler, Shrimp, CalendarDays, PlugZap, BatteryCharging, LifeBuoy, Fish, Shell, Space, Bluetooth, Infinity, Percent, IndianRupee, Clover, etc.
+- R471 candidates selected from expanded pool:
+  - Cadmium Sulfide (CdS) — CLEAN, confirmed 0 existing references
+  - Zinc Selenide (ZnSe) — CLEAN, confirmed 0 existing references
+- Icons verified: Binoculars (0 uses, confirmed VALID), DraftingCompass (0 uses, confirmed VALID)
+- Created Cadmium Sulfide Logistics (R471a): 228 lines, cds-* violet #7c3aed, 14 records
+  - 14 grades: CdS 99.99% Thin-Film PV Window, 99.95% Radiation Detector, 99.9% Cadmium Yellow Pigment, 99.85% Photoresistor LDR, 99.7% EL LED Phosphor, 99.92% Night Vision Intensifier, 99.5% PVC Stabilizer, 99.8% Flame-Retardant Smoke Suppressant, 99.93% Quantum Dot Solar, 99.6% XRF Scintillator, 99.4% Diode Laser Optocoupler, 99.85% Submarine CCD Coating, 99.96% Hypersonic IR Sensor, 99.0% General
+  - Applications: Tata Power PV, BARC radiation det, Asian Paints pigment, BHEL photoresistor, BEL EL phosphor, BEL Optronic NV, Reliance PVC, DRDO smoke, IIT-G quantum dot, ISRO XRF, BEL optocoupler, IN Navy CCD, DRDO HSTDV IR, SAIL pigment
+  - Rs 12,040 Cr total, avg 99.64%, melting point 980 degC, density 4.82 g/cm3
+  - Delayed: CDS-A2412 (28d, monsoon Visakhapatnam, submarine SSK periscope CCD coating)
+- Created Zinc Selenide Logistics (R471b): 228 lines, zns-* teal #0d9488, 14 records
+  - 14 grades: ZnSe 99.99% CO2 Laser Coupler, 99.95% Thermal Imaging FLIR, 99.9% Blue-Green LED Wafer, 99.85% Multi-Spectral Coating, 99.7% Night Vision Image Tube, 99.92% Submarine Periscope IR, 99.5% Laser Cutting Lens, 99.8% Missile Seeker IR Dome, 99.93% Hollow Cathode Lamp, 99.6% CIGS Buffer Layer, 99.4% Medical Laser Window, 99.85% Submarine Sonar Dome, 99.96% Hypersonic Wind Tunnel, 99.0% General
+  - Applications: BEL laser window, DRDO FLIR, IISc LED, ISRO optical, BEL Optronic NVG, Mazagon Dock IR, L&T cutting, DRDO Astra, IIT-G HCL, Tata Power CIGS, BEL medical, IN Navy sonar dome, DRDO HSTDV, SAIL industrial
+  - Rs 12,060 Cr total, avg 99.67%, melting point 1100 degC, density 5.27 g/cm3
+  - Delayed: ZNS-A2412 (28d, monsoon Visakhapatnam, submarine SSK sonar IR transparent dome)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (766 exports), page.tsx (1296 viewMap entries), app-store.ts (778 navItems)
-- CSS appended: 16 new rules (~63,426 total)
-- Git commit: 3bcf0e9, pushed to main
+- Three-file registration: index.ts (768 exports), page.tsx (1298 viewMap entries), app-store.ts (780 navItems)
+- CSS appended: 16 new rules (~63,442 total)
+- Git commit: 69bd2ab, pushed to main
 
 Stage Summary:
-- Project now: 766 module exports, 778 navItems, ~63,426 CSS lines, 1296 viewMap entries, 0 TSC errors in src/
-- Antimony Trisulfide: Submarine hull anode &#8377;900Cr, warship IR camo &#8377;940Cr, hypersonic IR &#8377;940Cr, solid-state &#8377;900Cr
-- Calcium Fluoride: Submarine sonar window &#8377;960Cr, nuclear fuel salt &#8377;940Cr, DUV lithography &#8377;900Cr, excimer laser &#8377;960Cr
-- Delayed: ATS-A2412 (28d), CAF-A2412 (28d) — both monsoon Visakhapatnam naval corridor (10th consecutive round)
+- Project now: 768 module exports, 780 navItems, ~63,442 CSS lines, 1298 viewMap entries, 0 TSC errors in src/
+- Cadmium Sulfide: Submarine CCD &#8377;920Cr, night vision &#8377;940Cr, quantum dot solar &#8377;900Cr, hypersonic IR &#8377;960Cr
+- Zinc Selenide: Submarine sonar dome &#8377;920Cr, thermal FLIR &#8377;960Cr, CO2 laser &#8377;940Cr, hypersonic tunnel &#8377;960Cr
+- Delayed: CDS-A2412 (28d), ZNS-A2412 (28d) — both monsoon Visakhapatnam naval corridor (11th consecutive round)
 
 **Project Current State:**
-- 766 module exports, 778 navItems, ~63,426 CSS lines, 1296 viewMap entries, 0 TSC errors in src/
-- Session total (R464-R470): 14 new modules added across 7 rounds, 0 TSC errors throughout
+- 768 module exports, 780 navItems, ~63,442 CSS lines, 1298 viewMap entries, 0 TSC errors in src/
+- Session total (R464-R471): 16 new modules added across 8 rounds, 0 TSC errors throughout
+- Icon pool: 30+ clean icons now available (expanded from ~4)
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- Visakhapatnam monsoon corridor: 10 consecutive rounds — EXTREME systemic pattern, recommend immediate route diversification
-- Sb2S3 99.95% — China controls 80% antimony supply, export ban since Sept 2024, critical defense material
-- CaF2 99.95% — Mexico/China/South Africa supply, critical for DUV semiconductor lithography
-- Candidate pool: ~19 clean names remaining from expanded scan
+- Visakhapatnam monsoon corridor: 11 consecutive rounds — EXTREME systemic pattern, recommend immediate route diversification
+- CdS 99.96% — cadmium is RoHS restricted, EU/US import controls on cadmium compounds, critical dual-use (solar + defense)
+- ZnSe 99.99% — China/Japan supply dominance, critical for CO2 laser industrial cutting + defense thermal imaging
+- Candidate pool: ~17 clean names remaining (cadmium-telluride, gallium-phosphide, AlGaN, InGaAs, SiGe, ZrB2, Al2O3-nano, BaF2, LiF, NaF, KF, PbF2, SrF2, ThO2, UO2, zirconium-silicate, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride)
+
+**Next Round R472 Suggested Candidates:**
+- Cadmium Telluride (CdTe) — thin-film PV champion, CLEAN
+- Gallium Phosphide (GaP) — LED/optoelectronics, CLEAN
