@@ -62017,3 +62017,39 @@ html.theme-transition body {
 .tungsten-powder-logistics .card-content { padding: 0.75rem 1rem; }
 .tungsten-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
 .tungsten-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
+/* R406a - Vanadium Powder Logistics */
+.vanadium-powder-logistics .space-y-6 > :first-child { border-left: 4px solid #059669; padding-left: 12px; }
+.vanadium-powder-logistics .text-emerald-600 { color: #059669; }
+.vanadium-powder-logistics .text-emerald-700 { color: #047857; }
+.vanadium-powder-logistics .border-emerald-500 { border-color: #10b981; }
+.vanadium-powder-logistics .text-2xl.font-bold.text-emerald-600 { color: #059669; font-weight: 700; font-size: 1.5rem; line-height: 2rem; }
+.vanadium-powder-logistics .grid.grid-cols-1.md\:grid-cols-4 > .rounded-lg { border: 1px solid #e2e8f0; border-radius: 0.5rem; }
+.vanadium-powder-logistics table { width: 100%; border-collapse: collapse; }
+.vanadium-powder-logistics table th { padding: 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #059669; }
+.vanadium-powder-logistics table td { padding: 0.5rem; font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
+.vanadium-powder-logistics table tr.border-l-4.border-l-red-500 { border-left: 4px solid #ef4444; background-color: rgba(254, 226, 226, 0.3); }
+.vanadium-powder-logistics .bg-red-50\/30 { background-color: rgba(254, 226, 226, 0.3); }
+.vanadium-powder-logistics .card { border-radius: 0.5rem; border: 1px solid #e2e8f0; }
+.vanadium-powder-logistics .card-header { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
+.vanadium-powder-logistics .card-title { font-size: 0.875rem; font-weight: 600; }
+.vanadium-powder-logistics .card-content { padding: 0.75rem 1rem; }
+.vanadium-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
+.vanadium-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }
+/* R406b - Zirconium Powder Logistics */
+.zirconium-powder-logistics .space-y-6 > :first-child { border-left: 4px solid #d97706; padding-left: 12px; }
+.zirconium-powder-logistics .text-amber-600 { color: #d97706; }
+.zirconium-powder-logistics .text-amber-700 { color: #b45309; }
+.zirconium-powder-logistics .border-amber-500 { border-color: #f59e0b; }
+.zirconium-powder-logistics .text-2xl.font-bold.text-amber-600 { color: #d97706; font-weight: 700; font-size: 1.5rem; line-height: 2rem; }
+.zirconium-powder-logistics .grid.grid-cols-1.md\:grid-cols-4 > .rounded-lg { border: 1px solid #e2e8f0; border-radius: 0.5rem; }
+.zirconium-powder-logistics table { width: 100%; border-collapse: collapse; }
+.zirconium-powder-logistics table th { padding: 0.5rem; text-align: left; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #d97706; }
+.zirconium-powder-logistics table td { padding: 0.5rem; font-size: 0.875rem; border-top: 1px solid #e2e8f0; }
+.zirconium-powder-logistics table tr.border-l-4.border-l-red-500 { border-left: 4px solid #ef4444; background-color: rgba(254, 226, 226, 0.3); }
+.zirconium-powder-logistics .bg-red-50\/30 { background-color: rgba(254, 226, 226, 0.3); }
+.zirconium-powder-logistics .card { border-radius: 0.5rem; border: 1px solid #e2e8f0; }
+.zirconium-powder-logistics .card-header { padding: 0.75rem 1rem; border-bottom: 1px solid #e2e8f0; }
+.zirconium-powder-logistics .card-title { font-size: 0.875rem; font-weight: 600; }
+.zirconium-powder-logistics .card-content { padding: 0.75rem 1rem; }
+.zirconium-powder-logistics .badge { font-size: 0.75rem; padding: 0.125rem 0.5rem; border-radius: 9999px; }
+.zirconium-powder-logistics .space-y-2 > div { display: flex; justify-content: space-between; align-items: center; padding: 0.25rem 0; }

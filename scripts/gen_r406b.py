@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Generate zirconium-powder-logistics-view.tsx (R406b)"""
+
+code = r"""'use client';
+
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared';
+import { Hexagon } from 'lucide-react';
+
+interface ZirconiumPowderRecord {
+  id: string;
+  batchNo: string;
+  city: string;
+  manufacturer: string;
+  powderGrade: string;
+  application: string;
+  zirconiumPercent: number;
+  particleSizeUm: number;
+  investmentCr: number;
+  status: string;
+  priority: string;
+  origin: string;
+  destination: string;
+  shipDate: string;
+  transitDays: number;
+  zone: string;
+  remarks: string;
+}
+
+const zirconiumPowderRecords: ZirconiumPowderRecord[] = [
+  { id: 'ZRP-0001', batchNo: 'ZRP-B2401', city: 'Mumbai', manufacturer: 'Nuclear Fuel Complex', powderGrade: 'Zr-Sn 1.5% Zircaloy-4', application: 'Nuclear Cladding (NPCIL)', zirconiumPercent: 98.0, particleSizeUm: 50, investmentCr: 680, status: 'Delivered', priority: 'Critical', origin: 'NFC Hyderabad (TG)', destination: 'NPCIL Tarapur (MH)', shipDate: '2026-07-15', transitDays: 2, zone: 'West', remarks: 'Zircaloy-4 tube for NPCIL Tarapur PHWR 540MW fuel cladding &#8594; 98% Zr with 1.5% Sn &#8594; &#8377;680Cr for 15 tonnes &#8594; India &#8377;20,400Cr nuclear Zr &#8594; NPCIL 22 reactors &#8594; 50um &#8594; 360&#176;C &#8594; Pilger+extruded' },
+  { id: 'ZRP-0002', batchNo: 'ZRP-B2402', city: 'Bengaluru', manufacturer: 'DRDO DMRL', powderGrade: 'Zr-2.5Nb Pressure Tube', application: 'Reactor Pressure Tube (IGCAR)', zirconiumPercent: 97.5, particleSizeUm: 40, investmentCr: 520, status: 'Delivered', priority: 'Critical', origin: 'DRDO DMRL Hyderabad (TG)', destination: 'IGCAR Kalpakkam (TN)', shipDate: '2026-07-16', transitDays: 2, zone: 'South', remarks: 'Zr-2.5%Nb alloy pressure tube for IGCAR PFBR coolant channel &#8594; 97.5% Zr with 2.5% Nb &#8594; &#8377;520Cr for 8 tonnes &#8594; India &#8377;15,600Cr nuclear Zr &#8594; IGCAR 500 MW &#8594; 40um &#8594; 550&#176;C &#8594; Pilger+quench' },
+  { id: 'ZRP-0003', batchNo: 'ZRP-B2403', city: 'Chennai', manufacturer: 'IGCAR', powderGrade: 'ZrO2 99.9% YSZ Ceramic', application: 'Thermal Barrier (HAL)', zirconiumPercent: 67.2, particleSizeUm: 0.05, investmentCr: 390, status: 'Delivered', priority: 'Critical', origin: 'IGCAR Kalpakkam (TN)', destination: 'HAL Bengaluru (KA)', shipDate: '2026-07-17', transitDays: 1, zone: 'South', remarks: 'Yttria-stabilized ZrO2 for HAL Tejas Mk2 Kaveri engine TBC &#8594; 67.2% Zr as 8YSZ &#8594; &#8377;390Cr for 3 tonnes &#8594; India &#8377;11,700Cr aero Zr &#8594; HAL 123 Tejas &#8594; 50nm APS &#8594; 1200&#176;C &#8594; EB-PVD' },
+  { id: 'ZRP-0004', batchNo: 'ZRP-B2404', city: 'Hyderabad', manufacturer: 'MIDHANI', powderGrade: 'Zr-4Sb Zircaloy-4 Sponge', application: 'BWR Fuel Cladding (NPCIL)', zirconiumPercent: 98.5, particleSizeUm: 100, investmentCr: 450, status: 'Delivered', priority: 'Critical', origin: 'NFC Hyderabad (TG)', destination: 'NPCIL Kudankulam (TN)', shipDate: '2026-07-18', transitDays: 1, zone: 'South', remarks: 'Zircaloy-4 from Kroll sponge for NPCIL Kudankulam VVER-1000 spacer grid &#8594; 98.5% Zr &#8594; &#8377;450Cr for 10 tonnes &#8594; India &#8377;13,500Cr nuclear Zr &#8594; NPCIL 6 VVER &#8594; 100um &#8594; 350&#176;C &#8594; sheet+strip' },
+  { id: 'ZRP-0005', batchNo: 'ZRP-B2405', city: 'Kolkata', manufacturer: 'SAIL', powderGrade: 'ZrSiO4 99% Zircon Sand', application: 'Foundry Refractory (SAIL)', zirconiumPercent: 49.8, particleSizeUm: 200, investmentCr: 95, status: 'Delivered', priority: 'Medium', origin: 'SAIL Durgapur (WB)', destination: 'SAIL Bhilai (CG)', shipDate: '2026-07-19', transitDays: 2, zone: 'East', remarks: 'Zircon flour for SAIL steel foundry facing sand &#8594; 49.8% Zr as ZrSiO4 &#8594; &#8377;95Cr for 200 tonnes &#8594; India &#8377;2,850Cr foundry Zr &#8594; SAIL 5 foundries &#8594; 200um &#8594; 1700&#176;C &#8594; milled' },
+  { id: 'ZRP-0006', batchNo: 'ZRP-B2406', city: 'Pune', manufacturer: 'Bharat Forge', powderGrade: 'ZrO2-CeO2 95/5 Polish', application: 'Optical Lens (BEL)', zirconiumPercent: 64.4, particleSizeUm: 0.3, investmentCr: 280, status: 'Delivered', priority: 'High', origin: 'Bharat Forge Pune (MH)', destination: 'BEL Ghaziabad (UP)', shipDate: '2026-07-20', transitDays: 2, zone: 'West', remarks: 'Ce-stabilized ZrO2 optical polish for BEL defence thermal imaging lens &#8594; 64.4% Zr as CeO2-ZrO2 &#8594; &#8377;280Cr for 2 tonnes &#8594; India &#8377;8,400Cr defence Zr &#8594; BEL 5K lenses &#8594; 300nm &#8594; 20nm Ra &#8594; hot pressed' },
+  { id: 'ZRP-0007', batchNo: 'ZRP-B2407', city: 'Ahmedabad', manufacturer: 'Gujarat Zirconium', powderGrade: 'ZrO2 99.5% Calcined', application: 'Ceramic Tile (Kajaria)', zirconiumPercent: 67.2, particleSizeUm: 1, investmentCr: 120, status: 'Delivered', priority: 'Medium', origin: 'Gujarat Zirconium Morbi (GJ)', destination: 'Kajaria Gail (RJ)', shipDate: '2026-07-21', transitDays: 1, zone: 'West', remarks: 'Calcined zirconia opacifier for Kajaria premium vitrified ceramic tile glaze &#8594; 67.2% Zr as ZrO2 &#8594; &#8377;120Cr for 30 tonnes &#8594; India &#8377;3,600Cr ceramic Zr &#8594; Kajaria 100 M sqm &#8594; 1um &#8594; 1200&#176;C &#8594; micronized' },
+  { id: 'ZRP-0008', batchNo: 'ZRP-B2408', city: 'Jaipur', manufacturer: 'Rajasthan Zirconium', powderGrade: 'ZrO2 99.8% Dental Ceramic', application: 'Dental Implant (Dentsply India)', zirconiumPercent: 67.2, particleSizeUm: 0.5, investmentCr: 340, status: 'Delivered', priority: 'High', origin: 'Rajasthan Zirconium Jaipur (RJ)', destination: 'Dentsply Mumbai (MH)', shipDate: '2026-07-22', transitDays: 2, zone: 'North', remarks: 'Y-TZP dental zirconia for Dentsply India crown and bridge restoration &#8594; 67.2% Zr as 3Y-TZP &#8594; &#8377;340Cr for 4 tonnes &#8594; India &#8377;10,200Cr dental Zr &#8594; Dentsply 2M crowns &#8594; 500nm &#8594; 1200 MPa &#8594; sintered' },
+  { id: 'ZRP-0009', batchNo: 'ZRP-B2409', city: 'Coimbatore', manufacturer: 'Tamil Nadu Zirconium', powderGrade: 'Zr-Nb 1% Fuel Spacer', application: 'PHWR Spacer Grid (NPCIL)', zirconiumPercent: 99.0, particleSizeUm: 60, investmentCr: 380, status: 'Delivered', priority: 'Critical', origin: 'NFC Hyderabad (TG)', destination: 'NPCIL Rawatbhata (RJ)', shipDate: '2026-07-23', transitDays: 2, zone: 'South', remarks: 'Zr-1Nb alloy strip for NPCIL Rajasthan PHWR fuel assembly spacer grid &#8594; 99% Zr with 1% Nb &#8594; &#8377;380Cr for 6 tonnes &#8594; India &#8377;11,400Cr nuclear Zr &#8594; NPCIL 14 PHWR &#8594; 60um &#8594; 300&#176;C &#8594; rolled sheet' },
+  { id: 'ZRP-0010', batchNo: 'ZRP-B2410', city: 'Bhubaneswar', manufacturer: 'IREL', powderGrade: 'ZrO2 Beach Sand Ilmenite', application: 'Pigment Co-Product (Trivitro)', zirconiumPercent: 65.3, particleSizeUm: 300, investmentCr: 85, status: 'Delivered', priority: 'Low', origin: 'IREL Chavara (KL)', destination: 'Trivitro Kerala (KL)', shipDate: '2026-07-24', transitDays: 1, zone: 'East', remarks: 'Zircon concentrate from beach sand for Trivitro ZrO2 pigment and opacifier &#8594; 65.3% Zr as ZrSiO4 &#8594; &#8377;85Cr for 100 tonnes &#8594; India &#8377;2,550Cr mineral Zr &#8594; Trivitro 20 KTPA &#8594; 300um &#8594; heavy mineral &#8594; spiral separation' },
+  { id: 'ZRP-0011', batchNo: 'ZRP-B2411', city: 'Guwahati', manufacturer: 'Assam Zirconium', powderGrade: 'ZrO2-TiO2 70/30 Thermal', application: 'Kiln Refractory (Dalmia)', zirconiumPercent: 47.0, particleSizeUm: 150, investmentCr: 110, status: 'Delivered', priority: 'Medium', origin: 'Assam Zirconium Guwahati (AS)', destination: 'Dalmia Rajgangpur (OD)', shipDate: '2026-07-25', transitDays: 4, zone: 'East', remarks: 'Zirconia-titania refractory for Dalmia cement kiln burner zone &#8594; 47% Zr as ZrO2-TiO2 &#8594; &#8377;110Cr for 40 tonnes &#8594; India &#8377;3,300Cr refractory Zr &#8594; Dalmia 40 MTPA &#8594; 150um &#8594; 1700&#176;C &#8594; castable' },
+  { id: 'ZRP-0012', batchNo: 'ZRP-B2412', city: 'Surat', manufacturer: 'Gujarat Zirconium Tech', powderGrade: 'Zr-1Sn ZIRLO Advanced', application: 'BWR Fuel Optimised (NPCIL)', zirconiumPercent: 98.5, particleSizeUm: 35, investmentCr: 560, status: 'Delayed', priority: 'Critical', origin: 'Gujarat Zirconium Tech Surat (GJ)', destination: 'NPCIL Tarapur (MH)', shipDate: '2026-07-01', transitDays: 25, zone: 'West', remarks: 'ZIRLO advanced alloy for NPCIL Tarapur BWR extended burnup fuel cladding &#8594; 98.5% Zr with 1% Sn &#8594; &#8377;560Cr for 12 tonnes &#8594; monsoon delay &#8594; India &#8377;16,800Cr nuclear Zr &#8594; NPCIL 2 BWR &#8594; 35um &#8594; 415&#176;C &#8594; low-corrosion' },
+  { id: 'ZRP-0013', batchNo: 'ZRP-B2413', city: 'Noida', manufacturer: 'UP Zirconium', powderGrade: 'ZrO2 99.9% Oxygen Sensor', application: 'Lambda Sensor (Bosch India)', zirconiumPercent: 67.2, particleSizeUm: 5, investmentCr: 210, status: 'Delivered', priority: 'High', origin: 'UP Zirconium Noida (UP)', destination: 'Bosch Bengaluru (KA)', shipDate: '2026-07-26', transitDays: 2, zone: 'North', remarks: 'Yttria-stabilized ZrO2 for Bosch India automotive lambda oxygen sensor electrolyte &#8594; 67.2% Zr as 8YSZ &#8594; &#8377;210Cr for 3 tonnes &#8594; India &#8377;6,300Cr auto Zr &#8594; Bosch 5M sensors &#8594; 5um &#8594; 600&#176;C &#8594; tape cast' },
+  { id: 'ZRP-0014', batchNo: 'ZRP-B2414', city: 'Bhopal', manufacturer: 'BHEL', powderGrade: 'ZrO2-SiO2 AZS Refractory', application: 'Glass Furnace (Asahi Glass)', zirconiumPercent: 33.0, particleSizeUm: 500, investmentCr: 155, status: 'Delivered', priority: 'High', origin: 'BHEL Bhopal (MP)', destination: 'Asahi Glass Mumbai (MH)', shipDate: '2026-07-27', transitDays: 2, zone: 'North', remarks: 'AZS fused cast refractory for Asahi India float glass furnace superstructure &#8594; 33% Zr as Al2O3-ZrO2-SiO2 &#8594; &#8377;155Cr for 50 tonnes &#8594; India &#8377;4,650Cr glass Zr &#8594; Asahi 3 furnaces &#8594; 500um &#8594; 1700&#176;C &#8594; fused cast' }
+];
+
+const tabs = ['Dashboard', 'Registry', 'Analytics', 'Insights'] as const;
+type Tab = typeof tabs[number];
+const priorityColors: Record<string, string> = { Critical: 'bg-red-100 text-red-800', High: 'bg-amber-100 text-amber-800', Medium: 'bg-green-100 text-green-800', Low: 'bg-slate-100 text-slate-600' };
+const delayedSet = new Set(zirconiumPowderRecords.filter(r => r.status === 'Delayed').map(r => r.id));
+
+export default function ZirconiumPowderLogisticsView() {
+  const [activeTab, setActiveTab] = useState<Tab>('Dashboard');
+  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const toggleFilter = (k: string, v: string) => { setFilters(p => { const s = { ...p }; const a = s[k] || []; const i = a.indexOf(v); if (i > -1) { a.splice(i, 1); if (!a.length) delete s[k]; } else s[k] = [...a, v]; return s; }); };
+  const filtered = useMemo(() => {
+    let d = zirconiumPowderRecords;
+    if (search) { const q = search.toLowerCase(); d = d.filter(r => r.id.toLowerCase().includes(q) || r.batchNo.toLowerCase().includes(q) || r.powderGrade.toLowerCase().includes(q) || r.application.toLowerCase().includes(q) || r.city.toLowerCase().includes(q) || r.manufacturer.toLowerCase().includes(q)); }
+    Object.entries(filters).forEach(([k, vs]) => { if (vs.length) d = d.filter(r => { const v = String((r as unknown as Record<string, unknown>)[k] ?? ''); return vs.some(x => v.toLowerCase().includes(x.toLowerCase())); }); });
+    return d;
+  }, [search, filters]);
+  const totalCr = filtered.reduce((s: number, r) => s + r.investmentCr, 0);
+  const avgZr = filtered.length ? filtered.reduce((s: number, r) => s + r.zirconiumPercent, 0) / filtered.length : 0;
+  const delayedCount = filtered.filter(r => r.status === 'Delayed').length;
+
+  return (
+    <div className="space-y-6">
+      <PageHeader title="Zirconium Powder Logistics" description="Indian zirconium powder supply chain from nuclear-grade cladding and pressure tubes to ceramics, refractories, dental implants and thermal barrier coatings" />
+      <div className="flex gap-2 border-b">
+        {tabs.map(t => (<button key={t} onClick={() => setActiveTab(t)} className={`px-4 py-2 text-sm font-medium ${activeTab === t ? 'border-b-2 border-amber-500 text-amber-700' : 'text-muted-foreground hover:text-foreground'}`}>{t}</button>))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">{filtered.length}</div><div className="text-xs text-muted-foreground">Total Shipments</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">&#8377;{totalCr.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground">Total Investment</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">{avgZr.toFixed(1)}%</div><div className="text-xs text-muted-foreground">Avg Zr Content</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-red-500">{delayedCount}</div><div className="text-xs text-muted-foreground">Delayed Shipments</div></CardContent></Card>
+      </div>
+      {(activeTab === 'Dashboard' || activeTab === 'Registry') && (
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <input placeholder="Search ID, grade, application, city..." value={search} onChange={e => setSearch(e.target.value)} className="border rounded-md px-3 py-1.5 text-sm flex-1 min-w-48" />
+            {['status', 'priority', 'zone'].map(f => { const opts = [...new Set(zirconiumPowderRecords.map(r => (r as unknown as Record<string, unknown>)[f] as string))]; return (<div key={f} className="flex flex-wrap gap-1">{opts.map(o => (<Badge key={o} variant={(filters[f] || []).includes(o) ? 'default' : 'outline'} className="cursor-pointer text-xs" onClick={() => toggleFilter(f, o)}>{o}</Badge>))}</div>); })}
+          </div>
+          <div className="rounded-md border"><div className="max-h-96 overflow-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-background"><tr><th className="p-2 text-left">ID</th><th className="p-2 text-left">Batch</th><th className="p-2 text-left">Grade</th><th className="p-2 text-left">Application</th><th className="p-2 text-right">Zr%</th><th className="p-2 text-right">&#8377;Cr</th><th className="p-2 text-left">Status</th></tr></thead><tbody>{filtered.map(r => (<tr key={r.id} className={`border-t ${delayedSet.has(r.id) ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}><td className="p-2">{r.id}</td><td className="p-2">{r.batchNo}</td><td className="p-2">{r.powderGrade}</td><td className="p-2">{r.application}</td><td className="p-2 text-right">{r.zirconiumPercent}</td><td className="p-2 text-right">{r.investmentCr}</td><td className="p-2"><Badge variant={r.status === 'Delivered' ? 'default' : 'destructive'}>{r.status}</Badge></td></tr>))}</tbody></table></div></div>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Analytics') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card><CardHeader><CardTitle className="text-sm">Investment by Application</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.application] = (m[r.application] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([a, v]) => (<div key={a} className="flex justify-between text-sm"><span>{a}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Shipments by Zone</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).map(([z, c]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Routes by Value</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.sort((a, b) => b.investmentCr - a.investmentCr).slice(0, 7).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.origin.split('(')[0]} &#8594; {r.destination.split('(')[0]}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Nuclear Grade Zr</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.filter(r => r.application.toLowerCase().includes('nuclear') || r.application.toLowerCase().includes('cladding') || r.application.toLowerCase().includes('reactor') || r.application.toLowerCase().includes('phwr') || r.application.toLowerCase().includes('bwr') || r.application.toLowerCase().includes('spacer')).sort((a, b) => b.investmentCr - a.investmentCr).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.powderGrade} ({r.particleSizeUm}um)</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">By Priority</CardTitle></CardHeader><CardContent><div className="space-y-2">{Object.entries(filtered.reduce((m, r) => { m[r.priority] = (m[r.priority] || 0) + 1; return m }, {} as Record<string, number>)).map(([p, c]) => (<div key={p} className="flex justify-between text-sm"><span className={priorityColors[p] || ''}>{p}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Zr Content Distribution</CardTitle></CardHeader><CardContent><div className="space-y-2">{[{ l: 'Nuclear Grade (97%+)', f: filtered.filter(r => r.zirconiumPercent >= 97).length }, { l: 'High Purity (65-97%)', f: filtered.filter(r => r.zirconiumPercent >= 65 && r.zirconiumPercent < 97).length }, { l: 'Industrial (33-65%)', f: filtered.filter(r => r.zirconiumPercent >= 33 && r.zirconiumPercent < 65).length }, { l: 'Compound (<33%)', f: filtered.filter(r => r.zirconiumPercent < 33).length }].map(b => (<div key={b.l} className="flex justify-between text-sm"><span>{b.l}</span><span className="font-medium">{b.f}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Manufacturers</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.manufacturer] = (m[r.manufacturer] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([m, v]) => (<div key={m} className="flex justify-between text-sm"><span>{m}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Avg Transit Days</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.length ? (Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || [] as number[]).concat(r.transitDays); return m }, {} as Record<string, number[]>)) as [string, number[]][]).map(([z, d]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{(d.reduce((s, n) => s + n, 0) / d.length).toFixed(1)}d</span></div>)) : []}</div></CardContent></Card>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Insights') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">NPCIL Nuclear Cladding Programme</div><div className="text-xs text-muted-foreground">India operating 22 nuclear reactors consuming 100 TPA nuclear-grade Zr alloy. NPCIL expanding with 10 PHWR-700 and 2 VVER-1200 under construction. NFC Hyderabad sole domestic producer of Zircaloy-4 and Zr-2.5Nb. India importing 40% nuclear Zr sponge from Russia &#8594; domestic Kroll process scaling to 600 TPA.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">YSZ Thermal Barrier Coatings</div><div className="text-xs text-muted-foreground">IGCAR and HAL developing indigenous 8YSZ EB-PVD thermal barrier coatings for Tejas Mk2 Kaveri engine. Currently importing 90% TBC powder from USA. YSZ demand scaling to 10 TPA with HAL targeting 200 engines and DRDO hypersonic programme. Local nano-YSZ plant at Hyderabad commissioning 2028.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">Dental Zirconia Revolution</div><div className="text-xs text-muted-foreground">India dental implant market consuming 8 TPA 3Y-TZP zirconia powder for crown and bridge. Dentsply, Nobel Biocare and Indian manufacturers scaling CAD/CAM Zr crowns. Rajasthan Zirconium and Tamil Nadu Zirconium primary suppliers. India targeting 5M Zr crowns/year by 2030 &#8594; 20 TPA demand.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">Beach Sand Zircon Concentration</div><div className="text-xs text-muted-foreground">IREL and Kerala Minerals extracting zircon from beach sand along Tamil Nadu and Kerala coast. 40% of India Zr supply from beach sand heavy mineral separation. Trivitro and IREL jointly developing 50 KTPA ZrO2 plant at Chavara. Beach sand zircon cheaper than rock zircon but lower purity.</div></CardContent></Card>
+        </div>
+      )}
+    </div>
+  );
+}
+"""
+
+import os
+outpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src', 'components', 'modules', 'zirconium-powder-logistics-view.tsx')
+outpath = os.path.normpath(outpath)
+with open(outpath, 'w') as f:
+    f.write(code.strip() + '\n')
+print(f"Generated: {outpath}")
+print(f"Size: {os.path.getsize(outpath)} bytes")
