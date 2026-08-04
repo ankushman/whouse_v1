@@ -1,4 +1,53 @@
 ---
+Task ID: R415 — Selenium Compound Logistics + Tungsten Carbide Logistics + Dedup Fix
+Agent: Main Agent (Cron Loop)
+Task: R415 — 2 new Indian logistics modules for selenium compound supply chain and tungsten carbide cemented carbide supply chain. Plus dedup audit and port-container-terminal fix.
+
+Work Log:
+- Read worklog: R414 complete (commit e7b64f5, f2797da), 663 exports, 670 navItems, ~62,159 CSS
+- TSC pre-validation: 0 errors in src/
+- Dedup audit performed:
+  - index.ts: 0 duplicate exports (clean after R414 fix)
+  - page.tsx viewMap: 0 duplicate keys (clean)
+  - app-store.ts: port-container-terminal DUPLICATE FOUND (lines 237 + 472) → removed line 237
+- Duplicate theme search: selenium-compound CLEAN (0 files), tungsten-carbide CLEAN (0 files)
+  - Skipped indium-phosphide (1 file already exists), molybdenum-sheet (1 file), hafnium-alloy (1 file)
+- Icons verified: Sun and Target both confirmed in iconMap
+- Created Selenium Compound Logistics (R415a): ~110 lines, sec-* emerald #059669, 14 records
+  - 14 grades: Se 5N CIGS, ZnSe IR, CdSe QD, Na2SeO3 Feed, Se Nuclear, SeS2 Vulcanizing, PbSe IR, Se Glass, CuInSe2 CIS, SeO2 Oxidizer, Ag2Se TE, Se DR X-Ray, MnSe Phosphor, Se OPC Drum
+  - 14 manufacturers: Sun Pharma, DRDO DMRL, CSIR-NPL, Bharat Forge, IGCAR, Gujarat Se Tech, Rajasthan Se Corp, NALCO, Tamil Nadu Se Corp, Gujarat Se Products, Assam Se Metals, UP Se Industries, SAIL, BHEL
+  - Applications: Tata Power CIGS, BEL FLIR, Dixon QLED, Venkateshwara feed, BHAVINI detector, CEAT tyre, BEL thermal, Asahi glass, Adani CIS, Lupin API, L&T TEG, HLL DR, Dixon LED, Canon OPC
+  - Rs 6,590 Cr total, avg 99.93% purity
+  - Delayed: SEC-B2412 (28d, monsoon UP, HLL a-Se X-ray flat panel)
+- Created Tungsten Carbide Logistics (R415b): ~110 lines, tgc-* amber #d97706, 14 records
+  - 14 grades: WC-8Co 92/8, WC-6Co 94/6, WC-10Co 90/10, WC-6Ni 94/6, WC-3TaC-6Co, WC-10Ni 90/10, WC-6Co Fine, WC Powder 99.9%, WC-12Co 88/12, WC-5TaC-10Co, WC-20Ag 80/20, WC-6Co Wear Plate, WC-8Co Milling, WC-15Co 85/15
+  - 14 manufacturers: Sandvik, Bharat Forge, Kennametal India, DRDO DMRL, IGCAR, Gujarat WC Tech, Rajasthan WC Corp, NALCO, Tamil Nadu WC Corp, Gujarat Tungsten Products, Assam WC Metals, UP WC Industries, SAIL, BHEL
+  - Applications: Tata Steel turning, OIL India drilling, Coal India mining, DRDO APFSDS, BHAVINI bearing, Reliance valve, Wipro end mill, Hindustan Tungsten press, Usha Martin wire, Godrej mould, BHEL contact, NPCIL slurry liner, HAL face mill, NMDC crusher
+  - Rs 6,620 Cr total, avg 91.4% WC
+  - Delayed: TGC-B2412 (28d, monsoon UP, NPCIL BWR slurry pump liner)
+- Both modules generated via Python raw string scripts (gen_r415a.py, gen_r415b.py)
+- Port dedup: removed port-container-terminal duplicate from app-store.ts (line 237, kept line 472 with Logistics label)
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (665), page.tsx (1187 viewMap entries), app-store.ts (673 navItems)
+- CSS appended: 4 new rules (~62,169 total)
+- Git commit: 6dbcfa6, pushed to main
+
+Stage Summary:
+- Project now: 665 module exports, 673 navItems, ~62,169 CSS lines, 1187 viewMap entries, 0 TSC errors in src/
+- Selenium Compound: CdSe QD Rs 740Cr, CIGS solar Rs 680Cr, Se nuclear Rs 580Cr, CIS solar Rs 620Cr
+- Tungsten Carbide: DRDO APFSDS Rs 890Cr, OIL drilling Rs 680Cr, Sandvik insert Rs 520Cr, NPCIL liner Rs 520Cr
+- Delayed: SEC-B2412 (28d), TGC-B2412 (28d) — both monsoon UP corridor
+- Dedup: port-container-terminal fixed in app-store.ts
+
+**Project Current State:**
+- 665 module exports, 673 navItems, ~62,169 CSS lines, 1187 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Pre-existing modules found: indium-phosphide, molybdenum-sheet, hafnium-alloy — always check before creating
+- Next clean candidates: zirconium-oxide, silicon-nitride, silicon-carbide, boron-nitride, graphite-electrode
+
+---
 Task ID: R414 — Tantalum Powder Logistics (NEW) + Gallium Arsenide (REFRESH) + Dedup Fixes
 Agent: Main Agent (Cron Loop)
 Task: R414 — 1 new Indian logistics module for tantalum powder supply chain, plus gallium arsenide content refresh and deduplication fixes.
