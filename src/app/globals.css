@@ -63150,3 +63150,27 @@ html.theme-transition body {
 .mns-shimmer { background: linear-gradient(90deg, #15803d08 25%, #15803d22 50%, #15803d08 75%); background-size: 200% 100%; animation: mns-shimmer-anim 2s infinite; }
 @keyframes mns-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .mns-hover:hover { box-shadow: 0 4px 20px #15803d33; transform: translateY(-1px); }
+
+/* R459 — Cobalt Carbonate Logistics (cbc) — cobalt-blue #1d4ed8 */
+.cbc-pulse { animation: cbc-pulse-anim 2s ease-in-out infinite; }
+@keyframes cbc-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.cbc-glow { box-shadow: 0 0 16px #1d4ed844; }
+.cbc-gradient { background: linear-gradient(135deg, #1d4ed822, #1d4ed808); }
+.cbc-border { border-left: 3px solid #1d4ed8; }
+.cbc-text { color: #1d4ed8; }
+.cbc-badge { background: #1d4ed818; color: #1d4ed8; }
+.cbc-shimmer { background: linear-gradient(90deg, #1d4ed808 25%, #1d4ed822 50%, #1d4ed808 75%); background-size: 200% 100%; animation: cbc-shimmer-anim 2s infinite; }
+@keyframes cbc-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.cbc-hover:hover { box-shadow: 0 4px 20px #1d4ed833; transform: translateY(-1px); }
+
+/* R459 — Zinc Sulfate Logistics (zns) — cyan #0e7490 */
+.zns-pulse { animation: zns-pulse-anim 2s ease-in-out infinite; }
+@keyframes zns-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.zns-glow { box-shadow: 0 0 16px #0e749044; }
+.zns-gradient { background: linear-gradient(135deg, #0e749022, #0e749008); }
+.zns-border { border-left: 3px solid #0e7490; }
+.zns-text { color: #0e7490; }
+.zns-badge { background: #0e749018; color: #0e7490; }
+.zns-shimmer { background: linear-gradient(90deg, #0e749008 25%, #0e749022 50%, #0e749008 75%); background-size: 200% 100%; animation: zns-shimmer-anim 2s infinite; }
+@keyframes zns-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.zns-hover:hover { box-shadow: 0 4px 20px #0e749033; transform: translateY(-1px); }

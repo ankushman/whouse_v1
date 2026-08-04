@@ -747,3 +747,5 @@ export { default as CadmiumMetalLogisticsView } from './cadmium-metal-logistics-
 export { default as MagnesiumMetalLogisticsView } from './magnesium-metal-logistics-view'
 export { default as VanadiumMetalLogisticsView } from './vanadium-metal-logistics-view'
 export { default as ManganeseSulfateLogisticsView } from './manganese-sulfate-logistics-view'
+export { default as CobaltCarbonateLogisticsView } from './cobalt-carbonate-logistics-view'
+export { default as ZincSulfateLogisticsView } from './zinc-sulfate-logistics-view'
