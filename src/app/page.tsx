@@ -491,6 +491,7 @@ import FloatingSolarFarmLogisticsView from "@/components/modules/floating-solar-
 import TidalEnergyLogisticsView from "@/components/modules/tidal-energy-logistics-view"
 import HydrogenFuelStationLogisticsView from "@/components/modules/hydrogen-fuel-station-logistics-view"
 import CarbonNanotubeProductionLogisticsView from "@/components/modules/carbon-nanotube-production-logistics-view"
+import GermaniumMetalLogisticsView from "@/components/modules/germanium-metal-logistics-view"
 import GrapheneProductionLogisticsView from "@/components/modules/graphene-production-logistics-view"
 import GeothermalEnergyLogisticsView from "@/components/modules/geothermal-energy-logistics-view"
 import AutonomousVehicleLogisticsView from "@/components/modules/autonomous-vehicle-logistics-view"
@@ -1001,6 +1002,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "floating-solar-farm": FloatingSolarFarmLogisticsView,
   "hydrogen-fuel-station": HydrogenFuelStationLogisticsView,
   "carbon-nanotube-production": CarbonNanotubeProductionLogisticsView,
+  "germanium-metal-logistics": GermaniumMetalLogisticsView,
   "graphene-production": GrapheneProductionLogisticsView,
   "geothermal-energy": GeothermalEnergyLogisticsView,
   "autonomous-vehicle": AutonomousVehicleLogisticsView,
@@ -1105,6 +1107,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "beryllium-copper-logistics": BerylliumCopperLogisticsView,
   "diamond-synthetic-logistics": DiamondSyntheticLogisticsView,
   "rare-earth-magnet-logistics": RareEarthMagnetLogisticsView,
+  "rare-earth-oxide-logistics": RareEarthOxideLogisticsView,
   "molybdenum-alloy-logistics": MolybdenumAlloyLogisticsView,
   "indium-alloy-logistics": IndiumAlloyLogisticsView,
   "indium-phosphide-logistics": IndiumPhosphideLogisticsView,
@@ -1361,6 +1364,7 @@ import SiliconPhotonicsLogisticsView from "@/components/modules/silicon-photonic
 import BerylliumCopperLogisticsView from "@/components/modules/beryllium-copper-logistics-view"
 import DiamondSyntheticLogisticsView from "@/components/modules/diamond-synthetic-logistics-view"
 import RareEarthMagnetLogisticsView from "@/components/modules/rare-earth-magnet-logistics-view"
+import RareEarthOxideLogisticsView from "@/components/modules/rare-earth-oxide-logistics-view"
 import MolybdenumAlloyLogisticsView from "@/components/modules/molybdenum-alloy-logistics-view"
 import IndiumAlloyLogisticsView from "@/components/modules/indium-alloy-logistics-view"
 import IndiumPhosphideLogisticsView from "@/components/modules/indium-phosphide-logistics-view"

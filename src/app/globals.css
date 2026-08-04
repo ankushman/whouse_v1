@@ -62079,3 +62079,29 @@ html.theme-transition body {
 .ptp-badge-critical { background: #fef2f2; color: #991b1b; }
 .ptp-badge-high { background: #fffbeb; color: #92400e; }
 .ptp-badge-medium { background: #f0fdf4; color: #166534; }
+/* ═══════════════════════════════════════════════════════════════ R408a: Germanium Metal Logistics (gem-*) ═══════════════════════════════════════════════════════════════ */
+.gem-module { --gem-primary: #0284c7; --gem-light: #e0f2fe; --gem-dark: #0c4a6e; }
+.gem-kpi-card { background: linear-gradient(135deg, var(--gem-light) 0%, white 100%); border-left: 3px solid var(--gem-primary); }
+.gem-kpi-card .text-2xl { color: var(--gem-dark); }
+.gem-tab-active { border-bottom-color: var(--gem-primary) !important; color: var(--gem-dark) !important; }
+.gem-table-header { background: var(--gem-primary); color: white; }
+.gem-table-row:hover { background: var(--gem-light); }
+.gem-delayed-row { border-left: 4px solid #ef4444 !important; background: rgba(239,68,68,0.08) !important; }
+.gem-insight-title { color: var(--gem-primary); font-weight: 600; font-size: 0.875rem; }
+.gem-chart-card { border-top: 3px solid var(--gem-primary); }
+.gem-badge-critical { background: #fef2f2; color: #991b1b; }
+.gem-badge-high { background: #fffbeb; color: #92400e; }
+.gem-badge-medium { background: #f0fdf4; color: #166534; }
+/* ═══════════════════════════════════════════════════════════════ R408b: Rare Earth Oxide Logistics (reo-*) ═══════════════════════════════════════════════════════════════ */
+.reo-module { --reo-primary: #65a30d; --reo-light: #ecfccb; --reo-dark: #3f6212; }
+.reo-kpi-card { background: linear-gradient(135deg, var(--reo-light) 0%, white 100%); border-left: 3px solid var(--reo-primary); }
+.reo-kpi-card .text-2xl { color: var(--reo-dark); }
+.reo-tab-active { border-bottom-color: var(--reo-primary) !important; color: var(--reo-dark) !important; }
+.reo-table-header { background: var(--reo-primary); color: white; }
+.reo-table-row:hover { background: var(--reo-light); }
+.reo-delayed-row { border-left: 4px solid #ef4444 !important; background: rgba(239,68,68,0.08) !important; }
+.reo-insight-title { color: var(--reo-primary); font-weight: 600; font-size: 0.875rem; }
+.reo-chart-card { border-top: 3px solid var(--reo-primary); }
+.reo-badge-critical { background: #fef2f2; color: #991b1b; }
+.reo-badge-high { background: #fffbeb; color: #92400e; }
+.reo-badge-medium { background: #f0fdf4; color: #166534; }
