@@ -735,3 +735,5 @@ export { default as TungstenMetalLogisticsView } from './tungsten-metal-logistic
 export { default as PhosphorusRedLogisticsView } from './phosphorus-red-logistics-view'
 export { default as SulfuricAcidLogisticsView } from './sulfuric-acid-logistics-view'
 export { default as NickelSulfateLogisticsView } from './nickel-sulfate-logistics-view'
+export { default as CopperCathodeLogisticsView } from './copper-cathode-logistics-view'
+export { default as TinMetalLogisticsView } from './tin-metal-logistics-view'
