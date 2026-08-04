@@ -1,42 +1,42 @@
 ---
-Task ID: R460 — Copper Sulfate Logistics + Manganese Metal Logistics
+Task ID: R461 — Chromium Sulfate Logistics + Nickel Carbonate Logistics
 Agent: Main Agent (Cron Loop)
-Task: R460 — 2 new Indian logistics modules for copper sulfate (CuSO4) fungicide/electroplating/mining flotation/submarine anti-fouling paint supply chain and manganese metal (Mn) FeMn/SiMn steel/Hadfield armour/Al-Mn aerospace/submarine HSLA-80 hull supply chain.
+Task: R461 — 2 new Indian logistics modules for chromium sulfate (Cr2(SO4)3) leather tanning/chromic anodize/refractory/submarine non-magnetic hull supply chain and nickel carbonate (NiCO3) stainless steel/superalloy/NCA cathode/submarine Monel propeller shaft supply chain.
 
 Work Log:
-- Read worklog: R459 complete (commit 9f756cd), 744 exports, ~63,176 CSS
+- Read worklog: R460 complete (commit 38b981d), 746 exports, ~63,200 CSS
 - TSC pre-validation: 0 errors in src/
-- Candidate scan: copper-sulfate (CLEAN), manganese-metal (CLEAN), chromium-sulfate (CLEAN), nickel-carbonate (CLEAN), selenium-dioxide (CLEAN), ammonium-vanadate (CLEAN)
-- Icons verified: BadgeCheck (0 uses, confirmed), Bean (0 uses, confirmed)
-- Created Copper Sulfate Logistics (R460a): 227 lines, cus-* copper-brown #b45309, 14 records
-  - 14 grades: CuSO4 99.5% Agricultural Fungicide, CuSO4 99.9% Electroplating Bath, CuSO4 99.3% Animal Feed, CuSO4 99.7% Mining Flotation, CuSO4 99.85% Water Treatment Algicide, CuSO4 99.8% Textile Mordant, CuSO4 99.6% Pigment Manufacturing, CuSO4 99.0% Battery Electrolyte, CuSO4 99.4% Soil Amendment, CuSO4 99.95% Analytical Crystal, CuSO4 99.2% Leather Tanning, CuSO4 99.9% Submarine Anti-Fouling, CuSO4 99.8% Warship Sonar Electrode, CuSO4 98.0% General Industrial
+- Candidate scan: chromium-sulfate (CLEAN), nickel-carbonate (CLEAN), selenium-dioxide (CLEAN), ammonium-vanadate (CLEAN), silicon-nitride (EXISTS), tungsten-metal (EXISTS)
+- Icons verified: Bug (0 uses, confirmed), Cable (0 uses, confirmed)
+- Created Chromium Sulfate Logistics (R461a): 227 lines, crs-* violet #7c3aed, 14 records
+  - 14 grades: Cr2(SO4)3 99.5% Leather Tanning, 99.9% Corrosion Inhibitor, 99.3% Pigment Chrome Green, 99.7% Wood Preservative CCA, 99.85% Textile Mordant, 99.8% Refractory Bond, 99.6% Water Treatment, 99.0% Ceramic Chrome Alumina, 99.4% Catalyst Cr2O3, 99.92% Aerospace Chromic Anodize, 99.2% Magnetic Tape CrO2, 99.9% Submarine Non-Magnetic Hull, 99.8% Warship GT Blade, 98.0% General Industrial
   - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: Maharashtra grape vineyard Cu spray, BEL PCB Cu plate, Amul dairy Cu premix, Hindalco Khetri Cu float, NTPC Talcher Cu algicide, Bhilwara Cu dye mordant, Sudarshan CuPC blue pigment, Exide Pb-Cu battery, Assam tea Cu foliar, IISc analytical CuSO4, Kanpur leather Cu tan, IN Navy SSK Cu anti-fouling, DRDO naval Cu electrode, SAIL process CuSO4
-  - Rs 12,100 Cr total, avg 99.35%, density 3.6 g/cm3
-  - Delayed: CUS-A2412 (28d, monsoon Visakhapatnam, submarine Cu anti-fouling paint)
-- Created Manganese Metal Logistics (R460b): 227 lines, mnm-* slate-grey #475569, 14 records
-  - 14 grades: Mn 99.9% Ferromanganese FeMn75, Mn 99.95% Silicomanganese SiMn65, Mn 99.7% Al-Mn Can Sheet, Mn 99.5% Hadfield Steel Mn12%, Mn 99.8% HSLA Bridge Girder, Mn 99.6% SS 200 Series, Mn 99.85% Dry Cell MnO2, Mn 99.3% Welding Flux, Mn 99.4% Fertilizer Grade, Mn 99.92% Aerospace 2000-Al, Mn 99.1% Al Bronze Propeller, Mn 99.95% Submarine HSLA-80, Mn 99.8% Warship Mangalloy Armour, Mn 98.0% General Metallurgical
+  - Applications: Kanpur chrome-tan leather, HAL Tejas chromate conv, Morbi chrome green glaze, Rajasthan CCA Cr treat, Bhilwara chrome mordant, SAIL Cr-Mg refractory, Pune municipal Cr flocc, Morbi Cr-Al2O3 setter, IOC Guwahati Cr cat, HAL chromic anodize bath, SME CrO2 tape precursor, IN Navy SSK non-mag Cr steel, DRDO naval GT blade Cr, SAIL Cr process liquor
+  - Rs 12,100 Cr total, avg 99.35%, density 3.01 g/cm3
+  - Delayed: CRS-A2412 (28d, monsoon Visakhapatnam, submarine non-magnetic Cr-Ni steel)
+- Created Nickel Carbonate Logistics (R461b): 227 lines, nic-* teal-green #059669, 14 records
+  - 14 grades: NiCO3 99.9% SS Austenitic, 99.95% Superalloy Turbine, 99.5% Electroplating Bright, 99.7% EV NCA Cathode, 99.85% Ra-Ni Catalyst, 99.6% Magnetic Bond, 99.8% Coinage Cu-Ni, 99.3% Ceramic Frit, 99.4% Welding Electrode, 99.92% Ni-Ti SMA, 99.2% Ni-Cd Battery, 99.95% Submarine Monel Shaft, 99.8% Warship Inconel Blade, 98.0% General Industrial
   - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: SAIL BOF FeMn75 charge, Tata Steel SiMn65 ladle, Hindalco Al-Mn can, Indian Railways Mn12 frog, L&amp;T HSLA bridge, Jindal SS 201 Cr-Mn, Eveready MnO2 cell, Ador Welding Mn flux, IFFCO Mn foliar, HAL Tejas Al-Mn skin, Mazagon Dock Cu-Mn prop, IN Navy SSK HSLA-80 hull, DRDO naval Mn12 armour, SAIL Mn foundry
-  - Rs 12,100 Cr total, avg 99.35%, density 7.21 g/cm3
-  - Delayed: MNM-A2412 (28d, monsoon Visakhapatnam, submarine HSLA-80 pressure hull)
+  - Applications: Jindal SS 304 Ni charge, HAL Tejas GT IN718 disc, Tata Steel bright Ni plate, Exide NCA Li cathode, IOC Haldia Ra-Ni cat, BHEL NdFeB bond Ni coat, SPMCIL Cu-Ni coin strip, Rajasthan Ni frit glaze, Ador Ni-alloy electrode, DRDO Ni-Ti SMA actuator, Exide Ni-Cd pocket plate, IN Navy SSK Monel shaft, DRDO naval Inconel blade, SAIL Ni alloy charge
+  - Rs 12,100 Cr total, avg 99.35%, density 4.39 g/cm3
+  - Delayed: NIC-A2412 (28d, monsoon Visakhapatnam, submarine Monel K-500 propeller shaft)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (746 exports), page.tsx (1276 viewMap entries), app-store.ts (758 navItems)
-- CSS appended: 16 new rules (~63,200 total)
-- Git commit: 38b981d, pushed to main
+- Three-file registration: index.ts (748 exports), page.tsx (1278 viewMap entries), app-store.ts (760 navItems)
+- CSS appended: 16 new rules (~63,224 total)
+- Git commit: 0f09c47, pushed to main
 
 Stage Summary:
-- Project now: 746 module exports, 758 navItems, ~63,200 CSS lines, 1276 viewMap entries, 0 TSC errors in src/
-- Copper Sulfate: Submarine anti-fouling &#8377;960Cr, analytical &#8377;880Cr, electroplating &#8377;900Cr, mining flotation &#8377;860Cr
-- Manganese Metal: Submarine HSLA-80 &#8377;960Cr, aerospace Al-Mn &#8377;960Cr, Hadfield armour &#8377;940Cr, FeMn75 &#8377;880Cr
-- Delayed: CUS-A2412 (28d), MNM-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+- Project now: 748 module exports, 760 navItems, ~63,224 CSS lines, 1278 viewMap entries, 0 TSC errors in src/
+- Chromium Sulfate: Submarine non-mag &#8377;960Cr, aerospace anodize &#8377;960Cr, warship GT blade &#8377;960Cr, corrosion inhibitor &#8377;900Cr
+- Nickel Carbonate: Submarine Monel &#8377;960Cr, Ni-Ti SMA &#8377;960Cr, superalloy &#8377;960Cr, NCA cathode &#8377;920Cr
+- Delayed: CRS-A2412 (28d), NIC-A2412 (28d) — both monsoon Visakhapatnam naval corridor
 
 **Project Current State:**
-- 746 module exports, 758 navItems, ~63,200 CSS lines, 1276 viewMap entries, 0 TSC errors in src/
+- 748 module exports, 760 navItems, ~63,224 CSS lines, 1278 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- Mn 99.95% HSLA-80 grade — critical submarine pressure hull steel, South Africa/Australia import dependency
-- CuSO4 99.9% anti-fouling grade — IMO environmental regulation tightening, Cu-based biocides under review
-- Mn 99.92% aerospace grade — strategic for Tejas Mk2, limited Indian primary Mn production
-- Next clean candidates: chromium-sulfate, nickel-carbonate, selenium-dioxide, ammonium-vanadate, silicon-nitride, tungsten-metal
+- Cr2(SO4)3 — EU REACH restriction on Cr(VI), trivalent Cr (III) compliance required for leather/textile export
+- NiCO3 99.95% superalloy — Indonesia/Norway export dependency, strategic defense material
+- NiCO3 99.92% Ni-Ti SMA — niche shape-memory alloy, limited global suppliers
+- Next clean candidates: selenium-dioxide, ammonium-vanadate, cobalt-oxide, nickel-sulfate, lithium-carbonate, sodium-sulfate
