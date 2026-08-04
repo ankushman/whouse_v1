@@ -62494,3 +62494,27 @@ html.theme-transition body {
 .nio-shimmer { background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.08), transparent); animation: nio-shimmer 3s infinite; }
 @keyframes nio-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .nio-hover:hover { background: rgba(124, 58, 237, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R437a: Copper Oxide Logistics - Orange #ea580c */
+.cuo-pulse { animation: cuo-pulse-anim 2s ease-in-out infinite; }
+@keyframes cuo-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.cuo-glow { box-shadow: 0 0 20px rgba(234, 88, 12, 0.3); }
+.cuo-gradient { background: linear-gradient(135deg, rgba(234, 88, 12, 0.15), rgba(234, 88, 12, 0.05)); }
+.cuo-border { border-color: rgba(234, 88, 12, 0.4); }
+.cuo-text { color: #ea580c; }
+.cuo-badge { background: rgba(234, 88, 12, 0.15); color: #ea580c; border: 1px solid rgba(234, 88, 12, 0.3); }
+.cuo-shimmer { background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.08), transparent); animation: cuo-shimmer 3s infinite; }
+@keyframes cuo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.cuo-hover:hover { background: rgba(234, 88, 12, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R437b: Manganese Oxide Logistics - Teal #0d9488 */
+.mno-pulse { animation: mno-pulse-anim 2s ease-in-out infinite; }
+@keyframes mno-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.mno-glow { box-shadow: 0 0 20px rgba(13, 148, 136, 0.3); }
+.mno-gradient { background: linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(13, 148, 136, 0.05)); }
+.mno-border { border-color: rgba(13, 148, 136, 0.4); }
+.mno-text { color: #0d9488; }
+.mno-badge { background: rgba(13, 148, 136, 0.15); color: #0d9488; border: 1px solid rgba(13, 148, 136, 0.3); }
+.mno-shimmer { background: linear-gradient(90deg, transparent, rgba(13, 148, 136, 0.08), transparent); animation: mno-shimmer 3s infinite; }
+@keyframes mno-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.mno-hover:hover { background: rgba(13, 148, 136, 0.1); transform: translateY(-1px); transition: all 0.2s; }
