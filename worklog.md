@@ -1,42 +1,42 @@
 ---
-Task ID: R466 — Rhenium Metal Logistics + Indium Tin Oxide Logistics
+Task ID: R467 — Aluminum Nitride Logistics + Samarium Cobalt Logistics
 Agent: Main Agent (Cron Loop)
-Task: R466 — 2 new Indian logistics modules for rhenium metal (Re) turbine blade/superalloy nozzle/submarine reactor shield/hypersonic scramjet supply chain and indium tin oxide (ITO) touch panel/fighter HUD/solar TCO/submarine periscope display supply chain.
+Task: R467 — 2 new Indian logistics modules for aluminum nitride (AlN) GaN-on-AlN substrate/UV LED/submarine sonar piezo/hypersonic TPS supply chain and samarium cobalt (SmCo) fighter servo/satellite reaction wheel/submarine motor/hypersonic guidance supply chain.
 
 Work Log:
-- Read worklog: R465 complete (commit ab05b33), 756 exports, ~63,316 CSS
+- Read worklog: R466 complete (commit aacf4b4), 758 exports, ~63,338 CSS
 - TSC pre-validation: 0 errors in src/
-- R466 candidates selected:
-  - Rhenium Metal (Re) — CLEAN, confirmed 0 existing references
-  - Indium Tin Oxide (ITO) — CLEAN, confirmed 0 existing references
-- Icons verified: Languages (0 uses, confirmed VALID), Telescope (0 uses, confirmed VALID)
-- Created Rhenium Metal Logistics (R466a): 228 lines, rem-* navy-steel #1e3a5f, 14 records
-  - 14 grades: Re 99.9% Single Crystal Turbine Blade, 99.95% Superalloy Nozzle Vane, 99.7% Rocket Combustion Chamber, 99.85% Pt-Re Reforming Catalyst, 99.3% Incandescent Filament, 99.8% Gas Turbine Combustor, 99.0% Electrical Contact, 99.6% Warship GT Blade, 99.92% Pt-Re Thermocouple, 99.4% X-Ray Tube Target, 99.8% FCC Catalyst, 99.85% Submarine Reactor Shield, 99.95% Hypersonic Scramjet, 98.0% General
-  - Applications: HAL Tejas turbine, GE Aviation superalloy, ISRO PSLV chamber, HPCL reformer, Surya Roshni filament, BHEL GT combustor, Mico Bosch contact, GRSE LM2500 blade, IISc thermocouple, Wipro GE X-ray, IOCL FCC cat, IN Navy SSBN shield, DRDO scramjet nozzle, SAIL alloy
-  - Rs 12,920 Cr total, avg 99.56%, melting point 3186 degC, density 21.02 g/cm3
-  - Delayed: REM-A2412 (28d, monsoon Visakhapatnam, submarine SSBN nuclear reactor containment shield)
-- Created Indium Tin Oxide Logistics (R466b): 228 lines, ito-* cyan-dark #0e7490, 14 records
-  - 14 grades: ITO 99.9% Touch Panel Conductor, 99.95% Fighter HUD Coating, 99.7% LCD Electrode, 99.85% Solar TCO Front, 99.3% EMI Shield Window, 99.8% Submarine Periscope Display, 99.0% Defog Windshield, 99.6% Warship Bridge Console, 99.92% OLED Anode, 99.4% Smart Glass EC, 99.8% Anti-Static Film, 99.85% Submarine Sonar Display, 99.95% Hypersonic IR Seeker, 98.0% General
-  - Applications: Dixon touch, HAL Tejas HUD, Dixon LCD, Adani Solar TCO, BEL EMI shield, Mazagon Dock display, HAL windshield heat, GRSE bridge console, IIT-G OLED anode, Saint-Gobain smart glass, Flex ESD packaging, IN Navy sonar display, DRDO Astra IR dome, SAIL ITO coating
-  - Rs 12,120 Cr total, avg 99.53%, density 7.15 g/cm3
-  - Delayed: ITO-A2412 (28d, monsoon Visakhapatnam, submarine sonar display panel acoustic operator)
+- R467 candidates selected:
+  - Aluminum Nitride (AlN) — CLEAN, confirmed 0 existing references
+  - Samarium Cobalt (SmCo) — CLEAN, confirmed 0 existing references
+- Icons verified: Printer (0 uses, confirmed VALID), Octagon (0 uses, confirmed VALID)
+- Created Aluminum Nitride Logistics (R467a): 228 lines, aln-* sky-dark #0369a1, 14 records
+  - 14 grades: AlN 99.9% GaN-on-AlN RF PA, 99.95% UV LED 280nm, 99.7% SiC IGBT Heat Spreader, 99.85% Submarine Sonar Piezo, 99.3% Smelting Crucible, 99.8% AESA Radar Module, 99.0% HEPA Ceramic, 99.6% Missile IR Dome, 99.92% QCL Heat Sink, 99.4% EV SiC Inverter, 99.8% 5G Heat Pipe, 99.85% Submarine Motor Insul, 99.95% Hypersonic TPS, 98.0% General
+  - Applications: RFIL 5G PA, IISc deep-UV LED, BHEL SiC heat sink, NPOL sonar piezo, Hindalco crucible, BEL AESA substrate, Cipla HEPA, DRDO Nag IR dome, IIT-G QCL package, Tata Motors SiC, Jio 5G heat pipe, IN Navy motor insulator, DRDO HSTDV TPS, SAIL refractory
+  - Rs 12,440 Cr total, avg 99.54%, melting point 2200 degC, density 3.26 g/cm3
+  - Delayed: ALN-A2412 (28d, monsoon Visakhapatnam, submarine SSK propulsion motor EM drive isolator)
+- Created Samarium Cobalt Logistics (R467b): 228 lines, smc-* rose-dark #9f1239, 14 records
+  - 14 grades: SmCo 99.9% Fighter Actuator, 99.95% Satellite Reaction Wheel, 99.7% Torpedo Motor, 99.85% Warship IEP Motor, 99.3% MRI Gradient, 99.8% Wind DD Gen, 99.0% EV Traction, 99.6% Missile Gyro, 99.92% Radar TWT Magnet, 99.4% Servo Motor, 99.8% APU Starter, 99.85% Sub Periscope Motor, 99.95% Hypersonic Guidance, 98.0% General
+  - Applications: HAL Tejas servo, ISRO reaction wheel, NPOL torpedo motor, GRSE IEP motor, Wipro GE MRI, Suzlon DD gen, Tata Motors rotor, DRDO Astra gyro, BEL radar TWT, Bosch servo, HAL APU starter, IN Navy mast motor, DRDO HSTDV guidance, SAIL magnet
+  - Rs 12,760 Cr total, avg 99.58%, density 8.40 g/cm3
+  - Delayed: SMC-A2412 (28d, monsoon Visakhapatnam, submarine SSK optronic mast rotary drive motor)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (758 exports), page.tsx (1288 viewMap entries), app-store.ts (770 navItems)
-- CSS appended: 16 new rules (~63,338 total)
-- Git commit: aacf4b4, pushed to main
+- Three-file registration: index.ts (760 exports), page.tsx (1290 viewMap entries), app-store.ts (772 navItems)
+- CSS appended: 16 new rules (~63,360 total)
+- Git commit: d8149b4, pushed to main
 
 Stage Summary:
-- Project now: 758 module exports, 770 navItems, ~63,338 CSS lines, 1288 viewMap entries, 0 TSC errors in src/
-- Rhenium Metal: Submarine SSBN reactor &#8377;960Cr, scramjet nozzle &#8377;980Cr, turbine blade &#8377;960Cr, rocket chamber &#8377;940Cr
-- Indium Tin Oxide: Fighter HUD &#8377;960Cr, submarine sonar display &#8377;960Cr, solar TCO &#8377;900Cr, OLED anode &#8377;940Cr
-- Delayed: REM-A2412 (28d), ITO-A2412 (28d) — both monsoon Visakhapatnam naval corridor (6th consecutive round)
+- Project now: 760 module exports, 772 navItems, ~63,360 CSS lines, 1290 viewMap entries, 0 TSC errors in src/
+- Aluminum Nitride: Submarine motor insulator &#8377;960Cr, hypersonic TPS &#8377;980Cr, AESA radar &#8377;940Cr, GaN-on-AlN 5G &#8377;900Cr
+- Samarium Cobalt: Hypersonic guidance &#8377;980Cr, satellite reaction wheel &#8377;960Cr, submarine motor &#8377;940Cr, fighter servo &#8377;920Cr
+- Delayed: ALN-A2412 (28d), SMC-A2412 (28d) — both monsoon Visakhapatnam naval corridor (7th consecutive round)
 
 **Project Current State:**
-- 758 module exports, 770 navItems, ~63,338 CSS lines, 1288 viewMap entries, 0 TSC errors in src/
+- 760 module exports, 772 navItems, ~63,360 CSS lines, 1290 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- Re 99.95% — Chile/USA/China supply, extremely rare (0.0007% crust abundance), critical for defense jet engines, India imports 100%
-- ITO 99.95% — China controls 60% indium supply, export restrictions since 2023, critical for defense displays and solar panels
-- Visakhapatnam monsoon corridor: 6 consecutive rounds with delayed naval items — escalating systemic risk, recommend route diversification
-- Next candidates pool: 9 clean names remaining (magnesium-ingot, aluminum-nitride, zirconium-silicate, yttrium-stabilized-zirconia, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride, samarium-cobalt, + more exotic)
+- AlN 99.95% — Japan/Germany supply dominance, critical for GaN-on-AlN 5G and defense AESA, India imports 90%+
+- SmCo 99.95% — China controls 70% rare earth supply, critical for defense high-temp magnets, India has limited domestic capability
+- Visakhapatnam monsoon corridor: 7 consecutive rounds with delayed naval items — CRITICAL recurring risk
+- Next candidates pool: 7 clean names remaining (magnesium-ingot, zirconium-silicate, yttrium-stabilized-zirconia, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride, + more exotic)
