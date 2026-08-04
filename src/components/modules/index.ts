@@ -695,3 +695,5 @@ export { default as AluminiumNitrideLogisticsView } from './aluminium-nitride-lo
 export { default as LithiumCarbideLogisticsView } from './lithium-carbide-logistics-view'
 export { default as HafniumOxideLogisticsView } from './hafnium-oxide-logistics-view'
 export { default as ZirconiumCarbideLogisticsView } from './zirconium-carbide-logistics-view'
+export { default as MagnesiumOxideLogisticsView } from './magnesium-oxide-logistics-view'
+export { default as BariumTitanateLogisticsView } from './barium-titanate-logistics-view'

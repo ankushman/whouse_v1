@@ -62398,3 +62398,27 @@ html.theme-transition body {
 .zrc-shimmer { background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.08), transparent); animation: zrc-shimmer 3s infinite; }
 @keyframes zrc-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .zrc-hover:hover { background: rgba(168, 85, 247, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R433a: Magnesium Oxide Logistics - Emerald #059669 */
+.mgo-pulse { animation: mgo-pulse-anim 2s ease-in-out infinite; }
+@keyframes mgo-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.mgo-glow { box-shadow: 0 0 20px rgba(5, 150, 105, 0.3); }
+.mgo-gradient { background: linear-gradient(135deg, rgba(5, 150, 105, 0.15), rgba(5, 150, 105, 0.05)); }
+.mgo-border { border-color: rgba(5, 150, 105, 0.4); }
+.mgo-text { color: #059669; }
+.mgo-badge { background: rgba(5, 150, 105, 0.15); color: #059669; border: 1px solid rgba(5, 150, 105, 0.3); }
+.mgo-shimmer { background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.08), transparent); animation: mgo-shimmer 3s infinite; }
+@keyframes mgo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.mgo-hover:hover { background: rgba(5, 150, 105, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R433b: Barium Titanate Logistics - Gold #ca8a04 */
+.bto-pulse { animation: bto-pulse-anim 2s ease-in-out infinite; }
+@keyframes bto-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.bto-glow { box-shadow: 0 0 20px rgba(202, 138, 4, 0.3); }
+.bto-gradient { background: linear-gradient(135deg, rgba(202, 138, 4, 0.15), rgba(202, 138, 4, 0.05)); }
+.bto-border { border-color: rgba(202, 138, 4, 0.4); }
+.bto-text { color: #ca8a04; }
+.bto-badge { background: rgba(202, 138, 4, 0.15); color: #ca8a04; border: 1px solid rgba(202, 138, 4, 0.3); }
+.bto-shimmer { background: linear-gradient(90deg, transparent, rgba(202, 138, 4, 0.08), transparent); animation: bto-shimmer 3s infinite; }
+@keyframes bto-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.bto-hover:hover { background: rgba(202, 138, 4, 0.1); transform: translateY(-1px); transition: all 0.2s; }
