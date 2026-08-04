@@ -1,4 +1,46 @@
 ---
+Task ID: R441 — Tungsten Oxide Logistics + Molybdenum Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R441 — 2 new Indian logistics modules for tungsten oxide (WO3) smart window/gas sensor/fireproof/tungsten carbide precursor supply chain and molybdenum oxide (MoO3) steel alloy/catalyst/pigment/lubricant supply chain.
+
+Work Log:
+- Read worklog: R440 complete (commit d681ce0), 706 exports, ~62,592 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: tungsten-oxide (CLEAN), molybdenum-oxide (CLEAN), cerium-oxide (CLEAN), lanthanum-oxide (CLEAN), neodymium-oxide (CLEAN), praseodymium-oxide (CLEAN)
+- Icons verified: Cog (confirmed), Factory (confirmed)
+- Created Tungsten Oxide Logistics (R441a): 227 lines, tno-* indigo #4338ca, 14 records
+  - 14 grades: WO3 99.9% Smart Window, WO3 99.7% Gas Sensor, WO3 99.5% Fireproof Fabric, WO3 99.0% Tungsten Carbide, WO3 99.8% X-Ray Shield, WO3 99.3% Catalyst, WO3 99.6% Underwater Paint, WO3 98.5% Ceramic Glaze, WO3 99.4% Plasma Display, WO3 99.95% Submarine Periscope, WO3 99.2% Pigment, WO3 99.8% Warship Stealth, WO3 99.6% Missile Fin, WO3 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Electrochromic smart window, NOx gas sensor, fireproof fabric heat resistant, tungsten carbide cutting tool precursor, X-ray radiology shield, hydrogenation catalyst, anti-fouling underwater paint, yellow ceramic glaze tint, plasma display phosphor, submarine periscope IR coating, yellow oxide pigment, IN Navy warship radar-absorb coating, DRDO missile aero-heating fin, alloy additive
+  - Rs 8,920 Cr total, avg 99.33%, melting point 1440-1473 degC
+  - Delayed: TNO-A2412 (28d, monsoon Visakhapatnam, warship stealth radar-absorb coating)
+- Created Molybdenum Oxide Logistics (R441b): 227 lines, moo-* emerald #059669, 14 records
+  - 14 grades: MoO3 99.9% Steel Alloy, MoO3 99.7% Jet Engine, MoO3 99.5% Desulfurization, MoO3 99.0% Pigment, MoO3 99.8% Solid Lubricant, MoO3 99.3% Corrosion Inhibit, MoO3 99.6% Catalyst Oxidation, MoO3 98.5% Ceramic Glaze, MoO3 99.4% Smoke Suppress, MoO3 99.95% Submarine Propeller, MoO3 99.2% Coil Coating, MoO3 99.8% Warship Hull Alloy, MoO3 99.6% Missile Airframe, MoO3 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: HSLA steel alloy strengthening, jet engine turbine blade, refinery desulfurization catalyst, moly orange pigment, high-temp solid lubricant grease, boiler pipe corrosion inhibitor, methanol oxidation catalyst, blue ceramic glaze tint, fire retardant smoke suppressant, submarine propeller alloy strengthening, galvanized coil coating, IN Navy warship hull steel alloy, DRDO missile HSLA airframe panel, cast iron alloy
+  - Rs 8,960 Cr total, avg 99.33%, melting point 775-795 degC
+  - Delayed: MOO-A2412 (28d, monsoon Visakhapatnam, naval warship hull steel alloy)
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (708 exports), page.tsx (1238 viewMap entries), app-store.ts (715 navItems)
+- CSS appended: 16 new rules (~62,616 total)
+- Git commit: 73bfd96, pushed to main
+
+Stage Summary:
+- Project now: 708 module exports, 715 navItems, ~62,616 CSS lines, 1238 viewMap entries, 0 TSC errors in src/
+- Tungsten Oxide: Submarine periscope &#8377;960Cr, warship stealth &#8377;940Cr, missile fin &#8377;900Cr, smart window &#8377;920Cr
+- Molybdenum Oxide: Submarine propeller &#8377;960Cr, jet engine &#8377;940Cr, warship hull &#8377;940Cr, missile airframe &#8377;900Cr
+- Delayed: TNO-A2412 (28d), MOO-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 708 module exports, 715 navItems, ~62,616 CSS lines, 1238 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- WO3 99.95% electrochromic-grade imported from Japan/Germany — naval periscope optics dependency
+- MoO3 99.95% propeller-grade imported from Chile/USA — submarine propulsion alloy risk
+- Next clean candidates: cerium-oxide, lanthanum-oxide, neodymium-oxide, praseodymium-oxide, samarium-oxide, gadolinium-oxide
+---
+---
 Task ID: R440 — Aluminum Oxide Logistics + Vanadium Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R440 — 2 new Indian logistics modules for aluminum oxide (Al2O3) sapphire substrate/abrasive/refractory/ceramic insulator supply chain and vanadium oxide (V2O5) sulfur catalyst/VRFB battery/thermochromic/smart glass supply chain.
