@@ -711,3 +711,5 @@ export { default as TitaniumDioxideLogisticsView } from './titanium-dioxide-logi
 export { default as SiliconDioxideLogisticsView } from './silicon-dioxide-logistics-view'
 export { default as AluminumOxideLogisticsView } from './aluminum-oxide-logistics-view'
 export { default as VanadiumOxideLogisticsView } from './vanadium-oxide-logistics-view'
+export { default as TungstenOxideLogisticsView } from './tungsten-oxide-logistics-view'
+export { default as MolybdenumOxideLogisticsView } from './molybdenum-oxide-logistics-view'
