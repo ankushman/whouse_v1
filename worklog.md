@@ -1,4 +1,48 @@
 ---
+Task ID: R424 — Manganese Silicon Logistics + Manganese Sulphide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R424 — 2 new Indian logistics modules for manganese silicon (FeMnSi) steelmaking/defense/nuclear/rail supply chain and manganese sulphide (MnS) pharma/steel/battery/nuclear/lubricant supply chain.
+
+Work Log:
+- Read worklog: R423 complete (commit 2cdaf14), 679 exports, ~62,262 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: manganese-silicon, manganese-sulphide, refractory-ceramic, cobalt-sulphate — ALL CLEAN across module files, index.ts, page.tsx, app-store.ts
+- Dev server QA: OOM at 680+ modules (known constraint) — TSC gate passed
+- Icons verified: MountainSnow (confirmed in iconMap), Pickaxe (confirmed)
+- Unified generator: created gen_r424.py as single script generating BOTH modules via shared gen_module() function
+- Created Manganese Silicon Logistics (R424a): 200 lines, msi-* amber #d97706, 14 records
+  - 14 grades: FeMnSi 65/15 HC, FeMnSi 68/18 LC, MnSi 75/65 Standard, FeMnSi 60/14 Auto, MnSi 65/17 Foundry, FeMnSi 70/16 BHEL, FeMnSi 62/13 EV, MnSi 70/20 Rail, FeMnSi 65/15 General, FeMnSi 72/22 Nuclear, FeMnSi 60/12 Pipeline, FeMnSi 68/16 Submarine, FeMnSi 65/15 Missile, FeMnSi 58/11 Rebar
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Shyam Ferro Alloys, BHEL R&D, Mahindra Steel, Rajasthan Ferro Alloys, Assam Ferro Alloys, Gujarat Ferro Alloys, UP Ferro Alloys, Vizag Ferro Alloys, DRDO TBRL, SAIL Ferro Alloys
+  - Applications: SAIL BOF, BEL Tejas Mk2, JSW EAF, Bharat Forge crankshaft, L&T warship, BHEL GT blade, Mahindra XUV400, Indian Railways RCF, Jio 5G, IGCAR PFBR, Adani pipeline, GRSE Project 75I, DRDO BrahMos, Tata Tiscon
+  - Rs 9,200 Cr total, avg 98.83% purity, Si content 11-22%
+  - Delayed: MSI-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I submarine hull special Mn-Si steel)
+- Created Manganese Sulphide Logistics (R424b): 200 lines, mns-* teal #0d9488, 14 records
+  - 14 grades: MnS 99.5% Pharma, MnS 98% Bearing, MnS 97% Machinability, MnS 96% EP Additive, MnS 95% Fertilizer, MnS 98% Welding, MnS 97% Resulphurized, MnS 96% Ceramic, MnS 94% Batteries, MnS 99% Nuclear, MnS 95% Water Treatment, MnS 98% Submarine, MnS 97% Missile, MnS 93% General Steel
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Godrej Lubricants, Shyam Chemicals, BHEL R&D, Mahindra Steel, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Sun Pharma vitamin, BEL Tejas bearing, Bharat Forge machining, L&T naval gearbox, IFFCO fertilizer, BHEL welding, Mahindra EV gearbox, RAK Ceramics, Exide battery, IGCAR PFBR, NTPC FGD, GRSE submarine, DRDO Pralay, SAIL rail
+  - Rs 8,780 Cr total, avg 97.04% purity, Mn content 42-56%
+  - Delayed: MNS-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I pressure hull HY-80 steel)
+- HTML entity scan: 40 (MSi) + 38 (MNS) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (681 exports), page.tsx (1204 viewMap entries), app-store.ts (686 navItems)
+- CSS appended: 8 new rules (~62,271 total)
+- Git commit: 32450a7, pushed to main
+
+Stage Summary:
+- Project now: 681 module exports, 686 navItems, ~62,271 CSS lines, 1204 viewMap entries, 0 TSC errors in src/
+- Manganese Silicon: GRSE submarine ₹940Cr, IGCAR nuclear ₹880Cr, DRDO BrahMos ₹860Cr, JSW EAF ₹960Cr
+- Manganese Sulphide: IGCAR nuclear ₹900Cr, GRSE submarine ₹920Cr, DRDO Pralay ₹820Cr, Sun Pharma ₹840Cr
+- Delayed: MSI-B2412 (28d), MNS-B2412 (28d) — both monsoon Visakhapatnam corridor
+
+**Project Current State:**
+- 681 module exports, 686 navItems, ~62,271 CSS lines, 1204 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- MnSi: FeMnSi 72/22 nuclear grade import-dependent from South Africa
+- MnS: MnS 99% pharmaceutical grade import-dependent from China — Atmanirbhar critical
+- Next clean candidates: refractory-ceramic, cobalt-sulphate, aluminium-powder, zirconium-fluoride
+---
 Task ID: R423 — Carbon Fibre Logistics + Lithium Hydroxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R423 — 2 new Indian logistics modules for carbon fibre (T300/T700/T800/M40J) aerospace/wind/auto/defense supply chain and lithium hydroxide (LiOH) EV battery cathode/space/nuclear/pharma supply chain.
