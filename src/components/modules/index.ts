@@ -661,3 +661,5 @@ export { default as CadmiumAlloyLogisticsView } from './cadmium-alloy-logistics-
 export { default as NiobiumPowderLogisticsView } from './niobium-powder-logistics-view'
 export { default as VanadiumSheetLogisticsView } from './vanadium-sheet-logistics-view'
 export { default as TantalumPowderLogisticsView } from './tantalum-powder-logistics-view'
+export { default as SeleniumCompoundLogisticsView } from './selenium-compound-logistics-view'
+export { default as TungstenCarbideLogisticsView } from './tungsten-carbide-logistics-view'

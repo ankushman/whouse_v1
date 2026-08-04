@@ -62157,3 +62157,13 @@ html.theme-transition body {
 .gas-card-accent { border-left: 3px solid #8b5cf6; }
 .gas-kpi-highlight { color: #7c3aed; font-weight: 700; }
 .gas-table-header { background-color: #f5f3ff; }
+/* === Selenium Compound Logistics Module Styles === */
+.sec-module-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+.sec-card-accent { border-left: 3px solid #10b981; }
+.sec-kpi-highlight { color: #059669; font-weight: 700; }
+.sec-table-header { background-color: #ecfdf5; }
+/* === Tungsten Carbide Logistics Module Styles === */
+.tgc-module-header { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); }
+.tgc-card-accent { border-left: 3px solid #f59e0b; }
+.tgc-kpi-highlight { color: #d97706; font-weight: 700; }
+.tgc-table-header { background-color: #fffbeb; }

@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+"""Generate R415b: Tungsten Carbide Logistics View (tgc-*)"""
+import os
+
+content = r'''"use client";
+
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared';
+import { Target } from 'lucide-react';
+
+interface TungstenCarbideRecord {
+  id: string;
+  batchNo: string;
+  city: string;
+  manufacturer: string;
+  carbideGrade: string;
+  application: string;
+  wcPercent: number;
+  hardnessHRA: number;
+  investmentCr: number;
+  status: string;
+  priority: string;
+  origin: string;
+  destination: string;
+  shipDate: string;
+  transitDays: number;
+  zone: string;
+  remarks: string;
+}
+
+const tungstenCarbideRecords: TungstenCarbideRecord[] = [
+  { id: 'TGC-0001', batchNo: 'TGC-B2401', city: 'Pune', manufacturer: 'Sandvik', carbideGrade: 'WC-8Co 92/8', application: 'Turning Insert (Tata Steel)', wcPercent: 92, hardnessHRA: 92, investmentCr: 520, status: 'Delivered', priority: 'High', origin: 'Sandvik Pune (MH)', destination: 'Tata Steel Jamshedpur (JH)', shipDate: '2026-07-15', transitDays: 2, zone: 'West', remarks: 'WC-8Co CVD-coated turning insert for Tata Steel hot-rolling mill steel cutting &#8594; 92% WC &#8594; &#8377;520Cr for 0.5 tonnes &#8594; India &#8377;15,600Cr tool WC &#8594; Sandvik 20M inserts &#8594; 92 HRA &#8594; &#8594; CVD &#8594; &#8594; 800&#176;C &#8594; &#8594; turning' },
+  { id: 'TGC-0002', batchNo: 'TGC-B2402', city: 'Bengaluru', manufacturer: 'Bharat Forge', carbideGrade: 'WC-6Co 94/6 Micrograin', application: 'Drilling Bit (OIL India)', wcPercent: 94, hardnessHRA: 93, investmentCr: 680, status: 'Delivered', priority: 'Critical', origin: 'Bharat Forge Pune (MH)', destination: 'OIL India Duliajan (AS)', shipDate: '2026-07-16', transitDays: 4, zone: 'West', remarks: 'WC-6Co micrograin drill bit for OIL India Assam deep well HDD rock drilling &#8594; 94% WC &#8594; &#8377;680Cr for 0.3 tonnes &#8594; India &#8377;20,400Cr drilling WC &#8594; OIL 500 wells &#8594; 93 HRA &#8594; &#8594; HIP &#8594; &#8594; 0.5um &#8594; &#8594; drilling' },
+  { id: 'TGC-0003', batchNo: 'TGC-B2403', city: 'Mumbai', manufacturer: 'Kennametal India', carbideGrade: 'WC-10Co 90/10 Mining', application: 'Mining Tool (Coal India)', wcPercent: 90, hardnessHRA: 91, investmentCr: 560, status: 'Delivered', priority: 'High', origin: 'Kennametal Bengaluru (KA)', destination: 'Coal India Ranchi (JH)', shipDate: '2026-07-17', transitDays: 2, zone: 'South', remarks: 'WC-10Co mining button insert for Coal India continuous miner coal extraction &#8594; 90% WC &#8594; &#8377;560Cr for 3 tonnes &#8594; India &#8377;16,800Cr mining WC &#8594; Coal India 50M tonne &#8594; 91 HRA &#8594; &#8594; press &#8594; &#8594; 1500HV &#8594; &#8594; mining' },
+  { id: 'TGC-0004', batchNo: 'TGC-B2404', city: 'Hyderabad', manufacturer: 'DRDO DMRL', carbideGrade: 'WC-6Ni 94/6 Binderless', application: 'APFSDS Dart (DRDO)', wcPercent: 94, hardnessHRA: 93.5, investmentCr: 890, status: 'Delivered', priority: 'Critical', origin: 'DRDO DMRL Hyderabad (TG)', destination: 'OFB Ambarnath (MH)', shipDate: '2026-07-18', transitDays: 2, zone: 'South', remarks: 'WC-6Ni binderless tungsten heavy alloy for DRDO Arjun Mk2 APFSDS kinetic energy penetrator &#8594; 94% WC &#8594; &#8377;890Cr for 2 tonnes &#8594; India &#8377;26,700Cr defence WC &#8594; DRDO 50K darts &#8594; 93.5 HRA &#8594; &#8594; LPS &#8594; &#8594; 17.5 g/cm3 &#8594; &#8594; KE' },
+  { id: 'TGC-0005', batchNo: 'TGC-B2405', city: 'Chennai', manufacturer: 'IGCAR', carbideGrade: 'WC-3TaC-6Co Nano', application: 'Glove Box Bearing (BHAVINI)', wcPercent: 91, hardnessHRA: 93, investmentCr: 420, status: 'Delivered', priority: 'High', origin: 'IGCAR Kalpakkam (TN)', destination: 'BHAVINI Kalpakkam (TN)', shipDate: '2026-07-19', transitDays: 0, zone: 'South', remarks: 'WC-TaC-Co nano-cermet bearing for BHAVINI PFBR hot-cell remote handling glove box &#8594; 91% WC &#8594; &#8377;420Cr for 0.2 tonnes &#8594; India &#8377;12,600Cr nuclear WC &#8594; BHAVINI 20 boxes &#8594; 93 HRA &#8594; &#8594; nano &#8594; &#8594; 300&#176;C &#8594; &#8594; bearing' },
+  { id: 'TGC-0006', batchNo: 'TGC-B2406', city: 'Ahmedabad', manufacturer: 'Gujarat WC Tech', carbideGrade: 'WC-10Ni 90/10 Corrosion', application: 'Valve Seat (Reliance)', wcPercent: 90, hardnessHRA: 90.5, investmentCr: 380, status: 'Delivered', priority: 'High', origin: 'Gujarat WC Tech Ahmedabad (GJ)', destination: 'Reliance Jamnagar (GJ)', shipDate: '2026-07-20', transitDays: 1, zone: 'West', remarks: 'WC-10Ni corrosion-resistant valve seat for Reliance refinery sour gas processing &#8594; 90% WC &#8594; &#8377;380Cr for 0.5 tonnes &#8594; India &#8377;11,400Cr petro WC &#8594; Reliance 200 valves &#8594; 90.5 HRA &#8594; &#8594; binderless &#8594; &#8594; H2S &#8594; &#8594; valve' },
+  { id: 'TGC-0007', batchNo: 'TGC-B2407', city: 'Jaipur', manufacturer: 'Rajasthan WC Corp', carbideGrade: 'WC-6Co 94/6 Fine Grain', application: 'End Mill (Wipro)', wcPercent: 94, hardnessHRA: 93, investmentCr: 440, status: 'Delivered', priority: 'High', origin: 'Rajasthan WC Corp Jaipur (RJ)', destination: 'Wipro Bengaluru (KA)', shipDate: '2026-07-21', transitDays: 2, zone: 'North', remarks: 'WC-6Co fine grain solid carbide end mill for Wipro aerospace Al-alloy precision milling &#8594; 94% WC &#8594; &#8377;440Cr for 0.3 tonnes &#8594; India &#8377;13,200Cr tool WC &#8594; Wipro 100K tools &#8594; 93 HRA &#8594; &#8594; submicron &#8594; &#8594; Al &#8594; &#8594; milling' },
+  { id: 'TGC-0008', batchNo: 'TGC-B2408', city: 'Bhubaneswar', manufacturer: 'NALCO', carbideGrade: 'WC Powder 99.9% 0.8um', application: 'Hardmetal Press (Hindustan Tungsten)', wcPercent: 99.9, hardnessHRA: 95, investmentCr: 490, status: 'Delivered', priority: 'High', origin: 'NALCO Bhubaneswar (OD)', destination: 'Hindustan Tungsten Bengaluru (KA)', shipDate: '2026-07-22', transitDays: 3, zone: 'East', remarks: 'WC raw powder for Hindustan Tungsten cemented carbide press sintering production &#8594; 99.9% WC &#8594; &#8377;490Cr for 2 tonnes &#8594; India &#8377;14,700Cr WC &#8594; HT 50 products &#8594; 95 HRA &#8594; &#8594; 0.8um &#8594; &#8594; carbotherm &#8594; &#8594; sinter' },
+  { id: 'TGC-0009', batchNo: 'TGC-B2409', city: 'Coimbatore', manufacturer: 'Tamil Nadu WC Corp', carbideGrade: 'WC-12Co 88/12 Wear', application: 'Wire Drawing Die (Usha Martin)', wcPercent: 88, hardnessHRA: 90, investmentCr: 360, status: 'Delivered', priority: 'Medium', origin: 'Tamil Nadu WC Corp Coimbatore (TN)', destination: 'Usha Martin Ranchi (JH)', shipDate: '2026-07-23', transitDays: 2, zone: 'South', remarks: 'WC-12Co wire drawing die nibs for Usha Martin steel wire rope manufacturing &#8594; 88% WC &#8594; &#8377;360Cr for 0.5 tonnes &#8594; India &#8377;10,800Cr wire WC &#8594; Usha Martin 500 dies &#8594; 90 HRA &#8594; &#8594; extrusion &#8594; &#8594; 1200 HV &#8594; &#8594; drawing' },
+  { id: 'TGC-0010', batchNo: 'TGC-B2410', city: 'Surat', manufacturer: 'Gujarat Tungsten Products', carbideGrade: 'WC-5TaC-10Co 85/5/10', application: 'Mould Die (Godrej)', wcPercent: 85, hardnessHRA: 91, investmentCr: 310, status: 'Delivered', priority: 'Medium', origin: 'Gujarat Tungsten Products Surat (GJ)', destination: 'Godrej Mumbai (MH)', shipDate: '2026-07-24', transitDays: 2, zone: 'West', remarks: 'WC-TaC-Co steel-cutting grade for Godrej injection moulding die cavity insert &#8594; 85% WC &#8594; &#8377;310Cr for 0.4 tonnes &#8594; India &#8377;9,300Cr die WC &#8594; Godrej 1000 dies &#8594; 91 HRA &#8594; &#8594; TaC &#8594; &#8594; P30 &#8594; &#8594; mould' },
+  { id: 'TGC-0011', batchNo: 'TGC-B2411', city: 'Guwahati', manufacturer: 'Assam WC Metals', carbideGrade: 'WC-20Ag 80/20 Contact', application: 'Electrical Contact (BHEL)', wcPercent: 80, hardnessHRA: 88, investmentCr: 280, status: 'Delivered', priority: 'Medium', origin: 'Assam WC Metals Guwahati (AS)', destination: 'BHEL Bhopal (MP)', shipDate: '2026-07-25', transitDays: 4, zone: 'East', remarks: 'WC-Ag metal-ceramic contact for BHEL HV vacuum circuit breaker arcing contact &#8594; 80% WC &#8594; &#8377;280Cr for 0.3 tonnes &#8594; India &#8377;8,400Cr electrical WC &#8594; BHEL 50K breakers &#8594; 88 HRA &#8594; &#8594; infiltration &#8594; &#8594; 36kV &#8594; &#8594; contact' },
+  { id: 'TGC-0012', batchNo: 'TGC-B2412', city: 'Lucknow', manufacturer: 'UP WC Industries', carbideGrade: 'WC-6Co 94/6 Wear Plate', application: 'Slurry Pump Liner (NPCIL)', wcPercent: 94, hardnessHRA: 93, investmentCr: 520, status: 'Delayed', priority: 'Critical', origin: 'UP WC Industries Lucknow (UP)', destination: 'NPCIL Tarapur (MH)', shipDate: '2026-07-01', transitDays: 28, zone: 'North', remarks: 'WC-Co wear plate liner for NPCIL Tarapur BWR spent fuel slurry pump erosion protection &#8594; 94% WC &#8594; &#8377;520Cr for 3 tonnes &#8594; monsoon delay &#8594; India &#8377;15,600Cr nuclear WC &#8594; NPCIL 5 pumps &#8594; 93 HRA &#8594; &#8594; HVOF &#8594; &#8594; slurry &#8594; &#8594; liner' },
+  { id: 'TGC-0013', batchNo: 'TGC-B2413', city: 'Noida', manufacturer: 'SAIL', carbideGrade: 'WC-8Co 92/8 Milling', application: 'Face Mill (HAL)', wcPercent: 92, hardnessHRA: 92, investmentCr: 470, status: 'Delivered', priority: 'High', origin: 'SAIL Rourkela (OD)', destination: 'HAL Bengaluru (KA)', shipDate: '2026-07-26', transitDays: 2, zone: 'East', remarks: 'WC-8Co indexable face mill insert for HAL Tejas LCA Ti-alloy structural frame milling &#8594; 92% WC &#8594; &#8377;470Cr for 0.4 tonnes &#8594; India &#8377;14,100Cr aero WC &#8594; HAL 200 tools &#8594; 92 HRA &#8594; &#8594; PVD &#8594; &#8594; Ti-6Al-4V &#8594; &#8594; milling' },
+  { id: 'TGC-0014', batchNo: 'TGC-B2414', city: 'Bhopal', manufacturer: 'BHEL', carbideGrade: 'WC-15Co 85/15 Impact', application: 'Crusher Liner (NMDC)', wcPercent: 85, hardnessHRA: 89, investmentCr: 340, status: 'Delivered', priority: 'Medium', origin: 'BHEL Bhopal (MP)', destination: 'NMDC Hyderabad (TG)', shipDate: '2026-07-27', transitDays: 1, zone: 'North', remarks: 'WC-15Co impact-grade crusher liner for NMDC Bailadila iron ore jaw crusher &#8594; 85% WC &#8594; &#8377;340Cr for 5 tonnes &#8594; India &#8377;10,200Cr mining WC &#8594; NMDC 10 crushers &#8594; 89 HRA &#8594; &#8594; press &#8594; &#8594; K10 &#8594; &#8594; crusher' }
+];
+
+const tabs = ['Dashboard', 'Registry', 'Analytics', 'Insights'] as const;
+type Tab = typeof tabs[number];
+const priorityColors: Record<string, string> = { Critical: 'bg-red-100 text-red-800', High: 'bg-amber-100 text-amber-800', Medium: 'bg-green-100 text-green-800', Low: 'bg-slate-100 text-slate-600' };
+const delayedSet = new Set(tungstenCarbideRecords.filter(r => r.status === 'Delayed').map(r => r.id));
+
+export default function TungstenCarbideLogisticsView() {
+  const [activeTab, setActiveTab] = useState<Tab>('Dashboard');
+  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const toggleFilter = (k: string, v: string) => { setFilters(p => { const s = { ...p }; const a = s[k] || []; const i = a.indexOf(v); if (i > -1) { a.splice(i, 1); if (!a.length) delete s[k]; } else s[k] = [...a, v]; return s; }); };
+  const filtered = useMemo(() => {
+    let d = tungstenCarbideRecords;
+    if (search) { const q = search.toLowerCase(); d = d.filter(r => r.id.toLowerCase().includes(q) || r.batchNo.toLowerCase().includes(q) || r.carbideGrade.toLowerCase().includes(q) || r.application.toLowerCase().includes(q) || r.city.toLowerCase().includes(q) || r.manufacturer.toLowerCase().includes(q)); }
+    Object.entries(filters).forEach(([k, vs]) => { if (vs.length) d = d.filter(r => { const v = String((r as unknown as Record<string, unknown>)[k] ?? ''); return vs.some(x => v.toLowerCase().includes(x.toLowerCase())); }); });
+    return d;
+  }, [search, filters]);
+  const totalCr = filtered.reduce((s: number, r) => s + r.investmentCr, 0);
+  const avgWc = filtered.length ? filtered.reduce((s: number, r) => s + r.wcPercent, 0) / filtered.length : 0;
+  const delayedCount = filtered.filter(r => r.status === 'Delayed').length;
+
+  return (
+    <div className="space-y-6">
+      <PageHeader title="Tungsten Carbide Logistics" description="Indian tungsten carbide supply chain tracking for metal cutting tools, mining equipment, defence kinetic energy penetrators, nuclear wear protection, oil drilling, aerospace machining, and electrical contacts" />
+      <div className="flex gap-2 border-b">
+        {tabs.map(t => (<button key={t} onClick={() => setActiveTab(t)} className={`px-4 py-2 text-sm font-medium ${activeTab === t ? 'border-b-2 border-amber-500 text-amber-700' : 'text-muted-foreground hover:text-foreground'}`}>{t}</button>))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">{filtered.length}</div><div className="text-xs text-muted-foreground">Total Shipments</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">&#8377;{totalCr.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground">Total Investment</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">{avgWc.toFixed(1)}% WC</div><div className="text-xs text-muted-foreground">Avg WC Content</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-red-500">{delayedCount}</div><div className="text-xs text-muted-foreground">Delayed Shipments</div></CardContent></Card>
+      </div>
+      {(activeTab === 'Dashboard' || activeTab === 'Registry') && (
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <input placeholder="Search ID, grade, application, city..." value={search} onChange={e => setSearch(e.target.value)} className="border rounded-md px-3 py-1.5 text-sm flex-1 min-w-48" />
+            {['status', 'priority', 'zone'].map(f => { const opts = [...new Set(tungstenCarbideRecords.map(r => (r as unknown as Record<string, unknown>)[f] as string))]; return (<div key={f} className="flex flex-wrap gap-1">{opts.map(o => (<Badge key={o} variant={(filters[f] || []).includes(o) ? 'default' : 'outline'} className="cursor-pointer text-xs" onClick={() => toggleFilter(f, o)}>{o}</Badge>))}</div>); })}
+          </div>
+          <div className="rounded-md border"><div className="max-h-96 overflow-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-background"><tr><th className="p-2 text-left">ID</th><th className="p-2 text-left">Batch</th><th className="p-2 text-left">Grade</th><th className="p-2 text-left">Application</th><th className="p-2 text-right">WC%</th><th className="p-2 text-right">&#8377;Cr</th><th className="p-2 text-left">Status</th></tr></thead><tbody>{filtered.map(r => (<tr key={r.id} className={`border-t ${delayedSet.has(r.id) ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}><td className="p-2">{r.id}</td><td className="p-2">{r.batchNo}</td><td className="p-2">{r.carbideGrade}</td><td className="p-2">{r.application}</td><td className="p-2 text-right">{r.wcPercent}</td><td className="p-2 text-right">{r.investmentCr}</td><td className="p-2"><Badge variant={r.status === 'Delivered' ? 'default' : 'destructive'}>{r.status}</Badge></td></tr>))}</tbody></table></div></div>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Analytics') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card><CardHeader><CardTitle className="text-sm">Investment by Application</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.application] = (m[r.application] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([a, v]) => (<div key={a} className="flex justify-between text-sm"><span>{a}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Shipments by Zone</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).map(([z, c]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Routes by Value</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.sort((a, b) => b.investmentCr - a.investmentCr).slice(0, 7).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.origin.split('(')[0]} &#8594; {r.destination.split('(')[0]}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Defence &amp; Nuclear</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.filter(r => r.application.toLowerCase().includes('drdo') || r.application.toLowerCase().includes('defence') || r.application.toLowerCase().includes('apfsds') || r.application.toLowerCase().includes('npcil') || r.application.toLowerCase().includes('nuclear') || r.application.toLowerCase().includes('ofb')).sort((a, b) => b.investmentCr - a.investmentCr).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.carbideGrade}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">By Priority</CardTitle></CardHeader><CardContent><div className="space-y-2">{Object.entries(filtered.reduce((m, r) => { m[r.priority] = (m[r.priority] || 0) + 1; return m }, {} as Record<string, number>)).map(([p, c]) => (<div key={p} className="flex justify-between text-sm"><span className={priorityColors[p] || ''}>{p}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">WC Grade Distribution</CardTitle></CardHeader><CardContent><div className="space-y-2">{[{ l: '94% WC (6Co Fine)', f: filtered.filter(r => r.carbideGrade.includes('94/6')).length }, { l: '92% WC (8Co)', f: filtered.filter(r => r.carbideGrade.includes('92/8')).length }, { l: '90% WC (10Co/Ni)', f: filtered.filter(r => r.carbideGrade.includes('90/10')).length }, { l: 'Other Grades', f: filtered.filter(r => !r.carbideGrade.includes('94/6') && !r.carbideGrade.includes('92/8') && !r.carbideGrade.includes('90/10')).length }].map(b => (<div key={b.l} className="flex justify-between text-sm"><span>{b.l}</span><span className="font-medium">{b.f}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Manufacturers</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.manufacturer] = (m[r.manufacturer] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([m, v]) => (<div key={m} className="flex justify-between text-sm"><span>{m}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Avg Transit Days</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.length ? (Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || [] as number[]).concat(r.transitDays); return m }, {} as Record<string, number[]>)) as [string, number[]][]).map(([z, d]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{(d.reduce((s, n) => s + n, 0) / d.length).toFixed(1)}d</span></div>)) : []}</div></CardContent></Card>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Insights') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">DRDO WC-6Ni APFSDS Kinetic Penetrator</div><div className="text-xs text-muted-foreground">DRDO DMRL qualifying WC-6Ni binderless heavy alloy for Arjun Mk2 120mm APFSDS dart achieving 1700m/s muzzle velocity. WC provides 17.5 g/cm3 density 2x higher than depleted uranium without radiation hazard. OFB Ambarnath producing 50K darts annually under &#8377;5,800Cr DRDO Ammunition Modernisation Mission.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">Sandvik India WC Tool Insert Production</div><div className="text-xs text-muted-foreground">Sandvik India Pune plant manufacturing WC-8Co CVD-coated turning and milling inserts for Indian automotive and steel sectors. WC-Co cermets provide 92 HRA hardness enabling 300m/min cutting speed on steel. India importing 60% of cemented carbide tools; MEITY targeting 80% domestic by 2028 under &#8377;6,200Cr Tooling Mission.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">NPCIL WC-Co Slurry Pump Protection</div><div className="text-xs text-muted-foreground">NPCIL deploying WC-6Co HVOF-sprayed wear plate liners for Tarapur and Kalpakkam BWR spent fuel slurry transfer pumps. WC-Co provides 10x erosion life vs 316SS in radioactive slurry at 10m/s velocity. Programme under &#8377;3,400Cr NPCIL Plant Life Extension replacing imported hardfacing.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">Coal India WC Mining Tool Demand</div><div className="text-xs text-muted-foreground">Coal India world-largest coal miner consuming 3,000 tonnes/year WC-Co mining tools for continuous miners, longwall shearers and roadheaders. WC-10Co button inserts with 91 HRA and 1500HV Vickers hardness providing 3x tool life vs steel picks. India targeting &#8377;12,000Cr domestic WC mining tool production under Coal India Make-in-India programme.</div></CardContent></Card>
+        </div>
+      )}
+    </div>
+  );
+}
+'''
+
+outpath = '/home/z/my-project/src/components/modules/tungsten-carbide-logistics-view.tsx'
+with open(outpath, 'w', encoding='utf-8') as f:
+    f.write(content)
+print(f"Generated: {outpath}")
+print(f"Size: {len(content)} bytes")

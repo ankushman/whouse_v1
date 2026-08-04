@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+"""Generate R415a: Selenium Compound Logistics View (sec-*)"""
+import os
+
+content = r'''"use client";
+
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared';
+import { Sun } from 'lucide-react';
+
+interface SeleniumCompoundRecord {
+  id: string;
+  batchNo: string;
+  city: string;
+  manufacturer: string;
+  compoundGrade: string;
+  application: string;
+  purityPercent: number;
+  densityGcm3: number;
+  investmentCr: number;
+  status: string;
+  priority: string;
+  origin: string;
+  destination: string;
+  shipDate: string;
+  transitDays: number;
+  zone: string;
+  remarks: string;
+}
+
+const seleniumCompoundRecords: SeleniumCompoundRecord[] = [
+  { id: 'SEC-0001', batchNo: 'SEC-B2401', city: 'Mumbai', manufacturer: 'Sun Pharma', compoundGrade: 'Se 99.999% CIGS Target', application: 'Thin Film Solar (Tata Power)', purityPercent: 99.999, densityGcm3: 4.81, investmentCr: 680, status: 'Delivered', priority: 'High', origin: 'Sun Pharma Mumbai (MH)', destination: 'Tata Power Mumbai (MH)', shipDate: '2026-07-15', transitDays: 0, zone: 'West', remarks: 'Se 5N sputtering target for Tata Power CIGS thin-film solar panel production &#8594; 99.999% Se &#8594; &#8377;680Cr for 2 tonnes &#8594; India &#8377;20,400Cr solar Se &#8594; Tata Power 500MW &#8594; 4.81 g/cm3 &#8594; &#8594; sputter &#8594; &#8594; 20% &#8594; &#8594; CIGS' },
+  { id: 'SEC-0002', batchNo: 'SEC-B2402', city: 'Hyderabad', manufacturer: 'DRDO DMRL', compoundGrade: 'ZnSe 99.99% IR Window', application: 'FLIR Sensor (BEL)', purityPercent: 99.99, densityGcm3: 5.42, investmentCr: 520, status: 'Delivered', priority: 'Critical', origin: 'DRDO DMRL Hyderabad (TG)', destination: 'BEL Ghaziabad (UP)', shipDate: '2026-07-16', transitDays: 2, zone: 'South', remarks: 'ZnSe polycrystalline blank for BEL military thermal FLIR imaging IR window &#8594; 99.99% ZnSe &#8594; &#8377;520Cr for 0.5 tonnes &#8594; India &#8377;15,600Cr defence Se &#8594; BEL 5000 FLIR &#8594; 5.42 g/cm3 &#8594; &#8594; CVD &#8594; &#8594; 8-12um &#8594; &#8594; IR' },
+  { id: 'SEC-0003', batchNo: 'SEC-B2403', city: 'Bengaluru', manufacturer: 'CSIR-NPL', compoundGrade: 'CdSe 99.999% Quantum Dot', application: 'QD Display (Dixon)', purityPercent: 99.999, densityGcm3: 5.81, investmentCr: 740, status: 'Delivered', priority: 'High', origin: 'CSIR-NPL New Delhi (DL)', destination: 'Dixon Noida (UP)', shipDate: '2026-07-17', transitDays: 1, zone: 'North', remarks: 'CdSe quantum dot for Dixon next-gen QLED TV display colour conversion layer &#8594; 99.999% CdSe &#8594; &#8377;740Cr for 0.05 tonnes &#8594; India &#8377;22,200Cr display Se &#8594; Dixon 2M QLED &#8594; 5.81 g/cm3 &#8594; &#8594; hot-inject &#8594; &#8594; 620nm &#8594; &#8594; QLED' },
+  { id: 'SEC-0004', batchNo: 'SEC-B2404', city: 'Pune', manufacturer: 'Bharat Forge', compoundGrade: 'Na2SeO3 99.9% Feed Additive', application: 'Animal Nutrition (Venkateshwara)', purityPercent: 99.9, densityGcm3: 3.10, investmentCr: 280, status: 'Delivered', priority: 'Medium', origin: 'Bharat Forge Pune (MH)', destination: 'Venkateshwara Hatcheries (AP)', shipDate: '2026-07-18', transitDays: 2, zone: 'West', remarks: 'Na2SeO3 feed-grade premix for Venkateshwara poultry selenium supplementation &#8594; 99.9% Na2SeO3 &#8594; &#8377;280Cr for 1 tonne &#8594; India &#8377;8,400Cr agri Se &#8594; Venkateshwara 50M birds &#8594; 3.10 g/cm3 &#8594; &#8594; premix &#8594; &#8594; 0.3ppm &#8594; &#8594; feed' },
+  { id: 'SEC-0005', batchNo: 'SEC-B2405', city: 'Chennai', manufacturer: 'IGCAR', compoundGrade: 'Se 99.995% Nuclear Grade', application: 'Photovoltaic Detector (BHAVINI)', purityPercent: 99.995, densityGcm3: 4.81, investmentCr: 580, status: 'Delivered', priority: 'High', origin: 'IGCAR Kalpakkam (TN)', destination: 'BHAVINI Kalpakkam (TN)', shipDate: '2026-07-19', transitDays: 0, zone: 'South', remarks: 'Se nuclear-grade for BHAVINI FBR in-vessel neutron flux selenium detector &#8594; 99.995% Se &#8594; &#8377;580Cr for 0.3 tonnes &#8594; India &#8377;17,400Cr nuclear Se &#8594; BHAVINI PFBR &#8594; 4.81 g/cm3 &#8594; &#8594; (n,gamma) &#8594; &#8594; 81Se &#8594; &#8594; detector' },
+  { id: 'SEC-0006', batchNo: 'SEC-B2406', city: 'Ahmedabad', manufacturer: 'Gujarat Selenium Tech', compoundGrade: 'SeS2 99.9% Vulcanizing', application: 'Rubber Curing (CEAT)', purityPercent: 99.9, densityGcm3: 4.10, investmentCr: 320, status: 'Delivered', priority: 'Medium', origin: 'Gujarat Selenium Tech Ahmedabad (GJ)', destination: 'CEAT Mumbai (MH)', shipDate: '2026-07-20', transitDays: 1, zone: 'West', remarks: 'SeS2 vulcanizing agent for CEAT radial truck tyre high-speed curing process &#8594; 99.9% SeS2 &#8594; &#8377;320Cr for 1.5 tonnes &#8594; India &#8377;9,600Cr rubber Se &#8594; CEAT 10M tyres &#8594; 4.10 g/cm3 &#8594; &#8594; cure &#8594; &#8594; 160&#176;C &#8594; &#8594; tyre' },
+  { id: 'SEC-0007', batchNo: 'SEC-B2407', city: 'Jaipur', manufacturer: 'Rajasthan Selenium Corp', compoundGrade: 'PbSe 99.99% IR Detector', application: 'Thermal Imager (BEL)', purityPercent: 99.99, densityGcm3: 8.27, investmentCr: 460, status: 'Delivered', priority: 'High', origin: 'Rajasthan Selenium Corp Jaipur (RJ)', destination: 'BEL Pune (MH)', shipDate: '2026-07-21', transitDays: 2, zone: 'North', remarks: 'PbSe thin-film for BEL military uncooled thermal imaging focal plane array &#8594; 99.99% PbSe &#8594; &#8377;460Cr for 0.1 tonnes &#8594; India &#8377;13,800Cr defence Se &#8594; BEL 3000 sensors &#8594; 8.27 g/cm3 &#8594; &#8594; PVD &#8594; &#8594; 3-5um &#8594; &#8594; TI' },
+  { id: 'SEC-0008', batchNo: 'SEC-B2408', city: 'Bhubaneswar', manufacturer: 'NALCO', compoundGrade: 'Se 99.9% Glass Decolorizer', application: 'Glass Manufacturing (Asahi India)', purityPercent: 99.9, densityGcm3: 4.81, investmentCr: 260, status: 'Delivered', priority: 'Medium', origin: 'NALCO Bhubaneswar (OD)', destination: 'Asahi India Mumbai (MH)', shipDate: '2026-07-22', transitDays: 3, zone: 'East', remarks: 'Se decolorizer additive for Asahi India automotive glass iron-green tint removal &#8594; 99.9% Se &#8594; &#8377;260Cr for 2 tonnes &#8594; India &#8377;7,800Cr glass Se &#8594; Asahi 20M m2 &#8594; 4.81 g/cm3 &#8594; &#8594; float &#8594; &#8594; Fe2+ &#8594; &#8594; clear' },
+  { id: 'SEC-0009', batchNo: 'SEC-B2409', city: 'Coimbatore', manufacturer: 'Tamil Nadu Selenium Corp', compoundGrade: 'CuInSe2 99.99% CIS Solar', application: 'Flexible Solar (Adani Green)', purityPercent: 99.99, densityGcm3: 5.77, investmentCr: 620, status: 'Delivered', priority: 'High', origin: 'Tamil Nadu Selenium Corp Coimbatore (TN)', destination: 'Adani Green Chennai (TN)', shipDate: '2026-07-23', transitDays: 1, zone: 'South', remarks: 'CuInSe2 chalcopyrite target for Adani Green flexible CIS thin-film solar module &#8594; 99.99% CuInSe2 &#8594; &#8377;620Cr for 0.8 tonnes &#8594; India &#8377;18,600Cr solar Se &#8594; Adani 100MW &#8594; 5.77 g/cm3 &#8594; &#8594; sputter &#8594; &#8594; 15% &#8594; &#8594; CIS' },
+  { id: 'SEC-0010', batchNo: 'SEC-B2410', city: 'Surat', manufacturer: 'Gujarat Se Products', compoundGrade: 'SeO2 99.9% Oxidizer', application: 'Organic Synthesis (Lupin)', purityPercent: 99.9, densityGcm3: 3.95, investmentCr: 340, status: 'Delivered', priority: 'Medium', origin: 'Gujarat Se Products Surat (GJ)', destination: 'Lupin Aurangabad (MH)', shipDate: '2026-07-24', transitDays: 2, zone: 'West', remarks: 'SeO2 oxidant for Lupin API selenoxide elimination asymmetric organic synthesis &#8594; 99.9% SeO2 &#8594; &#8377;340Cr for 0.3 tonnes &#8594; India &#8377;10,200Cr pharma Se &#8594; Lupin 5 APIs &#8594; 3.95 g/cm3 &#8594; &#8594; oxidant &#8594; &#8594; chiral &#8594; &#8594; API' },
+  { id: 'SEC-0011', batchNo: 'SEC-B2411', city: 'Guwahati', manufacturer: 'Assam Selenium Metals', compoundGrade: 'Ag2Se 99.9% Thermoelectric', application: 'TEG Module (L&amp;T)', purityPercent: 99.9, densityGcm3: 7.30, investmentCr: 480, status: 'Delivered', priority: 'High', origin: 'Assam Selenium Metals Guwahati (AS)', destination: 'L&amp;T Mumbai (MH)', shipDate: '2026-07-25', transitDays: 4, zone: 'East', remarks: 'Ag2Se selenide for L&amp;T industrial waste heat thermoelectric generator module &#8594; 99.9% Ag2Se &#8594; &#8377;480Cr for 0.2 tonnes &#8594; India &#8377;14,400Cr energy Se &#8594; L&amp;T 50 units &#8594; 7.30 g/cm3 &#8594; &#8594; hot-press &#8594; &#8594; 200&#176;C &#8594; &#8594; TEG' },
+  { id: 'SEC-0012', batchNo: 'SEC-B2412', city: 'Lucknow', manufacturer: 'UP Selenium Industries', compoundGrade: 'Se 99.99% X-Ray Detector', application: 'Digital Radiography (HLL)', purityPercent: 99.99, densityGcm3: 4.81, investmentCr: 560, status: 'Delayed', priority: 'High', origin: 'UP Selenium Industries Lucknow (UP)', destination: 'HLL Hyderabad (TG)', shipDate: '2026-07-01', transitDays: 28, zone: 'North', remarks: 'Se amorphous photoconductor for HLL direct-conversion digital X-ray flat panel detector &#8594; 99.99% Se &#8594; &#8377;560Cr for 0.4 tonnes &#8594; monsoon delay &#8594; India &#8377;16,800Cr medical Se &#8594; HLL 1K DR &#8594; 4.81 g/cm3 &#8594; &#8594; PVD &#8594; &#8594; a-Se &#8594; &#8594; DR' },
+  { id: 'SEC-0013', batchNo: 'SEC-B2413', city: 'Noida', manufacturer: 'SAIL', compoundGrade: 'MnSe 99.5% Phosphor', application: 'LED Phosphor (Dixon)', purityPercent: 99.5, densityGcm3: 4.60, investmentCr: 380, status: 'Delivered', priority: 'Medium', origin: 'SAIL Rourkela (OD)', destination: 'Dixon Noida (UP)', shipDate: '2026-07-26', transitDays: 1, zone: 'East', remarks: 'MnSe phosphor for Dixon LED backlight wide-colour-gamut orange emission &#8594; 99.5% MnSe &#8594; &#8377;380Cr for 0.1 tonnes &#8594; India &#8377;11,400Cr display Se &#8594; Dixon 5M LED &#8594; 4.60 g/cm3 &#8594; &#8594; solid-state &#8594; &#8594; 590nm &#8594; &#8594; LED' },
+  { id: 'SEC-0014', batchNo: 'SEC-B2414', city: 'Bhopal', manufacturer: 'BHEL', compoundGrade: 'Se 99.95% Copying Drum', application: 'Photocopier OPC (Canon)', purityPercent: 99.95, densityGcm3: 4.81, investmentCr: 290, status: 'Delivered', priority: 'Medium', origin: 'BHEL Bhopal (MP)', destination: 'Canon India Noida (UP)', shipDate: '2026-07-27', transitDays: 1, zone: 'North', remarks: 'Se alloy for Canon India laser printer OPC drum photoconductive coating &#8594; 99.95% Se &#8594; &#8377;290Cr for 0.8 tonnes &#8594; India &#8377;8,700Cr office Se &#8594; Canon 1M drums &#8594; 4.81 g/cm3 &#8594; &#8594; vacuum dep &#8594; &#8594; 780nm &#8594; &#8594; OPC' }
+];
+
+const tabs = ['Dashboard', 'Registry', 'Analytics', 'Insights'] as const;
+type Tab = typeof tabs[number];
+const priorityColors: Record<string, string> = { Critical: 'bg-red-100 text-red-800', High: 'bg-amber-100 text-amber-800', Medium: 'bg-green-100 text-green-800', Low: 'bg-slate-100 text-slate-600' };
+const delayedSet = new Set(seleniumCompoundRecords.filter(r => r.status === 'Delayed').map(r => r.id));
+
+export default function SeleniumCompoundLogisticsView() {
+  const [activeTab, setActiveTab] = useState<Tab>('Dashboard');
+  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const toggleFilter = (k: string, v: string) => { setFilters(p => { const s = { ...p }; const a = s[k] || []; const i = a.indexOf(v); if (i > -1) { a.splice(i, 1); if (!a.length) delete s[k]; } else s[k] = [...a, v]; return s; }); };
+  const filtered = useMemo(() => {
+    let d = seleniumCompoundRecords;
+    if (search) { const q = search.toLowerCase(); d = d.filter(r => r.id.toLowerCase().includes(q) || r.batchNo.toLowerCase().includes(q) || r.compoundGrade.toLowerCase().includes(q) || r.application.toLowerCase().includes(q) || r.city.toLowerCase().includes(q) || r.manufacturer.toLowerCase().includes(q)); }
+    Object.entries(filters).forEach(([k, vs]) => { if (vs.length) d = d.filter(r => { const v = String((r as unknown as Record<string, unknown>)[k] ?? ''); return vs.some(x => v.toLowerCase().includes(x.toLowerCase())); }); });
+    return d;
+  }, [search, filters]);
+  const totalCr = filtered.reduce((s: number, r) => s + r.investmentCr, 0);
+  const avgPurity = filtered.length ? filtered.reduce((s: number, r) => s + r.purityPercent, 0) / filtered.length : 0;
+  const delayedCount = filtered.filter(r => r.status === 'Delayed').length;
+
+  return (
+    <div className="space-y-6">
+      <PageHeader title="Selenium Compound Logistics" description="Indian selenium compound supply chain tracking for CIGS thin-film solar, IR optics, quantum dot displays, nuclear detectors, rubber vulcanization, thermoelectric generators, and medical digital radiography" />
+      <div className="flex gap-2 border-b">
+        {tabs.map(t => (<button key={t} onClick={() => setActiveTab(t)} className={`px-4 py-2 text-sm font-medium ${activeTab === t ? 'border-b-2 border-emerald-500 text-emerald-700' : 'text-muted-foreground hover:text-foreground'}`}>{t}</button>))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card><CardContent><div className="text-2xl font-bold text-emerald-600">{filtered.length}</div><div className="text-xs text-muted-foreground">Total Shipments</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-emerald-600">&#8377;{totalCr.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground">Total Investment</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-emerald-600">{avgPurity.toFixed(2)}%</div><div className="text-xs text-muted-foreground">Avg Purity</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-red-500">{delayedCount}</div><div className="text-xs text-muted-foreground">Delayed Shipments</div></CardContent></Card>
+      </div>
+      {(activeTab === 'Dashboard' || activeTab === 'Registry') && (
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <input placeholder="Search ID, grade, application, city..." value={search} onChange={e => setSearch(e.target.value)} className="border rounded-md px-3 py-1.5 text-sm flex-1 min-w-48" />
+            {['status', 'priority', 'zone'].map(f => { const opts = [...new Set(seleniumCompoundRecords.map(r => (r as unknown as Record<string, unknown>)[f] as string))]; return (<div key={f} className="flex flex-wrap gap-1">{opts.map(o => (<Badge key={o} variant={(filters[f] || []).includes(o) ? 'default' : 'outline'} className="cursor-pointer text-xs" onClick={() => toggleFilter(f, o)}>{o}</Badge>))}</div>); })}
+          </div>
+          <div className="rounded-md border"><div className="max-h-96 overflow-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-background"><tr><th className="p-2 text-left">ID</th><th className="p-2 text-left">Batch</th><th className="p-2 text-left">Grade</th><th className="p-2 text-left">Application</th><th className="p-2 text-right">Purity%</th><th className="p-2 text-right">&#8377;Cr</th><th className="p-2 text-left">Status</th></tr></thead><tbody>{filtered.map(r => (<tr key={r.id} className={`border-t ${delayedSet.has(r.id) ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}><td className="p-2">{r.id}</td><td className="p-2">{r.batchNo}</td><td className="p-2">{r.compoundGrade}</td><td className="p-2">{r.application}</td><td className="p-2 text-right">{r.purityPercent}</td><td className="p-2 text-right">{r.investmentCr}</td><td className="p-2"><Badge variant={r.status === 'Delivered' ? 'default' : 'destructive'}>{r.status}</Badge></td></tr>))}</tbody></table></div></div>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Analytics') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card><CardHeader><CardTitle className="text-sm">Investment by Application</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.application] = (m[r.application] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([a, v]) => (<div key={a} className="flex justify-between text-sm"><span>{a}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Shipments by Zone</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).map(([z, c]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Routes by Value</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.sort((a, b) => b.investmentCr - a.investmentCr).slice(0, 7).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.origin.split('(')[0]} &#8594; {r.destination.split('(')[0]}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Solar &amp; Display</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.filter(r => r.application.toLowerCase().includes('solar') || r.application.toLowerCase().includes('display') || r.application.toLowerCase().includes('qled') || r.application.toLowerCase().includes('led') || r.application.toLowerCase().includes('cis')).sort((a, b) => b.investmentCr - a.investmentCr).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.compoundGrade}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">By Priority</CardTitle></CardHeader><CardContent><div className="space-y-2">{Object.entries(filtered.reduce((m, r) => { m[r.priority] = (m[r.priority] || 0) + 1; return m }, {} as Record<string, number>)).map(([p, c]) => (<div key={p} className="flex justify-between text-sm"><span className={priorityColors[p] || ''}>{p}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Compound Type Distribution</CardTitle></CardHeader><CardContent><div className="space-y-2">{[{ l: 'Elemental Se', f: filtered.filter(r => r.compoundGrade.startsWith('Se ') || r.compoundGrade.startsWith('Se 99')).length }, { l: 'Metal Selenide', f: filtered.filter(r => r.compoundGrade.includes('Se ') && !r.compoundGrade.startsWith('Se ') && !r.compoundGrade.includes('O')).length }, { l: 'Selenium Oxide', f: filtered.filter(r => r.compoundGrade.includes('SeO')).length }, { l: 'Sodium Selenite/Other', f: filtered.filter(r => r.compoundGrade.includes('Na2Se') || r.compoundGrade.includes('SeS')).length }].map(b => (<div key={b.l} className="flex justify-between text-sm"><span>{b.l}</span><span className="font-medium">{b.f}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Manufacturers</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.manufacturer] = (m[r.manufacturer] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([m, v]) => (<div key={m} className="flex justify-between text-sm"><span>{m}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Avg Transit Days</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.length ? (Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || [] as number[]).concat(r.transitDays); return m }, {} as Record<string, number[]>)) as [string, number[]][]).map(([z, d]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{(d.reduce((s, n) => s + n, 0) / d.length).toFixed(1)}d</span></div>)) : []}</div></CardContent></Card>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Insights') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card><CardContent><div className="text-sm font-medium text-emerald-600 mb-2">Tata Power CIGS Thin-Film Solar</div><div className="text-xs text-muted-foreground">Tata Power Solar establishing 500MW CIGS thin-film PV line using Se 5N sputtering targets from Sun Pharma byproduct selenium. CIGS achieves 20% lab efficiency at half the silicon cost with flexible substrate capability. India targeting 10GW thin-film solar by 2030 under &#8377;25,000Cr National Solar Manufacturing Mission.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-emerald-600 mb-2">CSIR-NPL CdSe Quantum Dot Displays</div><div className="text-xs text-muted-foreground">CSIR-NPL developing CdSe core-shell quantum dots for Dixon QLED TV colour conversion achieving 120% NTSC gamut vs 85% for conventional LCD. Hot-injection synthesis enables monodisperse 620nm red emission. India targeting 50M QLED units by 2028 under &#8377;4,200Cr DST Quantum Technology Programme.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-emerald-600 mb-2">HLL Amorphous Se X-Ray Detector</div><div className="text-xs text-muted-foreground">HLL fabricating amorphous selenium photoconductor layers for direct-conversion digital radiography flat panel detectors eliminating indirect scintillator losses. Se provides 1000x higher sensitivity than CsI at 80kVp. India deploying 1000 DR systems under &#8377;6,800Cr National Diagnostic Imaging Programme replacing FUJI import dependency.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-emerald-600 mb-2">BEL ZnSe Military IR Optics</div><div className="text-xs text-muted-foreground">BEL qualifying CVD-grown ZnSe polycrystalline blanks for military thermal imaging seeker windows transmitting 8-12um with zero cold-shock cracking. ZnSe provides superior transmission vs Ge at reduced refractive index. DRDO co-developing under &#8377;2,400Cr DRDO Electro-Optics Mission for Nag/Helina ATGM and UAV payload.</div></CardContent></Card>
+        </div>
+      )}
+    </div>
+  );
+}
+'''
+
+outpath = '/home/z/my-project/src/components/modules/selenium-compound-logistics-view.tsx'
+with open(outpath, 'w', encoding='utf-8') as f:
+    f.write(content)
+print(f"Generated: {outpath}")
+print(f"Size: {len(content)} bytes")
