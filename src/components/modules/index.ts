@@ -656,3 +656,5 @@ export { default as RutheniumCatalystLogisticsView } from './ruthenium-catalyst-
 export { default as BismuthTellurideLogisticsView } from './bismuth-telluride-logistics-view'
 export { default as LithiumMetalLogisticsView } from './lithium-metal-logistics-view'
 export { default as BerylliumOxideLogisticsView } from './beryllium-oxide-logistics-view'
+export { default as ThalliumCompoundLogisticsView } from './thallium-compound-logistics-view'
+export { default as CadmiumAlloyLogisticsView } from './cadmium-alloy-logistics-view'
