@@ -1,4 +1,46 @@
 ---
+Task ID: R456 — Gallium Metal Logistics + Tellurium Metal Logistics
+Agent: Main Agent (Cron Loop)
+Task: R456 — 2 new Indian logistics modules for gallium metal (Ga) GaAs wafer/GaN radar/GaInP solar/submarine sonar supply chain and tellurium metal (Te) CdTe solar/Bi2Te3 thermoelectric/PCM memory/submarine AIP supply chain.
+
+Work Log:
+- Read worklog: R455 complete (commit 1ff8984), 736 exports, ~63,088 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: gallium-metal (CLEAN), tellurium-metal (CLEAN), cadmium-metal (CLEAN), magnesium-metal (CLEAN), silicon-metal (EXISTS), titanium-sponge (EXISTS)
+- Icons verified: CloudRain (0 uses, confirmed), Key (0 uses, confirmed)
+- Created Gallium Metal Logistics (R456a): 228 lines, gam-* sky #0369a1, 14 records
+  - 14 grades: Ga 99.9999% GaAs Wafer, Ga 99.999% GaN RF Amplifier, Ga 99.99% GaInP Solar Cell, Ga 99.95% Liquid Metal TIM, Ga 99.9% Ga2O3 Power Device, Ga 99.85% NTD Si Dope, Ga 99.995% VCSEL Laser, Ga 99.5% Galinstan Thermometer, Ga 99.9% 5G Phased Array, Ga 99.9999% Satellite Solar, Ga 99.7% Flexible Solar Film, Ga 99.99% Submarine Sonar GaN, Ga 99.9% Warship EW Jammer, Ga 99.0% General Alloy
+  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Osram GaAs LED wafer, DRDO AESA GaN MMIC, ISRO GSAT-4 GaInP cell, Intel Ga LM TIM pad, IISc Ga2O3 MOSFET, BHEL Si NTD Ga flux, II-VI 850nm VCSEL, Rajasthan hospital Ga thermometer, Jio 5G GaN PA module, ISRO NavIC triple-junction, Tata Power flex PV, IN Navy SSK GaN sonar, DRDO naval GaN jammer, SAIL Ga alloy charge
+  - Rs 12,100 Cr total, avg 99.35%, density 5.91 g/cm3
+  - Delayed: GAM-A2412 (28d, monsoon Visakhapatnam, submarine GaN sonar array)
+- Created Tellurium Metal Logistics (R456b): 228 lines, tlm-* purple #9333ea, 14 records
+  - 14 grades: Te 99.999% CdTe Solar Cell, Te 99.99% Bi2Te3 Thermoelectric, Te 99.9% Phase-Change Memory, Te 99.5% Rubber Vulcanization, Te 99.85% Copper Telluride Alloy, Te 99.8% Peltier Cooler, Te 99.95% CdHgTe FLIR, Te 99.0% Glass Colorant, Te 99.7% SeTe Photoreceptor, Te 99.999% Topological Insulator, Te 99.4% PbTe IR Emitter, Te 99.95% Submarine AIP TeGen, Te 99.8% Warship Thermal MCT, Te 97% General Metallurgical
+  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Tata Power CdTe module, ISRO deep-space RTG, IISc Ge2Sb2Te5 PCM, MRF tyre Te vulcanizer, BHEL free-machining CuTe, Blue Star Peltier cooler, DRDO MCT thermal sight, Asahi Te glass colorant, HP laser printer drum, IISc Bi2Te3 TI research, Havells PbTe IR heater, IN Navy SSK AIP Te module, DRDO warship IR MCT, SAIL steel Te deox
+  - Rs 12,100 Cr total, avg 99.35%, density 6.24 g/cm3
+  - Delayed: TLM-A2412 (28d, monsoon Visakhapatnam, submarine AIP thermoelectric)
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (738 exports), page.tsx (1268 viewMap entries), app-store.ts (746 navItems)
+- CSS appended: 16 new rules (~63,108 total)
+- Git commit: 11526b1, pushed to main
+
+Stage Summary:
+- Project now: 738 module exports, 746 navItems, ~63,108 CSS lines, 1268 viewMap entries, 0 TSC errors in src/
+- Gallium Metal: Submarine GaN sonar &#8377;960Cr, GaAs LED &#8377;960Cr, satellite solar &#8377;960Cr, GaN radar &#8377;940Cr
+- Tellurium Metal: Submarine AIP &#8377;960Cr, CdTe solar &#8377;940Cr, FLIR MCT &#8377;900Cr, RTG &#8377;920Cr
+- Delayed: GAM-A2412 (28d), TLM-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 738 module exports, 746 navItems, ~63,108 CSS lines, 1268 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 63K+ lines, dev server OOM — TSC-only QA gate
+- Ga 99.9999% GaAs grade — extreme criticality for defense AESA radar, imported from China/Japan
+- Te 99.999% CdTe grade — only 8x more abundant than Au, extreme scarcity for solar/defense
+- Next clean candidates: cadmium-metal, magnesium-metal, vanadium-metal, tungsten-carbide, silicon-carbide, boron-nitride
+---
+---
 Task ID: R455 — Bismuth Metal Logistics + Indium Metal Logistics
 Agent: Main Agent (Cron Loop)
 Task: R455 — 2 new Indian logistics modules for bismuth metal (Bi) pharma compound/fusible alloy/lead-free solder/submarine EMI shield supply chain and indium metal (In) ITO target/LCD semiconductor/CIGS solar/submarine sonar transducer supply chain.
