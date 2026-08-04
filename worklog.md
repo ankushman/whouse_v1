@@ -1,43 +1,42 @@
 ---
-Task ID: R458 — Vanadium Metal Logistics + Manganese Sulfate Logistics
+Task ID: R459 — Cobalt Carbonate Logistics + Zinc Sulfate Logistics
 Agent: Main Agent (Cron Loop)
-Task: R458 — 2 new Indian logistics modules for vanadium metal (V) HSLA steel/VRFB battery/Ti-6Al-4V aerospace/submarine HY-130 hull supply chain and manganese sulfate (MnSO4) fertilizer/NMC cathode/animal feed/submarine Pb-MnO2 battery supply chain.
+Task: R459 — 2 new Indian logistics modules for cobalt carbonate (CoCO3) NMC cathode/superalloy binder/ceramic pigment/submarine sonar magnet supply chain and zinc sulfate (ZnSO4) fertilizer/Zn-ion battery/galvanizing bath/submarine hull CP supply chain.
 
 Work Log:
-- Read worklog: R457 complete (commit 8edd4d6), 740 exports, ~63,128 CSS
+- Read worklog: R458 complete (commit 50ce829), 742 exports, ~63,152 CSS
 - TSC pre-validation: 0 errors in src/
-- agent-browser QA: preview loaded, no console errors
-- Candidate scan: vanadium-metal (CLEAN), manganese-sulfate (CLEAN), cobalt-carbonate (CLEAN), lead-oxide (EXISTS), zinc-sulfate (CLEAN), copper-sulfate (CLEAN), chromium-metal (EXISTS), molybdenum-metal (EXISTS)
-- Icons verified: GraduationCap (0 uses, confirmed), Cherry (0 uses, confirmed)
-- Created Vanadium Metal Logistics (R458a): 227 lines, vam-* rust #c2410c, 14 records
-  - 14 grades: V 99.9% HSLA Steel Alloy, V 99.7% Aerospace Ti-6Al-4V, V 99.5% Vanadium Redox Flow Battery, V 99.6% Tool Steel HSS M2, V 99.85% Ferrovanadium FeV80, V 99.3% Cr-V Turbine Blade Steel, V 99.95% V2O5 SCR Catalyst, V 99.0% Surgical Implant Ti-6Al-7Nb, V 99.4% Spring Steel SiCrV, V 99.8% Nitriding Alloy Nitro-V, V 99.2% Petrochemical Catalyst V2O5, V 99.7% Submarine Pressure Hull HY-130, V 99.6% Warship Armour Plate, V 98.5% General Ferrovanadium
+- Candidate scan: cobalt-carbonate (CLEAN), zinc-sulfate (CLEAN), copper-sulfate (CLEAN), manganese-metal (CLEAN), chromium-sulfate (CLEAN), nickel-carbonate (CLEAN)
+- Icons verified: Heart (0 uses, confirmed), Map (0 uses, confirmed)
+- Created Cobalt Carbonate Logistics (R459a): 227 lines, cbc-* cobalt-blue #1d4ed8, 14 records
+  - 14 grades: CoCO3 99.9% Li-Ion Battery Precursor, CoCO3 99.95% Superalloy Binder, CoCO3 99.5% Ceramic Pigment Blue, CoCO3 99.7% Hardmetal WC-Co Binder, CoCO3 99.85% Animal Feed Trace Mineral, CoCO3 99.3% Magnetic Alloy Alnico, CoCO3 99.8% Catalyst Petroleum HDS, CoCO3 99.0% Electroplating Anode, CoCO3 99.6% Rubber Adhesion Promoter, CoCO3 99.92% EV Battery NCM-811, CoCO3 99.4% Polyester Dye Catalyst, CoCO3 99.95% Submarine Sonar Magnet, CoCO3 99.8% Warship Gas Turbine Blade, CoCO3 97.5% General Industrial Grade
   - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: SAIL Vanadium-TiCr HSLA rebar, HAL Tejas LPTK Ti-V forge, Tata Power VRFB 4hr grid, Bharat Forge HSS V drill, SAIL Jindal FeV80 charge, BHEL 800MW steam turbine, Tata Cummins SCR DeNOx, AIIMS Ti-V bone plate, Indian Railways SiCrV spring, Mahindra Nitro-V crankshaft, IOC Mathura V2O5 contact, IN Navy SSK HY-130 weld, DRDO naval armour V-alloy, SAIL BOF FeV charge
-  - Rs 12,100 Cr total, avg 99.35%, density 6.0 g/cm3
-  - Delayed: VAM-A2412 (28d, monsoon Visakhapatnam, submarine HY-130 pressure hull V-alloy weld)
-- Created Manganese Sulfate Logistics (R458b): 227 lines, mns-* green #15803d, 14 records
-  - 14 grades: MnSO4 99.5% Micronutrient Fertilizer, MnSO4 99.9% NMC Battery Precursor, MnSO4 99.3% Animal Feed Supplement, MnSO4 99.7% Electrolytic MnO2 Feed, MnSO4 99.0% Agrochemical Intermediary, MnSO4 99.8% Pottery Glaze Colorant, MnSO4 99.6% Water Treatment Oxidant, MnSO4 99.2% Textile Dye Mordant, MnSO4 99.4% Tea Plantation Micronutrient, MnSO4 99.85% High-Purity Electrolyte, MnSO4 99.1% Dry Cell Battery Activator, MnSO4 99.9% Submarine Lead-Acid Battery, MnSO4 99.7% Warship Propulsion Fuel Additive, MnSO4 98.0% General Industrial Grade
+  - Applications: Exide NMC-622 Li cell, HAL Tejas Ni-Co blade, Corning Co-blue glass frit, Sandvik WC-Co carbide, Amul dairy Co premix, BHEL generator Alnico mag, IOC Vadodara Co-Mo HDS, Rajasthan Co bright plate, MRF brass Co-plated tyre, Ola Electric NCM-811 pack, Bhilwara Co-blue dye mord, IN Navy SSK sonar Alnico, DRDO naval LM2500 Co blade, SAIL steel Co charge
+  - Rs 12,100 Cr total, avg 99.35%, density 4.13 g/cm3
+  - Delayed: CBC-A2412 (28d, monsoon Visakhapatnam, submarine sonar Alnico magnet)
+- Created Zinc Sulfate Logistics (R459b): 227 lines, zns-* cyan #0e7490, 14 records
+  - 14 grades: ZnSO4 99.5% Agricultural Micronutrient, ZnSO4 99.9% Zn-Ion Battery Electrolyte, ZnSO4 99.3% Animal Feed Supplement, ZnSO4 99.7% Galvanizing Zinc Bath, ZnSO4 99.0% Water Treatment Coagulant, ZnSO4 99.8% Rayon Viscose Spin Bath, ZnSO4 99.6% Zinc Plating Electrolyte, ZnSO4 99.1% Wood Preservative, ZnSO4 99.4% Fungicide Zineb/Ziram, ZnSO4 99.85% Lithium Battery Zn Anode, ZnSO4 99.2% Dental Cement Zinc Phosphate, ZnSO4 99.9% Submarine Zinc Anode CP, ZnSO4 99.7% Warship Smoke Screening, ZnSO4 98.0% General Industrial Grade
   - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
-  - Applications: IFFCO Mn foliar spray, Exide NMC-811 Li cell, Amul dairy Mn premix, HBL Zn-MnO2 alkaline cell, UPL Mancozeb Mn bridge, Morbi purple Mn glaze, Mumbai BMC Fe-Mn filter, Bhilwara Mn dye mordant, Assam tea estate Mn foliar, Tata Mn electrorefining, Eveready MnO2 depolarizer, IN Navy SSK Pb-MnO2 bank, DRDO naval Mn anti-smoke, SAIL steel MnSO4 pickle
-  - Rs 12,100 Cr total, avg 99.35%, density 3.25 g/cm3
-  - Delayed: MNS-A2412 (28d, monsoon Visakhapatnam, submarine Pb-MnO2 battery bank)
+  - Applications: IFFCO Zn foliar spray, IISc Zn-ion pouch cell, Venkateshwara Zn feed, SAIL HDG bath replenish, Kolkata ZWC flocculant, Grasim Viscose ZnSO4 bath, Tata Steel Zn electroplate, Rajasthan CCA Zn treat, UPL Zineb fungicide, IISc Zn-Li prototype, Dental ZnPO4 cement, IN Navy SSK Zn anode plate, DRDO naval ZnO smoke, SAIL ZnSO4 pickle liquor
+  - Rs 12,100 Cr total, avg 99.35%, density 3.54 g/cm3
+  - Delayed: ZNS-A2412 (28d, monsoon Visakhapatnam, submarine Zn anode plate)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (742 exports), page.tsx (1272 viewMap entries), app-store.ts (754 navItems)
-- CSS appended: 16 new rules (~63,152 total)
-- Git commit: 50ce829, pushed to main
+- Three-file registration: index.ts (744 exports), page.tsx (1274 viewMap entries), app-store.ts (756 navItems)
+- CSS appended: 16 new rules (~63,176 total)
+- Git commit: 9f756cd, pushed to main
 
 Stage Summary:
-- Project now: 742 module exports, 754 navItems, ~63,152 CSS lines, 1272 viewMap entries, 0 TSC errors in src/
-- Vanadium Metal: Submarine HY-130 &#8377;960Cr, Ti-6Al-4V aerospace &#8377;940Cr, VRFB battery &#8377;900Cr, SCR catalyst &#8377;960Cr
-- Manganese Sulfate: Submarine Pb-MnO2 &#8377;960Cr, NMC cathode &#8377;940Cr, EMD battery &#8377;860Cr, VRFB &#8377;900Cr
-- Delayed: VAM-A2412 (28d), MNS-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+- Project now: 744 module exports, 756 navItems, ~63,176 CSS lines, 1274 viewMap entries, 0 TSC errors in src/
+- Cobalt Carbonate: Submarine sonar &#8377;960Cr, NCM-811 EV &#8377;960Cr, superalloy &#8377;960Cr, NMC-622 &#8377;940Cr
+- Zinc Sulfate: Submarine Zn anode &#8377;960Cr, Zn-ion battery &#8377;940Cr, Zn-Li hybrid &#8377;960Cr, galvanizing &#8377;860Cr
+- Delayed: CBC-A2412 (28d), ZNS-A2412 (28d) — both monsoon Visakhapatnam naval corridor
 
 **Project Current State:**
-- 742 module exports, 754 navItems, ~63,152 CSS lines, 1272 viewMap entries, 0 TSC errors in src/
+- 744 module exports, 756 navItems, ~63,176 CSS lines, 1274 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- V 99.7% aerospace Ti-6Al-4V grade — critical for Tejas Mk2 fighter, imported from China/Russia
-- V 99.5% VRFB battery grade — strategic energy storage material, China controls 60% global supply
-- MnSO4 99.9% NMC cathode grade — EV battery supply chain bottleneck, imported from South Africa/Australia
-- Next clean candidates: cobalt-carbonate, zinc-sulfate, copper-sulfate, manganese-metal, chromium-sulfate, nickel-carbonate
+- CoCO3 99.92% NCM-811 grade — DRC controls 70% global Co, critical EV battery supply chain risk
+- CoCO3 99.95% superalloy grade — strategic defense material, imported from China/Finland
+- ZnSO4 99.85% Zn-Li hybrid grade — emerging battery chemistry, limited Indian production capacity
+- Next clean candidates: copper-sulfate, manganese-metal, chromium-sulfate, nickel-carbonate, silicon-metal, titanium-sponge
