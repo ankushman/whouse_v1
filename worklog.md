@@ -1,4 +1,48 @@
 ---
+Task ID: R405 — Antimony Alloy Logistics + Tungsten Powder Logistics
+Agent: Main Agent (Cron Loop)
+Task: R405 — 2 new Indian logistics modules for antimony alloy supply chain and tungsten powder supply chain.
+
+Work Log:
+- Read worklog: R404 complete (commit 92e2d1d), 645 modules, 646 navItems, ~61,983 CSS
+- TSC pre-validation: 0 errors in src/
+- Dev server: OOM (not usable for visual QA at 645 modules)
+- Duplicate theme search: antimony-alloy CLEAN, tungsten-powder CLEAN
+- Icons verified: ShieldAlert and Hammer both confirmed in iconMap
+- Created Antimony Alloy Logistics (R405a): ~110 lines, ata-* violet #7c3aed, 14 records
+  - 14 alloy grades: Pb-Sb 6% Grid, Sn-Sb 5% Babbitt, Pb-Sb 3% Low-Main, Sb2O3 99.5% FR, Pb-Sb 11% Hard, Sn-Sb 8% Hard Solder, Sb 99.65% Regulus, Pb-Sb 2% Battery, Sn-Sb-Cu 4-4-0.5 Babbit, Sb2S3 98% Stibnite, Pb-Sb 9% Semi-Hard, Sb2O3 99.9% Nano Grade, In-Sb 5% Thermoelectric, Pb-Sb 7% Cable Sheath
+  - 14 manufacturers: Hindustan Lead, MIDHANI, DRDO NMRL, BEL, SAIL, TAM, Gujarat Antimony, Rajasthan Antimony, Tamil Nadu Antimony, NALCO, Assam Antimony, Gujarat Antimony Tech, UP Antimony, BHEL
+  - Applications: Exide auto battery, BHEL turbine bearing, MDL submarine battery, BEL FR plastic, Havells cable sheath, Dixon tech solder, Reliance PET catalyst, Luminous inverter, Cochin marine bearing, Wimco safety match, OFB bullet, Vikram Solar glass, BEL IR detector, KEC power cable
+  - &#8377;3,895 Cr total investment, avg 28.5% Sb
+  - Delayed: ATA-B2412 (22d, monsoon Gujarat, Vikram Solar nano-Sb2O3)
+- Created Tungsten Powder Logistics (R405b): ~110 lines, twp-* rose #e11d48, 14 records
+  - 14 powder grades: W-Ni-Fe 90/6/4 Heavy Alloy, WC-Co 88/12, W-5Re, W-Cu 80/20, W 99.95% Pure, WC-Ni 94/6, W-Cr-V HSS, W 99.9% Spherical AM, WC-Co 83/17 Mining, WO3 99.9%, W-Cu 75/25, WC 99% Nano, W-La2O3 Doped, WC-Co-Cr 86/10/4 HVOF
+  - 14 manufacturers: MIDHANI, HAL Aero Engines, IGCAR, DRDO DMRL, SAIL, Bharat Forge, Gujarat Tungsten, Rajasthan Tungsten, Tamil Nadu Tungsten, NALCO, Assam Tungsten, Gujarat Tungsten Tech, UP Tungsten, BHEL
+  - Applications: DRDO kinetic penetrator, HAL turbine blade tip, IGCAR nuclear target, BEL radar heat sink, Philips LED filament, Cummins valve seat, Sandvik cutting tool, ISRO thruster grid, Hindustan Zinc drill, Sandvik carbide precursor, ABB switchgear, Syrma PCB micro-drill, ESAB welding electrode, BHEL HVOF coating
+  - &#8377;5,415 Cr total investment, avg 74.6% W
+  - Delayed: TWP-B2412 (23d, monsoon Gujarat, Syrma nano-WC)
+- Both modules generated via Python raw string scripts (gen_r405a.py, gen_r405b.py)
+- Pre-generation fix: corrected particleSizeNm &#8594; particleSizeUm in TWP-0012 record
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (646), page.tsx (1167 viewMap entries), app-store.ts (652 navItems)
+- CSS appended: 22 new rules (~62,019 total)
+- Git commit: 21ce98e, pushed to main
+
+Stage Summary:
+- Project now: 647 module view files, 648 navItems, ~62,019 CSS lines, 1167 viewMap entries, 0 TSC errors in src/
+- Antimony Alloy: BEL In-Sb IR &#8377;480Cr, DRDO submarine battery &#8377;410Cr, BHEL Babbitt &#8377;320Cr, DRDO penetrator &#8377;620Cr
+- Tungsten Powder: DRDO kinetic W &#8377;620Cr, HAL WC-Co &#8377;540Cr, ISRO W AM &#8377;520Cr, Syrma nano-WC &#8377;450Cr
+- Delayed: ATA-B2412 (22d), TWP-B2412 (23d) &#8212; both monsoon Gujarat corridor
+
+**Project Current State:**
+- 647 module view files, 648 navItems, ~62,019 CSS lines, 1167 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Ghost modules: molybdenum-alloy, vanadium-alloy, tantalum-alloy (export-only, 29-31KB files)
+- Next clean candidates: vanadium-powder (vnp-*), zirconium-powder (zrp-*)
+
+---
 Task ID: R404 — Aluminum Powder Logistics + Silicon Powder Logistics + Bug Fix
 Agent: Main Agent (Cron Loop)
 Task: R404 — 2 new Indian logistics modules for aluminum powder supply chain and silicon powder supply chain. Also fixed 3 pre-existing malformed HTML entity bugs.
