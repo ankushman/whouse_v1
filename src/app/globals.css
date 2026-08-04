@@ -62147,3 +62147,13 @@ html.theme-transition body {
 .vns-card-accent { border-left: 3px solid #f97316; }
 .vns-kpi-highlight { color: #ea580c; font-weight: 700; }
 .vns-table-header { background-color: #fff7ed; }
+/* === Tantalum Powder Logistics Module Styles === */
+.tap-module-header { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
+.tap-card-accent { border-left: 3px solid #06b6d4; }
+.tap-kpi-highlight { color: #0891b2; font-weight: 700; }
+.tap-table-header { background-color: #ecfeff; }
+/* === Gallium Arsenide Logistics Module Styles === */
+.gas-module-header { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
+.gas-card-accent { border-left: 3px solid #8b5cf6; }
+.gas-kpi-highlight { color: #7c3aed; font-weight: 700; }
+.gas-table-header { background-color: #f5f3ff; }
