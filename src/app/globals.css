@@ -61903,3 +61903,46 @@ html.theme-transition body {
 .tna-tab-inactive { color: #78716c; }
 .tna-tab-inactive:hover { color: #0284c7; background-color: rgba(2,132,199,0.04); }
 @keyframes tna-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+/* R403a - Titanium Powder Logistics (tip-* slate #475569) */
+.tip-dashboard-card { border-left: 3px solid #475569; }
+.tip-dashboard-card:hover { box-shadow: 0 0 12px rgba(71,85,105,0.15); transform: translateY(-1px); }
+.tip-registry-card { border-left: 3px solid #64748b; }
+.tip-registry-card:hover { box-shadow: 0 0 12px rgba(71,85,105,0.12); }
+.tip-analytics-card { border-left: 3px solid #94a3b8; }
+.tip-analytics-card:hover { box-shadow: 0 0 12px rgba(71,85,105,0.1); }
+.tip-insights-card { border-left: 3px solid #cbd5e1; }
+.tip-insights-card:hover { box-shadow: 0 0 12px rgba(71,85,105,0.08); }
+.tip-badge { background-color: rgba(71,85,105,0.1); color: #475569; border: 1px solid rgba(71,85,105,0.2); }
+.tip-badge:hover { background-color: rgba(71,85,105,0.2); }
+.tip-status-delivered { color: #16a34a; font-weight: 600; }
+.tip-status-delayed { color: #dc2626; font-weight: 600; animation: tip-pulse 2s infinite; }
+.tip-priority-critical { color: #475569; font-weight: 700; }
+.tip-priority-high { color: #64748b; font-weight: 600; }
+.tip-table-header { background: linear-gradient(135deg, #475569, #64748b); color: white; }
+.tip-table-row:hover { background-color: rgba(71,85,105,0.04); }
+.tip-tab-active { border-bottom: 2px solid #475569; color: #475569; font-weight: 600; }
+.tip-tab-inactive { color: #78716c; }
+.tip-tab-inactive:hover { color: #475569; background-color: rgba(71,85,105,0.04); }
+@keyframes tip-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* R403b - Magnesium Powder Logistics (mgp-* lime #65a30d) */
+.mgp-dashboard-card { border-left: 3px solid #65a30d; }
+.mgp-dashboard-card:hover { box-shadow: 0 0 12px rgba(101,163,13,0.15); transform: translateY(-1px); }
+.mgp-registry-card { border-left: 3px solid #84cc16; }
+.mgp-registry-card:hover { box-shadow: 0 0 12px rgba(101,163,13,0.12); }
+.mgp-analytics-card { border-left: 3px solid #a3e635; }
+.mgp-analytics-card:hover { box-shadow: 0 0 12px rgba(101,163,13,0.1); }
+.mgp-insights-card { border-left: 3px solid #bef264; }
+.mgp-insights-card:hover { box-shadow: 0 0 12px rgba(101,163,13,0.08); }
+.mgp-badge { background-color: rgba(101,163,13,0.1); color: #65a30d; border: 1px solid rgba(101,163,13,0.2); }
+.mgp-badge:hover { background-color: rgba(101,163,13,0.2); }
+.mgp-status-delivered { color: #16a34a; font-weight: 600; }
+.mgp-status-delayed { color: #dc2626; font-weight: 600; animation: mgp-pulse 2s infinite; }
+.mgp-priority-critical { color: #65a30d; font-weight: 700; }
+.mgp-priority-high { color: #84cc16; font-weight: 600; }
+.mgp-table-header { background: linear-gradient(135deg, #65a30d, #84cc16); color: white; }
+.mgp-table-row:hover { background-color: rgba(101,163,13,0.04); }
+.mgp-tab-active { border-bottom: 2px solid #65a30d; color: #65a30d; font-weight: 600; }
+.mgp-tab-inactive { color: #78716c; }
+.mgp-tab-inactive:hover { color: #65a30d; background-color: rgba(101,163,13,0.04); }
+@keyframes mgp-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
