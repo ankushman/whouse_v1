@@ -765,3 +765,5 @@ export { default as RheniumMetalLogisticsView } from './rhenium-metal-logistics-
 export { default as IndiumTinOxideLogisticsView } from './indium-tin-oxide-logistics-view'
 export { default as AluminumNitrideLogisticsView } from './aluminum-nitride-logistics-view'
 export { default as SamariumCobaltLogisticsView } from './samarium-cobalt-logistics-view'
+export { default as MagnesiumIngotLogisticsView } from './magnesium-ingot-logistics-view'
+export { default as YttriaStabilizedZirconiaLogisticsView } from './yttria-stabilized-zirconia-logistics-view'

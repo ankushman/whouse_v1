@@ -63358,3 +63358,25 @@ html.theme-transition body {
 @keyframes smc-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .smc-shimmer { background: linear-gradient(90deg, transparent, rgba(159, 18, 57, 0.1), transparent); background-size: 200% 100%; animation: smc-shimmer 3s infinite; }
 .smc-hover:hover { background-color: rgba(159, 18, 57, 0.1); }
+
+/* === R468: Magnesium Ingot Logistics (mgi, #6b7280) === */
+@keyframes mgi-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes mgi-glow { 0%, 100% { box-shadow: 0 0 5px #6b7280; } 50% { box-shadow: 0 0 15px #6b7280; } }
+.mgi-gradient { background: linear-gradient(135deg, #6b7280, #374151); }
+.mgi-border { border-color: #6b7280; }
+.mgi-text { color: #6b7280; }
+.mgi-badge { background-color: rgba(107, 114, 128, 0.2); color: #6b7280; }
+@keyframes mgi-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.mgi-shimmer { background: linear-gradient(90deg, transparent, rgba(107, 114, 128, 0.1), transparent); background-size: 200% 100%; animation: mgi-shimmer 3s infinite; }
+.mgi-hover:hover { background-color: rgba(107, 114, 128, 0.1); }
+
+/* === R468: Yttria-Stabilized Zirconia Logistics (ysz, #b45309) === */
+@keyframes ysz-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ysz-glow { 0%, 100% { box-shadow: 0 0 5px #b45309; } 50% { box-shadow: 0 0 15px #b45309; } }
+.ysz-gradient { background: linear-gradient(135deg, #b45309, #78350f); }
+.ysz-border { border-color: #b45309; }
+.ysz-text { color: #b45309; }
+.ysz-badge { background-color: rgba(180, 83, 9, 0.2); color: #b45309; }
+@keyframes ysz-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ysz-shimmer { background: linear-gradient(90deg, transparent, rgba(180, 83, 9, 0.1), transparent); background-size: 200% 100%; animation: ysz-shimmer 3s infinite; }
+.ysz-hover:hover { background-color: rgba(180, 83, 9, 0.1); }
