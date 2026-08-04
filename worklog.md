@@ -1,4 +1,47 @@
 ---
+Task ID: R427 — Nickel Chromium Logistics + Molybdenum Disulphide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R427 — 2 new Indian logistics modules for nickel chromium (NiCr) heating/superalloy/thermocouple/nuclear supply chain and molybdenum disulphide (MoS2) solid lubricant/wear coating/aerospace/defense supply chain.
+
+Work Log:
+- Read worklog: R426 complete (commit 7866227), 685 exports, ~62,289 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: nickel-chromium, molybdenum-disulphide, tungsten-disulphide, silicon-wafer, germanium-ingot, vanadium-pentoxide, titanium-diboride, aluminium-nitride, lithium-carbide — ALL CLEAN (magnesium-alloy skipped, pre-existing)
+- Icons verified: Gem (confirmed), Wrench (confirmed)
+- Created Nickel Chromium Logistics (R427a): 200 lines, ncr-* rose #e11d48, 14 records
+  - 14 grades: NiCr 80/20 Heating, NiCr 60/15 Superalloy, NiCr 70/30 Thermocouple, NiCr 50/50 Resistance, NiCr 80/20 Oven, NiCr 60/20 Turbine, NiCr 80/20 EV, NiCr 90/10 Spark Plug, NiCr 70/30 Rail Weld, NiCr 80/20 Nuclear, NiCr 60/15 Glazing, NiCr 60/20 Submarine, NiCr 70/30 Missile, NiCr 50/50 General
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Shyam Alloys, BHEL R&D, Mahindra Steel, Rajasthan Alloys, Assam Alloys, Gujarat Alloys, UP Alloys, Vizag Alloys, DRDO TBRL, SAIL Alloys
+  - Applications: SAIL furnace, BEL Tejas afterburner, JSW caster TC, Bharat Forge heater, L&T galley, BHEL GT, Mahindra PTC, Bajaj spark, Indian Railways thermite, IGCAR nuclear, RAK kiln, GRSE periscope, DRDO BrahMos, SAIL boiler
+  - Rs 8,760 Cr total, avg 99.02% purity, temp 1050-1400 degC
+  - Delayed: NCR-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I periscope de-icing)
+- Created Molybdenum Disulphide Logistics (R427b): 200 lines, mdp-* lime #65a30d, 14 records
+  - 14 grades: MoS2 99.9% Aerospace, MoS2 99.5% Missile Bearing, MoS2 98% Metal Forming, MoS2 97% Auto Engine, MoS2 96% Gearbox, MoS2 99% Turbine Bearing, MoS2 98% Industrial Grease, MoS2 95% Chain, MoS2 94% Wire Rope, MoS2 99.8% Space, MoS2 97% Bolt, MoS2 99% Submarine, MoS2 99.5% Hypersonic, MoS2 93% General
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Shyam Chemicals, BHEL R&D, Godrej Lubricants, Rajasthan Lubricants, Assam Lubricants, Gujarat Lubricants, UP Lubricants, Vizag Lubricants, DRDO TBRL, SAIL Lubricants
+  - Applications: HAL Tejas gear, DRDO BrahMos gyro, JSW rolling, Mahindra piston, L&T naval, BHEL GT, Tata wind, Indian Railways chain, Coal India hoist, ISRO EVA, Adani pipeline, GRSE prop shaft, DRDO HSTDV, SAIL die
+  - Rs 8,760 Cr total, avg 97.86% purity, particle 0.04-0.30 um
+  - Delayed: MDP-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I prop shaft bearing)
+- HTML entity scan: 39 (NCR) + 39 (MDP) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (687 exports), page.tsx (1210 viewMap entries), app-store.ts (692 navItems)
+- CSS appended: 8 new rules (~62,298 total)
+- Git commit: 7a35070, pushed to main
+
+Stage Summary:
+- Project now: 687 module exports, 692 navItems, ~62,298 CSS lines, 1210 viewMap entries, 0 TSC errors in src/
+- Nickel Chromium: GRSE periscope &#8377;960Cr, DRDO BrahMos &#8377;880Cr, IGCAR nuclear &#8377;900Cr, JSW TC &#8377;940Cr
+- Molybdenum Disulphide: GRSE prop shaft &#8377;940Cr, ISRO EVA &#8377;920Cr, DRDO HSTDV &#8377;880Cr, DRDO BrahMos &#8377;780Cr
+- Delayed: NCR-B2412 (28d), MDP-B2412 (28d) — both monsoon Visakhapatnam corridor
+
+**Project Current State:**
+- 687 module exports, 692 navItems, ~62,298 CSS lines, 1210 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- NiCr 60/15 superalloy import-dependent from Russia/USA — sanctions risk
+- MoS2 99.8% space-grade from China — ISRO strategic stockpile needed
+- Next clean candidates: tungsten-disulphide, silicon-wafer, germanium-ingot, vanadium-pentoxide
+---
+---
 Task ID: R426 — Aluminium Powder Logistics + Zirconium Fluoride Logistics
 Agent: Main Agent (Cron Loop)
 Task: R426 — 2 new Indian logistics modules for aluminium powder (Al) additive manufacturing/aerospace/defense/pyrotechnic/space supply chain and zirconium fluoride (ZrF4) optical/laser/nuclear/fiber/defense supply chain.
