@@ -1,0 +1,116 @@
+r"""Generate Cadmium Sulphide Logistics View module (R409b)"""
+COMPONENT = r"""'use client';
+
+import React, { useState, useMemo } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { PageHeader } from '@/components/shared';
+import { Star } from 'lucide-react';
+
+interface CadmiumSulphideRecord {
+  id: string;
+  batchNo: string;
+  city: string;
+  manufacturer: string;
+  cdsmGrade: string;
+  application: string;
+  cdsPurityPercent: number;
+  particleSizeNm: number;
+  investmentCr: number;
+  status: string;
+  priority: string;
+  origin: string;
+  destination: string;
+  shipDate: string;
+  transitDays: number;
+  zone: string;
+  remarks: string;
+}
+
+const cadmiumSulphideRecords: CadmiumSulphideRecord[] = [
+  { id: 'CDS-0001', batchNo: 'CDS-B2401', city: 'Mumbai', manufacturer: 'Hindustan Zinc', cdsmGrade: 'CdS 99.999% Single Crystal', application: 'Photodiode Sensor (BEL)', cdsPurityPercent: 99.999, particleSizeNm: 5000, investmentCr: 380, status: 'Delivered', priority: 'Critical', origin: 'Hindustan Zinc Udaipur (RJ)', destination: 'BEL Bengaluru (KA)', shipDate: '2026-07-15', transitDays: 2, zone: 'West', remarks: 'Ultra-pure CdS single crystal for BEL laser rangefinder photodiode &#8594; 99.999% CdS &#8594; &#8377;380Cr for 0.5 tonnes &#8594; India &#8377;11,400Cr defence CdS &#8594; BEL 200 sensors &#8594; 5 mm crystal &#8594; 2.42 eV &#8594; UV-vis' },
+  { id: 'CDS-0002', batchNo: 'CDS-B2402', city: 'Bengaluru', manufacturer: 'Tata Advanced Materials', cdsmGrade: 'CdS:Cu 99.9% Nano Phosphor', application: 'EL Backlight Display (Reliance)', cdsPurityPercent: 99.9, particleSizeNm: 50, investmentCr: 420, status: 'Delivered', priority: 'High', origin: 'TAM Bengaluru (KA)', destination: 'Reliance Jamnagar (GJ)', shipDate: '2026-07-16', transitDays: 2, zone: 'South', remarks: 'Cu-doped CdS nano-phosphor for Reliance flexible EL backlight panel &#8594; 99.9% CdS &#8594; &#8377;420Cr for 0.3 tonnes &#8594; India &#8377;12,600Cr display CdS &#8594; Reliance 50M panels &#8594; 50 nm QD &#8594; 525 nm &#8594; EL' },
+  { id: 'CDS-0003', batchNo: 'CDS-B2403', city: 'Chennai', manufacturer: 'DRDO DMRL', cdsmGrade: 'CdS 99.99% Thin Film', application: 'CIGS Solar Cell (Adani Solar)', cdsPurityPercent: 99.99, particleSizeNm: 100, investmentCr: 560, status: 'Delivered', priority: 'Critical', origin: 'DRDO DMRL Hyderabad (TG)', destination: 'Adani Solar Mundra (GJ)', shipDate: '2026-07-17', transitDays: 2, zone: 'South', remarks: 'CdS window layer for Adani CIGS thin-film PV heterojunction &#8594; 99.99% CdS &#8594; &#8377;560Cr for 2 tonnes &#8594; India &#8377;16,800Cr solar CdS &#8594; Adani 10 GW &#8594; 100 nm CBD &#8594; 2.42 eV &#8594; window' },
+  { id: 'CDS-0004', batchNo: 'CDS-B2404', city: 'Hyderabad', manufacturer: 'IGCAR', cdsmGrade: 'CdS 99.95% Scintillator', application: 'Radiation Detector (BARC)', cdsPurityPercent: 99.95, particleSizeNm: 10000, investmentCr: 490, status: 'Delivered', priority: 'High', origin: 'IGCAR Kalpakkam (TN)', destination: 'BARC Mumbai (MH)', shipDate: '2026-07-18', transitDays: 2, zone: 'South', remarks: 'CdS scintillator crystal for BARC gamma radiation portal monitor &#8594; 99.95% CdS &#8594; &#8377;490Cr for 1 tonne &#8594; India &#8377;14,700Cr nuclear CdS &#8594; BARC 200 portals &#8594; 10 mm crystal &#8594; fast decay &#8594; scint' },
+  { id: 'CDS-0005', batchNo: 'CDS-B2405', city: 'Pune', manufacturer: 'Bharat Forge', cdsmGrade: 'CdS:Cl 99.9% Photoconductive', application: 'Laser Printer Drum (HP India)', cdsPurityPercent: 99.9, particleSizeNm: 200, investmentCr: 310, status: 'Delivered', priority: 'High', origin: 'Bharat Forge Pune (MH)', destination: 'HP India Bengaluru (KA)', shipDate: '2026-07-19', transitDays: 1, zone: 'West', remarks: 'Cl-doped CdS photoconductive layer for HP laser printer OPC drum &#8594; 99.9% CdS &#8594; &#8377;310Cr for 0.8 tonnes &#8594; India &#8377;9,300Cr printer CdS &#8594; HP 5M drums &#8594; 200 nm &#8594; 780 nm &#8594; OPC' },
+  { id: 'CDS-0006', batchNo: 'CDS-B2406', city: 'Ahmedabad', manufacturer: 'Gujarat CdS Tech', cdsmGrade: 'CdS/ZnS Core-Shell QD', application: 'QLED Display (Dixon OLED)', cdsPurityPercent: 99.99, particleSizeNm: 5, investmentCr: 650, status: 'Delivered', priority: 'Critical', origin: 'Gujarat CdS Tech Ahmedabad (GJ)', destination: 'Dixon OLED Noida (UP)', shipDate: '2026-07-20', transitDays: 2, zone: 'West', remarks: 'CdS/ZnS core-shell quantum dot for Dixon QLED TV green emission &#8594; 99.99% CdS &#8594; &#8377;650Cr for 0.05 tonnes &#8594; India &#8377;19,500Cr display CdS &#8594; Dixon 5M QLED &#8594; 5 nm QD &#8594; 530 nm &#8594; QLED' },
+  { id: 'CDS-0007', batchNo: 'CDS-B2407', city: 'Jaipur', manufacturer: 'Rajasthan CdS Minerals', cdsmGrade: 'CdS 99.5% Pigment', application: 'Artist Paint (Camlin)', cdsPurityPercent: 99.5, particleSizeNm: 500, investmentCr: 95, status: 'Delivered', priority: 'Low', origin: 'Rajasthan CdS Minerals Jaipur (RJ)', destination: 'Camlin Mumbai (MH)', shipDate: '2026-07-21', transitDays: 2, zone: 'North', remarks: 'Cadmium yellow lithopone pigment for Camlin premium artist oil paint &#8594; 99.5% CdS &#8594; &#8377;95Cr for 5 tonnes &#8594; India &#8377;2,850Cr pigment CdS &#8594; Camlin 10M tubes &#8594; 500 nm PSD &#8594; PY37 &#8594; lithopone' },
+  { id: 'CDS-0008', batchNo: 'CDS-B2408', city: 'Coimbatore', manufacturer: 'Tamil Nadu CdS Corp', cdsmGrade: 'CdS:Al 99.9% Transparent', application: 'TCO Glass (Saint-Gobain)', cdsPurityPercent: 99.9, particleSizeNm: 30, investmentCr: 275, status: 'Delivered', priority: 'Medium', origin: 'Tamil Nadu CdS Corp Hosur (TN)', destination: 'Saint-Gobain Chennai (TN)', shipDate: '2026-07-22', transitDays: 1, zone: 'South', remarks: 'Al-doped CdS transparent conductor for Saint-Gobain architectural TCO glass &#8594; 99.9% CdS &#8594; &#8377;275Cr for 2 tonnes &#8594; India &#8377;8,250Cr glass CdS &#8594; Saint-Gobain 20M m2 &#8594; 30 nm sputter &#8594; 85% T &#8594; TCO' },
+  { id: 'CDS-0009', batchNo: 'CDS-B2409', city: 'Bhubaneswar', manufacturer: 'NALCO', cdsmGrade: 'CdS 99.9% Heterojunction', application: 'Smoke Detector (Honeywell)', cdsPurityPercent: 99.9, particleSizeNm: 150, investmentCr: 185, status: 'Delivered', priority: 'Medium', origin: 'NALCO Bhubaneswar (OD)', destination: 'Honeywell Pune (MH)', shipDate: '2026-07-23', transitDays: 3, zone: 'East', remarks: 'CdS photoconductor for Honeywell ionization smoke detector sensing element &#8594; 99.9% CdS &#85854; &#8377;185Cr for 1 tonne &#8594; India &#8377;5,550Cr safety CdS &#8594; Honeywell 10M detectors &#8594; 150 nm &#8594; photoconductive &#8594; ionization' },
+  { id: 'CDS-0010', batchNo: 'CDS-B2410', city: 'Guwahati', manufacturer: 'Assam CdS Metals', cdsmGrade: 'CdS 99.999% Quantum Wire', application: 'Nanosensor (IIT-Bombay)', cdsPurityPercent: 99.999, particleSizeNm: 20, investmentCr: 440, status: 'Delivered', priority: 'High', origin: 'Assam CdS Metals Guwahati (AS)', destination: 'IIT-Bombay Mumbai (MH)', shipDate: '2026-07-24', transitDays: 4, zone: 'East', remarks: 'Five-nines CdS quantum wire for IIT-B gas nanosensor hydrogen detection &#8594; 99.999% CdS &#8594; &#8377;440Cr for 0.01 tonnes &#8594; India &#8377;13,200Cr research CdS &#8594; IIT-B 100 sensors &#8594; 20 nm wire &#8594; 2.42 eV &#8594; H2 sensor' },
+  { id: 'CDS-0011', batchNo: 'CDS-B2411', city: 'Surat', manufacturer: 'Gujarat CdS Products', cdsmGrade: 'CdS 99.99% CBD Buffer', application: 'Perovskite Solar Cell (Tata Power Solar)', cdsPurityPercent: 99.99, particleSizeNm: 80, investmentCr: 510, status: 'Delivered', priority: 'Critical', origin: 'Gujarat CdS Products Surat (GJ)', destination: 'Tata Power Solar Bengaluru (KA)', shipDate: '2026-07-25', transitDays: 2, zone: 'West', remarks: 'CdS CBD buffer layer for Tata Power Solar perovskite-silicon tandem cell &#8594; 99.99% CdS &#8594; &#8377;510Cr for 0.8 tonnes &#8594; India &#8377;15,300Cr solar CdS &#8594; Tata 2 GW tandem &#8594; 80 nm CBD &#8594; 28% eff &#8594; buffer' },
+  { id: 'CDS-0012', batchNo: 'CDS-B2412', city: 'Lucknow', manufacturer: 'UP CdS Industries', cdsmGrade: 'CdS 99.9% Glow Wire', application: 'Emergency Exit Sign (Wipro Lighting)', cdsPurityPercent: 99.9, particleSizeNm: 300, investmentCr: 160, status: 'Delayed', priority: 'Medium', origin: 'UP CdS Industries Lucknow (UP)', destination: 'Wipro Lighting Bengaluru (KA)', shipDate: '2026-07-02', transitDays: 28, zone: 'North', remarks: 'CdS EL phosphor for Wipro emergency exit sign self-luminous indicator &#8594; 99.9% CdS &#8594; &#8377;160Cr for 2 tonnes &#8594; monsoon delay &#8594; India &#8377;4,800Cr safety CdS &#8594; Wipro 2M signs &#8594; 300 nm &#8594; 525 nm &#8594; EL glow' },
+  { id: 'CDS-0013', batchNo: 'CDS-B2413', city: 'Noida', manufacturer: 'SAIL', cdsmGrade: 'CdS:In 99.9% n-Type Window', application: 'Thin-Film Transistor (SCL)', cdsPurityPercent: 99.9, particleSizeNm: 60, investmentCr: 385, status: 'Delivered', priority: 'High', origin: 'SAIL Rourkela (OD)', destination: 'SCL Mohali (PB)', shipDate: '2026-07-26', transitDays: 2, zone: 'North', remarks: 'In-doped CdS n-type window for SCL CdTe thin-film transistor backplane &#8594; 99.9% CdS &#8594; &#8377;385Cr for 0.5 tonnes &#8594; India &#8377;11,550Cr semi CdS &#8594; SCL 5000 wafer &#8594; 60 nm sputter &#8594; 2.42 eV &#8594; n-type' },
+  { id: 'CDS-0014', batchNo: 'CDS-B2414', city: 'Bhopal', manufacturer: 'BHEL', cdsmGrade: 'CdS 99.95% Optocoupler', application: 'Power Electronics Isolator (BHEL)', cdsPurityPercent: 99.95, particleSizeNm: 200, investmentCr: 260, status: 'Delivered', priority: 'High', origin: 'BHEL Bhopal (MP)', destination: 'BHEL Hyderabad (TG)', shipDate: '2026-07-27', transitDays: 1, zone: 'North', remarks: 'CdS photoresistor for BHEL IGBT gate driver optocoupler isolation &#8594; 99.95% CdS &#8594; &#8377;260Cr for 1 tonne &#8594; India &#8377;7,800Cr power CdS &#8594; BHEL 150 GW &#8594; 200 nm &#8594; 5000V isolation &#8594; optocoupler' }
+];
+
+const tabs = ['Dashboard', 'Registry', 'Analytics', 'Insights'] as const;
+type Tab = typeof tabs[number];
+const priorityColors: Record<string, string> = { Critical: 'bg-red-100 text-red-800', High: 'bg-amber-100 text-amber-800', Medium: 'bg-green-100 text-green-800', Low: 'bg-slate-100 text-slate-600' };
+const delayedSet = new Set(cadmiumSulphideRecords.filter(r => r.status === 'Delayed').map(r => r.id));
+
+export default function CadmiumSulphideLogisticsView() {
+  const [activeTab, setActiveTab] = useState<Tab>('Dashboard');
+  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const toggleFilter = (k: string, v: string) => { setFilters(p => { const s = { ...p }; const a = s[k] || []; const i = a.indexOf(v); if (i > -1) { a.splice(i, 1); if (!a.length) delete s[k]; } else s[k] = [...a, v]; return s; }); };
+  const filtered = useMemo(() => {
+    let d = cadmiumSulphideRecords;
+    if (search) { const q = search.toLowerCase(); d = d.filter(r => r.id.toLowerCase().includes(q) || r.batchNo.toLowerCase().includes(q) || r.cdsmGrade.toLowerCase().includes(q) || r.application.toLowerCase().includes(q) || r.city.toLowerCase().includes(q) || r.manufacturer.toLowerCase().includes(q)); }
+    Object.entries(filters).forEach(([k, vs]) => { if (vs.length) d = d.filter(r => { const v = String((r as unknown as Record<string, unknown>)[k] ?? ''); return vs.some(x => v.toLowerCase().includes(x.toLowerCase())); }); });
+    return d;
+  }, [search, filters]);
+  const totalCr = filtered.reduce((s: number, r) => s + r.investmentCr, 0);
+  const avgCds = filtered.length ? filtered.reduce((s: number, r) => s + r.cdsPurityPercent, 0) / filtered.length : 0;
+  const delayedCount = filtered.filter(r => r.status === 'Delayed').length;
+
+  return (
+    <div className="space-y-6">
+      <PageHeader title="Cadmium Sulphide Logistics" description="Indian cadmium sulphide supply chain tracking for solar cells, quantum dots, radiation detection, display QLED and defence sensor sectors" />
+      <div className="flex gap-2 border-b">
+        {tabs.map(t => (<button key={t} onClick={() => setActiveTab(t)} className={`px-4 py-2 text-sm font-medium ${activeTab === t ? 'border-b-2 border-amber-500 text-amber-700' : 'text-muted-foreground hover:text-foreground'}`}>{t}</button>))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">{filtered.length}</div><div className="text-xs text-muted-foreground">Total Shipments</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">&#8377;{totalCr.toLocaleString()} Cr</div><div className="text-xs text-muted-foreground">Total Investment</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-amber-600">{avgCds.toFixed(2)}%</div><div className="text-xs text-muted-foreground">Avg CdS Purity</div></CardContent></Card>
+        <Card><CardContent><div className="text-2xl font-bold text-red-500">{delayedCount}</div><div className="text-xs text-muted-foreground">Delayed Shipments</div></CardContent></Card>
+      </div>
+      {(activeTab === 'Dashboard' || activeTab === 'Registry') && (
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <input placeholder="Search ID, grade, application, city..." value={search} onChange={e => setSearch(e.target.value)} className="border rounded-md px-3 py-1.5 text-sm flex-1 min-w-48" />
+            {['status', 'priority', 'zone'].map(f => { const opts = [...new Set(cadmiumSulphideRecords.map(r => (r as unknown as Record<string, unknown>)[f] as string))]; return (<div key={f} className="flex flex-wrap gap-1">{opts.map(o => (<Badge key={o} variant={(filters[f] || []).includes(o) ? 'default' : 'outline'} className="cursor-pointer text-xs" onClick={() => toggleFilter(f, o)}>{o}</Badge>))}</div>); })}
+          </div>
+          <div className="rounded-md border"><div className="max-h-96 overflow-auto"><table className="w-full text-sm"><thead className="sticky top-0 bg-background"><tr><th className="p-2 text-left">ID</th><th className="p-2 text-left">Batch</th><th className="p-2 text-left">Grade</th><th className="p-2 text-left">Application</th><th className="p-2 text-right">Purity%</th><th className="p-2 text-right">&#8377;Cr</th><th className="p-2 text-left">Status</th></tr></thead><tbody>{filtered.map(r => (<tr key={r.id} className={`border-t ${delayedSet.has(r.id) ? 'border-l-4 border-l-red-500 bg-red-50/30' : ''}`}><td className="p-2">{r.id}</td><td className="p-2">{r.batchNo}</td><td className="p-2">{r.cdsmGrade}</td><td className="p-2">{r.application}</td><td className="p-2 text-right">{r.cdsPurityPercent}</td><td className="p-2 text-right">{r.investmentCr}</td><td className="p-2"><Badge variant={r.status === 'Delivered' ? 'default' : 'destructive'}>{r.status}</Badge></td></tr>))}</tbody></table></div></div>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Analytics') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card><CardHeader><CardTitle className="text-sm">Investment by Application</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.application] = (m[r.application] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([a, v]) => (<div key={a} className="flex justify-between text-sm"><span>{a}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Shipments by Zone</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || 0) + 1; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).map(([z, c]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Routes by Value</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.sort((a, b) => b.investmentCr - a.investmentCr).slice(0, 7).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.origin.split('(')[0]} &#8594; {r.destination.split('(')[0]}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Solar and Display</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.filter(r => r.application.toLowerCase().includes('solar') || r.application.toLowerCase().includes('display') || r.application.toLowerCase().includes('qled') || r.application.toLowerCase().includes('oled') || r.application.toLowerCase().includes('tandem')).sort((a, b) => b.investmentCr - a.investmentCr).map(r => (<div key={r.id} className="flex justify-between text-sm"><span>{r.cdsmGrade}</span><span className="font-medium">&#8377;{r.investmentCr}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">By Priority</CardTitle></CardHeader><CardContent><div className="space-y-2">{Object.entries(filtered.reduce((m, r) => { m[r.priority] = (m[r.priority] || 0) + 1; return m }, {} as Record<string, number>)).map(([p, c]) => (<div key={p} className="flex justify-between text-sm"><span className={priorityColors[p] || ''}>{p}</span><span className="font-medium">{c}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Purity Distribution</CardTitle></CardHeader><CardContent><div className="space-y-2">{[{ l: 'Ultra-Pure (99.99%+)', f: filtered.filter(r => r.cdsPurityPercent >= 99.99).length }, { l: 'High (99.9-99.99%)', f: filtered.filter(r => r.cdsPurityPercent >= 99.9 && r.cdsPurityPercent < 99.99).length }, { l: 'Standard (99.5-99.9%)', f: filtered.filter(r => r.cdsPurityPercent >= 99.5 && r.cdsPurityPercent < 99.9).length }, { l: 'Lower (<99.5%)', f: filtered.filter(r => r.cdsPurityPercent < 99.5).length }].map(b => (<div key={b.l} className="flex justify-between text-sm"><span>{b.l}</span><span className="font-medium">{b.f}</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Top Manufacturers</CardTitle></CardHeader><CardContent><div className="space-y-2">{(Object.entries(filtered.reduce((m, r) => { m[r.manufacturer] = (m[r.manufacturer] || 0) + r.investmentCr; return m }, {} as Record<string, number>)) as [string, number][]).sort((a, b) => b[1] - a[1]).slice(0, 7).map(([m, v]) => (<div key={m} className="flex justify-between text-sm"><span>{m}</span><span className="font-medium">&#8377;{v}Cr</span></div>))}</div></CardContent></Card>
+          <Card><CardHeader><CardTitle className="text-sm">Avg Transit Days</CardTitle></CardHeader><CardContent><div className="space-y-2">{filtered.length ? (Object.entries(filtered.reduce((m, r) => { m[r.zone] = (m[r.zone] || [] as number[]).concat(r.transitDays); return m }, {} as Record<string, number[]>)) as [string, number[]][]).map(([z, d]) => (<div key={z} className="flex justify-between text-sm"><span>{z}</span><span className="font-medium">{(d.reduce((s, n) => s + n, 0) / d.length).toFixed(1)}d</span></div>)) : []}</div></CardContent></Card>
+        </div>
+      )}
+      {(activeTab === 'Dashboard' || activeTab === 'Insights') && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">Adani CIGS CdS Window Layer</div><div className="text-xs text-muted-foreground">Adani Solar scaling CIGS thin-film production to 10 GW by 2028 with CdS CBD buffer layer as standard n-type heterojunction partner. 100 nm CdS layer deposited by chemical bath deposition enabling 22% cell efficiency. DRDO DMRL supplying 99.99% CdS precursor. India targeting 500 GW solar by 2030 with CIGS as 20% mix.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">Dixon QLED CdS/ZnS Quantum Dot</div><div className="text-xs text-muted-foreground">Dixon OLED adopting CdS/ZnS core-shell QD for QLED TV achieving 95% Rec.2020 colour gamut. 5 nm CdS core with ZnS shell provides narrow 530 nm emission FWHM of 20 nm. Gujarat CdS Tech sole Indian QD supplier. India TV market 30M units annually with QLED penetration at 25% by 2028.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">Tata Power Perovskite Tandem</div><div className="text-xs text-muted-foreground">Tata Power Solar developing perovskite-silicon tandem cell with CdS CBD buffer achieving 28% efficiency milestone. CdS buffer replaces Spiro-OMeTAD for improved UV stability and lower cost. Gujarat CdS Products supplying 80 nm CdS films for 2 GW pilot line. India investing &#8377;5,200Cr in tandem PV under National Solar Mission.</div></CardContent></Card>
+          <Card><CardContent><div className="text-sm font-medium text-amber-600 mb-2">BEL CdS Photodiode Defence</div><div className="text-xs text-muted-foreground">BEL manufacturing laser rangefinder and proximity fuze CdS photodiodes for infantry and artillery. 99.999% CdS single crystal provides fast response and UV-visible sensitivity. Hindustan Zinc developing indigenous CdS crystal growth from zinc smelter residue. India allocating &#8377;3,800Cr for defence optoelectronic components under iDEX.</div></CardContent></Card>
+        </div>
+      )}
+    </div>
+  );
+}
+"""
+
+outpath = "/home/z/my-project/src/components/modules/cadmium-sulphide-logistics-view.tsx"
+with open(outpath, "w") as f:
+    f.write(COMPONENT)
+print(f"Written {outpath} ({len(COMPONENT)} bytes)")

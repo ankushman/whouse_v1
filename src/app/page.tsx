@@ -1108,6 +1108,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "diamond-synthetic-logistics": DiamondSyntheticLogisticsView,
   "rare-earth-magnet-logistics": RareEarthMagnetLogisticsView,
   "rare-earth-oxide-logistics": RareEarthOxideLogisticsView,
+  "rhenium-alloy-logistics": RheniumAlloyLogisticsView,
   "molybdenum-alloy-logistics": MolybdenumAlloyLogisticsView,
   "indium-alloy-logistics": IndiumAlloyLogisticsView,
   "indium-phosphide-logistics": IndiumPhosphideLogisticsView,
@@ -1121,6 +1122,7 @@ const viewMap: Record<string, React.ComponentType> = {
   "nickel-superalloy-logistics": NickelSuperalloyLogisticsView,
   "titanium-sponge-logistics": TitaniumSpongeLogisticsView,
   "boron-carbide-logistics": BoronCarbideLogisticsView,
+  "cadmium-sulphide-logistics": CadmiumSulphideLogisticsView,
   "niobium-alloy-logistics": NiobiumAlloyLogisticsView,
   "platinum-group-metal-logistics": PlatinumGroupMetalLogisticsView,
   "platinum-powder-logistics": PlatinumPowderLogisticsView,
@@ -1365,6 +1367,7 @@ import BerylliumCopperLogisticsView from "@/components/modules/beryllium-copper-
 import DiamondSyntheticLogisticsView from "@/components/modules/diamond-synthetic-logistics-view"
 import RareEarthMagnetLogisticsView from "@/components/modules/rare-earth-magnet-logistics-view"
 import RareEarthOxideLogisticsView from "@/components/modules/rare-earth-oxide-logistics-view"
+import RheniumAlloyLogisticsView from "@/components/modules/rhenium-alloy-logistics-view"
 import MolybdenumAlloyLogisticsView from "@/components/modules/molybdenum-alloy-logistics-view"
 import IndiumAlloyLogisticsView from "@/components/modules/indium-alloy-logistics-view"
 import IndiumPhosphideLogisticsView from "@/components/modules/indium-phosphide-logistics-view"
@@ -1378,6 +1381,7 @@ import ScandiumAlloyLogisticsView from "@/components/modules/scandium-alloy-logi
 import NickelSuperalloyLogisticsView from "@/components/modules/nickel-superalloy-logistics-view"
 import TitaniumSpongeLogisticsView from "@/components/modules/titanium-sponge-logistics-view"
 import BoronCarbideLogisticsView from "@/components/modules/boron-carbide-logistics-view"
+import CadmiumSulphideLogisticsView from "@/components/modules/cadmium-sulphide-logistics-view"
 import NiobiumAlloyLogisticsView from "@/components/modules/niobium-alloy-logistics-view"
 import PlatinumGroupMetalLogisticsView from "@/components/modules/platinum-group-metal-logistics-view"
 import PlatinumPowderLogisticsView from "@/components/modules/platinum-powder-logistics-view"

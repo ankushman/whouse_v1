@@ -62105,3 +62105,23 @@ html.theme-transition body {
 .reo-badge-critical { background: #fef2f2; color: #991b1b; }
 .reo-badge-high { background: #fffbeb; color: #92400e; }
 .reo-badge-medium { background: #f0fdf4; color: #166534; }
+/* ═══════════════════════════════════════════════════════════════ R409a: Rhenium Alloy Logistics (rha-*) ═══════════════════════════════════════════════════════════════ */
+.rha-module { --rha-primary: #ea580c; --rha-light: #fff7ed; --rha-dark: #9a3412; }
+.rha-kpi-card { background: linear-gradient(135deg, var(--rha-light) 0%, white 100%); border-left: 3px solid var(--rha-primary); }
+.rha-kpi-card .text-2xl { color: var(--rha-dark); }
+.rha-tab-active { border-bottom-color: var(--rha-primary) !important; color: var(--rha-dark) !important; }
+.rha-table-header { background: var(--rha-primary); color: white; }
+.rha-table-row:hover { background: var(--rha-light); }
+.rha-delayed-row { border-left: 4px solid #ef4444 !important; background: rgba(239,68,68,0.08) !important; }
+.rha-insight-title { color: var(--rha-primary); font-weight: 600; font-size: 0.875rem; }
+.rha-chart-card { border-top: 3px solid var(--rha-primary); }
+/* ═══════════════════════════════════════════════════════════════ R409b: Cadmium Sulphide Logistics (cds-*) ═══════════════════════════════════════════════════════════════ */
+.cds-module { --cds-primary: #d97706; --cds-light: #fffbeb; --cds-dark: #92400e; }
+.cds-kpi-card { background: linear-gradient(135deg, var(--cds-light) 0%, white 100%); border-left: 3px solid var(--cds-primary); }
+.cds-kpi-card .text-2xl { color: var(--cds-dark); }
+.cds-tab-active { border-bottom-color: var(--cds-primary) !important; color: var(--cds-dark) !important; }
+.cds-table-header { background: var(--cds-primary); color: white; }
+.cds-table-row:hover { background: var(--cds-light); }
+.cds-delayed-row { border-left: 4px solid #ef4444 !important; background: rgba(239,68,68,0.08) !important; }
+.cds-insight-title { color: var(--cds-primary); font-weight: 600; font-size: 0.875rem; }
+.cds-chart-card { border-top: 3px solid var(--cds-primary); }
