@@ -673,4 +673,6 @@ export { default as PhosphorBronzeLogisticsView } from './phosphor-bronze-logist
 export { default as NimonicAlloyLogisticsView } from './nimonic-alloy-logistics-view'
 export { default as TungstenCopperLogisticsView } from './tungsten-copper-logistics-view'
 export { default as LeadFreeSolderLogisticsView } from './lead-free-solder-logistics-view'
+export { default as FerroAlloyLogisticsView } from './ferro-alloy-logistics-view'
+export { default as CalciumCarbideLogisticsView } from './calcium-carbide-logistics-view'
 

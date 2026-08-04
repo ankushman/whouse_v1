@@ -62238,3 +62238,14 @@ html.theme-transition body {
 .lead-free-solder-logistics .text-emerald-600 { color: #059669 !important; }
 .lead-free-solder-logistics .bg-emerald-500 { background-color: #059669 !important; }
 .lead-free-solder-logistics .bg-emerald-50\/50 { background-color: rgba(236, 253, 245, 0.5) !important; }
+
+/* R422a — Ferro Alloy Logistics */
+.ferro-alloy-logistics .border-l-rose-500 { border-left-color: #e11d48 !important; }
+.ferro-alloy-logistics .text-rose-600 { color: #e11d48 !important; }
+.ferro-alloy-logistics .bg-rose-500 { background-color: #e11d48 !important; }
+.ferro-alloy-logistics .bg-rose-50\/50 { background-color: rgba(255, 241, 242, 0.5) !important; }
+/* R422b — Calcium Carbide Logistics */
+.calcium-carbide-logistics .border-l-violet-500 { border-left-color: #7c3aed !important; }
+.calcium-carbide-logistics .text-violet-600 { color: #7c3aed !important; }
+.calcium-carbide-logistics .bg-violet-500 { background-color: #7c3aed !important; }
+.calcium-carbide-logistics .bg-violet-50\/50 { background-color: rgba(245, 243, 255, 0.5) !important; }
