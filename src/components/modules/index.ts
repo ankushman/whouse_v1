@@ -652,3 +652,5 @@ export { default as AntimonyAlloyLogisticsView } from './antimony-alloy-logistic
 export { default as TungstenPowderLogisticsView } from './tungsten-powder-logistics-view'
 export { default as VanadiumPowderLogisticsView } from './vanadium-powder-logistics-view'
 export { default as ZirconiumPowderLogisticsView } from './zirconium-powder-logistics-view'
+export { default as RutheniumCatalystLogisticsView } from './ruthenium-catalyst-logistics-view'
+export { default as BismuthTellurideLogisticsView } from './bismuth-telluride-logistics-view'

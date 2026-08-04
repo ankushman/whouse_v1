@@ -62125,3 +62125,7 @@ html.theme-transition body {
 .cds-delayed-row { border-left: 4px solid #ef4444 !important; background: rgba(239,68,68,0.08) !important; }
 .cds-insight-title { color: var(--cds-primary); font-weight: 600; font-size: 0.875rem; }
 .cds-chart-card { border-top: 3px solid var(--cds-primary); }
+.ruc-logistics-card:hover { box-shadow: 0 4px 12px rgba(124,58,237,0.15); transform: translateY(-1px); transition: all 0.2s; }
+.ruc-kpi { background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(124,58,237,0.02)); border-left: 3px solid #7c3aed; }
+.btd-logistics-card:hover { box-shadow: 0 4px 12px rgba(225,29,72,0.15); transform: translateY(-1px); transition: all 0.2s; }
+.btd-kpi { background: linear-gradient(135deg, rgba(225,29,72,0.05), rgba(225,29,72,0.02)); border-left: 3px solid #e11d48; }
