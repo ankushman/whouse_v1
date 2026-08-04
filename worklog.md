@@ -1,4 +1,54 @@
 ---
+Task ID: R420 — Zinc Alloy Logistics + Tin Alloy Logistics + Dedup Fixes
+Agent: Main Agent (Cron Loop)
+Task: R420 — 2 new Indian logistics modules for zinc alloy die-casting/galvanizing/battery supply chain and tin alloy solder/bearing/electronics supply chain. Plus dedup fixes for pre-existing navItems.
+
+Work Log:
+- Read worklog: R419 complete (commit e9dc33c), 673 exports, 683 navItems, ~62,218 CSS
+- TSC pre-validation: 0 errors in src/
+- Dedup audit:
+  - index.ts: ZincAlloy and TinAlloy exports already existed at lines 640/646 — removed duplicates added at 674/675
+  - page.tsx viewMap: zinc-alloy and tin-alloy keys already existed at lines 1161/1167 — removed duplicates added at 1195/1196
+  - page.tsx imports: ZincAlloy and TinAlloy imports already existed at 1441/1447 — removed duplicates added at 1475/1476
+  - app-store.ts: zinc-alloy and tin-alloy navItems already existed at 645/651 — removed duplicates added at 679/680
+  - AFTER dedup: 674 exports, 562 operations navItems, clean
+- Duplicate theme search: zinc-alloy CLEAN (no module file, only index.ts reference), tin-alloy CLEAN (same)
+  - Skipped: cadmium-alloy (index only), bismuth-alloy (index only)
+- Icons: Pre-existing navItems use Droplets (zinc) and Anchor (tin) — kept existing, modules import Shield/Wrench for tab icons
+- Created Zinc Alloy Logistics (R420a): 200 lines, zna-* green #16a34a, 14 records
+  - 14 grades: ZA-27 Al27Cu2, ZA-12 Naval Grade, Zn-99.99 SHG, ZA-8 Al8Cu1, Zn-5 Al-MM, Zn-Ag Battery, Zn-Cu Brass Ingot, ZnO-Pharma Grade, Zn-97% Galv, Zn-Ni Plating, Zn-Ti Corrosion, ZA-43 Al43, Zn-Dust Rotor, Zn-95% Thermal
+  - 14 manufacturers: Hindustan Zinc, DRDO DMRL, Sterlite Zinc, Hyderabad Zinc, Bharat Zinc, TN Zinc Works, Bajaj Zinc Div, Rajasthan Zinc, Assam Zinc, Gujarat Zinc Corp, UP Zinc Industries, Vizag Zinc Works, BHEL Zinc Div, SAIL Zinc
+  - Applications: Tata Motors Nexon die cast, BEL submarine sonar, JSW galvanized coil, Mahindra XUV700 seat, Godrej lock, Exide Zn-Ag cell, Bajaj wheel rim, Sun Pharma tablet, Tata Steel galvanizing, Bharat Forge crankshaft, Reliance pipeline, GRSE corvette deck, BHEL wind turbine, Hindalco smelter
+  - Rs 7,900 Cr total, avg 99.24% purity, 35-110 HB hardness range
+  - Delayed: ZNA-B2412 (28d, monsoon Visakhapatnam, GRSE ASW corvette deck fitting and mast bracket)
+- Created Tin Alloy Logistics (R420b): 200 lines, tna-* cyan #0891b2, 14 records
+  - 14 grades: Sn-99.99 High Purity, Sn-63Pb37 Eutectic, Sn-96.5Ag3Cu0.5 SAC, Sn-Sb8 Babbitt, Sn-Pb40 Soft Solder, Sn-99.95 Pharma, Sn-Cu0.7 Low Cost, Sn-Ag4 Wave Solder, Sn-50Pb50, Sn-Bi58 Low Melt, Sn-In52 Low Melt, Sn-Ni0.5 Corrosion, Sn-Zn9 LF Solder, Sn-Cu5 Bronze
+  - 14 manufacturers: Hindustan Tin, DRDO DMRL, Sterlite Tin, Hyderabad Tin Corp, Bharat Tin Works, TN Tin Works, Bajaj Tin Div, Rajasthan Tin, Assam Tin Mine, Gujarat Tin Corp, UP Tin Industries, Vizag Tin Works, BHEL Tin Div, SAIL Tin
+  - Applications: ISRO satellite BGA, BEL radar RF, Wipro SAC solder, SAIL Babbitt bearing, Tata Steel tinplate, Dr Reddys capsule, Bajaj fuse, L&T switchgear, Godrej aerosol, Dixon LED thermal, BHEL transformer, GRSE submarine hull, BEL missile, HAL hydraulic
+  - Rs 7,700 Cr total, avg 99.65% purity, melting point 118-260C
+  - Delayed: TNA-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I submarine hull cathodic protection anode)
+- Both modules generated via Python string-concat scripts (gen_r420a.py, gen_r420b.py) — no f-string for JSX
+- HTML entity scan: 210 (ZNA) + 224 (TNA) entities, 0 malformed
+- TSC: 0 errors in src/
+- CSS appended: 8 new rules (~62,229 total)
+- Git commit: 556369c, pushed to main
+
+Stage Summary:
+- Project now: 674 module exports, 562 operations navItems, ~62,229 CSS lines, 1196 viewMap entries, 0 TSC errors in src/
+- Zinc Alloy: BEL submarine Rs 860Cr, GRSE corvette Rs 740Cr, Bharat Forge Rs 620Cr, ISRO Rs 820Cr
+- Tin Alloy: GRSE submarine Rs 860Cr, ISRO satellite Rs 820Cr, BEL radar Rs 680Cr, BEL missile Rs 620Cr
+- Delayed: ZNA-B2412 (28d), TNA-B2412 (28d) — both monsoon Visakhapatnam corridor
+
+**Project Current State:**
+- 674 module exports, 562 operations navItems, ~62,229 CSS lines, 1196 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Pre-existing duplicates: zinc-alloy and tin-alloy navItems existed from pre-R300 rounds — deduped this round
+- Pre-existing module files: silicon-carbide, silicon-nitride, graphite-electrode, alumina-ceramic, beryllium-copper, inconel-superalloy, indium-phosphide, molybdenum-sheet, hafnium-alloy, gallium-arsenide, rare-earth-magnet, manganese-alloy, cobalt-alloy, titanium-sponge, nickel-superalloy, copper-nickel-alloy, lead-alloy, antimony-alloy
+- Next clean candidates: cadmium-alloy (check), bismuth-alloy (check), tungsten-copper (check), lead-free-solder (check)
+- Suggestion: always rg -l for ALL three files (index.ts, page.tsx viewMap, app-store.ts) before adding new entries
+---
 Task ID: R419 — Phosphor Bronze Logistics + Nimonic Alloy Logistics
 Agent: Main Agent (Cron Loop)
 Task: R419 — 2 new Indian logistics modules for phosphor bronze Cu-Sn-P spring/bearing/connector supply chain and nimonic nickel-chromium superalloy gas turbine/aerospace/nuclear supply chain.
