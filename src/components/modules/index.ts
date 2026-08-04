@@ -658,3 +658,5 @@ export { default as LithiumMetalLogisticsView } from './lithium-metal-logistics-
 export { default as BerylliumOxideLogisticsView } from './beryllium-oxide-logistics-view'
 export { default as ThalliumCompoundLogisticsView } from './thallium-compound-logistics-view'
 export { default as CadmiumAlloyLogisticsView } from './cadmium-alloy-logistics-view'
+export { default as NiobiumPowderLogisticsView } from './niobium-powder-logistics-view'
+export { default as VanadiumSheetLogisticsView } from './vanadium-sheet-logistics-view'

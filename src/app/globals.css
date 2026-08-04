@@ -62137,3 +62137,13 @@ html.theme-transition body {
 .thc-kpi { background: linear-gradient(135deg, rgba(67,56,202,0.05), rgba(67,56,202,0.02)); border-left: 3px solid #4338ca; }
 .cda-logistics-card:hover { box-shadow: 0 4px 12px rgba(217,119,6,0.15); transform: translateY(-1px); transition: all 0.2s; }
 .cda-kpi { background: linear-gradient(135deg, rgba(217,119,6,0.05), rgba(217,119,6,0.02)); border-left: 3px solid #d97706; }
+/* === Niobium Powder Logistics Module Styles === */
+.nbp-module-header { background: linear-gradient(135deg, #475569 0%, #1e293b 100%); }
+.nbp-card-accent { border-left: 3px solid #64748b; }
+.nbp-kpi-highlight { color: #475569; font-weight: 700; }
+.nbp-table-header { background-color: #f1f5f9; }
+/* === Vanadium Sheet Logistics Module Styles === */
+.vns-module-header { background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%); }
+.vns-card-accent { border-left: 3px solid #f97316; }
+.vns-kpi-highlight { color: #ea580c; font-weight: 700; }
+.vns-table-header { background-color: #fff7ed; }
