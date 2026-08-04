@@ -785,3 +785,5 @@ export { default as BariumFluorideLogisticsView } from './barium-fluoride-logist
 export { default as CeriumFluorideLogisticsView } from './cerium-fluoride-logistics-view'
 export { default as LithiumFluorideLogisticsView } from './lithium-fluoride-logistics-view'
 export { default as SodiumFluorideLogisticsView } from './sodium-fluoride-logistics-view'
+export { default as PotassiumFluorideLogisticsView } from './potassium-fluoride-logistics-view'
+export { default as LeadFluorideLogisticsView } from './lead-fluoride-logistics-view'

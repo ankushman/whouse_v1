@@ -63578,3 +63578,25 @@ html.theme-transition body {
 .naf2-badge { background: #ea580c22; color: #ea580c; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
 .naf2-shimmer { background: linear-gradient(90deg, #ea580c11, #ea580c44, #ea580c11); background-size: 200% 100%; animation: naf2-gradient 2s infinite; }
 .naf2-hover:hover { background-color: #ea580c11; }
+
+/* R478: Potassium Fluoride Logistics (kfl-*) - Green #15803d */
+@keyframes kfl-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes kfl-glow { 0%, 100% { box-shadow: 0 0 5px #15803d44; } 50% { box-shadow: 0 0 20px #15803d88; } }
+@keyframes kfl-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.kfl-card { transition: all 0.3s ease; border-left: 4px solid #15803d; }
+.kfl-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #15803d33; }
+.kfl-text { color: #15803d; }
+.kfl-badge { background: #15803d22; color: #15803d; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.kfl-shimmer { background: linear-gradient(90deg, #15803d11, #15803d44, #15803d11); background-size: 200% 100%; animation: kfl-gradient 2s infinite; }
+.kfl-hover:hover { background-color: #15803d11; }
+
+/* R478: Lead Fluoride Logistics (pbf-*) - Slate #64748b */
+@keyframes pbf-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes pbf-glow { 0%, 100% { box-shadow: 0 0 5px #64748b44; } 50% { box-shadow: 0 0 20px #64748b88; } }
+@keyframes pbf-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.pbf-card { transition: all 0.3s ease; border-left: 4px solid #64748b; }
+.pbf-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #64748b33; }
+.pbf-text { color: #64748b; }
+.pbf-badge { background: #64748b22; color: #64748b; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.pbf-shimmer { background: linear-gradient(90deg, #64748b11, #64748b44, #64748b11); background-size: 200% 100%; animation: pbf-gradient 2s infinite; }
+.pbf-hover:hover { background-color: #64748b11; }
