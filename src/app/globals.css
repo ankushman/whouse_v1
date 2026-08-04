@@ -63046,3 +63046,23 @@ html.theme-transition body {
 .snm-badge { background-color: rgba(124, 58, 237, 0.15); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.3); }
 .snm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.08) 50%, transparent 100%); animation: snm-pulse 2s ease-in-out infinite; }
 .snm-hover:hover { background-color: rgba(124, 58, 237, 0.1); border-color: #7c3aed; }
+
+/* === Zinc Dust Logistics (ZND) — R454 === */
+@keyframes znd-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes znd-glow { 0%, 100% { box-shadow: 0 0 8px rgba(101, 163, 13, 0.3); } 50% { box-shadow: 0 0 20px rgba(101, 163, 13, 0.6); } }
+.znd-gradient { background: linear-gradient(135deg, #65a30d 0%, #84cc16 50%, #a3e635 100%); }
+.znd-border { border-color: #65a30d; }
+.znd-text { color: #65a30d; }
+.znd-badge { background-color: rgba(101, 163, 13, 0.15); color: #65a30d; border: 1px solid rgba(101, 163, 13, 0.3); }
+.znd-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(101, 163, 13, 0.08) 50%, transparent 100%); animation: znd-pulse 2s ease-in-out infinite; }
+.znd-hover:hover { background-color: rgba(101, 163, 13, 0.1); border-color: #65a30d; }
+
+/* === Antimony Metal Logistics (SBM) — R454 === */
+@keyframes sbm-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes sbm-glow { 0%, 100% { box-shadow: 0 0 8px rgba(220, 38, 38, 0.3); } 50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); } }
+.sbm-gradient { background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%); }
+.sbm-border { border-color: #dc2626; }
+.sbm-text { color: #dc2626; }
+.sbm-badge { background-color: rgba(220, 38, 38, 0.15); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); }
+.sbm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(220, 38, 38, 0.08) 50%, transparent 100%); animation: sbm-pulse 2s ease-in-out infinite; }
+.sbm-hover:hover { background-color: rgba(220, 38, 38, 0.1); border-color: #dc2626; }

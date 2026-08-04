@@ -737,3 +737,5 @@ export { default as SulfuricAcidLogisticsView } from './sulfuric-acid-logistics-
 export { default as NickelSulfateLogisticsView } from './nickel-sulfate-logistics-view'
 export { default as CopperCathodeLogisticsView } from './copper-cathode-logistics-view'
 export { default as TinMetalLogisticsView } from './tin-metal-logistics-view'
+export { default as ZincDustLogisticsView } from './zinc-dust-logistics-view'
+export { default as AntimonyMetalLogisticsView } from './antimony-metal-logistics-view'
