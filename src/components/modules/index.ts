@@ -707,3 +707,5 @@ export { default as CopperOxideLogisticsView } from './copper-oxide-logistics-vi
 export { default as ManganeseOxideLogisticsView } from './manganese-oxide-logistics-view'
 export { default as CobaltOxideLogisticsView } from './cobalt-oxide-logistics-view'
 export { default as IronOxideLogisticsView } from './iron-oxide-logistics-view'
+export { default as TitaniumDioxideLogisticsView } from './titanium-dioxide-logistics-view'
+export { default as SiliconDioxideLogisticsView } from './silicon-dioxide-logistics-view'

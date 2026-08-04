@@ -62542,3 +62542,27 @@ html.theme-transition body {
 .feo-shimmer { background: linear-gradient(90deg, transparent, rgba(153, 27, 27, 0.08), transparent); animation: feo-shimmer 3s infinite; }
 @keyframes feo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .feo-hover:hover { background: rgba(153, 27, 27, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R439a: Titanium Dioxide Logistics - Yellow #eab308 */
+.tio-pulse { animation: tio-pulse-anim 2s ease-in-out infinite; }
+@keyframes tio-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.tio-glow { box-shadow: 0 0 20px rgba(234, 179, 8, 0.3); }
+.tio-gradient { background: linear-gradient(135deg, rgba(234, 179, 8, 0.15), rgba(234, 179, 8, 0.05)); }
+.tio-border { border-color: rgba(234, 179, 8, 0.4); }
+.tio-text { color: #eab308; }
+.tio-badge { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid rgba(234, 179, 8, 0.3); }
+.tio-shimmer { background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.08), transparent); animation: tio-shimmer 3s infinite; }
+@keyframes tio-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.tio-hover:hover { background: rgba(234, 179, 8, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R439b: Silicon Dioxide Logistics - Purple #a855f7 */
+.sio-pulse { animation: sio-pulse-anim 2s ease-in-out infinite; }
+@keyframes sio-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.sio-glow { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+.sio-gradient { background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05)); }
+.sio-border { border-color: rgba(168, 85, 247, 0.4); }
+.sio-text { color: #a855f7; }
+.sio-badge { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
+.sio-shimmer { background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.08), transparent); animation: sio-shimmer 3s infinite; }
+@keyframes sio-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.sio-hover:hover { background: rgba(168, 85, 247, 0.1); transform: translateY(-1px); transition: all 0.2s; }
