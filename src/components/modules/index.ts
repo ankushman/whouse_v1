@@ -793,3 +793,5 @@ export { default as UraniumDioxideLogisticsView } from './uranium-dioxide-logist
 export { default as ZirconiumSilicateLogisticsView } from './zirconium-silicate-logistics-view'
 export { default as MagnesiumFluorideLogisticsView } from './magnesium-fluoride-logistics-view'
 export { default as TitaniumCarbideLogisticsView } from './titanium-carbide-logistics-view'
+export { default as MolybdenumDisilicideLogisticsView } from './molybdenum-disilicide-logistics-view'
+export { default as HafniumCarbideLogisticsView } from './hafnium-carbide-logistics-view'
