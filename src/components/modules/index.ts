@@ -701,3 +701,5 @@ export { default as StrontiumTitanateLogisticsView } from './strontium-titanate-
 export { default as YttriumOxideLogisticsView } from './yttrium-oxide-logistics-view'
 export { default as ZincOxideLogisticsView } from './zinc-oxide-logistics-view'
 export { default as TinOxideLogisticsView } from './tin-oxide-logistics-view'
+export { default as LeadOxideLogisticsView } from './lead-oxide-logistics-view'
+export { default as NickelOxideLogisticsView } from './nickel-oxide-logistics-view'

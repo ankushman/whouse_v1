@@ -62470,3 +62470,27 @@ html.theme-transition body {
 .sno-shimmer { background: linear-gradient(90deg, transparent, rgba(133, 77, 14, 0.08), transparent); animation: sno-shimmer 3s infinite; }
 @keyframes sno-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .sno-hover:hover { background: rgba(133, 77, 14, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R436a: Lead Oxide Logistics - Deep Red #b91c1c */
+.pbo-pulse { animation: pbo-pulse-anim 2s ease-in-out infinite; }
+@keyframes pbo-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.pbo-glow { box-shadow: 0 0 20px rgba(185, 28, 28, 0.3); }
+.pbo-gradient { background: linear-gradient(135deg, rgba(185, 28, 28, 0.15), rgba(185, 28, 28, 0.05)); }
+.pbo-border { border-color: rgba(185, 28, 28, 0.4); }
+.pbo-text { color: #b91c1c; }
+.pbo-badge { background: rgba(185, 28, 28, 0.15); color: #b91c1c; border: 1px solid rgba(185, 28, 28, 0.3); }
+.pbo-shimmer { background: linear-gradient(90deg, transparent, rgba(185, 28, 28, 0.08), transparent); animation: pbo-shimmer 3s infinite; }
+@keyframes pbo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.pbo-hover:hover { background: rgba(185, 28, 28, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R436b: Nickel Oxide Logistics - Violet #7c3aed */
+.nio-pulse { animation: nio-pulse-anim 2s ease-in-out infinite; }
+@keyframes nio-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.nio-glow { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
+.nio-gradient { background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(124, 58, 237, 0.05)); }
+.nio-border { border-color: rgba(124, 58, 237, 0.4); }
+.nio-text { color: #7c3aed; }
+.nio-badge { background: rgba(124, 58, 237, 0.15); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.3); }
+.nio-shimmer { background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.08), transparent); animation: nio-shimmer 3s infinite; }
+@keyframes nio-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.nio-hover:hover { background: rgba(124, 58, 237, 0.1); transform: translateY(-1px); transition: all 0.2s; }
