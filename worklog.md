@@ -1,4 +1,48 @@
 ---
+Task ID: R422 — Ferro Alloy Logistics + Calcium Carbide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R422 — 2 new Indian logistics modules for ferro alloy (Fe-Cr, Fe-Mn, Fe-Si, Fe-Mo, Fe-V, Fe-W, Fe-Nb, Fe-Ti) steelmaking/foundry/defense supply chain and calcium carbide (CaC2) acetylene gas/welding/desulfurization/pharma supply chain.
+
+Work Log:
+- Read worklog: R421 complete (commit 2b025c7), 675 exports, ~62,240 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: 10+ candidates checked — manganese-silicon, manganese-sulphide, ferro-alloy, refractory-ceramic, calcium-carbide, carbon-fibre all confirmed CLEAN (no module files, no registrations)
+- Skipped pre-existing: selenium-compound, zirconium-oxide, boron-nitride, tungsten-carbide already had module files
+- Icons verified: Hammer (confirmed in iconMap), FlaskConical (confirmed)
+- Created Ferro Alloy Logistics (R422a): 201 lines, fa-* rose #e11d48, 14 records
+  - 14 grades: FeCr HC 65/6, FeMo 70 Grade, FeMn HC 75/7, FeSi 75 Grade, FeCr LC 70/0.05, FeW 80 Tungsten, FeV 50 Vanadium, FeNi 20 Nickel, FeNb 65 Niobium, FeSiMn 65/15, FeTi 70 Titanium, FeCr LC 70/0.03 Nuclear, FeMo 60 BHEL, FeSi 45 Low Cost
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Shyam Ferro Alloys, L&T Foundry, Mahindra Steel, Rajasthan Ferro Alloys, Assam Ferro Alloys, Gujarat Alloys, UP Ferro Alloys, Vizag Ferro Alloys, BHEL Ferro Div, SAIL Ferro Alloys
+  - Applications: SAIL Bhilai BOF, BEL LCA Mk1A undercarriage, JSW Steel Vijayanagar BOF, Bharat Forge crankshaft, Tata Power transformer core, L&T warship propeller, Mahindra XUV400 EV frame, Godrej appliance motor, Jio 5G tower girder, Bajaj Auto chassis rail, Adani pipeline desulf, GRSE Project 75I hull plate, BHEL 800MW GT blade, Welspun galvanized pipe
+  - Rs 7,680 Cr total, avg 98.73% purity, carbon 0.02-7.1% range
+  - Delayed: FA-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I submarine hull special steel nuclear-grade forging)
+- Created Calcium Carbide Logistics (R422b): 201 lines, cc-* violet #7c3aed, 14 records
+  - 14 grades: CaC2 295 Acetylene, CaC2 290 Military, CaC2 280 Steel Desulf, CaC2 295 Auto Grade, CaC2 270 Low Cost, CaC2 290 Pharma Grade, CaC2 295 Mining, CaC2 275 Lab Grade, CaC2 280 Tea Estate, CaC2 295 Pipeline, CaC2 290 FGD, CaC2 290 Submarine, CaC2 285 Power Plant, CaC2 270 General
+  - 14 manufacturers: Gujarat Carbide, Kerala Carbide, Tata Steel, AP Carbide, Shyam Carbide, BHEL R&D, TN Carbide, Rajasthan Carbide, Assam Carbide, Gujarat Carbide Corp, UP Carbide Works, Vizag Carbide Works, BHEL Carbide Div, SAIL Carbide Div
+  - Applications: L&T shipyard welding, BEL BrahMos launcher frame, JSW Steel desulfurization, Bharat Forge die welding, SAIL rail welding, Sun Pharma vitamin D, Coal India mine cutting, CSIR lab reagent, Tata Tea estate, Adani pipeline welding, NTPC FGD, GRSE Project 75I hull welding, BHEL boiler tube, Reliance foundry
+  - Rs 7,320 Cr total, avg 98.48% purity, gas yield 270-295 L/KG
+  - Delayed: CC-B2412 (28d, monsoon Visakhapatnam, GRSE Project 75I submarine pressure hull oxy-acetylene welding)
+- Both modules generated via Python string-concat scripts (gen_r422a.py, gen_r422b.py)
+- HTML entity scan: 219 (FA) + 197 (CC) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (677 exports), page.tsx (1200 viewMap entries), app-store.ts (682 navItems)
+- CSS appended: 8 new rules (~62,248 total)
+- Git commit: 2763eb2, pushed to main
+
+Stage Summary:
+- Project now: 677 module exports, 566 operations navItems, ~62,248 CSS lines, 1200 viewMap entries, 0 TSC errors in src/
+- Ferro Alloy: GRSE submarine ₹920Cr, BEL aircraft ₹860Cr, BHEL GT blade ₹720Cr, L&T warship ₹680Cr
+- Calcium Carbide: GRSE submarine ₹920Cr, BEL BrahMos ₹840Cr, L&T shipyard ₹720Cr, BHEL boiler ₹680Cr
+- Delayed: FA-B2412 (28d), CC-B2412 (28d) — both monsoon Visakhapatnam corridor
+
+**Project Current State:**
+- 677 module exports, 566 operations navItems, ~62,248 CSS lines, 1200 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- Import dependency: FeMo, FeV, FeNb, FeW heavily import-dependent from China/South Africa
+- Next clean candidates: manganese-silicon, manganese-sulphide, refractory-ceramic, carbon-fibre (all verified CLEAN)
+- Suggestion: always rg -l for ALL three files before adding new entries
+---
 Task ID: R421 — Tungsten Copper Logistics + Lead-Free Solder Logistics
 Agent: Main Agent (Cron Loop)
 Task: R421 — 2 new Indian logistics modules for tungsten copper (W-Cu) EDM electrode, thermal management, high-voltage contact, defense and nuclear supply chain and lead-free solder (Sn-Ag-Cu, Sn-Bi, Sn-Zn) electronics, automotive, aerospace and medical supply chain.
