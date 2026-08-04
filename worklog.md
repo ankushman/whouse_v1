@@ -1,4 +1,47 @@
 ---
+Task ID: R444 — Samarium Oxide Logistics + Gadolinium Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R444 — 2 new Indian logistics modules for samarium oxide (Sm2O3) SmCo magnet/nuclear reactor/catalyst/optical glass supply chain and gadolinium oxide (Gd2O3) MRI contrast/nuclear reactor/phosphor/optical coating supply chain.
+
+Work Log:
+- Read worklog: R443 complete (commit b512906), 712 exports, ~62,672 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: samarium-oxide (CLEAN), gadolinium-oxide (CLEAN), europium-oxide (CLEAN), terbium-oxide (CLEAN), dysprosium-oxide (CLEAN), holmium-oxide (CLEAN)
+- Icons verified: Sparkle (confirmed), Scan (confirmed)
+- Created Samarium Oxide Logistics (R444a): 227 lines, smo-* teal-dark #0f766e, 14 records
+  - 14 grades: Sm2O3 99.99% SmCo Magnet, Sm2O3 99.9% Nuclear Absorber, Sm2O3 99.7% DeNOx Catalyst, Sm2O3 99.5% Optical Glass, Sm2O3 99.3% Ceramic Capacitor, Sm2O3 99.8% MRAM Memory, Sm2O3 99.0% Carbon Electrode, Sm2O3 98.5% Paint Pigment, Sm2O3 99.6% Hydrogen Storage, Sm2O3 99.95% Quantum Dot, Sm2O3 99.2% Polyethylene Cat, Sm2O3 99.8% Submarine Motor, Sm2O3 99.4% Missile Guidance, Sm2O3 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Satellite SmCo permanent magnet, nuclear reactor control rod absorber, power plant SCR DeNOx catalyst, IR-transmitting optical glass, KPM ceramic capacitor dielectric, MRAM spintronic memory, cinema arc lamp carbon electrode, paint pigment hues, metal hydride hydrogen storage, display quantum dot phosphor, PET polyethylene polymerization catalyst, submarine quiet drive motor, DRDO missile gyroscope guidance, alloy additive
+  - Rs 12,220 Cr total, avg 99.35%, melting point 2320 degC
+  - Delayed: SMO-A2412 (28d, monsoon Visakhapatnam, submarine quiet drive motor)
+- Created Gadolinium Oxide Logistics (R444b): 227 lines, gdo-* purple-dark #9333ea, 14 records
+  - 14 grades: Gd2O3 99.99% MRI Contrast, Gd2O3 99.9% Nuclear Shield, Gd2O3 99.7% Green Phosphor, Gd2O3 99.5% Optical Coating, Gd2O3 99.3% Refractory, Gd2O3 99.8% Flash Memory, Gd2O3 99.0% Glass Additive, Gd2O3 98.5% Ceramic Glaze, Gd2O3 99.6% Scintillator, Gd2O3 99.95% Submarine Sonar, Gd2O3 99.2% Fuel Cell, Gd2O3 99.8% Warship Reactor, Gd2O3 99.4% Missile Seeker, Gd2O3 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Gd-DTPA MRI contrast agent, nuclear reactor neutron shield absorber, X-ray intensifier green phosphor, anti-reflective optical thin film, high-temp kiln refractory, magnetoresistive flash memory, UV-cut filter glass additive, ceramic glaze opacifier, PET scan scintillator detector, submarine sonar garnet crystal, SOFC fuel cell electrolyte, IN Navy warship reactor neutron shield, DRDO missile IR seeker detector, alloy additive
+  - Rs 12,220 Cr total, avg 99.35%, melting point 2420 degC
+  - Delayed: GDO-A2412 (28d, monsoon Visakhapatnam, warship reactor neutron shield)
+- HTML entity scan: 15 (SMO) + 15 (GDO) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (714 exports), page.tsx (1244 viewMap entries), app-store.ts (721 navItems)
+- CSS appended: 16 new rules (~62,700 total)
+- Git commit: b4abe92, pushed to main
+
+Stage Summary:
+- Project now: 714 module exports, 721 navItems, ~62,700 CSS lines, 1244 viewMap entries, 0 TSC errors in src/
+- Samarium Oxide: Satellite SmCo &#8377;960Cr, quantum dot &#8377;960Cr, submarine motor &#8377;940Cr, nuclear absorber &#8377;940Cr
+- Gadolinium Oxide: MRI contrast &#8377;960Cr, submarine sonar &#8377;960Cr, warship reactor &#8377;940Cr, scintillator &#8377;900Cr
+- Delayed: SMO-A2412 (28d), GDO-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 714 module exports, 721 navItems, ~62,700 CSS lines, 1244 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- Sm2O3 99.99% SmCo-grade imported from China/USA — satellite magnet rare earth dependency
+- Gd2O3 99.99% MRI-grade imported from China/Japan — medical imaging critical import
+- Next clean candidates: europium-oxide, terbium-oxide, dysprosium-oxide, holmium-oxide, erbium-oxide, ytterbium-oxide
+---
+---
 Task ID: R443 — Neodymium Oxide Logistics + Praseodymium Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R443 — 2 new Indian logistics modules for neodymium oxide (Nd2O3) NdFeB magnet/laser crystal/catalyst/glass colorant supply chain and praseodymium oxide (Pr6O11) aircraft alloy/ceramic glaze/glass polish/carbon arc electrode supply chain.
