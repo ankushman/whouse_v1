@@ -1,4 +1,47 @@
 ---
+Task ID: R450 — Chromium Metal Logistics + Molybdenum Metal Logistics
+Agent: Main Agent (Cron Loop)
+Task: R450 — 2 new Indian logistics modules for chromium metal (Cr) stainless steel/aerospace superalloy/chrome plating/naval armor supply chain and molybdenum metal (Mo) superalloy turbine blade/rocket nozzle/petroleum catalyst/reactor vessel supply chain.
+
+Work Log:
+- Read worklog: R449 complete (commit b34d881), 724 exports, ~62,896 CSS
+- TSC pre-validation: 0 errors in src/
+- Agent-browser QA: dev server OOM (known), TSC-only gate
+- Candidate scan: chromium-metal (CLEAN), molybdenum-metal (CLEAN), tungsten-metal (CLEAN), phosphorus-red (CLEAN), sulfuric-acid (CLEAN)
+- Icons verified: FlaskRound (0 uses, confirmed), Wind (0 uses, confirmed)
+- Created Chromium Metal Logistics (R450a): 228 lines, crm-* red #b91c1c, 14 records
+  - 14 grades: Cr 99.99% Stainless Steel, Cr 99.9% Aerospace Alloy, Cr 99.7% Chrome Plating, Cr 99.5% Leather Tanning, Cr 99.3% Pigment Green, Cr 99.8% Boiler Tube, Cr 99.0% Refractory Brick, Cr 99.6% Corrosion Resistant, Cr 99.4% Wood Preservative, Cr 99.95% Submarine Propeller, Cr 99.2% Cutting Tool, Cr 99.8% Warship Hull Steel, Cr 99.4% Missile Nozzle, Cr 97% General Alloy
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: SAIL 304/316 SS melt, GTRE Ni-Cr turbine blade, auto bumper hexavalent plating, leather Cr tanning, chrome green pigment, BHEL Cr-Mo boiler, cement kiln Mg-Cr refractory, petrochemical alloy pipe, CCA timber treatment, IN Navy submarine propeller alloy, Cr-V cutting tool, warship Cr-Ni-Mo armor plate, DRDO rocket nozzle throat, SAIL foundry Cr charge
+  - Rs 12,220 Cr total, avg 99.35%, density 7.19 g/cm3
+  - Delayed: CRM-A2412 (28d, monsoon Visakhapatnam, warship hull armor plate)
+- Created Molybdenum Metal Logistics (R450b): 228 lines, mom-* cyan-dark #0e7490, 14 records
+  - 14 grades: Mo 99.95% Superalloy Blade, Mo 99.9% Missile Thruster, Mo 99.7% Petroleum Catalyst, Mo 99.5% Structural Steel, Mo 99.3% Glass Electrode, Mo 99.8% Boiler Pipe, Mo 99.0% X-Ray Tube, Mo 99.6% Spraying Coating, Mo 99.4% Polymer Additive, Mo 99.95% Submarine Reactor, Mo 99.2% Filament, Mo 99.8% Warship Engine, Mo 99.4% Missile Fin, Mo 97% General Alloy
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: HAL HTT-4000 Ni-base superalloy blade, ISRO Vikas Mo rocket nozzle, IOC MoS2 HDS catalyst, HSLA bridge steel, Mo glass pH electrode, BHEL supercritical Cr-Mo boiler, medical X-ray Mo target anode, piston ring plasma spray, wire cable MoO3 flame retardant, IN Navy Mo-TZM reactor vessel, halogen lamp Mo filament, warship Mo diesel piston, DRDO missile tail fin, SAIL alloy Mo charge
+  - Rs 12,220 Cr total, avg 99.35%, density 10.28 g/cm3
+  - Delayed: MOM-A2412 (28d, monsoon Visakhapatnam, warship diesel engine)
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (726 exports), page.tsx (1256 viewMap entries), app-store.ts (733 navItems)
+- CSS appended: 16 new rules (~62,952 total)
+- Git commit: 16a25b9, pushed to main
+
+Stage Summary:
+- Project now: 726 module exports, 733 navItems, ~62,952 CSS lines, 1256 viewMap entries, 0 TSC errors in src/
+- Chromium Metal: Warship hull &#8377;960Cr, submarine propeller &#8377;960Cr, aerospace alloy &#8377;940Cr, missile nozzle &#8377;940Cr
+- Molybdenum Metal: Submarine reactor &#8377;960Cr, superalloy blade &#8377;960Cr, warship engine &#8377;960Cr, missile thruster &#8377;940Cr
+- Delayed: CRM-A2412 (28d), MOM-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 726 module exports, 733 navItems, ~62,952 CSS lines, 1256 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- Cr 99.99% stainless-grade imported from South Africa/Turkey — defense steel critical import
+- Mo 99.95% aerospace-grade imported from China/Chile — turbine blade supply chain risk
+- Next clean candidates: tungsten-metal, phosphorus-red, sulfuric-acid, cobalt-oxide, nickel-sulfate, copper-cathode
+---
+---
 Task ID: R449 — Scandium Oxide Logistics + Manganese Electrolytic Logistics
 Agent: Main Agent (Cron Loop)
 Task: R449 — 2 new Indian logistics modules for scandium oxide (Sc2O3) aerospace alloy/SOFC fuel cell/laser crystal/naval superstructure supply chain and manganese electrolytic (Mn) battery cathode/steel deoxidizer/welding flux/submarine battery supply chain.
