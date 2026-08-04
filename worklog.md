@@ -1,4 +1,47 @@
 ---
+Task ID: R443 — Neodymium Oxide Logistics + Praseodymium Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R443 — 2 new Indian logistics modules for neodymium oxide (Nd2O3) NdFeB magnet/laser crystal/catalyst/glass colorant supply chain and praseodymium oxide (Pr6O11) aircraft alloy/ceramic glaze/glass polish/carbon arc electrode supply chain.
+
+Work Log:
+- Read worklog: R442 complete (commit f9766d7), 710 exports, ~62,644 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: neodymium-oxide (CLEAN), praseodymium-oxide (CLEAN), samarium-oxide (CLEAN), gadolinium-oxide (CLEAN), europium-oxide (CLEAN), terbium-oxide (CLEAN)
+- Icons verified: Hexagon (confirmed), Dumbbell (confirmed)
+- Created Neodymium Oxide Logistics (R443a): 227 lines, ndo-* sky #0369a1, 14 records
+  - 14 grades: Nd2O3 99.99% NdFeB Magnet, Nd2O3 99.9% Nd:YAG Laser, Nd2O3 99.7% Petroleum Cracking, Nd2O3 99.5% Glass Colorant, Nd2O3 99.3% Dielectric Ceramic, Nd2O3 99.8% Wind Turbine Gen, Nd2O3 99.0% Headphone Driver, Nd2O3 98.5% Glaze Enamel, Nd2O3 99.6% MRI Contrast, Nd2O3 99.95% Drone Motor, Nd2O3 99.2% Spark Plug, Nd2O3 99.8% Submarine Motor, Nd2O3 99.4% Missile Actuator, Nd2O3 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: EV motor NdFeB permanent magnet, medical Nd:YAG laser crystal, refinery FCC cracking catalyst, purple glass tint colorant, KLM dielectric capacitor, wind turbine generator PM, headphone speaker driver, art ceramic glaze, MRI Gd-DTPA precursor, UAV BLDC motor, ignition spark plug electrode, submarine torpedo drive motor, DRDO missile fin control actuator, alloy additive
+  - Rs 12,220 Cr total, avg 99.35%, melting point 2215 degC
+  - Delayed: NDO-A2412 (28d, monsoon Visakhapatnam, submarine torpedo drive motor)
+- Created Praseodymium Oxide Logistics (R443b): 227 lines, pro-* lime #65a30d, 14 records
+  - 14 grades: Pr6O11 99.9% Aircraft Alloy, Pr6O11 99.7% Ceramic Glaze, Pr6O11 99.5% Glass Polish, Pr6O11 99.0% Carbon Arc, Pr6O11 99.3% Eyeglass Lens, Pr6O11 99.8% Denture Ceramic, Pr6O11 99.0% Fiber Optic, Pr6O11 98.5% Pigment, Pr6O11 99.6% Enamel Frit, Pr6O11 99.95% Permanet Mag, Pr6O11 99.2% Crack Catalyst, Pr6O11 99.8% Submarine Hull, Pr6O11 99.4% Missile Fuselage, Pr6O11 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Jet engine fan aircraft alloy, yellow ceramic glaze tint, optical glass polish, searchlight carbon arc electrode, photochromic eyeglass lens, dental prosthetic ceramic, fiber optic signal amplifier, praseodymium yellow pigment, vitreous enamel frit coating, PrCo5 permanent magnet, petroleum crack catalyst, IN Navy submarine sonar dome coating, DRDO missile Al-Mg-Pr alloy fuselage, alloy additive
+  - Rs 12,220 Cr total, avg 99.35%, melting point 2200 degC
+  - Delayed: PRO-A2412 (28d, monsoon Visakhapatnam, submarine sonar dome coating)
+- HTML entity scan: 15 (NDO) + 15 (PRO) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (712 exports), page.tsx (1242 viewMap entries), app-store.ts (719 navItems)
+- CSS appended: 16 new rules (~62,672 total)
+- Git commit: b512906, pushed to main
+
+Stage Summary:
+- Project now: 712 module exports, 719 navItems, ~62,672 CSS lines, 1242 viewMap entries, 0 TSC errors in src/
+- Neodymium Oxide: Drone motor &#8377;960Cr, NdFeB magnet &#8377;960Cr, submarine motor &#8377;940Cr, Nd:YAG laser &#8377;940Cr
+- Praseodymium Oxide: PrCo5 magnet &#8377;960Cr, aircraft alloy &#8377;940Cr, submarine hull &#8377;940Cr, dental ceramic &#8377;920Cr
+- Delayed: NDO-A2412 (28d), PRO-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 712 module exports, 719 navItems, ~62,672 CSS lines, 1242 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- Nd2O3 99.99% NdFeB-grade imported from China/Myanmar — EV motor magnet supply chain risk
+- Pr6O11 99.95% PrCo5-grade imported from China — rare earth permanent magnet dependency
+- Next clean candidates: samarium-oxide, gadolinium-oxide, europium-oxide, terbium-oxide, dysprosium-oxide, holmium-oxide
+---
+---
 Task ID: R442 — Cerium Oxide Logistics + Lanthanum Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R442 — 2 new Indian logistics modules for cerium oxide (CeO2) glass polish/catalytic converter/UV absorber/fuel cell electrolyte supply chain and lanthanum oxide (La2O3) optical lens/hydrogenation catalyst/NiMH battery/phosphor host supply chain.
