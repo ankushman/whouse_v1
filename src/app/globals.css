@@ -62726,3 +62726,31 @@ html.theme-transition body {
 .tbo-shimmer { background: linear-gradient(90deg, transparent, #15803d11, transparent); background-size: 200% 100%; animation: tbo-shimmer 2s infinite; }
 @keyframes tbo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .tbo-hover:hover { border-color: #15803d66; box-shadow: 0 0 10px #15803d33; }
+
+/* Dysprosium Oxide Logistics - DYO */
+@keyframes dyo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes dyo-glow { 0%, 100% { box-shadow: 0 0 5px #7c2d1244; } 50% { box-shadow: 0 0 20px #7c2d1266; } }
+@keyframes dyo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes dyo-border { 0%, 100% { border-color: #7c2d1266; } 50% { border-color: #7c2d1233; } }
+.dyo-pulse { animation: dyo-pulse 2s ease-in-out infinite; }
+.dyo-glow { animation: dyo-glow 2s ease-in-out infinite; }
+.dyo-gradient { background: linear-gradient(135deg, #7c2d1222, #7c2d1211, #7c2d1222); background-size: 200% 200%; animation: dyo-gradient 3s ease infinite; }
+.dyo-text { color: #7c2d12; }
+.dyo-badge { background-color: #7c2d1222; color: #7c2d12; }
+.dyo-shimmer { background: linear-gradient(90deg, transparent, #7c2d1211, transparent); background-size: 200% 100%; animation: dyo-shimmer 2s infinite; }
+@keyframes dyo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.dyo-hover:hover { border-color: #7c2d1266; box-shadow: 0 0 10px #7c2d1233; }
+
+/* Holmium Oxide Logistics - HOO */
+@keyframes hoo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes hoo-glow { 0%, 100% { box-shadow: 0 0 5px #b4530944; } 50% { box-shadow: 0 0 20px #b4530966; } }
+@keyframes hoo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes hoo-border { 0%, 100% { border-color: #b4530966; } 50% { border-color: #b4530933; } }
+.hoo-pulse { animation: hoo-pulse 2s ease-in-out infinite; }
+.hoo-glow { animation: hoo-glow 2s ease-in-out infinite; }
+.hoo-gradient { background: linear-gradient(135deg, #b4530922, #b4530911, #b4530922); background-size: 200% 200%; animation: hoo-gradient 3s ease infinite; }
+.hoo-text { color: #b45309; }
+.hoo-badge { background-color: #b4530922; color: #b45309; }
+.hoo-shimmer { background: linear-gradient(90deg, transparent, #b4530911, transparent); background-size: 200% 100%; animation: hoo-shimmer 2s infinite; }
+@keyframes hoo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.hoo-hover:hover { border-color: #b4530966; box-shadow: 0 0 10px #b4530933; }
