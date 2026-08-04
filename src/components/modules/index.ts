@@ -799,3 +799,5 @@ export { default as TantalumCarbideLogisticsView } from './tantalum-carbide-logi
 export { default as NiobiumCarbideLogisticsView } from './niobium-carbide-logistics-view'
 export { default as ChromiumCarbideLogisticsView } from './chromium-carbide-logistics-view'
 export { default as VanadiumCarbideLogisticsView } from './vanadium-carbide-logistics-view'
+export { default as HafniumDiborideLogisticsView } from './hafnium-diboride-logistics-view'
+export { default as MagnesiumDiborideLogisticsView } from './magnesium-diboride-logistics-view'
