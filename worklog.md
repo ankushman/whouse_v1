@@ -1,53 +1,44 @@
 ---
-Task ID: R479 — Strontium Fluoride Logistics + Thorium Dioxide Logistics
+Task ID: R480 — Uranium Dioxide Logistics + Zirconium Silicate Logistics
 Agent: Main Agent (Cron Loop)
-Task: R479 — 2 new Indian logistics modules for strontium fluoride (SrF2) UV laser window/scintillator/missile IR dome supply chain and thorium dioxide (ThO2) AHWR nuclear fuel/gas mantle/breeder blanket/refractory ceramic supply chain.
+Task: R480 — 2 new Indian logistics modules for uranium dioxide (UO2) PHWR fuel pellet/APFSDS penetrator/fast breeder MOX supply chain and zirconium silicate (ZrSiO4) foundry casting shell/ceramic opacifier/thermal barrier coating supply chain.
 
 Work Log:
-- Read worklog: R478 complete (commit 0ff15a9), 782 exports, ~63,554 CSS
+- Read worklog: R479 complete (commit 2bd3982), 784 exports, ~63,618 CSS
 - TSC pre-validation: 0 errors in src/
-- Candidate pool replenished: scanned 50 new compound names across 8 categories
-  - Refractory carbides/borides (9): TiC, TaC, NbC, HfC, Cr3C2, VC, HfB2, LaB6, MgB2
-  - Refractory silicides (5): MoSi2, WSi2, TiSi2, TaSi2, HfSi2
-  - Nuclear materials (7): ThO2, UO2, UN, UC, U3Si2, ZrH2, PuO2
-  - Optical/electro-optic (6): SrF2, MgF2, YF3, LiNbO3, LiTaO3, YAG
-  - Semiconductor/IR (8): InSb, GaSb, ZnS, ZnTe, CdSe, AlSb, HgCdTe, CZTS
-  - Specialty ceramics (6): zirconium-silicate, spinel, cordierite, forsterite, sialon, Al2TiO5
-  - Ferrites/magnetics (4): YIG, BaFe, NiFe, MnZn
-  - Energy/solar (5): PbBr2, PbI2, SnS, B2O3, Sb2O3
-- Candidates verified clean: SrF2 (0 refs), ThO2 (0 refs)
-- Icons: Shrimp (0 uses, VALID), Nuclear (NOT in lucide-react — fixed to Radiation, 1 use, acceptable)
-- Created Strontium Fluoride Logistics (R479a): 228 lines, srf-* dark cyan #0e7490, 14 records
-  - Rs 11,720 Cr total, avg 99.85%, MP 1477 degC, density 4.24 g/cm3
-  - Delayed: SRF-A2412 (28d, Visakhapatnam, sub periscope optical prism)
-- Created Thorium Dioxide Logistics (R479b): 228 lines, tho-* dark yellow #a16207, 14 records
-  - Rs 14,040 Cr total, avg 99.87%, MP 3350 degC, density 10.0 g/cm3
-  - Delayed: THO-A2412 (28d, Visakhapatnam, sub reactor ThO2-UO2 MOX fuel)
+- Candidates verified clean: UO2 (0 refs), ZrSiO4 (0 refs)
+- Icons: CalendarDays (0 uses, VALID), Martini (0 uses, VALID)
+- Created Uranium Dioxide Logistics (R480a): 228 lines, uo2-* dark red #b91c1c, 14 records
+  - Rs 16,840 Cr total, avg 99.83%, MP 2865 degC, density 10.97 g/cm3
+  - Highest investment module so far — nuclear-grade UO2
+  - Delayed: UO2-A2412 (28d, Visakhapatnam, INS Arihant SSBN PWR LEU fuel)
+- Created Zirconium Silicate Logistics (R480b): 228 lines, zrs-* dark lime #4d7c0f, 14 records
+  - Rs 10,180 Cr total, avg 99.67%, MP 2550 degC, density 4.68 g/cm3
+  - Delayed: ZRS-A2412 (28d, Visakhapatnam, sub SSK sonar dome casting shell)
 - TSC: 0 errors in src/
-- Registration: index.ts (784 exports), page.tsx (1314 viewMap), app-store.ts (796 navItems)
-- CSS: 16 new rules (~63,618 total)
-- Git commit: 30d8980, pushed
+- Registration: index.ts (786 exports), page.tsx (1316 viewMap), app-store.ts (798 navItems)
+- CSS: 16 new rules (~63,682 total)
+- Git commit: 23b2a01, pushed
 
 Stage Summary:
-- Project: 784 module exports, 796 navItems, ~63,618 CSS, 1314 viewMap, 0 TSC errors
-- Session total (R464-R479): 32 new modules, 16 rounds, 0 TSC errors
-- Visakhapatnam monsoon: 19th consecutive round
+- Project: 786 module exports, 798 navItems, ~63,682 CSS, 1316 viewMap, 0 TSC errors
+- Session total (R464-R480): 34 new modules, 17 rounds, 0 TSC errors
+- Visakhapatnam monsoon: 20th consecutive round — systemic
 
 **Project Current State:**
-- 784 exports, 796 navItems, ~63,618 CSS, 1314 viewMap, 0 TSC errors in src/
-- Candidate pool: REPLENISHED — 48 new names verified (SrF2, ThO2 consumed this round)
+- 786 exports, 798 navItems, ~63,682 CSS, 1316 viewMap, 0 TSC errors in src/
+- Candidate pool: 46 remaining names from R479 expanded scan
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA
-- Visakhapatnam monsoon: 19 rounds — CRITICAL systemic
-- ThO2: radioactive thorium-232, nuclear proliferation dual-use, India 3-stage program critical
-- SrF2: UV toxic dust inhalation, limited supply chain for defense optics
+- Visakhapatnam monsoon: 20 rounds — CRITICAL systemic delay pattern
+- UO2: radioactive uranium-235/238, nuclear proliferation treaty constraints, highest-value material
+- ZrSiO4: silica dust respiratory hazard, mining environmental impact
 
-**Next Round R480 Suggested Candidates:**
-- Uranium Dioxide (UO2) — PHWR fuel pellets, highest investment material
-- Zirconium Silicate (ZrSiO4) — foundry mold facing sand, ceramic opacifier
-- OR from new pool: magnesium-fluoride (MgF2), titanium-carbide (TiC), molybdenum-disilicide (MoSi2)
+**Next Round R481 Suggested Candidates:**
+- Magnesium Fluoride (MgF2) — anti-reflective lens coatings, VUV optic
+- Titanium Carbide (TiC) — cutting tool inserts, cermet coatings, defense armor
+- OR: molybdenum-disilicide (MoSi2), hafnium-carbide (HfC), silicon-carbide (SiC)
 
-**Available Icons from Pool:**
-- CalendarDays (0 uses), Palette (9 uses), Bomb (1 use), Crown (5 uses), Martini (0 uses)
-- Plus 20+ more from R471 expanded scan
+**Available Clean Icons:**
+- Bomb (1 use), Scan (1 use), PersonStanding (0 uses), ChevronsRight (0 uses), TowerControl (0 uses)
