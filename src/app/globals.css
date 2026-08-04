@@ -62422,3 +62422,27 @@ html.theme-transition body {
 .bto-shimmer { background: linear-gradient(90deg, transparent, rgba(202, 138, 4, 0.08), transparent); animation: bto-shimmer 3s infinite; }
 @keyframes bto-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .bto-hover:hover { background: rgba(202, 138, 4, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R434a: Strontium Titanate Logistics - Violet #7c3aed */
+.sto-pulse { animation: sto-pulse-anim 2s ease-in-out infinite; }
+@keyframes sto-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.sto-glow { box-shadow: 0 0 20px rgba(124, 58, 237, 0.3); }
+.sto-gradient { background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(124, 58, 237, 0.05)); }
+.sto-border { border-color: rgba(124, 58, 237, 0.4); }
+.sto-text { color: #7c3aed; }
+.sto-badge { background: rgba(124, 58, 237, 0.15); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.3); }
+.sto-shimmer { background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.08), transparent); animation: sto-shimmer 3s infinite; }
+@keyframes sto-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.sto-hover:hover { background: rgba(124, 58, 237, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R434b: Yttrium Oxide Logistics - Red #dc2626 */
+.y2o-pulse { animation: y2o-pulse-anim 2s ease-in-out infinite; }
+@keyframes y2o-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.y2o-glow { box-shadow: 0 0 20px rgba(220, 38, 38, 0.3); }
+.y2o-gradient { background: linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(220, 38, 38, 0.05)); }
+.y2o-border { border-color: rgba(220, 38, 38, 0.4); }
+.y2o-text { color: #dc2626; }
+.y2o-badge { background: rgba(220, 38, 38, 0.15); color: #dc2626; border: 1px solid rgba(220, 38, 38, 0.3); }
+.y2o-shimmer { background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.08), transparent); animation: y2o-shimmer 3s infinite; }
+@keyframes y2o-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.y2o-hover:hover { background: rgba(220, 38, 38, 0.1); transform: translateY(-1px); transition: all 0.2s; }

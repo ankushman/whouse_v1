@@ -697,3 +697,5 @@ export { default as HafniumOxideLogisticsView } from './hafnium-oxide-logistics-
 export { default as ZirconiumCarbideLogisticsView } from './zirconium-carbide-logistics-view'
 export { default as MagnesiumOxideLogisticsView } from './magnesium-oxide-logistics-view'
 export { default as BariumTitanateLogisticsView } from './barium-titanate-logistics-view'
+export { default as StrontiumTitanateLogisticsView } from './strontium-titanate-logistics-view'
+export { default as YttriumOxideLogisticsView } from './yttrium-oxide-logistics-view'
