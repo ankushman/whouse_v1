@@ -665,3 +665,5 @@ export { default as SeleniumCompoundLogisticsView } from './selenium-compound-lo
 export { default as TungstenCarbideLogisticsView } from './tungsten-carbide-logistics-view'
 export { default as ZirconiumOxideLogisticsView } from './zirconium-oxide-logistics-view'
 export { default as BoronNitrideLogisticsView } from './boron-nitride-logistics-view'
+export { default as GraphitePowderLogisticsView } from './graphite-powder-logistics-view'
+export { default as SilicaGlassLogisticsView } from './silica-glass-logistics-view'

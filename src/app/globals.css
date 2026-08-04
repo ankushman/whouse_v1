@@ -62177,3 +62177,17 @@ html.theme-transition body {
 .bnm-card-accent { border-left: 3px solid #ec4899; }
 .bnm-kpi-highlight { color: #db2777; font-weight: 700; }
 .bnm-table-header { background-color: #fdf2f8; }
+
+/* ── Graphite Powder Supply Chain (gtp-*) ── */
+/* gtp-* — Graphite Powder Logistics */
+.gtp-dashboard .gtp-card { border-left: 4px solid #64748b; }
+.gtp-registry .gtp-record:nth-child(odd) { background: rgba(100, 116, 139, 0.04); }
+.gtp-analytics .gtp-bar { background: linear-gradient(90deg, #64748b, #94a3b8); border-radius: 4px; }
+.gtp-insights .gtp-insight-card { border-left: 4px solid #64748b; background: rgba(100, 116, 139, 0.06); }
+
+/* ── Silica Glass Supply Chain (slg-*) ── */
+/* slg-* — Silica Glass Logistics */
+.slg-dashboard .slg-card { border-left: 4px solid #0ea5e9; }
+.slg-registry .slg-record:nth-child(odd) { background: rgba(14, 165, 233, 0.04); }
+.slg-analytics .slg-bar { background: linear-gradient(90deg, #0ea5e9, #38bdf8); border-radius: 4px; }
+.slg-insights .slg-insight-card { border-left: 4px solid #0ea5e9; background: rgba(14, 165, 233, 0.06); }
