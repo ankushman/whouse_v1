@@ -677,4 +677,6 @@ export { default as FerroAlloyLogisticsView } from './ferro-alloy-logistics-view
 export { default as CalciumCarbideLogisticsView } from './calcium-carbide-logistics-view'
 export { default as CarbonFibreLogisticsView } from './carbon-fibre-logistics-view'
 export { default as LithiumHydroxideLogisticsView } from './lithium-hydroxide-logistics-view'
+export { default as ManganeseSiliconLogisticsView } from './manganese-silicon-logistics-view'
+export { default as ManganeseSulphideLogisticsView } from './manganese-sulphide-logistics-view'
 
