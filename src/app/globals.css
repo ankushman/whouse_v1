@@ -63402,3 +63402,25 @@ html.theme-transition body {
 @keyframes hfo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .hfo-shimmer { background: linear-gradient(90deg, transparent, rgba(124, 45, 18, 0.1), transparent); background-size: 200% 100%; animation: hfo-shimmer 3s infinite; }
 .hfo-hover:hover { background-color: rgba(124, 45, 18, 0.1); }
+
+/* === R470: Antimony Trisulfide Logistics (ats, #831843) === */
+@keyframes ats-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ats-glow { 0%, 100% { box-shadow: 0 0 5px #831843; } 50% { box-shadow: 0 0 15px #831843; } }
+.ats-gradient { background: linear-gradient(135deg, #831843, #500724); }
+.ats-border { border-color: #831843; }
+.ats-text { color: #831843; }
+.ats-badge { background-color: rgba(131, 24, 67, 0.2); color: #831843; }
+@keyframes ats-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ats-shimmer { background: linear-gradient(90deg, transparent, rgba(131, 24, 67, 0.1), transparent); background-size: 200% 100%; animation: ats-shimmer 3s infinite; }
+.ats-hover:hover { background-color: rgba(131, 24, 67, 0.1); }
+
+/* === R470: Calcium Fluoride Logistics (caf, #155e75) === */
+@keyframes caf-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes caf-glow { 0%, 100% { box-shadow: 0 0 5px #155e75; } 50% { box-shadow: 0 0 15px #155e75; } }
+.caf-gradient { background: linear-gradient(135deg, #155e75, #0e444d); }
+.caf-border { border-color: #155e75; }
+.caf-text { color: #155e75; }
+.caf-badge { background-color: rgba(21, 94, 117, 0.2); color: #155e75; }
+@keyframes caf-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.caf-shimmer { background: linear-gradient(90deg, transparent, rgba(21, 94, 117, 0.1), transparent); background-size: 200% 100%; animation: caf-shimmer 3s infinite; }
+.caf-hover:hover { background-color: rgba(21, 94, 117, 0.1); }

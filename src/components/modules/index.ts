@@ -769,3 +769,5 @@ export { default as MagnesiumIngotLogisticsView } from './magnesium-ingot-logist
 export { default as YttriaStabilizedZirconiaLogisticsView } from './yttria-stabilized-zirconia-logistics-view'
 export { default as LeadZirconateLogisticsView } from './lead-zirconate-logistics-view'
 export { default as HafniumDioxideLogisticsView } from './hafnium-dioxide-logistics-view'
+export { default as AntimonyTrisulfideLogisticsView } from './antimony-trisulfide-logistics-view'
+export { default as CalciumFluorideLogisticsView } from './calcium-fluoride-logistics-view'
