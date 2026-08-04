@@ -63640,3 +63640,23 @@ html.theme-transition body {
 .zrs-badge { background-color: #4d7c0f22; color: #a3e635; }
 .zrs-shimmer { background: linear-gradient(90deg, #4d7c0f11 25%, #4d7c0f44 50%, #4d7c0f11 75%); }
 .zrs-hover:hover { background-color: #4d7c0f15; }
+
+/* R481a - Magnesium Fluoride Logistics (mgf) - violet-dark #6d28d9 */
+@keyframes mgf-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes mgf-glow { 0% { box-shadow: 0 0 5px #6d28d944; } 100% { box-shadow: 0 0 20px #6d28d988; } }
+.mgf-gradient { background: linear-gradient(135deg, #6d28d9, #4c1d95); }
+.mgf-border { border-color: #6d28d966; }
+.mgf-text { color: #6d28d9; }
+.mgf-badge { background-color: #6d28d922; color: #c084fc; }
+.mgf-shimmer { background: linear-gradient(90deg, #6d28d911 25%, #6d28d944 50%, #6d28d911 75%); }
+.mgf-hover:hover { background-color: #6d28d915; }
+
+/* R481b - Titanium Carbide Logistics (tic) - teal-dark #0f766e */
+@keyframes tic-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes tic-glow { 0% { box-shadow: 0 0 5px #0f766e44; } 100% { box-shadow: 0 0 20px #0f766e88; } }
+.tic-gradient { background: linear-gradient(135deg, #0f766e, #134e4a); }
+.tic-border { border-color: #0f766e66; }
+.tic-text { color: #0f766e; }
+.tic-badge { background-color: #0f766e22; color: #5eead4; }
+.tic-shimmer { background: linear-gradient(90deg, #0f766e11 25%, #0f766e44 50%, #0f766e11 75%); }
+.tic-hover:hover { background-color: #0f766e15; }
