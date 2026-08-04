@@ -733,3 +733,5 @@ export { default as ChromiumMetalLogisticsView } from './chromium-metal-logistic
 export { default as MolybdenumMetalLogisticsView } from './molybdenum-metal-logistics-view'
 export { default as TungstenMetalLogisticsView } from './tungsten-metal-logistics-view'
 export { default as PhosphorusRedLogisticsView } from './phosphorus-red-logistics-view'
+export { default as SulfuricAcidLogisticsView } from './sulfuric-acid-logistics-view'
+export { default as NickelSulfateLogisticsView } from './nickel-sulfate-logistics-view'

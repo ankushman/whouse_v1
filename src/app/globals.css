@@ -63006,3 +63006,23 @@ html.theme-transition body {
 .phr-hover:hover {
   background-color: rgba(220, 38, 38, 0.08);
 }
+
+/* === Sulfuric Acid Logistics (SUA) — R452 === */
+@keyframes sua-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes sua-glow { 0%, 100% { box-shadow: 0 0 8px rgba(234, 88, 12, 0.3); } 50% { box-shadow: 0 0 20px rgba(234, 88, 12, 0.6); } }
+.sua-gradient { background: linear-gradient(135deg, #ea580c 0%, #f97316 50%, #fb923c 100%); }
+.sua-border { border-color: #ea580c; }
+.sua-text { color: #ea580c; }
+.sua-badge { background-color: rgba(234, 88, 12, 0.15); color: #ea580c; border: 1px solid rgba(234, 88, 12, 0.3); }
+.sua-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(234, 88, 12, 0.08) 50%, transparent 100%); animation: sua-pulse 2s ease-in-out infinite; }
+.sua-hover:hover { background-color: rgba(234, 88, 12, 0.1); border-color: #ea580c; }
+
+/* === Nickel Sulfate Logistics (NIS) — R452 === */
+@keyframes nis-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes nis-glow { 0%, 100% { box-shadow: 0 0 8px rgba(13, 148, 136, 0.3); } 50% { box-shadow: 0 0 20px rgba(13, 148, 136, 0.6); } }
+.nis-gradient { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%); }
+.nis-border { border-color: #0d9488; }
+.nis-text { color: #0d9488; }
+.nis-badge { background-color: rgba(13, 148, 136, 0.15); color: #0d9488; border: 1px solid rgba(13, 148, 136, 0.3); }
+.nis-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(13, 148, 136, 0.08) 50%, transparent 100%); animation: nis-pulse 2s ease-in-out infinite; }
+.nis-hover:hover { background-color: rgba(13, 148, 136, 0.1); border-color: #0d9488; }
