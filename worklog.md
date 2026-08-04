@@ -1,4 +1,46 @@
 ---
+Task ID: R455 — Bismuth Metal Logistics + Indium Metal Logistics
+Agent: Main Agent (Cron Loop)
+Task: R455 — 2 new Indian logistics modules for bismuth metal (Bi) pharma compound/fusible alloy/lead-free solder/submarine EMI shield supply chain and indium metal (In) ITO target/LCD semiconductor/CIGS solar/submarine sonar transducer supply chain.
+
+Work Log:
+- Read worklog: R454 complete (commit ae9bf75), 734 exports, ~63,068 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: bismuth-metal (CLEAN), indium-metal (CLEAN), gallium-metal (CLEAN), tellurium-metal (CLEAN), cadmium-metal (CLEAN), magnesium-metal (CLEAN)
+- Icons verified: Pill (0 uses, confirmed), Binary (0 uses, confirmed)
+- Created Bismuth Metal Logistics (R455a): 228 lines, bsm-* pink #be185d, 14 records
+  - 14 grades: Bi 99.99% Pepto-Bismol Pharma, Bi 99.95% Bismuth-Tin Fusible Plug, Bi 99.9% Free-Cutting Steel, Bi 99.5% Low-Melting Alloy Solder, Bi 99.85% Bismuth Subcarbonate Pigment, Bi 99.8% Bismuth Germanate Crystal, Bi 99.93% Shotgun Pellet Lead-Free, Bi 99.0% Metallurgical Additive, Bi 99.7% X-Ray Contrast Agent, Bi 99.99% Semiconductor Dopant, Bi 99.4% Cosmetics Pearlescent Powder, Bi 99.95% Submarine EMI Shielding, Bi 99.8% Warship Explosive Replacement, Bi 97% General Low-Melt Alloy
+  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Abbott Bi sub-salicylate, NPCIL Tarapur reactor safety, Bharat Forge free-cut steel, Honeywell Bi-Sn fusible link, Asian Paints Bi pearl coat, DRDO nuclear BGO detector, IOF lead-free Bi shot, Rajasthan foundry Bi charge, AIIMS CT Bi contrast, IISc Bi2Te3 thermoelectric, Lakme Bi pearlescent, IN Navy SSK EMI Bi layer, DRDO lead-free Bi explosive, SAIL boiler Bi-Sn plug
+  - Rs 12,100 Cr total, avg 99.35%, density 9.78 g/cm3
+  - Delayed: BSM-A2412 (28d, monsoon Visakhapatnam, submarine EMI Bi layer)
+- Created Indium Metal Logistics (R455b): 228 lines, inm-* indigo #4f46e5, 14 records
+  - 14 grades: In 99.99% ITO Sputtering Target, In 99.95% Solder Alloy In-Sn, In 99.9% LCD Semiconductor, In 99.5% Low-Melting Solder Paste, In 99.85% CIGS Thin-Film Solar, In 99.8% Germanium Transistor Base, In 99.93% Dental Alloy, In 99.0% Bearing Alloy, In 99.7% Gallium-Indium Arsenide, In 99.99% Transparent Conductive Film, In 99.3% Sealed Battery Electrolyte, In 99.95% Submarine Sonar Transducer, In 99.8% Warship Thermal Imaging, In 97% General Solder Preform
+  - Manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Corning Gorilla ITO coat, ISRO satellite In-Sn bond, Samsung LCD ITO target, Dixon wafer In bump, Tata Power CIGS panel, DRDO thermal Imager InGe, 3M dental In-Pd alloy, BHEL sleeve bearing alloy, IISc GaInAs research cell, MicroOLED In flex screen, Exide sealed In electrolyte, IN Navy SSK bow array, DRDO naval IR InGe lens, SAIL In solder preform
+  - Rs 12,100 Cr total, avg 99.35%, density 7.31 g/cm3
+  - Delayed: INM-A2412 (28d, monsoon Visakhapatnam, submarine sonar transducer)
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (736 exports), page.tsx (1266 viewMap entries), app-store.ts (744 navItems)
+- CSS appended: 16 new rules (~63,088 total)
+- Git commit: 1ff8984, pushed to main
+
+Stage Summary:
+- Project now: 736 module exports, 744 navItems, ~63,088 CSS lines, 1266 viewMap entries, 0 TSC errors in src/
+- Bismuth Metal: Submarine EMI &#8377;960Cr, semiconductor dopant &#8377;960Cr, nuclear safety &#8377;900Cr, lead-free ammo &#8377;880Cr
+- Indium Metal: ITO target &#8377;960Cr, flexible OLED &#8377;960Cr, submarine sonar &#8377;960Cr, satellite In-Sn &#8377;920Cr
+- Delayed: BSM-A2412 (28d), INM-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 736 module exports, 744 navItems, ~63,088 CSS lines, 1266 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 63K+ lines, dev server OOM — TSC-only QA gate
+- Bi 99.99% pharma grade imported from China/South Korea — medical supply chain risk
+- In 99.99% ITO grade — extreme scarcity, <1% of primary In goes to ITO, display industry bottleneck
+- Next clean candidates: gallium-metal, tellurium-metal, cadmium-metal, magnesium-metal, silicon-metal, titanium-sponge
+---
+---
 Task ID: R454 — Zinc Dust Logistics + Antimony Metal Logistics
 Agent: Main Agent (Cron Loop)
 Task: R454 — 2 new Indian logistics modules for zinc dust (Zn) galvanizing spray/battery anode/rubber activator/submarine hull CP supply chain and antimony metal (Sb) battery grid/PET catalyst/flame retardant/submarine battery supply chain.
