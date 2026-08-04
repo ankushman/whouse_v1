@@ -63424,3 +63424,25 @@ html.theme-transition body {
 @keyframes caf-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .caf-shimmer { background: linear-gradient(90deg, transparent, rgba(21, 94, 117, 0.1), transparent); background-size: 200% 100%; animation: caf-shimmer 3s infinite; }
 .caf-hover:hover { background-color: rgba(21, 94, 117, 0.1); }
+
+/* R471: Cadmium Sulfide Logistics (cds-*) - Violet #7c3aed */
+@keyframes cds-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes cds-glow { 0%, 100% { box-shadow: 0 0 5px #7c3aed44; } 50% { box-shadow: 0 0 20px #7c3aed88; } }
+@keyframes cds-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.cds-card { transition: all 0.3s ease; border-left: 4px solid #7c3aed; }
+.cds-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #7c3aed33; }
+.cds-text { color: #7c3aed; }
+.cds-badge { background: #7c3aed22; color: #7c3aed; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.cds-shimmer { background: linear-gradient(90deg, #7c3aed11, #7c3aed44, #7c3aed11); background-size: 200% 100%; animation: cds-gradient 2s infinite; }
+.cds-hover:hover { background-color: #7c3aed11; }
+
+/* R471: Zinc Selenide Logistics (zns-*) - Teal #0d9488 */
+@keyframes zns-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes zns-glow { 0%, 100% { box-shadow: 0 0 5px #0d948844; } 50% { box-shadow: 0 0 20px #0d948888; } }
+@keyframes zns-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.zns-card { transition: all 0.3s ease; border-left: 4px solid #0d9488; }
+.zns-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #0d948833; }
+.zns-text { color: #0d9488; }
+.zns-badge { background: #0d948822; color: #0d9488; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.zns-shimmer { background: linear-gradient(90deg, #0d948811, #0d948844, #0d948811); background-size: 200% 100%; animation: zns-gradient 2s infinite; }
+.zns-hover:hover { background-color: #0d948811; }

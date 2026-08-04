@@ -771,3 +771,5 @@ export { default as LeadZirconateLogisticsView } from './lead-zirconate-logistic
 export { default as HafniumDioxideLogisticsView } from './hafnium-dioxide-logistics-view'
 export { default as AntimonyTrisulfideLogisticsView } from './antimony-trisulfide-logistics-view'
 export { default as CalciumFluorideLogisticsView } from './calcium-fluoride-logistics-view'
+export { default as CadmiumSulfideLogisticsView } from './cadmium-sulfide-logistics-view'
+export { default as ZincSelenideLogisticsView } from './zinc-selenide-logistics-view'
