@@ -63314,3 +63314,25 @@ html.theme-transition body {
 @keyframes ged-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .ged-shimmer { background: linear-gradient(90deg, transparent, rgba(202, 138, 4, 0.1), transparent); background-size: 200% 100%; animation: ged-shimmer 3s infinite; }
 .ged-hover:hover { background-color: rgba(202, 138, 4, 0.1); }
+
+/* === R466: Rhenium Metal Logistics (rem, #1e3a5f) === */
+@keyframes rem-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes rem-glow { 0%, 100% { box-shadow: 0 0 5px #1e3a5f; } 50% { box-shadow: 0 0 15px #1e3a5f; } }
+.rem-gradient { background: linear-gradient(135deg, #1e3a5f, #0f172a); }
+.rem-border { border-color: #1e3a5f; }
+.rem-text { color: #1e3a5f; }
+.rem-badge { background-color: rgba(30, 58, 95, 0.2); color: #1e3a5f; }
+@keyframes rem-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.rem-shimmer { background: linear-gradient(90deg, transparent, rgba(30, 58, 95, 0.1), transparent); background-size: 200% 100%; animation: rem-shimmer 3s infinite; }
+.rem-hover:hover { background-color: rgba(30, 58, 95, 0.1); }
+
+/* === R466: Indium Tin Oxide Logistics (ito, #0e7490) === */
+@keyframes ito-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ito-glow { 0%, 100% { box-shadow: 0 0 5px #0e7490; } 50% { box-shadow: 0 0 15px #0e7490; } }
+.ito-gradient { background: linear-gradient(135deg, #0e7490, #164e63); }
+.ito-border { border-color: #0e7490; }
+.ito-text { color: #0e7490; }
+.ito-badge { background-color: rgba(14, 116, 144, 0.2); color: #0e7490; }
+@keyframes ito-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ito-shimmer { background: linear-gradient(90deg, transparent, rgba(14, 116, 144, 0.1), transparent); background-size: 200% 100%; animation: ito-shimmer 3s infinite; }
+.ito-hover:hover { background-color: rgba(14, 116, 144, 0.1); }

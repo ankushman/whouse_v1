@@ -761,3 +761,5 @@ export { default as MolybdenumSulfideLogisticsView } from './molybdenum-sulfide-
 export { default as TantalumPentoxideLogisticsView } from './tantalum-pentoxide-logistics-view'
 export { default as NiobiumPentoxideLogisticsView } from './niobium-pentoxide-logistics-view'
 export { default as GermaniumDioxideLogisticsView } from './germanium-dioxide-logistics-view'
+export { default as RheniumMetalLogisticsView } from './rhenium-metal-logistics-view'
+export { default as IndiumTinOxideLogisticsView } from './indium-tin-oxide-logistics-view'
