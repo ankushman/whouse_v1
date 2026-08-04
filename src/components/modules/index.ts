@@ -717,3 +717,5 @@ export { default as CeriumOxideLogisticsView } from './cerium-oxide-logistics-vi
 export { default as LanthanumOxideLogisticsView } from './lanthanum-oxide-logistics-view'
 export { default as NeodymiumOxideLogisticsView } from './neodymium-oxide-logistics-view'
 export { default as PraseodymiumOxideLogisticsView } from './praseodymium-oxide-logistics-view'
+export { default as SamariumOxideLogisticsView } from './samarium-oxide-logistics-view'
+export { default as GadoliniumOxideLogisticsView } from './gadolinium-oxide-logistics-view'

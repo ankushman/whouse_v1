@@ -62670,3 +62670,31 @@ html.theme-transition body {
 .pro-shimmer { background: linear-gradient(90deg, transparent, #65a30d11, transparent); background-size: 200% 100%; animation: pro-shimmer 2s infinite; }
 @keyframes pro-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .pro-hover:hover { border-color: #65a30d66; box-shadow: 0 0 10px #65a30d33; }
+
+/* Samarium Oxide Logistics - SMO */
+@keyframes smo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes smo-glow { 0%, 100% { box-shadow: 0 0 5px #0f766e44; } 50% { box-shadow: 0 0 20px #0f766e66; } }
+@keyframes smo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes smo-border { 0%, 100% { border-color: #0f766e66; } 50% { border-color: #0f766e33; } }
+.smo-pulse { animation: smo-pulse 2s ease-in-out infinite; }
+.smo-glow { animation: smo-glow 2s ease-in-out infinite; }
+.smo-gradient { background: linear-gradient(135deg, #0f766e22, #0f766e11, #0f766e22); background-size: 200% 200%; animation: smo-gradient 3s ease infinite; }
+.smo-text { color: #0f766e; }
+.smo-badge { background-color: #0f766e22; color: #0f766e; }
+.smo-shimmer { background: linear-gradient(90deg, transparent, #0f766e11, transparent); background-size: 200% 100%; animation: smo-shimmer 2s infinite; }
+@keyframes smo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.smo-hover:hover { border-color: #0f766e66; box-shadow: 0 0 10px #0f766e33; }
+
+/* Gadolinium Oxide Logistics - GDO */
+@keyframes gdo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes gdo-glow { 0%, 100% { box-shadow: 0 0 5px #9333ea44; } 50% { box-shadow: 0 0 20px #9333ea66; } }
+@keyframes gdo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes gdo-border { 0%, 100% { border-color: #9333ea66; } 50% { border-color: #9333ea33; } }
+.gdo-pulse { animation: gdo-pulse 2s ease-in-out infinite; }
+.gdo-glow { animation: gdo-glow 2s ease-in-out infinite; }
+.gdo-gradient { background: linear-gradient(135deg, #9333ea22, #9333ea11, #9333ea22); background-size: 200% 200%; animation: gdo-gradient 3s ease infinite; }
+.gdo-text { color: #9333ea; }
+.gdo-badge { background-color: #9333ea22; color: #9333ea; }
+.gdo-shimmer { background: linear-gradient(90deg, transparent, #9333ea11, transparent); background-size: 200% 100%; animation: gdo-shimmer 2s infinite; }
+@keyframes gdo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.gdo-hover:hover { border-color: #9333ea66; box-shadow: 0 0 10px #9333ea33; }
