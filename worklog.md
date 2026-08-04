@@ -1,41 +1,43 @@
 ---
-Task ID: R463 — Lithium Carbonate Logistics + Sodium Sulfate Logistics
+Task ID: R464 — Molybdenum Sulfide Logistics + Tantalum Pentoxide Logistics
 Agent: Main Agent (Cron Loop)
-Task: R463 — 2 new Indian logistics modules for lithium carbonate (Li2CO3) Li-Ion cathode/EV LFP/aerospace Li-Al/submarine Li-Ion AIP propulsion supply chain and sodium sulfate (Na2SO4) detergent builder/kraft pulp/glass batch/submarine RO desalination supply chain.
+Task: R464 — 2 new Indian logistics modules for molybdenum sulfide (MoS2) solid lubricant/semiconductor 2D TMD/submarine bearing/aerospace dry film supply chain and tantalum pentoxide (Ta2O5) MLCC dielectric/DRAM capacitor/submarine sonar/quantum qubit supply chain.
 
 Work Log:
-- Read worklog: R462 complete (commit 32b3f47), 750 exports, ~63,248 CSS
+- Read worklog: R463 complete (commit 6dab53c), 752 exports, ~63,272 CSS
 - TSC pre-validation: 0 errors in src/
-- Candidate scan: lithium-carbonate (CLEAN), sodium-sulfate (CLEAN), beryllium-oxide (EXISTS), zirconium-oxide (EXISTS), neodymium-oxide (EXISTS), yttrium-oxide (EXISTS), cerium-oxide (EXISTS), lanthanum-oxide (EXISTS)
-- Icons verified: Candy (0 uses, confirmed), Clipboard (0 uses, confirmed)
-- Created Lithium Carbonate Logistics (R463a): 227 lines, lic-* rose-dark #be123c, 14 records
-  - 14 grades: Li2CO3 99.5% Li-Ion NMC, 99.95% Aerospace Li-Al, 99.3% Glass-Ceramic, 99.7% EV LFP, 99.85% Pharma Mood Stabilizer, 99.8% Grid BESS, 99.6% Grease Li Stearate, 99.0% Ceramic Glaze, 99.4% Al Smelting Flux, 99.92% Solid-State Battery, 99.2% CO2 DAC, 99.95% Submarine Li-Ion AIP, 99.8% Warship Torpedo Li, 98.0% General
-  - Applications: Exide NMC-622, HAL Tejas Li-Al panel, La Opala glass-ceramic, Ola Electric LFP, Sun Pharma LiCO3 tab, Tata Power LFP BESS, Castrol Li grease, Morbi Li glaze, Hindalco cryolite, IISc solid-state Li, Tata Steel DAC Li absorb, IN Navy SSK Li-Ion AIP, DRDO naval Li torpedo, SAIL Li flux charge
-  - Rs 12,100 Cr total, avg 99.35%, density 2.11 g/cm3
-  - Delayed: LIC-A2412 (28d, monsoon Visakhapatnam, submarine Li-Ion AIP propulsion battery)
-- Created Sodium Sulfate Logistics (R463b): 227 lines, sos-* slate #64748b, 14 records
-  - 14 grades: Na2SO4 99.5% Kraft Pulp, 99.9% Detergent Builder, 99.3% Glass Batch, 99.7% Textile Leveler, 99.85% Na2S Feedstock, 99.8% Thermal PCM, 99.6% Animal Feed, 99.0% Starch Additive, 99.4% Ceramic Deflocculant, 99.92% AR Reagent, 99.2% Fire Retardant, 99.9% Submarine RO Desal, 99.8% Warship Exhaust Scrubber, 98.0% General
-  - Applications: JK Paper kraft, HUL Surf Excel, Asahi glass batch, Bhilwara dye leveler, ITC Na2S precursor, Tata Power CSP PCM, Amul Na premix, Rajasthan starch, Morbi tile defloc, IISc analytical, Bhilwara FR treat, IN Navy SSK RO purify, DRDO naval exhaust wash, SAIL process salt
-  - Rs 12,100 Cr total, avg 99.35%, density 2.68 g/cm3
-  - Delayed: SOS-A2412 (28d, monsoon Visakhapatnam, submarine RO desalination brine)
-- CSS typo fixed: lic-shimmer hex spacing corrected
+- Dev server: OOM (expected for 63K+ CSS), TSC-only QA gate confirmed
+- Candidate scan: scanned 22 non-standard compound names, found 13 CLEAN candidates
+  - tungsten-powder (EXISTS), gallium-arsenide (EXISTS), titanium-sponge (EXISTS), silicon-carbide (EXISTS), boron-nitride (EXISTS), praseodymium-oxide (EXISTS), dysprosium-oxide (EXISTS), terbium-oxide (EXISTS) already present
+  - CLEAN: molybdenum-sulfide, tantalum-pentoxide, niobium-pentoxide, rhenium-metal, germanium-dioxide, indium-tin-oxide, magnesium-ingot, aluminum-nitride, zirconium-silicate, yttrium-stabilized-zirconia, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride, samarium-cobalt
+- Icons verified: Copy (0 uses, confirmed VALID), HandMetal (0 uses, confirmed VALID)
+- Created Molybdenum Sulfide Logistics (R464a): 228 lines, mos-* teal-dark #0f766e, 14 records
+  - 14 grades: MoS2 99.5% Solid Lubricant, 99.9% 2D TMD Semiconductor, 99.7% HDS Catalyst, 99.85% Aerospace Dry Film, 99.3% Polymer Composite, 99.8% Submarine Shaft Bearing, 99.0% Li-Ion Anode Alt, 99.6% Warship Gun Barrel, 99.92% MEMS NEMS Resonator, 99.4% EP Gear Oil, 99.8% Wind Turbine Gearbox, 99.2% Anti-Friction Coating, 99.95% Quantum Dot TMD, 98.0% General
+  - Applications: SKF India bearing coat, IISc MoS2 2D transistor, HPCL Visakh HDS catalyst, ISRO PSLV dry lube, RIL nylon bush, Mazagon Dock shaft bearing, Exide MoS2 anode, OFB Ordnance bore, IIT-G MEMS film, Castrol EP gear, Suzlon turbine gear, SAIL wire drawing, DRDO quantum dot, SAIL drawing
+  - Rs 12,200 Cr total, avg 99.47%, melting point 1185 degC
+  - Delayed: MOS-A2412 (28d, monsoon Visakhapatnam, submarine propeller bearing stealth quiet run)
+- Created Tantalum Pentoxide Logistics (R464b): 228 lines, tpt-* red-dark #b91c1c, 14 records
+  - 14 grades: Ta2O5 99.9% MLCC Dielectric, 99.95% DRAM Capacitor, 99.7% Optical AR Coating, 99.85% Radar Absorber, 99.3% SAW Filter, 99.8% Submarine Sonar, 99.0% X-Ray CT Pack, 99.6% Warship EW Jammer, 99.92% Quantum Qubit, 99.4% Fiber Optic Coupler, 99.8% LED Phosphor, 99.2% Oxygen Sensor, 99.95% Gate Oxide, 98.0% General
+  - Applications: Murata MLCC dielectric, IISc DRAM barrier, BEL Optronic IR lens, DRDO ASTRA RAM, RFIL SAW filter, NPOL sonar ceramic, Wipro GE CT pack, BEL Naval EW phase, IISc QC qubit, Sterlite fiber lens, Micromax LED host, SAIL refractory
+  - Rs 12,620 Cr total, avg 99.57%, melting point 1872 degC
+  - Delayed: TPT-A2412 (28d, monsoon Visakhapatnam, submarine torpedo homing sonar acoustic seeker)
 - TSC: 0 errors in src/
-- Three-file registration: index.ts (752 exports), page.tsx (1282 viewMap entries), app-store.ts (764 navItems)
-- CSS appended: 16 new rules (~63,272 total)
-- Git commit: 6dab53c, pushed to main
+- Three-file registration: index.ts (754 exports), page.tsx (1284 viewMap entries), app-store.ts (766 navItems)
+- CSS appended: 16 new rules (~63,294 total)
+- Git commit: abf716b, pushed to main
 
 Stage Summary:
-- Project now: 752 module exports, 764 navItems, ~63,272 CSS lines, 1282 viewMap entries, 0 TSC errors in src/
-- Lithium Carbonate: Submarine Li-Ion AIP &#8377;960Cr, solid-state &#8377;960Cr, aerospace Li-Al &#8377;960Cr, EV LFP &#8377;900Cr
-- Sodium Sulfate: Submarine RO desal &#8377;960Cr, warship exhaust scrubber &#8377;900Cr, thermal PCM &#8377;860Cr, detergent &#8377;840Cr
-- Delayed: LIC-A2412 (28d), SOS-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+- Project now: 754 module exports, 766 navItems, ~63,294 CSS lines, 1284 viewMap entries, 0 TSC errors in src/
+- Molybdenum Sulfide: Submarine propeller bearing &#8377;960Cr, quantum dot &#8377;940Cr, aerospace dry film &#8377;940Cr, 2D TMD semiconductor &#8377;960Cr
+- Tantalum Pentoxide: Submarine sonar &#8377;960Cr, quantum qubit &#8377;980Cr, torpedo homing &#8377;960Cr, DRAM capacitor &#8377;960Cr
+- Delayed: MOS-A2412 (28d), TPT-A2412 (28d) — both monsoon Visakhapatnam naval corridor
 
 **Project Current State:**
-- 752 module exports, 764 navItems, ~63,272 CSS lines, 1282 viewMap entries, 0 TSC errors in src/
+- 754 module exports, 766 navItems, ~63,294 CSS lines, 1284 viewMap entries, 0 TSC errors in src/
 
 **Risks:**
 - globals.css 63K+ lines, dev server OOM — TSC-only QA gate
-- Li2CO3 99.95% — China/Australia/Chile triopoly, critical EV and defense supply chain, India imports 90%+
-- Na2SO4 99.9% — abundant commodity, but high-purity grade has limited Indian producers
-- Li2CO3 99.92% solid-state battery — next-gen technology, geopolitical strategic material
-- Next clean candidates: depleted after R463, need to scan for new candidates beyond standard compounds. Consider: tungsten-powder, molybdenum-sulfide, tantalum-pentoxide, niobium-pentoxide, rhenium-metal, germanium-dioxide
+- MoS2 99.9% — China controls 80% global supply, critical 2D semiconductor material, India imports 95%+
+- Ta2O5 99.95% — Congo/Australia duopoly, critical defense and quantum computing material, India has no domestic production
+- Both delayed items are in Visakhapatnam naval corridor — recurring monsoon disruption pattern (4th consecutive round)
+- Next candidates pool: 13 clean names remaining (niobium-pentoxide, rhenium-metal, germanium-dioxide, indium-tin-oxide, magnesium-ingot, aluminum-nitride, zirconium-silicate, yttrium-stabilized-zirconia, lanthanum-fluoride, cerium-fluoride, neodymium-fluoride, samarium-cobalt + potentially more exotic compounds)
