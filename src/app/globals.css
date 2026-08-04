@@ -62205,3 +62205,14 @@ html.theme-transition body {
 .cro-registry .cro-record:nth-child(odd) { background: rgba(124, 58, 237, 0.04); }
 .cro-analytics .cro-bar { background: linear-gradient(90deg, #7c3aed, #a78bfa); border-radius: 4px; }
 .cro-insights .cro-insight-card { border-left: 4px solid #7c3aed; background: rgba(124, 58, 237, 0.06); }
+
+/* R419a — Phosphor Bronze Logistics */
+.phosphor-bronze-logistics .border-l-amber-500 { border-left-color: #d97706 !important; }
+.phosphor-bronze-logistics .text-amber-600 { color: #d97706 !important; }
+.phosphor-bronze-logistics .bg-amber-500 { background-color: #d97706 !important; }
+.phosphor-bronze-logistics .bg-amber-50\/50 { background-color: rgba(255, 251, 235, 0.5) !important; }
+/* R419b — Nimonic Alloy Logistics */
+.nimonic-alloy-logistics .border-l-orange-500 { border-left-color: #ea580c !important; }
+.nimonic-alloy-logistics .text-orange-600 { color: #ea580c !important; }
+.nimonic-alloy-logistics .bg-orange-500 { background-color: #ea580c !important; }
+.nimonic-alloy-logistics .bg-orange-50\/50 { background-color: rgba(255, 247, 237, 0.5) !important; }
