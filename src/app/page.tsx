@@ -1318,6 +1318,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "hafnium-carbide-logistics": HafniumCarbideLogisticsView,
   "tantalum-carbide-logistics": TantalumCarbideLogisticsView,
   "niobium-carbide-logistics": NiobiumCarbideLogisticsView,
+  "chromium-carbide-logistics": ChromiumCarbideLogisticsView,
+  "vanadium-carbide-logistics": VanadiumCarbideLogisticsView,
 }
 
 
@@ -1723,3 +1725,5 @@ import MolybdenumDisilicideLogisticsView from "@/components/modules/molybdenum-d
 import HafniumCarbideLogisticsView from "@/components/modules/hafnium-carbide-logistics-view"
 import TantalumCarbideLogisticsView from "@/components/modules/tantalum-carbide-logistics-view"
 import NiobiumCarbideLogisticsView from "@/components/modules/niobium-carbide-logistics-view"
+import ChromiumCarbideLogisticsView from "@/components/modules/chromium-carbide-logistics-view"
+import VanadiumCarbideLogisticsView from "@/components/modules/vanadium-carbide-logistics-view"

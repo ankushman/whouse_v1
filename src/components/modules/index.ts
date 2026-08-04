@@ -797,3 +797,5 @@ export { default as MolybdenumDisilicideLogisticsView } from './molybdenum-disil
 export { default as HafniumCarbideLogisticsView } from './hafnium-carbide-logistics-view'
 export { default as TantalumCarbideLogisticsView } from './tantalum-carbide-logistics-view'
 export { default as NiobiumCarbideLogisticsView } from './niobium-carbide-logistics-view'
+export { default as ChromiumCarbideLogisticsView } from './chromium-carbide-logistics-view'
+export { default as VanadiumCarbideLogisticsView } from './vanadium-carbide-logistics-view'

@@ -63700,3 +63700,23 @@ html.theme-transition body {
 .nbc-badge { background-color: #854d0e22; color: #fbbf24; }
 .nbc-shimmer { background: linear-gradient(90deg, #854d0e11 25%, #854d0e44 50%, #854d0e11 75%); }
 .nbc-hover:hover { background-color: #854d0e15; }
+
+/* R484a - Chromium Carbide Logistics (crc) - brown-dark #78350f */
+@keyframes crc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes crc-glow { 0% { box-shadow: 0 0 5px #78350f44; } 100% { box-shadow: 0 0 20px #78350f88; } }
+.crc-gradient { background: linear-gradient(135deg, #78350f, #451a03); }
+.crc-border { border-color: #78350f66; }
+.crc-text { color: #78350f; }
+.crc-badge { background-color: #78350f22; color: #d97706; }
+.crc-shimmer { background: linear-gradient(90deg, #78350f11 25%, #78350f44 50%, #78350f11 75%); }
+.crc-hover:hover { background-color: #78350f15; }
+
+/* R484b - Vanadium Carbide Logistics (vc) - indigo #4338ca */
+@keyframes vc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes vc-glow { 0% { box-shadow: 0 0 5px #4338ca44; } 100% { box-shadow: 0 0 20px #4338ca88; } }
+.vc-gradient { background: linear-gradient(135deg, #4338ca, #3730a3); }
+.vc-border { border-color: #4338ca66; }
+.vc-text { color: #4338ca; }
+.vc-badge { background-color: #4338ca22; color: #a78bfa; }
+.vc-shimmer { background: linear-gradient(90deg, #4338ca11 25%, #4338ca44 50%, #4338ca11 75%); }
+.vc-hover:hover { background-color: #4338ca15; }
