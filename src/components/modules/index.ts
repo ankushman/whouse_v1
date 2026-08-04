@@ -789,3 +789,5 @@ export { default as PotassiumFluorideLogisticsView } from './potassium-fluoride-
 export { default as LeadFluorideLogisticsView } from './lead-fluoride-logistics-view'
 export { default as StrontiumFluorideLogisticsView } from './strontium-fluoride-logistics-view'
 export { default as ThoriumDioxideLogisticsView } from './thorium-dioxide-logistics-view'
+export { default as UraniumDioxideLogisticsView } from './uranium-dioxide-logistics-view'
+export { default as ZirconiumSilicateLogisticsView } from './zirconium-silicate-logistics-view'

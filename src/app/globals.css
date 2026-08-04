@@ -63620,3 +63620,23 @@ html.theme-transition body {
 .tho-badge { background-color: #a1620722; color: #fbbf24; }
 .tho-shimmer { background: linear-gradient(90deg, #a1620711 25%, #a1620744 50%, #a1620711 75%); }
 .tho-hover:hover { background-color: #a1620715; }
+
+/* R480a - Uranium Dioxide Logistics (uo2) - dark red #b91c1c */
+@keyframes uo2-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes uo2-glow { 0% { box-shadow: 0 0 5px #b91c1c44; } 100% { box-shadow: 0 0 20px #b91c1c88; } }
+.uo2-gradient { background: linear-gradient(135deg, #b91c1c, #7f1d1d); }
+.uo2-border { border-color: #b91c1c66; }
+.uo2-text { color: #b91c1c; }
+.uo2-badge { background-color: #b91c1c22; color: #f87171; }
+.uo2-shimmer { background: linear-gradient(90deg, #b91c1c11 25%, #b91c1c44 50%, #b91c1c11 75%); }
+.uo2-hover:hover { background-color: #b91c1c15; }
+
+/* R480b - Zirconium Silicate Logistics (zrs) - dark lime #4d7c0f */
+@keyframes zrs-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes zrs-glow { 0% { box-shadow: 0 0 5px #4d7c0f44; } 100% { box-shadow: 0 0 20px #4d7c0f88; } }
+.zrs-gradient { background: linear-gradient(135deg, #4d7c0f, #365314); }
+.zrs-border { border-color: #4d7c0f66; }
+.zrs-text { color: #4d7c0f; }
+.zrs-badge { background-color: #4d7c0f22; color: #a3e635; }
+.zrs-shimmer { background: linear-gradient(90deg, #4d7c0f11 25%, #4d7c0f44 50%, #4d7c0f11 75%); }
+.zrs-hover:hover { background-color: #4d7c0f15; }
