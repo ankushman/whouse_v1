@@ -63556,3 +63556,25 @@ html.theme-transition body {
 .cef-badge { background: #b4530922; color: #b45309; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
 .cef-shimmer { background: linear-gradient(90deg, #b4530911, #b4530944, #b4530911); background-size: 200% 100%; animation: cef-gradient 2s infinite; }
 .cef-hover:hover { background-color: #b4530911; }
+
+/* R477: Lithium Fluoride Logistics (lif2-*) - Cyan #0891b2 */
+@keyframes lif2-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes lif2-glow { 0%, 100% { box-shadow: 0 0 5px #0891b244; } 50% { box-shadow: 0 0 20px #0891b288; } }
+@keyframes lif2-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.lif2-card { transition: all 0.3s ease; border-left: 4px solid #0891b2; }
+.lif2-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #0891b233; }
+.lif2-text { color: #0891b2; }
+.lif2-badge { background: #0891b222; color: #0891b2; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.lif2-shimmer { background: linear-gradient(90deg, #0891b211, #0891b244, #0891b211); background-size: 200% 100%; animation: lif2-gradient 2s infinite; }
+.lif2-hover:hover { background-color: #0891b211; }
+
+/* R477: Sodium Fluoride Logistics (naf2-*) - Orange #ea580c */
+@keyframes naf2-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes naf2-glow { 0%, 100% { box-shadow: 0 0 5px #ea580c44; } 50% { box-shadow: 0 0 20px #ea580c88; } }
+@keyframes naf2-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.naf2-card { transition: all 0.3s ease; border-left: 4px solid #ea580c; }
+.naf2-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #ea580c33; }
+.naf2-text { color: #ea580c; }
+.naf2-badge { background: #ea580c22; color: #ea580c; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.naf2-shimmer { background: linear-gradient(90deg, #ea580c11, #ea580c44, #ea580c11); background-size: 200% 100%; animation: naf2-gradient 2s infinite; }
+.naf2-hover:hover { background-color: #ea580c11; }

@@ -1304,6 +1304,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "lanthanum-fluoride-logistics": LanthanumFluorideLogisticsView,
   "barium-fluoride-logistics": BariumFluorideLogisticsView,
   "cerium-fluoride-logistics": CeriumFluorideLogisticsView,
+  "lithium-fluoride-logistics": LithiumFluorideLogisticsView,
+  "sodium-fluoride-logistics": SodiumFluorideLogisticsView,
 }
 
 
@@ -1695,3 +1697,5 @@ import NanoAluminaLogisticsView from "@/components/modules/nano-alumina-logistic
 import LanthanumFluorideLogisticsView from "@/components/modules/lanthanum-fluoride-logistics-view"
 import BariumFluorideLogisticsView from "@/components/modules/barium-fluoride-logistics-view"
 import CeriumFluorideLogisticsView from "@/components/modules/cerium-fluoride-logistics-view"
+import LithiumFluorideLogisticsView from "@/components/modules/lithium-fluoride-logistics-view"
+import SodiumFluorideLogisticsView from "@/components/modules/sodium-fluoride-logistics-view"
