@@ -675,4 +675,6 @@ export { default as TungstenCopperLogisticsView } from './tungsten-copper-logist
 export { default as LeadFreeSolderLogisticsView } from './lead-free-solder-logistics-view'
 export { default as FerroAlloyLogisticsView } from './ferro-alloy-logistics-view'
 export { default as CalciumCarbideLogisticsView } from './calcium-carbide-logistics-view'
+export { default as CarbonFibreLogisticsView } from './carbon-fibre-logistics-view'
+export { default as LithiumHydroxideLogisticsView } from './lithium-hydroxide-logistics-view'
 
