@@ -1240,6 +1240,8 @@ const viewMap: Record<string, React.ComponentType> = {
   "praseodymium-oxide-logistics": PraseodymiumOxideLogisticsView,
   "samarium-oxide-logistics": SamariumOxideLogisticsView,
   "gadolinium-oxide-logistics": GadoliniumOxideLogisticsView,
+  "europium-oxide-logistics": EuropiumOxideLogisticsView,
+  "terbium-oxide-logistics": TerbiumOxideLogisticsView,
 }
 
 
@@ -1561,6 +1563,8 @@ import NeodymiumOxideLogisticsView from "@/components/modules/neodymium-oxide-lo
 import PraseodymiumOxideLogisticsView from "@/components/modules/praseodymium-oxide-logistics-view"
 import SamariumOxideLogisticsView from "@/components/modules/samarium-oxide-logistics-view"
 import GadoliniumOxideLogisticsView from "@/components/modules/gadolinium-oxide-logistics-view"
+import EuropiumOxideLogisticsView from "@/components/modules/europium-oxide-logistics-view"
+import TerbiumOxideLogisticsView from "@/components/modules/terbium-oxide-logistics-view"
 import StrontiumTitanateLogisticsView from "@/components/modules/strontium-titanate-logistics-view"
 import YttriumOxideLogisticsView from "@/components/modules/yttrium-oxide-logistics-view"
 import MagnesiumOxideLogisticsView from "@/components/modules/magnesium-oxide-logistics-view"

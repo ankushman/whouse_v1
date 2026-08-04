@@ -62698,3 +62698,31 @@ html.theme-transition body {
 .gdo-shimmer { background: linear-gradient(90deg, transparent, #9333ea11, transparent); background-size: 200% 100%; animation: gdo-shimmer 2s infinite; }
 @keyframes gdo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .gdo-hover:hover { border-color: #9333ea66; box-shadow: 0 0 10px #9333ea33; }
+
+/* Europium Oxide Logistics - EUO */
+@keyframes euo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes euo-glow { 0%, 100% { box-shadow: 0 0 5px #be185d44; } 50% { box-shadow: 0 0 20px #be185d66; } }
+@keyframes euo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes euo-border { 0%, 100% { border-color: #be185d66; } 50% { border-color: #be185d33; } }
+.euo-pulse { animation: euo-pulse 2s ease-in-out infinite; }
+.euo-glow { animation: euo-glow 2s ease-in-out infinite; }
+.euo-gradient { background: linear-gradient(135deg, #be185d22, #be185d11, #be185d22); background-size: 200% 200%; animation: euo-gradient 3s ease infinite; }
+.euo-text { color: #be185d; }
+.euo-badge { background-color: #be185d22; color: #be185d; }
+.euo-shimmer { background: linear-gradient(90deg, transparent, #be185d11, transparent); background-size: 200% 100%; animation: euo-shimmer 2s infinite; }
+@keyframes euo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.euo-hover:hover { border-color: #be185d66; box-shadow: 0 0 10px #be185d33; }
+
+/* Terbium Oxide Logistics - TBO */
+@keyframes tbo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes tbo-glow { 0%, 100% { box-shadow: 0 0 5px #15803d44; } 50% { box-shadow: 0 0 20px #15803d66; } }
+@keyframes tbo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes tbo-border { 0%, 100% { border-color: #15803d66; } 50% { border-color: #15803d33; } }
+.tbo-pulse { animation: tbo-pulse 2s ease-in-out infinite; }
+.tbo-glow { animation: tbo-glow 2s ease-in-out infinite; }
+.tbo-gradient { background: linear-gradient(135deg, #15803d22, #15803d11, #15803d22); background-size: 200% 200%; animation: tbo-gradient 3s ease infinite; }
+.tbo-text { color: #15803d; }
+.tbo-badge { background-color: #15803d22; color: #15803d; }
+.tbo-shimmer { background: linear-gradient(90deg, transparent, #15803d11, transparent); background-size: 200% 100%; animation: tbo-shimmer 2s infinite; }
+@keyframes tbo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.tbo-hover:hover { border-color: #15803d66; box-shadow: 0 0 10px #15803d33; }
