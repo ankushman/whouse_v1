@@ -1,4 +1,48 @@
 ---
+Task ID: R436 — Lead Oxide Logistics + Nickel Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R436 — 2 new Indian logistics modules for lead oxide (PbO) battery plate/ceramic glaze/radiation shielding/crystal glass supply chain and nickel oxide (NiO) thermistor/ferromagnetic/battery cathode/catalyst supply chain.
+
+Work Log:
+- Read worklog: R435 complete (commit 6b1ccfd), 703 exports, ~62,472 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: lead-oxide (CLEAN), nickel-oxide (CLEAN), copper-oxide (CLEAN), manganese-oxide (CLEAN), cobalt-oxide (CLEAN), iron-oxide (CLEAN)
+- Icons verified: Radiation (confirmed), Magnet (confirmed)
+- Used proven clone-and-customize approach from zinc-oxide template
+- Created Lead Oxide Logistics (R436a): 227 lines, pbo-* deep red #b91c1c, 14 records
+  - 14 grades: PbO 99.9% Battery Plate, PbO 99.7% Grid Alloy, PbO 99.5% Litharge, PbO 99.0% Radiation Shield, PbO 99.8% Crystal Glass, PbO 99.3% Piezoelectric, PbO 99.6% Missile Seeker, PbO 98.5% PVC Stabilizer, PbO 99.4% Ferroelectric, PbO 99.95% Submarine Anode, PbO 99.2% Rubber Anti-Aging, PbO 99.8% Nuclear Shield, PbO 99.6% Propellant, PbO 97% General Chemical
+  - 14 manufacturers: MIDHANI, Exide Industries, Amara Raja, HBL Power, Tata Steel, BHEL R&D, DRDO DMRL, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Lead-acid battery plate, UPS backup battery grid, ceramic litharge glaze, X-ray radiation barrier, lead crystal glass, PZT piezoelectric precursor, DRDO missile IR dome, PVC thermal stabilizer, PZT ferroelectric ceramic, submarine cathodic protection anode, rubber anti-ozonant, nuclear reactor containment shield, DRDO AP propellant binder, solder alloy
+  - Rs 8,880 Cr total, avg 99.30%, melting point 850-888 degC
+  - Delayed: PBO-A2412 (28d, monsoon Visakhapatnam, nuclear reactor containment shield)
+- Created Nickel Oxide Logistics (R436b): 227 lines, nio-* violet #7c3aed, 14 records
+  - 14 grades: NiO 99.9% Thermistor, NiO 99.7% Ferrite Core, NiO 99.5% Battery Cathode, NiO 99.0% Fuel Cell, NiO 99.8% Catalyst, NiO 99.3% Ceramic Glaze, NiO 99.6% EMI Shielding, NiO 98.5% Glass Tint, NiO 99.4% Gas Sensor, NiO 99.95% Submarine Sonar, NiO 99.2% Electrode, NiO 99.8% Missile Seeker, NiO 99.6% Propellant, NiO 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: NTC thermistor, soft ferrite core, NMC battery cathode precursor, SOFC anode, methanation catalyst, ceramic green pigment, EMI absorber coating, UV-absorbing glass tint, CO gas sensor, submarine sonar acoustic matching, rechargeable Ni-Cd electrode, DRDO missile IR seeker dome, AP composite propellant catalyst, alloy additive
+  - Rs 8,760 Cr total, avg 99.34%, melting point 1930-1955 degC
+  - Delayed: NIO-A2412 (28d, monsoon Visakhapatnam, missile IR seeker dome)
+- HTML entity scan: 14 (PBO) + 14 (NIO) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (698 exports), page.tsx (1228 viewMap entries), app-store.ts (705 navItems)
+- CSS appended: 16 new rules (~62,496 total)
+- Git commit: 20244aa, pushed to main
+
+Stage Summary:
+- Project now: 698 module exports, 705 navItems, ~62,496 CSS lines, 1228 viewMap entries, 0 TSC errors in src/
+- Lead Oxide: Nuclear shield &#8377;940Cr, missile seeker &#8377;960Cr, submarine anode &#8377;940Cr, battery plate &#8377;900Cr
+- Nickel Oxide: Submarine sonar &#8377;940Cr, missile seeker &#8377;940Cr, EMI shielding &#8377;920Cr, battery cathode &#8377;880Cr
+- Delayed: PBO-A2412 (28d), NIO-A2412 (28d) — both monsoon Visakhapatnam corridor
+
+**Project Current State:**
+- 698 module exports, 705 navItems, ~62,496 CSS lines, 1228 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- PbO 99.95% nuclear-grade imported from Germany/Japan — BARC reactor shielding dependency
+- NiO 99.9% battery cathode-grade imported from China — EV supply chain risk
+- Next clean candidates: copper-oxide, manganese-oxide, cobalt-oxide, iron-oxide, titanium-dioxide, silicon-dioxide
+---
+---
 Task ID: R435 — Zinc Oxide Logistics + Tin Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R435 — 2 new Indian logistics modules for zinc oxide (ZnO) varistor/UV blocker/rubber vulcanization/TCO electrode supply chain and tin oxide (SnO2) TCO electrode/gas sensor/display/smart glass supply chain.
