@@ -62642,3 +62642,31 @@ html.theme-transition body {
 .lao-shimmer { background: linear-gradient(90deg, transparent, #c026d311, transparent); background-size: 200% 100%; animation: lao-shimmer 2s infinite; }
 @keyframes lao-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .lao-hover:hover { border-color: #c026d366; box-shadow: 0 0 10px #c026d333; }
+
+/* Neodymium Oxide Logistics - NDO */
+@keyframes ndo-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ndo-glow { 0%, 100% { box-shadow: 0 0 5px #0369a144; } 50% { box-shadow: 0 0 20px #0369a166; } }
+@keyframes ndo-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes ndo-border { 0%, 100% { border-color: #0369a166; } 50% { border-color: #0369a133; } }
+.ndo-pulse { animation: ndo-pulse 2s ease-in-out infinite; }
+.ndo-glow { animation: ndo-glow 2s ease-in-out infinite; }
+.ndo-gradient { background: linear-gradient(135deg, #0369a122, #0369a111, #0369a122); background-size: 200% 200%; animation: ndo-gradient 3s ease infinite; }
+.ndo-text { color: #0369a1; }
+.ndo-badge { background-color: #0369a122; color: #0369a1; }
+.ndo-shimmer { background: linear-gradient(90deg, transparent, #0369a111, transparent); background-size: 200% 100%; animation: ndo-shimmer 2s infinite; }
+@keyframes ndo-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ndo-hover:hover { border-color: #0369a166; box-shadow: 0 0 10px #0369a133; }
+
+/* Praseodymium Oxide Logistics - PRO */
+@keyframes pro-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes pro-glow { 0%, 100% { box-shadow: 0 0 5px #65a30d44; } 50% { box-shadow: 0 0 20px #65a30d66; } }
+@keyframes pro-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes pro-border { 0%, 100% { border-color: #65a30d66; } 50% { border-color: #65a30d33; } }
+.pro-pulse { animation: pro-pulse 2s ease-in-out infinite; }
+.pro-glow { animation: pro-glow 2s ease-in-out infinite; }
+.pro-gradient { background: linear-gradient(135deg, #65a30d22, #65a30d11, #65a30d22); background-size: 200% 200%; animation: pro-gradient 3s ease infinite; }
+.pro-text { color: #65a30d; }
+.pro-badge { background-color: #65a30d22; color: #65a30d; }
+.pro-shimmer { background: linear-gradient(90deg, transparent, #65a30d11, transparent); background-size: 200% 100%; animation: pro-shimmer 2s infinite; }
+@keyframes pro-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.pro-hover:hover { border-color: #65a30d66; box-shadow: 0 0 10px #65a30d33; }
