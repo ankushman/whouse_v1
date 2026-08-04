@@ -63174,3 +63174,27 @@ html.theme-transition body {
 .zns-shimmer { background: linear-gradient(90deg, #0e749008 25%, #0e749022 50%, #0e749008 75%); background-size: 200% 100%; animation: zns-shimmer-anim 2s infinite; }
 @keyframes zns-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .zns-hover:hover { box-shadow: 0 4px 20px #0e749033; transform: translateY(-1px); }
+
+/* R460 — Copper Sulfate Logistics (cus) — copper-brown #b45309 */
+.cus-pulse { animation: cus-pulse-anim 2s ease-in-out infinite; }
+@keyframes cus-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.cus-glow { box-shadow: 0 0 16px #b4530944; }
+.cus-gradient { background: linear-gradient(135deg, #b4530922, #b4530908); }
+.cus-border { border-left: 3px solid #b45309; }
+.cus-text { color: #b45309; }
+.cus-badge { background: #b4530918; color: #b45309; }
+.cus-shimmer { background: linear-gradient(90deg, #b4530908 25%, #b4530922 50%, #b4530908 75%); background-size: 200% 100%; animation: cus-shimmer-anim 2s infinite; }
+@keyframes cus-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.cus-hover:hover { box-shadow: 0 4px 20px #b4530933; transform: translateY(-1px); }
+
+/* R460 — Manganese Metal Logistics (mnm) — slate-grey #475569 */
+.mnm-pulse { animation: mnm-pulse-anim 2s ease-in-out infinite; }
+@keyframes mnm-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.mnm-glow { box-shadow: 0 0 16px #47556944; }
+.mnm-gradient { background: linear-gradient(135deg, #47556922, #47556908); }
+.mnm-border { border-left: 3px solid #475569; }
+.mnm-text { color: #475569; }
+.mnm-badge { background: #47556918; color: #475569; }
+.mnm-shimmer { background: linear-gradient(90deg, #47556908 25%, #47556922 50%, #47556908 75%); background-size: 200% 100%; animation: mnm-shimmer-anim 2s infinite; }
+@keyframes mnm-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.mnm-hover:hover { box-shadow: 0 4px 20px #47556933; transform: translateY(-1px); }
