@@ -1,4 +1,50 @@
 ---
+Task ID: R432 — Hafnium Oxide Logistics + Zirconium Carbide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R432 — 2 new Indian logistics modules for hafnium oxide (HfO2) high-k gate dielectric/DRAM capacitor/optical coating/nuclear control supply chain and zirconium carbide (ZrC) ultra-hard refractory/nuclear fuel coating/hypersonic TPS/cutting tool supply chain.
+
+Work Log:
+- Read worklog: R431 complete (commit c1d2ef7), 695 exports, ~62,376 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: hafnium-oxide, zirconium-carbide — CLEAN (silicon-nitride, tungsten-carbide skipped, pre-existing)
+- Icons verified: Hexagon (confirmed), Diamond (confirmed)
+- Generator approach: switched from list-of-strings template to clone-and-customize using working R431 file as base
+- gen_r432.py (list-of-strings) failed TSC due to {{/}} brace mismatch in non-f-string context — abandoned in favor of clone approach
+- Created Hafnium Oxide Logistics (R432a): 227 lines, hfo-* sky blue #0ea5e9, 14 records
+  - 14 grades: HfO2 99.99% Gate Dielectric, HfO2 99.9% DRAM Capacitor, HfO2 99.95% Anti-Reflective, HfO2 99.5% Optical Coating, HfO2 99.8% Laser Optic, HfO2 99.0% Thermal Barrier, HfO2 99.7% Fuel Cell YSZ, HfO2 98.5% Catalyst, HfO2 99.6% Piezoelectric, HfO2 99.98% Space Mirror, HfO2 99.3% Nuclear Absorber, HfO2 99.9% Submarine TPS, HfO2 99.7% Missile Dome, HfO2 97% General Ceramics
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Electronics, Bharat Forge, Shyam Ceramics, BHEL R&D, Godrej Ceramics, Rajasthan Ceramics, Assam Ceramics, Gujarat Ceramics, UP Ceramics, Vizag Ceramics, DRDO TBRL, SAIL Ceramics
+  - Applications: FinFET high-k gate, CMOS DRAM, solar AR coating, IR lens, DIRCM window, GT blade TBC, SOFC electrolyte, petrochemical catalyst, sonar transducer, ISRO mirror coating, nuclear control rod, submarine reactor shield, missile radome AR, foundry mold
+  - Rs 8,760 Cr total, avg 99.26%, dielectric constant k=16-25
+  - Delayed: HFO-A2412 (28d, monsoon Visakhapatnam, submarine reactor shield HfO2 coating)
+- Created Zirconium Carbide Logistics (R432b): 227 lines, zrc-* purple #a855f7, 14 records
+  - 14 grades: ZrC 99.5% TRISO Coating, ZrC 99.8% Hypersonic TPS, ZrC 99.0% Cutting Tool, ZrC 98.5% Thermocouple, ZrC 99.7% Rocket Nozzle, ZrC 99.2% Field Emitter, ZrC 99.6% Abrasive, ZrC 98% Metallurgical, ZrC 99.4% Submarine Hull, ZrC 99.9% Space Reactor, ZrC 99.1% Welding Electrode, ZrC 99.7% Torpedo Blade, ZrC 99.6% Missile Airframe, ZrC 97% General Foundry
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, Bharat Forge, Shyam Ceramics, BHEL R&D, Godrej Ceramics, Rajasthan Ceramics, Assam Ceramics, Gujarat Ceramics, UP Ceramics, Vizag Ceramics, DRDO TBRL, SAIL Ceramics
+  - Applications: IGCAR PFBR TRISO, DRDO HSTDV nose, CNC insert, GT thermocouple, ISRO scramjet nozzle, X-ray tube, lapping film, steel deoxidizer, GRSE submarine hull, ISRO BHASKARA reactor shield, hardface welding, GRSE torpedo blade, DRDO BrahMos fin, foundry crucible
+  - Rs 8,760 Cr total, avg 99.16%, melting point 3500-3540 degC
+  - Delayed: ZRC-A2412 (28d, monsoon Visakhapatnam, GRSE Project 75I torpedo blade ZrC edge)
+- HTML entity scan: 14 (HFO) + 14 (ZRC) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (697 exports), page.tsx (1220 viewMap entries), app-store.ts (702 navItems)
+- CSS appended: 16 new rules (~62,400 total)
+- Git commit: 422f895, pushed to main
+
+Stage Summary:
+- Project now: 697 module exports, 702 navItems, ~62,400 CSS lines, 1220 viewMap entries, 0 TSC errors in src/
+- Hafnium Oxide: Submarine shield &#8377;940Cr, ISRO mirror &#8377;960Cr, FinFET gate &#8377;940Cr, DIRCM &#8377;880Cr
+- Zirconium Carbide: Torpedo blade &#8377;940Cr, ISRO BHASKARA &#8377;960Cr, DRDO HSTDV &#8377;940Cr, TRISO &#8377;920Cr
+- Delayed: HFO-A2412 (28d), ZRC-A2412 (28d) — both monsoon Visakhapatnam corridor
+- Generator lesson: clone-and-customize from proven template is safer than list-of-strings template for JSX generation
+
+**Project Current State:**
+- 697 module exports, 702 navItems, ~62,400 CSS lines, 1220 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- HfO2 99.99% semiconductor-grade imported from Japan/USA — no domestic high-k dielectric production
+- ZrC 99.8% hypersonic-grade imported from France/USA — DRDO HSTDV strategic dependency
+- Next clean candidates: magnesium-oxide, calcium-carbide, barium-titanate, strontium-titanate, yttrium-oxide
+---
+---
 Task ID: R431 — Aluminium Nitride Logistics + Lithium Carbide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R431 — 2 new Indian logistics modules for aluminium nitride (AlN) ceramic substrate/thermal management/semiconductor/defense/space supply chain and lithium carbide (Li2C2) tritium breeder/nuclear fusion/battery chemistry/high-energy supply chain.
