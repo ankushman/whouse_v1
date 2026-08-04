@@ -699,3 +699,5 @@ export { default as MagnesiumOxideLogisticsView } from './magnesium-oxide-logist
 export { default as BariumTitanateLogisticsView } from './barium-titanate-logistics-view'
 export { default as StrontiumTitanateLogisticsView } from './strontium-titanate-logistics-view'
 export { default as YttriumOxideLogisticsView } from './yttrium-oxide-logistics-view'
+export { default as ZincOxideLogisticsView } from './zinc-oxide-logistics-view'
+export { default as TinOxideLogisticsView } from './tin-oxide-logistics-view'

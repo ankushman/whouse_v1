@@ -62446,3 +62446,27 @@ html.theme-transition body {
 .y2o-shimmer { background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.08), transparent); animation: y2o-shimmer 3s infinite; }
 @keyframes y2o-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .y2o-hover:hover { background: rgba(220, 38, 38, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R435a: Zinc Oxide Logistics - Green #16a34a */
+.zno-pulse { animation: zno-pulse-anim 2s ease-in-out infinite; }
+@keyframes zno-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.zno-glow { box-shadow: 0 0 20px rgba(22, 163, 74, 0.3); }
+.zno-gradient { background: linear-gradient(135deg, rgba(22, 163, 74, 0.15), rgba(22, 163, 74, 0.05)); }
+.zno-border { border-color: rgba(22, 163, 74, 0.4); }
+.zno-text { color: #16a34a; }
+.zno-badge { background: rgba(22, 163, 74, 0.15); color: #16a34a; border: 1px solid rgba(22, 163, 74, 0.3); }
+.zno-shimmer { background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.08), transparent); animation: zno-shimmer 3s infinite; }
+@keyframes zno-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.zno-hover:hover { background: rgba(22, 163, 74, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R435b: Tin Oxide Logistics - Amber #854d0e */
+.sno-pulse { animation: sno-pulse-anim 2s ease-in-out infinite; }
+@keyframes sno-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.sno-glow { box-shadow: 0 0 20px rgba(133, 77, 14, 0.3); }
+.sno-gradient { background: linear-gradient(135deg, rgba(133, 77, 14, 0.15), rgba(133, 77, 14, 0.05)); }
+.sno-border { border-color: rgba(133, 77, 14, 0.4); }
+.sno-text { color: #854d0e; }
+.sno-badge { background: rgba(133, 77, 14, 0.15); color: #854d0e; border: 1px solid rgba(133, 77, 14, 0.3); }
+.sno-shimmer { background: linear-gradient(90deg, transparent, rgba(133, 77, 14, 0.08), transparent); animation: sno-shimmer 3s infinite; }
+@keyframes sno-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.sno-hover:hover { background: rgba(133, 77, 14, 0.1); transform: translateY(-1px); transition: all 0.2s; }
