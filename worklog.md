@@ -1,4 +1,48 @@
 ---
+Task ID: R438 — Cobalt Oxide Logistics + Iron Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R438 — 2 new Indian logistics modules for cobalt oxide (Co3O4) battery cathode/superalloy/ceramic pigment/catalyst supply chain and iron oxide (Fe2O3) pigment/magnetic storage/catalyst/steel polishing supply chain.
+
+Work Log:
+- Read worklog: R437 complete (commit 9997b20), 700 exports, ~62,520 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: cobalt-oxide (CLEAN), iron-oxide (CLEAN), titanium-dioxide (CLEAN), silicon-dioxide (CLEAN), aluminum-oxide (CLEAN), chromium-oxide (EXISTS)
+- Icons verified: Target (confirmed), Anvil (confirmed)
+- Used proven clone-and-customize approach from zinc-oxide template
+- Created Cobalt Oxide Logistics (R438a): 227 lines, coo-* cyan #0891b2, 14 records
+  - 14 grades: Co3O4 99.9% Battery Cathode, Co3O4 99.7% Superalloy, Co3O4 99.5% Ceramic Pigment, Co3O4 99.0% Jet Engine, Co3O4 99.8% Heterogeneous Cat, Co3O4 99.3% VOC Oxidation, Co3O4 99.6% Enamel Binder, Co3O4 98.5% Tire Rubber, Co3O4 99.4% Magnetic Recorder, Co3O4 99.95% Submarine Battery, Co3O4 99.2% Glass Polish, Co3O4 99.8% Warship Coating, Co3O4 99.6% Solid Propellant, Co3O4 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Advanced Materials, Bharat Forge, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: NMC battery cathode precursor, gas turbine superalloy blade, blue ceramic pigment, LPC jet engine blade coating, Fischer-Tropsch catalyst, VOC catalytic converter, enamel ceramic glaze binder, tire vulcanizing agent, magnetic tape pigment, submarine Li-CoO2 backup battery, optical glass polishing, IN Navy warship anticorrosion coating, DRDO AP solid propellant catalyst, alloy binder
+  - Rs 8,960 Cr total, avg 99.32%, decomposition 875-895 degC
+  - Delayed: COO-A2412 (28d, monsoon Visakhapatnam, Navy warship anticorrosion coating)
+- Created Iron Oxide Logistics (R438b): 227 lines, feo-* dark red #991b1b, 14 records
+  - 14 grades: Fe2O3 99.9% Magnetic Storage, Fe2O3 99.7% RAM Memory, Fe2O3 99.5% Red Pigment, Fe2O3 99.0% Steel Polish, Fe2O3 99.8% Water Treatment, Fe2O3 99.3% Gas Sensor, Fe2O3 99.6% Ferrite Magnet, Fe2O3 98.5% Cement Additive, Fe2O3 99.4% Anti-Corrosion, Fe2O3 99.95% Submarine Hull, Fe2O3 99.2% Animal Feed, Fe2O3 99.8% Warship Anticorrosion, Fe2O3 99.6% Thermite, Fe2O3 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, SAIL, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Hard disk magnetic media, MRAM thin film memory, red paint pigment oxide, steel abrasive polishing media, water treatment flocculant, CO gas sensor, permanent ferrite magnet, Portland cement additive, anti-corrosion primer paint, submarine degaussing coating, animal iron feed supplement, IN Navy warship anticorrosion primer, DRDO thermite welding ignition, foundry sand binder
+  - Rs 8,760 Cr total, avg 99.31%, melting point 1530-1565 degC
+  - Delayed: FEO-A2412 (28d, monsoon Visakhapatnam, Navy warship anticorrosion primer)
+- HTML entity scan: 14 (COO) + 14 (FEO) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (702 exports), page.tsx (1232 viewMap entries), app-store.ts (709 navItems)
+- CSS appended: 16 new rules (~62,544 total)
+- Git commit: 598dd1a, pushed to main
+
+Stage Summary:
+- Project now: 702 module exports, 709 navItems, ~62,544 CSS lines, 1232 viewMap entries, 0 TSC errors in src/
+- Cobalt Oxide: Superalloy &#8377;940Cr, submarine battery &#8377;960Cr, warship coating &#8377;940Cr, jet engine &#8377;880Cr
+- Iron Oxide: Submarine hull &#8377;940Cr, MRAM &#8377;920Cr, warship anticorrosion &#8377;940Cr, ferrite &#8377;880Cr
+- Delayed: COO-A2412 (28d), FEO-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 702 module exports, 709 navItems, ~62,544 CSS lines, 1232 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- Co3O4 99.95% battery-grade imported from DRC/Congo — EV supply chain geopolitical risk
+- Fe2O3 99.95% degaussing-grade imported from Germany — submarine magnetic signature dependency
+- Next clean candidates: titanium-dioxide, silicon-dioxide, aluminum-oxide, vanadium-oxide, tungsten-oxide, molybdenum-oxide
+---
+---
 Task ID: R437 — Copper Oxide Logistics + Manganese Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R437 — 2 new Indian logistics modules for copper oxide (CuO/Cu2O) semiconductor/antifouling/battery cathode/PCB etching supply chain and manganese oxide (MnO2) battery cathode/water purification/ferrite/alloy supply chain.
