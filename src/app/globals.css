@@ -63292,3 +63292,25 @@ html.theme-transition body {
 @keyframes tpt-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .tpt-shimmer { background: linear-gradient(90deg, transparent, rgba(185, 28, 28, 0.1), transparent); background-size: 200% 100%; animation: tpt-shimmer 3s infinite; }
 .tpt-hover:hover { background-color: rgba(185, 28, 28, 0.1); }
+
+/* === R465: Niobium Pentoxide Logistics (nbp, #7e22ce) === */
+@keyframes nbp-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes nbp-glow { 0%, 100% { box-shadow: 0 0 5px #7e22ce; } 50% { box-shadow: 0 0 15px #7e22ce; } }
+.nbp-gradient { background: linear-gradient(135deg, #7e22ce, #581c87); }
+.nbp-border { border-color: #7e22ce; }
+.nbp-text { color: #7e22ce; }
+.nbp-badge { background-color: rgba(126, 34, 206, 0.2); color: #7e22ce; }
+@keyframes nbp-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.nbp-shimmer { background: linear-gradient(90deg, transparent, rgba(126, 34, 206, 0.1), transparent); background-size: 200% 100%; animation: nbp-shimmer 3s infinite; }
+.nbp-hover:hover { background-color: rgba(126, 34, 206, 0.1); }
+
+/* === R465: Germanium Dioxide Logistics (ged, #ca8a04) === */
+@keyframes ged-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes ged-glow { 0%, 100% { box-shadow: 0 0 5px #ca8a04; } 50% { box-shadow: 0 0 15px #ca8a04; } }
+.ged-gradient { background: linear-gradient(135deg, #ca8a04, #854d0e); }
+.ged-border { border-color: #ca8a04; }
+.ged-text { color: #ca8a04; }
+.ged-badge { background-color: rgba(202, 138, 4, 0.2); color: #ca8a04; }
+@keyframes ged-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.ged-shimmer { background: linear-gradient(90deg, transparent, rgba(202, 138, 4, 0.1), transparent); background-size: 200% 100%; animation: ged-shimmer 3s infinite; }
+.ged-hover:hover { background-color: rgba(202, 138, 4, 0.1); }

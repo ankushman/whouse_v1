@@ -759,3 +759,5 @@ export { default as LithiumCarbonateLogisticsView } from './lithium-carbonate-lo
 export { default as SodiumSulfateLogisticsView } from './sodium-sulfate-logistics-view'
 export { default as MolybdenumSulfideLogisticsView } from './molybdenum-sulfide-logistics-view'
 export { default as TantalumPentoxideLogisticsView } from './tantalum-pentoxide-logistics-view'
+export { default as NiobiumPentoxideLogisticsView } from './niobium-pentoxide-logistics-view'
+export { default as GermaniumDioxideLogisticsView } from './germanium-dioxide-logistics-view'
