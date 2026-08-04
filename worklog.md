@@ -1,4 +1,46 @@
 ---
+Task ID: R412 — Thallium Compound Logistics + Cadmium Alloy Logistics
+Agent: Main Agent (Cron Loop)
+Task: R412 — 2 new Indian logistics modules for thallium compound supply chain and cadmium alloy supply chain.
+
+Work Log:
+- Read worklog: R411 complete (commit d893963), 659 modules, 664 navItems, ~62,135 CSS
+- TSC pre-validation: 0 errors in src/
+- Duplicate theme search: thallium-compound CLEAN, cadmium-alloy CLEAN
+- Icons verified: BrainCircuit and Atom both confirmed in iconMap
+- Created Thallium Compound Logistics (R412a): ~110 lines, thc-* indigo #4338ca, 14 records
+  - 14 grades: Tl-201 Cardiac, Tl2O3 Optical, TlBr Gamma, TlCl IR, Tl2SO4 ECG, TlI Scintillator, Tl2O3 Superconductor, TlAs Semiconductor, Tl-204 NDT, TlClO4 Pharma, TlBr CT Detector, Tl2O3 Glass, TlF Dental, Tl2O3 Seal Glass
+  - 14 manufacturers: Haffkine, DRDO DMRL, CSIR-NPL, Bharat Forge, IGCAR, Gujarat Thallium Tech, Rajasthan Thallium, NALCO, Tamil Nadu Thallium, Gujarat Thallium Products, Assam Thallium, UP Thallium, SAIL, BHEL
+  - Applications: HLL cardiac SPECT, Carl Zeiss lens, BARC gamma detector, BEL IR seeker, HLL ECG, DRDO portal, CSIR-NML superconductor, ISRO IR FPA, BPCL NDT, Sun Pharma API, HLL PC-CT, Sterlite fiber, 3M dental X-ray, Dixon display seal
+  - Rs 6,120 Cr total, avg 99.93% purity
+  - Delayed: THC-B2412 (27d, monsoon UP, Sterlite fiber preform)
+- Created Cadmium Alloy Logistics (R412b): ~110 lines, cda-* amber #d97706, 14 records
+  - 14 grades: Cd-Ag 70/30 Brazing, Cd-Bi 40/60 Fusible, Cd-Cu 95/5 Bearing, Cd-Ni 85/15 Plating, Cd 99.99% Control Rod, Cd-Pb 70/30 Cable, Cd-Sn 80/20 Solder, Cd-Ag 65/35 Contact, Cd 99.95% Evaporation, Cd-Zn 90/10 Anode, Cd-Bi-Pb 50/30/20 Eutectic, Cd-Sb 95/5 Bearing, Cd-Ag-Cu 75/20/5 Brazing, Cd-In-Ag 80/15/5 Rod
+  - 14 manufacturers: Hindustan Zinc, DRDO DMRL, Tata Advanced Materials, Bharat Forge, IGCAR, Gujarat Cadmium Tech, Rajasthan Cadmium Corp, NALCO, Tamil Nadu Cadmium, Gujarat Cadmium Products, Assam Cadmium, UP Cadmium, SAIL, BHEL
+  - Applications: HAL brazing, BEL thermal fuse, GRSE naval bearing, BHEL plating, NPCIL control rod, Torrent cable, Dixon solder, BHEL relay, Tata Steel PVD, Reliance anode, Godrej sprinkler, Cummins bearing, Thermax VRF, NPCIL shutdown blade
+  - Rs 5,990 Cr total, avg 76.3% Cd
+  - Delayed: CDA-B2412 (27d, monsoon UP, Cummins engine bearing)
+- Both modules generated via Python raw string scripts (gen_r412a.py, gen_r412b.py)
+- Bug fixes: #858594 malformed entity in THC-0011, 'in' operator TSC error changed to .includes()
+- TSC: 0 errors in src/components/modules
+- Three-file registration: index.ts (661), page.tsx (1181 viewMap entries), app-store.ts (666 navItems)
+- CSS appended: 4 new rules (~62,139 total)
+- Git commit: 31e5613, pushed to main
+
+Stage Summary:
+- Project now: 661 module view files, 666 navItems, ~62,139 CSS lines, 1181 viewMap entries, 0 TSC errors in src/
+- Thallium Compound: BARC TlBr detector Rs 710Cr, HLL Tl-201 cardiac Rs 640Cr, NPCIL control rod Rs 620Cr, HLL PC-CT Rs 580Cr
+- Cadmium Alloy: NPCIL Cd-In-Ag rod Rs 560Cr, IGCAR control rod Rs 620Cr, HAL Cd-Ag brazing Rs 480Cr, Cummins bearing Rs 420Cr
+- Delayed: THC-B2412 (27d), CDA-B2412 (27d) — both monsoon UP corridor
+
+**Project Current State:**
+- 661 module view files, 666 navItems, ~62,139 CSS lines, 1181 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM, non-src/ TSC errors not blocking
+- Next clean candidates: niobium-powder, vanadium-sheet, tantalum-powder
+
+---
 Task ID: R411 — Lithium Metal Logistics + Beryllium Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R411 — 2 new Indian logistics modules for lithium metal supply chain and beryllium oxide ceramic supply chain.
