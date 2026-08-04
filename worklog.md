@@ -1,4 +1,47 @@
 ---
+Task ID: R442 — Cerium Oxide Logistics + Lanthanum Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R442 — 2 new Indian logistics modules for cerium oxide (CeO2) glass polish/catalytic converter/UV absorber/fuel cell electrolyte supply chain and lanthanum oxide (La2O3) optical lens/hydrogenation catalyst/NiMH battery/phosphor host supply chain.
+
+Work Log:
+- Read worklog: R441 complete (commit 73bfd96), 708 exports, ~62,616 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: cerium-oxide (CLEAN), lanthanum-oxide (CLEAN), neodymium-oxide (CLEAN), praseodymium-oxide (CLEAN), samarium-oxide (CLEAN), gadolinium-oxide (CLEAN)
+- Icons verified: Gem (confirmed), Orbit (confirmed)
+- Created Cerium Oxide Logistics (R442a): 227 lines, ceo-* rose #e11d48, 14 records
+  - 14 grades: CeO2 99.99% Glass Polish, CeO2 99.9% Catalytic Converter, CeO2 99.7% UV Absorber, CeO2 99.5% Fuel Cell Electrolyte, CeO2 99.3% Oxygen Storage, CeO2 99.8% Phosphor Activator, CeO2 99.0% Ceramic Glaze, CeO2 98.5% Gas Mantle, CeO2 99.6% Water Gas Shift, CeO2 99.95% Precision Polish, CeO2 99.2% Diesel Soot, CeO2 99.8% Submarine Periscope, CeO2 99.4% Missile IR Dome, CeO2 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Optical lens precision polish, auto exhaust catalytic converter, sunscreen UV broadband absorber, SOFC fuel cell anode, three-way catalyst oxygen storage, LED YAG:Ce phosphor activator, ceramic tile opacifier, incandescent gas mantle, syngas water gas shift catalyst, semiconductor CMP slurry, diesel particulate filter regeneration, submarine periscope optical polish, DRDO missile IR seeker dome, steel additive
+  - Rs 12,220 Cr total, avg 99.38%, melting point 2400 degC
+  - Delayed: CEO-A2412 (28d, monsoon Visakhapatnam, submarine periscope optical polish)
+- Created Lanthanum Oxide Logistics (R442b): 227 lines, lao-* fuchsia #c026d3, 14 records
+  - 14 grades: La2O3 99.99% Optical Lens, La2O3 99.9% Hydrogenation Cat, La2O3 99.7% NiMH Battery, La2O3 99.5% Phosphor Host, La2O3 99.3% Crack Catalyst, La2O3 99.8% Water Treatment, La2O3 99.0% Glass Additive, La2O3 98.5% Ceramic Dielectric, La2O3 99.6% DeNOx Catalyst, La2O3 99.95% Laser Crystal, La2O3 99.2% Electrode Binder, La2O3 99.8% Submarine Sonar, La2O3 99.4% Missile Seeker, La2O3 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Camera zoom optical lens, refinery HDS hydrogenation catalyst, EV NiMH battery electrode, Eu-doped red phosphor host, FCC zeolite crack catalyst, phosphate removal water treatment, high refractive index glass additive, MLCC ceramic capacitor, SCR DeNOx catalyst, Nd:YAG laser crystal host, solid oxide fuel cell electrode binder, submarine sonar acoustic lens, DRDO missile IR seeker window, alloy additive
+  - Rs 12,220 Cr total, avg 99.38%, melting point 2315 degC
+  - Delayed: LAO-A2412 (28d, monsoon Visakhapatnam, submarine sonar acoustic lens)
+- HTML entity scan: 16 (CEO) + 16 (LAO) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (710 exports), page.tsx (1240 viewMap entries), app-store.ts (717 navItems)
+- CSS appended: 16 new rules (~62,644 total)
+- Git commit: f9766d7, pushed to main
+
+Stage Summary:
+- Project now: 710 module exports, 717 navItems, ~62,644 CSS lines, 1240 viewMap entries, 0 TSC errors in src/
+- Cerium Oxide: Submarine periscope &#8377;940Cr, precision polish &#8377;960Cr, missile IR dome &#8377;900Cr, catalytic converter &#8377;940Cr
+- Lanthanum Oxide: Optical lens &#8377;960Cr, laser crystal &#8377;960Cr, submarine sonar &#8377;940Cr, NiMH battery &#8377;920Cr
+- Delayed: CEO-A2412 (28d), LAO-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 710 module exports, 717 navItems, ~62,644 CSS lines, 1240 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- CeO2 99.99% optical polish-grade imported from Japan/France — submarine periscope optics dependency
+- La2O3 99.99% laser crystal-grade imported from China/USA — Nd:YAG host supply risk
+- Next clean candidates: neodymium-oxide, praseodymium-oxide, samarium-oxide, gadolinium-oxide, europium-oxide, terbium-oxide
+---
+---
 Task ID: R441 — Tungsten Oxide Logistics + Molybdenum Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R441 — 2 new Indian logistics modules for tungsten oxide (WO3) smart window/gas sensor/fireproof/tungsten carbide precursor supply chain and molybdenum oxide (MoO3) steel alloy/catalyst/pigment/lubricant supply chain.
