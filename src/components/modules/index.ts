@@ -795,3 +795,5 @@ export { default as MagnesiumFluorideLogisticsView } from './magnesium-fluoride-
 export { default as TitaniumCarbideLogisticsView } from './titanium-carbide-logistics-view'
 export { default as MolybdenumDisilicideLogisticsView } from './molybdenum-disilicide-logistics-view'
 export { default as HafniumCarbideLogisticsView } from './hafnium-carbide-logistics-view'
+export { default as TantalumCarbideLogisticsView } from './tantalum-carbide-logistics-view'
+export { default as NiobiumCarbideLogisticsView } from './niobium-carbide-logistics-view'

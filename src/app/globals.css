@@ -63680,3 +63680,23 @@ html.theme-transition body {
 .hfc-badge { background-color: #1e40af22; color: #60a5fa; }
 .hfc-shimmer { background: linear-gradient(90deg, #1e40af11 25%, #1e40af44 50%, #1e40af11 75%); }
 .hfc-hover:hover { background-color: #1e40af15; }
+
+/* R483a - Tantalum Carbide Logistics (tac) - pink-dark #be185d */
+@keyframes tac-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes tac-glow { 0% { box-shadow: 0 0 5px #be185d44; } 100% { box-shadow: 0 0 20px #be185d88; } }
+.tac-gradient { background: linear-gradient(135deg, #be185d, #9d174d); }
+.tac-border { border-color: #be185d66; }
+.tac-text { color: #be185d; }
+.tac-badge { background-color: #be185d22; color: #f472b6; }
+.tac-shimmer { background: linear-gradient(90deg, #be185d11 25%, #be185d44 50%, #be185d11 75%); }
+.tac-hover:hover { background-color: #be185d15; }
+
+/* R483b - Niobium Carbide Logistics (nbc) - amber-dark #854d0e */
+@keyframes nbc-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes nbc-glow { 0% { box-shadow: 0 0 5px #854d0e44; } 100% { box-shadow: 0 0 20px #854d0e88; } }
+.nbc-gradient { background: linear-gradient(135deg, #854d0e, #713f12); }
+.nbc-border { border-color: #854d0e66; }
+.nbc-text { color: #854d0e; }
+.nbc-badge { background-color: #854d0e22; color: #fbbf24; }
+.nbc-shimmer { background: linear-gradient(90deg, #854d0e11 25%, #854d0e44 50%, #854d0e11 75%); }
+.nbc-hover:hover { background-color: #854d0e15; }
