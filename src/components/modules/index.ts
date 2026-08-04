@@ -689,3 +689,5 @@ export { default as TungstenDisulphideLogisticsView } from './tungsten-disulphid
 export { default as SiliconWaferLogisticsView } from './silicon-wafer-logistics-view'
 export { default as GermaniumIngotLogisticsView } from './germanium-ingot-logistics-view'
 export { default as VanadiumPentoxideLogisticsView } from './vanadium-pentoxide-logistics-view'
+export { default as TitaniumDiborideLogisticsView } from './titanium-diboride-logistics-view'
+export { default as SiliconCarbideWhiskerLogisticsView } from './silicon-carbide-whisker-logistics-view'
