@@ -1,4 +1,47 @@
 ---
+Task ID: R452 — Sulfuric Acid Logistics + Nickel Sulfate Logistics
+Agent: Main Agent (Cron Loop)
+Task: R452 — 2 new Indian logistics modules for sulfuric acid (H2SO4) lead-acid battery/rocket oxidizer/fertilizer/steel pickling/PCB etchant supply chain and nickel sulfate (NiSO4) EV battery cathode/electroplating/superalloy coating/aerospace Ni-P supply chain.
+
+Work Log:
+- Read worklog: R451 complete (commit 4386c58), 728 exports, ~63,008 CSS
+- TSC pre-validation: 0 errors in src/
+- Agent-browser QA: dev server OOM (known), TSC-only gate
+- Candidate scan: sulfuric-acid (CLEAN), nickel-sulfate (CLEAN), copper-cathode (CLEAN), tin-metal (CLEAN), zinc-dust (CLEAN), antimony-metal (CLEAN)
+- Icons verified: TestTube (0 uses, confirmed), Magnet (0 uses, confirmed)
+- Created Sulfuric Acid Logistics (R452a): 228 lines, sua-* orange #ea580c, 14 records
+  - 14 grades: H2SO4 99.9% Lead-Acid Battery, H2SO4 99.7% Rocket Propellant Oxidizer, H2SO4 99.5% Phosphoric Acid Production, H2SO4 99.0% Steel Pickling, H2SO4 99.8% Detergent Surfactant, H2SO4 99.3% Electrolyte Refining, H2SO4 99.6% Rayon Viscose Process, H2SO4 98.5% Alumina Digestion, H2SO4 99.4% Petroleum Alkylation, H2SO4 99.95% Electronic Etchant, H2SO4 99.2% Water pH Adjustment, H2SO4 99.8% Submarine Battery Electrolyte, H2SO4 99.6% Explosive Nitration, H2SO4 97% Industrial Drain Cleaner
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Exide lead-acid plates, ISRO S200 oxidizer blend, IFFCO DAP intermediate, SAIL hot-rolled strip pickle, Hindustan Unilever LAS, Hindalco Cu smelter bath, Grasim Viscose staple, Hindalco alumina refinery, IOCL Numaligarh refinery, Dixon copper PCB etch, Ganga water treatment plant, IN Navy SSK battery top-up, OFB GL Nalanda mixed acid, SAIL maintenance supply
+  - Rs 12,100 Cr total, avg 99.35%, density 10.5 M g/cm3
+  - Delayed: SUA-A2412 (28d, monsoon Visakhapatnam, submarine battery electrolyte)
+- Created Nickel Sulfate Logistics (R452b): 228 lines, nis-* teal #0d9488, 14 records
+  - 14 grades: NiSO4 99.9% EV Battery Cathode, NiSO4 99.7% Superalloy Plating, NiSO4 99.5% Electroplating Anode, NiSO4 99.0% Catalyst Support, NiSO4 99.8% Dye Fixation Mordant, NiSO4 99.3% PCB Electroless Cu, NiSO4 99.6% Corrosion Resistant Coating, NiSO4 98.5% Ceramic Pigment, NiSO4 99.4% Magnetic Recording Media, NiSO4 99.95% Aerospace Alloy Precursor, NiSO4 99.2% Galvanizing Brightener, NiSO4 99.8% Submarine Propeller Shielding, NiSO4 99.6% Warship Hull Anti-Fouling, NiSO4 97% General Electroplating
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Chemicals, Bharat Forge, Shyam Chemicals, BHEL R&amp;D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, UP Chemicals, Gujarat Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Ola S1 Pro NMC811 cell, HAL HTFE-20 Ni coat, auto bumper Ni underlayer, IOCL FCC Ni-W catalyst, Arvind denim mordant, Dixon HDI PCB ENIG, Grasim marine anticorrosive, Morbi ceramic glaze, Seagate plating bath, ISRO L110 tank Ni-P liner, SAIL galv line additive, IN Navy SSK EMI shield, IN Navy hull Ni-Cu plate, SAIL hardware Ni plate
+  - Rs 12,100 Cr total, avg 99.35%, density 4.0 M g/cm3
+  - Delayed: NIS-A2412 (28d, monsoon Visakhapatnam, submarine propeller EMI shielding)
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (730 exports), page.tsx (1260 viewMap entries), app-store.ts (738 navItems)
+- CSS appended: 16 new rules (~63,028 total)
+- Git commit: 5061a21, pushed to main
+
+Stage Summary:
+- Project now: 730 module exports, 738 navItems, ~63,028 CSS lines, 1260 viewMap entries, 0 TSC errors in src/
+- Sulfuric Acid: Submarine battery &#8377;960Cr, explosive nitration &#8377;900Cr, rocket oxidizer &#8377;880Cr, PCB etchant &#8377;940Cr
+- Nickel Sulfate: Submarine EMI shield &#8377;960Cr, aerospace Ni-P &#8377;960Cr, warship anti-foul &#8377;900Cr, EV cathode &#8377;940Cr
+- Delayed: SUA-A2412 (28d), NIS-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 730 module exports, 738 navItems, ~63,028 CSS lines, 1260 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 63K+ lines, dev server OOM — TSC-only QA gate
+- H2SO4 99.95% electronic etchant grade — controlled hazardous acid, transport compliance risk
+- NiSO4 99.9% battery grade imported from China/Canada — EV supply chain import dependency
+- Next clean candidates: copper-cathode, tin-metal, zinc-dust, antimony-metal, cobalt-oxide, selenium-metal
+---
+---
 Task ID: R451 — Tungsten Metal Logistics + Phosphorus Red Logistics
 Agent: Main Agent (Cron Loop)
 Task: R451 — 2 new Indian logistics modules for tungsten metal (W) kinetic penetrator/rocket nozzle/turbine blade/radiation shield/submarine torpedo supply chain and phosphorus red (P) phosphor bronze/WP smoke screen/flame retardant/LiFePO4 battery/naval incendiary supply chain.
