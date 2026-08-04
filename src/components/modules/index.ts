@@ -663,3 +663,5 @@ export { default as VanadiumSheetLogisticsView } from './vanadium-sheet-logistic
 export { default as TantalumPowderLogisticsView } from './tantalum-powder-logistics-view'
 export { default as SeleniumCompoundLogisticsView } from './selenium-compound-logistics-view'
 export { default as TungstenCarbideLogisticsView } from './tungsten-carbide-logistics-view'
+export { default as ZirconiumOxideLogisticsView } from './zirconium-oxide-logistics-view'
+export { default as BoronNitrideLogisticsView } from './boron-nitride-logistics-view'
