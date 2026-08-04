@@ -779,3 +779,5 @@ export { default as SiliconGermaniumLogisticsView } from './silicon-germanium-lo
 export { default as ZirconiumDiborideLogisticsView } from './zirconium-diboride-logistics-view'
 export { default as AluminumGalliumNitrideLogisticsView } from './aluminum-gallium-nitride-logistics-view'
 export { default as IndiumGalliumArsenideLogisticsView } from './indium-gallium-arsenide-logistics-view'
+export { default as NanoAluminaLogisticsView } from './nano-alumina-logistics-view'
+export { default as LanthanumFluorideLogisticsView } from './lanthanum-fluoride-logistics-view'
