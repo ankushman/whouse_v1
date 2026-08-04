@@ -62374,3 +62374,27 @@ html.theme-transition body {
 .lc-shimmer { background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.08), transparent); animation: lc-shimmer 3s infinite; }
 @keyframes lc-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .lc-hover:hover { background: rgba(245, 158, 11, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R432a: Hafnium Oxide Logistics - Sky Blue #0ea5e9 */
+.hfo-pulse { animation: hfo-pulse-anim 2s ease-in-out infinite; }
+@keyframes hfo-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.hfo-glow { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+.hfo-gradient { background: linear-gradient(135deg, rgba(14, 165, 233, 0.15), rgba(14, 165, 233, 0.05)); }
+.hfo-border { border-color: rgba(14, 165, 233, 0.4); }
+.hfo-text { color: #0ea5e9; }
+.hfo-badge { background: rgba(14, 165, 233, 0.15); color: #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.3); }
+.hfo-shimmer { background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.08), transparent); animation: hfo-shimmer 3s infinite; }
+@keyframes hfo-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.hfo-hover:hover { background: rgba(14, 165, 233, 0.1); transform: translateY(-1px); transition: all 0.2s; }
+
+/* R432b: Zirconium Carbide Logistics - Purple #a855f7 */
+.zrc-pulse { animation: zrc-pulse-anim 2s ease-in-out infinite; }
+@keyframes zrc-pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+.zrc-glow { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
+.zrc-gradient { background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05)); }
+.zrc-border { border-color: rgba(168, 85, 247, 0.4); }
+.zrc-text { color: #a855f7; }
+.zrc-badge { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.3); }
+.zrc-shimmer { background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.08), transparent); animation: zrc-shimmer 3s infinite; }
+@keyframes zrc-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.zrc-hover:hover { background: rgba(168, 85, 247, 0.1); transform: translateY(-1px); transition: all 0.2s; }

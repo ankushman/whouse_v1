@@ -693,3 +693,5 @@ export { default as TitaniumDiborideLogisticsView } from './titanium-diboride-lo
 export { default as SiliconCarbideWhiskerLogisticsView } from './silicon-carbide-whisker-logistics-view'
 export { default as AluminiumNitrideLogisticsView } from './aluminium-nitride-logistics-view'
 export { default as LithiumCarbideLogisticsView } from './lithium-carbide-logistics-view'
+export { default as HafniumOxideLogisticsView } from './hafnium-oxide-logistics-view'
+export { default as ZirconiumCarbideLogisticsView } from './zirconium-carbide-logistics-view'
