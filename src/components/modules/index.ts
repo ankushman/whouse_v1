@@ -743,3 +743,5 @@ export { default as BismuthMetalLogisticsView } from './bismuth-metal-logistics-
 export { default as IndiumMetalLogisticsView } from './indium-metal-logistics-view'
 export { default as GalliumMetalLogisticsView } from './gallium-metal-logistics-view'
 export { default as TelluriumMetalLogisticsView } from './tellurium-metal-logistics-view'
+export { default as CadmiumMetalLogisticsView } from './cadmium-metal-logistics-view'
+export { default as MagnesiumMetalLogisticsView } from './magnesium-metal-logistics-view'

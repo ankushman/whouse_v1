@@ -63106,3 +63106,23 @@ html.theme-transition body {
 .tlm-badge { background-color: rgba(147, 51, 234, 0.15); color: #9333ea; border: 1px solid rgba(147, 51, 234, 0.3); }
 .tlm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.08) 50%, transparent 100%); animation: tlm-pulse 2s ease-in-out infinite; }
 .tlm-hover:hover { background-color: rgba(147, 51, 234, 0.1); border-color: #9333ea; }
+
+/* === Cadmium Metal Logistics (CDM) — R457 === */
+@keyframes cdm-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes cdm-glow { 0%, 100% { box-shadow: 0 0 8px rgba(202, 138, 4, 0.3); } 50% { box-shadow: 0 0 20px rgba(202, 138, 4, 0.6); } }
+.cdm-gradient { background: linear-gradient(135deg, #ca8a04 0%, #eab308 50%, #facc15 100%); }
+.cdm-border { border-color: #ca8a04; }
+.cdm-text { color: #ca8a04; }
+.cdm-badge { background-color: rgba(202, 138, 4, 0.15); color: #ca8a04; border: 1px solid rgba(202, 138, 4, 0.3); }
+.cdm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(202, 138, 4, 0.08) 50%, transparent 100%); animation: cdm-pulse 2s ease-in-out infinite; }
+.cdm-hover:hover { background-color: rgba(202, 138, 4, 0.1); border-color: #ca8a04; }
+
+/* === Magnesium Metal Logistics (MGM) — R457 === */
+@keyframes mgm-pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes mgm-glow { 0%, 100% { box-shadow: 0 0 8px rgba(5, 150, 105, 0.3); } 50% { box-shadow: 0 0 20px rgba(5, 150, 105, 0.6); } }
+.mgm-gradient { background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%); }
+.mgm-border { border-color: #059669; }
+.mgm-text { color: #059669; }
+.mgm-badge { background-color: rgba(5, 150, 105, 0.15); color: #059669; border: 1px solid rgba(5, 150, 105, 0.3); }
+.mgm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(5, 150, 105, 0.08) 50%, transparent 100%); animation: mgm-pulse 2s ease-in-out infinite; }
+.mgm-hover:hover { background-color: rgba(5, 150, 105, 0.1); border-color: #059669; }
