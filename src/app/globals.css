@@ -63126,3 +63126,27 @@ html.theme-transition body {
 .mgm-badge { background-color: rgba(5, 150, 105, 0.15); color: #059669; border: 1px solid rgba(5, 150, 105, 0.3); }
 .mgm-shimmer { background: linear-gradient(90deg, transparent 0%, rgba(5, 150, 105, 0.08) 50%, transparent 100%); animation: mgm-pulse 2s ease-in-out infinite; }
 .mgm-hover:hover { background-color: rgba(5, 150, 105, 0.1); border-color: #059669; }
+
+/* R458 — Vanadium Metal Logistics (vam) — rust #c2410c */
+.vam-pulse { animation: vam-pulse-anim 2s ease-in-out infinite; }
+@keyframes vam-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.vam-glow { box-shadow: 0 0 16px #c2410c44; }
+.vam-gradient { background: linear-gradient(135deg, #c2410c22, #c2410c08); }
+.vam-border { border-left: 3px solid #c2410c; }
+.vam-text { color: #c2410c; }
+.vam-badge { background: #c2410c18; color: #c2410c; }
+.vam-shimmer { background: linear-gradient(90deg, #c2410c08 25%, #c2410c22 50%, #c2410c08 75%); background-size: 200% 100%; animation: vam-shimmer-anim 2s infinite; }
+@keyframes vam-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.vam-hover:hover { box-shadow: 0 4px 20px #c2410c33; transform: translateY(-1px); }
+
+/* R458 — Manganese Sulfate Logistics (mns) — green #15803d */
+.mns-pulse { animation: mns-pulse-anim 2s ease-in-out infinite; }
+@keyframes mns-pulse-anim { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+.mns-glow { box-shadow: 0 0 16px #15803d44; }
+.mns-gradient { background: linear-gradient(135deg, #15803d22, #15803d08); }
+.mns-border { border-left: 3px solid #15803d; }
+.mns-text { color: #15803d; }
+.mns-badge { background: #15803d18; color: #15803d; }
+.mns-shimmer { background: linear-gradient(90deg, #15803d08 25%, #15803d22 50%, #15803d08 75%); background-size: 200% 100%; animation: mns-shimmer-anim 2s infinite; }
+@keyframes mns-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+.mns-hover:hover { box-shadow: 0 4px 20px #15803d33; transform: translateY(-1px); }

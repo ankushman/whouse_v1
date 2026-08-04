@@ -745,3 +745,5 @@ export { default as GalliumMetalLogisticsView } from './gallium-metal-logistics-
 export { default as TelluriumMetalLogisticsView } from './tellurium-metal-logistics-view'
 export { default as CadmiumMetalLogisticsView } from './cadmium-metal-logistics-view'
 export { default as MagnesiumMetalLogisticsView } from './magnesium-metal-logistics-view'
+export { default as VanadiumMetalLogisticsView } from './vanadium-metal-logistics-view'
+export { default as ManganeseSulfateLogisticsView } from './manganese-sulfate-logistics-view'
