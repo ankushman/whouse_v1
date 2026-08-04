@@ -63270,3 +63270,25 @@ html.theme-transition body {
 .sos-shimmer { background: linear-gradient(90deg, #64748b08 25%, #64748b22 50%, #64748b08 75%); background-size: 200% 100%; animation: sos-shimmer-anim 2s infinite; }
 @keyframes sos-shimmer-anim { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 .sos-hover:hover { box-shadow: 0 4px 20px #64748b33; transform: translateY(-1px); }
+
+/* === R464: Molybdenum Sulfide Logistics (mos, #0f766e) === */
+@keyframes mos-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes mos-glow { 0%, 100% { box-shadow: 0 0 5px #0f766e; } 50% { box-shadow: 0 0 15px #0f766e; } }
+.mos-gradient { background: linear-gradient(135deg, #0f766e, #134e4a); }
+.mos-border { border-color: #0f766e; }
+.mos-text { color: #0f766e; }
+.mos-badge { background-color: rgba(15, 118, 110, 0.2); color: #0f766e; }
+@keyframes mos-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.mos-shimmer { background: linear-gradient(90deg, transparent, rgba(15, 118, 110, 0.1), transparent); background-size: 200% 100%; animation: mos-shimmer 3s infinite; }
+.mos-hover:hover { background-color: rgba(15, 118, 110, 0.1); }
+
+/* === R464: Tantalum Pentoxide Logistics (tpt, #b91c1c) === */
+@keyframes tpt-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+@keyframes tpt-glow { 0%, 100% { box-shadow: 0 0 5px #b91c1c; } 50% { box-shadow: 0 0 15px #b91c1c; } }
+.tpt-gradient { background: linear-gradient(135deg, #b91c1c, #7f1d1d); }
+.tpt-border { border-color: #b91c1c; }
+.tpt-text { color: #b91c1c; }
+.tpt-badge { background-color: rgba(185, 28, 28, 0.2); color: #b91c1c; }
+@keyframes tpt-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.tpt-shimmer { background: linear-gradient(90deg, transparent, rgba(185, 28, 28, 0.1), transparent); background-size: 200% 100%; animation: tpt-shimmer 3s infinite; }
+.tpt-hover:hover { background-color: rgba(185, 28, 28, 0.1); }

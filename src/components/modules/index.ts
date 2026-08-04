@@ -757,3 +757,5 @@ export { default as SeleniumDioxideLogisticsView } from './selenium-dioxide-logi
 export { default as AmmoniumVanadateLogisticsView } from './ammonium-vanadate-logistics-view'
 export { default as LithiumCarbonateLogisticsView } from './lithium-carbonate-logistics-view'
 export { default as SodiumSulfateLogisticsView } from './sodium-sulfate-logistics-view'
+export { default as MolybdenumSulfideLogisticsView } from './molybdenum-sulfide-logistics-view'
+export { default as TantalumPentoxideLogisticsView } from './tantalum-pentoxide-logistics-view'
