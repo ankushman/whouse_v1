@@ -1,4 +1,48 @@
 ---
+Task ID: R437 — Copper Oxide Logistics + Manganese Oxide Logistics
+Agent: Main Agent (Cron Loop)
+Task: R437 — 2 new Indian logistics modules for copper oxide (CuO/Cu2O) semiconductor/antifouling/battery cathode/PCB etching supply chain and manganese oxide (MnO2) battery cathode/water purification/ferrite/alloy supply chain.
+
+Work Log:
+- Read worklog: R436 complete (commit 20244aa), 698 exports, ~62,496 CSS
+- TSC pre-validation: 0 errors in src/
+- Candidate scan: copper-oxide (CLEAN), manganese-oxide (CLEAN), cobalt-oxide (CLEAN), iron-oxide (CLEAN), titanium-dioxide (CLEAN), silicon-dioxide (CLEAN)
+- Icons verified: CircuitBoard (confirmed), Flame (confirmed)
+- Used proven clone-and-customize approach from zinc-oxide template
+- Created Copper Oxide Logistics (R437a): 227 lines, cuo-* orange #ea580c, 14 records
+  - 14 grades: CuO 99.9% Semiconductor, CuO 99.7% Superconductor, Cu2O 99.5% Antifouling, CuO 99.0% PCB Etchant, CuO 99.8% Battery Cathode, CuO 99.3% Gas Sensor, CuO 99.6% Pigment, CuO 98.5% Fungicide, CuO 99.4% Thermoelectric, CuO 99.95% Submarine Cable, CuO 99.2% Catalyst, CuO 99.8% Warship Hull, CuO 99.6% Rocket Igniter, CuO 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Hindalco Industries, Sterlite Copper, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: p-type thin film semiconductor, YBCO superconductor precursor, ship hull antifouling paint, PCB ferric chloride etchant, Li-ion cathode additive, H2S gas sensor, ceramic glaze pigment, agricultural fungicide, Seebeck thermoelectric module, submarine cable anti-fouling coating, CO oxidation catalyst, IN Navy warship hull antifouling, DRDO solid propellant igniter, copper alloy smelting
+  - Rs 8,880 Cr total, avg 99.33%, melting point 1235-1446 degC
+  - Delayed: CUO-A2412 (28d, monsoon Visakhapatnam, Navy warship hull antifouling coating)
+- Created Manganese Oxide Logistics (R437b): 227 lines, mno-* teal #0d9488, 14 records
+  - 14 grades: MnO2 99.9% Battery Cathode, MnO2 99.7% Ferrite Core, MnO2 99.5% Water Purify, MnO2 99.0% Steel Alloy, MnO2 99.8% Dry Cell, MnO2 99.3% Glass Decolor, MnO2 99.6% Catalyst, MnO2 98.5% Ceramic Pigment, MnO2 99.4% Zinc-Mn Cell, MnO2 99.95% Submarine Battery, MnO2 99.2% Fertilizer, MnO2 99.8% Warship Battery, MnO2 99.6% Thermite, MnO2 97% General Chemical
+  - 14 manufacturers: MIDHANI, DRDO DMRL, Tata Steel, MOIL, Shyam Chemicals, BHEL R&D, Godrej Chemicals, Rajasthan Chemicals, Assam Chemicals, Gujarat Chemicals, UP Chemicals, Vizag Chemicals, DRDO TBRL, SAIL Chemicals
+  - Applications: Li-MnO2 primary battery cathode, Mn-Zn soft ferrite core, potable water filtration, steel desulfurization alloy, alkaline dry cell battery, UV glass stabilizer, ozone decomposition catalyst, brown ceramic glaze pigment, rechargeable Zn-Mn cell, submarine Li-MnO2 backup battery, manganese micronutrient fertilizer, IN Navy warship backup battery, DRDO thermite pyrotechnic, alloy deoxidizer
+  - Rs 8,880 Cr total, avg 99.31%, melting point 510-535 degC
+  - Delayed: MNO-A2412 (28d, monsoon Visakhapatnam, Navy warship backup battery)
+- HTML entity scan: 14 (CUO) + 14 (MNO) entities, 0 malformed
+- TSC: 0 errors in src/
+- Three-file registration: index.ts (700 exports), page.tsx (1230 viewMap entries), app-store.ts (707 navItems)
+- CSS appended: 16 new rules (~62,520 total)
+- Git commit: 9997b20, pushed to main
+
+Stage Summary:
+- Project now: 700 module exports, 707 navItems, ~62,520 CSS lines, 1230 viewMap entries, 0 TSC errors in src/
+- Copper Oxide: Superconductor &#8377;920Cr, submarine cable &#8377;940Cr, warship hull &#8377;940Cr, semiconductor &#8377;900Cr
+- Manganese Oxide: Submarine battery &#8377;940Cr, warship battery &#8377;940Cr, thermite &#8377;880Cr, ferrite &#8377;760Cr
+- Delayed: CUO-A2412 (28d), MNO-A2412 (28d) — both monsoon Visakhapatnam naval corridor
+
+**Project Current State:**
+- 700 module exports, 707 navItems, ~62,520 CSS lines, 1230 viewMap entries, 0 TSC errors in src/
+
+**Risks:**
+- globals.css 62K+ lines, dev server OOM — TSC-only QA gate
+- CuO 99.9% semiconductor-grade imported from Japan — DRDO superconductor program dependency
+- MnO2 99.95% battery-grade imported from South Africa/Gabon — Indian EV battery supply chain risk
+- Next clean candidates: cobalt-oxide, iron-oxide, titanium-dioxide, silicon-dioxide, aluminum-oxide, chromium-oxide
+---
+---
 Task ID: R436 — Lead Oxide Logistics + Nickel Oxide Logistics
 Agent: Main Agent (Cron Loop)
 Task: R436 — 2 new Indian logistics modules for lead oxide (PbO) battery plate/ceramic glaze/radiation shielding/crystal glass supply chain and nickel oxide (NiO) thermistor/ferromagnetic/battery cathode/catalyst supply chain.
