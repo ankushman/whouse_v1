@@ -683,3 +683,5 @@ export { default as RefractoryCeramicLogisticsView } from './refractory-ceramic-
 export { default as CobaltSulphateLogisticsView } from './cobalt-sulphate-logistics-view'
 export { default as AluminiumPowderLogisticsView } from './aluminium-powder-logistics-view'
 export { default as ZirconiumFluorideLogisticsView } from './zirconium-fluoride-logistics-view'
+export { default as NickelChromiumLogisticsView } from './nickel-chromium-logistics-view'
+export { default as MolybdenumDisulphideLogisticsView } from './molybdenum-disulphide-logistics-view'

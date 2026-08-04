@@ -62287,3 +62287,12 @@ html.theme-transition body {
 .zirconium-fluoride-logistics-view .text-fuchsia-600 { color: #a21caf; }
 .zirconium-fluoride-logistics-view .bg-fuchsia-500 { background-color: #a21caf; }
 .zirconium-fluoride-logistics-view .bg-fuchsia-50\/50 { background-color: rgba(253, 242, 255, 0.5); }
+/* R427 — Nickel Chromium Logistics + Molybdenum Disulphide Logistics */
+.nickel-chromium-logistics-view .border-l-rose-500 { border-left-color: #e11d48; }
+.nickel-chromium-logistics-view .text-rose-600 { color: #e11d48; }
+.nickel-chromium-logistics-view .bg-rose-500 { background-color: #e11d48; }
+.nickel-chromium-logistics-view .bg-rose-50\/50 { background-color: rgba(255, 241, 242, 0.5); }
+.molybdenum-disulphide-logistics-view .border-l-lime-500 { border-left-color: #65a30d; }
+.molybdenum-disulphide-logistics-view .text-lime-600 { color: #65a30d; }
+.molybdenum-disulphide-logistics-view .bg-lime-500 { background-color: #65a30d; }
+.molybdenum-disulphide-logistics-view .bg-lime-50\/50 { background-color: rgba(247, 254, 231, 0.5); }
