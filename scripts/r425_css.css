@@ -1,0 +1,9 @@
+/* R425 — Refractory Ceramic Logistics + Cobalt Sulphate Logistics */
+.refractory-ceramic-logistics-view .border-l-orange-500 { border-left-color: #ea580c; }
+.refractory-ceramic-logistics-view .text-orange-600 { color: #ea580c; }
+.refractory-ceramic-logistics-view .bg-orange-500 { background-color: #ea580c; }
+.refractory-ceramic-logistics-view .bg-orange-50\/50 { background-color: rgba(255, 247, 237, 0.5); }
+.cobalt-sulphate-logistics-view .border-l-sky-500 { border-left-color: #0284c7; }
+.cobalt-sulphate-logistics-view .text-sky-600 { color: #0284c7; }
+.cobalt-sulphate-logistics-view .bg-sky-500 { background-color: #0284c7; }
+.cobalt-sulphate-logistics-view .bg-sky-50\/50 { background-color: rgba(240, 249, 255, 0.5); }
