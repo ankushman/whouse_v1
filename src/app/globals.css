@@ -62296,3 +62296,21 @@ html.theme-transition body {
 .molybdenum-disulphide-logistics-view .text-lime-600 { color: #65a30d; }
 .molybdenum-disulphide-logistics-view .bg-lime-500 { background-color: #65a30d; }
 .molybdenum-disulphide-logistics-view .bg-lime-50\/50 { background-color: rgba(247, 254, 231, 0.5); }
+/* R428 — Tungsten Disulphide Logistics (violet) */
+.tungstendisulphide-logistics-view .violet-600 { color: #7c3aed; }
+.tungstendisulphide-logistics-view .bg-violet-50\/50 { background-color: rgb(245 243 255 / 0.5); }
+.tungstendisulphide-logistics-view .border-violet-500\/30 { border-color: rgb(139 92 246 / 0.3); }
+.tungstendisulphide-logistics-view .border-l-violet-500 { border-left-color: #8b5cf6; }
+.tungstendisulphide-logistics-view .bg-violet-500\/20 { background-color: rgb(139 92 246 / 0.2); }
+.tungstendisulphide-logistics-view .text-violet-700 { color: #6d28d9; }
+.tungstendisulphide-logistics-view .bg-violet-500 { background-color: #8b5cf6; }
+.tungstendisulphide-logistics-view .bg-violet-500\/20 { background-color: rgb(139 92 246 / 0.2); }
+/* R428 — Silicon Wafer Logistics (cyan) */
+.siliconwafer-logistics-view .cyan-600 { color: #0891b2; }
+.siliconwafer-logistics-view .bg-cyan-50\/50 { background-color: rgb(236 254 255 / 0.5); }
+.siliconwafer-logistics-view .border-cyan-500\/30 { border-color: rgb(6 182 212 / 0.3); }
+.siliconwafer-logistics-view .border-l-cyan-500 { border-left-color: #06b6d4; }
+.siliconwafer-logistics-view .bg-cyan-500\/20 { background-color: rgb(6 182 212 / 0.2); }
+.siliconwafer-logistics-view .text-cyan-700 { color: #0e7490; }
+.siliconwafer-logistics-view .bg-cyan-500 { background-color: #06b6d4; }
+.siliconwafer-logistics-view .bg-cyan-500\/20 { background-color: rgb(6 182 212 / 0.2); }

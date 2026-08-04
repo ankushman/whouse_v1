@@ -685,3 +685,5 @@ export { default as AluminiumPowderLogisticsView } from './aluminium-powder-logi
 export { default as ZirconiumFluorideLogisticsView } from './zirconium-fluoride-logistics-view'
 export { default as NickelChromiumLogisticsView } from './nickel-chromium-logistics-view'
 export { default as MolybdenumDisulphideLogisticsView } from './molybdenum-disulphide-logistics-view'
+export { default as TungstenDisulphideLogisticsView } from './tungsten-disulphide-logistics-view'
+export { default as SiliconWaferLogisticsView } from './silicon-wafer-logistics-view'
