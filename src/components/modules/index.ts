@@ -687,3 +687,5 @@ export { default as NickelChromiumLogisticsView } from './nickel-chromium-logist
 export { default as MolybdenumDisulphideLogisticsView } from './molybdenum-disulphide-logistics-view'
 export { default as TungstenDisulphideLogisticsView } from './tungsten-disulphide-logistics-view'
 export { default as SiliconWaferLogisticsView } from './silicon-wafer-logistics-view'
+export { default as GermaniumIngotLogisticsView } from './germanium-ingot-logistics-view'
+export { default as VanadiumPentoxideLogisticsView } from './vanadium-pentoxide-logistics-view'
