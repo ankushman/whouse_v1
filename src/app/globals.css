@@ -63534,3 +63534,25 @@ html.theme-transition body {
 .ltf-badge { background: #0f766e22; color: #0f766e; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
 .ltf-shimmer { background: linear-gradient(90deg, #0f766e11, #0f766e44, #0f766e11); background-size: 200% 100%; animation: ltf-gradient 2s infinite; }
 .ltf-hover:hover { background-color: #0f766e11; }
+
+/* R476: Barium Fluoride Logistics (baf-*) - Violet-dark #6d28d9 */
+@keyframes baf-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes baf-glow { 0%, 100% { box-shadow: 0 0 5px #6d28d944; } 50% { box-shadow: 0 0 20px #6d28d988; } }
+@keyframes baf-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.baf-card { transition: all 0.3s ease; border-left: 4px solid #6d28d9; }
+.baf-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #6d28d933; }
+.baf-text { color: #6d28d9; }
+.baf-badge { background: #6d28d922; color: #6d28d9; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.baf-shimmer { background: linear-gradient(90deg, #6d28d911, #6d28d944, #6d28d911); background-size: 200% 100%; animation: baf-gradient 2s infinite; }
+.baf-hover:hover { background-color: #6d28d911; }
+
+/* R476: Cerium Fluoride Logistics (cef-*) - Amber-dark #b45309 */
+@keyframes cef-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes cef-glow { 0%, 100% { box-shadow: 0 0 5px #b4530944; } 50% { box-shadow: 0 0 20px #b4530988; } }
+@keyframes cef-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.cef-card { transition: all 0.3s ease; border-left: 4px solid #b45309; }
+.cef-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px #b4530933; }
+.cef-text { color: #b45309; }
+.cef-badge { background: #b4530922; color: #b45309; padding: 2px 8px; border-radius: 9999px; font-size: 12px; font-weight: 500; }
+.cef-shimmer { background: linear-gradient(90deg, #b4530911, #b4530944, #b4530911); background-size: 200% 100%; animation: cef-gradient 2s infinite; }
+.cef-hover:hover { background-color: #b4530911; }

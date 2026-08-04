@@ -781,3 +781,5 @@ export { default as AluminumGalliumNitrideLogisticsView } from './aluminum-galli
 export { default as IndiumGalliumArsenideLogisticsView } from './indium-gallium-arsenide-logistics-view'
 export { default as NanoAluminaLogisticsView } from './nano-alumina-logistics-view'
 export { default as LanthanumFluorideLogisticsView } from './lanthanum-fluoride-logistics-view'
+export { default as BariumFluorideLogisticsView } from './barium-fluoride-logistics-view'
+export { default as CeriumFluorideLogisticsView } from './cerium-fluoride-logistics-view'
